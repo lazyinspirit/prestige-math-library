@@ -1,0 +1,19 @@
+# Step 3a item order: adjudicator batch-8, run fluid-dynamics-all-47-2026-10-23
+
+Assigned batches: 8. Read briefs/tasks/alpha-3a-adjudicate.md first.
+
+Adjudicate and complete each routed item from lowest dependency level to highest within the dispatched batches. Finish all obligations and the risk review for an item before moving to a higher level. The scope files remain authoritative for exact decisions; this list does not add obligations.
+
+Items in order:
+
+- level 1: batch 8, lem-fd-cauchy-contact — risk review
+
+- level 1: batch 8, lem-fd-weak-jump-consistency — risk review, reader:8:2, reader:8:3, refuter:8:2, refuter:8:3
+
+- level 1: batch 8, ex-fdmath-vacuum-momentum-degeneracy — reader:8:4, refuter:8:4
+
+- level 2: batch 8, lem-fd-local-balance-equivalence — risk review, reader:8:1, refuter:8:1
+
+Other routed obligations (pages and published dependencies; review them as required by the scope):
+
+- none

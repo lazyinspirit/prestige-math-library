@@ -1,0 +1,76 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "at": "2026-10-23T00:57:11.541965+00:00",
+  "root_read_complete_before_and_exact_repair_deltas": true,
+  "findings": [
+    {
+      "unit": 23,
+      "actual_decision": {
+        "id": "def-fd-conservation-system",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "abcec0b79fefe2a7853db6144f1f1c194d7174d5fb1bca5244bafd218f1e013b",
+        "outcome": "confirmed_fatal",
+        "defect_type": "logic",
+        "reason": "For F(z)=z\u00b2/2 and U=x/t on (0,1)\u00d7(1,2), U_t+(F(U))_x=0. Write a smooth test as b(x)+t a(x)+O(t\u00b2). Even if the old filter requires only the combined integrand to be integrable, its t^(-2) coefficient is x\u00b2 b_prime/2, forcing b_prime=0 and hence b=0 by compact spatial support. Its t^(-1) coefficient is x a+x\u00b2 a_prime/2, forcing (x\u00b2a)_prime=0 and hence a=0. Thus admitted tests are O(t\u00b2), and integration by parts gives zero bulk integral because U(epsilon)phi(epsilon)=O(epsilon). The initial term vanishes for every U0. Repaired by requiring state and flux integrability on every (0,tau)\u00d7K and the identity for every initial-boundary test. The singular field now fails the solution-class condition.",
+        "uncertain": false,
+        "source_urls": [
+          "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+        ],
+        "familiar": true
+      },
+      "actual_repaired_review": {
+        "id": "def-fd-conservation-system",
+        "disposition": "repaired",
+        "post_sha256": "75d492de4fe6f0bd502ed6712e4b79a0e621b41442f474b7eb8d367c7a499a6c",
+        "review_context_sha256": "643cb37af38753142dce64bea31c9cc5c44cdf700527ece3bf00ace5fd1e261f",
+        "reason": "Reviewed the current definition and all four direct suppliers. The added state/flux slab integrability bounds each test integral by its derivative supremum times a finite L1 integral. Each compact initial-boundary support lies in [0,tau]\u00d7K; U0 is locally integrable. Every test is now required. Entropy slab integrability, signs, compatibility, state domain, bilinear pairing and interior distribution formulation are preserved. No strong initial trace or physical assertion is introduced. This is the assigned repair review, not an independent review of my own repair.",
+        "uncertain": false,
+        "source_urls": [
+          "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+        ],
+        "familiar": true
+      },
+      "native_report": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-repeat-r1-u23.json",
+        "sha256": "abb564a47702fa1e80026ffc4cf1594b2c4711568e4258caaaeffe6be318e7e9"
+      }
+    },
+    {
+      "unit": 9,
+      "actual_decision": {
+        "id": "pthm-fd-conservation-jump-laws",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "94f812e81a0900741ee0d19d8723bc8dfdbdedd4286d090730be6e88f56d5f05",
+        "outcome": "confirmed_fatal",
+        "defect_type": "logic",
+        "reason": "Open-side positivity of T does not imply traces of q/T. At a stationary plane take T=x3^4 and tangential q=(x3^4 sin(1/x3),0,0), extended by zero at the plane. Both are C1 up to each side, but q/T has no trace. With rho=1 and u=e=s=b=r=sigma=0, every side and weak balance holds; the displayed entropy jump is undefined. Repair retains all conservation conclusions and adds the missing C1 extension assumption only to the entropy characterization. Its source remains merely locally integrable, handled by a zero-source integration identity and a thin-tube integral bound.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      "actual_repaired_review": {
+        "id": "pthm-fd-conservation-jump-laws",
+        "disposition": "repaired",
+        "post_sha256": "b87d8bd3e8a798b50f47cdd2eae326cfd618e46698e8f2c41eda6b1f32906ff4",
+        "review_context_sha256": "1f39122598d45c51c841f183332fad4193b5c00b843d8408cce4ad280743bc7a",
+        "reason": "Checked all conservation triples against the C1-extension hypotheses of lem-fd-weak-jump-consistency, the graph conormal signs, scalar and momentum contractions, and both implications. The entropy current now meets those hypotheses; its source is added to the supplier\u2019s zero-source integration identity. The L1 thin-tube estimate proves necessity of the entropy sign without bounded source traces. Positive temperature traces suffice but are not required when q/T extends. Original conservation conclusions, vacuum cases, Countable Choice and independent initial-data terms remain intact. This is the repair author\u2019s current check, not independent review of the repair.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      "native_report": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-repeat-r1-u9.json",
+        "sha256": "06ef71cf37a2b3a9002678093ce30766aab9383587f78fc2de435442a9512a58"
+      }
+    }
+  ],
+  "classification": "Both confirmed fatal; initial-data predicate could admit arbitrary U0, entropy quotient could have undefined trace. Repairs preserve conservation equations and all sound claims. Thin-tube source proof is part of the entropy applicability repair.",
+  "published_referral_dispositions": {
+    "def-distributional-derivative": "Existing3a-batch23-published5; no duplicate finding",
+    "def-regular-distribution-from-a-locally-integrable-function": "Existing3a-batch23-published1; no duplicate finding"
+  },
+  "native_collection_pending": true,
+  "canonical_adoption_next": "Use exact journal tuples after native collection succeeds; no fabricated journal or receipt.",
+  "independent_audit": false,
+  "gate_pass": false
+}

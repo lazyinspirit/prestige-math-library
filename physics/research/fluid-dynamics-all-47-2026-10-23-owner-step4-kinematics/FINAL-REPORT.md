@@ -1,0 +1,9 @@
+Scientific proposals for the kinematics/material-balance source cluster are complete for the captured current bytes. No live source, contract, manifest, decision, gate or dispatch control was changed.
+
+Nine exact source proposals and unified diffs are in `proposals.json`. The observer, spin-refuted, local-momentum and transport public statements remain byte-identical. Density changes only its false theorem locator. The material supplier/consumers acquire the missing same-motion premise; mechanical-only supplier conclusions are explicitly proved, and control-volume time remains arbitrary through local reanchoring. The full original energy/potential/global claims are preserved.
+
+The same owner checked all 88 logical consumers and 36 empty-body pages of the density definition, and all four logical consumers and 16 empty-body pages of the changed continuous-local interface. Exact paths, raw hashes, supplier-use excerpts, decisions and reading limits are in the linked JSON records. This is focused interface review, not a claim of full unrelated downstream re-audits.
+
+The concrete static-motion/independent-velocity countermodel in `scientific-resolution.json` demonstrates why the added material premise is necessary. Actual Luna rejection rows are preserved separately from the additional keep-true/newly discovered supplier issues. The transport determinant-index rejection is a false positive; the existing root-published surface/transport report owns its optional F4 clarification, while this proposal touches only its independently discovered F1 scope issue. Conformation’s separate actual rejection remains with the constitutive owner.
+
+Draft-only proof layout: 8 items, 50 steps, 0 defects. Imported mathematical suppliers used by the repair match their immutable import pins. Native Step5 workers must independently verify and adopt any proposal; root owns metadata/graph reconciliation and recertification.

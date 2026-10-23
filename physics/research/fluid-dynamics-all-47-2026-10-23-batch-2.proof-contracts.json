@@ -1,0 +1,837 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-smooth-motion",
+    "lem-fd-transport-and-density",
+    "lem-fd-observer-calculus",
+    "ex-fdmath-dilation-jacobian"
+  ],
+  "contracts": {
+    "def-fd-smooth-motion": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference region"
+          },
+          "evidence": "The Definition requires a nonempty reference region and a nonempty open time interval; the empty motion is outside its scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "$\\det D_a\\chi(t,a)>0$"
+          },
+          "evidence": "Definition: The determinant is strictly positive, so singular spatial derivatives are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "For every $t\\in I$, the map $\\chi_t(a):=\\chi(t,a)$ is a bijection"
+          },
+          "evidence": "Definition: The identity motion chi(t,a)=a satisfies the diffeomorphism and positive-Jacobian clauses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "with $\\det D_a\\chi(t,a)>0$ for all $a\\in U$"
+          },
+          "evidence": "Definition: A zero or negative Jacobian is excluded by the explicit orientation condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$."
+          },
+          "reason": "The domain I is open; the Definition makes no endpoint extension claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "The joint map $H(t,a):=(t,\\chi(t,a))$ is injective"
+          },
+          "evidence": "Definition: For each point the material label is unique; local inverses patch by uniqueness, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "No biconditional occurs in this Definition."
+          },
+          "reason": "The Definition introduces objects and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "No biconditional occurs in this Definition."
+          },
+          "reason": "The Definition introduces objects and contains no iff assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity motion",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "For chi(t,a)=a, F=I3, J=1, u=0, L=D=W=0, and theta=D0=0."
+        }
+      ],
+      "finite_checks_disposition": "An exact symbolic identity-motion substitution checks the definitions; no empirical or computational evidence is involved."
+    },
+    "lem-fd-transport-and-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-smooth-motion",
+          "source_section": "Definition",
+          "quote": "Define the Eulerian velocity field $u(t,x):=\\partial_t\\chi(t,A(t,x))$; an Eulerian field is a function of time and current position.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "6.2",
+            "10.2",
+            "11.1"
+          ],
+          "application_scope": "F1 uses the local definitions in the lemma Statement. The quoted regular-body definition is a notation comparison only when its additional hypotheses hold; joint inverse regularity follows independently from F2 in proof1.1-2.1. No C1-boundary hypothesis is imported into the generic transport lemma."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "If $Df(a)$ is invertible",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.2",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "source_section": "Statement",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial $$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$ in the $n^2$ commuting variables $x_{ri}$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "Let $K\\subseteq U$ be compact and Jordan measurable.",
+          "uses": [
+            "1.2",
+            "10.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.2",
+            "6.1",
+            "8.1",
+            "10.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "The function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-jordan-set-integral-well-defined",
+          "source_section": "Statement",
+          "quote": "The definition of $\\int_E f$ is independent of the chosen bounding rectangle.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int_Qf\\le\\int_Qg$.",
+          "uses": [
+            "6.1",
+            "8.1",
+            "10.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-zero-total-derivative-on-a-convex-open-set-is-constant",
+          "source_section": "Statement",
+          "quote": "then $f$ is constant on $U$.",
+          "uses": [
+            "6.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+          "source_section": "Statement",
+          "quote": "If $K\\subseteq U$ is compact and Jordan measurable, then $g(K)$ is compact and Jordan measurable.",
+          "uses": [
+            "1.2",
+            "10.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "The joint motion map is injective and a local diffeomorphism, so its local inverse labels patch to a global C1 inverse.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "The slice map satisfies the compact-Jordan change-of-variables hypotheses, giving the fixed-domain integral representation.",
+          "inputs": [
+            "F5",
+            "F11",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "The derivative formula for the inverse is C1 because DH is C1 and matrix inverse entries are cofactor-over-determinant rational functions with nonzero denominator.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "Differentiating A(t,chi)=a yields the inverse spatial derivative and the material chain rule.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "4.1",
+          "step": "4.1",
+          "claim": "A local rectangular-difference argument from continuity of the second partials proves their mixed-order equality; differentiating F=D_a chi then gives Fdot=L F.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "5.1",
+          "step": "5.1",
+          "claim": "The determinant permutation formula gives the columnwise derivative; repeated columns vanish and the trace calculation yields Jdot=J theta.",
+          "inputs": [
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "6.1",
+          "step": "6.1",
+          "claim": "The continuous theta-along-motion integral has derivative theta; multiplying J by its negative exponential gives a zero-derivative function and the stated exponential formula.",
+          "inputs": [
+            "F6",
+            "F8",
+            "F10",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "6.2",
+          "step": "6.2",
+          "claim": "The fixed-domain pullback integrand has derivative (D_t q+q theta) composed with chi times J.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "7.1",
+          "step": "7.1",
+          "claim": "Compactness and continuity give a uniform time-derivative estimate near t; apply the mean-value inequality to phi_a restricted to an open interval V contained in that neighborhood and int T and containing the segment from t to t+k, obtaining uniform convergence of difference quotients.",
+          "inputs": [
+            "F9",
+            "step 1.2",
+            "step 6.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "8.1",
+          "step": "8.1",
+          "claim": "Riemann integral linearity and the uniform error bound allow differentiation under the integral on a fixed Jordan set.",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 7.1"
+          ]
+        },
+        {
+          "id": "9.1",
+          "step": "9.1",
+          "claim": "Substituting the differentiated pullback formula and returning through change of variables gives both transport identities.",
+          "inputs": [
+            "step 1.2",
+            "step 6.2",
+            "step 8.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "10.1",
+          "step": "10.1",
+          "claim": "If the continuity residual vanishes, the transport identity gives zero mass-integral derivative, hence constant mass integral.",
+          "inputs": [
+            "F10",
+            "step 9.1",
+            "given"
+          ]
+        },
+        {
+          "id": "10.2",
+          "step": "10.2",
+          "claim": "Compact-Jordan image preservation and continuity justify change of variables for the residual; local cubes then force it to vanish pointwise.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "F11",
+            "step 9.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "11.1",
+          "step": "11.1",
+          "claim": "The product derivative is J times the continuity residual; zero derivative gives invariance, and invariance conversely forces continuity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F10",
+            "step 5.1",
+            "step 10.1",
+            "step 10.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $K\\subset U$ be any compact Jordan set"
+          },
+          "evidence": "Statement: For K empty, both material integrals vanish; the pointwise and pullback conclusions still quantify over all K and all labels."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "let $q,\\rho\\in C^1(\\Omega,\\mathbb R)$."
+          },
+          "evidence": "Statement: For q=0 or rho=0 the transport and continuity identities reduce to zero on both sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$\\theta=\\operatorname{tr}L$"
+          },
+          "evidence": "Statement: Taking q=1 gives the volume-rate identity; taking rho=1 tests the continuity condition theta=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$J(t,a):=\\det D_a\\chi(t,a)>0$"
+          },
+          "evidence": "Statement: The hypothesis J>0 rules out singular or orientation-reversing slices; the proof uses positivity only for inverse regularity and localization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$"
+          },
+          "reason": "I is open and the statement makes no endpoint extension claim; the signed integral formula applies on either side of 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "for every compact Jordan $K\\subset U$"
+          },
+          "evidence": "Statement: The finite subcover in step 7.1 follows from compactness; no arbitrary-index choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "holds on $\\Omega$ if and only if $M_K$ is constant on $I$"
+          },
+          "evidence": "Statement: Step 10.1 proves continuity implies constant material integrals, and step 11.1 proves the pullback consequence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "and if and only if $\\rho(t,\\chi(t,a))J(t,a)=\\rho(0,\\chi(0,a))J(0,a)"
+          },
+          "evidence": "Statement: Step 10.2 localizes the mass-integral condition, and step 11.1 differentiates pullback invariance to recover continuity."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "stationary motion",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 5.1",
+            "step 9.1"
+          ],
+          "expected": "For chi(t,a)=a, J=1, u=0 and theta=0; transport reduces to d/dt integral_K q = integral_K partial_t q."
+        },
+        {
+          "name": "positive uniform dilation",
+          "inputs": [
+            "F1",
+            "step 5.1",
+            "step 6.1",
+            "step 11.1"
+          ],
+          "expected": "For chi(t,a)=exp(kt)a, J=exp(3kt), theta=3k and rho(t,chi)J=rho0(a), exactly as in the B-page example."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic specializations of the displayed identities; not empirical data or numerical evidence.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Read all 14 proof steps, all 12 direct dependency statements, the reader repair account and empty refuter finding list, and the relevant Abeyaratne §§3.4.3,3.7 and Price §§3.3,3.4.1 passages. Joint inversion uses the open I x U domain and nonzero block determinant; cofactor formulas upgrade the inverse to C2. The rectangular-increment argument justifies mixed partial equality without assuming the conclusion. Column differentiation of the permutation polynomial and the explicit finite trace sum give Jprime=J theta, including nonidentity initial J. Compact Jordan images and continuous integrands satisfy both change-of-variables applications. Local compactness gives uniform convergence of time difference quotients; zero extension and the rectangle integral bound justify differentiation. F9 can be applied on a smaller open time interval inside the uniform-estimate neighborhood. The continuous residual localizes using positive-volume closed cubes; both signs and both directions of each equivalence are checked. Empty K, zero density, null-content K, arbitrary disconnected U, negative t and open endpoints cause no exception. Positivity excludes singular J; no AC, measured input, empirical inference or physical conservation assumption is used. Reader additions at 4.1 and 10.1–10.2 are sound nonfatal analytic justification repairs; current item bytes equal the post-reader hash. Statement and dependencies unchanged; no consumer propagation."
+      }
+    },
+    "lem-fd-observer-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Its inverse $g:W\\to V$ is $C^1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "The joint C2 motion has unique local C1 inverses; the explicit C2 event transformation gives a C1 transformed inverse and velocity. Differentiating at a fixed label gives the velocity law.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "Along each material curve, the chain rule identifies D_t u with the second time derivative of chi.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "The inverse spatial coordinate derivative is Q transpose, so the chain rule gives L*=Q L Q transpose plus Qprime Q transpose.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "Twice differentiating x*=Qx+c and substituting the material acceleration gives the acceleration transformation law.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "4.1",
+          "step": "4.1",
+          "claim": "Orthogonality makes Qprime Q transpose skew; symmetric/skew decomposition and trace yield D*, W*, and theta*.",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval"
+          },
+          "evidence": "The statement assumes a nonempty open time interval; an empty domain is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $Q\\in C^2(I,SO(3))$ and $c\\in C^2(I,\\mathbb R^3)$"
+          },
+          "evidence": "Statement: For Q=I3 and c=0, every transformed field equals its original, as checked in finite_check 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Write $SO(3):=\\{Q\\in\\mathbb R^{3\\times3}:Q^{\\mathsf T}Q=I_3,\\ \\det Q=1\\}$."
+          },
+          "evidence": "Statement: For a constant proper rotation and affine translation, Qprime=0 and cdoubleprime=0; acceleration reduces to Qa_m."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "with $\\det Q=1$"
+          },
+          "evidence": "Singular and orientation-reversing matrices are excluded by the definition of SO(3)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval"
+          },
+          "reason": "I is open and no finite endpoint extension is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $Q\\in C^2(I,SO(3))$ and $c\\in C^2(I,\\mathbb R^3)$"
+          },
+          "evidence": "Statement: Q and c are supplied maps; the calculation is pointwise and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Thus $D$ transforms objectively, meaning its transformed tensor components obey"
+          },
+          "evidence": "Statement: The conclusion is a transformation law, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Thus $D$ transforms objectively, meaning its transformed tensor components obey"
+          },
+          "evidence": "Statement: The conclusion is a transformation law, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity observer",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.2",
+            "step 4.1"
+          ],
+          "expected": "For Q=I3 and c=0, u*=u, L*=L, D*=D, W*=W, theta*=theta, and a_m*=a_m."
+        },
+        {
+          "name": "constant rotation",
+          "inputs": [
+            "step 2.2",
+            "step 4.1"
+          ],
+          "expected": "For Q constant in SO(3), Qprime=0; the added spin vanishes, D and W transform by conjugation, and theta is unchanged."
+        }
+      ],
+      "finite_checks_disposition": "Exact algebraic specializations of the kinematic observer formulas; no empirical observer or measured acceleration is asserted.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Read all five steps, both exact suppliers and Abeyaratne §3.8. The C2 motion gives C1 velocity on the open swept domain; Q,c give another such motion, with inverse label A(t,Q^T(x*-c)). Chain rule at fixed label proves the acceleration law including 2Qprime u; spatial differentiation at fixed time gives L*=QLQ^T+Qprime Q^T. Differentiated orthogonality makes the added term skew, so symmetric part and trace transform as claimed. Identity, constant rotation, affine translation and general rotating observer cases checked; empty U is vacuous, I is open, singular Q excluded, no choice or empirical premise. No defect; same-batch F1 supplies definitions without importing its unnecessary B or reference-time restrictions."
+      },
+      "step5_repair_review": {
+        "reviewer": "step5-v2-initial-r1-u2",
+        "scope": "Local correction review, not independent review of this repair.",
+        "evidence": "F1 now invokes the actual Euclidean inverse theorem on I times U. All kinematic fields are the Statement definitions. The transformed inverse is A(t,Q transpose (xstar-c)); chain and product rules give the unchanged five identities and acceleration law. No bounded reference body, initial time, choice principle or empirical premise is needed."
+      }
+    },
+    "ex-fdmath-dilation-jacobian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-transport-and-density",
+          "source_section": "Statement",
+          "quote": "The pointwise continuity equation $D_t\\rho+\\rho\\theta=0$, equivalently $\\partial_t\\rho+\\nabla_x\\!\\cdot(\\rho u)=0$, holds on $\\Omega$ if and only if $M_K$ is constant on $I$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "Direct differentiation of chi=alpha a gives F=alpha I3, J=alpha cubed, positive orientation, and the initial identity at alpha(0)=1.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "The inverse label and time derivative give u=(alpha prime/alpha)x and theta=3 alpha prime/alpha.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "Substitution of x=alpha a in rho and multiplication by J gives the invariant reference scalar density.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "The density is $C^1$ on the swept open set and $J>0$. Apply [F1] under the verified hypotheses in [F2] to the invariant product in step 2.2 to obtain the pointwise continuity equation and constant material integrals for every compact Jordan $K\\subset U$. This is a mathematical consequence of the displayed fields.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$"
+          },
+          "evidence": "Example: If rho0 is zero, the formulas give rho=0 and rho J=0; the geometric identities remain unchanged."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "For any $\\rho_0\\in C^1(U,\\mathbb R)$ define $\\rho(t,x)=\\alpha(t)^{-3}\\rho_0(x/\\alpha(t))$."
+          },
+          "evidence": "Example: The zero reference scalar is allowed and makes the density and pullback product vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "$\\alpha(0)=1$"
+          },
+          "evidence": "Example: At t=0, alpha(0)=1 gives F=I3, J=1 and rho(0,a)=rho0(a), as computed in step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "$\\alpha\\in C^2(I,(0,\\infty))$"
+          },
+          "evidence": "Example: Alpha is strictly positive, so F is invertible and J=alpha cubed never vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$"
+          },
+          "reason": "I is open and the example makes no extension claim to finite endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "For any $\\rho_0\\in C^1(U,\\mathbb R)$ define"
+          },
+          "evidence": "Example: The formulas use only supplied alpha and rho0; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The material pullback product $\\rho(t,\\chi(t,a))J(t,a)$ is independent of time"
+          },
+          "evidence": "The Example gives an explicit pullback identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The material pullback product $\\rho(t,\\chi(t,a))J(t,a)$ is independent of time"
+          },
+          "evidence": "The Example gives an explicit pullback identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "stationary dilation",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ],
+          "expected": "For alpha(t)=1, F=I3, J=1, u=0, theta=0, rho=rho0 and rho J=rho0."
+        },
+        {
+          "name": "exponential dilation at reference time",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ],
+          "expected": "For alpha(t)=exp(kt), alpha(0)=1, and t=0: F=I3, J=1, u=ka, theta=3k, rho=rho0 and rho J=rho0."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic substitutions into the example, not measurements or numerical experiments."
+    }
+  }
+}

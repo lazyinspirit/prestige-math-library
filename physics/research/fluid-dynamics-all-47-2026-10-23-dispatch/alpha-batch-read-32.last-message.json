@@ -1,0 +1,360 @@
+{
+  "group": "m",
+  "batches": ["32"],
+  "pages_read": ["fd-st01", "fd-st01-examples"],
+  "items_read": [
+    "def-fd-random-velocity-sensor-law",
+    "lem-fd-sensor-pairing-is-well-defined",
+    "lem-fd-velocity-tensor-is-bochner-integrable",
+    "thm-fd-expected-weak-reynolds",
+    "prop-fd-sensor-long-run-clt",
+    "ex-fd-ar1-long-run-variance"
+  ],
+  "conventions": [
+    {
+      "convention": "Spatial velocities are almost-everywhere classes in H=L²(D,λ;Rᵈ), with 0<λ(D)<∞. The sensor is the integral pairing against ψ∈H, not point evaluation.",
+      "fixed_by": "def-fd-random-velocity-sensor-law",
+      "matters_for": [
+        "lem-fd-sensor-pairing-is-well-defined",
+        "lem-fd-velocity-tensor-is-bochner-integrable",
+        "thm-fd-expected-weak-reynolds",
+        "prop-fd-sensor-long-run-clt",
+        "ex-fd-ar1-long-run-variance"
+      ]
+    },
+    {
+      "convention": "The general state interface supplies a separable real Banach space and strong measurability via simple approximants outside a measurable null set. Scalar evaluations use measurable versions; completeness of the probability measure is not assumed.",
+      "fixed_by": "def-fd-random-velocity-sensor-law",
+      "matters_for": ["lem-fd-sensor-pairing-is-well-defined"]
+    },
+    {
+      "convention": "The matrix norm is Frobenius, (a⊗b)ij=ai bj, and A:B=Σij Aij Bij. Countable Choice is explicitly assumed for the L¹ and L² completeness used in Bochner integration.",
+      "fixed_by": "lem-fd-velocity-tensor-is-bochner-integrable",
+      "matters_for": ["thm-fd-expected-weak-reynolds"]
+    },
+    {
+      "convention": "R is the covariance tensor E[(U−ū)⊗(U−ū)], without a density factor or a negative stress sign. Pointwise covariance requires the stipulated product-measurable representative. Weak testing uses essentially bounded tensor fields.",
+      "fixed_by": "thm-fd-expected-weak-reynolds",
+      "matters_for": ["thm-fd-expected-weak-reynolds"]
+    },
+    {
+      "convention": "The time-dependent Reynolds equation is conditional on the displayed pathwise distributional identities and moment bounds. The gradient convention is (∇φ)ij=∂jφi; pressure is per unit constant density. No existence, boundary trace, initial trace, or closure is asserted.",
+      "fixed_by": "thm-fd-expected-weak-reynolds",
+      "matters_for": ["thm-fd-expected-weak-reynolds"]
+    },
+    {
+      "convention": "CLT sums start at k=0 and end at n−1. Their variance is the absolutely convergent covariance sum, including variance zero. Total variation is the event supremum. AC is explicit; stationarity and mixing are hypotheses, not consequences of fluid dynamics.",
+      "fixed_by": "prop-fd-sensor-long-run-clt",
+      "matters_for": ["prop-fd-sensor-long-run-clt"]
+    },
+    {
+      "convention": "N(m,v) uses variance v. The AR(1) model assumes |ρ|<1, η>0, stationary joint Gaussianity, and independent N(0,η²) innovations independent of X₀.",
+      "fixed_by": "ex-fd-ar1-long-run-variance",
+      "matters_for": ["ex-fd-ar1-long-run-variance"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-random-velocity-sensor-law",
+      "statement": "A finite-second-moment random velocity law is a probability measure μ on the norm-Borel space H=L²(D,λ;Rᵈ), with 0<λ(D)<∞ and ∫H‖v‖H² dμ(v)<∞. For ψ∈H, Sψ(v)=∫D v·ψ dλ and fψ(v)=Sψ(v)−∫H Sψ dμ. The separate general interface supplies a separable real Banach state space and strongly measurable states with finite second moment.",
+      "used_by": [
+        "lem-fd-sensor-pairing-is-well-defined",
+        "lem-fd-velocity-tensor-is-bochner-integrable",
+        "thm-fd-expected-weak-reynolds",
+        "prop-fd-sensor-long-run-clt",
+        "ex-fd-ar1-long-run-variance",
+        "lem-fd-finite-modal-field-has-finite-second-moment",
+        "post-fd-fluid-observation-and-noise",
+        "pthm-fd-conditional-fluid-filter-law",
+        "def-fd-random-fluid-observable"
+      ]
+    },
+    {
+      "id": "lem-fd-sensor-pairing-is-well-defined",
+      "statement": "For the spatial law in the Definition and every ψ∈H, Sψ is finite, representative-independent, linear and continuous, with |Sψ(v)|≤‖v‖H‖ψ‖H; its centered observable is Borel and in L²(μ). For the supplied general Banach interface, the Bochner mean exists, bounded linear sensor expectations commute with that mean, and the finite sensor covariance matrix is well-defined and positive semidefinite.",
+      "used_by": [
+        "thm-fd-expected-weak-reynolds",
+        "prop-fd-sensor-long-run-clt",
+        "ex-fd-ar1-long-run-variance",
+        "post-fd-fluid-observation-and-noise",
+        "pthm-fd-conditional-fluid-filter-law",
+        "def-fd-random-fluid-observable"
+      ]
+    },
+    {
+      "id": "lem-fd-velocity-tensor-is-bochner-integrable",
+      "statement": "Assume Countable Choice. For H as in the Definition and K=L¹(D,λ;Rᵈˣᵈ) with Frobenius norm, v⊗w is representative-independent and ‖v⊗w‖K≤‖v‖H‖w‖H. A strongly measurable U with E‖U‖H²<∞ has Bochner-integrable U and U⊗U, with E‖U⊗U‖K=E‖U‖H².",
+      "used_by": ["thm-fd-expected-weak-reynolds"]
+    },
+    {
+      "id": "thm-fd-expected-weak-reynolds",
+      "statement": "Under Countable Choice, strong measurability, finite second moment and the supplied product-measurable representative, the mean and covariance satisfy E∫D(U⊗U):Φ dλ=∫D(ū⊗ū+R):Φ dλ for every essentially bounded measurable tensor test Φ, with R∈L¹ symmetric positive semidefinite almost everywhere. Under the additional displayed jointly measurable space-time fields, moment bounds and pathwise weak incompressible equation, expectation gives the displayed weak equation with convection tensor m⊗m+R; the stated local version also holds.",
+      "used_by": []
+    },
+    {
+      "id": "prop-fd-sensor-long-run-clt",
+      "statement": "Assume AC. The general centered strictly stationary square-integrable observable satisfies the covariance-sum CLT under any of the three stated strong-mixing/moment regimes. The stationary Markov sensor branch satisfies that CLT under the stated countably generated, invariant, path-shift-ergodic, irreducible, aperiodic Harris hypotheses and any of the six displayed rate/moment regimes. Both conclusions include zero variance and absolute covariance summability.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-l-p-space-as-a-quotient-by-null-functions",
+      "used_for": "Almost-everywhere quotient classes underlying spatial velocities and tensors.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+      "used_for": "Well-defined scalar quotient norms and finite-component normed spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-minkowski-inequality-for-integrals",
+      "used_for": "Triangle inequalities in the spatial sensor interface.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Linearity of sensor pairings and integrable centering operations.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability-space and total-mass-one conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-strongly-measurable-banach-valued-function",
+      "used_for": "Simple approximation, measurable null exceptions and scalar versions.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-inequality-for-integrals",
+      "used_for": "Sensor bounds, covariance integrability, tensor bounds and moment estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-bochner-integrability-criterion",
+      "used_for": "Bochner integrability from strong measurability and integrable norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-linear-maps-commute-with-bochner-integration",
+      "used_for": "Sensor expectation identities and identification of the pointwise mean with the Bochner mean.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice hypothesis in tensor and Reynolds arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-riesz-fischer-completeness-of-l-p",
+      "used_for": "Completeness of finite-component L² and L¹ spaces under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint representative and space-time measurability conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Exchanging nonnegative moment integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Exchanging absolutely integrable sensor, covariance and weak-equation integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-rationals-countable",
+      "used_for": "Countable rational bases in finite-dimensional measurability arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-q-and-irrationals-dense-r",
+      "used_for": "Density needed for rational boxes to form Euclidean bases.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit foundational assumption of the CLT proposition and AR(1) example.",
+      "opened": true
+    },
+    {
+      "id": "thm-mcmc-clt-sufficient-regimes",
+      "used_for": "Exact six sufficient Markov CLT regimes, covariance summability and covariance-sum limit variance.",
+      "opened": true
+    },
+    {
+      "id": "def-long-run-variance-for-stationary-markov-chain",
+      "used_for": "Naming the covariance long-run variance only after establishing summability and a CLT.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Markov probability-kernel convention.",
+      "opened": true
+    },
+    {
+      "id": "def-time-homogeneous-markov-chain-with-transition-kernel",
+      "used_for": "Markov property relative to the filtration and its AC hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "used_for": "Invariant-law and stationary-chain conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-phi-irreducible-chain",
+      "used_for": "All-state accessibility of positive irreducibility-measure sets.",
+      "opened": true
+    },
+    {
+      "id": "def-general-state-aperiodic-markov-chain",
+      "used_for": "Exclusion of positive-mass cyclic parts in the Markov CLT branch.",
+      "opened": true
+    },
+    {
+      "id": "def-harris-recurrent-markov-chain",
+      "used_for": "All-start almost-sure hitting condition.",
+      "opened": true
+    },
+    {
+      "id": "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+      "used_for": "Geometric total-variation bounds with finite or bounded envelopes.",
+      "opened": true
+    },
+    {
+      "id": "def-polynomial-ergodicity-with-integrable-rate-envelope",
+      "used_for": "Polynomial rate convention requiring an integrable envelope.",
+      "opened": true
+    },
+    {
+      "id": "def-general-state-reversibility-by-symmetric-flow-measure",
+      "used_for": "Measure-level reversibility in the fifth Markov regime.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "Event-supremum total-variation normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-ergodic-measure-preserving-system",
+      "used_for": "Zero-or-one invariant-event condition on the stationary path shift.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-preserving-transformation-and-system",
+      "used_for": "Path-shift preservation of the stationary path law.",
+      "opened": true
+    },
+    {
+      "id": "thm-strong-mixing-clt-with-moment-conditions",
+      "used_for": "The three general stationary CLT regimes, including logarithmic moments and zero variance.",
+      "opened": true
+    },
+    {
+      "id": "def-mixing-coefficients-for-stationary-markov-chain",
+      "used_for": "Strict stationarity and past/future strong-mixing coefficient.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "AR(1) variance and covariance calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Absolute summability and evaluation of the AR(1) covariance series.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-convergence-of-borel-probability-measures",
+      "used_for": "AR(1) Gaussian limit proved using bounded continuous tests.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "AR(1) normalized variance limit and Gaussian scaling argument.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "prop-fd-sensor-long-run-clt",
+      "concern": "Statement, Markov regimes 1 and 2: the text contains '$n\\ge1; $f_\\psi$' and '$n\\ge1; for some $\\delta>0$'. Each occurrence lacks the closing dollar immediately after n≥1. This disrupts the mathematical delimiters across the remainder of its bullet. The intended hypotheses match the supplier, but the displayed statement needs delimiter repair.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-rationals-countable",
+      "finding": "Its Statement begins '$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]])' and contains further inline supplier links before the complete statement ends. This violates the mandatory uninterrupted-statement rule; references must follow the complete section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "finding": "Its Definition opens with '([[def-measure-kernel-and-probability-kernel]])' and '([[def-probability-measure]])' and includes additional links within the defining section. These interrupt the complete Definition under the mandatory statement-first rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-phi-irreducible-chain",
+      "finding": "Its Definition contains 'countably generated measurable space ([[def-measurable-space]])' and further inline kernel and measure links. The mandatory uninterrupted-definition rule requires moving these links after the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-general-state-aperiodic-markov-chain",
+      "finding": "Its Definition opens 'Let P be a φ-irreducible probability kernel ([[def-phi-irreducible-chain]]) with invariant probability π ([[def-invariant-and-stationary-distribution-for-a-markov-kernel]])'. These links interrupt the Definition and need a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-general-state-reversibility-by-symmetric-flow-measure",
+      "finding": "Its Definition contains inline links including '[[def-measure-kernel-and-probability-kernel]]', '[[def-probability-measure]]' and '[[lem-prior-and-model-kernel-define-joint-law]]' before defining reversibility. They violate the mandatory uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-ergodic-measure-preserving-system",
+      "finding": "Its Definition says 'with I as in [[def-strict-and-mod-null-invariant-sigma-algebras]]' before completing the definition and qualifications. This link must follow the complete Definition under the mandatory editorial rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-preserving-transformation-and-system",
+      "finding": "Its Definition ends with supplier links '[[def-measure-space]] and [[def-measurable-function-between-measurable-spaces]]' inside the defining section. All hyperlinks must instead occupy the immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-mixing-coefficients-for-stationary-markov-chain",
+      "finding": "Its Definition contains 'where square-integrability is in the sense of [[def-l-p-space-as-a-quotient-by-null-functions]]' before the remaining coefficient conventions. This interrupts the complete Definition under the mandatory statement-first rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-strong-mixing-clt-with-moment-conditions",
+      "finding": "Its Statement includes '[[lem-zero-long-run-variance-gives-degenerate-clt]]' and '[[def-mixing-coefficients-for-stationary-markov-chain]]' within its final qualifications. These hyperlinks must follow the complete Statement in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-mcmc-clt-sufficient-regimes",
+      "finding": "Its Statement intersperses supplier links throughout its base assumptions and six regimes, including '[[def-phi-irreducible-chain]]' and '[[def-polynomial-ergodicity-with-integrable-rate-envelope]]'. This violates the mandatory uninterrupted-statement rule. The assigned sensor proposition restates the supplier hypotheses faithfully.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-pda01",
+      "to": "fd-st01",
+      "faithful": true,
+      "note": "Checked the finite-modal lemma, observation postulate and conditional-filter theorem against the sensor Definition and pairing lemma. Their bounded positive-volume three-dimensional regions, quotient-class pairings, norm bounds and finite-second-moment uses match. Modal continuity is derived locally rather than attributed to a supplier statement that does not assert it. No reverse dependency from fd-st01 is introduced."
+    },
+    {
+      "from": "fd-st02",
+      "to": "fd-st01",
+      "faithful": true,
+      "note": "The random-observable Definition specializes to the identity map on the norm-Borel velocity quotient and uses the pairing lemma for measurable square-integrable outputs. It explicitly requires additional joint representatives for pointwise fields and additional assumptions for dependent sampling. These qualifications preserve the supplier's scope; fd-st01 does not depend back on fd-st02."
+    }
+  ]
+}

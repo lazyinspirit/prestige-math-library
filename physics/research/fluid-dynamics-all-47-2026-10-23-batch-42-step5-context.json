@@ -1,0 +1,125 @@
+{
+  "group": "f",
+  "batches": [
+    "42"
+  ],
+  "pages_read": [
+    "fd-pmp01",
+    "fd-pmp01-examples"
+  ],
+  "items_read": [
+    "def-fd-phase-field-dimensionalization",
+    "post-fd-diffuse-interface-material-law",
+    "pthm-fd-phase-field-conditional-energy",
+    "ex-fd-phase-outside-unit-interval"
+  ],
+  "conventions": [
+    {
+      "convention": "The dimensionless torus is R³/(2πZ)³; the physical torus is R³/(2πLZ)³. Fields use periodic lifts, and spatial integrals are unnormalized Riemann integrals over the respective fundamental cubes.",
+      "fixed_by": "def-fd-phase-field-dimensionalization",
+      "matters_for": [
+        "post-fd-diffuse-interface-material-law",
+        "pthm-fd-phase-field-conditional-energy",
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    },
+    {
+      "convention": "Use x=Ly, t=(L/U)s, u=Uv, varphi=Phi_* phi, and p=rho_* U² pi, with strictly positive scales. The physical chemical potential is mu=(rho_* U²/Phi_*)mu_c.",
+      "fixed_by": "def-fd-phase-field-dimensionalization",
+      "matters_for": [
+        "post-fd-diffuse-interface-material-law",
+        "pthm-fd-phase-field-conditional-energy",
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    },
+    {
+      "convention": "The velocity gradient has entries ∂_j u_i, tensor divergence has components sum_j ∂_j sigma_ij, and traction is sigma n. The adopted capillary stress has divergence −varphi grad(mu).",
+      "fixed_by": "post-fd-diffuse-interface-material-law",
+      "matters_for": [
+        "pthm-fd-phase-field-conditional-energy",
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    },
+    {
+      "convention": "The phase variable is an internal scalar order parameter, not total mass density; no positivity or pointwise interval constraint is imposed. Mobility, viscosity, and density are constant and positive.",
+      "fixed_by": "post-fd-diffuse-interface-material-law",
+      "matters_for": [
+        "pthm-fd-phase-field-conditional-energy",
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    },
+    {
+      "convention": "The smooth branch requires v in C¹(time;C²_per), phi in C¹(time;C¹_per) intersect C(time;C²_per), pi in C(time;C¹_per), and the defined mu_c in C(time;C²_per). The energy identity concerns interior times and kinetic plus phase free energy, not complete thermodynamic energy.",
+      "fixed_by": "pthm-fd-phase-field-conditional-energy",
+      "matters_for": [
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "post-fd-diffuse-interface-material-law",
+      "statement": "Adopt the smooth periodic, constant-density incompressible equations ∂_t varphi+u·grad(varphi)=Mcal Δmu, div(u)=0, and rho_*(∂_t u+(u·grad)u)=div(sigma), with mu=f_b'(varphi)−lambda_phi Δvarphi and the explicitly displayed viscous and capillary stress. No external body force, interval constraint, empirical calibration, or thermal completion is adopted.",
+      "used_by": [
+        "pthm-fd-phase-field-conditional-energy",
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    },
+    {
+      "id": "def-fd-phase-field-dimensionalization",
+      "statement": "For positive L,U,rho_*,Phi_* and dimensionless epsilon,M,nu>0, define beta=rho_*U²/epsilon, lambda_phi=rho_*U²L²epsilon/Phi_*², eta=rho_*ULnu, and Mcal=M Phi_*²L/(rho_*U), with the stated scale map, chemical potential, and kinetic-plus-phase free-energy functional.",
+      "used_by": [
+        "post-fd-diffuse-interface-material-law",
+        "pthm-fd-phase-field-conditional-energy",
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    },
+    {
+      "id": "pthm-fd-phase-field-conditional-energy",
+      "statement": "Under its stated positive-parameter, W∈C²(R) bounded-below, periodic regularity, and adopted-equation hypotheses, dG/dt=−eta integral |grad_x u|² dx−Mcal integral |grad_x mu|² dx for 0<t<T_*S. This neither asserts solution existence nor derives the isothermal closure from total-energy or entropy balance.",
+      "used_by": [
+        "ex-fd-phase-outside-unit-interval"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The mathematical energy supplier uses the real mean value theorem to control potential-energy difference quotients; the periodic integration-by-parts supplier uses it on coordinate segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-r",
+      "used_for": "The mathematical energy supplier uses compactness of a closed bounded interval to establish boundedness and uniform continuity of W' on the local phase range.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "post-fd-diffuse-interface-material-law",
+      "concern": "The Postulate states the complete v, phi, pi, and mu_c regularity paragraph twice: first beginning “On ... require”, then again in the next paragraph beginning “For the smooth branch, require”. The repeated conditions agree, but duplicate the same mathematical content.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-heine-borel-r",
+      "finding": "The Statement contains inline wikilinks in “[a,b] ([[def-interval]]) is compact ([[def-open-cover-r]])” and later “uses [[thm-recursion]]”. These interrupt the complete Statement and have no immediately following Statement references section, contrary to the uninterrupted-statement instruction. The compactness claim itself is adequate for the inspected consumer.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-pmp01",
+      "to": "fd-f01",
+      "faithful": true,
+      "note": "Checked the continuum postulate and its frame/quantity definition against the phase-field postulate's reference and F1/L1. Absolute time, Cartesian inertial coordinates, SI quantities, traction sigma n, and the distinction between adopted balances and constitutive assumptions are preserved. The phase-field item explicitly declines to derive its reduced closure or a thermal completion from the supplier's total-energy and entropy balances."
+    },
+    {
+      "from": "fd-pmp01",
+      "to": "fd-mp01",
+      "faithful": true,
+      "note": "Checked the torus convention, equation definition, periodic integration-by-parts argument, and complete mathematical energy proof against the physical consumers. The d=3 specialization preserves regularity, positive coefficients, W∈C²(R) bounded below, force sign, and unnormalized integration. The physical proof establishes the dimensionless equations, G=rho_*U²L³E, and both dissipation scaling factors before applying the supplier. No existence, phase-range, or empirical conclusion is imported."
+    }
+  ]
+}

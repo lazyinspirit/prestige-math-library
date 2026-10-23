@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-rotating-stratified-shallow-equations",
+    "thm-fd-stratified-linear-energy",
+    "thm-fd-shallow-water-smooth-energy",
+    "ex-fd-geophysical-rest-state"
+  ],
+  "contracts": {
+    "def-fd-rotating-stratified-shallow-equations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "definition: the spatial periodic cells Q2 and Q3 are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: f=0 and nu=kappa=0 are admitted; N=0 and h=0 are excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes dimensions d=2 and d=3 and contains no one-object counting assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "definition: the diffusion coefficients may vanish, while N>0 and h>0 remain explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "definition: I is open; no temporal endpoint data or boundary trace are imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states equation families and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states equation families and makes no biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "The G01 definition specializes the current supplier formal-PDE convention to periodic lifts on R^3 for its 3D stratified branch and defines the 2D shallow-water branch locally.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ]
+    },
+    "thm-fd-stratified-linear-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The rotating, linear, constant-stratification Boussinesq equation family is\n\n$$u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "For a scalar field $q$, set $\\nabla q=(\\partial_{x_1}q,\\ldots,\\partial_{x_d}q)$ and $\\Delta q=\\sum_{j=1}^d\\partial_{x_j}^2q$. For a vector field $w=(w_1,\\ldots,w_d)$, set $\\nabla\\cdot w=\\sum_{j=1}^d\\partial_{x_j}w_j$, $\\Delta w=(\\Delta w_1,\\ldots,\\Delta w_d)$, $|w|^2=\\sum_{j=1}^dw_j^2$, and $|\\nabla w|^2=\\sum_{i,j=1}^d(\\partial_{x_j}w_i)^2$. For a matrix field $A$, its divergence is rowwise: $(\\nabla\\cdot A)_i=\\sum_{j=1}^d\\partial_{x_j}A_{ij}$. In three dimensions $e_3\\times u=(-u_2,u_1,0)$, and in two dimensions $Jv=(-v_2,v_1)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "The momentum equation gives the local kinetic-energy balance; Coriolis work vanishes, pressure is a divergence under incompressibility, and diffusion contributes -nu|grad u|^2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "The buoyancy equation gives the potential-energy balance, which cancels the kinetic buoyancy-transfer term and leaves the stated dissipation.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "Periodicity removes spatial fluxes, time FTC gives the exact endpoint identity, and N>0 with nonnegative diffusion gives positivity and monotonicity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "If I is empty, there is no pair t0<t1 in the stated identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: u=b=0 gives E=0 and zero dissipation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no finite-family cardinality parameter in this continuum PDE claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "statement and step 3.1: f=0 and nu=kappa=0 are admitted; N=0 is explicitly excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: each t0<t1 is internal to I and the fundamental theorem gives the endpoint identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no member from an indexed family and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero rest state",
+          "inputs": "u=b=pi=0",
+          "result": "both equations hold and both energy and dissipation are zero"
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "Transitive through the G01 definition; the proof uses its locally stated equations and Cartesian conventions. The supplier carrier and interface are current, but its Step-1 readiness record is missing.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ]
+    },
+    "thm-fd-shallow-water-smooth-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The inviscid one-layer shallow-water equation family is\n\n$$h_t+\\nabla\\cdot(hv)=0,\\qquad (hv)_t+\\nabla\\cdot(hv\\otimes v)+\\nabla\\!\\left(\\frac{g h^2}{2}\\right)+f h Jv=0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "For a scalar field $q$, set $\\nabla q=(\\partial_{x_1}q,\\ldots,\\partial_{x_d}q)$ and $\\Delta q=\\sum_{j=1}^d\\partial_{x_j}^2q$. For a vector field $w=(w_1,\\ldots,w_d)$, set $\\nabla\\cdot w=\\sum_{j=1}^d\\partial_{x_j}w_j$, $\\Delta w=(\\Delta w_1,\\ldots,\\Delta w_d)$, $|w|^2=\\sum_{j=1}^dw_j^2$, and $|\\nabla w|^2=\\sum_{i,j=1}^d(\\partial_{x_j}w_i)^2$. For a matrix field $A$, its divergence is rowwise: $(\\nabla\\cdot A)_i=\\sum_{j=1}^d\\partial_{x_j}A_{ij}$. In three dimensions $e_3\\times u=(-u_2,u_1,0)$, and in two dimensions $Jv=(-v_2,v_1)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Continuity converts the conservative momentum derivative to h D_t v, yielding D_t v=-fJv-g grad h.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Dotting by v gives the kinetic balance; continuity gives the potential balance; the pressure-work terms combine into the displayed energy flux.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "Periodic spatial fluxes integrate to zero and time FTC gives conservation of the total energy over every interval pair.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "If I is empty, there is no pair t0<t1 in the stated identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: v=0 and h=H>0 leave constant potential energy and zero flux divergence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no finite-family cardinality parameter in this continuum PDE claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1: f=0 is allowed and h>0 excludes dry states; the proof never divides by g or f."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: every t0<t1 in the open interval is covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no member from an indexed family and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant depth at rest",
+          "inputs": "h=H>0, v=0",
+          "result": "the equations hold and the cell energy equals 2 pi^2 g H^2"
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "Transitive through the G01 definition; the proof uses its locally stated equations and Cartesian conventions. The supplier carrier and interface are current, but its Step-1 readiness record is missing.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ]
+    },
+    "ex-fd-geophysical-rest-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The rotating, linear, constant-stratification Boussinesq equation family is\n\n$$u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The inviscid one-layer shallow-water equation family is\n\n$$h_t+\\nabla\\cdot(hv)=0,\\qquad (hv)_t+\\nabla\\cdot(hv\\otimes v)+\\nabla\\!\\left(\\frac{g h^2}{2}\\right)+f h Jv=0.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-shallow-water-smooth-energy",
+          "source_section": "Statement",
+          "quote": "Define the normalized energy density per horizontal area by $E:=h|v|^2/2+gh^2/2$; it is per unit reference density, so a specified constant density converts its area integral to joules. Then the pointwise energy flux identity is\n\n$$\\partial_t E+\\nabla\\cdot\\left(\\left(E+\\frac{gh^2}{2}\\right)v\\right)=0.$$\n\nConsequently, for every $t_0<t_1$ in $I$,\n\n$$\\int_{Q_2}E(t_1,x)\\,dx=\\int_{Q_2}E(t_0,x)\\,dx.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Direct substitution of the zero stratified fields satisfies each equation and sets the energy integrand to zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "1.2",
+          "claim": "Direct substitution of constant positive depth and zero velocity satisfies the shallow-water equations, so the local energy theorem applies.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.1",
+          "claim": "The normalized shallow energy density is gH^2/2; the periodic cell area is (2pi)^2, giving 2pi^2 g H^2.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes nonempty periodic cells Q2 and Q3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the stratified rest state has u=b=pi=0 and zero energy."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no finite-family cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: the stratified state works for zero or positive diffusion and the shallow state requires H>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: the shallow rest-state energy is independent of all t in I."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example selects no member from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "stratified zero state",
+          "inputs": "u=b=pi=0",
+          "result": "every PDE term and the energy are zero"
+        },
+        {
+          "case": "shallow rest state",
+          "inputs": "h=H>0, v=0",
+          "result": "mass and momentum equations vanish and total normalized energy is 2 pi^2 g H^2"
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "Transitive through the G01 definition; the proof uses its locally stated equations and Cartesian conventions. The supplier carrier and interface are current, but its Step-1 readiness record is missing.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "group": "d",
+  "batches": [
+    "21"
+  ],
+  "pages_read": [
+    "fd-ps02",
+    "fd-ps02-examples"
+  ],
+  "items_read": [
+    "post-fd-navier-slip-wall-law",
+    "pthm-fd-local-momentum-balance-from-continuum",
+    "pthm-fd-wall-mechanical-power-balance",
+    "pthm-fd-linear-acoustic-model-prediction",
+    "ex-fd-adopted-poiseuille-couette"
+  ],
+  "conventions": [
+    {
+      "convention": "The normal points outward from the fluid; tension-positive Cauchy stress acts by traction σn. Stress divergence is rowwise, (div σ)i = Σj ∂jσij.",
+      "fixed_by": "pthm-fd-local-momentum-balance-from-continuum",
+      "matters_for": [
+        "pthm-fd-wall-mechanical-power-balance",
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    },
+    {
+      "convention": "Tangential projection is aτ = a − (a·n)n. Stationary Navier friction means u·n = 0 and (σn)τ = −βuτ, with constant β ≥ 0 in Pa·s/m. For β > 0 the slip length is η/β; β = 0 means zero tangential traction.",
+      "fixed_by": "post-fd-navier-slip-wall-law",
+      "matters_for": [
+        "pthm-fd-wall-mechanical-power-balance"
+      ]
+    },
+    {
+      "convention": "Density and viscosity are positive constants; incompressibility is imposed separately, rather than derived from the momentum balance. D is the symmetric velocity gradient and |D|² is its Frobenius squared norm.",
+      "fixed_by": "pthm-fd-wall-mechanical-power-balance",
+      "matters_for": [
+        "pthm-fd-wall-mechanical-power-balance",
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    },
+    {
+      "convention": "Periodic faces are identified and are not physical walls. The periodic channel permits the tangential no-slip branch; the adopted stationary Navier branch and uniqueness conclusion are restricted to the bounded C2 domain.",
+      "fixed_by": "pthm-fd-wall-mechanical-power-balance",
+      "matters_for": [
+        "pthm-fd-wall-mechanical-power-balance",
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    },
+    {
+      "convention": "Countable Choice means every countable family of nonempty sets has a choice function; it is explicitly assumed for the divergence and Fourier suppliers.",
+      "fixed_by": "pthm-fd-wall-mechanical-power-balance",
+      "matters_for": [
+        "pthm-fd-local-momentum-balance-from-continuum",
+        "pthm-fd-wall-mechanical-power-balance",
+        "pthm-fd-linear-acoustic-model-prediction",
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    },
+    {
+      "convention": "The acoustic cell has period 2πL with L = 1 metre. Fourier coefficients use normalized cell volume and characters exp(iκ·x), κ ∈ L⁻¹Z³. The tangent model is the first variation at dimensionless ε = 0, not a finite-amplitude approximation theorem.",
+      "fixed_by": "pthm-fd-linear-acoustic-model-prediction",
+      "matters_for": [
+        "pthm-fd-linear-acoustic-model-prediction"
+      ]
+    },
+    {
+      "convention": "The periodic Poiseuille example uses constant pressure and body acceleration (G/ρ,0,0); a pressure term −Gx is not a single-valued periodic pressure. Reported powers are divided by streamwise/spanwise cell area.",
+      "fixed_by": "ex-fd-adopted-poiseuille-couette",
+      "matters_for": [
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "pthm-fd-local-momentum-balance-from-continuum",
+      "statement": "Under Countable Choice, the stated C2 orientation-preserving material motion, velocity and pressure regularity, constant positive density and viscosity, incompressibility, Newtonian stress, and adopted momentum balance on every relatively compact nonempty bounded C1 material subregion imply ρ(∂tu + (u·∇)u) = div σ + ρb throughout each current fluid region.",
+      "used_by": [
+        "pthm-fd-wall-mechanical-power-balance"
+      ]
+    },
+    {
+      "id": "pthm-fd-wall-mechanical-power-balance",
+      "statement": "Under the stated Countable Choice, smoothness, material-motion, integral-balance and constant-density incompressible Newtonian hypotheses, K′ equals body-force power minus 2η∫|D(u)|² plus ∫Γg·σn for tangential no-slip walls, or minus β∫Γ|uτ|² for stationary Navier friction on the bounded-domain branch. On that bounded branch, homogeneous stationary no-slip or common-β Navier data give at most one smooth velocity for the given force and initial velocity; no pressure uniqueness or existence is asserted.",
+      "used_by": [
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    },
+    {
+      "id": "post-fd-navier-slip-wall-law",
+      "statement": "On the stated fixed bounded C2 fluid domain, adopt u·n = 0 and (σn)τ = −βuτ, where β ≥ 0 is constant in pascal-seconds per metre.",
+      "used_by": [
+        "pthm-fd-wall-mechanical-power-balance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption carried into the local momentum, wall-power, acoustic and channel-example arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Rowwise conversion of traction resultants to stress divergence and integration of kinetic and stress-work fluxes on bounded C1 domains, under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+      "used_for": "The mathematical wall-uniqueness supplier's one-sided graph, outward-normal and interior-up-to-boundary derivative conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-surface-integral-on-a-compact-c-one-hypersurface",
+      "used_for": "The mathematical wall-uniqueness supplier's finite-chart Gram-density surface integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-basis-and-parseval-on-the-n-torus",
+      "used_for": "Fourier synthesis, coefficient uniqueness and Parseval in the global acoustic supplier, after rescaling the unit torus to the normalized 2π-periodic torus.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-compact-jordan-sets",
+      "used_for": "The transport supplier's compact-Jordan change of variables with positive Jacobian.",
+      "opened": true
+    },
+    {
+      "id": "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+      "used_for": "The transport supplier's preservation of compact Jordan sets under the material diffeomorphism.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+      "used_for": "Riemann integrability of the continuous transported fields on compact Jordan material sets.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-fd-adopted-poiseuille-couette",
+      "concern": "Verification 1.1 constructs the required material motion, and 2.1–2.2 verify the local equations, but the subsequent invocations of F1 do not explicitly verify its additional adopted material integral-momentum balance. That balance follows immediately here by applying transport to ρu and integrating the verified local equation with the divergence theorem. The numerical power identities are also calculated directly and are correct; the missing bridge concerns satisfaction of the cited theorem's hypotheses.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "pthm-fd-linear-acoustic-model-prediction",
+      "concern": "Proof 3.2 says, “Thus each nonzero longitudinal mode has time dependence” exp(−iωt). The preceding oscillator equation permits a superposition of the two frequencies. The Statement correctly restricts the single-exponential assertion to a defined longitudinal normal mode. The proof sentence should retain that restriction, or distinguish a general longitudinal Fourier solution from its normal-mode components.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-fourier-basis-and-parseval-on-the-n-torus",
+      "finding": "Its Statement begins “Assume the Axiom of Countable Choice ([[def-countable-choice]])” and embeds further torus and Fourier-definition wikilinks before the conclusions. These links interrupt the complete Statement and have no immediately following Statement references section, contrary to the required uninterrupted-statement presentation. The Fourier proposition used here is otherwise faithfully stated by its consumers.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+      "finding": "Its Definition contains “assume ... ([[def-countable-choice]])” and later “Derivatives use [[def-total-derivative-in-euclidean-space]]” together with an inner-product wikilink. These remain inside the defining section rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-surface-integral-on-a-compact-c-one-hypersurface",
+      "finding": "Its Definition opens “Assume the ... convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]” and embeds partition, Gram-determinant and Lebesgue-integral supplier links throughout the construction. They violate the uninterrupted-Definition requirement; the chart construction itself matches the wall-energy supplier's use.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-ps02",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "The actual boundary-data supplier distinguishes wall material velocity, impermeability, no-slip and periodic identification. The consumer uses precisely u = g with g·n = 0, or its separately adopted stationary friction law; periodic faces are correctly excluded from physical wall work."
+    },
+    {
+      "from": "fd-ps02",
+      "to": "fd-f03",
+      "faithful": true,
+      "note": "The Newtonian closure specializes to −pI + 2ηD when div u = 0 and viscosity is constant. The consumer explicitly avoids importing the incompressible definition's unforced equation into its forced derivation. The barotropic definition permits a C1 pressure law without a derivative-sign assumption; the acoustic consumer separately imposes p′(ρ*) > 0 and derives its first variation using continuity of p′."
+    },
+    {
+      "from": "fd-ps02",
+      "to": "fd-s03",
+      "faithful": true,
+      "note": "The current page contains thm-fd-smooth-wall-energy-uniqueness. Its bounded C2 domain, smoothness, positive density and viscosity, common force and initial velocity, homogeneous no-slip/common-β Navier alternatives, and velocity-only uniqueness conclusion match the consumer. The consumer does not extend that citation to moving-wall or periodic-channel uniqueness."
+    }
+  ]
+}

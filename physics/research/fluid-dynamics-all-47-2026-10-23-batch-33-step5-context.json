@@ -1,0 +1,223 @@
+{
+  "group": "m",
+  "batches": [
+    "33"
+  ],
+  "pages_read": [
+    "fd-st02",
+    "fd-st02-examples"
+  ],
+  "items_read": [
+    "def-fd-random-fluid-observable",
+    "thm-fd-observable-sampling-bias-split",
+    "alg-fd-uq-observable-budget",
+    "cor-fd-uq-observable-budget-guarantees",
+    "rem-fd-fluid-sobol-interface",
+    "ex-fd-all-zero-mc-sample"
+  ],
+  "conventions": [
+    {
+      "convention": "Exact and approximate outputs are measurable scalar composites on the same declared input law, using the same scalar unit. A measurable solution selection is supplied, not asserted to exist.",
+      "fixed_by": "def-fd-random-fluid-observable",
+      "matters_for": [
+        "thm-fd-observable-sampling-bias-split",
+        "alg-fd-uq-observable-budget",
+        "cor-fd-uq-observable-budget-guarantees"
+      ]
+    },
+    {
+      "convention": "Signed numerical mean bias is b_h = θ_h − θ. The exact observable needs a finite first absolute moment; the approximate output needs a finite second moment for the finite-sample MSE and variance bounds.",
+      "fixed_by": "thm-fd-observable-sampling-bias-split",
+      "matters_for": [
+        "alg-fd-uq-observable-budget",
+        "cor-fd-uq-observable-budget-guarantees"
+      ]
+    },
+    {
+      "convention": "Finite-sample guarantees concern independent copies with the original output law and externally supplied population bounds. Gaussian interval claims are asymptotic and additionally assume AC and positive output variance; the studentized quotient is zero at zero sample variance.",
+      "fixed_by": "thm-fd-observable-sampling-bias-split",
+      "matters_for": [
+        "alg-fd-uq-observable-budget",
+        "cor-fd-uq-observable-budget-guarantees",
+        "ex-fd-all-zero-mc-sample"
+      ]
+    },
+    {
+      "convention": "Fixed-size mode invokes every callback once, including after failures, and never replaces failed draws. Completion conditioning changes the input law when success probability lies strictly between zero and one.",
+      "fixed_by": "alg-fd-uq-observable-budget",
+      "matters_for": [
+        "cor-fd-uq-observable-budget-guarantees"
+      ]
+    },
+    {
+      "convention": "Certified mode uses N = max{1, ceil(V_h/(δ ε_s²))}; N = 1 supplies no sample variance. Execution and operation counts use exact real arithmetic and supplied finite-return sampling contracts.",
+      "fixed_by": "alg-fd-uq-observable-budget",
+      "matters_for": [
+        "cor-fd-uq-observable-budget-guarantees"
+      ]
+    },
+    {
+      "convention": "Sobol indices use a finite product input law and are undefined at zero output variance. Pick-freeze rows use six mutually independent input vectors; the ratio CLT and MCSE interpretation additionally require AC, an L4 output, and positive variance.",
+      "fixed_by": "rem-fd-fluid-sobol-interface",
+      "matters_for": [
+        "rem-fd-fluid-sobol-interface"
+      ]
+    },
+    {
+      "convention": "The all-zero example uses n ≥ 2 and p ∈ (0,1), with sample variance divided by n − 1. It is a probability-model example, not an empirical observation.",
+      "fixed_by": "ex-fd-all-zero-mc-sample",
+      "matters_for": [
+        "ex-fd-all-zero-mc-sample"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-fd-observable-sampling-bias-split",
+      "statement": "For Y ∈ L1 and Y_h ∈ L2, and n ≥ 1 independent copies of Y_h, E_s[(Ȳ_h,n − θ)²] = σ_h²/n + b_h². If finite nonnegative bounds satisfy |b_h| ≤ B_h and σ_h² ≤ V_h, with ε_b ≥ B_h and ε_s > 0, then P_s(|Ȳ_h,n − θ| > ε_b + ε_s) ≤ V_h/(n ε_s²).",
+      "used_by": [
+        "alg-fd-uq-observable-budget",
+        "cor-fd-uq-observable-budget-guarantees"
+      ]
+    },
+    {
+      "id": "def-fd-random-fluid-observable",
+      "statement": "An exact selected solution map is a supplied measurable map S: Θ → X. A real observable is a map J: X → R such that Y := J composed with S is measurable. Supplied measurable numerical composites Y_h = J_h composed with S_h define approximate outputs on the same input law.",
+      "used_by": [
+        "thm-fd-observable-sampling-bias-split",
+        "alg-fd-uq-observable-budget",
+        "prop-fd-surrogate-law-shift-observable"
+      ]
+    },
+    {
+      "id": "alg-fd-uq-observable-budget",
+      "statement": "Fixed-size mode draws N ≥ 2 independent inputs, invokes the callback exactly once per draw, and returns incomplete if any call fails. Certified mode, with its supplied law and population certificates and admissible numeric inputs, sets N = max{1, ceil(V_h/(δ ε_s²))} and returns the mean, tolerance ε_b + ε_s, failure bound δ, and RMS upper bound sqrt(V_h/N + ε_b²).",
+      "used_by": [
+        "cor-fd-uq-observable-budget-guarantees"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-iid-monte-carlo-estimators",
+      "used_for": "Sample mean, sample variance with divisor n − 1, and plug-in standard error.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Population variance and covariance definitions throughout the sampling and Sobol arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Transfer of moments and expectations between equal-law outputs on different probability spaces.",
+      "opened": true
+    },
+    {
+      "id": "cor-variance-adds-for-pairwise-independent-random-variables",
+      "used_for": "Finite-family variance additivity without requiring an infinite IID extension.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "MSE expansion, indicator probability bounds, and mean-bias certificates.",
+      "opened": true
+    },
+    {
+      "id": "thm-iid-monte-carlo-sample-variance-consistency",
+      "used_for": "Almost-sure sample-variance consistency under a finite second moment.",
+      "opened": true
+    },
+    {
+      "id": "thm-iid-monte-carlo-central-limit",
+      "used_for": "Gaussian sampling limit under AC and positive finite variance.",
+      "opened": true
+    },
+    {
+      "id": "thm-slutsky-for-real-random-variables",
+      "used_for": "Studentization with the stated convention at zero denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-convergence-in-distribution-for-real-random-variables",
+      "used_for": "CDF convergence at continuity points in the asymptotic coverage argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Bounded-indicator arguments converting almost-sure convergence into vanishing exceptional probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal-law scaling and the continuous, atomless standard normal distribution.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit additional assumption carried by the Gaussian and Sobol CLT suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of callback outputs as measurable functions of independent inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-sigma-algebras-and-events",
+      "used_for": "Completion probability and factorization of the completion-conditioned input law.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common-law conventions in the finite Bernoulli example.",
+      "opened": true
+    },
+    {
+      "id": "def-product-coordinate-projections",
+      "used_for": "Coordinate averaging, lifts to the full product, and empty-product conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-product-hoeffding-anova-components",
+      "used_for": "Subset-sum definition of Hoeffding components.",
+      "opened": true
+    },
+    {
+      "id": "def-first-and-total-sobol-indices",
+      "used_for": "Variance-component normalization and exclusion of zero output variance.",
+      "opened": true
+    },
+    {
+      "id": "thm-pick-freeze-sobol-covariance-identities",
+      "used_for": "First-order and total-effect numerator expectation identities.",
+      "opened": true
+    },
+    {
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "used_for": "Exact six-vector row sampler, denominator guard, ratio estimators, and formal covariance matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+      "used_for": "Joint ratio CLT and scaled plug-in covariance convergence under the stated additional hypotheses.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-st02",
+      "to": "fd-st01",
+      "faithful": true,
+      "note": "Checked the random-velocity-law definition and sensor-pairing lemma against the observable specialization. The identity-state construction uses the supplied Borel law on L2 quotient classes; continuous sensor pairing gives measurability and finite second moments. The consumer preserves the separate measurable-version qualification for strongly measurable Banach states and does not infer IID sampling or pointwise representatives."
+    },
+    {
+      "from": "fd-l01",
+      "to": "fd-st02",
+      "faithful": true,
+      "note": "The law-shift proposition uses the general measurable-state/scalar-observable interface faithfully and supplies its own Lipschitz, population moment, and bounded-density hypotheses. Its L sqrt(C) ε estimate follows by Hölder and does not claim empirical certification. The other fd-l01 items introduce no additional use of fd-st02."
+    }
+  ]
+}

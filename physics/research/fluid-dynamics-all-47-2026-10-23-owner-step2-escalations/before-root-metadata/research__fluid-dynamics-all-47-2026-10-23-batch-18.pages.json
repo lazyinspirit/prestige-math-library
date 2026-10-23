@@ -1,0 +1,488 @@
+[
+  {
+    "order": 395,
+    "id": "fd-s02",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Local smooth periodic Euler and Navier–Stokes",
+    "companion": "fd-s02-examples",
+    "requires": [
+      "fd-s01",
+      "picard-lindelof-and-first-order-odes",
+      "completeness-and-uniform-continuity",
+      "monotone-sequences-and-cauchy-completeness",
+      "rn-as-a-normed-space"
+    ],
+    "items": [
+      {
+        "id": "thm-fd-smooth-periodic-incompressible-ivp",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local smooth periodic Euler and Navier–Stokes",
+        "reference": "items/thm-fd-smooth-periodic-incompressible-ivp.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-fd-periodic-leray-pressure-maps",
+          "lem-fd-periodic-fourier-embedding-products",
+          "lem-fd-periodic-tame-transport-commutator",
+          "thm-fd-periodic-pressure-recovery",
+          "def-countable-choice",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "lem-fd-polynomial-ode-continuation",
+          "thm-bolzano-weierstrass",
+          "lem-fd-given-smooth-solutions-difference-energy"
+        ],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-fd-periodic-leray-pressure-maps": "mathematical-premise",
+          "lem-fd-periodic-fourier-embedding-products": "mathematical-premise",
+          "lem-fd-periodic-tame-transport-commutator": "mathematical-premise",
+          "thm-fd-periodic-pressure-recovery": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "lem-fd-polynomial-ode-continuation": "mathematical-premise",
+          "thm-bolzano-weierstrass": "mathematical-premise",
+          "lem-fd-given-smooth-solutions-difference-energy": "mathematical-premise"
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brian F. Morton, Local-in-Time Well-Posedness of the Incompressible Euler and Navier–Stokes Equations, §§7.1–7.3",
+              "url": "https://brianfmorton.github.io/Notes/Local_in_Time_Well_Posedness_of_the_Incompressible_Euler_and_Navier_Stokes_Equations.pdf"
+            },
+            {
+              "title": "Emil Wiedemann, Lecture Notes: Navier–Stokes Equations, §4.3",
+              "url": "https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "def-fd-polytropic-symmetric-variables",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Sound-speed variables for polytropic Euler",
+        "reference": "items/def-fd-polytropic-symmetric-variables.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, and put $a=(\\gamma-1)/2$. For positive density $\\rho>0$, define the polytropic pressure $p(\\rho)=\\kappa\\rho^\\gamma$, sound speed $c(\\rho)=\\sqrt{p'(\\rho)}=\\sqrt{\\kappa\\gamma}\\,\\rho^a$, and sound-speed variable $r=c/a$. The map $\\rho\\mapsto r$ is a smooth bijection $(0,\\infty)\\to(0,\\infty)$ with inverse $\\rho=(ar/\\sqrt{\\kappa\\gamma})^{1/a}$. For a velocity $u\\in\\mathbb R^d$, set $q=(r,u_1,\\ldots,u_d)\\in\\mathbb R^{d+1}$. Let $e_0,e_1,\\ldots,e_d$ be the standard basis of $\\mathbb R^{d+1}$, with $e_0$ the scalar coordinate and $e_j$ the velocity coordinate $u_j$. Define the real matrix\n$$A_j(q)=u_j I_{d+1}+ar(e_0e_j^{\\mathsf T}+e_je_0^{\\mathsf T}),\\qquad 1\\le j\\le d.$$\nEach $A_j(q)$ is symmetric and linear in $q$. The first-order system $q_t+\\sum_{j=1}^d A_j(q)\\partial_jq=0$ means the pair\n$$r_t+u\\cdot\\nabla r+ar\\,\\operatorname{div}u=0,\\qquad u_t+u\\cdot\\nabla u+ar\\nabla r=0.$$\nFor periodic use on $Q_d=(\\mathbb R/2\\pi\\mathbb Z)^d$, take normalized measure $d\\mu=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat q(k)=\\int q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and $\\|q\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat q(k)|^2$, componentwise; real fields satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. These are the periodic Fourier-space conventions used for $H^m$ in this development.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, The Boltzmann Equation and Its Hydrodynamic Limits, §7.4",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-fd-smooth-polytropic-euler-ivp",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local smooth positive-density polytropic Euler",
+        "reference": "items/thm-fd-smooth-polytropic-euler-ivp.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-polytropic-symmetric-variables",
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "lem-fd-periodic-fourier-embedding-products",
+          "lem-fd-periodic-tame-transport-commutator",
+          "def-countable-choice",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "lem-fd-polynomial-ode-continuation",
+          "thm-euclidean-space-complete",
+          "thm-bolzano-weierstrass"
+        ],
+        "dependency_roles": {
+          "def-fd-polytropic-symmetric-variables": "mathematical-premise",
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "lem-fd-periodic-fourier-embedding-products": "mathematical-premise",
+          "lem-fd-periodic-tame-transport-commutator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "lem-fd-polynomial-ode-continuation": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise",
+          "thm-bolzano-weierstrass": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, $a=(\\gamma-1)/2$, integer $s\\ge4$, and smooth real periodic data $\\rho_0,u_0$ on $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, with $\\min_{x\\in\\mathbb T^d}\\rho_0(x)>0$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. For $\\rho>0$, set $p(\\rho)=\\kappa\\rho^\\gamma$ and $r(\\rho)=\\sqrt{\\kappa\\gamma}\\,\\rho^a/a$. Then there is $T>0$, depending only on $d,s,\\kappa,\\gamma$, $\\|(r(\\rho_0),u_0)\\|_{H^s}$, and $\\min r(\\rho_0)$, and a unique smooth real solution $(\\rho,u)$ on $[0,T]\\times\\mathbb T^d$ of\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad u_t+u\\cdot\\nabla u+\\rho^{-1}\\nabla(\\kappa\\rho^\\gamma)=0,$$\nwith initial data $(\\rho_0,u_0)$ and $\\rho(t,x)>0$. For every integer $m\\ge s$, $\\sup_{0\\le t\\le T}(\\|\\rho(t)\\|_{H^m}+\\|u(t)\\|_{H^m})<\\infty$. This conditional smooth periodic theorem concerns the isentropic barotropic model with strictly positive density; it asserts no continuation through vacuum or shocks and no viscous or temperature-coupled result.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, The Boltzmann Equation and Its Hydrodynamic Limits, §7.4, Theorems 7.8–7.9",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf"
+            },
+            {
+              "title": "T. Sideris, Formation of Singularities in Three-Dimensional Compressible Fluids, §1",
+              "url": "https://web.math.ucsb.edu/~sideris/pdffiles/EulerCMP.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "def-fd-smooth-wall-exterior-solution-domains",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Smooth bounded-wall and exterior solution domains",
+        "reference": "items/def-fd-smooth-wall-exterior-solution-domains.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 0,
+        "deps": [],
+        "dependency_roles": {},
+        "statement": "A bounded wall domain is a bounded connected open set $\\Omega\\subset\\mathbb R^3$ with $C^2$ boundary. Its classical velocity class on $[0,T]$ is $C^1([0,T];C^2(\\overline\\Omega;\\mathbb R^3))$; a pressure in this class is continuous in time with one continuous spatial derivative. The boundary normal $n$ is the outward unit normal. A no-slip trace is $u|_{\\partial\\Omega}=0$, a prescribed moving-wall trace is $u|_{\\partial\\Omega}=g$, and an impermeable trace is $u\\cdot n=0$; these are distinct boundary data.\n\nAn exterior domain is $\\Omega_{\\mathrm{ext}}=\\mathbb R^3\\setminus K$, where $K\\subset\\mathbb R^3$ is compact with $C^2$ boundary and $\\Omega_{\\mathrm{ext}}$ is connected. The exterior classical velocity and pressure classes have the same local regularity up to $\\partial K$ on every compact spatial subset. The domain definition alone imposes no condition at infinity. An exterior energy argument must state additional decay or weighted-space hypotheses. We call the explicit bounds $|u(t,x)|=O(|x|^{-2})$, $|\\nabla u(t,x)|=O(|x|^{-3})$, and $|p(t,x)|=O(|x|^{-2})$, uniform for $t\\in[0,T]$, a cutoff-decay condition; this is additional solution data, not part of the bare exterior domain, and no energy identity follows from this definition alone.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2, §§3.2.1–3.2.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-fd-global-linear-acoustics",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Global smooth periodic linear acoustics",
+        "reference": "items/thm-fd-global-linear-acoustics.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "lem-fd-periodic-fourier-embedding-products",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "lem-fd-periodic-fourier-embedding-products": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\rho_*>0$, $c_*>0$, and let $z_0:\\mathbb T^d\\to\\mathbb R$ and $v_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth periodic data on the normalized torus $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. The constant-coefficient tangent system\n$$z_t+\\rho_*\\operatorname{div}v=0,\\qquad v_t+(c_*^2/\\rho_*)\\nabla z=0,\\qquad (z,v)|_{t=0}=(z_0,v_0)$$\nhas a unique real $C^\\infty$ solution $(z,v)$ on $\\mathbb R\\times\\mathbb T^d$. For every integer $m\\ge0$, the weighted energy $\\|v(t)\\|_{H^m}^2+(c_*^2/\\rho_*^2)\\|z(t)\\|_{H^m}^2$ is constant for all $t\\in\\mathbb R$. This is the exact linear tangent model; it does not assert equality with a finite-amplitude nonlinear fluid evolution.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 3, §4.4.4",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids3.pdf"
+            },
+            {
+              "title": "François Golse, The Boltzmann Equation and Its Hydrodynamic Limits, §7.4",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-fd-compatible-wall-shear-heat",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Global compatible no-slip shear evolution",
+        "reference": "items/thm-fd-compatible-wall-shear-heat.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-flat-channel-domains",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-flat-channel-domains": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice. Let $L_1,L_2,h,\\nu>0$ and let $\\Omega=(\\mathbb R/L_1\\mathbb Z)\\times(0,h)\\times(\\mathbb R/L_2\\mathbb Z)$ with periodic coordinates $x,z$ and no-slip walls $y=0,h$. Use product Lebesgue measure $dx\\,dy\\,dz$, with the quotient coordinates carrying their period-length measures. Suppose $F\\in C^\\infty([0,h])$ has a smooth odd $2h$-periodic extension to the real line. For $n\\ge1$, define $b_n=(2/h)\\int_0^hF(y)\\sin(n\\pi y/h)\\,dy$ and\n$$V(t,y)=\\sum_{n=1}^\\infty b_n e^{-\\nu(n\\pi/h)^2t}\\sin(n\\pi y/h),\\qquad t\\ge0.$$\nThen $u(t,x,y,z)=(V(t,y),0,0)$ is a global smooth real solution, unique among all smooth velocity solutions with the same initial data, of the incompressible periodic-channel system $u_t+u\\cdot\\nabla u+\\nabla\\pi=\\nu\\Delta u$, $\\operatorname{div}u=0$, $u|_{y=0,h}=0$, $u(0)=(F(y),0,0)$, with mean-zero pressure $\\pi=0$. The same sine series defines a smooth $2h$-periodic function of $y$ on the full real line. For every $t\\ge0$, $\\|u(t)\\|_{L^2(\\Omega)}\\le e^{-\\nu(\\pi/h)^2t}\\|u(0)\\|_{L^2(\\Omega)}$. This theorem concerns the shear solution and smooth uniqueness for the same full-flow data; it gives no global regularity theorem for perturbed three-dimensional flows.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2, §§3.2.1–3.2.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "def-fd-flat-channel-domains",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Flat periodic and infinite channel domains",
+        "reference": "items/def-fd-flat-channel-domains.md",
+        "design_state": "Step 1 local A-page supplier added to close an explicitly identified prerequisite gap; complete carrier authored.",
+        "dependency_level": 0,
+        "deps": [],
+        "dependency_roles": {},
+        "statement": "Fix lengths $L_1,L_2>0$ and width $h>0$. Define the periodic channel\n$$\\Omega_{\\mathrm{per}}=(\\mathbb R/L_1\\mathbb Z)\\times(0,h)\\times(\\mathbb R/L_2\\mathbb Z)$$\nand the infinite channel\n$$\\Omega_{\\infty}=\\mathbb R\\times(0,h)\\times\\mathbb R.$$\nBoth have the product Euclidean metric. On $\\Omega_{\\mathrm{per}}$, the first and third coordinates are periodic quotient coordinates with periods $L_1$ and $L_2$; differential operators are the ordinary coordinate operators applied to periodic lifts. On $\\Omega_{\\infty}$, all three coordinates are ordinary real coordinates. The closures add the two wall faces at $y=0$ and $y=h$, and no other spatial boundary is imposed. A vector field is $C^\\infty$ up to these walls when it is smooth in the interior and every spatial derivative of every order extends continuously to both faces on each compact coordinate patch. Its homogeneous no-slip boundary condition is $u=0$ on the two wall faces; prescribed wall velocity $g$ means the trace condition $u=g$. The definition imposes no decay or other condition at infinity on $\\Omega_{\\infty}$; such conditions must be stated separately.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2, §§3.2.1–3.2.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-fd-polynomial-ode-continuation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Continuation of bounded polynomial ODE solutions",
+        "reference": "items/lem-fd-polynomial-ode-continuation.md",
+        "design_state": "Step 1 local A-page supplier added to close an explicitly identified prerequisite gap; complete carrier authored.",
+        "dependency_level": 0,
+        "deps": [
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-euclidean-space-complete",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+        ],
+        "dependency_roles": {
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise",
+          "cor-vector-valued-ftc-and-lipschitz-bound": "mathematical-premise",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation": "mathematical-premise"
+        },
+        "statement": "Let $N\\ge1$, let $F:\\mathbb R^N\\to\\mathbb R^N$ be a polynomial map, and let $T_*>0$. If $x\\in C^1([0,T_*),\\mathbb R^N)$ solves $x'(t)=F(x(t))$ and there is $R\\ge0$ such that $\\|x(t)\\|_2\\le R$ for every $0\\le t<T_*$, then there are $\\epsilon>0$ and a solution $\\widetilde x\\in C^1([0,T_*+\\epsilon),\\mathbb R^N)$ of the same ODE with $\\widetilde x(t)=x(t)$ for $0\\le t<T_*$. Thus a finite right endpoint of a bounded finite-dimensional polynomial ODE trajectory is extendible.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, §2.6, Lemma 2.14 and Corollary 2.15",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      }
+    ]
+  },
+  {
+    "order": 396,
+    "id": "fd-s02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Local smooth periodic Euler and Navier–Stokes — Examples",
+    "companion": "fd-s02",
+    "requires": [
+      "fd-s02"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-compressible-viscous-shear",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Exact constant-density compressible viscous shear",
+        "reference": "items/ex-fd-compressible-viscous-shear.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 2,
+        "deps": [
+          "thm-fd-compatible-wall-shear-heat",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-fd-compatible-wall-shear-heat": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice. Let $\\ell,\\rho_*,\\eta,\\kappa>0$, $\\gamma>1$, $\\zeta\\ge0$, and $A\\in\\mathbb R$. On $\\mathbb T^3_\\ell=(\\mathbb R/2\\pi\\ell\\mathbb Z)^3$ with coordinates $(x,y,z)$, set $\\nu=\\eta/\\rho_*$, $p_*=\\kappa\\rho_*^\\gamma$, and $V(t,y)=Ae^{-\\nu t/\\ell^2}\\sin(y/\\ell)$. Then $\\rho=\\rho_*$ and $u=(V,0,0)$ give a global smooth solution with no external force of\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad (\\rho u)_t+\\operatorname{div}(\\rho u\\otimes u)+\\nabla(\\kappa\\rho^\\gamma)=\\operatorname{div}\\!\\left(2\\eta D_0+\\zeta(\\operatorname{div}u)I\\right),$$\nwhere $D_0=(\\nabla u+\\nabla u^{\\mathsf T})/2-(\\operatorname{div}u)I/3$. This is the first sine heat mode of the compatible channel shear evolution at channel height $h=\\pi\\ell$, periodically extended in $y$. It is one exact solution of the compressible viscous system, not a general nonconstant-density existence result. With SI units, $x,y,z,\\ell$ are metres, $t$ is seconds, $A,u$ are m/s, $\\rho_*$ is kg/m$^3$, $p_*$ is Pa, $\\eta,\\zeta$ are Pa$\\cdot$s, $\\kappa$ is Pa$\\cdot$(m$^3$/kg)$^\\gamma$, and $\\nu$ is m$^2$/s.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2, §§3.2.1–3.2.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "ex-fd-periodic-poiseuille-body-force",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Periodic channel Poiseuille flow uses a body force",
+        "reference": "items/ex-fd-periodic-poiseuille-body-force.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-flat-channel-domains"
+        ],
+        "dependency_roles": {
+          "def-fd-flat-channel-domains": "mathematical-premise"
+        },
+        "statement": "Let $L_1,L_2,h,\\rho,\\eta,G>0$ and use the periodic flat channel $\\Omega=(\\mathbb R/L_1\\mathbb Z)\\times(0,h)\\times(\\mathbb R/L_2\\mathbb Z)$. For the steady incompressible equations $\\rho(u\\cdot\\nabla)u=-\\nabla p+\\eta\\Delta u+\\rho b$, $\\operatorname{div}u=0$, prescribe no-slip walls and constant body acceleration $b=(G/\\rho,0,0)$. Then\n$$u(x,y,z)=\\left(\\frac{G}{2\\eta}y(h-y),0,0\\right),\\qquad p=p_0$$\nis an exact solution and its flux per unit transverse width is $Gh^3/(12\\eta)$. The formal pressure $p=p_0-Gx$ is not a single-valued periodic pressure. On the infinite flat channel $\\mathbb R\\times(0,h)\\times\\mathbb R$, the same velocity instead solves the zero-body-force equation with $p=p_0-Gx$. Among unidirectional shear profiles with the stated wall values, the velocity profile is unique. With SI units, $x,y,z,L_1,L_2,h$ are metres, $\\rho$ is kg/m$^3$, $\\eta$ is Pa$\\cdot$s, $G$ is Pa/m, $b$ is m/s$^2$, $u$ is m/s, pressure is Pa, and flux per unit width is m$^2$/s.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2, §§3.2.1–3.2.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "ex-fd-couette-vorticity",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Couette shear has nonzero vorticity",
+        "reference": "items/ex-fd-couette-vorticity.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-flat-channel-domains"
+        ],
+        "dependency_roles": {
+          "def-fd-flat-channel-domains": "mathematical-premise"
+        },
+        "statement": "Let $L_1,L_2,h>0$ and $V\\in\\mathbb R$ on the periodic flat channel $\\Omega=(\\mathbb R/L_1\\mathbb Z)\\times(0,h)\\times(\\mathbb R/L_2\\mathbb Z)$. For the steady incompressible equations $\\rho(u\\cdot\\nabla)u=-\\nabla p+\\eta\\Delta u$ with $\\rho,\\eta>0$, prescribe no body force, constant pressure, stationary lower wall, and top-wall velocity $(V,0,0)$. The field $u=(Vy/h,0,0)$ is a solution, its vorticity is $\\omega=\\nabla\\times u=(0,0,-V/h)$, and its flux per unit transverse width is $Vh/2$. It is the unique solution within the unidirectional shear class with those wall velocities. With SI units, $x,y,z,L_1,L_2,h$ are metres, $V$ and $u$ are m/s, $\\rho$ is kg/m$^3$, $\\eta$ is Pa$\\cdot$s, pressure is Pa, vorticity is s$^{-1}$, and flux per unit width is m$^2$/s.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2, §§3.2.1–3.2.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      },
+      {
+        "id": "rem-fd-general-viscous-wall-ivp-gaps",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Scope limits for general wall and viscous initial-value problems",
+        "reference": "items/rem-fd-general-viscous-wall-ivp-gaps.md",
+        "design_state": "Step 1 complete draft; conditional interfaces and source scope are recorded in batch-18 notes.",
+        "dependency_level": 4,
+        "deps": [
+          "thm-fd-smooth-periodic-incompressible-ivp",
+          "thm-fd-smooth-polytropic-euler-ivp",
+          "def-fd-smooth-wall-exterior-solution-domains",
+          "thm-fd-compatible-wall-shear-heat",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-fd-smooth-periodic-incompressible-ivp": "mathematical-premise",
+          "thm-fd-smooth-polytropic-euler-ivp": "mathematical-premise",
+          "def-fd-smooth-wall-exterior-solution-domains": "mathematical-premise",
+          "thm-fd-compatible-wall-shear-heat": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice for the Fourier-based periodic claims cited here. The local periodic incompressible draft gives a conditional smooth-evolution argument on a torus; the positive-density polytropic draft gives a conditional argument for only the stated inviscid barotropic system; and the channel heat theorem gives a compatible shear solution conditional on its Fourier interfaces. These results do not provide a local smooth theorem for arbitrary incompressible data on bounded-wall or exterior domains, nor a general nonuniform-density compressible viscous initial-value theorem. The bounded-wall and exterior domain definition only fixes domain, regularity, trace, and possible far-field conventions; it proves no existence or pressure regularity. No claim is made that the broader theories do not exist in the literature. A theorem for such a broader claim would need its own exact data compatibility, pressure/elliptic estimates, and proof chain, so none is inferred from these periodic or shear special cases.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brian F. Morton, Local-in-Time Well-Posedness of the Incompressible Euler and Navier–Stokes Equations, §§7.1–7.3",
+              "url": "https://brianfmorton.github.io/Notes/Local_in_Time_Well_Posedness_of_the_Incompressible_Euler_and_Navier_Stokes_Equations.pdf"
+            },
+            {
+              "title": "François Golse, The Boltzmann Equation and Its Hydrodynamic Limits, §7.4",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": []
+      }
+    ]
+  }
+]

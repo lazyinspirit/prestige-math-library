@@ -1,0 +1,172 @@
+[
+  {
+    "order": 699,
+    "id": "fd-pbl01",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Wall and free-surface physical qualifications",
+    "companion": "fd-pbl01-examples",
+    "requires": [
+      "fd-bl01",
+      "fd-f02"
+    ],
+    "items": [
+      {
+        "id": "post-fd-capillary-linear-free-surface",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Linear capillary free-surface model",
+        "reference": "items/post-fd-capillary-linear-free-surface.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-wall-defect-capillary-models",
+          "post-fd-boundary-data"
+        ],
+        "dependency_roles": {
+          "def-fd-wall-defect-capillary-models": "formulation-prerequisite",
+          "post-fd-boundary-data": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use a classical Cartesian inertial frame with absolute time $t$ in seconds and horizontal coordinates $x=(x_1,x_2)$ in metres, with upward vertical coordinate $z$ in metres; let $e_z$ be the upward unit vector. Fix horizontal periods $L_1,L_2>0$ metres and identify opposite horizontal faces by translations, so the horizontal cell is the quotient torus $\\mathbb T^2_L:=\\mathbb R^2/(L_1\\mathbb Z\\times L_2\\mathbb Z)$. Let $I\\subseteq\\mathbb R$ be a nonempty open time interval and let $h>0$ metres. The flat reference liquid region is $\\Omega_0:=\\mathbb T^2_L\\times(-h,0)$; the bottom $z=-h$ is a fixed solid bed and the upper interface is the graph $z=\\eta(x,t)$, where $\\eta:\\mathbb T^2_L\\times I\\to\\mathbb R$ is the surface displacement in metres. Horizontal periodic faces are mathematical identifications, not physical walls.\n\nAdopt a homogeneous single-component liquid with constant mass density $\\rho>0$ in kilograms per cubic metre, constant downward gravitational acceleration $-g e_z$ with $g>0$ in metres per second squared, and constant surface-tension coefficient $\\gamma>0$ in newtons per metre, equivalently kilograms per second squared. The gas above the liquid is modeled only by constant pressure $p_a$ in pascals; no gas momentum equation is included. Let $p_\\ell$ denote the liquid pressure in pascals. This model assumes a horizontally periodic scalar velocity potential $\\phi$ in metres squared per second, defined on $\\mathbb T^2_L\\times[-h,0]\\times I$; the fluid velocity is the vector field $u:=\\nabla\\phi:\\mathbb T^2_L\\times[-h,0]\\times I\\to\\mathbb R^3$ in metres per second, with no additive uniform component. The model is inviscid, meaning no viscous-stress or viscous-dissipation terms are included; it is incompressible and irrotational, meaning $\\operatorname{div}u=0$ and $\\operatorname{curl}u=0$. On the torus this potential assumption is stronger than irrotationality alone, since a curl-free field need not be the gradient of a periodic scalar. Assume $\\phi$ is at least $C^3$ and $\\eta$ is at least $C^2$; derivatives below are classical.\n\nThe outward unit normal from liquid to gas on the graph is $n=(-\\nabla_h\\eta,1)/\\sqrt{1+|\\nabla_h\\eta|^2}$, where $\\nabla_h:=(\\partial_{x_1},\\partial_{x_2})$ and $\\Delta_h:=\\partial_{x_1}^2+\\partial_{x_2}^2$. Define the signed curvature of this graph by $\\kappa:=-\\nabla_h\\cdot(\\nabla_h\\eta/\\sqrt{1+|\\nabla_h\\eta|^2})$; with the stated upward normal its first-order value about the flat state is $-\\Delta_h\\eta$, and $\\kappa$ has units of inverse metres. Adopt the liquid-minus-gas pressure jump $p_\\ell-p_a=\\gamma\\kappa$. At the fixed bed impose only impermeability, meaning zero normal fluid velocity, $u_z=0$, equivalently $\\phi_z=0$ at $z=-h$; no-slip is not imposed in this inviscid branch. The upper boundary moves with the fluid and obeys the explicit first-order kinematic equation below; it is not a solid wall.\n\nThe selected first-order model is defined by retaining only terms linear in perturbations about the hydrostatic rest state $\\eta=0$, $u=0$, and $p_\\ell=p_a-\\rho g z$, then evaluating surface derivatives at $z=0$. Products of perturbations are discarded, with no error estimate for replacing a finite-amplitude flow by this linear model. On $\\Omega_0\\times I$ the adopted equations and boundary conditions are\n\n$$\\Delta_h\\phi+\\partial_z^2\\phi=0,\\qquad -h<z<0,$$\n\n$$\\partial_z\\phi(x,-h,t)=0,$$\n\n$$\\partial_t\\eta(x,t)=\\partial_z\\phi(x,0,t),\\qquad \\partial_t\\phi(x,0,t)+g\\eta(x,t)-\\frac{\\gamma}{\\rho}\\Delta_h\\eta(x,t)=0.$$\n\nThese are model assumptions for the stated idealized regime. They assert no existence or uniqueness for the nonlinear free-boundary equations, no finite-amplitude approximation bound, and no empirical claim that a particular liquid satisfies this model.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.354, Nonlinear Dynamics II: Continuum Systems, Spring 2015 Lecture Notes (authors: Michael Brenner, Tom Peacock, Roman Stocker, Pedro Reis, Jörn Dunkel)",
+              "url": "https://ocw.mit.edu/courses/18-354j-nonlinear-dynamics-ii-continuum-systems-spring-2015/6163837c5efa5d6ed969e535ec8f890c_MIT18_354JS15_lectureNotes.pdf",
+              "locator": "§23.1, printed pp. 104–105, equations (541)–(548): potential flow, kinematic and capillary dynamic surface conditions, and first-order linearization."
+            },
+            {
+              "title": "Howard Georgi, MIT OpenCourseWare 8.03SC, The Physics of Waves, Fall 2016 textbook",
+              "url": "https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/ef731c1b91d77a6db003f6c27e300d25_MIT8_03SCF16_Textbook.pdf",
+              "locator": "§§11.5.1–11.5.2, printed pp. 285–291, equations (11.108)–(11.140): idealized incompressible fluid, fixed-depth bed, surface-tension energy, and capillary-gravity modes."
+            },
+            {
+              "title": "Richard Fitzpatrick, Fluid Mechanics, University of Texas at Austin, 'Gravity Waves'",
+              "url": "https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node147.html",
+              "locator": "Chapter 11, equations (11.1)–(11.21): incompressible inviscid wave model, bottom impermeability, free-surface kinematics, and finite-depth gravity-wave mode."
+            },
+            {
+              "title": "Richard Fitzpatrick, Fluid Mechanics, University of Texas at Austin, 'Surface Tension'",
+              "url": "https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node156.html",
+              "locator": "Chapter 11, equations (11.116)–(11.121): curvature sign, pressure jump, capillary free-surface condition, and finite-depth capillary-gravity dispersion relation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Adopted first-order inviscid, homogeneous, incompressible and irrotational capillary-gravity waves in a periodic horizontal cell above a fixed impermeable bed, with constant density and surface tension and negligible air inertia. No viscosity, background current, finite-amplitude accuracy, solvability, or universal empirical validity is asserted."
+      },
+      {
+        "id": "pthm-fd-capillary-wave-model-prediction",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Linear capillary-gravity wave dispersion",
+        "reference": "items/pthm-fd-capillary-wave-model-prediction.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "post-fd-capillary-linear-free-surface"
+        ],
+        "dependency_roles": {
+          "post-fd-capillary-linear-free-surface": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be nonempty and open, $h>0$ metres, and $L_1,L_2>0$ metres. Set $\\mathbb T^2_L:=\\mathbb R^2/(L_1\\mathbb Z\\times L_2\\mathbb Z)$, with horizontal coordinate $x\\in\\mathbb T^2_L$ in metres, vertical coordinate $z\\in[-h,0]$ in metres, and absolute time $t\\in I$ in seconds. Let $\\rho>0$ be constant liquid mass density in kilograms per cubic metre, $g>0$ downward gravitational acceleration magnitude in metres per second squared, and $\\gamma>0$ constant surface tension in newtons per metre. Let $\\phi:\\mathbb T^2_L\\times[-h,0]\\times I\\to\\mathbb R$ and $\\eta:\\mathbb T^2_L\\times I\\to\\mathbb R$ be the first-order fields, with units metres squared per second and metres respectively, satisfying\n\n$$\\Delta_h\\phi+\\partial_z^2\\phi=0,\\quad \\partial_z\\phi(x,-h,t)=0,$$\n\n$$\\partial_t\\eta(x,t)=\\partial_z\\phi(x,0,t),\\quad \\partial_t\\phi(x,0,t)+g\\eta(x,t)-\\frac{\\gamma}{\\rho}\\Delta_h\\eta(x,t)=0,$$\n\nwhere $\\Delta_h:=\\partial_{x_1}^2+\\partial_{x_2}^2$. For any $m=(m_1,m_2)\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$ define the wavevector $\\mathbf k:=2\\pi(m_1/L_1,m_2/L_2)$ in inverse metres and $k:=|\\mathbf k|>0$. Let $i\\in\\mathbb C$ satisfy $i^2=-1$. A complex mode of angular frequency $\\omega\\in\\mathbb C$ in inverse seconds is a pair $\\eta_c(x,t)=H e^{i(\\mathbf k\\cdot x-\\omega t)}$ and $\\phi_c(x,z,t)=F(z)e^{i(\\mathbf k\\cdot x-\\omega t)}$, with $H\\in\\mathbb C\\setminus\\{0\\}$ in metres and $F\\in C^2([-h,0],\\mathbb C)$ in metres squared per second; its real and imaginary parts are real-valued model fields. Such a nonzero mode exists exactly when\n\n$$\\omega^2=\\left(gk+\\frac{\\gamma}{\\rho}k^3\\right)\\tanh(kh),$$\n\nand each of the two frequencies $\\omega=\\pm\\sqrt{(gk+(\\gamma/\\rho)k^3)\\tanh(kh)}$ admits a nonzero mode. Here $\\tanh s:=\\sinh(s)/\\cosh(s)$. This is a conditional prediction of the stated first-order model, not a measurement or a claim that any actual fluid realizes every assumption.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.354, Nonlinear Dynamics II: Continuum Systems, Spring 2015 Lecture Notes (authors: Michael Brenner, Tom Peacock, Roman Stocker, Pedro Reis, Jörn Dunkel)",
+              "url": "https://ocw.mit.edu/courses/18-354j-nonlinear-dynamics-ii-continuum-systems-spring-2015/6163837c5efa5d6ed969e535ec8f890c_MIT18_354JS15_lectureNotes.pdf",
+              "locator": "§23.1, printed pp. 104–105, equations (547)–(551): linearized conditions and deep-water mode elimination."
+            },
+            {
+              "title": "Howard Georgi, MIT OpenCourseWare 8.03SC, The Physics of Waves, Fall 2016 textbook",
+              "url": "https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/ef731c1b91d77a6db003f6c27e300d25_MIT8_03SCF16_Textbook.pdf",
+              "locator": "§§11.5.1–11.5.2, printed pp. 285–291, equations (11.120)–(11.140): finite-depth capillary-gravity mode and independent energy derivation."
+            },
+            {
+              "title": "Richard Fitzpatrick, Fluid Mechanics, University of Texas at Austin, 'Gravity Waves'",
+              "url": "https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node147.html",
+              "locator": "Chapter 11, equations (11.17)–(11.21): vertical mode solution and finite-depth gravity-wave boundary calculation."
+            },
+            {
+              "title": "Richard Fitzpatrick, Fluid Mechanics, University of Texas at Austin, 'Surface Tension'",
+              "url": "https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node156.html",
+              "locator": "Chapter 11, equations (11.116)–(11.121): signed capillary pressure condition and finite-depth capillary-gravity dispersion formula."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Conditional dispersion prediction for nonzero periodic normal modes of the stated inviscid finite-depth linear capillary-gravity model; it does not establish empirical validity or nonlinear well-posedness.",
+        "proof_strategy": "direct"
+      }
+    ],
+    "examples": []
+  },
+  {
+    "order": 700,
+    "id": "fd-pbl01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Wall and free-surface physical qualifications — Examples",
+    "companion": "fd-pbl01",
+    "requires": [
+      "fd-pbl01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-capillary-restoring-sign",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Positive gravity and capillary modal restoring terms",
+        "reference": "items/ex-fd-capillary-restoring-sign.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-fd-capillary-wave-model-prediction"
+        ],
+        "dependency_roles": {
+          "pthm-fd-capillary-wave-model-prediction": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take any nonzero horizontal periodic mode in the adopted model, with $h,\\rho,g,\\gamma>0$. Its horizontal Laplacian satisfies $\\Delta_h\\eta=-k^2\\eta$, so the capillary part of the dynamic free-surface coefficient is $\\gamma k^2/\\rho>0$ and adds to the gravity coefficient $g>0$. The exact model frequency therefore has $\\omega^2>0$. This is a symbolic model example; it reports no observation or numerical measurement.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.354, Nonlinear Dynamics II: Continuum Systems, Spring 2015 Lecture Notes (authors: Michael Brenner, Tom Peacock, Roman Stocker, Pedro Reis, Jörn Dunkel)",
+              "url": "https://ocw.mit.edu/courses/18-354j-nonlinear-dynamics-ii-continuum-systems-spring-2015/6163837c5efa5d6ed969e535ec8f890c_MIT18_354JS15_lectureNotes.pdf",
+              "locator": "§23.1, printed pp. 104–105, equations (547c) and (551): capillary contribution to the linear dynamic condition and mode frequency."
+            },
+            {
+              "title": "Howard Georgi, MIT OpenCourseWare 8.03SC, The Physics of Waves, Fall 2016 textbook",
+              "url": "https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/ef731c1b91d77a6db003f6c27e300d25_MIT8_03SCF16_Textbook.pdf",
+              "locator": "§11.5.2, printed pp. 290–291, equation (11.137): positive gravity and surface-tension contributions to the finite-depth modal frequency."
+            },
+            {
+              "title": "Richard Fitzpatrick, Fluid Mechanics, University of Texas at Austin, 'Surface Tension'",
+              "url": "https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node156.html",
+              "locator": "Chapter 11, equations (11.119)–(11.121): capillary pressure sign and finite-depth dispersion relation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact sign check for nonzero modes of the stated inviscid finite-depth linear capillary-gravity model; it is not a measured result or a statement about nonlinear or viscous fluids.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

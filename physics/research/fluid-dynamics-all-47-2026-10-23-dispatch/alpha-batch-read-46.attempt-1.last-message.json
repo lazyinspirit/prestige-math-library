@@ -1,0 +1,213 @@
+{
+  "group": "p",
+  "batches": ["46"],
+  "pages_read": ["fd-bl01", "fd-bl01-examples"],
+  "items_read": [
+    "def-fd-wall-defect-capillary-models",
+    "thm-fd-common-wall-residual-error",
+    "thm-fd-capillary-gravity-dispersion-energy",
+    "ex-fd-capillary-zero-tension-limit"
+  ],
+  "conventions": [
+    {
+      "convention": "The momentum residual is w_t + (w·∇)w + ρ₀⁻¹∇q − νΔw − f. The Jacobian has entries ∂_j w_i; boundary traces are classical restrictions of neighborhood extensions.",
+      "fixed_by": "def-fd-wall-defect-capillary-models",
+      "matters_for": ["thm-fd-common-wall-residual-error"]
+    },
+    {
+      "convention": "The wall comparison uses divergence-free fields with identical full wall traces. The explicit channel lift is (a(t)(1−y/h)+b(t)y/h,0,0), exclusively for the specified tangential defects.",
+      "fixed_by": "def-fd-wall-defect-capillary-models",
+      "matters_for": ["thm-fd-common-wall-residual-error"]
+    },
+    {
+      "convention": "Volume L² norms use ordinary, unnormalized volume measure, including one cell in the periodic channel. L(t) is the supremum of |ζ·D_xu ξ| over positions and Euclidean unit vectors.",
+      "fixed_by": "thm-fd-common-wall-residual-error",
+      "matters_for": ["thm-fd-common-wall-residual-error"]
+    },
+    {
+      "convention": "Countable Choice is explicitly assumed for the bounded-domain divergence theorem application.",
+      "fixed_by": "thm-fd-common-wall-residual-error",
+      "matters_for": ["thm-fd-common-wall-residual-error"]
+    },
+    {
+      "convention": "The vertical coordinate points upward; the bottom is z=−h and the reference surface is z=0. The dynamic condition is φ_t+gη−(σ/ρ)Δ_Hη=0, with σ≥0, and velocity is ∇φ with no added uniform component.",
+      "fixed_by": "def-fd-wall-defect-capillary-models",
+      "matters_for": [
+        "thm-fd-capillary-gravity-dispersion-energy",
+        "ex-fd-capillary-zero-tension-limit",
+        "post-fd-capillary-linear-free-surface"
+      ]
+    },
+    {
+      "convention": "The capillary mode uses the positive frequency, wavelength λ=2π/k, and periodic sine/cosine values of a representative-dependent real phase. Energy is integrated over one horizontal cell, including the finite transverse span.",
+      "fixed_by": "thm-fd-capillary-gravity-dispersion-energy",
+      "matters_for": ["ex-fd-capillary-zero-tension-limit"]
+    },
+    {
+      "convention": "The wave claims are exact deductions within the linear mathematical model, with no nonlinear approximation, convergence, or empirical-observation assertion.",
+      "fixed_by": "thm-fd-capillary-gravity-dispersion-energy",
+      "matters_for": ["ex-fd-capillary-zero-tension-limit"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-wall-defect-capillary-models",
+      "statement": "Defines the full forced momentum residual, common-wall comparison and supplied divergence-free wall lift; independently defines the periodic capillary-gravity potential equations Δφ=0, φ_z(−h)=0, η_t=φ_z(0), and φ_t(0)+gη−(σ/ρ)Δ_Hη=0, with the stated classical regularity and positive parameters, allowing σ=0.",
+      "used_by": [
+        "thm-fd-common-wall-residual-error",
+        "thm-fd-capillary-gravity-dispersion-energy",
+        "post-fd-capillary-linear-free-surface"
+      ]
+    },
+    {
+      "id": "thm-fd-capillary-gravity-dispersion-energy",
+      "statement": "For h,g,ρ,k,L_y>0, σ≥0 and a∈ℝ, the displayed smooth periodic mode solves the linear capillary-gravity equations with positive frequency ω_σ²=(gk+(σ/ρ)k³)tanh(kh). At σ=0 it is exactly the finite-depth gravity-wave mode. For any T>0 and any solution with the stated C¹-in-time, C²-in-space neighborhood-extension regularity, the displayed cell energy is nonnegative and constant on [0,T].",
+      "used_by": ["ex-fd-capillary-zero-tension-limit"]
+    },
+    {
+      "id": "thm-fd-common-wall-residual-error",
+      "statement": "Assuming Countable Choice, the stated classical divergence-free exact and comparison solutions on a bounded connected C² domain with common wall trace satisfy ‖v(t)−u(t)‖₂ ≤ exp(A(t))(‖v(0)−u(0)‖₂ + ∫₀ᵗ exp(−A(s))‖r(s)‖₂ ds), where r=R(v,q) and A(t)=∫₀ᵗL(s)ds. The same estimate holds on the periodic channel with common wall traces; the specified tangential lift yields the displayed corrected residual and triangle-inequality bound for w−u.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-fd-x00",
+      "used_for": "Draft external supplier defining the Cartesian operators and forced-fluid notation used by the assigned model definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-fd-x03",
+      "used_for": "Draft external supplier providing the positive-frequency finite-depth gravity mode, used in the capillary time-rescaling construction and zero-tension specialization.",
+      "opened": true
+    },
+    {
+      "id": "def-fd-real-trigonometric-functions",
+      "used_for": "Draft external supplier defining the real sine and cosine functions S and C.",
+      "opened": true
+    },
+    {
+      "id": "lem-fd-real-trigonometric-derivatives",
+      "used_for": "Draft external supplier establishing S′=C and C′=−S for mode differentiation.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact Countable Choice premise carried into the bounded-domain divergence calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Vanishing transport, pressure and diffusion boundary terms on the bounded C² domain; its C¹-domain and Countable Choice hypotheses are satisfied.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-inequality-for-l-two",
+      "used_for": "Scalar L² estimate applied to vector magnitudes to bound residual work.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "The channel estimate ‖w−u‖₂≤‖v−u‖₂+‖ℓ‖₂.",
+      "opened": true
+    },
+    {
+      "id": "thm-newton-leibniz-with-interior-derivative",
+      "used_for": "Integrating the residual differential inequality and cancelling coordinate-face terms on the channel cell.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiating the integrating factor exp(−A).",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Product and sum differentiation in the error estimate, mode construction and energy calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Integrating-factor differentiation, affine phases and capillary time rescaling.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Positive frequencies and the positive regularization sqrt(Y+δ²).",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Pointwise vector estimates before applying scalar integral Cauchy–Schwarz.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "The real complete-ordered-field setting explicitly invoked for square roots.",
+      "opened": true
+    },
+    {
+      "id": "cor-greens-first-identity-for-glued-elementary-solid-regions",
+      "used_for": "Green's identity on the rectangular slab for kinetic-energy and surface-gradient integration by parts; neighborhood extensions provide its regularity hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+      "used_for": "Successive differentiation of the rectangular cell integrals defining energy.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-zero-sets-and-fundamental-period",
+      "used_for": "The 2π periodicity making the mode independent of the torus representative.",
+      "opened": true
+    },
+    {
+      "id": "thm-hyperbolic-identities-and-derivatives",
+      "used_for": "Vertical profile differentiation, positive cosh denominator and positivity of tanh(kh).",
+      "opened": true
+    },
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Continuity and repeated differentiability of the elementary functions used in the smooth mode.",
+      "opened": true
+    },
+    {
+      "id": "cor-zero-derivative-implies-constant",
+      "used_for": "Energy conservation on the entire closed time interval after proving continuity and zero interior derivative.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-fd-wall-defect-capillary-models",
+      "concern": "The source metadata names “Erik Wiedemann, Lecture Notes: Navier–Stokes Equations.” The linked PDF title page identifies Emil Wiedemann, edited by Jack Skipper. This is an author-name error; the cited relative-energy material is present. Source checked: https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf, PDF page 1.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-fd-common-wall-residual-error",
+      "concern": "The source metadata repeats “Erik Wiedemann” for the lecture notes whose linked title page identifies Emil Wiedemann. Correct the attribution consistently with the model definition. This does not affect the locally supplied energy proof.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-bl01",
+      "to": "fd-l01",
+      "faithful": true,
+      "note": "Compared the periodic solenoidal residual definition and residual-error theorem with the assigned bounded-domain argument. The latter supplies its own full-pressure energy proof and does not incorrectly transfer periodic face cancellation to physical walls. The page prerequisite is contextual; no assigned item cites the periodic theorem as a black-box bounded-domain result."
+    },
+    {
+      "from": "fd-bl01",
+      "to": "fd-x01",
+      "faithful": true,
+      "note": "The Cartesian operator conventions agree. The capillary proof uses the gravity mode at rescaled time and scales its potential by the same positive factor, retaining the exact gravity-mode hypotheses. The σ=0 frequency, elevation and potential coefficient agree with thm-fd-x03, including a=0."
+    },
+    {
+      "from": "fd-pbl01",
+      "to": "fd-bl01",
+      "faithful": true,
+      "note": "The physical postulate explicitly identifies mathematical σ with physical γ and matches the periods and boundary signs. Its stricter γ>0 is permitted. Its formulation notes supply the neighborhood extension and explain why the kinematic equation upgrades η to the mathematical supplier's C¹-in-time C²-in-space class. The downstream dispersion theorem proves its broader complex-mode iff locally rather than attributing that stronger conclusion to the assigned explicit real-mode theorem. Conditional physical scope is preserved."
+    }
+  ]
+}

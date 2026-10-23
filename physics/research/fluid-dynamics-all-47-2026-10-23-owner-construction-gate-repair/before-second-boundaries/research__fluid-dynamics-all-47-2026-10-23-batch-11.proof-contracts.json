@@ -1,0 +1,1353 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-newtonian-fourier",
+    "def-fd-barotropic-euler-model",
+    "def-fd-incompressible-newtonian-model",
+    "post-fd-local-equilibrium",
+    "pthm-fd-entropy-production",
+    "pthm-fd-acoustic-linearization",
+    "pthm-fd-perfect-gas-temperature",
+    "pthm-fd-newtonian-kinetic-decay",
+    "cex-fd-negative-bulk-viscosity",
+    "cex-fd-negative-response-acoustics"
+  ],
+  "contracts": {
+    "post-fd-newtonian-fourier": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "A physical postulate is an adopted model input; finite arithmetic cannot prove its empirical validity.",
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines the state domain, symmetric rate matrix, trace-free part, stress split, Fourier flux, tensor transformation, coefficient signs and SI units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope limits this to a specified smooth single-component model and makes no universal-validity or measured-coefficient claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong Part II §§3.1–3.1.1 and the Chapter 6 textbook §§6.5 and 6.7.2 were read in full for the cited sections; exact locators, limits and dispositions are in batch-11.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "Linearity, isotropy, coefficient functions and Fourier response are adopted premises; the mathematical classification only identifies the form under its hypotheses."
+        }
+      },
+      "supplier_excerpts": [
+        {
+          "supplier": "def-fd-quantity-and-frame-conventions",
+          "carrier": "items/def-fd-quantity-and-frame-conventions.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Use the nonrelativistic Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is an open interval with absolute time $t$ in seconds. Here $E$ is a three-dimensional oriented Euclidean affine space: its translation vectors form an oriented Euclidean vector space, but no origin in $E$ is distinguished. A **Cartesian inertial chart** supplies an orientation-preserving affine isometry $x:E\\to\\mathbb R^3$ and the absolute-time coordinate. Write $\\mathrm{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\det Q=1\\}$. Inertial charts are related by\n\n$$t^*=t+t_0,\\qquad x^*=Qx+vt+a,$$\n\nwhere $t_0$ is a constant time translation in seconds, $Q\\in\\mathrm{SO}(3)$ is constant, $v\\in\\mathbb R^3$ is a constant relative velocity in m s$^{-1}$, and $a\\in\\mathbb R^3$ is a constant spatial translation in metres. A **worldline** is a curve $t\\mapsto(t,x(t))$ with $x\\in C^2(I,\\mathbb R^3)$, parameterized by absolute time; this model imposes no relativistic speed or causal condition. A **rigid observer change** is the more general coordinate change $t^*=t,\\ x^*=Q(t)x+c(t)$, with $Q\\in C^2(I,\\mathrm{SO}(3))$ and $c\\in C^2(I,\\mathbb R^3)$ in metres; it is not called inertial unless $Q$ is constant and $c$ is affine in time. A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.\n\nLet $B\\subseteq\\mathbb R^3$ be a bounded open reference body whose boundary is locally the graph of a $C^1$ function, with $B$ lying on one side of each such graph. Identify the reference coordinates with the chosen initial Cartesian chart, and let $U$ be an open neighborhood of $\\overline B$. A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$. The label $a\\in U$ and position $x=\\chi(t,a)$ are measured in metres. Write\n\n$$F(t,a)=D_a\\chi(t,a),\\qquad J(t,a)=\\det F(t,a)>0,\\qquad A(t,x)=\\chi_t^{-1}(x),\\qquad \\Omega_t=\\chi_t(B).$$\n\nHere $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "relevant_hypotheses_and_conventions": "Role in this item: formulation-prerequisite.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        },
+        {
+          "supplier": "lem-fd-isotropic-linear-classification",
+          "carrier": "items/lem-fd-isotropic-linear-classification.md",
+          "status": "draft",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$\\operatorname{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I,\\ \\det Q=1\\}.$$\nAn orthogonal matrix is one with $Q^TQ=I$; define $O(3)$ by this condition without the determinant restriction. For $D\\in\\operatorname{Sym}(3)$ set $\\operatorname{tr}D=\\sum_{i=1}^3D_{ii}$. Suppose $L:\\operatorname{Sym}(3)\\to\\operatorname{Sym}(3)$ is real-linear, meaning $L(aD+bE)=aL(D)+bL(E)$ for all $a,b\\in\\mathbb R$ and $D,E\\in\\operatorname{Sym}(3)$, and satisfies\n$$L(QDQ^T)=QL(D)Q^T\\qquad(Q\\in\\operatorname{SO}(3),\\ D\\in\\operatorname{Sym}(3)).$$\nThen there are unique $\\lambda,\\mu\\in\\mathbb R$ such that\n$$L(D)=2\\mu D+\\lambda(\\operatorname{tr}D)I\\qquad(D\\in\\operatorname{Sym}(3)).$$\nConversely, each map of this form is real-linear and satisfies the displayed equivariance. Linearity and rotational equivariance are hypotheses of this mathematical classification; it does not assert that a material response is linear or isotropic.",
+          "relevant_hypotheses_and_conventions": "Role in this item: formulation-prerequisite.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        }
+      ]
+    },
+    "def-fd-barotropic-euler-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "evidence": "The Definition only requires I and Omega to be open; it does not assert nonemptiness. For Omega=empty, the empty C2 density and velocity maps exist and satisfy the displayed equations vacuously; P remains a prescribed C1 function on (0,infinity). No fluid is thereby asserted to occupy an empty region. The current reason wrongly says no empty-domain solution is described.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Definition only requires I and Omega to be open; it does not assert nonemptiness. For Omega=empty, the empty C2 density and velocity maps exist and satisfy the displayed equations vacuously; P remains a prescribed C1 function on (0,infinity). No fluid is thereby asserted to occupy an empty region. The current reason wrongly says no empty-domain solution is described.",
+            "item_sha256": "b0864ce530a55843b725569b997e429e83c706213b7316af6a030c1f0d32a29d",
+            "row_sha256": "bd866091666052af3606e98b95bd32ef16e45c5a4f3482d934e636e6a5082fc1",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "evidence": "Definition requires rho>0 and permits u=0 and constant pressure."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "reason": "No singleton state domain or scalar field is quantified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "evidence": "Definition allows P-prime=0; no sign restriction is built in."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "reason": "The Definition uses an open time interval and makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "reason": "The Definition selects no objects and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "reason": "The Definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem."
+          },
+          "reason": "The Definition contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "pressure-response sign is separate",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "The Definition permits P-prime=0 and imposes no positivity condition on P-prime."
+        }
+      ],
+      "finite_checks_disposition": "The check is a direct reading of the Definition, not an empirical or solver result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "post-fd-continuum-balances",
+          "carrier": "items/post-fd-continuum-balances.md",
+          "status": "draft",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$",
+          "relevant_hypotheses_and_conventions": "Role in this item: physical-assumption.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        }
+      ]
+    },
+    "def-fd-incompressible-newtonian-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "evidence": "Nonempty Omega is absent from the Definition. With Omega=empty the velocity, pressure and stress maps are empty, so the differential identities, rho=rho0 and div u=0 are vacuous; rho0>0 and nu=mu/rho0 remain well-defined constants. Thus the row should record this harmless formal empty-domain case rather than invent a nonempty hypothesis.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Nonempty Omega is absent from the Definition. With Omega=empty the velocity, pressure and stress maps are empty, so the differential identities, rho=rho0 and div u=0 are vacuous; rho0>0 and nu=mu/rho0 remain well-defined constants. Thus the row should record this harmless formal empty-domain case rather than invent a nonempty hypothesis.",
+            "item_sha256": "cb9a82dd3c5a51ec19305be9b971d95043111dce8df78fb3e798befe9b1a66b7",
+            "row_sha256": "f99313261756eb8eaa16b2cf60eec47534a62d37e86a7dd249feee4e08bea424",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "evidence": "Definition permits u=0, p constant and mu=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "reason": "No singleton field or one-dimensional special case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "evidence": "Definition permits the endpoint mu=0; density remains strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "reason": "The Definition makes no time-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "reason": "The Definition constructs no choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "reason": "The Definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence."
+          },
+          "reason": "The Definition contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "incompressible constant-viscosity stress divergence",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "Using div(u)=0 and constant mu, componentwise expansion gives div(2 mu D)=mu Delta(u)."
+        }
+      ],
+      "finite_checks_disposition": "The check is an exact componentwise identity in the Definition; it does not establish solution existence.",
+      "supplier_excerpts": [
+        {
+          "supplier": "post-fd-continuum-balances",
+          "carrier": "items/post-fd-continuum-balances.md",
+          "status": "draft",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$",
+          "relevant_hypotheses_and_conventions": "Role in this item: physical-assumption.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        },
+        {
+          "supplier": "post-fd-newtonian-fourier",
+          "carrier": "items/post-fd-newtonian-fourier.md",
+          "status": "draft",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K=(K+K^T)/2. $$\nAssume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt\n$$ \\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, the tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The closure is therefore form-invariant under those rotations. The mathematical linear-isotropic classification identifies this stress form from the stated linearity and equivariance hypotheses; it does not establish that any material adopts them.",
+          "relevant_hypotheses_and_conventions": "Role in this item: physical-assumption.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        }
+      ]
+    },
+    "post-fd-local-equilibrium": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "A physical postulate is an adopted model input; finite arithmetic cannot prove its empirical validity.",
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines the open state domain, C2 specific-energy function, state coordinates, temperature, thermodynamic pressure, density and SI units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The postulate is restricted to a smooth single-component local-equilibrium branch with T>0 and makes no global-inversion or universal-material claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong Part III §§4.4.2–4.4.3 and the Chapter 6 textbook §§6.1.1 and 6.1.4 were read at the cited locators; limitations and per-item dispositions are in batch-11.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "Local equilibrium is stated as an additional physical premise; the source and global equilibrium thermodynamics do not prove its empirical applicability."
+        }
+      },
+      "supplier_excerpts": [
+        {
+          "supplier": "def-fd-simple-fluid-state",
+          "carrier": "items/def-fd-simple-fluid-state.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two (write $e\\in C^2(U)$). The pair $(U,e)$ is a **simple-fluid state relation** for the purposes of this mathematical library. At $(v,s)\\in U$, $v$ is the specific-volume coordinate, $s$ the specific-entropy coordinate, and $e(v,s)$ the specific-energy value. Define\n$$T(v,s):=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s):=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho:=\\frac1v.$$\nIn these partial derivatives the other state coordinate is held fixed. Write $e_{vv},e_{vs},e_{sv},e_{ss}$ for the corresponding second partial derivatives, set\n$$H_e:=\\begin{pmatrix}e_{vv}&e_{vs}\\\\ e_{sv}&e_{ss}\\end{pmatrix},$$\nand define the coordinate-Hessian determinant\n$$J_e:=e_{vv}e_{ss}-e_{vs}e_{sv}.$$\nThe **local thermal-chart hypothesis** at a state is $T>0$ and $e_{ss}>0$; it is a pointwise hypothesis and does not assert a global inverse. The conditions $e_{vv}>0$ and $J_e>0$, when required, are separate pointwise response restrictions. The definition itself imposes no sign condition on $e_{vv}$ or $J_e$ and no invertibility or convexity condition on all of $U$.\n\nUnder the physical SI interpretation only, $v$ has units $\\mathrm{m^3\\,kg^{-1}}$, $s$ has units $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$, $e$ has units $\\mathrm{J\\,kg^{-1}}$, $T$ has units $\\mathrm K$, $p$ has units $\\mathrm{Pa}$, and $\\rho$ has units $\\mathrm{kg\\,m^{-3}}$. This is a mathematical definition of a state relation and makes no claim that an actual material obeys it.",
+          "relevant_hypotheses_and_conventions": "Role in this item: formulation-prerequisite.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        },
+        {
+          "supplier": "def-fd-quantity-and-frame-conventions",
+          "carrier": "items/def-fd-quantity-and-frame-conventions.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Use the nonrelativistic Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is an open interval with absolute time $t$ in seconds. Here $E$ is a three-dimensional oriented Euclidean affine space: its translation vectors form an oriented Euclidean vector space, but no origin in $E$ is distinguished. A **Cartesian inertial chart** supplies an orientation-preserving affine isometry $x:E\\to\\mathbb R^3$ and the absolute-time coordinate. Write $\\mathrm{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\det Q=1\\}$. Inertial charts are related by\n\n$$t^*=t+t_0,\\qquad x^*=Qx+vt+a,$$\n\nwhere $t_0$ is a constant time translation in seconds, $Q\\in\\mathrm{SO}(3)$ is constant, $v\\in\\mathbb R^3$ is a constant relative velocity in m s$^{-1}$, and $a\\in\\mathbb R^3$ is a constant spatial translation in metres. A **worldline** is a curve $t\\mapsto(t,x(t))$ with $x\\in C^2(I,\\mathbb R^3)$, parameterized by absolute time; this model imposes no relativistic speed or causal condition. A **rigid observer change** is the more general coordinate change $t^*=t,\\ x^*=Q(t)x+c(t)$, with $Q\\in C^2(I,\\mathrm{SO}(3))$ and $c\\in C^2(I,\\mathbb R^3)$ in metres; it is not called inertial unless $Q$ is constant and $c$ is affine in time. A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.\n\nLet $B\\subseteq\\mathbb R^3$ be a bounded open reference body whose boundary is locally the graph of a $C^1$ function, with $B$ lying on one side of each such graph. Identify the reference coordinates with the chosen initial Cartesian chart, and let $U$ be an open neighborhood of $\\overline B$. A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$. The label $a\\in U$ and position $x=\\chi(t,a)$ are measured in metres. Write\n\n$$F(t,a)=D_a\\chi(t,a),\\qquad J(t,a)=\\det F(t,a)>0,\\qquad A(t,x)=\\chi_t^{-1}(x),\\qquad \\Omega_t=\\chi_t(B).$$\n\nHere $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "relevant_hypotheses_and_conventions": "Role in this item: formulation-prerequisite.",
+          "supplier_proof_status": "Current Step 1 readiness is ready; this records authoring readiness only and not independent review acceptance.",
+          "consumer_use": "This direct prerequisite is used as declared in deps and dependency_roles."
+        }
+      ]
+    },
+    "pthm-fd-entropy-production": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Adopt a smooth single-component material continuum on a stated macroscopic regime in a Cartesian inertial chart. Let $\\rho_0\\in C^1(\\overline B)$ be positive. On each swept material region, require $\\rho,u,e,T,s,q,\\sigma\\in C^1$ and $b,r\\in C^0$, with $\\rho>0$ and $T>0$; the motion has the regularity and positive Jacobian in the preceding definition. A material subregion is $\\chi_t(V)$ for a nonempty bounded open set $V\\Subset B$ whose boundary is locally, after a rigid coordinate change, a $C^1$ graph with $V$ on one side; its boundary moves with the material velocity. The Jordan integral convention for such regions and their smooth images is the one in the mathematical interface identified below. The continuum approximation, its empirical regime, and the following balance laws are physical assumptions of this model, not deductions from the mathematical definition of a motion or from molecular mechanics.\n\nAssume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$\n\nAdopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$\n\nThe entropy flux uses the local material temperature at the heat-transfer point. A reservoir at a different temperature, a singular surface force, a shock, vacuum, or a weak solution requires a separately stated model and is not covered here. The postulate reports no experiment and asserts no measurement or universal claim that nature obeys these assumptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-local-equilibrium",
+          "source_section": "Postulate",
+          "quote": "Use a smooth single-component, nonpolar fluid branch in a Cartesian inertial frame. Let $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$ be an open state domain with coordinates $v$ and $s$, where $v$ is specific volume and $s$ is specific entropy. Adopt a specific internal-energy function $e:\\mathcal U\\to\\mathbb R$ of class $C^2$, meaning that its coordinate partial derivatives through total order two exist and are continuous. At a state $(v,s)$, define the temperature and thermodynamic pressure by\n$$ T(v,s)=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s)=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho=\\frac1v, $$\nwhere each partial derivative holds the other state coordinate fixed. Assume the local material states lie in $\\mathcal U$ and $T>0$. Local equilibrium here means that the fields $e,T,p$ at each event are assigned by these state functions of the local $v,s$.\n\nIn the physical SI interpretation, $v$ is in $\\mathrm{m^3\\,kg^{-1}}$, $s$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$, $e$ in $\\mathrm{J\\,kg^{-1}}$, $T$ in $\\mathrm K$, $p$ in $\\mathrm{Pa}$, and $\\rho$ in $\\mathrm{kg\\,m^{-3}}$. Positivity of $e_{ss}$, global invertibility of $s\\mapsto T$, convexity, and the dynamical entropy inequality are separate assumptions or postulates; none follows from this local equilibrium adoption. This closure is an additional physical model choice, not a consequence of global equilibrium thermodynamics.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Use a Cartesian inertial frame in Newtonian spacetime. At an event let $u$ be the fluid velocity, $T>0$ its temperature, $\\rho>0$ its mass density, and $\\xi=(\\rho,T)$ its local state in a specified open set $\\mathcal S\\subset(0,\\infty)^2$. The velocity gradient has components $L_{ij}=\\partial_{x_j}u_i$; define the symmetric rate matrix $D=(L+L^T)/2$, its trace $\\theta=\\operatorname{tr}D$, and its trace-free part $D_0=D-\\theta I_3/3$, where $I_3$ is the $3\\times3$ identity matrix. For $A,B\\in\\mathbb R^{3\\times3}$, use the Frobenius contraction $A:B=\\sum_{i,j=1}^3A_{ij}B_{ij}$.\n\nAdopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K=(K+K^T)/2. $$\nAssume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt\n$$ \\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, the tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The closure is therefore form-invariant under those rotations. The mathematical linear-isotropic classification identifies this stress form from the stated linearity and equivariance hypotheses; it does not establish that any material adopts them.\n\nIn SI units, $D,\\theta,D_0$ are in $\\mathrm{s^{-1}}$, $\\mu,\\zeta$ in $\\mathrm{Pa\\,s}$, $K$ in $\\mathrm{W\\,m^{-1}\\,K^{-1}}$, $q$ in $\\mathrm{W\\,m^{-2}}$, and $\\sigma,\\tau,p$ in $\\mathrm{Pa}$. If the same stress is written $2\\mu D+\\lambda\\theta I_3$, then $\\lambda=\\zeta-2\\mu/3$; no nonnegativity of $\\lambda$ is assumed. These specified constitutive functions are adopted model inputs, not measured coefficient values or consequences of balance laws.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-fd-gibbs-entropy-residual",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_n$ for every $n$. Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two. For $(v,s)\\in U$, $v$ is the specific-volume coordinate, $s$ the specific-entropy coordinate, and $e(v,s)$ the specific-energy value; set $T=e_s(v,s)$ and $p=-e_v(v,s)$, with each state partial derivative holding the other coordinate fixed.\n\nLet $I\\subset\\mathbb R$ be a nonempty open interval. Let $B\\subset\\mathbb R^3$ be a nonempty bounded open set with $C^1$ boundary, meaning that near every boundary point it is the graph of a continuously differentiable function after a rigid coordinate change. Let $N\\subset\\mathbb R^3$ be open with $\\overline B\\subset N$, and let $\\chi\\in C^2(I\\times N,\\mathbb R^3)$, where $C^r$ means that all coordinate partial derivatives through total order $r$ exist and are continuous. For each $t\\in I$, assume $\\chi_t(a):=\\chi(t,a)$ is a bijection from $N$ onto an open set with a $C^2$ inverse and $\\det D_a\\chi(t,a)>0$. Define $\\Omega_t:=\\chi_t(B)$, $\\Omega:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$, and $u(t,x):=\\partial_t\\chi(t,\\chi_t^{-1}(x))$; this swept set $\\Omega$ is open. For a scalar or vector field $f$ on $\\Omega$, set $D_tf:=\\partial_tf+\\sum_{j=1}^3u_j\\partial_{x_j}f$ componentwise. For each nonempty bounded open $C^1$ subdomain $V$ with $\\overline V\\subset B$, set $P_t:=\\chi_t(V)$; here a $C^1$ domain is locally on one side of a $C^1$ boundary graph.\n\nLet $\\rho,v,s,T,p,q,r,b$ be fields on $\\Omega$ with continuous first partial derivatives, with $\\rho>0$, $(v,s)\\in U$, $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $e$ on $\\Omega$ denote the composition $e(v,s)$. Let $\\sigma$ be a continuously differentiable $3\\times3$ stress matrix field, let $\\tau$ be a continuously differentiable $3\\times3$ matrix field, and suppose $\\sigma=-pI+\\tau$, where $I$ is the $3\\times3$ identity. For a scalar field $h$, define $(\\nabla h)_i:=\\partial_{x_i}h$; define $L:=\\nabla u$ by $L_{ij}:=\\partial_{x_j}u_i$, $D:=(L+L^T)/2$, and $\\theta:=\\operatorname{tr}D=\\sum_{i=1}^3\\partial_{x_i}u_i$. Define $A:B:=\\sum_{i,j=1}^3A_{ij}B_{ij}$ for matrices, $\\operatorname{div}q:=\\sum_i\\partial_{x_i}q_i$, and $\\operatorname{div}(q/T)$ componentwise. Put $a_m:=\\partial_tu+(u\\cdot\\nabla)u$, $k:=|u|^2/2$, and $E:=e+k$. The fields $u,q,b$ are vector-valued and $r$ is scalar-valued.\n\nAssume there is a contact traction $t_c(t,y,n)\\in\\mathbb R^3$ depending on a surface only through its point $y$ and outward unit normal $n\\in S^2$, continuous in $(y,n)$ and uniformly bounded near each point. Assume its local force balance $\\int_{\\partial P}t_c(t,y,\\nu_P(y))\\,dS_y+\\int_P\\rho(t,y)(b(t,y)-a_m(t,y))\\,dy=0$ for every nonempty bounded open $C^1$ subdomain $P$ whose closure is compactly contained in $\\Omega_t$. Surface integrals use Euclidean surface measure with chart area density $\\sqrt{\\det(DX^TDX)}$. Suppose the unique Cauchy stress supplied by this contact balance satisfies $t_c(t,y,n)=\\sigma(t,y)n$ and has the stated $C^1$ regularity; the contact result alone does not imply that regularity.\n\nAssume the pointwise continuity equation $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ and, for every such material subdomain $V$ and every $t\\in I$, the integral balances\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma\\nu\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma\\nu)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}\\rho b\\cdot u\\,dx+\\int_{\\partial P_t}(\\sigma\\nu)\\cdot u\\,dS-\\int_{\\partial P_t}q\\cdot\\nu\\,dS+\\int_{P_t}\\rho r\\,dx,$$\nwhere $\\nu$ is the outward unit normal, $\\times$ is the ordinary vector cross product, and all fields are continuous up to the swept closures. The angular-momentum balance gives $\\sigma=\\sigma^T$, and the local internal-energy equation supplied by these hypotheses is $\\rho D_te=\\sigma:D-\\operatorname{div}q+\\rho r$. Define the entropy residual $\\mathcal G:=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. Then\n$$\\mathcal G=\\frac{\\tau:D}{T}-\\frac{q\\cdot\\nabla T}{T^2}.$$\nAt any state with $e_{ss}>0$, a unique local $C^1$ branch $s(v,T)$ satisfies $e_s(v,s(v,T))=T$; the local Helmholtz function $a(v,T):=e(v,s(v,T))-Ts(v,T)$ then satisfies $a_T=-s$ and $a_v=-p$. The entropy identity does not assert $\\mathcal G\\ge0$ and makes no empirical claim. In the physical SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $b$ in $\\mathrm{m\\,s^{-2}}$, $v$ in $\\mathrm{m^3\\,kg^{-1}}$, $e,k,E$ in $\\mathrm{J\\,kg^{-1}}$, $s$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$, $T$ in $\\mathrm K$, $p,\\sigma,\\tau,t_c$ in $\\mathrm{Pa}$, $q$ in $\\mathrm{W\\,m^{-2}}$, and $r$ in $\\mathrm{W\\,kg^{-1}}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fd-newtonian-admissibility",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambda\\in\\mathbb R$, $K\\in\\mathbb R^{3\\times3}$, $T>0$, $g\\in\\mathbb R^3$, and let $D\\in\\mathbb R^{3\\times3}$ be symmetric. Put\n$$\\theta:=\\operatorname{tr}D=\\sum_{i=1}^3D_{ii},\\qquad D_0:=D-\\frac{\\theta}{3}I,\\qquad \\zeta:=\\lambda+\\frac{2\\mu}{3},\\qquad \\operatorname{sym}K:=\\frac{K+K^T}{2},$$\nwhere $I$ is the $3\\times3$ identity and $|D_0|^2:=\\sum_{i,j=1}^3(D_0)_{ij}^2$. Use the Newtonian stress expression $\\tau:=2\\mu D+\\lambda\\theta I$ and the Fourier flux expression $q:=-Kg$, and define the quadratic residual\n$$\\mathcal Q(D,g,T):=\\frac{\\tau:D}{T}-\\frac{q\\cdot g}{T^2}, \\qquad \\tau:D:=\\sum_{i,j=1}^3\\tau_{ij}D_{ij}.$$\nHere $g$ represents an independently varied temperature-gradient value. The coefficient equivalence is an algebraic statement about $\\mathcal Q$; its interpretation as an entropy residual is conditional on the local state and balance hypotheses of the Gibbs identity.\nFor these definitions the exact algebraic decomposition is\n$$\\mathcal Q(D,g,T)=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T}+\\frac{g^T(\\operatorname{sym}K)g}{T^2}.$$\nThen $\\mathcal Q(D,g,T)\\ge0$ for every symmetric $D$, every $g\\in\\mathbb R^3$, and every $T>0$ if and only if\n$$\\mu\\ge0,\\qquad \\zeta\\ge0,\\qquad x^T(\\operatorname{sym}K)x\\ge0\\quad\\text{for every }x\\in\\mathbb R^3.$$\nIn particular, $\\lambda$ need not be nonnegative: if $\\mu>0$ and $\\zeta=0$, then $\\lambda=-2\\mu/3$ and the coefficient conditions still hold when $\\operatorname{sym}K$ is positive semidefinite. This is an algebraic coefficient test for the conditional entropy residual; it neither derives a constitutive law nor assigns material coefficients. In the physical SI interpretation, $\\mu,\\lambda,\\zeta$ have units $\\mathrm{Pa\\,s}$, $D$ has units $\\mathrm{s^{-1}}$, $K$ has units $\\mathrm{W\\,m^{-1}\\,K^{-1}}$, $g$ has units $\\mathrm{K\\,m^{-1}}$, and $T$ has units $\\mathrm K$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under the exact motion, contact, continuity and energy-balance hypotheses in [L1], the Gibbs identity gives $\\mathcal G=\\tau:D/T-q\\cdot\\nabla T/T^2$. Substitute the postulated closures from [A3]. Since $D=D_0+\\theta I_3/3$, $\\operatorname{tr}D_0=0$, $D_0:I_3=0$, and $I_3:I_3=3$, contraction gives $\\tau:D=2\\mu|D_0|^2+\\zeta\\theta^2$. Also $-q\\cdot\\nabla T=(\\nabla T)^TK\\nabla T=(\\nabla T)^T\\operatorname{sym}(K)\\nabla T$, because a real scalar quadratic form annihilates the skew-symmetric part. This yields the stated formula.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply the exact coefficient equivalence [L2] with $g=\\nabla T$, $\\lambda=\\zeta-2\\mu/3$, and $T>0$. It gives nonnegativity for every independent local $D,g$ exactly under the three stated conditions. The adopted coefficient range in [A3] satisfies those conditions; thus this closure is consistent with the separately adopted entropy inequality in [A1]. This is a conditional model deduction, not a proof of either physical postulate.",
+          "inputs": [
+            "A1",
+            "A3",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "reason": "The Statement is pointwise on admissible smooth states and makes no assertion over an empty state domain.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The inherited Gibbs hypotheses include a nonempty material region and admissible positive-temperature states. The coefficient test is over all symmetric 3x3 D and g in R3, both nonempty classes containing zero, and T>0. It is not an arbitrarily indexed family that can be empty; step 2.1 applies the coefficient criterion on exactly these tests.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The inherited Gibbs hypotheses include a nonempty material region and admissible positive-temperature states. The coefficient test is over all symmetric 3x3 D and g in R3, both nonempty classes containing zero, and T>0. It is not an arbitrarily indexed family that can be empty; step 2.1 applies the coefficient criterion on exactly these tests.",
+            "item_sha256": "7107d817d6527e4bfd60b5b5cad0a6d43f90488554ab7a10b857c66d944eb95d",
+            "row_sha256": "f9458ee28a34a333ed4e9b10cbaca8427a629dcecdbfdf46056e8c71a23c6595",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "evidence": "Statement and step 1.1: D=0 and grad(T)=0 give zero residual."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "reason": "The coefficient criterion is a three-dimensional matrix statement, not a singleton-domain claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "evidence": "Step 2.1 includes mu=0, zeta=0, and semidefinite K with null directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "reason": "The residual formula is pointwise and has no endpoint quantifier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "evidence": "Statement and L1 retain exactly AC_omega; no full Axiom of Choice is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "evidence": "Step 2.1 applies the supplier equivalence to obtain coefficient necessity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity."
+          },
+          "evidence": "Step 2.1 applies the supplier equivalence to obtain coefficient sufficiency."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "trace-free shear test",
+          "inputs": [
+            "Statement",
+            "Proof step 2.1"
+          ],
+          "expected": "D trace-free and g=0 isolate 2 mu |D0|^2/T."
+        },
+        {
+          "name": "pure dilation test",
+          "inputs": [
+            "Statement",
+            "Proof step 2.1"
+          ],
+          "expected": "D=theta I/3 and g=0 isolate zeta theta^2/T."
+        },
+        {
+          "name": "conductivity quadratic test",
+          "inputs": [
+            "Statement",
+            "Proof step 2.1"
+          ],
+          "expected": "D=0 isolates g^T sym(K) g/T^2 for arbitrary g."
+        }
+      ],
+      "finite_checks_disposition": "All checks are exact symbolic or definitional checks; none is empirical or independent proof acceptance."
+    },
+    "pthm-fd-acoustic-linearization": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-fd-barotropic-euler-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-fd-local-equilibrium",
+          "source_section": "Postulate",
+          "quote": "Use a smooth single-component, nonpolar fluid branch in a Cartesian inertial frame. Let $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$ be an open state domain with coordinates $v$ and $s$, where $v$ is specific volume and $s$ is specific entropy. Adopt a specific internal-energy function $e:\\mathcal U\\to\\mathbb R$ of class $C^2$, meaning that its coordinate partial derivatives through total order two exist and are continuous. At a state $(v,s)$, define the temperature and thermodynamic pressure by\n$$ T(v,s)=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s)=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho=\\frac1v, $$\nwhere each partial derivative holds the other state coordinate fixed. Assume the local material states lie in $\\mathcal U$ and $T>0$. Local equilibrium here means that the fields $e,T,p$ at each event are assigned by these state functions of the local $v,s$.\n\nIn the physical SI interpretation, $v$ is in $\\mathrm{m^3\\,kg^{-1}}$, $s$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$, $e$ in $\\mathrm{J\\,kg^{-1}}$, $T$ in $\\mathrm K$, $p$ in $\\mathrm{Pa}$, and $\\rho$ in $\\mathrm{kg\\,m^{-3}}$. Positivity of $e_{ss}$, global invertibility of $s\\mapsto T$, convexity, and the dynamical entropy inequality are separate assumptions or postulates; none follows from this local equilibrium adoption. This closure is an additional physical model choice, not a consequence of global equilibrium thermodynamics.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fd-response-acoustic-algebra",
+          "source_section": "Statement",
+          "quote": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two. Fix $(v_b,s_b)\\in U$ with $T_b=e_s(v_b,s_b)>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$ and $p=-e_v$, and use the local chart $s=s(v,T)$ from the unique branch satisfying $e_s(v,s(v,T))=T$. Define\n$$c_v:=\\left.\\frac{\\partial}{\\partial T}e(v,s(v,T))\\right|_{v=v_b,T=T_b}, \\qquad c_s^2:=v_b^2 e_{vv}(v_b,s_b).$$\nLet $P(\\rho):=p(1/\\rho,s_b)$ for positive $\\rho$ near $\\rho_b$. Thus $c_s^2$ is the isentropic pressure-response coefficient $P'(\\rho_b)$; it is not assumed nonnegative merely by its notation.\n\nLet $I\\subset\\mathbb R$ be a nonempty open time interval. On $I\\times\\mathbb R^3$, let $\\rho:I\\times\\mathbb R^3\\to(0,\\infty)$ and $u:I\\times\\mathbb R^3\\to\\mathbb R^3$ have continuous partial derivatives through order two. Use $\\nabla h=(\\partial_{x_i}h)_{i=1}^3$, $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, and $(u\\cdot\\nabla)u_i=\\sum_{j=1}^3u_j\\partial_{x_j}u_i$. Consider the mathematical barotropic system\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0.$$\nHere $\\Delta r:=\\sum_{i=1}^3\\partial_{x_i x_i}r$. For $r:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$ with continuous partial derivatives through order two, the pointwise first variation about $(\\rho_b,0)$, defined by differentiating at $\\varepsilon=0$ after substituting $\\rho=\\rho_b+\\varepsilon r$ and $u=\\varepsilon w$, is\n$$r_t+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b w_t+c_s^2\\nabla r=0, \\qquad r_{tt}=c_s^2\\Delta r.$$\nIf $c_s^2>0$, then with $c_s=\\sqrt{c_s^2}$ each nonzero $k\\in\\mathbb R^3$ gives plane-wave solutions\n$$r=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t),\\qquad \\omega=c_s|k|.$$\nIf $c_s^2<0$, set $a=\\sqrt{-c_s^2}|k|$ for any nonzero $k\\in\\mathbb R^3$. Then\n$$r=Ae^{at}\\cos(k\\cdot x),\\qquad w=-\\frac{aA}{\\rho_b|k|^2}k e^{at}\\sin(k\\cdot x)$$\nsolves the same linearized system and grows exponentially. These are exact statements about the linearized mathematical system; they provide no finite-amplitude error or lifespan estimate and make no empirical claim about a material.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $P(\\rho)=p(1/\\rho,s_b)$ and $p=-e_v$, the chain rule at fixed $s_b$ gives $P'(\\rho_b)=p_v(v_b,s_b)(-1/\\rho_b^2)=(-e_{vv})(-v_b^2)=v_b^2e_{vv}$. This is $c_s^2$ by definition.",
+          "inputs": [
+            "A1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "Substitute $\\rho_\\varepsilon=\\rho_b+\\varepsilon\\delta\\rho$ and $u_\\varepsilon=\\varepsilon w$ into the model equations from [L1]. The order-$\\varepsilon$ continuity term is $\\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w$. The convective term in momentum is order $\\varepsilon^2$, while differentiability of $P$ gives $\\nabla P(\\rho_\\varepsilon)=\\varepsilon P'(\\rho_b)\\nabla\\delta\\rho+o(\\varepsilon)$. Dividing by $\\varepsilon$ and taking the derivative at zero yields the stated first-variation system.",
+          "inputs": [
+            "A2",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "3.1",
+          "claim": "Differentiate the first equation of the first-variation system in time. Take the divergence of the second equation; because $\\rho_b$ and $P'(\\rho_b)=c_s^2$ are constant, substitution gives $\\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho$.",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "4.1",
+          "claim": "Suppose $c_s^2>0$, take $k\\ne0$, and put $\\omega=c_s|k|$. For the stated fields, $\\partial_t\\delta\\rho=\\omega A\\sin(k\\cdot x-\\omega t)$, $\\nabla\\delta\\rho=-Ak\\sin(k\\cdot x-\\omega t)$, $\\operatorname{div}w=-\\omega A\\sin(k\\cdot x-\\omega t)/\\rho_b$, and $\\partial_tw=\\omega^2Ak\\sin(k\\cdot x-\\omega t)/(\\rho_b|k|^2)$. The continuity equation follows from the first and third expressions; the momentum equation follows from $\\omega^2=c_s^2|k|^2$.",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "reason": "The Statement fixes a nonempty local state and asserts no solution existence on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "evidence": "Statement requires k nonzero for the plane-wave formula; the linear system itself has no division at k=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "evidence": "Statement permits amplitude A=0, giving the zero perturbation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "evidence": "Statement does not claim oscillatory sound when c_s^2=0; positive waves require c_s^2>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "reason": "The Statement has no time-endpoint claim or finite-amplitude estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "evidence": "Statement and proof step 4.1 choose a single nonzero wave vector; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Statement derives the linearized mass/momentum equations from the adopted barotropic equations; steps 2.1, 3.1 give this forward deduction. It does not equate the nonlinear equations with their first variation, so no forward biconditional direction is asserted.",
+            "item_sha256": "1f2e8939280fb147a2df680c3c9b1927253820af84772db938a9ff4b8dba5e10",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted."
+          },
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The wave equation in step 3.1 is a consequence of the coupled first-variation system; the Statement does not claim that an arbitrary scalar wave solution reconstructs a velocity or a nonlinear fluid solution. Step 4.1 verifies particular waves directly, without a converse assertion.",
+            "item_sha256": "1f2e8939280fb147a2df680c3c9b1927253820af84772db938a9ff4b8dba5e10",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive-response plane wave",
+          "inputs": [
+            "Proof step 4.1"
+          ],
+          "expected": "Substitution gives zero in both first-variation equations because omega^2=c_s^2 |k|^2."
+        }
+      ],
+      "finite_checks_disposition": "All checks are exact symbolic or definitional checks; none is empirical or independent proof acceptance."
+    },
+    "pthm-fd-perfect-gas-temperature": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Adopt a smooth single-component material continuum on a stated macroscopic regime in a Cartesian inertial chart. Let $\\rho_0\\in C^1(\\overline B)$ be positive. On each swept material region, require $\\rho,u,e,T,s,q,\\sigma\\in C^1$ and $b,r\\in C^0$, with $\\rho>0$ and $T>0$; the motion has the regularity and positive Jacobian in the preceding definition. A material subregion is $\\chi_t(V)$ for a nonempty bounded open set $V\\Subset B$ whose boundary is locally, after a rigid coordinate change, a $C^1$ graph with $V$ on one side; its boundary moves with the material velocity. The Jordan integral convention for such regions and their smooth images is the one in the mathematical interface identified below. The continuum approximation, its empirical regime, and the following balance laws are physical assumptions of this model, not deductions from the mathematical definition of a motion or from molecular mechanics.\n\nAssume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$\n\nAdopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$\n\nThe entropy flux uses the local material temperature at the heat-transfer point. A reservoir at a different temperature, a singular surface force, a shock, vacuum, or a weak solution requires a separately stated model and is not covered here. The postulate reports no experiment and asserts no measurement or universal claim that nature obeys these assumptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-local-equilibrium",
+          "source_section": "Postulate",
+          "quote": "Use a smooth single-component, nonpolar fluid branch in a Cartesian inertial frame. Let $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$ be an open state domain with coordinates $v$ and $s$, where $v$ is specific volume and $s$ is specific entropy. Adopt a specific internal-energy function $e:\\mathcal U\\to\\mathbb R$ of class $C^2$, meaning that its coordinate partial derivatives through total order two exist and are continuous. At a state $(v,s)$, define the temperature and thermodynamic pressure by\n$$ T(v,s)=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s)=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho=\\frac1v, $$\nwhere each partial derivative holds the other state coordinate fixed. Assume the local material states lie in $\\mathcal U$ and $T>0$. Local equilibrium here means that the fields $e,T,p$ at each event are assigned by these state functions of the local $v,s$.\n\nIn the physical SI interpretation, $v$ is in $\\mathrm{m^3\\,kg^{-1}}$, $s$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$, $e$ in $\\mathrm{J\\,kg^{-1}}$, $T$ in $\\mathrm K$, $p$ in $\\mathrm{Pa}$, and $\\rho$ in $\\mathrm{kg\\,m^{-3}}$. Positivity of $e_{ss}$, global invertibility of $s\\mapsto T$, convexity, and the dynamical entropy inequality are separate assumptions or postulates; none follows from this local equilibrium adoption. This closure is an additional physical model choice, not a consequence of global equilibrium thermodynamics.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-fd-gibbs-entropy-residual",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_n$ for every $n$. Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two. For $(v,s)\\in U$, $v$ is the specific-volume coordinate, $s$ the specific-entropy coordinate, and $e(v,s)$ the specific-energy value; set $T=e_s(v,s)$ and $p=-e_v(v,s)$, with each state partial derivative holding the other coordinate fixed.\n\nLet $I\\subset\\mathbb R$ be a nonempty open interval. Let $B\\subset\\mathbb R^3$ be a nonempty bounded open set with $C^1$ boundary, meaning that near every boundary point it is the graph of a continuously differentiable function after a rigid coordinate change. Let $N\\subset\\mathbb R^3$ be open with $\\overline B\\subset N$, and let $\\chi\\in C^2(I\\times N,\\mathbb R^3)$, where $C^r$ means that all coordinate partial derivatives through total order $r$ exist and are continuous. For each $t\\in I$, assume $\\chi_t(a):=\\chi(t,a)$ is a bijection from $N$ onto an open set with a $C^2$ inverse and $\\det D_a\\chi(t,a)>0$. Define $\\Omega_t:=\\chi_t(B)$, $\\Omega:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$, and $u(t,x):=\\partial_t\\chi(t,\\chi_t^{-1}(x))$; this swept set $\\Omega$ is open. For a scalar or vector field $f$ on $\\Omega$, set $D_tf:=\\partial_tf+\\sum_{j=1}^3u_j\\partial_{x_j}f$ componentwise. For each nonempty bounded open $C^1$ subdomain $V$ with $\\overline V\\subset B$, set $P_t:=\\chi_t(V)$; here a $C^1$ domain is locally on one side of a $C^1$ boundary graph.\n\nLet $\\rho,v,s,T,p,q,r,b$ be fields on $\\Omega$ with continuous first partial derivatives, with $\\rho>0$, $(v,s)\\in U$, $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $e$ on $\\Omega$ denote the composition $e(v,s)$. Let $\\sigma$ be a continuously differentiable $3\\times3$ stress matrix field, let $\\tau$ be a continuously differentiable $3\\times3$ matrix field, and suppose $\\sigma=-pI+\\tau$, where $I$ is the $3\\times3$ identity. For a scalar field $h$, define $(\\nabla h)_i:=\\partial_{x_i}h$; define $L:=\\nabla u$ by $L_{ij}:=\\partial_{x_j}u_i$, $D:=(L+L^T)/2$, and $\\theta:=\\operatorname{tr}D=\\sum_{i=1}^3\\partial_{x_i}u_i$. Define $A:B:=\\sum_{i,j=1}^3A_{ij}B_{ij}$ for matrices, $\\operatorname{div}q:=\\sum_i\\partial_{x_i}q_i$, and $\\operatorname{div}(q/T)$ componentwise. Put $a_m:=\\partial_tu+(u\\cdot\\nabla)u$, $k:=|u|^2/2$, and $E:=e+k$. The fields $u,q,b$ are vector-valued and $r$ is scalar-valued.\n\nAssume there is a contact traction $t_c(t,y,n)\\in\\mathbb R^3$ depending on a surface only through its point $y$ and outward unit normal $n\\in S^2$, continuous in $(y,n)$ and uniformly bounded near each point. Assume its local force balance $\\int_{\\partial P}t_c(t,y,\\nu_P(y))\\,dS_y+\\int_P\\rho(t,y)(b(t,y)-a_m(t,y))\\,dy=0$ for every nonempty bounded open $C^1$ subdomain $P$ whose closure is compactly contained in $\\Omega_t$. Surface integrals use Euclidean surface measure with chart area density $\\sqrt{\\det(DX^TDX)}$. Suppose the unique Cauchy stress supplied by this contact balance satisfies $t_c(t,y,n)=\\sigma(t,y)n$ and has the stated $C^1$ regularity; the contact result alone does not imply that regularity.\n\nAssume the pointwise continuity equation $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ and, for every such material subdomain $V$ and every $t\\in I$, the integral balances\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma\\nu\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma\\nu)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}\\rho b\\cdot u\\,dx+\\int_{\\partial P_t}(\\sigma\\nu)\\cdot u\\,dS-\\int_{\\partial P_t}q\\cdot\\nu\\,dS+\\int_{P_t}\\rho r\\,dx,$$\nwhere $\\nu$ is the outward unit normal, $\\times$ is the ordinary vector cross product, and all fields are continuous up to the swept closures. The angular-momentum balance gives $\\sigma=\\sigma^T$, and the local internal-energy equation supplied by these hypotheses is $\\rho D_te=\\sigma:D-\\operatorname{div}q+\\rho r$. Define the entropy residual $\\mathcal G:=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. Then\n$$\\mathcal G=\\frac{\\tau:D}{T}-\\frac{q\\cdot\\nabla T}{T^2}.$$\nAt any state with $e_{ss}>0$, a unique local $C^1$ branch $s(v,T)$ satisfies $e_s(v,s(v,T))=T$; the local Helmholtz function $a(v,T):=e(v,s(v,T))-Ts(v,T)$ then satisfies $a_T=-s$ and $a_v=-p$. The entropy identity does not assert $\\mathcal G\\ge0$ and makes no empirical claim. In the physical SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $b$ in $\\mathrm{m\\,s^{-2}}$, $v$ in $\\mathrm{m^3\\,kg^{-1}}$, $e,k,E$ in $\\mathrm{J\\,kg^{-1}}$, $s$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$, $T$ in $\\mathrm K$, $p,\\sigma,\\tau,t_c$ in $\\mathrm{Pa}$, $q$ in $\\mathrm{W\\,m^{-2}}$, and $r$ in $\\mathrm{W\\,kg^{-1}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Use the nonrelativistic Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is an open interval with absolute time $t$ in seconds. Here $E$ is a three-dimensional oriented Euclidean affine space: its translation vectors form an oriented Euclidean vector space, but no origin in $E$ is distinguished. A **Cartesian inertial chart** supplies an orientation-preserving affine isometry $x:E\\to\\mathbb R^3$ and the absolute-time coordinate. Write $\\mathrm{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\det Q=1\\}$. Inertial charts are related by\n\n$$t^*=t+t_0,\\qquad x^*=Qx+vt+a,$$\n\nwhere $t_0$ is a constant time translation in seconds, $Q\\in\\mathrm{SO}(3)$ is constant, $v\\in\\mathbb R^3$ is a constant relative velocity in m s$^{-1}$, and $a\\in\\mathbb R^3$ is a constant spatial translation in metres. A **worldline** is a curve $t\\mapsto(t,x(t))$ with $x\\in C^2(I,\\mathbb R^3)$, parameterized by absolute time; this model imposes no relativistic speed or causal condition. A **rigid observer change** is the more general coordinate change $t^*=t,\\ x^*=Q(t)x+c(t)$, with $Q\\in C^2(I,\\mathrm{SO}(3))$ and $c\\in C^2(I,\\mathbb R^3)$ in metres; it is not called inertial unless $Q$ is constant and $c$ is affine in time. A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.\n\nLet $B\\subseteq\\mathbb R^3$ be a bounded open reference body whose boundary is locally the graph of a $C^1$ function, with $B$ lying on one side of each such graph. Identify the reference coordinates with the chosen initial Cartesian chart, and let $U$ be an open neighborhood of $\\overline B$. A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$. The label $a\\in U$ and position $x=\\chi(t,a)$ are measured in metres. Write\n\n$$F(t,a)=D_a\\chi(t,a),\\qquad J(t,a)=\\det F(t,a)>0,\\qquad A(t,x)=\\chi_t^{-1}(x),\\qquad \\Omega_t=\\chi_t(B).$$\n\nHere $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiate the entropy formula along a material trajectory. The chain rule gives $D_ts=(c_v/T)D_tT-(R/\\rho)D_t\\rho$. The continuity equation in [L1] is $D_t\\rho+\\rho\\theta=0$, so $D_t\\rho=-\\rho\\theta$. Hence $\\rho T D_ts=\\rho c_vD_tT+\\rho RT\\theta=\\rho c_vD_tT+p\\theta$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "The local internal-energy equation from [L1] and $\\sigma=-pI_3+\\tau$ give $\\rho D_te=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r$, since $I_3:D=\\theta$. With $e=c_vT$, this is the stated full temperature balance.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "3.1",
+          "claim": "If $\\tau=q=r=0$, the temperature equation gives $D_tT=-(R/c_v)T\\theta$. Substitution in the differentiated entropy formula of step 1.1 yields $D_ts=-(R\\theta)+(R\\theta)=0$.",
+          "inputs": [
+            "A3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "4.1",
+          "claim": "On a trajectory with entropy value $s_0$, solve the entropy formula for $T/T_{\\mathrm{ref}}=\\exp((s_0-s_{\\mathrm{ref}})/c_v)(\\rho/\\rho_{\\mathrm{ref}})^{R/c_v}$. Using $p=\\rho RT$, collect powers of $\\rho$ to obtain $p=K(s_0)\\rho^{1+R/c_v}$ with the displayed positive $K(s_0)$. Its dependence on $s_0$ shows that different entropy levels can have different coefficients.",
+          "inputs": [
+            "A3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "reason": "The Statement is conditional on a nonempty smooth material state and makes no assertion over an empty region."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "evidence": "Statement requires R, c_v, T_ref and rho_ref strictly positive, so the logarithms are defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "evidence": "Statement at s0=sref gives the positive coefficient K=R Tref rhoref^(-R/cv)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "evidence": "Statement: differentiating its explicit e=c_v T(v,s) state relation gives e_ss=T/c_v>0 because T,c_v>0; no zero-heat-capacity chart is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "reason": "All material derivatives are taken within the open motion interval; no endpoint trace is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "evidence": "Statement and L1 carry exactly AC_omega; no stronger choice principle is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "evidence": "The Statement explicitly calls its exponential state formulas equivalent to the entropy logarithm and p=rho RT. For v>0 and positive reference scales, taking logarithms gives s=s_ref+c_v log(T/T_ref)-R log(rho/rho_ref), rho=1/v; p=RT/v gives p=rho RT. Thus the N/A row overlooks an actual algebraic equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Statement explicitly calls its exponential state formulas equivalent to the entropy logarithm and p=rho RT. For v>0 and positive reference scales, taking logarithms gives s=s_ref+c_v log(T/T_ref)-R log(rho/rho_ref), rho=1/v; p=RT/v gives p=rho RT. Thus the N/A row overlooks an actual algebraic equivalence.",
+            "item_sha256": "df6b3c5240a4eccffd8e632ece0f5a268ac38f0bfb90188bdcd79ffad218e6b7",
+            "row_sha256": "28a44a10cccc4bce81ad96b7a276ef896040cb595f8cba24e57a774a81f79ad6",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the mathematical Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$, as stated in Facts & Assumptions. Let $R>0$ be a specific gas constant and $c_v>0$ a constant specific heat at constant volume, both in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. Choose reference values $T_{\\mathrm{ref}}>0$ in $\\mathrm K$, $\\rho_{\\mathrm{ref}}>0$ in $\\mathrm{kg\\,m^{-3}}$, and $s_{\\mathrm{ref}}$ in $\\mathrm{J\\,kg^{-1}\\,K^{-1}}$. On $v>0,\\ s\\in\\mathbb R$, adopt\n$$ T(v,s)=T_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s-s_{\\mathrm{ref}}}{c_v}\\right) \\left(\\frac{1}{\\rho_{\\mathrm{ref}}v}\\right)^{R/c_v},\\qquad e(v,s)=c_vT(v,s),\\qquad p(v,s)=\\frac{R\\,T(v,s)}{v}. $$\nThese formulas give $T=e_s>0$, $p=-e_v$, and $e\\in C^2((0,\\infty)\\times\\mathbb R)$; equivalently, with $\\rho=1/v$, $s=s_{\\mathrm{ref}}+c_v\\ln(T/T_{\\mathrm{ref}})-R\\ln(\\rho/\\rho_{\\mathrm{ref}})$ and $p=\\rho RT$. The logarithms have dimensionless arguments.\n\nFor a smooth solution, define $\\theta=\\operatorname{div}u$, $\\sigma=-pI_3+\\tau$, and the local entropy residual $\\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$. The temperature balance is\n$$ \\rho c_vD_tT=-p\\theta+\\tau:D-\\operatorname{div}q+\\rho r. $$\nOn the additional adiabatic, inviscid, unsourced branch $\\tau=0,\\ q=0,\\ r=0$, one has $D_ts=0$. Along any trajectory on which the entropy value is $s_0$, the pressure law is\n$$ p=K(s_0)\\rho^\\gamma,\\qquad \\gamma=1+\\frac{R}{c_v},\\qquad K(s_0)=RT_{\\mathrm{ref}}\\exp\\!\\left(\\frac{s_0-s_{\\mathrm{ref}}}{c_v}\\right) \\rho_{\\mathrm{ref}}^{-R/c_v}>0. $$\nThe factor $K(s_0)$ can differ between trajectories with different entropy values. The gas closure is an adopted model, and the adiabatic conclusion does not apply when viscous work, heat conduction, or heat supply is present."
+          },
+          "evidence": "For positive T,rho and c_v, exponentiating the displayed logarithmic entropy formula gives T=T_ref exp((s-s_ref)/c_v)(rho/rho_ref)^(R/c_v); replacing rho by 1/v recovers the adopted T(v,s), and p=rho RT recovers RT/v. e=c_v T remains the same adopted caloric law. This is the reverse of the explicitly stated state-formula equivalence, not a converse to the adiabatic conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: For positive T,rho and c_v, exponentiating the displayed logarithmic entropy formula gives T=T_ref exp((s-s_ref)/c_v)(rho/rho_ref)^(R/c_v); replacing rho by 1/v recovers the adopted T(v,s), and p=rho RT recovers RT/v. e=c_v T remains the same adopted caloric law. This is the reverse of the explicitly stated state-formula equivalence, not a converse to the adiabatic conclusion.",
+            "item_sha256": "df6b3c5240a4eccffd8e632ece0f5a268ac38f0bfb90188bdcd79ffad218e6b7",
+            "row_sha256": "ec7ce41cd4c774daecd94a5a9e6ae3a258e9d54689a0339e450520f08b23af34",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "dimensionless state logarithms",
+          "inputs": [
+            "Statement",
+            "Proof step 4.1"
+          ],
+          "expected": "Both logarithms use positive dimensionless ratios T/Tref and rho/rhoref."
+        }
+      ],
+      "finite_checks_disposition": "All checks are exact symbolic or definitional checks; none is empirical or independent proof acceptance."
+    },
+    "pthm-fd-newtonian-kinetic-decay": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-fd-local-balance-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, meaning that every countable sequence of nonempty sets has a choice function. Let $I\\subset\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subset\\mathbb R^3$ be a nonempty bounded open set with $C^1$ boundary, and let $U\\subset\\mathbb R^3$ be open with $\\overline B\\subset U$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have slices $\\chi_t:U\\to\\chi_t(U)$ that are orientation-preserving bijections with $C^2$ inverses and $\\det D_a\\chi(t,a)>0$. Put $\\Omega_t=\\chi_t(B)$, $\\mathcal W=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$, $u(t,x)=\\partial_t\\chi(t,\\chi_t^{-1}(x))$ on $\\mathcal W$, $D_t=\\partial_t+u\\cdot\\nabla_x$, $k=|u|^2/2$, and $E=e+k$. For each nonempty bounded $C^1$ domain $V\\Subset B$ with compact closure in $B$, set $P_t=\\chi_t(V)$. A bounded $C^1$ domain means a nonempty bounded open set locally on one side of a $C^1$ boundary graph; its unit normal $\\nu$ points outward. All fields below are continuously differentiable on open neighborhoods of the swept closures $\\{(t,x):t\\in I,\\ x\\in\\chi_t(\\overline V)\\}$ for each such $V$, and $\\rho>0$: let $\\rho$ be scalar, $u,b,q$ vector-valued, $e,r$ scalar, and $\\sigma$ a $3\\times3$ matrix field. Define $L=\\nabla_xu$ by $L_{ij}=\\partial_{x_j}u_i$, $A:B=\\sum_{i,j}A_{ij}B_{ij}$, $\\operatorname{div}v=\\sum_j\\partial_{x_j}v_j$ for vector fields $v$, and $(\\operatorname{div}M)_i=\\sum_j\\partial_{x_j}M_{ij}$ for $3\\times3$ fields $M$; define $(u\\otimes u)_{ij}=u_i u_j$. Interpret $\\rho,u,b,\\sigma,q,e,r$ as mass density, velocity, body acceleration, Cauchy stress, heat flux, specific internal energy, and specific energy supply rate. All cross products are the standard right-handed product in $\\mathbb R^3$. In SI, $x,a$ are in metres, $t$ in seconds, $\\rho$ in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $b$ in $\\mathrm{m\\,s^{-2}}$, $\\sigma$ in pascals, $q$ in $\\mathrm{W\\,m^{-2}}$, $e$ in $\\mathrm{J\\,kg^{-1}}$, and $r$ in $\\mathrm{W\\,kg^{-1}}$. The traction is $\\sigma\\nu$ on the outward boundary normal, and $q\\cdot\\nu$ is outward heat flux; thus $-\\int_{\\partial P_t}q\\cdot\\nu\\,dS$ is heat entering $P_t$. Surface integrals use the chart measure with area density $\\sqrt{\\det(DX^TDX)}$.\n\nAssume the continuity equation $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$, and suppose the following integral balances hold for every such $V$ and every $t\\in I$:\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma\\nu\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma\\nu)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}\\rho b\\cdot u\\,dx+\\int_{\\partial P_t}(\\sigma\\nu)\\cdot u\\,dS-\\int_{\\partial P_t}q\\cdot\\nu\\,dS+\\int_{P_t}\\rho r\\,dx.$$\nAssume the Cauchy contact result supplies the pointwise traction $\\tau=\\sigma\\nu$, and that its unique matrix field $\\sigma$ has the stated $C^1$ regularity; the pointwise contact result alone does not imply this regularity. Then the linear momentum balance is equivalent to\n$$\\partial_t(\\rho u)+\\operatorname{div}(\\rho u\\otimes u-\\sigma)=\\rho b.$$\nTogether with the angular-momentum balance, it is equivalent to this momentum equation and $\\sigma=\\sigma^T$. The kinetic-energy identity is\n$$\\partial_t(\\rho k)+\\operatorname{div}(\\rho k u-\\sigma^T u)=\\rho b\\cdot u-\\sigma:L.$$\nThe total-energy balance is equivalent to\n$$\\partial_t(\\rho E)+\\operatorname{div}(\\rho E u-\\sigma^T u+q)=\\rho b\\cdot u+\\rho r,$$\nand, after subtracting the kinetic identity, to the internal-energy equation\n$$\\partial_t(\\rho e)+\\operatorname{div}(\\rho e u+q)=\\sigma:L+\\rho r,\\qquad \\rho D_t e=\\sigma:L-\\operatorname{div}q+\\rho r.$$\nConversely, adding the kinetic and internal-energy equations recovers the total-energy equation. These are conditional identities for smooth fields; no balance postulate is derived.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Apply [L1] with $b=0$. It gives the local momentum equation $\\rho_0D_tu=\\operatorname{div}\\sigma$ and symmetric stress. Dot the equation with $u$. The component product rule gives $u_i\\partial_{x_j}\\sigma_{ij}=\\partial_{x_j}(\\sigma_{ij}u_i)-\\sigma_{ij}\\partial_{x_j}u_i$, while $D_t(|u|^2/2)=u\\cdot D_tu$. Since $\\rho_0$ is constant and $\\operatorname{div}u=0$, this yields\n$$ \\partial_t\\left(\\frac{\\rho_0|u|^2}{2}\\right) +\\operatorname{div}\\left(\\frac{\\rho_0|u|^2}{2}u-\\sigma^Tu\\right) =-\\sigma:\\nabla u. $$",
+          "inputs": [
+            "A1",
+            "A2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Integrate over the fixed domain or one periodic cell. On a no-slip boundary both flux terms vanish because $u=0$. On a periodic cell the fluxes on opposite faces cancel because their outward normals are opposite and the fields are periodic. Therefore $\\frac{d}{dt}E_k(t)=-\\int_\\Omega\\sigma:\\nabla u\\,dx$.",
+          "inputs": [
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "3.1",
+          "claim": "Write $\\nabla u=D+W$, where $W=(\\nabla u-\\nabla u^T)/2$ is skew-symmetric. A symmetric matrix is Frobenius-orthogonal to a skew-symmetric matrix, so $D:W=0$. The stress law gives $\\sigma:\\nabla u=(-pI_3+2\\mu D):(D+W)=-p\\,\\operatorname{div}u+2\\mu|D|^2=2\\mu|D|^2$. Thus $\\frac{d}{dt}E_k=-2\\mu\\int_\\Omega|D|^2\\,dx$. Integrating this identity from $t_1$ to $t_2$ proves the stated energy equality and nonincrease because $\\mu\\ge0$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "reason": "The Statement requires a nonempty material body or positive-period cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "evidence": "Statement and step 3.1 give equality when mu=0 or D=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "evidence": "Step 3.1 allows rigid/constant motions with D=0; strict decay is explicitly not claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "evidence": "Statement and proof step 3.1 include mu=0 and yield zero dissipation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "evidence": "Statement requires t_1<t_2 in the open interval I; it claims no value at an interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "evidence": "Statement and L1 carry exactly AC_omega; no full Axiom of Choice is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The energy equality follows from momentum and the selected boundary conditions by steps 1.1, 2.1, 3.1. It is a conditional consequence, with no claim that an energy balance characterizes the fluid equations.",
+            "item_sha256": "4e71f2b7b51afbd2d738acf218f73caecede24667db67d3c3e36554795b91ba2",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+          },
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Nonincrease of E_k does not reconstruct stress, incompressibility or boundary conditions. The Statement only infers nonincrease from its dissipative equality and does not assert this reverse implication; mu=0 and D=0 are expressly allowed.",
+            "item_sha256": "4e71f2b7b51afbd2d738acf218f73caecede24667db67d3c3e36554795b91ba2",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "stress contraction",
+          "inputs": [
+            "Proof step 3.1"
+          ],
+          "expected": "With theta=0 and D:W=0, sigma:grad(u)=2 mu |D|^2."
+        }
+      ],
+      "finite_checks_disposition": "All checks are exact symbolic or definitional checks; none is empirical or independent proof acceptance."
+    },
+    "cex-fd-negative-bulk-viscosity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-fd-entropy-production",
+          "source_section": "Statement",
+          "quote": "Assume the complete smooth material, state, contact and mass/momentum/angular-momentum/total-energy balance hypotheses of the local Gibbs-entropy identity, including $\\mathrm{AC}_\\omega$ and positive temperature, as stated in Facts & Assumptions. Use a $C^2$ local state relation $e(v,s)$ with $v=1/\\rho$, $T=e_s(v,s)>0$, and $p=-e_v(v,s)$. Let $\\sigma=-pI_3+\\tau$, define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, $\\theta=\\operatorname{tr}D$, and set\n$$ \\mathcal G=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T,\\qquad D_t=\\partial_t+u\\cdot\\nabla. $$\nFor the adopted Newtonian/Fourier form $\\tau=2\\mu D_0+\\zeta\\theta I_3$, $D_0=D-\\theta I_3/3$, and $q=-K\\nabla T$, the residual is\n$$ \\mathcal G=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T} +\\frac{(\\nabla T)^T\\operatorname{sym}(K)\\nabla T}{T^2}. $$\nAt a fixed state, if the algebraic coefficient family is tested for every symmetric $D$, every $g=\\nabla T\\in\\mathbb R^3$, and every $T>0$, this residual is nonnegative exactly when $\\mu\\ge0$, $\\zeta\\ge0$, and $x^T\\operatorname{sym}(K)x\\ge0$ for every $x\\in\\mathbb R^3$. These conditions make the adopted closure compatible with the separate continuum entropy inequality. The theorem does not derive the balance or entropy postulates, infer material coefficients, or assert empirical validity.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The trace is $\\operatorname{tr}D=\\theta$, so $D_0=D-\\theta I_3/3=0$. By [L1], the residual for these data is $\\mathcal G=\\zeta\\theta^2/T$.",
+          "inputs": [
+            "A1",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $\\zeta<0$, $\\theta^2>0$, and $T>0$, one has $\\mathcal G<0$. Thus a positive shear coefficient alone does not guarantee entropy admissibility for compressible strain. This is a coefficient counterexample outside the adopted sign range, not an observation about nature.",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "reason": "The Counterexample fixes T>0 and theta nonzero, so the witness has nonempty local data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "evidence": "The Counterexample Given requires theta nonzero; step 1.1 gives G=zeta theta^2/T, whose algebraic value would be zero at theta=0, outside the chosen negative witness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "reason": "The pointwise three-dimensional strain witness has no singleton-domain case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "evidence": "Counterexample step 1.1 isolates the volumetric mode D0=0 and K=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "reason": "The coefficient witness is pointwise and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "evidence": "Counterexample steps 1.1 and 2.1 give an explicit finite algebraic witness and use no choice. Its physical entropy interpretation inherits AC_omega through the parent theorem cited in Facts L1; no stronger choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "reason": "The Counterexample is a witness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "Within the smooth compressible Newtonian/Fourier residual family, a nonnegative shear viscosity $\\mu\\ge0$ by itself guarantees nonnegative local entropy production for every $T>0$, every symmetric rate matrix $D$, and every temperature gradient $g\\in\\mathbb R^3$, regardless of the bulk coefficient $\\zeta$."
+          },
+          "reason": "The Counterexample is a witness, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "pure dilation residual",
+          "inputs": [
+            "Proof step 1.1"
+          ],
+          "expected": "D0=0, g=0, zeta<0 and T>0 give G=zeta theta^2/T<0."
+        }
+      ],
+      "finite_checks_disposition": "All checks are exact symbolic or definitional checks; none is empirical or independent proof acceptance."
+    },
+    "cex-fd-negative-response-acoustics": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-fd-acoustic-linearization",
+          "source_section": "Statement",
+          "quote": "Let $I\\subset\\mathbb R$ be a nonempty open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ a nonempty open domain for the model fields. Let $e\\in C^2(\\mathcal U)$ be the local specific-energy relation on an open $\\mathcal U\\subset(0,\\infty)\\times\\mathbb R$, with state coordinates $(v,s)$, $T=e_s$, and $p=-e_v$; each state partial derivative holds the other coordinate fixed. Fix $(v_b,s_b)\\in\\mathcal U$ with $T_b>0$ and $e_{ss}(v_b,s_b)>0$, set $\\rho_b=1/v_b$, and take the barotropic pressure law to be $P(\\rho)=p(1/\\rho,s_b)$ near $\\rho_b$. This is the fixed-entropy restriction of the adopted local state relation. The smooth barotropic Euler model is linearized about the uniform rest state $(\\rho,u)=(\\rho_b,0)$. For $C^2$ perturbation fields $\\delta\\rho:I\\times\\mathbb R^3\\to\\mathbb R$ and $w:I\\times\\mathbb R^3\\to\\mathbb R^3$, the first variation at $\\varepsilon=0$ after $\\rho=\\rho_b+\\varepsilon\\delta\\rho$, $u=\\varepsilon w$ is\n$$ \\partial_t\\delta\\rho+\\rho_b\\operatorname{div}w=0,\\qquad \\rho_b\\partial_tw+P'(\\rho_b)\\nabla\\delta\\rho=0,\\qquad \\partial_{tt}\\delta\\rho=c_s^2\\Delta\\delta\\rho, \\quad c_s^2=P'(\\rho_b)=v_b^2e_{vv}(v_b,s_b). $$\nThe sign of $c_s^2$ is not assumed in the base model. If $c_s^2>0$, define $c_s=\\sqrt{c_s^2}$. For every nonzero $k\\in\\mathbb R^3$, with $\\omega=c_s|k|$, the fields\n$$ \\delta\\rho=A\\cos(k\\cdot x-\\omega t),\\qquad w=\\frac{\\omega A}{\\rho_b|k|^2}k\\cos(k\\cdot x-\\omega t) $$\nsolve the first-variation system for every real amplitude $A$. They are exact solutions of the linearized equations, not finite-amplitude approximations with an automatic error or lifespan bound. No empirical value of $c_s$ is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiation of the chosen state relation gives $T_b>0$, $e_{ss}=C>0$, and $e_{vv}=-A<0$ at $(v_b,s_b)$. For $P(\\rho)=p(1/\\rho,s_b)$, the chain rule gives $P'(\\rho_b)=v_b^2e_{vv}=-Av_b^2=c_s^2<0$.",
+          "inputs": [
+            "A1",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The derivatives of the stated mode are $\\partial_t\\delta\\rho=\\alpha\\delta\\rho$, $\\operatorname{div}w=-\\alpha\\delta\\rho/\\rho_b$, $\\partial_tw=-\\alpha^2a_0k e^{\\alpha t}\\sin(k\\cdot x)/(\\rho_b|k|^2)$, and $\\nabla\\delta\\rho=-a_0k e^{\\alpha t}\\sin(k\\cdot x)$. Therefore the continuity equation holds, and the momentum equation holds because $-\\alpha^2/|k|^2-c_s^2=0$ by the definition of $\\alpha$.",
+          "inputs": [
+            "L1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $\\alpha>0$ and $a_0\\ne0$, the density-variation amplitude grows as $e^{\\alpha t}$ without bound on $I=\\mathbb R$. This smooth first-order solution refutes the stated boundedness claim. It concerns only the linearized mathematical system; it supplies no finite-amplitude solution or empirical material claim.",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "reason": "The Counterexample fixes a local reference state and nonzero mode data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "evidence": "Counterexample step 2.1 requires k nonzero and amplitude a_0 nonzero; otherwise the mode is trivial."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "reason": "No singleton-domain or one-mode count assertion is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "evidence": "Counterexample step 1.1 requires e_ss=C>0 and c_s^2<0; zero response is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "evidence": "The Counterexample uses I=R, so exponential growth is stated for all positive time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "evidence": "Counterexample step 2.1 uses one explicit nonzero k; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "reason": "The Counterexample is a witness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement refuted",
+            "source_excerpt": "For every smooth positive-density barotropic rest state with negative fixed-entropy pressure response $P'(\\rho_b)<0$, all smooth solutions of its first-variation system remain bounded in time."
+          },
+          "reason": "The Counterexample is a witness, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exponential mode substitution",
+          "inputs": [
+            "Proof step 2.1"
+          ],
+          "expected": "The continuity equation cancels alpha delta-rho; the momentum equation cancels because alpha^2/|k|^2=-c_s^2."
+        }
+      ],
+      "finite_checks_disposition": "All checks are exact symbolic or definitional checks; none is empirical or independent proof acceptance."
+    }
+  }
+}

@@ -1,0 +1,377 @@
+[
+  {
+    "order": 411,
+    "id": "fd-k02",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Single-species elastic Boltzmann model",
+    "companion": "fd-k02-examples",
+    "requires": [
+      "fd-k01"
+    ],
+    "items": [
+      {
+        "id": "post-fd-boltzmann-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Single-species elastic Boltzmann model",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-elastic-collision-measure"
+        ],
+        "dependency_roles": {
+          "def-fd-elastic-collision-measure": "mathematical-premise"
+        },
+        "physical_scope": "Adopted nonrelativistic, single-species, monatomic kinetic model in a three-dimensional periodic cell with elastic binary collision data and an incoming-pair factorization. Dilute-gas applicability is qualitative; no density threshold, hard-sphere or Boltzmann–Grad limit, many-particle derivation, existence assertion, or empirical validity is claimed.",
+        "statement": "Let $\\Omega=\\prod_{j=1}^3(0,L_j)$, with $L_j>0$ measured in metres and opposite faces identified, and let $I\\subseteq\\mathbb R$ be an open time interval measured in seconds. The primitive state variable $f$ is a one-particle number-density field $f:I\\times\\Omega\\times\\mathbb R^3\\to[0,\\infty)$, measurable for the product Lebesgue sigma-algebra and periodic in $x$, where $x$ is in metres and velocity $v$ is in metres per second; $f\\,d^3x\\,d^3v$ counts particles, so $f$ has units $\\mathrm{s^3\\,m^{-6}}$. For solutions, require $f$ and its weak time and spatial derivatives $\\partial_t f$ and $\\nabla_x f$ to be represented locally by integrable functions, so $f$, $\\partial_t f$, and $v\\cdot\\nabla_x f$ are integrable on every compact subset of the product domain. Only translational kinetic energy $m|v|^2/2$ is modeled; no internal molecular modes are included. The single-particle mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per kelvin are primitive fixed parameters of this formulation; neither is derived from the collision equation.\n\nAn elastic collision quadruple is $(v,w,v',w')\\in(\\mathbb R^3)^4$ satisfying $v+w=v'+w'$ and $|v|^2+|w|^2=|v'|^2+|w'|^2$; write $Q_{\\rm el}$ for this closed set and give it the Borel sets inherited from $(\\mathbb R^3)^4$. A collision-rate measure is a function $\\nu$ on those sets with $\\nu(\\varnothing)=0$, values in $[0,\\infty]$, and $\\nu(\\bigcup_n E_n)=\\sum_n\\nu(E_n)$ for pairwise disjoint measurable $E_n$. This nonnegative countably additive $\\nu$ is a primitive collision-rate input, invariant under each particle swap and under interchanging incoming and outgoing pairs, with rate normalization chosen so the collision operator has units of $f$ per second. For the collision equation, restrict each velocity section $f(x,\\cdot,t)$ to the collision domain $\\mathcal D_\\nu$ of positive finite-valued measurable densities; a nonnegative ambient state outside $\\mathcal D_\\nu$ is not assigned a collision operator by this postulate.\n\nAdopt one-sided incoming molecular chaos: at each collision point and time, the incoming two-particle velocity density used by the collision term is $f(x,v,t)f(x,w,t)$. No outgoing-pair factorization is adopted, and no derivation from reversible many-particle mechanics or propagation of chaos is asserted.\n\nFor $A=f(x,v,t)f(x,w,t)$ and $B=f(x,v',t)f(x,w',t)$, adopt a collision operator $Q_\\nu(f)$, with a jointly measurable locally integrable representative, whose weak action for every compact smooth velocity test and every moment or logarithmic test for which both sides converge absolutely is\n\n$$\\int_{\\mathbb R^3}\\psi(v)Q_\\nu(f)(x,v,t)\\,d^3v=\\frac14\\int_{Q_{\\rm el}}(B-A)\\bigl(\\psi(v)+\\psi(w)-\\psi(v')-\\psi(w')\\bigr)\\,d\\nu.$$\n\nThe adopted kinetic equation is\n\n$$\\partial_t f+v\\cdot\\nabla_x f=Q_\\nu(f)$$\n\nas an equality of locally integrable functions almost everywhere. These equations and the incoming factorization are physical model postulates, not deductions. This item asserts no empirical measurement, universal dilute-gas threshold, or solution existence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 8",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/b8c07404633cdba3217e434ac06569ad_MIT8_333F13_Lec8.pdf",
+              "locator": "Section III.D, printed pp. 49–54; the incoming molecular-chaos closure and its correlation limitation."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Sections 2.2–2.2.3; collision closure and detailed balance. Tong factorizes both pre-collision and post-collision pairs, so this treatment does not support the one-sided incoming factorization adopted here."
+            }
+          ]
+        },
+        "reference": "items/post-fd-boltzmann-model.md"
+      },
+      {
+        "id": "def-fd-physical-kinetic-observables",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Kinetic number, mass and thermal observables",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-kinetic-density",
+          "post-fd-boltzmann-model"
+        ],
+        "dependency_roles": {
+          "def-fd-kinetic-density": "mathematical-premise",
+          "post-fd-boltzmann-model": "physical-assumption"
+        },
+        "physical_scope": "SI definitions for the single-species, three-dimensional, translational kinetic model on states with positive number density and, when temperature is used, positive centered second moment. No isotropy or empirical equation of state is assumed by the definitions.",
+        "statement": "Work in three spatial and velocity dimensions, with $x$ in metres, $v$ in metres per second, and a nonnegative measurable one-particle number density $f(x,v,t)$ as defined by the kinetic-density model. Adopt Countable Choice $\\mathrm{AC}_\\omega$ as in that definition, and put $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and $\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$. Assume $\\int_{\\mathbb R^3}\\omega_3(v)f(x,v,t)\\,d^3v<\\infty$ at the state under consideration. Use the primitive fixed particle mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per kelvin from the adopted Boltzmann model. The number density, mass density, mean velocity, peculiar velocity, translational temperature, stress, heat flux, and energy below are derived moment quantities. Where $n(x,t)>0$, define the number density, mass density, mean velocity, peculiar velocity, and translational temperature by\n\n$$n(x,t)=\\int_{\\mathbb R^3}f\\,d^3v,\\qquad \\rho(x,t)=m n(x,t),\\qquad u(x,t)=\\frac1{n(x,t)}\\int_{\\mathbb R^3}v f\\,d^3v,\\qquad c(x,v,t)=v-u(x,t),$$\n\n$$T(x,t)=\\frac{m}{3k_B n(x,t)}\\int_{\\mathbb R^3}|v-u(x,t)|^2 f(x,v,t)\\,d^3v.$$\n\nUse $u$ only where $n>0$, and use $T$ in the positive-temperature branch only where the centered second moment is strictly positive. Define the kinetic stress tensor, heat-flux vector, and total kinetic-energy density by\n\n$$P(x,t)=m\\int_{\\mathbb R^3}c\\otimes c\\,f\\,d^3v,\\qquad q(x,t)=\\frac m2\\int_{\\mathbb R^3}|c|^2c\\,f\\,d^3v,\\qquad E(x,t)=\\frac m2\\int_{\\mathbb R^3}|v|^2f\\,d^3v.$$\n\nHere $n$ is in $\\mathrm{m^{-3}}$, $\\rho$ in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $T$ in kelvins, $P$ in pascals, $q$ in $\\mathrm{W\\,m^{-2}}$, and $E$ in $\\mathrm{J\\,m^{-3}}$. The definitions impose no isotropy on $P$; $p$ will denote a separate scalar pressure only in a specified local-equilibrium conclusion.\n\nLet $f_{\\rm ref}>0$ be a constant reference density with the same units as $f$. At $f=0$, define both $f\\log(f/f_{\\rm ref})$ and $f|\\log(f/f_{\\rm ref})|$ to be zero, their continuous extensions from $f>0$; their products with $v$ or $|v|$ are also zero there. Where both $\\int f|\\log(f/f_{\\rm ref})|\\,d^3v$ and $\\int |v|f|\\log(f/f_{\\rm ref})|\\,d^3v$ are finite, define the dimensionless-log kinetic entropy integral, its flux, the physical kinetic entropy density, and its flux by\n\n$$h=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad J_H=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad s_{\\rm kin}=-k_Bh,\\qquad j_{\\rm kin}=-k_BJ_H.$$\n\nThus $h$ and $J_H$ have units $\\mathrm{m^{-3}}$ and $\\mathrm{m^{-2}\\,s^{-1}}$, respectively; $s_{\\rm kin}$ has units $\\mathrm{J\\,m^{-3}\\,K^{-1}}$ and $j_{\\rm kin}$ has units $\\mathrm{J\\,m^{-2}\\,s^{-1}\\,K^{-1}}$. These are kinetic-model observables; $s_{\\rm kin}$ is not the fine-grained Gibbs entropy of a reversible many-particle state.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 10",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ae32d4e53c9fa0bee4171378caa4ea84_MIT8_333F13_Lec10.pdf",
+              "locator": "Section III.G, printed pp. 64–67; collision moments, pressure tensor, internal kinetic energy, and heat flux."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Sections 2.4.1–2.4.2, printed pp. 35–42; number density, mass density, mean velocity, pressure tensor, and ideal-fluid moments."
+            }
+          ]
+        },
+        "reference": "items/def-fd-physical-kinetic-observables.md"
+      },
+      {
+        "id": "pthm-fd-local-boltzmann-h-balance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Local kinetic H balance for the elastic Boltzmann model",
+        "dependency_level": 4,
+        "deps": [
+          "post-fd-boltzmann-model",
+          "def-fd-physical-kinetic-observables",
+          "def-fd-elastic-collision-measure",
+          "thm-chain-rule",
+          "def-derivative",
+          "thm-algebra-of-function-limits",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_roles": {
+          "post-fd-boltzmann-model": "physical-assumption",
+          "def-fd-physical-kinetic-observables": "formulation-prerequisite",
+          "def-fd-elastic-collision-measure": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-function-limits": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        },
+        "physical_scope": "Conditional pointwise local kinetic H balance for positive regular solutions of the adopted single-species elastic Boltzmann model, under explicit velocity envelopes and absolutely convergent logarithmic collision tests. This is a model deduction, not a many-particle theorem or empirical claim.",
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let\n$\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$ be a periodic spatial cell with\n$L_j>0$ in metres. Let $v\\in\\mathbb R^3$ be measured in metres per second and\nlet $f:I\\times\\Omega\\times\\mathbb R^3\\to(0,\\infty)$ be measurable, continuously\ndifferentiable in $(t,x)$, and twice continuously differentiable in $v$.\nAssume $f\\,d^3x\\,d^3v$ counts particles, so $f$ has units\n$\\mathrm{s^3\\,m^{-6}}$. Put\n$Q_{\\rm el}=\\{(v,w,v',w')\\in(\\mathbb R^3)^4:v+w=v'+w',\\quad |v|^2+|w|^2=|v'|^2+|w'|^2\\}$, with its relative Borel sigma-algebra, and\nlet $\\nu$ be the nonnegative symmetric collision-rate measure on $Q_{\\rm el}$\nin the adopted model. Fix a constant $f_{\\rm ref}>0$ with the same units as\n$f$, and put $\\ell=\\log(f/f_{\\rm ref})$, which is dimensionless,\n$A=f(x,v,t)f(x,w,t)$, and $B=f(x,v',t)f(x,w',t)$. Let\n$v_*=1\\,\\mathrm{m\\,s^{-1}}$ and\n$\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$.\n\nFor every compact time interval $J\\subset I$, assume there are integrable\nvelocity majorants, independent of $(x,t)\\in\\Omega\\times J$, for each of\n$f\\omega_3(v)$, $f|\\ell|$, $|v|f|\\ell|$,\n$(1+|\\ell|)|\\partial_t f|$, and\n$(1+|\\ell|)|v|\\,|\\nabla_x f|$. At every $(x,t)$, assume that $f(x,\\cdot,t)$\nbelongs to the collision domain and that the weak collision tests $1$ and\n$\\ell(x,\\cdot,t)$ are measurable and absolutely convergent. For each $t\\in I$,\nassume that the map\n$$x\\longmapsto\\int_{Q_{\\rm el}}|(A-B)\\log(A/B)|\\,d\\nu$$\nis measurable and belongs to $L^1(\\Omega,dx)$. Assume that $f$ solves the adopted kinetic equation\n$\\partial_t f+v\\cdot\\nabla_x f=Q_\\nu(f)$ for Lebesgue-almost every velocity at every fixed $(x,t)$. This sectionwise solution sense is an additional hypothesis for the pointwise balance below.\n\nDefine\n$$h(x,t)=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad J_H(x,t)=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,d^3v,$$\nwhere $h$ and $J_H$ have units $\\mathrm{m^{-3}}$ and\n$\\mathrm{m^{-2}\\,s^{-1}}$, respectively.\nAlso define\n$$D(x,t)=\\frac14\\int_{Q_{\\rm el}}(A-B)\\log(A/B)\\,d\\nu.$$\nUnder the collision-rate normalization in the adopted model, $D$ has units\n$\\mathrm{m^{-3}\\,s^{-1}}$.\nThen $D(x,t)\\ge0$ and\n$$\\partial_t h+\\nabla_x\\cdot J_H=-D$$\nthroughout $I\\times\\Omega$. The identity is conditional on the adopted weak\ncollision model and makes no assertion about reversible many-particle entropy\nor empirical validity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 9",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ce250b44390106351cb97aafb0060ca7_MIT8_333F13_Lec9.pdf",
+              "locator": "Section III.E, printed pp. 56–57; local H balance, collision symmetrization and the entropy-production sign."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Section 2.3, printed pp. 32–35; local entropy balance and the H-theorem sign mechanism."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/pthm-fd-local-boltzmann-h-balance.md"
+      },
+      {
+        "id": "pthm-fd-boltzmann-entropy",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Entropy production in the adopted collision model",
+        "dependency_level": 5,
+        "deps": [
+          "def-countable-choice",
+          "def-fd-physical-kinetic-observables",
+          "thm-fd-kinetic-h",
+          "pthm-fd-local-boltzmann-h-balance",
+          "post-fd-boltzmann-model"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-fd-physical-kinetic-observables": "formulation-prerequisite",
+          "thm-fd-kinetic-h": "mathematical-premise",
+          "pthm-fd-local-boltzmann-h-balance": "physical-result",
+          "post-fd-boltzmann-model": "physical-assumption"
+        },
+        "physical_scope": "Conditional local and periodic-global kinetic-entropy balance for positive regular solutions of the adopted d=3 elastic Boltzmann model, under the stated moment, logarithmic-test, flux, and differentiation integrability hypotheses. This is not a theorem about fine-grained Hamiltonian Gibbs entropy or empirical validity of the model.",
+        "statement": "Assume Countable Choice $\\mathrm{AC}_\\omega$: every $\\mathbb N$-indexed family of nonempty sets has a choice function. Let $\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$ be a periodic cell with $L_j>0$ in metres, and let $I$ be an open time interval in seconds. Let $f:I\\times\\Omega\\times\\mathbb R^3\\to(0,\\infty)$ be periodic, continuously differentiable in $t,x$, and twice continuously differentiable in $v$, with $v$ in metres per second and $f$ in $\\mathrm{s^3\\,m^{-6}}$. Fix $k_B>0$ in joules per kelvin, $v_*=1\\,\\mathrm{m\\,s^{-1}}$, $\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$, and a constant $f_{\\rm ref}>0$ with the same units as $f$; put $\\ell=\\log(f/f_{\\rm ref})$. On each compact time interval, assume integrable velocity majorants uniform in $x,t$ for each of $f\\omega_3$, $f|\\ell|$, $|v|f|\\ell|$, $(1+|\\ell|)|\\partial_t f|$, and $(1+|\\ell|)|v|\\,|\\nabla_x f|$. Define the elastic collision set\n\n$$Q_{\\rm el}=\\{(v,w,v',w')\\in(\\mathbb R^3)^4:v+w=v'+w',\\ |v|^2+|w|^2=|v'|^2+|w'|^2\\}$$\n\nwith its relative Borel sigma-algebra, and let $\\nu$ be the nonnegative symmetric collision-rate measure on $Q_{\\rm el}$. At every $(x,t)$ assume $f(x,\\cdot,t)$ belongs to the collision domain and the weak identity\n\n$$\\int_{\\mathbb R^3}\\psi(v)Q_\\nu(f)(x,v,t)\\,d^3v=\\frac14\\int_{Q_{\\rm el}}(B-A)\\bigl(\\psi(v)+\\psi(w)-\\psi(v')-\\psi(w')\\bigr)\\,d\\nu$$\n\nholds absolutely for $\\psi=1$ and $\\psi=\\ell(x,\\cdot,t)$, where $A=f(x,v,t)f(x,w,t)$ and $B=f(x,v',t)f(x,w',t)$. For each $t\\in I$, assume that the map\n$$x\\longmapsto\\int_{Q_{\\rm el}}|(A-B)\\log(A/B)|\\,d\\nu$$\nis measurable and belongs to $L^1(\\Omega,dx)$. Assume that $f$ solves $\\partial_t f+v\\cdot\\nabla_x f=Q_\\nu(f)$ for Lebesgue-almost every velocity at every fixed $(x,t)$. This sectionwise equality is an additional solution hypothesis beyond the adopted product-almost-everywhere equation.\n\n$$A(x,v,w,t)=f(x,v,t)f(x,w,t),\\qquad B(x,v',w',t)=f(x,v',t)f(x,w',t).$$\n\nDefine\n\n$$D(x,t)=\\frac14\\int_{Q_{\\rm el}}(A-B)\\log(A/B)\\,d\\nu.$$\nUnder the adopted collision-rate normalization, $D$ has units\n$\\mathrm{m^{-3}\\,s^{-1}}$.\n\nThen $D(x,t)\\ge0$, and the physical kinetic entropy density and flux $s_{\\rm kin}=-k_B\\int f\\log(f/f_{\\rm ref})\\,d^3v$ and $j_{\\rm kin}=-k_B\\int v f\\log(f/f_{\\rm ref})\\,d^3v$ satisfy\n\n$$\\partial_t s_{\\rm kin}+\\nabla_x\\cdot j_{\\rm kin}=k_BD\\ge0.$$\n\nHere $s_{\\rm kin}$ and $j_{\\rm kin}$ have units $\\mathrm{J\\,m^{-3}\\,K^{-1}}$\nand $\\mathrm{J\\,m^{-2}\\,s^{-1}\\,K^{-1}}$, respectively.\n\nConsequently, on the periodic cell, $\\mathcal S_{\\rm kin}(t)=\\int_\\Omega s_{\\rm kin}(x,t)\\,d^3x$ has units $\\mathrm{J\\,K^{-1}}$ and is nondecreasing. Its rate has units $\\mathrm{J\\,K^{-1}\\,s^{-1}}$. This is a conditional deduction of the adopted collision model; it does not assert increase of fine-grained Hamiltonian Gibbs entropy or that the model describes nature.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 9",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ce250b44390106351cb97aafb0060ca7_MIT8_333F13_Lec9.pdf",
+              "locator": "Section III.E, printed pp. 56–57; complete H-theorem symmetrization and sign argument."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Section 2.3, printed pp. 32–35; Boltzmann H-theorem derivation and its molecular-chaos premise."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/pthm-fd-boltzmann-entropy.md"
+      },
+      {
+        "id": "pthm-fd-ideal-gas-euler-interface",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Conditional ideal-gas Euler kinetic interface",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "def-fd-physical-kinetic-observables",
+          "post-fd-boltzmann-model",
+          "prop-fd-maxwellian-moments",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts",
+          "lem-smooth-bump-between-concentric-euclidean-balls"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-fd-physical-kinetic-observables": "formulation-prerequisite",
+          "post-fd-boltzmann-model": "physical-assumption",
+          "prop-fd-maxwellian-moments": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "lem-smooth-bump-between-concentric-euclidean-balls": "mathematical-premise"
+        },
+        "physical_scope": "Conditional d=3, periodic, monatomic Boltzmann-to-Euler interface under the exact dimensionless fast-collision equation, C1 positive limiting fields, and strong weighted-L1 convergence of the kinetic density to its local Maxwellian, including the stated initial convergence. No existence or convergence theorem, Navier–Stokes limit, or empirical derivation is claimed.",
+        "statement": "Assume Countable Choice $\\mathrm{AC}_\\omega$: every $\\mathbb N$-indexed family of nonempty sets has a choice function. Let $\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$ be a fixed rectangular periodic cell with periods $L_j>0$ in metres, $T_*>0$ in seconds, and $\\varepsilon>0$ a dimensionless fast-collision parameter. Spatial position $x$ is measured in metres, velocity $v$ in metres per second, and $f^\\varepsilon d^3x\\,d^3v$ counts particles, so $f^\\varepsilon$ has units $\\mathrm{s^3\\,m^{-6}}$. Put $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and $\\omega_k(v)=\\sum_{j=0}^k(|v|/v_*)^j$ for $k=2,3$. For each $\\varepsilon$, let $f^\\varepsilon>0$ be periodic on $\\Omega$, continuously differentiable in $t,x$, and twice continuously differentiable in $v$ on $\\Omega\\times\\mathbb R^3\\times[0,T_*]$. Let $f_{\\rm ref}>0$ be constant in the same units as $f^\\varepsilon$ and put $\\ell^\\varepsilon=\\log(f^\\varepsilon/f_{\\rm ref})$. On each compact time interval, require integrable velocity majorants uniform in $x,t$ for each of $\\omega_3 f^\\varepsilon$, $\\omega_3|\\partial_t f^\\varepsilon|$, $\\omega_3|v\\cdot\\nabla_xf^\\varepsilon|$, $f^\\varepsilon|\\ell^\\varepsilon|$, $|v|f^\\varepsilon|\\ell^\\varepsilon|$, $(1+|\\ell^\\varepsilon|)|\\partial_t f^\\varepsilon|$, and $(1+|\\ell^\\varepsilon|)|v||\\nabla_x f^\\varepsilon|$. Require the collision logarithmic test to be absolutely integrable. Define\n\n$$Q_{\\rm el}=\\{(v,w,v',w')\\in(\\mathbb R^3)^4:v+w=v'+w',\\ |v|^2+|w|^2=|v'|^2+|w'|^2\\}$$\n\nwith its relative Borel sigma-algebra and let $\\nu$ be the nonnegative symmetric collision-rate measure on this set. For each admissible velocity test $\\psi$ with absolute convergence, the collision operator is assumed to satisfy\n\n$$\\int_{\\mathbb R^3}\\psi(v)Q_\\nu(f^\\varepsilon)(x,v,t)\\,d^3v=\\frac14\\int_{Q_{\\rm el}}(B-A)\\bigl(\\psi(v)+\\psi(w)-\\psi(v')-\\psi(w')\\bigr)\\,d\\nu,$$\n\nwhere $A=f^\\varepsilon(x,v,t)f^\\varepsilon(x,w,t)$ and $B=f^\\varepsilon(x,v',t)f^\\varepsilon(x,w',t)$. In particular require this identity for $\\psi=1,mv_i,m|v|^2/2$; the elastic collision constraints make each corresponding collision bracket zero. Require $f^\\varepsilon$ to solve\n\n$$\\varepsilon\\bigl(\\partial_t f^\\varepsilon+v\\cdot\\nabla_x f^\\varepsilon\\bigr)=Q_\\nu(f^\\varepsilon),$$\n\nLet $m>0$ in kilograms and $k_B>0$ in joules per kelvin. Let $n,u,T$ be $C^1$ periodic fields, with $n,T$ bounded above and bounded away from zero and $u$ bounded, and define their local Maxwellian by\n\n$$M_{n,u,T}(v)=n\\left(\\frac{m}{2\\pi k_BT}\\right)^{3/2}\\exp\\left(-\\frac{m|v-u|^2}{2k_BT}\\right),$$\n\nwhere $n$ is number density in $\\mathrm{m^{-3}}$, $u$ is velocity in $\\mathrm{m\\,s^{-1}}$, $T$ is translational temperature in kelvins, $p$ is pressure in pascals ($\\mathrm{J\\,m^{-3}}$), and $I_3$ below is the identity tensor on $\\mathbb R^3$.\n\nFor the fixed velocity unit $v_*=1\\,\\mathrm{m\\,s^{-1}}$, assume\n\n$$\\int_0^{T_*}\\int_\\Omega\\int_{\\mathbb R^3}\\omega_3(v)|f^\\varepsilon-M_{n,u,T}|\\,d^3v\\,d^3x\\,dt\\longrightarrow0\\quad\\text{as }\\varepsilon\\to0,$$\n\nand assume the initial convergence\n\n$$\\int_\\Omega\\int_{\\mathbb R^3}\\omega_2(v)|f^\\varepsilon(x,v,0)-M_{n(x,0),u(x,0),T(x,0)}(v)|\\,d^3v\\,d^3x\\longrightarrow0.$$\n\nThen, with $\\rho=mn$, $E=\\frac12\\rho|u|^2+\\frac32nk_BT$, and local-equilibrium scalar pressure $p=nk_BT$, the limiting fields satisfy the compressible ideal-monatomic-gas Euler equations\n\n$$\\partial_t\\rho+\\nabla_x\\cdot(\\rho u)=0,$$\n\n$$\\partial_t(\\rho u)+\\nabla_x\\cdot(\\rho u\\otimes u+pI_3)=0,$$\n\n$$\\partial_tE+\\nabla_x\\cdot((E+p)u)=0.$$\n\nThe equations hold distributionally and pointwise because the limiting fields are $C^1$; the initial trace is the one supplied by the initial convergence. The weighted strong convergence is a hypothesis, not a consequence of small $\\varepsilon$, the entropy estimate, or the adopted model alone. This is a conditional model deduction, not an empirical claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 11",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/7b163cc0ea1359b70b018a1415399d64_MIT8_333F13_Lec11.pdf",
+              "locator": "Section III.H, printed pp. 67–68; local Maxwellian moments and zeroth-order fluid equations."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Section 2.4.2, printed pp. 41–43; local Maxwellian, ideal-gas pressure, and Euler reduction, with the streaming-equation qualification."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/pthm-fd-ideal-gas-euler-interface.md"
+      },
+      {
+        "id": "post-fd-bgk-relaxation",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Conserving homogeneous BGK idealization",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-conserving-bgk"
+        ],
+        "dependency_roles": {
+          "def-fd-conserving-bgk": "mathematical-premise"
+        },
+        "physical_scope": "Separately adopted, spatially homogeneous, single-species, monatomic BGK relaxation model with positive translational temperature, constant phenomenological relaxation time, and a dimensionless fast-collision scale. It is not the binary Boltzmann collision operator, an inhomogeneous hydrodynamic limit, a many-particle derivation, or an empirical claim.",
+        "statement": "Adopt Countable Choice $\\mathrm{AC}_\\omega$ as in the BGK definition: for every family $(X_j)_{j\\in\\mathbb N}$ of nonempty sets there is a function $a$ with domain $\\mathbb N$ such that $a(j)\\in X_j$ for every $j\\in\\mathbb N$.\n\nLet $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and $\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$. A velocity density $g:\\mathbb R^3\\to[0,\\infty)$ is admissible when it is finite-valued and Lebesgue measurable, $g\\,d^3v$ is a number density in $\\mathrm{m^{-3}}$ (so $g$ has units $\\mathrm{s^3\\,m^{-6}}$), and\n$$\\int_{\\mathbb R^3}\\omega_3(v)g(v)\\,d^3v<\\infty.$$\nThe primitive parameters are species mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per kelvin. For an admissible $g$ with $n[g]:=\\int_{\\mathbb R^3}g\\,d^3v>0$ and positive centered second moment, define\n$$u[g]:=\\frac{1}{n[g]}\\int_{\\mathbb R^3}v g(v)\\,d^3v,\\qquad T[g]:=\\frac{m}{3k_Bn[g]}\\int_{\\mathbb R^3}|v-u[g]|^2g(v)\\,d^3v.$$\nThe domain condition ensures $T[g]>0$.\nDefine its moment-matched Maxwellian by\n$$M[g](v)=n[g]\\left(\\frac{m}{2\\pi k_BT[g]}\\right)^{3/2}\\exp\\left(-\\frac{m|v-u[g]|^2}{2k_BT[g]}\\right).$$\nIt has the same number, momentum, and kinetic-energy moments as $g$. For a constant relaxation time $\\tau>0$ in seconds, adopt the homogeneous collision model\n$$Q_{\\rm BGK}(g)=\\frac{M[g]-g}{\\tau}.$$\n\nLet $f_0$ be an admissible initial density with positive number density and positive centered second moment. For each dimensionless $\\varepsilon>0$, a trajectory considered in the accelerated model is a continuously differentiable map\n$$f^\\varepsilon\\in C^1\\!\\left([0,\\infty);L^1\\!\\left(\\mathbb R^3,\\omega_3(v)\\,d^3v\\right)\\right),$$\nwhose states have nonnegative admissible representatives with positive number density and positive centered second moment at every $t\\ge0$, and whose initial trace satisfies $f^\\varepsilon(0)=f_0$ in this weighted $L^1$ space. The derivative is the Banach-space derivative, with the right derivative at $t=0$. Adopt\n$$\\frac{d}{dt}f^\\varepsilon(t)=\\frac{M[f^\\varepsilon(t)]-f^\\varepsilon(t)}{\\varepsilon\\tau},\\qquad t\\ge0,$$\nas an equality in $L^1(\\mathbb R^3,\\omega_3(v)\\,d^3v)$ at every $t\\ge0$.\n\nThe model also permits pointwise solution representatives $\\widetilde f:\\mathbb R^3\\times[0,\\infty)\\to[0,\\infty)$ that are jointly measurable, have finite $\\omega_3$-weighted velocity integral at every time, and satisfy $\\widetilde f(v,0)=f_0(v)$ for almost every $v$. Require their velocity sections to be continuous on $[0,\\infty)$ and differentiable on $(0,\\infty)$ for almost every $v$, with positive number density and centered second moment at every time. In this solution sense, require one full-measure set of velocities on which\n$$\\partial_t\\widetilde f(v,t)=\\frac{M[\\widetilde f(\\cdot,t)](v)-\\widetilde f(v,t)}{\\varepsilon\\tau}$$\nholds for every $t>0$, and require on each compact time interval a velocity-integrable majorant for $\\omega_3(v)|\\partial_t\\widetilde f(v,t)|$ independent of $t$. The Banach-space and pointwise equalities specify two solution senses for the same adopted model; neither asserts solution existence. This is a separate phenomenological relaxation model. It does not replace or follow from the binary Boltzmann postulate, and the relaxation-time form is not asserted to be an exact microscopic collision operator. No empirical premise or measured relaxation time is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse and C. David Levermore, Fluid Dynamics from Kinetic Equations",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+              "locator": "Lecture 2, section V, 'The BGK Operator', PDF p. 28; local Maxwellian relaxation with positive relaxation time."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Section 2.5.1, printed pp. 45–46; the relaxation-time approximation and its explicit non-exactness qualification."
+            }
+          ]
+        },
+        "reference": "items/post-fd-bgk-relaxation.md"
+      },
+      {
+        "id": "pthm-fd-bgk-equilibration",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Exact equilibrium approach in the BGK model",
+        "dependency_level": 5,
+        "deps": [
+          "def-countable-choice",
+          "post-fd-bgk-relaxation",
+          "def-fd-conserving-bgk",
+          "prop-fd-maxwellian-moments",
+          "thm-fd-homogeneous-bgk-limit",
+          "prop-fd-bgk-entropy-rate",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "def-derivative",
+          "thm-algebra-of-function-limits",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "post-fd-bgk-relaxation": "physical-assumption",
+          "def-fd-conserving-bgk": "mathematical-premise",
+          "prop-fd-maxwellian-moments": "mathematical-premise",
+          "thm-fd-homogeneous-bgk-limit": "mathematical-premise",
+          "prop-fd-bgk-entropy-rate": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-function-limits": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        },
+        "physical_scope": "Conditional exact homogeneous fast-relaxation branch of the separately adopted single-species BGK model, for nonnegative initial velocity densities with finite dimensionless third-moment weight, positive number density and centered second moment, finite reference-relative entropy, and the stated pointwise solution regularity. It is a model prediction, not a binary-Boltzmann theorem, an inhomogeneous Euler limit, or an empirical claim.",
+        "statement": "Assume Countable Choice $\\mathrm{AC}_\\omega$: every $\\mathbb N$-indexed family of nonempty sets has a choice function. Let $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and\n$\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$. Let\n$f_0:\\mathbb R^3\\to[0,\\infty)$ be a measurable velocity number density,\nwith $f_0$ in $\\mathrm{s^3\\,m^{-6}}$ and $f_0\\,d^3v$ measured in\n$\\mathrm{m^{-3}}$, satisfying\n$\\int\\omega_3 f_0\\,d^3v<\\infty$, number density\n$n_0=\\int f_0\\,d^3v>0$, positive centered second moment, and finite\nreference-relative entropy $\\int f_0|\\log(f_0/f_{\\rm ref})|\\,d^3v$, where\n$f_{\\rm ref}>0$ is constant in the same units as $f_0$. Take the primitive\nparticle mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per\nkelvin. Define $u_0=n_0^{-1}\\int v f_0\\,d^3v$ and\n$T_0=m(3k_Bn_0)^{-1}\\int |v-u_0|^2f_0\\,d^3v>0$. For any nonnegative velocity\ndensity $g$ with finite $\\omega_3$ moment, number density\n$n[g]=\\int g\\,d^3v>0$, and positive centered second moment, define\n$u[g]=n[g]^{-1}\\int vg\\,d^3v$,\n$T[g]=m(3k_Bn[g])^{-1}\\int|v-u[g]|^2g\\,d^3v$, and its normalized\nmoment-matched Maxwellian\n\n$$M[g](v)=n[g]\\left(\\frac{m}{2\\pi k_BT[g]}\\right)^{3/2}\\exp\\left(-\\frac{m|v-u[g]|^2}{2k_BT[g]}\\right).$$\n\nWrite $M=M[f_0]$; it has the same number, momentum, and kinetic-energy\nmoments as $f_0$.\nFor $\\tau>0$ in seconds and dimensionless $\\varepsilon>0$, consider the\nhomogeneous equation\n\n$$\\partial_t f^\\varepsilon(v,t)=\\frac{M[f^\\varepsilon](v,t)-f^\\varepsilon(v,t)}{\\varepsilon\\tau},\\qquad f^\\varepsilon(v,0)=f_0(v),\\quad t\\ge0.$$\n\nThere is a nonnegative solution\n$f^\\varepsilon\\in C^1([0,\\infty);L^1(\\omega_3\\,d^3v))$ given by\n\n$$f^\\varepsilon(v,t)=M(v)+e^{-t/(\\varepsilon\\tau)}(f_0(v)-M(v)).$$\n\nIt solves the equation in $L^1(\\omega_3\\,d^3v)$ and preserves the number,\nmomentum, and kinetic-energy moments of $f_0$. It is also the unique solution\nin the following pointwise class: a jointly measurable\n$\\tilde f:\\mathbb R^3\\times[0,\\infty)\\to[0,\\infty)$ with finite\n$\\omega_3$-weighted velocity integral at every time and initial trace\n$\\tilde f(v,0)=f_0(v)$ for almost every $v$, whose velocity sections are\ncontinuous on $[0,\\infty)$ and differentiable on $(0,\\infty)$ for almost\nevery $v$. Require a common full-measure set of velocities on which the\nequation holds for every $t>0$, and, on each compact time interval, an\nintegrable $\\omega_3$-weighted majorant for $\\partial_t\\tilde f$ independent\nof $t$. Also require the density and temperature of $\\tilde f$ to remain\npositive. These envelopes permit differentiation of the three moment\nintegrals and justify the conservation argument in the proof.\n\nFor each $T_*>0$, with the dimensionless fixed velocity weight\n$\\|g\\|_{1,3}=\\int_{\\mathbb R^3}(1+|v/v_*|^3)|g(v)|\\,d^3v$, which has\nunits $\\mathrm{m^{-3}}$ for velocity densities $g$, it satisfies\n\n$$\\|f^\\varepsilon(t)-M\\|_{1,3}=e^{-t/(\\varepsilon\\tau)}\\|f_0-M\\|_{1,3},\\qquad \\int_0^{T_*}\\|f^\\varepsilon(t)-M\\|_{1,3}\\,dt\\le\\varepsilon\\tau\\|f_0-M\\|_{1,3}.$$\n\nWriting $H(g)=\\int_{\\mathbb R^3}g\\log(g/f_{\\rm ref})\\,d^3v$ with $0\\log0:=0$,\nwhich has units $\\mathrm{m^{-3}}$ for velocity densities $g$, the entropy\ngap obeys\n\n$$0\\le H(f^\\varepsilon(t))-H(M)\\le e^{-t/(\\varepsilon\\tau)}\\bigl(H(f_0)-H(M)\\bigr).$$\n\nThus for each fixed $t>0$, $f^\\varepsilon(t)\\to M$ in this weighted $L^1$\nnorm as $\\varepsilon\\to0$, while $f^\\varepsilon(0)=f_0$; if $f_0$ differs\nfrom $M$ on a set of positive measure, the initial mismatch is nonzero. If\n$f_0=M$ almost everywhere, the formula gives the stationary equilibrium with\nzero norm and entropy gaps. This is an exact homogeneous BGK model prediction\nand does not assert an inhomogeneous Boltzmann-to-Euler limit or an observed\nrelaxation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse and C. David Levermore, Fluid Dynamics from Kinetic Equations",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+              "locator": "Lecture 2, section V, 'The BGK Operator', PDF p. 28; moment-preserving local-Maxwellian relaxation model."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Section 2.5.1, printed pp. 45–46; relaxation-time approximation and the warning that it is not exact."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/pthm-fd-bgk-equilibration.md"
+      }
+    ]
+  },
+  {
+    "order": 412,
+    "id": "fd-k02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Single-species elastic Boltzmann model — Examples",
+    "companion": "fd-k02",
+    "requires": [
+      "fd-k02"
+    ],
+    "items": [
+      {
+        "id": "texp-fd-bgk-preparation",
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Prepared non-Maxwellian distribution and initial layer",
+        "dependency_level": 6,
+        "deps": [
+          "def-countable-choice",
+          "pthm-fd-bgk-equilibration"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "pthm-fd-bgk-equilibration": "physical-result"
+        },
+        "physical_scope": "Hypothetical spatially homogeneous preparation for the single-species BGK model, using a compactly supported non-Maxwellian initial velocity density. No apparatus, observation, or empirical relaxation is reported.",
+        "statement": "Assume Countable Choice $\\mathrm{AC}_\\omega$: every $\\mathbb N$-indexed family of nonempty sets has a choice function.\n\nConsider a hypothetical homogeneous three-dimensional gas with particle mass $m>0$ in kilograms, Boltzmann constant $k_B>0$ in joules per kelvin, number density $n_0>0$ in $\\mathrm{m^{-3}}$, translational temperature $T_0>0$ in kelvins, and a constant reference density $f_{\\rm ref}>0$ with the same units as the velocity density below. Put $\\theta=k_BT_0/m$ in $\\mathrm{m^2\\,s^{-2}}$, $V_c=\\sqrt{3\\theta}$ in $\\mathrm{m\\,s^{-1}}$, and define the prepared number density in velocity space by\n\n$$f_0(v)=\\frac{n_0}{8V_c^3}\\,\\mathbf 1_{[-V_c,V_c]^3}(v),\\qquad v\\in\\mathbb R^3.$$\n\nThe density $f_0$ has units $\\mathrm{s^3\\,m^{-6}}$, so $f_0\\,d^3v$ is a number density in $\\mathrm{m^{-3}}$.\n\nHere $\\mathbf 1_C$ is the function equal to one on the cube $C$ and zero outside it. The corresponding Maxwellian with the same number density, zero mean velocity, and temperature $T_0$ is\n\n$$M(v)=n_0\\left(\\frac{m}{2\\pi k_BT_0}\\right)^{3/2}\\exp\\left(-\\frac{m|v|^2}{2k_BT_0}\\right).$$\n\nDefine the dimensionless weighted norm by $\\|g\\|_{1,3}=\\int_{\\mathbb R^3}(1+|v/v_*|^3)|g(v)|\\,d^3v$, where $v_*=1\\,\\mathrm{m\\,s^{-1}}$; for velocity densities $g$ it has units $\\mathrm{m^{-3}}$. Under the homogeneous fast-scale conserving BGK model with $\\tau>0$ seconds and dimensionless $\\varepsilon>0$, this preparation has an exact initial-layer solution: for every fixed $t>0$, $f^\\varepsilon(t)\\to M$ in this weighted $L^1$ norm as $\\varepsilon\\to0$, while $f^\\varepsilon(0)=f_0\\ne M$. The compactly supported $f_0$ is a hypothetical distribution, not an observed preparation or experiment.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse and C. David Levermore, Fluid Dynamics from Kinetic Equations",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+              "locator": "Lecture 2, section V, 'The BGK Operator', PDF p. 28; moment-preserving Maxwellian relaxation."
+            },
+            {
+              "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "locator": "Section 2.5.1, printed pp. 45–46; the phenomenological relaxation-time qualification."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/texp-fd-bgk-preparation.md"
+      }
+    ]
+  }
+]

@@ -1,0 +1,198 @@
+[
+  {
+    "order": 687,
+    "id": "fd-mp01",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Diffuse-interface coupling and energy",
+    "companion": "fd-mp01-examples",
+    "requires": [
+      "fd-x01",
+      "the-derivative-and-mean-value-theorems",
+      "topology-of-r"
+    ],
+    "items": [
+      {
+        "id": "def-fd-periodic-torus-domain",
+        "kind": "definition",
+        "title": "Periodic torus calculus",
+        "statement": "For an integer $d\\ge 1$, set $\\mathbb T^d:=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ and let $Q_d:=[0,2\\pi]^d$ be its chosen fundamental cube. A scalar or vector field on $\\mathbb T^d$ is represented by its $(2\\pi\\mathbb Z)^d$-periodic lift to $\\mathbb R^d$. For $k\\ge 0$ and $m\\ge 1$, $C^k_{\\rm per}(\\mathbb T^d;\\mathbb R^m)$ consists of such lifts whose componentwise partial derivatives through order $k$ exist, are continuous and periodic, and are bounded, uniformly continuous, and Riemann integrable on $Q_d$. For a scalar field $f$ and a vector field $v=(v_1,\\ldots,v_d)$, define\n\n$$\\nabla f:=(\\partial_1 f,\\ldots,\\partial_d f),\\qquad \\operatorname{div}v:=\\sum_{j=1}^d\\partial_jv_j,\\qquad \\Delta f:=\\sum_{j=1}^d\\partial_j^2f.$$\n\nThe integral of an integrable scalar field over $\\mathbb T^d$ means its Riemann integral over $Q_d$. For a matrix field $A=(A_{ij})$, $|A|^2:=\\sum_{i,j}|A_{ij}|^2$. The notation $C^1([0,T];C^k_{\\rm per})$ means that the field is continuously differentiable in time in the supremum norms of its spatial derivatives through order $k$. These are dimensionless mathematical conventions; they assign no physical units.",
+        "deps": [],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility",
+              "url": "https://d-nb.info/1352416549/34",
+              "locator": "§1, p. 1: the source fixes the periodic convention T^3=(R/2πZ)^3; the definition here gives its coordinatewise d-dimensional version."
+            }
+          ]
+        },
+        "reference": "items/def-fd-periodic-torus-domain.md"
+      },
+      {
+        "id": "lem-fd-periodic-integration-by-parts",
+        "kind": "lemma",
+        "title": "Periodic integration by parts on a flat torus",
+        "statement": "Let $d\\ge 1$, let $g\\in C^1_{\\rm per}(\\mathbb T^d;\\mathbb R)$, and let $F\\in C^1_{\\rm per}(\\mathbb T^d;\\mathbb R^d)$. Then\n\n$$\\int_{\\mathbb T^d}\\operatorname{div}F\\,dx=0,\\qquad \\int_{\\mathbb T^d}\\nabla g\\cdot F\\,dx=-\\int_{\\mathbb T^d}g\\,\\operatorname{div}F\\,dx.$$",
+        "deps": [
+          "def-fd-periodic-torus-domain",
+          "cor-mean-value-theorem"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 1,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "def-fd-periodic-torus-domain": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility",
+              "url": "https://d-nb.info/1352416549/34",
+              "locator": "§2, pp. 3–7: periodic mollification and integration-by-parts identities in the T^3 argument; the d-dimensional coordinate proof below is local."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/lem-fd-periodic-integration-by-parts.md"
+      },
+      {
+        "id": "def-fd-diffuse-interface-equations",
+        "kind": "definition",
+        "title": "Periodic Cahn–Hilliard incompressible flow system",
+        "statement": "Fix an integer $d\\ge1$, a time interval $[0,T]$ with $T>0$, constants $\\varepsilon,M,\\nu>0$, and a potential $W\\in C^2(\\mathbb R)$ that is bounded below. Use the torus, integral, periodic-lift, and time-regularity conventions of periodic torus calculus, with all spatial derivatives taken on the lifts. For vectors $a,b\\in\\mathbb R^d$, write $a\\cdot b=\\sum_{j=1}^d a_jb_j$ and $|a|^2=a\\cdot a$; set $(\\Delta u)_i=\\sum_{j=1}^d\\partial_j^2u_i$, $(\\nabla u)_{ij}=\\partial_j u_i$, and $(u\\cdot\\nabla)f=\\sum_{j=1}^du_j\\partial_jf$, componentwise when $f$ is vector-valued. Write $\\nabla\\cdot u=\\operatorname{div}u$. A classical tuple consists of periodic fields $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$, $\\phi:[0,T]\\times\\mathbb T^d\\to\\mathbb R$, and $\\pi:[0,T]\\times\\mathbb T^d\\to\\mathbb R$, with $u\\in C^1([0,T];C^2_{\\rm per})$, $\\phi\\in C^1([0,T];C^1_{\\rm per})\\cap C([0,T];C^2_{\\rm per})$, and $\\pi\\in C([0,T];C^1_{\\rm per})$. Define the chemical-potential field, which is not an independent unknown, by\n\n$$\\mu_c:=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta\\phi,$$\n\nand require $\\mu_c\\in C([0,T];C^2_{\\rm per})$ so that its Laplacian is pointwise defined. The dimensionless periodic incompressible phase-flow system is\n\n$$\\partial_t\\phi+u\\cdot\\nabla\\phi=M\\Delta\\mu_c,\\qquad \\partial_tu+(u\\cdot\\nabla)u+\\nabla\\pi=\\nu\\Delta u-\\phi\\nabla\\mu_c,\\qquad \\nabla\\cdot u=0.$$\n\nHere $\\phi$ is a scalar order parameter; “diffuse interface” refers only to representing interfacial structure through this field and its spatial-gradient energy. The scalar $\\pi$ is the multiplier enforcing the divergence constraint. The associated total energy is\n\n$$E(t):=\\int_{\\mathbb T^d}\\left(\\frac12|u(t,x)|^2+\\frac{\\varepsilon}{2}|\\nabla\\phi(t,x)|^2+\\varepsilon^{-1}W(\\phi(t,x))\\right)\\,dx.$$\n\nAll coefficients and fields in this definition are dimensionless mathematical quantities; no physical units, empirical calibration, sharp-interface limit, or claim that $\\phi$ is a probability or positive density is asserted. A physical identification requires additional density, phase-scale, surface-energy, length/time-scale, and chemical-potential units.",
+        "deps": [
+          "def-fd-periodic-torus-domain"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 1,
+        "dependency_roles": {
+          "def-fd-periodic-torus-domain": "mathematical-premise"
+        },
+        "domain": "mathematics",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models",
+              "url": "https://www.oden.utexas.edu/media/reports/2017/1701.pdf",
+              "locator": "§§11.2 and 11.4, printed pp. 209–212, equations (11.1)–(11.10) and (11.16)–(11.21)."
+            },
+            {
+              "title": "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility",
+              "url": "https://d-nb.info/1352416549/34",
+              "locator": "§1, p. 1, equations (1.1)–(1.5), for the periodic coupled-system convention and source formulation."
+            }
+          ]
+        },
+        "reference": "items/def-fd-diffuse-interface-equations.md"
+      },
+      {
+        "id": "thm-fd-diffuse-interface-energy",
+        "kind": "theorem",
+        "title": "Cancellation of capillary and transport energy exchange",
+        "statement": "Let $d\\ge1$, $T>0$, $\\varepsilon,M,\\nu>0$, and $W\\in C^2(\\mathbb R)$ be bounded below. On $\\mathbb T^d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$, let $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$, $\\phi:[0,T]\\times\\mathbb T^d\\to\\mathbb R$, and $\\pi:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be periodic fields with\n\n$$u\\in C^1([0,T];C^2_{\\rm per}(\\mathbb T^d;\\mathbb R^d)),\\qquad \\phi\\in C^1([0,T];C^1_{\\rm per}(\\mathbb T^d;\\mathbb R))\\cap C([0,T];C^2_{\\rm per}(\\mathbb T^d;\\mathbb R)),\\qquad \\pi\\in C([0,T];C^1_{\\rm per}(\\mathbb T^d;\\mathbb R)).$$\n\nDefine $\\mu_c:=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta\\phi$ and assume that this defined field belongs to $C([0,T];C^2_{\\rm per}(\\mathbb T^d;\\mathbb R))$, so its gradient and Laplacian in the equations below are pointwise defined. Suppose the fields satisfy pointwise\n\n$$\\partial_t\\phi+u\\cdot\\nabla\\phi=M\\Delta\\mu_c,\\qquad \\partial_tu+(u\\cdot\\nabla)u+\\nabla\\pi=\\nu\\Delta u-\\phi\\nabla\\mu_c,\\qquad \\nabla\\cdot u=0.$$\n\nFor the energy\n\n$$E(t):=\\int_{\\mathbb T^d}\\left(\\frac12|u(t,x)|^2+\\frac{\\varepsilon}{2}|\\nabla\\phi(t,x)|^2+\\varepsilon^{-1}W(\\phi(t,x))\\right)\\,dx,$$\n\nwhere $|\\nabla u|^2=\\sum_{i,j=1}^d|\\partial_j u_i|^2$, the exact conditional identity is\n\n$$\\frac{dE}{dt}(t)=-\\nu\\int_{\\mathbb T^d}|\\nabla u(t,x)|^2\\,dx-M\\int_{\\mathbb T^d}|\\nabla\\mu_c(t,x)|^2\\,dx\\qquad(0<t<T).$$",
+        "deps": [
+          "def-fd-diffuse-interface-equations",
+          "lem-fd-periodic-integration-by-parts",
+          "cor-mean-value-theorem",
+          "thm-heine-borel-r"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 2,
+        "dependency_roles": {
+          "def-fd-diffuse-interface-equations": "mathematical-premise",
+          "lem-fd-periodic-integration-by-parts": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-heine-borel-r": "mathematical-premise"
+        },
+        "domain": "mathematics",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models",
+              "url": "https://www.oden.utexas.edu/media/reports/2017/1701.pdf",
+              "locator": "§§11.2 and 11.4, printed pp. 209–212, equations (11.1)–(11.10) and (11.16)–(11.21)."
+            },
+            {
+              "title": "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility",
+              "url": "https://d-nb.info/1352416549/34",
+              "locator": "§1, equations (1.1)–(1.10), and §2, Theorem 1 proof, pp. 1–7; the source's weak-solution assumptions are not used here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/thm-fd-diffuse-interface-energy.md"
+      }
+    ]
+  },
+  {
+    "order": 688,
+    "id": "fd-mp01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Diffuse-interface coupling and energy — Examples",
+    "companion": "fd-mp01",
+    "requires": [
+      "fd-mp01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-phase-constant-equilibrium",
+        "kind": "example",
+        "title": "Constant phase is an energy-stationary state",
+        "statement": "Let $d\\ge1$, $T>0$, $\\varepsilon,M,\\nu>0$, $W\\in C^2(\\mathbb R)$ be bounded below, and $c\\in\\mathbb R$. On $\\mathbb T^d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$, consider the periodic equations $\\partial_t\\phi+u\\cdot\\nabla\\phi=M\\Delta\\mu_c$, $\\partial_tu+(u\\cdot\\nabla)u+\\nabla\\pi=\\nu\\Delta u-\\phi\\nabla\\mu_c$, and $\\nabla\\cdot u=0$, with $\\mu_c=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta\\phi$. The constant fields $u=0$, $\\phi=c$, and $\\pi=0$ solve this system with constant chemical potential $\\mu_c=\\varepsilon^{-1}W'(c)$. Their total energy is $E(t)=(2\\pi)^d\\varepsilon^{-1}W(c)$ for all $t\\in[0,T]$, so this is an energy-stationary state, meaning that its energy is constant in time; no local-minimum or stability claim is made. All quantities are dimensionless mathematical variables.",
+        "deps": [
+          "thm-fd-diffuse-interface-energy"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "thm-fd-diffuse-interface-energy": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "reference": "items/ex-fd-phase-constant-equilibrium.md"
+      }
+    ]
+  }
+]

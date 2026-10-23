@@ -1,0 +1,211 @@
+{
+  "group": "i",
+  "batches": [
+    "10"
+  ],
+  "pages_read": [
+    "fd-mf03",
+    "fd-mf03-examples"
+  ],
+  "items_read": [
+    "lem-fd-isotropic-linear-classification",
+    "def-fd-simple-fluid-state",
+    "lem-fd-helmholtz-chart",
+    "lem-fd-response-acoustic-algebra",
+    "lem-fd-gibbs-entropy-residual",
+    "lem-fd-newtonian-admissibility",
+    "ex-fdmath-negative-bulk-residual"
+  ],
+  "conventions": [
+    {
+      "convention": "The state relation is e ∈ C²(U), with U open in (0,∞) × R, coordinates (v,s), T=e_s, p=−e_v, and ρ=1/v. Each state partial derivative holds the other coordinate fixed.",
+      "fixed_by": "def-fd-simple-fluid-state",
+      "matters_for": [
+        "lem-fd-helmholtz-chart",
+        "lem-fd-response-acoustic-algebra",
+        "lem-fd-gibbs-entropy-residual"
+      ]
+    },
+    {
+      "convention": "T>0 and e_ss>0 are local thermal-chart hypotheses. Neither global inversion nor positivity of e_vv or the Hessian determinant follows from the definition.",
+      "fixed_by": "def-fd-simple-fluid-state",
+      "matters_for": [
+        "lem-fd-helmholtz-chart",
+        "lem-fd-response-acoustic-algebra",
+        "lem-fd-gibbs-entropy-residual"
+      ]
+    },
+    {
+      "convention": "Isotropy means equivariance under every proper rotation Q ∈ SO(3), for a real-linear map from Sym(3) to Sym(3). Linearity and equivariance are assumptions.",
+      "fixed_by": "lem-fd-isotropic-linear-classification",
+      "matters_for": [
+        "lem-fd-newtonian-admissibility",
+        "post-fd-newtonian-fourier"
+      ]
+    },
+    {
+      "convention": "L_ij=∂u_i/∂x_j, D=(L+Lᵀ)/2, θ=tr D, and A:B=Σ_ij A_ij B_ij. Stress is split as σ=−pI+τ; boundary normals and conductive heat flux are outward.",
+      "fixed_by": "lem-fd-gibbs-entropy-residual",
+      "matters_for": [
+        "lem-fd-newtonian-admissibility",
+        "pthm-fd-entropy-production",
+        "pthm-fd-perfect-gas-temperature"
+      ]
+    },
+    {
+      "convention": "The Gibbs identity assumes countable choice, positive density and temperature, the specified smooth material motion and contact hypotheses, continuity, and separate linear/angular-momentum and total-energy balances. It does not assert nonnegative entropy production.",
+      "fixed_by": "lem-fd-gibbs-entropy-residual",
+      "matters_for": [
+        "lem-fd-newtonian-admissibility",
+        "pthm-fd-entropy-production",
+        "pthm-fd-perfect-gas-temperature"
+      ]
+    },
+    {
+      "convention": "The coefficient test varies symmetric D and temperature-gradient value g independently, with T>0. Bulk viscosity is ζ=λ+2μ/3; conductivity enters through sym K, and λ need not be nonnegative.",
+      "fixed_by": "lem-fd-newtonian-admissibility",
+      "matters_for": [
+        "ex-fdmath-negative-bulk-residual",
+        "pthm-fd-entropy-production"
+      ]
+    },
+    {
+      "convention": "Acoustic linearization is a pointwise first variation at ε=0, with perturbed density admissible locally at each point. Plane waves and growing modes solve the linearized equations; no nonlinear approximation error or lifespan estimate is asserted.",
+      "fixed_by": "lem-fd-response-acoustic-algebra",
+      "matters_for": [
+        "pthm-fd-acoustic-linearization"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-simple-fluid-state",
+      "statement": "Let U⊂(0,∞)×R be open, with coordinates (v,s), and let e:U→R have continuous total derivatives through order two. Define T=e_s, p=−e_v, and ρ=1/v. The local thermal-chart hypothesis at a state is T>0 and e_ss>0; the definition imposes no sign condition on e_vv or J_e and no global invertibility or convexity condition.",
+      "used_by": [
+        "lem-fd-helmholtz-chart",
+        "lem-fd-response-acoustic-algebra",
+        "lem-fd-gibbs-entropy-residual",
+        "post-fd-local-equilibrium"
+      ]
+    },
+    {
+      "id": "lem-fd-gibbs-entropy-residual",
+      "statement": "Under the Statement’s countable-choice, C² state-relation and orientation-preserving material-motion hypotheses, positive C¹ density and temperature, C¹ state and stress fields, contact balance, continuity equation, and separate linear/angular-momentum and total-energy integral balances, σ is symmetric and the entropy residual G:=ρD_t s+div(q/T)−ρr/T satisfies G=τ:D/T−q·∇T/T² for σ=−pI+τ.",
+      "used_by": [
+        "lem-fd-newtonian-admissibility",
+        "pthm-fd-entropy-production",
+        "pthm-fd-perfect-gas-temperature"
+      ]
+    },
+    {
+      "id": "lem-fd-isotropic-linear-classification",
+      "statement": "If L:Sym(3)→Sym(3) is real-linear and L(QDQᵀ)=QL(D)Qᵀ for every Q∈SO(3) and D∈Sym(3), then there are unique λ,μ∈R such that L(D)=2μD+λ(tr D)I for every D∈Sym(3). Conversely, every map of this form is real-linear and satisfies that equivariance.",
+      "used_by": [
+        "lem-fd-newtonian-admissibility",
+        "post-fd-newtonian-fourier"
+      ]
+    },
+    {
+      "id": "lem-fd-newtonian-admissibility",
+      "statement": "Assume countable choice. For fixed μ,λ∈R and K∈R³ˣ³, set ζ=λ+2μ/3, τ=2μD+λ(tr D)I, and q=−Kg. Then Q(D,g,T)=(2μ|D₀|²+ζθ²)/T+gᵀ(sym K)g/T². This is nonnegative for every symmetric D, every g∈R³, and every T>0 if and only if μ≥0, ζ≥0, and xᵀ(sym K)x≥0 for every x∈R³.",
+      "used_by": [
+        "ex-fdmath-negative-bulk-residual",
+        "pthm-fd-entropy-production"
+      ]
+    },
+    {
+      "id": "lem-fd-helmholtz-chart",
+      "statement": "For e∈C²(U) at (v₀,s₀) with T₀=e_s(v₀,s₀)>0 and e_ss(v₀,s₀)>0, there are open intervals V and J about v₀ and T₀ and a unique local C¹ branch s(v,T), valued in a fixed neighborhood of s₀, satisfying e_s(v,s(v,T))=T. For a=e(v,s(v,T))−Ts(v,T), a_T=−s, a_v=e_v=−p, s_v=−e_sv/e_ss, s_T=1/e_ss, a_TT=−1/e_ss, and a_vv=e_vv−e_vs e_sv/e_ss, evaluated at the chart point.",
+      "used_by": [
+        "lem-fd-response-acoustic-algebra",
+        "lem-fd-gibbs-entropy-residual"
+      ]
+    },
+    {
+      "id": "lem-fd-response-acoustic-algebra",
+      "statement": "Under the stated C² state relation and local thermal-chart hypotheses, P(ρ)=−e_v(1/ρ,s_b) satisfies P′(ρ_b)=v_b²e_vv(v_b,s_b)=c_s². The pointwise first variation of the displayed barotropic system about (ρ_b,0) is r_t+ρ_b div w=0 and ρ_b w_t+c_s²∇r=0, implying r_tt=c_s²Δr. The stated oscillatory modes for c_s²>0 and exponential modes for c_s²<0 solve that linear system.",
+      "used_by": [
+        "pthm-fd-acoustic-linearization"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+      "used_for": "Attainment of the quadratic-form maximum on the unit sphere and the invariant-plane unit circle in the local spectral-decomposition proof. Its nonemptiness and ZF qualifications are preserved.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict monotonicity, uniform difference bounds, and continuity of the local thermal inverse.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Existence of the unique thermal-chart branch between the chosen endpoint values.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Helmholtz derivatives, fixed-entropy pressure response, and the material Gibbs cancellation.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit AC_ω premise inherited through the surface-integration and balance-equivalence suppliers and carried into admissibility and the example.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+      "used_for": "The balance supplier’s bounded one-sided C¹ domains, outward normal, and up-to-boundary regularity conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-surface-integral-on-a-compact-c-one-hypersurface",
+      "used_for": "The Gram-density surface integral used by the contact and balance suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+      "used_for": "Chart-independent finite surface measure and consistent outward normals in the contact-balance prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Conversion of material-subdomain boundary fluxes to local momentum and energy equations in the Gibbs identity’s balance supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+      "finding": "Its Definition contains inline wikilinks, including “Assume AC_ω ([[def-countable-choice]])” and “Derivatives use [[def-total-derivative-in-euclidean-space]]”. These violate the mandatory uninterrupted-definition rule; the links have not been moved to an immediately following Definition references section. The mathematical conventions themselves support the present use.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-surface-integral-on-a-compact-c-one-hypersurface",
+      "finding": "Its Definition contains inline links to def-bounded-c-one-domain-boundary-charts-and-outward-normal, lem-finite-ambient-partitions-for-euclidean-boundary-integration, def-gram-matrix-and-gram-determinant, and def-nonnegative-lebesgue-integral. The mandatory uninterrupted-definition rule requires these links after the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "pthm-fd-newtonian-kinetic-decay",
+      "finding": "Proof 2.1 says “Integrate over the fixed domain or one periodic cell” and concludes the differential energy identity by vanishing or cancellation of boundary fluxes. The only declared dependency is def-fd-incompressible-newtonian-model; no integration-by-parts/divergence supplier or local derivation justifies this passage. The smoothness and boundary assumptions make the calculation standard, but the mathematical prerequisite and its foundational qualifications need to be supplied explicitly.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-mf03",
+      "to": "fd-mf02",
+      "faithful": true,
+      "note": "Compared the Gibbs consumer with the complete local-balance, transport, and contact arguments. It supplies the smooth motion, contact and integral-balance hypotheses, carries AC_ω, explicitly recenters time to meet the containing-zero convention, and converts σ:L to σ:D using the supplied stress symmetry. The internal-energy identity and flux signs are preserved."
+    },
+    {
+      "from": "fd-f03",
+      "to": "fd-mf03",
+      "faithful": true,
+      "note": "Compared both interfaces and actual uses: Newtonian/Fourier closure adopts linearity and SO(3) equivariance; local equilibrium preserves the state definition; entropy production and perfect-gas temperature retain the complete conditional Gibbs hypotheses; acoustic linearization preserves the local fixed-entropy pressure restriction and first-variation scope. The coefficient test retains independent D and g variation and permits negative λ when ζ≥0."
+    }
+  ]
+}

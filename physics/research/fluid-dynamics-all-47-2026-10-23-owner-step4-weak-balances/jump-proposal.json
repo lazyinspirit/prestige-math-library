@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "author": "/root/fluid_step4_weak_balances",
+  "mode": "unapplied-draft-only",
+  "native_review": false,
+  "native_adjudication": false,
+  "recertification": false,
+  "at": "2026-10-22T22:47:51.525491+00:00",
+  "cycle": 1,
+  "finding": "Confirmed ill-typed universal [F] dot n notation. Momentum flux is a 3x3 matrix and requires its matrix-vector normal product. The explicit displayed momentum jump was already correctly typed.",
+  "proposals": [
+    {
+      "id": "lem-fd-weak-jump-consistency",
+      "live_source": "items/lem-fd-weak-jump-consistency.md",
+      "before": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/before/lem-fd-weak-jump-consistency.md",
+        "sha256": "6854a048707d76df353c90a7d8af1026b0a43c6c46e3d8ca0a309f7c84405d7a"
+      },
+      "candidate": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/candidate/lem-fd-weak-jump-consistency.md",
+        "sha256": "e26a38211c334d7cf10bdcdc8ca7b6550718d59b201b2cc4799dbe029036f123"
+      },
+      "patch": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/patches/lem-fd-weak-jump-consistency.patch",
+        "sha256": "074c7a6009b3b0c92b1e28a26b1b0ea6f7b67e347f64b977e1bbb6948e443c49"
+      },
+      "edits": [
+        {
+          "before_excerpt": "\\lambda([F]\\cdot n-V_n[U])",
+          "after_excerpt": "\\lambda([F]n-V_n[U])",
+          "expected_matches": 1
+        },
+        {
+          "before_excerpt": "when $[F]\\cdot n-V_n[U]=0$",
+          "after_excerpt": "when $[F]n-V_n[U]=0$",
+          "expected_matches": 1
+        }
+      ],
+      "metadata_unchanged": true,
+      "statement_changed": false,
+      "scope_change": false
+    },
+    {
+      "id": "pthm-fd-conservation-jump-laws",
+      "live_source": "items/pthm-fd-conservation-jump-laws.md",
+      "before": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/before/pthm-fd-conservation-jump-laws.md",
+        "sha256": "d0fb569a2bf31268f03d99f778044897d4dd27857185a815879564e54c08db33"
+      },
+      "candidate": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/candidate/pthm-fd-conservation-jump-laws.md",
+        "sha256": "6484b4a35d6c6dc4de84d882cd60774d208acb02ded89676d35fa37fe7a4dd62"
+      },
+      "patch": {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/patches/pthm-fd-conservation-jump-laws.patch",
+        "sha256": "eccb76339821e915f20155d600117cad9e1ddfef877d3a6902697ca465fcd473"
+      },
+      "edits": [
+        {
+          "before_excerpt": "Equivalently, for any conservative density $U$ and flux $F$ above, the interface coefficient is $[F]\\cdot n-V_n[U]$; it must vanish for conservation and be nonnegative for physical entropy.",
+          "after_excerpt": "Equivalently, for any conservative density $U$ and flux $F$ above, the interface coefficient is $[F]n-V_n[U]$. Here $[F]n$ is matrix-vector multiplication for the momentum flux; for each scalar law its vector flux is identified with a one-row matrix, so $[F]n=[F]\\cdot n$. The coefficient must vanish for conservation and be nonnegative for physical entropy.",
+          "expected_matches": 1
+        },
+        {
+          "before_excerpt": "integration on the two sides gives interface coefficient $[F]\\cdot n-V_n[U]$;",
+          "after_excerpt": "integration on the two sides gives interface coefficient $[F]n-V_n[U]$, using the scalar-law row identification stated above;",
+          "expected_matches": 1
+        },
+        {
+          "before_excerpt": "its action is exactly the interface measure with coefficient $[F]\\cdot n-V_n[U]$.",
+          "after_excerpt": "its action is exactly the interface measure with coefficient $[F]n-V_n[U]$, with the scalar-law row identification from the Statement.",
+          "expected_matches": 1
+        }
+      ],
+      "metadata_unchanged": true,
+      "statement_changed": true,
+      "scope_change": false
+    }
+  ],
+  "inputs": {
+    "items/lem-fd-weak-jump-consistency.md": "6854a048707d76df353c90a7d8af1026b0a43c6c46e3d8ca0a309f7c84405d7a",
+    "items/pthm-fd-conservation-jump-laws.md": "d0fb569a2bf31268f03d99f778044897d4dd27857185a815879564e54c08db33",
+    "items/def-fd-conservative-weak-form.md": "401294f7dba2d634eaf0a7892e5ad176d9da90bf314397e40b04b1c2f20f5b53",
+    "items/post-fd-weak-balances.md": "7f34919fc6986989b7047e9fb0a7e5fa4f0ff0558dccf40a2eca20f0001c9061",
+    "items/def-fd-quantity-and-frame-conventions.md": "ab674c8978a426247bcc7da905e4f87e734a986a8ac72786ad5f7014080ea6bd"
+  },
+  "consumer_review": "consumer-use-matrix.json",
+  "reading_limits": "Read the complete current five local carriers saved in observed/ and both complete placement pages. Read current native Luna rejection and inspected actual Step-4 state/git history. Imported mathematics and external literature were not reread or modified; no new source-coverage, mathematical acceptance, stamp or gate is claimed. Prior Step-3 weak8 current-boundary-review was inspected only for historical context and is not substituted for current-carrier reading.",
+  "remaining_owner_work": "Native Step 5 independently verifies/adopts any actual source repairs, binds current contexts, reconciles owning contracts/manifests/levels if needed, and performs ordinary certification and gates. This evidence does none of those operations.",
+  "validation": {
+    "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/jump-validation.json",
+    "sha256": "c6b6ae950a2baa98393e9bf31c4600f826f17d2a8eb34a211c07afb20a13bef5"
+  }
+}

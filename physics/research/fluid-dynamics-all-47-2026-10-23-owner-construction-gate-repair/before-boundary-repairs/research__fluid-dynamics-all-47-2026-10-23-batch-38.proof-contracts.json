@@ -1,0 +1,271 @@
+{
+  "version": 1,
+  "level": "fluid-dynamics-all-47-2026-10-23-batch-38",
+  "scope": [
+    "post-fd-eddy-viscosity-closure",
+    "pthm-fd-eddy-closure-resolved-dissipation",
+    "ex-fd-eddy-shear-production"
+  ],
+  "contracts": {
+    "post-fd-eddy-viscosity-closure": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines the normalized positive periodic filter, the exact filtered covariance, the symmetric rate matrix, the 3D model tensor 2kI_3/3 - 2nu_t D, and its modeled transfer with units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Statement is limited to the smooth periodic 3D incompressible Newtonian model and treats k and nu_t as prescribed nonnegative model fields. It explicitly disclaims exact-covariance equality, positive-semidefiniteness of the modeled tensor, empirical adequacy in every regime, and universal no-backscatter."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Washington ME 544 §§3–5, Gibbs LES Lecture 12 pp. 7–8 and 17–24, and MIT OCW 12.820 Chapter 3 §§3.6–3.8 were inspected at the recorded locators. The first two independently support the LES stress sign and eddy-viscosity model; MIT supports the distinction between added closure assumptions and deductions."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is an adopted postulate with proof not-applicable. The text says the closure is not derived from the Newtonian equations and does not assert exact-covariance equality or physical validation."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-eddy-closure-resolved-dissipation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-eddy-viscosity-closure",
+          "source_section": "Postulate",
+          "quote": "$$\\tau_{\\ell}^{\\rm model}=\\frac{2k}{3}I_3-2\\nu_tD_\\ell,\\qquad \\Pi_{\\ell}^{\\rm model}=-\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell",
+          "uses": ["2.1", "3.1"]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "The branch is specified by\n$$\n\\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad\n\\sigma=-pI_3+2\\mu D,\\qquad\n\\rho_0D_tu=\\operatorname{div}\\sigma,\n$$",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-filtered-covariance-energy",
+          "source_section": "Statement",
+          "quote": "Consequently, for every $t\\in I$,\n\n$$\\frac{d}{dt}\\frac12\\int_{\\mathbb T_L^d}|\\overline u_\\ell|^2\\,d\\mu_L+\\nu\\int_{\\mathbb T_L^d}|\\nabla\\overline u_\\ell|_F^2\\,d\\mu_L=\\int_{\\mathbb T_L^d}\\tau_\\ell:\\nabla\\overline u_\\ell\\,d\\mu_L+\\int_{\\mathbb T_L^d}\\overline f_\\ell\\cdot\\overline u_\\ell\\,d\\mu_L.$$\n\nThe forward-transfer sign convention is $\\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell$; this theorem makes no sign assertion for $\\Pi_\\ell$.",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-periodic-filter-normalization-and-commutation",
+          "source_section": "Statement",
+          "quote": "then the filtered field has the same regularity and, for every spatial multi-index $\\beta$,\n\n$$\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_x^\\beta q}_\\ell,\\qquad \\partial_t\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_t\\partial_x^\\beta q}_\\ell.$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "For any smooth periodic vector field $u:\\mathbb T_L^d\\to\\mathbb R^d$, define the subfilter stress and transfer by\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell,$$",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Decompose the resolved gradient into its symmetric part D_ell and skew-symmetric part W_ell. Pairing entries (i,j) and (j,i) cancels each off-diagonal contraction and the diagonal of W_ell is zero, so D_ell:grad(ubar_ell)=|D_ell|_F^2.",
+          "inputs": ["given", "algebra"]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Derivative commutation and div(u)=0 give div(ubar_ell)=0; therefore I_3:grad(ubar_ell)=0.",
+          "inputs": ["A2", "F3", "given", "algebra"]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Contracting the adopted model stress with grad(ubar_ell), its isotropic term vanishes by step 1.2 and its deviatoric term is -2nu_t|D_ell|_F^2 by step 1.1. Thus Pi_model=2nu_t|D_ell|_F^2>=0.",
+          "inputs": ["A1", "step 1.1", "step 1.2", "algebra"]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Under the additional nu>0 equation hypotheses, the exact filtered energy identity has +tau_ell:grad(ubar_ell) on the right. The adopted model replaces that stress slot by tau_model, whose contribution is -Pi_model<=0 by step 2.1; this is not a sign assertion about exact tau_ell.",
+          "inputs": ["A1", "F1", "F2", "F4", "step 2.1", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model is three-dimensional on a nonempty periodic torus."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If nu_t=0 or D_ell=0, step 2.1 gives Pi_model=0 for every k>=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The physical supplier and the statement fix the spatial dimension at three."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: L>0 and 0<ell<L/2 are required; excluded endpoint widths are not asserted. The pointwise contraction is valid for every such ell."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero at nu_t=0; the isotropic k term remains zero in the contraction for every k>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 carry Countable Choice through the normalized torus/filter convention. The finite-dimensional contraction uses no additional choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way sign identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way sign identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero eddy viscosity",
+          "inputs": ["A1", "step 2.1"],
+          "expected": "Setting nu_t=0 gives Pi_model=0 regardless of k and the divergence-free resolved gradient."
+        },
+        {
+          "name": "zero strain",
+          "inputs": ["step 1.1", "step 2.1"],
+          "expected": "Setting D_ell=0 gives Pi_model=0; no positive dissipation is claimed when the modeled strain vanishes."
+        },
+        {
+          "name": "simple shear",
+          "inputs": ["step 1.1", "step 2.1"],
+          "expected": "For gradient with only partial_y ubar_x=S, |D_ell|_F^2=S^2/2 and Pi_model=nu_t S^2."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the contraction identity; no numerical sampling, empirical measurement, or statistical inference is used.",
+      "risk_review": {
+        "status": "conditional-proof-complete; current-suppliers-ready; independent-review-pending",
+        "reviewer": "beta-batch-38",
+        "notes": "The current F03 definition and the LES filter, commutation lemma, and exact energy theorem were read in full; their actual hypotheses and conventions match the consuming proof. Fresh loadStep1Record/step1Decision checks and content-hash comparisons found the current supplier records ready and hash-current. This records authoring readiness only; no independent proof approval or source acceptance is claimed."
+      }
+    },
+    "ex-fd-eddy-shear-production": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "pthm-fd-eddy-closure-resolved-dissipation",
+          "source_section": "Statement",
+          "quote": "Then, at every $(x,t)\\in\\mathbb T_L^3\\times I$,\n\n$$\\Pi_{\\ell}^{\\rm model}(x,t)=2\\nu_t(x,t)|D_\\ell(x,t)|_F^2\\ge0,\\qquad \\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell=-2\\nu_t|D_\\ell|_F^2\\le0.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The symmetric part of the simple-shear gradient has off-diagonal entries S/2 in positions (1,2) and (2,1); summing their squares gives |D_ell|_F^2=S^2/2.",
+          "inputs": ["given", "algebra"]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitute |D_ell|_F^2=S^2/2 and nu_t=nu_0 into the supplier identity to obtain Pi_model=nu_0 S^2>=0; the units are m^2 s^-3, and the value is zero if S=0 or nu_0=0.",
+          "inputs": ["A1", "A2", "step 1.1", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a pointwise state in the stated 3D model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "S=0 or nu_0=0 gives modeled transfer zero by step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The physical model fixes dimension three."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No limiting spatial domain or zero filter width is considered in this local calculation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The permitted boundary value nu_0=0 is covered and gives zero in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 carry Countable Choice; the finite matrix calculation uses no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct one-way calculation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct one-way calculation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero shear",
+          "inputs": ["given", "step 1.1", "step 2.1"],
+          "expected": "S=0 gives D_ell=0 and Pi_model=0."
+        },
+        {
+          "name": "zero eddy viscosity",
+          "inputs": ["A1", "step 2.1"],
+          "expected": "nu_0=0 gives Pi_model=0 for every shear rate S."
+        },
+        {
+          "name": "general simple shear",
+          "inputs": ["A1", "step 1.1", "step 2.1"],
+          "expected": "For arbitrary real S and nu_0>=0, Pi_model=nu_0 S^2>=0."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic evaluations of the model formula; no empirical data or numerical measurements are used.",
+      "risk_review": {
+        "status": "conditional-example-complete; inherited-suppliers-ready; independent-review-pending",
+        "reviewer": "beta-batch-38",
+        "notes": "The example is explicitly a pointwise model-state calculation, not a reported experiment or a solution claim. Its parent theorem and the current batch-11/batch-37 supplier records were inspected and are ready with current hashes. This is authoring readiness, not independent proof approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,306 @@
+PDF file page 1 (one-based)
+3
+The Navier-Stokes Equation
+So far we’ve built up some intuition for how ﬂuids ﬂow. But we’ve missed an ingredient
+and it turns out that this ingredient is rather important. This is the internal friction
+experienced by a ﬂuid, known as viscosity.
+We’ll give a more careful discussion of
+viscosity shortly in Section 3.1. But ﬁrst we give a quick, slightly handwavy derivation
+of the relevant equation.
+The Euler equation describing ﬂuid motion is, as we’ve seen, just the continuum
+version of “F = ma”. It is
+⇢Du
+Dt = −rP + f
+(3.1)
+where f describes any other forces experienced by the ﬂuid. We want to write down
+the force that arises from friction.
+We already met friction brieﬂy in our introduction to Newtonian Mechanics. There
+we explained that friction is not a fundamental force, but one that arises from the
+underlying interactions of many (say, 1023) particles. We stated, without proof, that
+particles moving slowly with speed v through very viscous ﬂuids experience linear drag,
+with F ⇠−v, while particles moving more quickly through less viscous ﬂuids experience
+quadratic drag F ⇠−v2. (For what it’s worth, we’ll recover the equations for linear
+drag in Section 3.4, while quadratic drag involves turbulent ﬂows and is not so easy to
+derive from ﬁrst principles.) The ﬁrst question that we want to ask in these lectures
+is: what kind of friction force does the ﬂuid experience when it rubs against itself?
+The answer is that the viscosity is linear in the ﬂuid velocity u(x, t). At heart, this
+statement follows simply from Taylor’s theorem. The underlying atomic interactions are
+complicated and they surely result in a friction force that is some arbitrarily complicated
+function of u. But, for suitably small velocities, the linear term is always larger than
+the quadratic term. This simple but powerful argument is known as linear response.
+It’s the same argument that leads to Ohm’s law with the current given by I = V/R
+rather than some more complicated function of voltage. (The lecture notes on Kinetic
+Theory contain a section devoted to linear response in more general settings.) Those
+ﬂuids for which the linear approximation is a good one are called Newtonian.
+So the viscosity should be a force f that is linear in the ﬂuid velocity u. What can we
+write down? First, the force can’t be proportional to u itself: that’s in contradiction
+with Gallilean relativity which says that the equations of ﬂuid mechanics must be
+invariant under a boost of the whole ﬂuid (and any container) by a constant u. This
+– 55 –
+
+
+PDF file page 5 (one-based)
+Figure 9. The torque experienced by a small parcel of ﬂuid. The red arrows depict σ12, the
+purple arrows σ21. (The purple arrow on the furthest face is unlabelled to avoid clutter.)
+area δA and normal n is given by
+F := f δA = σn δA
+Here f is the force per unit area. (Like pressure). In index notation, we have
+fi = σijnj
+(3.4)
+For pressure, the stress tensor takes the simple diagonal form
+σij = −P δij
+But, in general, it may take a more complicated form. Furthermore, for a ﬂuid the
+stress tensor is itself a ﬁeld σij(x, t) that may vary in both space and time. This means
+that the forces acting on various parts of the ﬂuid depend both on their position in the
+ﬂuid and on the orientation of the surface that is considered.
+The stress tensor has an important property: it is symmetric
+σij = σji
+We will now show this. Consider the (slightly messy) Figure 9 depicting a small cube
+with side lengths L. The two red lines depict the force (per unit area) in the x direction
+on the faces that are normal to the y direction. From (3.4) this force is σ12. Meanwhile,
+the two purple lines depict the force in the y-direction on the faces that are normal to
+the x direction. This force is σ21.
+– 59 –
+
+
+PDF file page 6 (one-based)
+These four forces give rise to a torque. Each σij is a force-per-unit-area, so the actual
+force is L2σij. Furthermore, the moment of each force about the centre of the cube is
+L/2. This means that the total torque around a line parallel to the z-axis, through the
+centre of the cube, is
+⌧= L3(σ12 −σ21) + O
+✓@σ12
+@y L4, @σ21
+@x L4
+◆
+The leading term comes from the di↵erence between σ12 and σ21. The sub-leading terms
+come from the di↵erence of, say, σ12 on the left and right-hand faces. (The statement
+that the cube is small is the assumption that σij does not vary much over the length
+scale L.)
+Further torque may come from bulk forces whose strength varies over the inside of
+the cube. But this torque will always be of order L4 (times some suitable dimensionful
+parameter) so, for small cubes, the leading contribution to the torque is proportional
+to the di↵erence (σ12 −σ21) and scales as L3.
+But torques that scale as L3 are bad. To see this, recall that the angular acceleration
+is given by ˙! = ⌧/I where I is the moment of inertia. But the moment of inertia of
+any object always scales as L5 (which is mass ⇥L2 = ⇢L5) and so ˙! ⇠1/L2. The
+actual speed of the object is v ⇠!L so if the torque scales as L3, the acceleration will
+diverge as ˙v ⇠1/L for small L. That makes no sense. To avoid this we must have
+σ12 = σ21
+Obviously the same argument works for all other components: σij = σji. The stress
+tensor is necessarily symmetric.
+3.1.1
+Newtonian Fluids
+With the technology of the stress tensor, it is straightforward to describe the e↵ect of
+friction. A Newtonian ﬂuid is one where the friction forces are linear in velocity. If we
+assume that the ﬂuid is isotropic then the form of the force is pretty much ﬁxed by
+rotational invariance: it must be a symmetric tensor constructed from r and u and
+the only option is @iuj + @jui. In fact, a symmetric tensor can be decomposed into its
+trace and a traceless piece (see the lectures on Vector Calculus) so in general we have,
+including the pressure term,
+σij = −Pδij + µ
+✓@ui
+@xj + @uj
+@xi −2
+3r · u δij
+◆
++ ⇣r · u δij
+– 60 –
+
+
+PDF file page 7 (one-based)
+where, as we saw previously, µ is the dynamical shear viscosity. This time we’ve included
+the extra term proportional to r · u with a coeﬃcient ⇣known as the bulk viscosity
+or sometimes the volume viscosity. Importantly, it can be shown that each of these
+coeﬃcients is necessarily positive. For µ, this follows from energy dissipation and we
+will give the argument shortly. For ⇣it turns out that this follows from considerations
+of entropy. However, in this course we are dealing only with incompressible ﬂuids with
+r · u = 0 which means that we can forget all about the bulk viscosity. We have
+σij = −Pδij + 2µEij
+(3.5)
+where Eij is the rate of strain tensor that we met previously (2.14)
+Eij = 1
+2
+✓@ui
+@xj + @uj
+@xi
+◆
+(3.6)
+We can now use this form of the stress tensor in the equation of motion for the ﬂuid.
+With a general surface force, captured by σij, the equation of motion for a ﬂuid (3.3)
+become
+⇢
+Z
+V
+Dui
+Dt dV =
+Z
+S
+σij dSj
+where we have neglected other forces such as gravity. We use the divergence theorem
+to change the surface integral into a volume integral
+⇢
+Z
+V
+Dui
+Dt dV =
+Z
+V
+@σij
+@xj dV
+This formula holds for arbitrary volume V , so the equation of motion is
+⇢Dui
+Dt = @σij
+@xj
+(3.7)
+From our equation (3.5), the right-hand side becomes
+@σij
+@xj = −@P
+@xi + µ
+✓@2ui
+@xj@xj +
+@2uj
+@xj@xi
+◆
+The second of these vanishes, again using our incompressibility condition r · u = 0,
+and we’re left with promised Navier-Stokes equation,
+⇢Du
+Dt = −rP + µr2u
+In what follows, we’ll often divide by the density to write the Navier-Stokes equation
+as
+Du
+Dt = −1
+⇢rP + ⌫r2u
+where, as deﬁned earlier, ⌫= µ/⇢is the kinematic viscosity. We can also add further
+forces on the right-hand side to taste.
+– 61 –
+
+
+PDF file page 8 (one-based)
+The derivation of the Navier-Stokes equation that we described above sits entirely
+within the continuum language that underlies this course. There is another remark-
+able, and ultimately better, derivation that really goes back to basics. This is due to
+Boltzmann. The derivation starts with the underlying ⇠1023 atoms and tracks their
+interactions, albeit in a statistical way. It explains why the variables of the Navier-
+Stokes equation are the right thing to focus on if you care only about long-time physics
+and gives a microscopic explanation of the various terms. You can ﬁnd this derivation
+in the lectures on Kinetic Theory.
+3.1.2
+Momentum and Energy Conservation Revisited
+For inviscid ﬂuids, the Euler equation is simply the statement that momentum is con-
+served, while energy conservation (2.11) led to Bernoulli’s principle. What becomes of
+these in the presence of viscosity?
+First momentum. Here there is no problem: in the absence of external forces, we
+can write the Navier-Stokes equation in the form of a continuity equation, telling us
+that momentum is conserved. The only di↵erence from the Euler equation is that we
+get an extra term in the momentum current, proportional to the viscosity
+@(⇢ui)
+@t
++ @⇧ij
+@xj = 0
+with
+⇧ij = ⇢uiuj + Pδij −2µEij
+As before, we’ve used the fact that r · u = 0 for incompressible ﬂuids. In particular,
+we’ve used this to keep ⇧ij symmetric by taking the extra term proportional to the
+rate of strain tensor (3.6) rather than just @jui.
+This gives us another perspective on the Navier-Stokes equation: it is, like the Euler
+equation, simply conservation of momentum, but with an additional term in the mo-
+mentum current coming from gradients of the velocity. The idea that gradients drive
+currents is something that also occurs in other, perhaps more familiar, contexts where
+it goes by the name of Fick’s law. For example, di↵erences in temperature result in a
+heat current J ⇠rT.
+What about energy? We will ignore other bulk forces for now. (We’ve already seen
+in Section 2.1.4 that conservative forces don’t spoil conservation of energy.) However,
+it’s useful to brieﬂy return to the form of the Navier-Stokes equation (3.7) in which we
+allow for general stress forces σij. Taking the inner product with the velocity u, the
+matter derivative becomes
+u · Du
+Dt = ui ·
+✓@ui
+@t + uj
+@ui
+@xj
+◆
+= 1
+2
+@|u|2
+@t
++ 1
+2u · r|u|2
+– 62 –
+
+
+PDF file page 9 (one-based)
+and our proto-Navier-Stokes equation (3.7) becomes
+⇢
+2
+✓@|u|2
+@t
++ u · r|u|2
+◆
+= ui
+@σij
+@xj
+Remember the game that we’re playing: we’d like to massage this into the continuity
+equation to see the conservation of energy. Using the fact the ﬂuid is incompressible,
+so r · u = 0, we have
+⇢
+2
+@|u|2
+@t
++ @
+@xj
+⇣⇢
+2|u|2uj −uiσij
+⌘
+= −σij
+@ui
+@xj = −σijEij
+where, in the second equality, we’ve used the fact that σij = σji so the contraction
+picks out the symmetric part of @ui/@xj which is Eij, the rate of strain tensor deﬁned
+in (3.6). The two terms on the left-hand side take the form of a continuity equation.
+But now the right-hand side is not zero. This tells us that, in contrast to the Euler
+equation, energy is not conserved in the Navier-Stokes equation.
+We can get an expression for how energy is low. If we integrate over some ﬁxed
+volume V then we have
+⇢
+2
+@
+@t
+Z
+V
+|u|2dV +
+Z
+S
+⇣⇢
+2|u|2uj −uiσij
+⌘
+dSj = −
+Z
+V
+σijEij dV
+(3.8)
+with S = @V . The volume term on the left-hand side is clearly the change in the
+kinetic energy in V . The surface term accounts for (some of) this change: the |u|2uj
+term captures the energy that ﬂows out through the surface, while the σijuj is the work
+done by the surface forces on the ﬂuid contained in V . This includes the work done
+by the both the pressure and by the viscous forces. All of this is consistent with the
+conservation of energy. However, because the right-hand side of (3.8) doesn’t vanish is
+telling us that energy is, in fact, no longer conserved. Instead, the right-hand side tells
+us the rate at which energy is dissipated.
+Dissipation =
+Z
+V
+σijEij dV = 2µ
+Z
+V
+EijEij dV
+(3.9)
+where, in the second equality, we’ve used the explicit form of the stress tensor (3.5).
+We see that the pressure doesn’t contribute to energy dissipation (because δijEij =
+r · u = 0).
+This, of course, is something that we found when studying the Euler
+equation. But we now see that one important consequence of viscosity is we no longer
+have energy conservation. Correspondingly, the Bernoulli’s principle no longer holds
+when the e↵ects of viscosity are important
+– 63 –

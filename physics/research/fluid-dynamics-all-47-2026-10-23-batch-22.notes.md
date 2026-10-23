@@ -1,0 +1,108 @@
+# Batch 22 authoring notes — `fd-w01`
+
+Run: `fluid-dynamics-all-47-2026-10-23` · batch: `22` · role: beta.
+Authoring is complete for the owned pair; final scoped checks and Step 1 records are still being closed.
+
+## Design control, scope, and conflicts
+
+The controlling design is `research/plan-fluid-dynamics-refresh-track.md`, W01 “Periodic solenoidal Fourier spaces” (assigned refresh section beginning at L753). It labels itself the current controlling owner refresh dated 2026-10-18 and explicitly supersedes conflicting historical fluid-design text. The historical `research/plan-fluid-dynamics-track.md` W01 section at L677 reserves the same pair, title, category, and order, but points to the old inventory at `research/extended-frameworks-2026-10-03/fluid-dynamics/proposed-inventory.json`. The controlling refresh instead points to `research/scaffold-refresh-2026-10-18/fluid-dynamics/proposed-inventory.json`. That inventory-path conflict is resolved in favor of the current refresh by its explicit owner-control notice.
+
+The current `research/plan-spec.json` agrees with the dispatch and refresh on page IDs `fd-w01` / `fd-w01-examples`, title, category, mathematics library, order 403/404, companion, and the eight A-page `requires`. Its page rows still have empty `items` arrays; those are unmaterialized scaffold inventories, not authority to omit the refresh inventory. The dispatch and controlling refresh supply the 13 planned A items and two B items. The current owner direction file `research/fluid-dynamics-all-47-2026-10-23-owner-authoring-direction.md` was not present.
+
+A local intermediate item, `lem-fd-bounded-solenoidal-basis`, was added on A because the bounded-domain compactness and Galerkin proofs need a complete separable smooth solenoidal basis for the exact closure spaces, without assuming a Stokes eigenbasis or an unproved solenoidal-density theorem. A second local bridge, `lem-fd-bounded-dual-separability`, proves the Hilbert Riesz isometry and separability needed for the (V^*)-valued nonlinear bound; no current imported Riesz carrier was available in `items/`, so the complete local argument is placed on A before its use.
+
+The authored inventory is 15 A items and two B items, below the 100-item page cap. The detailed item records and `dependency_level` values are in `research/fluid-dynamics-all-47-2026-10-23-batch-22.pages.json`; direct dependencies are copied from the current item carriers. The recomputed current-batch levels are:
+
+| Level | Items |
+|---|---|
+| 0 | `def-fd-periodic-solenoidal-spaces`, `def-fd-bounded-solenoidal-spaces` |
+| 1 | `def-fd-weak-time-continuity`, `lem-fd-bounded-solenoidal-basis`, `lem-fd-negative-space-nonlinear-bound`, `cex-fd-weak-products` |
+| 2 | `def-fd-periodic-leray-hopf`, `lem-fd-bounded-compactness`, `lem-fd-bounded-dual-separability`, `lem-fd-finite-mode-compactness` |
+| 3 | `lem-fd-no-slip-lsix`, `thm-fd-periodic-global-weak-existence` |
+| 4 | `prop-fd-pressure-reconstruction`, `thm-fd-bounded-global-weak-existence`, `thm-fd-weak-smooth-uniqueness` |
+| 5 | `prop-fd-bounded-evolving-pressure`, `rem-fd-weak-regularity-status` |
+
+The page carriers `library/fluid-dynamics-mathematics/fd-w01.md` and `fd-w01-examples.md` contain YAML frontmatter only and have empty bodies. No summary or `page_layout` flag was authored. The B page lists both `cex-fd-weak-products` and `rem-fd-weak-regularity-status` as examples.
+
+## Mathematical scope and conventions
+
+All authored items are mathematical and have `physical_scope: null`; none makes an empirical claim. The periodic branch fixes (d\ge2), period (L>0), normalized measure (L^{-d}dx), real Fourier conjugation symmetry, the unrestricted constant mode, and dimensionless Sobolev weights (1+L^2|\kappa_k|^2). The periodic existence theorem is unforced, requires (\nu>0), and claims neither uniqueness nor global smoothness. The smooth-comparison result is conditional on a given smooth velocity-pressure pair.
+
+The bounded branch uses a nonempty bounded open (\Omega\subset\mathbb R^3), (D_\sigma=\{a\in C_c^\infty(\Omega;\mathbb R^3):\operatorname{div}a=0\}), and the explicit (L^2) and (H_0^1) closures (H,V). It asserts no identification of (V) with every (H_0^1) divergence-free field and no trace theorem. The L6 estimate is proved by coordinate FTC, Fubini, Cauchy–Schwarz, and Sobolev closure; its dual-valued quadratic functional is defined in (V^*) with its measurability/integrability justified from separability and the local Riesz lemma.
+
+The periodic pressure is a mean-zero spacetime distribution constructed from the tensor Fourier coefficients, with no pointwise regularity claim. The bounded rectangular pressure proposition is conditional on the exact current divergence-inverse statement and only asserts distributional pressure with a test-function normalization; it gives no (L^2) estimate, corner regularity, or traction claim. The oscillatory B counterexample is explicitly not asserted to solve Navier–Stokes.
+
+## Supplier interfaces, current readiness, and cross-batch findings
+
+Read-only mathematical suppliers were checked at their current statements and proofs. The Fourier-basis theorem assumes Countable Choice and provides the normalized finite-torus coefficient isometry and Parseval formula. The Fubini/Tonelli proof inputs, distribution and derivative signs, zero-extension interface, and Sobolev completeness theorem were inspected; the latter explicitly uses full AC, which is stated in the bounded basis and bounded-existence branch. The AC/CC/DC inputs to the absolute-continuity FTC chain were checked at their actual hypotheses. The local bounded-dual lemma avoids claiming an absent imported Riesz supplier.
+
+The ODE supplier `NR-E2` is listed in the controlling inventory and its complete research argument was read at `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/expansion-proofs.md#E2`. Its exact interface is a contraction on a closed time-state cylinder where the vector field is bounded by (B), Lipschitz with constant (L), and the time radius satisfies (hB\le r), (hL<1); the fixed point is the unique local solution. The Galerkin vector fields are polynomial, and each authored proof separately proves continuation from its energy bound. The research argument has no current item carrier in this run and no current Step 1 readiness record. Consequently `thm-fd-periodic-global-weak-existence` and `thm-fd-bounded-global-weak-existence` are fully authored as conditional deductions but must be recorded `escalated`; their consumers `prop-fd-pressure-reconstruction`, `thm-fd-weak-smooth-uniqueness`, `rem-fd-weak-regularity-status`, and `prop-fd-bounded-evolving-pressure` inherit that unresolved input and are not marked ready.
+
+The page carrier `library/fluid-dynamics-mathematics/fd-s01.md` and its nonempty batch-17 manifest inventory are now present. The page frontmatter identifies `fd-s01`, “Periodic fluid Fourier Sobolev spaces,” and lists its current A items; its body is empty. The page-interface edge from `fd-w01` to `fd-s01` was checked and is recorded `verified` in the cross-batch file. This scoped page-edge check is not independent proof approval.
+
+The batch-17 carrier `items/lem-fd-rectangular-test-divergence-inverse.md` is present. Its exact statement and complete recursive proof were reread after the run readiness changed: for each finite nonempty rectangle in dimension $d\ge1$, it supplies a continuous linear right inverse $R:D_0(\Omega)\to C_c^\infty(\Omega;\mathbb R^d)$, with $\operatorname{div}(Rh)=h$, fixed compact output support for each compact input support, and continuity on fixed-support test spaces for every test seminorm. These hypotheses match the three-dimensional interface stated and used in `prop-fd-bounded-evolving-pressure`. The first Step 1 check found the supplier readiness record missing; a later `loadStep1Record`/`step1Decision` check returned a current `ready` record whose hash matches the current carrier. The scoped edge is therefore `verified` in the cross-batch file. The consuming item remains `escalated` because its separate bounded existence input depends on unresolved `NR-E2`; its original escalation was not overwritten. The supplier was not edited.
+
+`research/fluid-dynamics-all-47-2026-10-23-batch-22.cross-batch-dependencies.json` is a JSON array with one row for each cross-batch edge: the page edge `fd-w01`→`fd-s01` (`verified`) and the item edge `prop-fd-bounded-evolving-pressure`→`lem-fd-rectangular-test-divergence-inverse` (`open`). No other batch’s transitive notes were added as review rows.
+
+## Source reading, locators, dispositions, and retrieval history
+
+Two independent full-text treatments were inspected for A, including full lecture notes:
+
+- Leonid Ryzhik, *Math 256B Lecture Notes*, version 2024, full 169-page PDF: <https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf>. Read §§5.1–5.5, printed pp. 37–51; the function-space summary §5.2.2, pp. 42–43; nonlinear/time estimates §§5.3.1–5.3.2, pp. 43–46; compactness §5.4, pp. 46–48; weak limits §5.5, pp. 49–51; and status/strong uniqueness §§5.6 and 6.1, pp. 52–54. The notes’ mean-zero convention, use of an abstract compactness theorem, and strong–strong uniqueness scope are recorded in the per-result dispositions. Local results do not import those arguments where their hypotheses differ.
+- L. C. Berselli and S. Spirito, *On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations*, *Fluids* 6(1), 42 (2021), publisher version-of-record PDF: <https://www.mdpi.com/2311-5521/6/1/42/pdf>. Read the complete relevant passages in §§2.1–2.2, printed pp. 4–5; §3, pp. 5–8; §4, pp. 8–12; and §5.2, pp. 14–15. The published PDF’s actual numbering is Definition 1 in §3 and Theorem 3 in §5.2; item references use those locators. Its bounded-domain existence assumes smoother domains and its pressure discussion explicitly defers the general bounded case; those qualifications are preserved.
+
+`research/fluid-dynamics-all-47-2026-10-23-batch-22.coverage.json` lists the source URLs, locators, each harvested result, and its disposition. The active Stanford stamp is 920,637 bytes, 169 pages, SHA-256 prefix `92c8b6dbf6f9b450`; the active publisher PDF stamp is 371,524 bytes, 20 pages, prefix `60fa1c184b7b3e28`. The original submitted-PDF URL `https://arpi.unipi.it/retrieve/e0d6c92f-c274-fcf8-e053-d805fe0aa794/TeachingLH-submitted.pdf` failed the initial fetch and all five allowed retries (six HTTP 403s). Its full attempt/search history and a `source_resolution` record with alternative local arguments and direct dependency lists are retained as a certain URL drop; the article remains actively sourced by the fetch-verified publisher PDF. A separate University of Pisa published-PDF endpoint returned HTTP 403 once and was not selected; that single attempt and the publisher-direct alternative search are retained in `search_history`.
+
+## Authored items and exact dependency interfaces
+
+The item carriers are the source of truth. This table records each current direct dependency array, computed level, and claim/convention.
+
+| Item | Level | Direct dependencies | Claim and conventions |
+|---|---:|---|---|
+| def-fd-bounded-solenoidal-spaces | 0 | def-sobolev-space-wkp-and-its-norm; def-wkp-zero-as-a-sobolev-closure; def-weak-derivative-of-a-locally-integrable-function; def-distributional-derivative; lem-zero-extension-from-w-one-p-zero; def-countable-choice | Explicit Dσ,H,V closures on arbitrary bounded open Ω⊂R³; no trace or larger-space identification. |
+| def-fd-periodic-solenoidal-spaces | 0 | thm-fourier-basis-and-parseval-on-the-n-torus; def-countable-choice; def-distributional-derivative | Period-L normalized torus; real conjugate coefficients; mean mode retained; dimensionless weights; Pk, ΠN, H−r. |
+| def-fd-weak-time-continuity | 1 | def-fd-periodic-solenoidal-spaces | Defines Cw, strong measurability, Bochner Lp, and local time notation. |
+| lem-fd-bounded-solenoidal-basis | 1 | def-fd-bounded-solenoidal-spaces; lem-zero-extension-from-w-one-p-zero; thm-sobolev-spaces-are-banach-spaces; def-sobolev-space-wkp-and-its-norm; def-wkp-zero-as-a-sobolev-closure; thm-fourier-basis-and-parseval-on-the-n-torus; def-axiom-of-choice; def-countable-choice | Under AC, proves separable Hilbert closures and a smooth solenoidal basis dense in H,V. |
+| lem-fd-negative-space-nonlinear-bound | 1 | def-fd-periodic-solenoidal-spaces; thm-fourier-basis-and-parseval-on-the-n-torus; thm-holder-inequality-for-integrals | For r>d/2+1, direct weighted Fourier H−r bound for quadratic transport. |
+| cex-fd-weak-products | 1 | def-fd-periodic-solenoidal-spaces; thm-fourier-basis-and-parseval-on-the-n-torus | Divergence-free u_n=sin(2πnx₁/L)e₂ weakly tends to zero while its quadratic tensor has weak limit ½e₂⊗e₂; not a solution sequence. |
+| def-fd-periodic-leray-hopf | 2 | def-fd-weak-time-continuity; def-distributional-derivative | Unforced periodic weak identity, strong initial trace, every-time initial energy inequality, and full-measure restart inequality. |
+| lem-fd-bounded-compactness | 2 | def-fd-bounded-solenoidal-spaces; lem-fd-bounded-solenoidal-basis; lem-zero-extension-from-w-one-p-zero; thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces; thm-first-fundamental-theorem-of-calculus-for-l-one | Zero-extension/mollifier proof of compact V→H and H-projection tails. |
+| lem-fd-bounded-dual-separability | 2 | lem-fd-bounded-solenoidal-basis; def-countable-choice | Complete local projection-minimization proof of the real Riesz isometry and separable Hilbert V*. |
+| lem-fd-finite-mode-compactness | 2 | def-fd-periodic-solenoidal-spaces; def-fd-weak-time-continuity; thm-tonelli-theorem-for-sigma-finite-product-spaces; def-countable-choice | Coefficient equicontinuity, weak continuity, gradient bound, Fourier tails, strong L²tH, and a.e. strong times. |
+| lem-fd-no-slip-lsix | 3 | def-fd-bounded-solenoidal-spaces; lem-fd-bounded-solenoidal-basis; def-fd-weak-time-continuity; def-axiom-of-choice; thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces; thm-holder-inequality-for-integrals; thm-first-fundamental-theorem-of-calculus-for-l-one; lem-fd-bounded-dual-separability; def-countable-choice | Coordinate-FTC proof of H₀¹→L⁶, L⁴ interpolation, and the strongly measurable L⁴/³tV* transport bound. |
+| thm-fd-periodic-global-weak-existence | 3 | def-fd-periodic-solenoidal-spaces; def-fd-periodic-leray-hopf; lem-fd-finite-mode-compactness; lem-fd-negative-space-nonlinear-bound; NR-E2; def-countable-choice | Conditional Galerkin proof for d≥2,L>0,ν>0,u₀∈H; no uniqueness or smoothness claim. |
+| prop-fd-pressure-reconstruction | 4 | thm-fd-periodic-global-weak-existence; def-fd-periodic-solenoidal-spaces; def-distribution; def-distributional-derivative; def-regular-distribution-from-a-locally-integrable-function | Fourier pressure distribution normalized by its zero spatial mode; no stronger regularity claim. |
+| thm-fd-bounded-global-weak-existence | 4 | def-fd-bounded-solenoidal-spaces; lem-fd-bounded-compactness; lem-fd-no-slip-lsix; lem-fd-bounded-solenoidal-basis; NR-E2; thm-tonelli-theorem-for-sigma-finite-product-spaces; def-fd-weak-time-continuity; thm-fourier-basis-and-parseval-on-the-n-torus; def-countable-choice; def-axiom-of-choice | Conditional unforced closure-space Galerkin existence for bounded open 3D Ω, AC, ν>0,u₀∈H; no pressure/trace/smoothness claim. |
+| thm-fd-weak-smooth-uniqueness | 4 | thm-fd-periodic-global-weak-existence; def-fd-periodic-leray-hopf; cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous; thm-first-fundamental-theorem-of-calculus-for-l-one; lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous; thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions; def-countable-choice; def-dependent-choice | Smooth pressure-velocity comparison on [0,T]; cross identity, relative-energy inequality, AC/FTC Gronwall. |
+| prop-fd-bounded-evolving-pressure | 5 | thm-fd-bounded-global-weak-existence; lem-fd-rectangular-test-divergence-inverse; def-distribution; def-distributional-derivative | Conditional spacetime-distribution pressure on finite rectangles, normalized by a fixed unit-integral test; no L² claim. |
+| rem-fd-weak-regularity-status | 5 | thm-fd-periodic-global-weak-existence; lem-fd-finite-mode-compactness; thm-fd-weak-smooth-uniqueness | Records only the proved weak-existence/conditional-uniqueness/positive-viscosity compactness scope. |
+
+library/fluid-dynamics-mathematics/fd-w01.md inventories all 15 A items; fd-w01-examples.md inventories the two B items. The basis and dual items are explicitly marked as inventory expansions in the manifest.
+
+## Checks and readiness to be recorded
+
+Preliminary results after the authoring edits:
+
+- Scoped `dependencyLevels` on the two batch-22 pages: no errors; levels equal the table above.
+- `manifest-deps.mjs` on the batch-22 manifest: 17 items, 0 normalized, 0 errors.
+- `coverage-checklist.mjs --require-destination --json`: 1 page, 38 harvested results, 0 errors, 0 warnings.
+- `source-fetch-check.mjs --stamp`: 2/3 fetch-verified, 3/3 resolved, 1 documented source drop, 0 newly stamped.
+- `proof-layout.mjs` on the 17 changed items: 17 items, 53 steps, 0 defects.
+- `rendercheck.mjs` on the 17 items and both pages: 19 files pass KaTeX, link-in-math, delimiter, and frontmatter checks.
+- `manifest-deps.mjs` on the batch-22 manifest: 17 items, 0 normalized, 0 errors. Scoped current-batch dependency computation: 17 items on two pages, 0 errors, maximum level 5.
+- Strict proof-contract check: 17/17 items mapped; the only two errors are the expected `citation-source-missing` reports for `NR-E2` in the two conditional Galerkin existence proofs. The contracts retain the exact E2 research excerpt and path; the run still has no `NR-E2` item carrier.
+- Run-wide `item-dependency-levels.mjs check` still reports empty inventories and stale levels in other batches; the batch-22 scoped computation above is clean. Run-wide `batch-dependency-levels.mjs check` reports its shared record stale after current manifest changes; the dispatch-recorded batch-22 owner level remains 1 with prerequisite batch 17. Shared run-level files are left for the owner.
+
+Final `loadStep1Record`/`step1Decision` verification reports 11 batch-22 items `ready` with current hashes and six `escalated`: the two Galerkin global-existence theorems and four consumers (`prop-fd-pressure-reconstruction`, `thm-fd-weak-smooth-uniqueness`, `prop-fd-bounded-evolving-pressure`, and `rem-fd-weak-regularity-status`). Their remaining common prerequisite is `NR-E2`, which is outside this run and has no current item carrier or readiness record; its complete research proof remains cited conditionally. The S10 divergence-inverse carrier has since reached current `ready`, and its scoped edge is verified; the bounded evolving-pressure item stays escalated on `NR-E2`. The run-wide item-dependency check still reports empty inventories and stale levels in other batches, and the shared batch-dependency-level record is stale after manifest changes; both are left for the owner. No Step 1 record marks independent acceptance.
+
+## Final reconciliation
+
+The bounded-domain global existence proof now makes its global extraction explicit: it takes nested weak subsequences on integer time horizons, identifies their limits by the uniformly convergent basis coefficients, and selects one further subsequence with summable local $L^2_tH$ errors to obtain a single full-measure set of strong-time convergence. The corresponding proof-contract derivations were regenerated. The batch manifest statement copies were synchronized with the final no-slip and bounded-existence item statements; a carrier-to-manifest check reports no statement or metadata mismatch.
+
+Final scoped results: 19 item/page files pass `rendercheck`; 17 proofs with 53 numbered steps pass `proof-layout`; the batch-22 dependency graph has 17 items, no errors, and maximum level 5; manifest dependency validation reports 17 items with no normalization or errors; coverage has 38 harvested results with zero errors or warnings; source resolution reports two fetch-verified sources, three resolved source entries, and one documented drop. Statement sections contain no hyperlinks, both page bodies are empty, and the two cross-batch edges have valid array records (the `fd-s01` page edge and current-ready S10 item edge are `verified`). The strict proof-contract checker reports only the two `citation-source-missing` errors for the exact conditional `NR-E2` input. The run-wide dependency-level check remains stale and is not rewritten here.
+
+
+### Owner legacy-ODE resolution (2026-10-22T15:56:31.703Z)
+
+Owner /root integrated the round1 legacy-ODE repair from research/fluid-dynamics-all-47-2026-10-23-owner-weak-existence-resolution/review.json and repair-plan.json. The actual published Picard theorem supplies unique local solutions and overlap uniqueness for the finite real polynomial Galerkin systems; the local energy and endpoint-restart proofs supply forward continuation. Full periodic/bounded weak claims, CC/AC/DC qualifications and physical limits remain. This is authoring readiness; independent review and all native gates remain required.
+Original native missing-carrier errors are preserved as historical observations. Added the exact published supplier home to fd-w01 and its controlling plan. All unchanged ready prerequisites receive only a page-context hash refresh; no new proof audit. Final drained batch24 propagation remains with the same scientific reviewer.

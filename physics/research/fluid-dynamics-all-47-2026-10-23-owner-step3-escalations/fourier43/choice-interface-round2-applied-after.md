@@ -1,0 +1,76 @@
+---
+id: def-fd-periodic-fourier-sobolev-spaces
+kind: definition
+title: "Periodic fluid Fourier Sobolev spaces"
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - def-the-one-dimensional-torus-and-normalized-haar-integral
+  - def-fourier-coefficients-and-trigonometric-polynomials
+  - thm-fourier-basis-and-parseval-on-the-n-torus
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-the-one-dimensional-torus-and-normalized-haar-integral: mathematical-premise
+  def-fourier-coefficients-and-trigonometric-polynomials: mathematical-premise
+  thm-fourier-basis-and-parseval-on-the-n-torus: mathematical-premise
+proof_strategy: direct
+physical_scope: null
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pending
+sources:
+  references:
+    - title: "Gerald Teschl, Topics in Real and Functional Analysis (2017)"
+      url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07%2110_23_44_AM.pdf"
+      locator: "§2.5, printed pp. 63–68: Fourier coefficients, orthogonality, Parseval and Fejér completeness route."
+    - title: "Theo Bühler and Dietmar Salamon, Functional Analysis"
+      url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf"
+      locator: "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+---
+
+## Definition
+
+**Choice context.** The finite coefficient arrays and weighted coefficient completion below are defined without Countable Choice. In this coefficient-only reading, a finite real trigonometric polynomial is specified by a finite coefficient array $(a_k)$, extended by zero and satisfying $a_{-k}=\overline{a_k}$, and $\widehat q(k):=a_k$ denotes its specified coefficient coordinate. For the normalized Haar-measure conventions, integral Fourier coefficients and $L^2$ realization below, additionally assume Countable Choice, as in the declared measure and Fourier suppliers. In that analytic context the coefficient coordinates agree with the integral coefficients.
+
+Let $d\in\{1,2,3\}$ and $N\ge1$ be integers. Let $Q_d=\mathbb R^d/(2\pi\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\mathbb T^d=\mathbb R^d/\mathbb Z^d$ forward under $y\mapsto x=2\pi y$; in coordinates this is $(2\pi)^{-d}dx$. For any componentwise integrable real $q:Q_d\to\mathbb R^N$, considered up to equality almost everywhere, and $k\in\mathbb Z^d$, define its componentwise Fourier coefficient by $\widehat q(k)=\int_{Q_d}q(x)e^{-ik\cdot x}\,d\mu(x)$; this integral is finite because $|e^{ik\cdot x}|=1$ and $q\in L^1$. A finite real trigonometric polynomial is a finite sum $q(x)=\sum_{k\in F}a_ke^{ik\cdot x}$, where $F\subset\mathbb Z^d$ is finite and the coefficients, extended by zero outside $F$, satisfy $a_{-k}=\overline{a_k}$. Such polynomials are integrable and satisfy $\widehat q(-k)=\overline{\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\in\mathbb R$, define $H^s(Q_d;\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\|q\|_{H^s}^2=\sum_{k\in\mathbb Z^d}w_k^{2s}|\widehat q(k)|^2$. Identify this completion with the weighted coefficient space subject to conjugate symmetry, using finite symmetric cutoffs, and write $\widehat q(k)$ for its coefficient coordinate. Under Countable Choice, if $s\ge0$, each element has a unique $L^2$ representative, and its coefficient coordinate agrees with the normalized integral formula; for $s<0$ no $L^2$ representative is asserted.
+
+## Definition references
+
+[Gerald Teschl, Topics in Real and Functional Analysis (2017)](https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07%2110_23_44_AM.pdf).
+
+[Theo Bühler and Dietmar Salamon, Functional Analysis](https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf).
+
+## Facts & Assumptions
+
+**Given:** The hypotheses and conventions stated in the formulation.
+
+[F1] [[def-countable-choice]]: every countable family of nonempty sets has a choice function; the finite-torus Fourier-basis supplier assumes this principle.
+
+[F2] [[def-the-one-dimensional-torus-and-normalized-haar-integral]]: normalized Haar measure on the unit torus is probability Lebesgue measure, and the product torus carries its product probability measure.
+
+[F3] [[def-fourier-coefficients-and-trigonometric-polynomials]]: Fourier coefficients use the normalized integral against the conjugate character, and finite character sums are trigonometric polynomials.
+
+[F4] [[thm-fourier-basis-and-parseval-on-the-n-torus]]: under Countable Choice, normalized torus characters form a complete orthonormal basis; synthesis and Parseval hold and the coefficient map is an isometry onto $\ell^2$ in the finite-subset-net sense.
+
+## Proof
+
+**Given:** $d\in\{1,2,3\}$, $N\ge1$, and the coefficient conventions in the Definition. For the normalized-measure, integral and $L^2$ realization arguments, additionally assume Countable Choice.
+
+1.1 Under $x=2\pi y$, normalized measure on $\mathbb T^d$ pushes forward to $(2\pi)^{-d}dx$ on $Q_d$, while $e^{2\pi i k\cdot y}$ becomes $e^{ik\cdot x}$. Thus Fourier coefficients and the componentwise $L^2$ inner product are unchanged by this rescaling. [given, F2, F3, algebra]
+
+2.1 Apply [F4] to each of the $N$ components after this rescaling. The coefficient map identifies scalar $L^2(Q_d)$ isometrically with $\ell^2(\mathbb Z^d)$; summing the component identities gives the vector-valued coefficient isometry. The Countable Choice hypothesis is exactly [F1]. [given, F1, F4, step 1.1]
+
+3.1 Since $w_k^{2s}>0$, symmetric truncations to $|k|_\infty\le M$ converge in the weighted $\ell^2$ norm by convergence of the defining nonnegative series. The conjugate-symmetry condition is preserved by these cutoffs. To verify completeness of the coefficient space without Countable Choice, let $(a_n)$ be a Cauchy sequence in its weighted norm. For each $k$,
+$$|a_n(k)-a_m(k)|\le w_k^{-s}\|a_n-a_m\|_{H^s},$$
+so completeness of the finitely many real and imaginary scalar coordinates gives a unique limit $a(k)$. Conjugate symmetry passes to these coordinate limits. Given $\varepsilon>0$, choose $n_0$ so that $\|a_n-a_m\|_{H^s}\le\varepsilon$ for $n,m\ge n_0$. For fixed $n\ge n_0$ and every finite box $F_M=\{k:|k|_\infty\le M\}$, passing $m\to\infty$ in the finite sum gives
+$$\sum_{k\in F_M}w_k^{2s}|a_n(k)-a(k)|^2\le\varepsilon^2.$$
+The inequality $|a(k)|^2\le2|a_n(k)|^2+2|a(k)-a_n(k)|^2$ bounds the finite-box weighted sums for $a$ by $2\|a_n\|_{H^s}^2+2\varepsilon^2$, so $a$ lies in the weighted coefficient space. Taking the supremum over $M$ in the preceding difference bound gives $\|a_n-a\|_{H^s}\le\varepsilon$. Thus the coefficient space is complete, and the explicit cutoff density already proved identifies it with the completion of finite coefficient arrays. The coordinate limits are unique and the cutoffs are specified, so this argument makes no choice of function representatives and uses no Countable Choice. For $s\ge0$ under Countable Choice, $w_k^{2s}\ge1$, hence the coefficient sequence is in $\ell^2$ and [F4] gives its unique initially complex $L^2$ class. For each component $f$ of this class, complex conjugation preserves $L^2$ and the normalized coefficient convention gives
+$$\widehat{\overline f}(k)=\overline{\widehat f(-k)}=\overline{a_{-k}}=a_k=\widehat f(k),$$
+where $a_k$ is its coefficient coordinate. Uniqueness of Fourier synthesis in [F4] therefore gives $f=\overline f$ almost everywhere, so $\operatorname{Re}f$ is a real representative with the same coefficients. Applying this to the finitely many components gives a real $\mathbb R^N$-valued representative, unique up to equality almost everywhere by the coefficient isometry in step 2.1. For $s<0$ the construction gives only the weighted coefficient completion and makes no $L^2$ claim. [given, F3, F4, step 2.1, algebra] ∎
+

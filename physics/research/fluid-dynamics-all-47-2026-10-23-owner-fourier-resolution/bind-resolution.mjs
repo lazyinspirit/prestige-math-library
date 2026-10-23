@@ -1,0 +1,8 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {driftOwnerResolutionTemplate,driftHash,validateDriftOwnerResolutions} from '../../tools/physics-support/drift-owner-resolutions.mjs';
+const run='fluid-dynamics-all-47-2026-10-23',base=`research/${run}-owner-fourier-resolution`,receipt=driftOwnerResolutionTemplate(process.cwd(),run);
+const evidence=[`${base}/review.json`,`${base}/application.json`,`${base}/imports-application.json`,`${base}/before-planning/${run}-alpha-step1-drift.md`,`${base}/before-planning/plan-spec.json`,`${base}/before-planning/plan-fluid-dynamics-refresh-track.md`,'research/plan-fluid-dynamics-refresh-track.md','items/thm-fourier-basis-and-parseval-on-the-n-torus.md'];
+for(const path of evidence)receipt.inputs[path]=driftHash(readFileSync(path));
+for(const row of receipt.resolutions){row.decision='resolved';row.reason=`Root accepts the genuine delegated round-1 Fourier prerequisite review and its explicit disposition for ${row.page}. The sole missing published basis/Parseval supplier is added at fd-s01 with exact normalization and Countable Choice; all direct and indirect consumers and companions inherit the repaired closure without scope reduction.`;row.evidence=[`${base}/review.json`,`${base}/application.json`];row.current_inputs={'research/plan-fluid-dynamics-refresh-track.md':receipt.inputs['research/plan-fluid-dynamics-refresh-track.md'],'items/thm-fourier-basis-and-parseval-on-the-n-torus.md':receipt.inputs['items/thm-fourier-basis-and-parseval-on-the-n-torus.md']};}
+writeFileSync(`research/${run}-drift-owner-resolutions.json`,JSON.stringify(receipt,null,2)+'\n');
+console.log('Resolved blocked pages:',[...validateDriftOwnerResolutions(process.cwd(),run).resolved].join(', '));

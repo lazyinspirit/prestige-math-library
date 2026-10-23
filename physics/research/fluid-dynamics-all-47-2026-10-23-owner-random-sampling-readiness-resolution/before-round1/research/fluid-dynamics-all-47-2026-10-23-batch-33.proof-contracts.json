@@ -1,0 +1,526 @@
+{
+  "version": 1,
+  "level": "fluid-dynamics-all-47-2026-10-23-batch-33",
+  "scope": [
+    "def-fd-random-fluid-observable",
+    "alg-fd-uq-observable-budget",
+    "thm-fd-observable-sampling-bias-split",
+    "rem-fd-fluid-sobol-interface",
+    "ex-fd-all-zero-mc-sample"
+  ],
+  "contracts": {
+    "def-fd-random-fluid-observable": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires nonempty spatial and time domains and nonempty H; it makes no claim for an empty field domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: an identically zero scalar observable is allowed, and its integral and signed bias remain defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Definition has no sample-count or one-coordinate boundary assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant fields and degenerate scalar outputs are allowed; no positive-variance condition is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no limit or endpoint statement for the time interval or numerical setting."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the field, probability space, and maps are supplied as data; it invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fd-observable-sampling-bias-split": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-random-fluid-observable",
+          "source_section": "Definition",
+          "quote": "A real fluid observable of $U$ is a map $\\Phi:\\mathscr V\\to\\mathbb R$ for which $Y:=\\Phi\\circ U$ is measurable; it is integrable or square-integrable when $\\mathbb E[|Y|]<\\infty$ or $\\mathbb E[Y^2]<\\infty$, respectively. For a nonempty set $H$ of numerical settings, measurable composites $Y_h:=\\Phi_h\\circ U$ define numerical approximations",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "iid-moments",
+          "claim": "The sample mean has mean θ_h and variance σ_h²/n under the finite-second-moment IID hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "mse-expansion",
+          "claim": "Expanding the centered sample error gives the exact mean-square decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "indicator-bound",
+          "claim": "The absolute-error event forces the centered sample mean to exceed ε_s, yielding a pointwise indicator inequality.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "probability-bound",
+          "claim": "Taking expectations and using the exact sample variance proves the finite-sample probability bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a probability space, an IID sample, and n≥1; it makes no empty-sample assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: when b_h=0 the exact MSE reduces to σ_h²/n; zero variance is also permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: n=1 is allowed by the published IID moment result and the formula contains no n−1 denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1: σ_h²=0 is allowed and no division by σ_h is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is not an endpoint limit; ε_s is strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: only a finite sample mean and finite algebraic expansion are used; the item records no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives conditional equalities and bounds, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives conditional equalities and bounds, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "bernoulli-shifted-mean",
+          "input": "Y_h is Bernoulli(1/2), Y=0 almost surely, n=2.",
+          "check": "The sample mean has values 0, 1/2, 1 with probabilities 1/4, 1/2, 1/4, so E[(bar Y_h−θ)^2]=3/8; the formula gives (1/4)/2+(1/2)^2=3/8."
+        }
+      ]
+    },
+    "alg-fd-uq-observable-budget": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Procedure requires a sampling oracle and returns N≥1; empty-oracle behavior is not claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if V_h=0, the ceiling is zero before the max and the algorithm returns N=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the max with 1 makes a one-sample run admissible, including when V_h=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a zero-variance output is allowed and the returned RMS bound is still defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Procedure requires ε_s>0 and δ strictly between zero and one; boundary values are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the procedure uses a finite loop of N samples and no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is a procedure, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is a procedure, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-variance-budget",
+          "input": "V_h=0, ε_b=0.1, ε_s=0.5, δ=0.05, with a valid certificate.",
+          "check": "N=max(1,ceil(0))=1; the returned RMS bound is 0.1, total tolerance is 0.6, and the theorem probability bound is 0≤0.05."
+        }
+      ]
+    },
+    "rem-fd-fluid-sobol-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-and-total-sobol-indices",
+          "source_section": "Definition",
+          "quote": "Let $f\\in L^2(\\mu)$ on a finite product probability law and let $V_u$ denote $\\mathbb E[f_u^2]$ for the components of [[thm-product-hoeffding-anova-decomposition]]. Write $V=\\operatorname{Var}(f)=\\sum_{u\\ne\\varnothing}V_u$. Only when $V>0$ define the **first-order Sobol index** and **total Sobol index** of coordinate $i$ by $$S_i:=\\frac{V_{\\{i\\}}}{V},\\qquad S_{T_i}:=\\frac{\\sum_{u\\ni i}V_u}{V}.$$ For $V=0$, these normalized indices are undefined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-product-hoeffding-anova-components",
+          "source_section": "Definition",
+          "quote": "$$f_u:=\\sum_{v\\subseteq u}(-1)^{|u|-|v|}P_vf.$$ In particular $f_\\varnothing=P_\\varnothing f=\\mathbb E f$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pick-freeze-monte-carlo-sobol-estimators",
+          "source_section": "Definition",
+          "quote": "In each row draw six mutually independent vectors $X,X',U,V,W,W'$ with law $\\mu$. Reuse $Y=f(X)$; for each $i\\in[d]$, evaluate the hybrids $$X^{[i]}=(X_i,X'_{-i}),\\qquad \\widetilde X^{[i]}=(X_{-i},X'_i),$$ and form $$N_i=f(X)f(X^{[i]})-f(U)f(V),\\quad T_i=\\tfrac12(f(X)-f(\\widetilde X^{[i]}))^2,\\quad D=\\tfrac12(f(W)-f(W'))^2.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-coordinate-projections",
+          "source_section": "Definition",
+          "quote": "The conventions are $P_{[d]}f=f$ as an $L^2$ class and $P_\\varnothing f=\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pick-freeze-sobol-covariance-identities",
+          "source_section": "Statement",
+          "quote": "Then $$\\mathbb E[(f(X)-\\mu_f)(f(X^{[i]})-\\mu_f)]=V_{\\{i\\}},\\qquad \\frac12\\mathbb E[(f(X)-f(\\widetilde X^{[i]}))^2]=\\sum_{u\\ni i}V_u,$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d<\\infty$, let the product-law output satisfy $f\\in L^4(\\mu)$, and suppose $V=\\operatorname{Var}(f(X))>0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "true-one-factor-index",
+          "claim": "The Bernoulli one-factor model has variance component V_{1}=1/4 and true first-order index one.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "row-laws",
+          "claim": "The specified one-factor algorithm has numerator mean 1/4, denominator rows in {0,1/2}, and a binomial positive-row count independent of numerator draws.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "conditional-ratio",
+          "claim": "Conditioning on K>0 gives an expected sample ratio of 1/K.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "ratio-bias",
+          "claim": "Averaging over K=1,2 on the return event gives 5/6, different from the true index one.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "unbiased-numerators",
+          "claim": "The general finite-product first-order and total numerator expectations equal their variance components under the covariance-identity hypotheses.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F6"
+          ]
+        },
+        {
+          "id": "conditional-ratio-clt",
+          "claim": "The ratio CLT and plug-in MCSE interface is invoked only under AC, finite fourth moment, and positive output variance.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes 1≤d<∞ and a finite product probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: when V=0, normalized Sobol indices are undefined; the Bernoulli witness itself has V=1/4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the d=1 Bernoulli witness is explicitly analyzed and has true index one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: zero output variance makes normalized indices undefined; the witness uses a nondegenerate Bernoulli law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval endpoint or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–4.1 use finite sums and products; AC is stated separately for the cited asymptotic supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Remark contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Remark contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-row-bernoulli-ratio",
+          "input": "One Bernoulli(1/2) input, f(x)=x, n=2; condition on positive empirical denominator.",
+          "check": "K~Binomial(2,1/2), P(K=1|K>0)=2/3 and P(K=2|K>0)=1/3; conditional ratio expectation is (2/3)·1+(1/3)·(1/2)=5/6, while S_1=1."
+        }
+      ]
+    },
+    "ex-fd-all-zero-mc-sample": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in Law or distribution of a random element agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by $$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "all-zero-event",
+          "claim": "Mutual independence gives the positive probability (1−p)^n for an all-zero sample.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "sample-statistics",
+          "claim": "On that event the finite-sample mean, variance, and plug-in standard error all vanish.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "population-variance",
+          "claim": "Bernoulli moments give positive mean p and variance p(1−p), so the realized absolute error is p.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes n≥2 and a nonempty finite product sample space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example requires p>0; p=0 is excluded and would make the target mean and variance zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example requires p<1; p=1 is excluded and would make the population variance zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and step 1.1: the law is nondegenerate for 0<p<1 even though the realized all-zero sample is constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter endpoints p=0 and p=1 are excluded by the Example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 computes a finite product probability directly; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "p-half-n-three",
+          "input": "p=1/2 and n=3.",
+          "check": "The all-zero event has probability 1/8; on it the sample statistics are zero while the target mean is 1/2 and the population variance is 1/4."
+        }
+      ]
+    }
+  }
+}

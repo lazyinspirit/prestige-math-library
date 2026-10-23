@@ -1,0 +1,532 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-capillary-linear-free-surface",
+    "pthm-fd-capillary-wave-model-prediction",
+    "ex-fd-capillary-restoring-sign"
+  ],
+  "contracts": {
+    "post-fd-capillary-linear-free-surface": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines the horizontal quotient cell, flat finite-depth reference layer, moving free-surface graph, potential velocity field and units, upward curvature convention, liquid-minus-gas pressure jump, fixed-bed no-penetration condition, and exact first-order bulk and surface equations. It also matches the current mathematical capillary model definition under sigma=gamma and Lx/Ly mapped to the stated physical periods, with the physical branch taking gamma>0 and stronger regularity. The time interval is explicitly nonempty and open."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Postulate is restricted to an adopted inviscid, homogeneous, incompressible, irrotational, constant-density linear model with negligible gas inertia and constant gravity/surface tension. It excludes no-slip, finite-amplitude error claims, solvability, and universal empirical validity."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The complete relevant sections were read in MIT 18.354 §23.1 pp. 104–105, Georgi §§11.5.1–11.5.2 pp. 285–291, and Fitzpatrick 'Gravity Waves' (11.1)–(11.21) plus 'Surface Tension' (11.116)–(11.121). The adopted interface signs agree; fixed finite depth is explicit in the local model."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This item is an adopted physical model with provenance.proof: not-applicable and no Proof section. It says the linear equations are assumptions and asserts no nonlinear existence, approximation bound, or empirical validation."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "A postulate adopts a model and contains no finite numerical or empirical check; source fidelity and scope are reviewed instead."
+    },
+    "pthm-fd-capillary-wave-model-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-capillary-linear-free-surface",
+          "source_section": "Postulate",
+          "quote": "On $\\Omega_0\\times I$ the adopted equations and boundary conditions are\n\n$$\\Delta_h\\phi+\\partial_z^2\\phi=0,\\qquad -h<z<0,$$\n\n$$\\partial_z\\phi(x,-h,t)=0,$$\n\n$$\\partial_t\\eta(x,t)=\\partial_z\\phi(x,0,t),\\qquad \\partial_t\\phi(x,0,t)+g\\eta(x,t)-\\frac{\\gamma}{\\rho}\\Delta_h\\eta(x,t)=0.$$",
+          "uses": [
+            "3.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma$ be the unique smallest positive zero of cosine supplied by [[thm-cosine-has-a-smallest-positive-zero]]. Define\n$$\\pi:=2\\gamma.$$\n\nThus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-chain-rule-for-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V$ and $g:V\\to\\mathbb C$, where $U,V\\subseteq\\mathbb C$ are open. If $f$ is complex differentiable at $a\\in U$ and $g$ is complex differentiable at $f(a)$, then $g\\circ f$ is complex differentiable at $a$ and\n\n$$ (g\\circ f)'(a)=g'(f(a))f'(a). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$\n$$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$\nFor $x\\ne0$, define\n$$\\coth x:=\\frac{\\cosh x}{\\sinh x},\\qquad\\operatorname{csch}x:=\\frac1{\\sinh x}.$$\n\nThe positivity of $\\exp$ makes $\\cosh x>0$ for every $x$. If $x\\ne0$, then\n$x\\ne-x$, so strict increase of $\\exp$ makes $\\exp x\\ne\\exp(-x)$; hence\n$\\sinh x\\ne0$. Thus all four quotients above are defined on exactly their\nstated domains ([[cor-exponential-reciprocal-and-positivity]],\n[[thm-exponential-is-strictly-increasing]]).",
+          "uses": [
+            "4.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-hyperbolic-identities-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y,\\qquad\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y,$$\n$$\\cosh^2x-\\sinh^2x=1,\\qquad(\\sinh x)'=\\cosh x,\\qquad(\\cosh x)'=\\sinh x.$$\nMoreover $\\sinh:\\mathbb R\\to\\mathbb R$ is odd, strictly increasing, and onto;\n$\\cosh:\\mathbb R\\to[1,\\infty)$ is even and positive, and its restriction\nto $[0,\\infty)$ is strictly increasing and onto $[1,\\infty)$; and\n$\\tanh:\\mathbb R\\to(-1,1)$ is strictly increasing and onto. On their declared domains,\n$$(\\tanh x)'=\\operatorname{sech}^2x,\\quad(\\coth x)'=-\\operatorname{csch}^2x,\\quad(\\operatorname{sech}x)'=-\\operatorname{sech}x\\tanh x,\\quad(\\operatorname{csch}x)'=-\\operatorname{csch}x\\coth x.$$",
+          "uses": [
+            "4.1",
+            "7.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "9.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "mode-laplace-ode",
+          "step": "1.1",
+          "claim": "Complexifying one horizontal coordinate or the time variable gives an affine holomorphic exponent. By [L2] and [L4], the periodic lift of $q_m$ satisfies $\\partial_{x_j}q_m=i k_jq_m$ for $j=1,2$ and $\\partial_tq_m=-i\\omega q_m$.",
+          "inputs": [
+            "given",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bottom-compatible-profile",
+          "step": "3.1",
+          "claim": "Substituting $\\phi_c=F(z)q_m$ into the bulk equation and dividing by the nonzero factor $q_m$ gives $F''(z)-k^2F(z)=0$ on $(-h,0)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kinematic-amplitude-equation",
+          "step": "5.1",
+          "claim": "Since $q_m\\ne0$ by step 2.1, the bottom condition gives $F'(-h)=k\\beta=0$, so $\\beta=0$ because $k>0$; therefore $F(z)=\\alpha\\cosh(k(z+h))$.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dynamic-amplitude-equation",
+          "step": "6.1",
+          "claim": "Substitution into the kinematic condition and cancellation of $q_m$ using step 2.1 gives $-i\\omega H=\\alpha k\\sinh(kh)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exclude-zero-frequency",
+          "step": "7.1",
+          "claim": "Since $kh>0$, [L6] gives $\\sinh(kh)>0$; also $g+\\gamma k^2/\\rho>0$. If $\\omega=0$, step 6.1 forces $\\alpha=0$, and step 6.2 then forces $H=0$, contrary to the mode definition. Thus $\\omega\\ne0$.",
+          "inputs": [
+            "given",
+            "step 6.1",
+            "step 6.2",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dispersion-elimination",
+          "step": "8.1",
+          "claim": "Solve step 6.1 for $\\alpha=-i\\omega H/(k\\sinh(kh))$ and substitute into step 6.2. Using $(-i)^2=-1$ and $H\\ne0$ yields $\\omega^2=k(g+\\gamma k^2/\\rho)\\tanh(kh)=(gk+(\\gamma/\\rho)k^3)\\tanh(kh)$.",
+          "inputs": [
+            "given",
+            "step 6.1",
+            "step 6.2",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mode-existence-and-real-frequency",
+          "step": "9.1",
+          "claim": "Let $\\Lambda:=(gk+(\\gamma/\\rho)k^3)\\tanh(kh)>0$, using $kh>0$ and [L6]. By [L8], $\\sqrt\\Lambda$ exists and is a positive real number. By [L1], $\\omega^2=\\Lambda$ implies $(\\omega-\\sqrt\\Lambda)(\\omega+\\sqrt\\Lambda)=0$ and hence $\\omega=\\pm\\sqrt\\Lambda$, with the positive real square root. For either root and any $H\\ne0$, set $\\alpha:=-i\\omega H/(k\\sinh(kh))$, $F(z):=\\alpha\\cosh(k(z+h))$, and $\\eta_c:=Hq_m$. The definitions and [L5]–[L6] give $F''=k^2F$, $F'(-h)=0$, and step 1.1 gives the required horizontal and time derivatives; step 6.1 holds by construction, while step 6.2 follows from $\\omega^2=\\Lambda$. These are nonzero modes for both frequencies, and every nonzero mode has one of these frequencies by step 8.1.",
+          "inputs": [
+            "given",
+            "L1",
+            "L5",
+            "L6",
+            "L8",
+            "step 1.1",
+            "step 6.1",
+            "step 6.2",
+            "step 8.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-2-1",
+          "claim": "By [L3], $q_m$ never vanishes because $\\exp(w)\\exp(-w)=1$. Differentiating the horizontal identities in step 1.1 once more gives $\\Delta_hq_m=-(k_1^2+k_2^2)q_m=-k^2q_m$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-4-1",
+          "claim": "To solve this equation under only $F\\in C^2([-h,0],\\mathbb C)$, put $y=z+h\\in[0,h]$, $\\widehat F(y):=F(y-h)$, $\\alpha:=F(-h)$, $\\beta:=F'(-h)/k$, and $G(y):=\\alpha\\cosh(ky)+\\beta\\sinh(ky)$. By [L5], [L6] and the real chain rule, $G''=k^2G$, $G(0)=\\widehat F(0)$ and $G'(0)=\\widehat F'(0)$. Let $D:=\\widehat F-G$ and $U:=D'-kD$; then $D\\in C^2$, $D(0)=D'(0)=0$, and the differential equation gives $U'=D''-kD'=-kU$. From [L5] and [L6], $e^{ky}=\\cosh(ky)+\\sinh(ky)$ and $(e^{ky})'=ke^{ky}$; hence [L7] gives $(e^{ky}U)'=0$. The mean value theorem applied to both components makes $e^{ky}U$ constant, and its value at $0$ is zero. By [L3], $e^{ky}\\ne0$, so $U=0$. A second use of [L7] gives $(e^{-ky}D)'=e^{-ky}(D'-kD)=e^{-ky}U=0$; the same mean-value argument and $D(0)=0$ give $D=0$. Thus every $C^2$ solution has the general form $F(z)=\\alpha\\cosh(k(z+h))+\\beta\\sinh(k(z+h))$, and this representation is smooth.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "L3",
+            "L5",
+            "L6",
+            "L7",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-6-2",
+          "claim": "Substitution into the dynamic condition, using $\\Delta_h\\eta_c=-k^2\\eta_c$ from step 2.1 and canceling $q_m\\ne0$, gives $-i\\omega\\alpha\\cosh(kh)+(g+\\gamma k^2/\\rho)H=0$.",
+          "step": "6.2",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The time set I is explicitly nonempty and open, the mode index is nonzero, and both horizontal periods and depth are positive; the nonzero-mode necessity is not asserted on an empty time set.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$m\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement excludes the zero horizontal index and defines k=|k-vector|>0. Proof steps 3.1 and 7.1 use k>0 and sinh(kh)>0; uniform elevation and mean-flow modes are outside the claimed classification.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$k:=|\\mathbf k|>0$"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows any integer pair except (0,0), including a pair with exactly one nonzero component. Proof step 1.1 uses only k=|k-vector|>0, so these one-component modes are included.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$m=(m_1,m_2)\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires rho,g,gamma,h,k strictly positive. Proof steps 7.1 and 8.1 divide only by nonzero k,sinh(kh) and H; no zero-density, zero-depth, zero-gravity, zero-tension or zero-wave-number extension is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$h>0$, $\\rho>0$, $g>0$, and $\\gamma>0$"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is on an open time interval and makes no endpoint or long-time claim.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be open"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Fourier index and amplitudes are explicit data; no choice principle is used.",
+          "case_scope": {
+            "source_section": "Proof",
+            "source_excerpt": "For either real root $\\omega=\\pm\\sqrt{k(g+\\gamma k^2/\\rho)\\tanh(kh)}$ and any $H\\ne0$, define"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1, 5.1, 6.1, 7.1, and 5.1 prove that every nonzero admissible mode must satisfy the displayed dispersion relation.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Such a nonzero mode exists exactly when"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 9.1 explicitly constructs F and H for each positive or negative real root, proving the converse existence direction.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "and each of the two frequencies $\\omega=\\pm\\sqrt{(gk+(\\gamma/\\rho)k^3)\\tanh(kh)}$ admits a nonzero mode."
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No numerical finite check is needed: the proof solves and substitutes an arbitrary allowed Fourier mode symbolically. The result is a conditional model deduction, not experimental evidence."
+    },
+    "ex-fd-capillary-restoring-sign": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-capillary-wave-model-prediction",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval and let $E$ be an oriented three-dimensional Euclidean affine space, so the adopted Newtonian spacetime is $I\\times E$ with absolute time $t\\in I$. Define $\\mathrm{SO}(3):=\\{Q\\in\\mathbb R^{3\\times3}:Q^{\\mathsf T}Q=I_3,\\ \\det Q=1\\}$. Use an adapted Cartesian inertial chart $\\mathbf r:E\\to\\mathbb R^3$, an orientation-preserving affine isometry whose linear part lies in $\\mathrm{SO}(3)$; inertial charts are related by $t^*=t+t_0$ and $\\mathbf r^*=Q\\mathbf r+vt+a$, with constant $t_0$ in seconds, constant $Q\\in\\mathrm{SO}(3)$, $v\\in\\mathbb R^3$ constant in metres per second, and $a\\in\\mathbb R^3$ constant in metres. In these coordinates, time is measured in seconds and spatial coordinates $(x_1,x_2,z)$ in metres. Fix $h>0$ metres and horizontal periods $L_1,L_2>0$ metres, and set $\\mathbb T^2_L:=\\mathbb R^2/(L_1\\mathbb Z\\times L_2\\mathbb Z)$. Use the real constant $\\pi$ defined as twice the least positive zero of cosine. A field on $\\mathbb T^2_L$ is interpreted by its lift $\\widetilde f(\\widetilde x)=f([\\widetilde x])$ to $\\mathbb R^2$, periodic under translations $(L_1n_1,L_2n_2)$ for integers $n_1,n_2$; on products with $I$ and $[-h,0]$, $C^r$ means the lifted field has continuous ordinary coordinate partial derivatives through total order $r$, with continuous one-sided extensions at $z=-h,0$. Define $\\nabla_h:=(\\partial_{x_1},\\partial_{x_2})$ and $\\Delta_h:=\\partial_{x_1}^2+\\partial_{x_2}^2$ on these lifts. The real first-order fields are unrestricted formal perturbation coefficients, rather than finite-displacement interfaces: $\\phi:\\mathbb T^2_L\\times[-h,0]\\times I\\to\\mathbb R$ and $\\eta:\\mathbb T^2_L\\times I\\to\\mathbb R$ are those of the postulated model; they are at least $C^3$ and $C^2$ respectively, with units metres squared per second and metres. The model parameters are constant density $\\rho>0$ in kilograms per cubic metre, downward gravitational acceleration $-g e_z$ with $g>0$ in metres per second squared, and surface tension $\\gamma>0$ in newtons per metre. They satisfy\n\n$$\\Delta_h\\phi+\\partial_z^2\\phi=0\\quad(-h<z<0),\\qquad \\partial_z\\phi(x,-h,t)=0,$$\n\n$$\\partial_t\\eta(x,t)=\\partial_z\\phi(x,0,t),\\qquad \\partial_t\\phi(x,0,t)+g\\eta(x,t)-\\frac{\\gamma}{\\rho}\\Delta_h\\eta(x,t)=0.$$\n\nLet $\\mathbb C:=\\mathbb R[X]/(X^2+1)$ be the complex field and $i:=[X]$, so $i^2=-1$. Let $\\exp:\\mathbb C\\to\\mathbb C$ be the series-defined complex exponential, $\\exp w:=\\sum_{n=0}^{\\infty}w^n/n!$. For $m=(m_1,m_2)\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$ define the wavevector $\\mathbf k:=2\\pi(m_1/L_1,m_2/L_2)\\in\\mathbb R^2$ in inverse metres and its magnitude $k:=|\\mathbf k|>0$. The phase terms $\\mathbf k\\cdot\\widetilde x$ and $\\omega t$ are dimensionless. For $\\omega\\in\\mathbb C$ in inverse seconds, define the mode factor on the quotient torus by\n\n$$q_m([x],t):=\\exp\\bigl(i(\\mathbf k\\cdot\\widetilde x-\\omega t)\\bigr),$$\n\nwhere $\\widetilde x\\in\\mathbb R^2$ is any representative of $[x]\\in\\mathbb T^2_L$. If $\\widetilde x$ changes by $(L_1n_1,L_2n_2)$, the phase in parentheses changes by $2\\pi N$ for $N=m_1n_1+m_2n_2\\in\\mathbb Z$; the complex-exponential addition law and $e^{i\\pi}=-1$ give $\\exp(2\\pi iN)=1$ for every integer $N$ (by repeated addition for $N\\ge0$ and $\\exp(w)\\exp(-w)=1$ for $N<0$), so $q_m$ is independent of the representative. Its lift is smooth, and $\\Delta_hq_m=-k^2q_m$.\n\nA complex mode of angular frequency $\\omega$ is a pair $\\eta_c(x,t)=Hq_m(x,t)$ and $\\phi_c(x,z,t)=F(z)q_m(x,t)$ satisfying the complex-linear extension of the displayed model equations, with $H\\in\\mathbb C\\setminus\\{0\\}$ in metres and $F\\in C^2([-h,0],\\mathbb C)$ in metres squared per second; here $C^2([-h,0],\\mathbb C)$ means that the first two ordinary derivatives exist on $(-h,0)$ and extend continuously to both endpoints. The real and imaginary parts of any such mode are real-valued formal coefficient solutions of the real linear model, with no restriction on $|H|$. Optional finite-displacement graphs are $z=\\varepsilon\\eta$ with sufficiently small dimensionless $\\varepsilon$ on compact time windows as in the postulate; they impose no amplitude bound on these coefficients and no nonlinear-solution claim. For real $s$ write $e^s:=\\exp(s)$, $\\sinh s:=(e^s-e^{-s})/2$, $\\cosh s:=(e^s+e^{-s})/2$, and $\\tanh s:=\\sinh s/\\cosh s$. Such a nonzero mode exists exactly when\n\n$$\\omega^2=\\left(gk+\\frac{\\gamma}{\\rho}k^3\\right)\\tanh(kh),$$\n\nFor these hypotheses the right-hand side is positive because $k,h,g,\\gamma,\\rho>0$ and $\\tanh(kh)>0$. Thus for each $m$ the two frequencies $\\omega=\\pm\\sqrt{(gk+(\\gamma/\\rho)k^3)\\tanh(kh)}$, with the positive real square root, admit a nonzero mode. This is a conditional prediction of the stated first-order model, not a measurement or a claim that any actual fluid realizes every assumption.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-capillary-coefficient",
+          "step": "1.1",
+          "claim": "At any time $t$ in the model's nonempty interval, the theorem's factor in [F1] is $q_m(x,t)=q_m^h(x)\\exp(-i\\omega t)$. Its scalar time factor is nonzero by the exponential reciprocal identity, so $\\Delta_hq_m=-k^2q_m$ in [F1] gives $\\Delta_hq_m^h=-k^2q_m^h$ after cancellation. Linearity then gives $\\Delta_h\\eta_m=-k^2\\eta_m$ for $\\eta_m=Hq_m^h$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-mode-frequency-square",
+          "step": "2.1",
+          "claim": "By [F1], $\\omega^2=k(g+\\gamma k^2/\\rho)\\tanh(kh)>0$ for the nonzero lattice mode defined in the Example; hence each model frequency is real and nonzero.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-1-2",
+          "claim": "Since $k>0$, $\\gamma>0$, and $\\rho>0$, the capillary coefficient $\\gamma k^2/\\rho$ is positive; adding $g>0$ yields $g+\\gamma k^2/\\rho>0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example begins with a nonzero horizontal mode in a cell with positive periods and depth.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take any nonzero horizontal periodic mode"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero wave number is excluded by the nonzero-mode condition; the example does not address the uniform mode.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "$k>0$"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example covers any single nonzero horizontal periodic mode, including one with only one nonzero lattice component. Proof steps 1.1 and 2.1 use only its positive magnitude k and the stated positive model parameters.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "any nonzero horizontal periodic mode"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example assumes h, rho, g, and gamma are strictly positive; it makes no zero-parameter limiting claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "$h,\\rho,g,\\gamma>0$"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is an algebraic sign check and makes no time-endpoint claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The exact model frequency therefore has $\\omega^2>0$."
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used; the parameter and mode are arbitrary fixed inputs.",
+          "case_scope": {
+            "source_section": "Verification",
+            "source_excerpt": "Since $k>0$, $\\gamma>0$, and $\\rho>0$"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes a direct positivity statement, not a biconditional.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The exact model frequency therefore has $\\omega^2>0$."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Use $\\mathbb C:=\\mathbb R[X]/(X^2+1)$ with $i:=[X]$, the series-defined complex exponential $\\exp w:=\\sum_{n=0}^{\\infty}w^n/n!$, and $\\pi$ defined as twice the least positive zero of cosine.\n\nFix periods $L_1,L_2>0$ metres and let $\\mathbb "
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The current Example fixes an already chosen nonzero integer lattice mode m and unrestricted formal amplitude H, with h,rho,g,gamma>0 and k=|2*pi*(m1/L1,m2/L2)|>0. Verification 1.1 now derives the horizontal eigenfunction identity by cancelling a nonzero time factor at any t in the nonempty model interval; it does not recover mode existence from a sign. Verification 1.2 adds the positive capillary coefficient gamma*k^2/rho to g>0. Verification 2.1 uses F1 in the forward direction to obtain omega^2=k*(g+gamma*k^2/rho)*tanh(kh)>0, with the supplier identifying both nonzero real roots. None of these conclusions asserts that positivity implies the adopted model, its parameters, or mode existence. The supplier currently proves necessity in step 8.1 and constructs both branches in step 9.1, but that separate biconditional does not become a converse claim in this Example. The formal-coefficient and optional scaled-geometry qualification introduced in Step2 also adds no converse. Therefore preserve not_applicable and the reason No converse characterization is claimed.",
+            "item_sha256": "67c58151e730fa61b80a2a1464846982c6ea8c002ef10740fd70d6ed32c331fa",
+            "row_sha256": "ab3c4515574e887d669de08bb5a203b7d1f1dc6dc483f8b0cfc02cb571998200",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-43-47.json",
+              "sha256": "85d77e2b115cd44bf3f996cddf5a0a8dc47c8fc67581d148576d2e44a652ba73"
+            }
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The example is a symbolic positivity calculation for every allowed mode; no numerical parameter choice or empirical observation is introduced."
+    }
+  }
+}

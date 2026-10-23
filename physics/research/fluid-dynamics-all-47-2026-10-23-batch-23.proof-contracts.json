@@ -1,0 +1,1338 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-fd-locally-integrable-functions-define-distributions",
+    "thm-fd-rankine-hugoniot",
+    "prop-fd-entropy-jump",
+    "thm-fd-convex-scalar-riemann",
+    "prop-fd-viscous-entropy-passage",
+    "ex-fd-burgers-shock",
+    "ex-fd-burgers-fan",
+    "cex-fd-expansion-shock",
+    "cex-fd-shock-point-values"
+  ],
+  "contracts": {
+    "lem-fd-locally-integrable-functions-define-distributions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, write $f\\in L^1_{\\mathrm{loc}}(\\Omega)$ when $f:\\Omega\\to\\mathbb C$ is Lebesgue measurable and $\\int_K|f|<\\infty$ for every compact $K\\subseteq\\Omega$. This extends [[def-locally-integrable-function-on-r-n]]: equivalently, require integrability on every ball whose closure is a compact subset of $\\Omega$. Such balls finitely cover each compact $K$, and conversely their closures are compact; on all of $\\mathbb R^n$, any ball lies in a larger compact closed ball.\n\nFor a test $\\varphi$ as in [[def-test-function-space-d-of-an-open-set]], define the **regular functional**\n\n$$\\langle u_f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx.$$\n\nThis is well-defined since $|\\int f\\varphi|\\le\\sup_K|\\varphi|\\int_K|f|$ for $K=\\operatorname{supp}\\varphi$. It is complex-linear in $f$ and in $\\varphi$ and depends only on the almost-everywhere class of $f$. For an empty support the integral is zero. The subsequent embedding theorem establishes continuity, so that this is a distribution, and injectivity modulo almost-everywhere equality. That theorem states the Countable Choice cost of its injectivity proof; no choice is needed to define the displayed pairing.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-test-function-lf-topology-universal-property",
+          "source_section": "Statement",
+          "quote": "The test-function topology exists as a Hausdorff locally convex vector topology, induces the prescribed topology on each $\\mathcal D_K$, and is the finest locally convex topology making all inclusions $\\mathcal D_K\\to\\mathcal D(\\Omega)$ continuous. A linear map $L:\\mathcal D(\\Omega)\\to E$ to a locally convex space is continuous if and only if each restriction $L|_{\\mathcal D_K}$ is continuous. An increasing compact exhaustion whose interiors cover $\\Omega$ gives the same topology, independently of the exhaustion. Thus this is an LF topology of the complete metrizable fixed-support spaces. All these claims hold in ZF.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The functional $T_f$ is linear by [F1]. For each compact $K\\subseteq\\Omega$, [F1] gives $|\\langle T_f,\\varphi\\rangle|\\leq\\bigl(\\int_K|f|\\bigr)p_{0,K}(\\varphi)$ for every $\\varphi\\in\\mathcal D_K$, where $p_{0,K}(\\varphi)=\\sup_{x\\in K}|\\varphi(x)|$ and the value is $0$ when $K=\\varnothing$. Since $f$ is locally integrable, the coefficient is finite, so the restriction $T_f|_{\\mathcal D_K}$ is continuous.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to the linear map $T_f$: every fixed-support restriction is continuous by step 1.1, so $T_f$ is continuous on $\\mathcal D(\\Omega)$ with its LF topology. A continuous complex-linear functional on this space is a distribution, as claimed. The proof uses no choice axiom and asserts no injectivity result.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For fixed compact support K, |∫_K fφ| ≤ ||φ||∞∫_K|f|; if the right side is zero the functional vanishes on that fixed-support space."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement includes an empty open domain, where the unique zero functional is continuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero functional when the fixed-support L1 bound is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies for n=1 because it uses only the fixed compact-support estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No nondegenerate interval or geometric limiting case occurs in this continuity lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses each fixed compact support in the LF test-function space, including supports meeting the boundary of a chosen containing compact set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves only that a locally integrable function defines a distribution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of distributions by locally integrable functions is claimed."
+        }
+      ]
+    },
+    "thm-fd-rankine-hugoniot": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-piecewise-traces",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be the state domain of a conservation system, $n\\in\\mathbb R^d$ satisfy $|n|=1$, and $s\\in\\mathbb R$. The planar interface and its two open sides are\n$$\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st=0\\},\\qquad Q^-=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st<0\\},\\qquad Q^+=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st>0\\}.$$\nA state field is piecewise $C^1$ across $\\Sigma$ if on each side it is $C^1$ and, near every point of $\\Sigma$, each side field is the restriction of a $C^1$ map from a neighborhood in $I\\times\\Omega$ into $\\mathcal O$. The left and right traces $U_L,U_R:\\Sigma\\to\\mathcal O$ are the restrictions of those extensions to $\\Sigma$; they are independent of the chosen extensions because they agree with the same field on their respective open sides. For any state or flux quantity $G$ with these traces, define its jump by $[G]=G_R-G_L$. A planar shock profile is such a piecewise $C^1$ state field with its specified constant interface normal $n$ and speed $s$; the definition does not assert that it solves a conservation system.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ (Linear map between vector spaces over the same field,\nEvery Euclidean linear map has a unique matrix and satisfies $\\|Lh\\|_2\\le K\\|h\\|_2$ for some $K\\ge0$).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n(Nonnegative simple measurable functions) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure (Measures on sigma-algebras) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n(Extended-real-valued measurable functions). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\nThe integral of a nonnegative simple function.\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple (Nonnegative simple measurable functions).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\nClosure properties of measurable functions used by the integral and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n(Real and imaginary parts, complex conjugation, and modulus), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a test $\\varphi\\in C_c^\\infty(I\\times\\Omega;\\mathbb R^m)$. Choose an orthonormal basis of $n^\\perp$ and write $x=y+(st+r)n$, with $y\\in n^\\perp$ and $r=n\\cdot x-st$. In these coordinates $\\Phi(t,y,r)=(t,y+(st+r)n)$ is a linear bijection with absolute determinant $1$, and $y\\mapsto y+stn$ is an isometry from $n^\\perp$ onto the full spatial plane $\\{x\\in\\mathbb R^d:n\\cdot x=st\\}$, whose restriction gives the slice in $\\Omega$. [F4] states scaling for measurable sets. For a nonnegative simple function, [F6] and the set-scaling identity for $\\Phi^{-1}$ give equality of the integrals of the function and its pullback by summing over the measurable level sets; since $\\Phi$ is bijective, pullback gives a bijection between the simple minorants of a nonnegative measurable function and those of its pullback, so [F7] gives the same integral identity for nonnegative measurable functions. Apply that identity to the positive and negative parts of each signed integrable real integrand; [F8] then gives equality for the integrable integrands used here. Every test-supported integrand is integrable after extension by zero, since the coefficients are locally integrable and the test derivatives are bounded on compact support. Thus this chart preserves the required volume integrals, and [F5] permits their iterated evaluation. The coordinate measure $dy$ is the pushforward of $\\lambda_{d-1}$ by the chosen linear isometry $E$. Replacing $E$ by another such isometry changes $z$ by an orthogonal linear map, whose determinant has absolute value $1$, so [F4] and the same simple-function argument prove independence of the basis; when $d=1$ this is the one-point measure specified in the Statement. Let $H(r)=1$ for $r>0$ and $H(r)=0$ for $r<0$. By [F3], one-dimensional integration by parts in $r$ gives, for every $C^1$ coefficient field $a$, $\\partial_t(aH)=H\\partial_ta-s\\,a|_\\Sigma\\delta_\\Sigma$ and $\\partial_{x_j}(aH)=H\\partial_{x_j}a+n_j\\,a|_\\Sigma\\delta_\\Sigma$, where $\\delta_\\Sigma$ pairs with $dt\\,dy$ on the spatial plane, with the coordinate Lebesgue measure just defined. The time derivative is at fixed $x$, so in this chart $\\partial_t|_x=\\partial_t|_{y,r}-s\\partial_r$; this produces the factor $-s$ and the stated normalization. Tangential spatial derivatives have no boundary term, while the normal derivative contributes $n_j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a neighborhood of $\\Sigma$, write $U=U_L+[U]H$ and $F_j(U)=F_j(U_L)+[F_j(U)]H$, using the $C^1$ side extensions from [F1]. Apply the derivative formulas of step 1.1. The regular terms are the classical residuals on the two open sides, hence vanish by the given equations; the remaining interface term is $\\left(\\sum_jn_j[F_j(U)]-s[U]\\right)\\delta_\\Sigma$. A partition of unity over the compact support of $\\varphi$ gives the same formula throughout $I\\times\\Omega$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the coefficient vanishes on $\\Sigma$, the residual distribution is zero. Conversely, if it is nonzero at a point of $\\Sigma$, continuity of the traces gives a neighborhood on which one component has a fixed strict sign. A nonnegative compactly supported test in that interface patch, placed in the corresponding vector component, has a nonzero pairing with the residual, contradicting that it is the zero distribution. If $\\Sigma$ is empty in the cylinder, the equivalence is vacuous. Thus the residual vanishes exactly when the vector Rankine–Hugoniot equality holds pointwise on $\\Sigma$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "In d=m=1 with n=1, the coefficient reduces to [F(U)]−s[U]; it is a vector coefficient componentwise and no division by [U] occurs.",
+        "Normalization regression: d=3, n=e1, s=1, F=0, U=1_{x1>t} has residual -dt dx2 dx3. The explicit plane Lebesgue pushforward now gives this exact residual; d=1 uses lambda_0({0})=1."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 states that an interface empty in the cylinder makes the equivalence vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 make a zero jump coefficient produce the zero residual without dividing by the state jump."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes the normal-coordinate calculation to one spatial normal coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows [U]=0; steps 2.1–3.1 retain the full vector coefficient and test its components directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cylinder is open and the theorem has no initial or terminal boundary formulation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes ACω for the linear Lebesgue coordinate change used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 shows a zero coefficient gives zero residual, hence the Rankine–Hugoniot equality implies distributional solvability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 uses a localized nonnegative test in a component of any nonzero coefficient to prove the converse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Confirmed refuter:23:1 fatal for the frozen formula: imported Hausdorff measure uses sum diam^k without the normalizing volume factor. Fremlin 264I (printed p.41) gives lambda_2=(pi/4)H^2; with n=e1,s=1,F=0,U=1_{x1>t}, the actual residual is minus dt dx2 dx3, not minus the unnormalized H^2 slice. Repaired the measure definition to the explicit isometric pushforward of lambda_(d-1), lambda_0 singleton mass one; step 1.1 proves basis independence by orthogonal determinant-one absolute scaling. Checked all three steps: determinant of spacetime shear is absolute one; simple minorants extend set change-of-variables to integrands; Fubini and normal integration by parts give n_j[F_j]-s[U]. Side C1 extensions make all trace coefficients continuous, permitting the signed-patch test for the reverse implication. Empty interface is vacuous; zero vector jump requires no division; d=1 uses mass one. AC_omega retained exactly for cited change-of-variables. Consumer search finds only owned item consumers; entropy-jump normalization must be made explicit at its own next-level review."
+      }
+    },
+    "prop-fd-entropy-jump": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-piecewise-traces",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be the state domain of a conservation system, $n\\in\\mathbb R^d$ satisfy $|n|=1$, and $s\\in\\mathbb R$. The planar interface and its two open sides are\n$$\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st=0\\},\\qquad Q^-=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st<0\\},\\qquad Q^+=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st>0\\}.$$\nA state field is piecewise $C^1$ across $\\Sigma$ if on each side it is $C^1$ and, near every point of $\\Sigma$, each side field is the restriction of a $C^1$ map from a neighborhood in $I\\times\\Omega$ into $\\mathcal O$. The left and right traces $U_L,U_R:\\Sigma\\to\\mathcal O$ are the restrictions of those extensions to $\\Sigma$; they are independent of the chosen extensions because they agree with the same field on their respective open sides. For any state or flux quantity $G$ with these traces, define its jump by $[G]=G_R-G_L$. A planar shock profile is such a piecewise $C^1$ state field with its specified constant interface normal $n$ and speed $s$; the definition does not assert that it solves a conservation system.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-rankine-hugoniot",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and let $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $\\partial_tU+\\sum_j\\partial_{x_j}(F_j(U))=0$ pointwise on both open sides, and $U,F_j(U)\\in L^1_{\\mathrm{loc}}$. With $[G]=G_R-G_L$, the distributional residual is\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=\\left(\\sum_{j=1}^dn_j[F_j(U)]-s[U]\\right)\\delta_\\Sigma,$$\nHere spatial plane measure means the pushforward of Lebesgue measure $\\lambda_{d-1}$ by $z\\mapsto Ez+stn$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is any linear isometry onto $n^\\perp$. Explicitly, $\\langle A\\delta_\\Sigma,\\varphi\\rangle=\\int_I\\int_{\\{z:Ez+stn\\in\\Omega\\}}A(t,Ez+stn)\\cdot\\varphi(t,Ez+stn)\\,d\\lambda_{d-1}(z)\\,dt$. For $d=1$, $\\mathbb R^0=\\{0\\}$ and $\\lambda_0(\\{0\\})=1$. This definition is independent of $E$ and specifies the normalization without Hausdorff-measure notation. Consequently, $U$ solves the conservation system in distributions if and only if\n$$s[U]=\\sum_{j=1}^dn_j[F_j(U)]\\quad\\text{at every point of }\\Sigma.$$\nThis is a vector equality; no division by the vector jump is made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On either open side, [F4] and entropy compatibility give $\\partial_t\\eta(U)+\\sum_j\\partial_{x_j}q_j(U)=D\\eta(U)\\left(\\partial_tU+\\sum_jDF_j(U)\\partial_{x_j}U\\right)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The fields $\\eta(U)$ and $q_j(U)$ have $C^1$ extensions to each side of $\\Sigma$. Apply the normal-coordinate distribution calculation from [F3] under the stated Countable Choice assumption [F5] to this scalar density and its scalar fluxes; the bulk residuals vanish by step 1.1, leaving the interface coefficient $\\sum_jn_j[q_j(U)]-s[\\eta(U)]$. The interface measure is the time integral of the isometric pushforward of Lebesgue measure specified in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If this coefficient is nonpositive everywhere, pairing the residual with any nonnegative test gives a nonpositive value, which is the distributional inequality. If the coefficient is positive at a point, continuity makes it positive on a smaller interface patch; a nonnegative test supported there has positive pairing, contradicting the inequality. Thus the distributional inequality holds exactly under the stated pointwise condition.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For a scalar convex flux and a quadratic entropy, the residual sign is checked by evaluating the oriented jump [q]−s[η] at the two traces."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the interface is empty, step 2.1 has no singular residual and the side identities hold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero entropy jump coefficient gives the zero interface distribution in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement's coefficient and sign criterion reduce to the scalar formula when d=m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Affine entropies have η''=0 and the entropy production can vanish; steps 2.1–3.1 still cover zero coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is on an open cylinder and states no initial or terminal trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Statement for the RH coordinate calculation used by step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves a nonpositive coefficient pairs nonpositively with every nonnegative test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 localizes a nonnegative test where a continuous positive coefficient would violate the inequality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read steps 1.1–3.1 against chain rule, entropy compatibility and repaired normal-coordinate jump calculation. Chain-rule bulk residual vanishes; scalar density and flux have C1 side extensions, so use of the supplier calculation is justified even though entropy need not be an invertible state map. Repaired public measure convention to explicitly match the supplier isometric Lebesgue pushforward; no bare unnormalized Hausdorff measure is used. Nonpositive coefficient suffices by positive plane measure; positivity at any point yields a smooth nonnegative test on a patch by continuity, proving necessity. Empty interface is vacuous and d=1 uses mass one. AC_omega carried. Direct consumers are scalar Riemann theorem and expansion shock, both owned; their one-dimensional coefficients/signs are unchanged."
+      }
+    },
+    "thm-fd-convex-scalar-riemann": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-rankine-hugoniot",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and let $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $\\partial_tU+\\sum_j\\partial_{x_j}(F_j(U))=0$ pointwise on both open sides, and $U,F_j(U)\\in L^1_{\\mathrm{loc}}$. With $[G]=G_R-G_L$, the distributional residual is\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=\\left(\\sum_{j=1}^dn_j[F_j(U)]-s[U]\\right)\\delta_\\Sigma,$$\nHere spatial plane measure means the pushforward of Lebesgue measure $\\lambda_{d-1}$ by $z\\mapsto Ez+stn$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is any linear isometry onto $n^\\perp$. Explicitly, $\\langle A\\delta_\\Sigma,\\varphi\\rangle=\\int_I\\int_{\\{z:Ez+stn\\in\\Omega\\}}A(t,Ez+stn)\\cdot\\varphi(t,Ez+stn)\\,d\\lambda_{d-1}(z)\\,dt$. For $d=1$, $\\mathbb R^0=\\{0\\}$ and $\\lambda_0(\\{0\\})=1$. This definition is independent of $E$ and specifies the normalization without Hausdorff-measure notation. Consequently, $U$ solves the conservation system in distributions if and only if\n$$s[U]=\\sum_{j=1}^dn_j[F_j(U)]\\quad\\text{at every point of }\\Sigma.$$\nThis is a vector equality; no division by the vector jump is made.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-fd-entropy-jump",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ and $\\Omega\\subseteq\\mathbb R^d$ be open, let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and let $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and set $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $U_t+\\sum_jDF_j(U)\\partial_{x_j}U=0$ classically on each open side, and the state, flux, and entropy compositions are locally integrable. Let $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ be convex and let $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfy $Dq_j(V)=D\\eta(V)DF_j(V)$ for every $V\\in\\mathcal O$. With $[G]=G_R-G_L$, the distributional entropy residual is\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)=\\left(\\sum_{j=1}^dn_j[q_j(U)]-s[\\eta(U)]\\right)\\delta_\\Sigma.$$\nHere $\\delta_\\Sigma$ uses the plane measure defined in the vector jump-residual theorem: integrate in $t$ and in $z\\in\\mathbb R^{d-1}$ with $x=Ez+stn\\in\\Omega$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is a linear isometry onto $n^\\perp$, using Lebesgue measure $\\lambda_{d-1}$ and singleton mass one when $d=1$. The entropy inequality $\\partial_t\\eta(U)+\\sum_j\\partial_{x_j}q_j(U)\\leq0$ holds near the interface if and only if $\\sum_jn_j[q_j(U)]-s[\\eta(U)]\\leq0$ at every interface point. Entropy admissibility is an additional condition; the conservation jump equality alone does not imply it.",
+          "uses": [
+            "4.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-lax-pattern",
+          "source_section": "Definition",
+          "quote": "For a one-dimensional system $U_t+\\partial_xF(U)=0$ with $F\\in C^1(\\mathcal O;\\mathbb R^m)$ on an open state domain $\\mathcal O\\subseteq\\mathbb R^m$, the system is strictly hyperbolic at $V\\in\\mathcal O$ if the Jacobian $DF(V)$ has $m$ distinct real eigenvalues. Write them in increasing order as $\\lambda_1(V)<\\cdots<\\lambda_m(V)$. For states $U_L,U_R\\in\\mathcal O$ and speed $s\\in\\mathbb R$ satisfying the Rankine–Hugoniot equality\n$$F(U_R)-F(U_L)=s(U_R-U_L),$$\nassume strict hyperbolicity at both states. The jump is a $k$-Lax shock, $1\\leq k\\leq m$, if\n$$\\lambda_k(U_R)<s<\\lambda_k(U_L),$$\nand also $\\lambda_{k-1}(U_L)<s$ when $k>1$, and $s<\\lambda_{k+1}(U_R)$ when $k<m$. The outer inequality is omitted at each endpoint $k=1$ or $k=m$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.3",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $a=b$, the profile and initial data are constant. For every compactly supported test, integration of $\\varphi_t$ over $[0,T)$ gives $-\\varphi(0,x)$ and integration of $\\varphi_x$ over $\\mathbb R$ gives zero. The weak identity follows; the same calculation with the constants $\\eta(a)$ and $q(a)$ gives equality in every entropy identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $a>b$. Apply [F5] to $F$ on $[b,a]$ to obtain $s=F'(\\xi)$ for some $\\xi\\in(b,a)$. Apply [F5] to $F'$ on any subinterval of $[b,a]$; since its derivative $F''$ is positive, $F'$ is strictly increasing there. Hence $F'(b)<s<F'(a)$, which is the scalar Lax pattern in [F4].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $a<b$. Applying [F5] to $F'$ on any subinterval of $[a,b]$ shows it is strictly increasing, so it has an inverse $g$ on $[F'(a),F'(b)]$. This inverse is continuous: for each interior $z$, strict inequalities $F'(z-\\delta)<F'(z)<F'(z+\\delta)$ trap $g(y)$ near $z$ whenever $y$ is sufficiently near $F'(z)$, and the endpoint argument is one-sided. For $y=F'(z)$, the difference quotient $(g(y+h)-z)/h$ equals $(x-z)/(F'(x)-F'(z))$ with $x=g(y+h)$; as $h\\to0$, continuity gives $x\\to z$, and differentiability of $F'$ gives limit $1/F''(z)$. Thus $g'(y)=1/F''(g(y))$ on the interior. Applying [F7] to $u(t,x)=g(x/t)$ gives $u_t=-x/(t^2F''(u))$ and $u_x=1/(tF''(u))$, whence $u_t+F'(u)u_x=0$. The constant branches solve the equation too, and the profile is continuous at both fan edges.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The shock is constant on each open side, so the classical equation holds there. Its traces are $u_L=a$ and $u_R=b$, and the Rankine–Hugoniot coefficient is $[F]-s[u]=F(b)-F(a)-s(b-a)=0$. By [F2] under [F8], the distributional equation holds on $(0,T)\\times\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F2",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The traces at each fan edge agree, so both the state and flux jumps vanish there. By [F2], the distributional conservation residual is zero; hence the weak equation holds on $(0,T)\\times\\mathbb R$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On any compact spatial set, $u(t,\\cdot)$ differs from $u_0$ only between $0$ and $st$, an interval of length $|s|t$, and $|u-u_0|\\leq|a-b|$. Hence $\\|u(t,\\cdot)-u_0\\|_{L^1(K)}\\leq |a-b||s|t$. For an arbitrary initial-boundary test $\\varphi$, take smooth cutoffs $\\chi_\\epsilon$ that vanish on $[0,\\epsilon]$, equal $1$ for $t\\geq2\\epsilon$, and have $\\chi_\\epsilon'\\geq0$ with integral $1$. Apply the interior weak identity from step 2.1 to $\\chi_\\epsilon\\varphi$. The term $\\int u\\chi_\\epsilon'\\varphi$ tends to $\\int u_0\\varphi(0,\\cdot)$ by the displayed local $L^1$ estimate and uniform continuity of $\\varphi$; the terms over $0<t<2\\epsilon$ tend to zero because $u,F(u)$ and the test derivatives are bounded on the compact support. Taking the limit gives the initial weak identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $\\eta\\in C^2(\\mathbb R)$ be convex with compatible flux $q$, and let $C(z)=F(b)+s(z-b)$ be the chord joining $(b,F(b))$ to $(a,F(a))$. For $b<z<a$, [F5] gives points $\\xi_1\\in(b,z)$ and $\\xi_2\\in(z,a)$ whose derivatives equal the secant slopes on $[b,z]$ and $[z,a]$. Applying [F5] to $F'$ between $\\xi_1$ and $\\xi_2$ shows $F'(\\xi_1)<F'(\\xi_2)$; rearranging the secant-slope inequality gives $F(z)<C(z)$. At the endpoints $F=C$. Convexity of $\\eta$ gives $\\eta''\\geq0$, since its nonnegative symmetric second differences divided by $h^2$ converge to $\\eta''$. The jump coefficient is\n$$[q]-s[\\eta]=-\\int_b^a\\eta'(z)(F'(z)-s)\\,dz=\\int_b^a\\eta''(z)(F(z)-C(z))\\,dz\\leq0.$$\nThe integral identity follows by applying [F6] to the $C^1$ function $\\eta'(F-C)$; its endpoint values are zero. By [F3] under [F8] the entropy residual is nonpositive. Apply the cutoff argument of step 3.1 to this interior entropy inequality. The entropy density is Lipschitz on $[b,a]$, so the local $L^1$ trace estimate in step 3.1 gives the initial entropy term; boundedness makes the omitted time strip vanish.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "step 3.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For each $k$, the compositions $\\eta_k(u)$ and $q_k(u)$ are constant on each open side of the shock; splitting an interior test at $x=st$ and integrating by parts on the two sides therefore gives their distributional residual coefficient $[q_k]-s[\\eta_k]$. If $k<b$ or $k>a$, the sign of $z-k$ is constant for $z\\in[b,a]$, so $(\\eta_k(z),q_k(z))$ is, up to additive constants, the same signed multiple of $(z,F(z))$; its coefficient vanishes by the Rankine–Hugoniot equality from step 2.1. If $b\\leq k\\leq a$, direct substitution gives $[q_k]-s[\\eta_k]=2(F(k)-C(k))\\leq0$, with equality at $k=b,a$, since the strict convexity calculation in step 4.1 puts $F$ below its chord $C$ on $[b,a]$. Thus the Kružkov residual is nonpositive without applying the smooth entropy-jump result to the nonsmooth pair. Apply the cutoff argument of step 3.1 to this interior inequality; $\\eta_k$ and $q_k$ are Lipschitz on $[b,a]$, so the local trace and bounded-strip limits give the required initial term.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "A1",
+            "algebra",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "Write $\\alpha=F'(a)$ and $\\beta=F'(b)$, so $\\alpha<\\beta$ by [A1]. The fan and the initial step can differ only on $[\\min(0,\\alpha t),\\max(0,\\beta t)]$, whose length is $t(\\max(0,\\beta)-\\min(0,\\alpha))\\leq t(|\\alpha|+|\\beta|)$. On this interval both values lie in $[a,b]$, so $\\|u(t,\\cdot)-u_0\\|_{L^1(K)}\\leq(b-a)t(|\\alpha|+|\\beta|)$ for every compact $K$. Since $F$ is Lipschitz on $[a,b]$, its composition has the same local strong-trace property. Apply the same cutoff argument as in step 3.1 to the interior weak identity of step 2.2; the local $L^1$ bound makes the cutoff boundary term converge to the prescribed initial value, and boundedness makes the omitted time strip vanish. This proves the weak identity with the prescribed initial data.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.2",
+            "step 3.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For each compatible convex $C^2$ pair, [F7] and $q'=\\eta'F'$ give $\\partial_t\\eta(u)+\\partial_xq(u)=\\eta'(u)(u_t+F'(u)u_x)=0$ in the fan. Outside the fan both compositions are constant. Their traces agree at the edges, so [F3] gives zero interface residual. Apply the cutoff argument of step 4.2 to this interior identity; the Lipschitz continuity of $\\eta$ and $q$ on $[a,b]$ gives the required initial entropy term.",
+          "step": "5.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F7",
+            "step 1.3",
+            "step 4.2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Fix $k\\in\\mathbb R$. If $k\\notin[a,b]$, $\\eta_k$ is affine on the range of $u$ and the chain-rule computation of step 5.2 applies directly. If $k\\in[a,b]$, split the fan at the ray $x=tF'(k)$; on both open pieces the Kružkov compositions are $C^1$ and [F7] gives zero classical entropy residual. At the new interface both $\\eta_k(u)$ and $q_k(u)$ have equal traces because $u=k$ there and $q_k(k)=0$; the interface calculation from [F2] then gives zero singular residual. Apply the cutoff argument of step 4.2 to the resulting interior inequality; both compositions are Lipschitz on $[a,b]$, so the local trace estimate supplies the initial term. This proves every stated inequality, with equality for the fan.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F7",
+            "step 1.3",
+            "step 4.2",
+            "step 5.2",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For F(z)=z²/2 and a=2,b=0, the shock speed is 1 and 0<1<2; for a=−1,b=2 the fan trace support is contained in [−t,2t]."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes T>0 and a nonempty real spatial domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the zero-jump case a=b as a constant solution with equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement is a scalar construction and the proof covers the one-component case directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the degenerate state interval a=b separately; strict convexity is assumed only when a≠b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.2 pass the test functions through t=0, while steps 1.3 and 6.1 handle the fan edges and endpoint states."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes ACω and Fact F8 records it for the distributional jump suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem constructs profiles and does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization or uniqueness assertion is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read all eleven steps and eight actual supplier facts, including MVT and FTC, and both reader snapshots. Post-reader raw hash matches current; test space definition now precedes its use. Reviewed all a=b, a>b, a<b cases. Strict positivity of continuous F_second on the closed state interval gives the continuous inverse with finite endpoint derivatives and explicit C1 extension; chain rule solves fan interiors. Matching traces kill fan-edge residuals. MVT places shock speed strictly between endpoint slopes. FTC integration by parts gives integral eta_second(F-chord)<=0 for descending shocks. Direct piecewise integrations, rather than a smooth entropy theorem applied to |z-k|, give Kruzkov coefficients 2(F(k)-chord(k)) and matching zero traces inside fans, including k=a,b and k outside the range. Strong trace estimates of order t and bounded time strips justify all initial test identities. Arbitrary interface point values affect only null sets. Both jump suppliers use lambda_0 mass one in d=1 after normalization repair, so every actual use is unchanged. No general uniqueness or empirical conclusion. Complete review of direct consumers is carried in subsequent owned example reviews."
+      }
+    },
+    "prop-fd-viscous-entropy-passage": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the chain rule and compatibility give, pointwise for each $\\epsilon>0$,\n$$\\partial_t\\eta(u^\\epsilon)+\\sum_j\\partial_{x_j}q_j(u^\\epsilon)=\\epsilon\\eta'(u^\\epsilon)\\Delta u^\\epsilon.$$\nApplying the chain rule twice in each spatial coordinate and the product rule yields $\\eta'(u^\\epsilon)\\Delta u^\\epsilon=\\Delta\\eta(u^\\epsilon)-\\eta''(u^\\epsilon)|\\nabla u^\\epsilon|^2$. Since $\\eta''\\geq0$, the entropy residual is at most $\\epsilon\\Delta\\eta(u^\\epsilon)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply by $\\psi\\geq0$ and integrate. By [F4], the integrals can be taken iteratively in time and each spatial coordinate. Applying [F3] to the smooth compactly supported products gives integration by parts twice in each spatial coordinate and once in time, with $\\psi$ vanishing near $T$, and yields\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(\\eta(u^\\epsilon)\\psi_t+\\sum_jq_j(u^\\epsilon)\\psi_{x_j}\\right)\\,dx\\,dt+\\int_\\Omega\\eta(u_0^\\epsilon)\\psi(0,x)\\,dx\\geq-\\epsilon\\int_0^T\\!\\!\\int_\\Omega\\eta(u^\\epsilon)\\Delta\\psi\\,dx\\,dt.$$\nThese integrations by parts are the one-dimensional FTC applied to the smooth compactly supported products in each coordinate and in time; no spatial boundary term remains.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Continuity of $u^\\epsilon$ up to $t=0$ and its almost-everywhere bound on $(0,T)\\times\\Omega$ imply $|u_0^\\epsilon|\\leq M$ on $\\Omega$: a value larger than $M$ at any $x_0\\in\\Omega$ would, by continuity, give a relative open neighborhood in $(0,T)\\times\\Omega$ of positive measure where $|u^\\epsilon|>M$. For every compact $K\\subseteq\\Omega$, this bound and the strong initial convergence give $0\\leq\\int_K(|u_0|-M)_+\\,dx\\leq\\int_K|u_0-u_0^\\epsilon|\\,dx\\to0$, so $(|u_0|-M)_+=0$ almost everywhere on each such $K$. The countable compact exhaustion $K_N=\\{x\\in\\Omega:|x|\\leq N,\\ \\operatorname{dist}(x,\\mathbb R^d\\setminus\\Omega)\\geq1/N\\}$ (taking the distance to the empty set to be $+\\infty$) covers $\\Omega$, hence $|u_0|\\leq M$ almost everywhere on $\\Omega$. The functions $\\eta$ and $q_j$ are Lipschitz and bounded on $[-M,M]$. Thus [A2] implies local $L^1$ convergence of $\\eta(u^\\epsilon)$ and $q_j(u^\\epsilon)$ to $\\eta(u)$ and $q_j(u)$, and of $\\eta(u_0^\\epsilon)$ to $\\eta(u_0)$. For a given test, choose $0<\\tau<T$ and compact $K\\subseteq\\Omega$ with its support in $[0,\\tau]\\times K$. The same bounded ranges imply absolute integrability of $\\eta(u)$ and all $q_j(u)$ on this slab, as required by [F1]. For $0<\\delta<\\tau$, the spacetime terms converge on $[\\delta,\\tau]\\times K$ by the interior $L^1$ convergence and these Lipschitz bounds. On $(0,\\delta)\\times K$, their difference is bounded in absolute integral by\n$$2\\delta\\lambda_d(K)\\left(\\sup_{[-M,M]}|\\eta|\\,\\|\\psi_t\\|_\\infty+\\sum_{j=1}^d\\sup_{[-M,M]}|q_j|\\,\\|\\psi_{x_j}\\|_\\infty\\right),$$\nuniformly in $\\epsilon$. Letting $\\epsilon\\downarrow0$ first and then $\\delta\\downarrow0$ proves convergence for the complete initial-boundary test. Moreover, the absolute value of the right-hand side in step 2.1 is at most $\\epsilon\\sup_{[-M,M]}|\\eta|\\int|\\Delta\\psi|$, which tends to zero. Passing to the limit yields the stated entropy inequality.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "The exact diffusion remainder is −εη''(uε)|∇uε|²≤0 for convex η; continuity and the uniform spacetime bound control the approximate initial traces, and their strong L1loc limit remains in [−M,M]; the tested error is at most ε sup|η|∫|Δψ|."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement's inequality for an empty compact test support is the equality 0≥0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When εη''|∇uε|² vanishes, step 1.1 gives equality in the classical entropy balance before passage."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement is for scalar states and applies in one spatial dimension as a direct specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The permitted case Δuε=0 makes the diffusion entropy remainder vanish in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the t=0 initial term and uses tests vanishing near T; step 3.1 derives the common bound for u0^epsilon and u0 before passing the initial entropy trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the stated Fubini theorem and makes no additional choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition proves a conditional entropy inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse or existence statement is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read steps 1.1–3.1 against conservation-system entropy convention, total chain rule, FTC and Fubini statements. The diffusion remainder is -epsilon eta_second |grad u|^2, hence nonpositive; tested inequality has -epsilon integral eta(u_epsilon) Delta psi on the right. Continuity gives the initial uniform bound and the explicit compact exhaustion gives |u0|<=M a.e. Strong interior L1 convergence extends to test supports touching t=0: on [delta,Tprime]xK use convergence; on (0,delta)xK the bounded eta and q give an error at most C delta lambda(K), uniformly in epsilon; let epsilon then delta tend to zero. Initial entropy compositions converge by Lipschitz continuity on [-M,M]. Empty Omega is vacuous, M=0 is constant, no existence/compactness is asserted. Reader repair is mathematically sound; no additional substantial prerequisite or empirical premise."
+      }
+    },
+    "ex-fd-burgers-shock": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-convex-scalar-riemann",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $F\\in C^2(\\mathbb R;\\mathbb R)$. Let $a,b\\in\\mathbb R$. If $a\\ne b$, assume $F''(z)>0$ for every $z$ in the closed interval with endpoints $a,b$. Set $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$; its value at $x=0$ is arbitrary. For $t>0$ define the following profile:\n\n- If $a=b$, let $u(t,x)=a$.\n- If $a>b$, let $s=(F(a)-F(b))/(a-b)$ and let $u(t,x)=a$ for $x<st$ and $u(t,x)=b$ for $x>st$; its value on $x=st$ is arbitrary.\n- If $a<b$, let $u(t,x)=a$ for $x/t\\leq F'(a)$, let $u(t,x)=(F'|_{[a,b]})^{-1}(x/t)$ for $F'(a)<x/t<F'(b)$, and let $u(t,x)=b$ for $x/t\\geq F'(b)$.\n\nFor each $T>0$, $C_c^\\infty([0,T)\\times\\mathbb R)$ denotes restrictions of smooth functions defined on a neighborhood of $[0,T)\\times\\mathbb R$ and having compact support in that half-open cylinder; such a test may be nonzero at $t=0$. For every $T>0$ and every real test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$, the initial-value weak identity\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(u\\varphi_t+F(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}u_0(x)\\varphi(0,x)\\,dx=0$$\nholds. For every convex $\\eta\\in C^2(\\mathbb R)$ and $q\\in C^1(\\mathbb R)$ with $q'=\\eta'F'$, and for every $k\\in\\mathbb R$ with $\\eta_k(z)=|z-k|$ and $q_k(z)=\\operatorname{sgn}(z-k)(F(z)-F(k))$, the initial entropy inequality\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(\\eta(u)\\varphi_t+q(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}\\eta(u_0(x))\\varphi(0,x)\\,dx\\geq0$$\nholds for each nonnegative test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$. In the rarefaction case $a<b$, both inequalities are equalities. In the shock case $a>b$, the speed satisfies $F'(b)<s<F'(a)$, so the shock has the scalar Lax pattern.\n\nThe sign function is $1$ on positive numbers, $0$ at zero, and $-1$ on negative numbers. The statement concerns these exact Riemann profiles and makes no general existence or uniqueness claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cm-burgers-riemann-shock-and-rarefaction",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the Lebesgue weak formulation and the imported divergence theorem.\n\nLet $F(u)=\\tfrac12u^2$ and use the weak and entropy formulations of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]].\n\n**(a) Shock.** Let $u_L>u_R$, put $s:=(u_L+u_R)/2$ and\n\n$$u(t,x):=\\begin{cases}u_L,&x<st,\\\\ u_R,&x\\ge st,\\end{cases}\\qquad(t>0),$$\n\nwith Riemann initial data $f$ equal to $u_L$ for $x<0$ and $u_R$ for $x\\ge0$. Values on the shock line or at the single initial jump point do not change the integral identities. Then $u$ is a weak solution of $u_t+(F(u))_x=0$ with initial data $f$.\n\n**(b) Entropy of the shock.** For every $k\\in\\mathbb R$, set $\\eta_k(u):=|u-k|$ and $q_k(u):=\\operatorname{sgn}(u-k)\\,(u^2-k^2)/2$ for $u\\ne k$, with $q_k(k):=0$. Then the entropy inequality (E) of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]] holds for the pair $(\\eta_k,q_k)$, with interface coefficient\n\n$$s\\,[\\eta_k]-[q_k]=\\begin{cases}-(k-u_L)(k-u_R),&u_R\\le k\\le u_L,\\\\0,&k\\notin[u_R,u_L],\\end{cases}\\quad\\ge0 ,$$\n\nwhere $[h]:=h(u_R)-h(u_L)$. The shock also satisfies (E) for every convex $C^1$ entropy pair of the Definition, and is an entropy solution in its full declared sense.\n\n**(c) Rarefaction.** Let $u_L<u_R$ and define\n\n$$u(t,x):=\\begin{cases}u_L,&x\\le u_Lt,\\\\ x/t,&u_Lt<x<u_Rt,\\\\ u_R,&x\\ge u_Rt,\\end{cases}\\qquad(t>0).$$\n\nThen $u$ is continuous on $(0,\\infty)\\times\\mathbb R$, is a weak solution of $u_t+(F(u))_x=0$ with the Riemann initial data, and satisfies the entropy inequality (E) for every convex $C^1$ entropy pair and for every pair $(\\eta_k,q_k)$, $k\\in\\mathbb R$ (indeed with equality), and is an entropy solution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Burgers flux is $C^2$ and $F''(z)=1>0$ on $[b,a]$. Therefore [F1] applies to these states and this profile, giving the initial weak identity, the compatible convex entropy inequalities, the Kružkov inequalities, and the scalar Lax pattern in the formulations fixed by [F4]. The imported formulation in [F2] has the same profile and explicitly assumes the Countable Choice recorded in [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Directly, $s=(a^2-b^2)/(2(a-b))=(a+b)/2$, while $F'(b)=b$ and $F'(a)=a$; hence $F'(b)<s<F'(a)$. For $b\\leq k\\leq a$, put $C(z)=F(b)+s(z-b)$, the chord of $F$ joining the endpoint fluxes. Then $F(k)-C(k)=\\tfrac12(k-a)(k-b)$, so the Kružkov interface coefficient is $[q_k]-s[\\eta_k]=2(F(k)-C(k))=(k-a)(k-b)\\leq0$; for $k\\notin[b,a]$, $\\eta_k$ is affine on the state interval and $q_k$ is a constant-sign multiple of $F-F(k)$, so the coefficient is zero by the Rankine–Hugoniot equality. This agrees with the nonpositive residual convention.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "At a=2,b=0, s=1 and for k=1 the Kružkov coefficient is −1; the Lax inequalities are 0<1<2."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes T>0 and a real-line spatial domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The residual formula in step 2.1 gives zero at k=a and k=b."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Burgers example is a scalar one-dimensional conservation law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the coefficient without division by a trace or entropy jump."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the Kružkov coefficient vanishes at k=b and k=a."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example and Facts explicitly assume Countable Choice for the imported Lebesgue formulation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts a shock solution and does not state a converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No characterization of all entropy shocks is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read both steps and all four supplier facts, including full published Burgers proof and definition. Strict positivity F_second=1 on [b,a], a>b, matches local Riemann hypotheses. Local smooth initial tests are a subclass of published C1 initial tests; compact support extends to the infinite-time cylinder by zero. Both formulations have nonnegative tested entropy integral. Explicit speed lies strictly between b and a, including zero-speed cases. Kruzkov coefficient (k-a)(k-b)<=0 on [b,a] and zero outside agrees with imported opposite tested-integral coefficient; endpoints give zero. Arbitrary line values do not change integrals. Corrected general plane measure is lambda_0 mass one here. No owned repair or general uniqueness claim."
+      }
+    },
+    "ex-fd-burgers-fan": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-convex-scalar-riemann",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $F\\in C^2(\\mathbb R;\\mathbb R)$. Let $a,b\\in\\mathbb R$. If $a\\ne b$, assume $F''(z)>0$ for every $z$ in the closed interval with endpoints $a,b$. Set $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$; its value at $x=0$ is arbitrary. For $t>0$ define the following profile:\n\n- If $a=b$, let $u(t,x)=a$.\n- If $a>b$, let $s=(F(a)-F(b))/(a-b)$ and let $u(t,x)=a$ for $x<st$ and $u(t,x)=b$ for $x>st$; its value on $x=st$ is arbitrary.\n- If $a<b$, let $u(t,x)=a$ for $x/t\\leq F'(a)$, let $u(t,x)=(F'|_{[a,b]})^{-1}(x/t)$ for $F'(a)<x/t<F'(b)$, and let $u(t,x)=b$ for $x/t\\geq F'(b)$.\n\nFor each $T>0$, $C_c^\\infty([0,T)\\times\\mathbb R)$ denotes restrictions of smooth functions defined on a neighborhood of $[0,T)\\times\\mathbb R$ and having compact support in that half-open cylinder; such a test may be nonzero at $t=0$. For every $T>0$ and every real test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$, the initial-value weak identity\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(u\\varphi_t+F(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}u_0(x)\\varphi(0,x)\\,dx=0$$\nholds. For every convex $\\eta\\in C^2(\\mathbb R)$ and $q\\in C^1(\\mathbb R)$ with $q'=\\eta'F'$, and for every $k\\in\\mathbb R$ with $\\eta_k(z)=|z-k|$ and $q_k(z)=\\operatorname{sgn}(z-k)(F(z)-F(k))$, the initial entropy inequality\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(\\eta(u)\\varphi_t+q(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}\\eta(u_0(x))\\varphi(0,x)\\,dx\\geq0$$\nholds for each nonnegative test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$. In the rarefaction case $a<b$, both inequalities are equalities. In the shock case $a>b$, the speed satisfies $F'(b)<s<F'(a)$, so the shock has the scalar Lax pattern.\n\nThe sign function is $1$ on positive numbers, $0$ at zero, and $-1$ on negative numbers. The statement concerns these exact Riemann profiles and makes no general existence or uniqueness claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cm-burgers-riemann-shock-and-rarefaction",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the Lebesgue weak formulation and the imported divergence theorem.\n\nLet $F(u)=\\tfrac12u^2$ and use the weak and entropy formulations of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]].\n\n**(a) Shock.** Let $u_L>u_R$, put $s:=(u_L+u_R)/2$ and\n\n$$u(t,x):=\\begin{cases}u_L,&x<st,\\\\ u_R,&x\\ge st,\\end{cases}\\qquad(t>0),$$\n\nwith Riemann initial data $f$ equal to $u_L$ for $x<0$ and $u_R$ for $x\\ge0$. Values on the shock line or at the single initial jump point do not change the integral identities. Then $u$ is a weak solution of $u_t+(F(u))_x=0$ with initial data $f$.\n\n**(b) Entropy of the shock.** For every $k\\in\\mathbb R$, set $\\eta_k(u):=|u-k|$ and $q_k(u):=\\operatorname{sgn}(u-k)\\,(u^2-k^2)/2$ for $u\\ne k$, with $q_k(k):=0$. Then the entropy inequality (E) of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]] holds for the pair $(\\eta_k,q_k)$, with interface coefficient\n\n$$s\\,[\\eta_k]-[q_k]=\\begin{cases}-(k-u_L)(k-u_R),&u_R\\le k\\le u_L,\\\\0,&k\\notin[u_R,u_L],\\end{cases}\\quad\\ge0 ,$$\n\nwhere $[h]:=h(u_R)-h(u_L)$. The shock also satisfies (E) for every convex $C^1$ entropy pair of the Definition, and is an entropy solution in its full declared sense.\n\n**(c) Rarefaction.** Let $u_L<u_R$ and define\n\n$$u(t,x):=\\begin{cases}u_L,&x\\le u_Lt,\\\\ x/t,&u_Lt<x<u_Rt,\\\\ u_R,&x\\ge u_Rt,\\end{cases}\\qquad(t>0).$$\n\nThen $u$ is continuous on $(0,\\infty)\\times\\mathbb R$, is a weak solution of $u_t+(F(u))_x=0$ with the Riemann initial data, and satisfies the entropy inequality (E) for every convex $C^1$ entropy pair and for every pair $(\\eta_k,q_k)$, $k\\in\\mathbb R$ (indeed with equality), and is an entropy solution.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Burgers flux satisfies $F'(z)=z$ and $F''(z)=1>0$ on $[a,b]$. Thus [F1] applies, and its inverse profile is $u=x/t$ for $at<x<bt$, with the two constant branches displayed in the Example. It gives the weak and entropy identities with the specified initial trace in the formulation of [F4]; [F2] independently confirms the same Lebesgue formulation under [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the fan, $u_t=-x/t^2$ and $u_x=1/t$, so $u_t+u u_x=0$; the constant branches solve the equation, and the traces match at $x=at$ and $x=bt$. The fan values stay in $[a,b]$. The profile and initial step agree outside $[\\min(0,at),\\max(0,bt)]$, whose length is at most $t(|a|+|b|)$, and their values differ by at most $b-a$. This proves the stated local $L^1$ estimate, including when both characteristic speeds have the same sign.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For a=−1,b=2, the support interval is contained in [−t,2t] and the stated bound is 9t; direct substitution gives u_t+u u_x=0 in the fan."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes T>0 and a real-line spatial domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The profile reaches zero continuously if an endpoint state is zero; the formulas in step 2.1 remain defined on the fan."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement gives a scalar one-dimensional Burgers fan."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis a<b excludes a degenerate equal-state interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks matching traces at x=at and x=bt and the Statement gives the local t↓0 trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example explicitly assumes Countable Choice for the imported Lebesgue formulation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example proves a constructed solution, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The example constructs the centered rarefaction for a<b and proves a local L1 trace bound. It does not assert that all entropy solutions or all traces characterize this fan.",
+            "item_sha256": "f78a002abe6e7b21e84d54b6b35f503d2c6efd34b41578cc5e6e108b183eef19",
+            "row_sha256": "ab3c4515574e887d669de08bb5a203b7d1f1dc6dc483f8b0cfc02cb571998200"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read both steps and all four supplier facts, including the complete published Burgers proof and its weak/entropy definition. F_prime=z, F_second=1 gives the stated inverse profile; local Riemann theorem supplies weak identity and equality for both entropy families. Matching traces give continuity; the initial difference is confined to [min(0,at),max(0,bt)], giving the correct (b-a)(|a|+|b|)t bound even for two positive/two negative speeds and speed zero. Published supplier step 1.2 incorrectly asserts support only between at and bt when speeds share a sign; recorded separately for owner, while local supplier step 4.2 proves the correct estimate. Published proof conclusion remains valid by elementary enlargement of the interval. No change needed to owned example."
+      }
+    },
+    "cex-fd-expansion-shock": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-rankine-hugoniot",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and let $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $\\partial_tU+\\sum_j\\partial_{x_j}(F_j(U))=0$ pointwise on both open sides, and $U,F_j(U)\\in L^1_{\\mathrm{loc}}$. With $[G]=G_R-G_L$, the distributional residual is\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=\\left(\\sum_{j=1}^dn_j[F_j(U)]-s[U]\\right)\\delta_\\Sigma,$$\nHere spatial plane measure means the pushforward of Lebesgue measure $\\lambda_{d-1}$ by $z\\mapsto Ez+stn$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is any linear isometry onto $n^\\perp$. Explicitly, $\\langle A\\delta_\\Sigma,\\varphi\\rangle=\\int_I\\int_{\\{z:Ez+stn\\in\\Omega\\}}A(t,Ez+stn)\\cdot\\varphi(t,Ez+stn)\\,d\\lambda_{d-1}(z)\\,dt$. For $d=1$, $\\mathbb R^0=\\{0\\}$ and $\\lambda_0(\\{0\\})=1$. This definition is independent of $E$ and specifies the normalization without Hausdorff-measure notation. Consequently, $U$ solves the conservation system in distributions if and only if\n$$s[U]=\\sum_{j=1}^dn_j[F_j(U)]\\quad\\text{at every point of }\\Sigma.$$\nThis is a vector equality; no division by the vector jump is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-fd-entropy-jump",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ and $\\Omega\\subseteq\\mathbb R^d$ be open, let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and let $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and set $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $U_t+\\sum_jDF_j(U)\\partial_{x_j}U=0$ classically on each open side, and the state, flux, and entropy compositions are locally integrable. Let $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ be convex and let $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfy $Dq_j(V)=D\\eta(V)DF_j(V)$ for every $V\\in\\mathcal O$. With $[G]=G_R-G_L$, the distributional entropy residual is\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)=\\left(\\sum_{j=1}^dn_j[q_j(U)]-s[\\eta(U)]\\right)\\delta_\\Sigma.$$\nHere $\\delta_\\Sigma$ uses the plane measure defined in the vector jump-residual theorem: integrate in $t$ and in $z\\in\\mathbb R^{d-1}$ with $x=Ez+stn\\in\\Omega$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is a linear isometry onto $n^\\perp$, using Lebesgue measure $\\lambda_{d-1}$ and singleton mass one when $d=1$. The entropy inequality $\\partial_t\\eta(U)+\\sum_j\\partial_{x_j}q_j(U)\\leq0$ holds near the interface if and only if $\\sum_jn_j[q_j(U)]-s[\\eta(U)]\\leq0$ at every interface point. Entropy admissibility is an additional condition; the conservation jump equality alone does not imply it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-convex-scalar-riemann",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $F\\in C^2(\\mathbb R;\\mathbb R)$. Let $a,b\\in\\mathbb R$. If $a\\ne b$, assume $F''(z)>0$ for every $z$ in the closed interval with endpoints $a,b$. Set $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$; its value at $x=0$ is arbitrary. For $t>0$ define the following profile:\n\n- If $a=b$, let $u(t,x)=a$.\n- If $a>b$, let $s=(F(a)-F(b))/(a-b)$ and let $u(t,x)=a$ for $x<st$ and $u(t,x)=b$ for $x>st$; its value on $x=st$ is arbitrary.\n- If $a<b$, let $u(t,x)=a$ for $x/t\\leq F'(a)$, let $u(t,x)=(F'|_{[a,b]})^{-1}(x/t)$ for $F'(a)<x/t<F'(b)$, and let $u(t,x)=b$ for $x/t\\geq F'(b)$.\n\nFor each $T>0$, $C_c^\\infty([0,T)\\times\\mathbb R)$ denotes restrictions of smooth functions defined on a neighborhood of $[0,T)\\times\\mathbb R$ and having compact support in that half-open cylinder; such a test may be nonzero at $t=0$. For every $T>0$ and every real test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$, the initial-value weak identity\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(u\\varphi_t+F(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}u_0(x)\\varphi(0,x)\\,dx=0$$\nholds. For every convex $\\eta\\in C^2(\\mathbb R)$ and $q\\in C^1(\\mathbb R)$ with $q'=\\eta'F'$, and for every $k\\in\\mathbb R$ with $\\eta_k(z)=|z-k|$ and $q_k(z)=\\operatorname{sgn}(z-k)(F(z)-F(k))$, the initial entropy inequality\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(\\eta(u)\\varphi_t+q(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}\\eta(u_0(x))\\varphi(0,x)\\,dx\\geq0$$\nholds for each nonnegative test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$. In the rarefaction case $a<b$, both inequalities are equalities. In the shock case $a>b$, the speed satisfies $F'(b)<s<F'(a)$, so the shock has the scalar Lax pattern.\n\nThe sign function is $1$ on positive numbers, $0$ at zero, and $-1$ on negative numbers. The statement concerns these exact Riemann profiles and makes no general existence or uniqueness claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two constant states solve the equation on their open sides. Their jump speed satisfies $s(b-a)=F(b)-F(a)$, so [F1] under [F5] makes the interior distributional residual zero. For a test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$ in the class fixed by [F4], choose smooth temporal cutoffs $\\chi_\\delta$ that vanish on $[0,\\delta]$, equal $1$ on $[2\\delta,T)$, satisfy $\\chi_\\delta'\\geq0$, and have $\\int_0^T\\chi_\\delta'=1$. Apply the interior distributional identity to $\\chi_\\delta\\varphi$. The term with $\\chi_\\delta'$ tends to $\\int u_0(x)\\varphi(0,x)\\,dx$: on the compact spatial support, $u(t,\\cdot)$ differs from $u_0$ only between $0$ and $st$, so $\\|u(t,\\cdot)-u_0\\|_{L^1}\\leq |a-b||s|t$, while $\\varphi(t,\\cdot)\\to\\varphi(0,\\cdot)$ uniformly. The omitted integrals over $0<t<2\\delta$ tend to zero because $u,F(u)$ and the test derivatives are bounded on that compact set. The limit is the initial weak identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $\\eta(z)=z^2/2$ and $q(z)=z^3/3$, compatibility holds because $q'(z)=z^2=\\eta'(z)F'(z)$, and $\\eta$ is convex. The jump residual is\n$$[q]-s[\\eta]=\\frac{b^3-a^3}{3}-\\frac{a+b}{2}\\frac{b^2-a^2}{2}=\\frac{(b-a)^3}{12}>0.$$\nBy [F2] and [F4], a positive residual violates the entropy inequality. Thus this weak expansion shock is not entropy-admissible.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $F''=1>0$ on $[a,b]$, [F3] under [F5] gives the centered rarefaction profile as an entropy-admissible solution for the same initial data. It differs from the step profile on a set of positive spatial measure for every $t>0$ because the fan interval has width $t(b-a)>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "At a=0,b=2, the smooth entropy residual is (b−a)³/12=2/3>0, so a nonnegative test supported near the interface violates the inequality."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes T>0 and a real-line spatial domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives a strictly positive residual for every b>a, including the zero-speed symmetric case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is a scalar one-dimensional Burgers conservation law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypothesis a<b excludes a zero state jump; the positive cubic residual is explicit in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 passes the initial test trace through t=0 by the explicit local L1 estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated in the counterexample for its RH and entropy-jump suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal implication and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read all three steps and each of five supplier facts. Constant states satisfy bulk law; (a+b)/2 gives zero conservation jump and the cutoff/L1 trace argument gives the initial identity for either sign of speed, including s=0. Explicit expansion-entropy residual (b-a)^3/12 is positive for a<b, hence a positive patch test violates the declared nonpositive convention. F_second=1 gives an admissible centered fan for the same initial data; its width t(b-a)>0 distinguishes it from the step. One-dimensional singleton plane measure unchanged by repaired suppliers. No uniqueness or empirical claim; no edit needed."
+      }
+    },
+    "cex-fd-shock-point-values": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. For every $u \\in \\mathbb{R}^n$ with $u \\ne 0$ and every real $c$, the affine\n   hyperplane\n   $$H_{u,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : \\langle u,x\\rangle = c \\,\\}$$\n   ([[def-euclidean-inner-product]]) is Lebesgue measurable with\n   $\\lambda_n(H_{u,c}) = 0$, and so is every subset of it.\n2. Every proper linear subspace $W \\subsetneq \\mathbb{R}^n$\n   ([[def-linear-subspace]]) is Lebesgue measurable with $\\lambda_n(W) = 0$.\n\nAt $n = 1$ a hyperplane is the singleton $\\{c/u_0\\}$ and the only proper linear\nsubspace is $\\{0\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-piecewise-traces",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be the state domain of a conservation system, $n\\in\\mathbb R^d$ satisfy $|n|=1$, and $s\\in\\mathbb R$. The planar interface and its two open sides are\n$$\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st=0\\},\\qquad Q^-=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st<0\\},\\qquad Q^+=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st>0\\}.$$\nA state field is piecewise $C^1$ across $\\Sigma$ if on each side it is $C^1$ and, near every point of $\\Sigma$, each side field is the restriction of a $C^1$ map from a neighborhood in $I\\times\\Omega$ into $\\mathcal O$. The left and right traces $U_L,U_R:\\Sigma\\to\\mathcal O$ are the restrictions of those extensions to $\\Sigma$; they are independent of the chosen extensions because they agree with the same field on their respective open sides. For any state or flux quantity $G$ with these traces, define its jump by $[G]=G_R-G_L$. A planar shock profile is such a piecewise $C^1$ state field with its specified constant interface normal $n$ and speed $s$; the definition does not assert that it solves a conservation system.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-conservation-system",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In spacetime $\\mathbb R^{d+1}$, the equation $n\\cdot x-st=0$ defines an affine hyperplane because its normal $(-s,n)$ is nonzero, as $|n|=1$. Therefore [F1] gives $\\lambda_{d+1}(\\Sigma)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The original and modified fields agree off $\\Sigma$, so their difference is supported on a Lebesgue-null set. They are measurable and locally integrable; for every compactly supported test, the integral of their difference times the test is zero. The same reasoning applies to each flux composition and, whenever defined, each entropy and entropy-flux composition, since the compositions also differ only on $\\Sigma$. By [F3] all corresponding regular distributions and their distributional derivatives therefore agree.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two fields coincide on each open side, so their one-sided limits at every interface point coincide. By [F2], the assigned values on $\\Sigma$ do not enter the traces; hence the jump and any Rankine–Hugoniot or entropy jump coefficient computed from those traces are unchanged.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "The spacetime normal (−s,n) is nonzero because |n|=1, so the interface is a codimension-one affine hyperplane and is null under the stated theorem."
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement's reassignment is empty when Σ is empty, so every field and trace remains unchanged."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows changes on the null set have zero integral even if the assigned difference is nonzero there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and affine-hyperplane supplier include one-dimensional ambient space, where the interface is a null point set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses |n|=1 to exclude a zero spacetime normal, including when s=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement concerns an open spacetime cylinder and does not alter initial-boundary data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes Countable Choice exactly as required by the affine-hyperplane null theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample proves invariance under reassignment and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstruction of pointwise values from distributions is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-23",
+        "notes": "Read all three steps and cited null-hyperplane, countable-choice and conservation/trace definitions. The spacetime normal (-s,n) is nonzero; nullity holds even for s=0 and d=1. Measurable finite reassignments, including unbounded assignments on the interface, preserve integrability and tested compositions because they agree a.e.; null-set values do not affect the open-side C1 extensions. This proves equal distributional derivatives and identical side traces. Empty Sigma and zero jumps are included. No normalized surface-measure result is needed."
+      }
+    }
+  }
+}

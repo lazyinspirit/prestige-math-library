@@ -1,0 +1,438 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-solenoidal-reduced-ode",
+    "thm-fd-reduced-ode-global-energy",
+    "ex-fd-single-shear-reduced-model"
+  ],
+  "contracts": {
+    "def-fd-solenoidal-reduced-ode": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires r≥1, so the empty basis is excluded.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "For an integer $r\\ge1$"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero coefficients; then u_a=0 and all displayed finite integrals remain defined.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "a=(a_1,\\ldots,a_r)\\in\\mathbb R^r"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows r=1; each coefficient array then has a single finite index.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "For an integer $r\\ge1$"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition uses no inverse or positive-definiteness condition on A; its entries are finite integrals.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "$$A_{ij}=\\int_{Q_d}"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition specifies the coefficient system on [0,T) for T>0 and asserts no behavior at T.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "a:[0,T)\\to\\mathbb R^r"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly assumes Countable Choice; the finite basis and coefficient vector are supplied data.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Assume the Axiom of Countable Choice:"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A definition supplies a finite coefficient system and states no biconditional.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "The unforced finite solenoidal Galerkin coefficient dynamics is the initial-value system"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A definition supplies a finite coefficient system and states no biconditional.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "The unforced finite solenoidal Galerkin coefficient dynamics is the initial-value system"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This carrier defines the finite smooth coefficient model; smoothness on the compact torus makes each coefficient integral finite, and no theorem or numerical claim is asserted."
+    },
+    "thm-fd-reduced-ode-global-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-solenoidal-reduced-ode",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice: for every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets there is a function $f$ on $\\mathbb N$ such that $f(n)\\in X_n$. For $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure $d\\mu=(2\\pi)^{-d}dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=e^{ik\\cdot x}$; for $q:Q_d\\to\\mathbb R^N$, define its componentwise Fourier coefficients by $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$. The supplied space $H^0(Q_d;\\mathbb R^N)$ is the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^0}^2=\\sum_{k\\in\\mathbb Z^d}|\\widehat q(k)|^2$, identified with its unique $L^2$ representative; real classes satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. For vector fields with these representatives, set $\\langle v,w\\rangle_2=\\int_{Q_d}v\\cdot w\\,d\\mu$. For an integer $r\\ge1$, an admissible finite solenoidal family consists of classes $v_1,\\ldots,v_r\\in H^0(Q_d;\\mathbb R^d)$ whose representatives are smooth $2\\pi$-periodic fields satisfying $\\operatorname{div}v_i=\\sum_{m=1}^d\\partial_{x_m}v_i^m=0$ and $\\langle v_i,v_j\\rangle_2=\\delta_{ij}$. Given such a family, a parameter $\\nu\\ge0$, and a coefficient vector $a=(a_1,\\ldots,a_r)\\in\\mathbb R^r$, put $u_a=\\sum_{i=1}^r a_i v_i$ and define\n\n$$A_{ij}=\\int_{Q_d}\\sum_{\\ell,m=1}^d(\\partial_{x_m}v_j^\\ell)(\\partial_{x_m}v_i^\\ell)\\,d\\mu,\\qquad c_{ijk}=\\int_{Q_d}\\sum_{\\ell,m=1}^d v_j^m(\\partial_{x_m}v_k^\\ell)v_i^\\ell\\,d\\mu.$$\n\nThe unforced finite solenoidal Galerkin coefficient dynamics is the initial-value system for $a:[0,T)\\to\\mathbb R^r$,\n\n$$a_i'(t)+\\sum_{j,k=1}^r c_{ijk}a_j(t)a_k(t)+\\nu\\sum_{j=1}^r A_{ij}a_j(t)=0,\\qquad a_i(0)=a_i^0,\\quad i=1,\\ldots,r,$$\n\nwhere $T>0$ is the interval on which a solution is defined and $a^0\\in\\mathbb R^r$ is the initial coefficient vector. The displayed integrals are finite because their integrands are smooth on the compact torus. This is a finite-dimensional polynomial ODE; this definition asserts no convergence to a solution of the infinite-dimensional PDE.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Then a unique local solution of the IVP exists on some interval around the initial time.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Any two solutions through the same initial data agree on every common subinterval containing $t_0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "polynomial-local-lipschitz",
+          "step": "1.1",
+          "claim": "The finite coefficient vector field is polynomial and locally Lipschitz, so Picard–Lindelöf local existence and uniqueness apply.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compatible-local-solutions",
+          "step": "2.1",
+          "claim": "Local solutions through the initial data agree on overlaps, and their interval union defines one maximal compatible solution.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "skew-convection-energy-identity",
+          "step": "2.2",
+          "claim": "Periodic integration by parts gives c_ijk=-c_kji; the cubic contraction vanishes and the viscous quadratic form is the squared gradient norm.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "assume-contra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrated-energy-bound",
+          "step": "3.1",
+          "claim": "Integrating the differential identity gives the exact energy equality and a uniform forward coefficient bound.",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-endpoint-limit",
+          "step": "4.1",
+          "claim": "The polynomial vector field is explicitly bounded on the energy ball, so a finite endpoint would make the solution Cauchy and give a finite limit in R^r.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "restart-and-contradiction",
+          "step": "5.1",
+          "claim": "Picard–Lindelöf restarts at the endpoint limit; matching one-sided derivatives glues a larger solution interval, contradicting the defining union.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 4.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires r≥1, so the empty coefficient family is excluded.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "let $r\\ge1$"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 admits a^0=0; then F(0)=0, the unique solution is stationary, and the energy identity holds.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$a^0\\in\\mathbb R^r$"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 gives c_111=0 by skew-symmetry; for r=1 the equation is scalar and the same energy argument applies.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "let $r\\ge1$"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 uses only the nonnegative quadratic form ∫|∇u_a|²; it assumes no inverse or strict positivity of A.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Fix $\\nu\\ge0$ and $a^0\\in\\mathbb R^r$"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement asserts the energy identities for every t≥0, and step 3.1 integrates from t=0; no backward-global conclusion is claimed.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For every $t\\ge0$, it satisfies"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement carries Countable Choice; steps 2.1 and 5.1 use unique overlap compatibility and an explicit restart, with no stronger selection principle.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume Countable Choice, meaning every sequence of nonempty sets admits a choice function."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a global existence, uniqueness, and energy assertion, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "There is exactly one solution $a\\in C^1([0,\\infty),\\mathbb R^r)$ of this system."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a global existence, uniqueness, and energy assertion, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "There is exactly one solution $a\\in C^1([0,\\infty),\\mathbb R^r)$ of this system."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single coefficient",
+          "inputs": [
+            "F1",
+            "step 2.2"
+          ],
+          "expected": "For r=1, c_111=0 and A_11=∫|∇v_1|²≥0, so a(t)=a^0 exp(-ν A_11 t) is global and satisfies the energy identity."
+        },
+        {
+          "name": "zero viscosity",
+          "inputs": [
+            "step 2.2",
+            "step 4.1"
+          ],
+          "expected": "For ν=0 the energy is constant; the same coefficient bound prevents finite forward blow-up."
+        },
+        {
+          "name": "zero initial data",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 3.1"
+          ],
+          "expected": "For a^0=0, a(t)≡0 solves the system and uniqueness makes it the only solution through zero."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the finite ODE and energy identity; no numerical simulation or empirical claim is involved."
+    },
+    "ex-fd-single-shear-reduced-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-reduced-ode-global-energy",
+          "source_section": "Statement",
+          "quote": "There is exactly one solution $a\\in C^1([0,\\infty),\\mathbb R^r)$ of this system.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-reduced-ode-global-energy",
+          "source_section": "Statement",
+          "quote": "$$|a(t)|^2+2\\nu\\int_0^t\\int_{Q_d}|\\nabla u_{a(s)}|^2\\,d\\mu\\,ds=|a^0|^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normalized-solenoidal-mode-coefficients",
+          "step": "1.1",
+          "claim": "The explicit shear mode is smooth, periodic, exactly divergence-free, normalized, and has A_11=1 and c_111=0.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-scalar-shear-evolution",
+          "step": "2.1",
+          "claim": "The reduced equation is a′+νa=0; the exponential solves it globally, has the given initial value, and satisfies the energy law.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example supplies exactly one mode, so the empty family is excluded.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "take the single vector field $v_1=\\sqrt2\\sin(x_2)e_1$"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: at a_0=0 the explicit solution and its reduced energy are identically zero.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "For every $\\nu\\ge0$ and $a_0\\in\\mathbb R$"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "This example is precisely the one-mode case r=1.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "take the single vector field"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes A_11=1 and makes no claim about a degenerate coefficient matrix.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "the one-mode reduced velocity $u(t,x)=a(t)v_1(x)$"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example gives the explicit solution for every t≥0; step 2.1 checks its initial value at t=0 and makes no negative-time claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "for $t\\ge0$"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example carries the Countable Choice assumption from its supplier; step 1.1 uses only the explicit supplied mode and finite integrals.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume Countable Choice, meaning every sequence of nonempty sets admits a choice function."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit trajectory and energy identity, not an equivalence.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "the unique forward solution $a(t)=a_0e^{-\\nu t}$"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit trajectory and energy identity, not an equivalence.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "the unique forward solution $a(t)=a_0e^{-\\nu t}$"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "normalized shear mode",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ],
+          "expected": "∫_{Q₂}2 sin²(x₂)dμ₂=1, A_11=∫_{Q₂}2 cos²(x₂)dμ₂=1, and c_111=0."
+        },
+        {
+          "name": "zero amplitude and zero viscosity",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ],
+          "expected": "If a_0=0 the trajectory is zero; if ν=0 the amplitude is constant and the energy derivative vanishes."
+        }
+      ],
+      "finite_checks_disposition": "These are exact integrals and symbolic ODE checks, not a numerical simulation or empirical observation."
+    }
+  }
+}

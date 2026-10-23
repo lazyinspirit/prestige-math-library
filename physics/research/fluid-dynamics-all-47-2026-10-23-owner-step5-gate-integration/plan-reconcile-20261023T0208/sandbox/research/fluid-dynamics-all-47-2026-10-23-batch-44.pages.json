@@ -1,0 +1,203 @@
+[
+  {
+    "order": 693,
+    "id": "fd-l01",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Residual and distribution-shift surrogate certificates",
+    "companion": "fd-l01-examples",
+    "requires": [
+      "fd-s01",
+      "fd-st02",
+      "the-lp-spaces-holder-minkowski-and-riesz-fischer"
+    ],
+    "items": [
+      {
+        "id": "def-fd-solenoidal-surrogate-residual",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Continuous periodic solenoidal surrogate residual",
+        "reference": "items/def-fd-solenoidal-surrogate-residual.md",
+        "design_state": "Step 1 draft; continuous residual definition authored against the current Fourier and Leray interfaces.",
+        "dependency_level": 2,
+        "deps": [
+          "def-countable-choice",
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "def-fd-periodic-leray-pressure-maps"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "def-fd-periodic-leray-pressure-maps": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized volume $d\\mu=(2\\pi)^{-d}dx$. For a vector field $w$, use the componentwise Fourier coefficients $\\widehat w(k)=\\int_{Q_d}w(x)e^{-ik\\cdot x}\\,d\\mu(x)$ and norm $\\|w\\|_2=(\\int_{Q_d}|w(x)|^2\\,d\\mu(x))^{1/2}$. Define $P_0=I$ and, for $k\\ne0$, $P_k=I-kk^{\\mathsf T}/|k|^2$, with $\\widehat{Pw}(k)=P_k\\widehat w(k)$; $P$ is the Leray projector. For a smooth spatial vector field $w:Q_d\\to\\mathbb R^d$, define $\\operatorname{div}w(x)=\\sum_{j=1}^d\\partial_jw_j(x)$; for a smooth time-dependent vector field $w:[0,T]\\times Q_d\\to\\mathbb R^d$, define $\\operatorname{div}w(t,x)=\\sum_{j=1}^d\\partial_jw_j(t,x)$, with derivatives taken only in $x$; for a tensor field $F=(F_{ij})$, set $(\\operatorname{div}F)_i=\\sum_{j=1}^d\\partial_jF_{ij}$, and set $(v\\otimes v)_{ij}=v_i v_j$. Let $\\Delta=\\sum_{j=1}^d\\partial_j^2$. A smooth spatial field $w:Q_d\\to\\mathbb R^d$ is solenoidal, or divergence-free, iff $\\operatorname{div}w(x)=0$ for every $x\\in Q_d$; a smooth time-dependent field $w:[0,T]\\times Q_d\\to\\mathbb R^d$ is solenoidal iff $\\operatorname{div}w(t,x)=0$ for every $(t,x)\\in[0,T]\\times Q_d$. Given a constant $\\nu\\ge0$, smooth $f:[0,T]\\times Q_d\\to\\mathbb R^d$, a smooth solenoidal field $v:[0,T]\\times Q_d\\to\\mathbb R^d$, and a smooth solenoidal reference initial field $u_0:Q_d\\to\\mathbb R^d$, define the continuous residual and initial defect by\n\n$$r_v:=\\partial_t v+P\\operatorname{div}(v\\otimes v)-\\nu\\Delta v-Pf,\\qquad d_0:=\\|v(0,\\cdot)-u_0\\|_2.$$\n\nThe residual is a continuous function of time with values in $L^2(Q_d;\\mathbb R^d)$, so $\\int_0^T\\|r_v(t,\\cdot)\\|_2\\,dt$ is finite. This is a continuous-domain residual: finitely many collocation values do not by themselves bound this $L^1_tL^2_x$ quantity. All quantities here are mathematical; no physical units are assigned to $\\nu$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tanveer, Energy Estimate, Uniqueness and ν dependence of Smooth Solutions",
+              "url": "https://people.math.osu.edu/tanveer.1/m865/lec6mweek.pdf",
+              "locator": "§1.2, PDF pp. 2–3, equations (1.8)–(1.15): the smooth difference equation and continuous forcing difference."
+            },
+            {
+              "title": "Carlo Morosi and Livio Pizzocchero, On approximate solutions of the incompressible Euler and Navier-Stokes equations",
+              "url": "https://arxiv.org/pdf/1104.3832",
+              "locator": "Definition 3.4, §4.1, and Lemmas 4.1–4.2: continuous differential residual and initial-data error in the periodic Sobolev formulation."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is carried explicitly through the periodic Fourier and Leray-map definitions. No stronger choice principle is used here.",
+        "physical_scope": null
+      },
+      {
+        "id": "thm-fd-surrogate-residual-error",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Conditional continuous residual-to-error certificate",
+        "reference": "items/thm-fd-surrogate-residual-error.md",
+        "design_state": "Step 1 draft; complete conditional energy proof authored directly for a smooth exact solution and continuous residual.",
+        "dependency_level": 3,
+        "deps": [
+          "def-countable-choice",
+          "def-fd-periodic-leray-pressure-maps",
+          "def-fd-solenoidal-surrogate-residual",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-fd-periodic-leray-pressure-maps": "mathematical-premise",
+          "def-fd-solenoidal-surrogate-residual": "mathematical-premise",
+          "thm-holder-inequality-for-integrals": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized measure $d\\mu=(2\\pi)^{-d}dx$. Use $\\|w\\|_2=(\\int_{Q_d}|w|^2d\\mu)^{1/2}$ and let $P$ act on vector Fourier coefficients by $\\widehat{Pw}(0)=\\widehat w(0)$ and $\\widehat{Pw}(k)=(I-kk^{\\mathsf T}/|k|^2)\\widehat w(k)$ for $k\\ne0$. For a smooth spatial vector field $w:Q_d\\to\\mathbb R^d$, define $\\operatorname{div}w(x)=\\sum_j\\partial_jw_j(x)$; for a smooth time-dependent vector field $w:[0,T]\\times Q_d\\to\\mathbb R^d$, define $\\operatorname{div}_xw(t,x)=\\sum_j\\partial_jw_j(t,x)$, with derivatives taken only in $x$. Here divergence-free means $\\operatorname{div}w=0$ at every $x$ for a spatial field and $\\operatorname{div}_xw=0$ at every $(t,x)$ for a time-dependent field. For a tensor field $F$, define $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$; define $(w\\otimes z)_{ij}=w_i z_j$ and $\\Delta=\\sum_j\\partial_j^2$. Let $\\nu\\ge0$, let $f\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^d)$ be arbitrary, with no divergence condition imposed on $f$, let $u_0\\in C^\\infty(Q_d;\\mathbb R^d)$ satisfy $\\operatorname{div}u_0=0$ on $Q_d$, and let $u,v\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^d)$ satisfy $\\operatorname{div}_xu=\\operatorname{div}_xv=0$ on $[0,T]\\times Q_d$. Thus only $u_0,u,v$ are required to be divergence-free. Suppose $u(0)=u_0$ and\n\n$$\\partial_tu+P\\operatorname{div}(u\\otimes u)-\\nu\\Delta u=Pf,$$\n\nand define $r_v=\\partial_tv+P\\operatorname{div}(v\\otimes v)-\\nu\\Delta v-Pf$. For a smooth time-dependent vector field $b$, define its spatial Jacobian by $(\\nabla_x b(t,x))_{ij}=\\partial_jb_i(t,x)$, and for $a\\in\\mathbb R^d$ define $(a\\cdot\\nabla_x)b=(\\nabla_xb)a$. For a smooth scalar field $\\phi:[0,T]\\times Q_d\\to\\mathbb R$, let $\\nabla_x\\phi=(\\partial_j\\phi)_{j=1}^d$. For $M\\in\\mathbb R^{d\\times d}$, define $\\|M\\|_{\\mathrm{op}}=\\sup_{z\\in\\mathbb R^d,\\,|z|=1}|Mz|$, using the Euclidean norm. Set $A(t)=\\int_0^t\\sup_{x\\in Q_d}\\|\\nabla_xu(s,x)\\|_{\\mathrm{op}}\\,ds$. Then for every $t\\in[0,T]$,\n\n$$\\|v(t)-u(t)\\|_2\\le e^{A(t)}\\left(\\|v(0)-u_0\\|_2+\\int_0^t e^{-A(s)}\\|r_v(s)\\|_2\\,ds\\right).$$\n\nThis is a conditional estimate for an already given smooth exact solution; it proves no existence theorem and gives no error guarantee from finitely many collocation residual values alone. All quantities are mathematical, with no physical units assigned to $\\nu$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tanveer, Energy Estimate, Uniqueness and ν dependence of Smooth Solutions",
+              "url": "https://people.math.osu.edu/tanveer.1/m865/lec6mweek.pdf",
+              "locator": "§1.2, PDF pp. 2–3, equations (1.8)–(1.15): comparison of smooth solutions with forcing difference and the energy/Gronwall estimate."
+            },
+            {
+              "title": "Carlo Morosi and Livio Pizzocchero, On approximate solutions of the incompressible Euler and Navier-Stokes equations",
+              "url": "https://arxiv.org/pdf/1104.3832",
+              "locator": "Definition 3.4 and §4.1–4.5, especially Lemma 4.2 and Proposition 4.5: continuous residual, initial defect, and a complete periodic Sobolev comparison argument."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is carried through the periodic Fourier projector supplier. The energy calculation itself uses no further choice.",
+        "physical_scope": null
+      },
+      {
+        "id": "prop-fd-surrogate-law-shift-observable",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Lipschitz observable bias under bounded law shift",
+        "reference": "items/prop-fd-surrogate-law-shift-observable.md",
+        "design_state": "Step 1 draft; repaired statistical supplier and final drained observable-law interfaces checked; authoring readiness current; independent review pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-random-fluid-observable",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_roles": {
+          "def-fd-random-fluid-observable": "mathematical-premise",
+          "thm-holder-inequality-for-integrals": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(\\mathcal Z,\\Sigma)$ be a measurable space and let $\\mu$ be a probability measure on it, meaning a countably additive measure on $\\Sigma$ with $\\mu(\\mathcal Z)=1$. Let $X$ be a real normed vector space and give it the norm-Borel $\\sigma$-algebra generated by its norm-open sets. Let $S,\\widetilde S:\\mathcal Z\\to X$ be measurable maps. Let $J:X\\to\\mathbb R$ be $L$-Lipschitz, meaning $|J(x)-J(y)|\\le L\\|x-y\\|_X$ for all $x,y\\in X$, with $L\\ge0$. Suppose\n\n$$\\int_{\\mathcal Z}\\bigl(\\|S\\|_X^2+\\|\\widetilde S\\|_X^2\\bigr)\\,d\\mu<\\infty,\\qquad \\int_{\\mathcal Z}\\|S-\\widetilde S\\|_X^2\\,d\\mu\\le\\varepsilon^2$$\n\nfor some finite $\\varepsilon\\ge0$. For a measurable scalar function $h$, write $\\|h\\|_{L^2(\\mu)}=(\\int_{\\mathcal Z}|h|^2\\,d\\mu)^{1/2}$. Let $g:\\mathcal Z\\to[0,\\infty)$ be measurable with $\\int g\\,d\\mu=1$ and $g\\le C$ $\\mu$-almost everywhere for a finite $C\\ge1$, and define the target probability law by $\\nu(E)=\\int_Eg\\,d\\mu$ for $E\\in\\Sigma$, with target expectation $\\mathbb E_\\nu[H]=\\int Hg\\,d\\mu$ whenever the integral exists. Then the measurable scalar observables $J\\circ S$ and $J\\circ\\widetilde S$ are $\\nu$-integrable and\n\n$$\\left|\\mathbb E_\\nu[J(S)]-\\mathbb E_\\nu[J(\\widetilde S)]\\right|\\le L\\sqrt C\\,\\varepsilon.$$\n\nThe estimate assumes a population mean-square error under $\\mu$ and a bounded target density $g$; a finite test sample by itself establishes neither assumption. The state space may represent fluid fields when that measurable state model is supplied. For a physical application, both observables must use the same declared scalar unit; this mathematical proposition assigns no physical units.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Measure, Integration & Real Analysis",
+              "url": "https://measure.axler.net/MIRA.pdf",
+              "locator": "12 June 2026 edition, Section 7A, Theorem 7.9 and its proof, printed pp. 196–197 (one-based PDF pp. 211–212): Hölder's inequality, including the p=2 case."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice principle is used.",
+        "physical_scope": null
+      }
+    ]
+  },
+  {
+    "order": 694,
+    "id": "fd-l01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Residual and distribution-shift surrogate certificates — Examples",
+    "companion": "fd-l01",
+    "requires": [
+      "fd-l01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-unseen-input-shift",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Unseen input invalidates a training-law guarantee",
+        "reference": "items/ex-fd-unseen-input-shift.md",
+        "design_state": "Step 1 draft; repaired statistical supplier and final drained observable-law interfaces checked; authoring readiness current; independent review pending.",
+        "dependency_level": 4,
+        "deps": [
+          "prop-fd-surrogate-law-shift-observable"
+        ],
+        "dependency_roles": {
+          "prop-fd-surrogate-law-shift-observable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $d_s=2$, $D=(0,1)^2$, and $I=[0,1]$. Let $X$ consist of the constant product-measurable fields $c e_1:D\\times I\\to\\mathbb R^2$, where $c\\in\\mathbb R$ and $e_1=(1,0)$, with norm $\\|c e_1\\|_X=|c|$ and its Borel $\\sigma$-algebra; thus $X$ is isometric to $\\mathbb R$ and is a separable real Banach space. Let $Z=\\{0,1\\}$ with its power-set $\\sigma$-algebra and define $S(z)=0$, $\\widetilde S(0)=0$, $\\widetilde S(1)=M e_1$ for arbitrary $M>0$, and $J(c e_1)=c$, which is $1$-Lipschitz. An $X$-valued simple map means a map with finite range and measurable fibers. A map is strongly measurable with respect to a probability law if, outside a measurable set of measure zero, it is a pointwise norm limit of a sequence of simple maps. Here $S$ and $\\widetilde S$ are themselves simple maps, so their constant approximating sequences establish strong measurability for either law below. For $z\\in Z$, define the Dirac law $\\delta_z$ by $\\delta_z(E)=1$ if $z\\in E$ and $0$ otherwise. Take training law $\\mu=\\delta_0$ and target law $\\nu=\\delta_1$. Then the training-law mean-square state error is zero, while the target-law observable bias is $M$. Absolute continuity $\\nu\\ll\\mu$ means that $\\mu(E)=0$ implies $\\nu(E)=0$ for every measurable $E\\subseteq Z$. The target law is not absolutely continuous with respect to the training law, so the bounded-density hypothesis of the shift certificate fails; as $M$ is arbitrary, training-law error alone supplies no finite uniform target-bias bound.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Masashi Sugiyama, Matthias Krauledat, and Klaus-Robert Müller, Covariate Shift Adaptation by Importance Weighted Cross Validation",
+              "url": "https://jmlr.csail.mit.edu/papers/volume8/sugiyama07a/sugiyama07a.pdf",
+              "locator": "§2.1, printed pp. 986–987 / PDF pp. 2–3: covariate-shift setup and finite, known density-ratio assumption."
+            },
+            {
+              "title": "Dive into Deep Learning, Environment and Distribution Shift",
+              "url": "https://d2l.smola.org/chapter_linear-classification/environment-and-distribution-shift.html",
+              "locator": "§3.7.3.1, Covariate Shift Correction, and Exercise 2(b–c): support-overlap condition and infinite-weight case."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice principle is used.",
+        "generation": {
+          "role": "example"
+        },
+        "physical_scope": null
+      }
+    ]
+  }
+]

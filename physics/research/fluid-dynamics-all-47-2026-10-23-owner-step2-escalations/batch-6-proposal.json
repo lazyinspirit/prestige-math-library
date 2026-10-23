@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": 6,
+  "cycle": 1,
+  "status": "READ-ONLY proposal; awaiting root confirmation that batch13 is drained and write release",
+  "native_evidence": [
+    "research/fluid-dynamics-all-47-2026-10-23-scope-review/batch-6/repair-1.json",
+    "research/fluid-dynamics-all-47-2026-10-23-scope-review/batch-13/review-0.json"
+  ],
+  "current_source": {
+    "item": "thm-fd-x05",
+    "statement": "Complete current source read. Its steady solid-rotation streamline is explicitly a C1 gamma:J->R3 on an interval, gamma_prime=u_s(gamma).",
+    "proof": "Current proof 3.1 derives the derivative of x squared plus y squared as zero, then constant radius and Bernoulli. Vortex and solid-rotation claims remain the approved exact fields."
+  },
+  "current_consumers": {
+    "pthm-fd-px05-prediction": "Read complete current body: batch13 has already added Statement SI units and Facts F3 closed-curve circulation definition, but its Statement still only names an integral curve. Current proof 1.2 still uses u dot grad r without the exact curve condition.",
+    "ex-fd-x05-application": "Read complete current body: batch13 has already added Facts F2 curl and circulation definitions. Its Example still invokes circular streamlines without a C1 curve/ODE definition, and proof 2.1 assumes radius constancy."
+  },
+  "trace": [
+    {
+      "supplier": "thm-fd-x05",
+      "consumer": "pthm-fd-px05-prediction",
+      "use": "Exact vortex nonzero-circulation and solid-rotation Bernoulli clauses; Facts F2 and proof 1.2."
+    },
+    {
+      "supplier": "pthm-fd-px05-prediction",
+      "consumer": "ex-fd-x05-application",
+      "use": "Facts F1; fixed numerical vortex circulation and Bernoulli difference in proof 2.1."
+    },
+    {
+      "supplier": "thm-fd-x05",
+      "consumer": "ex-fd-x05-formal-verification",
+      "use": "Native batch6 repair records its own derivative-of-radius-squared calculation; not re-reviewed in this bounded physical-consumer proposal."
+    }
+  ],
+  "proposals": [
+    {
+      "item": "pthm-fd-px05-prediction",
+      "batch": 13,
+      "old_text": "A streamline here is an integral curve of the steady velocity field.",
+      "proposed_text": "A streamline here is a $C^1$ curve $\\gamma:J\\to\\mathcal O$, where $J\\subseteq\\mathbb R$ is an interval and $\\mathcal O\\subseteq\\mathbb R^3$ is the selected connected open spatial region, satisfying $\\gamma'(s)=u(\\gamma(s))$.",
+      "reason": "Supply the exact curve domain, regularity and steady ODE already made explicit by thm-fd-x05, without restricting the selected connected open region."
+    },
+    {
+      "item": "pthm-fd-px05-prediction",
+      "batch": 13,
+      "old_text": "Thus Euler holds and $B=p_0/\\rho_0+\\Omega^2r^2$; since $u\\cdot\\nabla r=0$, it is constant on each circle and varies across radii.",
+      "proposed_text": "Thus Euler holds and $B=p_0/\\rho_0+\\Omega^2r^2$. For a streamline $\\gamma(s)=(x(s),y(s),z(s))$, its defining ODE gives $\\frac{d}{ds}(x(s)^2+y(s)^2)=2x(-\\Omega y)+2y(\\Omega x)=0$. Hence its radius and Bernoulli value are constant along the curve, and the values differ across distinct radii because $\\Omega\\ne0$.",
+      "reason": "Make the claimed constancy follow directly from the exact ODE. Using r squared keeps the proof valid at the regular solid-rotation axis, where the old expression grad r is undefined; no public conclusion changes."
+    },
+    {
+      "item": "ex-fd-x05-application",
+      "batch": 13,
+      "old_text": "The Bernoulli value $B=p/\\rho_0+|u|^2/2$ differs",
+      "proposed_text": "For the steady solid-rotation field $u(x,y,z)=\\Omega(-y,x,0)$, a streamline is a $C^1$ curve $\\gamma:J\\to\\mathbb R^3$, with $J\\subseteq\\mathbb R$ an interval, satisfying $\\gamma'(s)=u(\\gamma(s))$. The Bernoulli value $B=p/\\rho_0+|u|^2/2$ differs",
+      "reason": "State the relevant complete streamline definition before its use in the uninterrupted Example; retain the same exact solid-rotation field and numerical values."
+    },
+    {
+      "item": "ex-fd-x05-application",
+      "batch": 13,
+      "old_text": "Since $r$ is constant on each circular streamline, each has one value and these radii have different values.",
+      "proposed_text": "For $\\gamma(s)=(x(s),y(s),z(s))$, the streamline ODE gives $\\frac{d}{ds}(x(s)^2+y(s)^2)=2x(-\\Omega y)+2y(\\Omega x)=0$. Therefore each circular streamline has fixed radius and one Bernoulli value, while the selected radii have the displayed different values.",
+      "reason": "Verify radius constancy from the explicit streamline condition, retaining the original Bernoulli difference and SI units."
+    }
+  ],
+  "closure_occurrences": [
+    {
+      "file": "items/ex-fd-x05-application.md",
+      "references": [
+        "pthm-fd-px05-prediction"
+      ]
+    },
+    {
+      "file": "items/ex-fd-x05-formal-verification.md",
+      "references": [
+        "thm-fd-x05"
+      ]
+    },
+    {
+      "file": "items/pthm-fd-px05-prediction.md",
+      "references": [
+        "thm-fd-x05"
+      ]
+    },
+    {
+      "file": "library/fluid-dynamics-mathematics/fd-x02.md",
+      "references": [
+        "thm-fd-x05"
+      ]
+    },
+    {
+      "file": "library/fluid-dynamics-mathematics/fd-x02-examples.md",
+      "references": [
+        "ex-fd-x05-formal-verification"
+      ]
+    },
+    {
+      "file": "library/fluid-dynamics/fd-px02-examples.md",
+      "references": [
+        "ex-fd-x05-application"
+      ]
+    },
+    {
+      "file": "library/fluid-dynamics/fd-px02.md",
+      "references": [
+        "pthm-fd-px05-prediction"
+      ]
+    }
+  ],
+  "batch13_state": "Root reports active writing. Current files show new unit/circulation changes and verification.precheck pending. No independent controller state inference or acceptance assertion is made. No batch13 item was edited.",
+  "related_batch14_issue": "Actual native batch13 review-0 lists pthm-fd-px07-prediction and ex-fd-x07-application as outside-batch Re/scope-wording consumers if def-fd-creeping-stokes-model Definition changes. This proposal makes no anticipatory edits there; root should route the eventual actual repair-1 finding after batch13 drains.",
+  "scientific_assessment": "No false public claim confirmed. The current solid-rotation proof uses grad r at its included regular axis; the proposed derivative of r squared removes this avoidable undefined intermediate expression while preserving the exact established conclusion. The same owner should apply and check both physical consumers after release.",
+  "limits": "Focused read of actual thm-fd-x05 and both physical consumers, native batch6 repair and batch13 review evidence; no external texts, full batch6 all-supplier re-audit, state/gate/validator operations or live contract edits."
+}

@@ -1,0 +1,149 @@
+[
+  {
+    "order": 667,
+    "id": "fd-pn02",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Physical interpretation of shock-capturing calculations",
+    "companion": "fd-pn02-examples",
+    "requires": [
+      "fd-f02",
+      "fd-f03",
+      "fd-n03"
+    ],
+    "items": [
+      {
+        "id": "post-fd-ideal-gas-numerical-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Calorically perfect ideal-gas Euler model for numerical states",
+        "reference": "items/post-fd-ideal-gas-numerical-model.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-simple-fluid-state",
+          "def-fd-quantity-and-frame-conventions",
+          "post-fd-local-equilibrium",
+          "post-fd-weak-balances",
+          "def-fd-compressible-numerical-contract"
+        ],
+        "dependency_roles": {
+          "def-fd-simple-fluid-state": "formulation-prerequisite",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "post-fd-local-equilibrium": "physical-assumption",
+          "post-fd-weak-balances": "physical-assumption",
+          "def-fd-compressible-numerical-contract": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use a nonrelativistic Cartesian inertial frame with absolute time and SI units. Let $\\Omega\\subseteq\\mathbb R$ be an open spatial interval measured in metres, let $T_f>0$ be a final time measured in seconds, and let the space-time domain be $\\Omega\\times(0,T_f)$. The measurable fields are mass density $\\rho:\\Omega\\times(0,T_f)\\to(0,\\infty)$ in kilograms per cubic metre, velocity $u:\\Omega\\times(0,T_f)\\to\\mathbb R$ in metres per second, specific entropy $s:\\Omega\\times(0,T_f)\\to\\mathbb R$ in joules per kilogram kelvin, and absolute temperature $T:\\Omega\\times(0,T_f)\\to(0,\\infty)$ in kelvins. Put $v=1/\\rho$ in cubic metres per kilogram.\n\nAdopt a local-equilibrium constitutive chart on the open state domain $\\mathcal U=(0,\\infty)\\times\\mathbb R$ with coordinates $(v,s)$ and a $C^2$ fundamental relation $e:\\mathcal U\\to\\mathbb R$ for specific internal energy in joules per kilogram. Let $c_v>0$ be the specific heat at constant volume and $R>0$ the specific gas constant, each in joules per kilogram kelvin. Set $c_p=c_v+R$ as the specific heat at constant pressure and $\\gamma=c_p/c_v=1+R/c_v>1$ as the dimensionless ratio of specific heats. Choose reference values $v_*>0$ in cubic metres per kilogram, $T_*>0$ in kelvins, and $s_*\\in\\mathbb R$ in joules per kilogram kelvin. Adopt the calorically perfect ideal-gas relation\n$$e(v,s)=c_vT_*\\left(\\frac{v_*}{v}\\right)^{\\gamma-1}\\exp\\left(\\frac{s-s_*}{c_v}\\right),$$\nwith the conventional additive energy reference for which the specific internal energy is zero at zero temperature. Define thermodynamic temperature and pressure by $T=\\partial_s e$ and $p=-\\partial_v e$. Direct differentiation gives\n$$T=\\frac{e}{c_v}>0,\\qquad p=(\\gamma-1)\\frac{e}{v}=(\\gamma-1)\\rho e=R\\rho T>0.$$\nAt fixed $s$, this relation makes $p$ proportional to $\\rho^\\gamma$, so $\\left.\\partial_\\rho p\\right|_s=\\gamma p/\\rho$ and the positive isentropic sound speed is $c=\\sqrt{\\left.\\partial_\\rho p\\right|_s}=\\sqrt{\\gamma p/\\rho}$. Thus $\\gamma$ is dimensionless, $c$ has units of metres per second, and $p$ has units of pascals. This is a constant-specific-heat ideal-gas approximation; it is restricted to a regime where that closure is adopted.\n\nDefine momentum density $m=\\rho u$ in kilograms per square metre second and total energy density $E=\\rho(e+u^2/2)$ in joules per cubic metre. For $\\gamma>1$, the corresponding numerical state is $U=(\\rho,m,E)\\in\\mathbb R^3$ with\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\},\\qquad p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right).$$\nThe calorically perfect closure makes this state pressure equal to the thermodynamic pressure above. With $u=m/\\rho$, its one-dimensional Euler flux and isentropic sound speed are\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p(U),u(E+p(U))\\right),\\qquad c(U)=\\sqrt{\\frac{\\gamma p(U)}{\\rho}}.$$\nThe components of $F$ are mass flux in kilograms per square metre second, momentum flux in pascals, and energy flux in watts per square metre. The speed $c$ is in metres per second.\n\nAdopt the inviscid one-dimensional branch with zero body acceleration, zero specific heat supply, zero conductive heat flux, and isotropic Cauchy stress $-pI$. In this branch, assume the locally integrable conservative variables, fluxes, entropy density, and entropy flux satisfy the following identities in the distributional sense. Let $\\rho_0,m_0,E_0,S_0\\in L^1_{\\mathrm{loc}}(\\Omega)$ be the initial mass density in kilograms per cubic metre, momentum density in kilograms per square metre second, total energy density in joules per cubic metre, and entropy density in joules per cubic metre kelvin, respectively. Require all displayed densities, fluxes, and products to be locally integrable up to $t=0$: their absolute values have finite integrals on every compact subset of $\\Omega\\times[0,T_f)$ in the relative topology, using the fields for $t>0$. This requirement assigns no point values at $t=0$ and asserts no strong initial trace. Test functions $\\phi,\\psi,\\eta,\\zeta\\in C^1(\\Omega\\times[0,T_f))$ are compactly supported in space-time and vanish near $T_f$; $\\zeta$ is nonnegative, and tests may be nonzero at $t=0$. Then adopt\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho\\,\\partial_t\\phi+\\rho u\\,\\partial_x\\phi\\right)\\,dx\\,dt+\\int_\\Omega\\rho_0\\phi(0,x)\\,dx=0,$$\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho u\\,\\partial_t\\psi+(\\rho u^2+p)\\partial_x\\psi\\right)\\,dx\\,dt+\\int_\\Omega m_0\\psi(0,x)\\,dx=0,$$\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(E\\,\\partial_t\\eta+u(E+p)\\partial_x\\eta\\right)\\,dx\\,dt+\\int_\\Omega E_0\\eta(0,x)\\,dx=0,$$\nand\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho s\\,\\partial_t\\zeta+\\rho u s\\,\\partial_x\\zeta\\right)\\,dx\\,dt+\\int_\\Omega S_0\\zeta(0,x)\\,dx\\le0.$$\nThe last inequality is a separately adopted physical entropy inequality. It is not deduced from the conservative equations or from smooth-flow identities. This postulate specifies a physical model and its idealized local-equilibrium closure; it does not assert existence or uniqueness of a weak solution, prove that actual matter obeys the model, or identify a computed state with an experimental observation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Gas Dynamics",
+              "url": "https://www.perplex.ethz.ch/thermo_course/various_thermodynamics_texts/Powers%20Lecture%20notes%20in%20Gasdynamics.pdf",
+              "locator": "Complete 164-page notes; §§2.3.3.3–2.3.4, printed pp. 25–27; §§2.4.6–2.4.7.2, pp. 35–36; §§3.2–3.3, pp. 39–43."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part III: Waves",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids3.pdf",
+              "locator": "Complete 70-page chapter; §§4.4.1–4.4.4, printed pp. 144–151; §4.6.1 shock and entropy discussion."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "One-dimensional, nonrelativistic, calorically perfect ideal-gas Euler branch in SI units, with positive density and temperature, local-equilibrium closure, conservative weak balances, and a separately adopted physical entropy inequality. It asserts no empirical universality or numerical entropy property."
+      },
+      {
+        "id": "pthm-fd-conditional-positive-euler-update",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Positive first-order compressible model update",
+        "reference": "items/pthm-fd-conditional-positive-euler-update.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "post-fd-ideal-gas-numerical-model",
+          "def-fd-compressible-numerical-contract",
+          "prop-fd-euler-llf-admissibility-interface"
+        ],
+        "dependency_roles": {
+          "post-fd-ideal-gas-numerical-model": "physical-assumption",
+          "def-fd-compressible-numerical-contract": "mathematical-premise",
+          "prop-fd-euler-llf-admissibility-interface": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the adopted one-dimensional calorically perfect ideal-gas Euler model with dimensionless constant $\\gamma>1$ and thermodynamic closure $p_i=(\\gamma-1)\\rho_i e_i$. Its admissible state set is\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E)\\in\\mathbb R^3:\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\}.$$\nOn a periodic uniform mesh of $N\\ge2$ cells, each of width $\\Delta x>0$ metres, let the cell state be $U_i=(\\rho_i,m_i,E_i)\\in\\mathcal G_\\gamma$ for $i\\in\\mathbb Z/N\\mathbb Z$, where $\\rho_i$ is mass density in kilograms per cubic metre, $m_i=\\rho_i u_i$ is momentum density in kilograms per square metre second, and $E_i=\\rho_i(e_i+u_i^2/2)$ is total energy density in joules per cubic metre. Here $u_i$ is velocity in metres per second and $e_i>0$ is specific internal energy in joules per kilogram. Define\n$$p_i=(\\gamma-1)\\left(E_i-\\frac{m_i^2}{2\\rho_i}\\right),\\qquad c_i=\\sqrt{\\frac{\\gamma p_i}{\\rho_i}}.$$\nThus $p_i$ is thermodynamic pressure in pascals, and $c_i$ is the positive isentropic sound speed, defined by $c_i^2=\\left.\\partial_\\rho p\\right|_{s,i}=\\gamma p_i/\\rho_i$ with the derivative taken at fixed specific entropy. The flux is $F_i=(m_i,m_i^2/\\rho_i+p_i,u_i(E_i+p_i))$, whose components have units of kilograms per square metre second, pascals, and watts per square metre. For a time step $\\Delta t\\ge0$ seconds, put $\\lambda=\\Delta t/\\Delta x$ in seconds per metre. At every periodic face choose a supplied speed $a_{i+1/2}>0$ in metres per second satisfying\n$$a_{i+1/2}\\ge\\max\\left(|u_i|+c_i,\\ |u_{i+1}|+c_{i+1}\\right),\\qquad 2\\lambda a_{i+1/2}\\le1.$$\nUse the symmetric HLL, or local Lax–Friedrichs, face flux and the shared-face update\n$$\\widehat F_{i+1/2}=\\frac12(F_i+F_{i+1})-\\frac{a_{i+1/2}}2(U_{i+1}-U_i),\\qquad U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$\nThen $U_i^+\\in\\mathcal G_\\gamma$ for every cell $i$, so each updated density and thermodynamic pressure is strictly positive. The speed bounds are algorithmic hypotheses on supplied numerical speeds; this result does not establish that they enclose the waves of an exact nonlinear Riemann solution. It is a conditional deduction about computed states in the adopted model and asserts no fully discrete entropy inequality, convergence, or agreement with physical measurements.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Xiangxiong Zhang and Chi-Wang Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "Complete 34-page article; §2, PDF pp. 5–9: ideal-gas admissible states, Lax–Friedrichs split states, and positivity-preserving conditions."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Euler approximate-solver chapter",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Complete online chapter; HLLE solver and Euler positivity sections, approximately lines 229–324."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "One one-dimensional periodic first-order symmetric HLL/LLF step for calorically perfect ideal-gas Euler states. Under the face-speed and CFL hypotheses, every updated density and thermodynamic pressure is positive. No fully discrete entropy inequality, convergence result, exact wave-speed enclosure, or empirical claim follows.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 668,
+    "id": "fd-pn02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Physical interpretation of shock-capturing calculations — Examples",
+    "companion": "fd-pn02",
+    "requires": [
+      "fd-pn02"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-positive-euler-uniform-gas",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Uniform ideal-gas state is an unchanged numerical step",
+        "reference": "items/ex-fd-positive-euler-uniform-gas.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-fd-conditional-positive-euler-update"
+        ],
+        "dependency_roles": {
+          "pthm-fd-conditional-positive-euler-update": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For a dimensionless $\\gamma>1$, define the admissible state set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E)\\in\\mathbb R^3:\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\}.$$\n\nFix a dimensionless $\\gamma>1$, $N\\ge2$, $\\Delta x>0$ metres, and $\\Delta t\\ge0$ seconds on a one-dimensional uniform periodic mesh. Choose one calorically perfect ideal-gas state $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, where $\\rho>0$ is mass density in kilograms per cubic metre, $m=\\rho u$ is momentum density in kilograms per square metre second, $E=\\rho(e+u^2/2)$ is total energy density in joules per cubic metre, $u=m/\\rho$ is velocity in metres per second, and $e>0$ is specific internal energy in joules per kilogram. Set $p=(\\gamma-1)(E-m^2/(2\\rho))>0$ in pascals, $c=\\sqrt{\\gamma p/\\rho}$ in metres per second, and $F(U)=(m,m^2/\\rho+p,u(E+p))$ with mass, momentum, and energy flux components in kilograms per square metre second, pascals, and watts per square metre. Put $\\lambda=\\Delta t/\\Delta x$ in seconds per metre. In every cell set $U_i=U$, and at every face use the same speed $a>0$ in metres per second with $a\\ge|u|+c$ and $2\\lambda a\\le1$, the symmetric HLL flux\n$$\\widehat F_{i+1/2}=\\frac12(F(U_i)+F(U_{i+1}))-\\frac a2(U_{i+1}-U_i),$$\nand the update\n$$U_i^+=U_i-\\lambda(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}).$$\nEvery face flux equals $F(U)$, so $U_i^+=U$ for every cell and the positive density and pressure remain unchanged. This uniform state has no shock; the calculation is a symbolic model example, not a reported measurement.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": []
+        },
+        "library": "physics",
+        "physical_scope": "A symbolic one-step fixed-point calculation for a spatially uniform positive state in the specified periodic ideal-gas Euler model. It illustrates constant-state preservation only; it describes neither a shock nor a reported physical observation.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

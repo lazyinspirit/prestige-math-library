@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "stage": "2-scope-review",
+  "batch": "31",
+  "owner_escalation_cycle": 1,
+  "review_input": "research/fluid-dynamics-all-47-2026-10-23-scope-review/batch-31/review-1.json",
+  "decision": "propose-observation-only-closure",
+  "decision_scope": "Owner proposal for the actual used supplier clause and the current batch31 consumers only. This report does not accept a whole published proof, certify publication evidence, change an original supplier, or replace native rereview.",
+  "native_finding": {
+    "item": "thm-hll-flux-is-consistent-and-conservative",
+    "confirmed_observations": [
+      "The published original Statement contains the inline wikilink [[def-hll-two-wave-flux]].",
+      "The separate finite-volume conservation paragraph ends with Here n>=1, but n is not introduced as the array size."
+    ],
+    "native_consumer_outcome": "The actual review-1 finding explicitly says the half-cell lemma derives the used intermediate-state/model-flux balances algebraically and the undefined n does not invalidate this batch positivity deduction. Both native listed consumers have decision accept."
+  },
+  "finding_disposition": [
+    {
+      "observation": "Inline wikilink in the published original Statement",
+      "classification": "editorial observation outside this fresh physics authoring scope",
+      "used_claim_effect": "The link identifies the already explicit HLL formula; it does not change the denominator, speed assumptions or model-flux balance. The imported published original remains read-only. No style rewrite or new proof/stamp is proposed."
+    },
+    {
+      "observation": "Unbound n in Here n>=1 in the separate conservation paragraph",
+      "classification": "confirmed local notation defect in a separate, unused clause",
+      "used_claim_effect": "The batch positivity chain consumes the preceding intermediate-state formula and model balances, not that paragraph or its n. The actual finite-volume definition used downstream binds its own N>=2 and nu=Delta t/h>=0. The current physics interface binds N>=2, Delta x>0 and Delta t>=0 independently."
+    }
+  ],
+  "used_clause_verification": {
+    "supplier": "thm-hll-flux-is-consistent-and-conservative",
+    "locator": "Statement first five displays and Proof 1.1",
+    "exact_used_claim": "For supplied S_L<0<S_R, D=S_R-S_L>0, U_*=(S_R U_R-S_L U_L-(F_R-F_L))/D, and F_*=F_L+S_L(U_*-U_L), the assigned model flux equals the HLL middle flux and satisfies F_*-F_L=S_L(U_*-U_L), F_R-F_*=S_R(U_R-U_*). It is not asserted equal to F(U_*).",
+    "independent_algebra": "U_*-U_L=[S_R(U_R-U_L)-(F_R-F_L)]/D and U_*-U_R=[S_L(U_R-U_L)-(F_R-F_L)]/D. Therefore F_L+S_L(U_*-U_L)=F_R+S_R(U_*-U_R)=[S_R F_L-S_L F_R+S_L S_R(U_R-U_L)]/D. The first balance is the definition of F_* and the second is the same equality rearranged. There is no array-size n in these identities.",
+    "hypotheses": "Vector states and flux values in the declared common finite-dimensional state space, supplied speeds S_L<0<S_R, and the explicit middle-branch flux definition. No physical Riemann wave enclosure is used.",
+    "local_rederivation": "lem-pe03-hll-half-cell-riemann-averages Proof 1.1 performs this same subtraction and expansion explicitly, so the exact downstream model-balance use is algebraically visible in the imported chain."
+  },
+  "proof_use_chain": [
+    {
+      "item": "def-hll-two-wave-flux",
+      "use": "Definition supplies the exact middle flux and the three-region approximate fan for supplied S_L<0<S_R. Enclosure of exact nonlinear wave speeds is expressly a separate hypothesis."
+    },
+    {
+      "item": "def-pe03-first-order-hll-finite-volume-update",
+      "use": "Definition binds N>=2, h>0, nu=Delta t/h>=0 and a single supplied middle-branch flux per face. These variables do not depend on the HLL theorem conservation paragraph’s unbound n."
+    },
+    {
+      "item": "lem-pe03-hll-half-cell-riemann-averages",
+      "use": "Facts F2 uses only the intermediate state/model balances. Proof1.1 verifies them; 2.1 derives the adjacent half-cell convex coefficients under 2nu(-S_L)<=1 and 2nu S_R<=1; 3.1 substitutes the two balances into the local update and gives U_i^+=(A^+_(i-1/2)+A^-_(i+1/2))/2. It does not invoke total periodic conservation."
+    },
+    {
+      "item": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+      "use": "Proof1.1 puts half-cell averages in convex K when endpoints and U_* lie in K with the local CFL bounds; 2.1 takes their half-sum. Only the half-cell identity is used."
+    },
+    {
+      "item": "lem-pe03-euler-llf-split-state-positive",
+      "use": "For a>=|u|+c, x=1±u/a>=c/a>0; its internal-energy correction ratio is at most (gamma-1)/(2gamma)<1. Proof1.1–2.1 therefore gives U±F(U)/a in G_gamma, including the speed equality case."
+    },
+    {
+      "item": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+      "use": "Only G_gamma convexity from Proof1.1 is used. Weighted Cauchy–Schwarz bounds the kinetic energy of a convex mixture; positive endpoint internal energies keep the mixture internal energy positive."
+    },
+    {
+      "item": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+      "use": "Proof1.1 obtains the two positive split states. Proof2.1 uses symmetric S_L=-a,S_R=a to give U_*=(U_L+F_L/a)/2+(U_R-F_R/a)/2 in G_gamma. Proof3.1 uses 2nu a<=1 facewise and the convex fan-average theorem to preserve G_gamma. This is exact algebra for the symmetric branch, with no use of the defective separate conservation clause."
+    },
+    {
+      "item": "prop-fd-euler-llf-admissibility-interface",
+      "use": "Proof1.1 matches positive sound speeds, supplied a>0 and lambda=Delta t/Delta x to nu=Delta t/h with h=Delta x. Proof2.1 applies the preceding symmetric-branch theorem to the actual periodic array. gamma>1 converts positive internal-energy density to positive pressure."
+    },
+    {
+      "item": "pthm-fd-conditional-positive-euler-update",
+      "use": "Current Proof1.1 defines the entropy of every positive state by its explicit logarithmic formula, substitutes it into the adopted caloric relation, and obtains p_th=p>0 and fixed-entropy derivative gamma p/rho=c^2>0. Current Proof2.1 applies the local proposition under exactly the supplied symmetric speed and CFL assumptions; it concludes one-step positive states and pressure only."
+    },
+    {
+      "item": "ex-fd-positive-euler-uniform-gas",
+      "use": "Current Verification1.1 substitutes identical neighboring states into the explicitly displayed symmetric flux, obtaining F(U). Verification2.1 cancels the two identical adjacent face fluxes, yielding U_i^+=U. This direct calculation does not use the original periodic-total-conservation paragraph."
+    }
+  ],
+  "current_consumer_checks": [
+    {
+      "item": "pthm-fd-conditional-positive-euler-update",
+      "conclusion": "No used-clause gap found",
+      "evidence": "Its current entropy map has a positive dimensionless logarithm argument because e_int>0, c_v T_*>0 and v/v_*>0. Substitution gives the same thermodynamic pressure as the mathematical interface. N>=2, Delta x>0, Delta t>=0, gamma>1, positive input states, symmetric speed lower bounds and 2lambda a<=1 match the exact supplier chain. No speed enclosure, entropy inequality, convergence or experimental conclusion is inferred."
+    },
+    {
+      "item": "ex-fd-positive-euler-uniform-gas",
+      "conclusion": "No used-clause gap found",
+      "evidence": "The proof uses the theorem’s explicit flux/update convention for equal supplied states. The jump term is zero and neighboring face fluxes are identical, so the fixed-point conclusion is independent of the editorial original findings."
+    }
+  ],
+  "original_observation_preserved": {
+    "item": "thm-hll-flux-is-consistent-and-conservative",
+    "truthful_record": "Published read-only original still has an inline Statement wikilink and an undefined n in a separate periodic conservation paragraph. No assertion is made that those original editorial defects were repaired. The exact intermediate-state and assigned-model-flux balances used here were read and checked algebraically; this is not a whole-original audit or publication approval.",
+    "action": "Retain this observation in owner/native evidence. No source, import, pin, verification stamp, contract or publication metadata change is proposed."
+  },
+  "scientific_gaps_found": [],
+  "scope_preserved": "All current one-step symmetric HLL/LLF positivity and uniform-state claims and their stated physical qualifications remain intact. No statement narrowing, removed dependency or substituted theorem is proposed.",
+  "reading_limits": {
+    "read": "Actual batch31 review-1.json, batch31 proof contracts, current three batch31 public bodies, current local prop-fd-euler-llf-admissibility-interface, and all imported HLL chain bodies named above, including original thm-hll-flux-is-consistent-and-conservative Statement and both proof steps. Current def-fd-compressible-numerical-contract was read during the preceding assigned audit.",
+    "not_read": "No external cited full texts were newly retrieved. No whole-corpus review, whole-original acceptance, source provenance recertification, empirical validation, or unrelated consumer review is claimed."
+  },
+  "writes_and_checks": {
+    "written": [
+      "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/batch-31-resolution.json"
+    ],
+    "source_writes": [],
+    "validators_layout_gates": "None executed.",
+    "metadata_hashes_bindings_state_acceptance": "No changes made; owned by root/native controller."
+  },
+  "required_root_next_actions": [
+    "Record observation-only resolution at the owner escalation boundary, preserving the actual original editorial observations and exact used-clause limitation.",
+    "Let the native workflow own subsequent disposition/rereview and transitions. No source repair is required for this finding on the inspected proof use."
+  ]
+}

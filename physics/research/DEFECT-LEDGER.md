@@ -1,15 +1,45 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ c71bf3b7a446 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 19dccd0aabcd by `tools/physics-support/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 4267 |
-| now mechanically prevented | 0 |
+| defects caught before publication | 4699 |
+| now mechanically prevented | 21 |
 | escaped to publication | 0 |
-| still open | 115 |
+| still open | 133 |
+
+## fluid-dynamics-all-47-2026-10-23 — 432 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate |
+|---|---|---|
+| ill-formed | 182 |  |
+| citation-inaccurate | 33 | 8 |
+| missing-hypothesis | 10 | 28 |
+| undefined-notation | 30 | 6 |
+| unlicensed-inference | 18 |  |
+| citation-inflated | 3 | 12 |
+| invalid-inference | 3 | 10 |
+| ill-typed-claim | 2 | 11 |
+| false-claim | 11 |  |
+| reader-repair | 8 |  |
+| false-or-overstrong-title | 5 | 3 |
+| false-or-overstrong-statement | 4 | 4 |
+| missing-choice-scope |  | 7 |
+| ill-typed-construction | 6 |  |
+| contract-mismatch |  | 5 |
+| missing-case | 1 | 3 |
+| citation-misattributed | 1 | 3 |
+| citation-truncated |  | 4 |
+| citation-missing | 1 | 2 |
+| wrong-source-locator | 2 |  |
+| overstrong-title-or-statement | 2 |  |
+| frontmatter-schema | 1 |  |
+| false-computation | 1 |  |
+| missing-map |  | 1 |
+| invalid-witness |  | 1 |
 
 ## physics-cm-qm-gr-79-2026-10-11 — 1605 row(s)
 
@@ -352,3 +382,21 @@
 - `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-thm-qftx-scalar-eg-induction-combined-module-detail` physics-non-fluid-129-2026-10-21-r2 · unlicensed-inference · thm-qftx-scalar-eg-induction
 - `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-rem-tgrx-three-black-hole-states-hawking-locator` physics-non-fluid-129-2026-10-21-r2 · citation-inaccurate · rem-tgrx-three-black-hole-states
 - `physics-non-fluid-129-2026-10-21-r2-owner-step5-repeat1-pthm-emx-runaway-preacceleration-coordinate-bound` physics-non-fluid-129-2026-10-21-r2 · ill-typed-construction · pthm-emx-runaway-preacceleration
+- `fluid-dynamics-all-47-2026-10-23-3a-batch-11-deferred-jordan-convention` fluid-dynamics-all-47-2026-10-23 · ill-formed · post-fd-continuum-balances
+- `fluid-dynamics-all-47-2026-10-23-3a-batch-21-upstream-smooth-sobolev` fluid-dynamics-all-47-2026-10-23 · unlicensed-inference · thm-fd-global-linear-acoustics
+- `fluid-dynamics-all-47-2026-10-23-3a-batch-21-upstream-golse-locator` fluid-dynamics-all-47-2026-10-23 · citation-inaccurate · thm-fd-global-linear-acoustics
+- `fluid-dynamics-all-47-2026-10-23-3a-batch-22-producer17-finite-integrals` fluid-dynamics-all-47-2026-10-23 · unlicensed-inference · lem-fd-rectangular-test-divergence-inverse
+- `fluid-dynamics-all-47-2026-10-23-3a-batch-42-surface-integral` fluid-dynamics-all-47-2026-10-23 · ill-formed · post-fd-continuum-balances
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-transport-interval-domain` fluid-dynamics-all-47-2026-10-23 · invalid-inference · lem-fd-transport-and-density
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-transport-f1-local-conventions` fluid-dynamics-all-47-2026-10-23 · citation-misattributed · lem-fd-transport-and-density
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-continuous-source-material-velocity` fluid-dynamics-all-47-2026-10-23 · missing-hypothesis · pthm-fd-continuous-source-local-balances
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-weak-jump-matrix-contraction` fluid-dynamics-all-47-2026-10-23 · ill-typed-claim · lem-fd-weak-jump-consistency
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-material-dilation-countable-choice` fluid-dynamics-all-47-2026-10-23 · missing-choice-scope · ex-fd-material-dilation
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-local-h-sectionwise-equation` fluid-dynamics-all-47-2026-10-23 · invalid-inference · pthm-fd-local-boltzmann-h-balance
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-weak-products-positive-index` fluid-dynamics-all-47-2026-10-23 · missing-hypothesis · cex-fd-weak-products
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-x01-dimensional-viscosity-label` fluid-dynamics-all-47-2026-10-23 · ill-typed-claim · ex-fd-x01-formal-verification
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-reddy-equation-section-page` fluid-dynamics-all-47-2026-10-23 · citation-inaccurate · pthm-fd-nonnewtonian-conditional-admissibility
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-bingham-page-locator` fluid-dynamics-all-47-2026-10-23 · citation-inaccurate · ex-fd-bingham-rest-stress
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-periodic-canonical-extraction` fluid-dynamics-all-47-2026-10-23 · missing-choice-scope · thm-fd-smooth-periodic-incompressible-ivp
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-euler-fixed-time-stress` fluid-dynamics-all-47-2026-10-23 · ill-typed-claim · def-fd-incompressible-euler-system
+- `fluid-dynamics-all-47-2026-10-23-owner-precollection-torus-branch-viscosity` fluid-dynamics-all-47-2026-10-23 · missing-hypothesis · ex-fd-x08-application

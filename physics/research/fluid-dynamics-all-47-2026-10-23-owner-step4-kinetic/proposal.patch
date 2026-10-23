@@ -1,0 +1,251 @@
+--- a/items/prop-fd-maxwellian-moments.md
++++ b/items/prop-fd-maxwellian-moments.md
+@@ -45,7 +45,7 @@
+ 
+ ## Statement
+ 
+-Let $n>0$, $u\in\mathbb R^3$, $T>0$, particle mass $m>0$, and Boltzmann constant $k_B>0$. Set $\theta=k_BT/m$ and define $M_{n,u,T}(v):=n(2\pi\theta)^{-3/2}\exp(-|v-u|^2/(2\theta))$. Its Lebesgue moments are
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $n>0$, $u\in\mathbb R^3$, $T>0$, particle mass $m>0$, and Boltzmann constant $k_B>0$. Set $\theta=k_BT/m$ and define $M_{n,u,T}(v):=n(2\pi\theta)^{-3/2}\exp(-|v-u|^2/(2\theta))$. Its Lebesgue moments are
+ $$\int_{\mathbb R^3}M_{n,u,T}\,dv=n,\qquad \int_{\mathbb R^3}vM_{n,u,T}\,dv=nu,$$
+ $$m\int_{\mathbb R^3}(v-u)\otimes(v-u)M_{n,u,T}\,dv=nk_BT\,I_3,\qquad \frac m2\int_{\mathbb R^3}|v-u|^2(v-u)M_{n,u,T}\,dv=0,$$
+ and
+@@ -60,7 +60,7 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $M_{n,u,T}(v)=n(2\pi\theta)^{-3/2}\exp(-|v-u|^2/(2\theta))$, with $\theta=k_BT/m>0$.
++**Given:** Countable Choice $\mathrm{AC}_\omega$ and $M_{n,u,T}(v)=n(2\pi\theta)^{-3/2}\exp(-|v-u|^2/(2\theta))$, with $\theta=k_BT/m>0$.
+ 
+ [F1] [[thm-gaussian-integral]]: $\int_{\mathbb R}e^{-z^2/2}\,dz=\sqrt{2\pi}$, obtained from the one-dimensional Gaussian integral by rescaling.
+ 
+@@ -72,7 +72,7 @@
+ 
+ [F5] [[thm-of-square-roots]]: $\theta>0$ has the positive square root used in the substitution.
+ 
+-[F6] [[thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line]]: A nonnegative function whose improper Riemann integral converges has the same Lebesgue integral on each half-line.
++[F6] [[thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line]]: Under Countable Choice, a nonnegative function Riemann integrable on compact truncations with finite improper integral has the same Lebesgue integral on each half-line.
+ 
+ [F7] [[thm-exponential-beats-every-polynomial]]: Polynomial factors times $e^{-z^2/2}$ are integrable at infinity, since the exponential dominates every inverse power after setting $x=z^2$.
+ 
+--- a/items/def-fd-conserving-bgk.md
++++ b/items/def-fd-conserving-bgk.md
+@@ -30,7 +30,7 @@
+ 
+ ## Definition
+ 
+-Fix the particle mass $m>0$ in kilograms, Boltzmann constant $k_B>0$ in joules per kelvin, and velocity Lebesgue measure $dv$ from the kinetic-density definition. Put $v_*=1\,\mathrm{m\,s^{-1}}$ and $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$. Here $v\in\mathbb R^3$ is measured in metres per second, and $f$ is a number density in velocity space with units $\mathrm{s^3\,m^{-6}}$. For a finite-valued nonnegative measurable velocity density $f:\mathbb R^3\to[0,\infty)$ with finite absolute third moment $\int\omega_3(v)f(v)\,dv<\infty$, set $n:=\int f\,dv$. Where $n>0$, set $u:=n^{-1}\int vf\,dv$ and $T:=m(3k_Bn)^{-1}\int|v-u|^2f\,dv$; then $n$ has units $\mathrm{m^{-3}}$, $u$ has units $\mathrm{m\,s^{-1}}$, and $T$ has units kelvins. Define the admissible BGK input domain
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Fix the particle mass $m>0$ in kilograms, Boltzmann constant $k_B>0$ in joules per kelvin, and velocity Lebesgue measure $dv$ from the kinetic-density definition. Put $v_*=1\,\mathrm{m\,s^{-1}}$ and $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$. Here $v\in\mathbb R^3$ is measured in metres per second, and $f$ is a number density in velocity space with units $\mathrm{s^3\,m^{-6}}$. For a finite-valued nonnegative measurable velocity density $f:\mathbb R^3\to[0,\infty)$ with finite absolute third moment $\int\omega_3(v)f(v)\,dv<\infty$, set $n:=\int f\,dv$. Where $n>0$, set $u:=n^{-1}\int vf\,dv$ and $T:=m(3k_Bn)^{-1}\int|v-u|^2f\,dv$; then $n$ has units $\mathrm{m^{-3}}$, $u$ has units $\mathrm{m\,s^{-1}}$, and $T$ has units kelvins. Define the admissible BGK input domain
+ $$\mathcal D_{\rm BGK}:=\left\{f:\int\omega_3f\,dv<\infty,\ f\ge0\text{ finite-valued measurable},\ n>0,\ \int|v-u|^2f\,dv>0\right\}.$$
+ Fix a relaxation time $\tau>0$ measured in seconds. For $f\in\mathcal D_{\rm BGK}$, the temperature $T$ is strictly positive, $\theta:=k_BT/m$ has units $\mathrm{m^2\,s^{-2}}$, and the moment-matched Maxwellian $M[f]$ and relaxation operator are defined by the following formulas; $M[f]$ has the same units as $f$:
+ $$M[f](v):=n(2\pi\theta)^{-3/2}\exp(-|v-u|^2/(2\theta)),\qquad Q_{\rm BGK}(f):=\frac{M[f]-f}{\tau}.$$
+--- a/items/thm-fd-homogeneous-bgk-limit.md
++++ b/items/thm-fd-homogeneous-bgk-limit.md
+@@ -32,7 +32,7 @@
+ 
+ ## Statement
+ 
+-Let $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v):=\sum_{j=0}^3(|v|/v_*)^j$, let $\tau>0$ be a relaxation time in seconds, and let $\epsilon>0$ be dimensionless. Let $f_0:\mathbb R^3\to[0,\infty)$ be a finite-valued measurable velocity density with units fixed by the kinetic-density definition, with $\int\omega_3f_0\,dv<\infty$, number density $n>0$, and strictly positive centered second moment. Let $M=M[f_0]$ be its positive-temperature Gaussian from the single-species BGK definition. Fix a constant reference density $f_{\rm ref}>0$ with the same units as $f_0$ and assume $\int f_0|\log(f_0/f_{\rm ref})|\,dv<\infty$, with $0\log0:=0$ and the integrand $f_0|\log(f_0/f_{\rm ref})|$ assigned value zero where $f_0=0$. Define
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v):=\sum_{j=0}^3(|v|/v_*)^j$, let $\tau>0$ be a relaxation time in seconds, and let $\epsilon>0$ be dimensionless. Let $f_0:\mathbb R^3\to[0,\infty)$ be a finite-valued measurable velocity density with units fixed by the kinetic-density definition, with $\int\omega_3f_0\,dv<\infty$, number density $n>0$, and strictly positive centered second moment. Let $M=M[f_0]$ be its positive-temperature Gaussian from the single-species BGK definition. Fix a constant reference density $f_{\rm ref}>0$ with the same units as $f_0$ and assume $\int f_0|\log(f_0/f_{\rm ref})|\,dv<\infty$, with $0\log0:=0$ and the integrand $f_0|\log(f_0/f_{\rm ref})|$ assigned value zero where $f_0=0$. Define
+ $$f^\epsilon(t,v):=M(v)+e^{-t/(\epsilon\tau)}(f_0(v)-M(v)),\qquad t\ge0\text{ in seconds}.$$
+ Then $f^\epsilon\ge0$, has the same mass, momentum, and kinetic energy as $f_0$ for every $t$, belongs to $C^1([0,\infty);L^1(\omega_3\,dv))$, and solves, as an equality in $L^1(\omega_3\,dv)$,
+ $$\partial_t f^\epsilon=\frac{M[f^\epsilon]-f^\epsilon}{\epsilon\tau},\qquad f^\epsilon(0)=f_0.$$
+--- a/items/prop-fd-bgk-entropy-rate.md
++++ b/items/prop-fd-bgk-entropy-rate.md
+@@ -40,7 +40,7 @@
+ 
+ ## Statement
+ 
+-Let $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$, let $\tau>0$ be a relaxation time in seconds, and let $\epsilon>0$ be dimensionless. Let $f_0:\mathbb R^3\to[0,\infty)$ be a finite-valued measurable velocity density with $\int\omega_3 f_0\,dv<\infty$, number density $n=\int f_0\,dv>0$, and strictly positive centered second moment $\int|v-u_0|^2f_0\,dv>0$, where $u_0=n^{-1}\int v f_0\,dv$. Fix a constant reference density $f_{\rm ref}>0$ with the same units as $f_0$, and assume $\int f_0|\log(f_0/f_{\rm ref})|\,dv<\infty$, using $0\log0:=0$ and assigning $f_0|\log(f_0/f_{\rm ref})|$ the value zero where $f_0=0$. These are the hypotheses of the homogeneous BGK relaxation theorem; the fixed $m>0$ and $k_B>0$ and the Gaussian $M=M[f_0]$ are as in the single-species BGK definition. Set
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$, let $\tau>0$ be a relaxation time in seconds, and let $\epsilon>0$ be dimensionless. Let $f_0:\mathbb R^3\to[0,\infty)$ be a finite-valued measurable velocity density with $\int\omega_3 f_0\,dv<\infty$, number density $n=\int f_0\,dv>0$, and strictly positive centered second moment $\int|v-u_0|^2f_0\,dv>0$, where $u_0=n^{-1}\int v f_0\,dv$. Fix a constant reference density $f_{\rm ref}>0$ with the same units as $f_0$, and assume $\int f_0|\log(f_0/f_{\rm ref})|\,dv<\infty$, using $0\log0:=0$ and assigning $f_0|\log(f_0/f_{\rm ref})|$ the value zero where $f_0=0$. These are the hypotheses of the homogeneous BGK relaxation theorem; the fixed $m>0$ and $k_B>0$ and the Gaussian $M=M[f_0]$ are as in the single-species BGK definition. Set
+ $$f^\epsilon(t)=M+e^{-t/(\epsilon\tau)}(f_0-M),\qquad t\ge0.$$
+ For each nonnegative velocity density $g$ with the same units as $f_0$ and for which the integral is absolutely finite, define
+ $$H(g):=\int_{\mathbb R^3}g(v)\log(g(v)/f_{\rm ref})\,dv,\qquad 0\log0:=0.$$
+--- a/items/ex-fd-bgk-initial-layer.md
++++ b/items/ex-fd-bgk-initial-layer.md
+@@ -49,11 +49,11 @@
+ 
+ ## Example
+ 
+-Let $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$, $\theta>0$ be a squared speed, choose a speed $a>0$ with $a^2<\theta$, and let $n>0$. For a positive-definite covariance matrix $\Sigma$, define the normalized Gaussian
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$, $\theta>0$ be a squared speed, choose a speed $a>0$ with $a^2<\theta$, and let $n>0$. For a positive-definite covariance matrix $\Sigma$, define the normalized Gaussian
+ $$G_{\mu,\Sigma}(v):=\frac{n}{(2\pi)^{3/2}\sqrt{\det\Sigma}} \exp\!\left(-\frac12(v-\mu)^{\mathsf T}\Sigma^{-1}(v-\mu)\right).$$
+ Set $\Sigma=\operatorname{diag}(\theta-a^2,\theta,\theta)$ and
+ $$f_0(v):=\frac12G_{ae_1,\Sigma}(v)+\frac12G_{-ae_1,\Sigma}(v).$$
+-This positive density has mass $n$, mean velocity $0$, and normalized covariance $\theta I_3$ (equivalently, second centered moment tensor $n\theta I_3$), so its moment-matched Maxwellian is $M=M_{n,0,T}$ with $k_BT=m\theta$. It is not itself Maxwellian and satisfies $\int f_0|\log(f_0/f_{\rm ref})|\,dv<\infty$ for every fixed positive reference density $f_{\rm ref}$ with the same units as $f_0$, interpreting the integrand as zero where $f_0=0$. For $\epsilon,\tau>0$, its homogeneous BGK evolution is
++This positive density has mass $n$, mean velocity $0$, and normalized covariance $\theta I_3$ (equivalently, second centered moment tensor $n\theta I_3$), so its moment-matched Maxwellian is $M=M_{n,0,T}$ with $k_BT=m\theta$. It is not itself Maxwellian and satisfies $\int f_0|\log(f_0/f_{\rm ref})|\,dv<\infty$ for every fixed positive constant reference density $f_{\rm ref}$ with the same units as $f_0$, interpreting the integrand as zero where $f_0=0$. For $\epsilon,\tau>0$, its homogeneous BGK evolution is
+ $$f^\epsilon(t,v)=M(v)+e^{-t/(\epsilon\tau)}(f_0(v)-M(v)).$$
+ For every $t>0$ this approaches $M$ as $\epsilon\to0$, and on every finite interval $[0,T_*]$ its $\omega_3$ weighted spacetime distance to $M$ is at most $\epsilon\tau\int\omega_3|f_0-M|\,dv$. It does not converge uniformly in time on $[0,T_*]$, since the distance at $t=0$ is strictly positive.
+ 
+@@ -65,7 +65,7 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $0<a^2<\theta$, $n,m,k_B,\epsilon,\tau>0$, and $k_BT=m\theta$.
++**Given:** Countable Choice $\mathrm{AC}_\omega$, a fixed positive constant $f_{\rm ref}$ in the same units as $f_0$, $0<a^2<\theta$, $n,m,k_B,\epsilon,\tau>0$, and $k_BT=m\theta$.
+ 
+ [F1] [[thm-gaussian-integral]], [[thm-substitution-for-improper-integrals]], and [[thm-of-square-roots]]: Each one-dimensional Gaussian factor with variance $\sigma_i^2>0$ normalizes to one after $z=(v_i-\mu_i)/\sigma_i$.
+ 
+--- a/items/thm-fd-controlled-euler-passage.md
++++ b/items/thm-fd-controlled-euler-passage.md
+@@ -40,7 +40,7 @@
+ 
+ ## Statement
+ 
+-Let $T_*>0$ seconds, let $L_1,L_2,L_3>0$ be fixed spatial periods in metres, and set $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$. Give $\Omega$ the completed unnormalised pushforward $dx$ of Lebesgue measure on $C=\prod_j[0,L_j)$ under the quotient map, as in the kinetic-density definition. Let $v_*=1\,\mathrm{m\,s^{-1}}$. For $k=2,3$ put
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $T_*>0$ seconds, let $L_1,L_2,L_3>0$ be fixed spatial periods in metres, and set $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$. Give $\Omega$ the completed unnormalised pushforward $dx$ of Lebesgue measure on $C=\prod_j[0,L_j)$ under the quotient map, as in the kinetic-density definition. Let $v_*=1\,\mathrm{m\,s^{-1}}$. For $k=2,3$ put
+ $$\omega_k(v):=\sum_{j=0}^k(|v|/v_*)^j.$$
+ Let $Q_{\rm el}=\{(v,w,v',w')\in\mathbb R^{12}:v+w=v'+w',\ |v|^2+|w|^2=|v'|^2+|w'|^2\}$ be the elastic collision set, and use the nonnegative countably additive symmetric collision measure $\nu$ and operator $Q_\nu:\mathcal D_\nu\to L^1_{\rm loc}$ specified in the earlier elastic-collision definition; the three particle-exchange and incoming/outgoing invariances are hypotheses on $\nu$. Thus, for each $f^\epsilon(x,\cdot,t)$ in its declared collision domain, the weak identity has factor $1/4$ and collision bracket $\delta\psi=\psi(v)+\psi(w)-\psi(v')-\psi(w')$ whenever the test and both integrals are admissible. For each dimensionless $\epsilon>0$, let $f^\epsilon>0$ be periodic, $C^1$ in $(t,x)$ and $C^2$ in $v$ on the closed slab (with one-sided time derivatives at its endpoints), with $\int\omega_3 f^\epsilon\,dv<\infty$ at each $(t,x)$, and solve on $0<t<T_*$
+ $$\epsilon(\partial_t f^\epsilon+v\cdot\nabla_xf^\epsilon)=Q_\nu(f^\epsilon).$$ Assume the common $L^1(dv)$ derivative envelopes from the moment-balance proposition: for each multiplier $\psi\in\{m,mv_1,mv_2,mv_3,m|v|^2/2\}$, the time derivative and each spatially weighted derivative have one velocity majorant independent of $(t,x)$ on compact time slabs. At every $(t,x)$, require $f^\epsilon(x,\cdot,t)\in\mathcal D_\nu$ and $1,v_1,v_2,v_3,|v|^2\in\mathcal S_{f^\epsilon(x,\cdot,t)}$ with the measurability and absolute-convergence conditions of the elastic-collision definition; assume finite velocity moments through degree three. The elastic bracket of each such invariant is zero. Let $n,u,T$ be $C^1$ on $[0,T_*]\times\Omega$, periodic in $x$, with $n,T$ bounded above and bounded away from zero and $u$ bounded; $n$ is number density in $\mathrm{m^{-3}}$, $u$ is velocity in $\mathrm{m\,s^{-1}}$, and $T$ is temperature in kelvins. Use the fixed particle mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per kelvin from the kinetic-density definition, and define $\rho=mn$, $p=nk_BT$, $E=\rho|u|^2/2+3nk_BT/2$, and
+--- a/items/post-fd-bgk-relaxation.md
++++ b/items/post-fd-bgk-relaxation.md
+@@ -37,7 +37,7 @@
+ 
+ ## Postulate
+ 
+-Let $v_*=1\,\mathrm{m\,s^{-1}}$ and $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$. A velocity density $g:\mathbb R^3\to[0,\infty)$ is admissible when it is finite-valued and Lebesgue measurable, $g\,d^3v$ is a number density in $\mathrm{m^{-3}}$ (so $g$ has units $\mathrm{s^3\,m^{-6}}$), and
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $v_*=1\,\mathrm{m\,s^{-1}}$ and $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$. A velocity density $g:\mathbb R^3\to[0,\infty)$ is admissible when it is finite-valued and Lebesgue measurable, $g\,d^3v$ is a number density in $\mathrm{m^{-3}}$ (so $g$ has units $\mathrm{s^3\,m^{-6}}$), and
+ $$\int_{\mathbb R^3}\omega_3(v)g(v)\,d^3v<\infty.$$
+ The primitive parameters are species mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per kelvin. For an admissible $g$ with $n[g]:=\int_{\mathbb R^3}g\,d^3v>0$ and positive centered second moment, define
+ $$u[g]:=\frac{1}{n[g]}\int_{\mathbb R^3}v g(v)\,d^3v,\qquad T[g]:=\frac{m}{3k_Bn[g]}\int_{\mathbb R^3}|v-u[g]|^2g(v)\,d^3v.$$
+--- a/items/pthm-fd-bgk-equilibration.md
++++ b/items/pthm-fd-bgk-equilibration.md
+@@ -59,7 +59,7 @@
+ 
+ ## Statement
+ 
+-Let $v_*=1\,\mathrm{m\,s^{-1}}$ and
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $v_*=1\,\mathrm{m\,s^{-1}}$ and
+ $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$. Let
+ $f_0:\mathbb R^3\to[0,\infty)$ be a measurable velocity number density,
+ with $f_0$ in $\mathrm{s^3\,m^{-6}}$ and $f_0\,d^3v$ measured in
+--- a/items/pthm-fd-ideal-gas-euler-interface.md
++++ b/items/pthm-fd-ideal-gas-euler-interface.md
+@@ -51,7 +51,7 @@
+ 
+ ## Statement
+ 
+-Let $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$ be a fixed rectangular periodic cell with periods $L_j>0$ in metres, $T_*>0$ in seconds, and $\varepsilon>0$ a dimensionless fast-collision parameter. Spatial position $x$ is measured in metres, velocity $v$ in metres per second, and $f^\varepsilon d^3x\,d^3v$ counts particles, so $f^\varepsilon$ has units $\mathrm{s^3\,m^{-6}}$. Put $v_*=1\,\mathrm{m\,s^{-1}}$ and $\omega_k(v)=\sum_{j=0}^k(|v|/v_*)^j$ for $k=2,3$. For each $\varepsilon$, let $f^\varepsilon>0$ be periodic on $\Omega$, continuously differentiable in $t,x$, and twice continuously differentiable in $v$ on $\Omega\times\mathbb R^3\times[0,T_*]$. Let $f_{\rm ref}>0$ be constant in the same units as $f^\varepsilon$ and put $\ell^\varepsilon=\log(f^\varepsilon/f_{\rm ref})$. On each compact time interval, require integrable velocity majorants uniform in $x,t$ for each of $\omega_3 f^\varepsilon$, $\omega_3|\partial_t f^\varepsilon|$, $\omega_3|v\cdot\nabla_xf^\varepsilon|$, $f^\varepsilon|\ell^\varepsilon|$, $|v|f^\varepsilon|\ell^\varepsilon|$, $(1+|\ell^\varepsilon|)|\partial_t f^\varepsilon|$, and $(1+|\ell^\varepsilon|)|v||\nabla_x f^\varepsilon|$. Require the collision logarithmic test to be absolutely integrable. Define
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$ be a fixed rectangular periodic cell with periods $L_j>0$ in metres, $T_*>0$ in seconds, and $\varepsilon>0$ a dimensionless fast-collision parameter. Spatial position $x$ is measured in metres, velocity $v$ in metres per second, and $f^\varepsilon d^3x\,d^3v$ counts particles, so $f^\varepsilon$ has units $\mathrm{s^3\,m^{-6}}$. Put $v_*=1\,\mathrm{m\,s^{-1}}$ and $\omega_k(v)=\sum_{j=0}^k(|v|/v_*)^j$ for $k=2,3$. For each $\varepsilon$, let $f^\varepsilon>0$ be periodic on $\Omega$, continuously differentiable in $t,x$, and twice continuously differentiable in $v$ on $\Omega\times\mathbb R^3\times[0,T_*]$. Let $f_{\rm ref}>0$ be constant in the same units as $f^\varepsilon$ and put $\ell^\varepsilon=\log(f^\varepsilon/f_{\rm ref})$. On each compact time interval, require integrable velocity majorants uniform in $x,t$ for each of $\omega_3 f^\varepsilon$, $\omega_3|\partial_t f^\varepsilon|$, $\omega_3|v\cdot\nabla_xf^\varepsilon|$, $f^\varepsilon|\ell^\varepsilon|$, $|v|f^\varepsilon|\ell^\varepsilon|$, $(1+|\ell^\varepsilon|)|\partial_t f^\varepsilon|$, and $(1+|\ell^\varepsilon|)|v||\nabla_x f^\varepsilon|$. Require the collision logarithmic test to be absolutely integrable. Define
+ 
+ $$Q_{\rm el}=\{(v,w,v',w')\in(\mathbb R^3)^4:v+w=v'+w',\ |v|^2+|w|^2=|v'|^2+|w'|^2\}$$
+ 
+--- a/items/rem-fd-kinetic-limit-status.md
++++ b/items/rem-fd-kinetic-limit-status.md
+@@ -32,7 +32,7 @@
+ 
+ ## Remark
+ 
+-The Euler-passage theorem in this collection assumes weighted strong convergence to local Maxwellians and proves only the resulting conservation-law passage. The separate homogeneous BGK theorem gives an explicit relaxation solution and its limit. Neither result proves convergence for general inhomogeneous Boltzmann solutions, a Boltzmann–Grad limit from deterministic many-particle dynamics, or a Navier–Stokes–Fourier limit. Those questions require additional hypotheses and separate theorem chains.
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. The Euler-passage theorem in this collection assumes weighted strong convergence to local Maxwellians and proves only the resulting conservation-law passage. The separate homogeneous BGK theorem gives an explicit relaxation solution and its limit. Neither result proves convergence for general inhomogeneous Boltzmann solutions, a Boltzmann–Grad limit from deterministic many-particle dynamics, or a Navier–Stokes–Fourier limit. Those questions require additional hypotheses and separate theorem chains.
+ 
+ ## Remark references
+ 
+--- a/items/texp-fd-bgk-preparation.md
++++ b/items/texp-fd-bgk-preparation.md
+@@ -36,7 +36,7 @@
+ 
+ ## Statement
+ 
+-Consider a hypothetical homogeneous three-dimensional gas with particle mass $m>0$ in kilograms, Boltzmann constant $k_B>0$ in joules per kelvin, number density $n_0>0$ in $\mathrm{m^{-3}}$, translational temperature $T_0>0$ in kelvins, and a constant reference density $f_{\rm ref}>0$ with the same units as the velocity density below. Put $\theta=k_BT_0/m$ in $\mathrm{m^2\,s^{-2}}$, $V_c=\sqrt{3\theta}$ in $\mathrm{m\,s^{-1}}$, and define the prepared number density in velocity space by
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Consider a hypothetical homogeneous three-dimensional gas with particle mass $m>0$ in kilograms, Boltzmann constant $k_B>0$ in joules per kelvin, number density $n_0>0$ in $\mathrm{m^{-3}}$, translational temperature $T_0>0$ in kelvins, and a constant reference density $f_{\rm ref}>0$ with the same units as the velocity density below. Put $\theta=k_BT_0/m$ in $\mathrm{m^2\,s^{-2}}$, $V_c=\sqrt{3\theta}$ in $\mathrm{m\,s^{-1}}$, and define the prepared number density in velocity space by
+ 
+ $$f_0(v)=\frac{n_0}{8V_c^3}\,\mathbf 1_{[-V_c,V_c]^3}(v),\qquad v\in\mathbb R^3.$$
+ 
+--- a/items/def-fd-physical-kinetic-observables.md
++++ b/items/def-fd-physical-kinetic-observables.md
+@@ -47,7 +47,7 @@
+ 
+ Here $n$ is in $\mathrm{m^{-3}}$, $\rho$ in $\mathrm{kg\,m^{-3}}$, $u$ in $\mathrm{m\,s^{-1}}$, $T$ in kelvins, $P$ in pascals, $q$ in $\mathrm{W\,m^{-2}}$, and $E$ in $\mathrm{J\,m^{-3}}$. The definitions impose no isotropy on $P$; $p$ will denote a separate scalar pressure only in a specified local-equilibrium conclusion.
+ 
+-Let $f_{\rm ref}>0$ be a constant reference density with the same units as $f$. Where both $\int f|\log(f/f_{\rm ref})|\,d^3v$ and $\int |v|f|\log(f/f_{\rm ref})|\,d^3v$ are finite, define the dimensionless-log kinetic entropy integral, its flux, the physical kinetic entropy density, and its flux by
++Let $f_{\rm ref}>0$ be a constant reference density with the same units as $f$. Assign $f\log(f/f_{\rm ref})=0$ and $f|\log(f/f_{\rm ref})|=0$ wherever $f=0$; their velocity-weighted products are then zero there as well. These are the continuous extensions at zero. Where both $\int f|\log(f/f_{\rm ref})|\,d^3v$ and $\int |v|f|\log(f/f_{\rm ref})|\,d^3v$ are finite, define the dimensionless-log kinetic entropy integral, its flux, the physical kinetic entropy density, and its flux by
+ 
+ $$h=\int_{\mathbb R^3}f\log(f/f_{\rm ref})\,d^3v,\qquad J_H=\int_{\mathbb R^3}v f\log(f/f_{\rm ref})\,d^3v,\qquad s_{\rm kin}=-k_Bh,\qquad j_{\rm kin}=-k_BJ_H.$$
+ 
+--- a/items/pthm-fd-local-boltzmann-h-balance.md
++++ b/items/pthm-fd-local-boltzmann-h-balance.md
+@@ -50,7 +50,7 @@
+ 
+ ## Statement
+ 
+-Let $I\subseteq\mathbb R$ be an open time interval in seconds and let
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $I\subseteq\mathbb R$ be an open time interval in seconds and let
+ $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$ be a periodic spatial cell with
+ $L_j>0$ in metres. Let $v\in\mathbb R^3$ be measured in metres per second and
+ let $f:I\times\Omega\times\mathbb R^3\to(0,\infty)$ be measurable, continuously
+@@ -70,12 +70,14 @@
+ $f\omega_3(v)$, $f|\ell|$, $|v|f|\ell|$,
+ $(1+|\ell|)|\partial_t f|$, and
+ $(1+|\ell|)|v|\,|\nabla_x f|$. At every $(x,t)$, assume that $f(x,\cdot,t)$
+-belongs to the collision domain and that the weak collision tests $1$ and
+-$\ell(x,\cdot,t)$ are measurable and absolutely convergent. For each $t\in I$,
++belongs to the collision domain $\mathcal D_\nu$ and that
++$1,\ell(x,\cdot,t)\in\mathcal S_{f(x,\cdot,t)}$, with the measurability,
++absolute convergence, and weak collision identity specified by the adopted
++collision model for both tests. For each $t\in I$,
+ assume that the map
+ $$x\longmapsto\int_{Q_{\rm el}}|(A-B)\log(A/B)|\,d\nu$$
+ is measurable and belongs to $L^1(\Omega,dx)$. Assume that $f$ solves the adopted kinetic equation
+-$\partial_t f+v\cdot\nabla_x f=Q_\nu(f)$.
++$\partial_t f+v\cdot\nabla_x f=Q_\nu(f)$ as an equality for Lebesgue-almost every velocity at every fixed $(x,t)$. This sectionwise solution sense is an explicit hypothesis for the pointwise balance below.
+ 
+ Define
+ $$h(x,t)=\int_{\mathbb R^3}f\log(f/f_{\rm ref})\,d^3v,\qquad J_H(x,t)=\int_{\mathbb R^3}v f\log(f/f_{\rm ref})\,d^3v,$$
+@@ -99,9 +101,9 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** The positive regular solution, the stated velocity envelopes, the adopted kinetic equation, and absolutely convergent collision tests $1$ and $\ell$.
++**Given:** Countable Choice $\mathrm{AC}_\omega$, the positive regular solution, the stated velocity envelopes, the sectionwise kinetic equation, and tests $1,\ell\in\mathcal S_f$ with absolutely convergent weak identities.
+ 
+-[F1] [[post-fd-boltzmann-model]]: the adopted equation is $\partial_t f+v\cdot\nabla_x f=Q_\nu(f)$; its weak identity applies to compact smooth tests and to moment or logarithmic tests whose two sides converge absolutely, including $1$ and $\ell$ under [A1].
++[F1] [[post-fd-boltzmann-model]]: the adopted equation $\partial_t f+v\cdot\nabla_x f=Q_\nu(f)$ holds almost everywhere in the product domain; the sectionwise equality in [A1] is an additional solution hypothesis here. The postulate grants its weak identity to compact smooth tests and to moment or logarithmic tests whose two sides converge absolutely, including $1$ and $\ell$ under [A1].
+ 
+ [F2] [[def-fd-physical-kinetic-observables]]: $h=\int f\log(f/f_{\rm ref})\,d^3v$ and $J_H=\int v f\log(f/f_{\rm ref})\,d^3v$ are the dimensionless-log entropy integral and its flux.
+ 
+@@ -133,7 +135,7 @@
+ $$\partial_t h+\nabla_x\cdot J_H=\int_{\mathbb R^3}(1+\ell)(\partial_t f+v\cdot\nabla_x f)\,d^3v.$$
+ [given, A1, F2, F4, F5, F6, F7, F8, algebra]
+ 
+-2.1 Substitute the model equation [F1]. The test $1$ has zero collision
++2.1 At the fixed $(x,t)$, substitute the sectionwise equation in [A1], which has the adopted model form [F1]; its velocity null set does not change the absolutely integrable velocity integrals. The test $1$ has zero collision
+ bracket, so $\int Q_\nu(f)\,d^3v=0$. For the test $\ell$,
+ $$\delta\ell=\log\!\left(\frac{f(x,v,t)f(x,w,t)}{f_{\rm ref}^2}\right)-\log\!\left(\frac{f(x,v',t)f(x,w',t)}{f_{\rm ref}^2}\right)=\log(A/B),$$
+ whose logarithm arguments are dimensionless. By [F3],
+--- a/items/pthm-fd-boltzmann-entropy.md
++++ b/items/pthm-fd-boltzmann-entropy.md
+@@ -41,17 +41,17 @@
+ 
+ ## Statement
+ 
+-Let $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$ be a periodic cell with $L_j>0$ in metres, and let $I$ be an open time interval in seconds. Let $f:I\times\Omega\times\mathbb R^3\to(0,\infty)$ be periodic, continuously differentiable in $t,x$, and twice continuously differentiable in $v$, with $v$ in metres per second and $f$ in $\mathrm{s^3\,m^{-6}}$. Fix $k_B>0$ in joules per kelvin, $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$, and a constant $f_{\rm ref}>0$ with the same units as $f$; put $\ell=\log(f/f_{\rm ref})$. On each compact time interval, assume integrable velocity majorants uniform in $x,t$ for each of $f\omega_3$, $f|\ell|$, $|v|f|\ell|$, $(1+|\ell|)|\partial_t f|$, and $(1+|\ell|)|v|\,|\nabla_x f|$. Define the elastic collision set
++Adopt Countable Choice $\mathrm{AC}_\omega$, as in the kinetic-density framework. Let $\Omega=\prod_{j=1}^3(\mathbb R/L_j\mathbb Z)$ be a periodic cell with $L_j>0$ in metres, and let $I$ be an open time interval in seconds. Let $f:I\times\Omega\times\mathbb R^3\to(0,\infty)$ be periodic, continuously differentiable in $t,x$, and twice continuously differentiable in $v$, with $v$ in metres per second and $f$ in $\mathrm{s^3\,m^{-6}}$. Fix $k_B>0$ in joules per kelvin, $v_*=1\,\mathrm{m\,s^{-1}}$, $\omega_3(v)=\sum_{j=0}^3(|v|/v_*)^j$, and a constant $f_{\rm ref}>0$ with the same units as $f$; put $\ell=\log(f/f_{\rm ref})$. On each compact time interval, assume integrable velocity majorants uniform in $x,t$ for each of $f\omega_3$, $f|\ell|$, $|v|f|\ell|$, $(1+|\ell|)|\partial_t f|$, and $(1+|\ell|)|v|\,|\nabla_x f|$. Define the elastic collision set
+ 
+ $$Q_{\rm el}=\{(v,w,v',w')\in(\mathbb R^3)^4:v+w=v'+w',\ |v|^2+|w|^2=|v'|^2+|w'|^2\}$$
+ 
+-with its relative Borel sigma-algebra, and let $\nu$ be the nonnegative symmetric collision-rate measure on $Q_{\rm el}$. At every $(x,t)$ assume $f(x,\cdot,t)$ belongs to the collision domain and the weak identity
++with its relative Borel sigma-algebra, and let $\nu$ be the nonnegative symmetric collision-rate measure on $Q_{\rm el}$. At every $(x,t)$ assume $f(x,\cdot,t)\in\mathcal D_\nu$ and $1,\ell(x,\cdot,t)\in\mathcal S_{f(x,\cdot,t)}$, with the measurability and absolute convergence specified by the collision model, and assume the weak identity
+ 
+ $$\int_{\mathbb R^3}\psi(v)Q_\nu(f)(x,v,t)\,d^3v=\frac14\int_{Q_{\rm el}}(B-A)\bigl(\psi(v)+\psi(w)-\psi(v')-\psi(w')\bigr)\,d\nu$$
+ 
+ holds absolutely for $\psi=1$ and $\psi=\ell(x,\cdot,t)$, where $A=f(x,v,t)f(x,w,t)$ and $B=f(x,v',t)f(x,w',t)$. For each $t\in I$, assume that the map
+ $$x\longmapsto\int_{Q_{\rm el}}|(A-B)\log(A/B)|\,d\nu$$
+-is measurable and belongs to $L^1(\Omega,dx)$. Assume that $f$ solves $\partial_t f+v\cdot\nabla_x f=Q_\nu(f)$.
++is measurable and belongs to $L^1(\Omega,dx)$. Assume that $f$ solves $\partial_t f+v\cdot\nabla_x f=Q_\nu(f)$ for Lebesgue-almost every velocity at every fixed $(x,t)$, the sectionwise solution sense used for the pointwise local balance.
+ 
+ $$A(x,v,w,t)=f(x,v,t)f(x,w,t),\qquad B(x,v',w',t)=f(x,v',t)f(x,w',t).$$
+ 
+@@ -78,11 +78,11 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** The periodic-cell, positivity, regularity, absolute moment, logarithmic-test, entropy-flux, and differentiation-envelope hypotheses in the statement, together with $k_B>0$.
++**Given:** Countable Choice $\mathrm{AC}_\omega$, the periodic-cell, positivity, regularity, absolute moment, declared logarithmic-test, sectionwise-equation, entropy-flux, and differentiation-envelope hypotheses in the statement, together with $k_B>0$.
+ 
+ [F1] [[thm-fd-kinetic-h]] (current batch-25 draft carrier; authoring readiness is not proof acceptance): under its positive periodic regularity, entropy and derivative envelopes, local spacetime integrability, measurable locally integrable collision production with integrable spatial sections, adopted equation, and absolutely convergent collision tests $1$ and $\ell$, it states the local distributional balance $\partial_t h+\nabla_x\cdot J_H=-D$ and the differentiable global identity $H'(t)=-D_{\rm tot}(t)\le0$, where $H=\int_\Omega h\,dx$ and $D_{\rm tot}=\int_\Omega D\,dx$. The uniform velocity majorants in this item's Statement imply the source's moment, entropy, derivative and local spacetime integrability conditions on compact time intervals. The equation and the two weak tests give $D=-\int\ell Q_\nu(f)\,dv=-\int(1+\ell)(\partial_t f+v\cdot\nabla_xf)\,dv$; those same majorants make this a measurable locally integrable function, while the Statement separately assumes integrable spatial production sections. Proof step 2.1 below uses the global identity; the pointwise local balance used in step 1.1 is supplied by [F2] under this item's stronger velocity envelopes.
+ 
+-[F2] [[pthm-fd-local-boltzmann-h-balance]]: $h_t+\nabla_x\cdot J_H=-D(x,t)$ pointwise, with $D(x,t)\ge0$, under the local envelope and collision-test assumptions in the Statement.
++[F2] [[pthm-fd-local-boltzmann-h-balance]]: $h_t+\nabla_x\cdot J_H=-D(x,t)$ pointwise, with $D(x,t)\ge0$, under the local envelope, declared collision-test, and sectionwise-equation assumptions in the Statement.
+ 
+ [F3] [[def-fd-physical-kinetic-observables]]: $s_{\rm kin}=-k_Bh$ in $\mathrm{J\,m^{-3}\,K^{-1}}$ and $j_{\rm kin}=-k_BJ_H$ in $\mathrm{J\,m^{-2}\,s^{-1}\,K^{-1}}$.
+ 

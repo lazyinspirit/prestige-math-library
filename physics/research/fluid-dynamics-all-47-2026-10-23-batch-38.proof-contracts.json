@@ -1,0 +1,543 @@
+{
+  "version": 1,
+  "level": "fluid-dynamics-all-47-2026-10-23-batch-38",
+  "scope": [
+    "post-fd-eddy-viscosity-closure",
+    "pthm-fd-eddy-closure-resolved-dissipation",
+    "ex-fd-eddy-shear-production"
+  ],
+  "contracts": {
+    "post-fd-eddy-viscosity-closure": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Step-5 unit 38 reviewed the current Postulate: normalized volume-measure convolution, C1 periodic base pressure p_dyn, filtered specific pressure pi_ell=overline(p_dyn)_ell/rho0, full modeled stress 2kI_3/3-2nu_t D, and transfer -tau_model:grad(ubar) have explicit domains, regularity and SI units. The resolved gradient is grad(pi_ell); the isotropic modeled stress remains on the right. Continuous first derivatives on compact period-cell/time rectangles justify the C1 pressure convolution without assuming spatial Cinfinity pressure."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Statement is limited to the smooth periodic 3D incompressible Newtonian model and treats k and nu_t as prescribed nonnegative model fields. It explicitly disclaims exact-covariance equality, positive-semidefiniteness of the modeled tensor, empirical adequacy in every regime, and universal no-backscatter."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Step-5 unit 38 consulted Washington ME 544 section 3, printed pp. 11-12, Eqs. (15)-(20), and section 4, printed pp. 14-15, Eq. (30) and the modeled-transfer calculation, using the online PDF text and retained extraction. Eqs. (15)/(17) filter the base pressure; Eq. (20) separately absorbs isotropic stress. Our full-stress convention uses filtered pressure without that absorption. Gibbs and MIT reading is historical author evidence only; this adjudicator did not retrieve or independently read them."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is an adopted postulate with proof not-applicable. The text says the closure is not derived from the Newtonian equations and does not assert exact-covariance equality or physical validation."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-eddy-closure-resolved-dissipation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-eddy-viscosity-closure",
+          "source_section": "Postulate",
+          "quote": "$$\\tau_{\\ell}^{\\rm model}=\\frac{2k}{3}I_3-2\\nu_tD_\\ell,\\qquad \\Pi_{\\ell}^{\\rm model}=-\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "The branch is specified by\n$$\n\\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad\n\\sigma=-pI_3+2\\mu D,\\qquad\n\\rho_0D_tu=\\operatorname{div}\\sigma,\n$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-filtered-covariance-energy",
+          "source_section": "Statement",
+          "quote": "Consequently, for every $t\\in I$,\n\n$$\\frac{d}{dt}\\frac12\\int_{\\mathbb T_L^d}|\\overline u_\\ell|^2\\,d\\mu_L+\\nu\\int_{\\mathbb T_L^d}|\\nabla\\overline u_\\ell|_F^2\\,d\\mu_L=\\int_{\\mathbb T_L^d}\\tau_\\ell:\\nabla\\overline u_\\ell\\,d\\mu_L+\\int_{\\mathbb T_L^d}\\overline f_\\ell\\cdot\\overline u_\\ell\\,d\\mu_L.$$\n\nThe forward-transfer sign convention is $\\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell$; this theorem makes no sign assertion for $\\Pi_\\ell$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-periodic-filter-normalization-and-commutation",
+          "source_section": "Statement",
+          "quote": "then the filtered field has the same regularity and, for every spatial multi-index $\\beta$,\n\n$$\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_x^\\beta q}_\\ell,\\qquad \\partial_t\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_t\\partial_x^\\beta q}_\\ell.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "For any smooth periodic vector field $u:\\mathbb T_L^d\\to\\mathbb R^d$, define the subfilter stress and transfer by\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell,$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $W_\\ell=(\\nabla\\overline u_\\ell-(\\nabla\\overline u_\\ell)^T)/2$. Then $\\nabla\\overline u_\\ell=D_\\ell+W_\\ell$, with $D_\\ell$ symmetric and $W_\\ell$ skew-symmetric. Pairing terms $(i,j)$ and $(j,i)$ gives $D_\\ell:W_\\ell=0$, since $(D_\\ell)_{ij}=(D_\\ell)_{ji}$ and $(W_\\ell)_{ji}=-(W_\\ell)_{ij}$; diagonal terms vanish because $(W_\\ell)_{ii}=0$. Hence $D_\\ell:\\nabla\\overline u_\\ell=|D_\\ell|_F^2$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [A2], [F3], and the given $\\nabla\\cdot u=0$, $\\nabla\\cdot\\overline u_\\ell=\\overline{\\nabla\\cdot u}_\\ell=0$, so $I_3:\\nabla\\overline u_\\ell=\\operatorname{tr}(\\nabla\\overline u_\\ell)=0$.",
+          "inputs": [
+            "A2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Contract [A1] with $\\nabla\\overline u_\\ell$ and use steps 1.1 and 1.2 to obtain $\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell=(2k/3)I_3:\\nabla\\overline u_\\ell-2\\nu_tD_\\ell:\\nabla\\overline u_\\ell=-2\\nu_t|D_\\ell|_F^2$. Therefore $\\Pi_{\\ell}^{\\rm model}=2\\nu_t|D_\\ell|_F^2\\ge0$ by $\\nu_t\\ge0$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Under the additional $\\nu>0$ equation hypotheses in [F2], the exact resolved-energy balance has the stress contraction $+\\tau_\\ell:\\nabla\\overline u_\\ell$ on the right. The physical branch definition [F1] and exact covariance/transfer convention [F4] fix this model context. The postulate [A1] replaces that stress slot only in the modeled equation, so its contribution is $\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell=-\\Pi_{\\ell}^{\\rm model}=-2\\nu_t|D_\\ell|_F^2\\le0$ by step 2.1. This conclusion concerns the adopted closure term, not the exact covariance.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model is three-dimensional on a nonempty periodic torus.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: The Statement fixes T_L^3 with L>0 and a kernel of mass one; the periodization index Z^3 and contraction index {1,2,3}^2 are fixed and nonempty. Proof 1.1 pairs symmetric and skew entries, 1.2 gives zero filtered divergence, and 2.1 computes the nine-term stress contraction as -2 nu_t |D_ell|_F^2. The claim permits zero strain or eddy viscosity, but never an empty matrix size or empty spatial domain. The syntax detector supplies no mathematical contradiction to the existing row.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "e46c773fd7b7c1a45c2067cbd845ce81d7c16da2b0a0d798a0a39e76159a8221",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If nu_t=0 or D_ell=0, step 2.1 gives Pi_model=0 for every k>=0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "751f16600a90ec72dd4a8434dbb5a99b694f2fa112e2efef622a3990a5c17cbd",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The physical supplier and the statement fix the spatial dimension at three.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "8d80d5eb353715bbd053b2de90ad0abc41c4db522f7864564b21a333af2f68e3",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: L>0 and 0<ell<L/2 are required; excluded endpoint widths are not asserted. The pointwise contraction is valid for every such ell.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "61492c6a02dc86f5046993ef8088a666a18f64f073a594a476e2dc93b6552399",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero at nu_t=0; the isotropic k term remains zero in the contraction for every k>=0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "3abed2934d8b17ca255415b80328b6753926019da5d42a5c09250ed252c97eaf",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 carry Countable Choice through the normalized torus/filter convention. The finite-dimensional contraction uses no additional choice.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "52bf415f92fe0bd83b599500390f9aa57f7f8e435119a5ce1c4ce7d373b9af36",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way sign identity, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "7f4063dd9935cd61bed5548286d7dd2b1b0685da13067aa5758541127b6a72d2",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way sign identity, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current torus/kernel/strain hypotheses and proof1.1–3.1 retain the same pointwise stress-contraction scope; changing convolution integration variable dx to dr has no effect on this axis or the separate modeled/exact stress distinction.",
+            "item_sha256": "638deed498810b24c904fd3af169f2900c7422ccf0d11c3ea46b6638cacb72d6",
+            "row_sha256": "7996abfe86df07eb6985c791856a21a45868ffc1c7c44cea5af4064254c86941",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero eddy viscosity",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ],
+          "expected": "Setting nu_t=0 gives Pi_model=0 regardless of k and the divergence-free resolved gradient."
+        },
+        {
+          "name": "zero strain",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "Setting D_ell=0 gives Pi_model=0; no positive dissipation is claimed when the modeled strain vanishes."
+        },
+        {
+          "name": "simple shear",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For gradient with only partial_y ubar_x=S, |D_ell|_F^2=S^2/2 and Pi_model=nu_t S^2."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the contraction identity; no numerical sampling, empirical measurement, or statistical inference is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Independently read all four proof steps and direct suppliers. Symmetric/skew contraction gives D:grad=|D|^2, commutation gives trace zero, and the adopted stress gives Pi_model=2 nu_t |D|^2. The exact energy supplier applies only in the additional nu>0, smooth pressure, unforced PDE case (f=0); stress replacement is a conditional model prescription. Refuter domain-order omission repaired by explicit space-first fields and curried evaluation convention; no extra hypothesis or empirical assertion. Zero strain/nu_t and k=0 are covered; strict width endpoints remain excluded. Countable Choice is inherited only from the torus convention. Current source fidelity checked against Washington Eq. (30) and Gibbs slides 8 and 17–24; MIT URL inaccessible in this review. The only historical theorem consumer is the owned example, now computing directly from the postulate."
+      }
+    },
+    "ex-fd-eddy-shear-production": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-eddy-viscosity-closure",
+          "source_section": "Postulate",
+          "quote": "$$\\tau_{\\ell}^{\\rm model}=\\frac{2k}{3}I_3-2\\nu_tD_\\ell,\\qquad \\Pi_{\\ell}^{\\rm model}=-\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "For a field $q$ with finitely many real components, each smooth and $L$-periodic, define its filtered field by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-periodic-filter-normalization-and-commutation",
+          "source_section": "Statement",
+          "quote": "then the filtered field has the same regularity and, for every spatial multi-index $\\beta$,\n\n$$\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_x^\\beta q}_\\ell,\\qquad \\partial_t\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_t\\partial_x^\\beta q}_\\ell.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The normalized filter is well defined and preserves the given zero divergence by [A2], [F1], and [F2]. Symmetrizing the given gradient gives $D_\\ell(x_0,t_0)=\\begin{pmatrix}0&S/2&0\\\\S/2&0&0\\\\0&0&0\\end{pmatrix}$. Therefore $|D_\\ell(x_0,t_0)|_F^2=(S/2)^2+(S/2)^2=S^2/2$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The gradient in the statement has zero trace, so $I_3:\\nabla\\overline u_\\ell=0$. Its symmetric part in step 1.1 satisfies $D_\\ell:\\nabla\\overline u_\\ell=|D_\\ell|_F^2=S^2/2$. Applying [A1] at $(x_0,t_0)$ therefore gives $\\Pi_{\\ell}^{\\rm model}=-(2k_0/3)(0)+2\\nu_0(S^2/2)=\\nu_0S^2\\ge0$. Since $[\\nu_0S^2]=({\\rm m^2\\,s^{-1}})({\\rm s^{-2}})={\\rm m^2\\,s^{-3}}$, the units agree; if $S=0$ or $\\nu_0=0$, the value is exactly zero. This is an exact model calculation, not an observation.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a pointwise state in the stated 3D model.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "8fe5addd95cd573ef8045f26485a6539caaa7c0b357f6138408fd3b725dcc0ef",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "S=0 or nu_0=0 gives modeled transfer zero by step 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "2175acfac15c616e25b02576219886ca968903c7145ea6ee71f8833ded0c630b",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The physical model fixes dimension three.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "5529c6ca3ba693ff5f33eac83f62288eebbe99aeed8c5a7a1ed1a1a36b38c42a",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No limiting spatial domain or zero filter width is considered in this local calculation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "c2438131f2cb86f748f6fa502be404e2e57dfbe74f779f52bc7636a1b25b1dd4",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The permitted boundary value nu_0=0 is covered and gives zero in step 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "5017c72bea63fe46e202ae45e6a1028b4165d40a894407772e5822a991bf78ef",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 carry Countable Choice; the finite matrix calculation uses no further choice.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "c4ee017f2c27a718a992bf1e313ec43bf5469c6f4368caecc0de06ad7a0eeef3",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct one-way calculation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "24c957501ba0fd15e4b495889fa925a3f8bb3aa57fc37872d7b8e0f31da333fd",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct one-way calculation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current example fixes a pointwise3x3 gradient, admits S=0/nu0=0 and carries its existing Countable Choice convention. The dr correction changes no contraction, coefficient range or claimed evolution.",
+            "item_sha256": "ca3e42150b7817f88cb6ad5a05ba59a63b1a5756f012cbb9e92ac9226dff61c3",
+            "row_sha256": "88f043e77f346d36aafc26f5650b60bcca02a1d18f61580fda915c1c664dd670",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero shear",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "S=0 gives D_ell=0 and Pi_model=0."
+        },
+        {
+          "name": "zero eddy viscosity",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ],
+          "expected": "nu_0=0 gives Pi_model=0 for every shear rate S."
+        },
+        {
+          "name": "general simple shear",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For arbitrary real S and nu_0>=0, Pi_model=nu_0 S^2>=0."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic evaluations of the model formula; no empirical data or numerical measurements are used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Read both Verification steps, current Example, reader repair, all three bound refuter findings and every direct supplier. The pointwise gradient has trace zero; its symmetric part has two entries S/2, so |D|^2=S^2/2 and contraction gives Pi_model=nu_0 S^2 for all real S and nonnegative nu_0,k_0. Both S=0 and nu_0=0 give zero and SI dimensions are m^2 s^-3. The example uses the closure postulate directly, not the PDE theorem; smooth periodic filtering commutes with derivatives under the stated C1-in-time/Cinfty-in-space hypotheses. Explicit space-first domains and time-indexed evaluation convention repair the bound refuter typing omission. No solution existence, measured value, exact-stress sign, or statistical claim is inferred. Countable Choice is inherited from the torus convention; finite algebra adds none. No diagram needed. No outside consumers found. Strict contract diagnostics exposed stale A1/A2 quote text and missing F1/F2 contracts in the reader repair. Exact supplier excerpts and explicit setup uses in step 1.1 now match all four citations; no additional mathematical assumption enters."
+      }
+    }
+  }
+}

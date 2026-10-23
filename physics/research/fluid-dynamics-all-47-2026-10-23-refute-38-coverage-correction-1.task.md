@@ -1,0 +1,11 @@
+# One bounded fresh native refuter coverage correction
+
+Run: fluid-dynamics-all-47-2026-10-23. Batch: 38. Owner authorization uses WORKFLOW.md's exact refuter-continuation protocol.
+
+Read CLAUDE.md, SCHEMA.md, WORKFLOW.md, ../PHYSICS-CONTENT-MODEL.md, briefs/refuter.md and briefs/tasks/alpha-3a-refuter.md. Retain all substantive obligations and the refuter's read-only source scope.
+
+Read CURRENT research/fluid-dynamics-all-47-2026-10-23-step3-scope-38.json, then perform a FRESH complete read of all five exact scoped carriers and the dependencies genuinely needed to test their claims: ex-fd-eddy-shear-production, fd-ples01, fd-ples01-examples, post-fd-eddy-viscosity-closure, pthm-fd-eddy-closure-resolved-dissipation. Do not substitute old coverage assertions for fresh reading.
+
+The original report is preserved verbatim at research/fluid-dynamics-all-47-2026-10-23-refute-38-before-coverage-correction.json, with its native receipt intact. It wrongly added def-fd-periodic-fourier-sobolev-spaces to the five owed IDs. This producer is not a valid batch38 reader in-run-dependency finding; dependencies read as context do not add opened coverage IDs. Preserve the old producer observation in that archive, without importing it as a batch38 flag or implying any verdict on its separate ongoing owner review. The old report also records three current in-scope ordered-domain defects. Preserve their history in the archive and independently test current scoped carriers afresh; report all confirmed current scoped defects rather than suppressing any. The extra Fourier producer proof observation remains preserved for separate owner43 review. Never alter pinned imports or original mathematics.
+
+Return the ordinary refute-report schema to research/fluid-dynamics-all-47-2026-10-23-refute-38.json, batch 38, opened exactly the CURRENT refuter_scope once each, not_opened [], and flagged only concrete CURRENT defects of those scoped carriers with precise evidence. A complete fresh read finding no such defects should return flagged []. State genuine reading limits in coverage_note. Do not edit source, pages, manifests, contracts, original reports or receipts. Only the new current refuter result is written through native dispatch. This is the single bounded correction for this unit; it grants no fabricated reading or coverage.

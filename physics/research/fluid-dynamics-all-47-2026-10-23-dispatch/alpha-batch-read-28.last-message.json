@@ -1,0 +1,169 @@
+{
+  "group": "l",
+  "batches": ["28"],
+  "pages_read": ["fd-n02", "fd-n02-examples"],
+  "items_read": [
+    "def-fd-mini-fluid-interface",
+    "prop-fd-mini-observation-error",
+    "prop-fd-mini-accumulated-pressure-observation",
+    "rem-fd-mini-weak-velocity-scope",
+    "ex-fd-mini-pressure-time-test"
+  ],
+  "conventions": [
+    {
+      "convention": "D is a nonempty bounded connected Lipschitz polygonal/polyhedral domain in dimension 2 or 3. Velocity has zero boundary trace, pressure has zero spatial mean, and the MINI mesh is conforming, shape-regular and affine simplicial.",
+      "fixed_by": "def-fd-mini-fluid-interface",
+      "matters_for": [
+        "prop-fd-mini-observation-error",
+        "prop-fd-mini-accumulated-pressure-observation",
+        "ex-fd-mini-pressure-time-test"
+      ]
+    },
+    {
+      "convention": "The viscosity form is 2ν∫ε(v):ε(w), the pressure pairing is b(v,q)=−∫q div(v), and convection uses the real skew form. The discrete divergence constraint defines the weak kernel Z_h rather than requiring pointwise divergence-free discrete velocity.",
+      "fixed_by": "def-fd-mini-fluid-interface",
+      "matters_for": [
+        "prop-fd-mini-observation-error",
+        "prop-fd-mini-accumulated-pressure-observation",
+        "rem-fd-mini-weak-velocity-scope"
+      ]
+    },
+    {
+      "convention": "Time nodes run from 0 to N, forcing is averaged over each cell, initialization is the L2 projection onto Z_h, and any actual mixed backward Euler root is admissible. Velocity observations sample right endpoints; reconstructed pressure equals p_h^n on (t_{n−1},t_n].",
+      "fixed_by": "def-fd-mini-fluid-interface",
+      "matters_for": [
+        "prop-fd-mini-observation-error",
+        "prop-fd-mini-accumulated-pressure-observation",
+        "ex-fd-mini-pressure-time-test"
+      ]
+    },
+    {
+      "convention": "The smooth branch assumes u∈W^{1,∞}(0,T;H²∩V_σ) and p∈W^{1,∞}(0,T;H¹∩Q), using continuous representatives at time nodes. Countable Choice is assumed.",
+      "fixed_by": "def-fd-mini-fluid-interface",
+      "matters_for": [
+        "prop-fd-mini-observation-error",
+        "prop-fd-mini-accumulated-pressure-observation",
+        "rem-fd-mini-weak-velocity-scope",
+        "ex-fd-mini-pressure-time-test"
+      ]
+    },
+    {
+      "convention": "The estimates require τ_maxΛ≤1/2, retain the suppliers' explicit viscosity-dependent constants, and impose no additional mesh/time coupling. Pressure bounds concern primitives and smooth time tests, not instantaneous pressure error.",
+      "fixed_by": "prop-fd-mini-accumulated-pressure-observation",
+      "matters_for": [
+        "rem-fd-mini-weak-velocity-scope",
+        "ex-fd-mini-pressure-time-test",
+        "pthm-fd-no-slip-cfd-observations"
+      ]
+    },
+    {
+      "convention": "The weak-limit branch assumes the Axiom of Choice as well as Countable Choice and concludes subsequential solenoidal velocity convergence and an energy inequality without asserting pressure regularity.",
+      "fixed_by": "rem-fd-mini-weak-velocity-scope",
+      "matters_for": ["rem-fd-mini-weak-velocity-scope"]
+    },
+    {
+      "convention": "The example uses D=(0,1)², T=1, three time cells, ξ(x,y)=x−1/2, and a nonconstant compactly supported smooth time test normalized by its derivative's L1 norm. Diagram spacing and node heights are schematic.",
+      "fixed_by": "ex-fd-mini-pressure-time-test",
+      "matters_for": ["ex-fd-mini-pressure-time-test"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-mini-fluid-interface",
+      "statement": "Under Countable Choice, defines the smooth no-slip exact velocity-pressure pair and mixed backward Euler MINI solution on a bounded connected Lipschitz polygonal/polyhedral domain in dimension 2 or 3, with positive viscosity and final time, shape-regular affine simplicial mesh, cell-average L2 forcing, mass-projected initialization, endpoint velocity observations, pressure primitives, and smooth time-tested pressure observations. It asserts no error rate or solver-existence result.",
+      "used_by": [
+        "prop-fd-mini-observation-error",
+        "prop-fd-mini-accumulated-pressure-observation",
+        "rem-fd-mini-weak-velocity-scope",
+        "ex-fd-mini-pressure-time-test",
+        "pthm-fd-no-slip-cfd-observations"
+      ]
+    },
+    {
+      "id": "prop-fd-mini-accumulated-pressure-observation",
+      "statement": "Assume Countable Choice, the complete smooth MINI interface hypotheses, mass-projected initialization, any actual mixed backward Euler solution, and τ_maxΛ≤1/2. With H=hM+τ_maxM² and K exactly as displayed in the Statement, every ξ∈Q, η∈C_c^∞(0,T), and node 0≤m≤N satisfy |(P(t_m)−P_h^m,ξ)|≤KH‖ξ‖_Q and |(∫(p−p̄_h)η,ξ)|≤(K+1)H‖η′‖_L1‖ξ‖_Q. No instantaneous pressure-error rate is asserted.",
+      "used_by": [
+        "rem-fd-mini-weak-velocity-scope",
+        "ex-fd-mini-pressure-time-test",
+        "pthm-fd-no-slip-cfd-observations"
+      ]
+    },
+    {
+      "id": "prop-fd-mini-observation-error",
+      "statement": "Assume Countable Choice, the complete smooth MINI interface hypotheses, mass-projected initialization, any actual mixed backward Euler solution, and τ_maxΛ≤1/2. With H=hM+τ_maxM² and C_* exactly the displayed smooth velocity supplier constant, any bounded real-linear sensors ℓ_n∈V* satisfy |O_h(ℓ;u_h)−O(ℓ;u)|≤ν^(−1/2)C_*H‖ℓ‖_{ℓ²_τ(V*)}. No Reynolds-uniform claim is made.",
+      "used_by": ["pthm-fd-no-slip-cfd-observations"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact choice assumption inherited by the smooth interface, both observation estimates, and example.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Stronger choice assumption explicitly carried into the weak-limit scope remark.",
+      "opened": true
+    },
+    {
+      "id": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+      "used_for": "V=H¹_0 with gradient norm, Q=L²_0 with L2 norm, strain tensor, viscosity form, and pressure-pairing sign.",
+      "opened": true
+    },
+    {
+      "id": "def-na-evolutionary-skew-convective-form",
+      "used_for": "Real skew convection, cancellation, and agreement with advective convection for solenoidal first argument.",
+      "opened": true
+    },
+    {
+      "id": "def-na-mini-element-p1-bubble-p1-spaces",
+      "used_for": "Exact bubble normalization and conforming MINI velocity and mean-zero pressure spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-na-discrete-weak-and-exact-divergence-free-spaces",
+      "used_for": "Weak divergence kernel Z_h and its distinction from exact discrete solenoidality.",
+      "opened": true
+    },
+    {
+      "id": "def-na-evolutionary-incompressible-ns-weak-solution",
+      "used_for": "Evolutionary space conventions, H_σ, forcing class, and distinction between pressure-bearing and solenoidal formulations.",
+      "opened": true
+    },
+    {
+      "id": "def-na-mini-navier-stokes-backward-euler-scheme",
+      "used_for": "Cell-average forcing, mixed recurrence, zero-mean pressure gauge, and admissibility of actual roots without a solver claim.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-mini-be-smooth-velocity-error",
+      "used_for": "Nodal L2 and weighted time-integrated V error with the exact regularity, initialization, time-step restriction, and explicit C_* used by the velocity observation proposition.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-mini-be-smooth-integrated-pressure-error",
+      "used_for": "Exact K, nodal primitive bound KH, continuous primitive bound (K+1)H, and smooth time-test bound used by the pressure observation proposition.",
+      "opened": true
+    },
+    {
+      "id": "def-na-solenoidal-energy-weak-ns-velocity",
+      "used_for": "Solenoidal weak momentum equation, weak continuity, initial trace, energy inequality, and absence of an asserted pressure-regularity conclusion.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-mini-navier-stokes-be-subsequential-limit",
+      "used_for": "Weak-limit remark's strong L²_tL²_x and weak L²_tH¹_0 convergence, solenoidal momentum, initial trace, and energy inequality under uncoupled vanishing mesh/time steps and the Axiom of Choice.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-pn01",
+      "to": "fd-n02",
+      "faithful": true,
+      "note": "Checked the declared page requirement and the actual uses in pthm-fd-no-slip-cfd-observations against the interface and both observation propositions. The consumer preserves strong-solution regularity, zero-mean pressure, cell-average forcing, projected initialization, actual-root scope, τ_maxΛ≤1/2, and the exact constants. Its physical interpretation explicitly adopts a weak extension, retains dimensionless numerical hypotheses, converts the pressure volume-time functional by ρ₀U₀ℓ₀⁴, and makes no instantaneous-pressure or empirical-validation claim."
+    }
+  ]
+}

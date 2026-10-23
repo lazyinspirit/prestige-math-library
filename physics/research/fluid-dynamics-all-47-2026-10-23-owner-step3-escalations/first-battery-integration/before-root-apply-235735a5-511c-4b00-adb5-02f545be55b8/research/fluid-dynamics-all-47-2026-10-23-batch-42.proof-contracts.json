@@ -1,0 +1,347 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": 42,
+  "scope": [
+    "def-fd-phase-field-dimensionalization",
+    "post-fd-diffuse-interface-material-law",
+    "pthm-fd-phase-field-conditional-energy",
+    "ex-fd-phase-outside-unit-interval"
+  ],
+  "contracts": {
+    "def-fd-phase-field-dimensionalization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes positive length, speed, density, phase scale, and nonempty time and spatial domains.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Definition fixes the three-dimensional box Q_L=[0,2pi L]^3 and [0,T_* S], with S,L,U,rho_*,Phi_*>0 and T_*=L/U>0. The explicit Laplacian sum is j=1,2,3 and the physical fields have three velocity components. No family can be assigned an empty index set, and none of the positive scales can collapse the box or time interval. The empty-case trigger is the fixed coordinate sum, rather than an allowed empty aggregate. This is a definition of scales and functionals, not a proved energy statement.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Definition fixes the three-dimensional box Q_L=[0,2pi L]^3 and [0,T_* S], with S,L,U,rho_*,Phi_*>0 and T_*=L/U>0. The explicit Laplacian sum is j=1,2,3 and the physical fields have three velocity components. No family can be assigned an empty index set, and none of the positive scales can collapse the box or time interval. The empty-case trigger is the fixed coordinate sum, rather than an allowed empty aggregate. This is a definition of scales and functionals, not a proved energy statement.",
+            "item_sha256": "8f843e4962ea490316cd1bf3ae796a7655659478e805a30039da69032caf536c",
+            "row_sha256": "ba31866a336b06f64159095088d510f43fd908a7900f78a476182bc01a3c5125",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition explicitly excludes zero scales and assigns positive dimensionless mobility, viscosity, and interface coefficient."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition is a scale map, not a one-object assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition relates the physical and dimensionless periods by positive L and gives the coefficient map for every positive scale. It now also fixes the maps and periodic regularity of the dimensionless fields used by the chemical potential and energy integrals."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no endpoint derivative result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or selection construction is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states conventions and coefficient assignments, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states conventions and coefficient assignments, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This is a definition of the scale map and units; it asserts no separate theorem."
+    },
+    "post-fd-diffuse-interface-material-law": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate fixes a three-dimensional periodic domain, constant density, internal order parameter, dimensional chemical potential, capillary Cauchy stress, mobility flux, incompressibility, and local momentum equation with units and signs."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "It is an isothermal reduced model with periodic boundaries, constant positive coefficients, no body force, no pointwise phase bound, no heat or entropy closure, no empirical calibration, and no universal or sharp-interface claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The complete relevant Oden lecture-note sections, the complete Georgiadis article and proof, and Badalassi et al. §§2.1–2.4 were inspected; conventions and nonimported assumptions are recorded in the batch coverage."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The free-energy, mobility, and stress closure are explicitly adopted physical assumptions. The item does not derive them from the inherited continuum balance postulate or claim that a source or experiment proves their applicability."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "A physical postulate is adopted rather than deduced; no numerical measurement or finite experiment is claimed.",
+      "risk_review": {
+        "status": "open",
+        "reviewer": "alpha-batch-42",
+        "notes": "Independently reviewed complete Postulate, F1-F3 and L1, all three direct supplier interfaces, reader/refuter findings and relevant Oden 11.2/11.4, Badalassi 2.1-2.4 and Georgiadis 1 source passages. Constant positive SI scales, d=3 periodic lifts, exact classical regularity including separately assumed C2 chemical potential, W in C2 bounded below, internal phase variable and unrestricted phase range are explicit. Component stress divergence is -varphi grad(mu); coefficient/time/volume rescaling yields exact smooth energy identity with both dissipation factors rho_* U^3 L^2. Opposite periodic faces cancel; positive scales exclude degeneracy; zero-gradient constant fields have zero dissipation. The postulate adopts closure and no heat/entropy completion, empirical calibration, existence theorem or universal applicability; no statistical inference or uncertainty invented. OPEN prerequisite: batch-3 post-fd-continuum-balances uses undefined surface integrals in its adopted balances; its Jordan/transport suppliers define volume integration only. reader:42:1 and refuter:42:1 escalated with original producer bindings. Owner must supply exact C1 surface integration and review affected consumers before closure. See research/fluid-dynamics-all-47-2026-10-23-alpha-batch-42-3a.md."
+      }
+    },
+    "pthm-fd-phase-field-conditional-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-fd-diffuse-interface-material-law",
+          "source_section": "Postulate",
+          "quote": "$$\\partial_t\\varphi+u\\cdot\\nabla_x\\varphi=\\mathcal M\\Delta_x\\mu,\\qquad \\nabla_x\\cdot u=0,\\qquad \\rho_*\\left(\\partial_tu+(u\\cdot\\nabla_x)u\\right)=\\operatorname{div}_x\\sigma.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-phase-field-dimensionalization",
+          "source_section": "Definition",
+          "quote": "$$u(t,x)=U v(s,y),\\qquad \\varphi(t,x)=\\Phi_*\\phi(s,y),\\qquad p(t,x)=\\rho_*U^2\\pi(s,y).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-diffuse-interface-energy",
+          "source_section": "Statement",
+          "quote": "$$\\frac{dE}{dt}(t)=-\\nu\\int_{\\mathbb T^d}|\\nabla u(t,x)|^2\\,dx-M\\int_{\\mathbb T^d}|\\nabla\\mu_c(t,x)|^2\\,dx\\qquad(0<t<T).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "capillary-stress-and-dimensionless-system",
+          "step": "1.1",
+          "claim": "Componentwise product differentiation gives div(sigma_c)=-varphi grad(mu); incompressibility gives div(2 eta D)=eta Delta(u). The coefficient formulas then transform the stress momentum balance, phase equation, divergence constraint, and kinetic-plus-phase functional to the exact dimensionless system and E.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "physical-free-energy-dissipation",
+          "step": "2.1",
+          "claim": "Apply the exact dimensionless smooth periodic identity and change variables in time and space. Both dimensional dissipation integrals equal rho U^3 L^2 times their dimensionless counterparts, giving the stated physical-unit identity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "S, L, U, rho, and Phi are positive, and the three-dimensional periodic domain is nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement fixes physical and dimensionless T^3, S,L,U,rho_*,Phi_*>0, and coordinate sums over three indices. Proof 1.1 expands the three-component stress divergence and divides only by positive scale factors; dx=L^3dy yields G=rho_* U^2 L^3 E. Proof 2.1 applies the dimensionless energy theorem only at d=3 and transforms its two dissipation integrals. These domains and component index sets cannot be empty. This preserves the physical R3 scope independently of the supplier theorem valid at every positive integer dimension.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement fixes physical and dimensionless T^3, S,L,U,rho_*,Phi_*>0, and coordinate sums over three indices. Proof 1.1 expands the three-component stress divergence and divides only by positive scale factors; dx=L^3dy yields G=rho_* U^2 L^3 E. Proof 2.1 applies the dimensionless energy theorem only at d=3 and transforms its two dissipation integrals. These domains and component index sets cannot be empty. This preserves the physical R3 scope independently of the supplier theorem valid at every positive integer dimension.",
+            "item_sha256": "6352c0227e6a948972553f46219c6c2ffcd0086e9a4a7fcf765a69df6374aa61",
+            "row_sha256": "70fbce4985782812e05ced2f5d88adadb715a05d02b00ad040cc7e342196e0d6",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For zero velocity and spatially constant phase, both gradients in the dissipation law vanish; step 2.1 gives zero free-energy derivative."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is explicitly three-dimensional and asserts no one-dimensional specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 keeps both dissipation terms with their exact nonnegative coefficients; when either gradient vanishes its term is zero, and strict decrease is not asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The derivative identity is asserted only on the open physical time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only fixed coordinate scalings, componentwise calculus, and the cited smooth identity; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way conditional identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way conditional identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "chemical-potential coefficient conversion",
+          "result": "mu=(rho_* U^2/Phi_*) mu_c",
+          "evidence": "Step 1.1 substitutes beta=rho_* U^2/epsilon and lambda_phi=rho_* U^2 L^2 epsilon/Phi_*^2 into mu=f_b'(varphi)-lambda_phi Delta(varphi)."
+        },
+        {
+          "name": "free-energy unit conversion",
+          "result": "G=rho_* U^2 L^3 E",
+          "evidence": "Step 1.1 uses dx=L^3 dy and the exact coefficient definitions."
+        },
+        {
+          "name": "dissipation unit conversion",
+          "result": "each physical dissipation equals rho_* U^3 L^2 times its dimensionless term",
+          "evidence": "Step 2.1 computes the viscosity and mobility integrals separately."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic scaling checks, not numerical measurements or empirical claims."
+    },
+    "ex-fd-phase-outside-unit-interval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-phase-field-conditional-energy",
+          "source_section": "Statement",
+          "quote": "$$\\frac{d\\mathcal G}{dt}(t)=-\\eta\\int_{\\Omega_L}|\\nabla_xu(t,x)|^2\\,dx-\\mathcal M\\int_{\\Omega_L}|\\nabla_x\\mu(t,x)|^2\\,dx\\qquad (0<t<T_*S).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-fields-solve-phase-model",
+          "step": "1.1",
+          "claim": "For u=0 and varphi=2 Phi_*, all time and spatial derivatives vanish; mu is constant, so both sides of the phase equation and every term in the incompressible stress momentum equation vanish.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-free-energy-outside-interval",
+          "step": "2.1",
+          "claim": "W(2)=9/4 and W'(2)=6; integrating the constant bulk density over the physical fundamental cube gives the stated finite value, and F1 gives zero derivative.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes positive scales and a nonempty periodic domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example explicitly uses zero velocity; step 1.1 verifies its equations and step 2.1 computes the remaining finite free energy."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a fixed three-dimensional constant state, not a dimension-variable theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The spatially constant phase and zero velocity have vanishing gradients; this is exactly the case verified in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint derivative or interval-endpoint theorem is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example constructs one explicit smooth state and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct construction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "quartic potential value",
+          "result": "W(2)=9/4",
+          "evidence": "Step 2.1 substitutes q=2 into (q^2-1)^2/4."
+        },
+        {
+          "name": "quartic potential derivative",
+          "result": "W'(2)=6",
+          "evidence": "Step 2.1 differentiates W(q) and substitutes q=2."
+        },
+        {
+          "name": "periodic-box volume",
+          "result": "vol(Omega_L)=(2 pi L)^3",
+          "evidence": "The fundamental cube Q_L has side length 2 pi L in each of three coordinates."
+        }
+      ],
+      "finite_checks_disposition": "These are exact algebraic and geometric checks; the example reports no observation or simulation."
+    }
+  }
+}

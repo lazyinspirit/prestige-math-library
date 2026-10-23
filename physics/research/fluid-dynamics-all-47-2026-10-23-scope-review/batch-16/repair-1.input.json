@@ -1,0 +1,74 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-16-1",
+  "inventory": {
+    "pages": [
+      "fd-f04",
+      "fd-f04-examples"
+    ],
+    "items": [
+      "def-fd-adopted-nonnewtonian-models",
+      "pthm-fd-nonnewtonian-conditional-admissibility",
+      "ex-fd-bingham-rest-stress"
+    ],
+    "pairs": [
+      "fd-f04"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-fd-adopted-nonnewtonian-models.md",
+    "items/pthm-fd-nonnewtonian-conditional-admissibility.md",
+    "items/ex-fd-bingham-rest-stress.md",
+    "library/fluid-dynamics/fd-f04.md",
+    "library/fluid-dynamics/fd-f04-examples.md"
+  ],
+  "write_batches": [
+    "16"
+  ],
+  "consumer_scope": [
+    {
+      "id": "pthm-fd-nonnewtonian-conditional-admissibility",
+      "path": [
+        "def-fd-adopted-nonnewtonian-models",
+        "pthm-fd-nonnewtonian-conditional-admissibility"
+      ],
+      "paths": [
+        [
+          "def-fd-adopted-nonnewtonian-models",
+          "pthm-fd-nonnewtonian-conditional-admissibility"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-fd-adopted-nonnewtonian-models": [
+      {
+        "kind": "definition",
+        "domain": "physics",
+        "physical_scope": "Chosen generalized Newtonian/Bingham closures; isothermal conformation adds C storage and thermostat, with no empirical applicability claim.",
+        "empirical_premises": []
+      },
+      "## Definition\n\nLet $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference body with $C^1$ boundary, and let $U$ be an open neighborhood of $\\overline B$. A material motion is a map $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ whose slices $\\chi_t(a)=\\chi(t,a)$ are orientation-preserving $C^2$ diffeomorphisms onto their images, with $\\chi(0,a)=a$. Its swept open region is $\\Omega=\\{(t,x):x\\in\\chi_t(U)\\}$, its inverse label is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^{\\mathsf T})/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_t=\\partial_t+u\\cdot\\nabla$. A branch is incompressible when $\\theta=0$, so $D$ is symmetric and trace-free. Write $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ for the Frobenius contraction and $|S|=(S:S)^{1/2}$ for its norm. Define $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D=D^{\\mathsf T},\\operatorname{tr}D=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A rigid observer change is $x^*=Q(t)x+c(t)$ with $Q\\in C^2(I,\\mathrm{SO}(3))$, $c\\in C^2(I,\\mathbb R^3)$, and $\\mathrm{SO}(3)=\\{Q:Q^{\\mathsf T}Q=I_3,\\det Q=1\\}$. A second-order tensor transforms as $S^*=QSQ^{\\mathsf T}$; a constitutive response is objective when it obeys this rule at corresponding events.\n\nFor the generalized Newtonian and Bingham branches, $\\tau$ is a symmetric deviatoric extra stress, meaning $\\operatorname{tr}\\tau=0$; the total tension-positive Cauchy stress may additionally contain an isotropic pressure. In the conformation branch, $\\tau_p$ and $\\tau_s$ denote the polymer and solvent stresses separately and the pressure is a Lagrange multiplier. Stress is measured in Pa, $D$ and shear rate in $\\mathrm{s}^{-1}$, viscosity in $\\mathrm{Pa\\,s}$, and a rate of stress power per volume in $\\mathrm{W\\,m^{-3}}$.\n\nFor a generalized Newtonian branch, define\n\n$$\n\\dot\\gamma=(2D:D)^{1/2},\\qquad \\tau=2\\eta(\\dot\\gamma)D,\n$$\n\nwhere $\\eta:[0,\\infty)\\to[0,\\infty)$ is finite and continuous. Two permitted scalar choices are the Carreau form\n\n$$\n\\eta_C(\\dot\\gamma)=\\eta_\\infty+(\\eta_0-\\eta_\\infty)\\bigl(1+(\\lambda_C\\dot\\gamma)^2\\bigr)^{(n_C-1)/2},\n$$\n\nwith $\\eta_0\\ge\\eta_\\infty\\ge0$ in $\\mathrm{Pa\\,s}$, $\\lambda_C\\ge0$ in seconds, and dimensionless $n_C>0$, and the regularized power form\n\n$$\n\\eta_R(\\dot\\gamma)=m(\\varepsilon^2+\\dot\\gamma^2)^{(n_R-1)/2},\n$$\n\nwith $m>0$ in $\\mathrm{Pa\\,s}^{n_R}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n_R>0$. The unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n_R-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$, so for $0<n_R<1$ the viscosity diverges at zero rate even though the extended stress can be continuous.\n\nFor the Bingham branch, let $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ in $\\mathrm{Pa}$. Use the set-valued graph\n\n$$\n\\mathcal B(D)= \\begin{cases} \\{2\\mu_pD+\\tau_yD/|D|\\},&D\\ne0,\\\\ \\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\},&D=0, \\end{cases}\n$$\n\nwhere $\\mathrm{Sym}_0(3)$ is the space of trace-free symmetric $3\\times3$ real matrices. Here $\\tau_y$ is, by definition, the radius of the Frobenius stress ball at rest; other invariant normalizations require a corresponding parameter conversion. The graph is single-valued for $D\\ne0$ and set-valued at rest.\n\nFor an isothermal conformation branch, take a smooth incompressible trajectory and a dimensionless matrix $C(t)\\in\\mathrm{Sym}^+(3)$. Let $G>0$ be a modulus in Pa, $\\lambda>0$ a relaxation time in seconds, $\\eta_s\\ge0$ a solvent viscosity in $\\mathrm{Pa\\,s}$, and $T_0>0$ a fixed temperature in K. Here an external thermostat is an idealized heat reservoir that maintains $T_0$ and accounts for heat released by this branch; it is an additional model assumption. Adopt\n\n$$\nD_tC-LC-CL^{\\mathsf T}=-(C-I_3)/\\lambda,\\qquad \\tau_p=G(C-I_3),\\qquad \\tau_s=2\\eta_sD,\\qquad w(C)=\\frac G2\\bigl(\\operatorname{tr}C-\\log\\det C-3\\bigr).\n$$\n\nThe polymer and solvent stresses $\\tau_p,\\tau_s$ are measured in Pa, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant is positive because $C$ is symmetric positive definite. These are selected model equations on the stated smooth incompressible regime; they assert no empirical applicability to a particular material, fitted parameter values, PDE solution existence, or universal validity."
+    ],
+    "pthm-fd-nonnewtonian-conditional-admissibility": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Given selected stated law and balances, derive objective nonnegative mechanical dissipation; conformation entropy requires explicit isothermal Helmholtz realization/thermostat.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nWork in the smooth incompressible branch of the adopted nonrelativistic continuum model. Let $T>0$, let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $u\\in C^2(J\\times\\Omega;\\mathbb R^3)$ be the Eulerian velocity induced by a $C^2$ material motion with orientation-preserving $C^2$ diffeomorphic time slices, and satisfy $\\operatorname{div}u=0$. At a spatial point let $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, $\\operatorname{tr}D=0$, and use the Frobenius contraction $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ with norm $|S|=(S:S)^{1/2}$. Let $M_3(\\mathbb R)$ denote the real $3\\times3$ matrices, and define $\\mathrm{Sym}_0(3)=\\{S\\in M_3(\\mathbb R):S=S^{\\mathsf T},\\operatorname{tr}S=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A constitutive response is objective when under every rigid observer change $x^*=Q(t)x+c(t)$, with $Q\\in C^2([0,T],\\mathrm{SO}(3))$ and $c\\in C^2([0,T],\\mathbb R^3)$, its second-order tensor value at corresponding events transforms as $S^*=QSQ^{\\mathsf T}$. For the generalized Newtonian branch, let $\\dot\\gamma=(2D:D)^{1/2}$, let $\\eta:[0,\\infty)\\to[0,\\infty)$ be finite and continuous, and set $\\tau=2\\eta(\\dot\\gamma)D$. Define $I_3$ as the $3\\times3$ identity matrix; in SI units, $L,D,\\dot\\gamma$ have units $\\mathrm{s}^{-1}$, $\\eta,\\eta_s,\\mu_p$ have units $\\mathrm{Pa\\,s}$, and $\\tau,\\tau_y,G$ have units Pa. For the Bingham branch, let $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ in $\\mathrm{Pa}$, and set $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ for $D\\ne0$ and $\\mathcal B(0)=\\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\}$. For the conformation branch, take a $C^1$ trajectory $x:[0,T]\\to\\Omega$ with $x'(t)=u(t,x(t))$. Set $L(t)=\\nabla u(t,x(t))$, $D(t)=(L(t)+L(t)^{\\mathsf T})/2$, and let the dimensionless $C\\in C^1([0,T];M_3(\\mathbb R))$ be symmetric, so $C(t)=C(t)^{\\mathsf T}$ for all $t$, and satisfy\n\n$$\nC'=LC+CL^{\\mathsf T}-(C-I_3)/\\lambda,\\qquad C(0)=C_0\\in\\mathrm{Sym}^+(3),\n$$\n\nwhere $G>0$ is a modulus in Pa, $\\lambda>0$ is a relaxation time in seconds, and $\\eta_s\\ge0$ is a solvent viscosity in Pa s. Define $\\tau_p=G(C-I_3)$, $\\tau_s=2\\eta_sD$, and $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in J m$^{-3}$. Then the generalized Newtonian and Bingham branches have objective stress responses and nonnegative instantaneous mechanical power $\\tau:D\\ge0$ for every allowed stress. On every forward time $t\\in[0,T]$, the conformation solution remains positive definite, its constitutive response is objective, and\n\n$$\n(\\tau_s+\\tau_p):D-\\frac{d}{dt}w(C) =2\\eta_sD:D+\\frac{G}{2\\lambda}\\bigl(\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6\\bigr)\\ge0.\n$$\n\nThus the selected smooth branches have nonnegative mechanical or stored-energy dissipation under their stated model hypotheses. This is a conditional deduction, not a claim of empirical material applicability or existence of a fluid partial-differential-equation solution. The conformation inequality is an entropy-production statement only under a separate isothermal model that adopts $w$ as its Helmholtz free-energy density at fixed $T_0>0$ K and includes an external thermostat to account for removed heat; no entropy identity is inferred from the continuum balances alone."
+    ],
+    "ex-fd-bingham-rest-stress": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "Worked model calculation/counterexample; leaf, no downstream suppliers.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

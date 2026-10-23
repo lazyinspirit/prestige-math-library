@@ -1,0 +1,1402 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "6",
+  "level": 1,
+  "scope": [
+    "thm-fd-x04",
+    "thm-fd-x05",
+    "thm-fd-x06",
+    "thm-fd-x08",
+    "thm-fd-x09",
+    "def-fd-incompressible-euler-system",
+    "thm-fd-x13",
+    "ex-fd-x04-formal-verification",
+    "ex-fd-x05-formal-verification",
+    "ex-fd-x06-formal-verification",
+    "ex-fd-x08-formal-verification",
+    "ex-fd-x09-formal-verification",
+    "ex-fd-x13-formal-verification"
+  ],
+  "contracts": {
+    "thm-fd-x04": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.\n\nFor a barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives and let $V:\\Omega\\to\\mathbb R$ have continuous spatial partial derivatives through order two. The formal compressible Euler system for $u$ and positive density $\\rho$ is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nAt a constant background density $\\rho_0>0$ with $P'(\\rho_0)>0$, the positive parameter $c$ defined by $c^2=P'(\\rho_0)$ is the sound-speed parameter of this mathematical branch. A separate rotating linear system, for constant $\\Omega\\in\\mathbb R^3$ and scalar field $q$, is $\\partial_tu+2\\Omega\\times u=-\\nabla q$ and $\\operatorname{div}u=0$.\n\nThe vorticity field is $\\operatorname{curl}u$. If $\\gamma:[a,b]\\to\\Omega$ is a closed piecewise-$C^1$ oriented curve, with $\\gamma(a)=\\gamma(b)$, its circulation is $\\oint_\\gamma u\\cdot d\\mathbf r$. If $S$ is a compact oriented regular surface patch in $\\Omega$ with unit normal $n_S$, its volume-flux observable is $\\int_S u\\cdot n_S\\,dS$. The traction on $S$ is $\\sigma n_S$ and the formal resultant force is the componentwise surface integral $\\int_S\\sigma n_S\\,dS$. For a steady field, a streamline is a $C^1$ curve $x:J\\to\\Omega$ satisfying $x'(s)=u(x(s))$; the parameter $s$ is a curve parameter, not time. A closed material loop on a time interval $J\\subseteq I$ is a $C^1$ map $X:J\\times[0,1]\\to\\Omega$ with $X(t,0)=X(t,1)$ and $\\partial_tX(t,\\theta)=u(t,X(t,\\theta))$; the definition asserts no existence of such a map. On an exterior domain, $f(x)\\to f_\\infty$ uniformly in direction as $|x|\\to\\infty$ means $\\sup_{|e|=1}\\|f(re)-f_\\infty\\|_2\\to0$ as $r\\to\\infty$, using absolute value when the field is scalar.\n\nFor one optional SI interpretation, the dimensions are $[x]=\\mathrm m$, $[t]=\\mathrm s$, $[u]=\\mathrm{m\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[p]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[V]=[q]=\\mathrm{m^2\\,s^{-2}}$, and $[\\Omega]=\\mathrm{s^{-1}}$. Thus $[\\operatorname{curl}u]=\\mathrm{s^{-1}}$, circulation has units $\\mathrm{m^2\\,s^{-1}}$, volume flux has units $\\mathrm{m^3\\,s^{-1}}$, stress has units Pa, and resultant force has units N. In this interpretation $\\rho_0,\\mu,P,V,\\Omega$ are inputs to the displayed formulas, while $\\nu=\\mu/\\rho_0$ and $c^2=P'(\\rho_0)$ are derived quantities relative to those formulas; this classification is not asserted to be universal across physical theories.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the plane channel, $\\operatorname{div}u=0$, $\\partial_tu=0$, $(u\\cdot\\nabla)u=v(y)\\partial_xu=0$, $\\Delta u=(v''(y),0,0)$, and $\\nabla p=(-G,0,0)$. The $x$ component of the stated Navier–Stokes equation is therefore $-G/\\rho_0-\\nu v''=0$, equivalently $\\mu v''=-G$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the pipe, the velocity is divergence-free and $(u\\cdot\\nabla)u=w(r)\\partial_xu=0$. For $r>0$, Cartesian differentiation gives $\\partial_yw=w'y/r$, $\\partial_zw=w'z/r$, $\\partial_y^2w=w''y^2/r^2+w'(1/r-y^2/r^3)$, and $\\partial_z^2w=w''z^2/r^2+w'(1/r-z^2/r^3)$; adding yields $\\Delta w=w''+w'/r$. Thus the axial equation is $\\mu(w''+w'/r)=-G$, or $(rw')'=-Gr/\\mu$. Integrating on $(0,a]$ gives $w(r)=-Gr^2/(4\\mu)+C\\log r+D$. Since $\\log r$ is unbounded as $r\\downarrow0$ while the radial field is continuous on the full disk, $C=0$; $w(a)=0$ then gives $D=Ga^2/(4\\mu)$. The resulting polynomial in $y,z$ is $C^\\infty$ on the disk, proving existence and uniqueness in the stated radial ansatz.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrating twice gives $v(y)=c_0+c_1y-Gy^2/(2\\mu)$. The endpoint conditions give $c_0=V_0$ and $c_1=(V_1-V_0)/h+Gh/(2\\mu)$, which yields the displayed profile. Any two profiles satisfying the same ODE and endpoints differ by an affine function vanishing at both $0$ and $h$; since $h>0$, that difference is zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Integrating the profile term by term gives $Q_{\\rm ch}$. The row-component Jacobian gives $\\sigma_{xy}=\\mu\\partial_yu_x=\\mu v'(y)$; substituting $y=0,h$ gives the two displayed shear components. The derivative convention gives $\\operatorname{curl}u=(0,0,-v'(y))$. These are exact component values; the traction vector additionally depends on the chosen wall normal.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Polar integration yields $Q_{\\rm pipe}=2\\pi\\int_0^a r\\,G(a^2-r^2)/(4\\mu)\\,dr=\\pi Ga^4/(8\\mu)$. In both geometries the computed time derivative and convective term vanish, so removing them gives exactly the steady Stokes equations as well.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 1.2 derive the plane and pipe profiles, which both reduce to zero for zero pressure gradient and zero wall velocities."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "G=V_0=V_1=0 is allowed. Steps 1.2 and 2.1 then give w=v=0, while 3.1 and 4.1 give zero flux/shear; only h,a,rho_0,mu must stay positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 1.2 verify the channel wall data and pipe wall trace; step 1.2 uses full-disk regularity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "thm-fd-x05": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.\n\nFor a barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives and let $V:\\Omega\\to\\mathbb R$ have continuous spatial partial derivatives through order two. The formal compressible Euler system for $u$ and positive density $\\rho$ is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nAt a constant background density $\\rho_0>0$ with $P'(\\rho_0)>0$, the positive parameter $c$ defined by $c^2=P'(\\rho_0)$ is the sound-speed parameter of this mathematical branch. A separate rotating linear system, for constant $\\Omega\\in\\mathbb R^3$ and scalar field $q$, is $\\partial_tu+2\\Omega\\times u=-\\nabla q$ and $\\operatorname{div}u=0$.\n\nThe vorticity field is $\\operatorname{curl}u$. If $\\gamma:[a,b]\\to\\Omega$ is a closed piecewise-$C^1$ oriented curve, with $\\gamma(a)=\\gamma(b)$, its circulation is $\\oint_\\gamma u\\cdot d\\mathbf r$. If $S$ is a compact oriented regular surface patch in $\\Omega$ with unit normal $n_S$, its volume-flux observable is $\\int_S u\\cdot n_S\\,dS$. The traction on $S$ is $\\sigma n_S$ and the formal resultant force is the componentwise surface integral $\\int_S\\sigma n_S\\,dS$. For a steady field, a streamline is a $C^1$ curve $x:J\\to\\Omega$ satisfying $x'(s)=u(x(s))$; the parameter $s$ is a curve parameter, not time. A closed material loop on a time interval $J\\subseteq I$ is a $C^1$ map $X:J\\times[0,1]\\to\\Omega$ with $X(t,0)=X(t,1)$ and $\\partial_tX(t,\\theta)=u(t,X(t,\\theta))$; the definition asserts no existence of such a map. On an exterior domain, $f(x)\\to f_\\infty$ uniformly in direction as $|x|\\to\\infty$ means $\\sup_{|e|=1}\\|f(re)-f_\\infty\\|_2\\to0$ as $r\\to\\infty$, using absolute value when the field is scalar.\n\nFor one optional SI interpretation, the dimensions are $[x]=\\mathrm m$, $[t]=\\mathrm s$, $[u]=\\mathrm{m\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[p]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[V]=[q]=\\mathrm{m^2\\,s^{-2}}$, and $[\\Omega]=\\mathrm{s^{-1}}$. Thus $[\\operatorname{curl}u]=\\mathrm{s^{-1}}$, circulation has units $\\mathrm{m^2\\,s^{-1}}$, volume flux has units $\\mathrm{m^3\\,s^{-1}}$, stress has units Pa, and resultant force has units N. In this interpretation $\\rho_0,\\mu,P,V,\\Omega$ are inputs to the displayed formulas, while $\\nu=\\mu/\\rho_0$ and $c^2=P'(\\rho_0)$ are derived quantities relative to those formulas; this classification is not asserted to be universal across physical theories.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $r^2=x^2+y^2$. Direct differentiation gives $\\operatorname{div}u_v=\\partial_x(-\\kappa y/r^2)+\\partial_y(\\kappa x/r^2)=2\\kappa xy/r^4-2\\kappa xy/r^4=0$. The only potentially nonzero curl component is $\\partial_x(u_v)_y-\\partial_y(u_v)_x=\\kappa(y^2-x^2)/r^4+\\kappa(x^2-y^2)/r^4=0$. For the Laplacian, $\\Delta(x/r^2)=-4x/r^4+4x(x^2+y^2)/r^6=0$, and interchanging $x,y$ gives $\\Delta(y/r^2)=0$; hence $\\Delta u_v=0$ for $r>0$. The operator $u_v\\cdot\\nabla=-\\kappa y\\,r^{-2}\\partial_x+\\kappa x\\,r^{-2}\\partial_y$ gives $(u_v\\cdot\\nabla)(u_v)_x=-\\kappa^2x/r^4$ and $(u_v\\cdot\\nabla)(u_v)_y=-\\kappa^2y/r^4$. Thus $(u_v\\cdot\\nabla)u_v=-\\kappa^2(x,y,0)/r^4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Along $\\gamma_R$, $u_v(\\gamma_R(\\theta))\\cdot\\gamma_R'(\\theta)=\\kappa$, so the circulation is $\\int_0^{2\\pi}\\kappa\\,d\\theta=2\\pi\\kappa\\ne0$. If $u_v=\\nabla\\phi$ for a single-valued $C^1$ function on $D$, the chain rule gives $\\oint_{\\gamma_R}\\nabla\\phi\\cdot d\\mathbf r=\\phi(\\gamma_R(2\\pi))-\\phi(\\gamma_R(0))=0$, contradicting the computed value.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Differentiation gives $\\nabla p_v=\\rho_0\\kappa^2(x,y,0)/r^4$. This cancels $\\rho_0(u_v\\cdot\\nabla)u_v$; together with $\\Delta u_v=0$ and $\\partial_tu_v=0$, the displayed Navier–Stokes expression vanishes for every $\\nu>0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the solid-rotation field, $\\operatorname{div}u_s=0$, $\\Delta u_s=0$, $(u_s\\cdot\\nabla)u_s=-\\Omega_0^2(x,y,0)$, and $\\nabla p_s=\\rho_0\\Omega_0^2(x,y,0)$. Thus its steady Navier–Stokes expression vanishes. Along a streamline $r$ is fixed, so $B=p_0/\\rho_0+\\Omega_0^2r^2$ is constant there; since $\\Omega_0\\ne0$, distinct radii give distinct values.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The nonzero-circulation claim assumes κ≠0 and the Bernoulli-variation claim assumes Ω₀≠0; the excluded zero-parameter cases are not asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Required positive radii, densities, viscosities, time scales, or nonzero wave numbers are explicitly assumed; zero/singular cases are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the closed circle at matching endpoints and uses the single-valued-potential contradiction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "thm-fd-x06": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.\n\nFor a barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives and let $V:\\Omega\\to\\mathbb R$ have continuous spatial partial derivatives through order two. The formal compressible Euler system for $u$ and positive density $\\rho$ is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nAt a constant background density $\\rho_0>0$ with $P'(\\rho_0)>0$, the positive parameter $c$ defined by $c^2=P'(\\rho_0)$ is the sound-speed parameter of this mathematical branch. A separate rotating linear system, for constant $\\Omega\\in\\mathbb R^3$ and scalar field $q$, is $\\partial_tu+2\\Omega\\times u=-\\nabla q$ and $\\operatorname{div}u=0$.\n\nThe vorticity field is $\\operatorname{curl}u$. If $\\gamma:[a,b]\\to\\Omega$ is a closed piecewise-$C^1$ oriented curve, with $\\gamma(a)=\\gamma(b)$, its circulation is $\\oint_\\gamma u\\cdot d\\mathbf r$. If $S$ is a compact oriented regular surface patch in $\\Omega$ with unit normal $n_S$, its volume-flux observable is $\\int_S u\\cdot n_S\\,dS$. The traction on $S$ is $\\sigma n_S$ and the formal resultant force is the componentwise surface integral $\\int_S\\sigma n_S\\,dS$. For a steady field, a streamline is a $C^1$ curve $x:J\\to\\Omega$ satisfying $x'(s)=u(x(s))$; the parameter $s$ is a curve parameter, not time. A closed material loop on a time interval $J\\subseteq I$ is a $C^1$ map $X:J\\times[0,1]\\to\\Omega$ with $X(t,0)=X(t,1)$ and $\\partial_tX(t,\\theta)=u(t,X(t,\\theta))$; the definition asserts no existence of such a map. On an exterior domain, $f(x)\\to f_\\infty$ uniformly in direction as $|x|\\to\\infty$ means $\\sup_{|e|=1}\\|f(re)-f_\\infty\\|_2\\to0$ as $r\\to\\infty$, using absolute value when the field is scalar.\n\nFor one optional SI interpretation, the dimensions are $[x]=\\mathrm m$, $[t]=\\mathrm s$, $[u]=\\mathrm{m\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[p]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[V]=[q]=\\mathrm{m^2\\,s^{-2}}$, and $[\\Omega]=\\mathrm{s^{-1}}$. Thus $[\\operatorname{curl}u]=\\mathrm{s^{-1}}$, circulation has units $\\mathrm{m^2\\,s^{-1}}$, volume flux has units $\\mathrm{m^3\\,s^{-1}}$, stress has units Pa, and resultant force has units N. In this interpretation $\\rho_0,\\mu,P,V,\\Omega$ are inputs to the displayed formulas, while $\\nu=\\mu/\\rho_0$ and $c^2=P'(\\rho_0)$ are derived quantities relative to those formulas; this classification is not asserted to be universal across physical theories.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any radial scalar functions $A,B$, direct Cartesian differentiation with $\\partial_i r=x_i/r$ and $\\partial_i s=U_i$ gives $\\operatorname{div}(AU+Bsx)=(s/r)(A'+r^2B'+4rB)$ and $\\Delta(AU+Bsx)=(A''+2A'/r+2B)U+(B''+6B'/r)sx$. For the stated coefficients, $A'=3a/(4r^2)+3a^3/(4r^4)$, $A''=-3a/(2r^3)-3a^3/r^5$, $B'=9a/(4r^4)-15a^3/(4r^6)$, and $B''=-9a/r^5+45a^3/(2r^7)$. Substitution yields $A'+r^2B'+4rB=0$ and $\\Delta u=-3aU/(2r^3)+9asx/(2r^5)$. Also $\\nabla(s/r^3)=U/r^3-3sx/r^5$, so $\\nabla p=\\mu\\Delta u$ and $\\operatorname{div}u=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $r=a$, $A(a)=B(a)=0$, giving $u=0$. As $r\\to\\infty$, $A(r)-1=O(r^{-1})$ and $|B(r)sx|=O(r^{-1})$ uniformly because $|s|\\le |U|r$; hence $u-U=O(r^{-1})$. Differentiating the displayed radial expression gives $\\nabla u=O(r^{-2})$, and $|p-p_\\infty|\\le (3\\mu a|U|)/(2r^2)$; these also establish the required uniform far-field limits.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $(\\widetilde u,\\widetilde p)$ be any other pair in the stated class and put $w=\\widetilde u-u$, $q=\\widetilde p-p$. Subtracting the equations gives $\\operatorname{div}w=0$, $\\mu\\Delta w=\\nabla q$, $w=0$ on $S_a$, and $w=O(r^{-1})$, $\\nabla w=O(r^{-2})$, $q=O(r^{-2})$ uniformly. For each $R>a$, apply [F2] on the bounded smooth annulus $\\Omega_{a,R}=\\{a<r<R\\}$ to $qw$ and to $\\sum_iw_i\\nabla w_i$. The product rule and $\\operatorname{div}w=0$ give $\\int_{\\Omega_{a,R}}w\\cdot\\nabla q=\\int_{\\partial\\Omega_{a,R}}q\\,w\\cdot n_R\\,dS$ and $\\int_{\\Omega_{a,R}}w\\cdot\\Delta w=\\int_{\\partial\\Omega_{a,R}}w\\cdot\\partial_{n_R}w\\,dS-\\int_{\\Omega_{a,R}}|\\nabla w|^2dx$. Substitution into $\\mu\\Delta w=\\nabla q$ yields $\\mu\\int_{\\Omega_{a,R}}|\\nabla w|^2dx=\\int_{r=R}(\\mu w\\cdot\\partial_rw-q\\,w\\cdot n)\\,dS$, since both inner-boundary terms vanish by $w=0$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $U_t=U-(U\\cdot n)n$ on $S_a$. There $A'(a)=3/(2a)$, $B(a)=0$, and $B'(a)=-3/(2a^3)$, so the outward radial derivative is $\\partial_nu=(3/(2a))U_t$. Since the boundary trace is the zero vector, every tangential derivative there vanishes; thus $Du=(3/(2a))U_t\\otimes n$, $(Du)^{\\mathsf T}n=0$, and $Du\\,n=(3/(2a))U_t$. Further, $p|_{S_a}=p_\\infty-(3\\mu/(2a))(U\\cdot n)$. It follows that $\\sigma n=-p_\\infty n+(3\\mu/(2a))U$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The antipodal map $n\\mapsto-n$ preserves spherical area and reverses $n$, so $\\int_{S_a}n\\,dS=0$. Integrating the expression in step 3.1 and using $\\operatorname{area}(S_a)=4\\pi a^2$ gives $\\int_{S_a}\\sigma n\\,dS=(3\\mu/(2a))4\\pi a^2U=6\\pi\\mu aU$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "On $r=R$ the integrand in step 2.2 is $O(R^{-3})$ and the area is $4\\pi R^2$, so its integral tends to zero as $R\\to\\infty$. The left side is nonnegative and nondecreasing in $R$; since it equals a quantity tending to zero, it is zero for every $R>a$. Continuity then gives $\\nabla w=0$ throughout the connected exterior, so $w$ is constant there; its far-field limit is zero, hence $w=0$. The equation now gives $\\nabla q=0$, so $q$ is constant, and its zero far-field limit gives $q=0$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses permit the zero far-field vector; substituting U=0 in the explicit field and resultant formulas gives the zero field/resultant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "U=0 is permitted. The explicit formulas give u=0 and p=p_infty, the step-4.1 resultant is zero, and the step-2.2/5.1 uniqueness argument still applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the inner sphere trace and the uniform far-field limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the imported divergence theorem on each bounded annulus under the explicitly stated ACω hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "thm-fd-x08": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.\n\nFor a barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives and let $V:\\Omega\\to\\mathbb R$ have continuous spatial partial derivatives through order two. The formal compressible Euler system for $u$ and positive density $\\rho$ is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nAt a constant background density $\\rho_0>0$ with $P'(\\rho_0)>0$, the positive parameter $c$ defined by $c^2=P'(\\rho_0)$ is the sound-speed parameter of this mathematical branch. A separate rotating linear system, for constant $\\Omega\\in\\mathbb R^3$ and scalar field $q$, is $\\partial_tu+2\\Omega\\times u=-\\nabla q$ and $\\operatorname{div}u=0$.\n\nThe vorticity field is $\\operatorname{curl}u$. If $\\gamma:[a,b]\\to\\Omega$ is a closed piecewise-$C^1$ oriented curve, with $\\gamma(a)=\\gamma(b)$, its circulation is $\\oint_\\gamma u\\cdot d\\mathbf r$. If $S$ is a compact oriented regular surface patch in $\\Omega$ with unit normal $n_S$, its volume-flux observable is $\\int_S u\\cdot n_S\\,dS$. The traction on $S$ is $\\sigma n_S$ and the formal resultant force is the componentwise surface integral $\\int_S\\sigma n_S\\,dS$. For a steady field, a streamline is a $C^1$ curve $x:J\\to\\Omega$ satisfying $x'(s)=u(x(s))$; the parameter $s$ is a curve parameter, not time. A closed material loop on a time interval $J\\subseteq I$ is a $C^1$ map $X:J\\times[0,1]\\to\\Omega$ with $X(t,0)=X(t,1)$ and $\\partial_tX(t,\\theta)=u(t,X(t,\\theta))$; the definition asserts no existence of such a map. On an exterior domain, $f(x)\\to f_\\infty$ uniformly in direction as $|x|\\to\\infty$ means $\\sup_{|e|=1}\\|f(re)-f_\\infty\\|_2\\to0$ as $r\\to\\infty$, using absolute value when the field is scalar.\n\nFor one optional SI interpretation, the dimensions are $[x]=\\mathrm m$, $[t]=\\mathrm s$, $[u]=\\mathrm{m\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[p]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[V]=[q]=\\mathrm{m^2\\,s^{-2}}$, and $[\\Omega]=\\mathrm{s^{-1}}$. Thus $[\\operatorname{curl}u]=\\mathrm{s^{-1}}$, circulation has units $\\mathrm{m^2\\,s^{-1}}$, volume flux has units $\\mathrm{m^3\\,s^{-1}}$, stress has units Pa, and resultant force has units N. In this interpretation $\\rho_0,\\mu,P,V,\\Omega$ are inputs to the displayed formulas, while $\\nu=\\mu/\\rho_0$ and $c^2=P'(\\rho_0)$ are derived quantities relative to those formulas; this classification is not asserted to be universal across physical theories.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Gaussian integral $I_0$ is positive and finite: its integrand is positive and, for $r\\ge1$, $e^{-r^2}\\le e^{-r}$, whose tail is integrable. Differentiation gives $E'(s)=-e^{-s^2}/I_0$ and $E''(s)=-2sE'(s)$. For $s=y/(2\\sqrt{\\nu t})$, $s_t=-s/(2t)$ and $s_y=1/(2\\sqrt{\\nu t})$, so $u_t=-UsE'(s)/(2t)$ and $\\nu u_{yy}=-UsE'(s)/(2t)$. Thus $u_t=\\nu u_{yy}$; the field has zero divergence and zero convection because it has only an $x$ component and is independent of $x$. The pressure gradient is zero, so [F1] gives the exact equation. Also $E(0)=1$, $E(s)\\to0$ as $s\\to\\infty$, and for fixed $y>0$, $s\\to\\infty$ as $t\\downarrow0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the periodic shear, $u_t=-\\nu k^2u$, $\\Delta u=-k^2u$, $\\operatorname{div}u=0$, and $(u\\cdot\\nabla)u=u_x\\partial_xu=0$. A constant pressure therefore makes every term in [F1] sum to zero. Let $y_0(s)=b\\cos(2\\pi s)$ and $x_0(s)=c\\sin(2\\pi s)$; the displacement $d(y,t)=A(1-e^{-\\nu k^2t})\\sin(ky)/(\\nu k^2)$ satisfies $d_t(y,t)=Ae^{-\\nu k^2t}\\sin(ky)$. Hence $X(t,s)=(x_0(s)+d(y_0(s),t),y_0(s),0)$ is closed and $X_t=u(t,X)$, so it is a smooth material loop. Its circulation is $\\int_0^1Ae^{-\\nu k^2t}\\sin(ky_0(s))(x_0'(s)+d_y(y_0(s),t)y_0'(s))\\,ds$. The second term is the integral of $\\partial_sH(y_0(s),t)$ for a primitive $H_y(y,t)=Ae^{-\\nu k^2t}\\sin(ky)d_y(y,t)$; it vanishes because $y_0(0)=y_0(1)$ and $H$ is single-valued. Changing variables $\\theta=2\\pi s$ in the remaining term gives $\\Gamma(t)=Ac e^{-\\nu k^2t}\\int_0^{2\\pi}\\cos\\theta\\sin(kb\\cos\\theta)\\,d\\theta=AcC_\\alpha e^{-\\nu k^2t}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $r=s+z$ in the tail integral gives $E(s)=I_0^{-1}\\int_0^\\infty e^{-(s+z)^2}dz\\le e^{-s^2}I_0^{-1}\\int_0^\\infty e^{-z^2}dz=e^{-s^2}$, since $(s+z)^2\\ge s^2+z^2$. If $y\\ge2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}$, then $s^2\\ge\\log(1/\\varepsilon)$ and hence $|u|=|U|E(s)\\le\\varepsilon|U|$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $0<\\alpha<\\pi$, $\\sin(\\alpha\\cos\\theta)$ has the same sign as $\\cos\\theta$ whenever $\\cos\\theta\\ne0$. Thus $\\cos\\theta\\sin(\\alpha\\cos\\theta)>0$ except at its zeros, so its integral $C_\\alpha$ is strictly positive. With $A\\ne0$, $c>0$, $\\nu>0$, and $k\\ne0$, step 1.2 has a nonzero coefficient multiplying the nonconstant exponential $e^{-\\nu k^2t}$. This exact viscous solution therefore has a smooth material loop with nonconserved circulation; it does not assert Kelvin conservation for a viscous model.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow U=0 and A=0, respectively, giving the zero fields and zero circulation in those parameter cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The periodic field permits m=1, a single nonzero Fourier wave number; step 2.1 verifies its exact equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "U=0 and A=0 are allowed. Steps 1.1 and 1.2 then give the corresponding zero velocities; Gamma=0 for A=0, while step 3.1 explicitly conditions nonconstancy on A!=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement specifies the one-sided wall/initial limits and excludes only the incompatible (0,0) corner; steps 1.1–1.2 verify the limits and bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "thm-fd-x09": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.\n\nFor a barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives and let $V:\\Omega\\to\\mathbb R$ have continuous spatial partial derivatives through order two. The formal compressible Euler system for $u$ and positive density $\\rho$ is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nAt a constant background density $\\rho_0>0$ with $P'(\\rho_0)>0$, the positive parameter $c$ defined by $c^2=P'(\\rho_0)$ is the sound-speed parameter of this mathematical branch. A separate rotating linear system, for constant $\\Omega\\in\\mathbb R^3$ and scalar field $q$, is $\\partial_tu+2\\Omega\\times u=-\\nabla q$ and $\\operatorname{div}u=0$.\n\nThe vorticity field is $\\operatorname{curl}u$. If $\\gamma:[a,b]\\to\\Omega$ is a closed piecewise-$C^1$ oriented curve, with $\\gamma(a)=\\gamma(b)$, its circulation is $\\oint_\\gamma u\\cdot d\\mathbf r$. If $S$ is a compact oriented regular surface patch in $\\Omega$ with unit normal $n_S$, its volume-flux observable is $\\int_S u\\cdot n_S\\,dS$. The traction on $S$ is $\\sigma n_S$ and the formal resultant force is the componentwise surface integral $\\int_S\\sigma n_S\\,dS$. For a steady field, a streamline is a $C^1$ curve $x:J\\to\\Omega$ satisfying $x'(s)=u(x(s))$; the parameter $s$ is a curve parameter, not time. A closed material loop on a time interval $J\\subseteq I$ is a $C^1$ map $X:J\\times[0,1]\\to\\Omega$ with $X(t,0)=X(t,1)$ and $\\partial_tX(t,\\theta)=u(t,X(t,\\theta))$; the definition asserts no existence of such a map. On an exterior domain, $f(x)\\to f_\\infty$ uniformly in direction as $|x|\\to\\infty$ means $\\sup_{|e|=1}\\|f(re)-f_\\infty\\|_2\\to0$ as $r\\to\\infty$, using absolute value when the field is scalar.\n\nFor one optional SI interpretation, the dimensions are $[x]=\\mathrm m$, $[t]=\\mathrm s$, $[u]=\\mathrm{m\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[p]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[V]=[q]=\\mathrm{m^2\\,s^{-2}}$, and $[\\Omega]=\\mathrm{s^{-1}}$. Thus $[\\operatorname{curl}u]=\\mathrm{s^{-1}}$, circulation has units $\\mathrm{m^2\\,s^{-1}}$, volume flux has units $\\mathrm{m^3\\,s^{-1}}$, stress has units Pa, and resultant force has units N. In this interpretation $\\rho_0,\\mu,P,V,\\Omega$ are inputs to the displayed formulas, while $\\nu=\\mu/\\rho_0$ and $c^2=P'(\\rho_0)$ are derived quantities relative to those formulas; this classification is not asserted to be universal across physical theories.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In coordinates, $((v\\cdot\\nabla)v)_i=\\sum_jv_j\\partial_jv_i$ and $\\partial_i(|v|^2/2)=\\sum_jv_j\\partial_iv_j$. Let $\\epsilon_{ijk}$ be the alternating symbol with $\\epsilon_{123}=1$. Using $(v\\times\\operatorname{curl}v)_i=\\sum_{j,k,l,m}\\epsilon_{ijk}\\epsilon_{klm}v_j\\partial_lv_m=\\sum_jv_j\\partial_iv_j-\\sum_jv_j\\partial_jv_i$ gives the asserted identity component by component.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The fundamental theorem of calculus and the chain rule give $\\nabla h(\\rho)=(P'(\\rho)/\\rho)\\nabla\\rho=\\rho^{-1}\\nabla(P(\\rho))$. For a steady solution, $u_t=0$, so dotting the momentum equation with $u$ and applying step 1.1 yields $u\\cdot\\nabla(|u|^2/2+h(\\rho)+V)=0$, because $u\\cdot(u\\times\\operatorname{curl}u)=0$. Along a streamline $x'(s)=u(x(s))$, the chain rule makes the derivative of this quantity zero, proving streamline constancy. If $\\operatorname{curl}u=0$, step 1.1 and the momentum equation give $\\nabla(|u|^2/2+h(\\rho)+V)=0$. A differentiable function with zero gradient is constant along every polygonal path; in an open connected subset of $\\mathbb R^3$, polygonally reachable points form a nonempty relatively open and relatively closed set (each point has a ball contained in the open set). Connectedness therefore gives constancy on that component.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the assumed continuous mixed derivatives, differentiate under the integral sign and commute $X_{ts}=\\partial_sX_t$. The chain rule and $X_t=u(t,X)$ give $\\partial_t(u(t,X)\\cdot X_s)=(\\partial_tu+(u\\cdot\\nabla)u)(t,X)\\cdot X_s+\\partial_s(|u(t,X)|^2/2)$. The momentum equation and step 2.1's enthalpy-gradient identity turn this into $-\\partial_s(h(\\rho(t,X))+V(X))+\\partial_s(|u(t,X)|^2/2)$. Integrating in $s$ gives the endpoint difference of $|u|^2/2-h(\\rho)-V$, which is zero because $X(t,0)=X(t,1)$ and all fields are single-valued. Hence $d\\Gamma/dt=0$ on $J$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement says Omega is open, without requiring nonemptiness. For Omega empty the pointwise identity/Euler conclusions are vacuous, there are no nonempty streamlines or material loops into it, and no connected components to test. The proof only fixes a component or loop when present."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid for u=0 and gives a constant Bernoulli value; step 3.1 gives constant circulation for any closed loop."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A steady rest solution u=0 with constant positive rho and constant V is admitted. Step 2.1 gives constant Bernoulli value and step 3.1 gives zero circulation; there is no division by |u|. Positive rho alone excludes vacuum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses equality of the closed material-loop endpoints to cancel the endpoint potential difference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "def-fd-incompressible-euler-system": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition admits u=0 with spatially constant p as a formal solution of its displayed equations; it asserts no solution existence theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition admits u=0 and constant p: all displayed derivatives vanish and the pointwise equations remain meaningful. rho_0=0 is excluded by rho_0>0; inviscidity is the branch itself, not an excluded zero-viscosity singular limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition specifies pointwise equations on open sets and introduces no time endpoint or limiting operation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "thm-fd-x13": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.\n\nFor a barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives and let $V:\\Omega\\to\\mathbb R$ have continuous spatial partial derivatives through order two. The formal compressible Euler system for $u$ and positive density $\\rho$ is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nAt a constant background density $\\rho_0>0$ with $P'(\\rho_0)>0$, the positive parameter $c$ defined by $c^2=P'(\\rho_0)$ is the sound-speed parameter of this mathematical branch. A separate rotating linear system, for constant $\\Omega\\in\\mathbb R^3$ and scalar field $q$, is $\\partial_tu+2\\Omega\\times u=-\\nabla q$ and $\\operatorname{div}u=0$.\n\nThe vorticity field is $\\operatorname{curl}u$. If $\\gamma:[a,b]\\to\\Omega$ is a closed piecewise-$C^1$ oriented curve, with $\\gamma(a)=\\gamma(b)$, its circulation is $\\oint_\\gamma u\\cdot d\\mathbf r$. If $S$ is a compact oriented regular surface patch in $\\Omega$ with unit normal $n_S$, its volume-flux observable is $\\int_S u\\cdot n_S\\,dS$. The traction on $S$ is $\\sigma n_S$ and the formal resultant force is the componentwise surface integral $\\int_S\\sigma n_S\\,dS$. For a steady field, a streamline is a $C^1$ curve $x:J\\to\\Omega$ satisfying $x'(s)=u(x(s))$; the parameter $s$ is a curve parameter, not time. A closed material loop on a time interval $J\\subseteq I$ is a $C^1$ map $X:J\\times[0,1]\\to\\Omega$ with $X(t,0)=X(t,1)$ and $\\partial_tX(t,\\theta)=u(t,X(t,\\theta))$; the definition asserts no existence of such a map. On an exterior domain, $f(x)\\to f_\\infty$ uniformly in direction as $|x|\\to\\infty$ means $\\sup_{|e|=1}\\|f(re)-f_\\infty\\|_2\\to0$ as $r\\to\\infty$, using absolute value when the field is scalar.\n\nFor one optional SI interpretation, the dimensions are $[x]=\\mathrm m$, $[t]=\\mathrm s$, $[u]=\\mathrm{m\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[p]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[V]=[q]=\\mathrm{m^2\\,s^{-2}}$, and $[\\Omega]=\\mathrm{s^{-1}}$. Thus $[\\operatorname{curl}u]=\\mathrm{s^{-1}}$, circulation has units $\\mathrm{m^2\\,s^{-1}}$, volume flux has units $\\mathrm{m^3\\,s^{-1}}$, stress has units Pa, and resultant force has units N. In this interpretation $\\rho_0,\\mu,P,V,\\Omega$ are inputs to the displayed formulas, while $\\nu=\\mu/\\rho_0$ and $c^2=P'(\\rho_0)$ are derived quantities relative to those formulas; this classification is not asserted to be universal across physical theories.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-incompressible-euler-system",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open time interval, let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian coordinates, and fix a constant density $\\rho_0>0$. Let $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous first time derivatives, first spatial derivatives, and second spatial derivatives, and let $p:I\\times\\Omega\\to\\mathbb R$ have continuous first spatial derivatives. The formal constant-density incompressible Euler system is the pointwise system\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p=0,\\qquad \\operatorname{div}u=0.$$\n\nUse the Cartesian derivative conventions $\\nabla f=(\\partial_i f)_{i=1}^3$, $\\operatorname{div}u=\\sum_i\\partial_i u_i$, and $(u\\cdot\\nabla)u=\\sum_j u_j\\partial_j u$. The velocity has continuous first time, first spatial, and second spatial derivatives, and pressure has continuous first spatial derivatives. For this inviscid branch define the formal pressure stress by $\\sigma_E=-pI_3$. On a compact oriented regular surface patch $S\\subset\\Omega$ with unit normal $n_S$, define its formal stress resultant to be $\\int_S\\sigma_En_S\\,dS=-\\int_Sp n_S\\,dS$. A steady solution has $\\partial_tu=0$. These definitions impose no boundary condition, assert no solution existence, and do not claim that the system describes an observed fluid.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-x09",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be $C^2$. Suppose $u:I\\times\\Omega\\to\\mathbb R^3$ has continuous first time, first spatial, and second spatial derivatives; $\\rho:I\\times\\Omega\\to(0,\\infty)$ has continuous first time and first spatial derivatives; and $V:\\Omega\\to\\mathbb R$ is time-independent and $C^2$. Assume pointwise\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nFor any reference density $\\rho_{\\rm ref}>0$, define $h(q)=\\int_{\\rho_{\\rm ref}}^q P'(r)/r\\,dr$ for $q>0$. A streamline is a $C^1$ curve $x:J\\to\\Omega$ with $x'(s)=u(x(s))$. If $u$ and $\\rho$ are independent of time, every streamline has $|u|^2/2+h(\\rho)+V$ constant along it. If in addition $\\operatorname{curl}u=0$ on a connected component of $\\Omega$, this quantity is constant throughout that component.\n\nFor any closed $C^1$ material loop $X:J\\times[0,1]\\to\\Omega$ satisfying $X(t,0)=X(t,1)$, $X_t(t,s)=u(t,X(t,s))$, with $X_s$ and $X_{ts}$ continuous, the circulation $\\Gamma(t)=\\int_0^1u(t,X(t,s))\\cdot X_s(t,s)\\,ds$ is constant on $J$. Independently of the Euler assumptions, every $C^2$ vector field $v$ on an open subset of $\\mathbb R^3$ obeys the identity\n\n$$ (v\\cdot\\nabla)v=\\nabla(|v|^2/2)-v\\times\\operatorname{curl}v. $$\n\nNo claim is made for shocks, nonbarotropic pressure, nonconservative body forces, or viscous circulation. Under SI interpretation, $u$ is in metres per second, $\\rho$ in kilograms per cubic metre, $P$ in pascals, and $h,V$ in square metres per second squared.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $r>0$, $\\partial_i(1/r)=-x_i/r^3$ and $\\partial_i^2(1/r)=-1/r^3+3x_i^2/r^5$ for $i=1,2,3$, so $\\Delta(1/r)=-3/r^3+3r^2/r^5=0$. Since $(U\\cdot x)/r^3=-U\\cdot\\nabla(1/r)$, commuting smooth derivatives gives $\\Delta((U\\cdot x)/r^3)=0$. Also $\\Delta(U\\cdot x)=0$, so $\\Delta\\phi=0$. Therefore $\\operatorname{div}u=\\Delta\\phi=0$ and $\\operatorname{curl}u=0$ by equality of the mixed second partials of $\\phi$. Direct differentiation yields $u=U+\\frac{a^3}{2r^3}\\bigl(U-3(U\\cdot n)n\\bigr)$. This gives uniform $u\\to U$ at infinity. At $r=a$, $u=(3/2)(U-(U\\cdot n)n)$, which is tangent to the sphere and has zero normal component.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] and $\\operatorname{curl}u=0$, $(u\\cdot\\nabla)u=\\nabla(|u|^2/2)$. The pressure definition gives $\\rho_0^{-1}\\nabla p=-\\nabla(|u|^2/2)$, so the steady momentum equation in [F2] holds; step 1.1 supplies its divergence condition. The explicit formula gives $u-U=O(r^{-1})$, hence $|u|^2\\to|U|^2$ and $p\\to p_\\infty$ uniformly in direction.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the sphere, $u=(3/2)U_t$ with $U_t=U-(U\\cdot n)n$, so $|u|^2=(9/4)(|U|^2-(U\\cdot n)^2)$. Thus $p|_{r=a}$ depends on $n$ only through $(U\\cdot n)^2$ and is unchanged by $n\\mapsto-n$. The antipodal map preserves spherical area and reverses $n$, so the vector integrand $p n$ has zero integral over the sphere. By the stress convention in [F2], $\\int_{|x|=a}\\sigma_En\\,dS=-\\int_{|x|=a}pn\\,dS=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses permit the zero far-field vector; substituting U=0 in the explicit field and resultant formulas gives the zero field/resultant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "U=0 is allowed. The potential and velocity then vanish, p=p_infty, and step 3.1 reduces the resultant to the zero integral of the constant-pressure normal field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 verify the no-through sphere trace and uniform far-field limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation is required; the claims are established by the displayed conditional real-calculus arguments.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "def-fd-x00",
+        "status": "verified",
+        "inspected_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives; a density field $\\rho$ has continuous first time and first spatial partial derivatives and takes values in $(0,\\infty)$. A scalar function of one or several displayed real variables is $C^1$ when its first partial derivatives exist and are continuous; piecewise-$C^1$ paths have the meaning in the line-integral definition below. For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.\n\nFor constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf",
+        "interface_check": "The current Definition matches every stated use; the current batch-5 manifest and fd-x01 A-page carrier place def-fd-x00, and loadStep1Record/step1Decision confirms its current Step-1 record is closed and ready.",
+        "effect": "No unresolved Step-1 prerequisite remains for this edge. Verification records only interface, placement and readiness, not independent proof approval."
+      }
+    },
+    "ex-fd-x04-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x04",
+          "source_section": "Statement",
+          "quote": "Let $h,a,\\rho_0,\\mu>0$, let $p_0,G,V_0,V_1\\in\\mathbb R$, and set $\\nu=\\mu/\\rho_0$. In the constant-density model\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0,$$\n\ntake the infinite plane channel $\\Omega_{\\rm ch}=\\{(x,y,z):x\\in\\mathbb R,\\ 0<y<h,\\ z\\in\\mathbb R\\}$, with $u=(v(y),0,0)$, $p=p_0-Gx$, $v\\in C^2([0,h])$, and wall values $v(0)=V_0$, $v(h)=V_1$. Then the unique profile within this ansatz is\n\n$$v(y)=V_0+(V_1-V_0)\\frac yh+\\frac{G}{2\\mu}y(h-y).$$\n\nIts volume flux per unit width in the $z$ direction and its fixed-coordinate shear component are\n\n$$Q_{\\rm ch}=\\int_0^h v(y)\\,dy=\\frac h2(V_0+V_1)+\\frac{Gh^3}{12\\mu},\\qquad \\sigma_{xy}(0)=\\mu\\frac{V_1-V_0}{h}+\\frac{Gh}{2},\\qquad \\sigma_{xy}(h)=\\mu\\frac{V_1-V_0}{h}-\\frac{Gh}{2}.$$\n\nFor the infinite circular pipe $\\Omega_a=\\{(x,y,z):x\\in\\mathbb R,\\ y^2+z^2<a^2\\}$, take $x$ as the axial coordinate, $r=(y^2+z^2)^{1/2}$, $u=(w(r),0,0)$, $p=p_0-Gx$, and require the radial field $(y,z)\\mapsto w((y^2+z^2)^{1/2})$ to be $C^2$ on the closed cross-sectional disk with no slip $w(a)=0$. Then the unique profile within this ansatz is\n\n$$w(r)=\\frac{G}{4\\mu}(a^2-r^2),\\qquad Q_{\\rm pipe}=\\int_0^a2\\pi r\\,w(r)\\,dr=\\frac{\\pi G a^4}{8\\mu}.$$\n\nBoth fields satisfy the exact stationary Navier–Stokes equations for every choice of the positive constants and also satisfy the corresponding steady Stokes equations, because their time derivative and convective acceleration vanish. The pipe uniqueness claim uses regularity on the full disk, including the axis. Both uniqueness claims are restricted to the stated one-dimensional ansatz; neither asserts uniqueness among all flows. The domains are infinite or fully developed and give no finite entrance or exit error estimate. Under SI interpretation, $h,a,x,y,z,r$ are in metres, $u,V_0,V_1,v,w$ in metres per second, $\\rho_0$ in kilograms per cubic metre, $\\mu$ in pascal-seconds, $\\nu$ in square metres per second, $p,p_0$ in pascals, and $G$ in pascals per metre. The channel flux per unit width is in square metres per second and the pipe volume flux is in cubic metres per second.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting the channel parameters into the formula in [F1] gives $v(y)=y/2+y(2-y)=5y/2-y^2$. It obeys $v(0)=0$, $v(2)=1$, and $\\mu v''=2(-2)=-4=-G$. Integrating gives $\\int_0^2v(y)\\,dy=5-8/3=7/3$. Also $v'(0)=5/2$ and $v'(2)=-3/2$, so $\\mu v'(0)=5$ and $\\mu v'(2)=-3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting the pipe parameters into [F1] gives $w(r)=1-r^2$, which as a Cartesian radial field is $1-y^2-z^2$, smooth on the full disk and zero at $r=1$. Polar integration gives $2\\pi\\int_0^1r(1-r^2)\\,dr=\\pi/2$. The parameter values are positive where required, so the exact-solution and restricted-uniqueness conclusions of [F1] apply to both displayed fields.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked example fixes nonzero wall/pressure data; it is a single specified parameter substitution."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Required positive radii, densities, viscosities, time scales, or nonzero wave numbers are explicitly assumed; zero/singular cases are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check both channel wall values, pipe no-slip at r=1, and full-disk regularity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "channel and pipe parameter substitution",
+          "input": "(h,V0,V1,G,mu,rho0)=(2,0,1,4,2,1); (a,G,mu,rho0)=(1,8,2,1)",
+          "check": "Substitution gives v=5y/2-y^2, Q_ch=7/3, wall shear (5,-3), w=1-r^2 and Q_pipe=pi/2.",
+          "disposition": "checked exactly in Verification steps 1.1–1.2 by integration and endpoint substitution."
+        }
+      ],
+      "finite_checks_disposition": "The stated finite parameter checks are exact substitutions documented in the finished verification.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "thm-fd-x04",
+        "status": "verified",
+        "effect": "The current in-run A theorem statement and complete conditional proof match this worked substitution, and its transitive def-fd-x00 placement/readiness is now current and ready."
+      }
+    },
+    "ex-fd-x05-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x05",
+          "source_section": "Statement",
+          "quote": "Let $D=\\{(x,y,z)\\in\\mathbb R^3:r=(x^2+y^2)^{1/2}>0\\}$, let $\\rho_0>0$, $p_0\\in\\mathbb R$, and let $\\kappa\\ne0$. On $D$ define\n\n$$u_v(x,y,z)=\\left(-\\frac{\\kappa y}{r^2},\\frac{\\kappa x}{r^2},0\\right),\\qquad p_v(x,y,z)=p_0-\\frac{\\rho_0\\kappa^2}{2r^2}.$$\n\nFor every $R>0$ and fixed $z_0$, the positively oriented circle $\\gamma_R(\\theta)=(R\\cos\\theta,R\\sin\\theta,z_0)$, $0\\le\\theta\\le2\\pi$, has circulation $\\oint_{\\gamma_R}u_v\\cdot d\\mathbf r=2\\pi\\kappa$. Consequently no single-valued $C^1$ function $\\phi:D\\to\\mathbb R$ satisfies $u_v=\\nabla\\phi$ on all of $D$, even though $\\operatorname{curl}u_v=0$ there. Both $\\operatorname{div}u_v=0$ and $\\Delta u_v=0$ on $D$, and the pointwise identity\n\n$$\\partial_tu_v+(u_v\\cdot\\nabla)u_v+\\rho_0^{-1}\\nabla p_v-\\nu\\Delta u_v=0$$\n\nholds for every $\\nu>0$, with $\\partial_tu_v=0$.\n\nSeparately, for $\\Omega_0\\ne0$ set $u_s=(-\\Omega_0y,\\Omega_0x,0)$ and $p_s=p_0+\\rho_0\\Omega_0^2r^2/2$ on $\\mathbb R^3$. This smooth steady field is divergence-free and satisfies the same constant-density equation for every $\\nu>0$. Its Bernoulli quantity $B=|u_s|^2/2+p_s/\\rho_0=p_0/\\rho_0+\\Omega_0^2r^2$ is constant on each circular streamline but varies with $r$. Thus a common Bernoulli constant is not implied for all steady constant-density flows. This example does not contradict a Bernoulli theorem that assumes an irrotational field or a separate barotropic model. Under SI interpretation, $r$ is in metres, the velocities in metres per second, $\\kappa$ in square metres per second, $\\Omega_0$ in inverse seconds, $\\rho_0$ in kilograms per cubic metre, and $p,p_0$ in pascals.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parameter substitutions in [F1] give $p_v=-1/r^2$. Direct differentiation yields $\\nabla p_v=2(x,y,0)/r^4$, so $\\rho_0^{-1}\\nabla p_v=(x,y,0)/r^4$; the vortex convection is $-(x,y,0)/r^4$ and its Laplacian is zero. Along $\\gamma_2(\\theta)=(2\\cos\\theta,2\\sin\\theta,z_0)$, $u_v\\cdot\\gamma_2'=1$, so $\\oint_{\\gamma_2}u_v\\cdot d\\mathbf r=\\int_0^{2\\pi}1\\,d\\theta=2\\pi\\ne0$. A single-valued potential would have zero integral by the chain rule around the closed curve.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For solid rotation the substituted pressure is $p_s=r^2$ and $|u_s|^2/2=r^2/2$, while $p_s/\\rho_0=r^2/2$. Hence $B=r^2$; it is fixed along each circular streamline because $r$ is fixed there, but changes between any two positive radii with different squares.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked vortex uses κ=1 and solid rotation uses Ω₀=1; zero strengths are not part of this fixed example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Required positive radii, densities, viscosities, time scales, or nonzero wave numbers are explicitly assumed; zero/singular cases are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates a closed circle with identical start and end point and integrates over 0≤θ≤2π."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "radius-two circulation and two solid-rotation radii",
+          "input": "kappa=1, R=2; Omega0=1, rho0=2",
+          "check": "The circle integral is 2pi and B=r^2 varies between any two distinct positive radii.",
+          "disposition": "checked exactly in Verification steps 1.1–1.2."
+        }
+      ],
+      "finite_checks_disposition": "The stated finite parameter checks are exact substitutions documented in the finished verification.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "thm-fd-x05",
+        "status": "verified",
+        "effect": "The current in-run A theorem statement and complete conditional proof match this worked substitution, and its transitive def-fd-x00 placement/readiness is now current and ready."
+      }
+    },
+    "ex-fd-x06-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x06",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $a,\\mu,\\rho_0>0$, $p_\\infty\\in\\mathbb R$, $U\\in\\mathbb R^3$, and $\\nu=\\mu/\\rho_0$. On the exterior domain $\\Omega_a=\\{x\\in\\mathbb R^3:r=|x|>a\\}$ put $s=U\\cdot x$ and define\n\n$$u(x)=A(r)U+B(r)sx,\\qquad A(r)=1-\\frac{3a}{4r}-\\frac{a^3}{4r^3},\\qquad B(r)=-\\frac{3a}{4r^3}+\\frac{3a^3}{4r^5},\\qquad p(x)=p_\\infty-\\frac{3\\mu a}{2}\\frac{s}{r^3}.$$\n\nThis field is $C^2$ up to the spherical boundary from the exterior, $p$ is $C^1$, $u=0$ at $r=a$, and $u\\to U$ uniformly in direction as $r\\to\\infty$. It satisfies the steady Stokes system $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$, $\\operatorname{div}u=0$ on $\\Omega_a$. For $n=x/a$ on $S_a=\\{x:|x|=a\\}$, put $D u=(\\partial_j u_i)_{i,j}$ and form the stress $\\sigma=-pI_3+\\mu(Du+(Du)^{\\mathsf T})$. The formal resultant with this sphere orientation is\n\n$$\\int_{S_a}\\sigma n\\,dS=6\\pi\\mu aU.$$\n\nMoreover, among classical pairs $(\\widetilde u,\\widetilde p)$ satisfying the same Stokes system on $\\Omega_a$, the same zero boundary velocity and far-field limits, and the uniform decay conditions $\\widetilde u-U=O(r^{-1})$, $\\nabla\\widetilde u=O(r^{-2})$, $\\widetilde p-p_\\infty=O(r^{-2})$, this pair is unique. Here the velocity is $C^2$ and pressure $C^1$ locally up to $S_a$, the displayed bounds hold uniformly in direction, and pressure is normalized by its limit $p_\\infty$. The claim is for the Stokes equations only; it gives no finite-Reynolds-number error bound or exterior Navier–Stokes existence result. Under SI interpretation, $a,r,x$ are in metres, $U$ in metres per second, $\\rho_0$ in kilograms per cubic metre, $\\mu$ in pascal-seconds, $\\nu$ in square metres per second, $p,p_\\infty$ in pascals, and the resultant in newtons.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under [A1], $s=U\\cdot x=z$ and the general coefficients in [F1] reduce to the displayed $A,B,p$. At $r=1$, $A=1-3/4-1/4=0$ and $B=-3/4+3/4=0$, so $u=0$. As $r\\to\\infty$, $A\\to1$ and $Bzx=O(r^{-1})$ uniformly because $|z||x|\\le r^2$ and $B=O(r^{-3})$; hence $u\\to e_z$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The constants meet the positivity and regularity hypotheses of [F1]. Its exact resultant specializes to $6\\pi(1)(1)e_z=6\\pi e_z$, and its uniqueness statement applies to every competing classical solution with the same data and decay bounds. This is a Stokes-model conclusion, not a finite-Reynolds-number estimate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This fixed worked field has U=e_z, not zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Required positive radii, densities, viscosities, time scales, or nonzero wave numbers are explicitly assumed; zero/singular cases are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the sphere trace and far-field limit at r=1 and r→∞."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The current Given expressly assumes AC_omega for the supplier bounded-annulus proof, and F1/Verification 2.1 invoke its uniqueness conclusion. This inherited assumption contradicts the existing no-choice reason."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit sphere, unit axial far field",
+          "input": "a=mu=rho0=1, U=e_z, p_infinity=0",
+          "check": "A(1)=B(1)=0, u tends to e_z, and the formal stress resultant is 6pi e_z.",
+          "disposition": "checked exactly in Verification steps 1.1–1.2."
+        }
+      ],
+      "finite_checks_disposition": "The stated finite parameter checks are exact substitutions documented in the finished verification.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "thm-fd-x06",
+        "status": "verified",
+        "effect": "The current in-run A theorem statement and complete conditional proof match this worked substitution, and its transitive def-fd-x00 placement/readiness is now current and ready."
+      }
+    },
+    "ex-fd-x08-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x08",
+          "source_section": "Statement",
+          "quote": "Let $\\rho_0,\\mu>0$, $\\nu=\\mu/\\rho_0$, and $U\\in\\mathbb R$. On $t>0$, $y>0$ define $I_0=\\int_0^\\infty e^{-r^2}\\,dr$ and $E(s)=I_0^{-1}\\int_s^\\infty e^{-r^2}\\,dr$ for $s\\ge0$. The velocity $u(t,x,y,z)=(U E(y/(2\\sqrt{\\nu t})),0,0)$ with constant pressure is smooth for $t>0,y>0$ and satisfies the unsteady Stokes equation $\\partial_tu+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ and $\\operatorname{div}u=0$. It also solves the full constant-density Navier–Stokes system because its convective term vanishes. Its one-sided wall trace is $U$ for $t>0$, its limit as $y\\to\\infty$ is zero, and for every fixed $y>0$ its limit as $t\\downarrow0$ is zero. The corner $(t,y)=(0,0)$ is excluded from the classical claim. For $0<\\varepsilon<1$ and $y\\ge2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}$, the bound $|u(t,y)|\\le\\varepsilon|U|$ holds.\n\nSeparately, define $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ for $L>0$ and let the spatial domain be the flat three-torus $\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z}$, where $L_x,L_y,L_z>0$. Choose an integer $m\\ge1$, put $k=2\\pi m/L_y$, and let $A\\in\\mathbb R$. For all $t\\in\\mathbb R$, $u(t,x,y,z)=(A e^{-\\nu k^2t}\\sin(ky),0,0)$ with constant pressure is a smooth exact Navier–Stokes solution. Choose $c,b>0$ with $c<L_x/2$, $b<L_y/2$, and $0<\\alpha:=kb<\\pi$. Define the smooth closed material loop\n\n$$X(t,s)=\\left(c\\sin(2\\pi s)+\\frac{A}{\\nu k^2}(1-e^{-\\nu k^2t})\\sin(kb\\cos(2\\pi s)),\\,b\\cos(2\\pi s),\\,0\\right)\\quad\\text{in }\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z},\\quad 0\\le s\\le1.$$\n\nLet $C_\\alpha=\\int_0^{2\\pi}\\cos\\theta\\,\\sin(\\alpha\\cos\\theta)\\,d\\theta$. Then $C_\\alpha>0$ and the circulation of this loop is $\\Gamma(t)=AcC_\\alpha e^{-\\nu k^2t}$, which is nonconstant when $A\\ne0$. The corner-excluded wall-layer solution and the periodic material-loop solution are distinct exact mathematical models; neither states an experiment or a general boundary-layer theorem. Under SI interpretation, $x,y,z,L_x,L_y,L_z,b,c$ are in metres, $t$ in seconds, $u,U,A$ in metres per second, $\\rho_0$ in kilograms per cubic metre, $\\mu$ in pascal-seconds, $\\nu$ in square metres per second, and $k$ in inverse metres.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The wall-layer parameters give $y=2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}=2$, so the theorem's tail bound yields $|u(1,2)|\\le e^{-1}|U|=e^{-1}$. The corner is not involved because $t=1$ and $y=2$ are both positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the periodic field, $kL_y=2\\pi$, $0<c<L_x/2$, $0<b<L_y/2$, and $0<\\alpha=kb=\\pi/2<\\pi$, so [F1] applies. Substitution gives $\\Gamma(t)=2\\cdot1\\cdot C_{\\pi/2}e^{-t}=2C_{\\pi/2}e^{-t}$. Since $C_{\\pi/2}>0$, $\\Gamma(0)=2C_{\\pi/2}$ and $\\Gamma(1)=2C_{\\pi/2}/e$ are distinct. This is a formal viscous circulation change for this loop only.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked wall speed and periodic amplitude are fixed nonzero values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the single periodic mode m=1, k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Required positive radii, densities, viscosities, time scales, or nonzero wave numbers are explicitly assumed; zero/singular cases are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses positive t,y away from the excluded corner, and step 2.1 evaluates the loop circulation at t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "tail and periodic-mode substitution",
+          "input": "nu=U=t=1, y=2, epsilon=e^-1; k=1, A=2, c=1, b=pi/2",
+          "check": "The wall-layer tail is bounded by e^-1 and the smooth periodic ellipse has Gamma(t)=2 C_(pi/2)e^-t with C_(pi/2)>0.",
+          "disposition": "checked exactly in Verification steps 1.1–2.1 using the tail estimate and the positive defining integral."
+        }
+      ],
+      "finite_checks_disposition": "The listed wall-layer and periodic-ellipse substitutions are exact calculations recorded in the finished verification.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "thm-fd-x08",
+        "status": "verified",
+        "effect": "The current in-run A theorem statement and complete conditional proof match this worked substitution, and its transitive def-fd-x00 placement/readiness is now current and ready."
+      }
+    },
+    "ex-fd-x09-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x09",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be $C^2$. Suppose $u:I\\times\\Omega\\to\\mathbb R^3$ has continuous first time, first spatial, and second spatial derivatives; $\\rho:I\\times\\Omega\\to(0,\\infty)$ has continuous first time and first spatial derivatives; and $V:\\Omega\\to\\mathbb R$ is time-independent and $C^2$. Assume pointwise\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V.$$\n\nFor any reference density $\\rho_{\\rm ref}>0$, define $h(q)=\\int_{\\rho_{\\rm ref}}^q P'(r)/r\\,dr$ for $q>0$. A streamline is a $C^1$ curve $x:J\\to\\Omega$ with $x'(s)=u(x(s))$. If $u$ and $\\rho$ are independent of time, every streamline has $|u|^2/2+h(\\rho)+V$ constant along it. If in addition $\\operatorname{curl}u=0$ on a connected component of $\\Omega$, this quantity is constant throughout that component.\n\nFor any closed $C^1$ material loop $X:J\\times[0,1]\\to\\Omega$ satisfying $X(t,0)=X(t,1)$, $X_t(t,s)=u(t,X(t,s))$, with $X_s$ and $X_{ts}$ continuous, the circulation $\\Gamma(t)=\\int_0^1u(t,X(t,s))\\cdot X_s(t,s)\\,ds$ is constant on $J$. Independently of the Euler assumptions, every $C^2$ vector field $v$ on an open subset of $\\mathbb R^3$ obeys the identity\n\n$$ (v\\cdot\\nabla)v=\\nabla(|v|^2/2)-v\\times\\operatorname{curl}v. $$\n\nNo claim is made for shocks, nonbarotropic pressure, nonconservative body forces, or viscous circulation. Under SI interpretation, $u$ is in metres per second, $\\rho$ in kilograms per cubic metre, $P$ in pascals, and $h,V$ in square metres per second squared.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The fields have the required smoothness and positive density. Since $\\rho$ is constant, $\\rho_t+\\operatorname{div}(\\rho u)=0$; also $u_t=0$, $(u\\cdot\\nabla)u=0$, $\\nabla(P(\\rho))=0$, and $\\nabla V=0$. Thus both barotropic Euler equations hold pointwise. The enthalpy formula in [F1] gives $h(q)=\\int_1^q dr/r=\\log q$, so $h(1)=0$ and $|u|^2/2+h(1)+V=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The loop is closed because its endpoint values at $s=0,1$ agree, and $X_t=(1,0,0)=u(t,X)$; its spatial and mixed derivatives are continuous. Its tangent is $X_s=(-2\\pi\\sin(2\\pi s),2\\pi\\cos(2\\pi s),0)$, so $\\Gamma(t)=\\int_0^1u\\cdot X_s\\,ds=-2\\pi\\int_0^1\\sin(2\\pi s)\\,ds=0$. This verifies the theorem's circulation conclusion directly.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed worked velocity is u=e_x, not zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "V=0, constant density/velocity gradients and zero circulation are the actual Example. Verification 1.1 handles their vanishing derivatives, and 2.1 integrates the tangent to obtain Gamma=0, so the blanket exclusion of zero cases is inappropriate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks X(t,0)=X(t,1) and integrates the circulation over the full parameter interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "uniform barotropic state and translated circle",
+          "input": "P(q)=q, rho=1, V=0, u=e_x, X(t,s)=(cos(2pi s)+t,sin(2pi s),0)",
+          "check": "The Euler equations hold, h(1)=0, Bernoulli is 1/2, and Gamma(t)=0.",
+          "disposition": "checked exactly in Verification steps 1.1–1.2."
+        }
+      ],
+      "finite_checks_disposition": "The stated finite parameter checks are exact substitutions documented in the finished verification.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "thm-fd-x09",
+        "status": "verified",
+        "effect": "The current in-run A theorem statement and complete conditional proof match this worked substitution, and its transitive def-fd-x00 placement/readiness is now current and ready."
+      }
+    },
+    "ex-fd-x13-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x13",
+          "source_section": "Statement",
+          "quote": "Let $a,\\rho_0>0$, $p_\\infty\\in\\mathbb R$, $U\\in\\mathbb R^3$, and on $\\Omega_a=\\{x\\in\\mathbb R^3:r=|x|>a\\}$ define $n=x/r$, $\\phi(x)=(U\\cdot x)(1+a^3/(2r^3))$, $u=\\nabla\\phi$, and $p=p_\\infty+\\rho_0(|U|^2-|u|^2)/2$. Then $u,p$ are smooth in the exterior and up to $r=a$, $u\\to U$ and $p\\to p_\\infty$ uniformly in direction at infinity, and $u\\cdot n=0$ on $r=a$. The pair solves $(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p=0$, $\\operatorname{div}u=0$, the steady formal constant-density incompressible Euler system. Its boundary condition is impermeable slip/no-through: $u$ is generally nonzero tangent to the sphere, so this is not a no-slip solution. For the formal Euler stress $\\sigma_E=-pI_3$ and sphere normal $n=x/a$ pointing from the center into the exterior, the exact resultant is\n\n$$\\int_{|x|=a}\\sigma_E n\\,dS=-\\int_{|x|=a}p n\\,dS=0.$$\n\nThe theorem concerns only this explicit inviscid mathematical model; it asserts neither a viscous zero-drag result nor an observed force. Under SI interpretation, $a,r,x$ are in metres, $U,u$ in metres per second, $\\rho_0$ in kilograms per cubic metre, and $p,p_\\infty$ in pascals.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parameters satisfy the theorem's positivity assumptions. Substituting $a=1$, $U=e_x$ into its potential gives $\\phi=x(1+1/(2r^3))$; the displayed pressure is the theorem's pressure formula, and on $r=1$ the velocity is $(3/2)(e_x-n_xn)$, whose dot product with $n$ is $(3/2)(n_x-n_x)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $r=1$, $|u|^2=(9/4)(1-n_x^2)$, so $p=\\frac12(1-\\frac94(1-n_x^2))=-5/8+(9/8)n_x^2$. This is even under $n\\mapsto-n$; spherical area is invariant and $n$ changes sign, hence $\\int_{|x|=1}pn\\,dS=0$. Therefore $\\int\\sigma_En\\,dS=-\\int pn\\,dS=0$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes nonempty open domains or explicit nonempty parameter domains; an empty-domain theorem is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed worked field uses U=e_x, not zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes its stated three-dimensional geometry or particular example and makes no one-dimensional dimension-general claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Required positive radii, densities, viscosities, time scales, or nonzero wave numbers are explicitly assumed; zero/singular cases are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 verify the unit-sphere no-through boundary and antipodal surface integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit sphere potential and pressure symmetry",
+          "input": "a=rho0=1, U=e_x, p_infinity=0",
+          "check": "On r=1, u=(3/2)(e_x-n_x n), p=-5/8+(9/8)n_x^2, and the resultant is zero.",
+          "disposition": "checked exactly in Verification steps 1.1–1.2."
+        }
+      ],
+      "finite_checks_disposition": "The stated finite parameter checks are exact substitutions documented in the finished verification.",
+      "risk_review": "Review the exact domains, regularity, signs, boundary orientations, topology/decay class, and model qualification recorded in the Statement; do not infer experimental truth or stronger uniqueness.",
+      "conditional_supplier_context": {
+        "supplier": "thm-fd-x13",
+        "status": "verified",
+        "effect": "The current in-run A theorem statement and complete conditional proof match this worked substitution, and its transitive def-fd-x00 placement/readiness is now current and ready."
+      }
+    }
+  },
+  "conditional_supplier_context": {
+    "supplier": "def-fd-x00",
+    "current_item_path": "items/def-fd-x00.md",
+    "status": "verified",
+    "placement": "The current batch-5 pages manifest lists def-fd-x00 on fd-x01; the fd-x01 page carrier exists with empty Markdown body.",
+    "readiness": "loadStep1Record/step1Decision confirms the current def-fd-x00 readiness record is closed with decision ready and its hash matches.",
+    "inspected_interface": "The current formal Definition has the exact nonempty open spatial domain and time interval conventions, velocity/pressure regularity, constant-density Navier–Stokes and steady Stokes equations with nu=mu/rho0, Cartesian gradient/divergence/curl and componentwise Laplacian, stress and observable conventions, and a separately stated positive-density barotropic Euler branch. Every direct FD-X02 use was checked against the actual Definition.",
+    "affected_direct_items": [
+      "thm-fd-x04",
+      "thm-fd-x05",
+      "thm-fd-x06",
+      "thm-fd-x08",
+      "thm-fd-x09",
+      "def-fd-incompressible-euler-system",
+      "thm-fd-x13"
+    ],
+    "affected_transitive_examples": [
+      "ex-fd-x04-formal-verification",
+      "ex-fd-x05-formal-verification",
+      "ex-fd-x06-formal-verification",
+      "ex-fd-x08-formal-verification",
+      "ex-fd-x09-formal-verification",
+      "ex-fd-x13-formal-verification"
+    ],
+    "next_action": "No supplier repair is outstanding; preserve this interface and readiness record, and route later independent proof review through its normal gate."
+  }
+}

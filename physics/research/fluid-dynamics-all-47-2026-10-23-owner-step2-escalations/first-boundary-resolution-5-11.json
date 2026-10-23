@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "gate_resolution_round": 1,
+  "source_diagnostic": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/first-boundary-failure-full.json",
+  "rows": [
+    {
+      "id": "thm-fd-x05",
+      "batch": 6,
+      "case": "zero",
+      "detector_candidate": {
+        "id": "thm-fd-x05",
+        "case": "zero",
+        "why": "the proof divides by a symbolic denominator (ds) \u2014 the zero case is a real obligation unless a hypothesis excludes it",
+        "reason": "The nonzero-circulation claim assumes \u03ba\u22600 and the Bernoulli-variation claim assumes \u03a9\u2080\u22600; the excluded zero-parameter cases are not asserted.",
+        "file": "research/fluid-dynamics-all-47-2026-10-23-proof-contracts.json"
+      },
+      "classification": "false-positive detector",
+      "decision": "uphold",
+      "old_row": {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "The nonzero-circulation claim assumes \u03ba\u22600 and the Bernoulli-variation claim assumes \u03a9\u2080\u22600; the excluded zero-parameter cases are not asserted."
+      },
+      "reason": "The detector reads the TeX derivative d/ds in Proof 3.1 as a fraction with symbolic denominator ds. It is differentiation along the expressly given C1 curve gamma:J->R3 satisfying gamma_prime=u_s(gamma), not division by a model parameter ds. Proof 3.1 expands the derivative of x(s)^2+y(s)^2 as 2x(-Omega_0 y)+2y(Omega_0 x)=0 at every parameter value where the derivative is taken, including s=0 whenever it is in the curve domain. No ds!=0 hypothesis exists or is needed. The actual algebraic denominators in the vortex argument are powers of r with r>0, and rho_0>0; the nonzero-circulation and distinct-radius assertions retain kappa!=0 and Omega_0!=0. Thus no genuine zero-denominator case was omitted."
+    },
+    {
+      "id": "ex-fd-x05-formal-verification",
+      "batch": 6,
+      "case": "zero",
+      "detector_candidate": {
+        "id": "ex-fd-x05-formal-verification",
+        "case": "zero",
+        "why": "the proof divides by a symbolic denominator (ds) \u2014 the zero case is a real obligation unless a hypothesis excludes it",
+        "reason": "The worked vortex uses \u03ba=1 and solid rotation uses \u03a9\u2080=1; zero strengths are not part of this fixed example.",
+        "file": "research/fluid-dynamics-all-47-2026-10-23-proof-contracts.json"
+      },
+      "classification": "false-positive detector",
+      "decision": "uphold",
+      "old_row": {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "The worked vortex uses \u03ba=1 and solid rotation uses \u03a9\u2080=1; zero strengths are not part of this fixed example."
+      },
+      "reason": "The Example fixes kappa=1, Omega_0=1, rho_0=2 and vortex r>0. Verification 1.1 divides only by positive density and powers of that nonzero vortex radius. Verification 2.1 differentiates x(s)^2+y(s)^2 along gamma_prime=(-y,x,0), obtaining 2x(-y)+2yx=0. The token ds in d/ds denotes the curve derivative and is not a scalar input that can be set to zero. The solid-rotation axis is regular and its derivative calculation also holds there. Preserve the fixed-strength zero disposition; inventing a nonzero ds restriction would change the meaning of differentiation."
+    },
+    {
+      "id": "thm-fd-x10",
+      "batch": 7,
+      "case": "empty",
+      "detector_candidate": {
+        "id": "thm-fd-x10",
+        "case": "empty",
+        "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+        "reason": "The channel has positive lengths and height by hypothesis, so the empty-cell case is excluded.",
+        "file": "research/fluid-dynamics-all-47-2026-10-23-proof-contracts.json"
+      },
+      "classification": "false-positive detector",
+      "decision": "uphold",
+      "old_row": {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "The channel has positive lengths and height by hypothesis, so the empty-cell case is excluded."
+      },
+      "reason": "The detector sees the Statement advection sum over j=1,2,3, not an arbitrary family with a potentially empty index set. Statement fixes L_x,L_z,h>0 and T>0 and defines Q=T_(L_x) times (0,h) times T_(L_z), where T_L=R/(L Z); every factor is nonempty and each periodic fundamental cell has positive measure. Proof 2.1 integrates over that actual cell and Proof 3.1 applies its positive-height Poincare inequality. The empty-cell exclusion in the current row is exactly the present hypothesis, so no empty-case proof or claim restriction is required."
+    },
+    {
+      "id": "pthm-fd-newtonian-kinetic-decay",
+      "batch": 11,
+      "case": "empty",
+      "detector_candidate": {
+        "id": "pthm-fd-newtonian-kinetic-decay",
+        "case": "empty",
+        "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+        "reason": "The Statement requires a nonempty material body or positive-period cell.",
+        "file": "research/fluid-dynamics-all-47-2026-10-23-proof-contracts.json"
+      },
+      "classification": "false-positive detector; metadata currency repair only",
+      "decision": "repair",
+      "old_row": {
+        "case": "empty",
+        "status": "not_applicable",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Suppose a smooth solution of the constant-density incompressible Newtonian model has $\\rho=\\rho_0>0$, $\\operatorname{div}u=0$, constant $\\mu\\ge0$, zero body force, and stress $\\sigma=-pI_3+2\\mu D$. Assume the complete $\\mathrm{AC}_\\omega$, smooth-motion, positive-density, contact/stress-regularity, continuity, and separate linear/angular-momentum and total-energy balance hypotheses of the mathematical local-balance equivalence result, as specified in Facts & Assumptions. The spatial region is either a nonempty bounded $C^1$ domain fixed in time with no-slip condition $u=0$ on its boundary, or a periodic domain with the fields and their derivatives periodic on opposite faces of a rectangular period cell with positive side lengths. For the periodic case, interpret the local balance assumptions on the periodic lift to $\\mathbb R^3$.\n\nFor $D=(\\nabla u+\\nabla u^T)/2$, let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+        },
+        "reason": "The Statement requires a nonempty material body or positive-period cell."
+      },
+      "reason": "The detector sees the fixed finite Frobenius sums i,j=1,2,3 in the Statement. Their index sets cannot become empty. The current spatial domain is explicitly either a nonempty fixed bounded C1 domain or a rectangular period cell with L_1,L_2,L_3>0, and the time interval is nonempty. Proof 1.1 uses the pointwise model on that same spatial domain, Proof 2.1 removes its closed boundary flux, and Proof 3.1 integrates the dissipation identity. The empty axis remains not applicable, but the old row incorrectly refers to a material body and quotes the superseded material-motion Statement. Repair that metadata wording and excerpt to the actual fixed-domain/periodic formulation; no source or mathematical case repair is needed.",
+      "proposed_boundary": {
+        "case": "empty",
+        "status": "not_applicable",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $I\\subset\\mathbb R$ be a nonempty open time interval containing $0$. Use SI units: time is measured in seconds, spatial coordinates and lengths in metres, $\\rho_0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu$ in $\\mathrm{Pa\\,s}$, $u$ in $\\mathrm{m\\,s^{-1}}$, and $p$ in $\\mathrm{Pa}$. A bounded $C^1$ domain means a bounded open set locally on one side of a continuously differentiable boundary graph. The fixed spatial region $\\Omega$ is either a nonempty bounded $C^1$ domain in $\\mathbb R^3$ or one rectangular period cell $[0,L_1]\\times[0,L_2]\\times[0,L_3]$ with side lengths $L_1,L_2,L_3>0$ metres. In the bounded-domain case, let $\\mathcal O\\subset I\\times\\mathbb R^3$ be open and contain $I\\times\\overline\\Omega$, and suppose $u\\in C^2(\\mathcal O,\\mathbb R^3)$ and $p\\in C^1(\\mathcal O,\\mathbb R)$. In the periodic case, take $u$ and $p$ on $I\\times\\mathbb R^3$, periodic with their derivatives on opposite faces of the stated cell. In either case suppose the smooth fields satisfy on the stated spacetime domain the pointwise constant-density incompressible Newtonian model equations\n$$ \\rho=\\rho_0>0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $\\mu\\ge0$ is constant, the body force is zero, $D=(\\nabla u+\\nabla u^T)/2$, $D_tu=\\partial_tu+(u\\cdot\\nabla)u$, and $\\operatorname{div}\\sigma$ is the rowwise divergence. In the bounded-domain case impose the no-slip condition $u=0$ on $I\\times\\partial\\Omega$; in the periodic case the model equations hold on the periodic lift to $\\mathbb R^3$.\n\nFor matrices $A,B\\in\\mathbb R^{3\\times3}$ define the Frobenius contraction $A:B:=\\sum_{i,j=1}^3A_{ij}B_{ij}$ and the squared norm $|D|^2:=D:D=\\sum_{i,j=1}^3D_{ij}^2$. Let $E_k(t)=\\frac{\\rho_0}{2}\\int_\\Omega |u(t,x)|^2\\,dx$, using one period cell in the periodic case. For every $t_1<t_2$ in $I$,\n$$ E_k(t_2)+2\\mu\\int_{t_1}^{t_2}\\int_\\Omega |D(t,x)|^2\\,dx\\,dt=E_k(t_1). $$\nThus $E_k$ is nonincreasing; strict decay is not claimed when $D$ vanishes. The theorem is conditional on an actual smooth solution and supplies no existence or long-time regularity result."
+        },
+        "reason": "The Statement requires either a nonempty fixed bounded C1 spatial domain or a rectangular periodic cell with all three side lengths positive; its Frobenius component sums have the fixed nonempty indices i,j=1,2,3. Proof steps 1.1, 2.1 and 3.1 work on precisely that same domain, so no empty spatial-domain case is asserted."
+      }
+    }
+  ],
+  "detector_reading": {
+    "file": "tools/physics-support/boundary-audit.mjs",
+    "exhibitsDivision": "Reads every simple TeX frac denominator containing a letter; hence frac{d}{ds} matches despite denoting a differential operator, not algebraic division by a scalar parameter.",
+    "exhibitsFamily": "Matches a sum_{ token in the public claim without recognizing that its displayed coordinate index range is the fixed nonempty set {1,2,3}."
+  },
+  "summary": {
+    "cases": 4,
+    "genuine_case_omissions": 0,
+    "uphold": 3,
+    "metadata_currency_repairs": 1,
+    "source_repairs": 0
+  },
+  "limits": "Read the exact four current public claims, Facts and complete relevant arguments, the current per-batch boundary rows, actual diagnostic candidates and detector implementations. No external full texts, source/contract/metadata/binding edits or gate runs. This JSON is the only output written; root owns any exact reviewed escape or metadata repair binding."
+}

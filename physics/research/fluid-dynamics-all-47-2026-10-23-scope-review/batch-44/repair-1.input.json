@@ -1,0 +1,78 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-44-1",
+  "inventory": {
+    "pages": [
+      "fd-l01",
+      "fd-l01-examples"
+    ],
+    "items": [
+      "def-fd-solenoidal-surrogate-residual",
+      "thm-fd-surrogate-residual-error",
+      "prop-fd-surrogate-law-shift-observable",
+      "ex-fd-unseen-input-shift"
+    ],
+    "pairs": [
+      "fd-l01"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-fd-solenoidal-surrogate-residual.md",
+    "items/thm-fd-surrogate-residual-error.md",
+    "items/prop-fd-surrogate-law-shift-observable.md",
+    "items/ex-fd-unseen-input-shift.md",
+    "library/fluid-dynamics-mathematics/fd-l01.md",
+    "library/fluid-dynamics-mathematics/fd-l01-examples.md"
+  ],
+  "write_batches": [
+    "44"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-fd-unseen-input-shift",
+      "path": [
+        "prop-fd-surrogate-law-shift-observable",
+        "ex-fd-unseen-input-shift"
+      ],
+      "paths": [
+        [
+          "prop-fd-surrogate-law-shift-observable",
+          "ex-fd-unseen-input-shift"
+        ]
+      ]
+    },
+    {
+      "id": "thm-fd-surrogate-residual-error",
+      "path": [
+        "def-fd-solenoidal-surrogate-residual",
+        "thm-fd-surrogate-residual-error"
+      ],
+      "paths": [
+        [
+          "def-fd-solenoidal-surrogate-residual",
+          "thm-fd-surrogate-residual-error"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-fd-solenoidal-surrogate-residual": [
+      null,
+      "## Definition\n\nAssume Countable Choice. Let $d\\in\\{2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized volume $d\\mu=(2\\pi)^{-d}dx$. For a vector field $w$, use the componentwise Fourier coefficients $\\widehat w(k)=\\int_{Q_d}w(x)e^{-ik\\cdot x}\\,d\\mu(x)$ and norm $\\|w\\|_2=(\\int_{Q_d}|w(x)|^2\\,d\\mu(x))^{1/2}$. Define $P_0=I$ and, for $k\\ne0$, $P_k=I-kk^{\\mathsf T}/|k|^2$, with $\\widehat{Pw}(k)=P_k\\widehat w(k)$; $P$ is the Leray projector. For a vector field $w$, $\\operatorname{div}w=\\sum_{j=1}^d\\partial_jw_j$; for a tensor field $F=(F_{ij})$, set $(\\operatorname{div}F)_i=\\sum_{j=1}^d\\partial_jF_{ij}$, and set $(v\\otimes v)_{ij}=v_i v_j$. Let $\\Delta=\\sum_{j=1}^d\\partial_j^2$. A field is called solenoidal when it is divergence-free. Given a constant $\\nu\\ge0$, smooth $f:[0,T]\\times Q_d\\to\\mathbb R^d$, a smooth solenoidal field $v:[0,T]\\times Q_d\\to\\mathbb R^d$, and a smooth solenoidal reference initial field $u_0:Q_d\\to\\mathbb R^d$, define the continuous residual and initial defect by\n\n$$r_v:=\\partial_t v+P\\operatorname{div}(v\\otimes v)-\\nu\\Delta v-Pf,\\qquad d_0:=\\|v(0,\\cdot)-u_0\\|_2.$$\n\nThe residual is a continuous function of time with values in $L^2(Q_d;\\mathbb R^d)$, so $\\int_0^T\\|r_v(t,\\cdot)\\|_2\\,dt$ is finite. This is a continuous-domain residual: finitely many collocation values do not by themselves bound this $L^1_tL^2_x$ quantity. All quantities here are mathematical; no physical units are assigned to $\\nu$."
+    ],
+    "thm-fd-surrogate-residual-error": [
+      null,
+      "## Statement\n\nAssume Countable Choice. Let $d\\in\\{2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized measure $d\\mu=(2\\pi)^{-d}dx$. Use $\\|w\\|_2=(\\int_{Q_d}|w|^2d\\mu)^{1/2}$ and let $P$ act on vector Fourier coefficients by $\\widehat{Pw}(0)=\\widehat w(0)$ and $\\widehat{Pw}(k)=(I-kk^{\\mathsf T}/|k|^2)\\widehat w(k)$ for $k\\ne0$. Define $\\operatorname{div}w=\\sum_j\\partial_jw_j$, $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, $(w\\otimes z)_{ij}=w_i z_j$, and $\\Delta=\\sum_j\\partial_j^2$. Let $\\nu\\ge0$, $f\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^d)$, $u_0\\in C^\\infty(Q_d;\\mathbb R^d)$, and $u,v\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^d)$ all be divergence-free. Suppose $u(0)=u_0$ and\n\n$$\\partial_tu+P\\operatorname{div}(u\\otimes u)-\\nu\\Delta u=Pf,$$\n\nand define $r_v=\\partial_tv+P\\operatorname{div}(v\\otimes v)-\\nu\\Delta v-Pf$. Put $A(t)=\\int_0^t\\sup_{x\\in Q_d}\\|\\nabla u(s,x)\\|_{\\mathrm{op}}\\,ds$, where $\\|\\cdot\\|_{\\mathrm{op}}$ is the Euclidean matrix operator norm. Then for every $t\\in[0,T]$,\n\n$$\\|v(t)-u(t)\\|_2\\le e^{A(t)}\\left(\\|v(0)-u_0\\|_2+\\int_0^t e^{-A(s)}\\|r_v(s)\\|_2\\,ds\\right).$$\n\nThis is a conditional estimate for an already given smooth exact solution; it proves no existence theorem and gives no error guarantee from finitely many collocation residual values alone. All quantities are mathematical, with no physical units assigned to $\\nu$."
+    ],
+    "prop-fd-surrogate-law-shift-observable": [
+      null,
+      "## Statement\n\nLet $(\\mathcal Z,\\Sigma)$ be a measurable space and let $\\mu$ be a probability measure on it, meaning a countably additive measure on $\\Sigma$ with $\\mu(\\mathcal Z)=1$. Let $X$ be a real normed vector space and give it the norm-Borel $\\sigma$-algebra generated by its norm-open sets. Let $S,\\widetilde S:\\mathcal Z\\to X$ be measurable maps. Let $J:X\\to\\mathbb R$ be $L$-Lipschitz, meaning $|J(x)-J(y)|\\le L\\|x-y\\|_X$ for all $x,y\\in X$, with $L\\ge0$. Suppose\n\n$$\\int_{\\mathcal Z}\\bigl(\\|S\\|_X^2+\\|\\widetilde S\\|_X^2\\bigr)\\,d\\mu<\\infty,\\qquad \\int_{\\mathcal Z}\\|S-\\widetilde S\\|_X^2\\,d\\mu\\le\\varepsilon^2$$\n\nfor some finite $\\varepsilon\\ge0$. For a measurable scalar function $h$, write $\\|h\\|_{L^2(\\mu)}=(\\int_{\\mathcal Z}|h|^2\\,d\\mu)^{1/2}$. Let $g:\\mathcal Z\\to[0,\\infty)$ be measurable with $\\int g\\,d\\mu=1$ and $g\\le C$ $\\mu$-almost everywhere for a finite $C\\ge1$, and define the target probability law by $\\nu(E)=\\int_Eg\\,d\\mu$ for $E\\in\\Sigma$, with target expectation $\\mathbb E_\\nu[H]=\\int Hg\\,d\\mu$ whenever the integral exists. Then the measurable scalar observables $J\\circ S$ and $J\\circ\\widetilde S$ are $\\nu$-integrable and\n\n$$\\left|\\mathbb E_\\nu[J(S)]-\\mathbb E_\\nu[J(\\widetilde S)]\\right|\\le L\\sqrt C\\,\\varepsilon.$$\n\nThe estimate assumes a population mean-square error under $\\mu$ and a bounded target density $g$; a finite test sample by itself establishes neither assumption. The state space may represent fluid fields when that measurable state model is supplied. For a physical application, both observables must use the same declared scalar unit; this mathematical proposition assigns no physical units."
+    ],
+    "ex-fd-unseen-input-shift": [
+      null
+    ]
+  }
+}

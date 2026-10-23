@@ -1,0 +1,285 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "def-fd-incompressible-newtonian-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "d61c488c4b2463ce2d27b45ff2802828c066b2988411c8ba5358aaa2bb6d2b25",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal explicitness defect: the Definition did not identify its coordinate fields with a defined inertial chart. Both declared physical suppliers already require a Cartesian inertial frame, so the premise is inherited and the alleged fatal omission is overstated. The repair spells out the inherited affine-isometry/constant-velocity chart, fixes all derivatives in it, and records that scope; all equations, domains, regularity and parameter ranges are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-fd-incompressible-newtonian-model",
+      "disposition": "repaired",
+      "post_sha256": "e726e454e19eaefe350b463d4dc1e5ed778388b2cbe26db0e10765b6dff71a65",
+      "review_context_sha256": "34de9aea483a9e4c3ef735315bc2976dea74375d8eb2b2cbd7b683fd003e5c61",
+      "reason": "Reviewed the current inertial-chart definition and both adopted physical prerequisites. Expanding the rowwise stress divergence gives -grad(p)+mu Delta(u)+mu grad(div(u)), with the last term zero by incompressibility and C2 spatial mixed-partial equality. Positive rho0 defines nu=mu/rho0, including mu=0; empty open domains remain vacuous. The chart formula is valid on arbitrary open time intervals without requiring 0 in I. Units and the no-existence/no-empirical-validity qualifications are retained. This is my review of my repair, not an independent approval.",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-fd-forced-incompressible-newtonian-model",
+    "post-fd-eddy-viscosity-closure",
+    "pthm-fd-eddy-closure-resolved-dissipation",
+    "pthm-fd-local-periodic-incompressible-model-evolution",
+    "pthm-fd-two-dimensional-viscous-model-globality",
+    "pthm-fd-newtonian-kinetic-decay",
+    "pthm-fd-no-slip-cfd-observations",
+    "pthm-fd-px01-prediction",
+    "pthm-fd-px04-prediction",
+    "pthm-fd-px08-prediction",
+    "pthm-fd-wall-mechanical-power-balance",
+    "pthm-fd-local-momentum-balance-from-continuum"
+  ],
+  "downstream_uses": {
+    "pthm-fd-local-momentum-balance-from-continuum": "The textual model dictionary is explicitly context only, not a proof premise; it uses constant density, multiplier stress and rowwise divergence while explicitly declining the unforced momentum equation. Its separate continuum balance retains the same inertial convention."
+  },
+  "gate_resolutions": [],
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "id": "def-fd-incompressible-newtonian-model",
+        "severity": "nonfatal",
+        "status": "fixed",
+        "finding": "Inherited inertial frame omitted from the local Definition wording.",
+        "resolution": "Confirmed nonfatal explicitness defect: the Definition did not identify its coordinate fields with a defined inertial chart. Both declared physical suppliers already require a Cartesian inertial frame, so the premise is inherited and the alleged fatal omission is overstated. The repair spells out the inherited affine-isometry/constant-velocity chart, fixes all derivatives in it, and records that scope; all equations, domains, regularity and parameter ranges are preserved."
+      },
+      {
+        "id": "def-fd-incompressible-newtonian-model",
+        "severity": "nonfatal",
+        "status": "fixed",
+        "finding": "Owning contract excerpt cited energy/entropy rather than mechanical momentum and dismissed the explicitly asserted equivalence as lacking a biconditional.",
+        "resolution": "Replaced only the assigned subject supplier excerpt with exact inertial-chart linear/angular momentum balances, refreshed exact boundary excerpts, and verified both directions of the stress-divergence identity including zero viscosity."
+      },
+      {
+        "id": "pthm-fd-newtonian-kinetic-decay",
+        "status": "proposed_owner_followup",
+        "finding": "Preexisting Step-4 concern reproduced at current Proof 2.1: bounded-domain divergence integration and differentiation under the integral have no declared supplier; the model definition alone supplies neither.",
+        "resolution": "Refer to ordinary frontier owner for independent disposition and sufficient local proof or exact integration suppliers with inherited hypotheses. Not caused by the present frame-interface clarification."
+      }
+    ],
+    "published_consumer_ledger": []
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-11-step5-context.json": "03d42186e503f5a935098f6766084c2d7ead6bed7319d4d8b800d5dde324e6f2",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/science-report.md": "c1c36c15ba16f88f49f3bd70da1002624ca3671bc7b88ea7f7b003695d77eafd",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/proposals/def-fd-incompressible-newtonian-model.patch": "13841357a2e2221e18af4ba82a064923bab962773396552ec2ee948ffc34f261",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/before/def-fd-incompressible-newtonian-model.md": "0649909474043a26efd2dcf3f7864d1bcb885bdf7de44bae36561e917904ac54"
+  },
+  "repair_notes": {
+    "checkpoint": "Completed assigned item repair, focused current review, owning metadata reconciliation and focused validators. No unresolved mathematical obligation in this assigned scope; engine retains native impact/gate/certification duties.",
+    "claim_preserved": "Constant positive density; constant mu>=0; C2 velocity and C1 multiplier pressure on arbitrary open spacetime Omega; div u=0, sigma=-pI3+2muD and rho0 D_tu=div sigma; no existence or empirical applicability.",
+    "source_reading": "Newly consulted Tong Part II PDF: Chapter 3 opening Galilean-boost motivation, printed pp.55-56, and complete section 3.1.1, printed pp.60-61. No fresh retrieval of the second textbook reference is claimed.",
+    "consumer_reviews": [
+      {
+        "id": "def-fd-forced-incompressible-newtonian-model",
+        "path": "items/def-fd-forced-incompressible-newtonian-model.md",
+        "location": "Definition, forced branch and Definition references",
+        "affected_use": "Uses the unforced density, multiplier-pressure and stress conventions, adding prescribed body acceleration through the separately adopted material balance. The inherited inertial chart still applies; no accelerating observer is introduced.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "post-fd-eddy-viscosity-closure",
+        "path": "items/post-fd-eddy-viscosity-closure.md",
+        "location": "Postulate base-model paragraph; Facts F1",
+        "affected_use": "Uses constant density and viscosity, periodic multiplier pressure, Newtonian stress and kinematic viscosity. The periodic lift is interpreted in the inherited inertial chart; the new explicit chart changes none of these formulas.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-eddy-closure-resolved-dissipation",
+        "path": "items/pthm-fd-eddy-closure-resolved-dissipation.md",
+        "location": "Statement base equation; Facts F1; Proof 3.1",
+        "affected_use": "Uses the unforced Newtonian equation and the dynamic-to-specific pressure conversion as fixed-chart model inputs. The symmetric/skew contraction and modeled stress-transfer calculation remain unchanged by the explicit inherited inertial chart.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-local-periodic-incompressible-model-evolution",
+        "path": "items/pthm-fd-local-periodic-incompressible-model-evolution.md",
+        "location": "Facts A1 and A3; Proof 1.1-2.1",
+        "affected_use": "A1 explicitly assumes inertial Cartesian balances; A3 uses the three-dimensional constant-density Newtonian stress and momentum equation. The invariant lower-dimensional lifts and positive unit scaling use that fixed chart.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-two-dimensional-viscous-model-globality",
+        "path": "items/pthm-fd-two-dimensional-viscous-model-globality.md",
+        "location": "Facts A1 and A3; Proof 1.1-2.1",
+        "affected_use": "A1 already specifies inertial Cartesian momentum balance; A3 supplies the three-dimensional stress equation. The planar invariant lift and positive unit scaling stay in the same chart, so no extra inertial term is required.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-newtonian-kinetic-decay",
+        "path": "items/pthm-fd-newtonian-kinetic-decay.md",
+        "location": "Statement pointwise model equations; Facts A1; Proof 1.1",
+        "affected_use": "Assumes the exact unforced equations on a fixed wall domain or periodic lift and uses the stress contraction in that coordinate system. Making the inherited chart explicit preserves the conditional energy identity; no observer transformation is performed.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-no-slip-cfd-observations",
+        "path": "items/pthm-fd-no-slip-cfd-observations.md",
+        "location": "Statement physical branch and SI scaling; Statement references",
+        "affected_use": "Uses unforced model conventions and the separately adopted forced branch and Sobolev weak extension. The physical-to-dimensionless map is a constant unit scaling in the inherited inertial chart, with no claim of accelerating-frame covariance.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-px01-prediction",
+        "path": "items/pthm-fd-px01-prediction.md",
+        "location": "Statement opening inertial-chart definition; Facts F1; Proof 1.1",
+        "affected_use": "The Statement explicitly fixes the same affine-isometry/constant-velocity inertial chart and distinguishes coordinate scaling from observer changes. F1 and step 1.1 use the unchanged stress-divergence identity.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-px04-prediction",
+        "path": "items/pthm-fd-px04-prediction.md",
+        "location": "Statement Cartesian channel/pipe ansatz; Facts F1; Proof 1.1",
+        "affected_use": "The fixed Cartesian channel/pipe profiles use the unchanged constant-viscosity equation. Constant tangential wall velocities are prescribed boundary data in that chart, with no accelerating observer or altered momentum law.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-px08-prediction",
+        "path": "items/pthm-fd-px08-prediction.md",
+        "location": "Statement half-space and periodic-lift branches; Facts F1; Proof 1.2",
+        "affected_use": "The positive-time shear layer and smooth periodic sine-shear lift solve the unchanged unforced equation in fixed Cartesian coordinates. An impulsive wall datum does not change observer coordinates; the excluded initial-wall corner stays excluded.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-wall-mechanical-power-balance",
+        "path": "items/pthm-fd-wall-mechanical-power-balance.md",
+        "location": "Facts F1; Proof 1.1-3.1",
+        "affected_use": "F1 uses only the constant-density, stress and rowwise divergence conventions and explicitly excludes the unforced momentum equation. The forced equation comes from the separate material balance in the inherited inertial chart.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "pthm-fd-local-momentum-balance-from-continuum",
+        "path": "items/pthm-fd-local-momentum-balance-from-continuum.md",
+        "location": "Authoring review notes, model dictionary paragraph",
+        "affected_use": "The textual model dictionary is explicitly context only, not a proof premise; it uses constant density, multiplier stress and rowwise divergence while explicitly declining the unforced momentum equation. Its separate continuum balance retains the same inertial convention.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None from the inherited-frame clarification.",
+        "minimality": "No consumer Statement or Definition change is necessary for this interface clarification.",
+        "route": "frontier-owner"
+      }
+    ],
+    "page_uses": [
+      {
+        "id": "fd-f03",
+        "path": "library/fluid-dynamics/fd-f03.md",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only compact-v1 page places this definition without additional prose; inventory and prerequisite page edges remain correct. The companion examples page also has no Markdown body."
+      }
+    ],
+    "checks": [
+      {
+        "name": "proof-layout",
+        "command": "node tools/physics-support/proof-layout.mjs items/def-fd-incompressible-newtonian-model.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 0 steps, 0 defects"
+      },
+      {
+        "name": "rendercheck",
+        "command": "node tools/physics-support/rendercheck.mjs items/def-fd-incompressible-newtonian-model.md",
+        "exit_code": 0,
+        "output": "OK \u2014 1 file(s): no wikilink inside math, no nested or unbalanced\ndelimiters, no multiline display block, every math span parses under the real\nKaTeX, and every frontmatter block parses under the renderer's YAML parser."
+      },
+      {
+        "name": "precheck",
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-fd-incompressible-newtonian-model.md",
+        "exit_code": 0,
+        "output": "0 checked, 0 failing \u2014 all clean"
+      },
+      {
+        "name": "proof-contract",
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-11.proof-contracts.json --strict --items def-fd-incompressible-newtonian-model",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "name": "claim-and-consumer-invariants",
+        "command": "node --input-type=module (focused assertions against preserved preimage, current item guard, Definition links, manifest mirror and exact direct textual consumers)",
+        "exit_code": 0,
+        "output": "PASS: original equation/regularity/parameter claim unchanged; current item guard matches review; Definition has no hyperlinks; manifest mirror exact; all 12 textual/direct consumers inventoried."
+      },
+      {
+        "name": "review-currency",
+        "command": "read-only reviewContextHashes comparison against the recorded review; no report hash refreshed",
+        "exit_code": 0,
+        "output": "PASS: recorded item and review context hashes remain current; no acceptance hash refreshed."
+      }
+    ],
+    "metadata_repairs": [
+      "Under the shared lock, reread both owning files and changed only this subject: exact Definition and physical_scope mirrors in batch-11.pages.json; exact current boundary excerpts in batch-11.proof-contracts.json; mechanical-momentum supplier excerpt replaces the irrelevant energy/entropy excerpt.",
+      "Both directions of the displayed stress-divergence/momentum equivalence are now checked in the boundary worksheet, including mu=0, without dividing by mu. The original template-review record is retained as historical evidence; no independent-review stamp is manufactured.",
+      "The metadata updater asserted that every other manifest field and every other contract entry remained structurally identical."
+    ],
+    "support_attribution": "Reused the outside constitutive report and unapplied frame-clarification patch as attributed scientific support. I independently read the current assigned item, both direct physical supplier formulations, the exact frame-definition supplier, and all 12 current direct consumer uses. The outside author's Powers retrieval and other subject reviews are not claimed as my work.",
+    "diagrams": "The assigned definition has no TikZ/tikzcd diagram; no diagram is needed for its coordinate, field and equation interface.",
+    "propagation": "The Definition and physical_scope changed explicitly; all 12 direct item/reference consumers are listed. Their frame-specific uses remain sound, so no consumer interface changes and no second-hop expansion are necessary. The fd-f03 placement and examples companion remain frontmatter-only compact-v1 pages. No published or outside-frontier consumer was found for this supplier event.",
+    "metadata_command": "node tools/physics-support/step5-shared-write-lock.mjs run --owner step5-v2-initial-r1-u11 -- node /tmp/fluid-dynamics-all-47-2026-10-23-u11-scoped-metadata-update.mjs",
+    "metadata_result": {
+      "exit_code": 0,
+      "acquired": true,
+      "released": true
+    },
+    "validation_limits": "The normative precheck selects this definition but has no proof-bearing body to check (0 checked); strict contract validation checked 1/1 item, rendercheck checked the actual item, and proof-layout checked 1 item with 0 steps and 0 defects. No judge, full gate, empirical validation or independent approval was performed.",
+    "out_of_scope_findings": [
+      {
+        "id": "pthm-fd-newtonian-kinetic-decay",
+        "path": "items/pthm-fd-newtonian-kinetic-decay.md",
+        "location": "Proof 2.1 and deps",
+        "affected_use": "Step 2.1 integrates the local divergence identity on a general bounded C1 domain and differentiates its volume integral, but cites only A2, step 1.1 and algebra; its sole declared dependency is the model definition.",
+        "finding": "Retain the rejection-blind digest concern for the frontier owner: the formal dependency accounting provides no integration-by-parts/divergence or differentiation-under-the-integral supplier. The standard kinetic-energy calculation is valid with suitable integration justifications; the referenced library divergence supplier carries Countable Choice, so any use must state that hypothesis or supply another complete argument.",
+        "disposition": "refer_frontier_owner",
+        "caused_by_this_interface_change": false,
+        "minimality": "No repair to this consumer is required by the inertial-chart clarification. Its preexisting proof/dependency finding requires separate native owner disposition; no out-of-scope source was edited."
+      }
+    ]
+  }
+}

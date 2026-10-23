@@ -1,0 +1,55 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "review": "first-Step2-full-battery-boundary-resolution",
+  "round": 1,
+  "scope": {
+    "item": "pthm-fd-capillary-wave-model-prediction",
+    "case": "empty",
+    "excluded": "Unrelated batch44 candidate"
+  },
+  "diagnostic": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/first-boundary-failure-full.json",
+  "candidate": {
+    "id": "pthm-fd-capillary-wave-model-prediction",
+    "case": "empty",
+    "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+    "reason": "The time set I is explicitly nonempty and open, the mode index is nonzero, and both horizontal periods and depth are positive; the nonzero-mode necessity is not asserted on an empty time set.",
+    "file": "research/fluid-dynamics-all-47-2026-10-23-proof-contracts.json"
+  },
+  "current_source": "items/pthm-fd-capillary-wave-model-prediction.md",
+  "current_source_rawsha": "aae1dc35a3c866f7e2aaab17c4729dc40a066c35cc9d783c9c8c73446da3aa10",
+  "rows": [
+    {
+      "id": "pthm-fd-capillary-wave-model-prediction",
+      "case": "empty",
+      "decision": "uphold",
+      "reason": "The sole sum syntax triggering this Statement is exp(w)=sum_{n=0}^{infinity} w^n/n!, the definition of one fixed complex exponential over N_0. Its index set is nonempty and never an arbitrary family parameter: n=0 is always present with term 1, including w=0. Facts L2 imports that fixed everywhere-convergent exponential, not a theorem for a sum over an unspecified possibly empty set. The other aggregate is a fixed two-coordinate wavevector/dot product: m lies in Z^2 minus {(0,0)}, L1,L2>0, so k>0 and no dimension or coordinate-index set can disappear. The time interval I is expressly nonempty and open, and h>0 gives a nonempty vertical interior (-h,0). Thus the necessity argument cannot become vacuous on an empty space-time domain. Current steps1.1\u20133.1 differentiate and cancel the actually nonzero exponential, steps4.1\u20135.1 solve its vertical profile on [0,h], and steps6.1\u20138.1 impose both surface equations for the supplied H!=0. Step9.1 constructs a genuine mode for either root and every H!=0; it does not aggregate modes over a variable family. Consequently there is no omitted empty-family branch: uphold the exact not_applicable row. The regex detector recognizes sum_{ without checking its fixed lower bound/index set, so this candidate is a fixed-nonempty-index false positive.",
+      "current_boundary": {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "The time set I is explicitly nonempty and open, the mode index is nonzero, and both horizontal periods and depth are positive; the nonzero-mode necessity is not asserted on an empty time set.",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "$m\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$"
+        }
+      },
+      "proposal": {
+        "action": "preserve-boundary-status-and-reason",
+        "status": "not_applicable",
+        "reason": "The time set I is explicitly nonempty and open, the mode index is nonzero, and both horizontal periods and depth are positive; the nonzero-mode necessity is not asserted on an empty time set.",
+        "reviewed_escape_basis": "The sole sum syntax triggering this Statement is exp(w)=sum_{n=0}^{infinity} w^n/n!, the definition of one fixed complex exponential over N_0. Its index set is nonempty and never an arbitrary family parameter: n=0 is always present with term 1, including w=0. Facts L2 imports that fixed everywhere-convergent exponential, not a theorem for a sum over an unspecified possibly empty set. The other aggregate is a fixed two-coordinate wavevector/dot product: m lies in Z^2 minus {(0,0)}, L1,L2>0, so k>0 and no dimension or coordinate-index set can disappear. The time interval I is expressly nonempty and open, and h>0 gives a nonempty vertical interior (-h,0). Thus the necessity argument cannot become vacuous on an empty space-time domain. Current steps1.1\u20133.1 differentiate and cancel the actually nonzero exponential, steps4.1\u20135.1 solve its vertical profile on [0,h], and steps6.1\u20138.1 impose both surface equations for the supplied H!=0. Step9.1 constructs a genuine mode for either root and every H!=0; it does not aggregate modes over a variable family. Consequently there is no omitted empty-family branch: uphold the exact not_applicable row. The regex detector recognizes sum_{ without checking its fixed lower bound/index set, so this candidate is a fixed-nonempty-index false positive."
+      }
+    }
+  ],
+  "detector_review": {
+    "file": "tools/boundary-audit.mjs",
+    "implementation": "claimOf reads the Statement; DETECTORS.empty invokes exhibitsFamily; /\\\\sum_\\{/ matches the fixed exponential power-series definition. The implementation does not analyze whether the index set is fixed/nonempty.",
+    "actual_trigger_excerpt": "Let $\\mathbb C:=\\mathbb R[X]/(X^2+1)$ be the complex field and $i:=[X]$, so $i^2=-1$. Let $\\exp:\\mathbb C\\to\\mathbb C$ be the series-defined complex exponential, $\\exp w:=\\sum_{n=0}^{\\infty}w^n/n!$. For $m=(m_1,m_2)\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$ define the wavevector $\\mathbf k:=2\\pi(m_1/L_1,m_2/L_2)\\in\\mathbb R^2$ in inverse metres and its magnitude $k:=|\\mathbf k|>0$. The phase terms $\\mathbf k\\cdot\\widetilde x$ and $\\omega t$ are dimensionless. For $\\omega\\in\\mathbb C$ in inverse seconds, define the mode factor on the quotient torus by",
+    "matching_sum_token_count": 1,
+    "interpretation": "Syntactic candidate requiring human review, not a mathematical contradiction."
+  },
+  "reading_limits": [
+    "Read the complete actual current Statement, Facts L1\u2013L8 and Proof1.1\u20139.1, the exact current batch47 empty boundary row, the actual diagnostic candidate, and the claimOf/exhibitsFamily/DETECTORS.empty/reviewed-escape detector code.",
+    "This is a focused empty-axis decision. No source, contract, metadata, binding, acceptance stamp or gate was changed/run. Only this report was written.",
+    "Current source raw SHA256 was checked again before report completion; no change occurred during this review. No external source retrieval or independent review of all imported mathematical suppliers is claimed."
+  ]
+}

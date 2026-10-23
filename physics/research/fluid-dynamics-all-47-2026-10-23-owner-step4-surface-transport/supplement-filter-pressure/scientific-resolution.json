@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "reviewer": "/root/fluid_step4_surface_transport",
+  "review_cycle": 1,
+  "status": "draft outside support for native Step5; no source or decision authority",
+  "edits": [
+    {
+      "id": "lem-fd-periodic-filter-normalization-and-commutation",
+      "before_raw_sha256": "f38c899da5c0996371dd407f3d7bd1f41f2ace74f0435d71777e10d349cbbed2",
+      "proposed_raw_sha256": "0f814cbc9c25d9ed49cd88b6ee7102c6b2b3c6b671769291f2f0d895b4699e11",
+      "diff": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-surface-transport/supplement-filter-pressure/lem-fd-periodic-filter-normalization-and-commutation.diff",
+      "interface_changed": false,
+      "frontmatter_unchanged": true
+    },
+    {
+      "id": "post-fd-eddy-viscosity-closure",
+      "before_raw_sha256": "5b931ba1a36019b8f1dfd6100b587ee9e81c9f2a535fc1c01be93f047daef9b2",
+      "proposed_raw_sha256": "e35ed9cf0b18df9ffaafe0eea315aa33f3a601ec1a3fedb63b2715636a2703ac",
+      "diff": "research/fluid-dynamics-all-47-2026-10-23-owner-step4-surface-transport/supplement-filter-pressure/post-fd-eddy-viscosity-closure.diff",
+      "interface_changed": true,
+      "frontmatter_unchanged": true
+    }
+  ],
+  "filter_finding": {
+    "decision": "confirmed nonfatal incomplete dependency restatement",
+    "supplier": "cor-change-of-variables-for-compactly-supported-functions",
+    "proof_check": "The actual dilation g(s)=ell s is global on open R^d with image R^d and invertible derivative. All kernel and periodic-field products are compactly supported Riemann integrands by existing proof1.2. F2 can therefore be applied with every exact supplier hypothesis. The centered-cell replacement for2.1/3.1 eliminates translated-cell boundary bookkeeping: because ell<L/2, all nonzero lattice translates vanish on [-L/2,L/2]^d and the surviving support lies strictly inside the cell. No extra prerequisite or narrowed field/parameter scope is needed.",
+    "public_statement_unchanged": true,
+    "public_definition_justifier": "def-fd-positive-convolution-fluid-filter lists this lemma in justified_by; its Definition and required normalization remain unchanged.",
+    "consumer_use_reviews": [
+      {
+        "id": "ex-fd-eddy-shear-production",
+        "raw_sha256": "6cf7056c6ce7f36a7aa6ad565e3689647088ff1f0157f316172c4f19e3fed591",
+        "decision": "unaffected by Facts/proof-only repair",
+        "reason": "F2 and Verification1.1 use only spatial commutation and normalization, unchanged by the proof repair."
+      },
+      {
+        "id": "pthm-fd-eddy-closure-resolved-dissipation",
+        "raw_sha256": "d2bff38b2a755ca2d25566735bbf4d58c6cf1cb74cbafe969b899999fde1b980",
+        "decision": "unaffected by Facts/proof-only repair",
+        "reason": "F3 and Proof1.2 use only spatial derivative commutation to preserve zero divergence. The full lemma Statement is unchanged."
+      },
+      {
+        "id": "thm-fd-filtered-covariance-energy",
+        "raw_sha256": "0c1f6ff81a711ad1b440cc5ac24817819bb900f6c75a4537a840030ab14cc271",
+        "decision": "unaffected by Facts/proof-only repair",
+        "reason": "F2 and Proof1.1–3.1 use unit mass, Euclidean representation and derivative commutation. The centered-cell proof establishes the same full Statement, so exact covariance, filtered pressure and energy calculations retain their supplier."
+      },
+      {
+        "id": "thm-fd-holder-energy-transfer-bound",
+        "raw_sha256": "6c386851118339fa1a56b687a9e423349186d57960941ba32892ab7d47a2bacc",
+        "decision": "unaffected by Facts/proof-only repair",
+        "reason": "F2 and Proof1.1–1.3/3.1 use the same Euclidean representation, unit mass, compact kernel moments and fixed-time spatial commutation; its constant-time-extension explanation remains valid. No Statement change or extra time regularity is introduced."
+      },
+      {
+        "id": "ex-fd-filtering-constant-field",
+        "raw_sha256": "9248d7e449604b20eae9db2325bfd732a4e517117550ccbc17b2393b657907b9",
+        "decision": "unaffected by Facts/proof-only repair",
+        "reason": "The example uses the filter definition and Holder theorem indirectly; unit-mass filtering still preserves constants and zero covariance. No affected pressure assumption."
+      }
+    ]
+  },
+  "pressure_finding": {
+    "decision": "confirmed public Postulate pressure typing/notation defect",
+    "problem": "p_dyn is defined as the base dynamic pressure in the fine-scale Cauchy stress. Its unfiltered ratio cannot generally serve as the filtered momentum pressure. Imposing filter-invariant pressure would silently narrow the adopted smooth periodic scope and is not proposed.",
+    "repair": "Define pi_ell=overline(p_dyn)_ell/rho0 by its explicit volume-measure convolution and use grad(pi_ell) in the resolved equation. Keep the entire modeled stress, including2kI3/3, on the right; no pressure absorption or extra2k/3 term.",
+    "regularity_check": "The prescribed p_dyn is C1 on torus×I. On every compact time interval the kernel and p_dyn and each first derivative are continuous on the compact integration cell/product. The already read compact-rectangle differentiation and Fubini interfaces pass each first derivative through the integral, so the defined pi_ell is C1. This uses the exact explicit convolution and needs no false assertion that p_dyn has the spatial C-infinity regularity of velocity.",
+    "scope_preserved": "Constant density, smooth periodic3D branch, mu>=0, k>=0, nu_t>=0, model inputs, units, Countable Choice, no empirical validation/universal applicability/no-exact-covariance-equality/no-exact-backscatter-sign clauses are preserved.",
+    "complete_consumer_layers": [
+      [
+        "ex-fd-eddy-shear-production",
+        "pthm-fd-eddy-closure-resolved-dissipation"
+      ]
+    ],
+    "same_reviewer_all_public_consumers": [
+      {
+        "id": "ex-fd-eddy-shear-production",
+        "path": "items/ex-fd-eddy-shear-production.md",
+        "raw_sha256": "6cf7056c6ce7f36a7aa6ad565e3689647088ff1f0157f316172c4f19e3fed591",
+        "decision": "unaffected after the precise public Postulate correction",
+        "reviewer": "/root/fluid_step4_surface_transport",
+        "reason": "Full Example, Facts and Verification1.1–2.1 use only the modeled stress and transfer formulas, prescribed nonnegative fields, fixed filter and zero trace of the displayed shear gradient. Pressure and the resolved momentum equation are not used. The pi_ell correction preserves the public model tensor, units, contraction convention, scope and exact-versus-modeled distinction. No source repair is needed."
+      },
+      {
+        "id": "pthm-fd-eddy-closure-resolved-dissipation",
+        "path": "items/pthm-fd-eddy-closure-resolved-dissipation.md",
+        "raw_sha256": "d2bff38b2a755ca2d25566735bbf4d58c6cf1cb74cbafe969b899999fde1b980",
+        "decision": "unaffected after the precise public Postulate correction",
+        "reviewer": "/root/fluid_step4_surface_transport",
+        "reason": "Full Statement, A1/F1–F4 and Proof1.1–3.1 were checked. The consumer intentionally defines its own pi=p_dyn/rho0 as the unfiltered specific pressure in its explicitly assumed fine-scale Newtonian equation. That definition must remain unfiltered. Its pointwise contraction proof uses no pressure. The final conditional energy-slot argument uses the exact covariance theorem, whose own Statement and Proof1.2/3.1 correctly filter the fine-scale pressure. With the postulate corrected to pi_ell, replacement of only the stress slot is now consistent. No consumer source edit or new regularity/empirical premise is required."
+      }
+    ],
+    "indirect_consumers": []
+  },
+  "source_reading": {
+    "url": "https://courses.washington.edu/mengr544/handouts/hd-les.pdf",
+    "downloaded_bytes": 2402343,
+    "sha256": "36c1aaccf552bab92330f8f97da25b17300e4496a6693b2d64d15c67fb1f64e8",
+    "pinned_coverage_sha256_16": "36c1aaccf552bab9",
+    "pin_match": true,
+    "actual_pages_independently_read": [
+      6,
+      7,
+      11,
+      12,
+      14,
+      15
+    ],
+    "page_convention": "Actual PDF file and printed page numbers agree for the relevant pages. Earlier coverage locators10–12 include the observed pressure formulas on11–12.",
+    "locators": [
+      "Section2 p6 Eq1 normalization/convolution; p7 Eq5 spatial homogeneity needed for commutation.",
+      "Section3 p11 Eqs15–17: the fine-scale pressure P is filtered to overline(P), with full exact residual stress tauR.",
+      "Section3 p12 Eqs18–20: separate trace2ksgs/3, deviatoric stress and modified filtered pressure. We do not copy its dimensionally suppressed modified-pressure formula into the Pa/specific-pressure convention.",
+      "Section4 p14 Eq30 and p15 first paragraph: deviatoric eddy stress and nonnegative modeled stress transfer; no exact-stress sign theorem."
+    ],
+    "limits": "Full PDF was retrieved and hash-matched, but independent reading was limited to the pages listed. Extraction5–15 is retained as evidence; no claim to have read every extracted page, the entire29-page PDF, Gibbs or MIT sources. Local target bodies and all listed direct supplier carriers/full LES consumer bodies were independently read. No original/imported mathematics edits."
+  },
+  "contract_proposals": [
+    {
+      "id": "lem-fd-periodic-filter-normalization-and-commutation",
+      "path": "research/fluid-dynamics-all-47-2026-10-23-batch-37.proof-contracts.json",
+      "derivation_replacements": [
+        {
+          "old": {
+            "id": "step-2-1",
+            "claim": "Integrating the periodization over a fundamental cell, local finiteness gives a finite sum of integrals. Translating each cell by $Ln$ partitions the support of $y\\mapsto\\ell^{-d}K(y/\\ell)$, so linearity and translation change of variables turn their sum into $\\int_{\\mathbb R^d}\\ell^{-d}K(y/\\ell)\\,dy$. Apply [F2] to $g(s)=\\ell s$ and $f(y)=\\ell^{-d}K(y/\\ell)$; the integral is $\\int K(s)\\,ds=1$.",
+            "step": "2.1",
+            "inputs": [
+              "F2",
+              "F5",
+              "step 1.1",
+              "step 1.2"
+            ]
+          },
+          "proposed": {
+            "id": "step-2-1",
+            "claim": "Choose the centered closed period cell $Q=[-L/2,L/2]^d$. For $r\\in Q$ and $n\\in\\mathbb Z^d\\setminus\\{0\\}$, one coordinate of $r+Ln$ has absolute value at least $L/2>\\ell$, so its kernel summand is zero. Thus on $Q$ the periodized kernel is $f(r)=\\ell^{-d}K(r/\\ell)$, whose support $\\ell\\operatorname{supp}K$ is compactly contained in $B_\\ell(0)\\subset\\operatorname{int}Q$. Its period-cell integral is therefore its integral over $\\mathbb R^d$. Step 1.2 gives compact-support Riemann integrability. Apply [F2] on the open domain $V=\\mathbb R^d$ with $g(s)=\\ell s$. This map is a global $C^1$ diffeomorphism with image $\\mathbb R^d$, $|\\det Dg|=\\ell^d$, and hence $\\operatorname{supp}f\\subseteq g(V)$; zero extension outside $V$ is vacuous. The transformed integrand is $K(s)$, giving $\\int_{\\mathbb T_L^d}G_\\ell=\\int_{\\mathbb R^d}K=1$.",
+            "step": "2.1",
+            "inputs": [
+              "F2",
+              "F5",
+              "step 1.1",
+              "step 1.2"
+            ]
+          }
+        },
+        {
+          "old": {
+            "id": "step-3-1",
+            "claim": "With an additional smooth periodic factor $q(x-r,t)$, the same finite-cell translation and periodicity give $\\int_{\\mathbb R^d}\\ell^{-d}K(y/\\ell)q(x-y,t)\\,dy$. Applying [F2] to $g(s)=\\ell s$ changes this to $\\int_{\\mathbb R^d}K(s)q(x-\\ell s,t)\\,ds$, proving the Euclidean representation.",
+            "step": "3.1",
+            "inputs": [
+              "F1",
+              "F2",
+              "F5",
+              "step 1.1",
+              "step 1.2",
+              "step 2.1"
+            ]
+          },
+          "proposed": {
+            "id": "step-3-1",
+            "claim": "With the additional smooth periodic factor $q(x-r,t)$, the centered-cell argument in step 2.1 identifies the convolution with $\\int_{\\mathbb R^d}f_{x,t}(y)\\,dy$, where $f_{x,t}(y)=\\ell^{-d}K(y/\\ell)q(x-y,t)$, componentwise. Each such integrand has support contained in the same compact set $\\ell\\operatorname{supp}K$ and is Riemann integrable by step 1.2. Apply [F2] with the same global dilation $g(s)=\\ell s$ on $V=\\mathbb R^d$; its image contains this support, its derivative is invertible, and zero extension outside $V$ is vacuous. The transformed integrand is $K(s)q(x-\\ell s,t)$, proving the stated Euclidean representation.",
+            "step": "3.1",
+            "inputs": [
+              "F1",
+              "F2",
+              "F5",
+              "step 1.1",
+              "step 1.2",
+              "step 2.1"
+            ]
+          }
+        }
+      ],
+      "citation_action": "Retain the exact corollary quote including support-in-image; the repaired Fact now matches it. Existing step IDs and input tags remain unchanged.",
+      "risk_review_action": "Native reviewer should record its actual centered-cell/global-dilation support checks; do not reuse old review as acceptance of new proof."
+    },
+    {
+      "id": "post-fd-eddy-viscosity-closure",
+      "path": "research/fluid-dynamics-all-47-2026-10-23-batch-38.proof-contracts.json",
+      "physics_review_action": "Native reviewer must freshly review formulation and the pressure/source distinction; scope and non-derivation remain the same. UW page11 Eqs15/17 carries filtered P; page12 Eq20 uses a modified filtered pressure after moving the isotropic stress term. Our full stress retains that isotropic term and uses pi_ell=filtered(p_dyn)/rho0 without absorbing2k/3.",
+      "all_public_interface_consumers_checked": [
+        {
+          "id": "ex-fd-eddy-shear-production",
+          "path": "items/ex-fd-eddy-shear-production.md",
+          "raw_sha256": "6cf7056c6ce7f36a7aa6ad565e3689647088ff1f0157f316172c4f19e3fed591",
+          "decision": "unaffected after the precise public Postulate correction",
+          "reviewer": "/root/fluid_step4_surface_transport",
+          "reason": "Full Example, Facts and Verification1.1–2.1 use only the modeled stress and transfer formulas, prescribed nonnegative fields, fixed filter and zero trace of the displayed shear gradient. Pressure and the resolved momentum equation are not used. The pi_ell correction preserves the public model tensor, units, contraction convention, scope and exact-versus-modeled distinction. No source repair is needed."
+        },
+        {
+          "id": "pthm-fd-eddy-closure-resolved-dissipation",
+          "path": "items/pthm-fd-eddy-closure-resolved-dissipation.md",
+          "raw_sha256": "d2bff38b2a755ca2d25566735bbf4d58c6cf1cb74cbafe969b899999fde1b980",
+          "decision": "unaffected after the precise public Postulate correction",
+          "reviewer": "/root/fluid_step4_surface_transport",
+          "reason": "Full Statement, A1/F1–F4 and Proof1.1–3.1 were checked. The consumer intentionally defines its own pi=p_dyn/rho0 as the unfiltered specific pressure in its explicitly assumed fine-scale Newtonian equation. That definition must remain unfiltered. Its pointwise contraction proof uses no pressure. The final conditional energy-slot argument uses the exact covariance theorem, whose own Statement and Proof1.2/3.1 correctly filter the fine-scale pressure. With the postulate corrected to pi_ell, replacement of only the stress slot is now consistent. No consumer source edit or new regularity/empirical premise is required."
+        }
+      ],
+      "historical_review_action": "Existing reports/stamps are history, not new acceptance."
+    }
+  ],
+  "inputs": {
+    "items/cor-archimedean-reciprocal.md": "01ac6a9dc9555f6605ad25c62904b2b71148f76bbcc0c704f26901860002486d",
+    "items/cor-change-of-variables-for-compactly-supported-functions.md": "effdc8c3c00455f259f1adc813fec267a43cb0638ca152af2b3552a1602198fd",
+    "items/def-countable-choice.md": "9defd3355ab0f6afc7f0ce0dc10fdefe78d9a2f39b3af244e44b3dc181cce2cc",
+    "items/def-fd-incompressible-newtonian-model.md": "0649909474043a26efd2dcf3f7864d1bcb885bdf7de44bae36561e917904ac54",
+    "items/def-fd-positive-convolution-fluid-filter.md": "368949def0005a9173597fb02f6fb1dfdecc0e8e9f590bcdd7b6cf1a802fbedd",
+    "items/def-multidimensional-darboux-sums.md": "503fd7045d541241a9aecf9b2d377430897eae0e96b2170045b2c08318d9c026",
+    "items/def-multidimensional-grid-partition.md": "dda57b81a7dc285f34c1b7483712ca9d30f6a761503dc5b3711a4163ad53c74e",
+    "items/ex-fd-eddy-shear-production.md": "6cf7056c6ce7f36a7aa6ad565e3689647088ff1f0157f316172c4f19e3fed591",
+    "items/ex-fd-filtering-constant-field.md": "9248d7e449604b20eae9db2325bfd732a4e517117550ccbc17b2393b657907b9",
+    "items/lem-fd-periodic-filter-normalization-and-commutation.md": "f38c899da5c0996371dd407f3d7bd1f41f2ace74f0435d71777e10d349cbbed2",
+    "items/lem-finite-sum-laws.md": "3467572c6702803040451ced4569b5d8a9a9cb30617ff6156cc5225cf9b93fee",
+    "items/post-fd-eddy-viscosity-closure.md": "5b931ba1a36019b8f1dfd6100b587ee9e81c9f2a535fc1c01be93f047daef9b2",
+    "items/pthm-fd-eddy-closure-resolved-dissipation.md": "d2bff38b2a755ca2d25566735bbf4d58c6cf1cb74cbafe969b899999fde1b980",
+    "items/thm-differentiation-under-the-integral-sign-on-a-compact-rectangle.md": "a96708907281c4ae95431e31a0bbd32cdcfe0281b24df104ad10563c86fe0fd8",
+    "items/thm-fd-filtered-covariance-energy.md": "0c1f6ff81a711ad1b440cc5ac24817819bb900f6c75a4537a840030ab14cc271",
+    "items/thm-fd-holder-energy-transfer-bound.md": "6c386851118339fa1a56b687a9e423349186d57960941ba32892ab7d47a2bacc",
+    "items/thm-heine-borel-rn.md": "217266234ab245ffe6a21b77d11bf70e316bfe3e860265a4db52d2087f2dfc8f",
+    "items/thm-heine-cantor-metric.md": "a95be3a60c832d68fc3cddec925651632b9a54b383d7dad26e7984b049d61772",
+    "items/thm-multidimensional-integral-properties.md": "0a8c6f1d947621cc55ad2392eb52657b8c707a41ec569a4312193d4e60a86b64",
+    "items/thm-multidimensional-riemann-criterion.md": "9d66e291b4cc1baab6c9dc391da7421014a1fb9af1bcb6b20d55c4d36a8df31b",
+    "items/thm-riemann-fubini-on-product-rectangles.md": "d317a522988c02d0913158a6e8d38234cbecda5ed5a2032a8f02e9b5e80c254d",
+    "research/fluid-dynamics-all-47-2026-10-23-batch-37.pages.json": "0fecc895518016234a29ee6b1f0b820d4b626e1e07ea87ef1fd3abac005a938f",
+    "research/fluid-dynamics-all-47-2026-10-23-batch-37.proof-contracts.json": "8f5e309866a4a289cef21eb860110dddd72b9e0eab92c8294ff6fc408f671179",
+    "research/fluid-dynamics-all-47-2026-10-23-batch-37.coverage.json": "f652abe561d38123630e7f28f8d41d32f8130bbbadd8c8a157bf5295d456c37a",
+    "research/fluid-dynamics-all-47-2026-10-23-batch-38.pages.json": "cb06a12336102bc9addcdda9f7ffdd297888fecf11680dc4f96ae590448fee02",
+    "research/fluid-dynamics-all-47-2026-10-23-batch-38.proof-contracts.json": "530cdaa813d7cb8d381ca9c38dbb6accd9b4ae8724a54f50cd064a042284e355",
+    "research/fluid-dynamics-all-47-2026-10-23-batch-38.coverage.json": "8eb6d486a8d1c69c3c8c8c333e5f290ba64b14b5d93068394941c89c19fe9cd8",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-surface-transport/supplement-filter-pressure/sources/hd-les.pdf": "36c1aaccf552bab92330f8f97da25b17300e4496a6693b2d64d15c67fb1f64e8",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-surface-transport/supplement-filter-pressure/sources/hd-les-pages-5-15.txt": "ecdd4f8c3529ebfc77305210aa62e7a1e2e37081e4a4b8aeb27746a041779711"
+  },
+  "native_adoption_required": true,
+  "gates_stamps_state_writes_performed": false,
+  "frozen_initial_artifacts_modified": false
+}

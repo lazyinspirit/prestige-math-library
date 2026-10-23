@@ -1,0 +1,181 @@
+[
+  {
+    "order": 391,
+    "id": "fd-f04",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Restricted non-Newtonian constitutive examples",
+    "companion": "fd-f04-examples",
+    "requires": [
+      "fd-f01",
+      "fd-mf04"
+    ],
+    "items": [
+      {
+        "id": "def-fd-adopted-nonnewtonian-models",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Restricted non-Newtonian constitutive examples",
+        "reference": "items/def-fd-adopted-nonnewtonian-models.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-nonnewtonian-laws",
+          "def-fd-smooth-motion"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-nonnewtonian-laws": "mathematical-premise",
+          "def-fd-smooth-motion": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "physical_scope": "Chosen incompressible generalized Newtonian/Bingham closures; isothermal conformation adds C storage and thermostat, with no empirical applicability claim.",
+        "statement": "Let $M_3(\\mathbb R)=\\mathbb R^{3\\times3}$ be the real $3\\times3$ matrices. For $M=(M_{ij})\\in M_3(\\mathbb R)$, define its trace by $\\operatorname{tr}M=\\sum_{i=1}^3M_{ii}$, and let $I_3$ be the $3\\times3$ identity matrix, with diagonal entries $1$ and all other entries $0$.\n\nLet $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference body with $C^1$ boundary, and let $U$ be an open neighborhood of $\\overline B$. A material motion is a map $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ whose slices $\\chi_t(a)=\\chi(t,a)$ are orientation-preserving $C^2$ diffeomorphisms onto their images, with $\\chi(0,a)=a$. Its swept open region is $\\Omega=\\{(t,x):x\\in\\chi_t(U)\\}$, its inverse label is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^{\\mathsf T})/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_t=\\partial_t+u\\cdot\\nabla$. A branch is incompressible when $\\theta=0$, so $D$ is symmetric and trace-free. Write $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ for the Frobenius contraction and $|S|=(S:S)^{1/2}$ for its norm. Define $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D=D^{\\mathsf T},\\operatorname{tr}D=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A rigid observer change is $x^*=Q(t)x+c(t)$ with $Q\\in C^2(I,\\mathrm{SO}(3))$, $c\\in C^2(I,\\mathbb R^3)$, and $\\mathrm{SO}(3)=\\{Q:Q^{\\mathsf T}Q=I_3,\\det Q=1\\}$. A second-order tensor transforms as $S^*=QSQ^{\\mathsf T}$; a constitutive response is objective when it obeys this rule at corresponding events.\n\nFor the generalized Newtonian and Bingham branches, require $\\theta=\\operatorname{div}u=0$ throughout $\\Omega$, so $D\\in\\mathrm{Sym}_0(3)$. In these branches, $\\tau$ is a symmetric deviatoric extra stress, meaning $\\operatorname{tr}\\tau=0$; the total tension-positive Cauchy stress may additionally contain an isotropic pressure. In the conformation branch, $\\tau_p$ and $\\tau_s$ denote the polymer and solvent stresses separately and the pressure is a Lagrange multiplier. Stress is measured in Pa, $D$ and shear rate in $\\mathrm{s}^{-1}$, viscosity in $\\mathrm{Pa\\,s}$, and a rate of stress power per volume in $\\mathrm{W\\,m^{-3}}$.\n\nFor a generalized Newtonian branch, define\n\n$$\n\\dot\\gamma=(2D:D)^{1/2},\\qquad \\tau=2\\eta(\\dot\\gamma)D,\n$$\n\nwhere $\\eta:[0,\\infty)\\to[0,\\infty)$ is finite and continuous. Two permitted scalar choices are the Carreau form\n\n$$\n\\eta_C(\\dot\\gamma)=\\eta_\\infty+(\\eta_0-\\eta_\\infty)\\bigl(1+(\\lambda_C\\dot\\gamma)^2\\bigr)^{(n_C-1)/2},\n$$\n\nwith $\\eta_0\\ge\\eta_\\infty\\ge0$ in $\\mathrm{Pa\\,s}$, $\\lambda_C\\ge0$ in seconds, and dimensionless $n_C>0$, and the regularized power form\n\n$$\n\\eta_R(\\dot\\gamma)=m(\\varepsilon^2+\\dot\\gamma^2)^{(n_R-1)/2},\n$$\n\nwith $m>0$ in $\\mathrm{Pa\\,s}^{n_R}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n_R>0$. The unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n_R-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$, so for $0<n_R<1$ the viscosity diverges at zero rate even though the extended stress can be continuous.\n\nFor the Bingham branch, let $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ in $\\mathrm{Pa}$. Adopt $\\tau\\in\\mathcal B(D)$, where the set-valued graph on $\\mathrm{Sym}_0(3)$ is\n\n$$\n\\mathcal B(D)= \\begin{cases} \\{2\\mu_pD+\\tau_yD/|D|\\},&D\\ne0,\\\\ \\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\},&D=0, \\end{cases}\n$$\n\nwhere $\\mathrm{Sym}_0(3)$ is the space of trace-free symmetric $3\\times3$ real matrices. Here $\\tau_y$ is, by definition, the radius of the Frobenius stress ball at rest; other invariant normalizations require a corresponding parameter conversion. The graph is single-valued for $D\\ne0$ and set-valued at rest.\n\nFor an isothermal conformation branch, let $K=[t_0,t_1]\\subset I$ be a compact interval with $t_0<t_1$. A pathline on $K$ is a continuously differentiable curve $x:K\\to\\mathbb R^3$ satisfying $(t,x(t))\\in\\Omega$ and $x'(t)=u(t,x(t))$ for every $t\\in K$; derivatives at the endpoints are one-sided. Assume $\\operatorname{div}u=0$ on $\\Omega$ and take such a pathline. Let $C\\in C^1(K;\\mathrm{Sym}^+(3))$ be a dimensionless matrix-valued function. Along this pathline, the material derivative of $C$ is its ordinary derivative, $D_tC(t,x(t)):=\\frac{d}{dt}C(t)$. Set $L(t)=\\nabla u(t,x(t))$ and $D(t)=(L(t)+L(t)^{\\mathsf T})/2$. Let $G>0$ be a modulus in Pa, $\\lambda>0$ a relaxation time in seconds, $\\eta_s\\ge0$ a solvent viscosity in $\\mathrm{Pa\\,s}$, and $T_0>0$ a fixed temperature in K. Here an external thermostat is an idealized heat reservoir that maintains $T_0$ and accounts for heat released by this branch; it is an additional model assumption. Adopt\n\n$$\n\\frac{dC}{dt}=LC+CL^{\\mathsf T}-(C-I_3)/\\lambda,\\qquad \\tau_p=G(C-I_3),\\qquad \\tau_s=2\\eta_sD,\\qquad w(C)=\\frac G2\\bigl(\\operatorname{tr}C-\\log\\det C-3\\bigr).\n$$\n\nThe polymer and solvent stresses $\\tau_p,\\tau_s$ are measured in Pa, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant is positive because $C$ is symmetric positive definite. These are selected model equations on the stated smooth incompressible regime; they assert no empirical applicability to a particular material, fitted parameter values, PDE solution existence, or universal validity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. N. Reddy, An Introduction to Continuum Mechanics, Second Edition, Chapter 6, equation (6.5.15) and §§6.6.1–6.6.2.3",
+              "url": "https://courses.washington.edu/mengr503/Chapter_6.pdf"
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare 1.63J/2.21J Lecture Notes on Fluid Dynamics, §1.6.2",
+              "url": "https://ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/0c5e315f2b97fff948cb35f10a97894c_16stressstrain.pdf"
+            },
+            {
+              "title": "John W. Barrett and Sébastien Boyaval, Existence and Approximation of a (Regularized) Oldroyd-B Model, arXiv:0907.4066v2, §1.1 and §2.3",
+              "url": "https://arxiv.org/pdf/0907.4066"
+            },
+            {
+              "title": "S. Boyaval, T. Lelièvre, and C. Mangoubi, Free-energy-dissipative schemes for the Oldroyd-B model, ESAIM: M2AN 43 (2009), §§2.1.1–2.1.2",
+              "url": "https://www.numdam.org/item/10.1051/m2an/2009008.pdf"
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part I lecture notes, §§1.1.1–1.1.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-fd-nonnewtonian-conditional-admissibility",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional admissibility of the specified non-Newtonian branches",
+        "reference": "items/pthm-fd-nonnewtonian-conditional-admissibility.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-adopted-nonnewtonian-models",
+          "lem-fd-generalized-newtonian-dissipation",
+          "lem-fd-bingham-monotone-graph",
+          "lem-fd-conformation-storage"
+        ],
+        "dependency_roles": {
+          "def-fd-adopted-nonnewtonian-models": "formulation-prerequisite",
+          "lem-fd-generalized-newtonian-dissipation": "mathematical-premise",
+          "lem-fd-bingham-monotone-graph": "mathematical-premise",
+          "lem-fd-conformation-storage": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "physical_scope": "Given selected stated law and balances, derive objective nonnegative mechanical dissipation; conformation entropy requires explicit isothermal Helmholtz realization/thermostat.",
+        "statement": "Work in the smooth incompressible branch of the adopted nonrelativistic continuum model. Let $T>0$, let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $u\\in C^2(J\\times\\Omega;\\mathbb R^3)$ be the Eulerian velocity induced by a $C^2$ material motion with orientation-preserving $C^2$ diffeomorphic time slices, and satisfy $\\operatorname{div}u=0$. At a spatial point let $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, $\\operatorname{tr}D=0$, and use the Frobenius contraction $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ with norm $|S|=(S:S)^{1/2}$. Let $M_3(\\mathbb R)$ denote the real $3\\times3$ matrices, and define $\\mathrm{Sym}_0(3)=\\{S\\in M_3(\\mathbb R):S=S^{\\mathsf T},\\operatorname{tr}S=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A constitutive response is objective when under every rigid observer change $x^*=Q(t)x+c(t)$, with $Q\\in C^2([0,T],\\mathrm{SO}(3))$ and $c\\in C^2([0,T],\\mathbb R^3)$, its second-order tensor value at corresponding events transforms as $S^*=QSQ^{\\mathsf T}$. For the generalized Newtonian branch, let $\\dot\\gamma=(2D:D)^{1/2}$, let $\\eta:[0,\\infty)\\to[0,\\infty)$ be finite and continuous, and set $\\tau=2\\eta(\\dot\\gamma)D$. Define $I_3$ as the $3\\times3$ identity matrix; in SI units, $L,D,\\dot\\gamma$ have units $\\mathrm{s}^{-1}$, $\\eta,\\eta_s,\\mu_p$ have units $\\mathrm{Pa\\,s}$, and $\\tau,\\tau_y,G$ have units Pa. For the Bingham branch, let $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ in $\\mathrm{Pa}$, and set $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ for $D\\ne0$ and $\\mathcal B(0)=\\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\}$. For the conformation branch, take a $C^1$ trajectory $x:[0,T]\\to\\Omega$ with $x'(t)=u(t,x(t))$. Set $L(t)=\\nabla u(t,x(t))$, $D(t)=(L(t)+L(t)^{\\mathsf T})/2$, and let the dimensionless $C\\in C^1([0,T];M_3(\\mathbb R))$ be symmetric, so $C(t)=C(t)^{\\mathsf T}$ for all $t$, and satisfy\n\n$$\nC'=LC+CL^{\\mathsf T}-(C-I_3)/\\lambda,\\qquad C(0)=C_0\\in\\mathrm{Sym}^+(3),\n$$\n\nwhere $G>0$ is a modulus in Pa, $\\lambda>0$ is a relaxation time in seconds, and $\\eta_s\\ge0$ is a solvent viscosity in Pa s. Define $\\tau_p=G(C-I_3)$, $\\tau_s=2\\eta_sD$, and $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in J m$^{-3}$. Then the generalized Newtonian and Bingham branches have objective stress responses and nonnegative instantaneous mechanical power $\\tau:D\\ge0$ for every allowed stress. On every forward time $t\\in[0,T]$, the conformation solution remains positive definite, its constitutive response is objective, and\n\n$$\n(\\tau_s+\\tau_p):D-\\frac{d}{dt}w(C) =2\\eta_sD:D+\\frac{G}{2\\lambda}\\bigl(\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6\\bigr)\\ge0.\n$$\n\nThus the selected smooth branches have nonnegative mechanical or stored-energy dissipation under their stated model hypotheses. This is a conditional deduction, not a claim of empirical material applicability or existence of a fluid partial-differential-equation solution.\n\nFor an entropy-production interpretation of the conformation inequality, additionally adopt the following separate isothermal realization along the trajectory. Fix $T_0>0$ in K and let $e_v,s_v\\in C^1([0,T];\\mathbb R)$ be internal-energy and entropy densities per current volume, in $\\mathrm{J\\,m^{-3}}$ and $\\mathrm{J\\,K^{-1}m^{-3}}$, respectively. Let $h\\in C^0([0,T];\\mathbb R)$ be the signed heat-removal rate per current volume, in $\\mathrm{W\\,m^{-3}}$, positive for heat passed to an ideal external thermostat at the same temperature $T_0$. Assume this is the only heat exchange, carrying entropy out at rate $h/T_0$, and adopt the energy balance $e_v'=(\\tau_s+\\tau_p):D-h$ and the Helmholtz free-energy identification $w(C)=e_v-T_0s_v$. Define the internal entropy-production density by $\\pi_s:=s_v'+h/T_0$, in $\\mathrm{W\\,K^{-1}m^{-3}}$. Derivatives at the time endpoints are one-sided. Then\n\n$$\nT_0\\pi_s=(\\tau_s+\\tau_p):D-\\frac{d}{dt}w(C)\\ge0.\n$$\n\nThese additional thermodynamic assumptions are not inferred from the continuum balances or the stored-energy identity alone.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. N. Reddy, An Introduction to Continuum Mechanics, Second Edition, §§5.4.2–5.4.3, equations (5.4.11), (5.4.20), (5.4.23)–(5.4.30)",
+              "url": "https://courses.washington.edu/mengr503/Chapter_5.pdf"
+            },
+            {
+              "title": "J. N. Reddy, An Introduction to Continuum Mechanics, Second Edition, Chapter 6, equation (6.5.15) and §§6.6.1–6.6.2.3",
+              "url": "https://courses.washington.edu/mengr503/Chapter_6.pdf"
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare 1.63J/2.21J Lecture Notes on Fluid Dynamics, §1.6.2",
+              "url": "https://ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/0c5e315f2b97fff948cb35f10a97894c_16stressstrain.pdf"
+            },
+            {
+              "title": "John W. Barrett and Sébastien Boyaval, Existence and Approximation of a (Regularized) Oldroyd-B Model, arXiv:0907.4066v2, §1.1 and §2.3",
+              "url": "https://arxiv.org/pdf/0907.4066"
+            },
+            {
+              "title": "S. Boyaval, T. Lelièvre, and C. Mangoubi, Free-energy-dissipative schemes for the Oldroyd-B model, ESAIM: M2AN 43 (2009), §§2.1.1–2.1.2",
+              "url": "https://www.numdam.org/item/10.1051/m2an/2009008.pdf"
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part I lecture notes, §§1.1.1–1.1.3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 392,
+    "id": "fd-f04-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Restricted non-Newtonian constitutive examples — Examples",
+    "companion": "fd-f04",
+    "requires": [
+      "fd-f04"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-bingham-rest-stress",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Resting Bingham graph supports nonzero stress",
+        "reference": "items/ex-fd-bingham-rest-stress.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "lem-fd-bingham-monotone-graph"
+        ],
+        "dependency_roles": {
+          "lem-fd-bingham-monotone-graph": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "physical_scope": "Worked model calculation/counterexample; leaf, no downstream suppliers.",
+        "statement": "Use the Bingham graph on $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D=D^{\\mathsf T},\\operatorname{tr}D=0\\}$ with Frobenius norm $|S|=(\\operatorname{tr}(S^{\\mathsf T}S))^{1/2}$, whose zero-rate value is $\\mathcal B(0)=\\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\}$. Let the strain rate be $D=0$, let the yield-ball radius satisfy $\\tau_y>0$ in Pa, and choose\n\n$$\nS=\\frac{\\tau_y}{\\sqrt2} \\begin{pmatrix} 1&0&0\\\\ 0&-1&0\\\\ 0&0&0 \\end{pmatrix}.\n$$\n\nThis example tests membership in the constitutive graph only. It does not assert force balance, a realized material state, or an experimental observation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. N. Reddy, An Introduction to Continuum Mechanics, Second Edition, Chapter 6, §6.6.2.3",
+              "url": "https://courses.washington.edu/mengr503/Chapter_6.pdf"
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare 1.63J/2.21J Lecture Notes on Fluid Dynamics, §1.6.2",
+              "url": "https://ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/0c5e315f2b97fff948cb35f10a97894c_16stressstrain.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct",
+        "empirical_premises": []
+      }
+    ]
+  }
+]

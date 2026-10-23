@@ -1,0 +1,836 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-fd-cauchy-contact",
+    "lem-fd-local-balance-equivalence",
+    "lem-fd-weak-jump-consistency",
+    "ex-fdmath-vacuum-momentum-degeneracy"
+  ],
+  "contracts": {
+    "lem-fd-cauchy-contact": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-fd-smooth-motion",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$. For an integer $r\\ge1$, $C^r$ means that all coordinate partial derivatives through total order $r$ exist and are continuous. Let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference region whose boundary is, near each boundary point and in coordinates $y=Qx+c$ for some $Q\\in\\mathbb R^{3\\times3}$ and $c\\in\\mathbb R^3$ with $Q^{\\mathsf T}Q=I_3$, the graph of a $C^1$ function; let $U\\subseteq\\mathbb R^3$ be open with $\\overline B\\subset U$. A smooth motion is a map $\\chi:I\\times U\\to\\mathbb R^3$ of class $C^2$ such that, for every $t\\in I$, the map $\\chi_t(a):=\\chi(t,a)$ is a bijection from $U$ onto an open set $\\chi_t(U)$ with a $C^2$ inverse and with $\\det D_a\\chi(t,a)>0$ for all $a\\in U$. The coordinate $a$ labels a reference point and $x=\\chi(t,a)$ is its current position; $\\Omega:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$ is the swept open set and $\\Omega_t:=\\chi_t(B)$ is the current image of $B$.\n\nFor $(t,x)\\in\\Omega$, define the inverse label $A(t,x)$ by $\\chi(t,A(t,x))=x$, and put $F(t,a):=D_a\\chi(t,a)$ and $J(t,a):=\\det F(t,a)$. The joint map $H(t,a):=(t,\\chi(t,a))$ is injective and has block-triangular derivative with determinant $J(t,a)>0$. The Euclidean inverse function theorem therefore gives local $C^1$ inverses; they agree on overlaps because the label is unique, so $A$ is globally $C^1$ on $\\Omega$. Define the Eulerian velocity field $u(t,x):=\\partial_t\\chi(t,A(t,x))$; an Eulerian field is a function of time and current position. Thus $u$ is $C^1$.\n\nFor any $C^1$ scalar or vector field $f$ on $\\Omega$, its material derivative is $D_tf:=\\partial_tf+(D_xf)u$, componentwise; it is the derivative along the curves $t\\mapsto\\chi(t,a)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "source_section": "Definition",
+          "quote": "A bounded $C^1$ domain is a nonempty bounded open set $\\Omega\\subset\\mathbb R^n$ whose boundary is locally, after a rigid change of coordinates, the graph $z=h(y)$ of a $C^1$ function, with $\\Omega$ locally exactly the subgraph $z<h(y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "The same chart formula restricts to a compact Borel face contained in a regular patch.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Every regular chart density is continuous and strictly positive. The chart integral on a compact embedded $C^1$ hypersurface defines a finite Borel measure independent of the finite charts and subordinate partitions. In graph coordinates $X(y)=(y,h(y))$ its density is $\\sqrt{1+|Dh|^2}$. On a one-sided domain boundary the outward unit normal agrees on chart overlaps and is continuous.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pillbox-limit",
+          "claim": "Rounded thin pillboxes yield oddness of opposite tractions.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "opposite-traction",
+          "claim": "The local traction satisfies $\\tau(t,x,n)+\\tau(t,x,-n)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "tetrahedron-linearity",
+          "claim": "Projected face areas and vanishing volume resultants give a linear map in the normal.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "L1",
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "unique-stress-matrix",
+          "claim": "Continuity covers zero normal coordinates and coordinate tractions determine a unique matrix.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is local at an interior point and assumes nonempty subdomains for the balance hypothesis.",
+          "evidence": "",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Statement explicitly assumes nonempty I and B, fixes (t,x) in the swept open set, and quantifies force balance over nonempty P. S^2 is the prescribed nonempty set of normals. The pillbox and tetrahedron in steps 1.1–3.1 have positive h before limits; indexing traction by n does not introduce an empty family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Statement explicitly assumes nonempty I and B, fixes (t,x) in the swept open set, and quantifies force balance over nonempty P. S^2 is the prescribed nonempty set of normals. The pillbox and tetrahedron in steps 1.1–3.1 have positive h before limits; indexing traction by n does not introduce an empty family.",
+            "item_sha256": "e0cb954f7424bcc98cca29774b1408b58a37f3660017de76644588ed93a55179",
+            "row_sha256": "e12bb285d56f60e520033ea5ef8baf048680d71e2164aba085b455272df1c311",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero coordinate of the normal makes a coordinate face degenerate; step 4.1 takes a limit of nondegenerate unit normals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For each coordinate normal $n=e_i$, step 3.1 gives $\\sigma e_i=\\tau(t,x,e_i)$, fixing the corresponding column."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 treats vanishing normal components by continuity; the tetrahedron in step 3.1 is nondegenerate before that limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is evaluated at a fixed interior time and contains no time endpoint conclusion.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only set-theoretic assumption is the stated $\\mathrm{AC}_\\omega$; steps 1.1, 2.1, and 3.1 otherwise fix a point and finitely many directions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way consequence of the local balance, not an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a linear traction map to the local balance is claimed.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Read all four current steps and exact five supplier definitions/statements (including the chart-independence proof). Rounded parallel bodies have C1 boundaries; face integrals converge uniformly and curved areas and added volumes vanish at fixed h. Taking delta then epsilon then h yields oddness. For fixed n with nonzero coordinates, signed coordinate faces have area |n_i|A and volume/A=O(h); oddness gives linearity. Continuity handles zero coordinates, and coordinate columns force uniqueness. AC_omega is explicit for surface machinery; no additional choice is used. Checked the schematic tetrahedron: four vertices, six edges, oblique outward n and coordinate faces agree with the text; it is not a proof premise. Source reading: Lopez-Pamies §§3.3.2–3.3.4 printed pp38–40 and Oden §4.1 pp26–27; local rounding and signed-normal details complete their classical limit arguments. No reader/refuter objection is routed to this item; no repair needed."
+      }
+    },
+    "lem-fd-local-balance-equivalence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-fd-transport-and-density",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open region, let $U$ be an open neighborhood of $\\overline B$, and let $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ be a family of orientation-preserving diffeomorphisms $\\chi_t:U\\to\\chi_t(U)$ with $J(t,a):=\\det D_a\\chi(t,a)>0$. Here $C^r$ means that all coordinate partial derivatives through total order $r$ exist and are continuous; a diffeomorphism is a bijection with an inverse of the stated regularity. Write $A(t,x)=\\chi_t^{-1}(x)$, $u(t,x)=\\partial_t\\chi(t,A(t,x))$, $F=D_a\\chi$, $L=D_xu$, and $\\theta=\\operatorname{tr}L=\\sum_{i=1}^3\\partial_{x_i}u_i$. Here $D_a\\chi$ and $D_xu$ are matrices of coordinate partial derivatives. The joint inverse $A$ has domain $\\Omega=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$.\n\nA compact Jordan set $K\\subset\\mathbb R^3$ means a compact set whose boundary, for every $\\varepsilon>0$, is coverable by finitely many axis-parallel boxes with total volume less than $\\varepsilon$, where a box's volume is the product of its side lengths. Integrals over such sets are Riemann integrals, defined by extending the integrand by zero to a containing rectangle. Let $K\\subset U$ be any compact Jordan set and let $q,\\rho\\in C^1(\\Omega,\\mathbb R)$. Then $A$ is jointly $C^2$, and for every $a\\in U$ and $t\\in I$,\n\n$$\\partial_tF(t,a)=L(t,\\chi(t,a))F(t,a),\\qquad \\partial_tJ(t,a)=J(t,a)\\theta(t,\\chi(t,a)),\\qquad J(t,a)=J(0,a)\\exp\\!\\left(\\int_0^t\\theta(s,\\chi(s,a))\\,ds\\right).$$\n\nFor every $t\\in I$, change of variables and material transport satisfy\n\n$$\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_Kq(t,\\chi(t,a))J(t,a)\\,da,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_{\\chi_t(K)}\\bigl(D_tq(t,x)+q(t,x)\\theta(t,x)\\bigr)\\,dx=\\int_{\\chi_t(K)}\\bigl(\\partial_tq+\\nabla_x\\!\\cdot(qu)\\bigr)\\,dx,$$\n\nwhere $D_tq=\\partial_tq+u\\cdot\\nabla_xq$ and $\\nabla_x\\!\\cdot(qu)=\\sum_{i=1}^3\\partial_{x_i}(qu_i)$. Define $M_K(t):=\\int_{\\chi_t(K)}\\rho(t,x)\\,dx$. The pointwise continuity equation $D_t\\rho+\\rho\\theta=0$, equivalently $\\partial_t\\rho+\\nabla_x\\!\\cdot(\\rho u)=0$, holds on $\\Omega$ if and only if $M_K$ is constant on $I$ for every compact Jordan $K\\subset U$, and if and only if $\\rho(t,\\chi(t,a))J(t,a)=\\rho(0,\\chi(0,a))J(0,a)$ for all $a\\in U$ and $t\\in I$. This is a mathematical equivalence; it adopts no physical mass-conservation postulate and asserts no weak-field or vacuum extension.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-fd-cauchy-contact",
+          "source_section": "Statement",
+          "quote": "Then there is a unique matrix $\\sigma(t,x)\\in\\mathbb R^{3\\times3}$ such that $\\tau(t,x,n)=\\sigma(t,x)n$ for every $n\\in S^2$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$. A bounded $C^1$ domain is a nonempty bounded open set $\\Omega\\subset\\mathbb R^n$ whose boundary is locally, after a rigid change of coordinates, the graph $z=h(y)$ of a $C^1$ function, with $\\Omega$ locally exactly the subgraph $z<h(y)$. Connectedness is not required. The outward normal in these coordinates is $\\nu=(-Dh,1)/\\sqrt{1+|Dh|^2}$, transported by the orthogonal coordinate map.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "The same chart formula restricts to a compact Borel face contained in a regular patch.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-momentum-localization",
+          "claim": "The assumed linear-momentum integral balance localizes to the material momentum equation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "conservative-momentum-form",
+          "claim": "Continuity converts material momentum to conservative divergence form, and the local equation recovers the integral balance.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "A1",
+            "A2",
+            "L1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "angular-balance-symmetry",
+          "claim": "The angular-momentum balance forces the stress matrix to be symmetric.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "L1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "kinetic-energy-balance",
+          "claim": "Dotting material momentum with velocity gives the kinetic-energy identity.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "total-energy-localization",
+          "claim": "The assumed total-energy integral balance localizes to the conservative total-energy equation.",
+          "step": "2.4",
+          "inputs": [
+            "given",
+            "L1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "momentum-angular-converse",
+          "claim": "The conservative momentum equation and symmetric stress recover the angular-momentum integral balance.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "internal-energy-split",
+          "claim": "Subtracting kinetic energy gives internal energy, and adding it back recovers total energy.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.3",
+            "step 2.4",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The integral balances are assumed for nonempty material domains; the empty-domain identity is trivial and cannot localize a residual.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: B and each material test domain V are explicitly nonempty. The localization in step 1.1 needs positive-volume spatial balls; an empty-domain 0=0 balance could not establish a residual at a point. Component sums always run over the fixed three spatial coordinates.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: B and each material test domain V are explicitly nonempty. The localization in step 1.1 needs positive-volume spatial balls; an empty-domain 0=0 balance could not establish a residual at a point. Component sums always run over the fixed three spatial coordinates.",
+            "item_sha256": "83c1d2e874d196f9fd47b3a9cd78abb6153080f7fe8d1299bb64736cb1d09c1d",
+            "row_sha256": "a17b4f9367f994f76dd447b9092461aed5e469f270803ab8b730193f5aafc0a9",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The kinetic identity in step 2.3 remains valid when $u=0$, with $k=0$ and zero mechanical power."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result fixes three spatial dimensions and makes no one-dimensional reduction claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes $\\rho>0$; the zero-density momentum degeneracy is handled by the separate B-page example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time interval is open and the statement makes no endpoint or initial-trace claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The divergence supplier's exact choice hypothesis is ACω, named in the Statement and Facts; steps 1.1, 2.2, and 2.4 use that supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 2.4 derive the local conservative equations from their integral balances."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1, 2.4, 3.1, and 4.1 integrate the local momentum, angular, and energy equations back to their integral forms."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Read all seven steps and exact six dependencies: the transport supplier current proof/Statement, Cauchy lemma (reviewed first), divergence theorem and surface/domain/choice definitions. C1 compact boundary charts give O(delta) volume covers; diffeomorphism images preserve C1 boundaries and the proof supplies Jordan/null boundary and local time/reference restriction to meet the transport supplier. Every small spatial ball is an admissible material image, permitting continuous residual localization. Continuity converts rho Dt u to conservative momentum, including the reverse integral derivation. The angular flux derivative gives epsilon_ijl sigma_lj and forces precisely the three off-diagonal symmetry equations; symmetric stress conversely recovers angular balance. Rowwise divergence gives u·div sigma=div(sigma^T u)-sigma:L without assuming symmetry, and boundary power uses sigma^T u. Subtracting/adding kinetic and total/internal energy preserves signs, outward heat convention and rho r (specific source). Stress C1 regularity is separately assumed, not inferred from the pointwise Cauchy result. Both iff directions are proved; zero velocity is harmless; rho>0 and open time exclude vacuum and endpoint assertions. AC_omega is retained for divergence machinery. Read Lopez-Pamies §3.3.4 pp40–41 and Oden §§4.1–4.2,4.4 and5.1 pp26–34; Oden leaves stress symmetry as an exercise, which the local component argument supplies. Only the routed rendered layout defect in step2.1 requires repair; no Statement change or new consumer obligation."
+      }
+    },
+    "ex-fdmath-vacuum-momentum-degeneracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-conservative-weak-form",
+          "source_section": "Definition",
+          "quote": "Let $U: \\Omega\\times[0,T)\\to\\mathbb R^m$, $F: \\Omega\\times[0,T)\\to\\mathbb R^{m\\times3}$, and $S: \\Omega\\times[0,T)\\to\\mathbb R^m$ be such fields, and let $U_0:\\Omega\\to\\mathbb R^m$ be locally integrable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-density-collapse",
+          "claim": "Choose $u_1=0$ and $u_2=e_1$, where $e_1=(1,0,0)$. They are distinct, but at $\\rho=0$ their momentum densities satisfy $\\rho u_1=0=\\rho u_2$. Thus the map $u\\mapsto\\rho u$ is not injective when $\\rho=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-density-inverse",
+          "claim": "If $\\rho>0$ and $M=\\rho u$, division by the positive scalar gives the unique recovery $u=M/\\rho$. Hence the failure in step 1.1 is exactly the zero-density degeneracy, not a claim about positive density.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a point and two explicit distinct velocities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The actual main claim fixes one point and supplies two concrete vectors, so it is not a theorem quantifying over empty families. The added field-admissibility aside is conditional on a chosen Omega/T and does not alter that pointwise scope.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "c030376fd523ff18e595ed311284a418b76635d401648d375992e0042b0c8050",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both momentum-density vectors as zero when density is zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Verification1.1 still multiplies both explicit velocities0 and e1 by rho=0, obtaining equal zero momentum. The new field-measure convention is not a premise of this multiplication.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "f637736ff8efa4806a66b5d8ff92a9ec7ec42ddd2d4fb179fae268718be99e86",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the single nonzero coordinate vector $e_1$ to witness noninjectivity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Verification1.1 uses e1=(1,0,0), a single active coordinate, as the nonzero witness. The field aside retains three momentum components and creates no ambient one-dimensional theorem.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "de0cdc1e8f09bc4c2c6a947dbd74822e1ab39c4f13f36eeae4098a5079b1576d",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is exactly $\\rho=0$ in step 1.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The actual loss of injectivity is rho=0 in1.1, while2.1 divides only under rho>0. Neither the new local-integrability convention nor its conditional Choice premise changes this exact split.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "0856428e3c8e082c91989ac55410bdc76e2c0bc38875c6e1d2cb7a449f000f7d",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is pointwise algebra and has no time or interval endpoints.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The proved assertion and both Verification steps remain pointwise algebra without a time endpoint. The separate field paragraph mentions local integrability up to t=0 only as an admissibility requirement and does not prove or use a trace.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "6f84c8c66844774587c963ed65497249cee6a08babb09f73910be5a3269c2366",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly chooses $0$ and $e_1$; it uses no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Preserve the existing checked evidence exactly: Verification1.1 supplies0 and e1 explicitly and uses no choice principle. The current Example carefully scopes Countable Choice to its optional weak-field interpretation; that paragraph is not an assumption for the pointwise injectivity calculation, and must not be turned into one by worksheet rebinding.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "b01cdff9980d98b7ca898f8a289ee313430b700fbd898c0ee41ba5f45e165947",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example shows a failure of injectivity at zero density and states the positive-density inverse, not an iff theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Example gives a concrete failure of injectivity at rho=0 and an explicit positive-density inverse. It asserts no separate biconditional theorem or weak-solution characterization; the field aside changes neither logical form.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "81efedd7f084b917982e952a31f4dba5dd83513c1e13b34f522b1c5bfc5612b5",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse theorem is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "There is no converse characterization of weak fields or equations in the Example. Verification2.1 merely solves M=rho u for u at a supplied positive rho; it does not infer a PDE or admissibility from momentum data.",
+            "item_sha256": "8c2a19cf5a426b5fc814f52aecc5a34d73ae3bd9833fa2bf85bca4ad61b3a39c",
+            "row_sha256": "a3f50a00ab17975f513ed038485c3720f24c145d336e41b6f8152dd27e47e118",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        }
+      ]
+    },
+    "lem-fd-weak-jump-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-conservative-weak-form",
+          "source_section": "Definition",
+          "quote": "Adopt the Axiom of Countable Choice, meaning that every sequence of nonempty sets admits a choice function. For $n\\ge1$, use the complete Euclidean Lebesgue measure space $(\\mathbb R^n,\\mathcal L_n,\\lambda_n)$, where $\\mathcal L_n=\\mathcal L(\\mathbb R^n)$ is the Caratheodory-measurable family for Lebesgue outer measure and $\\lambda_n$ is that outer measure restricted to $\\mathcal L_n$. The sigma-algebra and complete-measure assertions are the Lebesgue measure theorem under this axiom. For a Lebesgue-measurable set $E\\subseteq\\mathbb R^n$, use the trace sigma-algebra $\\mathcal L_E:=\\{E\\cap B:B\\in\\mathcal L_n\\}$ and the measure $\\lambda_E(A):=\\lambda_n(A)$ for $A\\in\\mathcal L_E$; its countable additivity is inherited from $\\lambda_n$. A map $f:E\\to\\mathbb R^k$ is measurable when $f^{-1}(B)\\in\\mathcal L_E$ for every Borel set $B\\subseteq\\mathbb R^k$, where the Borel sigma-algebra is generated by the open sets. For matrix-valued maps use their finite coordinate arrays. A property holds almost everywhere on $E$ when its exceptional set is contained in a measurable $\\lambda_E$-null set. Nonnegative integrals are suprema of nonnegative simple minorants; signed real integrals are the difference of the positive- and negative-part integrals when those parts are finite. Finite-dimensional integrals are taken componentwise.\n\nLet $T>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $m\\ge1$ be an integer. Put $D:=\\Omega\\times[0,T)\\subseteq\\mathbb R^4$ in spatial-first coordinates $(x,t)$. Both $D$ and $\\Omega$ are Borel and hence Lebesgue measurable. Spatial integrals use $\\lambda_\\Omega$ from $\\lambda_3$, and space-time integrals use $\\lambda_D$ from $\\lambda_4$. For a finite coordinate array $v$, set $\\|v\\|_1:=\\sum_i|v_i|$, summing all entries for a matrix. A measurable field $f:E\\to\\mathbb R^k$ is locally integrable when $\\int_K\\|f\\|_1\\,d\\lambda_E<\\infty$ for every compact $K\\subseteq E$. For $E=D$ the compact sets are taken in the relative topology, including those meeting $t=0$. Fields on $D$ are identified up to $\\lambda_D$-almost-everywhere equality, and initial fields on $\\Omega$ up to $\\lambda_\\Omega$-almost-everywhere equality. The slice $\\Omega\\times\\{0\\}$ is contained in a Lebesgue-null coordinate hyperplane in $\\mathbb R^4$; values of a space-time representative on that slice do not determine the separately prescribed initial field.\n\nIn the displayed weak identities, $\\int_0^T\\int_\\Omega f\\,dx\\,dt$ denotes the joint integral of the zero extension of $f$ from $D$ with respect to $\\lambda_4$. For each test, its compact support bounds the test and its first derivatives, so every component of the tested products is measurable and is bounded in absolute value by a fixed multiple of the norm of a locally integrable field on that compact set. Thus all tested products and their finite sums have finite signed integrals. Euclidean Lebesgue measure on $\\mathbb R^3\\times\\mathbb R$ is the completed product of $\\lambda_3$ and $\\lambda_1$; completed-product Fubini therefore also gives the displayed iterated notation, with section integrals taken for almost every time and set to zero on a measurable exceptional null set. No integrability of every individual time slice is required. The integral is unchanged by the stated almost-everywhere identifications. The same conventions apply to the scalar inequality and to the initial integrals on $\\Omega$.\n\nLet $U: \\Omega\\times[0,T)\\to\\mathbb R^m$, $F: \\Omega\\times[0,T)\\to\\mathbb R^{m\\times3}$, and $S: \\Omega\\times[0,T)\\to\\mathbb R^m$ be such fields, and let $U_0:\\Omega\\to\\mathbb R^m$ be locally integrable. For each row $a$, define $(\\operatorname{div}_x F)_a=\\sum_{j=1}^3\\partial_{x_j}F_{aj}$ in the distributional sense, and define $F:\\nabla_x\\phi=\\sum_{a=1}^m\\sum_{j=1}^3F_{aj}\\partial_{x_j}\\phi_a$. The equation $\\partial_tU+\\operatorname{div}_xF=S$ with distributional initial datum $U_0$ means that for every $\\phi\\in C_c^1(\\Omega\\times[0,T);\\mathbb R^m)$, continuously differentiable up to $t=0$ and supported away from $\\partial\\Omega$ and $t=T$,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(U\\cdot\\partial_t\\phi+F:\\nabla_x\\phi+S\\cdot\\phi\\bigr)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\phi(x,0)\\,dx=0.$$\n\nNo boundary condition on $\\partial\\Omega$ is encoded because the test fields are supported away from it. This initial identity specifies the initial datum distributionally; it does not assert $U(\\cdot,t)\\to U_0$ in $L^1_{\\mathrm{loc}}(\\Omega)$ or any other stronger trace topology. Such a trace must be assumed or proved separately. The fields are abstract mathematical variables; no physical unit system or balance postulate is imposed.\n\nFor locally integrable scalar fields $H,R:D\\to\\mathbb R$ and $H_0:\\Omega\\to\\mathbb R$, and a locally integrable flux $Q: \\Omega\\times[0,T)\\to\\mathbb R^3$, the inequality $\\partial_tH+\\operatorname{div}_x Q\\ge R$ with initial datum $H_0$ means that for every nonnegative $\\psi\\in C_c^1(\\Omega\\times[0,T))$ with the same support convention,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(H\\,\\partial_t\\psi+Q\\cdot\\nabla_x\\psi+R\\psi\\bigr)\\,dx\\,dt+\\int_\\Omega H_0(x)\\psi(x,0)\\,dx\\le0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-fd-conservative-weak-form",
+          "source_section": "Definition",
+          "quote": "Adopt the Axiom of Countable Choice, meaning that every sequence of nonempty sets admits a choice function. For $n\\ge1$, use the complete Euclidean Lebesgue measure space $(\\mathbb R^n,\\mathcal L_n,\\lambda_n)$, where $\\mathcal L_n=\\mathcal L(\\mathbb R^n)$ is the Caratheodory-measurable family for Lebesgue outer measure and $\\lambda_n$ is that outer measure restricted to $\\mathcal L_n$. The sigma-algebra and complete-measure assertions are the Lebesgue measure theorem under this axiom. For a Lebesgue-measurable set $E\\subseteq\\mathbb R^n$, use the trace sigma-algebra $\\mathcal L_E:=\\{E\\cap B:B\\in\\mathcal L_n\\}$ and the measure $\\lambda_E(A):=\\lambda_n(A)$ for $A\\in\\mathcal L_E$; its countable additivity is inherited from $\\lambda_n$. A map $f:E\\to\\mathbb R^k$ is measurable when $f^{-1}(B)\\in\\mathcal L_E$ for every Borel set $B\\subseteq\\mathbb R^k$, where the Borel sigma-algebra is generated by the open sets. For matrix-valued maps use their finite coordinate arrays. A property holds almost everywhere on $E$ when its exceptional set is contained in a measurable $\\lambda_E$-null set. Nonnegative integrals are suprema of nonnegative simple minorants; signed real integrals are the difference of the positive- and negative-part integrals when those parts are finite. Finite-dimensional integrals are taken componentwise.\n\nLet $T>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $m\\ge1$ be an integer. Put $D:=\\Omega\\times[0,T)\\subseteq\\mathbb R^4$ in spatial-first coordinates $(x,t)$. Both $D$ and $\\Omega$ are Borel and hence Lebesgue measurable. Spatial integrals use $\\lambda_\\Omega$ from $\\lambda_3$, and space-time integrals use $\\lambda_D$ from $\\lambda_4$. For a finite coordinate array $v$, set $\\|v\\|_1:=\\sum_i|v_i|$, summing all entries for a matrix. A measurable field $f:E\\to\\mathbb R^k$ is locally integrable when $\\int_K\\|f\\|_1\\,d\\lambda_E<\\infty$ for every compact $K\\subseteq E$. For $E=D$ the compact sets are taken in the relative topology, including those meeting $t=0$. Fields on $D$ are identified up to $\\lambda_D$-almost-everywhere equality, and initial fields on $\\Omega$ up to $\\lambda_\\Omega$-almost-everywhere equality. The slice $\\Omega\\times\\{0\\}$ is contained in a Lebesgue-null coordinate hyperplane in $\\mathbb R^4$; values of a space-time representative on that slice do not determine the separately prescribed initial field.\n\nIn the displayed weak identities, $\\int_0^T\\int_\\Omega f\\,dx\\,dt$ denotes the joint integral of the zero extension of $f$ from $D$ with respect to $\\lambda_4$. For each test, its compact support bounds the test and its first derivatives, so every component of the tested products is measurable and is bounded in absolute value by a fixed multiple of the norm of a locally integrable field on that compact set. Thus all tested products and their finite sums have finite signed integrals. Euclidean Lebesgue measure on $\\mathbb R^3\\times\\mathbb R$ is the completed product of $\\lambda_3$ and $\\lambda_1$; completed-product Fubini therefore also gives the displayed iterated notation, with section integrals taken for almost every time and set to zero on a measurable exceptional null set. No integrability of every individual time slice is required. The integral is unchanged by the stated almost-everywhere identifications. The same conventions apply to the scalar inequality and to the initial integrals on $\\Omega$.\n\nLet $U: \\Omega\\times[0,T)\\to\\mathbb R^m$, $F: \\Omega\\times[0,T)\\to\\mathbb R^{m\\times3}$, and $S: \\Omega\\times[0,T)\\to\\mathbb R^m$ be such fields, and let $U_0:\\Omega\\to\\mathbb R^m$ be locally integrable. For each row $a$, define $(\\operatorname{div}_x F)_a=\\sum_{j=1}^3\\partial_{x_j}F_{aj}$ in the distributional sense, and define $F:\\nabla_x\\phi=\\sum_{a=1}^m\\sum_{j=1}^3F_{aj}\\partial_{x_j}\\phi_a$. The equation $\\partial_tU+\\operatorname{div}_xF=S$ with distributional initial datum $U_0$ means that for every $\\phi\\in C_c^1(\\Omega\\times[0,T);\\mathbb R^m)$, continuously differentiable up to $t=0$ and supported away from $\\partial\\Omega$ and $t=T$,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(U\\cdot\\partial_t\\phi+F:\\nabla_x\\phi+S\\cdot\\phi\\bigr)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\phi(x,0)\\,dx=0.$$\n\nNo boundary condition on $\\partial\\Omega$ is encoded because the test fields are supported away from it. This initial identity specifies the initial datum distributionally; it does not assert $U(\\cdot,t)\\to U_0$ in $L^1_{\\mathrm{loc}}(\\Omega)$ or any other stronger trace topology. Such a trace must be assumed or proved separately. The fields are abstract mathematical variables; no physical unit system or balance postulate is imposed.\n\nFor locally integrable scalar fields $H,R:D\\to\\mathbb R$ and $H_0:\\Omega\\to\\mathbb R$, and a locally integrable flux $Q: \\Omega\\times[0,T)\\to\\mathbb R^3$, the inequality $\\partial_tH+\\operatorname{div}_x Q\\ge R$ with initial datum $H_0$ means that for every nonnegative $\\psi\\in C_c^1(\\Omega\\times[0,T))$ with the same support convention,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(H\\,\\partial_t\\psi+Q\\cdot\\nabla_x\\psi+R\\psi\\bigr)\\,dx\\,dt+\\int_\\Omega H_0(x)\\psi(x,0)\\,dx\\le0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ (Linear map between vector spaces over the same field,\nEvery Euclidean linear map has a unique matrix and satisfies $\\|Lh\\|_2\\le K\\|h\\|_2$ for some $K\\ge0$).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "piecewise-integration-by-parts",
+          "claim": "By [A2] and [F2], $P$ and $P^{-1}$ preserve the Lebesgue sigma-algebra and measure. Pullback by $P$ bijects nonnegative simple minorants and preserves their level-set measures, so the nonnegative integral is preserved by its defining supremum; applying positive and negative parts gives the same conclusion for the integrable tested scalar products in [F1]. Thus the time-first coordinates and the spatial-first weak definition give the same test integrals. For a test $\\phi$ supported in $\\mathcal O$, apply the product rule to the space-time current $(U^\\pm,F_1^\\pm,F_2^\\pm,F_3^\\pm)$ separately on $\\mathcal O^-$ and $\\mathcal O^+$. Coordinatewise integration by parts in $t,x_1,x_2,x_3$ gives $\\int_{\\mathcal O}(U\\cdot\\partial_t\\phi+F:\\nabla_x\\phi+S\\cdot\\phi)=-\\int_{\\mathcal O^-}W^-\\cdot\\phi-\\int_{\\mathcal O^+}W^+\\cdot\\phi-\\int_{J\\times D}K_{\\rm graph}\\cdot\\phi(t,x',h(t,x'))\\,dx'\\,dt$, where $W^\\pm=\\partial_tU^\\pm+\\operatorname{div}_xF^\\pm-S^\\pm$ and $K_{\\rm graph}=[F_3]-\\partial_th[U]-\\nabla_{x'}h\\cdot[F_{1,2}]$. Compact support removes all outer-boundary terms; the remaining graph term is the difference of the two side conormal fluxes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "A2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "normal-speed-jump",
+          "claim": "The unnormalised space-time conormal from minus to plus is $(-\\partial_th,-\\nabla_{x'}h,1)$. Its contraction with the jump current equals $K_{\\rm graph}=[F_3]-\\partial_th[U]-\\nabla_{x'}h\\cdot[F_{1,2}]=\\lambda([F]n-V_n[U])$. Since $\\lambda>0$, the graph coefficient vanishes exactly when $[F]n-V_n[U]=0$, and has the same sign as the scalar entropy jump coefficient.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "system-weak-equivalence",
+          "claim": "If the weak identity holds, choose tests supported wholly inside either side in step 1.1. Each continuous component of $W^\\pm$ must vanish: a nonzero value would have a fixed strict sign on a small ball and contradict the identity for a nonnegative $C^1$ bump there. With these bulk terms zero, step 1.1 gives zero integral of $K_{\\rm graph}$ against every trace of a test. Any compactly supported $C^1$ graph test $\\zeta(t,x')$ extends to the patch as $\\phi(t,x',x_3)=\\zeta(t,x')\\eta(x_3-h(t,x'))$, where $\\eta$ is a $C^1$ cutoff with $\\eta(0)=1$ and sufficiently small support. Such a uniform tube lies in $\\mathcal O$ because the graph over $\\operatorname{supp}\\zeta$ is compact in this open patch. A nonzero component of continuous $K_{\\rm graph}$ would have a fixed sign on a small graph patch and contradict the identity. Hence $W^\\pm=0$ and $K_{\\rm graph}=0$. Conversely, these equalities make the weak integral zero by step 1.1, and step 1.2 gives the stated jump condition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "entropy-weak-equivalence",
+          "claim": "For the scalar inequality, step 1.1 gives the weak integral as the negative of the bulk integrals of $g^\\pm=\\partial_tH^\\pm+\\operatorname{div}_xG^\\pm-R^\\pm$ and the negative graph integral with coefficient $K_H=[G_3]-\\partial_th[H]-\\nabla_{x'}h\\cdot[G_{1,2}]$. If both bulk residuals and $K_H$ are nonnegative, the weak integral is nonpositive for every nonnegative test. Conversely, a negative bulk residual at a point admits a nonnegative bump supported on that side and violates the weak inequality. If $K_H<0$ at a graph point, continuity gives a smaller graph patch where $K_H$ is bounded above by a negative constant. Choose a nonnegative test with fixed positive trace on that patch and support in a tube of width $\\varepsilon$ about the graph. The negative interface contribution to the weak integral is positive and independent of $\\varepsilon$, while the bounded bulk terms have magnitude $O(\\varepsilon)$; for small enough $\\varepsilon$ the weak integral is positive, a contradiction. Hence both the side inequalities and $K_H\\ge0$ are necessary. Step 1.2 shows $K_H=\\lambda([G]\\cdot n-V_n[H])$, so the stated jump sign is equivalent.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "F1",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the corrected O is contained in J×D×R and contains Gamma. If J or D is empty, Gamma and O are empty and all weak, side and interface conditions are vacuous. On nonempty patches steps 2.1 and 3.1 use side tests and graph tubes to give the two directions without any nonemptiness inference.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The current Statement has O contained in J x D x R and containing the graph. Empty J or D makes both O and Gamma empty, so every weak, side and interface clause is vacuous. The new measure/permutation part of1.1 also preserves empty sets and zero integrals. On present patches2.1/3.1 still give the side/graph equivalences; preserve the checked row.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "c372f2f73bc77a48ee03194281166fb8d2b94cdb46ae7cfcb5414bc023548a9b",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement formula at a stationary graph $h_t=0$ reduces to the normal-flux jump conditions $[F]\\cdot n=0$ and $[G]\\cdot n\\ge0$.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Setting h_t=0 in the actual normal-speed formula gives V_n=0. Proof1.2 then removes the speed term from K_graph=lambda([F]n-V_n[U]), and3.1 gives the same stationary entropy-flux sign. The added measure context never divides by h_t.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "5676619d072a8d2cc8529f57855723d54bb611952ebb0242f19d287536dd5dc8",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes a three-dimensional spatial graph and makes no one-dimensional reduction claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Statement fixes three spatial coordinates and a two-coordinate graph base; the new permutation P has four spacetime coordinates. No ambient one-dimensional reduction has been added. Scalar state components are already included in m>=1, not a new spatial-dimension claim.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "760570220ea214479f756d20b81bb18452ffcc818b88d1747681a11430d65860",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement jump formula with $[U]=0$ or $[H]=0$ drops the speed term and reduces to the corresponding normal-flux condition without division by a state jump.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof1.2 uses lambda=sqrt(1+|grad h|^2)>0 and never divides by [U] or[H]. Their zero values simply remove the normal-speed contribution, exactly as the checked row states; the new determinant-one coordinate relabeling has no state-jump denominator.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "068252c43de531d3aa511fcf51e906f74dcf543dcd9c1c654f7dd4b6bf051281",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The graph time interval lies in $(0,T)$; initial data are supplied independently by the A-page definition and no interface trace at $t=0$ is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The graph is strictly interior: J subset(0,T). Current1.1–3.1 use interior compact tests; no initial trace is obtained from graph coefficients. A2 now identifies the weak integral on restricted lambda4, which leaves the source definition's independent lambda3 initial term intact.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "fdab55ec131b58cb97ff79ac8d52065a8704ae238b0a1a64c76034558447bad5",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes Countable Choice. Facts [A2] and [F2], used in Proof1.1, supply the complete restricted Euclidean Lebesgue calculus and the published determinant-one coordinate-permutation measure result under AC_omega. The graph residual and local test witnesses use no additional selection principle.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume Countable Choice: every sequence of nonempty sets admits a choice function."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Repair the current denial. The Statement explicitly assumes Countable Choice, A2 adopts the complete Lebesgue weak calculus, and new F2/Proof1.1 apply the published linear-change-of-variables theorem under AC_omega before using the graph residual. Local bump choices require no separate choice axiom; that does not remove the stated measure/permutation premise.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "59443d241d5aeb4e4aaae9dfe7365908fe1c0c58a54ecd080ecb67f8a5a700a8",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the weak residual formula, step 1.2 normalizes the graph coefficient, step 2.1 identifies side and interface residuals, and step 3.1 gives necessity for the scalar inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof1.1 still derives the same bulk/graph residual after its new measure-preserving coordinate prelude;1.2 normalizes the coefficient,2.1 forces continuous side and interface residuals to vanish, and3.1 isolates the necessary entropy sign by thin tubes. These arguments now run in the explicit AC_omega measure context, without changing the direction.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "9eca33b6e907ab9543f2fa5efc563cee42a3f49dc95ad44aa79032e2a15660cd",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 substitute the side equations/inequalities and interface conditions into the residual formula to recover the weak identities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof2.1 substitutes zero side/interface residuals into1.1. Proof3.1 substitutes nonnegative side/interface residuals to make the weak integral nonpositive. The permutation prelude preserves integrals and signs in both coordinates; no stronger trace or solution-existence assertion enters.",
+            "item_sha256": "917af18ab859e28fd777031f67fe78b26d1106fec434a2d2786fdb20360960a5",
+            "row_sha256": "f88212326e53417cde201d01da15eee12c1f94bb4826aef0be32448800f84c68",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/weak8/current-boundary-review.json",
+              "sha256": "27e0323df98abe444b9fc2ec2594a34cc79489534b79a80f1a488510499b0c4d"
+            }
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Checked every step against def-fd-conservative-weak-form and read Silvestre §§6.2.1–6.2.2 pp100–104 and Guermond §24.4.2 pp181–182. These sources give scalar one-space-dimensional weak/jump arguments; the authored proof explicitly derives the multidimensional matrix/source and scalar inequality extension. Repaired time-first versus spatial-first typing by an explicit permutation and O contained in the graph cylinder. Product integration gives negative bulk residuals and negative graph coefficient K=[F3]-h_t[U]-sum h_j[Fj]; lambda>0 gives K=lambda([F]n-V_n[U]). Side bumps force zero residuals, and compact graph tests extend in a tube inside O. For inequality necessity a shrinking tube has fixed interface term and O(epsilon) bounded bulk term. Converse follows directly from the residual formula. Empty graph/patch is vacuous, zero speed and zero jumps require no division, and time-zero traces remain separate. No choice or singular source is silently introduced. Proof 1.1 now uses one paragraph. Direct outside consumer pthm-fd-conservation-jump-laws has matching local C1 graph charts, one-sided C1 extensions, ordinary locally integrable sources, and the identical normal/speed orientation; no consumer repair is necessary."
+      }
+    }
+  }
+}

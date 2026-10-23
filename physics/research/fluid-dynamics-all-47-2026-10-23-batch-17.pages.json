@@ -1,0 +1,626 @@
+[
+  {
+    "order": 393,
+    "id": "fd-s01",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Periodic fluid Fourier Sobolev spaces",
+    "companion": "fd-s01-examples",
+    "requires": [
+      "countability-and-uncountability",
+      "hilbert-space-geometry-and-riesz-representation",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "relations-functions-and-quotients",
+      "weak-derivatives-and-sobolev-spaces",
+      "monotone-sequences-and-cauchy-completeness",
+      "the-riemann-integral-in-rn-and-jordan-content",
+      "fubini-and-change-of-variables",
+      "the-fundamental-theorems-of-calculus",
+      "uniform-convergence-of-functions"
+    ],
+    "items": [
+      {
+        "id": "def-fd-periodic-fourier-sobolev-spaces",
+        "kind": "definition",
+        "title": "Periodic fluid Fourier Sobolev spaces",
+        "statement": "**Choice context.** The finite coefficient arrays and weighted coefficient completion below are defined without Countable Choice. In this coefficient-only reading, a finite real trigonometric polynomial is specified by a finite coefficient array $(a_k)$, extended by zero and satisfying $a_{-k}=\\overline{a_k}$, and $\\widehat q(k):=a_k$ denotes its specified coefficient coordinate. For the normalized Haar-measure conventions, integral Fourier coefficients and $L^2$ realization below, additionally assume Countable Choice, as in the declared measure and Fourier suppliers. In that analytic context the coefficient coordinates agree with the integral coefficients.\n\nLet $d\\in\\{1,2,3\\}$ and $N\\ge1$ be integers. Let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$. For any componentwise integrable real $q:Q_d\\to\\mathbb R^N$, considered up to equality almost everywhere, and $k\\in\\mathbb Z^d$, define its componentwise Fourier coefficient by $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$; this integral is finite because $|e^{ik\\cdot x}|=1$ and $q\\in L^1$. A finite real trigonometric polynomial is a finite sum $q(x)=\\sum_{k\\in F}a_ke^{ik\\cdot x}$, where $F\\subset\\mathbb Z^d$ is finite and the coefficients, extended by zero outside $F$, satisfy $a_{-k}=\\overline{a_k}$. Such polynomials are integrable and satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. Identify this completion with the weighted coefficient space subject to conjugate symmetry, using finite symmetric cutoffs, and write $\\widehat q(k)$ for its coefficient coordinate. Under Countable Choice, if $s\\ge0$, each element has a unique $L^2$ representative, and its coefficient coordinate agrees with the normalized integral formula; for $s<0$ no $L^2$ representative is asserted.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-countable-choice",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "thm-cauchy-criterion-via-lub"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral": "mathematical-premise",
+          "def-fourier-coefficients-and-trigonometric-polynomials": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "thm-cauchy-criterion-via-lub": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "reference": "items/def-fd-periodic-fourier-sobolev-spaces.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07%2110_23_44_AM.pdf",
+              "locator": "§2.5, printed pp. 63–68: Fourier coefficients, orthogonality, Parseval and Fejér completeness route."
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf",
+              "locator": "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "def-fd-projected-no-slip-stokes-space",
+        "kind": "definition",
+        "title": "Projected no-slip Stokes Hilbert space",
+        "statement": "Assume the full Axiom of Choice. Let $d\\ge2$, let $R>0$, and let $\\Omega\\subset(-R,R)^d$ be a nonempty bounded open set. Define $W^{1,2}(\\Omega;\\mathbb R^d)$ componentwise: $v=(v_1,\\ldots,v_d)$ belongs to it exactly when each $v_i$ belongs to the scalar $W^{1,2}(\\Omega;\\mathbb R)$ defined in the earlier integer-order Sobolev-space definition. Its weak derivatives are $\\partial_jv_i$, its gradient is the matrix $\\nabla v=(\\partial_jv_i)_{i,j=1}^d$, and its norm is\n$$\\|v\\|_{W^{1,2}(\\Omega;\\mathbb R^d)}^2=\\sum_{i=1}^d\\left(\\|v_i\\|_{L^2(\\Omega)}^2+\\sum_{j=1}^d\\|\\partial_jv_i\\|_{L^2(\\Omega)}^2\\right)=\\int_\\Omega\\left(|v|^2+|\\nabla v|_F^2\\right)\\,dx,$$\nwhere $v\\cdot w=\\sum_i v_iw_i$, $|v|^2=\\sum_i|v_i|^2$, $A:B=\\sum_{i,j}A_{ij}B_{ij}$, and $|A|_F^2=\\sum_{i,j}|A_{ij}|^2$. Define $H_0^1(\\Omega;\\mathbb R^d)$ as the closure of the $d$-tuples of compactly supported smooth real functions in this norm. Define $\\operatorname{div}v=0$ distributionally to mean $\\int_\\Omega v\\cdot\\nabla\\phi=0$ for every $\\phi\\in C_c^\\infty(\\Omega;\\mathbb R)$, and set $V=\\{v\\in H_0^1(\\Omega;\\mathbb R^d):\\operatorname{div}v=0\\}$. Equip $V$ with the inherited $H^1$ inner product $\\int_\\Omega(v\\cdot w+\\nabla v:\\nabla w)$. The phrase no-slip here means membership in this closure; no trace characterization on arbitrary $\\Omega$ is part of the definition.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "def-axiom-of-choice",
+          "def-real-and-complex-inner-product-space",
+          "def-hilbert-space"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "thm-sobolev-spaces-are-banach-spaces": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-real-and-complex-inner-product-space": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/def-fd-projected-no-slip-stokes-space.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)",
+              "url": "https://www.ljll.fr/MathModel/enseignement/polycopies/vohralik.pdf",
+              "locator": "Chapter 6 §6.1, PDF pp. 55–56: no-slip Stokes formulation in H¹₀ and mean-zero L² pressure; independent source context."
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf",
+              "locator": "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "lem-fd-rectangular-test-divergence-inverse",
+        "kind": "lemma",
+        "title": "Rectangular continuous divergence inverse on mean-zero tests",
+        "statement": "Let $d\\ge1$ and let $\\Omega=\\prod_{i=1}^d(a_i,b_i)$ be a nonempty finite open rectangle. Write $D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb R)$ and $D_0(\\Omega)=\\{h\\in D(\\Omega):\\int_\\Omega h=0\\}$. For every compact $K\\subset\\Omega$ there is a compact $K'\\subset\\Omega$ such that a linear map $R:D_0(\\Omega)\\to D(\\Omega;\\mathbb R^d)$ sends tests supported in $K$ to fields supported in $K'$, satisfies $\\operatorname{div}(Rh)=h$, and is continuous on each fixed-support test space for the seminorms $\\sup|\\partial^\\alpha h|$.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "lem-uniform-integral-error-bound"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "thm-continuous-on-a-rectangle-is-riemann-integrable": "mathematical-premise",
+          "thm-riemann-fubini-on-product-rectangles": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle": "mathematical-premise",
+          "lem-uniform-integral-error-bound": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/lem-fd-rectangular-test-divergence-inverse.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)",
+              "url": "https://www.ljll.fr/MathModel/enseignement/polycopies/vohralik.pdf",
+              "locator": "Chapter 6 §6.1, PDF pp. 55–56: Stokes pressure and inf–sup context; the explicit rectangle right inverse is proved here."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "lem-fd-periodic-fourier-embedding-products",
+        "kind": "lemma",
+        "title": "Periodic Fourier embeddings and products",
+        "statement": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$ and use $H^\\sigma(Q_d)$ with the normalized measure and weights in the Definition. For every integer $j\\ge0$ and $\\sigma>j+d/2$, each scalar $q\\in H^\\sigma(Q_d)$ has a $C^j$ representative and $\\|q\\|_{C^j}\\le C_{d,\\sigma,j}\\|q\\|_{H^\\sigma}$. For every $\\sigma>d/2$, pointwise multiplication extends uniquely from trigonometric polynomials to a continuous bilinear map $H^\\sigma\\times H^\\sigma\\to H^\\sigma$ satisfying $\\|fg\\|_{H^\\sigma}\\le C_{d,\\sigma}\\|f\\|_{H^\\sigma}\\|g\\|_{H^\\sigma}$. The assertions extend componentwise to finite-dimensional vector and tensor fields.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/lem-fd-periodic-fourier-embedding-products.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)",
+              "url": "https://www.math.mcgill.ca/gantumur/math595f14/Notes.pdf",
+              "locator": "§§2.1.1–2.1.2, §2.1.5.2, §4.1.1; Fourier, weak derivatives, product estimate and Leray projection."
+            },
+            {
+              "title": "Terence Tao, 254A Notes 1: Local well-posedness of the Navier–Stokes equations (2018)",
+              "url": "https://terrytao.wordpress.com/2018/09/16/254a-notes-1-local-well-posedness-of-the-navier-stokes-equations/",
+              "locator": "Periodic pressure/Leray discussion and Sobolev Proposition 35 / Exercise 36."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "def-fd-periodic-leray-pressure-maps",
+        "kind": "definition",
+        "title": "Periodic Leray and pressure maps",
+        "statement": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(k)=P_ka(k)$ for every $k\\in\\mathbb Z^d$, where $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. For $q\\in H^s(Q_d)$, define $\\partial_jq\\in H^{s-1}(Q_d)$ coefficientwise by $\\widehat{\\partial_jq}(k)=ik_j\\widehat q(k)$; for vector fields set $\\widehat{\\nabla q}(k)=ik\\widehat q(k)$, and for tensor fields set $\\widehat{\\operatorname{div}F}_i(k)=i\\sum_jk_j\\widehat F_{ij}(k)$. These derivative maps are bounded from $H^s$ to $H^{s-1}$. The multipliers $P$ and $Q$ are real-preserving and bounded on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with these derivatives. For every $F$ and every $k\\in\\mathbb Z^d$, their exact identity is the coefficientwise equality\n$$\\widehat{\\nabla QF}(k)=-(I-P_k)\\widehat{\\operatorname{div}F}(k).$$\nIn particular, both sides have zero coefficient at $k=0$.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/def-fd-periodic-leray-pressure-maps.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)",
+              "url": "https://www.math.mcgill.ca/gantumur/math595f14/Notes.pdf",
+              "locator": "§§2.1.1–2.1.2, §2.1.5.2, §4.1.1; Fourier, weak derivatives, product estimate and Leray projection."
+            },
+            {
+              "title": "Terence Tao, 254A Notes 1: Local well-posedness of the Navier–Stokes equations (2018)",
+              "url": "https://terrytao.wordpress.com/2018/09/16/254a-notes-1-local-well-posedness-of-the-navier-stokes-equations/",
+              "locator": "Periodic pressure/Leray discussion and Sobolev Proposition 35 / Exercise 36."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "lem-fd-periodic-tame-transport-commutator",
+        "kind": "lemma",
+        "title": "Tame transport commutator",
+        "statement": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, let $m\\ge s\\ge4$ be integers, let $f,g\\in C^\\infty(Q_d;\\mathbb R)$, and define $\\Lambda^m$ by $\\widehat{\\Lambda^m q}(k)=w_k^m\\widehat q(k)$. For each coordinate $j$,\n$$\\|[\\Lambda^m,f]\\partial_jg\\|_{L^2}\\le C_{d,m,s}\\bigl(\\|f\\|_{H^m}\\|g\\|_{H^s}+\\|f\\|_{H^s}\\|g\\|_{H^m}\\bigr),$$\nwhere $[\\Lambda^m,f]h=\\Lambda^m(fh)-f\\Lambda^mh$.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "lem-fd-periodic-fourier-embedding-products",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "lem-fd-periodic-fourier-embedding-products": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/lem-fd-periodic-tame-transport-commutator.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)",
+              "url": "https://www.math.mcgill.ca/gantumur/math595f14/Notes.pdf",
+              "locator": "§§2.1.1–2.1.2, §2.1.5.2, §4.1.1; Fourier, weak derivatives, product estimate and Leray projection."
+            },
+            {
+              "title": "Terence Tao, 254A Notes 1: Local well-posedness of the Navier–Stokes equations (2018)",
+              "url": "https://terrytao.wordpress.com/2018/09/16/254a-notes-1-local-well-posedness-of-the-navier-stokes-equations/",
+              "locator": "Periodic pressure/Leray discussion and Sobolev Proposition 35 / Exercise 36."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "thm-fd-periodic-pressure-recovery",
+        "kind": "theorem",
+        "title": "Pressure recovery for periodic incompressible Sobolev velocity",
+        "statement": "Let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ have normalized measure $d\\mu=(2\\pi)^{-d}dx$. For $\\alpha=(\\alpha_1,\\ldots,\\alpha_d)\\in\\mathbb N_0^d$, write $|\\alpha|=\\sum_j\\alpha_j$ and $\\partial^\\alpha=\\partial_1^{\\alpha_1}\\cdots\\partial_d^{\\alpha_d}$. Give $C^\\infty(Q_d;\\mathbb R)$ the Fr\\'echet topology generated by $p_m(\\phi)=\\max_{|\\alpha|\\le m}\\|\\partial^\\alpha\\phi\\|_\\infty$, for $m\\in\\mathbb N_0$, where the derivatives are those of the smooth periodic lift to $\\mathbb R^d$. A periodic distribution is a continuous real-linear functional on this test space, extended complex-linearly to complex-valued tests. For such a distribution $S$, define $\\widehat S(k)=\\langle S,e^{-ik\\cdot x}\\rangle$ for $e_k(x)=e^{ik\\cdot x}$ and define its mean to be $\\widehat S(0)=\\langle S,1\\rangle$. For an integrable function $g$, the pairing is $\\langle g,\\phi\\rangle=\\int_{Q_d}g\\phi\\,d\\mu$. Define distributional derivatives by $\\langle\\partial_jS,\\phi\\rangle=-\\langle S,\\partial_j\\phi\\rangle$. For a smooth scalar test, $\\nabla\\phi=(\\partial_1\\phi,\\ldots,\\partial_d\\phi)$ and $\\Delta\\phi=\\sum_j\\partial_j^2\\phi$; for a smooth vector field $v$, $\\operatorname{div}v=\\sum_j\\partial_jv_j$, $(v\\otimes v)_{ij}=v_iv_j$, and $(v\\cdot\\nabla)v_i=\\sum_jv_j\\partial_jv_i$. In particular, $\\operatorname{div}u=0$ distributionally means $-\\int_{Q_d}u\\cdot\\nabla\\phi\\,d\\mu=0$ for every real test function $\\phi$. Equality of periodic distributions means equality on every such test function. Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s>d/2+1$, and let $u\\in H^s(Q_d;\\mathbb R^d)$ satisfy $\\operatorname{div}u=0$ in this sense. Then $u\\otimes u\\in H^s$, the mean-zero scalar $\\pi=Q(u\\otimes u)$ belongs to $H^s$, and in $H^{s-1}$,\n$$P(u\\cdot\\nabla u)=u\\cdot\\nabla u+\\nabla\\pi.$$\nAmong mean-zero periodic distributions $\\widetilde\\pi$ for which this identity holds as an equality of periodic distributions, this pressure is unique. The formula is a torus pressure recovery result and asserts no wall pressure regularity.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-fd-periodic-leray-pressure-maps",
+          "lem-fd-periodic-fourier-embedding-products",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-fd-periodic-leray-pressure-maps": "mathematical-premise",
+          "lem-fd-periodic-fourier-embedding-products": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/thm-fd-periodic-pressure-recovery.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, 254A Notes 1: Local well-posedness of the Navier–Stokes equations (2018)",
+              "url": "https://terrytao.wordpress.com/2018/09/16/254a-notes-1-local-well-posedness-of-the-navier-stokes-equations/",
+              "locator": "Periodic pressure/Leray discussion and Sobolev Proposition 35 / Exercise 36."
+            },
+            {
+              "title": "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)",
+              "url": "https://www.math.mcgill.ca/gantumur/math595f14/Notes.pdf",
+              "locator": "§§2.1.1–2.1.2, §2.1.5.2, §4.1.1; Fourier, weak derivatives, product estimate and Leray projection."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "lem-fd-zero-trace-directional-poincare",
+        "kind": "lemma",
+        "title": "Directional Poincaré bound for zero trace",
+        "statement": "Assume full AC. Let $d\\ge2$, $R>0$, and let $\\Omega\\subset(-R,R)^d$ be bounded and open. For every $v\\in H_0^1(\\Omega;\\mathbb R^d)$,\n$$\\|v\\|_{L^2(\\Omega)}\\le2R\\|\\partial_1v\\|_{L^2(\\Omega)}\\le2R\\|\\nabla v\\|_{L^2(\\Omega)}.$$\nHere $H_0^1$ is the closure of compactly supported smooth fields in the Sobolev norm.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-projected-no-slip-stokes-space",
+          "def-axiom-of-choice",
+          "def-sobolev-space-wkp-and-its-norm"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-projected-no-slip-stokes-space": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/lem-fd-zero-trace-directional-poincare.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)",
+              "url": "https://www.ljll.fr/MathModel/enseignement/polycopies/vohralik.pdf",
+              "locator": "Chapter 3 §3.7, PDF p. 30: global Friedrichs inequality on H¹₀(Ω); the local directional 2R estimate is proved here."
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf",
+              "locator": "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "thm-fd-projected-stationary-stokes",
+        "kind": "theorem",
+        "title": "Projected stationary weak Stokes solvability",
+        "statement": "Assume full AC. Let $d\\ge2$, let $R>0$, let $\\Omega\\subset(-R,R)^d$ be nonempty bounded open, let $\\mu>0$, and let $f\\in L^2(\\Omega;\\mathbb R^d)$. There is a unique $u\\in V$ such that\n$$\\mu\\int_\\Omega\\nabla u:\\nabla v=\\int_\\Omega f\\cdot v\\qquad(v\\in V),$$\nwhere $V$ is the distributionally divergence-free subspace of $H_0^1$ defined above. It satisfies $\\|\\nabla u\\|_2\\le2R\\|f\\|_2/\\mu$. This is a projected variational velocity result; it asserts no pressure, $L^2$ pressure regularity, or classical boundary regularity.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-projected-no-slip-stokes-space",
+          "lem-fd-zero-trace-directional-poincare",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-projected-no-slip-stokes-space": "mathematical-premise",
+          "lem-fd-zero-trace-directional-poincare": "mathematical-premise",
+          "thm-riesz-representation-for-hilbert-space": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/thm-fd-projected-stationary-stokes.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)",
+              "url": "https://www.ljll.fr/MathModel/enseignement/polycopies/vohralik.pdf",
+              "locator": "Chapter 4 §4.1, PDF p. 31: Riesz/Lax–Milgram formulation for the Dirichlet Laplacian; Chapter 6 §6.1, PDF pp. 55–56: Stokes variational formulation and pressure context."
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf",
+              "locator": "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "lem-fd-given-smooth-solutions-difference-energy",
+        "kind": "lemma",
+        "title": "Difference energy for given smooth incompressible and symmetric solutions",
+        "statement": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized measure $d\\mu=(2\\pi)^{-d}dx$. For $z:Q_d\\to\\mathbb R^M$, use componentwise Fourier coefficients $\\widehat z(k)=\\int_{Q_d}z(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and the weighted coefficient completion norm $\\|z\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat z(k)|^2$; the normalized Fourier isometry gives $\\|z\\|_2^2=\\sum_k|\\widehat z(k)|^2$, where $\\|z\\|_2=(\\int_{Q_d}|z|^2\\,d\\mu)^{1/2}$ and the pointwise component norm is Euclidean. In particular, $H^0=L^2$. For a map $z:[0,T]\\times Q_d\\to\\mathbb R^M$, smooth on the closed cylinder means that for every $m\\in\\mathbb N_0$ and spatial multi-index $\\alpha$, $\\partial_t^m\\partial_x^\\alpha z$ exists on $(0,T)\\times Q_d$ and extends continuously to $[0,T]\\times Q_d$; spatial derivatives are those of its periodic lift. For a spatial vector field define $\\operatorname{div}z=\\sum_{j=1}^d\\partial_jz_j$ and $\\Delta z=\\sum_{j=1}^d\\partial_j^2z$. Write $\\nabla z$ for the spatial Jacobian and $\\|\\nabla z(t)\\|_\\infty=\\sup_{x\\in Q_d}|\\nabla z(t,x)|_F$, where $|\\cdot|_F$ is the Euclidean Frobenius matrix norm. Let $P$ be the coefficientwise vector multiplier with $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. The equations below hold pointwise on $(0,T)\\times Q_d$ and at the time endpoints by continuous extension.\n\n(i) If $\\nu\\ge0$ and $u,v\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^d)$ satisfy, for each $z\\in\\{u,v\\}$,\n$$z_t+P((z\\cdot\\nabla)z)=\\nu\\Delta z,\\qquad \\operatorname{div}z=0,$$\nthen for every $t\\in[0,T]$, with $w=u-v$,\n$$\\|w(t)\\|_2^2\\le\\|w(0)\\|_2^2\\exp\\!\\left(2\\int_0^t\\|\\nabla v(\\tau)\\|_\\infty\\,d\\tau\\right).$$\n\n(ii) Let $N\\ge1$ and, for $1\\le j\\le d$, let $A_j:\\mathbb R^N\\to\\mathbb R^{N\\times N}$ be a fixed real-linear map whose image consists of symmetric matrices. If $q,r\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^N)$ satisfy, for each $z\\in\\{q,r\\}$,\n$$z_t+\\sum_{j=1}^dA_j(z)\\partial_jz=0,$$\nthen for every $t\\in[0,T]$,\n$$\\|q(t)-r(t)\\|_2^2\\le\\|q(0)-r(0)\\|_2^2\\exp\\!\\left(C_{d,N,A}\\int_0^t(\\|\\nabla q(\\tau)\\|_\\infty+\\|\\nabla r(\\tau)\\|_\\infty)\\,d\\tau\\right),$$\nwhere $C_{d,N,A}$ depends only on $d,N$ and the operator norms of the finitely many maps $A_j$. For either pair $(z_1,z_2)=(u,v)$ or $(q,r)$, put $w=z_1-z_2$. Let $\\Gamma\\ge0$ be any uniform rate for which the corresponding squared $L^2$ estimate above gives $\\|w(t)\\|_2^2\\le\\|w(0)\\|_2^2e^{\\Gamma t}$. If $s\\ge1$ and $\\max_{t\\in[0,T]}\\max(\\|z_1(t)\\|_{H^s},\\|z_2(t)\\|_{H^s})\\le M$ for some $M\\ge0$, define\n$$B_s(M)=\\begin{cases}1,&s=1,\\\\(2M)^{(s-1)/s},&s>1.\\end{cases}$$\nThen for every $t\\in[0,T]$,\n$$\\|w(t)\\|_{H^{s-1}}\\le B_s(M)\\|w(0)\\|_2^{1/s}e^{\\Gamma t/(2s)}.$$\nThese are conditional estimates for already given smooth maps on the stated cylinder and assert no existence theorem. All quantities are mathematical and no physical units are assigned to $\\nu$.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "lem-fd-periodic-fourier-embedding-products",
+          "def-fd-periodic-leray-pressure-maps",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "lem-fd-periodic-fourier-embedding-products": "mathematical-premise",
+          "def-fd-periodic-leray-pressure-maps": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/lem-fd-given-smooth-solutions-difference-energy.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)",
+              "url": "https://www.math.mcgill.ca/gantumur/math595f14/Notes.pdf",
+              "locator": "§§2.1.1–2.1.2, §2.1.5.2, §4.1.1; Fourier, weak derivatives, product estimate and Leray projection."
+            },
+            {
+              "title": "Terence Tao, 254A Notes 1: Local well-posedness of the Navier–Stokes equations (2018)",
+              "url": "https://terrytao.wordpress.com/2018/09/16/254a-notes-1-local-well-posedness-of-the-navier-stokes-equations/",
+              "locator": "Periodic pressure/Leray discussion and Sobolev Proposition 35 / Exercise 36."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "thm-fd-rectangular-no-slip-stokes-velocity-pressure",
+        "kind": "theorem",
+        "title": "Rectangular no-slip Stokes velocity and distribution pressure",
+        "statement": "Assume full AC. Let $d\\ge2$, $R>0$, and let $\\Omega=\\prod_{i=1}^d(a_i,b_i)\\subset(-R,R)^d$ be a nonempty finite open rectangle. For $\\alpha=(\\alpha_1,\\ldots,\\alpha_d)\\in\\mathbb N_0^d$, write $|\\alpha|=\\sum_j\\alpha_j$ and $\\partial^\\alpha=\\partial_1^{\\alpha_1}\\cdots\\partial_d^{\\alpha_d}$. For each compact $K\\subset\\Omega$, let $\\mathcal D_K(\\Omega)=\\{\\phi\\in C_c^\\infty(\\Omega;\\mathbb R):\\operatorname{supp}\\phi\\subseteq K\\}$ with seminorms $p_{K,m}(\\phi)=\\max_{|\\alpha|\\le m}\\sup_{x\\in K}|\\partial^\\alpha\\phi(x)|$, $m\\in\\mathbb N_0$. Give $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb R)=\\bigcup_{K\\text{ compact},\\ K\\subset\\Omega}\\mathcal D_K(\\Omega)$ the locally convex inductive-limit topology of these fixed-support test spaces. Give vector test fields the componentwise topology. A scalar or vector distribution is a continuous real-linear functional on the corresponding test space; write its bilinear real pairing as $\\langle T,\\phi\\rangle$ or $\\langle T,\\psi\\rangle$. For scalar distributions define $\\langle\\partial_jT,\\phi\\rangle=-\\langle T,\\partial_j\\phi\\rangle$. For a smooth vector field $\\psi=(\\psi_1,\\ldots,\\psi_d)$, set $\\operatorname{div}\\psi=\\sum_j\\partial_j\\psi_j$ and $\\langle\\nabla p,\\psi\\rangle=-\\langle p,\\operatorname{div}\\psi\\rangle$. An $L^2$ vector field $f$ acts by $\\langle f,\\psi\\rangle=\\int_\\Omega f\\cdot\\psi\\,dx$, and for $u\\in H_0^1$ define $\\langle\\Delta u,\\psi\\rangle=-\\int_\\Omega\\nabla u:\\nabla\\psi\\,dx$. Here, for $m=1$ or $m=d$, $H_0^1(\\Omega;\\mathbb R^m)$ is the closure of $C_c^\\infty(\\Omega;\\mathbb R^m)$ in $\\|v\\|_{H^1}=(\\int_\\Omega(|v|^2+|\\nabla v|^2)\\,dx)^{1/2}$, where $(\\nabla v)_{ij}=\\partial_jv_i$ and $A:B=\\sum_{i,j}A_{ij}B_{ij}$; $H^{-1}(\\Omega)=(H_0^1(\\Omega;\\mathbb R))'$ is the continuous real dual of the scalar space with dual norm $\\|p\\|_{H^{-1}}=\\sup_{\\|\\phi\\|_{H^1}\\le1}|\\langle p,\\phi\\rangle|$. A constant distribution $c$ acts by $\\langle c,\\phi\\rangle=c\\int_\\Omega\\phi\\,dx$; $\\mathbb R\\subset H^{-1}$ denotes this subspace, and $H^{-1}/\\mathbb R$ has quotient norm $\\|[p]\\|=\\inf_{c\\in\\mathbb R}\\|p-c\\|_{H^{-1}}$. Thus $D'(\\Omega;\\mathbb R^d)$ denotes the continuous real dual of the vector test space, and the equation below is an equality on every vector test field. Define $V=\\{v\\in H_0^1(\\Omega;\\mathbb R^d):\\int_\\Omega v\\cdot\\nabla\\phi\\,dx=0\\text{ for every }\\phi\\in C_c^\\infty(\\Omega;\\mathbb R)\\}$, with the inherited $H^1$ norm.\n\nLet $\\mu>0$ and $f\\in L^2(\\Omega;\\mathbb R^d)$. There is a unique $u\\in V$ such that\n$$\\mu\\int_\\Omega\\nabla u:\\nabla v\\,dx=\\int_\\Omega f\\cdot v\\,dx\\qquad(v\\in V),$$\nand $\\|\\nabla u\\|_2\\le2R\\|f\\|_2/\\mu$. There is a distribution $p\\in H^{-1}(\\Omega)$ such that $-\\mu\\Delta u+\\nabla p=f$ in $D'(\\Omega;\\mathbb R^d)$; it is unique modulo constant distributions. With the quotient norm on $H^{-1}/\\mathbb R$ and the product of the inherited $H^1$ norm on $V$ with that quotient norm, the map $f\\mapsto(u,[p])$ into $V\\times(H^{-1}/\\mathbb R)$ is bounded and linear. The pressure is not asserted to lie in $L^2$ or to be smooth at rectangle corners.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-projected-no-slip-stokes-space",
+          "thm-fd-projected-stationary-stokes",
+          "lem-fd-rectangular-test-divergence-inverse",
+          "def-axiom-of-choice",
+          "lem-fd-zero-trace-directional-poincare"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-projected-no-slip-stokes-space": "mathematical-premise",
+          "thm-fd-projected-stationary-stokes": "mathematical-premise",
+          "lem-fd-rectangular-test-divergence-inverse": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "lem-fd-zero-trace-directional-poincare": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/thm-fd-rectangular-no-slip-stokes-velocity-pressure.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)",
+              "url": "https://www.ljll.fr/MathModel/enseignement/polycopies/vohralik.pdf",
+              "locator": "Chapter 6 §6.1, PDF pp. 55–56: standard no-slip Stokes velocity-pressure formulation; its L² pressure relies on inf–sup, unlike the local H⁻¹ construction proved here."
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf",
+              "locator": "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+            }
+          ]
+        },
+        "physical_scope": null
+      }
+    ]
+  },
+  {
+    "order": 394,
+    "id": "fd-s01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Periodic fluid Fourier Sobolev spaces — Examples",
+    "companion": "fd-s01",
+    "requires": [
+      "fd-s01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-single-mode-pressure",
+        "kind": "example",
+        "title": "Shear mode has zero periodic pressure",
+        "statement": "Assume Countable Choice and let $d\\in\\{2,3\\}$, $A\\in\\mathbb R$, and $u(x)=A\\sin(x_2)e_1$ on $Q_d$, where $e_1$ is the first coordinate vector. Then $u$ is smooth and divergence-free, $u\\cdot\\nabla u=0$, and its unique mean-zero pressure recovered by $Q(u\\otimes u)$ is $\\pi=0$. This is a verification of the pressure recovery map; it is not asserted to solve an unforced viscous Navier–Stokes equation.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "thm-fd-periodic-pressure-recovery",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "thm-fd-periodic-pressure-recovery": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/ex-fd-single-mode-pressure.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, 254A Notes 1: Local well-posedness of the Navier–Stokes equations (2018)",
+              "url": "https://terrytao.wordpress.com/2018/09/16/254a-notes-1-local-well-posedness-of-the-navier-stokes-equations/",
+              "locator": "Periodic pressure/Leray discussion and Sobolev Proposition 35 / Exercise 36."
+            },
+            {
+              "title": "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)",
+              "url": "https://www.math.mcgill.ca/gantumur/math595f14/Notes.pdf",
+              "locator": "§§2.1.1–2.1.2, §2.1.5.2, §4.1.1; Fourier, weak derivatives, product estimate and Leray projection."
+            }
+          ]
+        },
+        "physical_scope": null
+      },
+      {
+        "id": "rem-fd-stokes-pressure-prerequisite",
+        "kind": "remark",
+        "title": "Full wall Stokes pressure requires a divergence inverse",
+        "statement": "Assume full AC. Let $d\\ge2$, $R>0$, and let $\\Omega\\subset(-R,R)^d$ be a nonempty bounded open set. For each $\\mu>0$ and $f\\in L^2(\\Omega;\\mathbb R^d)$, the projected stationary Stokes theorem gives a unique $u$ in the distributionally divergence-free subspace $V$ of the closure-based $H_0^1(\\Omega;\\mathbb R^d)$ space, satisfying\n$$\\mu\\int_\\Omega\\nabla u:\\nabla v\\,dx=\\int_\\Omega f\\cdot v\\,dx\\qquad(v\\in V),$$\nwith $\\|\\nabla u\\|_2\\le2R\\|f\\|_2/\\mu$; this conclusion contains no pressure. If $\\Omega=\\prod_{i=1}^d(a_i,b_i)\\subset(-R,R)^d$ is a nonempty finite open rectangle, the separate rectangular theorem additionally gives $p\\in H^{-1}(\\Omega)$ such that $-\\mu\\Delta u+\\nabla p=f$ as vector distributions, with $p$ unique modulo constant distributions. The rectangular result does not assert an $L^2$ pressure estimate or smoothness at rectangle corners. Neither theorem claims pressure recovery for arbitrary bounded open sets; such a claim needs a domain-appropriate divergence right inverse or inf-sup argument.",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "def-fd-projected-no-slip-stokes-space",
+          "thm-fd-projected-stationary-stokes",
+          "thm-fd-rectangular-no-slip-stokes-velocity-pressure",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_roles": {
+          "def-fd-projected-no-slip-stokes-space": "mathematical-premise",
+          "thm-fd-projected-stationary-stokes": "mathematical-premise",
+          "thm-fd-rectangular-no-slip-stokes-velocity-pressure": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "reference": "items/rem-fd-stokes-pressure-prerequisite.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "inventory_expansion_required": false,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)",
+              "url": "https://www.ljll.fr/MathModel/enseignement/polycopies/vohralik.pdf",
+              "locator": "Chapter 6 §6.1, PDF pp. 55–56: standard Stokes weak formulation uses an inf–sup condition for mean-zero L² pressure; local rectangle theorem proves a separate H⁻¹ result."
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21%2112_02_01_AM.pdf",
+              "locator": "§2.3.6, Example 2.66, pp. 87–88; §5.3.1, pp. 233–237."
+            }
+          ]
+        },
+        "physical_scope": null
+      }
+    ]
+  }
+]

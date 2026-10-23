@@ -1,0 +1,718 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-navier-slip-wall-law",
+    "pthm-fd-local-momentum-balance-from-continuum",
+    "pthm-fd-wall-mechanical-power-balance",
+    "pthm-fd-linear-acoustic-model-prediction",
+    "ex-fd-adopted-poiseuille-couette"
+  ],
+  "contracts": {
+    "post-fd-navier-slip-wall-law": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate defines a stationary smooth wall, outward normal, tangential projection, traction convention, impermeability, beta and its SI units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The scope is limited to an adopted stationary impermeable wall law in the incompressible Newtonian branch; no universal material law or measured coefficient is claimed."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Chen and Qian, arXiv:0901.0147v1, §§1–2, equations (1.3)–(1.4), (2.5), and Proposition 2.1 were read in full on PDF pp. 1–5. Their positive slip length zeta maps to beta=eta/zeta under the stated stress convention."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is an adopted physical boundary premise, not a consequence of interior balances, and the item makes no universal applicability claim."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": []
+    },
+    "pthm-fd-wall-mechanical-power-balance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "adopt the balances of linear and angular momentum",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "\\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "\\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "post-fd-navier-slip-wall-law",
+          "source_section": "Postulate",
+          "quote": "(\\sigma n)_\\tau=-\\beta u_\\tau",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-smooth-wall-exterior-solution-domains",
+          "source_section": "Definition",
+          "quote": "A bounded wall domain is a bounded connected open set $\\Omega\\subset\\mathbb R^3$ with $C^2$ boundary.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-fd-smooth-wall-energy-uniqueness",
+          "source_section": "Statement",
+          "quote": "If two smooth velocity solutions satisfy the same equation, force, initial velocity, density, viscosity, and selected wall law, then their velocities are equal on $[0,T]$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "pthm-fd-local-momentum-balance-from-continuum",
+          "source_section": "Statement",
+          "quote": "\\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)=\\operatorname{div}\\sigma+\\rho b.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-forced-momentum",
+          "step": "1.1",
+          "claim": "The adopted material momentum balance and the current incompressible Newtonian branch give the forced local momentum equation through the complete transport and localization theorem.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "kinetic-work-substitution",
+          "step": "2.1",
+          "claim": "The kinetic-energy product rule and impermeable walls remove the advective boundary flux and reduce the derivative to body-force power plus the integral of u dotted with div sigma.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "A2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "newtonian-dissipation",
+          "step": "3.1",
+          "claim": "The rowwise product identity and symmetric/skew decomposition give sigma:grad u=2 eta |D|^2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "integrated-power-identity",
+          "step": "4.1",
+          "claim": "The divergence theorem on bounded domains, or periodic-face cancellation on the channel, yields the boundary-traction power identity.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "A2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "wall-law-specialization",
+          "step": "5.1",
+          "claim": "No-slip gives the tangential wall-velocity work; stationary Navier friction gives negative beta times tangential speed squared.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "stationary-smooth-uniqueness",
+          "step": "6.1",
+          "claim": "For bounded-domain stationary homogeneous wall data the current smooth uniqueness theorem gives at most one velocity for the same force and initial data, conditional on its current Step-1 readiness record.",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The bounded-domain option is stated to be nonempty and the periodic channel has positive side lengths and height.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is conditional wall mechanical power balance; steps 2.1–5.1 integrate kinetic/stress fluxes and substitute the selected wall law. Branch B explicitly assumes nonempty Omega; branch P assumes Lx,Lz,h>0. The family in the material-motion description is indexed by a supplied time interval, not an optional empty domain family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is conditional wall mechanical power balance; steps 2.1–5.1 integrate kinetic/stress fluxes and substitute the selected wall law. Branch B explicitly assumes nonempty Omega; branch P assumes Lx,Lz,h>0. The family in the material-motion description is indexed by a supplied time interval, not an optional empty domain family.",
+            "item_sha256": "9c04deb4dc3ff37c62e613f339ce0bab9754a24e0bfd09bba30a4cec875445a1",
+            "row_sha256": "43b4b0ee12c53efc120aa918ff74dfdefc6f7272b4d26bec663326a102851454",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1, 4.1 and 5.1 allow zero body force, stationary no-slip g=0 and beta=0 without division by any of them."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The formulation is explicitly three-dimensional and has no one-dimensional special case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes rho>0 and eta>0; beta may be zero, and steps 2.1–5.1 make no division by beta."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "The identities are asserted only for t in (0,T); no endpoint derivative claim is made.",
+          "reason": "The Statement gives no endpoint derivative claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit and is the exact hypothesis of the bounded-domain divergence theorem used in steps 2.1 and 4.1; periodic cancellation is direct."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts power identities and a conditional uniqueness result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts power identities and a conditional uniqueness result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "periodic-channel side-face cancellation",
+          "input": "A smooth periodic flux field on the x,z coordinates of Omega_{Lx,h,Lz}.",
+          "check": "The x and z derivative integrals cancel at opposite periodic faces; only the y=0,h wall flux remains, which is handled by the stated wall condition.",
+          "disposition": "checked by the componentwise fundamental theorem calculation recorded in proof steps 1.1 and 1.3."
+        }
+      ]
+    },
+    "pthm-fd-linear-acoustic-model-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-barotropic-euler-model",
+          "source_section": "Definition",
+          "quote": "\\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-global-linear-acoustics",
+          "source_section": "Statement",
+          "quote": "has a unique real $C^\\infty$ solution $(z,v)$ on $\\mathbb R\\times\\mathbb T^d$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "admissible-variation",
+          "step": "1.1",
+          "claim": "Positive reference density and bounded smooth perturbation make rho plus epsilon z remain in the positive-density state domain locally in time.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "linearized-mass",
+          "step": "2.1",
+          "claim": "The first variation of the adopted mass equation gives z_t plus rho-star div v equals zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "linearized-momentum",
+          "step": "2.2",
+          "claim": "The first variation of nonconservative barotropic momentum gives v_t plus p-prime over rho-star grad z equals zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "global-tangent-solution",
+          "step": "3.1",
+          "claim": "The physical space, time, density and velocity rescaling gives the exact normalized tangent system supplied by the current global theorem.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "acoustic-dispersion",
+          "step": "3.2",
+          "claim": "Differentiating the tangent equations yields the wave equation and Fourier dispersion; mean and transverse modes are constant.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "acoustic-energy",
+          "step": "4.1",
+          "claim": "The derivative of the quadratic acoustic energy is a periodic divergence integral and vanishes by opposite-face cancellation.",
+          "inputs": [
+            "given",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The periodic cell has positive length scale L=1 m and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats zero wavevector and the zero perturbation is included among the smooth initial data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The physical model is stated in three dimensions; no one-dimensional reduction is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires rho-star>0 and p-prime(rho-star)>0, so division by rho-star and the real sound speed are valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies a global smooth solution for all real time; no finite-time endpoint restriction is introduced."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Statement, Fact A1 and step 2.1; the mathematical supplier also lists it as a prerequisite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a direct conditional prediction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a direct conditional prediction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single longitudinal periodic mode",
+          "input": "Take k=(1,0,0), z=A cos(x_1/L−omega t), v=(c-star A/rho-star,0,0) cos(x_1/L−omega t), and omega=c-star/L.",
+          "check": "Substitution in both tangent equations gives zero residual; omega^2=c-star^2/L^2 and the integrated acoustic energy is constant.",
+          "disposition": "checked directly by differentiating the displayed mode and integrating over one periodic cell."
+        }
+      ]
+    },
+    "ex-fd-adopted-poiseuille-couette": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-fd-wall-mechanical-power-balance",
+          "source_section": "Statement",
+          "quote": "(N) no-slip, $u=g$ on $\\Gamma$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "shear-profile-reduction",
+          "step": "1.1",
+          "claim": "For a steady streamwise shear profile, incompressibility and convection vanish and the Newtonian stress divergence reduces to eta U-double-prime in the streamwise component.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "poiseuille-profile",
+          "step": "2.1",
+          "claim": "The parabolic profile has zero wall values and second derivative minus G over eta, which is balanced by the selected constant body acceleration; its flux and vorticity follow by direct integration and differentiation.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "couette-profile",
+          "step": "2.2",
+          "claim": "The linear profile has zero second derivative, matches both wall velocities, and gives the stated flux and vorticity.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "poiseuille-power-check",
+          "step": "3.1",
+          "claim": "The explicit Poiseuille body-force power equals the integrated Newtonian shear dissipation, while stationary-wall work vanishes.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "couette-power-and-periodic-pressure",
+          "step": "4.1",
+          "claim": "The top-wall Couette work equals viscous dissipation, and the linear pressure ramp is not single-valued on the periodic streamwise coordinate.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example requires Lx,Lz,h>0; the channel cell is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 and step 4.1 remain valid for V=0; G>0, rho>0, eta>0 and h>0 avoid zero denominators."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is explicitly a three-dimensional channel with two periodic coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes positive density, viscosity and height; zero Couette speed is allowed and verified in step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example statement describes steady fields; steps 2.1 and 3.1 and steps 2.2 and 4.1 verify the time-independent equations and power identities without startup or endpoint claims."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example statement explicitly assumes Countable Choice; steps 3.1 and 4.1 apply the depended-on wall-power theorem under that premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a worked exact example, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a worked exact example, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Poiseuille flux and power",
+          "input": "UP(y)=G y(h−y)/(2 eta), b_x=G/rho.",
+          "check": "Integrating UP gives Gh^3/(12 eta); body-force power and viscous dissipation per unit span both equal G^2 h^3/(12 eta).",
+          "disposition": "checked by the explicit one-variable integrals in steps 2.1 and 3.1."
+        },
+        {
+          "name": "Couette flux and power",
+          "input": "UC(y)=Vy/h with top-wall speed V.",
+          "check": "Integrating UC gives Vh/2; viscous dissipation and top-wall power per unit area both equal eta V^2/h.",
+          "disposition": "checked by the explicit one-variable integrals and traction evaluation in steps 2.2 and 4.1."
+        }
+      ]
+    },
+    "pthm-fd-local-momentum-balance-from-continuum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "In the same inertial chart, adopt the balances of linear and angular momentum",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "\\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "\\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "material-transport-derivative",
+          "step": "1.1",
+          "claim": "Change of variables, the material velocity identity and Jacobi’s determinant formula show that the derivative of material momentum is the integral of rho times material acceleration when div u=0.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "calculus"
+          ]
+        },
+        {
+          "id": "integrated-local-residual",
+          "step": "2.1",
+          "claim": "The divergence theorem converts traction to stress divergence; the adopted material balance then says the integral of the continuous local momentum residual vanishes on every material subregion.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "A2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "pointwise-localization",
+          "step": "3.1",
+          "claim": "Testing on inverse images of arbitrarily small balls and using continuity forces each component of the local residual to vanish pointwise.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "continuity"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement allows B=empty (and hence Omega_t=empty); the local conclusion then holds vacuously. For nonempty Omega_t, step 3.1 localizes at each x0 using a nonempty small ball. No nonempty material subregion exists when B is empty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is a pointwise local momentum equation on each material image; steps 1.1–3.1 transport the integral, replace traction and localize the continuous residual. The Statement allows B=empty (and hence Omega_t=empty); the local conclusion then holds vacuously. For nonempty Omega_t, step 3.1 localizes at each x0 using a nonempty small ball. No nonempty material subregion exists when B is empty. The current row misstates the applicable case or its proof locator.",
+            "item_sha256": "5c27ecb85af9faf7861a2471a51c67a79aadf6141d9adc7fefeecab254b5dd7f",
+            "row_sha256": "8dd8fe3a1e52f2ceba2486198ea3bd67d5a66fc84cd035d657213d10f9a82a80",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The integral and localization proof remains valid when b=0; no division by b occurs in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The model is stated in three-dimensional Euclidean space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes rho>0 and eta>0; the proof makes no division by either coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "The conclusion is pointwise for t in the open interval I and has no endpoint assertion.",
+          "reason": "The Statement makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit and is the exact assumption of the divergence theorem applied in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct local-balance deduction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a direct local-balance deduction, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

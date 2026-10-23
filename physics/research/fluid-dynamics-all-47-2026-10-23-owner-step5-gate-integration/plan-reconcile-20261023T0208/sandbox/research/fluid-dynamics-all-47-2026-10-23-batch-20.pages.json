@@ -1,0 +1,233 @@
+[
+  {
+    "order": 399,
+    "id": "fd-ps01",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Local periodic incompressible model evolution",
+    "companion": "fd-ps01-examples",
+    "requires": [
+      "fd-f03",
+      "fd-s03"
+    ],
+    "items": [
+      {
+        "id": "pthm-fd-local-periodic-incompressible-model-evolution",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local periodic incompressible model evolution",
+        "reference": "items/pthm-fd-local-periodic-incompressible-model-evolution.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "post-fd-continuum-balances",
+          "post-fd-newtonian-fourier",
+          "def-fd-incompressible-newtonian-model",
+          "thm-fd-smooth-periodic-incompressible-ivp",
+          "thm-fd-periodic-pressure-recovery"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "post-fd-continuum-balances": "physical-assumption",
+          "post-fd-newtonian-fourier": "physical-assumption",
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite",
+          "thm-fd-smooth-periodic-incompressible-ivp": "mathematical-premise",
+          "thm-fd-periodic-pressure-recovery": "mathematical-premise"
+        },
+        "physical_scope": "Force-free smooth constant-density incompressible Newtonian model on a periodic cell; constant nonnegative shear viscosity; local smooth evolution in three dimensions and in its transversely invariant one- and two-dimensional sectors. The zero-viscosity branch is inviscid Euler. This is a mechanical subsystem and asserts no wall, variable-viscosity, thermal, total-energy, entropy-balance, or empirical-validity result.",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $L>0$, $U_*>0$, and $\\rho_*>0$, and fix an integer $s\\ge4$. Use SI units: $L$ is measured in metres, $U_*$ in metres per second, physical position $X$ in metres, time $t$ in seconds, mass density $\\rho_*$ in kilograms per cubic metre, velocity $u$ in metres per second, pressure $p$ and stress $\\sigma$ in pascals, and dynamic shear viscosity $\\mu$ in pascal seconds. To specialize the Newtonian/Fourier closure, fix an auxiliary constant temperature $T_*>0$ in kelvins and an open state set $\\mathcal S\\subset(0,\\infty)^2$ containing $(\\rho_*,T_*)$; take the auxiliary constitutive state throughout the branch to be the constant pair $(\\rho,T)=(\\rho_*,T_*)$ and the shear-viscosity state law to have value $\\mu$ there. The bulk coefficient may be any admissible value because $\\nabla_d\\cdot u=0$, and any admissible conductivity law gives zero Fourier flux for this constant temperature. No total-energy or entropy-balance solution is asserted. Let $I\\subset\\mathbb R$ be an open time interval containing $0$ and $\\mathbb T_L^d=(\\mathbb R/(2\\pi L\\mathbb Z))^d$; this is the physical periodic cell for $d=3$ and the reduced coordinate torus for $d=1,2$, whose physical cell is $\\mathbb T_L^3$. The smooth model fields are $u\\in C^\\infty(I\\times\\mathbb T_L^d;\\mathbb R^d)$ and $p\\in C^\\infty(I\\times\\mathbb T_L^d;\\mathbb R)$. Torus fields are understood as smooth periodic lifts to Euclidean coordinate space when the local continuum equations are applied. Adopt a force-free incompressible Newtonian model with constant density $\\rho_*$, constant shear viscosity $\\mu\\ge0$, velocity field $u$, pressure multiplier $p$ enforcing $\\nabla_d\\cdot u=0$, and reduced stress\n$$\\sigma^{(d)}=-pI_d+2\\mu D_du,\\qquad D_du=\\tfrac12\\bigl(\\nabla_du+(\\nabla_du)^{\\mathsf T}\\bigr).$$\nOn the retained $d$ coordinates, the local momentum equation and constraint are\n$$\\rho_*\\bigl(\\partial_tu+(u\\cdot\\nabla_d)u\\bigr)=\\nabla_d\\cdot\\sigma^{(d)},\\qquad \\nabla_d\\cdot u=0.$$\nFor $d=3$, this is the direct physical equation on $\\mathbb T_L^3$ with stress $\\sigma^{(3)}=-pI_3+2\\mu D_3u$. For $d=1,2$, $\\mathbb T_L^d$ is the reduced coordinate torus and the corresponding physical cell is $\\mathbb T_L^3$. Let $J_d:\\mathbb T_L^3\\to\\mathbb T_L^d$ be $J_d(X_1,X_2,X_3)=(X_1,\\ldots,X_d)$, with coordinates understood modulo $2\\pi L$. A reduced velocity $u:\\mathbb T_L^d\\to\\mathbb R^d$ and pressure $p:\\mathbb T_L^d\\to\\mathbb R$ lift to\n$$\\widetilde u(X)=\\bigl(u_1(J_dX),\\ldots,u_d(J_dX),0,\\ldots,0\\bigr),\\qquad \\widetilde p(X)=p(J_dX).$$\nThe physical three-dimensional stress is $\\widetilde\\sigma=-\\widetilde p I_3+2\\mu D_3\\widetilde u$, where $D_3\\widetilde u=\\tfrac12(\\nabla_3\\widetilde u+(\\nabla_3\\widetilde u)^{\\mathsf T})$. For $\\nabla_d\\cdot u=0$, direct differentiation gives\n$$\\nabla_3\\cdot\\widetilde u=(\\nabla_d\\cdot u)\\circ J_d,\\qquad (\\widetilde u\\cdot\\nabla_3)\\widetilde u=\\bigl((u\\cdot\\nabla_d)u,0,\\ldots,0\\bigr)\\circ J_d,\\qquad \\nabla_3\\cdot\\widetilde\\sigma=\\bigl((\\nabla_d\\cdot\\sigma^{(d)}),0,\\ldots,0\\bigr)\\circ J_d.$$\nThus the reduced equation is exactly the restriction of the three-dimensional equation to fields independent of the omitted coordinates and with the omitted velocity components zero. Conversely, every smooth solution in this invariant class reduces to the displayed $d$-dimensional equation. When $d=3$, no lift or reduction is used.\nAssume $u_0:\\mathbb T_L^d\\to\\mathbb R^d$ is smooth, real, periodic, and divergence-free. Set $x=X/L\\in\\mathbb T^d=(\\mathbb R/(2\\pi\\mathbb Z))^d$, $\\tau=tU_*/L$, $U_0(x)=u_0(Lx)/U_*$, $\\bar\\nu=\\mu/(\\rho_*U_*L)$, and $\\Pi=p/(\\rho_*U_*^2)$. For a smooth periodic field $f$, use normalized measure $d\\mu_x=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e^{-ik\\cdot x}\\,d\\mu_x$, and\n$$\\|f\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}(1+|k|^2)^s|\\widehat f(k)|^2.$$\nFor this integer $s$, there is $T>0$, depending only on $d$, $s$, and $\\|U_0\\|_{H^s}$, and independent of $\\bar\\nu$ and all higher Sobolev norms of $U_0$, such that the normalized system has a unique smooth solution $(U,\\Pi)$ on $[0,T]\\times\\mathbb T^d$:\n$$\\partial_\\tau U+(U\\cdot\\nabla_x)U=-\\nabla_x\\Pi+\\bar\\nu\\Delta_xU,\\qquad \\nabla_x\\cdot U=0,\\qquad U(0,\\cdot)=U_0,$$\nwith $\\Pi$ fixed by zero spatial mean at each time. Every integer Sobolev order $m\\ge s$ remains bounded on this same interval. Returning to physical variables gives a unique smooth model evolution on $0\\le t\\le (L/U_*)T$. When $\\mu=0$, the adopted reduced stress is $-pI_d$ (its 3D lift is $-\\widetilde pI_3$) and the mechanical model is inviscid Euler; when $\\mu>0$, it is viscous Navier–Stokes. This is a conditional model deduction and makes no claim of empirical validity, wall evolution, variable-viscosity evolution, or thermal evolution.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brian F. Morton, Local-in-Time Well-Posedness of the Incompressible Euler and Navier–Stokes Equations",
+              "url": "https://brianfmorton.github.io/Notes/Local_in_Time_Well_Posedness_of_the_Incompressible_Euler_and_Navier_Stokes_Equations.pdf",
+              "locator": "§§7.1–7.3, especially Theorem 7.5, PDF pp. 24–34; whole-space mollifier method, compared only for scope."
+            },
+            {
+              "title": "Emil Wiedemann, Lecture Notes — Navier–Stokes Equations",
+              "url": "https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf",
+              "locator": "§4.3, Lemma 4.13 and Theorem 4.14, PDF pp. 31–32; positive-viscosity 3D-torus local strong-solution treatment."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 3: The Navier–Stokes Equation",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf",
+              "locator": "§§3.1.1–3.1.2, printed pp.60–63 (PDF file pp.6–9); traction context on printed p.59 (PDF file p.5)."
+            },
+            {
+              "title": "Sergei Kuksin and Armen Shirikyan, Mathematics of Two-Dimensional Turbulence",
+              "url": "https://webusers.imj-prg.fr/~sergei.kuksin/MyBooks/bookArmen.pdf",
+              "locator": "Chapter 2 §§2.1.5–2.1.7, PDF pp. 42–51; independent periodic energy/regularity context."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": [],
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-fd-local-polytropic-model-evolution",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local positive-density polytropic model evolution",
+        "reference": "items/pthm-fd-local-polytropic-model-evolution.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "def-countable-choice",
+          "post-fd-continuum-balances",
+          "def-fd-barotropic-euler-model",
+          "thm-fd-smooth-polytropic-euler-ivp",
+          "thm-fd-polytropic-energy"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-barotropic-euler-model": "formulation-prerequisite",
+          "thm-fd-smooth-polytropic-euler-ivp": "mathematical-premise",
+          "thm-fd-polytropic-energy": "mathematical-premise"
+        },
+        "physical_scope": "Unforced, smooth, positive-density barotropic Euler model on a periodic cell, with one fixed polytropic parameter and exponent; dimensions one and two are transversely invariant sectors of the three-dimensional model. It adopts specific internal energy $e_{\\mathrm{phys}}(\\rho)=\\kappa_{\\mathrm{phys}}\\rho^{\\gamma-1}/(\\gamma-1)$ for the model energy and asserts local smooth evolution and its mean-energy conservation. It does not cover vacuum, shocks, thermal coupling, spatially varying $\\kappa_{\\mathrm{phys}}$ or $\\gamma$, or a molecular derivation of either constitutive law.",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, $L>0$, reference density $\\rho_*>0$ in kilograms per cubic metre, reference speed $U_*>0$ in metres per second, physical polytropic coefficient $\\kappa_{\\mathrm{phys}}>0$ in pascals times $(\\mathrm{m}^3/\\mathrm{kg})^\\gamma$, and dimensionless exponent $\\gamma>1$. Let $I\\subset\\mathbb R$ be an open time interval containing $0$ and $\\mathbb T_L^d=(\\mathbb R/(2\\pi L\\mathbb Z))^d$, with position $X$ in metres and time $t$ in seconds; this is the physical cell for $d=3$ and the reduced coordinate torus for $d=1,2$, whose physical cell is $\\mathbb T_L^3$. The smooth model fields are $\\rho_{\\mathrm{phys}}\\in C^\\infty(I\\times\\mathbb T_L^d;(0,\\infty))$ and $u_{\\mathrm{phys}}\\in C^\\infty(I\\times\\mathbb T_L^d;\\mathbb R^d)$. Torus fields are understood as smooth periodic lifts to Euclidean coordinates when applying the local continuum equations. The physical density $\\rho_{\\mathrm{phys}}$ is measured in kilograms per cubic metre, velocity $u_{\\mathrm{phys}}$ in metres per second, and pressure $p_{\\mathrm{phys}}$ in pascals. Adopt the unforced, positive-density barotropic Euler model\n$$\\partial_t\\rho_{\\mathrm{phys}}+\\nabla_X\\cdot(\\rho_{\\mathrm{phys}}u_{\\mathrm{phys}})=0,\\qquad \\partial_tu_{\\mathrm{phys}}+(u_{\\mathrm{phys}}\\cdot\\nabla_X)u_{\\mathrm{phys}}+\\rho_{\\mathrm{phys}}^{-1}\\nabla_X\\!\\left(\\kappa_{\\mathrm{phys}}\\rho_{\\mathrm{phys}}^\\gamma\\right)=0,$$\nwhere the same fixed $\\kappa_{\\mathrm{phys}}$ and $\\gamma$ apply throughout the flow. Also adopt the specific internal-energy closure $e_{\\mathrm{phys}}(\\rho)=\\kappa_{\\mathrm{phys}}\\rho^{\\gamma-1}/(\\gamma-1)$ in joules per kilogram, so the model internal-energy density is $\\rho e_{\\mathrm{phys}}=\\kappa_{\\mathrm{phys}}\\rho^\\gamma/(\\gamma-1)$ in pascals and $\\rho^2 e_{\\mathrm{phys}}\\prime(\\rho)=\\kappa_{\\mathrm{phys}}\\rho^\\gamma=p_{\\mathrm{phys}}(\\rho)$ for $\\rho>0$. This is an additional constitutive assumption for the model energy; neither it nor the pressure law is derived from molecular mechanics or from an empirical measurement here.\n\nFor $d=3$, these are the direct three-dimensional equations. For $d=1,2$, define $J_d:\\mathbb T_L^3\\to\\mathbb T_L^d$ by $J_d(X_1,X_2,X_3)=(X_1,\\ldots,X_d)$, with coordinates modulo $2\\pi L$, and lift reduced fields by\n$$\\widetilde\\rho_{\\mathrm{phys}}(t,X)=\\rho_{\\mathrm{phys}}(t,J_dX),\\qquad \\widetilde u_{\\mathrm{phys}}(t,X)=\\bigl((u_{\\mathrm{phys}})_1(t,J_dX),\\ldots,(u_{\\mathrm{phys}})_d(t,J_dX),0,\\ldots,0\\bigr).$$\nThe three-dimensional pressure and Cauchy stress are $\\widetilde p_{\\mathrm{phys}}=\\kappa_{\\mathrm{phys}}\\widetilde\\rho_{\\mathrm{phys}}^\\gamma$ and $\\widetilde\\sigma=-\\widetilde p_{\\mathrm{phys}}I_3$. Direct differentiation gives\n$$\\partial_t\\widetilde\\rho_{\\mathrm{phys}}+\\nabla_3\\cdot(\\widetilde\\rho_{\\mathrm{phys}}\\widetilde u_{\\mathrm{phys}})=\\bigl(\\partial_t\\rho_{\\mathrm{phys}}+\\nabla_d\\cdot(\\rho_{\\mathrm{phys}}u_{\\mathrm{phys}})\\bigr)\\circ J_d,$$\n$$\\partial_t\\widetilde u_{\\mathrm{phys}}+(\\widetilde u_{\\mathrm{phys}}\\cdot\\nabla_3)\\widetilde u_{\\mathrm{phys}}+\\widetilde\\rho_{\\mathrm{phys}}^{-1}\\nabla_3(\\kappa_{\\mathrm{phys}}\\widetilde\\rho_{\\mathrm{phys}}^\\gamma)=\\bigl(\\partial_tu_{\\mathrm{phys}}+(u_{\\mathrm{phys}}\\cdot\\nabla_d)u_{\\mathrm{phys}}+\\rho_{\\mathrm{phys}}^{-1}\\nabla_d(\\kappa_{\\mathrm{phys}}\\rho_{\\mathrm{phys}}^\\gamma),0,\\ldots,0\\bigr)\\circ J_d.$$\nThus the lower-dimensional equations are exactly the mass and momentum reduction of the adopted three-dimensional barotropic Euler model for fields independent of the omitted coordinates and with zero omitted velocity components. Conversely, every smooth three-dimensional solution in this invariant class reduces to the stated equations. For a scalar field $f$ on $\\mathbb T_L^d$ and its lift $\\widetilde f=f\\circ J_d$, the physical-cell means satisfy\n$$\\frac{1}{(2\\pi L)^3}\\int_{\\mathbb T_L^3}\\widetilde f(X)\\,dX=\\frac{1}{(2\\pi L)^d}\\int_{\\mathbb T_L^d}f(X_1,\\ldots,X_d)\\,dX_1\\cdots dX_d;$$\nthis follows by integrating the constant-in-transverse-coordinate lift over the remaining $3-d$ periodic coordinates.\n\nSet $x=X/L\\in\\mathbb T^d=(\\mathbb R/(2\\pi\\mathbb Z))^d$, $\\tau=tU_*/L$, $R=\\rho_{\\mathrm{phys}}/\\rho_*$, $V=u_{\\mathrm{phys}}/U_*$, $P=p_{\\mathrm{phys}}/(\\rho_*U_*^2)$, and $\\bar\\kappa=\\kappa_{\\mathrm{phys}}\\rho_*^{\\gamma-1}/U_*^2>0$. Put $a=(\\gamma-1)/2$ and $r(R)=\\sqrt{\\bar\\kappa\\gamma}\\,R^a/a$. For smooth periodic $f$, use normalized measure $d\\mu_x=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu_x$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}(1+|k|^2)^m|\\widehat f(k)|^2$. Let $\\rho_0:\\mathbb T_L^d\\to(0,\\infty)$ and $u_0:\\mathbb T_L^d\\to\\mathbb R^d$ be smooth real periodic initial data, and define $R_0(x)=\\rho_0(Lx)/\\rho_*$ and $V_0(x)=u_0(Lx)/U_*$. Then for every integer $s\\ge4$ there is $T>0$, depending only on $d,s,\\bar\\kappa,\\gamma,\\|(r(R_0),V_0)\\|_{H^s}$, and $\\min r(R_0)$, such that the normalized system\n$$\\partial_\\tau R+\\nabla_x\\cdot(RV)=0,\\qquad \\partial_\\tau V+(V\\cdot\\nabla_x)V+R^{-1}\\nabla_x(\\bar\\kappa R^\\gamma)=0,\\qquad R(0,\\cdot)=R_0,\\quad V(0,\\cdot)=V_0$$\nhas a unique smooth real solution on $[0,T]\\times\\mathbb T^d$ with $R(\\tau,x)>0$ and every integer Sobolev order $m\\ge s$ bounded on that same interval. The dimensionless mean total-energy density\n$$\\overline E(\\tau)=\\int_{\\mathbb T^d}\\left(\\tfrac12 R|V|^2+\\frac{\\bar\\kappa}{\\gamma-1}R^\\gamma\\right)d\\mu_x$$\nis constant. Equivalently, $\\frac{1}{(2\\pi L)^3}\\int_{\\mathbb T_L^3}\\left(\\tfrac12\\widetilde\\rho_{\\mathrm{phys}}|\\widetilde u_{\\mathrm{phys}}|^2+\\kappa_{\\mathrm{phys}}\\widetilde\\rho_{\\mathrm{phys}}^\\gamma/(\\gamma-1)\\right)\\,dX$ is constant and has units of pascals; for $d=3$ the tildes are omitted, and for $d=1,2$ this mean equals the reduced $d$-dimensional cell mean by the formula above. The polytropic pressure law is an adopted constitutive closure, not a molecular derivation. No temperature-coupled equation, vacuum or shock continuation, spatially varying constitutive parameters, or empirical validity claim is included.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, The Boltzmann Equation and Its Hydrodynamic Limits, §7.4",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf",
+              "locator": "Theorem 7.8, PDF pp. 84–86; local symmetrizable compressible Euler context, not the exact periodic barotropic proof."
+            },
+            {
+              "title": "Thomas C. Sideris, Formation of Singularities in Three-Dimensional Compressible Fluids",
+              "url": "https://web.math.ucsb.edu/~sideris/pdffiles/EulerCMP.pdf",
+              "locator": "§1, PDF pp. 2–3; positive-density local C1 symmetric-hyperbolic existence is cited, not proved, and used only as context."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 4: Waves",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids3.pdf",
+              "locator": "§4.6, printed pp.170–171 (PDF file pp.60–61), equations(4.97)–(4.101), especially energy conservation(4.100) and ideal-gas internal-energy/enthalpy context(4.101)."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": [],
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-fd-two-dimensional-viscous-model-globality",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Global two-dimensional periodic viscous model evolution",
+        "reference": "items/pthm-fd-two-dimensional-viscous-model-globality.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "def-countable-choice",
+          "post-fd-continuum-balances",
+          "post-fd-newtonian-fourier",
+          "def-fd-incompressible-newtonian-model",
+          "thm-fd-global-two-dimensional-periodic-navier-stokes"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "post-fd-continuum-balances": "physical-assumption",
+          "post-fd-newtonian-fourier": "physical-assumption",
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite",
+          "thm-fd-global-two-dimensional-periodic-navier-stokes": "mathematical-premise"
+        },
+        "physical_scope": "Force-free smooth constant-density incompressible Newtonian model in the transversely invariant two-dimensional sector of the three-dimensional model, with constant positive shear viscosity. It asserts global smooth evolution for every smooth divergence-free datum in this invariant sector. This is a mechanical subsystem and asserts no wall or thermal evolution, no total- energy or entropy-balance solution, no global regularity for general 3D data or inviscid flow, and no empirical validity.",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. Let $L>0$ be measured in metres, $U_*>0$ in metres per second, $\\rho_*>0$ be a constant mass density in kilograms per cubic metre, and $\\mu>0$ be a constant dynamic shear viscosity in pascal seconds. Fix an auxiliary constant temperature $T_*>0$ in kelvins and an open constitutive state set $\\mathcal S\\subset(0,\\infty)^2$ containing $(\\rho_*,T_*)$; take the auxiliary constitutive state throughout the branch to be the constant pair $(\\rho,T)=(\\rho_*,T_*)$, where the adopted shear-viscosity law has value $\\mu$. The bulk coefficient may be any admissible value because the velocity is divergence-free, and any admissible conductivity law gives zero Fourier flux for the constant temperature; no total-energy or entropy-balance solution is asserted. Use SI position $X$ in metres, time $t$ in seconds, velocity $u$ in metres per second, and pressure $p$ in pascals. On the reduced two-dimensional periodic torus $\\mathbb T_L^2=(\\mathbb R/(2\\pi L\\mathbb Z))^2$, let the smooth model fields be $u\\in C^\\infty(I\\times\\mathbb T_L^2;\\mathbb R^2)$ and $p\\in C^\\infty(I\\times\\mathbb T_L^2;\\mathbb R)$ for an open time interval $I$ containing $0$, and adopt the force-free incompressible Newtonian equations. Identify torus fields with smooth periodic lifts to Euclidean coordinates when applying the local continuum equations.\n$$\\rho_*\\bigl(\\partial_tu+(u\\cdot\\nabla_2)u\\bigr)=\\nabla_2\\cdot\\sigma^{(2)},\\qquad \\nabla_2\\cdot u=0,\\qquad \\sigma^{(2)}=-pI_2+2\\mu D_2u,\\qquad D_2u=\\tfrac12\\bigl(\\nabla_2u+(\\nabla_2u)^{\\mathsf T}\\bigr).$$\nThese are the invariant reduction of the adopted three-dimensional continuum and Newtonian stress on physical cell $\\mathbb T_L^3$. Let $J_2:\\mathbb T_L^3\\to\\mathbb T_L^2$ be $J_2(X_1,X_2,X_3)=(X_1,X_2)$ modulo $2\\pi L$, and lift $u=(u_1,u_2)$ and $p$ to $\\widetilde u=(u_1\\circ J_2,u_2\\circ J_2,0)$ and $\\widetilde p=p\\circ J_2$. The three-dimensional stress is $\\widetilde\\sigma=-\\widetilde pI_3+2\\mu D_3\\widetilde u$. For $\\nabla_2\\cdot u=0$, direct differentiation yields $\\nabla_3\\cdot\\widetilde u=0$, $\\nabla_3\\cdot\\widetilde\\sigma=(\\nabla_2\\cdot\\sigma^{(2)},0)$, and $\\nabla_3\\cdot(2\\mu D_3\\widetilde u)=(\\mu\\Delta_2u,0)$. The third momentum component vanishes, and the first two are exactly the displayed equations. Conversely, every smooth 3D solution with this transverse invariance and zero third velocity component reduces to the displayed planar equations. The normalized 3D mean of the lifted pressure equals its normalized 2D mean, so the pressure gauge is preserved.\nSet $x=X/L\\in\\mathbb T^2=(\\mathbb R/(2\\pi\\mathbb Z))^2$, $\\tau=tU_*/L$, $U=u/U_*$, $\\Pi=p/(\\rho_*U_*^2)$, and $\\bar\\nu=\\mu/(\\rho_*U_*L)>0$. Use normalized measure $d\\mu=(2\\pi)^{-2}dx$ and fix the pressure gauge by $\\int_{\\mathbb T^2}\\Pi(\\tau,x)\\,d\\mu(x)=0$ at each time. For any smooth real periodic divergence-free initial velocity $U_0:\\mathbb T^2\\to\\mathbb R^2$, the adopted model has a unique smooth velocity $U$ and the unique pressure $\\Pi$ with this zero-mean gauge on all normalized times $\\tau\\ge0$, satisfying\n$$\\partial_\\tau U+(U\\cdot\\nabla_x)U=-\\nabla_x\\Pi+\\bar\\nu\\Delta_xU,\\qquad \\nabla_x\\cdot U=0,\\qquad U(0,\\cdot)=U_0.$$\nHere global means smooth on $[0,\\infty)$ with finite Sobolev norms on every compact time interval; no uniform-in-time norm bound is asserted. Scaling back gives a unique global smooth physical model evolution for all $t\\ge0$. This conclusion applies to the adopted two-dimensional positive-viscosity periodic model and, by the stated lift, to the corresponding transversely invariant three-dimensional data. It asserts no global regularity for arbitrary three-dimensional data or inviscid flow, and no empirical validity claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sergei Kuksin and Armen Shirikyan, Mathematics of Two-Dimensional Turbulence",
+              "url": "https://webusers.imj-prg.fr/~sergei.kuksin/MyBooks/bookArmen.pdf",
+              "locator": "Chapter 2 §§2.1.5–2.1.7, especially Theorem 2.1.18 and its complete regularity estimate, PDF pp. 42–51."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": [],
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 400,
+    "id": "fd-ps01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Local periodic incompressible model evolution — Examples",
+    "companion": "fd-ps01",
+    "requires": [
+      "fd-ps01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-homogeneous-polytropic-model",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Homogeneous translating polytropic fluid",
+        "reference": "items/ex-fd-homogeneous-polytropic-model.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-fd-local-polytropic-model-evolution"
+        ],
+        "dependency_roles": {
+          "pthm-fd-local-polytropic-model-evolution": "physical-result"
+        },
+        "physical_scope": "Exact spatially homogeneous positive-density state of the unforced polytropic Euler model on a periodic cell. It makes no thermal, molecular, shock, or empirical claim.",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$ and $L>0$ measured in metres, and write $\\mathbb T_L^d=(\\mathbb R/(2\\pi L\\mathbb Z))^d$ for the coordinate torus. When $d=3$ it is the physical cell; when $d=1,2$ it is the reduced coordinate torus and the physical cell is $\\mathbb T_L^3$. In SI units, choose a constant density $\\rho_*>0$ in kilograms per cubic metre, a constant velocity $V_*\\in\\mathbb R^d$ in metres per second, a constant $\\kappa_{\\mathrm{phys}}>0$ in pascals times $(\\mathrm{m}^3/\\mathrm{kg})^\\gamma$, and a dimensionless exponent $\\gamma>1$. Define $W_*\\in\\mathbb R^3$ by $W_*=V_*$ for $d=3$ and $W_*=(V_{*,1},\\ldots,V_{*,d},0,\\ldots,0)$ for $d=1,2$. Identify fields on the three-dimensional torus with their smooth $2\\pi L$-periodic lifts to $\\mathbb R^3$ when applying the local continuum equations. In the unforced three-dimensional polytropic Euler model with $p_{\\mathrm{phys}}=\\kappa_{\\mathrm{phys}}\\rho_{\\mathrm{phys}}^\\gamma$ and adopted specific internal energy $e_{\\mathrm{phys}}(\\rho)=\\kappa_{\\mathrm{phys}}\\rho^{\\gamma-1}/(\\gamma-1)$, take initial data $\\rho_{\\mathrm{phys}}(0,X)=\\rho_*$ and $u_{\\mathrm{phys}}(0,X)=W_*$. The constant fields $\\rho_{\\mathrm{phys}}(t,X)=\\rho_*$, $u_{\\mathrm{phys}}(t,X)=W_*$, and $p_{\\mathrm{phys}}(t,X)=\\kappa_{\\mathrm{phys}}\\rho_*^\\gamma$ form a smooth solution for every $t\\ge0$. For $d=1,2$ their reduced representation on $\\mathbb T_L^d$ has velocity $V_*$. The total energy density $\\tfrac12\\rho_*|W_*|^2+\\rho_*e_{\\mathrm{phys}}(\\rho_*)=\\tfrac12\\rho_*|W_*|^2+\\kappa_{\\mathrm{phys}}\\rho_*^\\gamma/(\\gamma-1)$, measured in pascals, is constant in space and time and equals the reduced expression with $|V_*|^2$. For $d=3$ this is the unique local solution branch; for $d=1,2$ it is the unique branch in the transversely invariant reduced model.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 4: Waves",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids3.pdf",
+              "locator": "§4.6, printed pp.170–171 (PDF file pp.60–61), equations(4.97)–(4.101), especially energy conservation(4.100) and ideal-gas internal-energy/enthalpy context(4.101)."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "forward_refs": [],
+        "aliases": [],
+        "generation": {
+          "role": "example"
+        },
+        "empirical_premises": []
+      }
+    ]
+  }
+]

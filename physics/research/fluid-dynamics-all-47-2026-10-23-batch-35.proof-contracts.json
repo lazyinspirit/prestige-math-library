@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "35",
+  "scope": [
+    "prop-fd-linear-fluid-filter-interface",
+    "prop-fd-finite-observation-identifiability",
+    "ex-fd-two-mode-one-sensor"
+  ],
+  "contracts": {
+    "prop-fd-linear-fluid-filter-interface": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-fluid-coefficient-observation-model",
+          "source_section": "Definition",
+          "quote": "$a_0\\sim N_{m_0}(\\mu_0,P_0)$, $q_k\\sim N_{m_k}(0,Q_k)$, and $r_k\\sim N_{p_k}(0,R_k)$ are mutually independent, with $P_0,Q_k,R_k\\succeq0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "all mutually independent in the sense of [[def-independent-random-elements]]",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Singular initial, process, measurement, predicted-state, and filtered-state covariances are allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-state-space-hypotheses",
+          "claim": "Identify the coefficient state with the state vector in the finite linear-Gaussian state-space model: the local matrices are $F_k$ and $H_k$, and the local Gaussian vectors are the initial state and the mutually independent $q_k,r_k$. Their dimensions and covariance signs match the supplied model by [F1] and [F2]. The stated positive-definite $S_k$ condition is exactly the admissibility condition for each covariance solve, and [A1] matches the choice assumption of the Gaussian suppliers. Thus all hypotheses of [F3] hold.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identify-filtering-law",
+          "claim": "The declared Kalman recursion therefore defines one exact conditional-law version, with its mean and covariance at every finite observation history; no pointwise uniqueness on observation-law null sets is claimed.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement fixes a nonnegative integer horizon T; step 1.1 matches the T=0 model and step 2.1 includes k=0, for which the observation history is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows zero or singular state, process, and measurement covariances; step 1.1 requires positivity only for each solved innovation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies at k=1 by the same finite-horizon theorem application."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits singular predicted and analysis covariances while retaining positive-definite innovation matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 covers both initial time k=0 and every terminal time k=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated in the Statement and Fact A1, matching the imported Gaussian and filtering suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts a conditional exact-filter conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts a conditional exact-filter conclusion, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-step-scalar",
+          "claim": "A scalar one-step model checks the stated innovation and update formulas.",
+          "calculation": "Take m0=0, P0=1, F=1, Q=0, H=1, R=1, and y=2. Then S=2, K=1/2, ma=1, and Pa=1/2.",
+          "disposition": "Symbolic matrix arithmetic sanity check only; the general exactness follows from the imported theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Read both authored proof steps and all four direct supplier definitions/statements; read the full exact-Kalman supplier proof, one-step conditioning lemma, conditional-Gaussian theorem and filtering-law definition. Step 1.1 matches finite integer horizon, changing positive state/observation dimensions, real F/H matrices, mutually independent Gaussian initial/process/observation vectors, PSD covariances, AC and SPD innovations exactly. Step 2.1 applies the supplied everywhere-defined kernel theorem, not merely a formal Gaussian-density calculation. The supplier proves measurability and the conditional event identity by independent-noise extension, Gaussian conditioning and integration over histories. T=0 is the singleton empty history and prior Gaussian. Zero/singular state, process and observation covariances remain allowed; no inverse of these is used. Only solved S matrices must be SPD. Values at null histories are those of a selected version, without asserting uniqueness there. The existing proof unchanged by reader is valid under that reading. Outside pthm-fd-conditional-fluid-filter-law F7, 2.1 and 3.1 explicitly use this same version and carry the null-set qualification; local EnKF remark fixes the chosen Kalman law. No consumer repair. Law et al. 4.1 Theorem 4.1/Corollary 4.2 (printed pp.78-80) gives classical nonsingular context; the stronger singular-covariance and variable-dimension claims are supplied by the complete local published proof, not attributed to that narrower book theorem. No empirical premise or unresolved gap."
+      }
+    },
+    "prop-fd-finite-observation-identifiability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-fd-fluid-coefficient-observation-model",
+          "source_section": "Definition",
+          "quote": "a real matrix $G\\in\\mathbb R^{p\\times m}$ maps coefficients $a\\in\\mathbb R^m$ to predicted observations $Ga$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique non-negative operator $R:V\\to V$ such that $$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and $(f_1,\\dots,f_m)$ of $W$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "construct-whitening-map",
+          "claim": "Since $R\\succ0$, it is positive semidefinite, so [F1] gives a symmetric positive-semidefinite $S$ with $S^2=R$. If $Sv=0$, then $Rv=S^2v=0$, and positive definiteness of $R$ forces $v=0$; hence $S$ is invertible. Therefore $W=S^{-1}$ is symmetric positive definite and $W^TW=S^{-2}=R^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "singular-value-injectivity",
+          "claim": "Apply [F2] to $A$ on the nonzero finite-dimensional inner-product space $E$: for an orthonormal basis $e_1,\\ldots,e_d$ of $E$, the SVD gives $r\\le\\min(d,p)$ positive singular values $s_1,\\ldots,s_r$, an orthonormal list $f_1,\\ldots,f_r$ in $\\mathbb R^p$, $Ae_i=s_if_i$ for $i\\le r$, and $Ae_i=0$ for $i>r$. For $v=\\sum_i c_ie_i$ with $\\|v\\|_2=1$, $\\|Av\\|_2^2=\\sum_{i=1}^r s_i^2c_i^2$. Thus the infimum in the Statement is zero when $r<d$ and is $\\min_i s_i$ when $r=d$; it is positive exactly when $A$ is injective. If $r<d$, any $e_j$ with $j>r$ is a nonzero kernel vector.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kernel-identifiability",
+          "claim": "The operator $W$ is invertible by step 1.1, so for every $v\\in E$, $Av=0$ if and only if $WGv=0$, which holds if and only if $Gv=0$. Thus $A$ is injective exactly when $G|_E$ is injective, and in the noninjective case a nonzero $v\\in E\\cap\\ker G$ gives $G(a+v)=Ga$ for every $a\\in E$. In the pressure-field case stated in the item, an additive-constant direction with $Gv_c=0$ is such a null vector. Restricting coefficients to a complement of its span fixes this direction, while identifying $a$ and $b$ when $a-b$ lies in that span gives the stated equivalence-class formulation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "least-squares-stability",
+          "claim": "Suppose $\\sigma_{\\min}(A)>0$. Step 1.2 then has $r=d\\le p$, so the $d$ vectors $f_1,\\ldots,f_d$ form an orthonormal list that extends to an orthonormal basis $f_1,\\ldots,f_p$ of $\\mathbb R^p$ by [F2]. For $y=Ga+e$, write $a=\\sum_{i=1}^d a_ie_i$ and $Wy=\\sum_{i=1}^d b_if_i+b_\\perp$, where $b_\\perp$ is orthogonal to each $f_i$ for $i\\le d$. For any $b=\\sum_{i=1}^d c_ie_i\\in E$, $\\|W(y-Gb)\\|_2^2=\\sum_{i=1}^d(b_i-s_ic_i)^2+\\|b_\\perp\\|_2^2$; since each $s_i>0$, this is uniquely minimized by $c_i=b_i/s_i$. Therefore $\\hat a-a=\\sum_{i=1}^d s_i^{-1}\\langle We,f_i\\rangle e_i$. Orthonormality gives $\\|\\hat a-a\\|_2^2=\\sum_{i=1}^d s_i^{-2}|\\langle We,f_i\\rangle|^2\\le\\sigma_{\\min}(A)^{-2}\\sum_{i=1}^d|\\langle We,f_i\\rangle|^2\\le\\sigma_{\\min}(A)^{-2}\\|We\\|_2^2$, where the last inequality follows by expanding $We$ in the full orthonormal basis. Taking square roots proves the bound.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonzero coefficient subspace and a positive observation dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 treat a zero minimum gain by producing a nonzero kernel vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies when E and the observation space are one-dimensional; the only singular value is the scalar gain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 cover rank deficiency and convert the zero singular direction to a kernel direction of G."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite inverse statement has no time interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 use finite-dimensional square-root and SVD results only and invoke no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 show positive minimum gain implies injectivity of G on E."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 show injectivity of G on E implies positive minimum gain."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "identity-observation",
+          "claim": "A full-rank two-coefficient sensor has unit minimum gain and unit weighting.",
+          "calculation": "Take E=R^2, G=I2, and R=I2. Then W=I2, sigma_min=1, the weighted least-squares estimate is y, and ||a_hat-a||2=||e||2.",
+          "disposition": "Finite arithmetic check of the scale and bound; not a substitute for the SVD proof."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Read all four current proof steps, exact square-root/SVD statements and their complete local proofs, and reader/refuter evidence. R positive definite makes its symmetric square root injective and invertible; W preserves kernels. On nonzero E the full domain singular-value list includes zeros when dim(E)>p or rank is deficient, so the unit-sphere infimum is attained and is positive iff G restricted to E is injective. Both directions checked. In the full-column-rank case, orthogonal expansion uniquely minimizes the squared weighted residual and yields the stated inverse-minimum-gain error bound by a finite sum of squared coordinates. Zero G, one-dimensional E, singular G and exact error zero are covered; E=0 is excluded. The pressure constant direction is defined by Pi and lies in ker(G); the complement fixes only this direction, and G descends to the quotient since its span is in the kernel. Neither construction asserts removal of other null directions. No stochastic error law, confidence statement or general PDE result follows. No new choice use. The only item consumer is the unchanged two-mode example, which uses the unchanged kernel conclusion. Axler fourth edition 7.65, 7.68 and 7.70 with proof (printed pp.271-274) support the singular-value convention; local square-root and SVD suppliers furnish the exact results. No unresolved defect."
+      }
+    },
+    "ex-fd-two-mode-one-sensor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-fd-finite-observation-identifiability",
+          "source_section": "Statement",
+          "quote": "If $\\sigma_{\\min}(A)=0$, a nonzero vector in $E\\cap\\ker G$ makes distinct coefficients observationally indistinguishable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-kernel-vector",
+          "claim": "Direct multiplication gives $G(a_1,a_2)^T=a_1$ and $G(0,1)^T=0$, while $(0,1)^T\\ne0$. Thus $v=(0,1)^T$ is a nonzero vector in the kernel of $G$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "show-nonidentifiability",
+          "claim": "For every $a\\in\\mathbb R^2$ and every $t\\in\\mathbb R$, linearity gives $G(a+tv)=Ga+tGv=Ga$. Taking any $t\\ne0$ produces a distinct coefficient vector with the same predicted observation and the same realized error $e$; by [F1], the coefficient vector is not identifiable.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two coefficients and one sensor."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the nonzero null direction (0,1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-sensor observation is computed explicitly in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show the map has rank one on a two-dimensional coefficient space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no temporal or interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is an explicit finite matrix calculation and invokes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example demonstrates one nonidentifiable map and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example demonstrates one nonidentifiable map and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-mode-one-sensor",
+          "claim": "The one-row observation matrix has a one-dimensional kernel.",
+          "calculation": "For G=[1,0], G(0,1)^T=0 while (0,1)^T is nonzero; G(a1,a2)^T=a1 for every coefficient pair.",
+          "disposition": "Exact hand calculation; agrees with steps 1.1 and 2.1."
+        }
+      ]
+    }
+  }
+}

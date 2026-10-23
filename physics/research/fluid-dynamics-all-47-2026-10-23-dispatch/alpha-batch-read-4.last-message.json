@@ -1,0 +1,63 @@
+{
+  "group": "a",
+  "batches": ["4"],
+  "pages_read": ["fd-c02", "fd-c02-examples"],
+  "items_read": ["rem-fd-turbulence-and-closure-scope", "ex-fd-reynolds-stress-sign-and-units"],
+  "conventions": [
+    {
+      "convention": "Averaging uses a fixed finite family with constant nonnegative dimensionless weights summing to one. Covariance is R = Σ a_j(u_j − ū) ⊗ (u_j − ū); no identification with temporal averages, probability expectations, or long-time limits is assumed.",
+      "fixed_by": "rem-fd-turbulence-and-closure-scope",
+      "matters_for": ["rem-fd-turbulence-and-closure-scope", "ex-fd-reynolds-stress-sign-and-units"]
+    },
+    {
+      "convention": "The outer product has entries (u ⊗ v)rs = u_r v_s, and matrix divergence is rowwise. The averaged momentum equation has −div R on its right-hand side.",
+      "fixed_by": "rem-fd-turbulence-and-closure-scope",
+      "matters_for": ["rem-fd-turbulence-and-closure-scope", "ex-fd-reynolds-stress-sign-and-units"]
+    },
+    {
+      "convention": "The equations are per unit mass: velocity has units m/s, pressure per unit mass and covariance have units m²/s², acceleration has units m/s², and kinematic viscosity has units m²/s.",
+      "fixed_by": "rem-fd-turbulence-and-closure-scope",
+      "matters_for": ["rem-fd-turbulence-and-closure-scope", "ex-fd-reynolds-stress-sign-and-units"]
+    },
+    {
+      "convention": "For constant density ρ₀ > 0 and momentum equations written with +div σ on the right, the effective Reynolds-stress correction is σ_R = −ρ₀R, with units Pa. This specifies a signed contribution, without asserting uniqueness from its divergence or identification with measured total stress.",
+      "fixed_by": "ex-fd-reynolds-stress-sign-and-units",
+      "matters_for": ["ex-fd-reynolds-stress-sign-and-units"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-fdmath-finite-reynolds-identity",
+      "statement": "For an open interval I, open Ω ⊆ R^d, integers d,N ≥ 1, fixed nonnegative weights summing to one, and common ν ≥ 0, let u_j be C¹ with continuous second spatial derivatives, p_j be C¹, and f_j be continuous. If div u_j = 0 and ∂t u_j + div(u_j ⊗ u_j) + ∇p_j = νΔu_j + f_j pointwise, then ∂t ū + div(ū ⊗ ū) + ∇p̄ = νΔū + f̄ − div R. Moreover R = Σ a_j(u_j − ū) ⊗ (u_j − ū) is symmetric positive semidefinite. These identities assert neither existence of such solutions nor a statistical or physical interpretation.",
+      "used_by": ["rem-fd-turbulence-and-closure-scope", "ex-fd-reynolds-stress-sign-and-units"]
+    },
+    {
+      "id": "def-fd-quantity-and-frame-conventions",
+      "statement": "For the initial-chart material-motion convention require 0 ∈ I. A material motion χ ∈ C²(I × U,R³) has time slices that are bijections onto open images with C² inverses and positive Jacobian determinant, and χ(0,a) = a. Eulerian velocity satisfies u(t,χ(t,a)) = ∂tχ(t,a). Coordinates are measured in metres and velocity in m/s. Stress uses tension-positive traction σn and has units Pa.",
+      "used_by": ["ex-fd-reynolds-stress-sign-and-units"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-euclidean-inverse-function-theorem",
+      "used_for": "Indirect prerequisite through def-fd-smooth-motion: its local C¹ inverse conclusion justifies openness of the swept spacetime domain and the jointly C¹ inverse label map. The assigned translation example also supplies its inverses explicitly.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-c02",
+      "to": "fd-c01",
+      "faithful": true,
+      "note": "The supplier page contains the finite-ensemble definition and Reynolds identity. Both assigned consumers preserve fixed finite weights, regularity, common viscosity, incompressibility, covariance convention, and correction sign. The theorem's complete algebraic proof supports the uses; no statistical averaging conclusion is imported."
+    },
+    {
+      "from": "fd-c02",
+      "to": "fd-f01",
+      "faithful": true,
+      "note": "The supplier's material-motion, velocity, SI-unit, and tension-positive stress conventions agree with the example's Facts and Verification. The translations satisfy the initial normalization, regularity, inverse, and positive-Jacobian requirements. Constant-density scaling yields the stated negative stress correction without a density-transport or empirical claim."
+    }
+  ]
+}

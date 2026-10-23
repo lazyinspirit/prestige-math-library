@@ -1,0 +1,1071 @@
+{
+  "version": 1,
+  "level": "fluid-dynamics-all-47-2026-10-23-batch-37",
+  "scope": [
+    "lem-fd-periodic-filter-normalization-and-commutation",
+    "thm-fd-filtered-covariance-energy",
+    "thm-fd-holder-energy-transfer-bound",
+    "ex-fd-filtering-constant-field"
+  ],
+  "contracts": {
+    "lem-fd-periodic-filter-normalization-and-commutation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice for the normalized periodic torus convention used here. Let $d\\in\\{1,2,3\\}$ and let $L>0$ be a period length. Put $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$, with normalized Haar measure $d\\mu_L=L^{-d}\\,dx$; writing $y=x/L$ and $\\xi=2\\pi y$ identifies this normalized measure with normalized Haar measure on $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, the periodic Fourier convention fixed in the referenced Fourier-Sobolev definition. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, vanish outside a compact subset of $B_1(0)$, and satisfy $\\int_{\\mathbb R^d}K(s)\\,ds=1$. For $0<\\ell<L/2$, define the periodized kernel\n\n$$G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K\\!\\left(\\frac{r+Ln}{\\ell}\\right),\\qquad r\\in\\mathbb T_L^d.$$\n\nFor a field $q$ with finitely many real components, each smooth and $L$-periodic, define its filtered field by\n\n$$\\overline q_\\ell(x)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,dx=L^d\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,d\\mu_L(r).$$\n\nHere $dx$ is the volume measure on one period cell. For any smooth periodic vector field $u:\\mathbb T_L^d\\to\\mathbb R^d$, define the subfilter stress and transfer by\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell,$$\n\nwhere $(u\\otimes v)_{ij}=u_i v_j$, $(\\nabla v)_{ij}=\\partial_jv_i$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. We call $\\Pi_\\ell$ the forward-transfer scalar by sign convention: $\\tau_\\ell:\\nabla\\overline u_\\ell=-\\Pi_\\ell$, so $\\Pi_\\ell>0$ exactly when this stress-gradient contraction is negative. This convention does not assert an evolution equation, an energy balance, or a sign for $\\Pi_\\ell$. With length in metres and time in seconds, $x,L,\\ell$ have units m, $u$ has units m s$^{-1}$, $G_\\ell$ has units m$^{-d}$, $\\tau_\\ell$ has units m$^2$ s$^{-2}$, and $\\Pi_\\ell$ has units m$^2$ s$^{-3}$. The nonnegative-kernel hypothesis is part of this definition; no positivity or transfer-sign property is assigned to signed kernels or sharp spectral cutoffs.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and $c<d$. Suppose $g,h:[a,b]\\times[c,d]\\to\\mathbb R$ are continuous and, for every fixed $t\\in[c,d]$, the function $x\\mapsto g(x,t)$ is differentiable on $(a,b)$ with derivative $h(x,t)$. Define\n\n$$G(x):=\\int_c^d g(x,t)\\,dt.$$\n\nThen $G$ is differentiable on $[a,b]$ as a function on that interval and\n\n$$G'(x)=\\int_c^d h(x,t)\\,dt\\qquad(x\\in[a,b]).$$\n\nAt $a$ and $b$ the derivative is relative and one-sided. The derivative hypothesis is imposed only for interior parameter values; continuity of $h$ supplies its endpoint values.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multidimensional-riemann-criterion",
+          "source_section": "Statement",
+          "quote": "A bounded $f:Q\\to\\mathbb R$ on a nondegenerate rectangle is Riemann\nintegrable if and only if, for every $\\varepsilon>0$, some grid $P$ satisfies\n$U(f,P)-L(f,P)<\\varepsilon$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space), let\n$(Y,d_Y)$ be any metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to Y$ be\ncontinuous (Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form). Then $f$ is uniformly continuous\n(Uniform continuity of a map of metric spaces: one $\\delta$ serving every point).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n(Every open cover of a compact metric space has a Lebesgue number: a $\\delta > 0$ such that every nonempty subset of diameter less than $\\delta$ lies inside a single member of the cover).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-multidimensional-darboux-sums",
+          "source_section": "Definition",
+          "quote": "Let $f:Q\\to\\mathbb R$ be bounded on a nondegenerate rectangle and let $P$ be a grid. For each cell $Q_i$, put\n$$m_i:=\\inf f[Q_i],\\quad M_i:=\\sup f[Q_i],\\quad L(f,P):=\\sum_i m_i\\operatorname{vol}(Q_i),\\quad U(f,P):=\\sum_i M_i\\operatorname{vol}(Q_i).$$\nThe extrema exist as finite reals because each nonempty image is bounded ([[def-bounded-set]], [[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]), and the sums use the iterated convention of [[def-multidimensional-grid-partition]].\n\nSince $m_i\\le M_i$ and cell volumes are nonnegative, $L(f,P)\\le U(f,P)$. Moreover\n$$U(f,P)-L(f,P)=\\sum_i(M_i-m_i)\\operatorname{vol}(Q_i),$$\nthe sum of cell oscillations weighted by volume ([[lem-finite-sum-laws]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-multidimensional-grid-partition",
+          "source_section": "Definition",
+          "quote": "A **grid partition** $P$ of a nondegenerate rectangle $Q=[a,b]\\subseteq\\mathbb R^m$ is a family, one for each $j<m$, of one-dimensional partitions $a_j=t_{j,0}<\\cdots<t_{j,n_j}=b_j$ ([[def-partition-and-refinement]]). For a multi-index $i=(i_0,\\ldots,i_{m-1})$ with $i_j<n_j$, its cell is\n$$Q_i:=\\prod_{j<m}[t_{j,i_j},t_{j,i_j+1}].$$\nA sum over cells means the iterated recursive sum $\\sum_{i_0<n_0}\\cdots\\sum_{i_{m-1}<n_{m-1}}$ of [[def-finite-sum]]. The **mesh** is $\\max_{j<m,i_j<n_j}(t_{j,i_j+1}-t_{j,i_j})$, which exists by [[lem-finite-set-has-max]] and is the largest $d_\\infty$-diameter ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]]).\n\nRefinement is coordinatewise. Coordinatewise union gives a common refinement. The cells cover $Q$ and have pairwise disjoint interiors. Repeated splitting of finite sums and induction on $m$ give\n$$\\sum_i\\operatorname{vol}(Q_i)=\\operatorname{vol}(Q).$$\nThese statements include boundary overlaps: boundaries may meet, but interiors do not, and volume splitting is algebraic.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ (Every complete ordered field is Archimedean) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse (Field). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\nEvery complete ordered field is Archimedean on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $r$ in a bounded period cell, a nonzero summand requires $|r+Ln|<\\ell<L/2$. Only finitely many integer vectors $n$ meet this bound, uniformly on the cell, so the sum is locally finite there; all its derivatives are locally finite sums as well. Replacing $r$ by $r+Lm$ and reindexing $n$ by $n-m$ proves periodicity, and each summand is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every continuous integrand used below is supported in a fixed nondegenerate compact box $Q$ (enlarge the support box if necessary). By [F7] and [F8], it is bounded and uniformly continuous on $Q$. Write $V=\\operatorname{vol}(Q)>0$ and let $\\delta>0$ be a uniform-continuity radius for tolerance $\\varepsilon/(2V)$. Choose $N\\ge1$ with $1/N<\\delta/(2R\\sqrt d)$ by [F10], where $2R$ is the side length of a box containing $Q$, and divide each side into $N$ equal parts. Each cell's Euclidean diameter is at most $2R\\sqrt d/N<\\delta$, so each cell oscillation is below that tolerance. By [F9], the Darboux gap is at most $(\\varepsilon/(2V))\\sum_i\\operatorname{vol}(Q_i)=\\varepsilon/2<\\varepsilon$; the criterion [F6] makes the integrand Riemann integrable. This applies componentwise to the compactly supported kernel factors and their products with the periodic field and its derivatives.",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose the centered closed period cell $Q=[-L/2,L/2]^d$. For $r\\in Q$ and $n\\in\\mathbb Z^d\\setminus\\{0\\}$, one coordinate of $r+Ln$ has absolute value at least $L/2>\\ell$, so its kernel summand is zero. Thus on $Q$ the periodized kernel is $f(r)=\\ell^{-d}K(r/\\ell)$, whose support $\\ell\\operatorname{supp}K$ is compactly contained in $B_\\ell(0)\\subset\\operatorname{int}Q$. Its period-cell integral is therefore its integral over $\\mathbb R^d$. Step 1.2 gives compact-support Riemann integrability. Apply",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $\\gamma>0$, the functions $K(s)|s|^\\gamma$ and $|\\partial_jK(s)|\\,|s|^\\gamma$ are continuous, bounded, and compactly supported. Step 1.2 makes them Riemann integrable, and their integrals are finite by boundedness on a compact box; the finite maximum over $j$ is finite as well.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With the additional smooth periodic factor $q(x-r,t)$, the centered-cell argument in step 2.1 identifies the convolution with $\\int_{\\mathbb R^d}f_{x,t}(y)\\,dy$, where $f_{x,t}(y)=\\ell^{-d}K(y/\\ell)q(x-y,t)$, componentwise. Each such integrand has support contained in the same compact set $\\ell\\operatorname{supp}K$ and is Riemann integrable by step 1.2. Apply",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On a compact time interval inside $I$ and a compact parameter interval for any coordinate $x_j$, the Euclidean representation has a continuous integrand and continuous parameter derivative on the fixed compact support box of $K$. By [F4] the multiple integral is an iterated integral; applying [F3] to each one-dimensional factor and then [F4] again passes $\\partial_t$ and $\\partial_{x_j}$ through the integral. Repeating this argument for each spatial derivative gives the stated multi-index identities and continuous derivatives.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 1.1–4.1 establish the kernel, convolution, derivative, and moment claims.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement restricts d to {1,2,3} and L>0, so its period cell is nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Uphold the nonapplicability of an empty spatial/index domain: Statement fixes d in {1,2,3}, L>0, and the periodization index Z^d contains 0. Unit mass excludes an empty kernel support. Proof 1.1 treats locally finite periodization; at a point with no active summands its value and derivatives are zero, which creates no missing nonemptiness premise. Proof 2.1 integrates translated cells and obtains mass 1. The sum-syntax trigger does not exhibit an admissible empty family. The current row truthfully excludes an empty period cell; it does not assert that a local active-summand set is always nonempty.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Uphold the nonapplicability of an empty spatial/index domain: Statement fixes d in {1,2,3}, L>0, and the periodization index Z^d contains 0. Unit mass excludes an empty kernel support. Proof 1.1 treats locally finite periodization; at a point with no active summands its value and derivatives are zero, which creates no missing nonemptiness premise. Proof 2.1 integrates translated cells and obtains mass 1. The sum-syntax trigger does not exhibit an admissible empty family. The current row truthfully excludes an empty period cell; it does not assert that a local active-summand set is always nonempty.",
+            "item_sha256": "a32a0de19cc0e7d57cc66f1f450287ee0c053deeaabf8d392b8d6b09d842152b",
+            "row_sha256": "510ccec103507c208492c168b01005806a279987749fabd60e4ef03798a344f9",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For q=0 the convolution and every derivative are zero; normalization and the finite kernel moments remain as proved in steps 2.1, 2.2, and 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The permitted case d=1 has one period coordinate; the normalization calculation in step 2.1 and moment calculation in step 2.2 apply unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypotheses require L>0 and 0<ell<L/2, so neither a zero period nor a zero filter width is included; the nondegenerate cell construction appears in steps 1.2 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Reindexing the locally finite periodization under r to r+Lm proves matching periodic values at the identified cell faces in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly adopted in A1; the finite reindexing and grid arguments use no additional selection, as shown in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives normalization and commutation identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma gives normalization and commutation identities, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional period cell normalization",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "For d=1, L=4 and ell=1, integrate the finite periodization over [0,4]; translating its supported pieces gives the full-line integral of K, which is 1."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the stated identities and estimates; no numerical sampling, experimental measurement, or statistical inference is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Independently checked Proof 1.1–5.1 and all thirteen exact dependency interfaces. Compact support gives uniformly finite periodization on bounded cells; reindexing yields periodic smoothness. Finite translated cell integrals and affine C1 invertible change of variables give volume-measure mass one (not Haar mass one). The Darboux argument uses compact boxes, uniform continuity and arbitrarily fine grids with positive volume; boundary overlaps have zero content. Compact kernel moments are finite for gamma>0. Iterated Riemann Fubini and compact-rectangle differentiation apply on interior compact time/parameter intervals, including mixed derivatives under the stated joint regularity. Checked d=1, zero q, empty active summands, periodic faces, excluded L=0/ell=0/ell=L/2 and explicit Countable Choice; no further choice use. Reader/refuter report no local defect. Published Fubini/grid/Darboux inline links are nonfatal read-only editorial findings reader:37:1–3, recorded separately; they do not invalidate these interfaces. Washington filter normalization/commutation and Eyink filter/covariance conventions crosschecked at cited equations. No item edit or unresolved mathematical prerequisite. Step5 unit 37: checked the full support-in-image and zero-extension hypotheses against the current change-of-variables supplier. Repaired F2 and proofs 2.1/3.1 using the centered cell and the global dilation on open R^d; every nonzero lattice translate vanishes on that cell since ell<L/2. The scalar integrands and componentwise kernel-field products have compact support inside the image R^d and are Riemann integrable by step 1.2. Statement, dependencies, Countable Choice, moments and commutation interfaces are unchanged. This is the repairing adjudicator’s check, not independent review of the repair."
+      }
+    },
+    "thm-fd-filtered-covariance-energy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice for the normalized periodic torus convention used here. Let $d\\in\\{1,2,3\\}$ and let $L>0$ be a period length. Put $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$, with normalized Haar measure $d\\mu_L=L^{-d}\\,dx$; writing $y=x/L$ and $\\xi=2\\pi y$ identifies this normalized measure with normalized Haar measure on $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, the periodic Fourier convention fixed in the referenced Fourier-Sobolev definition. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, vanish outside a compact subset of $B_1(0)$, and satisfy $\\int_{\\mathbb R^d}K(s)\\,ds=1$. For $0<\\ell<L/2$, define the periodized kernel\n\n$$G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K\\!\\left(\\frac{r+Ln}{\\ell}\\right),\\qquad r\\in\\mathbb T_L^d.$$\n\nFor a field $q$ with finitely many real components, each smooth and $L$-periodic, define its filtered field by\n\n$$\\overline q_\\ell(x)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,dx=L^d\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,d\\mu_L(r).$$\n\nHere $dx$ is the volume measure on one period cell. For any smooth periodic vector field $u:\\mathbb T_L^d\\to\\mathbb R^d$, define the subfilter stress and transfer by\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell,$$\n\nwhere $(u\\otimes v)_{ij}=u_i v_j$, $(\\nabla v)_{ij}=\\partial_jv_i$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. We call $\\Pi_\\ell$ the forward-transfer scalar by sign convention: $\\tau_\\ell:\\nabla\\overline u_\\ell=-\\Pi_\\ell$, so $\\Pi_\\ell>0$ exactly when this stress-gradient contraction is negative. This convention does not assert an evolution equation, an energy balance, or a sign for $\\Pi_\\ell$. With length in metres and time in seconds, $x,L,\\ell$ have units m, $u$ has units m s$^{-1}$, $G_\\ell$ has units m$^{-d}$, $\\tau_\\ell$ has units m$^2$ s$^{-2}$, and $\\Pi_\\ell$ has units m$^2$ s$^{-3}$. The nonnegative-kernel hypothesis is part of this definition; no positivity or transfer-sign property is assigned to signed kernels or sharp spectral cutoffs.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-periodic-filter-normalization-and-commutation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice required by the normalized periodic torus convention. Let $d\\in\\{1,2,3\\}$, $L>0$, $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$, and $d\\mu_L=L^{-d}dx$. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, supported in a compact subset of $B_1(0)$, with $\\int K(s)\\,ds=1$, and let $0<\\ell<L/2$. Define $G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K((r+Ln)/\\ell)$ and $\\overline q_\\ell(x)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,dx$. The locally finite sum defining $G_\\ell$ is smooth, nonnegative, and $L$-periodic, and $\\int_{\\mathbb T_L^d}G_\\ell(r)\\,dx=1$. For every smooth periodic finite-dimensional field $q$, the filter also has the Euclidean representation\n\n$$\\overline q_\\ell(x,t)=\\int_{\\mathbb R^d}K(s)q(x-\\ell s,t)\\,ds,$$\n\nwhere $q$ on the right is its periodic lift. If $I\\subseteq\\mathbb R$ is open and each component of $q:I\\times\\mathbb T_L^d\\to\\mathbb R^m$ and of its time derivative has continuous spatial derivatives of every order, then the filtered field has the same regularity and, for every spatial multi-index $\\beta$,\n\n$$\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_x^\\beta q}_\\ell,\\qquad \\partial_t\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_t\\partial_x^\\beta q}_\\ell.$$\n\nFor every $\\gamma>0$, the kernel moments\n\n$$M_\\gamma:=\\int_{\\mathbb R^d}K(s)|s|^\\gamma\\,ds,\\qquad N_\\gamma:=\\max_{1\\le j\\le d}\\int_{\\mathbb R^d}|\\partial_jK(s)|\\,|s|^\\gamma\\,ds$$\n\nare finite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-divergence-satisfies-the-product-rule",
+          "source_section": "Statement",
+          "quote": "For a smooth scalar function $f$ and smooth vector field $X$,\n$$\\operatorname{div}_\\mu(fX)=df(X)+f\\operatorname{div}_\\mu X.$$\nThe formula holds also on manifolds with boundary.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n(A continuous function on $[a,b]$ is Riemann integrable, by Heine-Cantor and Riemann's criterion).",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n(Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $f$ is bounded (Lower bound, bounded below, bounded set) and Riemann\nintegrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multidimensional-riemann-criterion",
+          "source_section": "Statement",
+          "quote": "A bounded $f:Q\\to\\mathbb R$ on a nondegenerate rectangle is Riemann\nintegrable if and only if, for every $\\varepsilon>0$, some grid $P$ satisfies\n$U(f,P)-L(f,P)<\\varepsilon$.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space), let\n$(Y,d_Y)$ be any metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to Y$ be\ncontinuous (Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form). Then $f$ is uniformly continuous\n(Uniform continuity of a map of metric spaces: one $\\delta$ serving every point).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n(Every open cover of a compact metric space has a Lebesgue number: a $\\delta > 0$ such that every nonempty subset of diameter less than $\\delta$ lies inside a single member of the cover).",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and $c<d$. Suppose $g,h:[a,b]\\times[c,d]\\to\\mathbb R$ are continuous and, for every fixed $t\\in[c,d]$, the function $x\\mapsto g(x,t)$ is differentiable on $(a,b)$ with derivative $h(x,t)$. Define\n\n$$G(x):=\\int_c^d g(x,t)\\,dt.$$\n\nThen $G$ is differentiable on $[a,b]$ as a function on that interval and\n\n$$G'(x)=\\int_c^d h(x,t)\\,dt\\qquad(x\\in[a,b]).$$\n\nAt $a$ and $b$ the derivative is relative and one-sided. The derivative hypothesis is imposed only for interior parameter values; continuity of $h$ supplies its endpoint values.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multidimensional-darboux-sums",
+          "source_section": "Definition",
+          "quote": "Let $f:Q\\to\\mathbb R$ be bounded on a nondegenerate rectangle and let $P$ be a grid. For each cell $Q_i$, put\n$$m_i:=\\inf f[Q_i],\\quad M_i:=\\sup f[Q_i],\\quad L(f,P):=\\sum_i m_i\\operatorname{vol}(Q_i),\\quad U(f,P):=\\sum_i M_i\\operatorname{vol}(Q_i).$$\nThe extrema exist as finite reals because each nonempty image is bounded ([[def-bounded-set]], [[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]), and the sums use the iterated convention of [[def-multidimensional-grid-partition]].\n\nSince $m_i\\le M_i$ and cell volumes are nonnegative, $L(f,P)\\le U(f,P)$. Moreover\n$$U(f,P)-L(f,P)=\\sum_i(M_i-m_i)\\operatorname{vol}(Q_i),$$\nthe sum of cell oscillations weighted by volume ([[lem-finite-sum-laws]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multidimensional-grid-partition",
+          "source_section": "Definition",
+          "quote": "A **grid partition** $P$ of a nondegenerate rectangle $Q=[a,b]\\subseteq\\mathbb R^m$ is a family, one for each $j<m$, of one-dimensional partitions $a_j=t_{j,0}<\\cdots<t_{j,n_j}=b_j$ ([[def-partition-and-refinement]]). For a multi-index $i=(i_0,\\ldots,i_{m-1})$ with $i_j<n_j$, its cell is\n$$Q_i:=\\prod_{j<m}[t_{j,i_j},t_{j,i_j+1}].$$\nA sum over cells means the iterated recursive sum $\\sum_{i_0<n_0}\\cdots\\sum_{i_{m-1}<n_{m-1}}$ of [[def-finite-sum]]. The **mesh** is $\\max_{j<m,i_j<n_j}(t_{j,i_j+1}-t_{j,i_j})$, which exists by [[lem-finite-set-has-max]] and is the largest $d_\\infty$-diameter ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]]).\n\nRefinement is coordinatewise. Coordinatewise union gives a common refinement. The cells cover $Q$ and have pairwise disjoint interiors. Repeated splitting of finite sums and induction on $m$ give\n$$\\sum_i\\operatorname{vol}(Q_i)=\\operatorname{vol}(Q).$$\nThese statements include boundary overlaps: boundaries may meet, but interiors do not, and volume splitting is algebraic.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ (Every complete ordered field is Archimedean) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse (Field). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\nEvery complete ordered field is Archimedean on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\delta_su(x,t)=u(x-\\ell s,t)-u(x,t)$. Unit mass and the Euclidean filter representation give $m_\\ell=\\overline u_\\ell-u$. Expanding componentwise gives $\\int K(s)\\,\\delta_su\\otimes\\delta_su\\,ds=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes u-u\\otimes\\overline u_\\ell+u\\otimes u$, while $m_\\ell\\otimes m_\\ell=(\\overline u_\\ell-u)\\otimes(\\overline u_\\ell-u)$. Subtraction gives the stated covariance formula and symmetry.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply the filter to [A2]. By [F2], time and spatial derivatives pass through the filter, so $\\partial_t\\overline u_\\ell+\\nabla\\cdot\\overline{u\\otimes u}_\\ell+\\nabla\\overline p_\\ell=\\nu\\Delta\\overline u_\\ell+\\overline f_\\ell$ and $\\nabla\\cdot\\overline u_\\ell=0$. Substituting $\\overline{u\\otimes u}_\\ell=\\overline u_\\ell\\otimes\\overline u_\\ell+\\tau_\\ell$ gives the stated filtered system.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $z\\in\\mathbb R^d$, contraction of the covariance formula gives $z^{\\mathsf T}\\tau_\\ell z=\\int K(s)(z\\cdot\\delta_su)^2\\,ds-(\\int K(s)z\\cdot\\delta_su\\,ds)^2=\\int K(s)(z\\cdot\\delta_su-z\\cdot m_\\ell)^2\\,ds\\ge0$, where unit mass expands the square and $K\\ge0$ makes the last integrand nonnegative. Thus $\\tau_\\ell$ is positive semidefinite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In components, $\\partial_j(\\overline u_{\\ell,i}\\overline u_{\\ell,j})=\\overline u_{\\ell,j}\\partial_j\\overline u_{\\ell,i}+\\overline u_{\\ell,i}\\partial_j\\overline u_{\\ell,j}$; the last term vanishes by $\\nabla\\cdot\\overline u_\\ell=0$. Hence the filtered quadratic divergence is the incompressible transport term used in the energy balance.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiply the filtered momentum equation by $\\overline u_{\\ell,i}$ and sum over $i$. The product rule [F3] and $\\nabla\\cdot\\overline u_\\ell=0$ give $\\overline u_{\\ell,i}\\partial_i\\overline p_\\ell=\\partial_i(\\overline p_\\ell\\overline u_{\\ell,i})$ and $-\\overline u_{\\ell,i}\\partial_j\\tau_{\\ell,ij}=-\\partial_j(\\overline u_{\\ell,i}\\tau_{\\ell,ij})+\\tau_{\\ell,ij}\\partial_j\\overline u_{\\ell,i}$. The scalar product rule gives $\\nu\\overline u_{\\ell,i}\\partial_j\\partial_j\\overline u_{\\ell,i}=\\nu\\partial_j(\\overline u_{\\ell,i}\\partial_j\\overline u_{\\ell,i})-\\nu(\\partial_j\\overline u_{\\ell,i})^2$, and [F2] supplies $\\partial_t(|\\overline u_\\ell|^2/2)=\\overline u_{\\ell,i}\\partial_t\\overline u_{\\ell,i}$. Collecting the divergence terms yields the stated pointwise local energy equation.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the closed period cell $Q=[0,L]^d$, each component of the local energy flux and its divergence is continuous. By [F7], each is bounded and uniformly continuous. Given $\\varepsilon>0$, let $\\delta>0$ be a uniform-continuity radius for tolerance $\\varepsilon/(2L^d)$. Choose $N\\ge1$ with $1/N<\\delta/(L\\sqrt d)$ by [F11] and divide each coordinate interval into $N$ equal parts. Each cell's Euclidean diameter is at most $L\\sqrt d/N<\\delta$, so its oscillation is below that tolerance; by [F10] the Darboux gap is at most $(\\varepsilon/(2L^d))\\sum_i\\operatorname{vol}(Q_i)=\\varepsilon/2<\\varepsilon$. The criterion [F7] makes the flux components and their divergence Riemann integrable on $Q$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F10",
+            "F11",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Fix all coordinates but $x_j$. Apply [F4] to $u=1$ and $v$ equal to the $j$-th local flux component on $[0,L]$; its derivative is continuous and integrable by [F5], and periodicity makes the endpoint term zero. By [F6], integrating these zero one-dimensional integrals over the other coordinates gives zero integral for the total divergence on $\\mathbb T_L^d$.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Fix $t_0\\in I$ and choose a compact interval $J\\subset I$ with $t_0$ in its interior. On $J\\times Q$, $e_\\ell$ and $\\partial_t e_\\ell$ are continuous, so [F7] gives boundedness and uniform continuity and its grid criterion gives Riemann integrability of each spatial section. By [F6] the spatial integral is an iterated integral; applying [F9] successively to its $d$ one-dimensional integrations passes $\\partial_t$ through each integral at $t_0$. Integrating the local identity from step 3.1 over $Q$, using step 5.1 to make the total-divergence integral zero, and dividing by $L^d$ for normalized Haar measure gives the stated global resolved-energy identity at $t_0$.",
+          "step": "6.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F9",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dimension is restricted to d in {1,2,3}; no zero-dimensional torus case is asserted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement restricts d to {1,2,3} and L>0; the displayed periodization is over fixed nonempty Z^d, and all i,j sums run over 1 through d. There is no freely chosen index family whose empty member must be added to the theorem. Proof 1.1 expands covariance using the unit-mass filter, proof 2.1 rewrites the quadratic form as a nonnegative weighted square, and proofs 3.1 and 5.1 sum component fluxes and cancel opposite periodic faces. None requires selecting a member of a possibly empty family. The zero field and vanishing local kernel terms are permitted, but do not make the spatial domain or these fixed indices empty.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement restricts d to {1,2,3} and L>0; the displayed periodization is over fixed nonempty Z^d, and all i,j sums run over 1 through d. There is no freely chosen index family whose empty member must be added to the theorem. Proof 1.1 expands covariance using the unit-mass filter, proof 2.1 rewrites the quadratic form as a nonnegative weighted square, and proofs 3.1 and 5.1 sum component fluxes and cancel opposite periodic faces. None requires selecting a member of a possibly empty family. The zero field and vanishing local kernel terms are permitted, but do not make the spatial domain or these fixed indices empty.",
+            "item_sha256": "e1f7f53095c636e3aa98d3d2220242f22f0cf579d92f524148ebdd5dbcfe5aa1",
+            "row_sha256": "bdcc09e8432ceb282cf3d35bd99f1917dfbaec377aac621ee756cd9d6c3c3a02",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=0 with p=f=0 the covariance, stress, resolved energy, dissipation, and transfer all vanish; the identities reduce directly by steps 1.1, 2.1, 3.1, and 6.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case d=1 is included; the component sums in the local energy calculation and periodic integration in steps 3.1 and 5.1 reduce to their single-coordinate forms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires L>0, 0<ell<L/2, and nu>0; zero period, zero filter width, and zero viscosity are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Periodicity cancels the flux values on opposite faces in step 5.1, and t0 is chosen in the interior of I before differentiating in step 6.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is the explicit axiom A1 inherited from the Fourier-Sobolev torus convention; the algebraic covariance and energy derivations add no selection, as steps 1.1 and 1.2 show."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts identities and positive semidefiniteness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts identities and positive semidefiniteness, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant velocity solution",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "step 6.1"
+          ],
+          "expected": "For u=w constant and p=f=0, all increments and gradients vanish, so tau=Pi=0 and both resolved-energy sides are zero."
+        },
+        {
+          "name": "one-dimensional index contraction",
+          "inputs": [
+            "F3",
+            "step 2.2",
+            "step 3.1"
+          ],
+          "expected": "When d=1, each tensor contraction has a single i=j=1 term; the product rule still gives the stated local energy identity."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the stated identities and estimates; no numerical sampling, experimental measurement, or statistical inference is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Independently reviewed Proof 1.1–6.1 and all sixteen declared dependency interfaces after the level-2 filter lemma. Unit mass expands covariance; contraction against arbitrary z is an integral of a nonnegative square, proving symmetry and positive semidefiniteness without a transfer-sign claim. C1(I;C-infinity) field regularity supplies the mixed spatial/time derivatives required by the lemma; smooth p,f and constant nu permit filtering the pointwise PDE. Checked component divergence convention and signs: stress flux +sum_i ubar_i tau_ij, RHS +tau:grad ubar=-Pi, viscosity dissipation negative and force work positive. Periodic smooth flux has zero integrated divergence by one-dimensional integration by parts and Riemann Fubini; differentiation of energy integrals is justified on compact interior time intervals. Checked d=1, u=0, constant fields, arbitrary z including zero, periodic faces, positive-width exclusions and explicit inherited Countable Choice. Washington equations (13)–(23) and Eyink (3),(4),(9)–(17) checked; own algebra fixes pressure sign independently. Reader/refuter give no local defect. Published inline-link findings are nonfatal read-only maintenance. No local repair or unresolved prerequisite."
+      }
+    },
+    "thm-fd-holder-energy-transfer-bound": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice for the normalized periodic torus convention used here. Let $d\\in\\{1,2,3\\}$ and let $L>0$ be a period length. Put $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$, with normalized Haar measure $d\\mu_L=L^{-d}\\,dx$; writing $y=x/L$ and $\\xi=2\\pi y$ identifies this normalized measure with normalized Haar measure on $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, the periodic Fourier convention fixed in the referenced Fourier-Sobolev definition. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, vanish outside a compact subset of $B_1(0)$, and satisfy $\\int_{\\mathbb R^d}K(s)\\,ds=1$. For $0<\\ell<L/2$, define the periodized kernel\n\n$$G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K\\!\\left(\\frac{r+Ln}{\\ell}\\right),\\qquad r\\in\\mathbb T_L^d.$$\n\nFor a field $q$ with finitely many real components, each smooth and $L$-periodic, define its filtered field by\n\n$$\\overline q_\\ell(x)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,dx=L^d\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,d\\mu_L(r).$$\n\nHere $dx$ is the volume measure on one period cell. For any smooth periodic vector field $u:\\mathbb T_L^d\\to\\mathbb R^d$, define the subfilter stress and transfer by\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell,$$\n\nwhere $(u\\otimes v)_{ij}=u_i v_j$, $(\\nabla v)_{ij}=\\partial_jv_i$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. We call $\\Pi_\\ell$ the forward-transfer scalar by sign convention: $\\tau_\\ell:\\nabla\\overline u_\\ell=-\\Pi_\\ell$, so $\\Pi_\\ell>0$ exactly when this stress-gradient contraction is negative. This convention does not assert an evolution equation, an energy balance, or a sign for $\\Pi_\\ell$. With length in metres and time in seconds, $x,L,\\ell$ have units m, $u$ has units m s$^{-1}$, $G_\\ell$ has units m$^{-d}$, $\\tau_\\ell$ has units m$^2$ s$^{-2}$, and $\\Pi_\\ell$ has units m$^2$ s$^{-3}$. The nonnegative-kernel hypothesis is part of this definition; no positivity or transfer-sign property is assigned to signed kernels or sharp spectral cutoffs.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-periodic-filter-normalization-and-commutation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice required by the normalized periodic torus convention. Let $d\\in\\{1,2,3\\}$, $L>0$, $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$, and $d\\mu_L=L^{-d}dx$. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, supported in a compact subset of $B_1(0)$, with $\\int K(s)\\,ds=1$, and let $0<\\ell<L/2$. Define $G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K((r+Ln)/\\ell)$ and $\\overline q_\\ell(x)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,dx$. The locally finite sum defining $G_\\ell$ is smooth, nonnegative, and $L$-periodic, and $\\int_{\\mathbb T_L^d}G_\\ell(r)\\,dx=1$. For every smooth periodic finite-dimensional field $q$, the filter also has the Euclidean representation\n\n$$\\overline q_\\ell(x,t)=\\int_{\\mathbb R^d}K(s)q(x-\\ell s,t)\\,ds,$$\n\nwhere $q$ on the right is its periodic lift. If $I\\subseteq\\mathbb R$ is open and each component of $q:I\\times\\mathbb T_L^d\\to\\mathbb R^m$ and of its time derivative has continuous spatial derivatives of every order, then the filtered field has the same regularity and, for every spatial multi-index $\\beta$,\n\n$$\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_x^\\beta q}_\\ell,\\qquad \\partial_t\\partial_x^\\beta\\overline q_\\ell=\\overline{\\partial_t\\partial_x^\\beta q}_\\ell.$$\n\nFor every $\\gamma>0$, the kernel moments\n\n$$M_\\gamma:=\\int_{\\mathbb R^d}K(s)|s|^\\gamma\\,ds,\\qquad N_\\gamma:=\\max_{1\\le j\\le d}\\int_{\\mathbb R^d}|\\partial_jK(s)|\\,|s|^\\gamma\\,ds$$\n\nare finite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n(A continuous function on $[a,b]$ is Riemann integrable, by Heine-Cantor and Riemann's criterion).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\nClosure properties of measurable functions used by the integral and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n(Real and imaginary parts, complex conjugation, and modulus), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space), let\n$(Y,d_Y)$ be any metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to Y$ be\ncontinuous (Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form). Then $f$ is uniformly continuous\n(Uniform continuity of a map of metric spaces: one $\\delta$ serving every point).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n(Every open cover of a compact metric space has a Lebesgue number: a $\\delta > 0$ such that every nonempty subset of diameter less than $\\delta$ lies inside a single member of the cover).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n(Lebesgue outer measure on $\\mathbb{R}^n$). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, Assuming countable choice, Lebesgue outer measure is an outer measure that restricts to elementary volume\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of Carathéodory measurable sets.\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume, which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it (Measures on sigma-algebras);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete (Complete measure spaces), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of Half-open boxes in $\\mathbb{R}^n$ and their volume, and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ (Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ (The Borel sigma-algebra of a topological space) is Lebesgue\nmeasurable (Lebesgue measurable sets, the family $\\mathcal{L}(\\mathbb{R}^n)$, and the restricted set function $\\lambda_n$). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\delta_su(x,t)=u(x-\\ell s,t)-u(x,t)$ and $m_\\ell(x,t)=\\int K(s)\\delta_su(x,t)\\,ds$. By unit mass and the Euclidean representation in [F2], $m_\\ell=\\overline u_\\ell-u$. Expanding componentwise and using linearity [F5] gives $\\int K(s)\\delta_{s,i}u\\,\\delta_{s,j}u\\,ds=\\overline{u_i u_j}_\\ell-\\overline u_{\\ell,i}u_j-u_i\\overline u_{\\ell,j}+u_i u_j$. Subtracting $m_{\\ell,i}m_{\\ell,j}=(\\overline u_{\\ell,i}-u_i)(\\overline u_{\\ell,j}-u_j)$ yields $\\tau_{\\ell,ij}$. Thus the covariance identity holds at each fixed time under the stated spatial regularity, without a time-regularity hypothesis on its spatial derivatives.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], each stress component is $\\tau_{\\ell,ij}=\\int K(s)\\delta_{s,i}u\\,\\delta_{s,j}u\\,ds-m_{\\ell,i}m_{\\ell,j}$. From [F5], nonnegativity of $K$, and [A1], $|\\int K(s)\\delta_{s,i}u\\,\\delta_{s,j}u\\,ds|\\le A(t)^2\\ell^{2\\alpha}M_{2\\alpha}$ and $|m_{\\ell,i}|\\le A(t)\\ell^\\alpha M_\\alpha$. Therefore $|\\tau_{\\ell,ij}|\\le A(t)^2\\ell^{2\\alpha}(M_{2\\alpha}+M_\\alpha^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], spatial differentiation at fixed $t$ passes through the convolution. Since $\\partial_{s_j}u_i(x-\\ell s,t)=-\\ell\\partial_j u_i(x-\\ell s,t)$, integration by parts in $s_j$ over a box containing $\\operatorname{supp}K$ gives $\\partial_j\\overline u_{\\ell,i}=\\ell^{-1}\\int\\partial_jK(s)u_i(x-\\ell s,t)\\,ds$. Compact support gives $\\int\\partial_jK(s)\\,ds=0$, so this equals $\\ell^{-1}\\int\\partial_jK(s)\\delta_{s,i}u(x,t)\\,ds$. The product-rectangle integrals are justified by [F4], and integration by parts by [F3]. Applying [F5] and [A1] gives $|\\partial_j\\overline u_{\\ell,i}(x,t)|\\le A(t)\\ell^{\\alpha-1}\\int|\\partial_jK(s)|\\,|s|^\\alpha\\,ds\\le A(t)\\ell^{\\alpha-1}N_\\alpha$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing the $d^2$ products in $\\Pi_\\ell=-\\sum_{i,j}\\tau_{\\ell,ij}\\partial_j\\overline u_{\\ell,i}$ and using steps 1.3 and 1.2 gives $|\\Pi_\\ell(x,t)|\\le d^2(M_{2\\alpha}+M_\\alpha^2)N_\\alpha A(t)^3\\ell^{3\\alpha-1}=C_{d,K,\\alpha}A(t)^3\\ell^{3\\alpha-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix a compact interval $J\\subset I$. By [A2] and [F9], $J$ is Lebesgue measurable, including when it is a singleton. Set $\\mathcal L_J:=\\{J\\cap E:E\\in\\mathcal L(\\mathbb R)\\}$ and $\\lambda_J(B):=\\lambda_1(B)$ for $B\\in\\mathcal L_J$; this is a measure on $J$, since its empty-set value and countable additivity are inherited from $\\lambda_1$. Here $dt$ means $d\\lambda_J$. If $J$ is empty, both displayed time integrals are zero; otherwise lift the fields periodically to a period cell $Q=[0,L]^d$. Choose closed boxes $S\\subset\\mathbb R^d$ and $Q'\\subset\\mathbb R^d$ with $\\operatorname{supp}K\\subset S$, $Q\\subset Q'$, and $x-\\ell s\\in Q'$ whenever $x\\in Q$ and $s\\in S$. By [F8], $Q'\\times J$ and $Q\\times J\\times S$ are compact. The lifts of $u$ and $\\partial_j u$ are uniformly continuous on $Q'\\times J$, so the maps $(x,t,s)\\mapsto u(x-\\ell s,t)$ and $(x,t,s)\\mapsto\\partial_j u(x-\\ell s,t)$ are uniformly continuous on $Q\\times J\\times S$. The convolution formulas and the spatial derivative formula from [F2] therefore make $\\overline u_\\ell$, $\\overline{u\\otimes u}_\\ell$, $\\nabla\\overline u_\\ell$, and $\\Pi_\\ell$ continuous on $Q\\times J$. Thus $F_\\ell(t):=\\sup_{x\\in\\mathbb T_L^d}|\\Pi_\\ell(x,t)|$ is finite and continuous: $|F_\\ell(t)-F_\\ell(s)|\\le\\sup_x|\\Pi_\\ell(x,t)-\\Pi_\\ell(x,s)|\\to0$ as $s\\to t$. For each open set $V\\subseteq\\mathbb R$, continuity makes $F_\\ell^{-1}(V)$ relatively open in $J$, hence equal to $J\\cap O$ for some open $O\\subseteq\\mathbb R$; [F10] gives $O\\in\\mathcal L(\\mathbb R)$, so $F_\\ell^{-1}(V)\\in\\mathcal L_J$. Thus $F_\\ell:J\\to[0,\\infty)$ is $\\mathcal L_J$-measurable. By step 2.1, $0\\le F_\\ell(t)\\le C_{d,K,\\alpha}\\ell^{3\\alpha-1}A(t)^3$ on $J$. The given $A^3$ is nonnegative and $\\mathcal L_J$-measurable with finite $\\lambda_J$ integral, while $C_{d,K,\\alpha}\\ell^{3\\alpha-1}$ is a finite nonnegative scalar by [F2] and $\\ell>0$. Apply [F7] on the measure space $(J,\\mathcal L_J,\\lambda_J)$ and use [F6] to obtain the claimed finite integral inequality, including the zero-scalar case without forming $0\\cdot\\infty$. When $\\alpha>1/3$, $3\\alpha-1>0$, so its right-hand side tends to zero as $\\ell\\downarrow0$; at $\\alpha=1/3$ its scale factor is $1$, which gives no decay conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dimension is restricted to d in {1,2,3}; no empty spatial torus case is claimed.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement has d in {1,2,3}, L>0, positive filter width, and a unit-mass kernel. Thus Z^d, the j-index of N_gamma, and the d-squared contraction indices are nonempty. Proof 1.1 integrates a compactly supported derivative, 1.2 bounds each stress component, and 3.1 sums precisely d^2 terms. There is no arbitrary empty family parameter. A zero-length compact time interval J, if allowed by the word interval, has zero integral on both sides of the time estimate in 4.1, so it does not contradict the row about the nonempty spatial torus.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The actual Statement still fixes d in{1,2,3}, L>0, 0<ell<L/2 and unit kernel mass, so the spatial torus, contraction indices and maximum over j are nonempty. Current Proof1.1–1.3 uses those fixed spatial indices, and2.1 sums d^2 terms. Current3.1 now explicitly treats empty J by zero integrals and singleton J using F9/trace Lebesgue measure. That clarification strengthens the prior time-interval explanation without contradicting the retained row, which expressly concerns an empty spatial torus. Preserve its spatially qualified wording.",
+            "item_sha256": "cd8a344efd830276199d545e4e6a688745d97b8351167887ec5ec802c7461442",
+            "row_sha256": "d0b3316df3b791718d37036abe23f88d082091fc3e32abcf44bbe0eb63880f97",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-1-6-and37.json",
+              "sha256": "a811f629858091a169c58d22cc617977f3ac144da8c02c4a98973879145c52a7"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Countable Choice required by the normalized periodic torus convention. Let $d\\in\\{1,2,3\\}$, $L>0$, and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ with normalized Haar measure $d\\mu_L=L^{-d}dx$. Let $K:\\mathbb R^d\\to[0,\\inf"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If A(t)=0, the increment hypothesis forces the supported increments to vanish; steps 1.2, 1.3, and 3.1 then give zero stress and transfer."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 the finite component sum in step 2.1 has one term and the stated d-squared constant remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof uses 0<ell<L/2 and 0<alpha<1; zero width and alpha endpoints are excluded in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At alpha=1/3, step 3.1 gives exponent zero and no decay; only alpha>1/3 yields decay, while alpha=0 and 1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly adopted in A2; the componentwise integrals and finite sums use no further choice, as steps 1.1 and 1.2 show."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The estimate is one-way and has no converse assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate is one-way and has no converse assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant-field zero increments",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ],
+          "expected": "For constant u, choose A=0; both component estimates vanish and the transfer bound reads 0<=0."
+        },
+        {
+          "name": "critical-exponent substitution",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ],
+          "expected": "Substituting alpha=1/3 gives ell^(3 alpha-1)=ell^0=1, so the bound is scale-independent and implies no decay."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the stated identities and estimates; no numerical sampling, experimental measurement, or statistical inference is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Independently reviewed Proof 1.1–3.1, all fourteen declared interfaces and Eyink II equations (12)–(25). Fixed-time spatial commutation is correctly obtained by constant-time extension, so no mixed time derivative is imposed on u. Unit mass gives covariance locally. K>=0 and the increment bound give component stress <=A^2 ell^(2alpha)(M_2alpha+M_alpha^2). Integration by parts gives the positive ell^-1 derivative-kernel formula with zero boundary terms and zero derivative mass; supp(dK) is contained in supp(K), so the stated increment hypothesis covers it. Each gradient component is <=A ell^(alpha-1)N_alpha; summing d^2 products gives the exact constant and exponent. For compact J, joint spatial continuity makes Pi and its spatial supremum continuous, hence trace-Lebesgue measurable; explicit measure restriction and order/scalar integral rules justify integration. Checked empty/singleton J, A=0, d=1, zero scalar, alpha=1/3 with no decay, excluded alpha=0,1 and ell=0. Decay of the RHS uses fixed K,alpha,A,J; application across scales requires the same bound across those scales, and no regularity or dissipation theorem is inferred. Countable Choice is explicit; no further choice or empirical input. Reader/refuter report no local defect. Published Lebesgue explanatory duplication is nonfatal because the full Caratheodory criterion and complete-measure supplier remain exact. No repair or missing prerequisite."
+      }
+    },
+    "ex-fd-filtering-constant-field": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-positive-convolution-fluid-filter",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice for the normalized periodic torus convention used here. Let $d\\in\\{1,2,3\\}$ and let $L>0$ be a period length. Put $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$, with normalized Haar measure $d\\mu_L=L^{-d}\\,dx$; writing $y=x/L$ and $\\xi=2\\pi y$ identifies this normalized measure with normalized Haar measure on $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, the periodic Fourier convention fixed in the referenced Fourier-Sobolev definition. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, vanish outside a compact subset of $B_1(0)$, and satisfy $\\int_{\\mathbb R^d}K(s)\\,ds=1$. For $0<\\ell<L/2$, define the periodized kernel\n\n$$G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K\\!\\left(\\frac{r+Ln}{\\ell}\\right),\\qquad r\\in\\mathbb T_L^d.$$\n\nFor a field $q$ with finitely many real components, each smooth and $L$-periodic, define its filtered field by\n\n$$\\overline q_\\ell(x)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,dx=L^d\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r)\\,d\\mu_L(r).$$\n\nHere $dx$ is the volume measure on one period cell. For any smooth periodic vector field $u:\\mathbb T_L^d\\to\\mathbb R^d$, define the subfilter stress and transfer by\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell,$$\n\nwhere $(u\\otimes v)_{ij}=u_i v_j$, $(\\nabla v)_{ij}=\\partial_jv_i$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. We call $\\Pi_\\ell$ the forward-transfer scalar by sign convention: $\\tau_\\ell:\\nabla\\overline u_\\ell=-\\Pi_\\ell$, so $\\Pi_\\ell>0$ exactly when this stress-gradient contraction is negative. This convention does not assert an evolution equation, an energy balance, or a sign for $\\Pi_\\ell$. With length in metres and time in seconds, $x,L,\\ell$ have units m, $u$ has units m s$^{-1}$, $G_\\ell$ has units m$^{-d}$, $\\tau_\\ell$ has units m$^2$ s$^{-2}$, and $\\Pi_\\ell$ has units m$^2$ s$^{-3}$. The nonnegative-kernel hypothesis is part of this definition; no positivity or transfer-sign property is assigned to signed kernels or sharp spectral cutoffs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-holder-energy-transfer-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice required by the normalized periodic torus convention. Let $d\\in\\{1,2,3\\}$, $L>0$, and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ with normalized Haar measure $d\\mu_L=L^{-d}dx$. Let $K:\\mathbb R^d\\to[0,\\infty)$ be smooth, vanish outside a compact subset of $B_1(0)$, and satisfy $\\int K(s)\\,ds=1$. Let $I\\subseteq\\mathbb R$ be an open interval, and let $0<\\ell<L/2$. For a finite-dimensional field $q:I\\times\\mathbb T_L^d\\to\\mathbb R^m$ whose spatial slices are smooth and periodic, use the periodized filter on each fixed-time slice\n\n$$G_\\ell(r)=\\sum_{n\\in\\mathbb Z^d}\\ell^{-d}K\\!\\left(\\frac{r+Ln}{\\ell}\\right),\\qquad \\overline q_\\ell(x,t)=\\int_{\\mathbb T_L^d}G_\\ell(r)q(x-r,t)\\,dx.$$\n\nHere $dx$ is volume measure on a period cell, and each Euclidean $s$-integral is the Riemann integral of a compactly supported continuous function on any box containing its support.\n\nLet $u:I\\times\\mathbb T_L^d\\to\\mathbb R^d$. Assume that $\\partial_tu$ exists and is jointly continuous on $I\\times\\mathbb T_L^d$, and that for every spatial multi-index $\\beta$, $\\partial_x^\\beta u$ exists and is jointly continuous there, including $\\beta=0$. No time derivatives of positive-order spatial derivatives are assumed. Define\n\n$$\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell,\\qquad \\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell.$$\n\nFor $0<\\alpha<1$, let $A:I\\to[0,\\infty)$ and assume that for every $(x,t)\\in\\mathbb T_L^d\\times I$ and every $s\\in\\operatorname{supp}K$,\n\n$$|u(x-\\ell s,t)-u(x,t)|\\le A(t)\\ell^\\alpha|s|^\\alpha.$$\n\nUsing the finite dimensionless kernel moments $M_\\gamma=\\int K(s)|s|^\\gamma\\,ds$ and $N_\\gamma=\\max_j\\int|\\partial_jK(s)|\\,|s|^\\gamma\\,ds$, define $C_{d,K,\\alpha}:=d^2(M_{2\\alpha}+M_\\alpha^2)N_\\alpha$. Then for every $(x,t)$,\n\n$$|\\Pi_\\ell(x,t)|\\le C_{d,K,\\alpha}A(t)^3\\ell^{3\\alpha-1}.$$\n\nFor every compact interval $J\\subset I$ such that $A^3$ is Lebesgue measurable on $J$ and $\\int_J A(t)^3\\,dt<\\infty$ (equivalently, $A^3\\in L^1(J,dt)$, with $dt$ denoting Lebesgue measure),\n\n$$\\int_J\\sup_{x\\in\\mathbb T_L^d}|\\Pi_\\ell(x,t)|\\,dt\\le C_{d,K,\\alpha}\\ell^{3\\alpha-1}\\int_J A(t)^3\\,dt.$$\n\nConsequently this upper bound tends to zero as $\\ell\\downarrow0$ when $\\alpha>1/3$. At $\\alpha=1/3$ it is scale-independent and gives no decay conclusion. With $x,L,\\ell$ measured in m, $t$ in s, and $u$ in m s$^{-1}$, the Hölder factor $A$ has units m$^{1-\\alpha}$ s$^{-1}$, the moments and constant $C_{d,K,\\alpha}$ are dimensionless, and $\\Pi_\\ell$ has units m$^2$ s$^{-3}$. The estimate is conditional on the stated Hölder increment bound; it neither supplies that bound nor proves an endpoint conservation theorem, a turbulent $4/5$ law, or positive anomalous dissipation.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every spatial and time derivative of $u$ vanishes, so $\\nabla\\cdot u=0$, $\\partial_tu=0$, $\\nabla\\cdot(u\\otimes u)=0$, and $\\Delta u=0$. Thus [A1] holds with $p=f=0$ for every $\\nu>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the kernel has unit mass, filtering the constant field gives $\\overline u_\\ell=w$ and filtering $u\\otimes u=w\\otimes w$ gives $\\overline{u\\otimes u}_\\ell=w\\otimes w$. Hence $\\tau_\\ell=0$, $\\nabla\\overline u_\\ell=0$, and $\\Pi_\\ell=0$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For all $s,x,t$, $u(x-\\ell s,t)-u(x,t)=0$, so the Hölder condition holds with $A(t)=0$ for any $0<\\alpha<1$. Applying [F2] yields $|\\Pi_\\ell|\\le0$, consistent with the exact value in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example restricts d to {1,2,3}; its torus is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The permitted vector w=0 yields the zero field and zero stress/transfer by steps 1.1 and 2.1, and the estimate is zero in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 the constant scalar velocity is preserved by the unit-mass filter in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example assumes L>0, nu>0, and 0<ell<L/2; it makes no claim at zero viscosity or endpoint widths."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The constant field is periodic across all identified faces and filtering preserves it exactly in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly adopted in A2; the constant-field derivative and filter calculation require no selection in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is an exact computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is an exact computation, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant velocity specialization",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ],
+          "expected": "For arbitrary constant w, filtering preserves w and w tensor w, hence tau=Pi=0; the Hölder estimate with A=0 also has zero right-hand side."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic specializations of the stated identities and estimates; no numerical sampling, experimental measurement, or statistical inference is used.",
+      "risk_review": {
+        "status": "authoring-readiness-owner-resolved; independent-review-pending",
+        "reviewer": "/root",
+        "notes": "Owner /root resolves the former missing source17 readiness hold using research/fluid-dynamics-all-47-2026-10-23-owner-fourier-consumer-readiness-resolution/review.json and actual current native source17 readiness. Normalized torus and explicit Countable Choice interfaces match. This is authoring readiness only; independent review and ordinary gates remain pending."
+      }
+    }
+  }
+}

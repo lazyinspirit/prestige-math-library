@@ -1,0 +1,860 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-navier-slip-wall-law",
+    "pthm-fd-local-momentum-balance-from-continuum",
+    "pthm-fd-wall-mechanical-power-balance",
+    "pthm-fd-linear-acoustic-model-prediction",
+    "ex-fd-adopted-poiseuille-couette"
+  ],
+  "contracts": {
+    "post-fd-navier-slip-wall-law": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate defines the stationary smooth wall, outward normal, tangential projection, traction convention, impermeability and beta units. It identifies eta with the constant closure coefficient mu and defines the finite slip-length parameter ell_s=eta/beta in metres for beta>0, with beta=0 as the no-finite-length zero-traction endpoint."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The scope is limited to an adopted stationary impermeable wall law in the incompressible Newtonian branch; no universal material law or measured coefficient is claimed."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Chen and Qian, arXiv:0901.0147v1, §§1–2, equations (1.3)–(1.4), (2.5), and Proposition 2.1 were read in full on PDF pp. 1–5. Their positive slip-length convention and the stated Newtonian stress convention give beta=eta/ell_s; the item now records the length unit and beta=0 endpoint explicitly."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is an adopted physical boundary premise, not a consequence of interior balances, and the item makes no universal applicability claim."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": []
+    },
+    "pthm-fd-wall-mechanical-power-balance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "adopt the balances of linear and angular momentum",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "\\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Use a Cartesian inertial frame in Newtonian spacetime. At an event let $u$ be the fluid velocity, $T>0$ its temperature, $\\rho>0$ its mass density, and $\\xi=(\\rho,T)$ its local state in a specified open set $\\mathcal S\\subset(0,\\infty)^2$. The velocity gradient has components $L_{ij}=\\partial_{x_j}u_i$; define the symmetric rate matrix $D=(L+L^T)/2$, its trace $\\theta=\\operatorname{tr}D$, and its trace-free part $D_0=D-\\theta I_3/3$, where $I_3$ is the $3\\times3$ identity matrix. For $A,B\\in\\mathbb R^{3\\times3}$, use the Frobenius contraction $A:B=\\sum_{i,j=1}^3A_{ij}B_{ij}$.\n\nAdopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K:=(K+K^T)/2. $$\nThe conductivity law is tensor-valued and may be anisotropic; no restriction $K=kI_3$ is imposed. Define $\\operatorname{Sym}(3):=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$ and $\\operatorname{SO}(3):=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\ \\det Q=1\\}$. At a fixed state, let $\\mathcal A_\\xi:\\operatorname{Sym}(3)\\to\\operatorname{Sym}(3)$ assign the viscous stress to the symmetric rate matrix. Assume it is real-linear, meaning $\\mathcal A_\\xi(aD+bE)=a\\mathcal A_\\xi(D)+b\\mathcal A_\\xi(E)$ for all $a,b\\in\\mathbb R$ and $D,E\\in\\operatorname{Sym}(3)$, and equivariant in the sense $\\mathcal A_\\xi(QDQ^T)=Q\\mathcal A_\\xi(D)Q^T$ for every $Q\\in\\operatorname{SO}(3)$. Adopt\n$$ \\tau=\\mathcal A_\\xi(D)=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The viscous response is isotropic in this proper-rotation sense, while the conductivity tensor transforms covariantly and may be anisotropic. The mathematical linear-isotropic classification identifies this stress form from the stated domain, codomain, linearity and equivariance hypotheses; it does not establish that any material adopts them.\n\nIn SI units, $D,\\theta,D_0$ are in $\\mathrm{s^{-1}}$, $\\mu,\\zeta$ in $\\mathrm{Pa\\,s}$, $K$ in $\\mathrm{W\\,m^{-1}\\,K^{-1}}$, $q$ in $\\mathrm{W\\,m^{-2}}$, and $\\sigma,\\tau,p$ in $\\mathrm{Pa}$. If the same stress is written $2\\mu D+\\lambda\\theta I_3$, then $\\lambda=\\zeta-2\\mu/3$; no nonnegativity of $\\lambda$ is assumed. These specified constitutive functions are adopted model inputs, not measured coefficient values or consequences of balance laws.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "post-fd-navier-slip-wall-law",
+          "source_section": "Postulate",
+          "quote": "(\\sigma n)_\\tau=-\\beta u_\\tau",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-smooth-wall-exterior-solution-domains",
+          "source_section": "Definition",
+          "quote": "A bounded wall domain is a bounded connected open set $\\Omega\\subset\\mathbb R^3$ with $C^2$ boundary.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-fd-smooth-wall-energy-uniqueness",
+          "source_section": "Statement",
+          "quote": "If two smooth velocity solutions satisfy the same equation, force, initial velocity, density, viscosity, and selected wall law, then their velocities are equal on $[0,T]$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "pthm-fd-local-momentum-balance-from-continuum",
+          "source_section": "Statement",
+          "quote": "\\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)=\\operatorname{div}\\sigma+\\rho b.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-forced-momentum",
+          "step": "1.1",
+          "claim": "The adopted material momentum balance and the current incompressible Newtonian branch give the forced local momentum equation through the complete transport and localization theorem.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "kinetic-work-substitution",
+          "step": "2.1",
+          "claim": "Put $k=\\rho|u|^2/2$. Since $\\rho$ is constant and $\\operatorname{div}u=0$, the product rule gives $\\partial_t k+\\operatorname{div}(ku)=\\rho u\\cdot(\\partial_tu+(u\\cdot\\nabla)u)$. In branch (B), the divergence theorem applied to $ku$ gives boundary flux $k(u\\cdot n)=0$; in branch (P), periodic-coordinate endpoint values cancel and the two wall fluxes vanish because $u\\cdot n=0$. Substituting the local equation from step 1.1 therefore yields $K'=\\int_\\Omega u\\cdot\\operatorname{div}\\sigma\\,dx+\\int_\\Omega\\rho b\\cdot u\\,dx$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "newtonian-dissipation",
+          "step": "3.1",
+          "claim": "Using the Frobenius contraction and $|D|^2=D:D$ defined in the Statement and the rowwise divergence convention, the Statement identifies eta with the constant coefficient mu, and the product rule gives $u\\cdot\\operatorname{div}\\sigma=\\operatorname{div}(\\sigma^{\\mathsf T}u)-\\sigma:\\nabla u$. Write $\\nabla u=D+W$ with $W=(\\nabla u-\\nabla u^{\\mathsf T})/2$; symmetry of $D$ and skew-symmetry of $W$ imply $D:W=0$, while $\\operatorname{div}u=\\operatorname{tr}D=0$. Consequently $\\sigma:\\nabla u=(-pI+2\\eta D):(D+W)=2\\eta|D|^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrated-power-identity",
+          "step": "4.1",
+          "claim": "The divergence theorem on bounded domains, or periodic-face cancellation on the channel, yields the boundary-traction power identity.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "A2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "wall-law-specialization",
+          "step": "5.1",
+          "claim": "In branch (N), $u=g$ on the physical wall, so the last integral in step 4.1 is $\\int_{\\Gamma}g\\cdot\\sigma n\\,dS$. In branch (S), $u=u_\\tau$ and $(\\sigma n)_\\tau=-\\beta u_\\tau$, so $u\\cdot\\sigma n=u_\\tau\\cdot(\\sigma n)_\\tau=-\\beta|u_\\tau|^2$. These substitutions give the two asserted power identities.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stationary-smooth-uniqueness",
+          "step": "6.1",
+          "claim": "For bounded-domain stationary homogeneous wall data the current smooth uniqueness theorem proves at most one velocity field for the same force and initial data; it does not assert pressure uniqueness. This use is conditional on its current Step-1 readiness record.",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The bounded-domain option is stated to be nonempty and the periodic channel has positive side lengths and height.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is conditional wall mechanical power balance; steps 2.1–5.1 integrate kinetic/stress fluxes and substitute the selected wall law. Branch B explicitly assumes nonempty Omega; branch P assumes Lx,Lz,h>0. The family in the material-motion description is indexed by a supplied time interval, not an optional empty domain family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Current Statement still requires nonempty bounded Omega on branch B and Lx,Lz,h>0 on branch P. Its new explicit motion is a diffeomorphism of that domain or its nonempty cover on I=(0,T),T>0; each material test V is also required nonempty. Step 1.1 now matches these detailed hypotheses but creates no empty spatial-domain case. The existing exclusion is preserved.",
+            "item_sha256": "735d5cc46e731e1903c4d5364bd9be57cfc4db718fd56bc9aab9f8e7ad7435e2",
+            "row_sha256": "43b4b0ee12c53efc120aa918ff74dfdefc6f7272b4d26bec663326a102851454",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume Countable Choice, meaning every countable family of nonempty sets has a choice function. Let $T>0$ seconds. The spatial domain is either (B) a bounded connected nonempty open $\\Omega\\subset\\mathbb R^3$ with $C^2$ boundary, or (P) a p"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1, 4.1 and 5.1 allow zero body force, stationary no-slip g=0 and beta=0 without division by any of them."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The formulation is explicitly three-dimensional and has no one-dimensional special case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes rho>0 and eta>0; beta may be zero, and steps 2.1–5.1 make no division by beta."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "The identities are asserted only for t in (0,T); no endpoint derivative claim is made.",
+          "reason": "The Statement gives no endpoint derivative claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit and is the exact hypothesis of the bounded-domain divergence theorem used in steps 2.1 and 4.1; periodic cancellation is direct."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts power identities and a conditional uniqueness result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts power identities and a conditional uniqueness result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "periodic-channel side-face cancellation",
+          "input": "A smooth periodic flux field on the x,z coordinates of Omega_{Lx,h,Lz}.",
+          "check": "The x and z derivative integrals cancel at opposite periodic faces; only the y=0,h wall flux remains, which is handled by the stated wall condition.",
+          "disposition": "checked by the componentwise fundamental theorem calculation recorded in proof steps 1.1 and 1.3."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-21",
+        "notes": "Reviewed all six steps and every exact direct supplier. The bounded C2 and periodic-channel branches have zero convective flux; periodic sides cancel without applying a smooth-boundary theorem to cell corners. Stress work is div(sigma^T u)-sigma:grad u, with D:W=0 and pressure cancellation, yielding nonnegative viscous dissipation. Boundary work substitutes g for no-slip or gives -beta|u_tau|^2 for stationary slip, including beta=0. The inspected smooth-wall theorem proves velocity uniqueness only by the difference estimate and integrating factor under common force, coefficients, initial velocity and homogeneous wall law. The example consumer does not use uniqueness. Checked zero force/data, time-interior power identities, exact regularity and inherited Countable Choice; no empirical input, existence or pressure uniqueness is claimed."
+      }
+    },
+    "pthm-fd-linear-acoustic-model-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-barotropic-euler-model",
+          "source_section": "Definition",
+          "quote": "\\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-global-linear-acoustics",
+          "source_section": "Statement",
+          "quote": "has a unique real $C^\\infty$ solution $(z,v)$ on $\\mathbb R\\times\\mathbb T^d$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "admissible-variation",
+          "step": "1.1",
+          "claim": "Positive reference density and bounded smooth perturbation make rho plus epsilon z remain in the positive-density state domain locally in time.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "linearized-mass",
+          "step": "2.1",
+          "claim": "Expanding the mass equation gives $\\partial_t\\rho_\\epsilon+\\operatorname{div}(\\rho_\\epsilon u_\\epsilon)=\\epsilon(\\partial_tz+\\rho_*\\operatorname{div}v)+\\epsilon^2\\operatorname{div}(zv)$. Divide by $\\epsilon$ and take $\\epsilon\\to0$ to obtain $\\partial_tz+\\rho_*\\operatorname{div}v=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "linearized-momentum",
+          "step": "2.2",
+          "claim": "In the supplier's nonconservative momentum equation, $\\rho_\\epsilon(\\partial_tu_\\epsilon+(u_\\epsilon\\cdot\\nabla)u_\\epsilon)=\\epsilon\\rho_*\\partial_tv+O(\\epsilon^2)$. The chain rule gives $\\nabla p(\\rho_\\epsilon)=\\epsilon p'(\\rho_*)\\nabla z+o(\\epsilon)$ because $p'$ is continuous and $\\rho_\\epsilon\\to\\rho_*$ uniformly on each compact time interval. Dividing by $\\epsilon\\rho_*$ and taking $\\epsilon\\to0$ gives $\\partial_tv+(p'(\\rho_*)/\\rho_*)\\nabla z=0$, which is the second tangent equation since $c_*^2=p'(\\rho_*)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-tangent-solution",
+          "step": "3.1",
+          "claim": "Write $y=x/L$, $s=(c_*/L)t$, $\\widetilde z=z/\\rho_*$ and $\\widetilde v=v/c_*$. The chain rule transforms the tangent equations into $\\partial_s\\widetilde z+\\operatorname{div}_y\\widetilde v=0$ and $\\partial_s\\widetilde v+\\nabla_y\\widetilde z=0$ on $\\mathbb T^3=(\\mathbb R/2\\pi\\mathbb Z)^3$. Apply [F2] with both positive mathematical coefficients equal to $1$ and with the rescaled smooth initial data. It supplies a unique smooth solution for all $s\\in\\mathbb R$, hence for all physical times $t\\in\\mathbb R$. Countable Choice is the exact assumption [A1].",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "acoustic-dispersion",
+          "step": "3.2",
+          "claim": "For each Fourier character e_kappa, the tangent equations give zhat_t+i rho-star kappa dot vhat=0 and vhat_t+i(c-star^2/rho-star)kappa zhat=0. When kappa is nonzero, dotting the second equation with kappa and differentiating the first yields zhat_tt+c-star^2|kappa|^2 zhat=0, while orthogonal projection gives vhat_perp_t=0. Thus nonzero longitudinal normal modes e^{-i omega t} satisfy omega^2=c-star^2|kappa|^2, transverse coefficients are constant, and at kappa=0 both means are constant.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "acoustic-energy",
+          "step": "4.1",
+          "claim": "Differentiate $E_{\\mathrm{ac}}$ and use the tangent equations to get $\\frac{dE_{\\mathrm{ac}}}{dt}=-c_*^2\\int_{\\Omega_L}\\bigl(v\\cdot\\nabla z+z\\,\\operatorname{div}v\\bigr)\\,dx=-c_*^2\\int_{\\Omega_L}\\operatorname{div}(zv)\\,dx=0$. The last integral vanishes because each component is periodic and opposite-face fluxes cancel; the global smoothness from step 3.1 justifies differentiation under the integral.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The periodic cell has positive length scale L=1 m and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats zero wavevector and the zero perturbation is included among the smooth initial data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The physical model is stated in three dimensions; no one-dimensional reduction is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires rho-star>0 and p-prime(rho-star)>0, so division by rho-star and the real sound speed are valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies a global smooth solution for all real time; no finite-time endpoint restriction is introduced."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Statement, Fact A1 and step 2.1; the mathematical supplier also lists it as a prerequisite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a direct conditional prediction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a direct conditional prediction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single longitudinal periodic mode",
+          "input": "Take k=(1,0,0), z=A cos(x_1/L−omega t), v=(c-star A/rho-star,0,0) cos(x_1/L−omega t), and omega=c-star/L.",
+          "check": "Substitution in both tangent equations gives zero residual; omega^2=c-star^2/L^2 and the integrated acoustic energy is constant.",
+          "disposition": "checked directly by differentiating the displayed mode and integrating over one periodic cell."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-scientific-review:/root/fluid_fourier_consumers",
+        "notes": "Owner scientific review of the complete current physical Statement and all six numbered proof steps, exact barotropic-model Definition, and complete current global-linear-acoustics supplier proof. On compact time intervals smooth z is bounded, so dimensionless epsilon keeps rho_*+epsilon z positive locally. C1 pressure suffices for first variation through continuity of pprime; no nonlinear perturbed solution is assumed. Rescaling y=x/L, s=c_*t/L, ztilde=z/rho_*, vtilde=v/c_* gives unit positive coefficients on the normalized 2pi torus, so d=3 and explicit Countable Choice match the supplier. For the supplier tangent-system formulation one may choose the auxiliary smooth law P(rho)=rho at unit coefficients; this does not strengthen the physical C1 law p. Current supplier3.1 independently proves rapid Fourier decay of smooth data by repeated periodic integration by parts and the summable lattice shell estimate, so smooth initial data belongs to every Hm; supplier4.1/5.1 supplies real global smooth synthesis and uniqueness. The old Golse locator is now correctly section7.1.2 for whole-space context only. Physical proof3.2 treats nonzero longitudinal dispersion, transverse constants and zero modes separately. Proof4.1 conserves the stated unnormalized physical energy because periodic opposite-face fluxes cancel; its integrand has energy-density SI units and dx gives joules. Arbitrary real smooth data, global linear evolution and all finite-amplitude/error/empirical caveats remain intact. No body change or material-pressure C2 premise is needed."
+      }
+    },
+    "ex-fd-adopted-poiseuille-couette": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-fd-wall-mechanical-power-balance",
+          "source_section": "Statement",
+          "quote": "(N) no-slip, $u=g$ on $\\Gamma$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "shear-profile-reduction",
+          "step": "1.1",
+          "claim": "Let $\\widetilde\\Omega=\\mathbb R\\times(0,h)\\times\\mathbb R$ and $\\Lambda=\\{(mL_x,0,nL_z):m,n\\in\\mathbb Z\\}$. For $U=U_P$ in the Poiseuille case and $U=U_C$ in the Couette case, define the lifted material map for each $t$ by $\\widetilde\\chi^U_t(x,y,z)=(x+tU(y),y,z)$. Both profiles are smooth, so this map is $C^\\infty$; its inverse is $(x-tU(y),y,z)$. It maps $\\widetilde\\Omega$ onto itself, fixes the $y$ coordinate, and obeys $\\widetilde\\chi^U_t(a+\\lambda)=\\widetilde\\chi^U_t(a)+\\lambda$ for every $\\lambda\\in\\Lambda$. Its Jacobian matrix is $\\begin{pmatrix}1&tU'(y)&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}$, with determinant $1>0$. Since $y$ is unchanged, $\\partial_t\\widetilde\\chi^U_t=(U(y),0,0)=\\widetilde u(t,\\widetilde\\chi^U_t(x,y,z))$, so each map descends to the periodic channel and has the example's velocity as its Eulerian velocity. Thus both profiles meet the material-motion hypothesis of [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "poiseuille-profile",
+          "step": "2.1",
+          "claim": "In the Poiseuille case, $U_P(0)=U_P(h)=0$ and $U_P''=-G/\\eta$. Thus $(\\operatorname{div}\\sigma)_x+\\rho b_x=\\eta U_P''+G=0$, and the other momentum components vanish, proving the steady equations and no-slip compatibility. Direct integration gives $Q_P=\\int_0^hU_P(y)\\,dy=Gh^3/(12\\eta)$ and $\\omega_{P,z}=-U_P'=-G(h-2y)/(2\\eta)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "couette-profile",
+          "step": "2.2",
+          "claim": "In the Couette case, $U_C(0)=0$, $U_C(h)=V$, and $U_C''=0$, so the momentum equation holds with constant pressure and no body force; the velocity traces equal the stated wall velocities. Direct integration gives $Q_C=\\int_0^hU_C(y)\\,dy=Vh/2$ and $\\omega_{C,z}=-U_C'=-V/h$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "poiseuille-power-check",
+          "step": "3.1",
+          "claim": "By the defined squared norm $|D|^2=D:D$, for either profile $|D|^2=(U')^2/2$, hence viscous dissipation per unit streamwise/spanwise wall area is $\\eta\\int_0^h(U')^2\\,dy$. In the Poiseuille case this is $\\frac{G^2}{4\\eta}\\int_0^h(h-2y)^2\\,dy=G^2h^3/(12\\eta)$, while body-force power is $\\int_0^h\\rho(G/\\rho)U_P\\,dy=GQ_P=G^2h^3/(12\\eta)$; stationary-wall power is zero. This agrees with the stationary no-slip case of [F1].",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "couette-power-and-periodic-pressure",
+          "step": "4.1",
+          "claim": "In the Couette case viscous dissipation per unit wall area is $\\eta\\int_0^h(V/h)^2\\,dy=\\eta V^2/h$. At the top wall $n=(0,1,0)$ and $\\sigma n$ has tangential component $\\eta(V/h)(1,0,0)$, so wall power per unit area is $g\\cdot\\sigma n=\\eta V^2/h$; the lower wall has $g=0$. This agrees with the tangential no-slip case of [F1]. Finally, a purported periodic pressure $p_0-Gx$ changes by $-GL_x$ under $x\\mapsto x+L_x$, so it is not single-valued on $\\Omega$ when $G>0$; the body-force formulation in the Example avoids that incompatibility.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-1-2",
+          "claim": "For either profile $u=(U(y),0,0)$, $\\operatorname{div}u=0$, $\\partial_tu=0$ and $(u\\cdot\\nabla)u=U(y)\\partial_xu=0$. The only nonzero entries of $D$ are $D_{xy}=D_{yx}=U'/2$, so the only nonzero viscous shear entries are $\\sigma_{xy}=\\sigma_{yx}=\\eta U'$, and $(\\operatorname{div}\\sigma)_x=-\\partial_xp+\\eta U''$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example requires Lx,Lz,h>0; the channel cell is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 and step 4.1 remain valid for V=0; G>0, rho>0, eta>0 and h>0 avoid zero denominators."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is explicitly a three-dimensional channel with two periodic coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes positive density, viscosity and height; zero Couette speed is allowed and verified in step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example statement describes steady fields; steps 2.1 and 3.1 and steps 2.2 and 4.1 verify the time-independent equations and power identities without startup or endpoint claims."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example statement explicitly assumes Countable Choice; steps 3.1 and 4.1 apply the depended-on wall-power theorem under that premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a worked exact example, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a worked exact example, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Poiseuille flux and power",
+          "input": "UP(y)=G y(h−y)/(2 eta), b_x=G/rho.",
+          "check": "Integrating UP gives Gh^3/(12 eta); body-force power and viscous dissipation per unit span both equal G^2 h^3/(12 eta).",
+          "disposition": "checked by the explicit one-variable integrals in steps 2.1 and 3.1."
+        },
+        {
+          "name": "Couette flux and power",
+          "input": "UC(y)=Vy/h with top-wall speed V.",
+          "check": "Integrating UC gives Vh/2; viscous dissipation and top-wall power per unit area both equal eta V^2/h.",
+          "disposition": "checked by the explicit one-variable integrals and traction evaluation in steps 2.2 and 4.1."
+        }
+      ]
+    },
+    "pthm-fd-local-momentum-balance-from-continuum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "In the same inertial chart, adopt the balances of linear and angular momentum",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Use the nonrelativistic Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is an open interval with absolute time $t$ in seconds. Here $E$ is a three-dimensional oriented Euclidean affine space: its translation vectors form an oriented Euclidean vector space, but no origin in $E$ is distinguished. A **Cartesian inertial chart** is an event-coordinate map $(t,X)\\mapsto(t,x_t(X))$, where $b:E\\to\\mathbb R^3$ is an orientation-preserving affine isometry, $w\\in\\mathbb R^3$ is constant, and $x_t(X)=b(X)+tw$ for $t\\in I$. The affine map $b$ is auxiliary data defined on $E$, so this formula requires no evaluation at time $0$ when $0\\notin I$. Each fixed-time spatial map is an orientation-preserving affine isometry with fixed spatial orientation; the spatial origin has constant velocity. Spatial coordinates are measured in metres and $w$ in metres per second. A chart may also use a translated absolute-time coordinate; at corresponding events the inertial-chart transformations are the ones displayed below. Write $\\mathrm{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\det Q=1\\}$. Inertial charts are related by\n\n$$t^*=t+t_0,\\qquad x^*=Qx+vt+a,$$\n\nwhere $t_0$ is a constant time translation in seconds, $Q\\in\\mathrm{SO}(3)$ is constant, $v\\in\\mathbb R^3$ is a constant relative velocity in m s$^{-1}$, and $a\\in\\mathbb R^3$ is a constant spatial translation in metres. A **worldline** is a curve $t\\mapsto(t,x(t))$ with $x\\in C^2(I,\\mathbb R^3)$, parameterized by absolute time; this model imposes no relativistic speed or causal condition. A **rigid observer change** is the more general coordinate change $t^*=t,\\ x^*=Q(t)x+c(t)$, with $Q\\in C^2(I,\\mathrm{SO}(3))$ and $c\\in C^2(I,\\mathbb R^3)$ in metres; it is not called inertial unless $Q$ is constant and $c$ is affine in time. A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.\n\nFor the initial-chart material-motion convention below, require $0\\in I$. Let $B\\subseteq\\mathbb R^3$ be a bounded open reference body whose boundary is locally the graph of a $C^1$ function, with $B$ lying on one side of each such graph. Identify the reference coordinates with the chosen initial Cartesian chart, and let $U$ be an open neighborhood of $\\overline B$. A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$. The label $a\\in U$ and position $x=\\chi(t,a)$ are measured in metres. Write\n\n$$F(t,a)=D_a\\chi(t,a),\\qquad J(t,a)=\\det F(t,a)>0,\\qquad A(t,x)=\\chi_t^{-1}(x),\\qquad \\Omega_t=\\chi_t(B).$$\n\nHere $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Use a Cartesian inertial frame in Newtonian spacetime. At an event let $u$ be the fluid velocity, $T>0$ its temperature, $\\rho>0$ its mass density, and $\\xi=(\\rho,T)$ its local state in a specified open set $\\mathcal S\\subset(0,\\infty)^2$. The velocity gradient has components $L_{ij}=\\partial_{x_j}u_i$; define the symmetric rate matrix $D=(L+L^T)/2$, its trace $\\theta=\\operatorname{tr}D$, and its trace-free part $D_0=D-\\theta I_3/3$, where $I_3$ is the $3\\times3$ identity matrix. For $A,B\\in\\mathbb R^{3\\times3}$, use the Frobenius contraction $A:B=\\sum_{i,j=1}^3A_{ij}B_{ij}$.\n\nAdopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K:=(K+K^T)/2. $$\nThe conductivity law is tensor-valued and may be anisotropic; no restriction $K=kI_3$ is imposed. Define $\\operatorname{Sym}(3):=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$ and $\\operatorname{SO}(3):=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\ \\det Q=1\\}$. At a fixed state, let $\\mathcal A_\\xi:\\operatorname{Sym}(3)\\to\\operatorname{Sym}(3)$ assign the viscous stress to the symmetric rate matrix. Assume it is real-linear, meaning $\\mathcal A_\\xi(aD+bE)=a\\mathcal A_\\xi(D)+b\\mathcal A_\\xi(E)$ for all $a,b\\in\\mathbb R$ and $D,E\\in\\operatorname{Sym}(3)$, and equivariant in the sense $\\mathcal A_\\xi(QDQ^T)=Q\\mathcal A_\\xi(D)Q^T$ for every $Q\\in\\operatorname{SO}(3)$. Adopt\n$$ \\tau=\\mathcal A_\\xi(D)=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The viscous response is isotropic in this proper-rotation sense, while the conductivity tensor transforms covariantly and may be anisotropic. The mathematical linear-isotropic classification identifies this stress form from the stated domain, codomain, linearity and equivariance hypotheses; it does not establish that any material adopts them.\n\nIn SI units, $D,\\theta,D_0$ are in $\\mathrm{s^{-1}}$, $\\mu,\\zeta$ in $\\mathrm{Pa\\,s}$, $K$ in $\\mathrm{W\\,m^{-1}\\,K^{-1}}$, $q$ in $\\mathrm{W\\,m^{-2}}$, and $\\sigma,\\tau,p$ in $\\mathrm{Pa}$. If the same stress is written $2\\mu D+\\lambda\\theta I_3$, then $\\lambda=\\zeta-2\\mu/3$; no nonnegativity of $\\lambda$ is assumed. These specified constitutive functions are adopted model inputs, not measured coefficient values or consequences of balance laws.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fd-transport-and-density",
+          "source_section": "Statement",
+          "quote": "For every $t\\in I$, change of variables and material transport satisfy\n\n$$\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_Kq(t,\\chi(t,a))J(t,a)\\,da,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_{\\chi_t(K)}\\bigl(D_tq(t,x)+q(t,x)\\theta(t,x)\\bigr)\\,dx=\\int_{\\chi_t(K)}\\bigl(\\partial_tq+\\nabla_x\\!\\cdot(qu)\\bigr)\\,dx,$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fd-c1-domain-jordan-integrals",
+          "source_section": "Statement",
+          "quote": "Then $V$ and $\\phi(V)$ are bounded open sets with locally $C^1$ graph boundaries, their compact closures are Jordan measurable, $\\partial V$ and $\\phi(\\partial V)$ have content zero, and\n\n$$\\int_{\\phi(V)}f(x)\\,dx=\\int_{\\phi(\\overline V)}f(x)\\,dx.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "material-transport-derivative",
+          "step": "1.1",
+          "claim": "Fix an admissible reference region $V$ and a time $t_0\\in I$, and put $K=\\overline V$. Its $C^1$ boundary makes $K$ a compact Jordan set. Apply the material-transport identity in [F5], componentwise to $q=\\rho u$, on a relatively compact neighborhood of $K$ and a time-translated interval containing $0$ at $t_0$. Because $\\rho$ is constant and $\\operatorname{div}u=0$, $D_t(\\rho u)+(\\rho u)\\operatorname{div}u=\\rho(\\partial_tu+(u\\cdot\\nabla)u)$. The open-region integral compatibility in [F5] identifies the resulting compact-Jordan integrals with those over $\\chi_t(V)$, so $\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho(\\partial_tu+(u\\cdot\\nabla)u)\\,dx$ at $t=t_0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrated-local-residual",
+          "step": "2.1",
+          "claim": "By [F5], the image $\\chi_t(V)$ is a bounded $C^1$ domain. The adopted Newtonian stress [F3] is $C^1$ up to its boundary by the stated field regularity, since $\\overline{\\chi_t(V)}$ is compactly contained in $\\Omega_t$. Apply [F4] to each row of $\\sigma$ to replace its traction resultant by $\\int_{\\chi_t(V)}\\operatorname{div}\\sigma\\,dx$. Substitution of step 1.1 into [A1] gives $\\int_{\\chi_t(V)}R(t,x)\\,dx=0$ for every such $V$, where $R:=\\rho(\\partial_tu+(u\\cdot\\nabla)u)-\\rho b-\\operatorname{div}\\sigma$ is continuous. The hypotheses of [F4] hold by the stated regularity, the $C^2$ motion and [A2].",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "A2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "pointwise-localization",
+          "step": "3.1",
+          "claim": "Fix $t$ and $x_0\\in\\Omega_t$. For all sufficiently small $r>0$, the closed ball $\\overline{B_r(x_0)}$ lies in $\\Omega_t$. Apply [F5]'s $C^1$-image clause to the inverse diffeomorphism $\\chi_t^{-1}$ on a neighborhood of this closed ball; then $V:=\\chi_t^{-1}(B_r(x_0))$ is bounded, has $C^1$ boundary, and satisfies $\\overline V\\Subset B$. Step 2.1 gives $\\int_{B_r(x_0)}R(t,x)\\,dx=0$. If any component $R_i(t,x_0)$ were positive, continuity would make it positive on some sufficiently small ball and force its integral to be positive; if negative, the integral would be negative. Both contradict the zero integral, so $R_i(t,x_0)=0$ for each component. Thus $R=0$ throughout $\\Omega_t$, which is the claimed local momentum equation.",
+          "inputs": [
+            "given",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement allows B=empty (and hence Omega_t=empty); the local conclusion then holds vacuously. For nonempty Omega_t, step 3.1 localizes at each x0 using a nonempty small ball. No nonempty material subregion exists when B is empty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement hypotheses and proof1.1–3.1 are unchanged by F2 context relocation. F5 now names actual public transport/C1-Jordan Statements; no unforced equation premise is used.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "8dd8fe3a1e52f2ceba2486198ea3bd67d5a66fc84cd035d657213d10f9a82a80",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The integral and localization proof remains valid when b=0; no division by b occurs in steps 1.1–3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement hypotheses and proof1.1–3.1 are unchanged by F2 context relocation. F5 now names actual public transport/C1-Jordan Statements; no unforced equation premise is used.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "f01e15331c21b28b6ffa6dc2a5671b9352e6c3ff8c089643f7be0398cc816034",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The model is stated in three-dimensional Euclidean space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement hypotheses and proof1.1–3.1 are unchanged by F2 context relocation. F5 now names actual public transport/C1-Jordan Statements; no unforced equation premise is used.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "71336d7ad6e3b6c3a7f643468a10734f704a415db23d55308c44ae570688d338",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes rho>0 and eta>0; the proof makes no division by either coefficient.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement hypotheses and proof1.1–3.1 are unchanged by F2 context relocation. F5 now names actual public transport/C1-Jordan Statements; no unforced equation premise is used.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "98838bba63fafbca4e207b2c28fcb932fa50a894f4bd7d87bbdccd7750499bcc",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The conclusion is pointwise on the open arbitrary time interval I and has no endpoint assertion. At each t0, proof1.1 time-translates the interval to apply the actual public transport Statement in F5; that supplier does not demand chi0=id. Removal of unused model F2 context changes no hypothesis or proof step.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let $B\\subseteq\\mathbb R^3$ be an open reference region."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Direct public F5 supplier/time localization preserves arbitrary I; no generalized initial-chart0 restriction may be inferred from source3.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "20348bf285e86f2f599fde99369492e1736780cc9badef663c75f204e967ce1b",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes Countable Choice, and own step 2.1 applies divergence F4 under A2. Under this same premise the separate supplier lem-fd-c1-boundary-surface-integrals, in its final Riemann-to-Lebesgue comparison, identifies the continuous Riemann traction integral with the Lebesgue chart flux. Its finite-area construction is unconditional. Own step 1.1 uses public transport/C1-Jordan suppliers in F5; the removed F2 dictionary is context only and its unforced momentum equation is not used.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume Countable Choice."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The own locators are steps1.1/2.1. The separately named surface-integral supplier provides the final Riemann-to-Lebesgue comparison under the same Countable Choice premise; its local numbering is omitted here because this evidence field parses every decimal as an own step. No mathematical claim or premise changes.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "34bf50248301a20163494c8ca17528897723adeaae4b79ead83e8969c5a0c786",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/boundary-wording-corrections.json",
+              "sha256": "9756ff0a08cf53d81fbb1ea4d1d07795ba7977a9fc350610995924d81cff27fb"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct local-balance deduction, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement hypotheses and proof1.1–3.1 are unchanged by F2 context relocation. F5 now names actual public transport/C1-Jordan Statements; no unforced equation premise is used.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "3b3c98311aa75b22f3566230e7b845b3625b4fe38773ad2869cc7e170ee6712f",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a direct local-balance deduction, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement hypotheses and proof1.1–3.1 are unchanged by F2 context relocation. F5 now names actual public transport/C1-Jordan Statements; no unforced equation premise is used.",
+            "item_sha256": "4c89df1e908f40332a4db01f14b914e59576a21b8a69cc54bf3791edbb4f6dfd",
+            "row_sha256": "07203e884ab0c52379a47545b5318e0fa873459cb20d6f0ba42c17dbeaedcb48",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/source3/current-boundary-review.json",
+              "sha256": "5cee223ba7fbefd3984c27b69afee3f857bb936fd68eb206f65ebdb9dedfde97"
+            }
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-21",
+        "notes": "Reviewed all three steps and current exact suppliers: material transport on compact Jordan closures, C1 image/volume compatibility, rowwise C1 stress divergence and continuity localization on inverse images of small balls. Local bounded reference neighborhoods and time translation meet the transport hypotheses for arbitrary open B. Checked empty B, zero force, positive density/viscosity, absence of endpoint/iff claims, and inherited Countable Choice. The wall-power consumer meets the strengthened explicit interface; no consumer repair is needed."
+      }
+    }
+  }
+}

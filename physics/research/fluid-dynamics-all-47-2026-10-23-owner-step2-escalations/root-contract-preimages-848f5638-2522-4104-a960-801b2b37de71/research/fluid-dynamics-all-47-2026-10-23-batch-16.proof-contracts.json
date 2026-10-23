@@ -1,0 +1,283 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "16",
+  "level": 2,
+  "scope": [
+    "pthm-fd-nonnewtonian-conditional-admissibility",
+    "ex-fd-bingham-rest-stress"
+  ],
+  "contracts": {
+    "pthm-fd-nonnewtonian-conditional-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference body with $C^1$ boundary, and let $U$ be an open neighborhood of $\\overline B$. A material motion is a map $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ whose slices $\\chi_t(a)=\\chi(t,a)$ are orientation-preserving $C^2$ diffeomorphisms onto their images, with $\\chi(0,a)=a$. Its swept open region is $\\Omega=\\{(t,x):x\\in\\chi_t(U)\\}$, its inverse label is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^{\\mathsf T})/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_t=\\partial_t+u\\cdot\\nabla$. A branch is incompressible when $\\theta=0$, so $D$ is symmetric and trace-free. Write $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ for the Frobenius contraction and $|S|=(S:S)^{1/2}$ for its norm. Define $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D=D^{\\mathsf T},\\operatorname{tr}D=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A rigid observer change is $x^*=Q(t)x+c(t)$ with $Q\\in C^2(I,\\mathrm{SO}(3))$, $c\\in C^2(I,\\mathbb R^3)$, and $\\mathrm{SO}(3)=\\{Q:Q^{\\mathsf T}Q=I_3,\\det Q=1\\}$. A second-order tensor transforms as $S^*=QSQ^{\\mathsf T}$; a constitutive response is objective when it obeys this rule at corresponding events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "For a generalized Newtonian branch, define\n\n$$\n\\dot\\gamma=(2D:D)^{1/2},\\qquad \\tau=2\\eta(\\dot\\gamma)D,\n$$\n\nwhere $\\eta:[0,\\infty)\\to[0,\\infty)$ is finite and continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "Here $\\tau_y$ is, by definition, the radius of the Frobenius stress ball at rest; other invariant normalizations require a corresponding parameter conversion. The graph is single-valued for $D\\ne0$ and set-valued at rest.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "Adopt\n\n$$\nD_tC-LC-CL^{\\mathsf T}=-(C-I_3)/\\lambda,\\qquad \\tau_p=G(C-I_3),\\qquad \\tau_s=2\\eta_sD,\\qquad w(C)=\\frac G2\\bigl(\\operatorname{tr}C-\\log\\det C-3\\bigr).\n$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fd-generalized-newtonian-dissipation",
+          "source_section": "Statement",
+          "quote": "For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-fd-bingham-monotone-graph",
+          "source_section": "Statement",
+          "quote": "Then $\\Phi$ is finite, nonnegative, and convex; $\\mathcal B(D)=\\partial\\Phi(D)$ for every $D$; the graph is monotone in the sense that $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$ whenever $\\tau_i\\in\\mathcal B(D_i)$; every graph value satisfies $\\tau:D\\ge0$; and, for $Q\\in SO(3)$, $\\mathcal B(QDQ^{\\mathsf T})=Q\\mathcal B(D)Q^{\\mathsf T}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-fd-conformation-storage",
+          "source_section": "Statement",
+          "quote": "Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,\n\n$$(\\tau_s+\\tau_p):D-\\frac{d}{dt}w(C)=2\\eta_sD:D+\\frac{G}{2\\lambda}\\bigl(\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6\\bigr)\\ge0.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-fd-conformation-storage",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ rigid observer change $x^*=Q(t)x+c(t)$ with $Q(t)\\in SO(3)$, set $C^*=QCQ^{\\mathsf T}$ and $L^*=QLQ^{\\mathsf T}+Q'Q^{\\mathsf T}$. The conformation equation is covariant under this transformation, $D^*=QDQ^{\\mathsf T}$, $\\tau_p^*=Q\\tau_pQ^{\\mathsf T}$, $\\tau_s^*=Q\\tau_sQ^{\\mathsf T}$, and $w(C^*)=w(C)$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gn-power-and-objectivity",
+          "claim": "The generalized Newtonian stress has nonnegative power and an objective response.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "bingham-power-and-objectivity",
+          "claim": "Every allowed Bingham stress has nonnegative power, and the graph is objective, including at rest.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "conformation-storage-identity-and-sign",
+          "claim": "The conformation branch is positive definite and objective, and its storage identity has nonnegative right-hand side.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "combined-conditional-conclusion",
+          "claim": "The three branch cases yield the stated conditional dissipation and objectivity, with the entropy interpretation confined to its added isothermal model assumption.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem contains no empty-indexed sum, family, or set-extremum assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-rate generalized Newtonian power follows from the formula in step 1.1; the Bingham D=0 case is calculated in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each of the three constitutive branches is treated separately in steps 1.1, 1.2, and 1.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed zero viscosity and yield parameters are covered by the nonnegative formulas in steps 1.1 and 1.2; C=I makes the squared-eigenvalue terms in step 1.3 vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The conformation supplier applies on the closed forward interval [0,T], including t=0 and t=T, as used in step 1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 notes that the zero-rate graph contains 0 and that each nonzero-rate value is a singleton."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no biconditional claim, so there is no forward implication direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no biconditional claim, so there is no reverse implication direction to audit."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "generalized-Newtonian zero rate",
+          "calculation": "D=0 gives dot-gamma=0 and tau:D=eta(0) dot-gamma^2=0.",
+          "result": "nonnegative"
+        },
+        {
+          "case": "Bingham rest and parameter endpoint",
+          "calculation": "D=0 gives tau:D=0 for every graph stress; tau_y=0 makes the rest ball {0}.",
+          "result": "nonnegative"
+        },
+        {
+          "case": "conformation equilibrium tensor",
+          "calculation": "C=I and D=0 give tau_p=0, w=0, and a zero dissipation right-hand side.",
+          "result": "identity gives 0=0"
+        }
+      ]
+    },
+    "ex-fd-bingham-rest-stress": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-bingham-monotone-graph",
+          "source_section": "Statement",
+          "quote": "Define the Bingham graph by $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ when $D\\ne0$, and by $\\mathcal B(0)=\\{\\tau\\in\\mathcal S_0:|\\tau|\\le\\tau_y\\}$ when $D=0$; its graph stresses are in $\\mathrm{Pa}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trace-free-normed-stress",
+          "claim": "The displayed stress is trace-free and has Frobenius norm exactly tau_y.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1"
+          ]
+        },
+        {
+          "id": "rest-graph-membership",
+          "claim": "The stress is a nonzero member of the Bingham graph at zero strain rate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example defines one explicit matrix and makes no claim about an empty set or empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strain rate is D=0 by assumption A1, and graph membership at this zero rate is verified in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single witness matrix is calculated in step 1.1 and tested for graph membership in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes the strictly positive yield radius tau_y>0 and makes no claim for the degenerate endpoint tau_y=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, limiting process, or endpoint parameter in this static matrix example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs an explicit nonzero member of the zero-rate graph value."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts membership of one witness and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts membership of one witness and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "trace",
+          "calculation": "tr(S)=tau_y(1-1+0)/sqrt(2)=0.",
+          "result": "trace-free"
+        },
+        {
+          "case": "Frobenius norm",
+          "calculation": "|S|^2=tau_y^2(1^2+(-1)^2)/2=tau_y^2.",
+          "result": "|S|=tau_y"
+        },
+        {
+          "case": "graph membership",
+          "calculation": "D=0 and |S|=tau_y <= tau_y.",
+          "result": "S is in B(0), and tau_y>0 makes S nonzero"
+        }
+      ]
+    }
+  }
+}

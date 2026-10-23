@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "cycle": 1,
+  "findings": [
+    {
+      "id": "pthm-fd-px08-prediction",
+      "location": "Statement half-space wall trace",
+      "decision": "confirmed and repaired",
+      "reason": "U is scalar and u vector-valued. E(0)=1 gives the full trace (U,0,0) for positive time; no corner extension or new boundary hypothesis is asserted."
+    },
+    {
+      "id": "pthm-fd-px08-prediction",
+      "location": "Facts F3 torus circulation",
+      "decision": "confirmed and repaired",
+      "reason": "The Euclidean def-fd-x00 closed-curve definition does not itself define quotient circulation. The actual thm-fd-x08 now provides the periodic-lift convention. The physical Statement/F3/proof explicitly use pi, tilde u and the closed lifted loop, with lattice-translation independence, while preserving Euclidean circulation as its separate legitimate convention."
+    },
+    {
+      "id": "ex-fd-x08-application",
+      "location": "Facts F2 torus circulation",
+      "decision": "same defect confirmed; repaired after explicit root release",
+      "reason": "The numerical example applies the exact supplied torus result. Its Euclidean convention is retained, but the torus integral is now inherited from its physical F1 supplier and described using lifted fields; Example/numerics/frontmatter unchanged."
+    }
+  ],
+  "changes": [
+    {
+      "id": "pthm-fd-px08-prediction",
+      "before_file": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/classical6-13/before__pthm-fd-px08-prediction.md",
+      "after_source": "---\nid: pthm-fd-px08-prediction\nkind: physics-theorem\ntitle: Exact viscous diffusion layer and material-circulation decay \u2014\n  conditional physical prediction\nstatus: draft\norigin: pipeline\ndomain: physics\nlibrary: physics\ndependency_level: 4\ndeps:\n  - thm-fd-x08\n  - post-fd-continuum-balances\n  - post-fd-boundary-data\n  - post-fd-newtonian-fourier\n  - def-fd-incompressible-newtonian-model\n  - def-fd-x00\ndependency_roles:\n  thm-fd-x08: mathematical-premise\n  post-fd-continuum-balances: physical-assumption\n  post-fd-boundary-data: physical-assumption\n  post-fd-newtonian-fourier: physical-assumption\n  def-fd-incompressible-newtonian-model: formulation-prerequisite\n  def-fd-x00: formulation-prerequisite\nphysical_scope: t>0,y>0 initial-wall corner excluded; exact layer bound and\n  separately smooth periodic sine-shear material loop. Worked example is the\n  actual explicit field/parameter selection in that section. B leaf cannot\n  supply any later item.\nempirical_premises: []\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: Mandre, Fluid Dynamics Lecture Notes\n      url: https://notes.shreyasmandre.com/fluid-dynamics-notes/Ch3.html\n      locator: \u00a73.3.1, full Stokes first-problem derivation.\n    - title: 'MIT 2.25 Advanced Fluid Mechanics, Solution: Stokes First Problem'\n      url: https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/6c64b72340cd5b5da9a0d59516b63aec_MIT2_25F13_SolutionStokes1.pdf\n      locator: All four pages; similarity scale and wall-stress scaling, not erfc\n        profile.\nverification:\n  precheck: pending\n---\n\n## Statement\n\nLet $\\rho_0,\\mu>0$, $\\nu=\\mu/\\rho_0$, and $U\\in\\mathbb R$. Use SI units: length metres, time seconds, velocity $U,A$ in $\\mathrm{m\\,s^{-1}}$, density $\\mathrm{kg\\,m^{-3}}$, viscosity $\\mathrm{Pa\\,s}$, diffusivity $\\nu$ in $\\mathrm{m^2\\,s^{-1}}$, periods $L_x,L_y,L_z$ in metres, and $k$ in $\\mathrm{m^{-1}}$. For Cartesian fields use $\\operatorname{div}u=\\partial_xu_x+\\partial_yu_y+\\partial_zu_z$ and componentwise $\\Delta u$. For $t>0,y>0$ and $x,z\\in\\mathbb R$, set $I_0=\\int_0^\\infty e^{-r^2}dr$, $E(s)=I_0^{-1}\\int_s^\\infty e^{-r^2}dr$ for $s\\ge0$, and $u(t,x,y,z)=(UE(y/(2\\sqrt{\\nu t})),0,0)$, with constant pressure. This field is smooth for positive time and positive $y$, solves unsteady Stokes and full constant-density Navier\u2013Stokes because its convective term vanishes, has vector wall trace $(U,0,0)$ for $t>0$, tends to zero as $y\\to\\infty$, and tends to zero as $t\\downarrow0$ for each fixed $y>0$. The corner $(t,y)=(0,0)$ is excluded. For $0<\\varepsilon<1$,\n$$y\\ge2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}\\quad\\Longrightarrow\\quad |u(t,y)|\\le\\varepsilon|U|.$$\n\nSeparately let the domain be the flat three-torus $\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_y,L_z>0$. Choose an integer $m\\ge1$, set $k=2\\pi m/L_y$, and take $A\\in\\mathbb R$. Let $\\pi:\\mathbb R^3\\to\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z}$ be the quotient map. Use the flat metric and tangent-space identification induced by Euclidean translations; equations on the torus mean equations for periodic lifts on $\\mathbb R^3$. The periodic lift $\\widetilde u(t,x,y,z)=(Ae^{-\\nu k^2t}\\sin(ky),0,0)$ defines a torus vector field by $u(t,\\pi(q))=d\\pi_q(\\widetilde u(t,q))$; with constant pressure it is a smooth exact Navier\u2013Stokes solution for all $t\\in\\mathbb R$. Choose $b,c>0$ with $c<L_x/2$, $b<L_y/2$, and $\\alpha=kb\\in(0,\\pi)$. Define the closed lifted loop\n$$\\widetilde X(t,s)=\\left(c\\sin(2\\pi s)+\\frac{A}{\\nu k^2}(1-e^{-\\nu k^2t})\\sin(kb\\cos(2\\pi s)),\\ b\\cos(2\\pi s),\\ 0\\right),\\quad 0\\le s\\le1,$$\nand put $X(t,s)=\\pi(\\widetilde X(t,s))$. Its material condition is $\\partial_t\\widetilde X(t,s)=\\widetilde u(t,\\widetilde X(t,s))$, and its flat-torus circulation is $\\Gamma(t):=\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$. This value is unchanged by translating the lift by a lattice vector in $L_x\\mathbb Z\\times L_y\\mathbb Z\\times L_z\\mathbb Z$. It has the value $\\Gamma(t)=AcC_\\alpha e^{-\\nu k^2t}$, where $C_\\alpha=\\int_0^{2\\pi}\\cos\\theta\\sin(\\alpha\\cos\\theta)\\,d\\theta>0$; it is nonconstant if $A\\ne0$. These are distinct exact solutions in the selected Newtonian model, not experiments or general boundary-layer claims.\n\n## Statement references\n\n[Mandre, *Fluid Dynamics Lecture Notes*, \u00a73.3.1, Stokes first problem](https://notes.shreyasmandre.com/fluid-dynamics-notes/Ch3.html)\n\n[MIT 2.25 Advanced Fluid Mechanics, *Solution: Stokes First Problem*, all four pages; similarity and wall-stress scaling only](https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/6c64b72340cd5b5da9a0d59516b63aec_MIT2_25F13_SolutionStokes1.pdf)\n\n## Facts & Assumptions\n\n**Given:** $\\rho_0,\\mu>0$, $\\nu=\\mu/\\rho_0$, wall speed $U$, half-space data, positive-time restriction, torus periods, wave number and loop.\n\n[A1] [[post-fd-continuum-balances]]: continuum balance laws are adopted physical assumptions; these are conditional model deductions.\n\n[A2] [[post-fd-boundary-data]]: wall and initial values are separate inputs; the impulsive corner is outside the smooth claim.\n\n[A3] [[post-fd-newtonian-fourier]]: the selected mechanical closure is Newtonian in the incompressible constant-viscosity branch; heat flux is unused.\n\n[F1] [[def-fd-incompressible-newtonian-model]]: the local equation is $\\operatorname{div}u=0$ and $\\rho_0D_tu+\\nabla p=\\mu\\Delta u$ for constant $\\mu$.\n\n[F2] [[thm-fd-x08]]: the half-space field, Gaussian tail bound, torus shear solution and specified material-loop circulation are as stated, with the corner excluded.\n\n[F3] [[def-fd-x00]] defines Euclidean circulation for a closed piecewise-$C^1$ curve $\\gamma:[a,b]\\to\\Omega\\subseteq\\mathbb R^3$ as $\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the flat quotient, [[thm-fd-x08]] supplies the periodic-lift convention: $X=\\pi(\\widetilde X)$ is material when $\\partial_t\\widetilde X=\\widetilde u(t,\\widetilde X)$, and its circulation is $\\int_0^1\\widetilde u(t,\\widetilde X)\\cdot\\partial_s\\widetilde X\\,ds$. Translating the lift by a period-lattice vector changes neither the periodic velocity nor the lift derivative, so the value descends to the specified torus loop.\n\n## Proof\n\n1.1 Set $s=y/(2\\sqrt{\\nu t})\\ge0$. The integral $I_0$ is positive and finite, since its integrand is positive and $e^{-r^2}\\le e^{-r}$ for $r\\ge1$. Substituting $r=s+z$ in the definition of $E$ and using $(s+z)^2\\ge s^2+z^2$ gives $E(s)=I_0^{-1}\\int_0^\\infty e^{-(s+z)^2}\\,dz\\le e^{-s^2}I_0^{-1}\\int_0^\\infty e^{-z^2}\\,dz=e^{-s^2}$. If $y\\ge2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}$, then $s^2\\ge\\log(1/\\varepsilon)$, so $E(s)\\le\\varepsilon$ and $|u|\\le\\varepsilon|U|$. [given, algebra]\n\n1.2 For the periodic lift, div $\\widetilde u=0$, $(\\widetilde u\\cdot\\nabla)\\widetilde u=0$, and $\\partial_t\\widetilde u=\\nu\\Delta\\widetilde u$, so the local Newtonian equation holds. Differentiation gives $\\partial_t\\widetilde X=(Ae^{-\\nu k^2t}\\sin(kb\\cos2\\pi s),0,0)=\\widetilde u(t,\\widetilde X)$, so $X=\\pi(\\widetilde X)$ is material. By [F3], the circulation is $\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$; parameterize this integral by $\\theta=2\\pi s$. The base-loop term is $Ac e^{-\\nu k^2t}C_\\alpha$. The extra term from the moving horizontal shift is proportional to $\\int_0^{2\\pi}\\sin(\\alpha\\cos\\theta)\\sin\\theta\\cos(\\alpha\\cos\\theta)\\,d\\theta=0$, since its integrand changes sign under $\\theta\\mapsto2\\pi-\\theta$. This proves the formula. [A1, A2, A3, F1, F2, F3, algebra]\n\n2.1 The first solution is asserted only for $t>0,y>0$; the second circulation is for the specified torus field and loop. They imply no general boundary-layer or Kelvin theorem. [A2, F2, step 1.1, step 1.2] \u220e\n\n",
+      "diff": "--- before/items/pthm-fd-px08-prediction.md\n+++ after/items/pthm-fd-px08-prediction.md\n@@ -46,12 +46,12 @@\n \n ## Statement\n \n-Let $\\rho_0,\\mu>0$, $\\nu=\\mu/\\rho_0$, and $U\\in\\mathbb R$. Use SI units: length metres, time seconds, velocity $U,A$ in $\\mathrm{m\\,s^{-1}}$, density $\\mathrm{kg\\,m^{-3}}$, viscosity $\\mathrm{Pa\\,s}$, diffusivity $\\nu$ in $\\mathrm{m^2\\,s^{-1}}$, periods $L_x,L_y,L_z$ in metres, and $k$ in $\\mathrm{m^{-1}}$. For Cartesian fields use $\\operatorname{div}u=\\partial_xu_x+\\partial_yu_y+\\partial_zu_z$ and componentwise $\\Delta u$. For $t>0,y>0$ and $x,z\\in\\mathbb R$, set $I_0=\\int_0^\\infty e^{-r^2}dr$, $E(s)=I_0^{-1}\\int_s^\\infty e^{-r^2}dr$ for $s\\ge0$, and $u(t,x,y,z)=(UE(y/(2\\sqrt{\\nu t})),0,0)$, with constant pressure. This field is smooth for positive time and positive $y$, solves unsteady Stokes and full constant-density Navier\u2013Stokes because its convective term vanishes, has wall trace $U$ for $t>0$, tends to zero as $y\\to\\infty$, and tends to zero as $t\\downarrow0$ for each fixed $y>0$. The corner $(t,y)=(0,0)$ is excluded. For $0<\\varepsilon<1$,\n+Let $\\rho_0,\\mu>0$, $\\nu=\\mu/\\rho_0$, and $U\\in\\mathbb R$. Use SI units: length metres, time seconds, velocity $U,A$ in $\\mathrm{m\\,s^{-1}}$, density $\\mathrm{kg\\,m^{-3}}$, viscosity $\\mathrm{Pa\\,s}$, diffusivity $\\nu$ in $\\mathrm{m^2\\,s^{-1}}$, periods $L_x,L_y,L_z$ in metres, and $k$ in $\\mathrm{m^{-1}}$. For Cartesian fields use $\\operatorname{div}u=\\partial_xu_x+\\partial_yu_y+\\partial_zu_z$ and componentwise $\\Delta u$. For $t>0,y>0$ and $x,z\\in\\mathbb R$, set $I_0=\\int_0^\\infty e^{-r^2}dr$, $E(s)=I_0^{-1}\\int_s^\\infty e^{-r^2}dr$ for $s\\ge0$, and $u(t,x,y,z)=(UE(y/(2\\sqrt{\\nu t})),0,0)$, with constant pressure. This field is smooth for positive time and positive $y$, solves unsteady Stokes and full constant-density Navier\u2013Stokes because its convective term vanishes, has vector wall trace $(U,0,0)$ for $t>0$, tends to zero as $y\\to\\infty$, and tends to zero as $t\\downarrow0$ for each fixed $y>0$. The corner $(t,y)=(0,0)$ is excluded. For $0<\\varepsilon<1$,\n $$y\\ge2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}\\quad\\Longrightarrow\\quad |u(t,y)|\\le\\varepsilon|U|.$$\n \n-Separately let the domain be the flat three-torus $\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_y,L_z>0$. Choose an integer $m\\ge1$, set $k=2\\pi m/L_y$, and take $A\\in\\mathbb R$. The field $u=(Ae^{-\\nu k^2t}\\sin(ky),0,0)$ with constant pressure is a smooth exact Navier\u2013Stokes solution for all $t\\in\\mathbb R$. Choose $b,c>0$ with $c<L_x/2$, $b<L_y/2$, and $\\alpha=kb\\in(0,\\pi)$. The closed material loop\n-$$X(t,s)=\\left(c\\sin(2\\pi s)+\\frac{A}{\\nu k^2}(1-e^{-\\nu k^2t})\\sin(kb\\cos(2\\pi s)),\\ b\\cos(2\\pi s),\\ 0\\right),\\quad 0\\le s\\le1,$$\n-has circulation $\\Gamma(t)=AcC_\\alpha e^{-\\nu k^2t}$, where $C_\\alpha=\\int_0^{2\\pi}\\cos\\theta\\sin(\\alpha\\cos\\theta)\\,d\\theta>0$; it is nonconstant if $A\\ne0$. These are distinct exact solutions in the selected Newtonian model, not experiments or general boundary-layer claims.\n+Separately let the domain be the flat three-torus $\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_y,L_z>0$. Choose an integer $m\\ge1$, set $k=2\\pi m/L_y$, and take $A\\in\\mathbb R$. Let $\\pi:\\mathbb R^3\\to\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times\\mathbb T_{L_z}$ be the quotient map. Use the flat metric and tangent-space identification induced by Euclidean translations; equations on the torus mean equations for periodic lifts on $\\mathbb R^3$. The periodic lift $\\widetilde u(t,x,y,z)=(Ae^{-\\nu k^2t}\\sin(ky),0,0)$ defines a torus vector field by $u(t,\\pi(q))=d\\pi_q(\\widetilde u(t,q))$; with constant pressure it is a smooth exact Navier\u2013Stokes solution for all $t\\in\\mathbb R$. Choose $b,c>0$ with $c<L_x/2$, $b<L_y/2$, and $\\alpha=kb\\in(0,\\pi)$. Define the closed lifted loop\n+$$\\widetilde X(t,s)=\\left(c\\sin(2\\pi s)+\\frac{A}{\\nu k^2}(1-e^{-\\nu k^2t})\\sin(kb\\cos(2\\pi s)),\\ b\\cos(2\\pi s),\\ 0\\right),\\quad 0\\le s\\le1,$$\n+and put $X(t,s)=\\pi(\\widetilde X(t,s))$. Its material condition is $\\partial_t\\widetilde X(t,s)=\\widetilde u(t,\\widetilde X(t,s))$, and its flat-torus circulation is $\\Gamma(t):=\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$. This value is unchanged by translating the lift by a lattice vector in $L_x\\mathbb Z\\times L_y\\mathbb Z\\times L_z\\mathbb Z$. It has the value $\\Gamma(t)=AcC_\\alpha e^{-\\nu k^2t}$, where $C_\\alpha=\\int_0^{2\\pi}\\cos\\theta\\sin(\\alpha\\cos\\theta)\\,d\\theta>0$; it is nonconstant if $A\\ne0$. These are distinct exact solutions in the selected Newtonian model, not experiments or general boundary-layer claims.\n \n ## Statement references\n \n@@ -73,13 +73,13 @@\n \n [F2] [[thm-fd-x08]]: the half-space field, Gaussian tail bound, torus shear solution and specified material-loop circulation are as stated, with the corner excluded.\n \n-[F3] [[def-fd-x00]]: for a closed piecewise-$C^1$ oriented curve $\\gamma:[a,b]\\to\\Omega$, circulation is the line integral $\\oint_\\gamma u\\cdot d\\mathbf r=\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the closed material loop $X(t,s)$ in the Statement, this is $\\int_0^1u(t,X(t,s))\\cdot\\partial_sX(t,s)\\,ds$.\n+[F3] [[def-fd-x00]] defines Euclidean circulation for a closed piecewise-$C^1$ curve $\\gamma:[a,b]\\to\\Omega\\subseteq\\mathbb R^3$ as $\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the flat quotient, [[thm-fd-x08]] supplies the periodic-lift convention: $X=\\pi(\\widetilde X)$ is material when $\\partial_t\\widetilde X=\\widetilde u(t,\\widetilde X)$, and its circulation is $\\int_0^1\\widetilde u(t,\\widetilde X)\\cdot\\partial_s\\widetilde X\\,ds$. Translating the lift by a period-lattice vector changes neither the periodic velocity nor the lift derivative, so the value descends to the specified torus loop.\n \n ## Proof\n \n 1.1 Set $s=y/(2\\sqrt{\\nu t})\\ge0$. The integral $I_0$ is positive and finite, since its integrand is positive and $e^{-r^2}\\le e^{-r}$ for $r\\ge1$. Substituting $r=s+z$ in the definition of $E$ and using $(s+z)^2\\ge s^2+z^2$ gives $E(s)=I_0^{-1}\\int_0^\\infty e^{-(s+z)^2}\\,dz\\le e^{-s^2}I_0^{-1}\\int_0^\\infty e^{-z^2}\\,dz=e^{-s^2}$. If $y\\ge2\\sqrt{\\nu t}\\sqrt{\\log(1/\\varepsilon)}$, then $s^2\\ge\\log(1/\\varepsilon)$, so $E(s)\\le\\varepsilon$ and $|u|\\le\\varepsilon|U|$. [given, algebra]\n \n-1.2 For the torus field, div $u=0$, $(u\\cdot\\nabla)u=0$, and $\\partial_tu=\\nu\\Delta u$, so the local Newtonian equation holds. Differentiation gives $X_t=(Ae^{-\\nu k^2t}\\sin(kb\\cos2\\pi s),0,0)=u(t,X)$, so $X$ is material. By [F3], the circulation is $\\int_0^1u(t,X(t,s))\\cdot X_s(t,s)\\,ds$; parameterize this integral by $\\theta=2\\pi s$. The base-loop term is $Ac e^{-\\nu k^2t}C_\\alpha$. The extra term from the moving horizontal shift is proportional to $\\int_0^{2\\pi}\\sin(\\alpha\\cos\\theta)\\sin\\theta\\cos(\\alpha\\cos\\theta)\\,d\\theta=0$, since its integrand changes sign under $\\theta\\mapsto2\\pi-\\theta$. This proves the formula. [A1, A2, A3, F1, F2, F3, algebra]\n+1.2 For the periodic lift, div $\\widetilde u=0$, $(\\widetilde u\\cdot\\nabla)\\widetilde u=0$, and $\\partial_t\\widetilde u=\\nu\\Delta\\widetilde u$, so the local Newtonian equation holds. Differentiation gives $\\partial_t\\widetilde X=(Ae^{-\\nu k^2t}\\sin(kb\\cos2\\pi s),0,0)=\\widetilde u(t,\\widetilde X)$, so $X=\\pi(\\widetilde X)$ is material. By [F3], the circulation is $\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$; parameterize this integral by $\\theta=2\\pi s$. The base-loop term is $Ac e^{-\\nu k^2t}C_\\alpha$. The extra term from the moving horizontal shift is proportional to $\\int_0^{2\\pi}\\sin(\\alpha\\cos\\theta)\\sin\\theta\\cos(\\alpha\\cos\\theta)\\,d\\theta=0$, since its integrand changes sign under $\\theta\\mapsto2\\pi-\\theta$. This proves the formula. [A1, A2, A3, F1, F2, F3, algebra]\n \n 2.1 The first solution is asserted only for $t>0,y>0$; the second circulation is for the specified torus field and loop. They imply no general boundary-layer or Kelvin theorem. [A2, F2, step 1.1, step 1.2] \u220e\n \n",
+      "frontmatter_unchanged": true
+    },
+    {
+      "id": "ex-fd-x08-application",
+      "before_file": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/classical6-13/before__ex-fd-x08-application.md",
+      "after_source": "---\nid: ex-fd-x08-application\nkind: example\ntitle: Exact viscous diffusion layer and material-circulation decay \u2014 worked\n  interpretation\nstatus: draft\norigin: pipeline\ndomain: physics\nlibrary: physics\ndependency_level: 5\ndeps:\n  - pthm-fd-px08-prediction\n  - def-fd-x00\ndependency_roles:\n  pthm-fd-px08-prediction: physical-result\n  def-fd-x00: formulation-prerequisite\nphysical_scope: Numerical substitutions in two exact Newtonian model solutions;\n  not an observation or a general boundary-layer or Kelvin result.\nempirical_premises: []\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: Mandre, Fluid Dynamics Lecture Notes\n      url: https://notes.shreyasmandre.com/fluid-dynamics-notes/Ch3.html\n      locator: \u00a73.3.1, Stokes first problem.\n    - title: 'MIT 2.25, Solution: Stokes First Problem'\n      url: https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/6c64b72340cd5b5da9a0d59516b63aec_MIT2_25F13_SolutionStokes1.pdf\n      locator: Similarity and wall-stress scale only.\nverification:\n  precheck: pending\n---\n\n## Example\n\nFor the half-space Stokes first-problem model, choose $\\nu=1\\,\\mathrm{m^2\\,s^{-1}}$, $U=1\\,\\mathrm{m\\,s^{-1}}$, and $t=1\\,\\mathrm s$. At $y=2\\sqrt{\\log2}\\,\\mathrm m$, the exact Gaussian-tail estimate gives $|u|\\le\\tfrac12\\,\\mathrm{m\\,s^{-1}}$. For the separate torus shear choose $L_x=L_y=L_z=2\\pi\\,\\mathrm m$, $m=1$, $k=1\\,\\mathrm{m^{-1}}$, $A=2\\,\\mathrm{m\\,s^{-1}}$, $b=\\pi/3\\,\\mathrm m$, and $c=1\\,\\mathrm m$. Then $\\alpha=\\pi/3$ and\n$$\\Gamma(t)=2C_{\\pi/3}e^{-t/(1\\,\\mathrm s)}\\,\\mathrm{m^2\\,s^{-1}},\\qquad C_{\\pi/3}=\\int_0^{2\\pi}\\cos\\theta\\sin((\\pi/3)\\cos\\theta)\\,d\\theta>0.$$\nThese are exact model values, not measured velocity or circulation.\n\n## Example references\n\n[Mandre, *Fluid Dynamics Lecture Notes*, \u00a73.3.1](https://notes.shreyasmandre.com/fluid-dynamics-notes/Ch3.html)\n\n[MIT 2.25 Advanced Fluid Mechanics, *Solution: Stokes First Problem*, similarity scaling](https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/6c64b72340cd5b5da9a0d59516b63aec_MIT2_25F13_SolutionStokes1.pdf)\n\n## Facts & Assumptions\n\n**Given:** The positive-time half-space and torus solutions, parameters above, and specified loop.\n\n[F1] [[pthm-fd-px08-prediction]]: the half-space field obeys $|u|\\le|U|e^{-y^2/(4\\nu t)}$, and the torus material-loop circulation is $AcC_\\alpha e^{-\\nu k^2t}$.\n\n[F2] [[def-fd-x00]] defines Euclidean circulation for closed piecewise-$C^1$ curves as $\\int u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the torus loop, the physical supplier [F1] instead specifies the flat-quotient lift $X=\\pi(\\widetilde X)$, the periodic velocity $\\widetilde u$, and the circulation $\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$. The given lift is closed, and period-lattice translations preserve this integral; this is the convention used for the torus value below.\n\n## Proof\n\n1.1 At the selected height $y^2/(4\\nu t)=\\log2$, so $|u|\\le1\\cdot e^{-\\log2}=\\tfrac12\\,\\mathrm{m\\,s^{-1}}$. [given, F1, algebra]\n\n2.1 Interpret the torus circulation as the periodic-lift integral in [F2], whose value is supplied by [F1]. For the torus parameters, $\\nu k^2=1\\,\\mathrm{s^{-1}}$, $Ac=2\\,\\mathrm{m^2\\,s^{-1}}$, and $\\alpha=kb=\\pi/3$; substitution gives the displayed circulation. Positivity of $C_{\\pi/3}$ follows from the theorem's stated range. [given, F1, F2, step 1.1, algebra]\n\n3.1 Both outputs are deductions for their specified exact solutions and make no general empirical or boundary-layer claim. [F1, step 1.1, step 2.1] \u220e\n\n",
+      "diff": "--- before/items/ex-fd-x08-application.md\n+++ after/items/ex-fd-x08-application.md\n@@ -51,13 +51,13 @@\n \n [F1] [[pthm-fd-px08-prediction]]: the half-space field obeys $|u|\\le|U|e^{-y^2/(4\\nu t)}$, and the torus material-loop circulation is $AcC_\\alpha e^{-\\nu k^2t}$.\n \n-[F2] [[def-fd-x00]]: for a closed piecewise-$C^1$ oriented curve $\\gamma:[a,b]\\to\\Omega$, circulation is the line integral $\\oint_\\gamma u\\cdot d\\mathbf r=\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$; for the material loop $X(t,s)$, the curve integral is $\\int_0^1u(t,X(t,s))\\cdot\\partial_sX(t,s)\\,ds$.\n+[F2] [[def-fd-x00]] defines Euclidean circulation for closed piecewise-$C^1$ curves as $\\int u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the torus loop, the physical supplier [F1] instead specifies the flat-quotient lift $X=\\pi(\\widetilde X)$, the periodic velocity $\\widetilde u$, and the circulation $\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$. The given lift is closed, and period-lattice translations preserve this integral; this is the convention used for the torus value below.\n \n ## Proof\n \n 1.1 At the selected height $y^2/(4\\nu t)=\\log2$, so $|u|\\le1\\cdot e^{-\\log2}=\\tfrac12\\,\\mathrm{m\\,s^{-1}}$. [given, F1, algebra]\n \n-2.1 Interpret circulation as the material-loop integral in [F2], whose value is supplied by [F1]. For the torus parameters, $\\nu k^2=1\\,\\mathrm{s^{-1}}$, $Ac=2\\,\\mathrm{m^2\\,s^{-1}}$, and $\\alpha=kb=\\pi/3$; substitution gives the displayed circulation. Positivity of $C_{\\pi/3}$ follows from the theorem's stated range. [given, F1, F2, step 1.1, algebra]\n+2.1 Interpret the torus circulation as the periodic-lift integral in [F2], whose value is supplied by [F1]. For the torus parameters, $\\nu k^2=1\\,\\mathrm{s^{-1}}$, $Ac=2\\,\\mathrm{m^2\\,s^{-1}}$, and $\\alpha=kb=\\pi/3$; substitution gives the displayed circulation. Positivity of $C_{\\pi/3}$ follows from the theorem's stated range. [given, F1, F2, step 1.1, algebra]\n \n 3.1 Both outputs are deductions for their specified exact solutions and make no general empirical or boundary-layer claim. [F1, step 1.1, step 2.1] \u220e\n \n",
+      "frontmatter_unchanged": true
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/reflow.mts items/pthm-fd-px08-prediction.md items/ex-fd-x08-application.md",
+      "exit_code": 0,
+      "actual_output": "unchanged items/pthm-fd-px08-prediction.md\nunchanged items/ex-fd-x08-application.md"
+    },
+    {
+      "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-fd-px08-prediction.md items/ex-fd-x08-application.md --json",
+      "exit_code": 0,
+      "actual_output": {
+        "summary": {
+          "files": 2,
+          "checked": 2,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/pthm-fd-px08-prediction.md",
+            "item_id": "pthm-fd-px08-prediction",
+            "status": "pass",
+            "strategy": "direct"
+          },
+          {
+            "file": "items/ex-fd-x08-application.md",
+            "item_id": "ex-fd-x08-application",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/physics-support/proof-layout.mjs items/pthm-fd-px08-prediction.md items/ex-fd-x08-application.md",
+      "exit_code": 0,
+      "actual_output": "proof-layout: 2 items, 6 steps, 0 defects",
+      "scope": "Actual explicit-path private renderer/layout check after final reflow; no source edit followed."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "supplier": "thm-fd-x08",
+      "consumer": "ex-fd-x08-formal-verification",
+      "decision": "compatible, no edit",
+      "evidence": "The formal example already cites thm08 directly for its supplied material loop. Positive periods and alpha=pi/2 meet the exact lift theorem; its zero-corner-excluded tail bound and 2 C_(pi/2) exp(-t) circulation remain valid."
+    },
+    {
+      "supplier": "thm-fd-x08",
+      "consumer": "pthm-fd-px08-prediction",
+      "decision": "repaired",
+      "evidence": "The physical vector trace now matches the supplier and the full flat-quotient lift convention is explicit. All U and A, all allowed m and periods, exact PDE/tail/circulation claims, SI units and physical limitations are preserved."
+    },
+    {
+      "supplier": "pthm-fd-px08-prediction",
+      "consumer": "ex-fd-x08-application",
+      "decision": "repaired and checked",
+      "evidence": "Its unchanged positive-time half-speed calculation is an interior evaluation, not a vector boundary value. The selected periods 2pi, m=k=1, A=2,b=pi/3,c=1 satisfy the same closed-lift restrictions; integral invariance under lattice translation leaves its exact circulation value unchanged. No item consumes this example."
+    },
+    {
+      "supplier": "thm-fd-x06",
+      "consumers": [
+        "ex-fd-x06-formal-verification",
+        "pthm-fd-px06-prediction",
+        "ex-fd-x06-application"
+      ],
+      "decision": "claims compatible; source proof repair proposed",
+      "evidence": "The unchanged exact exterior fields yield traction -p_infinity n+(3mu/(2a))U. The physical px06 current proof now itself supplies the sphere density/area and antipodal substitution, while both examples are exact parameter substitutions in the same decay class. Proposed source repair adds those mathematical details locally and changes no interface."
+    },
+    {
+      "supplier": "thm-fd-x13",
+      "consumers": [
+        "ex-fd-x13-formal-verification",
+        "pthm-fd-px13-prediction",
+        "ex-fd-x13-application"
+      ],
+      "decision": "claims compatible; source proof repair proposed",
+      "evidence": "The boundary pressure is even in n and the physical px13 current proof explicitly gives the spherical parameter substitution. Both examples use unchanged pressure formulas and antipodal cancellation. The proposed mathematical source proof supplies the chart-density verification, with no slip/no-slip, force or empirical claim change."
+    }
+  ],
+  "root_contract_proposals": [
+    {
+      "id": "pthm-fd-px08-prediction",
+      "fact": "F3",
+      "sources": [
+        {
+          "id": "def-fd-x00",
+          "section": "Definition",
+          "use": "Only the Euclidean closed-curve circulation convention, evaluated on the displayed Euclidean lift."
+        },
+        {
+          "id": "thm-fd-x08",
+          "section": "Statement",
+          "use": "Flat quotient tangent identification, periodic lifts, material condition and lift circulation with period-lattice translation invariance."
+        }
+      ],
+      "note": "Both suppliers already appear in live deps; no metadata edit needed. Root should refresh actual F3 citation/source-section binding and changed boundary excerpts; preserve both sound supplier contributions."
+    },
+    {
+      "id": "ex-fd-x08-application",
+      "fact": "F2",
+      "sources": [
+        {
+          "id": "def-fd-x00",
+          "section": "Definition",
+          "use": "Euclidean closed-curve integral only."
+        },
+        {
+          "id": "pthm-fd-px08-prediction",
+          "section": "Statement",
+          "use": "Actual torus lift circulation convention inherited through F1."
+        }
+      ],
+      "note": "Both current suppliers already declared; root owns exact mixed-fact citation bindings."
+    }
+  ],
+  "active_source6_observations": [
+    {
+      "id": "thm-fd-x08",
+      "status": "reported to root; not edited",
+      "evidence": "Current half-space Statement final inequality lacks its closing inline dollar delimiter. The current proof 1.2 retains X/u coordinate shorthand for the lift, whereas the new Statement distinguishes X/u from tildeX/tildeu. Native alpha6 can resolve formatting and notation when reviewing its active source."
+    }
+  ],
+  "source6_proposals": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/classical6-13/source6-proposals.json",
+  "page_context": "Current item-text search finds only the source mathematical page fd-x02 and physical fd-px02 with their companion placements for these chains. Pages contain inventory-only bodies; no prose repair is needed. No other logical/nonlogical item consumers were found by item-ID search under items/ and library/.",
+  "reading_limits": "Read the actual complete current thm08 interface, physical px08 and its two mathematical/physical examples, source x06/x13 proof arguments, relevant physical sphere consumers and parameter examples, native reader6/refuter6 findings, native reader13 source findings, and exact area/density Definition sections. No external source full texts or unrelated transitive proof audit claimed.",
+  "operations": "Only two explicitly released physical bodies, before snapshots and these research reports changed. No active batch6 source edits, metadata/frontmatter, contracts, manifests, hashes/bindings, ledgers, acceptance or full gates modified."
+}

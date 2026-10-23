@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "26",
+  "status": "authoring-complete; canonical mathematical page dependency verified; independent review pending",
+  "blockers": [],
+  "note": "Owner resolved the wrong-category path hold: canonical mathematical suppliers are library/fluid-dynamics-mathematics/fd-k01.md and fd-k01-examples.md. Actual page IDs, mathematical library and inventories match the completed batch25 manifest (10 A and 3 B). No duplicate physical pages or supplier proof acceptance is created. See research/fluid-dynamics-all-47-2026-10-23-owner-completed-consumer-resolution/review.json. Original native source reading and checks remain historical.",
+  "source_searches": [
+    {
+      "query": "Boltzmann equation H theorem full lecture notes kinetic theory",
+      "outcome": "Found and inspected MIT OCW 8.333 Lectures 8–11 and David Tong Cambridge Kinetic Theory Chapter 2; both provide accessible full-text lecture notes."
+    },
+    {
+      "query": "BGK operator local Maxwellian relaxation time full-text lecture notes",
+      "outcome": "Found and inspected the full Golse–Levermore Fluid Dynamics from Kinetic Equations lecture PDF, including the BGK operator section."
+    },
+    {
+      "query": "Bhatnagar Gross Krook 1954 BGK model full text",
+      "outcome": "APS record was available; an exploratory Cranfield CoA Memo 154 PDF open returned an error. The accessible Golse–Levermore full-text lecture source was then opened and read for the BGK model."
+    }
+  ],
+  "prior_source_routes": [],
+  "source_resolution": {
+    "candidate_history": [
+      {
+        "title": "CoA Memo 154, June 1968, BGK equation section",
+        "url": "https://dspace.lib.cranfield.ac.uk/bitstream/1826/9580/1/COA_Memo_154_June_1968.pdf",
+        "disposition": "not harvested; alternative full-text source used",
+        "attempts": [
+          {
+            "date": "2026-10-23",
+            "outcome": "Browser open returned an error response instead of readable PDF text."
+          },
+          {
+            "date": "2026-10-23",
+            "outcome": "Recovery via the already located Golse–Levermore full-text lecture PDF succeeded; BGK section inspected, then recovery stopped."
+          }
+        ],
+        "searches": [
+          {
+            "query": "Bhatnagar Gross Krook 1954 model full text PDF Maxwellian conservation",
+            "outcome": "Located APS bibliographic record, Cranfield report candidate, and Golse–Levermore full lecture slides."
+          }
+        ],
+        "alternative": "François Golse and C. David Levermore, Fluid Dynamics from Kinetic Equations, Lecture 2, section II, The BGK Operator; full PDF read at https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf."
+      }
+    ],
+    "unresolved": [],
+    "items": {
+      "post-fd-boltzmann-model": {
+        "argument": "Adopts the periodic single-species elastic Boltzmann equation with incoming factorization and symmetric weak collision action; the current K01 collision-measure definition interface matches after explicitly restricting collision solutions to its positive finite-valued domain.",
+        "dependencies": [
+          "def-fd-elastic-collision-measure"
+        ],
+        "source_disposition": {
+          "MIT-Lecture-8": "included: incoming molecular chaos and its correlation limitation",
+          "Tong-Kinetic-Theory": "included: collision model and one-sided molecular-chaos assumption"
+        },
+        "unresolved": []
+      },
+      "def-fd-physical-kinetic-observables": {
+        "argument": "Defines SI number/mass density, mean/peculiar velocity, translational temperature, stress, heat flux, kinetic energy, and reference-relative entropy observables from the inspected K01 density domain.",
+        "dependencies": [
+          "def-fd-kinetic-density",
+          "post-fd-boltzmann-model"
+        ],
+        "source_disposition": {
+          "MIT-Lecture-10": "included: moment definitions, pressure tensor, energy and heat flux",
+          "Tong-Kinetic-Theory": "included: kinetic moments and ideal-fluid variables"
+        },
+        "unresolved": []
+      },
+      "pthm-fd-boltzmann-entropy": {
+        "argument": "Uses the newly proved local H-balance item for the local physical entropy equation and the inspected current thm-fd-kinetic-h global Statement for total entropy monotonicity; preserves the distinction from fine-grained Gibbs entropy.",
+        "dependencies": [
+          "def-fd-physical-kinetic-observables",
+          "pthm-fd-local-boltzmann-h-balance",
+          "thm-fd-kinetic-h",
+          "post-fd-boltzmann-model"
+        ],
+        "source_disposition": {
+          "MIT-Lecture-9": "included: independent full H-theorem treatment",
+          "Tong-Kinetic-Theory": "included: independent H-theorem treatment and molecular-chaos qualification"
+        },
+        "unresolved": []
+      },
+      "pthm-fd-ideal-gas-euler-interface": {
+        "argument": "Conditionally applies the current K3 theorem under its exact dimensionless fast scale, positive C1 limiting fields, omega3 spacetime convergence and omega2 initial convergence; the theorem assumes rather than derives convergence.",
+        "dependencies": [
+          "def-fd-physical-kinetic-observables",
+          "thm-fd-controlled-euler-passage",
+          "post-fd-boltzmann-model"
+        ],
+        "source_disposition": {
+          "MIT-Lecture-11": "included: local Maxwellian moments and zeroth-order fluid equations, with approximation caveat",
+          "Tong-Kinetic-Theory": "included: ideal-fluid Euler reduction and streaming-equation qualification"
+        },
+        "unresolved": []
+      },
+      "post-fd-bgk-relaxation": {
+        "argument": "Adopts a distinct homogeneous single-species BGK model with exact moment-matched Maxwellian, positive temperature, fixed phenomenological relaxation time and dimensionless fast scale; the current K01 definition interface matches.",
+        "dependencies": [
+          "def-fd-conserving-bgk"
+        ],
+        "source_disposition": {
+          "Golse-Levermore-Lecture-2": "included: BGK operator definition and model form",
+          "Tong-Kinetic-Theory": "included: relaxation-time approximation and non-exactness qualification"
+        },
+        "unresolved": []
+      },
+      "pthm-fd-bgk-equilibration": {
+        "argument": "Applies the current K4 exact homogeneous solution and omega3 bound, proves uniqueness in the explicitly defined pointwise differentiable class, derives the selected smaller weighted-L1 equality from the exact formula, and applies the current entropy-gap estimate.",
+        "dependencies": [
+          "post-fd-bgk-relaxation",
+          "def-fd-conserving-bgk",
+          "prop-fd-maxwellian-moments",
+          "thm-fd-homogeneous-bgk-limit",
+          "prop-fd-bgk-entropy-rate",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "def-derivative",
+          "thm-algebra-of-function-limits",
+          "cor-mean-value-theorem"
+        ],
+        "source_disposition": {
+          "Golse-Levermore-Lecture-2": "included: adopted moment-preserving BGK model form",
+          "Tong-Kinetic-Theory": "included: relaxation-time approximation and non-exactness qualification"
+        },
+        "unresolved": []
+      },
+      "texp-fd-bgk-preparation": {
+        "argument": "Constructs a uniform finite-cube non-Maxwellian velocity density, proves its moments, finite omega3 moment and finite reference-relative entropy, then applies the exact conditional BGK theorem to exhibit its initial layer.",
+        "dependencies": [
+          "pthm-fd-bgk-equilibration"
+        ],
+        "source_disposition": {
+          "Golse-Levermore-Lecture-2": "included: adopted BGK operator scope",
+          "Tong-Kinetic-Theory": "included: relaxation-time approximation and non-exactness qualification"
+        },
+        "unresolved": []
+      },
+      "pthm-fd-local-boltzmann-h-balance": {
+        "argument": "Proves the local h-balance directly from the adopted weak collision identity, with positive regularity, explicit velocity envelopes, admissible tests 1 and log(f/f_ref), differentiation under the velocity integral, and monotonicity of log. Added because the current thm-fd-kinetic-h Statement provides the global identity only.",
+        "dependencies": [
+          "post-fd-boltzmann-model",
+          "def-fd-physical-kinetic-observables",
+          "def-fd-elastic-collision-measure",
+          "thm-chain-rule",
+          "def-derivative",
+          "thm-algebra-of-function-limits",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem"
+        ],
+        "source_disposition": {
+          "MIT-Lecture-9": "included: local H balance, collision symmetrization and production sign",
+          "Tong-Kinetic-Theory": "included: local entropy balance and H-theorem sign"
+        },
+        "unresolved": []
+      }
+    }
+  },
+  "pages": [
+    {
+      "page": "fd-k02",
+      "sources": [
+        {
+          "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 8",
+          "kind": "lecture-notes",
+          "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/b8c07404633cdba3217e434ac06569ad_MIT8_333F13_Lec8.pdf",
+          "original_url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/b8c07404633cdba3217e434ac06569ad_MIT8_333F13_Lec8.pdf",
+          "contents": [
+            {
+              "name": "Section III.D, printed pp. 49–54; the incoming molecular-chaos closure and its correlation limitation.",
+              "disposition": "included",
+              "item": "post-fd-boltzmann-model",
+              "source_review": {
+                "read_extent": "Section III.D, printed pp. 49–54; the incoming molecular-chaos closure and its correlation limitation.",
+                "supports": "Supports the adopted collision equation and incoming factorization; no many-particle derivation is taken.",
+                "limitations": "The source explicitly notes that correlations can be generated by collisions; no propagation-of-chaos or many-particle derivation is claimed."
+              }
+            }
+          ],
+          "locator": "Section III.D, printed pp. 49–54; the incoming molecular-chaos closure and its correlation limitation.",
+          "recovery_attempts": [
+            {
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/b8c07404633cdba3217e434ac06569ad_MIT8_333F13_Lec8.pdf",
+              "at": "2026-10-22T14:58:57.566Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:58:57.566Z",
+            "bytes": 179230,
+            "sha256_16": "36ccee9b144ec65f",
+            "kind": "pdf",
+            "pages": 10
+          }
+        },
+        {
+          "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+          "kind": "lecture-notes",
+          "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+          "original_url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+          "contents": [
+            {
+              "name": "Sections 2.2–2.2.3; the Boltzmann collision model, detailed balance, and the one-sided molecular-chaos assumption.",
+              "disposition": "included",
+              "item": "post-fd-boltzmann-model",
+              "source_review": {
+                "read_extent": "Sections 2.2–2.2.3; the Boltzmann collision model, detailed balance, and the one-sided molecular-chaos assumption.",
+                "supports": "Supports the adopted collision equation and incoming factorization; no many-particle derivation is taken.",
+                "limitations": "The source is used for physical context; the exact K01 convergence and homogeneous BGK arguments remain conditional local prerequisites."
+              }
+            },
+            {
+              "name": "Sections 2.4.1–2.4.2, printed pp. 35–42; number density, mass density, mean velocity, pressure tensor, and ideal-fluid moments.",
+              "disposition": "included",
+              "item": "def-fd-physical-kinetic-observables",
+              "source_review": {
+                "read_extent": "Sections 2.4.1–2.4.2, printed pp. 35–42; number density, mass density, mean velocity, pressure tensor, and ideal-fluid moments.",
+                "supports": "Supports the physical meanings and moment conventions; the item supplies explicit SI units and velocity-space normalization.",
+                "limitations": "The source is used for physical context; the exact K01 convergence and homogeneous BGK arguments remain conditional local prerequisites."
+              }
+            },
+            {
+              "name": "Section 2.3, printed pp. 32–35; Boltzmann H-theorem derivation and its molecular-chaos premise.",
+              "disposition": "included",
+              "item": "pthm-fd-boltzmann-entropy",
+              "source_review": {
+                "read_extent": "Section 2.3, printed pp. 32–35; Boltzmann H-theorem derivation and its molecular-chaos premise.",
+                "supports": "Supports the H-theorem sign mechanism; local production is proved in the batch-26 local balance item and the K01 supplier is used only for its global identity.",
+                "limitations": "The source is used for physical context; no many-particle entropy theorem or empirical validity is claimed."
+              }
+            },
+            {
+              "name": "Section 2.4.2, printed pp. 41–43; local Maxwellian, ideal-gas pressure, and Euler reduction, with the streaming-equation qualification.",
+              "disposition": "included",
+              "item": "pthm-fd-ideal-gas-euler-interface",
+              "source_review": {
+                "read_extent": "Section 2.4.2, printed pp. 41–43; local Maxwellian, ideal-gas pressure, and Euler reduction, with the streaming-equation qualification.",
+                "supports": "Supports local-Maxwellian Euler interpretation; it does not prove the strong convergence hypothesis.",
+                "limitations": "The source is used for physical context; the exact K01 convergence and homogeneous BGK arguments remain conditional local prerequisites."
+              }
+            },
+            {
+              "name": "Section 2.5.1, printed pp. 45–46; the relaxation-time approximation and its explicit non-exactness qualification.",
+              "disposition": "included",
+              "item": "post-fd-bgk-relaxation",
+              "source_review": {
+                "read_extent": "Section 2.5.1, printed pp. 45–46; the relaxation-time approximation and its explicit non-exactness qualification.",
+                "supports": "Supports the simplified moment-preserving local-Maxwellian BGK model; it is an adopted phenomenological postulate.",
+                "limitations": "The source is used for physical context; the exact K01 convergence and homogeneous BGK arguments remain conditional local prerequisites."
+              }
+            },
+            {
+              "name": "Section 2.5.1, printed pp. 45–46; relaxation-time approximation and the warning that it is not exact.",
+              "disposition": "included",
+              "item": "pthm-fd-bgk-equilibration",
+              "source_review": {
+                "read_extent": "Section 2.5.1, printed pp. 45–46; relaxation-time approximation and the warning that it is not exact.",
+                "supports": "Supports BGK model scope and approximation caveat; the exact homogeneous solution is conditionally proved from the planned K01 K4 argument.",
+                "limitations": "The source is used for physical context; the exact K01 convergence and homogeneous BGK arguments remain conditional local prerequisites."
+              }
+            },
+            {
+              "name": "Section 2.3, printed pp. 32–35; local entropy balance and H-theorem sign mechanism.",
+              "disposition": "included",
+              "item": "pthm-fd-local-boltzmann-h-balance",
+              "source_review": {
+                "read_extent": "Section 2.3, printed pp. 32–35; local entropy balance and H-theorem sign mechanism.",
+                "supports": "Supports the local entropy-balance and H-theorem mechanism; the authored proof retains the K02 collision-domain and integrability hypotheses.",
+                "limitations": "The source supplies physical context, not the independent K01 readiness record or model acceptance."
+              }
+            }
+          ],
+          "locator": "Sections 2.2–2.2.3; the Boltzmann collision model, detailed balance, and the one-sided molecular-chaos assumption.; Sections 2.4.1–2.4.2, printed pp. 35–42; number density, mass density, mean velocity, pressure tensor, and ideal-fluid moments.; Section 2.3, printed pp. 32–35; Boltzmann H-theorem derivation and its molecular-chaos premise.; Section 2.4.2, printed pp. 41–43; local Maxwellian, ideal-gas pressure, and Euler reduction, with the streaming-equation qualification.; Section 2.5.1, printed pp. 45–46; the relaxation-time approximation and its explicit non-exactness qualification.; Section 2.5.1, printed pp. 45–46; relaxation-time approximation and the warning that it is not exact.",
+          "recovery_attempts": [
+            {
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "at": "2026-10-22T14:58:59.206Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:58:59.206Z",
+            "bytes": 753477,
+            "sha256_16": "679d3311f627e2f3",
+            "kind": "pdf",
+            "pages": 39
+          }
+        },
+        {
+          "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 10",
+          "kind": "lecture-notes",
+          "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ae32d4e53c9fa0bee4171378caa4ea84_MIT8_333F13_Lec10.pdf",
+          "original_url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ae32d4e53c9fa0bee4171378caa4ea84_MIT8_333F13_Lec10.pdf",
+          "contents": [
+            {
+              "name": "Section III.G, printed pp. 64–67; collision moments, pressure tensor, internal kinetic energy, and heat flux.",
+              "disposition": "included",
+              "item": "def-fd-physical-kinetic-observables",
+              "source_review": {
+                "read_extent": "Section III.G, printed pp. 64–67; collision moments, pressure tensor, internal kinetic energy, and heat flux.",
+                "supports": "Supports the physical meanings and moment conventions; the item supplies explicit SI units and velocity-space normalization.",
+                "limitations": "The notes use momentum-space notation in places; the local items define velocity-space f and SI units directly."
+              }
+            }
+          ],
+          "locator": "Section III.G, printed pp. 64–67; collision moments, pressure tensor, internal kinetic energy, and heat flux.",
+          "recovery_attempts": [
+            {
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ae32d4e53c9fa0bee4171378caa4ea84_MIT8_333F13_Lec10.pdf",
+              "at": "2026-10-22T14:58:59.495Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:58:59.495Z",
+            "bytes": 137512,
+            "sha256_16": "f6fc89be46bb0b58",
+            "kind": "pdf",
+            "pages": 5
+          }
+        },
+        {
+          "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 9",
+          "kind": "lecture-notes",
+          "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ce250b44390106351cb97aafb0060ca7_MIT8_333F13_Lec9.pdf",
+          "original_url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ce250b44390106351cb97aafb0060ca7_MIT8_333F13_Lec9.pdf",
+          "contents": [
+            {
+              "name": "Section III.E, printed pp. 56–57; complete H-theorem symmetrization and sign argument.",
+              "disposition": "included",
+              "item": "pthm-fd-boltzmann-entropy",
+              "source_review": {
+                "read_extent": "Section III.E, printed pp. 56–57; complete H-theorem symmetrization and sign argument.",
+                "supports": "Supports the H-theorem sign mechanism; local production is proved in the batch-26 local balance item and the K01 supplier is used only for its global identity.",
+                "limitations": "The source is used for physical context; no many-particle entropy theorem or empirical validity is claimed."
+              }
+            },
+            {
+              "name": "Section III.E, printed pp. 56–57; local H balance, collision symmetrization and production sign.",
+              "disposition": "included",
+              "item": "pthm-fd-local-boltzmann-h-balance",
+              "source_review": {
+                "read_extent": "Section III.E, printed pp. 56–57; local H balance, collision symmetrization and production sign.",
+                "supports": "Supports the local H-balance mechanism and entropy-production sign; the authored proof applies the exact K02 symmetric weak measure directly.",
+                "limitations": "The source uses its own binary cross-section representation; no many-particle derivation is claimed."
+              }
+            }
+          ],
+          "locator": "Section III.E, printed pp. 56–57; complete H-theorem symmetrization and sign argument.",
+          "recovery_attempts": [
+            {
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/ce250b44390106351cb97aafb0060ca7_MIT8_333F13_Lec9.pdf",
+              "at": "2026-10-22T14:58:59.763Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:58:59.763Z",
+            "bytes": 179002,
+            "sha256_16": "7ec312ab5d9c772a",
+            "kind": "pdf",
+            "pages": 9
+          }
+        },
+        {
+          "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 11",
+          "kind": "lecture-notes",
+          "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/7b163cc0ea1359b70b018a1415399d64_MIT8_333F13_Lec11.pdf",
+          "original_url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/7b163cc0ea1359b70b018a1415399d64_MIT8_333F13_Lec11.pdf",
+          "contents": [
+            {
+              "name": "Section III.H, printed pp. 67–68; local Maxwellian moments and zeroth-order fluid equations.",
+              "disposition": "included",
+              "item": "pthm-fd-ideal-gas-euler-interface",
+              "source_review": {
+                "read_extent": "Section III.H, printed pp. 67–68; local Maxwellian moments and zeroth-order fluid equations.",
+                "supports": "Supports local-Maxwellian Euler interpretation; it does not prove the strong convergence hypothesis.",
+                "limitations": "The source presents zeroth-order local equilibrium as an approximation; it does not prove weighted-L1 kinetic convergence."
+              }
+            }
+          ],
+          "locator": "Section III.H, printed pp. 67–68; local Maxwellian moments and zeroth-order fluid equations.",
+          "recovery_attempts": [
+            {
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/7b163cc0ea1359b70b018a1415399d64_MIT8_333F13_Lec11.pdf",
+              "at": "2026-10-22T14:59:00.020Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:59:00.020Z",
+            "bytes": 191783,
+            "sha256_16": "ea7f283408f899e3",
+            "kind": "pdf",
+            "pages": 8
+          }
+        },
+        {
+          "title": "François Golse and C. David Levermore, Fluid Dynamics from Kinetic Equations",
+          "kind": "lecture-slides",
+          "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+          "original_url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+          "contents": [
+            {
+              "name": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; local Maxwellian relaxation with positive relaxation time.",
+              "disposition": "included",
+              "item": "post-fd-bgk-relaxation",
+              "source_review": {
+                "read_extent": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; local Maxwellian relaxation with positive relaxation time.",
+                "supports": "Supports the simplified moment-preserving local-Maxwellian BGK model; it is an adopted phenomenological postulate.",
+                "limitations": "The source supports the local-Maxwellian BGK model form, not the exact K01 homogeneous solution or entropy estimate."
+              }
+            },
+            {
+              "name": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; moment-preserving local-Maxwellian relaxation model.",
+              "disposition": "included",
+              "item": "pthm-fd-bgk-equilibration",
+              "source_review": {
+                "read_extent": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; moment-preserving local-Maxwellian relaxation model.",
+                "supports": "Supports BGK model scope and approximation caveat; the exact homogeneous solution is conditionally proved from the planned K01 K4 argument.",
+                "limitations": "The source supports the local-Maxwellian BGK model form, not the exact K01 homogeneous solution or entropy estimate."
+              }
+            }
+          ],
+          "locator": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; local Maxwellian relaxation with positive relaxation time.; Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; moment-preserving local-Maxwellian relaxation model.",
+          "recovery_attempts": [
+            {
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+              "at": "2026-10-22T14:59:02.114Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:59:02.114Z",
+            "bytes": 125447,
+            "sha256_16": "112869bd2084b535",
+            "kind": "pdf",
+            "pages": 38
+          }
+        }
+      ]
+    },
+    {
+      "page": "fd-k02-examples",
+      "sources": [
+        {
+          "title": "François Golse and C. David Levermore, Fluid Dynamics from Kinetic Equations",
+          "kind": "lecture-slides",
+          "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+          "original_url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+          "contents": [
+            {
+              "name": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; moment-preserving Maxwellian relaxation.",
+              "disposition": "included",
+              "item": "texp-fd-bgk-preparation",
+              "source_review": {
+                "read_extent": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; moment-preserving Maxwellian relaxation.",
+                "supports": "Supports the BGK model context only; the finite-cube preparation and its moments are proved in the item.",
+                "limitations": "The source supports the local-Maxwellian BGK model form, not the exact K01 homogeneous solution or entropy estimate."
+              }
+            }
+          ],
+          "locator": "Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29; moment-preserving Maxwellian relaxation.",
+          "recovery_attempts": [
+            {
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf",
+              "at": "2026-10-22T14:59:04.198Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:59:04.198Z",
+            "bytes": 125447,
+            "sha256_16": "112869bd2084b535",
+            "kind": "pdf",
+            "pages": 38
+          }
+        },
+        {
+          "title": "David Tong, Lectures on Kinetic Theory, Chapter 2",
+          "kind": "lecture-notes",
+          "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+          "original_url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+          "contents": [
+            {
+              "name": "Section 2.5.1, printed pp. 45–46; the phenomenological relaxation-time qualification.",
+              "disposition": "included",
+              "item": "texp-fd-bgk-preparation",
+              "source_review": {
+                "read_extent": "Section 2.5.1, printed pp. 45–46; the phenomenological relaxation-time qualification.",
+                "supports": "Supports the BGK model context only; the finite-cube preparation and its moments are proved in the item.",
+                "limitations": "The source is used for physical context; the exact K01 convergence and homogeneous BGK arguments remain conditional local prerequisites."
+              }
+            }
+          ],
+          "locator": "Section 2.5.1, printed pp. 45–46; the phenomenological relaxation-time qualification.",
+          "recovery_attempts": [
+            {
+              "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+              "at": "2026-10-22T14:59:05.685Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-22T14:59:05.685Z",
+            "bytes": 753477,
+            "sha256_16": "679d3311f627e2f3",
+            "kind": "pdf",
+            "pages": 39
+          }
+        }
+      ]
+    }
+  ],
+  "owner_resolution": {
+    "at": "2026-10-22T15:58:16.919Z",
+    "evidence": "Owner resolved the wrong-category path hold: canonical mathematical suppliers are library/fluid-dynamics-mathematics/fd-k01.md and fd-k01-examples.md. Actual page IDs, mathematical library and inventories match the completed batch25 manifest (10 A and 3 B). No duplicate physical pages or supplier proof acceptance is created. See research/fluid-dynamics-all-47-2026-10-23-owner-completed-consumer-resolution/review.json."
+  }
+}

@@ -1,0 +1,1564 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "17",
+  "level": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-periodic-fourier-sobolev-spaces",
+    "def-fd-projected-no-slip-stokes-space",
+    "lem-fd-rectangular-test-divergence-inverse",
+    "lem-fd-periodic-fourier-embedding-products",
+    "def-fd-periodic-leray-pressure-maps",
+    "lem-fd-periodic-tame-transport-commutator",
+    "thm-fd-periodic-pressure-recovery",
+    "lem-fd-zero-trace-directional-poincare",
+    "thm-fd-projected-stationary-stokes",
+    "lem-fd-given-smooth-solutions-difference-energy",
+    "thm-fd-rectangular-no-slip-stokes-velocity-pressure",
+    "ex-fd-single-mode-pressure",
+    "rem-fd-stokes-pressure-prerequisite"
+  ],
+  "contracts": {
+    "def-fd-periodic-fourier-sobolev-spaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Coordinatewise integer parts give unique representatives in $[0,1)^n$, and the continuous quotient map sends the compact cube $[0,1]^n$ onto $\\mathbb T^n$. Compactness of the cube follows from [[thm-heine-borel-r]] and [[thm-finite-products-of-compact-spaces]], and compactness of its image follows from [[thm-compactness-under-continuous-maps]]. Preimages of Borel sets are Borel; disjoint preimages and countable additivity make the displayed set function a measure, and the box formula gives total mass one. The integral identity follows from indicators, increasing simple approximation and decomposition exactly as in one dimension. For translation invariance, discard the integer parts of the translation vector, split each coordinate of $[0,1)^n$ at its fractional part, and translate the resulting $2^n$ disjoint half-open boxes by integer vectors to partition the translated cube. The periodic preimage set is unchanged by these integer vectors; finite additivity and Lebesgue translation invariance give the same measure. Applying the indicator identity, simple approximation and decomposition gives the integral formula on any translated cube. The coordinate projections induce a continuous bijection $\\Phi:\\mathbb T^n\\to(\\mathbb R/\\mathbb Z)^n$ by the universal property. Its domain is compact by the preceding check, while its codomain is a finite product of Hausdorff spaces and hence Hausdorff ([[lem-products-preserve-t0-t1-and-hausdorff]]); the continuous-bijection theorem therefore makes $\\Phi$ a homeomorphism. Thus $\\mathbb T^n$ carries the finite product topology ([[def-product-topology]], [[thm-finite-products-of-compact-spaces]], [[thm-compactness-under-continuous-maps]]), and its characters $x\\mapsto\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, are defined on this compact Hausdorff space: replacing representatives by integer vectors leaves the exponential unchanged by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and the trigonometric period. Finite products of the countable base above form a countable rectangular base. Hence every product-open set is a countable union of Borel rectangles. Conversely coordinate projections are continuous, so Borel rectangles are Borel in the product. Thus the product Borel sigma-algebra equals the Borel sigma-algebra of $\\mathbb T^n$. On a product $A_0\\times\\cdots\\times A_{n-1}$ of Borel subsets of the factors, the defining fundamental-domain formula and repeated application of [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] give $m_{\\mathbb T^n}(A_0\\times\\cdots\\times A_{n-1})=\\prod_jm_{\\mathbb T}(A_j)$, so $m_{\\mathbb T^n}$ agrees on every measurable rectangle with the product measure $m_{\\mathbb T}\\times\\cdots\\times m_{\\mathbb T}$ ([[def-product-measure-on-sigma-finite-spaces]]); both are probability measures, and uniqueness of the product measure on sigma-finite spaces identifies them on the entire Borel sigma-algebra ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). Fubini's theorem then computes iterated integrals of $L^1$ functions on $\\mathbb T^n$ ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fourier-coefficients-and-trigonometric-polynomials",
+          "source_section": "Definition",
+          "quote": "**Trigonometric polynomials.** A **trigonometric polynomial** on $\\mathbb T$ is a finite complex linear combination of characters, $p=\\sum_{k\\in F}c_ke_k$, for a finite $F\\subseteq\\mathbb Z$ and scalars $c_k\\in\\mathbb C$. The set of all trigonometric polynomials is the span of $\\{e_k:k\\in\\mathbb Z\\}$; it is closed under addition, scalar multiplication, multiplication and complex conjugation (by the identities for $e_ke_l$ and $\\overline{e_k}$), and it contains $e_0=1$. Nothing is claimed here about uniqueness of the coefficients in an expansion, nor about the size of $\\widehat p$; those are properties of the characters proved below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert space $L^2(\\mathbb T^n)$; 2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$; 3. consequently the Fourier expansion $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$ hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and 4. the Fourier coefficient map is a surjective linear isometry of $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under $x=2\\pi y$, normalized measure on $\\mathbb T^d$ pushes forward to $(2\\pi)^{-d}dx$ on $Q_d$, while $e^{2\\pi i k\\cdot y}$ becomes $e^{ik\\cdot x}$. Thus Fourier coefficients and the componentwise $L^2$ inner product are unchanged by this rescaling.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F4] to each of the $N$ components after this rescaling. The coefficient map identifies scalar $L^2(Q_d)$ isometrically with $\\ell^2(\\mathbb Z^d)$; summing the component identities gives the vector-valued coefficient isometry. The Countable Choice hypothesis is exactly [F1].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Since $w_k^{2s}>0$, completion of finite symmetric coefficient arrays is the weighted $\\ell^2$ space: truncating to $|k|_\\infty\\le M$ converges by convergence of the defining nonnegative series. Conjugate symmetry is preserved under these symmetric cutoffs and yields real representatives by uniqueness of Fourier synthesis. For $s\\ge0$, $w_k^{2s}\\ge1$, so the coefficient sequence is in $\\ell^2$ and [F4] gives its unique $L^2$ representative. For $s<0$ this argument gives only the weighted coefficient completion and makes no $L^2$ claim.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: setting all Fourier coefficients to zero gives the zero field and zero weighted norm; the s≥0 representative is zero by the coefficient isometry."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: s=0 is included in the nonnegative-order L2 representative clause; negative orders remain coefficient completions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 applies the finite-torus basis theorem under the explicitly stated Countable Choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single conjugate-symmetric mode pair",
+          "input": "Coefficients a at k and conjugate(a) at -k, all other coefficients zero.",
+          "check": "A finite symmetric cutoff is exact; Parseval gives the same L2 norm and the synthesized polynomial is real.",
+          "disposition": "checked directly from the coefficient formula and conjugate symmetry."
+        }
+      ],
+      "risk_review": "The key risks are normalization drift under x=2πy, conjugate-symmetry realness, and incorrectly assigning L2 representatives to negative-order completions; the proof handles each explicitly."
+    },
+    "def-fd-projected-no-slip-stokes-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function > (Choice function).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "The real and complex $L^p$ classes use the conventions in The space $L^p(\\mu)$ as the quotient by null functions and Complex Lp classes and Euclidean test-function conventions. Their quotient norm values are supplied by The $L^p$ norm descends to the quotient and makes $L^p$ a normed space for $1 \\le p \\le \\infty$ for real scalars and Complex Holder, Minkowski, and the quotient norm for complex scalars.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sobolev-spaces-are-banach-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, used to invoke the published real and complex $L^p$ completeness results through their Countable-Choice interface. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, let $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $W^{k,p}(\\Omega;\\mathbb K)$, equipped with the displayed norm of [[def-sobolev-space-wkp-and-its-norm]], is a complete normed space over $\\mathbb K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "which is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness makes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square root, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and $\\langle v,v\\rangle=\\|v\\|^2$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] and [F3], the real $W^{1,2}(\\Omega;\\mathbb R^d)$ norm is complete under the stated AC assumption. Its closed linear subspace $H_0^1$, defined by norm closure, is therefore complete in the inherited inner product from [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each fixed $\\phi\\in C_c^\\infty(\\Omega)$ the functional $v\\mapsto\\int_\\Omega v\\cdot\\nabla\\phi$ is continuous in the $H^1$ norm, since its absolute value is at most $\\|v\\|_{L^2}\\|\\nabla\\phi\\|_{L^2}$. Its kernel is closed; the intersection of these kernels is exactly $V$. Thus $V$ is a closed real linear subspace of $H_0^1$ and is complete.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The inherited pairing is positive definite and complete on $V$, so [F5] makes $V$ a real Hilbert space. The only boundary condition used is the defining closure $H_0^1$; no converse density or arbitrary-domain trace theorem has been invoked.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero smooth field lies in the closure and satisfies every divergence test."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element cardinality parameter or one-dimensional instance in this formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter endpoint is part of this statement; all strict domain and regularity hypotheses are left unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the Sobolev completeness supplier with the explicitly stated full AC hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": "The key risks are silently weakening full AC in Sobolev completeness or identifying closure-based H0^1 with a trace characterization on arbitrary open sets; neither is done."
+    },
+    "lem-fd-rectangular-test-divergence-inverse": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each interval, choose an affine copy of the bump in [A1]. Every derivative on $|s|<1$ is the exponential times a finite sum of rational terms with poles of finite order at $|s|=1$; $e^{-1/(1-s^2)}$ tends to zero faster than every such power, so extension by zero is smooth. Its integral is finite and positive, so normalization gives $\\theta_i$. For $d=1$, put $(Rh)(x)=\\int_{a_1}^x h(s)\\,ds$. Its derivative is $h$, and it vanishes near both endpoints because $h$ is compactly supported and has total integral zero. Its support is compact inside the interval, and its $j$th derivative is $h^{(j-1)}$ for $j\\ge1$; the zeroth seminorm is bounded by $(b_1-a_1)\\sup|h|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $d>1$, let $x'=(x_2,\\ldots,x_d)$ and $H(x')=\\int_{a_1}^{b_1}h(s,x')\\,ds$. Then $\\int H=0$ by [A2]. Assuming the construction in dimension $d-1$, define\n$$(Rh)_1=\\int_{a_1}^{x_1}\\bigl(h(s,x')-\\theta_1(s)H(x')\\bigr)\\,ds,\\qquad (Rh)_j=\\theta_1(x_1)(R'H)_{j-1}(x')\\quad(j\\ge2).$$\nDifferentiating gives $\\operatorname{div}(Rh)=h-\\theta_1H+\\theta_1H=h$. The first component vanishes both before the support and after its total first-coordinate integral, which is zero; the other components are compactly supported by induction.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If inputs are supported in fixed compact $K$, each coordinate projection $K_i$ is compactly contained in $(a_i,b_i)$. Choose closed intervals $J_i\\Subset(a_i,b_i)$ containing $K_i$ and the support of $\\theta_i$; for the first component also include the interval hull of these supports. The recursive formulas then place every output component inside the fixed compact product $K'=\\prod_iJ_i$. Every output derivative is a finite sum of fixed-bump derivatives times finite-coordinate integrals of derivatives of $h$ or its marginals. Such integrals have sup norm at most the interval length times the integrand sup norm, and differentiation in other coordinates commutes with integration. Induction therefore bounds each output seminorm by a constant times finitely many input seminorms. This proves fixed-support continuity.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.2",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: h=0 gives H=0 and the displayed linear recursive construction gives R0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter endpoint is part of this statement; all strict domain and regularity hypotheses are left unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The local argument makes no selection from a family of nonempty sets; any background assumption is stated separately."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional derivative test",
+          "input": "For any η∈C_c∞((a,b)), set h=η' and R h(x)=∫_a^x h(s)ds.",
+          "check": "∫h=0 and Rh=η because η vanishes near a.",
+          "disposition": "direct FTC check."
+        }
+      ],
+      "risk_review": "The key risks are losing compact support at rectangle faces, missing the mean-zero compatibility condition, or claiming continuity without fixed-support seminorm bounds."
+    },
+    "lem-fd-periodic-fourier-embedding-products": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The number of lattice points in the shell $n\\le|k|<n+1$ is at most $C_d(n+1)^{d-1}$, by covering each point with a disjoint unit cube and bounding the volume of a shell of fixed enlarged width. Hence $\\sum_k w_k^{-2\\alpha}<\\infty$ whenever $\\alpha>d/2$. Cauchy–Schwarz gives\n$\\sum_k |k|^j|\\widehat q(k)|\\le(\\sum_k |k|^{2j}w_k^{-2\\sigma})^{1/2}\\|q\\|_{H^\\sigma}\\le C\\|q\\|_{H^\\sigma}$\nwhen $\\sigma>j+d/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The derivative Fourier series through order $j$ are absolutely and uniformly convergent by step 1.1. Their partial sums are derivatives of finite Fourier sums; the one-dimensional fundamental theorem of calculus in each coordinate identifies the uniform limits successively as the classical derivatives of the limit. This proves the $C^j$ representative and bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For polynomials, $\\widehat{fg}(k)=\\sum_\\ell\\widehat f(k-\\ell)\\widehat g(\\ell)$. The weight inequality $w_{k+\\ell}^{\\sigma}\\le C_\\sigma(w_k^\\sigma+w_\\ell^\\sigma)$ follows from $w_{k+\\ell}\\le w_k+w_\\ell$ and $(a+b)^\\sigma\\le C_\\sigma(a^\\sigma+b^\\sigma)$. Discrete Young, obtained by Minkowski's inequality on finite translates, yields\n$\\|fg\\|_{H^\\sigma}\\le C(\\|f\\|_{H^\\sigma}\\|\\widehat g\\|_{\\ell^1}+\\|\\widehat f\\|_{\\ell^1}\\|g\\|_{H^\\sigma})\\le C\\|f\\|_{H^\\sigma}\\|g\\|_{H^\\sigma}$,\nsince step 1.1 with $j=0$ bounds both coefficient $\\ell^1$ norms.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Finite Fourier sums are dense by the completion in [F1], so the polynomial product estimate extends uniquely by Cauchy convergence to $H^\\sigma$. Since step 1.1 also gives convergence in $C^0$, this extended product agrees pointwise with multiplication of the continuous representatives. Applying the scalar estimate to finitely many components proves the vector and tensor versions.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: if q=0 or either factor is zero, the stated norm bounds hold with both relevant sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the embedding and algebra thresholds are strict (>); equality at σ=j+d/2 or σ=d/2 is not claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.4 retain Countable Choice from the coefficient completion while all estimates are proved locally."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two finite modes",
+          "input": "f=e^{ix_1}, g=e^{ix_2} for d≥2.",
+          "check": "The product has exactly the mode e^{i(x_1+x_2)} and the convolution formula has one nonzero summand.",
+          "disposition": "finite coefficient identity; does not replace the dimension-uniform norm estimate."
+        }
+      ],
+      "risk_review": "The key risks are an incorrect lattice-shell count, endpoint use at σ=d/2, and confusing the extended product with pointwise multiplication; all are addressed by the estimates and uniform convergence."
+    },
+    "def-fd-periodic-leray-pressure-maps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $k\\ne0$, $P_k$ is real symmetric, $P_k^2=P_k$, and its range is $k^\\perp$; $P_0=I$. Thus each multiplier is an orthogonal projection of norm at most one. The scalar multiplier defining $Q$ has absolute value at most $\\sum_{i,j}|k_i k_j|/|k|^2\\le d$, so both maps preserve every weighted $\\ell^2$ norm up to a dimension-dependent constant.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $P_{-k}=P_k$ and the coefficient multiplier for $Q$ is real and even in $k$, both maps preserve conjugate symmetry and hence real fields. Multipliers commute with $ik_j$, so $P$ commutes with weak derivatives. For $k\\ne0$, the $i$th component of $\\nabla QF$ has coefficient\n$-i\\sum_{a,j} k_i k_a k_j|k|^{-2}\\widehat F_{aj}(k)$, which is exactly the $i$th coefficient of $-(I-P_k)\\widehat{\\operatorname{div}F}(k)$. At $k=0$ both sides vanish.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: both multipliers are linear, so zero coefficients map to zero, including at k=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the degenerate zero frequency is explicitly assigned P_0=I and QF̂(0)=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter endpoint is part of this statement; all strict domain and regularity hypotheses are left unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition retains Countable Choice as required by the Fourier coefficient space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero and coordinate frequencies",
+          "input": "At k=0; at k=e_1 apply P_k to e_1 and e_2; take F_{11} supported at k=e_1.",
+          "check": "P_0=I, P_{e1}e_1=0, P_{e1}e_2=e_2, and QF has coefficient -F̂_{11}(e_1).",
+          "disposition": "direct matrix and multiplier calculation."
+        }
+      ],
+      "risk_review": "The key risks are the zero-frequency convention, the sign of the pressure multiplier, and confusing a torus projection with a wall pressure solver."
+    },
+    "lem-fd-periodic-tame-transport-commutator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-periodic-fourier-embedding-products",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$ and use $H^\\sigma(Q_d)$ with the normalized measure and weights in the Definition. For every integer $j\\ge0$ and $\\sigma>j+d/2$, each scalar $q\\in H^\\sigma(Q_d)$ has a $C^j$ representative and $\\|q\\|_{C^j}\\le C_{d,\\sigma,j}\\|q\\|_{H^\\sigma}$. For every $\\sigma>d/2$, pointwise multiplication extends uniquely from trigonometric polynomials to a continuous bilinear map $H^\\sigma\\times H^\\sigma\\to H^\\sigma$ satisfying $\\|fg\\|_{H^\\sigma}\\le C_{d,\\sigma}\\|f\\|_{H^\\sigma}\\|g\\|_{H^\\sigma}$. The assertions extend componentwise to finite-dimensional vector and tensor fields.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a trigonometric polynomial approximation, the $k$th coefficient of the commutator is\n$\\sum_{v+\\ell=k}(w_k^m-w_\\ell^m)\\widehat f(v)i\\ell_j\\widehat g(\\ell)$.\nThe mean-value theorem applied to $x\\mapsto(1+|x|^2)^{m/2}$ gives\n$|w_{\\ell+v}^m-w_\\ell^m|\\le C_m|v|(w_v^{m-1}+w_\\ell^{m-1})$,\nbecause $w_{\\ell+\\theta v}^{m-1}\\le C_m(w_\\ell^{m-1}+w_v^{m-1})$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The first resulting convolution is bounded in $\\ell^2$ by\n$C\\|w^m\\widehat f\\|_2\\sum_\\ell |\\ell|\\,|\\widehat g(\\ell)|$;\nthe second is bounded by\n$C\\sum_v|v|,|\\widehat f(v)|\\|w^m\\widehat g\\|_2$.\nCauchy–Schwarz and $\\sum_k |k|^2w_k^{-2s}<\\infty$ for $s>1+d/2$ bound these sums by $C\\|g\\|_{H^s}$ and $C\\|f\\|_{H^s}$, respectively. The required strict inequality holds since $s\\ge4$ and $d\\le3$. Discrete Young then gives the claimed bound for polynomials.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Smooth Fourier truncations converge in each displayed Sobolev norm, so the polynomial estimate passes to smooth $f,g$ by continuity of multiplication and Fourier multipliers. The strict $s\\ge4>d/2+1$ condition also agrees with the $C^1$ embedding in [F2]; no endpoint commutator estimate is used.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: zero f or zero g makes every term in the commutator coefficient sum vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the integer endpoint m=s=4 is included by m≥s≥4; no fractional or lower-order endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and step 1.3 retain Countable Choice through the Fourier completion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-mode coefficient identity",
+          "input": "f=e^{iv·x}, g=e^{iℓ·x}.",
+          "check": "The commutator has only frequency v+ℓ and coefficient iℓ_j(w_{v+ℓ}^m-w_ℓ^m), exactly the displayed convolution formula.",
+          "disposition": "direct finite Fourier substitution."
+        }
+      ],
+      "risk_review": "The key risks are reversing the Fourier difference, dropping the derivative factor, or asserting an endpoint estimate; the mean-value bound and stated m≥s≥4 resolve these."
+    },
+    "thm-fd-periodic-pressure-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-periodic-fourier-embedding-products",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$ and use $H^\\sigma(Q_d)$ with the normalized measure and weights in the Definition. For every integer $j\\ge0$ and $\\sigma>j+d/2$, each scalar $q\\in H^\\sigma(Q_d)$ has a $C^j$ representative and $\\|q\\|_{C^j}\\le C_{d,\\sigma,j}\\|q\\|_{H^\\sigma}$. For every $\\sigma>d/2$, pointwise multiplication extends uniquely from trigonometric polynomials to a continuous bilinear map $H^\\sigma\\times H^\\sigma\\to H^\\sigma$ satisfying $\\|fg\\|_{H^\\sigma}\\le C_{d,\\sigma}\\|f\\|_{H^\\sigma}\\|g\\|_{H^\\sigma}$. The assertions extend componentwise to finite-dimensional vector and tensor fields.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-periodic-leray-pressure-maps",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(0)=a(0)$ and $(Pa)(k)=P_ka(k)$ for $k\\ne0$, where $P_k=I-kk^{\\mathsf T}/|k|^2$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. These formulas define real-preserving bounded maps on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with derivatives. With $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, they satisfy $\\nabla QF=-(I-P)\\operatorname{div}F$ as Fourier distributions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $s>d/2$, [F3] gives $u\\otimes u\\in H^s$. The bounded map $Q$ in [F4] therefore gives a mean-zero $\\pi=Q(u\\otimes u)\\in H^s$. Also $s-1>d/2$, so [F3] places $u\\cdot\\nabla u$ in $H^{s-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The distributional product rule, justified by smooth Fourier truncation and the $C^1$ convergence supplied by [F3], gives\n$\\operatorname{div}(u\\otimes u)_i=\\sum_j\\partial_j(u_i u_j)=u\\cdot\\nabla u_i+u_i\\operatorname{div}u=u\\cdot\\nabla u_i$.\nApplying the multiplier identity in [F4] yields $\\nabla\\pi=-(I-P)(u\\cdot\\nabla u)$, hence the asserted decomposition.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If another periodic distribution $\\widetilde\\pi$ gives the same decomposition, then $\\nabla(\\widetilde\\pi-\\pi)=0$. For every $k\\ne0$, its Fourier coefficient is annihilated by multiplication by $ik$, and hence is zero; only the constant mode may remain. Both pressures have zero mean, so the constant is zero.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2: u=0 yields u⊗u=0, π=0, and the projected identity 0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the regularity threshold s>d/2+1 is strict, so the equality endpoint is outside the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement retains Countable Choice and steps 1.1–1.3 use only the inspected Fourier interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": "The key risks are the tensor divergence sign, the distributional product rule, and pressure constants; the proof states the convention and restricts uniqueness to mean-zero pressures."
+    },
+    "lem-fd-zero-trace-directional-poincare": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-projected-no-slip-stokes-space",
+          "source_section": "Definition",
+          "quote": "Assume the full Axiom of Choice. Let $d\\ge2$, let $R>0$, and let $\\Omega\\subset(-R,R)^d$ be a nonempty bounded open set. Define $H_0^1(\\Omega;\\mathbb R^d)$ as the closure of $C_c^\\infty(\\Omega;\\mathbb R^d)$ in the real $W^{1,2}$ norm. Define $\\operatorname{div}v=0$ distributionally to mean $\\int_\\Omega v\\cdot\\nabla\\phi=0$ for every $\\phi\\in C_c^\\infty(\\Omega)$, and set $V=\\{v\\in H_0^1(\\Omega;\\mathbb R^d):\\operatorname{div}v=0\\}$. Equip $V$ with the inherited $H^1$ inner product $\\int_\\Omega(v\\cdot w+\\nabla v:\\nabla w)$. The phrase no-slip here means membership in this closure; no trace characterization on arbitrary $\\Omega$ is part of the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $v\\in C_c^\\infty(\\Omega;\\mathbb R^d)$, extend $v$ by zero to the cube. For each component and fixed $x'=(x_2,\\ldots,x_d)$, the fundamental theorem of calculus gives $v(x_1,x')=\\int_{-R}^{x_1}\\partial_1v(t,x')dt$. Cauchy–Schwarz bounds its squared norm by $2R\\int_{-R}^R|\\partial_1v(t,x')|^2dt$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Integrating the preceding bound over $x_1\\in(-R,R)$ and $x'$ yields $\\|v\\|_2^2\\le(2R)^2\\|\\partial_1v\\|_2^2$. The pointwise matrix norm inequality $|\\partial_1v|\\le|\\nabla v|$ gives the second inequality.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By the closure in [F2], choose compactly supported smooth $v_n\\to v$ in $H^1$. Then both $v_n\\to v$ in $L^2$ and $\\partial_1v_n\\to\\partial_1v$ in $L^2$, so the inequalities pass to the limit.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3: v=0 belongs to the closure and both sides of the inequality vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element cardinality parameter or one-dimensional instance in this formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter endpoint is part of this statement; all strict domain and regularity hypotheses are left unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The local argument makes no selection from a family of nonempty sets; any background assumption is stated separately."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": "The key risks are assuming a regular boundary or using a trace theorem; zero extension follows only from the H0^1 closure and the proof uses that definition."
+    },
+    "thm-fd-projected-stationary-stokes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function > (Choice function).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-projected-no-slip-stokes-space",
+          "source_section": "Definition",
+          "quote": "Assume the full Axiom of Choice. Let $d\\ge2$, let $R>0$, and let $\\Omega\\subset(-R,R)^d$ be a nonempty bounded open set. Define $H_0^1(\\Omega;\\mathbb R^d)$ as the closure of $C_c^\\infty(\\Omega;\\mathbb R^d)$ in the real $W^{1,2}$ norm. Define $\\operatorname{div}v=0$ distributionally to mean $\\int_\\Omega v\\cdot\\nabla\\phi=0$ for every $\\phi\\in C_c^\\infty(\\Omega)$, and set $V=\\{v\\in H_0^1(\\Omega;\\mathbb R^d):\\operatorname{div}v=0\\}$. Equip $V$ with the inherited $H^1$ inner product $\\int_\\Omega(v\\cdot w+\\nabla v:\\nabla w)$. The phrase no-slip here means membership in this closure; no trace characterization on arbitrary $\\Omega$ is part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-zero-trace-directional-poincare",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $d\\ge2$, $R>0$, and let $\\Omega\\subset(-R,R)^d$ be bounded and open. For every $v\\in H_0^1(\\Omega;\\mathbb R^d)$, $$\\|v\\|_{L^2(\\Omega)}\\le2R\\|\\partial_1v\\|_{L^2(\\Omega)}\\le2R\\|\\nabla v\\|_{L^2(\\Omega)}.$$ Here $H_0^1$ is the closure of compactly supported smooth fields in the Sobolev norm.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riesz-representation-for-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ (The dual space X^* of a normed space and its dual norm). Then there is a unique $y\\in H$ with",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $V$ is complete in its $H^1$ norm. The estimate in [F3] shows $\\|v\\|_2\\le2R\\|\\nabla v\\|_2$, so the gradient norm is equivalent to the $H^1$ norm on $V$ and is complete. Thus $(v,w)_V=\\int_\\Omega\\nabla v:\\nabla w$ is a real Hilbert inner product.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The functional $F(v)=\\int f\\cdot v$ is linear and satisfies $|F(v)|\\le\\|f\\|_2\\|v\\|_2\\le2R\\|f\\|_2\\|v\\|_V$. To verify the Countable Choice hypothesis of [F4], take any sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets. Its range $\\mathcal F=\\{X_n:n\\in\\mathbb N\\}$ is a family of nonempty sets, so full AC [F1] gives a choice function $g$ on $\\mathcal F$; then $n\\mapsto g(X_n)$ is a selector for the sequence. Riesz [F4] therefore applies to the real Hilbert space from step 1.1 and bounded functional $F$, giving a unique $z\\in V$ with $(z,v)_V=F(v)$; set $u=z/\\mu$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Taking $v=u$ in the variational identity gives $\\mu\\|\\nabla u\\|_2^2=\\int f\\cdot u\\le2R\\|f\\|_2\\|\\nabla u\\|_2$. If the gradient norm is zero, the desired bound is immediate; otherwise divide by $\\mu\\|\\nabla u\\|_2$. If $u_1,u_2$ both solve, their difference tested against itself has zero gradient norm, hence is zero by Poincaré.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.3: f=0 gives the zero Riesz representative and the zero-gradient case is handled before division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element cardinality parameter or one-dimensional instance in this formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: μ>0 is required; the excluded endpoint μ=0 is not covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses full AC to supply the Countable Choice hypothesis of the Hilbert Riesz theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero forcing",
+          "input": "f=0.",
+          "check": "The unique variational solution is u=0 and the stated norm bound has both sides zero.",
+          "disposition": "follows from the Riesz representation and uniqueness proof."
+        }
+      ],
+      "risk_review": "The key risks are the full AC/CC chain, completeness in the gradient norm, and overclaiming pressure recovery; the statement and proof preserve the distinction."
+    },
+    "lem-fd-given-smooth-solutions-difference-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-periodic-leray-pressure-maps",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(0)=a(0)$ and $(Pa)(k)=P_ka(k)$ for $k\\ne0$, where $P_k=I-kk^{\\mathsf T}/|k|^2$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. These formulas define real-preserving bounded maps on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with derivatives. With $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, they satisfy $\\nabla QF=-(I-P)\\operatorname{div}F$ as Fourier distributions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-periodic-fourier-embedding-products",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$ and use $H^\\sigma(Q_d)$ with the normalized measure and weights in the Definition. For every integer $j\\ge0$ and $\\sigma>j+d/2$, each scalar $q\\in H^\\sigma(Q_d)$ has a $C^j$ representative and $\\|q\\|_{C^j}\\le C_{d,\\sigma,j}\\|q\\|_{H^\\sigma}$. For every $\\sigma>d/2$, pointwise multiplication extends uniquely from trigonometric polynomials to a continuous bilinear map $H^\\sigma\\times H^\\sigma\\to H^\\sigma$ satisfying $\\|fg\\|_{H^\\sigma}\\le C_{d,\\sigma}\\|f\\|_{H^\\sigma}\\|g\\|_{H^\\sigma}$. The assertions extend componentwise to finite-dimensional vector and tensor fields.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In case (i), subtract equations and set $w=u-v$ to get $w_t+P(u\\cdot\\nabla w+w\\cdot\\nabla v)=\\nu\\Delta w$. Pair with $w$; [F3] and $Pw=w$ remove $P$, periodic integration and $\\operatorname{div}u=0$ give $\\int(u\\cdot\\nabla w)\\cdot w=0$, and diffusion contributes $-\\nu\\|\\nabla w\\|_2^2$. Thus $(\\|w\\|_2^2)'\\le2\\|\\nabla v\\|_\\infty\\|w\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In case (ii), linearity of $A_j$ gives $w_t+\\sum_jA_j(q)\\partial_jw=-\\sum_jA_j(w)\\partial_jr$, where $w=q-r$. Symmetry implies\n$\\int w^TA_j(q)\\partial_jw=-\\frac12\\int w^T(\\partial_jA_j(q))w$.\nThe fixed linear maps $A_j$ are bounded in finite dimension, so pairing the equation with $w$ yields $(\\|w\\|_2^2)'\\le C(\\|\\nabla q\\|_\\infty+\\|\\nabla r\\|_\\infty)\\|w\\|_2^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In either case, multiplying the differential inequality by its integrating factor proves the corresponding $L^2$ estimate. Weighted coefficient Hölder gives\n$\\sum_kw_k^{2(s-1)}|\\widehat w(k)|^2\\le(\\sum_k|\\widehat w(k)|^2)^{1/s}(\\sum_kw_k^{2s}|\\widehat w(k)|^2)^{(s-1)/s}$.\nTaking square roots and using the common bound $\\|w(t)\\|_{H^s}\\le2M$ proves the stated $H^{s-1}$ estimate with its displayed factor and rate $\\Gamma/(2s)$; no solution is constructed by this comparison.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3: w(0)=0 makes the Grönwall estimate force w(t)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 is included explicitly, and the stated proof estimates remain valid in that one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: interpolation includes the endpoint s=1; both energy estimates hold on the closed time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and step 1.3 retain Countable Choice through the Fourier coefficient convention."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identical solution pair",
+          "input": "u=v in case (i), or q=r in case (ii).",
+          "check": "w=0 and both differential inequalities and interpolation bound hold with equality.",
+          "disposition": "direct substitution."
+        }
+      ],
+      "risk_review": "The key risks are assuming existence, dropping divergence-free or symmetry hypotheses, and losing the interpolation factor; the estimates are conditional and the 2M factor is explicit."
+    },
+    "thm-fd-rectangular-no-slip-stokes-velocity-pressure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-projected-no-slip-stokes-space",
+          "source_section": "Definition",
+          "quote": "Assume the full Axiom of Choice. Let $d\\ge2$, let $R>0$, and let $\\Omega\\subset(-R,R)^d$ be a nonempty bounded open set. Define $H_0^1(\\Omega;\\mathbb R^d)$ as the closure of $C_c^\\infty(\\Omega;\\mathbb R^d)$ in the real $W^{1,2}$ norm. Define $\\operatorname{div}v=0$ distributionally to mean $\\int_\\Omega v\\cdot\\nabla\\phi=0$ for every $\\phi\\in C_c^\\infty(\\Omega)$, and set $V=\\{v\\in H_0^1(\\Omega;\\mathbb R^d):\\operatorname{div}v=0\\}$. Equip $V$ with the inherited $H^1$ inner product $\\int_\\Omega(v\\cdot w+\\nabla v:\\nabla w)$. The phrase no-slip here means membership in this closure; no trace characterization on arbitrary $\\Omega$ is part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-projected-stationary-stokes",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $d\\ge2$, let $R>0$, let $\\Omega\\subset(-R,R)^d$ be nonempty bounded open, let $\\mu>0$, and let $f\\in L^2(\\Omega;\\mathbb R^d)$. There is a unique $u\\in V$ such that $$\\mu\\int_\\Omega\\nabla u:\\nabla v=\\int_\\Omega f\\cdot v\\qquad(v\\in V),$$ where $V$ is the distributionally divergence-free subspace of $H_0^1$ defined above. It satisfies $\\|\\nabla u\\|_2\\le2R\\|f\\|_2/\\mu$. This is a projected variational velocity result; it asserts no pressure, $L^2$ pressure regularity, or classical boundary regularity.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-rectangular-test-divergence-inverse",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $\\Omega=\\prod_{i=1}^d(a_i,b_i)$ be a nonempty finite open rectangle. Write $D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb R)$ and $D_0(\\Omega)=\\{h\\in D(\\Omega):\\int_\\Omega h=0\\}$. For every compact $K\\subset\\Omega$ there is a compact $K'\\subset\\Omega$ such that a linear map $R:D_0(\\Omega)\\to D(\\Omega;\\mathbb R^d)$ sends tests supported in $K$ to fields supported in $K'$, satisfies $\\operatorname{div}(Rh)=h$, and is continuous on each fixed-support test space for the seminorms $\\sup|\\partial^\\alpha h|$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F3] to obtain the unique $u\\in V$ and the stated variational identity and gradient bound. Define the vector distribution $T=f+\\mu\\Delta u$ by\n$\\langle T,\\psi\\rangle=\\int f\\cdot\\psi-\\mu\\int\\nabla u:\\nabla\\psi$.\nThe variational identity shows that $T$ annihilates every compactly supported smooth divergence-free vector field, since each lies in $V$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each interval contains a central compact subinterval. Affinely rescale $b(s)=e^{-1/(1-s^2)}$ on $|s|<1$, extended by zero. Every derivative is the exponential times a finite sum of rational terms with poles of finite order at $|s|=1$, and the exponential tends to zero faster than every such power; thus the extension is smooth. Normalize its positive finite integral and take the product to obtain $\\theta\\in C_c^\\infty(\\Omega)$ with $\\int\\theta=1$. For $\\phi\\in D(\\Omega)$ put $\\phi_0=\\phi-(\\int\\phi)\\theta$ and define $\\langle p,\\phi\\rangle=-\\langle T,R\\phi_0\\rangle$, using [F4]. This is linear; for tests with fixed compact support, $R\\phi_0$ has fixed compact support and seminorms bounded by finitely many seminorms of $\\phi$. Since $T$ is a distribution, $p$ is a distribution and $\\langle p,\\theta\\rangle=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Write $\\ell_1=b_1-a_1$ and $Jg(x_1,x')=\\int_{a_1}^{x_1}g(s,x')\\,ds$. Cauchy–Schwarz and Fubini give $\\|Jg\\|_{L^2(\\Omega)}\\le\\ell_1\\|g\\|_2$, $\\partial_1Jg=g$, and $\\|\\partial_{x_j}Jg\\|_2\\le\\ell_1\\|\\partial_{x_j}g\\|_2$ for $j>1$. For the marginal $H(x')=\\int_{a_1}^{b_1}h(s,x')ds$, they give $\\|H\\|_{H^1(\\Omega')}\\le\\ell_1^{1/2}\\|h\\|_{H^1(\\Omega)}$. Multiplication by the fixed smooth $\\theta_1$ is bounded on $H^1$, by the product rule and boundedness of $\\theta_1,\\theta_1'$. Hence $\\|h-\\theta_1H\\|_{H^1}\\le C\\|h\\|_{H^1}$. Applying the bounds for $J$ to the first component in [F4], and the induction estimate $\\|R'H\\|_{H^1(\\Omega')}\\le C\\|H\\|_{H^1(\\Omega')}$ to the remaining components $\\theta_1R'H$, proves $\\|Rh\\|_{H^1}\\le C_\\Omega\\|h\\|_{H^1}$ by induction on $d$. Also $\\phi_0=\\phi-(\\int\\phi)\\theta$ satisfies $\\|\\phi_0\\|_{H^1}\\le C_\\Omega\\|\\phi\\|_{H^1}$, since $|\\int\\phi|\\le|\\Omega|^{1/2}\\|\\phi\\|_2$. Therefore\n$|\\langle p,\\phi\\rangle|\\le C_\\Omega(\\|f\\|_2+\\mu\\|\\nabla u\\|_2)\\|\\phi\\|_{H^1}$. Density extends $p$ to $(H_0^1)'=H^{-1}$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For compactly supported smooth vector $\\psi$, $\\int\\operatorname{div}\\psi=0$. The field $\\psi-R(\\operatorname{div}\\psi)$ is divergence-free, so [F4] and step 1.1 imply $\\langle T,R(\\operatorname{div}\\psi)\\rangle=\\langle T,\\psi\\rangle$. By the definition of distribution gradient,\n$\\langle\\nabla p,\\psi\\rangle=-\\langle p,\\operatorname{div}\\psi\\rangle=\\langle T,\\psi\\rangle$,\nhence $\\nabla p=T$ and $-\\mu\\Delta u+\\nabla p=f$. If $p_1,p_2$ both work, their difference annihilates $D_0(\\Omega)$ because every such test is a divergence by [F4]; decomposing any test as $\\phi_0+(\\int\\phi)\\theta$ shows $p_1-p_2$ is constant. The construction is linear in $f$ and the displayed bounds prove boundedness into the quotient.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2: f=0 yields u=0, T=0, and the normalized construction gives p=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element cardinality parameter or one-dimensional instance in this formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: μ>0 is required; the excluded endpoint μ=0 is not covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the variational Stokes supplier under full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero forcing",
+          "input": "f=0.",
+          "check": "The variational velocity is u=0, T=0, and the normalized pressure construction gives p=0.",
+          "disposition": "directly follows through proof steps 1.1–1.4."
+        }
+      ],
+      "risk_review": "The key risks are pressure sign, H1 continuity of the divergence inverse, additive constants, and overclaiming L2 or corner regularity; the proof checks each and limits the result to rectangles."
+    },
+    "ex-fd-single-mode-pressure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-periodic-pressure-recovery",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s>d/2+1$, and let $u\\in H^s(Q_d;\\mathbb R^d)$ satisfy $\\operatorname{div}u=0$ distributionally. Then $u\\otimes u\\in H^s$, the mean-zero scalar $\\pi=Q(u\\otimes u)$ belongs to $H^s$, and in $H^{s-1}$, $$P(u\\cdot\\nabla u)=u\\cdot\\nabla u+\\nabla\\pi.$$ Among mean-zero periodic distributions satisfying the identity, this pressure is unique. The formula is a torus pressure recovery result and asserts no wall pressure regularity.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The only nonzero component is $u_1=A\\sin(x_2)$ and it is independent of $x_1$, so $\\operatorname{div}u=\\partial_1u_1=0$. Also $u\\cdot\\nabla u=u_1\\partial_1u=0$. The field is a finite Fourier sum and hence belongs to every $H^s(Q_d)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose any $s>d/2+1$. By [F3], the recovered mean-zero pressure gives the decomposition with left side $P(0)=0$ and convection zero, so $\\nabla\\pi=0$. A periodic distribution with zero gradient has only its zero Fourier mode; mean zero forces that mode to vanish. Thus $\\pi=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–1.2: A=0 gives zero velocity, convection, and mean-zero pressure."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element cardinality parameter or one-dimensional instance in this formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 includes A=0 and direct zero-convection evaluation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter endpoint is part of this statement; all strict domain and regularity hypotheses are left unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.2 invokes pressure recovery under the stated Countable Choice assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "shear mode",
+          "input": "u=A sin(x_2)e_1.",
+          "check": "div u=∂_1u_1=0 and u·∇u=u_1∂_1u=0, so the unique mean-zero pressure is zero.",
+          "disposition": "direct differentiation and the pressure recovery theorem."
+        }
+      ],
+      "risk_review": "The key risks are the component/direction of the shear derivative and implying an unforced viscous solution; the verification computes convection directly and disclaims that conclusion."
+    },
+    "rem-fd-stokes-pressure-prerequisite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-projected-stationary-stokes",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $d\\ge2$, let $R>0$, let $\\Omega\\subset(-R,R)^d$ be nonempty bounded open, let $\\mu>0$, and let $f\\in L^2(\\Omega;\\mathbb R^d)$. There is a unique $u\\in V$ such that $$\\mu\\int_\\Omega\\nabla u:\\nabla v=\\int_\\Omega f\\cdot v\\qquad(v\\in V),$$ where $V$ is the distributionally divergence-free subspace of $H_0^1$ defined above. It satisfies $\\|\\nabla u\\|_2\\le2R\\|f\\|_2/\\mu$. This is a projected variational velocity result; it asserts no pressure, $L^2$ pressure regularity, or classical boundary regularity.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-rectangular-no-slip-stokes-velocity-pressure",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $d\\ge2$, let $\\Omega=\\prod_{i=1}^d(a_i,b_i)\\subset(-R,R)^d$ be a nonempty finite rectangle, let $\\mu>0$, and let $f\\in L^2(\\Omega;\\mathbb R^d)$. The projected variational theorem gives a unique $u\\in V$ with $\\mu\\int\\nabla u:\\nabla v=\\int f\\cdot v$ for all $v\\in V$ and $\\|\\nabla u\\|_2\\le2R\\|f\\|_2/\\mu$. There is a distribution $p\\in H^{-1}(\\Omega):=(H_0^1(\\Omega))'$ such that $-\\mu\\Delta u+\\nabla p=f$ in $D'(\\Omega;\\mathbb R^d)$; it is unique modulo constant distributions. With the quotient norm on $H^{-1}/\\mathbb R$, the map $f\\mapsto(u,[p])$ is bounded and linear. The pressure is not asserted to lie in $L^2$ or to be smooth at rectangle corners.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The conclusion of [F2] names only $u\\in V$, the variational identity, and the gradient estimate; it contains no pressure variable or distributional momentum equation. Thus the projected theorem alone supplies no pressure conclusion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On a finite rectangle, [F3] additionally establishes the distribution equation and an $H^{-1}$ pressure class modulo constants by constructing the pressure from the divergence inverse on mean-zero tests. Its hypotheses include the rectangle and its conclusion is limited to $H^{-1}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The two conclusions therefore justify the distinction stated in the Remark. No step extends the rectangle argument to arbitrary bounded open sets or strengthens $H^{-1}$ to $L^2$; either extension would need an additional proved right-inverse or inf-sup estimate.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formulation fixes a nonempty domain or a fixed nonempty hypothesis class; it contains no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark compares theorem interfaces and has no zero-valued input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element cardinality parameter or one-dimensional instance in this formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate rank, matrix, or singular geometry case occurs in the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter endpoint is part of this statement; all strict domain and regularity hypotheses are left unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The local argument makes no selection from a family of nonempty sets; any background assumption is stated separately."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": "The key risk is reading the projected theorem as a full Stokes pressure theorem; the remark quotes the exact separate conclusions and does not infer a general-domain result."
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "group": "j",
+  "batches": ["18"],
+  "pages_read": ["fd-s02", "fd-s02-examples"],
+  "items_read": [
+    "def-fd-polytropic-symmetric-variables",
+    "def-fd-smooth-wall-exterior-solution-domains",
+    "thm-fd-global-linear-acoustics",
+    "def-fd-flat-channel-domains",
+    "thm-fd-compatible-wall-shear-heat",
+    "lem-fd-polynomial-ode-continuation",
+    "thm-fd-smooth-periodic-incompressible-ivp",
+    "thm-fd-smooth-polytropic-euler-ivp",
+    "ex-fd-compressible-viscous-shear",
+    "ex-fd-periodic-poiseuille-body-force",
+    "ex-fd-couette-vorticity",
+    "rem-fd-general-viscous-wall-ivp-gaps"
+  ],
+  "conventions": [
+    {
+      "convention": "Periodic Fourier calculations use the torus (R/2πZ)^d, probability measure (2π)^(-d) dx, characters exp(ik·x), weights sqrt(1+|k|²), and componentwise weighted coefficient norms. Countable Choice is assumed for the analytic Fourier framework.",
+      "fixed_by": "def-fd-polytropic-symmetric-variables",
+      "matters_for": [
+        "thm-fd-global-linear-acoustics",
+        "thm-fd-smooth-periodic-incompressible-ivp",
+        "thm-fd-smooth-polytropic-euler-ivp"
+      ]
+    },
+    {
+      "convention": "For κ>0 and γ>1, a=(γ−1)/2, p(ρ)=κρ^γ, c(ρ)=sqrt(κγ)ρ^a, and r=c/a. The inverse density map is defined only for r>0; the matrices A_j(r,u)=u_j I+ar(e_0 e_jᵀ+e_j e_0ᵀ) are symmetric and linear.",
+      "fixed_by": "def-fd-polytropic-symmetric-variables",
+      "matters_for": [
+        "thm-fd-smooth-polytropic-euler-ivp",
+        "rem-fd-general-viscous-wall-ivp-gaps"
+      ]
+    },
+    {
+      "convention": "Bounded wall domains have C² boundary and outward unit normal. No-slip, prescribed moving-wall velocity, and impermeability are distinct traces. Exterior domains impose no condition at infinity unless additional solution data explicitly provide one.",
+      "fixed_by": "def-fd-smooth-wall-exterior-solution-domains",
+      "matters_for": ["rem-fd-general-viscous-wall-ivp-gaps"]
+    },
+    {
+      "convention": "Flat channels have wall-normal coordinate y∈(0,h); x and z are either periodic with periods L_1,L_2 or unrestricted real coordinates. Homogeneous no-slip means zero velocity on both wall faces; infinite channels carry no implicit decay condition.",
+      "fixed_by": "def-fd-flat-channel-domains",
+      "matters_for": [
+        "thm-fd-compatible-wall-shear-heat",
+        "ex-fd-periodic-poiseuille-body-force",
+        "ex-fd-couette-vorticity"
+      ]
+    },
+    {
+      "convention": "The compatible heat-shear theorem assumes ν>0 and a smooth odd 2h-periodic extension of the initial profile. Its L² norm uses period-length Lebesgue measures in the two periodic side coordinates, rather than normalized probability measure.",
+      "fixed_by": "thm-fd-compatible-wall-shear-heat",
+      "matters_for": ["ex-fd-compressible-viscous-shear"]
+    },
+    {
+      "convention": "The periodic incompressible theorem includes ν=0, fixes P_0=I, and normalizes the recovered scalar pressure to have zero spatial mean. Its existence time is independent of viscosity and higher initial Sobolev norms.",
+      "fixed_by": "thm-fd-smooth-periodic-incompressible-ivp",
+      "matters_for": [
+        "rem-fd-general-viscous-wall-ivp-gaps",
+        "thm-fd-periodic-smooth-incompressible-energy",
+        "thm-fd-periodic-smooth-stability",
+        "thm-fd-smooth-sobolev-continuation",
+        "thm-fd-periodic-inviscid-limit"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-fd-smooth-periodic-incompressible-ivp",
+      "statement": "Assume Countable Choice. For d∈{1,2,3}, integer s≥4, ν≥0, and smooth real divergence-free periodic initial data u_0, there is a unique smooth solution of u_t+P((u·∇)u)=νΔu, div u=0, on [0,T]. The time depends only on d,s,||u_0||_{H^s}, independently of ν and higher initial norms. Every integer H^m order m≥s remains bounded on that same interval, and the equivalent full equation has a unique smooth mean-zero pressure.",
+      "used_by": [
+        "rem-fd-general-viscous-wall-ivp-gaps",
+        "thm-fd-periodic-smooth-incompressible-energy",
+        "thm-fd-periodic-smooth-stability",
+        "thm-fd-smooth-sobolev-continuation",
+        "thm-fd-periodic-inviscid-limit",
+        "thm-fd-smooth-vorticity-identities",
+        "thm-fd-global-two-dimensional-periodic-navier-stokes"
+      ]
+    },
+    {
+      "id": "thm-fd-smooth-polytropic-euler-ivp",
+      "statement": "Assume Countable Choice. For d∈{1,2,3}, κ>0, γ>1, integer s≥4, and smooth real periodic data with strictly positive minimum density, the displayed inviscid barotropic Euler system has a unique smooth positive-density solution on [0,T]. The time depends only on d,s,κ,γ, the initial symmetric-state H^s norm, and the initial minimum sound-speed variable. Every integer density and velocity H^m norm, m≥s, is bounded on the same interval; no continuation through vacuum or shocks, viscous result, or temperature-coupled result is asserted.",
+      "used_by": [
+        "rem-fd-general-viscous-wall-ivp-gaps",
+        "thm-fd-periodic-smooth-stability",
+        "thm-fd-smooth-sobolev-continuation",
+        "thm-fd-polytropic-energy"
+      ]
+    },
+    {
+      "id": "lem-fd-polynomial-ode-continuation",
+      "statement": "Let N≥1, let F:R^N→R^N be polynomial, and let T_*>0. A C¹ solution x on [0,T_*) satisfying x'=F(x) and a uniform Euclidean bound ||x(t)||₂≤R extends as a C¹ solution of the same ODE to [0,T_*+ε) for some ε>0, agreeing with x before T_*.",
+      "used_by": [
+        "thm-fd-smooth-periodic-incompressible-ivp",
+        "thm-fd-smooth-polytropic-euler-ivp"
+      ]
+    },
+    {
+      "id": "def-fd-polytropic-symmetric-variables",
+      "statement": "For κ>0, γ>1, a=(γ−1)/2 and ρ>0, define r=sqrt(κγ)ρ^a/a and q=(r,u). The inverse is ρ=(ar/sqrt(κγ))^(1/a). The symmetric linear matrices A_j(q)=u_j I+ar(e_0 e_jᵀ+e_j e_0ᵀ) define r_t+u·∇r+ar div u=0 and u_t+u·∇u+ar∇r=0.",
+      "used_by": [
+        "thm-fd-smooth-polytropic-euler-ivp",
+        "thm-fd-periodic-smooth-stability",
+        "thm-fd-smooth-sobolev-continuation",
+        "thm-fd-polytropic-energy"
+      ]
+    },
+    {
+      "id": "thm-fd-compatible-wall-shear-heat",
+      "statement": "Assume Countable Choice and L_1,L_2,h,ν>0. For a smooth profile F with a smooth odd 2h-periodic extension, the stated sine heat series gives a global smooth no-slip incompressible periodic-channel shear u=(V,0,0), with mean-zero pressure zero. Its velocity is unique among smooth solutions with the same initial data, and ||u(t)||₂≤exp(−ν(π/h)²t)||u(0)||₂.",
+      "used_by": [
+        "ex-fd-compressible-viscous-shear",
+        "rem-fd-general-viscous-wall-ivp-gaps"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Checked the exact indexed-family choice principle assumed by Fourier synthesis and cited in the diagonal extraction steps; distinguished independent countable choices from dependent recursive choices.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-basis-and-parseval-on-the-n-torus",
+      "used_for": "Checked normalized unit-torus Fourier synthesis, Parseval, coefficient-isometry surjectivity, and its Countable Choice hypothesis; verified the consumers' explicit rescaling to period 2π and to the odd period-2h extension.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local existence and uniqueness for the real finite-dimensional polynomial Galerkin systems and endpoint restart in the polynomial continuation lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-criterion-via-lub",
+      "used_for": "Scalar completeness used to assemble the endpoint limit of a bounded polynomial ODE trajectory.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "The exact bounded-derivative Lipschitz estimate on compact subintervals, producing the Cauchy endpoint bound in the polynomial continuation proof.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Checked the continuity, domain and interval hypotheses for passing to and joining the integral equations at the finite ODE endpoint.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Finite-dimensional coefficient completeness cited in the polytropic Galerkin continuation argument; the positive-dimension hypothesis is retained.",
+      "opened": true
+    },
+    {
+      "id": "thm-bolzano-weierstrass",
+      "used_for": "Bounded scalar coefficient sequences have convergent subsequences, used in both nonlinear compactness constructions.",
+      "opened": true
+    },
+    {
+      "id": "lem-peak-monotone-subsequence",
+      "used_for": "Inspected the Bolzano–Weierstrass proof's underlying least-index construction to verify that nested scalar extractions can be made deterministic without assuming Dependent Choice.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-fd-smooth-periodic-incompressible-ivp",
+      "concern": "Step 5.1 says that the countable set of mode/rational-time pairs means '[A1] permits one diagonal subsequence'. Nested subsequence extraction involves choices depending on previous extractions; Countable Choice by itself is a principle for fixed families. Specify a deterministic scalar extraction before recursing, then take the diagonal. This is a small reconstructible gap: the opened Bolzano–Weierstrass supplier's peak-subsequence proof uses least indices, and its bounded-peak case can use the least admissible cutoff. The theorem does not require a stronger choice assumption.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "thm-fd-smooth-polytropic-euler-ivp",
+      "concern": "Step 4.1 similarly attributes repeated nested extraction directly to '[F10] and Countable Choice [F6, A1]'. Explain how the nested subsequences are selected, rather than treating independent Countable Choice as dependent recursion. A deterministic least-index extraction from the cited Bolzano–Weierstrass proof closes this without changing the statement or adding Dependent Choice.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-s02",
+      "to": "fd-s01",
+      "faithful": true,
+      "note": "Checked the actual Fourier-space, embedding/product, Leray/pressure, tame-commutator, pressure-recovery, and given-smooth-solutions difference-energy carriers against their fd-s02 uses. The normalized measure, derivative multipliers, pressure sign, Countable Choice hypothesis, dimensions d≤3, and integer commutator orders m≥s≥4 agree. The conditional difference estimate is not used to construct a solution."
+    },
+    {
+      "from": "fd-s03",
+      "to": "fd-s02",
+      "faithful": true,
+      "note": "Checked the local-existence uses in energy, stability, continuation, inviscid limit, vorticity, polytropic energy and global 2D Navier–Stokes, and the wall-domain use in conditional wall energy/uniqueness. The continuation theorem explicitly cites quantitative lifespan bounds from the current fd-s02 proofs; stability and inviscid limit use viscosity-uniform bounds actually proved there. Positive density and the inviscid barotropic restriction are retained, and no general wall existence theorem is inferred."
+    }
+  ]
+}

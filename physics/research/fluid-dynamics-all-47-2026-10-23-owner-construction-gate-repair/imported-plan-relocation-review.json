@@ -1,0 +1,1254 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "reviewer": "/root/physics_mixed_layout",
+  "kind": "read-only-imported-plan-relocation-review",
+  "at": "2026-10-22T18:07:56.694Z",
+  "id": "cardinal-arithmetic-and-cofinality",
+  "pins": [
+    {
+      "path": "library/set-theory/cardinal-arithmetic-and-cofinality.md",
+      "sha256": "c115ecea467a3f4a940b8aebcbb630e04a0c09dd3309338270f30a28e8957167"
+    }
+  ],
+  "canonical_plan_rows": [],
+  "carriers": [
+    {
+      "path": "library/foundations/cardinal-arithmetic-and-cofinality.md",
+      "sha256": "c115ecea467a3f4a940b8aebcbb630e04a0c09dd3309338270f30a28e8957167",
+      "regular": true,
+      "realpath": "/home/lazyinspirit/Projects/prestige-math-library/physics/library/foundations/cardinal-arithmetic-and-cofinality.md",
+      "mode": "444",
+      "metadata": {
+        "page": "cardinal-arithmetic-and-cofinality",
+        "title": "Cardinal Arithmetic, Cofinality and the Alephs",
+        "status": "published",
+        "items": [
+          "lem-cardinality-of-a-well-orderable-set",
+          "lem-cardinal-operations-are-well-defined",
+          "def-cardinal-arithmetic",
+          "lem-cardinal-arithmetic-basic-laws",
+          "thm-cardinal-arithmetic-agrees-with-finite-counting",
+          "thm-cardinal-power-set-and-cantor",
+          "thm-hessenberg",
+          "cor-cardinal-absorption",
+          "lem-successor-cardinal-exists",
+          "cor-the-aleph-and-beth-hierarchies-are-well-defined",
+          "def-aleph-and-beth-hierarchies",
+          "thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero",
+          "thm-every-infinite-cardinal-is-an-aleph",
+          "thm-cardinal-comparability-iff-ac",
+          "thm-tarski-square",
+          "lem-cofinality-is-well-defined",
+          "def-cofinality",
+          "thm-cofinality-basics",
+          "thm-regularity-of-the-alephs",
+          "def-infinite-cardinal-sum-and-product",
+          "thm-konig",
+          "cor-cofinality-of-a-cardinal-power",
+          "rem-cardinal-arithmetic-choice-ledger"
+        ],
+        "examples": [
+          "fs-cardinal-addition-is-cancellative",
+          "fs-every-aleph-is-regular",
+          "fs-cardinal-exponentiation-is-strictly-monotone-in-the-base",
+          "fs-the-continuum-has-cardinality-aleph-omega"
+        ]
+      },
+      "raw": "---\npage: cardinal-arithmetic-and-cofinality\ntitle: \"Cardinal Arithmetic, Cofinality and the Alephs\"\nstatus: published\nitems: [lem-cardinality-of-a-well-orderable-set,\n        lem-cardinal-operations-are-well-defined,\n        def-cardinal-arithmetic,\n        lem-cardinal-arithmetic-basic-laws,\n        thm-cardinal-arithmetic-agrees-with-finite-counting,\n        thm-cardinal-power-set-and-cantor,\n        thm-hessenberg,\n        cor-cardinal-absorption,\n        lem-successor-cardinal-exists,\n        cor-the-aleph-and-beth-hierarchies-are-well-defined,\n        def-aleph-and-beth-hierarchies,\n        thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero,\n        thm-every-infinite-cardinal-is-an-aleph,\n        thm-cardinal-comparability-iff-ac,\n        thm-tarski-square,\n        lem-cofinality-is-well-defined,\n        def-cofinality,\n        thm-cofinality-basics,\n        thm-regularity-of-the-alephs,\n        def-infinite-cardinal-sum-and-product,\n        thm-konig,\n        cor-cofinality-of-a-cardinal-power,\n        rem-cardinal-arithmetic-choice-ledger]\nexamples: [fs-cardinal-addition-is-cancellative,\n           fs-every-aleph-is-regular,\n           fs-cardinal-exponentiation-is-strictly-monotone-in-the-base,\n           fs-the-continuum-has-cardinality-aleph-omega]\n---\n\n**Objective.** A cardinal is an ordinal not equinumerous with any smaller ordinal\n([[def-cardinal]]), and that much is already in place. This page turns the\ncardinals into an arithmetic: it defines $\\kappa \\oplus \\lambda$,\n$\\kappa \\otimes \\lambda$ and $\\kappa^{\\lambda}$, proves the laws they satisfy and\nthe laws they do not, builds the aleph and beth hierarchies, shows that the\nalephs exhaust the infinite cardinals, defines the cofinality\n$\\operatorname{cf}(\\alpha)$ with the regular and singular vocabulary, and proves\nKönig's inequality and the constraint it puts on $2^{\\aleph_0}$. Throughout, each\nresult carries its own choice hypothesis, and\n[[rem-cardinal-arithmetic-choice-ledger]] keeps the ledger.\n\n**A choice-free notion of cardinality has to come first.** [[def-cardinal]]\nattaches $\\lvert X\\rvert$ to a set under the hypothesis \"Assume the Axiom of\nChoice\", and it needs that hypothesis only to know that $X$ carries a well-order\nat all. [[lem-cardinality-of-a-well-orderable-set]] isolates the rest: for a\n**well-orderable** $X$ there is a least ordinal equinumerous with it, that ordinal\nis a cardinal, and equinumerous sets receive the same one, all in ZF. Without\nthis item Hessenberg's theorem could not be stated as the theorem of ZF that it\nis, and Tarski's theorem — which is precisely about the gap between ZF and ZFC —\ncould not be stated at all.\n\n**Sum and product are free; exponentiation is not.** The disjoint union and the cartesian\nproduct of two ordinals carry well-orders written down from the ordinal order\n([[lem-cardinal-operations-are-well-defined]]), so $\\oplus$ and $\\otimes$ are ZF\noperations. A set of *functions* between well-ordered sets has no canonical\norder, so $\\kappa^{\\lambda}$ is defined under the Axiom of Choice, and every\nstatement here that writes an infinite exponential says so in its own hypotheses.\n\n**The symbols are deliberately not $+$ and $\\cdot$.** Ordinal addition and\nmultiplication are defined on the same objects and give different values, so the\ncardinal operations are written $\\oplus$ and $\\otimes$\n([[def-cardinal-arithmetic]]). Exponentiation keeps its notation under an\nexplicit rule stated where it is defined: base and exponent are always alephs or\none of $\\kappa, \\lambda, \\mu$, never $\\omega$ and never an ordinal letter. That\nrule is the answer to the warning already recorded in\n[[rem-ordinal-versus-cardinal-exponentiation]]. A second collision is handled the\nsame way: $\\kappa^{+}$ on a cardinal letter is the successor cardinal, while\n$\\alpha^{+}$ on an ordinal letter keeps its published meaning, and the two are\nnever the same on an infinite cardinal.\n\n**One notation, one meaning, on the finite numbers.**\n[[def-finite-cardinality]] already writes $\\lvert A\\rvert$ for a finite set, with\na natural number as its value. [[thm-cardinal-arithmetic-agrees-with-finite-counting]]\nproves that this is the same $\\lvert A\\rvert$, and that on $\\omega$ the cardinal\noperations are the published counting operations. It also settles the small facts\nthe rest of the page leans on constantly: every natural number and $\\omega$ are\ncardinals, and every infinite cardinal is a limit ordinal.\n\n**Hessenberg's theorem is the engine.** $\\kappa \\otimes \\kappa = \\kappa$ for\nevery infinite cardinal, proved from a single well-order of $\\kappa \\times \\kappa$\nthat orders pairs by their maximum first ([[thm-hessenberg]]). Nothing is chosen:\nthe order is defined, not selected, so the theorem is ZF. Everything about\n$\\oplus$ and $\\otimes$ on infinite cardinals collapses out of it —\n[[cor-cardinal-absorption]] says the larger argument simply swallows the smaller\n— and the collapse is what makes cancellation fail, which section 5 records.\n\n**The hierarchy, and its exhaustiveness.** The Hartogs number gives a successor\ncardinal in ZF ([[lem-successor-cardinal-exists]]); transfinite recursion along\nthe ordinals turns the successor clause into the alephs, and the power clause\ninto the beths ([[cor-the-aleph-and-beth-hierarchies-are-well-defined]],\n[[def-aleph-and-beth-hierarchies]]). That the alephs are not merely a supply of\ninfinite cardinals but **all** of them is a separate theorem, proved by a least\ncounterexample rather than by the recursion, and its second clause — that every\ninfinite *set* is equinumerous with an aleph — is where the Axiom of Choice\nenters ([[thm-every-infinite-cardinal-is-an-aleph]]).\n\n**The size of the continuum.** The choice-free bijections\n$\\mathbb R\\approx{}^\\omega 2\\approx\\mathcal P(\\mathbb N)$ are proved in\n[[thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero]]. Under the Axiom\nof Choice this becomes the initial-cardinal equation\n$|\\mathbb R|=2^{\\aleph_0}$ used on this page and by later topology examples.\n\n**Where choice is measured exactly.** Comparability of arbitrary sets is\nequivalent to the Axiom of Choice ([[thm-cardinal-comparability-iff-ac]]), so the\ntrichotomy this page uses freely for cardinals is *not* available for sets. And\nTarski's square law, $A \\times A \\approx A$ for every infinite set, is also\nequivalent to it ([[thm-tarski-square]]): extending Hessenberg's theorem from the\nalephs to arbitrary sets is not a mild strengthening but choice itself.\n\n**Cofinality.** [[def-cofinal-subset-of-an-ordinal]] supplies cofinal subsets and\nstops there. Here the cofinality function is defined:\n$\\operatorname{cf}(\\alpha)$ is the least length of a family reaching $\\alpha$ from\nbelow ([[lem-cofinality-is-well-defined]], [[def-cofinality]]), and for a limit\nordinal it is an infinite cardinal which is its own cofinality\n([[thm-cofinality-basics]]). Regularity of $\\aleph_0$ and singularity of\n$\\aleph_\\omega$ are theorems of ZF; regularity of the successor alephs is proved\nhere only from the Axiom of Choice, and [[thm-regularity-of-the-alephs]] carries\nthe hypothesis in its statement and names where it is spent.\n\n**König, and what ZFC decides about the continuum.** With sums and\nproducts of indexed families in place ([[def-infinite-cardinal-sum-and-product]]),\n[[thm-konig]] gives $\\sum_i \\kappa_i < \\prod_i \\lambda_i$ whenever\n$\\kappa_i < \\lambda_i$ throughout — Cantor's diagonal argument over an arbitrary\nindex set. Its consequence is $\\kappa < \\kappa^{\\operatorname{cf}(\\kappa)}$ and\nhence $\\operatorname{cf}(2^{\\kappa}) > \\kappa$\n([[cor-cofinality-of-a-cardinal-power]]). At $\\kappa = \\aleph_0$ that says the\ncontinuum has uncountable cofinality, which excludes candidate values without\nselecting one.\n\n**What is refuted, and what is left open.** Section 5 refutes, each time with a\nproof rather than an appeal to independence: cancellation of $\\oplus$, regularity\nof every aleph, strict monotonicity of exponentiation in the base, and the value\n$2^{\\aleph_0} = \\aleph_\\omega$. What is *not* settled here is\nwhich aleph the continuum is; that is the continuum hypothesis, and\n[[rem-cardinal-arithmetic-choice-ledger]] records it, along with the cost in\nchoice of every result on this page, as a statement not decided by anything among\nthis page's declared prerequisites.\n",
+      "head": {
+        "path": "physics/library/foundations/cardinal-arithmetic-and-cofinality.md",
+        "sha256": "c115ecea467a3f4a940b8aebcbb630e04a0c09dd3309338270f30a28e8957167",
+        "raw": "---\npage: cardinal-arithmetic-and-cofinality\ntitle: \"Cardinal Arithmetic, Cofinality and the Alephs\"\nstatus: published\nitems: [lem-cardinality-of-a-well-orderable-set,\n        lem-cardinal-operations-are-well-defined,\n        def-cardinal-arithmetic,\n        lem-cardinal-arithmetic-basic-laws,\n        thm-cardinal-arithmetic-agrees-with-finite-counting,\n        thm-cardinal-power-set-and-cantor,\n        thm-hessenberg,\n        cor-cardinal-absorption,\n        lem-successor-cardinal-exists,\n        cor-the-aleph-and-beth-hierarchies-are-well-defined,\n        def-aleph-and-beth-hierarchies,\n        thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero,\n        thm-every-infinite-cardinal-is-an-aleph,\n        thm-cardinal-comparability-iff-ac,\n        thm-tarski-square,\n        lem-cofinality-is-well-defined,\n        def-cofinality,\n        thm-cofinality-basics,\n        thm-regularity-of-the-alephs,\n        def-infinite-cardinal-sum-and-product,\n        thm-konig,\n        cor-cofinality-of-a-cardinal-power,\n        rem-cardinal-arithmetic-choice-ledger]\nexamples: [fs-cardinal-addition-is-cancellative,\n           fs-every-aleph-is-regular,\n           fs-cardinal-exponentiation-is-strictly-monotone-in-the-base,\n           fs-the-continuum-has-cardinality-aleph-omega]\n---\n\n**Objective.** A cardinal is an ordinal not equinumerous with any smaller ordinal\n([[def-cardinal]]), and that much is already in place. This page turns the\ncardinals into an arithmetic: it defines $\\kappa \\oplus \\lambda$,\n$\\kappa \\otimes \\lambda$ and $\\kappa^{\\lambda}$, proves the laws they satisfy and\nthe laws they do not, builds the aleph and beth hierarchies, shows that the\nalephs exhaust the infinite cardinals, defines the cofinality\n$\\operatorname{cf}(\\alpha)$ with the regular and singular vocabulary, and proves\nKönig's inequality and the constraint it puts on $2^{\\aleph_0}$. Throughout, each\nresult carries its own choice hypothesis, and\n[[rem-cardinal-arithmetic-choice-ledger]] keeps the ledger.\n\n**A choice-free notion of cardinality has to come first.** [[def-cardinal]]\nattaches $\\lvert X\\rvert$ to a set under the hypothesis \"Assume the Axiom of\nChoice\", and it needs that hypothesis only to know that $X$ carries a well-order\nat all. [[lem-cardinality-of-a-well-orderable-set]] isolates the rest: for a\n**well-orderable** $X$ there is a least ordinal equinumerous with it, that ordinal\nis a cardinal, and equinumerous sets receive the same one, all in ZF. Without\nthis item Hessenberg's theorem could not be stated as the theorem of ZF that it\nis, and Tarski's theorem — which is precisely about the gap between ZF and ZFC —\ncould not be stated at all.\n\n**Sum and product are free; exponentiation is not.** The disjoint union and the cartesian\nproduct of two ordinals carry well-orders written down from the ordinal order\n([[lem-cardinal-operations-are-well-defined]]), so $\\oplus$ and $\\otimes$ are ZF\noperations. A set of *functions* between well-ordered sets has no canonical\norder, so $\\kappa^{\\lambda}$ is defined under the Axiom of Choice, and every\nstatement here that writes an infinite exponential says so in its own hypotheses.\n\n**The symbols are deliberately not $+$ and $\\cdot$.** Ordinal addition and\nmultiplication are defined on the same objects and give different values, so the\ncardinal operations are written $\\oplus$ and $\\otimes$\n([[def-cardinal-arithmetic]]). Exponentiation keeps its notation under an\nexplicit rule stated where it is defined: base and exponent are always alephs or\none of $\\kappa, \\lambda, \\mu$, never $\\omega$ and never an ordinal letter. That\nrule is the answer to the warning already recorded in\n[[rem-ordinal-versus-cardinal-exponentiation]]. A second collision is handled the\nsame way: $\\kappa^{+}$ on a cardinal letter is the successor cardinal, while\n$\\alpha^{+}$ on an ordinal letter keeps its published meaning, and the two are\nnever the same on an infinite cardinal.\n\n**One notation, one meaning, on the finite numbers.**\n[[def-finite-cardinality]] already writes $\\lvert A\\rvert$ for a finite set, with\na natural number as its value. [[thm-cardinal-arithmetic-agrees-with-finite-counting]]\nproves that this is the same $\\lvert A\\rvert$, and that on $\\omega$ the cardinal\noperations are the published counting operations. It also settles the small facts\nthe rest of the page leans on constantly: every natural number and $\\omega$ are\ncardinals, and every infinite cardinal is a limit ordinal.\n\n**Hessenberg's theorem is the engine.** $\\kappa \\otimes \\kappa = \\kappa$ for\nevery infinite cardinal, proved from a single well-order of $\\kappa \\times \\kappa$\nthat orders pairs by their maximum first ([[thm-hessenberg]]). Nothing is chosen:\nthe order is defined, not selected, so the theorem is ZF. Everything about\n$\\oplus$ and $\\otimes$ on infinite cardinals collapses out of it —\n[[cor-cardinal-absorption]] says the larger argument simply swallows the smaller\n— and the collapse is what makes cancellation fail, which section 5 records.\n\n**The hierarchy, and its exhaustiveness.** The Hartogs number gives a successor\ncardinal in ZF ([[lem-successor-cardinal-exists]]); transfinite recursion along\nthe ordinals turns the successor clause into the alephs, and the power clause\ninto the beths ([[cor-the-aleph-and-beth-hierarchies-are-well-defined]],\n[[def-aleph-and-beth-hierarchies]]). That the alephs are not merely a supply of\ninfinite cardinals but **all** of them is a separate theorem, proved by a least\ncounterexample rather than by the recursion, and its second clause — that every\ninfinite *set* is equinumerous with an aleph — is where the Axiom of Choice\nenters ([[thm-every-infinite-cardinal-is-an-aleph]]).\n\n**The size of the continuum.** The choice-free bijections\n$\\mathbb R\\approx{}^\\omega 2\\approx\\mathcal P(\\mathbb N)$ are proved in\n[[thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero]]. Under the Axiom\nof Choice this becomes the initial-cardinal equation\n$|\\mathbb R|=2^{\\aleph_0}$ used on this page and by later topology examples.\n\n**Where choice is measured exactly.** Comparability of arbitrary sets is\nequivalent to the Axiom of Choice ([[thm-cardinal-comparability-iff-ac]]), so the\ntrichotomy this page uses freely for cardinals is *not* available for sets. And\nTarski's square law, $A \\times A \\approx A$ for every infinite set, is also\nequivalent to it ([[thm-tarski-square]]): extending Hessenberg's theorem from the\nalephs to arbitrary sets is not a mild strengthening but choice itself.\n\n**Cofinality.** [[def-cofinal-subset-of-an-ordinal]] supplies cofinal subsets and\nstops there. Here the cofinality function is defined:\n$\\operatorname{cf}(\\alpha)$ is the least length of a family reaching $\\alpha$ from\nbelow ([[lem-cofinality-is-well-defined]], [[def-cofinality]]), and for a limit\nordinal it is an infinite cardinal which is its own cofinality\n([[thm-cofinality-basics]]). Regularity of $\\aleph_0$ and singularity of\n$\\aleph_\\omega$ are theorems of ZF; regularity of the successor alephs is proved\nhere only from the Axiom of Choice, and [[thm-regularity-of-the-alephs]] carries\nthe hypothesis in its statement and names where it is spent.\n\n**König, and what ZFC decides about the continuum.** With sums and\nproducts of indexed families in place ([[def-infinite-cardinal-sum-and-product]]),\n[[thm-konig]] gives $\\sum_i \\kappa_i < \\prod_i \\lambda_i$ whenever\n$\\kappa_i < \\lambda_i$ throughout — Cantor's diagonal argument over an arbitrary\nindex set. Its consequence is $\\kappa < \\kappa^{\\operatorname{cf}(\\kappa)}$ and\nhence $\\operatorname{cf}(2^{\\kappa}) > \\kappa$\n([[cor-cofinality-of-a-cardinal-power]]). At $\\kappa = \\aleph_0$ that says the\ncontinuum has uncountable cofinality, which excludes candidate values without\nselecting one.\n\n**What is refuted, and what is left open.** Section 5 refutes, each time with a\nproof rather than an appeal to independence: cancellation of $\\oplus$, regularity\nof every aleph, strict monotonicity of exponentiation in the base, and the value\n$2^{\\aleph_0} = \\aleph_\\omega$. What is *not* settled here is\nwhich aleph the continuum is; that is the continuum hypothesis, and\n[[rem-cardinal-arithmetic-choice-ledger]] records it, along with the cost in\nchoice of every result on this page, as a statement not decided by anything among\nthis page's declared prerequisites.\n"
+      }
+    },
+    {
+      "path": "library/set-theory/cardinal-arithmetic-and-cofinality.md",
+      "sha256": "c115ecea467a3f4a940b8aebcbb630e04a0c09dd3309338270f30a28e8957167",
+      "regular": true,
+      "realpath": "/home/lazyinspirit/Projects/prestige-math-library/physics/library/set-theory/cardinal-arithmetic-and-cofinality.md",
+      "mode": "444",
+      "metadata": {
+        "page": "cardinal-arithmetic-and-cofinality",
+        "title": "Cardinal Arithmetic, Cofinality and the Alephs",
+        "status": "published",
+        "items": [
+          "lem-cardinality-of-a-well-orderable-set",
+          "lem-cardinal-operations-are-well-defined",
+          "def-cardinal-arithmetic",
+          "lem-cardinal-arithmetic-basic-laws",
+          "thm-cardinal-arithmetic-agrees-with-finite-counting",
+          "thm-cardinal-power-set-and-cantor",
+          "thm-hessenberg",
+          "cor-cardinal-absorption",
+          "lem-successor-cardinal-exists",
+          "cor-the-aleph-and-beth-hierarchies-are-well-defined",
+          "def-aleph-and-beth-hierarchies",
+          "thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero",
+          "thm-every-infinite-cardinal-is-an-aleph",
+          "thm-cardinal-comparability-iff-ac",
+          "thm-tarski-square",
+          "lem-cofinality-is-well-defined",
+          "def-cofinality",
+          "thm-cofinality-basics",
+          "thm-regularity-of-the-alephs",
+          "def-infinite-cardinal-sum-and-product",
+          "thm-konig",
+          "cor-cofinality-of-a-cardinal-power",
+          "rem-cardinal-arithmetic-choice-ledger"
+        ],
+        "examples": [
+          "fs-cardinal-addition-is-cancellative",
+          "fs-every-aleph-is-regular",
+          "fs-cardinal-exponentiation-is-strictly-monotone-in-the-base",
+          "fs-the-continuum-has-cardinality-aleph-omega"
+        ]
+      },
+      "raw": "---\npage: cardinal-arithmetic-and-cofinality\ntitle: \"Cardinal Arithmetic, Cofinality and the Alephs\"\nstatus: published\nitems: [lem-cardinality-of-a-well-orderable-set,\n        lem-cardinal-operations-are-well-defined,\n        def-cardinal-arithmetic,\n        lem-cardinal-arithmetic-basic-laws,\n        thm-cardinal-arithmetic-agrees-with-finite-counting,\n        thm-cardinal-power-set-and-cantor,\n        thm-hessenberg,\n        cor-cardinal-absorption,\n        lem-successor-cardinal-exists,\n        cor-the-aleph-and-beth-hierarchies-are-well-defined,\n        def-aleph-and-beth-hierarchies,\n        thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero,\n        thm-every-infinite-cardinal-is-an-aleph,\n        thm-cardinal-comparability-iff-ac,\n        thm-tarski-square,\n        lem-cofinality-is-well-defined,\n        def-cofinality,\n        thm-cofinality-basics,\n        thm-regularity-of-the-alephs,\n        def-infinite-cardinal-sum-and-product,\n        thm-konig,\n        cor-cofinality-of-a-cardinal-power,\n        rem-cardinal-arithmetic-choice-ledger]\nexamples: [fs-cardinal-addition-is-cancellative,\n           fs-every-aleph-is-regular,\n           fs-cardinal-exponentiation-is-strictly-monotone-in-the-base,\n           fs-the-continuum-has-cardinality-aleph-omega]\n---\n\n**Objective.** A cardinal is an ordinal not equinumerous with any smaller ordinal\n([[def-cardinal]]), and that much is already in place. This page turns the\ncardinals into an arithmetic: it defines $\\kappa \\oplus \\lambda$,\n$\\kappa \\otimes \\lambda$ and $\\kappa^{\\lambda}$, proves the laws they satisfy and\nthe laws they do not, builds the aleph and beth hierarchies, shows that the\nalephs exhaust the infinite cardinals, defines the cofinality\n$\\operatorname{cf}(\\alpha)$ with the regular and singular vocabulary, and proves\nKönig's inequality and the constraint it puts on $2^{\\aleph_0}$. Throughout, each\nresult carries its own choice hypothesis, and\n[[rem-cardinal-arithmetic-choice-ledger]] keeps the ledger.\n\n**A choice-free notion of cardinality has to come first.** [[def-cardinal]]\nattaches $\\lvert X\\rvert$ to a set under the hypothesis \"Assume the Axiom of\nChoice\", and it needs that hypothesis only to know that $X$ carries a well-order\nat all. [[lem-cardinality-of-a-well-orderable-set]] isolates the rest: for a\n**well-orderable** $X$ there is a least ordinal equinumerous with it, that ordinal\nis a cardinal, and equinumerous sets receive the same one, all in ZF. Without\nthis item Hessenberg's theorem could not be stated as the theorem of ZF that it\nis, and Tarski's theorem — which is precisely about the gap between ZF and ZFC —\ncould not be stated at all.\n\n**Sum and product are free; exponentiation is not.** The disjoint union and the cartesian\nproduct of two ordinals carry well-orders written down from the ordinal order\n([[lem-cardinal-operations-are-well-defined]]), so $\\oplus$ and $\\otimes$ are ZF\noperations. A set of *functions* between well-ordered sets has no canonical\norder, so $\\kappa^{\\lambda}$ is defined under the Axiom of Choice, and every\nstatement here that writes an infinite exponential says so in its own hypotheses.\n\n**The symbols are deliberately not $+$ and $\\cdot$.** Ordinal addition and\nmultiplication are defined on the same objects and give different values, so the\ncardinal operations are written $\\oplus$ and $\\otimes$\n([[def-cardinal-arithmetic]]). Exponentiation keeps its notation under an\nexplicit rule stated where it is defined: base and exponent are always alephs or\none of $\\kappa, \\lambda, \\mu$, never $\\omega$ and never an ordinal letter. That\nrule is the answer to the warning already recorded in\n[[rem-ordinal-versus-cardinal-exponentiation]]. A second collision is handled the\nsame way: $\\kappa^{+}$ on a cardinal letter is the successor cardinal, while\n$\\alpha^{+}$ on an ordinal letter keeps its published meaning, and the two are\nnever the same on an infinite cardinal.\n\n**One notation, one meaning, on the finite numbers.**\n[[def-finite-cardinality]] already writes $\\lvert A\\rvert$ for a finite set, with\na natural number as its value. [[thm-cardinal-arithmetic-agrees-with-finite-counting]]\nproves that this is the same $\\lvert A\\rvert$, and that on $\\omega$ the cardinal\noperations are the published counting operations. It also settles the small facts\nthe rest of the page leans on constantly: every natural number and $\\omega$ are\ncardinals, and every infinite cardinal is a limit ordinal.\n\n**Hessenberg's theorem is the engine.** $\\kappa \\otimes \\kappa = \\kappa$ for\nevery infinite cardinal, proved from a single well-order of $\\kappa \\times \\kappa$\nthat orders pairs by their maximum first ([[thm-hessenberg]]). Nothing is chosen:\nthe order is defined, not selected, so the theorem is ZF. Everything about\n$\\oplus$ and $\\otimes$ on infinite cardinals collapses out of it —\n[[cor-cardinal-absorption]] says the larger argument simply swallows the smaller\n— and the collapse is what makes cancellation fail, which section 5 records.\n\n**The hierarchy, and its exhaustiveness.** The Hartogs number gives a successor\ncardinal in ZF ([[lem-successor-cardinal-exists]]); transfinite recursion along\nthe ordinals turns the successor clause into the alephs, and the power clause\ninto the beths ([[cor-the-aleph-and-beth-hierarchies-are-well-defined]],\n[[def-aleph-and-beth-hierarchies]]). That the alephs are not merely a supply of\ninfinite cardinals but **all** of them is a separate theorem, proved by a least\ncounterexample rather than by the recursion, and its second clause — that every\ninfinite *set* is equinumerous with an aleph — is where the Axiom of Choice\nenters ([[thm-every-infinite-cardinal-is-an-aleph]]).\n\n**The size of the continuum.** The choice-free bijections\n$\\mathbb R\\approx{}^\\omega 2\\approx\\mathcal P(\\mathbb N)$ are proved in\n[[thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero]]. Under the Axiom\nof Choice this becomes the initial-cardinal equation\n$|\\mathbb R|=2^{\\aleph_0}$ used on this page and by later topology examples.\n\n**Where choice is measured exactly.** Comparability of arbitrary sets is\nequivalent to the Axiom of Choice ([[thm-cardinal-comparability-iff-ac]]), so the\ntrichotomy this page uses freely for cardinals is *not* available for sets. And\nTarski's square law, $A \\times A \\approx A$ for every infinite set, is also\nequivalent to it ([[thm-tarski-square]]): extending Hessenberg's theorem from the\nalephs to arbitrary sets is not a mild strengthening but choice itself.\n\n**Cofinality.** [[def-cofinal-subset-of-an-ordinal]] supplies cofinal subsets and\nstops there. Here the cofinality function is defined:\n$\\operatorname{cf}(\\alpha)$ is the least length of a family reaching $\\alpha$ from\nbelow ([[lem-cofinality-is-well-defined]], [[def-cofinality]]), and for a limit\nordinal it is an infinite cardinal which is its own cofinality\n([[thm-cofinality-basics]]). Regularity of $\\aleph_0$ and singularity of\n$\\aleph_\\omega$ are theorems of ZF; regularity of the successor alephs is proved\nhere only from the Axiom of Choice, and [[thm-regularity-of-the-alephs]] carries\nthe hypothesis in its statement and names where it is spent.\n\n**König, and what ZFC decides about the continuum.** With sums and\nproducts of indexed families in place ([[def-infinite-cardinal-sum-and-product]]),\n[[thm-konig]] gives $\\sum_i \\kappa_i < \\prod_i \\lambda_i$ whenever\n$\\kappa_i < \\lambda_i$ throughout — Cantor's diagonal argument over an arbitrary\nindex set. Its consequence is $\\kappa < \\kappa^{\\operatorname{cf}(\\kappa)}$ and\nhence $\\operatorname{cf}(2^{\\kappa}) > \\kappa$\n([[cor-cofinality-of-a-cardinal-power]]). At $\\kappa = \\aleph_0$ that says the\ncontinuum has uncountable cofinality, which excludes candidate values without\nselecting one.\n\n**What is refuted, and what is left open.** Section 5 refutes, each time with a\nproof rather than an appeal to independence: cancellation of $\\oplus$, regularity\nof every aleph, strict monotonicity of exponentiation in the base, and the value\n$2^{\\aleph_0} = \\aleph_\\omega$. What is *not* settled here is\nwhich aleph the continuum is; that is the continuum hypothesis, and\n[[rem-cardinal-arithmetic-choice-ledger]] records it, along with the cost in\nchoice of every result on this page, as a statement not decided by anything among\nthis page's declared prerequisites.\n",
+      "head": null
+    }
+  ],
+  "comparison": {
+    "raw_bytes_identical": true,
+    "both_match_exact_pin": true,
+    "same_published_identity_title_body_and_inventory": true
+  },
+  "policy_observation": "Existing owner-gate prerequisitePaths permits an identical pinned copy beside a canonical plan location, and rejects distinct bodies/unpinned extras. This page has no plan declaration, so that exact canonical-plan predicate cannot apply. The foundations carrier is nevertheless an exact pinned-byte pre-existing HEAD-tracked placement; the set-theory path is the current immutable import pin. Current helper rejects both solely because copies.length is 2.",
+  "proposed_narrow_resolution": "Permit exactly one alternate regular carrier only when its exact path and raw pinned bytes are already present in repository HEAD, in addition to the unique intact current pin. No arbitrary unpinned extra, staged-only/untracked copy, third carrier, different byte/title/publication/inventory, or symlink can qualify. Keep both source bytes and the import receipt unchanged. Root review of this proposed authority is pending.",
+  "limitations": [
+    "Local metadata/byte/provenance review only; no fresh scientific reading or proof acceptance is asserted.",
+    "No live gates, source/plan/manifest/import-pin/state or helper changes occurred before this report."
+  ],
+  "inputs": {
+    "research/math-imports.json": "b0cb638d70bba5a85c57a1b2a95162f13710cb1525e3fac2d9f8235148f1a4cb",
+    "research/plan-spec.json": "a7b78daaf0599f90617526b9b8ce54a229b9253dad6de3dad1138d4d9d7f5b50",
+    "tools/physics-support/imported-plan-pages.mjs": "b5807697413e5a39fa7aeaaf1c8c92d5c477936fbc35756e5399898980af8073",
+    "tools/physics-autopilot/src/owner-gate-recertification.mjs": "0c3e8a1f420012ca04b5c3f36b2bed731cf1d04660b8ac2fe55208f6936bd325"
+  },
+  "root_authorized_resolution": {
+    "reviewer": "/root",
+    "decision": "implement-narrow-historical-tracked-placement-authority",
+    "reason": "Root independently confirmed historical tracked foundations placement and authorized exactly one regular HEAD-tracked alternate with the exact immutable pin bytes. No untracked/staged-only/third/different/symlink carrier qualifies.",
+    "head": "5f5446d9f9d7fc9be4f3c29cf797122e44d326ff",
+    "historical_commit": "29450da28f82d81f6865b920e64b2dd106cbe4e6",
+    "historical_blob_sha256": "c115ecea467a3f4a940b8aebcbb630e04a0c09dd3309338270f30a28e8957167"
+  },
+  "resolution_class_diagnosis": {
+    "method": "Read-only explicit reproduction of selected manifest item/page prerequisite reachability using current item deps, aliases, library homes and canonical/current manifests, followed by direct private resolver calls for missing page declarations. No validator/gate/controller invocation.",
+    "selected_pages": 94,
+    "selected_items": 304,
+    "actual_item_context": 3369,
+    "reached_pages": 395,
+    "missing_catalogue_pages": 48,
+    "authenticated_context_pages": 48,
+    "unsupported_or_unpinned": [],
+    "resolutions": [
+      {
+        "id": "matrix-differentiation-and-first-order-spectral-perturbation",
+        "copies": [
+          "linear-algebra/matrix-differentiation-and-first-order-spectral-perturbation.md"
+        ],
+        "pins": [
+          {
+            "path": "library/linear-algebra/matrix-differentiation-and-first-order-spectral-perturbation.md",
+            "sha256": "3bbf2adb0cac02dd5440bd3e9f95a46c2dd69b52c00a14600ef68c3a5febcdf3"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "matrix-differentiation-and-first-order-spectral-perturbation",
+          "kind": "P",
+          "category": "linear-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "riemann-solvers-for-hyperbolic-systems",
+        "copies": [
+          "numerical-pdes-and-spatial-discretization/riemann-solvers-for-hyperbolic-systems.md"
+        ],
+        "pins": [
+          {
+            "path": "library/numerical-pdes-and-spatial-discretization/riemann-solvers-for-hyperbolic-systems.md",
+            "sha256": "c75808b94bc894f0e7505b9c291c9c62a9ba58a32256e6b6917eed82db58ef3b"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "riemann-solvers-for-hyperbolic-systems",
+          "kind": "P",
+          "category": "numerical-pdes-and-spatial-discretization",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "general-state-mcmc-kernels-and-reversibility",
+        "copies": [
+          "bayesian-computational-statistics/general-state-mcmc-kernels-and-reversibility.md"
+        ],
+        "pins": [
+          {
+            "path": "library/bayesian-computational-statistics/general-state-mcmc-kernels-and-reversibility.md",
+            "sha256": "bf7f5a649736fc9ce3c90c1d86d03cfb894c97107b06d8ca0f7b71d135a493e9"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "general-state-mcmc-kernels-and-reversibility",
+          "kind": "P",
+          "category": "bayesian-computational-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "mcmc-ergodicity-and-mixing",
+        "copies": [
+          "bayesian-computational-statistics/mcmc-ergodicity-and-mixing.md"
+        ],
+        "pins": [
+          {
+            "path": "library/bayesian-computational-statistics/mcmc-ergodicity-and-mixing.md",
+            "sha256": "11b4522f9f7cdd2922a78f612834f613d0614fbddcf77e8ecbbec77fe1c386fa"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "mcmc-ergodicity-and-mixing",
+          "kind": "P",
+          "category": "bayesian-computational-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "state-space-models-as-probability-laws",
+        "copies": [
+          "statistical-models-and-experiments/state-space-models-as-probability-laws.md"
+        ],
+        "pins": [
+          {
+            "path": "library/statistical-models-and-experiments/state-space-models-as-probability-laws.md",
+            "sha256": "6e1d3731e6750fc67a48f88509446ec2e9dff5feea8ee878e73cf2a8be39f0dd"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "state-space-models-as-probability-laws",
+          "kind": "P",
+          "category": "statistical-models-and-experiments",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "state-space-filtering-and-predictive-laws",
+        "copies": [
+          "bayesian-computational-statistics/state-space-filtering-and-predictive-laws.md"
+        ],
+        "pins": [
+          {
+            "path": "library/bayesian-computational-statistics/state-space-filtering-and-predictive-laws.md",
+            "sha256": "a2bb065cae481f6f32b61420883c3e48ccccdf4a11fbe65dfd4a9957a6936284"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "state-space-filtering-and-predictive-laws",
+          "kind": "P",
+          "category": "bayesian-computational-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "matrix-norms-condition-numbers-and-numerical-stability",
+        "copies": [
+          "linear-algebra/matrix-norms-condition-numbers-and-numerical-stability.md"
+        ],
+        "pins": [
+          {
+            "path": "library/linear-algebra/matrix-norms-condition-numbers-and-numerical-stability.md",
+            "sha256": "fca90e9b4621b2f8ee9a334dd32b85f680a6bb3453acff2a029e2db53b694aea"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "matrix-norms-condition-numbers-and-numerical-stability",
+          "kind": "P",
+          "category": "linear-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "the-fundamental-theorem-of-algebra",
+        "copies": [
+          "abstract-algebra/the-fundamental-theorem-of-algebra.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/the-fundamental-theorem-of-algebra.md",
+            "sha256": "3b5bbfc88441326497c1f6d50c7e9341a8bbfc17bf0f63c75e3a95b506dbebc9"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "the-fundamental-theorem-of-algebra",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "finite-element-meshes-and-interpolation",
+        "copies": [
+          "numerical-pdes-and-spatial-discretization/finite-element-meshes-and-interpolation.md"
+        ],
+        "pins": [
+          {
+            "path": "library/numerical-pdes-and-spatial-discretization/finite-element-meshes-and-interpolation.md",
+            "sha256": "981d7d0dc945bdc76a21532b6549460669202f8c29fd87daaa3970c3a9b680d8"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "finite-element-meshes-and-interpolation",
+          "kind": "P",
+          "category": "numerical-pdes-and-spatial-discretization",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "decomposition-inertia-and-frobenius",
+        "copies": [
+          "number-theory/decomposition-inertia-and-frobenius.md"
+        ],
+        "pins": [
+          {
+            "path": "library/number-theory/decomposition-inertia-and-frobenius.md",
+            "sha256": "1f1aa4999c8327ba0b69b41c56260794450b8e9fa8d245195c62e7e7429e07f9"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "decomposition-inertia-and-frobenius",
+          "kind": "P",
+          "category": "number-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "nonlinear-parabolic-compactness-and-monotone-evolution",
+        "copies": [
+          "numerical-pdes-and-spatial-discretization/nonlinear-parabolic-compactness-and-monotone-evolution.md"
+        ],
+        "pins": [
+          {
+            "path": "library/numerical-pdes-and-spatial-discretization/nonlinear-parabolic-compactness-and-monotone-evolution.md",
+            "sha256": "1c50912482a8a1eaeeb2ae9619d690d806a784da7aa90a42d69d307aef0c058f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "nonlinear-parabolic-compactness-and-monotone-evolution",
+          "kind": "P",
+          "category": "numerical-pdes-and-spatial-discretization",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "parabolic-finite-element-methods",
+        "copies": [
+          "numerical-pdes-and-spatial-discretization/parabolic-finite-element-methods.md"
+        ],
+        "pins": [
+          {
+            "path": "library/numerical-pdes-and-spatial-discretization/parabolic-finite-element-methods.md",
+            "sha256": "ce944b9e9f65b5eecea268b41bfcfb25a9c83345e8da861b139310bad657107f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "parabolic-finite-element-methods",
+          "kind": "P",
+          "category": "numerical-pdes-and-spatial-discretization",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "finite-element-pde-constrained-optimization",
+        "copies": [
+          "numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-element-pde-constrained-optimization.md"
+        ],
+        "pins": [
+          {
+            "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-element-pde-constrained-optimization.md",
+            "sha256": "10be90837ecef43840c0116e001d604601f214d81fd51d932a04beccf72874ee"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "finite-element-pde-constrained-optimization",
+          "kind": "P",
+          "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "scalar-conservation-laws-and-entropy-solutions",
+        "copies": [
+          "pde/scalar-conservation-laws-and-entropy-solutions.md"
+        ],
+        "pins": [
+          {
+            "path": "library/pde/scalar-conservation-laws-and-entropy-solutions.md",
+            "sha256": "53ef71946b52f191d15d1f857f170d3144afdb369fd149f3568b21e3b430accd"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "scalar-conservation-laws-and-entropy-solutions",
+          "kind": "P",
+          "category": "pde",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "losses-risk-and-decision-rules",
+        "copies": [
+          "mathematical-statistics/losses-risk-and-decision-rules.md"
+        ],
+        "pins": [
+          {
+            "path": "library/mathematical-statistics/losses-risk-and-decision-rules.md",
+            "sha256": "2ef9fff8f0705e0c57857a88c9dcd9a4792d23fe09a22433a71cfa0a186d8052"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "losses-risk-and-decision-rules",
+          "kind": "P",
+          "category": "mathematical-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "recurrence-transience-and-hitting-times-for-markov-chains",
+        "copies": [
+          "probability/recurrence-transience-and-hitting-times-for-markov-chains.md"
+        ],
+        "pins": [
+          {
+            "path": "library/probability/recurrence-transience-and-hitting-times-for-markov-chains.md",
+            "sha256": "6d15ad064dda469032f1c6b287401596b8b6194110082e3a3a003428e4aea69f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "recurrence-transience-and-hitting-times-for-markov-chains",
+          "kind": "P",
+          "category": "probability",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "delta-method-and-asymptotic-normality",
+        "copies": [
+          "mathematical-statistics/delta-method-and-asymptotic-normality.md"
+        ],
+        "pins": [
+          {
+            "path": "library/mathematical-statistics/delta-method-and-asymptotic-normality.md",
+            "sha256": "50eb151bc80c27e10022bbcf1e303810c3573dee08e035e0882c255a0f880284"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "delta-method-and-asymptotic-normality",
+          "kind": "P",
+          "category": "mathematical-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "resampling-algorithms-and-sampling-units",
+        "copies": [
+          "bayesian-computational-statistics/resampling-algorithms-and-sampling-units.md"
+        ],
+        "pins": [
+          {
+            "path": "library/bayesian-computational-statistics/resampling-algorithms-and-sampling-units.md",
+            "sha256": "9ce6976530616090fda7e655e91cfa093c5af19b119ceff93868df8331a6a61f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "resampling-algorithms-and-sampling-units",
+          "kind": "P",
+          "category": "bayesian-computational-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "kalman-smoothing-and-rts-recursion",
+        "copies": [
+          "bayesian-computational-statistics/kalman-smoothing-and-rts-recursion.md"
+        ],
+        "pins": [
+          {
+            "path": "library/bayesian-computational-statistics/kalman-smoothing-and-rts-recursion.md",
+            "sha256": "2ff8ccebd50a921466ec03efd70f4534d3efc2e24306ed52bb42cf97bbc5d5cf"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "kalman-smoothing-and-rts-recursion",
+          "kind": "P",
+          "category": "bayesian-computational-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "conjugate-families-and-posterior-prediction",
+        "copies": [
+          "bayesian-computational-statistics/conjugate-families-and-posterior-prediction.md"
+        ],
+        "pins": [
+          {
+            "path": "library/bayesian-computational-statistics/conjugate-families-and-posterior-prediction.md",
+            "sha256": "0992b89cb1d1f0fb643b2bde0b6dc9af4f5e9d7587db0c47c1237fb3d2a06eb4"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "conjugate-families-and-posterior-prediction",
+          "kind": "P",
+          "category": "bayesian-computational-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "scientific-statistical-model-contracts",
+        "copies": [
+          "statistical-models-and-experiments/scientific-statistical-model-contracts.md"
+        ],
+        "pins": [
+          {
+            "path": "library/statistical-models-and-experiments/scientific-statistical-model-contracts.md",
+            "sha256": "c31e7ed631f6aa6d1253736cc192daef83eaec349b204b6d741c4eedf90be9ac"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "scientific-statistical-model-contracts",
+          "kind": "P",
+          "category": "statistical-models-and-experiments",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "stationary-time-series-moments-and-autocovariance",
+        "copies": [
+          "statistical-models-and-experiments/stationary-time-series-moments-and-autocovariance.md"
+        ],
+        "pins": [
+          {
+            "path": "library/statistical-models-and-experiments/stationary-time-series-moments-and-autocovariance.md",
+            "sha256": "fea703fa22f638b1aed7975844b02261e236bb38b533865d49140b2d99d6c81c"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "stationary-time-series-moments-and-autocovariance",
+          "kind": "P",
+          "category": "statistical-models-and-experiments",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "statistical-experiments-models-and-identifiability",
+        "copies": [
+          "mathematical-statistics/statistical-experiments-models-and-identifiability.md"
+        ],
+        "pins": [
+          {
+            "path": "library/mathematical-statistics/statistical-experiments-models-and-identifiability.md",
+            "sha256": "63589e57bfe0c6ae6b23568b85f1342a68005ede5fbbf296b0398d49be51b390"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "statistical-experiments-models-and-identifiability",
+          "kind": "P",
+          "category": "mathematical-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "complex-coordinate-and-path-transport",
+        "copies": [
+          "complex-analysis/complex-coordinate-and-path-transport.md"
+        ],
+        "pins": [
+          {
+            "path": "library/complex-analysis/complex-coordinate-and-path-transport.md",
+            "sha256": "cbb188044f0ec6ab22b88c2163cf99976e3b9cba21813384ce009aae7b5bf6d8"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "complex-coordinate-and-path-transport",
+          "kind": "P",
+          "category": "complex-analysis",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "complex-subspace-realification",
+        "copies": [
+          "functional-analysis/complex-subspace-realification.md"
+        ],
+        "pins": [
+          {
+            "path": "library/functional-analysis/complex-subspace-realification.md",
+            "sha256": "3645179983b0b79f1f713ab930b65f4270150440f2cd582b151278342d149bba"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "complex-subspace-realification",
+          "kind": "P",
+          "category": "functional-analysis",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "the-structure-of-finite-abelian-groups",
+        "copies": [
+          "abstract-algebra/the-structure-of-finite-abelian-groups.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/the-structure-of-finite-abelian-groups.md",
+            "sha256": "2531613faede8ba082073d84e280c8f12bc742f3fbd0fc266fa7af5d0f44a6af"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "the-structure-of-finite-abelian-groups",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "splitting-fields",
+        "copies": [
+          "abstract-algebra/splitting-fields.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/splitting-fields.md",
+            "sha256": "98a7a63244181d5c2ad267a5d704597aa21adb3e129191075a471d9f1080f60f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "splitting-fields",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "the-galois-correspondence",
+        "copies": [
+          "abstract-algebra/the-galois-correspondence.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/the-galois-correspondence.md",
+            "sha256": "6924aa3d9a9fa447220b159b916ce4327f0f2d7bde1876ba60490b88a6e89f1f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "the-galois-correspondence",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "sylow-theorems-and-nilpotent-groups",
+        "copies": [
+          "abstract-algebra/sylow-theorems-and-nilpotent-groups.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/sylow-theorems-and-nilpotent-groups.md",
+            "sha256": "4b004f08552bc6cd9cbacb22b17380996be3b8ea8042a8b00e057d7813917c43"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "sylow-theorems-and-nilpotent-groups",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "pointwise-extended-real-function-products",
+        "copies": [
+          "measure-theory/pointwise-extended-real-function-products.md"
+        ],
+        "pins": [
+          {
+            "path": "library/measure-theory/pointwise-extended-real-function-products.md",
+            "sha256": "78cbd4ebc5b9a394379a1a4668835cc737ffee919c227708bdc4b9f7997b4479"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "pointwise-extended-real-function-products",
+          "kind": "P",
+          "category": "measure-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "dirichlet-kernel-localisation-and-pointwise-fourier-convergence",
+        "copies": [
+          "fourier-analysis/dirichlet-kernel-localisation-and-pointwise-fourier-convergence.md"
+        ],
+        "pins": [
+          {
+            "path": "library/fourier-analysis/dirichlet-kernel-localisation-and-pointwise-fourier-convergence.md",
+            "sha256": "b00ce95d322ce811725d87a30014f2f16a45b4cefe232b0ec6cafff22dc5e157"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "dirichlet-kernel-localisation-and-pointwise-fourier-convergence",
+          "kind": "P",
+          "category": "fourier-analysis",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "absolute-values-completions-and-p-adic-numbers",
+        "copies": [
+          "number-theory/absolute-values-completions-and-p-adic-numbers.md"
+        ],
+        "pins": [
+          {
+            "path": "library/number-theory/absolute-values-completions-and-p-adic-numbers.md",
+            "sha256": "a37ee6f675c690bb528009b8a8edf190e4da03766843b7abd417bd0e42d3da82"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "absolute-values-completions-and-p-adic-numbers",
+          "kind": "P",
+          "category": "number-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "asymptotic-convergence-consistency-and-identification",
+        "copies": [
+          "mathematical-statistics/asymptotic-convergence-consistency-and-identification.md"
+        ],
+        "pins": [
+          {
+            "path": "library/mathematical-statistics/asymptotic-convergence-consistency-and-identification.md",
+            "sha256": "21818db9c08c335eb4a2bb45e2cb792c00bca62332eca0c01ad2f2daf36cccd0"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "asymptotic-convergence-consistency-and-identification",
+          "kind": "P",
+          "category": "mathematical-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "estimators-and-randomized-procedures",
+        "copies": [
+          "mathematical-statistics/estimators-and-randomized-procedures.md"
+        ],
+        "pins": [
+          {
+            "path": "library/mathematical-statistics/estimators-and-randomized-procedures.md",
+            "sha256": "18fa29509e0037bf9f6023964f0ffb5acfe51aaca61aec2c1eb995a1de79d48a"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "estimators-and-randomized-procedures",
+          "kind": "P",
+          "category": "mathematical-statistics",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "cyclic-groups-and-direct-products",
+        "copies": [
+          "abstract-algebra/cyclic-groups-and-direct-products.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/cyclic-groups-and-direct-products.md",
+            "sha256": "3f254331d1a681c5bb2646726027c44c13d4ccae3a06faef5df6249d9ec3173c"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "cyclic-groups-and-direct-products",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "primes-and-the-fundamental-theorem-of-arithmetic",
+        "copies": [
+          "number-theory/primes-and-the-fundamental-theorem-of-arithmetic.md"
+        ],
+        "pins": [
+          {
+            "path": "library/number-theory/primes-and-the-fundamental-theorem-of-arithmetic.md",
+            "sha256": "84941178bf5586c3bee1e324e8bf777cf40506b8a9d2e30143a180c23e132548"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "primes-and-the-fundamental-theorem-of-arithmetic",
+          "kind": "P",
+          "category": "number-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "divisibility-gcd-and-bezout",
+        "copies": [
+          "number-theory/divisibility-gcd-and-bezout.md"
+        ],
+        "pins": [
+          {
+            "path": "library/number-theory/divisibility-gcd-and-bezout.md",
+            "sha256": "4c2c69e74b30b67925b1a4821b40b1bdf670a8cd07adc3816810669c35bc9152"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "divisibility-gcd-and-bezout",
+          "kind": "P",
+          "category": "number-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "composition-series-and-solvable-groups",
+        "copies": [
+          "abstract-algebra/composition-series-and-solvable-groups.md"
+        ],
+        "pins": [
+          {
+            "path": "library/abstract-algebra/composition-series-and-solvable-groups.md",
+            "sha256": "04fae391902780504224615f4a51ccd871067f110db187300f9fe62cff8ea755"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "composition-series-and-solvable-groups",
+          "kind": "P",
+          "category": "abstract-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "cw-complexes-and-cellular-homology",
+        "copies": [
+          "algebraic-topology/cw-complexes-and-cellular-homology.md"
+        ],
+        "pins": [
+          {
+            "path": "library/algebraic-topology/cw-complexes-and-cellular-homology.md",
+            "sha256": "81e188d5f913829083f49da5c8e4cd7a4b06ee8beead6e32b14125459e330161"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "cw-complexes-and-cellular-homology",
+          "kind": "P",
+          "category": "algebraic-topology",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "chain-homotopy-and-the-homotopy-category",
+        "copies": [
+          "homological-algebra/chain-homotopy-and-the-homotopy-category.md"
+        ],
+        "pins": [
+          {
+            "path": "library/homological-algebra/chain-homotopy-and-the-homotopy-category.md",
+            "sha256": "073ecd98e6717088aae22ca27acaf6a30b19bffe3781712bf3482dda1a6f724b"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "chain-homotopy-and-the-homotopy-category",
+          "kind": "P",
+          "category": "homological-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "long-exact-sequences-in-homology",
+        "copies": [
+          "homological-algebra/long-exact-sequences-in-homology.md"
+        ],
+        "pins": [
+          {
+            "path": "library/homological-algebra/long-exact-sequences-in-homology.md",
+            "sha256": "c0d7cfe39fb0cf88758f16a3836a15f3d9958597b0e75ecc4753ac8ad6bbe8ce"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "long-exact-sequences-in-homology",
+          "kind": "P",
+          "category": "homological-algebra",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "simplicial-subdivision-and-simplicial-approximation",
+        "copies": [
+          "algebraic-topology/simplicial-subdivision-and-simplicial-approximation.md"
+        ],
+        "pins": [
+          {
+            "path": "library/algebraic-topology/simplicial-subdivision-and-simplicial-approximation.md",
+            "sha256": "c55c945920124bc838583565e0181afaba15ac85e4f32e5e9aa705112af3728f"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "simplicial-subdivision-and-simplicial-approximation",
+          "kind": "P",
+          "category": "algebraic-topology",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "the-diagram-lemmas-in-an-abelian-category",
+        "copies": [
+          "category-theory/the-diagram-lemmas-in-an-abelian-category.md"
+        ],
+        "pins": [
+          {
+            "path": "library/category-theory/the-diagram-lemmas-in-an-abelian-category.md",
+            "sha256": "aebc7e3ba413ea23fe8604a7b1d5dab884b3494deb1ba8ee27985cc907fb4e68"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "the-diagram-lemmas-in-an-abelian-category",
+          "kind": "P",
+          "category": "category-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "exactness-and-the-member-calculus",
+        "copies": [
+          "category-theory/exactness-and-the-member-calculus.md"
+        ],
+        "pins": [
+          {
+            "path": "library/category-theory/exactness-and-the-member-calculus.md",
+            "sha256": "b130a68c53f368ff71a02efc657411bdffdd36c021b7ed872b0fda1085e05216"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "exactness-and-the-member-calculus",
+          "kind": "P",
+          "category": "category-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "reflective-subcategories-and-the-adjoint-functor-theorems",
+        "copies": [
+          "category-theory/reflective-subcategories-and-the-adjoint-functor-theorems.md"
+        ],
+        "pins": [
+          {
+            "path": "library/category-theory/reflective-subcategories-and-the-adjoint-functor-theorems.md",
+            "sha256": "a1b05a8b3703289a83f24f0208ef14289d659a1d8f154c2af0aa9d4b874ac441"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "reflective-subcategories-and-the-adjoint-functor-theorems",
+          "kind": "P",
+          "category": "category-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "cardinal-arithmetic-and-cofinality",
+        "copies": [
+          "foundations/cardinal-arithmetic-and-cofinality.md",
+          "set-theory/cardinal-arithmetic-and-cofinality.md"
+        ],
+        "pins": [
+          {
+            "path": "library/set-theory/cardinal-arithmetic-and-cofinality.md",
+            "sha256": "c115ecea467a3f4a940b8aebcbb630e04a0c09dd3309338270f30a28e8957167"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "cardinal-arithmetic-and-cofinality",
+          "kind": "P",
+          "category": "set-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "universal-properties-and-the-yoneda-lemma",
+        "copies": [
+          "category-theory/universal-properties-and-the-yoneda-lemma.md"
+        ],
+        "pins": [
+          {
+            "path": "library/category-theory/universal-properties-and-the-yoneda-lemma.md",
+            "sha256": "d3aa7711f4008f13a428d4c905aaf0ffc47461688f6b7e554554eaf808ba8d11"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "universal-properties-and-the-yoneda-lemma",
+          "kind": "P",
+          "category": "category-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      },
+      {
+        "id": "ordinal-arithmetic",
+        "copies": [
+          "foundations/ordinal-arithmetic.md",
+          "set-theory/ordinal-arithmetic.md"
+        ],
+        "pins": [
+          {
+            "path": "library/set-theory/ordinal-arithmetic.md",
+            "sha256": "bc6a777c1045677cbd8296382314dc67d35f103251aa130d7fa38efa6b56e5fd"
+          }
+        ],
+        "status": "authenticated-context-only",
+        "resolved": {
+          "id": "ordinal-arithmetic",
+          "kind": "P",
+          "category": "set-theory",
+          "library": "mathematics",
+          "order": 0,
+          "requires": [],
+          "items": [],
+          "importedKind": "A"
+        }
+      }
+    ]
+  }
+}

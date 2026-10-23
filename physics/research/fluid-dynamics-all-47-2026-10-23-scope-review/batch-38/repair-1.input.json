@@ -1,0 +1,93 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-38-1",
+  "inventory": {
+    "pages": [
+      "fd-ples01",
+      "fd-ples01-examples"
+    ],
+    "items": [
+      "post-fd-eddy-viscosity-closure",
+      "pthm-fd-eddy-closure-resolved-dissipation",
+      "ex-fd-eddy-shear-production"
+    ],
+    "pairs": [
+      "fd-ples01"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/post-fd-eddy-viscosity-closure.md",
+    "items/pthm-fd-eddy-closure-resolved-dissipation.md",
+    "items/ex-fd-eddy-shear-production.md",
+    "library/fluid-dynamics/fd-ples01.md",
+    "library/fluid-dynamics/fd-ples01-examples.md"
+  ],
+  "write_batches": [
+    "38"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-fd-eddy-shear-production",
+      "path": [
+        "post-fd-eddy-viscosity-closure",
+        "pthm-fd-eddy-closure-resolved-dissipation",
+        "ex-fd-eddy-shear-production"
+      ],
+      "paths": [
+        [
+          "post-fd-eddy-viscosity-closure",
+          "pthm-fd-eddy-closure-resolved-dissipation",
+          "ex-fd-eddy-shear-production"
+        ],
+        [
+          "pthm-fd-eddy-closure-resolved-dissipation",
+          "ex-fd-eddy-shear-production"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-fd-eddy-closure-resolved-dissipation",
+      "path": [
+        "post-fd-eddy-viscosity-closure",
+        "pthm-fd-eddy-closure-resolved-dissipation"
+      ],
+      "paths": [
+        [
+          "post-fd-eddy-viscosity-closure",
+          "pthm-fd-eddy-closure-resolved-dissipation"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "post-fd-eddy-viscosity-closure": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "Adopted three-dimensional isotropic stress-form closure for smooth, periodic, constant-density incompressible Newtonian large-eddy models using the stated positive convolution filter. The nonnegative specific unresolved energy and kinematic eddy-viscosity fields are model inputs; no coefficient law, empirical validation, universal applicability, or equality with the exact filtered covariance is asserted.",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nAssume the Axiom of Countable Choice for the normalized periodic torus convention. Let $I\\subseteq\\mathbb R$ be an open time interval, let $L>0$ m, and let $\\mathbb T_L^3=(\\mathbb R/L\\mathbb Z)^3$ have volume measure $dx$ on a period cell and normalized measure $d\\mu_L=L^{-3}dx$. Coordinates $x,r,L,\\ell$ are measured in metres and time $t$ in seconds. Let $K:\\mathbb R^3\\to[0,\\infty)$ be smooth, dimensionless, supported in a compact subset of $B_1(0)$, and satisfy $\\int_{\\mathbb R^3}K(s)\\,ds=1$. For $0<\\ell<L/2$, define\n\n$$G_\\ell(r)=\\sum_{n\\in\\mathbb Z^3}\\ell^{-3}K\\!\\left(\\frac{r+Ln}{\\ell}\\right),\\qquad \\overline q_\\ell(x,t)=\\int_{\\mathbb T_L^3}G_\\ell(r)q(x-r,t)\\,dx.$$\n\nThe kernel $G_\\ell$ has units m$^{-3}$ and filtering preserves the units of $q$.\n\nThe physical base model is the smooth, unforced, constant-density incompressible Newtonian branch: $\\rho_0>0$ kg m$^{-3}$ and dynamic viscosity $\\mu\\ge0$ Pa s are constant, $u\\in C^1(I;C^\\infty(\\mathbb T_L^3;\\mathbb R^3))$ is periodic with $\\nabla\\cdot u=0$ and velocity units m s$^{-1}$, $D(u)=(\\nabla u+(\\nabla u)^T)/2$, the dynamic Cauchy stress is $\\sigma=-p_{\\rm dyn}I_3+2\\mu D(u)$, and $\\nu=\\mu/\\rho_0$ m$^2$ s$^{-1}$. Here $p_{\\rm dyn}$ is the pressure multiplier in Pa; the pressure per unit mass in the filtered equation is $\\pi=p_{\\rm dyn}/\\rho_0$ in m$^2$ s$^{-2}$.\n\nFor the filtered velocity $\\overline u_\\ell$, define its rate-of-strain tensor by\n\n$$D_\\ell=\\frac12\\left(\\nabla\\overline u_\\ell+(\\nabla\\overline u_\\ell)^T\\right),\\qquad (\\nabla\\overline u_\\ell)_{ij}=\\partial_j\\overline u_{\\ell,i}.$$\n\nThe matrix $D_\\ell$ has units s$^{-1}$. Let $I_3$ be the $3\\times3$ identity matrix and use the Frobenius contraction $A:B=\\sum_{i,j=1}^3A_{ij}B_{ij}$ for real $3\\times3$ matrices.\n\nAdopt the following large-eddy simulation (LES) stress-form closure. A closure here means a specified modeled stress substituted for the exact filtered covariance in the resolved momentum equation. Let $k,\\nu_t\\in C^1(I\\times\\mathbb T_L^3;[0,\\infty))$ be prescribed model fields, where $k$ represents specific unresolved kinetic energy in m$^2$ s$^{-2}$ and $\\nu_t$ is kinematic eddy viscosity in m$^2$ s$^{-1}$. The modeled specific subfilter stress and its modeled transfer are\n\n$$\\tau_{\\ell}^{\\rm model}=\\frac{2k}{3}I_3-2\\nu_tD_\\ell,\\qquad \\Pi_{\\ell}^{\\rm model}=-\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell.$$\n\nThe closed filtered momentum equation uses the sign convention\n\n$$\\partial_t\\overline u_\\ell+\\nabla\\cdot(\\overline u_\\ell\\otimes\\overline u_\\ell)+\\nabla\\pi=\\nu\\Delta\\overline u_\\ell-\\nabla\\cdot\\tau_{\\ell}^{\\rm model},\\qquad \\nabla\\cdot\\overline u_\\ell=0.$$\n\nBoth terms in $\\tau_{\\ell}^{\\rm model}$ have units m$^2$ s$^{-2}$, and $\\Pi_{\\ell}^{\\rm model}$ has units m$^2$ s$^{-3}$. This is an adopted constitutive form, not a derivation of a physical law: $k$ and $\\nu_t$ must be supplied as model inputs or by separate model equations. The prescription does not assert that $\\tau_{\\ell}^{\\rm model}$ equals the exact covariance $\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell$, that the modeled tensor is positive semidefinite, or that the closure is empirically adequate in every flow regime. No absence of backscatter for the exact filtered stress is asserted."
+    ],
+    "pthm-fd-eddy-closure-resolved-dissipation": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Pointwise resolved stress-transfer identity for the adopted smooth, periodic, three-dimensional incompressible Newtonian closure. The nonnegative result concerns only the modeled eddy-viscosity stress. It does not assert a sign for the exact filtered covariance, model accuracy, a solution-existence result, or universal absence of backscatter.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nAssume the Axiom of Countable Choice for the normalized periodic torus convention. Let $I\\subseteq\\mathbb R$ be an open time interval, $L>0$ m, $0<\\ell<L/2$, and $\\mathbb T_L^3=(\\mathbb R/L\\mathbb Z)^3$. Spatial coordinates are in metres and time is in seconds. Let $K:\\mathbb R^3\\to[0,\\infty)$ be smooth, dimensionless, supported in a compact subset of $B_1(0)$, and satisfy $\\int K(s)\\,ds=1$. Define $G_\\ell(r)=\\sum_{n\\in\\mathbb Z^3}\\ell^{-3}K((r+Ln)/\\ell)$ and $\\overline u_\\ell(x,t)=\\int_{\\mathbb T_L^3}G_\\ell(r)u(x-r,t)\\,dx$, using volume measure on a period cell. Let $u\\in C^1(I;C^\\infty(\\mathbb T_L^3;\\mathbb R^3))$ be periodic and divergence-free, with constant density $\\rho_0>0$ kg m$^{-3}$ and constant dynamic viscosity $\\mu\\ge0$ Pa s. Put $\\nu=\\mu/\\rho_0$ m$^2$ s$^{-1}$ and let $\\pi=p_{\\rm dyn}/\\rho_0$ be pressure per unit mass in m$^2$ s$^{-2}$. Assume the unforced incompressible Newtonian equation\n\n$$\\partial_tu+\\nabla\\cdot(u\\otimes u)+\\nabla\\pi=\\nu\\Delta u,\\qquad \\nabla\\cdot u=0.$$\n\nFor this filter define the exact covariance stress and transfer by $\\tau_\\ell=\\overline{u\\otimes u}_\\ell-\\overline u_\\ell\\otimes\\overline u_\\ell$ and $\\Pi_\\ell=-\\tau_\\ell:\\nabla\\overline u_\\ell$. For real $3\\times3$ matrices set $A:B=\\sum_{i,j=1}^3A_{ij}B_{ij}$ and $|A|_F^2=\\sum_{i,j=1}^3|A_{ij}|^2$.\n\nUse the positive smooth unit-mass periodic convolution filter of width $\\ell$ to define $\\overline u_\\ell$. Define the resolved rate-of-strain matrix by\n\n$$D_\\ell=\\frac12\\left(\\nabla\\overline u_\\ell+(\\nabla\\overline u_\\ell)^T\\right),\\qquad (\\nabla\\overline u_\\ell)_{ij}=\\partial_j\\overline u_{\\ell,i}.$$\n\nThe matrix $D_\\ell$ has units s$^{-1}$; let $I_3$ be the $3\\times3$ identity matrix.\n\nLet $k,\\nu_t\\in C^1(I\\times\\mathbb T_L^3;[0,\\infty))$ be prescribed specific unresolved kinetic energy and kinematic eddy-viscosity fields, with units m$^2$ s$^{-2}$ and m$^2$ s$^{-1}$, respectively. Adopt the modeled specific stress $\\tau_{\\ell}^{\\rm model}=2kI_3/3-2\\nu_tD_\\ell$ as the replacement for the exact filtered covariance in the resolved model equation, and define $\\Pi_{\\ell}^{\\rm model}=-\\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell$. Then, at every $(x,t)\\in\\mathbb T_L^3\\times I$,\n\n$$\\Pi_{\\ell}^{\\rm model}(x,t)=2\\nu_t(x,t)|D_\\ell(x,t)|_F^2\\ge0,\\qquad \\tau_{\\ell}^{\\rm model}:\\nabla\\overline u_\\ell=-2\\nu_t|D_\\ell|_F^2\\le0.$$\n\nIf additionally $\\nu>0$ and the specific pressure $\\pi$ is smooth, the exact filtered-covariance energy theorem applies to this smooth solution. Its resolved-energy balance contains the exact stress contraction $+\\tau_\\ell:\\nabla\\overline u_\\ell$ on the right-hand side. Replacing that stress slot by $\\tau_{\\ell}^{\\rm model}$ in the adopted closure model therefore contributes the displayed nonpositive term to the modeled balance. This is a conditional model deduction; it does not identify the modeled stress with the exact covariance or assert a sign for exact filtered transfer."
+    ],
+    "ex-fd-eddy-shear-production": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "Pointwise simple-shear state of the adopted three-dimensional LES closure. This is an exact model calculation, not a measured flow or a solution- existence claim.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

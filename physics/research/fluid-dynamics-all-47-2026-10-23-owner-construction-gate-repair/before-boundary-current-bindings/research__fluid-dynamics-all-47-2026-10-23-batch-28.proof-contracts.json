@@ -1,0 +1,540 @@
+{
+  "version": 1,
+  "scope": [
+    "def-fd-mini-fluid-interface",
+    "prop-fd-mini-observation-error",
+    "prop-fd-mini-accumulated-pressure-observation",
+    "rem-fd-mini-weak-velocity-scope",
+    "ex-fd-mini-pressure-time-test"
+  ],
+  "contracts": {
+    "def-fd-mini-fluid-interface": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The interface requires a nonempty domain, positive final time, and at least one strictly positive time cell.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: T>0 and 0=t_0<...<t_N=T force N>=1; D is explicitly nonempty and its conforming mesh covers D. The bubble product is fixed j=0,...,d with d=2 or 3, so neither the time-cell family nor barycentric product has an empty case.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item defines input and observation maps but asserts no zero-data estimate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no one-cell numerical claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Zero viscosity, zero time cells, and empty spatial domains are excluded by the interface conditions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition specifies nodal and time-tested outputs but proves no endpoint estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Countable Choice is adopted as an explicit mathematical premise; this definition proves no selection or existence result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines an interface and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines an interface and states no equivalence."
+        }
+      ]
+    },
+    "prop-fd-mini-observation-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-mini-be-smooth-velocity-error",
+          "source_section": "Statement",
+          "quote": "\\max_{0\\le n\\le N}\\|u(t_n)-u_h^n\\|_2+\\nu^{1/2}\\left(\\sum_{n=1}^N\\tau_n\\|u(t_n)-u_h^n\\|_V^2\\right)^{1/2}\\le C_*\\bigl(hM+\\tau_{\\max}M^2\\bigr)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-mini-fluid-interface",
+          "source_section": "Definition",
+          "quote": "For a family of bounded real-linear velocity sensors $\\ell_n\\in V^*$, define the endpoint-sampled exact and discrete observations by",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "observation-difference",
+          "claim": "Rewrite the discrete-minus-exact endpoint observation as a finite weighted sum of velocity errors.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "weighted-duality",
+          "claim": "Apply the V* dual norm and weighted Cauchy–Schwarz to the finite sum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "smooth-velocity-substitution",
+          "claim": "Use the time-integrated V error component of the smooth MINI velocity theorem.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The interface requires T>0 and a strictly increasing finite partition, so an empty time-cell family is outside the statement.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: The inherited smooth MINI interface forces N>=1 because its partition spans T>0. Proof 1.1 sums errors over n=1,...,N and step 2.1 applies weighted Cauchy–Schwarz to those positive time cells. An empty partition is excluded, not silently assigned an error bound.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every sensor is zero, the identity in step 1.1 makes the observation difference zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-cell partition the weighted Cauchy–Schwarz inequality in step 2.1 is the same one-term bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the nodal velocity errors vanish, the identity in step 1.1 gives zero observation error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The supplier estimate used in step 3.1 controls every node from t0 through tN."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite sensor family and actual discrete root are given inputs; step 3.1 invokes only the explicitly assumed Countable Choice supplier result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an inequality and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an inequality and states no equivalence."
+        }
+      ]
+    },
+    "prop-fd-mini-accumulated-pressure-observation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-mini-be-smooth-integrated-pressure-error",
+          "source_section": "Statement",
+          "quote": "\\max_m\\|P(t_m)-P_h^m\\|_2\\le KH",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-mini-be-smooth-integrated-pressure-error",
+          "source_section": "Statement",
+          "quote": "\\left\\|\\int_0^T\\bigl(p(t)-\\overline p_h(t)\\bigr)\\eta(t)\\,dt\\right\\|_2\\le(K+1)H\\|\\eta'\\|_{L^1(0,T)}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-mini-fluid-interface",
+          "source_section": "Definition",
+          "quote": "For $\\xi\\in Q$ and $\\eta\\in C_c^\\infty(0,T)$, define the accumulated-pressure observation $(P(t_m)-P_h^m,\\xi)_{L^2}$ and the time-tested pressure observation $\\left(\\int_0^T(p(t)-\\bar p_h(t))\\eta(t)\\,dt,\\xi\\right)_{L^2}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "endpoint-observation",
+          "claim": "Identify the endpoint scalar observation with the Q pairing in the interface.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "endpoint-pressure-bound",
+          "claim": "Pair the accumulated pressure-norm estimate with xi using Hilbert-space Cauchy–Schwarz.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "time-test-norm",
+          "claim": "Use the imported norm estimate for the right-constant pressure reconstruction and smooth time test.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "time-test-pairing",
+          "claim": "Pair the Q-valued time-test estimate with xi.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The smooth interface requires T>0 and at least one strictly positive time cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If xi is zero, both pairings vanish by the Cauchy–Schwarz bounds in steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-cell partition the endpoint and time-test pairings remain the same norm inequalities in steps 2.1 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If eta is zero the time-tested pairing is zero by step 1.2; at m=0 the primitive pairing is zero by P(0)=P_h^0=0 in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The supplier bound used in step 2.1 holds for every node 0<=m<=N, including m=0 and m=N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The fixed xi and eta are given; no selection is made in steps 1.1–3.1 and Countable Choice is an explicit supplier hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a pair of inequalities and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a pair of inequalities and states no equivalence."
+        }
+      ]
+    },
+    "rem-fd-mini-weak-velocity-scope": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-mini-navier-stokes-be-subsequential-limit",
+          "source_section": "Statement",
+          "quote": "a subsequence of piecewise-constant velocities converges strongly in $L^2(0,T;L^2(D)^d)$ and weakly in $L^2(0,T;H^1_0(D)^d)$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-mini-navier-stokes-be-subsequential-limit",
+          "source_section": "Statement",
+          "quote": "It does not assert the pressure regularity and pressure-bearing formulation required by the PE06 plan",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-na-solenoidal-energy-weak-ns-velocity",
+          "source_section": "Definition",
+          "quote": "This solenoidal definition does not itself assert a pressure exists in $L^{4/3}(0,T;L^2_0(D))$; that is a separate regularity conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-fd-mini-accumulated-pressure-observation",
+          "source_section": "Statement",
+          "quote": "the exact no-slip solution has $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$ and $p\\in W^{1,\\infty}(0,T;H^1(D)\\cap Q)$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weak-limit-conclusion",
+          "claim": "Apply the subsequential-limit theorem under its Axiom-of-Choice and energy-data assumptions.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "pressure-scope-comparison",
+          "claim": "Compare the weak-limit theorem's express pressure limitation with the smooth pressure-observation hypotheses.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The weak-limit theorem assumes a nonempty bounded domain, positive final time, and nonempty mesh/time families."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The theorem remains a velocity statement when f and u0 vanish; step 2.1 still supplies no pressure-observation conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result is about a subsequence of mesh/time families tending to zero, not a single discretization."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem excludes empty domains and requires positive finite T and strictly positive time steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The weak initial trace u(0)=u0 is part of the conclusion recorded in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Theorem application in step 1.1 explicitly assumes AC; the smooth comparison separately retains Countable Choice in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark records the scope of a theorem and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark records the scope of a theorem and states no equivalence."
+        }
+      ]
+    },
+    "ex-fd-mini-pressure-time-test": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-fd-mini-accumulated-pressure-observation",
+          "source_section": "Statement",
+          "quote": "For every $\\xi\\in Q$, every $\\eta\\in C_c^\\infty(0,T)$, and every node $0\\le m\\le N$, the interface observations satisfy",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-mini-fluid-interface",
+          "source_section": "Definition",
+          "quote": "For $\\xi\\in Q$ and $\\eta\\in C_c^\\infty(0,T)$, define the accumulated-pressure observation $(P(t_m)-P_h^m,\\xi)_{L^2}$ and the time-tested pressure observation $\\left(\\int_0^T(p(t)-\\bar p_h(t))\\eta(t)\\,dt,\\xi\\right)_{L^2}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "square-sensor-norm",
+          "claim": "Integrate the mean-zero linear pressure sensor and compute its L2 norm on the unit square.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "test-normalization",
+          "claim": "Prove the denominator is positive for a nonconstant smooth test and normalize its derivative L1 norm to one.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "pressure-bound-specialization",
+          "claim": "Apply the accumulated-pressure proposition and substitute the two computed norms.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero sensor and a nonconstant test; an empty sensor/test family is outside this instance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero sensor x-1/2; zero sensors are covered by the general proposition instead."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit square and unit time interval are used in the direct integrals of step 1.1, and the single time test is normalized in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The nonconstant test makes the normalization denominator positive by step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The bound in step 2.1 applies at every node 0<=m<=3, including m=0 and m=3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A nonconstant test is a given input and Countable Choice is explicit; step 2.1 makes no selection from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a conditional inequality and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a conditional inequality and states no equivalence."
+        }
+      ]
+    }
+  }
+}

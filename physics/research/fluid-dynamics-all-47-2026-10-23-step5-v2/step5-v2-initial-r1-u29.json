@@ -1,0 +1,191 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "def-fd-forced-incompressible-newtonian-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "521f9b3770d181c38b27034be68ea1a6058f79b7310d317e1218cc01528790c6",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The selected classical wall equality is undefined for fields specified only on I x Omega. Interior C2 regularity, even with the forced interior equations, does not yield a boundary restriction: on the unit ball u=(-x_2,x_1,0)/(1-|x|^2) is smooth and divergence-free with no finite extension at (1,0,0); p=0 and b=(u dot grad)u-(mu_0/rho_0)Delta u satisfy the forced equation. Added an explicit continuous extension and defined its unique boundary restriction precisely when classical stationary no-slip is selected.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "model": "gpt-6-luna",
+      "context_sha256": "a6e8c39479fb2cbe0f7e55ed4563da6339ae9fa5c8912cc07714f0dca2dd7a24",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplier declares time-first fields while this theorem uses space-first physical fields without specifying their relationship. The local equations and estimates have the intended content, but the explicit model-interface convention is missing. Defined u_phys(x,t)=u(t,x), likewise p and b, with both product domains, including the adopted weak extension. Also replaced the undefined t_m* conversion by t_phys,m=(ell_0/U_0)t_m, preserving every bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-fd-forced-incompressible-newtonian-model",
+      "disposition": "repaired",
+      "post_sha256": "b4afb04ce9fc14557c7af648e342695fff0524205df6ecadc556a21fa844aad9",
+      "review_context_sha256": "7f407f6dc8c8cfac50d7d73ad5e2ba3bb9a39fd212faa80f373742d3ec6744eb",
+      "reason": "Checked the classical field domains, rowwise stress divergence, div(2 mu_0 D)=mu_0 Delta u for constant viscosity and zero divergence, SI units and lack of existence/empirical assertions. The new continuous extension gives a unique classical wall trace by density, without imposing pressure boundary regularity or inferring it from interior equations. The direct CFD consumer separately adopts its Sobolev weak extension and H1_0 wall data; that alternative is unchanged. Subsequently examined the current unforced supplier\u2019s explicit inertial-chart clarification; it preserves the inherited stress and material-derivative convention. Final hashes follow that actual effect review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "disposition": "repaired",
+      "post_sha256": "b311707c4ec3669d18e3b1e98cd2c7d01fc7205e43fd02296b2674524e9bd24e",
+      "review_context_sha256": "51334f639bc68b34cf6128d0c0c2b7c25a7c82920b1fc979c016023d849784a5",
+      "reason": "Checked the reindexing against the forced model and its separate classical trace repair. The adopted Sobolev weak equation, H1_0 trace, mean-zero gauge, strong regularity, averaged force, mass initialization, any actual MINI root, Countable Choice and time-step restriction match the local observation suppliers. Their full arguments yield the stated velocity dual-norm and pressure-pairing bounds, with the exact C_* and K coefficients; the imported mathematical theorem statements/proofs were inspected as supporting context, without claiming an audit of their entire prerequisite closure. Scaling pressure, volume and time yields rho_0 U_0 ell_0^4; the corrected physical node matches the dimensionless partition. No new empirical or instantaneous-pressure assertion is made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-fd-no-slip-cfd-observations",
+    "ex-fd-cfd-density-pressure-conversion"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "proposed_fixed",
+      "id": "def-fd-forced-incompressible-newtonian-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "521f9b3770d181c38b27034be68ea1a6058f79b7310d317e1218cc01528790c6",
+      "outcome": "confirmed_fatal",
+      "reason": "The selected classical wall equality is undefined for fields specified only on I x Omega. Interior C2 regularity, even with the forced interior equations, does not yield a boundary restriction: on the unit ball u=(-x_2,x_1,0)/(1-|x|^2) is smooth and divergence-free with no finite extension at (1,0,0); p=0 and b=(u dot grad)u-(mu_0/rho_0)Delta u satisfy the forced equation. Added an explicit continuous extension and defined its unique boundary restriction precisely when classical stationary no-slip is selected.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "other"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "proposed_fixed",
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "model": "gpt-6-luna",
+      "context_sha256": "a6e8c39479fb2cbe0f7e55ed4563da6339ae9fa5c8912cc07714f0dca2dd7a24",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplier declares time-first fields while this theorem uses space-first physical fields without specifying their relationship. The local equations and estimates have the intended content, but the explicit model-interface convention is missing. Defined u_phys(x,t)=u(t,x), likewise p and b, with both product domains, including the adopted weak extension. Also replaced the undefined t_m* conversion by t_phys,m=(ell_0/U_0)t_m, preserving every bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "No published consumer or published mathematical defect was identified in these assigned uses. The two actual downstream consumers are draft frontier items; imported mathematical suppliers remain untouched.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "checkpoint": "Complete: both assigned tuples adjudicated, both repairs and metadata reconciled, all scoped checks passed, direct consumer uses examined, and final current hashes recorded after the concurrent supplier effect review.",
+    "completed_items": [
+      "def-fd-forced-incompressible-newtonian-model",
+      "pthm-fd-no-slip-cfd-observations"
+    ],
+    "source_reading": "Reviewed current local suppliers and attributed outside proposal; no external retrieval or independent review of this repair is claimed.",
+    "consumer_uses": [
+      {
+        "supplier": "def-fd-forced-incompressible-newtonian-model",
+        "consumer": "pthm-fd-no-slip-cfd-observations",
+        "path": "items/pthm-fd-no-slip-cfd-observations.md",
+        "affected_use": "Statement, A2/A4 and step 1.1 adopt forced stress/body acceleration and separately specify the strong Sobolev distributional extension with zero trace encoded by V=H1_0.",
+        "disposition": "Classical trace clarification does not require a weak-branch change; the separate assigned time/space reindex repair is complete and reviewed."
+      },
+      {
+        "supplier": "pthm-fd-no-slip-cfd-observations",
+        "consumer": "ex-fd-cfd-density-pressure-conversion",
+        "path": "items/ex-fd-cfd-density-pressure-conversion.md",
+        "affected_use": "Example formula E_phys, Fact F1 and Verification steps 2.1 and 3.1 use the time-tested pressure bound and rho_0 U_0 ell_0^4 conversion with space-first p_phys(x,t).",
+        "disposition": "unaffected; space-first fields are now explicitly reindexed. The example assumes all theorem hypotheses, xi has mean zero and norm 1/sqrt(12), and its normalized eta gives exactly the retained symbolic bound. No consumer edit or further hop is necessary."
+      }
+    ],
+    "unresolved_obligations": [],
+    "page_uses": [
+      {
+        "page": "fd-pn01",
+        "path": "library/fluid-dynamics/fd-pn01.md",
+        "disposition": "unaffected",
+        "reason": "The frontmatter-only compact page lists both assigned items; it contains no mathematical prose, equation or diagram to repair."
+      },
+      {
+        "page": "fd-pn01-examples",
+        "path": "library/fluid-dynamics/fd-pn01-examples.md",
+        "disposition": "unaffected",
+        "reason": "The frontmatter-only compact examples page lists the unchanged pressure-conversion example and has no body or separate mathematical use."
+      }
+    ],
+    "metadata_repair": {
+      "manifest": "research/fluid-dynamics-all-47-2026-10-23-batch-29.pages.json",
+      "fields": [
+        "def-fd-forced-incompressible-newtonian-model.statement",
+        "pthm-fd-no-slip-cfd-observations.statement"
+      ],
+      "contract": "research/fluid-dynamics-all-47-2026-10-23-batch-29.proof-contracts.json",
+      "citation": "pthm-fd-no-slip-cfd-observations A4 / def-fd-forced-incompressible-newtonian-model full Definition quotation",
+      "lock": "step5-shared-write-lock.mjs run --owner step5-v2-initial-r1-u29 -- node --input-type=module; acquire/update/check/release completed with exit 0. No proof step, dependency, page body or historical review was changed."
+    },
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-fd-forced-incompressible-newtonian-model.md items/pthm-fd-no-slip-cfd-observations.md --json",
+        "exit_code": 0,
+        "result": "2 files; definition has no phase body, theorem direct proof passes; 0 failures."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-fd-forced-incompressible-newtonian-model.md items/pthm-fd-no-slip-cfd-observations.md library/fluid-dynamics/fd-pn01.md library/fluid-dynamics/fd-pn01-examples.md --json",
+        "exit_code": 0,
+        "result": "4 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-29.proof-contracts.json --strict --items pthm-fd-no-slip-cfd-observations --json",
+        "exit_code": 0,
+        "result": "1 assigned proof carrier checked; ok=true, no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-fd-forced-incompressible-newtonian-model.md items/pthm-fd-no-slip-cfd-observations.md",
+        "exit_code": 0,
+        "result": "2 items, 5 steps, 0 defects."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u29-items.json --json",
+        "selected_items": [
+          "def-fd-forced-incompressible-newtonian-model",
+          "pthm-fd-no-slip-cfd-observations"
+        ],
+        "exit_code": 0,
+        "result": "Focused checks cover exactly the two assigned items and their prerequisite graph; 0 errors, 0 warnings."
+      }
+    ],
+    "upstream_effect_review": {
+      "supplier": "def-fd-incompressible-newtonian-model",
+      "change": "Another owner added an explicit Cartesian inertial-chart definition and physical-scope clause during this review.",
+      "affected_uses": "The forced definition specializes the unforced Newtonian stress/material derivative in that inherited chart; the CFD theorem rescales coordinates in the same chart.",
+      "disposition": "unaffected; the orientation-preserving affine spatial isometry plus constant Galilean velocity identifies a Cartesian inertial chart. It preserves all time-first domains, derivative formulas, SI units and model equations used here. post-fd-boundary-data and post-fd-continuum-balances remain byte-identical to the inspected preimages. Examined the full current diff before recapturing review contexts."
+    },
+    "diagram_review": "Neither assigned carrier contains TikZ/tikzcd or a diagram-dependent claim; these scalar scaling and trace arguments need no added diagram.",
+    "outside_maintenance": "No affected published or outside-frontier item was found. Both direct consumers are in the frozen frontier; the unchanged example remains a controller-routed consumer review, with no source edit here.",
+    "final_consistency_check": "Exact frozen tuple identities, both downstream IDs in the frontier, every bound support-file raw hash and both manifest statement mirrors verified. Statements contain no hyperlinks; an initial naive bracket scan matched the mathematical product ](nu*) in K, and the corrected scan excludes mathematical spans. No source defect or edit resulted."
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/review.md": "2680c13d03b9d702736c8325bab4da26627968cf5c009aeba2035404d528f255",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/proposals/def-fd-forced-incompressible-newtonian-model.patch": "1c1b7eeea64b9cb78338b41e8e5461e6e3bc182705616b15c79d74397cc973b0",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/proposals/pthm-fd-no-slip-cfd-observations.patch": "579c4c822d70f067c2f1276e930362e6025c0cdca6832a23c32bb6c873ce3f1c",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/consumer-use-matrix.json": "0df4540c2f3e4170c70251c8c568e000f909ba92b9a24311a926ecbcb4699dcc",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/before/def-fd-forced-incompressible-newtonian-model.md": "2be4a90658b48b140e3463577fa1db9df400803f8e345d9dc7b0a921967fbb4d",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/before/pthm-fd-no-slip-cfd-observations.md": "5c55b4db3b26ec3b76d977dee205d071c1dc4fdcbb1c3b99c78a6862c4f1fae6",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-boundary-models/before/def-fd-incompressible-newtonian-model.md": "0649909474043a26efd2dcf3f7864d1bcb885bdf7de44bae36561e917904ac54"
+  }
+}

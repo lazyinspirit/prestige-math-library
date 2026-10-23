@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "43",
+  "round": 0,
+  "reviewed_items": [
+    "def-fd-solenoidal-reduced-ode",
+    "thm-fd-reduced-ode-global-energy",
+    "ex-fd-single-shear-reduced-model"
+  ],
+  "reviewed_pages": [
+    "fd-rom01",
+    "fd-rom01-examples"
+  ],
+  "decision": "repair",
+  "reason": "The inventory and page prerequisites match the approved design; both pages have empty bodies. The cited treatments support the finite Galerkin system and energy cancellation, while the local proof supplies the finite-family continuation and excludes PDE convergence ([Wiedemann §3.1.2](https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf), [Ryzhik §5.2](https://virtualmath1.stanford.edu/~ryzhik/STANFORD/STANF256B-19/notes-256B-19.pdf)). Repair the definition precision issues, declare the Euclidean completeness supplier, and make the Picard–Lindelöf map explicit; no gap requires owner escalation.",
+  "findings": [
+    {
+      "id": "def-fd-solenoidal-reduced-ode",
+      "type": "local",
+      "reason": "The Definition integrates Fourier coefficients for an arbitrary map q:Q_d→R^N without a measurability or integrability condition; restrict the coefficient map to an appropriate domain such as L^1. Also specify the solution regularity on [0,T), including the endpoint convention, or state the relevant content of the earlier ODE solution definition."
+    },
+    {
+      "id": "thm-fd-reduced-ode-global-energy",
+      "type": "prerequisite",
+      "reason": "Step 4.1 uses completeness of R^r to obtain the endpoint limit; Fact A1 asserts this without a declared supplier. Add and cite the published thm-euclidean-space-complete result (r≥1) as a mathematical premise."
+    },
+    {
+      "id": "thm-fd-reduced-ode-global-energy",
+      "type": "local",
+      "reason": "Step 1.1 applies the Picard supplier, whose domain is time-state space, to the state-only map F(a). Define the lift F̃(t,a)=F(a) and establish its locally uniform state-Lipschitz property; use that lift consistently at Step 5.1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-fd-reduced-ode-global-energy",
+      "decision": "accept",
+      "reason": "Its stated modes are smooth periodic fields and its solution class is C^1, so its current use satisfies the proposed integrability and solution-regularity clarifications; no consumer edit appears necessary."
+    },
+    {
+      "id": "ex-fd-single-shear-reduced-model",
+      "decision": "accept",
+      "reason": "Its finite sine mode is integrable and its explicit exponential solution is C^1; its indirect use through the theorem satisfies the proposed clarifications."
+    }
+  ]
+}

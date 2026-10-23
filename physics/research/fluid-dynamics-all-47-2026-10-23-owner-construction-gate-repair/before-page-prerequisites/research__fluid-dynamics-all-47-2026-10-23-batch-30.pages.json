@@ -1,0 +1,258 @@
+[
+  {
+    "order": 665,
+    "id": "fd-n03",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Compressible numerical conservation and admissibility",
+    "companion": "fd-n03-examples",
+    "requires": [
+      "conservative-finite-volume-weak-limits",
+      "invariant-domain-and-entropy-stable-conservative-schemes"
+    ],
+    "items": [
+      {
+        "id": "def-fd-compressible-numerical-contract",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Euler state, flux, positive set and numerical roles",
+        "reference": "items/def-fd-compressible-numerical-contract.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-hll-two-wave-flux",
+          "def-pe03-first-order-hll-finite-volume-update",
+          "def-pe03-entropy-stable-dissipative-flux"
+        ],
+        "dependency_roles": {
+          "def-ideal-gas-euler-state-and-pressure": "mathematical-premise",
+          "def-hll-two-wave-flux": "mathematical-premise",
+          "def-pe03-first-order-hll-finite-volume-update": "mathematical-premise",
+          "def-pe03-entropy-stable-dissipative-flux": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix a constant $\\gamma>1$. The one-dimensional ideal-gas Euler state is\n$U=(\\rho,m,E)\\in\\mathcal G_\\gamma\\subset\\mathbb R^3$, where\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\}.$$\nFor $U\\in\\mathcal G_\\gamma$, define the pressure, velocity, sound speed, and\nflux by\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right),\\qquad u(U)=\\frac m\\rho,\\qquad c(U)=\\sqrt{\\frac{\\gamma p(U)}{\\rho}},\\qquad F(U)=\\left(m,\\frac{m^2}{\\rho}+p(U),u(U)(E+p(U))\\right).$$\nThus $\\mathcal G_\\gamma$ is exactly the set with positive density and positive\npressure; every displayed map is defined on that open set.\n\nFor a periodic uniform mesh with $N\\ge2$ cells, width $\\Delta x>0$, and time\nstep $\\Delta t\\ge0$, index cells by $i\\in\\mathbb Z/N\\mathbb Z$ and put\n$\\lambda=\\Delta t/\\Delta x$. Given cell states $U_i\\in\\mathcal G_\\gamma$, a\nshared-face flux is one vector $\\widehat F_{i+1/2}\\in\\mathbb R^3$ assigned to\neach face and used in both adjacent cell balances. When produced by a\ntwo-state numerical flux $\\widehat F(U_L,U_R)$, it is consistent if\n$\\widehat F(U,U)=F(U)$ for every $U\\in\\mathcal G_\\gamma$. The associated\none-step update in conservative finite-volume form is\n$$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$\nThis shared-face form means that the same face vector appears with opposite\nsigns in the two neighboring cell updates. A step is admissible when every\noutput state $U_i^+$ belongs to $\\mathcal G_\\gamma$; this is a property to\nprove under specific flux and time-step hypotheses, not part of the update\ndefinition.\n\nWhen the HLL middle branch is used at a face, its supplied speeds satisfy\n$S_L<0<S_R$ and the flux is\n$$\\widehat F_{\\rm HLL}(U_L,U_R)=\\frac{S_RF(U_L)-S_LF(U_R)+S_LS_R(U_R-U_L)}{S_R-S_L}.$$\nThe speeds are supplied data; their appearance in this formula does not assert\nthat they enclose the waves of an exact nonlinear Riemann solution. The\nratio $\\lambda$ is the time step divided by cell width and is not a physical\nviscosity.\n\nFor a specified convex entropy pair, write $v$ for its entropy variable and\n$F^{ec}$ for a consistent entropy-conservative two-point flux. If $D$ is a\nsymmetric positive-semidefinite matrix, meaning $z^TDz\\ge0$ for every vector\n$z$, and $F^{ec}$ satisfies\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L),$$\nwhere $\\psi$ is the corresponding entropy potential, the entropy-stable\ndissipative flux is\n$$F^{es}(U_L,U_R)=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)\\bigl(v(U_R)-v(U_L)\\bigr).$$\nHere $v=\\nabla\\eta$ for the chosen entropy $\\eta$, and the entropy-conservative\nflux satisfies the corresponding entropy-variable jump identity. This is a\nseparate flux condition; it includes no fully discrete time-step entropy\ninequality. Conservation, admissibility, entropy stability, and convergence\ntherefore name different properties and require their own hypotheses.\n\nThe following schematic view shows the orientation of one shared face flux.\nPositive flux points to the right; the same vector leaves cell $i$ and enters\ncell $i+1$. The diagram records the indexing convention only; the update\nformula supplies the definition used in proofs.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.15cm,y=1cm]\n  \\draw (0,0) rectangle (2,0.7);\n  \\draw (2,0) rectangle (4,0.7);\n  \\draw (4,0) rectangle (6,0.7);\n  \\node at (1,0.35) {$U_{i-1}$};\n  \\node at (3,0.35) {$U_i$};\n  \\node at (5,0.35) {$U_{i+1}$};\n  \\draw[->] (1.55,1.1) -- (2.45,1.1);\n  \\draw[->] (3.55,1.1) -- (4.45,1.1);\n  \\node at (2,1.4) {$\\widehat F_{i-1/2}$};\n  \\node at (4,1.4) {$\\widehat F_{i+1/2}$};\n\\end{tikzpicture}\n~~~",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Complete 143-page course notes; §§3.4.1–3.4.3, PDF pp. 94–98: finite-volume cell averages, the shared-flux update, and numerical conservation."
+            },
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Complete 27-page chapter; §§4.1–4.3 and 5: entropy variables, entropy-conservative fluxes, positive-semidefinite dissipation, and the distinct fully discrete analysis."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Complete Euler approximate-solver chapter; HLLE two-wave middle state and supplied-wave-speed convention."
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "prop-fd-euler-llf-admissibility-interface",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Ideal-gas LLF admissibility specialization",
+        "reference": "items/prop-fd-euler-llf-admissibility-interface.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-compressible-numerical-contract",
+          "thm-pe03-ideal-gas-llf-branch-preserves-positivity"
+        ],
+        "dependency_roles": {
+          "def-fd-compressible-numerical-contract": "mathematical-premise",
+          "thm-pe03-ideal-gas-llf-branch-preserves-positivity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix $\\gamma>1$, an integer $N\\ge2$, a width $\\Delta x>0$, a time step\n$\\Delta t\\ge0$, and a periodic array of one-dimensional ideal-gas Euler states\n$U_i=(\\rho_i,m_i,E_i)\\in\\mathcal G_\\gamma\\subset\\mathbb R^3$, indexed by\n$i\\in\\mathbb Z/N\\mathbb Z$. For each state set\n$$p_i=(\\gamma-1)\\left(E_i-\\frac{m_i^2}{2\\rho_i}\\right),\\qquad u_i=\\frac{m_i}{\\rho_i},\\qquad c_i=\\sqrt{\\frac{\\gamma p_i}{\\rho_i}},\\qquad F_i=\\left(m_i,\\frac{m_i^2}{\\rho_i}+p_i,u_i(E_i+p_i)\\right),$$\nwhere\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\}.$$\nAt every face choose a supplied speed $a_{i+1/2}$ satisfying\n$$a_{i+1/2}\\ge\\max\\bigl(|u_i|+c_i,\\ |u_{i+1}|+c_{i+1}\\bigr),\\qquad 2\\lambda a_{i+1/2}\\le1,\\qquad \\lambda=\\frac{\\Delta t}{\\Delta x}.$$\nUse the symmetric HLL speeds $S_L=-a_{i+1/2}$ and $S_R=a_{i+1/2}$, so that\n$$\\widehat F_{i+1/2}=\\frac12(F_i+F_{i+1})-\\frac{a_{i+1/2}}2(U_{i+1}-U_i),\\qquad U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$\nThen $U_i^+\\in\\mathcal G_\\gamma$ for every cell $i$; in particular, each\nupdated density and pressure is strictly positive. This conclusion is for the\nspecified one-step symmetric branch and does not assert positivity for other\nHLL speed pairs or a fully discrete entropy inequality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Xiangxiong Zhang and Chi-Wang Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "Complete 34-page article; §2, PDF pp. 5–9: positive Euler states, Lax–Friedrichs split states, and convex-combination argument."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Complete Euler approximate-solver chapter; HLLE middle-state formula and Euler positivity discussion."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-fd-shared-face-global-conservation",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Shared-face flux telescoping conservation",
+        "reference": "items/prop-fd-shared-face-global-conservation.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-compressible-numerical-contract"
+        ],
+        "dependency_roles": {
+          "def-fd-compressible-numerical-contract": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix $\\gamma>1$, an integer $N\\ge2$, a cell width $\\Delta x>0$, a time step\n$\\Delta t\\ge0$, and periodic cell states $U_i=(\\rho_i,m_i,E_i)\\in\\mathcal G_\\gamma$\nfor $i\\in\\mathbb Z/N\\mathbb Z$. Assign one vector flux\n$\\widehat F_{i+1/2}\\in\\mathbb R^3$ to each periodic face and use that same\nvalue in both neighboring cell updates\n$$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right),\\qquad \\lambda=\\frac{\\Delta t}{\\Delta x}.$$\nDefine the total conserved vector before and after the step by\n$$M=\\Delta x\\sum_{i\\in\\mathbb Z/N\\mathbb Z}U_i,\\qquad M^+=\\Delta x\\sum_{i\\in\\mathbb Z/N\\mathbb Z}U_i^+.$$\nThen $M^+=M$. Thus the total density, momentum, and total energy components\nare unchanged by this periodic shared-face update. This algebraic conservation\nclaim alone does not assert admissibility, entropy stability, or convergence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Complete 143-page course notes; §§3.4.1 and 3.4.3, PDF pp. 94–98: shared interface fluxes and cancellation of interior fluxes."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336 Lecture 19, Finite Volume Methods",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "Complete six-page lecture note; pp. 1–2: cell-average states, conservative flux-difference update, and boundary flux accounting."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-fd-compressible-stability-distinctions",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Entropy, invariant-domain and weak-limit hypotheses",
+        "reference": "items/rem-fd-compressible-stability-distinctions.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "alg-pe03-convex-scaling-positivity-limiter",
+          "def-countable-choice",
+          "def-pe03-convex-invariant-domain",
+          "def-pe03-entropy-stable-dissipative-flux",
+          "lem-pe03-hll-half-cell-riemann-averages",
+          "prop-fd-shared-face-global-conservation",
+          "thm-conservative-finite-volume-weak-limit",
+          "thm-pe03-hll-update-preserves-convex-invariant-domain",
+          "thm-pe03-ideal-gas-llf-branch-preserves-positivity"
+        ],
+        "dependency_roles": {
+          "alg-pe03-convex-scaling-positivity-limiter": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-pe03-convex-invariant-domain": "mathematical-premise",
+          "def-pe03-entropy-stable-dissipative-flux": "mathematical-premise",
+          "lem-pe03-hll-half-cell-riemann-averages": "mathematical-premise",
+          "prop-fd-shared-face-global-conservation": "mathematical-premise",
+          "thm-conservative-finite-volume-weak-limit": "mathematical-premise",
+          "thm-pe03-hll-update-preserves-convex-invariant-domain": "mathematical-premise",
+          "thm-pe03-ideal-gas-llf-branch-preserves-positivity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The relevant numerical properties have separate hypotheses. A shared-face\nfinite-volume update on a periodic grid conserves the sum of its cell states by\nfinite telescoping. That algebra alone gives no membership of the updated states\nin an admissible set, entropy inequality, or convergence result.\n\nFor the symmetric ideal-gas HLL/LLF branch, the stated one-step positivity\nresult assumes $a\\ge\\max(|u_L|+c_L,|u_R|+c_R)$ and $2\\lambda a\\le1$ at every\nface. For a general HLL middle branch, the convex invariant-domain result uses a\ndifferent explicit hypothesis. Let $K$ be a convex state set, meaning every\nsegment joining two members lies in $K$, and write $\\nu=\\Delta t/h$ for the\ntime-step-to-cell-width ratio in this HLL formula. The approximate HLL fan at a\nface with $S_L<0<S_R$ has middle state\n$$U_*=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nThis is the state in the two-wave approximation; its associated model flux is\nnot assumed to be the physical flux $F(U_*)$. The fan is $U_L$ to the left of\n$S_L$, $U_*$ between $S_L$ and $S_R$, and $U_R$ to the right of $S_R$. Its\nspatial averages over the left and right adjacent half-cells at time\n$\\Delta t$, respectively, are\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*,$$\nunder the one-sided bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$. The HLL\ninvariant-domain result assumes both half-cell averages lie in $K$ at every\nface and every cell mean lies in $K$. Since each cell update is the average of\nits two adjacent half-cell averages, convexity then gives the updated mean in\n$K$. A sufficient way to verify the fan-average hypothesis is to show\n$U_L,U_R,U_*\\in K$; the result does not infer $U_*\\in K$ from supplied endpoint\nspeed estimates alone.\n\nThe sketch fixes the fan and half-cell conventions used in those formulas.\nThe axes are $x$ horizontally and $t$ upward; the wave lines have supplied\nspeeds $S_L<0<S_R$. The dashed verticals mark the adjacent cell centers at\n$-h/2$ and $h/2$. The one-sided CFL bounds keep each wave inside its half-cell\nthrough time $\\Delta t$. The proof and averages are the displayed algebraic\nformulas, not the drawing.\n\n~~~tikz\n\\begin{tikzpicture}[x=2cm,y=1.15cm]\n  \\draw[->] (-1.35,0) -- (1.45,0) node[right] {$x$};\n  \\draw[->] (-1.3,0) -- (-1.3,1.2) node[above] {$t$};\n  \\draw[dashed] (-0.5,0) -- (-0.5,1.05);\n  \\draw[dashed] (0.5,0) -- (0.5,1.05);\n  \\draw[thick] (0,0) -- (-0.34,1);\n  \\draw[thick] (0,0) -- (0.34,1);\n  \\node at (-0.95,0.7) {$U_L$};\n  \\node at (0,0.68) {$U_*$};\n  \\node at (0.95,0.7) {$U_R$};\n  \\node[below] at (-0.5,0) {$-h/2$};\n  \\node[below] at (0.5,0) {$h/2$};\n  \\node[above right] at (-0.34,1) {$S_L$};\n  \\node[above left] at (0.34,1) {$S_R$};\n  \\node[below right] at (0,0) {$0$};\n  \\node[left] at (-1.3,1) {$\\Delta t$};\n\\end{tikzpicture}\n~~~\n\nThe entropy-stable dissipative-flux definition specifies a consistent\nentropy-conservative flux with positive-semidefinite entropy-variable\ndissipation, and explicitly supplies no fully discrete time-step inequality.\nAny semidiscrete entropy inequality for a selected semidiscrete evolution is a\nseparate result; a fully discrete bound also requires an argument for the\nchosen time integrator. The ratio $\\nu$ above is only the mesh time-step to\nwidth ratio and is not physical viscosity.\n\nThe convex-scaling limiter applies to a finite nonempty set of node states\n$V_j\\in\\mathbb R^m$ with positive weights $w_j$ summing to one and an already\nadmissible mean $\\bar V=\\sum_jw_jV_j\\in K$. For its scaled states\n$V_j^\\theta=\\bar V+\\theta(V_j-\\bar V)$, direct summation gives\n$$\\sum_jw_jV_j^\\theta=\\sum_jw_j\\bar V+\\theta\\left(\\sum_jw_jV_j-\\sum_jw_j\\bar V\\right)=\\bar V+\\theta(\\bar V-\\bar V)=\\bar V.$$\nThus the construction preserves the supplied mean and constrains the chosen\nnodes; it has no admissibility branch for a mean outside $K$ and gives no\npointwise-in-cell assertion between those nodes.\n\nThe conservative finite-volume weak-limit theorem is a separate scalar\none-dimensional result on $\\mathbb R$. It assumes $T>0$, a continuous scalar\nflux $f:\\mathbb R\\to\\mathbb R$, initial data\n$u_0\\in L^\\infty(\\mathbb R)\\cap L^1_{\\mathrm{loc}}(\\mathbb R)$, a continuous\nconsistent numerical flux $F:\\mathbb R^2\\to\\mathbb R$, initial cell averages,\n$h_m,\\tau_m\\to0$, and the Axiom of Countable Choice\n$\\mathrm{AC}_\\omega$ (for every family $(X_n)_{n\\in\\mathbb N}$ of nonempty sets,\nthere is a function $f:\\mathbb N\\to\\bigcup_{n\\in\\mathbb N}X_n$ with\n$f(n)\\in X_n$ for every $n$). Strong local $L^1$ convergence of the reconstructed states and\nlocal uniform bounds on every bounded space-time cylinder through $t=0$ are\nalso hypotheses. Under them the limit is a locally bounded scalar\ndistributional weak solution. In its proof, $\\mathrm{AC}_\\omega$ is used only\nin the local spatial-translation step of the face-flux convergence lemma; the\ndiscrete summation and limit passage require no further choice. The theorem\nassumes neither a CFL condition nor\nan entropy inequality, proves neither convergence nor compactness, and does\nnot apply to the compressible Euler system.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Complete 143-page course notes; §§3.4.1–3.4.3, PDF pp. 94–98; the scalar weak-limit statement in §3.4.3 is not used as a system theorem."
+            },
+            {
+              "title": "Xiangxiong Zhang and Chi-Wang Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "Complete 34-page article; §2, PDF pp. 5–9: Euler admissibility, split states, convexity, and finite-node limiter scope."
+            },
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Complete 27-page chapter; §§4.1–4.3 and 5, PDF pp. 11–20: entropy-variable dissipation and the separate fully discrete analysis."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Complete Euler approximate-solver chapter; HLL fan state, supplied speeds, and Euler positivity discussion."
+            }
+          ]
+        },
+        "library": "mathematics"
+      }
+    ]
+  },
+  {
+    "order": 666,
+    "id": "fd-n03-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Compressible numerical conservation and admissibility — Examples",
+    "companion": "fd-n03",
+    "requires": [
+      "fd-n03"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-compressible-constant-state",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Constant Euler state preserved by consistent shared flux",
+        "reference": "items/ex-fd-compressible-constant-state.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-compressible-numerical-contract",
+          "rem-fd-compressible-stability-distinctions"
+        ],
+        "dependency_roles": {
+          "def-fd-compressible-numerical-contract": "mathematical-premise",
+          "rem-fd-compressible-stability-distinctions": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix $\\gamma>1$, $N\\ge2$, $\\Delta x>0$, and $\\Delta t\\ge0$ on a periodic uniform\ngrid. Let\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E)\\in\\mathbb R^3:\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand choose a constant state $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$. Its ideal-gas\nEuler flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right),\\frac m\\rho\\left(E+(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)\\right)\\right).$$\nSet $U_i=U$ in every cell and use one consistent shared face flux at each\ninterface, meaning $\\widehat F_{i+1/2}(U,U)=F(U)$. For the update\n$$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right),\\qquad \\lambda=\\frac{\\Delta t}{\\Delta x},$$\nevery cell remains exactly $U_i^+=U$. This is a one-step constant-state\nfixed-point calculation; it does not assert any other stability or convergence\nproperty.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Complete 143-page course notes; §§3.4.1 and 3.4.3, PDF pp. 94–98: cell averages and the shared-flux update."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Complete Euler approximate-solver chapter; consistent Euler flux and finite-volume context."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

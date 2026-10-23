@@ -1,0 +1,63 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-12-1",
+  "inventory": {
+    "pages": [
+      "fd-px01",
+      "fd-px01-examples"
+    ],
+    "items": [
+      "pthm-fd-px01-prediction",
+      "ex-fd-x01-application"
+    ],
+    "pairs": [
+      "fd-px01"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/pthm-fd-px01-prediction.md",
+    "items/ex-fd-x01-application.md",
+    "library/fluid-dynamics/fd-px01.md",
+    "library/fluid-dynamics/fd-px01-examples.md"
+  ],
+  "write_batches": [
+    "12"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-fd-x01-application",
+      "path": [
+        "pthm-fd-px01-prediction",
+        "ex-fd-x01-application"
+      ],
+      "paths": [
+        [
+          "pthm-fd-px01-prediction",
+          "ex-fd-x01-application"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "pthm-fd-px01-prediction": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Exact coefficient transformations for the smooth, unforced constant-density incompressible Newtonian branch with constant positive viscosity and the separate smooth, unforced positive-density barotropic Euler branch with a specified C2 pressure law and positive derivative at the reference density. Compatible velocity and momentum initial/boundary data are rescaled as inputs; thermal evolution and heat-flux scaling are outside scope. No empirical observation, low-parameter limit, error estimate, turbulence threshold, or solution-existence result is asserted.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nLet $I\\subseteq\\mathbb R$ be a nonempty open interval of time in seconds and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open spatial region in metres, expressed in a Newtonian Cartesian inertial chart. Let $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous first time partial derivatives and continuous first and second spatial partial derivatives. Let a pressure field have continuous first spatial partial derivatives. Write $(D_xu)_{ij}=\\partial_{x_j}u_i$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, and let $\\Delta u$ act componentwise. Use SI units: $[u]=[U]=[c]=\\mathrm{m\\,s^{-1}}$, $[L]=\\mathrm m$, $[\\rho]=[\\rho_0]=\\mathrm{kg\\,m^{-3}}$, $[p]=[P(\\rho)]=[p_{\\mathrm{ref}}]=\\mathrm{Pa}$, and $[\\mu]=\\mathrm{Pa\\,s}$. Fix constants $\\rho_0>0$, $\\mu>0$, $U>0$, $L>0$, and $c>0$, and define $\\nu=\\mu/\\rho_0$, $\\operatorname{Re}=UL/\\nu$, and $\\operatorname{Ma}=U/c$.\n\nIn the first, force-free branch, assume $\\rho(t,x)=\\rho_0$, $\\operatorname{div}u=0$, and the selected incompressible Newtonian model with stress $\\sigma=-pI_3+2\\mu D$ and local momentum equation $\\rho_0(\\partial_tu+(u\\cdot\\nabla_x)u)=\\operatorname{div}\\sigma$, where $p$ is the constraint multiplier and is not an equation-of-state pressure. Set $\\Theta=Ut/L$, $X=x/L$, $I^*=\\{Ut/L:t\\in I\\}$, and $\\Omega^*=\\{x/L:x\\in\\Omega\\}$. Under $u(t,x)=Uu^*(\\Theta,X)$ and $p(t,x)=p_{\\mathrm{ref}}+\\rho_0U^2p_{\\mathrm{inc}}^*(\\Theta,X)$ for a constant $p_{\\mathrm{ref}}$, the governing equations are exactly\n\n$$\\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\nabla_Xp_{\\mathrm{inc}}^*+\\operatorname{Re}^{-1}\\Delta_Xu^*,\\qquad \\operatorname{div}_Xu^*=0.$$\n\nIn the separate, unforced barotropic Euler branch, let $\\rho,u\\in C^2(I\\times\\Omega)$ with $\\rho>0$, let $P:(0,\\infty)\\to\\mathbb R$ be $C^2$, and set the scalar potential $V:\\Omega\\to\\mathbb R$ to the zero function. Assume the mass and momentum equations\n\n$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0,\\qquad \\rho(\\partial_tu+(u\\cdot\\nabla_x)u)+\\nabla_xP(\\rho)=0.$\n\nAt the chosen reference density assume $P'(\\rho_0)=c^2>0$. Define $\\rho^*=\\rho/\\rho_0$ and\n\n$$p_{\\mathrm{bar}}^*(\\Theta,X)=\\frac{P(\\rho_0\\rho^*(\\Theta,X))-P(\\rho_0)}{\\rho_0c^2}.$$\n\nUnder $u(t,x)=Uu^*(\\Theta,X)$, the exact transformed mass and momentum equations are\n\n$$\\partial_\\Theta\\rho^*+\\operatorname{div}_X(\\rho^*u^*)=0,\\qquad \\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\operatorname{Ma}^{-2}(\\rho^*)^{-1}\\nabla_Xp_{\\mathrm{bar}}^*.$$\n\nThe ratios are dimensionless derived parameters: $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[c]=\\mathrm{m\\,s^{-1}}$, and $[\\operatorname{Re}]=[\\operatorname{Ma}]=1$. Any compatible velocity, pressure, density, and momentum initial/boundary data for these equations are transformed with the same invertible coordinate change. Thermal evolution and heat-flux scaling are not part of this calculation. The coefficient identities do not assert an incompressible or inviscid limit, an error bound, uniqueness, identical solutions for different geometries or rescaled data, or a turbulence threshold. They are conditional predictions of the adopted model formulations and are not experimental observations or proof that either model describes a material."
+    ],
+    "ex-fd-x01-application": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "Formal periodic smooth-model example with explicitly selected SI parameters and fields. The values are mathematical inputs, not measurements or representative data for a named fluid. No approximation, limit, turbulence, or empirical conclusion is asserted.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

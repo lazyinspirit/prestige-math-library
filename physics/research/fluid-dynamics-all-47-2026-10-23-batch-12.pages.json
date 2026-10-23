@@ -1,0 +1,121 @@
+[
+  {
+    "order": 383,
+    "id": "fd-px01",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Exact Reynolds and Mach nondimensionalization — conditional physical prediction",
+    "companion": "fd-px01-examples",
+    "requires": [
+      "fd-f02",
+      "fd-f03",
+      "fd-x01"
+    ],
+    "items": [
+      {
+        "id": "pthm-fd-px01-prediction",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Exact Reynolds and Mach nondimensionalization — conditional physical prediction",
+        "reference": "items/pthm-fd-px01-prediction.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "thm-fd-x01",
+          "post-fd-continuum-balances",
+          "post-fd-boundary-data",
+          "post-fd-newtonian-fourier",
+          "def-fd-barotropic-euler-model",
+          "def-fd-incompressible-newtonian-model"
+        ],
+        "dependency_roles": {
+          "thm-fd-x01": "mathematical-premise",
+          "post-fd-continuum-balances": "physical-assumption",
+          "post-fd-boundary-data": "physical-assumption",
+          "post-fd-newtonian-fourier": "physical-assumption",
+          "def-fd-barotropic-euler-model": "formulation-prerequisite",
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is a nonempty open interval of absolute time in seconds and $E$ is an oriented three-dimensional Euclidean affine space measured in metres. A Newtonian Cartesian inertial chart is the event map $(t,X)\\mapsto(t,x_t(X))$, where $b:E\\to\\mathbb R^3$ is an orientation-preserving affine isometry, $w\\in\\mathbb R^3$ is constant and $x_t(X)=b(X)+tw$ for every $t\\in I$. Write $x$ for its spatial event coordinate; no assumption $0\\in I$ is needed for this chart formula. Write $I_3$ for the $3\\times3$ identity matrix and set $\\operatorname{SO}(3):=\\{Q\\in\\mathbb R^{3\\times3}:Q^{\\mathsf T}Q=I_3,\\ \\det Q=1\\}$. Inertial-chart changes have the form $t'=t+t_0$, $x'=Qx+vt+a$, where $t_0$ is a constant time translation in seconds, $a\\in\\mathbb R^3$ is a constant spatial translation in metres, $v\\in\\mathbb R^3$ is a constant relative velocity in metres per second, and $Q\\in\\operatorname{SO}(3)$ is constant. A frame in this statement means such an adapted chart, not an observer congruence or a basis field. Fix one such chart and a nonempty open spatial coordinate region $\\Omega\\subseteq\\mathbb R^3$. All derivatives below are Cartesian derivatives in this fixed chart; the positive coordinate rescaling defined below is not a change of observer.\n\nFor a scalar field $f$, $\\nabla_x f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$.\n\nFor a vector field $u=(u_i)$, define $D_xu,D:I\\times\\Omega\\to\\mathbb R^{3\\times3}$, $\\operatorname{div}_xu:I\\times\\Omega\\to\\mathbb R$, and $\\Delta_xu,D_tu:I\\times\\Omega\\to\\mathbb R^3$ by $(D_xu)_{ij}=\\partial_{x_j}u_i$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $\\operatorname{div}_xu=\\sum_{j=1}^3\\partial_{x_j}u_j$, $(\\Delta_xu)_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i$, and $D_tu=\\partial_tu+(u\\cdot\\nabla_x)u$. The fields $D$ and $\\operatorname{div}_xu$ have units $\\mathrm{s^{-1}}$. Fix constants $\\rho_0>0$, $\\mu>0$, $U>0$, $L>0$, and $c>0$, and define $\\nu=\\mu/\\rho_0$, $\\operatorname{Re}=UL/\\nu$, and $\\operatorname{Ma}=U/c$. In SI units, $[u]=[U]=[c]=\\mathrm{m\\,s^{-1}}$, $[x]=[L]=\\mathrm m$, $[\\rho]=[\\rho_0]=\\mathrm{kg\\,m^{-3}}$, $[p]=[P(\\rho)]=[p_{\\mathrm{ref}}]=[\\sigma]=\\mathrm{Pa}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, and $[\\Theta]=[X]=[\\operatorname{Re}]=[\\operatorname{Ma}]=1$; thus the two ratios are dimensionless.\n\nDefine the dimensionless coordinates and their domains by\n$$\\Theta=\\frac{Ut}{L},\\qquad X=\\frac{x}{L},\\qquad I^*=\\left\\{\\frac{Ut}{L}:t\\in I\\right\\},\\qquad \\Omega^*=\\left\\{\\frac{x}{L}:x\\in\\Omega\\right\\}.$$\nThe map $\\Phi:I\\times\\Omega\\to I^*\\times\\Omega^*$, $\\Phi(t,x)=(Ut/L,x/L)$, is bijective with inverse $\\Phi^{-1}(\\Theta,X)=(L\\Theta/U,LX)$. The corresponding $X$-derivatives are defined by the same component formulas.\n\nIn the first, force-free branch, let $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous first time partial derivatives and continuous first and second spatial partial derivatives, and let the pressure field $p:I\\times\\Omega\\to\\mathbb R$ be continuous with continuous first spatial partial derivatives. Let the density field $\\rho:I\\times\\Omega\\to(0,\\infty)$ be the constant $\\rho_0$. Assume $\\operatorname{div}_xu=0$ and the selected incompressible Newtonian equations\n$$\\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}_x\\sigma,\\qquad (\\operatorname{div}_x\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij},$$\nwhere $\\sigma:I\\times\\Omega\\to\\mathbb R^{3\\times3}$ is stress, $p$ is the constraint multiplier, not an equation-of-state pressure, and the tension-positive stress convention identifies $\\sigma n$ as traction on an outward unit normal $n$. Define $u^*:I^*\\times\\Omega^*\\to\\mathbb R^3$ and $p_{\\mathrm{inc}}^*:I^*\\times\\Omega^*\\to\\mathbb R$ by\n$$u^*(\\Theta,X)=\\frac{1}{U}u\\bigl(\\Phi^{-1}(\\Theta,X)\\bigr),\\qquad p_{\\mathrm{inc}}^*(\\Theta,X)=\\frac{p\\bigl(\\Phi^{-1}(\\Theta,X)\\bigr)-p_{\\mathrm{ref}}}{\\rho_0U^2},$$\nfor a constant reference pressure $p_{\\mathrm{ref}}\\in\\mathbb R$. The scaled fields are dimensionless, $[u^*]=[p_{\\mathrm{inc}}^*]=1$, and have respectively the same stated velocity and spatial-pressure regularity. Equivalently, $u(t,x)=Uu^*(\\Theta,X)$ and $p(t,x)=p_{\\mathrm{ref}}+\\rho_0U^2p_{\\mathrm{inc}}^*(\\Theta,X)$. The governing equations become exactly\n$$\\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\nabla_Xp_{\\mathrm{inc}}^*+\\operatorname{Re}^{-1}\\Delta_Xu^*,\\qquad \\operatorname{div}_Xu^*=0.$$\n\nIn the separate, unforced barotropic Euler branch, let $\\rho:I\\times\\Omega\\to(0,\\infty)$ and $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous partial derivatives through total order two, and let $P:(0,\\infty)\\to\\mathbb R$ have continuous derivatives through order two, with pressure measured in pascals. Set the potential $V:\\Omega\\to\\mathbb R$ to the zero function. Assume\n$$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0,\\qquad \\rho D_tu+\\nabla_xP(\\rho)=0,$$\nand assume at the chosen reference density that $P'(\\rho_0)=c^2>0$, where $[P'(\\rho_0)]=\\mathrm{m^2\\,s^{-2}}$. Define $\\rho^*:I^*\\times\\Omega^*\\to(0,\\infty)$, $u^*:I^*\\times\\Omega^*\\to\\mathbb R^3$, and $p_{\\mathrm{bar}}^*:I^*\\times\\Omega^*\\to\\mathbb R$ by\n$$\\rho^*(\\Theta,X)=\\frac{\\rho\\bigl(\\Phi^{-1}(\\Theta,X)\\bigr)}{\\rho_0},\\qquad u^*(\\Theta,X)=\\frac{u\\bigl(\\Phi^{-1}(\\Theta,X)\\bigr)}{U},\\qquad p_{\\mathrm{bar}}^*(\\Theta,X)=\\frac{P\\bigl(\\rho_0\\rho^*(\\Theta,X)\\bigr)-P(\\rho_0)}{\\rho_0c^2}.$$\nThese scaled fields are dimensionless, $[\\rho^*]=[u^*]=[p_{\\mathrm{bar}}^*]=1$, and have continuous partial derivatives through order two. The exact transformed mass and momentum equations are\n$$\\partial_\\Theta\\rho^*+\\operatorname{div}_X(\\rho^*u^*)=0,\\qquad \\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\operatorname{Ma}^{-2}(\\rho^*)^{-1}\\nabla_Xp_{\\mathrm{bar}}^*.$$\n\nInitial values are data on a slice $t=t_0\\in I$; boundary values are data on a chosen subset $\\Gamma\\subseteq I\\times\\partial\\Omega$ wherever the relevant traces exist. Extend $\\Phi$ to $I\\times\\mathbb R^3$ by the same coordinate formula and put $S^*=\\Phi(S)$ for any such initial or boundary data set $S$. If $g_u:S\\to\\mathbb R^3$, $g_p:S\\to\\mathbb R$, $g_\\rho:S\\to(0,\\infty)$, and $g_P:S\\to\\mathbb R$ are prescribed velocity, incompressible pressure-multiplier, density, and barotropic-pressure data, respectively, define $g_u^*:S^*\\to\\mathbb R^3$, $g_{p,\\mathrm{inc}}^*:S^*\\to\\mathbb R$, $g_\\rho^*:S^*\\to(0,\\infty)$, and $g_{P,\\mathrm{bar}}^*:S^*\\to\\mathbb R$ by\n$$g_u^*(\\Phi(t,x))=\\frac{g_u(t,x)}{U},\\qquad g_{p,\\mathrm{inc}}^*(\\Phi(t,x))=\\frac{g_p(t,x)-p_{\\mathrm{ref}}}{\\rho_0U^2},\\qquad g_\\rho^*(\\Phi(t,x))=\\frac{g_\\rho(t,x)}{\\rho_0},\\qquad g_{P,\\mathrm{bar}}^*(\\Phi(t,x))=\\frac{g_P(t,x)-P(\\rho_0)}{\\rho_0c^2}.$$\nHere $g_p$ and $g_{p,\\mathrm{inc}}^*$ apply to the incompressible branch, while $g_\\rho$ and $g_P$ apply to the barotropic branch; a prescribed wall-velocity field uses the same velocity map. The spatial dilation takes each boundary trace portion to its image and preserves its outward Euclidean unit normal wherever that normal exists. For momentum density $m:I\\times\\Omega\\to\\mathbb R^3$, with units $\\mathrm{kg\\,m^{-2}\\,s^{-1}}$, define $m^*:I^*\\times\\Omega^*\\to\\mathbb R^3$ by\n$$m^*(\\Phi(t,x))=\\frac{m(t,x)}{\\rho_0U}=\\rho^*(\\Phi(t,x))u^*(\\Phi(t,x)),$$\nwhere $\\rho^*(\\Phi(t,x))=1$ in the constant-density branch. Thus $m^*$ is dimensionless. Whenever the integrals exist, total momentum on corresponding spatial regions $A\\subseteq\\Omega$ and $A^*=A/L$ satisfies\n$$\\int_A \\rho u\\,dx=\\rho_0UL^3\\int_{A^*}\\rho^*u^*\\,dX.$$\nThe total momentum has units $\\mathrm{kg\\,m\\,s^{-1}}$, as does its scale factor $\\rho_0UL^3$.\nBecause $\\Phi$ and each field-value scaling are invertible, these formulas carry any already-compatible initial or boundary data to the corresponding scaled data; they assert no compatibility or solvability beyond the selected model and its separate data assumptions. Thermal evolution and heat-flux scaling are not part of this calculation. The coefficient identities do not assert an incompressible or inviscid limit, an error bound, uniqueness, identical solutions for different geometries or rescaled data, or a turbulence threshold. They are conditional predictions of the adopted model formulations and are not experimental observations or proof that either model describes a material.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, MIT 8.09, Chapter 6: Fluid Mechanics, §6.7 Reynolds Number and Similarity",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/3bfed6897483f5c55bf615ed583af603_MIT8_09F14_Chapter_6.pdf",
+              "locator": "§6.7, printed pp. 133–134."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part II lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids2.pdf",
+              "locator": "§3.3.1, printed pp. 72–73, and §3.3.2, printed pp. 74–76."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part III lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids3.pdf",
+              "locator": "§4.5.3, printed p. 166, definition of the Mach number."
+            },
+            {
+              "title": "MIT 16.01 Unified Engineering, F5 lecture notes: Effects of Reynolds Number and Mach Number",
+              "url": "https://ocw.mit.edu/courses/16-01-unified-engineering-i-ii-iii-iv-fall-2005-spring-2006/b4ddec4a7d0be7ec3814a10dc891d5ef_f5.pdf",
+              "locator": "F5 lecture notes, pp. 1–4."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact coefficient transformations for the smooth, unforced constant-density incompressible Newtonian branch with constant positive viscosity and the separate smooth, unforced positive-density barotropic Euler branch with a specified C2 pressure law and positive derivative at the reference density. Compatible velocity and momentum initial/boundary data are rescaled as inputs; thermal evolution and heat-flux scaling are outside scope. No empirical observation, low-parameter limit, error estimate, turbulence threshold, or solution-existence result is asserted.",
+        "scope": "Positive U,L and chosen reference density/speed; algebra only, no incompressible or turbulent limit theorem. Worked example is the actual explicit field/parameter selection in that section. B leaf cannot supply any later item.",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 384,
+    "id": "fd-px01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Exact Reynolds and Mach nondimensionalization — conditional physical prediction — Examples",
+    "companion": "fd-px01",
+    "requires": [
+      "fd-px01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-x01-application",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Exact Reynolds and Mach nondimensionalization — worked interpretation",
+        "reference": "items/ex-fd-x01-application.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-fd-px01-prediction"
+        ],
+        "dependency_roles": {
+          "pthm-fd-px01-prediction": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use SI units and select the formal inputs $\\rho_0=10^3\\,\\mathrm{kg\\,m^{-3}}$, $\\mu=10^{-3}\\,\\mathrm{Pa\\,s}$, $U=1\\,\\mathrm{m\\,s^{-1}}$, $L=10^{-1}\\,\\mathrm m$, and $c=10^2\\,\\mathrm{m\\,s^{-1}}$. These are exact illustrative parameters, not measurements. Then $\\nu=\\mu/\\rho_0=10^{-6}\\,\\mathrm{m^2\\,s^{-1}}$, $\\operatorname{Re}=UL/\\nu=10^5$, $\\operatorname{Ma}=U/c=10^{-2}$, and $\\operatorname{Ma}^{-2}=10^4$.\n\nLet $J=(-1,1)$ be a dimensionless open time interval containing $\\Theta=0$ and let the physical time interval be $I=(L/U)J=(-L/U,L/U)$ seconds. For a side length $\\ell>0$, write $\\mathbb T^3_\\ell:=\\mathbb R^3/(\\ell\\mathbb Z^3)$ and let $[x]_\\ell$ denote the class of $x\\in\\mathbb R^3$ modulo $\\ell\\mathbb Z^3$. Define the dimensionless flat torus $\\mathbb T^3_{2\\pi}$ and the physical flat torus $\\mathbb T^3_{2\\pi L}$. The map\n$$D_L:\\mathbb T^3_{2\\pi L}\\to\\mathbb T^3_{2\\pi},\\qquad D_L([x]_{2\\pi L})=[x/L]_{2\\pi},$$\nis a well-defined smooth bijection with inverse $[X]_{2\\pi}\\mapsto[LX]_{2\\pi L}$. The quotient, not the open cube, is the periodic spatial domain; $[0,2\\pi)^3$ is only a representative cell.\n\nDefine the periodic lift $\\widetilde u^*:J\\times\\mathbb R^3\\to\\mathbb R^3$ and pressure field $\\widetilde p_{\\mathrm{inc}}^*:J\\times\\mathbb R^3\\to\\mathbb R$ by\n$$\\widetilde u^*(\\Theta,X)=(e^{-\\Theta/\\operatorname{Re}}\\sin X_2,0,0),\\qquad \\widetilde p_{\\mathrm{inc}}^*(\\Theta,X)=0.$$\nFor every $k\\in\\mathbb Z^3$, $\\widetilde u^*(\\Theta,X+2\\pi k)=\\widetilde u^*(\\Theta,X)$, so these smooth fields descend to $u^*:J\\times\\mathbb T^3_{2\\pi}\\to\\mathbb R^3$ and $p_{\\mathrm{inc}}^*:J\\times\\mathbb T^3_{2\\pi}\\to\\mathbb R$. Spatial derivatives on this flat torus are defined by differentiating the periodic lifts. They satisfy the scaled incompressible equations\n$$\\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\nabla_Xp_{\\mathrm{inc}}^*+\\operatorname{Re}^{-1}\\Delta_Xu^*,\\qquad \\operatorname{div}_Xu^*=0.$$\nUnder the spatial dilation $D_L$ and the time map $\\Theta=Ut/L$, define the corresponding physical fields on $I\\times\\mathbb T^3_{2\\pi L}$ by\n$$u(t,[x]_{2\\pi L})=Uu^*\\bigl(Ut/L,D_L([x]_{2\\pi L})\\bigr),\\qquad p(t,[x]_{2\\pi L})=p_{\\mathrm{ref}}+\\rho_0U^2p_{\\mathrm{inc}}^*\\bigl(Ut/L,D_L([x]_{2\\pi L})\\bigr)=p_{\\mathrm{ref}}.$$\nEquivalently, the physical velocity lift is $\\widetilde u(t,x)=U\\widetilde u^*(Ut/L,x/L)$, which is periodic under $x\\mapsto x+2\\pi Lk$ for every $k\\in\\mathbb Z^3$; physical spatial derivatives on the quotient are defined by this lift. A representative physical cell has side length $2\\pi L$. This is an exact solution of the selected incompressible equations.\n\nOn the same dimensionless spacetime domain $J\\times\\mathbb T^3_{2\\pi}$, for the separate barotropic branch choose the pressure law $P:(0,\\infty)\\to\\mathbb R$ given by $P(\\rho)=10^5\\,\\mathrm{Pa}+c^2(\\rho-\\rho_0)$ and the constant fields $\\rho^*:J\\times\\mathbb T^3_{2\\pi}\\to(0,\\infty)$, $u^*:J\\times\\mathbb T^3_{2\\pi}\\to\\mathbb R^3$, and $p_{\\mathrm{bar}}^*:J\\times\\mathbb T^3_{2\\pi}\\to\\mathbb R$, with values $\\rho^*=1$, $u^*=0$, and $p_{\\mathrm{bar}}^*=0$. For these fields the scaled equations\n$$\\partial_\\Theta\\rho^*+\\operatorname{div}_X(\\rho^*u^*)=0,\\qquad \\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\operatorname{Ma}^{-2}(\\rho^*)^{-1}\\nabla_Xp_{\\mathrm{bar}}^*$$\nhold identically. They are smooth, $P'(\\rho_0)=c^2>0$, and their corresponding physical fields $\\rho:I\\times\\mathbb T^3_{2\\pi L}\\to(0,\\infty)$ and $u:I\\times\\mathbb T^3_{2\\pi L}\\to\\mathbb R^3$ have the constant values $\\rho(t,[x]_{2\\pi L})=\\rho_0$ and $u(t,[x]_{2\\pi L})=0$. This is an exact equilibrium of the unforced barotropic model. The computed coefficients and fields illustrate algebra in the adopted equations only; they report no observation and imply no low-Mach or high-Reynolds approximation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "library": "physics",
+        "physical_scope": "Formal periodic smooth-model example with explicitly selected SI parameters and fields. The values are mathematical inputs, not measurements or representative data for a named fluid. No approximation, limit, turbulence, or empirical conclusion is asserted.",
+        "scope": "Positive U,L and chosen reference density/speed; algebra only, no incompressible or turbulent limit theorem. Worked example is the actual explicit field/parameter selection in that section. B leaf cannot supply any later item.",
+        "empirical_premises": [],
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

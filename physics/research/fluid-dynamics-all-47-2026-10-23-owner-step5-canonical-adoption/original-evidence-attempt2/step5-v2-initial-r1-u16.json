@@ -1,0 +1,223 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "def-fd-adopted-nonnewtonian-models",
+      "model": "gpt-6-luna",
+      "context_sha256": "8a478c9b8c1bc851ceeaa1a9d8cef1d7ea8891d0749bfcce041c0e26aa74cc3c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The generalized Newtonian and Bingham branches define but do not impose incompressibility. The permitted motion chi(t,a)=exp(alpha*t)*a induces u=alpha*x and D=alpha*I_3; for eta=eta_*>0, tr(tau)=6*eta_*alpha is nonzero, contradicting the declared deviatoric stress. The mathematical supplier defines the Bingham graph only on Sym_0(3). Repaired by requiring div(u)=0 throughout the swept region and explicitly adopting tau in the graph on Sym_0(3).",
+      "uncertain": false,
+      "source_urls": [
+        "https://courses.washington.edu/mengr503/Chapter_6.pdf",
+        "https://ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/0c5e315f2b97fff948cb35f10a97894c_16stressstrain.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-fd-adopted-nonnewtonian-models",
+      "disposition": "repaired",
+      "post_sha256": "6a9f09b1f584055125d2f06f435cf6cde7fe10e2316d3ba5f135b47ac3c771bf",
+      "review_context_sha256": "fd25dbe9daf6404ea17afb695bbd6d4a268654640f1ff72fa149e73f2cc6019e",
+      "reason": "Requiring div(u)=0 gives symmetric trace-free D. Consequently tr(2*eta*D)=0, and both the nonzero-rate Bingham value and its entire rest ball lie in Sym_0(3). The explicit graph selection preserves the full yield ball, all parameter endpoints and unregularized stress extension. Reviewed the current Definition against the exact mathematical model and smooth-motion suppliers; conformation equations and empirical nonclaims remain intact. Corrected the Reddy equation/page locator and synchronized the manifest interface and existing F4 citation quote. Native hashes recorded immediately after this completed review; no independent review of my own repair is claimed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://courses.washington.edu/mengr503/Chapter_6.pdf",
+        "https://ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/0c5e315f2b97fff948cb35f10a97894c_16stressstrain.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-fd-nonnewtonian-conditional-admissibility"
+  ],
+  "repair_notes": {
+    "status": "Completed assigned repair and current native review; focused checks complete. No certification, independent acceptance, judge launch or shared-ledger write performed.",
+    "claim": "Incompressible smooth generalized Newtonian/Bingham branches with Frobenius stress normalization; original parameters, zero-rate extensions and conformation equations preserved.",
+    "dependencies": [
+      "post-fd-continuum-balances",
+      "def-fd-nonnewtonian-laws",
+      "def-fd-smooth-motion"
+    ],
+    "source_reading": "Read Reddy equation (6.5.15) and sections 6.6.1 through 6.6.2.3 in the linked PDF (printed pages 245\u2013247), and Mei section 1.6.2 including equations (1.6.13)\u2013(1.6.18). Reddy equation (6.6.10) prints zero stress below yield, so it is not used as the exact rest-ball supplier; the explicit local mathematical graph supplies that definition. No other external full-text reading is claimed.",
+    "source_locator_repair": "Corrected equation (6.5.15) versus nonexistent section 6.5.15 and the source page range to PDF pages 25\u201327; the Carreau and Bingham sections are on PDF page 27.",
+    "consumer_checks": [
+      {
+        "id": "pthm-fd-nonnewtonian-conditional-admissibility",
+        "path": "items/pthm-fd-nonnewtonian-conditional-admissibility.md",
+        "affected_use": "Statement assumes div(u)=0 and tr(D)=0; Facts F2/F3 and Proof 1.1/1.2 use the generalized Newtonian stress and the Sym_0(3) Bingham graph.",
+        "disposition": "unaffected",
+        "reason": "The consumer already explicitly assumes the added condition, and its formulas, admissible stress choices and conditional deductions are unchanged. This is a focused use check, not independent review of my repair."
+      }
+    ],
+    "page_uses": [
+      {
+        "id": "fd-f04",
+        "path": "library/fluid-dynamics/fd-f04.md",
+        "affected_use": "The frontmatter inventory places the repaired definition before the conditional admissibility theorem.",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only page has no model-domain prose; inventory, requires and compact-v1 layout remain correct."
+      }
+    ],
+    "unresolved_obligations": [],
+    "support_attribution": "Used the immutable constitutive science report and proposed incompressibility hunk from /root/fluid_step4_constitutive as attributed support. Independently checked the current Definition, exact mathematical supplier and sole direct consumer. Added explicit Bingham graph selection/domain and verified the Reddy locator directly; no outside source retrieval is claimed as my own.",
+    "mathematical_checks": "For trace-free symmetric D, tau=2*eta*D is trace-free and symmetric. For D!=0 the Bingham value is a scalar multiple of D; for D=0 its values are expressly the trace-free Frobenius ball. All mu_p,tau_y endpoints remain valid, including the singleton zero ball. The added motion condition is consistent with the mathematical supplier and unchanged incompressible conformation branch. No AC assumption is used or added.",
+    "interface_changes": [
+      {
+        "path": "items/def-fd-adopted-nonnewtonian-models.md",
+        "section": "Definition",
+        "before": "For the generalized Newtonian and Bingham branches, $\\tau$ is a symmetric deviatoric extra stress",
+        "after": "For the generalized Newtonian and Bingham branches, require $\\theta=\\operatorname{div}u=0$ throughout $\\Omega$, so $D\\in\\mathrm{Sym}_0(3)$.",
+        "reason": "Makes the missing incompressible domain restriction explicit before declaring deviatoric stress."
+      },
+      {
+        "path": "items/def-fd-adopted-nonnewtonian-models.md",
+        "section": "Definition",
+        "before": "Use the set-valued graph",
+        "after": "Adopt $\\tau\\in\\mathcal B(D)$, where the set-valued graph on $\\mathrm{Sym}_0(3)$ is",
+        "reason": "Specifies the admissible stress selection and exact graph domain without changing any graph values."
+      },
+      {
+        "path": "items/def-fd-adopted-nonnewtonian-models.md",
+        "section": "physical_scope",
+        "reason": "Inserted incompressible for the generalized Newtonian/Bingham closures; empirical nonclaims and conformation scope are preserved."
+      }
+    ],
+    "metadata_repairs": [
+      {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-batch-16.pages.json",
+        "fields": [
+          "/0/items/0/statement",
+          "/0/items/0/physical_scope",
+          "/0/items/0/sources/references/0/title"
+        ],
+        "reason": "Mirrors only the assigned definition and corrected Reddy locator metadata."
+      },
+      {
+        "path": "research/fluid-dynamics-all-47-2026-10-23-batch-16.proof-contracts.json",
+        "fields": [
+          "/contracts/pthm-fd-nonnewtonian-conditional-admissibility/citations/F4/quote"
+        ],
+        "reason": "The existing F4 quote included the entire Definition; synchronized it with the repaired supplier, preserving all consumer derivations."
+      }
+    ],
+    "shared_write": "Applied the surgical manifest/contract synchronization through step5-shared-write-lock.mjs run --owner step5-v2-initial-r1-u16 with a short research run-scoped script that reread current owning files, guarded the old/current Definition, updated only the assigned mirrors, and checked exact equality. Lock acquisition, child check and release all exited 0. Removed the temporary helper after application.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-fd-adopted-nonnewtonian-models.md",
+        "exit_code": 0,
+        "result": "One file checked; renderer YAML and all KaTeX spans parse."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-fd-adopted-nonnewtonian-models.md",
+        "exit_code": 0,
+        "result": "0 proof-bearing items checked, 0 failing; this definition has no proof section, so this result is not proof-format coverage."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-fd-adopted-nonnewtonian-models.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run once after the final item edit."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/fluid-step5-u16-items.json --pending-audit-ok --json",
+        "exit_code": 0,
+        "result": "Focused item def-fd-adopted-nonnewtonian-models and page fd-f04: 0 errors, 0 warnings; prerequisite cycles checked over the actual 1095-item/259-page dependency closure."
+      },
+      {
+        "exit_code": 0,
+        "result": "All four F1\u2013F4 quotes from the assigned supplier match the current Definition exactly.",
+        "check": "scoped sourceSectionText citation-equality check"
+      },
+      {
+        "exit_code": 0,
+        "result": "Definition is uninterrupted by hyperlinks; no assigned TikZ/tikzcd diagram; textual uses are the supplier, sole direct consumer and fd-f04 page placement.",
+        "check": "assigned statement/consumer scan"
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run fluid-dynamics-all-47-2026-10-23 --items def-fd-adopted-nonnewtonian-models",
+        "exit_code": 0,
+        "result": "Recorded the genuine post_sha256 and review_context_sha256 shown in reviews immediately after the completed review and metadata synchronization."
+      }
+    ],
+    "exploratory_tool_failure": {
+      "command": "node tools/physics-support/physics-check.mjs --help",
+      "exit_code": 1,
+      "reason": "This tool has no help branch: the invocation entered an unscoped loader and failed on an unrelated in-flight malformed frontmatter line, proof_strategy: directverification: {}. It is not a scoped assigned-item validation result. No outside repair or tool edit was made; the explicit-item depcheck and renderer checks pass."
+    },
+    "outside_scope_referrals": [
+      {
+        "id": "pthm-fd-nonnewtonian-conditional-admissibility",
+        "path": "items/pthm-fd-nonnewtonian-conditional-admissibility.md:75",
+        "affected_use": "Reddy reference labels \u00a7\u00a76.5.15 and 6.6.1\u20136.6.2.3, PDF pp. 24\u201326.",
+        "invalidated_claim": "The label identifies equation (6.5.15) as a section and omits PDF page 27, which contains both Carreau and Bingham sections.",
+        "minimality": "Citation-only correction to equation (6.5.15), \u00a7\u00a76.6.1\u20136.6.2.3, PDF pp. 25\u201327 (printed pp. 245\u2013247). Mathematical statement and proof need no change for this locator issue.",
+        "disposition": "refer_unassigned_owner"
+      },
+      {
+        "id": "ex-fd-bingham-rest-stress",
+        "path": "items/ex-fd-bingham-rest-stress.md:42",
+        "affected_use": "Reddy \u00a76.6.2.3 reference labels PDF pp. 25\u201326.",
+        "invalidated_claim": "The cited Bingham section is on PDF page 27, printed page 247.",
+        "minimality": "Change only the citation page locator to PDF p. 27 (printed p. 247); no graph, witness or verification change is required for this locator issue.",
+        "disposition": "refer_unassigned_owner"
+      }
+    ]
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-16-step5-context.json": "c16f83670a6372fed4dc6de8da4e9a4860fdabbd70e752389570ecd51dcdcf60",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/science-report.md": "c1c36c15ba16f88f49f3bd70da1002624ca3671bc7b88ea7f7b003695d77eafd",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/proposals/def-fd-adopted-nonnewtonian-models.patch": "b3cc812459b04483f24acf11a84f58010df75099f6a22d26b905b323aa71ddce",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/before/def-fd-adopted-nonnewtonian-models.md": "5462c4f005ef41509d410ddc2f133fa66b4738e2c0ad28cec8b57ab48c6d82d3"
+  },
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "id": "def-fd-adopted-nonnewtonian-models",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The generalized Newtonian and Bingham branches define but do not impose incompressibility. The permitted motion chi(t,a)=exp(alpha*t)*a induces u=alpha*x and D=alpha*I_3; for eta=eta_*>0, tr(tau)=6*eta_*alpha is nonzero, contradicting the declared deviatoric stress. The mathematical supplier defines the Bingham graph only on Sym_0(3). Repaired by requiring div(u)=0 throughout the swept region and explicitly adopting tau in the graph on Sym_0(3)."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "id": "def-fd-adopted-nonnewtonian-models",
+      "status": "fixed",
+      "severity": "nonfatal",
+      "reason": "Corrected the Reddy source equation/section distinction and missing PDF page 27, verified against the actual linked chapter."
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "id": "def-fd-adopted-nonnewtonian-models",
+      "status": "no-update-required",
+      "reason": "The only direct item consumer is draft pthm-fd-nonnewtonian-conditional-admissibility; no published or outside-frontier consumer was found. Record the exact focused use check without claiming a published-item audit."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "id": "pthm-fd-nonnewtonian-conditional-admissibility",
+      "status": "refer_unassigned_owner",
+      "severity": "nonfatal",
+      "reason": "The label identifies equation (6.5.15) as a section and omits PDF page 27, which contains both Carreau and Bingham sections. Citation-only correction to equation (6.5.15), \u00a7\u00a76.6.1\u20136.6.2.3, PDF pp. 25\u201327 (printed pp. 245\u2013247). Mathematical statement and proof need no change for this locator issue."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "id": "ex-fd-bingham-rest-stress",
+      "status": "refer_unassigned_owner",
+      "severity": "nonfatal",
+      "reason": "The cited Bingham section is on PDF page 27, printed page 247. Change only the citation page locator to PDF p. 27 (printed p. 247); no graph, witness or verification change is required for this locator issue."
+    }
+  ]
+}

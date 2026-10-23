@@ -1,0 +1,11 @@
+import {writeFileSync as wf,readFileSync as rf} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {orderedItems,runPages} from '../../tools/physics-support/item-dependency-levels.mjs';
+const run='fluid-dynamics-all-47-2026-10-23',files=orderedItems(runPages(process.cwd(),run)).map(x=>`items/${x.id}.md`);
+if(files.length!==305)throw Error('Wrong scope');
+const sha=p=>createHash('sha256').update(rf(p)).digest('hex'),before=Object.fromEntries(files.map(p=>[p,sha(p)]));
+const result=spawnSync(process.execPath,['tools/physics-support/proof-layout.mjs',...files],{encoding:'utf8',maxBuffer:16*1024*1024});
+if(files.some(p=>sha(p)!==before[p]))throw Error('Layout inputs changed');
+wf(`research/${run}-owner-step2-escalations/final-explicit-layout-attributions.json`,JSON.stringify({run,at:new Date().toISOString(),command:['node','tools/physics-support/proof-layout.mjs',...files],inputs:before,exit:result.status,stdout:result.stdout,stderr:result.stderr,formatting_only:true,complete:result.status===0},null,2)+'\n',{flag:'wx'});
+console.log(result.stdout);console.error(result.stderr);process.exitCode=result.status??1;

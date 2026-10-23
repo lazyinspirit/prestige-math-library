@@ -1,0 +1,426 @@
+{
+  "group": "a",
+  "batches": ["9"],
+  "pages_read": ["fd-f02", "fd-f02-examples"],
+  "items_read": [
+    "lem-fd-moving-control-volume-transport",
+    "post-fd-boundary-data",
+    "pthm-fd-material-mass-continuity",
+    "post-fd-weak-balances",
+    "pthm-fd-continuous-source-local-balances",
+    "pthm-fd-conservation-jump-laws",
+    "pthm-fd-cauchy-momentum-angular",
+    "pthm-fd-control-volume-balances",
+    "pthm-fd-energy-decomposition",
+    "cex-fd-vacuum-velocity-determination",
+    "ex-fd-conduction-energy-entropy"
+  ],
+  "conventions": [
+    {
+      "convention": "Material velocity satisfies u(t,χ(t,a)) = ∂tχ(t,a). Balance conclusions hold on the swept physical body, not its larger ambient regularity domain.",
+      "fixed_by": "pthm-fd-material-mass-continuity",
+      "matters_for": [
+        "pthm-fd-continuous-source-local-balances",
+        "pthm-fd-cauchy-momentum-angular",
+        "pthm-fd-control-volume-balances",
+        "pthm-fd-energy-decomposition"
+      ]
+    },
+    {
+      "convention": "Traction is σn with tension-positive stress; divergence is rowwise; outward conductive heat flux is q·n. Total-energy flux is ρEu − σᵀu + q.",
+      "fixed_by": "post-fd-weak-balances",
+      "matters_for": [
+        "pthm-fd-continuous-source-local-balances",
+        "pthm-fd-conservation-jump-laws",
+        "pthm-fd-energy-decomposition",
+        "ex-fd-conduction-energy-entropy"
+      ]
+    },
+    {
+      "convention": "The interface normal points from minus to plus, [g] = g+ − g−, and Vn is signed in that normal direction. Conservation requires [F]n − Vn[U] = 0; physical entropy requires the corresponding scalar coefficient to be nonnegative.",
+      "fixed_by": "pthm-fd-conservation-jump-laws",
+      "matters_for": ["pthm-fd-conservation-jump-laws"]
+    },
+    {
+      "convention": "The weak branch adopts Countable Choice and complete Euclidean Lebesgue spaces. Local integrability includes compact sets meeting initial time; conservative initial terms do not assert a strong initial trace.",
+      "fixed_by": "post-fd-weak-balances",
+      "matters_for": [
+        "pthm-fd-conservation-jump-laws",
+        "cex-fd-vacuum-velocity-determination"
+      ]
+    },
+    {
+      "convention": "Impermeability means (u − wb)·n = 0; separately adopted no-slip means u = wb. Thermal conditions are selected alternatives. Periodic faces are identifications, not walls.",
+      "fixed_by": "post-fd-boundary-data",
+      "matters_for": [
+        "pthm-fd-energy-decomposition",
+        "ex-fd-conduction-energy-entropy"
+      ]
+    },
+    {
+      "convention": "A control boundary has its own velocity w; only w·n enters transport. The relative fluid flux is measured using u − w.",
+      "fixed_by": "lem-fd-moving-control-volume-transport",
+      "matters_for": ["pthm-fd-control-volume-balances"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "pthm-fd-continuous-source-local-balances",
+      "statement": "Under the stated smooth material balances, pointwise mass continuity and Countable Choice, local conservative momentum, symmetric stress, total-energy, kinetic-energy and internal-energy equations hold throughout the balanced physical region. Conversely, pointwise momentum with symmetric stress implies the material angular balance, and the local total-energy equation implies its material balance.",
+      "used_by": [
+        "pthm-fd-cauchy-momentum-angular",
+        "pthm-fd-control-volume-balances",
+        "pthm-fd-energy-decomposition"
+      ]
+    },
+    {
+      "id": "pthm-fd-material-mass-continuity",
+      "statement": "The stated positive C1 densities and C2 material motion, with mass equality on every admissible relatively compact C1 material subregion, imply ∂tρ + div(ρu) = 0 throughout the balanced physical region.",
+      "used_by": [
+        "pthm-fd-continuous-source-local-balances",
+        "pthm-fd-cauchy-momentum-angular",
+        "pthm-fd-control-volume-balances",
+        "pthm-fd-energy-decomposition"
+      ]
+    },
+    {
+      "id": "post-fd-boundary-data",
+      "statement": "Adopts separately specified impermeable or no-slip wall data, alternative thermal conditions, periodic identification, and evolution-specific compatible initial data; asserts no existence, uniqueness, regularity improvement or solvability.",
+      "used_by": [
+        "pthm-fd-energy-decomposition",
+        "ex-fd-conduction-energy-entropy"
+      ]
+    },
+    {
+      "id": "post-fd-weak-balances",
+      "statement": "Separately adopts locally integrable weak conservative mass, momentum and total-energy identities, with initial conservative data, and a physical entropy inequality tested with nonnegative functions.",
+      "used_by": ["pthm-fd-conservation-jump-laws"]
+    },
+    {
+      "id": "lem-fd-moving-control-volume-transport",
+      "statement": "Under Countable Choice and the stated C2 motion of a bounded C1 control region, d/dt ∫C(t) g = ∫C(t) ∂tg + ∫∂C(t) g w·n, componentwise for vector fields.",
+      "used_by": ["pthm-fd-control-volume-balances"]
+    },
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "statement": "The adopted smooth balances yield total-, kinetic- and internal-energy equations. A time-independent conservative body potential and zero heat supply give conservation of integrated total-plus-potential energy under the specified fixed no-slip/insulating or periodic conditions.",
+      "used_by": ["ex-fd-conduction-energy-entropy"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact mathematical choice convention for moving-boundary transport and the weak branch.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The later smooth theorems and conduction example explicitly assume AC and derive Countable Choice from it.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Volume-to-boundary conversion for C1 fields on bounded C1 domains, under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-inverse-function-theorem",
+      "used_for": "External motion and Jordan-region suppliers: joint inverse regularity and preservation of local graph boundaries.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "External transport and boundary-regularity arguments.",
+      "opened": true
+    },
+    {
+      "id": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+      "used_for": "Transport supplier's Jacobian differentiation and inverse regularity.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-compact-jordan-sets",
+      "used_for": "Transport supplier's reference-to-current Riemann integral formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+      "used_for": "Jordan measurability of transported compact reference regions.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+      "used_for": "Integrability of continuous transported fields.",
+      "opened": true
+    },
+    {
+      "id": "def-riemann-integral-over-a-jordan-set",
+      "used_for": "Zero-extension integral convention used by the smooth transport suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-jordan-set-integral-well-defined",
+      "used_for": "Independence of the containing rectangle in that convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-integral-properties",
+      "used_for": "Linearity, monotonicity and absolute integral bounds in transport and localization.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Uniform difference-quotient bound in the transport supplier.",
+      "opened": true
+    },
+    {
+      "id": "cor-zero-total-derivative-on-a-convex-open-set-is-constant",
+      "used_for": "Constancy of transported mass and the Jacobian integrating factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-graphs-of-continuous-functions-have-content-zero",
+      "used_for": "C1-region supplier's finite graph-patch boundary argument.",
+      "opened": true
+    },
+    {
+      "id": "def-null-and-content-zero-in-rn",
+      "used_for": "Boundary content-zero and null-set conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-jordan-boundary-criterion",
+      "used_for": "Jordan measurability of C1 regions and their closures.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of bounded closed boundaries and closures.",
+      "opened": true
+    },
+    {
+      "id": "thm-compactness-under-continuous-maps",
+      "used_for": "Compact transported boundaries and bounded continuous integrands.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-criterion-in-rn",
+      "used_for": "Riemann integrability of bounded differences supported on content-zero boundaries.",
+      "opened": true
+    },
+    {
+      "id": "thm-jordan-content-and-indicator-integrability",
+      "used_for": "Zero integral of a content-zero boundary indicator.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-change-of-variables-for-lebesgue-measure",
+      "used_for": "Weak-jump supplier's time-first/spatial-first coordinate permutation.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Weak-form supplier's Euclidean Lebesgue spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Completeness and measure properties under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Measurability of open spatial domains and initial-time space-time domains.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Measurability convention for finite-dimensional weak fields.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Definition of measurable weak fields.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-null-set-and-almost-everywhere",
+      "used_for": "Almost-everywhere identification of fields and exceptional sections.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Weak-form integral definition.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Finite signed componentwise weak integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of tested products and sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Measurability of continuous tests and coordinate operations.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Integrability bounds for compactly supported tested products.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite sums and componentwise weak identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+      "used_for": "Independence of weak tests from almost-everywhere representatives.",
+      "opened": true
+    },
+    {
+      "id": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+      "used_for": "Finite compact-set measure and sigma-finiteness in the weak-form supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+      "used_for": "Identification of joint space-time measure with the completed product.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-and-fubini-for-completed-product-measures",
+      "used_for": "Iterated-integral notation with measurable exceptional null sections.",
+      "opened": true
+    },
+    {
+      "id": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+      "used_for": "Initial-time slice nullity and independence of separately prescribed initial data.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "concern": "The Statement explicitly makes ρ0 C1 but introduces current density only as 'ρ: O → (0,∞)' before separately requiring u,e,q,σ to be C1. Proof 2.1 applies suppliers requiring current density to be C1. Under the literal displayed hypotheses, take identity motion on a ball containing the origin, I=(-1/2,1/2), ρ0=1, u=σ=b=q=r=0, e=1, and ρ(t,x)=1 except ρ(t,0)=2+t. All stated material integrals and balances hold: bounded point modifications do not change their Riemann integrals. Nevertheless the claimed pointwise total-energy equation has left side 1 at the origin and right side 0. The intended smooth-postulate convention would exclude this example, but the complete Statement needs to carry that regularity explicitly.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "pthm-fd-continuous-source-local-balances",
+      "concern": "The Statement introduces χ and u separately without stating u(t,χ(t,a))=∂tχ(t,a). Proof 1.1 uses precisely this relation when applying material transport. F1's earlier Eulerian-velocity convention supplies the intended interpretation, but the complete Statement should identify it explicitly. Without that convention, identity χ, constant ρ=1, steady u=(-x2,x1,0), and σ=b=q=r=e=0 satisfy the displayed integral balances and mass continuity while violating the claimed local momentum equation.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "pthm-fd-cauchy-momentum-angular",
+      "concern": "The Statement calls u a velocity field but does not explicitly identify it as the Eulerian velocity of χ. Proof 1.3 applies pthm-fd-material-mass-continuity, whose Statement explicitly requires that identification. The earlier frame convention resolves the intended meaning; making the relation explicit would prevent the independent-field reading and its stationary-motion/rotating-u counterexample.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "concern": "As in the local momentum statements, χ and u are introduced separately without the explicit material-velocity relation. Proof 2.1 needs that relation for both cited suppliers. The prior framework definition supplies the intended convention, but it should be carried into this complete Statement alongside the density regularity.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-riemann-integral-over-a-jordan-set",
+      "finding": "Its Definition contains inline links including 'bounded in the metric sense of [[def-metric-bounded-diameter]]' and 'proved in [[lem-jordan-set-integral-well-defined]]'. These interrupt the complete Definition; the mandatory statement-first rule requires the links in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-null-and-content-zero-in-rn",
+      "finding": "The Definition includes 'The series and finite sums are [[def-series]] and [[def-finite-sum]]' and further inline supplier links. These must follow the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-compactness-under-continuous-maps",
+      "finding": "The Statement contains inline links such as 'topological spaces ([[def-topological-space]])', 'continuous ([[def-continuous-map-top]])' and 'compact ([[def-compact-space]])'. The mandatory uninterrupted-statement rule requires relocating all these links after the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-null-set-and-almost-everywhere",
+      "finding": "The Definition begins 'In a measure space ... ([[def-measure-space]])'. That inline hyperlink violates the required uninterrupted Definition and should be moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+      "finding": "Its Statement embeds [[def-countable-choice]], [[def-finite-sigma-finite-and-semifinite-measures]] and [[def-metric-bounded-diameter]]. These hyperlinks must follow the complete Statement in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+      "finding": "The Statement begins 'Assume the Axiom of Countable Choice ([[def-countable-choice]])'. The inline link must move after the complete Statement under the mandatory editorial rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-tonelli-and-fubini-for-completed-product-measures",
+      "finding": "The Statement begins 'Assume the Axiom of Countable Choice ([[def-countable-choice]])'. The inline link interrupts the Statement and needs a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+      "finding": "The Statement includes inline [[def-countable-choice]], [[def-euclidean-inner-product]] and [[def-linear-subspace]] links. Relocate them after the complete Statement without dropping the choice assumption or mathematical definitions.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "finding": "The Definition contains the malformed sentence 'Under countable choice, Assuming countable choice, Lebesgue outer measure is an outer measure that restricts to elementary volume makes ...'. A later sentence similarly inserts a theorem title after 'in Assuming countable choice'. The intended mathematical content is recoverable, but these supplier-title substitutions leave grammatically broken defining prose.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-f02",
+      "to": "fd-f01",
+      "faithful": true,
+      "note": "The smooth branch uses the supplied SI/frame, material-balance and C1-region integral conventions. The explicit-hypothesis omissions in individual consumer Statements are recorded in concerns."
+    },
+    {
+      "from": "fd-f02",
+      "to": "fd-mf02",
+      "faithful": true,
+      "note": "Weak tests, initial-data distinction, Countable Choice, coordinate permutation and jump residual signs agree with the current mathematical suppliers. No strong initial trace or shock existence theorem is inferred."
+    },
+    {
+      "from": "fd-px01",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "The nondimensionalization theorem uses separately selected compatible data and explicitly makes no thermal-scaling or solvability claim."
+    },
+    {
+      "from": "fd-px02",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "The exact-flow items preserve separately adopted boundary data, distinguish slip from no-slip, and exclude the impulsive initial-wall corner where appropriate."
+    },
+    {
+      "from": "fd-ps02",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "Mechanical power uses no-slip u=g and impermeability u·n=0 on a fixed wall with tangential wall velocity. Periodic identifications remain distinct from physical walls."
+    },
+    {
+      "from": "fd-pn01",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "Stationary no-slip is explicitly adopted as zero velocity trace. The Sobolev CFD application separately adopts its distributional physical extension instead of claiming classical regularity from the smooth postulate."
+    },
+    {
+      "from": "fd-pn02",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "The one-dimensional ideal-gas branch explicitly adopts the dimensional specialization of weak conservative balances and physical entropy inequality, retaining local integrability up to initial time and the absence of a strong-trace conclusion."
+    },
+    {
+      "from": "fd-pbl01",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "The fixed bed imposes only impermeability, φz=0. No-slip would additionally impose u=0 and is expressly omitted; horizontal periodic faces are identifications."
+    }
+  ]
+}

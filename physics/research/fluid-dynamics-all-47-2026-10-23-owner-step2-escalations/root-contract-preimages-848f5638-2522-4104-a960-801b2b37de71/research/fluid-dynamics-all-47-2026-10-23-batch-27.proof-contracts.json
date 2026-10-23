@@ -1,0 +1,468 @@
+{
+  "version": 1,
+  "level": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "thm-fd-stokes-load-observable-stability",
+    "prop-fd-pressure-gauge-observables",
+    "ex-fd-stokes-gradient-forcing-gauge"
+  ],
+  "contracts": {
+    "thm-fd-stokes-load-observable-stability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-na-weak-stokes-solvability-lipschitz-domain",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-weak-stokes-solvability-lipschitz-domain",
+          "source_section": "Statement",
+          "quote": "there is a unique $(u,p)\\in V\\times Q$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-weak-stokes-solvability-lipschitz-domain",
+          "source_section": "Statement",
+          "quote": "One stability bound is $\\|u\\|_V\\le\\nu^{-1}\\|F\\|_{V'}$ and $\\|p\\|_2\\le3C_{\\rm div}(D)\\|F\\|_{V'}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "source_section": "Statement",
+          "quote": "it is finite and independent of any finite-element mesh",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "source_section": "Definition",
+          "quote": "For $v\\in V$, define $\\varepsilon(v):=(\\nabla v+\\nabla v^T)/2$ and $b(v,q):=-\\int_Dq\\,\\operatorname{div}v$. For viscosity $\\nu>0$, set $a_\\nu(u,v):=2\\nu\\int_D\\varepsilon(u):\\varepsilon(v)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-bounded-stokes-observation-interface",
+          "source_section": "Definition",
+          "quote": "A bounded Stokes pressure sensor on $D$ is a bounded real-linear functional $S:Q\\to\\mathbb R",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pressure-map-linearity",
+          "step": "1.1",
+          "claim": "Every linear combination of two weak Stokes solutions solves the weak system at the corresponding linear combination of loads; uniqueness gives linearity of the pressure map and sensor outputs.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pressure-map-lipschitz-bound",
+          "step": "2.1",
+          "claim": "Apply the imported pressure bound to the load difference and use linearity; the divergence right-inverse constant is finite.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "finite-sensor-vector-bound",
+          "step": "3.1",
+          "claim": "Apply each sensor operator norm, square and sum the finitely many scalar inequalities, then use the pressure bound.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty domain and a positive number of sensors.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: Statement requires nonempty D and positive integer m. Proof 3.1 sums exactly m sensor inequalities, so m=0 is outside scope; the finite-sum detector correctly sees an aggregate but does not override the explicit positive-cardinality hypothesis.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: Statement requires nonempty D and positive integer m. Proof 3.1 sums exactly m sensor inequalities, so m=0 is outside scope; the finite-sum detector correctly sees an aggregate but does not override the explicit positive-cardinality hypothesis.",
+            "item_sha256": "7c4bbebbbb36a7d925c5ca7777766e0a7d3741a4938c0cb37808a2199899dd39",
+            "row_sha256": "84d25e32a34de74527ba51c1039471e5f6fa9d50f98e0fdbe59b816a412e5aaa",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 give zero pressure difference and zero right-hand side when F=G."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits m=1; step 3.1 then is exactly the scalar sensor estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero sensor has operator norm zero, and step 3.1 forces its output difference to be zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The viscosity is assumed strictly positive; no estimate is asserted at nu=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 retains the supplier’s Countable Choice assumption; steps 1.1–3.1 make no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way Lipschitz estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way Lipschitz estimate, not an equivalence."
+        }
+      ]
+    },
+    "prop-fd-pressure-gauge-observables": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-na-zero-mean-of-zero-boundary-divergence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "source_section": "Definition",
+          "quote": "Define $$V:=H^1_0(D;\\mathbb R^d),\\qquad Q:=L^2_0(D):=\\{q\\in L^2(D;\\mathbb R):\\int_Dq=0\\}.$$ Equip $V$ with $\\|v\\|_V:=\\|\\nabla v\\|_{L^2(D)}$ and $Q$ with $\\|q\\|_Q:=\\|q\\|_{L^2(D)}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-zero-mean-of-zero-boundary-divergence",
+          "source_section": "Statement",
+          "quote": "If $v\\in H^1_0(D;\\mathbb R^d)$, then $\\operatorname{div}v\\in L^2(D)$ and $\\int_D\\operatorname{div}v=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then $$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-bounded-stokes-observation-interface",
+          "source_section": "Definition",
+          "quote": "A bounded Stokes pressure sensor on $D$ is a bounded real-linear functional $S:Q\\to\\mathbb R",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weight-sensor-and-normalized-gauge",
+          "step": "1.1",
+          "claim": "The L2 pairing is bounded; subtracting the mean from the weight does not change its action on zero-mean pressures.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stokes-pressure-constant-gauge",
+          "step": "1.2",
+          "claim": "The zero-mean divergence lemma makes the weak pressure term unchanged by an additive constant.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "iff-gauge-invariant-weight",
+          "step": "2.1",
+          "claim": "The change in reading under p to p+c is c times the integral of the weight; vanishing for every c is equivalent to zero mean.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is assumed nonempty and open."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For g=0, step 1.1 gives the zero sensor and step 2.1 gives invariance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the constant weight g=1, step 1.1 is defined and step 2.1 shows non-invariance because |D|>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The domain assumptions exclude an empty or measure-zero open set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles every real c, including c=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/A1 preserves the supplier Countable Choice assumption; proof steps 1.1 and 1.2 make no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows zero-mean weights give invariant readings."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 takes c=1 to show invariant readings force zero mean."
+        }
+      ]
+    },
+    "ex-fd-stokes-gradient-forcing-gauge": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-na-weak-stokes-solvability-lipschitz-domain",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "source_section": "Definition",
+          "quote": "Here $H^1_0(D)$ is the $H^1$-closure of $C_c^\\infty(D)$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-weak-stokes-solvability-lipschitz-domain",
+          "source_section": "Statement",
+          "quote": "there is a unique $(u,p)\\in V\\times Q$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-stokes-load-observable-stability",
+          "source_section": "Statement",
+          "quote": "For each $F\\in V'$, let $(u_F,p_F)\\in V\\times Q$ be the unique pair",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-bounded-stokes-observation-interface",
+          "source_section": "Definition",
+          "quote": "A bounded Stokes pressure sensor on $D$ is a bounded real-linear functional $S:Q\\to\\mathbb R",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-fd-pressure-gauge-observables",
+          "source_section": "Statement",
+          "quote": "For $g\\in L^2(D)$ define $S_g(q):=\\int_Dgq\\,dx$ for $q\\in Q$; this is a bounded pressure sensor.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then $$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coordinate-potential-properties",
+          "step": "1.1",
+          "claim": "The coordinate function is square integrable on the bounded domain; subtracting its average gives a mean-zero H1 potential with gradient e1.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gradient-load-is-bounded",
+          "step": "2.1",
+          "claim": "Integration by parts extends from compactly supported smooth velocities to H1_0 by closure and L2 continuity; the trace estimate bounds the load in V'.",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-solution-identification",
+          "step": "3.1",
+          "claim": "Direct substitution verifies both weak equations; uniqueness identifies the pressure as phi.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "positive-gauge-invariant-reading",
+          "step": "4.1",
+          "claim": "The phi-weight defines a bounded sensor, has zero mean, and its reading at phi is the strictly positive variance of the first coordinate.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty open domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This example fixes a nonconstant coordinate potential and does not treat the zero-load case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement uses one sensor; step 4.1 verifies its positive reading."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A nonempty open domain contains a ball, so the coordinate is not almost everywhere constant.",
+          "evidence": "Steps 1.1 and 4.1 use that a nonempty open domain contains a ball, so the coordinate is not almost everywhere constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint parameter in this domain example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/A1 preserves the supplier Countable Choice premise; step 3.1 uses its uniqueness conclusion without new choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a specific construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a specific construction, not an equivalence."
+        }
+      ]
+    }
+  }
+}

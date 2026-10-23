@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "reviewer": "/root/fluid_completed_consumers",
+  "round": 1,
+  "scope": "Read-only focused escalation review of batches31,46,47, supplier before consumer. Only this evidence file is written; root owns archives, edits, current hashes, checks and readiness.",
+  "native_evidence": "Read genuine successful completed results for31 (15:55:00.060Z),46 (16:04:59.807Z),47 (16:00:41.044Z),9 (16:06:33.209Z) and44 (16:02:09.541Z). Read all source9 eleven native ready rows and source44 four stored ready rows; two source44 statistical rows now carry later 16:08:56 times, so these are observed current stored states, not a claim they were all final at native finish. Source11 root integration and prior same-owner review were read. No row hash was computed or current-validated.",
+  "items": [
+    {
+      "id": "post-fd-ideal-gas-numerical-model",
+      "batch": 31,
+      "examined_direct_dependency_ids": [
+        "def-fd-simple-fluid-state",
+        "def-fd-quantity-and-frame-conventions",
+        "post-fd-local-equilibrium",
+        "post-fd-weak-balances",
+        "def-fd-compressible-numerical-contract"
+      ],
+      "recommendation": "ready after time-zero integrability clarification and owner current binding",
+      "scientific_review": "Calorically perfect e(v,s) is smooth and positive with T=e/c_v, p=(gamma-1)rho e=Rrho T, gamma=1+R/c_v>1. Reference ratios/exponent are dimensionless. m=rho u, E=rho(e+u^2/2) identify the exact positive numerical state and thermodynamic pressure; c^2=gamma p/rho is the fixed-entropy derivative. The R1 weak model is explicitly authored locally, rather than inferred by dimension reduction from the R3 weak postulate. Zero forcing/heat flux and isotropic stress give the displayed Euler flux; entropy is separately adopted. Need integrability up to t=0 for tests allowed to touch zero (finding F1). SI densities/fluxes match; no AC_omega premise is required for this adopted closure or finite numerical step.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:51:14.770Z",
+        "sha256_as_stored_only": "a0ce583a28cfa4b801132c725b3d16d60980791f55bf91e75bde994fbaed03f3"
+      }
+    },
+    {
+      "id": "pthm-fd-conditional-positive-euler-update",
+      "batch": 31,
+      "examined_direct_dependency_ids": [
+        "post-fd-ideal-gas-numerical-model",
+        "def-fd-compressible-numerical-contract",
+        "prop-fd-euler-llf-admissibility-interface"
+      ],
+      "recommendation": "ready after postulate clarification and owner current binding",
+      "scientific_review": "Exact match to numerical contract and LLF admissibility proposition: gamma>1, N>=2 periodic uniform mesh, dt>=0, dx>0, speed a>=max(|uL|+cL,|uR|+cR)>0, and inclusive 2lambda a<=1. lambda has s/m and lambda a is dimensionless. The proposition maps supplier nu=dt/h to lambda=dt/dx and uses the middle HLL branch; physical proof only identifies p=(gamma-1)rho e with state pressure before applying it. Strict positivity survives endpoint equality. No exact Riemann wave enclosure, fully discrete entropy inequality or convergence is imported. Postulate time-zero clarification does not affect the finite-step proof.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:51:22.674Z",
+        "sha256_as_stored_only": "893bc515390f817d614d497846f7f0698959d88a87a9c5181baf9776bd69e5fe"
+      }
+    },
+    {
+      "id": "ex-fd-positive-euler-uniform-gas",
+      "batch": 31,
+      "examined_direct_dependency_ids": [
+        "pthm-fd-conditional-positive-euler-update"
+      ],
+      "recommendation": "ready after parent binding",
+      "scientific_review": "All neighboring states equal U, so jump dissipation vanishes and every shared flux equals F(U). Flux differences vanish, preserving the entire state and positive pressure/density, including dt=0 and N=2. Same supplied speed/CFL/model assumptions as parent; no extra statistical or physical premise.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:51:30.990Z",
+        "sha256_as_stored_only": "4f55b3ff18d96e17e08256a753fda2e15b9bb10a67f2d48513230acab4dfd631"
+      }
+    },
+    {
+      "id": "def-fd-wall-defect-capillary-models",
+      "batch": 46,
+      "examined_direct_dependency_ids": [
+        "def-fd-x00"
+      ],
+      "recommendation": "ready after owner binding; retain explicit conditional trace/lift convention",
+      "scientific_review": "Read full definition and source5 x00: full momentum residual includes pressure/rho0, viscosity and forcing, with unprojected row-Cartesian derivatives on a bounded domain. Common trace and supplied divergence-free lift are explicit conditions; no arbitrary-data lift existence is claimed. The affine channel defect lift has only x component linear in y. The separate finite-depth capillary equations use harmonic potential, impermeable bed and correct -sigma Delta_H eta/rho sign, with rho,g,h positive and sigma>=0. Traces are required by the comparison definition, not inferred for every interior-C2 field. Optional SI dimensions are correct here. Periodic L01 projected residual is not used as its definition.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:59:41.748Z",
+        "sha256_as_stored_only": "13c2cbac8f547ed2c67f4a886f0cfd879895d605cd51a21191be57a28857634d"
+      }
+    },
+    {
+      "id": "thm-fd-common-wall-residual-error",
+      "batch": 46,
+      "examined_direct_dependency_ids": [
+        "def-fd-wall-defect-capillary-models",
+        "def-countable-choice",
+        "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+        "cor-cauchy-schwarz-inequality-for-l-two",
+        "cor-triangle-inequality-for-inner-product-norm",
+        "thm-newton-leibniz-with-interior-derivative",
+        "thm-derivative-of-exponential",
+        "thm-algebra-of-derivatives",
+        "thm-chain-rule",
+        "thm-of-square-roots"
+      ],
+      "recommendation": "ready only after F2 dimensional correction and F3 channel-proof bridge; no new supplier needed",
+      "scientific_review": "Bounded C2 closure-regular fields meet C1 divergence theorem hypotheses under exactly AC_omega. With e=v-u, subtraction gives transport by v and (e dot grad)u; e=0 at the common wall kills convection, pressure and diffusion boundary terms even for nonzero shared wall velocity. Gradient norm bounds the remaining convection; Cauchy-Schwarz bounds forcing residual. Differentiating the energy is justified uniformly on compact closure; regularized sqrt(Y+delta^2) handles zero error without division and integrating factor gives the rich claimed estimate. The affine lift and all cross terms are correct, with Delta ell=(ell dot grad)ell=0; triangle inequality gives the w-u bound. Preserve common nonzero trace and explicit lift scope; no inviscid-limit or general lift theorem. Actual velocity volume L2 units need m^(5/2)/s, and periodic channel requires explicit face-cancellation argument instead of literal application of Euclidean C2-domain theorem.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:59:49.435Z",
+        "sha256_as_stored_only": "2d32aecc64d3305e2b5c54a71c36af32399f29edbcd72cde0e679fb1c37c3cbe"
+      }
+    },
+    {
+      "id": "thm-fd-capillary-gravity-dispersion-energy",
+      "batch": 46,
+      "examined_direct_dependency_ids": [
+        "def-fd-wall-defect-capillary-models",
+        "thm-fd-x03",
+        "thm-chain-rule",
+        "thm-of-square-roots",
+        "cor-greens-first-identity-for-glued-elementary-solid-regions",
+        "thm-algebra-of-derivatives",
+        "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle"
+      ],
+      "recommendation": "ready after owner binding",
+      "scientific_review": "Source5 gravity mode has exact same h,g,k, vertical G, real phase and positive omega0. Rescaling t by c_sigma=sqrt(1+sigma k^2/(rho g)) and potential amplitude by c_sigma preserves bottom/kinematic condition; dynamic equation cancels using c_sigma^2=1+sigma k^2/(rho g). Coefficient identity gives a omega_sigma/(k tanh(kh)) without division by a; sigma=0 is exact original mode. General energy theorem uses C1-in-time C2-in-space fields extending past the closed rectangular slab; Green first identity with phi_t/phi meets asymmetric regularity. Paired periodic faces and impermeable bed remove flux; top derivative cancels the gravity and surface-gradient energy derivatives by dynamic and kinematic conditions. All energies have joules; sigma>=0, rho,g>0 yield nonnegative energy. This theorem does not depend on common-wall estimate or periodic L01 claims; no inherited AC_omega assumption is needed.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:59:57.468Z",
+        "sha256_as_stored_only": "6bada5843d572eccba2c054209c9dd8166da38a13ac8bea0c046fb0134df5f00"
+      }
+    },
+    {
+      "id": "ex-fd-capillary-zero-tension-limit",
+      "batch": 46,
+      "examined_direct_dependency_ids": [
+        "thm-fd-capillary-gravity-dispersion-energy",
+        "thm-fd-x03"
+      ],
+      "recommendation": "ready after capillary theorem binding",
+      "scientific_review": "At sigma=0, positive frequency roots agree and coefficient a omega0/(k tanh kh)=ag/omega0, including zero amplitude. Rationalizing the difference gives nonnegative numerator sigma k^3 tanh(kh)/rho divided by omega_sigma+omega0>=omega0>0, so one-sided limit is zero. Same h,g,rho,k positivity and SI units; exact model specialization only.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T16:00:05.706Z",
+        "sha256_as_stored_only": "fe151b0e8da90558ba3261d909166f711e369c266bda10bf52399d92be4a5011"
+      }
+    },
+    {
+      "id": "post-fd-capillary-linear-free-surface",
+      "batch": 47,
+      "examined_direct_dependency_ids": [
+        "def-fd-wall-defect-capillary-models",
+        "post-fd-boundary-data"
+      ],
+      "recommendation": "ready after owner binding and nonempty-time clarification if owner synchronizes intended branch",
+      "scientific_review": "Read mathematical capillary definition and source9 boundary postulate. Map sigma to physical gamma>0, Lx/Ly to L1/L2; stronger C3 phi/C2 eta regularity is allowed. Fixed bed imposes only zero normal velocity, never no-slip. Horizontal identifications are not walls. Upward graph normal and kappa=-div_h(grad eta/sqrt(1+|grad eta|^2)) give p_liquid-p_gas=gamma kappa; first-order condition is phi_t+g eta-(gamma/rho)Delta_h eta=0. Periodic potential is explicitly stronger than curl-free and excludes additive uniform flow. Constant density/tension, inviscid/linear/no-current scope retained, with no finite-amplitude accuracy or empirical claim. Require a nonempty time interval for the theorem consumer (F4).",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:55:26.077Z",
+        "sha256_as_stored_only": "e46bd67dcf3190555d5a59147dd39066c226aeedfde0062785ea37f6766ba0a7"
+      }
+    },
+    {
+      "id": "pthm-fd-capillary-wave-model-prediction",
+      "batch": 47,
+      "examined_direct_dependency_ids": [
+        "post-fd-capillary-linear-free-surface"
+      ],
+      "recommendation": "ready after F4 nonempty-time repair and owner binding",
+      "scientific_review": "The full two-dimensional nonzero lattice vector k=2pi(m1/L1,m2/L2) is preserved, not narrowed to x-directed mode. Substitution gives Fdoubleprime-k^2 F=0; bottom leaves A cosh(k(z+h)), kinematic -i omega H=A k sinh kh, dynamic -i omega A cosh kh+(g+gamma k^2/rho)H=0. H!=0, k,h>0 force omega!=0; elimination gives positive dispersion square. Each sign of its real square root has explicit nonzero mode, satisfying both iff directions. Real/imaginary parts solve real equations by linearity; no empirical premise. As written I may be empty, invalidating necessity by vacuity; require nonempty I. No choice principle is used.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:55:34.757Z",
+        "sha256_as_stored_only": "8998859e442dcf8f7719533f99a4cdb7da50f903e9573ce81dbb34197040e7e7"
+      }
+    },
+    {
+      "id": "ex-fd-capillary-restoring-sign",
+      "batch": 47,
+      "examined_direct_dependency_ids": [
+        "pthm-fd-capillary-wave-model-prediction"
+      ],
+      "recommendation": "ready after repaired parent binding",
+      "scientific_review": "For every nonzero allowed lattice mode k>0, gamma k^2/rho>0 adds to g>0, and positive k tanh kh yields omega^2>0. Since complex z with z^2 positive real has zero imaginary part and nonzero real part, the two frequencies are real and nonzero. This exact sign argument consumes the repaired full mode theorem and is not an observed stability result.",
+      "observed_row": {
+        "decision": "escalated",
+        "at": "2026-10-22T15:55:43.601Z",
+        "sha256_as_stored_only": "66df92add6448420c9f909f73c81c7b540614ce11a83ef8eeb745e251006e327"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1-time-zero-integrability",
+      "classification": "formulation precision gap; no missing theorem",
+      "subjects": [
+        "post-fd-weak-balances",
+        "post-fd-ideal-gas-numerical-model"
+      ],
+      "actual_problem": "31 explicitly demands L1loc only on Omega x (0,Tf), while its weak tests may be nonzero at0. This alone permits nonintegrable singularities near0 and does not ensure the displayed test integrals exist. Source9 likewise defines fields on open (0,Tf), defines local integrability on compact subsets without the relative-time0 convention, and allows initial tests; its link to the exact weak-form definition suggests intended correct convention but leaves public formulation ambiguous. Equality of finite integrals may implicitly exclude bad fields; make the intended requirement explicit rather than relying on that interpretation.",
+      "smallest_repair": "In both public postulates, require every conservative density, flux and source appearing in initial weak tests to be integrable on every compact subset of Omega x [0,Tf) in the relative topology (equivalently on K x (0,tau] for each compact spatial K and tau<Tf). Fields need not be assigned point values at0. Preserve separate initial data and do not infer a strong trace or existence. No positive-state/numerical/entropy claim is removed.",
+      "consumer_review": "31 all three consumers reviewed above. Also read complete pthm-fd-conservation-jump-laws, the other direct weak-postulate item consumer found by scoped text search: its theorem is explicitly interior away from0, and initial terms are separate. Clarifying source integrability leaves its jump proof and public interior statement valid; it uses no new trace. Root must rebind all affected actual closures after source change.",
+      "contract_and_metadata": "Update31 postulate physics_review formulation/scope evidence to say up-to-zero integrability. Update exact Postulate quotes in affected consumers/contracts if the quote spans the revised sentence, including31 positivity A1 as applicable and source9 jump A1 if quoted. Source9 level is now3 and ready row exists; do not retain old level0/missing-row claims."
+    },
+    {
+      "id": "F2-wall-L2-units",
+      "classification": "confirmed dimensional error in public Statement",
+      "subject": "thm-fd-common-wall-residual-error",
+      "actual_problem": "Last Statement sentence claims each volume L2 norm has units m^(3/2) s^-1, but norm of a velocity over ordinary 3D volume has sqrt(m^2 s^-2 times m^3)=m^(5/2) s^-1. Residual norm itself has m^(5/2) s^-2; its time integral matches velocity norm.",
+      "smallest_repair": "Replace that sentence with: velocity/error/lift volume L2 norms have units m^(5/2) s^-1, residual volume L2 norms have m^(5/2) s^-2, and the time-integrated residual term has m^(5/2) s^-1. Keep the unnormalized integral/norm, rich estimate and all geometry unchanged.",
+      "affected_consumers": "No direct item use of this theorem appears in the inspected31/46/47 dependency lists; capillary theorem and physical47 use the common definition but not this wall theorem. Scoped item-text search found only the theorem itself naming its ID. A precise units-only change does not transfer periodic statistical scope. Root retains ordinary current dependency check duties.",
+      "contract_and_metadata": "Sync manifest Statement mirror and any full Statement quote/boundary excerpt containing old unit sentence. Proof derivation math is unchanged."
+    },
+    {
+      "id": "F3-channel-proof-bridge",
+      "classification": "small local proof-interface gap; no new supplier",
+      "subject": "thm-fd-common-wall-residual-error",
+      "actual_problem": "Step2.3 says apply the bounded-domain estimate to periodic channel. The channel quotient/fundamental rectangular cell is not literally the bounded Euclidean C2 domain assumed by step1.3/F2. Statement correctly says periodic face terms cancel, but proof should explicitly perform that bridge.",
+      "smallest_repair": "Before applying step1.3 repeat step1.2 on [0,Lx]x[0,h]x[0,Lz] using coordinate FTC for divergence: opposite x,z traces cancel by periodicity, wall terms vanish because e=0 at y=0,h. The same energy inequality and scalar integration step1.3 then apply; preserve explicit affine lift/cross terms. Use no new periodic L01 premise.",
+      "contract_and_metadata": "Sync step2.3 derivation and its inputs with the actual revised argument. Step1.3 also says D is compact, although closure D is compact; correct to closure D. Step1.2 source tags omit step1.1 although its contract inputs include step1.1; add the genuine earlier-step tag when making the focused proof edit."
+    },
+    {
+      "id": "F4-empty-time-mode",
+      "classification": "confirmed omitted hypothesis/boundary counterexample",
+      "subject": "pthm-fd-capillary-wave-model-prediction",
+      "actual_problem": "Statement only requires I open, allowing I=empty. Fields then satisfy all PDE/boundary equations vacuously for any omega, with H!=0 and C2 F still supplied, so its stated mode-existence iff need not imply dispersion.",
+      "smallest_repair": "Require I nonempty and open (an open interval is sufficient but connectedness is unnecessary). If synchronizing the model postulate, explicitly call its time interval nonempty too. Preserve arbitrary nonzero 2D lattice vectors, complex formulation, finite depth and both real frequency branches.",
+      "contract_and_metadata": "Repair mode contract empty-case evidence to name nonempty I; sync manifest Statement and any theorem-source quotes used by restoring-sign example. Review the example against the repaired hypothesis as above. No new lemma required."
+    }
+  ],
+  "scope_preservation": {
+    "approved_plan": "Read controlling refresh-track section lines1457\u20131515: intended four wall/capillary math items and three physical free-surface items, same A/B pages and navigation prerequisites. Current full bounded-wall estimate, common nonzero trace, affine lift and exact capillary mode/energy remain present; physical theorem retains full arbitrary 2D lattice iff with both signs.",
+    "removed_periodic_edges": "Read current source44 periodic residual definition and proof and periodic residual-error theorem/proof. They use normalized torus measure and Leray projection and cannot supply bounded-wall full-pressure/common-trace theorem. Their two removed logical edges are correct. Local46 derivation supplies the approved richer bounded-wall claim; no replacement bounded theorem on L01 is required. Keep L01 as approved navigation context. Statistical44 rows are navigation-only here; no statistical proof propagation is warranted.",
+    "shared_levels": "Native46 tail acknowledges one write to shared dependency-level file. Do not revert/rewrite it in this resolution; root recomputes at the final native join."
+  },
+  "status_cleanup": {
+    "batch31": "Postulate references paragraph for post-local-equilibrium still says readiness missing/stale definitions; remove only obsolete current-status assertions. All three old escalation reasons and four open edges (page to fd-f02/fd-f03, item to local-equilibrium/weak-balances) are historical. Archive them, update live evidence only after F1 repair/root binding. Coverage blockers still contain these obsolete holds and level0 claim; replace current blocker summary with actual F1 resolution evidence, retaining author source reading. Notes should distinguish old checkpoints from current resolution.",
+    "batch46": "No stale supplier-status clauses in examined item bodies. All four escalation rows cite old L01 readiness; archive/replace after applicable F2/F3 repairs. Cross-batch L01 page edge is already verified and removed logical edges accurately documented; retain them. Notes paragraphs demanding a new bounded supplier or changed navigation prerequisite are superseded by correct local proof/navigation-only disposition. Fix live notes without erasing native history.",
+    "batch47": "No stale readiness clauses in examined item bodies. Archive three old missing-model/x00/boundary/L01 row reasons. Cross-batch model-definition item edge remains open and should become verified only after root binding; boundary edge already verified. Keep existing page identities and physical qualifications. Fix F4 source/contract/manifest before readiness."
+  },
+  "optional_local_proof_detail": "Physical mode proof step2.1 calls the elementary ODE general solution without deriving it. To make completeness entirely explicit without new dependency, set G=Fprime-kF; Gprime=-kG, so exp(kz)G is constant, integrate the resulting first-order equation (or note the two independent exponentials with matching Cauchy data) to get cosh/sinh. This is a small proof expansion, not an identified false dispersion claim or new prerequisite. If edited, sync its matching contract derivation.",
+  "reading_limits": [
+    "Read complete10 scoped item bodies; direct physical suppliers weak-balances and boundary-data; numerical contract/proposition and complete published LLF positivity supplier proof; complete source5 gravity-mode statement/proof and source44 two periodic residual carriers. Earlier same-owner reviews read simple-state/local-equilibrium/F01 and x00 in full; no incompatible interface change was observed.",
+    "Read complete Green identity, differentiation-under-integral, L2 Cauchy-Schwarz and triangle supplier bodies. Read exact Statements (not newly complete proofs) for common-wall divergence theorem, scalar FTC, exponential derivative, product rule, chain rule and square-root suppliers. Did not recursively audit their imported dependency closure.",
+    "Read all selected contract derivation/evidence/boundary records via compact extraction, citation supplier identities and current direct source texts. Repeated long exact quote/boundary excerpts were not mechanically validated.",
+    "No external full texts were newly retrieved/read. Native coverage records remain historical source-reading/fetch attestations; no new source approval is asserted.",
+    "No source, manifest, contract, readiness, active state, hash or dispatch file was edited; no validators/gates/hash tools ran. Root must perform actual current-input validation after its archive and repairs. This is not independent acceptance or whole-audit coverage."
+  ],
+  "gates_attempted": 0,
+  "supplementary_closure_scan": {
+    "method": "Read-only rg -l search of all five repaired seed IDs over items/ and library/ Markdown, combined with direct/current manifest logical dependency index supplied/read by root; no checksum or validation tool.",
+    "item_results": [
+      "pthm-fd-conservation-jump-laws",
+      "post-fd-weak-balances",
+      "ex-fd-capillary-restoring-sign",
+      "thm-fd-common-wall-residual-error",
+      "pthm-fd-conditional-positive-euler-update",
+      "pthm-fd-capillary-wave-model-prediction",
+      "post-fd-capillary-linear-free-surface",
+      "post-fd-ideal-gas-numerical-model"
+    ],
+    "page_results": [
+      "fd-bl01",
+      "fd-pbl01",
+      "fd-f02",
+      "fd-pn02"
+    ],
+    "interpretation": "Seed-ID mentions in item bodies are within the same9-subject actual logical closure; page results are inventory placement. The second-generation uniform-gas example is included through its positivity theorem. No additional body-only/nonlogical consumer was found by this scoped seed-name scan. This is not a global alias/identity validator."
+  },
+  "subsequent_authorized_repair": {
+    "phase": "After this initial read-only review, root authorized and archived round1 body repairs; see consumer31-capillary-repair-plan.json. Initial reading limits describe the pre-repair review phase.",
+    "scope": [
+      "post-fd-weak-balances",
+      "pthm-fd-conservation-jump-laws",
+      "post-fd-ideal-gas-numerical-model",
+      "pthm-fd-conditional-positive-euler-update",
+      "ex-fd-positive-euler-uniform-gas",
+      "thm-fd-common-wall-residual-error",
+      "post-fd-capillary-linear-free-surface",
+      "pthm-fd-capillary-wave-model-prediction",
+      "ex-fd-capillary-restoring-sign"
+    ]
+  }
+}

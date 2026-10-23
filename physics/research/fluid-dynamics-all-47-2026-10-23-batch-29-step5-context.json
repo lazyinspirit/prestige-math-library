@@ -1,0 +1,194 @@
+{
+  "group": "e",
+  "batches": [
+    "29"
+  ],
+  "pages_read": [
+    "fd-pn01",
+    "fd-pn01-examples"
+  ],
+  "items_read": [
+    "def-fd-pn01-forced-creeping-stokes-branch",
+    "def-fd-forced-incompressible-newtonian-model",
+    "pthm-fd-creeping-lipschitz-pressure",
+    "pthm-fd-no-slip-cfd-observations",
+    "ex-fd-cfd-density-pressure-conversion"
+  ],
+  "conventions": [
+    {
+      "convention": "Countable Choice means that every sequence of nonempty sets has a choice function; the physical conclusions retain this mathematical assumption.",
+      "fixed_by": "def-fd-pn01-forced-creeping-stokes-branch",
+      "matters_for": [
+        "pthm-fd-creeping-lipschitz-pressure",
+        "pthm-fd-no-slip-cfd-observations",
+        "ex-fd-cfd-density-pressure-conversion"
+      ]
+    },
+    {
+      "convention": "V is real H1-zero with gradient norm; Q is real L2 with spatial mean zero and its L2 norm. Pressure outputs use this selected gauge.",
+      "fixed_by": "def-fd-pn01-forced-creeping-stokes-branch",
+      "matters_for": [
+        "pthm-fd-creeping-lipschitz-pressure"
+      ]
+    },
+    {
+      "convention": "The creeping branch adopts zero inertia as an alternative model, with stress −pI + 2μD and force balance div σ + ρb = 0; it does not simultaneously impose material-acceleration momentum balance.",
+      "fixed_by": "def-fd-pn01-forced-creeping-stokes-branch",
+      "matters_for": [
+        "pthm-fd-creeping-lipschitz-pressure"
+      ]
+    },
+    {
+      "convention": "Density and dynamic viscosity are primitive positive branch parameters in SI units. Kinematic viscosity μ/ρ is derived. Stress divergence is rowwise, and stationary no-slip data are separately adopted.",
+      "fixed_by": "def-fd-forced-incompressible-newtonian-model",
+      "matters_for": [
+        "pthm-fd-no-slip-cfd-observations",
+        "ex-fd-cfd-density-pressure-conversion"
+      ]
+    },
+    {
+      "convention": "The scaling is x = ℓ0 y, physical time = (ℓ0/U0)t*, physical velocity = U0 u*, physical pressure = ρ0 U0² p*, and ν* = μ0/(ρ0 U0 ℓ0). Physical volume-time pressure observations consequently acquire the factor ρ0 U0 ℓ0⁴.",
+      "fixed_by": "pthm-fd-no-slip-cfd-observations",
+      "matters_for": [
+        "ex-fd-cfd-density-pressure-conversion"
+      ]
+    },
+    {
+      "convention": "The evolutionary result explicitly adopts a distributional physical balance at the stated Sobolev regularity. It uses mass-projected initialization, interval-average forcing, any actual mixed backward-Euler MINI root, and τmax Λ ≤ 1/2. Pressure estimates concern primitives and smooth time tests, not instantaneous pressure error.",
+      "fixed_by": "pthm-fd-no-slip-cfd-observations",
+      "matters_for": [
+        "ex-fd-cfd-density-pressure-conversion"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "statement": "Under Countable Choice, the stated forced incompressible Newtonian weak extension, complete smooth MINI interface hypotheses, and τmax Λ ≤ 1/2, the endpoint velocity observation error is at most (ν*)^(−1/2) C* H times the weighted sensor norm. The nodal pressure-primitive observation error is at most K H times the Q norm of ξ, and the smooth time-tested pressure error is at most (K+1) H times the L1 norm of η′ and the Q norm of ξ. Physical volume-time pressure bounds acquire the factor ρ0 U0 ℓ0⁴. These are conditional strong-branch predictions, with no instantaneous pressure-error or Reynolds-uniform claim.",
+      "used_by": [
+        "ex-fd-cfd-density-pressure-conversion"
+      ]
+    },
+    {
+      "id": "def-fd-pn01-forced-creeping-stokes-branch",
+      "statement": "The parameterized forced creeping Stokes weak formulation uses V = H1-zero(D*; R³), Q = L2-zero-mean(D*), ν* = μ0/(ρ0 U0 ℓ0), Fg*(v) = ∫ g*·v, and the equations 2ν*∫ ε(u*):ε(v) − ∫ q* div v = Fg*(v), −∫ r div u* = 0. Physical pressure is ρ0 U0² q*, and the stationary no-slip condition is encoded by V. This weak interface contains no material-acceleration term.",
+      "used_by": [
+        "pthm-fd-creeping-lipschitz-pressure"
+      ]
+    },
+    {
+      "id": "def-fd-forced-incompressible-newtonian-model",
+      "statement": "For the specified classical fields, positive constant density and viscosity, and prescribed continuous body acceleration, the forced branch adopts div u = 0 and ρ0(∂t u + (u·∇)u) = ρ0 b + div σ, with σ = −pI3 + 2μ0D and D = (∇u + ∇uᵀ)/2. Stationary no-slip boundary data are separately selected.",
+      "used_by": [
+        "pthm-fd-no-slip-cfd-observations"
+      ]
+    },
+    {
+      "id": "pthm-fd-creeping-lipschitz-pressure",
+      "statement": "Under Countable Choice and the stated bounded connected Lipschitz-domain, positive-parameter, continuous L2 body-acceleration, forced creeping-model and bounded real-linear pressure-sensor hypotheses, the physical pressure-output difference is at most 3ρ0 U0² Cdiv(D*) CP(D*) (Σj ||Sj||²)^(1/2) ||g1*−g2*||L2. This is conditional stability for the adopted creeping model, without a finite-Reynolds Navier–Stokes approximation claim.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact choice assumption retained by the Stokes and smooth MINI interfaces and their physical consumers.",
+      "opened": true
+    },
+    {
+      "id": "lem-na-homogeneous-dirichlet-poincare",
+      "used_for": "The slab-width Poincare constant and continuity of body-acceleration loads on the gradient-norm velocity space.",
+      "opened": true
+    },
+    {
+      "id": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+      "used_for": "Real velocity and pressure spaces, norms, symmetric-gradient viscous form, and negative pressure-divergence sign.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+      "used_for": "Finite domain-dependent divergence-lifting constant used by the Stokes pressure stability supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-weak-stokes-solvability-lipschitz-domain",
+      "used_for": "Unique weak Stokes pair and pressure bound ||p||2 ≤ 3 Cdiv(D) ||F||V′ underlying the creeping pressure observations.",
+      "opened": true
+    },
+    {
+      "id": "def-na-evolutionary-skew-convective-form",
+      "used_for": "Skew convection convention and its agreement with ordinary convection for divergence-free zero-trace advecting velocity.",
+      "opened": true
+    },
+    {
+      "id": "def-na-mini-element-p1-bubble-p1-spaces",
+      "used_for": "Exact conforming MINI velocity bubbles and continuous mean-zero affine pressure space.",
+      "opened": true
+    },
+    {
+      "id": "def-na-discrete-weak-and-exact-divergence-free-spaces",
+      "used_for": "The weak discrete divergence kernel Z_h used in initialization and the recurrence; no exact discrete incompressibility is assumed.",
+      "opened": true
+    },
+    {
+      "id": "def-na-mini-navier-stokes-backward-euler-scheme",
+      "used_for": "Mixed backward-Euler equations, interval-average forcing, and mean-zero discrete pressure convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-mini-solenoidal-stokes-projection-error",
+      "used_for": "Checked the energy projection and approximation input appearing in the published smooth velocity-error proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-mini-be-smooth-velocity-error",
+      "used_for": "Strong-branch velocity error with mass initialization, any actual root, explicit viscosity-dependent C*, and the stated time-step restriction.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-mini-be-smooth-integrated-pressure-error",
+      "used_for": "Exact K coefficient, nodal primitive bound, continuous primitive bound, and smooth time-tested pressure bound used by the local observation proposition.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "concern": "The Statement first defines t_m as a dimensionless partition node, but later says “For t_m=(ℓ0/U0)t_m*”. The symbol t_m* has not been defined, and t_m is thereby reused as physical time. The intended conversion is clear from the surrounding scaling, but distinct names for the dimensionless and physical nodes are needed.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-pn01",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "The consumer treats stationary no-slip as separately adopted boundary data. Its weak interfaces explicitly encode zero trace rather than claiming that the boundary postulate supplies general Lipschitz-domain solvability."
+    },
+    {
+      "from": "fd-pn01",
+      "to": "fd-f03",
+      "faithful": true,
+      "note": "The consumers preserve the Newtonian stress sign, constant-density incompressibility, pressure-multiplier interpretation and derived kinematic viscosity. The forced definition explicitly adds prescribed body acceleration to the unforced model."
+    },
+    {
+      "from": "fd-pn01",
+      "to": "fd-n01",
+      "faithful": true,
+      "note": "The creeping theorem uses the same real spaces, mean-zero gauge, bounded sensors, continuous load and 3 Cdiv pressure-stability constant. Poincare supplies the additional load factor CP; physical pressure scaling supplies ρ0 U0²."
+    },
+    {
+      "from": "fd-pn01",
+      "to": "fd-n02",
+      "faithful": true,
+      "note": "The no-slip theorem retains the full smooth MINI interface, initialization, forcing averages, actual-root condition, time-step restriction and explicit constants. It correctly restricts pressure conclusions to primitives and smooth time tests. Its Sobolev physical balance is explicitly adopted."
+    },
+    {
+      "from": "fd-pn01",
+      "to": "fd-px02",
+      "faithful": true,
+      "note": "The forced creeping branch preserves the postulate's prescribed body acceleration and alternative zero-inertia force law. It does not infer that branch from small Reynolds number or claim a Navier–Stokes approximation error."
+    }
+  ]
+}

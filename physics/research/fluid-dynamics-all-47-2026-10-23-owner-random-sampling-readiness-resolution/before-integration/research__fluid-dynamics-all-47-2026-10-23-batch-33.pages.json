@@ -1,0 +1,230 @@
+[
+  {
+    "order": 671,
+    "id": "fd-st02",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Fluid observable uncertainty and numerical bias budgets",
+    "companion": "fd-st02-examples",
+    "requires": [
+      "fd-st01",
+      "global-sensitivity-anova-and-sobol-estimation",
+      "iid-monte-carlo-integration-and-error"
+    ],
+    "items": [
+      {
+        "id": "def-fd-random-fluid-observable",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Random fluid observable and numerical approximation",
+        "reference": "items/def-fd-random-fluid-observable.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 0,
+        "deps": [],
+        "dependency_roles": {},
+        "inventory_expansion_required": false,
+        "statement": "Let $d_s\\in\\{2,3\\}$, let $D\\subseteq\\mathbb R^{d_s}$ be a nonempty Lebesgue-measurable spatial region, and let $I\\subseteq\\mathbb R$ be a nonempty interval. Give $D\\times I$ the product of the restricted Lebesgue sigma-algebra on $D$ and the Borel sigma-algebra on $I$. Let $(\\mathscr V,\\mathcal V)$ be a measurable space whose elements are product-measurable vector fields $u:D\\times I\\to\\mathbb R^{d_s}$. A random fluid field is a measurable map $U:(\\Omega,\\mathcal F,\\mathbb P)\\to(\\mathscr V,\\mathcal V)$ from a probability space. A real fluid observable of $U$ is a map $\\Phi:\\mathscr V\\to\\mathbb R$ for which $Y:=\\Phi\\circ U$ is measurable; it is integrable or square-integrable when $\\mathbb E[|Y|]<\\infty$ or $\\mathbb E[Y^2]<\\infty$, respectively. For a nonempty set $H$ of numerical settings, measurable composites $Y_h:=\\Phi_h\\circ U$ define numerical approximations, where each $\\Phi_h:\\mathscr V\\to\\mathbb R$ and $Y_h$ is measurable. When $Y,Y_h$ are integrable, define the target $\\theta:=\\mathbb E[Y]$, approximate target $\\theta_h:=\\mathbb E[Y_h]$, and signed numerical bias $b_h:=\\theta_h-\\theta$; finite second moments are required for variances. This definition assumes no fluid equation, independence, convergence as $h$ changes, or error bound. If the fields are interpreted as velocities, their components have one fixed velocity unit, and $\\Phi$ and each $\\Phi_h$ must return the same declared scalar unit before their bias is formed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §§2.1–2.2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            },
+            {
+              "title": "Olivier Le Maître and Omar Knio, Introduction to Uncertainty Quantification, DTU PhD course lecture notes, pp. 3–4 and 14–16",
+              "url": "https://www2.compute.dtu.dk/~apek/UQ2018/lecture1.pdf"
+            },
+            {
+              "title": "NASA Glenn Research Center, Uncertainty and Error in CFD Simulations",
+              "url": "https://www.grc.nasa.gov/WWW/wind/valid/tutorial/errors.html"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "alg-fd-uq-observable-budget",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "IID sampling budget for a numerically biased observable",
+        "reference": "items/alg-fd-uq-observable-budget.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-random-fluid-observable",
+          "thm-fd-observable-sampling-bias-split"
+        ],
+        "dependency_roles": {
+          "def-fd-random-fluid-observable": "mathematical-premise",
+          "thm-fd-observable-sampling-bias-split": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Input:** A numerical output law $Y_h$ from the definition of a random fluid observable; an oracle that returns mutually independent samples with the law of $Y_h$; a finite bias allocation $\\epsilon_b\\ge0$; a finite variance upper bound $V_h\\ge0$; a sampling allocation $\\epsilon_s>0$; a failure allocation $\\delta\\in(0,1)$; and a certificate. Here a certificate means a separate proof or argument establishing that $Y$ and $Y_h$ have finite means, $Y_h$ has finite variance, $|\\mathbb E[Y_h]-\\mathbb E[Y]|\\le\\epsilon_b$, $\\operatorname{Var}(Y_h)\\le V_h$, and the oracle returns IID samples with the stated law. The algorithm does not check the mathematical validity of that certificate.\n\n**Procedure:** If the certificate or oracle is absent, return `not-certified` and no sample-size or error guarantee. If a supplied numeric value is not finite or is outside its stated range, return `invalid-input`. Otherwise set\n\n$$N:=\\max\\left\\{1,\\left\\lceil\\frac{V_h}{\\delta\\epsilon_s^2}\\right\\rceil\\right\\}.$$\n\nRequest $N$ independent samples $Y_{h,1},\\ldots,Y_{h,N}$ from the oracle and compute $\\widehat\\theta_{h,N}:=N^{-1}\\sum_{j=1}^N Y_{h,j}$. Return `conditional-budget` together with $N$, $\\widehat\\theta_{h,N}$, total absolute tolerance $\\epsilon_b+\\epsilon_s$, failure bound $\\delta$, and root-mean-square upper bound $\\sqrt{V_h/N+\\epsilon_b^2}$. The returned guarantees are conditional on the supplied certificates and IID sampling law. The procedure does not estimate or certify the numerical bias or variance bound from the sample or from mesh refinement. If the observable is dimensional, both tolerance allocations use its fixed output unit, $V_h$ uses the squared unit, and $\\delta$ is dimensionless.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §§2.1–2.2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            },
+            {
+              "title": "NASA Glenn Research Center, Uncertainty and Error in CFD Simulations",
+              "url": "https://www.grc.nasa.gov/WWW/wind/valid/tutorial/errors.html"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "thm-fd-observable-sampling-bias-split",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact sampling variance and a numerical-bias error bound",
+        "reference": "items/thm-fd-observable-sampling-bias-split.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-random-fluid-observable",
+          "def-iid-monte-carlo-estimators",
+          "thm-iid-monte-carlo-mean-moments"
+        ],
+        "dependency_roles": {
+          "def-fd-random-fluid-observable": "mathematical-premise",
+          "def-iid-monte-carlo-estimators": "mathematical-premise",
+          "thm-iid-monte-carlo-mean-moments": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $Y=\\Phi(U)$ and $Y_h=\\Phi_h(U)$ be a real random fluid observable and its numerical approximation as defined by the random-fluid-observable definition. Assume $Y,Y_h\\in L^2(\\mathbb P)$. Set $\\theta:=\\mathbb E[Y]$, $\\theta_h:=\\mathbb E[Y_h]$, $b_h:=\\theta_h-\\theta$, and $\\sigma_h^2:=\\operatorname{Var}(Y_h)$. For an integer $n\\ge1$, let $Y_{h,1},\\ldots,Y_{h,n}$ be independent random variables with the law of $Y_h$, on a sampling probability space $(\\Omega_s,\\mathcal F_s,\\mathbb P_s)$, and define $\\bar Y_{h,n}:=n^{-1}\\sum_{j=1}^nY_{h,j}$. Then\n\n$$\\mathbb E_s[(\\bar Y_{h,n}-\\theta)^2]=\\frac{\\sigma_h^2}{n}+b_h^2.$$\n\nIf finite nonnegative bounds $B_h,V_h$ satisfy $|b_h|\\le B_h$ and $\\sigma_h^2\\le V_h$, and $\\epsilon_b\\ge B_h$ and $\\epsilon_s>0$, then\n\n$$\\mathbb P_s\\bigl(|\\bar Y_{h,n}-\\theta|>\\epsilon_b+\\epsilon_s\\bigr)\\le\\frac{V_h}{n\\epsilon_s^2}.$$\n\nThe probability is over IID sampling. The bias bound is an external premise, not an output inferred from the sample; no normal approximation or pointwise error guarantee is asserted. If the observable is dimensional, $B_h,\\epsilon_b,\\epsilon_s$ have its unit, $V_h$ has the squared unit, and the formulas use one consistent output unit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §§2.1–2.2 and end-note p. 40",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            },
+            {
+              "title": "Olivier Le Maître and Omar Knio, Introduction to Uncertainty Quantification, DTU PhD course lecture notes, pp. 14–16",
+              "url": "https://www2.compute.dtu.dk/~apek/UQ2018/lecture1.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "axiom_use": "No choice principle is used; the proof uses the finite IID moment formulas and a pointwise indicator inequality."
+      },
+      {
+        "id": "rem-fd-fluid-sobol-interface",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Sobol sensitivity and observable-error interface",
+        "reference": "items/rem-fd-fluid-sobol-interface.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 0,
+        "deps": [
+          "def-first-and-total-sobol-indices",
+          "def-product-hoeffding-anova-components",
+          "def-product-coordinate-projections",
+          "def-moments-variance-and-covariance",
+          "thm-pick-freeze-sobol-covariance-identities",
+          "alg-pick-freeze-monte-carlo-sobol-estimators",
+          "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-first-and-total-sobol-indices": "mathematical-premise",
+          "def-product-hoeffding-anova-components": "mathematical-premise",
+          "def-product-coordinate-projections": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise",
+          "thm-pick-freeze-sobol-covariance-identities": "mathematical-premise",
+          "alg-pick-freeze-monte-carlo-sobol-estimators": "mathematical-premise",
+          "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X=(X_1,\\ldots,X_d)$ have a finite product probability law, where $1\\le d<\\infty$, and let $f\\in L^2$ be real-valued. For the product-law Hoeffding components $f_u$, write $V_u:=\\mathbb E[f_u^2]$ and $V:=\\operatorname{Var}(f(X))=\\sum_{u\\ne\\varnothing}V_u$. When $V>0$, the first-order and total Sobol indices are $S_i:=V_{\\{i\\}}/V$ and $S_{T_i}:=\\sum_{u\\ni i}V_u/V$; when $V=0$, these normalized indices are undefined.\n\nFor sample size $n\\ge2$, draw $n$ IID rows; within each row let $X,X',U,V_0,W,W'$ be mutually independent random vectors with law $\\mu$. Define $X^{[i]}=(X_i,X'_{-i})$ and $\\widetilde X^{[i]}=(X_{-i},X'_i)$. The first-order numerator is $N_i:=f(X)f(X^{[i]})-f(U)f(V_0)$, the total-effect numerator is $T_i:=\\tfrac12(f(X)-f(\\widetilde X^{[i]}))^2$, and the denominator is $D:=\\tfrac12(f(W)-f(W'))^2$. The expectations of the two numerators are respectively $V_{\\{i\\}}$ and $\\sum_{u\\ni i}V_u$. The estimator returns ratios of the sample means of $N_i$ and $T_i$ over the sample mean of $D$ only when the latter is positive. Its formal plug-in covariance matrix is $\\widehat J\\widehat\\Sigma\\widehat J^{\\mathsf T}/n$, where $\\widehat\\Sigma:=(n-1)^{-1}\\sum_{r=1}^n(Z_r-\\bar Z)^{\\mathsf T}(Z_r-\\bar Z)$, $Z_r=(N_{1,r},\\ldots,N_{d,r},T_{1,r},\\ldots,T_{d,r},D_r)$, and $\\widehat J$ is the derivative of the vector ratio map at the observed row means.\n\nA finite-sample ratio need not be unbiased: for one input $X\\sim\\operatorname{Bernoulli}(1/2)$ and output $f(x)=x$, take two rows $r=1,2$ of mutually independent Bernoulli$(1/2)$ draws $X_r,X'_r,U_r,V_r,W_r,W'_r$, with all draws independent across rows. Set $N_r:=X_r^2-U_rV_r$, $D_r:=\\tfrac12(W_r-W'_r)^2$, $\\bar N:=(N_1+N_2)/2$, and $\\bar D:=(D_1+D_2)/2$. Here $V=\\operatorname{Var}(X)=1/4$ and $V_{\\{1\\}}=\\mathbb E[(X-\\mathbb E X)^2]=1/4$, so the true first-order index is $1$, while conditional on $\\bar D>0$ the reported ratio has expectation $\\mathbb E[\\bar N/\\bar D\\mid\\bar D>0]=5/6$.\n\nThe joint ratio CLT and plug-in MCSE statement applies under its additional assumptions of AC, $f\\in L^4$, and $V>0$; an $L^2$ input alone does not ensure a finite row-vector covariance or an MCSE interpretation. These independent-input formulas are not asserted for dependent coordinates. The sampling and bias budget above bounds an expected scalar observable only; it gives no error bound for Sobol ratios.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Variance Components and Generalized Sobol' Indices, arXiv:1205.1774, §§2–2.1",
+              "url": "https://arxiv.org/pdf/1205.1774"
+            },
+            {
+              "title": "Olivier Le Maître and Omar Knio, Introduction to Uncertainty Quantification, DTU PhD course lecture notes, pp. 66–83",
+              "url": "https://www2.compute.dtu.dk/~apek/UQ2018/lecture1.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "axiom_use": "AC is assumed only for the cited Sobol ratio joint-CLT and MCSE result, where its supplier identifies the multivariate IID CLT as the use. The definitions, numerator identities, and finite-sample witness below use no choice principle."
+      }
+    ]
+  },
+  {
+    "order": 672,
+    "id": "fd-st02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Fluid observable uncertainty and numerical bias budgets — Examples",
+    "companion": "fd-st02",
+    "requires": [
+      "fd-st02"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-all-zero-mc-sample",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "An all-zero Monte Carlo sample can report zero standard error",
+        "reference": "items/ex-fd-all-zero-mc-sample.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 0,
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-iid-monte-carlo-estimators",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_roles": {
+          "def-identically-distributed-and-iid-random-variables": "mathematical-premise",
+          "def-iid-monte-carlo-estimators": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge2$ and $p\\in(0,1)$. On the product probability space $\\{0,1\\}^n$ with independent Bernoulli$(p)$ coordinates $X_1,\\ldots,X_n$, define $\\bar X_n:=n^{-1}\\sum_{j=1}^nX_j$, $s_n^2:=(n-1)^{-1}\\sum_{j=1}^n(X_j-\\bar X_n)^2$, and $\\widehat{se}_n:=s_n/\\sqrt n$. The event that all coordinates are zero has probability $(1-p)^n>0$. On that event $\\bar X_n=s_n^2=\\widehat{se}_n=0$, although the target mean is $p>0$ and the population variance is $p(1-p)>0$, so the absolute error is $p$. This is an exact finite-sample probability-model example, not an experimental observation; it shows that a zero plug-in standard error in one realization does not establish zero population variance or zero estimation error.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §2.2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

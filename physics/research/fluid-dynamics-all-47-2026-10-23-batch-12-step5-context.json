@@ -1,0 +1,136 @@
+{
+  "group": "b",
+  "batches": [
+    "12"
+  ],
+  "pages_read": [
+    "fd-px01",
+    "fd-px01-examples"
+  ],
+  "items_read": [
+    "pthm-fd-px01-prediction",
+    "ex-fd-x01-application"
+  ],
+  "conventions": [
+    {
+      "convention": "All derivatives are Cartesian derivatives in one fixed Newtonian inertial chart. Positive coordinate rescaling changes units and coordinates, not the observer.",
+      "fixed_by": "pthm-fd-px01-prediction",
+      "matters_for": [
+        "pthm-fd-px01-prediction",
+        "ex-fd-x01-application"
+      ]
+    },
+    {
+      "convention": "Stress is tension-positive, traction is σn, (div σ)i = Σj ∂xj σij, and Dij = (∂xj ui + ∂xi uj)/2.",
+      "fixed_by": "pthm-fd-px01-prediction",
+      "matters_for": [
+        "pthm-fd-px01-prediction",
+        "ex-fd-x01-application"
+      ]
+    },
+    {
+      "convention": "All five scales ρ₀, μ, U, L and c are strictly positive; ν = μ/ρ₀, Re = UL/ν, Ma = U/c, Θ = Ut/L and X = x/L.",
+      "fixed_by": "pthm-fd-px01-prediction",
+      "matters_for": [
+        "pthm-fd-px01-prediction",
+        "ex-fd-x01-application"
+      ]
+    },
+    {
+      "convention": "The branches are separate: incompressible pressure is a constraint multiplier scaled by ρ₀U² after subtracting a constant reference pressure; barotropic pressure is P(ρ), scaled by ρ₀c² after subtracting P(ρ₀), with P′(ρ₀) = c² > 0.",
+      "fixed_by": "pthm-fd-px01-prediction",
+      "matters_for": [
+        "pthm-fd-px01-prediction",
+        "ex-fd-x01-application"
+      ]
+    },
+    {
+      "convention": "Initial and boundary data are already-compatible inputs, with boundary traces and outward normals used only where they exist. Their rescaling asserts neither compatibility nor solvability.",
+      "fixed_by": "pthm-fd-px01-prediction",
+      "matters_for": [
+        "pthm-fd-px01-prediction",
+        "ex-fd-x01-application"
+      ]
+    },
+    {
+      "convention": "The periodic domain is the quotient torus; spatial derivatives are derivatives of periodic lifts. The numerical parameters are exact illustrative inputs, not measurements.",
+      "fixed_by": "ex-fd-x01-application",
+      "matters_for": [
+        "ex-fd-x01-application"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "pthm-fd-px01-prediction",
+      "statement": "Under the explicitly stated smooth, unforced model branches and positive scales, the incompressible equations transform exactly to ∂Θu* + (u*·∇X)u* = −∇Xp*inc + Re⁻¹ΔXu*, divXu* = 0; the positive-density barotropic equations transform exactly to ∂Θρ* + divX(ρ*u*) = 0 and ∂Θu* + (u*·∇X)u* = −Ma⁻²(ρ*)⁻¹∇Xp*bar. Compatible data transform by the specified invertible maps, and total momentum on corresponding regions scales by ρ₀UL³ whenever the integrals exist. These are conditional coefficient identities, without existence, uniqueness, asymptotic or empirical conclusions.",
+      "used_by": [
+        "ex-fd-x01-application"
+      ]
+    },
+    {
+      "id": "ex-fd-x01-application",
+      "statement": "The selected exact SI inputs give ν = 10⁻⁶ m² s⁻¹, Re = 10⁵, Ma = 10⁻² and Ma⁻² = 10⁴. On the dimensionless periodic torus, u* = (exp(−Θ/Re) sin X₂, 0, 0) and p*inc = 0 solve the scaled incompressible equations. In the separate barotropic branch, P(ρ) = 10⁵ Pa + c²(ρ − ρ₀), ρ* = 1, u* = 0 and p*bar = 0 give an exact equilibrium. The corresponding dimensional fields solve the selected models; no observation or approximation is asserted.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Indirect supplier through thm-fd-x01: coordinatewise differentiation under the positive affine time and spatial rescalings. The actual coordinate domains are open, so the published theorem's limit-point hypotheses hold.",
+      "opened": true
+    },
+    {
+      "id": "def-divergence-and-curl-of-a-c1-vector-field",
+      "used_for": "Indirect formulation supplier through def-fd-x00: componentwise Cartesian divergence; its curl definition is not used in the assigned deductions.",
+      "opened": true
+    },
+    {
+      "id": "def-laplacian-of-a-c2-function",
+      "used_for": "Indirect formulation supplier through def-fd-x00: scalar Laplacian and its componentwise extension to vector fields.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Indirect formulation supplier through def-fd-x00: row-component Jacobian and Cartesian scalar gradient.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Indirect formulation supplier through def-fd-x00: Euclidean inner product and norm underlying the Cartesian vector conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+      "used_for": "Read as a cited formulation prerequisite of def-fd-x00. It defines that supplier's circulation observable; circulation is not used in either assigned item.",
+      "opened": true
+    },
+    {
+      "id": "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+      "used_for": "Read as a cited formulation prerequisite of def-fd-x00: oriented surface normals and flux. Surface-flux integration is not invoked in the assigned scaling proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-px01",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "Checked the prerequisite page and post-fd-boundary-data against A2 and proof step 1.3. The supplier selects wall, periodic and initial data separately and asserts no solvability. The consumer preserves those qualifications, explicitly maps the relevant data and restricts boundary claims to existing traces and normals. Thermal evolution is excluded."
+    },
+    {
+      "from": "fd-px01",
+      "to": "fd-f03",
+      "faithful": true,
+      "note": "Checked post-fd-newtonian-fourier and both model definitions against A3, F1–F2 and the deductions. Constant μ > 0 and div u = 0 give τ = 2μD. The barotropic branch is unforced, has positive density, and adds P ∈ C² and P′(ρ₀) = c² > 0 explicitly. The incompressible branch's derivative assumptions suffice for the componentwise reduction performed locally; its pressure is correctly distinguished from equation-of-state pressure."
+    },
+    {
+      "from": "fd-px01",
+      "to": "fd-x01",
+      "faithful": true,
+      "note": "Read the mathematical prerequisite page, def-fd-x00 and the complete thm-fd-x01 statement and proof. F3 preserves the positive-scale hypotheses, exact coefficients, equation equivalence and absence of limit or existence conclusions. Setting V = 0 correctly specializes the mathematical barotropic result. The example applies the open-domain theorem to periodic lifts on ℝ³ before descending to the quotient."
+    }
+  ]
+}

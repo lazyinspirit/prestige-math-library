@@ -1,0 +1,205 @@
+{
+  "group": "d",
+  "batches": [
+    "26"
+  ],
+  "pages_read": [
+    "fd-k02",
+    "fd-k02-examples"
+  ],
+  "items_read": [
+    "post-fd-boltzmann-model",
+    "def-fd-physical-kinetic-observables",
+    "pthm-fd-local-boltzmann-h-balance",
+    "pthm-fd-boltzmann-entropy",
+    "pthm-fd-ideal-gas-euler-interface",
+    "post-fd-bgk-relaxation",
+    "pthm-fd-bgk-equilibration",
+    "texp-fd-bgk-preparation"
+  ],
+  "conventions": [
+    {
+      "convention": "The model is three-dimensional, nonrelativistic, single-species and monatomic, with periodic spatial boundaries and no internal molecular modes. The density counts particles; m and k_B are fixed primitive parameters, and quantities use SI units.",
+      "fixed_by": "post-fd-boltzmann-model",
+      "matters_for": [
+        "def-fd-physical-kinetic-observables",
+        "pthm-fd-local-boltzmann-h-balance",
+        "pthm-fd-boltzmann-entropy",
+        "pthm-fd-ideal-gas-euler-interface"
+      ]
+    },
+    {
+      "convention": "Collision inputs are positive finite-valued velocity densities in the declared collision domain. The nonnegative collision measure is symmetric under both particle exchanges and incoming/outgoing interchange. Its weak identity has factor 1/4; moment and logarithmic tests require measurability and absolute convergence.",
+      "fixed_by": "post-fd-boltzmann-model",
+      "matters_for": [
+        "pthm-fd-local-boltzmann-h-balance",
+        "pthm-fd-boltzmann-entropy",
+        "pthm-fd-ideal-gas-euler-interface"
+      ]
+    },
+    {
+      "convention": "Countable Choice is adopted through the kinetic-density supplier. Moment observables require a finite absolute third velocity moment; u requires n>0, and the positive-temperature branch requires a strictly positive centered second moment.",
+      "fixed_by": "def-fd-physical-kinetic-observables",
+      "matters_for": [
+        "pthm-fd-local-boltzmann-h-balance",
+        "pthm-fd-boltzmann-entropy",
+        "pthm-fd-ideal-gas-euler-interface"
+      ]
+    },
+    {
+      "convention": "The logarithm uses a constant positive reference density f_ref with the units of f. Physical kinetic entropy and its flux are s_kin=-k_B h and j_kin=-k_B J_H.",
+      "fixed_by": "def-fd-physical-kinetic-observables",
+      "matters_for": [
+        "pthm-fd-local-boltzmann-h-balance",
+        "pthm-fd-boltzmann-entropy"
+      ]
+    },
+    {
+      "convention": "The Euler interface assumes the exact equation ε(∂_t f^ε+v·∇_x f^ε)=Q(f^ε), weighted strong spacetime convergence through velocity degree three, and initial convergence through degree two. Convergence is an additional hypothesis.",
+      "fixed_by": "pthm-fd-ideal-gas-euler-interface",
+      "matters_for": [
+        "pthm-fd-ideal-gas-euler-interface"
+      ]
+    },
+    {
+      "convention": "BGK is a separately adopted homogeneous model with constant τ>0 in seconds and dimensionless ε>0. Its Maxwellian matches the current number, momentum and energy moments. Banach-space solutions and the specified pointwise solution class are distinguished.",
+      "fixed_by": "post-fd-bgk-relaxation",
+      "matters_for": [
+        "pthm-fd-bgk-equilibration",
+        "texp-fd-bgk-preparation"
+      ]
+    },
+    {
+      "convention": "For BGK entropy, 0 log 0 is assigned value zero. The weight 1+(|v|/v_*)^3 is dimensionless, while the resulting velocity-density norm has units m^-3. Equilibrium convergence is asserted for fixed t>0, with a possible initial mismatch at t=0.",
+      "fixed_by": "pthm-fd-bgk-equilibration",
+      "matters_for": [
+        "texp-fd-bgk-preparation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "post-fd-boltzmann-model",
+      "statement": "Adopt the equation ∂_t f+v·∇_x f=Q_ν(f) as an equality of locally integrable functions almost everywhere, with positive collision-domain sections, symmetric collision-rate data, one-sided incoming-pair factorization, and the displayed absolutely convergent weak collision identity. No microscopic derivation, solution existence or empirical validity is asserted.",
+      "used_by": [
+        "def-fd-physical-kinetic-observables",
+        "pthm-fd-local-boltzmann-h-balance",
+        "pthm-fd-boltzmann-entropy",
+        "pthm-fd-ideal-gas-euler-interface"
+      ]
+    },
+    {
+      "id": "def-fd-physical-kinetic-observables",
+      "statement": "For the stated finite-third-moment kinetic states, define n, ρ=mn, u, c=v-u, T, P, q and E by the displayed velocity moments. Where the two absolute logarithmic integrals are finite, define h=∫f log(f/f_ref) dv, J_H=∫vf log(f/f_ref) dv, s_kin=-k_B h and j_kin=-k_B J_H.",
+      "used_by": [
+        "pthm-fd-local-boltzmann-h-balance",
+        "pthm-fd-boltzmann-entropy",
+        "pthm-fd-ideal-gas-euler-interface"
+      ]
+    },
+    {
+      "id": "pthm-fd-local-boltzmann-h-balance",
+      "statement": "Under the stated positivity, regularity, uniform velocity envelopes, collision-domain and absolutely convergent weak-test assumptions, and the adopted kinetic equation, D=(1/4)∫(A-B)log(A/B) dν≥0 and ∂_t h+∇_x·J_H=-D throughout I×Ω.",
+      "used_by": [
+        "pthm-fd-boltzmann-entropy"
+      ]
+    },
+    {
+      "id": "post-fd-bgk-relaxation",
+      "statement": "For admissible homogeneous densities with positive number density and centered second moment, adopt d f^ε/dt=(M[f^ε]-f^ε)/(ετ), with constant τ>0 and dimensionless ε>0, in the stated weighted Banach-space and pointwise solution senses.",
+      "used_by": [
+        "pthm-fd-bgk-equilibration"
+      ]
+    },
+    {
+      "id": "pthm-fd-bgk-equilibration",
+      "statement": "For the stated nonnegative initial data with finite weighted third moment and reference-relative entropy and positive number density and centered second moment, f^ε(t)=M+exp(-t/(ετ))(f_0-M) is a nonnegative C1 weighted-L1 solution preserving the defining moments, unique in the specified pointwise class. Its weighted distance decays by the same exponential, its integrated distance is bounded by ετ times the initial distance, and its nonnegative entropy gap is bounded by the exponentially decaying initial gap.",
+      "used_by": [
+        "texp-fd-bgk-preparation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-tdmath-elastic-collision-kernel",
+      "used_for": "Underlying elastic collision set, symmetric measure, declared operator domain, admissible test space and weak identity. The K01 definition adds explicit compact-test requirements; the physical postulate explicitly adopts its stronger testing scope.",
+      "opened": true
+    },
+    {
+      "id": "thm-tdmath-regular-collision-entropy",
+      "used_for": "Published global H identity underlying thm-fd-kinetic-h. Checked its derivative envelope, transport integrability, absolute collision tests and spatial production-integrability hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Coordinate differentiation of log(f/f_ref) and differentiation of the BGK integrating factor, with real interval domains and differentiability hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Difference-quotient derivations of product differentiation in the local H and BGK proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-function-limits",
+      "used_for": "Products of finite limits in the explicit product-rule arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiation-under-the-integral-sign",
+      "used_for": "Differentiation of entropy integrals and pointwise BGK moment integrals under a common integrable derivative majorant on a common full-measure set.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The logarithmic derivative and positivity of its derivative in the entropy-production sign argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict increase of log and constancy of differentiable scalar functions with zero derivative in the BGK uniqueness argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Rearranging absolutely integrable time, periodic-space and velocity integrals in the Euler weak-moment argument. It is not applied to a product involving the arbitrary collision measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "Fixed-velocity time and spatial integration by parts in the Euler argument; C1 regularity supplies the supplier's derivative-integrability hypotheses on compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-bump-between-concentric-euclidean-balls",
+      "used_for": "A nonnegative compact smooth test detecting a continuous nonzero Euler residual in a local spacetime chart.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiating the scalar BGK integrating factor.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "post-fd-bgk-relaxation",
+      "concern": "The Golse–Levermore source locator says “Lecture 2, section II, 'The BGK Operator', PDF pp. 27–29”. In the opened source https://www.cmls.polytechnique.fr/perso/golse/Exposes/HLslides2.pdf, the outline identifies section V as Examples, and “The BGK Operator” is on PDF page 28 within that section. The model formula is supported, but the section locator is incorrect.",
+      "severity": "presentation"
+    },
+    {
+      "id": "post-fd-boltzmann-model",
+      "concern": "The spatial domain is written as Ω=∏(0,L_j), “with ... opposite faces identified”. The open box contains no faces to identify. The intended periodic torus is clear from K01 and the consuming statements, but the postulate should use their explicit quotient domain or identify the faces of the closed box.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-k02",
+      "to": "fd-k01",
+      "faithful": true,
+      "note": "Checked K01 kinetic-density and collision definitions, the H theorem, Maxwellian moments, conserving BGK definition, exact homogeneous relaxation theorem and entropy-rate proposition against their K02 uses. Positivity, moment weights, reference-density conventions, entropy envelopes and BGK hypotheses are retained. K02 derives its Euler interface directly from Gaussian moments and assumed weighted convergence; it does not invoke the historical controlled-Euler-passage edge. K01 suppliers remain mathematical and contain no reverse physical prerequisites. Their draft status is explicitly distinguished from proof acceptance. The postulate's open-box notation is separately reported as a presentation concern."
+    }
+  ]
+}

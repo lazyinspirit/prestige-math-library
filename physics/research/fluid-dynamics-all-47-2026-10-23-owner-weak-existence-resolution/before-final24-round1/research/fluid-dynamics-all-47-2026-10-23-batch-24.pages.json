@@ -1,0 +1,358 @@
+[
+  {
+    "order": 407,
+    "id": "fd-w02",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Periodic incompressible Newtonian idealization",
+    "companion": "fd-w02-examples",
+    "requires": [
+      "cm-math-fluid",
+      "fd-w01",
+      "td-continuum-heat-model"
+    ],
+    "items": [
+      {
+        "id": "post-fd-periodic-newtonian",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Periodic incompressible Newtonian idealization",
+        "reference": "items/post-fd-periodic-newtonian.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "NR-E13",
+          "def-fd-periodic-solenoidal-spaces",
+          "def-fd-periodic-leray-hopf",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "NR-E13": "formulation-prerequisite",
+          "def-fd-periodic-solenoidal-spaces": "formulation-prerequisite",
+          "def-fd-periodic-leray-hopf": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "physical_scope": "Adopted three-dimensional, incompressible, constant-density and constant-viscosity Newtonian continuum model on a flat periodic cell, with zero body force and no temperature field. Its weak realization uses the unforced periodic Leray–Hopf class. It asserts no empirical universality, global smoothness, or uniqueness.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open time interval measured in seconds. Fix $L>0$ as the numerical period in the declared SI metre unit, so the physical side length is $L\\,\\mathrm m$, and use the flat periodic cell $\\mathbb T_L^3=(\\mathbb R/L\\mathbb Z)^3$ with normalized spatial measure $L^{-3}dx$. Spatial coordinates in physical volume integrals are measured in metres. Assume Countable Choice for the stated Fourier and Sobolev space conventions. The velocity is a vector field $u:I\\times\\mathbb T_L^3\\to\\mathbb R^3$ with SI units $\\mathrm{m\\,s^{-1}}$; the mass density is a constant primitive parameter $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$; the dynamic viscosity is a constant primitive parameter $\\mu>0$ in $\\mathrm{Pa\\,s}$; and the mechanical pressure $p$ has units $\\mathrm{Pa}$. The body-force density is zero (its SI unit is $\\mathrm{N\\,m^{-3}}$), and there is no temperature variable in this model.\n\nFor classical fields take $u\\in C^1(I;C^2(\\mathbb T_L^3;\\mathbb R^3))$ and $p\\in C^1(I;C^1(\\mathbb T_L^3))$. Adopt incompressibility $\\operatorname{div}u=0$ and the local momentum balance\n$$\\rho_0\\bigl(\\partial_tu+\\operatorname{div}(u\\otimes u)\\bigr)=\\operatorname{div}\\sigma,\\qquad \\sigma=-pI_3+2\\mu D(u),\\qquad D(u)=\\tfrac12\\bigl(\\nabla u+(\\nabla u)^{\\mathsf T}\\bigr).$$\nHere $\\sigma$ is the Cauchy stress, so its traction on an oriented surface with unit normal $n$ is $\\sigma n$; $D(u)$ is the symmetric rate-of-deformation tensor; and $\\nabla$ has units $\\mathrm{m^{-1}}$. Every term in the momentum balance has units $\\mathrm{N\\,m^{-3}}$. Since $\\operatorname{div}u=0$, this equation is equivalently\n$$\\partial_tu+\\operatorname{div}(u\\otimes u)+\\nabla\\pi=\\nu\\Delta u,\\qquad \\nu=\\mu/\\rho_0>0,\\qquad \\pi=p/\\rho_0.$$\nwhere kinematic viscosity $\\nu$ and kinematic pressure $\\pi$ have units $\\mathrm{m^2\\,s^{-1}}$ and $\\mathrm{m^2\\,s^{-2}}$, respectively. All fields are periodic in each spatial coordinate; this is an ideal cell, not a wall-bounded vessel.\n\nFor the weak regime, use the global unforced periodic Leray–Hopf class. The spaces are $H$, the real $L^2$ vector fields whose divergence vanishes distributionally on $\\mathbb T_L^3$, with unrestricted constant Fourier mode, and $V=H\\cap H^1$, where $H^1$ consists of fields and first weak derivatives in $L^2$; use normalized spatial norms. Here $C_w([0,\\infty);H)$ means that $t\\mapsto (u(t),h)_H$ is continuous for every fixed $h\\in H$; the time-dependent $L^p$ spaces are the corresponding Bochner spaces. A weak velocity has $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$, strongly attains $u_0\\in H$ as $t\\downarrow0$, and satisfies, for every smooth real periodic divergence-free test field $\\phi$ compactly supported in time,\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\bigr]dt+(u_0,\\phi(0))=0.\n$$\nThe tensor pairing is $L^{-3}\\int_{[0,L]^3}u_i u_j\\partial_j\\phi_i\\,dx$, and the gradient pairing is $L^{-3}\\int_{[0,L]^3}\\partial_j u_i\\partial_j\\phi_i\\,dx$. The class also requires\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2\\qquad(t\\ge0),\n$$\nand a full-measure set $S\\subset(0,\\infty)$ such that\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2\\qquad(s\\in S\\cup\\{0\\},\\ t\\ge s).\n$$\nThis weak convention asserts neither uniqueness nor pressure regularity. These equations and the solution class are adopted model assumptions; they are not deductions that every physical fluid obeys them.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§1.3, printed pp. 9–11, especially the symmetric velocity gradient, Newtonian stress, and incompressible reduction."
+            },
+            {
+              "title": "Luigi C. Berselli and Stefano Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "§1, printed pp. 1–3, for the constant-density, constant-temperature incompressible model, zero force, and periodic domain."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "pthm-fd-periodic-weak-continuation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Weak continuation of the adopted periodic viscous model",
+        "reference": "items/pthm-fd-periodic-weak-continuation.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "post-fd-periodic-newtonian",
+          "thm-fd-periodic-global-weak-existence",
+          "def-fd-periodic-solenoidal-spaces",
+          "def-fd-periodic-leray-hopf",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-periodic-newtonian": "physical-assumption",
+          "thm-fd-periodic-global-weak-existence": "mathematical-premise",
+          "def-fd-periodic-solenoidal-spaces": "mathematical-premise",
+          "def-fd-periodic-leray-hopf": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L^3$, use normalized Lebesgue measure $L^{-3}dx$, and let $H$ be the real $L^2$ vector fields whose divergence vanishes distributionally, with unrestricted mean mode, and $V=H\\cap H^1$, where $H^1$ consists of fields and first weak derivatives in $L^2$. Here $H^s_\\sigma$ means the real Fourier-weighted Sobolev space with weights $(1+L^2|\\kappa_k|^2)^s$, Fourier divergence condition $k\\cdot\\widehat u(k)=0$ for $k\\ne0$, and unrestricted constant mode. Let $u_0\\in H$ be an initial velocity measured in $\\mathrm{m\\,s^{-1}}$. Assume Countable Choice. Then the adopted unforced periodic model has a global weak velocity $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\mathrm{loc}}(0,\\infty;V)$, where $C_w$ means continuity of each fixed $H$-pairing and the time-dependent spaces are strongly measurable Bochner spaces, with $u(0)=u_0$ and strong $H$ trace at zero. For every smooth real periodic divergence-free test field $\\phi$ compactly supported in time it satisfies\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\bigr]dt+(u_0,\\phi(0))=0,\n$$\nwhere the spatial pairings use the normalized measure and $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$. It also satisfies, for every $t\\ge0$,\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2,\n$$\nand there is a full-measure set $S\\subset(0,\\infty)$ such that for every $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.\n$$\nIn SI units the kinetic energy is $K(t)=\\frac{\\rho_0}{2}\\int_{[0,L]^3}|u(t,x)|^2dx$, and the inequality implies\n$$\nK(t)+\\mu\\int_0^t\\int_{[0,L]^3}|\\nabla u(s,x)|^2dx\\,ds\\le K(0).\n$$\nThere is also a full-measure set $S\\subset(0,\\infty)$ such that for every $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\nK(t)+\\mu\\int_s^t\\int_{[0,L]^3}|\\nabla u(\\tau,x)|^2dx\\,d\\tau\\le K(s).\n$$\nThis is a conditional model deduction about velocity; it asserts no pressure regularity, weak uniqueness, global smoothness, or empirical validity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§§5.1–5.5, printed pp. 37–51, for the periodic weak formulation, Galerkin estimates, compactness, and energy inequality."
+            },
+            {
+              "title": "Luigi C. Berselli and Stefano Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "Theorem 3 and proof, §5.2, printed pp. 14–16, flat-torus case."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional global weak velocity existence for the three-dimensional constant-density, constant-viscosity, unforced incompressible Newtonian model on a flat periodic cell. No pressure regularity, weak uniqueness, global smoothness, temperature evolution, or empirical universality is claimed."
+      },
+      {
+        "id": "pthm-fd-smooth-consistency",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Weak continuation agrees with smooth periodic evolution",
+        "reference": "items/pthm-fd-smooth-consistency.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-fd-periodic-weak-continuation",
+          "thm-fd-weak-smooth-uniqueness",
+          "thm-local-smooth-periodic-euler-viscous-solution",
+          "lem-periodic-pressure-reconstruction",
+          "def-fd-periodic-solenoidal-spaces",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_roles": {
+          "pthm-fd-periodic-weak-continuation": "physical-result",
+          "thm-fd-weak-smooth-uniqueness": "mathematical-premise",
+          "thm-local-smooth-periodic-euler-viscous-solution": "mathematical-premise",
+          "lem-periodic-pressure-reconstruction": "mathematical-premise",
+          "def-fd-periodic-solenoidal-spaces": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§6.1, printed pp. 53–54; the source proves strong-solution uniqueness, while the local weak–smooth comparison is supplied by the exact mathematical dependency."
+            },
+            {
+              "title": "Luigi C. Berselli and Stefano Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "§3.1 and §4, printed pp. 5–6 and 8–12, for the weak formulation and energy inequality; it does not supply the local weak–smooth comparison used here."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "physical_scope": "Smooth divergence-free initial data for the three-dimensional constant- density, constant-viscosity, unforced periodic model. Every Leray–Hopf weak continuation agrees with the smooth solution only on its local smooth interval. No global 3D regularity or uniqueness among arbitrary weak solutions is claimed."
+      },
+      {
+        "id": "post-fd-no-slip-newtonian",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Bounded no-slip Newtonian vessel model",
+        "reference": "items/post-fd-no-slip-newtonian.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "NR-E13",
+          "def-fd-bounded-solenoidal-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "NR-E13": "formulation-prerequisite",
+          "def-fd-bounded-solenoidal-spaces": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "physical_scope": "Adopted constant-density, positive-viscosity, zero-force incompressible Newtonian continuum on a fixed nonempty bounded open three-dimensional vessel. No-slip is the H_0^1 solenoidal-closure condition; no pointwise trace is asserted on an arbitrary open boundary. The weak result concerns velocity only, and makes no universal empirical or thermal claim.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let $\\Omega\\subset\\mathbb R^3$ be a fixed nonempty bounded open vessel in Cartesian coordinates measured in metres. Assume Countable Choice for the stated Sobolev space conventions. Define $D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}$, where divergence is the distributional divergence (equal to the classical divergence for these smooth fields), $H$ as its closure in $L^2(\\Omega;\\mathbb R^3)$, and $V$ as its closure in $H_0^1(\\Omega;\\mathbb R^3)$; here $H_0^1$ is the closure of compactly supported smooth vector fields in the $H^1$ norm, and $H^1$ uses square-integrable fields and first weak derivatives. The adopted no-slip condition means $u(t)\\in V$, not a pointwise boundary value. This closure convention does not identify $V$ with every divergence-free member of $H_0^1$ on an arbitrary open set and does not assert a boundary trace theorem.\n\nTake a constant mass density $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic viscosity $\\mu>0$ in $\\mathrm{Pa\\,s}$, and zero body-force density in $\\mathrm{N\\,m^{-3}}$. For classical fields $u\\in C^1(I;C^2(\\Omega;\\mathbb R^3))$ and $p\\in C^1(I;C^1(\\Omega))$, adopt $\\operatorname{div}u=0$, the Cauchy stress $\\sigma=-pI_3+2\\mu D(u)$ with $D(u)=\\tfrac12(\\nabla u+(\\nabla u)^{\\mathsf T})$, and the local balance $\\rho_0(\\partial_tu+\\operatorname{div}(u\\otimes u))=\\operatorname{div}\\sigma$ in the interior. The velocity has units $\\mathrm{m\\,s^{-1}}$, pressure and stress have units $\\mathrm{Pa}$, spatial derivatives have units $\\mathrm{m^{-1}}$, and $\\nu=\\mu/\\rho_0$ has units $\\mathrm{m^2\\,s^{-1}}$. No temperature field is included.\n\nFor the weak regime, take $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$, with $u(0)=u_0\\in H$ and strong $H$ trace at zero; $u_0$ is an initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $C_w$ means continuity of every fixed $H$-pairing, and each time-dependent Bochner space uses strongly measurable maps with the indicated norm, locally on every finite interval. Interpret this model through the solenoidal variational identity: for every compactly time-supported $C^1$ curve $\\phi:[0,\\infty)\\to V$,\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)_{L^2}+(u\\otimes u,\\nabla\\phi)_{L^2}-\\nu(\\nabla u,\\nabla\\phi)_{L^2}\\bigr]dt+(u_0,\\phi(0))_{L^2}=0.\n$$\nHere all spatial pairings use unnormalized Lebesgue measure on $\\Omega$, $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$, and $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. In this weak formulation pressure is eliminated by the divergence-free tests; no distributional pressure or corner regularity is postulated. On a smoother boundary, a pointwise zero-trace reading would require a separate trace theorem. This is an adopted fixed-vessel model, not a deduction about every real wall.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§§1.2–1.3, printed pp. 6–12, for the continuum momentum and Newtonian stress formulation; §§5.2–5.5 for weak velocity conventions."
+            },
+            {
+              "title": "Luigi C. Berselli and Stefano Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "§1, printed pp. 1–3, for the bounded-domain homogeneous Dirichlet case; §§2.1–2.2 for the energy spaces."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "pthm-fd-bounded-weak-continuation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Global weak velocity in the no-slip vessel model",
+        "reference": "items/pthm-fd-bounded-weak-continuation.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "post-fd-no-slip-newtonian",
+          "thm-fd-bounded-global-weak-existence",
+          "def-fd-bounded-solenoidal-spaces",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-no-slip-newtonian": "physical-assumption",
+          "thm-fd-bounded-global-weak-existence": "mathematical-premise",
+          "def-fd-bounded-solenoidal-spaces": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be any nonempty bounded open set in Cartesian coordinates measured in metres. Define $D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}$, let $H$ be its $L^2(\\Omega)$ closure, and let $V$ be its closure in $H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of compactly supported smooth fields and $H^1$ has the norm formed from the $L^2$ norms of a field and its first weak derivatives. Let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, $\\nu=\\mu/\\rho_0$, and $u_0\\in H$ be an initial velocity in $\\mathrm{m\\,s^{-1}}$. Assume the Axiom of Choice and Countable Choice. Then the adopted unforced no-slip model has\n$$\nu\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\mathrm{loc}}(0,\\infty;V),\n$$\nwhere $C_w$ means continuity of every fixed $H$-pairing and the time-dependent spaces are Bochner spaces of strongly measurable maps, with $u(0)=u_0$, strong $H$ trace at zero, and, for every compactly time-supported $C^1$ curve $\\phi:[0,\\infty)\\to V$,\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)_{L^2}+(u\\otimes u,\\nabla\\phi)_{L^2}-\\nu(\\nabla u,\\nabla\\phi)_{L^2}\\bigr]dt+(u_0,\\phi(0))_{L^2}=0.\n$$\nIt satisfies the initial energy inequality\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2\\qquad(t\\ge0),\n$$\nand a full-measure set $S\\subset(0,\\infty)$ such that for every $s\\in S\\cup\\{0\\}$ and $t\\ge s$,\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.\n$$\nHere spatial norms and pairings use unnormalized Lebesgue measure, $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$, and $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. Thus the SI kinetic energy $E(t)=\\frac{\\rho_0}{2}\\int_\\Omega|u(t,x)|^2dx$ obeys\n$$\nE(t)+\\mu\\int_0^t\\int_\\Omega|\\nabla u(s,x)|^2dx\\,ds\\le E(0).\n$$\nThe no-slip condition is only the stated $H_0^1$ closure condition; the result supplies no pressure or pointwise wall trace.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. C. Berselli and S. Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "Theorem 3 and proof, §5.2, printed pp. 14–16; source assumes a smoother bounded boundary, while the local proof uses the stated closure spaces."
+            },
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§§5.2–5.5, printed pp. 39–51, for the energy-space and Galerkin framework; the local bounded-open proof is separate."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional global weak velocity for a constant-density, positive- viscosity, zero-force incompressible Newtonian model on any fixed bounded open three-dimensional vessel. No pointwise boundary trace, pressure regularity, uniqueness, smoothness, thermal evolution, or empirical universality is claimed."
+      },
+      {
+        "id": "pthm-fd-rectangular-weak-pressure",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Weak rectangular Newtonian velocity and pressure",
+        "reference": "items/pthm-fd-rectangular-weak-pressure.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "post-fd-no-slip-newtonian",
+          "thm-fd-bounded-global-weak-existence",
+          "prop-fd-bounded-evolving-pressure",
+          "lem-fd-rectangular-test-divergence-inverse",
+          "def-fd-bounded-solenoidal-spaces",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-no-slip-newtonian": "physical-assumption",
+          "thm-fd-bounded-global-weak-existence": "mathematical-premise",
+          "prop-fd-bounded-evolving-pressure": "mathematical-premise",
+          "lem-fd-rectangular-test-divergence-inverse": "mathematical-premise",
+          "def-fd-bounded-solenoidal-spaces": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$. Define $D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}$, $H$ as its closure in $L^2(\\Omega;\\mathbb R^3)$, and $V$ as its closure in $H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of compactly supported smooth vector fields and $H^1$ uses square-integrable fields and first weak derivatives. This convention does not identify $V$ with all divergence-free members of $H_0^1$ on an arbitrary open set and makes no pointwise trace assertion. Let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, $\\nu=\\mu/\\rho_0>0$, and $u_0\\in H$ be an initial velocity in $\\mathrm{m\\,s^{-1}}$. Assume AC and Countable Choice. In addition, assume the following rectangular test-divergence inverse: for $D_0(\\Omega)=\\{h\\in C_c^\\infty(\\Omega):\\int_\\Omega h=0\\}$, a continuous linear map $R:D_0(\\Omega)\\to C_c^\\infty(\\Omega;\\mathbb R^3)$ satisfies $\\operatorname{div}(Rh)=h$; for each compact input support there is one compact output support, and every output test-function seminorm is bounded by finitely many input seminorms.\n\nThen there are a weak velocity $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\mathrm{loc}}(0,\\infty;V)$ and a spacetime distribution $\\pi$ on $(0,\\infty)\\times\\Omega$. Here $C_w$ means continuity of every fixed $H$-pairing, and the time-dependent spaces use strongly measurable Bochner maps on finite intervals. The velocity has $u(0)=u_0$ and strong $H$ trace at zero, and for every compactly time-supported $C^1$ curve $\\phi:[0,\\infty)\\to V$ it satisfies\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)_{L^2}+(u\\otimes u,\\nabla\\phi)_{L^2}-\\nu(\\nabla u,\\nabla\\phi)_{L^2}\\bigr]dt+(u_0,\\phi(0))_{L^2}=0.\n$$\nAll spatial pairings use unnormalized Lebesgue measure, with $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$ and $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. For every $t\\ge0$ it satisfies\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2,\n$$\nand there is a full-measure set $S\\subset(0,\\infty)$ such that for every $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.\n$$\nFix one scalar test function $\\theta\\in C_c^\\infty(\\Omega)$ with $\\int_\\Omega\\theta=1$. The spacetime distributional equation and this fixed normalization are\n$$\n\\partial_tu+\\operatorname{div}(u\\otimes u)+\\nabla\\pi=\\nu\\Delta u,\n$$\n$$\n\\langle\\pi,a(t)\\theta(x)\\rangle=0\n$$\nfor every compactly supported smooth temporal test $a$. Such a $\\theta$ exists because a product of normalized smooth compactly supported interval bumps belongs to $C_c^\\infty(\\Omega)$ and has integral one. The physical pressure $p=\\rho_0\\pi$ has units $\\mathrm{Pa}$, is unique under this fixed scaled normalization, and satisfies\n$$\n\\rho_0\\partial_tu+\\rho_0\\operatorname{div}(u\\otimes u)+\\nabla p=\\mu\\Delta u\n$$\nas a spacetime distribution. The SI kinetic energy $E(t)=\\frac{\\rho_0}{2}\\int_\\Omega|u(t,x)|^2dx$ obeys $E(t)+\\mu\\int_0^t\\int_\\Omega|\\nabla u(s,x)|^2dx\\,ds\\le E(0)$. This conditional result asserts no pressure in $L^2$, corner regularity, or pointwise boundary traction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. C. Berselli and S. Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "§1 and §5.2, printed pp. 1–3 and 14–16, for the incompressible model and bounded-domain weak velocity; §3.5, pp. 6–8, explicitly defers bounded-domain pressure reconstruction."
+            },
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§§5.2–5.5, printed pp. 39–51, for the weak momentum and energy framework."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional no-slip weak velocity and normalized distribution pressure on a finite rectangular vessel, with constant density, positive constant viscosity, and zero force. Pressure is only a spacetime distribution; no L2 estimate, corner regularity, or pointwise wall traction is claimed."
+      }
+    ]
+  },
+  {
+    "order": 408,
+    "id": "fd-w02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Periodic incompressible Newtonian idealization — Examples",
+    "companion": "fd-w02",
+    "requires": [
+      "fd-w02"
+    ],
+    "items": [
+      {
+        "id": "rem-fd-thermal-coupling",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Thermal balance requires an additional coupling",
+        "reference": "items/rem-fd-thermal-coupling.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-fd-periodic-weak-continuation",
+          "post-td-local-energy-balance",
+          "post-td-fourier-conductivity",
+          "pthm-td-fourier-entropy-production",
+          "pthm-td-neumann-heat-relaxation",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-fd-periodic-weak-continuation": "physical-result",
+          "post-td-local-energy-balance": "physical-assumption",
+          "post-td-fourier-conductivity": "physical-assumption",
+          "pthm-td-fourier-entropy-production": "physical-result",
+          "pthm-td-neumann-heat-relaxation": "physical-result",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The periodic mechanical model has a velocity field and a kinetic-energy inequality with viscous dissipation, but it has no temperature variable. The separate thermal model uses a positive temperature field $T$ in kelvin, a thermal energy density $e_{\\mathrm{th}}(T)$ in $\\mathrm{J\\,m^{-3}}$, and heat flux $j_Q$ in $\\mathrm{W\\,m^{-2}}$; its adopted local balance is $\\partial_t e_{\\mathrm{th}}(T)+\\operatorname{div}j_Q=0$ with insulated faces $j_Q\\cdot n=0$. Its Fourier constitutive assumption is $j_Q=-K(x,T)\\nabla T$, where the symmetric part of $K$ is positive semidefinite. The separate entropy-production theorem and constant-conductivity Neumann heat-evolution theorem retain their own regularity and initial-data conditions.\n\nNeither branch identifies any part of the mechanical viscous dissipation with a source in the thermal balance, and the two branches use different domains. A coupled temperature evolution therefore requires an additional model assumption specifying the conversion of mechanical energy into heat and a common domain/field interface; it does not follow from the weak periodic continuation or from the thermal entropy and heat-evolution results.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2024",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/notes-256B-24.pdf",
+              "locator": "§1.3, printed pp. 9–11, for the isothermal incompressible Newtonian mechanical model."
+            },
+            {
+              "title": "Luigi C. Berselli and Stefano Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)",
+              "url": "https://www.mdpi.com/2311-5521/6/1/42/pdf",
+              "locator": "§1, printed pp. 1–3, which formulates the incompressible model at constant temperature and density."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct",
+        "physical_scope": "Comparison of the separate periodic isothermal mechanical branch and the rectangular insulated continuum-heat branch. No coupled temperature evolution, viscous-heating source, or total thermomechanical energy balance is asserted."
+      }
+    ]
+  }
+]

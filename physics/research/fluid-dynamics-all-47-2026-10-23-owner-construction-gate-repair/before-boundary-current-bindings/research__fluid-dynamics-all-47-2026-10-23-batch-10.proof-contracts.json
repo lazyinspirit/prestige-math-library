@@ -1,0 +1,1162 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "lem-fd-isotropic-linear-classification",
+    "def-fd-simple-fluid-state",
+    "lem-fd-helmholtz-chart",
+    "lem-fd-response-acoustic-algebra",
+    "lem-fd-gibbs-entropy-residual",
+    "lem-fd-newtonian-admissibility",
+    "ex-fdmath-negative-bulk-residual"
+  ],
+  "contracts": {
+    "lem-fd-isotropic-linear-classification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $D\\in\\operatorname{Sym}(3)$ and define $q_D(x)=x^TDx$ on $S^2=\\{x\\in\\mathbb R^3:x^Tx=1\\}$. The sphere is nonempty, closed because $x\\mapsto x^Tx$ is continuous, and bounded because each $|x_i|\\le1$ there. The function $q_D$ is continuous because it is a finite sum of coordinate products. By [F1], $q_D$ has a maximum at some $e\\in S^2$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $X=\\operatorname{diag}(d_1,d_2,d_3)$. The proper half-turns $Q_1=\\operatorname{diag}(1,-1,-1)$, $Q_2=\\operatorname{diag}(-1,1,-1)$, and $Q_3=\\operatorname{diag}(-1,-1,1)$ each leave $X$ fixed. Equivariance gives $L(X)=Q_iL(X)Q_i^T$ for each $i$; because $L(X)$ is symmetric, these three equalities force every off-diagonal entry to vanish.",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $y\\in S^2$ satisfy $e^Ty=0$ and put $c(t)=(e+ty)/\\sqrt{1+t^2}$. Then $c(t)^Tc(t)=1$ and differentiating at $0$ gives $c'(0)=y$. The differentiable function $t\\mapsto q_D(c(t))$ has a maximum at $0$, so its derivative there is $0$: its right difference quotients are nonpositive and its left difference quotients are nonnegative. Differentiating gives $0=y^TDe+e^TDy=2y^TDe$, since $D^T=D$. By scaling, this holds for every $y\\perp e$, so $De$ is a scalar multiple of $e$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Let $E_{jj}$ be the diagonal matrix with a $1$ in position $(j,j)$ and $0$ elsewhere, and let the $j$th column of a matrix $M$ be the diagonal vector $(L(E_{jj})_{11},L(E_{jj})_{22},L(E_{jj})_{33})^T$. Linearity and step 1.2 give $\\operatorname{diag}L(X)=M(d_1,d_2,d_3)^T$, where $\\operatorname{diag}A=(A_{11},A_{22},A_{33})^T$. A permutation matrix $P$ permutes the coordinate basis; if $\\det P=-1$, then $-P\\in\\operatorname{SO}(3)$ and $(-P)X(-P)^T=PXP^T$. Equivariance says $\\operatorname{diag}L(PXP^T)=\\operatorname{diag}(PL(X)P^T)$, hence $MPd=PMd$ for every vector $d$ and $MP=PM$. Equivalently $M_{ij}=M_{\\pi(i)\\pi(j)}$ for every permutation $\\pi$, so its diagonal entries have a common value $c$ and its off-diagonal entries have a common value $d_0$. Thus $L(X)=(c-d_0)X+d_0(\\operatorname{tr}X)I$.",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $z\\perp e$, then $e^TDz=(De)^Tz=0$, so $e^\\perp$ is invariant under $D$, and the restriction of $D$ to this two-dimensional plane is symmetric. Its unit circle is a nonempty closed bounded subset of $\\mathbb R^3$; repeating the argument of steps 1.1 and 2.1 on this invariant plane gives a unit eigenvector in $e^\\perp$. The remaining one-dimensional orthogonal complement is invariant and consists of eigenvectors. Hence $D$ has an orthonormal eigenbasis. Only finitely many vectors are chosen in this construction; no arbitrary choice principle is used.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "By step 3.1 write an arbitrary $D\\in\\operatorname{Sym}(3)$ as $D=OXO^T$ with $O$ orthogonal and $X$ diagonal. If $\\det O=-1$, change the sign of one eigenvector; this changes $\\det O$ to $1$ and leaves $OXO^T$ unchanged. We may therefore take $O\\in\\operatorname{SO}(3)$. Equivariance and step 2.2 yield $L(D)=(c-d_0)D+d_0(\\operatorname{tr}D)I$.",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Set $2\\mu=c-d_0$ and $\\lambda=d_0$. Conversely, for any real $\\lambda,\\mu$, the map $D\\mapsto2\\mu D+\\lambda(\\operatorname{tr}D)I$ is linear and equivariant: $QIQ^T=I$, and $\\operatorname{tr}(QDQ^T)=\\sum_{j,k=1}^3D_{jk}\\sum_{i=1}^3Q_{ij}Q_{ik}=\\sum_{j=1}^3D_{jj}=\\operatorname{tr}D$ because the columns of $Q$ are orthonormal. If two coefficient pairs give the same map, evaluation at $\\operatorname{diag}(1,-1,0)$ makes their $2\\mu$ coefficients equal, and evaluation at $I$ then makes their $\\lambda$ coefficients equal. This proves existence, converse, and uniqueness.",
+          "inputs": [
+            "A1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "The Statement quantifies over the nonempty space Sym(3), which contains zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "Step 5.1 includes the zero map at lambda=mu=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "Step 5.1 includes the identity map at mu=1/2 and lambda=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "Statement: Steps 3.1 and 2.2 cover repeated eigenvalues without dividing by eigenvalue differences."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "reason": "The pointwise map classification has no interval or endpoint quantifier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "Statement: Steps 1.1–2.1 make only finite local choices; the extreme-value supplier states ZF."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "Step 4.1 proves the coefficient form for every equivariant linear map."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\operatorname{Sym}(3)=\\{D\\in\\mathbb R^{3\\times3}:D^T=D\\}$, let $I$ be the $3\\times3$ identity matrix, and define\n$$"
+          },
+          "evidence": "Step 5.1 proves the converse and uniqueness."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "isotropic map specialization",
+          "inputs": [
+            "Statement",
+            "Proof step 5.1"
+          ],
+          "expected": "For L(D)=2 mu D+lambda tr(D) I, substitution gives L(QDQ^T)=Q L(D) Q^T for every SO(3) matrix; mu=1/2, lambda=0 gives the identity."
+        }
+      ],
+      "finite_checks_disposition": "Every listed check is an exact symbolic specialization of the local argument; none is empirical or computational evidence."
+    },
+    "def-fd-simple-fluid-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "evidence": "The Definition permits the empty open domain, with the function and conditions interpreted vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "evidence": "Statement: No derivative sign is imposed, so zero response derivatives are allowed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "reason": "A nonempty open subset of the two-dimensional state space is not a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "evidence": "The Definition imposes no Hessian-determinant or invertibility condition, so J_e may vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "reason": "The state-relation Definition makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "reason": "The Definition specifies a domain and function and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "reason": "The Definition contains no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous tot"
+          },
+          "reason": "The Definition contains no biconditional assertion."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The Definition asserts no theorem and requires no finite check."
+    },
+    "lem-fd-helmholtz-chart": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-simple-fluid-state",
+          "source_section": "Definition",
+          "quote": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two (write $e\\in C^2(U)$). The pair $(U,e)$ is a **simple-fluid state relation** for the purposes of this mathematical library. At $(v,s)\\in U$, $v$ is the specific-volume coordinate, $s$ the specific-entropy coordinate, and $e(v,s)$ the specific-energy value. Define\n$$T(v,s):=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s):=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho:=\\frac1v.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in [a,b]$ with $f(c) = y$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $f(v,s)=e_s(v,s)$ and $a_0=e_{ss}(v_0,s_0)>0$. Since $U$ is open and $e_{ss},e_{sv}$ are continuous, choose $\\delta,\\rho>0$ so the closed rectangle $R=[v_0-\\delta,v_0+\\delta]\\times[s_0-\\rho,s_0+\\rho]$ is contained in $U$, $f_s=e_{ss}\\ge a_0/2=:a>0$ on $R$, and $|f_v|=|e_{sv}|\\le B$ on $R$ for some finite $B$. By [F2] on the two vertical segments, $f(v_0,s_0-\\rho)\\le T_0-a\\rho<T_0<T_0+a\\rho\\le f(v_0,s_0+\\rho)$. Continuity of the endpoint values in $v$ therefore gives smaller open intervals $V$ about $v_0$ and $J$ about $T_0$, with $J\\subset(0,\\infty)$, such that $f(v,s_0-\\rho)<T<f(v,s_0+\\rho)$ for all $(v,T)\\in V\\times J$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For fixed $v\\in V$, [F2] and $f_s\\ge a$ imply that $s\\mapsto f(v,s)$ is strictly increasing on $[s_0-\\rho,s_0+\\rho]$. By [F3], for every $T\\in J$ there is $s(v,T)\\in(s_0-\\rho,s_0+\\rho)$ with $f(v,s(v,T))=T$; strict increase gives uniqueness in that interval.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Take $(v,T),(v',T')\\in V\\times J$ and write $s=s(v,T)$, $s'=s(v',T')$. Applying [F2] in the $s$ variable and using $f_s\\ge a$ gives $a|s'-s|\\le|f(v,s')-f(v,s)|=|f(v,s')-T|$. Since $f(v',s')=T'$, [F2] in the $v$ variable and $|f_v|\\le B$ give $|f(v,s')-T|\\le B|v-v'|+|T-T'|$. Hence $s(v,T)$ is locally Lipschitz and, in particular, continuous.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "At a fixed $(v,T)$, let $h,k$ be increments in $v,T$ and set $\\Delta s=s(v+h,T+k)-s(v,T)$. The bound of step 3.1 gives $\\Delta s=O(|h|+|k|)$. By the definition of the total derivative of the $C^1$ function $f$ at $(v,s(v,T))$, $k=f_vh+f_s\\Delta s+o(|h|+|\\Delta s|)$, so $\\Delta s=-\\frac{f_v}{f_s}h+\\frac1{f_s}k+o(|h|+|k|)$. Thus $s_v=-e_{sv}/e_{ss}$ and $s_T=1/e_{ss}$. These derivatives are continuous because $e$ has continuous total derivatives through order two, $s$ is continuous, and $e_{ss}\\ge a>0$; therefore the unique local branch is continuously differentiable.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "By [F4] and the identity $e_s(v,s(v,T))=T$, differentiation of $a=e(v,s(v,T))-T s(v,T)$ gives $a_v=e_v+(e_s-T)s_v=e_v=-p$ and $a_T=e_s s_T-s-Ts_T=-s$.",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Differentiating the first-derivative identities of step 5.1 and using step 4.1 yields $a_{TT}=-s_T=-1/e_{ss}$ and $a_{vv}=\\partial_v(e_v(v,s(v,T)))=e_{vv}+e_{vs}s_v=e_{vv}-e_{vs}e_{sv}/e_{ss}$. These derivatives are continuous by the stated regularity, so $a$ is $C^2$. All derivatives are evaluated at the chart point $(v,s(v,T))$.",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "evidence": "Statement: The fixed state point makes U nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "evidence": "Step 6.1 allows zero mixed or volume derivatives; only e_ss is required positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "evidence": "Step 2.1 proves one unique inverse value in the fixed neighborhood for each chart point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "evidence": "Step 6.1 remains valid when the Hessian determinant vanishes; the denominator is e_ss>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "reason": "The chart is local on open intervals and makes no endpoint-extension claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "evidence": "Statement: The proof makes finite local choices and uses the canonical IVT bisection, not Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "reason": "The Statement contains no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let the state relation $e:U\\to\\mathbb R$ have continuous total deriv"
+          },
+          "reason": "The Statement contains no biconditional assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "quadratic local chart",
+          "inputs": [
+            "Statement"
+          ],
+          "expected": "For e(v,s)=v^2/2+s+s^2/2 at (v0,s0)=(1,0), T0=1, e_ss=1, s(v,T)=T-1, s_T=1, a_T=1-T, a_TT=-1, and a_vv=1."
+        }
+      ],
+      "finite_checks_disposition": "Every listed check is an exact symbolic specialization of the local argument; none is empirical or computational evidence."
+    },
+    "lem-fd-response-acoustic-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-simple-fluid-state",
+          "source_section": "Definition",
+          "quote": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two (write $e\\in C^2(U)$). The pair $(U,e)$ is a **simple-fluid state relation** for the purposes of this mathematical library. At $(v,s)\\in U$, $v$ is the specific-volume coordinate, $s$ the specific-entropy coordinate, and $e(v,s)$ the specific-energy value. Define\n$$T(v,s):=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s):=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho:=\\frac1v.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-helmholtz-chart",
+          "source_section": "Statement",
+          "quote": "s_v=-\\frac{e_{sv}}{e_{ss}},\\qquad s_T=\\frac1{e_{ss}},\\qquad a_{TT}=-\\frac1{e_{ss}},\\qquad a_{vv}=e_{vv}-\\frac{e_{vs}e_{sv}}{e_{ss}}.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2], at fixed $v=v_b$ the chain rule gives $c_v=e_s(v_b,s_b)s_T(v_b,T_b)=T_b/e_{ss}(v_b,s_b)$. For fixed $s=s_b$, the chain rule and $v=1/\\rho$ give $P'(\\rho_b)=p_v(v_b,s_b)(-1/\\rho_b^2)=(-e_{vv})(-v_b^2)=v_b^2e_{vv}=c_s^2$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $\\rho_\\varepsilon=\\rho_b+\\varepsilon r$ and $u_\\varepsilon=\\varepsilon w$. Substitution into the continuity equation gives $\\varepsilon(r_t+\\rho_b\\operatorname{div}w)+O(\\varepsilon^2)=0$. In the momentum equation, $(u_\\varepsilon\\cdot\\nabla)u_\\varepsilon$ is order $\\varepsilon^2$, while $\\nabla P(\\rho_\\varepsilon)=\\varepsilon P'(\\rho_b)\\nabla r+o(\\varepsilon)$; its first-order term is therefore $\\varepsilon(\\rho_b w_t+c_s^2\\nabla r)$. Equating first-order coefficients gives the displayed linearized system.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Differentiate $r_t+\\rho_b\\operatorname{div}w=0$ in time and take the divergence of $\\rho_b w_t+c_s^2\\nabla r=0$. Since $\\rho_b$ and $c_s^2$ are constants, subtraction yields $r_{tt}=c_s^2\\Delta r$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Suppose $c_s^2>0$, take $k\\ne0$, and put $\\omega=c_s|k|$. For $r=A\\cos(k\\cdot x-\\omega t)$, $r_t=\\omega A\\sin(k\\cdot x-\\omega t)$ and $\\nabla r=-Ak\\sin(k\\cdot x-\\omega t)$. The stated $w$ gives $\\operatorname{div}w=-\\omega A\\sin(k\\cdot x-\\omega t)/\\rho_b$ and $w_t=\\omega^2Ak\\sin(k\\cdot x-\\omega t)/(\\rho_b|k|^2)$; hence both linearized equations hold because $\\omega^2=c_s^2|k|^2$.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Suppose $c_s^2<0$, put $a=\\sqrt{-c_s^2}|k|$, and use the stated exponential mode. Then $r_t=ar$, $\\operatorname{div}w=-ar/\\rho_b$, $w_t=-\\frac{a^2A}{\\rho_b|k|^2}k e^{at}\\sin(k\\cdot x)$, and $\\nabla r=-Ak e^{at}\\sin(k\\cdot x)$. The continuity equation follows from the first two identities, and the momentum equation follows from $-a^2/|k|^2-c_s^2=0$, which holds by the definition of $a$. Since $a>0$ for $k\\ne0$, this mode grows exponentially.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "evidence": "The Statement requires a nonempty time interval and positive base volume and temperature."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "evidence": "Statement: The zero-response value is outside both strict-sign mode clauses; no zero-response stability claim is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "evidence": "Statement: Steps 4.1–5.1 require nonzero k; zero wave number is excluded from the mode formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "evidence": "Statement: The base density is positive and each mode denominator |k|^2 is positive for nonzero k."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "reason": "The time domain is open and no endpoint extension is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "reason": "Each wave vector is supplied data; the Statement invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "reason": "The Statement contains no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open and let $e:U\\to\\mathbb R$ have continuous total derivatives through orde"
+          },
+          "reason": "The Statement contains no biconditional assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive and negative acoustic modes",
+          "inputs": [
+            "Statement",
+            "Proof steps 4.1 and 5.1"
+          ],
+          "expected": "For the positive quadratic state e=v^2/2+s+s^2/2 and the negative-response state e=-v^2/2+s+s^2/2, at (v_b,s_b)=(1,0), k=(1,0,0), direct differentiation verifies the stated cosine mode for c_s^2=1 and exponential mode for c_s^2=-1."
+        }
+      ],
+      "finite_checks_disposition": "Every listed check is an exact symbolic specialization of the local argument; none is empirical or computational evidence."
+    },
+    "lem-fd-gibbs-entropy-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-simple-fluid-state",
+          "source_section": "Definition",
+          "quote": "Let $U\\subset(0,\\infty)\\times\\mathbb R$ be open, with coordinates $(v,s)$, and let $e:U\\to\\mathbb R$ have continuous total derivatives through order two (write $e\\in C^2(U)$). The pair $(U,e)$ is a **simple-fluid state relation** for the purposes of this mathematical library. At $(v,s)\\in U$, $v$ is the specific-volume coordinate, $s$ the specific-entropy coordinate, and $e(v,s)$ the specific-energy value. Define\n$$T(v,s):=\\frac{\\partial e}{\\partial s}(v,s),\\qquad p(v,s):=-\\frac{\\partial e}{\\partial v}(v,s),\\qquad \\rho:=\\frac1v.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-helmholtz-chart",
+          "source_section": "Statement",
+          "quote": "a_T=-s,\\qquad a_v=e_v=-p,\\qquad s_v=-\\frac{e_{sv}}{e_{ss}},\\qquad s_T=\\frac1{e_{ss}},\\qquad a_{TT}=-\\frac1{e_{ss}},\\qquad a_{vv}=e_{vv}-\\frac{e_{vs}e_{sv}}{e_{ss}}.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-fd-local-balance-equivalence",
+          "source_section": "Statement",
+          "quote": "and, after subtracting the kinetic identity, to the internal-energy equation\n$$\\partial_t(\\rho e)+\\operatorname{div}(\\rho e u+q)=\\sigma:L+\\rho r,\\qquad \\rho D_t e=\\sigma:L-\\operatorname{div}q+\\rho r.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The stated mass equation expands to $D_t\\rho+\\rho\\theta=0$, since $\\operatorname{div}(\\rho u)=\\sum_i u_i\\partial_{x_i}\\rho+\\rho\\sum_i\\partial_{x_i}u_i$. Because $v=1/\\rho$, the chain rule gives $D_tv=-\\rho^{-2}D_t\\rho=v\\theta$, hence $\\rho D_tv=\\theta$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1] and [F3], $D_te=e_vD_tv+e_sD_ts=-pD_tv+T D_ts$. Multiplying by $\\rho$ and using step 1.1 gives $\\rho D_te=-p\\theta+\\rho T D_ts$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Choose any $t_0\\in I$ and set $I_0:=I-t_0$, an open interval containing $0$. For $t'\\in I_0$, define $\\widehat\\chi(t',a):=\\chi(t'+t_0,a)$ and define each shifted field by $\\widehat f(t',x):=f(t'+t_0,x)$. The shifted motion is still $C^2$ and orientation-preserving, $\\widehat P_{t'}=P_{t'+t_0}$, and its material derivative is the original one at time $t'+t_0$. Time translation preserves the stated regularity, state relations, local contact balance, continuity equation, and each material-subdomain integral balance because $d/dt'=d/dt$ under $t=t'+t_0$. Thus the actual hypotheses and interval convention of [L1] hold on $I_0$, so [L1] gives $\\sigma=\\sigma^T$ and $\\rho D_te=\\sigma:L-\\operatorname{div}q+\\rho r$ throughout the original interval. Since $\\sigma=-pI+\\tau$, symmetry of $\\sigma$ implies symmetry of $\\tau$; therefore $\\sigma:L=\\sigma:D=-p\\operatorname{tr}D+\\tau:D=-p\\theta+\\tau:D$. Equating this expression for $\\rho D_te$ with step 2.1 and cancelling $-p\\theta$ yields $\\rho T D_ts=\\tau:D-\\operatorname{div}q+\\rho r$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F4",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Divide step 3.1 by $T>0$ and expand the product rule componentwise: $$ \\operatorname{div}(q/T)=\\sum_i\\partial_{x_i}(q_i/T)=\\frac{\\operatorname{div}q}{T}-\\frac{q\\cdot\\nabla T}{T^2}. $$ Substitution into the definition of $\\mathcal G$ cancels the heat-supply and divergence terms, giving $\\mathcal G=\\tau:D/T-q\\cdot\\nabla T/T^2$. The Helmholtz-chart identities in the Statement are the conditional consequence [F2].",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "evidence": "The Statement assumes nonempty B and I, so its swept domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "evidence": "Statement: Zero heat flux, stress, supply, or velocity gradient is permitted; the identity has no division by those values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "evidence": "Statement: A constant stationary state with zero flux and stress gives zero on both sides, when its balance hypotheses hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "evidence": "Statement: The chart uses only e_ss>0 and T>0; no Hessian determinant is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "reason": "I is open and the Statement makes no temporal endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "evidence": "The Statement explicitly assumes AC_omega and does not assume full Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "reason": "The Statement contains no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_"
+          },
+          "reason": "The Statement contains no biconditional assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant-state balance specialization",
+          "inputs": [
+            "Statement",
+            "Proof step 4.1"
+          ],
+          "expected": "Take e(v,s)=s+s^2/2, v=rho=1, s=0, T=1, p=0, u=q=tau=b=r=0, with constant motion and fields. The continuity, contact and integral balances hold with zero flux/stress, and both sides of the entropy identity are zero."
+        }
+      ],
+      "finite_checks_disposition": "Every listed check is an exact symbolic specialization of the local argument; none is empirical or computational evidence."
+    },
+    "lem-fd-newtonian-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-gibbs-entropy-residual",
+          "source_section": "Statement",
+          "quote": "\\mathcal G=\\frac{\\tau:D}{T}-\\frac{q\\cdot\\nabla T}{T^2}.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-isotropic-linear-classification",
+          "source_section": "Statement",
+          "quote": "L(D)=2\\mu D+\\lambda(\\operatorname{tr}D)I\\qquad(D\\in\\operatorname{Sym}(3)).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under the conditional Gibbs identity [F1] and the countable-choice premise [A2, F3], substituting the stress and flux expressions assumed in the Statement, with $g=\\nabla T$, identifies $\\mathcal Q$ with the entropy residual. The stress expression is a member of the linear isotropic family classified by [F2]; that classification imposes no sign condition on its coefficients. The trace of $D_0$ is $\\theta-\\frac{\\theta}{3}\\operatorname{tr}I=0$, and $D=D_0+\\frac{\\theta}{3}I$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $D_0:I=\\operatorname{tr}D_0=0$ and $I:I=3$, contraction gives $\\tau:D=2\\mu|D_0|^2+\\left(\\lambda+\\frac{2\\mu}{3}\\right)\\theta^2=2\\mu|D_0|^2+\\zeta\\theta^2$. Also $-q\\cdot g=g^TKg=g^T(\\operatorname{sym}K)g$: the scalar $g^T(K-K^T)g$ equals its transpose $g^T(K^T-K)g$, so it is zero. Hence $\\mathcal Q(D,g,T)=(2\\mu|D_0|^2+\\zeta\\theta^2)/T+g^T(\\operatorname{sym}K)g/T^2$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\mu\\ge0$, $\\zeta\\ge0$, and $\\operatorname{sym}K$ is positive semidefinite, every term in step 2.1 is nonnegative for all $D,g,T>0$. This proves sufficiency.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For necessity, take $T=1$, $g=0$, and $D=\\operatorname{diag}(1,-1,0)$. Then $\\theta=0$, $D_0=D$, and $|D_0|^2=2$, so step 2.1 gives $\\mathcal Q=4\\mu\\ge0$ and hence $\\mu\\ge0$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.3",
+          "claim": "Take $T=1$, $g=0$, and $D=I/3$. Then $\\theta=1$ and $D_0=0$, so $\\mathcal Q=\\zeta\\ge0$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-4",
+          "step": "3.4",
+          "claim": "Take $T=1$, $D=0$, and arbitrary $g\\in\\mathbb R^3$. Then $\\mathcal Q=g^T(\\operatorname{sym}K)g\\ge0$ for every $g$, which is exactly positive semidefiniteness of $\\operatorname{sym}K$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If $\\mu>0$ and $\\zeta=0$, then $\\lambda=-2\\mu/3<0$, while step 3.1 still gives nonnegative residual whenever $\\operatorname{sym}K$ is positive semidefinite. Thus nonnegativity of $\\lambda$ is not necessary.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "Statement: Symmetric matrices and vectors include zero, and the criterion quantifies over all values."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "Statement: Steps 3.1–3.4 include zero coefficients and semidefinite kernel directions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "The Statement explicitly includes mu>0, zeta=0, lambda<0 as admissible."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "Statement: Steps 3.2–3.4 allow equality and singular semidefinite cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "reason": "The algebraic coefficient test has no interval or endpoint limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "Statement: Only AC_omega is adopted; the coefficient algebra uses no stronger choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "Step 3.1 proves sufficiency of all three coefficient conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. At a fixed state, let $\\mu,\\lambd"
+          },
+          "evidence": "Statement: Steps 3.2–3.4 derive each necessary condition by independent test inputs."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "coefficient necessity and semidefinite boundary",
+          "inputs": [
+            "Statement",
+            "Proof steps 3.1–3.4"
+          ],
+          "expected": "For the admissible case mu=1,zeta=0,lambda=-2/3,K=diag(1,0,0),D=diag(1,-1,0),g=0,T=1, Q=4. Violating mu>=0, zeta>=0, or PSD of symK is detected respectively by mu=-1,D=diag(1,-1,0); zeta=-1,D=I/3; or K=diag(-1,0,0),g=(1,0,0), with other terms zero."
+        }
+      ],
+      "finite_checks_disposition": "Every listed check is an exact symbolic specialization of the local argument; none is empirical or computational evidence.",
+      "finite_smoke": [
+        {
+          "check": "fd-newtonian-stress-admissibility",
+          "asserts": "Then $\\mathcal Q(D,g,T)\\ge0$ for every symmetric $D$, every $g\\in\\mathbb R^3$, and every $T>0$ if and only if\n$$\\mu\\ge0,\\qquad \\zeta\\ge0,\\qquad x^T(\\operatorname{sym}K)x\\ge0\\quad\\text{for every }x\\in\\mathbb R^3.$$"
+        }
+      ]
+    },
+    "ex-fdmath-negative-bulk-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-newtonian-admissibility",
+          "source_section": "Statement",
+          "quote": "\\mathcal Q(D,g,T)=\\frac{2\\mu|D_0|^2+\\zeta\\theta^2}{T}+\\frac{g^T(\\operatorname{sym}K)g}{T^2}.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "From the definitions, $\\operatorname{tr}D=\\theta$, so $D_0=(\\theta/3)I-(\\theta/3)I=0$. Also $g^T(\\operatorname{sym}K)g=0$ because $g=0$.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1] and the countable-choice premise [F2], step 1.1 gives $\\mathcal Q=\\zeta\\theta^2/T$. Since $\\zeta<0$, $\\theta^2>0$, and $T>0$, this value is strictly negative. Therefore the stated positive-shear example verifies the claimed failure of nonnegative residual.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "evidence": "Statement: The strict parameter conditions and theta nonzero provide explicit nonempty admissible data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "evidence": "Step 1.1 verifies D_0=0 while the bulk contribution stays nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "evidence": "Step 2.1 gives Q=-1/2 for mu=1,zeta=-1,T=2,theta=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "evidence": "Step 1.1 uses K=I positive definite; conductivity degeneracy is unnecessary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "reason": "The algebraic Example has no interval or endpoint operation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "evidence": "The Example states AC_omega and makes no full-Choice claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "reason": "The Example contains no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$: every sequence of nonempty sets admits a choice function. Let $\\mu>0$, $\\zeta<0$, $T>0$, an"
+          },
+          "reason": "The Example contains no biconditional assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "negative bulk residual",
+          "inputs": [
+            "Example",
+            "Verification step 2.1"
+          ],
+          "expected": "For mu=1,zeta=-1,T=2,theta=1,lambda=-5/3,K=I,D=I/3,g=0, D0=0 and Q=-1/2<0."
+        }
+      ],
+      "finite_checks_disposition": "Every listed check is an exact symbolic specialization of the local argument; none is empirical or computational evidence."
+    }
+  }
+}

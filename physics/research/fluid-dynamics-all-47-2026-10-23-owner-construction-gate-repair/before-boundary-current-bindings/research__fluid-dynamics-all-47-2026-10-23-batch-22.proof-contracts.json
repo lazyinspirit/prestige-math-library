@@ -1,0 +1,2243 @@
+{
+  "version": 1,
+  "scope": [
+    "def-fd-bounded-solenoidal-spaces",
+    "def-fd-periodic-solenoidal-spaces",
+    "def-fd-weak-time-continuity",
+    "lem-fd-bounded-solenoidal-basis",
+    "lem-fd-negative-space-nonlinear-bound",
+    "def-fd-periodic-leray-hopf",
+    "lem-fd-bounded-compactness",
+    "lem-fd-bounded-dual-separability",
+    "lem-fd-finite-mode-compactness",
+    "lem-fd-no-slip-lsix",
+    "thm-fd-periodic-global-weak-existence",
+    "prop-fd-pressure-reconstruction",
+    "thm-fd-bounded-global-weak-existence",
+    "thm-fd-weak-smooth-uniqueness",
+    "prop-fd-bounded-evolving-pressure",
+    "cex-fd-weak-products",
+    "rem-fd-weak-regularity-status"
+  ],
+  "contracts": {
+    "def-fd-bounded-solenoidal-spaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\nThe space $L^p(\\mu)$ as the quotient by null functions and\nComplex Lp classes and Euclidean test-function conventions. Their quotient\nnorm values are supplied by\nThe $L^p$ norm descends to the quotient and makes $L^p$ a normed space for $1 \\le p \\le \\infty$\nfor real scalars and\nComplex Holder, Minkowski, and the quotient norm for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\nWeak derivative of a locally integrable function. Under\nThe Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\nWeak differentiation ignores null-set changes, while\nUniqueness of a weak derivative as an almost-everywhere class gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-derivative-of-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, let\n$u,v\\in L^1_{\\mathrm{loc}}(\\Omega)$, and let\n$\\alpha\\in\\mathbb N_0^n$ be the multi-index of\n[[def-ck-and-multi-index-notation-in-several-variables]]. We say that $v$ is\nthe **weak derivative** $D^\\alpha u$ if\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nBoth integrals are finite because the test and all its derivatives are bounded\nand compactly supported. The test identity is choice-free. By\n[[def-locally-integrable-function-as-a-regular-distribution]] and the signed\ntranspose convention in [[def-distributional-derivative]], it is equivalent\nto $\\partial^\\alpha T_u=T_v$ as distributions. For $\\alpha=0$, this identity\nreduces to $T_u=T_v$, hence to $u=v$ almost everywhere by the published\nembedding theorem under [[def-countable-choice]].\n\n**Well-definedness.** Changing either representative on a null set leaves each\ntest integral unchanged. Weak derivatives are therefore statements about\nalmost-everywhere classes; existence and uniqueness of their locally\nintegrable value classes are audited separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-zero-extension-from-w-one-p-zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For any open $\\Omega\\subseteq\\mathbb R^n$,\n$n\\ge1$, any $1\\le p\\le\\infty$ and any\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, extension by zero\n$$E_0u(x)=u(x)\\ \\ (x\\in\\Omega),\\qquad E_0u(x)=0\\ \\ (x\\notin\\Omega),$$\nacted on representatives, sends $W_0^{1,p}(\\Omega;\\mathbb K)$ linearly into\n$W^{1,p}(\\mathbb R^n;\\mathbb K)$. For every $u\\in W_0^{1,p}(\\Omega;\\mathbb K)$\nand every coordinate direction $i$, the class $D_i(E_0u)$ is the zero\nextension of the class $D_iu$, and every $L^p$ component norm is preserved:\n$$\\|E_0u\\|_{L^p(\\mathbb R^n)}=\\|u\\|_{L^p(\\Omega)},\\qquad \\|D_i(E_0u)\\|_{L^p(\\mathbb R^n)}=\\|D_iu\\|_{L^p(\\Omega)},$$\nso that $\\|E_0u\\|_{W^{1,p}(\\mathbb R^n)}=\\|u\\|_{W^{1,p}(\\Omega)}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $D_\\sigma(\\Omega)$ is a real vector subspace because the divergence operator is linear and sums and scalar multiples of compactly supported smooth fields remain compactly supported and smooth. Its closures in the two stated norms are therefore linear subspaces and define the sets $H$ and $V$ without a boundary trace convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $a_n\\in D_\\sigma$ converges to $a\\in V$ in $H_0^1$, then [F3] makes their zero extensions converge in $H^1(\\mathbb R^3)$ and preserves their derivatives. Their distributional divergences converge to $\\operatorname{div}a$ when paired with any compact smooth scalar test by [F2]. Since each $\\operatorname{div}a_n=0$, the limit divergence is zero, and the zero extension represents the $H^1$ limit. This verifies the final properties in the Definition without claiming a converse density theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for def-fd-bounded-solenoidal-spaces explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector field belongs to both closure spaces by the definitions verified in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "def-fd-bounded-solenoidal-spaces has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "def-fd-bounded-solenoidal-spaces makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "def-fd-bounded-solenoidal-spaces has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the approximating sequence from the H_0^1 closure and the Countable Choice hypothesis of the zero-extension supplier F3. This is an inherited supplier premise, not a newly proved countable-selection construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "def-fd-bounded-solenoidal-spaces states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "def-fd-bounded-solenoidal-spaces states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "def-fd-periodic-solenoidal-spaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $k\\ne0$, the multiplier $P_k$ is the Euclidean orthogonal projection onto $\\kappa_k^\\perp$, since it is symmetric, $P_k^2=P_k$, and $P_k\\kappa_k=0$; $P_0=I$ leaves constant vector fields unrestricted.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], coefficient sequences in the displayed weighted square-sum define unique $L^2$ classes, and Fourier truncations converge in the stated $H^s$ norm whenever that sum is finite. The conjugation condition is exactly the real-valued condition, while $k\\cdot\\widehat u(k)=0$ is the Fourier form of zero distributional divergence. Thus the formulas define the stated real Hilbert coefficient spaces and projections.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for def-fd-periodic-solenoidal-spaces explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Definition gives weighted Fourier spaces, solenoidal P and Pi_N; step 1.1 handles P_0 and step 1.2 uses Fourier synthesis and truncation convergence. d>=2 and L>0 fix a nonempty torus and Z^d; N>=0 truncations always retain k=0, so even N=0 is not an empty truncation.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero Fourier sequence satisfies the displayed weighted norm and solenoidal constraints in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the admitted cutoff N=0, Pi_0 retains the singleton frequency set {0}; P_0=I leaves the constant real vector mode unrestricted by step 1.1. Step 2.1 treats the same finite coefficient truncation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The potentially singular zero Fourier mode is explicitly assigned P0=I in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-solenoidal-spaces has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes Fourier-basis/Parseval F1 with its explicit Countable Choice premise F2 to identify coefficient sequences with L2 classes. The projection multipliers in step 1.1 are explicit; step 2.1 does not construct a new selection function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-solenoidal-spaces states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-solenoidal-spaces states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "def-fd-weak-time-continuity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$. Define\n$H^s(\\mathbb T_L^d)$ by\n$$\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty,$$\nfor $s\\ge0$, with the square root of this sum as norm; the weight is dimensionless. The\nreal solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. The orthogonal solenoidal projection\n$P$ has multiplier $P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$; the\nfor integer $N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the completion of finite Fourier coefficient sequences\nin the norm squared $\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The weak-continuity clause is the continuity of all scalar coordinate maps $u\\mapsto(u,h)_H$ and therefore defines a topology on $H$; its definition makes no assertion of norm continuity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Strong measurability and the displayed Bochner $L^p$ conditions specify measurable equivalence classes and their norms; the local notation is exactly the conjunction of those conditions over finite $T$. No representative-dependent time value is assigned by these spaces.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for def-fd-weak-time-continuity explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero map satisfies the defining continuity and integrability predicates in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "def-fd-weak-time-continuity has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "def-fd-weak-time-continuity makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The weak-continuity domain is the closed interval [0,T] by definition; step 1.1 specifies all t there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "def-fd-weak-time-continuity performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "def-fd-weak-time-continuity states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "def-fd-weak-time-continuity states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "lem-fd-bounded-solenoidal-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-bounded-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set. Let\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ denote smooth compactly supported vector\nfields and set\n$$D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}.$$\nLet $H$ be the closure of $D_\\sigma(\\Omega)$ in\n$L^2(\\Omega;\\mathbb R^3)$, and let $V$ be its closure in\n$H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ and weak derivatives define the $H^1$\nnorm. Use $\\|a\\|_H=\\|a\\|_2$ and\n$\\|a\\|_V^2=\\|a\\|_2^2+\\|\\nabla a\\|_2^2$. Each $V$ element has zero\nextension in $H^1(\\mathbb R^3)$ and distributional divergence zero. This\nclosure definition does not identify $V$ with every divergence-free member\nof $H_0^1(\\Omega;\\mathbb R^3)$ on an arbitrary open set, and it makes no\npointwise boundary trace assertion.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-zero-extension-from-w-one-p-zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For any open $\\Omega\\subseteq\\mathbb R^n$,\n$n\\ge1$, any $1\\le p\\le\\infty$ and any\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, extension by zero\n$$E_0u(x)=u(x)\\ \\ (x\\in\\Omega),\\qquad E_0u(x)=0\\ \\ (x\\notin\\Omega),$$\nacted on representatives, sends $W_0^{1,p}(\\Omega;\\mathbb K)$ linearly into\n$W^{1,p}(\\mathbb R^n;\\mathbb K)$. For every $u\\in W_0^{1,p}(\\Omega;\\mathbb K)$\nand every coordinate direction $i$, the class $D_i(E_0u)$ is the zero\nextension of the class $D_iu$, and every $L^p$ component norm is preserved:\n$$\\|E_0u\\|_{L^p(\\mathbb R^n)}=\\|u\\|_{L^p(\\Omega)},\\qquad \\|D_i(E_0u)\\|_{L^p(\\mathbb R^n)}=\\|D_iu\\|_{L^p(\\Omega)},$$\nso that $\\|E_0u\\|_{W^{1,p}(\\mathbb R^n)}=\\|u\\|_{W^{1,p}(\\Omega)}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sobolev-spaces-are-banach-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, used to invoke the published real and complex\n$L^p$ completeness results through their Countable-Choice interface. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, let $k\\in\\mathbb N_0$,\n$1\\le p\\le\\infty$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then\n$W^{k,p}(\\Omega;\\mathbb K)$, equipped with the displayed norm of\n[[def-sobolev-space-wkp-and-its-norm]], is a complete normed space over\n$\\mathbb K$.\n\nBoth endpoints $p=1$ and $p=\\infty$ are included, as is $k=0$, where the\nassertion reduces to the completeness of $L^p$. If $\\Omega=\\varnothing$, then\n$W^{k,p}(\\Omega;\\mathbb K)$ is the zero space and the assertion is trivial.\nThe Axiom of Choice is used only to derive Countable Choice for the two\npublished completeness interfaces; no other selection is made. Representative\nselection inside the finitely many coordinate classes is finite and\nchoice-free.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The zero-extension map embeds $H$ isometrically into $L^2$ of a periodic cube containing $\\overline\\Omega$ in its interior. By [F2], it embeds $V$ into the finite product consisting of the zero extension and its three first derivatives in $L^2$ of that cube. Each ambient space is separable by [F4]. Every subspace of a separable metric space is separable: take its countable base of intersections with ambient rational balls and, using [F5], choose one point from each nonempty intersection. Thus $H$ and $V$ are separable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The $L^2$ and $H^1$ graph inner products make the ambient spaces Hilbert: completeness of $L^2$ and the Sobolev completeness in [F3] give convergence of Cauchy sequences in the function and all derivative coordinates, and the weak-derivative identity passes to the limit against each test. The spaces $H,V$ are closed by their definitions as closures, so they inherit Hilbert structure. The $V$ norm dominates the $H$ norm; since $D_\\sigma$ is dense in both closures, the inclusion $V\\hookrightarrow H$ is continuous with dense image.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Separability of $V$ and density of $D_\\sigma$ in $V$ allow Countable Choice to select $d_j\\in D_\\sigma$ approximating a countable dense subset of $V$ to every rational precision; the selected countable collection is dense in $V$ and, because $D_\\sigma$ is also dense in $H$, its linear span is dense in $H$. The space $D_\\sigma$ is infinite dimensional: choose countably many disjoint balls in one ball contained in $\\Omega$ and in each choose a nonzero smooth compactly supported curl field; their disjoint supports give linear independence. Apply Gram–Schmidt in $H$ to the selected collection, discarding zero remainders. Each resulting $e_j$ is a finite linear combination of elements of $D_\\sigma$, so is still in $D_\\sigma$; its span contains every selected $d_j$ after the corresponding finite stage and is therefore dense in $V$ and $H$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for lem-fd-bounded-solenoidal-basis explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The nonzero oscillatory witness or structural basis assertion in lem-fd-bounded-solenoidal-basis has no zero-input branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-solenoidal-basis has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-solenoidal-basis makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-solenoidal-basis has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable selection under the stated choice hypotheses used for the construction occurs in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-solenoidal-basis states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-solenoidal-basis states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "lem-fd-negative-space-nonlinear-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$. Define\n$H^s(\\mathbb T_L^d)$ by\n$$\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty,$$\nfor $s\\ge0$, with the square root of this sum as norm; the weight is dimensionless. The\nreal solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. The orthogonal solenoidal projection\n$P$ has multiplier $P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$; the\nfor integer $N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the completion of finite Fourier coefficient sequences\nin the norm squared $\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $a_i a_j\\in L^1$, its $k$th Fourier coefficient is an ordinary integral. Cauchy–Schwarz gives $|\\widehat{a_i a_j}(k)|\\le\\|a_i\\|_2\\|a_j\\|_2$, hence the Euclidean tensor norm of this coefficient is at most $C_d\\|a\\|_2^2$. The coefficient of its divergence is obtained by multiplying by $i\\kappa_k$, and $P_k$ does not increase its norm.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The square of the resulting negative norm is bounded by\n$C_d\\|a\\|_2^4\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^{-r}|\\kappa_k|^2$.\nFor lattice shell $m\\le|k|<m+1$, the number of points is at most $C_dm^{d-1}$, while each summand is at most $C_{L,r}m^{2-2r}$ for $m\\ge1$; the shell series is dominated by $\\sum_m m^{d+1-2r}$, which converges because $r>d/2+1$. The zero mode contributes zero. Taking square roots proves the bound and that the coefficients define an element of $H^{-r}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for lem-fd-negative-space-nonlinear-bound explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a=0 all Fourier coefficients and the asserted negative norm vanish in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-fd-negative-space-nonlinear-bound has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-fd-negative-space-nonlinear-bound makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-fd-negative-space-nonlinear-bound has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-fd-negative-space-nonlinear-bound performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-fd-negative-space-nonlinear-bound states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-fd-negative-space-nonlinear-bound states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "def-fd-periodic-leray-hopf": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-weak-time-continuity",
+          "source_section": "Definition",
+          "quote": "Let $H,V,H^{-r}$ be the spaces of Periodic solenoidal Fourier spaces, let\n$T>0$, and identify time-dependent functions that agree almost everywhere.\nA map $u:[0,T]\\to H$ is in $C_w([0,T];H)$ when\n$t\\mapsto (u(t),h)_H$ is continuous for each fixed $h\\in H$. A map\n$u:(0,T)\\to X$ into a separable Hilbert space $X$ is strongly measurable\nwhen it is an almost-everywhere pointwise limit of measurable simple\n$X$-valued maps. For $1\\le p<\\infty$, $L^p(0,T;X)$ consists of strongly\nmeasurable maps with $\\int_0^T\\|u(t)\\|_X^pdt<\\infty$; $L^\\infty(0,T;X)$\nuses the essential supremum norm. In this page, $L^p_{\\rm loc}(0,\\infty;X)$\nmeans membership on every finite interval $(0,T)$. These conventions also\napply with $X=V$ and $X=H^{-r}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each clause is a predicate on the stated equivalence class: the Bochner terms are finite on compact time intervals, the tensor term is integrable because $u\\in L^\\infty_tL^2_x$, and the gradient term is integrable by $u\\in L^2_{\\rm loc}V$. The displayed weak identity therefore has well-defined pairings with its tests.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The sign and initial term in that identity agree with the distributional derivative convention in [F2]; the all-time energy clause and the almost-everywhere restart clause are additional explicit requirements, and neither implies a smoothness or uniqueness clause. Thus the definition is unambiguous under the stated conventions.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for def-fd-periodic-leray-hopf explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Definition specifies a global weak solution by its tests, initial trace and initial/restart inequalities; steps 1.1–1.2 establish well-defined pairings and conventions. d>=2 and L>0 fix the spatial torus. The sums in tensor and gradient pairings run through fixed {1,...,d}; an empty component family is excluded by d>=2.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u0=0 the zero field satisfies every displayed weak and energy clause in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-leray-hopf has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-leray-hopf makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition includes t=0 in the initial inequality and restart set, as stated and verified in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-leray-hopf performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-leray-hopf states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "def-fd-periodic-leray-hopf states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "lem-fd-bounded-compactness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-bounded-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set. Let\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ denote smooth compactly supported vector\nfields and set\n$$D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}.$$\nLet $H$ be the closure of $D_\\sigma(\\Omega)$ in\n$L^2(\\Omega;\\mathbb R^3)$, and let $V$ be its closure in\n$H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ and weak derivatives define the $H^1$\nnorm. Use $\\|a\\|_H=\\|a\\|_2$ and\n$\\|a\\|_V^2=\\|a\\|_2^2+\\|\\nabla a\\|_2^2$. Each $V$ element has zero\nextension in $H^1(\\mathbb R^3)$ and distributional divergence zero. This\nclosure definition does not identify $V$ with every divergence-free member\nof $H_0^1(\\Omega;\\mathbb R^3)$ on an arbitrary open set, and it makes no\npointwise boundary trace assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-bounded-solenoidal-basis",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every nonempty bounded open\n$\\Omega\\subset\\mathbb R^3$, the closure spaces $H,V$ of\nBounded no-slip solenoidal closure spaces are separable Hilbert spaces, with\n$V\\hookrightarrow H$ continuous and dense. There is a countable sequence\n$e_j\\in D_\\sigma(\\Omega)$ that is orthonormal in $H$ and whose finite linear\nspan is dense in both $H$ and $V$. No Stokes eigenfunction regularity or\nidentification of $V$ with a larger solenoidal space is asserted.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-zero-extension-from-w-one-p-zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For any open $\\Omega\\subseteq\\mathbb R^n$,\n$n\\ge1$, any $1\\le p\\le\\infty$ and any\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, extension by zero\n$$E_0u(x)=u(x)\\ \\ (x\\in\\Omega),\\qquad E_0u(x)=0\\ \\ (x\\notin\\Omega),$$\nacted on representatives, sends $W_0^{1,p}(\\Omega;\\mathbb K)$ linearly into\n$W^{1,p}(\\mathbb R^n;\\mathbb K)$. For every $u\\in W_0^{1,p}(\\Omega;\\mathbb K)$\nand every coordinate direction $i$, the class $D_i(E_0u)$ is the zero\nextension of the class $D_iu$, and every $L^p$ component norm is preserved:\n$$\\|E_0u\\|_{L^p(\\mathbb R^n)}=\\|u\\|_{L^p(\\Omega)},\\qquad \\|D_i(E_0u)\\|_{L^p(\\mathbb R^n)}=\\|D_iu\\|_{L^p(\\Omega)},$$\nso that $\\|E_0u\\|_{W^{1,p}(\\mathbb R^n)}=\\|u\\|_{W^{1,p}(\\Omega)}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)).\n\nLet $a<b$ and let $f\\in L^1([a,b])$. Fix a measurable integrable representative, also denoted by $f$, if $L^1([a,b])$ is interpreted as a space of almost-everywhere equivalence classes. Define\n$$F(x):=\\int_a^x f(t)\\,dt\\qquad(a\\le x\\le b).$$\nThen there is a measurable set $E\\subseteq(a,b)$ whose complement in $(a,b)$ has Lebesgue measure zero such that $F$ is differentiable at every $x\\in E$ and\n$$F'(x)=f(x)\\qquad(x\\in E).$$\nThe primitive $F$ is independent of the chosen representative; the almost-everywhere derivative identity holds for every fixed measurable integrable representative.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $w\\in C_c^\\infty(\\mathbb R^3)$, [F5] and Cauchy–Schwarz in the segment parameter give\n$$|w(x-h)-w(x)|^2\\le |h|^2\\int_0^1|\\nabla w(x-sh)|^2ds.$$\nIntegrating in $x$, using translation invariance and [F4], yields\n$\\|w(\\cdot-h)-w\\|_2\\le|h|\\|\\nabla w\\|_2$. Density and the isometric zero extension [F3] extend this estimate to every $a\\in V$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a nonnegative $\\eta\\in C_c^\\infty(\\mathbb R^3)$ with integral one and set $\\eta_\\epsilon(x)=\\epsilon^{-3}\\eta(x/\\epsilon)$. Jensen's inequality for the probability density $\\eta_\\epsilon$ and [F4] give\n$$\\|E_0a-\\eta_\\epsilon*E_0a\\|_2^2\\le\\int\\eta_\\epsilon(h)\\|E_0a(\\cdot-h)-E_0a\\|_2^2dh\\le C_\\eta^2\\epsilon^2\\|\\nabla a\\|_2^2.$$\nFor the $V$ unit ball this error is uniform and tends to zero with $\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $\\epsilon$, all mollified zero extensions have support in one compact box. Cauchy–Schwarz bounds their sup norms by $\\|\\eta_\\epsilon\\|_2\\|a\\|_2$ and their first derivatives by $\\|\\nabla\\eta_\\epsilon\\|_2\\|a\\|_2$, uniformly on the $V$ unit ball. Cover the box by a finite grid fine enough that the derivative bound changes every value by less than a prescribed tolerance; quantize the bounded vector values at grid points in a finite lattice. The resulting finitely many piecewise-constant fields approximate every mollified field in sup norm, hence in $L^2$ on the finite box. Step 2.1 transfers these finite nets to finite $L^2$ nets for the original $V$ unit ball, with arbitrarily small error. Thus that ball is totally bounded in $H$; completeness of $H$ from [F2] makes its closure compact.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For every $a$ in that compact closure, $\\Pi_Ka\\to a$ in $H$ by the $H$-basis property in [F2]. Given $\\epsilon>0$, take a finite $\\epsilon$-net of the compact set and choose $K$ so that $\\|(I-\\Pi_K)b\\|<\\epsilon$ at each net point $b$. Since $I-\\Pi_K$ is an orthogonal contraction, the triangle inequality gives $\\sup_{\\|a\\|_V\\le1}\\|(I-\\Pi_K)a\\|\\le2\\epsilon$. These suprema decrease with $K$; taking them as $\\delta_K$ proves $\\delta_K\\to0$ and, by homogeneity, the asserted estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for lem-fd-bounded-compactness explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a=0 the projection-tail inequality in step 4.1 is immediate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For K=1, Pi_1 is projection onto span(e_1). Step 4.1 defines delta_1 as the supremum of ||(I-Pi_1)a|| on the V unit ball and proves the asserted bound by homogeneity; the one-mode projection has no exceptional denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-compactness makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-compactness has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-compactness performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-compactness states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-compactness states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "lem-fd-bounded-dual-separability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-bounded-solenoidal-basis",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every nonempty bounded open\n$\\Omega\\subset\\mathbb R^3$, the closure spaces $H,V$ of\nBounded no-slip solenoidal closure spaces are separable Hilbert spaces, with\n$V\\hookrightarrow H$ continuous and dense. There is a countable sequence\n$e_j\\in D_\\sigma(\\Omega)$ that is orthonormal in $H$ and whose finite linear\nspan is dense in both $H$ and $V$. No Stokes eigenfunction regularity or\nidentification of $V$ with a larger solenoidal space is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\ell\\in V^*$ be nonzero. Its kernel $K=\\{v:\\ell(v)=0\\}$ is a closed linear subspace. Choose $x\\notin K$ and put $d_0=\\inf_{k\\in K}\\|x-k\\|_V$. By [F2], choose $k_n\\in K$ with $\\|x-k_n\\|_V\\to d_0$. Since $(k_n+k_m)/2\\in K$, the parallelogram identity yields\n$$\\|k_n-k_m\\|_V^2=2\\|x-k_n\\|_V^2+2\\|x-k_m\\|_V^2-4\\left\\|x-\\frac{k_n+k_m}{2}\\right\\|_V^2\\le2\\|x-k_n\\|_V^2+2\\|x-k_m\\|_V^2-4d_0^2,$$\nwhich tends to zero as $n,m\\to\\infty$. Thus $(k_n)$ is Cauchy; completeness and closedness give a limit $k_0\\in K$ attaining the distance. Set $y=x-k_0\\ne0$; because $k_0\\in K$ and $x\\notin K$, $\\ell(y)=\\ell(x)\\ne0$. For any $k\\in K$, the quadratic $\\|y-tk\\|_V^2$ has its minimum at $t=0$, so its linear coefficient vanishes and $(y,k)_V=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $z\\in V$, the vector $z-\\ell(z)y/\\ell(y)$ belongs to $K$. Orthogonality from step 1.1 therefore gives\n$$\\ell(z)=\\frac{\\ell(y)}{\\|y\\|_V^2}(y,z)_V=(w_\\ell,z)_V,\\qquad w_\\ell:=\\frac{\\ell(y)}{\\|y\\|_V^2}y.$$\nThe zero functional is represented by $w_0=0$. If two vectors represent the same functional, their difference is orthogonal to every vector and hence is zero. Cauchy–Schwarz gives $\\|Jw\\|_{V^*}\\le\\|w\\|_V$, while testing at $v=w/\\|w\\|_V$ for $w\\ne0$ gives equality. Thus $J$ is a linear isometric bijection.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The image under an isometry of a countable dense subset of $V$ is countable and dense in $V^*$ because $J$ is onto. The Riesz isometry transports the Hilbert inner product of $V$ to $V^*$, so the dual is a separable real Hilbert space.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for lem-fd-bounded-dual-separability explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero functional is represented by w0=0 explicitly in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-dual-separability has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-dual-separability makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-dual-separability has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable selection under the stated choice hypotheses used for the construction occurs in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-dual-separability states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-fd-bounded-dual-separability states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "lem-fd-finite-mode-compactness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$. Define\n$H^s(\\mathbb T_L^d)$ by\n$$\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty,$$\nfor $s\\ge0$, with the square root of this sum as norm; the weight is dimensionless. The\nreal solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. The orthogonal solenoidal projection\n$P$ has multiplier $P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$; the\nfor integer $N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the completion of finite Fourier coefficient sequences\nin the norm squared $\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-weak-time-continuity",
+          "source_section": "Definition",
+          "quote": "Let $H,V,H^{-r}$ be the spaces of Periodic solenoidal Fourier spaces, let\n$T>0$, and identify time-dependent functions that agree almost everywhere.\nA map $u:[0,T]\\to H$ is in $C_w([0,T];H)$ when\n$t\\mapsto (u(t),h)_H$ is continuous for each fixed $h\\in H$. A map\n$u:(0,T)\\to X$ into a separable Hilbert space $X$ is strongly measurable\nwhen it is an almost-everywhere pointwise limit of measurable simple\n$X$-valued maps. For $1\\le p<\\infty$, $L^p(0,T;X)$ consists of strongly\nmeasurable maps with $\\int_0^T\\|u(t)\\|_X^pdt<\\infty$; $L^\\infty(0,T;X)$\nuses the essential supremum norm. In this page, $L^p_{\\rm loc}(0,\\infty;X)$\nmeans membership on every finite interval $(0,T)$. These conventions also\napply with $X=V$ and $X=H^{-r}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed $k$, the coefficients are bounded by $A$ and have common Lipschitz constant $C_k$. Select a subsequence converging at every rational time by successive finite-dimensional Bolzano–Weierstrass selections and Countable Choice; the common Lipschitz bound and a finite rational mesh then make this subsequence uniformly Cauchy on $[0,T]$. Diagonalizing over the countable lattice gives one subsequence with uniform convergence for every coefficient.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At each time, every finite Fourier sum of squared limiting coefficients is at most $A^2$; Parseval therefore defines $z(t)\\in H$ with norm at most $A$. Pairings with finite Fourier sums are continuous in time. For arbitrary $h\\in H$, approximate $h$ by its finite Fourier truncations; the pairing error is at most $2A\\|h-\\Pi_Kh\\|_2$, uniformly in time, so $t\\mapsto(z(t),h)$ is continuous. Finite gradient sums integrated in time pass to the limit and are bounded by $B$; monotone convergence of these sums gives $z\\in L^2(0,T;V)$ and the asserted gradient bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $|k|_\\infty>K$, then $|\\kappa_k|\\ge2\\pi K/L$, so Parseval and the gradient bound give\n$\\int_0^T\\sum_{|k|_\\infty>K}|\\widehat z_n(k,t)|^2dt\\le BL^2/(4\\pi^2K^2)$; the same estimate holds for $z$. On the finitely many modes $|k|_\\infty\\le K$, uniform coefficient convergence gives strong $L^2$ convergence. Letting $K\\to\\infty$ proves strong convergence in $L^2(0,T;H)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The product estimate\n$\\|z_n\\otimes z_n-z\\otimes z\\|_{L^1_{t,x}}\\le(\\|z_n\\|_{L^2_{t,x}}+\\|z\\|_{L^2_{t,x}})\\|z_n-z\\|_{L^2_{t,x}}$\nproves strong $L^1$ convergence of the quadratic tensors. Choose a further subsequence for which the squared $L^2_tH$ errors have finite sum. By [F3], their pointwise sum is finite for almost every time, so the subsequence converges strongly in $H$ at each such time.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for lem-fd-finite-mode-compactness explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sequence satisfies the uniform bounds and converges to the zero limit in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A curve supported on a single Fourier frequency obeys the same fixed-mode compactness argument in step 1.1. Step 2.1 reconstructs the limiting coefficient and step 3.1 gives strong L2 convergence; constant-mode curves are also admitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-fd-finite-mode-compactness makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Uniform coefficient convergence and limits are on closed [0,T], including both endpoints, by steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable selection under the stated choice hypotheses used for the construction occurs in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-fd-finite-mode-compactness states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-fd-finite-mode-compactness states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "lem-fd-no-slip-lsix": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-bounded-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set. Let\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ denote smooth compactly supported vector\nfields and set\n$$D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}.$$\nLet $H$ be the closure of $D_\\sigma(\\Omega)$ in\n$L^2(\\Omega;\\mathbb R^3)$, and let $V$ be its closure in\n$H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ and weak derivatives define the $H^1$\nnorm. Use $\\|a\\|_H=\\|a\\|_2$ and\n$\\|a\\|_V^2=\\|a\\|_2^2+\\|\\nabla a\\|_2^2$. Each $V$ element has zero\nextension in $H^1(\\mathbb R^3)$ and distributional divergence zero. This\nclosure definition does not identify $V$ with every divergence-free member\nof $H_0^1(\\Omega;\\mathbb R^3)$ on an arbitrary open set, and it makes no\npointwise boundary trace assertion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)).\n\nLet $a<b$ and let $f\\in L^1([a,b])$. Fix a measurable integrable representative, also denoted by $f$, if $L^1([a,b])$ is interpreted as a space of almost-everywhere equivalence classes. Define\n$$F(x):=\\int_a^x f(t)\\,dt\\qquad(a\\le x\\le b).$$\nThen there is a measurable set $E\\subseteq(a,b)$ whose complement in $(a,b)$ has Lebesgue measure zero such that $F$ is differentiable at every $x\\in E$ and\n$$F'(x)=f(x)\\qquad(x\\in E).$$\nThe primitive $F$ is independent of the chosen representative; the almost-everywhere derivative identity holds for every fixed measurable integrable representative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-fd-bounded-solenoidal-basis",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every nonempty bounded open\n$\\Omega\\subset\\mathbb R^3$, the closure spaces $H,V$ of\nBounded no-slip solenoidal closure spaces are separable Hilbert spaces, with\n$V\\hookrightarrow H$ continuous and dense. There is a countable sequence\n$e_j\\in D_\\sigma(\\Omega)$ that is orthonormal in $H$ and whose finite linear\nspan is dense in both $H$ and $V$. No Stokes eigenfunction regularity or\nidentification of $V$ with a larger solenoidal space is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-fd-weak-time-continuity",
+          "source_section": "Definition",
+          "quote": "Let $H,V,H^{-r}$ be the spaces of Periodic solenoidal Fourier spaces, let\n$T>0$, and identify time-dependent functions that agree almost everywhere.\nA map $u:[0,T]\\to H$ is in $C_w([0,T];H)$ when\n$t\\mapsto (u(t),h)_H$ is continuous for each fixed $h\\in H$. A map\n$u:(0,T)\\to X$ into a separable Hilbert space $X$ is strongly measurable\nwhen it is an almost-everywhere pointwise limit of measurable simple\n$X$-valued maps. For $1\\le p<\\infty$, $L^p(0,T;X)$ consists of strongly\nmeasurable maps with $\\int_0^T\\|u(t)\\|_X^pdt<\\infty$; $L^\\infty(0,T;X)$\nuses the essential supremum norm. In this page, $L^p_{\\rm loc}(0,\\infty;X)$\nmeans membership on every finite interval $(0,T)$. These conventions also\napply with $X=V$ and $X=H^{-r}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-fd-bounded-dual-separability",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $V$ be the separable real Hilbert space supplied by the bounded solenoidal basis\nresult above. Its continuous real-linear dual $V^*$,\nwith norm $\\|\\ell\\|_{V^*}=\\sup_{\\|v\\|_V\\le1}|\\ell(v)|$, is a separable real\nHilbert space. The Riesz map\n$$J:V\\to V^*,\\qquad Jw(v)=(w,v)_V$$\nis a surjective linear isometry.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $h\\in C_c^\\infty(\\mathbb R^3)$ define $A_1(x_2,x_3)=\\int_{\\mathbb R}|\\partial_1h(x_1,x_2,x_3)|dx_1$, and define $A_2(x_1,x_3)$ and $A_3(x_1,x_2)$ analogously. By [F4], $|h(x)|\\le A_i(x_{\\widehat i})$ for each $i$, hence $|h|^{3/2}\\le(A_1A_2A_3)^{1/2}$. Put $B_2(x_3)=\\int A_2(x_1,x_3)dx_1$ and $B_3(x_2)=\\int A_3(x_1,x_2)dx_1$. Cauchy–Schwarz in $x_1$ gives $\\int(A_2A_3)^{1/2}dx_1\\le(B_2B_3)^{1/2}$; applying Cauchy–Schwarz in $(x_2,x_3)$ to the remaining $A_1^{1/2}(B_2B_3)^{1/2}$ gives\n$$\\int_{\\mathbb R^3}|h|^{3/2}\\le(\\int_{\\mathbb R^2}A_1)^{1/2}(\\int_{\\mathbb R}B_2)^{1/2}(\\int_{\\mathbb R}B_3)^{1/2}=\\prod_{i=1}^3(\\int_{\\mathbb R^3}|\\partial_i h|)^{1/2}.$$\nThe changes of integration order are justified by [F3]. Raising to the power $2/3$ yields $\\|h\\|_{3/2}\\le\\prod_i\\|\\partial_i h\\|_1^{1/3}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a smooth compactly supported vector field $w$, set $h=|w|^4$, which is smooth, and note $|\\partial_i h|\\le4|w|^3|\\partial_iw|$. Hölder gives $\\|\\partial_i h\\|_1\\le4\\|w\\|_6^3\\|\\partial_iw\\|_2$. Substitution into step 1.1 yields $\\|w\\|_6^4\\le4\\|w\\|_6^3\\prod_i\\|\\partial_iw\\|_2^{1/3}\\le4\\|w\\|_6^3\\|\\nabla w\\|_2$. Divide when $\\|w\\|_6>0$; if it is zero the inequality is immediate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [F5], choose $w_n\\in C_c^\\infty(\\Omega;\\mathbb R^3)$ converging to $a$ in $H^1$. The inequality of step 2.1 applied to differences makes $(w_n)$ Cauchy in $L^6$; on bounded $\\Omega$, convergence in $L^6$ also implies convergence in $L^2$, so its $L^6$ limit is the given $L^2$ class $a$. Passing to the limit proves the first inequality. Finally, $\\int|a|^4\\le(\\int|a|^2)^{1/2}(\\int|a|^6)^{1/2}$ by Cauchy–Schwarz, which proves the interpolation inequality. For almost every $t$, raising it to power $8/3$ gives $\\|u(t)\\|_4^{8/3}\\le\\|u(t)\\|_2^{2/3}\\|u(t)\\|_6^2\\le C\\|u(t)\\|_H^{2/3}\\|u(t)\\|_V^2$. Integrating and using $u\\in L^\\infty_tH\\cap L^2_tV$ proves the stated $L^{8/3}_tL^4_x$ bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each time, Hölder gives $|b_u(t)(\\phi)|\\le\\|u(t)\\|_4^2\\|\\nabla\\phi\\|_2$, so $b_u(t)\\in V^*$ and its norm is at most $\\|u(t)\\|_4^2$. The map $a\\mapsto b_a$ is continuous from $L^4$ to $V^*$ because $\\|b_a-b_c\\|_{V^*}\\le(\\|a\\|_4+\\|c\\|_4)\\|a-c\\|_4$. The continuous embedding and strong measurability of $u$ in $V$ therefore give strong measurability of $t\\mapsto b_u(t)$ in the separable Hilbert space $V^*$ by [F6,F8]. Finally $\\int_0^T\\|b_u(t)\\|_{V^*}^{4/3}dt\\le\\int_0^T\\|u(t)\\|_4^{8/3}dt<\\infty$ by step 3.1; [F7] gives $b_u\\in L^{4/3}(0,T;V^*)$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for lem-fd-no-slip-lsix explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Substitution of the zero field in the defining relation or estimate of lem-fd-no-slip-lsix gives the zero identity in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-fd-no-slip-lsix has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-fd-no-slip-lsix makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The time interpolation integrates on the full finite interval [0,T] with no endpoint loss in steps 3.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable selection under the stated choice hypotheses used for the construction occurs in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-fd-no-slip-lsix states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-fd-no-slip-lsix states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "thm-fd-periodic-global-weak-existence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$. Define\n$H^s(\\mathbb T_L^d)$ by\n$$\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty,$$\nfor $s\\ge0$, with the square root of this sum as norm; the weight is dimensionless. The\nreal solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. The orthogonal solenoidal projection\n$P$ has multiplier $P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$; the\nfor integer $N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the completion of finite Fourier coefficient sequences\nin the norm squared $\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-leray-hopf",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$, $L>0$, $\\nu>0$, $u_0\\in H$, and use the spaces and weak-time\nconventions of Periodic solenoidal Fourier spaces and\nWeak time continuity and energy spaces. A **global unforced periodic Leray–Hopf\nsolution** with data $(\\nu,u_0)$ is a map\n$u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$\nsuch that $u(0)=u_0$ in $H$, $\\|u(t)-u_0\\|_H\\to0$ as $t\\downarrow0$, and for\nevery smooth real periodic divergence-free test field\n$\\phi:[0,\\infty)\\times\\mathbb T_L^d\\to\\mathbb R^d$ compactly supported in\ntime,\n$$\\int_0^\\infty\\!\\big[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\big]dt+(u_0,\\phi(0))=0.$$\nIt must also satisfy, for every $t\\ge0$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2,$$\nand there must be a full-measure set $S\\subset(0,\\infty)$ such that for\nevery $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.$$\nFor a matrix field $A$, $(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$. The tensor pairing means $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$;\nthe gradient pairing means $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$.\nAll derivatives in the weak identity are distributional; the definition\nasserts neither uniqueness nor smoothness.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-finite-mode-compactness",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge2$, $L>0$, and $T>0$. Let $z_n:[0,T]\\to H$ be continuous\nfinite-Fourier-sum curves such that, for constants $A,B<\\infty$,\n$$\\sup_{n,t}\\|z_n(t)\\|_H\\le A,\\qquad \\sup_n\\int_0^T\\|\\nabla z_n(t)\\|_2^2dt\\le B,$$\nand for each $k\\in\\mathbb Z^d$ there is $C_k<\\infty$ with\n$|\\widehat z_n(k,t)-\\widehat z_n(k,s)|\\le C_k|t-s|$ for all $n,s,t$.\nThen some subsequence converges uniformly in each Fourier coefficient to\n$z\\in C_w([0,T];H)\\cap L^2(0,T;V)$, with\n$\\sup_t\\|z(t)\\|_H\\le A$ and $\\int_0^T\\|\\nabla z\\|_2^2dt\\le B$; it also\nconverges strongly to $z$ in $L^2(0,T;H)$ and, after a further subsequence,\nstrongly in $H$ for almost every $t$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-negative-space-nonlinear-bound",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge2$, $L>0$, $r>d/2+1$, and $a\\in L^2(\\mathbb T_L^d;\\mathbb R^d)$.\nFor the Fourier projection $P$ and divergence convention of\nPeriodic solenoidal Fourier spaces, the distribution $P\\operatorname{div}(a\\otimes a)$ belongs to $H^{-r}$ and satisfies\n$$\\|P\\operatorname{div}(a\\otimes a)\\|_{H^{-r}}\\le C(d,L,r)\\|a\\|_2^2.$$\nHere $(a\\otimes a)_{ij}=a_i a_j$ and\n$(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$. The estimate uses no\nthree-dimensional singular-integral bound.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $N\\ge1$, let $X_N=\\operatorname{ran}\\Pi_N\\cap H$ and solve in this finite-dimensional real space\n$$\\partial_tu_N+\\Pi_NP\\operatorname{div}(u_N\\otimes u_N)=\\nu\\Delta u_N,\\qquad u_N(0)=\\Pi_Nu_0.$$\nChoose real orthonormal coordinates on $X_N$, whose finite Fourier coefficients satisfy the real conjugation and solenoidal conditions. The right side preserves this real space and is a polynomial vector field $F_N:\\mathbb R^m\\to\\mathbb R^m$. It is continuous on the open time-state domain $\\mathbb R\\times\\mathbb R^m$; its derivative is bounded on each closed coefficient ball, so integration along line segments gives a Lipschitz bound there. Thus [F6] gives a unique local solution through the projected initial value. Pairing with $u_N$ removes $P,\\Pi_N$ by orthogonality, and periodic integration by parts gives $\\int (u_N\\cdot\\nabla)u_N\\cdot u_N=\\int\\operatorname{div}(u_N|u_N|^2/2)=0$. Thus\n$$\\|u_N(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u_N\\|_2^2d\\tau=\\|u_N(s)\\|_2^2$$\non every local existence interval. [given, F1, F6, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the overlap uniqueness in [F6], all local solutions through the initial data glue on their interval union to one maximal solution. The energy identity bounds its coordinates in the fixed finite-dimensional real space $X_N$ for all nonnegative times of existence. The polynomial vector field is bounded on that closed coefficient ball, so the coordinate curve is uniformly Lipschitz in time. If its positive endpoint $\\beta$ were finite, completeness of $\\mathbb R^m$ would give a limit $a_*$ as $t\\uparrow\\beta$. Apply [F6] at $(\\beta,a_*)$ and join the resulting local solution to the old curve. The derivatives match because both approach $F_N(a_*)$, so this is a $C^1$ solution extending the maximal interval, a contradiction. Therefore every $u_N$ is forward global and the energy identity holds for all $0\\le s\\le t$. [given, F6, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $k$, the nonlinear coefficient is bounded by $C|\\kappa_k|\\|u_N\\|_2^2$ and the viscous coefficient by $\\nu|\\kappa_k|^2\\|u_N\\|_2$. The energy identity supplies uniform $L^\\infty H$ and $L^2V$ bounds. The fixed-mode derivative bound is therefore uniform in $N$; [F3] gives subsequential compactness on each finite horizon. Applying [F5] diagonally over integer horizons yields one global limit $u\\in C_w([0,\\infty);H)\\cap L^2_{\\rm loc}V$ with the stated energy bounds. [given, F1, F3, F4, F5, step 1.1]",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For a finite Fourier divergence-free test, uniform coefficient convergence passes the time-linear terms, strong $L^2_tH$ convergence passes the quadratic term by [F3], and the viscous term passes after integration by parts as $+\\nu(u_N,\\Delta\\phi)$, using strong $L^2_tH$ convergence. A smooth periodic test and its time derivative have uniformly convergent Fourier truncations on their compact time support, by repeated integration by parts in space; the uniform energy bound controls the truncation errors. Thus the weak identity in [F2] holds for every admissible test, including its initial term because $\\Pi_Nu_0\\to u_0$ in $H$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each fixed $t$, finite coefficient convergence gives $\\|u(t)\\|_2^2\\le\\liminf_N\\|u_N(t)\\|_2^2$. For the gradient integral on $[s,t]$, each finite Fourier sum is the limit of the corresponding Galerkin sum and is bounded above by the full Galerkin integral; increasing the finite sets gives the lower-semicontinuous bound for $\\int_s^t\\|\\nabla u\\|_2^2$. At $s=0$, use $\\Pi_Nu_0\\to u_0$ in the Galerkin equality to obtain the initial energy inequality for every $t$. For almost every $s$, [F3] gives strong $H$ convergence $u_N(s)\\to u(s)$ along the chosen subsequence; passing the equality from that $s$ yields the restart inequality for every $t\\ge s$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The coefficient convergence implies $u(t)\\rightharpoonup u_0$ in $H$ as $t\\downarrow0$. The initial energy inequality gives $\\limsup_{t\\downarrow0}\\|u(t)\\|_2\\le\\|u_0\\|_2$; weak convergence and the Hilbert identity for $\\|u(t)-u_0\\|_2^2$ then imply strong convergence to $u_0$. Together the compactness, weak-limit, and energy arguments verify every clause of the Leray–Hopf definition; the finite-dimensional local existence and continuation used above are supplied by [F6]. [given, F2, F5, F6, step 2.2, step 3.2] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "step 2.2",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for thm-fd-periodic-global-weak-existence explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u0=0 every Galerkin field is zero and the estimates and limit in steps 1.1–4.1 remain valid."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-fd-periodic-global-weak-existence has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-fd-periodic-global-weak-existence makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial inequality is proved at s=0 for every t, and the trace at t↓0 is proved in steps 3.2–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable selection under the stated choice hypotheses used for the construction occurs in step 2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-fd-periodic-global-weak-existence states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-fd-periodic-global-weak-existence states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "prop-fd-pressure-reconstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-periodic-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, $L>0$, $\\nu>0$, and $u_0\\in H$ for the periodic solenoidal\nFourier spaces defined above. Then there\nexists a global unforced periodic Leray–Hopf solution with data $(\\nu,u_0)$\nunder the definition above. This is an existence assertion; it asserts no\nuniqueness or global smoothness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$. Define\n$H^s(\\mathbb T_L^d)$ by\n$$\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty,$$\nfor $s\\ge0$, with the square root of this sum as norm; the weight is dimensionless. The\nreal solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. The orthogonal solenoidal projection\n$P$ has multiplier $P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$; the\nfor integer $N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the completion of finite Fourier coefficient sequences\nin the norm squared $\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Omega)\\to\\mathbb C$, with the test-function topology of [[def-test-function-topology]]. Their vector space is denoted $\\mathcal D'(\\Omega)$. Write $\\langle u,\\varphi\\rangle=u(\\varphi)$; the pairing is linear in both arguments, with no conjugation.\n\nContinuity means continuity for that topology: for each $\\varepsilon>0$ the set $\\{|u(\\varphi)|<\\varepsilon\\}$ contains a zero-neighborhood. By linearity this suffices at every point. Sums and scalar multiples remain continuous and linear, so the indicated collection is a complex vector space. If $\\Omega=\\varnothing$, its test space is zero and its distribution space is zero as well. The finite-order estimate and the sequential criterion are established separately; neither substitutes for continuity in this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, write $f\\in L^1_{\\mathrm{loc}}(\\Omega)$ when $f:\\Omega\\to\\mathbb C$ is Lebesgue measurable and $\\int_K|f|<\\infty$ for every compact $K\\subseteq\\Omega$. This extends [[def-locally-integrable-function-on-r-n]]: equivalently, require integrability on every ball whose closure is a compact subset of $\\Omega$. Such balls finitely cover each compact $K$, and conversely their closures are compact; on all of $\\mathbb R^n$, any ball lies in a larger compact closed ball.\n\nFor a test $\\varphi$ as in [[def-test-function-space-d-of-an-open-set]], define the **regular functional**\n\n$$\\langle u_f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx.$$\n\nThis is well-defined since $|\\int f\\varphi|\\le\\sup_K|\\varphi|\\int_K|f|$ for $K=\\operatorname{supp}\\varphi$. It is complex-linear in $f$ and in $\\varphi$ and depends only on the almost-everywhere class of $f$. For an empty support the integral is zero. The subsequent embedding theorem establishes continuity, so that this is a distribution, and injectivity modulo almost-everywhere equality. That theorem states the Countable Choice cost of its injectivity proof; no choice is needed to define the displayed pairing.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $T=u\\otimes u$. Since $u\\in L^\\infty_tL^2_x$, $T\\in L^\\infty_{\\rm loc}(0,\\infty;L^1_x)$, and each Fourier coefficient $\\widehat T(k,t)$ is measurable and bounded on finite time intervals. For $k\\ne0$ set\n$$\\widehat\\pi(k,t)=-\\sum_{a,b=1}^d\\frac{\\kappa_{k,a}\\kappa_{k,b}}{|\\kappa_k|^2}\\widehat T_{ab}(k,t),\\qquad \\widehat\\pi(0,t)=0.$$\nThe coefficients are bounded in $k$ by $C_d\\|u(t)\\|_2^2$. For a smooth spacetime test $\\phi$, repeated spatial integration by parts makes $\\widehat\\phi(k,t)$ decay faster than any power of $|k|$, uniformly with each time derivative on its compact support. Therefore $\\langle\\pi,\\phi\\rangle=\\int\\sum_k\\widehat\\pi(k,t)\\widehat\\phi(-k,t)dt$ converges absolutely and is bounded by a finite test seminorm; it defines a spacetime distribution with zero spatial mean.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At each nonzero frequency, the Fourier multiplier identity gives $i\\kappa_k\\widehat\\pi(k)=- (I-P_k)\\,i\\sum_b\\kappa_{k,b}\\widehat T_{\\cdot b}(k)$; the zero-frequency identity is also valid because both sides vanish. The weak identity in [F1] is exactly $\\partial_tu+P\\operatorname{div}T-\\nu\\Delta u=0$ after testing against solenoidal fields. Adding the displayed gradient identity yields $\\partial_tu+\\operatorname{div}T+\\nabla\\pi-\\nu\\Delta u=0$ for every smooth periodic vector test, which is the claimed equation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\pi_1,\\pi_2$ are two such mean-zero distributions, the difference has zero spatial gradient. Its $k$th Fourier coefficient therefore vanishes for every $k\\ne0$, since $i\\kappa_k\\ne0$; its zero coefficient vanishes by the mean-zero normalization. All Fourier coefficients of the difference are zero, so Fourier completeness implies $\\pi_1=\\pi_2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for prop-fd-pressure-reconstruction explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=0 the tensor, residual, and normalized pressure constructed in step 1.1 are zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "prop-fd-pressure-reconstruction has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "prop-fd-pressure-reconstruction makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "prop-fd-pressure-reconstruction has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "prop-fd-pressure-reconstruction performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "prop-fd-pressure-reconstruction states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "prop-fd-pressure-reconstruction states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "thm-fd-bounded-global-weak-existence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-bounded-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set. Let\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ denote smooth compactly supported vector\nfields and set\n$$D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}.$$\nLet $H$ be the closure of $D_\\sigma(\\Omega)$ in\n$L^2(\\Omega;\\mathbb R^3)$, and let $V$ be its closure in\n$H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ and weak derivatives define the $H^1$\nnorm. Use $\\|a\\|_H=\\|a\\|_2$ and\n$\\|a\\|_V^2=\\|a\\|_2^2+\\|\\nabla a\\|_2^2$. Each $V$ element has zero\nextension in $H^1(\\mathbb R^3)$ and distributional divergence zero. This\nclosure definition does not identify $V$ with every divergence-free member\nof $H_0^1(\\Omega;\\mathbb R^3)$ on an arbitrary open set, and it makes no\npointwise boundary trace assertion.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-bounded-solenoidal-basis",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every nonempty bounded open\n$\\Omega\\subset\\mathbb R^3$, the closure spaces $H,V$ of\nBounded no-slip solenoidal closure spaces are separable Hilbert spaces, with\n$V\\hookrightarrow H$ continuous and dense. There is a countable sequence\n$e_j\\in D_\\sigma(\\Omega)$ that is orthonormal in $H$ and whose finite linear\nspan is dense in both $H$ and $V$. No Stokes eigenfunction regularity or\nidentification of $V$ with a larger solenoidal space is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-bounded-compactness",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be bounded and open, and let $H,V$ and\n$(e_j)_{j\\ge1}$ be as in the bounded closure-space and basis results on this\npage. The inclusion $V\\hookrightarrow H$ is compact. If $\\Pi_K$ is the\n$H$-orthogonal projection onto $\\operatorname{span}(e_1,\\ldots,e_K)$, then\nthere are numbers $\\delta_K\\downarrow0$ such that\n$$\\|(I-\\Pi_K)a\\|_H\\le\\delta_K\\|a\\|_V\\qquad(a\\in V).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-no-slip-lsix",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^3$ be bounded and\nopen, and let $H,V$ be the closure spaces defined above. There is a constant $C$ independent of $\\Omega$\nand $a$ such that every $a\\in H_0^1(\\Omega;\\mathbb R^3)$ satisfies\n$$\\|a\\|_{L^6(\\Omega)}\\le C\\|\\nabla a\\|_{L^2(\\Omega)},\\qquad \\|a\\|_{L^4(\\Omega)}\\le\\|a\\|_{L^2(\\Omega)}^{1/4}\\|a\\|_{L^6(\\Omega)}^{3/4}.$$\nFor $T>0$, if $u\\in L^\\infty(0,T;H)\\cap L^2(0,T;V)$, then\n$u\\in L^{8/3}(0,T;L^4(\\Omega))$. Here the time-dependent $L^p$ notation\nmeans strong measurability and integrability of the displayed norm; the\ncontinuous embedding $V\\to L^4(\\Omega)$ carries strongly measurable\n$V$-valued maps to strongly measurable $L^4$-valued maps. Let $V^*$ be the\ncontinuous real-linear dual of $V$ with its operator norm and set\n$$b_u(t)(\\phi)=-\\int_\\Omega u_i(t,x)u_j(t,x)\\partial_j\\phi_i(x)dx,\\qquad\\phi\\in V.$$\nThen $b_u(t)\\in V^*$, $t\\mapsto b_u(t)$ is strongly measurable, and\n$b_u\\in L^{4/3}(0,T;V^*)$ with\n$\\|b_u(t)\\|_{V^*}\\le\\|u(t)\\|_{L^4(\\Omega)}^2.$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-weak-time-continuity",
+          "source_section": "Definition",
+          "quote": "Let $H,V,H^{-r}$ be the spaces of Periodic solenoidal Fourier spaces, let\n$T>0$, and identify time-dependent functions that agree almost everywhere.\nA map $u:[0,T]\\to H$ is in $C_w([0,T];H)$ when\n$t\\mapsto (u(t),h)_H$ is continuous for each fixed $h\\in H$. A map\n$u:(0,T)\\to X$ into a separable Hilbert space $X$ is strongly measurable\nwhen it is an almost-everywhere pointwise limit of measurable simple\n$X$-valued maps. For $1\\le p<\\infty$, $L^p(0,T;X)$ consists of strongly\nmeasurable maps with $\\int_0^T\\|u(t)\\|_X^pdt<\\infty$; $L^\\infty(0,T;X)$\nuses the essential supremum norm. In this page, $L^p_{\\rm loc}(0,\\infty;X)$\nmeans membership on every finite interval $(0,T)$. These conventions also\napply with $X=V$ and $X=H^{-r}$.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $(e_j)$ be the basis from [F2], and set $u_N=\\sum_{j=1}^Na_j(t)e_j$ with initial value the $H$-projection of $u_0$. Solve\n$$ (u_N',e_i)_H+\\int_\\Omega(u_N\\cdot\\nabla)u_N\\cdot e_i\\,dx+\\nu(\\nabla u_N,\\nabla e_i)=0,\\quad i\\le N.$$\nBecause the $e_j$ are real and $H$-orthonormal, the displayed system has identity mass matrix and is an autonomous polynomial ODE $a'=F_N(a)$ on $\\mathbb R^N$. Its open time-state domain is $\\mathbb R\\times\\mathbb R^N$; it is continuous and its derivative is bounded on every closed coefficient ball, giving a Lipschitz bound there by integration along line segments. Hence [F9] gives its unique local solution. Pairing with $u_N$ and summing the equations cancels the transport term because $\\operatorname{div}u_N=0$ and $\\int (u_N\\cdot\\nabla)u_N\\cdot u_N=\\int\\operatorname{div}(u_N|u_N|^2/2)=0$ for its compact support. Thus\n$$\\|u_N(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u_N\\|_2^2d\\tau=\\|u_N(s)\\|_2^2.$$\nThe overlap uniqueness in [F9] glues all local solutions through the initial value on their interval union. The energy identity bounds the coefficient vector of this maximal solution for nonnegative times; $F_N$ is bounded on that closed ball, so the curve is uniformly Lipschitz in time. A finite positive endpoint would therefore have a limit $a_*\\in\\mathbb R^N$. The local solution supplied by [F9] at that endpoint and state joins to the old one with matching derivative $F_N(a_*)$, producing a $C^1$ extension and contradicting maximality. Hence $u_N$ is forward global. [given, A1, F2, F9, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For fixed $i$ and $N\\ge i$, integration by parts and the energy bound give\n$$|(u_N'(t),e_i)|\\le\\|\\nabla e_i\\|_\\infty\\|u_N(t)\\|_2^2+\\nu\\|\\nabla e_i\\|_2\\|\\nabla u_N(t)\\|_2.$$\nIntegrating from $s$ to $t$ and applying Cauchy–Schwarz bounds coefficient increments by $C_i|t-s|+D_i|t-s|^{1/2}$, uniformly in $N$ on each finite horizon. Diagonal extraction over the countable basis and integer horizons gives uniformly convergent coefficient curves. Their finite sums define for every $t$ a bounded $H$ element; approximation of an arbitrary $H$ test by finite basis sums proves weak continuity as in [F5].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each integer $m\\ge1$, the energy equality bounds $u_N$ in the separable Hilbert space $X_m=L^2(0,m;V)$. Completeness follows by selecting from a Cauchy sequence a subsequence with summable $X_m$-norm differences, applying [F6] to obtain pointwise summability in complete $V$, and then using the $L^2$ triangle inequality for convergence. Separability follows by approximating strongly measurable maps by finite-valued simple maps, their scalar indicators by the countable Fourier span from [F7], and their values by a countable dense subset of $V$ from [F2]. In any separable Hilbert space, a bounded sequence has a weakly convergent subsequence: diagonalize coordinates in a countable orthonormal basis; finite squared sums bound the limiting coordinates, their square-summable series defines a vector, and finite-basis approximation plus the uniform norm bound gives convergence against every vector. Apply this successively on $m=1,2,\\ldots$ to nested subsequences of the coefficient-convergent sequence from step 2.1, and take the diagonal subsequence. It converges weakly in every $X_m$. The limits agree on overlapping horizons: for each basis vector $e_j$ from [F2], the map $w\\mapsto(w,e_j)_H$ is continuous from $V$ to $\\mathbb R$, so the induced map $X_m\\to L^2(0,m)$ preserves weak convergence, while step 2.1 gives strong $L^2$ convergence of that coefficient to its fixed uniform limit. Uniqueness of weak limits identifies the coefficient of each $X_m$ limit with that same curve; the countable basis then identifies the $H$-valued limits almost everywhere. Thus one $u\\in L^2_{\\rm loc}(0,\\infty;V)$ is obtained on all finite horizons.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On each integer horizon $m$, [F3] gives\n$$\\int_0^m\\|(I-\\Pi_K)u_N(t)\\|_2^2dt\\le\\delta_K^2\\int_0^m\\|u_N(t)\\|_V^2dt,$$\nuniformly in $N$. The weak limit in step 3.1 has the same tail bound: restriction and $I-\\Pi_K:L^2(0,m;V)\\to L^2(0,m;H)$ are bounded linear maps, and the Hilbert norm is weakly lower semicontinuous. For each fixed $K$, the first $K$ coefficients converge uniformly by step 2.1. Choose $K$ to make both $u_N$ and $u$ tails small in $L^2(0,m;H)$, then pass to the limit in the finitely many coefficients; this proves strong convergence in $L^2(0,m;H)$ for every $m$. A further diagonal subsequence can be chosen with $\\|u_{N_j}-u\\|_{L^2(0,j;H)}^2\\le2^{-j}$. For each fixed $m$, Tonelli [F6] gives $\\sum_{j\\ge m}\\|u_{N_j}(t)-u(t)\\|_H^2<\\infty$ for almost every $t\\in(0,m)$. Intersecting these full-measure sets over integer $m$ gives a single full-measure set $S\\subset(0,\\infty)$ on which $u_{N_j}(t)\\to u(t)$ strongly in $H$. The identity\n$$\\|u_{N_j}\\otimes u_{N_j}-u\\otimes u\\|_{L^1((0,m)\\times\\Omega)}\\le(\\|u_{N_j}\\|_{L^2((0,m)\\times\\Omega)}+\\|u\\|_{L^2((0,m)\\times\\Omega)})\\|u_{N_j}-u\\|_{L^2((0,m)\\times\\Omega)}$$\nthen gives strong tensor convergence on every finite horizon.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F8",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a test field taking values in a fixed finite span of the $e_j$, the Galerkin identity is exact for all sufficiently large $N$. Uniform coefficient convergence passes the time and initial terms, strong tensor convergence from step 4.1 passes the transport term, and weak convergence in $L^2V$ passes viscosity. To pass to any compactly supported $C^1$ curve $\\phi:[0,\\infty)\\to V$, let $Q_K$ be the $V$-orthogonal projection onto $\\operatorname{span}(e_1,\\ldots,e_K)$. It is a contraction and converges strongly to the identity by [F2]; finite nets of the compact images of $\\phi$ and $\\phi_t$ make this convergence uniform in time. The nonlinear error is bounded by the uniform $L^{4/3}_tV^*$ norm from [F4] times $\\|\\phi-Q_K\\phi\\|_{L^4_tV}$; the time and viscosity errors tend to zero by the $L^\\infty H$ and $L^2V$ bounds. Thus the full weak identity holds.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For each fixed $t$, convergence of the finite coefficients gives $\\|u(t)\\|_2^2\\le\\liminf_N\\|u_N(t)\\|_2^2$. Weak convergence in $L^2V$ restricted to any $[s,t]$ gives lower semicontinuity of the gradient integral there. At $s=0$, $u_N(0)\\to u_0$ strongly, so passing the Galerkin equality proves the initial energy inequality for every $t$. At every time $s$ in the full-measure set from step 4.1, $u_N(s)\\to u(s)$ strongly; passing the same equality on $[s,t]$ gives the restart inequality for every $t\\ge s$. Coefficient convergence gives $u(t)\\rightharpoonup u_0$ as $t\\downarrow0$, and the initial energy inequality gives the norm limsup; the Hilbert identity then gives strong convergence to $u_0$. Together the Galerkin, compactness, weak-limit, and energy arguments prove the stated existence, with the finite-dimensional local existence and continuation supplied by [F9]. [given, A1, F1, F5, F6, F9, step 1.1, step 3.1, step 4.1, step 5.1] ∎",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for thm-fd-bounded-global-weak-existence explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim gives bounded-domain global weak velocity with all stated tests/energy and initial trace; steps 1.1–3.2 construct Galerkin solutions and pass weak/strong limits. The referenced H,V and basis are those defined for nonempty open Omega; steps 1.1 and 1.2 use N>=1 and fixed e_i. Tensor sums have the fixed three coordinate indices.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u0=0 the Galerkin coefficient field and its global limit are zero in steps 1.1–6.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-fd-bounded-global-weak-existence has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-fd-bounded-global-weak-existence makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial and restart inequalities hold for all stated t≥s, with s=0 included, in step 6.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable selection under the stated choice hypotheses used for the construction occurs in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-fd-bounded-global-weak-existence states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-fd-bounded-global-weak-existence states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "thm-fd-weak-smooth-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-periodic-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, $L>0$, $\\nu>0$, and $u_0\\in H$ for the periodic solenoidal\nFourier spaces defined above. Then there\nexists a global unforced periodic Leray–Hopf solution with data $(\\nu,u_0)$\nunder the definition above. This is an existence assertion; it asserts no\nuniqueness or global smoothness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "For $f\\in L^1[a,b]$, the function $I_f(x)=\\int_a^x f$ is absolutely continuous.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)).\n\nLet $a<b$ and let $f\\in L^1([a,b])$. Fix a measurable integrable representative, also denoted by $f$, if $L^1([a,b])$ is interpreted as a space of almost-everywhere equivalence classes. Define\n$$F(x):=\\int_a^x f(t)\\,dt\\qquad(a\\le x\\le b).$$\nThen there is a measurable set $E\\subseteq(a,b)$ whose complement in $(a,b)$ has Lebesgue measure zero such that $F$ is differentiable at every $x\\in E$ and\n$$F'(x)=f(x)\\qquad(x\\in E).$$\nThe primitive $F$ is independent of the chosen representative; the almost-everywhere derivative identity holds for every fixed measurable integrable representative.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "If $F,G\\in AC[a,b]$, then $FG\\in AC[a,b]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F:[a,b]\\to\\mathbb R$, the following are equivalent:\n\n1. $F$ is absolutely continuous.\n2. $F'$ exists almost everywhere, $F'\\in L^1[a,b]$, and\n$$F(x)-F(a)=\\int_a^xF'(t)\\,dt\\quad\\text{for every }x\\in[a,b].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-periodic-leray-hopf",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$, $L>0$, $\\nu>0$, $u_0\\in H$, and use the spaces and weak-time\nconventions of Periodic solenoidal Fourier spaces and\nWeak time continuity and energy spaces. A **global unforced periodic Leray–Hopf\nsolution** with data $(\\nu,u_0)$ is a map\n$u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$\nsuch that $u(0)=u_0$ in $H$, $\\|u(t)-u_0\\|_H\\to0$ as $t\\downarrow0$, and for\nevery smooth real periodic divergence-free test field\n$\\phi:[0,\\infty)\\times\\mathbb T_L^d\\to\\mathbb R^d$ compactly supported in\ntime,\n$$\\int_0^\\infty\\!\\big[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\big]dt+(u_0,\\phi(0))=0.$$\nIt must also satisfy, for every $t\\ge0$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2,$$\nand there must be a full-measure set $S\\subset(0,\\infty)$ such that for\nevery $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.$$\nFor a matrix field $A$, $(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$. The tensor pairing means $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$;\nthe gradient pairing means $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$.\nAll derivatives in the weak identity are distributional; the definition\nasserts neither uniqueness nor smoothness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $t\\in[0,T]$ and choose smooth time cutoffs converging to the indicator of $[0,t]$ in the weak identity for $u$, with test field equal to the cutoff times $v$. The terms are integrable because $u\\in L^\\infty H\\cap L^2V$ and $v,v_t,\\nabla v,q$ are bounded; $t\\mapsto(u(t),v(t))$ is continuous because $u\\in C_wH$ and $v$ is norm-continuous. Passing the cutoff limit gives\n$$ (u(t),v(t))-(u_0,v(0))=\\int_0^t\\big[(u,v_t)+(u\\otimes u,\\nabla v)-\\nu(\\nabla u,\\nabla v)\\big]ds.$$\nUsing $v_t=-\\operatorname{div}(v\\otimes v)-\\nabla q+\\nu\\Delta v$, the pressure pairing vanishes because $u$ is distributionally divergence free. Periodic integration by parts then rewrites the integrand as $(v\\otimes v,\\nabla u)+(u\\otimes u,\\nabla v)-2\\nu(\\nabla u,\\nabla v)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Testing the smooth equation by $v$, periodic integration by parts gives $\\frac12\\frac d{dt}\\|v\\|_2^2+\\nu\\|\\nabla v\\|_2^2=0$: the transport integral is $\\int\\operatorname{div}(v|v|^2/2)=0$, the pressure term is $-\\int q\\operatorname{div}v=0$, and the Laplacian term is $-\\|\\nabla v\\|_2^2$. Integrating gives the energy equality for $v$. Add it to the weak energy inequality for $u$ and subtract twice the cross identity of step 1.1. The viscous terms combine to $2\\nu\\int_0^t\\|\\nabla(u-v)\\|_2^2ds$. With $w=u-v$, incompressibility and periodic integration by parts give\n$(v\\otimes v,\\nabla u)+(u\\otimes u,\\nabla v)= (w\\otimes w,\\nabla v)$: expand $u=v+w$; the $v\\otimes v$ term has zero integral, the $v_iw_j\\partial_jv_i$ term is a divergence, and $(v\\otimes v,\\nabla w)=-(w_i v_j,\\partial_jv_i)$ cancels the remaining mixed term. Hence\n$$D(t)+2\\nu\\int_0^t\\|\\nabla w\\|_2^2ds\\le D(0)-2\\int_0^t(w\\otimes w,\\nabla v)ds.$$\nSince $|(w\\otimes w,\\nabla v)|\\le\\|\\nabla v\\|_\\infty D(s)$, dropping the nonnegative gradient integral proves the stated integral inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $a(t)=2\\|\\nabla v(t)\\|_\\infty\\in L^1(0,T)$ and $G(t)=D(0)+\\int_0^t a(s)D(s)ds$. Step 2.1 gives $0\\le D\\le G$. By [F2], $G$ is absolutely continuous and $G'=aD\\le aG$ almost everywhere. The function $A(t)=\\int_0^ta(s)ds$ is absolutely continuous; by [F3], $e^{-A}G$ is absolutely continuous with derivative $e^{-A}(G'-aG)\\le0$ almost everywhere. The absolutely-continuous fundamental theorem in [F3] then implies $e^{-A(t)}G(t)\\le G(0)=D(0)$, and therefore $D(t)\\le D(0)e^{A(t)}$. When $D(0)=0$, this forces $D(t)=0$ for every $t\\in[0,T]$, proving uniqueness against the smooth solution.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for thm-fd-weak-smooth-uniqueness explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When D(0)=0 the integrating-factor argument in step 3.1 yields D(t)=0 for every t."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-fd-weak-smooth-uniqueness has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-fd-weak-smooth-uniqueness makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cross identity and comparison hold for every t∈[0,T], including t=0, by steps 1.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The local argument makes no selection from nonempty sets: step 1.1 tests given u against the given v, step 2.1 derives relative energy, and step 3.1 applies the absolutely-continuous integrating factor. Choice assumptions of an existence supplier are not an additional selection at step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-fd-weak-smooth-uniqueness states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-fd-weak-smooth-uniqueness states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "prop-fd-bounded-evolving-pressure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-bounded-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be bounded and open, assume the Axiom of\nChoice, let $\\nu>0$, and let $u_0\\in H$ for the bounded closure spaces\ndefined above. There exists\n$$u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$$\nwith $u(0)=u_0$ and $\\|u(t)-u_0\\|_H\\to0$ as $t\\downarrow0$, satisfying for\nevery compactly time-supported $C^1$ map $\\phi:[0,\\infty)\\to V$,\n$$\\int_0^\\infty\\!\\big[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\big]dt+(u_0,\\phi(0))=0.$$\nIt also satisfies\n$$\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u\\|_2^2ds\\le\\|u_0\\|_2^2\\quad(t\\ge0),$$\nand there is a full-measure set $S\\subset(0,\\infty)$ such that for every\n$s\\in S\\cup\\{0\\}$ and $t\\ge s$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.$$\nThe conclusion is a velocity result for the specified unforced closure-space\nformulation; it asserts no uniqueness, smoothness, pressure regularity, or\nboundary trace beyond membership in $H_0^1$. Here\n$(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$ and\n$\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. For a matrix field\n$A$, $(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-rectangular-test-divergence-inverse",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $\\Omega=\\prod_{i=1}^d(a_i,b_i)$ be a nonempty finite open rectangle. Write $D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb R)$ and $D_0(\\Omega)=\\{h\\in D(\\Omega):\\int_\\Omega h=0\\}$. For every compact $K\\subset\\Omega$ there is a compact $K'\\subset\\Omega$ such that a linear map $R:D_0(\\Omega)\\to D(\\Omega;\\mathbb R^d)$ sends tests supported in $K$ to fields supported in $K'$, satisfies $\\operatorname{div}(Rh)=h$, and is continuous on each fixed-support test space for the seminorms $\\sup|\\partial^\\alpha h|$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Omega)\\to\\mathbb C$, with the test-function topology of [[def-test-function-topology]]. Their vector space is denoted $\\mathcal D'(\\Omega)$. Write $\\langle u,\\varphi\\rangle=u(\\varphi)$; the pairing is linear in both arguments, with no conjugation.\n\nContinuity means continuity for that topology: for each $\\varepsilon>0$ the set $\\{|u(\\varphi)|<\\varepsilon\\}$ contains a zero-neighborhood. By linearity this suffices at every point. Sums and scalar multiples remain continuous and linear, so the indicated collection is a complex vector space. If $\\Omega=\\varnothing$, its test space is zero and its distribution space is zero as well. The finite-order estimate and the sequential criterion are established separately; neither substitutes for continuity in this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The residual $T$ is a spacetime distribution: $u\\in L^2_{\\rm loc}$, $u\\otimes u\\in L^1_{\\rm loc}$, and the second derivatives in $\\Delta u$ act continuously on smooth tests by transferring derivatives. For a scalar test $\\phi(t,x)$ put $\\phi_0=\\phi-\\theta(x)\\int_\\Omega\\phi(t,y)dy$ and define\n$$\\langle\\pi,\\phi\\rangle=-\\langle T,R_x\\phi_0\\rangle.$$\nThe map $R$ is applied at each time. Its fixed support and seminorm bounds in [F2] ensure $R_x\\phi_0$ is a smooth spacetime test with the same compact temporal support; the fixed-interval formulas for $R$ commute with time derivatives by differentiation under the integral. Thus the displayed functional is continuous on test functions and is a distribution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a compact smooth vector test $\\psi$, $h=\\operatorname{div}_x\\psi$ has spatial integral zero by coordinate integration, so $h\\in D_0(\\Omega)$ and $\\psi-Rh$ is compactly supported, smooth, and divergence free. By [F1], $\\langle T,\\psi-Rh\\rangle=0$. Moreover,\n$$\\langle\\nabla_x\\pi,\\psi\\rangle=-\\langle\\pi,h\\rangle=\\langle T,Rh\\rangle=\\langle T,\\psi\\rangle.$$\nSubstituting the definition of $T$ proves the full distributional momentum equation. The normalization holds because $(a\\theta)_0=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\pi_1,\\pi_2$ have the same gradient, their difference $q$ annihilates every $h\\in D_0$ since $h=\\operatorname{div}Rh$ and $\\langle q,h\\rangle=-\\langle\\nabla q,Rh\\rangle=0$. For an arbitrary scalar test $\\phi$, $\\phi-\\theta\\int_\\Omega\\phi$ lies in $D_0$, so $\\langle q,\\phi\\rangle=\\langle q,\\theta\\rangle\\int_\\Omega\\phi$. Thus $q$ is a spatially constant distribution in time; the normalization forces $\\langle q,a\\theta\\rangle=0$ for every temporal test $a$, so $q=0$. This proves uniqueness conditional on [F2].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for prop-fd-bounded-evolving-pressure explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is normalized distributional pressure conditional on the rectangular test-divergence inverse; steps 1.1–2.1 define pi via R, recover its gradient and prove uniqueness. The rectangle has three side intervals and the required normalization theta has integral one. In particular a degenerate/empty rectangle cannot satisfy these admitted hypotheses; the product notation is over the fixed set {1,2,3}.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=0 the residual and normalized pressure in steps 1.1–2.1 are zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "prop-fd-bounded-evolving-pressure has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "prop-fd-bounded-evolving-pressure makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "prop-fd-bounded-evolving-pressure has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "prop-fd-bounded-evolving-pressure performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "prop-fd-bounded-evolving-pressure states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "prop-fd-bounded-evolving-pressure states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "cex-fd-weak-products": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$. Define\n$H^s(\\mathbb T_L^d)$ by\n$$\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty,$$\nfor $s\\ge0$, with the square root of this sum as norm; the weight is dimensionless. The\nreal solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. The orthogonal solenoidal projection\n$P$ has multiplier $P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$; the\nfor integer $N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the completion of finite Fourier coefficient sequences\nin the norm squared $\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix the second coordinate vector $e_2\\in\\mathbb R^d$ and set\n$$u_n(x)=\\sin(2\\pi n x_1/L)e_2,\\qquad u(x)=0.$$\nEach $u_n$ has only the Fourier modes $k=\\pm ne_1$ and its vector coefficient is perpendicular to $k$, so $u_n\\in H$. For a finite trigonometric polynomial $g$, $(u_n,g)_H=0$ for all sufficiently large $n$ because its Fourier support is finite. Approximate an arbitrary $g\\in H$ by such polynomials using [F2]; the error is at most $\\sup_n\\|u_n\\|_2$ times the approximation error. Hence $u_n\\rightharpoonup0$ in $H$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The only nonzero entry of $u_n\\otimes u_n$ is its $(2,2)$ entry, equal to\n$$\\sin^2(2\\pi n x_1/L)=\\tfrac12-\\tfrac12\\cos(4\\pi n x_1/L).$$\nThe oscillatory cosine has zero pairing eventually with every finite trigonometric polynomial and its $L^2$ norm is uniformly bounded; density and Cauchy–Schwarz therefore show it converges weakly to zero in $L^2$. Thus $u_n\\otimes u_n\\rightharpoonup\\tfrac12 e_2\\otimes e_2$ in $L^2$, while $u\\otimes u=0$. This refutes the false statement. These fields are only a functional-analytic witness and are not claimed to solve Navier–Stokes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses for cex-fd-weak-products explicitly require the relevant torus or domain to be nonempty; no empty-set extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The nonzero oscillatory witness or structural basis assertion in cex-fd-weak-products has no zero-input branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "cex-fd-weak-products has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "cex-fd-weak-products makes no claim at an excluded limiting or degenerate parameter value; the Statement lists its full admissible range."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "cex-fd-weak-products has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "cex-fd-weak-products performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "cex-fd-weak-products states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "cex-fd-weak-products states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    },
+    "rem-fd-weak-regularity-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-periodic-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, $L>0$, $\\nu>0$, and $u_0\\in H$ for the periodic solenoidal\nFourier spaces defined above. Then there\nexists a global unforced periodic Leray–Hopf solution with data $(\\nu,u_0)$\nunder the definition above. This is an existence assertion; it asserts no\nuniqueness or global smoothness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-finite-mode-compactness",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge2$, $L>0$, and $T>0$. Let $z_n:[0,T]\\to H$ be continuous\nfinite-Fourier-sum curves such that, for constants $A,B<\\infty$,\n$$\\sup_{n,t}\\|z_n(t)\\|_H\\le A,\\qquad \\sup_n\\int_0^T\\|\\nabla z_n(t)\\|_2^2dt\\le B,$$\nand for each $k\\in\\mathbb Z^d$ there is $C_k<\\infty$ with\n$|\\widehat z_n(k,t)-\\widehat z_n(k,s)|\\le C_k|t-s|$ for all $n,s,t$.\nThen some subsequence converges uniformly in each Fourier coefficient to\n$z\\in C_w([0,T];H)\\cap L^2(0,T;V)$, with\n$\\sup_t\\|z(t)\\|_H\\le A$ and $\\int_0^T\\|\\nabla z\\|_2^2dt\\le B$; it also\nconverges strongly to $z$ in $L^2(0,T;H)$ and, after a further subsequence,\nstrongly in $H$ for almost every $t$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-weak-smooth-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $u$ be a global unforced periodic Leray–Hopf solution on $\\mathbb T_L^d$\nwith viscosity $\\nu>0$ and initial datum $u_0$. Suppose\n$v\\in C^\\infty([0,T]\\times\\mathbb T_L^d;\\mathbb R^d)$ and\n$q\\in C^\\infty([0,T]\\times\\mathbb T_L^d)$ satisfy $\\operatorname{div}v=0$ and\n$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla q=\\nu\\Delta v$, with\n$v(0)=u_0$. Then $u(t)=v(t)$ in $H$ for every $t\\in[0,T]$. More generally,\nfor $D(t)=\\|u(t)-v(t)\\|_2^2$,\n$$D(t)\\le D(0)+2\\int_0^t\\|\\nabla v(s)\\|_\\infty D(s)\\,ds.$$\nThis conditional result does not assert existence of such a smooth pair.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first two sentences restate the exact scope and quantifiers of [F1] and [F3]; neither theorem's conclusion contains global regularity or unrestricted three-dimensional uniqueness.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The compactness lemma requires the bound $B=\\sup_n\\int_0^T\\|\\nabla z_n\\|_2^2dt$; in the viscous Galerkin energy identity this is obtained after dividing by $2\\nu>0$. At $\\nu=0$ that step supplies no gradient control, so the stated compactness proof gives no inviscid conclusion. This is a proof-scope observation only.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Remark is a scope report about the named existence/comparison/compactness results, not an assertion that its own hypotheses explicitly require a nonempty domain; steps 1.1–2.1 only compare those results."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks why nu=0 is excluded from the compactness proof: the Galerkin energy identity supplies the gradient bound only after division by 2nu>0. This is a proof-scope exclusion, not a claimed inviscid solution."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "rem-fd-weak-regularity-status has no independent cardinality parameter being varied across one; dimensions and index sets are fixed by its Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular zero-viscosity boundary is explicitly discussed in step 2.1: the positive-viscosity gradient bound cannot be inferred at nu=0, so no inviscid conclusion follows from that proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "rem-fd-weak-regularity-status has no temporal endpoint parameter; its claim is spatial or pointwise on the domain stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "rem-fd-weak-regularity-status performs no selection from a family of nonempty sets; all objects used are explicitly fixed or universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "rem-fd-weak-regularity-status states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "rem-fd-weak-regularity-status states a definition, construction, estimate, or one-way implication and contains no iff assertion."
+        }
+      ]
+    }
+  }
+}

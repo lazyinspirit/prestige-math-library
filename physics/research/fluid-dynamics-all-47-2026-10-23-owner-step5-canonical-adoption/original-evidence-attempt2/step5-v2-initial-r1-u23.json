@@ -1,0 +1,366 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "23",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "def-fd-conservation-system",
+      "model": "gpt-6-luna",
+      "context_sha256": "a4e5e26cdaa584619442dee11bb484075c3396cbde72da4f70cc60cb759fa8f8",
+      "outcome": "confirmed_fatal",
+      "reason": "Interior local integrability does not ensure finite signed entropy integrals for tests reaching t=0. For example U(t,x)=1/t with F=0, eta(z)=z^2 and q=0 has locally integrable compositions on every interior compact set but eta(U)=t^-2 is not integrable on (0,tau) times a spatial compact set of positive measure. The initial entropy clause omitted the corresponding test-support qualification. Added explicit absolute integrability of eta(U) and all q_j(U) on every such boundary slab and specified all nonnegative initial-boundary tests; the sign, compatibility and initial term are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "def-fd-lax-pattern",
+      "model": "gpt-6-luna",
+      "context_sha256": "c7f451e2fe67a6716aae29e84c87e0b4d789886d1ea54675114d5438ce3ad022",
+      "outcome": "false_positive",
+      "reason": "The Definition supplies the equation, C1 flux, Jacobian, ordered distinct real eigenvalues, Rankine-Hugoniot equality and all Lax inequalities explicitly. These are well-defined on any open state domain: they use only flux values and derivatives at the stated states, with no convex combination or entropy pair. The earlier conservation-system item works on convex domains but its convex-entropy construction is not invoked here. Dafermos section 8.3 equation (8.3.1) was consulted for the characteristic inequalities; his general chapter 7 setting additionally assumes convexity and C3 flux, which are not necessary for this locally explicit definition. Narrowing this sound definition would discard scope without repairing a mathematical defect.",
+      "uncertain": false,
+      "source_urls": [
+        "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "cex-fd-shock-point-values",
+      "model": "gpt-6-luna",
+      "context_sha256": "468f212f5297616110bd62d42b2f9f1a237fd796eb47c1e4d8616cbebf1a4625",
+      "outcome": "false_positive",
+      "reason": "The exact statement says let I subset R and Omega subset R^d be open, so both sets are open and Q is open. The trace supplier also requires I merely open. All regular-distribution operations used in F3 apply on any open set Q, as explicitly stated in the conservation definition and its regular-distribution supplier; connectedness of I is not used. Under Countable Choice the spacetime normal (-s,n) is nonzero, hence Sigma is null; measurable finite changes there preserve local integrability and every regular pairing, while identical open-side fields have identical C1 traces. No time-boundary assertion is made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-fd-conservation-system",
+      "disposition": "repaired",
+      "post_sha256": "eac317ed235a5c6afa84e9fac0f177c8c16431109ce635c819dffd9cdf621182",
+      "review_context_sha256": "00288e7ce858d91ec0eb19ceee6dd9e505be02586e84c1508f0c6499b7f33969",
+      "reason": "Added absolute integrability on (0,tau) times every compact spatial K. Every compact initial-boundary test support lies in [0,tau] times such a K, and its derivatives are bounded, so each spacetime term is finite; local integrability of eta(U0) makes the initial term finite. Interior distributional formulation and entropy sign are unchanged. This is the author repair review, not an independent review of that repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-fd-lax-pattern",
+      "reason": "The Definition supplies the equation, C1 flux, Jacobian, ordered distinct real eigenvalues, Rankine-Hugoniot equality and all Lax inequalities explicitly. These are well-defined on any open state domain: they use only flux values and derivatives at the stated states, with no convex combination or entropy pair. The earlier conservation-system item works on convex domains but its convex-entropy construction is not invoked here. Dafermos section 8.3 equation (8.3.1) was consulted for the characteristic inequalities; his general chapter 7 setting additionally assumes convexity and C3 flux, which are not necessary for this locally explicit definition. Narrowing this sound definition would discard scope without repairing a mathematical defect.",
+      "uncertain": false,
+      "source_urls": [
+        "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+      ],
+      "familiar": false,
+      "disposition": "unaffected",
+      "post_sha256": "924cb86a89faf4d815212bb9ba94d0864fee0c2d501fa057a87df5772c850690",
+      "review_context_sha256": "7a8b129e3fcefbeb4a8930a786fac2d12631780b3a01d53ceda9612ccb7dd8eb"
+    },
+    {
+      "id": "cex-fd-shock-point-values",
+      "reason": "The exact statement says let I subset R and Omega subset R^d be open, so both sets are open and Q is open. The trace supplier also requires I merely open. All regular-distribution operations used in F3 apply on any open set Q, as explicitly stated in the conservation definition and its regular-distribution supplier; connectedness of I is not used. Under Countable Choice the spacetime normal (-s,n) is nonzero, hence Sigma is null; measurable finite changes there preserve local integrability and every regular pairing, while identical open-side fields have identical C1 traces. No time-boundary assertion is made. Its unchanged source has only an owning-contract F3 quotation refresh after the supplier repair; no claim or proof was edited.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "post_sha256": "b056293241fb998a9909d88260fece9a89581a9efc3b380534a8bb1c592f001f",
+      "review_context_sha256": "0cef750797ad1c8b3b7f33bb9529ab1eabbfd805b05a8858ad2a27203206621b",
+      "metadata_repair_only": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-fd-piecewise-traces",
+    "thm-fd-rankine-hugoniot",
+    "prop-fd-entropy-jump",
+    "def-fd-lax-pattern",
+    "thm-fd-convex-scalar-riemann",
+    "prop-fd-viscous-entropy-passage",
+    "ex-fd-burgers-shock",
+    "ex-fd-burgers-fan",
+    "cex-fd-expansion-shock",
+    "cex-fd-shock-point-values"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "def-fd-conservation-system",
+      "batch": "23",
+      "proposal": "confirmed_fatal",
+      "status": "fixed",
+      "reason": "Interior local integrability does not ensure finite signed entropy integrals for tests reaching t=0. For example U(t,x)=1/t with F=0, eta(z)=z^2 and q=0 has locally integrable compositions on every interior compact set but eta(U)=t^-2 is not integrable on (0,tau) times a spatial compact set of positive measure. The initial entropy clause omitted the corresponding test-support qualification. Added explicit absolute integrability of eta(U) and all q_j(U) on every such boundary slab and specified all nonnegative initial-boundary tests; the sign, compatibility and initial term are preserved.",
+      "uncertain": false,
+      "native_report": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-initial-r1-u23.json"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "def-fd-lax-pattern",
+      "batch": "23",
+      "proposal": "false_positive",
+      "status": "false-positive",
+      "reason": "The Definition supplies the equation, C1 flux, Jacobian, ordered distinct real eigenvalues, Rankine-Hugoniot equality and all Lax inequalities explicitly. These are well-defined on any open state domain: they use only flux values and derivatives at the stated states, with no convex combination or entropy pair. The earlier conservation-system item works on convex domains but its convex-entropy construction is not invoked here. Dafermos section 8.3 equation (8.3.1) was consulted for the characteristic inequalities; his general chapter 7 setting additionally assumes convexity and C3 flux, which are not necessary for this locally explicit definition. Narrowing this sound definition would discard scope without repairing a mathematical defect.",
+      "uncertain": false,
+      "native_report": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-initial-r1-u23.json"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "cex-fd-shock-point-values",
+      "batch": "23",
+      "proposal": "false_positive",
+      "status": "false-positive",
+      "reason": "The exact statement says let I subset R and Omega subset R^d be open, so both sets are open and Q is open. The trace supplier also requires I merely open. All regular-distribution operations used in F3 apply on any open set Q, as explicitly stated in the conservation definition and its regular-distribution supplier; connectedness of I is not used. Under Countable Choice the spacetime normal (-s,n) is nonzero, hence Sigma is null; measurable finite changes there preserve local integrability and every regular pairing, while identical open-side fields have identical C1 traces. No time-boundary assertion is made.",
+      "uncertain": false,
+      "native_report": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-initial-r1-u23.json"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "prop-fd-viscous-entropy-passage",
+      "batch": "23",
+      "proposal": "new distinct nonfatal proof-detail finding; refer to frontier owner without modifying historical rows",
+      "status": "open",
+      "location": "Proof 3.1, final sentence: Passing to the limit yields the stated entropy inequality.",
+      "affected_use": "Facts F1; Proof 2.1 and 3.1: initial entropy inequality and passage of its initial-boundary test integral.",
+      "invalidated_claim": "The written inference from interior L1_loc convergence directly to the full initial-boundary test integral omits a boundary-strip estimate. The theorem itself remains valid under its existing bound.",
+      "minimality": "Proof-only insertion: for support in [0,tau] times K, split into 0<t<delta and delta<=t<=tau. On the latter, use the stated L1_loc convergence and Lipschitz continuity of eta,q on [-M,M]. On the strip, each coefficient difference has absolute value at most twice its sup norm on [-M,M], so its integral against the bounded test derivative is at most 2 delta lambda_d(K) times the corresponding sup norm times the derivative sup norm. Sum over coefficients and then let delta decrease to zero. The initial term already converges by the established common initial bound. No Statement, dependency or hypothesis change is required.",
+      "reason": "Current full proof and the rejection-blind digest were both read. The former supplies the common range but does not write this strip argument; the digest identifies precisely that omission. This is distinct from the historically fixed justification of the initial range bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "subject": "def-regular-distribution-from-a-locally-integrable-function",
+      "proposal": "refer imported mathematics presentation to root maintenance; no Step-5 item repair or gate",
+      "status": "maintenance-open",
+      "affected_use": "The assigned null-set/distribution argument uses this published supplier; its mathematical statement is adequate, but its complete Definition/Statement contains inline supplier links.",
+      "observed_excerpt": "This extends [[def-locally-integrable-function-on-r-n]]",
+      "invalidated_claim": "No mathematical inference is invalidated; the uninterrupted-statement editorial requirement is violated.",
+      "minimality": "Move the existing links to the immediately following Definition references or Statement references section in the original mathematics maintenance route, preserving hypotheses and immutable import bytes here.",
+      "reason": "The current relevant supplier section was read directly and this exact inline hyperlink remains. No whole-supplier audit or source-book reading is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "subject": "def-distributional-derivative",
+      "proposal": "refer imported mathematics presentation to root maintenance; no Step-5 item repair or gate",
+      "status": "maintenance-open",
+      "affected_use": "The assigned null-set/distribution argument uses this published supplier; its mathematical statement is adequate, but its complete Definition/Statement contains inline supplier links.",
+      "observed_excerpt": "in the convention of [[def-distribution]]",
+      "invalidated_claim": "No mathematical inference is invalidated; the uninterrupted-statement editorial requirement is violated.",
+      "minimality": "Move the existing links to the immediately following Definition references or Statement references section in the original mathematics maintenance route, preserving hypotheses and immutable import bytes here.",
+      "reason": "The current relevant supplier section was read directly and this exact inline hyperlink remains. No whole-supplier audit or source-book reading is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "subject": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+      "proposal": "refer imported mathematics presentation to root maintenance; no Step-5 item repair or gate",
+      "status": "maintenance-open",
+      "affected_use": "The assigned null-set/distribution argument uses this published supplier; its mathematical statement is adequate, but its complete Definition/Statement contains inline supplier links.",
+      "observed_excerpt": "([[def-countable-choice]])",
+      "invalidated_claim": "No mathematical inference is invalidated; the uninterrupted-statement editorial requirement is violated.",
+      "minimality": "Move the existing links to the immediately following Definition references or Statement references section in the original mathematics maintenance route, preserving hypotheses and immutable import bytes here.",
+      "reason": "The current relevant supplier section was read directly and this exact inline hyperlink remains. No whole-supplier audit or source-book reading is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "checkpoint": "Completed all three adjudications and current native reviews, minimal assigned supplier repair, shared metadata integration, ten direct consumer checks and two page uses. All focused validators passed; separate owner/maintenance referrals remain explicit and no independent acceptance or certification is claimed.",
+    "conventions": "Time-first Q=I times Omega; bilinear regular pairings; nonpositive entropy residual; Countable Choice only as carried by the null-hyperplane supplier.",
+    "metadata": "Under the shared write lock, mirrored the repaired Definition in its batch-23 owning manifest and refreshed eight exact Definition citations in the batch-23 proof contracts. No proof claims or item sources were changed by that metadata operation.",
+    "sources_consulted": [
+      {
+        "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf",
+        "locators": [
+          "section 7.2 opening pp.180-181",
+          "section 8.3 opening pp.213-214"
+        ],
+        "reading_limit": "Consulted these definition passages only; no whole-book or source-proof audit claimed."
+      }
+    ],
+    "unresolved_obligations": [],
+    "consumer_uses": [
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "def-fd-piecewise-traces",
+        "path": "items/def-fd-piecewise-traces.md",
+        "observed_raw_sha256": "8af107ab4250dbcf01f0de381a78254eac1dc7450e513cadf90f6f44c017d6d5",
+        "affected_use": "Definition opening: the state domain of a conservation system; Definition references.",
+        "disposition": "unaffected",
+        "reason": "Uses the unchanged open convex state domain and C1 flux notation. It defines only open-side C1 extensions and traces, with no initial-boundary entropy integral.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "thm-fd-rankine-hugoniot",
+        "path": "items/thm-fd-rankine-hugoniot.md",
+        "observed_raw_sha256": "31c43dc1fd459d4c1e757e5a36dfd148674bbf71c730f662082a2e9e2ca9dfdb",
+        "affected_use": "Facts F2 and Proof 1.1: distributional residual against compactly supported vector tests; Statement references.",
+        "disposition": "unaffected",
+        "reason": "Uses only the unchanged interior distribution convention. Compact test supports lie inside the open cylinder; the new boundary-slab condition is not invoked.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "prop-fd-entropy-jump",
+        "path": "items/prop-fd-entropy-jump.md",
+        "observed_raw_sha256": "7739c8bf4857c42d427ea973507f0f8284b873b55abe64e86c4c8c00d176f226",
+        "affected_use": "Facts F1 and Proof 1.1, 3.1: Dq_j=Deta DF_j and the nonpositive interior entropy residual.",
+        "disposition": "unaffected",
+        "reason": "Uses the unchanged compatibility and nonnegative-test sign on the interior cylinder. No initial trace or boundary test occurs.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "def-fd-lax-pattern",
+        "path": "items/def-fd-lax-pattern.md",
+        "observed_raw_sha256": "8280b3e8d468019b694127d1ca5be100ac559bc1caa241be665d576fbd5d2142",
+        "affected_use": "Definition opening equation and Definition references to the one-dimensional conservation system.",
+        "disposition": "unaffected",
+        "reason": "Uses the displayed flux equation and explicitly defines its own pointwise eigenvalue and speed conditions. No entropy composition or initial-boundary assertion occurs.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "thm-fd-convex-scalar-riemann",
+        "path": "items/thm-fd-convex-scalar-riemann.md",
+        "observed_raw_sha256": "4eed1e06289cc1019d0bd5f54bd278f6788ec32c7c6b874b2e1fce184ffa8e53",
+        "affected_use": "Facts F1; Proof 1.1, 3.1, 4.1-4.2, 5.1-5.2 and 6.1: initial weak and entropy formulations.",
+        "disposition": "unaffected",
+        "reason": "All constructed profiles and initial data take values in the compact interval between a and b almost everywhere. Continuous eta and q, and each fixed Kruzkov pair, are bounded there, hence their slab integrals are finite. Arbitrary finite assignments on the null shock plane do not change this conclusion. The existing bounded-strip cutoff argument meets the repaired definition.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "prop-fd-viscous-entropy-passage",
+        "path": "items/prop-fd-viscous-entropy-passage.md",
+        "observed_raw_sha256": "11e1beef9e56d939addd5d14c247cd7f57975a9540a9c04c0714bf643bf07bf9",
+        "affected_use": "Facts F1; Proof 2.1 and 3.1: initial entropy inequality and passage of its initial-boundary test integral.",
+        "disposition": "refer_frontier_owner",
+        "reason": "The common a.e. bound |u|<=M bounds eta(u) and q_j(u) and therefore supplies the added slab integrability. A distinct inherited omission remains in the written limit argument, recorded separately: interior L1 convergence alone is not convergence on supports reaching zero.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No consumer Statement/Definition change is necessary; no further propagation is warranted. A separate proof-only clarification is referred for the viscous consumer."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "ex-fd-burgers-shock",
+        "path": "items/ex-fd-burgers-shock.md",
+        "observed_raw_sha256": "50b795f8ce6607d4200f694cb6435fec7eadb764964605a9d591cffcc33fc293",
+        "affected_use": "Facts F4 and Proof 1.1: interpretation of the initial weak and entropy identities.",
+        "disposition": "unaffected",
+        "reason": "The two-state profile is essentially bounded by max(|a|,|b|); all continuous entropy compositions and fixed Kruzkov compositions are bounded almost everywhere on test slabs, including after arbitrary finite null-plane assignments.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "ex-fd-burgers-fan",
+        "path": "items/ex-fd-burgers-fan.md",
+        "observed_raw_sha256": "ff813919fcfd7ff0ca21f62971de320ef1da97b4b2068c477d5cfd3b6b3a6903",
+        "affected_use": "Facts F4 and Proof 1.1: the initial-boundary weak and entropy formulations.",
+        "disposition": "unaffected",
+        "reason": "The explicit fan stays in [a,b]. Continuous entropy and flux compositions on this compact range are bounded, so the added slab condition and locally integrable initial entropy hold.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "cex-fd-expansion-shock",
+        "path": "items/cex-fd-expansion-shock.md",
+        "observed_raw_sha256": "ef14676b5d17d1bbf8c95a3857aad8d419f469a04960ddf8f4d1dbba47794337",
+        "affected_use": "Facts F4; Proof 1.1-1.2: initial weak identity and entropy-admissibility failure.",
+        "disposition": "unaffected",
+        "reason": "The two-state profile, quadratic entropy and cubic entropy flux are bounded almost everywhere on each finite slab. The positive interior jump residual still disproves entropy admissibility; the added boundary condition is satisfied.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      },
+      {
+        "supplier": "def-fd-conservation-system",
+        "id": "cex-fd-shock-point-values",
+        "path": "items/cex-fd-shock-point-values.md",
+        "observed_raw_sha256": "08083f5e139461986a31c2982f568266fab58292ccd3bed60b77b18dc053fca9",
+        "affected_use": "Facts F3 and Proof 2.1: equal regular distributions and equal distributional derivatives after null-plane reassignment.",
+        "disposition": "unaffected",
+        "reason": "The proof concerns interior L1_loc fields on an open Q, with no initial data or initial-boundary tests. Its almost-everywhere equality and trace invariance use unchanged supplier clauses.",
+        "invalidated_claim": "None from the supplier change: initial-boundary applications already have bounded compositions, and interior applications are unchanged.",
+        "minimality": "No source repair is necessary for this changed supplier clause; no further hop is opened."
+      }
+    ],
+    "page_uses": [
+      {
+        "page": "fd-w03",
+        "path": "library/fluid-dynamics-mathematics/fd-w03.md",
+        "affected_use": "Frontmatter inventory only; the page body is empty and makes no additional mathematical assertion.",
+        "disposition": "unaffected"
+      },
+      {
+        "page": "fd-w03-examples",
+        "path": "library/fluid-dynamics-mathematics/fd-w03-examples.md",
+        "affected_use": "Frontmatter inventory only; the page body is empty and makes no additional mathematical assertion.",
+        "disposition": "unaffected"
+      }
+    ],
+    "diagram_review": "The three assigned carriers contain no TikZ/tikzcd diagrams and none is needed for their definitions or null-set argument.",
+    "interface_change": "Compared the original/current Definition directly. Only the initial entropy clause changed. The reconstructed pre-edit clause reproduces the frozen before itemHashGuard exactly; both false-positive carriers match their before guards. No physical public interface changed.",
+    "published_alert_limits": "Other published-supplier alerts in the digest retain their original attributed status. Only the three presentation issues above were checked directly here; none of their imported carriers was edited.",
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-fd-conservation-system.md items/def-fd-lax-pattern.md items/cex-fd-shock-point-values.md",
+        "exit_code": 0,
+        "result": "One proof-bearing item checked, zero failing; definition carriers have no proof sections."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-fd-conservation-system.md items/def-fd-lax-pattern.md items/cex-fd-shock-point-values.md library/fluid-dynamics-mathematics/fd-w03.md library/fluid-dynamics-mathematics/fd-w03-examples.md --json",
+        "exit_code": 0,
+        "result": "Five files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-23.proof-contracts.json --strict --items cex-fd-shock-point-values --json",
+        "exit_code": 0,
+        "result": "Assigned proof contract checked; ok true, no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-fd-conservation-system.md",
+        "exit_code": 0,
+        "result": "One changed definition carrier, zero numbered proof steps, zero defects."
+      },
+      {
+        "command": "node --input-type=module (read-only surgical-diff/guard and manifest-mirror assertions)",
+        "exit_code": 0,
+        "result": "Restoring only the replaced initial entropy clause reproduces the frozen conservation guard; both false-positive source guards are unchanged; the owning manifest equals the current Definition."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/fluid-u23-items.txt --json",
+        "selection": [
+          "def-fd-conservation-system",
+          "def-fd-lax-pattern",
+          "cex-fd-shock-point-values"
+        ],
+        "exit_code": 0,
+        "result": "Focused item checks and the two owning pages pass, with zero errors/warnings; dependency context includes 585 items and 180 pages. Inventory totals in the tool summary are not an assertion of whole-corpus review."
+      }
+    ],
+    "operational_checks": "Initial attempts to call precheck directly with node failed because .mts needs the provided tsx wrapper; a help probe also showed this script takes file paths rather than --help. The correct explicit-file invocation then passed. A guessed plural proof-contract helper did not exist; the actual singular helper was located and passed. No tool or workflow source was changed."
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-23-step5-context.json": "bd35e413b3d3b26317b63af2d012b6a4a94289c69c282e53c1fb49c60ea5869b"
+  }
+}

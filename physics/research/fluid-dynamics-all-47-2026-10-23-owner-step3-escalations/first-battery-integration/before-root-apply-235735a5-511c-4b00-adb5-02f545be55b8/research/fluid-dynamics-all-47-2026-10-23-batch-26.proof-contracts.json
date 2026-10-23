@@ -1,0 +1,987 @@
+{
+  "version": 1,
+  "scope": [
+    "post-fd-boltzmann-model",
+    "pthm-fd-local-boltzmann-h-balance",
+    "pthm-fd-boltzmann-entropy",
+    "pthm-fd-ideal-gas-euler-interface",
+    "post-fd-bgk-relaxation",
+    "pthm-fd-bgk-equilibration",
+    "texp-fd-bgk-preparation"
+  ],
+  "contracts": {
+    "post-fd-boltzmann-model": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Defines d=3 state, elastic quadruples, invariant rate measure and adopted weak identity. Incoming-pair factorization is applied to each directed collision, including the reversed gain event. Current positive finite-valued collision-domain definition was independently inspected and matches; no solution existence or microscopic derivation is asserted."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and the Postulate section limit the claim to a single-species nonrelativistic monatomic periodic model, qualitative dilute-gas applicability, no internal modes, and no empirical validity or solution-existence claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "MIT 8.333 Lecture 8 §III.D was read for dilute-gas BBGKY scaling and collision-pair correlation context; it is not treated as deriving this weak operator. Tong Kinetic Theory §2.2.1, equations (2.21)–(2.24), printed pp. 22–23, assumes incoming-pair factorization and notes its before/after asymmetry, while its later §2.2.3 derivation (printed pp. 31–32) assumes uncorrelated pairs both before and after. Only the former supports the one-sided convention adopted here; retrieval stamps are in batch-26.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section labels the equation and incoming factorization as adopted assumptions and explicitly disclaims a reversible many-particle derivation or propagation-of-chaos claim."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-boltzmann-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-kinetic-h",
+          "source_section": "Statement",
+          "quote": "Let $I$ be an open time interval in seconds and let $\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$, with fixed periods $L_j>0$ in metres. Give $\\Omega$ the completed, unnormalised pushforward of Lebesgue measure on $C=\\prod_{j=1}^3[0,L_j)$ under the quotient map, as in the kinetic-density definition. Let $f:\\Omega\\times\\mathbb R^3\\times I\\to(0,\\infty)$ be $C^1$ in $(x,t)$ and $C^2$ in $v$, with $v$ measured in metres per second and $f$ in the units assigned by the kinetic-density definition. Fix a constant $f_{\\rm ref}>0$ with the same units as $f$. Put $\\ell=\\log(f/f_{\\rm ref})$, $A=f(x,v,t)f(x,w,t)$, and $B=f(x,v',t)f(x,w',t)$. Use the elastic collision set $Q_{\\rm el}=\\{(v,w,v',w')\\in\\mathbb R^{12}:v+w=v'+w',\\ |v|^2+|w|^2=|v'|^2+|w'|^2\\}$ with its relative Borel sigma-algebra and the nonnegative countably additive measure $\\nu$ invariant under particle exchange in either pair and incoming/outgoing interchange, together with the weak operator $Q_\\nu$ from the elastic-collision definition. Assume for each $t$ that $f$, $f|v|^2$, and $f|\\ell|$ are integrable over $\\Omega\\times\\mathbb R^3$. On each compact time interval assume a common integrable envelope in $(x,v)$ for $|(1+\\ell)\\partial_t f|$; at each $t$ assume $(1+|\\ell|)|v\\cdot\\nabla_x f|$ is integrable over $\\Omega\\times\\mathbb R^3$. In addition, assume\n$$f(1+|v|)|\\ell|,\\quad (1+|\\ell|)|\\partial_t f|,\\quad (1+|\\ell|)|v|\\,|\\nabla_x f|\\in L^1_{\\rm loc}(I\\times\\Omega\\times\\mathbb R^3,dt\\,dx\\,dv),$$\nso the entropy density, entropy flux, and local differentiation terms are integrable on compact time-space regions. Define\n$$D(x,t):=\\frac14\\int_{Q_{\\rm el}}(A-B)\\log(A/B)\\,d\\nu.$$\nAssume that $D$ is measurable and locally integrable on $I\\times\\Omega$, and that for each $t$ its spatial section belongs to $L^1(\\Omega)$. At every $(x,t)$ assume $f(x,\\cdot,t)\\in\\mathcal D_\\nu$ and $1,\\ell(x,\\cdot,t)\\in\\mathcal S_{f(x,\\cdot,t)}$, with the measurability and absolute-convergence conditions of the elastic-collision definition. With $\\delta\\varphi=\\varphi(v)+\\varphi(w)-\\varphi(v')-\\varphi(w')$, assume\n$$\\int_{\\mathbb R^3}\\varphi(v)Q_\\nu(f)(v)\\,dv=\\frac14\\int_{Q_{\\rm el}}(B-A)\\delta\\varphi\\,d\\nu$$\nfor those two tests, and suppose $\\partial_t f+v\\cdot\\nabla_x f=Q_\\nu(f)$. Define\n$$h(x,t):=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,dv,\\qquad J_H(x,t):=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,dv,$$\n$$H(t):=\\int_\\Omega h(x,t)\\,dx,\\qquad D_{\\rm tot}(t):=\\int_\\Omega D(x,t)\\,dx.$$\nThen the local entropy balance holds in distributions: for every $\\eta\\in C_c^\\infty(I\\times\\Omega)$,\n$$\\int_I\\int_\\Omega\\bigl(h\\,\\partial_t\\eta+J_H\\cdot\\nabla_x\\eta-D\\eta\\bigr)\\,dx\\,dt=0.$$\nMoreover, $D(x,t)\\ge0$ for almost every $(x,t)$. The periodic global entropy $H$ is differentiable and\n$$\\frac{dH}{dt}=-D_{\\rm tot}(t)\\le0.$$\nThe inequality is conditional on the adopted weak collision identity; it is not a derivation from reversible many-particle mechanics or a kinetic-PDE existence theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-fd-local-boltzmann-h-balance",
+          "source_section": "Statement",
+          "quote": "$$\\partial_t h+\\nabla_x\\cdot J_H=-D$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-physical-kinetic-observables",
+          "source_section": "Definition",
+          "quote": "$$h=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad J_H=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad s_{\\rm kin}=-k_Bh,\\qquad j_{\\rm kin}=-k_BJ_H.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-fd-boltzmann-model",
+          "source_section": "Postulate",
+          "quote": "These equations and the incoming factorization are physical model postulates, not deductions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "physical-local-entropy",
+          "claim": "Scale the locally proved H balance by -k_B and substitute the physical entropy and flux definitions; the source k_B D has units J m^-3 K^-1 s^-1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "periodic-global-entropy",
+          "claim": "Use the actual K01 total H identity and the same integrated collision production to obtain monotonic physical entropy.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes L_j>0 and a positive solution on a periodic cell.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: All three periods are positive, so the fixed spatial torus has positive volume. Steps 1.1–2.1 multiply the local balance and integrate the supplied global H identity on that torus; an empty product or empty sensor family is never quantified.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "All three periods remain positive and the source/physical h and J_H use the same nonempty periodic cell. Current1.1 multiplies the pointwise local-H F2 balance by -k_B;2.1 uses the mathematical-H global identity. The repaired F1 accurately records its additional distributional claim but introduces no empty index family.",
+            "item_sha256": "71384dfd618c86fb250c0d33c6a54eb0216125db2f40f87e694e25f4a011eb45",
+            "row_sha256": "a60e579dcd78b4d8e5686de5e6cee2a16f15329dd705101e8a4de9d1c2d936d3",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-25-31.json",
+              "sha256": "eeceac2f84fa65fcbf55c7443149978e45bcb99afe314e11ba7a87d1f6534a40"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$ be a periodic cell with $L_j>0$ in metres, and let $I$ be an open time interval in seconds. Let $f:I\\times\\Omega\\times\\mathbb R^3\\to(0,\\infty)$ be periodic, continuously differentiable in $"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 retains D=0 as zero production; no strict increase is claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is a balance over continuous velocity space."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement does not characterize collision equilibria."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time interval I is open; no time endpoints are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a balance and inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "planned_supplier_excerpts": {
+        "thm-fd-kinetic-h": {
+          "path": "items/thm-fd-kinetic-h.md#Statement",
+          "carrier_status": "Current batch-25 item and manifest carrier inspected; current Step 1 readiness record is missing. Its current Statement gives a local distributional balance and the periodic global identity. This consumer uses the global identity, while the batch-26 result supplies the stronger pointwise local balance under its own hypotheses.",
+          "excerpt": "$$\\frac{dH}{dt}=-D(t)\\le0.$$"
+        }
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Checked steps 1.1–2.1 and complete current local H and K01 H supplier arguments. Uniform velocity envelopes on the finite torus imply K01 spatial and local spacetime integrability; its production measurability follows from the velocity-integrated equation, and integrable spatial production is explicitly assumed. Multiplication by -k_B turns local -D into nonnegative physical k_B D; global identity gives S_prime=k_B D_tot. Checked zero production A=B, nonempty positive-period cell and open-time interior. SI units of density, flux and global rate agree. No strict increase or fine-grained Gibbs entropy claim. Reader/refuter findings arrays are empty; units additions are audit enrichment."
+      }
+    },
+    "pthm-fd-ideal-gas-euler-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-fd-maxwellian-moments",
+          "source_section": "Statement",
+          "quote": "Let $n>0$, $u\\in\\mathbb R^3$, $T>0$, particle mass $m>0$, and Boltzmann constant $k_B>0$. Set $\\theta=k_BT/m$ and define $M_{n,u,T}(v):=n(2\\pi\\theta)^{-3/2}\\exp(-|v-u|^2/(2\\theta))$. Its Lebesgue moments are\n$$\\int_{\\mathbb R^3}M_{n,u,T}\\,dv=n,\\qquad \\int_{\\mathbb R^3}vM_{n,u,T}\\,dv=nu,$$\n$$m\\int_{\\mathbb R^3}(v-u)\\otimes(v-u)M_{n,u,T}\\,dv=nk_BT\\,I_3,\\qquad \\frac m2\\int_{\\mathbb R^3}|v-u|^2(v-u)M_{n,u,T}\\,dv=0,$$\nand\n$$\\frac m2\\int_{\\mathbb R^3}|v|^2M_{n,u,T}\\,dv =\\frac{mn|u|^2}{2}+\\frac{3nk_BT}{2}.$$\nThus its pressure tensor is isotropic and its centered heat flux vanishes; these conclusions concern this Gaussian profile and do not impose isotropy on a general kinetic density.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-physical-kinetic-observables",
+          "source_section": "Definition",
+          "quote": "Here $n$ is in $\\mathrm{m^{-3}}$, $\\rho$ in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $T$ in kelvins, $P$ in pascals, $q$ in $\\mathrm{W\\,m^{-2}}$, and $E$ in $\\mathrm{J\\,m^{-3}}$. The definitions impose no isotropy on $P$; $p$ will denote a separate scalar pressure only in a specified local-equilibrium conclusion.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n(A continuous function on $[a,b]$ is Riemann integrable, by Heine-Cantor and Riemann's criterion).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-fd-boltzmann-model",
+          "source_section": "Postulate",
+          "quote": "The adopted kinetic equation is",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "conditional-euler-application",
+          "claim": "Use the collision-invariant multipliers $\\psi=m$, $\\psi=mv_i$ for $i=1,2,3$, and $\\psi=m|v|^2/2$. Their weak collision brackets vanish by the elastic constraints, and the stated absolute convergence makes $\\int\\psi Q_\\nu(f^\\varepsilon)\\,d^3v=0$ for each of them. Since $\\varepsilon>0$, the scaled equation therefore gives $\\int\\psi(\\partial_t f^\\varepsilon+v\\cdot\\nabla_xf^\\varepsilon)\\,d^3v=0$. The assumed $\\omega_3|\\partial_t f^\\varepsilon|$ and $\\omega_3|v\\cdot\\nabla_xf^\\varepsilon|$ majorants justify these integrals. This uses the summed transport derivative as supplied; separate majorants for $\\psi v_j\\partial_{x_j}f^\\varepsilon$ are not needed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "physical-euler-interpretation",
+          "claim": "Replace $f^\\varepsilon$ in step 2.1 by $M=M_{n,u,T}$, including its value at $t=0$. The absolute difference of the spacetime terms is at most $C_\\chi\\int_0^{T_*}\\int_\\Omega\\int\\omega_3|f^\\varepsilon-M|$, since the coefficients $\\psi\\partial_t\\chi+\\psi v\\cdot\\nabla_x\\chi$ have velocity degree at most three and the test derivatives are bounded. The initial difference is at most $C_\\chi\\int_\\Omega\\int\\omega_2|f^\\varepsilon(0)-M(0)|$, since $\\psi$ has degree at most two. Both tend to zero by the two stated convergence hypotheses. Hence the displayed weak moment identity holds with $M$ and its initial value.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-2-1",
+          "claim": "Let $\\chi\\in C^1([0,T_*]\\times\\Omega)$ be periodic in space and vanish near $T_*$, allowing $\\chi(0,x)\\ne0$. For each fixed velocity, integrate $\\psi f^\\varepsilon$ against $\\partial_t\\chi+v\\cdot\\nabla_x\\chi$ and use [F4] in time and in each spatial coordinate. The time boundary is $-\\int_\\Omega\\psi f^\\varepsilon(0,x,v)\\chi(0,x)\\,d^3x$, and opposite periodic spatial boundaries cancel. Integrate this identity in velocity using [F3]. Indeed, $\\psi$ has degree at most two, so $|\\psi|$ and $|\\psi||v|$ are bounded by constants times $\\omega_3$; the displayed moment, time-derivative, and summed-transport envelopes make the grouped terms absolutely integrable. The initial term is integrable by the same moment bound at $t=0$. Thus step 1.1 gives the weak moment identity\n$$\\int_0^{T_*}\\int_\\Omega\\int_{\\mathbb R^3}\\psi f^\\varepsilon(\\partial_t\\chi+v\\cdot\\nabla_x\\chi)\\,d^3v\\,d^3x\\,dt+\\int_\\Omega\\int_{\\mathbb R^3}\\psi f^\\varepsilon(0,x,v)\\chi(0,x)\\,d^3v\\,d^3x=0.$$\nThe spatial integration by parts was performed at each fixed velocity before applying Fubini to the summed transport and final test-gradient terms, so no separate weighted spatial derivative bound has been assumed.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-4-1",
+          "claim": "Apply [F1] to the Gaussian moments in step 3.1. The multiplier $m$ gives density $\\rho$ and flux $\\rho u$; the three multipliers $mv_i$ give momentum $\\rho u$ and flux tensor $\\rho u\\otimes u+pI_3$; the multiplier $m|v|^2/2$ gives energy $E$ and flux $(E+p)u$. Applying the scalar identity componentwise to a vector test gives the momentum weak identity. Thus all three Euler equations hold in distributions, and their weak identities include exactly the initial values of the displayed Gaussian moments, identified by the $\\omega_2$ initial convergence. These are the stated initial traces of the $C^1$ limiting fields.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-5-1",
+          "claim": "The residuals of the three displayed Euler equations are continuous because the limiting fields are $C^1$. If a residual component were nonzero at an interior point, it would have one strict sign on a sufficiently small coordinate ball in $(0,T_*)\\times\\Omega$. Choose concentric balls within that chart and a nonnegative smooth bump from [F5], equal to one on the inner ball and supported in the outer ball; extend it by zero to the periodic cylinder. Its pairing with the residual would have strict sign, contradicting the distributional identity from step 4.1. Every residual therefore vanishes pointwise for $0<t<T_*$.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-6-1",
+          "claim": "The observables [F2] identify $\\rho=mn$ and the physical kinetic-energy density. The Gaussian moments in [F1] give $E=\\rho|u|^2/2+3nk_BT/2$ and $p=nk_BT$ in pascals, with precisely the stated SI units. The argument has used weighted strong convergence and its initial counterpart as assumptions, not derived them from small $\\varepsilon$ or entropy. The full conclusion is conditional on the adopted physical model [A1] and convergence hypotheses [A2], with no empirical validity claim.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "A2",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires L_j>0, T_*>0, and n,T bounded away from zero on the periodic cylinder.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: The fixed three-factor torus, T_*>0 and n,T bounded away from zero rule out a void macroscopic branch. Its omega_2 and omega_3 sums include j=0. Proof 1.1 applies the passage theorem to this nonempty cylinder rather than an arbitrary-cardinality product.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The current Statement still has three positive spatial periods, T_*>0 and limiting n,T bounded away from zero, with fixed omega2/omega3 sums beginning at j=0. The proof now directly cancels collision invariants in1.1, derives weak identities in2.1, and passes their moments in3.1–4.1 on that nonempty cylinder. The old rationale invoking the stronger passage theorem at1.1 is obsolete, but the actual not_applicable empty-case row remains truthful.",
+            "item_sha256": "3db174eca31afc83f238ff8a097f15e2494c33e640e9c8ffb8b356b1b7dcfde5",
+            "row_sha256": "4ab9f15cc1ac98c8a85100048d67e8c5b00a6b27f5a7de25f78669dea4dbc735",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-25-31.json",
+              "sha256": "eeceac2f84fa65fcbf55c7443149978e45bcb99afe314e11ba7a87d1f6534a40"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$ be a fixed rectangular periodic cell with periods $L_j>0$ in metres, $T_*>0$ in seconds, and $\\varepsilon>0$ a dimensionless fast-collision parameter. Spatial position $x$ is measured in me"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows u=0; step 3.1 uses no division by velocity and the positive n,T assumptions keep the equations defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The framework fixes three spatial and velocity dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Vacuum and zero-temperature limits are excluded by the uniform positive lower bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the initial trace from the explicit initial weighted convergence and works on [0,T_*]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no choice principle or arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a conditional implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from Euler flow to kinetic convergence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Checked every step 1.1–6.1 and exact F1–F5/A1 suppliers: positive n,T; epsilon>0; invariant brackets zero; fixed-velocity integration by parts before Fubini on grouped transport terms; degree-three spacetime and degree-two initial weights bound test coefficients. Gaussian moments give momentum and energy fluxes. The smooth bump lemma applies in an interior coordinate ball and upgrades continuous zero-distribution residuals to pointwise zero. No convergence is inferred from entropy or small epsilon. Periodic faces and initial trace are explicit; no choice beyond inherited AC_omega. Reader and refuter report no outstanding content findings. Pressure-unit addition preserves these claims."
+      }
+    },
+    "post-fd-bgk-relaxation": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate states the moment-matched Maxwellian, constant phenomenological relaxation time and dimensionless homogeneous fast scale. The current batch-25 BGK definition carrier is present and its moment convention matches; its current Step 1 readiness record is missing."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope separates this monatomic homogeneous BGK idealization from the binary Boltzmann operator and excludes inhomogeneous hydrodynamic limits, many-particle derivations, and empirical claims."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Golse–Levermore Lecture 2 §II and Tong §2.5.1 were read at the cited full-text locators; the former gives the local-Maxwellian BGK form, while the latter is used only for its explicit approximation caveat. Fetch stamps are in batch-26.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section explicitly adopts a phenomenological relaxation model and does not claim an exact microscopic collision operator or derive BGK from the binary Boltzmann postulate."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-bgk-equilibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-homogeneous-bgk-limit",
+          "source_section": "Statement",
+          "quote": "Let $v_*=1\\,\\mathrm{m\\,s^{-1}}$, $\\omega_3(v):=\\sum_{j=0}^3(|v|/v_*)^j$, let $\\tau>0$ be a relaxation time in seconds, and let $\\epsilon>0$ be dimensionless. Let $f_0:\\mathbb R^3\\to[0,\\infty)$ be a finite-valued measurable velocity density with units fixed by the kinetic-density definition, with $\\int\\omega_3f_0\\,dv<\\infty$, number density $n>0$, and strictly positive centered second moment. Let $M=M[f_0]$ be its positive-temperature Gaussian from the single-species BGK definition. Fix a constant reference density $f_{\\rm ref}>0$ with the same units as $f_0$ and assume $\\int f_0|\\log(f_0/f_{\\rm ref})|\\,dv<\\infty$, with $0\\log0:=0$ and the integrand $f_0|\\log(f_0/f_{\\rm ref})|$ assigned value zero where $f_0=0$. Define\n$$f^\\epsilon(t,v):=M(v)+e^{-t/(\\epsilon\\tau)}(f_0(v)-M(v)),\\qquad t\\ge0\\text{ in seconds}.$$\nThen $f^\\epsilon\\ge0$, has the same mass, momentum, and kinetic energy as $f_0$ for every $t$, belongs to $C^1([0,\\infty);L^1(\\omega_3\\,dv))$, and solves, as an equality in $L^1(\\omega_3\\,dv)$,\n$$\\partial_t f^\\epsilon=\\frac{M[f^\\epsilon]-f^\\epsilon}{\\epsilon\\tau},\\qquad f^\\epsilon(0)=f_0.$$\nA solution means a nonnegative $C^1([0,\\infty);L^1(\\omega_3\\,dv))$ function satisfying this equality at each time. The solution is unique among nonnegative solutions in this function class whose density and temperature remain strictly positive. Moreover,\n$$\\int_{\\mathbb R^3}\\omega_3|f^\\epsilon(t)-M|\\,dv =e^{-t/(\\epsilon\\tau)}\\int_{\\mathbb R^3}\\omega_3|f_0-M|\\,dv,$$\nand for every $T_*>0$,\n$$\\int_0^{T_*}\\int_{\\mathbb R^3}\\omega_3|f^\\epsilon-M|\\,dv\\,dt \\le\\epsilon\\tau\\int_{\\mathbb R^3}\\omega_3|f_0-M|\\,dv.$$\nThus the equilibrium limit is exact for each fixed $t>0$ and in spacetime weighted $L^1$, but need not be uniform at $t=0$. This branch has stationary homogeneous Euler moments; it gives no evolving inhomogeneous Euler limit.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-conserving-bgk",
+          "source_section": "Definition",
+          "quote": "Fix the particle mass $m>0$ in kilograms, Boltzmann constant $k_B>0$ in joules per kelvin, and velocity Lebesgue measure $dv$ from the kinetic-density definition. Put $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and $\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$. Here $v\\in\\mathbb R^3$ is measured in metres per second, and $f$ is a number density in velocity space with units $\\mathrm{s^3\\,m^{-6}}$. For a finite-valued nonnegative measurable velocity density $f:\\mathbb R^3\\to[0,\\infty)$ with finite absolute third moment $\\int\\omega_3(v)f(v)\\,dv<\\infty$, set $n:=\\int f\\,dv$. Where $n>0$, set $u:=n^{-1}\\int vf\\,dv$ and $T:=m(3k_Bn)^{-1}\\int|v-u|^2f\\,dv$; then $n$ has units $\\mathrm{m^{-3}}$, $u$ has units $\\mathrm{m\\,s^{-1}}$, and $T$ has units kelvins. Define the admissible BGK input domain\n$$\\mathcal D_{\\rm BGK}:=\\left\\{f:\\int\\omega_3f\\,dv<\\infty,\\ f\\ge0\\text{ finite-valued measurable},\\ n>0,\\ \\int|v-u|^2f\\,dv>0\\right\\}.$$\nFor $f\\in\\mathcal D_{\\rm BGK}$, the temperature $T$ is strictly positive, $\\theta:=k_BT/m$ has units $\\mathrm{m^2\\,s^{-2}}$, and the moment-matched Maxwellian $M[f]$ and relaxation operator are defined by the following formulas; $M[f]$ has the same units as $f$:\n$$M[f](v):=n(2\\pi\\theta)^{-3/2}\\exp(-|v-u|^2/(2\\theta)),\\qquad Q_{\\rm BGK}(f):=\\frac{M[f]-f}{\\tau}.$$\nFor fixed relaxation time $\\tau>0$ measured in seconds, the displayed formula defines the single-species Bhatnagar–Gross–Krook (BGK) relaxation operator pointwise on $\\mathcal D_{\\rm BGK}$, with $Q_{\\rm BGK}(f)$ in units of $f$ per second. The corresponding accelerated homogeneous model with dimensionless parameter $\\epsilon>0$ is $\\partial_t f=Q_{\\rm BGK}(f)/\\epsilon$. Outside $\\mathcal D_{\\rm BGK}$ this item assigns no BGK operator. This is a prescribed relaxation model. It is distinct from the binary collision operator and does not by itself assert a derivation from microscopic mechanics or an inhomogeneous hydrodynamic limit.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-fd-maxwellian-moments",
+          "source_section": "Statement",
+          "quote": "Thus its pressure tensor is isotropic and its centered heat flux vanishes; these conclusions concern this Gaussian profile and do not impose isotropy on a general kinetic density.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-fd-bgk-entropy-rate",
+          "source_section": "Statement",
+          "quote": "$$0\\le H(f^\\epsilon(t))-H(M)",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\exp^{(m)}=\\exp.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-function-limits",
+          "source_section": "Statement",
+          "quote": "$$\\lim_{x \\to c} (fg)(x) \\;=\\; \\Bigl(\\lim_{x \\to c} f(x)\\Bigr)\\Bigl(\\lim_{x \\to c} g(x)\\Bigr) \\;=\\; LM ;$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-bgk-relaxation",
+          "source_section": "Postulate",
+          "quote": "Let $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and $\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$. A velocity density $g:\\mathbb R^3\\to[0,\\infty)$ is admissible when it is finite-valued and Lebesgue measurable, $g\\,d^3v$ is a number density in $\\mathrm{m^{-3}}$ (so $g$ has units $\\mathrm{s^3\\,m^{-6}}$), and\n$$\\int_{\\mathbb R^3}\\omega_3(v)g(v)\\,d^3v<\\infty.$$\nThe primitive parameters are species mass $m>0$ in kilograms and Boltzmann constant $k_B>0$ in joules per kelvin. For an admissible $g$ with $n[g]:=\\int_{\\mathbb R^3}g\\,d^3v>0$ and positive centered second moment, define\n$$u[g]:=\\frac{1}{n[g]}\\int_{\\mathbb R^3}v g(v)\\,d^3v,\\qquad T[g]:=\\frac{m}{3k_Bn[g]}\\int_{\\mathbb R^3}|v-u[g]|^2g(v)\\,d^3v.$$\nThe domain condition ensures $T[g]>0$.\nDefine its moment-matched Maxwellian by\n$$M[g](v)=n[g]\\left(\\frac{m}{2\\pi k_BT[g]}\\right)^{3/2}\\exp\\left(-\\frac{m|v-u[g]|^2}{2k_BT[g]}\\right).$$\nIt has the same number, momentum, and kinetic-energy moments as $g$. For a constant relaxation time $\\tau>0$ in seconds, adopt the homogeneous collision model\n$$Q_{\\rm BGK}(g)=\\frac{M[g]-g}{\\tau}.$$\n\nLet $f_0$ be an admissible initial density with positive number density and positive centered second moment. For each dimensionless $\\varepsilon>0$, a trajectory considered in the accelerated model is a continuously differentiable map\n$$f^\\varepsilon\\in C^1\\!\\left([0,\\infty);L^1\\!\\left(\\mathbb R^3,\\omega_3(v)\\,d^3v\\right)\\right),$$\nwhose states have nonnegative admissible representatives with positive number density and positive centered second moment at every $t\\ge0$, and whose initial trace satisfies $f^\\varepsilon(0)=f_0$ in this weighted $L^1$ space. The derivative is the Banach-space derivative, with the right derivative at $t=0$. Adopt\n$$\\frac{d}{dt}f^\\varepsilon(t)=\\frac{M[f^\\varepsilon(t)]-f^\\varepsilon(t)}{\\varepsilon\\tau},\\qquad t\\ge0,$$\nas an equality in $L^1(\\mathbb R^3,\\omega_3(v)\\,d^3v)$ at every $t\\ge0$.\n\nThe model also permits pointwise solution representatives $\\widetilde f:\\mathbb R^3\\times[0,\\infty)\\to[0,\\infty)$ that are jointly measurable, have finite $\\omega_3$-weighted velocity integral at every time, and satisfy $\\widetilde f(v,0)=f_0(v)$ for almost every $v$. Require their velocity sections to be continuous on $[0,\\infty)$ and differentiable on $(0,\\infty)$ for almost every $v$, with positive number density and centered second moment at every time. In this solution sense, require one full-measure set of velocities on which\n$$\\partial_t\\widetilde f(v,t)=\\frac{M[\\widetilde f(\\cdot,t)](v)-\\widetilde f(v,t)}{\\varepsilon\\tau}$$\nholds for every $t>0$, and require on each compact time interval a velocity-integrable majorant for $\\omega_3(v)|\\partial_t\\widetilde f(v,t)|$ independent of $t$. The Banach-space and pointwise equalities specify two solution senses for the same adopted model; neither asserts solution existence. This is a separate phenomenological relaxation model. It does not replace or follow from the binary Boltzmann postulate, and the relaxation-time form is not asserted to be an exact microscopic collision operator. No empirical premise or measured relaxation time is asserted.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-solution-branch",
+          "claim": "Apply the current homogeneous BGK theorem to obtain the nonnegative weighted-Banach-space solution and its exact omega3 estimate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "conserve-pointwise-moments",
+          "claim": "Let $\\tilde f$ be any solution in the pointwise class stated above. By [F5], its number, momentum, and energy moment functions are differentiable under their integrals. Integrating the equation [A2] against $1$, $mv_i$, and $m|v|^2/2$, the BGK definition [F2] and Maxwellian moments [F3] make each derivative zero. Hence those moments equal their initial values, so $M[\\tilde f(t)]=M$ for every $t$. The equation reduces to $\\partial_t(\\tilde f-M)=-(\\tilde f-M)/(\\varepsilon\\tau)$ for almost every velocity and every $t>0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pointwise-uniqueness",
+          "claim": "Solve the resulting scalar linear equation by an integrating factor and the mean-value theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "weighted-and-entropy-bounds",
+          "claim": "Derive the chosen smaller weighted-L1 equality from the exact formula; its units are m^-3. Apply the current entropy-rate proposition to the reference-relative entropy, also in m^-3.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "initial-layer-and-equilibrium-boundary",
+          "claim": "Take the fixed-positive-time fast-scale limit and check the t=0 and stationary equilibrium cases.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n_0>0 and positive centered second moment make the Maxwellian branch nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: omega_3 is the fixed sum of four nonnegative terms beginning with 1; n_0>0 and T_0>0 make M a positive Gaussian on R^3. Proof 1.1 supplies the explicit curve and 3.1 separately handles zero mismatch, so a zero norm is not an empty family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The current model retains fixed four-term omega3, n0>0 and positive centered variance, so M is a positive Gaussian on R3. Step1.1 supplies the explicit trajectory;3.1 handles the separate zero-mismatch equilibrium. The revised solution-sense A2 and draft-readiness wording do not turn a zero norm into an empty family.",
+            "item_sha256": "6de52d839f2cb8176aa3560b389e049b53017371faa713909fc01e3bd574ea43",
+            "row_sha256": "7d1f9347fbc48f0ee88b44bdbfba56e1d4d99957c50040d0a20ace6d441f7668",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-25-31.json",
+              "sha256": "eeceac2f84fa65fcbf55c7443149978e45bcb99afe314e11ba7a87d1f6534a40"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $v_*=1\\,\\mathrm{m\\,s^{-1}}$ and\n$\\omega_3(v)=\\sum_{j=0}^3(|v|/v_*)^j$. Let\n$f_0:\\mathbb R^3\\to[0,\\infty)$ be a measurable velocity number density,\nwith $f_0$ in $\\mathrm{s^3\\,m^{-6}}$ and $f_0\\,d^3v$ measured in\n$\\mathrm{m^{-3}}$, satis"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement permits f_0=0 on velocity subsets with 0log0=0; step 2.2 uses the exact absolute-value formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement is single species and the conserved number density is n_0>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes f_0=M almost everywhere as the stationary zero-gap case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks t=0 separately from every fixed t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The solution formula and pointwise uniqueness use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an explicit solution and one-way estimate, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a small entropy gap to a unique initial state is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "dimensionless norm comparison",
+          "method": "For z=|v|/v_*≥0, 1+z^3≤1+z+z^2+z^3=omega_3.",
+          "result": "The chosen 1+z^3 weighted norm is finite and bounded by the exact omega_3 norm."
+        },
+        {
+          "name": "time-integrated exponential",
+          "method": "Integrate a(t)=exp(-t/(epsilon tau)) on [0,T_*].",
+          "result": "The integral is epsilon tau(1-exp(-T_*/(epsilon tau)))≤epsilon tau."
+        }
+      ],
+      "planned_supplier_excerpts": {
+        "thm-fd-homogeneous-bgk-limit": {
+          "path": "items/thm-fd-homogeneous-bgk-limit.md#Statement",
+          "carrier_status": "Current draft carrier Statement and complete proof independently inspected at Step 3a for this owned use; exact hypotheses and conclusion match. Authoring readiness is not proof acceptance.",
+          "excerpt": "$$f^\\epsilon(t,v):=M(v)+e^{-t/(\\epsilon\\tau)}(f_0(v)-M(v)),\\qquad t\\ge0.$$"
+        },
+        "prop-fd-bgk-entropy-rate": {
+          "path": "items/prop-fd-bgk-entropy-rate.md#Statement",
+          "carrier_status": "Current draft carrier Statement and complete proof independently inspected at Step 3a for this owned use; exact hypotheses and conclusion match. Authoring readiness is not proof acceptance.",
+          "excerpt": "$$0\\le H(f^\\epsilon(t))-H(M)\n\\le e^{-t/(\\epsilon\\tau)}\\bigl(H(f_0)-H(M)\\bigr).$$"
+        }
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Checked steps 1.1–3.1, homogeneous BGK theorem and entropy proposition including their proofs, BGK definition, Gaussian moments and every cited calculus statement. Finite omega3 moments and positive n and variance satisfy the supplier domains. Convex-combination formula preserves moments, positivity and weighted C1 regularity. In the pointwise class the common velocity full-measure set and derivative majorants permit conservation for all times; continuity at zero fixes the integrating-factor constant. The smaller norm is controlled by omega3 and its exact exponential formula proves the integrated bound. Relative entropy uses finite absolute entropy and Gaussian quadratic-log cancellation. Checked t=0, each fixed t>0, epsilon,tau>0 and f0=M stationary case; no uniform-at-zero convergence or binary Boltzmann conclusion. Reader/refuter have no findings. Golse BGK source is PDF p.28 under Examples, so the incorrect section-II locator is corrected without altering the claim."
+      }
+    },
+    "texp-fd-bgk-preparation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-bgk-equilibration",
+          "source_section": "Statement",
+          "quote": "$$f^\\varepsilon(v,t)=M(v)+e^{-t/(\\varepsilon\\tau)}(f_0(v)-M(v)).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prepared-density-moments",
+          "claim": "Let $C=n_0/(8V_c^3)$ and $R=\\sqrt3V_c/v_*$. The cube has volume $8V_c^3$, so $\\int f_0\\,d^3v=n_0$. Symmetry of each interval gives $\\int v f_0\\,d^3v=0$. For the second moment, each coordinate contributes $(2V_c)^2\\int_{-V_c}^{V_c}s^2\\,ds=8V_c^5/3$, so $\\int_{[-V_c,V_c]^3}|v|^2\\,d^3v=8V_c^5$; dividing by $8V_c^3$ gives mean square speed $V_c^2$. Thus $\\int |v|^2f_0\\,d^3v=n_0V_c^2=3n_0k_BT_0/m$, so the mean velocity is zero and its temperature is $T_0$. On the support, $\\omega_3(v)\\le1+R+R^2+R^3$, hence $\\int\\omega_3 f_0\\,d^3v\\le n_0(1+R+R^2+R^3)<\\infty$. With $f_{\\rm ref}>0$ in the same units as $C$, $\\int f_0|\\log(f_0/f_{\\rm ref})|\\,d^3v=n_0|\\log(C/f_{\\rm ref})|<\\infty$, using $0\\log0=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "not-equilibrium",
+          "claim": "The Maxwellian $M$ is strictly positive on all of $\\mathbb R^3$, whereas $f_0$ vanishes outside the compact cube, so $f_0\\ne M$ almost everywhere and $\\|f_0-M\\|_{1,3}>0$. The data in step 1.1 satisfy the hypotheses of [F1]; applying it gives the exact solution and exponential weighted-norm equality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "conditional-initial-layer",
+          "claim": "For each fixed $t>0$, $e^{-t/(\\varepsilon\\tau)}\\to0$ as $\\varepsilon\\to0$, so the equality in step 2.1 gives $f^\\varepsilon(t)\\to M$ in the weighted L^1 norm, which has units m^-3. At $t=0$, the solution is $f_0$, whose positive mismatch was proved in step 2.1. The initial layer is therefore a conditional model prediction for this hypothetical preparation, not an empirical result.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n_0>0 and T_0>0 make the prepared density and velocity box nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses V_c>0 from T_0>0; the box width does not collapse to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement is explicitly single species and the initial density integrates to n_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the selected compactly supported density is not the Maxwellian."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 distinguishes t=0 from fixed t>0, the initial layer endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction uses an explicit box and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a conditional model prediction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse inference from relaxation to a unique initial density is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "box normalization and moments",
+          "method": "Direct one-dimensional integrals on [-V_c,V_c] and product volume.",
+          "result": "\\int f_0\\,d^3v=n_0,\\quad \\int vf_0\\,d^3v=0,\\quad \\int |v|^2f_0\\,d^3v=n_0V_c^2=3n_0k_BT_0/m."
+        },
+        {
+          "name": "reference-relative entropy",
+          "method": "The density is constant on a finite-volume cube and zero elsewhere.",
+          "result": "The absolute entropy integral equals n_0 times the finite absolute logarithm of C/f_ref."
+        }
+      ]
+    },
+    "pthm-fd-local-boltzmann-h-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-fd-boltzmann-model",
+          "source_section": "Postulate",
+          "quote": "$$\\partial_t f+v\\cdot\\nabla_x f=Q_\\nu(f)$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-physical-kinetic-observables",
+          "source_section": "Definition",
+          "quote": "$$h=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad J_H=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad s_{\\rm kin}=-k_Bh,\\qquad j_{\\rm kin}=-k_BJ_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-elastic-collision-measure",
+          "source_section": "Definition",
+          "quote": "Each velocity is in $\\mathbb R^3$ measured in metres per second, $dv=\\lambda_3$ is three-dimensional Lebesgue measure, and $v_*=1\\,\\mathrm{m\\,s^{-1}}$ is the fixed reference speed. The elastic collision set is\n$$Q_{\\rm el}:=\\{(v,w,v',w')\\in\\mathbb R^{12}:v+w=v'+w',\\ |v|^2+|w|^2=|v'|^2+|w'|^2\\},$$\nwith its relative Borel sigma-algebra. A collision measure is a nonnegative countably additive measure $\\nu$ on this set, invariant under particle exchange in either pair and under interchange of incoming and outgoing pairs. Symmetry is a model hypothesis; it does not follow merely from the conservation equations.\n\nThe collision model declares an input domain $\\mathcal D_\\nu$ contained in the finite-valued, positive, Lebesgue-measurable functions $f:\\mathbb R^3\\to(0,\\infty)$ for which each of the four coordinate evaluations $f(v),f(w),f(v'),f(w')$ on $Q_{\\rm el}$ is $\\nu$-measurable. For each $f\\in\\mathcal D_\\nu$, it supplies a chosen measurable locally integrable representative $Q_\\nu(f)\\in L^1_{\\rm loc}(\\mathbb R^3,dv)$. For finite-valued complex Lebesgue-measurable $\\varphi$, set\n$$A:=f(v)f(w),\\qquad B:=f(v')f(w'),\\qquad \\delta\\varphi:=\\varphi(v)+\\varphi(w)-\\varphi(v')-\\varphi(w').$$\nLet $\\mathcal T_f$ be the class of those $\\varphi$ for which $\\delta\\varphi$ is $\\nu$-measurable and both integrals\n$$\\int_{\\mathbb R^3}|\\varphi(v)Q_\\nu(f)(v)|\\,dv,\\qquad \\int_{Q_{\\rm el}}|(B-A)\\delta\\varphi|\\,d\\nu$$\nare finite. For each $f\\in\\mathcal D_\\nu$, the model declares a complex linear subspace $\\mathcal S_f\\subseteq\\mathcal T_f$ containing every compactly supported smooth complex-valued velocity test $\\varphi\\in C_c^\\infty(\\mathbb R^3;\\mathbb C)$. Require the weak collision identity\n$$\\int_{\\mathbb R^3}\\varphi(v)Q_\\nu(f)(v)\\,dv =\\frac14\\int_{Q_{\\rm el}}(B-A)\\delta\\varphi\\,d\\nu$$\nfor every $\\varphi\\in\\mathcal S_f$. For the moment-balance results below, additionally require $1$, $v_1,v_2,v_3$, and $|v|^2$ to lie in $\\mathcal S_f$; for the entropy result additionally require $\\log(f/f_{\\rm ref})\\in\\mathcal S_f$, where $f_{\\rm ref}>0$ is a constant reference density with the same units as $f$. Each required membership includes the stated measurability and absolute-convergence conditions. The collision measure and weak identity are adopted mathematical model data; they do not assert a microscopic derivation or that every density and measure admit such an operator. In a physical application, normalize the units of $\\nu$ so $Q_\\nu(f)$ has units of $f$ per second; no specific cross-section or measured collision rate is fixed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-function-limits",
+          "source_section": "Statement",
+          "quote": "$$\\lim_{x \\to c} (fg)(x) \\;=\\; \\Bigl(\\lim_{x \\to c} f(x)\\Bigr)\\Bigl(\\lim_{x \\to c} g(x)\\Bigr) \\;=\\; LM ;$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "differentiate-local-entropy-integrals",
+          "claim": "Differentiate h and J_H under their velocity integrals and combine the transport and time derivatives.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-collision-production",
+          "claim": "Use the equation and weak tests 1 and log(f/f_ref); write the logarithm as the dimensionless ratio A/B to identify the local collision contribution as -D.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonnegative-local-production",
+          "claim": "Use monotonicity of the logarithm on the dimensionless positive ratio A/B and nonnegativity of the collision measure.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes L_j>0 and a positive solution on the periodic cell.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: The product has exactly three periodic factors with L_j>0 and the weight has four terms j=0,...,3. The positive solution and local velocity integrals remain on these fixed spaces; steps 1.1–2.1 derive the balance there, so the product token is not an empty-family branch.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The current torus has exactly three positive periods and the fixed omega3 includes1. Steps1.1–2.1 use the positive profile and its velocity/log tests; the new per-time measurable L1 absolute-production hypothesis controls D, rather than admitting an empty product or arbitrary zero-member family.",
+            "item_sha256": "310825729a90c441047290a80f81f2fabe27fb2479673fafec8930270d79f5bf",
+            "row_sha256": "8f260262efeb1231683097bda13fbbf856f080470106c9222200e71c33c0ec7f",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-25-31.json",
+              "sha256": "eeceac2f84fa65fcbf55c7443149978e45bcb99afe314e11ba7a87d1f6534a40"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let\n$\\Omega=\\prod_{j=1}^3(\\mathbb R/L_j\\mathbb Z)$ be a periodic spatial cell with\n$L_j>0$ in metres. Let $v\\in\\mathbb R^3$ be measured in metres per second and\nlet $f:I\\time"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero integrand when A=B; strict production is not claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result concerns a continuous three-dimensional velocity space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 allows A=B at every collision, yielding D=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "I is open and the statement makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no choice principle or arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a local balance and inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of zero production is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Checked all steps 1.1–3.1 and exact collision definition, observables and calculus supplier statements. Positivity permits differentiation of log(f/f_ref); the stated uniform velocity envelopes control each derivative integral. Tests 1 and ell are assumed absolutely convergent at every state and give -D with factor 1/4. Corrected logarithms use dimensionless A/f_ref^2 and B/f_ref^2. Log derivative and MVT prove sign for A>B, A<B and equality A=B. No strict entropy production or equilibrium converse is claimed. Spatial production measurability and integrability are explicit. Reader/refuter findings arrays are empty; accepted repair needs no further mathematical hypothesis."
+      }
+    }
+  }
+}

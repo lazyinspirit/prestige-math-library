@@ -1,0 +1,124 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-21-1",
+  "inventory": {
+    "pages": [
+      "fd-ps02",
+      "fd-ps02-examples"
+    ],
+    "items": [
+      "post-fd-navier-slip-wall-law",
+      "pthm-fd-local-momentum-balance-from-continuum",
+      "pthm-fd-wall-mechanical-power-balance",
+      "pthm-fd-linear-acoustic-model-prediction",
+      "ex-fd-adopted-poiseuille-couette"
+    ],
+    "pairs": [
+      "fd-ps02"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/post-fd-navier-slip-wall-law.md",
+    "items/pthm-fd-local-momentum-balance-from-continuum.md",
+    "items/pthm-fd-wall-mechanical-power-balance.md",
+    "items/pthm-fd-linear-acoustic-model-prediction.md",
+    "items/ex-fd-adopted-poiseuille-couette.md",
+    "library/fluid-dynamics/fd-ps02.md",
+    "library/fluid-dynamics/fd-ps02-examples.md"
+  ],
+  "write_batches": [
+    "21"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-fd-adopted-poiseuille-couette",
+      "path": [
+        "post-fd-navier-slip-wall-law",
+        "pthm-fd-wall-mechanical-power-balance",
+        "ex-fd-adopted-poiseuille-couette"
+      ],
+      "paths": [
+        [
+          "post-fd-navier-slip-wall-law",
+          "pthm-fd-wall-mechanical-power-balance",
+          "ex-fd-adopted-poiseuille-couette"
+        ],
+        [
+          "pthm-fd-local-momentum-balance-from-continuum",
+          "pthm-fd-wall-mechanical-power-balance",
+          "ex-fd-adopted-poiseuille-couette"
+        ],
+        [
+          "pthm-fd-wall-mechanical-power-balance",
+          "ex-fd-adopted-poiseuille-couette"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-fd-wall-mechanical-power-balance",
+      "path": [
+        "post-fd-navier-slip-wall-law",
+        "pthm-fd-wall-mechanical-power-balance"
+      ],
+      "paths": [
+        [
+          "post-fd-navier-slip-wall-law",
+          "pthm-fd-wall-mechanical-power-balance"
+        ],
+        [
+          "pthm-fd-local-momentum-balance-from-continuum",
+          "pthm-fd-wall-mechanical-power-balance"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "post-fd-navier-slip-wall-law": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "An adopted smooth stationary impermeable wall law for the incompressible Newtonian branch; no universality, measured coefficient, roughness derivation, or moving-wall slip law is asserted.",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nLet $\\Omega\\subset\\mathbb R^3$ be a bounded domain with $C^2$ boundary, fixed in an inertial Euclidean frame, and let $n$ be its outward unit normal. On $\\partial\\Omega$, let $u$ be the trace of a $C^1$ fluid-velocity field in metres per second and let $\\sigma$ be the Cauchy-stress tensor in pascals, with traction on the fluid defined by $\\sigma n$. For a vector $a$, define its tangential projection by $a_\\tau:=a-(a\\cdot n)n$. Adopt impermeability $u\\cdot n=0$ and the linear friction wall law\n\n$$ (\\sigma n)_\\tau=-\\beta u_\\tau,$$\n\nwhere $\\beta\\ge0$ is a constant with units pascal-seconds per metre. In the incompressible Newtonian branch with constant dynamic viscosity $\\eta>0$ in pascal-seconds, this law corresponds for finite slip length $\\ell_s>0$ to $\\beta=\\eta/\\ell_s$; $\\beta=0$ is the zero-tangential-traction endpoint. This is a selected wall model, not a consequence of interior balance equations, a measured value of $\\beta$, or a claim that any material or wall universally obeys it."
+    ],
+    "pthm-fd-local-momentum-balance-from-continuum": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Smooth positive-density constant-density incompressible Newtonian material regions under the adopted integral momentum balance. It derives the local forced momentum equation by transport and localization; it asserts no solution existence or empirical validity.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nAssume Countable Choice. Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let $B\\subseteq\\mathbb R^3$ be an open reference region. Let $\\chi\\in C^2(I\\times B;\\mathbb R^3)$ be a material motion whose maps $\\chi_t$ are orientation-preserving $C^2$ diffeomorphisms onto their open images, and define the Eulerian velocity by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Set $\\Omega_t:=\\chi_t(B)$ and $\\mathcal O:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$. Assume that $\\partial_tu$ and all spatial derivatives of $u$ through order two are continuous on $\\mathcal O$, that $p$ and its spatial first derivatives are continuous on $\\mathcal O$, and that $b\\in C^0(\\mathcal O;\\mathbb R^3)$; here $u$ is in metres per second, $p$ in pascals, and body acceleration $b$ in metres per second squared. In the selected constant-density incompressible Newtonian branch, let the current density be the constant $\\rho>0$ kilograms per cubic metre, let $\\operatorname{div}u=0$, let the dynamic viscosity be the constant $\\eta>0$ pascal-seconds, and put\n\n$$D(u):=\\frac{\\nabla u+(\\nabla u)^{\\mathsf T}}2,\\qquad \\sigma:=-pI_3+2\\eta D(u),\\qquad (\\operatorname{div}\\sigma)_i:=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}.$$\n\nAssume the adopted material linear-momentum balance holds for every nonempty bounded open $V\\Subset B$ with $C^1$ boundary:\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}\\sigma n\\,dS,$$\n\nwhere $n$ is the outward normal and $dx,dS$ are Euclidean volume and area measures. Then throughout each $\\Omega_t$ the corresponding local equation is\n\n$$\\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)=\\operatorname{div}\\sigma+\\rho b.$$\n\nThis is a conditional local form of the adopted balance for the stated smooth material motion and model branch; it makes no existence or empirical-applicability claim."
+    ],
+    "pthm-fd-wall-mechanical-power-balance": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Smooth incompressible Newtonian solutions of constant positive density and viscosity on a fixed bounded C2 domain, or on the stated periodic channel with no-slip physical walls. The adopted stationary Navier friction law is used only on the bounded-domain branch. It gives conditional mechanical power identities and stationary bounded-domain smooth uniqueness only; no existence or universal wall-law applicability is asserted.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nAssume Countable Choice, meaning every countable family of nonempty sets has a choice function. Let $T>0$ seconds. The spatial domain is either (B) a bounded connected nonempty open $\\Omega\\subset\\mathbb R^3$ with $C^2$ boundary, or (P) a periodic channel $\\Omega_{L_x,h,L_z}:=(\\mathbb R/L_x\\mathbb Z)\\times(0,h)\\times(\\mathbb R/L_z\\mathbb Z)$ with $L_x,L_z,h>0$ metres. In (P), fields and the material motion are periodic in the first and third coordinates on the Euclidean covering space, and the only physical wall boundary is $\\Gamma=(\\mathbb R/L_x\\mathbb Z)\\times\\{0,h\\}\\times(\\mathbb R/L_z\\mathbb Z)$; identified periodic faces are not walls. In (B), set $\\Gamma:=\\partial\\Omega$. In either case let $n$ be the outward unit normal on $\\Gamma$, let $dx$ be Euclidean volume measure (or its periodic-cell quotient measure), and let $dS$ be the induced area measure on $\\Gamma$. Let the constant mass density be $\\rho>0$ kilograms per cubic metre, the constant dynamic viscosity be $\\eta>0$ pascal-seconds, the body-acceleration field be $b\\in C([0,T]\\times\\overline\\Omega;\\mathbb R^3)$ in metres per second squared, the velocity be $u\\in C^1([0,T];C^2(\\overline\\Omega;\\mathbb R^3))$ in metres per second, and the pressure be $p\\in C([0,T];C^1(\\overline\\Omega))$ in pascals. Assume that $u$ is the Eulerian velocity of a smooth material motion preserving $\\Omega$ (or its periodic lift), and that the adopted material linear-momentum balance holds on every admissible material subregion. Define $D(u)_{ij}:=(\\partial_{x_j}u_i+\\partial_{x_i}u_j)/2$, $\\sigma:=-pI+2\\eta D(u)$, and rowwise $(\\operatorname{div}\\sigma)_i:=\\sum_j\\partial_{x_j}\\sigma_{ij}$. At every time impose one of the following wall laws: (N) no-slip, $u=g$ on $\\Gamma$ for a prescribed tangential wall-velocity field $g\\in C^1([0,T];C^2(\\Gamma;\\mathbb R^3))$ in metres per second with $g\\cdot n=0$; or (S) stationary Navier friction on branch (B) only, $u\\cdot n=0$ and $(\\sigma n)_\\tau=-\\beta u_\\tau$ on $\\Gamma$, where $a_\\tau:=a-(a\\cdot n)n$ and $\\beta\\ge0$ is the adopted constant wall coefficient in pascal-seconds per metre. Then the local momentum equation\n\n$$\\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)=\\operatorname{div}\\sigma+\\rho b,\\qquad \\operatorname{div}u=0$$\n\nholds on the fluid domain by the local momentum result from the adopted material balance. Let $K(t):=\\int_\\Omega \\rho|u(t,x)|^2/2\\,dx$. Then for every $t\\in(0,T)$ in case (N),\n\n$$\\frac{dK}{dt}=\\int_\\Omega \\rho b\\cdot u\\,dx-2\\eta\\int_\\Omega |D(u)|^2\\,dx+\\int_{\\Gamma}g\\cdot\\sigma n\\,dS,$$\n\nand for every $t\\in(0,T)$ in case (S),\n\n$$\\frac{dK}{dt}=\\int_\\Omega \\rho b\\cdot u\\,dx-2\\eta\\int_\\Omega |D(u)|^2\\,dx-\\beta\\int_{\\Gamma}|u_\\tau|^2\\,dS.$$\n\nEvery term has units of watts. In branch (B) only, in either stationary homogeneous case, (N) with $g=0$ or (S) with a fixed $\\beta$, there is at most one solution in this smooth class for a given body force and initial velocity. These are deductions conditional on the stated model and wall assumptions; no solution-existence or empirical-applicability claim is made."
+    ],
+    "pthm-fd-linear-acoustic-model-prediction": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Exact global smooth tangent-model prediction for a positive-density, no-force barotropic Euler equilibrium at rest on a periodic three-dimensional cell, when p'(rho*)>0. No finite-amplitude error estimate or empirical applicability claim is asserted.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nAssume Countable Choice. Let $I\\subseteq\\mathbb R$ be an open time interval measured in seconds with $0\\in I$, let $L=1\\,\\mathrm m$, and let $\\Omega_L:=\\mathbb R^3/(2\\pi L\\mathbb Z)^3$ be a spatial periodic cell with coordinates in metres and volume measure $dx$ induced from a fundamental cell. Let $p:(0,\\infty)\\to\\mathbb R$ be a $C^1$ barotropic pressure law in pascals, let $\\rho_*>0$ be a constant reference density in kilograms per cubic metre, and assume $p'(\\rho_*)>0$ in square metres per second squared. The adopted no-force barotropic Euler model is\n\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla p(\\rho)=0,$$\n\nfor periodic fields $\\rho\\in C^2(I\\times\\Omega_L;(0,\\infty))$ and $u\\in C^2(I\\times\\Omega_L;\\mathbb R^3)$, where density is in kilograms per cubic metre and velocity is in metres per second. The uniform state $(\\rho,u)=(\\rho_*,0)$ is an equilibrium. For $z\\in C^\\infty(I\\times\\Omega_L;\\mathbb R)$ and $v\\in C^\\infty(I\\times\\Omega_L;\\mathbb R^3)$ periodic in space, define the tangent model as the vanishing first variation at $\\epsilon=0$ of this equation operator on $\\rho_\\epsilon=\\rho_*+\\epsilon z$ and $u_\\epsilon=\\epsilon v$. That tangent model is\n\n$$\\partial_t z+\\rho_*\\operatorname{div}v=0,\\qquad \\partial_t v+\\frac{c_*^2}{\\rho_*}\\nabla z=0,\\qquad (z,v)|_{t=0}=(z_0,v_0),\\qquad c_*:=\\sqrt{p'(\\rho_*)}>0.$$\n\nHere $z$ is a density perturbation in kilograms per cubic metre, $v$ is a velocity perturbation in metres per second, and $c_*$ is the model sound speed in metres per second. For every smooth periodic initial pair $z_0:\\Omega_L\\to\\mathbb R$ and $v_0:\\Omega_L\\to\\mathbb R^3$, this linear tangent system has a unique global smooth solution $(z,v):\\mathbb R\\times\\Omega_L\\to\\mathbb R\\times\\mathbb R^3$. Its acoustic energy\n\n$$E_{\\mathrm{ac}}(t):=\\frac12\\int_{\\Omega_L}\\left(\\rho_*|v|^2+\\frac{c_*^2}{\\rho_*}z^2\\right)\\,dx$$\n\nis constant in joules. For each nonzero periodic wavevector $\\kappa\\in L^{-1}\\mathbb Z^3$ in inverse metres, longitudinal Fourier modes with angular frequency $\\omega$ in inverse seconds satisfy $\\omega^2=c_*^2|\\kappa|^2$; zero-frequency mean and transverse velocity modes are constant. These are exact deductions for the specified linear tangent model, not a finite-amplitude approximation theorem, an observation, or a claim that an actual fluid follows the model."
+    ],
+    "ex-fd-adopted-poiseuille-couette": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "Exact steady profiles in the stated periodic incompressible Newtonian channel model with no-slip walls; the Poiseuille pressure-drop notation is replaced by a constant body acceleration on the periodic cell. No measured flow or claim about a named material is included.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,734 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "pthm-fd-px07-prediction",
+    "pthm-fd-px10-prediction",
+    "ex-fd-x07-application",
+    "ex-fd-x10-application"
+  ],
+  "contracts": {
+    "pthm-fd-px07-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "For every such material subregion, adopt conservation of mass",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Assume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "The formal constant-density incompressible Navier--Stokes system is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-x07",
+          "source_section": "Statement",
+          "quote": "Then $$\\|\\nabla w\\|_2\\le \\frac{C_\\Omega}{\\mu}\\|f\\|_2,\\qquad \\|w\\|_2\\le \\frac{C_\\Omega^2}{\\mu}\\|f\\|_2.$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-creeping-stokes-model",
+          "source_section": "Definition",
+          "quote": "The selected steady creeping Stokes branch is $$ \\operatorname{div}u=0,\\qquad \\sigma=-pI+2\\mu D,\\qquad \\operatorname{div}\\sigma+\\rho_0b=0. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A5",
+          "source": "post-fd-creeping-force-balance",
+          "source_section": "Postulate",
+          "quote": "Adopt $$ \\operatorname{div}u=0,\\qquad \\sigma=-pI+2\\mu D,\\qquad \\operatorname{div}\\sigma+\\rho_0b=0,\\qquad D=\\tfrac12(\\nabla u+\\nabla u^{\\mathsf T}). $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "subtract-existing-strong-systems",
+          "step": "1.1",
+          "claim": "Subtracting the stationary Navier–Stokes and planned zero-body-force Stokes systems gives the exact residual equation for the velocity difference; common boundary data give zero trace.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-domain-estimate",
+          "step": "2.2",
+          "claim": "The residual field matches the bounded C1 domain theorem and the assumed Poincare inequality, yielding both L2 bounds.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "periodic-cell-energy-identity",
+          "step": "2.1",
+          "claim": "Integration by parts over one channel cell cancels periodic faces and uses zero wall trace and incompressibility to obtain μ||∇w||²=∫f·w.",
+          "inputs": [
+            "given",
+            "A4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integral-cauchy-inequality",
+          "step": "3.1",
+          "claim": "A nonnegative integral quadratic proves |∫f·w|≤||f||₂||w||₂, including the zero-norm case.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "channel-estimate",
+          "step": "4.1",
+          "claim": "The proved channel Poincare bound with constant h closes the energy estimate, with a separate zero-gradient case before division.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a bounded connected open C1 domain; the channel branch has positive side lengths and positive height.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let Ω⊂R³ be a bounded connected open C¹ domain"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 handles ||∇w||₂=0 without division; when f=0 the displayed right sides vanish and the same estimate forces w=0 under the stated Poincare bound.",
+          "case_scope": {
+            "source_section": "Proof",
+            "source_excerpt": "If r=0 the gradient estimate is immediate; if r>0, divide by μr"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result concerns continuous vector fields and has no finite index family or one-element case.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "u_NS,u_S∈C²(Ω̄;R³)"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes μ>0 and C_Ω>0; the proof separates r=0 before dividing by μr.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let C_Ω>0 have units of metres"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stationary residual estimate has no time endpoint or limiting claim.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "stationary strong incompressible Navier–Stokes equation"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and steps 2.2 and 4.1 use exactly AC_omega; no stronger choice principle is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume AC_ω, meaning countable choice for a sequence of nonempty sets."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Then ||∇w||≤C_Ω||f||/μ"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Then ||w||≤C_Ω²||f||/μ"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite computation is needed; the bounded and periodic estimates are proved analytically. The rotating-ball example has a separate exact verification."
+    },
+    "pthm-fd-px10-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "The continuum approximation, its empirical regime, and the following balance laws are physical assumptions of this model, not deductions from the mathematical definition of a motion or from molecular mechanics.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Assume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "The formal constant-density incompressible Navier--Stokes system is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-x10",
+          "source_section": "Statement",
+          "quote": "If $|S|h^2/\\nu<2$, then for every $t\\in[0,T]$,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-strong-solution-hypotheses",
+          "step": "1.1",
+          "claim": "The physical solution hypotheses specify the same parameters, regularity, periodicity, strong equation, divergence condition, and Couette wall data as the mathematical stability theorem.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "apply-conditional-stability-theorem",
+          "step": "2.1",
+          "claim": "Applying the mathematical theorem with the matched hypotheses gives the claimed finite-interval energy estimate.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires positive channel lengths, positive height, and T>0.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let L_x,L_z,h>0 be lengths in metres"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the conditional estimate without division by E(0); if E(0)=0, nonnegativity forces E(t)=0.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "E(t)=∫_Q|w(t,x,y,z)|²"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result concerns a continuous velocity field, not a finite family.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let u∈C¹([0,T];C²(Q̄;R³))"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes μ>0 and ρ₀>0, so ν>0 and the threshold and decay coefficient are defined.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let ρ₀>0 be a constant density ... and let μ>0 be a constant dynamic viscosity"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes t=0 and the chosen terminal time T, but only on the already-assumed existence interval.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "for every t∈[0,T]"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 carry exactly AC_omega through the mathematical supplier; no full-choice assumption is added.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume AC_ω, meaning countable choice for a sequence of nonempty sets."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "If |S|h²/ν<2, then for every t∈[0,T]"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The sufficient condition is not asserted to be necessary; there is no reverse implication.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "The condition is sufficient and is not asserted to be sharp."
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The item is a conditional theorem proved by applying a fully stated mathematical supplier; no finite computation can establish global existence or physical validity."
+    },
+    "ex-fd-x07-application": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Stress and traction have units Pa",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-fd-px07-prediction",
+          "source_section": "Statement",
+          "quote": "The first equation is the stationary strong incompressible Navier–Stokes system. The second is the separately adopted restricted steady Stokes comparison system, with its convective term omitted only for $u_{\\rm S}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rigid-rotation-solutions",
+          "step": "1.1",
+          "claim": "Direct differentiation verifies divergence-free velocity, zero Laplacian, centripetal acceleration, the two pressure fields, both strong equations, and the rotating no-slip wall values.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pressure-residual-and-zero-velocity-error",
+          "step": "2.1",
+          "claim": "The pressure difference has gradient equal to the convective residual, while w=0; the bounded-domain estimate then holds exactly.",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses R>0, so B_R is a nonempty bounded smooth domain.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "let R>0 metres"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example explicitly uses Ω_r>0; its pressure residual is nonzero away from the rotation axis, while the two velocity fields coincide.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Their velocity difference is zero, while the convective residual is"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses a continuum field rather than a finite index family.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "On the ball B_R"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example assumes C_{B_R}>0 and selects strictly positive R, μ, ρ₀, and Ω_r, so all parameters in the residual bounds are nondegenerate.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "let R>0 metres, ρ₀>0 ... μ>0 ... Ω_r>0"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both fields are stationary and no time endpoint or limit is claimed.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "stationary constant-density incompressible Navier–Stokes equation"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries AC_ω from the physical theorem's bounded-domain supplier chain.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume AC_ω."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The constant C_{B_R}=2R satisfies the zero-trace Poincare inequality"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no reverse implication.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "the estimate in the bounded-domain theorem applies"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The rotation identities and zero-error inequalities are exact analytic calculations; no finite numerical sample is used."
+    },
+    "ex-fd-x10-application": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "A periodic cell with side lengths $L_1,L_2,L_3>0$ metres is the quotient torus $\\mathbb T^3_L:=\\mathbb R^3/(L_1\\mathbb Z\\times L_2\\mathbb Z\\times L_3\\mathbb Z)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-fd-px10-prediction",
+          "source_section": "Statement",
+          "quote": "$$E(t)\\le\\exp\\!\\left[-\\left(\\frac{2\\nu}{h^2}-|S|\\right)t\\right]E(0).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-single-mode-strong-solution",
+          "step": "1.1",
+          "claim": "Differentiation verifies the exact strong equation, incompressibility, smoothness, periodicity, and Couette wall data.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-single-mode-energy",
+          "step": "2.1",
+          "claim": "Integration of sin² over the channel gives the exact exponential energy with the stated amplitude and cell volume.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "check-sufficient-threshold",
+          "step": "3.1",
+          "claim": "The selected dimensionless parameter is 1<2 and the exact exponent 2π² is stronger than the theorem's rate 1 s⁻¹.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example chooses positive h, Lx, Lz, and T.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take SI values h=1 metre, L_x=L_z=2π metres"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement selects a≠0 for a nontrivial mode; if a=0, the exact Couette base solution has E(t)=0 and satisfies the estimate trivially.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "choose an amplitude a≠0 metres per second"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a continuum velocity field, not a finite ensemble.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "On Q=..."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example selects positive density and viscosity, so ν=1 m²/s and all denominators are nonzero.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "ρ₀=1 kilogram per cubic metre, and μ=1 pascal-second"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example formula is defined and the inequality holds at both t=0 and t=T.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "for every t∈[0,T]"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries AC_ω through its mathematical physical-theorem supplier.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume AC_ω."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Since |S|h²/ν=1<2"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The sufficient condition is not claimed to be necessary.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "this exact decay is stronger than the sufficient bound"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "selected-dimensionless-threshold",
+          "status": "checked",
+          "evidence": "With |S|=1 s⁻¹, h=1 m, and ν=1 m²/s, |S|h²/ν=1<2.",
+          "inputs": [
+            "Example"
+          ]
+        },
+        {
+          "case": "rate-comparison",
+          "status": "checked",
+          "evidence": "2π²>1, so e^(−2π²t)≤e^(−t) for all t≥0.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "finite_checks_disposition": "These exact scalar comparisons support only this constructed parameter choice; the analytic proof and conditional supplier theorem carry the general claim."
+    }
+  }
+}

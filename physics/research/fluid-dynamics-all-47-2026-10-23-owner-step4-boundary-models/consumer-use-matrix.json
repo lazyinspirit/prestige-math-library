@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "reviewer": "/root/fluid_step4_boundary_models",
+  "scope": "Actual logical direct/indirect consumers of the proposed supplier interfaces, plus nonlogical item-reference search. No native acceptance.",
+  "graph_method": "Parsed all *fd*.md deps and justified_by supplier edges; initial five roots have empty aliases. Repository-wide rg over items and library for all five root IDs found no additional item-reference-only carrier outside this closure. Eight downstream items plus two root-as-consumer subjects are listed. No dependency edge changes are proposed.",
+  "reviews": [
+    {
+      "id": "thm-fd-smooth-wall-energy-uniqueness",
+      "source": "items/thm-fd-smooth-wall-energy-uniqueness.md",
+      "raw_sha256": "730865e49d1e1f71fc91d5ee2291ec4cd29d71794eb0b60cdea0fe1aa7e1195c",
+      "reached_through": [
+        "def-fd-smooth-wall-exterior-solution-domains"
+      ],
+      "actual_deps": [
+        "def-fd-smooth-wall-exterior-solution-domains"
+      ],
+      "decision": "unaffected",
+      "review": "Direct bounded-wall supplier use. The stated C1_t C2_x velocity and C_t C1_x pressure already have continuous classical restrictions; the theorem imposes homogeneous no-slip or stationary Navier slip itself. The energy integration and difference-energy uniqueness do not use an unspecified moving g. No equation, regularity hypothesis, force, beta, or uniqueness class changes."
+    },
+    {
+      "id": "pthm-fd-wall-mechanical-power-balance",
+      "source": "items/pthm-fd-wall-mechanical-power-balance.md",
+      "raw_sha256": "729547f0e137aa6805f2b6c409daa79a677836d2c0a6afb75143fb51aff5744d",
+      "reached_through": [
+        "def-fd-smooth-wall-exterior-solution-domains",
+        "thm-fd-smooth-wall-energy-uniqueness"
+      ],
+      "actual_deps": [
+        "def-fd-smooth-wall-exterior-solution-domains",
+        "thm-fd-smooth-wall-energy-uniqueness"
+      ],
+      "decision": "unaffected",
+      "review": "Direct smooth-wall use and indirect uniqueness use. Its own g is C1([0,T];C2(Gamma;R3)), tangential, and explicitly typed, so it satisfies the proposed continuous wall-data convention. Its bounded C2 and periodic-channel branches, nonzero moving-wall work, stationary Navier dissipation, material-motion hypotheses, and conditional bounded-domain uniqueness all remain intact. No empirical applicability is inferred."
+    },
+    {
+      "id": "rem-fd-general-viscous-wall-ivp-gaps",
+      "source": "items/rem-fd-general-viscous-wall-ivp-gaps.md",
+      "raw_sha256": "24c9ff3bd2e59e339e4eb63144d85f4638121943656db768d4678e9e3f70a0d3",
+      "reached_through": [
+        "def-fd-smooth-wall-exterior-solution-domains",
+        "thm-fd-compatible-wall-shear-heat"
+      ],
+      "actual_deps": [
+        "def-fd-smooth-wall-exterior-solution-domains",
+        "thm-fd-compatible-wall-shear-heat"
+      ],
+      "decision": "unaffected",
+      "review": "Direct bounded/exterior definition and indirect channel use. The remark says precisely that domain/regularity/trace/far-field conventions supply no existence theorem. Typing g and defining restrictions strengthens no existence conclusion and leaves every exterior/far-field limitation intact."
+    },
+    {
+      "id": "thm-fd-compatible-wall-shear-heat",
+      "source": "items/thm-fd-compatible-wall-shear-heat.md",
+      "raw_sha256": "b077861bc82d763a925ec29684b5f3ebe65bbb80bc9499ef04769ddb306bbd4b",
+      "reached_through": [
+        "def-fd-flat-channel-domains"
+      ],
+      "actual_deps": [
+        "def-fd-flat-channel-domains"
+      ],
+      "decision": "unaffected",
+      "review": "Direct channel use. The rapid-decay sine coefficients give jointly smooth time-first u on [0,infinity) times the closure, with zero classical traces. The periodic x,z geometry, heat synthesis, full smooth-flow difference-energy uniqueness and exponential decay are untouched; restricting to any finite interval fits the proposed evolution convention."
+    },
+    {
+      "id": "ex-fd-periodic-poiseuille-body-force",
+      "source": "items/ex-fd-periodic-poiseuille-body-force.md",
+      "raw_sha256": "263c299819254f72d8b474813f7d173d7c601c23469a0e020002b533fba6ec72",
+      "reached_through": [
+        "def-fd-flat-channel-domains"
+      ],
+      "actual_deps": [
+        "def-fd-flat-channel-domains"
+      ],
+      "decision": "unaffected",
+      "review": "Direct channel use. Its polynomial steady velocity is continuous and C2 up to each wall, and g=0 is a continuous map on the two faces; its infinite-channel pressure is a separate space-only map with no added decay assumption. Periodic single-valued pressure obstruction and the shear-class uniqueness proof are unchanged."
+    },
+    {
+      "id": "ex-fd-couette-vorticity",
+      "source": "items/ex-fd-couette-vorticity.md",
+      "raw_sha256": "4fa7c259ab9ad3206b59c0edc48625c2f1903df2e42f70d69549f9f6c98ab5c0",
+      "reached_through": [
+        "def-fd-flat-channel-domains"
+      ],
+      "actual_deps": [
+        "def-fd-flat-channel-domains"
+      ],
+      "decision": "proposal-subject",
+      "review": "Direct channel use; this is also a named proposal subject. The affine steady velocity and piecewise face-constant g are continuous on the disconnected wall boundary. The C2 competing shear class is retained because the proposed trace convention does not require C-infinity. Only F1 is repaired to call x streamwise and z transverse. Vorticity, flux, exact solution and shear-class uniqueness stay byte-identical."
+    },
+    {
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "source": "items/pthm-fd-no-slip-cfd-observations.md",
+      "raw_sha256": "5c55b4db3b26ec3b76d977dee205d071c1dc4fdcbb1c3b99c78a6862c4f1fae6",
+      "reached_through": [
+        "def-fd-forced-incompressible-newtonian-model"
+      ],
+      "actual_deps": [
+        "def-fd-forced-incompressible-newtonian-model"
+      ],
+      "decision": "proposal-subject",
+      "review": "Direct forced-model use; this is also a named proposal subject. The theorem explicitly adopts a distributional weak extension at its strong Sobolev regularity and expressly does not infer classical C2/C1 regularity. That alternative remains explicit, with H1_0 wall trace from V. The new conditional classical trace-extension requirement is not silently imposed on the weak extension. Reindexing u_phys(x,t)=u(t,x), likewise p,b, reconciles the physical supplier with existing space-first formulas without changing any numerical equation or bound."
+    },
+    {
+      "id": "ex-fd-cfd-density-pressure-conversion",
+      "source": "items/ex-fd-cfd-density-pressure-conversion.md",
+      "raw_sha256": "22cfa41e8a10e25a72472e3029c7f942ce236c27e3000353b64d1e785af2b0ae",
+      "reached_through": [
+        "pthm-fd-no-slip-cfd-observations"
+      ],
+      "actual_deps": [
+        "pthm-fd-no-slip-cfd-observations"
+      ],
+      "decision": "unaffected",
+      "review": "Direct CFD consumer and indirect forced-model consumer. Its physical pressure functional already uses the space-first physical convention made explicit in the proposed theorem, so no formula needs editing. Its full Countable Choice, strong-solution, adopted weak extension, mean-zero gauge, initialization, actual-root and time-step hypotheses persist. xi remains mean zero with norm 1/sqrt(12); rho0 U0 ell0^4 and the qualified symbolic pressure bound remain correct."
+    },
+    {
+      "id": "ex-fd-adopted-poiseuille-couette",
+      "source": "items/ex-fd-adopted-poiseuille-couette.md",
+      "raw_sha256": "8d7f9cad4480f35c451d5958325efc6a6258e93bf9ae2b5c76c2c66c71db2c9b",
+      "reached_through": [
+        "pthm-fd-wall-mechanical-power-balance"
+      ],
+      "actual_deps": [
+        "pthm-fd-wall-mechanical-power-balance"
+      ],
+      "decision": "unaffected",
+      "review": "Indirect smooth-wall consumer. Its affine/quadratic steady fields have smooth classical wall restrictions and the declared constant tangential g; explicit translation-equivariant shear material maps verify the mechanical-power supplier hypotheses. Both profiles, body force replacing periodic pressure drop, fluxes, vorticities and wall-power/dissipation identities remain sound conditional model predictions, with no measured-flow claim."
+    },
+    {
+      "id": "ex-fd-compressible-viscous-shear",
+      "source": "items/ex-fd-compressible-viscous-shear.md",
+      "raw_sha256": "87666c2017b0c850405e5733d876fe77aea1d18330bd270210aa3fce91b8fcc5",
+      "reached_through": [
+        "thm-fd-compatible-wall-shear-heat"
+      ],
+      "actual_deps": [
+        "thm-fd-compatible-wall-shear-heat"
+      ],
+      "decision": "unaffected",
+      "review": "Indirect channel consumer. F=A sin(y/ell) has a smooth odd periodic extension, and the channel construction supplies the first sine mode before its periodic extension onto the torus. The exact constant-density compressible viscous substitution, pressure kappa rho_*^gamma, viscosity powers and absence of a general density-dependent existence claim are unchanged."
+    }
+  ]
+}

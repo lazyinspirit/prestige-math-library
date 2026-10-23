@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-ideal-gas-numerical-model",
+    "pthm-fd-conditional-positive-euler-update",
+    "ex-fd-positive-euler-uniform-gas"
+  ],
+  "contracts": {
+    "post-fd-ideal-gas-numerical-model": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines an open (v,s) state domain, a C2 calorically perfect ideal-gas fundamental relation, the derived temperature and pressure, conserved-state variables, Euler flux, isentropic sound speed, and the one-dimensional weak identities with initial data."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The claim is restricted to the adopted one-dimensional nonrelativistic inviscid calorically perfect ideal-gas branch with positive density and temperature. Displayed densities, fluxes and products are locally integrable up to t=0 in the relative topology; this supplies the initial test integrals without asserting point values or a strong trace."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The complete relevant Powers Gas Dynamics sections and Tong Part III Waves sections were retrieved and inspected at the locators recorded in the item and batch coverage. They support the ideal-gas EOS, caloric closure, Gibbs relation, and entropy convention. The weak entropy inequality is separately adopted and is not represented as proved by these sources."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The weak balance laws, local-equilibrium closure, and physical entropy inequality are expressly adopted model premises. The item asserts no existence, uniqueness, empirical universality, or derivation of weak entropy admissibility from smooth equations."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read the complete Postulate and five direct formulation suppliers. On v>0 the exponential relation is C2, T=e/c_v>0, p=(gamma-1)e/v=R rho T, and fixed-s differentiation gives c^2=gamma p/rho>0. SI dimensions and tension-positive stress give momentum flux rho u^2+p and energy flux u(E+p). Products are explicitly integrable on compact subsets up to t=0; initial terms assert distributional data without a strong trace. Nonnegative entropy tests and the <=0 integrated sign encode nonnegative entropy production. Weak entropy is separately adopted. Inspected relevant Powers sections 2.3.3.4-2.3.4 and 2.4.6-2.4.7.2 (2.73, 2.81, 2.118) and Tong section 4.4.2 in cited PDFs. No empirical universality, existence, uniqueness, choice or numerical entropy result is asserted. Reader/refuter report no owned defect. No public-interface edit; no diagram in this carrier."
+      }
+    },
+    "pthm-fd-conditional-positive-euler-update": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-ideal-gas-numerical-model",
+          "source_section": "Postulate",
+          "quote": "Use the Newtonian spacetime and Cartesian inertial-chart convention from the earlier definition titled “Classical frames, primitive quantities and SI units”: time is absolute, $M$ is an oriented Euclidean affine three-space with no distinguished origin, and a Cartesian inertial chart is an event-coordinate map with absolute-time coordinate and spatial maps $X_t(q)=b(q)+tw$, where $b:M\\to\\mathbb R^3$ is an orientation-preserving affine isometry and $w\\in\\mathbb R^3$ is constant in metres per second. Write $X=(X_1,X_2,X_3)$ for the spatial event coordinates of one selected such chart. Choose the positive $X_1$ axis and restrict this branch to fields depending only on absolute time $t$ and the coordinate $x:=X_1$; $u$ is the signed scalar velocity component along that axis. Here a frame means this adapted Cartesian inertial chart, not an observer congruence or a basis field. Let $\\Omega\\subseteq\\mathbb R$ be an open interval of $x$ measured in metres, let $T_f>0$ be a final time measured in seconds, and take the space-time domain to be $\\Omega\\times(0,T_f)$. For this one-dimensional weak branch, adopt Countable Choice (every sequence of nonempty sets admits a choice function) and use the all-dimensional Euclidean Lebesgue convention of the conservative weak-form definition. Space-time fields use the restriction of $\\lambda_2$ to $\\Omega\\times[0,T_f)$ and initial data the restriction of $\\lambda_1$ to $\\Omega$, with the corresponding trace sigma-algebras, measurable-map and almost-everywhere conventions. Integrals use the signed Lebesgue integral and completed-product almost-everywhere section convention from that definition. The measurable fields are mass density $\\rho:\\Omega\\times(0,T_f)\\to(0,\\infty)$ in kilograms per cubic metre, velocity $u:\\Omega\\times(0,T_f)\\to\\mathbb R$ in metres per second, and specific entropy $s:\\Omega\\times(0,T_f)\\to\\mathbb R$ in joules per kilogram kelvin.\n\nAdopt a local-equilibrium constitutive chart on the open state domain $\\mathcal U=(0,\\infty)\\times\\mathbb R$ with coordinates $(v,s)$ and a $C^2$ fundamental relation $e:\\mathcal U\\to\\mathbb R$ for specific internal energy in joules per kilogram. Let $c_v>0$ be the adopted specific-heat-at-constant-volume parameter and $R>0$ the adopted specific gas-constant parameter, each in joules per kilogram kelvin. Define the derived specific heat at constant pressure and ratio of specific heats by $c_p:=c_v+R$ and $\\gamma:=c_p/c_v=1+R/c_v>1$. Choose $v_*>0$ in cubic metres per kilogram, $T_*>0$ in kelvins, and $s_*\\in\\mathbb R$ in joules per kilogram kelvin as reference data. Adopt the calorically perfect ideal-gas relation\n$$e(v,s)=c_vT_*\\left(\\frac{v_*}{v}\\right)^{\\gamma-1}\\exp\\left(\\frac{s-s_*}{c_v}\\right),$$\nwith the conventional additive energy reference for which the specific internal energy is zero at zero temperature. Define the thermodynamic temperature and pressure maps by $T(v,s):=\\partial_s e(v,s)$ and $p(v,s):=-\\partial_v e(v,s)$, holding the other state coordinate fixed. Direct differentiation gives\n$$T(v,s)=\\frac{e(v,s)}{c_v}>0,\\qquad p(v,s)=(\\gamma-1)\\frac{e(v,s)}{v}>0.$$\nFor density and entropy coordinates define the state-pressure map $p_{\\mathrm{th}}(\\rho,s):=p(1/\\rho,s)$ for $\\rho>0$ and $s\\in\\mathbb R$. The spacetime state map is $v(t,x):=1/\\rho(t,x)$ and $(t,x)\\mapsto(v(t,x),s(t,x))\\in\\mathcal U$. It assigns the specific internal-energy, temperature, and thermodynamic-pressure fields by\n$$e_{\\mathrm{int}}(t,x):=e(v(t,x),s(t,x)),\\qquad T(t,x):=(\\partial_s e)(v(t,x),s(t,x)),\\qquad p_{\\mathrm{th}}(t,x):=p_{\\mathrm{th}}(\\rho(t,x),s(t,x))=-(\\partial_v e)(v(t,x),s(t,x)).$$\nConsequently $T(t,x)=e_{\\mathrm{int}}(t,x)/c_v$ and $p_{\\mathrm{th}}(t,x)=(\\gamma-1)e_{\\mathrm{int}}(t,x)/v(t,x)=(\\gamma-1)\\rho(t,x)e_{\\mathrm{int}}(t,x)=R\\rho(t,x)T(t,x)$. At fixed specific entropy $s$, the state-pressure map is proportional to $\\rho^\\gamma$, so $\\left.\\partial_\\rho p_{\\mathrm{th}}(\\rho,s)\\right|_s=\\gamma p_{\\mathrm{th}}(\\rho,s)/\\rho$; define the positive isentropic sound-speed map by $c_{\\mathrm{th}}(\\rho,s):=\\sqrt{\\left.\\partial_\\rho p_{\\mathrm{th}}(\\rho,s)\\right|_s}=\\sqrt{\\gamma p_{\\mathrm{th}}(\\rho,s)/\\rho}$. Thus $\\gamma$ is dimensionless, sound speed has units of metres per second, and pressure has units of pascals. This is a constant-specific-heat ideal-gas approximation, restricted to a regime where that closure is adopted.\n\nDefine momentum density $m(t,x):=\\rho(t,x)u(t,x)$ in kilograms per square metre second and total energy density $E(t,x):=\\rho(t,x)(e_{\\mathrm{int}}(t,x)+u(t,x)^2/2)$ in joules per cubic metre. The corresponding numerical state is $U(t,x):=(\\rho(t,x),m(t,x),E(t,x))\\in\\mathbb R^3$. For $\\gamma>1$, set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\},\\qquad p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right).$$\nSince $\\rho(t,x)>0$ and $e_{\\mathrm{int}}(t,x)>0$, $U(t,x)\\in\\mathcal G_\\gamma$. For this state, $E-m^2/(2\\rho)=\\rho e_{\\mathrm{int}}$ and $p(U(t,x))=p_{\\mathrm{th}}(t,x)$, so the numerical and thermodynamic pressure maps agree. With $u=m/\\rho$, its one-dimensional Euler flux and isentropic sound speed are\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p(U),u(E+p(U))\\right),\\qquad c(U)=\\sqrt{\\frac{\\gamma p(U)}{\\rho}}.$$\nThe components of $F$ are mass flux in kilograms per square metre second, momentum flux in pascals, and energy flux in watts per square metre. The speed $c$ is in metres per second.\n\nAdopt the inviscid one-dimensional branch with zero body acceleration, zero specific heat supply, zero conductive heat flux, and isotropic three-dimensional Cauchy stress $\\sigma=-p_{\\mathrm{th}}I_3$ in the tension-positive convention in which traction on an outward unit normal $n$ is $\\sigma n$; here $I_3$ is the $3\\times3$ identity matrix. Its restriction to the selected axis is the scalar normal stress $\\sigma_{\\mathrm{1D}}:=\\sigma_{11}=-p_{\\mathrm{th}}$ in pascals, so the one-dimensional momentum flux is $\\rho u^2-\\sigma_{\\mathrm{1D}}=\\rho u^2+p_{\\mathrm{th}}$. In the following weak identities, write $p:=p_{\\mathrm{th}}$. Assume the locally integrable conservative variables, fluxes, entropy density, and entropy flux satisfy the identities in the distributional sense. Let $\\rho_0,m_0,E_0,S_0\\in L^1_{\\mathrm{loc}}(\\Omega)$ be the initial mass density in kilograms per cubic metre, momentum density in kilograms per square metre second, total energy density in joules per cubic metre, and entropy density in joules per cubic metre kelvin, respectively. Require all displayed densities, fluxes, and products to be locally integrable up to $t=0$: their absolute values have finite integrals on every compact subset of $\\Omega\\times[0,T_f)$ in the relative topology, using the fields for $t>0$. This requirement assigns no point values at $t=0$ and asserts no strong initial trace. Test functions $\\phi,\\psi,\\eta,\\zeta\\in C^1(\\Omega\\times[0,T_f))$ are compactly supported in space-time and vanish near $T_f$; $\\zeta$ is nonnegative, and tests may be nonzero at $t=0$. Then adopt\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho\\,\\partial_t\\phi+\\rho u\\,\\partial_x\\phi\\right)\\,dx\\,dt+\\int_\\Omega\\rho_0\\phi(0,x)\\,dx=0,$$\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho u\\,\\partial_t\\psi+(\\rho u^2+p)\\partial_x\\psi\\right)\\,dx\\,dt+\\int_\\Omega m_0\\psi(0,x)\\,dx=0,$$\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(E\\,\\partial_t\\eta+u(E+p)\\partial_x\\eta\\right)\\,dx\\,dt+\\int_\\Omega E_0\\eta(0,x)\\,dx=0,$$\nand\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho s\\,\\partial_t\\zeta+\\rho u s\\,\\partial_x\\zeta\\right)\\,dx\\,dt+\\int_\\Omega S_0\\zeta(0,x)\\,dx\\le0.$$\nThe last inequality is a separately adopted physical entropy inequality. It is not deduced from the conservative equations or from smooth-flow identities. This postulate specifies a physical model and its idealized local-equilibrium closure; it does not assert existence or uniqueness of a weak solution, prove that actual matter obeys the model, or identify a computed state with an experimental observation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-compressible-numerical-contract",
+          "source_section": "Definition",
+          "quote": "The associated one-step update in conservative finite-volume form is $$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-fd-euler-llf-admissibility-interface",
+          "source_section": "Statement",
+          "quote": "Then $U_i^+\\in\\mathcal G_\\gamma$ for every cell $i$; in particular, each updated density and pressure is strictly positive. This conclusion is for the specified one-step symmetric branch and does not assert positivity for other HLL speed pairs or a fully discrete entropy inequality.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-physical-and-conservative-pressure",
+          "step": "1.1",
+          "claim": "The adopted internal-energy relation makes the physical pressure equal the state pressure used in the mathematical positivity interface.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-facewise-symmetric-positivity-result",
+          "step": "2.1",
+          "claim": "The stated periodic states, symmetric flux, facewise speed lower bounds, and CFL bounds match the exact local proposition, so every updated state lies in the admissible set.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N>=2 periodic cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows Delta t=0; then lambda=0, and step 2.1 gives the identity update."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is scoped to N>=2 cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses rho>0 and p>0 to obtain c>0, so the face speed lower bound makes a>0 and the symmetric speeds strictly straddle zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The speed lower bound and CFL upper bound are inclusive in the statement and local proposition; equality at either bound is permitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite states and face speeds are supplied; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way positivity implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way positivity implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate numerical finite check is needed: the full result is an exact application of the inspected local symmetric-branch proposition, with zero-step and inclusive endpoint cases recorded above.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Checked both proof steps, A1/F1/F2 exact statements, current local proposition and complete published positivity/split-state/convexity/half-cell/invariant-domain proof chain. Positive internal energy makes the natural-log argument positive and dimensionless; substitution recovers e and physical pressure, with c^2=gamma p/rho at fixed entropy. Supplier split states have x>=c/a>0 and relative pressure subtraction <=(gamma-1)/(2 gamma)<1, including a=|u|+c. Weighted Cauchy-Schwarz proves convexity. The symmetric HLL middle state is the average of the two positive split states. Local CFL makes the two half-cell convex weights nonnegative; their half-sum is precisely the shared-face update. Thus strict positivity survives equality in CFL. Delta t=0 gives identity; N=2 periodic indexing is valid; empty and N=1 are excluded. No choice or nonlinear wave-enclosure hypothesis is silently added. Inspected Zhang-Shu section 2 Remark 2.4 (PDF pp. 7-8) and Clawpack Euler chapter HLLE section as contextual sources; local algebra, not a generic HLL assertion, supplies the exact facewise theorem. Reader/refuter finding about published unbound n is nonfatal and does not affect intermediate-state algebra. No entropy/convergence/measurement conclusion, public-interface edit or diagram."
+      }
+    },
+    "ex-fd-positive-euler-uniform-gas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-conditional-positive-euler-update",
+          "source_section": "Statement",
+          "quote": "Use the symmetric HLL, or local Lax–Friedrichs, face flux and the shared-face update $$\\widehat F_{i+1/2}=\\frac12(F_i+F_{i+1})-\\frac{a_{i+1/2}}2(U_{i+1}-U_i),\\qquad U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-face-flux",
+          "step": "1.1",
+          "claim": "Equal neighboring states cancel the dissipative jump term and give the same physical flux at every face.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-state-fixed-point",
+          "step": "2.1",
+          "claim": "Equal periodic face fluxes make every conservative flux difference zero, so the one-step update leaves each cell at the supplied state.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires N>=2 periodic cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows Delta t=0, and step 2.1 gives U_i^+=U."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is scoped to N>=2 cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves equal face fluxes, and step 2.1 uses only that equality, including when the common flux vector is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes equality in the speed and CFL bounds, and steps 1.1–2.1 still give the fixed-point identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The constant state and common speed are supplied; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way fixed-point assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way fixed-point assertion, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-cell periodic uniform-state specialization",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ],
+          "expected": "For N=2, both periodic interfaces have the common flux F(U), so the flux difference in each cell is zero and U_i^+=U."
+        }
+      ],
+      "finite_checks_disposition": "This is an exact symbolic boundary specialization of the local algebra, not a numerical simulation or empirical observation."
+    }
+  }
+}

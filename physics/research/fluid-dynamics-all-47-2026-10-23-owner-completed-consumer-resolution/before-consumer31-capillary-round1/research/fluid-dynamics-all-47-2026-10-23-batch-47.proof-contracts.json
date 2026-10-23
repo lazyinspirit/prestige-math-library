@@ -1,0 +1,326 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-capillary-linear-free-surface",
+    "pthm-fd-capillary-wave-model-prediction",
+    "ex-fd-capillary-restoring-sign"
+  ],
+  "contracts": {
+    "post-fd-capillary-linear-free-surface": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines the horizontal quotient cell, flat finite-depth reference layer, moving free-surface graph, potential velocity field and units, upward curvature convention, liquid-minus-gas pressure jump, fixed-bed no-penetration condition, and exact first-order bulk and surface equations. It also matches the current mathematical capillary model definition under sigma=gamma and Lx/Ly mapped to the stated physical periods, with the physical branch taking gamma>0 and stronger regularity."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Postulate is restricted to an adopted inviscid, homogeneous, incompressible, irrotational, constant-density linear model with negligible gas inertia and constant gravity/surface tension. It excludes no-slip, finite-amplitude error claims, solvability, and universal empirical validity."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The complete relevant sections were read in MIT 18.354 §23.1 pp. 104–105, Georgi §§11.5.1–11.5.2 pp. 285–291, and Fitzpatrick 'Gravity Waves' (11.1)–(11.21) plus 'Surface Tension' (11.116)–(11.121). The adopted interface signs agree; fixed finite depth is explicit in the local model."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This item is an adopted physical model with provenance.proof: not-applicable and no Proof section. It says the linear equations are assumptions and asserts no nonlinear existence, approximation bound, or empirical validation."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "A postulate adopts a model and contains no finite numerical or empirical check; source fidelity and scope are reviewed instead."
+    },
+    "pthm-fd-capillary-wave-model-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-capillary-linear-free-surface",
+          "source_section": "Postulate",
+          "quote": "On $\\Omega_0\\times I$ the adopted equations and boundary conditions are\n\n$$\\Delta_h\\phi+\\partial_z^2\\phi=0,\\qquad -h<z<0,$$\n\n$$\\partial_z\\phi(x,-h,t)=0,$$\n\n$$\\partial_t\\eta(x,t)=\\partial_z\\phi(x,0,t),\\qquad \\partial_t\\phi(x,0,t)+g\\eta(x,t)-\\frac{\\gamma}{\\rho}\\Delta_h\\eta(x,t)=0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "mode-laplace-ode",
+          "step": "1.1",
+          "claim": "The periodic horizontal exponential converts the bulk Laplace equation to F''-k^2 F=0.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bottom-compatible-profile",
+          "step": "2.1",
+          "claim": "Solving the constant-coefficient ODE and imposing the fixed-bed Neumann condition leaves F=A cosh(k(z+h)).",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kinematic-amplitude-equation",
+          "step": "3.1",
+          "claim": "The kinematic free-surface condition gives -i omega H=A k sinh(kh).",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dynamic-amplitude-equation",
+          "step": "3.2",
+          "claim": "The dynamic free-surface condition gives -i omega A cosh(kh)+(g+gamma k^2/rho)H=0.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exclude-zero-frequency",
+          "step": "4.1",
+          "claim": "Positivity and the two boundary equations rule out omega=0 for a nonzero mode.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dispersion-elimination",
+          "step": "5.1",
+          "claim": "Eliminating A from the kinematic and dynamic amplitude equations yields the finite-depth capillary-gravity dispersion formula.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mode-existence-and-real-frequency",
+          "step": "6.1",
+          "claim": "The right side is strictly positive, and the explicit amplitude/profile construction realizes both real frequency branches.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mode index is explicitly nonzero and both horizontal periods and depth are positive.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$m\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero horizontal mode is excluded. The proof uses k>0 and sinh(kh)>0, so it makes no claim about uniform elevation or mean-flow modes.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$k:=|\\mathbf k|>0$"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Modes with exactly one nonzero integer component are included; the proof uses only the positive magnitude k=|k-vector|.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$m=(m_1,m_2)\\in\\mathbb Z^2\\setminus\\{(0,0)\\}$"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypotheses require rho, g, gamma, h, and k strictly positive. Zero density, zero depth, zero gravity, zero surface tension, and zero wave number are not covered; all divisions and sign steps are valid under the strict hypotheses.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "$h>0$, $\\rho>0$, $g>0$, and $\\gamma>0$"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is on an open time interval and makes no endpoint or long-time claim.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be open"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Fourier index and amplitudes are explicit data; no choice principle is used.",
+          "case_scope": {
+            "source_section": "Proof",
+            "source_excerpt": "For either real root $\\omega=\\pm\\sqrt{k(g+\\gamma k^2/\\rho)\\tanh(kh)}$ and any $H\\ne0$, define"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, 3.2, 4.1, and 5.1 prove that every nonzero admissible mode must satisfy the displayed dispersion relation.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Such a nonzero mode exists exactly when"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.1 explicitly constructs F and H for each positive or negative real root, proving the converse existence direction.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "and each of the two frequencies $\\omega=\\pm\\sqrt{(gk+(\\gamma/\\rho)k^3)\\tanh(kh)}$ admits a nonzero mode."
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No numerical finite check is needed: the proof solves and substitutes an arbitrary allowed Fourier mode symbolically. The result is a conditional model deduction, not experimental evidence."
+    },
+    "ex-fd-capillary-restoring-sign": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-capillary-wave-model-prediction",
+          "source_section": "Statement",
+          "quote": "Such a nonzero mode exists exactly when $$\\omega^2=\\left(gk+\\frac{\\gamma}{\\rho}k^3\\right)\\tanh(kh),$$ and each of the two frequencies $\\omega=\\pm\\sqrt{(gk+(\\gamma/\\rho)k^3)\\tanh(kh)}$ admits a nonzero mode.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-capillary-coefficient",
+          "step": "1.1",
+          "claim": "The capillary coefficient gamma k^2/rho is positive and adds to positive gravity coefficient g.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-mode-frequency-square",
+          "step": "2.1",
+          "claim": "The theorem formula and kh>0 imply a strictly positive squared frequency and real nonzero mode frequency.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example begins with a nonzero horizontal mode in a cell with positive periods and depth.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take any nonzero horizontal periodic mode"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero wave number is excluded by the nonzero-mode condition; the example does not address the uniform mode.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "$k>0$"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The calculation applies to any single nonzero periodic mode, including modes with one nonzero horizontal component.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "any nonzero horizontal periodic mode"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example assumes h, rho, g, and gamma are strictly positive; it makes no zero-parameter limiting claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "$h,\\rho,g,\\gamma>0$"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is an algebraic sign check and makes no time-endpoint claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The exact model frequency therefore has $\\omega^2>0$."
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used; the parameter and mode are arbitrary fixed inputs.",
+          "case_scope": {
+            "source_section": "Verification",
+            "source_excerpt": "Since $k>0$, $\\gamma>0$, and $\\rho>0$"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes a direct positivity statement, not a biconditional.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The exact model frequency therefore has $\\omega^2>0$."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "The capillary part of the dynamic free-surface coefficient is $\\gamma k^2/\\rho>0$ and adds to the gravity coefficient $g>0$."
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The example is a symbolic positivity calculation for every allowed mode; no numerical parameter choice or empirical observation is introduced."
+    }
+  }
+}

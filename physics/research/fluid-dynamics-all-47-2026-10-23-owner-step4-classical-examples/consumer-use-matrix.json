@@ -1,0 +1,957 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "reviewer": "/root/fluid_step4_classical_examples",
+  "native_review": false,
+  "x00_declared_closure_count": 58,
+  "euler_definition_closure": [
+    "def-fd-incompressible-euler-model",
+    "ex-fd-x05-application",
+    "ex-fd-x13-application",
+    "ex-fd-x13-formal-verification",
+    "pthm-fd-px05-prediction",
+    "pthm-fd-px13-prediction",
+    "thm-fd-x13"
+  ],
+  "rows": [
+    {
+      "id": "def-fd-incompressible-euler-model",
+      "path": "items/def-fd-incompressible-euler-model.md",
+      "raw_sha256": "d274b72bd06bb46d74f7b849747d097a308115ec8c23d91b4ce1af231afa29a1",
+      "domain": "physics",
+      "reached_suppliers": [
+        "def-fd-incompressible-euler-system"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes only divergence-free local Euler equation, constant density and multiplier convention; no stress-integral definition is used.",
+      "source_excerpts": [
+        "[F1] [[def-fd-incompressible-euler-system]]: the mathematical incompressible Euler system is the constant-density divergence-free local equation with pressure multiplier."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "def-fd-incompressible-euler-system",
+      "path": "items/def-fd-incompressible-euler-system.md",
+      "raw_sha256": "d3bb822029a1df2bb3737cebcf75ed68980ea205ad5bd10d55c4319f6c79eabb",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "Repeats spacetime-pressure/spatial-integral omission; companion Definition draft fixes time; PDE, pressure-stress sign and S subset Omega unchanged.",
+      "source_excerpts": [
+        "Formal fluid derivative conventions and regularity: [[def-fd-x00]]."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "def-fd-rotating-stratified-shallow-equations",
+      "path": "items/def-fd-rotating-stratified-shallow-equations.md",
+      "raw_sha256": "50ed4d0659880c9f241391c802330ab1b3005db782596771385ca452417bd80e",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses x00 Cartesian operators and regularity on open R3 periodic lifts. Defines own torus measure and distinct 2D system; no changed curve/surface observable use.",
+      "source_excerpts": [
+        "Formal-PDE supplier [[def-fd-x00]]: it defines $I$ as a nonempty open time interval and $\\Omega$ as a nonempty open subset of $\\mathbb R^3$, requires pointwise classical equations with velocity $C^1$ in time and $C^2$ in space and pressure $C^1$ in space, and requires any further regularity used by a proof. Its Cartesian gradient, divergence, Laplacian, componentwise vector-Laplacian, row-component Jacobian, and Euclidean conventions match the conventions stated locally above. The periodic lifts use $\\Omega=\\mathbb R^3$, so the stratified branch meets its spatial-domain hypothesis. It does not define the two-dimensional shallow-water equations, which this item specifies locally."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "def-fd-wall-defect-capillary-models",
+      "path": "items/def-fd-wall-defect-capillary-models.md",
+      "raw_sha256": "2846c461abe7689d726cdcaf921966e62c2c2ad6905d07ae7e4a5ea542c083f8",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses Cartesian PDE operators and defines own residual, traces and capillary system. No changed circulation/traction definition use.",
+      "source_excerpts": [
+        "Cartesian fluid operators and the formal constant-density incompressible system: [[def-fd-x00]]."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-capillary-restoring-sign",
+      "path": "items/ex-fd-capillary-restoring-sign.md",
+      "raw_sha256": "0085a4cf829589f19feb549fcc1063a33ab871aaabf3c519467e3e14f87cc92e",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-capillary-wave-model-prediction"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes locally defined periodic Fourier mode and capillary symbol. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-capillary-wave-model-prediction]]: for each nonzero integer lattice mode, the quotient-torus mode factor has $\\Delta_hq_m=-k^2q_m$; every complex mode with $k>0$ has $\\omega^2=(gk+(\\gamma/\\rho)k^3)\\tanh(kh)$, and the right-hand side is positive when $h,\\rho,g,\\gamma>0$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-capillary-zero-tension-limit",
+      "path": "items/ex-fd-capillary-zero-tension-limit.md",
+      "raw_sha256": "1df3f9ba9014618649168332b29e6e49192abdeaeaf73dbc9e95d978b7146809",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-capillary-gravity-dispersion-energy",
+        "thm-fd-x03"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes mode frequency algebra and zero-tension parameter limit. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Capillary-gravity dispersion and its exact mode: [[thm-fd-capillary-gravity-dispersion-energy]].",
+        "Finite-depth gravity-wave mode: [[thm-fd-x03]].",
+        "[F1] [[thm-fd-capillary-gravity-dispersion-energy]]: for $h,g,\\rho,k>0$ and $\\sigma\\ge0$, $\\omega_\\sigma^2=(gk+\\sigma k^3/\\rho)\\tanh(kh)$ and the positive-frequency mode has potential coefficient $a\\omega_\\sigma/(k\\tanh(kh))$.",
+        "[F2] [[thm-fd-x03]]: for $h,g,k>0$, $\\omega_0=\\sqrt{gk\\tanh(kh)}>0$ and the finite-depth gravity mode has potential coefficient $ag/\\omega_0$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-coriolis-no-work",
+      "path": "items/ex-fd-coriolis-no-work.md",
+      "raw_sha256": "b697804597f56400cbd58c8188d0a4dde1ea91f201f2f58b93e9248e9912308d",
+      "domain": "physics",
+      "reached_suppliers": [
+        "post-fd-geophysical-model-branches"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes pointwise algebraic Coriolis orthogonality. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[[post-fd-geophysical-model-branches]]: adopted Coriolis acceleration convention and its physical scope.",
+        "[A1] [[post-fd-geophysical-model-branches]]: the local Cartesian coordinates are right-handed, $e_3=(0,0,1)$, and the rotating Boussinesq momentum equation places $+f e_3\\times u$ on its left side, with signed acceleration contribution $-f e_3\\times u$ on the right.",
+        "[F1] [[post-fd-geophysical-model-branches]]: the coordinate convention is $e_3\\times u=(-u_2,u_1,0)$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-geophysical-rest-state",
+      "path": "items/ex-fd-geophysical-rest-state.md",
+      "raw_sha256": "d03a7db1a38deef457d5ca24188599c57abb1d4b192a43399e64a89bf2b75cba",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-rotating-stratified-shallow-equations",
+        "thm-fd-shallow-water-smooth-energy"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes locally defined torus energy integral for stationary fields. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Rotating stratified and shallow-water equations: [[def-fd-rotating-stratified-shallow-equations]].",
+        "The smooth rotating shallow-water energy balance: [[thm-fd-shallow-water-smooth-energy]].",
+        "[F1] [[def-fd-rotating-stratified-shallow-equations]]: the rotating, linear, constant-stratification Boussinesq equation family is $u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u$, $\\nabla\\cdot u=0$, and $b_t+N^2u_3=\\kappa\\Delta b$.",
+        "[F2] [[def-fd-rotating-stratified-shallow-equations]]: the inviscid one-layer shallow-water equation family is $h_t+\\nabla\\cdot(hv)=0$ and $(hv)_t+\\nabla\\cdot(hv\\otimes v)+\\nabla(gh^2/2)+fhJv=0$.",
+        "[F3] [[thm-fd-shallow-water-smooth-energy]]: for every smooth periodic positive-depth solution of the flat-bottom, inviscid shallow-water system, the energy density $E=h|v|^2/2+gh^2/2$ satisfies $\\partial_tE+\\nabla\\cdot((E+gh^2/2)v)=0$ and its integral over $Q_2$ is conserved."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x01-application",
+      "path": "items/ex-fd-x01-application.md",
+      "raw_sha256": "fa3d56f54b2088a81820b5f0218246582b092c688d7e6b03225c857c2ccf334b",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px01-prediction"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes scaled incompressible shear and independent barotropic equilibrium; periodic-lift equations. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px01-prediction]]: for positive scales, the unforced constant-density incompressible Newtonian system and the unforced positive-density barotropic Euler system have the exact scaled equations stated there. This example is conditional on those adopted model formulations and is not empirical evidence."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x01-formal-verification",
+      "path": "items/ex-fd-x01-formal-verification.md",
+      "raw_sha256": "6f40a2d0114e6f516308fb2370d5a447d7b3f05253efa19adb22d96cfc2133d6",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x01"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes positive parameter/Re/Ma algebra. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Exact Reynolds and Mach scaling identities: [[thm-fd-x01]].",
+        "[F1] Under the positive scale substitutions, the incompressible coefficient is $\\operatorname{Re}^{-1}=\\nu/(UL)$ and the barotropic momentum coefficient is $\\operatorname{Ma}^{-2}=c^2/U^2$ ([[thm-fd-x01]])."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x02-application",
+      "path": "items/ex-fd-x02-application.md",
+      "raw_sha256": "feb2b711dc547dde1492a9c2f58d898f550af5f0acb159b69d8b38f3eec4fab6",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x02"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes acoustic/inertial finite-mode substitution. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Acoustic and rotating finite-mode theorem: [[thm-fd-x02]].",
+        "[F1] For $\\chi>0$, the displayed acoustic fields solve the linear acoustic system when $A\\ne0$ and $\\omega^2=\\chi|k|^2$; the theorem also gives the zero-amplitude case ([[thm-fd-x02]]).",
+        "[F2] For constant $\\Omega$ and nonzero $k$, the theorem-defined $e,a,b,\\alpha,z,\\beta,w,q$ satisfy the rotating linear system when $|a|=|e|=1$ and $a\\perp e$ ([[thm-fd-x02]])."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x03-application",
+      "path": "items/ex-fd-x03-application.md",
+      "raw_sha256": "ffaa9e7652000b3db807933139ee0edeb690f9ba48e19e13fd0715cadab461f0",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x03"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes finite-depth mode and relative-error substitutions. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Finite-depth linear mode and quantitative bounds: [[thm-fd-x03]].",
+        "[F1] For $h,g,k>0$, the frequency $\\omega=\\sqrt{gk\\tanh(kh)}$ gives the displayed exact linear potential mode and the shallow and deep relative-error bounds ([[thm-fd-x03]])."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x04-application",
+      "path": "items/ex-fd-x04-application.md",
+      "raw_sha256": "12261768f6398873b5135cf9a1fcf9d1ebf52115299bc23f436ca0e9d180522e",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px04-prediction"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes stationary channel/pipe flux and shear values. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px04-prediction]]: channel flux and wall shear and fixed-pipe flux and wall shear follow from the exact stated profiles in the infinite one-dimensional model."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x04-formal-verification",
+      "path": "items/ex-fd-x04-formal-verification.md",
+      "raw_sha256": "38a96aaee85efff48b902787679a12721614dc614d16822bb4976633c5da4009",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x04"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes stationary channel/pipe exact profiles and spatial flux integrals. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[[thm-fd-x04]]",
+        "[F1] [[thm-fd-x04]]: the channel profile is $V_0+(V_1-V_0)y/h+Gy(h-y)/(2\\mu)$ with the stated flux and shear formulas; the full-disk pipe profile is $G(a^2-r^2)/(4\\mu)$ with flux $\\pi Ga^4/(8\\mu)$. Both fields solve the constant-density Navier\u2013Stokes/Stokes equations exactly within their ansatz."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x05-application",
+      "path": "items/ex-fd-x05-application.md",
+      "raw_sha256": "2d31a274b69d62ebd2f2247a12dfcbc6536507bafd5e5da9fa2b57fb1968bc0c",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px05-prediction",
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Steady punctured-axis field, closed radius-two circle. Its u(gamma) notation is licensed by stationary section convention; curl and streamline clauses unchanged.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px05-prediction]]: vortex circulation is $2\\pi\\kappa$, and solid-rotation Bernoulli is $p_0/\\rho_0+\\Omega^2r^2$, constant on but not across circles.",
+        "[F2] [[def-fd-x00]]: Cartesian curl uses $\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\partial_zu_x-\\partial_xu_z,\\partial_xu_y-\\partial_yu_x)$. For a closed piecewise-$C^1$ oriented curve $\\gamma:[a,b]\\to\\Omega$, circulation is $\\oint_\\gamma u\\cdot d\\mathbf r=\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x05-formal-verification",
+      "path": "items/ex-fd-x05-formal-verification.md",
+      "raw_sha256": "b37c737e480f2e694c92a1d70fc25a72384246442b2d3a291ed30b0b2ec8c95f",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x05"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes stationary closed-circle vortex circulation and rotation Bernoulli values. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[[thm-fd-x05]]",
+        "[F1] [[thm-fd-x05]]: the vortex has circulation $2\\pi\\kappa$ and pressure $p_0-\\rho_0\\kappa^2/(2r^2)$; its nonzero circulation rules out a single-valued global potential. Solid rotation with pressure $p_0+\\rho_0\\Omega_0^2r^2/2$ is an exact steady field with $B=p_0/\\rho_0+\\Omega_0^2r^2$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x06-application",
+      "path": "items/ex-fd-x06-application.md",
+      "raw_sha256": "ae6cd61014bb682de266658efe36684a0c44f9176157edbd38fb85762811f912",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px06-prediction"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "AC\u03c9 already explicitly adopted. F2 definition-only draft removes proof-history attribution from the axiom definition; actual upstream x06 annular proof does use AC\u03c9. Values and public Example unchanged.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px06-prediction]]: under $\\mathrm{AC}_\\omega$, the fixed-sphere Stokes resultant is $6\\pi\\mu aU$ in the stated orientation and decay class."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x06-formal-verification",
+      "path": "items/ex-fd-x06-formal-verification.md",
+      "raw_sha256": "46ff81deaf6b4f39fd1793c9f4317ada9c8a4b0437fecc43c87bdfcbd8710a9f",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x06"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "Explicit AC\u03c9 adoption proposed; stationary Stokes field, stress and exact force unchanged. Boundary surface integral is separately supplied by x06 theorem and its area-density suppliers.",
+      "source_excerpts": [
+        "[[thm-fd-x06]]",
+        "[F1] [[thm-fd-x06]]: for arbitrary $a,\\mu,\\rho_0>0$ and $U$, the stated explicit exterior Stokes field has zero sphere trace, constant far field, formal resultant $6\\pi\\mu aU$, and is unique in the explicitly stated decay class, assuming $\\mathrm{AC}_\\omega$ for the annular divergence theorem."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x07-application",
+      "path": "items/ex-fd-x07-application.md",
+      "raw_sha256": "c325ec33e30ba7fd8209adb64699e14b8a36a04011a65d8e4715dd9b54b09102",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px07-prediction"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes stationary rotating-ball residual; common velocity means zero velocity error. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F3] [[pthm-fd-px07-prediction]]: for already-existing smooth Navier\u2013Stokes and restricted Stokes comparison fields with the same boundary velocity and a zero-trace Poincare constant $C_\\Omega$, the velocity and gradient differences obey the two stated residual estimates."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x07-formal-verification",
+      "path": "items/ex-fd-x07-formal-verification.md",
+      "raw_sha256": "97bc1c9cabd84e9a301288806e6445d0357866611d13876ae1ee555659392c4f",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x07"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "Only scope precision changes: valid h bound and exact ratio h/pi for stated mode. No optimal global constant asserted. No x00 integral definition used.",
+      "source_excerpts": [
+        "[F1] [[thm-fd-x07]]: on this periodic channel, every $C^1$ field $v$ periodic in the torus variables and zero on $y=0,h$ satisfies $\\|v\\|_{L^2(Q)}\\le h\\|\\nabla v\\|_{L^2(Q)}$. The theorem's global statement carries $\\mathrm{AC}_\\omega$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x08-application",
+      "path": "items/ex-fd-x08-application.md",
+      "raw_sha256": "60d3c14e717b67abfd0f8fe3cdeea55834eee6196d7193a133622b009543af6d",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px08-prediction",
+        "def-fd-x00"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "Same independent periodic \u03bd=1 omission repaired. F2 retains distinct Euclidean section convention and explicitly supplied torus lift circulation. Physical description changes only by supplied numerical diffusivity; no downstream item consumes this leaf.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px08-prediction]]: the half-space field obeys $|u|\\le|U|e^{-y^2/(4\\nu t)}$, and the torus material-loop circulation is $AcC_\\alpha e^{-\\nu k^2t}$.",
+        "[F2] [[def-fd-x00]] defines Euclidean circulation for closed piecewise-$C^1$ curves as $\\int u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the torus loop, the physical supplier [F1] instead specifies the flat-quotient lift $X=\\pi(\\widetilde X)$, the periodic velocity $\\widetilde u$, and the circulation $\\int_0^1\\widetilde u(t,\\widetilde X(t,s))\\cdot\\partial_s\\widetilde X(t,s)\\,ds$. The given lift is closed, and period-lattice translations preserve this integral; this is the convention used for the torus value below."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x08-formal-verification",
+      "path": "items/ex-fd-x08-formal-verification.md",
+      "raw_sha256": "4156960c349f2e62ceb418296a2582f219853c8c3f2640074655a438eeca7a99",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x08"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "Periodic branch needs independent \u03bd=1 adoption. Material-loop integral is explicitly defined through torus lifts by x08; no Euclidean-to-torus extrapolation.",
+      "source_excerpts": [
+        "[[thm-fd-x08]]",
+        "[F1] [[thm-fd-x08]]: $E(s)\\le e^{-s^2}$; for the smooth material loop initialized as an ellipse with $0<\\alpha=kb<\\pi$, circulation is $\\Gamma(t)=AcC_\\alpha e^{-\\nu k^2t}$ with $C_\\alpha=\\int_0^{2\\pi}\\cos\\theta\\sin(\\alpha\\cos\\theta)\\,d\\theta>0$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x09-application",
+      "path": "items/ex-fd-x09-application.md",
+      "raw_sha256": "74b40532d74ba4a7cc1d5833639e5b5eac812a2cccf5cad90b969c25b64e36d1",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px09-prediction",
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Steady velocity on a moving radius-one material circle; displayed Gamma(t) evaluates u(t,X(t,theta)) at each fixed time. Fixed-time definition now licenses it directly.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px09-prediction]]: circulation is $2\\pi\\Omega s^2$ and Bernoulli is a constant plus $\\Omega^2r^2$ in this smooth barotropic Euler model.",
+        "[F2] [[def-fd-x00]]: for a closed piecewise-$C^1$ oriented curve, circulation is $\\oint_\\gamma u\\cdot d\\mathbf r=\\int u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. Here the material circle in the $z=0$ plane is $X(t,\\theta)=((1\\,\\mathrm m)\\cos(\\theta+\\Omega t),(1\\,\\mathrm m)\\sin(\\theta+\\Omega t),0)$ for $t\\in\\mathbb R$ seconds and $0\\le\\theta\\le2\\pi$, with $\\Omega=1\\,\\mathrm{s^{-1}}$; $\\partial_tX=u(t,X)$ and $\\Gamma(t)=\\int_0^{2\\pi}u(t,X(t,\\theta))\\cdot\\partial_\\theta X(t,\\theta)\\,d\\theta$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x09-formal-verification",
+      "path": "items/ex-fd-x09-formal-verification.md",
+      "raw_sha256": "925449d5c3cbf04db1add4b7883b858acb697f89ae3c4039dc569b4d437187dd",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x09"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes uniform steady field and explicitly timed translating material circle. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[[thm-fd-x09]]",
+        "[F1] [[thm-fd-x09]]: for classical positive-density barotropic Euler with conservative $V$, $h(q)=\\int_{\\rho_{\\rm ref}}^qP'(r)/r\\,dr$; steady Bernoulli is constant on streamlines, and a closed $C^1$ material loop has constant circulation under the stated mixed-derivative condition."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x10-application",
+      "path": "items/ex-fd-x10-application.md",
+      "raw_sha256": "1db153f96d00e87cb1476bafd1a44fa940d0ff0f43c46075e1489770d04ee3d8",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px10-prediction"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes explicit timed periodic shear energy decay. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F3] [[pthm-fd-px10-prediction]]: an already-existing smooth solution with these periodic Couette data obeys the stated sufficient conditional energy estimate when $|S|h^2/\\nu<2$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x10-formal-verification",
+      "path": "items/ex-fd-x10-formal-verification.md",
+      "raw_sha256": "f67775a5e67e714662ffcab33b37e8c3b58e34165949e5f7d4fc6058632e6924",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x10"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes explicit timed periodic shear energy decay. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F1] [[thm-fd-x10]]: for an already-existing smooth incompressible Navier-Stokes solution on a periodic channel of height $h$ with Couette shear $S$, if $|S|h^2/\\nu<2$ and the theorem's stated dependencies hold, its perturbation energy satisfies $E(t)\\le e^{-(2\\nu/h^2-|S|)t}E(0)$ on the assumed smooth interval."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x11-application",
+      "path": "items/ex-fd-x11-application.md",
+      "raw_sha256": "675dddfb9f944b157797be32cf99e7e392d38a540c99dd16acfddd06e401ef06",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x11"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes exact linear vortex-sheet growing mode. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[F1] [[thm-fd-x11]]: for equal positive densities and the stated harmonic linear interface conditions without gravity or surface tension, a normal mode with $k>0$ has $\\lambda=-ik\\overline U\\pm k|\\Delta U|/2$; nonzero velocity jump gives the positive real branch."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x13-application",
+      "path": "items/ex-fd-x13-application.md",
+      "raw_sha256": "859ba2ad5990e15b837bb54b780ade32f2897d64d5f435f5ba0ad809bb6ca356",
+      "domain": "physics",
+      "reached_suppliers": [
+        "pthm-fd-px13-prediction"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses physical sphere supplier exact boundary pressure. Same boundary values and antipodal zero resultant; numerical pressures 100002 and 99997.5 unchanged.",
+      "source_excerpts": [
+        "[F1] [[pthm-fd-px13-prediction]]: surface velocity is tangent, pressure is $p_\\infty+\\rho_0(|U|^2-|u|^2)/2$, and pressure-only resultant vanishes."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "ex-fd-x13-formal-verification",
+      "path": "items/ex-fd-x13-formal-verification.md",
+      "raw_sha256": "860c64bdcf0836344647d91c2eadd05b72a4460beb32aa2ea14a4a807f97ea1c",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "thm-fd-x13"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Unit-sphere boundary values are inherited from exact x13 extension/restriction convention. Pressure -5/8+9 n_x\u00b2/8 and zero resultant unchanged.",
+      "source_excerpts": [
+        "[[thm-fd-x13]]",
+        "[F1] [[thm-fd-x13]]: this potential produces a smooth steady formal incompressible Euler field with $u\\cdot n=0$; the sphere velocity is $(3/2)(U-(U\\cdot n)n)$, and the pressure-only formal resultant is zero by antipodal symmetry."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "post-fd-capillary-linear-free-surface",
+      "path": "items/post-fd-capillary-linear-free-surface.md",
+      "raw_sha256": "d227adbdf7e0affcc3ea89e6c343ad6dd07e623aad3f204d888184b37eb1c271",
+      "domain": "physics",
+      "reached_suppliers": [
+        "def-fd-wall-defect-capillary-models"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes own first-order capillary equations/trace definitions, reached through wall/capillary mathematical formulation. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "post-fd-geophysical-model-branches",
+      "path": "items/post-fd-geophysical-model-branches.md",
+      "raw_sha256": "cbe9d038471d67fb13bc3e278701cf3dc77572ccadfd172923a8316f9fa0c899",
+      "domain": "physics",
+      "reached_suppliers": [
+        "def-fd-rotating-stratified-shallow-equations"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes own linear Boussinesq/shallow-water model assumptions, reached through derivative conventions. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[[def-fd-rotating-stratified-shallow-equations]]: the pointwise linear stratified Boussinesq and one-layer shallow-water equation families and their mathematical conventions."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-capillary-wave-model-prediction",
+      "path": "items/pthm-fd-capillary-wave-model-prediction.md",
+      "raw_sha256": "72694a280b302b5c1a3a63884117ba1229b24266d1413737f3681d5b4fb2fe8e",
+      "domain": "physics",
+      "reached_suppliers": [
+        "post-fd-capillary-linear-free-surface"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes own Fourier-mode definitions and first-order capillary boundary model. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[A1] [[post-fd-capillary-linear-free-surface]] adopts the model on Newtonian spacetime $I\\times E$, with an adapted Cartesian inertial chart and constant Galilean transformations; its horizontal torus fields and derivatives are defined by their $L$-periodic lifts. It assumes $\\rho,g,\\gamma,h>0$, $\\phi$ at least $C^3$, $\\eta$ at least $C^2$, and the same bulk, bottom, kinematic and dynamic equations used here. Its surface variable is an unrestricted formal first-order coefficient; optional scaled geometry imposes no mode-amplitude bound. The postulate's finite reflection construction and kinematic-equation argument reconcile its up-to-boundary regularity with the mathematical formulation. The model is conditional and makes no empirical validity claim."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-geophysical-conditional-energy",
+      "path": "items/pthm-fd-geophysical-conditional-energy.md",
+      "raw_sha256": "afddeb8d24f1cea0165efb34dda7f8ea2aef0c6d3a73dc732b6e1b8fc193ebb3",
+      "domain": "physics",
+      "reached_suppliers": [
+        "post-fd-geophysical-model-branches",
+        "thm-fd-stratified-linear-energy"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes explicit time-section energy integral from unchanged stratified supplier. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "[[post-fd-geophysical-model-branches]]: adopted linear constant-stratification rotating Boussinesq branch and its physical scope.",
+        "[[thm-fd-stratified-linear-energy]]: exact mathematical energy identity for the same periodic pointwise equations and regularity hypotheses.",
+        "[A1] [[post-fd-geophysical-model-branches]]: the Boussinesq branch uses a constant reference density in inertia and the divergence constraint, retains buoyancy perturbation vertically, and adopts the displayed linear periodic equations with constant $f,N,\\nu,\\kappa$; this is a model assumption without a claim of empirical validity.",
+        "[F1] [[thm-fd-stratified-linear-energy]] (draft; complete proof inspected): under $\\mathrm{AC}_\\omega$, for these $2\\pi$-periodic fields and equations, with $N>0$ and $\\nu,\\kappa\\ge0$, the integral of $\\tfrac12(|u|^2+b^2/N^2)$ changes by minus the time-integrated diffusion terms $\\nu|\\nabla u|^2+\\kappa|\\nabla b|^2/N^2$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px01-prediction",
+      "path": "items/pthm-fd-px01-prediction.md",
+      "raw_sha256": "cb31364c6937ff15f0222f7263eab9ca84ad2a016e4471bf1ea4ae3bf8945b0f",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x01"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses unchanged dimensional PDE scaling, stress algebra and frame conventions; momentum scaling is evaluated on corresponding spatial slices. No changed line/surface observable use.",
+      "source_excerpts": [
+        "[F3] [[thm-fd-x01]]: for positive $\\rho_0,\\mu,U,L,c$, the smooth constant-density incompressible system and the positive-density barotropic Euler system transform exactly under the stated positive changes of variables, with coefficients $\\operatorname{Re}^{-1}$ and $\\operatorname{Ma}^{-2}$. The result is an equivalence of equations, not a limit or existence theorem."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px04-prediction",
+      "path": "items/pthm-fd-px04-prediction.md",
+      "raw_sha256": "b491fbbe651952fb78658609b81b275aa1ee6bf27bd23e0f41f48952a78f494b",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x04"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Stationary channel/pipe profiles, fixed-coordinate stress components and volume flux integrals. All spatial sections are time independent; values and ansatz-limited uniqueness unaffected.",
+      "source_excerpts": [
+        "[F2] [[thm-fd-x04]]: the channel and fixed-wall pipe profiles are unique within their stated one-dimensional ans\u00e4tze; pipe uniqueness assumes full-disk regularity, and both fields solve NS and Stokes because acceleration vanishes."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px05-prediction",
+      "path": "items/pthm-fd-px05-prediction.md",
+      "raw_sha256": "cb33f9445910ba18dec00468a1606a6204c3639dddac26a9256ed11b5f991321",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x05",
+        "def-fd-incompressible-euler-model",
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Both velocities are steady spatial maps. Circulation is on closed circle in punctured Euclidean domain; x00 draft expressly retains spatial shorthand for steady sections. Bernoulli/streamline use unchanged.",
+      "source_excerpts": [
+        "[F1] [[def-fd-incompressible-euler-model]]: steady fields satisfy $\\operatorname{div}u=0$ and $\\rho_0(u\\cdot\\nabla)u+\\nabla p=0$.",
+        "[F2] [[thm-fd-x05]]: the vortex has nonzero circulation despite zero curl, and solid rotation has streamline-wise but non-global Bernoulli values.",
+        "[F3] [[def-fd-x00]]: for a closed piecewise-$C^1$ oriented curve $\\gamma:[a,b]\\to\\Omega$, circulation is the line integral $\\oint_\\gamma u\\cdot d\\mathbf r=\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. The theorem's circular value uses $\\gamma_R(\\theta)=(R\\cos\\theta,R\\sin\\theta,z_0)$ with $0\\le\\theta\\le2\\pi$ and positive orientation about the axis."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px06-prediction",
+      "path": "items/pthm-fd-px06-prediction.md",
+      "raw_sha256": "f1536cdc871bfab4d8061d76ee5e7a7a185500db2558de9146b0ef1c92a5ab8d",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x06"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Steady Stokes field and sphere boundary derivatives are explicit in mathematical supplier. Pressure/viscous traction and 6pi\u03bcaU unaffected by fixing time; AC\u03c9 already assumed.",
+      "source_excerpts": [
+        "[F3] [[thm-fd-x06]]: under $\\mathrm{AC}_\\omega$, the exact exterior fields solve Stokes, have resultant $6\\pi\\mu aU$, and are unique only in the stated uniform decay class."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px07-prediction",
+      "path": "items/pthm-fd-px07-prediction.md",
+      "raw_sha256": "183b084c7de32a72fe29a1f12a450e19c36f6f53ad4c922e1b0335ca100602be",
+      "domain": "physics",
+      "reached_suppliers": [
+        "def-fd-x00",
+        "thm-fd-x07"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses unchanged NS/Stokes differential equations, residual theorem and direct periodic-cell FTC. Spatial L2 estimates already apply to stationary fields. No changed line/surface observable use.",
+      "source_excerpts": [
+        "[F2] [[def-fd-x00]]: for constants $\\rho_0,\\mu>0$, the formal pointwise incompressible Navier\u2013Stokes equation is $\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-(\\mu/\\rho_0)\\Delta u=0$, $\\operatorname{div}u=0$; its steady Stokes system omits the time derivative and convection. This is mathematical notation and asserts no physical solution.",
+        "[F3] [[thm-fd-x07]] is a draft mathematical theorem with a proof present; no independent proof acceptance is recorded. Under $\\mathrm{AC}_\\omega$, on bounded $C^1$ Euclidean domains, a smooth divergence-free zero-trace field satisfying $-\\mu\\Delta w+\\nabla q=f$ and the stated zero-trace Poincare inequality obeys both residual bounds in the Statement. The same result separately proves $\\|v\\|_{L^2(Q)}\\le h\\|\\nabla v\\|_{L^2(Q)}$ for smooth periodic channel fields vanishing at $y=0,h$; its proof does not regard $Q$ as a bounded $C^1$ Euclidean domain. Its current Step-1 record is owner-resolved ready for authoring only, not proof acceptance."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px08-prediction",
+      "path": "items/pthm-fd-px08-prediction.md",
+      "raw_sha256": "7901b113ce1298ed22725d242c27b46db3ec501c1bd08ef736072bc003b6cd34",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x08",
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Euclidean circulation mention is the fixed-time convention; actual torus proof uses explicit periodic lift integral at time t. Entire torus proof retains its own closed lift/material condition. No claim/hypothesis changes.",
+      "source_excerpts": [
+        "[F2] [[thm-fd-x08]]: the half-space field, Gaussian tail bound, torus shear solution and specified material-loop circulation are as stated, with the corner excluded.",
+        "[F3] [[def-fd-x00]] defines Euclidean circulation for a closed piecewise-$C^1$ curve $\\gamma:[a,b]\\to\\Omega\\subseteq\\mathbb R^3$ as $\\int_a^b u(\\gamma(s))\\cdot\\gamma'(s)\\,ds$. For the flat quotient, [[thm-fd-x08]] supplies the periodic-lift convention: $X=\\pi(\\widetilde X)$ is material when $\\partial_t\\widetilde X=\\widetilde u(t,\\widetilde X)$, and its circulation is $\\int_0^1\\widetilde u(t,\\widetilde X)\\cdot\\partial_s\\widetilde X\\,ds$. Translating the lift by a period-lattice vector changes neither the periodic velocity nor the lift derivative, so the value descends to the specified torus loop."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px09-prediction",
+      "path": "items/pthm-fd-px09-prediction.md",
+      "raw_sha256": "e265729940219812b20b4c53d7adde721aa9973e280c268034c04e4366586868",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x09",
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Barotropic PDE and curl conventions unchanged. Its material-loop circulation already fixes t explicitly inside u(t,X(t,s)); steady example equally compatible.",
+      "source_excerpts": [
+        "[F2] [[thm-fd-x09]]: for the stated smooth barotropic Euler system with conservative potential, steady Bernoulli is constant along streamlines and globally on connected curl-free components, and circulation is conserved for closed material loops with the stated regularity.",
+        "[F3] [[def-fd-x00]]: for $u=(u_x,u_y,u_z)$ in Cartesian coordinates, $\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\partial_zu_x-\\partial_xu_z,\\partial_xu_y-\\partial_yu_x)$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px10-prediction",
+      "path": "items/pthm-fd-px10-prediction.md",
+      "raw_sha256": "a8fc59edc056e89f88328a430e9afc4b2ab4362449e7fae7e7cddb2b6b333331",
+      "domain": "physics",
+      "reached_suppliers": [
+        "def-fd-x00",
+        "thm-fd-x10"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses unchanged NS/Poincare interfaces and explicit E(t)=integral |w(t,x)|\u00b2. No circulation/traction/resultant use.",
+      "source_excerpts": [
+        "[F2] [[def-fd-x00]]: the formal constant-density incompressible Navier\u2013Stokes system is $\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-(\\mu/\\rho_0)\\Delta u=0$, $\\operatorname{div}u=0$, with componentwise vector Laplacian. This formal definition asserts no physical solution.",
+        "[F3] [[thm-fd-x10]] is a draft mathematical theorem with a proof present; no independent proof acceptance is recorded. Under $\\mathrm{AC}_\\omega$, for an existing smooth solution on the periodic channel with Couette wall values, the sufficient condition $|S|h^2/\\nu<2$ implies $E(t)\\le e^{-(2\\nu/h^2-|S|)t}E(0)$ on its assumed interval. Its current Step-1 record is owner-resolved ready; this is authoring readiness only and does not accept the mathematical proof."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "pthm-fd-px13-prediction",
+      "path": "items/pthm-fd-px13-prediction.md",
+      "raw_sha256": "05fb4649340c69e4fdc809a731135e3f5d991f7be96fca70fca9ac4cb3826849",
+      "domain": "physics",
+      "reached_suppliers": [
+        "thm-fd-x13",
+        "def-fd-incompressible-euler-model",
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses unchanged Euler differential equations and x13 exact exterior solution and boundary values; sphere pressure formula is the restriction of x13 smooth r>0 extension, so its independent antipodal integral computation remains valid.",
+      "source_excerpts": [
+        "[F1] [[def-fd-incompressible-euler-model]]: the selected local equations are div $u=0$ and $\\rho_0D_tu+\\nabla p=0$, with inviscid stress $\\sigma_E=-pI$.",
+        "[F2] [[thm-fd-x13]]: the displayed potential sphere field solves steady Euler, has no-through slip, and has zero pressure-only resultant with the stated orientation.",
+        "[F3] [[def-fd-x00]]: for $u=(u_x,u_y,u_z)$ in Cartesian coordinates, $\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\partial_zu_x-\\partial_xu_z,\\partial_xu_y-\\partial_yu_x)$; in the smooth potential field the mixed second derivatives commute, giving $\\operatorname{curl}(\\nabla\\phi)=0$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-capillary-gravity-dispersion-energy",
+      "path": "items/thm-fd-capillary-gravity-dispersion-energy.md",
+      "raw_sha256": "a4c4393f2b08db7f0f6391927dbe6af22b6b0af056625bb08a9506fc6b6a8191",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-wall-defect-capillary-models",
+        "thm-fd-x03"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes explicit time-section energy integrals and periodic boundary model. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Finite-depth gravity-wave mode used at zero surface tension: [[thm-fd-x03]].",
+        "Model equations and conventions: [[def-fd-wall-defect-capillary-models]].",
+        "[A1] The capillary-gravity potential model is the mathematical model defined in [[def-fd-wall-defect-capillary-models]]: harmonic potential in $-h<z<0$, impermeable bottom, kinematic condition $\\eta_t=\\phi_z$ at $z=0$, and dynamic condition $\\phi_t+g\\eta-(\\sigma/\\rho)\\Delta_H\\eta=0$.",
+        "[F1] [[thm-fd-x03]]: for $h,g,k>0$, $\\omega_0=\\sqrt{gk\\tanh(kh)}>0$ and the fields $\\eta_0=aC(kx-\\omega_0t')$, $\\phi_0=(ag/\\omega_0)G(z)S(kx-\\omega_0t')$ solve the finite-depth linear gravity-wave system; $G(z)=\\cosh(k(z+h))/\\cosh(kh)$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-common-wall-residual-error",
+      "path": "items/thm-fd-common-wall-residual-error.md",
+      "raw_sha256": "eb0c3c690e87cf3a8410159f48e6952606c1a8122c16ec38878798f894232487",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-wall-defect-capillary-models"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes explicit time-section L2 residual norms and wall-trace differences. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "The forced constant-density incompressible operators and full residual convention: [[def-fd-wall-defect-capillary-models]].",
+        "[F1] [[def-fd-wall-defect-capillary-models]] defines the full forced residual $\\mathcal R(w,q)=w_t+(w\\cdot\\nabla)w+\\rho_0^{-1}\\nabla q-\\nu\\Delta w-f$ with the Cartesian operators; the theorem's residual signs match that definition."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-shallow-water-smooth-energy",
+      "path": "items/thm-fd-shallow-water-smooth-energy.md",
+      "raw_sha256": "e7811c584274ccb033899d767f772ea820679b8913131a85de7a02d4f663588f",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-rotating-stratified-shallow-equations"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes own 2D differential equation and time-section energy integral. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Equation family and conventions: [[def-fd-rotating-stratified-shallow-equations]].",
+        "[F1] [[def-fd-rotating-stratified-shallow-equations]]: the shallow-water branch is $h_t+\\nabla\\cdot(hv)=0$ and $(hv)_t+\\nabla\\cdot(hv\\otimes v)+\\nabla(gh^2/2)+fhJv=0$, with $h>0$, $g>0$, and $f\\in\\mathbb R$ constant.",
+        "[F2] [[def-fd-rotating-stratified-shallow-equations]]: for scalar $q$, $\\nabla q=(\\partial_{x_1}q,\\partial_{x_2}q)$; for vector $w$, $\\nabla\\cdot w=\\sum_j\\partial_{x_j}w_j$; for a matrix $A$, $(\\nabla\\cdot A)_i=\\sum_j\\partial_{x_j}A_{ij}$; and $J(v_1,v_2)=(-v_2,v_1)$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-stratified-linear-energy",
+      "path": "items/thm-fd-stratified-linear-energy.md",
+      "raw_sha256": "c35ff92209bb5325c5dd614dd1968f1f51cccb3d677ecf7a1d3888f500358dad",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-rotating-stratified-shallow-equations"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Consumes own 3D equation and explicit time-section energy integral. The inherited x00 Cartesian differential/steady conventions are unchanged; no use requires an unfixed spacetime field in a spatial line/surface integral.",
+      "source_excerpts": [
+        "Equation family and pointwise regularity: [[def-fd-rotating-stratified-shallow-equations]].",
+        "[F1] [[def-fd-rotating-stratified-shallow-equations]]: the stratified branch on $\\mathbb T^3$ is $u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u$, $\\nabla\\cdot u=0$, and $b_t+N^2u_3=\\kappa\\Delta b$, with constant $f\\in\\mathbb R$, $N>0$, and $\\nu,\\kappa\\ge0$.",
+        "[F2] [[def-fd-rotating-stratified-shallow-equations]]: for a scalar field $q$, $\\nabla q=(\\partial_{x_1}q,\\partial_{x_2}q,\\partial_{x_3}q)$; for a vector field $w$, $\\nabla\\cdot w=\\sum_j\\partial_{x_j}w_j$, $\\Delta w$ is componentwise, $|w|^2=\\sum_jw_j^2$, and $|\\nabla w|^2=\\sum_{i,j}(\\partial_{x_j}w_i)^2$; $e_3\\times w=(-w_2,w_1,0)$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x01",
+      "path": "items/thm-fd-x01.md",
+      "raw_sha256": "957fb536d86f24b55c1361276d957c4244041adba668091d09acf5b9f8e6ff2b",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Exact positive scale substitutions and PDE operators only; no changed spatial observable use.",
+      "source_excerpts": [
+        "The formal systems and derivative conventions: [[def-fd-x00]].",
+        "[A1] The constant-density incompressible system is $\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ and $\\operatorname{div}u=0$ ([[def-fd-x00]]).",
+        "[A2] The barotropic system is $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ and $\\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V$ ([[def-fd-x00]]).",
+        "[F1] The gradient, divergence, Laplacian, and componentwise convective derivative in these systems are the Cartesian operators defined in [[def-fd-x00]]."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x02",
+      "path": "items/thm-fd-x02.md",
+      "raw_sha256": "2a1855c41ee27fd590b3cca4c1a38c3afa69fe897da8193e0731d80807ec121d",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Barotropic/rotating linear equations and Cartesian derivatives only; finite-mode statements untouched.",
+      "source_excerpts": [
+        "Formal system definitions and Cartesian operators: [[def-fd-x00]].",
+        "[A1] Barotropic equations: $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ and $\\partial_tu+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V$ ([[def-fd-x00]]).",
+        "[A2] Rotating linear equations: $\\partial_t w+2\\Omega\\times w=-\\nabla q$ and $\\operatorname{div}w=0$ ([[def-fd-x00]])."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x03",
+      "path": "items/thm-fd-x03.md",
+      "raw_sha256": "761bd25ee9b6cd169be8d690a1c5593669d6d1cfc166e06faf816782c5ae6034",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses scalar Cartesian Laplacian only; finite-depth mode and hyperbolic error estimates unchanged.",
+      "source_excerpts": [
+        "Cartesian Laplacian convention: [[def-fd-x00]].",
+        "[F1] The scalar Laplacian in Cartesian coordinates is the sum of the pure second partial derivatives ([[def-fd-x00]])."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x04",
+      "path": "items/thm-fd-x04.md",
+      "raw_sha256": "794e7783a864b2460403e96aab7f14aac3f2cd2a35dd345ebc3aa212c504f518",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Time-independent channel/pipe sections; stress algebra and flux integrals remain identical, including full-disk axis regularity.",
+      "source_excerpts": [
+        "[F1] [[def-fd-x00]]: the current formal definition sets $\\nu=\\mu/\\rho_0$, defines the pointwise constant-density incompressible Navier\u2013Stokes equation and its steady Stokes specialization, defines divergence and curl from Cartesian partial derivatives, fixes the componentwise Laplacian and row-component Jacobian conventions, and defines stress by $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x05",
+      "path": "items/thm-fd-x05.md",
+      "raw_sha256": "9effbfa57784371bb75ec3a38c47be779a6f135dab74968118fb84a10174d15b",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Steady Euclidean circulation is licensed by stationary section shorthand; domain excludes axis, path closed, nonzero circulation computation unchanged.",
+      "source_excerpts": [
+        "[F1] [[def-fd-x00]]: divergence, curl and componentwise Laplacian are defined by Cartesian partial derivatives; the constant-density Navier\u2013Stokes equation is pointwise, with $\\rho_0,\\mu>0$ and $\\nu=\\mu/\\rho_0$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x06",
+      "path": "items/thm-fd-x06.md",
+      "raw_sha256": "1316ce8a4f600b3247f24bf46a396ed0be226d93d42b93971784eaa7f02dd6a8",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses stationary Stokes/stress conventions. Surface force defined and computed using explicit sphere parametrization and published area integrals. Annular proof still explicitly assumes AC\u03c9.",
+      "source_excerpts": [
+        "Cartesian derivative, Stokes-system, and stress conventions: [[def-fd-x00]].",
+        "[F1] [[def-fd-x00]]: the constant-density steady Stokes equation is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ with $\\nu=\\mu/\\rho_0$; $D u=(\\partial_j u_i)_{i,j}$, $\\Delta$ is componentwise, and the stress is $-pI_3+\\mu(Du+(Du)^{\\mathsf T})$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x07",
+      "path": "items/thm-fd-x07.md",
+      "raw_sha256": "4eabd0b473d3b7a8b23c4a0495ccd28b1cea5a5c3884374997ada3c5cac45ab5",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses only unchanged NS/Stokes PDE system. Generic bounded-domain residual and separate nonsharp periodic h bound unchanged.",
+      "source_excerpts": [
+        "[F1] [[def-fd-x00]] on $fd-x01$ defines, for constants $\\rho_0>0$ and $\\mu>0$ with $\\nu=\\mu/\\rho_0$, the pointwise constant-density incompressible equation $u_t+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$, $\\nabla\\cdot u=0$. Its steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$, $\\nabla\\cdot u=0$, and omits both the time derivative and convection."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x08",
+      "path": "items/thm-fd-x08.md",
+      "raw_sha256": "393a7dc8a04d334d14ce98f3d2b045415672229f897e9a97fbfdca10ecc13ab2",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Half-space PDE unchanged; torus circulation is explicitly defined through periodic lifts, at each fixed t, independent of x00 Euclidean curve interface.",
+      "source_excerpts": [
+        "Constant-density equations and Euclidean circulation conventions: [[def-fd-x00]].",
+        "[F1] [[def-fd-x00]]: for constant density, $\\nu=\\mu/\\rho_0$ and the incompressible Navier\u2013Stokes equation is $u_t+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ with $\\operatorname{div}u=0$; Cartesian derivatives and componentwise Laplacian are used. This supplies the pointwise system for the half-space field and, through the periodic-lift convention in the Statement, for the torus field. The Euclidean material-loop definition there has domain in an open subset of $\\mathbb R^3$; it is not used for the torus loop, whose material condition and circulation are defined through lifts in the Statement."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x09",
+      "path": "items/thm-fd-x09.md",
+      "raw_sha256": "07e2f2f3d9064a68135f2eb9b0e4d23245c3ba4b4723f799182a20c8e84ec50c",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Material-loop Gamma(t) already evaluates u(t,X(t,s)) at fixed time; barotropic equations, streamline domain and Kelvin proof unchanged.",
+      "source_excerpts": [
+        "Formal barotropic system, Cartesian derivative conventions, and streamline definition: [[def-fd-x00]].",
+        "[F1] [[def-fd-x00]]: the barotropic Euler equations are $\\rho_t+\\operatorname{div}(\\rho u)=0$ and $u_t+(u\\cdot\\nabla)u=-\\rho^{-1}\\nabla(P(\\rho))-\\nabla V$, with positive density, $P\\in C^2$, and time-independent $V\\in C^2$; divergence, gradient, curl and convective derivative use Cartesian coordinates."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x10",
+      "path": "items/thm-fd-x10.md",
+      "raw_sha256": "fd8427de53000e27e992340de662d69da353eb2c4805aba18519509348ecad2b",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00",
+        "thm-fd-x07"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses unchanged differential equations and x07 bound. Energy E(t) already evaluated on each time slice; no changed surface/line observable.",
+      "source_excerpts": [
+        "[F1] [[def-fd-x00]] on $fd-x01$ defines, for constants $\\rho_0>0$ and $\\mu>0$ with $\\nu=\\mu/\\rho_0$, the pointwise constant-density incompressible equation $u_t+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$, $\\nabla\\cdot u=0$. Its vector Laplacian is componentwise; the fields here have the stated stronger channel regularity.",
+        "[F2] [[thm-fd-x07]] states that for the periodic channel and any $C^1$ field $v$ periodic in $x,z$ and zero at $y=0,h$, $\\|v\\|_{L^2(Q)}^2\\le h^2\\|\\nabla v\\|_{L^2(Q)}^2$. Its full conditional proof interface includes $\\mathrm{AC}_\\omega$."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x11",
+      "path": "items/thm-fd-x11.md",
+      "raw_sha256": "7a118849fd16516bf49b9e52b1f791cda17fabf4da52bd2a841203c5222f05f9",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00"
+      ],
+      "disposition": "unchanged-interface-use-compatible",
+      "reviewed_use": "Uses only Cartesian scalar Laplacian, reduced by third-coordinate independence. Linear interface mode and Sobolev claims unchanged.",
+      "source_excerpts": [
+        "[F1] [[def-fd-x00]] on $fd-x01$ defines Euclidean partial derivatives pointwise, defines the scalar Laplacian by $\\Delta f=\\operatorname{div}\\nabla f=\\sum_j\\partial_j^2f$, and applies vector Laplacians componentwise. Extending these potentials independently of a third coordinate makes this two-coordinate Laplacian the restriction of that defined three-coordinate Laplacian."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    },
+    {
+      "id": "thm-fd-x13",
+      "path": "items/thm-fd-x13.md",
+      "raw_sha256": "2690cdcb414cd5bc25a7983647ee001edca09988a66d24d30602a6126621a9de",
+      "domain": "mathematics",
+      "reached_suppliers": [
+        "def-fd-x00",
+        "def-fd-incompressible-euler-system",
+        "thm-fd-x09"
+      ],
+      "disposition": "proposal-repair",
+      "reviewed_use": "Proof-only extension on D={r>0} supplies stationary smooth ambient field around sphere; original Statement retained byte-identically, and all parameters including U=0 remain allowed.",
+      "source_excerpts": [
+        "Formal constant-density incompressible Euler system and pressure-stress definition: [[def-fd-incompressible-euler-system]].",
+        "[F1] [[def-fd-x00]]: $\\nabla$ and $\\Delta$ are Cartesian operators, and smooth scalar fields have commuting mixed partials.",
+        "[F2] [[def-fd-incompressible-euler-system]]: the steady inviscid equations are $(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p=0$, $\\operatorname{div}u=0$, and the formal stress is $\\sigma_E=-pI_3$ with resultant $\\int_S\\sigma_En_S\\,dS$.",
+        "[F3] [[thm-fd-x09]]: for every $C^2$ vector field, $(u\\cdot\\nabla)u=\\nabla(|u|^2/2)-u\\times\\operatorname{curl}u$. This is the exact algebraic clause of that theorem used here; no barotropic Bernoulli conclusion is invoked."
+      ],
+      "review_limit": "Focused changed-interface use/assumption check; not a fresh independent audit of every inherited proof."
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+FILE PAGE 5
+• In large-eddy simulation, only the small scales are modeled. These scales generally have little
+energy (generally 5% or less of the turbulent kinetic energy) so that there is not as much
+inﬂuence of the modeling. In addition, the smaller scale motions are more ‘universal’, so that
+a good small scale model should be applicable for a range of ﬂows.
+So in theory large-eddy simulation would be expect to apply to very high Reynolds number ﬂows.
+1.5
+Disadvantages of large-eddy simulation
+There are clearly some disadvantages as well to employing large-eddy simulations.
+• Compared to DNS, large-eddy simulation requires some ad hoc modeling. This can be espe-
+cially diﬃcult near boundaries.
+• Compared to RANS, the numerical problem for large-eddy simulation is very diﬃcult. The
+simulation must be three-dimensional and time-dependent. Considerably more resolution in
+space and time is required than for RANS, with smaller time scales to be resolved (more
+time steps), and smaller spatial scales to be resolved (more grid points). Generally, to keep
+the computational size and length manageable, very accurate numerical methods are used in
+large-eddy simulation.
+1.6
+General comments
+At the present time, large-eddy simulation is used as a research tools, e.g., to explore ﬂows in detail
+(numerical experiments, as ﬁrst done by Deardorﬀ), and to develop and improve subgrid-scale
+modeling, e.g., for chemically-reacting ﬂows, multiphase ﬂows, boundary layer ﬂows.
+Currently large-eddy simulation is beginning to be used in applications. This is especially true
+in situations where RANS is expected to be inaccurate, e.g., for ﬂows with large density variations,
+for fast rotating ﬂows. In general, however, it is too computationally intensive and too complicated
+to use. It is starting to appear, however, in commercial codes. But it must be recognized that most
+(all?) commercial codes are low order codes, which makes numerical resolution in space and time
+even more diﬃcult.
+1.7
+Development of the equations for large-eddy simulations
+The development of the equations for large-eddy simulations parallels that for the ensemble (or
+time, etc.) averaged equations, which includes the following steps.
+• An averaging operator is deﬁned, in this case a spatial ﬁlter (also implying a temporal ﬁlter).
+• This ﬁltering is then applied to the Navier-Stokes equations, resulting in a closure problem
+related to the ﬁltered (subgrid-scale, or residual) motions; the closure problem is again due
+to the nonlinearity in the equations.
+• Models are oﬀered for the eﬀects of the subgrid-scale motions, closing the equations.
+• Appropriate numerical methods are then used to solve the resulting equations.
+5
+
+FILE PAGE 6
+2
+Filtering
+Of interest in large-eddy simulation is the ﬁltered values of the unknowns, e.g., of U and p. First the
+ﬁltering operators will be deﬁned, and their properties will be explored. Then, in order to obtain
+dynamic equations for these ﬁltered quantities, the Navier-Stokes equations are then ﬁltered.
+Given an unknown, e.g., U(x, t), a spatial ﬁltering operator is deﬁned by:
+¯U(x, t) =
+Z
+G(r, x)U(x −r, t)dr , (a convolution)
+(1)
+where
+• G is the ﬁlter function satisfying
+Z
+G(r, x)dr = 1 ,
+(if this were not true, then the ﬁltered value of a constant would not be that constant), with
+some implied ﬁltered width ∆, possibly dependent upon x and related to the grid spacing
+∆x, and
+• the integrals are over the entire (computational) domain, although they are only eﬀective
+near |r| →0.
+Figure 5: Cartoon of the eﬀect of ﬁltering U(x).
+The eﬀect of the ﬁlter is qualitatively as shown in Figure 5. Note that, in particular,
+∂
+∂t
+¯U(x, t)
+=
+∂
+∂t
+Z
+G(x, r)U(x −r, t)dr
+=
+Z
+G(x, r) ∂
+∂t
+¯U(x −r, t)dr = ∂U
+∂t (Leibnitz rule),
+(2)
+assuming that the operations of integration and diﬀerentiation can be interchanged.
+With u′ called the subgrid-scale motion, and deﬁned by
+u′(x, t) = U(x, t) −¯U(x, t) , then
+(3)
+u′(x, t) = ¯U(x, t) −¯U(x, t) .
+(4)
+6
+
+FILE PAGE 7
+Note that, in general,
+¯U(x, t) =
+Z
+G(x, r) ¯U(x −r, t)dr ̸=
+Z
+G(r, x)U(x −r, t)dr = ¯U(x, t) .
+Therefore, in general,
+u′(x, t) ̸= 0 ,
+which can make the analysis more diﬃcult. We will ﬁnd that only projection ﬁlters, e.g., spectral
+ﬁlters, will have the property that u′(x, t) = 0. Also note that
+∂
+∂xi
+¯U(x, t)
+=
+∂
+∂xi
+Z
+G(r, x)U(x −r, t)dr
+=
+Z
+G(r, x)
+∂
+∂(xi −ri)U(x −r, t)dr +
+Z
+∂
+∂xi
+G(r, x)U(x −r, t)dr
+=
+∂
+∂xi
+U(x, t) +
+Z
+∂
+∂xi
+G(r, x)U(x −r, t)dr .
+(5)
+So spatial diﬀerentiation and ﬁltering do not commute unless G is independent of x. In particular,
+this can lead to additional terms near boundaries since the turbulence scales, and hence the ﬁlter
+width, should decrease as the boundary is approached.
+2.1
+Types of ﬁlters
+Several types of ﬁlters have been employed in large-eddy simulations. The most commonly used
+are the following (deﬁned here in one dimension).
+Figure 6: Top-hat ﬁlter function G(r).
+• top-hat ﬁlter (the one originally used by Deardorﬀ). Here the ﬁlter is deﬁned by (see Figure 6):
+G(r) = 1
+∆
+ 1
+|r| < 1
+2∆
+0
+otherwise
+(6)
+• Gaussian, here deﬁned as (see Figure 7):
+G(r) =
+ 6
+π∆2
+1/2
+exp
+n
+−6r2
+∆2
+o
+.
+(7)
+7
+
+FILE PAGE 8
+Figure 7: Gaussian ﬁlter function G(r).
+• The third type of ﬁlter is the projection ﬁlter.
+Here we will mainly consider a spectral
+truncation ﬁlter, although various other series, e.g., Chebychev series, could be considered.
+For a Fourier series with period 2π, a function, say U(x), can be represented as
+U(x) =
+∞
+X
+k=−∞
+ˆUkeikx .
+The spectral truncation ﬁlter is then
+¯U(x) =
+k=Kc
+X
+k=−Kc
+ˆ¯Ukeikx , with Kc = π/∆and
+ˆ¯Uk =
+ ˆUk
+|k| < Kc
+0
+otherwise
+Note that for this spectral truncation (and projection truncations in general), ¯U(x) = ¯U(x),
+since the additional truncation does not change ¯U(x).
+Figure 8 plots all three ﬁlters as functions of r.
+Note that, in physical space, the spectral
+truncation ﬁlter is the Fourier transform of a top-hat ﬁlter in wave number space, i.e., the transfer
+function of the spectral ﬁlter. Transfer functions are discussed in the next section.
+2.2
+Transfer function
+In considering any of the ﬁlters, if U(x) is representable by a Fourier integral, then in wave number
+space the ﬁlters can be considered as a multiplication of ˆU(k) by a transfer function (see Table 13.2,
+page 563 in the text). Assuming that G is independent of x, then
+ˆ¯U(k) = ˆG(k) ˆU(k) ,
+where ˆG(k) is the Fourier transform of G(r). For the top-hat ﬁlter,
+ˆG(k) = sin(1
+2k∆)
+1
+2k∆
+,
+8
+
+FILE PAGE 9
+Figure 8: The ﬁlters G(r).
+which decays in k as 1/(k∆), which is rather slow and requires more numerical resolution for the
+ﬁltered function.
+On the other hand, for the Gaussian ﬁlter, probably the most often used in
+practice,
+ˆG(k) = exp
+n
+−k2∆2
+24
+o
+.
+Note that the Gaussian ﬁlter decays much more rapidly in k than does the top-hat ﬁlter, and
+therefore is more compact and will require signiﬁcantly less numerical resolution. For the spectral
+ﬁlter,
+ˆG(k) =
+ 1
+for k < Kc
+0
+otherwise
+so that it is compact in wave number space, although not compact in physical space (see Figure 8).
+The behavior of all three ﬁlter transfer functions is shown in Figure 9.
+Figure 9: The ﬁlter transfer functions ˆG(k).
+In a homework problem (Problem 13.7, page 570), it is shown that the energy spectrum, for
+example E11(k) related to the spatial autocorrelation function ⟨u1(x1)u1(x1 +r1)⟩, is related to the
+energy spectrum of the spatially-ﬁltered velocity as
+¯E11(k) = | ˆG(k)|2E11(k) .
+Other properties of the ﬁlter functions and ﬁlter transfer functions are discussed in the text.
+9
+
+FILE PAGE 10
+Note the following.
+• The grid spacing ∆xg is usually chosen to e a fraction of the ﬁlter width, say ∆xf, e.g.,
+∆xg = 1
+2∆xf, so that Kcg .= Kcf.
+• The numerical scheme will also act as a ﬁlter, especially for the top-hat ﬁlter case. In fact it
+can be diﬃcult to totally separate the numerical schemes from the ﬁltering. In the extreme
+case, the ﬁltering is solely done by the numerical scheme, an approach which is called Implicit
+LES, which will be discussed later.
+2.3
+Filtered rate-of-strain
+In the following discussion, it will be assumed that G is independent of x unless otherwise stated.
+A quantity of importance in modeling, especially in the popular Smagorinsky model, in the ﬁltered
+strain-rate,
+¯Sij = 1
+2
+ ∂
+∂xj
+¯Ui + ∂
+∂xi
+¯Uj
+
+,
+(8)
+and its magnitude
+¯S =
+
+2 ¯Sij ¯Sij
+1/2
+, summation on i, j
+(9)
+It is instructive to determine its dependence on the ﬁltering.
+Assume homogeneous, isotropic
+turbulence with an inertial subrange. For isotropic turbulence,
+⟨sijsij⟩=
+Z ∞
+0
+k2E(k)dk ,
+where E(k) is the three-dimensional energy spectrum. (See Equation 6.191, page 222 in the text,
+noting that ϵ = 2ν⟨sijsij⟩.) So
+⟨¯S2⟩= 2⟨¯Sij ¯Sij⟩= 2
+Z ∞
+0
+k2 ¯E(k)dk = 2
+Z ∞
+0
+k2| ˆG(k)|2E(k)dk
+(see Problem 13.7, page 570.)
+Since k2 weights the integral towards larger k, but | ˆG(k)|2 damps the integrand above k = Kc,
+we expect the maximum contribution to the integral to come from values of k near Kc. But note
+also that this is where numerical schemes have their greatest errors. If Kc is in the inertial subrange,
+which is often assumed to be the case of large-eddy simulations, we can use the Kolmogorov inertial
+subrange spectrum to estimate the integral; i.e., assuming that the principal contribution is due to
+E near Kc, then E(k) = Cϵ2/3k−5/3, where C is a known constant, so that
+⟨¯S2⟩
+.=
+2
+Z ∞
+0
+k2| ˆG(k)|2Cϵ2/3k−5/3dk = 2Cϵ2/3
+Z ∞
+0
+k1/3| ˆG(k)|2dk
+=
+2Cϵ2/3∆−4/3
+Z ∞
+0
+(∆k)1/3| ˆG(k)|2d(∆k) = afCϵ2/3∆−4/3 , with
+(10)
+af = 2
+Z ∞
+0
+∆4/3k2| ˆG(k)|2k−5/3dk = 2
+Z ∞
+0
+(k∆)1/3| ˆG(k)|2d(k∆)
+(11)
+which depends on the ﬁlter transfer function ˆG(k). Note that the integral is independent of ∆,
+since ˆG(k) = f(k∆), and furthermore the integral is a constant. An important result is that
+⟨¯S2⟩1/2 ∝∆−2/3 ,
+(12)
+10
+
+FILE PAGE 11
+which will be used below.
+The quantity af can be easily evaluated. For example, for the spectral truncation ﬁlter, with
+ˆG(k) = H(Kc −|k|) = H
+
+1 −|k|∆
+π
+
+,
+with H(·) the Heaviside function, and Kc = π/∆,
+af = 2
+Z ∞
+0
+ζ1/3H(1 −ζ
+π)dζ
+|
+{z
+}
+k∆=ζ
+= 2
+Z π
+0
+ζ1/3dζ = 2ζ4/3
+4/3
+
+π
+0 = 3
+2π4/3 .= 6.9 .
+Note that for a computational grid of length L and N grid points, then L = N∆, kmin = (2π)/L,
+kmax = (N/2)kmin = (N/2)(2π/L) = (Nπ/L) = π/∆.
+3
+Filtering the equations of motion
+To obtain the governing equations for the ﬁltered velocity ﬁeld and pressure ﬁeld, we ﬁlter the
+Navier-Stokes equations. We assume that the ﬁlter G is independent of x to that the operations
+of spatial ﬁltering and spatial derivatives commute. We start with the continuity equation, which
+when ﬁltered gives:
+∂
+∂xi
+Ui =
+∂
+∂xi
+¯Ui = 0 .
+(13)
+Also, decompositing the velocity into the ﬁltered velocity plus the residual (subgrid-scale) velocity,
+Ui = ¯Ui + u′
+i, then taking the divergence of Ui and using Equation (13) gives:
+∂
+∂xi
+u′
+i = 0 .
+(14)
+Furthermore, since spatial derivatives and ﬁltering commute, then
+∂
+∂xi
+u′
+i =
+∂
+∂xi
+u′
+i = 0 .
+Next, ﬁltering the momentum equation, after writing the nonlinear term, using continuity, as
+Uj
+∂
+∂xj
+Ui =
+∂
+∂xj
+(UjUi) ,
+and using the facts that both the time and space derivatives commute with the ﬁltering operation:
+∂
+∂t
+¯Ui +
+∂
+∂xj
+UjUi = −1
+ρ
+∂
+∂xi
+¯P + ν ∂2
+∂x2
+j
+¯Ui .
+(15)
+It is useful to now deﬁne the subgrid-scale, or residual, stress as
+τ R
+ij = UjUi −¯Ui ¯Uj .
+(16)
+Using Equation (16), Equation (15) can be written as:
+∂
+∂t
+¯Ui + ¯Uj
+∂
+∂xj
+¯Ui +
+∂
+∂xj
+τ R
+ij = −1
+ρ
+∂
+∂xi
+¯P + ν ∂2
+∂x2
+j
+¯Ui .
+(17)
+11
+
+FILE PAGE 12
+Following what was done with Reynolds stress modeling, it is useful to deﬁne a subgrid-scale kinetic
+energy (an alternative deﬁnition, kr, is given below) as
+ksgs = 1
+2τ R
+ii = 1
+2UiUi −1
+2
+¯Ui ¯Ui ,
+(18)
+so that the anisotropic, deviator part of the subgrid-scale stress tensor is:
+τ r
+ij = τ R
+ij −2
+3ksgsδij .
+(19)
+Plugging this expression for τ R
+ij into Equation (17) gives ﬁnally, with
+¯p = ¯P + 2
+3ksgs , the modiﬁed pressure,
+∂
+∂t
+¯Ui + ¯Uj
+∂
+∂xj
+¯Ui = −1
+ρ
+∂
+∂xi
+¯p + ν ∂2
+∂x2
+j
+¯Ui −
+∂
+∂xj
+τ r
+ij .
+(20)
+As with the Reynolds averaged equation modeling, we now have 4 equations, Equations (13) and
+(20) for ¯Ui and ¯p. In addition, however, we have the 6 unknowns τ r
+ij so that there is again a closure
+problem. Note that if the equations were linear, then τ r
+ij = 0 and there would be no direct eﬀect of
+the subgrid-scale motions on the ﬁltered motions, and no closure problem.
+It is useful to ﬁrst examine the energetics of the ﬁltered ﬁelds. The ﬁltered kinetic energy is
+¯E = 1
+2UiUi .
+(21)
+On the other hand, the kinetic energy of the ﬁltered motions ( ¯Ui) is
+Ef = 1
+2
+¯Ui ¯Ui (this can be directly computed from an LES).
+(22)
+Note that
+¯E −Ef = 1
+2UiUi −1
+2
+¯Ui ¯Ui = 1
+2τ R
+ii = ksgs
+from Equation (18). So
+¯E = Ef + ksgs .
+The dynamic equation for the kinetic energy of the ﬁltered motions Ef can be obtained by multi-
+plying Equation (20) by ¯Ui and summing on i. The result is:
+∂
+∂t
+1
+2
+¯U2
+i + ¯Uj
+∂
+∂xj
+1
+2
+¯U2
+i = 1
+ρ
+¯Ui
+∂
+∂xi
+¯p + ¯Uiν ∂2
+∂x2
+j
+¯Ui −¯Ui
+∂
+∂xj
+τ r
+ij .
+(23)
+However,
+¯Ui
+∂
+∂xi
+¯p =
+∂
+∂xi
+¯Ui¯p using Equation (13),
+¯Ui
+∂
+∂xj
+τ r
+ij =
+∂
+∂xj
+( ¯Uiτ r
+ij) −τ r
+ij
+∂
+∂xj
+¯Ui , and
+¯Ui
+∂2
+∂x2
+j
+¯Ui = ¯Ui
+∂
+∂xj
+ ∂
+∂xj
+¯Ui + ∂
+∂xi
+¯Uj
+
+= 2 ¯Ui
+∂
+∂xj
+¯Sij = 2 ∂
+∂xj
+( ¯Ui ¯Sij) −2 ¯Sij ¯Sij ;
+12
+
+FILE PAGE 13
+again using Equation (13). Plugging these quantities into Equation (23) gives, ﬁnally:
+ ∂
+∂t + ¯Uj
+∂
+∂xj
+
+Ef
+|
+{z
+}
+rate-of-change
+following
+ﬁltered motion
+=
+∂
+∂xj
+n
+−¯Ui
+ ¯p
+ρδij + τ r
+ij + 2ν ¯Sij
+o
+|
+{z
+}
+ﬁltered pressure, sgs,
+and viscous transport
+−
+2ν ¯Sij ¯Sij
+|
+{z
+}
+dissipation rate of
+ﬁltered motions
++
+τ r
+ij ¯Sij
+| {z }
+loss to sgs
+(24)
+The last term on the RHS represents the loss (gain) of energy from the grid-scale motions Ef to
+(from) the subgrid-scale motions kr = 1
+2UiUi −1
+2
+¯Ui ¯Ui (see Figure 10). In general it is expected
+that the net transfer is from Ef to kr, although some ‘back-scattering’ from the subgrid-scales to
+the grid-scales is expected to occur.
+Figure 10: Cartoon of the energy transfer from the ﬁltered (grid-scale) motions to the subgrid-scale
+motions.
+Note that for very high Reynolds number ﬂows, if the ﬁlter width ∆is in the inertial range (or is
+even smaller), then there is very little energy in the subgrid-scale motions, and 1
+2
+¯Ui ¯U1 ≈1
+2UiUi = E.
+If, however, there is appreciable energy in the subgrid-scale motions, then an estimate is needed
+for the subgrid-scale energy, deﬁned here as the kinetic energy in the unﬁltered motions minus the
+kinetic energy in the ﬁltered (grid-scale) motions, i.e.,
+kr = E −1
+2
+¯Ui ¯Ui .
+(25)
+Note that ksgs ̸= kr (see Equation (18)).
+For homogeneous, isotropic turbulence, the energy
+spectrum for kr is (see Problem 13.7, page 570 and Problem 13.10, page 577 of the text):
+Er(k) = E(k) −¯E(k) =
+
+1 −| ˆG(k)|2
+E(k) ,
+(26)
+where E(k) is the energy spectrum of the unﬁltered motions (the ‘true’ energy spectrum), and ˆG(k)
+is the Fourier transform of the ﬁlter function G(r). Therefore,
+⟨kr⟩=
+Z ∞
+0
+
+1 −| ˆG(k)|2
+E(k)dk .
+(27)
+13
+
+FILE PAGE 14
+An equation for kr can be obtained by subtracting the equation for 1
+2
+¯Ui ¯Ui from that for 1
+2UiUi,
+giving:
+∂
+∂tkr + ¯Uj
+∂
+∂xj
+kr + u′
+j
+∂
+∂xj
+E
+=
+∂
+∂xj
+n
+−1
+ρ(PUi −¯p ¯Ui)δij + 2ν(UiSij −¯Ui ¯Sij) + ¯Uiτ r
+ij
+o
+−
+2ν(SijSij −¯Sij ¯Sij) −τ r
+ij ¯Sij .
+(28)
+With appropriate models for τ r
+ij, this is sometimes used to predict kr.
+There are several LES
+approaches which use an equation for kr, somewhat analogous to the use of a k equation in Reynolds-
+averaged equation modeling. These approaches are mainly in the atmospheric sciences community,
+where the use of a kr equation was started by Deardorﬀ, but has continued up to the present time,
+and in some modeling in the combustion community. In most modeling, however, the assumption is
+made, sometimes not explicitly, that Kc is in the inertial subrange. Then, based upon Kolmogorov’s
+equilibrium theory, the principal balance in Equation 28 is expected to be:
+
+−τ r
+ij ˆSij
+
+|
+{z
+}
+transfer rate to
+subgrid-scales
+≈
+⟨ϵ⟩
+|{z}
+dissipation rate:
+all occurs in
+subgrid-scales
+.
+(29)
+This implies that all the energy lost by the grid-scale motions is dissipated. Also note that there
+is the possibility for backscatter, so that −τ r
+ij ¯Sij need not be positive everywhere, although it is
+expected that its average is positive. In fact some modeling attempts to explicitly include the local
+eﬀects of backscatter.
+The use of an equation for kr should depend, to some extent, on how much kinetic energy is
+in the subsgrid-scales. If the ﬁlter cutoﬀis in the inertial range, so that there is very little energy
+in the subgrid-scale motions, and these motions are in approximate equilibrium as assumed by
+Kolmogorov, then an equation for kr is probably not needed, and Equation (29) can be assumed.
+If, however, a signiﬁcant portion of the energy is in the subgrid-scales, indicating also that the
+subgrid-scale motions are not in equilibrium and Equation (29) is probably not valid, then it may
+be important to include a dynamic equation for kr.
+4
+Models for τ r
+ij
+The ﬁrst model for τ r
+ij, introduced by Lilly and based upon a model of Smagorinsky for two-
+dimensional, atmospheric ﬂows, and still used extensively, is as follows:
+τ r
+ij = −2νsgs ¯Sij , ¯Sij = 1
+2
+ ∂
+∂xj
+¯Ui + ∂
+∂xi
+¯Uj
+
+,
+(30)
+where the subgrid-scale viscosity is giving by
+νsgs
+=
+ℓ2
+s ¯S (see the mixing length model, Equation 10.19, page 367 in the text)
+ℓs
+=
+cs∆with ∆the ﬁlter width
+¯S
+=
+(2 ¯Sij ¯Sij)
+1
+2 the magnitude of the grid-scale strain rate
+and cs is the Smagorinsky coeﬃcient. The analogy with the turbulence viscosity modeling of the
+Reynolds stress is clear.
+Here there is no need for an additional length scale, as is needed in
+Reynolds averaged equations modeling, as a length scale, ∆, is already provided by the ﬁiltering.
+14
+
+FILE PAGE 15
+Note that the rate of energy transferred from the grid-scale motions to the subgrid-scale motions
+is
+−τ r
+ij
+∂
+∂xj
+¯Ui = +2νsgs ¯Sij
+∂
+∂xj
+¯Ui = 2νsgs ¯Sij ¯Sij = νsgs ¯S2 > 0 ,
+as νsgs > 0 in the original model. Therefore, for this model, the transfer is always from the grid-scale
+to the subgrid-scale motions. There is no backscatter.
+Following Lilly, the constant in Smagorinsky’s model can be estimated, assuming high Reynolds
+number and that the cutoﬀwave number Kc is in the initial range. In that case, assuming homo-
+geneous isotropic turbulence, at least for the inertial range,
+⟨¯S2⟩= 2⟨¯Sij ¯Sij⟩= 2
+Z ∞
+0
+k2 ¯E(k)dk ≈2
+Z ∞
+0
+k2| ˆG)k)|2C⟨ϵ⟩2/3k−5/3dk ,
+with E(k) = C⟨ϵ⟩2/3k−5/3 in the inertial range, and C Kolmogorov’s constant. So
+⟨¯S2⟩≈afC⟨ϵ⟩2/3∆−4/3 ,
+with the constant af given by Equation (11), assuming that ˆG(k) is a function of k∆. Solving for
+⟨ϵ⟩gives
+⟨ϵ⟩= (afC)−3/2∆2⟨¯S2⟩3/2 .
+Assuming that the subgrid-scale motions are in equilibrium, so that Equation (29), then
+⟨ϵ⟩≈−⟨τ r
+ij ¯Sij⟩= +⟨2νsgs ¯Sij ¯Sij⟩= ℓ2
+s⟨¯S3⟩= c2
+s∆2⟨¯S3⟩.
+Comparing the previous two equations gives:
+(afC)−3/2∆2⟨¯S2⟩3/2 ≈c2
+s∆2⟨¯S3⟩.
+Solving this for cs gives
+cs ≈
+1
+(afC)3/4
+⟨¯S2⟩3/4
+⟨¯S3⟩
+.
+For the sharp spectral ﬁlter, it was found that af ≈6.9.
+Furthermore, from laboratory data,
+C ≈1.5. Finally, assuming that ⟨¯S2⟩3/4 ≈⟨¯S3⟩1/2, then
+cs ≈
+1
+(1.5 · 3
+2π4/3)3/4 =
+1
+(1.5 · 3
+2)3/4
+1
+π ≈0.17 ,
+that is, cs ≈0.17. This is the estimate originally made by Lilly. We will ﬁnd later from comparisons
+of simulation results with data that this is a little oﬀ. The value of cs is usually recommended as
+about 0.1. The main point of this analysis, though, is to show that cs can be theoretically estimated.
+We will see later that it can be estimated ‘on the ﬂy’ during a simulation.
+4.1
+Limiting behavior of Smagorinsky’s model
+It is often useful to test a model by examining its limiting behavior, which can give insights into
+the strengths and weaknesses of the model. There are at least two cases for which Smagorinsky’s
+model should be consistent.
+• Consider the limit as ∆
+η →0. In this case the LES should reduce to a DNS, i.e., τ r
+ij →0.
+Here η = (ν3/ϵ)1/4 is the Kolmogorov scale, the characteristic scale for the dissipation range,
+and ‘below’ which there is no relevant energy.
+15

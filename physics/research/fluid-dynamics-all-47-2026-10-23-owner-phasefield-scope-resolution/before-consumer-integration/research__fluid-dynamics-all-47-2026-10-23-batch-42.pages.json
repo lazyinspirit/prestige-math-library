@@ -1,0 +1,191 @@
+[
+  {
+    "order": 689,
+    "id": "fd-pmp01",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Physical phase-field model adoption",
+    "companion": "fd-pmp01-examples",
+    "requires": [
+      "fd-f01",
+      "fd-mp01"
+    ],
+    "items": [
+      {
+        "id": "def-fd-phase-field-dimensionalization",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "SI dimensionalization of the periodic diffuse-interface model",
+        "reference": "items/def-fd-phase-field-dimensionalization.md",
+        "design_state": "Necessary local A-page SI dimensionalization definition; draft authored and readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-diffuse-interface-equations"
+        ],
+        "dependency_roles": {
+          "def-fd-diffuse-interface-equations": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the dimensionless periodic torus $\\mathbb T^3=\\mathbb R^3/(2\\pi\\mathbb Z)^3$ with dimensionless coordinates $y\\in\\mathbb T^3$ and $s\\in[0,S]$, where $S>0$. Its physical length-scale image is the periodic box $\\Omega_L=\\mathbb R^3/(2\\pi L\\mathbb Z)^3$, with physical coordinates $x=Ly$ and fundamental cube $Q_L=[0,2\\pi L]^3$. Fields on $\\Omega_L$ are represented by $(2\\pi L\\mathbb Z)^3$-periodic lifts, spatial derivatives are coordinate derivatives of these lifts, and spatial integrals mean Riemann integrals over $Q_L$. For a scalar field $g$, set $\\nabla_xg=(\\partial_{x_1}g,\\partial_{x_2}g,\\partial_{x_3}g)$ and $\\Delta_xg=\\sum_{j=1}^3\\partial_{x_j}^2g$; for a vector field $u$, set $(\\nabla_xu)_{ij}=\\partial_{x_j}u_i$. Choose fixed scales $L>0$ in metres, $U>0$ in metres per second, $\\rho_*>0$ in kilograms per cubic metre, and $\\Phi_*>0$ in a specified phase unit $[\\Phi]$. Set $T_*=L/U$, so physical time is $t=T_*s$ and the interval is $[0,T_*S]$.\n\nLet $\\varepsilon,M,\\nu>0$ be dimensionless coefficients and let $W\\in C^2(\\mathbb R)$ be a dimensionless potential bounded below. For dimensionless fields $v(s,y)$, $\\phi(s,y)$, and $\\pi(s,y)$, define physical fields by\n\n$$u(t,x)=U v(s,y),\\qquad \\varphi(t,x)=\\Phi_*\\phi(s,y),\\qquad p(t,x)=\\rho_*U^2\\pi(s,y).$$\n\nwhere $\\mu_c=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta_y\\phi$. Define the positive physical coefficients\n\n$$\\beta=\\frac{\\rho_*U^2}{\\varepsilon},\\qquad \\lambda_\\phi=\\frac{\\rho_*U^2L^2\\varepsilon}{\\Phi_*^2},\\qquad \\eta=\\rho_*UL\\nu,\\qquad \\mathcal M=\\frac{M\\Phi_*^2L}{\\rho_*U}.$$\n\nHere $\\beta$ is a bulk free-energy-density coefficient in joules per cubic metre, $\\lambda_\\phi$ is a gradient free-energy coefficient in joules per metre per phase-unit squared, $\\eta$ is dynamic viscosity in pascal seconds, and $\\mathcal M$ has units $[\\Phi]^2\\mathrm{m^3\\,s\\,kg^{-1}}$. The physical chemical potential has units $\\mathrm{J\\,m^{-3}}[\\Phi]^{-1}$ and the pressure has units pascals.\n\nDefine the bulk phase free-energy density, phase free-energy functional, and kinetic-plus-phase free-energy functional by\n\n$$f_b(\\varphi)=\\beta W(\\varphi/\\Phi_*),\\qquad \\mathcal F[\\varphi]=\\int_{\\Omega_L}\\left(f_b(\\varphi)+\\frac{\\lambda_\\phi}{2}|\\nabla_x\\varphi|^2\\right)\\,dx,$$\n\n$$\\mathcal G[u,\\varphi]=\\int_{\\Omega_L}\\left(\\frac{\\rho_*}{2}|u|^2+f_b(\\varphi)+\\frac{\\lambda_\\phi}{2}|\\nabla_x\\varphi|^2\\right)\\,dx.$$\n\nThe dimensional chemical-potential field used by this model is\n\n$$\\mu=f_b'(\\varphi)-\\lambda_\\phi\\Delta_x\\varphi=\\frac{\\beta}{\\Phi_*}W'(\\varphi/\\Phi_*)-\\lambda_\\phi\\Delta_x\\varphi.$$\n\nThe length, speed, density, and phase scales are model inputs; no measured calibration is assigned by this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models",
+              "url": "https://www.oden.utexas.edu/media/reports/2017/1701.pdf",
+              "locator": "§§11.2 and 11.4, printed pp. 209–212, equations (11.1)–(11.10) and (11.16)–(11.21)."
+            },
+            {
+              "title": "V.E. Badalassi, H.D. Ceniceros, and S. Banerjee, Computation of multiphase systems with phase field models",
+              "url": "https://web.math.ucsb.edu/~hdc/public/JCP2003BCB.pdf",
+              "locator": "§§2.1–2.4, pp. 372–374, equations (1)–(15): free energy, chemical potential, convective Cahn–Hilliard equation, Model H coupling, and nondimensionalization."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "SI scaling of the three-dimensional periodic, constant-density diffuse-interface model. The definition fixes length, time, density, phase, viscosity, mobility, free-energy, pressure, and chemical-potential units; it supplies no empirical calibration or claim of universal physical applicability."
+      },
+      {
+        "id": "post-fd-diffuse-interface-material-law",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted diffuse free energy, mobility and capillary stress",
+        "reference": "items/post-fd-diffuse-interface-material-law.md",
+        "design_state": "Planned FD-PMP01 model adoption; draft authored and readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-diffuse-interface-equations",
+          "def-fd-phase-field-dimensionalization"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-diffuse-interface-equations": "mathematical-premise",
+          "def-fd-phase-field-dimensionalization": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt the following isothermal phase-field model in a Cartesian inertial chart with absolute time $t$ in seconds and spatial coordinates $x$ in metres. Let $L>0$ metres, $U>0$ metres per second, $\\rho_*>0$ kilograms per cubic metre, and $\\Phi_*>0$ in a chosen phase unit $[\\Phi]$ be fixed scales. Let $S>0$, $T_*=L/U$, $\\Omega_L=\\mathbb R^3/(2\\pi L\\mathbb Z)^3$, and $t\\in[0,T_*S]$. A physical field is represented by a $(2\\pi L\\mathbb Z)^3$-periodic function on $\\mathbb R^3$, and its spatial integral is the Riemann integral over $Q_L=[0,2\\pi L]^3$. Set $s=t/T_*$, $y=x/L$, $v=u/U$, $\\phi=\\varphi/\\Phi_*$, and $\\pi=p/(\\rho_*U^2)$. The velocity is $u:[0,T_*S]\\times\\Omega_L\\to\\mathbb R^3$ in metres per second, the scalar order parameter is $\\varphi:[0,T_*S]\\times\\Omega_L\\to\\mathbb R$ in phase units $[\\Phi]$, and scalar pressure $p$ is in pascals. The order parameter is an internal phase variable, not total mass density; no positivity or pointwise interval constraint is imposed on it.\n\nOn $\\mathbb T^3=\\mathbb R^3/(2\\pi\\mathbb Z)^3$, require $v\\in C^1([0,S];C^2_{\\rm per}(\\mathbb T^3;\\mathbb R^3))$, $\\phi\\in C^1([0,S];C^1_{\\rm per}(\\mathbb T^3;\\mathbb R))\\cap C([0,S];C^2_{\\rm per}(\\mathbb T^3;\\mathbb R))$, and $\\pi\\in C([0,S];C^1_{\\rm per}(\\mathbb T^3;\\mathbb R))$, with $\\mu_c=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta_y\\phi\\in C([0,S];C^2_{\\rm per})$. Here $C^k_{\\rm per}$ means periodic lifts whose coordinate derivatives through order $k$ are continuous, bounded, and uniformly continuous on $[0,2\\pi]^3$; time differentiability in $C^k_{\\rm per}$ is in the corresponding supremum norms.\n\nFor a scalar field $g$, $\\nabla_xg=(\\partial_{x_1}g,\\partial_{x_2}g,\\partial_{x_3}g)$ and $\\Delta_xg=\\sum_{j=1}^3\\partial_{x_j}^2g$; for a vector field $u$, $(\\nabla_xu)_{ij}=\\partial_{x_j}u_i$. On the dimensionless torus $\\mathbb T^3=\\mathbb R^3/(2\\pi\\mathbb Z)^3$, use periodic lifts and $\\Delta_y=\\sum_{j=1}^3\\partial_{y_j}^2$. For the smooth branch, require $v\\in C^1([0,S];C^2_{\\rm per}(\\mathbb T^3;\\mathbb R^3))$, $\\phi\\in C^1([0,S];C^1_{\\rm per}(\\mathbb T^3;\\mathbb R))\\cap C([0,S];C^2_{\\rm per}(\\mathbb T^3;\\mathbb R))$, and $\\pi\\in C([0,S];C^1_{\\rm per}(\\mathbb T^3;\\mathbb R))$, with $\\mu_c=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta_y\\phi\\in C([0,S];C^2_{\\rm per})$. Here $C^k_{\\rm per}$ means periodic lifts whose coordinate derivatives through order $k$ are continuous, bounded, and uniformly continuous on the fundamental cube; time differentiability in $C^k_{\\rm per}$ is in the corresponding supremum norms.\n\nUse dimensionless parameters $\\varepsilon,M,\\nu>0$, a potential $W\\in C^2(\\mathbb R)$ bounded below, and the dimensional coefficients\n\n$$\\beta=\\frac{\\rho_*U^2}{\\varepsilon},\\qquad \\lambda_\\phi=\\frac{\\rho_*U^2L^2\\varepsilon}{\\Phi_*^2},\\qquad \\eta=\\rho_*UL\\nu,\\qquad \\mathcal M=\\frac{M\\Phi_*^2L}{\\rho_*U}.$$\n\nThe bulk phase free-energy density is $f_b(\\varphi)=\\beta W(\\varphi/\\Phi_*)$ in joules per cubic metre. Define the chemical-potential field and the symmetric rate tensor by\n\n$$\\mu=f_b'(\\varphi)-\\lambda_\\phi\\Delta_x\\varphi,\\qquad D=\\frac12\\left(\\nabla_xu+(\\nabla_xu)^{\\mathsf T}\\right).$$\n\nFor vectors $a,b\\in\\mathbb R^3$, $(a\\otimes b)_{ij}=a_i b_j$; $I_3$ is the $3\\times3$ identity; and $(\\operatorname{div}_x\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$. Adopt the phase-field stress and total Cauchy stress\n\n$$\\sigma_c=\\left(f_b(\\varphi)-\\varphi\\mu+\\frac{\\lambda_\\phi}{2}|\\nabla_x\\varphi|^2\\right)I_3-\\lambda_\\phi\\nabla_x\\varphi\\otimes\\nabla_x\\varphi,\\qquad \\sigma=-pI_3+2\\eta D+\\sigma_c,$$\n\nwhere each stress has units pascals and traction is $\\sigma n$ on an outward unit normal $n$. The adopted pointwise equations are\n\n$$\\partial_t\\varphi+u\\cdot\\nabla_x\\varphi=\\mathcal M\\Delta_x\\mu,\\qquad \\nabla_x\\cdot u=0,\\qquad \\rho_*\\left(\\partial_tu+(u\\cdot\\nabla_x)u\\right)=\\operatorname{div}_x\\sigma.$$\n\nThe model uses these smooth periodic fields, so its spatial integrals have no boundary terms. It adopts constant density, constant viscosity, constant mobility, and no external body force. The phase equation describes evolution of the internal order parameter and is not a total-mass diffusion equation. This is a reduced isothermal model: $\\mathcal G=\\int_{\\Omega_L}(\\rho_*|u|^2/2+f_b(\\varphi)+\\lambda_\\phi|\\nabla_x\\varphi|^2/2)\\,dx$ is kinetic plus phase-field free energy, not the complete thermodynamic energy. No heat or entropy balance, thermostat coupling, species-mass interpretation, sharp-interface limit, contact-line law, empirical calibration, or claim of universal physical validity is adopted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models",
+              "url": "https://www.oden.utexas.edu/media/reports/2017/1701.pdf",
+              "locator": "§§11.2 and 11.4, printed pp. 209–212, equations (11.1)–(11.10) and (11.16)–(11.21)."
+            },
+            {
+              "title": "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility",
+              "url": "https://d-nb.info/1352416549/34",
+              "locator": "Complete 8-page version-of-record PDF; §1, equations (1.1)–(1.5) and (1.10), with distinct phase-range, stress, viscosity, and weak-solution assumptions explicitly not imported."
+            },
+            {
+              "title": "V.E. Badalassi, H.D. Ceniceros, and S. Banerjee, Computation of multiphase systems with phase field models",
+              "url": "https://web.math.ucsb.edu/~hdc/public/JCP2003BCB.pdf",
+              "locator": "Complete 27-page paper; §§2.1–2.4, pp. 372–374, equations (1)–(15), including the order parameter, free energy, chemical potential, coupled flow model, and scaling conventions."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An adopted isothermal, constant-density, incompressible phase-field model on a three-dimensional periodic box, with constant positive mobility and viscosity and a scalar internal order parameter. It does not identify that parameter with total mass density, assert an empirical calibration, supply a heat or entropy closure, or establish applicability to every two-phase material."
+      },
+      {
+        "id": "pthm-fd-phase-field-conditional-energy",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional phase-field free-energy dissipation",
+        "reference": "items/pthm-fd-phase-field-conditional-energy.md",
+        "design_state": "Planned M1 conditional physical deduction; draft authored and readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "post-fd-diffuse-interface-material-law",
+          "thm-fd-diffuse-interface-energy",
+          "def-fd-phase-field-dimensionalization"
+        ],
+        "dependency_roles": {
+          "post-fd-diffuse-interface-material-law": "physical-assumption",
+          "thm-fd-diffuse-interface-energy": "mathematical-premise",
+          "def-fd-phase-field-dimensionalization": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $S,L,U,\\rho_*,\\Phi_*>0$ with units respectively dimensionless, metres, metres per second, kilograms per cubic metre, and a chosen phase unit $[\\Phi]$. Put $T_*=L/U$, $\\mathbb T^3=\\mathbb R^3/(2\\pi\\mathbb Z)^3$, $\\Omega_L=\\mathbb R^3/(2\\pi L\\mathbb Z)^3$, and $t\\in[0,T_*S]$. Fields on each torus are represented by periodic lifts and physical integrals are over $Q_L=[0,2\\pi L]^3$. Let $\\varepsilon,M,\\nu>0$ be dimensionless and let $W\\in C^2(\\mathbb R)$ be bounded below. Define\n\n$$\\beta=\\frac{\\rho_*U^2}{\\varepsilon},\\qquad \\lambda_\\phi=\\frac{\\rho_*U^2L^2\\varepsilon}{\\Phi_*^2},\\qquad \\eta=\\rho_*UL\\nu,\\qquad \\mathcal M=\\frac{M\\Phi_*^2L}{\\rho_*U},\\qquad f_b(\\varphi)=\\beta W(\\varphi/\\Phi_*).$$\n\nFor periodic physical fields $u:[0,T_*S]\\times\\Omega_L\\to\\mathbb R^3$, $\\varphi:[0,T_*S]\\times\\Omega_L\\to\\mathbb R$, and scalar pressure $p$, define\n\n$$\\mu=f_b'(\\varphi)-\\lambda_\\phi\\Delta_x\\varphi,\\qquad D=\\frac12\\left(\\nabla_xu+(\\nabla_xu)^{\\mathsf T}\\right),$$\n\n$$\\sigma=-pI_3+2\\eta D+\\left(f_b(\\varphi)-\\varphi\\mu+\\frac{\\lambda_\\phi}{2}|\\nabla_x\\varphi|^2\\right)I_3-\\lambda_\\phi\\nabla_x\\varphi\\otimes\\nabla_x\\varphi.$$\n\nAssume the dimensionless fields $v(s,y)=u(T_*s,Ly)/U$, $\\phi(s,y)=\\varphi(T_*s,Ly)/\\Phi_*$, and $\\pi(s,y)=p(T_*s,Ly)/(\\rho_*U^2)$ satisfy\n\n$$v\\in C^1([0,S];C^2_{\\rm per}(\\mathbb T^3;\\mathbb R^3)),\\qquad \\phi\\in C^1([0,S];C^1_{\\rm per}(\\mathbb T^3;\\mathbb R))\\cap C([0,S];C^2_{\\rm per}(\\mathbb T^3;\\mathbb R)),\\qquad \\pi\\in C([0,S];C^1_{\\rm per}(\\mathbb T^3;\\mathbb R)),$$\n\nwith $\\mu_c=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta_y\\phi\\in C([0,S];C^2_{\\rm per})$, and satisfy the adopted dimensional equations\n\n$$\\partial_t\\varphi+u\\cdot\\nabla_x\\varphi=\\mathcal M\\Delta_x\\mu,\\qquad \\nabla_x\\cdot u=0,\\qquad \\rho_*\\left(\\partial_tu+(u\\cdot\\nabla_x)u\\right)=\\operatorname{div}_x\\sigma,\\quad (\\operatorname{div}_x\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}.$$\n\nHere $C^k_{\\rm per}$ consists of periodic lifts whose coordinate derivatives through order $k$ are continuous, bounded, and uniformly continuous on $[0,2\\pi]^3$; $C^1([0,S];C^k_{\\rm per})$ means time differentiability in the corresponding supremum norms. For a scalar field $g$, $\\nabla_xg=(\\partial_{x_1}g,\\partial_{x_2}g,\\partial_{x_3}g)$ and $\\Delta_xg=\\sum_{j=1}^3\\partial_{x_j}^2g$; for a vector field $u$, $(\\nabla_xu)_{ij}=\\partial_{x_j}u_i$.\n\nFor the kinetic-plus-phase free-energy functional\n\n$$\\mathcal G(t)=\\int_{\\Omega_L}\\left(\\frac{\\rho_*}{2}|u(t,x)|^2+\\frac{\\lambda_\\phi}{2}|\\nabla_x\\varphi(t,x)|^2+\\beta W(\\varphi(t,x)/\\Phi_*)\\right)\\,dx,$$\n\nwhere $|\\nabla_xu|^2=\\sum_{i,j=1}^3|\\partial_{x_j}u_i|^2$, the conditional model identity is\n\n$$\\frac{d\\mathcal G}{dt}(t)=-\\eta\\int_{\\Omega_L}|\\nabla_xu(t,x)|^2\\,dx-\\mathcal M\\int_{\\Omega_L}|\\nabla_x\\mu(t,x)|^2\\,dx\\qquad (0<t<T_*S).$$\n\nThe functional $\\mathcal G$ is not the complete thermodynamic energy. This deduction neither asserts existence of such a solution nor derives the adopted isothermal closure from a total-energy or entropy balance.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models",
+              "url": "https://www.oden.utexas.edu/media/reports/2017/1701.pdf",
+              "locator": "§§11.2 and 11.4, printed pp. 209–212; background for the phase free-energy and conserved mobility structure, not the proof below."
+            },
+            {
+              "title": "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility",
+              "url": "https://d-nb.info/1352416549/34",
+              "locator": "Complete 8-page version-of-record PDF; §1 and Theorem 1 with its full §2 proof. The paper's weak-solution, phase-range, stress, and viscosity hypotheses are not imported."
+            },
+            {
+              "title": "V.E. Badalassi, H.D. Ceniceros, and S. Banerjee, Computation of multiphase systems with phase field models",
+              "url": "https://web.math.ucsb.edu/~hdc/public/JCP2003BCB.pdf",
+              "locator": "§§2.1–2.4, pp. 372–374, for the order parameter, chemical potential, coupled flow model, and dimensional scaling context."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Conditional decay of kinetic plus phase-field free energy for a smooth constant-density incompressible model on a three-dimensional periodic box. This is not total thermodynamic energy, an existence theorem, an empirical conclusion, or a sharp-interface or immiscibility result.",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 690,
+    "id": "fd-pmp01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Physical phase-field model adoption — Examples",
+    "companion": "fd-pmp01",
+    "requires": [
+      "fd-pmp01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-phase-outside-unit-interval",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Finite phase-field free energy does not impose an interval bound",
+        "reference": "items/ex-fd-phase-outside-unit-interval.md",
+        "design_state": "Planned FD-PMP01 B leaf; draft authored and readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-fd-phase-field-conditional-energy"
+        ],
+        "dependency_roles": {
+          "pthm-fd-phase-field-conditional-energy": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$ metres, $U>0$ metres per second, $\\rho_*>0$ kilograms per cubic metre, $\\Phi_*>0$ in a chosen phase unit $[\\Phi]$, and $S>0$ dimensionless. Let $\\varepsilon,M,\\nu>0$ be dimensionless, set $\\beta=\\rho_*U^2/\\varepsilon$, $\\lambda_\\phi=\\rho_*U^2L^2\\varepsilon/\\Phi_*^2$, $\\eta=\\rho_*UL\\nu$, and $\\mathcal M=M\\Phi_*^2L/(\\rho_*U)$, and choose the dimensionless potential $W(q)=(q^2-1)^2/4$. Put $T_*=L/U$, $\\Omega_L=\\mathbb R^3/(2\\pi L\\mathbb Z)^3$, $f_b(\\varphi)=\\beta W(\\varphi/\\Phi_*)$, $\\mu=f_b'(\\varphi)-\\lambda_\\phi\\Delta_x\\varphi$, and $D_{ij}=(\\partial_{x_j}u_i+\\partial_{x_i}u_j)/2$.\n\n$$\\sigma=-pI_3+2\\eta D+\\left(f_b(\\varphi)-\\varphi\\mu+\\frac{\\lambda_\\phi}{2}|\\nabla_x\\varphi|^2\\right)I_3-\\lambda_\\phi\\nabla_x\\varphi\\otimes\\nabla_x\\varphi.$$\n\nOn this periodic domain, let $u$ be a velocity field in metres per second, $\\varphi$ a scalar phase field in unit $[\\Phi]$, and $p$ a scalar pressure in pascals. For a scalar field $g$, $\\nabla_xg=(\\partial_{x_1}g,\\partial_{x_2}g,\\partial_{x_3}g)$ and $\\Delta_xg=\\sum_j\\partial_{x_j}^2g$; for a vector field $u$, $\\nabla_x\\cdot u=\\sum_j\\partial_{x_j}u_j$; $I_3$ is the $3\\times3$ identity. Consider the adopted equations $\\partial_t\\varphi+u\\cdot\\nabla_x\\varphi=\\mathcal M\\Delta_x\\mu$, $\\nabla_x\\cdot u=0$, and $\\rho_*(\\partial_tu+(u\\cdot\\nabla_x)u)=\\operatorname{div}_x\\sigma$, where $\\sigma=-pI_3+2\\eta D+(f_b-\\varphi\\mu+\\lambda_\\phi|\\nabla_x\\varphi|^2/2)I_3-\\lambda_\\phi\\nabla_x\\varphi\\otimes\\nabla_x\\varphi$ and $(\\operatorname{div}_x\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$. Define the kinetic-plus-phase free energy by $\\mathcal G(t)=\\int_{\\Omega_L}(\\rho_*|u|^2/2+f_b(\\varphi)+\\lambda_\\phi|\\nabla_x\\varphi|^2/2)\\,dx$. The constant fields $u=0$, $\\varphi=2\\Phi_*$, and $p=0$ satisfy these equations for all $t\\in[0,T_*S]$. Their chemical potential is the constant $\\mu=6\\beta/\\Phi_*$, and their kinetic-plus-phase free energy is $\\mathcal G(t)=(2\\pi L)^3\\beta W(2)=\\frac94(2\\pi L)^3\\beta<\\infty$. Thus this smooth model solution has normalized order parameter $\\varphi/\\Phi_*=2$ outside $[-1,1]$ while its free energy is finite and constant. The model's energy and equations do not impose that interval as a pointwise constraint; this example is not a maximum-principle theorem, stability claim, or reported observation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": []
+        },
+        "library": "physics",
+        "physical_scope": "One constant periodic solution of the adopted isothermal phase-field model. It demonstrates that the quartic potential and conditional free-energy identity alone do not impose a pointwise order-parameter interval; it is not an observation or a claim about every physical mixture.",
+        "empirical_premises": [],
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

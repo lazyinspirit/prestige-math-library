@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "6",
+  "round": 0,
+  "reviewed_items": [
+    "thm-fd-x04",
+    "thm-fd-x05",
+    "thm-fd-x06",
+    "thm-fd-x08",
+    "thm-fd-x09",
+    "def-fd-incompressible-euler-system",
+    "thm-fd-x13",
+    "ex-fd-x04-formal-verification",
+    "ex-fd-x05-formal-verification",
+    "ex-fd-x06-formal-verification",
+    "ex-fd-x08-formal-verification",
+    "ex-fd-x09-formal-verification",
+    "ex-fd-x13-formal-verification"
+  ],
+  "reviewed_pages": [
+    "fd-x02",
+    "fd-x02-examples"
+  ],
+  "decision": "repair",
+  "reason": "The supplier hypotheses and proofs otherwise match the batch claims, including the explicit ACω assumption for the annulus argument. Local fixes are needed for the pipe-axis proof, streamline definitions and justifications, and two example descriptions.",
+  "findings": [
+    {
+      "id": "thm-fd-x04",
+      "type": "local",
+      "reason": "Proof 1.2 derives the pipe equation only for r>0. After obtaining the smooth polynomial profile, explicitly use continuity of the equation residual to establish the equation at the axis, which is included in the claimed domain."
+    },
+    {
+      "id": "thm-fd-x05",
+      "type": "local",
+      "reason": "The statement and Proof 3.1 use circular streamlines and assert that r is fixed without stating the relevant definition from def-fd-x00 or deriving it. State the steady-curve condition x′=u_s(x) and show d(r²)/ds=0 for the solid-rotation field."
+    },
+    {
+      "id": "ex-fd-x05-formal-verification",
+      "type": "local",
+      "reason": "Verification 2.1 repeats the unsupported claim that r is fixed on each circular streamline. Derive this for the selected field by differentiating r² along its integral curves."
+    },
+    {
+      "id": "thm-fd-x08",
+      "type": "local",
+      "reason": "Facts F1 omits the relevant def-fd-x00 content for the terms material loop and circulation. Identify the loop condition X_t=u(t,X), the closed-endpoint condition, and circulation as the corresponding line integral; Proof 1.2 already verifies the loop condition."
+    },
+    {
+      "id": "thm-fd-x09",
+      "type": "local",
+      "reason": "The statement defines u:I×Ω→R³, then defines a streamline using x′(s)=u(x(s)), which is ill-typed for a time-dependent field. Restrict the definition to steady u or specify a fixed time, consistently with def-fd-x00."
+    },
+    {
+      "id": "ex-fd-x08-formal-verification",
+      "type": "local",
+      "reason": "The example calls the evolving material loop an ellipse. The initial loop is an ellipse, but the y-dependent displacement generally deforms it; describe it as a loop initialized as an ellipse."
+    },
+    {
+      "id": "ex-fd-x09-formal-verification",
+      "type": "local",
+      "reason": "The example reports the Bernoulli quantity as 1/2 without stating its defining expression. State B=|u|²/2+h(ρ)+V before evaluating it."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-fd-x09-formal-verification",
+      "decision": "repair",
+      "reason": "It remains valid for the steady example after the streamline clarification, but its local Bernoulli-definition omission is also reported for repair."
+    },
+    {
+      "id": "thm-fd-x13",
+      "decision": "accept",
+      "reason": "Its use of thm-fd-x09 is limited to the independently proved vector identity, not the streamline clause."
+    },
+    {
+      "id": "ex-fd-x13-formal-verification",
+      "decision": "accept",
+      "reason": "Its use through thm-fd-x13 is unaffected by the steady-streamline clarification."
+    },
+    {
+      "id": "pthm-fd-px09-prediction",
+      "decision": "accept",
+      "reason": "This outside-batch consumer states a steady streamline condition explicitly and uses thm-fd-x09 under matching steady hypotheses; no repair is required."
+    }
+  ]
+}

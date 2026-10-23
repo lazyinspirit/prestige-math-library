@@ -1,0 +1,437 @@
+[
+  {
+    "order": 365,
+    "id": "fd-f01",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Classical frames, primitive quantities and SI units",
+    "companion": "fd-f01-examples",
+    "requires": [
+      "fd-mf01"
+    ],
+    "items": [
+      {
+        "id": "def-fd-quantity-and-frame-conventions",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Classical frames, primitive quantities and SI units",
+        "reference": "items/def-fd-quantity-and-frame-conventions.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-smooth-motion"
+        ],
+        "dependency_roles": {
+          "def-fd-smooth-motion": "mathematical-premise"
+        },
+        "physical_scope": "Smooth nonrelativistic continuum kinematics on Newtonian spacetime, with explicit Cartesian inertial charts, rigid observers, material motions, field types, primitive/derived roles, and SI dimensions. No relativistic causal structure or empirical fluid applicability is asserted.",
+        "inventory_expansion_required": false,
+        "statement": "Use the nonrelativistic Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is an open interval with absolute time $t$ in seconds. Here $E$ is a three-dimensional oriented Euclidean affine space: its translation vectors form an oriented Euclidean vector space, but no origin in $E$ is distinguished. A **Cartesian inertial chart** supplies an orientation-preserving affine isometry $x:E\\to\\mathbb R^3$ and the absolute-time coordinate. Write $\\mathrm{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\det Q=1\\}$. Inertial charts are related by\n\n$$t^*=t+t_0,\\qquad x^*=Qx+vt+a,$$\n\nwhere $t_0$ is a constant time translation in seconds, $Q\\in\\mathrm{SO}(3)$ is constant, $v\\in\\mathbb R^3$ is a constant relative velocity in m s$^{-1}$, and $a\\in\\mathbb R^3$ is a constant spatial translation in metres. A **worldline** is a curve $t\\mapsto(t,x(t))$ with $x\\in C^2(I,\\mathbb R^3)$, parameterized by absolute time; this model imposes no relativistic speed or causal condition. A **rigid observer change** is the more general coordinate change $t^*=t,\\ x^*=Q(t)x+c(t)$, with $Q\\in C^2(I,\\mathrm{SO}(3))$ and $c\\in C^2(I,\\mathbb R^3)$ in metres; it is not called inertial unless $Q$ is constant and $c$ is affine in time. A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.\n\nLet $B\\subseteq\\mathbb R^3$ be a bounded open reference body whose boundary is locally the graph of a $C^1$ function, with $B$ lying on one side of each such graph. Identify the reference coordinates with the chosen initial Cartesian chart, and let $U$ be an open neighborhood of $\\overline B$. A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$. The label $a\\in U$ and position $x=\\chi(t,a)$ are measured in metres. Write\n\n$$F(t,a)=D_a\\chi(t,a),\\qquad J(t,a)=\\det F(t,a)>0,\\qquad A(t,x)=\\chi_t^{-1}(x),\\qquad \\Omega_t=\\chi_t(B).$$\n\nHere $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 8.01SC, Chapter 11: Reference Frames",
+              "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter11.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.09, Advanced Classical Mechanics, full lecture notes",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part I lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
+            },
+            {
+              "title": "BIPM, The International System of Units, 9th edition, version 4.01",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf/2d2b50bf-f2b4-9661-f402-5f9d66e4b507?download=true&t=1780410776583&version=7.0"
+            },
+            {
+              "title": "NIST SP 330-2019, The International System of Units (SI)",
+              "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.330-2019.pdf"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-fd-c1-domain-jordan-integrals",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "C1 material regions have compatible Jordan volume integrals",
+        "reference": "items/lem-fd-c1-domain-jordan-integrals.md",
+        "design_state": "Local mathematical prerequisite authored on the assigned A page; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "def-null-and-content-zero-in-rn",
+          "thm-jordan-boundary-criterion",
+          "thm-heine-borel-rn",
+          "thm-compactness-under-continuous-maps",
+          "thm-lebesgue-criterion-in-rn",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-multidimensional-integral-properties",
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-graphs-of-continuous-functions-have-content-zero": "mathematical-premise",
+          "def-null-and-content-zero-in-rn": "mathematical-premise",
+          "thm-jordan-boundary-criterion": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-compactness-under-continuous-maps": "mathematical-premise",
+          "thm-lebesgue-criterion-in-rn": "mathematical-premise",
+          "thm-jordan-content-and-indicator-integrability": "mathematical-premise",
+          "thm-multidimensional-integral-properties": "mathematical-premise",
+          "def-riemann-integral-over-a-jordan-set": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $V\\subset\\mathbb R^3$ be a bounded open set whose boundary is locally, after a rigid coordinate change, the graph of a $C^1$ function, with $V$ lying locally on one side of that graph. Let $U\\subset\\mathbb R^3$ be open with $\\overline V\\subset U$. Let $\\phi:U\\to\\phi(U)$ be a bijection onto an open image with $\\phi$ and $\\phi^{-1}$ both $C^1$, and let $f:\\phi(U)\\to\\mathbb R$ be continuous. A bounded set is Jordan measurable when its indicator is Riemann integrable by the zero-extension convention; a set has content zero when it has finite cube covers of arbitrarily small total volume. Then $V$ and $\\phi(V)$ are bounded open sets with locally $C^1$ graph boundaries, their compact closures are Jordan measurable, $\\partial V$ and $\\phi(\\partial V)$ have content zero, and\n\n$$\\int_{\\phi(V)}f(x)\\,dx=\\int_{\\phi(\\overline V)}f(x)\\,dx.$$\n\nThus a balance integral over an open $C^1$ material region agrees with the compact-Jordan integral on its closure after a $C^1$ diffeomorphic motion.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "library": "physics",
+        "sources": {
+          "references": [
+            {
+              "title": "Jiří Lebl, Basic Analysis II, §10.5 Jordan measurable sets",
+              "url": "https://www.jirka.org/ra/html/sec_jordansets.html",
+              "locator": "Proposition10.5.1 (boundary criterion), Definition10.5.4 and Proposition10.5.5 (zero-extension Jordan integral and continuous functions), Proposition10.5.6 (linearity/order/a.e. equality), Proposition10.5.9 (compact Jordan images under injective C1 maps); ingredients adapted in the local proof, not an attribution of the complete item verbatim."
+            },
+            {
+              "title": "Jiří Lebl, Basic Analysis II, §8.5 Inverse and implicit function theorems",
+              "url": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html",
+              "locator": "Theorem8.5.1: local C1 inverse from invertible derivative, used for the local graph-coordinate argument. The complete C1-region compatibility statement is proved locally from the declared published suppliers."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fd-continuous-localization-on-c1-domains",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Continuous residuals localize on C1 domains",
+        "reference": "items/lem-fd-continuous-localization-on-c1-domains.md",
+        "design_state": "Local mathematical prerequisite authored on the assigned A page; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "lem-fd-c1-domain-jordan-integrals",
+          "thm-multidimensional-integral-properties",
+          "thm-jordan-content-and-indicator-integrability"
+        ],
+        "dependency_roles": {
+          "lem-fd-c1-domain-jordan-integrals": "mathematical-premise",
+          "thm-multidimensional-integral-properties": "mathematical-premise",
+          "thm-jordan-content-and-indicator-integrability": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $\\Omega\\subseteq\\mathbb R^3$ be open and let $h:\\Omega\\to\\mathbb R$ be continuous. A bounded $C^1$ subdomain of $\\Omega$ means a nonempty bounded open set $V$ with $\\overline V\\subset\\Omega$ whose boundary is locally, after rigid coordinate changes, a $C^1$ graph with $V$ on one side. If $\\int_Vh\\,dx=0$ for every bounded $C^1$ subdomain $V\\Subset\\Omega$, then $h=0$ throughout $\\Omega$. If instead $\\int_Vh\\,dx\\ge0$ for every such $V$, then $h\\ge0$ throughout $\\Omega$. These are pointwise conclusions for continuous integrands; no assertion is made for merely integrable or distributional residuals.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "library": "physics",
+        "sources": {
+          "references": [
+            {
+              "title": "Jiří Lebl, Basic Analysis II, §10.5 Jordan measurable sets",
+              "url": "https://www.jirka.org/ra/html/sec_jordansets.html",
+              "locator": "Definition10.5.4 and Propositions10.5.5–10.5.6, especially integral monotonicity: ingredients in the local continuity-and-positive-ball localization proof. Lebl is not asserted to state this complete C1-subdomain localization lemma verbatim."
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-fd-continuum-balances",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Single-component nonpolar continuum and material balances",
+        "reference": "items/post-fd-continuum-balances.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-quantity-and-frame-conventions",
+          "lem-fd-transport-and-density",
+          "lem-fd-c1-domain-jordan-integrals"
+        ],
+        "dependency_roles": {
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "lem-fd-transport-and-density": "formulation-prerequisite",
+          "lem-fd-c1-domain-jordan-integrals": "formulation-prerequisite"
+        },
+        "physical_scope": "Adopted smooth, single-component, nonpolar material continuum on a declared macroscopic regime, for bounded C1 material subregions and C2 orientation- preserving motions with positive density and temperature. No molecular limit, weak/shock/vacuum theory, surface couple, micropolar response, or claim of universal empirical validity is included.",
+        "inventory_expansion_required": false,
+        "statement": "Adopt a smooth single-component material continuum on a stated macroscopic regime in a Cartesian inertial chart. Let $\\rho_0\\in C^1(\\overline B)$ be positive. On each swept material region, require $\\rho,u,e,T,s,q,\\sigma\\in C^1$ and $b,r\\in C^0$, with $\\rho>0$ and $T>0$; the motion has the regularity and positive Jacobian in the preceding definition. A material subregion is $\\chi_t(V)$ for a nonempty bounded open set $V\\Subset B$ whose boundary is locally, after a rigid coordinate change, a $C^1$ graph with $V$ on one side; its boundary moves with the material velocity. The Jordan integral convention for such regions and their smooth images is the one in the mathematical interface identified below. The continuum approximation, its empirical regime, and the following balance laws are physical assumptions of this model, not deductions from the mathematical definition of a motion or from molecular mechanics.\n\nAssume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$\n\nAdopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$\n\nThe entropy flux uses the local material temperature at the heat-transfer point. A reservoir at a different temperature, a singular surface force, a shock, vacuum, or a weak solution requires a separately stated model and is not covered here. The postulate reports no experiment and asserts no measurement or universal claim that nature obeys these assumptions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ain A. Sonin, Fundamental Laws of Motion for Particles, Material Volumes, and Control Volumes, MIT 2.25 lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/d11fcb4ad68d875ce88a12c18c263932_MIT2_25F13_Fundam_Law-Son.pdf"
+            },
+            {
+              "title": "Andrew Hazel, MATH45061 Continuum Mechanics, Chapter 3: Forces, Momentum and Stress",
+              "url": "https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/MATH45061/MATH45061_Ch3.pdf"
+            },
+            {
+              "title": "Andrew Hazel, MATH45061 Continuum Mechanics, Chapter 4: Physical Conservation and Balance Laws & Thermodynamics",
+              "url": "https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/MATH45061/MATH45061_Ch4.pdf"
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part I lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "pthm-fd-smooth-material-kinematics",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Mass density reconstruction and incompressibility",
+        "reference": "items/pthm-fd-smooth-material-kinematics.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "lem-fd-transport-and-density",
+          "lem-fd-c1-domain-jordan-integrals",
+          "lem-fd-continuous-localization-on-c1-domains"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "lem-fd-transport-and-density": "mathematical-premise",
+          "lem-fd-c1-domain-jordan-integrals": "mathematical-premise",
+          "lem-fd-continuous-localization-on-c1-domains": "mathematical-premise"
+        },
+        "physical_scope": "Conditional on the adopted smooth single-component mass balance, a C2 orientation-preserving material motion with positive Jacobian, and a C1 positive density. Vacuum, shocks, weak solutions, non-injective motions, and empirical validity are excluded.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open time interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded $C^1$ reference domain, and let $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ be an orientation-preserving family of diffeomorphisms on an open neighborhood $U\\supseteq\\overline B$, with $\\chi(0,a)=a$ and $J(t,a)=\\det D_a\\chi(t,a)>0$. Set $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Let the current density $\\rho\\in C^1$ be positive on the swept material region, and define $\\rho_0(a)=\\rho(0,a)$. Assume the adopted single-component mass balance with no sources or diffusion relative to $u$, on every bounded $C^1$ material subregion. Then this integral material-mass balance is equivalent, under these smoothness hypotheses, to $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$. It also forces $\\rho(t,\\chi(t,a))J(t,a)=\\rho_0(a)$. Consequently, for positive density, $D_t\\rho=0$ throughout the material region if and only if $\\operatorname{div}u=0$ there. This is a conditional deduction within the adopted smooth model; it asserts no result for vacuum, shocks, weak solutions, or empirical applicability.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ain A. Sonin, Fundamental Laws of Motion for Particles, Material Volumes, and Control Volumes, MIT 2.25 lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/d11fcb4ad68d875ce88a12c18c263932_MIT2_25F13_Fundam_Law-Son.pdf"
+            },
+            {
+              "title": "Andrew Hazel, MATH45061 Continuum Mechanics, Chapter 4: Physical Conservation and Balance Laws & Thermodynamics",
+              "url": "https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/MATH45061/MATH45061_Ch4.pdf"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 366,
+    "id": "fd-f01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Classical frames, primitive quantities and SI units — Examples",
+    "companion": "fd-f01",
+    "requires": [
+      "fd-f01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-material-dilation",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Volume dilation and bulk production",
+        "reference": "items/ex-fd-material-dilation.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "pthm-fd-smooth-material-kinematics",
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "lem-fd-transport-and-density",
+          "lem-fd-c1-domain-jordan-integrals",
+          "lem-fd-continuous-localization-on-c1-domains",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-fd-smooth-material-kinematics": "physical-result",
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "lem-fd-transport-and-density": "mathematical-premise",
+          "lem-fd-c1-domain-jordan-integrals": "mathematical-premise",
+          "lem-fd-continuous-localization-on-c1-domains": "mathematical-premise",
+          "thm-change-of-variables-for-compact-jordan-sets": "mathematical-premise",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "physical_scope": "Conditional worked calculation for a smooth positive-density material motion and a specified local-equilibrium compressible Newtonian/Fourier model branch. It derives a model entropy-production identity from adopted balances and constitutive assumptions; it is not a measurement or a claim of universal material response.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ be an open time interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded $C^1$ reference body, and let $U\\subseteq\\mathbb R^3$ be an open neighborhood of $\\overline B$. Let $\\alpha\\in C^2(I,(0,\\infty))$ be dimensionless with $\\alpha(0)=1$, and define $\\chi:I\\times U\\to\\mathbb R^3$ by $\\chi(t,a)=\\alpha(t)a$. This is a $C^2$ orientation-preserving motion with $\\chi(0,a)=a$ and positive density $\\rho_0\\in C^1(\\overline B)$. Assume the adopted smooth material mass, linear-momentum, total-energy, and entropy balances on every bounded $C^1$ material subregion. On the example's local-equilibrium branch, $e=e(v,s)\\in C^2$ on an open state domain, with $v=1/\\rho$, $T=e_s>0$, $p=-e_v$, and $de=T\\,ds-p\\,dv$. Adopt the specified symmetric Newtonian stress and Fourier heat-flux closure\n\n$$\\sigma=-pI_3+\\tau,\\qquad \\tau=2\\mu D_0+\\zeta\\theta I_3,\\qquad q=-\\kappa_T\\nabla T,$$\n\nwith constant coefficients $\\mu,\\zeta,\\kappa_T\\ge0$ in Pa s, Pa s, and W m$^{-1}$ K$^{-1}$, respectively. Assume $\\rho,u,e,T,s,q,\\sigma\\in C^1$ and $b,r\\in C^0$ on the relevant swept regions, with $\\rho,T$ positive. Then $F=\\alpha I_3$, $J=\\alpha^3$, $u(t,x)=(\\alpha'(t)/\\alpha(t))x$, and $\\theta=3\\alpha'/\\alpha$, so $D_0=0$ while the mass theorem gives $\\rho(t,\\chi(t,a))=\\rho_0(a)/\\alpha(t)^3$. The local entropy-production residual $g=\\rho D_ts+\\operatorname{div}(q/T)-\\rho r/T$ is\n\n$$g=\\frac{\\zeta\\theta^2}{T}+\\frac{\\kappa_T|\\nabla T|^2}{T^2}\\ge0.$$\n\nIn the spatially uniform-temperature case, the heat-conduction term vanishes and the bulk-viscous production is $\\zeta\\theta^2/T$. The residual has units W m$^{-3}$ K$^{-1}$. This is a conditional deduction for the stated closure and balances, not a claim that actual fluids universally obey them.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ain A. Sonin, Fundamental Laws of Motion for Particles, Material Volumes, and Control Volumes, MIT 2.25 lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/d11fcb4ad68d875ce88a12c18c263932_MIT2_25F13_Fundam_Law-Son.pdf"
+            },
+            {
+              "title": "Andrew Hazel, MATH45061 Continuum Mechanics, Chapter 4: Physical Conservation and Balance Laws & Thermodynamics",
+              "url": "https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/MATH45061/MATH45061_Ch4.pdf"
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part II lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "library": "physics"
+      },
+      {
+        "id": "cex-fd-incompressibility-not-homogeneity",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Incompressibility does not imply uniform density",
+        "reference": "items/cex-fd-incompressibility-not-homogeneity.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-quantity-and-frame-conventions",
+          "pthm-fd-smooth-material-kinematics"
+        ],
+        "dependency_roles": {
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "pthm-fd-smooth-material-kinematics": "physical-result"
+        },
+        "physical_scope": "Smooth positive-density, no-mass-source kinematics on a Newtonian spatial domain. The witness satisfies mass transport and incompressibility; no momentum solution, constitutive law, or empirical material claim is asserted.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "For every smooth positive-density material motion satisfying the no-source mass balance, material constancy of density $D_t\\rho=0$ forces spatially uniform density $\\nabla\\rho=0$, and incompressibility $\\operatorname{div}u=0$ forces irrotationality $\\operatorname{curl}u=0$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Part I lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
+            },
+            {
+              "title": "Andrew Hazel, MATH45061 Continuum Mechanics, Chapter 4: Physical Conservation and Balance Laws & Thermodynamics",
+              "url": "https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/MATH45061/MATH45061_Ch4.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "library": "physics"
+      },
+      {
+        "id": "cex-fd-unsteady-pathlines-streamlines",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Unsteady pathlines differ from streamlines",
+        "reference": "items/cex-fd-unsteady-pathlines-streamlines.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-quantity-and-frame-conventions"
+        ],
+        "dependency_roles": {
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite"
+        },
+        "physical_scope": "Smooth kinematic velocity field on Newtonian spacetime, with pathlines and streamlines defined on the same spatial region. No momentum equation, constitutive law, or empirical flow is asserted.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "Whenever both curves exist on a common interval, for every $C^1$ velocity field $u:I\\times\\Omega\\to\\mathbb R^3$, every initial point $x_0\\in\\Omega$, and every frozen time $t_0\\in I$, the pathline $X$ satisfying $X(t_0)=x_0$ equals the streamline through $x_0$ at time $t_0$ when the streamline parameter is identified with $t-t_0$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Part I lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "library": "physics"
+      },
+      {
+        "id": "cex-fd-spin-sensitive-stress",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Spin-sensitive velocity-gradient stress violates objectivity",
+        "reference": "items/cex-fd-spin-sensitive-stress.md",
+        "design_state": "Step 1 draft authored; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-quantity-and-frame-conventions",
+          "lem-fd-observer-calculus"
+        ],
+        "dependency_roles": {
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "lem-fd-observer-calculus": "mathematical-premise"
+        },
+        "physical_scope": "Smooth Newtonian spatial kinematics used to test a tensor-valued constitutive response under time-dependent rigid observer changes. The candidate law is not asserted to be an admissible or empirically realized fluid stress.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "statement": "For every smooth velocity field $u:I\\times\\mathbb R^3\\to\\mathbb R^3$ and every constant dynamic-viscosity coefficient $\\mu>0$ in Pa s, the candidate tensor response $\\tau=\\mu L$, where $L_{ij}=\\partial_j u_i$, is objective under every $C^2$ rigid observer change $t^*=t,\\ x^*=Q(t)x+c(t)$. Here objectivity requires the responses at corresponding events to satisfy $\\tau^*(t,x^*)=Q(t)\\tau(t,x)Q(t)^T$, with $\\tau^*=\\mu L^*$ computed from the transformed velocity.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 8.09, Advanced Classical Mechanics, full lecture notes",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "David Tong, Fluid Mechanics, Part II lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "library": "physics"
+      }
+    ]
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "10",
+  "round": 1,
+  "reviewed_items": [
+    "lem-fd-isotropic-linear-classification",
+    "def-fd-simple-fluid-state",
+    "lem-fd-helmholtz-chart",
+    "lem-fd-response-acoustic-algebra",
+    "lem-fd-gibbs-entropy-residual",
+    "lem-fd-newtonian-admissibility",
+    "ex-fdmath-negative-bulk-residual"
+  ],
+  "reviewed_pages": [
+    "fd-mf03",
+    "fd-mf03-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The three local findings are repaired. The direct acoustic theorem consumer is compatible, but its indirect counterexample consumer needs an outside-batch pressure-law repair.",
+  "findings": [
+    {
+      "id": "lem-fd-response-acoustic-algebra",
+      "type": "local",
+      "reason": "Defined a local density interval for P, restricted the system density to that interval, quantified A in both mode families, and retained both T_b>0 and e_ss>0 in Fact F2."
+    },
+    {
+      "id": "lem-fd-newtonian-admissibility",
+      "type": "local",
+      "reason": "Fact F2 now includes the classification's converse, which supports proof step 1.1."
+    },
+    {
+      "id": "ex-fdmath-negative-bulk-residual",
+      "type": "local",
+      "reason": "Defined the identity matrix, trace, symmetric part, and matrix norm in the uninterrupted example; its verification now also checks the stated quadratic-form condition."
+    },
+    {
+      "id": "cex-fd-negative-response-acoustics",
+      "type": "outside-batch",
+      "reason": "Its Counterexample defines e only on a small rectangle and uses only a local P, while its prerequisite model requires P in C1((0,infinity)). The outside-batch consumer should state a global extension; P(rho)=p_b+A(1/rho-v_b) is C1 for rho>0 and agrees with the local pressure relation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pthm-fd-acoustic-linearization",
+      "decision": "accept",
+      "reason": "The model supplies a global C1 pressure law equal to the state-relation pressure near rho_b. Its proof uses the local derivative and first variation, which remain supported by the repaired statement."
+    },
+    {
+      "id": "cex-fd-negative-response-acoustics",
+      "decision": "escalate",
+      "reason": "The Counterexample setup and step 1.1 use a local state relation and pressure law through pthm-fd-acoustic-linearization. Add an explicit global C1 pressure-law extension in this outside-batch item."
+    }
+  ]
+}

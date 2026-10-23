@@ -1,0 +1,151 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "rem-fd-fluid-sobol-interface",
+      "model": "gpt-6-luna",
+      "context_sha256": "3f5ee83ad2b84191e681585d850b83e1b7e3316db15f415b7be7fde81af5cfa5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original unguarded covariance formula evaluates the ratio derivative at bar D=0, where it is undefined. In the existing two-row Bernoulli witness, P(bar D=0)=1/4 even though V=1/4. The imported algorithm and CLT explicitly separate failure from the positive-denominator return branch. Repair makes both branches explicit without dropping any valid conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rem-fd-fluid-sobol-interface",
+      "disposition": "repaired",
+      "post_sha256": "a36dfa12046ba168915f9a159db361212797e7685407339832eaee0e0da85b28",
+      "review_context_sha256": "3d941c9e8251dadb3f6234030bd72f3abf2305a045434c201d57e0a059aef1f9",
+      "reason": "Checked the entire current Remark, all six proof steps, all eight direct supplier carriers, the complete imported covariance-identity and ratio-CLT proofs, the owning contract and compact page. Product projections, numerator expectations and the conditional Bernoulli ratio calculation remain correct. Nonnegative D makes the zero/positive branches exhaustive; the derivative and formal matrix exist only on the positive branch. The zero branch supplies no index or matrix, and fixed finite extensions occur only in asymptotic statements under AC, L4 and V>0. Exact enumeration confirms failure probability 1/4 and conditional expectation 5/6. Contract derivations and the manifest statement mirror now match the repair. No new premise, consumer repair or independent acceptance is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "propose_append",
+      "subject": "rem-fd-fluid-sobol-interface",
+      "severity": "fatal",
+      "disposition": "fixed",
+      "defect_type": "logic",
+      "location": "Remark: formal plug-in covariance matrix; Proof 4.1",
+      "reason": "The original matrix formula had no empirical-denominator guard and its derivative was undefined on the positive-probability zero branch. The repair explicitly returns zero-empirical-variance with no normalized index or matrix at bar D=0; the formula and derivative are restricted to bar D>0. The existing two-row Bernoulli model has failure probability 1/4. This new finding is distinct from the historical fixed Proof 1.3 numerator-expansion finding.",
+      "evidence": [
+        {
+          "path": "items/rem-fd-fluid-sobol-interface.md",
+          "note": "Remark, F4 and Proof 3.1/4.1"
+        },
+        {
+          "path": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-initial-r1-u33.json",
+          "note": "Decision, current repair review and actual focused checks"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "Completed assigned repair and current author review; native collection, independent rejudgment and certification remain controller responsibilities.",
+    "scope": {
+      "item": "items/rem-fd-fluid-sobol-interface.md",
+      "contract": "research/fluid-dynamics-all-47-2026-10-23-batch-33.proof-contracts.json",
+      "manifest": "research/fluid-dynamics-all-47-2026-10-23-batch-33.pages.json",
+      "contract_scope": "rem-fd-fluid-sobol-interface",
+      "manifest_scope": "fd-st02 items entry for rem-fd-fluid-sobol-interface"
+    },
+    "repair": "Applied the six Sobol-only hunks from the attributed outside statistics proposal after verifying the current original bytes and actual suppliers. Added explicit zero-status and positive-denominator branches, failure probability in the existing witness, F4 branch information and proof 4.1 justification; retained the original mathematical conclusions and all moment/choice qualifications.",
+    "claim_and_conventions": "1<=d<infinity; finite product probability; coordinate-average/ANOVA L2 classes; mutually independent six-vector IID rows; n>=2. Positive population V defines normalized indices but does not guarantee positive empirical denominator. L2 gives integrable numerators; AC, L4 and positive V are additional assumptions for the ratio CLT and MCSE limit. No measured data or empirical assertion is involved.",
+    "source_reading": "Local current supplier carriers were read, including the complete imported pick-freeze identities and ratio-CLT proofs. All eight direct supplier raw hashes match research/math-imports.json. No external URL was retrieved, and no outside PDF reading claim is adopted from the historical contract.",
+    "reused_evidence": "Attributed /root/fluid_step4_statistics: scientific-review.md, consumer-use-matrix.json and the Sobol-only part of proposal.patch. Independently checked present supplier interfaces, complete target argument, current references/page use and all 4096 Bernoulli outcomes. Outside checks/hashes are evidence only; the current native review-context hashes were obtained directly.",
+    "public_interface": {
+      "section": "Remark",
+      "changed": true,
+      "description": "Makes the finite-sample estimator failure branch and positive-denominator restriction on its plug-in matrix explicit; also records the existing witness zero-event probability and asymptotic-only extension convention. There is no original Statement or Definition heading in this remark.",
+      "direct_item_consumers": [],
+      "aliases": [],
+      "consumer_search": "rg -n --glob *.md rem-fd-fluid-sobol-interface items library found only its own identity and its fd-st02 inventory placement. No other item or prose reference was found."
+    },
+    "page_uses": [
+      {
+        "id": "fd-st02",
+        "path": "library/fluid-dynamics-mathematics/fd-st02.md",
+        "affected_use": "YAML items inventory entry rem-fd-fluid-sobol-interface; the page has no Markdown body and asserts no additional mathematical claim.",
+        "invalidated_claim": null,
+        "disposition": "unaffected",
+        "minimality": "The page only places the remark; its inventory, compact-v1 flag and empty body remain sound with either estimator return branch. No page edit is necessary."
+      }
+    ],
+    "published_findings": [],
+    "shared_metadata": "Reread and surgically updated only the assigned contract and manifest entry using step5-shared-write-lock.mjs run with owner step5-v2-initial-r1-u33. Initial contract check caught a noncontiguous quotation; corrected it to the exact current algorithm Definition excerpt under the same lock. Final strict scoped check passes. No shared ledger was edited.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-33.proof-contracts.json --strict --items rem-fd-fluid-sobol-interface",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/rem-fd-fluid-sobol-interface.md",
+        "exit_code": 0,
+        "output": "PASS (direct); 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/rem-fd-fluid-sobol-interface.md --json",
+        "exit_code": 0,
+        "output": {
+          "errors": [],
+          "warnings": [],
+          "checked": 1
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/rem-fd-fluid-sobol-interface.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 6 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run fluid-dynamics-all-47-2026-10-23 --items rem-fd-fluid-sobol-interface",
+        "exit_code": 0,
+        "output": {
+          "post_sha256": "a36dfa12046ba168915f9a159db361212797e7685407339832eaee0e0da85b28",
+          "review_context_sha256": "3d941c9e8251dadb3f6234030bd72f3abf2305a045434c201d57e0a059aef1f9"
+        }
+      }
+    ],
+    "finite_check": {
+      "method": "Exact Python Fraction enumeration over all 2^12 equally likely six-vector/two-row Bernoulli draws; X-prime bits retained although unused for d=1.",
+      "outcomes": 4096,
+      "zero_status_outcomes": 1024,
+      "failure_probability": "1/4",
+      "conditional_ratio_expectation": "5/6",
+      "interpretation": "Exact arithmetic for the supplied probability model, not observations."
+    },
+    "unresolved_obligations": [],
+    "created_items": [],
+    "diagrams": "No TikZ/tikzcd or other mathematical diagram occurs in the assigned item; no diagram is needed for its finite-probability calculation.",
+    "interface_checks": "Complete Remark is uninterrupted by links; original references are retained immediately after it. Its exact manifest statement mirror agrees. Source raw SHA256 d75cc68e93b2a5c4581cbde5a8a6f39ae9fd1ba25f9f7f0ef20068d8ac9b99e1 matches the independently verified Sobol-only proposal. Original draft status and frontmatter are unchanged."
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-33-step5-context.json": "56807edacd7f77809eaaa623016ea84db5cfef24a26ad624aec920a82245f907",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-index.json": "4a83bdddc6c191f48ee116d78ae9c344db071985381ff8142b37cf51f838a40e",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-supplement-0001.json": "90e98f055337bee8b6ff7855f4f79e311b306e802b8f542f70a90797239e38de",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-supplement-0002.json": "2f2a6200c092208fd5ec0dca9b65e1a68b797d8db4c95f713a266cff97d3c4bd",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-statistics/scientific-review.md": "de09393db89535a3375caf2965efdd0c4accb4a8415e193b51f97c0267ddef60",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-statistics/consumer-use-matrix.json": "ad1121c48c9bfb887743b42bb5e36cb8b84d20cf0bebd367d77ca5b9a45c18dc",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-statistics/proposal-guards.json": "471d734c4192f29c877f21d2b05f125d9c761e0ad9e2354316ea1f3b75f23391",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-statistics/proposal.patch": "b39484b0aff8c826bf9e797231ea59713a01285dbc19981a390e9471b9695e8d",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-statistics/final-artifact-seal.json": "c09388d184df61a0a9c7d7b17ad79c99e4a3082083298bfae8daaad824029575"
+  }
+}

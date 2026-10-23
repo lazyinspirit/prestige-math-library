@@ -1,0 +1,628 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "44",
+  "level": 2,
+  "scope": [
+    "def-fd-solenoidal-surrogate-residual",
+    "thm-fd-surrogate-residual-error",
+    "prop-fd-surrogate-law-shift-observable",
+    "ex-fd-unseen-input-shift"
+  ],
+  "contracts": {
+    "def-fd-solenoidal-surrogate-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-periodic-leray-pressure-maps",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(0)=a(0)$ and $(Pa)(k)=P_ka(k)$ for $k\\ne0$, where $P_k=I-kk^{\\mathsf T}/|k|^2$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. These formulas define real-preserving bounded maps on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with derivatives. With $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, they satisfy $\\nabla QF=-(I-P)\\operatorname{div}F$ as Fourier distributions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The smoothness assumptions make $v\\otimes v$, $\\partial_t v$, $\\Delta v$, and $f$ well-defined periodic fields. By [F1] these fields lie in the required $L^2$ spaces. The adopted projector convention is conditional on the explicit Countable Choice premise [F2], and [F3] defines the multiplier on each term; hence the displayed formula defines $r_v$ at every $t\\in[0,T]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The maps $t\\mapsto \\partial_t v$, $t\\mapsto\\operatorname{div}(v\\otimes v)$, $t\\mapsto\\Delta v$, and $t\\mapsto f$ are continuous into $L^2$; boundedness of $P$ from [F3] preserves that continuity. Hence $r_v\\in C([0,T];L^2)$, and compactness of $[0,T]$ gives $\\int_0^T\\|r_v(t)\\|_2dt<\\infty$. Also $v(0)-u_0\\in L^2$, so $d_0$ is finite.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires d in {2,3} and T>0, so Q_d and [0,T] are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Taking v=f=u0=0 gives r_v=0 and d0=0 directly from the Definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Definition is for vector fields in spatial dimensions 2 or 3 and makes no one-element cardinality claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At ν=0 the residual formula remains defined; step 1.1 uses the multiplier, and step 2.1 proves continuity and integrability without positive viscosity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves r_v is continuous on the closed interval [0,T], including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is an explicit premise in the Definition; steps 1.1 and 2.1 select no elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition makes no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero residual and zero initial defect",
+          "status": "checked",
+          "evidence": "For v=f=u0=0, the continuous formula gives r_v=0 and d0=0."
+        },
+        {
+          "name": "spatially constant field",
+          "status": "checked",
+          "evidence": "For v(t,x)=c(t) with f=0, div(v tensor v)=0, Delta v=0, and r_v=c'(t), matching the displayed definition."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-fd-periodic-fourier-sobolev-spaces",
+          "carrier": "items/def-fd-periodic-fourier-sobolev-spaces.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.\n\n",
+          "relevant_hypotheses_and_conventions": "The normalized torus Q_d, normalized measure, Fourier coefficients, and H0=L2 convention used for the residual.",
+          "supplier_proof_status": "Current draft Definition and complete well-definedness proof inspected; the run Step-1 record is ready. Countable Choice is explicit.",
+          "consumer_use": [
+            "F1 in 1.1–1.2"
+          ]
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "relevant_hypotheses_and_conventions": "AC_omega: every countable family of nonempty sets has a choice function; no full AC assumption is imported by this Definition.",
+          "supplier_proof_status": "Published definition carrier inspected; it is an adopted axiom/definition and has no proof obligation.",
+          "consumer_use": [
+            "F2 in 1.1"
+          ]
+        },
+        {
+          "supplier": "def-fd-periodic-leray-pressure-maps",
+          "carrier": "items/def-fd-periodic-leray-pressure-maps.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(0)=a(0)$ and $(Pa)(k)=P_ka(k)$ for $k\\ne0$, where $P_k=I-kk^{\\mathsf T}/|k|^2$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. These formulas define real-preserving bounded maps on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with derivatives. With $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, they satisfy $\\nabla QF=-(I-P)\\operatorname{div}F$ as Fourier distributions.\n\n",
+          "relevant_hypotheses_and_conventions": "The Fourier formula for P, boundedness on Hs, orthogonal-projection property, and commutation with derivatives.",
+          "supplier_proof_status": "Current draft Definition and complete well-definedness proof inspected; the run Step-1 record is ready. Independent acceptance remains a later gate.",
+          "consumer_use": [
+            "F3 in 1.1–1.2"
+          ]
+        },
+        {
+          "supplier": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "carrier": "items/thm-fourier-basis-and-parseval-on-the-n-torus.md",
+          "status": "published",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.\n\n",
+          "relevant_hypotheses_and_conventions": "Under Countable Choice, torus characters are an orthonormal basis and the Fourier coefficient map is an isometry onto ell2; this is transitive through def-fd-periodic-fourier-sobolev-spaces.",
+          "supplier_proof_status": "Published Statement and complete current proof inspected for the transitive coefficient-space interface; it assumes Countable Choice, not full AC.",
+          "consumer_use": [
+            "Transitive through F1"
+          ]
+        }
+      ]
+    },
+    "thm-fd-surrogate-residual-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-solenoidal-surrogate-residual",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized volume $d\\mu=(2\\pi)^{-d}dx$. For a vector field $w$, use the componentwise Fourier coefficients $\\widehat w(k)=\\int_{Q_d}w(x)e^{-ik\\cdot x}\\,d\\mu(x)$ and norm $\\|w\\|_2=(\\int_{Q_d}|w(x)|^2\\,d\\mu(x))^{1/2}$. Define $P_0=I$ and, for $k\\ne0$, $P_k=I-kk^{\\mathsf T}/|k|^2$, with $\\widehat{Pw}(k)=P_k\\widehat w(k)$; $P$ is the Leray projector. For a vector field $w$, $\\operatorname{div}w=\\sum_{j=1}^d\\partial_jw_j$; for a tensor field $F=(F_{ij})$, set $(\\operatorname{div}F)_i=\\sum_{j=1}^d\\partial_jF_{ij}$, and set $(v\\otimes v)_{ij}=v_i v_j$. Let $\\Delta=\\sum_{j=1}^d\\partial_j^2$. A field is called solenoidal when it is divergence-free. Given a constant $\\nu\\ge0$, smooth $f:[0,T]\\times Q_d\\to\\mathbb R^d$, a smooth solenoidal field $v:[0,T]\\times Q_d\\to\\mathbb R^d$, and a smooth solenoidal reference initial field $u_0:Q_d\\to\\mathbb R^d$, define the continuous residual and initial defect by\n\n$$r_v:=\\partial_t v+P\\operatorname{div}(v\\otimes v)-\\nu\\Delta v-Pf,\\qquad d_0:=\\|v(0,\\cdot)-u_0\\|_2.$$\n\nThe residual is a continuous function of time with values in $L^2(Q_d;\\mathbb R^d)$, so $\\int_0^T\\|r_v(t,\\cdot)\\|_2\\,dt$ is finite. This is a continuous-domain residual: finitely many collocation values do not by themselves bound this $L^1_tL^2_x$ quantity. All quantities here are mathematical; no physical units are assigned to $\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-leray-pressure-maps",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(0)=a(0)$ and $(Pa)(k)=P_ka(k)$ for $k\\ne0$, where $P_k=I-kk^{\\mathsf T}/|k|^2$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. These formulas define real-preserving bounded maps on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with derivatives. With $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, they satisfy $\\nabla QF=-(I-P)\\operatorname{div}F$ as Fourier distributions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $e=v-u$. Under the explicit Countable Choice convention [F4], subtracting the exact equation from the residual equation [F1] gives $\\partial_te+P\\operatorname{div}(v\\otimes v-u\\otimes u)-\\nu\\Delta e=r_v$. Since $\\operatorname{div}u=\\operatorname{div}v=0$, the tensor convention gives $\\operatorname{div}(v\\otimes v)=v\\cdot\\nabla v$ and $\\operatorname{div}(u\\otimes u)=u\\cdot\\nabla u$; the difference is $v\\cdot\\nabla e+e\\cdot\\nabla u$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pair the resulting equation with $e$ in normalized $L^2$. By [F2], $Pe=e$ and $P$ is self-adjoint, so each projected transport term paired with $e$ equals its unprojected pairing. Periodicity gives $\\int_{Q_d}\\operatorname{div}(v|e|^2)\\,d\\mu=0$; since $\\operatorname{div}v=0$, this yields $\\langle v\\cdot\\nabla e,e\\rangle=\\frac12\\int v\\cdot\\nabla|e|^2\\,d\\mu=0$. Also $|\\langle e\\cdot\\nabla u,e\\rangle|\\le\\sup_x\\|\\nabla u\\|_{\\mathrm{op}}\\|e\\|_2^2$. Periodic integration by parts gives $\\langle-\\nu\\Delta e,e\\rangle=\\nu\\|\\nabla e\\|_2^2\\ge0$. By [F3], $|\\langle r_v,e\\rangle|\\le\\|r_v\\|_2\\|e\\|_2$. Using $\\langle\\partial_t e,e\\rangle=\\frac12\\frac{d}{dt}\\|e\\|_2^2$ now gives $\\frac12\\frac{d}{dt}\\|e\\|_2^2\\le \\sup_x\\|\\nabla u\\|_{\\mathrm{op}}\\|e\\|_2^2+\\|r_v\\|_2\\|e\\|_2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $\\delta>0$ put $y_\\delta(t)=(\\|e(t)\\|_2^2+\\delta^2)^{1/2}$ and $a(t)=\\sup_x\\|\\nabla u(t,x)\\|_{\\mathrm{op}}$. Continuity of $\\nabla u$ on compact $[0,T]\\times Q_d$ makes $a$ continuous, so the definition of $A$ gives $A'(t)=a(t)$. The differential inequality in step 2.1 and the bounds $\\|e\\|_2^2/y_\\delta\\le y_\\delta$ and $\\|e\\|_2/y_\\delta\\le1$ imply $y_\\delta'(t)\\le A'(t)y_\\delta(t)+\\|r_v(t)\\|_2$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The product rule and $A'(t)=\\sup_x\\|\\nabla u(t,x)\\|_{\\mathrm{op}}$ show that $\\frac{d}{dt}(e^{-A(t)}y_\\delta(t))\\le e^{-A(t)}\\|r_v(t)\\|_2$. Integrating from $0$ to $t$ and multiplying by $e^{A(t)}$ gives $y_\\delta(t)\\le e^{A(t)}y_\\delta(0)+\\int_0^t e^{A(t)-A(s)}\\|r_v(s)\\|_2ds$. As $\\delta\\downarrow0$, $y_\\delta(t)\\to\\|e(t)\\|_2$ and $y_\\delta(0)\\to\\|v(0)-u_0\\|_2$, which proves the stated estimate.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes T>0 and d in {2,3}; the torus and comparison interval are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If v(0)=u0 and r_v=0, step 3.1 yields yδ′≤A′yδ; step 4.1 integrates it and lets δ decrease to zero, giving ||v(t)−u(t)||2=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is restricted to d in {2,3}; it makes no one-dimensional claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint ν=0 is allowed; step 2.1 drops only the nonnegative term ν||∇e||²."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 integrates from 0 through each t∈[0,T] and takes the δ→0 limit, so it includes t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is carried explicitly by F4; the proof otherwise fixes u and v and selects no objects (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a one-way inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a one-way inequality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant-in-space residual equality",
+          "status": "checked",
+          "evidence": "Take u=0, u0=0, f=0 and v(t,x)=t c for a fixed c in R^d. Then r_v=c, A=0, ||v(t)−u(t)||2=t|c|, and the right side is integral_0^t |c| ds=t|c|."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-fd-solenoidal-surrogate-residual",
+          "carrier": "items/def-fd-solenoidal-surrogate-residual.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized volume $d\\mu=(2\\pi)^{-d}dx$. For a vector field $w$, use the componentwise Fourier coefficients $\\widehat w(k)=\\int_{Q_d}w(x)e^{-ik\\cdot x}\\,d\\mu(x)$ and norm $\\|w\\|_2=(\\int_{Q_d}|w(x)|^2\\,d\\mu(x))^{1/2}$. Define $P_0=I$ and, for $k\\ne0$, $P_k=I-kk^{\\mathsf T}/|k|^2$, with $\\widehat{Pw}(k)=P_k\\widehat w(k)$; $P$ is the Leray projector. For a vector field $w$, $\\operatorname{div}w=\\sum_{j=1}^d\\partial_jw_j$; for a tensor field $F=(F_{ij})$, set $(\\operatorname{div}F)_i=\\sum_{j=1}^d\\partial_jF_{ij}$, and set $(v\\otimes v)_{ij}=v_i v_j$. Let $\\Delta=\\sum_{j=1}^d\\partial_j^2$. A field is called solenoidal when it is divergence-free. Given a constant $\\nu\\ge0$, smooth $f:[0,T]\\times Q_d\\to\\mathbb R^d$, a smooth solenoidal field $v:[0,T]\\times Q_d\\to\\mathbb R^d$, and a smooth solenoidal reference initial field $u_0:Q_d\\to\\mathbb R^d$, define the continuous residual and initial defect by\n\n$$r_v:=\\partial_t v+P\\operatorname{div}(v\\otimes v)-\\nu\\Delta v-Pf,\\qquad d_0:=\\|v(0,\\cdot)-u_0\\|_2.$$\n\nThe residual is a continuous function of time with values in $L^2(Q_d;\\mathbb R^d)$, so $\\int_0^T\\|r_v(t,\\cdot)\\|_2\\,dt$ is finite. This is a continuous-domain residual: finitely many collocation values do not by themselves bound this $L^1_tL^2_x$ quantity. All quantities here are mathematical; no physical units are assigned to $\\nu$.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact continuous residual, common viscosity/forcing convention, normalized L2 norm, and tensor divergence used in the Statement.",
+          "supplier_proof_status": "Current draft Definition and proof inspected; its batch-17 prerequisites have current ready records.",
+          "consumer_use": [
+            "F1 in 1.1"
+          ]
+        },
+        {
+          "supplier": "def-fd-periodic-leray-pressure-maps",
+          "carrier": "items/def-fd-periodic-leray-pressure-maps.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(0)=a(0)$ and $(Pa)(k)=P_ka(k)$ for $k\\ne0$, where $P_k=I-kk^{\\mathsf T}/|k|^2$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. These formulas define real-preserving bounded maps on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with derivatives. With $(\\operatorname{div}F)_i=\\sum_j\\partial_jF_{ij}$, they satisfy $\\nabla QF=-(I-P)\\operatorname{div}F$ as Fourier distributions.\n\n",
+          "relevant_hypotheses_and_conventions": "P is the orthogonal Fourier projection onto divergence-free modes, bounded on Hs and commuting with derivatives.",
+          "supplier_proof_status": "Current draft Definition and complete well-definedness proof inspected; run Step-1 record ready. This records actual inspected scope, not independent acceptance.",
+          "consumer_use": [
+            "F2 in 1.2"
+          ]
+        },
+        {
+          "supplier": "thm-holder-inequality-for-integrals",
+          "carrier": "items/thm-holder-inequality-for-integrals.md",
+          "status": "published",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "relevant_hypotheses_and_conventions": "For conjugate exponents p=q=2 and L2 functions, integral |ab| is at most the product of the two L2 norms.",
+          "supplier_proof_status": "Published Statement and complete proof inspected; the p=2 Cauchy–Schwarz case applies. One source-reference metadata mismatch is separately escalated in batch notes; the valid Axler source and local use are recorded.",
+          "consumer_use": [
+            "F3 in 1.2, 2.1"
+          ]
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "relevant_hypotheses_and_conventions": "AC_omega means every countable family of nonempty sets has a choice function.",
+          "supplier_proof_status": "Published definition inspected; the theorem states this exact inherited premise and uses no full AC.",
+          "consumer_use": [
+            "F4 in 1.1"
+          ]
+        }
+      ]
+    },
+    "prop-fd-surrogate-law-shift-observable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-random-fluid-observable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal A,\\mu)$ be a specified probability space of inputs, let $I\\subset\\mathbb R$ be a nonempty common time interval, and let $(X,\\mathcal X)$ be a specified measurable state or path space. An exact selected solution map is a supplied measurable map $S:\\Theta\\to X$ whose values solve the specified mathematical model on $I$. The equation, solution class and admissible input set are supplied as data; a smooth uniqueness theorem may identify a single-valued map, but measurability is a separate required hypothesis. In a nonunique weak theory an actual measurable selection must be given before taking a pushforward law; this definition asserts no selection theorem. More generally a supplied measurable random state is allowed without any PDE interpretation. A real observable is a map $J:X\\to\\mathbb R$ such that $Y:=J\\circ S$ is measurable. It is integrable or square-integrable when $\\mathbb E_\\mu|Y|<\\infty$ or $\\mathbb E_\\mu Y^2<\\infty$, respectively.\n\nFor a nonempty set $H$ of numerical settings, supplied measurable numerical composites $Y_h=J_h\\circ S_h$ define approximate outputs on the same input law; the maps $S_h$ may take values in specified approximation spaces $X_h$, with $J_h:X_h\\to\\mathbb R$. When $Y,Y_h$ are integrable, define $\\theta=\\mathbb E_\\mu Y$, $\\theta_h=\\mathbb E_\\mu Y_h$ and signed mean bias $b_h=\\theta_h-\\theta$. Output variances require finite second moments. This definition implies neither IID sampling nor numerical convergence, a bias bound, or physical applicability. All exact and approximate outputs must use the same declared scalar unit before forming their bias.\n\nThe finite-second-moment spatial velocity law and sensor are included by taking $X=H_D=L^2(D;\\mathbb R^d)$ with its norm-Borel sigma-algebra and $J=S_\\psi$, a representative-independent bounded linear sensor. Its pairing lemma gives measurability and a finite second moment under the stated velocity law. This use is on quotient classes and requires no measurable choice of pointwise representatives. In the general separable Banach-state branch, bounded linear sensors have the same measurability and moment property by their operator bounds. Time-series sampling, a Markov chain, and mixing remain additional assumptions; dependent consecutive readings are not IID merely because this definition applies.\n\nThe earlier pointwise-field formulation is also included: let $d_s\\in\\{2,3\\}$, let $D\\subseteq\\mathbb R^{d_s}$ be nonempty and Lebesgue-measurable, and let $(\\mathscr V,\\mathcal V)$ be any specified measurable space of product-measurable fields $u:D\\times I\\to\\mathbb R^{d_s}$. Use $X=\\mathscr V$, a supplied measurable random-field map, and measurable scalar composites. Passing from an $L^2$ class to such a pointwise random field requires a supplied jointly measurable representative; it is not part of the quotient-sensor specialization. Velocity components use one fixed velocity unit, and sensor weights carry the corresponding integral units.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Lipschitz map $J$ is continuous, so the measurable state maps make $J\\circ S$ and $J\\circ\\widetilde S$ measurable scalar observables as in [F1]. By [A2], $\\int g^2d\\mu\\le C\\int gd\\mu=C$, hence $\\|g\\|_{L^2(\\mu)}\\le\\sqrt C$. For every $z\\in\\mathcal Z$, $|J(S(z))|\\le|J(0)|+L\\|S(z)\\|_X$; [F2] and [A1] therefore give $\\int |J(S)|g\\,d\\mu\\le |J(0)|+L\\|\\|S\\|_X\\|_{L^2(\\mu)}\\|g\\|_{L^2(\\mu)}<\\infty$. The same estimate with $\\widetilde S$ proves both target expectations are finite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target-density definition and Lipschitz condition give\n$$\\left|\\mathbb E_\\nu[J(S)]-\\mathbb E_\\nu[J(\\widetilde S)]\\right|=\\left|\\int (J(S)-J(\\widetilde S))g\\,d\\mu\\right|\\le L\\int\\|S-\\widetilde S\\|_Xg\\,d\\mu.$$\nThe integral is well-defined by step 1.1 and $g\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] to $\\|S-\\widetilde S\\|_X$ and $g$, then use the mean-square bound in [A1] and $\\|g\\|_2\\le\\sqrt C$ from step 1.1. This bounds the last integral in step 2.1 by $\\varepsilon\\sqrt C$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Multiplying the step 3.1 bound by $L$ in step 2.1 proves the claimed inequality.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes a probability measure mu, so the input space cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If ε=0, step 3.1 makes the last integral in step 2.1 zero; if L=0, step 2.1 gives zero bias directly. Step 4.1 concludes the stated bound in either case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "On a one-point input space μ=ν and g=1; steps 2.1–4.1 reduce to the pointwise Lipschitz estimate with the stated mean-square error."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If C=1, g=1 μ-a.e. because 0≤g≤1 and ∫g dμ=1; steps 2.1–4.1 then give the usual Lε estimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No exponent endpoint is asserted; Holder is used only at p=q=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes the displayed measures and maps and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives an inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives an inequality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-point target law",
+          "status": "checked",
+          "evidence": "For a one-point space and constant states x,y with J(s)=s, C=1 and epsilon=|x−y|; the inequality is equality when L=1."
+        },
+        {
+          "name": "zero observable Lipschitz constant",
+          "status": "checked",
+          "evidence": "For L=0, J is constant on X, so both target expectations agree and the bound is zero."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-fd-random-fluid-observable",
+          "carrier": "items/def-fd-random-fluid-observable.md",
+          "status": "draft",
+          "source_section": "Definition",
+          "exact_statement": "Let $(\\Theta,\\mathcal A,\\mu)$ be a specified probability space of inputs, let $I\\subset\\mathbb R$ be a nonempty common time interval, and let $(X,\\mathcal X)$ be a specified measurable state or path space. An exact selected solution map is a supplied measurable map $S:\\Theta\\to X$ whose values solve the specified mathematical model on $I$. The equation, solution class and admissible input set are supplied as data; a smooth uniqueness theorem may identify a single-valued map, but measurability is a separate required hypothesis. In a nonunique weak theory an actual measurable selection must be given before taking a pushforward law; this definition asserts no selection theorem. More generally a supplied measurable random state is allowed without any PDE interpretation. A real observable is a map $J:X\\to\\mathbb R$ such that $Y:=J\\circ S$ is measurable. It is integrable or square-integrable when $\\mathbb E_\\mu|Y|<\\infty$ or $\\mathbb E_\\mu Y^2<\\infty$, respectively.\n\nFor a nonempty set $H$ of numerical settings, supplied measurable numerical composites $Y_h=J_h\\circ S_h$ define approximate outputs on the same input law; the maps $S_h$ may take values in specified approximation spaces $X_h$, with $J_h:X_h\\to\\mathbb R$. When $Y,Y_h$ are integrable, define $\\theta=\\mathbb E_\\mu Y$, $\\theta_h=\\mathbb E_\\mu Y_h$ and signed mean bias $b_h=\\theta_h-\\theta$. Output variances require finite second moments. This definition implies neither IID sampling nor numerical convergence, a bias bound, or physical applicability. All exact and approximate outputs must use the same declared scalar unit before forming their bias.\n\nThe finite-second-moment spatial velocity law and sensor are included by taking $X=H_D=L^2(D;\\mathbb R^d)$ with its norm-Borel sigma-algebra and $J=S_\\psi$, a representative-independent bounded linear sensor. Its pairing lemma gives measurability and a finite second moment under the stated velocity law. This use is on quotient classes and requires no measurable choice of pointwise representatives. In the general separable Banach-state branch, bounded linear sensors have the same measurability and moment property by their operator bounds. Time-series sampling, a Markov chain, and mixing remain additional assumptions; dependent consecutive readings are not IID merely because this definition applies.\n\nThe earlier pointwise-field formulation is also included: let $d_s\\in\\{2,3\\}$, let $D\\subseteq\\mathbb R^{d_s}$ be nonempty and Lebesgue-measurable, and let $(\\mathscr V,\\mathcal V)$ be any specified measurable space of product-measurable fields $u:D\\times I\\to\\mathbb R^{d_s}$. Use $X=\\mathscr V$, a supplied measurable random-field map, and measurable scalar composites. Passing from an $L^2$ class to such a pointwise random field requires a supplied jointly measurable representative; it is not part of the quotient-sensor specialization. Velocity components use one fixed velocity unit, and sensor weights carry the corresponding integral units.\n\n",
+          "relevant_hypotheses_and_conventions": "A random fluid field is a measurable map into a space of product-measurable fields and a real fluid observable is a measurable scalar composition.",
+          "supplier_proof_status": "Current draft Definition inspected. Its Step-1 record is escalated because fd-st01, required upstream by fd-st02, has no current carriers; this proposition states its own norm, moment, and density conditions explicitly and remains conditional.",
+          "consumer_use": [
+            "F1 in 1.1"
+          ]
+        },
+        {
+          "supplier": "thm-holder-inequality-for-integrals",
+          "carrier": "items/thm-holder-inequality-for-integrals.md",
+          "status": "published",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "relevant_hypotheses_and_conventions": "For conjugate exponents p=q=2, measurable L2 functions satisfy integral |ab| <= ||a||2 ||b||2.",
+          "supplier_proof_status": "Published Statement and complete proof inspected. The exact p=2 inequality is used; a source-metadata mismatch is separately recorded in batch notes.",
+          "consumer_use": [
+            "F2 in 1.1, 2.1"
+          ]
+        }
+      ]
+    },
+    "ex-fd-unseen-input-shift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-fd-surrogate-law-shift-observable",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal Z,\\Sigma)$ be a measurable space and let $\\mu$ be a probability measure on it, meaning a countably additive measure on $\\Sigma$ with $\\mu(\\mathcal Z)=1$. Let $X$ be a real normed vector space and give it the norm-Borel $\\sigma$-algebra generated by its norm-open sets. Let $S,\\widetilde S:\\mathcal Z\\to X$ be measurable maps. Let $J:X\\to\\mathbb R$ be $L$-Lipschitz, meaning $|J(x)-J(y)|\\le L\\|x-y\\|_X$ for all $x,y\\in X$, with $L\\ge0$. Suppose\n\n$$\\int_{\\mathcal Z}\\bigl(\\|S\\|_X^2+\\|\\widetilde S\\|_X^2\\bigr)\\,d\\mu<\\infty,\\qquad \\int_{\\mathcal Z}\\|S-\\widetilde S\\|_X^2\\,d\\mu\\le\\varepsilon^2$$\n\nfor some finite $\\varepsilon\\ge0$. For a measurable scalar function $h$, write $\\|h\\|_{L^2(\\mu)}=(\\int_{\\mathcal Z}|h|^2\\,d\\mu)^{1/2}$. Let $g:\\mathcal Z\\to[0,\\infty)$ be measurable with $\\int g\\,d\\mu=1$ and $g\\le C$ $\\mu$-almost everywhere for a finite $C\\ge1$, and define the target probability law by $\\nu(E)=\\int_Eg\\,d\\mu$ for $E\\in\\Sigma$, with target expectation $\\mathbb E_\\nu[H]=\\int Hg\\,d\\mu$ whenever the integral exists. Then the measurable scalar observables $J\\circ S$ and $J\\circ\\widetilde S$ are $\\nu$-integrable and\n\n$$\\left|\\mathbb E_\\nu[J(S)]-\\mathbb E_\\nu[J(\\widetilde S)]\\right|\\le L\\sqrt C\\,\\varepsilon.$$\n\nThe estimate assumes a population mean-square error under $\\mu$ and a bounded target density $g$; a finite test sample by itself establishes neither assumption. The state space may represent fluid fields when that measurable state model is supplied. For a physical application, both observables must use the same declared scalar unit; this mathematical proposition assigns no physical units.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The norm identifies $X$ isometrically with $\\mathbb R$, the maps themselves are finite-valued measurable simple maps and hence strongly measurable, and $J$ is $1$-Lipschitz; thus the state-space and measurability hypotheses of [F1] hold. Under $\\mu=\\delta_0$, both $S(0)$ and $\\widetilde S(0)$ equal zero, so $\\mathbb E_\\mu\\|S-\\widetilde S\\|_X^2=0$; the separate state second moments are also finite because the maps have finite range.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under $\\nu=\\delta_1$, $J(S(1))=0$ and $J(\\widetilde S(1))=M$, hence $|\\mathbb E_\\nu J(S)-\\mathbb E_\\nu J(\\widetilde S)|=M$. Since $M$ is arbitrary, the target bias can be arbitrarily large while the training-law error remains zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The set $\\{1\\}$ has $\\mu$-measure zero and $\\nu$-measure one. If a target density $g$ existed, then $\\nu(\\{1\\})=\\int_{\\{1\\}}g\\,d\\mu=0$, a contradiction; hence $\\nu\\not\\ll\\mu$ and the density hypothesis in [F1] fails.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes Z={0,1}, a nonempty finite input set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The training-law error is exactly zero in step 1.1 while the target bias is M in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example deliberately uses two input points; the one-point case is not part of this witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The training and target laws are mutually singular point masses; steps 1.1 and 3.1 show the support mismatch, while step 2.1 gives the target bias."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limiting exponent, or endpoint assertion is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sets, maps, and laws are explicitly finite; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a witness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a witness, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-point unseen state",
+          "status": "checked",
+          "evidence": "Direct evaluation gives E_mu|S−S_tilde|^2=0 and |E_nu J(S)−E_nu J(S_tilde)|=M for every M>0."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "prop-fd-surrogate-law-shift-observable",
+          "carrier": "items/prop-fd-surrogate-law-shift-observable.md",
+          "status": "draft",
+          "source_section": "Statement",
+          "exact_statement": "Let $d_s\\in\\{2,3\\}$, let $D\\subseteq\\mathbb R^{d_s}$ be nonempty and Lebesgue-measurable, and let $I\\subseteq\\mathbb R$ be a nonempty interval. Let $(\\mathscr V,\\mathcal V)$ be a measurable space of product-measurable vector fields $w:D\\times I\\to\\mathbb R^{d_s}$, where the product $\\sigma$-algebra is the restricted Lebesgue $\\sigma$-algebra on $D$ times the Borel $\\sigma$-algebra on $I$. Let $(\\mathcal Z,\\Sigma)$ be a measurable input space. Let $X\\subseteq\\mathscr V$ be a real vector space of such fields with a specified norm $\\|\\cdot\\|_X$ and its norm-Borel $\\sigma$-algebra, and assume the inclusion $X\\to(\\mathscr V,\\mathcal V)$ is measurable. Let $S,\\widetilde S:(\\mathcal Z,\\Sigma)\\to X$ be measurable maps, and let $J:X\\to\\mathbb R$ be $L$-Lipschitz, meaning $|J(x)-J(y)|\\le L\\|x-y\\|_X$ for all $x,y\\in X$, with $L\\ge0$. Let $\\mu$ be a probability measure on $(\\mathcal Z,\\Sigma)$ and suppose\n\n$$\\int_{\\mathcal Z}\\bigl(\\|S\\|_X^2+\\|\\widetilde S\\|_X^2\\bigr)\\,d\\mu<\\infty,\\qquad \\int_{\\mathcal Z}\\|S-\\widetilde S\\|_X^2\\,d\\mu\\le\\varepsilon^2$$\n\nfor some finite $\\varepsilon\\ge0$. Let $g:\\mathcal Z\\to[0,\\infty)$ be measurable with $\\int g\\,d\\mu=1$ and $g\\le C$ $\\mu$-almost everywhere for a finite $C\\ge1$, and define the target probability law by $\\nu(E)=\\int_Eg\\,d\\mu$ for $E\\in\\Sigma$, with target expectation $\\mathbb E_\\nu[H]=\\int Hg\\,d\\mu$ whenever the integral exists. Then the measurable scalar observables $J\\circ S$ and $J\\circ\\widetilde S$ are $\\nu$-integrable and\n\n$$\\left|\\mathbb E_\\nu[J(S)]-\\mathbb E_\\nu[J(\\widetilde S)]\\right|\\le L\\sqrt C\\,\\varepsilon.$$\n\nThe estimate assumes a population mean-square error under $\\mu$ and a bounded target density $g$; a finite test sample by itself establishes neither assumption. All quantities here are mathematical, with no physical units assigned.\n\n",
+          "relevant_hypotheses_and_conventions": "The conditional certificate assumes a population mean-square error under mu and a bounded target density g with respect to mu.",
+          "supplier_proof_status": "Current draft conditional Statement and Proof inspected. Its readiness is escalated on the fd-st01 input inherited through fd-st02; this finite example is also verified directly from its own maps and laws.",
+          "consumer_use": [
+            "F1 in 2.1"
+          ]
+        }
+      ]
+    }
+  }
+}

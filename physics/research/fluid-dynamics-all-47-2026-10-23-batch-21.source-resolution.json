@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "21",
+  "source_resolution": {
+    "status": "resolved",
+    "retrieval_date_utc": "2026-10-22",
+    "attempts": [
+      {
+        "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf",
+        "outcome": "Browser open failed with HTTP 400 because the 11,323,490-byte full-course PDF exceeded the browser fetch limit. Recovered using the author-hosted complete Chapter 2 and Chapter 3 PDFs; both standalone chapters downloaded and read."
+      },
+      {
+        "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf",
+        "outcome": "Recovered full 56-page Chapter 2 PDF via author site; retrieved and relevant sections read in full."
+      },
+      {
+        "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids3.pdf",
+        "outcome": "Recovered full 70-page Chapter 3 PDF via author site; retrieved and relevant acoustic section read in full."
+      },
+      {
+        "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+        "outcome": "Browser open timed out. Recovered by direct HTTP download of the complete 18 MB, 480-page author PDF; relevant cited sections read in full."
+      },
+      {
+        "url": "https://addi.ehu.es/bitstream/handle/10810/32004/TESIS_GHOSH_AMRITA.pdf?sequence=1",
+        "outcome": "Optional thesis candidate returned HTTP 404. Search alternatives found the full Chen–Qian arXiv paper, which supports the needed stationary Navier friction law; the thesis is not cited or relied on."
+      },
+      {
+        "url": "https://www.theses.fr/2018PAUU3021/document",
+        "outcome": "Optional alternative thesis URL was inaccessible through the browser. Search alternatives yielded the arXiv paper cited below; no claim is made that the thesis was read."
+      },
+      {
+        "url": "https://arxiv.org/pdf/math/0901.0147",
+        "outcome": "An initial malformed category path returned HTTP 404. The canonical arXiv URL below was then retrieved successfully."
+      },
+      {
+        "url": "https://arxiv.org/pdf/0901.0147",
+        "outcome": "Retrieved the complete 30-page arXiv v1 PDF and read §§1–2, including the kinematic and Navier boundary condition and its stated slip-length convention."
+      },
+      {
+        "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf",
+        "outcome": "Browser and direct HTTP retrieval succeeded for the complete 143-page chapter. Sections 2.3 and 7.1.2 were read in full."
+      }
+    ],
+    "searches": [
+      {
+        "query": "Navier slip boundary condition energy identity Navier Stokes lecture notes pdf",
+        "outcome": "Located academic thesis and university/course material; thesis mirror retrieval failed, so no claim was based on that candidate."
+      },
+      {
+        "query": "site:ocw.mit.edu fluid mechanics Navier slip boundary condition energy equation pdf",
+        "outcome": "No suitable source was selected from the results; existing full lecture notes Tong/Powers cover the mechanical-energy context."
+      },
+      {
+        "query": "linear acoustics fluid mechanics lecture notes Tong §4.4.4 Boltzmann equation Golse §7.4",
+        "outcome": "Located Tong Chapter 3 and the full Golse handbook chapter."
+      },
+      {
+        "query": "Navier boundary condition (2 D(u) n)_tau + alpha u_tau energy identity PDF lecture notes",
+        "outcome": "Located formulations of the Navier friction condition; followed the full arXiv paper by Chen and Qian."
+      },
+      {
+        "query": "\"Navier boundary condition\" \"energy identity\" incompressible Navier-Stokes bounded domain PDF",
+        "outcome": "Located full arXiv sources on Navier boundary conditions."
+      },
+      {
+        "query": "Navier slip wall law energy dissipation tangential traction lecture notes fluid mechanics pdf",
+        "outcome": "Confirmed the need to distinguish slip length from dimensional traction coefficient; adopted beta=eta/zeta only under the stated constant-viscosity convention."
+      },
+      {
+        "query": "Amrita Ghosh \"Navier-Stokes equations with Navier boundary condition\" thesis pdf full",
+        "outcome": "Found the thesis record and inaccessible mirrors; recovered the needed full-text wall-law treatment from Chen and Qian arXiv:0901.0147v1."
+      }
+    ],
+    "items": [
+      {
+        "id": "post-fd-navier-slip-wall-law",
+        "claim": "Adopt the stationary impermeable linear friction boundary condition (sigma n)_tau=-beta u_tau, beta>=0, with SI units and no universality claim.",
+        "deps": [
+          "post-fd-continuum-balances",
+          "post-fd-boundary-data"
+        ],
+        "source_uses": [
+          "Chen and Qian, arXiv:0901.0147v1, §§1–2, equations (1.3)–(1.4), (2.5), Proposition 2.1; their finite slip length zeta and density-normalized viscosity map to beta=eta/zeta."
+        ],
+        "argument_disposition": "Adopted postulate; both current physical suppliers are Step-1 ready; no measured coefficient or universal law is claimed."
+      },
+      {
+        "id": "pthm-fd-local-momentum-balance-from-continuum",
+        "claim": "Derive the pointwise forced momentum equation from the adopted material momentum balance for a smooth constant-density incompressible Newtonian material motion.",
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "def-fd-incompressible-newtonian-model",
+          "post-fd-newtonian-fourier",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice"
+        ],
+        "source_uses": [
+          "Tong Chapter 2 §§3.1.1–3.1.2",
+          "Powers §4.4.5.2"
+        ],
+        "argument_disposition": "Complete local argument: change variables along the material motion, differentiate with Jacobi’s formula, apply the divergence theorem to traction, then use inverse images of small balls and continuity to localize. The unforced equation in the incompressible definition is expressly not used; body force comes from the adopted material balance."
+      },
+      {
+        "id": "pthm-fd-wall-mechanical-power-balance",
+        "claim": "Derive bounded-wall and periodic-channel mechanical power identities for the stated smooth incompressible Newtonian model; bounded stationary homogeneous uniqueness is conditional on the current S06 supplier.",
+        "deps": [
+          "post-fd-continuum-balances",
+          "post-fd-newtonian-fourier",
+          "post-fd-boundary-data",
+          "post-fd-navier-slip-wall-law",
+          "def-fd-incompressible-newtonian-model",
+          "def-fd-smooth-wall-exterior-solution-domains",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice",
+          "thm-fd-smooth-wall-energy-uniqueness",
+          "pthm-fd-local-momentum-balance-from-continuum"
+        ],
+        "source_uses": [
+          "Tong Chapter 2 §§3.1.1–3.1.2, 3.2.1–3.2.3",
+          "Powers §4.4.5.2 and §5.4.1",
+          "Chen–Qian arXiv:0901.0147v1 §§1–2"
+        ],
+        "argument_disposition": "Kinetic work, both boundary identities and bounded stationary uniqueness are fully supported. The current S06 statement, complete integrating-factor Gronwall proof and Step-1 readiness record match the exact uniqueness clause."
+      },
+      {
+        "id": "pthm-fd-linear-acoustic-model-prediction",
+        "claim": "Differentiate the positive-density barotropic equations at a uniform rest state, rescale to the normalized periodic system, and derive global smooth tangent evolution, energy conservation and dispersion.",
+        "deps": [
+          "def-fd-barotropic-euler-model",
+          "thm-fd-global-linear-acoustics",
+          "def-countable-choice"
+        ],
+        "source_uses": [
+          "Tong Chapter 3 §4.4.4",
+          "Golse Chapter 3 §§2.3 and 7.1.2"
+        ],
+        "argument_disposition": "Complete conditional deduction. The actual current positive-density barotropic definition and ready periodic mathematical theorem match; there is no finite-amplitude error claim."
+      },
+      {
+        "id": "ex-fd-adopted-poiseuille-couette",
+        "claim": "Verify exact no-slip Poiseuille and Couette channel profiles, their fluxes, vorticities and matching body/wall power with viscous dissipation.",
+        "deps": [
+          "pthm-fd-wall-mechanical-power-balance",
+          "def-countable-choice"
+        ],
+        "source_uses": [
+          "Tong Chapter 2 §§3.2.2–3.2.3",
+          "Powers §5.4.1"
+        ],
+        "argument_disposition": "Complete direct substitution and integration; the current wall-power supplier and all of its required current prerequisites are ready."
+      }
+    ],
+    "unresolved_prerequisites": [],
+    "dropped_sources": []
+  }
+}

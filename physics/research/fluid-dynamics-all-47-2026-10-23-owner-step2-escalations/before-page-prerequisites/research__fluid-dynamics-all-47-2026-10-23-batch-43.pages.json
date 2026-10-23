@@ -1,0 +1,133 @@
+[
+  {
+    "order": 691,
+    "id": "fd-rom01",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Solenoidal reduced dynamics",
+    "companion": "fd-rom01-examples",
+    "requires": [
+      "fd-s01",
+      "picard-lindelof-and-first-order-odes"
+    ],
+    "items": [
+      {
+        "id": "def-fd-solenoidal-reduced-ode",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite solenoidal Galerkin coefficient dynamics",
+        "reference": "items/def-fd-solenoidal-reduced-ode.md",
+        "design_state": "Step 1 complete draft; readiness conditional on the current Fourier supplier Step 1 record.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-periodic-fourier-sobolev-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-periodic-fourier-sobolev-spaces": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice: for every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets there is a function $f$ on $\\mathbb N$ such that $f(n)\\in X_n$. For $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure $d\\mu=(2\\pi)^{-d}dx$. For $k\\in\\mathbb Z^d$ define $e_k:Q_d\\to\\mathbb C$ by $e_k([x])=e^{ik\\cdot x}$; this is independent of the representative since $e^{2\\pi i k\\cdot n}=1$ for $n\\in\\mathbb Z^d$. For an integer $N\\ge1$ and a Borel-measurable map $q:Q_d\\to\\mathbb R^N$ with $\\int_{Q_d}|q(x)|\\,d\\mu(x)<\\infty$ in the Euclidean norm, considered up to equality $\\mu$-almost everywhere, define its componentwise Fourier coefficients by $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$; this integral is finite componentwise because $|e_k(x)|=1$. The supplied space $H^0(Q_d;\\mathbb R^N)$ is the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^0}^2=\\sum_{k\\in\\mathbb Z^d}|\\widehat q(k)|^2$, identified with its unique $L^2$ representative; real classes satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. For vector fields with these representatives, set $\\langle v,w\\rangle_2=\\int_{Q_d}v\\cdot w\\,d\\mu$. For an integer $r\\ge1$, an admissible finite solenoidal family consists of classes $v_1,\\ldots,v_r\\in H^0(Q_d;\\mathbb R^d)$ whose representatives are smooth $2\\pi$-periodic fields satisfying $\\operatorname{div}v_i=\\sum_{m=1}^d\\partial_{x_m}v_i^m=0$ and $\\langle v_i,v_j\\rangle_2=\\delta_{ij}$, where $\\delta_{ij}=1$ if $i=j$ and $0$ otherwise. Given such a family, a parameter $\\nu\\ge0$, and a coefficient vector $a=(a_1,\\ldots,a_r)\\in\\mathbb R^r$, put $u_a=\\sum_{i=1}^r a_i v_i$ and define\n\n$$A_{ij}=\\int_{Q_d}\\sum_{\\ell,m=1}^d(\\partial_{x_m}v_j^\\ell)(\\partial_{x_m}v_i^\\ell)\\,d\\mu,\\qquad c_{ijk}=\\int_{Q_d}\\sum_{\\ell,m=1}^d v_j^m(\\partial_{x_m}v_k^\\ell)v_i^\\ell\\,d\\mu.$$\n\nThe unforced finite solenoidal Galerkin coefficient dynamics is the initial-value system for $a:[0,T)\\to\\mathbb R^r$,\n\n$$a_i'(t)+\\sum_{j,k=1}^r c_{ijk}a_j(t)a_k(t)+\\nu\\sum_{j=1}^r A_{ij}a_j(t)=0,\\qquad a_i(0)=a_i^0,\\quad i=1,\\ldots,r,$$\n\nwhere $T\\in(0,\\infty]$ is the right endpoint of the interval on which a solution is defined and $a^0\\in\\mathbb R^r$ is the initial coefficient vector. A solution on $[0,T)$ is continuous on $[0,T)$ and continuously differentiable on $(0,T)$, has a right derivative at $0$, and its derivative extends continuously to $0$ with that value; the ODE holds for $0<t<T$ and at $t=0$ using this right derivative. When $T<\\infty$, no value or derivative at $T$ is required because $T$ is excluded; when $T=\\infty$, no endpoint condition is imposed at infinity. The displayed integrals are finite because their integrands are smooth on the compact torus. This is a finite-dimensional polynomial ODE; this definition asserts no convergence to a solution of the infinite-dimensional PDE.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Wiedemann, Lecture Notes: Navier-Stokes Equations, edited by Jack Skipper, Universität Ulm, Winter 2018/19",
+              "url": "https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf"
+            },
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2019, Stanford University",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/STANFORD/STANF256B-19/notes-256B-19.pdf"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "thm-fd-reduced-ode-global-energy",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Skew reduced convection and global finite dynamics",
+        "reference": "items/thm-fd-reduced-ode-global-energy.md",
+        "design_state": "Step 1 complete draft; readiness conditional on the current Fourier supplier Step 1 record.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-solenoidal-reduced-ode",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-euclidean-space-complete"
+        ],
+        "dependency_roles": {
+          "def-fd-solenoidal-reduced-ode": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice, meaning every sequence of nonempty sets admits a choice function. Let $d\\in\\{1,2,3\\}$, $r\\in\\mathbb N$ with $r\\ge1$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with probability measure $d\\mu=(2\\pi)^{-d}dx$. In the supplied Fourier-Sobolev convention, $H^0(Q_d;\\mathbb R^d)$ is the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^0}^2=\\sum_{k\\in\\mathbb Z^d}|\\widehat q(k)|^2$, with unique $L^2$ representatives and conjugate-symmetric coefficients for real classes. Let $v_1,\\ldots,v_r\\in H^0(Q_d;\\mathbb R^d)$ have smooth $2\\pi$-periodic representatives satisfying $\\operatorname{div}v_i=0$ and $\\int_{Q_d}v_i\\cdot v_j\\,d\\mu=\\delta_{ij}$. Fix $\\nu\\ge0$ and $a^0\\in\\mathbb R^r$, set $u_a=\\sum_i a_i v_i$, and define\n\n$$A_{ij}=\\int_{Q_d}\\nabla v_j:\\nabla v_i\\,d\\mu,\\qquad c_{ijk}=\\int_{Q_d}((v_j\\cdot\\nabla)v_k)\\cdot v_i\\,d\\mu,$$\n\nwhere $\\nabla v_j:\\nabla v_i=\\sum_{\\ell,m=1}^d(\\partial_{x_m}v_j^\\ell)(\\partial_{x_m}v_i^\\ell)$ and $((v_j\\cdot\\nabla)v_k)^\\ell=\\sum_{m=1}^d v_j^m\\partial_{x_m}v_k^\\ell$. Consider the coefficient initial-value system\n\n$$a_i'(t)+\\sum_{j,k=1}^r c_{ijk}a_j(t)a_k(t)+\\nu\\sum_{j=1}^r A_{ij}a_j(t)=0,\\qquad a_i(0)=a_i^0,\\quad i=1,\\ldots,r.$$\n\nThere is exactly one solution $a\\in C^1([0,\\infty),\\mathbb R^r)$ of this system. For every $t\\ge0$, it satisfies\n\n$$\\frac12\\frac{d}{dt}|a(t)|^2+\\nu\\int_{Q_d}|\\nabla u_{a(t)}|^2\\,d\\mu=0,$$\n\n$$|a(t)|^2+2\\nu\\int_0^t\\int_{Q_d}|\\nabla u_{a(s)}|^2\\,d\\mu\\,ds=|a^0|^2.$$\n\nThis is a global result for the specified finite coefficient ODE only; it asserts no convergence to, existence of, or uniqueness for a solution of the infinite-dimensional Navier–Stokes equations. The Countable Choice assumption is inherited from the periodic Fourier-Sobolev framework; the finite-dimensional proof makes no further choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Wiedemann, Lecture Notes: Navier-Stokes Equations, edited by Jack Skipper, Universität Ulm, Winter 2018/19",
+              "url": "https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf"
+            },
+            {
+              "title": "Lenya Ryzhik, Lecture Notes for Math 256B, Version 2019, Stanford University",
+              "url": "https://virtualmath1.stanford.edu/~ryzhik/STANFORD/STANF256B-19/notes-256B-19.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "contradiction"
+      }
+    ]
+  },
+  {
+    "order": 692,
+    "id": "fd-rom01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Solenoidal reduced dynamics — Examples",
+    "companion": "fd-rom01",
+    "requires": [
+      "fd-rom01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-single-shear-reduced-model",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "One shear mode reduced evolution",
+        "reference": "items/ex-fd-single-shear-reduced-model.md",
+        "design_state": "Step 1 complete draft; readiness conditional on the current Fourier supplier Step 1 record.",
+        "dependency_level": 3,
+        "deps": [
+          "thm-fd-reduced-ode-global-energy"
+        ],
+        "dependency_roles": {
+          "thm-fd-reduced-ode-global-energy": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice, meaning every sequence of nonempty sets admits a choice function. On $Q_2=\\mathbb R^2/(2\\pi\\mathbb Z)^2$ with normalized measure $d\\mu=(2\\pi)^{-2}dx_1dx_2$, take the single vector field $v_1(x_1,x_2)=\\sqrt2\\sin(x_2)e_1$, where $e_1=(1,0)$. This finite real trigonometric polynomial belongs to $H^0(Q_2;\\mathbb R^2)$ and has its displayed smooth periodic representative. For every $\\nu\\ge0$ and $a_0\\in\\mathbb R$, the one-mode reduced velocity $u(t,x)=a(t)v_1(x)$ has coefficient equation $a'(t)+\\nu a(t)=0$ and unique forward solution $a(t)=a_0e^{-\\nu t}$ for $t\\ge0$. Its reduced energy $E(t)=\\frac12 a(t)^2$ satisfies $E'(t)=-\\nu\\int_{Q_2}|\\nabla u(t,x)|^2\\,d\\mu$. This is an exact finite-mode calculation and asserts no convergence or approximation error for the full partial differential equation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {},
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

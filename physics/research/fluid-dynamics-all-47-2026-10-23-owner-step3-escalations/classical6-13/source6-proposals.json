@@ -1,0 +1,85 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "cycle": 1,
+  "proposals": [
+    {
+      "id": "thm-fd-x06",
+      "batch": 6,
+      "status": "proposal only; do not apply until native alpha6 drains and root releases",
+      "old_step": "4.1 For $\\Phi(\\theta,\\varphi)=a(\\sin\\theta\\cos\\varphi,\\sin\\theta\\sin\\varphi,\\cos\\theta)$, $0\\le\\theta\\le\\pi$, $0\\le\\varphi\\le2\\pi$, direct differentiation gives $|\\Phi_\\theta\\times\\Phi_\\varphi|=a^2\\sin\\theta$. The poles and seam contribute zero to the surface integral, so $\\operatorname{area}(S_a)=a^2\\int_0^{2\\pi}\\int_0^\\pi\\sin\\theta\\,d\\theta\\,d\\varphi=4\\pi a^2$. The parameter change $(\\theta,\\varphi)\\mapsto(\\pi-\\theta,\\varphi+\\pi\\bmod2\\pi)$ preserves this density and induces the antipodal map. Thus the antipodal map $n\\mapsto-n$ preserves spherical area and reverses $n$, so $\\int_{S_a}n\\,dS=0$. Integrating the expression in step 3.1 and using $\\operatorname{area}(S_a)=4\\pi a^2$ gives $\\int_{S_a}\\sigma n\\,dS=(3\\mu/(2a))4\\pi a^2U=6\\pi\\mu aU$. [step 3.1, algebra]",
+      "proposed_step": "4.1 For any radius $a>0$, parameterize the sphere by $\\Phi_a(\\theta,\\varphi)=a(\\sin\\theta\\cos\\varphi,\\sin\\theta\\sin\\varphi,\\cos\\theta)$ on $[0,\\pi]\\times[0,2\\pi]$, using the admitted seam and pole boundary convention. Its parameter tangents have Gram coefficients $E=a^2$, $F=0$ and $G=a^2\\sin^2\\theta$, so the area density is $\\sqrt{EG-F^2}=a^2\\sin\\theta$. The parameter boundary contributes zero to these integrals. Thus $\\operatorname{Area}(S_a)=\\int_0^{2\\pi}\\int_0^\\pi a^2\\sin\\theta\\,d\\theta\\,d\\varphi=4\\pi a^2$. The antipodal parameter map is $(\\theta,\\varphi)\\mapsto(\\pi-\\theta,\\varphi+\\pi\\ {\\rm mod}\\ 2\\pi)$: split the longitude interval at $\\pi$ so each part is an ordinary affine substitution. It has absolute Jacobian one, sends $\\Phi_a$ to $-\\Phi_a$, and preserves $a^2\\sin\\theta\\,d\\theta\\,d\\varphi$ because $\\sin(\\pi-\\theta)=\\sin\\theta$. Hence $n$ changes sign under an area-preserving substitution and $\\int_{S_a}n\\,dS=0$. Integrating the stress in step 3.1 gives $\\int_{S_a}\\sigma n\\,dS=(3\\mu/(2a))4\\pi a^2U=6\\pi\\mu aU$. [F3, F4, step 3.1, construct, algebra]",
+      "facts_to_add": [
+        {
+          "label": "F3",
+          "supplier": "def-first-fundamental-form-and-surface-area-density",
+          "role": "mathematical-premise",
+          "source_section": "Definition",
+          "exact_source_excerpt": "The surface area density is $J_\\varphi=\\sqrt{\\det G_\\varphi}$, where $G_\\varphi$ is the Gram matrix of $\\varphi_u$ and $\\varphi_v$.",
+          "proposed_fact": "[F3] [[def-first-fundamental-form-and-surface-area-density]]: the area density is the square root of the determinant of the Gram matrix of the two parameter tangents."
+        },
+        {
+          "label": "F4",
+          "supplier": "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "role": "mathematical-premise",
+          "source_section": "Definition",
+          "exact_source_excerpt": "For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.",
+          "proposed_fact": "[F4] [[def-surface-area-and-scalar-surface-integral-of-a-patch]]: integrate a continuous scalar field against the chart density on the parameter region; area is the integral of that density, and content-zero parameter boundaries do not change the value."
+        }
+      ],
+      "root_metadata_proposal": {
+        "deps_append": [
+          "def-first-fundamental-form-and-surface-area-density",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch"
+        ],
+        "dependency_roles_add": {
+          "def-first-fundamental-form-and-surface-area-density": "mathematical-premise",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch": "mathematical-premise"
+        }
+      },
+      "reason": "The current result is sound, but the local proof assumes the chart-area evaluation/invariance without doing its density computation. The explicit Gram coefficients, sphere-area integral and split antipodal parameter substitution close exactly that omission without changing the public claim.",
+      "downstream_step_proposal": {
+        "old": "5.1 On $r=R$ the integrand in step 2.2 is $O(R^{-3})$ and the area is $4\\pi R^2$, so its integral tends to zero as $R\\to\\infty$. The left side is nonnegative and nondecreasing in $R$; since it equals a quantity tending to zero, it is zero for every $R>a$. Continuity then gives $\\nabla w=0$ throughout the connected exterior, so $w$ is constant there; its far-field limit is zero, hence $w=0$. The equation now gives $\\nabla q=0$, so $q$ is constant, and its zero far-field limit gives $q=0$. [step 2.2, algebra] \u220e",
+        "new": "5.1 On $r=R$ the integrand in step 2.2 is $O(R^{-3})$ and the area is $4\\pi R^2$, so its integral tends to zero as $R\\to\\infty$. The left side is nonnegative and nondecreasing in $R$; since it equals a quantity tending to zero, it is zero for every $R>a$. Continuity then gives $\\nabla w=0$ throughout the connected exterior, so $w$ is constant there; its far-field limit is zero, hence $w=0$. The equation now gives $\\nabla q=0$, so $q$ is constant, and its zero far-field limit gives $q=0$. [step 2.2, step 4.1, algebra] \u220e",
+        "reason": "The uniqueness outer-boundary O(R squared) area estimate uses the sphere-area formula derived in step 4.1 with radius R."
+      }
+    },
+    {
+      "id": "thm-fd-x13",
+      "batch": 6,
+      "status": "proposal only; do not apply until native alpha6 drains and root releases",
+      "old_step": "3.1 On the sphere, $u=(3/2)U_t$ with $U_t=U-(U\\cdot n)n$, so $|u|^2=(9/4)(|U|^2-(U\\cdot n)^2)$. Thus $p|_{r=a}$ depends on $n$ only through $(U\\cdot n)^2$ and is unchanged by $n\\mapsto-n$. The antipodal map preserves spherical area and reverses $n$, so the vector integrand $p n$ has zero integral over the sphere. By the stress convention in [F2], $\\int_{|x|=a}\\sigma_En\\,dS=-\\int_{|x|=a}pn\\,dS=0$. [given, F2, step 1.1, algebra] \u220e",
+      "proposed_step": "3.1 On the sphere, $u=(3/2)U_t$ with $U_t=U-(U\\cdot n)n$, so $|u|^2=(9/4)(|U|^2-(U\\cdot n)^2)$. Thus $p|_{r=a}$ depends on $n$ only through $(U\\cdot n)^2$ and is unchanged by $n\\mapsto-n$. For any radius $a>0$, parameterize the sphere by $\\Phi_a(\\theta,\\varphi)=a(\\sin\\theta\\cos\\varphi,\\sin\\theta\\sin\\varphi,\\cos\\theta)$ on $[0,\\pi]\\times[0,2\\pi]$, using the admitted seam and pole boundary convention. Its parameter tangents have Gram coefficients $E=a^2$, $F=0$ and $G=a^2\\sin^2\\theta$, so the area density is $\\sqrt{EG-F^2}=a^2\\sin\\theta$. The parameter boundary contributes zero to these integrals. Thus $\\operatorname{Area}(S_a)=\\int_0^{2\\pi}\\int_0^\\pi a^2\\sin\\theta\\,d\\theta\\,d\\varphi=4\\pi a^2$. The antipodal parameter map is $(\\theta,\\varphi)\\mapsto(\\pi-\\theta,\\varphi+\\pi\\ {\\rm mod}\\ 2\\pi)$: split the longitude interval at $\\pi$ so each part is an ordinary affine substitution. It has absolute Jacobian one, sends $\\Phi_a$ to $-\\Phi_a$, and preserves $a^2\\sin\\theta\\,d\\theta\\,d\\varphi$ because $\\sin(\\pi-\\theta)=\\sin\\theta$. Under this substitution $p$ is unchanged and $n$ reverses, hence $\\int_{S_a}pn\\,dS$ equals its own negative and is zero. By [F2], the formal resultant is $\\int_{S_a}\\sigma_E n\\,dS=-\\int_{S_a}pn\\,dS=0$. [given, F2, F4, F5, step 1.1, construct, algebra] \u220e",
+      "facts_to_add": [
+        {
+          "label": "F4",
+          "supplier": "def-first-fundamental-form-and-surface-area-density",
+          "role": "mathematical-premise",
+          "source_section": "Definition",
+          "exact_source_excerpt": "The surface area density is $J_\\varphi=\\sqrt{\\det G_\\varphi}$, where $G_\\varphi$ is the Gram matrix of $\\varphi_u$ and $\\varphi_v$.",
+          "proposed_fact": "[F4] [[def-first-fundamental-form-and-surface-area-density]]: the area density is the square root of the determinant of the Gram matrix of the two parameter tangents."
+        },
+        {
+          "label": "F5",
+          "supplier": "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "role": "mathematical-premise",
+          "source_section": "Definition",
+          "exact_source_excerpt": "For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.",
+          "proposed_fact": "[F5] [[def-surface-area-and-scalar-surface-integral-of-a-patch]]: integrate a continuous scalar field against the chart density on the parameter region; area is the integral of that density, and content-zero parameter boundaries do not change the value."
+        }
+      ],
+      "root_metadata_proposal": {
+        "deps_append": [
+          "def-first-fundamental-form-and-surface-area-density",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch"
+        ],
+        "dependency_roles_add": {
+          "def-first-fundamental-form-and-surface-area-density": "mathematical-premise",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch": "mathematical-premise"
+        }
+      },
+      "reason": "The current result is sound, but the local proof assumes the chart-area evaluation/invariance without doing its density computation. The explicit Gram coefficients, sphere-area integral and split antipodal parameter substitution close exactly that omission without changing the public claim."
+    }
+  ],
+  "scope_limit": "No live source6, contract or metadata writes. Body proofs proposed from archived actual current sources; root/native writer must compare against current source again after drain.",
+  "source_reading_limits": "Read the complete current local source arguments and the two cited published Definition sections; no published supplier body was altered, and no external source full text reading is claimed."
+}

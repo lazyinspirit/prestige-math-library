@@ -1,0 +1,89 @@
+# Batch 2 — authoring and source evidence
+
+Run: `fluid-dynamics-all-47-2026-10-23`  
+Pair: `fd-mf01`  
+Output manifest: `research/fluid-dynamics-all-47-2026-10-23-batch-2.pages.json`
+
+## Current authority and design comparison
+
+- Read `research/fluid-dynamics-all-47-2026-10-23-owner-authoring-direction.md`. It confirms that the current controlling fluid design is `research/plan-fluid-dynamics-refresh-track.md` and preserves the user's assigned scope: batch 2, pair `fd-mf01`.
+- The controlling design section at `research/plan-fluid-dynamics-refresh-track.md` L53–79 reserves A `fd-mf01`, B `fd-mf01-examples`, category/library `fluid-dynamics-mathematics` / `mathematics`, order 363, the three page prerequisites, and the A/B item roles: `def-fd-smooth-motion`, `lem-fd-transport-and-density`, `lem-fd-observer-calculus`, and `ex-fdmath-dilation-jacobian` on B.
+- The historical section at `research/plan-fluid-dynamics-track.md` L41–69 has the same reservation, but explicitly predates the owner refresh. The refresh says it supersedes conflicting historical fluid design; it controls even where the reservations happen to agree.
+- The `fd-mf01` rows in `research/plan-spec.json` (A at order 363; B at 364) agree on identity, title, category, library, companion and the exact three page prerequisites. Their `items: []` arrays are the pre-authoring inventory, not a conflicting content decision. The pair-specific row in `research/fluid-dynamics-all-47-2026-10-23-drift-evidence.json` has `declaredRequires` equal to `closure`; the drift owner frontier assigns the page to batch 2 and contains no pair-specific correction.
+- The refreshed source inventory is `research/scaffold-refresh-2026-10-18/fluid-dynamics/proposed-inventory.json`; its four pair records give the claim scopes and proof-module locators. Read F00, F01, F02 and F10 in `research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/foundations/foundation-proofs.md` and the exact supplier review in `research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/foundations/supplier-reading.md`.
+
+## Inventory and levels
+
+The run dependency-level file gives batch 2 level 0 with no in-run batch prerequisites. Planned item edges are supplier-first: `def-fd-smooth-motion` level 0; `lem-fd-transport-and-density` and `lem-fd-observer-calculus` level 1; `ex-fdmath-dilation-jacobian` level 2. The B page depends on A within this pair. All mathematical suppliers are outside the current 47-batch run; the batch-2 cross-batch dependency array is therefore empty.
+
+The transport proof uses the inverse function theorem, chain rule, determinant permutation polynomial, compact-Jordan image and integrability results, change of variables, Jordan-integral definition/well-definedness, integral properties, the mean-value inequality and zero-derivative constancy. The image theorem `thm-injective-c-one-images-of-compact-jordan-sets-are-jordan` is an explicit direct dependency: change of variables over $\chi_t(K)$ needs the image to be compact Jordan, and the theorem's full proof verifies this under the same injective $C^1$ and invertible-derivative hypotheses. Its source hash is pinned in `research/math-imports.json` and it belongs to the planned change-of-variables page closure. These item-level additions leave the planned page-level `requires` unchanged. The Jacobian evolution is proved by differentiating the finite Leibniz formula column by column, without importing a determinant-differential result.
+
+## Source searches and dispositions
+
+Two independent full-text treatments were read for this A page. The listed passages, not whole-book reading, are the claimed reading extent. `source-fetch-check --stamp` evidence is in `research/fluid-dynamics-all-47-2026-10-23-batch-2.coverage.json`.
+
+1. R. Abeyaratne, *Continuum Mechanics*, Vol. II, MIT (1988, revised 2020), `https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf`. Read Chapter 3 §§3.1–3.4, §3.7 and §3.8 (printed pp. 64–71, 86–91): motion and inverse labels; velocity gradient, stretching/spin and volume-rate formulas; volume transport derivation; observer transformations and tensor transformation law. Supports `def-fd-smooth-motion`, `lem-fd-transport-and-density`, `lem-fd-observer-calculus` and the dilation calculation. Disposition: `included`. Scope limit: source uses compact material regions and gives continuum-kinematics motivation; the local proof supplies the exact C² inverse bootstrap, compact-Jordan Riemann hypotheses, and uniform fixed-domain differentiation.
+2. James F. Price, *Lagrangian and Eulerian Representations of Fluid Flow, Part 1: Kinematics and the Equations of Motion*, MIT OpenCourseWare RES.12-001 (revised August 2023), active full-text URL `https://ocw.mit.edu/courses/res-12-001-topics-in-fluid-dynamics-fall-2024/mitres_12_001_f24_essay1_pt1.pdf`. Read §§1.2.1–1.2.2, 3.2, 3.3 and 3.4.1 (printed pp. 9–11, 36–40): material labels and Eulerian fields; the chain-rule material derivative; moving-volume/Jacobian transport; localization to the continuity equation. Supports `def-fd-smooth-motion` and `lem-fd-transport-and-density`. Disposition: `included`. Scope limit: its 3D transport step is presented as a generalization and its mass-conservation premise is physical; neither is used as the local mathematical proof or as a postulate.
+
+Retrieval history: the Fall 2023 PDF path `https://ocw.mit.edu/courses/res-12-001-topics-in-fluid-dynamics-fall-2023/mitres_12_001_f23_essay1_pt1.pdf` returned HTTP 404 on the fetch check's initial request plus five retries. Search located the official Fall 2024 course copy of the same August 2023 essay; the complete cited passages were opened at that active URL. The failed URL and all six attempts remain in the coverage record with a certain URL-drop disposition and complete per-item local alternative arguments. The source document and its mathematical coverage remain included through the active URL.
+
+Searches also returned the UPC *Continuum Mechanics for Engineers* PDF, IIT Delhi continuum-mechanics lecture index, Chalmers mechanics-of-solids-and-fluids notes, and David Tong's *Fluid Mechanics* PDF. These were not selected or cited because the two sources above supply the required independent coverage. The web PDF viewer could not open the UPC/Tong large files and returned an internal error for Chalmers; those candidates supply no premise and are not dropped required sources.
+
+## Item checkpoints
+
+Authoring proceeds supplier-first. After each item is complete, append its exact claim, conventions, dependencies, source locators, validation status, unresolved obligations and next action here. Final scoped check outputs are appended after all edits.
+
+### `def-fd-smooth-motion` — completed draft
+
+- Claim: defines a $C^2$ orientation-preserving diffeomorphic family on a neighborhood of a bounded $C^1$ reference region; constructs the joint inverse labels and Eulerian velocity, material derivative, velocity-gradient decomposition, volume-rate scalar, deviatoric rate, pathlines and frozen-time streamlines. No units or physical balances are adopted. The joint inverse is proved $C^1$ in the definition's well-definedness paragraph by the block-triangular Jacobian, the Euclidean inverse theorem, injectivity and patching.
+- Source paths/URLs: refresh inventory `research/scaffold-refresh-2026-10-18/fluid-dynamics/proposed-inventory.json`; Abeyaratne PDF `https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf`, Ch. 3 §§3.1–3.3, printed pp. 64–68; Price MIT OCW Fall 2024 PDF `https://ocw.mit.edu/courses/res-12-001-topics-in-fluid-dynamics-fall-2024/mitres_12_001_f24_essay1_pt1.pdf`, §§1.2.1–1.2.2, printed pp. 9–11.
+- Dependencies: `thm-euclidean-inverse-function-theorem` (mathematical premise; external published supplier). In-run level 0. Decision: no unresolved prerequisite.
+- Validation: precheck not applicable for this definition; rendercheck, content-policy, scoped depcheck, strict proof-contract, and proof-layout all pass. The identity-motion and boundary contracts are present. Step-1 readiness is recorded as `ready`; the current record is `research/fluid-dynamics-all-47-2026-10-23-step1-def-fd-smooth-motion.json` for this item.
+- Next action: no further batch-2 authoring action; later independent review gates determine acceptance and publication.
+
+### `lem-fd-transport-and-density` — completed draft
+
+- Claim: upgrades the joint inverse label map to $C^2$; proves $\dot F=LF$, $\dot J=J\theta$ and the exponential Jacobian formula; proves the compact-Jordan change-of-variables and material transport identities; establishes the exact equivalence among the pointwise continuity equation, constant mass integrals over every compact Jordan material subregion, and invariance of $\rho J$. The scalar $\rho$ is only a $C^1$ mathematical field; there is no positivity, weak/vacuum, or physical mass postulate.
+- Conventions: open time interval containing reference time $0$; orientation-preserving $C^2$ slice diffeomorphisms; general $J(0,a)$ (no assumption $\chi_0=\mathrm{id}$); Riemann integrals on compact Jordan sets by zero extension; all field identities are classical and pointwise.
+- Dependencies: local `def-fd-smooth-motion`; external pinned mathematics `thm-euclidean-inverse-function-theorem`, `thm-chain-rule-for-total-derivatives`, `cor-determinant-is-a-polynomial-in-the-matrix-entries`, `thm-change-of-variables-for-compact-jordan-sets`, `thm-injective-c-one-images-of-compact-jordan-sets-are-jordan`, `thm-continuous-functions-on-compact-jordan-sets-are-integrable`, `def-riemann-integral-over-a-jordan-set`, `lem-jordan-set-integral-well-defined`, `thm-multidimensional-integral-properties`, `thm-mean-value-inequality-for-total-derivatives`, and `cor-zero-total-derivative-on-a-convex-open-set-is-constant`. All are pinned in `research/math-imports.json` and belong to the three planned page prerequisites; no page-level prerequisite changed. In-run level 1.
+- Sources/locators: Abeyaratne, Volume II §§3.4.3 and 3.7, printed pp. 71–72 and 86–88; Price MIT OCW Fall 2024 §§3.2–3.4.1, printed pp. 36–40. Both provide source context; the item supplies its own C² inverse bootstrap, determinant multilinearity, uniform differentiation-under-integral proof, and both directions of localization.
+- Decision: the compact-Jordan image prerequisite is now explicit and its published proof was checked against this use. All direct and transitive mathematical suppliers are current; no unresolved proof gap remains. Final precheck, rendercheck, content-policy, scoped depcheck, strict proof-contract, and proof-layout pass. Step-1 readiness is recorded as `ready`; the current record is `research/fluid-dynamics-all-47-2026-10-23-step1-lem-fd-transport-and-density.json` for this item.
+- Next action: no further batch-2 authoring action; later independent review gates determine acceptance and publication.
+
+### `lem-fd-observer-calculus` — completed draft
+
+- Claim: for $x^*=Q(t)x+c(t)$ with $Q\in C^2(I,SO(3))$ and $c\in C^2$, derives the transformed velocity gradient, stretching/spin split, invariant divergence, objective symmetric rate tensor, and acceleration terms $2Q'u+Q''x+c''$. Time is fixed; the transformation is not called an inertial frame, and the result is purely kinematic.
+- Sources/locator: Abeyaratne, *Continuum Mechanics*, Volume II, §3.8, printed pp. 89–91; URL `https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf`.
+- Dependencies: `def-fd-smooth-motion`, `thm-chain-rule-for-total-derivatives`; both are mathematical premises. In-run level 1.
+- Decision: complete conditional kinematic calculation; no physical balance, constitutive assumption, or empirical claim. Precheck, rendercheck, content-policy, scoped depcheck, strict proof-contract, and proof-layout pass. Step-1 readiness is recorded as `ready`; the current record is `research/fluid-dynamics-all-47-2026-10-23-step1-lem-fd-observer-calculus.json` for this item.
+- Next action: no further batch-2 authoring action; later independent review gates determine acceptance and publication.
+
+### `ex-fdmath-dilation-jacobian` — completed draft
+
+- Claim: for $\chi(t,a)=\alpha(t)a$ with positive $C^2$ $\alpha$ and $\alpha(0)=1$, computes $F=\alpha I_3$, $J=\alpha^3$, $u=(\alpha'/\alpha)x$, $\theta=3\alpha'/\alpha$, and the scalar field $\rho(t,x)=\alpha^{-3}\rho_0(x/\alpha)$ with $\rho(t,\chi)J=\rho_0$. The example is mathematical and makes no physical or empirical claim.
+- Conventions: three-dimensional Euclidean labels and positions; no assumption that a density is strictly positive; the initial map is the identity due to $\alpha(0)=1$.
+- Source/locator: Abeyaratne, Volume II §3.4.3, printed pp. 71–72; URL `https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf`.
+- Dependency: `lem-fd-transport-and-density`, mathematical premise. In-run level 2.
+- Decision: all required data and formula suppliers exist; no unresolved prerequisite. Precheck, rendercheck, content-policy, scoped depcheck, strict proof-contract, and proof-layout pass. Step-1 readiness is recorded as `ready`; the current record is `research/fluid-dynamics-all-47-2026-10-23-step1-ex-fdmath-dilation-jacobian.json` for this item.
+- Next action: no further batch-2 authoring action; later independent review gates determine acceptance and publication.
+
+## Outstanding scope notes
+
+- The existing `library/fluid-dynamics-mathematics/` contains the batch-1 pair but no `_category.md` or `_pathway.md`. Category introductions and pathway briefs remain broader owner/run obligations and are outside this pair's authorized writes; the assigned A/B pages remain YAML-frontmatter-only.
+- No missing prerequisite has been found. No supplier is awaited, and no item from another assigned pair will be authored here.
+
+## Source retrieval resolution
+
+- The 2023 MIT OCW PDF URL produced six recorded HTTP 404 attempts (one initial plus five retries). Search found the official Fall 2024 course PDF of the same August 2023 revised essay; the complete cited sections were inspected there. The failed URL is retained as a certain URL-level `dropped` record with complete per-item alternative arguments and dependency IDs in the coverage file; the essay's coverage remains active through the Fall 2024 URL.
+- `sourceResolutionErrors` from `tools/physics-support/source-resolution.mjs` returned no errors for the dropped URL record.
+- `node tools/physics-support/source-fetch-check.mjs --coverage research/fluid-dynamics-all-47-2026-10-23-batch-2.coverage.json --stamp` returned: `2/3 source(s) fetch-verified`, `3/3 source(s) resolved`, `1 documented drop`. Both active full-text PDFs were stamped; the dropped URL is not counted as a fetch stamp.
+
+
+## Final scoped checks and remaining run-level blockers
+
+- The final batch manifest has four items with dependency levels 0, 1, 1 and 2; the transport item has 12 mathematical dependencies, including the compact-Jordan image theorem. The A and B page bodies are empty and their inventories are 3 and 1. The cross-batch dependency file is the JSON array `[]` because this batch has no supplier edge into another batch.
+- Final checks: precheck returned 3 proof-bearing items pass and the definition not applicable (0 failures); proof-layout checked 4 items and 23 steps with 0 defects; rendercheck checked 6 files with 0 errors/warnings; content-policy checked 4 items with 0 errors/warnings; focused depcheck checked the four assigned items and both pages with 0 errors/warnings; strict proof-contract checked all 4 items with 0 errors/warnings.
+- Source checks: source-fetch-check reported 2/3 sources fetch-verified, 3/3 resolved and 1 documented URL drop; sourceResolutionErrors reported no errors. The dropped Fall 2023 URL retains the six recorded 404 attempts, search history, a current local alternative argument for each supported item, and the complete dependency IDs.
+- Run-wide `proof-contract-coverage` stops at the empty unassigned frontier inventory `fd-f03`; it cannot inspect only the authored contract scope. Run-wide `item-dependency-levels check` exits 1 due to 39 empty scaffold inventories and 17 stale dependency levels; none of its errors names an assigned batch-2 item, and there are no invalid item IDs. The empty unassigned pages are `fd-f03`, `fd-f03-examples`, `fd-px01`, `fd-px01-examples`, `fd-px02`, `fd-px02-examples`, `fd-px03`, `fd-px03-examples`, `fd-f04`, `fd-f04-examples`, `fd-s03`, `fd-s03-examples`, `fd-ps01`, `fd-ps01-examples`, `fd-ps02`, `fd-ps02-examples`, `fd-w02`, `fd-w02-examples`, `fd-k01`, `fd-k01-examples`, `fd-pn01`, `fd-pn01-examples`, `fd-pn02`, `fd-pn02-examples`, `fd-st03-examples`, `fd-pda01`, `fd-pda01-examples`, `fd-ples01`, `fd-ples01-examples`, `fd-pg01`, `fd-pg01-examples`, `fd-pmp01`, `fd-pmp01-examples`, `fd-l01`, `fd-l01-examples`, `fd-bl01`, `fd-bl01-examples`, `fd-pbl01`, and `fd-pbl01-examples`. The 17 stale-level items are `post-fd-boundary-data`, `pthm-fd-cauchy-momentum-angular`, `pthm-fd-control-volume-balances`, `pthm-fd-energy-decomposition`, `post-fd-weak-balances`, `pthm-fd-conservation-jump-laws`, `ex-fd-conduction-energy-entropy`, `cex-fd-vacuum-velocity-determination`, `post-fd-boltzmann-model`, `def-fd-physical-kinetic-observables`, `pthm-fd-boltzmann-entropy`, `pthm-fd-ideal-gas-euler-interface`, `post-fd-bgk-relaxation`, `pthm-fd-bgk-equilibration`, `texp-fd-bgk-preparation`, `def-fd-fluid-profile-bootstrap-interface`, and `prop-fd-profile-functional-bootstrap`. These run-wide results are recorded without changing unassigned work.
+- All four current Step-1 records have `decision: ready`, `owner: false`, and `step1Decision` reports each as closed with a current hash. No independent review or publication approval is implied.
+- The existing category directory still has no `_category.md` or `_pathway.md`; these broader run obligations are outside the assigned pair.

@@ -1,0 +1,247 @@
+[
+  {
+    "order": 661,
+    "id": "fd-n02",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Incompressible numerical observable and pressure errors",
+    "companion": "fd-n02-examples",
+    "requires": [
+      "energy-stable-incompressible-navier-stokes-discretization",
+      "countability-and-uncountability",
+      "mixed-finite-elements-and-stokes-stability",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "def-fd-mini-fluid-interface",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Smooth MINI observation interface",
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\in\\{2,3\\}$, let $D\\subset\\mathbb R^d$ be a nonempty bounded connected Lipschitz polygonal or polyhedral open set, let $T>0$ and $\\nu>0$, and let $\\mathcal T_h$ be a conforming shape-regular affine simplicial mesh of $D$. Let $0=t_0<t_1<\\cdots<t_N=T$ be a finite time partition with $\\tau_n=t_n-t_{n-1}>0$, and put $h=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$ and $\\tau_{\\max}=\\max_n\\tau_n$.\n\nWrite $V=H^1_0(D;\\mathbb R^d)$, $Q=L^2_0(D)=\\{q\\in L^2(D):\\int_Dq=0\\}$, and $V_\\sigma=\\{v\\in V:\\operatorname{div}v=0\\}$. Let $S^1_h$ be the continuous piecewise-affine scalar space on $\\mathcal T_h$. For each simplex $K$ with barycentric coordinates $\\lambda_{K,0},\\ldots,\\lambda_{K,d}$, set $b_K=(d+1)^{d+1}\\prod_{j=0}^d\\lambda_{K,j}$ on $K$ and extend $b_K$ by zero outside $K$. The conforming MINI spaces are\n$$V_h=[S^1_h\\cap H^1_0(D)]^d\\oplus\\bigoplus_{K\\in\\mathcal T_h}b_K\\mathbb R^d,\\qquad Q_h=S^1_h\\cap Q,$$\nand their weak divergence kernel is $Z_h=\\{v_h\\in V_h:b(v_h,q_h)=0\\text{ for every }q_h\\in Q_h\\}$. Let $P_{Z_h}$ denote the $L^2(D)^d$-orthogonal projection onto this finite-dimensional subspace.\n\nFor $v,w\\in V$, set $\\varepsilon(v)=(\\nabla v+\\nabla v^{\\mathsf T})/2$, $a_\\nu(v,w)=2\\nu\\int_D\\varepsilon(v):\\varepsilon(w)\\,dx$, and $b(v,q)=-\\int_Dq\\,\\operatorname{div}v\\,dx$. For $a,v,w\\in V$, use the real skew convective form\n$$c(a;v,w)=\\frac12\\int_D\\big((a\\cdot\\nabla)v\\cdot w-(a\\cdot\\nabla)w\\cdot v\\big)\\,dx.$$\nThus $c(a;v,w)=-c(a;w,v)$ and $c(a;v,v)=0$.\n\nA smooth MINI interface consists of a forcing $f\\in L^2(0,T;L^2(D)^d)$, an exact no-slip velocity-pressure pair $(u,p)$, and a mixed backward Euler MINI solution $(u_h^n,p_h^n)_{n=0}^N$ with the following conditions. The exact pair has $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$, $p\\in W^{1,\\infty}(0,T;H^1(D)\\cap Q)$, and satisfies\n$$(\\partial_tu(t),v)_{L^2}+a_\\nu(u(t),v)+c(u(t);u(t),v)+b(v,p(t))=(f(t),v)_{L^2},\\qquad b(u(t),q)=0$$\nfor every $v\\in V$, $q\\in Q$, and almost every $t\\in(0,T)$. The continuous representatives of $u$ and $p$ are used at the time nodes, and $u_0=u(0)$. The discrete initial value is $u_h^0=P_{Z_h}u_0$. With $f_h^n=\\tau_n^{-1}\\int_{t_{n-1}}^{t_n}f(t)\\,dt$, each $u_h^n\\in V_h$ and $p_h^n\\in Q_h$ satisfies\n$$\\left(\\frac{u_h^n-u_h^{n-1}}{\\tau_n},v_h\\right)_{L^2}+a_\\nu(u_h^n,v_h)+c(u_h^n;u_h^n,v_h)+b(v_h,p_h^n)=(f_h^n,v_h)_{L^2},\\qquad b(u_h^n,q_h)=0$$\nfor every $v_h\\in V_h$, $q_h\\in Q_h$, and $1\\le n\\le N$.\n\nFor a family of bounded real-linear velocity sensors $\\ell_n\\in V^*$, define the endpoint-sampled exact and discrete observations by\n$$\\mathcal O(\\ell;u)=\\sum_{n=1}^N\\tau_n\\ell_n(u(t_n)),\\qquad \\mathcal O_h(\\ell;u_h)=\\sum_{n=1}^N\\tau_n\\ell_n(u_h^n).$$\nDefine the accumulated exact and discrete pressures by $P(t)=\\int_0^tp(s)\\,ds\\in Q$ and $P_h^0=0$, $P_h^m=\\sum_{n=1}^m\\tau_np_h^n$. Let $\\bar p_h(t)=p_h^n$ on $(t_{n-1},t_n]$. For $\\xi\\in Q$ and $\\eta\\in C_c^\\infty(0,T)$, define the accumulated-pressure observation $(P(t_m)-P_h^m,\\xi)_{L^2}$ and the time-tested pressure observation $\\left(\\int_0^T(p(t)-\\bar p_h(t))\\eta(t)\\,dt,\\xi\\right)_{L^2}$. The latter is an integrated pressure functional; it is not a pointwise-in-time pressure value. This definition supplies inputs and observables only and asserts no error rate or solver-existence result.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces": "mathematical-premise",
+          "def-na-evolutionary-skew-convective-form": "mathematical-premise",
+          "def-na-mini-element-p1-bubble-p1-spaces": "mathematical-premise",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces": "mathematical-premise",
+          "def-na-mini-navier-stokes-backward-euler-scheme": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54: Stokes equations: Stable pairs (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "§54.2, Lemma 54.5 and Remark 54.6, printed pp. 410–413: the P1-bubble/P1 MINI spaces, their uniform inf-sup stability, and stationary Stokes approximation; these do not assert the evolutionary errors below."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§8.4.2 and §8.6.1, printed pp. 470–471 and 487–488: the two-dimensional MINI P1-bubble/P1 stability and stationary Stokes error context; no time-dependent pressure-observation estimate is imported."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "reference": "research/plan-fluid-dynamics-refresh-track.md#incompressible-numerical-observable-and-pressure-errors",
+        "library": "mathematics"
+      },
+      {
+        "id": "prop-fd-mini-observation-error",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Bounded velocity-observation error for the smooth MINI branch",
+        "statement": "Assume Countable Choice and a smooth MINI observation interface as specified by the interface definition on this page. In particular, let $D\\subset\\mathbb R^d$ be bounded, connected, Lipschitz and polygonal or polyhedral with $d\\in\\{2,3\\}$; use a shape-regular conforming affine simplicial mesh, viscosity $\\nu>0$, $f\\in L^2(0,T;L^2(D)^d)$, the mass-projected initial value, and any actual mixed backward Euler MINI solution. Suppose the exact no-slip solution has $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$ and $p\\in W^{1,\\infty}(0,T;H^1(D)\\cap L^2_0(D))$. Set\n$$M=1+\\|u\\|_{W^{1,\\infty}H^2}+\\|p\\|_{W^{1,\\infty}H^1},\\qquad H=hM+\\tau_{\\max}M^2,\\qquad M_u=\\|u\\|_{L^\\infty(0,T;V)},\\qquad \\Lambda=1+C_D\\nu^{-3}M_u^4.$$\nAssume $\\tau_{\\max}\\Lambda\\le\\tfrac12$. Let $M_\\infty$, $M_E$ and $C_*$ have exactly the values in the smooth MINI velocity-error estimate, namely\n$$M_\\infty=\\bigl(\\|u(0)\\|_2^2+C_P(D)^2\\nu^{-1}\\|f\\|_{L^2L^2}^2\\bigr)^{1/2},\\qquad M_E=\\nu^{-1/2}\\|u(0)\\|_2+C_P(D)\\nu^{-1}\\|f\\|_{L^2L^2},$$\n$$C_*=C_{D,\\mathrm{shape}}(1+\\nu)^2(1+\\nu^{-4})(1+T)^2(1+M_\\infty+M_E+M)^4\\exp(2T\\Lambda),$$\nwhere $C_D$ depends only on the domain, dimension and trilinear-form constant, and $C_{D,\\mathrm{shape}}$ is independent of $h$, the time steps and $\\nu$. No mesh/time coupling is imposed beyond the stated time-step restriction. For any sensors $\\ell_n\\in V^*$, define $\\|\\ell\\|_{\\ell^2_\\tau(V^*)}=(\\sum_{n=1}^N\\tau_n\\|\\ell_n\\|_{V^*}^2)^{1/2}$. Then the endpoint-sampled observations of the interface satisfy\n$$\\left|\\mathcal O_h(\\ell;u_h)-\\mathcal O(\\ell;u)\\right|\\le \\nu^{-1/2}C_*H\\,\\|\\ell\\|_{\\ell^2_\\tau(V^*)}.$$\nThis is a conditional bound for bounded linear velocity sensors on the smooth branch; it makes no Reynolds-uniform claim.",
+        "deps": [
+          "def-fd-mini-fluid-interface",
+          "thm-na-mini-be-smooth-velocity-error",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-mini-fluid-interface": "mathematical-premise",
+          "thm-na-mini-be-smooth-velocity-error": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54: Stokes equations: Stable pairs (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "§54.2, Lemma 54.5 and Remark 54.6, printed pp. 410–413: MINI inf-sup stability and stationary Stokes approximation context; the present observation estimate is derived from the explicit evolutionary supplier."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488: the MINI pair's Fortin stability and stationary Stokes estimates; not the time-dependent observation inequality."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct",
+        "reference": "research/plan-fluid-dynamics-refresh-track.md#incompressible-numerical-observable-and-pressure-errors",
+        "library": "mathematics"
+      },
+      {
+        "id": "prop-fd-mini-accumulated-pressure-observation",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Accumulated pressure-observation error for the smooth MINI branch",
+        "statement": "Assume Countable Choice and a smooth MINI observation interface as specified by the interface definition on this page. In particular, $D\\subset\\mathbb R^d$ is bounded, connected, Lipschitz and polygonal or polyhedral with $d\\in\\{2,3\\}$; $T>0$, $\\nu>0$, and $f\\in L^2(0,T;L^2(D)^d)$; the exact no-slip solution has $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$ and $p\\in W^{1,\\infty}(0,T;H^1(D)\\cap Q)$; the MINI meshes are shape-regular conforming affine simplices; the initial value is $u_h^0=P_{Z_h}u(0)$; and any actual mixed backward Euler MINI solution is used. No mesh/time relation is imposed. Impose the time-step restriction $\\tau_{\\max}\\Lambda\\le\\tfrac12$ of the smooth-branch pressure-primitive theorem. Set $M=1+\\|u\\|_{W^{1,\\infty}H^2}+\\|p\\|_{W^{1,\\infty}H^1}$, $H=hM+\\tau_{\\max}M^2$, $M_u=\\|u\\|_{L^\\infty(0,T;V)}$, $M_E=\\nu^{-1/2}\\|u(0)\\|_2+C_P(D)\\nu^{-1}\\|f\\|_{L^2(0,T;L^2(D)^d)}$, and $\\Lambda=1+C_D\\nu^{-3}M_u^4$, where $C_D$ depends only on the domain, dimension and trilinear-form constant. Let $C_*$ be exactly the explicit viscosity-dependent constant in the smooth MINI velocity-error theorem. Let $\\beta>0$ be the uniform MINI inf-sup lower bound, let $M_b=\\sqrt d$, let $C_I$ be a mean-adjusted continuous P1 pressure interpolation constant satisfying $\\inf_{q_h\\in Q_h}\\|q-q_h\\|_2\\le C_Ih\\|q\\|_{H^1(D)}$ for $q\\in H^1(D)\\cap Q$, and choose $C_c$ such that $|c(a;b,v)|\\le C_c\\|a\\|_V\\|b\\|_V\\|v\\|_V$. Let $C_P(D)$ satisfy $\\|v\\|_{L^2(D)}\\le C_P(D)\\|v\\|_V$ for $v\\in V$. With\n$$K=(1+M_b/\\beta)C_IT+\\beta^{-1}\\bigl(2C_P+[2\\nu\\sqrt T+C_c(M_E+\\sqrt T M_u)]\\nu^{-1/2}\\bigr)C_*+\\beta^{-1}(2\\nu T+2C_cT).$$\nFor every $\\xi\\in Q$, every $\\eta\\in C_c^\\infty(0,T)$, and every node $0\\le m\\le N$, the interface observations satisfy\n$$\\left|\\bigl(P(t_m)-P_h^m,\\xi\\bigr)_{L^2}\\right|\\le KH\\|\\xi\\|_Q.$$\n\n$$\\left|\\left(\\int_0^T(p(t)-\\bar p_h(t))\\eta(t)\\,dt,\\xi\\right)_{L^2}\\right|\\le(K+1)H\\|\\eta'\\|_{L^1(0,T)}\\|\\xi\\|_Q.$$\nThese are accumulated-pressure and time-tested pressure bounds on the smooth branch. They do not assert an instantaneous pressure-error rate.",
+        "deps": [
+          "def-fd-mini-fluid-interface",
+          "thm-na-mini-be-smooth-integrated-pressure-error",
+          "thm-na-mini-be-smooth-velocity-error",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-mini-fluid-interface": "mathematical-premise",
+          "thm-na-mini-be-smooth-integrated-pressure-error": "mathematical-premise",
+          "thm-na-mini-be-smooth-velocity-error": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54: Stokes equations: Stable pairs (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "§54.2, Lemma 54.5 and Remark 54.6, printed pp. 410–413: MINI inf-sup stability and stationary Stokes approximation context; the pressure-observation bound is derived from the current evolutionary supplier."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488: MINI pair stability and stationary Stokes approximation; no time-dependent pressure-primitive estimate."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct",
+        "reference": "research/plan-fluid-dynamics-refresh-track.md#incompressible-numerical-observable-and-pressure-errors",
+        "library": "mathematics"
+      },
+      {
+        "id": "rem-fd-mini-weak-velocity-scope",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Weak velocity limits do not supply the smooth pressure-observation estimate",
+        "statement": "Assume both Countable Choice and the Axiom of Choice. Let $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be a nonempty bounded connected Lipschitz polyhedral domain, let $0<T<\\infty$, let $\\nu>0$, let $V=H^1_0(D;\\mathbb R^d)$, $Q=L^2_0(D)$, $V_\\sigma=\\{v\\in V:\\operatorname{div}v=0\\}$, and $H_\\sigma=\\overline{V_\\sigma}^{\\,L^2(D)^d}$. Define $\\varepsilon(v)=(\\nabla v+\\nabla v^{\\mathsf T})/2$, $a_\\nu(v,w)=2\\nu\\int_D\\varepsilon(v):\\varepsilon(w)\\,dx$, $b(v,q)=-\\int_Dq\\,\\operatorname{div}v\\,dx$, and $c(a;v,w)=\\tfrac12\\int_D((a\\cdot\\nabla)v\\cdot w-(a\\cdot\\nabla)w\\cdot v)\\,dx$. On each matching shape-regular affine simplicial mesh, let $V_{h,j}$ be the MINI continuous piecewise-linear velocity space enriched by one interior bubble per simplex and let $Q_{h,j}$ be the continuous piecewise-linear pressure space with zero mean. Set $Z_j=\\{v_{h,j}\\in V_{h,j}:b(v_{h,j},q_{h,j})=0\\text{ for every }q_{h,j}\\in Q_{h,j}\\}$. Take $f\\in L^2(0,T;L^2(D)^d)$ and $u_0\\in H_\\sigma$. Use a mesh family with maximum cell diameters $h_j\\to0$ and time partitions $0=t_0^j<\\cdots<t_{N_j}^j=T$ whose maximum steps $\\tau_{\\max,j}$ tend to zero, without a relation between these limits. On each mesh, initialize by the $L^2$ projection of $u_0$ onto $Z_j$ and choose any actual mixed backward Euler MINI solution; write $\\bar u_j(t)=u_j^n$ on $(t_{n-1}^j,t_n^j]$. A subsequence satisfies $\\bar u_j\\to u$ strongly in $L^2(0,T;L^2(D)^d)$ and weakly in $L^2(0,T;V)$, where $u\\in L^\\infty(0,T;H_\\sigma)\\cap L^2(0,T;V_\\sigma)$ is weakly continuous into $H_\\sigma$, has $u(0)=u_0$, and obeys, for every fixed $v\\in V_\\sigma$ and $\\eta\\in C^1([0,T])$ vanishing near $T$,\n$$-\\int_0^T(u(t),v)_{L^2}\\eta'(t)\\,dt+\\int_0^T\\bigl(a_\\nu(u(t),v)+c(u(t);u(t),v)\\bigr)\\eta(t)\\,dt=\\int_0^T(f(t),v)_{L^2}\\eta(t)\\,dt+(u_0,v)_{L^2}\\eta(0),$$\nand, for almost every $t\\in(0,T)$,\n$$\\frac12\\|u(t)\\|_{L^2}^2+\\nu\\int_0^t\\|\\nabla u(s)\\|_{L^2}^2\\,ds\\le\\frac12\\|u_0\\|_{L^2}^2+\\int_0^t(f(s),u(s))_{L^2}\\,ds.$$\nThe subsequential-limit theorem does not assert pressure regularity or a pressure-observation error estimate. The accumulated-pressure observation proposition on this page additionally requires the strong no-slip regularity $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$ and $p\\in W^{1,\\infty}(0,T;H^1(D)\\cap Q)$. Thus the weak-limit theorem alone does not supply that pressure estimate. This scope remark does not assert that a pressure is absent or rule out a separately proved pressure-primitive result.",
+        "deps": [
+          "thm-na-mini-navier-stokes-be-subsequential-limit",
+          "def-na-solenoidal-energy-weak-ns-velocity",
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-fd-mini-fluid-interface",
+          "prop-fd-mini-accumulated-pressure-observation"
+        ],
+        "dependency_roles": {
+          "thm-na-mini-navier-stokes-be-subsequential-limit": "mathematical-premise",
+          "def-na-solenoidal-energy-weak-ns-velocity": "mathematical-premise",
+          "def-na-evolutionary-incompressible-ns-weak-solution": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-fd-mini-fluid-interface": "mathematical-premise",
+          "prop-fd-mini-accumulated-pressure-observation": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54: Stokes equations: Stable pairs (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "§54.2, Lemma 54.5 and Remark 54.6, printed pp. 410–413: MINI approximation context only; the current weak-limit result is the exact mathematical supplier."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488: MINI stability and stationary Stokes context only; not a pressure-regularity claim for weak evolution limits."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct",
+        "reference": "research/plan-fluid-dynamics-refresh-track.md#incompressible-numerical-observable-and-pressure-errors",
+        "library": "mathematics"
+      }
+    ]
+  },
+  {
+    "order": 662,
+    "id": "fd-n02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Incompressible numerical observable and pressure errors — Examples",
+    "companion": "fd-n02",
+    "requires": [
+      "fd-n02",
+      "countability-and-uncountability"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-mini-pressure-time-test",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A mean-zero square pressure time test",
+        "statement": "Assume Countable Choice. Take $D=(0,1)^2$, $T=1$, and a smooth MINI observation interface with three time cells $0=t_0<t_1<t_2<t_3=1$ satisfying the accumulated-pressure proposition's strong-solution and time-step hypotheses. Use the mean-zero pressure sensor $\\xi(x,y)=x-\\tfrac12$. Choose any nonconstant $\\widehat\\eta\\in C_c^\\infty((\\tfrac14,\\tfrac34))$ and set $\\eta=\\widehat\\eta/\\|\\widehat\\eta'\\|_{L^1(0,1)}$. Then $\\|\\xi\\|_{L^2(D)}=1/\\sqrt{12}$ and $\\|\\eta'\\|_{L^1(0,1)}=1$. For every node $m\\in\\{0,1,2,3\\}$, the accumulated pressure observation error is at most $KH/\\sqrt{12}$ and the time-tested pressure observation error is at most $(K+1)H/\\sqrt{12}$, where $K$ and $H$ are exactly those in the accumulated-pressure proposition.\n\nThe diagram records only the definitions: the horizontal cells carry the right-constant pressure reconstruction, and each arrow adds the corresponding pressure increment to the Q-valued primitive. Node heights are layout only and do not encode pressure magnitudes or data.\n\n\\begin{tikzpicture}[>=stealth]\n\\node (p0) at (0,1.25) {$P_h^0=0$};\n\\node (p1) at (2,1.25) {$P_h^1$};\n\\node (p2) at (4,1.25) {$P_h^2$};\n\\node (p3) at (6,1.25) {$P_h^3$};\n\\draw[->] (p0) -- node[above] {$+\\tau_1p_h^1$} (p1);\n\\draw[->] (p1) -- node[above] {$+\\tau_2p_h^2$} (p2);\n\\draw[->] (p2) -- node[above] {$+\\tau_3p_h^3$} (p3);\n\\draw[->] (0,0) -- (6.4,0) node[right] {$t$};\n\\foreach \\x/\\lab in {0/$t_0$,2/$t_1$,4/$t_2$,6/$t_3$}\n  \\draw (\\x,0.08) -- (\\x,-0.08) node[below] {\\lab};\n\\node at (1,0.38) {$\\bar p_h=p_h^1$};\n\\node at (3,0.38) {$\\bar p_h=p_h^2$};\n\\node at (5,0.38) {$\\bar p_h=p_h^3$};\n\\end{tikzpicture}",
+        "deps": [
+          "def-fd-mini-fluid-interface",
+          "prop-fd-mini-accumulated-pressure-observation",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-mini-fluid-interface": "mathematical-premise",
+          "prop-fd-mini-accumulated-pressure-observation": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54: Stokes equations: Stable pairs (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "§54.2, Lemma 54.5 and Remark 54.6, printed pp. 410–413: MINI finite-element context; this example is a direct specialization of the local pressure-observation proposition."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488: MINI finite-element context; this example uses the local accumulated-pressure estimate."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct",
+        "reference": "research/plan-fluid-dynamics-refresh-track.md#incompressible-numerical-observable-and-pressure-errors",
+        "library": "mathematics",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "scope": [
+    "pthm-fd-creeping-lipschitz-pressure",
+    "pthm-fd-no-slip-cfd-observations",
+    "ex-fd-cfd-density-pressure-conversion"
+  ],
+  "contracts": {
+    "pthm-fd-creeping-lipschitz-pressure": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-fd-creeping-force-balance",
+          "source_section": "Postulate",
+          "quote": "\\operatorname{div}u=0,\\qquad \\sigma=-pI+2\\mu D,\\qquad \\operatorname{div}\\sigma+\\rho_0b=0",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-pn01-forced-creeping-stokes-branch",
+          "source_section": "Definition",
+          "quote": "The parameterized forced creeping Stokes weak formulation uses this physical stress, a divergence-free velocity, and the separately adopted steady force balance $\\operatorname{div}\\sigma_{\\mathrm{phys}}+\\rho_0b_{\\mathrm{phys}}=0$ from the current creeping-force postulate, which permits a specified body-acceleration field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-stokes-load-observable-stability",
+          "source_section": "Statement",
+          "quote": "Then $F\\mapsto p_F$ and $\\mathcal O$ are real-linear, and for all $F,G\\in V'$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-homogeneous-dirichlet-poincare",
+          "source_section": "Statement",
+          "quote": "For every real $v\\in H^1_0(D)$, $$\\|v\\|_{L^2(D)}\\le L\\|\\partial_1v\\|_{L^2(D)}\\le L\\|\\nabla v\\|_{L^2(D)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "load-is-continuous",
+          "step": "1.1",
+          "claim": "The local definition gives the load functional; Cauchy–Schwarz and Poincare show each load is in V' and bound the difference of the two loads by C_P times the L2 difference of the normalized accelerations.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-pressure-stability",
+          "step": "2.1",
+          "claim": "The current Stokes sensor theorem applies to the two continuous loads and the finite sensors. Multiplying its sensor bound by the physical pressure scale and using the load bound gives the claimed physical pressure-output Lipschitz estimate under the adopted creeping branch.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "L1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "convert-pressure-scale",
+          "step": "3.1",
+          "claim": "The physical output is the normalized sensor vector multiplied by the positive factor rho_0 U_0^2; substitution of step 1.1 into step 2.1 gives the stated inequality with pressure units.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes m >= 1 and a nonempty finite sensor family, so an empty family is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to zero sensors or equal loads; the sensor vector difference is then zero and step 3.1 preserves that zero under the positive pressure scale."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits m = 1; step 3.1 applies to a one-element sensor family with the same finite-sensor estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires a nonempty bounded domain and positive density, viscosity, length and velocity scales, so all displayed scale divisions are defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The creeping branch is steady and has no time node or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and fact A1 explicitly assume Countable Choice; step 3.1 applies the Stokes solvability result under that same strength."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts an inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts an inequality, not a biconditional."
+        }
+      ]
+    },
+    "pthm-fd-no-slip-cfd-observations": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-fd-forced-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "The forced incompressible Newtonian branch adopts $$\\operatorname{div}u=0,\\qquad \\rho_0\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)=\\rho_0b+\\operatorname{div}\\sigma.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-mini-fluid-interface",
+          "source_section": "Definition",
+          "quote": "The conforming MINI spaces are $$V_h=[S^1_h\\cap H^1_0(D)]^d\\oplus\\bigoplus_{K\\in\\mathcal T_h}b_K\\mathbb R^d,\\qquad Q_h=S^1_h\\cap Q,$$ and their weak divergence kernel is $Z_h=\\{v_h\\in V_h:b(v_h,q_h)=0\\text{ for every }q_h\\in Q_h\\}$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-fd-mini-observation-error",
+          "source_section": "Statement",
+          "quote": "Then the endpoint-sampled observations of the interface satisfy $$\\left|\\mathcal O_h(\\ell;u_h)-\\mathcal O(\\ell;u)\\right|\\le \\nu^{-1/2}C_*H\\,\\|\\ell\\|_{\\ell^2_\\tau(V^*)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-fd-mini-accumulated-pressure-observation",
+          "source_section": "Statement",
+          "quote": "For every $\\xi\\in Q$, every $\\eta\\in C_c^\\infty(0,T)$, and every node $0\\le m\\le N$, the interface observations satisfy",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nondimensionalize-branch",
+          "step": "1.1",
+          "claim": "Substitution of the declared SI scales into the adopted forced balance gives the normalized forcing and viscosity. The componentwise stress-divergence identity uses div u = 0; stationary zero wall trace is unchanged by scaling.",
+          "inputs": [
+            "A2",
+            "A3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "match-interface",
+          "step": "2.1",
+          "claim": "The scaled exact and discrete fields satisfy the exact smooth MINI interface, including its mean-zero gauge, shape-regular spaces, projected initial value, actual-root condition and time-step restriction.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "velocity-observation",
+          "step": "3.1",
+          "claim": "Apply the current velocity-observation proposition to the bounded endpoint sensors; it gives the dimensionless bound with the explicit viscosity dependence and constant C_*.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "pressure-observation",
+          "step": "3.2",
+          "claim": "Apply the current accumulated-pressure proposition to the mean-zero sensor and compactly supported time test; it gives the nodal primitive and integrated pressure bounds, not an instantaneous rate.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "physical-unit-conversion",
+          "step": "4.1",
+          "claim": "The velocity reading scales by U_0. For pressure over physical volume and time, pressure, volume and time contribute rho_0 U_0^2, ell_0^3 and ell_0/U_0, respectively, yielding rho_0 U_0 ell_0^4.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 3.1–3.2 allow zero sensor/test functionals; both sides then vanish."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the normalized observation error is zero, step 3.1 multiplies zero by positive scale factors and the physical error is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits N = 1 and individual bounded sensors; steps 3.1–3.2 use the same finite sums without a lower bound on N beyond one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires T^*, rho_0, mu_0, ell_0 and U_0 positive and a nonempty domain; the dimensionless conversion factors are defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The pressure primitive estimate covers every node 0 <= m <= N, including m = 0 and m = N; step 3.2 retains the full interval time test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 records exactly Countable Choice, and steps 3.1–3.2 apply the two propositions under that same assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives direct error bounds and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives direct error bounds and contains no biconditional."
+        }
+      ]
+    },
+    "ex-fd-cfd-density-pressure-conversion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-no-slip-cfd-observations",
+          "source_section": "Statement",
+          "quote": "\\left|\\left(\\int_0^{T^*}(p^*-\\bar p_h^*)\\eta\\,dt^*,\\xi\\right)_{L^2}\\right|\\le(K+1)H\\|\\eta'\\|_{L^1(0,T^*)}\\|\\xi\\|_Q",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unit-cube-sensor",
+          "step": "1.1",
+          "claim": "Integrating y_1 - 1/2 over the unit cube gives mean zero, and integrating its square gives 1/12; hence the sensor lies in Q with norm 1/sqrt(12).",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "normalized-test",
+          "step": "1.2",
+          "claim": "A nonconstant smooth bump supported strictly inside (0,T^*) has a finite positive L1 norm of its derivative; division by that norm gives the required normalized test.",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "apply-time-tested-bound",
+          "step": "2.1",
+          "claim": "Apply the current continuum theorem with the unit-cube sensor and normalized test from steps 1.1 and 1.2; the dimensionless bound is (K+1)H/sqrt(12).",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "convert-integral-units",
+          "step": "3.1",
+          "claim": "The physical pressure, volume and time factors multiply to rho_0 U_0 ell_0^4; multiplying step 2.1 by this positive factor proves the symbolic physical-unit bound.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one nonzero pressure sensor and a normalized test, so the empty-observation case is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The chosen sensor is nonzero; if the actual error is zero, step 3.1 preserves zero under the positive physical scale."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses one explicitly defined pressure sensor and one normalized smooth test; steps 1.1–3.1 compute and apply this single-observation case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the domain is the nonempty unit cube and rho_0, ell_0 and U_0 are positive, so all conversions are defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The time test is compactly supported inside (0,T^*); step 1.2 ensures it vanishes near both temporal endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example inherits Countable Choice from its theorem supplier and states it among the given hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts one upper bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts one upper bound, not a biconditional."
+        }
+      ]
+    }
+  }
+}

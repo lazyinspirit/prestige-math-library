@@ -1,0 +1,17 @@
+import {readFileSync,writeFileSync,existsSync,readdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {step1Decision} from '../../tools/physics-support/step1-decisions.mjs';
+import {loadStep1Record} from '../../tools/physics-support/frontier-snapshot.mjs';
+const run='fluid-dynamics-all-47-2026-10-23',base=`research/${run}-owner-mini-readiness-resolution`,read=p=>JSON.parse(readFileSync(p)),sha=b=>createHash('sha256').update(b).digest('hex');
+if(existsSync(`${base}/completion.json`))throw Error('Completion already exists');
+const application=read(`${base}/application.json`),review=read(`${base}/review.json`),before=read(`${base}/before.json`);
+if(application.complete!==false||!application.error?.startsWith('Unexpected non-whitespace character after JSON')||review.genuine_unresolved_issues.length||!review.root_readiness_recording_recommended)throw Error('Wrong interrupted application');
+if(sha(readFileSync(application.review.path))!==application.review.sha256||sha(readFileSync(application.before.path))!==application.before.sha256)throw Error('Reviewed evidence changed');
+for(const row of before.files)if(sha(readFileSync(row.archive))!==row.sha256||(!row.path.includes('-step1-')&&sha(readFileSync(row.path))!==row.sha256))throw Error('Authored/preimage evidence changed '+row.path);
+for(const row of application.imported_suppliers)if(sha(readFileSync(row.path))!==row.sha256)throw Error('Published supplier changed '+row.id);
+const state=read(`.physics-autopilot/${run}/state.json`);if(!state.dispatches['1-scaffold:batch-28']?.endedAt)throw Error('Native writer not drained');
+for(const pid of readdirSync('/proc').filter(x=>/^\d+$/.test(x))){let args;try{args=readFileSync(`/proc/${pid}/cmdline`,'utf8').split('\0');}catch{continue;}if(args.some(x=>x.endsWith('/dispatch.mjs'))&&args.includes('--run')&&args[args.indexOf('--run')+1]===run&&args.includes('--label')&&/^batch-28(?:$|-)/.test(args[args.indexOf('--label')+1]))throw Error('Relevant writer live');}
+const snapshot=loadStep1Record(process.cwd(),run),records=[];
+for(const id of review.root_recording_order){const decision=step1Decision(snapshot,id);if(!decision.closed||decision.row.owner!==true||decision.row.decision!=='ready')throw Error('Readiness not current '+id);const path=`research/${run}-step1-${id}.json`;records.push({id,path,sha256:sha(readFileSync(path)),content_input_sha256:decision.row.sha256,current:true});}
+const fresh=loadStep1Record(process.cwd(),run);for(const row of records)if(!step1Decision(fresh,row.id).closed||sha(readFileSync(row.path))!==row.sha256)throw Error('Readiness changed during verification '+row.id);
+const completed={version:1,run,batch:28,at:new Date().toISOString(),owner:'/root',complete:true,records,scientific_review:application.review,interrupted_application:{path:`${base}/application.json`,sha256:sha(readFileSync(`${base}/application.json`)),reason:'All five readiness rows had been written; immediate currency verification was interrupted by an unrelated in-flight manifest trailing literal escape. No malformed manifest was ignored. Fresh strict ownership snapshots now parse and all five actual current closures verify.'},authored_carriers_changed:false,imports_changed:false,gate_pass_created:false,proof_audit_created:false};writeFileSync(`${base}/completion.json`,JSON.stringify(completed,null,2)+'\n');console.log(JSON.stringify({batch:28,current_ready:records.length,readiness_rows_rewritten:0,source_changes:0,gates_attempted:0}));

@@ -1,0 +1,629 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "20",
+  "scope": [
+    "pthm-fd-local-periodic-incompressible-model-evolution",
+    "pthm-fd-local-polytropic-model-evolution",
+    "pthm-fd-two-dimensional-viscous-model-globality",
+    "ex-fd-homogeneous-polytropic-model"
+  ],
+  "contracts": {
+    "pthm-fd-local-periodic-incompressible-model-evolution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "In the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Adopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K=(K+K^T)/2. $$\nAssume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt\n$$ \\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, the tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The closure is therefore form-invariant under those rotations. The mathematical linear-isotropic classification identifies this stress form from the stated linearity and equivariance hypotheses; it does not establish that any material adopts them.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-smooth-periodic-incompressible-ivp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-periodic-pressure-recovery",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s>d/2+1$, and let $u\\in H^s(Q_d;\\mathbb R^d)$ satisfy $\\operatorname{div}u=0$ distributionally. Then $u\\otimes u\\in H^s$, the mean-zero scalar $\\pi=Q(u\\otimes u)$ belongs to $H^s$, and in $H^{s-1}$,\n$$P(u\\cdot\\nabla u)=u\\cdot\\nabla u+\\nabla\\pi.$$\nAmong mean-zero periodic distributions satisfying the identity, this pressure is unique. The formula is a torus pressure recovery result and asserts no wall pressure regularity.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pthm-fd-local-periodic-incompressible-model-evolution-1-1",
+          "claim": "Since $\\mu$ and $\\rho_*$ are constant and $\\nabla_X\\cdot u=0$, componentwise differentiation gives\n$$\\nabla_X\\cdot(2\\mu D_Xu)=\\mu\\Delta_Xu+\\mu\\nabla_X(\\nabla_X\\cdot u)=\\mu\\Delta_Xu.$$\nThus the adopted local momentum equation is $\\partial_tu+(u\\cdot\\nabla_X)u=-\\rho_*^{-1}\\nabla_Xp+(\\mu/\\rho_*)\\Delta_Xu$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-periodic-incompressible-model-evolution-2-1",
+          "claim": "With $x=X/L$ and $\\tau=tU_*/L$, we have $\\partial_tu=(U_*^2/L)\\partial_\\tau U$, $(u\\cdot\\nabla_X)u=(U_*^2/L)(U\\cdot\\nabla_xU)$, $\\nabla_Xp=(\\rho_*U_*^2/L)\\nabla_x\\Pi$, and $\\Delta_Xu=(U_*/L^2)\\Delta_xU$. Substituting these scalings into the acceleration equation of step 1.1 and multiplying by $L/U_*^2$ gives the normalized equation with coefficient $\\bar\\nu=\\mu/(\\rho_*U_*L)\\ge0$; the divergence constraint and initial datum transform to $\\nabla_x\\cdot U=0$ and $U(0)=U_0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-periodic-incompressible-model-evolution-3-1",
+          "claim": "The hypotheses of [F1] now hold, including Countable Choice [A4], $d\\in\\{1,2,3\\}$, integer $s\\ge4$, and $\\bar\\nu\\ge0$. Therefore the normalized system has a unique smooth velocity on $[0,T]$, with $T$ depending only on $d,s,\\|U_0\\|_{H^s}$ and with every higher Sobolev norm bounded there.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A4",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-periodic-incompressible-model-evolution-4-1",
+          "claim": "Since $s\\ge4>d/2+1$, [F2] applies to each smooth divergence-free time slice. It supplies the unique mean-zero pressure $\\Pi$ for the full normalized momentum equation.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-periodic-incompressible-model-evolution-5-1",
+          "claim": "The inverse change $t=(L/U_*)\\tau$, $X=Lx$, $u(t,X)=U_*U(\\tau,x)$, and $p(t,X)=\\rho_*U_*^2\\Pi(\\tau,x)$ preserves smoothness, periodicity, and the equations in step 1.1; it maps the normalized interval $[0,T]$ to $[0,(L/U_*)T]$. Uniqueness transfers under this invertible scaling.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-periodic-incompressible-model-evolution-6-1",
+          "claim": "The conclusion is only a deduction inside the adopted force-free model: the continuum balance, constitutive law, and model definition are assumptions, while existence and pressure recovery are conditional mathematical inputs. No experiment or mathematical proof establishes empirical validity of those physical assumptions.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is on the prescribed nonempty periodic tori and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: μ=0 is allowed; Proof step 3.1 applies the local supplier at ν̄=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The Statement includes d=1 among d∈{1,2,3}; Proof step 2.1 uses that full dimension range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Statement allows μ=0, where the viscous stress vanishes and the model branch is inviscid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The Statement includes d=1 and d=3, s=4, and the viscosity endpoint μ=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 invokes Countable Choice [A4] under the local existence hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "μ=0",
+          "status": "checked",
+          "evidence": "The dimensionless viscosity is zero and the stress is −pI; the normalized Euler equation is the ν=0 case of the local theorem."
+        },
+        {
+          "case": "u0=0",
+          "status": "checked",
+          "evidence": "The zero field with constant mean-zero pressure solves the normalized system and is covered by the local supplier's zero-data branch."
+        }
+      ]
+    },
+    "pthm-fd-local-polytropic-model-evolution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "In the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-barotropic-euler-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-smooth-polytropic-euler-ivp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, $a=(\\gamma-1)/2$, integer $s\\ge4$, and smooth real periodic data $\\rho_0,u_0$ on $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, with $\\min_{x\\in\\mathbb T^d}\\rho_0(x)>0$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. For $\\rho>0$, set $p(\\rho)=\\kappa\\rho^\\gamma$ and $r(\\rho)=\\sqrt{\\kappa\\gamma}\\,\\rho^a/a$. Then there is $T>0$, depending only on $d,s,\\kappa,\\gamma$, $\\|(r(\\rho_0),u_0)\\|_{H^s}$, and $\\min r(\\rho_0)$, and a unique smooth real solution $(\\rho,u)$ on $[0,T]\\times\\mathbb T^d$ of\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad u_t+u\\cdot\\nabla u+\\rho^{-1}\\nabla(\\kappa\\rho^\\gamma)=0,$$\nwith initial data $(\\rho_0,u_0)$ and $\\rho(t,x)>0$. For every integer $m\\ge s$, $\\sup_{0\\le t\\le T}(\\|\\rho(t)\\|_{H^m}+\\|u(t)\\|_{H^m})<\\infty$. This conditional smooth periodic theorem concerns the isentropic barotropic model with strictly positive density; it asserts no continuation through vacuum or shocks and no viscous or temperature-coupled result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-polytropic-energy",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, $a=(\\gamma-1)/2$, integer $s\\ge4$, and smooth real periodic data $\\rho_0:Q_d\\to(0,\\infty)$ and $u_0:Q_d\\to\\mathbb R^d$ on the normalized torus $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$, with $\\min_{x\\in Q_d}\\rho_0(x)>0$. Use normalized Lebesgue measure $d\\mu=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat f(k)=\\int_{Q_d}f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, and norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}(1+|k|^2)^m|\\widehat f(k)|^2$. For $\\rho>0$, set $r(\\rho)=\\sqrt{\\kappa\\gamma}\\rho^a/a$. The local positive-density polytropic Euler theorem supplies a unique smooth solution $(\\rho,u)$ on $[0,T]$ with these initial data and $\\rho(t,x)>0$, where $T$ depends only on $d,s,\\kappa,\\gamma,\\|(r(\\rho_0),u_0)\\|_{H^s}$ and $\\min_{x\\in Q_d}r(\\rho_0)(x)$, satisfying\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad u_t+u\\cdot\\nabla u+\\rho^{-1}\\nabla p(\\rho)=0,\\qquad p(\\rho)=\\kappa\\rho^\\gamma.$$\nDefine the internal-energy density $U(\\rho)=\\kappa\\rho^\\gamma/(\\gamma-1)$ and total-energy density $E=\\frac12\\rho|u|^2+U(\\rho)$. Then\n$$\\partial_tE+\\operatorname{div}((E+p(\\rho))u)=0,$$\nand the total energy $\\int_{Q_d}E(t,x)\\,d\\mu(x)$ is constant on $[0,T]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pthm-fd-local-polytropic-model-evolution-1-1",
+          "claim": "The definitions of $R,V,P,x,\\tau$ give $\\partial_t\\rho_{\\mathrm{phys}}=(\\rho_*U_*/L)\\partial_\\tau R$ and $\\nabla_X\\cdot(\\rho_{\\mathrm{phys}}u_{\\mathrm{phys}})=(\\rho_*U_*/L)\\nabla_x\\cdot(RV)$, so the mass equation becomes $\\partial_\\tau R+\\nabla_x\\cdot(RV)=0$. Also $\\partial_tu_{\\mathrm{phys}}+(u_{\\mathrm{phys}}\\cdot\\nabla_X)u_{\\mathrm{phys}}=(U_*^2/L)(\\partial_\\tau V+(V\\cdot\\nabla_x)V)$ and $\\rho_{\\mathrm{phys}}^{-1}\\nabla_Xp_{\\mathrm{phys}}=(U_*^2/L)R^{-1}\\nabla_xP$. Since $P=\\kappa_{\\mathrm{phys}}\\rho_*^{\\gamma-1}U_*^{-2}R^\\gamma=\\bar\\kappa R^\\gamma$, the velocity equation becomes exactly the normalized equation in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-polytropic-model-evolution-2-1",
+          "claim": "The hypotheses of [F2] hold for the normalized data and parameters, including Countable Choice [A2], $d\\le3$, integer $s\\ge4$, $\\bar\\kappa>0$, $\\gamma>1$, and $\\min R_0>0$. Thus the normalized system has a unique smooth solution on the claimed interval, remains positive there, and has bounded Sobolev norms at all integer orders $m\\ge s$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-polytropic-model-evolution-3-1",
+          "claim": "Applying the exact conditional energy interface [F3] to that positive smooth periodic solution gives constancy of $\\overline E(\\tau)$ throughout $[0,T]$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-polytropic-model-evolution-4-1",
+          "claim": "The physical energy density equals $\\rho_*U_*^2\\left(\\tfrac12R|V|^2+\\bar\\kappa R^\\gamma/(\\gamma-1)\\right)$. The change of variables $X=Lx$ also gives normalized cell averages in the two coordinate systems, so the physical mean energy density is the fixed factor $\\rho_*U_*^2$ times $\\overline E(\\tau)$ and is constant.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-local-polytropic-model-evolution-5-1",
+          "claim": "These deductions require the stated positive-density local branch and fixed polytropic closure; they assert no continuation through vacuum or shocks and no thermal or empirical conclusion.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns positive-density data on a prescribed nonempty periodic torus."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 3.1 applies the energy identity without a nonzero velocity hypothesis; its algebra remains valid for zero initial velocity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The Statement includes d=1 in d∈{1,2,3}, matching the polytropic IVP supplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Statement requires κ̄>0, γ>1, and min R0>0; zero coefficient, γ=1, and vacuum are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The Statement includes d=1, d=3, and s=4, while keeping γ>1 and positive minimum density strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.1 invokes Countable Choice [A2] when applying the local IVP theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "d=1,2,3",
+          "status": "checked",
+          "evidence": "Each listed dimension is within the local theorem's explicit dimension set."
+        },
+        {
+          "case": "κphys>0, γ>1",
+          "status": "checked",
+          "evidence": "These conditions make κ̄>0 and a=(γ−1)/2>0, so the stated sound-speed change of variables is defined for positive density."
+        }
+      ]
+    },
+    "pthm-fd-two-dimensional-viscous-model-globality": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "In the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Adopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K=(K+K^T)/2. $$\nAssume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt\n$$ \\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, the tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The closure is therefore form-invariant under those rotations. The mathematical linear-isotropic classification identifies this stress form from the stated linearity and equivariance hypotheses; it does not establish that any material adopts them.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-global-two-dimensional-periodic-navier-stokes",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\nu>0$ and let $u_0:Q_2\\to\\mathbb R^2$ be a smooth real divergence-free field on $Q_2=\\mathbb R^2/(2\\pi\\mathbb Z)^2$. Use normalized measure $d\\mu=(2\\pi)^{-2}dx$, coefficients $\\widehat f(k)=\\int_{Q_2}f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^2}w_k^{2m}|\\widehat f(k)|^2$. The unique maximal smooth periodic solution supplied by the local incompressible theorem,\n$$u_t+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u,\\qquad \\operatorname{div}u=0,\\qquad u(0)=u_0,$$\nexists for all $t\\ge0$ and is unique among smooth solutions with these data. For each integer $m\\ge4$ there is a constant $C_m$ depending only on $m$ such that\n$$\\sqrt{\\log(e+\\|u(t)\\|_{H^m})}\\le \\sqrt{\\log(e+\\|u_0\\|_{H^m})}+C_m\\left[t+\\|\\omega_0\\|_{L^2}\\sqrt{t\\left(t+\\frac1{2\\nu}\\right)}\\right],\\qquad \\omega_0=\\partial_1(u_0)_2-\\partial_2(u_0)_1.$$\nThis is a theorem for positive viscosity on the two-dimensional periodic domain; it asserts no global regularity for three-dimensional Navier–Stokes or for inviscid Euler.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pthm-fd-two-dimensional-viscous-model-globality-1-1",
+          "claim": "Since $\\rho_*$ and $\\mu$ are constant and $\\nabla_X\\cdot u=0$, componentwise differentiation gives $\\nabla_X\\cdot(2\\mu D_Xu)=\\mu\\Delta_Xu+\\mu\\nabla_X(\\nabla_X\\cdot u)=\\mu\\Delta_Xu$. Thus the adopted momentum equation is $\\partial_tu+(u\\cdot\\nabla_X)u=-\\rho_*^{-1}\\nabla_Xp+(\\mu/\\rho_*)\\Delta_Xu$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-two-dimensional-viscous-model-globality-2-1",
+          "claim": "With $x=X/L$, $\\tau=tU_*/L$, $U=u/U_*$, and $\\Pi=p/(\\rho_*U_*^2)$, the time derivative, convective, pressure-gradient, and Laplacian terms scale respectively by $U_*^2/L$, $U_*^2/L$, $\\rho_*U_*^2/L$, and $U_*/L^2$. Substituting these scalings into the acceleration equation of step 1.1 and multiplying by $L/U_*^2$ gives $\\partial_\\tau U+(U\\cdot\\nabla_x)U=-\\nabla_x\\Pi+\\bar\\nu\\Delta_xU$, with $\\bar\\nu=\\mu/(\\rho_*U_*L)>0$; the divergence constraint and smooth periodic initial data are preserved.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pthm-fd-two-dimensional-viscous-model-globality-3-1",
+          "claim": "The hypotheses of [F1] hold for $d=2$, $\\bar\\nu>0$, smooth divergence-free $U_0$, and Countable Choice [A4]. Conditional on the current supplier statement, it gives the unique global smooth normalized velocity and mean-zero pressure asserted in the Statement.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A4",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "pthm-fd-two-dimensional-viscous-model-globality-4-1",
+          "claim": "The inverse scaling $t=(L/U_*)\\tau$, $X=Lx$, $u(t,X)=U_*U(\\tau,x)$, and $p(t,X)=\\rho_*U_*^2\\Pi(\\tau,x)$ preserves the equations, periodicity, smoothness, and uniqueness. Since every finite physical time corresponds to a finite normalized time, the physical solution exists smoothly for all $t\\ge0$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "pthm-fd-two-dimensional-viscous-model-globality-5-1",
+          "claim": "The argument uses only the adopted planar force-free positive-viscosity periodic model and the conditional mathematical global theorem; it neither proves a 3D or Euler global-regularity result nor establishes empirical validity of the model assumptions.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes the nonempty two-dimensional torus and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The Statement requires μ>0, so the zero-viscosity Euler endpoint is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement is specifically two-dimensional and makes no one-dimensional theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Statement requires μ>0; it does not extend the global theorem to the degenerate μ=0 branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The Statement specifies positive finite L, U*, ρ*, and μ, and claims compact-time smoothness without a uniform-in-time norm bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 invokes Countable Choice [A4] when applying the current global mathematical supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "μ>0",
+          "status": "checked",
+          "evidence": "The global theorem requires strictly positive normalized viscosity; μ>0 and positive reference scales give ν̄>0."
+        },
+        {
+          "case": "d=3",
+          "status": "checked",
+          "evidence": "No conclusion is asserted; the theorem is explicitly restricted to dimension two."
+        }
+      ]
+    },
+    "ex-fd-homogeneous-polytropic-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-local-polytropic-model-evolution",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, $L>0$, reference density $\\rho_*>0$ in kilograms per cubic metre, reference speed $U_*>0$ in metres per second, physical polytropic coefficient $\\kappa_{\\mathrm{phys}}>0$ in pascals times $(\\mathrm{m}^3/\\mathrm{kg})^\\gamma$, and dimensionless exponent $\\gamma>1$. Let the physical periodic cell be $\\mathbb T_L^d=(\\mathbb R/(2\\pi L\\mathbb Z))^d$, with position $X$ in metres and time $t$ in seconds. The physical density $\\rho_{\\mathrm{phys}}$ is measured in kilograms per cubic metre, velocity $u_{\\mathrm{phys}}$ in metres per second, and pressure $p_{\\mathrm{phys}}$ in pascals. Adopt the unforced, positive-density barotropic Euler model\n$$\\partial_t\\rho_{\\mathrm{phys}}+\\nabla_X\\cdot(\\rho_{\\mathrm{phys}}u_{\\mathrm{phys}})=0,\\qquad \\partial_tu_{\\mathrm{phys}}+(u_{\\mathrm{phys}}\\cdot\\nabla_X)u_{\\mathrm{phys}}+\\rho_{\\mathrm{phys}}^{-1}\\nabla_X\\!\\left(\\kappa_{\\mathrm{phys}}\\rho_{\\mathrm{phys}}^\\gamma\\right)=0,$$\nwhere the same fixed $\\kappa_{\\mathrm{phys}}$ and $\\gamma$ apply throughout the flow. Set $x=X/L\\in\\mathbb T^d=(\\mathbb R/(2\\pi\\mathbb Z))^d$, $\\tau=tU_*/L$, $R=\\rho_{\\mathrm{phys}}/\\rho_*$, $V=u_{\\mathrm{phys}}/U_*$, $P=p_{\\mathrm{phys}}/(\\rho_*U_*^2)$, and $\\bar\\kappa=\\kappa_{\\mathrm{phys}}\\rho_*^{\\gamma-1}/U_*^2>0$. Put $a=(\\gamma-1)/2$ and $r(R)=\\sqrt{\\bar\\kappa\\gamma}\\,R^a/a$. For smooth periodic $f$, use normalized measure $d\\mu_x=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu_x$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}(1+|k|^2)^m|\\widehat f(k)|^2$. Let $\\rho_0:\\mathbb T_L^d\\to(0,\\infty)$ and $u_0:\\mathbb T_L^d\\to\\mathbb R^d$ be smooth real periodic initial data, and define $R_0(x)=\\rho_0(Lx)/\\rho_*$ and $V_0(x)=u_0(Lx)/U_*$. Then for every integer $s\\ge4$ there is $T>0$, depending only on $d,s,\\bar\\kappa,\\gamma,\\|(r(R_0),V_0)\\|_{H^s}$, and $\\min r(R_0)$, such that the normalized system\n$$\\partial_\\tau R+\\nabla_x\\cdot(RV)=0,\\qquad \\partial_\\tau V+(V\\cdot\\nabla_x)V+R^{-1}\\nabla_x(\\bar\\kappa R^\\gamma)=0,\\qquad R(0,\\cdot)=R_0,\\quad V(0,\\cdot)=V_0$$\nhas a unique smooth real solution on $[0,T]\\times\\mathbb T^d$ with $R(\\tau,x)>0$ and every integer Sobolev order $m\\ge s$ bounded on that same interval. The dimensionless mean total-energy density\n$$\\overline E(\\tau)=\\int_{\\mathbb T^d}\\left(\\tfrac12 R|V|^2+\\frac{\\bar\\kappa}{\\gamma-1}R^\\gamma\\right)d\\mu_x$$\nis constant. Equivalently, the physical mean of $\\tfrac12\\rho_{\\mathrm{phys}}|u_{\\mathrm{phys}}|^2+\\kappa_{\\mathrm{phys}}\\rho_{\\mathrm{phys}}^\\gamma/(\\gamma-1)$ over the physical cell is constant and has units of pascals. The polytropic pressure law is an adopted constitutive closure, not a molecular derivation. No thermal equation, vacuum, shock continuation, nonuniform-entropy model, or empirical validity claim is included.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-fd-homogeneous-polytropic-model-1-1",
+          "claim": "Since $\\rho_{\\mathrm{phys}}$ and $u_{\\mathrm{phys}}$ are constant in $t$ and $X$, $\\partial_t\\rho_{\\mathrm{phys}}=0$, $\\nabla_X\\cdot(\\rho_{\\mathrm{phys}}u_{\\mathrm{phys}})=0$, and $\\partial_tu_{\\mathrm{phys}}+(u_{\\mathrm{phys}}\\cdot\\nabla_X)u_{\\mathrm{phys}}=0$. Thus the mass equation holds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-fd-homogeneous-polytropic-model-2-1",
+          "claim": "The pressure $\\kappa_{\\mathrm{phys}}\\rho_*^\\gamma$ is constant, so its gradient vanishes; the momentum equation also holds. The density stays strictly positive, and all fields are smooth and periodic.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-fd-homogeneous-polytropic-model-3-1",
+          "claim": "The local theorem [F1] gives uniqueness for these same initial data. Therefore its local branch coincides with the constant solution verified in steps 1.1 and 2.1, which already extends for every $t\\ge0$. Its energy density is the same constant displayed in the Example.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies positive density and a prescribed nonempty periodic cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The Example includes zero drift V*=0; the direct substitution in Proof step 1.1 still gives zero derivatives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The Example includes d=1 in d∈{1,2,3}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Example requires ρ*>0, κphys>0, and γ>1; vacuum and zero polytropic coefficient are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The Example includes d=1 and d=3 while keeping density, κphys, and γ in their strict positive ranges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 applies the local uniqueness result under the Countable Choice assumption in the Example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant fields",
+          "status": "checked",
+          "evidence": "Substitution gives zero for the continuity, acceleration, momentum-flux divergence, and pressure-gradient terms."
+        },
+        {
+          "case": "energy density",
+          "status": "checked",
+          "evidence": "Every factor in the displayed energy density is constant in space and time."
+        }
+      ]
+    }
+  }
+}

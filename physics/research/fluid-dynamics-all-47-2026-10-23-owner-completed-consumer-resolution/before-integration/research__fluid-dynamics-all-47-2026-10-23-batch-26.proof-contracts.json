@@ -1,0 +1,808 @@
+{
+  "version": 1,
+  "scope": [
+    "post-fd-boltzmann-model",
+    "pthm-fd-local-boltzmann-h-balance",
+    "pthm-fd-boltzmann-entropy",
+    "pthm-fd-ideal-gas-euler-interface",
+    "post-fd-bgk-relaxation",
+    "pthm-fd-bgk-equilibration",
+    "texp-fd-bgk-preparation"
+  ],
+  "contracts": {
+    "post-fd-boltzmann-model": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate defines the d=3 state, elastic quadruple space, symmetric collision-rate measure and weak identity. The current batch-25 definition carrier is present and its positive finite-valued collision domain matches; its current Step 1 readiness record is missing."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and the Postulate section limit the claim to a single-species nonrelativistic monatomic periodic model, qualitative dilute-gas applicability, no internal modes, and no empirical validity or solution-existence claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "MIT 8.333 Lecture 8 §III.D and Tong Kinetic Theory §§2.2–2.2.3 were read at the cited full-text locators; retrieval stamps are in batch-26.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section labels the equation and incoming factorization as adopted assumptions and explicitly disclaims a reversible many-particle derivation or propagation-of-chaos claim."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-boltzmann-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-kinetic-h",
+          "source_section": "Statement",
+          "quote": "$$\\frac{dH}{dt}=-D(t)\\le0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-fd-local-boltzmann-h-balance",
+          "source_section": "Statement",
+          "quote": "$$\\partial_t h+\\nabla_x\\cdot J_H=-D$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-physical-kinetic-observables",
+          "source_section": "Definition",
+          "quote": "$$h=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad J_H=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad s_{\\rm kin}=-k_Bh,\\qquad j_{\\rm kin}=-k_BJ_H.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-fd-boltzmann-model",
+          "source_section": "Postulate",
+          "quote": "These equations and the incoming factorization are physical model postulates, not deductions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "physical-local-entropy",
+          "claim": "Scale the locally proved H balance by -k_B and substitute the physical entropy and flux definitions.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "periodic-global-entropy",
+          "claim": "Use the actual K01 total H identity and the same integrated collision production to obtain monotonic physical entropy.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes L_j>0 and a positive solution on a periodic cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 retains D=0 as zero production; no strict increase is claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is a balance over continuous velocity space."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement does not characterize collision equilibria."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time interval I is open; no time endpoints are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a balance and inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "planned_supplier_excerpts": {
+        "thm-fd-kinetic-h": {
+          "path": "items/thm-fd-kinetic-h.md#Statement",
+          "carrier_status": "Current batch-25 item and manifest carrier inspected; current Step 1 readiness record is missing. Its current Statement gives the periodic global identity only; the batch-26 local result is proved separately.",
+          "excerpt": "$$\\frac{dH}{dt}=-D(t)\\le0.$$"
+        }
+      }
+    },
+    "pthm-fd-ideal-gas-euler-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-controlled-euler-passage",
+          "source_section": "Statement",
+          "quote": "Then $\\rho=mn$, $p=nk_BT$, and $E=\\rho|u|^2/2+3nk_BT/2$ satisfy the compressible monatomic Euler equations in distributions on $(0,T_*)\\times\\Omega$; explicitly, for every $C^1$ scalar tests $\\phi,\\eta$ and vector test $\\zeta$ on $[0,T_*]\\times\\Omega$, periodic in $x$ and compactly supported away from $t=T_*$,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-physical-kinetic-observables",
+          "source_section": "Definition",
+          "quote": "Here $n$ is in $\\mathrm{m^{-3}}$, $\\rho$ in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $T$ in kelvins, $P$ in pascals, $q$ in $\\mathrm{W\\,m^{-2}}$, and $E$ in $\\mathrm{J\\,m^{-3}}$. The definitions impose no isotropy on $P$; $p$ will denote a separate scalar pressure only in a specified local-equilibrium conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-fd-boltzmann-model",
+          "source_section": "Postulate",
+          "quote": "The adopted kinetic equation is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "conditional-euler-application",
+          "claim": "Verify the exact scaled-equation and weighted convergence hypotheses of the planned K01 theorem, then apply it for the distributional Euler system and initial trace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "physical-euler-interpretation",
+          "claim": "Use the moment definitions to expand total energy and interpret the mass, momentum, and energy variables in SI units; preserve the strong convergence as a hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires L_j>0, T_*>0, and n,T bounded away from zero on the periodic cylinder."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows u=0; step 2.1 uses no division by velocity and the positive n,T assumptions keep the equations defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The framework fixes three spatial and velocity dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Vacuum and zero-temperature limits are excluded by the uniform positive lower bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the initial trace from the explicit initial weighted convergence and works on [0,T_*]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no choice principle or arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a conditional implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from Euler flow to kinetic convergence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "planned_supplier_excerpts": {
+        "thm-fd-controlled-euler-passage": {
+          "path": "items/thm-fd-controlled-euler-passage.md#Statement",
+          "carrier_status": "Current batch-25 carrier and manifest entry inspected; its exact weighted hypotheses match. Current Step 1 readiness record is missing.",
+          "excerpt": "Then $\\rho=mn$, $p=nk_BT$, and $E=\\rho|u|^2/2+3nk_BT/2$ satisfy the compressible monatomic Euler equations in distributions on $(0,T_*)\\times\\Omega$; explicitly, for every $C^1$ scalar tests $\\phi,\\eta$ and vector test $\\zeta$ on $[0,T_*]\\times\\Omega$, periodic in $x$ and compactly supported away from $t=T_*$,"
+        }
+      }
+    },
+    "post-fd-bgk-relaxation": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate states the moment-matched Maxwellian, constant phenomenological relaxation time and dimensionless homogeneous fast scale. The current batch-25 BGK definition carrier is present and its moment convention matches; its current Step 1 readiness record is missing."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope separates this monatomic homogeneous BGK idealization from the binary Boltzmann operator and excludes inhomogeneous hydrodynamic limits, many-particle derivations, and empirical claims."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Golse–Levermore Lecture 2 §II and Tong §2.5.1 were read at the cited full-text locators; the former gives the local-Maxwellian BGK form, while the latter is used only for its explicit approximation caveat. Fetch stamps are in batch-26.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section explicitly adopts a phenomenological relaxation model and does not claim an exact microscopic collision operator or derive BGK from the binary Boltzmann postulate."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-bgk-equilibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-homogeneous-bgk-limit",
+          "source_section": "Statement",
+          "quote": "$$f^\\epsilon(t,v):=M(v)+e^{-t/(\\epsilon\\tau)}(f_0(v)-M(v)),\\qquad t\\ge0.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-conserving-bgk",
+          "source_section": "Definition",
+          "quote": "$$Q_{\\rm BGK}(f):=\\frac{M[f]-f}{\\tau}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-fd-maxwellian-moments",
+          "source_section": "Statement",
+          "quote": "Thus its pressure tensor is isotropic and its centered heat flux vanishes; these conclusions concern this Gaussian profile and do not impose isotropy on a general kinetic density.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-fd-bgk-entropy-rate",
+          "source_section": "Statement",
+          "quote": "$$0\\le H(f^\\epsilon(t))-H(M)",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\exp^{(m)}=\\exp.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-function-limits",
+          "source_section": "Statement",
+          "quote": "$$\\lim_{x \\to c} (fg)(x) \\;=\\; \\Bigl(\\lim_{x \\to c} f(x)\\Bigr)\\Bigl(\\lim_{x \\to c} g(x)\\Bigr) \\;=\\; LM ;$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-bgk-relaxation",
+          "source_section": "Postulate",
+          "quote": "$$\\partial_t f^\\varepsilon=\\frac{M[f^\\varepsilon]-f^\\varepsilon}{\\varepsilon\\tau},\\qquad t\\ge0.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-solution-branch",
+          "claim": "Apply the current homogeneous BGK theorem to obtain the nonnegative weighted-Banach-space solution and its exact omega3 estimate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "conserve-pointwise-moments",
+          "claim": "Differentiate the three invariant moments under the stated common envelope and use the moment-preserving Maxwellian to fix M.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pointwise-uniqueness",
+          "claim": "Solve the resulting scalar linear equation by an integrating factor and the mean-value theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "weighted-and-entropy-bounds",
+          "claim": "Derive the chosen smaller weighted-L1 equality from the exact formula and apply the current entropy-rate proposition.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "initial-layer-and-equilibrium-boundary",
+          "claim": "Take the fixed-positive-time fast-scale limit and check the t=0 and stationary equilibrium cases.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n_0>0 and positive centered second moment make the Maxwellian branch nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement permits f_0=0 on velocity subsets with 0log0=0; step 2.2 uses the exact absolute-value formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement is single species and the conserved number density is n_0>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes f_0=M almost everywhere as the stationary zero-gap case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks t=0 separately from every fixed t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The solution formula and pointwise uniqueness use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an explicit solution and one-way estimate, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a small entropy gap to a unique initial state is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "dimensionless norm comparison",
+          "method": "For z=|v|/v_*≥0, 1+z^3≤1+z+z^2+z^3=omega_3.",
+          "result": "The chosen 1+z^3 weighted norm is finite and bounded by the exact omega_3 norm."
+        },
+        {
+          "name": "time-integrated exponential",
+          "method": "Integrate a(t)=exp(-t/(epsilon tau)) on [0,T_*].",
+          "result": "The integral is epsilon tau(1-exp(-T_*/(epsilon tau)))≤epsilon tau."
+        }
+      ],
+      "planned_supplier_excerpts": {
+        "thm-fd-homogeneous-bgk-limit": {
+          "path": "items/thm-fd-homogeneous-bgk-limit.md#Statement",
+          "carrier_status": "Current batch-25 carrier and manifest item inspected; exact formula and omega3 norm match. Current Step 1 readiness record is missing.",
+          "excerpt": "$$f^\\epsilon(t,v):=M(v)+e^{-t/(\\epsilon\\tau)}(f_0(v)-M(v)),\\qquad t\\ge0.$$"
+        },
+        "prop-fd-bgk-entropy-rate": {
+          "path": "items/prop-fd-bgk-entropy-rate.md#Statement",
+          "carrier_status": "Current batch-25 carrier and manifest item inspected; exact reference-relative entropy inequality matches. Current Step 1 readiness record is missing.",
+          "excerpt": "$$0\\le H(f^\\epsilon(t))-H(M)\n\\le e^{-t/(\\epsilon\\tau)}\\bigl(H(f_0)-H(M)\\bigr).$$"
+        }
+      }
+    },
+    "texp-fd-bgk-preparation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-bgk-equilibration",
+          "source_section": "Statement",
+          "quote": "$$f^\\varepsilon(v,t)=M(v)+e^{-t/(\\varepsilon\\tau)}(f_0(v)-M(v)).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prepared-density-moments",
+          "claim": "Integrate the uniform-cube density and its first and second moments, then verify the third-moment and entropy hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "not-equilibrium",
+          "claim": "The compact support differs from the everywhere-positive Maxwellian, so the initial weighted distance is strictly positive.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "conditional-initial-layer",
+          "claim": "Apply the authored BGK theorem to the prepared data and take the fixed-positive-time fast-scale limit while preserving the initial mismatch.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n_0>0 and T_0>0 make the prepared density and velocity box nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses V_c>0 from T_0>0; the box width does not collapse to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement is explicitly single species and the initial density integrates to n_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the selected compactly supported density is not the Maxwellian."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 distinguishes t=0 from fixed t>0, the initial layer endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction uses an explicit box and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a conditional model prediction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse inference from relaxation to a unique initial density is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "box normalization and moments",
+          "method": "Direct one-dimensional integrals on [-V_c,V_c] and product volume.",
+          "result": "\\int f_0\\,d^3v=n_0,\\quad \\int vf_0\\,d^3v=0,\\quad \\int |v|^2f_0\\,d^3v=n_0V_c^2=3n_0k_BT_0/m."
+        },
+        {
+          "name": "reference-relative entropy",
+          "method": "The density is constant on a finite-volume cube and zero elsewhere.",
+          "result": "The absolute entropy integral equals n_0 times the finite absolute logarithm of C/f_ref."
+        }
+      ]
+    },
+    "pthm-fd-local-boltzmann-h-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-fd-boltzmann-model",
+          "source_section": "Postulate",
+          "quote": "$$\\partial_t f+v\\cdot\\nabla_x f=Q_\\nu(f)$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-physical-kinetic-observables",
+          "source_section": "Definition",
+          "quote": "$$h=\\int_{\\mathbb R^3}f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad J_H=\\int_{\\mathbb R^3}v f\\log(f/f_{\\rm ref})\\,d^3v,\\qquad s_{\\rm kin}=-k_Bh,\\qquad j_{\\rm kin}=-k_BJ_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-elastic-collision-measure",
+          "source_section": "Definition",
+          "quote": "The model's weak collision identity is\n$$\\int_{\\mathbb R^3}\\varphi(v)Q_\\nu(f)(v)\\,dv",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-function-limits",
+          "source_section": "Statement",
+          "quote": "$$\\lim_{x \\to c} (fg)(x) \\;=\\; \\Bigl(\\lim_{x \\to c} f(x)\\Bigr)\\Bigl(\\lim_{x \\to c} g(x)\\Bigr) \\;=\\; LM ;$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "differentiate-local-entropy-integrals",
+          "claim": "Differentiate h and J_H under their velocity integrals and combine the transport and time derivatives.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-collision-production",
+          "claim": "Use the equation and weak tests 1 and log(f/f_ref) to identify the local collision contribution as -D.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonnegative-local-production",
+          "claim": "Use monotonicity of log on positive arguments and nonnegativity of the collision measure.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes L_j>0 and a positive solution on the periodic cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero integrand when A=B; strict production is not claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result concerns a continuous three-dimensional velocity space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 allows A=B at every collision, yielding D=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "I is open and the statement makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no choice principle or arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a local balance and inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of zero production is asserted."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

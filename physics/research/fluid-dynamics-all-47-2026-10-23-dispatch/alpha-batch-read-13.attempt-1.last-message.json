@@ -1,0 +1,216 @@
+{
+  "group": "b",
+  "batches": ["13"],
+  "pages_read": ["fd-px02", "fd-px02-examples"],
+  "items_read": [
+    "pthm-fd-px04-prediction",
+    "def-fd-incompressible-euler-model",
+    "pthm-fd-px05-prediction",
+    "post-fd-creeping-force-balance",
+    "def-fd-creeping-stokes-model",
+    "pthm-fd-px06-prediction",
+    "pthm-fd-px08-prediction",
+    "pthm-fd-px09-prediction",
+    "pthm-fd-px13-prediction",
+    "ex-fd-x04-application",
+    "ex-fd-x05-application",
+    "ex-fd-x06-application",
+    "ex-fd-x08-application",
+    "ex-fd-x09-application",
+    "ex-fd-x13-application"
+  ],
+  "conventions": [
+    {
+      "convention": "Incompressible Euler pressure is a constraint multiplier at constant density, not pressure prescribed by a barotropic equation of state.",
+      "fixed_by": "def-fd-incompressible-euler-model",
+      "matters_for": ["pthm-fd-px05-prediction", "pthm-fd-px13-prediction"]
+    },
+    {
+      "convention": "The creeping model adopts a steady zero-inertia alternative balance; it does not simultaneously impose the full material-acceleration momentum equation.",
+      "fixed_by": "post-fd-creeping-force-balance",
+      "matters_for": [
+        "def-fd-creeping-stokes-model",
+        "pthm-fd-px06-prediction",
+        "ex-fd-x06-application"
+      ]
+    },
+    {
+      "convention": "Sphere resultants use n=x/a pointing from the sphere into the exterior fluid and tension-positive stress. This normal is opposite to the exterior fluid domain's inner-boundary outward normal.",
+      "fixed_by": "pthm-fd-px06-prediction",
+      "matters_for": [
+        "ex-fd-x06-application",
+        "pthm-fd-px13-prediction",
+        "ex-fd-x13-application"
+      ]
+    },
+    {
+      "convention": "Exterior Stokes uniqueness assumes Countable Choice, fixed pressure limit, and direction-uniform velocity, gradient and pressure decay of orders r^-1, r^-2 and r^-2.",
+      "fixed_by": "pthm-fd-px06-prediction",
+      "matters_for": ["ex-fd-x06-application"]
+    },
+    {
+      "convention": "The diffusion layer is classical only for t>0 and y>0; its wall trace is the vector (U,0,0), and the initial-wall corner is excluded.",
+      "fixed_by": "pthm-fd-px08-prediction",
+      "matters_for": ["ex-fd-x08-application"]
+    },
+    {
+      "convention": "Torus equations and material-loop circulation are defined through periodic Euclidean lifts; lattice translations leave the specified circulation unchanged.",
+      "fixed_by": "pthm-fd-px08-prediction",
+      "matters_for": ["ex-fd-x08-application"]
+    },
+    {
+      "convention": "Barotropic Bernoulli includes h(rho)=integral of P'(r)/r and the conservative potential V. Component-wide constancy additionally requires zero curl; Kelvin conservation requires the stated closed material-loop regularity.",
+      "fixed_by": "pthm-fd-px09-prediction",
+      "matters_for": ["ex-fd-x09-application"]
+    },
+    {
+      "convention": "The potential sphere uses impermeable slip and pressure-only Euler stress; its zero resultant is not a no-slip or viscous-drag conclusion.",
+      "fixed_by": "pthm-fd-px13-prediction",
+      "matters_for": ["ex-fd-x13-application"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "post-fd-creeping-force-balance",
+      "statement": "For the stated steady C2 velocity, C1 pressure, continuous body acceleration, and constant positive density and viscosity, adopt div u=0, sigma=-pI+2mu D, and div sigma+rho0 b=0 as an alternative zero-inertia branch, without simultaneously imposing the full material-acceleration equation.",
+      "used_by": [
+        "def-fd-creeping-stokes-model",
+        "pthm-fd-px07-prediction",
+        "def-fd-pn01-forced-creeping-stokes-branch",
+        "pthm-fd-creeping-lipschitz-pressure"
+      ]
+    },
+    {
+      "id": "def-fd-creeping-stokes-model",
+      "statement": "For the stated open spatial domain, constant rho0,mu>0, u in C2, p in C1 and specified continuous b, the selected steady creeping branch is div u=0 and div sigma+rho0 b=0 with sigma=-pI+2mu D, equivalently -grad p+mu Laplacian u+rho0 b=0. Boundary, far-field, geometry and decay conditions are separate.",
+      "used_by": ["pthm-fd-px06-prediction", "pthm-fd-px07-prediction"]
+    },
+    {
+      "id": "def-fd-incompressible-euler-model",
+      "statement": "On the stated open time and spatial domains in a Cartesian inertial chart, with constant rho0>0, C2 velocity and C1 pressure, the selected unforced incompressible Euler branch is rho=rho0, div u=0 and rho0 D_t u+grad p=0. Pressure is a constraint multiplier; no viscous stress or equation of state is included.",
+      "used_by": ["pthm-fd-px05-prediction", "pthm-fd-px13-prediction"]
+    },
+    {
+      "id": "pthm-fd-px06-prediction",
+      "statement": "Under Countable Choice, the displayed exterior-sphere fields solve the zero-body-acceleration steady Stokes system, satisfy no slip and the prescribed uniform far field, have oriented resultant 6πmu aU, and are unique among classical pairs with the stated pressure normalization and direction-uniform decay bounds.",
+      "used_by": ["ex-fd-x06-application"]
+    },
+    {
+      "id": "pthm-fd-px09-prediction",
+      "statement": "For the stated smooth positive-density barotropic Euler equations with C2 pressure law and time-independent C2 conservative potential, steady Bernoulli is constant along streamlines and throughout connected curl-free components; circulation is constant for every closed material loop with the stated regularity. The displayed exponential-density solid rotation satisfies both equations and has radius-dependent Bernoulli values.",
+      "used_by": ["ex-fd-x09-application"]
+    },
+    {
+      "id": "pthm-fd-px08-prediction",
+      "statement": "The displayed Gaussian-tail half-space field solves unsteady Stokes and full constant-density Navier–Stokes on t>0,y>0, has the stated separate boundary and initial limits, and obeys the stated tail bound. Separately, the specified periodic sine shear and lifted material loop have circulation Ac C_alpha exp(-nu k²t), with C_alpha>0 and nonconstant circulation when A≠0.",
+      "used_by": ["ex-fd-x08-application"]
+    },
+    {
+      "id": "pthm-fd-px04-prediction",
+      "statement": "For the stated positive parameters, affine axial pressure, infinite channel and pipe domains, and wall data, the displayed Couette–Poiseuille profiles are unique within their respective one-dimensional ansätze, have the stated fluxes and shear components, and solve both stationary Navier–Stokes and steady Stokes. Pipe uniqueness requires C2 regularity on the full disk.",
+      "used_by": ["ex-fd-x04-application"]
+    },
+    {
+      "id": "pthm-fd-px05-prediction",
+      "statement": "The specified punctured-axis vortex solves steady incompressible Euler, has zero divergence and curl but circulation 2πkappa and no single-valued global potential. The specified solid rotation also solves Euler and has Bernoulli constant along each streamline but different at different radii.",
+      "used_by": ["ex-fd-x05-application"]
+    },
+    {
+      "id": "pthm-fd-px13-prediction",
+      "statement": "The displayed exterior-sphere potential and pressure solve steady incompressible Euler, approach their prescribed far-field limits uniformly in direction, satisfy impermeability with generally nonzero tangential surface velocity, and have zero pressure-only resultant with the stated sphere normal.",
+      "used_by": ["ex-fd-x13-application"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact indexed Countable Choice assumption inherited by exterior Stokes uniqueness and its worked example.",
+      "opened": true
+    },
+    {
+      "id": "def-divergence-and-curl-of-a-c1-vector-field",
+      "used_for": "Cartesian divergence and right-handed curl conventions used through def-fd-x00.",
+      "opened": true
+    },
+    {
+      "id": "def-laplacian-of-a-c2-function",
+      "used_for": "Componentwise scalar and vector Laplacian in the formal fluid systems.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Row-component Jacobian and scalar gradient conventions underlying stress and momentum calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean dot product and norm in circulation, kinetic energy and resultant calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+      "used_for": "Euclidean circulation as a parametrized vector-field line integral.",
+      "opened": true
+    },
+    {
+      "id": "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+      "used_for": "Oriented surface flux and normal convention underlying formal stress resultants.",
+      "opened": true
+    },
+    {
+      "id": "def-first-fundamental-form-and-surface-area-density",
+      "used_for": "Gram area density in the exterior sphere suppliers' explicit sphere integrations.",
+      "opened": true
+    },
+    {
+      "id": "def-surface-area-and-scalar-surface-integral-of-a-patch",
+      "used_for": "Parametrized sphere surface integration and the content-zero parameter-boundary convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Annular integration by parts in thm-fd-x06, with Countable Choice and outward normals on both boundary components; inherited by the physical uniqueness claim.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "post-fd-creeping-force-balance",
+      "concern": "Facts F1 restates the frame supplier as saying that 'an inertial Cartesian chart is an orientation-preserving affine isometry from that space to R3'. The cited def-fd-quantity-and-frame-conventions instead defines an event-coordinate map (t,X)↦(t,x_t(X)), whose fixed-time spatial maps are affine isometries and may translate at constant velocity. F1 conflates a spatial slice with the full chart. The steady force-balance calculation is unaffected, but the supplier's object and domain should be stated faithfully.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-px02",
+      "to": "fd-f02",
+      "faithful": true,
+      "note": "Boundary-data uses preserve separately adopted no-slip, inviscid impermeability, periodic identification and initial compatibility; they infer no solvability. The impulsive corner remains excluded."
+    },
+    {
+      "from": "fd-px02",
+      "to": "fd-f03",
+      "faithful": true,
+      "note": "Newtonian consumers select constant viscosity and zero divergence, so the stated stress specialization is valid. The barotropic theorem explicitly adds conservative forcing rather than attributing it to the earlier unforced definition."
+    },
+    {
+      "from": "fd-px02",
+      "to": "fd-x02",
+      "faithful": true,
+      "note": "Checked all six formal solution suppliers and the formal Euler definition. Physical consumers retain ansatz-only uniqueness, full-axis pipe regularity, exterior decay and Countable Choice, corner exclusion, torus lift conventions, Kelvin hypotheses and slip pressure-only force. No barotropic theorem is improperly used for constant-density multiplier pressure."
+    },
+    {
+      "from": "fd-px03",
+      "to": "fd-px02",
+      "faithful": true,
+      "note": "The residual-estimate consumer uses the creeping definition and force-balance postulate with b=0, explicitly as an alternative comparison equation for its Stokes field. It does not impose the full acceleration balance on that same field."
+    },
+    {
+      "from": "fd-pn01",
+      "to": "fd-px02",
+      "faithful": true,
+      "note": "The forced creeping weak branch and pressure-stability consumer accurately use the postulate's specified body acceleration and zero-inertia alternative. The weak formulation is supplied explicitly downstream rather than claimed to follow from classical regularity alone."
+    }
+  ]
+}

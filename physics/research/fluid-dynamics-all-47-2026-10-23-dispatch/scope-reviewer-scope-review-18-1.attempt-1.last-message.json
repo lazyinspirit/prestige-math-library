@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "18",
+  "round": 1,
+  "reviewed_items": [
+    "thm-fd-smooth-periodic-incompressible-ivp",
+    "def-fd-polytropic-symmetric-variables",
+    "thm-fd-smooth-polytropic-euler-ivp",
+    "def-fd-smooth-wall-exterior-solution-domains",
+    "thm-fd-global-linear-acoustics",
+    "thm-fd-compatible-wall-shear-heat",
+    "def-fd-flat-channel-domains",
+    "lem-fd-polynomial-ode-continuation",
+    "ex-fd-compressible-viscous-shear",
+    "ex-fd-periodic-poiseuille-body-force",
+    "ex-fd-couette-vorticity",
+    "rem-fd-general-viscous-wall-ivp-gaps"
+  ],
+  "reviewed_pages": [
+    "fd-s02",
+    "fd-s02-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The three round-0 repairs are present, and all 11 required consumer checks pass for the clarified interfaces. A remaining prerequisite proof issue blocks acceptance; this is the second review, so owner resolution is required.",
+  "findings": [
+    {
+      "id": "thm-fd-smooth-polytropic-euler-ivp",
+      "type": "prerequisite",
+      "reason": "Proof step 2.1 uses F9 and the dependency on thm-euclidean-space-complete for the finite-dimensional endpoint limit. That imported proof's step 3.2 uses an undefined q-hat. The repaired lem-fd-polynomial-ode-continuation now proves the needed continuation using coordinatewise real completeness, but this theorem still explicitly consumes F9. The smallest resolution is to remove that use and dependency or supply the coordinatewise argument locally; no second engine repair is available."
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "type": "outside-batch",
+      "reason": "The published imported item is read-only. Its proof step 3.2 chooses q but then uses undefined q-hat in the convergence bound, so I cannot attest that proof as written. This flags the proof, not the truth of its Statement; the owner must review or reconcile the current consumer use."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-fd-compressible-viscous-shear",
+      "decision": "accept",
+      "reason": "Its profile F(y)=A sin(y/ℓ) is real-valued because A∈ℝ, satisfying the clarified shear interface."
+    },
+    {
+      "id": "ex-fd-homogeneous-polytropic-model",
+      "decision": "accept",
+      "reason": "Its constant positive density and real velocity data fit the clarified polytropic input maps."
+    },
+    {
+      "id": "pthm-fd-local-polytropic-model-evolution",
+      "decision": "accept",
+      "reason": "Its physical initial data normalize to maps into (0,∞) and ℝᵈ, matching the clarified theorem interface."
+    },
+    {
+      "id": "pthm-fd-two-dimensional-viscous-model-globality",
+      "decision": "accept",
+      "reason": "Its use is through the two-dimensional incompressible theorem and does not use the clarified polytropic input interface."
+    },
+    {
+      "id": "rem-fd-boundary-layer-low-mach-status",
+      "decision": "accept",
+      "reason": "Its scope conclusions concern the inviscid-limit and acoustic items, not the changed polytropic input interface."
+    },
+    {
+      "id": "rem-fd-general-viscous-wall-ivp-gaps",
+      "decision": "accept",
+      "reason": "Its limited-scope descriptions remain consistent with the clarified polytropic and real-valued shear claims."
+    },
+    {
+      "id": "thm-fd-global-two-dimensional-periodic-navier-stokes",
+      "decision": "accept",
+      "reason": "Its continuation use is the incompressible branch; the clarified polytropic input maps are not used."
+    },
+    {
+      "id": "thm-fd-periodic-inviscid-limit",
+      "decision": "accept",
+      "reason": "Its argument uses the incompressible branch of the stability result, not the clarified polytropic interface."
+    },
+    {
+      "id": "thm-fd-periodic-smooth-stability",
+      "decision": "accept",
+      "reason": "Its polytropic clause compares already-given smooth positive-density solutions; the input-map clarification does not alter that use."
+    },
+    {
+      "id": "thm-fd-polytropic-energy",
+      "decision": "accept",
+      "reason": "Its initial-data maps already have the clarified domains and codomains."
+    },
+    {
+      "id": "thm-fd-smooth-sobolev-continuation",
+      "decision": "accept",
+      "reason": "Its restart data are positive smooth symmetric-variable states and fit the clarified polytropic theorem interface."
+    }
+  ]
+}

@@ -1,0 +1,548 @@
+[
+  {
+    "order": 405,
+    "id": "fd-w03",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Distributional systems and entropy flux pairs",
+    "companion": "fd-w03-examples",
+    "requires": [
+      "cm-math-continuum",
+      "distributions-test-functions-and-differentiation"
+    ],
+    "items": [
+      {
+        "id": "lem-fd-locally-integrable-functions-define-distributions",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Locally integrable functions define distributions",
+        "reference": "items/lem-fd-locally-integrable-functions-define-distributions.md",
+        "design_state": "Step 1 authored draft; local prerequisite item; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "lem-test-function-lf-topology-universal-property"
+        ],
+        "dependency_roles": {
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "lem-test-function-lf-topology-universal-property": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $\\Omega\\subseteq\\mathbb R^n$ be open and let $f\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb C)$. The regular functional $T_f$ defined by\n$$\\langle T_f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx\\qquad(\\varphi\\in\\mathcal D(\\Omega))$$\nis a distribution on $\\Omega$ with the LF test-function topology.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Razvan Gelca, Functional Analysis, lecture notes, Chapter 7, Section 7.3",
+              "url": "https://www.math.ttu.edu/~rgelca/FUNCTANAL.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-fd-conservation-system",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Distributional systems and entropy flux pairs",
+        "reference": "items/def-fd-conservation-system.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "lem-fd-locally-integrable-functions-define-distributions",
+          "def-distributional-derivative",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "lem-fd-locally-integrable-functions-define-distributions": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $d,m\\in\\mathbb N$, let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex. Put $Q=I\\times\\Omega$. A first-order conservation system on $\\mathcal O$ consists of fluxes $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$, and the equation\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=0.$$\nA state field $U:Q\\to\\mathcal O$ is locally bounded if it is measurable and essentially bounded on every compact subset of $Q$. For an open set $Q$, $g\\in L^1_{\\mathrm{loc}}(Q)$ means $g$ is measurable and $\\int_K|g|<\\infty$ for every compact $K\\subseteq Q$. Require also $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q;\\mathbb R^m)$. These fields then define regular distributions componentwise. The conservation system holds in distributions on $Q$ when, for every real-valued $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$,\n$$\\int_Q\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt=0.$$\nThis is the test-function meaning of the displayed derivative equation, using the distributional derivative convention in the supplied mathematics. The pairing is bilinear, without complex conjugation.\n\nFor an initial-value problem on $(0,T)\\times\\Omega$, $T>0$, let $U_0:\\Omega\\to\\mathcal O$ be measurable and locally integrable. Require integrability of the state and fluxes up to the initial boundary:\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|U|+\\sum_{j=1}^d|F_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact}).$$\nThis condition uses only positive-time values and does not assert a strong trace at $t=0$. A test function up to the initial boundary is the restriction of a smooth function defined on a neighborhood of $[0,T)\\times\\Omega$, with compact support in $[0,T)\\times\\Omega$; its value at $t=0$ need not vanish. The initial-value weak identity is\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(U\\cdot\\partial_t\\varphi+\\sum_{j=1}^dF_j(U)\\cdot\\partial_{x_j}\\varphi\\right)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\varphi(0,x)\\,dx=0$$\nfor every such real vector test function. The stated integrability up to the initial boundary makes every term finite, including for tests nonzero at $t=0$; a weak solution with initial data $U_0$ must satisfy these integrability conditions and this identity for all such tests.\n\nA convex entropy-flux pair for the system is a function $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ that is convex on the convex state domain $\\mathcal O$ and functions $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfying\n$$Dq_j(V)=D\\eta(V)\\,DF_j(V)\\qquad(V\\in\\mathcal O,\\ 1\\leq j\\leq d),$$\nwhere convexity means $\\eta((1-\\theta)V+\\theta W)\\leq(1-\\theta)\\eta(V)+\\theta\\eta(W)$ for $V,W\\in\\mathcal O$ and $\\theta\\in[0,1]$, and $D\\eta,Dq_j$ are row derivatives while $DF_j$ is the Jacobian matrix. For a state field $U$, require $\\eta(U),q_1(U),\\ldots,q_d(U)\\in L^1_{\\mathrm{loc}}$ before using their distributions. The entropy inequality on $Q$ means\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)\\leq0,$$\nwith the sign convention that this holds exactly when\n$$\\int_Q\\left(\\eta(U)\\,\\partial_t\\psi+\\sum_{j=1}^dq_j(U)\\,\\partial_{x_j}\\psi\\right)\\,dx\\,dt\\geq0$$\nfor every nonnegative $\\psi\\in C_c^\\infty(Q)$. With initial data on $(0,T)\\times\\Omega$, require also\n$$\\int_0^\\tau\\!\\!\\int_K\\left(|\\eta(U)|+\\sum_{j=1}^d|q_j(U)|\\right)\\,dx\\,dt<\\infty\\qquad(0<\\tau<T,\\ K\\subseteq\\Omega\\text{ compact})$$\nand $\\eta(U_0)\\in L^1_{\\mathrm{loc}}(\\Omega)$. Use every nonnegative scalar test up to the initial boundary defined above and add $\\int_\\Omega\\eta(U_0)\\psi(0,x)\\,dx$ to the entropy integral. These conditions make all terms finite even when the test is nonzero at $t=0$. A weak solution satisfying this inequality is entropy-admissible relative to that pair.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter III §3.2 and Chapter IV §§4.3–4.5",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §§2–3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            },
+            {
+              "title": "Piotr Gwiazda, Martin Michálek, and Agnieszka Świerczewska-Gwiazda, A Note on Weak Solutions of Conservation Laws and Energy/Entropy Conservation, §1",
+              "url": "https://arxiv.org/pdf/1706.10154"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null
+      },
+      {
+        "id": "def-fd-piecewise-traces",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Planar shocks and piecewise smooth traces",
+        "reference": "items/def-fd-piecewise-traces.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-conservation-system"
+        ],
+        "dependency_roles": {
+          "def-fd-conservation-system": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be the state domain of a conservation system, $n\\in\\mathbb R^d$ satisfy $|n|=1$, and $s\\in\\mathbb R$. The planar interface and its two open sides are\n$$\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st=0\\},\\qquad Q^-=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st<0\\},\\qquad Q^+=\\{(t,x)\\in I\\times\\Omega:n\\cdot x-st>0\\}.$$\nA state field is piecewise $C^1$ across $\\Sigma$ if on each side it is $C^1$ and, near every point of $\\Sigma$, each side field is the restriction of a $C^1$ map from a neighborhood in $I\\times\\Omega$ into $\\mathcal O$. The left and right traces $U_L,U_R:\\Sigma\\to\\mathcal O$ are the restrictions of those extensions to $\\Sigma$; they are independent of the chosen extensions because they agree with the same field on their respective open sides. For any state or flux quantity $G$ with these traces, define its jump by $[G]=G_R-G_L$. A planar shock profile is such a piecewise $C^1$ state field with its specified constant interface normal $n$ and speed $s$; the definition does not assert that it solves a conservation system.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter III §3.1 and Chapter IV §4.3",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null
+      },
+      {
+        "id": "thm-fd-rankine-hugoniot",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Vector Rankine–Hugoniot condition",
+        "reference": "items/thm-fd-rankine-hugoniot.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-piecewise-traces",
+          "def-fd-conservation-system",
+          "def-distributional-derivative",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-nonnegative-lebesgue-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-piecewise-traces": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "thm-linear-change-of-variables-for-lebesgue-measure": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ be open, $\\Omega\\subseteq\\mathbb R^d$ be open, $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and let $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $\\partial_tU+\\sum_j\\partial_{x_j}(F_j(U))=0$ pointwise on both open sides, and $U,F_j(U)\\in L^1_{\\mathrm{loc}}$. With $[G]=G_R-G_L$, the distributional residual is\n$$\\partial_tU+\\sum_{j=1}^d\\partial_{x_j}F_j(U)=\\left(\\sum_{j=1}^dn_j[F_j(U)]-s[U]\\right)\\delta_\\Sigma,$$\nHere spatial plane measure means the pushforward of Lebesgue measure $\\lambda_{d-1}$ by $z\\mapsto Ez+stn$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is any linear isometry onto $n^\\perp$. Explicitly, $\\langle A\\delta_\\Sigma,\\varphi\\rangle=\\int_I\\int_{\\{z:Ez+stn\\in\\Omega\\}}A(t,Ez+stn)\\cdot\\varphi(t,Ez+stn)\\,d\\lambda_{d-1}(z)\\,dt$. For $d=1$, $\\mathbb R^0=\\{0\\}$ and $\\lambda_0(\\{0\\})=1$. This definition is independent of $E$ and specifies the normalization without Hausdorff-measure notation. Consequently, $U$ solves the conservation system in distributions if and only if\n$$s[U]=\\sum_{j=1}^dn_j[F_j(U)]\\quad\\text{at every point of }\\Sigma.$$\nThis is a vector equality; no division by the vector jump is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter III §3.1 and Chapter IV §4.3",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-fd-entropy-jump",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Entropy jump residual",
+        "reference": "items/prop-fd-entropy-jump.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "thm-fd-rankine-hugoniot",
+          "def-fd-piecewise-traces",
+          "def-fd-conservation-system",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-fd-rankine-hugoniot": "mathematical-premise",
+          "def-fd-piecewise-traces": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $I\\subseteq\\mathbb R$ and $\\Omega\\subseteq\\mathbb R^d$ be open, let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and let $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$, $1\\leq j\\leq d$. Let $n\\in\\mathbb R^d$ have $|n|=1$, let $s\\in\\mathbb R$, and set $\\Sigma=\\{(t,x)\\in I\\times\\Omega:n\\cdot x=st\\}$. Suppose $U$ is piecewise $C^1$ across $\\Sigma$, satisfies $U_t+\\sum_jDF_j(U)\\partial_{x_j}U=0$ classically on each open side, and the state, flux, and entropy compositions are locally integrable. Let $\\eta\\in C^2(\\mathcal O;\\mathbb R)$ be convex and let $q_j\\in C^1(\\mathcal O;\\mathbb R)$ satisfy $Dq_j(V)=D\\eta(V)DF_j(V)$ for every $V\\in\\mathcal O$. With $[G]=G_R-G_L$, the distributional entropy residual is\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_{x_j}q_j(U)=\\left(\\sum_{j=1}^dn_j[q_j(U)]-s[\\eta(U)]\\right)\\delta_\\Sigma.$$\nHere $\\delta_\\Sigma$ uses the plane measure defined in the vector jump-residual theorem: integrate in $t$ and in $z\\in\\mathbb R^{d-1}$ with $x=Ez+stn\\in\\Omega$, where $E:\\mathbb R^{d-1}\\to n^\\perp$ is a linear isometry onto $n^\\perp$, using Lebesgue measure $\\lambda_{d-1}$ and singleton mass one when $d=1$. The entropy inequality $\\partial_t\\eta(U)+\\sum_j\\partial_{x_j}q_j(U)\\leq0$ holds near the interface if and only if $\\sum_jn_j[q_j(U)]-s[\\eta(U)]\\leq0$ at every interface point. Entropy admissibility is an additional condition; the conservation jump equality alone does not imply it.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter III §3.2 and Chapter IV §4.5",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §§2–3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            },
+            {
+              "title": "Piotr Gwiazda, Martin Michálek, and Agnieszka Świerczewska-Gwiazda, A Note on Weak Solutions of Conservation Laws and Energy/Entropy Conservation, §1",
+              "url": "https://arxiv.org/pdf/1706.10154"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-fd-lax-pattern",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Strict hyperbolicity and Lax shock pattern",
+        "reference": "items/def-fd-lax-pattern.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-conservation-system"
+        ],
+        "dependency_roles": {
+          "def-fd-conservation-system": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For a one-dimensional system $U_t+\\partial_xF(U)=0$ with $F\\in C^1(\\mathcal O;\\mathbb R^m)$ on an open state domain $\\mathcal O\\subseteq\\mathbb R^m$, the system is strictly hyperbolic at $V\\in\\mathcal O$ if the Jacobian $DF(V)$ has $m$ distinct real eigenvalues. Write them in increasing order as $\\lambda_1(V)<\\cdots<\\lambda_m(V)$. For states $U_L,U_R\\in\\mathcal O$ and speed $s\\in\\mathbb R$ satisfying the Rankine–Hugoniot equality\n$$F(U_R)-F(U_L)=s(U_R-U_L),$$\nassume strict hyperbolicity at both states. The jump is a $k$-Lax shock, $1\\leq k\\leq m$, if\n$$\\lambda_k(U_R)<s<\\lambda_k(U_L),$$\nand also $\\lambda_{k-1}(U_L)<s$ when $k>1$, and $s<\\lambda_{k+1}(U_R)$ when $k<m$. The outer inequality is omitted at each endpoint $k=1$ or $k=m$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter III §3.1 and Chapter VIII §8.3",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null
+      },
+      {
+        "id": "thm-fd-convex-scalar-riemann",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Strictly convex scalar Riemann construction",
+        "reference": "items/thm-fd-convex-scalar-riemann.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "prop-fd-entropy-jump",
+          "def-fd-lax-pattern",
+          "def-fd-conservation-system",
+          "thm-fd-rankine-hugoniot",
+          "def-fd-piecewise-traces",
+          "cor-mean-value-theorem",
+          "thm-ftc-second-part",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "prop-fd-entropy-jump": "mathematical-premise",
+          "def-fd-lax-pattern": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "thm-fd-rankine-hugoniot": "mathematical-premise",
+          "def-fd-piecewise-traces": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$).\n\nLet $F\\in C^2(\\mathbb R;\\mathbb R)$. Let $a,b\\in\\mathbb R$. If $a\\ne b$, assume $F''(z)>0$ for every $z$ in the closed interval with endpoints $a,b$. Set $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$; its value at $x=0$ is arbitrary. For $t>0$ define the following profile:\n\n- If $a=b$, let $u(t,x)=a$.\n- If $a>b$, let $s=(F(a)-F(b))/(a-b)$ and let $u(t,x)=a$ for $x<st$ and $u(t,x)=b$ for $x>st$; its value on $x=st$ is arbitrary.\n- If $a<b$, let $u(t,x)=a$ for $x/t\\leq F'(a)$, let $u(t,x)=(F'|_{[a,b]})^{-1}(x/t)$ for $F'(a)<x/t<F'(b)$, and let $u(t,x)=b$ for $x/t\\geq F'(b)$.\n\nFor each $T>0$, $C_c^\\infty([0,T)\\times\\mathbb R)$ denotes restrictions of smooth functions defined on a neighborhood of $[0,T)\\times\\mathbb R$ and having compact support in that half-open cylinder; such a test may be nonzero at $t=0$. For every $T>0$ and every real test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$, the initial-value weak identity\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(u\\varphi_t+F(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}u_0(x)\\varphi(0,x)\\,dx=0$$\nholds. For every convex $\\eta\\in C^2(\\mathbb R)$ and $q\\in C^1(\\mathbb R)$ with $q'=\\eta'F'$, and for every $k\\in\\mathbb R$ with $\\eta_k(z)=|z-k|$ and $q_k(z)=\\operatorname{sgn}(z-k)(F(z)-F(k))$, the initial entropy inequality\n$$\\int_0^T\\!\\!\\int_{\\mathbb R}\\left(\\eta(u)\\varphi_t+q(u)\\varphi_x\\right)\\,dx\\,dt+\\int_{\\mathbb R}\\eta(u_0(x))\\varphi(0,x)\\,dx\\geq0$$\nholds for each nonnegative test $\\varphi\\in C_c^\\infty([0,T)\\times\\mathbb R)$. In the rarefaction case $a<b$, both inequalities are equalities. In the shock case $a>b$, the speed satisfies $F'(b)<s<F'(a)$, so the shock has the scalar Lax pattern.\n\nThe sign function is $1$ on positive numbers, $0$ at zero, and $-1$ on negative numbers. The statement concerns these exact Riemann profiles and makes no general existence or uniqueness claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapters IV §§4.3–4.5 and Chapter VIII §8.3",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §§2–3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            },
+            {
+              "title": "Piotr Gwiazda, Martin Michálek, and Agnieszka Świerczewska-Gwiazda, A Note on Weak Solutions of Conservation Laws and Energy/Entropy Conservation, §1",
+              "url": "https://arxiv.org/pdf/1706.10154"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-fd-viscous-entropy-passage",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Entropy inequality under an assumed viscous limit",
+        "reference": "items/prop-fd-viscous-entropy-passage.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-conservation-system",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-fd-conservation-system": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $T>0$, let $\\Omega\\subseteq\\mathbb R^d$ be open, let $F\\in C^2(\\mathbb R;\\mathbb R^d)$, and let $\\eta\\in C^2(\\mathbb R)$ be convex. Let $q\\in C^1(\\mathbb R;\\mathbb R^d)$ satisfy $q_j'(z)=\\eta'(z)F_j'(z)$ for every $z\\in\\mathbb R$ and $1\\leq j\\leq d$. For each $\\epsilon>0$, let $u^\\epsilon:[0,T]\\times\\Omega\\to\\mathbb R$, with initial trace $u_0^\\epsilon:=u^\\epsilon(0,\\cdot)$, and let $u:(0,T)\\times\\Omega\\to\\mathbb R$ and $u_0:\\Omega\\to\\mathbb R$. Suppose $u^\\epsilon$, $\\partial_tu^\\epsilon$, all first spatial derivatives, and all second spatial derivatives are continuous on $[0,T]\\times K$ for every compact $K\\subseteq\\Omega$. Suppose $u^\\epsilon$ solves\n$$\\partial_tu^\\epsilon+\\sum_{j=1}^d\\partial_{x_j}F_j(u^\\epsilon)=\\epsilon\\Delta u^\\epsilon\\quad\\text{on }(0,T)\\times\\Omega,$$\nSuppose $|u^\\epsilon|,|u|\\leq M$ almost everywhere for one finite $M$, $u^\\epsilon\\to u$ as $\\epsilon\\downarrow0$ strongly in $L^1_{\\mathrm{loc}}((0,T)\\times\\Omega)$, and $u_0^\\epsilon\\to u_0$ as $\\epsilon\\downarrow0$ strongly in $L^1_{\\mathrm{loc}}(\\Omega)$. Here $f_\\epsilon\\to f$ strongly in $L^1_{\\mathrm{loc}}(X)$ means $\\int_K|f_\\epsilon-f|\\,d\\lambda\\to0$ for every compact $K\\subseteq X$, with Lebesgue measure $\\lambda$ on $X$. Then, for every nonnegative real test $\\psi\\in C_c^\\infty([0,T)\\times\\Omega)$,\n$$\\int_0^T\\!\\!\\int_\\Omega\\left(\\eta(u)\\partial_t\\psi+\\sum_{j=1}^dq_j(u)\\partial_{x_j}\\psi\\right)\\,dx\\,dt+\\int_\\Omega\\eta(u_0(x))\\psi(0,x)\\,dx\\geq0.$$\nThis is a conditional passage for any family satisfying the stated smoothness, bound, and convergence assumptions; it asserts neither existence nor compactness of such a family.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter IV §4.6",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §2",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 406,
+    "id": "fd-w03-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Distributional systems and entropy flux pairs — Examples",
+    "companion": "fd-w03",
+    "requires": [
+      "fd-w03"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-burgers-shock",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Burgers shock entropy and Lax speeds",
+        "reference": "items/ex-fd-burgers-shock.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "thm-fd-convex-scalar-riemann",
+          "thm-cm-burgers-riemann-shock-and-rarefaction",
+          "def-fd-conservation-system",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-fd-convex-scalar-riemann": "mathematical-premise",
+          "thm-cm-burgers-riemann-shock-and-rarefaction": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. Let $T>0$, let $a,b\\in\\mathbb R$ with $a>b$, and set $F(z)=z^2/2$ and $s=(a+b)/2$. For $t>0$ define $u(t,x)=a$ for $x<st$ and $u(t,x)=b$ for $x>st$; assign any value at $x=st$. Let $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$, with an arbitrary value at $x=0$. Then $u$ satisfies the initial-value weak identity for $u_t+\\partial_xF(u)=0$. For every convex $\\eta\\in C^2(\\mathbb R)$ and every $q\\in C^1(\\mathbb R)$ with $q'=\\eta'F'$, it satisfies the initial-value entropy inequality with the convention that the distributional entropy residual is nonpositive. It also satisfies every Kružkov inequality for $\\eta_k(z)=|z-k|$ and $q_k(z)=\\operatorname{sgn}(z-k)(F(z)-F(k))$, where $\\operatorname{sgn}(0)=0$. Its shock speed obeys $F'(b)<s<F'(a)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter IV §§4.3–4.5",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §§2–3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-fd-burgers-fan",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Burgers centered rarefaction and trace",
+        "reference": "items/ex-fd-burgers-fan.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "thm-fd-convex-scalar-riemann",
+          "thm-cm-burgers-riemann-shock-and-rarefaction",
+          "def-fd-conservation-system",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-fd-convex-scalar-riemann": "mathematical-premise",
+          "thm-cm-burgers-riemann-shock-and-rarefaction": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. Let $T>0$, let $a,b\\in\\mathbb R$ with $a<b$, and set $F(z)=z^2/2$. For $t>0$ define\n$$u(t,x)=\\begin{cases}a,&x\\leq at,\\\\ x/t,&at<x<bt,\\\\ b,&x\\geq bt.\\end{cases}$$\nLet $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$, with any value at $x=0$. Then $u$ is continuous for $t>0$, satisfies the initial-value weak identity for $u_t+\\partial_xF(u)=0$, and satisfies with equality the initial entropy identity for every convex $\\eta\\in C^2(\\mathbb R)$ with compatible flux $q'=\\eta'F'$ and every Kružkov pair $\\eta_k(z)=|z-k|$, $q_k(z)=\\operatorname{sgn}(z-k)(F(z)-F(k))$, where $\\operatorname{sgn}(0)=0$. For every compact interval $K\\subset\\mathbb R$ and $t>0$,\n$$\\int_K|u(t,x)-u_0(x)|\\,dx\\leq(b-a)(|a|+|b|)t,$$\nso $u(t,\\cdot)\\to u_0$ strongly in $L^1_{\\mathrm{loc}}(\\mathbb R)$ as $t\\downarrow0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter IV §§4.3–4.5",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §§2–3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-fd-expansion-shock",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Expansion shock fails entropy selection",
+        "reference": "items/cex-fd-expansion-shock.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "thm-fd-convex-scalar-riemann",
+          "prop-fd-entropy-jump",
+          "thm-fd-rankine-hugoniot",
+          "def-fd-conservation-system",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-fd-convex-scalar-riemann": "mathematical-premise",
+          "prop-fd-entropy-jump": "mathematical-premise",
+          "thm-fd-rankine-hugoniot": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$). The assertion that every weak jump satisfying Rankine–Hugoniot is entropy-admissible is false. For $T>0$, let $a<b$, $F(z)=z^2/2$, $s=(a+b)/2$, and set $u(t,x)=a$ for $x<st$ and $u(t,x)=b$ for $x>st$ on $(0,T)\\times\\mathbb R$, with arbitrary value on the shock line. Give it Riemann initial data $u_0(x)=a$ for $x<0$ and $u_0(x)=b$ for $x>0$, with arbitrary value at zero. This expansion shock is a weak solution but violates the entropy inequality for the convex entropy $\\eta(z)=z^2/2$ and compatible entropy flux $q(z)=z^3/3$. The strictly convex scalar Riemann theorem supplies an entropy-admissible centered fan for the same flux and initial data; no general uniqueness conclusion is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter IV §§4.4–4.5",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §§2–3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-fd-shock-point-values",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Point assignments do not alter weak jump",
+        "reference": "items/cex-fd-shock-point-values.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-piecewise-traces",
+          "def-fd-conservation-system",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-piecewise-traces": "mathematical-premise",
+          "def-fd-conservation-system": "mathematical-premise",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice. The assertion that a pointwise value assigned on a shock plane determines its one-sided trace or weak jump is false. Let $d,m\\geq1$, let $I\\subseteq\\mathbb R$ and $\\Omega\\subseteq\\mathbb R^d$ be open, let $\\mathcal O\\subseteq\\mathbb R^m$ be open and convex, and let $F_j\\in C^1(\\mathcal O;\\mathbb R^m)$ for $1\\leq j\\leq d$. Let $n\\in\\mathbb R^d$ be a unit vector, let $s\\in\\mathbb R$, put $Q=I\\times\\Omega$, and set $\\Sigma=\\{(t,x)\\in Q:n\\cdot x=st\\}$. Suppose $U:Q\\to\\mathcal O$ is measurable, has piecewise $C^1$ side fields with $C^1$ extensions to the interface, and $U,F_1(U),\\ldots,F_d(U)\\in L^1_{\\mathrm{loc}}(Q)$. Let $\\widetilde U:Q\\to\\mathcal O$ be any measurable field that agrees with $U$ off $\\Sigma$. Then $\\widetilde U$ and $F_j(\\widetilde U)$ are locally integrable and define the same regular distributions as $U$ and $F_j(U)$; their distributional conservation residuals are equal. For every convex $\\eta\\in C^2(\\mathcal O)$ and compatible $q_j\\in C^1(\\mathcal O)$ with $Dq_j=D\\eta\\,DF_j$ whose compositions $\\eta(U),q_j(U)$ are locally integrable, the corresponding compositions for $\\widetilde U$ are locally integrable and have the same regular distributions and entropy residual. The two fields have the same one-sided traces and jump. In particular, assigning a third state on the shock plane does not change its weak jump condition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Constantine M. Dafermos, Hyperbolic Conservation Laws in Continuum Physics, 2nd ed., Chapter III §3.1 and Chapter IV §4.3",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Dafermos.pdf"
+            },
+            {
+              "title": "Lawrence C. Evans, Entropy and Partial Differential Equations, Chapter V §3",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

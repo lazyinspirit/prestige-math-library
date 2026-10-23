@@ -1,0 +1,162 @@
+[
+  {
+    "order": 361,
+    "id": "fd-c01",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Finite weighted ensemble and covariance",
+    "companion": "fd-c01-examples",
+    "requires": [],
+    "items": [
+      {
+        "id": "def-fdmath-finite-ensemble-and-covariance",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite weighted ensemble and covariance",
+        "reference": "items/def-fdmath-finite-ensemble-and-covariance.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [],
+        "dependency_roles": {},
+        "inventory_expansion_required": false,
+        "statement": "Let $N\\ge1$ be an integer and let $a_1,\\ldots,a_N\\in[0,\\infty)$ satisfy $\\sum_{j=1}^N a_j=1$. The fixed tuple $(a_1,\\ldots,a_N)$ is a finite ensemble of weights. For integers $m,n\\ge1$, let $X=(X_1,\\ldots,X_N)\\in(\\mathbb R^m)^N$ and $Y=(Y_1,\\ldots,Y_N)\\in(\\mathbb R^n)^N$. Define the weighted mean of $X$ and its $j$th fluctuation by\n\n$$\\bar X:=\\sum_{j=1}^N a_jX_j,\\qquad X'_j:=X_j-\\bar X.$$\n\nUsing the same weights, define the cross-covariance tensor\n\n$$C(X,Y):=\\sum_{j=1}^N a_j X'_j\\otimes Y'_j\\in\\mathbb R^{m\\times n},$$\n\nwhere $x\\otimes y$ is the matrix with entries $(x\\otimes y)_{rs}=x_r y_s$. The covariance tensor of $X$ is $C(X):=C(X,X)$. If $D$ is a set and $X_j:D\\to\\mathbb R^m$, $Y_j:D\\to\\mathbb R^n$ are functions, apply these formulas pointwise at each $q\\in D$ using the same fixed weights. No probability space, limiting operation, or interpretation as an empirical sample is part of this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3 (Spring 2006 lecture notes)",
+              "url": "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
+            },
+            {
+              "title": "Gregory L. Eyink, Johns Hopkins University Turbulence Notes, Chapter VIb, §(B) Reynolds Averaging and kinetic-energy balances, pp. 17–19",
+              "url": "https://www.ams.jhu.edu/~eyink/Turbulence/notes/ChapterVIb.pdf"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "thm-fdmath-finite-reynolds-identity",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact finite Reynolds averaged equation",
+        "reference": "items/thm-fdmath-finite-reynolds-identity.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fdmath-finite-ensemble-and-covariance"
+        ],
+        "dependency_roles": {
+          "def-fdmath-finite-ensemble-and-covariance": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open interval, let $d,N\\ge1$ be integers, let $\\Omega\\subseteq\\mathbb R^d$ be open, and fix constants $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$ and a common $\\nu\\ge0$. For $j=1,\\ldots,N$, let $u_j:I\\times\\Omega\\to\\mathbb R^d$ be continuously differentiable in $(t,x)$ with continuous second spatial derivatives, let $p_j:I\\times\\Omega\\to\\mathbb R$ be continuously differentiable, and let $f_j:I\\times\\Omega\\to\\mathbb R^d$ be continuous. Suppose pointwise that\n\n$$\\operatorname{div}u_j=0,\\qquad \\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j+f_j.$$\n\nHere $(u\\otimes v)_{rs}=u_rv_s$, $\\operatorname{div}$ of a matrix field is rowwise, $(\\operatorname{div}A)_r=\\sum_{s=1}^d\\partial_{x_s}A_{rs}$, and $\\Delta$ acts componentwise. Define the weighted means $\\bar u=\\sum_j a_ju_j$, $\\bar p=\\sum_j a_jp_j$, and $\\bar f=\\sum_j a_jf_j$, the fluctuations $v_j=u_j-\\bar u$, and the covariance tensor $R=\\sum_j a_jv_j\\otimes v_j$. Then, pointwise on $I\\times\\Omega$,\n\n$$\\operatorname{div}\\bar u=0,\\qquad \\sum_{j=1}^N a_jv_j=0,\\qquad \\sum_{j=1}^N a_j u_j\\otimes u_j=\\bar u\\otimes\\bar u+R,$$\n\nand the exact averaged equation is\n\n$$\\partial_t\\bar u+\\operatorname{div}(\\bar u\\otimes\\bar u)+\\nabla\\bar p=\\nu\\Delta\\bar u+\\bar f-\\operatorname{div}R.$$\n\nThe tensor $R$ is symmetric positive semidefinite, with $z^{\\mathsf T}Rz=\\sum_j a_j(v_j\\cdot z)^2\\ge0$ for every $z\\in\\mathbb R^d$. With $\\operatorname{tr}A:=\\sum_{r=1}^d A_{rr}$ for $A\\in\\mathbb R^{d\\times d}$, the pointwise energy split is $\\sum_j a_j|u_j|^2=|\\bar u|^2+\\operatorname{tr}R$. These are identities for the specified smooth functions; they assert neither existence of such solutions nor a statistical or physical interpretation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3 (Spring 2006 lecture notes)",
+              "url": "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
+            },
+            {
+              "title": "Gregory L. Eyink, Johns Hopkins University Turbulence Notes, Chapter VIb, §(B) Reynolds Averaging and kinetic-energy balances, pp. 17–19",
+              "url": "https://www.ams.jhu.edu/~eyink/Turbulence/notes/ChapterVIb.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-fdmath-mean-fluctuation-energy-transfer",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Mean and fluctuation energy exchange",
+        "reference": "items/thm-fdmath-mean-fluctuation-energy-transfer.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "thm-fdmath-finite-reynolds-identity"
+        ],
+        "dependency_roles": {
+          "thm-fdmath-finite-reynolds-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open interval, let $d\\ge2$ and $N\\ge1$ be integers, and define the flat torus $\\mathbb T^d:=(\\mathbb R/2\\pi\\mathbb Z)^d$, with integration using Lebesgue measure on a periodic cell $[0,2\\pi]^d$. Fix constants $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$ and a common constant $\\nu\\ge0$. For $j=1,\\ldots,N$, let $u_j:I\\times\\mathbb R^d\\to\\mathbb R^d$ be continuously differentiable in $(t,x)$ with continuous second spatial derivatives, and let $p_j:I\\times\\mathbb R^d\\to\\mathbb R$ be continuously differentiable. Require these fields to be $2\\pi$-periodic in each spatial coordinate, so they descend to $\\mathbb T^d$. Suppose they are unforced and satisfy pointwise on $I\\times\\mathbb R^d$\n\n$$\\operatorname{div}u_j=0,\\qquad \\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j.$$\n\nUse $(u\\otimes v)_{rs}=u_rv_s$, $(\\operatorname{div}A)_r=\\sum_s\\partial_{x_s}A_{rs}$ for a matrix field $A$, and componentwise Laplacian. For $A\\in\\mathbb R^{d\\times d}$ set $\\operatorname{tr}A:=\\sum_rA_{rr}$. Define $\\bar u=\\sum_j a_ju_j$, $v_j=u_j-\\bar u$, $R=\\sum_j a_jv_j\\otimes v_j$, and\n\n$$E_m(t):=\\frac12\\int_{\\mathbb T^d}|\\bar u(t,x)|^2\\,dx,\\qquad E_f(t):=\\frac12\\int_{\\mathbb T^d}\\operatorname{tr}R(t,x)\\,dx=\\frac12\\int_{\\mathbb T^d}\\sum_j a_j|v_j(t,x)|^2\\,dx.$$\n\nFor a matrix $A$ and vector field $q$, set $A:\\nabla q:=\\sum_{r,s=1}^d A_{rs}\\partial_{x_s}q_r$ and $|\\nabla q|^2:=\\sum_{r,s=1}^d|\\partial_{x_s}q_r|^2$. Then for every $t\\in I$,\n\n$$\\frac{dE_m}{dt}=-\\nu\\int_{\\mathbb T^d}|\\nabla\\bar u|^2\\,dx+\\int_{\\mathbb T^d}R:\\nabla\\bar u\\,dx,$$\n\n$$\\frac{dE_f}{dt}=-\\nu\\int_{\\mathbb T^d}\\sum_j a_j|\\nabla v_j|^2\\,dx-\\int_{\\mathbb T^d}R:\\nabla\\bar u\\,dx.$$\n\nFor every $t_0<t_1$ in $I$, the endpoint identities are\n\n$$E_m(t_1)-E_m(t_0)=-\\nu\\int_{t_0}^{t_1}\\int_{\\mathbb T^d}|\\nabla\\bar u|^2\\,dx\\,dt+\\int_{t_0}^{t_1}\\int_{\\mathbb T^d}R:\\nabla\\bar u\\,dx\\,dt,$$\n\n$$E_f(t_1)-E_f(t_0)=-\\nu\\int_{t_0}^{t_1}\\int_{\\mathbb T^d}\\sum_j a_j|\\nabla v_j|^2\\,dx\\,dt-\\int_{t_0}^{t_1}\\int_{\\mathbb T^d}R:\\nabla\\bar u\\,dx\\,dt.$$\n\nThe transfer term has opposite signs in the two balances and cancels in their sum. No sign is asserted for $\\int_{\\mathbb T^d}R:\\nabla\\bar u\\,dx$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3 (Spring 2006 lecture notes)",
+              "url": "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
+            },
+            {
+              "title": "Gregory L. Eyink, Johns Hopkins University Turbulence Notes, Chapter VIb, §(B) Reynolds Averaging and kinetic-energy balances, pp. 17–19",
+              "url": "https://www.ams.jhu.edu/~eyink/Turbulence/notes/ChapterVIb.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 362,
+    "id": "fd-c01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Finite weighted ensemble and covariance — Examples",
+    "companion": "fd-c01",
+    "requires": [
+      "fd-c01"
+    ],
+    "items": [
+      {
+        "id": "cex-fdmath-mean-does-not-determine-covariance",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Equal means with unequal Reynolds covariance",
+        "reference": "items/cex-fdmath-mean-does-not-determine-covariance.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "thm-fdmath-finite-reynolds-identity"
+        ],
+        "dependency_roles": {
+          "thm-fdmath-finite-reynolds-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix any integer $d\\ge2$ and any $\\nu\\ge0$, and define $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Consider the entire class of finite ensembles described as follows, allowing the number of members and the weight tuple to vary across the class. Each ensemble has an integer $N\\ge1$ and fixed weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$. For $j=1,\\ldots,N$, let $u_j:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuously differentiable in $(t,x)$ with continuous second spatial derivatives, and let $p_j:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R$ be continuously differentiable. Require all these fields to be $2\\pi$-periodic in each spatial coordinate, and suppose that for each $j=1,\\ldots,N$, pointwise on $\\mathbb R\\times\\mathbb R^d$,\n\n$$\\operatorname{div}u_j=0,\\qquad \\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j.$$\n\nFor each such family, define $\\bar u=\\sum_j a_ju_j$, $\\bar p=\\sum_j a_jp_j$, and $R=\\sum_j a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$. The following universal determination assertion over this entire class is false: any two ensembles in the class with the same mean velocity and mean pressure fields $\\bar u,\\bar p$ must have the same covariance tensor $R$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3, §3.6 (Spring 2006 lecture notes)",
+              "url": "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

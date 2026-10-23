@@ -1,0 +1,605 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "lem-fd-profile-affine-coordinate-isometry",
+    "def-fd-fluid-profile-bootstrap-interface",
+    "prop-fd-profile-functional-bootstrap",
+    "ex-fd-constant-profile-bootstrap"
+  ],
+  "contracts": {
+    "lem-fd-profile-affine-coordinate-isometry": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\nThe quotient vector space $V/W$ and its canonical projection.\n\nFor $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item\nThe $L^p$ distance for $0 < p < 1$ is a complete translation-invariant metric\nsupplies the metric structure rather than a normed-space structure.\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The affine map $T:(0,1)\\to I$, $T(\\xi)=a+\\ell\\xi$, is a $C^1$ diffeomorphism with derivative $\\ell>0$. If $q_1,q_2$ represent the same element of $H_I$, the measurable set $N=\\{z\\in I:q_1(z)\\ne q_2(z)\\}$ is null. Apply [F2] to $\\mathbf 1_N$ and $T$: $0=\\lambda_I(N)=\\ell\\lambda_{(0,1)}(T^{-1}N)$, so $T^{-1}N$ is null. Therefore the displayed assignment is independent of representatives, and its pointwise formula is linear on representative functions.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a representative $q$ of an element of $H_I$, apply [F2] to the nonnegative function $z\\mapsto |q(z)|^2$. The formula gives $\\int_I |q(z)|^2\\,dz=\\ell\\int_0^1|q(a+\\ell\\xi)|^2\\,d\\xi=\\|U_{a,\\ell}[q]\\|_{H_0}^2$. The right-hand integral is finite by $q\\in H_I$, so the image is in $H_0$, $U_{a,\\ell}$ is a well-defined linear map, and the norm is preserved.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The inverse affine map $T^{-1}:I\\to(0,1)$ is also a $C^1$ diffeomorphism. The same null-set argument makes $V_{a,\\ell}$ independent of the representative, and change of variables for $T^{-1}$, whose derivative is $1/\\ell$, gives $\\|V_{a,\\ell}[g]\\|_{H_I}^2=\\ell^{-1}\\int_I|g((z-a)/\\ell)|^2\\,dz=\\int_0^1|g(\\xi)|^2\\,d\\xi$. Direct substitution gives $V_{a,\\ell}U_{a,\\ell}[q]=[q]$ and $U_{a,\\ell}V_{a,\\ell}[g]=[g]$; hence $V_{a,\\ell}$ is the inverse and $U_{a,\\ell}$ is bijective.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes ell>0, so the interval is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 applies the norm identity to every representative, including the zero class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1 cover ell=1 through the affine diffeomorphism and its inverse."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "ell=0 is excluded by the explicit ell>0 hypothesis; the map would not be a diffeomorphism."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses the open intervals (0,1) and (a,a+ell); endpoint representatives do not enter either domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes Countable Choice, and step 1.1 applies the change-of-variables supplier under that hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a well-defined isometric bijection, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a well-defined isometric bijection, not an iff statement."
+        }
+      ]
+    },
+    "def-fd-fluid-profile-bootstrap-interface": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Block length is required to satisfy 1<=b<=n, so an empty block is outside the definition.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json: The Definition simultaneously requires n>=1 and integer 1<=b<=n. Consequently the legal-start set has cardinality n-b+1>=1, each selected block contains at least one observation, and truncation produces exactly n>=1 elements. None of the finite resampling draws or its arithmetic mean has an empty index set. The separate replacement family is genuinely countable and the approximability sum starts at m=1.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json",
+              "sha256": "596381b98fa132479fb42b8980975dd2366c32c94475e936f97356ad12edf8b8"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json: The Definition simultaneously requires n>=1 and integer 1<=b<=n. Consequently the legal-start set has cardinality n-b+1>=1, each selected block contains at least one observation, and truncation produces exactly n>=1 elements. None of the finite resampling draws or its arithmetic mean has an empty index set. The separate replacement family is genuinely countable and the approximability sum starts at m=1.",
+            "item_sha256": "1345d4fe052cb1ddc724352ce6243d0479525807ebe9eaab784538b3be84a3b7",
+            "row_sha256": "e8c74920a07035718abd7d8ceb44b02c80750b9b72aba8ed69de33f7b3911269",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json",
+              "sha256": "596381b98fa132479fb42b8980975dd2366c32c94475e936f97356ad12edf8b8"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition admits zero-valued H data and defines the resampled mean and conditional center for that data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits n=b=1; the legal-start set then has the single start 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits b=n; the legal-start set is {1}, so the resampled sequence is fixed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes the first and last legal starts in {1,...,n-b+1} and truncates the final block to exactly n values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly assumes Countable Choice and Dependent Choice for the replacement-innovation extension."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an interface definition and states no iff result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an interface definition and states no iff result."
+        }
+      ]
+    },
+    "prop-fd-profile-functional-bootstrap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-fluid-profile-bootstrap-interface",
+          "source_section": "Definition",
+          "quote": "Let $H=L^2([0,1],\\mathcal B,\\lambda;\\mathbb R)$ be the real Hilbert space of almost-everywhere classes of square-integrable real profiles, with $\\langle u,v\\rangle_H=\\int_0^1u(\\xi)v(\\xi)\\,d\\xi$, where $\\mathcal B$ is generated by intervals with rational endpoints and $\\lambda$ is Lebesgue measure restricted to $\\mathcal B$. Let $(\\Omega,\\mathcal F,\\mathbb P)$ and $(S,\\mathcal S,\\nu)$ be probability spaces, let $(\\delta_t)_{t\\in\\mathbb Z}$ be independent identically distributed measurable $S$-valued random elements on $\\Omega$ with law $\\nu$, and let $f:S^{\\mathbb N_0}\\to H$ be measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. The associated causal profile process is $X_t=f(\\delta_t,\\delta_{t-1},\\ldots)$. Assume $X_0$ is Bochner integrable and has Bochner mean $\\mathbb E_BX_0:=\\int_\\Omega X_0(\\omega)\\,d\\mathbb P(\\omega)=0$, with $\\mathbb E\\|X_0\\|_H^2<\\infty$. Assume Countable Choice and Dependent Choice and take an independent product extension carrying the countable replacement-innovation family.\n\nFor every $t\\in\\mathbb Z$, $m\\ge1$, and $k\\le t-m$, let $\\delta'_{t,m,k}$ have law $\\nu$, with all these copies mutually independent and independent of the original innovations. Set\n\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),\\qquad \\delta_m=\\bigl(\\mathbb E\\|X_0-X_{0,m}\\|_H^2\\bigr)^{1/2}.$$\n\nThe profile process is $L^2$-$m$-approximable when $\\sum_{m=1}^{\\infty}\\delta_m<\\infty$. For data $X_1,\\ldots,X_n\\in H$, $n\\ge1$, and an integer block length $1\\le b\\le n$, moving-block resampling independently draws starts uniformly from $\\{1,\\ldots,n-b+1\\}$, concatenates the corresponding ordered length-$b$ blocks, and truncates the last block to obtain exactly $n$ resampled elements $X_1^*,\\ldots,X_n^*$. Define $\\bar X_n^*=n^{-1}\\sum_{j=1}^nX_j^*$, and let $\\mathbb E^*$ denote expectation over these draws with the observations fixed. For any bounded real-linear functional $L:H\\to\\mathbb R$, let $\\|L\\|=\\sup_{\\|u\\|_H\\le1}|L(u)|$; the centered resampled scalar profile summary is $\\sqrt n\\,L(\\bar X_n^*-\\mathbb E^*\\bar X_n^*)$. This definition specifies the data space and resampling law; it does not assert asymptotic validity.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moving-block-bootstrap-clt-for-dependent-data",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H=L^2([0,1])$, and let $(X_t)_{t\\in\\mathbb Z}$ be a centered causal Bernoulli shift that is $L^2$-$m$-approximable under [[def-l2-m-approximable-causal-bernoulli-shift]]. Write\n\n$$\\delta_m=\\bigl(E\\|X_0-X_{0,m}\\|_H^2\\bigr)^{1/2}.$$\n\nBy [[lem-independent-tail-replacement-errors-are-monotone]], the summability in the stated process definition implies $m\\delta_m\\to0$. For each $n$, let $b_n$ be an integer with $b_n\\to\\infty$ and $b_n/\\sqrt n\\to0$. For all sufficiently large $n$, these conditions give $1\\le b_n\\le n$; apply [[alg-moving-block-bootstrap]] to $X_1,\\ldots,X_n$ on this admissible tail. All limits below concern that tail. Let $\\Gamma$ be the long-run covariance operator from [[thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts]], and let $\\bar X_n^*=n^{-1}\\sum_{t=1}^nX_t^*$. Then\n\n$$\\mathcal L^*\\!\\left(\\sqrt n(\\bar X_n^*-E^*\\bar X_n^*)\\right)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},$$\n\nand\n\n$$\\left\\|n\\,\\operatorname{Cov}^*(\\bar X_n^*)-\\Gamma\\right\\|_{\\mathrm{HS}}\\longrightarrow0\\quad\\hbox{in probability},$$\n\nwhere $G$ is the centered $H$-valued Gaussian with covariance $\\Gamma$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H=L^2([0,1],dt;\\mathbb R)$ and let\n$(X_t)_{t\\in\\mathbb Z}$ be a centered, $L^2$-$m$-approximable causal\nBernoulli shift as defined in\n[[def-l2-m-approximable-causal-bernoulli-shift]], with Bochner mean\n$\\mathbb E_BX_0=0$. Let $\\Gamma$ be its long-run covariance operator from\n[[lem-long-run-covariance-is-trace-class]], and let $G$ be a centered\n$H$-valued Gaussian random element with covariance $\\Gamma$, whose existence\nis given by [[lem-positive-trace-class-covariance-defines-hilbert-gaussian]].\nThen, for $S_n=\\sum_{t=1}^nX_t$,\n$$n^{-1/2}S_n\\ \\Rightarrow\\ G$$\nin the weak topology of Borel probability measures on $H$. The covariance\nkernel is the $L^2([0,1]^2)$ equivalence class $c$ in the long-run covariance\nlemma, and its integral operator is $T_c=\\Gamma$. This is a CLT for the\n$H$-valued sample sums; it is not a functional CLT for the time-indexed\npartial-sum process.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-weak-convergence-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $E$ be a separable complete metric space, let $\\mathcal D_n$ be the sigma-algebra generated by the observed data at sample size $n$, and let $Z_n^*$ be a bootstrap random element whose remaining randomness is the resampling randomization. Write $\\mathcal L^*(Z_n^*)$ for its conditional Borel probability law given $\\mathcal D_n$. Supply as part of the data a metric $d_w$ on Borel probability measures on $E$ such that $d_w(\\mu_n,\\mu)\\to0$ exactly when $\\mu_n\\Rightarrow\\mu$ in the sense of [[def-weak-convergence-of-borel-probability-measures]]. Assume the displayed metric distance is a measurable real random variable. For a fixed Borel probability measure $\\mu$ on $E$, we say that $Z_n^*$ converges conditionally weakly in probability to $\\mu$ when\n\n$$d_w\\!\\left(\\mathcal L^*(Z_n^*),\\mu\\right)\\longrightarrow 0\\quad\\hbox{in probability}.$$\n\nThe metric is supplied as a hypothesis; this definition makes no metric-existence assertion. It applies to separable complete metric spaces, including separable Banach spaces, their closed linear subspaces and finite products.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in Integrable real and complex functions, and their integrals. No completeness or coupling is required.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-riesz-representation-for-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ (The dual space X^* of a normed space and its dual norm). Then there is a unique $y\\in H$ with\n\n$$f(x)=\\langle x,y\\rangle\\qquad\\text{for every }x\\in H,$$\n\nand $\\|f\\|=\\|y\\|$, where $\\|f\\|$ is the dual norm (The operator norm as the least bound and as the unit-sphere or unit-ball supremum). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\\overline a\\,y_1+\\overline b\\,y_2$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-l2-m-approximable-causal-bernoulli-shift",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B$ be the Borel sigma-algebra of $[0,1]$, generated by intervals with rational endpoints; let $dt$ be Lebesgue measure restricted to $\\mathcal B$, and set $H=L^2([0,1],\\mathcal B,dt;\\mathbb R)$, with inner product $\\langle x,y\\rangle_H=\\int_0^1x(u)y(u)\\,du$. We use the quotient-by-null-functions convention for $L^2$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). The measure space is finite and countably generated, so under Countable Choice $H$ is separable ([[thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable]], [[def-countable-choice]], [[def-separable-space]]); [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]] verifies that this real pairing makes the quotient a Hilbert space.\n\nLet $(S,\\mathcal S,\\nu)$ be a probability space and $(\\delta_t)_{t\\in\\mathbb Z}$ an independent identically distributed family of $S$-valued random elements with law $\\nu$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]], [[def-independent-random-elements]]). A **causal Bernoulli shift** with innovation law $\\nu$ is a process\n$$X_t=f(\\delta_t,\\delta_{t-1},\\delta_{t-2},\\ldots),\\qquad t\\in\\mathbb Z,$$\nwhere $f:S^{\\mathbb N_0}\\to H$ is measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. This product-measurability formulation is meaningful for a merely measurable innovation space $S$.\n\nOn an independent product extension, take replacement innovations $\\delta'_{t,m,k}$, indexed by $t\\in\\mathbb Z$, $m\\in\\mathbb N_0$, and integers $k\\le t-m$, all with law $\\nu$, mutually independent, and independent of the original innovations. Such a countable family and its product with the original probability space exist under Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]], [[cor-countable-independent-copies-exist]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). For $m\\ge1$ define\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),$$\nand define the full replacement $X_{t,0}=f(\\delta'_{t,0,t},\\delta'_{t,0,t-1},\\ldots)$. Each $X_{t,m}$ has the same marginal law as $X_t$; for fixed $m\\ge1$ the sequence $(X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary and $m$-dependent because its original-innovation windows have length $m$ and its replacement arrays are independent across $t$.\n\nFor every fixed $m\\ge0$, the joint process $(X_t,X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary: shifting all indices relabels a family of mutually independent innovations with the same law and commutes with the defining measurable maps. Consequently $D_{t,m}:=X_t-X_{t,m}$ is stationary and $\\|D_{t,m}\\|_{L^2(H)}=\\delta_m$ for every $t$.\n\nWrite $\\|X\\|_{L^2(H)}=(\\mathbb E\\|X\\|_H^2)^{1/2}$ and\n$$\\delta_m=\\|X_0-X_{0,m}\\|_{L^2(H)},\\qquad m\\ge0.$$\nThe process is **$L^2$-$m$-approximable** when\n$$\\mathbb E\\|X_0\\|_H^2<\\infty\\qquad\\hbox{and}\\qquad\\sum_{m\\ge1}\\delta_m<\\infty.$$\nThe same marginal law gives $\\delta_0\\le2\\|X_0\\|_{L^2(H)}<\\infty$. For a Bochner-integrable $H$-valued random element $Y$, write $\\mathbb E_B Y=\\int Y\\,d\\mathbb P$; the moment condition makes $X_t$ and every $X_{t,m}$ Bochner integrable ([[def-bochner-integrable-function]], [[thm-bochner-integrability-criterion]]).\n\nHere **strict stationarity** means invariance of every finite-dimensional law under integer shifts. A process is **$m$-dependent** if, for every $a\\in\\mathbb Z$, the sigma-algebras generated by $(X_s)_{s\\le a}$ and $(X_s)_{s\\ge a+m+1}$ are independent ([[def-independent-sigma-algebras-and-events]]). The stated input windows for $X_{t,m}$ are disjoint across these two index ranges, so they satisfy this definition.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real or complex Hilbert space, let $(x_n)_{n\\in\\mathbb N}$ be a\nsequence in $H$ whose range $\\{x_n : n\\in\\mathbb N\\}$ is dense in $H$\n([[def-dense-top]]), and let\n\n$$L_0:=\\varnothing,\\qquad L_{n+1}:=L_n\\cup\\Bigl\\{\\tfrac{v_n}{\\|v_n\\|}\\Bigr\\}\\ \\text{ if }\\ v_n:=x_n-\\sum_{e\\in L_n}\\langle x_n,e\\rangle e\\ne0, \\qquad L_{n+1}:=L_n\\ \\text{ otherwise}.$$\n\nThen $L:=\\bigcup_{n\\in\\mathbb N}L_n$ is a finite or countably infinite orthonormal\nset whose closed linear span is $H$; that is, $L$ is an orthonormal basis of $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]), and\nit is obtained from the given sequence by Gram–Schmidt elimination. The\nenumeration of $L$ is the canonical one by the stage at which an element\nappears, and no choice principle is used.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hilbert-schmidt-operator",
+          "source_section": "Definition",
+          "quote": "Throughout, $H$ and $K$ are real or complex Hilbert spaces with the pairing\nlinear in the first argument and conjugate-linear in the second\n([[def-hilbert-space]]), $T\\in\\mathcal B(H,K)$ is a bounded linear operator\n([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]) of\noperator norm $\\|T\\|$ ([[def-operator-norm]]), and $E$ is a **Hilbert basis**\nof $H$, that is, a complete orthonormal subset of $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).\nThe basis $E$ is **supplied as data**; the definitions below are stated\nrelative to it.\n\n**The Hilbert–Schmidt square-sum.** The family $(\\|Te\\|^2)_{e\\in E}$ consists of\nnonnegative real numbers and is indexed by the arbitrary set $E$. Its sum is the\nsupremum of the finite subsums,\n\n$$s_E(T):=\\sum_{e\\in E}\\|Te\\|^2:=\\sup\\Bigl\\{\\sum_{e\\in F}\\|Te\\|^2 \\;:\\; F\\subseteq E \\text{ finite}\\Bigr\\}\\in[0,+\\infty],$$\n\nin the finite-subset-supremum convention of\n[[def-square-summable-family-on-an-arbitrary-index-set]]; the empty finite\nsubset contributes the empty sum $0$, so the supremum is over a nonempty\nset and exists in $[0,+\\infty]$. No enumeration, ordering or countability of\n$E$ is used or asserted, and no choice is performed: the supremum ranges over\nthe set of finite subsets of the fixed index set $E$. For finite $E$ the\nsupremum is the ordinary finite sum over $E$, because all terms are\nnonnegative.\n\n**Hilbert–Schmidt relative to a basis.** The operator $T$ is\n**Hilbert–Schmidt relative to $E$** when $s_E(T)<+\\infty$, that is, when the\nfinite subsums are bounded above in $\\mathbb R$. In that case the\n**Hilbert–Schmidt norm of $T$ relative to $E$** is the nonnegative square root\n\n$$\\|T\\|_{HS,E}:=\\Bigl(\\sum_{e\\in E}\\|Te\\|^2\\Bigr)^{1/2}\\in[0,+\\infty).$$\n\nWhen $s_E(T)=+\\infty$, no Hilbert–Schmidt norm relative to $E$ is defined, and\n$T$ is not Hilbert–Schmidt relative to $E$.\n\n**Degenerate and extreme cases.** The zero operator satisfies $s_E(0)=0$ for\nevery basis $E$, so it is Hilbert–Schmidt relative to every basis with norm\n$0$. If $H=\\{0\\}$ then the empty family is a Hilbert basis of $H$, the only\nfinite subset is empty, and $s_\\varnothing(T)=0$ for the only linear operator\n$T:\\{0\\}\\to K$; that operator is Hilbert–Schmidt relative to the empty basis\nwith norm $0$. If $H$ is finite dimensional and $E$ is finite, $s_E(T)$ is an\nordinary finite sum of the squared norms $\\|Te\\|^2$, and $T$ is automatically\nHilbert–Schmidt relative to $E$.\n\n**The basis is part of the notation.** The symbol $\\|T\\|_{HS,E}$ keeps the\nbasis in the subscript on purpose. Until the next result is proved, the phrase\n\"$T$ is Hilbert–Schmidt\" is never used without a specified Hilbert basis, and\nnothing here asserts that a Hilbert basis of $H$ exists: the existence of $E$\nis a hypothesis of the definition, and the question of whether the finiteness\nof $s_E(T)$ and the value $\\|T\\|_{HS,E}$ depend on $E$ is taken up in\n[[thm-hilbert-schmidt-norm-is-basis-independent]]. In particular this\ndefinition makes no basis-existence claim and no comparison with the operator\nnorm $\\|T\\|$; every such statement is proved later, where its own hypotheses\nare displayed.\n\n**Notation.** For a finite $F\\subseteq E$ we write\n$s_F(T):=\\sum_{e\\in F}\\|Te\\|^2$ for the finite subsum, so that\n$s_E(T)=\\sup\\{s_F(T):F\\subseteq E \\text{ finite}\\}$.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-hilbert-schmidt-norm-is-basis-independent",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H,K)$ be a bounded linear operator\n([[def-bounded-linear-operator]], [[def-operator-norm]]), with Hilbert adjoint\n$T^*\\in\\mathcal B(K,H)$ ([[def-hilbert-space-adjoint]],\n[[thm-hilbert-adjoint-properties]]). Let $E$ be a Hilbert basis of $H$ and $F$ a\nHilbert basis of $K$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]), and\nlet $s_E(T)=\\sum_{e\\in E}\\|Te\\|^2$ and $s_F(T^*)=\\sum_{f\\in F}\\|T^*f\\|^2$ be the\nfinite-subset-supremum sums of\n[[def-hilbert-schmidt-operator]] and\n[[def-square-summable-family-on-an-arbitrary-index-set]]. Then:\n\n1. **(matrix-coefficient form)** the finite-subset supremum\n   $$\\sup\\Bigl\\{\\sum_{e\\in A}\\sum_{f\\in B}|\\langle Te,f\\rangle|^2 \\;:\\; A\\subseteq E,\\ B\\subseteq F \\text{ finite}\\Bigr\\}$$\n   equals $s_E(T)$, and it also equals $s_F(T^*)$;\n2. **(basis independence)** $s_E(T)=s_{E'}(T)$ for every Hilbert basis $E'$ of\n   $H$, and $s_E(T)=s_F(T^*)$ for every Hilbert basis $F$ of $K$;\n3. **(membership and norms)** $T$ is Hilbert–Schmidt relative to $E$ if and\n   only if it is Hilbert–Schmidt relative to every other Hilbert basis of $H$,\n   and then $\\|T\\|_{HS,E}=\\|T\\|_{HS,E'}=\\|T^*\\|_{HS,F}$ for all such bases\n   $E,E'$ and every Hilbert basis $F$ of $K$; when the common defining sum is\n   $+\\infty$, none of these Hilbert–Schmidt norms is defined, and $T$ is\n   Hilbert–Schmidt relative to none of the bases.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-hilbert-schmidt-operators-form-a-two-sided-ideal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$, $K$\nand $L$ be real or complex Hilbert spaces and let $E$ be a Hilbert basis of $H$\n(supplied as data), with $s_E(T)=\\sum_{e\\in E}\\|Te\\|^2$ the Hilbert–Schmidt\nsquare-sum and $\\|T\\|_{HS,E}$ the Hilbert–Schmidt norm of\n[[def-hilbert-schmidt-operator]]. Then:\n\n1. if $S,T\\in\\mathcal B(H,K)$ are Hilbert–Schmidt relative to $E$, then so is\n   $aS+bT$ for all scalars $a,b$, and\n   $$\\|aS+bT\\|_{HS,E}\\le|a|\\,\\|S\\|_{HS,E}+|b|\\,\\|T\\|_{HS,E};$$\n2. if $T\\in\\mathcal B(H,K)$ is Hilbert–Schmidt relative to $E$, then for every\n   Hilbert basis $F$ of $K$ the adjoint $T^*$ is Hilbert–Schmidt relative to $F$\n   and\n   $$\\|T^*\\|_{HS,F}=\\|T\\|_{HS,E};$$\n3. if $T\\in\\mathcal B(H,K)$ is Hilbert–Schmidt relative to $E$ and\n   $A\\in\\mathcal B(K,L)$, $B\\in\\mathcal B(H_0,H)$ are bounded with $E_0$ a\n   Hilbert basis of $H_0$ and $F$ a supplied Hilbert basis of $K$, then\n   $AT\\in\\mathcal B(H,L)$ is Hilbert–Schmidt relative to $E$ and\n   $TB\\in\\mathcal B(H_0,K)$ is Hilbert–Schmidt relative to $E_0$, with\n   $$\\|AT\\|_{HS,E}\\le\\|A\\|\\,\\|T\\|_{HS,E},\\qquad \\|TB\\|_{HS,E_0}\\le\\|T\\|_{HS,E}\\,\\|B\\|,$$\n   and consequently\n   $$\\|ATB\\|_{HS,E_0}\\le\\|A\\|\\,\\|T\\|_{HS,E}\\,\\|B\\| .$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-moving-block-bootstrap-conditional-covariance",
+          "source_section": "Statement",
+          "quote": "Fix a positive integer $n$, observations $x_1,\\ldots,x_n\\in H$, and an integer block length $b$ with $1\\le b\\le n$. Put $N=n-b+1$, $k=\\lfloor n/b\\rfloor$, and $r=n-kb$. For $q\\in\\{b\\}$, and also $q=r$ when $r>0$, define\n\n$$S_j^{(q)}=\\sum_{\\ell=1}^q x_{j+\\ell-1},\\qquad \\bar S_q=N^{-1}\\sum_{j=1}^N S_j^{(q)},\\qquad C_q=N^{-1}\\sum_{j=1}^N(S_j^{(q)}-\\bar S_q)\\otimes(S_j^{(q)}-\\bar S_q).$$\n\nSet $C_0=0$. If $\\bar X_n^*$ is the mean produced by [[alg-moving-block-bootstrap]], then its conditional covariance operator is\n\n$$n\\,\\operatorname{Cov}^*(\\bar X_n^*)=\\frac{kC_b+C_r}{n},$$\n\nwhere the $C_r$ term is zero when $r=0$. Here $\\operatorname{Cov}^*(Z)=E^*[(Z-E^*Z)\\otimes(Z-E^*Z)]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F8], the stated AC yields both Countable Choice and Dependent Choice. Then [F1] makes $H$ a complete real Hilbert space, and [F6] makes it separable; hence $H$ is separable complete. The real line has the same property, so [F4]'s conditional weak-law topology applies to both. Let $\\mu_n^*=\\mathcal L^*(\\sqrt n(\\bar X_n^*-\\mathbb E^*\\bar X_n^*))$ and $\\mu=\\mathcal L(G)$. For a Borel probability law $\\eta$ on $H$, define $L_\\#\\eta$ by $L_\\#\\eta(B)=\\eta(L^{-1}(B))$ for each Borel set $B\\subseteq\\mathbb R$. For every bounded continuous $\\varphi:\\mathbb R\\to\\mathbb R$, $\\varphi\\circ L$ is bounded and continuous on $H$. The bounded-continuous-test definition [F4] therefore gives $L_\\#\\eta_j\\Rightarrow L_\\#\\eta$ whenever $\\eta_j\\Rightarrow\\eta$ on $H$, so $L_\\#$ is continuous between the weak probability-law topologies. For any weak-law neighborhood $V$ of $L_\\#\\mu$, continuity supplies a neighborhood $U$ of $\\mu$ with $L_\\#U\\subseteq V$. Since [F2] gives $\\mu_n^*\\Rightarrow\\mu$ in probability, $\\mathbb P(\\mu_n^*\\in U)\\to1$, and thus $\\mathbb P(L_\\#\\mu_n^*\\in V)\\to1$. For fixed $n$, resampling has finitely many block-start tuples, so conditional expectation is a finite weighted sum and commutes with $L$; hence $L_\\#\\mu_n^*$ is the displayed conditional scalar law and $L_\\#\\mu=\\mathcal L(LG)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1] and [F8], the assumed AC supplies Countable Choice and Dependent Choice. Then [F5] gives the Riesz representative, while [F1] and [F6] give separability of $H$ and a countable orthonormal basis; use $\\{1\\}$ as the basis of $\\mathbb R$. Put $T_n=C_n-\\Gamma$ and $Z_n^*=\\sqrt n(\\bar X_n^*-\\mathbb E^*\\bar X_n^*)$. By the covariance definition in the Statement, $\\operatorname{Cov}^*(Z_n^*)=C_n$, since centering and scaling by $\\sqrt n$ multiplies covariance by $n$. The Riesz identity and the same conditional covariance convention as [F9] give $\\operatorname{Var}^*(L(Z_n^*))=\\mathbb E^*\\langle Z_n^*,h_L\\rangle_H^2=\\langle C_nh_L,h_L\\rangle_H=(LC_nL^*)(1)$. Apply [F7] to $A=L$, $T=T_n$, and $B=L^*$: $|LT_nL^*(1)|=\\|LT_nL^*\\|_{\\mathrm{HS}}\\le\\|L\\|\\,\\|T_n\\|_{\\mathrm{HS}}\\,\\|L^*\\|=\\|L\\|^2\\|T_n\\|_{\\mathrm{HS}}$. By [F2] this bound tends to zero in probability. The covariance of $LG$ is $L\\Gamma L^*$ by [F3], proving the variance conclusion, including the zero-variance case.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1 and applies the bootstrap only on the sufficiently large admissible tail.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json: Its Statement quantifies over n>=1 and only applies resampling on the sufficiently large tail. Since integer b_n tends to infinity, b_n>=1 eventually; since b_n/sqrt(n) tends to zero, b_n<=n eventually. Hence that tail has n-b_n+1>=1 legal starts. Step 1.1 uses the finite nonempty set of start tuples to commute L with conditional expectation; no n=0 statistic or empty-start law is claimed.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json",
+              "sha256": "596381b98fa132479fb42b8980975dd2366c32c94475e936f97356ad12edf8b8"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Preserve not_applicable for empty observations or legal starts. The current Statement requires n>=1 and applies resampling only for sufficiently large n. Since integer b_n tends to infinity, it is eventually at least1; since b_n/sqrt(n) tends to0, eventually b_n<=n. Therefore n-b_n+1>=1 and the finite block-start tuple set used in current proof1.1 is nonempty. Native Step2 supplied the common probability space, covariance definitions and explicit AC=>DC=>CC premise but did not create an n=0 or empty-start resampling law.",
+            "item_sha256": "ba5c42fe864f7cdceffa618e375dd58ce33d5b4a5737859042942f0bacf172bf",
+            "row_sha256": "bd785f9dd39bea5a88e2ad0f83c954c2cb35e29c2986970e93489389ae9e161e",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-32-35-and-newcor.json",
+              "sha256": "dd68c353251b35158b12e4b48b5edfce9742aef04b0b272aa8d7553131062109"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be the common probability space for the innovations and their independent replacement family (take a countable independent product extension if needed), and write $\\mathbb E$ for expectation under $\\mathb"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 explicitly obtains the variance inequality, including the zero-variance case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 treats the scalar target with basis {1} and applies to every bounded L, including norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 states the variance conclusion includes the zero-variance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement specifies truncation to exactly n, and step 1.1 uses the finite set of block-start tuples for conditional centering."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes the Axiom of Choice; facts A1 and F2 match the moving-block theorem hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states conditional convergence and a variance bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition states conditional convergence and a variance bound, not an iff."
+        }
+      ]
+    },
+    "ex-fd-constant-profile-bootstrap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-l2-m-approximable-causal-bernoulli-shift",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B$ be the Borel sigma-algebra of $[0,1]$, generated by intervals with rational endpoints; let $dt$ be Lebesgue measure restricted to $\\mathcal B$, and set $H=L^2([0,1],\\mathcal B,dt;\\mathbb R)$, with inner product $\\langle x,y\\rangle_H=\\int_0^1x(u)y(u)\\,du$. We use the quotient-by-null-functions convention for $L^2$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). The measure space is finite and countably generated, so under Countable Choice $H$ is separable ([[thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable]], [[def-countable-choice]], [[def-separable-space]]); [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]] verifies that this real pairing makes the quotient a Hilbert space.\n\nLet $(S,\\mathcal S,\\nu)$ be a probability space and $(\\delta_t)_{t\\in\\mathbb Z}$ an independent identically distributed family of $S$-valued random elements with law $\\nu$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]], [[def-independent-random-elements]]). A **causal Bernoulli shift** with innovation law $\\nu$ is a process\n$$X_t=f(\\delta_t,\\delta_{t-1},\\delta_{t-2},\\ldots),\\qquad t\\in\\mathbb Z,$$\nwhere $f:S^{\\mathbb N_0}\\to H$ is measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. This product-measurability formulation is meaningful for a merely measurable innovation space $S$.\n\nOn an independent product extension, take replacement innovations $\\delta'_{t,m,k}$, indexed by $t\\in\\mathbb Z$, $m\\in\\mathbb N_0$, and integers $k\\le t-m$, all with law $\\nu$, mutually independent, and independent of the original innovations. Such a countable family and its product with the original probability space exist under Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]], [[cor-countable-independent-copies-exist]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). For $m\\ge1$ define\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),$$\nand define the full replacement $X_{t,0}=f(\\delta'_{t,0,t},\\delta'_{t,0,t-1},\\ldots)$. Each $X_{t,m}$ has the same marginal law as $X_t$; for fixed $m\\ge1$ the sequence $(X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary and $m$-dependent because its original-innovation windows have length $m$ and its replacement arrays are independent across $t$.\n\nFor every fixed $m\\ge0$, the joint process $(X_t,X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary: shifting all indices relabels a family of mutually independent innovations with the same law and commutes with the defining measurable maps. Consequently $D_{t,m}:=X_t-X_{t,m}$ is stationary and $\\|D_{t,m}\\|_{L^2(H)}=\\delta_m$ for every $t$.\n\nWrite $\\|X\\|_{L^2(H)}=(\\mathbb E\\|X\\|_H^2)^{1/2}$ and\n$$\\delta_m=\\|X_0-X_{0,m}\\|_{L^2(H)},\\qquad m\\ge0.$$\nThe process is **$L^2$-$m$-approximable** when\n$$\\mathbb E\\|X_0\\|_H^2<\\infty\\qquad\\hbox{and}\\qquad\\sum_{m\\ge1}\\delta_m<\\infty.$$\nThe same marginal law gives $\\delta_0\\le2\\|X_0\\|_{L^2(H)}<\\infty$. For a Bochner-integrable $H$-valued random element $Y$, write $\\mathbb E_B Y=\\int Y\\,d\\mathbb P$; the moment condition makes $X_t$ and every $X_{t,m}$ Bochner integrable ([[def-bochner-integrable-function]], [[thm-bochner-integrability-criterion]]).\n\nHere **strict stationarity** means invariance of every finite-dimensional law under integer shifts. A process is **$m$-dependent** if, for every $a\\in\\mathbb Z$, the sigma-algebras generated by $(X_s)_{s\\le a}$ and $(X_s)_{s\\ge a+m+1}$ are independent ([[def-independent-sigma-algebras-and-events]]). The stated input windows for $X_{t,m}$ are disjoint across these two index ranges, so they satisfy this definition.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bochner-integrable-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space and $X$ a real or complex\nBanach space. A strongly measurable function $f:\\Omega\\to X$ is\n**Bochner integrable** if there is a sequence of integrable $X$-valued simple\nfunctions $(s_n)$ such that\n\n$$\\lim_{n\\to\\infty}\\int_\\Omega\\|f-s_n\\|\\,d\\mu=0.$$\n\nFor such a sequence define\n\n$$\\int_\\Omega f\\,d\\mu:=\\lim_{n\\to\\infty}\\int_\\Omega s_n\\,d\\mu.$$\n\nThe displayed norm limit exists: the simple integral inequality gives\n\n$$\\left\\|\\int s_n-\\int s_m\\right\\|\\leq\\int\\|s_n-s_m\\|\\leq\\int\\|s_n-f\\|+\\int\\|f-s_m\\|,$$\n\nso the simple integrals form a Cauchy sequence, and $X$ is complete. The next\ntheorem proves that the value is independent of the approximating sequence and\ncharacterizes existence by integrability of $\\|f\\|$.\n\nFor $E\\in\\mathcal A$, write\n$\\int_Ef\\,d\\mu:=\\int_\\Omega\\mathbf1_Ef\\,d\\mu$ whenever this function is\nBochner integrable.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bochner-integrability-criterion",
+          "source_section": "Statement",
+          "quote": "Let $f:\\Omega\\to X$ be strongly measurable. Then $f$ is Bochner integrable if\nand only if\n\n$$\\int_\\Omega\\|f\\|\\,d\\mu<\\infty.$$\n\nHere an a.e.-defined scalar function is integrated through any measurable\nrepresentative supplied by the strong simple approximation. Moreover the\nBochner integral is independent of the approximating sequence in its\ndefinition.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-fd-profile-functional-bootstrap",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be the common probability space for the innovations and their independent replacement family (take a countable independent product extension if needed), and write $\\mathbb E$ for expectation under $\\mathbb P$.\n\nAssume the Axiom of Choice. Let $H=L^2([0,1],\\mathcal B,\\lambda;\\mathbb R)$, where $\\mathcal B$ is generated by intervals with rational endpoints and $\\lambda$ is Lebesgue measure restricted to $\\mathcal B$. Let $(S,\\mathcal S,\\nu)$ be a probability space, let $(\\delta_t)_{t\\in\\mathbb Z}$ be independent identically distributed measurable $S$-valued random elements with law $\\nu$, and let $f:S^{\\mathbb N_0}\\to H$ be measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. Set $X_t=f(\\delta_t,\\delta_{t-1},\\ldots)$ and assume its Bochner expectation is zero and $\\mathbb E\\|X_0\\|_H^2<\\infty$. For each $t\\in\\mathbb Z$, $m\\ge1$, and $k\\le t-m$, let $\\delta'_{t,m,k}$ have law $\\nu$, with these copies mutually independent and independent of the original innovations, and set $X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots)$. Assume $\\sum_{m=1}^{\\infty}\\delta_m<\\infty$, where $\\delta_m=(\\mathbb E\\|X_0-X_{0,m}\\|_H^2)^{1/2}$. For each $n\\ge1$, let the integer block length $b_n$ satisfy $b_n\\to\\infty$ and $b_n/\\sqrt n\\to0$; for all sufficiently large $n$, apply moving-block resampling with block length $b_n$ to $X_1,\\ldots,X_n$, truncating the last block to exactly $n$ elements. Write $\\bar X_n^*=n^{-1}\\sum_{j=1}^nX_j^*$, and let $\\mathbb E^*$ denote expectation over these draws with the observations fixed. For a finite-support $H$-valued resampling random element $Z$, define its conditional covariance operator by\n\n$$\\operatorname{Cov}^*(Z):=\\mathbb E^*\\bigl[(Z-\\mathbb E^*Z)\\otimes(Z-\\mathbb E^*Z)\\bigr]\\in\\mathcal B(H),\\qquad (u\\otimes v)h:=\\langle h,v\\rangle_Hu\\quad(h,u,v\\in H).$$\n\nFor a finite-support real-valued resampling random variable $V$, define $\\operatorname{Var}^*(V):=\\mathbb E^*[(V-\\mathbb E^*V)^2]$. Each convergence-in-probability assertion below is with respect to $\\mathbb P$.\n\nWrite $\\mathcal L^*(Z)$ for the law of $Z$ under the same conditional resampling distribution. Let $G$ be the centered $H$-valued Gaussian limit with covariance operator $\\Gamma$ supplied by the Hilbert-valued sample-mean CLT for this process. For any bounded real-linear $L:H\\to\\mathbb R$, set $\\|L\\|=\\sup_{\\|u\\|_H\\le1}|L(u)|$, let $h_L\\in H$ be the unique vector satisfying $L(u)=\\langle u,h_L\\rangle_H$ for every $u\\in H$, and define $L^*r=rh_L$. Identify the scalar operator $L\\Gamma L^*:\\mathbb R\\to\\mathbb R$ with its value at $1$. Then\n$$\\mathcal L^*\\!\\left(\\sqrt n\\,L(\\bar X_n^*-\\mathbb E^*\\bar X_n^*)\\right)\\Rightarrow\\mathcal L(LG)\\quad\\text{in probability},$$\nand, with $C_n=n\\operatorname{Cov}^*(\\bar X_n^*)$,\n$$\\left|\\operatorname{Var}^*\\!\\left(\\sqrt n\\,L(\\bar X_n^*-\\mathbb E^*\\bar X_n^*)\\right)-L\\Gamma L^*\\right|\\le\\|L\\|^2\\|C_n-\\Gamma\\|_{\\mathrm{HS}}\\longrightarrow0\\quad\\text{in probability}.$$\nHere $L\\Gamma L^*$ is the variance of the limiting scalar Gaussian. This conclusion concerns bounded linear profile observations under the stated Bernoulli-shift and block-length hypotheses; it makes no claim for nonlinear statistics or for finite-replicate quantile accuracy.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-strongly-measurable-banach-valued-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space and $X$ a real or complex\nBanach space. A function $f:\\Omega\\to X$ is **strongly measurable** (or\n**Bochner measurable**) if there are measurable $X$-valued simple functions\n$s_n$ and a measurable null set $N$ such that\n\n$$\\lim_{n\\to\\infty}\\|s_n(\\omega)-f(\\omega)\\|=0$$\n\nfor every $\\omega\\in\\Omega\\setminus N$.\n\nThis is a norm-convergence condition. It is not, by definition, merely Borel\nmeasurability of $f$ or measurability of every scalar function $x^*\\circ f$.\nChanging $f$ on a null set preserves strong measurability: enlarge $N$ by that\nnull set and retain the same approximants.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F7], the assumed AC yields both DC and Countable Choice, so the product-extension setup in [F1] is available. Use the map $\\iota$ defined in the Example, denoting it by $\\mathcal I$ in this calculation: $\\mathcal I(y)=\\iota(y)=[\\xi\\mapsto y]$. Then $\\|\\mathcal I(y)\\|_H^2=\\int_0^1|y|^2\\,d\\xi=|y|^2$, so $\\mathcal I$ is a linear isometry. Since $\\mathcal I$ is continuous, $X_t(\\omega)=\\mathcal I(Y_t(\\omega))$ is a measurable causal $H$-valued shift; applying $\\mathcal I$ to the same independent replacements gives $X_{t,m}(\\omega)=\\mathcal I(Y_{t,m}(\\omega))$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The isometry gives $\\mathbb E\\|X_0\\|_H^2=\\mathbb E|Y_0|^2$ and $(\\mathbb E\\|X_0-X_{0,m}\\|_H^2)^{1/2}=(\\mathbb E|Y_0-Y_{0,m}|^2)^{1/2}$ for every $m$. Apply [F2] to $Y_0$ and the constant random variable $1$ to obtain $\\mathbb E|Y_0|\\le(\\mathbb E|Y_0|^2)^{1/2}<\\infty$; hence $\\mathbb E\\|X_0\\|_H<\\infty$. By [A1] and [F7], AC supplies Countable Choice, so [F1] gives a countable dense sequence $(h_k)$ in $H$. For each $N$, let $\\pi_N(x)$ be a nearest point among $h_1,\\ldots,h_N$, resolving ties by the least index. Its finitely many cells are Borel, since they are finite intersections of strict or weak comparisons of continuous distance functions. Thus $\\pi_N\\circ X_0$ is a measurable finite-valued simple map, and density gives $\\pi_N(X_0)\\to X_0$ pointwise. By [F6], $X_0$ is strongly measurable, so [F3] gives its Bochner integrability. Since [F3] also gives scalar simple functions $s_j=\\sum_k c_{j,k}\\mathbf1_{A_{j,k}}$ with $\\mathbb E|s_j-Y_0|\\to0$, their images satisfy $\\mathbb E_B\\mathcal I(s_j)=\\sum_k\\mathbb P(A_{j,k})\\mathcal I(c_{j,k})=\\mathcal I(\\mathbb E s_j)$. The isometry implies $\\mathbb E\\|\\mathcal I(s_j)-X_0\\|_H\\to0$, so taking the defining integral limits gives $\\mathbb E_BX_0=\\mathcal I(\\mathbb E Y_0)=0$. The profile shift therefore has the required centering and exactly the scalar replacement-error sum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The functional $L$ is well-defined on almost-everywhere classes, and [F5] gives $|L(v)|\\le\\|v\\|_H\\|1\\|_H=\\|v\\|_H$. Since $L(1)=1$ and $\\|1\\|_H=1$, $\\|L\\|=1$; also $L(X_t)=\\int_0^1Y_t\\,d\\xi=Y_t$. All hypotheses of [F4] are therefore satisfied, so its conditional bootstrap conclusion applies to this scalar summary.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example constructs a process indexed by all integers and invokes the proposition only for n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 preserve the zero profile and its zero replacement errors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 proves L(1)=1 and ||1||=1, so the scalar summary has unit operator norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 remain valid for the all-zero scalar process."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 defines L on almost-everywhere classes, so endpoint values on [0,1] do not change the integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example assumes Choice and fact A1 supplies the proposition assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a construction and claims no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a construction and claims no iff."
+        }
+      ]
+    }
+  }
+}

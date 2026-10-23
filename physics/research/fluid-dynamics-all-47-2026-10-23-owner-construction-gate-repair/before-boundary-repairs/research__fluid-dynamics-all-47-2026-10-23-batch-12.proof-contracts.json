@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "pthm-fd-px01-prediction",
+    "ex-fd-x01-application"
+  ],
+  "contracts": {
+    "pthm-fd-px01-prediction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Adopt a smooth single-component material continuum on a stated macroscopic regime in a Cartesian inertial chart. Let $\\rho_0\\in C^1(\\overline B)$ be positive. On each swept material region, require $\\rho,u,e,T,s,q,\\sigma\\in C^1$ and $b,r\\in C^0$, with $\\rho>0$ and $T>0$; the motion has the regularity and positive Jacobian in the preceding definition. A material subregion is $\\chi_t(V)$ for a nonempty bounded open set $V\\Subset B$ whose boundary is locally, after a rigid coordinate change, a $C^1$ graph with $V$ on one side; its boundary moves with the material velocity. The Jordan integral convention for such regions and their smooth images is the one in the mathematical interface identified below. The continuum approximation, its empirical regime, and the following balance laws are physical assumptions of this model, not deductions from the mathematical definition of a motion or from molecular mechanics.\n\nAssume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$\n\nAdopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$\n\nThe entropy flux uses the local material temperature at the heat-transfer point. A reservoir at a different temperature, a singular surface force, a shock, vacuum, or a weak solution requires a separately stated model and is not covered here. The postulate reports no experiment and asserts no measurement or universal claim that nature obeys these assumptions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "Work in the nonrelativistic SI fluid model on an open time interval $I\\subseteq\\mathbb R$ measured in seconds and oriented Euclidean three-space measured in metres. Let $\\Omega_t$ be the fluid region at time $t$ and $\\mathcal O:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$ its open spacetime region. Let $u:\\mathcal O\\to\\mathbb R^3$ be fluid velocity in metres per second, $T:\\mathcal O\\to(0,\\infty)$ absolute temperature in kelvins, and $q:\\mathcal O\\to\\mathbb R^3$ conductive heat flux in watts per square metre. A moving solid boundary is locally parameterized by a $C^2$ embedding $X_b:I\\times\\Xi\\to\\mathbb R^3$, where $\\Xi\\subseteq\\mathbb R^2$ is open and $D_\\xi X_b$ has rank two; its material boundary velocity is $w_b(t,X_b(t,\\xi)):=\\partial_tX_b(t,\\xi)$ in metres per second. The boundary patches have continuous outward Euclidean unit normal $n$. In the smooth branch, assume $u,T,q$ have continuous traces wherever boundary values are imposed. The no-penetration or impermeability condition is the adopted equality $(u-w_b)\\cdot n=0$ on the wall. When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall. Neither equality is deduced from an interior balance equation; no-slip is not part of the inviscid wall model unless explicitly adopted.\n\nAt each thermal boundary patch, select and state compatible data of one of these forms: insulation, $q\\cdot n=0$; prescribed temperature, $T=T_b$ for a specified field $T_b>0$ in kelvins; or prescribed outward conductive heat flux, $q\\cdot n=q_b$ for a specified field $q_b$ in watts per square metre. These are alternative boundary models. Their energy and entropy fluxes are accounted for through the chosen boundary data; no separate surface storage or reservoir entropy law is implicit.\n\nA periodic cell with side lengths $L_1,L_2,L_3>0$ metres is the quotient torus $\\mathbb T^3_L:=\\mathbb R^3/(L_1\\mathbb Z\\times L_2\\mathbb Z\\times L_3\\mathbb Z)$. Periodicity identifies opposite faces by the corresponding translations and requires equality of the fields and of each derivative trace required by the selected evolution problem. Paired fluxes then cancel in cell integrals. These identified faces are not physical walls.\n\nAt an initial time $t_0\\in I$, prescribe only the fields present in the selected model. Require them to satisfy the exact function-space regularity, positivity, differential constraints, constitutive state-domain restrictions, and wall or periodic compatibility hypotheses of the particular evolution result being used. In the weak formulation, initial data enter through the test-function initial term; that fixes a distributional initial datum but does not by itself supply a strong trace. This postulate selects model data only. It asserts no existence, uniqueness, regularity improvement, approximation, or solvability for any initial-boundary value problem.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-fd-newtonian-fourier",
+          "source_section": "Postulate",
+          "quote": "Use a Cartesian inertial frame in Newtonian spacetime. At an event let $u$ be the fluid velocity, $T>0$ its temperature, $\\rho>0$ its mass density, and $\\xi=(\\rho,T)$ its local state in a specified open set $\\mathcal S\\subset(0,\\infty)^2$. The velocity gradient has components $L_{ij}=\\partial_{x_j}u_i$; define the symmetric rate matrix $D=(L+L^T)/2$, its trace $\\theta=\\operatorname{tr}D$, and its trace-free part $D_0=D-\\theta I_3/3$, where $I_3$ is the $3\\times3$ identity matrix. For $A,B\\in\\mathbb R^{3\\times3}$, use the Frobenius contraction $A:B=\\sum_{i,j=1}^3A_{ij}B_{ij}$.\n\nAdopt specified scalar state laws $\\mu,\\zeta:\\mathcal S\\to[0,\\infty)$ and a specified conductivity matrix law $K:\\mathcal S\\to\\mathbb R^{3\\times3}$, with\n$$ x^T\\operatorname{sym}K(\\xi)x\\ge0\\quad(x\\in\\mathbb R^3),\\qquad \\operatorname{sym}K=(K+K^T)/2. $$\nAssume the viscous response at a fixed state is linear in $D$ and equivariant under proper rotations, and adopt\n$$ \\tau=2\\mu(\\xi)D_0+\\zeta(\\xi)\\theta I_3,\\qquad \\sigma=-pI_3+\\tau,\\qquad q=-K(\\xi)\\nabla T. $$\nHere $p$ is the scalar pressure field in the tension-positive convention: the traction on an outward unit normal $n$ is $\\sigma n$. Under a rigid observer rotation $Q\\in\\operatorname{SO}(3)$, the tensor fields transform by $S^*=QSQ^T$; $\\mu,\\zeta$ are scalar state functions and $K^*=QKQ^T$. The closure is therefore form-invariant under those rotations. The mathematical linear-isotropic classification identifies this stress form from the stated linearity and equivariance hypotheses; it does not establish that any material adopts them.\n\nIn SI units, $D,\\theta,D_0$ are in $\\mathrm{s^{-1}}$, $\\mu,\\zeta$ in $\\mathrm{Pa\\,s}$, $K$ in $\\mathrm{W\\,m^{-1}\\,K^{-1}}$, $q$ in $\\mathrm{W\\,m^{-2}}$, and $\\sigma,\\tau,p$ in $\\mathrm{Pa}$. If the same stress is written $2\\mu D+\\lambda\\theta I_3$, then $\\lambda=\\zeta-2\\mu/3$; no nonnegativity of $\\lambda$ is assumed. These specified constitutive functions are adopted model inputs, not measured coefficient values or consequences of balance laws.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-incompressible-newtonian-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval and $\\Omega\\subset I\\times\\mathbb R^3$ open. A smooth constant-density incompressible Newtonian branch has a constant $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic shear viscosity $\\mu\\ge0$ in $\\mathrm{Pa\\,s}$, a velocity field $u\\in C^2(\\Omega,\\mathbb R^3)$, and a pressure multiplier $p\\in C^1(\\Omega,\\mathbb R)$. Define $L_{ij}=\\partial_{x_j}u_i$, $D=(L+L^T)/2$, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$. The branch is specified by\n$$ \\rho=\\rho_0,\\qquad \\operatorname{div}u=0,\\qquad \\sigma=-pI_3+2\\mu D,\\qquad \\rho_0D_tu=\\operatorname{div}\\sigma, $$\nwhere $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$. Equivalently, for constant $\\mu$, its momentum equation is\n$$ \\rho_0D_tu+\\nabla p=\\mu\\Delta u,\\qquad \\Delta u_i=\\sum_{j=1}^3\\partial_{x_jx_j}u_i. $$\nIndeed, $\\operatorname{div}(2\\mu D)=\\mu\\Delta u+\\mu\\nabla(\\operatorname{div}u)=\\mu\\Delta u$. This is the incompressible specialization of the adopted Newtonian closure: $\\theta=\\operatorname{div}u=0$ implies $D_0=D$, so the bulk-viscosity and Fourier-flux terms do not enter this mechanical equation. The pressure is a constraint multiplier and is not identified with a compressible equation-of-state pressure. Define the kinematic viscosity $\\nu=\\mu/\\rho_0$, in $\\mathrm{m^2\\,s^{-1}}$. Boundary and initial data are not part of this definition, and the item asserts no solution existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-barotropic-euler-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subset\\mathbb R$ be an open time interval, let $\\Omega\\subset I\\times\\mathbb R^3$ be open, and let $P:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable pressure function. A smooth positive-density barotropic Euler solution is a pair of fields $\\rho\\in C^2(\\Omega,(0,\\infty))$ and $u\\in C^2(\\Omega,\\mathbb R^3)$ satisfying\n$$ \\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla P(\\rho)=0. $$\nHere $\\operatorname{div}u=\\sum_{i=1}^3\\partial_{x_i}u_i$, $\\nabla$ is the spatial gradient, and $D_tu=\\partial_tu+(u\\cdot\\nabla)u$ is the material acceleration. The constitutive stress is $\\sigma=-P(\\rho)I_3$ under the tension-positive traction convention. Thus “barotropic” means that pressure is a specified function of density alone, and “Euler” here means that the viscous stress is absent. No sign of $P'(\\rho)$ is built into the definition; a positive acoustic response is a separate hypothesis where used. In SI interpretation, $\\rho$ is in $\\mathrm{kg\\,m^{-3}}$, $u$ in $\\mathrm{m\\,s^{-1}}$, $P$ in $\\mathrm{Pa}$, and $P'(\\rho)$ in $\\mathrm{m^2\\,s^{-2}}$. The model gives equations for a smooth solution and asserts no existence theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-x01",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ and $\\Omega\\subseteq\\mathbb R^3$ be open, let $\\rho_0,\\mu,U,L,c>0$, and set $\\nu=\\mu/\\rho_0$, $\\operatorname{Re}=UL/\\nu$, and $\\operatorname{Ma}=U/c$. Define $T=Ut/L$, $X=x/L$, $I^*=\\{Ut/L:t\\in I\\}$, and $\\Omega^*=\\{x/L:x\\in\\Omega\\}$. For the incompressible branch, let $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous first time and first and second spatial partial derivatives, and let $p:I\\times\\Omega\\to\\mathbb R$ have continuous first spatial partial derivatives. Write $u^*:I^*\\times\\Omega^*\\to\\mathbb R^3$ and $p^*:I^*\\times\\Omega^*\\to\\mathbb R$ for the corresponding fields with the same stated regularity. Set $u(t,x)=Uu^*(T,X)$ and $p(t,x)=p_{\\mathrm{ref}}+\\rho_0U^2p^*(T,X)$, where $p_{\\mathrm{ref}}$ is constant. Then the original system is equivalent under this invertible change of variables to\n\n$$\\partial_Tu^*+(u^*\\cdot\\nabla_X)u^*=-\\nabla_Xp^*+\\operatorname{Re}^{-1}\\Delta_Xu^*,\\qquad \\operatorname{div}_Xu^*=0.$$\n\nFor the barotropic branch, let $P:(0,\\infty)\\to\\mathbb R$ have two continuous derivatives with $P'(\\rho_0)=c^2>0$. Let $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous first time and first and second spatial partial derivatives, let $\\rho:I\\times\\Omega\\to(0,\\infty)$ have continuous first time and spatial partial derivatives, and let any potential $V$ have continuous spatial partial derivatives through order two. Write $u^*:I^*\\times\\Omega^*\\to\\mathbb R^3$, $\\rho^*:I^*\\times\\Omega^*\\to(0,\\infty)$, and $p^*:I^*\\times\\Omega^*\\to\\mathbb R$ for the rescaled fields with the corresponding stated regularity. Set $\\rho=\\rho_0\\rho^*$ and $P(\\rho)=P(\\rho_0)+\\rho_0c^2p^*$; if a potential is present, set $V=U^2V^*$ with $V^*:\\Omega^*\\to\\mathbb R$. Then the exact transformed equations are\n\n$$\\partial_T\\rho^*+\\operatorname{div}_X(\\rho^*u^*)=0,\\qquad \\partial_Tu^*+(u^*\\cdot\\nabla_X)u^*=-\\operatorname{Ma}^{-2}(\\rho^*)^{-1}\\nabla_Xp^*-\\nabla_XV^*.$$\n\nThese are coefficient identities under positive changes of scale. They do not assert a limit as either dimensionless ratio tends to zero or infinity, an error estimate, uniqueness, or identical solutions when geometry or rescaled data differ.\n\nIn the optional SI interpretation, $[\\rho_0]=\\mathrm{kg\\,m^{-3}}$, $[\\mu]=\\mathrm{Pa\\,s}$, $[U]=[c]=\\mathrm{m\\,s^{-1}}$, $[L]=\\mathrm m$, and $[\\nu]=\\mathrm{m^2\\,s^{-1}}$; $\\operatorname{Re}$ and $\\operatorname{Ma}$ are dimensionless.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the incompressible branch [F1], $\\sigma_{ij}=-p\\delta_{ij}+\\mu(\\partial_{x_j}u_i+\\partial_{x_i}u_j)$. Since $\\mu$ is constant and $u$ has continuous second spatial partial derivatives, componentwise differentiation gives $(\\operatorname{div}\\sigma)_i=-\\partial_{x_i}p+\\mu\\Delta u_i+\\mu\\partial_{x_i}(\\operatorname{div}u)$. The last term vanishes by $\\operatorname{div}u=0$, so the local equation is $\\partial_tu+(u\\cdot\\nabla_x)u+\\rho_0^{-1}\\nabla_xp-\\nu\\Delta u=0$. The adopted balances and constitutive closure are model assumptions.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the unforced barotropic branch [F2], divide the momentum equation by $\\rho>0$ and impose the additional hypotheses $P\\in C^2$ and $P'(\\rho_0)=c^2>0$. The definition of $p_{\\mathrm{bar}}^*$ gives $P(\\rho)=P(\\rho_0)+\\rho_0c^2p_{\\mathrm{bar}}^*$. Under $\\rho=\\rho_0\\rho^*$ and $u=Uu^*$, the mass terms have common factor $\\rho_0U/L$, while $D_tu$ has factor $U^2/L$ and $\\rho^{-1}\\nabla_xP(\\rho)=(c^2/L)(\\rho^*)^{-1}\\nabla_Xp_{\\mathrm{bar}}^*$. Dividing by the positive factors yields the displayed mass equation and the momentum coefficient $c^2/U^2=\\operatorname{Ma}^{-2}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The hypotheses established in step 1.1 match the constant-density system in [F3]. With $\\Theta=Ut/L$, $X=x/L$, $u=Uu^*$, and $p=p_{\\mathrm{ref}}+\\rho_0U^2p_{\\mathrm{inc}}^*$, the chain-rule identities in [F3] give the displayed dimensionless incompressible equation, since $\\nu/(UL)=\\operatorname{Re}^{-1}$. The compatible velocity, pressure, and momentum data selected in [A2] are carried by the same coordinate substitution. Positivity of $U,L,\\rho_0,\\mu$ makes every substitution and division invertible, so the equation equivalence holds in both directions.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact equivalences in steps 1.2 and 2.1 do not establish solvability or identify solutions on geometries or data sets that are not related by the stated substitution. Because $[UL]=[\\nu]=\\mathrm{m^2\\,s^{-1}}$ and $[U]=[c]=\\mathrm{m\\,s^{-1}}$, both ratios are dimensionless. These coefficient identities alone give no asymptotic limit, error estimate, low-Mach incompressibility conclusion, or high-Reynolds turbulence threshold.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty open time interval and a nonempty open spatial region."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The positive U, L, rho_0, mu, and c hypotheses in the Statement exclude zero scales and denominators."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If Re=1 or Ma=1, the corresponding coefficient is 1; steps 1.2 and 2.1 remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The positive-density and positive-sound-response hypotheses exclude vacuum and zero sound speed; the two branch statements preserve those assumptions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result concerns pointwise equations on open domains and makes no endpoint-trace claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All scales and fields are fixed inputs; no set-valued choice construction is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward scaled equations are derived in steps 1.2 and 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The positive changes of variables are invertible in steps 1.2 and 2.1, so the equations reverse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "status": "not_applicable",
+          "reason": "The theorem ranges over arbitrary positive real scales and smooth fields. Its validity is established by the complete symbolic identities in steps 1.1–2.1; a finite enumeration cannot cover that domain."
+        }
+      ]
+    },
+    "ex-fd-x01-application": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-px01-prediction",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time in seconds and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open spatial region in metres, expressed in a Newtonian Cartesian inertial chart. Let $u:I\\times\\Omega\\to\\mathbb R^3$ have continuous first time partial derivatives and continuous first and second spatial partial derivatives. Let a pressure field have continuous first spatial partial derivatives. Write $(D_xu)_{ij}=\\partial_{x_j}u_i$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, and let $\\Delta u$ act componentwise. Use SI units: $[u]=[U]=[c]=\\mathrm{m\\,s^{-1}}$, $[L]=\\mathrm m$, $[\\rho]=[\\rho_0]=\\mathrm{kg\\,m^{-3}}$, $[p]=[P(\\rho)]=[p_{\\mathrm{ref}}]=\\mathrm{Pa}$, and $[\\mu]=\\mathrm{Pa\\,s}$. Fix constants $\\rho_0>0$, $\\mu>0$, $U>0$, $L>0$, and $c>0$, and define $\\nu=\\mu/\\rho_0$, $\\operatorname{Re}=UL/\\nu$, and $\\operatorname{Ma}=U/c$.\n\nIn the first, force-free branch, assume $\\rho(t,x)=\\rho_0$, $\\operatorname{div}u=0$, and the selected incompressible Newtonian model with stress $\\sigma=-pI_3+2\\mu D$ and local momentum equation $\\rho_0(\\partial_tu+(u\\cdot\\nabla_x)u)=\\operatorname{div}\\sigma$, where $p$ is the constraint multiplier and is not an equation-of-state pressure. Set $\\Theta=Ut/L$, $X=x/L$, $I^*=\\{Ut/L:t\\in I\\}$, and $\\Omega^*=\\{x/L:x\\in\\Omega\\}$. Under $u(t,x)=Uu^*(\\Theta,X)$ and $p(t,x)=p_{\\mathrm{ref}}+\\rho_0U^2p_{\\mathrm{inc}}^*(\\Theta,X)$ for a constant $p_{\\mathrm{ref}}$, the governing equations are exactly\n\n$$\\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\nabla_Xp_{\\mathrm{inc}}^*+\\operatorname{Re}^{-1}\\Delta_Xu^*,\\qquad \\operatorname{div}_Xu^*=0.$$\n\nIn the separate, unforced barotropic Euler branch, let $\\rho,u\\in C^2(I\\times\\Omega)$ with $\\rho>0$, let $P:(0,\\infty)\\to\\mathbb R$ be $C^2$, and set the scalar potential $V:\\Omega\\to\\mathbb R$ to the zero function. Assume the mass and momentum equations\n\n$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0,\\qquad \\rho(\\partial_tu+(u\\cdot\\nabla_x)u)+\\nabla_xP(\\rho)=0.$\n\nAt the chosen reference density assume $P'(\\rho_0)=c^2>0$. Define $\\rho^*=\\rho/\\rho_0$ and\n\n$$p_{\\mathrm{bar}}^*(\\Theta,X)=\\frac{P(\\rho_0\\rho^*(\\Theta,X))-P(\\rho_0)}{\\rho_0c^2}.$$\n\nUnder $u(t,x)=Uu^*(\\Theta,X)$, the exact transformed mass and momentum equations are\n\n$$\\partial_\\Theta\\rho^*+\\operatorname{div}_X(\\rho^*u^*)=0,\\qquad \\partial_\\Theta u^*+(u^*\\cdot\\nabla_X)u^*=-\\operatorname{Ma}^{-2}(\\rho^*)^{-1}\\nabla_Xp_{\\mathrm{bar}}^*.$$\n\nThe ratios are dimensionless derived parameters: $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, $[c]=\\mathrm{m\\,s^{-1}}$, and $[\\operatorname{Re}]=[\\operatorname{Ma}]=1$. Any compatible velocity, pressure, density, and momentum initial/boundary data for these equations are transformed with the same invertible coordinate change. Thermal evolution and heat-flux scaling are not part of this calculation. The coefficient identities do not assert an incompressible or inviscid limit, an error bound, uniqueness, identical solutions for different geometries or rescaled data, or a turbulence threshold. They are conditional predictions of the adopted model formulations and are not experimental observations or proof that either model describes a material.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The definitions give $\\nu=\\mu/\\rho_0=10^{-3}/10^3=10^{-6}\\,\\mathrm{m^2\\,s^{-1}}$. Therefore $\\operatorname{Re}=UL/\\nu=(1)(10^{-1})/10^{-6}=10^5$ and $\\operatorname{Ma}=U/c=1/10^2=10^{-2}$, so $\\operatorname{Ma}^{-2}=10^4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the selected shear field, $\\operatorname{div}_Xu^*=0$ because its first component is independent of $X_1$, and $(u^*\\cdot\\nabla_X)u^*=0$ for the same reason. Direct differentiation gives $\\partial_\\Theta u^*=-\\operatorname{Re}^{-1}u^*$ and $\\Delta_Xu^*=-u^*$. With $p_{\\mathrm{inc}}^*=0$, the momentum equation is thus satisfied componentwise. The scaling in [F1] carries this smooth solution to the physical periodic cell with the stated positive scales.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the linear pressure law, $P'(\\rho_0)=c^2>0$. At $\\rho^*=1$, $p_{\\mathrm{bar}}^*=0$; the selected constant density and zero velocity make both the mass equation and the barotropic momentum equation vanish on each side. The coefficient $10^4$ multiplies a zero pressure gradient in this equilibrium and is not an approximation parameter conclusion.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every selected value and field is a formal input or exact solution of the stated model equations; none is a measured result. The calculation supplies no limit or empirical claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses a nonempty periodic cell and a nonempty open time interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The selected scales rho_0, mu, U, L, and c are positive in step 1.1; zero velocity components do not set a scale to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coefficient formulas remain defined when a dimensionless value equals 1; the selected values in step 1.1 are positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The selected shear is smooth and the barotropic state has rho^*=1; step 2.2 verifies the equilibrium."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The shear formula is smooth for every real Theta, including the interior initial time Theta=0 used in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All fields and parameters are explicit formulas and fixed constants, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies selected solutions and does not assert an equivalence of solution sets."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies selected solutions and does not assert a converse classification."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "SI parameter arithmetic",
+          "status": "checked",
+          "calculation": "nu=10^{-3}/10^3=10^{-6} m^2 s^{-1}; Re=(1)(10^{-1})/10^{-6}=10^5; Ma=1/10^2=10^{-2}; Ma^{-2}=10^4."
+        },
+        {
+          "case": "periodic shear derivatives",
+          "status": "checked",
+          "calculation": "div u^*=0, (u^* dot grad)u^*=0, partial_Theta u^*=-Re^{-1}u^*, and Delta u^*=-u^*."
+        },
+        {
+          "case": "barotropic equilibrium",
+          "status": "checked",
+          "calculation": "rho^*=1 implies p_bar^*=0; u^*=0 and constant rho^* make both mass and momentum residuals zero."
+        }
+      ]
+    }
+  }
+}

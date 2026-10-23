@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-ideal-gas-numerical-model",
+    "pthm-fd-conditional-positive-euler-update",
+    "ex-fd-positive-euler-uniform-gas"
+  ],
+  "contracts": {
+    "post-fd-ideal-gas-numerical-model": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines an open (v,s) state domain, a C2 calorically perfect ideal-gas fundamental relation, the derived temperature and pressure, conserved-state variables, Euler flux, isentropic sound speed, and the one-dimensional weak identities with initial data."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The claim is restricted to a nonrelativistic SI, one-dimensional, inviscid calorically perfect ideal-gas branch with positive density and temperature. All displayed densities, fluxes, and products are required to be locally integrable."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The complete relevant Powers Gas Dynamics sections and Tong Part III Waves sections were retrieved and inspected at the locators recorded in the item and batch coverage. They support the ideal-gas EOS, caloric closure, Gibbs relation, and entropy convention. The weak entropy inequality is separately adopted and is not represented as proved by these sources."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The weak balance laws, local-equilibrium closure, and physical entropy inequality are expressly adopted model premises. The item asserts no existence, uniqueness, empirical universality, or derivation of weak entropy admissibility from smooth equations."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-conditional-positive-euler-update": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-ideal-gas-numerical-model",
+          "source_section": "Postulate",
+          "quote": "$$T=\\frac{e}{c_v}>0,\\qquad p=(\\gamma-1)\\frac{e}{v}=(\\gamma-1)\\rho e=R\\rho T>0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-compressible-numerical-contract",
+          "source_section": "Definition",
+          "quote": "The associated one-step update in conservative finite-volume form is $$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-fd-euler-llf-admissibility-interface",
+          "source_section": "Statement",
+          "quote": "Then $U_i^+\\in\\mathcal G_\\gamma$ for every cell $i$; in particular, each updated density and pressure is strictly positive. This conclusion is for the specified one-step symmetric branch and does not assert positivity for other HLL speed pairs or a fully discrete entropy inequality.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-physical-and-conservative-pressure",
+          "step": "1.1",
+          "claim": "The adopted internal-energy relation makes the physical pressure equal the state pressure used in the mathematical positivity interface.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-facewise-symmetric-positivity-result",
+          "step": "2.1",
+          "claim": "The stated periodic states, symmetric flux, facewise speed lower bounds, and CFL bounds match the exact local proposition, so every updated state lies in the admissible set.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N>=2 periodic cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows Delta t=0; then lambda=0, and step 2.1 gives the identity update."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is scoped to N>=2 cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses rho>0 and p>0 to obtain c>0, so the face speed lower bound makes a>0 and the symmetric speeds strictly straddle zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The speed lower bound and CFL upper bound are inclusive in the statement and local proposition; equality at either bound is permitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite states and face speeds are supplied; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way positivity implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way positivity implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate numerical finite check is needed: the full result is an exact application of the inspected local symmetric-branch proposition, with zero-step and inclusive endpoint cases recorded above."
+    },
+    "ex-fd-positive-euler-uniform-gas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-fd-conditional-positive-euler-update",
+          "source_section": "Statement",
+          "quote": "Use the symmetric HLL, or local Lax–Friedrichs, face flux and the shared-face update $$\\widehat F_{i+1/2}=\\frac12(F_i+F_{i+1})-\\frac{a_{i+1/2}}2(U_{i+1}-U_i),\\qquad U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-face-flux",
+          "step": "1.1",
+          "claim": "Equal neighboring states cancel the dissipative jump term and give the same physical flux at every face.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-state-fixed-point",
+          "step": "2.1",
+          "claim": "Equal periodic face fluxes make every conservative flux difference zero, so the one-step update leaves each cell at the supplied state.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires N>=2 periodic cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows Delta t=0, and step 2.1 gives U_i^+=U."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is scoped to N>=2 cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves equal face fluxes, and step 2.1 uses only that equality, including when the common flux vector is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes equality in the speed and CFL bounds, and steps 1.1–2.1 still give the fixed-point identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The constant state and common speed are supplied; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way fixed-point assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way fixed-point assertion, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-cell periodic uniform-state specialization",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ],
+          "expected": "For N=2, both periodic interfaces have the common flux F(U), so the flux difference in each cell is zero and U_i^+=U."
+        }
+      ],
+      "finite_checks_disposition": "This is an exact symbolic boundary specialization of the local algebra, not a numerical simulation or empirical observation."
+    }
+  }
+}

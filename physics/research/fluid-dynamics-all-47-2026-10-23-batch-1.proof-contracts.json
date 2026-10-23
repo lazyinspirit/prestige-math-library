@@ -1,0 +1,581 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fdmath-finite-ensemble-and-covariance",
+    "thm-fdmath-finite-reynolds-identity",
+    "thm-fdmath-mean-fluctuation-energy-transfer",
+    "cex-fdmath-mean-does-not-determine-covariance"
+  ],
+  "contracts": {
+    "def-fdmath-finite-ensemble-and-covariance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires N≥1, so no empty weight tuple is admitted.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $N\\ge1$ be an integer and let"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits zero weights; their terms contribute zero to the displayed mean and covariance sums.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "let $a_1,\\ldots,a_N\\in[0,\\infty)$ satisfy"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 normalization gives a_1=1, and the Definition still assigns the mean, fluctuation, and covariance.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "The fixed tuple $(a_1,\\ldots,a_N)$ is a finite ensemble of weights."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits covariance tensors that are zero or singular and imposes no invertibility requirement.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "The covariance tensor of $X$ is $C(X):=C(X,X)$."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition specifies tuples and pointwise fields, not a time-endpoint or limit operation.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "If $D$ is a set"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Weights and tuples are supplied finite data; the Definition uses no choice principle.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $N\\ge1$ be an integer"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition introduces objects and contains no biconditional claim.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Define the weighted mean of $X$ and its $j$th fluctuation by"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition introduces objects and contains no biconditional claim.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Define the weighted mean of $X$ and its $j$th fluctuation by"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This carrier defines the finite weighted mean, fluctuations, and covariance tensor for positive integer dimensions m,n; it asserts no theorem requiring a sampled or computational finite check."
+    },
+    "thm-fdmath-finite-reynolds-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fdmath-finite-ensemble-and-covariance",
+          "source_section": "Definition",
+          "quote": "$$\\bar X:=\\sum_{j=1}^N a_jX_j,\\qquad X'_j:=X_j-\\bar X.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fdmath-finite-ensemble-and-covariance",
+          "source_section": "Definition",
+          "quote": "$$C(X,Y):=\\sum_{j=1}^N a_j X'_j\\otimes Y'_j\\in\\mathbb R^{m\\times n},$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fixed-weight-centering",
+          "step": "1.1",
+          "claim": "Finite fixed weights commute with derivatives; the weighted velocity is divergence-free and the weighted fluctuations sum to zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-product-split",
+          "step": "2.1",
+          "claim": "Expanding each member outer product and using zero weighted fluctuation yields the mean product plus the covariance tensor.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "averaged-equation",
+          "step": "3.1",
+          "claim": "Summing the member equations and substituting the product split yields the exact finite averaged momentum equation.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-covariance-and-energy-split",
+          "step": "4.1",
+          "claim": "The covariance quadratic form is a weighted sum of squares, and centering cancels the cross term in the kinetic-energy split.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires N≥1, so the empty index family is excluded.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval, let $d,N\\ge1$ be integers."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero weights are allowed; their terms vanish in the covariance and energy sums, as used in step 4.1.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Fix constants $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the normalized weight is 1, so v_1=0 and R=0; step 4.1 reduces the energy split to equality.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Fix constants $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No inverse of R is used; step 4.1 proves positive semidefiniteness even when R is singular or zero.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "The tensor $R$ is symmetric positive semidefinite."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is pointwise on the open time-space domain and makes no endpoint or limit claim.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Then, pointwise on $I\\times\\Omega$,"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All weights and finite tuples are supplied data; no choice principle is used.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval, let $d,N\\ge1$ be integers."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an identity and positivity assertion, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "and the exact averaged equation is"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an identity and positivity assertion, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "and the exact averaged equation is"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single-member ensemble",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1"
+          ],
+          "expected": "For N=1 and a_1=1, v_1=0 and R=0; the averaged equation is the member equation and the energy split is equality."
+        },
+        {
+          "name": "two-member covariance expansion",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 4.1"
+          ],
+          "expected": "For weights a and 1-a on x_1,x_2, R=a(1-a)(x_1-x_2)⊗(x_1-x_2), hence zᵀRz=a(1-a)(z·(x_1-x_2))²≥0."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic checks of the finite sums, not numerical experiments or probabilistic sampling."
+    },
+    "thm-fdmath-mean-fluctuation-energy-transfer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fdmath-finite-reynolds-identity",
+          "source_section": "Statement",
+          "quote": "$$\\partial_t\\bar u+\\operatorname{div}(\\bar u\\otimes\\bar u)+\\nabla\\bar p=\\nu\\Delta\\bar u+\\bar f-\\operatorname{div}R.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fdmath-finite-reynolds-identity",
+          "source_section": "Statement",
+          "quote": "\\sum_{j=1}^N a_jv_j=0",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fdmath-finite-reynolds-identity",
+          "source_section": "Statement",
+          "quote": "$\\sum_j a_j|u_j|^2=|\\bar u|^2+\\operatorname{tr}R$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "mean-energy-balance",
+          "step": "1.1",
+          "claim": "Dot the exact averaged equation with the mean field; periodic divergence integrals vanish, viscosity integrates by parts, and covariance divergence contributes positive stress work.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "total-energy-balance",
+          "step": "2.1",
+          "claim": "Dot each smooth unforced member equation with its velocity and integrate over the periodic cell; sum with the fixed weights.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fluctuation-energy-balance",
+          "step": "3.1",
+          "claim": "The weighted gradient fluctuations sum to zero; subtracting the mean balance from the total balance gives the opposite-signed transfer term.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-time-identities",
+          "step": "4.1",
+          "claim": "Continuity in time permits the fundamental theorem of calculus on every compact interval [t_0,t_1] inside I; adding balances cancels transfer exactly.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires N≥1 and normalized weights; no empty ensemble is admitted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Fix constants $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows zero weights; their terms vanish in the energy and stress sums.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Fix constants $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement’s one-member case has zero fluctuation and zero transfer, reducing to the periodic member energy identity.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Define $E_m(t)$ and $E_f(t)$ from $\\bar u$ and $R$."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement uses no covariance inverse; step 3.1 remains valid when R is singular or zero.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For a matrix $A$ and vector field $q$, set $A:\\nabla q$."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For any t_0<t_1 in I the explicit endpoint formulas follow by the fundamental theorem of calculus in step 4.1.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For every $t_0<t_1$ in $I$, the endpoint identities are"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite family and weights are supplied; no selection or arbitrary choice is used.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives two identities and their cancellation, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Then for every $t\\in I$,"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives two identities and their cancellation, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Then for every $t\\in I$,"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single-member energy balance",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1"
+          ],
+          "expected": "When N=1 and a_1=1, R=v_1=0, E_f=0, and the mean equation reduces to the periodic incompressible Navier–Stokes energy identity."
+        },
+        {
+          "name": "constant two-member ensemble",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ],
+          "expected": "For constant members w and -w with equal weights, bar u=0, R=w⊗w is spatially constant, and both transfer and gradient terms vanish; both energy derivatives are zero."
+        }
+      ],
+      "finite_checks_disposition": "The checks are exact symbolic specializations of the proved identities; no numerical sampling or empirical energy measurement is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Independently checked Statement and all four proof steps against the complete current finite Reynolds proof and finite-ensemble Definition. F1 applies to periodic lifts on the open domain R^d with zero continuous forcing, fixed normalized nonnegative weights and common nu>=0; F2 gives zero weighted fluctuation and gradient; F3 gives the exact total-energy split. On each compact time subinterval times the periodic cell, continuous time derivatives justify differentiation under the integral; continuous second spatial derivatives justify integration by parts. Periodic endpoint values cancel all coordinate divergence integrals, including pressure and convection. Rowwise divergence gives -integral(bar u dot div R)=+integral R:grad(bar u). Memberwise viscous terms are nonpositive; the gradient cross terms vanish by F2, giving the opposite transfer sign in step 3.1. The resulting continuous derivatives justify both endpoint identities by the fundamental theorem of calculus and exact transfer cancellation. No sign claim for transfer, solution existence, physical applicability or empirical certainty is inferred. N=1, zero weights, nu=0, singular/zero R and constant opposite members all satisfy the identities; empty ensembles are excluded, endpoints lie inside I, and no choice or iff argument occurs. Reader and refuter report no finding. Independently retrieved MIT OCW Chapter 3 sections 3.2, 3.6-3.7 and Eyink Chapter VIb section B printed pages 17-19: these supply statistical context and analogous balance signs, while the local finite deterministic proofs supply the actual deduction. No TikZ/tikzcd diagram occurs or is needed. No repair or unresolved prerequisite."
+      }
+    },
+    "cex-fdmath-mean-does-not-determine-covariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fdmath-finite-reynolds-identity",
+          "source_section": "Statement",
+          "quote": "$$\\partial_t\\bar u+\\operatorname{div}(\\bar u\\otimes\\bar u)+\\nabla\\bar p=\\nu\\Delta\\bar u+\\bar f-\\operatorname{div}R.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-solution-pair",
+          "step": "1.1",
+          "claim": "Both zero and opposite constant velocity families are smooth periodic, divergence-free, and solve the unforced equation because all derivatives vanish; their mean velocity and pressure agree.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "covariance-separation",
+          "step": "2.1",
+          "claim": "The finite Reynolds supplier identifies the covariance term; direct computation gives zero covariance for the zero family and w⊗w≠0 for the opposite family.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "universal-claim-refuted",
+          "step": "3.1",
+          "claim": "The same mean fields with different covariance tensors refute the universal determination claim, without addressing restricted closure models.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The refuted statement and construction require N≥1; the empty family is excluded.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For any $N\\ge1$, fixed weights $a_j\\ge0$ summing to one."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Ensemble A is the all-zero member case and gives R_A=0, computed explicitly in step 2.1.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Define $R=\\sum_j a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the normalized weight is 1 and R=0, so the restricted one-member case does not supply this counterexample; the two-member witness refutes the universal claim.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For any $N\\ge1$, fixed weights $a_j\\ge0$ summing to one."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero ensemble has rank-zero R while the opposite ensemble has nonzero rank-one R, as shown in step 2.1.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "The assertion that any two such ensembles with the same mean velocity and mean pressure fields"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fields are constant for all real times; no endpoint or limiting behavior is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $d\\ge2$, let $\\nu\\ge0$."
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness is explicitly the two-member pair and uses no choice principle.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Define ensemble A by $u_1=u_2=0$."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal uniqueness implication, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "The assertion that any two such ensembles"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal uniqueness implication, not a biconditional.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "The assertion that any two such ensembles"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "explicit two-member separation",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "Both means are zero; R_A=0 and R_B=1/2(w⊗w)+1/2((-w)⊗(-w))=w⊗w, with wᵀR_Bw=|w|⁴>0."
+        }
+      ],
+      "finite_checks_disposition": "The counterexample itself is the complete exact finite check; it is not a sampled or empirical result."
+    }
+  }
+}

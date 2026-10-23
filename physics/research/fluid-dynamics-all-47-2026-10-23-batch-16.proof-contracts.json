@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "16",
+  "level": 2,
+  "scope": [
+    "pthm-fd-nonnewtonian-conditional-admissibility",
+    "ex-fd-bingham-rest-stress"
+  ],
+  "contracts": {
+    "pthm-fd-nonnewtonian-conditional-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference body with $C^1$ boundary, and let $U$ be an open neighborhood of $\\overline B$. A material motion is a map $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ whose slices $\\chi_t(a)=\\chi(t,a)$ are orientation-preserving $C^2$ diffeomorphisms onto their images, with $\\chi(0,a)=a$. Its swept open region is $\\Omega=\\{(t,x):x\\in\\chi_t(U)\\}$, its inverse label is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^{\\mathsf T})/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_t=\\partial_t+u\\cdot\\nabla$. A branch is incompressible when $\\theta=0$, so $D$ is symmetric and trace-free. Write $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ for the Frobenius contraction and $|S|=(S:S)^{1/2}$ for its norm. Define $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D=D^{\\mathsf T},\\operatorname{tr}D=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A rigid observer change is $x^*=Q(t)x+c(t)$ with $Q\\in C^2(I,\\mathrm{SO}(3))$, $c\\in C^2(I,\\mathbb R^3)$, and $\\mathrm{SO}(3)=\\{Q:Q^{\\mathsf T}Q=I_3,\\det Q=1\\}$. A second-order tensor transforms as $S^*=QSQ^{\\mathsf T}$; a constitutive response is objective when it obeys this rule at corresponding events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "For a generalized Newtonian branch, define\n\n$$\n\\dot\\gamma=(2D:D)^{1/2},\\qquad \\tau=2\\eta(\\dot\\gamma)D,\n$$\n\nwhere $\\eta:[0,\\infty)\\to[0,\\infty)$ is finite and continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "Here $\\tau_y$ is, by definition, the radius of the Frobenius stress ball at rest; other invariant normalizations require a corresponding parameter conversion. The graph is single-valued for $D\\ne0$ and set-valued at rest.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-adopted-nonnewtonian-models",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)=\\mathbb R^{3\\times3}$ be the real $3\\times3$ matrices. For $M=(M_{ij})\\in M_3(\\mathbb R)$, define its trace by $\\operatorname{tr}M=\\sum_{i=1}^3M_{ii}$, and let $I_3$ be the $3\\times3$ identity matrix, with diagonal entries $1$ and all other entries $0$.\n\nLet $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference body with $C^1$ boundary, and let $U$ be an open neighborhood of $\\overline B$. A material motion is a map $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ whose slices $\\chi_t(a)=\\chi(t,a)$ are orientation-preserving $C^2$ diffeomorphisms onto their images, with $\\chi(0,a)=a$. Its swept open region is $\\Omega=\\{(t,x):x\\in\\chi_t(U)\\}$, its inverse label is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^{\\mathsf T})/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_t=\\partial_t+u\\cdot\\nabla$. A branch is incompressible when $\\theta=0$, so $D$ is symmetric and trace-free. Write $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$ for the Frobenius contraction and $|S|=(S:S)^{1/2}$ for its norm. Define $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D=D^{\\mathsf T},\\operatorname{tr}D=0\\}$ and $\\mathrm{Sym}^+(3)=\\{C\\in M_3(\\mathbb R):C=C^{\\mathsf T},z^{\\mathsf T}Cz>0\\text{ for every }z\\ne0\\}$. A rigid observer change is $x^*=Q(t)x+c(t)$ with $Q\\in C^2(I,\\mathrm{SO}(3))$, $c\\in C^2(I,\\mathbb R^3)$, and $\\mathrm{SO}(3)=\\{Q:Q^{\\mathsf T}Q=I_3,\\det Q=1\\}$. A second-order tensor transforms as $S^*=QSQ^{\\mathsf T}$; a constitutive response is objective when it obeys this rule at corresponding events.\n\nFor the generalized Newtonian and Bingham branches, require $\\theta=\\operatorname{div}u=0$ throughout $\\Omega$, so $D\\in\\mathrm{Sym}_0(3)$. In these branches, $\\tau$ is a symmetric deviatoric extra stress, meaning $\\operatorname{tr}\\tau=0$; the total tension-positive Cauchy stress may additionally contain an isotropic pressure. In the conformation branch, $\\tau_p$ and $\\tau_s$ denote the polymer and solvent stresses separately and the pressure is a Lagrange multiplier. Stress is measured in Pa, $D$ and shear rate in $\\mathrm{s}^{-1}$, viscosity in $\\mathrm{Pa\\,s}$, and a rate of stress power per volume in $\\mathrm{W\\,m^{-3}}$.\n\nFor a generalized Newtonian branch, define\n\n$$\n\\dot\\gamma=(2D:D)^{1/2},\\qquad \\tau=2\\eta(\\dot\\gamma)D,\n$$\n\nwhere $\\eta:[0,\\infty)\\to[0,\\infty)$ is finite and continuous. Two permitted scalar choices are the Carreau form\n\n$$\n\\eta_C(\\dot\\gamma)=\\eta_\\infty+(\\eta_0-\\eta_\\infty)\\bigl(1+(\\lambda_C\\dot\\gamma)^2\\bigr)^{(n_C-1)/2},\n$$\n\nwith $\\eta_0\\ge\\eta_\\infty\\ge0$ in $\\mathrm{Pa\\,s}$, $\\lambda_C\\ge0$ in seconds, and dimensionless $n_C>0$, and the regularized power form\n\n$$\n\\eta_R(\\dot\\gamma)=m(\\varepsilon^2+\\dot\\gamma^2)^{(n_R-1)/2},\n$$\n\nwith $m>0$ in $\\mathrm{Pa\\,s}^{n_R}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n_R>0$. The unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n_R-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$, so for $0<n_R<1$ the viscosity diverges at zero rate even though the extended stress can be continuous.\n\nFor the Bingham branch, let $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ in $\\mathrm{Pa}$. Adopt $\\tau\\in\\mathcal B(D)$, where the set-valued graph on $\\mathrm{Sym}_0(3)$ is\n\n$$\n\\mathcal B(D)= \\begin{cases} \\{2\\mu_pD+\\tau_yD/|D|\\},&D\\ne0,\\\\ \\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\},&D=0, \\end{cases}\n$$\n\nwhere $\\mathrm{Sym}_0(3)$ is the space of trace-free symmetric $3\\times3$ real matrices. Here $\\tau_y$ is, by definition, the radius of the Frobenius stress ball at rest; other invariant normalizations require a corresponding parameter conversion. The graph is single-valued for $D\\ne0$ and set-valued at rest.\n\nFor an isothermal conformation branch, let $K=[t_0,t_1]\\subset I$ be a compact interval with $t_0<t_1$. A pathline on $K$ is a continuously differentiable curve $x:K\\to\\mathbb R^3$ satisfying $(t,x(t))\\in\\Omega$ and $x'(t)=u(t,x(t))$ for every $t\\in K$; derivatives at the endpoints are one-sided. Assume $\\operatorname{div}u=0$ on $\\Omega$ and take such a pathline. Let $C\\in C^1(K;\\mathrm{Sym}^+(3))$ be a dimensionless matrix-valued function. Along this pathline, the material derivative of $C$ is its ordinary derivative, $D_tC(t,x(t)):=\\frac{d}{dt}C(t)$. Set $L(t)=\\nabla u(t,x(t))$ and $D(t)=(L(t)+L(t)^{\\mathsf T})/2$. Let $G>0$ be a modulus in Pa, $\\lambda>0$ a relaxation time in seconds, $\\eta_s\\ge0$ a solvent viscosity in $\\mathrm{Pa\\,s}$, and $T_0>0$ a fixed temperature in K. Here an external thermostat is an idealized heat reservoir that maintains $T_0$ and accounts for heat released by this branch; it is an additional model assumption. Adopt\n\n$$\n\\frac{dC}{dt}=LC+CL^{\\mathsf T}-(C-I_3)/\\lambda,\\qquad \\tau_p=G(C-I_3),\\qquad \\tau_s=2\\eta_sD,\\qquad w(C)=\\frac G2\\bigl(\\operatorname{tr}C-\\log\\det C-3\\bigr).\n$$\n\nThe polymer and solvent stresses $\\tau_p,\\tau_s$ are measured in Pa, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant is positive because $C$ is symmetric positive definite. These are selected model equations on the stated smooth incompressible regime; they assert no empirical applicability to a particular material, fitted parameter values, PDE solution existence, or universal validity.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fd-generalized-newtonian-dissipation",
+          "source_section": "Statement",
+          "quote": "For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-fd-bingham-monotone-graph",
+          "source_section": "Statement",
+          "quote": "Then $\\Phi$ is finite, nonnegative, and convex; $\\mathcal B(D)=\\partial\\Phi(D)$ for every $D$; the graph is monotone in the sense that $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$ whenever $\\tau_i\\in\\mathcal B(D_i)$; every graph value satisfies $\\tau:D\\ge0$; and, for $Q\\in SO(3)$, $\\mathcal B(QDQ^{\\mathsf T})=Q\\mathcal B(D)Q^{\\mathsf T}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-fd-conformation-storage",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $u\\in C^1(J\\times\\Omega;\\mathbb R^3)$ satisfy $\\operatorname{div}u=0$ on a neighborhood of a $C^1$ trajectory $x:[0,T]\\to\\Omega$ with $x'(t)=u(t,x(t))$. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Set $L(t)=\\nabla u(t,x(t))$ and $D(t)=(L(t)+L(t)^{\\mathsf T})/2$, both with units $\\mathrm{s}^{-1}$. Let $\\mathrm{Sym}(3)$ denote the real symmetric $3\\times3$ matrices and $\\mathrm{Sym}^+(3)=\\{M\\in\\mathrm{Sym}(3):v^{\\mathsf T}Mv>0\\text{ for every }v\\ne0\\}$. Let $C\\in C^1([0,T];\\mathrm{Sym}(3))$ be dimensionless and satisfy\n\n$$\nC'=LC+CL^{\\mathsf T}-(C-I_3)/\\lambda,\\qquad C(0)=C_0\\in\\mathrm{Sym}^+(3),\n$$\n\nwhere $C_0\\in\\mathrm{Sym}^+(3)$, $I_3$ is the $3\\times3$ identity matrix, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I_3)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I_3$, and for every $t$,\n\n$$(\\tau_s+\\tau_p):D-\\frac{d}{dt}w(C)=2\\eta_sD:D+\\frac{G}{2\\lambda}\\bigl(\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6\\bigr)\\ge0.$$\n\nFor a $C^2$ rigid observer change $x^*=Q(t)x+c(t)$ with $Q(t)\\in SO(3)$, set $C^*=QCQ^{\\mathsf T}$ and $L^*=QLQ^{\\mathsf T}+Q'Q^{\\mathsf T}$. The conformation equation is covariant under this transformation, $D^*=QDQ^{\\mathsf T}$, $\\tau_p^*=Q\\tau_pQ^{\\mathsf T}$, $\\tau_s^*=Q\\tau_sQ^{\\mathsf T}$, and $w(C^*)=w(C)$. Positivity is a forward-time conclusion from the initial time $0$; no backward-time positivity, PDE solution existence, or entropy-production claim is asserted.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-fd-conformation-storage",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ rigid observer change $x^*=Q(t)x+c(t)$ with $Q(t)\\in SO(3)$, set $C^*=QCQ^{\\mathsf T}$ and $L^*=QLQ^{\\mathsf T}+Q'Q^{\\mathsf T}$. The conformation equation is covariant under this transformation, $D^*=QDQ^{\\mathsf T}$, $\\tau_p^*=Q\\tau_pQ^{\\mathsf T}$, $\\tau_s^*=Q\\tau_sQ^{\\mathsf T}$, and $w(C^*)=w(C)$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gn-power-and-objectivity",
+          "claim": "In the generalized Newtonian branch, $\\dot\\gamma^2=2D:D$ and $\\eta(\\dot\\gamma)\\ge0$ by [F2], so $\\tau:D=2\\eta(\\dot\\gamma)D:D=\\eta(\\dot\\gamma)\\dot\\gamma^2\\ge0$. Under a rigid observer change, [F5] gives $D^*=QDQ^{\\mathsf T}$ and $\\tau^*=Q\\tau Q^{\\mathsf T}$; orthogonal conjugation preserves the Frobenius product, hence $\\dot\\gamma^*=\\dot\\gamma$. By the definition in [F1], the response is objective.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bingham-power-and-objectivity",
+          "claim": "In the Bingham branch, when $D\\ne0$, each allowed stress is $\\tau=2\\mu_pD+\\tau_yD/|D|$, so $\\tau:D=2\\mu_p|D|^2+\\tau_y|D|\\ge0$. When $D=0$, every allowed stress has $\\tau:D=0$; the graph value there is nonempty since it contains $0$, and for $D\\ne0$ the graph value is a singleton. The kinematic identity $D^*=QDQ^{\\mathsf T}$ in [F5] and the graph equivariance in [F6] give $\\mathcal B(D^*)=Q\\mathcal B(D)Q^{\\mathsf T}$, so the graph response is objective, including at zero rate.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conformation-storage-identity-and-sign",
+          "claim": "For the conformation branch, [F7] supplies positive definiteness and the exact identity in the Statement under its forward-time and regularity hypotheses; [F8] supplies objectivity. Set $A=C-I_3$. Since $C$ is positive definite, it is invertible and $C^{-1}$ is positive definite: for each nonzero $z$, $z^{\\mathsf T}C^{-1}z=(C^{-1}z)^{\\mathsf T}C(C^{-1}z)>0$. Matrix multiplication gives $AC^{-1}A=C+C^{-1}-2I_3$, so $\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6=\\operatorname{tr}(A^{\\mathsf T}C^{-1}A)=\\sum_{j=1}^3a_j^{\\mathsf T}C^{-1}a_j\\ge0$, where $a_j$ are the columns of $A$. Since $\\eta_s\\ge0$, the displayed stored-energy dissipation is nonnegative.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "combined-conditional-conclusion",
+          "claim": "Steps 1.1–1.3 establish the conditional nonnegative mechanical or stored-energy dissipation and objectivity. Under the additional assumptions [A1], constancy of $T_0$ gives $\\frac{d}{dt}w(C)=e_v'-T_0s_v'=(\\tau_s+\\tau_p):D-h-T_0s_v'$. Rearrangement yields $(\\tau_s+\\tau_p):D-\\frac{d}{dt}w(C)=T_0(s_v'+h/T_0)=T_0\\pi_s\\ge0$ by step 1.3. Since $T_0>0$, $\\pi_s\\ge0$; no entropy conclusion is used or asserted without [A1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem contains no empty-indexed sum, family, or set-extremum assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-rate generalized Newtonian power follows from the formula in step 1.1; the Bingham D=0 case is calculated in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each of the three constitutive branches is treated separately in steps 1.1, 1.2, and 1.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 cover zero viscosities and yield radius. In step 1.3, C=I annihilates relaxation only; D=0 also kills solvent dissipation, and step 2.1 then gives zero optional entropy production."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly uses one-sided endpoint derivatives for the additional C1 energy/entropy densities; steps 1.3 and 2.1 apply on the entire forward interval [0,T], with T0 strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 notes that the zero-rate graph contains 0 and that each nonzero-rate value is a singleton."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no biconditional claim, so there is no forward implication direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no biconditional claim, so there is no reverse implication direction to audit."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "generalized-Newtonian zero rate",
+          "calculation": "D=0 gives dot-gamma=0 and tau:D=eta(0) dot-gamma^2=0.",
+          "result": "nonnegative"
+        },
+        {
+          "case": "Bingham rest and parameter endpoint",
+          "calculation": "D=0 gives tau:D=0 for every graph stress; tau_y=0 makes the rest ball {0}.",
+          "result": "nonnegative"
+        },
+        {
+          "case": "conformation equilibrium tensor",
+          "calculation": "C=I and D=0 give tau_p=0, w=0, and a zero dissipation right-hand side.",
+          "result": "identity gives 0=0"
+        },
+        {
+          "case": "isothermal heat-exchange cancellation",
+          "calculation": "w'=e_v'-T0*s_v'=P-h-T0*s_v'; T0*pi_s=T0*s_v'+h=P-w'. The sign of h is unrestricted and cancels exactly.",
+          "result": "Nonnegative entropy production follows from storage dissipation only with the additional energy, Helmholtz and entropy-exchange assumptions; T0>0."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Independently reviewed all four theorem steps and direct supplier definitions/proofs. F5 supplies observer kinematics independently of the Bingham law; 1.2 now explicitly combines D*=QDQ^T with F6 graph equivariance, including the full rest ball and tau_y=0. Generalized-Newtonian zero-rate power and eta=0 are covered. The continuous-L fundamental-matrix representation in lem-fd-conformation-storage preserves positivity only for forward t in [0,T]; the imported ODE, inversion, determinant/log derivative, spectral and exponential statements match its finite-dimensional hypotheses. The storage identity is exact, and tr((C-I)^T C^-1(C-I)) is nonnegative. C=I kills relaxation only; D=0 also kills solvent dissipation. New explicit C1 volumetric energy/entropy densities, continuous signed thermostat heat removal, same T0>0, energy balance and Helmholtz identification give T0*pi_s=P-wprime in 2.1, including one-sided endpoints. No empirical input, PDE existence, universal material applicability, AC or backward positivity is claimed. Reddy Chapter 5 §§5.4.2–5.4.3 (5.4.11),(5.4.20),(5.4.23)–(5.4.30) checked for thermodynamic conventions; Boyaval–Lelievre–Mangoubi §§2.1.1–2.1.2 Lemma 2.1/Theorem 2.2 and proof checked for smooth storage context. Both routed refuter findings confirmed and fully repaired; reader made no changes. The statement has no links and references follow it. No diagram occurs in this routed item. Current item/reference consumer search finds only its unchanged frontmatter-only page; no outside affected consumer or unmet prerequisite."
+      }
+    },
+    "ex-fd-bingham-rest-stress": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-bingham-monotone-graph",
+          "source_section": "Statement",
+          "quote": "Define the Bingham graph by $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ when $D\\ne0$, and by $\\mathcal B(0)=\\{\\tau\\in\\mathcal S_0:|\\tau|\\le\\tau_y\\}$ when $D=0$; its graph stresses are in $\\mathrm{Pa}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trace-free-normed-stress",
+          "claim": "The displayed matrix $S$ is symmetric and has trace $\\frac{\\tau_y}{\\sqrt2}(1-1+0)=0$. Its squared Frobenius norm is the sum of its squared entries, $|S|^2=\\frac{\\tau_y^2}{2}(1^2+(-1)^2)=\\tau_y^2$, so $|S|=\\tau_y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rest-graph-membership",
+          "claim": "The stress is a nonzero member of the Bingham graph at zero strain rate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example defines one explicit matrix and makes no claim about an empty set or empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strain rate is D=0 by assumption A1, and graph membership at this zero rate is verified in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single witness matrix is calculated in step 1.1 and tested for graph membership in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes the strictly positive yield radius tau_y>0 and makes no claim for the degenerate endpoint tau_y=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, limiting process, or endpoint parameter in this static matrix example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs an explicit nonzero member of the zero-rate graph value."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts membership of one witness and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts membership of one witness and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "trace",
+          "calculation": "tr(S)=tau_y(1-1+0)/sqrt(2)=0.",
+          "result": "trace-free"
+        },
+        {
+          "case": "Frobenius norm",
+          "calculation": "|S|^2=tau_y^2(1^2+(-1)^2)/2=tau_y^2.",
+          "result": "|S|=tau_y"
+        },
+        {
+          "case": "graph membership",
+          "calculation": "D=0 and |S|=tau_y <= tau_y.",
+          "result": "S is in B(0), and tau_y>0 makes S nonzero"
+        }
+      ]
+    }
+  }
+}

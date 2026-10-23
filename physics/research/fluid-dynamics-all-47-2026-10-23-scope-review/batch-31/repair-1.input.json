@@ -1,0 +1,93 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-31-1",
+  "inventory": {
+    "pages": [
+      "fd-pn02",
+      "fd-pn02-examples"
+    ],
+    "items": [
+      "post-fd-ideal-gas-numerical-model",
+      "pthm-fd-conditional-positive-euler-update",
+      "ex-fd-positive-euler-uniform-gas"
+    ],
+    "pairs": [
+      "fd-pn02"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/post-fd-ideal-gas-numerical-model.md",
+    "items/pthm-fd-conditional-positive-euler-update.md",
+    "items/ex-fd-positive-euler-uniform-gas.md",
+    "library/fluid-dynamics/fd-pn02.md",
+    "library/fluid-dynamics/fd-pn02-examples.md"
+  ],
+  "write_batches": [
+    "31"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-fd-positive-euler-uniform-gas",
+      "path": [
+        "post-fd-ideal-gas-numerical-model",
+        "pthm-fd-conditional-positive-euler-update",
+        "ex-fd-positive-euler-uniform-gas"
+      ],
+      "paths": [
+        [
+          "post-fd-ideal-gas-numerical-model",
+          "pthm-fd-conditional-positive-euler-update",
+          "ex-fd-positive-euler-uniform-gas"
+        ],
+        [
+          "pthm-fd-conditional-positive-euler-update",
+          "ex-fd-positive-euler-uniform-gas"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-fd-conditional-positive-euler-update",
+      "path": [
+        "post-fd-ideal-gas-numerical-model",
+        "pthm-fd-conditional-positive-euler-update"
+      ],
+      "paths": [
+        [
+          "post-fd-ideal-gas-numerical-model",
+          "pthm-fd-conditional-positive-euler-update"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "post-fd-ideal-gas-numerical-model": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "One-dimensional, nonrelativistic, calorically perfect ideal-gas Euler branch in SI units, with positive density and temperature, local-equilibrium closure, conservative weak balances, and a separately adopted physical entropy inequality. It asserts no empirical universality or numerical entropy property.",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nUse a nonrelativistic Cartesian inertial frame with absolute time and SI units. Let $\\Omega\\subseteq\\mathbb R$ be an open spatial interval measured in metres, let $T_f>0$ be a final time measured in seconds, and let the space-time domain be $\\Omega\\times(0,T_f)$. The measurable fields are mass density $\\rho:\\Omega\\times(0,T_f)\\to(0,\\infty)$ in kilograms per cubic metre, velocity $u:\\Omega\\times(0,T_f)\\to\\mathbb R$ in metres per second, specific entropy $s:\\Omega\\times(0,T_f)\\to\\mathbb R$ in joules per kilogram kelvin, and absolute temperature $T:\\Omega\\times(0,T_f)\\to(0,\\infty)$ in kelvins. Put $v=1/\\rho$ in cubic metres per kilogram.\n\nAdopt a local-equilibrium constitutive chart on the open state domain $\\mathcal U=(0,\\infty)\\times\\mathbb R$ with coordinates $(v,s)$ and a $C^2$ fundamental relation $e:\\mathcal U\\to\\mathbb R$ for specific internal energy in joules per kilogram. Let $c_v>0$ be the specific heat at constant volume and $R>0$ the specific gas constant, each in joules per kilogram kelvin. Set $c_p=c_v+R$ as the specific heat at constant pressure and $\\gamma=c_p/c_v=1+R/c_v>1$ as the dimensionless ratio of specific heats. Choose reference values $v_*>0$ in cubic metres per kilogram, $T_*>0$ in kelvins, and $s_*\\in\\mathbb R$ in joules per kilogram kelvin. Adopt the calorically perfect ideal-gas relation\n$$e(v,s)=c_vT_*\\left(\\frac{v_*}{v}\\right)^{\\gamma-1}\\exp\\left(\\frac{s-s_*}{c_v}\\right),$$\nwith the conventional additive energy reference for which the specific internal energy is zero at zero temperature. Define thermodynamic temperature and pressure by $T=\\partial_s e$ and $p=-\\partial_v e$. Direct differentiation gives\n$$T=\\frac{e}{c_v}>0,\\qquad p=(\\gamma-1)\\frac{e}{v}=(\\gamma-1)\\rho e=R\\rho T>0.$$\nAt fixed $s$, this relation makes $p$ proportional to $\\rho^\\gamma$, so $\\left.\\partial_\\rho p\\right|_s=\\gamma p/\\rho$ and the positive isentropic sound speed is $c=\\sqrt{\\left.\\partial_\\rho p\\right|_s}=\\sqrt{\\gamma p/\\rho}$. Thus $\\gamma$ is dimensionless, $c$ has units of metres per second, and $p$ has units of pascals. This is a constant-specific-heat ideal-gas approximation; it is restricted to a regime where that closure is adopted.\n\nDefine momentum density $m=\\rho u$ in kilograms per square metre second and total energy density $E=\\rho(e+u^2/2)$ in joules per cubic metre. For $\\gamma>1$, the corresponding numerical state is $U=(\\rho,m,E)\\in\\mathbb R^3$ with\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\},\\qquad p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right).$$\nThe calorically perfect closure makes this state pressure equal to the thermodynamic pressure above. With $u=m/\\rho$, its one-dimensional Euler flux and isentropic sound speed are\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p(U),u(E+p(U))\\right),\\qquad c(U)=\\sqrt{\\frac{\\gamma p(U)}{\\rho}}.$$\nThe components of $F$ are mass flux in kilograms per square metre second, momentum flux in pascals, and energy flux in watts per square metre. The speed $c$ is in metres per second.\n\nAdopt the inviscid one-dimensional branch with zero body acceleration, zero specific heat supply, zero conductive heat flux, and isotropic Cauchy stress $-pI$. In this branch, assume the locally integrable conservative variables, fluxes, entropy density, and entropy flux satisfy the following identities in the distributional sense. Let $\\rho_0,m_0,E_0,S_0\\in L^1_{\\mathrm{loc}}(\\Omega)$ be the initial mass density in kilograms per cubic metre, momentum density in kilograms per square metre second, total energy density in joules per cubic metre, and entropy density in joules per cubic metre kelvin, respectively. Require all displayed densities, fluxes, and products to be locally integrable up to $t=0$: their absolute values have finite integrals on every compact subset of $\\Omega\\times[0,T_f)$ in the relative topology, using the fields for $t>0$. This requirement assigns no point values at $t=0$ and asserts no strong initial trace. Test functions $\\phi,\\psi,\\eta,\\zeta\\in C^1(\\Omega\\times[0,T_f))$ are compactly supported in space-time and vanish near $T_f$; $\\zeta$ is nonnegative, and tests may be nonzero at $t=0$. Then adopt\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho\\,\\partial_t\\phi+\\rho u\\,\\partial_x\\phi\\right)\\,dx\\,dt+\\int_\\Omega\\rho_0\\phi(0,x)\\,dx=0,$$\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho u\\,\\partial_t\\psi+(\\rho u^2+p)\\partial_x\\psi\\right)\\,dx\\,dt+\\int_\\Omega m_0\\psi(0,x)\\,dx=0,$$\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(E\\,\\partial_t\\eta+u(E+p)\\partial_x\\eta\\right)\\,dx\\,dt+\\int_\\Omega E_0\\eta(0,x)\\,dx=0,$$\nand\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\left(\\rho s\\,\\partial_t\\zeta+\\rho u s\\,\\partial_x\\zeta\\right)\\,dx\\,dt+\\int_\\Omega S_0\\zeta(0,x)\\,dx\\le0.$$\nThe last inequality is a separately adopted physical entropy inequality. It is not deduced from the conservative equations or from smooth-flow identities. This postulate specifies a physical model and its idealized local-equilibrium closure; it does not assert existence or uniqueness of a weak solution, prove that actual matter obeys the model, or identify a computed state with an experimental observation."
+    ],
+    "pthm-fd-conditional-positive-euler-update": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "One one-dimensional periodic first-order symmetric HLL/LLF step for calorically perfect ideal-gas Euler states. Under the face-speed and CFL hypotheses, every updated density and thermodynamic pressure is positive. No fully discrete entropy inequality, convergence result, exact wave-speed enclosure, or empirical claim follows.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nUse the adopted one-dimensional calorically perfect ideal-gas Euler model with dimensionless constant $\\gamma>1$ and thermodynamic closure $p_i=(\\gamma-1)\\rho_i e_i$. Its admissible state set is\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E)\\in\\mathbb R^3:\\rho>0,\\quad E-\\frac{m^2}{2\\rho}>0\\right\\}.$$\nOn a periodic uniform mesh of $N\\ge2$ cells, each of width $\\Delta x>0$ metres, let the cell state be $U_i=(\\rho_i,m_i,E_i)\\in\\mathcal G_\\gamma$ for $i\\in\\mathbb Z/N\\mathbb Z$, where $\\rho_i$ is mass density in kilograms per cubic metre, $m_i=\\rho_i u_i$ is momentum density in kilograms per square metre second, and $E_i=\\rho_i(e_i+u_i^2/2)$ is total energy density in joules per cubic metre. Here $u_i$ is velocity in metres per second and $e_i>0$ is specific internal energy in joules per kilogram. Define\n$$p_i=(\\gamma-1)\\left(E_i-\\frac{m_i^2}{2\\rho_i}\\right),\\qquad c_i=\\sqrt{\\frac{\\gamma p_i}{\\rho_i}}.$$\nThus $p_i$ is thermodynamic pressure in pascals, and $c_i$ is the positive isentropic sound speed, defined by $c_i^2=\\left.\\partial_\\rho p\\right|_{s,i}=\\gamma p_i/\\rho_i$ with the derivative taken at fixed specific entropy. The flux is $F_i=(m_i,m_i^2/\\rho_i+p_i,u_i(E_i+p_i))$, whose components have units of kilograms per square metre second, pascals, and watts per square metre. For a time step $\\Delta t\\ge0$ seconds, put $\\lambda=\\Delta t/\\Delta x$ in seconds per metre. At every periodic face choose a supplied speed $a_{i+1/2}>0$ in metres per second satisfying\n$$a_{i+1/2}\\ge\\max\\left(|u_i|+c_i,\\ |u_{i+1}|+c_{i+1}\\right),\\qquad 2\\lambda a_{i+1/2}\\le1.$$\nUse the symmetric HLL, or local Lax–Friedrichs, face flux and the shared-face update\n$$\\widehat F_{i+1/2}=\\frac12(F_i+F_{i+1})-\\frac{a_{i+1/2}}2(U_{i+1}-U_i),\\qquad U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$\nThen $U_i^+\\in\\mathcal G_\\gamma$ for every cell $i$, so each updated density and thermodynamic pressure is strictly positive. The speed bounds are algorithmic hypotheses on supplied numerical speeds; this result does not establish that they enclose the waves of an exact nonlinear Riemann solution. It is a conditional deduction about computed states in the adopted model and asserts no fully discrete entropy inequality, convergence, or agreement with physical measurements."
+    ],
+    "ex-fd-positive-euler-uniform-gas": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "A symbolic one-step fixed-point calculation for a spatially uniform positive state in the specified periodic ideal-gas Euler model. It illustrates constant-state preservation only; it describes neither a shock nor a reported physical observation.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,289 @@
+[
+  {
+    "order": 663,
+    "id": "fd-pn01",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Conditional continuum interpretation of mixed CFD",
+    "companion": "fd-pn01-examples",
+    "requires": [
+      "fd-f02",
+      "fd-f03",
+      "fd-n01",
+      "fd-n02",
+      "fd-px02"
+    ],
+    "items": [
+      {
+        "id": "def-fd-pn01-forced-creeping-stokes-branch",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Forced creeping Stokes branch for pressure observations",
+        "reference": "items/def-fd-pn01-forced-creeping-stokes-branch.md",
+        "library": "physics",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "post-fd-boundary-data",
+          "post-fd-creeping-force-balance",
+          "post-fd-newtonian-fourier"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces": "mathematical-premise",
+          "lem-na-homogeneous-dirichlet-poincare": "mathematical-premise",
+          "post-fd-boundary-data": "physical-assumption",
+          "post-fd-creeping-force-balance": "physical-assumption",
+          "post-fd-newtonian-fourier": "physical-assumption"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "statement": "Assume Countable Choice, meaning that every sequence of nonempty sets has a choice function. Let $D^*\\subset\\mathbb R^3$ be a nonempty bounded connected open set in dimensionless coordinates whose boundary has a finite rigidly moved Lipschitz graph-chart atlas. Choose $a<b$ such that $D^*\\subset(a,b)\\times\\mathbb R^2$ and set $C_P(D^*):=b-a$. Let $\\ell_0>0$ metres be a length scale and $U_0>0$ metres per second a velocity scale. The physical domain is $\\Omega_{\\mathrm{phys}}=\\ell_0D^*$. Let $\\rho_0>0$ kilograms per cubic metre and $\\mu_0>0$ pascal seconds be constant density and dynamic shear viscosity. Let $b_{\\mathrm{phys}}:\\Omega_{\\mathrm{phys}}\\to\\mathbb R^3$ be a continuous body-acceleration field in metres per second squared such that $g^*(y):=\\ell_0 b_{\\mathrm{phys}}(\\ell_0y)/U_0^2$ belongs to $L^2(D^*;\\mathbb R^3)$. Define the dimensionless kinematic viscosity $\\nu^*:=\\mu_0/(\\rho_0U_0\\ell_0)>0$ and Reynolds number $\\operatorname{Re}:=\\rho_0U_0\\ell_0/\\mu_0=1/\\nu^*$; the dimensional kinematic viscosity is $\\mu_0/\\rho_0$ in square metres per second.\n\nUse the real spaces $V:=H^1_0(D^*;\\mathbb R^3)$ with gradient norm $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D^*)}$ and $Q:=L^2_0(D^*)=\\{q\\in L^2(D^*):\\int_{D^*}q\\,dy=0\\}$ with its $L^2$ norm. Here $H^1_0$ is the $H^1$ closure of compactly supported smooth vector fields, and $Q$ selects the spatial mean-zero representative of pressure. Let $u^*\\in V$ be dimensionless velocity, let $q^*\\in Q$ be dimensionless pressure, set $\\varepsilon(u^*)=(\\nabla u^*+\\nabla u^{*\\mathsf T})/2$, and define the dimensionless load functional $F_{g^*}(v):=\\int_{D^*}g^*(y)\\cdot v(y)\\,dy$ for $v\\in V$. The bounded-domain Poincare inequality makes $F_{g^*}$ a continuous linear functional on $V$.\n\nThe physical fields corresponding to the dimensionless solution are $u_{\\mathrm{phys}}(\\ell_0y)=U_0u^*(y)$ and $p_{\\mathrm{phys}}(\\ell_0y)=\\rho_0U_0^2q^*(y)$. Define $D_{\\mathrm{phys}}=(\\nabla_xu_{\\mathrm{phys}}+\\nabla_xu_{\\mathrm{phys}}^{\\mathsf T})/2$ in inverse seconds and $\\sigma_{\\mathrm{phys}}=-p_{\\mathrm{phys}}I_3+2\\mu_0D_{\\mathrm{phys}}$ in pascals. The parameterized forced creeping Stokes weak formulation uses this physical stress, a divergence-free velocity, and the separately adopted steady force balance $\\operatorname{div}\\sigma_{\\mathrm{phys}}+\\rho_0b_{\\mathrm{phys}}=0$ from the current creeping-force postulate, which permits a specified body-acceleration field. It is the zero-inertia alternative branch; no material-acceleration equation is imposed on the same field. Its nondimensional weak form is the pair of equations\n\n$$2\\nu^*\\int_{D^*}\\varepsilon(u^*):\\varepsilon(v)\\,dy-\\int_{D^*}q^*\\operatorname{div}v\\,dy=F_{g^*}(v)\\quad(v\\in V),\\qquad-\\int_{D^*}r\\operatorname{div}u^*\\,dy=0\\quad(r\\in Q).$$\n\nThe functional satisfies $\\|F_{g^*}\\|_{V'}\\le C_P(D^*)\\|g^*\\|_{L^2(D^*)}$ by the bounded-domain Poincare inequality. The chosen stationary no-slip wall condition is the zero trace encoded by $V$. The pressure is a constraint multiplier with mean-zero gauge. This weak interface contains no material-acceleration term. It asserts no additional solution existence, uniqueness, approximation error, or empirical applicability.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Iain W. Stewart, MIT 8.09, Advanced Classical Mechanics",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf",
+              "locator": "§6.8, printed pp. 135–138; low-Re Stokes model and stationary sphere boundary data."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids.pdf",
+              "locator": "§3.4, printed pp. 77–93; Stokes equations and no-slip model, without a general approximation-error result."
+            },
+            {
+              "title": "University of Cambridge, Fluid Dynamics II (D)",
+              "url": "https://www.damtp.cam.ac.uk/user/examples/D23Le.pdf",
+              "locator": "Chapter 4, printed pp. 32–33; low-Re Stokes equations with prescribed boundary data."
+            }
+          ]
+        },
+        "physical_scope": "Conditional weak-form interface for a steady, incompressible, constant-density Newtonian branch with a prescribed body-acceleration load, mean-zero pressure gauge, and separately selected stationary no-slip boundary. The current steady force-balance postulate supplies the specified body-acceleration input; this definition adds the scaled weak formulation and no-slip trace.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "design_state": "Step 1 draft authored; owner resolved inherited readiness and focused source defects; independent review pending."
+      },
+      {
+        "id": "def-fd-forced-incompressible-newtonian-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Forced constant-density incompressible Newtonian model",
+        "reference": "items/def-fd-forced-incompressible-newtonian-model.md",
+        "library": "physics",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-incompressible-newtonian-model",
+          "post-fd-continuum-balances",
+          "post-fd-boundary-data"
+        ],
+        "dependency_roles": {
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite",
+          "post-fd-continuum-balances": "physical-assumption",
+          "post-fd-boundary-data": "physical-assumption"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "statement": "Let $I\\subset\\mathbb R$ be a bounded open time interval measured in seconds and let $\\Omega\\subset\\mathbb R^3$ be a fixed bounded open spatial domain measured in metres whose boundary is locally a Lipschitz graph after rigid coordinate changes. Let $\\rho_0>0$ kilograms per cubic metre and $\\mu_0>0$ pascal seconds be constant density and dynamic shear viscosity. Let $u:I\\times\\Omega\\to\\mathbb R^3$ be a twice continuously differentiable velocity in metres per second, $p:I\\times\\Omega\\to\\mathbb R$ a once continuously differentiable pressure multiplier in pascals, and $b:I\\times\\Omega\\to\\mathbb R^3$ a continuous body-acceleration field in metres per second squared. Define $D=(\\nabla u+\\nabla u^{\\mathsf T})/2$ and the stress tensor $\\sigma=-pI_3+2\\mu_0D$ in pascals, where $I_3$ is the $3\\times3$ identity and $(\\operatorname{div}\\sigma)_i=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$.\n\nThe forced incompressible Newtonian branch adopts\n\n$$\\operatorname{div}u=0,\\qquad \\rho_0\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)=\\rho_0b+\\operatorname{div}\\sigma.$$\n\nEquivalently, since $\\mu_0$ is constant and $\\operatorname{div}u=0$, its momentum equation is\n\n$$\\rho_0\\bigl(\\partial_tu+(u\\cdot\\nabla)u\\bigr)+\\nabla p=\\mu_0\\Delta u+\\rho_0b.$$\n\nThe kinematic viscosity is $\\nu_{\\mathrm{phys}}=\\mu_0/\\rho_0$ in square metres per second. Pressure is a constraint multiplier, not an equation-of-state pressure. For a stationary solid wall, the separately selected no-slip boundary datum is $u=0$ on the wall; neither this trace nor the body force follows from the interior balance. This is a forced branch of the Newtonian model: it adds the prescribed acceleration field to the unforced branch and makes no claim of solution existence or empirical validity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Part II lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids.pdf",
+              "locator": "§§3.1.1 and 3.2.1, printed pp. 60–65; incompressible Newtonian stress and adopted no-slip boundary condition."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://www3.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§5.4.1, printed pp. 173–174; stress/strain-rate relation and no-slip plate setup."
+            }
+          ]
+        },
+        "physical_scope": "Smooth, forced, constant-density incompressible Newtonian branch with a prescribed body acceleration and separately selected no-slip wall data. The definition asserts no solution existence, solver convergence, or empirical applicability.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "pthm-fd-creeping-lipschitz-pressure",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Creeping continuum pressure and bounded observations",
+        "reference": "items/pthm-fd-creeping-lipschitz-pressure.md",
+        "library": "physics",
+        "dependency_level": 5,
+        "deps": [
+          "def-countable-choice",
+          "def-fd-pn01-forced-creeping-stokes-branch",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "post-fd-boundary-data",
+          "post-fd-creeping-force-balance",
+          "thm-fd-stokes-load-observable-stability"
+        ],
+        "dependency_roles": {
+          "def-fd-pn01-forced-creeping-stokes-branch": "formulation-prerequisite",
+          "post-fd-boundary-data": "physical-assumption",
+          "thm-fd-stokes-load-observable-stability": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-na-homogeneous-dirichlet-poincare": "mathematical-premise",
+          "post-fd-creeping-force-balance": "physical-assumption"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "statement": "Assume Countable Choice. Let $D^*\\subset\\mathbb R^3$ be a nonempty bounded connected Lipschitz open set whose boundary has a finite rigidly moved graph-chart atlas, contained in a slab $(a,b)\\times\\mathbb R^2$, and set $C_P(D^*):=b-a$. Let $\\ell_0>0$ metres and $U_0>0$ metres per second be reference length and velocity; the physical domain is $\\Omega_{\\mathrm{phys}}=\\ell_0D^*$. Fix constant density $\\rho_0>0$ kilograms per cubic metre and constant dynamic viscosity $\\mu_0>0$ pascal seconds. Write $\\nu^*:=\\mu_0/(\\rho_0U_0\\ell_0)>0$ for the dimensionless kinematic viscosity and $\\nu_{\\mathrm{phys}}:=\\mu_0/\\rho_0$ for its dimensional value in square metres per second. For each continuous body-acceleration field $b_i\\in C^0(\\Omega_{\\mathrm{phys}};\\mathbb R^3)\\cap L^2(\\Omega_{\\mathrm{phys}};\\mathbb R^3)$ in metres per second squared, set $g_i^*(y):=\\ell_0b_i(\\ell_0y)/U_0^2$. Use the forced creeping Stokes branch defined on this page: the velocity $u_i^*\\in V:=H^1_0(D^*;\\mathbb R^3)$ with gradient norm $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D^*)}$ has zero trace on the selected stationary no-slip wall, the pressure $q_i^*\\in Q:=L^2_0(D^*)=\\{q\\in L^2(D^*):\\int_{D^*}q\\,dy=0\\}$ is the spatial mean-zero multiplier, and the weak model equation is\n\n$$2\\nu^*\\int_{D^*}\\varepsilon(u_i^*):\\varepsilon(v)\\,dy-\\int_{D^*}q_i^*\\operatorname{div}v\\,dy=F_i(v)\\quad(v\\in V),\\qquad-\\int_{D^*}r\\operatorname{div}u_i^*\\,dy=0\\quad(r\\in Q),$$\n\nwhere $\\varepsilon(w)=(\\nabla w+\\nabla w^{\\mathsf T})/2$ and $F_i(v):=\\int_{D^*}g_i^*(y)\\cdot v(y)\\,dy$. The physical pressure is recovered from $p_{i,\\mathrm{phys}}(\\ell_0y)=\\rho_0U_0^2q_i^*(y)$ using this mean-zero gauge. Let $m\\ge1$ be an integer and let $S_1,\\ldots,S_m:Q\\to\\mathbb R$ be bounded real-linear pressure sensors with $\\|S_j\\|_{Q'}:=\\sup_{\\|q\\|_{L^2(D^*)}\\le1}|S_j(q)|$. Define the physical pressure-output vector $\\mathcal P_{\\mathrm{phys}}(b_i):=\\rho_0U_0^2(S_1(q_i^*),\\ldots,S_m(q_i^*))\\in\\mathbb R^m$. The earlier Stokes-load solvability and sensor-stability theorem gives the weak solution pairs and yields\n\n$$\\|\\mathcal P_{\\mathrm{phys}}(b_1)-\\mathcal P_{\\mathrm{phys}}(b_2)\\|_{\\mathbb R^m}\\le3\\rho_0U_0^2C_{\\mathrm{div}}(D^*)C_P(D^*)\\left(\\sum_{j=1}^m\\|S_j\\|_{Q'}^2\\right)^{1/2}\\|g_1^*-g_2^*\\|_{L^2(D^*)},$$\n\nwhere $C_{\\mathrm{div}}(D^*)<\\infty$ satisfies: there is a bounded linear right inverse $B_{D^*}:Q\\to V$ with $\\operatorname{div}B_{D^*}q=q$ and $\\|\\nabla B_{D^*}q\\|_{L^2(D^*)}\\le C_{\\mathrm{div}}(D^*)\\|q\\|_Q$. This is a conditional stability result for the adopted forced creeping model. It does not infer that inertia is negligible from $\\operatorname{Re}$, estimate the error against the full Navier–Stokes model at finite Reynolds number, fix an absolute pressure gauge, or report an experiment.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Iain W. Stewart, MIT 8.09, Advanced Classical Mechanics",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf",
+              "locator": "§6.8, printed pp. 135–138; low-Re Stokes flow around a sphere."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids.pdf",
+              "locator": "§3.4, printed pp. 77–93; Stokes equations, no-slip sphere, and limited low-Re scope."
+            },
+            {
+              "title": "University of Cambridge, Fluid Dynamics II (D)",
+              "url": "https://www.damtp.cam.ac.uk/user/examples/D23Le.pdf",
+              "locator": "Chapter 4, printed pp. 32–35; low-Re Stokes equations, prescribed boundary data, and sphere solution."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 53: Stokes Equations",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§§53.2.1–53.2.2: weak Stokes formulation, pressure gauge, divergence lifting, and pressure stability context."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§§4.2.1–4.2.3 and §8.2.1: mixed Hilbert-space stability and Stokes pressure gauge context."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Conditional pressure-observation stability for the separately adopted steady forced creeping Stokes branch on a bounded no-slip domain. The material- acceleration term is omitted by that model assumption; no finite-Re Navier–Stokes approximation error, empirical coefficient inference, or experimental validation is asserted.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "design_state": "Step 1 draft authored; owner resolved inherited readiness and focused source defects; independent review pending."
+      },
+      {
+        "id": "pthm-fd-no-slip-cfd-observations",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "No-slip continuum CFD observable error",
+        "reference": "items/pthm-fd-no-slip-cfd-observations.md",
+        "library": "physics",
+        "dependency_level": 5,
+        "deps": [
+          "def-countable-choice",
+          "def-fd-forced-incompressible-newtonian-model",
+          "def-fd-incompressible-newtonian-model",
+          "def-fd-mini-fluid-interface",
+          "post-fd-boundary-data",
+          "prop-fd-mini-accumulated-pressure-observation",
+          "prop-fd-mini-observation-error"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-fd-forced-incompressible-newtonian-model": "formulation-prerequisite",
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite",
+          "def-fd-mini-fluid-interface": "mathematical-premise",
+          "post-fd-boundary-data": "physical-assumption",
+          "prop-fd-mini-accumulated-pressure-observation": "mathematical-premise",
+          "prop-fd-mini-observation-error": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "statement": "Assume Countable Choice. Let $D^*\\subset\\mathbb R^3$ be a nonempty bounded connected polyhedral open set in dimensionless coordinates whose boundary has a finite rigidly moved Lipschitz graph-chart atlas, and let $T^*>0$ be dimensionless final time. Choose $\\ell_0>0$ metres and $U_0>0$ metres per second, so the physical domain is $\\Omega_{\\mathrm{phys}}=\\ell_0D^*$ and physical time is $t_{\\mathrm{phys}}=(\\ell_0/U_0)t^*$. Let constant density $\\rho_0>0$ have units $\\mathrm{kg\\,m^{-3}}$ and constant dynamic shear viscosity $\\mu_0>0$ have units $\\mathrm{Pa\\,s}$. Let $b_{\\mathrm{phys}}$ be a continuous body-acceleration field on $\\Omega_{\\mathrm{phys}}\\times(0,(\\ell_0/U_0)T^*)$, measured in $\\mathrm{m\\,s^{-2}}$. Set\n$$u^*(y,t^*):=U_0^{-1}u_{\\mathrm{phys}}(\\ell_0y,\\ell_0t^*/U_0),\\quad p^*(y,t^*):=(\\rho_0U_0^2)^{-1}p_{\\mathrm{phys}}(\\ell_0y,\\ell_0t^*/U_0),\\quad f^*(y,t^*):=\\ell_0U_0^{-2}b_{\\mathrm{phys}}(\\ell_0y,\\ell_0t^*/U_0),\\quad \\nu^*:=\\frac{\\mu_0}{\\rho_0U_0\\ell_0}>0.$$\nThus $u^*,p^*,f^*,\\nu^*$, the mesh size $h$, and all time steps $\\tau_n$ in the mathematical estimates are dimensionless; the dimensional kinematic viscosity is $\\nu_{\\mathrm{phys}}=\\mu_0/\\rho_0$ in $\\mathrm{m^2\\,s^{-1}}$, and the Reynolds number at these scales is $\\operatorname{Re}=\\rho_0U_0\\ell_0/\\mu_0=1/\\nu^*$. Adopt the forced constant-density incompressible Newtonian branch and the stationary no-slip boundary choice from the preceding model definitions: $\\rho=\\rho_0$, $\\operatorname{div}u_{\\mathrm{phys}}=0$, $\\sigma_{\\mathrm{phys}}=-p_{\\mathrm{phys}}I_3+2\\mu_0D_{\\mathrm{phys}}$, and $\\rho_0(\\partial_tu_{\\mathrm{phys}}+(u_{\\mathrm{phys}}\\cdot\\nabla)u_{\\mathrm{phys}})=\\rho_0b_{\\mathrm{phys}}+\\operatorname{div}\\sigma_{\\mathrm{phys}}$, where $D_{\\mathrm{phys}}=(\\nabla_xu_{\\mathrm{phys}}+\\nabla_xu_{\\mathrm{phys}}^{\\mathsf T})/2$ and stress divergence is rowwise. The pressure is a constraint multiplier enforcing incompressibility, not an equation-of-state pressure. The selected no-slip condition is zero velocity trace on the stationary wall. The dimensionless pressure uses the spatial mean-zero gauge.\n\nUse the complete smooth MINI observation interface defined earlier on the incompressible-numerical page. In particular, $V=H^1_0(D^*)^3$ has norm $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D^*)}$, $Q=L^2_0(D^*)$ has its $L^2$ norm, and $V_\\sigma=\\{v\\in V:\\operatorname{div}v=0\\}$. The velocity space is continuous piecewise affine enriched by one interior simplex bubble per component, the pressure space is continuous piecewise affine with zero mean, and the discrete velocity belongs to the weak divergence kernel $Z_h$. Let $0=t_0<\\cdots<t_N=T^*$ be the finite dimensionless time partition, $\\tau_n=t_n-t_{n-1}>0$, $\\tau_{\\max}=\\max_n\\tau_n$, and $h=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$ on a conforming shape-regular affine simplicial mesh $\\mathcal T_h$. Forcing is averaged over each interval, the initial discrete velocity is $u_h^0=P_{Z_h}u^*(0)$, and each step uses the stated mixed backward-Euler recurrence with the real skew convective form; choose any actual discrete root. Assume $f^*\\in L^2(0,T^*;L^2(D^*)^3)$, the exact solution satisfies $u^*\\in W^{1,\\infty}(0,T^*;H^2(D^*)^3\\cap V_\\sigma)$ and $p^*\\in W^{1,\\infty}(0,T^*;H^1(D^*)\\cap Q)$, and the exact and discrete fields satisfy the full interface equations. Let $C_P(D^*)$ satisfy $\\|v\\|_{L^2(D^*)}\\le C_P(D^*)\\|v\\|_V$ for $v\\in V$. Impose the time-step restriction $\\tau_{\\max}\\Lambda\\le\\frac12$; no other mesh/time coupling is imposed.\n\nSet\n$$M=1+\\|u^*\\|_{W^{1,\\infty}H^2}+\\|p^*\\|_{W^{1,\\infty}H^1},\\quad H=hM+\\tau_{\\max}M^2,\\quad M_u=\\|u^*\\|_{L^\\infty(0,T^*;V)},\\quad \\Lambda=1+C_D(\\nu^*)^{-3}M_u^4,$$\n$$M_\\infty=\\bigl(\\|u^*(0)\\|_2^2+C_P(D^*)^2(\\nu^*)^{-1}\\|f^*\\|_{L^2L^2}^2\\bigr)^{1/2},\\qquad M_E=(\\nu^*)^{-1/2}\\|u^*(0)\\|_2+C_P(D^*)(\\nu^*)^{-1}\\|f^*\\|_{L^2L^2},$$\n$$C_*=C_{D,\\mathrm{shape}}(1+\\nu^*)^2(1+(\\nu^*)^{-4})(1+T^*)^2(1+M_\\infty+M_E+M)^4\\exp(2T^*\\Lambda).$$\nHere $C_D$ depends only on the domain, dimension, and trilinear-form constant, and $C_{D,\\mathrm{shape}}$ is independent of $h$, the time steps, and $\\nu^*$. For the pressure estimate let $\\beta>0$ be the uniform MINI inf-sup lower bound, $M_b=\\sqrt3$, let $C_I$ satisfy $\\inf_{q_h\\in Q_h}\\|q-q_h\\|_2\\le C_Ih\\|q\\|_{H^1(D^*)}$ for $q\\in H^1(D^*)\\cap Q$, and choose $C_c$ with $|c(a;b,v)|\\le C_c\\|a\\|_V\\|b\\|_V\\|v\\|_V$. Define\n$$K=(1+M_b/\\beta)C_IT^*+\\beta^{-1}\\bigl(2C_P(D^*)+[2\\nu^*\\sqrt{T^*}+C_c(M_E+\\sqrt{T^*}M_u)](\\nu^*)^{-1/2}\\bigr)C_*+\\beta^{-1}(2\\nu^*T^*+2C_cT^*).$$\nFor bounded endpoint velocity sensors $\\ell_n:V\\to\\mathbb R$ that are real-linear and continuous, define $\\|\\ell_n\\|_{V^*}=\\sup_{\\|v\\|_V\\le1}|\\ell_n(v)|$, $\\mathcal O(\\ell;u^*)=\\sum_{n=1}^N\\tau_n\\ell_n(u^*(t_n))$, $\\mathcal O_h(\\ell;u_h^*)=\\sum_{n=1}^N\\tau_n\\ell_n(u_h^{*,n})$, and $\\|\\ell\\|_{\\ell^2_\\tau(V^*)}=(\\sum_{n=1}^N\\tau_n\\|\\ell_n\\|_{V^*}^2)^{1/2}$. The dimensionless interface observations obey\n$$|\\mathcal O_h(\\ell;u_h)-\\mathcal O(\\ell;u^*)|\\le(\\nu^*)^{-1/2}C_*H\\left(\\sum_{n=1}^N\\tau_n\\|\\ell_n\\|_{V^*}^2\\right)^{1/2}.$$\nFor every $\\xi\\in Q$, every $\\eta\\in C_c^\\infty(0,T^*)$, and every node $0\\le m\\le N$, with $P^*(t)=\\int_0^tp^*(s)\\,ds$, $P_h^{*,m}=\\sum_{n=1}^m\\tau_np_h^{*,n}$, and $\\bar p_h^*(t)=p_h^{*,n}$ on $(t_{n-1},t_n]$, the dimensionless pressure observations obey\n$$|(P^*(t_m)-P_h^{*,m},\\xi)_{L^2}|\\le KH\\|\\xi\\|_Q,\\qquad \\left|\\left(\\int_0^{T^*}(p^*-\\bar p_h^*)\\eta\\,dt^*,\\xi\\right)_{L^2}\\right|\\le(K+1)H\\|\\eta'\\|_{L^1(0,T^*)}\\|\\xi\\|_Q.$$\nThe physical endpoint velocity reading obtained by multiplying each normalized scalar sensor by $U_0$ has error bound $U_0(\\nu^*)^{-1/2}C_*H\\|\\ell\\|_{\\ell^2_\\tau(V^*)}$. Define the physical primitive $P_{\\mathrm{phys}}(x,t)=\\int_0^t p_{\\mathrm{phys}}(x,s)\\,ds$, the physical discrete primitive $P_{\\mathrm{phys},h}^m(x)=\\sum_{n=1}^m(\\ell_0/U_0)\\tau_n\\rho_0U_0^2p_h^{*,n}(x/\\ell_0)$, and the physical right-constant pressure reconstruction $\\bar p_{\\mathrm{phys},h}(x,t)=\\rho_0U_0^2\\bar p_h^*(x/\\ell_0,U_0t/\\ell_0)$. For $t_m=(\\ell_0/U_0)t_m^*$, the spatially weighted physical primitive error $\\int_{\\Omega_{\\mathrm{phys}}}\\xi(x/\\ell_0)(P_{\\mathrm{phys}}(x,t_m)-P_{\\mathrm{phys},h}^m(x))\\,dx$ is bounded by $\\rho_0U_0\\ell_0^4KH\\|\\xi\\|_Q$. The physical volume-time pressure error\n$$\\left|\\int_0^{(\\ell_0/U_0)T^*}\\int_{\\Omega_{\\mathrm{phys}}}\\xi(x/\\ell_0)(p_{\\mathrm{phys}}(x,t)-\\bar p_{\\mathrm{phys},h}(x,t))\\eta(U_0t/\\ell_0)\\,dx\\,dt\\right|$$\nis at most $\\rho_0U_0\\ell_0^4(K+1)H\\|\\eta'\\|_{L^1(0,T^*)}\\|\\xi\\|_Q$ in $\\mathrm{Pa\\,m^3\\,s}$. The scale factor follows from $p_{\\mathrm{phys}}=\\rho_0U_0^2p^*$, $dx=\\ell_0^3dy$, and $dt=(\\ell_0/U_0)dt^*$. These are conditional model predictions on the strong-solution branch. They make no Reynolds-uniform claim and no instantaneous pressure-error claim, and do not establish solver convergence or empirical validation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Part II lecture notes",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids.pdf",
+              "locator": "§§3.1.1 and 3.2.1, printed pp. 60–65; incompressible Newtonian stress and no-slip as a separately adopted boundary condition."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://www3.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§5.4.1, printed pp. 173–174; Newtonian shear stress and the no-slip Couette setup."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54: Stokes equations: Stable pairs (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "§54.2, printed pp. 410–413; P1-bubble/P1 MINI stability and stationary Stokes approximation context only."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488; MINI stability and stationary Stokes approximation context only."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Conditional endpoint velocity-sensor and integrated-pressure error bounds for a constant-density, forced, incompressible Newtonian model with selected stationary no-slip walls, after explicit SI nondimensionalization. The claim is limited to the smooth strong-solution MINI branch and has no empirical validation, weak-limit pressure-rate, or Reynolds-uniform assertion.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false
+      }
+    ]
+  },
+  {
+    "order": 664,
+    "id": "fd-pn01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Conditional continuum interpretation of mixed CFD — Examples",
+    "companion": "fd-pn01",
+    "requires": [
+      "fd-pn01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-cfd-density-pressure-conversion",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Pressure normalization carries density units",
+        "reference": "items/ex-fd-cfd-density-pressure-conversion.md",
+        "library": "physics",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-fd-no-slip-cfd-observations"
+        ],
+        "dependency_roles": {
+          "pthm-fd-no-slip-cfd-observations": "physical-result"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "statement": "Assume the full hypotheses of the preceding no-slip continuum CFD theorem, including its Countable Choice, strong-solution regularity, dimensionless smooth MINI interface, mean-zero pressure gauge, projected initialization, actual mixed backward-Euler solution, and time-step restriction. Take the dimensionless physical domain $D^*=(0,1)^3$, constant density $\\rho_0>0$ kilograms per cubic metre, and positive scales $\\ell_0$ metres and $U_0$ metres per second. Use the mean-zero pressure weight $\\xi(y)=y_1-\\tfrac12$ and the normalized test $\\eta\\in C_c^\\infty(0,T^*)$ with $\\|\\eta'\\|_{L^1(0,T^*)}=1$. Let $p_{\\mathrm{phys}}=\\rho_0U_0^2p^*$ and let $\\bar p_{\\mathrm{phys},h}$ be its corresponding right-constant physical pressure reconstruction. The physically weighted space-time pressure error\n\n$$E_{\\mathrm{phys}}:=\\int_0^{(\\ell_0/U_0)T^*}\\int_{\\ell_0D^*}\\xi(x/\\ell_0)\\bigl(p_{\\mathrm{phys}}(x,t)-\\bar p_{\\mathrm{phys},h}(x,t)\\bigr)\\eta(U_0t/\\ell_0)\\,dx\\,dt$$\n\nhas the symbolic bound $|E_{\\mathrm{phys}}|\\le\\rho_0U_0\\ell_0^4(K+1)H/\\sqrt{12}$, in pascal cubic-metre seconds. The factor $\\rho_0$ converts kinematic pressure $p_{\\mathrm{phys}}/\\rho_0$, measured in square metres per square second, to physical pressure in pascals; the remaining factors convert the dimensionless pressure-time-volume integral. No measurement or computed numerical value is asserted.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "physical_scope": "Symbolic conversion of a dimensionless smooth-MINI pressure observation to physical pressure using constant density and declared length, velocity, and time scales. It reports no simulation or measurement.",
+        "empirical_premises": [],
+        "inventory_expansion_required": false,
+        "generation": {
+          "role": "example"
+        },
+        "strategy": "direct"
+      }
+    ]
+  }
+]

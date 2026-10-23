@@ -1,0 +1,110 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "23",
+  "input_sha256": "7f494da77e6cb1562c7ca418528655f42e8e8e795685d52005e27817c84dd0d4",
+  "decisions": [
+    {
+      "id": "def-fd-conservation-system",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "6a77a387b7996ee299f24dabd1cfacdaf9970f44d3e59904f653926b7bcb2745",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Remarks asserts entropy equality for every C1 state field. With d=m=1, I=(0,1), Omega=R, state domain R, F=q=0, eta(u)=u and U(t,x)=t, all stated regularity and entropy compatibility hypotheses hold but the entropy residual is 1. The missing equation hypothesis is essential. Repaired the Remarks to require U in C1(Q;O) satisfying the conservation system pointwise; the chain rule then gives the entropy residual as Deta(U) times the zero conservation residual.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-fd-conservation-system",
+      "disposition": "repaired",
+      "post_sha256": "52317de1504ed6e49f46ab7fae312995b5e70e46d389b5175f2c0020c2379784",
+      "review_context_sha256": "981b31fb374de3623065c5d2e4bdea959d8c08c899c3eb419dfae9e0ac5d9825",
+      "reason": "Reviewed the complete current item, its four direct suppliers, manifest interface and owning frontmatter-only pages. For C1 U and C1 fluxes, the chain rule identifies each spatial flux derivative with DF_j(U) partial_j U; compatibility then makes the entropy residual Deta(U) times the conservation residual, which vanishes by the newly explicit pointwise equation hypothesis. Interior and initial-boundary weak definitions, absolute integrability conditions, entropy sign and convexity are unchanged. No diagrams occur and none is needed. This is the assigned repair review, not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "subject": "def-fd-conservation-system",
+        "location": "Remarks, first paragraph",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "reason": "The original Remarks asserts entropy equality for every C1 state field. With d=m=1, I=(0,1), Omega=R, state domain R, F=q=0, eta(u)=u and U(t,x)=t, all stated regularity and entropy compatibility hypotheses hold but the entropy residual is 1. The missing equation hypothesis is essential. Repaired the Remarks to require U in C1(Q;O) satisfying the conservation system pointwise; the chain rule then gives the entropy residual as Deta(U) times the zero conservation residual."
+      }
+    ],
+    "published_ledger": [
+      {
+        "subject": "def-distributional-derivative",
+        "consumer": "def-fd-conservation-system",
+        "disposition": "retain_existing_open_maintenance",
+        "existing_locator": "research/published-consumer-supplier-ledger.md:2208",
+        "affected_use": "The Definition uses the minus test-derivative convention and bilinear pairing. These mathematical clauses remain sound; the supplier Definition still contains inline links to def-distribution and thm-test-function-operations-are-continuous.",
+        "invalidated_claim": "No mathematical claim is invalidated; this is the existing uninterrupted-definition presentation defect.",
+        "minimality": "Mathematics-owner maintenance should move those links into Definition references, preserving all mathematical wording. Imported supplier left unchanged."
+      },
+      {
+        "subject": "def-regular-distribution-from-a-locally-integrable-function",
+        "consumer": "def-fd-conservation-system",
+        "disposition": "retain_existing_open_maintenance",
+        "existing_locator": "research/published-consumer-supplier-ledger.md:2200",
+        "affected_use": "The Definition uses local integrability and the bilinear regular functional. Both clauses remain sound; the supplier Definition still contains inline links to def-locally-integrable-function-on-r-n and def-test-function-space-d-of-an-open-set.",
+        "invalidated_claim": "No mathematical claim is invalidated; this is the existing uninterrupted-definition presentation defect.",
+        "minimality": "Mathematics-owner maintenance should move the existing links into Definition references without changing hypotheses or pairing conventions. Imported supplier left unchanged."
+      }
+    ]
+  },
+  "repair_notes": {
+    "changed_paths": [
+      "items/def-fd-conservation-system.md"
+    ],
+    "exact_change": "Only the opening hypothesis of the first Remarks paragraph changes: a C1 state field is replaced by U in C1(Q;O) satisfying the system pointwise on Q.",
+    "public_interface_changed": false,
+    "definition_preserved": true,
+    "manifest_definition_match": true,
+    "propagation": "The original Definition section is byte-for-byte unchanged; this mathematics-domain Remarks correction creates no supplier-interface event. No downstream examination inventory is triggered.",
+    "source_reading": "Elementary chain-rule computation checked against the current local supplier and counterexample. No external source was retrieved or read in this dispatch. The outside support finding concerns initial-boundary integrability already present in the current Definition; it supplies no repair or certification authority here.",
+    "unresolved_obligations": [],
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-fd-conservation-system.md --json",
+        "exit_code": 0,
+        "result": "One selected definition; proof precheck not-applicable, zero failures."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-fd-conservation-system.md --json",
+        "exit_code": 0,
+        "result": "One item checked; zero errors, zero warnings."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file <(printf '%s\\n' '[\"def-fd-conservation-system\"]') --json",
+        "exit_code": 0,
+        "result": "Focused item def-fd-conservation-system and page fd-w03; 518 prerequisite-closure item cycle checks and 138 prerequisite pages; zero errors, zero warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-fd-conservation-system.md",
+        "exit_code": 0,
+        "result": "One item, zero proof steps, zero defects."
+      }
+    ],
+    "operational_corrections": [
+      "Direct node invocation of precheck.mts failed with ERR_UNKNOWN_FILE_EXTENSION; rerun successfully through tools/tsx-run.mjs.",
+      "Depcheck requires a JSON selection array; initial plain-text process-substitution selection failed to parse, then the corrected JSON array selection passed.",
+      "Statement-first wrapper has no --help mode and rejected that exploratory invocation; no whole-run statement check was launched. Current Definition manually checked to be uninterrupted and followed by its existing Definition references."
+    ]
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-23-step5-context.json": "bd35e413b3d3b26317b63af2d012b6a4a94289c69c282e53c1fb49c60ea5869b",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/supplement-1/findings.json": "37e289cba18e90b42177e4c4a18979e59beae092b38a38c6956e9928248623db"
+  }
+}

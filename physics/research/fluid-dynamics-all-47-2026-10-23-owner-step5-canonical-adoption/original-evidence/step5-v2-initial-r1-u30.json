@@ -1,0 +1,180 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "30",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "rem-fd-compressible-stability-distinctions",
+      "model": "gpt-6-luna",
+      "context_sha256": "34e659b8b403fa1b16aeeaf888d74b08b3d5f34c326f52eda489f80e4dcb6b84",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unqualified periodic-grid assertion is false for nonuniform widths: with widths 1 and 2, time step 1, and face-flux difference q in the first cell and -q in the second, the unweighted sum changes by -q/2 while the width-weighted total is unchanged. The cited proposition instead has a common width and common time-step ratio. Restored those exact hypotheses and the periodic balance; finite reindexing then proves the asserted conservation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rem-fd-compressible-stability-distinctions",
+      "disposition": "repaired",
+      "post_sha256": "770b4d84d55119f6c4f4c7123a7ed0aba9e6cb6b55d8d60739476068a05bd7da",
+      "review_context_sha256": "a69b3574477c903d277478d98687602077d1e8a8eede36724c5716f1a4eff35d",
+      "reason": "Restored uniform periodic mesh and common ratio in the conservation summary. Also repaired the digest-identified limiter applicability gap: its target is now explicitly closed and convex, its output is the maximal feasible scaling, and existence follows because the feasible parameters form a nonempty closed subset of [0,1]. Checked all nine direct supplier bodies, HLL half-cell formulas and diagram, entropy-flux scope, and the scalar weak-limit hypotheses against their actual statements and arguments. Mean preservation and all original numerical distinctions remain intact. The sole item consumer uses only the preserved distinction between conservation, admissibility, entropy and convergence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-fd-compressible-constant-state"
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-30-step5-context.json": "05aea9dee64f513b38fe45be97324eacea1cc6fc9e4bd113c0323a99e36802e8"
+  },
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "id": "rem-fd-compressible-stability-distinctions",
+        "finding": "Missing uniform-mesh hypothesis in conservation summary",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "proposed_status": "fixed",
+        "evidence": "Remark now fixes N>=2 periodic cells, a common positive width, a common time-step ratio, and the shared-face balance. The two periodic flux sums are identical by finite reindexing. This is the assigned original judge finding."
+      },
+      {
+        "id": "rem-fd-compressible-stability-distinctions",
+        "finding": "Missing closed-target hypothesis for the maximal convex-scaling limiter",
+        "severity": "fatal",
+        "defect_type": "dependency_citation",
+        "proposed_status": "fixed",
+        "evidence": "Distinct Step-4 digest finding, verified against alg-pe03-convex-scaling-positivity-limiter Definition. For K=(0,1), equal-weight nodes -1/2 and 3/2 have mean 1/2, but feasible scalings [0,1/2) have no maximum. The repaired Remark requires closed convex K and states why the maximum exists. No additional judge tuple is fabricated."
+      }
+    ],
+    "published_consumer_ledger": []
+  },
+  "repair_notes": {
+    "changed_files": [
+      "items/rem-fd-compressible-stability-distinctions.md",
+      "research/fluid-dynamics-all-47-2026-10-23-batch-30.pages.json"
+    ],
+    "interface_change": {
+      "section": "Remark",
+      "affected_clauses": [
+        "Periodic-grid conservation now explicitly carries the cited uniform-grid/common-ratio hypotheses and update formula.",
+        "Limiter applicability now carries closedness in addition to convexity and specifies maximal scaling."
+      ],
+      "comparison": "Direct before/after Remark comparison: precisely the conservation and limiter paragraphs changed; all other prose, references, metadata and TikZ source are unchanged."
+    },
+    "supplier_checks": [
+      {
+        "id": "prop-fd-shared-face-global-conservation",
+        "locator": "Statement and Proof 1.1, 2.1",
+        "evidence": "The single positive cell width makes the time-step ratio common. Shared periodic face vectors cancel componentwise in both the state sum and its width multiple."
+      },
+      {
+        "id": "alg-pe03-convex-scaling-positivity-limiter",
+        "locator": "Definition",
+        "evidence": "Requires closed convex K, finite nonempty nodes, positive normalized weights, and a mean in K; returns the largest feasible theta. Continuous affine node paths have closed inverse images of K; their intersection in [0,1] contains 0, hence has a maximum."
+      },
+      {
+        "id": "lem-pe03-hll-half-cell-riemann-averages",
+        "locator": "Statement and Proof 1.1-3.1",
+        "evidence": "Left fan lengths h/2+S_L dt and -S_L dt give the stated A-minus formula; right lengths S_R dt and h/2-S_R dt give A-plus. Their neighboring half-sum is the update."
+      },
+      {
+        "id": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+        "locator": "Statement and Proof 1.1, 2.1",
+        "evidence": "Requires periodic uniform mesh, local one-sided CFL and both adjacent fan averages in convex K; intermediate-state membership is sufficient, never inferred from endpoint speed data."
+      },
+      {
+        "id": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+        "locator": "Statement and Proof 1.1-3.1",
+        "evidence": "The symmetric speed bound and facewise 2 nu a<=1 match the Remark; split-state convex combination establishes strict positivity only under these hypotheses."
+      },
+      {
+        "id": "def-pe03-entropy-stable-dissipative-flux",
+        "locator": "Definition",
+        "evidence": "Symmetric positive-semidefinite entropy-variable dissipation defines a flux condition; no fully discrete time-step inequality is included."
+      },
+      {
+        "id": "thm-conservative-finite-volume-weak-limit",
+        "locator": "Statement, Facts and Proof; lem-conservative-fv-face-fluxes-converge-in-l1loc Proof 1.1-4.1",
+        "evidence": "Scalar continuous consistent fluxes, initial cell averages, vanishing mesh/time steps, strong local L1 convergence and bounds through t=0 are required. The spatial-translation use of countable choice is recorded; no convergence, entropy or Euler-system theorem is obtained."
+      },
+      {
+        "id": "def-countable-choice",
+        "locator": "Definition",
+        "evidence": "The indexed-family formulation agrees exactly with the formulation restated in the Remark."
+      },
+      {
+        "id": "def-pe03-convex-invariant-domain",
+        "locator": "Definition",
+        "evidence": "Convexity is closure under line segments, and invariance is for the specified one-step map only."
+      }
+    ],
+    "consumer_reviews": [
+      {
+        "id": "ex-fd-compressible-constant-state",
+        "path": "items/ex-fd-compressible-constant-state.md",
+        "affected_use": "Example references; Facts F3 and Verification 2.1 use only that flux cancellation does not establish a separate entropy or convergence property.",
+        "disposition": "unaffected",
+        "reason": "Its Example already requires a periodic uniform grid and proves the fixed-point identity by equality of consistent constant-state face fluxes. It never invokes the limiter or any nonuniform conservation claim.",
+        "raw_sha256": "22be1853350574b3ce419735a8c95752b3f26e2301f02034f610d8df93261515"
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/fluid-dynamics-mathematics/fd-n03.md",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only page lists the Remark; no page assertion consumes either repaired clause. The examples companion is also frontmatter-only."
+      }
+    ],
+    "graph_check": "Searched current items and library for the assigned ID; aliases are empty. The only item dependency/reference consumer is ex-fd-compressible-constant-state. No outside or published affected consumer was found.",
+    "diagram_review": "TikZ fan regions U_L, U_*, U_R, supplied speed signs, x/time orientations, and centers at +/-h/2 agree with the half-cell formulas and CFL bounds. No diagram correction or addition is needed; algebra supplies the argument.",
+    "metadata": "Under the shared write lock, reread batch-30.pages.json and replaced only this item statement mirror with the complete current Remark. Exact object comparison verified every other field unchanged. Existing proof contract passes without modification; historical reviews and stamps were preserved.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-30.proof-contracts.json --strict --items rem-fd-compressible-stability-distinctions",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/rem-fd-compressible-stability-distinctions.md",
+        "exit_code": 0,
+        "output": "OK: 1 file; all math and frontmatter parse under the real renderers."
+      },
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/rem-fd-compressible-stability-distinctions.md",
+        "exit_code": 0,
+        "output": "0 checked, 0 failing; Remark has no proof-bearing section."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/rem-fd-compressible-stability-distinctions.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "node --input-type=module",
+        "scope": [
+          "rem-fd-compressible-stability-distinctions"
+        ],
+        "exit_code": 0,
+        "output": "Inline call to the native inspectStatement(id, remark, body): 1 item, errors: []."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run fluid-dynamics-all-47-2026-10-23 --items rem-fd-compressible-stability-distinctions",
+        "exit_code": 0,
+        "output": "Returned the exact post_sha256 and review_context_sha256 copied into the review."
+      }
+    ],
+    "reading_limits": "Reviewed current local supplier bodies and elementary arguments directly. No external source retrieval or independent review of this repair is claimed. The support index and supplements contain no proposal for this subject; the Step-4 digest concern was independently verified.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects native evidence, merges the proposed ledger updates and schedules ordinary frontier consumer/context work and rejudgment. No certification or judge launch performed."
+  }
+}

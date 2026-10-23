@@ -1,0 +1,972 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-nonnewtonian-laws",
+    "lem-fd-generalized-newtonian-dissipation",
+    "lem-fd-bingham-monotone-graph",
+    "lem-fd-conformation-storage",
+    "ex-fdmath-bingham-zero-rate-stress"
+  ],
+  "contracts": {
+    "def-fd-nonnewtonian-laws": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Use SI units and an oriented Euclidean three-space with Cartesian coordinates. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference body with $C^1$ boundary, and let $\\mathcal U$ be an open neighborhood of $\\overline B$. A smooth motion is a map $\\chi\\in C^2(I\\times\\mathcal U;\\mathbb R^3)$ such that each $\\chi_t(a):=\\chi(t,a)$ is an orientation-preserving $C^2$ diffeomorphism onto its image; when labels are initially the current positions, $\\chi_0(a)=a$. Set $\\Omega_t=\\chi_t(B)$. For $x\\in\\chi_t(\\mathcal U)$ its inverse label map is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,x)=\\partial_t\\chi(t,A(t,x))$. Position and material-label coordinates have units $\\mathrm m$, time has units $\\mathrm s$, and velocity has units $\\mathrm{m\\,s^{-1}}$. The velocity gradient is $L=\\nabla u$, the rate-of-strain tensor is $D=(L+L^{\\mathsf T})/2$, the spin is $W=(L-L^{\\mathsf T})/2$, and the dilatation is $\\theta=\\operatorname{tr}D=\\operatorname{tr}L$; all have units $\\mathrm{s^{-1}}$. The material derivative is $D_t=\\partial_t+u\\cdot\\nabla$, acting componentwise on tensor fields, with units $\\mathrm{s^{-1}}$ on dimensionless fields. Matrix contraction is $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$, with Frobenius norm $|S|=(S:S)^{1/2}$. These definitions are the mathematical motion and kinematics used below."
+          },
+          "evidence": "The Definition excludes an empty time interval and requires a nonempty body. Definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Write $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$. The generalized Newtonian branch is incompressible, so $\\theta=0$ and $D\\in\\mathrm{Sym}_0(3)$. Define the shear-rate scalar $\\dot\\gamma=(2D:D)^{1/2}$, with units $\\mathrm{s}^{-1}$, and let $\\eta(\\dot\\gamma)$ be a finite nonnegative viscosity with units $\\mathrm{Pa\\,s}$. The deviatoric stress is $\\tau=2\\eta(\\dot\\gamma)D$, in $\\mathrm{Pa}$; no pressure term is included."
+          },
+          "evidence": "Zero viscosity is allowed and gives zero generalized-Newtonian stress. Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "with $m>0$ in $\\mathrm{Pa\\,s^n}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n>0$. For comparison, the unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$. When $0<n<1$, this viscosity diverges as $\\dot\\gamma\\downarrow0$, although the extended stress may remain continuous."
+          },
+          "evidence": "The zero-rate unregularized stress is set to zero and regularized laws are defined at rest. Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "with $m>0$ in $\\mathrm{Pa\\,s^n}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n>0$. For comparison, the unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$. When $0<n<1$, this viscosity diverges as $\\dot\\gamma\\downarrow0$, although the extended stress may remain continuous."
+          },
+          "evidence": "The singular unregularized viscosity is defined only for positive rate. Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Use SI units and an oriented Euclidean three-space with Cartesian coordinates. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference body with $C^1$ boundary, and let $\\mathcal U$ be an open neighborhood of $\\overline B$. A smooth motion is a map $\\chi\\in C^2(I\\times\\mathcal U;\\mathbb R^3)$ such that each $\\chi_t(a):=\\chi(t,a)$ is an orientation-preserving $C^2$ diffeomorphism onto its image; when labels are initially the current positions, $\\chi_0(a)=a$. Set $\\Omega_t=\\chi_t(B)$. For $x\\in\\chi_t(\\mathcal U)$ its inverse label map is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,x)=\\partial_t\\chi(t,A(t,x))$. Position and material-label coordinates have units $\\mathrm m$, time has units $\\mathrm s$, and velocity has units $\\mathrm{m\\,s^{-1}}$. The velocity gradient is $L=\\nabla u$, the rate-of-strain tensor is $D=(L+L^{\\mathsf T})/2$, the spin is $W=(L-L^{\\mathsf T})/2$, and the dilatation is $\\theta=\\operatorname{tr}D=\\operatorname{tr}L$; all have units $\\mathrm{s^{-1}}$. The material derivative is $D_t=\\partial_t+u\\cdot\\nabla$, acting componentwise on tensor fields, with units $\\mathrm{s^{-1}}$ on dimensionless fields. Matrix contraction is $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$, with Frobenius norm $|S|=(S:S)^{1/2}$. These definitions are the mathematical motion and kinematics used below."
+          },
+          "reason": "The time domain is open; no finite-endpoint extension is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Write $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$. The generalized Newtonian branch is incompressible, so $\\theta=0$ and $D\\in\\mathrm{Sym}_0(3)$. Define the shear-rate scalar $\\dot\\gamma=(2D:D)^{1/2}$, with units $\\mathrm{s}^{-1}$, and let $\\eta(\\dot\\gamma)$ be a finite nonnegative viscosity with units $\\mathrm{Pa\\,s}$. The deviatoric stress is $\\tau=2\\eta(\\dot\\gamma)D$, in $\\mathrm{Pa}$; no pressure term is included."
+          },
+          "evidence": "Every branch is specified directly from supplied scalar arguments; no choice is used. Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Here $\\tau_p,\\tau_s$ are polymer and solvent stresses in $\\mathrm{Pa}$, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant in this formula is positive for symmetric positive-definite $C$, by the finite-dimensional real spectral theorem and determinant multiplicativity. These are mathematical constitutive definitions and adopted model equations. They assert neither empirical validity for a particular material nor existence of a solution to a fluid partial differential equation."
+          },
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Here $\\tau_p,\\tau_s$ are polymer and solvent stresses in $\\mathrm{Pa}$, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant in this formula is positive for symmetric positive-definite $C$, by the finite-dimensional real spectral theorem and determinant multiplicativity. These are mathematical constitutive definitions and adopted model equations. They assert neither empirical validity for a particular material nor existence of a solution to a fluid partial differential equation."
+          },
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity motion",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "For chi(t,a)=a, u=L=D=W=theta=0, gamma=0, and generalized-Newtonian stress is zero."
+        },
+        {
+          "name": "Carreau n equals one",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "For n=1, eta_C=eta_0 at every finite shear rate, including lambda=0."
+        },
+        {
+          "name": "zero-rate Bingham graph",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "At D=0 the closed Frobenius stress ball reduces to {0} when tau_y=0."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic specializations of the displayed definitions or arguments; no empirical measurement or inference is asserted."
+    },
+    "lem-fd-generalized-newtonian-dissipation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-fd-nonnewtonian-laws",
+          "source_section": "Definition",
+          "quote": "Use SI units and an oriented Euclidean three-space with Cartesian coordinates. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference body with $C^1$ boundary, and let $\\mathcal U$ be an open neighborhood of $\\overline B$. A smooth motion is a map $\\chi\\in C^2(I\\times\\mathcal U;\\mathbb R^3)$ such that each $\\chi_t(a):=\\chi(t,a)$ is an orientation-preserving $C^2$ diffeomorphism onto its image; when labels are initially the current positions, $\\chi_0(a)=a$. Set $\\Omega_t=\\chi_t(B)$. For $x\\in\\chi_t(\\mathcal U)$ its inverse label map is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,x)=\\partial_t\\chi(t,A(t,x))$. Position and material-label coordinates have units $\\mathrm m$, time has units $\\mathrm s$, and velocity has units $\\mathrm{m\\,s^{-1}}$. The velocity gradient is $L=\\nabla u$, the rate-of-strain tensor is $D=(L+L^{\\mathsf T})/2$, the spin is $W=(L-L^{\\mathsf T})/2$, and the dilatation is $\\theta=\\operatorname{tr}D=\\operatorname{tr}L$; all have units $\\mathrm{s^{-1}}$. The material derivative is $D_t=\\partial_t+u\\cdot\\nabla$, acting componentwise on tensor fields, with units $\\mathrm{s^{-1}}$ on dimensionless fields. Matrix contraction is $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$, with Frobenius norm $|S|=(S:S)^{1/2}$. These definitions are the mathematical motion and kinematics used below.\n\nWrite $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$. The generalized Newtonian branch is incompressible, so $\\theta=0$ and $D\\in\\mathrm{Sym}_0(3)$. Define the shear-rate scalar $\\dot\\gamma=(2D:D)^{1/2}$, with units $\\mathrm{s}^{-1}$, and let $\\eta(\\dot\\gamma)$ be a finite nonnegative viscosity with units $\\mathrm{Pa\\,s}$. The deviatoric stress is $\\tau=2\\eta(\\dot\\gamma)D$, in $\\mathrm{Pa}$; no pressure term is included.\n\nTwo named viscosity choices are the Carreau form\n\n$$\n\\eta_C(\\dot\\gamma)=\\eta_\\infty+(\\eta_0-\\eta_\\infty)\\bigl(1+(\\lambda\\dot\\gamma)^2\\bigr)^{(n-1)/2},\n$$\n\nwith $\\eta_0\\ge\\eta_\\infty\\ge0$ in $\\mathrm{Pa\\,s}$, $\\lambda\\ge0$ in $\\mathrm{s}$, and dimensionless $n>0$, and the regularized power form\n\n$$\n\\eta_R(\\dot\\gamma)=m(\\varepsilon^2+\\dot\\gamma^2)^{(n-1)/2},\n$$\n\nwith $m>0$ in $\\mathrm{Pa\\,s^n}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n>0$. For comparison, the unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$. When $0<n<1$, this viscosity diverges as $\\dot\\gamma\\downarrow0$, although the extended stress may remain continuous.\n\nFor the Bingham branch use the Frobenius norm just defined, $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$, and yield parameter $\\tau_y\\ge0$ in $\\mathrm{Pa}$. Its set-valued deviatoric stress graph on $\\mathrm{Sym}_0(3)$ is\n\n$$\n\\mathcal B(D)=\\begin{cases}\\{2\\mu_pD+\\tau_yD/|D|\\},&D\\ne0,\\\\\\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\},&D=0.\\end{cases}\n$$\n\nThe value at rest is therefore a whole stress ball when $\\tau_y>0$. The chosen Frobenius normalization fixes the numerical convention for $\\tau_y$; a source using a differently normalized second invariant requires a corresponding parameter conversion.\n\nFor the conformation branch, $C(t)$ is a dimensionless symmetric positive-definite $3\\times3$ tensor, $G>0$ is a modulus in $\\mathrm{Pa}$, $\\lambda>0$ is a relaxation time in $\\mathrm{s}$, and $\\eta_s\\ge0$ is a solvent viscosity in $\\mathrm{Pa\\,s}$. Along an incompressible trajectory, adopt\n\n$$D_tC-LC-CL^{\\mathsf T}=-(C-I)/\\lambda,\\qquad \\tau_p=G(C-I),\\qquad \\tau_s=2\\eta_sD,\\qquad w(C)=\\frac G2\\bigl(\\operatorname{tr}C-\\log\\det C-3\\bigr).$$\n\nHere $\\tau_p,\\tau_s$ are polymer and solvent stresses in $\\mathrm{Pa}$, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant in this formula is positive for symmetric positive-definite $C$, by the finite-dimensional real spectral theorem and determinant multiplicativity. These are mathematical constitutive definitions and adopted model equations. They assert neither empirical validity for a particular material nor existence of a solution to a fluid partial differential equation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-fd-observer-calculus",
+          "source_section": "Statement",
+          "quote": "$$u^*(t,x^*)=Q'(t)x+Q(t)u(t,x)+c'(t),\\qquad L^*(t,x^*)=Q(t)L(t,x)Q(t)^{\\mathsf T}+Q'(t)Q(t)^{\\mathsf T},$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "If $D\\ne0$, then $\\tau:D=2\\eta(\\dot\\gamma)(D:D)=\\eta(\\dot\\gamma)\\dot\\gamma^2\\ge0$; if $D=0$, then $\\tau=0$ and the contraction is $0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "For finite $\\dot\\gamma$, the Carreau base $1+(\\lambda\\dot\\gamma)^2$ is at least $1$, hence every real power appearing in $\\eta_C$ is finite and positive; the parameter inequalities make both summands nonnegative.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "If $\\lambda>0$, the base $1+(\\lambda\\dot\\gamma)^2$ increases from $1$ to $+\\infty$ as $\\dot\\gamma$ runs from $0$ to $+\\infty$; its exponent $(n-1)/2$ is negative for $0<n<1$, zero for $n=1$, and positive for $n>1$. Thus the factor decreases to $0$, is constantly $1$, or increases without bound, respectively. Since $\\eta_0-\\eta_\\infty>0$, adding $\\eta_\\infty$ gives the three stated limits and monotonicities. If $\\lambda=0$ or $\\eta_0=\\eta_\\infty$, direct substitution gives a constant.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "Since $\\varepsilon^2+\\dot\\gamma^2>0$ and is finite, its real power is finite and positive; multiplication by $m>0$ proves the regularized viscosity claim. For $\\dot\\gamma>0$, the unregularized law has $|\\tau|=2m\\dot\\gamma^{n-1}|D|=\\sqrt2m\\dot\\gamma^n\\to0$ as $\\dot\\gamma\\downarrow0$, proving continuity of its zero extension, while $\\dot\\gamma^{n-1}\\to+\\infty$ when $0<n<1$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "By [F1], $D^*=QDQ^{\\mathsf T}$. Orthogonality gives $(QDQ^{\\mathsf T})^{\\mathsf T}(QDQ^{\\mathsf T})=QD^{\\mathsf T}DQ^{\\mathsf T}$, so cyclicity of the finite matrix trace yields $D^*:D^*=\\operatorname{tr}(QD^{\\mathsf T}DQ^{\\mathsf T})=\\operatorname{tr}(D^{\\mathsf T}DQ^{\\mathsf T}Q)=D:D$. Thus $\\dot\\gamma^*=\\dot\\gamma$. Consequently $\\tau^*=2\\eta(\\dot\\gamma^*)D^*=Q(2\\eta(\\dot\\gamma)D)Q^{\\mathsf T}=Q\\tau Q^{\\mathsf T}$; the zero-rate extension obeys the same identity.",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $u$ be the $C^1$ Eulerian velocity induced by a $C^2$ incompressible motion in Euclidean three-space, and set $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, and $\\dot\\gamma=(2D:D)^{1/2}$. Here incompressibility means $\\operatorname{div}u=\\operatorname{tr}L=0$. For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$."
+          },
+          "evidence": "The zero viscosity case is allowed and step 1.1 gives zero power. Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the Carreau formula $\\eta_C=\\eta_\\infty+(\\eta_0-\\eta_\\infty)(1+(\\lambda\\dot\\gamma)^2)^{(n-1)/2}$, assume $\\eta_0\\ge\\eta_\\infty\\ge0$, $\\lambda\\ge0$, and $n>0$. It is finite and nonnegative for every finite $\\dot\\gamma$. If $\\lambda>0$ and $\\eta_0>\\eta_\\infty$, it decreases to $\\eta_\\infty$ for $0<n<1$, is the constant $\\eta_0$ for $n=1$, and increases without bound for $n>1$; if $\\lambda=0$ or $\\eta_0=\\eta_\\infty$, it is constant. For the regularized power formula $\\eta_R=m(\\varepsilon^2+\\dot\\gamma^2)^{(n-1)/2}$, assume $m>0$, $\\varepsilon>0$, and $n>0$; it is finite and strictly positive for every finite $\\dot\\gamma$. For the unregularized power stress $\\tau=2m\\dot\\gamma^{n-1}D$ at $\\dot\\gamma>0$, with $m>0,n>0$, the extension $\\tau=0$ at $D=0$ is continuous, even though the viscosity diverges there when $0<n<1$."
+          },
+          "evidence": "The zero-rate extension is tested in step 2.2. Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the Carreau formula $\\eta_C=\\eta_\\infty+(\\eta_0-\\eta_\\infty)(1+(\\lambda\\dot\\gamma)^2)^{(n-1)/2}$, assume $\\eta_0\\ge\\eta_\\infty\\ge0$, $\\lambda\\ge0$, and $n>0$. It is finite and nonnegative for every finite $\\dot\\gamma$. If $\\lambda>0$ and $\\eta_0>\\eta_\\infty$, it decreases to $\\eta_\\infty$ for $0<n<1$, is the constant $\\eta_0$ for $n=1$, and increases without bound for $n>1$; if $\\lambda=0$ or $\\eta_0=\\eta_\\infty$, it is constant. For the regularized power formula $\\eta_R=m(\\varepsilon^2+\\dot\\gamma^2)^{(n-1)/2}$, assume $m>0$, $\\varepsilon>0$, and $n>0$; it is finite and strictly positive for every finite $\\dot\\gamma$. For the unregularized power stress $\\tau=2m\\dot\\gamma^{n-1}D$ at $\\dot\\gamma>0$, with $m>0,n>0$, the extension $\\tau=0$ at $D=0$ is continuous, even though the viscosity diverges there when $0<n<1$."
+          },
+          "evidence": "Step 2.1 handles n=1 exactly. Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the Carreau formula $\\eta_C=\\eta_\\infty+(\\eta_0-\\eta_\\infty)(1+(\\lambda\\dot\\gamma)^2)^{(n-1)/2}$, assume $\\eta_0\\ge\\eta_\\infty\\ge0$, $\\lambda\\ge0$, and $n>0$. It is finite and nonnegative for every finite $\\dot\\gamma$. If $\\lambda>0$ and $\\eta_0>\\eta_\\infty$, it decreases to $\\eta_\\infty$ for $0<n<1$, is the constant $\\eta_0$ for $n=1$, and increases without bound for $n>1$; if $\\lambda=0$ or $\\eta_0=\\eta_\\infty$, it is constant. For the regularized power formula $\\eta_R=m(\\varepsilon^2+\\dot\\gamma^2)^{(n-1)/2}$, assume $m>0$, $\\varepsilon>0$, and $n>0$; it is finite and strictly positive for every finite $\\dot\\gamma$. For the unregularized power stress $\\tau=2m\\dot\\gamma^{n-1}D$ at $\\dot\\gamma>0$, with $m>0,n>0$, the extension $\\tau=0$ at $D=0$ is continuous, even though the viscosity diverges there when $0<n<1$."
+          },
+          "evidence": "Step 2.1 treats lambda=0 or equal plateau viscosities by substitution. Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $u$ be the $C^1$ Eulerian velocity induced by a $C^2$ incompressible motion in Euclidean three-space, and set $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, and $\\dot\\gamma=(2D:D)^{1/2}$. Here incompressibility means $\\operatorname{div}u=\\operatorname{tr}L=0$. For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$."
+          },
+          "reason": "The Statement has no temporal endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $u$ be the $C^1$ Eulerian velocity induced by a $C^2$ incompressible motion in Euclidean three-space, and set $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, and $\\dot\\gamma=(2D:D)^{1/2}$. Here incompressibility means $\\operatorname{div}u=\\operatorname{tr}L=0$. For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$."
+          },
+          "evidence": "The viscosity is treated pointwise; no choice is used. Statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $u$ be the $C^1$ Eulerian velocity induced by a $C^2$ incompressible motion in Euclidean three-space, and set $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, and $\\dot\\gamma=(2D:D)^{1/2}$. Here incompressibility means $\\operatorname{div}u=\\operatorname{tr}L=0$. For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$."
+          },
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $u$ be the $C^1$ Eulerian velocity induced by a $C^2$ incompressible motion in Euclidean three-space, and set $L=\\nabla u$, $D=(L+L^{\\mathsf T})/2$, and $\\dot\\gamma=(2D:D)^{1/2}$. Here incompressibility means $\\operatorname{div}u=\\operatorname{tr}L=0$. For any finite continuous viscosity $\\eta:[0,\\infty)\\to[0,\\infty)$ and the stress law $\\tau=2\\eta(\\dot\\gamma)D$, one has $\\tau:D\\ge0$. Under a $C^2$ rigid change of observer $x^*=Q(t)x+c(t)$, where $Q(t)\\in SO(3)$, the transformed rate of strain is $D^*=QDQ^{\\mathsf T}$, so the transformed stress is $\\tau^*=Q\\tau Q^{\\mathsf T}$."
+          },
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "diagonal trace-free strain",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ],
+          "expected": "For D=diag(a,-a,0), a>0, gamma=2a and tau:D=eta(2a) gamma^2>=0."
+        },
+        {
+          "name": "Carreau n equals one",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ],
+          "expected": "For n=1 the factor is one and eta_C=eta_0."
+        },
+        {
+          "name": "unregularized low-rate stress",
+          "inputs": [
+            "A1",
+            "step 2.2"
+          ],
+          "expected": "As gamma tends to zero, |tau|=sqrt(2)m gamma^n tends to zero for every n>0."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic specializations of the displayed definitions or arguments; no empirical measurement or inference is asserted."
+    },
+    "lem-fd-bingham-monotone-graph": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-fd-nonnewtonian-laws",
+          "source_section": "Definition",
+          "quote": "For the Bingham branch use the Frobenius norm just defined, $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$, and yield parameter $\\tau_y\\ge0$ in $\\mathrm{Pa}$. Its set-valued deviatoric stress graph on $\\mathrm{Sym}_0(3)$ is",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "The norm is convex by the triangle inequality and positive homogeneity. For $0\\le s\\le1$, $|sD+(1-s)E|^2\\le(s|D|+(1-s)|E|)^2\\le s|D|^2+(1-s)|E|^2$, the second inequality following from $s(1-s)(|D|-|E|)^2\\ge0$. Thus $\\Phi$ is convex; it is finite everywhere and $\\Phi\\ge0$, so the supporting-inequality set defined in the Statement is well-defined.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "Let $D\\ne0$. For every $E\\in\\mathcal S_0$, expansion of $|E-D|^2\\ge0$ gives $|E|^2\\ge|D|^2+2D:(E-D)$, while Cauchy–Schwarz gives $|E|\\ge|D|+(D/|D|):(E-D)$. Multiplying by $\\mu_p$ and $\\tau_y$ and adding shows $\\Phi(E)\\ge\\Phi(D)+(2\\mu_pD+\\tau_yD/|D|):(E-D)$, so the stated nonzero graph value belongs to the set defined in the Statement.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "1.3",
+          "step": "1.3",
+          "claim": "If $\\xi$ belongs to the set defined as $\\partial\\Phi(D)$ with $D\\ne0$, apply its supporting inequality to $E=D+hH$. For $h>0$ division by $h$ gives $\\xi:H\\le(\\Phi(D+hH)-\\Phi(D))/h$; for $h<0$ the reversed inequality gives $\\xi:H\\ge(\\Phi(D+hH)-\\Phi(D))/h$. The identity $(|D+hH|-|D|)/h=(2D:H+h|H|^2)/(|D+hH|+|D|)\\to(D:H)/|D|$ and the quadratic expansion in step 1.2 show that both limits equal $(2\\mu_pD+\\tau_yD/|D|):H$. Since this holds for every $H\\in\\mathcal S_0$, nondegeneracy of the Frobenius product gives $\\xi=2\\mu_pD+\\tau_yD/|D|$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "At $D=0$, the supporting inequality is $\\mu_p|E|^2+\\tau_y|E|\\ge\\xi:E$ for every $E$. If $|\\xi|\\le\\tau_y$, Cauchy–Schwarz proves it. Conversely, if $|\\xi|>\\tau_y$, choose $E=t\\xi/|\\xi|$; the inequality would imply $|\\xi|\\le\\mu_pt+\\tau_y$ for every $t>0$, which fails for sufficiently small $t$ when $\\mu_p>0$, and fails for every $t>0$ when $\\mu_p=0$. Hence $\\partial\\Phi(0)$ is exactly the stated stress ball, proving $\\mathcal B=\\partial\\Phi$ also at zero.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "For $\\tau_i\\in\\partial\\Phi(D_i)$, the defining inequality gives $\\Phi(D_2)\\ge\\Phi(D_1)+\\tau_1:(D_2-D_1)$ and $\\Phi(D_1)\\ge\\Phi(D_2)+\\tau_2:(D_1-D_2)$. Adding and cancelling the potential values yields $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "If $D\\ne0$, then $\\tau:D=2\\mu_p|D|^2+\\tau_y|D|\\ge0$; if $D=0$, then $\\tau:D=0$ for every point of the stress ball.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "3.2",
+          "step": "3.2",
+          "claim": "Conjugation by $Q\\in SO(3)$ preserves symmetry, trace, Frobenius norm, and the Frobenius product. Substituting $QDQ^{\\mathsf T}$ into each nonzero formula therefore gives $Q\\tau Q^{\\mathsf T}$; at $D=0$, the full ball maps onto itself because $|Q\\tau Q^{\\mathsf T}|=|\\tau|$. This proves the stated rotation-equivariance.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Define the Bingham graph by $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ when $D\\ne0$, and by $\\mathcal B(0)=\\{\\tau\\in\\mathcal S_0:|\\tau|\\le\\tau_y\\}$ when $D=0$; its graph stresses are in $\\mathrm{Pa}$. Then $\\Phi$ is finite, nonnegative, and convex; $\\mathcal B(D)=\\partial\\Phi(D)$ for every $D$; the graph is monotone in the sense that $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$ whenever $\\tau_i\\in\\mathcal B(D_i)$; every graph value satisfies $\\tau:D\\ge0$; and, for $Q\\in SO(3)$, $\\mathcal B(QDQ^{\\mathsf T})=Q\\mathcal B(D)Q^{\\mathsf T}$."
+          },
+          "evidence": "The D=0 branch is the full stress ball; step 2.1 proves it. Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\mathcal S_0=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$, with Frobenius product $D:E=\\operatorname{tr}(D^{\\mathsf T}E)$ and norm $|D|=(D:D)^{1/2}$. For $D$ measured in $\\mathrm{s}^{-1}$, let $\\mu_p\\ge0$ be in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ be in $\\mathrm{Pa}$; define $\\Phi(D)=\\mu_p|D|^2+\\tau_y|D|$, in $\\mathrm{Pa\\,s^{-1}}$, and"
+          },
+          "evidence": "Steps 2.1 and 3.1 include zero values of either parameter. Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\mathcal S_0=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$, with Frobenius product $D:E=\\operatorname{tr}(D^{\\mathsf T}E)$ and norm $|D|=(D:D)^{1/2}$. For $D$ measured in $\\mathrm{s}^{-1}$, let $\\mu_p\\ge0$ be in $\\mathrm{Pa\\,s}$ and $\\tau_"
+          },
+          "evidence": "Step 1.3 identifies the nonzero branch, including zero parameters. Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\mathcal S_0=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$, with Frobenius product $D:E=\\operatorname{tr}(D^{\\mathsf T}E)$ and norm $|D|=(D:D)^{1/2}$. For $D$ measured in $\\mathrm{s}^{-1}$, let $\\mu_p\\ge0$ be in $\\mathrm{Pa\\,s}$ and $\\tau_"
+          },
+          "evidence": "The division by |D| is restricted to D!=0; step 2.1 avoids it at zero. Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\mathcal S_0=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$, with Frobenius product $D:E=\\operatorname{tr}(D^{\\mathsf T}E)$ and norm $|D|=(D:D)^{1/2}$. For $D$ measured in $\\mathrm{s}^{-1}$, let $\\mu_p\\ge0$ be in $\\mathrm{Pa\\,s}$ and $\\tau_y\\ge0$ be in $\\mathrm{Pa}$; define $\\Phi(D)=\\mu_p|D|^2+\\tau_y|D|$, in $\\mathrm{Pa\\,s^{-1}}$, and"
+          },
+          "reason": "The Statement has no temporal endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\mathcal S_0=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$, with Frobenius product $D:E=\\operatorname{tr}(D^{\\mathsf T}E)$ and norm $|D|=(D:D)^{1/2}$. For $D$ measured in $\\mathrm{s}^{-1}$, let $\\mu_p\\ge0$ be in $\\mathrm{Pa\\,s}$ and $\\tau_"
+          },
+          "evidence": "The proof uses arbitrary E and H from universal quantifiers; no choice is used. Statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Define the Bingham graph by $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ when $D\\ne0$, and by $\\mathcal B(0)=\\{\\tau\\in\\mathcal S_0:|\\tau|\\le\\tau_y\\}$ when $D=0$; its graph stresses are in $\\mathrm{Pa}$. Then $\\Phi$ is finite, nonnegative, and convex; $\\mathcal B(D)=\\partial\\Phi(D)$ for every $D$; the graph is monotone in the sense that $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$ whenever $\\tau_i\\in\\mathcal B(D_i)$; every graph value satisfies $\\tau:D\\ge0$; and, for $Q\\in SO(3)$, $\\mathcal B(QDQ^{\\mathsf T})=Q\\mathcal B(D)Q^{\\mathsf T}$."
+          },
+          "evidence": "Steps 1.2, 1.3 and 2.1 prove the forward graph inclusion. Statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Define the Bingham graph by $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ when $D\\ne0$, and by $\\mathcal B(0)=\\{\\tau\\in\\mathcal S_0:|\\tau|\\le\\tau_y\\}$ when $D=0$; its graph stresses are in $\\mathrm{Pa}$. Then $\\Phi$ is finite, nonnegative, and convex; $\\mathcal B(D)=\\partial\\Phi(D)$ for every $D$; the graph is monotone in the sense that $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$ whenever $\\tau_i\\in\\mathcal B(D_i)$; every graph value satisfies $\\tau:D\\ge0$; and, for $Q\\in SO(3)$, $\\mathcal B(QDQ^{\\mathsf T})=Q\\mathcal B(D)Q^{\\mathsf T}$."
+          },
+          "evidence": "Steps 1.3 and 2.1 prove the reverse graph inclusion. Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "pure yield potential",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1"
+          ],
+          "expected": "For mu_p=0 the graph is radial off zero and a radius-tau_y ball at zero; graph power is nonnegative."
+        },
+        {
+          "name": "pure viscous potential",
+          "inputs": [
+            "A1",
+            "step 2.2"
+          ],
+          "expected": "For tau_y=0 monotonicity reduces to 2 mu_p |D1-D2|^2>=0."
+        },
+        {
+          "name": "zero yield",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ],
+          "expected": "For tau_y=0 and D=0 the graph ball is {0}."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic specializations of the displayed definitions or arguments; no empirical measurement or inference is asserted."
+    },
+    "lem-fd-conformation-storage": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-fd-nonnewtonian-laws",
+          "source_section": "Definition",
+          "quote": "Use SI units and an oriented Euclidean three-space with Cartesian coordinates. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Let $I\\subseteq\\mathbb R$ be a nonempty open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference body with $C^1$ boundary, and let $\\mathcal U$ be an open neighborhood of $\\overline B$. A smooth motion is a map $\\chi\\in C^2(I\\times\\mathcal U;\\mathbb R^3)$ such that each $\\chi_t(a):=\\chi(t,a)$ is an orientation-preserving $C^2$ diffeomorphism onto its image; when labels are initially the current positions, $\\chi_0(a)=a$. Set $\\Omega_t=\\chi_t(B)$. For $x\\in\\chi_t(\\mathcal U)$ its inverse label map is $A(t,x)=\\chi_t^{-1}(x)$, and its Eulerian velocity is $u(t,x)=\\partial_t\\chi(t,A(t,x))$. Position and material-label coordinates have units $\\mathrm m$, time has units $\\mathrm s$, and velocity has units $\\mathrm{m\\,s^{-1}}$. The velocity gradient is $L=\\nabla u$, the rate-of-strain tensor is $D=(L+L^{\\mathsf T})/2$, the spin is $W=(L-L^{\\mathsf T})/2$, and the dilatation is $\\theta=\\operatorname{tr}D=\\operatorname{tr}L$; all have units $\\mathrm{s^{-1}}$. The material derivative is $D_t=\\partial_t+u\\cdot\\nabla$, acting componentwise on tensor fields, with units $\\mathrm{s^{-1}}$ on dimensionless fields. Matrix contraction is $S:T=\\operatorname{tr}(S^{\\mathsf T}T)$, with Frobenius norm $|S|=(S:S)^{1/2}$. These definitions are the mathematical motion and kinematics used below.\n\nWrite $\\mathrm{Sym}_0(3)=\\{D\\in M_3(\\mathbb R):D^{\\mathsf T}=D,\\operatorname{tr}D=0\\}$. The generalized Newtonian branch is incompressible, so $\\theta=0$ and $D\\in\\mathrm{Sym}_0(3)$. Define the shear-rate scalar $\\dot\\gamma=(2D:D)^{1/2}$, with units $\\mathrm{s}^{-1}$, and let $\\eta(\\dot\\gamma)$ be a finite nonnegative viscosity with units $\\mathrm{Pa\\,s}$. The deviatoric stress is $\\tau=2\\eta(\\dot\\gamma)D$, in $\\mathrm{Pa}$; no pressure term is included.\n\nTwo named viscosity choices are the Carreau form\n\n$$\n\\eta_C(\\dot\\gamma)=\\eta_\\infty+(\\eta_0-\\eta_\\infty)\\bigl(1+(\\lambda\\dot\\gamma)^2\\bigr)^{(n-1)/2},\n$$\n\nwith $\\eta_0\\ge\\eta_\\infty\\ge0$ in $\\mathrm{Pa\\,s}$, $\\lambda\\ge0$ in $\\mathrm{s}$, and dimensionless $n>0$, and the regularized power form\n\n$$\n\\eta_R(\\dot\\gamma)=m(\\varepsilon^2+\\dot\\gamma^2)^{(n-1)/2},\n$$\n\nwith $m>0$ in $\\mathrm{Pa\\,s^n}$, $\\varepsilon>0$ in $\\mathrm{s}^{-1}$, and dimensionless $n>0$. For comparison, the unregularized power form $\\eta_U=m\\dot\\gamma^{\\,n-1}$ is defined only for $\\dot\\gamma>0$; its stress is extended by $\\tau=0$ at $D=0$. When $0<n<1$, this viscosity diverges as $\\dot\\gamma\\downarrow0$, although the extended stress may remain continuous.\n\nFor the Bingham branch use the Frobenius norm just defined, $\\mu_p\\ge0$ in $\\mathrm{Pa\\,s}$, and yield parameter $\\tau_y\\ge0$ in $\\mathrm{Pa}$. Its set-valued deviatoric stress graph on $\\mathrm{Sym}_0(3)$ is\n\n$$\n\\mathcal B(D)=\\begin{cases}\\{2\\mu_pD+\\tau_yD/|D|\\},&D\\ne0,\\\\\\{S\\in\\mathrm{Sym}_0(3):|S|\\le\\tau_y\\},&D=0.\\end{cases}\n$$\n\nThe value at rest is therefore a whole stress ball when $\\tau_y>0$. The chosen Frobenius normalization fixes the numerical convention for $\\tau_y$; a source using a differently normalized second invariant requires a corresponding parameter conversion.\n\nFor the conformation branch, $C(t)$ is a dimensionless symmetric positive-definite $3\\times3$ tensor, $G>0$ is a modulus in $\\mathrm{Pa}$, $\\lambda>0$ is a relaxation time in $\\mathrm{s}$, and $\\eta_s\\ge0$ is a solvent viscosity in $\\mathrm{Pa\\,s}$. Along an incompressible trajectory, adopt\n\n$$D_tC-LC-CL^{\\mathsf T}=-(C-I)/\\lambda,\\qquad \\tau_p=G(C-I),\\qquad \\tau_s=2\\eta_sD,\\qquad w(C)=\\frac G2\\bigl(\\operatorname{tr}C-\\log\\det C-3\\bigr).$$\n\nHere $\\tau_p,\\tau_s$ are polymer and solvent stresses in $\\mathrm{Pa}$, and $w$ is a stored-energy density in $\\mathrm{J\\,m^{-3}}$. The determinant in this formula is positive for symmetric positive-definite $C$, by the finite-dimensional real spectral theorem and determinant multiplicativity. These are mathematical constitutive definitions and adopted model equations. They assert neither empirical validity for a particular material nor existence of a solution to a fluid partial differential equation.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "source_section": "Statement",
+          "quote": "has a unique solution on all of $I$, with domain-relative one-sided\nderivatives at the endpoints. If $n\\ge1$ and $a=b$, then $t_0=a$ and there is exactly\none map $Y:I\\to M_n(\\mathbb R)$ with $Y(a)=Y_0$. This singleton map\nextends to a solution of $Z'=C(a)Z$, $Z(a)=Y_0$, on an open interval\naround $a$; any two such local continuations agree on their common interval\ncontaining $a$. No time derivative or IVP solution on the singleton itself\nis asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-a-fundamental-matrix-is-invertible",
+          "source_section": "Statement",
+          "quote": "on an interval $I$, where $C:I\\to M_n(\\mathbb R)$ is continuous. Then every\nmatrix $A(t)$ is invertible. Equivalently, a fundamental matrix of the\nvariational equation is invertible at every time on its interval of definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-matrix-inversion",
+          "source_section": "Statement",
+          "quote": "Let $A$ be invertible. Then the inversion map is real Fr\\'echet differentiable\nat $A$, and for every direction $H$,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-differential-and-jacobis-formula",
+          "source_section": "Statement",
+          "quote": "If $A$ is invertible, then",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-integral-logarithm-product-law",
+          "source_section": "Statement",
+          "quote": "For all $x,y>0$,",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-cm-positive-definite-matrix-square-roots",
+          "source_section": "Statement",
+          "quote": "1. $M$ is invertible and $M^{-1}$ is symmetric and positive definite;\n2. there is a unique symmetric positive definite matrix $M^{1/2}$ with $(M^{1/2})^2=M$;\n3. $M^{-1/2}:=(M^{1/2})^{-1}$ is symmetric and positive definite, satisfies $(M^{-1/2})^2=M^{-1}$, and $M^{-1/2}MM^{-1/2}=I_n$;\n4. for every symmetric matrix $K$ that is non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v$, the matrix $S:=M^{-1/2}KM^{-1/2}$ is symmetric and non-negative, and $S$ is positive definite if and only if $K$ is.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-fd-observer-calculus",
+          "source_section": "Statement",
+          "quote": "$$u^*(t,x^*)=Q'(t)x+Q(t)u(t,x)+c'(t),\\qquad L^*(t,x^*)=Q(t)L(t,x)Q(t)^{\\mathsf T}+Q'(t)Q(t)^{\\mathsf T},$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "Since $u$ and $x$ are $C^1$, $L(t)=\\nabla u(t,x(t))$ is continuous on the compact interval $[0,T]$. Applying [F1] gives a unique $C^1$ solution $Z'=LZ$, $Z(0)=I$ on all of $[0,T]$; by [F2], each $Z(t)$ is invertible.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "By [F3] and the chain rule along $Z$, $(Z^{-1})'=-Z^{-1}Z'Z^{-1}=-Z^{-1}L$; transposing gives $(Z^{-\\mathsf T})'=-L^{\\mathsf T}Z^{-\\mathsf T}$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "Define $Y(t)=e^{t/\\lambda}Z(t)^{-1}C(t)Z(t)^{-\\mathsf T}$. Product differentiation using [F4], then substitution of the equation for $C'$ and the identities in step 1.2, cancels the $LC$ and $CL^{\\mathsf T}$ terms and yields $Y'(t)=\\frac1\\lambda e^{t/\\lambda}Z(t)^{-1}Z(t)^{-\\mathsf T}$.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F9",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "Since $Y(0)=C_0$, the fundamental theorem of calculus gives $Y(t)=C_0+\\frac1\\lambda\\int_0^t e^{s/\\lambda}Z(s)^{-1}Z(s)^{-\\mathsf T}\\,ds$. For nonzero $v$, the integrand's quadratic form is $e^{s/\\lambda}|Z(s)^{-\\mathsf T}v|^2/\\lambda>0$; its integral is positive semidefinite (zero at $t=0$), so adding it to the positive-definite $C_0$ makes $Y(t)$ positive definite for every $t\\in[0,T]$. The identity $C=e^{-t/\\lambda}ZYZ^{\\mathsf T}$ and invertibility of $Z$ then give $v^{\\mathsf T}Cv=e^{-t/\\lambda}(Z^{\\mathsf T}v)^{\\mathsf T}Y(Z^{\\mathsf T}v)>0$ for every nonzero $v$.",
+          "inputs": [
+            "given",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "By [F10], a material trajectory transforms with velocity $u^*=Q'x+Qu+c'$ and gradient $L^*=QLQ^{\\mathsf T}+Q'Q^{\\mathsf T}$. Along that trajectory, differentiating $C^*=QCQ^{\\mathsf T}$ by the chain and product rules gives $D_t^*C^*=Q(D_tC)Q^{\\mathsf T}+Q'CQ^{\\mathsf T}+QCQ'^{\\mathsf T}$. Substituting these formulas cancels the observer-derivative terms and gives $D_t^*C^*-L^*C^*-C^*(L^*)^{\\mathsf T}=Q(D_tC-LC-CL^{\\mathsf T})Q^{\\mathsf T}$. Since $C^*-I=Q(C-I)Q^{\\mathsf T}$, the conformation equation is covariant.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F10"
+          ]
+        },
+        {
+          "id": "4.1",
+          "step": "4.1",
+          "claim": "By [F6], write $C=Q\\operatorname{diag}(c_1,c_2,c_3)Q^{\\mathsf T}$ with $c_i>0$. Determinant multiplicativity and $QQ^{\\mathsf T}=I$ give $\\det C=c_1c_2c_3$; finite-sum trace cyclicity gives $\\operatorname{tr}C=\\sum_i c_i$; hence [F7] gives $\\log\\det C=\\sum_i\\log c_i$. For each $c>0$, [F5] gives $\\log c=\\int_1^c dt/t$: if $c>1$, then $\\log c<c-1$ because $1/t<1$ on the interior of $[1,c]$; if $0<c<1$, then $\\log c=-\\int_c^1dt/t<-(1-c)=c-1$ because $1/t>1$ on the interior of $[c,1]$; at $c=1$ the integral is zero. Thus $c-\\log c-1\\ge0$, with equality exactly at $c=1$, so $w(C)=\\frac G2\\sum_i(c_i-\\log c_i-1)\\ge0$, with equality exactly when all $c_i=1$, that is, $C=I$.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "4.2",
+          "step": "4.2",
+          "claim": "By [F6], write $C=U\\operatorname{diag}(c_1,c_2,c_3)U^{\\mathsf T}$ with $c_i>0$. The unique positive square root and inverse square root in [F8] are $U\\operatorname{diag}(\\sqrt{c_i})U^{\\mathsf T}$ and $U\\operatorname{diag}(c_i^{-1/2})U^{\\mathsf T}$, respectively. Thus $C^{-1}=U\\operatorname{diag}(c_i^{-1})U^{\\mathsf T}$ and $\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6=\\sum_{i=1}^3(c_i+c_i^{-1}-2)=\\sum_{i=1}^3(\\sqrt{c_i}-c_i^{-1/2})^2\\ge0$.",
+          "inputs": [
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "5.1",
+          "step": "5.1",
+          "claim": "Since $C$ is positive definite by step 2.2 and $\\det C>0$ by step 4.1, Jacobi's formula and the derivative of logarithm in [F5] give $\\frac{d}{dt}w(C)=\\frac G2\\operatorname{tr}((I-C^{-1})C')$. Substituting [A1] and multiplying out gives\n$\\operatorname{tr}((I-C^{-1})(LC+CL^{\\mathsf T}))=\\operatorname{tr}(LC)+\\operatorname{tr}(CL^{\\mathsf T})-\\operatorname{tr}(C^{-1}LC)-\\operatorname{tr}(L^{\\mathsf T})$.\nThe finite-sum identity $\\operatorname{tr}(AB)=\\operatorname{tr}(BA)$ and $C^{\\mathsf T}=C$ give $\\operatorname{tr}(CL^{\\mathsf T})=\\operatorname{tr}(LC)$, $\\operatorname{tr}(C^{-1}LC)=\\operatorname{tr}L$, and $\\operatorname{tr}(L^{\\mathsf T})=\\operatorname{tr}L$. Also $(C-I):D=\\operatorname{tr}((C-I)L)=\\operatorname{tr}(LC)-\\operatorname{tr}L$, since the contraction of a symmetric matrix with the skew part of $L$ is zero. Therefore the displayed linear term is $2(C-I):D$. Direct multiplication gives $(I-C^{-1})(C-I)=C+C^{-1}-2I$, so its trace is $\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6$. Hence $\\frac{d}{dt}w=G(C-I):D-\\frac{G}{2\\lambda}(\\operatorname{tr}C+\\operatorname{tr}C^{-1}-6)$.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 2.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "6.1",
+          "step": "6.1",
+          "claim": "From [A1], $(\\tau_s+\\tau_p):D=2\\eta_sD:D+G(C-I):D$. Subtracting the derivative in step 5.1 gives the identity in the Statement; it is nonnegative by $\\eta_s\\ge0$, $D:D\\ge0$, and step 4.2. Since $D^*=QDQ^{\\mathsf T}$ and $C^*=QCQ^{\\mathsf T}$, the stress definitions give $\\tau_s^*=Q\\tau_sQ^{\\mathsf T}$ and $\\tau_p^*=Q\\tau_pQ^{\\mathsf T}$; trace and determinant invariance give $w(C^*)=w(C)$.",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "step 4.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $T>0$, let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $u\\in C^1(J\\times\\Omega;\\mathbb R^3)$ satisfy $\\operatorname{div}u=0$ on a neighborhood of a $C^1$ trajectory $x:[0,T]\\to\\Omega$ with $x'(t)=u(t,x(t))$. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Set $L(t)=\\nabla u(t,x(t))$ and $D(t)=(L(t)+L(t)^{\\mathsf T})/2$, both with units $\\mathrm{s}^{-1}$. Let $\\mathrm{Sym}(3)$ denote the real symmetric $3\\times3$ matrices and $\\mathrm{Sym}^+(3)=\\{M\\in\\mathrm{Sym}(3):v^{\\mathsf T}Mv>0\\text{ for every }v\\ne0\\}$. Let $C\\in C^1([0,T];\\mathrm{Sym}(3))$ be dimensionless and satisfy"
+          },
+          "evidence": "T>0 and a pathline on [0,T] are explicit; no empty-interval case is included. Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "where $C_0\\in\\mathrm{Sym}^+(3)$, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,"
+          },
+          "evidence": "At eta_s=0 the solvent term vanishes; step 6.1 gives zero power when D=0,C=I. Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "where $C_0\\in\\mathrm{Sym}^+(3)$, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,"
+          },
+          "evidence": "Step 4.1 writes w as scalar terms that vanish exactly at eigenvalue one. Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "where $C_0\\in\\mathrm{Sym}^+(3)$, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,"
+          },
+          "evidence": "Step 2.2 uses strict initial positivity and a positive source. Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "where $C_0\\in\\mathrm{Sym}^+(3)$, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,"
+          },
+          "evidence": "Steps 1.1 and 5.1 use one-sided endpoint derivatives; identities extend by continuity. Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $T>0$, let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $u\\in C^1(J\\times\\Omega;\\mathbb R^3)$ satisfy $\\operatorname{div}u=0$ on a neighborhood of a $C^1$ trajectory $x:[0,T]\\to\\Omega$ with $x'(t)=u(t,x(t))$. Here $C^r$ means that coordinate partial derivatives through total order $r$ exist and are continuous. Set $L(t)=\\nabla u(t,x(t))$ and $D(t)=(L(t)+L(t)^{\\mathsf T})/2$, both with units $\\mathrm{s}^{-1}$. Let $\\mathrm{Sym}(3)$ denote the real symmetric $3\\times3$ matrices and $\\mathrm{Sym}^+(3)=\\{M\\in\\mathrm{Sym}(3):v^{\\mathsf T}Mv>0\\text{ for every }v\\ne0\\}$. Let $C\\in C^1([0,T];\\mathrm{Sym}(3))$ be dimensionless and satisfy"
+          },
+          "evidence": "The unique fundamental matrix and integral in steps 1.1-2.2 need no choice. Statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "where $C_0\\in\\mathrm{Sym}^+(3)$, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,"
+          },
+          "evidence": "Step 4.1 substitutes C=I and obtains w=0. Statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "where $C_0\\in\\mathrm{Sym}^+(3)$, $G>0$ is in $\\mathrm{Pa}$, $\\lambda>0$ is in $\\mathrm{s}$, and $\\eta_s\\ge0$ is in $\\mathrm{Pa\\,s}$. Derivatives of $C$ at the endpoints are one-sided. Define $\\tau_p=G(C-I)$ and $\\tau_s=2\\eta_sD$, both in $\\mathrm{Pa}$. On $\\mathrm{Sym}^+(3)$ define the stored-energy density $w(C)=\\frac G2(\\operatorname{tr}C-\\log\\det C-3)$ in $\\mathrm{J\\,m^{-3}}$, where $\\log r:=\\int_1^r ds/s$ for $r>0$. Then $C(t)$ remains positive definite for every $t\\in[0,T]$, $w(C(t))\\ge0$, with equality exactly when $C(t)=I$, and for every $t$,"
+          },
+          "evidence": "Step 4.1 proves w=0 forces every eigenvalue to be one, hence C=I. Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "rest equilibrium",
+          "inputs": [
+            "A1",
+            "step 4.1",
+            "step 4.2",
+            "step 6.1"
+          ],
+          "expected": "For L=D=0 and C=I, dC/dt=0, w=0, and both sides of the storage identity vanish."
+        },
+        {
+          "name": "isotropic relaxation",
+          "inputs": [
+            "A1",
+            "step 4.2",
+            "step 5.1",
+            "step 6.1"
+          ],
+          "expected": "For L=0,C=cI,c>0, w=(3G/2)(c-log c-1) and -dw/dt=(3G/(2lambda))(c+c^-1-2), matching the relaxation term."
+        },
+        {
+          "name": "pure rigid rotation",
+          "inputs": [
+            "F10",
+            "step 3.1",
+            "step 6.1"
+          ],
+          "expected": "For D=0 and L skew-symmetric, C=I is stationary and orthogonal conjugation preserves positivity, determinant and energy."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic specializations of the displayed definitions or arguments; no empirical measurement or inference is asserted."
+    },
+    "ex-fdmath-bingham-zero-rate-stress": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fd-bingham-monotone-graph",
+          "source_section": "Statement",
+          "quote": "Define the Bingham graph by $\\mathcal B(D)=\\{2\\mu_pD+\\tau_yD/|D|\\}$ when $D\\ne0$, and by $\\mathcal B(0)=\\{\\tau\\in\\mathcal S_0:|\\tau|\\le\\tau_y\\}$ when $D=0$; its graph stresses are in $\\mathrm{Pa}$. Then $\\Phi$ is finite, nonnegative, and convex; $\\mathcal B(D)=\\partial\\Phi(D)$ for every $D$; the graph is monotone in the sense that $(\\tau_1-\\tau_2):(D_1-D_2)\\ge0$ whenever $\\tau_i\\in\\mathcal B(D_i)$; every graph value satisfies $\\tau:D\\ge0$; and, for $Q\\in SO(3)$, $\\mathcal B(QDQ^{\\mathsf T})=Q\\mathcal B(D)Q^{\\mathsf T}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "The diagonal entries of $S$ sum to zero, so $S\\in\\mathrm{Sym}_0(3)$; its squared Frobenius norm is $\\tau_y^2/2+\\tau_y^2/2=\\tau_y^2$, and $S\\ne0$ because $\\tau_y>0$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "By [F1] and step 1.1, $|S|=\\tau_y$ places $S$ in $\\mathcal B(0)$.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "The pair $D=0,\\tau=S\\ne0$ is therefore an element of the graph, which refutes the implication that zero strain rate forces zero deviatoric stress for this model.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $\\tau_y>0$, let $D=0\\in\\mathrm{Sym}_0(3)$, and use the Frobenius-norm Bingham graph whose zero-rate value is $\\{\\tau\\in\\mathrm{Sym}_0(3):|\\tau|\\le\\tau_y\\}$. The tensor"
+          },
+          "evidence": "The strict yield hypothesis is essential because tau_y=0 makes the ball {0}. Example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $\\tau_y>0$, let $D=0\\in\\mathrm{Sym}_0(3)$, and use the Frobenius-norm Bingham graph whose zero-rate value is $\\{\\tau\\in\\mathrm{Sym}_0(3):|\\tau|\\le\\tau_y\\}$. The tensor"
+          },
+          "evidence": "The Example fixes D=0 and step 1.2 verifies membership there. Example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "is nonzero, trace-free, and has Frobenius norm $\\tau_y$, so $S\\in\\mathcal B(0)$. Thus zero strain rate does not imply zero deviatoric stress in this set-valued Bingham model."
+          },
+          "evidence": "The closed-ball boundary |S|=tau_y is included in F1. Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $\\tau_y>0$, let $D=0\\in\\mathrm{Sym}_0(3)$, and use the Frobenius-norm Bingham graph whose zero-rate value is $\\{\\tau\\in\\mathrm{Sym}_0(3):|\\tau|\\le\\tau_y\\}$. The tensor"
+          },
+          "evidence": "If tau_y=0 the displayed S vanishes, so the strict assumption is necessary. Example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $\\tau_y>0$, let $D=0\\in\\mathrm{Sym}_0(3)$, and use the Frobenius-norm Bingham graph whose zero-rate value is $\\{\\tau\\in\\mathrm{Sym}_0(3):|\\tau|\\le\\tau_y\\}$. The tensor"
+          },
+          "reason": "The Example has no time variable or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $\\tau_y>0$, let $D=0\\in\\mathrm{Sym}_0(3)$, and use the Frobenius-norm Bingham graph whose zero-rate value is $\\{\\tau\\in\\mathrm{Sym}_0(3):|\\tau|\\le\\tau_y\\}$. The tensor"
+          },
+          "evidence": "The tensor is displayed explicitly; no choice is involved. Example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "is nonzero, trace-free, and has Frobenius norm $\\tau_y$, so $S\\in\\mathcal B(0)$. Thus zero strain rate does not imply zero deviatoric stress in this set-valued Bingham model."
+          },
+          "reason": "The Example is a counterexample, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "is nonzero, trace-free, and has Frobenius norm $\\tau_y$, so $S\\in\\mathcal B(0)$. Thus zero strain rate does not imply zero deviatoric stress in this set-valued Bingham model."
+          },
+          "reason": "The Example is a counterexample, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "boundary stress tensor",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ],
+          "expected": "For S=diag(tau_y/sqrt(2),-tau_y/sqrt(2),0), trace S=0, |S|=tau_y and S is nonzero in B(0)."
+        }
+      ],
+      "finite_checks_disposition": "Exact symbolic specializations of the displayed definitions or arguments; no empirical measurement or inference is asserted."
+    }
+  }
+}

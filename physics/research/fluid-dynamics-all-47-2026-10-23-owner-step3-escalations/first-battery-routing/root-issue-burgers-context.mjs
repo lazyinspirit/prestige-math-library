@@ -1,0 +1,13 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {externalContextReceipt} from '../../../tools/physics-support/step3-escalations.mjs';
+const run='fluid-dynamics-all-47-2026-10-23',base=`research/${run}-owner-step3-escalations/first-battery-routing`,candidate=`${base}/root-integration-staging/materialized-context-2026-10-22T22-23-24.753Z.json`,read=p=>JSON.parse(fs.readFileSync(p)),sha=x=>createHash('sha256').update(x).digest('hex');
+assert.ok(process.argv.includes('--root-reviewed-writers-drained'));assert.ok(!fs.existsSync(`.physics-autopilot/${run}/controller.lock`));
+const state=read(`.physics-autopilot/${run}/state.json`);assert.ok(!Object.values(state.dispatches).some(x=>x.startedAt&&!x.endedAt));
+const receipt=read(candidate);assert.equal(receipt.reviewed_by,null);assert.equal(receipt.contexts.length,1);assert.equal(receipt.contexts[0].obligation,'reader:23:11');
+const path=`research/${run}-step3-owner-external-context.json`,decisionPath=`research/${run}-alpha-batch-23-3a-decisions.json`,before=fs.readFileSync(decisionPath),doc=JSON.parse(before),matches=doc.decisions.filter(x=>x.obligation==='reader:23:11');assert.equal(matches.length,1);const d=matches[0];assert.equal(d.verdict,'context_accepted');assert.ok(!fs.existsSync(path));
+const archive=`${base}/before-root-external-context`;fs.mkdirSync(archive);fs.writeFileSync(`${archive}/decision23.json`,before,{flag:'wx'});fs.copyFileSync(candidate,`${archive}/reviewed-candidate.json`,fs.constants.COPYFILE_EXCL);
+receipt.reviewed_by='root';receipt.reviewed_at=new Date().toISOString();receipt.status='Root adopts the attributed complete exact shock-use review and current literal premises. Published presentation maintenance remains deferred/open and the distinct rarefaction proof omission remains nonfatal maintenance; no original, import or source edited.';
+const raw=JSON.stringify(receipt,null,2)+'\n';d.context_receipt_sha256=sha(raw);fs.writeFileSync(path,raw,{flag:'wx'});assert.deepEqual(fs.readFileSync(decisionPath),before);fs.writeFileSync(decisionPath,JSON.stringify(doc,null,2)+'\n');
+const check=externalContextReceipt(process.cwd(),run,d);assert.equal(check.valid,true,check.error);
+fs.writeFileSync(`${base}/root-external-context-integration.json`,JSON.stringify({run,owner:'/root',at:new Date().toISOString(),archive,receipt_path:path,receipt_sha256:sha(raw),actual_context_guard:check,source_edits:0,native_subject_stamp_pending:true,gates_attempted:0},null,2)+'\n',{flag:'wx'});
+console.log({actual_external_context_valid:check.valid,retained_maintenance_rows:check.defect_ids,receipt_sha256:sha(raw)});

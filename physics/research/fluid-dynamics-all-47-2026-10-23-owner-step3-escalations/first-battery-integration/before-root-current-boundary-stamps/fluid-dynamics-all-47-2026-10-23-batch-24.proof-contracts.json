@@ -1,0 +1,1211 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "post-fd-periodic-newtonian",
+    "pthm-fd-periodic-weak-continuation",
+    "pthm-fd-smooth-consistency",
+    "post-fd-no-slip-newtonian",
+    "pthm-fd-bounded-weak-continuation",
+    "pthm-fd-rectangular-weak-pressure",
+    "rem-fd-thermal-coupling"
+  ],
+  "contracts": {
+    "post-fd-periodic-newtonian": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The uninterrupted Postulate states the adopted constant-density, positive-viscosity Newtonian stress and weak variational formulation with its domains, fields, and SI units. Actual def-fd-quantity-and-frame-conventions supplies only the Cartesian/SI/D/traction dictionary; weak adoption remains explicitly separate."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Postulate limits the claim to the unforced periodic cell and explicitly declines empirical universality, unsupported regularity, and any unmodeled branch."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item records two independent full-text treatments with exact URLs and locators in its source metadata; coverage records every harvested result and the resolved PDF endpoint."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is explicitly an adopted model assumption, not a derivation that every real fluid obeys it or an empirical observation."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Reviewed the complete adopted Postulate against the actual frame/SI dictionary, periodic Fourier spaces and Leray–Hopf definition. Positive L,rho0,mu, normalized measure, unrestricted mean, stress sign and row-divergence conventions agree. The smooth reduction div(2mu D)=mu Delta u uses constant viscosity and div u=0; the weak identity and both energy inequalities are separately adopted, with actual C_w representative and strong initial trace. No boundary wall, temperature variable, pressure regularity, uniqueness, or empirical inference is introduced. Zero and constant velocities are admitted; L=0,mu=0,rho0=0 are excluded. No diagram or reader/refuter defect concerns this item."
+      }
+    },
+    "pthm-fd-periodic-weak-continuation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-periodic-newtonian",
+          "source_section": "Postulate",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval measured in seconds. Fix $L>0$ as the numerical period in the declared SI metre unit, so the physical side length is $L\\,\\mathrm m$, and use the flat periodic cell $\\mathbb T_L^3=(\\mathbb R/L\\mathbb Z)^3$ with normalized spatial measure $L^{-3}dx$. Spatial coordinates in physical volume integrals are measured in metres. Assume Countable Choice for the stated Fourier and Sobolev space conventions. The velocity is a vector field $u:I\\times\\mathbb T_L^3\\to\\mathbb R^3$ with SI units $\\mathrm{m\\,s^{-1}}$; the mass density is a constant primitive parameter $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$; the dynamic viscosity is a constant primitive parameter $\\mu>0$ in $\\mathrm{Pa\\,s}$; and the mechanical pressure $p$ has units $\\mathrm{Pa}$. The body-force density is zero (its SI unit is $\\mathrm{N\\,m^{-3}}$), and there is no temperature variable in this model.\n\nFor classical fields take $u\\in C^1(I;C^2(\\mathbb T_L^3;\\mathbb R^3))$ and $p\\in C^1(I;C^1(\\mathbb T_L^3))$. Adopt incompressibility $\\operatorname{div}u=0$ and the local momentum balance\n$$\\rho_0\\bigl(\\partial_tu+\\operatorname{div}(u\\otimes u)\\bigr)=\\operatorname{div}\\sigma,\\qquad \\sigma=-pI_3+2\\mu D(u),\\qquad D(u)=\\tfrac12\\bigl(\\nabla u+(\\nabla u)^{\\mathsf T}\\bigr).$$\nHere $\\sigma$ is the Cauchy stress, so its traction on an oriented surface with unit normal $n$ is $\\sigma n$; $D(u)$ is the symmetric rate-of-deformation tensor; and $\\nabla$ has units $\\mathrm{m^{-1}}$. Every term in the momentum balance has units $\\mathrm{N\\,m^{-3}}$. Since $\\operatorname{div}u=0$, this equation is equivalently\n$$\\partial_tu+\\operatorname{div}(u\\otimes u)+\\nabla\\pi=\\nu\\Delta u,\\qquad \\nu=\\mu/\\rho_0>0,\\qquad \\pi=p/\\rho_0.$$\nwhere kinematic viscosity $\\nu$ and kinematic pressure $\\pi$ have units $\\mathrm{m^2\\,s^{-1}}$ and $\\mathrm{m^2\\,s^{-2}}$, respectively. All fields are periodic in each spatial coordinate; this is an ideal cell, not a wall-bounded vessel.\n\nFor the weak regime, use the global unforced periodic Leray–Hopf class. The spaces are $H$, the real $L^2$ vector fields whose divergence vanishes distributionally on $\\mathbb T_L^3$, with unrestricted constant Fourier mode, and $V=H\\cap H^1$, where $H^1$ consists of fields and first weak derivatives in $L^2$; use normalized spatial norms. Here $C_w([0,\\infty);H)$ means that $t\\mapsto (u(t),h)_H$ is continuous for every fixed $h\\in H$; the time-dependent $L^p$ spaces are the corresponding Bochner spaces. A weak velocity has $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$, strongly attains $u_0\\in H$ as $t\\downarrow0$, and satisfies, for every smooth real periodic divergence-free test field $\\phi$ compactly supported in time,\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\bigr]dt+(u_0,\\phi(0))=0.\n$$\nThe tensor pairing is $L^{-3}\\int_{[0,L]^3}u_i u_j\\partial_j\\phi_i\\,dx$, and the gradient pairing is $L^{-3}\\int_{[0,L]^3}\\partial_j u_i\\partial_j\\phi_i\\,dx$. The class also requires\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2\\qquad(t\\ge0),\n$$\nand a full-measure set $S\\subset(0,\\infty)$ such that\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2\\qquad(s\\in S\\cup\\{0\\},\\ t\\ge s).\n$$\nThis weak convention asserts neither uniqueness nor pressure regularity. These equations and the solution class are adopted model assumptions; they are not deductions that every physical fluid obeys them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$.\n\nThe periodic scalar test functions are $C^\\infty(\\mathbb T_L^d;\\mathbb C)$, identified with smooth $L$-periodic lifts to $\\mathbb R^d$ and equipped with the seminorms\n$$p_m(\\varphi)=\\max_{|\\alpha|\\le m}\\sup_{x\\in\\mathbb T_L^d}|\\partial^\\alpha\\varphi(x)|\\qquad(m\\in\\mathbb N_0).$$\nA periodic distribution is a continuous complex-linear functional on this test space, with bilinear pairing. Its derivative is defined by\n$$\\langle\\partial_j T,\\varphi\\rangle=-\\langle T,\\partial_j\\varphi\\rangle.$$\nFor $f\\in L^2(\\mathbb T_L^d;\\mathbb C)$, its associated regular distribution is $T_f(\\varphi)=\\int_{\\mathbb T_L^d}f\\varphi\\,d\\mu$; vector fields are treated componentwise. This is continuous since $|\\int f\\varphi\\,d\\mu|\\le\\|f\\|_2p_0(\\varphi)$. For a vector distribution $U=(U_1,\\ldots,U_d)$, define\n$$\\langle\\operatorname{div}U,\\varphi\\rangle=-\\sum_{j=1}^d\\langle U_j,\\partial_j\\varphi\\rangle.$$\nThus, for $u\\in L^2(\\mathbb T_L^d;\\mathbb R^d)$, $\\operatorname{div}u=0$ distributionally means\n$$\\int_{\\mathbb T_L^d}u(x)\\cdot\\nabla\\varphi(x)\\,L^{-d}dx=0\\qquad(\\varphi\\in C^\\infty(\\mathbb T_L^d;\\mathbb C)).$$\n\nFor $s\\ge0$, let\n$$H^s(\\mathbb T_L^d)=\\left\\{f\\in L^2:\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty\\right\\},$$\nwith norm given by the square root of this sum; the weight is dimensionless.\nUnder Countable Choice the coefficient map is injective, so this is a norm.\nThe real solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. Under Countable Choice, the supplied\nFourier-basis theorem makes the coefficient map a surjective isometry from\n$L^2$ onto $\\ell^2$; the coefficient-space norm identifications and the\nequivalence between Fourier divergence and distributional divergence in this\ndefinition use that hypothesis. Under the same assumption, the orthogonal\nsolenoidal projection $P$ is well-defined on $L^2$ and has multiplier\n$P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$. For integer\n$N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the Hilbert completion of finite complex Fourier\ncoefficient sequences in the norm squared\n$\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$; its real subspace is the\ncompletion of the conjugate-symmetric sequences.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-leray-hopf",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$, $L>0$, $\\nu>0$, $u_0\\in H$, and use the spaces and weak-time\nconventions of Periodic solenoidal Fourier spaces and\nWeak time continuity and energy spaces. A **global unforced periodic Leray–Hopf\nsolution** with data $(\\nu,u_0)$ is a map\n$u:[0,\\infty)\\to H$ such that its restriction to each finite interval is in\n$C_w([0,T];H)$ and its Bochner equivalence classes satisfy\n$u\\in L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$. All clauses\ninvolving $u(t)$ at a specified time, including the initial trace and energy\ninequalities, refer to this weakly continuous map. By the uniqueness result in\nWeak time continuity and energy spaces, it is the unique weakly continuous\nrepresentative of those Bochner classes. It must satisfy $u(0)=u_0$ in $H$,\n$\\|u(t)-u_0\\|_H\\to0$ as $t\\downarrow0$, and for\nevery smooth real periodic divergence-free test field\n$\\phi:[0,\\infty)\\times\\mathbb T_L^d\\to\\mathbb R^d$ compactly supported in\ntime,\n$$\\int_0^\\infty\\!\\big[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\big]dt+(u_0,\\phi(0))=0.$$\nIt must also satisfy, for every $t\\ge0$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2,$$\nand there must be a full-measure set $S\\subset(0,\\infty)$ such that for\nevery $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.$$\nFor a matrix field $A$, $(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$. The tensor pairing means $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$;\nthe gradient pairing means $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$.\nAll derivatives in the weak identity are distributional; the definition\nasserts neither uniqueness nor smoothness.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-periodic-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, $L>0$, $\\nu>0$, and $u_0\\in H$ for the periodic solenoidal\nFourier spaces defined above. Then there\nexists a global unforced periodic Leray–Hopf solution with data $(\\nu,u_0)$\nunder the definition above. This is an existence assertion; it asserts no\nuniqueness or global smoothness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the classical model, $\\operatorname{div}(u\\otimes u)=(u\\cdot\\nabla)u$ follows componentwise from $\\operatorname{div}u=0$, and $\\operatorname{div}(2\\mu D(u))=\\mu\\Delta u+\\mu\\nabla\\operatorname{div}u=\\mu\\Delta u$. When tested against a periodic divergence-free $\\phi$, the pressure term pairs to zero. For weak $u,\\phi\\in V$, the diffusion form has the same meaning: $2D(u):\\nabla\\phi=\\nabla u:\\nabla\\phi+\\partial_j u_i\\partial_i\\phi_j$. Finite Fourier truncations of $u$ and $\\phi$ remain divergence free, are smooth, and converge to them in $H^1$ by [F1]; for each truncation, periodic integration by parts makes the integral of the cross term $-\\int u_i\\partial_i(\\operatorname{div}\\phi)=0$. Continuity of the bilinear forms in $H^1$ passes this identity to the limit. Thus division by $\\rho_0$ gives exactly the weak identity in [F2] with $\\nu=\\mu/\\rho_0>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $d=3\\ge2$, the cell length is $L>0$, the viscosity is $\\nu>0$, and $u_0\\in H$, [F3] supplies a global weak velocity with the identity and inequalities in [F2] under Countable Choice [A2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "A2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], $\\|u(t)\\|_2^2=L^{-3}\\int_{[0,L]^3}|u(t,x)|^2dx$ and $\\|\\nabla u(t)\\|_2^2=L^{-3}\\int_{[0,L]^3}|\\nabla u(t,x)|^2dx$. Multiplying the normalized initial energy inequality by $\\rho_0L^3/2$, and using $\\rho_0\\nu=\\mu$, gives the displayed SI kinetic-energy inequality. Applying the same positive factor to each restart inequality gives the stated restart form.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty spatial domain; the excluded empty case is outside its hypotheses.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is conditional periodic weak existence and SI energy inequalities; step 1.1 matches the stress weak form, step 2.1 invokes existence and step 3.1 scales by rho0 L^3/2. L>0 fixes a nonempty 3D torus, and the pairings sum over three fixed coordinate indices. Zero velocity is admitted without making those index sets empty.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The same L>0 gives a nonempty three-dimensional physical torus. The native edits qualify suppliers and metadata but do not change the fixed three coordinate sums or admit an empty cell.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "084d2e58bfd90f4c4c793ab31cc9ee14ce10bb2e77e557428c17013c4aa06c0e",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero initial velocity is permitted by the supplier hypotheses and is covered in step 2.1; the energy conversion is checked in the stated proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "For u0=0,the supplier initial energy inequality forces ||u(t)||H=0 for each t. Step 2.1 supplies that inequality and step 3.1 scales it by positive rho0 L^3/2,so this zero-data case persists without adding general weak uniqueness.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "906306f365139d091969876cf0720bd408412b519d15207e8ba6a60f2701e5ad",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate cardinality parameter in this continuous-field statement, so a one-element boundary case is not applicable.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Statement still fixes a 3D torus and continuous fields,with no variable finite cardinality. Step 2.1 explicitly applies the d=3 supplier;L=1 is an ordinary admitted positive unit scale,not a singleton boundary.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "7abfca523d79a7f9d1a294cd9c805d2b93ea20039a451c5905676502e3672f87",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated domain lengths and positive density/viscosity hypotheses exclude the relevant degenerate geometry or zero-viscosity limit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "rho0>0,mu>0,L>0 remain strict. Thus nu=mu/rho0>0 and the physical theorem claims no inviscid or collapsed-cell continuation after the native supplier qualifications.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "1f4606ea1c834ce431ec58e8f9da49819dabab75c2d6577116d03319b65bcc6e",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial or terminal time behavior is part of the stated conclusion and is checked in step 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Step 2.1 obtains the actual velocity map,strong trace at zero and all-time/restart inequalities;step 3.1 applies a positive factor to both physical energy forms. This preserves t=0 and equal-time cases and asserts no state at infinity.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "1c38e5a06a4b3bd1ea82e03045c096b07ff4d6e6168b8fc6cf6d264c540ce786",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The required nonempty selections are covered by the explicit choice hypotheses and the cited construction in step 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Countable Choice is still explicit in the physical Statement and A2. Step 2.1 invokes mathematical weak existence whose current proof now makes a single horizon-compatible full-measure restart selection;the physical use adds no stronger principle.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "5cf4ad459bdf8376c6b2d25c3191f3745fdab91b83abd48ce052904a4f5615ba",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts a conditional result, not an equivalence; there is no forward implication branch to check.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The result remains conditional physical-model weak existence and SI energy conversion. Step 1.1 matches stress weak form and steps 2.1–3.1 deduce conclusions,not a forward equivalence of model and existence.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "044b246dd203b1e133a96991398509efde42da89bdfd77953f72d5b4f6578f24",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts a conditional result, not an equivalence; there is no reverse implication branch to check.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Nothing in the theorem infers physical premises from a weak velocity or from its energy bound. The supplier recasting has introduced no reverse model-validity claim.",
+            "item_sha256": "230f15aeaf9b205494a386055e3c79da083c7b8dc2a0153e78863f522eca0c90",
+            "row_sha256": "bd9dc3322f9f0ec98bd0571cedc76d89cace2bd3d7eb86f49fab5296f912f102",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "normalized-to-SI energy coefficient",
+          "calculation": "Multiplication by ρ₀L³/2 changes the normalized gradient term to (ρ₀L³/2)(2νL⁻³)=ρ₀ν=μ, and the normalized velocity norm to K=(ρ₀/2)∫|u|²dx.",
+          "disposition": "Exact algebra and SI unit conversion; no empirical input."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all three proof steps and current periodic existence proof/solution definition. Fourier truncations converge in H1, remain solenoidal and justify cancellation of the cross-gradient integral on the periodic cell. The supplier has d>=2, L>0, nu>0, Countable Choice and unrestricted mean; d=3 and the physical parameters meet these exactly. Its Galerkin energy, strong L2 compactness and single horizon-compatible full-measure restart set supply the actual all-time representative and initial/restart inequalities. Multiplication by rho0 L^3/2 converts normalized norms to SI volume energy with coefficient mu. Zero and nonzero constant modes, t=0 and t=s are covered; viscosity/density/length degeneracies excluded. No claim of weak uniqueness, pressure regularity or empirical validity. No diagram or routed finding concerns this item."
+      }
+    },
+    "pthm-fd-smooth-consistency": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "pthm-fd-periodic-weak-continuation",
+          "source_section": "Statement",
+          "quote": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ be constant in $\\mathrm{kg\\,m^{-3}}$ and $\\mu>0$ constant in $\\mathrm{Pa\\,s}$. Set $\\nu=\\mu/\\rho_0>0$. On $\\mathbb T_L^3$, use normalized Lebesgue measure $L^{-3}dx$, and let $H$ be the real $L^2$ vector fields whose divergence vanishes distributionally, with unrestricted mean mode, and $V=H\\cap H^1$, where $H^1$ consists of fields and first weak derivatives in $L^2$. Here $H^s_\\sigma$ means the real Fourier-weighted Sobolev space with weights $(1+L^2|\\kappa_k|^2)^s$, Fourier divergence condition $k\\cdot\\widehat u(k)=0$ for $k\\ne0$, and unrestricted constant mode. Let $u_0\\in H$ be an initial velocity measured in $\\mathrm{m\\,s^{-1}}$. Assume Countable Choice. Then the adopted unforced periodic model has a global weak velocity $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\mathrm{loc}}(0,\\infty;V)$, where $C_w$ means continuity of each fixed $H$-pairing and the time-dependent spaces are strongly measurable Bochner spaces, with $u(0)=u_0$ and strong $H$ trace at zero. For every smooth real periodic divergence-free test field $\\phi$ compactly supported in time it satisfies\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\bigr]dt+(u_0,\\phi(0))=0,\n$$\nwhere the spatial pairings use the normalized measure and $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$. It also satisfies, for every $t\\ge0$,\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u(s)\\|_2^2ds\\le\\|u_0\\|_2^2,\n$$\nand there is a full-measure set $S\\subset(0,\\infty)$ such that for every $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\n\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u(\\tau)\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.\n$$\nIn SI units the kinetic energy is $K(t)=\\frac{\\rho_0}{2}\\int_{[0,L]^3}|u(t,x)|^2dx$, and the inequality implies\n$$\nK(t)+\\mu\\int_0^t\\int_{[0,L]^3}|\\nabla u(s,x)|^2dx\\,ds\\le K(0).\n$$\nThere is also a full-measure set $S\\subset(0,\\infty)$ such that for every $s\\in S\\cup\\{0\\}$ and every $t\\ge s$,\n$$\nK(t)+\\mu\\int_s^t\\int_{[0,L]^3}|\\nabla u(\\tau,x)|^2dx\\,d\\tau\\le K(s).\n$$\nThis is a conditional model deduction about velocity; it asserts no pressure regularity, weak uniqueness, global smoothness, or empirical validity.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-local-smooth-periodic-euler-viscous-solution",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0\\in H^s_\\sigma(\\mathbb T^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T^3;\\mathbb R^3)$ be a smooth divergence-free field (so that $\\|u_0\\|_{H^m}<+\\infty$ for every $m$). Let $Y_0:=\\|u_0\\|_{H^s}$, let $C_s$ be the commutator constant of [[lem-tame-transport-commutator]], and set\n$$T:=\\begin{cases}(2C_sY_0)^{-1},&Y_0>0,\\\\ 1,&Y_0=0.\\end{cases}$$\nThen there exists a field $u\\in C^\\infty([0,T]\\times\\mathbb T^3;\\mathbb R^3)$ such that:\n\n1. $u(0,\\cdot)=u_0$; for every real $m\\ge s$ the identity\n$$\\partial_tu+P\\bigl((u\\cdot\\nabla)u\\bigr)=\\nu\\Delta u$$\nholds in $C([0,T],H^{m-2})$ (hence pointwise on the strip after the smoothness conclusion), where $P$ is the Leray projection of [[def-periodic-vector-sobolev-space-and-leray-projection]]; the identities $\\operatorname{div}u=0$ and $\\int_{\\mathbb T^3}u(t,x)\\,dx=\\int_{\\mathbb T^3}u_0(x)\\,dx$ hold for all $t$;\n2. for every real $m\\ge s$ the uniform bound $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}\\le B_m:=\\|u_0\\|_{H^m}e^{4C_mY_0T}$ holds, where $C_m$ is the commutator constant of order $m$;\n3. if $Y_0=0$ then $u_0=0$ and $u\\equiv0$. The existence time $T$ depends only on the single number $Y_0=\\|u_0\\|_{H^s}$ (and on $s$), not on the finer profile of $u_0$; the case $\\nu=0$ is the periodic incompressible Euler model and $\\nu>0$ the constant-viscosity Navier-Stokes model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-pressure-reconstruction",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $T>0$, let $u:[0,T]\\times\\mathbb T^3\\to\\mathbb R^3$ be a field such that $u\\in C([0,T],H^m)$ for every real $m\\ge0$, $t\\mapsto u(t)$ is differentiable into $H^m$ with $\\partial_tu\\in C([0,T],H^m)$ for every $m$, $u(t)$ is divergence-free for every $t$, and $u$ solves the projected equation $\\partial_tu=\\nu\\Delta u-P((u\\cdot\\nabla)u)$ for some real $\\nu\\ge0$ (all in the sense of the spaces of [[def-periodic-vector-sobolev-space-and-leray-projection]]).\n\nDefine the real scalar field $p$ on $[0,T]\\times\\mathbb T^3$ by its Fourier coefficients\n$$\\widehat p(t,0):=0,\\qquad \\widehat p(t,k):=-\\frac{1}{|k|_2^2}\\sum_{i,j=1}^{3}k_ik_j\\,\\widehat{u_iu_j}(t,k)\\quad(k\\ne0),$$\nwhere $\\widehat{u_iu_j}(t,k)$ is the $k$-th Fourier coefficient of the product field $u_i(t,\\cdot)u_j(t,\\cdot)$. Then:\n\n1. $p\\in C([0,T],H^m)$ for every $m\\ge0$, $t\\mapsto p(t)$ is differentiable into every $H^m$, $p\\in C^\\infty([0,T]\\times\\mathbb T^3)$, and $\\int_{\\mathbb T^3}p(t,x)\\,dx=0$ for every $t$.\n2. The following identities hold on the strip:\n$$\\nabla p=-(I-P)\\bigl((u\\cdot\\nabla)u\\bigr),\\qquad \\partial_tu+(u\\cdot\\nabla)u=\\nu\\Delta u-\\nabla p,\\qquad \\Delta p=-\\sum_{i,j=1}^{3}\\partial_i\\partial_j(u_iu_j).$$\n3. **Uniqueness.** If $q\\in C^\\infty([0,T]\\times\\mathbb T^3)$ has $\\int_{\\mathbb T^3}q(t,\\cdot)\\,dx=0$ and $\\nabla q=\\nabla p$ for every $t$, then $q=p$; equivalently, $p$ is the unique smooth mean-zero pressure making $u$ solve the primitive-variable system.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-weak-smooth-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $d\\ge2$, $L>0$, $\\nu>0$,\nand $u_0\\in H$. Let $u:[0,\\infty)\\to H$ be the map in the Unforced periodic\nLeray–Hopf solution definition with data $(\\nu,u_0)$, using its unique weakly\ncontinuous representative, Bochner equivalence classes, weak identity, and\ninitial and restart energy inequalities. Suppose\n$v\\in C^\\infty([0,T]\\times\\mathbb T_L^d;\\mathbb R^d)$ and\n$q\\in C^\\infty([0,T]\\times\\mathbb T_L^d)$ satisfy $\\operatorname{div}v=0$ and\n$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla q=\\nu\\Delta v$, with\n$v(0)=u_0$. Then $u(t)=v(t)$ in $H$ for every $t\\in[0,T]$. More generally,\nfor $D(t)=\\|u(t)-v(t)\\|_2^2$,\n$$D(t)\\le D(0)+2\\int_0^t\\|\\nabla v(s)\\|_\\infty D(s)\\,ds.$$\nThis conditional result does not assert existence of such a smooth pair.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-periodic-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ be an integer, and let $L>0$ be the numerical period in a fixed\nlength unit. Let\n$\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$ carry normalized Lebesgue measure\n$L^{-d}dx$. For $k\\in\\mathbb Z^d$ put\n$\\kappa_k=2\\pi k/L$ and $e_k(x)=\\exp(i\\kappa_k\\cdot x)$. For a complex\nscalar or vector $L^2$ class $f$, let\n$\\widehat f(k)=L^{-d}\\int_{[0,L]^d}f(x)e^{-i\\kappa_k\\cdot x}\\,dx$;\nreal fields are the classes satisfying\n$\\widehat f(-k)=\\overline{\\widehat f(k)}$.\n\nThe periodic scalar test functions are $C^\\infty(\\mathbb T_L^d;\\mathbb C)$, identified with smooth $L$-periodic lifts to $\\mathbb R^d$ and equipped with the seminorms\n$$p_m(\\varphi)=\\max_{|\\alpha|\\le m}\\sup_{x\\in\\mathbb T_L^d}|\\partial^\\alpha\\varphi(x)|\\qquad(m\\in\\mathbb N_0).$$\nA periodic distribution is a continuous complex-linear functional on this test space, with bilinear pairing. Its derivative is defined by\n$$\\langle\\partial_j T,\\varphi\\rangle=-\\langle T,\\partial_j\\varphi\\rangle.$$\nFor $f\\in L^2(\\mathbb T_L^d;\\mathbb C)$, its associated regular distribution is $T_f(\\varphi)=\\int_{\\mathbb T_L^d}f\\varphi\\,d\\mu$; vector fields are treated componentwise. This is continuous since $|\\int f\\varphi\\,d\\mu|\\le\\|f\\|_2p_0(\\varphi)$. For a vector distribution $U=(U_1,\\ldots,U_d)$, define\n$$\\langle\\operatorname{div}U,\\varphi\\rangle=-\\sum_{j=1}^d\\langle U_j,\\partial_j\\varphi\\rangle.$$\nThus, for $u\\in L^2(\\mathbb T_L^d;\\mathbb R^d)$, $\\operatorname{div}u=0$ distributionally means\n$$\\int_{\\mathbb T_L^d}u(x)\\cdot\\nabla\\varphi(x)\\,L^{-d}dx=0\\qquad(\\varphi\\in C^\\infty(\\mathbb T_L^d;\\mathbb C)).$$\n\nFor $s\\ge0$, let\n$$H^s(\\mathbb T_L^d)=\\left\\{f\\in L^2:\\sum_{k\\in\\mathbb Z^d}(1+L^2|\\kappa_k|^2)^s|\\widehat f(k)|^2<\\infty\\right\\},$$\nwith norm given by the square root of this sum; the weight is dimensionless.\nUnder Countable Choice the coefficient map is injective, so this is a norm.\nThe real solenoidal spaces are\n$$H=\\{u\\in L^2(\\mathbb T_L^d;\\mathbb R^d): k\\cdot\\widehat u(k)=0\\text{ for every }k\\ne0\\},\\qquad V=H\\cap H^1(\\mathbb T_L^d;\\mathbb R^d).$$\nThe zero Fourier mode is unrestricted. Under Countable Choice, the supplied\nFourier-basis theorem makes the coefficient map a surjective isometry from\n$L^2$ onto $\\ell^2$; the coefficient-space norm identifications and the\nequivalence between Fourier divergence and distributional divergence in this\ndefinition use that hypothesis. Under the same assumption, the orthogonal\nsolenoidal projection $P$ is well-defined on $L^2$ and has multiplier\n$P_0=I$ and\n$P_k=I-\\kappa_k\\kappa_k^{\\mathsf T}/|\\kappa_k|^2$ for $k\\ne0$. For integer\n$N\\ge0$, rectangular truncation $\\Pi_N$ keeps precisely $|k|_\\infty\\le N$. A weak\nderivative in coordinate $j$ has Fourier coefficient $i\\kappa_{k,j}\\widehat f(k)$.\nFor $r>0$, $H^{-r}$ is the Hilbert completion of finite complex Fourier\ncoefficient sequences in the norm squared\n$\\sum_k(1+L^2|\\kappa_k|^2)^{-r}|\\widehat f(k)|^2$; its real subspace is the\ncompletion of the conjugate-symmetric sequences.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-periodic-vector-sobolev-space-and-leray-projection",
+          "source_section": "Definition",
+          "quote": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), which is used by the imported Fourier-basis theorem quoted below.\n\n**The three-torus and its measure.** Let $\\mathbb T:=\\mathbb R/\\mathbb Z$ be the one-dimensional torus with its quotient topology and its normalized Haar integral $m_{\\mathbb T}$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]); $\\mathbb T$ is compact Hausdorff ([[lem-finite-tori-are-compact-hausdorff-character-spaces]]). Put $\\mathbb T^3:=\\mathbb T\\times\\mathbb T\\times\\mathbb T$ with the finite product topology. Let $dx:=m_{\\mathbb T}\\otimes m_{\\mathbb T}\\otimes m_{\\mathbb T}$ be the product measure on the Borel $\\sigma$-algebra of $\\mathbb T^3$ ([[def-product-measure-on-sigma-finite-spaces]], [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]); being a product of probability measures it is a probability measure. For a vector $k=(k_1,k_2,k_3)\\in\\mathbb Z^3$ and $x=(x_1,x_2,x_3)\\in\\mathbb T^3$ define the **character**\n$$e_k(x):=\\exp\\bigl(2\\pi i\\,(k_1x_1+k_2x_2+k_3x_3)\\bigr)=e^{2\\pi i\\,k\\cdot x},$$\nwhere each $x_j$ is inserted through any real representative and $\\exp$ is the complex exponential ([[def-fourier-coefficients-and-trigonometric-polynomials]]); the definition does not depend on the representatives. Then $|e_k(x)|=1$, $e_k e_l=e_{k+l}$, and $e_{-k}=\\overline{e_k}$.\n\n**Function spaces.** Write $L^2:=L^2(\\mathbb T^3;\\mathbb R^3)$ for the real Hilbert space of (equivalence classes of) real Borel vector fields $u:\\mathbb T^3\\to\\mathbb R^3$ with $\\int_{\\mathbb T^3}|u|_2^2\\,dx<+\\infty$, inner product $\\langle u,v\\rangle:=\\int_{\\mathbb T^3}u\\cdot v\\,dx$ and norm $|u|_2:=\\langle u,u\\rangle^{1/2}$; here $u\\cdot v$ is the Euclidean inner product of $\\mathbb R^3$ ([[def-complex-lp-and-euclidean-test-function-conventions]]). Similarly $L^1(\\mathbb T^3;\\mathbb C^3)$ denotes the integrable complex vector fields.\n\n**Fourier coefficients.** For $u\\in L^1(\\mathbb T^3;\\mathbb C^3)$ and $k\\in\\mathbb Z^3$ define\n$$\\widehat u(k):=\\int_{\\mathbb T^3}u(x)\\,e_{-k}(x)\\,dx\\ \\in\\mathbb C^3 .$$\nThe integral depends only on the class of $u$. A field $u\\in L^1$ is real almost everywhere if and only if $\\widehat u(-k)=\\overline{\\widehat u(k)}$ for every $k\\in\\mathbb Z^3$; the forward direction uses $\\widehat{\\overline u}(k)=\\overline{\\widehat u(-k)}$, and the reverse uses $L^1$ Fourier uniqueness, proved below. On the circle this uniqueness follows from [[thm-fejer-convergence-in-lp]] with $p=1$: zero coefficients give zero Fejer means, whose $L^1$ limit is the function. To pass to $\\mathbb T^d$ for $d=2,3$, use [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: for fixed $k'\\in\\mathbb Z^{d-1}$, $g_{k'}(x_1)=\\int_{\\mathbb T^{d-1}}u(x_1,x')e_{-k'}(x')dx'$ is in $L^1(\\mathbb T)$ and all its coefficients vanish. Hence $g_{k'}=0$ almost everywhere. The countable union of the exceptional sets over $k'$ is null. For every remaining $x_1$, the $L^1$ section in $x'$ has all coefficients zero, so induction in $d$ makes it zero almost everywhere. Fubini then makes $u=0$ almost everywhere on $\\mathbb T^d$. Apply this uniqueness to $u-\\overline u$ to obtain the reverse real-valuedness implication. For $u\\in L^2\\subset L^1$ (finite measure) the coefficient map is the one of the imported theorem, which states: $(e_k)_{k\\in\\mathbb Z^3}$ is an orthonormal basis of the complex Hilbert space $L^2(\\mathbb T^3;\\mathbb C)$, the finite-subset-net expansion $u=\\sum_k\\widehat u(k)e_k$ and the Parseval identities hold, and $u\\mapsto\\widehat u$ is a surjective linear isometry of $L^2(\\mathbb T^3;\\mathbb C)$ onto $\\ell^2(\\mathbb Z^3;\\mathbb C)$ ([[thm-fourier-basis-and-parseval-on-the-n-torus]]); the last statement applied componentwise gives $\\langle u,v\\rangle=\\sum_k\\widehat u(k)\\cdot\\overline{\\widehat v(k)}$ for real $u,v\\in L^2$.\n\n**Weights.** For $k\\in\\mathbb Z^3$ set\n$$w_k:=\\bigl(1+|2\\pi k|_2^2\\bigr)^{1/2}=\\bigl(1+4\\pi^2|k|_2^2\\bigr)^{1/2}\\ \\ge 1,$$\nso that $w_k\\ge|2\\pi k_j|$ for $j=1,2,3$ and $w_{k+l}\\le w_k+w_l$ for all $k,l\\in\\mathbb Z^3$.\n\n**The coefficient space and $H^s$.** For $s\\in\\mathbb R$ let $\\ell^2_s$ be the complex Hilbert space of all $c:\\mathbb Z^3\\to\\mathbb C^3$ with\n$$\\|c\\|_{\\ell^2_s}^2:=\\sum_{k\\in\\mathbb Z^3}w_k^{2s}|c(k)|_2^2<+\\infty,\\qquad \\langle c,d\\rangle_{\\ell^2_s}:=\\sum_{k\\in\\mathbb Z^3}w_k^{2s}\\,c(k)\\cdot\\overline{d(k)} ,$$\nand let $\\ell^2_{s,\\mathbb R}:=\\{c\\in\\ell^2_s: c(-k)=\\overline{c(k)}\\ \\forall k\\}$. The set $\\ell^2_{s,\\mathbb R}$ is closed in $\\ell^2_s$ and is a real-linear subspace; on it the Hermitian pairing $\\langle\\cdot,\\cdot\\rangle_{\\ell^2_s}$ is real valued, because the substitution $k\\mapsto-k$ shows that it equals its own conjugate. By the imported theorem the coefficient map restricts to a bijection of the set of real classes of $L^2$ onto $\\ell^2_{0,\\mathbb R}$. For $s\\ge0$ define\n$$H^s(\\mathbb T^3;\\mathbb R^3):=\\{u\\in L^2:\\widehat u\\in\\ell^2_{s,\\mathbb R}\\},\\qquad \\|u\\|_{H^s}:=\\|\\widehat u\\|_{\\ell^2_s}.$$\nFor $s<0$ define $H^s$ to be the completion of the real trigonometric polynomials in the same weighted coefficient norm, equivalently the space of formal real coefficient families $\\ell^2_{s,\\mathbb R}$. For an element of this completion $\\widehat u(k)$ means its coefficient, not an integral of an assumed $L^2$ function. The embedding of $L^2$ into these negative-order spaces is its coefficient map. Truncation makes finite families dense, so this completion is all of $\\ell^2_{s,\\mathbb R}$, not merely the coefficient families of $L^2$ fields. Consequently each $H^s$ is a real Hilbert space isometric to $\\ell^2_{s,\\mathbb R}$ through $u\\mapsto\\widehat u$, and $\\|u\\|_{H^0}=|u|_2$. If $s\\ge t$ then $H^s\\subseteq H^t$ and $\\|u\\|_{H^t}\\le\\|u\\|_{H^s}$. The **trigonometric polynomials** are the fields $p=\\sum_{k\\in F}c_k e_k$ with $F\\subseteq\\mathbb Z^3$ finite and $c_{-k}=\\overline{c_k}$ (equivalently, real coefficient families of finite support); they belong to every $H^s$, and the finitely supported families are dense in each $\\ell^2_{s,\\mathbb R}$ (truncate a family to $|k|_\\infty\\le M$ and let $M\\to\\infty$), so trigonometric polynomials are dense in every $H^s$.\n\n**Scalar spaces.** For $s\\in\\mathbb R$ define $\\ell^2_s(\\mathbb Z^3;\\mathbb C)$ to consist of families $c:\\mathbb Z^3\\to\\mathbb C$ with $\\sum_k w_k^{2s}|c(k)|^2<\\infty$, with pairing $\\sum_k w_k^{2s}c(k)\\overline{d(k)}$; its real subspace is specified by $c(-k)=\\overline{c(k)}$. For $s\\ge0$, $H^s(\\mathbb T^3;\\mathbb R)$ consists of real scalar $L^2$ classes with this weighted coefficient norm; for $s<0$ it is the completion of real scalar trigonometric polynomials, identified with the real coefficient subspace. Scalar Fourier coefficients are $\\widehat f(k)=\\int f e_{-k}\\,dx$ when $f\\in L^1$, and otherwise denote the completion coordinates. Parseval and truncation give the scalar Hilbert-space and density assertions exactly as above. A vector belongs to $H^s(\\mathbb T^3;\\mathbb R^3)$ exactly when each of its three scalar components belongs to $H^s(\\mathbb T^3;\\mathbb R)$, with $\\|u\\|_{H^s}^2=\\sum_{j=1}^3\\|u_j\\|_{H^s}^2$. Below the value type distinguishes scalar and vector $H^s$; $\\Lambda^s$, $\\partial_j$ and $\\Delta$ have the same multipliers for scalars, $\\nabla$ maps scalar to vector spaces, and $\\operatorname{div}$ maps vector to scalar spaces.\n\n**The operators $\\Lambda^s$, $\\partial_j$, $\\Delta$, $\\nabla$ and $\\operatorname{div}$.**\nFor $s,t\\in\\mathbb R$ and $u\\in H^t$ define $\\Lambda^s u\\in H^{t-s}$ by the coefficient rule\n$$\\widehat{\\Lambda^s u}(k):=w_k^{s}\\,\\widehat u(k);$$\nthen $\\Lambda^s$ is a linear isometric isomorphism of $H^t$ onto $H^{t-s}$, $\\Lambda^0=\\mathrm{id}$, $\\Lambda^s\\Lambda^t=\\Lambda^{s+t}$, and $\\Lambda^{-s}$ is the inverse of $\\Lambda^s$. For $j=1,2,3$ and $u\\in H^{s+1}$ define $\\partial_j u\\in H^s$ by\n$$\\widehat{\\partial_j u}(k):=2\\pi i\\,k_j\\,\\widehat u(k);$$\nfor $u\\in H^{s+2}$ define $\\Delta u\\in H^s$ by $\\widehat{\\Delta u}(k):=-4\\pi^2|k|_2^2\\,\\widehat u(k)$; for a scalar field $f$ with coefficients $\\widehat f(k)\\in\\mathbb C$ in the scalar spaces just defined, define $\\nabla f\\in H^s$ for $f\\in H^{s+1}$ by $\\widehat{\\nabla f}(k):=2\\pi i\\,k\\,\\widehat f(k)$; and for $u\\in H^{s+1}$ define $\\operatorname{div}u:=\\sum_{j=1}^{3}\\partial_j u_j\\in H^s$. These operators satisfy $\\|\\partial_j u\\|_{H^s}\\le\\|u\\|_{H^{s+1}}$, $\\|\\Delta u\\|_{H^s}\\le\\|u\\|_{H^{s+2}}$, and for every integer $m\\ge1$, $\\Lambda^{2m}=(I-\\Delta)^m$, the identity following coefficientwise from $w_k^2=1+4\\pi^2|k|_2^2$. On trigonometric polynomials all four operators agree with the classical coordinatewise derivatives and divergence computed from the smooth functions $x\\mapsto e^{2\\pi ik\\cdot x}$, by the classical rules $\\partial_j e_k=2\\pi i k_j e_k$; this is the convention in which the notation is used below.\n\n**Divergence-free fields and the Leray projection.** For $s\\in\\mathbb R$ put\n$$H^s_\\sigma(\\mathbb T^3;\\mathbb R^3):=\\bigl\\{\\,u\\in H^s: k\\cdot\\widehat u(k)=0\\ \\text{for every }k\\in\\mathbb Z^3\\,\\bigr\\};$$\nthis is a closed real-linear subspace of $H^s$, and $\\operatorname{div}u=0$ in $H^s$ for $u\\in H^{s+1}_\\sigma$. For $k\\neq0$ let $\\pi_k\\in L(\\mathbb C^3)$ be the orthogonal projection onto the hyperplane $\\{k\\}^\\perp$,\n$$\\pi_k v:=v-\\frac{k\\cdot v}{|k|_2^2}\\,k ,$$\nand set $\\pi_0:=\\mathrm{id}_{\\mathbb C^3}$. Define the **Leray projection** $P$ by\n$$\\widehat{Pu}(k):=\\pi_k\\widehat u(k)\\qquad(k\\in\\mathbb Z^3).$$\nThen: $P$ maps $H^s$ linearly into $H^s_\\sigma$, and $\\|Pu\\|_{H^s}\\le\\|u\\|_{H^s}$; $P^2=P$; $P$ is self-adjoint on $H^s$, i.e. $\\langle Pu,v\\rangle_{H^s}=\\langle u,Pv\\rangle_{H^s}$ for all $u,v\\in H^s$; $P$ commutes with each $\\Lambda^t$, with each $\\partial_j$, and with $\\Delta$ wherever these are defined; and the identity $\\operatorname{div}(Pu)=0$ holds in $H^{s-1}$ for $u\\in H^s$. Moreover every $u\\in H^s$ has the orthogonal decomposition\n$$u=Pu+\\nabla f,\\qquad f\\in H^{s+1},\\quad \\widehat f(0)=0,\\qquad \\langle Pu,\\nabla f\\rangle_{H^s}=0.$$\nHere zero mean means zero coefficient at $0$ (the usual integral when the field is integrable); orthogonality for all real orders is in the $H^s$ pairing. The scalar element $f$ is determined by $\\widehat f(0):=0$ and $\\widehat f(k):=\\dfrac{k\\cdot\\widehat u(k)}{2\\pi i\\,|k|_2^2}$ for $k\\neq0$; here $f\\in H^{s+1}$ because $w_k^{2(s+1)}|\\widehat f(k)|^2\\le C\\,w_k^{2s}|\\widehat u(k)|^2$ for $k\\neq0$, and $\\widehat{\\nabla f}(k)=\\bigl(k\\cdot\\widehat u(k)/|k|_2^2\\bigr)k=\\widehat u(k)-\\pi_k\\widehat u(k)$. In particular $P\\nabla f=0$ for every $f$ with $\\nabla f\\in H^s$, so $P$ is the orthogonal projection of $H^s$ onto $H^s_\\sigma$. On smooth fields the decomposition $u=Pu+\\nabla f$ derived above from the Fourier coefficients is called the Hodge decomposition of the torus; the operator $P$ is the Leray projection of the fluid literature.\n\n**Time-dependent fields.** For an interval $[0,T]$ with $T>0$ and $s\\in\\mathbb R$, let $C([0,T],H^s)$ denote the set of continuous maps from $[0,T]$ to the metric space $(H^s,\\|\\cdot\\|_{H^s})$, with $\\|u\\|_{C([0,T],H^s)}:=\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^s}$. For a map $u:[0,T]\\times\\mathbb T^3\\to\\mathbb R^3$ of class $C^\\infty$ we mean that every mixed partial derivative $\\partial_t^r\\partial_x^\\alpha u$ exists and is continuous on $[0,T]\\times\\mathbb T^3$, with one-sided time derivatives at $t=0,T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $y=x/L$, $\\tau=t/L^2$, and $\\widetilde u_0(y)=L u_0(Ly)$. The period-$L$ Fourier weights $(1+L^2|\\kappa_k|^2)^s$, with $\\kappa_k=2\\pi k/L$, equal the unit-torus weights $(1+4\\pi^2|k|^2)^s$, so [F4] makes $\\widetilde u_0$ a smooth divergence-free datum in the required $H^s_\\sigma$. By [F1] and [A2], there is a smooth projected-equation solution $\\widetilde v$ on some interval $[0,\\widetilde T]$ for the same $\\nu$. Set $v(t,x)=L^{-1}\\widetilde v(t/L^2,x/L)$; each time, convective, and viscous term acquires the same factor $L^{-3}$, so $v$ is a smooth solution on $[0,T]$, where $T=L^2\\widetilde T>0$, with $v(0)=u_0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to $\\widetilde v$ to obtain a smooth mean-zero pressure $\\widetilde\\pi$ for its primitive equation. The rescaled field $\\pi_v(t,x)=L^{-2}\\widetilde\\pi(t/L^2,x/L)$ is smooth, has mean zero, and its gradient scales by $L^{-3}$; therefore $v,\\pi_v$ satisfy the full equation in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A1], choose a global weak Leray–Hopf velocity $u$ with the same initial datum and viscosity as $v$. The exact Fourier convention and initial trace are those in [F4], and both $u$ and $v$ solve the same periodic model.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The hypotheses of [F3] hold: $u$ is global Leray–Hopf by step 3.1, $v$ and $\\pi_v$ are smooth by steps 1.1–2.1, and they share $u_0$ and $\\nu$. With the exact Countable and Dependent Choice assumptions [A2]–[A3], the weak–smooth comparison gives $u(t)=v(t)$ in $H$ for every $t\\in[0,T]$. This is restricted to the smooth interval.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "A2",
+            "A3",
+            "step 3.1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has L>0 and a supplied smooth initial datum on the nonempty3D torus. Proof1.1 constructs the local smooth branch independently; proof3.1 supplies a weak continuation, so the every-continuation comparison does not rest merely on a potentially empty comparison class.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "L>0 still fixes a nonempty 3D torus and u0 is a supplied smooth datum. Step 1.1 constructs v from rescaled local existence,independently of how many weak comparison maps are considered.",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "084d2e58bfd90f4c4c793ab31cc9ee14ce10bb2e77e557428c17013c4aa06c0e",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero initial velocity remains zero under the rescaling in step 1.1; the local smooth IVP supplies v=0 and step 2.1 gives zero mean-zero pressure. Step 4.1 identifies every same-data weak continuation with this branch on [0,T]. This proof has no energy-conversion step.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Step 1.1 preserves zero data under rescaling;the local IVP gives v=0 and step 2.1 gives the zero mean-zero pressure. Step 4.1 now invokes the explicitly CC/DC-qualified weak-smooth result to identify all same-data continuations on [0,T].",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "5133b3afcaf900cca8a50d06d79d7dc25c0d8586934f3a975ec4460289d1ad0f",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ b"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement fixes three velocity components and integer regularity order s≥4, not a family cardinality. Proof1.1 constructs one smooth branch and4.1 compares every given same-data continuation, without a one-element size parameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The model has fixed three spatial components;integer s>=4 is regularity order,not cardinality. The existence and every-continuation comparison do not have a finite-family size parameter.",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "7abfca523d79a7f9d1a294cd9c805d2b93ea20039a451c5905676502e3672f87",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement requires L,rho0,mu>0 and nu=mu/rho0>0. Proof1.1 rescales by positive L and2.1 reconstructs pressure; no zero-viscosity, zero-density or collapsed-cell limit is included, nor is agreement extended beyond the local smooth interval.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The source keeps rho0,mu,L positive and uses only the given smooth local interval. The expanded F3 choice explanation does not assert a zero-viscosity or collapsed-cell branch.",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "1f4606ea1c834ce431ec58e8f9da49819dabab75c2d6577116d03319b65bcc6e",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement asserts equality in H for all t∈[0,T], with v(0)=u0; proof4.1 explicitly applies the weak-smooth theorem on this closed interval under CC and DC. Both endpoints are included, and no agreement afterT is inferred.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Step 4.1 applies weak-smooth comparison for every t in the closed interval [0,T],including both endpoints. The new F3 text explicitly retains the given smooth pair and CC/DC assumptions rather than extending it beyond T.",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "dd79532ad7bbb3ba2e35bb13cda6361d8552c12940875057c0945d1eed9e7bf0",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions."
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The required nonempty selections are covered by the explicit choice hypotheses and the cited construction in steps 1.1 and 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts local smooth existence followed by agreement of every same-data Leray-Hopf continuation on its interval. Proof1.1–2.1 construct the smooth pair and4.1 compare; no equivalence between weak existence and smooth existence is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Statement constructs a smooth branch then concludes agreement of same-data Leray-Hopf continuations. It does not state that weak existence is equivalent to smooth existence or smoothness.",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "044b246dd203b1e133a96991398509efde42da89bdfd77953f72d5b4f6578f24",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof4.1 assumes the already constructed smooth velocity/pressure with the same initial datum and viscosity. Statement offers no reverse inference from equality of fields or weak existence to an arbitrary smooth pair or global smoothness.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No reverse inference constructs a smooth pair merely from equality or a weak solution. Current F3 expressly says its comparison assumes that pair and does not assert its existence.",
+            "item_sha256": "da8858878f63fd9b150137c3f6bea73b9af74e8f39dfc62978213396754b3182",
+            "row_sha256": "bd9dc3322f9f0ec98bd0571cedc76d89cace2bd3d7eb86f49fab5296f912f102",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $L>0$ be the numerical period in the declared SI metre unit, with physical side length $L\\,\\mathrm m$; let $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, $\\mu>0$ in $\\mathrm{Pa\\,s}$, and $\\nu=\\mu/\\rho_0>0$ in $\\mathrm{m^2\\,s^{-1}}$. Let $s\\ge4$ be an integer and let $u_0\\in H^s_\\sigma(\\mathbb T_L^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T_L^3;\\mathbb R^3)$ be a divergence-free initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $H^s_\\sigma$ consists of real Fourier-weighted fields with dimensionless weights $(1+L^2|\\kappa_k|^2)^s$ and $k\\cdot\\widehat u_0(k)=0$ for $k\\ne0$, with the constant Fourier mode unrestricted. Assume Countable Choice and Dependent Choice. Then there are $T>0$, a smooth periodic velocity $v\\in C^\\infty([0,T]\\times\\mathbb T_L^3;\\mathbb R^3)$, and a smooth mean-zero kinematic pressure $\\pi_v$, with $v(0)=u_0$, such that\n$$\\partial_tv+\\operatorname{div}(v\\otimes v)+\\nabla\\pi_v=\\nu\\Delta v,\\qquad \\operatorname{div}v=0.$$\nEvery global unforced periodic Leray–Hopf weak continuation $u$ of the same model and data satisfies $u(t)=v(t)$ in $H$ for all $t\\in[0,T]$. The physical pressure is $p_v=\\rho_0\\pi_v$ in $\\mathrm{Pa}$. The conclusion applies only while this smooth branch exists; it does not assert global smoothness or uniqueness among arbitrary weak solutions."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "period-L rescaling",
+          "calculation": "With y=x/L, τ=t/L², v=L⁻¹ũ(τ,y), and πᵥ=L⁻²π̃(τ,y), the time, convective, pressure-gradient, and viscous terms each acquire the common factor L⁻³.",
+          "disposition": "Exact symbolic scaling check; no finite numerical approximation or empirical input."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all four current proof steps and actual smooth-existence, pressure-reconstruction and weak–smooth comparison suppliers. Exact unit torus R/Z and characters exp(2pi i k.y) require y=x/L, tau=t/L^2, u0tilde=L u0(Ly), v=L^{-1}vtilde(t/L^2,x/L), pi=L^{-2}pitilde(t/L^2,x/L). Time, transport, viscous and pressure-gradient terms scale by L^{-3}; Fourier weights coincide and the datum, realness, divergence and mean mode are preserved. Smooth data satisfy the full high-norm hypotheses of the published theorem and yield a positive closed smooth interval, including the zero-data branch. Fourier pressure has zero mean and is smooth. The current comparison proof derives the cross identity and relative-energy inequality, then AC Gronwall with explicit Countable and Dependent Choice; it applies to every Leray–Hopf continuation, not only the witness selected in step 3.1. All-time H equality includes t=0 and T and remains local in smooth lifespan. Compared the full source recovered from the native reader log, with raw pre hash 3b196332ef77c3f3103c52dc375016dff7e612e7be0f835ad093d4579337e5d2, against the unchanged current post hash 2c16dc053aa34db82b209832fbbf066d804fc762f7a0fa1a2caa9223ee53aeb3: only unit-torus reference/F1 and steps 1.1/2.1 rescaling changed. The original Statement, physical scope and dependencies are identical. Accept the reader repair; no new source edit or consumer-interface event is needed. No diagrams occur. Final metadata amendment: declared the unit-torus definition explicitly in deps/dependency_roles and the manifest, supplied its exact F1 contract quote, and refreshed stale F4 quotations after the external definition enrichment. The proof and original public Statement are unchanged by Alpha; amended_repair supersedes the provisional accepted_repair disposition."
+      }
+    },
+    "post-fd-no-slip-newtonian": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The uninterrupted Postulate states the adopted constant-density, positive-viscosity Newtonian stress and weak variational formulation with its domains, fields, and SI units. Actual def-fd-quantity-and-frame-conventions supplies only the Cartesian/SI/D/traction dictionary; weak adoption remains explicitly separate."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Postulate limits the claim to a fixed bounded open no-slip vessel and explicitly declines empirical universality, unsupported regularity, and any unmodeled branch."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item records two independent full-text treatments with exact URLs and locators in its source metadata; coverage records every harvested result and the resolved PDF endpoint."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is explicitly an adopted model assumption, not a derivation that every real fluid obeys it or an empirical observation."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": []
+    },
+    "pthm-fd-bounded-weak-continuation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-no-slip-newtonian",
+          "source_section": "Postulate",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let $\\Omega\\subset\\mathbb R^3$ be a fixed nonempty bounded open vessel in Cartesian coordinates measured in metres. Assume Countable Choice for the stated Sobolev space conventions. Define $D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}$, where divergence is the distributional divergence (equal to the classical divergence for these smooth fields), $H$ as its closure in $L^2(\\Omega;\\mathbb R^3)$, and $V$ as its closure in $H_0^1(\\Omega;\\mathbb R^3)$; here $H_0^1$ is the closure of compactly supported smooth vector fields in the $H^1$ norm, and $H^1$ uses square-integrable fields and first weak derivatives. The adopted no-slip condition means $u(t)\\in V$, not a pointwise boundary value. This closure convention does not identify $V$ with every divergence-free member of $H_0^1$ on an arbitrary open set and does not assert a boundary trace theorem.\n\nTake a constant mass density $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic viscosity $\\mu>0$ in $\\mathrm{Pa\\,s}$, and zero body-force density in $\\mathrm{N\\,m^{-3}}$. For classical fields $u\\in C^1(I;C^2(\\Omega;\\mathbb R^3))$ and $p\\in C^1(I;C^1(\\Omega))$, adopt $\\operatorname{div}u=0$, the Cauchy stress $\\sigma=-pI_3+2\\mu D(u)$ with $D(u)=\\tfrac12(\\nabla u+(\\nabla u)^{\\mathsf T})$, and the local balance $\\rho_0(\\partial_tu+\\operatorname{div}(u\\otimes u))=\\operatorname{div}\\sigma$ in the interior. The velocity has units $\\mathrm{m\\,s^{-1}}$, pressure and stress have units $\\mathrm{Pa}$, spatial derivatives have units $\\mathrm{m^{-1}}$, and $\\nu=\\mu/\\rho_0$ has units $\\mathrm{m^2\\,s^{-1}}$. No temperature field is included.\n\nFor the weak regime, take $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$, with $u(0)=u_0\\in H$ and strong $H$ trace at zero; $u_0$ is an initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $C_w$ means continuity of every fixed $H$-pairing, and each time-dependent Bochner space uses strongly measurable maps with the indicated norm, locally on every finite interval. Interpret this model through the solenoidal variational identity: for every compactly time-supported $C^1$ curve $\\phi:[0,\\infty)\\to V$,\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)_{L^2}+(u\\otimes u,\\nabla\\phi)_{L^2}-\\nu(\\nabla u,\\nabla\\phi)_{L^2}\\bigr]dt+(u_0,\\phi(0))_{L^2}=0.\n$$\nHere all spatial pairings use unnormalized Lebesgue measure on $\\Omega$, $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$, and $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. In this weak formulation pressure is eliminated by the divergence-free tests; no distributional pressure or corner regularity is postulated. On a smoother boundary, a pointwise zero-trace reading would require a separate trace theorem. This is an adopted fixed-vessel model, not a deduction about every real wall.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-bounded-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set. Let\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ denote smooth compactly supported vector\nfields and set\n$$D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}.$$\nLet $H$ be the closure of $D_\\sigma(\\Omega)$ in\n$L^2(\\Omega;\\mathbb R^3)$, and let $V$ be its closure in\n$H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ and weak derivatives define the $H^1$\nnorm. Use $\\|a\\|_H=\\|a\\|_2$ and\n$\\|a\\|_V^2=\\|a\\|_2^2+\\|\\nabla a\\|_2^2$. Under Countable Choice, each $V$ element has zero\nextension in $H^1(\\mathbb R^3)$ and distributional divergence zero. This\nclosure definition does not identify $V$ with every divergence-free member\nof $H_0^1(\\Omega;\\mathbb R^3)$ on an arbitrary open set, and it makes no\npointwise boundary trace assertion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-bounded-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be bounded and open, assume the Axiom of\nChoice, let $\\nu>0$, and let $u_0\\in H$ for the bounded closure spaces\ndefined above. There exists\n$$u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$$\nwith $u(0)=u_0$ and $\\|u(t)-u_0\\|_H\\to0$ as $t\\downarrow0$, satisfying for\nevery compactly time-supported $C^1$ map $\\phi:[0,\\infty)\\to V$,\n$$\\int_0^\\infty\\!\\big[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\big]dt+(u_0,\\phi(0))=0.$$\nIt also satisfies\n$$\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u\\|_2^2ds\\le\\|u_0\\|_2^2\\quad(t\\ge0),$$\nand there is a full-measure set $S\\subset(0,\\infty)$ such that for every\n$s\\in S\\cup\\{0\\}$ and $t\\ge s$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.$$\nThe conclusion is a velocity result for the specified unforced closure-space\nformulation; it asserts no uniqueness, smoothness, pressure regularity, or\nboundary trace beyond membership in $H_0^1$. Here\n$(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$ and\n$\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. For a matrix field\n$A$, $(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For smooth fields, $\\operatorname{div}(u\\otimes u)=(u\\cdot\\nabla)u$ because $\\operatorname{div}u=0$, and $\\operatorname{div}(2\\mu D(u))=\\mu\\Delta u$. In the weak form, $-pI_3:\\nabla\\phi=-p\\operatorname{div}\\phi=0$. Also $2D(u):\\nabla\\phi=\\nabla u:\\nabla\\phi+\\partial_j u_i\\partial_i\\phi_j$. For compactly supported smooth solenoidal $u,\\phi$, integration by parts makes the integral of the cross term $-\\int u_i\\partial_i(\\operatorname{div}\\phi)=0$; density of those fields in $V$ and continuity of the bilinear forms extend this equality to $u,\\phi\\in V$. Thus the weak stress balance reduces to the identity in [F2] with $\\nu=\\mu/\\rho_0>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The domain, viscosity, initial velocity, closure spaces, AC, and Countable Choice meet the exact hypotheses of [F2]. Countable Choice [A3] is carried because its proof uses countable selections. Therefore [F2] supplies the weak velocity, initial/restart inequalities, and tested equation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiply the initial energy inequality in [F2] by $\\rho_0/2>0$ and use $\\rho_0\\nu=\\mu$. This gives the displayed physical kinetic-energy inequality; the same multiplication gives its full-measure restart form.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty spatial domain; the excluded empty case is outside its hypotheses.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is conditional no-slip closure-space weak existence and SI energy conversion; steps 1.1–2.1 match the stress form and existence hypotheses and step 3.1 multiplies by rho0/2. Omega is explicitly nonempty bounded open. The tensor sums have the fixed three-component index sets, regardless of zero data.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is conditional no-slip closure-space weak existence and SI energy conversion; steps 1.1–2.1 match the stress form and existence hypotheses and step 3.1 multiplies by rho0/2. Omega is explicitly nonempty bounded open. The tensor sums have the fixed three-component index sets, regardless of zero data.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "084d2e58bfd90f4c4c793ab31cc9ee14ce10bb2e77e557428c17013c4aa06c0e",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero initial velocity is permitted by the supplier hypotheses and is covered in step 2.1; the energy conversion is checked in the stated proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: For u0=0, the supplier initial energy inequality forces zero H norm at every time. The existence application in step 2.1 and positive SI scaling in step 3.1 retain this case; the row makes no weak uniqueness claim for nonzero data.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "906306f365139d091969876cf0720bd408412b519d15207e8ba6a60f2701e5ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate cardinality parameter in this continuous-field statement, so a one-element boundary case is not applicable.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root adopts the actual second-cycle focused review: Statement fixes Omega as a subset of R^3 and its field spaces as closures of three-component solenoidal tests. It contains no mesh size,sensor count or number of trajectories that can be set to one. Step 2.1 instantiates weak existence on this supplied domain and initial field; the NA row concerns cardinality, not the allowed numerical scale of rho0 or mu.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "7abfca523d79a7f9d1a294cd9c805d2b93ea20039a451c5905676502e3672f87",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/second-boundary-anchors-other.json",
+              "sha256": "2524153be3c3e33f0ac54ba3ba08ebf6ea55c893d827ed222644161ffb172615"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated domain lengths and positive density/viscosity hypotheses exclude the relevant degenerate geometry or zero-viscosity limit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Statement explicitly requires rho0>0, mu>0 and nonempty bounded open Omega. Thus nu=mu/rho0>0, and the proof makes no zero-viscosity or collapsed-domain assertion.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "1f4606ea1c834ce431ec58e8f9da49819dabab75c2d6577116d03319b65bcc6e",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial or terminal time behavior is part of the stated conclusion and is checked in step 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root adopts the actual second-cycle focused review: Statement gives u(0)=u0,strong H trace,energy inequality for t>=0 and restart times in S union {0}; it does not assign a terminal state at infinity. Step 2.1 supplies these exact initial/restart conclusions from F2. Step 3.1 multiplies by rho0/2 and explicitly preserves the restart form, so zero and equal-time energy cases remain valid. The generic endpoint sentence is supported by this actual scaling step.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "1c38e5a06a4b3bd1ea82e03045c096b07ff4d6e6168b8fc6cf6d264c540ce786",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/second-boundary-anchors-other.json",
+              "sha256": "2524153be3c3e33f0ac54ba3ba08ebf6ea55c893d827ed222644161ffb172615"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The required nonempty selections are covered by the explicit choice hypotheses and the cited construction in step 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Statement carries AC and Countable Choice. Step 2.1 invokes the actual weak-existence supplier whose coefficient/horizon subsequence selections were inspected; the physical argument adds no stronger selection claim.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "5cf4ad459bdf8376c6b2d25c3191f3745fdab91b83abd48ce052904a4f5615ba",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts a conditional result, not an equivalence; there is no forward implication branch to check.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is conditional no-slip closure-space weak existence and SI energy conversion; steps 1.1–2.1 match the stress form and existence hypotheses and step 3.1 multiplies by rho0/2. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "044b246dd203b1e133a96991398509efde42da89bdfd77953f72d5b4f6578f24",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts a conditional result, not an equivalence; there is no reverse implication branch to check.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is conditional no-slip closure-space weak existence and SI energy conversion; steps 1.1–2.1 match the stress form and existence hypotheses and step 3.1 multiplies by rho0/2. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "5594a67e73a596bea68f2a761ffde5e73f59ec9bb47cbb63ce48fd2269595c60",
+            "row_sha256": "bd9dc3322f9f0ec98bd0571cedc76d89cace2bd3d7eb86f49fab5296f912f102",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "mathematical-to-SI energy coefficient",
+          "calculation": "Multiplication by ρ₀/2 gives (ρ₀/2)(2ν)=ρ₀ν=μ for the gradient dissipation term.",
+          "disposition": "Exact algebra and SI unit conversion; no empirical input."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all three proof steps and current bounded existence proof, bounded closure definition and no-slip Postulate. Compactly supported solenoidal density in V justifies the cross-gradient cancellation without any boundary trace theorem. The exact mathematical supplier accepts bounded open Omega, AC and nu>0 and produces the stated C1-time V-test identity and actual weakly continuous representative. Its proof handles arbitrary bounded open sets by closure spaces, basis compactness and L^{4/3}V* nonlinear control, not by a smooth-boundary citation. rho0/2 times the energy inequality yields the unnormalized SI formula because rho0 nu=mu. Zero data, t=0 and t=s satisfy the inequalities; no global smoothness, weak uniqueness, pressure or thermal conclusion follows. No diagrams or routed findings concern this item."
+      }
+    },
+    "pthm-fd-rectangular-weak-pressure": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-no-slip-newtonian",
+          "source_section": "Postulate",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval in seconds and let $\\Omega\\subset\\mathbb R^3$ be a fixed nonempty bounded open vessel in Cartesian coordinates measured in metres. Assume Countable Choice for the stated Sobolev space conventions. Define $D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}$, where divergence is the distributional divergence (equal to the classical divergence for these smooth fields), $H$ as its closure in $L^2(\\Omega;\\mathbb R^3)$, and $V$ as its closure in $H_0^1(\\Omega;\\mathbb R^3)$; here $H_0^1$ is the closure of compactly supported smooth vector fields in the $H^1$ norm, and $H^1$ uses square-integrable fields and first weak derivatives. The adopted no-slip condition means $u(t)\\in V$, not a pointwise boundary value. This closure convention does not identify $V$ with every divergence-free member of $H_0^1$ on an arbitrary open set and does not assert a boundary trace theorem.\n\nTake a constant mass density $\\rho_0>0$ in $\\mathrm{kg\\,m^{-3}}$, a constant dynamic viscosity $\\mu>0$ in $\\mathrm{Pa\\,s}$, and zero body-force density in $\\mathrm{N\\,m^{-3}}$. For classical fields $u\\in C^1(I;C^2(\\Omega;\\mathbb R^3))$ and $p\\in C^1(I;C^1(\\Omega))$, adopt $\\operatorname{div}u=0$, the Cauchy stress $\\sigma=-pI_3+2\\mu D(u)$ with $D(u)=\\tfrac12(\\nabla u+(\\nabla u)^{\\mathsf T})$, and the local balance $\\rho_0(\\partial_tu+\\operatorname{div}(u\\otimes u))=\\operatorname{div}\\sigma$ in the interior. The velocity has units $\\mathrm{m\\,s^{-1}}$, pressure and stress have units $\\mathrm{Pa}$, spatial derivatives have units $\\mathrm{m^{-1}}$, and $\\nu=\\mu/\\rho_0$ has units $\\mathrm{m^2\\,s^{-1}}$. No temperature field is included.\n\nFor the weak regime, take $u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$, with $u(0)=u_0\\in H$ and strong $H$ trace at zero; $u_0$ is an initial velocity in $\\mathrm{m\\,s^{-1}}$. Here $C_w$ means continuity of every fixed $H$-pairing, and each time-dependent Bochner space uses strongly measurable maps with the indicated norm, locally on every finite interval. Interpret this model through the solenoidal variational identity: for every compactly time-supported $C^1$ curve $\\phi:[0,\\infty)\\to V$,\n$$\n\\int_0^\\infty\\!\\bigl[(u,\\partial_t\\phi)_{L^2}+(u\\otimes u,\\nabla\\phi)_{L^2}-\\nu(\\nabla u,\\nabla\\phi)_{L^2}\\bigr]dt+(u_0,\\phi(0))_{L^2}=0.\n$$\nHere all spatial pairings use unnormalized Lebesgue measure on $\\Omega$, $(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$, and $\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. In this weak formulation pressure is eliminated by the divergence-free tests; no distributional pressure or corner regularity is postulated. On a smoother boundary, a pointwise zero-trace reading would require a separate trace theorem. This is an adopted fixed-vessel model, not a deduction about every real wall.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-bounded-solenoidal-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set. Let\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ denote smooth compactly supported vector\nfields and set\n$$D_\\sigma(\\Omega)=\\{a\\in C_c^\\infty(\\Omega;\\mathbb R^3):\\operatorname{div}a=0\\}.$$\nLet $H$ be the closure of $D_\\sigma(\\Omega)$ in\n$L^2(\\Omega;\\mathbb R^3)$, and let $V$ be its closure in\n$H_0^1(\\Omega;\\mathbb R^3)$, where $H_0^1$ is the $H^1$ closure of\n$C_c^\\infty(\\Omega;\\mathbb R^3)$ and weak derivatives define the $H^1$\nnorm. Use $\\|a\\|_H=\\|a\\|_2$ and\n$\\|a\\|_V^2=\\|a\\|_2^2+\\|\\nabla a\\|_2^2$. Under Countable Choice, each $V$ element has zero\nextension in $H^1(\\mathbb R^3)$ and distributional divergence zero. This\nclosure definition does not identify $V$ with every divergence-free member\nof $H_0^1(\\Omega;\\mathbb R^3)$ on an arbitrary open set, and it makes no\npointwise boundary trace assertion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-bounded-global-weak-existence",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be bounded and open, assume the Axiom of\nChoice, let $\\nu>0$, and let $u_0\\in H$ for the bounded closure spaces\ndefined above. There exists\n$$u\\in C_w([0,\\infty);H)\\cap L^\\infty(0,\\infty;H)\\cap L^2_{\\rm loc}(0,\\infty;V)$$\nwith $u(0)=u_0$ and $\\|u(t)-u_0\\|_H\\to0$ as $t\\downarrow0$, satisfying for\nevery compactly time-supported $C^1$ map $\\phi:[0,\\infty)\\to V$,\n$$\\int_0^\\infty\\!\\big[(u,\\partial_t\\phi)+(u\\otimes u,\\nabla\\phi)-\\nu(\\nabla u,\\nabla\\phi)\\big]dt+(u_0,\\phi(0))=0.$$\nIt also satisfies\n$$\\|u(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla u\\|_2^2ds\\le\\|u_0\\|_2^2\\quad(t\\ge0),$$\nand there is a full-measure set $S\\subset(0,\\infty)$ such that for every\n$s\\in S\\cup\\{0\\}$ and $t\\ge s$,\n$$\\|u(t)\\|_2^2+2\\nu\\int_s^t\\|\\nabla u\\|_2^2d\\tau\\le\\|u(s)\\|_2^2.$$\nThe conclusion is a velocity result for the specified unforced closure-space\nformulation; it asserts no uniqueness, smoothness, pressure regularity, or\nboundary trace beyond membership in $H_0^1$. Here\n$(u\\otimes u):\\nabla\\phi=\\sum_{i,j}u_i u_j\\partial_j\\phi_i$ and\n$\\nabla u:\\nabla\\phi=\\sum_{i,j}\\partial_j u_i\\partial_j\\phi_i$. For a matrix field\n$A$, $(\\operatorname{div}A)_i=\\sum_j\\partial_jA_{ij}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-fd-bounded-evolving-pressure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $a_i<b_i$ for $i=1,2,3$ and let\n$\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be the resulting finite open\nrectangle, let $\\nu>0$ and $u_0\\in H$ for the bounded closure spaces on this\npage, and let $u$ be a global weak velocity supplied for these data by the\nbounded no-slip weak existence theorem on this page. Assume the rectangular divergence-inverse\nresult: there is a continuous linear map\n$R:D_0(\\Omega)\\to C_c^\\infty(\\Omega;\\mathbb R^3)$, where\n$D_0(\\Omega)=\\{h\\in C_c^\\infty(\\Omega):\\int_\\Omega h=0\\}$, such that\n$\\operatorname{div}Rh=h$. For each compact $K\\subset\\Omega$ there is a compact\n$K'\\subset\\Omega$ containing the support of $Rh$ whenever $h$ is supported in\n$K$, and on each fixed-support test space $R$ is continuous for all seminorms\n$\\sup|\\partial^\\alpha h|$. Then there is a spacetime distribution $\\pi$ with\n$$\\partial_tu+\\operatorname{div}(u\\otimes u)+\\nabla\\pi=\\nu\\Delta u$$\non $(0,\\infty)\\times\\Omega$. Its normalization may be fixed by any\n$\\theta\\in C_c^\\infty(\\Omega)$ with $\\int_\\Omega\\theta=1$ through\n$\\langle\\pi,a(t)\\theta(x)\\rangle=0$ for every compactly supported smooth\ntemporal test $a$. Pressure is unique under this normalization. This is a\nconditional distributional statement and gives no $L^2$ pressure estimate,\ncorner regularity, or pointwise boundary traction. Here\n$(u\\otimes u):\\nabla\\psi=\\sum_{i,j}u_i u_j\\partial_j\\psi_i$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-rectangular-test-divergence-inverse",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $\\Omega=\\prod_{i=1}^d(a_i,b_i)$ be a nonempty finite open rectangle. Write $D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb R)$ and $D_0(\\Omega)=\\{h\\in D(\\Omega):\\int_\\Omega h=0\\}$. For every compact $K\\subset\\Omega$ there is a compact $K'\\subset\\Omega$ such that a linear map $R:D_0(\\Omega)\\to D(\\Omega;\\mathbb R^d)$ sends tests supported in $K$ to fields supported in $K'$, satisfies $\\operatorname{div}(Rh)=h$, and is continuous on each fixed-support test space for the seminorms $\\sup|\\partial^\\alpha h|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each side interval set $m_i=(a_i+b_i)/2$, $d_i=(b_i-a_i)/4>0$, and $r_i(x_i)=(x_i-m_i)/d_i$. Define $g_i(x_i)=\\exp(-1/(1-r_i(x_i)^2))$ when $|r_i(x_i)|<1$ and $g_i=0$ otherwise. Its support is the compact interval $[m_i-d_i,m_i+d_i]\\subset(a_i,b_i)$. Each repeated derivative inside that support is a finite sum of a polynomial in $r_i$ times a negative power of $1-r_i^2$ times the exponential; since $y^{-N}e^{-1/y}\\to0$ as $y\\downarrow0$ for every $N$, all derivatives vanish at the support endpoints and $g_i\\in C_c^\\infty((a_i,b_i))$. Positivity and compact support give $I_i=\\int_{a_i}^{b_i}g_i\\,dx_i\\in(0,\\infty)$. Put $\\eta_i=g_i/I_i$ and $\\theta(x)=\\eta_1(x_1)\\eta_2(x_2)\\eta_3(x_3)$; then $\\theta\\in C_c^\\infty(\\Omega)$ and Fubini gives $\\int_\\Omega\\theta=1$. Set $\\nu=\\mu/\\rho_0>0$. The domain, initial datum, closure spaces, AC, and Countable Choice match [F2], so choose its global weak velocity $u$ with the stated initial and restart energy inequalities. To match the stress model, first take compactly supported smooth solenoidal $u,\\phi$. Then $2D(u):\\nabla\\phi=\\nabla u:\\nabla\\phi+\\partial_j u_i\\partial_i\\phi_j$; integration by parts makes the last term $-\\int u_i\\partial_i(\\operatorname{div}\\phi)=0$. The pressure term also vanishes because $\\operatorname{div}\\phi=0$. The bilinear forms are continuous in $V$, so density extends this identity to the closure-space weak velocity. Hence [F2] is exactly the weak velocity input for [A1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "A2",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rectangle is within the domain of [F3], and its exact conditional right-inverse hypothesis is supplied by [F4]. Apply the proposition to this weak velocity to obtain $\\pi$, its fixed-$\\theta$ normalization, and the spacetime distributional equation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $p=\\rho_0\\pi$. Multiplication by the positive constant $\\rho_0$ preserves distributional equality and the normalization; substituting $\\rho_0\\nu=\\mu$ gives the physical equation in the Statement. The same scaling preserves uniqueness under normalization and converts the velocity energy inequality to SI units. No step supplies an $L^2$ or corner estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty rectangle; the excluded empty case is outside its hypotheses.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is weak velocity plus normalized pressure and SI energy; step 1.1 constructs theta and obtains velocity, step 2.1 obtains pressure and step 3.1 rescales it. a_i<b_i for each of the three side intervals excludes an empty rectangle. The displayed product is over {1,2,3}, not an arbitrary family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The clarified Statement still has exactly three intervals with ai<bi,so Omega and positive-time spacetime U are nonempty. Its new test-space definitions may quantify over compact empty support,but that only gives the zero test and does not create an empty rectangle.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "61bb045a5db47f0472c4f18ff73eb0a47a82a2df0fe3626d90dc72eb9988be3a",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u0=0, the initial energy inequality supplied in step 1.1 forces ||u(t)||2=0 for every t. The residual defining pressure in step 2.1 is zero, so fixed normalization gives pi=0; step 3.1 preserves zero under SI scaling.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Step 1.1 supplies the initial energy inequality which forces u=0 for u0=0. The residual in step 2.1 is then zero and normalized pressure is pi=0;step 3.1 preserves zero under positive scaling. The clarified complex-linear distribution convention changes none of these equalities.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "295671fb886eecb97da547adc3c243f8f66e285847574072d0d2d31ae4fc5f95",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no separate cardinality parameter in this continuous-field statement, so a one-element boundary case is not applicable.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "There remain three fixed side intervals and one fixed theta normalization,not a variable family cardinality. Step 1.1 constructs theta from three interval bumps;the added D_K definitions do not assert a one-dimensional fluid result.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "7abfca523d79a7f9d1a294cd9c805d2b93ea20039a451c5905676502e3672f87",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated domain lengths and positive density/viscosity hypotheses exclude the relevant degenerate geometry or zero-viscosity limit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Positive side lengths,rho0 and mu are unchanged. The new explicit LF topology and derivative conventions still promise distribution pressure only,without collapsed geometry,nu=0,L2 pressure or corner regularity.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "1f4606ea1c834ce431ec58e8f9da49819dabab75c2d6577116d03319b65bcc6e",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial or terminal time behavior is part of the stated conclusion and is checked in step 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The current Statement is now especially explicit that pi is on U=(0,infinity) times Omega,while velocity has an initial H trace. Step 3.1 scales those distinct objects and the energy inequality;it adds neither a pressure trace at zero nor a terminal pressure value.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "1c38e5a06a4b3bd1ea82e03045c096b07ff4d6e6168b8fc6cf6d264c540ce786",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly constructs the normalized bump product theta and applies the bounded weak-existence supplier under AC and Countable Choice. Step 2.1 applies the supplied linear R to reconstruct pressure deterministically; no selection construction occurs there.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Step 1.1 explicitly constructs theta and invokes bounded existence under AC/Countable Choice. Step 2.1 applies the given right inverse and normalized pressure proposition;the clarified real/complex test spaces do not require a new selector or alter the existing row anchor.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "a00f8fc931e638ab46670f5f70297d91a35455e6d237a6b05c63bd6b915cefb9",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts a conditional result, not an equivalence; there is no forward implication branch to check.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The conclusion supplies weak velocity and a uniquely normalized pressure under the stated model and right-inverse assumptions. The new distribution definitions make that conclusion precise,not an iff characterization of all possible data.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "044b246dd203b1e133a96991398509efde42da89bdfd77953f72d5b4f6578f24",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts a conditional result, not an equivalence; there is no reverse implication branch to check.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No reverse deduction of geometry,model premises or right-inverse continuity from the pressure equation is stated. Step 3.1 only rescales the already constructed normalized pressure and its uniqueness.",
+            "item_sha256": "8adfb078eec53cd8183bf7c906aea25fed3e521eebd977e8eef79622914f6d4c",
+            "row_sha256": "bd9dc3322f9f0ec98bd0571cedc76d89cace2bd3d7eb86f49fab5296f912f102",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-21-24.json",
+              "sha256": "f42a36f382e5707486747654be4cd54c862c70fd73e8b841594b059de20d9b04"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega=\\prod_{i=1}^3(a_i,b_i)\\subset\\mathbb R^3$ be a finite open rectangle in Cartesian coordinates measured in metres, with $a_i<b_i$, and write $U=(0,\\infty)\\times\\Omega\\subset\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$. For an "
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "pressure and energy scaling",
+          "calculation": "Set p=ρ₀π and use ρ₀ν=μ; multiplying the normalized mathematical energy inequality by ρ₀/2 gives the stated SI kinetic-energy inequality.",
+          "disposition": "Exact algebraic scaling; pressure remains only a distribution and no regularity is inferred."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Reviewed all three proof steps, full current pressure-producer proof and its batch-22 contract/manifest, bounded existence and the current explicit recursive rectangular divergence inverse. The bump construction has strictly interior support, positive finite normalization and integral one. The complex extension of R preserves support and every fixed-support bound; time differentiation commutes with R. Residual signs give grad pi=-u_t-div(u tensor u)+nu Delta u. The uniqueness proof uses phi-a(t)theta as an actual spacetime test; no spatial-only pairing remains. Constant positive rho0 maps pi to p, preserves uniqueness for the fixed velocity and normalization, and converts the energy inequality with factor rho0/2. Pressure is real because real u, R and theta give real pairings. Rectangle sides, viscosity and density are strictly positive; initial/restart endpoints and zero data are covered. No L2 pressure, trace or corner estimate is inferred. Historical reader:24:1/2 are genuine nonfatal typing omissions already corrected in the producer. Its older open risk review concerns batch-17 integration justification; the current batch-17 proof now supplies explicit finite-integral/Fubini/differentiation estimates, although its deps metadata still requires owning-batch synchronization. The physical theorem also explicitly assumes the exact R interface, so that external metadata issue does not invalidate its conditional deduction."
+      }
+    },
+    "rem-fd-thermal-coupling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no empty parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no zero parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no one parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no degenerate parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no endpoints parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no nonempty-choice parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no iff-forward parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This explanatory remark has no iff-reverse parameter case or equivalence direction; it distinguishes two adopted branches and states a missing coupling assumption."
+        }
+      ],
+      "finite_checks": [],
+      "review_notes": "Refuter:24:1 confirmed fatal to the original universal necessity claim. Replaced the conversion requirement for all coupling with a general need to specify field relations/domain and a separate conditional requirement for adopting viscous heating. Source-free Fourier conduction and temperature-dependent mechanical coefficients are a possible one-way coupling; no combined energy conservation or empirical validity is inferred. Actual published thermal suppliers retain their separate domains, regularity and hypotheses. No item consumer exists; fd-w02-examples only places the remark and remains frontmatter-only. Manifest statement mirror synchronized; no dependency, title, scope or source change."
+    }
+  }
+}

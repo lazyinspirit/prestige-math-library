@@ -1,0 +1,119 @@
+{
+  "group": "o",
+  "batches": ["41"],
+  "pages_read": ["fd-mp01", "fd-mp01-examples"],
+  "items_read": [
+    "def-fd-periodic-torus-domain",
+    "lem-fd-periodic-integration-by-parts",
+    "def-fd-diffuse-interface-equations",
+    "thm-fd-diffuse-interface-energy",
+    "ex-fd-phase-constant-equilibrium"
+  ],
+  "conventions": [
+    {
+      "convention": "For integer d ≥ 1, the torus is R^d/(2πZ)^d. Fields are periodic lifts, and torus integration means Riemann integration over [0,2π]^d.",
+      "fixed_by": "def-fd-periodic-torus-domain",
+      "matters_for": [
+        "lem-fd-periodic-integration-by-parts",
+        "def-fd-diffuse-interface-equations",
+        "thm-fd-diffuse-interface-energy",
+        "ex-fd-phase-constant-equilibrium"
+      ]
+    },
+    {
+      "convention": "C^k_per requires continuous periodic spatial derivatives through order k, bounded, uniformly continuous and Riemann integrable on the fundamental cube. C^1 time regularity is differentiability in the supremum norms of those spatial derivatives.",
+      "fixed_by": "def-fd-periodic-torus-domain",
+      "matters_for": [
+        "lem-fd-periodic-integration-by-parts",
+        "def-fd-diffuse-interface-equations",
+        "thm-fd-diffuse-interface-energy"
+      ]
+    },
+    {
+      "convention": "All fields and coefficients are dimensionless. The chemical potential is the defined field μ_c = ε⁻¹W′(φ) − εΔφ, required separately to belong to C([0,T];C²_per). The momentum coupling is −φ∇μ_c.",
+      "fixed_by": "def-fd-diffuse-interface-equations",
+      "matters_for": [
+        "thm-fd-diffuse-interface-energy",
+        "ex-fd-phase-constant-equilibrium"
+      ]
+    },
+    {
+      "convention": "The matrix norm is the Frobenius norm; (∇u)_ij = ∂_j u_i. Thus |∇u|² is the sum of all squared coordinate derivatives, rather than the squared symmetric-gradient norm.",
+      "fixed_by": "def-fd-diffuse-interface-equations",
+      "matters_for": ["thm-fd-diffuse-interface-energy"]
+    },
+    {
+      "convention": "Energy-stationary means energy constant in time; the example asserts neither a local minimum nor stability.",
+      "fixed_by": "ex-fd-phase-constant-equilibrium",
+      "matters_for": ["ex-fd-phase-constant-equilibrium"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-fd-periodic-integration-by-parts",
+      "statement": "Let d ≥ 1, g ∈ C¹_per(T^d;R), and F ∈ C¹_per(T^d;R^d). Then ∫ div F dx = 0 and ∫ ∇g·F dx = −∫ g div F dx.",
+      "used_by": ["thm-fd-diffuse-interface-energy"]
+    },
+    {
+      "id": "def-fd-diffuse-interface-equations",
+      "statement": "For integer d ≥ 1, T > 0, ε,M,ν > 0 and W ∈ C²(R) bounded below, a classical tuple has u ∈ C¹([0,T];C²_per), φ ∈ C¹([0,T];C¹_per) ∩ C([0,T];C²_per), π ∈ C([0,T];C¹_per), and defined μ_c = ε⁻¹W′(φ) − εΔφ ∈ C([0,T];C²_per). The system is ∂_tφ + u·∇φ = MΔμ_c, ∂_tu + (u·∇)u + ∇π = νΔu − φ∇μ_c, and div u = 0; its total energy integrates |u|²/2 + ε|∇φ|²/2 + ε⁻¹W(φ).",
+      "used_by": [
+        "thm-fd-diffuse-interface-energy",
+        "ex-fd-phase-constant-equilibrium",
+        "def-fd-phase-field-dimensionalization",
+        "post-fd-diffuse-interface-material-law"
+      ]
+    },
+    {
+      "id": "thm-fd-diffuse-interface-energy",
+      "statement": "For the parameters, periodic classical fields, chemical potential and pointwise equations specified in def-fd-diffuse-interface-equations, E′(t) = −ν∫|∇u(t,x)|² dx − M∫|∇μ_c(t,x)|² dx for every 0 < t < T.",
+      "used_by": [
+        "ex-fd-phase-constant-equilibrium",
+        "pthm-fd-phase-field-conditional-energy"
+      ]
+    },
+    {
+      "id": "def-fd-periodic-torus-domain",
+      "statement": "For integer d ≥ 1, T^d := R^d/(2πZ)^d with fundamental cube Q_d := [0,2π]^d; fields are represented by periodic lifts, coordinate derivatives define gradient, divergence and Laplacian, and integration means Riemann integration over Q_d.",
+      "used_by": [
+        "lem-fd-periodic-integration-by-parts",
+        "def-fd-diffuse-interface-equations",
+        "thm-fd-diffuse-interface-energy"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The periodic integration lemma uses its closed-interval continuity and interior differentiability hypotheses on coordinate segments to estimate difference quotients before telescoping. The energy theorem uses it on potential-value intervals to control W(φ) difference quotients. Both uses preserve its hypotheses and conclusion.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-r",
+      "used_for": "Energy proof step 1.1 uses finite-subcover compactness of the closed bounded interval containing nearby values of φ. The proof locally derives uniform continuity and boundedness of W′ from that property, rather than attributing those additional conclusions directly to the supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "thm-heine-borel-r",
+      "finding": "The published supplier's Statement contains inline wikilinks in '[a,b] ([[def-interval]]) is compact ([[def-open-cover-r]])' and later 'uses [[thm-recursion]]'. These interrupt the complete Statement, contrary to the mandatory statement-first instruction. Move them into an immediately following Statement references section while preserving the claim and recursion qualification. This is an editorial defect; the compactness statement and its use in the assigned energy proof are sound.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-mp01",
+      "to": "fd-x01",
+      "faithful": true,
+      "note": "The page declares fd-x01 as prerequisite context. Its formal-fluid definition uses coordinate derivatives and row-component Jacobians consistently with this batch. No assigned item invokes an fd-x01 result: the torus calculus and dimensionless coupled system are defined locally, so the general dimension d and periodic setting do not improperly inherit the supplier's three-dimensional Euclidean-domain restrictions."
+    },
+    {
+      "from": "fd-pmp01",
+      "to": "fd-mp01",
+      "faithful": true,
+      "note": "Checked the dimensionalization definition, material-law postulate and conditional physical energy theorem against the mathematical definition and theorem. The consumer specializes to d = 3, retains positive parameters, bounded-below C² potential and the required field regularity, derives the −φ∇μ_c force from its stress, and applies the exact smooth energy identity. Its scaling gives G = ρ_*U²L³E and dG/dt = ρ_*U³L²E′. It preserves the distinction between adopted physical assumptions and conditional deduction, with no empirical calibration or existence claim."
+    }
+  ]
+}

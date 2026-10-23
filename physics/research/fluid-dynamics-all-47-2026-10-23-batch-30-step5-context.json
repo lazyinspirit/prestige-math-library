@@ -1,0 +1,228 @@
+{
+  "group": "m",
+  "batches": [
+    "30"
+  ],
+  "pages_read": [
+    "fd-n03",
+    "fd-n03-examples"
+  ],
+  "items_read": [
+    "def-fd-compressible-numerical-contract",
+    "prop-fd-euler-llf-admissibility-interface",
+    "prop-fd-shared-face-global-conservation",
+    "rem-fd-compressible-stability-distinctions",
+    "ex-fd-compressible-constant-state"
+  ],
+  "conventions": [
+    {
+      "convention": "Fix γ>1. Euler states are U=(ρ,m,E) with ρ>0 and E−m²/(2ρ)>0; pressure is (γ−1)(E−m²/(2ρ)).",
+      "fixed_by": "def-fd-compressible-numerical-contract",
+      "matters_for": [
+        "prop-fd-euler-llf-admissibility-interface",
+        "prop-fd-shared-face-global-conservation",
+        "ex-fd-compressible-constant-state"
+      ]
+    },
+    {
+      "convention": "Cells are indexed by Z/NZ with N≥2, uniform width Δx>0, Δt≥0, and λ=Δt/Δx. One shared face vector enters neighboring updates with opposite signs; positive flux points right.",
+      "fixed_by": "def-fd-compressible-numerical-contract",
+      "matters_for": [
+        "prop-fd-shared-face-global-conservation",
+        "prop-fd-euler-llf-admissibility-interface",
+        "ex-fd-compressible-constant-state"
+      ]
+    },
+    {
+      "convention": "The positivity specialization uses symmetric supplied speeds S_L=−a and S_R=a, with a at least both adjacent |u|+c values and 2λa≤1 at every face.",
+      "fixed_by": "prop-fd-euler-llf-admissibility-interface",
+      "matters_for": [
+        "rem-fd-compressible-stability-distinctions",
+        "pthm-fd-conditional-positive-euler-update"
+      ]
+    },
+    {
+      "convention": "HLL speeds are supplied numerical data; neither their use nor the HLL middle-state formula establishes enclosure of exact nonlinear waves. The assigned middle model flux need not equal F(U_*).",
+      "fixed_by": "def-fd-compressible-numerical-contract",
+      "matters_for": [
+        "prop-fd-euler-llf-admissibility-interface",
+        "rem-fd-compressible-stability-distinctions",
+        "pthm-fd-conditional-positive-euler-update"
+      ]
+    },
+    {
+      "convention": "The cited weak-limit theorem is scalar on the full line, assumes ACω, strong local L¹ convergence and local uniform bounds through t=0, and supplies neither convergence nor an entropy inequality.",
+      "fixed_by": "rem-fd-compressible-stability-distinctions",
+      "matters_for": [
+        "ex-fd-compressible-constant-state"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-compressible-numerical-contract",
+      "statement": "For admissible one-dimensional ideal-gas Euler states, define pressure, velocity, sound speed and Euler flux; on a periodic uniform mesh define the shared-face update U_i^+=U_i−λ(F̂_{i+1/2}−F̂_{i−1/2}), consistency F̂(U,U)=F(U), and admissibility as membership of every output in G_γ. HLL speeds are supplied data, and entropy-variable dissipation is a separate flux condition without a fully discrete entropy assertion.",
+      "used_by": [
+        "prop-fd-euler-llf-admissibility-interface",
+        "prop-fd-shared-face-global-conservation",
+        "ex-fd-compressible-constant-state",
+        "post-fd-ideal-gas-numerical-model",
+        "pthm-fd-conditional-positive-euler-update"
+      ]
+    },
+    {
+      "id": "prop-fd-euler-llf-admissibility-interface",
+      "statement": "For γ>1, N≥2 periodic admissible Euler states, Δx>0 and Δt≥0, choose each a_{i+1/2}≥max(|u_i|+c_i,|u_{i+1}|+c_{i+1}) with 2λa_{i+1/2}≤1. The stated symmetric HLL/LLF shared-face step gives U_i^+∈G_γ for every cell, hence strictly positive updated density and pressure. No other HLL speed pair or fully discrete entropy inequality is asserted.",
+      "used_by": [
+        "pthm-fd-conditional-positive-euler-update"
+      ]
+    },
+    {
+      "id": "prop-fd-shared-face-global-conservation",
+      "statement": "For the stated periodic uniform mesh and one shared vector flux per face, M=Δx∑_i U_i and M^+=Δx∑_i U_i^+ satisfy M^+=M. This algebraic conservation claim alone does not assert admissibility, entropy stability, or convergence.",
+      "used_by": [
+        "rem-fd-compressible-stability-distinctions"
+      ]
+    },
+    {
+      "id": "rem-fd-compressible-stability-distinctions",
+      "statement": "Shared-face conservation, symmetric-branch positivity, convex invariant-domain preservation under admissible fan averages, entropy-variable dissipation, finite-node limiting, and the scalar conditional weak-limit theorem have separate hypotheses and conclusions.",
+      "used_by": [
+        "ex-fd-compressible-constant-state"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-ideal-gas-euler-state-and-pressure",
+      "used_for": "Exact Euler state domain, pressure, velocity, sound speed and physical flux used by the numerical contract and positivity specialization.",
+      "opened": true
+    },
+    {
+      "id": "def-hll-two-wave-flux",
+      "used_for": "Three-branch HLL flux, middle-branch formula and distinction between supplied speeds and exact-wave enclosure.",
+      "opened": true
+    },
+    {
+      "id": "def-pe03-first-order-hll-finite-volume-update",
+      "used_for": "Periodic shared-flux update and identification of the supplier ratio ν with local λ.",
+      "opened": true
+    },
+    {
+      "id": "def-pe03-entropy-stable-dissipative-flux",
+      "used_for": "Positive-semidefinite entropy-variable dissipation formula and explicit exclusion of a fully discrete time-step property.",
+      "opened": true
+    },
+    {
+      "id": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+      "used_for": "Exact one-step positivity implication specialized by the owned proposition; endpoint speed and facewise CFL hypotheses match.",
+      "opened": true
+    },
+    {
+      "id": "def-pe03-convex-invariant-domain",
+      "used_for": "Convexity and one-step invariant-domain terminology in the stability remark.",
+      "opened": true
+    },
+    {
+      "id": "lem-pe03-hll-half-cell-riemann-averages",
+      "used_for": "HLL middle state, left/right half-cell averages, their CFL bounds and the adjacent-half-average update identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+      "used_for": "Preservation of a convex set under the explicit fan-average hypothesis, with intermediate-state membership only a sufficient condition.",
+      "opened": true
+    },
+    {
+      "id": "alg-pe03-convex-scaling-positivity-limiter",
+      "used_for": "Finite-node maximal scaling procedure, admissible-mean prerequisite and closed convex target set; comparison exposes the omitted closedness qualification in the owned remark.",
+      "opened": true
+    },
+    {
+      "id": "thm-conservative-finite-volume-weak-limit",
+      "used_for": "Scalar conditional distributional weak-limit conclusion, initial-data convention, strong-convergence and local-bound hypotheses, and ACω qualification.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact indexed-family formulation of ACω restated in the stability remark.",
+      "opened": true
+    },
+    {
+      "id": "def-hyperbolic-system-and-characteristic-families",
+      "used_for": "Underlying conservation-system state-domain and flux conventions for the Euler/HLL suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-pe03-system-entropy-pair-and-potential",
+      "used_for": "Entropy compatibility equation, column-gradient entropy variable and entropy potential underlying the dissipative-flux terminology.",
+      "opened": true
+    },
+    {
+      "id": "def-pe03-tadmor-entropy-conservative-flux",
+      "used_for": "Consistency, symmetry, continuity and exact entropy-variable jump identity underlying the numerical contract.",
+      "opened": true
+    },
+    {
+      "id": "lem-pe03-euler-llf-split-state-positive",
+      "used_for": "Checked the split-state algebra and strict positivity, including equality in a≥|u|+c, supporting the cited positivity theorem.",
+      "opened": true
+    },
+    {
+      "id": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+      "used_for": "Checked convexity of G_γ used in the positivity supplier's convex-combination proof.",
+      "opened": true
+    },
+    {
+      "id": "def-pe03-euler-positive-margin-domain",
+      "used_for": "Positive-margin set referenced by the convexity supplier, distinguished from the open admissible Euler set.",
+      "opened": true
+    },
+    {
+      "id": "thm-hll-flux-is-consistent-and-conservative",
+      "used_for": "Checked the assigned HLL model flux and conservative middle-state balances supporting the half-cell formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-conservative-finite-volume-scheme",
+      "used_for": "Scalar full-line scheme, initial cell averages, positive mesh parameters and continuous consistent numerical flux underlying the weak-limit theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-volume-space-time-reconstruction",
+      "used_for": "Piecewise-constant state/face-flux reconstruction and strong local L¹ convention underlying the weak-limit summary.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-volume-discrete-summation-by-parts",
+      "used_for": "Checked the discrete weak identity used in the weak-limit supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+      "used_for": "Checked face-flux convergence and the identified local spatial-translation use of ACω reported by the owned remark.",
+      "opened": true
+    },
+    {
+      "id": "def-locally-bounded-distributional-weak-solution",
+      "used_for": "Exact weak-limit conclusion with initial boundary term and local boundedness, without an entropy inequality or strong initial trace.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "rem-fd-compressible-stability-distinctions",
+      "concern": "The paragraph beginning “The convex-scaling limiter applies to a finite nonempty set of node states” lists positive normalized weights and an admissible mean but omits the supplier's essential requirement that K be closed and convex. Earlier in this remark K is only a convex state set. The cited alg-pe03-convex-scaling-positivity-limiter returns the largest admissible θ, which need not exist for an open convex K: take K=(0,1), equally weighted nodes −1/2 and 3/2, and mean 1/2. The admissible parameters are [0,1/2), with no maximum. The mean-preservation calculation is sound, but applicability of the cited maximal limiter needs its closed-target hypothesis stated.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fd-pn02",
+      "to": "fd-n03",
+      "faithful": true,
+      "note": "Checked the page prerequisite and both consuming items. post-fd-ideal-gas-numerical-model uses the same Euler state, pressure, flux and sound-speed formulas while separately adopting its physical closure. pthm-fd-conditional-positive-euler-update preserves the periodic symmetric-branch endpoint-speed and CFL hypotheses and applies the positivity proposition faithfully. It explicitly excludes exact-wave enclosure, fully discrete entropy, convergence and empirical agreement. Both owned TikZ diagrams also match their stated face orientation and half-cell fan conventions."
+    }
+  ]
+}

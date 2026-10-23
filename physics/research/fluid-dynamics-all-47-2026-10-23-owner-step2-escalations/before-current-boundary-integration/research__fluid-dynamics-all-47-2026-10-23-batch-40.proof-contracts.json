@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "40",
+  "scope": [
+    "post-fd-geophysical-model-branches",
+    "pthm-fd-geophysical-conditional-energy",
+    "ex-fd-coriolis-no-work"
+  ],
+  "contracts": {
+    "post-fd-geophysical-model-branches": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate separately states the exact periodic linear constant-N Boussinesq equations and the one-layer flat-bottom shallow-water equations, with their field types, coefficients, Cartesian operators and SI units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Boussinesq branch states small fractional density anomalies, constant reference density in inertia, retained buoyancy, constant f and N, linearization and periodic mathematical domain. The shallow-water branch states H/L much less than one, hydrostatic pressure, depth-independent horizontal velocity, positive depth, flat bottom and omitted effects. No accuracy estimate or universal empirical claim is made."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Vallis, University of Exeter full lecture notes, §§1.2, 1.6.2–1.6.3, 1.7 and 2.1, and Berloff, Imperial College full lecture notes, Boussinesq/hydrostatic sections and the shallow-water model, were independently read at their complete relevant arguments. Both full PDFs passed source-fetch-check --stamp."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item labels both branches as adopted model assumptions, explicitly says they are not mathematical conclusions, supplies no approximation-error theorem, and reports no experiment or validation."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "A physical postulate records adopted assumptions; no finite measurement or numerical test is claimed."
+    },
+    "pthm-fd-geophysical-conditional-energy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-geophysical-model-branches",
+          "source_section": "Postulate",
+          "quote": "$$u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-stratified-linear-energy",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$, and use the periodic domain $\\mathbb T^3=\\mathbb R^3/(2\\pi\\mathbb Z)^3$ with Lebesgue measure $\\lambda_3$ on $Q_3=[0,2\\pi]^3$, where $dx=d\\lambda_3(x)$ and the time-space integral is iterated with the spatial integral first. Let $f\\in\\mathbb R$, $N>0$, and $\\nu,\\kappa\\ge0$ be constants. Suppose $u,b$ are continuously differentiable in time and space with continuous second spatial derivatives, and $\\pi$ has continuous first spatial derivatives; all fields are $2\\pi$-periodic and satisfy\n\n$$u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b.$$\n\nDefine the positive energy per reference density\n\n$$E(t):=\\frac12\\int_{Q_3}\\left(|u(t,x)|^2+\\frac{b(t,x)^2}{N^2}\\right)\\,dx.$$\n\nThen for every $t_0<t_1$ in $I$,\n\n$$E(t_1)-E(t_0)=-\\int_{t_0}^{t_1}\\int_{Q_3}\\left(\\nu|\\nabla u|^2+\\frac{\\kappa}{N^2}|\\nabla b|^2\\right)\\,dx\\,dt.$$\n\nThus the inviscid model conserves $E$, and the stated nonnegative diffusion coefficients make it nonincreasing. The condition $N>0$ is essential for this positive energy. This is an exact identity conditional on the displayed smooth linear Boussinesq equations; it is not a nonlinear or compressible stability theorem. A discrete analogue requires a skew Coriolis operator and compatible pressure/divergence pairing in the actual discretization; no claim is made for arbitrary schemes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-model-and-energy-hypotheses",
+          "step": "1.1",
+          "claim": "The hypotheses in the statement, including Countable Choice [A2], give exactly the periodic domain, Lebesgue integration convention, regularity, coefficient signs, and pointwise equations required by [F1], and the defined $E$ is the same normalized integral functional as [F1]; [A1] identifies those equations as the adopted physical model branch.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1"
+          ]
+        },
+        {
+          "id": "apply-stratified-linear-energy-identity",
+          "step": "2.1",
+          "claim": "Apply the mathematical supplier's exact integral identity on the stated interval to obtain the displayed conditional physical-model energy balance.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "deduce-energy-monotonicity-and-units",
+          "step": "3.1",
+          "claim": "Nonnegative coefficients make the dissipation integral nonnegative; setting both coefficients to zero gives conservation. The declared SI dimensions give the density and integral units.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty open interval, nonempty periodic domain, and t0<t1 in that interval.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement explicitly fixes the nonempty Q_3=[0,2pi]^3, a nonempty open I, and t0<t1. Its sums have indices j=1,2,3 or (i,j) in {1,2,3}^2; no variable finite family is quantified. Proof 1.1 matches these hypotheses to thm-fd-stratified-linear-energy; 2.1 applies that supplier on the nonempty interval [t0,t1], and 3.1 uses the nonnegative fixed-component norms. I also read that supplier: its steps 1.1–3.1 cancel buoyancy work and periodic flux and integrate in time. Empty domains or index sets are not admissible here.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement explicitly fixes the nonempty Q_3=[0,2pi]^3, a nonempty open I, and t0<t1. Its sums have indices j=1,2,3 or (i,j) in {1,2,3}^2; no variable finite family is quantified. Proof 1.1 matches these hypotheses to thm-fd-stratified-linear-energy; 2.1 applies that supplier on the nonempty interval [t0,t1], and 3.1 uses the nonnegative fixed-component norms. I also read that supplier: its steps 1.1–3.1 cancel buoyancy work and periodic flux and integrate in time. Empty domains or index sets are not admissible here.",
+            "item_sha256": "1349b6f8875eabf33aedad4f8f9efd1b13add76f58d704b2d0e32d25e791760c",
+            "row_sha256": "81b449e23a8ed22ac81fc47d40ed0b8faad265e47b096cce5991100e52139752",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=b=0, E and both diffusion terms vanish. When nu=kappa=0, step 3.1 gives exact conservation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The branch is explicitly three-dimensional on T^3; no one-dimensional variant is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N>0 excludes division by zero. If either coefficient is zero its diffusion term vanishes, and no strict decay is claimed; see Statement and step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints are arbitrary elements t0<t1 of I; the stated continuity ensures integrals on the compact interval, and the identity applies at those endpoints in Statement and step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof invokes one fixed supplier theorem and finite algebra only; see steps 1.1 and 2.1. It uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way energy identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way energy identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof is a conditional analytic identity for every field in the stated class; no finite numerical instance is offered as proof."
+    },
+    "ex-fd-coriolis-no-work": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-geophysical-model-branches",
+          "source_section": "Postulate",
+          "quote": "u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-fd-geophysical-model-branches",
+          "source_section": "Postulate",
+          "quote": "Here $e_3\\times u=(-u_2,u_1,0)$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "expand-coriolis-cross-product",
+          "step": "1.1",
+          "claim": "Use the right-handed coordinate definition of the cross product to write f e3 cross u as f(-u2,u1,0).",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cancel-coriolis-work",
+          "step": "2.1",
+          "claim": "Dot the signed acceleration contribution -f e3 cross u with u; the two scalar products cancel, giving zero specific power with units W/kg.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a pointwise identity for a vector in R^3 and has no domain-existence assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If u=0 or f=0, the signed work term vanishes directly; the coordinate proof in step 2.1 covers these cases."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses the fixed three-dimensional cross product and makes no lower-dimensional variant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Every vector is covered, including vertical vectors parallel to e3; see the coordinate expansion in step 1.1 and cancellation in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is pointwise algebra and asserts no time-endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The cancellation in step 2.1 is finite algebra and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a one-way identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The example is proved for every vector by coordinate algebra; no numerical sample is used as evidence."
+    }
+  }
+}

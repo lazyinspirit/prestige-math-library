@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "47",
+  "round": 1,
+  "reviewed_items": [
+    "post-fd-capillary-linear-free-surface",
+    "pthm-fd-capillary-wave-model-prediction",
+    "ex-fd-capillary-restoring-sign"
+  ],
+  "reviewed_pages": [
+    "fd-pbl01",
+    "fd-pbl01-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The repair resolves all four earlier findings, and the required consumer checks are complete. The current postulate introduces a geometric constraint on the same field used for unrestricted linear modes, and its regularity convention is not explicitly reconciled with the current mathematical supplier. This second review remains unsatisfied, so owner resolution is required.",
+  "findings": [
+    {
+      "id": "f47-5-linear-mode-scope",
+      "type": "scope",
+      "reason": "The Postulate imposes eta(x,t) > -h on the same eta used as a first-order model field. The theorem says real and imaginary parts of its complex modes are model fields, and proof step 6.1 constructs modes for any H != 0. For nonzero m, the horizontal phase covers the circle, so a real mode with |H| > h falls below -h. Clarify whether the first-order field is a formal perturbation exempt from the finite-interface constraint, or carry an admissibility condition through the theorem and example."
+    },
+    {
+      "id": "f47-6-capillary-regularity-edge",
+      "type": "prerequisite",
+      "reason": "The current Definition of def-fd-wall-defect-capillary-models requires closed-slab fields to extend to a neighborhood. The consuming Postulate defines C^r using continuous derivatives and one-sided boundary extensions, but does not establish that this class meets the supplier's extension requirement. Reconcile the exact edge def-fd-wall-defect-capillary-models -> post-fd-capillary-linear-free-surface with an explicit regularity condition or an exact extension result."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "post-fd-capillary-linear-free-surface",
+      "decision": "escalate",
+      "reason": "Direct consumer of the changed mathematical Definition; the exact regularity convention remains unresolved. The new eta > -h restriction also needs reconciliation with the formal linear perturbation."
+    },
+    {
+      "id": "pthm-fd-capillary-wave-model-prediction",
+      "decision": "escalate",
+      "reason": "Direct consumer of the Postulate and indirect consumer of the changed Definition. Its real-mode interpretation and unrestricted amplitudes inherit the unresolved geometric constraint."
+    },
+    {
+      "id": "ex-fd-capillary-restoring-sign",
+      "decision": "escalate",
+      "reason": "Indirect consumer through the theorem; its mode example inherits the unresolved distinction between formal perturbations and admissible finite-interface geometry."
+    },
+    {
+      "id": "thm-fd-common-wall-residual-error",
+      "decision": "accept",
+      "reason": "Its stated bounded C^2 domain, neighborhood-extension regularity, common traces, and residual convention match the current Definition."
+    },
+    {
+      "id": "thm-fd-capillary-gravity-dispersion-energy",
+      "decision": "accept",
+      "reason": "Its periodic-lift convention and neighborhood-extension regularity match the current capillary-model Definition."
+    },
+    {
+      "id": "ex-fd-capillary-zero-tension-limit",
+      "decision": "accept",
+      "reason": "Its use through the capillary-gravity theorem remains consistent with the current model Definition."
+    }
+  ]
+}

@@ -1,0 +1,333 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "post-fd-boundary-data",
+      "model": "gpt-6-luna",
+      "context_sha256": "2420c43d3e88e9cfbed9f230cf2929e336e44b636e5727a6b0777e3e6da65fde",
+      "outcome": "false_positive",
+      "reason": "The cited academicweb PDF was retrieved successfully and its SHA-256 d6cffab64c700da0bfae91a18801205bc1e8512fd4eaf997906385cfd16b81f2 matches the attributed extracted source. I read the extracted complete section 5.4.1 on printed pp. 173\u2013174, including the explicit plate/fluid velocity equality called no-slip on p. 174. The locator is correct for this version; the separately specified thermal, periodic and initial data are model assumptions, with no solvability claim. No source edit is warranted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "pthm-fd-conservation-jump-laws",
+      "model": "gpt-6-luna",
+      "context_sha256": "8f860c5384bd9db902f988fac3504aef5e8886430131df2b3b401c214899af70",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed type error in the generic Statement, F2 restatement and proof 2.1: momentum flux is a 3x3 matrix, so its normal contraction is [F]n. The separate displayed physical jump equalities were already correct. Repaired the generic notation with an explicit scalar-law row identification, retained all jumps, and spelled out the thin-tube entropy necessity argument. Classified as nonfatal because the componentwise derivation and explicit momentum conclusion were sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-fd-cauchy-momentum-angular",
+      "model": "gpt-6-luna",
+      "context_sha256": "8a20ae1b51c0a175a850bf159b5aee436d01b2a03690522b47a09889399e68bc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The broad local-balance supplier requires C1 thermodynamic fields and the total-energy balance, absent from this mechanical Statement; its narrower F3 restatement was unlicensed. Replaced that invocation by direct material transport, divergence and continuous-residual localization for momentum, then an explicit alternating-symbol calculation and converse for angular momentum. Also required u(t,chi(t,a))=partial_t chi(t,a), without which a static chi and steady u=(y,x,0), rho=1, sigma=b=0 satisfy all displayed material integrals but violate local momentum. All original mechanical conclusions and continuous-body-source scope are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-fd-control-volume-balances",
+      "model": "gpt-6-luna",
+      "context_sha256": "e4d56f28a16488fd3368d35c1cfc3c9e38831701b07e5a2e5cfd53ba108b7b97",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed missing applicability premise: Omega_t had no link to any balanced material motion, so the proof could not obtain PDEs near the control closure from the cited material-body interfaces. Added explicit eventwise normalized local material charts, inducing u and carrying the exact material mass and momentum balances. Applied the mass supplier with translated time; derived momentum directly from the given material balance using transport, divergence and continuous-residual localization. Preserved arbitrary I, arbitrary control motion X, and both original relative-flux conclusions without assuming angular or thermal balances.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "model": "gpt-6-luna",
+      "context_sha256": "7c8eefec6c873df6f153f9967cfba6bd5aaac27c6e618fb0aff1c205ca9cba61",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed missing same-motion premise: with identity chi, rho=rho0=1, steady u=(y,x,0), and sigma=b=q=r=e=0 all displayed static material integrals balance, but (u dot grad)u=(x,y,0) and div((|u|^2/2)u)=2xy contradict the claimed local equations. Also confirmed the digest density omission: C1 regularity of rho was absent. Added both explicit hypotheses, retained all energy and potential/global conclusions, applied the repaired Cauchy mechanical interface, and proved local total energy by transport/divergence/localization. Kinetic stress-work and internal-energy subtraction, potential cancellation, fixed no-slip/insulating flux cancellation and periodic face cancellation were checked directly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "post-fd-boundary-data",
+      "disposition": "unaffected",
+      "post_sha256": "985869e89db4297406f39f8172c1be2a35229675fb3d9305cf81b1a284819b52",
+      "review_context_sha256": "a20a12c5c488df4e424bdd05f494ab8276e922258ef2c584138db4d2ff8c538e",
+      "reason": "Retrieved the cited Powers PDF and matched its exact SHA-256 to the attributed extraction. Read complete section 5.4.1 on pp. 173\u2013174, including no-slip on p. 174. The citation is correct; the wall, thermal, periodic and weak-initial conventions remain qualified adopted assumptions with no solvability assertion. Item unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "pthm-fd-conservation-jump-laws",
+      "reason": "Checked the componentwise graph residual, scalar row identification, momentum matrix-vector contraction, entropy thin-tube sign argument, both weak-law implications and independent initial terms. Corrected the generic notation while retaining every displayed physical jump and allowing zero density.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "2f35113cfec1a2c41145394f22c07dbd0993e3c0b97628234f2d795a704afbdc",
+      "review_context_sha256": "8a6a06a8472722df5c59e5376dc1eeb1336c5f36117d401f153b219c3f62a292"
+    },
+    {
+      "id": "pthm-fd-cauchy-momentum-angular",
+      "reason": "Checked the explicit same-motion velocity, exact continuity supplier and direct transport/divergence/localization derivation. The alternating-symbol moment-stress identity proves symmetry, and its reverse proves angular balance. No thermal premise is needed. Canonical numbering and current owning metadata are synchronized.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "5d2ae031bbe5b349d1fcc70ce334c3bc4eeb80fe6e972229c1c607a50a14eb09",
+      "review_context_sha256": "f58902eca6ec19ee900b6944e536598a5838cd5e67d91e739036eae710ed158c"
+    },
+    {
+      "id": "pthm-fd-control-volume-balances",
+      "reason": "Checked eventwise normalized material charts cover O, with positive C1 reference density and motion-induced velocity. Exact continuity and a direct momentum localization hold near every control closure. Transport and rowwise divergence give the stated u-w fluxes; only its normal component enters. Canonical numbering and metadata are synchronized.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "0fbc0a8005921b0e1b799c350d18af9ff835177496acecae9c0b2638d215189d",
+      "review_context_sha256": "2a56561bca7abe98d2040da1ba263993b6a8fcaad20ba3535f77346c95076a0d"
+    },
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "reason": "Checked C1 current density and induced velocity, repaired Cauchy applicability, and direct localization of total energy. Verified stress transpose and contraction signs, kinetic/internal subtraction, potential cancellation, and fixed-wall or periodic global conservation. The unchanged conduction consumer supplies all added hypotheses explicitly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "76ed9986a767c933adfc28457ca0235fac7759ac9d1928f7d8b95bcbbf9c3cdc",
+      "review_context_sha256": "5bba1989362867c8bc8204998fd3c619b308e0146f967e93f64b58269d4d0e8f"
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-fd-energy-decomposition",
+    "ex-fd-conduction-energy-entropy"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "proposed_updates": [
+        {
+          "ledger": "canonical-defect",
+          "id": "pthm-fd-conservation-jump-laws",
+          "status": "fixed",
+          "severity": "nonfatal",
+          "finding": "Generic momentum flux contraction mistyped as a vector dot product; repaired to row/matrix normal multiplication.",
+          "uncertain": false,
+          "familiar": true,
+          "source_urls": []
+        },
+        {
+          "ledger": "canonical-defect",
+          "id": "pthm-fd-cauchy-momentum-angular",
+          "status": "fixed",
+          "severity": "fatal",
+          "defect_type": "dependency_citation",
+          "finding": "Removed invocation of full thermal balance interface from mechanical proof; also made same-motion velocity explicit.",
+          "uncertain": false,
+          "familiar": true,
+          "source_urls": []
+        },
+        {
+          "ledger": "canonical-defect",
+          "id": "pthm-fd-control-volume-balances",
+          "status": "fixed",
+          "severity": "fatal",
+          "defect_type": "dependency_citation",
+          "finding": "Established that every event used by a control integral lies in a balanced material chart, and removed use of a thermal interface from the momentum derivation.",
+          "uncertain": false,
+          "familiar": true,
+          "source_urls": []
+        },
+        {
+          "ledger": "canonical-defect",
+          "id": "pthm-fd-energy-decomposition",
+          "status": "fixed",
+          "severity": "fatal",
+          "defect_type": "logic",
+          "finding": "Made current density C1 and identified u with the material velocity; completed direct total-energy derivation and preserved all conditional conservation claims.",
+          "uncertain": false,
+          "familiar": true,
+          "source_urls": []
+        },
+        {
+          "id": "pthm-fd-continuous-source-local-balances",
+          "status": "open-proposed",
+          "severity": "fatal",
+          "defect_type": "logic",
+          "route": "owner native discovery",
+          "reason": "With identity chi, rho=1, steady u=(y,x,0), sigma=b=e=q=r=0, continuity and all static material integrals hold, but D_tu=(x,y,0) and div(ku)=2xy violate the local momentum and energy conclusions.",
+          "uncertain": false,
+          "familiar": true,
+          "source_urls": []
+        },
+        {
+          "id": "lem-fd-weak-jump-consistency",
+          "status": "open-proposed",
+          "severity": "nonfatal",
+          "route": "assigned supplier owner",
+          "reason": "Proof 1.2 writes lambda([F] dot n-V_n[U]) and its vanishing condition for a matrix-valued system flux, although its Statement correctly uses [F]n. Replace the two generic dot products in proof 1.2 with matrix-vector multiplication; preserve the already-correct Statement and scalar entropy formula.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        }
+      ]
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "proposed_updates": []
+    }
+  ],
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-9-step5-context.json": "2029403fb33708fac3c762f97be1c9c5f64f79aa52ed18ea6986da7346a93108",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/sources/reading.json": "06fda4d161cf25090e125308c14e4edd83245e744de4904d134d5462230b4dd0",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/sources/powers-inspected-pages.txt": "6956ab5e6356bf22929dccd13e578075d18c235ba50aaef67a4e1a4c9964f4b8",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/jump-proposal.json": "e895224bcce37ca7ec2f518adac5c658cf27cf31239d31ced7be382e754ae715",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-kinematics/scientific-resolution.json": "92b59e5c6f8244b57115b529991bfd25d93310fe7f714e1326c7a0abcfa7ee59",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-index.json": "4a83bdddc6c191f48ee116d78ae9c344db071985381ff8142b37cf51f838a40e",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-supplement-0001.json": "90e98f055337bee8b6ff7855f4f79e311b306e802b8f542f70a90797239e38de",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-supplement-0002.json": "2f2a6200c092208fd5ec0dca9b65e1a68b797d8db4c95f713a266cff97d3c4bd",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-supplement-0003.json": "f1ece2972593556335a4cd066c0d6c70f19a912f097dcbb0b6c040f74e501b4b",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-kinematics/pthm-fd-control-volume-balances.diff": "6c7e232285d695922744c99046e9c73676733b05af824d0260cd0a7641daa9fd",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-constitutive/science-report.md": "c1c36c15ba16f88f49f3bd70da1002624ca3671bc7b88ea7f7b003695d77eafd"
+  },
+  "repair_notes": {
+    "status": "complete",
+    "next_action": "Controller collects, routes both unassigned supplier findings and the unchanged conduction consumer, then completes ordinary review and certification; this dispatch does not certify the run.",
+    "source_reading": "Powers PDF retrieved to /tmp/step5-u9-powers.pdf; exact hash matches immutable support PDF. Relevant full section read from attributed extraction; no claim of new text extraction. Web fetch failed, ordinary TLS curl succeeded.",
+    "consumer_uses": [
+      {
+        "supplier": "pthm-fd-cauchy-momentum-angular",
+        "consumer": "pthm-fd-energy-decomposition",
+        "path": "items/pthm-fd-energy-decomposition.md",
+        "affected_use": "New F1 and proof 2.1 use mechanical momentum and symmetry only, with precisely the same normalized chi, induced u, positive C1 rho0/rho and adopted material mass, linear and angular balances.",
+        "disposition": "repaired within assigned energy item; current F1 quotation and proof contract synchronized"
+      },
+      {
+        "supplier": "pthm-fd-energy-decomposition",
+        "consumer": "ex-fd-conduction-energy-entropy",
+        "path": "items/ex-fd-conduction-energy-entropy.md",
+        "affected_use": "F1 and proof 2.1 invoke internal energy and periodic conservation. Proof 2.1 supplies chi(t,a)=a, U=R3, a bounded C1 ball B containing Q, rho0=rho constant, u=0, and verifies all material balances; smooth T,e,q on I containing zero satisfy the explicit C1 rho and same-motion hypotheses.",
+        "disposition": "unaffected source; frontier owner should review current context and refresh its owning F1 contract quotation if required",
+        "consumer_raw_sha256": "eb279002cc9b340dcc5b7a4dab87e80bd9b4db741891d692b325c5324644c15c"
+      }
+    ],
+    "interface_comparisons": {
+      "post-fd-boundary-data": "No change to item bytes, physical_scope, Postulate or empirical qualifications.",
+      "pthm-fd-conservation-jump-laws": "Statement generic coefficient and contraction convention changed; all explicit jumps, hypotheses and physical scope preserved.",
+      "pthm-fd-cauchy-momentum-angular": "Statement now explicitly identifies u with chi-induced velocity; original conclusions preserved. Replaced broad thermal dependency with actual existing mechanical proof tools; dependency_level and manifest now 4.",
+      "pthm-fd-control-volume-balances": "Statement now requires open O and eventwise balanced local material charts inducing u, with explicit reference mass and linear momentum formulas. Arbitrary I and independently moving X retained. Removed broad thermal interface, added C1-image supplier; dependency_level and manifest now 4.",
+      "pthm-fd-energy-decomposition": "Statement now requires C1 current density and induced material velocity. All energy, potential and boundary conclusions preserved. Replaced broad local supplier by repaired Cauchy plus direct transport/divergence/localization; dependency_level remains 5."
+    },
+    "outside_scope_findings": [
+      {
+        "id": "pthm-fd-continuous-source-local-balances",
+        "path": "items/pthm-fd-continuous-source-local-balances.md",
+        "route": "owner native discovery; no assigned tuple and no source edit",
+        "affected_use": "Statement introduces chi and u independently, but proof 1.1 uses chi transport with advective velocity u. Exact same-motion premise is absent.",
+        "invalidated_claim": "With identity chi, rho=1, steady u=(y,x,0), sigma=b=e=q=r=0, continuity and all static material integrals hold, but D_tu=(x,y,0) and div(ku)=2xy violate the local momentum and energy conclusions.",
+        "minimality": "Add the missing same-motion velocity equality; any mechanical-only interface must separately be stated and proved before consumers may cite it. This unit instead completed mechanical and energy arguments locally and removed its uses of this unassigned supplier.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "lem-fd-weak-jump-consistency",
+        "path": "items/lem-fd-weak-jump-consistency.md",
+        "route": "assigned supplier owner; no source edit",
+        "affected_use": "Proof 1.2 writes lambda([F] dot n-V_n[U]) and its vanishing condition for a matrix-valued system flux, although its Statement correctly uses [F]n.",
+        "invalidated_claim": "The generic proof notation is ill-typed for m>1; the preceding explicit column formula and the Statement already give the correct matrix-vector contraction.",
+        "minimality": "Replace the two generic dot products in proof 1.2 with matrix-vector multiplication; preserve the already-correct Statement and scalar entropy formula.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "mathematical_review_limits": "Checked actual local arguments and exact material, moving-boundary, weak-jump, geometric and divergence interfaces used here. No independent review of these repairs, whole-transitive audit, empirical observation, or external full-book reading is claimed. No TikZ/tikzcd diagram occurs in the assigned five items; no diagram is needed for these componentwise deductions.",
+    "support_attribution": "The root-published jump proposal identified the same contraction correction; the kinematics report identified the same motion/region issues. I checked the current supplier statements and arguments. I did not adopt proposals requiring an edit to the unassigned continuous-local supplier, and instead supplied the needed direct mechanical/energy arguments in assigned items. The constitutive source extraction was read with attribution and verified against a newly retrieved matching PDF hash.",
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/post-fd-boundary-data.md items/pthm-fd-conservation-jump-laws.md items/pthm-fd-cauchy-momentum-angular.md items/pthm-fd-control-volume-balances.md items/pthm-fd-energy-decomposition.md",
+        "exit_code": 0,
+        "result": "5 checked, 0 failing; all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/post-fd-boundary-data.md items/pthm-fd-conservation-jump-laws.md items/pthm-fd-cauchy-momentum-angular.md items/pthm-fd-control-volume-balances.md items/pthm-fd-energy-decomposition.md",
+        "exit_code": 0,
+        "result": "5 files, all math and frontmatter parse; no delimiter/link defects"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-9.proof-contracts.json --strict --items post-fd-boundary-data,pthm-fd-conservation-jump-laws,pthm-fd-cauchy-momentum-angular,pthm-fd-control-volume-balances,pthm-fd-energy-decomposition",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 5/5 checked"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/pthm-fd-conservation-jump-laws.md items/pthm-fd-cauchy-momentum-angular.md items/pthm-fd-control-volume-balances.md items/pthm-fd-energy-decomposition.md",
+        "exit_code": 0,
+        "result": "4 items, 24 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-u9-items.json --json",
+        "exit_code": 0,
+        "result": "Focused five-item selection and fd-f02: 0 errors, 0 warnings; dependency closure contains 955 items and 168 pages."
+      },
+      {
+        "command": "node --input-type=module (import inspectStatement,statementRuntime from tools/statement-first.mjs; inspect five explicit assigned sources)",
+        "exit_code": 0,
+        "result": "5 items, 0 statement-first defects"
+      }
+    ],
+    "shared_metadata": "Owning batch-9 pages manifest and proof-contract rows for the four repaired items were surgically synchronized under the step5 shared lock; all strict per-item checks passed. Other rows, independent reviews and original round evidence were preserved.",
+    "page_uses": [
+      {
+        "supplier": "pthm-fd-conservation-jump-laws",
+        "consumer": "fd-f02",
+        "path": "library/fluid-dynamics/fd-f02.md",
+        "affected_use": "The items inventory places the fluid jump theorem on fd-f02; its body is empty and it asserts no additional jump identity.",
+        "disposition": "unaffected"
+      },
+      {
+        "supplier": "pthm-fd-cauchy-momentum-angular",
+        "consumer": "fd-f02",
+        "path": "library/fluid-dynamics/fd-f02.md",
+        "affected_use": "The page items inventory places this changed theorem in supplier order; the page body is empty under compact-v1 and makes no additional mathematical assertion.",
+        "disposition": "unaffected"
+      },
+      {
+        "supplier": "pthm-fd-control-volume-balances",
+        "consumer": "fd-f02",
+        "path": "library/fluid-dynamics/fd-f02.md",
+        "affected_use": "The page items inventory places this changed theorem in supplier order; the page body is empty under compact-v1 and makes no additional mathematical assertion.",
+        "disposition": "unaffected"
+      },
+      {
+        "supplier": "pthm-fd-energy-decomposition",
+        "consumer": "fd-f02",
+        "path": "library/fluid-dynamics/fd-f02.md",
+        "affected_use": "The page items inventory places this changed theorem in supplier order; the page body is empty under compact-v1 and makes no additional mathematical assertion.",
+        "disposition": "unaffected"
+      }
+    ],
+    "published_maintenance": "No new published-item defect was independently confirmed in this assignment. Imported mathematics remains read-only; inherited digest alerts were not silently promoted to fresh source findings.",
+    "gate_scope": "No gate diagnostics were assigned. No independent repair acceptance, judge launch, stamp or certification is claimed."
+  },
+  "downstream_uses": {}
+}

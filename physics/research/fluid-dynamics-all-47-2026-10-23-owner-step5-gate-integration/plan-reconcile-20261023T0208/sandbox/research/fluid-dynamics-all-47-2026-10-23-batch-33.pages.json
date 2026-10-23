@@ -1,0 +1,309 @@
+[
+  {
+    "order": 671,
+    "id": "fd-st02",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Fluid observable uncertainty and numerical bias budgets",
+    "companion": "fd-st02-examples",
+    "requires": [
+      "fd-st01",
+      "global-sensitivity-anova-and-sobol-estimation",
+      "iid-monte-carlo-integration-and-error",
+      "modes-of-convergence-for-random-variables",
+      "probability-spaces-random-variables-and-expectation",
+      "relations-functions-and-quotients",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "def-fd-random-fluid-observable",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Random fluid observable and numerical approximation",
+        "reference": "items/def-fd-random-fluid-observable.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-random-velocity-sensor-law",
+          "lem-fd-sensor-pairing-is-well-defined"
+        ],
+        "dependency_roles": {
+          "lem-fd-sensor-pairing-is-well-defined": "mathematical-premise",
+          "def-fd-random-velocity-sensor-law": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(\\Theta,\\mathcal A,\\mu)$ be a specified probability space of inputs, let $I\\subset\\mathbb R$ be a nonempty common time interval, and let $(X,\\mathcal X)$ be a specified measurable state or path space. An exact selected solution map is a supplied measurable map $S:\\Theta\\to X$ whose values solve the specified mathematical model on $I$. The equation, solution class and admissible input set are supplied as data; a smooth uniqueness theorem may identify a single-valued map, but measurability is a separate required hypothesis. In a nonunique weak theory an actual measurable selection must be given before taking a pushforward law; this definition asserts no selection theorem. More generally a supplied measurable random state is allowed without any PDE interpretation. A real observable is a map $J:X\\to\\mathbb R$ such that $Y:=J\\circ S$ is measurable. It is integrable or square-integrable when $\\mathbb E_\\mu|Y|<\\infty$ or $\\mathbb E_\\mu Y^2<\\infty$, respectively.\n\nFor a nonempty set $H$ of numerical settings, supplied measurable numerical composites $Y_h=J_h\\circ S_h$ define approximate outputs on the same input law; the maps $S_h$ may take values in specified approximation spaces $X_h$, with $J_h:X_h\\to\\mathbb R$. When $Y,Y_h$ are integrable, define $\\theta=\\mathbb E_\\mu Y$, $\\theta_h=\\mathbb E_\\mu Y_h$ and signed mean bias $b_h=\\theta_h-\\theta$. Output variances require finite second moments. This definition implies neither IID sampling nor numerical convergence, a bias bound, or physical applicability. All exact and approximate outputs must use the same declared scalar unit before forming their bias.\n\nThe finite-second-moment spatial velocity law and sensor are included as follows. Let $H_D=L^2(D,\\mathcal D,\\lambda;\\mathbb R^d)$ and let $\\mu_H$ be the supplied finite-second-moment probability law on $(H_D,\\mathcal B(H_D))$. Take $\\Theta=X=H_D$, $\\mathcal A=\\mathcal X=\\mathcal B(H_D)$, $\\mu=\\mu_H$, $S=\\operatorname{id}_{H_D}$, and $J=S_\\psi$ for the supplied weight $\\psi\\in H_D$. Thus the input itself is the random velocity class and $Y(v)=S_\\psi(v)$. The identity map is measurable, and the pairing lemma gives measurability and a finite second moment under exactly $\\mu_H$. This use is on quotient classes and requires no measurable choice of pointwise representatives. In the general separable Banach-state branch, bounded linear sensors have the same measurability and moment property by their operator bounds. Time-series sampling, a Markov chain, and mixing remain additional assumptions; dependent consecutive readings are not IID merely because this definition applies.\n\nThe earlier pointwise-field formulation is also included: let $d_s\\in\\{2,3\\}$, let $D\\subseteq\\mathbb R^{d_s}$ be nonempty and Lebesgue-measurable, and let $(\\mathscr V,\\mathcal V)$ be any specified measurable space of product-measurable fields $u:D\\times I\\to\\mathbb R^{d_s}$. Use $X=\\mathscr V$, a supplied measurable random-field map, and measurable scalar composites. Passing from an $L^2$ class to such a pointwise random field requires a supplied jointly measurable representative; it is not part of the quotient-sensor specialization. Velocity components use one fixed velocity unit, and sensor weights carry the corresponding integral units.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §§2.1–2.2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            },
+            {
+              "title": "Olivier Le Maître and Omar Knio, Introduction to Uncertainty Quantification, DTU PhD course lecture notes, pp. 3–4 and 14–16",
+              "url": "https://www2.compute.dtu.dk/~apek/UQ2018/lecture1.pdf"
+            },
+            {
+              "title": "NASA Glenn Research Center, Uncertainty and Error in CFD Simulations",
+              "url": "https://www.grc.nasa.gov/WWW/wind/valid/tutorial/errors.html"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "justified_by": []
+      },
+      {
+        "id": "thm-fd-observable-sampling-bias-split",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact sampling variance and a numerical-bias error bound",
+        "reference": "items/thm-fd-observable-sampling-bias-split.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-random-fluid-observable",
+          "def-iid-monte-carlo-estimators",
+          "thm-iid-monte-carlo-central-limit",
+          "thm-iid-monte-carlo-sample-variance-consistency",
+          "thm-slutsky-for-real-random-variables",
+          "def-convergence-in-distribution-for-real-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-axiom-of-choice",
+          "thm-dominated-convergence",
+          "def-standard-normal-and-normal-laws",
+          "thm-change-of-variables-for-expectation",
+          "cor-variance-adds-for-pairwise-independent-random-variables",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_roles": {
+          "def-standard-normal-and-normal-laws": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "def-convergence-in-distribution-for-real-random-variables": "mathematical-premise",
+          "thm-slutsky-for-real-random-variables": "mathematical-premise",
+          "thm-iid-monte-carlo-sample-variance-consistency": "mathematical-premise",
+          "thm-iid-monte-carlo-central-limit": "mathematical-premise",
+          "def-fd-random-fluid-observable": "mathematical-premise",
+          "def-iid-monte-carlo-estimators": "mathematical-premise",
+          "thm-change-of-variables-for-expectation": "mathematical-premise",
+          "cor-variance-adds-for-pairwise-independent-random-variables": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $Y=J(S)$ and $Y_h=J_h(S_h)$ be a real random fluid observable and its numerical approximation as defined by the random-fluid-observable definition. Assume $Y\\in L^1(\\mathbb P)$ and $Y_h\\in L^2(\\mathbb P)$. Set $\\theta:=\\mathbb E[Y]$, $\\theta_h:=\\mathbb E[Y_h]$, $b_h:=\\theta_h-\\theta$, and $\\sigma_h^2:=\\operatorname{Var}(Y_h)$. For an integer $n\\ge1$, let $Y_{h,1},\\ldots,Y_{h,n}$ be independent random variables with the law of $Y_h$, on a sampling probability space $(\\Omega_s,\\mathcal F_s,\\mathbb P_s)$, and define $\\bar Y_{h,n}:=n^{-1}\\sum_{j=1}^nY_{h,j}$. Then\n\n$$\\mathbb E_s[(\\bar Y_{h,n}-\\theta)^2]=\\frac{\\sigma_h^2}{n}+b_h^2.$$\n\nIf finite nonnegative bounds $B_h,V_h$ satisfy $|b_h|\\le B_h$ and $\\sigma_h^2\\le V_h$, and $\\epsilon_b\\ge B_h$ and $\\epsilon_s>0$, then\n\n$$\\mathbb P_s\\bigl(|\\bar Y_{h,n}-\\theta|>\\epsilon_b+\\epsilon_s\\bigr)\\le\\frac{V_h}{n\\epsilon_s^2}.$$\n\nThe probability is over IID sampling. The bias bound is an external premise, not an output inferred from the sample; no normal approximation or pointwise error guarantee is asserted. If the observable is dimensional, $B_h,\\epsilon_b,\\epsilon_s$ have its unit, $V_h$ has the squared unit, and the formulas use one consistent output unit.\n\n**Mean certificates and callback qualification.** If a measurable supplied bound $b\\ge0$ satisfies $|Y-Y_h|\\le b$ almost surely and $\\mathbb E b<\\infty$, then $|b_h|\\le\\mathbb E b$. More generally, for a normed state space and an $L$-Lipschitz scalar observable $J$, supplied measurable states with integrable norm difference satisfy $|\\mathbb E J(S_h)-\\mathbb E J(S)|\\le L\\mathbb E\\|S_h-S\\|$, provided the two scalar means exist. These are bounds on mean bias, not pointwise accuracy guarantees. An empirical average of the $b$ values alone is no deterministic upper bound on $\\mathbb E b$; a supplied deterministic envelope $b\\le B$ does imply $|b_h|\\le B$. For a solver callback, assume its success set and successful output/certificate maps are measurable. The IID formulas apply to complete callback output with the original input law only when the callback succeeds almost surely and the stated moments hold. If failure has positive probability, the formulas do not apply to the original input law merely by retaining or conditioning on successful cases.\n\n**Asymptotic sampling branch.** For an infinite IID output sequence, finite $\\mathbb E Y_h^2$ implies $s_n^2\\to\\sigma_h^2$ almost surely, where $s_n^2=(n-1)^{-1}\\sum_{j=1}^n(Y_{h,j}-\\bar Y_{h,n})^2$ for $n\\ge2$. If additionally AC and $\\sigma_h^2>0$ are assumed, then $\\sqrt n(\\bar Y_{h,n}-\\theta_h)\\Rightarrow N(0,\\sigma_h^2)$ and $\\sqrt n(\\bar Y_{h,n}-\\theta_h)/s_n\\Rightarrow N(0,1)$, assigning the last quotient zero where $s_n=0$. Consequently, for a supplied $z>0$ and $\\alpha\\in(0,1)$ such that a standard normal variable $Z$ satisfies $\\mathbb P(|Z|\\le z)=1-\\alpha$, and any deterministic $B\\ge|b_h|$,\n$$\\liminf_{n\\to\\infty}\\mathbb P_s\\bigl(|\\bar Y_{h,n}-\\theta|\\le B+z s_n/\\sqrt n\\bigr)\\ge1-\\alpha.$$\nThis interval assertion is asymptotic, unlike the earlier finite-sample inequality. The sample-based $\\bar b$ cannot replace deterministic $B$ without another proved bound. No time-series mixing CLT is substituted for the IID law here; dependent sensors require their actual separate long-run variance and assumptions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §§2.1–2.2 and end-note p. 40",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            },
+            {
+              "title": "Olivier Le Maître and Omar Knio, Introduction to Uncertainty Quantification, DTU PhD course lecture notes, pp. 14–16",
+              "url": "https://www2.compute.dtu.dk/~apek/UQ2018/lecture1.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "axiom_use": "No choice principle is used for the finite-sample and mean-bias bounds; AC is additionally assumed only for the imported IID Gaussian CLT and its asymptotic interval consequence.",
+        "justified_by": []
+      },
+      {
+        "id": "alg-fd-uq-observable-budget",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "Failure-aware fluid UQ callback and certified sampling budget",
+        "reference": "items/alg-fd-uq-observable-budget.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-random-fluid-observable",
+          "thm-fd-observable-sampling-bias-split",
+          "def-iid-monte-carlo-estimators"
+        ],
+        "dependency_roles": {
+          "def-iid-monte-carlo-estimators": "mathematical-premise",
+          "def-fd-random-fluid-observable": "mathematical-premise",
+          "thm-fd-observable-sampling-bias-split": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Fixed-size callback mode.** Inputs are a finite integer $N\\ge2$, the specified input law $\\mu$ and exact/numerical observable interface, an IID sampler for $\\mu$, and a solver callback with a supplied finite computational budget for each invocation. The callback is total, with a measurable success set and measurable successful outputs: for every input $\\theta$ it returns either `solver-failed` or a numerical state $s_h(\\theta)$ with finite real observable $q_h(\\theta)=J_h(s_h(\\theta))$, together with a finite $b(\\theta)\\ge0$ and its supplied pointwise certificate $|Y(\\theta)-q_h(\\theta)|\\le b(\\theta)$. A stated failure result is allowed when the finite budget is exhausted; the procedure asserts no universal numerical solver termination theorem.\n\nDraw $\\theta_1,\\ldots,\\theta_N$ independently with law $\\mu$ and call the callback exactly once on each draw, including the draws after any earlier failure. If any call fails, return `incomplete` with the failed indices and the collected outputs, and no IID mean/error certificate for $\\mu$. Never delete, replace or resample failed cases. If all calls succeed with finite arithmetic values, set\n$$\\bar q_h=N^{-1}\\sum_{i=1}^Nq_i,\\qquad s_N^2=(N-1)^{-1}\\sum_{i=1}^N(q_i-\\bar q_h)^2,\\qquad \\widehat{se}_N=s_N/\\sqrt N,\\qquad \\bar b=N^{-1}\\sum_{i=1}^Nb_i.$$\nReturn $N,\\bar q_h,s_N^2,\\widehat{se}_N,\\bar b$ and `complete`; if $s_N^2=0$, also return `zero-sample-variance`. This diagnostic asserts neither a deterministic population nor zero estimation error. The sample mean of certificates $\\bar b$ is a diagnostic, not a rigorous upper bound on $\\mathbb E b$. The plug-in standard error has only the moment/asymptotic interpretation supplied by the sampling theorem, not an exact confidence guarantee. If callback failure has positive $\\mu$-probability, conditioning on `complete` changes the input law and does not certify IID sampling of the original $\\mu$.\n\n**Optional certified-budget mode.** This retains a separate finite-sample guarantee when externally proved global bounds are available. Inputs are the numerical output law $Y_h$, a total oracle returning independent finite real samples of that law, finite $\\epsilon_b,V_h\\ge0$, $\\epsilon_s>0$, $\\delta\\in(0,1)$, and a certificate that $Y\\in L^1$, $Y_h\\in L^2$, $|\\mathbb E Y_h-\\mathbb E Y|\\le\\epsilon_b$, $\\operatorname{Var}(Y_h)\\le V_h$, and the oracle has that IID law. The algorithm does not validate a supplied mathematical certificate. Apply the input guards in this order: if the certificate or oracle is absent, return `not-certified`; if both are supplied but any of $\\epsilon_b,V_h,\\epsilon_s,\\delta$ is nonfinite or outside its stated admissible range, return `invalid-input`. Otherwise set\n$$N:=\\max\\{1,\\lceil V_h/(\\delta\\epsilon_s^2)\\rceil\\}.$$\nRequest exactly $N$ samples and return `conditional-budget`, $N$, their mean $\\widehat\\theta_{h,N}$, tolerance $\\epsilon_b+\\epsilon_s$, failure bound $\\delta$ and RMS upper bound $\\sqrt{V_h/N+\\epsilon_b^2}$, conditional on the certificate. If an oracle invocation instead fails its total-return contract, return `incomplete` and no guarantee. This mode permits $N=1$ but then supplies no sample variance or plug-in standard error. When implemented through the callback mode, its certificate additionally requires callback success $\\mu$-almost surely; the probability guarantee is not conditional on deleting failed inputs.\n\nNeither mode infers a bias/variance certificate from a sample or mesh trend. Numerical bias, physical model discrepancy and measurement uncertainty are different quantities; the latter two are absent unless separately quantified. Both tolerance allocations use the declared observable unit, variance bounds use its square and $\\delta$ is dimensionless. The operation counts concern the specified finite callback/oracle contract, not uncontrolled floating-point error.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §§2.1–2.2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            },
+            {
+              "title": "NASA Glenn Research Center, Uncertainty and Error in CFD Simulations",
+              "url": "https://www.grc.nasa.gov/WWW/wind/valid/tutorial/errors.html"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "justified_by": []
+      },
+      {
+        "id": "cor-fd-uq-observable-budget-guarantees",
+        "reference": "items/cor-fd-uq-observable-budget-guarantees.md",
+        "proof_status": "Complete newly authored local proof reported by owner scientific repair; draft, not publication or independent/native acceptance.",
+        "kind": "corollary",
+        "title": "Execution and conditional error guarantees of the fluid UQ budget algorithm",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "deps": [
+          "alg-fd-uq-observable-budget",
+          "thm-fd-observable-sampling-bias-split",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-change-of-variables-for-expectation",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "alg-fd-uq-observable-budget": "mathematical-premise",
+          "thm-fd-observable-sampling-bias-split": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "thm-change-of-variables-for-expectation": "mathematical-premise",
+          "def-independent-random-elements": "mathematical-premise",
+          "def-independent-sigma-algebras-and-events": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "direct-corollary"
+        },
+        "axiom_use": "No choice principle is used for the finite execution and error claims. The optional infinite-sequence Gaussian interpretation carries exactly the additional AC assumption of the sampling theorem.",
+        "proof_strategy": "direct",
+        "statement": "Let $(\\Theta,\\mathcal A,\\mu)$ be a probability space of inputs and let $Y:\\Theta\\to\\mathbb R$ be the supplied measurable exact scalar observable. Put $\\theta=\\mathbb E_\\mu Y$ whenever $Y\\in L^1(\\mu)$. Consider the two modes of the failure-aware fluid UQ callback and certified sampling-budget algorithm, using exact real arithmetic, with every requested input draw delivered in finite time and the supplied finite-return callback or oracle contracts. Probability statements are conditional on the truth of the supplied law, measurability and mathematical certificates; the algorithm does not verify those premises.\n\nIn fixed-size callback mode, take an integer $N\\ge2$ and independent measurable input draws $\\theta_1,\\ldots,\\theta_N$ with common law $\\mu$ on a sampling probability space $(\\Omega_s,\\mathcal F_s,\\mathbb P_s)$. Write $\\mathbb P=\\mathbb P_s$ and $\\mathbb E=\\mathbb E_s$ for sampling probability and expectation. The total callback, with its supplied finite budget per invocation, has a measurable success set $A\\in\\mathcal A$ and measurable successful output and certificate maps $q_h:A\\to\\mathbb R$ and $b:A\\to[0,\\infty)$, for the restricted input sigma-algebra on $A$. Its supplied pointwise certificate is $|Y(v)-q_h(v)|\\le b(v)$ for $v\\in A$. Put $p=\\mu(A)$ and $C=\\{(\\theta_1,\\ldots,\\theta_N)\\in A^N\\}$. Only on $C$, define $q_i=q_h(\\theta_i)$ and $b_i=b(\\theta_i)$ for $1\\le i\\le N$, and define the returned diagnostics by\n$$\\bar q_h=N^{-1}\\sum_{i=1}^N q_i,\\qquad \\bar b=N^{-1}\\sum_{i=1}^N b_i,\\qquad s_N^2=(N-1)^{-1}\\sum_{i=1}^N(q_i-\\bar q_h)^2,\\qquad s_N=\\sqrt{s_N^2},\\qquad \\widehat{se}_N=s_N/\\sqrt N.$$\nThe algorithm makes exactly $N$ callback invocations, including after any failure, and returns `complete` exactly on $C$, with these diagnostics and the additional `zero-sample-variance` flag precisely when $s_N^2=0$. Otherwise it returns `incomplete` with exactly the failed indices and available outputs. In particular,\n$$\\mathbb P(C)=p^N,\\qquad \\mathbb P(C^c)=1-p^N\\le N(1-p).$$\nFor $p>0$, conditional on $C$ the inputs are independent with common law $\\mu(\\cdot\\mid A)$; for $p=0$, $C$ is null and this corollary supplies no conditional-on-completion certificate. If $0<p<1$, completing the run does not give IID draws from the original $\\mu$.\n\nIf $p=1$, extend $q_h,b$ by zero off $A$ and assume $Y\\in L^1(\\mu)$ and $q_h\\in L^2(\\mu)$. Set $\\theta_h=\\mathbb E_\\mu q_h$, $\\sigma_h^2=\\operatorname{Var}_\\mu(q_h)$ and $b_h=\\theta_h-\\theta$. The formulas below use these extensions and agree with the returned complete diagnostics almost surely. The complete outputs obey\n$$\\mathbb E\\bar q_h=\\theta_h,\\qquad \\mathbb E[(\\bar q_h-\\theta)^2]=\\sigma_h^2/N+b_h^2,\\qquad \\mathbb E s_N^2=\\sigma_h^2,\\qquad \\mathbb E\\widehat{se}_N^2=\\sigma_h^2/N.$$\nWhen also $\\mathbb E_\\mu b<\\infty$ and the supplied pointwise certificate holds on $A$, $|b_h|\\le\\mathbb E_\\mu b$ and $\\mathbb E\\bar b=\\mathbb E_\\mu b$. The realized $\\bar b$ need not bound that expectation and zero realized $s_N^2$ need not imply zero population variance or error. An infinite sequence of these IID successful outputs has the sample-variance and, under the sampling theorem's additional AC and positive-variance hypotheses, studentized Gaussian limits stated there. No finite-sample normal confidence assertion follows.\n\nIn certified-budget mode, missing certificates/oracles or invalid numeric inputs produce the prescribed guard output before sampling. For admissible finite numeric inputs and a true certificate, put\n$$N=\\max\\{1,\\lceil V_h/(\\delta\\epsilon_s^2)\\rceil\\}.$$\nLet $Y_h:\\Theta\\to\\mathbb R$ be the supplied measurable numerical observable. The total IID oracle contract returns independent finite real random variables $Q_1,\\ldots,Q_N$ with the law of $Y_h$ under $\\mu$, on a sampling probability space, again using $\\mathbb P,\\mathbb E$ for its probability and expectation. If that contract holds, exactly $N$ samples are requested and `conditional-budget` returns their arithmetic mean $\\widehat\\theta_{h,N}:=N^{-1}\\sum_{i=1}^N Q_i$ with the advertised bounds\n$$\\mathbb P\\bigl(|\\widehat\\theta_{h,N}-\\theta|>\\epsilon_b+\\epsilon_s\\bigr)\\le\\delta,\\qquad \\bigl(\\mathbb E[(\\widehat\\theta_{h,N}-\\theta)^2]\\bigr)^{1/2}\\le\\sqrt{V_h/N+\\epsilon_b^2}.$$\nHere $\\epsilon_b,V_h\\ge0$, $\\epsilon_s>0$, $0<\\delta<1$, the certificate states $Y\\in L^1(\\mu)$, $Y_h\\in L^2(\\mu)$, $|\\mathbb E_\\mu Y_h-\\theta|\\le\\epsilon_b$, $\\operatorname{Var}_\\mu(Y_h)\\le V_h$, and the samples have the IID law of $Y_h$. The case $V_h=0$ gives $N=1$ and a zero sampling deviation almost surely; $N=1$ never supplies a sample variance. If the oracle instead violates its finite-return contract by reporting failure, the procedure returns `incomplete` without these guarantees. A nonreturning invocation violates the hypotheses, so no termination claim is made for it. Callback implementations of the certified mode require almost-sure callback success, as stipulated by the algorithm.\n\nApart from the supplied sampling and callback/oracle work, the sampling loop and output reductions require finitely many operations, with a number bounded by a constant times $N$. This count uses exact real arithmetic and finite evaluations of the displayed square root and ceiling, and makes no floating-point error bound or empirical fluid-model adequacy claim.",
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-fd-fluid-sobol-interface",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Sobol sensitivity and observable-error interface",
+        "reference": "items/rem-fd-fluid-sobol-interface.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 0,
+        "deps": [
+          "def-first-and-total-sobol-indices",
+          "def-product-hoeffding-anova-components",
+          "def-product-coordinate-projections",
+          "def-moments-variance-and-covariance",
+          "thm-pick-freeze-sobol-covariance-identities",
+          "alg-pick-freeze-monte-carlo-sobol-estimators",
+          "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-first-and-total-sobol-indices": "mathematical-premise",
+          "def-product-hoeffding-anova-components": "mathematical-premise",
+          "def-product-coordinate-projections": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise",
+          "thm-pick-freeze-sobol-covariance-identities": "mathematical-premise",
+          "alg-pick-freeze-monte-carlo-sobol-estimators": "mathematical-premise",
+          "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $1\\le d<\\infty$, let $(E_j,\\mathcal E_j,\\mu_j)$ be probability spaces, and set $(E,\\mathcal E,\\mu)=\\prod_{j=1}^d(E_j,\\mathcal E_j,\\mu_j)$ with the finite product sigma-algebra and product probability. Let $X=(X_1,\\ldots,X_d)$ have law $\\mu$ and let $f\\in L^2(\\mu)$ be real-valued. Write $[d]=\\{1,\\ldots,d\\}$; coordinate products $E_v$ and laws $\\mu_v$ use the one-point probability space for the empty product. For $v\\subseteq[d]$, define the coordinate projection by\n$$P_vf(x_v):=\\int_{E_{[d]\\setminus v}}f(x_v,z_{[d]\\setminus v})\\,d\\mu_{[d]\\setminus v}(z_{[d]\\setminus v}),$$\nfor almost every integrable section, assigning zero on its exceptional null set, and lift it to $E$ by making it constant in the other coordinates. As $L^2$ classes, $P_{[d]}f=f$ and $P_\\varnothing f=\\int f\\,d\\mu$. Define the product-law Hoeffding components by\n$$f_u:=\\sum_{v\\subseteq u}(-1)^{|u|-|v|}P_vf,\\qquad u\\subseteq[d].$$\nIn particular $f_\\varnothing=\\mathbb E_\\mu f$. With these definitions, write $V_u:=\\mathbb E[f_u^2]$ and $V:=\\operatorname{Var}(f(X))=\\sum_{u\\ne\\varnothing}V_u$. When $V>0$, the first-order and total Sobol indices are $S_i:=V_{\\{i\\}}/V$ and $S_{T_i}:=\\sum_{u\\ni i}V_u/V$; when $V=0$, these normalized indices are undefined.\n\nFor sample size $n\\ge2$, draw $n$ IID rows; within each row let $X,X',U,V_0,W,W'$ be mutually independent random vectors with law $\\mu$. Define $X^{[i]}=(X_i,X'_{-i})$ and $\\widetilde X^{[i]}=(X_{-i},X'_i)$. The first-order numerator is $N_i:=f(X)f(X^{[i]})-f(U)f(V_0)$, the total-effect numerator is $T_i:=\\tfrac12(f(X)-f(\\widetilde X^{[i]}))^2$, and the denominator is $D:=\\tfrac12(f(W)-f(W'))^2$. The expectations of the two numerators are respectively $V_{\\{i\\}}$ and $\\sum_{u\\ni i}V_u$. Since $D\\ge0$, its sample mean $\\bar D$ is nonnegative. If $\\bar D=0$, the estimator returns status `zero-empirical-variance`, no normalized index, and no plug-in covariance matrix or MCSE. If $\\bar D>0$, it returns ratios of the sample means of $N_i$ and $T_i$ over $\\bar D$, together with the formal plug-in covariance matrix $\\widehat J\\widehat\\Sigma\\widehat J^{\\mathsf T}/n$, where $\\widehat\\Sigma:=(n-1)^{-1}\\sum_{r=1}^n(Z_r-\\bar Z)^{\\mathsf T}(Z_r-\\bar Z)$, $Z_r=(N_{1,r},\\ldots,N_{d,r},T_{1,r},\\ldots,T_{d,r},D_r)$, and, on this positive-denominator branch, $\\widehat J$ is the derivative of the vector ratio map at the observed row means. The zero-denominator branch can have positive probability even when the population variance $V$ is positive.\n\nA finite-sample ratio need not be unbiased: for one input $X\\sim\\operatorname{Bernoulli}(1/2)$ and output $f(x)=x$, take two rows $r=1,2$ of mutually independent Bernoulli$(1/2)$ draws $X_r,X'_r,U_r,V_r,W_r,W'_r$, with all draws independent across rows. Set $N_r:=X_r^2-U_rV_r$, $D_r:=\\tfrac12(W_r-W'_r)^2$, $\\bar N:=(N_1+N_2)/2$, and $\\bar D:=(D_1+D_2)/2$. Here $V=\\operatorname{Var}(X)=1/4$ and $V_{\\{1\\}}=\\mathbb E[(X-\\mathbb E X)^2]=1/4$, so the true first-order index is $1$, while $\\mathbb P(\\bar D=0)=1/4$ and conditional on $\\bar D>0$ the reported ratio has expectation $\\mathbb E[\\bar N/\\bar D\\mid\\bar D>0]=5/6$.\n\nThe joint ratio CLT and plug-in MCSE statement applies under its additional assumptions of AC, $f\\in L^4$, and $V>0$, using any fixed finite extension on the zero-status event only for the asymptotic statements; an $L^2$ input alone does not ensure a finite row-vector covariance or an MCSE interpretation. These independent-input formulas are not asserted for dependent coordinates. The sampling and bias budget above bounds an expected scalar observable only; it gives no error bound for Sobol ratios.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Variance Components and Generalized Sobol' Indices, arXiv:1205.1774, §§2–2.1",
+              "url": "https://arxiv.org/pdf/1205.1774"
+            },
+            {
+              "title": "Olivier Le Maître and Omar Knio, Introduction to Uncertainty Quantification, DTU PhD course lecture notes, pp. 66–83",
+              "url": "https://www2.compute.dtu.dk/~apek/UQ2018/lecture1.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "axiom_use": "AC is assumed only for the cited Sobol ratio joint-CLT and MCSE result, where its supplier identifies the multivariate IID CLT as the use. The definitions, numerator identities, and finite-sample witness below use no choice principle.",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 672,
+    "id": "fd-st02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Fluid observable uncertainty and numerical bias budgets — Examples",
+    "companion": "fd-st02",
+    "requires": [
+      "fd-st02",
+      "probability-spaces-random-variables-and-expectation",
+      "weak-laws-and-series-of-independent-random-variables"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-all-zero-mc-sample",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "An all-zero Monte Carlo sample can report zero standard error",
+        "reference": "items/ex-fd-all-zero-mc-sample.md",
+        "design_state": "Step 1 draft authored; fd-st01 page prerequisite remains open.",
+        "dependency_level": 0,
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-iid-monte-carlo-estimators",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_roles": {
+          "def-identically-distributed-and-iid-random-variables": "mathematical-premise",
+          "def-iid-monte-carlo-estimators": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge2$ and $p\\in(0,1)$. On the product probability space $\\{0,1\\}^n$ with independent Bernoulli$(p)$ coordinates $X_1,\\ldots,X_n$, define $\\bar X_n:=n^{-1}\\sum_{j=1}^nX_j$, $s_n^2:=(n-1)^{-1}\\sum_{j=1}^n(X_j-\\bar X_n)^2$, and $\\widehat{se}_n:=s_n/\\sqrt n$. The event that all coordinates are zero has probability $(1-p)^n>0$. On that event $\\bar X_n=s_n^2=\\widehat{se}_n=0$, although the target mean is $p>0$ and the population variance is $p(1-p)>0$, so the absolute error is $p$. This is an exact finite-sample probability-model example, not an experimental observation; it shows that a zero plug-in standard error in one realization does not establish zero population variance or zero estimation error.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2, §2.2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

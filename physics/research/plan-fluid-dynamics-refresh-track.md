@@ -553,7 +553,31 @@ Current controlling owner refresh:2026-10-18. This section supersedes conflictin
 
 A page `fd-s01`; B companion `fd-s01-examples`. Category `fluid-dynamics-mathematics`; library `mathematics`.
 Order 393. Exact source inventory: `research/scaffold-refresh-2026-10-18/fluid-dynamics/proposed-inventory.json`.
-Declared earlier prerequisites: `countability-and-uncountability`, `hilbert-space-geometry-and-riesz-representation`, `relations-functions-and-quotients`, `weak-derivatives-and-sobolev-spaces`.
+Declared earlier prerequisites: `countability-and-uncountability`, `hilbert-space-geometry-and-riesz-representation`, `orthonormal-bases-parseval-and-fourier-series`, `relations-functions-and-quotients`, `weak-derivatives-and-sobolev-spaces`.
+
+
+Owner prerequisite correction, 2026-10-23 (controlling over the inherited
+inventory and unsupported tensorized-E24 premise): use the published
+`thm-fourier-basis-and-parseval-on-the-n-torus` on
+`orthonormal-bases-parseval-and-fourier-series`. Add that exact theorem to
+`def-fd-periodic-fourier-sobolev-spaces.deps` with
+`dependency_roles: mathematical-premise`, retaining `def-countable-choice`.
+For dimension $d\in\{1,2,3\}$, change variables $x=2\pi y$ from the
+normalized unit torus to the $2\pi$-periodic torus: normalized measure becomes
+$(2\pi)^{-d}dx$ and the characters become $e^{ik\cdot x}$. The theorem gives
+componentwise Parseval and coefficient synthesis; conjugate-symmetric
+coefficients yield real representatives by uniqueness. Finite symmetric
+cutoffs approximate the weighted coefficient completion. For nonnegative
+Sobolev orders the weight is at least one, so this completion embeds in
+$L^2$. This does not claim $L^2$ representatives for negative-order
+completions. Preserve Countable Choice and all stronger independently required
+assumptions in every consuming claim and contract. The remaining embedding,
+product, commutator, projection and pressure estimates retain their existing
+local proofs and hypotheses; this imported local supplier does not establish
+those estimates by itself. The full focused review and all 26 reached A/B
+page dispositions are in
+`research/fluid-dynamics-all-47-2026-10-23-owner-fourier-resolution/review.json`.
+No pair, item, statement or promised argument is removed.
 
 Original reservation (read together with the full required sources above):
 

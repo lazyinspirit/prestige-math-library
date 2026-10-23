@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": 1,
+  "cycle": 1,
+  "item": "cex-fdmath-mean-does-not-determine-covariance",
+  "escalation": "research/fluid-dynamics-all-47-2026-10-23-scope-review/batch-1/review-1.json",
+  "decision": "resolved-by-body-quantifier-clarification",
+  "source_path": "items/cex-fdmath-mean-does-not-determine-covariance.md",
+  "before": "---\nid: cex-fdmath-mean-does-not-determine-covariance\nkind: counterexample\ntitle: Equal means with unequal Reynolds covariance\nstatus: draft\norigin: pipeline\ndomain: mathematics\nlibrary: mathematics\ndependency_level: 2\ndeps:\n  - thm-fdmath-finite-reynolds-identity\ndependency_roles:\n  thm-fdmath-finite-reynolds-identity: mathematical-premise\nproof_strategy: direct\nprovenance:\n  statement: ai-generated\n  proof: ai-generated\ngeneration:\n  role: counterexample\nsources:\n  references:\n    - title: \"Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3, §3.6 (Spring 2006 lecture notes)\"\n      url: \"https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf\"\nverification:\n  precheck: pass\n---\n\n## Statement refuted\n\nLet $d\\ge2$ and $N\\ge1$ be integers, let $\\nu\\ge0$, and define $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Fix weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$. For $j=1,\\ldots,N$, let $u_j:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuously differentiable in $(t,x)$ with continuous second spatial derivatives, and let $p_j:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R$ be continuously differentiable. Require all these fields to be $2\\pi$-periodic in each spatial coordinate, and suppose that for each $j=1,\\ldots,N$, pointwise on $\\mathbb R\\times\\mathbb R^d$,\n\n$$\\operatorname{div}u_j=0,\\qquad \\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j.$$\n\nFor each such family, define $\\bar u=\\sum_j a_ju_j$, $\\bar p=\\sum_j a_jp_j$, and $R=\\sum_j a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$. The assertion that any two such ensembles with the same mean velocity and mean pressure fields $\\bar u,\\bar p$ must have the same covariance tensor $R$ is false.\n\n## Statement references\n\n[Flierl and Ferrari, MIT OCW 12.820, Chapter 3, §3.6 (closure problem), full lecture notes](https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf)\n\n## Facts & Assumptions\n\n[F1] [[thm-fdmath-finite-reynolds-identity]]: For integers $d,N\\ge1$, an open time interval $I$, an open spatial domain $\\Omega\\subseteq\\mathbb R^d$, fixed nonnegative weights summing to one, and common $\\nu\\ge0$, the finite Reynolds theorem assumes velocities $u_j:I\\times\\Omega\\to\\mathbb R^d$ continuously differentiable in $(t,x)$ with continuous second spatial derivatives, continuously differentiable pressures $p_j:I\\times\\Omega\\to\\mathbb R$, continuous forcings $f_j:I\\times\\Omega\\to\\mathbb R^d$, and pointwise equations $\\operatorname{div}u_j=0$ and $\\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j+f_j$. It defines $\\bar u=\\sum_j a_ju_j$, $v_j=u_j-\\bar u$, and $R=\\sum_j a_jv_j\\otimes v_j$, and proves the exact averaged equation with covariance term $-\\operatorname{div}R$. In this counterexample $I=\\mathbb R$, $\\Omega=\\mathbb R^d$, and $f_j=0$.\n\n[A1] Fix any integer $d\\ge2$, any $\\nu\\ge0$, and any nonzero constant vector $w\\in\\mathbb R^d$.\n\n[A2] The two proposed ensembles each have two members (so $N=2$) and fixed weights $a_1=a_2=1/2$; all velocities and pressures are the constant fields specified in the Counterexample steps.\n\n**Given:** The torus, common viscosity, finite Reynolds equation and covariance convention [F1], and the nonzero vector [A1].\n\n## Counterexample\n\n1.1 Define ensemble A by $u_1=u_2=0$ and $p_1=p_2=0$. Define ensemble B by $u_1=w$, $u_2=-w$, and $p_1=p_2=0$, with weights $1/2,1/2$ in each. These velocity and pressure fields are constant, so the velocities are continuously differentiable with continuous second spatial derivatives, the pressures are continuously differentiable, and all fields are periodic. Every time and spatial derivative vanishes, so every member is divergence-free and satisfies the displayed equation for the common $\\nu$. The mean velocities in both ensembles are $0$, and the mean pressures in both are $0$. [given, A1, A2, algebra]\n\n2.1 By [F1], the covariance tensor in the averaged equation is $R=\\sum_j a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$. For ensemble A this is $R_A=0$. For ensemble B the fluctuations are $w,-w$, hence $R_B=\\frac12w\\otimes w+\\frac12(-w)\\otimes(-w)=w\\otimes w\\ne0$, since $w^{\\mathsf T}R_Bw=|w|^4>0$. [given, F1, A1, A2, step 1.1, algebra]\n\n3.1 The two admissible ensembles have identical mean velocity and pressure fields but unequal covariance tensors, contradicting the refuted universal determination claim. This excludes only unrestricted determination from those means; it does not address a closure relation restricted by additional hypotheses. [step 1.1, step 2.1, algebra] ∎\n",
+  "after": "---\nid: cex-fdmath-mean-does-not-determine-covariance\nkind: counterexample\ntitle: Equal means with unequal Reynolds covariance\nstatus: draft\norigin: pipeline\ndomain: mathematics\nlibrary: mathematics\ndependency_level: 2\ndeps:\n  - thm-fdmath-finite-reynolds-identity\ndependency_roles:\n  thm-fdmath-finite-reynolds-identity: mathematical-premise\nproof_strategy: direct\nprovenance:\n  statement: ai-generated\n  proof: ai-generated\ngeneration:\n  role: counterexample\nsources:\n  references:\n    - title: \"Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3, §3.6 (Spring 2006 lecture notes)\"\n      url: \"https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf\"\nverification:\n  precheck: pass\n---\n\n## Statement refuted\n\nFix any integer $d\\ge2$ and any $\\nu\\ge0$, and define $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Consider the entire class of finite ensembles described as follows, allowing the number of members and the weight tuple to vary across the class. Each ensemble has an integer $N\\ge1$ and fixed weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$. For $j=1,\\ldots,N$, let $u_j:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuously differentiable in $(t,x)$ with continuous second spatial derivatives, and let $p_j:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R$ be continuously differentiable. Require all these fields to be $2\\pi$-periodic in each spatial coordinate, and suppose that for each $j=1,\\ldots,N$, pointwise on $\\mathbb R\\times\\mathbb R^d$,\n\n$$\\operatorname{div}u_j=0,\\qquad \\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j.$$\n\nFor each such family, define $\\bar u=\\sum_j a_ju_j$, $\\bar p=\\sum_j a_jp_j$, and $R=\\sum_j a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$. The following universal determination assertion over this entire class is false: any two ensembles in the class with the same mean velocity and mean pressure fields $\\bar u,\\bar p$ must have the same covariance tensor $R$.\n\n## Statement references\n\n[Flierl and Ferrari, MIT OCW 12.820, Chapter 3, §3.6 (closure problem), full lecture notes](https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf)\n\n## Facts & Assumptions\n\n[F1] [[thm-fdmath-finite-reynolds-identity]]: For integers $d,N\\ge1$, an open time interval $I$, an open spatial domain $\\Omega\\subseteq\\mathbb R^d$, fixed nonnegative weights summing to one, and common $\\nu\\ge0$, the finite Reynolds theorem assumes velocities $u_j:I\\times\\Omega\\to\\mathbb R^d$ continuously differentiable in $(t,x)$ with continuous second spatial derivatives, continuously differentiable pressures $p_j:I\\times\\Omega\\to\\mathbb R$, continuous forcings $f_j:I\\times\\Omega\\to\\mathbb R^d$, and pointwise equations $\\operatorname{div}u_j=0$ and $\\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j+f_j$. It defines $\\bar u=\\sum_j a_ju_j$, $v_j=u_j-\\bar u$, and $R=\\sum_j a_jv_j\\otimes v_j$, and proves the exact averaged equation with covariance term $-\\operatorname{div}R$. In this counterexample $I=\\mathbb R$, $\\Omega=\\mathbb R^d$, and $f_j=0$.\n\n[A1] Fix any integer $d\\ge2$, any $\\nu\\ge0$, and any nonzero constant vector $w\\in\\mathbb R^d$.\n\n[A2] The two proposed ensembles each have two members (so $N=2$) and fixed weights $a_1=a_2=1/2$; all velocities and pressures are the constant fields specified in the Counterexample steps.\n\n**Given:** The torus, common viscosity, finite Reynolds equation and covariance convention [F1], and the nonzero vector [A1].\n\n## Counterexample\n\n1.1 Define ensemble A by $u_1=u_2=0$ and $p_1=p_2=0$. Define ensemble B by $u_1=w$, $u_2=-w$, and $p_1=p_2=0$, with weights $1/2,1/2$ in each. These velocity and pressure fields are constant, so the velocities are continuously differentiable with continuous second spatial derivatives, the pressures are continuously differentiable, and all fields are periodic. Every time and spatial derivative vanishes, so every member is divergence-free and satisfies the displayed equation for the common $\\nu$. The mean velocities in both ensembles are $0$, and the mean pressures in both are $0$. [given, A1, A2, algebra]\n\n2.1 By [F1], the covariance tensor in the averaged equation is $R=\\sum_j a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$. For ensemble A this is $R_A=0$. For ensemble B the fluctuations are $w,-w$, hence $R_B=\\frac12w\\otimes w+\\frac12(-w)\\otimes(-w)=w\\otimes w\\ne0$, since $w^{\\mathsf T}R_Bw=|w|^4>0$. [given, F1, A1, A2, step 1.1, algebra]\n\n3.1 The two admissible ensembles have identical mean velocity and pressure fields but unequal covariance tensors, contradicting the refuted universal determination claim. This excludes only unrestricted determination from those means; it does not address a closure relation restricted by additional hypotheses. [step 1.1, step 2.1, algebra] ∎\n",
+  "edits": [
+    {
+      "before": "Let $d\\ge2$ and $N\\ge1$ be integers, let $\\nu\\ge0$, and define $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Fix weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$.",
+      "after": "Fix any integer $d\\ge2$ and any $\\nu\\ge0$, and define $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Consider the entire class of finite ensembles described as follows, allowing the number of members and the weight tuple to vary across the class. Each ensemble has an integer $N\\ge1$ and fixed weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$."
+    },
+    {
+      "before": "The assertion that any two such ensembles with the same mean velocity and mean pressure fields $\\bar u,\\bar p$ must have the same covariance tensor $R$ is false.",
+      "after": "The following universal determination assertion over this entire class is false: any two ensembles in the class with the same mean velocity and mean pressure fields $\\bar u,\\bar p$ must have the same covariance tensor $R$."
+    }
+  ],
+  "scope_review": {
+    "approved_scope_sources": [
+      {
+        "path": "research/plan-fluid-dynamics-refresh-track.md",
+        "section": "Finite weighted ensemble and covariance",
+        "observed": "Current controlling owner refresh; FD-C01 B_leaf=true and exact reserved counterexample ID."
+      },
+      {
+        "path": "research/scaffold-refresh-2026-10-18/fluid-dynamics/proposed-inventory.json",
+        "section": "cex-fdmath-mean-does-not-determine-covariance",
+        "observed": "Constant opposite velocities versus zero velocities on a torus; B side, supplier finite Reynolds identity."
+      },
+      {
+        "path": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/complete-local-arguments.md",
+        "section": "C02: mean data do not determine Reynolds covariance",
+        "observed": "Explicit two-member equal-weight constant ensembles refute recovery from the means for all ensembles; restricted closure regimes expressly excluded."
+      }
+    ],
+    "quantifier": "For each fixed d>=2 and nu>=0, define the whole class allowing N and normalized nonnegative weight lists to vary. Refute the single universal same-means-implies-same-R assertion over that class. No assertion is made that determination fails within every fixed N or weight tuple.",
+    "witness": "For every such d and nu, select N=2, equal weights and nonzero w. All constant fields have the retained continuous first time/spatial and second spatial derivatives and are periodic unforced solutions. The two zero means agree, while R_A=0 and R_B=w tensor w has w^T R_B w=|w|^4>0. One pair in the class refutes its universal determination claim.",
+    "singleton_check": "At N=1 normalization forces a_1=1 and R=0; the clarified class-level assertion does not falsely claim nonuniqueness for that fixed subcase.",
+    "supplier_review": "Read complete current thm-fdmath-finite-reynolds-identity and its finite-ensemble definition. Its open-domain hypotheses apply with I=R, Omega=R^d, zero continuous forcing and the retained exact regularity. Proof 1.1 commutes finite fixed-weight sums with derivatives, 2.1 expands outer products, 3.1 averages the PDE and 4.1 proves positivity/energy split; the counterexample uses its covariance definition directly.",
+    "preserved": "d>=2, all nu>=0, arbitrary nonnegative normalized finite weights and N>=1 in the refuted class; exact current velocity and pressure regularity; periodicity; no forcing; explicit original two-member witness; qualification excluding only unrestricted determination and preserving restricted closure hypotheses.",
+    "source_claim_changes": "No citation, attribution, source premise, external source reading claim or empirical claim added/changed.",
+    "proof_changes": "None. All Facts, Given and Counterexample steps 1.1–3.1 are byte-identical; regularity descriptions unchanged.",
+    "metadata_changes": "None. Frontmatter byte-identical."
+  },
+  "consumer_review": {
+    "complete": true,
+    "before_searches": [
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "cex-fdmath-mean-does-not-determine-covariance",
+          "items",
+          "library"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library/physics",
+        "exit_code": 0,
+        "stdout": "library/fluid-dynamics-mathematics/fd-c01-examples.md:10:  - cex-fdmath-mean-does-not-determine-covariance\nitems/cex-fdmath-mean-does-not-determine-covariance.md:2:id: cex-fdmath-mean-does-not-determine-covariance\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "fd-c01-examples",
+          "items",
+          "library"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library/physics",
+        "exit_code": 0,
+        "stdout": "library/fluid-dynamics-mathematics/fd-c01-examples.md:2:page: fd-c01-examples\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "cex-fdmath-mean-does-not-determine-covariance",
+          "items",
+          "library",
+          "articles"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "Equal means with unequal Reynolds covariance",
+          "items",
+          "library"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library/physics",
+        "exit_code": 0,
+        "stdout": "items/cex-fdmath-mean-does-not-determine-covariance.md:4:title: Equal means with unequal Reynolds covariance\n",
+        "stderr": ""
+      }
+    ],
+    "after_searches": [
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "cex-fdmath-mean-does-not-determine-covariance",
+          "items",
+          "library"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library/physics",
+        "exit_code": 0,
+        "stdout": "library/fluid-dynamics-mathematics/fd-c01-examples.md:10:  - cex-fdmath-mean-does-not-determine-covariance\nitems/cex-fdmath-mean-does-not-determine-covariance.md:2:id: cex-fdmath-mean-does-not-determine-covariance\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "fd-c01-examples",
+          "items",
+          "library"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library/physics",
+        "exit_code": 0,
+        "stdout": "library/fluid-dynamics-mathematics/fd-c01-examples.md:2:page: fd-c01-examples\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "cex-fdmath-mean-does-not-determine-covariance",
+          "items",
+          "library",
+          "articles"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "rg",
+          "-n",
+          "--fixed-strings",
+          "Equal means with unequal Reynolds covariance",
+          "items",
+          "library"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library/physics",
+        "exit_code": 0,
+        "stdout": "items/cex-fdmath-mean-does-not-determine-covariance.md:4:title: Equal means with unequal Reynolds covariance\n",
+        "stderr": ""
+      }
+    ],
+    "aliases": "The complete item frontmatter has no aliases field, so no alternate ID resolution needs traversal. Exact ID and display-title searches cover current item/page identity and mentions.",
+    "direct_logical_consumers": [],
+    "indirect_logical_consumers": [],
+    "nonlogical_consumers": [
+      {
+        "id": "fd-c01-examples",
+        "path": "library/fluid-dynamics-mathematics/fd-c01-examples.md",
+        "before": "---\npage: fd-c01-examples\ntitle: Finite weighted ensemble and covariance — Examples\nstatus: draft\nlibrary: mathematics\nrequires:\n  - fd-c01\nitems: []\nexamples:\n  - cex-fdmath-mean-does-not-determine-covariance\npage_layout: compact-v1\n---\n",
+        "after": "---\npage: fd-c01-examples\ntitle: Finite weighted ensemble and covariance — Examples\nstatus: draft\nlibrary: mathematics\nrequires:\n  - fd-c01\nitems: []\nexamples:\n  - cex-fdmath-mean-does-not-determine-covariance\npage_layout: compact-v1\n---\n",
+        "decision": "compatible-no-repair",
+        "reason": "The sole reference is the examples navigation inventory. Page body is empty; it restates no claim. Page-ID search finds no further referring items/pages."
+      }
+    ],
+    "root_mathematics_or_article_consumers": [],
+    "affected_consumer_changes_required": [],
+    "limits": "Searches inspect current source items/library and root items/library/articles, not research artifacts as mathematical consumers. Physics has no articles directory. No alias or first direct logical edge exists, so the indirect logical closure is empty."
+  },
+  "validation": "No validators, proof-layout, gates, state, manifest, contract, hash bindings, metadata or readiness operations performed. Root owns final layout, input bindings and acceptance.",
+  "reading_limits": "Read actual complete held item, finite Reynolds supplier and its definition; actual native review-1.json; batch1 notes and current B manifest record; current controlling scope section, exact inventory record and inherited C01/C02 arguments; full current B page and current reference searches. External linked sources were not freshly retrieved or claimed read."
+}

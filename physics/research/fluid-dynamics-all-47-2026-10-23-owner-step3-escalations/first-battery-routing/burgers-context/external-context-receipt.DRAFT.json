@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "reviewed_by": null,
+  "contexts": [
+    {
+      "obligation": "reader:23:11",
+      "group": "batch-23",
+      "supplier_id": "thm-cm-burgers-riemann-shock-and-rarefaction",
+      "consumer_id": "ex-fd-burgers-shock",
+      "finding_sha256": null,
+      "supplier_math_sha256": null,
+      "consumer_math_sha256": null,
+      "used_clause": "**(a) Shock.** Let $u_L>u_R$, put $s:=(u_L+u_R)/2$ and\n\n$$u(t,x):=\\begin{cases}u_L,&x<st,\\\\ u_R,&x\\ge st,\\end{cases}\\qquad(t>0),$$\n\nwith Riemann initial data $f$ equal to $u_L$ for $x<0$ and $u_R$ for $x\\ge0$. Values on the shock line or at the single initial jump point do not change the integral identities. Then $u$ is a weak solution of $u_t+(F(u))_x=0$ with initial data $f$.\n\n**(b) Entropy of the shock.** For every $k\\in\\mathbb R$, set $\\eta_k(u):=|u-k|$ and $q_k(u):=\\operatorname{sgn}(u-k)\\,(u^2-k^2)/2$ for $u\\ne k$, with $q_k(k):=0$. Then the entropy inequality (E) of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]] holds for the pair $(\\eta_k,q_k)$, with interface coefficient\n\n$$s\\,[\\eta_k]-[q_k]=\\begin{cases}-(k-u_L)(k-u_R),&u_R\\le k\\le u_L,\\\\0,&k\\notin[u_R,u_L],\\end{cases}\\quad\\ge0 ,$$\n\nwhere $[h]:=h(u_R)-h(u_L)$. The shock also satisfies (E) for every convex $C^1$ entropy pair of the Definition, and is an entropy solution in its full declared sense.",
+      "premise_quotes": [
+        "[F1] [[thm-fd-convex-scalar-riemann]]: for a $C^2$ scalar flux with $F''>0$ between the two states, the stated shock profile is an initial-value weak solution, satisfies every compatible convex $C^2$ entropy inequality and every Kružkov inequality, and has the scalar Lax speed inequalities.",
+        "[F2] [[thm-cm-burgers-riemann-shock-and-rarefaction]]: assuming Countable Choice, for $F(z)=z^2/2$ and left state greater than right state, the same shock profile satisfies the Lebesgue weak formulation and all stated convex $C^1$ and Kružkov entropy inequalities.",
+        "[F3] [[def-countable-choice]]: Countable Choice is the choice assumption used by the imported Lebesgue weak formulation.",
+        "1.1 The Burgers flux is $C^2$ and $F''(z)=1>0$ on $[b,a]$. Therefore [F1] applies to these states and this profile, giving the initial weak identity, the compatible convex entropy inequalities, the Kružkov inequalities, and the scalar Lax pattern in the formulations fixed by [F4]. The imported formulation in [F2] has the same profile and explicitly assumes the Countable Choice recorded in [F3]. [given, F1, F2, F3, F4, A1]",
+        "2.1 Directly, $s=(a^2-b^2)/(2(a-b))=(a+b)/2$, while $F'(b)=b$ and $F'(a)=a$; hence $F'(b)<s<F'(a)$. For $b\\leq k\\leq a$, put $C(z)=F(b)+s(z-b)$, the chord of $F$ joining the endpoint fluxes. Then $F(k)-C(k)=\\tfrac12(k-a)(k-b)$, so the Kružkov interface coefficient is $[q_k]-s[\\eta_k]=2(F(k)-C(k))=(k-a)(k-b)\\leq0$; for $k\\notin[b,a]$, $\\eta_k$ is affine on the state interval and $q_k$ is a constant-sign multiple of $F-F(k)$, so the coefficient is zero by the Rankine–Hugoniot equality. This agrees with the nonpositive residual convention. [given, F2, A1, step 1.1, algebra] ∎"
+      ],
+      "review": {
+        "completed": true,
+        "confidence": 1,
+        "verdict": "sound_under_explicit_consumer_premises",
+        "prerequisites": "supplied",
+        "evidence": "The exact owned use is the shock branch for a>b with Burgers fluxF(z)=z²/2 and Countable Choice. Published proof1.1 applies its interface identity with speed(a+b)/2, giving zero weak residual and the actual initial step directly; it does not use rarefaction step1.2. Published2.1 computes the Kruzhkov residual at allk, including outside/endpoints, and3.1 proves the convexC1 entropy sign by monotonic eta prime; both depend only on shock1.1/F1. The current local consumer1.1 primarily applies its independently proved strictly convex Riemann supplierF1 (F double prime=1) and uses publishedF2 to identify the same formulation/choice premise. Consumer2.1 directly computes speed and (k-a)(k-b)<=0. The local Riemann supplier current3.1 gives the shock order-t trace on the interval between0 andst, and its4.2 gives the correct rarefaction interval containing0, so the published fan estimate does not supply a hidden missing initial trace. The published rarefaction support error in1.2/4.1 is genuine but is outside this exact shock-use clause; the correct containing interval has O(epsilon) length and the conclusion can be repaired by its mathematics owner. No published proof correction or whole-item acceptance is claimed.",
+        "evidence_refs": [
+          {
+            "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/first-battery-routing/burgers-context/scientific-review.json",
+            "sha256": "444b014737d208bf0bac17f363012442c59c8e13fcc9f917d27a73b53c96a5b0"
+          }
+        ]
+      },
+      "maintenance": {
+        "path": "research/published-consumer-supplier-ledger.md",
+        "disposition": "open",
+        "defect_id": "fluid-dynamics-all-47-2026-10-23-3a-batch-23-published-11-deferred-context",
+        "quote": "Root context disposition for `fluid-dynamics-all-47-2026-10-23` / `reader:23:11`: published supplier `thm-cm-burgers-riemann-shock-and-rarefaction`, owned consumer `ex-fd-burgers-shock`. Canonical presentation maintenance `fluid-dynamics-all-47-2026-10-23-3a-batch-23-published-11-deferred-context` supersedes `fluid-dynamics-all-47-2026-10-23-3a-batch-23-published-11` solely to retain the still-unfixed outside publication maintenance as DEFERRED/OPEN mathematics-owner work. The original row and its historical OPEN entry above remain intact. Separate support-estimate maintenance `fluid-dynamics-all-47-2026-10-23-3a-batch-23-published-burgers-initial-support` remains nonfatal-recorded and OPEN for mathematics-owner proof repair. Only the exact shock branch(a)/(b) under the owned consumer’s explicit Countable Choice/profile premises is accepted as context; no published source, imported pin, proof audit or whole-item acceptance is supplied."
+      },
+      "reviewed_maintenance_findings": [
+        {
+          "defect_id": "fluid-dynamics-all-47-2026-10-23-3a-batch-23-published-burgers-initial-support",
+          "ledger_row_sha256": null,
+          "review": {
+            "completed": true,
+            "confidence": 1,
+            "verdict": "sound_under_explicit_consumer_premises",
+            "prerequisites": "supplied",
+            "evidence": "The exact owned use is the shock branch for a>b with Burgers fluxF(z)=z²/2 and Countable Choice. Published proof1.1 applies its interface identity with speed(a+b)/2, giving zero weak residual and the actual initial step directly; it does not use rarefaction step1.2. Published2.1 computes the Kruzhkov residual at allk, including outside/endpoints, and3.1 proves the convexC1 entropy sign by monotonic eta prime; both depend only on shock1.1/F1. The current local consumer1.1 primarily applies its independently proved strictly convex Riemann supplierF1 (F double prime=1) and uses publishedF2 to identify the same formulation/choice premise. Consumer2.1 directly computes speed and (k-a)(k-b)<=0. The local Riemann supplier current3.1 gives the shock order-t trace on the interval between0 andst, and its4.2 gives the correct rarefaction interval containing0, so the published fan estimate does not supply a hidden missing initial trace. The published rarefaction support error in1.2/4.1 is genuine but is outside this exact shock-use clause; the correct containing interval has O(epsilon) length and the conclusion can be repaired by its mathematics owner. No published proof correction or whole-item acceptance is claimed.",
+            "evidence_refs": [
+              {
+                "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step3-escalations/first-battery-routing/burgers-context/scientific-review.json",
+                "sha256": "444b014737d208bf0bac17f363012442c59c8e13fcc9f917d27a73b53c96a5b0"
+              }
+            ]
+          }
+        }
+      ],
+      "maintenance_disposition_transitions": [
+        {
+          "prior_defect_id": "fluid-dynamics-all-47-2026-10-23-3a-batch-23-published-11",
+          "prior_row_sha256": "ab8862ef53d45a078828d94a01566daf3e2b14cf9a633a7a1058f5763160e92d",
+          "from": "nonfatal-recorded",
+          "to": "deferred",
+          "reviewed_by": "root",
+          "rationale": "The original published Statement still has the reported embedded links and remains unchanged/read-only; mathematics-owner relocation remains OPEN. Reclassify the already-recorded presentation maintenance as deferred, not fixed or false-positive, while accepting only the exact existing shock-consumer use under its explicit premises. The independent rarefaction support estimate remains a separate nonfatal-recorded maintenance row. This successor preserves the original row/finding and all existing references; no new exposure defect or source correction is asserted."
+        }
+      ]
+    }
+  ],
+  "status": "DRAFT ONLY; root reissues all null bindings/current context seal and byte pointer after actual adoption/stamping. No production approval issued."
+}

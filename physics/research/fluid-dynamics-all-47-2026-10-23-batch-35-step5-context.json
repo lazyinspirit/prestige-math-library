@@ -1,0 +1,191 @@
+{
+  "group": "n",
+  "batches": [
+    "35"
+  ],
+  "pages_read": [
+    "fd-da01",
+    "fd-da01-examples"
+  ],
+  "items_read": [
+    "def-fd-fluid-coefficient-observation-model",
+    "prop-fd-linear-fluid-filter-interface",
+    "rem-fd-fluid-enkf-scope",
+    "prop-fd-finite-observation-identifiability",
+    "ex-fd-two-mode-one-sensor"
+  ],
+  "conventions": [
+    {
+      "convention": "The horizon T is a nonnegative integer; coefficient dimensions and observation dimensions are positive. States start at k=0 and observations at k=1. Each trial-field representation uses an ordered basis.",
+      "fixed_by": "def-fd-fluid-coefficient-observation-model",
+      "matters_for": [
+        "prop-fd-linear-fluid-filter-interface",
+        "rem-fd-fluid-enkf-scope"
+      ]
+    },
+    {
+      "convention": "AC is assumed for the Gaussian-law construction. Initial, process, and measurement vectors are mutually independent Gaussian vectors. Singular covariances are allowed; the exact filter requires positive-definite innovation covariances.",
+      "fixed_by": "def-fd-fluid-coefficient-observation-model",
+      "matters_for": [
+        "prop-fd-linear-fluid-filter-interface",
+        "rem-fd-fluid-enkf-scope"
+      ]
+    },
+    {
+      "convention": "The perturbed-observation EnKF uses divisor-N empirical covariances, independent member perturbations, and positive-definite observation covariance. Its limit holds at fixed horizon and fixed data, in probability over ensemble sampling.",
+      "fixed_by": "rem-fd-fluid-enkf-scope",
+      "matters_for": [
+        "rem-fd-fluid-enkf-scope"
+      ]
+    },
+    {
+      "convention": "Identifiability means injectivity on a nonzero coefficient subspace E. Whitening uses W=(R^(1/2))^(-1), Euclidean norms, and the minimum gain over the unit sphere of E. Singular values include domain-kernel zeros.",
+      "fixed_by": "prop-fd-finite-observation-identifiability",
+      "matters_for": [
+        "prop-fd-finite-observation-identifiability",
+        "ex-fd-two-mode-one-sensor"
+      ]
+    },
+    {
+      "convention": "The inverse-problem error bound is pointwise in a realized error vector; it is not a confidence statement. Exact filtering and ensemble limits concern the declared finite model and assert no empirical adequacy.",
+      "fixed_by": "def-fd-fluid-coefficient-observation-model",
+      "matters_for": [
+        "prop-fd-linear-fluid-filter-interface",
+        "rem-fd-fluid-enkf-scope",
+        "prop-fd-finite-observation-identifiability",
+        "ex-fd-two-mode-one-sensor"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-fluid-coefficient-observation-model",
+      "statement": "Defines finite coefficient trial-field representations, linear observation matrices, an independent-noise finite linear-Gaussian state model, admissible Kalman updates with positive-definite innovations, the divisor-N perturbed-observation ensemble update, and the deterministic inverse interface y=Ga+e.",
+      "used_by": [
+        "prop-fd-linear-fluid-filter-interface",
+        "rem-fd-fluid-enkf-scope",
+        "prop-fd-finite-observation-identifiability",
+        "post-fd-fluid-observation-and-noise",
+        "pthm-fd-conditional-fluid-filter-law"
+      ]
+    },
+    {
+      "id": "prop-fd-linear-fluid-filter-interface",
+      "statement": "Under AC, for an admissible finite stochastic coefficient model with mutually independent Gaussian initial state and noises and positive-definite solved innovation covariances, the Kalman recursion gives an everywhere-defined conditional-law version at every observation history, allowing singular state and noise covariances.",
+      "used_by": [
+        "rem-fd-fluid-enkf-scope",
+        "pthm-fd-conditional-fluid-filter-law"
+      ]
+    },
+    {
+      "id": "prop-fd-finite-observation-identifiability",
+      "statement": "For nonzero E and symmetric positive-definite R, G restricted to E is injective exactly when the minimum gain of A=R^(-1/2)(G restricted to E) is positive. In that case the unique weighted least-squares estimate satisfies norm(hat a-a) ≤ norm(We)/sigma_min(A). Otherwise a nonzero kernel direction makes coefficients indistinguishable.",
+      "used_by": [
+        "ex-fd-two-mode-one-sensor"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Exact meaning of AC and the explicitly inherited Gaussian-construction assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-gaussian-state-space-model-with-independent-noises",
+      "used_for": "Finite, potentially varying dimensions; mutually independent Gaussian initial state and noises; positive-semidefinite, potentially singular covariances.",
+      "opened": true
+    },
+    {
+      "id": "alg-kalman-filter",
+      "used_for": "Initialization, forecast, innovation, Cholesky solves, covariance update, and the T=0 case.",
+      "opened": true
+    },
+    {
+      "id": "alg-ensemble-kalman-filter",
+      "used_for": "Perturbed-observation ensemble procedure, divisor-N covariance, perturbation independence, and gain formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-kalman-filter-is-exact-posterior",
+      "used_for": "Exact everywhere-defined filtering-kernel version under positive-definite innovations, including singular state and noise covariances.",
+      "opened": true
+    },
+    {
+      "id": "thm-perturbed-observation-ensemble-kalman-large-ensemble-limit",
+      "used_for": "Fixed-data, fixed-horizon convergence in probability of empirical analysis means, covariances, and bounded Lipschitz averages.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Existence and uniqueness of the symmetric nonnegative square root used in whitening.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Orthonormal decomposition including kernel directions, minimum gain, and the weighted least-squares stability estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-singular-values-of-an-endomorphism",
+      "used_for": "Checked that the singular-value convention includes all eigenvalues of the positive square root on the domain, including zeros when the domain exceeds the rank.",
+      "opened": true
+    },
+    {
+      "id": "def-state-space-filtering-laws",
+      "used_for": "Filtering-kernel and conditional-law version meanings, empty-history convention, and interpretation of the downstream physical pushforward.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian-law convention permitting singular positive-semidefinite covariance and the stated AC assumption.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "pthm-fd-conditional-fluid-filter-law",
+      "finding": "Proof step 2.1 says, “Thus every hypothesis of the exact coefficient filtering result [F7] holds.” However, its Statement allows arbitrary modal fields phi_(k,j), whereas def-fd-fluid-coefficient-observation-model requires these fields to form an ordered basis. For example, two identical modal fields satisfy the physical Statement but not that interface. The filtering conclusion remains obtainable from the underlying linear-Gaussian theorem without independence of the physical modal fields, but the cited local proposition's interface is not matched literally. An explicit abstract coefficient-space realization or another exact hypothesis match is needed.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "item": "alg-kalman-filter",
+      "finding": "Its Definition contains inline hyperlinks, including “linear-Gaussian model from [[def-linear-gaussian-state-space-model-with-independent-noises]]” and the Cholesky supplier link inside instruction 3. These interrupt the complete defining procedure, contrary to the mandatory uninterrupted-Definition rule; the links need a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-ensemble-kalman-filter",
+      "finding": "Its Definition contains “observation perturbations ... under [[def-multivariate-normal-law]]”. This hyperlink occurs before the complete procedure ends, contrary to the mandatory uninterrupted-Definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-linear-gaussian-state-space-model-with-independent-noises",
+      "finding": "Its Definition embeds supplier links, beginning with “Assume AC ([[def-axiom-of-choice]])” and continuing with kernel-model, Gaussian-law, and independence links. The complete Definition is therefore interrupted by hyperlinks rather than followed by a Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-kalman-filter-is-exact-posterior",
+      "finding": "Its Statement contains inline links to the state-space model, alg-kalman-filter, and def-state-space-filtering-laws. These violate the mandatory uninterrupted-Statement rule; the mathematical hypotheses themselves match the owned filtering proposition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-perturbed-observation-ensemble-kalman-large-ensemble-limit",
+      "finding": "Its Statement contains inline links in “model from [[def-linear-gaussian-state-space-model-with-independent-noises]]” and “EnKF of [[alg-ensemble-kalman-filter]]”. These interrupt the complete Statement, contrary to the mandatory editorial rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-state-space-filtering-laws",
+      "finding": "Its Definition embeds numerous supplier hyperlinks, including [[def-general-state-space-model-by-kernels]] and [[def-regular-conditional-distribution]], before the complete definition ends. This violates the mandatory uninterrupted-Definition rule.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-pda01",
+      "to": "fd-da01",
+      "faithful": false,
+      "note": "The page prerequisite is declared, and the downstream postulate and theorem preserve Gaussian independence, singular-covariance allowances, positive-definite solved innovations, AC, null-history version qualifications, and conditional physical scope. The supplier's Definition and filtering proposition support those conclusions. One literal hypothesis mismatch remains: the downstream physical model permits dependent modal fields, while its invocation of the local coefficient interface presupposes an ordered basis. See the alert on pthm-fd-conditional-fluid-filter-law. The pushforward argument itself does not require modal independence."
+    }
+  ]
+}

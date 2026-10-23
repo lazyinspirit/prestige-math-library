@@ -1,0 +1,69 @@
+--- a/items/pthm-fd-conditional-fluid-filter-law.md
++++ b/items/pthm-fd-conditional-fluid-filter-law.md
+@@ -111,13 +111,13 @@
+ 
+ [F5] The physical postulate adopts the finite-dimensional coefficient state equation, weighted sensor observation equation, and independent Gaussian noise assumptions; it does not assert empirical adequacy. [[post-fd-fluid-observation-and-noise]]
+ 
+-[F6] The finite linear-Gaussian state-space convention has $a_k=F_ka_{k-1}+q_k$ and $y_k=H_ka_k+r_k$, with mutually independent Gaussian vectors and positive-semidefinite covariances, including singular ones. [[def-fd-fluid-coefficient-observation-model]]
++[F6] The finite coefficient interface accepts finite-dimensional real vector spaces with specified ordered bases, linear observation maps, and coefficient equations $a_k=F_ka_{k-1}+q_k$, $y_k=H_ka_k+r_k$ with mutually independent Gaussian initial and noise vectors and positive-semidefinite covariances, including singular ones. [[def-fd-fluid-coefficient-observation-model]]
+ 
+ [F7] Under AC and positive-definite solved innovations, the declared finite coefficient model has the stated exact Gaussian conditional law at every observation history, including singular state and noise covariances. [[prop-fd-linear-fluid-filter-interface]]
+ 
+ [F8] A filtering kernel is an everywhere-defined probability kernel whose composition with the observation history is a regular conditional distribution of the state; it satisfies the conditional event identities on every Borel history set. [[def-state-space-filtering-laws]]
+ 
+-[F9] The finite coefficient observation matrix is defined by $[H_k]_{ij}=[L_k(\phi_{k,j})]_i$, so the field observation equals $H_ka_k$. [[def-fd-fluid-coefficient-observation-model]]
++[F9] For an ordered basis $(b_{k,1},\ldots,b_{k,m_k})$ and linear observation map $M_k$, the coefficient interface defines its observation matrix by $[H_k]_{ij}=[M_k(b_{k,j})]_i$. [[def-fd-fluid-coefficient-observation-model]]
+ 
+ [F10] The space $\mathcal H=L^2(D;\mathbb R^3)$ has its stated norm, which satisfies the norm triangle inequality. [[def-fd-random-velocity-sensor-law]]
+ 
+@@ -127,13 +127,13 @@
+ 
+ 1.1 In the fixed Cartesian inertial chart of [F1], for each $k$ and coefficient vector $a$, the weighted sensor maps in [F2] and postulate [F5] use finite linearity of the pairings [F3] to give
+ $$(L_k(\Phi_k(a)))_i=S_{\psi_{k,i}}\!\left(\sum_{j=1}^{m_k}a_j\phi_{k,j}\right)=\sum_{j=1}^{m_k}a_jS_{\psi_{k,i}}(\phi_{k,j})=\sum_{j=1}^{m_k}[H_k]_{ij}a_j.$$
+-All terms are defined because $\phi_{k,j},\psi_{k,i}\in\mathcal H$ and [F3] makes each pairing finite. By the matrix definition in [F9], this is exactly the finite coefficient observation equation. [F1, F2, F3, F5, F9, given, algebra]
++All terms are defined because $\phi_{k,j},\psi_{k,i}\in\mathcal H$ and [F3] makes each pairing finite. Thus $L_k(U_k)=H_ka_k$, identifying the sensor signal in the stated observation equation. [F1, F2, F3, F5, given, algebra]
+ 
+ 1.2 For each $k$, put $C_k=\sum_{j=1}^{m_k}\|\phi_{k,j}\|_{\mathcal H}$. For $a,b\in\mathbb R^{m_k}$, the norm triangle inequality [F10] gives
+ $$\|\Phi_k(a)-\Phi_k(b)\|_{\mathcal H}\le\sum_{j=1}^{m_k}|a_j-b_j|\|\phi_{k,j}\|_{\mathcal H}\le C_k|a-b|,$$
+ because each coordinate satisfies $|a_j-b_j|\le|a-b|$. Thus $\Phi_k$ is continuous. This estimate is derived here; the finite-second-moment lemma [F4] does not assert continuity. [F10, given, algebra]
+ 
+-2.1 By [F5] and [F6], the coefficient equations, dimensions, mutual independence, and covariance conventions match the finite linear-Gaussian interface. Step 1.1 identifies its matrix observation map with the specified physical sensor. The explicit AC assumption [A1] and positive-definite $S_k$ hypotheses are exactly the remaining assumptions of [F7]. Thus every hypothesis of the exact coefficient filtering result [F7] holds. [A1, F5, F6, F7, given, step 1.1]
++2.1 To instantiate [F6], take the abstract trial space $V_k=\mathbb R^{m_k}$ with its standard ordered basis $(e_{k,1},\ldots,e_{k,m_k})$, where $e_{k,j}$ has coordinate $j$ equal to one and all other coordinates zero. This list is linearly independent and spans $V_k$, regardless of any linear dependence among the physical fields $\phi_{k,j}$. For $1\le k\le T$, give this abstract space the linear observation map $M_k:V_k\to\mathbb R^{p_k}$ defined by $M_k(b)=L_k(\Phi_k(b))$. Its coefficient observation matrix has entries $[M_k(e_{k,j})]_i=[L_k(\phi_{k,j})]_i=[H_k]_{ij}$ by [F9] and step 1.1. Its trial vector $\sum_j a_{k,j}e_{k,j}$ is exactly $a_k$; the physical velocity is obtained separately by the synthesis map $\Phi_k$. Use the given $F_k$, Gaussian initial state and noises, and covariances on this abstract coefficient realization. By [F5] and [F6], their dimensions, mutual independence, and covariance conventions match the interface. The explicit AC assumption [A1] and positive-definite $S_k$ hypotheses supply its remaining admissibility conditions, so [F7] applies to this coefficient model without requiring $\Phi_k$ to be injective. [A1, F5, F6, F7, F9, given, step 1.1, construct, algebra]
+ 
+ 3.1 Apply [F7] to obtain the coefficient regular conditional kernel $\pi_k$ at every history. By step 1.2, $\Phi_k^{-1}(C)$ is Borel for every $C\in\mathcal B(\mathcal H)$. For each history $y$, $C\mapsto\pi_k(y,\Phi_k^{-1}(C))$ is a probability measure, and for each Borel $C$ its value is measurable in $y$ by the kernel property; hence $\rho_k$ is a probability kernel. For any Borel observation-history set $B$, the defining conditional-law identity in [F8] therefore gives
+ $$\mathbb P(U_k\in C,\ y_{1:k}\in B)=\mathbb P(a_k\in\Phi_k^{-1}(C),\ y_{1:k}\in B)=\int_B\pi_k(y,\Phi_k^{-1}(C))\,\nu_k(dy).$$
+--- a/items/rem-fd-fluid-sobol-interface.md
++++ b/items/rem-fd-fluid-sobol-interface.md
+@@ -50,11 +50,11 @@
+ $$f_u:=\sum_{v\subseteq u}(-1)^{|u|-|v|}P_vf,\qquad u\subseteq[d].$$
+ In particular $f_\varnothing=\mathbb E_\mu f$. With these definitions, write $V_u:=\mathbb E[f_u^2]$ and $V:=\operatorname{Var}(f(X))=\sum_{u\ne\varnothing}V_u$. When $V>0$, the first-order and total Sobol indices are $S_i:=V_{\{i\}}/V$ and $S_{T_i}:=\sum_{u\ni i}V_u/V$; when $V=0$, these normalized indices are undefined.
+ 
+-For sample size $n\ge2$, draw $n$ IID rows; within each row let $X,X',U,V_0,W,W'$ be mutually independent random vectors with law $\mu$. Define $X^{[i]}=(X_i,X'_{-i})$ and $\widetilde X^{[i]}=(X_{-i},X'_i)$. The first-order numerator is $N_i:=f(X)f(X^{[i]})-f(U)f(V_0)$, the total-effect numerator is $T_i:=\tfrac12(f(X)-f(\widetilde X^{[i]}))^2$, and the denominator is $D:=\tfrac12(f(W)-f(W'))^2$. The expectations of the two numerators are respectively $V_{\{i\}}$ and $\sum_{u\ni i}V_u$. The estimator returns ratios of the sample means of $N_i$ and $T_i$ over the sample mean of $D$ only when the latter is positive. Its formal plug-in covariance matrix is $\widehat J\widehat\Sigma\widehat J^{\mathsf T}/n$, where $\widehat\Sigma:=(n-1)^{-1}\sum_{r=1}^n(Z_r-\bar Z)^{\mathsf T}(Z_r-\bar Z)$, $Z_r=(N_{1,r},\ldots,N_{d,r},T_{1,r},\ldots,T_{d,r},D_r)$, and $\widehat J$ is the derivative of the vector ratio map at the observed row means.
++For sample size $n\ge2$, draw $n$ IID rows; within each row let $X,X',U,V_0,W,W'$ be mutually independent random vectors with law $\mu$. Define $X^{[i]}=(X_i,X'_{-i})$ and $\widetilde X^{[i]}=(X_{-i},X'_i)$. The first-order numerator is $N_i:=f(X)f(X^{[i]})-f(U)f(V_0)$, the total-effect numerator is $T_i:=\tfrac12(f(X)-f(\widetilde X^{[i]}))^2$, and the denominator is $D:=\tfrac12(f(W)-f(W'))^2$. The expectations of the two numerators are respectively $V_{\{i\}}$ and $\sum_{u\ni i}V_u$. Since $D\ge0$, its sample mean $\bar D$ is nonnegative. If $\bar D=0$, the estimator returns status `zero-empirical-variance`, no normalized index, and no plug-in covariance matrix or MCSE. If $\bar D>0$, it returns ratios of the sample means of $N_i$ and $T_i$ over $\bar D$, together with the formal plug-in covariance matrix $\widehat J\widehat\Sigma\widehat J^{\mathsf T}/n$, where $\widehat\Sigma:=(n-1)^{-1}\sum_{r=1}^n(Z_r-\bar Z)^{\mathsf T}(Z_r-\bar Z)$, $Z_r=(N_{1,r},\ldots,N_{d,r},T_{1,r},\ldots,T_{d,r},D_r)$, and, on this positive-denominator branch, $\widehat J$ is the derivative of the vector ratio map at the observed row means. The zero-denominator branch can have positive probability even when the population variance $V$ is positive.
+ 
+-A finite-sample ratio need not be unbiased: for one input $X\sim\operatorname{Bernoulli}(1/2)$ and output $f(x)=x$, take two rows $r=1,2$ of mutually independent Bernoulli$(1/2)$ draws $X_r,X'_r,U_r,V_r,W_r,W'_r$, with all draws independent across rows. Set $N_r:=X_r^2-U_rV_r$, $D_r:=\tfrac12(W_r-W'_r)^2$, $\bar N:=(N_1+N_2)/2$, and $\bar D:=(D_1+D_2)/2$. Here $V=\operatorname{Var}(X)=1/4$ and $V_{\{1\}}=\mathbb E[(X-\mathbb E X)^2]=1/4$, so the true first-order index is $1$, while conditional on $\bar D>0$ the reported ratio has expectation $\mathbb E[\bar N/\bar D\mid\bar D>0]=5/6$.
++A finite-sample ratio need not be unbiased: for one input $X\sim\operatorname{Bernoulli}(1/2)$ and output $f(x)=x$, take two rows $r=1,2$ of mutually independent Bernoulli$(1/2)$ draws $X_r,X'_r,U_r,V_r,W_r,W'_r$, with all draws independent across rows. Set $N_r:=X_r^2-U_rV_r$, $D_r:=\tfrac12(W_r-W'_r)^2$, $\bar N:=(N_1+N_2)/2$, and $\bar D:=(D_1+D_2)/2$. Here $V=\operatorname{Var}(X)=1/4$ and $V_{\{1\}}=\mathbb E[(X-\mathbb E X)^2]=1/4$, so the true first-order index is $1$, while $\mathbb P(\bar D=0)=1/4$ and conditional on $\bar D>0$ the reported ratio has expectation $\mathbb E[\bar N/\bar D\mid\bar D>0]=5/6$.
+ 
+-The joint ratio CLT and plug-in MCSE statement applies under its additional assumptions of AC, $f\in L^4$, and $V>0$; an $L^2$ input alone does not ensure a finite row-vector covariance or an MCSE interpretation. These independent-input formulas are not asserted for dependent coordinates. The sampling and bias budget above bounds an expected scalar observable only; it gives no error bound for Sobol ratios.
++The joint ratio CLT and plug-in MCSE statement applies under its additional assumptions of AC, $f\in L^4$, and $V>0$, using any fixed finite extension on the zero-status event only for the asymptotic statements; an $L^2$ input alone does not ensure a finite row-vector covariance or an MCSE interpretation. These independent-input formulas are not asserted for dependent coordinates. The sampling and bias budget above bounds an expected scalar observable only; it gives no error bound for Sobol ratios.
+ 
+ ## Remark references
+ 
+@@ -90,7 +90,7 @@
+ 
+ [F3] [[def-moments-variance-and-covariance]]: for square-integrable $X$, $\operatorname{Var}(X)=\mathbb E[(X-\mathbb E[X])^2]$.
+ 
+-[F4] [[alg-pick-freeze-monte-carlo-sobol-estimators]]: for one input its first-order numerator is $N=f(X)f(X)-f(U)f(V)$, its denominator row is $D=\tfrac12(f(W)-f(W'))^2$, and independent rows are sampled; the ratio of their means is returned when the denominator mean is positive.
++[F4] [[alg-pick-freeze-monte-carlo-sobol-estimators]]: for one input its first-order numerator is $N=f(X)f(X)-f(U)f(V)$, its denominator row is $D=\tfrac12(f(W)-f(W'))^2$, and independent rows are sampled. On a zero denominator mean it returns `zero-empirical-variance` with no normalized index or plug-in matrix; on a positive denominator mean it returns the ratios and the formal derivative-based plug-in matrix.
+ 
+ [F5] [[def-product-coordinate-projections]]: $P_{[d]}f=f$ and $P_\varnothing f=\int f\,d\mu$.
+ 
+@@ -108,6 +108,6 @@
+ 
+ 2.1 On the return event $K>0$, the sample means are $\bar D=K/4$ and $\bar N=(N_1+N_2)/2$. Conditional on $K$, independence from $N_1+N_2$ and the mean in step 1.2 give $\mathbb E[\bar N/\bar D\mid K]=2\mathbb E[N_1+N_2]/K=1/K$. [F4, step 1.2, algebra]
+ 
+-3.1 Since $\mathbb P(K=1)=1/2$, $\mathbb P(K=2)=1/4$, and $\mathbb P(K>0)=3/4$, the conditional probabilities are $2/3$ and $1/3$. Therefore $\mathbb E[\bar N/\bar D\mid K>0]=(2/3)1+(1/3)(1/2)=5/6\ne1$. This proves finite-sample bias conditional on the algorithm returning a ratio, while step 1.1 gives the true index. [step 1.1, step 1.2, step 2.1, algebra]
++3.1 Since $\mathbb P(K=1)=1/2$, $\mathbb P(K=2)=1/4$, and $\mathbb P(K>0)=3/4$, the conditional probabilities are $2/3$ and $1/3$, and $\mathbb P(\bar D=0)=\mathbb P(K=0)=1/4$. Therefore $\mathbb E[\bar N/\bar D\mid K>0]=(2/3)1+(1/3)(1/2)=5/6\ne1$. This proves finite-sample bias conditional on the algorithm returning a ratio, while step 1.1 gives the true index. [step 1.1, step 1.2, step 2.1, algebra]
+ 
+-4.1 Under the additional hypotheses [A2], [F7] supplies the stated joint ratio CLT and plug-in MCSE limit. Those hypotheses are not implied by $f\in L^2$, so no such MCSE interpretation is asserted from square-integrability alone. [A2, F7] ∎
++4.1 Each $D_r$ is nonnegative, so $\bar D\ge0$. On $\bar D=0$, [F4] prescribes the failure status and no ratios or plug-in matrix. On $\bar D>0$, the ratio map is smooth on the open half-space with positive last coordinate; hence its derivative at $\bar Z$ and the formal plug-in matrix are defined. The witness in step 3.1 shows that the zero branch need not be a null event even for $V>0$. Under the additional hypotheses [A2], [F7] supplies the joint ratio CLT and plug-in MCSE limit, with a fixed finite extension on the zero-status event only for asymptotic statements; that extension does not change what the finite-sample algorithm returns. Those hypotheses are not implied by $f\in L^2$, so no such MCSE interpretation is asserted from square-integrability alone. [A2, F4, F7, step 3.1, algebra] ∎

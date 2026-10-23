@@ -1,0 +1,104 @@
+[
+  {
+    "order": 367,
+    "id": "fd-c02",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Turbulent averaging and open closure questions",
+    "companion": "fd-c02-examples",
+    "requires": [
+      "fd-c01",
+      "fd-f01"
+    ],
+    "items": [
+      {
+        "id": "rem-fd-turbulence-and-closure-scope",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Turbulent averaging and open closure questions",
+        "reference": "items/rem-fd-turbulence-and-closure-scope.md",
+        "design_state": "Step 1 authoring in progress; current item checkpoint recorded in batch notes.",
+        "dependency_level": 2,
+        "deps": [
+          "thm-fdmath-finite-reynolds-identity"
+        ],
+        "dependency_roles": {
+          "thm-fdmath-finite-reynolds-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open time interval, let $\\Omega\\subseteq\\mathbb R^3$ be an open spatial region, and let $N\\ge1$. For $j=1,\\ldots,N$, let $u_j:I\\times\\Omega\\to\\mathbb R^3$ be $C^1$ in $(t,x)$ with continuous second spatial derivatives, let $p_j:I\\times\\Omega\\to\\mathbb R$ be $C^1$, and let $f_j:I\\times\\Omega\\to\\mathbb R^3$ be continuous. Suppose $\\operatorname{div}u_j=0$ and\n\n$$\\partial_tu_j+\\operatorname{div}(u_j\\otimes u_j)+\\nabla p_j=\\nu\\Delta u_j+f_j$$\n\nfor one common constant $\\nu\\ge0$. In the formal SI fluid interpretation, the equation is per unit mass: $u_j$ is velocity (m s$^{-1}$), $p_j$ is pressure per unit mass (m$^2$ s$^{-2}$), $f_j$ is body force per unit mass, or acceleration (m s$^{-2}$), and $\\nu$ is kinematic viscosity (m$^2$ s$^{-1}$). These units specify an interpretation of the fields and do not assert physical applicability. Fix dimensionless weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$, define $\\bar u=\\sum_j a_ju_j$, $\\bar p=\\sum_j a_jp_j$, $\\bar f=\\sum_j a_jf_j$, $v_j=u_j-\\bar u$, and $R=\\sum_j a_jv_j\\otimes v_j$, and use $(u\\otimes v)_{rs}=u_rv_s$ with rowwise tensor divergence. Thus $R$ has units m$^2$ s$^{-2}$ under this interpretation. The exact finite weighted identity is\n\n$$\\partial_t\\bar u+\\operatorname{div}(\\bar u\\otimes\\bar u)+\\nabla\\bar p=\\nu\\Delta\\bar u+\\bar f-\\operatorname{div}R.$$\n\nThis is an identity for the specified smooth fields and fixed finite weights. For comparison, choose $t_0\\in I$ and a finite $T>0$ such that $[t_0,t_0+T]\\subset I$. For each fixed $x\\in\\Omega$, the temporal average of the first supplied field over this window is $T^{-1}\\int_{t_0}^{t_0+T}u_1(s,x)\\,ds$; its componentwise ordinary Riemann integral exists because $u_1(\\cdot,x)$ is continuous on the compact window. No equality of this temporal average, the finite weighted mean $\\bar u$, or a probability-space expectation is assumed or deduced. No long-time limit as $T\\to\\infty$ is asserted. The tensor $R$ is the covariance term left by the nonlinear product; a closure prescription is an additional model relation that specifies this unresolved term using selected mean fields or additional variables. The identity itself supplies no such prescription. This remark asserts no measured turbulent flow, statistical averaging theorem, closure law, scaling law, universality result, or existence theorem for turbulent solutions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3 (Spring 2006 lecture notes)",
+              "url": "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
+            },
+            {
+              "title": "H. Tennekes and J. L. Lumley, A First Course in Turbulence (1972), full-text digital copy",
+              "url": "https://djvu.online/file/rx5CLAMFpVjaT"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Formal finite weighted averaging of smooth incompressible model fields and contextual limits on closure claims. No statistical averaging theorem, empirical turbulence observation, closure law, scaling law, or universality result is asserted."
+      }
+    ]
+  },
+  {
+    "order": 368,
+    "id": "fd-c02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Turbulent averaging and open closure questions \u2014 Examples",
+    "companion": "fd-c02",
+    "requires": [
+      "fd-c02"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-reynolds-stress-sign-and-units",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Covariance versus effective Reynolds stress",
+        "reference": "items/ex-fd-reynolds-stress-sign-and-units.md",
+        "design_state": "Step 1 conditional argument complete; F01 carrier placement/readiness remains unresolved.",
+        "dependency_level": 2,
+        "deps": [
+          "thm-fdmath-finite-reynolds-identity",
+          "def-fd-quantity-and-frame-conventions"
+        ],
+        "dependency_roles": {
+          "thm-fdmath-finite-reynolds-identity": "mathematical-premise",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\tau>0$ s, $I=(-\\tau,\\tau)$, and use initial and current Cartesian coordinates measured in metres. Let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference region with $C^1$ boundary and let $U\\subseteq\\mathbb R^3$ be an open neighborhood of $\\overline B$. Choose $e\\in\\mathbb R^3$ with Euclidean norm $|e|=1$ and a speed $c>0$ measured in m s$^{-1}$. Define $\\chi_1,\\chi_2:I\\times U\\to\\mathbb R^3$ by $\\chi_1(t,a)=a+ct e$ and $\\chi_2(t,a)=a-ct e$. On the open spatial region $\\Omega=\\mathbb R^3$, define $u_1,u_2:I\\times\\Omega\\to\\mathbb R^3$ by $u_1(t,x)=ce$ and $u_2(t,x)=-ce$. Take equal dimensionless weights $a_1=a_2=1/2$, zero pressure-per-unit-mass fields $p_j:I\\times\\Omega\\to\\mathbb R$ (units m$^2$ s$^{-2}$), zero body-force-per-unit-mass fields $f_j:I\\times\\Omega\\to\\mathbb R^3$ (units m s$^{-2}$), and common kinematic viscosity $\\nu=0$ m$^2$ s$^{-1}$ in the per-unit-mass finite Reynolds identity. For the formal constant-density interpretation, adopt a constant density parameter $\\rho_0>0$ in kg m$^{-3}$ for momentum scaling. Define the covariance $R=\\sum_{j=1}^2a_j(u_j-\\bar u)\\otimes(u_j-\\bar u)$ and define the effective Reynolds-stress correction $\\sigma_R=-\\rho_0R$ when the momentum equation is written with a $+\\operatorname{div}\\sigma$ contribution on the right. Then $\\bar u=0$, $R=c^2e\\otimes e$, and $\\rho_0R$ is a nonzero positive-semidefinite tensor with units Pa, while $\\sigma_R$ has the opposite sign. This is an exact finite-field illustration, not an empirical observation or a statistical turbulence model.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3 (Spring 2006 lecture notes)",
+              "url": "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
+            },
+            {
+              "title": "H. Tennekes and J. L. Lumley, A First Course in Turbulence (1972), full-text digital copy",
+              "url": "https://djvu.online/file/rx5CLAMFpVjaT"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A two-member constant-velocity example in a formal constant-density incompressible model, used only to distinguish covariance from the signed effective stress contribution and to check SI units. It reports no measurement and proposes no closure law."
+      }
+    ]
+  }
+]

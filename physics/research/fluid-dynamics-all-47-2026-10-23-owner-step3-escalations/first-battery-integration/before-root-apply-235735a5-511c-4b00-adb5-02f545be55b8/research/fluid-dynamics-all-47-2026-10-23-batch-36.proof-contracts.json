@@ -1,0 +1,640 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "36",
+  "scope": [
+    "lem-fd-finite-modal-field-has-finite-second-moment",
+    "post-fd-fluid-observation-and-noise",
+    "pthm-fd-conditional-fluid-filter-law",
+    "ex-fd-symbolic-single-sensor"
+  ],
+  "contracts": {
+    "lem-fd-finite-modal-field-has-finite-second-moment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-random-velocity-sensor-law",
+          "source_section": "Definition",
+          "quote": "A finite-second-moment random velocity law",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-strongly-measurable-banach-valued-function",
+          "source_section": "Definition",
+          "quote": "is **strongly measurable** (or **Bochner measurable**)",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Its **nonnegative Lebesgue integral** is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Then there is an increasing sequence of nonnegative simple measurable functions",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-riesz-fischer-completeness-of-l-p",
+          "source_section": "Statement",
+          "quote": "Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with its quotient norm, is complete. Equivalently, every Cauchy\nsequence in the metric induced by that norm converges in $L^p(\\mu)$.\n\nMoreover, if a sequence in $L^p(\\mu)$ converges in norm, then some subsequence\nadmits measurable representatives converging almost everywhere relative to $\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "modal-field-strong-measurability",
+          "claim": "A real Banach space means a real normed linear space complete in its norm metric. This is the codomain condition in [F3] for the phrase \u201cstrongly measurable.\u201d Write each $v\\in H$ in its $d$ scalar coordinate classes $v^{(r)}\\in L^2(D,\\lambda;\\mathbb R)$; the Definition gives the isometric finite direct-sum norm $\\|v\\|_H^2=\\sum_{r=1}^d\\|v^{(r)}\\|_2^2$. If $(v_n)$ is Cauchy in this norm, meaning that for each $\\varepsilon>0$ there is $N$ such that $\\|v_n-v_q\\|_H<\\varepsilon$ for all $n,q\\ge N$, then each coordinate sequence is Cauchy because $\\|v_n^{(r)}-v_q^{(r)}\\|_2\\le\\|v_n-v_q\\|_H$. By [F8], each coordinate sequence converges to a class $v^{(r)}\\in L^2(D,\\lambda;\\mathbb R)$. The finite tuple $v=(v^{(1)},\\ldots,v^{(d)})$ belongs to $H$, and the finite sum of squared coordinate errors tends to zero, so $v_n\\to v$ in $H$. Hence $H$ is complete and normed, so it is a real Banach space and [F3] applies.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pushforward-law-and-moment",
+          "claim": "Put $C_\\phi=(\\sum_{j=1}^m\\|\\phi_j\\|_H^2)^{1/2}$. For $a,b\\in\\mathbb R^m$, the triangle inequality and [F7] give\n$$\\|T(a)-T(b)\\|_H\\le\\sum_{j=1}^m|a_j-b_j|\\|\\phi_j\\|_H\\le C_\\phi|a-b|.$$\nThus $T$ is continuous and $U=T\\circ A$ is Borel measurable. For each $n\\ge1$, truncate every coordinate of $A$ to $[-n,n]$ and round it down to a multiple of $2^{-n}$, obtaining a finite-valued measurable map $A_n:\\Omega\\to\\mathbb R^m$ with $A_n\\to A$ pointwise. The maps $T\\circ A_n$ are measurable simple $H$-valued functions and converge pointwise in norm to $U$ by continuity of $T$. Hence $U$ is strongly measurable by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "current-step-2-1",
+          "claim": "For Borel sets $B\\subseteq H$, the preimage map preserves complements and countable disjoint unions, and $U^{-1}(H)=\\Omega$. Therefore $\\mu(B)=\\mathbb P(U^{-1}(B))$ is countably additive with $\\mu(H)=1$ by [F2]. For any nonnegative Borel function $g:H\\to[0,\\infty]$, choose nonnegative simple functions $s_n\\uparrow g$ as provided by [F5]. The identity $\\int_H s_n\\,d\\mu=\\mathbb E_{\\mathbb P}[s_n(U)]$ follows by writing each simple integral as a finite sum over its level sets and using the definition of $\\mu$. Apply [F6] to both sides and pass to the increasing limits to obtain $\\int_H g\\,d\\mu=\\mathbb E_{\\mathbb P}[g(U)]$. Apply this identity to the continuous function $g(v)=\\|v\\|_H^2$. The bound in step 1.2 with $b=0$ gives $\\|U\\|_H^2\\le C_\\phi^2|A|^2$, so $\\mathbb E_{\\mathbb P}\\|U\\|_H^2\\le C_\\phi^2\\mathbb E_{\\mathbb P}|A|^2<\\infty$. This proves the stated moment identity and bound, and hence that $\\mu$ is a finite-second-moment law of the Definition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive finite spatial measure and has no empty-region conclusion.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json: The Statement rules out each relevant empty aggregate explicitly: positive lambda(D) excludes the empty spatial region, d>=1 gives a positive vector dimension, and m>=1 makes the mode list and the sum defining T nonempty. Step 1.1 forms C_phi from these m supplied modes. Zero modes or zero coefficients remain allowed, but that is the distinct zero/degenerate boundary and does not introduce an empty modal family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-31-36.json",
+              "sha256": "596381b98fa132479fb42b8980975dd2366c32c94475e936f97356ad12edf8b8"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The CURRENT Statement retains0<lambda(D)<infinity,d>=1,m>=1 and a probability space of mass1. Thus empty spatial region, zero component dimension and empty modal list are excluded. Added AC/Banach completeness in1.1 changes neither exclusion; the modal norm constant is now formed in1.2 (formerly1.1). Zero supplied modes are allowed and yield a zero map, not an empty family.",
+            "item_sha256": "ff31e84d256082720a786de9ef3681dbe55d5ea17bd90d4edf486d5fd7c1713c",
+            "row_sha256": "6a3fe05602df7e4201bc604825b91cf17df575213c850db00baecacbbd8a7e3c",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-15-20-and36.json",
+              "sha256": "e4102d694259576c8501b84e5f2d0a2b27d6e392b604f0cf45d94fdc64688405"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Choice (AC), meaning every family of nonempty sets has a choice function. Let $(D,\\mathcal D,\\lambda)$, $d\\ge1$, and $H=L^2(D,\\lambda;\\mathbb R^d)$ be as in the Definition of the finite-second-moment random velocity sens"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 cover this zero case explicitly; If all modal fields vanish, then C_phi=0, U=0, the pushforward is the point mass at zero, and the stated bound is equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the finite-sum estimate in step 1.1 reduces to ||a phi_1||=|a| ||phi_1||."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 cover this degenerate case explicitly; The estimate includes zero modes and a degenerate coefficient law; no injectivity of the modal map is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no time variable or endpoint assertion in this lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs no choices and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication about a modal map, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication about a modal map, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-mode",
+          "claim": "The estimate includes the zero modal map.",
+          "calculation": "Take m=1 and phi_1=0. Then C_phi=0, U=0, mu is the point mass at 0, and both sides of the moment bound are 0.",
+          "disposition": "Finite symbolic check only; the general bound is proved in steps 1.1\u20131.2."
+        }
+      ],
+      "finite_checks_disposition": "The finite check covers a degenerate modal map; it is not used in place of the proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-36",
+        "notes": "Checked all three proof steps and nine cited supplier statements/definitions. AC supplies countable choice for scalar Riesz-Fischer; finite coordinate direct sums are complete. Dyadic truncations give finite measurable approximants converging everywhere, even for zero/dependent modes. Cauchy-Schwarz gives the modal norm bound. Simple integration and monotone convergence prove the pushforward integral identity. Positive spatial measure and m,d>=1 exclude empty dimensions; no separability of the entire spatial L2 space is assumed. Reader/refuter supply no local counterexample. No diagrams or empirical inputs; no defect found."
+      }
+    },
+    "post-fd-fluid-observation-and-noise": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate specifies the Newtonian chart, finite velocity modes, weighted spatial sensor integrals, coefficient transition and observation equations, independent Gaussian initial/process/observation vectors, covariance signs, units, and the AC convention."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "It is limited to a selected discrete-time finite-modal regime with ideal weighted sensors. It explicitly excludes universal flow validity, nonlinear or untruncated dynamics, unmodeled bias/correlations, and any claim that real sensor noise is Gaussian."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The full Law\u2013Stuart\u2013Zygalakis monograph passages (Chapter 2 \u00a7\u00a72.1, 2.4; Chapter 4 \u00a74.1) and the full S\u00e4rkk\u00e4 book passages (Chapter 4 \u00a7\u00a74.1\u20134.3) were read. Their positive-definite source hypotheses are recorded; the broader singular-covariance interface comes from the exact inspected local mathematical supplier. Source fetch stamps are recorded in batch-36 coverage."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The linear, Gaussian, independent-noise, finite-mode and ideal-sensor clauses are explicitly adopted model assumptions. The postulate reports no observations and makes no deduction that nature or an actual apparatus satisfies them."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "This is an adopted physical model, not a proved claim or reported experiment.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-36",
+        "notes": "Read complete postulate and six direct suppliers, including full sensor proof and finite modal lemma. Spatial L2 classes, weighted integral sensors, finite maps, Cartesian chart, time interval and SI dimensions are explicit. Finite-dimensional Gaussian initial/noise laws and their independence are adopted, not derived from continuum equations or observations. PSD covariances allow zero process/prior variance; no inversion occurs here; T=0 has empty observation list. Finite Gaussian coefficients have finite second moments and modal lemma applies even to dependent modes (the coefficient basis can be taken abstractly). S\u00e4rkk\u00e4 Chapter 4, equations 4.17-4.18, supports the adopted model; no experimental sampling, calibration or measured precision is asserted. Reader/refuter identify no local defect; no diagrams. No defect found."
+      }
+    },
+    "pthm-fd-conditional-fluid-filter-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Use the nonrelativistic Newtonian spacetime $I\\times E$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-random-velocity-sensor-law",
+          "source_section": "Definition",
+          "quote": "The sensor reads a weighted spatial average; it does not represent a point evaluation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-sensor-pairing-is-well-defined",
+          "source_section": "Statement",
+          "quote": "The map $S_\\psi:H\\to\\mathbb R$ is linear and continuous",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-finite-modal-field-has-finite-second-moment",
+          "source_section": "Statement",
+          "quote": "Then $U$ is strongly measurable, $\\mu$ is a probability measure",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "post-fd-fluid-observation-and-noise",
+          "source_section": "Postulate",
+          "quote": "These linearity, Gaussianity, independence, covariance, finite-mode, and ideal-sensor conditions are adopted physical-model assumptions for this selected regime.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-fd-fluid-coefficient-observation-model",
+          "source_section": "Definition",
+          "quote": "$$a_k=F_ka_{k-1}+q_k,\\qquad y_k=H_ka_k+r_k.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-fd-linear-fluid-filter-interface",
+          "source_section": "Statement",
+          "quote": "its Gaussian output is an everywhere-defined conditional-law version for the coefficient state",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-state-space-filtering-laws",
+          "source_section": "Definition",
+          "quote": "a probability kernel",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-fd-fluid-coefficient-observation-model",
+          "source_section": "Definition",
+          "quote": "The observation matrix $H_k\\in\\mathbb R^{p_k\\times m_k}$ is defined by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-fd-random-velocity-sensor-law",
+          "source_section": "Definition",
+          "quote": "**General random-state interface.** Let $X$ be a specified separable real Banach space with its norm-Borel sigma-algebra, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, and let $U:\\Omega\\to X$ be strongly measurable: measurable finite-valued simple maps converge to $U$ in norm outside a measurable null set. A finite-second-moment state satisfies $\\mathbb E\\|U\\|_X^2<\\infty$. Finite collections of bounded linear maps $L_j:X\\to\\mathbb R$ are bounded sensors; their operator bounds are $|L_j(x)|\\le C_j\\|x\\|_X$ with supplied finite $C_j$. When used as a physical model, specify whether randomness describes initial data, forcing, measurement, or an adopted stochastic closure. None of those interpretations follows from deterministic balance equations. This interface asserts no PDE or existence of a measurable solution selection.\n\n**Spatial velocity law and integral sensor.** Let $d\\ge1$ be an integer and let $(D,\\mathcal D,\\lambda)$ be a finite measure space with $0<\\lambda(D)<\\infty$, interpreted as a spatial region with volume measure $\\lambda$. Let $H:=L^2(D,\\lambda;\\mathbb R^d)$ consist of almost-everywhere equivalence classes of measurable vector fields $v$ with $\\int_D|v(x)|^2\\,d\\lambda(x)<\\infty$, where $|\\cdot|$ is the Euclidean norm. Give $H$ the norm $\\|v\\|_H:=(\\int_D|v(x)|^2\\,d\\lambda(x))^{1/2}$ and its norm topology; this is the finite direct sum of the scalar $L^2$ norms. Write $\\mathcal B(H)$ for the sigma-algebra generated by the norm-open subsets of $H$. A finite-second-moment random velocity law is a probability measure $\\mu$ on $(H,\\mathcal B(H))$ such that\n$$\\int_H \\|v\\|_H^2\\,d\\mu(v)<\\infty.$$\nFor a sensor weight $\\psi\\in H$, define the ideal linear sensor and its centered observable by\n$$S_\\psi(v):=\\int_D v(x)\\cdot\\psi(x)\\,d\\lambda(x),\\qquad f_\\psi(v):=S_\\psi(v)-\\int_H S_\\psi(w)\\,d\\mu(w).$$\nThe sensor reads a weighted spatial average; it does not represent a point evaluation. When $v$ is assigned SI velocity units of metres per second and $\\lambda$ is volume in $\\mathrm m^d$, assigning $\\psi$ units $\\mathrm m^{-d}$ makes $S_\\psi(v)$ a velocity. Other weight units multiply the sensor units by the corresponding factor. The centered observable is dimensionally the same as the sensor reading.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-sensor-matrix",
+          "claim": "In the fixed Cartesian inertial chart of [F1], for each $k$ and coefficient vector $a$, the weighted sensor maps in [F2] and postulate [F5] use finite linearity of the pairings [F3] to give\n$$(L_k(\\Phi_k(a)))_i=S_{\\psi_{k,i}}\\!\\left(\\sum_{j=1}^{m_k}a_j\\phi_{k,j}\\right)=\\sum_{j=1}^{m_k}a_jS_{\\psi_{k,i}}(\\phi_{k,j})=\\sum_{j=1}^{m_k}[H_k]_{ij}a_j.$$\nAll terms are defined because $\\phi_{k,j},\\psi_{k,i}\\in\\mathcal H$ and [F3] makes each pairing finite. By the matrix definition in [F9], this is exactly the finite coefficient observation equation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "match-filter-hypotheses",
+          "claim": "The finite coefficient equations, independent Gaussian vectors, PSD covariances, AC, and PD solved innovations satisfy the exact coefficient-filter proposition.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "pushforward-r-c-d",
+          "claim": "For each $k$, put $C_k=\\sum_{j=1}^{m_k}\\|\\phi_{k,j}\\|_{\\mathcal H}$. For $a,b\\in\\mathbb R^{m_k}$, the norm triangle inequality [F10] gives\n$$\\|\\Phi_k(a)-\\Phi_k(b)\\|_{\\mathcal H}\\le\\sum_{j=1}^{m_k}|a_j-b_j|\\|\\phi_{k,j}\\|_{\\mathcal H}\\le C_k|a-b|,$$\nbecause each coordinate satisfies $|a_j-b_j|\\le|a-b|$. Thus $\\Phi_k$ is continuous. This estimate is derived here; the finite-second-moment lemma [F4] does not assert continuity.",
+          "step": "1.2",
+          "inputs": [
+            "F10",
+            "given",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "current-step-3-1",
+          "claim": "Apply [F7] to obtain the coefficient regular conditional kernel $\\pi_k$ at every history. By step 1.2, $\\Phi_k^{-1}(C)$ is Borel for every $C\\in\\mathcal B(\\mathcal H)$. For each history $y$, $C\\mapsto\\pi_k(y,\\Phi_k^{-1}(C))$ is a probability measure, and for each Borel $C$ its value is measurable in $y$ by the kernel property; hence $\\rho_k$ is a probability kernel. For any Borel observation-history set $B$, the defining conditional-law identity in [F8] therefore gives\n$$\\mathbb P(U_k\\in C,\\ y_{1:k}\\in B)=\\mathbb P(a_k\\in\\Phi_k^{-1}(C),\\ y_{1:k}\\in B)=\\int_B\\pi_k(y,\\Phi_k^{-1}(C))\\,\\nu_k(dy).$$\nThe last integrand is $\\rho_k(y,C)$, so the conditional event identity holds for $U_k$ and $\\rho_k$ is its regular conditional law by [F8]. Because $\\pi_k$ is defined at every history, so is its pushforward $\\rho_k$, including on null histories.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 includes k=0: the observation history is the singleton and the field law is the pushforward of the initial coefficient Gaussian."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows singular P0, Qk, and Rk; it requires positive definiteness only for each innovation covariance being inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.2 apply when T=1, including a single sensor and a single modal coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The modal map may be non-injective or zero; step 1.2 still pushes the conditional coefficient law forward without an identifiability claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 1.2 include the initial history k=0 and terminal history k=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated in the Statement and Fact A1, matching the finite Gaussian and exact-filter suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a conditional filtering result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a conditional filtering result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-mode-one-sensor",
+          "claim": "A scalar finite model gives the advertised update and field pushforward.",
+          "calculation": "Set F=H=1, Q=0, mu=0, P=1, R=1, and y=2. Then S=2, K=1/2, m^a=1, and P^a=1/2; the field law is the pushforward under a -> a e.",
+          "disposition": "Arithmetic sanity check only; exact conditionality follows from the inspected proposition and the local pushforward proof."
+        }
+      ],
+      "finite_checks_disposition": "The scalar calculation checks conventions only and is not empirical data or a proof of the general theorem.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-36",
+        "notes": "Read every theorem step and all nine direct suppliers; independently checked coefficient proposition and full imported Kalman induction plus critical Gaussian-conditioning and independent-noise kernel proofs. Exact dimensions, AC, mutual independence, PSD covariances and PD innovations match; singular state/noise covariances require no state inverse. Sensor identity follows from finite linearity; modal continuity is proved locally, including zero/noninjective maps. Pullback of each field Borel event is Borel and coefficient conditional identity proves the pushforward kernel, at k=0 and k=T and on null histories without uniqueness claims. S\u00e4rkk\u00e4 Theorem4.2 equations4.20-4.29 supports the standard recursion; singular extension is justified by local imported suppliers, not attributed to textbook density arguments. Reader36:1 missing published audit is confirmed nonfatal to this sound deduction and referred to read-only published ledger; no mathematical prerequisite gap found. No data or diagrams."
+      }
+    },
+    "ex-fd-symbolic-single-sensor": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-random-velocity-sensor-law",
+          "source_section": "Definition",
+          "quote": "define the ideal linear sensor and its centered observable by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-sensor-pairing-is-well-defined",
+          "source_section": "Statement",
+          "quote": "finite and independent of the representatives of $v$ and $\\psi$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-fd-fluid-observation-and-noise",
+          "source_section": "Postulate",
+          "quote": "$[H_k]_{ij}=(L_k\\phi_{k,j})_i$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-fd-conditional-fluid-filter-law",
+          "source_section": "Statement",
+          "quote": "its regular conditional law is the pushforward kernel",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "are SI base units in this dictionary",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normalize-spatial-sensor",
+          "claim": "Since $|e|=1$, $\\|\\phi\\|_{L^2}^2=\\int_D|e|^2\\,d^3x=V<\\infty$ and $\\|\\psi\\|_{L^2}^2=\\int_D|e/V|^2\\,d^3x=1/V<\\infty$. Linearity of the sensor integral gives\n$$S_\\psi(\\phi)=\\int_D e\\cdot(e/V)\\,d^3x=V/V=1,$$\nso the scalar observation matrix is $H_1=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-scalar-update",
+          "claim": "The chosen state transition and process noise give forecast mean $m_{1|0}=\\mu$ and variance $P_{1|0}=P$. Thus the innovation covariance is $S_1=H_1P_{1|0}H_1^T+R=P+R>0$, the gain is $K_1=P/(P+R)$, and the covariance update is\n$$P_{1|1}=P-\\frac{P^2}{P+R}=\\frac{PR}{P+R}.$$\nSubstituting $v_1=y_1-\\mu$ into the mean update gives the displayed $m_{1|1}$. These formulas hold at $P=0$ as well because $R>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "field-posterior",
+          "claim": "The one-mode field posterior is the pushforward of the scalar Gaussian conditional law.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes a spatial region of positive finite volume and one sensor."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly includes P=0; R>0 keeps S positive, the gain is zero, and the posterior variance remains zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example and its verification cover this case: The setup has exactly one coefficient, one sensor, and one observation time."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the zero-prior-variance case P=0; positive R keeps the innovation invertible and gives posterior variance zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example and step 3.1 start from the stated prior and end at the single analysis update."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example and its verification cover this case: The verification explicitly carries AC as A1 and invokes the theorem with that assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "normalized-volume-sensor",
+          "claim": "The volume-normalized constant sensor has unit response.",
+          "calculation": "For |e|=1, phi=e and psi=e/V give integral_D phi dot psi d^3x=V/V=1.",
+          "disposition": "Direct finite integral calculation; no measured data are used."
+        },
+        {
+          "id": "scalar-numeric-sanity",
+          "claim": "The scalar update has the stated Kalman values.",
+          "calculation": "With mu=0, P=1, F=H=1, Q=0, R=1, and y=2, S=2, K=1/2, m^a=1, and P^a=1/2.",
+          "disposition": "Arithmetic sanity check only; the Example remains symbolic and hypothetical."
+        }
+      ],
+      "finite_checks_disposition": "Both checks are symbolic calculations, not reported experiments or empirical evidence.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-36",
+        "notes": "Checked complete Example and Verification against all six direct suppliers after their lower-level reviews. Positive finite V gives norms squared V and 1/V and sensor response1; F=H=1,Q=0 gives S=P+R>0, gain P/(P+R), mean mu+gain(y-mu), variance PR/(P+R). At P=0 gain and variance vanish and mean remains mu; R=0 is excluded. Coefficient/field posterior distinction is maintained by pushforward under a->ae. AC and finite-model SI conventions are carried. Datum is symbolic, no measured values, precision, inference or calibration invented. Reader/refuter identify no local defect; no diagrams. Imported publication-audit maintenance is inherited but does not invalidate checked conditional arithmetic."
+      }
+    }
+  }
+}

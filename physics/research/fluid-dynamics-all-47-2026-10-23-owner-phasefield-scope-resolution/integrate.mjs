@@ -1,0 +1,27 @@
+import {readFileSync,writeFileSync,existsSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {readItem} from '../../tools/physics-support/physics-content.mjs';
+import {sourceSectionText} from '../../tools/physics-support/facts-block.mjs';
+import {loadStep1Record} from '../../tools/physics-support/frontier-snapshot.mjs';
+import {recordStep1Batch,step1Decision} from '../../tools/physics-support/step1-decisions.mjs';
+const run='fluid-dynamics-all-47-2026-10-23',base=`research/${run}-owner-phasefield-scope-resolution`,root=process.cwd();
+const read=p=>JSON.parse(readFileSync(p)),write=(p,v)=>writeFileSync(p,JSON.stringify(v,null,2)+'\n'),sha=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const review=read(`${base}/review.json`),out=`${base}/integration.json`,state=read(`.physics-autopilot/${run}/state.json`);
+if(existsSync(out)||review.round!==1||review.items.length!==5)throw Error('Wrong/already applied phasefield review');
+if(!state.dispatches['1-scaffold:batch-41']?.endedAt)throw Error('Batch41 writer live');
+const before=[];mkdirSync(`${base}/before-integration`,{recursive:true});
+const paths=[...review.items.flatMap(r=>[`items/${r.id}.md`,`research/${run}-step1-${r.id}.json`]),...['pages.json','proof-contracts.json','cross-batch-dependencies.json','notes.md','coverage.json'].map(s=>`research/${run}-batch-41.${s}`)];
+for(const path of paths){if(!existsSync(path))continue;const archive=`${base}/before-integration/${path.replaceAll('/','__')}`;if(existsSync(archive))throw Error('Archive exists');writeFileSync(archive,readFileSync(path));before.push({path,archive,sha256:sha(path)});}write(`${base}/before-integration.json`,{version:1,run,at:new Date().toISOString(),files:before});
+const id='def-fd-diffuse-interface-equations',path=`items/${id}.md`,old=readFileSync(path,'utf8');
+if(!old.includes('  - def-fd-x00\n')||!old.includes('  def-fd-x00: mathematical-premise\n'))throw Error('Expected exact obsolete premise absent');
+writeFileSync(path,old.replace('  - def-fd-x00\n','').replace('  def-fd-x00: mathematical-premise\n',''));
+const item=readItem(path),mp=`research/${run}-batch-41.pages.json`,manifest=read(mp),entry=manifest.flatMap(p=>p.items).find(x=>x.id===id);
+entry.statement=sourceSectionText(item.body,'Definition').trim();entry.deps=item.deps;entry.dependency_roles=item.dependency_roles;write(mp,manifest);
+const evidence=`Owner /root integrated the round1 all-dimensional phase-field repair in ${base}/review.json: explicit finite-component operators and the existing local periodic calculus replace the spurious R3-only x00 premise. Equations, regularity, energy law and all d>=1 scope are retained. This is authoring readiness; independent review and native gates remain required.`;
+const ep=`research/${run}-batch-41.cross-batch-dependencies.json`,edges=read(ep);if(edges.filter(x=>x.kind==='item'&&x.consumer===id&&x.supplier==='def-fd-x00').length!==1)throw Error('Missing obsolete edge');write(ep,edges.filter(x=>!(x.kind==='item'&&x.consumer===id&&x.supplier==='def-fd-x00')));
+const cp=`research/${run}-batch-41.coverage.json`,coverage=read(cp);coverage.blockers=[];coverage.status='authoring-source-reading-complete; owner repaired spurious dimensional prerequisite; independent review pending';coverage.owner_resolution={at:new Date().toISOString(),evidence};write(cp,coverage);
+const np=`research/${run}-batch-41.notes.md`;writeFileSync(np,readFileSync(np,'utf8')+`\n\n### Owner scope resolution (${new Date().toISOString()})\n\n${evidence}\nThe original missing-source observation and native escalation remain historical. The four physical batch42 consumers require their final drained review by the same scientific reviewer.\n`);
+const snapshot=loadStep1Record(root,run),retained=[];const records=[];
+for(const r of review.items){if(r.readiness_recommendation==='retain ready'){const d=step1Decision(snapshot,r.id);if(!d.closed)throw Error('Unchanged local prerequisite no longer current '+r.id);retained.push({id:r.id,sha256:d.row.sha256});}else records.push({item:r.id,decision:'ready',dependencies:r.recommended_deps,reason:evidence+' '+r.scientific_basis});}
+const receipt={version:1,run,owner:'/root',at:new Date().toISOString(),review:{path:`${base}/review.json`,sha256:sha(`${base}/review.json`)},before:`${base}/before-integration.json`,retained,removed_spurious_edge:{consumer:id,supplier:'def-fd-x00'},proof_contract_changes:[],pending_consumer_batch:42,gates_attempted:0};
+try{const rows=recordStep1Batch(root,{run,owner:true,records}),fresh=loadStep1Record(root,run);receipt.records=rows.map(r=>({id:r.item,sha256:r.sha256,current:step1Decision(fresh,r.item).closed}));if(receipt.records.some(r=>!r.current))throw Error('Readiness changed');receipt.complete=true;}catch(e){receipt.complete=false;receipt.error=e.message;write(out,receipt);throw e;}write(out,receipt);console.log(JSON.stringify({ready:receipt.records.length,retained:retained.length,downstream_check_pending:42,gates:0}));

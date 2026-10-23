@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "25",
+  "round": 0,
+  "reviewed_items": [
+    "def-fd-kinetic-density",
+    "def-fd-elastic-collision-measure",
+    "prop-fd-kinetic-moment-balances",
+    "thm-fd-kinetic-h",
+    "thm-fd-collision-maxwellian",
+    "prop-fd-maxwellian-moments",
+    "thm-fd-controlled-euler-passage",
+    "def-fd-conserving-bgk",
+    "thm-fd-homogeneous-bgk-limit",
+    "prop-fd-bgk-entropy-rate",
+    "cex-fd-collision-support",
+    "ex-fd-bgk-initial-layer",
+    "rem-fd-kinetic-limit-status"
+  ],
+  "reviewed_pages": [
+    "fd-k01",
+    "fd-k01-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch and its actual suppliers were reviewed. Several repairable definition, hypothesis, and approved-scope gaps need one local repair; an outside-batch consumer disposition is also required.",
+  "findings": [
+    {
+      "id": "def-fd-kinetic-density",
+      "type": "local",
+      "reason": "The definition names quotient Lebesgue measure on one periodic cell but does not construct or identify its normalization. Define it, for example as the pushforward of Lebesgue measure on the half-open fundamental cell, since later integrals and periodic cancellations use this measure."
+    },
+    {
+      "id": "def-fd-elastic-collision-measure",
+      "type": "prerequisite",
+      "reason": "The actual supplier def-tdmath-elastic-collision-kernel defines Dν using positive measurable inputs whose four collision evaluations are ν-measurable. This Definition only names a declared Dν; it does not impose those measurability conditions on A and B, so the collision integral can be undefined. State the exact domain and test-space content."
+    },
+    {
+      "id": "def-fd-elastic-collision-measure",
+      "type": "scope",
+      "reason": "Approved K0 requires the weak identity for compact smooth velocity tests as well as the moment and logarithmic tests. The current arbitrary S_f can omit every compact test. Restore that test scope with its convergence conditions; K2's approved weak equilibrium conclusion depends on it."
+    },
+    {
+      "id": "prop-fd-kinetic-moment-balances",
+      "type": "prerequisite",
+      "reason": "Step 2.1 passes spatial derivatives through velocity integrals, but the Statement supplies only locally bounded L1(dv) norms of possibly different majorants in x. That does not provide the common velocity majorant required by thm-differentiation-under-the-integral-sign for pointwise spatial differentiation; Fubini alone does not supply it. Add a locally uniform common envelope or state and prove distributional balances. thm-fd-controlled-euler-passage uses this edge in F1 and steps 1.1 and 3.1."
+    },
+    {
+      "id": "thm-fd-kinetic-h",
+      "type": "scope",
+      "reason": "Approved K1 and the approved item design include the local balance h_t + div J_H = -D as well as its periodic integral. The current Statement proves only the total H identity. Restore the local result with explicit entropy-flux and differentiation hypotheses; this will require an outside-batch consumer update."
+    },
+    {
+      "id": "thm-fd-collision-maxwellian",
+      "type": "prerequisite",
+      "reason": "Facts F2 imports thm-fd-kinetic-h, whose actual Statement assumes a time-dependent solution of the kinetic PDE; this theorem concerns a static profile with no PDE hypothesis. Step 1.1 needs only the pointwise inequality (A-B)log(A/B) ≥ 0. State that directly or use an exact supplier whose hypotheses are met."
+    },
+    {
+      "id": "thm-fd-collision-maxwellian",
+      "type": "scope",
+      "reason": "Approved K2 also concludes that a Maxwellian annihilates the collision operator in the weak identity. The current converse establishes only D_x=0. After restoring the compact-test class, include the weak Qν(M)=0 conclusion and its assumptions."
+    },
+    {
+      "id": "prop-fd-maxwellian-moments",
+      "type": "local",
+      "reason": "thm-fd-collision-maxwellian is declared as a prerequisite but is not used in this Statement, Facts, or proof. The Gaussian moment calculations use the kinetic-density definition and Gaussian suppliers; remove the unused edge or state its necessary role."
+    },
+    {
+      "id": "thm-fd-controlled-euler-passage",
+      "type": "local",
+      "reason": "The Statement calls Ω a fixed rectangular periodic cell without specifying its periods, quotient measure, or the exact earlier definition used. State that content or identify the exact definition and its relevant domain and measure."
+    },
+    {
+      "id": "thm-fd-homogeneous-bgk-limit",
+      "type": "local",
+      "reason": "The entropy premise uses log(f0/f_ref) but says only f_ref>0. State that f_ref has the same units as f0 so the logarithm has a dimensionless argument."
+    },
+    {
+      "id": "prop-fd-bgk-entropy-rate",
+      "type": "local",
+      "reason": "The phrase “exact homogeneous BGK relaxation hypotheses” does not give the full conditions in this Statement. Identify the exact earlier result and state the relevant finite weighted-moment, positive-density, positive-temperature, and entropy hypotheses; also require f_ref to have the same units as f0."
+    },
+    {
+      "id": "pthm-fd-boltzmann-entropy",
+      "type": "outside-batch",
+      "reason": "If the requested K1 local-balance result is restored, Fact F1's assertion that thm-fd-kinetic-h “does not state the local balance” becomes false. This consumer is outside batch 25; the owner must update and review that Fact after the local repair."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "prop-fd-kinetic-moment-balances",
+      "decision": "repair",
+      "reason": "Clarify the spatial differentiation hypothesis or use a distributional formulation; its current proof claims pointwise derivative interchange."
+    },
+    {
+      "id": "thm-fd-kinetic-h",
+      "decision": "repair",
+      "reason": "Restore the approved local entropy balance and explicit flux hypotheses."
+    },
+    {
+      "id": "thm-fd-collision-maxwellian",
+      "decision": "repair",
+      "reason": "Replace the H-theorem use whose PDE hypotheses are absent, and restore the approved weak equilibrium conclusion."
+    },
+    {
+      "id": "cex-fd-collision-support",
+      "decision": "repair",
+      "reason": "Its Dirac model's S_f currently lists only a finite span; after the approved compact-test scope is restored, add those tests and verify their absolute convergence."
+    },
+    {
+      "id": "prop-fd-maxwellian-moments",
+      "decision": "repair",
+      "reason": "Remove or justify its unused collision-equilibrium dependency."
+    },
+    {
+      "id": "thm-fd-controlled-euler-passage",
+      "decision": "repair",
+      "reason": "Review F1 and steps 1.1 and 3.1 against the repaired moment-balance assumptions and specify the periodic domain."
+    },
+    {
+      "id": "def-fd-conserving-bgk",
+      "decision": "accept",
+      "reason": "Its moment-matched Gaussian use remains supported by the Maxwellian moment proposition."
+    },
+    {
+      "id": "thm-fd-homogeneous-bgk-limit",
+      "decision": "repair",
+      "reason": "Specify the reference-density units used by its entropy hypothesis."
+    },
+    {
+      "id": "prop-fd-bgk-entropy-rate",
+      "decision": "repair",
+      "reason": "State the full hypotheses rather than relying on the vague “exact homogeneous BGK relaxation hypotheses” phrase."
+    },
+    {
+      "id": "ex-fd-bgk-initial-layer",
+      "decision": "accept",
+      "reason": "Its Gaussian-mixture and relaxation uses remain compatible with the stated BGK and Maxwellian results."
+    },
+    {
+      "id": "rem-fd-kinetic-limit-status",
+      "decision": "accept",
+      "reason": "Its scope description remains accurate under the proposed local repairs."
+    },
+    {
+      "id": "post-fd-boltzmann-model",
+      "decision": "accept",
+      "reason": "Its Statement already adopts the compact smooth tests and convergent moment/log tests; the collision-domain clarification will supply the exact Dν content it invokes."
+    },
+    {
+      "id": "def-fd-physical-kinetic-observables",
+      "decision": "accept",
+      "reason": "It states the moment quantities and units explicitly; the proposed kinetic-density clarification does not alter those formulas."
+    },
+    {
+      "id": "pthm-fd-local-boltzmann-h-balance",
+      "decision": "accept",
+      "reason": "Its weak-test uses and entropy-flux assumptions are explicitly stated and match the collision-model interface."
+    },
+    {
+      "id": "pthm-fd-boltzmann-entropy",
+      "decision": "escalate",
+      "reason": "Outside batch 25; after restoring the mathematical local balance, update Fact F1 and review its supplier use."
+    },
+    {
+      "id": "pthm-fd-ideal-gas-euler-interface",
+      "decision": "accept",
+      "reason": "Its Statement already carries uniform spatial/time derivative envelopes and the limiting convergence hypotheses needed by the conditional Euler passage."
+    },
+    {
+      "id": "post-fd-bgk-relaxation",
+      "decision": "accept",
+      "reason": "Its adopted homogeneous BGK model remains compatible with the explicit moment-matched Gaussian definition."
+    },
+    {
+      "id": "pthm-fd-bgk-equilibration",
+      "decision": "accept",
+      "reason": "Its Statement supplies the full initial-data, entropy, and pointwise solution hypotheses used by its BGK results."
+    }
+  ]
+}

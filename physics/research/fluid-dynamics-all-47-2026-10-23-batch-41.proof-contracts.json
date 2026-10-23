@@ -1,0 +1,417 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-fd-periodic-integration-by-parts",
+    "thm-fd-diffuse-interface-energy",
+    "ex-fd-phase-constant-equilibrium"
+  ],
+  "contracts": {
+    "lem-fd-periodic-integration-by-parts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-torus-domain",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, set $\\mathbb T^d:=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ and let $Q_d:=[0,2\\pi]^d$ be its chosen fundamental cube. A scalar or vector field on $\\mathbb T^d$ is represented by its $(2\\pi\\mathbb Z)^d$-periodic lift to $\\mathbb R^d$. For $k\\ge 0$ and $m\\ge 1$, $C^k_{\\rm per}(\\mathbb T^d;\\mathbb R^m)$ consists of such lifts whose componentwise partial derivatives through order $k$ exist, are continuous and periodic, and are bounded, uniformly continuous, and Riemann integrable on $Q_d$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-grid-integral-limit",
+          "step": "1.1",
+          "claim": "Uniform continuity bounds the Darboux gap of the uniform grid by the cell volume times the derivative's modulus of continuity, so the left-tag Riemann sums converge to the torus integral.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "periodic-derivative-integral-zero",
+          "step": "2.1",
+          "claim": "The mean value theorem bounds each grid difference quotient by the derivative modulus of continuity; summing the periodic differences telescopes to zero, so the derivative integral is zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "divergence-integral-zero",
+          "step": "3.1",
+          "claim": "Apply the derivative identity to each component; the uniform-continuity Darboux bound gives integrability of the finite divergence sum, and finite Riemann-sum linearity gives zero divergence integral.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "periodic-integration-by-parts",
+          "step": "4.1",
+          "claim": "Establish the coordinate product rule by difference quotients, check Riemann integrability by the same Darboux bound, and apply the divergence identity to gF.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d is a positive integer, so Q_d is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If F is zero, step 3.1 gives zero divergence integral and step 4.1 gives zero on both sides; if g is zero, step 4.1 is also immediate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats the empty remaining-coordinate tuple when d=1, so the one-dimensional periodic endpoints telescope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nonzero-field or nondegeneracy hypothesis is used; steps 3.1–4.1 cover zero fields."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fundamental-cube endpoint values are paired by periodicity in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only finitely many mean-value estimates for each finite grid; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts one-way integration identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts one-way integration identities, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Independently checked Proof 1.1–4.1 and exact F1/F2 suppliers. On Q_d the derivative modulus gives Darboux gap at most (2pi)^d omega(sqrt(d) ell_n); MVT applies on each closed coordinate segment, whose telescoping sum is zero by periodic endpoint equality. The error bound survives the finite grid sum. For d=1 the other-coordinate tuple is the single empty tuple. Finite linearity gives divergence zero; difference quotients prove the product rule and bounded uniformly continuous products have vanishing Darboux gaps, so gF and both integrands are admissible. Zero fields and constant g are included; no boundary flux, Fubini theorem, arbitrary choice, or physical premise is used. Read the mean-value corollary and Cauchy/Rolle proof path; reported published inline links do not alter the exact MVT hypotheses. No mathematical defect or required diagram found."
+      }
+    },
+    "thm-fd-diffuse-interface-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-diffuse-interface-equations",
+          "source_section": "Definition",
+          "quote": "$$\\partial_t\\phi+u\\cdot\\nabla\\phi=M\\Delta\\mu_c,\\qquad \\partial_tu+(u\\cdot\\nabla)u+\\nabla\\pi=\\nu\\Delta u-\\phi\\nabla\\mu_c,\\qquad \\nabla\\cdot u=0.$$",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-periodic-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "$$\\int_{\\mathbb T^d}\\operatorname{div}F\\,dx=0,\\qquad \\int_{\\mathbb T^d}\\nabla g\\cdot F\\,dx=-\\int_{\\mathbb T^d}g\\,\\operatorname{div}F\\,dx.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-diffuse-interface-equations",
+          "source_section": "Definition",
+          "quote": "$$\\mu_c:=\\varepsilon^{-1}W'(\\phi)-\\varepsilon\\Delta\\phi,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Then the closed bounded interval $[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of open subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily whose union already contains $[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "phase-energy-differentiation",
+          "step": "1.1",
+          "claim": "Use uniform time difference quotients, establish uniform continuity of W' on the local compact range by a finite-cover argument, apply the mean value theorem to the potential term, and pass the uniform limit through the Riemann integral.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kinetic-energy-derivative",
+          "step": "1.2",
+          "claim": "Differentiate the kinetic energy in the stated time class and substitute the momentum equation.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "chemical-potential-variation",
+          "step": "2.1",
+          "claim": "Periodic integration by parts converts the gradient term into the stated chemical-potential pairing.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "incompressible-kinetic-cancellations",
+          "step": "2.2",
+          "claim": "The periodic identity removes convective and pressure work under div u=0 and turns the Laplacian term into viscous dissipation.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "phase-energy-balance",
+          "step": "3.1",
+          "claim": "Substitute the phase equation and integrate the chemical-potential Laplacian by parts to obtain phase diffusion and transport contributions.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "capillary-transport-cancellation",
+          "step": "4.1",
+          "claim": "Periodic integration by parts and the divergence constraint make phase transport cancel capillary work exactly.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "total-energy-identity",
+          "step": "5.1",
+          "claim": "Add phase and kinetic balances and cancel the two exchange terms to obtain the stated derivative identity.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "step 2.2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d>=1 and T>0, so the periodic spatial domain and time interval are nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement uses the positive integer dimension d>=1 and T>0. Hence Q_d, the component sets {1,...,d}, and the square-norm indices are nonempty. Proof 1.1 uses a compact interval J=[-R,R] with R=||phi(t)||_infty+1>0; its finite subcover cannot be empty. Proofs 2.2 and 4.1 use finite component identities, and 5.1 adds the two energy balances. I read the periodic integration-by-parts supplier: its 2.1 explicitly treats d=1 by a single empty remaining-coordinate tuple, not an empty index set. Thus the all-dimensional d>=1 claim remains intact and the empty-domain row is truthful.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json: Statement uses the positive integer dimension d>=1 and T>0. Hence Q_d, the component sets {1,...,d}, and the square-norm indices are nonempty. Proof 1.1 uses a compact interval J=[-R,R] with R=||phi(t)||_infty+1>0; its finite subcover cannot be empty. Proofs 2.2 and 4.1 use finite component identities, and 5.1 adds the two energy balances. I read the periodic integration-by-parts supplier: its 2.1 explicitly treats d=1 by a single empty remaining-coordinate tuple, not an empty index set. Thus the all-dimensional d>=1 claim remains intact and the empty-domain row is truthful.",
+            "item_sha256": "d4677318660b6be13414c5ceb1a3d505693b5f6acf11f820cec2e2c437f6acfe",
+            "row_sha256": "e69213d481173747fa81b1110c3f0576c9081753dca86b85950b0887e9824492",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-37-42.json",
+              "sha256": "a3f5a2b5b86196b71651e91209693d8c751f0e08fabd9284852a59eae22c9d2a"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=0 and constant phi, steps 2.2 and 3.1 give zero dissipation and step 5.1 gives E'=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes d=1; the periodic calculus supplier treats the empty remaining-coordinate tuple explicitly in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If grad u or grad mu_c vanishes, the corresponding term in steps 2.2 and 3.1 is exactly zero; no strict dissipation is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement asserts the derivative only for 0<t<T and makes no one-sided endpoint derivative claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The local compactness argument uses one finite subcover supplied by the choice-free bisection proof of thm-heine-borel-r; the mean-value estimates need no selected family of intermediate points, and the final sum in step 5.1 is finite algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way energy identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way energy identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Checked every current Proof step 1.1–5.1 against F1–F5 and A1, following the level-1 periodic identity review. Uniform C1 time difference quotients control the gradient and kinetic energies. At each interior time, phi and its nearby values lie in J=[-R,R]; the explicit all-pairs open cover and finite subcover prove bounded uniform continuity of W prime without choice, and MVT bounds all intermediate values without choosing a function of x. Uniform Riemann-integral continuity justifies differentiation. All applications of periodic integration by parts have C1 scalar/vector inputs: dt phi with epsilon grad phi, pi with u, each ui with grad ui, mu with grad mu, and phi with mu u. Incompressibility kills convective and pressure work. Phase transport equals plus integral phi u dot grad mu, canceling the negative kinetic exchange. Final dissipation signs and coefficients agree. Checked d=1, zero fields, constant phase, vanishing gradients, finite nonempty J subcover and interior-time restriction; no existence, strict dissipation, empirical or stability assertion follows. Read MVT and Heine–Borel statements/proofs; inline published links are nonfatal to these uses. Oden sections 11.2/11.4 and Georgiadis equations 1.1–1.10, Theorem 1 and periodic integration passages were compared as context, not imported weak-solution premises. No mathematical repair or diagram needed."
+      }
+    },
+    "ex-fd-phase-constant-equilibrium": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-diffuse-interface-energy",
+          "source_section": "Statement",
+          "quote": "\\frac{dE}{dt}(t)=-\\nu\\int_{\\mathbb T^d}|\\nabla u(t,x)|^2\\,dx-M\\int_{\\mathbb T^d}|\\nabla\\mu_c(t,x)|^2\\,dx\\qquad(0<t<T).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-field-satisfies-system",
+          "step": "1.1",
+          "claim": "All derivatives and both sides of the phase and momentum equations vanish for u=0 and phi=c, while div u=0.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "constant-energy",
+          "step": "2.1",
+          "claim": "Integrating the constant potential over a fundamental cube gives the displayed energy, and the conditional theorem also gives zero derivative.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d>=1 and T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At c=0 the same constant-field calculation in step 1.1 applies, regardless of W'(0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The permitted choice c=1 is included because W is defined on all of R; steps 1.1 and 2.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-velocity, spatially constant state is the degenerate-gradient case checked in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example allows every real c, including both endpoints of any chosen bounded interval for the order parameter; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The result is universal in c and uses no choice principle; steps 1.1 and 2.1 are direct substitutions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a one-way construction, not an equivalence."
+        }
+      ]
+    }
+  }
+}

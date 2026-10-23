@@ -1,0 +1,141 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "1c22c1cc86be97fa9dd1a8cc2de2ccc3b27a8b600272a0511c4eb27756fb21ec",
+  "decisions": [
+    {
+      "id": "pthm-fd-conservation-jump-laws",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "94f812e81a0900741ee0d19d8723bc8dfdbdedd4286d090730be6e88f56d5f05",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Open-side positivity of T does not imply traces of q/T. At a stationary plane take T=x3^4 and tangential q=(x3^4 sin(1/x3),0,0), extended by zero at the plane. Both are C1 up to each side, but q/T has no trace. With rho=1 and u=e=s=b=r=sigma=0, every side and weak balance holds; the displayed entropy jump is undefined. Repair retains all conservation conclusions and adds the missing C1 extension assumption only to the entropy characterization. Its source remains merely locally integrable, handled by a zero-source integration identity and a thin-tube integral bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "pthm-fd-conservation-jump-laws",
+      "disposition": "repaired",
+      "post_sha256": "b87d8bd3e8a798b50f47cdd2eae326cfd618e46698e8f2c41eda6b1f32906ff4",
+      "review_context_sha256": "1f39122598d45c51c841f183332fad4193b5c00b843d8408cce4ad280743bc7a",
+      "reason": "Checked all conservation triples against the C1-extension hypotheses of lem-fd-weak-jump-consistency, the graph conormal signs, scalar and momentum contractions, and both implications. The entropy current now meets those hypotheses; its source is added to the supplier’s zero-source integration identity. The L1 thin-tube estimate proves necessity of the entropy sign without bounded source traces. Positive temperature traces suffice but are not required when q/T extends. Original conservation conclusions, vacuum cases, Countable Choice and independent initial-data terms remain intact. This is the repair author’s current check, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "pthm-fd-conservation-jump-laws",
+      "phase": "repeat",
+      "round": 1,
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "disposition": "fixed",
+      "reason": "Open-side positivity of T does not imply traces of q/T. At a stationary plane take T=x3^4 and tangential q=(x3^4 sin(1/x3),0,0), extended by zero at the plane. Both are C1 up to each side, but q/T has no trace. With rho=1 and u=e=s=b=r=sigma=0, every side and weak balance holds; the displayed entropy jump is undefined. Repair retains all conservation conclusions and adds the missing C1 extension assumption only to the entropy characterization. Its source remains merely locally integrable, handled by a zero-source integration identity and a thin-tube integral bound.",
+      "correction": "Add a C1 one-sided extension hypothesis for q/T only to the entropy jump characterization. Proof 2.2 uses the zero-source integration identity then adds the locally integrable entropy source; Proof 4.1 replaces the invalid bounded-residual estimate with an L1 thin-tube bound. Synchronize only this item’s owning manifest statement and contract derivations/citations/risk review.",
+      "post_sha256": "b87d8bd3e8a798b50f47cdd2eae326cfd618e46698e8f2c41eda6b1f32906ff4",
+      "evidence": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-repeat-r1-u9.json"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "subject": "pthm-fd-conservation-jump-laws",
+      "reason": "The current exact-ID dependency/reference scan of items and library found no item consumer of this theorem. The sole library occurrence is the unchanged frontmatter inventory in fd-f02; no published supplier or consumer defect was found or repaired in this dispatch."
+    }
+  ],
+  "repair_notes": {
+    "status": "Completed assigned repair, owning metadata reconciliation, current review-context capture and focused validations. Native collection, rejudgment and certification remain controller duties.",
+    "claim": "The original three conservation jump equivalences remain unchanged. The entropy characterization additionally assumes C1 one-sided extensions of q/T, permits zero temperature traces when the quotient extends, and keeps rho r/T only locally integrable.",
+    "dependencies": [
+      "def-fd-quantity-and-frame-conventions",
+      "lem-fd-weak-jump-consistency",
+      "post-fd-weak-balances",
+      "def-fd-conservative-weak-form",
+      "def-countable-choice"
+    ],
+    "source_reading": "Current local statement/proof of lem-fd-weak-jump-consistency, conservative weak definition, weak postulate and SI/frame definition read. No external source retrieval claimed. Own repair check, not independent acceptance.",
+    "unresolved_obligations": [],
+    "diagrams": "No TikZ/tikzcd diagram exists in the assigned item; the local analytic proof requires none.",
+    "witness": "On a stationary plane x3=0 choose length ell>0 metres, temperature T_*>0 kelvins and heat flux q_*>0 watts per square metre. With xi=x3/ell set T=T_*xi^4 and q=q_*xi^4 sin(1/xi)(1,0,0) off the plane, extended by zero at it. Their first derivatives extend continuously, but q/T=(q_*/T_*)sin(1/xi)(1,0,0) is bounded locally integrable and has no one-sided limit. Set rho to a positive constant and u=e=s=b=r=sigma=0. The fluxes are tangential and independent of x1, so their spatial divergences vanish, including weakly; initial conservative data are constant rho, zero momentum/energy/entropy. Every adopted balance holds, yet the unrepaired entropy jump is undefined. Values of T and q/T on the plane are immaterial to the weak forms.",
+    "interface_comparison": {
+      "changed_section": "Statement",
+      "changed_clause": "The paragraph immediately before the displayed entropy jump now states the additional C1 extension hypothesis on q/T and the trace-of-quotient convention; it imposes no extra condition on the conservation conclusions or on rho r/T.",
+      "unchanged_interfaces": [
+        "All three displayed conservation jump equations",
+        "physical_scope",
+        "empirical_premises",
+        "Initial-data separation",
+        "Countable Choice convention"
+      ],
+      "consumer_scan": {
+        "command": "rg -n 'pthm-fd-conservation-jump-laws' items library",
+        "item_consumers": [],
+        "page_uses": [
+          {
+            "path": "library/fluid-dynamics/fd-f02.md",
+            "affected_use": "Frontmatter items inventory contains pthm-fd-conservation-jump-laws; the page has no Markdown body or assertion applying its entropy conclusion.",
+            "disposition": "unaffected",
+            "reason": "The inventory continues to place the same draft theorem and its corrected statement; no page prose or consumer proof assumes a temperature-trace consequence."
+          }
+        ],
+        "downstream_reason": "No direct dependency/reference item consumer exists; downstream is therefore empty. No outside maintenance repair is required."
+      }
+    },
+    "metadata_repairs": {
+      "paths": [
+        "research/fluid-dynamics-all-47-2026-10-23-batch-9.pages.json",
+        "research/fluid-dynamics-all-47-2026-10-23-batch-9.proof-contracts.json"
+      ],
+      "reason": "Under the shared write lock, reread owning files, mirror the exact corrected Statement and regenerate only this item’s citations/derivations. Update its risk review; preserve all other contract entries and historical boundary reviews. The temporary scoped metadata script was removed after its successful guarded execution."
+    },
+    "reused_evidence": "The outside jump proposal and consumer-use matrix concern the earlier matrix contraction repair. They supplied historical type/use context only. Current suppliers, theorem and placement pages were examined directly; the temperature-trace defect and present repair were checked here, and no outside source retrieval or review hash was reused.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-fd-conservation-jump-laws.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; canonical phase ordering adopted after the initial repair diagnostic."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/pthm-fd-conservation-jump-laws.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-9.proof-contracts.json --strict --items pthm-fd-conservation-jump-laws --json",
+        "exit_code": 0,
+        "result": "The assigned item passed with no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/pthm-fd-conservation-jump-laws.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects; run once after final item edits."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run fluid-dynamics-all-47-2026-10-23 --items pthm-fd-conservation-jump-laws",
+        "exit_code": 0,
+        "result": "Current post_sha256 and review_context_sha256 copied exactly to the repaired review."
+      },
+      {
+        "command": "Exact assigned manifest Statement comparison against the current item section",
+        "exit_code": 0,
+        "result": "One owning manifest row; its statement matches the complete corrected item Statement byte for byte after trimming section boundary whitespace."
+      }
+    ]
+  },
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-batch-9-step5-context.json": "2029403fb33708fac3c762f97be1c9c5f64f79aa52ed18ea6986da7346a93108",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/jump-proposal.json": "e895224bcce37ca7ec2f518adac5c658cf27cf31239d31ced7be382e754ae715",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-weak-balances/consumer-use-matrix.json": "f6f7361caa1521377df889a7ca8be50e32d8606a4f763b43b3117f114d63bf25"
+  }
+}

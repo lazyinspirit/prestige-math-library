@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "9",
+  "round": 1,
+  "reviewed_items": [
+    "lem-fd-moving-control-volume-transport",
+    "post-fd-boundary-data",
+    "pthm-fd-material-mass-continuity",
+    "post-fd-weak-balances",
+    "pthm-fd-continuous-source-local-balances",
+    "pthm-fd-conservation-jump-laws",
+    "pthm-fd-cauchy-momentum-angular",
+    "pthm-fd-control-volume-balances",
+    "pthm-fd-energy-decomposition",
+    "cex-fd-vacuum-velocity-determination",
+    "ex-fd-conduction-energy-entropy"
+  ],
+  "reviewed_pages": [
+    "fd-f02",
+    "fd-f02-examples"
+  ],
+  "decision": "accept",
+  "reason": "Both findings are repaired. I clarified the material surface charts and consistent wall velocity, and made the jump theorem’s one-sided C1 extension hypothesis explicit to match its supplier. I checked all 34 current direct and indirect consumers of the boundary-data postulate; none needs a repair. The jump-law theorem has no downstream item consumers.",
+  "findings": [
+    {
+      "id": "post-fd-boundary-data",
+      "type": "local",
+      "reason": "Repaired: the postulate now defines C2 regularity, local surface-chart slices, material labels, and overlap consistency so the wall velocity is single-valued."
+    },
+    {
+      "id": "pthm-fd-conservation-jump-laws",
+      "type": "prerequisite",
+      "reason": "Repaired: the statement now requires C1 one-sided extensions on relatively compact interface patches, with the coordinate-derivative convention, matching lem-fd-weak-jump-consistency."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-fd-creeping-stokes-model",
+      "decision": "accept",
+      "reason": "Its selected stationary no-slip and far-field data do not depend on surface-chart parametrization."
+    },
+    {
+      "id": "def-fd-forced-incompressible-newtonian-model",
+      "decision": "accept",
+      "reason": "It uses separately selected stationary no-slip data; the clarified moving-wall chart does not change that condition."
+    },
+    {
+      "id": "def-fd-incompressible-euler-model",
+      "decision": "accept",
+      "reason": "It treats wall, periodic, and initial data as separate inputs and does not use the wall-chart representation."
+    },
+    {
+      "id": "def-fd-pn01-forced-creeping-stokes-branch",
+      "decision": "accept",
+      "reason": "Its stationary no-slip trace is unchanged by the material-chart clarification."
+    },
+    {
+      "id": "ex-fd-adopted-poiseuille-couette",
+      "decision": "accept",
+      "reason": "Its Couette wall velocities remain prescribed material velocities; the repair makes their wall-velocity meaning unambiguous."
+    },
+    {
+      "id": "ex-fd-capillary-restoring-sign",
+      "decision": "accept",
+      "reason": "Its dependency chain uses the fixed-bottom capillary model and periodic modes, not moving solid-wall charts."
+    },
+    {
+      "id": "ex-fd-cfd-density-pressure-conversion",
+      "decision": "accept",
+      "reason": "It inherits the stationary no-slip CFD theorem’s boundary data; no chart parametrization is used."
+    },
+    {
+      "id": "ex-fd-conduction-energy-entropy",
+      "decision": "accept",
+      "reason": "It uses periodic face identification and compatible fluxes, which are unchanged."
+    },
+    {
+      "id": "ex-fd-x01-application",
+      "decision": "accept",
+      "reason": "It uses periodic data and compatible field inputs; it does not define or reparameterize a moving wall."
+    },
+    {
+      "id": "ex-fd-x04-application",
+      "decision": "accept",
+      "reason": "Its inherited no-slip and pressure data remain unchanged."
+    },
+    {
+      "id": "ex-fd-x05-application",
+      "decision": "accept",
+      "reason": "Its local solution uses no wall data; finite-device boundary data remain separate."
+    },
+    {
+      "id": "ex-fd-x06-application",
+      "decision": "accept",
+      "reason": "Its sphere example uses the selected no-slip and far-field data; the wall velocity is now consistently defined."
+    },
+    {
+      "id": "ex-fd-x07-application",
+      "decision": "accept",
+      "reason": "It explicitly uses u=w_b for a rotating wall; the repaired definition makes w_b single-valued across material charts."
+    },
+    {
+      "id": "ex-fd-x08-application",
+      "decision": "accept",
+      "reason": "Its wall and initial data remain separate inputs, with the impulsive corner excluded from the smooth claim."
+    },
+    {
+      "id": "ex-fd-x09-application",
+      "decision": "accept",
+      "reason": "Its local steady solution requires no wall data."
+    },
+    {
+      "id": "ex-fd-x10-application",
+      "decision": "accept",
+      "reason": "Its Couette wall values and periodic identifications are unchanged; its material wall velocities now have an explicit chart convention."
+    },
+    {
+      "id": "ex-fd-x13-application",
+      "decision": "accept",
+      "reason": "It uses fixed-sphere impermeability, not a moving solid-wall chart."
+    },
+    {
+      "id": "post-fd-capillary-linear-free-surface",
+      "decision": "accept",
+      "reason": "It adopts a fixed impermeable bottom and periodic horizontal identification; neither depends on the clarified moving-wall charts."
+    },
+    {
+      "id": "post-fd-creeping-force-balance",
+      "decision": "accept",
+      "reason": "It treats boundary and far-field data as separate model inputs."
+    },
+    {
+      "id": "post-fd-navier-slip-wall-law",
+      "decision": "accept",
+      "reason": "Its stationary impermeable-wall law is unchanged."
+    },
+    {
+      "id": "pthm-fd-capillary-wave-model-prediction",
+      "decision": "accept",
+      "reason": "It consumes the fixed-bottom capillary model and periodic modes, with no moving solid-wall velocity use."
+    },
+    {
+      "id": "pthm-fd-creeping-lipschitz-pressure",
+      "decision": "accept",
+      "reason": "Its selected stationary no-slip trace remains valid under the clarified wall-velocity definition."
+    },
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "decision": "accept",
+      "reason": "Its global conclusion uses fixed-wall no-slip and insulation or periodic data; those conditions are unchanged."
+    },
+    {
+      "id": "pthm-fd-no-slip-cfd-observations",
+      "decision": "accept",
+      "reason": "It uses stationary no-slip walls and explicit nondimensionalization, not wall-chart parametrization."
+    },
+    {
+      "id": "pthm-fd-px01-prediction",
+      "decision": "accept",
+      "reason": "It uses compatible velocity, pressure, density, and momentum data as separate inputs."
+    },
+    {
+      "id": "pthm-fd-px04-prediction",
+      "decision": "accept",
+      "reason": "Its no-slip and pressure data remain separately selected and unchanged."
+    },
+    {
+      "id": "pthm-fd-px05-prediction",
+      "decision": "accept",
+      "reason": "Its local fields require no wall data."
+    },
+    {
+      "id": "pthm-fd-px06-prediction",
+      "decision": "accept",
+      "reason": "Its no-slip sphere and far-field data are unchanged; no chart representation is consumed."
+    },
+    {
+      "id": "pthm-fd-px07-prediction",
+      "decision": "accept",
+      "reason": "It assumes matching prescribed wall velocities; the clarification supplies a consistent material-velocity interpretation."
+    },
+    {
+      "id": "pthm-fd-px08-prediction",
+      "decision": "accept",
+      "reason": "Its wall and initial values remain separate inputs, and the impulsive corner stays outside the smooth claim."
+    },
+    {
+      "id": "pthm-fd-px09-prediction",
+      "decision": "accept",
+      "reason": "Its local steady solution requires no wall data."
+    },
+    {
+      "id": "pthm-fd-px10-prediction",
+      "decision": "accept",
+      "reason": "Its Couette wall values and periodic faces are unchanged; the material wall velocity is now unambiguous."
+    },
+    {
+      "id": "pthm-fd-px13-prediction",
+      "decision": "accept",
+      "reason": "It uses far-field and fixed-sphere impermeability data, not moving-wall parametrization."
+    },
+    {
+      "id": "pthm-fd-wall-mechanical-power-balance",
+      "decision": "accept",
+      "reason": "Its prescribed no-slip wall trace and periodic-channel conditions are unchanged; material wall velocities now have consistent chart meaning."
+    }
+  ]
+}

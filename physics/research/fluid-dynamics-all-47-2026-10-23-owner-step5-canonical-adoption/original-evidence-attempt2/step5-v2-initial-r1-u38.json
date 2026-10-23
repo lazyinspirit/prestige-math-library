@@ -1,0 +1,132 @@
+{
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "38",
+  "input_sha256": "9be711b940a681b75640bcf998c1259c5d3eb539d47214af2cabfb73a7f7cd6d",
+  "decisions": [
+    {
+      "id": "post-fd-eddy-viscosity-closure",
+      "model": "gpt-6-luna",
+      "context_sha256": "6c7117da98841f55982eb5b6593a1306296300ae35ca6c45dbb7d372a432ffeb",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Postulate identifies p_dyn as the fine-scale Cauchy pressure but uses grad(p_dyn/rho0) in the resolved equation. Constant-density convolution gives grad(overline(p_dyn)_ell/rho0); the difference need not be a spatial constant. Thus substituting only the covariance stress does not produce the displayed equation. Repaired the pressure definition and gradient to pi_ell, retaining the full modeled stress and all original scope. Washington section 3, printed p. 11, Eqs. (15)/(17), explicitly uses filtered pressure.",
+      "uncertain": false,
+      "source_urls": [
+        "https://courses.washington.edu/mengr544/handouts/hd-les.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "post-fd-eddy-viscosity-closure",
+      "disposition": "repaired",
+      "post_sha256": "d3f39601cc1f6d987a88c2c1a214eeb82f8d54c145839a9eac7df26915a94a5c",
+      "review_context_sha256": "28190aa178da2d99b6ee133f9e0d917f02706d11de48c593d446ddf1f5704e84",
+      "reason": "Reviewed the complete Postulate, its direct formulation suppliers, owning contract/page, and both direct consumer arguments. The explicit convolution defines pi_ell on T_L^3 x I with the same SI units. C1 pressure and its first derivatives are continuous on every compact period-cell/time rectangle; uniform difference-quotient convergence passes each first derivative through the finite integral, giving C1 pi_ell. The full stress retains 2kI_3/3, so pressure does not double-count that term. k, nu_t, strain, transfer sign, Countable Choice, empirical exclusions and coefficient ranges are unchanged. This is formulation/source adjudication and repair, not an independent review of my own edit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://courses.washington.edu/mengr544/handouts/hd-les.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-fd-eddy-closure-resolved-dissipation",
+    "ex-fd-eddy-shear-production"
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step5-support-supplement-0002.json": "2f2a6200c092208fd5ec0dca9b65e1a68b797d8db4c95f713a266cff97d3c4bd",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-surface-transport/supplement-filter-pressure/scientific-resolution.json": "ab06aedc998ff2a75718edb803238df979deb5707178439b5af1040a8009f027",
+    "research/fluid-dynamics-all-47-2026-10-23-owner-step4-surface-transport/supplement-filter-pressure/sources/hd-les-pages-5-15.txt": "ecdd4f8c3529ebfc77305210aa62e7a1e2e37081e4a4b8aeb27746a041779711"
+  },
+  "repair_notes": {
+    "claim_and_conventions": "Adopted smooth periodic 3D incompressible Newtonian LES model; volume-measure positive convolution; grad(v)_ij=partial_j v_i; tau_model=2kI_3/3-2nu_t D; Pi_model=-tau_model:grad(ubar). Only filtered-pressure definition and its gradient changed. No existence, exact-covariance identity, empirical accuracy, or exact-transfer sign is asserted.",
+    "dependencies": [
+      "def-countable-choice",
+      "def-fd-incompressible-newtonian-model",
+      "def-fd-positive-convolution-fluid-filter"
+    ],
+    "local_mathematics": "For any C1 periodic pressure, the spatial derivative of its convolution equals convolution of the derivative: on a compact parameter neighborhood the difference quotients converge uniformly by uniform continuity of the first derivative. Integration against the integrable fixed kernel preserves this limit. Time differentiation is identical. Constant rho0 commutes with the integral. This directly verifies the regularity used in the repaired formulation; it does not incorrectly apply the Cinfinity-field commutation lemma to a merely C1 pressure.",
+    "source_reading": "Independently read Washington online PDF extracted section 3, pp. 11-12, Eqs. (13)-(20), and the retained extraction for pp. 14-15, Eq. (30) and modeled-transfer calculation. Eq. (17) retains full stress with filtered pressure; Eq. (20) separately absorbs the isotropic stress. Its printed modified-pressure normalization is not copied into our explicit Pa/specific-pressure convention. The local extraction and scientific proposal were supplied by /root/fluid_step4_surface_transport; retrieval and prior consumer checks are attributed to that owner. I independently checked the current local consumers. No independent full-PDF download, Gibbs/MIT retrieval, or full transitive supplier audit is claimed. Browser screenshot retrieval failed; source reading used text.",
+    "metadata": "Under step5-shared-write-lock run, reread and surgically updated only this item statement mirror in batch-38.pages.json and this item formulation/source review fields in batch-38.proof-contracts.json and the merged run proof-contracts.json. Other item contracts, page frontmatter, publication status, frozen inputs and historical reviews are preserved.",
+    "downstream_reviews": [
+      {
+        "id": "pthm-fd-eddy-closure-resolved-dissipation",
+        "path": "items/pthm-fd-eddy-closure-resolved-dissipation.md",
+        "affected_use": "A1 uses the adopted stress as a replacement for exact covariance; Proof 2.1 contracts that stress, and Proof 3.1 replaces the exact resolved-energy stress slot. Its own Statement pi=p_dyn/rho0 is correctly unfiltered in its fine-scale equation.",
+        "disposition": "unaffected",
+        "reason": "Symmetric/skew contraction and zero divergence yield Pi_model=2nu_t|D|^2 independently of pressure. The conditional energy argument uses thm-fd-filtered-covariance-energy, whose Statement and Proof 1.2/3.1 already use filtered pressure. Correcting the postulate makes that stress-only substitution consistent. Do not filter the consumer fine-scale pi. No item or interface change is necessary.",
+        "route": "ordinary frontier owner impact review; no source edit by this unit"
+      },
+      {
+        "id": "ex-fd-eddy-shear-production",
+        "path": "items/ex-fd-eddy-shear-production.md",
+        "affected_use": "A1 and Verification 2.1 use tau_model=2kI_3/3-2nu_t D and Pi_model=-tau_model:grad(ubar), evaluated at the displayed pointwise shear gradient.",
+        "disposition": "unaffected",
+        "reason": "The displayed gradient has zero trace and symmetric part with two S/2 entries, so Pi_model=nu_0 S^2. This calculation uses neither pressure nor the momentum equation; the adopted tensor and empirical qualifications are unchanged. No consumer repair or further hop is needed.",
+        "route": "ordinary frontier owner impact review; no source edit by this unit"
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/fluid-dynamics/fd-ples01.md",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only page inventories the repaired postulate and the dissipation theorem; it contains no pressure claim or Markdown summary."
+      },
+      {
+        "path": "library/fluid-dynamics/fd-ples01-examples.md",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only companion inventories the shear example and requires fd-ples01. Its metadata and empty body need no change."
+      }
+    ],
+    "diagram_review": "The assigned Postulate has no TikZ/tikzcd diagram; the tensor definition and momentum equation require no diagram for completeness.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/post-fd-eddy-viscosity-closure.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; postulate has no proof obligation."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/post-fd-eddy-viscosity-closure.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/post-fd-eddy-viscosity-closure.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; nonproof structure passes."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/fluid-dynamics-all-47-2026-10-23-batch-38.proof-contracts.json --strict --items post-fd-eddy-viscosity-closure --json",
+        "exit_code": 0,
+        "result": "Assigned postulate checked; ok=true, no errors or warnings."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the native decision and review, merges proposed ledger evidence and routes both unchanged direct consumers through ordinary frontier impact ownership. No judges, certification or transition launched here."
+  },
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "ledger": "research/defect-ledger.jsonl",
+        "subject": "post-fd-eddy-viscosity-closure",
+        "run": "fluid-dynamics-all-47-2026-10-23",
+        "batch": "38",
+        "caught_at_stage": "5.1-adjudicate",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "location": "Postulate: filtered specific pressure definition and resolved momentum gradient",
+        "detail": "The base dynamic pressure was used unfiltered in the resolved equation. Repaired to pi_ell=overline(p_dyn)_ell/rho0, keeping full modeled stress. Both direct consumers examined and remain sound; no additional consumer interface changes.",
+        "evidence_path": "research/fluid-dynamics-all-47-2026-10-23-step5-v2/step5-v2-initial-r1-u38.json"
+      }
+    ],
+    "published_consumer_ledger": [],
+    "published_ledger_reason": "No published item or published consumer is changed or newly found defective in this assigned pressure repair. The Step-4 digest supplier notation alerts remain attributed evidence outside this unit; no published acceptance or maintenance closure is asserted."
+  }
+}

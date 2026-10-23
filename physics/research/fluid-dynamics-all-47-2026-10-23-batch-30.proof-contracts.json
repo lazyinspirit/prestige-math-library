@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-compressible-numerical-contract",
+    "prop-fd-euler-llf-admissibility-interface",
+    "prop-fd-shared-face-global-conservation",
+    "rem-fd-compressible-stability-distinctions",
+    "ex-fd-compressible-constant-state"
+  ],
+  "contracts": {
+    "def-fd-compressible-numerical-contract": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no assertion for an empty state family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a definition; no zero-parameter theorem is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is a definition; no one-cell boundary result is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This is a definition of inputs and predicates, not a theorem about degenerate states."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no limit or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All states, fluxes, and speeds are supplied data; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: if U belongs to G_gamma, then rho>0 and E-m^2/(2rho)>0. Its pressure formula is p=(gamma-1)(E-m^2/(2rho)); since gamma>1, pressure is positive. This proves the forward direction of its exactly characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root adopts the actual second-cycle focused review: Definition: if U belongs to G_gamma, then rho>0 and E-m^2/(2rho)>0. Its pressure formula is p=(gamma-1)(E-m^2/(2rho)); since gamma>1, pressure is positive. This proves the forward direction of its exactly characterization. The Definition explicitly says exactly positive density and pressure. The existing forward algebra is correct but lacks its actual Definition anchor.",
+            "item_sha256": "be054b36409fa439a461d5605aec59e377e70fe05f09a98339804b18a6061c58",
+            "row_sha256": "d5a4dd44988e26cebf0fa58b381421badef8a9cd51078e14ace2f0b4ef3033fd",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/second-boundary-anchors-other.json",
+              "sha256": "2524153be3c3e33f0ac54ba3ba08ebf6ea55c893d827ed222644161ffb172615"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: for rho>0 and positive pressure given by its displayed formula, E-m^2/(2rho)=p/(gamma-1)>0 because gamma>1. Hence U belongs to G_gamma. This proves the reverse direction of its exactly characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root adopts the actual second-cycle focused review: Definition: for rho>0 and positive pressure given by its displayed formula, E-m^2/(2rho)=p/(gamma-1)>0 because gamma>1. Hence U belongs to G_gamma. This proves the reverse direction of its exactly characterization. The reverse characterization is the same explicit Definition equivalence; the pressure quotient requires only the already stated gamma>1 and rho>0.",
+            "item_sha256": "be054b36409fa439a461d5605aec59e377e70fe05f09a98339804b18a6061c58",
+            "row_sha256": "fce655bfd1064607d6d657e560c0031342066cc589387988d26fd29eef6778af",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/second-boundary-anchors-other.json",
+              "sha256": "2524153be3c3e33f0ac54ba3ba08ebf6ea55c893d827ed222644161ffb172615"
+            }
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This item defines state and numerical-flux interfaces; it asserts no finite theorem requiring a symbolic or computational check.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read the full Definition and its four direct suppliers plus entropy-pair and Tadmor definitions. On rho>0 the internal-energy expression is continuous, so G_gamma is open; gamma>1 makes positive internal energy equivalent to positive pressure and ensures real positive sound speed. N>=2, dx>0 and dt>=0 fix the finite periodic indexing and ratio. Supplied straddling speeds give a nonzero HLL denominator without asserting nonlinear fan enclosure. The exact entropy supplier defines eta in C2, q in C1, v=grad eta and psi=v^T F-q; its jump identity and symmetric PSD dissipation are distinct from fully discrete entropy or positivity. Checked shared-face diagram: right flux leaves i and enters i+1. No choice or limiting argument is asserted. Reader 1-6 are published inline-link defects, nonfatal to these exact definitions; no local item repair needed."
+      }
+    },
+    "prop-fd-euler-llf-admissibility-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-compressible-numerical-contract",
+          "source_section": "Definition",
+          "quote": "U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+          "source_section": "Statement",
+          "quote": "Then one first-order HLL update preserves $\\mathcal G_\\gamma$; in particular, every updated density and pressure is strictly positive.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-hll-branch-and-cfl",
+          "step": "1.1",
+          "claim": "The positive input states make the symmetric speeds straddle zero, and the local time-step ratio equals the supplier ratio, so the exact CFL hypotheses match.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-symmetric-positivity-theorem",
+          "step": "2.1",
+          "claim": "The pinned one-step positivity theorem applies at every face and places every updated state in the ideal-gas admissible set.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N≥2 periodic cells.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: The periodic array is explicitly indexed by Z/NZ with N>=2; there are N actual cells/faces. Proof 1.1 checks positive sound speed and speeds at each face and 2.1 invokes the positivity supplier for that array. N=0 is not an admitted instance.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: The periodic array is explicitly indexed by Z/NZ with N>=2; there are N actual cells/faces. Proof 1.1 checks positive sound speed and speeds at each face and 2.1 invokes the positivity supplier for that array. N=0 is not an admitted instance.",
+            "item_sha256": "adddc922dbd4f44e2ccb9eaca8513e9208fa8af0d13dd763d6045b6c1446668a",
+            "row_sha256": "85c73766b3e53aad5e718251199fa36ec32ba39aa1799fa77c2d0007fd9b700b",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When Δt=0, λ=0 and the stated update returns every input state unchanged, consistent with step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is scoped to N≥2 cells and asserts no one-cell result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Strictly positive density and pressure exclude zero sound speed for γ>1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 1.1 use inclusive inequalities; equality in the endpoint-speed lower bound and CFL upper bound is permitted by the cited theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite periodic states and face speeds are supplied; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way positivity implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way positivity implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite computation applies; the complete result is the exact application of the pinned one-step theorem, and its inclusive endpoint cases are recorded above.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read both proof steps, exact F1/F2, full LLF supplier proof, split-state lemma, convexity proof, half-cell lemma and invariant-domain theorem. rho>0 and gamma>1 imply c>0, so the face bound makes a>0 and symmetric HLL speeds strictly straddle zero. nu=dt/h=lambda matches every supplied CFL. Independently checked split-state internal energy e*x-delta^2*p^2/(2*rho*x), with x>=c/a>0 and relative subtraction <=(gamma-1)/(2*gamma)<1; both signs and equality in the speed bound are valid. Weighted Cauchy-Schwarz proves convexity including weights 0 and 1. Each half-cell coefficient is nonnegative at the inclusive CFL endpoint; averaging gives the update, preserving strict admissibility even when some weights vanish. dt=0 returns the input, N>=2 excludes empty/one-cell cases, and no choice is used. Reader 7,8,13 are nonfatal published link placement defects. The dangling n in another upstream published theorem is nonfatal: its HLL model balances are explicitly proved and those alone supply the half-cell calculation. No local repair."
+      }
+    },
+    "prop-fd-shared-face-global-conservation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-compressible-numerical-contract",
+          "source_section": "Definition",
+          "quote": "The associated one-step update in conservative finite-volume form is $$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sum-cell-updates",
+          "step": "1.1",
+          "claim": "Summing the shared-face difference over the finite periodic array expresses the total change as a finite sum of face flux differences.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "periodic-face-telescoping",
+          "step": "2.1",
+          "claim": "Periodic reindexing identifies the two face-flux sums, so their difference is zero componentwise.",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N≥2 cells.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: N>=2 excludes an empty cell index set. Proof 1.1 sums those N updates and 2.1 uses a bijection of the same periodic face list; no empty-sum convention is used to establish conservation.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json: N>=2 excludes an empty cell index set. Proof 1.1 sums those N updates and 2.1 uses a bijection of the same periodic face list; no empty-sum convention is used to establish conservation.",
+            "item_sha256": "08ff5c600846b10efb42c6038d766e1db35013eb587c4d79d4ddf90386eaf946",
+            "row_sha256": "570acfc57eb366c67aed656133c47356f8813eac7bdff90beefb7d9bb61862da",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-25-30.json",
+              "sha256": "ab4c2805faaf1d53d7a91b4ff7ec45f4ac6d86b5a32fd63508d88674bc09c0f7"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For Δt=0, step 1.1 gives M⁺−M=0 directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is scoped to N≥2 cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cancellation in step 2.1 allows equal, zero, or otherwise degenerate face-flux values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is a one-step finite identity and makes no endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All finite states and fluxes are supplied; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-cell periodic cancellation",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ],
+          "expected": "For N=2 the four signed appearances of the two periodic face vectors cancel pairwise in step 2.1, so M⁺−M=0."
+        }
+      ],
+      "finite_checks_disposition": "The check is an exact finite specialization of the proved telescoping identity, not a numerical experiment."
+    },
+    "rem-fd-compressible-stability-distinctions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This remark states supplier interfaces and does not assert a theorem for an empty state family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This remark is not a zero-parameter theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This remark is not a one-cell theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This remark does not assert a result for degenerate states or matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This remark makes no endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark reports the exact ACω hypothesis of its scalar supplier and makes no independent choice claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u3",
+            "reason": "Current iff-forward examination: The Remark distinguishes shared-face telescoping, conditional fan-average convexity, finite-node limiting, and assumed scalar weak convergence. Its HLL diagram has correct left/right wave directions, axes and half-cell labels. No equivalence of these numerical properties is claimed.",
+            "item_sha256": "770b4d84d55119f6c4f4c7123a7ed0aba9e6cb6b55d8d60739476068a05bd7da",
+            "row_sha256": "ad4b204283b07a27ed3883b73c27161e8cfe007a0f667b1dafdb4ff519529bef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u3",
+            "reason": "Current iff-reverse examination: The Remark distinguishes shared-face telescoping, conditional fan-average convexity, finite-node limiting, and assumed scalar weak convergence. Its HLL diagram has correct left/right wave directions, axes and half-cell labels. No equivalence of these numerical properties is claimed.",
+            "item_sha256": "770b4d84d55119f6c4f4c7123a7ed0aba9e6cb6b55d8d60739476068a05bd7da",
+            "row_sha256": "ce1c0bcd8ba2b402e69a71bb01172de14c252bd70a6171a827f5fa27494f4a33"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This remark records exact mathematical interfaces and scope limits; it asserts no new finite theorem.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read the entire Remark, all nine direct supplier bodies and cited facts, plus scalar scheme/reconstruction definitions, discrete summation and face-flux convergence proofs, weak-solution definitions, HLL algebra and entropy definitions. Finite periodic reindexing proves conservation componentwise. Half-cell lengths and speed signs give the displayed convex coefficients, including CFL equality and dt=0; the intermediate model flux need not be F(U_*). The limiter has closed convex K, finite nodes, positive normalized weights and mean in K; theta=0 is feasible, the feasible set is closed in [0,1], and the displayed sum preserves the mean. No between-node positivity is claimed. Weak-limit proof uses scalar continuous consistent fluxes, L1 convergence and uniform bounds through t=0: local translation controls the neighboring reconstruction, compact-state uniform continuity controls face fluxes, the initial strip has O(epsilon) error, and finite summation/test differences yield the weak identity. The recorded AC_omega assumption is retained; neither compactness, entropy nor Euler-system convergence is concluded. Diagram has correct fan regions and signs; its time arrow is an offset orientation marker, x=0 is the face, and the slopes denote x(t)/t. Reader clarification changes only this explanation. Manifest original statement reconstructs exact pre-reader raw SHA256 60c8833104a04069342385fa081176900bc29e147bfe80f675dcb4a8e5d7ebc9; current raw equals post SHA256 8c6783ad3e7ec26e9959a8f120bef37e41c1ed75268cfdb1244c1772b291dbf3. Accepted clarification; synchronize manifest. The only item consumer is the same-batch constant-state example, whose F3 and step 2.1 use the preserved distinctions; page fd-n03 only lists the remark. No outside affected consumer. All routed published findings are nonfatal presentation/notation issues, recorded without editing imports."
+      }
+    },
+    "ex-fd-compressible-constant-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-compressible-numerical-contract",
+          "source_section": "Definition",
+          "quote": "it is consistent if $\\widehat F(U,U)=F(U)$ for every $U\\in\\mathcal G_\\gamma$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-compressible-numerical-contract",
+          "source_section": "Definition",
+          "quote": "The associated one-step update in conservative finite-volume form is $$U_i^+=U_i-\\lambda\\left(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "rem-fd-compressible-stability-distinctions",
+          "source_section": "Remark",
+          "quote": "That algebra alone gives no membership of the updated states in an admissible set, entropy inequality, or convergence result.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equal-state-face-fluxes",
+          "step": "1.1",
+          "claim": "Every face sees the same state on both sides, so consistency assigns the same physical flux at each interface.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "constant-state-fixed-point",
+          "step": "2.1",
+          "claim": "Substitution makes each flux difference zero, so every updated cell equals the supplied admissible state.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires N≥2 periodic cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When Δt=0, the update in step 2.1 is the identity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is scoped to N≥2 cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The argument remains valid when the consistent flux is zero or when adjacent face fluxes coincide; step 2.1 uses only equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no limit or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The constant state and finite grid are supplied; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way fixed-point assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way fixed-point assertion, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-cell constant-state update",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "For N=2 with U_0=U_1=U, both periodic face fluxes equal F(U), so both updated states equal U."
+        }
+      ],
+      "finite_checks_disposition": "The check is an exact symbolic specialization of the local proof and is not a numerical simulation.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read the complete Example, F1-F3 and both Verification steps against the already completed numerical-contract and distinctions reviews. Every interface has identical input (U,U), so consistency gives the same F(U) even if different consistent numerical flux functions are supplied on different faces. Their difference is exactly zero and the update returns U for any finite dt>=0 with dx>0. The given U is in G_gamma, so this fixed point is admissible without a separate time-step restriction; no claim extends to nonconstant arrays. N>=2 excludes empty/one-cell cases; zero flux, dt=0 and coincident faces cause no problem. No selection principle or limit is used. F3 cites only the unchanged distinction of conservation, positivity, entropy and convergence; the reader diagram clarification needs no consumer repair."
+      }
+    }
+  }
+}

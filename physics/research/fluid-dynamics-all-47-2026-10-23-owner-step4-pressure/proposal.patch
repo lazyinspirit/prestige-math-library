@@ -1,0 +1,209 @@
+--- a/physics/items/def-fd-projected-no-slip-stokes-space.md
++++ b/physics/items/def-fd-projected-no-slip-stokes-space.md
+@@ -58,7 +58,7 @@
+ 
+ [F3] [[thm-sobolev-spaces-are-banach-spaces]]: under its stated full Axiom of Choice hypothesis, the stated $W^{1,2}$ space is complete.
+ 
+-[F4] [[def-real-and-complex-inner-product-space]]: the real $W^{1,2}$ pairing is bilinear, symmetric and positive definite.
++[F4] [[def-real-and-complex-inner-product-space]]: a real inner product must be bilinear, symmetric and positive definite. These are axioms to verify for the displayed Sobolev pairing, not an assertion in this supplier that a particular integral pairing satisfies them.
+ 
+ [F5] [[def-hilbert-space]]: a real inner-product space is Hilbert when its induced norm is complete.
+ 
+@@ -66,9 +66,13 @@
+ 
+ **Given:** Full AC, $d\ge2$, and nonempty bounded open $\Omega\subset(-R,R)^d$ with the weak-derivative convention in the Definition.
+ 
+-1.1 By [F2] and [F3], each scalar component space $W^{1,2}(\Omega;\mathbb R)$ is complete under the stated AC assumption. A Cauchy sequence in the finite product $W^{1,2}(\Omega;\mathbb R^d)$ is Cauchy in each component; completeness gives a limit in each component, and the finite sum in the displayed vector norm gives convergence to the vector of those limits. Thus the vector space is complete. Its closed linear subspace $H_0^1$, defined by norm closure, is therefore complete in the inherited real inner product from [F4]. [given, F1, F2, F3, F4]
++1.1 First verify the pairing on $W^{1,2}(\Omega;\mathbb R^d)$. Each coordinate of $v,w$ and each first weak derivative lies in $L^2$ by [F2]. For any two such scalar coordinates $a,b$, the pointwise inequality $2|ab|\le|a|^2+|b|^2$ proves that $ab$ is integrable. Changing either $L^2$ representative affects the product only on a null set; the weak derivative classes are unique by [F2], so the finite sum of these integrals is well-defined on the Sobolev classes. Weak differentiation is linear: adding and scaling its defining identities against every scalar test gives $\partial_j(av_i+bw_i)=a\partial_jv_i+b\partial_jw_i$, using uniqueness of weak derivatives. Linearity of integration therefore proves bilinearity of the pairing; commutativity of real multiplication proves symmetry. Finally,
++$$\langle v,v\rangle=\sum_i\left(\|v_i\|_2^2+\sum_j\|\partial_jv_i\|_2^2\right)=\|v\|_{W^{1,2}}^2\ge0.$$
++If this is zero, every $\|v_i\|_2$ is zero, so every $v_i$ is the zero $L^2$ class and $v=0$; conversely the zero class and all its weak derivatives are zero. Thus the axioms in [F4] hold and its induced norm is exactly the displayed vector Sobolev norm. [given, F2, F3, F4, algebra]
+ 
+-2.1 For each fixed $\phi\in C_c^\infty(\Omega)$ the functional $v\mapsto\int_\Omega v\cdot\nabla\phi$ is continuous in the $H^1$ norm, since its absolute value is at most $\|v\|_{L^2}\|\nabla\phi\|_{L^2}$. Its kernel is closed; the intersection of these kernels is exactly $V$. Thus $V$ is a closed real linear subspace of $H_0^1$ and is complete. [given, step 1.1, algebra]
++2.1 By [F2] and [F3], each scalar component space $W^{1,2}(\Omega;\mathbb R)$ is complete under the stated AC assumption. A Cauchy sequence in the finite product $W^{1,2}(\Omega;\mathbb R^d)$ is Cauchy in each component; completeness gives a limit in each component, and the finite sum in the displayed vector norm gives convergence to the vector of those limits. Thus the vector space is complete. Its closed linear subspace $H_0^1$, defined by norm closure, is therefore complete in the inherited inner-product norm verified in step 1.1. [given, F1, F2, F3, step 1.1]
+ 
+-3.1 The inherited pairing is positive definite and complete on $V$, so [F5] makes $V$ a real Hilbert space. The only boundary condition used is the defining closure $H_0^1$; no converse density or arbitrary-domain trace theorem has been invoked. [given, F4, F5, step 2.1] ∎
++3.1 For each fixed $\phi\in C_c^\infty(\Omega)$ the functional $v\mapsto\int_\Omega v\cdot\nabla\phi$ is continuous in the $H^1$ norm, since its absolute value is at most $\|v\|_{L^2}\|\nabla\phi\|_{L^2}$. Its kernel is closed; the intersection of these kernels is exactly $V$. Thus $V$ is a closed real linear subspace of $H_0^1$ and is complete. [given, step 1.1, step 2.1, algebra]
+ 
++4.1 The inherited pairing is positive definite and complete on $V$, so [F5] makes $V$ a real Hilbert space. The only boundary condition used is the defining closure $H_0^1$; no converse density or arbitrary-domain trace theorem has been invoked. [given, F4, F5, step 3.1] ∎
++
+--- a/physics/items/lem-fd-no-slip-lsix.md
++++ b/physics/items/lem-fd-no-slip-lsix.md
+@@ -38,7 +38,7 @@
+ ## Statement
+ 
+ Assume the Axiom of Choice. Let $\Omega\subset\mathbb R^3$ be bounded and
+-open, and let $H,V$ be the closure spaces defined above. There is a constant $C$ independent of $\Omega$
++open, and let $H,V$ be the closure spaces defined above when $\Omega\ne\varnothing$. If $\Omega=\varnothing$, use the same closure formulas: take the finite product of scalar $W^{1,2}$ spaces as $H^1$, let $H_0^1$ be the $H^1$ closure of $C_c^\infty(\Omega;\mathbb R^3)$, let $D_\sigma=\{a\in C_c^\infty(\Omega;\mathbb R^3):\operatorname{div}a=0\}$, and let $H$ and $V$ be the $L^2$ and $H_0^1$ closures of $D_\sigma$. All these spaces are then $\{0\}$. There is a constant $C$ independent of $\Omega$
+ and $a$ such that every $a\in H_0^1(\Omega;\mathbb R^3)$ satisfies
+ $$\|a\|_{L^6(\Omega)}\le C\|\nabla a\|_{L^2(\Omega)},\qquad \|a\|_{L^4(\Omega)}\le\|a\|_{L^2(\Omega)}^{1/4}\|a\|_{L^6(\Omega)}^{3/4}.$$
+ For $T>0$, if $u\in L^\infty(0,T;H)\cap L^2(0,T;V)$, then
+@@ -79,15 +79,19 @@
+ 
+ [F8] [[lem-fd-bounded-dual-separability]]: the Riesz map is a surjective isometry from $V$ onto $V^*$, so $V^*$ is a separable Hilbert space and the Bochner convention in [F7] applies.
+ 
++[F9] [[def-sobolev-space-wkp-and-its-norm]] and [[def-wkp-zero-as-a-sobolev-closure]]: scalar $W^{1,2}$ and its test-function closure are defined on every open set, including the empty one, where they contain only the zero class.
++
+ ## Proof
+ 
+-1.1 For real $g\in C^1([a,b])$, put $G(t)=\int_a^t g'(s)ds$. The difference between its difference quotient at an interior $t$ and $g'(t)$ is bounded by $\sup_{|s-t|\le|h|}|g'(s)-g'(t)|$, which tends to zero. Hence $(G-g)'=0$ everywhere inside the interval; the mean value theorem and endpoint continuity give $g(b)-g(a)=\int_a^b g'$. For $h\in C_c^\infty(\mathbb R^3)$ define $A_1(x_2,x_3)=\int_{\mathbb R}|\partial_1h(x_1,x_2,x_3)|dx_1$, and define $A_2(x_1,x_3)$ and $A_3(x_1,x_2)$ analogously. Applying the endpoint identity along each coordinate line from a point outside the support gives $|h(x)|\le A_i(x_{\widehat i})$ for each $i$, hence $|h|^{3/2}\le(A_1A_2A_3)^{1/2}$. Put $B_2(x_3)=\int A_2(x_1,x_3)dx_1$ and $B_3(x_2)=\int A_3(x_1,x_2)dx_1$. Cauchy–Schwarz in $x_1$ gives $\int(A_2A_3)^{1/2}dx_1\le(B_2B_3)^{1/2}$; applying Cauchy–Schwarz in $(x_2,x_3)$ to the remaining $A_1^{1/2}(B_2B_3)^{1/2}$ gives
++1.1 If $\Omega=\varnothing$, [F9] and the local closure formulas in the Statement give $H_0^1=H=V=\{0\}$. The only linear functional on $V$ is zero, so $V^*=\{0\}$ as well; each zero space is a separable real Hilbert space (the singleton $\{0\}$ is dense). Every spatial $L^p$ class and every time-dependent map with one of these zero targets is zero, with the constant zero simple map proving strong measurability. Thus both spatial inequalities, time integrability, representative independence, the defining formula for $b_u$, and the $V^*$ norm bound all hold with zero on both sides, for the same positive universal constant as in the nonempty case. No basis, approximation sequence or zero-extension theorem for a nonempty domain is applied here. Henceforth assume $\Omega\ne\varnothing$; all uses of [F1], [F6] and [F8] below are in that case. [given, A1, F7, F9, algebra]
++
++1.2 For real $g\in C^1([a,b])$, put $G(t)=\int_a^t g'(s)ds$. The difference between its difference quotient at an interior $t$ and $g'(t)$ is bounded by $\sup_{|s-t|\le|h|}|g'(s)-g'(t)|$, which tends to zero. Hence $(G-g)'=0$ everywhere inside the interval; the mean value theorem and endpoint continuity give $g(b)-g(a)=\int_a^b g'$. For $h\in C_c^\infty(\mathbb R^3)$ define $A_1(x_2,x_3)=\int_{\mathbb R}|\partial_1h(x_1,x_2,x_3)|dx_1$, and define $A_2(x_1,x_3)$ and $A_3(x_1,x_2)$ analogously. Applying the endpoint identity along each coordinate line from a point outside the support gives $|h(x)|\le A_i(x_{\widehat i})$ for each $i$, hence $|h|^{3/2}\le(A_1A_2A_3)^{1/2}$. Put $B_2(x_3)=\int A_2(x_1,x_3)dx_1$ and $B_3(x_2)=\int A_3(x_1,x_2)dx_1$. Cauchy–Schwarz in $x_1$ gives $\int(A_2A_3)^{1/2}dx_1\le(B_2B_3)^{1/2}$; applying Cauchy–Schwarz in $(x_2,x_3)$ to the remaining $A_1^{1/2}(B_2B_3)^{1/2}$ gives
+ $$\int_{\mathbb R^3}|h|^{3/2}\le(\int_{\mathbb R^2}A_1)^{1/2}(\int_{\mathbb R}B_2)^{1/2}(\int_{\mathbb R}B_3)^{1/2}=\prod_{i=1}^3(\int_{\mathbb R^3}|\partial_i h|)^{1/2}.$$
+ The changes of integration order are justified by [F3]. Raising to the power $2/3$ yields $\|h\|_{3/2}\le\prod_i\|\partial_i h\|_1^{1/3}$. [given, F2, F3, F4, algebra]
+ 
+-2.1 For a smooth compactly supported vector field $w$, set $h=|w|^4$, which is smooth, and note $|\partial_i h|\le4|w|^3|\partial_iw|$. Hölder gives $\|\partial_i h\|_1\le4\|w\|_6^3\|\partial_iw\|_2$. Substitution into step 1.1 yields $\|w\|_6^4\le4\|w\|_6^3\prod_i\|\partial_iw\|_2^{1/3}\le4\|w\|_6^3\|\nabla w\|_2$. Divide when $\|w\|_6>0$; if it is zero the inequality is immediate. [given, F2, step 1.1]
++2.1 For a smooth compactly supported vector field $w$, set $h=|w|^4$, which is smooth, and note $|\partial_i h|\le4|w|^3|\partial_iw|$. Hölder gives $\|\partial_i h\|_1\le4\|w\|_6^3\|\partial_iw\|_2$. Substitution into step 1.2 yields $\|w\|_6^4\le4\|w\|_6^3\prod_i\|\partial_iw\|_2^{1/3}\le4\|w\|_6^3\|\nabla w\|_2$. Divide when $\|w\|_6>0$; if it is zero the inequality is immediate. [given, F2, step 1.2]
+ 
+ 3.1 By [F1] and [F5], choose $w_n\in C_c^\infty(\Omega;\mathbb R^3)$ converging to $a$ in $H^1$. The inequality of step 2.1 applied to differences makes $(w_n)$ Cauchy in $L^6$; on bounded $\Omega$, convergence in $L^6$ also implies convergence in $L^2$, so its $L^6$ limit is the given $L^2$ class $a$. Passing to the limit proves the first inequality. Finally, $\int|a|^4\le(\int|a|^2)^{1/2}(\int|a|^6)^{1/2}$ by Cauchy–Schwarz, which proves the interpolation inequality. For almost every $t$, raising it to power $8/3$ gives $\|u(t)\|_4^{8/3}\le\|u(t)\|_2^{2/3}\|u(t)\|_6^2\le C\|u(t)\|_H^{2/3}\|u(t)\|_V^2$. Integrating and using $u\in L^\infty_tH\cap L^2_tV$ proves the stated $L^{8/3}_tL^4_x$ bound. [given, F1, F2, F5, step 2.1]
+ 
+-4.1 Fix the strongly measurable representative $\widetilde u$ chosen in the Statement. For almost every time, Hölder gives $|b_u(t)(\phi)|\le\|\widetilde u(t)\|_4^2\|\nabla\phi\|_2$, so $b_u(t)\in V^*$ and its norm is at most $\|\widetilde u(t)\|_4^2$. The map $a\mapsto b_a$ is continuous from $L^4$ to $V^*$ because $\|b_a-b_c\|_{V^*}\le(\|a\|_4+\|c\|_4)\|a-c\|_4$. Composing simple-map approximations to $\widetilde u$ with the continuous embedding $V\to L^4$ and this map therefore gives strongly measurable $V^*$-valued $b_u$, up to the permitted null-set assignment; [F6,F8] provide the separable Hilbert target. Two representatives of the same $L^2_tV$ class agree in $V$ almost everywhere, hence agree in $L^4$ there and define the same $b_u$ almost everywhere. Thus its Bochner class is independent of the representative. Finally $\int_0^T\|b_u(t)\|_{V^*}^{4/3}dt\le\int_0^T\|\widetilde u(t)\|_4^{8/3}dt<\infty$ by step 3.1; [F7] gives $b_u\in L^{4/3}(0,T;V^*)$. [given, A1, F2, F6, F7, F8, step 3.1] ∎
++4.1 Fix the strongly measurable representative $\widetilde u$ chosen in the Statement. For almost every time, Hölder gives $|b_u(t)(\phi)|\le\|\widetilde u(t)\|_4^2\|\nabla\phi\|_2$, so $b_u(t)\in V^*$ and its norm is at most $\|\widetilde u(t)\|_4^2$. The map $a\mapsto b_a$ is continuous from $L^4$ to $V^*$ because $\|b_a-b_c\|_{V^*}\le(\|a\|_4+\|c\|_4)\|a-c\|_4$. Composing simple-map approximations to $\widetilde u$ with the continuous embedding $V\to L^4$ and this map therefore gives strongly measurable $V^*$-valued $b_u$, up to the permitted null-set assignment; [F6,F8] provide the separable Hilbert target. Two representatives of the same $L^2_tV$ class agree in $V$ almost everywhere, hence agree in $L^4$ there and define the same $b_u$ almost everywhere. Thus its Bochner class is independent of the representative. Finally $\int_0^T\|b_u(t)\|_{V^*}^{4/3}dt\le\int_0^T\|\widetilde u(t)\|_4^{8/3}dt<\infty$ by step 3.1; [F7] gives $b_u\in L^{4/3}(0,T;V^*)$. [given, A1, F2, F6, F7, F8, step 1.1, step 3.1] ∎
+ 
+--- a/physics/items/lem-fd-rectangular-test-divergence-inverse.md
++++ b/physics/items/lem-fd-rectangular-test-divergence-inverse.md
+@@ -33,7 +33,9 @@
+ 
+ ## Statement
+ 
+-Let $d\ge1$ and let $\Omega=\prod_{i=1}^d(a_i,b_i)$ be a nonempty finite open rectangle. Write $D(\Omega)=C_c^\infty(\Omega;\mathbb R)$ and $D_0(\Omega)=\{h\in D(\Omega):\int_\Omega h=0\}$. For every compact $K\subset\Omega$ there is a compact $K'\subset\Omega$ such that a linear map $R:D_0(\Omega)\to D(\Omega;\mathbb R^d)$ sends tests supported in $K$ to fields supported in $K'$, satisfies $\operatorname{div}(Rh)=h$, and is continuous on each fixed-support test space for the seminorms $\sup|\partial^\alpha h|$.
++Let $d\ge1$ and let $\Omega=\prod_{i=1}^d(a_i,b_i)$ be a nonempty finite open rectangle. Write $D(\Omega)=C_c^\infty(\Omega;\mathbb R)$ and $D_0(\Omega)=\{h\in D(\Omega):\int_\Omega h=0\}$. There is one linear map $R:D_0(\Omega)\to D(\Omega;\mathbb R^d)$ with $\operatorname{div}(Rh)=h$ such that, for every compact $K\subset\Omega$, there is a compact $K'\subset\Omega$ containing the support of $Rh$ whenever $h$ is supported in $K$, and every fixed-support restriction is continuous for the seminorms $\sup|\partial^\alpha h|$. This same map can be chosen to satisfy
++$$\|Rh\|_{1,2;\Omega}\le C_\Omega\|h\|_{1,2;\Omega}\qquad(h\in D_0(\Omega)),$$
++where $\|g\|_{1,2;\Omega}^2=\int_\Omega(|g|^2+|\nabla g|^2)\,dx$, summing over components for vector fields, and $C_\Omega<\infty$ depends on the rectangle and the fixed bumps in its construction, but not on the support of $h$. No bound from the $L^2$ norm of $h$ to the $H^1$ norm of $Rh$ is asserted.
+ 
+ ## Statement references
+ 
+@@ -52,6 +54,8 @@
+ [F3] [[thm-differentiation-under-the-integral-sign-on-a-compact-rectangle]]: for continuous real $g$ and its continuous parameter derivative on a compact two-variable rectangle, that derivative passes through the finite integral, including one-sided parameter endpoints.
+ 
+ [F4] [[lem-uniform-integral-error-bound]]: if integrable $f,g$ differ in sup norm by at most $M$ on $[a,b]$, their integrals differ by at most $(b-a)M$.
++
++[F5] [[thm-holder-inequality-for-integrals]]: for real square-integrable functions, $\int|fg|\le\|f\|_2\|g\|_2$; in particular, on an interval of length $\ell$, $|\int g|^2\le\ell\int|g|^2$.
+ 
+ ## Proof
+ 
+@@ -99,6 +103,10 @@
+ components are compactly supported by induction. [given, A1, step 1.1, step 1.2, step 1.3, step 2.1,
+ induction]
+ 
++3.2 We now prove the additional estimate for the very same fixed-bump map constructed in steps 1.1 and 3.1. Put $\ell=b_1-a_1$ and, for a smooth $g$ on the box, $Jg(x_1,x')=\int_{a_1}^{x_1}g(s,x')\,ds$. By [F5], $|Jg(x_1,x')|^2\le\ell\int_{a_1}^{b_1}|g(s,x')|^2\,ds$; integration over $x_1$ and $x'$ gives $\|Jg\|_2\le\ell\|g\|_2$. The smooth derivative identities in steps 1.3–2.1 give $\partial_1Jg=g$ and $\partial_jJg=J(\partial_jg)$ for $j>1$, so
++$$\|Jg\|_{1,2;\Omega}^2\le(\ell^2+1)\|g\|_2^2+\ell^2\sum_{j=2}^d\|\partial_jg\|_2^2\le(1+\ell^2)\|g\|_{1,2;\Omega}^2.$$
++All functions integrated here are smooth up to the closed box; step 1.2 licenses the iterated integrations. In dimension one the map is $Rh=Jh$, and this proves the base case. [given, F2, F5, step 1.1, step 1.2, step 1.3, step 2.1, algebra]
++
+ 4.1 If inputs are supported in fixed compact $K$, each coordinate projection $K_i$ is compactly
+ contained in $(a_i,b_i)$. Choose closed intervals $J_i\Subset(a_i,b_i)$ containing $K_i$ and the
+ support of the already fixed bump $\theta_i$. Their product is a common compact output-support set
+@@ -121,4 +129,12 @@
+ fixed-support seminorm estimates, proving the full stated continuity. Every displayed construction
+ is linear in $h$, and the bumps were fixed once independently of $h$ and $K$, so the same map $R$
+ serves all compact input supports. [given, A1, F4, step 1.1, step 1.3, step 2.1, step 3.1, step 4.1,
+-induction] ∎
++induction]
++
++6.1 In dimension $d>1$, write $\Omega'=\prod_{i=2}^d(a_i,b_i)$ and $H(x')=\int_{a_1}^{b_1}h(s,x')\,ds$. Apply [F5] to this integral and each derivative identity in step 1.3, then integrate in $x'$, to obtain
++$$\|H\|_{1,2;\Omega'}^2\le\ell\left(\|h\|_2^2+\sum_{j=2}^d\|\partial_jh\|_2^2\right)\le\ell\|h\|_{1,2;\Omega}^2.$$
++For any scalar or vector smooth $G$ on $\Omega'$, direct differentiation and separated integration give
++$$\|\theta_1G\|_{1,2;\Omega}^2=(\|\theta_1\|_2^2+\|\theta_1'\|_2^2)\|G\|_{2;\Omega'}^2+\|\theta_1\|_2^2\|\nabla'G\|_{2;\Omega'}^2\le B^2\|G\|_{1,2;\Omega'}^2,$$
++where $B=(\|\theta_1\|_2^2+\|\theta_1'\|_2^2)^{1/2}<\infty$. Thus $g=h-\theta_1H$ satisfies $\|g\|_{1,2;\Omega}\le(1+B\sqrt\ell)\|h\|_{1,2;\Omega}$. The first component of $Rh$ is $Jg$, so step 3.2 bounds it by $\sqrt{1+\ell^2}(1+B\sqrt\ell)\|h\|_{1,2;\Omega}$. The remaining components form $\theta_1R'H$. By step 1.2, $H$ has integral zero, so the inductive estimate for the same lower-dimensional construction gives their combined norm at most $BC_{\Omega'}\sqrt\ell\|h\|_{1,2;\Omega}$. Squaring and adding the first-component and remaining-component estimates proves the claimed estimate with
++$$C_\Omega^2=(1+\ell^2)(1+B\sqrt\ell)^2+B^2\ell C_{\Omega'}^2.$$
++This finite induction depends only on the fixed side lengths and bumps, never on the compact input support. The support, divergence and all-order test continuity properties already proved remain properties of this same map. [given, F2, F5, step 1.2, step 1.3, step 3.1, step 4.1, step 5.1, step 3.2, algebra, induction] ∎
+--- a/physics/items/lem-fd-zero-trace-directional-poincare.md
++++ b/physics/items/lem-fd-zero-trace-directional-poincare.md
+@@ -50,13 +50,17 @@
+ 
+ [F2] [[def-fd-projected-no-slip-stokes-space]]: $H_0^1$ is the Sobolev-norm closure of $C_c^\infty$ fields on $\Omega$.
+ 
++[F3] [[def-sobolev-space-wkp-and-its-norm]]: for every open $\Omega$, including $\Omega=\varnothing$, scalar $W^{1,2}$ is defined; on the empty open set the $L^2$ and Sobolev spaces consist only of the zero class.
++
+ ## Proof
+ 
+ **Given:** Full AC, $R>0$, $\Omega\subset(-R,R)^d$, and $v\in H_0^1(\Omega;\mathbb R^d)$.
+ 
+-1.1 For $v\in C_c^\infty(\Omega;\mathbb R^d)$, extend $v$ by zero to the cube. For each component and fixed $x'=(x_2,\ldots,x_d)$, the fundamental theorem of calculus gives $v(x_1,x')=\int_{-R}^{x_1}\partial_1v(t,x')dt$. Cauchy–Schwarz bounds its squared norm by $2R\int_{-R}^R|\partial_1v(t,x')|^2dt$. [given, F2, construct, algebra]
++1.1 If $\Omega=\varnothing$, define the vector Sobolev space componentwise from [F3], and $H_0^1$ by the closure formula in the Statement. Every component and derivative is the zero class, and the only compactly supported smooth field is zero. Thus $H_0^1=\{0\}$ and all three norms in the claimed inequalities are zero. No application of the nonempty-domain supplier [F2] is made in this case. [given, F1, F3, algebra]
+ 
+-2.1 Integrating the preceding bound over $x_1\in(-R,R)$ and $x'$ yields $\|v\|_2^2\le(2R)^2\|\partial_1v\|_2^2$. The pointwise matrix norm inequality $|\partial_1v|\le|\nabla v|$ gives the second inequality. [given, step 1.1, F2, algebra]
++1.2 Henceforth suppose $\Omega\ne\varnothing$, so the hypotheses of [F2] hold. For $v\in C_c^\infty(\Omega;\mathbb R^d)$, extend $v$ by zero to the cube. For each component and fixed $x'=(x_2,\ldots,x_d)$, the fundamental theorem of calculus gives $v(x_1,x')=\int_{-R}^{x_1}\partial_1v(t,x')dt$. Cauchy–Schwarz bounds its squared norm by $2R\int_{-R}^R|\partial_1v(t,x')|^2dt$. [given, F2, construct, algebra]
+ 
+-3.1 By the closure in [F2], choose compactly supported smooth $v_n\to v$ in $H^1$. Then both $v_n\to v$ in $L^2$ and $\partial_1v_n\to\partial_1v$ in $L^2$, so the inequalities pass to the limit. [given, F1, F2, step 2.1, algebra] ∎
++2.1 Integrating the preceding bound over $x_1\in(-R,R)$ and $x'$ yields $\|v\|_2^2\le(2R)^2\|\partial_1v\|_2^2$. The pointwise matrix norm inequality $|\partial_1v|\le|\nabla v|$ gives the second inequality. [given, step 1.2, F2, algebra]
+ 
++3.1 By the closure in [F2], choose compactly supported smooth $v_n\to v$ in $H^1$. Then both $v_n\to v$ in $L^2$ and $\partial_1v_n\to\partial_1v$ in $L^2$, so the inequalities pass to the limit. [given, F1, F2, step 1.1, step 2.1, algebra] ∎
++
+--- a/physics/items/thm-fd-bounded-global-weak-existence.md
++++ b/physics/items/thm-fd-bounded-global-weak-existence.md
+@@ -40,7 +40,7 @@
+ 
+ Let $\Omega\subset\mathbb R^3$ be bounded and open, assume the Axiom of
+ Choice, let $\nu>0$, and let $u_0\in H$ for the bounded closure spaces
+-defined above. There exists
++defined above when $\Omega\ne\varnothing$. For $\Omega=\varnothing$, use the same closure formulas: $H^1$ is the finite product of scalar $W^{1,2}$ spaces, $H_0^1$ is the $H^1$ closure of compactly supported smooth vector fields, $D_\sigma=\{a\in C_c^\infty(\Omega;\mathbb R^3):\operatorname{div}a=0\}$, and $H,V$ are its $L^2$ and $H_0^1$ closures. Thus $H_0^1=H=V=\{0\}$ in this case. There exists
+ $$u\in C_w([0,\infty);H)\cap L^\infty(0,\infty;H)\cap L^2_{\rm loc}(0,\infty;V)$$
+ with $u(0)=u_0$ and $\|u(t)-u_0\|_H\to0$ as $t\downarrow0$, satisfying for
+ every compactly time-supported $C^1$ map $\phi:[0,\infty)\to V$,
+@@ -87,9 +87,13 @@
+ 
+ [F9] [[thm-picard-lindelof-local-existence-and-uniqueness]]: a continuous vector field on an open subset of $\mathbb R\times\mathbb R^m$ that is locally Lipschitz in the state has a unique local solution through every initial point, and any two such solutions agree on each common interval containing that initial time. In particular, on a closed cylinder with state radius $r$ and time radius $h$, a bound $\|F\|\le B$, a state-Lipschitz constant $L_F$, $hB\le r$, and $hL_F<1$ give the stated local solution.
+ 
++[F10] [[def-sobolev-space-wkp-and-its-norm]] and [[def-wkp-zero-as-a-sobolev-closure]]: scalar $W^{1,2}$ and its test-function closure are defined for all open sets, including the empty set, where they consist only of the zero class.
++
+ ## Proof
+ 
+-1.1 Let $(e_j)$ be the basis from [F2], and set $u_N=\sum_{j=1}^Na_j(t)e_j$ with initial value the $H$-projection of $u_0$. Solve
++1.1 If $\Omega=\varnothing$, [F10] and the closure formulas in the Statement give $H_0^1=H=V=\{0\}$. These are complete separable real Hilbert spaces with their zero pairings, so [F5] applies. Necessarily $u_0=0$; define the actual map $u(t)=0$ for every $t\ge0$. Every fixed $H$ pairing is the constant zero function, so $u\in C_w([0,\infty);H)$. The constant zero simple map proves strong measurability in $H$ and $V$, and every required $L^\infty$ or local $L^2$ norm is zero. The initial value and strong trace are immediate. Every test curve into $V$ is zero, so the tested identity is $0=0$; both energy inequalities likewise reduce to $0\le0$. Taking $S=(0,\infty)$ gives the required full-measure restart set. This proves every assertion in the empty case directly, without an orthonormal sequence or a Galerkin ODE on a zero-dimensional target. Henceforth suppose $\Omega\ne\varnothing$, so the nonempty-domain closure, basis and compactness suppliers [F1]–[F4] apply. [given, F5, F10, algebra]
++
++1.2 Let $(e_j)$ be the basis from [F2], and set $u_N=\sum_{j=1}^Na_j(t)e_j$ with initial value the $H$-projection of $u_0$. Solve
+ $$ (u_N',e_i)_H+\int_\Omega(u_N\cdot\nabla)u_N\cdot e_i\,dx+\nu(\nabla u_N,\nabla e_i)=0,\quad i\le N.$$
+ Because the $e_j$ are real and $H$-orthonormal, the displayed system has identity mass matrix and is an autonomous polynomial ODE $a'=F_N(a)$ on $\mathbb R^N$. Its open time-state domain is $\mathbb R\times\mathbb R^N$; it is continuous and its derivative is bounded on every closed coefficient ball, giving a Lipschitz bound there by integration along line segments. Hence [F9] gives its unique local solution. Pairing with $u_N$ and summing the equations cancels the transport term because $\operatorname{div}u_N=0$ and $\int (u_N\cdot\nabla)u_N\cdot u_N=\int\operatorname{div}(u_N|u_N|^2/2)=0$ for its compact support. Thus
+ $$\|u_N(t)\|_2^2+2\nu\int_s^t\|\nabla u_N\|_2^2d\tau=\|u_N(s)\|_2^2.$$
+@@ -97,7 +101,7 @@
+ 
+ 2.1 For fixed $i$ and $N\ge i$, integration by parts and the energy bound give
+ $$|(u_N'(t),e_i)|\le\|\nabla e_i\|_\infty\|u_N(t)\|_2^2+\nu\|\nabla e_i\|_2\|\nabla u_N(t)\|_2.$$
+-Integrating from $s$ to $t$ and applying Cauchy–Schwarz bounds coefficient increments by $C_i|t-s|+D_i|t-s|^{1/2}$, uniformly in $N$ on each finite horizon. Diagonal extraction over the countable basis and integer horizons gives uniformly convergent coefficient curves. Their finite sums define for every $t$ a bounded $H$ element; approximation of an arbitrary $H$ test by finite basis sums proves weak continuity as in [F5]. [given, F2, F5, F8, step 1.1]
++Integrating from $s$ to $t$ and applying Cauchy–Schwarz bounds coefficient increments by $C_i|t-s|+D_i|t-s|^{1/2}$, uniformly in $N$ on each finite horizon. Diagonal extraction over the countable basis and integer horizons gives uniformly convergent coefficient curves. Their finite sums define for every $t$ a bounded $H$ element; approximation of an arbitrary $H$ test by finite basis sums proves weak continuity as in [F5]. [given, F2, F5, F8, step 1.2]
+ 
+ 3.1 For each integer $m\ge1$, the energy equality bounds $u_N$ in the separable Hilbert space $X_m=L^2(0,m;V)$. Completeness follows by selecting from a Cauchy sequence a subsequence with summable $X_m$-norm differences, applying [F6] to obtain pointwise summability in complete $V$, and then using the $L^2$ triangle inequality for convergence. Separability follows by approximating strongly measurable maps by finite-valued simple maps, their scalar indicators by the countable Fourier span from [F7], and their values by a countable dense subset of $V$ from [F2]. In any separable Hilbert space, a bounded sequence has a weakly convergent subsequence: diagonalize coordinates in a countable orthonormal basis; finite squared sums bound the limiting coordinates, their square-summable series defines a vector, and finite-basis approximation plus the uniform norm bound gives convergence against every vector. Apply this successively on $m=1,2,\ldots$ to nested subsequences of the coefficient-convergent sequence from step 2.1, and take the diagonal subsequence. It converges weakly in every $X_m$. The limits agree on overlapping horizons: for each basis vector $e_j$ from [F2], the map $w\mapsto(w,e_j)_H$ is continuous from $V$ to $\mathbb R$, so the induced map $X_m\to L^2(0,m)$ preserves weak convergence, while step 2.1 gives strong $L^2$ convergence of that coefficient to its fixed uniform limit. Uniqueness of weak limits identifies the coefficient of each $X_m$ limit with that same curve; the countable basis then identifies the $H$-valued limits almost everywhere. Thus one $u\in L^2_{\rm loc}(0,\infty;V)$ is obtained on all finite horizons. [given, F2, F6, F7, F8, step 2.1]
+ 
+@@ -109,5 +113,5 @@
+ 
+ 5.1 For a test field taking values in a fixed finite span of the $e_j$, the Galerkin identity is exact for all sufficiently large $N$. Uniform coefficient convergence passes the time and initial terms, strong tensor convergence from step 4.1 passes the transport term, and weak convergence in $L^2V$ passes viscosity. To pass to any compactly supported $C^1$ curve $\phi:[0,\infty)\to V$, let $Q_K$ be the $V$-orthogonal projection onto $\operatorname{span}(e_1,\ldots,e_K)$. It is a contraction and converges strongly to the identity by [F2]; finite nets of the compact images of $\phi$ and $\phi_t$ make this convergence uniform in time. The nonlinear error is bounded by the uniform $L^{4/3}_tV^*$ norm from [F4] times $\|\phi-Q_K\phi\|_{L^4_tV}$; the time and viscosity errors tend to zero by the $L^\infty H$ and $L^2V$ bounds. Thus the full weak identity holds. [given, F2, F4, step 2.1, step 4.1]
+ 
+-6.1 For each fixed $t$, convergence of the finite coefficients gives $\|u(t)\|_2^2\le\liminf_N\|u_N(t)\|_2^2$. Weak convergence in $L^2V$ restricted to any $[s,t]$ gives lower semicontinuity of the gradient integral there. At $s=0$, $u_N(0)\to u_0$ strongly, so passing the Galerkin equality proves the initial energy inequality for every $t$. At every time $s$ in the full-measure set from step 4.1, $u_N(s)\to u(s)$ strongly; passing the same equality on $[s,t]$ gives the restart inequality for every $t\ge s$. Coefficient convergence gives $u(t)\rightharpoonup u_0$ as $t\downarrow0$, and the initial energy inequality gives the norm limsup; the Hilbert identity then gives strong convergence to $u_0$. Together the Galerkin, compactness, weak-limit, and energy arguments prove the stated existence, with the finite-dimensional local existence and continuation supplied by [F9]. [given, A1, F1, F5, F6, F9, step 1.1, step 3.1, step 4.1, step 5.1] ∎
++6.1 For each fixed $t$, convergence of the finite coefficients gives $\|u(t)\|_2^2\le\liminf_N\|u_N(t)\|_2^2$. Weak convergence in $L^2V$ restricted to any $[s,t]$ gives lower semicontinuity of the gradient integral there. At $s=0$, $u_N(0)\to u_0$ strongly, so passing the Galerkin equality proves the initial energy inequality for every $t$. At every time $s$ in the full-measure set from step 4.1, $u_N(s)\to u(s)$ strongly; passing the same equality on $[s,t]$ gives the restart inequality for every $t\ge s$. Coefficient convergence gives $u(t)\rightharpoonup u_0$ as $t\downarrow0$, and the initial energy inequality gives the norm limsup; the Hilbert identity then gives strong convergence to $u_0$. Together the Galerkin, compactness, weak-limit, and energy arguments prove the stated existence, with the finite-dimensional local existence and continuation supplied by [F9]. [given, A1, F1, F5, F6, F9, step 1.1, step 1.2, step 3.1, step 4.1, step 5.1] ∎
+ 
+--- a/physics/items/thm-fd-rectangular-no-slip-stokes-velocity-pressure.md
++++ b/physics/items/thm-fd-rectangular-no-slip-stokes-velocity-pressure.md
+@@ -58,9 +58,11 @@
+ 
+ [F3] [[thm-fd-projected-stationary-stokes]]: for the stated bounded open domain, $\mu>0$, and $f\in L^2$, a unique variational velocity exists with the $2R/\mu$ gradient bound.
+ 
+-[F4] [[lem-fd-rectangular-test-divergence-inverse]]: on a finite rectangle, every compactly supported smooth scalar test of integral zero has a compactly supported smooth vector preimage under divergence, with fixed-support continuity.
++[F4] [[lem-fd-rectangular-test-divergence-inverse]]: on a finite rectangle, one linear map $\mathscr R$ gives every compactly supported smooth scalar test of integral zero a compactly supported smooth vector preimage under divergence, with fixed-support continuity and $\|\mathscr Rh\|_{H^1}\le C_\Omega\|h\|_{H^1}$ for this same map, independently of input support.
+ 
+ [A1] A normalized smooth compact bump exists inside every nonempty interval; an affine rescaling of $e^{-1/(1-s^2)}$ on $|s|<1$, extended by zero, gives one after normalization.
++
++[F5] [[lem-fd-zero-trace-directional-poincare]]: for the stated zero-trace space on $\Omega\subset(-R,R)^d$, $\|v\|_2\le2R\|\nabla v\|_2$.
+ 
+ ## Proof
+ 
+@@ -70,12 +72,15 @@
+ $$\langle T,\psi\rangle=\int_\Omega f\cdot\psi\,dx-\mu\int_\Omega\nabla u:\nabla\psi\,dx.$$
+ It satisfies $|\langle T,\psi\rangle|\le(\|f\|_2+\mu\|\nabla u\|_2)\|\psi\|_{H^1}$. For each fixed compact support $K$, $\|\psi\|_{H^1}\le C_K p_{K,1}(\psi)$ componentwise, so $T$ is continuous on every $\mathcal D_K$ and hence belongs to $D'(\Omega;\mathbb R^d)$ with the stated inductive-limit topology. The variational identity shows that $T$ annihilates every compactly supported smooth divergence-free vector field, since each lies in $V$. [given, F1, F2, F3, algebra]
+ 
+-2.1 Write $\mathscr R$ for the right inverse $R$ in [F4]. Each interval contains a central compact subinterval. Affinely rescale $b(s)=e^{-1/(1-s^2)}$ on $|s|<1$, extended by zero. Every derivative is the exponential times a finite sum of rational terms with poles of finite order at $|s|=1$, and the exponential tends to zero faster than every such power; thus the extension is smooth. Normalize its positive finite integral to obtain the interval bumps $\theta_i$ used in the recursive construction of [F4], and set $\theta(x)=\prod_{i=1}^d\theta_i(x_i)$. Then $\theta\in C_c^\infty(\Omega)$ and $\int_\Omega\theta\,dx=1$. For $\phi\in\mathcal D(\Omega)$ put $\phi_0=\phi-(\int_\Omega\phi\,dx)\theta$ and define $\langle p,\phi\rangle=-\langle T,\mathscr R\phi_0\rangle$, using [F4]. This is linear; for tests supported in fixed $K$, $\phi_0$ is supported in the fixed compact $K\cup\operatorname{supp}\theta$, and the fixed-support continuity of $\mathscr R$ makes $\mathscr R\phi_0$ supported in a fixed compact with every output seminorm controlled by finitely many input seminorms. Since $T$ is continuous on that output test space, $p$ is continuous on every $\mathcal D_K$ and hence is a distribution. Its construction also gives $\langle p,\theta\rangle=0$. [given, A1, F4, step 1.1, construct]
++2.1 Write $\mathscr R$ for the right inverse $R$ in [F4]. Each interval contains a central compact subinterval. Affinely rescale $b(s)=e^{-1/(1-s^2)}$ on $|s|<1$, extended by zero. Every derivative is the exponential times a finite sum of rational terms with poles of finite order at $|s|=1$, and the exponential tends to zero faster than every such power; thus the extension is smooth. Normalize its positive finite integral to obtain interval bumps $\theta_i$ and set $\theta(x)=\prod_{i=1}^d\theta_i(x_i)$. Then $\theta\in C_c^\infty(\Omega)$ and $\int_\Omega\theta\,dx=1$. For $\phi\in\mathcal D(\Omega)$ put $\phi_0=\phi-(\int_\Omega\phi\,dx)\theta$ and define $\langle p,\phi\rangle=-\langle T,\mathscr R\phi_0\rangle$, using [F4]. This is linear; for tests supported in fixed $K$, $\phi_0$ is supported in the fixed compact $K\cup\operatorname{supp}\theta$, and the fixed-support continuity of $\mathscr R$ makes $\mathscr R\phi_0$ supported in a fixed compact with every output seminorm controlled by finitely many input seminorms. Since $T$ is continuous on that output test space, $p$ is continuous on every $\mathcal D_K$ and hence is a distribution. Its construction also gives $\langle p,\theta\rangle=0$. [given, A1, F4, step 1.1, construct]
+ 
+-3.1 Write $\ell_1=b_1-a_1$, $\Omega'=\prod_{i=2}^d(a_i,b_i)$, and $Jg(x_1,x')=\int_{a_1}^{x_1}g(s,x')\,ds$. Cauchy–Schwarz and Fubini give $\|Jg\|_{L^2(\Omega)}\le\ell_1\|g\|_2$, $\partial_1Jg=g$, and $\|\partial_{x_j}Jg\|_2\le\ell_1\|\partial_{x_j}g\|_2$ for $j>1$. For the marginal $H(x')=\int_{a_1}^{b_1}h(s,x')\,ds$, they give $\|H\|_{H^1(\Omega')}\le\ell_1^{1/2}\|h\|_{H^1(\Omega)}$. Multiplication by the fixed smooth $\theta_1$ is bounded from $H^1(\Omega')$ to $H^1(\Omega)$ after viewing $\theta_1H$ as a function on $\Omega$, by the product rule and boundedness of $\theta_1,\theta_1'$. Hence $\|h-\theta_1H\|_{H^1(\Omega)}\le C\|h\|_{H^1(\Omega)}$. Applying the bounds for $J$ to the first component of the recursive $\mathscr R$ in [F4] gives an $H^1$ bound by $C\|h\|_{H^1}$. The remaining components are $\theta_1(x_1)(\mathscr R'H)(x')$; their $H^1(\Omega)$ norm is bounded by $C\|\mathscr R'H\|_{H^1(\Omega')}$. Starting with the one-dimensional bound for $J$ and applying this estimate inductively in the remaining dimensions proves $\|\mathscr Rh\|_{H^1(\Omega)}\le C_\Omega\|h\|_{H^1(\Omega)}$ for the explicit map in [F4]. Also $\phi_0=\phi-(\int_\Omega\phi\,dx)\theta$ satisfies $\|\phi_0\|_{H^1}\le C_\Omega\|\phi\|_{H^1}$, since $|\int_\Omega\phi\,dx|\le|\Omega|^{1/2}\|\phi\|_2$. Therefore
+-$|\langle p,\phi\rangle|\le C_\Omega(\|f\|_2+\mu\|\nabla u\|_2)\|\phi\|_{H^1}$. Density extends $p$ to $(H_0^1)'=H^{-1}$. [given, F3, F4, step 2.1, algebra, induction]
++3.1 The $H^1$ estimate in [F4] applies to exactly the map $\mathscr R$ chosen in step 2.1, so $\|\mathscr R\phi_0\|_{H^1}\le C_\Omega\|\phi_0\|_{H^1}$. Also
++$$\|\phi_0\|_{H^1}\le\left(1+|\Omega|^{1/2}\|\theta\|_{H^1}\right)\|\phi\|_{H^1},$$
++because $|\int_\Omega\phi\,dx|\le|\Omega|^{1/2}\|\phi\|_2$. The bound for $T$ in step 1.1 therefore gives
++$$|\langle p,\phi\rangle|\le C_\Omega\left(1+|\Omega|^{1/2}\|\theta\|_{H^1}\right)(\|f\|_2+\mu\|\nabla u\|_2)\|\phi\|_{H^1}.$$
++For $v\in H_0^1$, choose tests $\phi_n\to v$ in $H^1$ and define $p(v)=\lim_n\langle p,\phi_n\rangle$. The displayed estimate makes these real values Cauchy, and applying it to differences of two approximations proves that their limits agree. This defines the unique continuous extension to the closure $H_0^1$, with the same norm bound, hence $p\in H^{-1}$. This uses the quantitative assertion of [F4], rather than inferring any Sobolev estimate from test-space continuity alone. [given, F1, F4, step 1.1, step 2.1, algebra]
+ 
+ 4.1 For compactly supported smooth vector $\psi$, $\int_\Omega\operatorname{div}\psi\,dx=0$. The field $\psi-\mathscr R(\operatorname{div}\psi)$ is divergence-free, so [F4] and step 1.1 imply $\langle T,\mathscr R(\operatorname{div}\psi)\rangle=\langle T,\psi\rangle$. By the definition of distribution gradient,
+ $\langle\nabla p,\psi\rangle=-\langle p,\operatorname{div}\psi\rangle=\langle T,\psi\rangle$,
+-hence $\nabla p=T$ and $-\mu\Delta u+\nabla p=f$. If $p_1,p_2$ both work, then $\nabla(p_1-p_2)=0$. For every $h\in D_0(\Omega)$, write $h=\operatorname{div}(\mathscr Rh)$ using [F4]; the real pairing convention gives $\langle p_1-p_2,h\rangle=-\langle\nabla(p_1-p_2),\mathscr Rh\rangle=0$. Decomposing any test as $\phi_0+(\int_\Omega\phi\,dx)\theta$ shows $p_1-p_2$ is constant. The construction is linear in $f$ and the displayed bounds prove boundedness into the quotient. [given, F1, F3, F4, step 1.1, step 2.1, step 3.1, algebra] ∎
++hence $\nabla p=T$ and $-\mu\Delta u+\nabla p=f$. If $p_1,p_2$ both work, then $\nabla(p_1-p_2)=0$. For every $h\in D_0(\Omega)$, write $h=\operatorname{div}(\mathscr Rh)$ using [F4]; the real pairing convention gives $\langle p_1-p_2,h\rangle=-\langle\nabla(p_1-p_2),\mathscr Rh\rangle=0$. Decomposing any test as $\phi_0+(\int_\Omega\phi\,dx)\theta$ shows $p_1-p_2$ is constant. The variational identity and uniqueness imply that $u(af_1+bf_2)=au(f_1)+bu(f_2)$ for all real $a,b$; hence $T$ and the fixed-$\theta$ pressure construction are linear as well. Furthermore $\|u\|_{H^1}\le\sqrt{1+4R^2}\|\nabla u\|_2$: for this $u\in H_0^1$, [F5] gives $\|u\|_2\le2R\|\nabla u\|_2$. Together with the gradient bound and step 3.1, this bounds $\|u\|_{H^1}+\|[p]\|_{H^{-1}/\mathbb R}$ by a finite constant, depending on the fixed rectangle, $R$ and $\mu$, times $\|f\|_2$. [given, F1, F3, F4, F5, step 1.1, step 2.1, step 3.1, algebra] ∎
+ 

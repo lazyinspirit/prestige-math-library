@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "40",
+  "round": 0,
+  "reviewed_items": [
+    "post-fd-geophysical-model-branches",
+    "pthm-fd-geophysical-conditional-energy",
+    "ex-fd-coriolis-no-work"
+  ],
+  "reviewed_pages": [
+    "fd-pg01",
+    "fd-pg01-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The complete assigned inventory matches the approved geophysical approximation design. Both A/B pages are frontmatter-only, and all three claims are uninterrupted by links. The source-backed model assumptions, item uses, and page prerequisites were reviewed. Escalation is required because the mathematical energy supplier has an undeclared calculus prerequisite in its proof; a locally repairable frame-definition issue also needs attention on the postulate page.",
+  "findings": [
+    {
+      "id": "fd-stratified-energy-calculus-prerequisite-gap",
+      "type": "prerequisite",
+      "reason": "The assigned edge pthm-fd-geophysical-conditional-energy → thm-fd-stratified-linear-energy is load-bearing. The supplier's Proof 3.1 applies the fundamental theorem of calculus to periodic derivatives and integrates over the time-space rectangle, but its deps list only def-fd-rotating-stratified-shallow-equations. It needs an exact C1 fundamental-theorem-of-calculus result and a product-integration/Fubini justification with hypotheses matching its continuous integrands. A published root C1 result, lem-fundamental-theorem-and-integration-by-parts, is not in this workspace's math-imports; imported Fubini suppliers are also absent from the theorem's deps. Consumer proof steps 1.1–2.1 simply apply the supplier result, so this gap cannot be resolved on the assigned physics page. Owner reconciliation of the batch-39 supplier is required before accepting this consumer."
+    },
+    {
+      "id": "fd-geophysical-rotating-frame-definition",
+      "type": "local",
+      "reason": "The postulate defines a Cartesian inertial chart, then says “In this chart” it adopts a time-dependent rotating basis and uses rotating-frame velocity and Coriolis terminology. The cited frame definition says a frame is an adapted chart, not a basis field; this page does not give the rotating chart or basis map, its relation to the inertial chart, or the velocity-component convention. Define that rotating object precisely on the postulate page while preserving the displayed equation and sign. Also replace or define “smooth” alongside the more specific stated regularity."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pthm-fd-geophysical-conditional-energy",
+      "decision": "escalate",
+      "reason": "Its use of the postulated equation is consistent, and its proof hypotheses match the energy supplier. It inherits the undeclared calculus prerequisites through Proof steps 1.1–2.1, which require owner resolution at the supplier."
+    },
+    {
+      "id": "ex-fd-coriolis-no-work",
+      "decision": "accept",
+      "reason": "Its algebra follows from the explicitly stated component identity e3×u=(-u2,u1,0) and the signed acceleration term -f e3×u. A precise rotating-frame clarification can preserve these formulas; the example makes no empirical claim."
+    }
+  ]
+}

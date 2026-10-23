@@ -1,0 +1,35 @@
+{
+  "batch": "38",
+  "opened": [
+    "ex-fd-eddy-shear-production",
+    "fd-ples01",
+    "fd-ples01-examples",
+    "post-fd-eddy-viscosity-closure",
+    "pthm-fd-eddy-closure-resolved-dissipation"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "ex-fd-eddy-shear-production",
+      "location": "Example",
+      "defect": "ill-formed",
+      "evidence": "The Example declares “\\bar u_\\ell:I\\times\\mathbb T_L^3\\to\\mathbb R^3” and “k,\\nu_t\\in C^1(I\\times\\mathbb T_L^3),” but then takes “(x_0,t_0)\\in\\mathbb T_L^3\\times I” and evaluates \\bar u_\\ell(x_0,t_0), k(x_0,t_0), and \\nu_t(x_0,t_0). Those pairs have the reverse order from the declared domains; no swap map or reversed evaluation convention is specified.",
+      "severity": "fatal"
+    },
+    {
+      "id": "post-fd-eddy-viscosity-closure",
+      "location": "Postulate",
+      "defect": "ill-formed",
+      "evidence": "The Postulate declares u\\in C^1(I;C^\\infty(\\mathbb T_L^3;\\mathbb R^3)) and defines filtered fields using \\bar q_\\ell(x,t), while declaring k,\\nu_t\\in C^1(I\\times\\mathbb T_L^3) and combining them with D_\\ell in the modeled stress. It gives no common ordered domain or evaluation convention for these fields, so the displayed closure does not specify a well-typed field on one domain.",
+      "severity": "fatal"
+    },
+    {
+      "id": "pthm-fd-eddy-closure-resolved-dissipation",
+      "location": "Statement",
+      "defect": "ill-formed",
+      "evidence": "The Statement declares “k,\\nu_t\\in C^1(I\\times\\mathbb T_L^3),” then asserts the result at every “(x,t)\\in\\mathbb T_L^3\\times I” and evaluates \\nu_t(x,t). The stated pair is outside the declared ordered domain; no swap map or reversed evaluation convention is given.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Freshly read all five scoped carriers and checked the example calculation, postulate, theorem proof, and relevant filter, commutation, Newtonian-model, and energy-balance dependencies. The Fourier-space supplier was consulted only for its Definition and Facts as context; I make no batch-38 finding or separate owner-review verdict about it. I did not re-audit transitive mathematical proof histories, and the cited MIT OCW PDF was not retrievable in this read."
+}

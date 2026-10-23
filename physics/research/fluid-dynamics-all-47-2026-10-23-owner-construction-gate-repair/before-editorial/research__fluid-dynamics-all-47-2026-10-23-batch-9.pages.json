@@ -1,0 +1,548 @@
+[
+  {
+    "order": 377,
+    "id": "fd-f02",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Specified wall, thermal, periodic and initial data",
+    "companion": "fd-f02-examples",
+    "requires": [
+      "fd-f01",
+      "fd-mf02",
+      "countability-and-uncountability",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "lem-fd-moving-control-volume-transport",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Transport across a moving control boundary",
+        "reference": "items/lem-fd-moving-control-volume-transport.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-countable-choice",
+          "lem-fd-transport-and-density",
+          "lem-fd-c1-domain-jordan-integrals",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "lem-fd-transport-and-density": "mathematical-premise",
+          "lem-fd-c1-domain-jordan-integrals": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume countable choice: every countable family of nonempty sets has a choice function. Let $I\\subseteq\\mathbb R$ be an open interval, let $C_0\\subseteq\\mathbb R^3$ be a bounded open region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U_C$ be an open neighborhood of $\\overline{C_0}$. Let $X\\in C^2(I\\times U_C;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices onto open images (bijections with $C^2$ inverses and positive Jacobian determinant). Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous, and set $C(t)=X_t(C_0)$. Let $g$ be a scalar $C^1$ field on an open neighborhood of $\\{(t,x):x\\in\\overline{C(t)},\\,t\\in I\\}$. Define the boundary velocity by $w(t,X(t,\\xi))=\\partial_tX(t,\\xi)$ and let $n$ be the outward Euclidean unit normal on $\\partial C(t)$. Use Euclidean surface measure, whose chart density is $\\sqrt{\\det(DY^{\\mathsf T}DY)}$. Then\n$$\\frac{d}{dt}\\int_{C(t)}g(t,x)\\,dx =\\int_{C(t)}\\partial_tg(t,x)\\,dx+\\int_{\\partial C(t)}g(t,x)\\,w(t,x)\\cdot n(t,x)\\,dS_x.$$\nFor vector-valued $g$, the identity holds componentwise. No condition equating $w$ with a fluid velocity is required.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§§4.6.1–4.6.4, printed pp. 152–156."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/4bbeb3c0de9503422b6049d2f9760af9_13transthm.pdf",
+              "locator": "§1.3, complete 4-page moving-volume transport derivation."
+            }
+          ]
+        },
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-fd-boundary-data",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Specified wall, thermal, periodic and initial data",
+        "reference": "items/post-fd-boundary-data.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-fd-quantity-and-frame-conventions",
+          "def-fd-conservative-weak-form"
+        ],
+        "dependency_roles": {
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "def-fd-conservative-weak-form": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Work in the nonrelativistic SI fluid model on an open time interval $I\\subseteq\\mathbb R$ measured in seconds and oriented Euclidean three-space measured in metres. Let $\\Omega_t$ be the fluid region at time $t$ and $\\mathcal O:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$ its open spacetime region. Let $u:\\mathcal O\\to\\mathbb R^3$ be fluid velocity in metres per second, $T:\\mathcal O\\to(0,\\infty)$ absolute temperature in kelvins, and $q:\\mathcal O\\to\\mathbb R^3$ conductive heat flux in watts per square metre. A moving solid boundary is locally parameterized by a $C^2$ embedding $X_b:I\\times\\Xi\\to\\mathbb R^3$, where $\\Xi\\subseteq\\mathbb R^2$ is open and $D_\\xi X_b$ has rank two; its material boundary velocity is $w_b(t,X_b(t,\\xi)):=\\partial_tX_b(t,\\xi)$ in metres per second. The boundary patches have continuous outward Euclidean unit normal $n$. In the smooth branch, assume $u,T,q$ have continuous traces wherever boundary values are imposed. The no-penetration or impermeability condition is the adopted equality $(u-w_b)\\cdot n=0$ on the wall. When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall. Neither equality is deduced from an interior balance equation; no-slip is not part of the inviscid wall model unless explicitly adopted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf",
+              "locator": "§2.3.1 and §3.2.1, printed pp. 33–34 and 64–65."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§5.4.1, printed pp. 173–174; boundary conditions are separately specified."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Adopted impermeable/no-slip wall motion, alternative thermal exchange, periodic identification and evolution-specific initial data; no implied solvability or empirical universality."
+      },
+      {
+        "id": "pthm-fd-material-mass-continuity",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Material mass balance implies local continuity",
+        "reference": "items/pthm-fd-material-mass-continuity.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "lem-fd-transport-and-density",
+          "lem-fd-c1-domain-jordan-integrals"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "lem-fd-transport-and-density": "mathematical-premise",
+          "lem-fd-c1-domain-jordan-integrals": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant), and satisfy $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous; write $\\Omega_t=\\chi_t(B)$ and $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho\\in C^1(\\mathcal O)$ be positive mass densities, where $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Suppose that for every nonempty bounded open $V$ with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side and every $t\\in I$,\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\nThen the pointwise continuity equation\n$$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0$$\nholds throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$. The larger set $\\mathcal O$ is only the ambient regularity domain; no balance outside $\\chi_t(B)$ is assumed or concluded. This is a conditional deduction in the smooth material model and asserts no extension to weak fields or vacuum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§4.6.1, printed pp. 152–153."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/4bbeb3c0de9503422b6049d2f9760af9_13transthm.pdf",
+              "locator": "§1.3, complete 4-page moving-volume transport derivation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Smooth positive-density material branch: the adopted integral mass balance yields local continuity; no weak or vacuum extension is asserted.",
+        "proof_strategy": "direct",
+        "aliases": [
+          "lem-fd-material-mass-continuity"
+        ]
+      },
+      {
+        "id": "post-fd-weak-balances",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Integrable weak continuum balance and entropy adoption",
+        "reference": "items/post-fd-weak-balances.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-fd-conservative-weak-form",
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions"
+        ],
+        "dependency_roles": {
+          "def-fd-conservative-weak-form": "formulation-prerequisite",
+          "post-fd-continuum-balances": "formulation-prerequisite",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Work in a classical Cartesian inertial frame with SI units on a fixed open spatial region $\\Omega\\subseteq\\mathbb R^3$ and time interval $(0,T_f)$, where $T_f>0$ is measured in seconds. Write $L^1_{\\mathrm{loc}}$ for functions whose absolute value is integrable on every compact subset. Let all fields be measurable functions of $(t,x)$ on $\\Omega\\times(0,T_f)$. Require $T>0$ almost everywhere wherever $q/T$ or $r/T$ is used. Let $\\rho\\ge0$ be mass density in kilograms per cubic metre, $u$ velocity in metres per second, $\\sigma$ Cauchy stress in pascals, $b$ body acceleration in metres per second squared, $e$ specific internal energy in joules per kilogram, $q$ outward-positive conductive heat flux in watts per square metre, $r$ specific heat supply in watts per kilogram, $T>0$ absolute temperature in kelvins, and $s$ specific entropy in joules per kilogram kelvin. Set $E:=e+|u|^2/2$, use $t=\\sigma n$ for traction and rowwise matrix divergence, and define the test-gradient by $(\\nabla\\psi)_{ij}:=\\partial_{x_j}\\psi_i$ and the Frobenius product by $A:B:=\\sum_{i,j}A_{ij}B_{ij}$.\n\nA test function is a $C^1$ function on $\\Omega\\times[0,T_f)$, compactly supported in space-time and vanishing near $T_f$; it may be nonzero at $t=0$. Let scalar test functions be $\\phi,\\eta,\\zeta$ and vector test function be $\\psi$. Adopt as a separate weak-branch model assumption that the displayed conservative variables, fluxes and sources below belong to $L^1_{\\mathrm{loc}}$ and satisfy the following identities for every indicated test function. Initial conservative data $\\rho_0,m_0,\\mathcal E_0,S_0\\in L^1_{\\mathrm{loc}}(\\Omega)$ represent initial mass, momentum, total-energy and entropy densities; the initial terms specify distributional data and do not assert a strong trace.\n\nMass balance, for every scalar $\\phi$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho\\,\\partial_t\\phi+\\rho u\\cdot\\nabla\\phi\\bigr)\\,dx\\,dt+\\int_\\Omega\\rho_0\\phi(0,x)\\,dx=0.$$\n\nMomentum balance, for every vector $\\psi$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho u\\cdot\\partial_t\\psi+(\\rho u\\otimes u-\\sigma):\\nabla\\psi+\\rho b\\cdot\\psi\\bigr)\\,dx\\,dt+\\int_\\Omega m_0\\cdot\\psi(0,x)\\,dx=0.$$\n\nTotal-energy balance, for every scalar $\\eta$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho E\\,\\partial_t\\eta+(\\rho E u-\\sigma^{\\mathsf T}u+q)\\cdot\\nabla\\eta+(\\rho b\\cdot u+\\rho r)\\eta\\bigr)\\,dx\\,dt+\\int_\\Omega\\mathcal E_0\\eta(0,x)\\,dx=0.$$\n\nPhysical entropy inequality, for every nonnegative scalar $\\zeta\\ge0$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho s\\,\\partial_t\\zeta+(\\rho s u+q/T)\\cdot\\nabla\\zeta+(\\rho r/T)\\zeta\\bigr)\\,dx\\,dt+\\int_\\Omega S_0\\zeta(0,x)\\,dx\\le0.$$\n\nEvery conservative density, product, flux and source displayed in these tests is required to be locally integrable up to $t=0$, including $\\rho u\\otimes u$, $\\rho E u$, $\\sigma^{\\mathsf T}u$, $q/T$ and $\\rho r/T$: its absolute value has finite integral on every compact subset of $\\Omega\\times[0,T_f)$ in the relative topology, using its values for $t>0$. This condition assigns no point values at $t=0$ and asserts no strong initial trace. Interior test functions impose no boundary condition; walls, thermal exchange, periodic identifications and stronger initial trace conditions are separate data. This weak mass/momentum/energy adoption and the physical entropy inequality are not inferred for arbitrary discontinuous or vacuum states from the smooth balance postulate. The source term and the sign of the entropy inequality use the outward-positive heat-flux convention above.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§§4.4–4.8, printed pp. 141–160, and §9.4.1, printed pp. 379–382."
+            },
+            {
+              "title": "David Tong, Fluid Mechanics",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf",
+              "locator": "§3.1.2, printed pp. 62–63; smooth momentum-current and kinetic-work discussion only."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Separate adoption at discontinuities: locally integrable weak mass, momentum and total-energy balances plus physical entropy inequality; not inferred for arbitrary nonsmooth fields from smooth balances."
+      },
+      {
+        "id": "pthm-fd-continuous-source-local-balances",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local smooth balances with continuous body sources",
+        "reference": "items/pthm-fd-continuous-source-local-balances.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "pthm-fd-material-mass-continuity",
+          "lem-fd-transport-and-density",
+          "lem-fd-c1-domain-jordan-integrals",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "pthm-fd-material-mass-continuity": "physical-result",
+          "lem-fd-transport-and-density": "mathematical-premise",
+          "lem-fd-c1-domain-jordan-integrals": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume countable choice. Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and satisfy $\\chi(0,a)=a$, and set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Let $\\rho:\\mathcal O\\to(0,\\infty)$, $u:\\mathcal O\\to\\mathbb R^3$, $e:\\mathcal O\\to\\mathbb R$, $q:\\mathcal O\\to\\mathbb R^3$, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ be $C^1$ on $\\mathcal O$. Let $b:\\mathcal O\\to\\mathbb R^3$ and $r:\\mathcal O\\to\\mathbb R$ be continuous. Their SI units are respectively kilograms per cubic metre, metres per second, joules per kilogram, watts per square metre, pascals, metres per second squared, and watts per kilogram. Put $k=|u|^2/2$, $E=e+k$, $D_xu=(\\partial_{x_j}u_i)_{ij}$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $D_t=\\partial_t+u\\cdot\\nabla_x$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. Use rowwise divergence $(\\operatorname{div}\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$, vector divergence $\\operatorname{div}q=\\sum_j\\partial_{x_j}q_j$, and traction $t=\\sigma n$, where $n$ is the outward Euclidean unit normal and $q\\cdot n>0$ denotes heat leaving the material region.\n\nAssume pointwise mass continuity and, on every material region $P_t=\\chi_t(V)$ where $V$ is a nonempty bounded open reference region with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side, the adopted linear-momentum, angular-momentum, and total-energy balances\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma n\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma n)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}(\\rho b\\cdot u+\\rho r)\\,dx+\\int_{\\partial P_t}\\bigl(u\\cdot\\sigma n-q\\cdot n\\bigr)\\,dS.$$\nThe angular balance is about a fixed inertial origin and there are no surface couples or intrinsic spin. Then throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$, with $\\mathcal O$ retained only as the ambient regularity domain,\n$$\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u-\\sigma)=\\rho b,$$\n$$\\sigma=\\sigma^{\\mathsf T},$$\n$$\\partial_t(\\rho E)+\\operatorname{div}_x(\\rho E u-\\sigma^{\\mathsf T}u+q)=\\rho b\\cdot u+\\rho r,$$\nand\n$$\\partial_t(\\rho k)+\\operatorname{div}_x(\\rho k u-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D,\\qquad \\rho D_t e=\\sigma:D-\\operatorname{div}_xq+\\rho r.$$\nConversely, the pointwise momentum equation and symmetric stress imply the angular-momentum balance, and the pointwise total-energy equation implies its stated material integral balance. All deductions are conditional on the smooth model and do not assert existence of a solution.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§§4.2–4.5, printed pp. 129–152."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/9c89bd5fd8f9c4a4748a64e2c333acc1_15momem.pdf",
+              "locator": "§1.5, complete 2-page material momentum derivation."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/20946c507055a595c44422b3616a83da_41energy.pdf",
+              "locator": "§4.1, complete 3-page energy derivation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Smooth positive-density material branch with C1 stored fields and only continuous body acceleration and heat supply; no weak, shock, or vacuum extension.",
+        "proof_strategy": "direct",
+        "aliases": [
+          "lem-fd-continuous-source-local-balances"
+        ]
+      },
+      {
+        "id": "pthm-fd-conservation-jump-laws",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Fluid conservation and entropy jump conditions",
+        "reference": "items/pthm-fd-conservation-jump-laws.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-quantity-and-frame-conventions",
+          "lem-fd-weak-jump-consistency",
+          "post-fd-weak-balances",
+          "def-fd-conservative-weak-form"
+        ],
+        "dependency_roles": {
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "lem-fd-weak-jump-consistency": "mathematical-premise",
+          "post-fd-weak-balances": "physical-assumption",
+          "def-fd-conservative-weak-form": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open spatial region and $I=(0,T_f)$ a time interval in seconds, with $T_f>0$. Let $\\Sigma$ be a $C^1$ moving interface in $\\Omega\\times I$ that locally is the graph $x_3=h(t,x_1,x_2)$ and separates minus and plus sides. Let $n$ be the dimensionless Euclidean unit normal pointing from minus to plus, and let $V_n$ be the signed normal speed of $\\Sigma$ in metres per second. For a field with one-sided traces, define $[g]:=g_+-g_-$. Let $\\rho\\ge0$ be mass density in kilograms per cubic metre, $u$ velocity in metres per second, $\\sigma$ Cauchy stress in pascals, $e$ specific internal energy in joules per kilogram, $q$ outward-positive heat flux in watts per square metre, $T>0$ absolute temperature in kelvins, $s$ specific entropy in joules per kilogram kelvin, $b$ body acceleration in metres per second squared, and $r$ specific heat supply in watts per kilogram. Set $E:=e+|u|^2/2$ in joules per kilogram. Assume these fields are $C^1$ on each side up to $\\Sigma$, with finite continuous one-sided traces, and that all displayed products and sources are locally integrable. The sources are ordinary volume functions and have no measure concentrated on $\\Sigma$. Use traction $t=\\sigma n$, $(u\\otimes u)_{ij}=u_i u_j$, and rowwise matrix divergence $(\\operatorname{div}F)_i=\\sum_j\\partial_{x_j}F_{ij}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§4.7.1, printed pp. 156–157, and §9.4.1, printed pp. 379–382."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/9c89bd5f8f9c4a4748a64e2c333acc1_15momem.pdf",
+              "locator": "§1.5, complete 2-page material momentum derivation."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/20946c507055a595c44422b3616a83da_41energy.pdf",
+              "locator": "§4.1, complete 3-page energy derivation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Adopted weak balances on piecewise C1 states give Rankine–Hugoniot conservation and physical entropy jump conditions; no smooth-balance theorem through shocks or existence result.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-fd-cauchy-momentum-angular",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Cauchy stress, local momentum and stress symmetry",
+        "reference": "items/pthm-fd-cauchy-momentum-angular.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "pthm-fd-material-mass-continuity",
+          "pthm-fd-continuous-source-local-balances",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "pthm-fd-material-mass-continuity": "physical-result",
+          "pthm-fd-continuous-source-local-balances": "physical-result",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U\\subseteq\\mathbb R^3$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and satisfy $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Use SI units in a classical Cartesian inertial frame with absolute time; inertial changes have form $t^*=t+t_0$, $x^*=Qx+ct+d$, where $SO(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^{\\mathsf T}Q=I_3,\\det Q=1\\}$, $c$ is a constant relative velocity in metres per second, and $d$ is a constant spatial translation in metres. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho\\in C^1(\\mathcal O)$ be positive mass densities in kilograms per cubic metre, let $u\\in C^1(\\mathcal O;\\mathbb R^3)$ be velocity in metres per second, and let $b\\in C^0(\\mathcal O;\\mathbb R^3)$ be body acceleration in metres per second squared. Let $\\sigma\\in C^1(\\mathcal O;\\mathbb R^{3\\times3})$ be Cauchy stress in pascals, with traction $t(t,x,n)=\\sigma(t,x)n$ for every outward Euclidean unit normal $n$. For every nonempty bounded open reference region $V$ whose closure is compact in $B$ and whose $C^1$ boundary is locally a graph with the region on one side, put $P_t=\\chi_t(V)$. Adopt on each $P_t$ the material mass, linear-momentum and angular-momentum balances:\n\n$$\\int_{P_t}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da,\\qquad \\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{P_t}x\\times\\rho u\\,dx=\\int_{P_t}x\\times\\rho b\\,dx+\\int_{\\partial P_t}x\\times t(t,x,n)\\,dS.$$\n\nHere $dS$ is Euclidean surface measure, with chart density $\\sqrt{\\det(DY^{\\mathsf T}DY)}$. The angular momentum equation is about a fixed inertial origin; the model has no surface couples or intrinsic spin.\n\nAssume the Axiom of Choice. The adopted traction representation is pointwise unique. The local momentum and stress-symmetry conclusions below hold on the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$; the larger $\\mathcal O$ supplies ambient regularity only. With $D_tu:=\\partial_tu+(D_xu)u$ and rowwise divergence $(\\operatorname{div}\\sigma)_i:=\\sum_{j=1}^3\\partial_{x_j}\\sigma_{ij}$, the local momentum equation is\n\n$$\\rho D_tu=\\rho b+\\operatorname{div}\\sigma,$$\n\nequivalently\n\n$$\\partial_t(\\rho u)+\\operatorname{div}(\\rho u\\otimes u-\\sigma)=\\rho b,$$\n\nwhere $(u\\otimes u)_{ij}=u_i u_j$. The angular momentum balance with no couples implies $\\sigma=\\sigma^{\\mathsf T}$. Conversely, in this same smooth positive-density setting, the local momentum equation with symmetric $\\sigma$ implies the angular momentum balance. The model postulate adopts the traction representation; this theorem establishes its local balance consequences and uniqueness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf",
+              "locator": "§3.1.2, printed pp. 62–63."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§§4.2–4.3, printed pp. 129–141."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/207b0fbc8614ebc0a74c8e46d09f3758_14forces.pdf",
+              "locator": "§1.4, complete 4-page PDF."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/9c89bd5fd8f9c4a4748a64e2c333acc1_15momem.pdf",
+              "locator": "§1.5, complete 2-page PDF."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "The smooth nonpolar postulate adopts Cauchy traction; its mass, linear- and angular-momentum balances yield local momentum and symmetric stress.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-fd-control-volume-balances",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Moving control-volume mass and momentum",
+        "reference": "items/pthm-fd-control-volume-balances.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "pthm-fd-material-mass-continuity",
+          "pthm-fd-continuous-source-local-balances",
+          "lem-fd-moving-control-volume-transport",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "pthm-fd-material-mass-continuity": "physical-result",
+          "pthm-fd-continuous-source-local-balances": "physical-result",
+          "lem-fd-moving-control-volume-transport": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use a classical Cartesian inertial frame and SI units. Let $I\\subseteq\\mathbb R$ be a nonempty open time interval in seconds, let $C_0\\subseteq\\mathbb R^3$ be a nonempty bounded open region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $X:I\\times U_C\\to\\mathbb R^3$ be a $C^2$ family of orientation-preserving diffeomorphisms (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) on an open neighborhood $U_C\\supseteq\\overline{C_0}$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. The moving control region is $C(t):=X_t(C_0)$; its boundary velocity is $w(t,X(t,\\xi)):=\\partial_tX(t,\\xi)$ in metres per second. Let $\\Omega_t$ be the open fluid region and $\\mathcal O:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$; assume $\\overline{C(t)}\\subset\\Omega_t$ for every $t$. The fields $\\rho:\\mathcal O\\to(0,\\infty)$ and $u:\\mathcal O\\to\\mathbb R^3$ are $C^1$, $b:\\mathcal O\\to\\mathbb R^3$ is continuous, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ is $C^1$. Their units are respectively kilograms per cubic metre, metres per second, metres per second squared and pascals. Let $n$ be the outward Euclidean unit normal and use Euclidean surface measure, with chart density $\\sqrt{\\det(DY^{\\mathsf T}DY)}$. Set $(u\\otimes u)_{ij}:=u_i u_j$ and $(\\operatorname{div}\\sigma)_i:=\\sum_j\\partial_{x_j}\\sigma_{ij}$. Use traction $t=\\sigma n$. Assume the adopted single-component continuum mass and momentum balances and the Axiom of Choice.\n\nThen every such $C(t)$ satisfies\n\n$$\\frac{d}{dt}\\int_{C(t)}\\rho\\,dx=-\\int_{\\partial C(t)}\\rho\\,(u-w)\\cdot n\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{C(t)}\\rho u\\,dx=\\int_{C(t)}\\rho b\\,dx+\\int_{\\partial C(t)}\\sigma n\\,dS-\\int_{\\partial C(t)}\\rho u\\,\\bigl((u-w)\\cdot n\\bigr)\\,dS.$$\n\nOnly the normal component $w\\cdot n$ enters these balances. If $C(t)$ is material, so $w\\cdot n=u\\cdot n$ on its boundary, the relative mass and advective-momentum fluxes vanish. The conclusion is a conditional model deduction; it asserts no existence of a flow satisfying the balances.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§4.6.1–§4.6.4, printed pp. 152–156."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/4bbeb3c0de9503422b6049d2f9760af9_13transthm.pdf",
+              "locator": "§1.3, complete 4-page moving-volume transport derivation."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/9c89bd5fd8f9c4a4748a64e2c333acc1_15momem.pdf",
+              "locator": "§1.5, complete 2-page material momentum derivation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "C1 control-region motion with relative normal flux u-w and smooth field traces; no boundary-layer or control-surface model is inferred.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-fd-energy-decomposition",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Kinetic/internal/total energy and boundary work",
+        "reference": "items/pthm-fd-energy-decomposition.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "pthm-fd-material-mass-continuity",
+          "pthm-fd-continuous-source-local-balances",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-axiom-of-choice",
+          "post-fd-boundary-data"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "formulation-prerequisite",
+          "pthm-fd-material-mass-continuity": "physical-result",
+          "pthm-fd-continuous-source-local-balances": "physical-result",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "post-fd-boundary-data": "operational-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U\\subseteq\\mathbb R^3$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ be a motion with orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Use SI units in a classical Cartesian inertial frame. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho:\\mathcal O\\to(0,\\infty)$ be positive densities, and let $u:\\mathcal O\\to\\mathbb R^3$, $e:\\mathcal O\\to\\mathbb R$, $q:\\mathcal O\\to\\mathbb R^3$, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ be $C^1$; let $b:\\mathcal O\\to\\mathbb R^3$ and $r:\\mathcal O\\to\\mathbb R$ be continuous. Their units are respectively kilograms per cubic metre, metres per second, joules per kilogram, watts per square metre, pascals, metres per second squared, and watts per kilogram. Define $k:=|u|^2/2$, $E:=e+k$, $D_xu=(\\partial_{x_j}u_i)_{ij}$, $D:=(D_xu+(D_xu)^{\\mathsf T})/2$, $D_t:=\\partial_t+u\\cdot\\nabla_x$, and $A:B:=\\sum_{i,j}A_{ij}B_{ij}$. Use rowwise divergence $(\\operatorname{div}\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$ and vector divergence $\\operatorname{div}q=\\sum_j\\partial_{x_j}q_j$. For every nonempty bounded open $V$ whose closure is compact in $B$ and whose $C^1$ boundary is locally a graph with the region on one side, put $P_t=\\chi_t(V)$ and let $n$ be its outward Euclidean unit normal. Use Euclidean surface measure $dS$ with chart density $\\sqrt{\\det(DY^{\\mathsf T}DY)}$.\n\nAdopt, on each such material region,\n\n$$\\int_{P_t}\\rho\\,dx=\\int_V\\rho_0\\,da,\\qquad \\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma n\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{P_t}x\\times\\rho u\\,dx=\\int_{P_t}x\\times\\rho b\\,dx+\\int_{\\partial P_t}x\\times\\sigma n\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}(\\rho b\\cdot u+\\rho r)\\,dx+\\int_{\\partial P_t}\\bigl(u\\cdot\\sigma n-q\\cdot n\\bigr)\\,dS.$$\n\nThe angular-momentum balance is about a fixed inertial origin; assume no surface couples or intrinsic spin. Assume also the Axiom of Choice. On the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$, angular momentum gives $\\sigma=\\sigma^{\\mathsf T}$, and the local total-energy balance is\n\n$$\\partial_t(\\rho E)+\\operatorname{div}(\\rho E u-\\sigma^{\\mathsf T}u+q)=\\rho b\\cdot u+\\rho r.$$\n\nIt splits into the kinetic and internal-energy balances\n\n$$\\partial_t(\\rho k)+\\operatorname{div}(\\rho k u-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D,$$\n\n$$\\rho D_t e=\\sigma:D-\\operatorname{div}q+\\rho r.$$\n\nThus the boundary power flux is $-\\sigma^{\\mathsf T}u$ and the outward heat flux is $q$. If additionally $b=-\\nabla_x\\Phi$ for a time-independent $C^1$ scalar potential $\\Phi$ defined on an open spatial set containing every $\\Omega_t$, measured in joules per kilogram, and $r=0$, then\n\n$$\\partial_t\\bigl(\\rho(E+\\Phi)\\bigr)+\\operatorname{div}\\bigl(\\rho(E+\\Phi)u-\\sigma^{\\mathsf T}u+q\\bigr)=0.$$\n\nConsequently $\\int_C\\rho(E+\\Phi)\\,dx$ is constant on any bounded fixed $C^1$ region $C$ with closure contained in the fluid region throughout $I$, with no-slip $u=0$ and insulation $q\\cdot n=0$, or on a periodic cell with side lengths $L_j>0$ metres and opposite faces identified by translations when all fields and $\\Phi$ are periodic. All local equations above are asserted on $\\mathcal O_B$; the larger $\\mathcal O$ supplies ambient regularity only. These are deductions for any solution with the stated regularity; the theorem does not assert that a solution exists.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf",
+              "locator": "§3.1.2, printed pp. 62–63 (kinetic-energy balance; total/internal distinction)."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§§4.4–4.6, printed pp. 141–156."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/20946c507055a595c44422b3616a83da_41energy.pdf",
+              "locator": "§4.1, complete 3-page PDF."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Smooth positive-density balance branch: total energy splits into kinetic and internal energy; conservative potential and compatible no-slip/insulating or periodic data give a conditional global conservation law.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 378,
+    "id": "fd-f02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Specified wall, thermal, periodic and initial data — Examples",
+    "companion": "fd-f02",
+    "requires": [
+      "fd-f02"
+    ],
+    "items": [
+      {
+        "id": "cex-fd-vacuum-velocity-determination",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Conservative momentum alone does not fix vacuum velocity",
+        "reference": "items/cex-fd-vacuum-velocity-determination.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-fd-conservative-weak-form"
+        ],
+        "dependency_roles": {
+          "def-fd-conservative-weak-form": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Omega=(0,1)^3$ metres and $I=(0,T_f)$ with $T_f>0$. The weak conservative mass and momentum equations use mass density $\\rho$, velocity $u$, momentum density $\\rho u$, mass flux $\\rho u$, momentum flux $\\rho u\\otimes u-\\sigma$, and momentum source $\\rho b$, tested against compactly supported $C^1$ scalar and vector fields with the conservative initial-data terms. Set $\\rho\\equiv0$, $\\sigma\\equiv0$, $b\\equiv0$, and initial mass and momentum densities equal to zero. Both the velocity field $u_1\\equiv0$ and any fixed nonzero constant velocity field $u_2\\equiv v_*$ (with $v_*\\in\\mathbb R^3$ in metres per second) are bounded and smooth. The two choices have the same zero conservative mass and momentum variables and satisfy the same weak mass and momentum equations, although $u_1\\ne u_2$ everywhere. Thus those conservative equations alone do not determine a velocity on the set where $\\rho=0$. The example concerns the formal vacuum degeneracy of the equations, not a fluid-particle velocity in physical vacuum, and makes no claim about an energy or constitutive equation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "library": "physics",
+        "physical_scope": "Formal weak mass and momentum laws do not determine velocity on vacuum; this is not a claim that a material fluid occupies vacuum.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-fd-conduction-energy-entropy",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Conduction preserves energy while entropy increases",
+        "reference": "items/ex-fd-conduction-energy-entropy.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-fd-energy-decomposition",
+          "post-fd-boundary-data",
+          "post-fd-continuum-balances"
+        ],
+        "dependency_roles": {
+          "pthm-fd-energy-decomposition": "physical-result",
+          "post-fd-boundary-data": "operational-prerequisite",
+          "post-fd-continuum-balances": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L_1,L_2,L_3>0$ be side lengths in metres and let $Q:=\\prod_{j=1}^3[0,L_j]$ be a periodic cell, with opposite faces identified as in the periodic boundary-data model. Let $\\rho>0$ be constant mass density in kilograms per cubic metre, $c>0$ constant specific heat in joules per kilogram kelvin, $\\kappa>0$ constant thermal conductivity in watts per metre kelvin, $T_*>|a|>0$ a reference temperature and amplitude in kelvins, and $m\\in\\mathbb Z^3\\setminus\\{0\\}$. Put $k_j:=2\\pi m_j/L_j$ in inverse metres, $\\lambda:=\\kappa|k|^2/(\\rho c)$ in inverse seconds, and, for $t\\ge0$, define\n\n$$T(t,x):=T_*+a e^{-\\lambda t}\\cos(k\\cdot x),\\qquad u:=0,\\quad \\sigma:=0,\\quad b:=0,\\quad r:=0,\\quad q:=-\\kappa\\nabla T,$$\n\n$$e:=cT,\\qquad s:=c\\log(T/T_*).$$\n\nThen $T>0$, these fields satisfy the smooth balance equations on the periodic cell, and total internal energy $\\int_Q\\rho e\\,dx$ is constant. The physical entropy density satisfies\n\n$$\\partial_t(\\rho s)+\\operatorname{div}(q/T)=\\kappa\\frac{|\\nabla T|^2}{T^2}\\ge0,$$\n\nand the total entropy $\\int_Q\\rho s\\,dx$ is strictly increasing for every finite $t\\ge0$. This is an exact conditional calculation for the stated balance-law and caloric model; it is not an experimental observation or a constitutive claim about a particular substance.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§§4.4–4.5, printed pp. 141–152."
+            },
+            {
+              "title": "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics",
+              "url": "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/20946c507055a595c44422b3616a83da_41energy.pdf",
+              "locator": "§4.1, complete 3-page PDF."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact balance-law example with Fourier conduction on a periodic cell; no empirical measurement or claim about a named real fluid.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

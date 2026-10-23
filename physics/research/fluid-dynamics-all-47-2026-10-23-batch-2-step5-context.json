@@ -1,0 +1,189 @@
+{
+  "group": "h",
+  "batches": [
+    "2"
+  ],
+  "pages_read": [
+    "fd-mf01",
+    "fd-mf01-examples"
+  ],
+  "items_read": [
+    "def-fd-smooth-motion",
+    "lem-fd-transport-and-density",
+    "lem-fd-observer-calculus",
+    "ex-fdmath-dilation-jacobian"
+  ],
+  "conventions": [
+    {
+      "convention": "A smooth motion is jointly C² on I × U; its spatial slices are orientation-preserving C² diffeomorphisms, with J = det D_aχ > 0. The definition requires 0 ∈ I but does not impose χ(0,a) = a.",
+      "fixed_by": "def-fd-smooth-motion",
+      "matters_for": [
+        "lem-fd-transport-and-density",
+        "lem-fd-observer-calculus",
+        "ex-fdmath-dilation-jacobian",
+        "def-fd-quantity-and-frame-conventions"
+      ]
+    },
+    {
+      "convention": "Coordinates are time first: Ω = {(t,x): x ∈ χ_t(U)}. The Eulerian velocity is u(t,x) = ∂_tχ(t,A(t,x)), and D_tf = ∂_tf + (D_xf)u.",
+      "fixed_by": "def-fd-smooth-motion",
+      "matters_for": [
+        "lem-fd-transport-and-density",
+        "lem-fd-observer-calculus",
+        "ex-fdmath-dilation-jacobian"
+      ]
+    },
+    {
+      "convention": "Material transport integrates over arbitrary compact Jordan reference sets K ⊂ U using the zero-extension Riemann integral. Density-Jacobian invariance retains the full initial factor ρ(0,χ(0,a))J(0,a); positivity of ρ is not assumed.",
+      "fixed_by": "lem-fd-transport-and-density",
+      "matters_for": [
+        "ex-fdmath-dilation-jacobian",
+        "post-fd-continuum-balances",
+        "pthm-fd-smooth-material-kinematics",
+        "lem-fd-local-balance-equivalence"
+      ]
+    },
+    {
+      "convention": "Rigid observer changes preserve time and use x* = Q(t)x + c(t), with Q ∈ C²(I,SO(3)) and c ∈ C²(I,R³). Objectivity of a tensor means T* = QTQᵀ at corresponding events; these changes need not be inertial.",
+      "fixed_by": "lem-fd-observer-calculus",
+      "matters_for": [
+        "lem-fd-generalized-newtonian-dissipation",
+        "lem-fd-conformation-storage"
+      ]
+    },
+    {
+      "convention": "The dilation example assumes α > 0 and α(0) = 1, making χ(0,a) = a and J(0,a) = 1. Its density is a mathematical scalar field, without a positivity or empirical interpretation requirement.",
+      "fixed_by": "ex-fdmath-dilation-jacobian",
+      "matters_for": [
+        "ex-fdmath-dilation-jacobian"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-smooth-motion",
+      "statement": "For a jointly C² orientation-preserving motion χ:I × U → R³ with C² spatial inverses, define the joint inverse label A, F = D_aχ, J = det F, u(t,x) = ∂_tχ(t,A(t,x)), D_tf = ∂_tf + (D_xf)u, L = D_xu, D = (L + Lᵀ)/2, W = (L − Lᵀ)/2, θ = tr L, and D₀ = D − θI₃/3. The joint inverse A and velocity u are C¹. The definition also specifies pathlines and frozen-time streamlines on interval domains with one-sided endpoint derivatives.",
+      "used_by": [
+        "lem-fd-transport-and-density",
+        "lem-fd-observer-calculus",
+        "def-fd-quantity-and-frame-conventions",
+        "lem-fd-cauchy-contact",
+        "def-fd-nonnewtonian-laws"
+      ]
+    },
+    {
+      "id": "lem-fd-transport-and-density",
+      "statement": "Under the stated C² orientation-preserving motion hypotheses, A is jointly C², ∂_tF = L(t,χ)F, ∂_tJ = Jθ(t,χ), and J(t,a) = J(0,a)exp(∫₀ᵗθ(s,χ(s,a)) ds). For every compact Jordan K ⊂ U and C¹ scalar q on Ω, change of variables holds and d/dt ∫_{χ_t(K)}q = ∫_{χ_t(K)}(D_tq + qθ) = ∫_{χ_t(K)}(∂_tq + div(qu)). For C¹ scalar ρ on Ω, continuity is equivalent both to constancy of every material integral M_K and to ρ(t,χ(t,a))J(t,a) = ρ(0,χ(0,a))J(0,a) for every a and t.",
+      "used_by": [
+        "ex-fdmath-dilation-jacobian",
+        "post-fd-continuum-balances",
+        "pthm-fd-smooth-material-kinematics",
+        "lem-fd-local-balance-equivalence"
+      ]
+    },
+    {
+      "id": "lem-fd-observer-calculus",
+      "statement": "For the stated C² motion and rigid observer change x* = Q(t)x + c(t), u* = Q′x + Qu + c′, L* = QLQᵀ + Q′Qᵀ, D* = QDQᵀ, W* = QWQᵀ + Q′Qᵀ, θ* = θ, and a_m* = Qa_m + 2Q′u + Q″x + c″ at corresponding events. When Q′ = 0 and c″ = 0, acceleration transforms as a_m* = Qa_m.",
+      "used_by": [
+        "lem-fd-generalized-newtonian-dissipation",
+        "lem-fd-conformation-storage"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-euclidean-inverse-function-theorem",
+      "used_for": "Local C¹ inversion of H(t,a) = (t,χ(t,a)); uniqueness patches the local inverses. The transport proof separately bootstraps the inverse to C².",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Inverse-label differentiation, material derivatives, deformation-gradient evolution, and rigid-observer transformations.",
+      "opened": true
+    },
+    {
+      "id": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+      "used_for": "Polynomial cofactor formulas in the C² inverse bootstrap and the explicit columnwise derivation of the Jacobian evolution equation.",
+      "opened": true
+    },
+    {
+      "id": "def-riemann-integral-over-a-jordan-set",
+      "used_for": "The zero-extension convention for integrals over compact Jordan reference sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-integral-properties",
+      "used_for": "Linearity, monotonicity and absolute-value estimates in differentiation under the integral and continuous localization.",
+      "opened": true
+    },
+    {
+      "id": "lem-jordan-set-integral-well-defined",
+      "used_for": "Representing all fixed-domain integrals on a single containing rectangle without changing their values.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+      "used_for": "Integrability of continuous transported fields and their time derivatives on compact Jordan sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Uniform control of time difference quotients in transport proof step 7.1.",
+      "opened": true
+    },
+    {
+      "id": "cor-zero-total-derivative-on-a-convex-open-set-is-constant",
+      "used_for": "Constancy of the Jacobian integrating-factor product, material integrals, and density-Jacobian products on I.",
+      "opened": true
+    },
+    {
+      "id": "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+      "used_for": "Ensuring that each moving image χ_t(K) remains compact Jordan.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-compact-jordan-sets",
+      "used_for": "Pulling moving-domain Riemann integrals back to K with positive weight J, and returning continuous residual integrals to reference coordinates.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-fd-transport-and-density",
+      "concern": "Proof step 7.1 establishes the derivative-error bound only for times sufficiently close to t and then says, “Applying [F9] on int T”. The previously chosen T need not lie in that smaller neighborhood, whereas F9 requires its derivative bound throughout the convex open domain of application. Restricting the application to a smaller open interval containing the segment from t to t+k closes this immediately; the transport conclusion is unaffected.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "lem-fd-observer-calculus",
+      "concern": "The Statement references label Abeyaratne §3.8 as “printed pp. 89–91”. In the linked PDF, the velocity and acceleration formulas (3.96)–(3.97) occur on printed p. 92, and the velocity-gradient, strain-rate and spin formulas (3.101)–(3.102) and following display occur on printed p. 93. The section citation is correct, but the supplied page range omits the formulas supporting the principal conclusions. Source checked: https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf, PDF pages 111–112.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-riemann-integral-over-a-jordan-set",
+      "finding": "The published Definition contains inline hyperlinks, including “bounded in the metric sense of [[def-metric-bounded-diameter]]” and “proved in [[lem-jordan-set-integral-well-defined]]”, as well as links to def-jordan-inner-and-outer-content and thm-jordan-content-and-indicator-integrability. There is no following Definition references section. This violates the mandatory uninterrupted-definition rule; the mathematical zero-extension convention itself is adequate for this batch.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-f01",
+      "to": "fd-mf01",
+      "faithful": true,
+      "note": "Checked the supplier interfaces against def-fd-quantity-and-frame-conventions, post-fd-continuum-balances and pthm-fd-smooth-material-kinematics. The consumer explicitly adds χ(0,a)=a and SI conventions. Its transport citation preserves C² motion, C¹ density and positive J; its proof separately supplies open-C¹-region to compact-Jordan conversion and localization. Physical mass balance remains an adopted premise."
+    },
+    {
+      "from": "fd-mf02",
+      "to": "fd-mf01",
+      "faithful": true,
+      "note": "Checked the motion citation in lem-fd-cauchy-contact and the transport citation and uses in lem-fd-local-balance-equivalence. The cited transport formula matches the supplier, including positive J and compact Jordan reference sets. Proof step 1.1 explicitly supplies boundary-null conversion, local field restriction and time translation; vector transport is applied componentwise."
+    },
+    {
+      "from": "fd-mf04",
+      "to": "fd-mf01",
+      "faithful": true,
+      "note": "Checked def-fd-nonnewtonian-laws and the observer-calculus quotations and uses in lem-fd-generalized-newtonian-dissipation and lem-fd-conformation-storage. The coordinate convention x*=Qx+c, additive spin Q′Qᵀ and objective strain D*=QDQᵀ agree with the supplier. Stress objectivity and conformation covariance are derived using the consumers’ additional constitutive definitions."
+    }
+  ]
+}

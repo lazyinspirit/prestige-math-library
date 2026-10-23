@@ -1,0 +1,878 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "7",
+  "scope": [
+    "thm-fd-x07",
+    "thm-fd-x10",
+    "thm-fd-x11",
+    "ex-fd-x07-formal-verification",
+    "ex-fd-x10-formal-verification",
+    "ex-fd-x11-application"
+  ],
+  "contracts": {
+    "thm-fd-x07": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "For constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each component $i$, set $G_i=w_i\\nabla w_i\\in C^1(\\overline\\Omega;\\mathbb R^n)$. The product rule gives $\\nabla\\cdot G_i=|\\nabla w_i|^2+w_i\\Delta w_i$. Since $w_i=0$ on the boundary, $G_i\\cdot\\nu=w_i\\partial_\\nu w_i=0$ there. Apply [F3] to each $G_i$ and sum over $i$ to obtain $-\\int_\\Omega w\\cdot\\Delta w\\,dx=\\int_\\Omega|\\nabla w|^2\\,dx$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The field $G=qw$ is $C^1$ on $\\overline\\Omega$. Its divergence is $\\nabla q\\cdot w+q\\nabla\\cdot w$, and its boundary flux is $qw\\cdot\\nu=0$. Applying [F3] and using $\\nabla\\cdot w=0$ yields $\\int_\\Omega\\nabla q\\cdot w\\,dx=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $A=\\int_\\Omega|f|^2\\,dx$, $B=\\int_\\Omega|w|^2\\,dx$, and $C=\\int_\\Omega|f|\\,|w|\\,dx$. By [F2], $|\\int_\\Omega f\\cdot w\\,dx|\\le C$. For every $t\\in\\mathbb R$, $0\\le\\int_\\Omega(|f|-t|w|)^2\\,dx=A-2tC+t^2B$; if $B>0$, choosing $t=C/B$ gives $C^2\\le AB$, while if $B=0$, continuity forces $w=0$ throughout $\\Omega$ and hence $C=0$. Thus $|\\int_\\Omega f\\cdot w\\,dx|\\le\\|f\\|_2\\|w\\|_2$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "On the periodic channel, fix $(x,z,y)$ and set $g(s)=\\partial_y v(x,s,z)$, so $v(x,y,z)=\\int_0^y g(s)\\,ds$ because $v$ vanishes at $y=0$. By bilinearity and repeated integration, $|v(x,y,z)|^2=\\int_0^y\\int_0^y g(s)\\cdot g(t)\\,ds\\,dt$. By [F2] and $2ab\\le a^2+b^2$, this is at most $y\\int_0^y|g(s)|^2\\,ds\\le h\\int_0^h|g(s)|^2\\,ds$. Integrating over $0<y<h$ and the two periodic coordinates gives $\\|v\\|_{L^2(Q)}^2\\le h^2\\|\\partial_yv\\|_{L^2(Q)}^2\\le h^2\\|\\nabla v\\|_{L^2(Q)}^2$; periodic faces are identified and no $C^1$ Euclidean-domain theorem is invoked on this cell.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "For already-existing stationary fields in the comparison clause, [F1] gives $-\\mu\\Delta u_{\\rm NS}+\\nabla p_{\\rm NS}=-\\rho_0(u_{\\rm NS}\\cdot\\nabla)u_{\\rm NS}$ and $-\\mu\\Delta u_{\\rm S}+\\nabla p_{\\rm S}=0$. Subtraction shows $w=u_{\\rm NS}-u_{\\rm S}$ has zero trace and satisfies the residual equation with $q=p_{\\rm NS}-p_{\\rm S}$ and the stated $f$; it does not assert either field exists.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take the Euclidean inner product of $-\\mu\\Delta w+\\nabla q=f$ with $w$, integrate over $\\Omega$, and substitute steps 1.1 and 1.2. The result is $\\mu\\|\\nabla w\\|_2^2=\\int_\\Omega f\\cdot w\\,dx$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $r=\\|\\nabla w\\|_2$. Steps 2.1 and 1.3 and the assumed Poincare inequality give $\\mu r^2\\le C_\\Omega\\|f\\|_2r$. If $r=0$ the gradient bound is immediate; if $r>0$, division by $\\mu r$ gives $r\\le C_\\Omega\\|f\\|_2/\\mu$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the Poincare inequality once more to $w$ and then use step 3.1 to obtain $\\|w\\|_2\\le C_\\Omega r\\le C_\\Omega^2\\|f\\|_2/\\mu$. This proves both residual estimates.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The residual fields in step 1.5 satisfy the hypotheses of the first estimate, so steps 3.1 and 4.1 give the stated a-posteriori bounds whenever the explicit Poincare inequality holds.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.5",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for a connected domain and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 treat zero L2 norm and zero gradient norm separately; the residual estimates then hold directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-point or n=1 case; the Euclidean dimension is restricted to n≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 cover the zero-norm degeneracies without division by zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use zero trace on every boundary component to make the flux terms vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes exactly ACω, and steps 1.1 and 1.2 invoke the bounded-C1 divergence theorem with that hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a conditional estimate, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a conditional estimate, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "prerequisite_gaps": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "dependency_path": [
+            "thm-fd-x07",
+            "def-fd-x00"
+          ],
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md",
+          "current_carrier_status": "draft; Definition item; proof provenance not-applicable",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified."
+        }
+      ]
+    },
+    "thm-fd-x10": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "For constants $\\rho_0>0$ and $\\mu>0$, define the kinematic-viscosity parameter $\\nu=\\mu/\\rho_0$. The formal constant-density incompressible Navier--Stokes system is\n\n$$\\partial_tu+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0,\\qquad \\operatorname{div}u=0.$$\n\nIts associated formal Cauchy stress matrix is $\\sigma=-pI_3+\\mu(D_xu+(D_xu)^{\\mathsf T})$. The corresponding steady Stokes system is $\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$ together with $\\operatorname{div}u=0$; it omits both the time derivative and convective term. These are definitions of pointwise mathematical systems and do not assert that a physical fluid has a solution with the stated regularity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-x07",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge2$ and let $\\Omega\\subset\\mathbb R^n$ be a bounded $C^1$ domain, meaning a bounded connected open set whose boundary is locally a $C^1$ graph and which lies on one side of that graph after a rigid change of coordinates. Let $\\mu>0$, $w\\in C^2(\\overline\\Omega;\\mathbb R^n)$, $q\\in C^1(\\overline\\Omega)$, and $f\\in C(\\overline\\Omega;\\mathbb R^n)$; $C^k(\\overline\\Omega)$ means that derivatives through order $k$ extend continuously to the closure. Write $|a|$ for the Euclidean norm, $|\\nabla w|^2=\\sum_{i,j=1}^n|\\partial_jw_i|^2$, and $\\|g\\|_2=(\\int_\\Omega|g|^2\\,dx)^{1/2}$. Suppose pointwise that $\\nabla\\cdot w=0$, $w|_{\\partial\\Omega}=0$, and $-\\mu\\Delta w+\\nabla q=f$. Also assume that a stated constant $C_\\Omega>0$ satisfies the zero-trace Poincare inequality $\\|v\\|_2\\le C_\\Omega\\|\\nabla v\\|_2$ for every $v\\in C^1(\\overline\\Omega;\\mathbb R^n)$ with $v|_{\\partial\\Omega}=0$. Then\n\n$$\\|\\nabla w\\|_2\\le \\frac{C_\\Omega}{\\mu}\\|f\\|_2,\\qquad \\|w\\|_2\\le \\frac{C_\\Omega^2}{\\mu}\\|f\\|_2.$$\n\nFor the periodic channel cell $Q=\\mathbb T_{L_x}\\times(0,h)\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_z,h>0$. Integrals on $Q$ use Lebesgue measure on one fundamental cell in each periodic coordinate. Every $v\\in C^1(\\overline Q;\\mathbb R^3)$ periodic in the two torus variables and zero on $y=0,h$ satisfies $\\|v\\|_{L^2(Q)}\\le h\\|\\nabla v\\|_{L^2(Q)}$. This channel inequality is a separate direct estimate on the periodic cell; it does not treat that cell as a bounded $C^1$ Euclidean domain.\n\nIn dimension three, let $\\rho_0>0$, $\\nu=\\mu/\\rho_0$, and suppose already-existing time-independent fields $u_{\\rm NS},u_{\\rm S}\\in C^2(\\overline\\Omega;\\mathbb R^3)$ and $p_{\\rm NS},p_{\\rm S}\\in C^1(\\overline\\Omega)$ are divergence-free, have the same boundary velocity, and satisfy the constant-density incompressible Navier-Stokes and Stokes equations $\\rho_0(u_{\\rm NS}\\cdot\\nabla)u_{\\rm NS}+\\nabla p_{\\rm NS}-\\mu\\Delta u_{\\rm NS}=0$ and $\\nabla p_{\\rm S}-\\mu\\Delta u_{\\rm S}=0$. If $f=-\\rho_0(u_{\\rm NS}\\cdot\\nabla)u_{\\rm NS}$, then the preceding estimate applies to $w=u_{\\rm NS}-u_{\\rm S}$ and $q=p_{\\rm NS}-p_{\\rm S}$ whenever the stated Poincare bound holds. This is an a-posteriori residual estimate for already-given fields; it asserts no solution existence, no exterior-domain bound, and no error bound from Reynolds number alone. The constant $C_\\Omega=h$ established for the periodic channel is not transferred to an exterior domain.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The base field $U_b=(Sy,0,0)$ has $\\nabla\\cdot U_b=0$, $(U_b\\cdot\\nabla)U_b=0$, and $\\Delta U_b=0$, so with constant pressure it solves the stationary equation in [F1]. Its wall values are $0$ and $Sh(1,0,0)$. Subtracting this equation from [A1] and using $w=u-U_b$ gives $w_t+(U_b\\cdot\\nabla)w+(w\\cdot\\nabla)U_b+(w\\cdot\\nabla)w=-\\nabla q+\\nu\\Delta w$, $\\nabla\\cdot w=0$, and $w=0$ at both walls, where $q=p/\\rho_0$ up to an additive constant.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Pointwise, $2|w_1w_2|\\le w_1^2+w_2^2\\le|w|^2$. Integrating yields $|S|\\left|\\int_Qw_1w_2\\right|\\le\\frac{|S|}{2}E(t)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $E(t)=\\int_Q|w|^2$. Multiply the perturbation equation in step 1.1 by $w$ and integrate over one cell. The $U_b$ transport integral is $\\frac12\\int_Q\\nabla\\cdot(U_b|w|^2)=0$: $\\nabla\\cdot U_b=0$, its normal component vanishes at the $y$ walls, and paired periodic-face terms cancel. The nonlinear transport integral is $\\frac12\\int_Q\\nabla\\cdot(w|w|^2)=0$ because $\\nabla\\cdot w=0$, $w=0$ at the walls, and periodic-face terms cancel. The pressure integral is $-\\int_Q\\nabla\\cdot(qw)+\\int_Qq\\nabla\\cdot w=0$ for the same wall and periodic reasons. Componentwise integration by parts gives $\\int_Qw\\cdot\\Delta w=-\\|\\nabla w\\|_{L^2(Q)}^2$, with zero wall term and canceling periodic faces. Since $(w\\cdot\\nabla)U_b=S w_2(1,0,0)$, the remaining identity is $\\frac12E'(t)=-\\nu\\|\\nabla w\\|_{L^2(Q)}^2-S\\int_Qw_1w_2$. These integrations use the one-dimensional FTC on one periodic cell, not the bounded $C^1$ Euclidean divergence theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "From step 2.1 and step 1.2, $E'(t)\\le-2\\nu\\|\\nabla w\\|_{L^2(Q)}^2+|S|E(t)$. Apply [F2] with the carried exact $\\mathrm{AC}_\\omega$ premise [F4] to get $E'(t)\\le-(2\\nu/h^2-|S|)E(t)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $c=2\\nu/h^2-|S|>0$ by the stated strict condition. Then $\\frac{d}{dt}(e^{ct}E(t))=e^{ct}(E'(t)+cE(t))\\le0$ by step 3.1. Integrating from $0$ to $t$ gives $E(t)\\le e^{-ct}E(0)$ for every $t\\in[0,T]$, which is the claimed conditional decay.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The channel has positive lengths and height by hypothesis, so the empty-cell case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When S=0 the strict condition holds and step 4.1 yields decay; when E(0)=0 the nonnegative energy estimate forces E(t)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-point case is stated; the periodic lengths and channel height are positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 use the estimate without dividing by E, including E=0 and S=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 integrates on the closed assumed interval and gives equality at t=0; wall traces and paired periodic faces are handled in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement carries exactly ACω through the channel Poincare supplier; step 3.1 cites that supplier and the exact countable-choice assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a sufficient decay implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a sufficient decay implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "prerequisite_gaps": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "dependency_path": [
+            "thm-fd-x10",
+            "def-fd-x00"
+          ],
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md",
+          "current_carrier_status": "draft; Definition item; proof provenance not-applicable",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified."
+        }
+      ]
+    },
+    "thm-fd-x11": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-x00",
+          "source_section": "Definition",
+          "quote": "For a scalar field $f$, set $\\nabla f=(\\partial_{x_1}f,\\partial_{x_2}f,\\partial_{x_3}f)$; for a vector field $u=(u_1,u_2,u_3)$, set $\\operatorname{div}u=\\sum_{j=1}^3\\partial_{x_j}u_j$, $\\operatorname{curl}u=(\\partial_{x_2}u_3-\\partial_{x_3}u_2,\\partial_{x_3}u_1-\\partial_{x_1}u_3,\\partial_{x_1}u_2-\\partial_{x_2}u_1)$, and $\\Delta f=\\sum_{j=1}^3\\partial_{x_j}^2f$, with $\\Delta u$ applied componentwise. Define the row-component Jacobian $D_xu=(\\partial_{x_j}u_i)_{i,j}$ and $(u\\cdot\\nabla)u=\\sum_{j=1}^3u_j\\partial_{x_j}u$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using the planned supplier's pointwise Euclidean derivative convention [F1], substitute the upper and lower mode forms into the Laplace equations. Since $\\partial_{xx}$ multiplies each mode by $-k^2$ and $\\partial_{yy}$ multiplies the exponential profile by $k^2$, both potentials are harmonic; the chosen signs make them decay in their respective half-planes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $D_\\pm=\\lambda+ikU_\\pm$. The kinematic conditions at $y=0$ give $D_+H=-kA_+$ and $D_-H=kA_-$. Since $k>0$, $A_+=-D_+H/k$ and $A_-=D_-H/k$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Pressure continuity gives $-\\rho_0D_+A_+=-\\rho_0D_-A_-$. Substitute step 2.1 and use $\\rho_0>0$, $k>0$, and $H\\ne0$ to obtain $D_+^2+D_-^2=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $\\Lambda=\\lambda+ik\\overline U$. Then $D_+=\\Lambda+ik\\Delta U/2$ and $D_-=\\Lambda-ik\\Delta U/2$, so step 3.1 becomes $2\\Lambda^2-k^2(\\Delta U)^2/2=0$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Solving the quadratic gives $\\Lambda=\\pm k|\\Delta U|/2$, hence $\\lambda=-ik\\overline U\\pm k|\\Delta U|/2$. When $\\Delta U\\ne0$, the plus branch has positive real part $k|\\Delta U|/2$. Because the interface equations have real coefficients, real and imaginary parts of a complex mode separately solve them.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "On $\\mathbb T_{2\\pi}$ take an integer $k\\ge1$ and the growing-branch interface mode $\\eta_k(x,t)=a_k e^{k|\\Delta U|t/2}\\cos(k(x-\\overline U t))$, where $a_k=(1+k^2)^{-m/2}$. Its only nonzero Fourier coefficients at time $t$ are at $\\pm k$, each of magnitude $a_k e^{k|\\Delta U|t/2}/2$. Therefore $\\|\\eta_k(0)\\|_{H^m}^2=1/2$ and $\\|\\eta_k(t)\\|_{H^m}^2=e^{k|\\Delta U|t}/2$. For fixed $t>0$ and $\\Delta U\\ne0$, the first norm is uniformly bounded and the second diverges as $k\\to\\infty$, proving the stated failure of a uniform bound.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns nonzero normal-mode amplitudes and a nonempty periodic interface; no empty-interface case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 shows that ΔU=0 gives zero real growth rate; the positive-growth conclusion is expressly conditional on ΔU≠0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes k>0 and has no one-point spatial case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 retains the repeated zero-growth branch when ΔU=0; the Hm divergence argument assumes ΔU≠0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 calculates the normalized initial norm at t=0 and the evolved norm for each fixed t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite Fourier-mode calculation uses no choice principle or nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The dispersion relation is a direct consequence of the mode equations, not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The dispersion relation is a direct consequence of the mode equations, not a biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "prerequisite_gaps": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "dependency_path": [
+            "thm-fd-x11",
+            "def-fd-x00"
+          ],
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md",
+          "current_carrier_status": "draft; Definition item; proof provenance not-applicable",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified."
+        }
+      ]
+    },
+    "ex-fd-x07-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x07",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge2$ and let $\\Omega\\subset\\mathbb R^n$ be a bounded $C^1$ domain, meaning a bounded connected open set whose boundary is locally a $C^1$ graph and which lies on one side of that graph after a rigid change of coordinates. Let $\\mu>0$, $w\\in C^2(\\overline\\Omega;\\mathbb R^n)$, $q\\in C^1(\\overline\\Omega)$, and $f\\in C(\\overline\\Omega;\\mathbb R^n)$; $C^k(\\overline\\Omega)$ means that derivatives through order $k$ extend continuously to the closure. Write $|a|$ for the Euclidean norm, $|\\nabla w|^2=\\sum_{i,j=1}^n|\\partial_jw_i|^2$, and $\\|g\\|_2=(\\int_\\Omega|g|^2\\,dx)^{1/2}$. Suppose pointwise that $\\nabla\\cdot w=0$, $w|_{\\partial\\Omega}=0$, and $-\\mu\\Delta w+\\nabla q=f$. Also assume that a stated constant $C_\\Omega>0$ satisfies the zero-trace Poincare inequality $\\|v\\|_2\\le C_\\Omega\\|\\nabla v\\|_2$ for every $v\\in C^1(\\overline\\Omega;\\mathbb R^n)$ with $v|_{\\partial\\Omega}=0$. Then\n\n$$\\|\\nabla w\\|_2\\le \\frac{C_\\Omega}{\\mu}\\|f\\|_2,\\qquad \\|w\\|_2\\le \\frac{C_\\Omega^2}{\\mu}\\|f\\|_2.$$\n\nFor the periodic channel cell $Q=\\mathbb T_{L_x}\\times(0,h)\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_z,h>0$. Integrals on $Q$ use Lebesgue measure on one fundamental cell in each periodic coordinate. Every $v\\in C^1(\\overline Q;\\mathbb R^3)$ periodic in the two torus variables and zero on $y=0,h$ satisfies $\\|v\\|_{L^2(Q)}\\le h\\|\\nabla v\\|_{L^2(Q)}$. This channel inequality is a separate direct estimate on the periodic cell; it does not treat that cell as a bounded $C^1$ Euclidean domain.\n\nIn dimension three, let $\\rho_0>0$, $\\nu=\\mu/\\rho_0$, and suppose already-existing time-independent fields $u_{\\rm NS},u_{\\rm S}\\in C^2(\\overline\\Omega;\\mathbb R^3)$ and $p_{\\rm NS},p_{\\rm S}\\in C^1(\\overline\\Omega)$ are divergence-free, have the same boundary velocity, and satisfy the constant-density incompressible Navier-Stokes and Stokes equations $\\rho_0(u_{\\rm NS}\\cdot\\nabla)u_{\\rm NS}+\\nabla p_{\\rm NS}-\\mu\\Delta u_{\\rm NS}=0$ and $\\nabla p_{\\rm S}-\\mu\\Delta u_{\\rm S}=0$. If $f=-\\rho_0(u_{\\rm NS}\\cdot\\nabla)u_{\\rm NS}$, then the preceding estimate applies to $w=u_{\\rm NS}-u_{\\rm S}$ and $q=p_{\\rm NS}-p_{\\rm S}$ whenever the stated Poincare bound holds. This is an a-posteriori residual estimate for already-given fields; it asserts no solution existence, no exterior-domain bound, and no error bound from Reynolds number alone. The constant $C_\\Omega=h$ established for the periodic channel is not transferred to an exterior domain.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The field is periodic in $x,z$ and vanishes at $y=0,h$ because $\\sin(0)=\\sin(\\pi)=0$. Its only nonzero component is independent of $x$, so $\\nabla\\cdot w=0$, and $\\Delta w=-(\\pi/h)^2w$. Hence $-\\mu\\Delta w+\\nabla q=\\mu(\\pi/h)^2w=f$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Integrating $\\sin^2(\\pi y/h)$ over $0<y<h$ gives $h/2$, so $\\|w\\|_{L^2(Q)}^2=L_xL_z h/2$. The only nonzero derivative is $\\partial_yw_1=(\\pi/h)\\cos(\\pi y/h)$, whose squared integral gives $\\|\\nabla w\\|_{L^2(Q)}^2=L_xL_z(\\pi/h)^2(h/2)=(\\pi/h)^2\\|w\\|_{L^2(Q)}^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\pi>1$, step 1.2 gives $\\|w\\|_{L^2(Q)}=(h/\\pi)\\|\\nabla w\\|_{L^2(Q)}\\le h\\|\\nabla w\\|_{L^2(Q)}$. This explicitly verifies the channel inequality in [F1]; the field is only a worked channel residual, not an application of the general-domain residual estimate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive Lx, Lz and h, so its cell is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen sine field and its residual are nonzero for h, μ>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no one-point input or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "All geometric and viscosity parameters are strictly positive and the selected field is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero trace at y=0 and y=h."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example states ACω in A1 and imports the exact channel clause from the theorem in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The worked field verifies an inequality and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The worked field verifies an inequality and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "periodic channel sine field norms",
+          "status": "checked",
+          "evidence": "Direct integration gives ∫₀ʰsin²(πy/h)dy=∫₀ʰcos²(πy/h)dy=h/2, hence ||∇w||₂²=(π/h)²||w||₂² and ||w||₂=(h/π)||∇w||₂≤h||∇w||₂."
+        }
+      ],
+      "prerequisite_gaps": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "dependency_path": [
+            "ex-fd-x07-formal-verification",
+            "thm-fd-x07",
+            "def-fd-x00"
+          ],
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md",
+          "current_carrier_status": "draft; Definition item; proof provenance not-applicable",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified."
+        }
+      ]
+    },
+    "ex-fd-x10-formal-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x10",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $L_x,L_z,h,\\nu,\\rho_0>0$, $S\\in\\mathbb R$, and $T>0$. Set $Q=\\mathbb T_{L_x}\\times(0,h)\\times\\mathbb T_{L_z}$, with Lebesgue integration over one fundamental cell, and let $U_b(x,y,z)=(Sy,0,0)$. Let $u\\in C^1([0,T];C^2(\\overline Q;\\mathbb R^3))$ and $p\\in C([0,T];C^1(\\overline Q))$, periodic in $x,z$. Suppose $u$ is an already-existing solution of the constant-density incompressible Navier-Stokes equation $u_t+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$, $\\nabla\\cdot u=0$, with wall values $u|_{y=0}=0$ and $u|_{y=h}=Sh(1,0,0)$. Define $w=u-U_b$ and $E(t)=\\int_Q|w(t,x,y,z)|^2\\,dx\\,dy\\,dz$. If $|S|h^2/\\nu<2$, then for every $t\\in[0,T]$,\n\n$$E(t)\\le \\exp\\!\\left[-\\left(\\frac{2\\nu}{h^2}-|S|\\right)t\\right]E(0).$$\n\nThe condition is sufficient and is not asserted to be sharp. The estimate holds only on the interval where the assumed smooth solution exists; it proves neither existence on all time nor global three-dimensional regularity or a physical transition threshold.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The only nonzero component of $u$ is independent of $x$, so $\\nabla\\cdot u=0$ and $(u\\cdot\\nabla)u=0$. Direct differentiation gives $u_t=-a\\pi^2e^{-\\pi^2t}\\sin(\\pi y)(1,0,0)$ and $\\Delta u=-a\\pi^2e^{-\\pi^2t}\\sin(\\pi y)(1,0,0)$; hence $u_t+(u\\cdot\\nabla)u+\\rho_0^{-1}\\nabla p-\\nu\\Delta u=0$. Since $\\sin(0)=\\sin(\\pi)=0$, the stated wall values hold.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The perturbation is $w=a e^{-\\pi^2t}\\sin(\\pi y)(1,0,0)$. Integrating $\\sin^2(\\pi y)$ over $0<y<1$ and over both periods gives $E(t)=\\|w(t)\\|_{L^2(Q)}^2=2\\pi^2a^2e^{-2\\pi^2t}=e^{-2\\pi^2t}E(0)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Here $|S|h^2/\\nu=1$ and $2\\nu/h^2-|S|=1$. Applying [F1] gives $E(t)\\le e^{-t}E(0)$, while step 2.1 verifies the sharper exact decay because $2\\pi^2\\ge1$. The estimate is conditional on the stipulated supplier and assumptions.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a positive-height periodic channel with positive periodic length."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If a=0 the perturbation energy is zero, and steps 2.1–3.1 still satisfy the decay estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The worked parameters are S=ν=h=1, giving |S|h²/ν=1<2; step 3.1 checks the theorem condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At a=0 the perturbation energy is zero, and steps 2.1–3.1 still satisfy the decay estimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the exact wall values for every t≥0, including t=0; the energy identity in step 2.1 gives the initial endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states ACω and F1 records that the theorem interface carries it; the example does not strengthen the assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a sufficient estimate and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a sufficient estimate and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit Couette perturbation substitution",
+          "status": "checked",
+          "evidence": "For h=ν=S=1 and g=a e^(−π²t)sin(πy), g_t=g_yy, the convection term vanishes for this unidirectional field, wall values are 0 and 1, and E(t)=e^(−2π²t)E(0)≤e^(−t)E(0) since 2π²≥1."
+        }
+      ],
+      "prerequisite_gaps": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "dependency_path": [
+            "ex-fd-x10-formal-verification",
+            "thm-fd-x10",
+            "def-fd-x00"
+          ],
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md",
+          "current_carrier_status": "draft; Definition item; proof provenance not-applicable",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified."
+        }
+      ]
+    },
+    "ex-fd-x11-application": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-x11",
+          "source_section": "Statement",
+          "quote": "For $t\\in\\mathbb R$, assume fields are independent of any third spatial coordinate, so the cross-section has coordinates $(x,y)$. Use ordinary pointwise Euclidean partial derivatives and set $\\Delta=\\partial_{xx}+\\partial_{yy}$. Let $U_+,U_-\\in\\mathbb R$ be constant horizontal base velocities, and let the two half-planes $y>0$ and $y<0$ have the same constant density $\\rho_0>0$. The unknown interface displacement $\\eta(x,t)$ and scalar potentials $\\phi_+(x,y,t)$ for $y>0$ and $\\phi_-(x,y,t)$ for $y<0$ are smooth, have one-sided traces at $y=0$, satisfy $\\Delta\\phi_\\pm=0$, and decay together with their first derivatives as $y\\to+\\infty$ and $y\\to-\\infty$ respectively. The stipulated linear interface equations at $y=0$ are $(\\partial_t+U_\\pm\\partial_x)\\eta=\\partial_y\\phi_\\pm$ and continuity of the defined pressure perturbations $p'_\\pm=-\\rho_0(\\partial_t+U_\\pm\\partial_x)\\phi_\\pm$. Gravity and surface tension are absent. Complexify this real linear system for the following normal-mode calculation.\n\nFor every $k>0$, every nonzero complex amplitude $H$, and every mode of the form $\\eta=H e^{ikx+\\lambda t}$, $\\phi_+=A_+e^{-ky}e^{ikx+\\lambda t}$, $\\phi_-=A_-e^{ky}e^{ikx+\\lambda t}$, set $\\overline U=(U_++U_-)/2$ and $\\Delta U=U_+-U_-$. The mode equations require\n\n$$\\lambda=-ik\\overline U\\pm \\frac{k|\\Delta U|}{2}.$$\n\nIf $\\Delta U\\ne0$, one root has positive real part $k|\\Delta U|/2$, and its real or imaginary part gives a real exponentially growing solution of the stated linear system.\n\nFor the periodic interface $x\\in\\mathbb T_{2\\pi}$, define $\\widehat\\eta_j=(2\\pi)^{-1}\\int_0^{2\\pi}\\eta(x)e^{-ijx}\\,dx$ and, for $m\\ge0$, $\\|\\eta\\|_{H^m}^2=\\sum_{j\\in\\mathbb Z}(1+j^2)^m|\\widehat\\eta_j|^2$. Let $H^m(\\mathbb T_{2\\pi})$ be the completion of trigonometric polynomials in this norm. If $\\Delta U\\ne0$, then for every fixed $t>0$ this exact mode family has bounded initial $H^m$ norm but unbounded evolved $H^m$ norm as its integer wavenumber $k\\to\\infty$. Thus no uniform estimate of the form $\\|\\eta(t)\\|_{H^m}\\le C_t\\|\\eta(0)\\|_{H^m}$ holds for this family. This is a linear interface-model conclusion, not a theorem of nonlinear turbulent transition, viscous shear-layer behavior, or physical instability in a particular experiment.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The $x$-dependence of each potential is a sine or cosine and its $y$-dependence is $e^{-y}$ above or $e^y$ below, so $\\partial_{xx}\\phi_\\pm=-\\phi_\\pm$ and $\\partial_{yy}\\phi_\\pm=\\phi_\\pm$. Hence $\\Delta\\phi_\\pm=0$, and the exponential factors give the required decay.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At $y=0$, $(\\partial_t+\\partial_x)\\phi_+=2e^t\\sin x$ and $(\\partial_t-\\partial_x)\\phi_-=2e^t\\sin x$. Therefore $p'_+=p'_-=-2e^t\\sin x$, so pressure continuity holds.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $y=0$, $(\\partial_t+\\partial_x)\\eta=e^t(\\cos x-\\sin x)=\\partial_y\\phi_+$, while $(\\partial_t-\\partial_x)\\eta=e^t(\\cos x+\\sin x)=\\partial_y\\phi_-$. Thus both kinematic conditions hold.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Here $k=1$, $\\overline U=0$, and $\\Delta U=2$. The growing branch in [F1] has $\\lambda=1$, agreeing with the explicit factor $e^t$ in $\\eta$; this is one exact linear-model example only.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a nonzero periodic interface mode and contains no empty-set case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The selected amplitudes, density and wavenumber are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The worked mode uses k=1, and step 3.1 confirms the theorem growth rate λ=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes ΔU=2 and k=1, excluding the equal-velocity and zero-wavenumber degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 verify pressure continuity and both kinematic conditions at the interface y=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The explicit real Fourier mode uses no choice principle or nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct solution check, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct solution check, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit wavenumber interface substitution",
+          "status": "checked",
+          "evidence": "For U+=1, U−=−1, k=1, the exact mode has Ū=0 and ΔU=2, so the growing root is λ=1; direct differentiation in steps 1.1, 1.2 and 2.1 checks harmonicity, pressure continuity and both kinematic conditions."
+        }
+      ],
+      "prerequisite_gaps": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "dependency_path": [
+            "ex-fd-x11-application",
+            "thm-fd-x11",
+            "def-fd-x00"
+          ],
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md",
+          "current_carrier_status": "draft; Definition item; proof provenance not-applicable",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified."
+        }
+      ]
+    }
+  }
+}

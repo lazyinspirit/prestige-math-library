@@ -1,0 +1,11 @@
+# One bounded fresh native refuter coverage correction
+
+Run: fluid-dynamics-all-47-2026-10-23. Batch: 44. Owner authorization uses WORKFLOW.md's exact refuter-continuation protocol.
+
+Read CLAUDE.md, SCHEMA.md, WORKFLOW.md, ../PHYSICS-CONTENT-MODEL.md, briefs/refuter.md and briefs/tasks/alpha-3a-refuter.md. Retain all substantive obligations and the refuter's read-only source scope.
+
+Read CURRENT research/fluid-dynamics-all-47-2026-10-23-step3-scope-44.json, then perform a FRESH complete read of all six exact scoped carriers and the dependencies genuinely needed to test their claims: def-fd-solenoidal-surrogate-residual, ex-fd-unseen-input-shift, fd-l01, fd-l01-examples, prop-fd-surrogate-law-shift-observable, thm-fd-surrogate-residual-error. Do not substitute old coverage assertions for fresh reading.
+
+The original report is preserved verbatim at research/fluid-dynamics-all-47-2026-10-23-refute-44-before-coverage-correction.json, with its native receipt intact. It wrongly added def-fd-periodic-fourier-sobolev-spaces to the six owed IDs. This producer is not a valid batch44 reader in-run-dependency finding; dependencies read as context do not add opened coverage IDs. Preserve the old producer observation in that archive, without importing it as a batch44 flag or implying any verdict on its separate ongoing owner review. The extra producer is actually owned by batch17. Its historical inline-link observation from a different batch is not an owed batch44 flag or coverage ID. Preserve all historical observations and perform an independent current scoped read. Never alter pinned imports or original mathematics.
+
+Return the ordinary refute-report schema to research/fluid-dynamics-all-47-2026-10-23-refute-44.json, batch 44, opened exactly the CURRENT refuter_scope once each, not_opened [], and flagged only concrete CURRENT defects of those scoped carriers with precise evidence. A complete fresh read finding no such defects should return flagged []. State genuine reading limits in coverage_note. Do not edit source, pages, manifests, contracts, original reports or receipts. Only the new current refuter result is written through native dispatch. This is the single bounded correction for this unit; it grants no fabricated reading or coverage.

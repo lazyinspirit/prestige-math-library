@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "rem-fd-turbulence-and-closure-scope",
+    "ex-fd-reynolds-stress-sign-and-units"
+  ],
+  "contracts": {
+    "rem-fd-turbulence-and-closure-scope": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Remark requires $N\\ge1$ and has no empty family.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "and let $N\\ge1$."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Remark statement allows zero weights; their terms vanish in the finite sums and no division by a weight is used.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "Fix weights $a_j\\ge0$ with $\\sum_{j=1}^N a_j=1$."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Remark statement admits $N=1$; then the normalized weight is $1$, so $v_1=R=0$ and the identity reduces to the single member equation.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "and let $N\\ge1$."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Remark statement uses no inverse or nondegeneracy of $R$ in its covariance identity.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "and $R=\\sum_j a_jv_j\\otimes v_j$."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Remark states a pointwise identity on the open interval and makes no endpoint or limiting claim.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "Let $I\\subseteq\\mathbb R$ be an open interval."
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite family and its weights are supplied data; no choice principle is used.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "and let $N\\ge1$."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Remark states an identity and scope limits, not an equivalence.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "The exact finite weighted identity is"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Remark states an identity and scope limits, not an equivalence.",
+          "case_scope": {
+            "source_section": "Remark",
+            "source_excerpt": "The exact finite weighted identity is"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This non-proof remark records a conditional model identity and scope limits; it makes no computational or empirical claim requiring a finite check."
+    },
+    "ex-fd-reynolds-stress-sign-and-units": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fdmath-finite-reynolds-identity",
+          "source_section": "Statement",
+          "quote": "$$\\partial_t\\bar u+\\operatorname{div}(\\bar u\\otimes\\bar u)+\\nabla\\bar p=\\nu\\Delta\\bar u+\\bar f-\\operatorname{div}R.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "translation-fields-satisfy-finite-reynolds-hypotheses",
+          "step": "1.1",
+          "claim": "The explicit translations are smooth material motions with identity Jacobian; their constant Eulerian fields are divergence-free and solve each selected member equation with zero pressure, forcing, and viscosity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "equal-weight-covariance",
+          "step": "2.1",
+          "claim": "The equal-weight mean vanishes and direct substitution gives $R=c^2e\\otimes e$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-covariance-and-si-units",
+          "step": "3.1",
+          "claim": "The covariance quadratic form is a positive square; multiplying its units by the adopted mass density gives pascals, and the signed tensor correction has the opposite semidefinite sign.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "effective-stress-sign",
+          "step": "4.1",
+          "claim": "For constant density, multiplying the supplier's $-\\operatorname{div}R$ term gives $\\operatorname{div}(-\\rho_0R)$, establishing the stated sign under the adopted plus-divergence convention.",
+          "inputs": [
+            "F1",
+            "A1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes exactly two members, so the empty family is excluded.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take equal weights $a_1=a_2=1/2$."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both weights are fixed at $1/2$; zero weights are outside this example.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take equal weights $a_1=a_2=1/2$."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes a two-member family and makes no single-member claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take equal weights $a_1=a_2=1/2$."
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the quadratic-form sign without inverting $R$; $c>0$ makes this example's $R$ nonzero, and substituting $c=0$ yields $R=0$ without changing the formula.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Choose a unit vector $e$ and a speed $c>0$."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example is pointwise on an open time interval and makes no endpoint or limit claim.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $\\tau>0$ seconds, $I=(-\\tau,\\tau)$."
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The unit vector and positive speed are explicitly supplied; no choice principle is used.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Choose a unit vector $e$ and a speed $c>0$."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a worked identity, not an equivalence.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Then $\\bar u=0$, $R=c^2e\\otimes e$."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a worked identity, not an equivalence.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Then $\\bar u=0$, $R=c^2e\\otimes e$."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "equal-weight two-member covariance",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ],
+          "expected": "$R=\\frac12(ce\\otimes ce)+\\frac12((-ce)\\otimes(-ce))=c^2e\\otimes e$."
+        },
+        {
+          "name": "quadratic-form sign",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ],
+          "expected": "$z^{\\mathsf T}Rz=c^2(z\\cdot e)^2\\ge0$ and $z^{\\mathsf T}\\sigma_Rz=-\\rho_0c^2(z\\cdot e)^2\\le0$."
+        },
+        {
+          "name": "stress-divergence sign and dimensions",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 3.1",
+            "step 4.1"
+          ],
+          "expected": "$-\\rho_0\\operatorname{div}R=\\operatorname{div}(-\\rho_0R)$ for constant $\\rho_0$, with $[\\rho_0R]=\\mathrm{kg\\,m^{-1}s^{-2}}=\\mathrm{Pa}$."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic checks of a two-member finite sum and dimensional factors, not numerical experiments, sampled turbulence, or measured stress data."
+    }
+  }
+}

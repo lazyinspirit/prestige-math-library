@@ -1,0 +1,2657 @@
+{
+  "version": 1,
+  "level": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "lem-fd-torus-mean-zero-poincare",
+    "thm-fd-periodic-smooth-incompressible-energy",
+    "thm-fd-periodic-smooth-stability",
+    "thm-fd-smooth-sobolev-continuation",
+    "thm-fd-periodic-inviscid-limit",
+    "thm-fd-smooth-vorticity-identities",
+    "thm-fd-polytropic-energy",
+    "thm-fd-smooth-wall-energy-uniqueness",
+    "prop-fd-fluid-equation-scaling",
+    "lem-fd-2d-fourier-log-velocity-bound",
+    "lem-fd-2d-transport-commutator-l1-bound",
+    "thm-fd-global-two-dimensional-periodic-navier-stokes",
+    "ex-fd-acoustic-energy-mode",
+    "rem-fd-global-regularity-open",
+    "rem-fd-boundary-layer-low-mach-status"
+  ],
+  "contracts": {
+    "lem-fd-torus-mean-zero-poincare": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and $\\bar f=0$, $\\widehat f(0)=0$. Every nonzero $k\\in\\mathbb Z^d$ has $|k|^2\\ge1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], componentwise Parseval and the derivative-coefficient formula give $\\|f\\|_{L^2}^2=\\sum_{k\\ne0}|\\widehat f(k)|^2$ and $\\|\\nabla f\\|_{L^2}^2=\\sum_{k\\ne0}|k|^2|\\widehat f(k)|^2$. Termwise comparison using [step 1.1] yields $\\|f\\|_{L^2}^2\\le\\|\\nabla f\\|_{L^2}^2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both norms are nonnegative, so taking square roots proves the asserted inequality.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is the zero-mean L2 Poincare estimate; steps 1.1–3.1 remove the mean coefficient and compare |k|^2>=1 termwise. d is 1, 2 or 3 and N>=1; the component and lattice index sets are fixed nonempty sets, rather than variable possibly empty families.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is the zero-mean L2 Poincare estimate; steps 1.1–3.1 remove the mean coefficient and compare |k|^2>=1 termwise. d is 1, 2 or 3 and N>=1; the component and lattice index sets are fixed nonempty sets, rather than variable possibly empty families.",
+            "item_sha256": "d61668111cd89938f514bc3f86e028eaf288a50a26afed0e03c53eb5d4806a49",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement: for f=0 every coefficient and both norms vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement: the first nonzero frequency |k|=1 attains the termwise lower bound; f=e_1 cos(x_1) gives equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement fixes its regularity and parameter hypotheses and makes no degenerate-limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is the zero-mean L2 Poincare estimate; steps 1.1–3.1 remove the mean coefficient and compare |k|^2>=1 termwise. The Statement fixes d in {1,2,3}, N>=1 and smooth zero-mean fields; no dimension-zero or singular-limit extension is asserted. The zero field is separately admitted and its norms vanish.",
+            "item_sha256": "d61668111cd89938f514bc3f86e028eaf288a50a26afed0e03c53eb5d4806a49",
+            "row_sha256": "41920ec5d37c6a88da3a99d709233a1a7786f4bf91f2ac4b8b98fee9918b0b64",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no time interval, endpoint, or limiting parameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is the zero-mean L2 Poincare estimate; steps 1.1–3.1 remove the mean coefficient and compare |k|^2>=1 termwise. This is a spatial norm inequality with no time variable or limiting parameter; the nonzero-lattice lower bound in step 1.1 has no endpoint passage.",
+            "item_sha256": "d61668111cd89938f514bc3f86e028eaf288a50a26afed0e03c53eb5d4806a49",
+            "row_sha256": "4dea0c29b458a72a979790977c0afe42f7c210f991e52d872c9203020eccb2b5",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and the Statement: Countable Choice is explicit and the Parseval input is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is the zero-mean L2 Poincare estimate; steps 1.1–3.1 remove the mean coefficient and compare |k|^2>=1 termwise. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "d61668111cd89938f514bc3f86e028eaf288a50a26afed0e03c53eb5d4806a49",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is the zero-mean L2 Poincare estimate; steps 1.1–3.1 remove the mean coefficient and compare |k|^2>=1 termwise. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "d61668111cd89938f514bc3f86e028eaf288a50a26afed0e03c53eb5d4806a49",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "first nonzero torus mode",
+          "status": "checked",
+          "evidence": "For f=e_1 cos(x_1), normalized Parseval gives ||f||_2=||grad f||_2, so the unit constant is attained."
+        }
+      ]
+    },
+    "thm-fd-periodic-smooth-incompressible-energy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-smooth-periodic-incompressible-ivp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-torus-mean-zero-poincare",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $N\\ge1$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized Lebesgue measure $d\\mu=(2\\pi)^{-d}dx$. For a smooth real vector field $f:Q_d\\to\\mathbb R^N$, define its mean by $\\bar f=\\int_{Q_d}f\\,d\\mu$ and the Frobenius gradient norm by $|\\nabla f|^2=\\sum_{a=1}^N\\sum_{j=1}^d|\\partial_j f_a|^2$. If $\\bar f=0$, then $\\|f\\|_{L^2(Q_d)}\\le\\|\\nabla f\\|_{L^2(Q_d)}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $u$ is smooth, divergence-free, and periodic and satisfies the full equation in the Statement. Taking the $L^2$ inner product with $u$ gives $\\frac12\\frac{d}{dt}\\|u\\|_2^2=-\\int (u\\cdot\\nabla u)\\cdot u\\,d\\mu-\\int\\nabla\\pi\\cdot u\\,d\\mu+\\nu\\int u\\cdot\\Delta u\\,d\\mu$. The transport integral is $\\frac12\\int u\\cdot\\nabla|u|^2\\,d\\mu=0$, since it is the integral of a periodic divergence and $\\operatorname{div}u=0$. Periodic integration by parts gives $\\int\\nabla\\pi\\cdot u\\,d\\mu=-\\int\\pi\\,\\operatorname{div}u\\,d\\mu=0$ and $\\int u\\cdot\\Delta u\\,d\\mu=-\\|\\nabla u\\|_2^2$. Hence $\\frac12\\frac{d}{dt}\\|u\\|_2^2=-\\nu\\|\\nabla u\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrating the differential identity in step 1.1 from $0$ to $t$ and using $u(0)=u_0$ gives the asserted energy balance.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Integrating the full equation from step 1.1 over $Q_d$ shows that each component of $\\int_{Q_d}u\\,d\\mu$ has derivative zero: the transport is $\\operatorname{div}(u_i u)$, the pressure term is a periodic derivative, and the Laplacian term is a sum of periodic second derivatives. Since the initial mean is zero, $\\bar u(t)=0$ throughout the lifespan.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\nu>0$, [F2] and step 1.1 imply $\\frac{d}{dt}\\|u(t)\\|_2^2\\le-2\\nu\\|u(t)\\|_2^2$. Differentiating $e^{2\\nu t}\\|u(t)\\|_2^2$ therefore gives a nonpositive derivative, so $\\|u(t)\\|_2^2\\le e^{-2\\nu t}\\|u_0\\|_2^2$. Taking nonnegative square roots proves the stated decay.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is kinetic-energy equality and positive-viscosity decay; steps 1.1–3.1 cancel periodic transport/pressure and integrate the scalar energy equation. Q_d has d in {1,2,3}; the smooth solution and its nonempty local lifespan are already supplied. No empty spatial region or variable empty family is claimed.",
+            "item_sha256": "aadd45eec3eed12e40d3c9e83b7fadd7fa3ca2d51470f7a11cfd6e9aab6215d2",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the Statement: zero data give the zero solution by local uniqueness and both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement at t=0 reduces the balance to the identical initial energy."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and the Statement: when nu=0 the dissipation term vanishes and the kinetic energy is constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement integrate the continuous identity from t=0 through each time in the local lifespan."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement record Countable Choice for the local IVP and Parseval inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is kinetic-energy equality and positive-viscosity decay; steps 1.1–3.1 cancel periodic transport/pressure and integrate the scalar energy equation. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "aadd45eec3eed12e40d3c9e83b7fadd7fa3ca2d51470f7a11cfd6e9aab6215d2",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is kinetic-energy equality and positive-viscosity decay; steps 1.1–3.1 cancel periodic transport/pressure and integrate the scalar energy equation. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "aadd45eec3eed12e40d3c9e83b7fadd7fa3ca2d51470f7a11cfd6e9aab6215d2",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "periodic shear solution",
+          "status": "checked",
+          "evidence": "For u=A exp(-nu t) sin(x_2)e_1 and pi=0, direct differentiation gives u_t=nu Delta u, convective term zero, and the stated energy identity exactly."
+        }
+      ]
+    },
+    "thm-fd-periodic-smooth-stability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-smooth-periodic-incompressible-ivp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-polytropic-symmetric-variables",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, and put $a=(\\gamma-1)/2$. For positive density $\\rho>0$, define the polytropic pressure $p(\\rho)=\\kappa\\rho^\\gamma$, sound speed $c(\\rho)=\\sqrt{p'(\\rho)}=\\sqrt{\\kappa\\gamma}\\,\\rho^a$, and sound-speed variable $r=c/a$. The map $\\rho\\mapsto r$ is a smooth bijection $(0,\\infty)\\to(0,\\infty)$ with inverse $\\rho=(ar/\\sqrt{\\kappa\\gamma})^{1/a}$. For a velocity $u\\in\\mathbb R^d$, set $q=(r,u_1,\\ldots,u_d)\\in\\mathbb R^{d+1}$. Let $e_0,e_1,\\ldots,e_d$ be the standard basis of $\\mathbb R^{d+1}$, with $e_0$ the scalar coordinate and $e_j$ the velocity coordinate $u_j$. Define the real matrix\n$$A_j(q)=u_j I_{d+1}+ar(e_0e_j^{\\mathsf T}+e_je_0^{\\mathsf T}),\\qquad 1\\le j\\le d.$$\nEach $A_j(q)$ is symmetric and linear in $q$. The first-order system $q_t+\\sum_{j=1}^d A_j(q)\\partial_jq=0$ means the pair\n$$r_t+u\\cdot\\nabla r+ar\\,\\operatorname{div}u=0,\\qquad u_t+u\\cdot\\nabla u+ar\\nabla r=0.$$\nFor periodic use on $Q_d=(\\mathbb R/2\\pi\\mathbb Z)^d$, take normalized measure $d\\mu=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat q(k)=\\int q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and $\\|q\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat q(k)|^2$, componentwise; real fields satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. These are the periodic Fourier-space conventions used for $H^m$ in this development.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-smooth-polytropic-euler-ivp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, $a=(\\gamma-1)/2$, integer $s\\ge4$, and smooth real periodic maps $\\rho_0:\\mathbb T^d\\to(0,\\infty)$ and $u_0:\\mathbb T^d\\to\\mathbb R^d$, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, with $\\min_{x\\in\\mathbb T^d}\\rho_0(x)>0$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. For $\\rho>0$, set $p(\\rho)=\\kappa\\rho^\\gamma$ and $r(\\rho)=\\sqrt{\\kappa\\gamma}\\,\\rho^a/a$. Then there is $T>0$, depending only on $d,s,\\kappa,\\gamma$, $\\|(r(\\rho_0),u_0)\\|_{H^s}$, and $\\min r(\\rho_0)$, and a unique smooth real solution $(\\rho,u)$ on $[0,T]\\times\\mathbb T^d$ of\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad u_t+u\\cdot\\nabla u+\\rho^{-1}\\nabla(\\kappa\\rho^\\gamma)=0,$$\nwith initial data $(\\rho_0,u_0)$ and $\\rho(t,x)>0$. For every integer $m\\ge s$, $\\sup_{0\\le t\\le T}(\\|\\rho(t)\\|_{H^m}+\\|u(t)\\|_{H^m})<\\infty$. This conditional smooth periodic theorem concerns the isentropic barotropic model with strictly positive density; it asserts no continuation through vacuum or shocks and no viscous or temperature-coupled result.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-given-smooth-solutions-difference-energy",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $T>0$, and $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ with normalized measure $d\\mu=(2\\pi)^{-d}dx$. For $z:Q_d\\to\\mathbb R^M$, use componentwise Fourier coefficients $\\widehat z(k)=\\int_{Q_d}z(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and the weighted coefficient completion norm $\\|z\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat z(k)|^2$; the normalized Fourier isometry gives $\\|z\\|_2^2=\\sum_k|\\widehat z(k)|^2$, where $\\|z\\|_2=(\\int_{Q_d}|z|^2\\,d\\mu)^{1/2}$ and the pointwise component norm is Euclidean. In particular, $H^0=L^2$. For a map $z:[0,T]\\times Q_d\\to\\mathbb R^M$, smooth on the closed cylinder means that for every $m\\in\\mathbb N_0$ and spatial multi-index $\\alpha$, $\\partial_t^m\\partial_x^\\alpha z$ exists on $(0,T)\\times Q_d$ and extends continuously to $[0,T]\\times Q_d$; spatial derivatives are those of its periodic lift. For a spatial vector field define $\\operatorname{div}z=\\sum_{j=1}^d\\partial_jz_j$ and $\\Delta z=\\sum_{j=1}^d\\partial_j^2z$. Write $\\nabla z$ for the spatial Jacobian and $\\|\\nabla z(t)\\|_\\infty=\\sup_{x\\in Q_d}|\\nabla z(t,x)|_F$, where $|\\cdot|_F$ is the Euclidean Frobenius matrix norm. Let $P$ be the coefficientwise vector multiplier with $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. The equations below hold pointwise on $(0,T)\\times Q_d$ and at the time endpoints by continuous extension.\n\n(i) If $\\nu\\ge0$ and $u,v\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^d)$ satisfy, for each $z\\in\\{u,v\\}$,\n$$z_t+P((z\\cdot\\nabla)z)=\\nu\\Delta z,\\qquad \\operatorname{div}z=0,$$\nthen for every $t\\in[0,T]$, with $w=u-v$,\n$$\\|w(t)\\|_2^2\\le\\|w(0)\\|_2^2\\exp\\!\\left(2\\int_0^t\\|\\nabla v(\\tau)\\|_\\infty\\,d\\tau\\right).$$\n\n(ii) Let $N\\ge1$ and, for $1\\le j\\le d$, let $A_j:\\mathbb R^N\\to\\mathbb R^{N\\times N}$ be a fixed real-linear map whose image consists of symmetric matrices. If $q,r\\in C^\\infty([0,T]\\times Q_d;\\mathbb R^N)$ satisfy, for each $z\\in\\{q,r\\}$,\n$$z_t+\\sum_{j=1}^dA_j(z)\\partial_jz=0,$$\nthen for every $t\\in[0,T]$,\n$$\\|q(t)-r(t)\\|_2^2\\le\\|q(0)-r(0)\\|_2^2\\exp\\!\\left(C_{d,N,A}\\int_0^t(\\|\\nabla q(\\tau)\\|_\\infty+\\|\\nabla r(\\tau)\\|_\\infty)\\,d\\tau\\right),$$\nwhere $C_{d,N,A}$ depends only on $d,N$ and the operator norms of the finitely many maps $A_j$. For either pair $(z_1,z_2)=(u,v)$ or $(q,r)$, put $w=z_1-z_2$. Let $\\Gamma\\ge0$ be any uniform rate for which the corresponding squared $L^2$ estimate above gives $\\|w(t)\\|_2^2\\le\\|w(0)\\|_2^2e^{\\Gamma t}$. If $s\\ge1$ and $\\max_{t\\in[0,T]}\\max(\\|z_1(t)\\|_{H^s},\\|z_2(t)\\|_{H^s})\\le M$ for some $M\\ge0$, define\n$$B_s(M)=\\begin{cases}1,&s=1,\\\\(2M)^{(s-1)/s},&s>1.\\end{cases}$$\nThen for every $t\\in[0,T]$,\n$$\\|w(t)\\|_{H^{s-1}}\\le B_s(M)\\|w(0)\\|_2^{1/s}e^{\\Gamma t/(2s)}.$$\nThese are conditional estimates for already given smooth maps on the stated cylinder and assert no existence theorem. All quantities are mathematical and no physical units are assigned to $\\nu$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fd-periodic-leray-pressure-maps",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(k)=P_ka(k)$ for every $k\\in\\mathbb Z^d$, where $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. For $q\\in H^s(Q_d)$, define $\\partial_jq\\in H^{s-1}(Q_d)$ coefficientwise by $\\widehat{\\partial_jq}(k)=ik_j\\widehat q(k)$; for vector fields set $\\widehat{\\nabla q}(k)=ik\\widehat q(k)$, and for tensor fields set $\\widehat{\\operatorname{div}F}_i(k)=i\\sum_jk_j\\widehat F_{ij}(k)$. These derivative maps are bounded from $H^s$ to $H^{s-1}$. The multipliers $P$ and $Q$ are real-preserving and bounded on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with these derivatives. For every $F$ and every $k\\in\\mathbb Z^d$, their exact identity is the coefficientwise equality\n$$\\widehat{\\nabla QF}(k)=-(I-P_k)\\widehat{\\operatorname{div}F}(k).$$\nIn particular, both sides have zero coefficient at $k=0$.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] separately to each smooth divergence-free initial velocity and its fixed viscosity. Each local lifespan is positive; restricting both solutions to the minimum of those two lifespans gives a common $[0,T]$, and the local theorem's all-order bounds remain finite there.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For possibly different viscosities, subtract the two projected equations. The identity $u^{\\nu_1}\\cdot\\nabla u^{\\nu_1}-u^{\\nu_2}\\cdot\\nabla u^{\\nu_2}=u^{\\nu_1}\\cdot\\nabla w+w\\cdot\\nabla u^{\\nu_2}$ gives\n$w_t+P(u^{\\nu_1}\\cdot\\nabla w+w\\cdot\\nabla u^{\\nu_2})=\\nu_1\\Delta w+(\\nu_1-\\nu_2)\\Delta u^{\\nu_2}$.\nPair with $w$. Since $Pw=w$ and $P$ is self-adjoint, it disappears from the inner product. Periodicity and $\\operatorname{div}u^{\\nu_1}=0$ cancel the first transport term; the second is bounded by $L(t)\\|w\\|_2^2$; and $\\nu_1\\int w\\cdot\\Delta w=-\\nu_1\\|\\nabla w\\|_2^2\\le0$. Thus, with $R(t)=|\\nu_1-\\nu_2|\\|\\Delta u^{\\nu_2}(t)\\|_2$, $\\frac12(\\|w\\|_2^2)'\\le L(t)\\|w\\|_2^2+R(t)\\|w\\|_2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the polytropic branch, [F2] places the two given solutions in the symmetric system with linear symmetric matrices. Applying the symmetric part of [F3] and integrating its scalar differential inequality with its integrating factor gives the displayed squared $L^2$ estimate.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the incompressible case with equal viscosity, [F3] applies to the solutions from step 1.1 and yields the stated squared $L^2$ difference inequality. Multiplying by $\\exp(-2\\int_0^tL(\\tau)\\,d\\tau)$ and differentiating gives a nonincreasing product, hence the asserted norm estimate after taking square roots.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Replace $\\|w\\|_2$ by $y_\\epsilon=(\\|w\\|_2^2+\\epsilon^2)^{1/2}$, differentiate, integrate the scalar inequality from step 1.2 with factor $\\exp(-\\int_0^tL)$, and let $\\epsilon\\downarrow0$. This yields the displayed residual estimate, including times at which $w=0$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $s\\ge1$, weighted coefficient Holder gives\n$\\|w\\|_{H^{s-1}}\\le\\|w\\|_2^{1/s}\\|w\\|_{H^s}^{(s-1)/s}$.\nUsing the common $H^s$ bound $M$ from step 1.1 yields the stated factor $(2M)^{(s-1)/s}$ for either solution pair.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the coefficient Holder estimate from step 3.1 to the two symmetric states. Their common $H^s$ bound gives the same $H^{s-1}$ continuity estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion bounds differences of two supplied solutions; steps 1.2 and 2.2 treat the viscosity residual, step 1.3 the symmetric branch, and steps 3.1–4.1 interpolate. Both solution pairs live on Q_d, d>=1, and a supplied common [0,T] with T>0. The two solution objects are specified, not an arbitrarily empty collection.",
+            "item_sha256": "f33149706aada6ac220a32330d9af6f93baae7a97874b87629d3b809b3d8e2ff",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement: equal initial velocities with equal viscosity give zero difference; the residual estimate also vanishes when its forcing difference is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement treats the boundary case nu_1=nu_2 and recovers the equal-viscosity estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Statement remain valid when one viscosity is zero; nu_1=nu_2 removes the residual term."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement gives equality at t=0 and holds throughout the common interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and the Statement use the explicit Countable Choice assumption for the local solution inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion bounds differences of two supplied solutions; steps 1.2 and 2.2 treat the viscosity residual, step 1.3 the symmetric branch, and steps 3.1–4.1 interpolate. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "f33149706aada6ac220a32330d9af6f93baae7a97874b87629d3b809b3d8e2ff",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion bounds differences of two supplied solutions; steps 1.2 and 2.2 treat the viscosity residual, step 1.3 the symmetric branch, and steps 3.1–4.1 interpolate. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "f33149706aada6ac220a32330d9af6f93baae7a97874b87629d3b809b3d8e2ff",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fd-smooth-sobolev-continuation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-smooth-periodic-incompressible-ivp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-smooth-polytropic-euler-ivp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, $a=(\\gamma-1)/2$, integer $s\\ge4$, and smooth real periodic maps $\\rho_0:\\mathbb T^d\\to(0,\\infty)$ and $u_0:\\mathbb T^d\\to\\mathbb R^d$, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, with $\\min_{x\\in\\mathbb T^d}\\rho_0(x)>0$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. For $\\rho>0$, set $p(\\rho)=\\kappa\\rho^\\gamma$ and $r(\\rho)=\\sqrt{\\kappa\\gamma}\\,\\rho^a/a$. Then there is $T>0$, depending only on $d,s,\\kappa,\\gamma$, $\\|(r(\\rho_0),u_0)\\|_{H^s}$, and $\\min r(\\rho_0)$, and a unique smooth real solution $(\\rho,u)$ on $[0,T]\\times\\mathbb T^d$ of\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad u_t+u\\cdot\\nabla u+\\rho^{-1}\\nabla(\\kappa\\rho^\\gamma)=0,$$\nwith initial data $(\\rho_0,u_0)$ and $\\rho(t,x)>0$. For every integer $m\\ge s$, $\\sup_{0\\le t\\le T}(\\|\\rho(t)\\|_{H^m}+\\|u(t)\\|_{H^m})<\\infty$. This conditional smooth periodic theorem concerns the isentropic barotropic model with strictly positive density; it asserts no continuation through vacuum or shocks and no viscous or temperature-coupled result.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-polytropic-symmetric-variables",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, and put $a=(\\gamma-1)/2$. For positive density $\\rho>0$, define the polytropic pressure $p(\\rho)=\\kappa\\rho^\\gamma$, sound speed $c(\\rho)=\\sqrt{p'(\\rho)}=\\sqrt{\\kappa\\gamma}\\,\\rho^a$, and sound-speed variable $r=c/a$. The map $\\rho\\mapsto r$ is a smooth bijection $(0,\\infty)\\to(0,\\infty)$ with inverse $\\rho=(ar/\\sqrt{\\kappa\\gamma})^{1/a}$. For a velocity $u\\in\\mathbb R^d$, set $q=(r,u_1,\\ldots,u_d)\\in\\mathbb R^{d+1}$. Let $e_0,e_1,\\ldots,e_d$ be the standard basis of $\\mathbb R^{d+1}$, with $e_0$ the scalar coordinate and $e_j$ the velocity coordinate $u_j$. Define the real matrix\n$$A_j(q)=u_j I_{d+1}+ar(e_0e_j^{\\mathsf T}+e_je_0^{\\mathsf T}),\\qquad 1\\le j\\le d.$$\nEach $A_j(q)$ is symmetric and linear in $q$. The first-order system $q_t+\\sum_{j=1}^d A_j(q)\\partial_jq=0$ means the pair\n$$r_t+u\\cdot\\nabla r+ar\\,\\operatorname{div}u=0,\\qquad u_t+u\\cdot\\nabla u+ar\\nabla r=0.$$\nFor periodic use on $Q_d=(\\mathbb R/2\\pi\\mathbb Z)^d$, take normalized measure $d\\mu=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat q(k)=\\int q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and $\\|q\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat q(k)|^2$, componentwise; real fields satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. These are the periodic Fourier-space conventions used for $H^m$ in this development.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In either branch, the corresponding local theorem [F1] or [F2] gives a nonempty interval of smooth solution. Local uniqueness makes any two such solutions with the same data agree on their common interval. Taking the union over all right endpoints on which a solution exists therefore defines a unique solution on an interval $[0,T^*)$, where $T^*$ is the supremum of those endpoints; the same local uniqueness makes the union well-defined and maximal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the incompressible branch, let $M=\\sup_{t<T^*}\\|u(t)\\|_{H^s}<\\infty$ and $M_1=\\max\\{1,M\\}$. The current proof of [F1] gives a restart lifespan at least $\\epsilon=\\min\\{1,(2C_sM_1)^{-1}\\}>0$ for every datum $u(t_0)$ with $t_0<T^*$. Choose $t_0<T^*$ with $T^*-t_0<\\epsilon/2$. The local theorem applied at $t_0$ gives a smooth solution beyond $T^*$; by [F1] uniqueness it agrees with the maximal solution on the overlap $[t_0,T^*)$. Patching them extends $u$ beyond $T^*$, as required.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the polytropic branch, let $M=\\sup_{t<T^*}\\|q(t)\\|_{H^s}<\\infty$, $M_1=\\max\\{1,M\\}$, and $r_*=\\inf_{t<T^*,\\,x\\in Q_d}r(t,x)>0$. By [F2], every restart datum has an $H^s$ lifespan at least $(2C_sM_1)^{-1}$, while positivity persists for at least $r_*/(2C_1M_1^2)$. Thus $\\epsilon=\\min\\{1,(2C_sM_1)^{-1},r_*/(2C_1M_1^2)\\}>0$ works uniformly for all $q(t_0)$. Choose $t_0$ with $T^*-t_0<\\epsilon/2$ and apply [F2] at $q(t_0)$. Uniqueness on the overlap gives a smooth extension of $q$ beyond $T^*$; the positive lower bound keeps the inverse map $\\rho=(ar/\\sqrt{\\kappa\\gamma})^{1/a}$ smooth there.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The maximality in the Statement rules out a finite endpoint satisfying either set of bounds. The constructed extensions establish both continuation conclusions without requiring a limit of the solution at $T^*$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is continuation under uniform Hs bounds, with a positive lower r bound in the polytropic branch; steps 2.1–2.2 restart before T* and patch by uniqueness. Step 1.1 starts from the nonempty local existence interval; its union of compatible intervals is consequently nonempty. Q_d is nonempty for d in {1,2,3}.",
+            "item_sha256": "470f7e5a487aeece8d6b022c2869d583f0488d0ba4d4f7a16667458adf49b3d7",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement uses max(1,M), so the zero-norm incompressible datum still has a positive restart lifespan."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement contains no singleton or one-element cardinality assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is continuation under uniform Hs bounds, with a positive lower r bound in the polytropic branch; steps 2.1–2.2 restart before T* and patch by uniqueness. There is no finite-family cardinality input: the objects are one given maximal trajectory in either equation branch, and the issue is restarting at its finite maximal time.",
+            "item_sha256": "470f7e5a487aeece8d6b022c2869d583f0488d0ba4d4f7a16667458adf49b3d7",
+            "row_sha256": "4d6e330e48ac80cec0dd80661c1afbcbc0b110435f8604e901eb862feddb50da",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and the Statement require a finite maximal endpoint and the stated uniform norm and positivity bounds; no endpoint limit is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement restart before the finite endpoint and patch by uniqueness on overlap."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and the Statement inherit the explicit Countable Choice premise of both local IVP suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is continuation under uniform Hs bounds, with a positive lower r bound in the polytropic branch; steps 2.1–2.2 restart before T* and patch by uniqueness. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "470f7e5a487aeece8d6b022c2869d583f0488d0ba4d4f7a16667458adf49b3d7",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is continuation under uniform Hs bounds, with a positive lower r bound in the polytropic branch; steps 2.1–2.2 restart before T* and patch by uniqueness. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "470f7e5a487aeece8d6b022c2869d583f0488d0ba4d4f7a16667458adf49b3d7",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fd-periodic-inviscid-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-periodic-smooth-stability",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, and use the normalized torus $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$. For any two smooth real divergence-free initial velocities, the local incompressible IVP theorem supplies unique smooth periodic solutions $u^{\\nu_1},u^{\\nu_2}$ for each $\\nu_1,\\nu_2\\ge0$ on a common interval $[0,T]$. For fixed data, this interval and the local theorem's bound in each integer $H^m$, $m\\ge s$, can be chosen independently of $\\nu_1,\\nu_2$. Put $w=u^{\\nu_1}-u^{\\nu_2}$ and $L(t)=\\|\\nabla u^{\\nu_2}(t)\\|_{L^\\infty}$. Then\n$$\\|w(t)\\|_{L^2}\\le e^{\\int_0^t L(\\tau)\\,d\\tau}\\|w(0)\\|_{L^2}+|\\nu_1-\\nu_2|\\int_0^t e^{\\int_s^t L(\\tau)\\,d\\tau}\\|\\Delta u^{\\nu_2}(s)\\|_{L^2}\\,ds.$$\nIn particular, if $\\nu_1=\\nu_2=\\nu$, the exact difference-energy supplier gives $\\|w(t)\\|_{L^2}\\le e^{\\int_0^tL(\\tau)\\,d\\tau}\\|w(0)\\|_{L^2}$. For two smooth positive-density polytropic Euler solutions with the same $\\kappa>0$ and $\\gamma>1$, the symmetric variables $q=(r,u)$ from the stated definition satisfy\n$$\\|q(t)-\\widetilde q(t)\\|_{L^2}^2\\le\\|q(0)-\\widetilde q(0)\\|_{L^2}^2\\exp\\!\\left(C\\int_0^t(\\|\\nabla q(\\tau)\\|_{L^\\infty}+\\|\\nabla\\widetilde q(\\tau)\\|_{L^\\infty})\\,d\\tau\\right).$$\nIn either system, if both solutions have a common bound $M$ in $H^s$ on $[0,T]$, then the $H^{s-1}$ difference is bounded by the $L^2$ difference to the power $1/s$ times $(2M)^{(s-1)/s}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] with $\\nu_1=\\nu$, $\\nu_2=0$, $u^{\\nu_1}=u^\\nu$, and $u^{\\nu_2}=v$. The initial difference is zero and the residual norm is $\\nu\\|\\Delta v(s)\\|_2$, so [F1] gives the displayed estimate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Smoothness of $v$ on the compact cylinder implies $L_*=\\sup_{0\\le t\\le T}\\|\\nabla v(t)\\|_\\infty<\\infty$ and $D_*=\\sup_{0\\le t\\le T}\\|\\Delta v(t)\\|_2<\\infty$. Hence the integral in step 1.1 is at most $T e^{T L_*}D_*$. Multiplying by $\\nu$ proves the uniform $O(\\nu)$ estimate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], there is $M_s<\\infty$ bounding $\\|u^\\nu(t)\\|_{H^s}$ for all $0\\le\\nu\\le1$ and $t\\in[0,T]$, and also bounding $\\|v(t)\\|_{H^s}$. Thus $\\|u^\\nu(t)-v(t)\\|_{H^s}\\le2M_s$. Weighted Cauchy–Schwarz applied to the coefficient sums in [F2] gives $\\|w\\|_{H^{s-1}}\\le\\|w\\|_2^{1/s}\\|w\\|_{H^s}^{(s-1)/s}$: write $w_k^{2(s-1)}|\\widehat w|^2=(|\\widehat w|^2)^{1/s}(w_k^{2s}|\\widehat w|^2)^{(s-1)/s}$ and apply Holder with exponents $s$ and $s/(s-1)$. Apply this to $w=u^\\nu-v$ and step 2.1 to obtain $\\sup_{t\\in[0,T]}\\|u^\\nu(t)-v(t)\\|_{H^{s-1}}\\le(2M_s)^{(s-1)/s}(T e^{T L_*}D_*)^{1/s}\\nu^{1/s}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is O(nu) L2 and O(nu^(1/s)) H^(s-1) convergence; steps 1.1–3.1 apply stability and coefficient Holder on the common smooth interval. The family is indexed by the fixed nonempty interval 0<=nu<=1, with a distinguished member v=u^0; the Fourier sums are over fixed Z^d. Empty support of coefficients is the zero-field case, not an empty index family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is O(nu) L2 and O(nu^(1/s)) H^(s-1) convergence; steps 1.1–3.1 apply stability and coefficient Holder on the common smooth interval. The family is indexed by the fixed nonempty interval 0<=nu<=1, with a distinguished member v=u^0; the Fourier sums are over fixed Z^d. Empty support of coefficients is the zero-field case, not an empty index family.",
+            "item_sha256": "e782ed2cc1e4e1a7561ae8d45cdd5828ca44d90aeb1d247cb669458a31b1a4b4",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement give zero error when nu=0, since the viscous branch is then the Euler branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement at t=0 gives zero difference for every 0<=nu<=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and the Statement control the limit nu down to zero only on the fixed periodic common interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement use smooth bounds on the closed common interval [0,T], including t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement state the choice assumption used by the solution and stability inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is O(nu) L2 and O(nu^(1/s)) H^(s-1) convergence; steps 1.1–3.1 apply stability and coefficient Holder on the common smooth interval. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "e782ed2cc1e4e1a7561ae8d45cdd5828ca44d90aeb1d247cb669458a31b1a4b4",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is O(nu) L2 and O(nu^(1/s)) H^(s-1) convergence; steps 1.1–3.1 apply stability and coefficient Holder on the common smooth interval. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "e782ed2cc1e4e1a7561ae8d45cdd5828ca44d90aeb1d247cb669458a31b1a4b4",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fd-smooth-vorticity-identities": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-smooth-periodic-incompressible-ivp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In dimension three, set $u\\times\\omega$ using the usual Levi-Civita component formula. Since $\\operatorname{div}u=0$, the identity $u\\cdot\\nabla u=\\nabla(|u|^2/2)-u\\times\\omega$ and the component expansion\n$\\nabla\\times(u\\times\\omega)=u\\,\\operatorname{div}\\omega-\\omega\\,\\operatorname{div}u+(\\omega\\cdot\\nabla)u-(u\\cdot\\nabla)\\omega$\ngive $\\nabla\\times(u\\cdot\\nabla u)=(u\\cdot\\nabla)\\omega-(\\omega\\cdot\\nabla)u$. Taking the curl of the momentum equation annihilates the pressure gradient and commutes with $\\partial_t$ and $\\Delta$, yielding the stated 3D equation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In dimension two, regard $u=(u_1,u_2,0)$ and $\\omega=(0,0,\\partial_1u_2-\\partial_2u_1)$. The 3D curl identity from step 1.1 applies to these fields, and $(\\omega\\cdot\\nabla)u=0$ because $u$ is independent of the third coordinate. Its third component is therefore the stated scalar transport-diffusion equation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiply the scalar equation in step 2.1 by $\\omega$ and integrate over the periodic torus. The transport integral is $\\frac12\\int u\\cdot\\nabla(\\omega^2)\\,d\\mu=0$ by periodicity and $\\operatorname{div}u=0$; integration by parts gives $\\int\\omega\\Delta\\omega\\,d\\mu=-\\|\\nabla\\omega\\|_2^2$. This proves the enstrophy identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $M=\\|\\omega(0)\\|_\\infty$. For $\\varepsilon>0$, the function $g(t,x)=\\omega(t,x)-M-\\varepsilon t$ is nonpositive at $t=0$. If it has a positive maximum on the compact cylinder $[0,T]\\times Q_2$, it occurs at some $t_*>0$; there $\\nabla g=0$, $\\Delta g\\le0$, and the time derivative from the left is nonnegative. But the equation in step 2.1 gives $g_t+u\\cdot\\nabla g=\\nu\\Delta g-\\varepsilon<0$, a contradiction. Apply the same argument to $-\\omega$, then let $\\varepsilon\\downarrow0$ to obtain $\\|\\omega(t)\\|_\\infty\\le M$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are curl identities, 2D enstrophy equality and a maximum bound; steps 1.1–4.1 compute curls, integrate the scalar equation and apply the epsilon maximum argument. The index sums defining curl/divergence have d=2 or 3, and the field is given on the prescribed nonempty torus. They do not quantify over a variable possibly empty component family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are curl identities, 2D enstrophy equality and a maximum bound; steps 1.1–4.1 compute curls, integrate the scalar equation and apply the epsilon maximum argument. The index sums defining curl/divergence have d=2 or 3, and the field is given on the prescribed nonempty torus. They do not quantify over a variable possibly empty component family.",
+            "item_sha256": "c720a9a600cc87155b57169bb978b47b43e58545f849292a681f9cb8331916fb",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement: zero initial vorticity gives zero enstrophy dissipation and the stated maximum bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement distinguish the 3D stretching equation from the 2D scalar equation where stretching vanishes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Statement remains valid at nu=0 and becomes conservation of enstrophy; the maximum argument covers every nu>=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement includes t=0 and the compact terminal time in the maximum-principle argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement state the local IVP choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are curl identities, 2D enstrophy equality and a maximum bound; steps 1.1–4.1 compute curls, integrate the scalar equation and apply the epsilon maximum argument. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "c720a9a600cc87155b57169bb978b47b43e58545f849292a681f9cb8331916fb",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are curl identities, 2D enstrophy equality and a maximum bound; steps 1.1–4.1 compute curls, integrate the scalar equation and apply the epsilon maximum argument. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "c720a9a600cc87155b57169bb978b47b43e58545f849292a681f9cb8331916fb",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fd-polytropic-energy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-polytropic-symmetric-variables",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, and put $a=(\\gamma-1)/2$. For positive density $\\rho>0$, define the polytropic pressure $p(\\rho)=\\kappa\\rho^\\gamma$, sound speed $c(\\rho)=\\sqrt{p'(\\rho)}=\\sqrt{\\kappa\\gamma}\\,\\rho^a$, and sound-speed variable $r=c/a$. The map $\\rho\\mapsto r$ is a smooth bijection $(0,\\infty)\\to(0,\\infty)$ with inverse $\\rho=(ar/\\sqrt{\\kappa\\gamma})^{1/a}$. For a velocity $u\\in\\mathbb R^d$, set $q=(r,u_1,\\ldots,u_d)\\in\\mathbb R^{d+1}$. Let $e_0,e_1,\\ldots,e_d$ be the standard basis of $\\mathbb R^{d+1}$, with $e_0$ the scalar coordinate and $e_j$ the velocity coordinate $u_j$. Define the real matrix\n$$A_j(q)=u_j I_{d+1}+ar(e_0e_j^{\\mathsf T}+e_je_0^{\\mathsf T}),\\qquad 1\\le j\\le d.$$\nEach $A_j(q)$ is symmetric and linear in $q$. The first-order system $q_t+\\sum_{j=1}^d A_j(q)\\partial_jq=0$ means the pair\n$$r_t+u\\cdot\\nabla r+ar\\,\\operatorname{div}u=0,\\qquad u_t+u\\cdot\\nabla u+ar\\nabla r=0.$$\nFor periodic use on $Q_d=(\\mathbb R/2\\pi\\mathbb Z)^d$, take normalized measure $d\\mu=(2\\pi)^{-d}dx$, Fourier coefficients $\\widehat q(k)=\\int q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and $\\|q\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat q(k)|^2$, componentwise; real fields satisfy $\\widehat q(-k)=\\overline{\\widehat q(k)}$. These are the periodic Fourier-space conventions used for $H^m$ in this development.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-smooth-polytropic-euler-ivp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, $a=(\\gamma-1)/2$, integer $s\\ge4$, and smooth real periodic maps $\\rho_0:\\mathbb T^d\\to(0,\\infty)$ and $u_0:\\mathbb T^d\\to\\mathbb R^d$, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$, with $\\min_{x\\in\\mathbb T^d}\\rho_0(x)>0$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. For $\\rho>0$, set $p(\\rho)=\\kappa\\rho^\\gamma$ and $r(\\rho)=\\sqrt{\\kappa\\gamma}\\,\\rho^a/a$. Then there is $T>0$, depending only on $d,s,\\kappa,\\gamma$, $\\|(r(\\rho_0),u_0)\\|_{H^s}$, and $\\min r(\\rho_0)$, and a unique smooth real solution $(\\rho,u)$ on $[0,T]\\times\\mathbb T^d$ of\n$$\\rho_t+\\operatorname{div}(\\rho u)=0,\\qquad u_t+u\\cdot\\nabla u+\\rho^{-1}\\nabla(\\kappa\\rho^\\gamma)=0,$$\nwith initial data $(\\rho_0,u_0)$ and $\\rho(t,x)>0$. For every integer $m\\ge s$, $\\sup_{0\\le t\\le T}(\\|\\rho(t)\\|_{H^m}+\\|u(t)\\|_{H^m})<\\infty$. This conditional smooth periodic theorem concerns the isentropic barotropic model with strictly positive density; it asserts no continuation through vacuum or shocks and no viscous or temperature-coupled result.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the unique smooth positive-density solution exists on its local lifespan. For every smooth scalar $\\phi$, the continuity equation and product rule give\n$\\partial_t(\\rho\\phi)+\\operatorname{div}(\\rho u\\phi)=\\rho(\\partial_t\\phi+u\\cdot\\nabla\\phi)$.\nIndeed, expansion of the left side produces $\\phi(\\rho_t+\\operatorname{div}(\\rho u))+\\rho\\phi_t+\\rho u\\cdot\\nabla\\phi$, and the first term is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $U(\\rho)=\\kappa\\rho^\\gamma/(\\gamma-1)$, the continuity equation gives $\\partial_tU+\\operatorname{div}(Uu)=U'(\\rho)(\\rho_t+u\\cdot\\nabla\\rho)+U\\operatorname{div}u=(U-\\rho U')\\operatorname{div}u$. Direct differentiation gives $U-\\rho U'=-\\kappa\\rho^\\gamma=-p$, hence $\\partial_tU+\\operatorname{div}(Uu)=-p\\operatorname{div}u$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $K=\\rho|u|^2/2$. The momentum equation is $\\rho(\\partial_tu+u\\cdot\\nabla u)=-\\nabla p$. Apply step 1.1 to $\\phi=|u|^2/2$, so $\\partial_tK+\\operatorname{div}(Ku)=\\rho u\\cdot(\\partial_tu+u\\cdot\\nabla u)=-u\\cdot\\nabla p$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Add steps 2.1 and 1.2 and use $u\\cdot\\nabla p+p\\operatorname{div}u=\\operatorname{div}(pu)$. This yields $\\partial_t(K+U)+\\operatorname{div}((K+U+p)u)=0$, which is the asserted local conservation law. Integrating it over the periodic torus makes the divergence integral vanish, so the total energy is constant.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is local and integrated polytropic energy conservation; steps 1.1–3.1 combine mass transport with U-rho Uprime=-p. Q_d, d>=1, and the strictly positive-density solution on [0,T] are prescribed; its Fourier lattice is Z^d. The sum defining a Sobolev norm is not a variable empty family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is local and integrated polytropic energy conservation; steps 1.1–3.1 combine mass transport with U-rho Uprime=-p. Q_d, d>=1, and the strictly positive-density solution on [0,T] are prescribed; its Fourier lattice is Z^d. The sum defining a Sobolev norm is not a variable empty family.",
+            "item_sha256": "6d1211b1fd63c21e84cd91038d801601d2cf6c83d44186f9bb623383189bacf2",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement remain valid for zero velocity; the internal energy is retained and its flux is computed from density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires gamma>1, so the gamma=1 endpoint is excluded before defining U=rho-dependent pressure energy."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires strictly positive density and a positive minimum; the vacuum boundary is outside the inverse sound-speed variables."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement integrates the local conservation law over the full local interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement state the choice premise for the positive-density IVP."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is local and integrated polytropic energy conservation; steps 1.1–3.1 combine mass transport with U-rho Uprime=-p. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "6d1211b1fd63c21e84cd91038d801601d2cf6c83d44186f9bb623383189bacf2",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is local and integrated polytropic energy conservation; steps 1.1–3.1 combine mass transport with U-rho Uprime=-p. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "6d1211b1fd63c21e84cd91038d801601d2cf6c83d44186f9bb623383189bacf2",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fd-smooth-wall-energy-uniqueness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-smooth-wall-exterior-solution-domains",
+          "source_section": "Definition",
+          "quote": "A bounded wall domain is a bounded connected open set $\\Omega\\subset\\mathbb R^3$ with $C^2$ boundary. Its classical velocity class on $[0,T]$ is $C^1([0,T];C^2(\\overline\\Omega;\\mathbb R^3))$; a pressure in this class is continuous in time with one continuous spatial derivative. The boundary normal $n$ is the outward unit normal. A no-slip trace is $u|_{\\partial\\Omega}=0$, a prescribed moving-wall trace is $u|_{\\partial\\Omega}=g$, and an impermeable trace is $u\\cdot n=0$; these are distinct boundary data.\n\nAn exterior domain is $\\Omega_{\\mathrm{ext}}=\\mathbb R^3\\setminus K$, where $K\\subset\\mathbb R^3$ is compact with $C^2$ boundary and $\\Omega_{\\mathrm{ext}}$ is connected. The exterior classical velocity and pressure classes have the same local regularity up to $\\partial K$ on every compact spatial subset. The domain definition alone imposes no condition at infinity. An exterior energy argument must state additional decay or weighted-space hypotheses. We call the explicit bounds $|u(t,x)|=O(|x|^{-2})$, $|\\nabla u(t,x)|=O(|x|^{-3})$, and $|p(t,x)|=O(|x|^{-2})$, uniform for $t\\in[0,T]$, a cutoff-decay condition; this is additional solution data, not part of the bare exterior domain, and no energy identity follows from this definition alone.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "source_section": "Definition",
+          "quote": "Throughout this surface-integration page assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the earlier Lebesgue and polar measure machinery. Let $n\\ge2$. A bounded $C^1$ domain is a nonempty bounded open set $\\Omega\\subset\\mathbb R^n$ whose boundary is locally, after a rigid change of coordinates, the graph $z=h(y)$ of a $C^1$ function, with $\\Omega$ locally exactly the subgraph $z<h(y)$. Connectedness is not required. The outward normal in these coordinates is $\\nu=(-Dh,1)/\\sqrt{1+|Dh|^2}$, transported by the orthogonal coordinate map. Its overlap agreement is justified with surface charts below.\n\nThe convention $F\\in C^1(\\overline\\Omega)$ means F is continuously differentiable in $\\Omega$, and F and its first derivatives extend continuously to its closure. For $C^2$ require the same for derivatives through order two. No ambient extension across the boundary is required. Derivatives use [[def-total-derivative-in-euclidean-space]]; products are the real Euclidean inner products of [[def-inner-product-space]]. Write $\\operatorname{div}F=\\sum_i\\partial_iF_i$, $Du=(\\partial_iu)_i$ and $\\Delta u=\\sum_i\\partial_i^2u$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the flux $F_c=\\frac12\\rho|u|^2u$. The wall-domain definition [F1] gives C2 spatial regularity for $u$, and the C2 boundary is a bounded C1 domain by [F2]; hence this flux is C1 up to the boundary and [F4] applies. The product rule gives $\\operatorname{div}F_c=\\rho(u\\cdot\\nabla u)\\cdot u+\\frac12\\rho|u|^2\\operatorname{div}u=\\rho(u\\cdot\\nabla u)\\cdot u$. The resulting boundary flux uses the surface measure [F3] and equals $\\frac12\\rho\\int_{\\partial\\Omega}|u|^2u\\cdot n\\,dS$, which vanishes under either wall law: no-slip has $u=0$, and impermeable slip has $u\\cdot n=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The tensor $\\sigma$ is C1 up to the boundary by [F1] and the stated regularity of $u,p$. Applying [F4] to the vector field with components $(F_\\sigma)_j=\\sum_i u_i\\sigma_{ij}$ yields $\\int_\\Omega u\\cdot\\operatorname{div}\\sigma\\,dx=\\int_{\\partial\\Omega}u\\cdot\\sigma n\\,dS-\\int_\\Omega\\sigma:\\nabla u\\,dx$. The C1-domain and surface-measure conventions [F2], [F3] match this use. Since $\\sigma=-pI+2\\eta D$, $\\sigma:\\nabla u=-p\\operatorname{div}u+2\\eta D:\\nabla u=2\\eta|D|^2$: the pressure term vanishes, and the symmetric matrix $D$ is orthogonal to the skew-symmetric part of $\\nabla u$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take the inner product of the momentum equation with $u$ and integrate. The time term is $K'(t)$, the convective term vanishes by step 1.1, and step 1.2 gives the stress work. In the no-slip case the boundary work is zero. In the slip case $u\\cdot n=0$ and $(\\sigma n)_{\\tan}=-\\beta u_{\\tan}$ imply $u\\cdot\\sigma n=-\\beta|u_{\\tan}|^2$. Substitution gives exactly the two stated energy balances.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $u,\\widetilde u$ be two solutions with the same data and set $w=\\widetilde u-u$, $q=\\widetilde p-p$, and $\\sigma_w=-qI+2\\eta D(w)$. Subtracting their equations gives $\\rho(w_t+\\widetilde u\\cdot\\nabla w+w\\cdot\\nabla u)=\\operatorname{div}\\sigma_w$. Pair with $w$ and integrate. The transport term is zero by [F4], $\\operatorname{div}\\widetilde u=0$, and the common impermeable/no-slip trace. As in step 1.2, $\\sigma_w:\\nabla w=2\\eta|D(w)|^2$. The C1 boundary and surface convention [F2], [F3] and the C1 flux regularity from [F1] justify this integration; the boundary term is zero for no-slip and is $-\\beta|w_{\\tan}|^2$ for the same linear slip traction law. Therefore $\\frac12\\frac{d}{dt}\\|w\\|_2^2\\le\\|\\nabla u\\|_\\infty\\|w\\|_2^2$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $w(0)=0$, multiplying the inequality in step 2.2 by $\\exp(-2\\int_0^t\\|\\nabla u(s)\\|_\\infty ds)$ gives a nonincreasing nonnegative function initially zero. Thus $\\|w(t)\\|_2=0$ and the two continuous velocity fields agree everywhere on $[0,T]\\times\\overline\\Omega$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are the two wall energy balances and velocity uniqueness; steps 1.1–2.2 integrate stress work and step 3.1 uses an integrating factor. The Statement explicitly requires a nonempty bounded C2 domain, so an empty wall region is outside its hypotheses.",
+            "item_sha256": "ebd6a70230292e567919562b5ba37e2f4162de8e6acf0df2e94d1b51cc94a8e0",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement give zero flux and zero dissipation for the zero velocity field under either wall law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement separately verify the no-slip and impermeable Navier-slip boundary contributions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement fixes a bounded C2 domain and the stated classical regularity; rough boundaries and weaker traces are outside scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement hold for every t in the closed classical interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement supply Countable Choice for the bounded-C1 divergence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are the two wall energy balances and velocity uniqueness; steps 1.1–2.2 integrate stress work and step 3.1 uses an integrating factor. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "ebd6a70230292e567919562b5ba37e2f4162de8e6acf0df2e94d1b51cc94a8e0",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusions are the two wall energy balances and velocity uniqueness; steps 1.1–2.2 integrate stress work and step 3.1 uses an integrating factor. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "ebd6a70230292e567919562b5ba37e2f4162de8e6acf0df2e94d1b51cc94a8e0",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "prop-fd-fluid-equation-scaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-leray-pressure-maps",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and fix $d\\in\\{1,2,3\\}$. For a vector Fourier coefficient $a(k)\\in\\mathbb C^d$, define $(Pa)(k)=P_ka(k)$ for every $k\\in\\mathbb Z^d$, where $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. For a tensor field $F=(F_{ij})_{i,j=1}^d$ with coefficients in any $H^s(Q_d)$, define the scalar pressure map $Q$ by $\\widehat{QF}(0)=0$ and $\\widehat{QF}(k)=-\\sum_{i,j=1}^d k_i k_j|k|^{-2}\\widehat F_{ij}(k)$ for $k\\ne0$. For $q\\in H^s(Q_d)$, define $\\partial_jq\\in H^{s-1}(Q_d)$ coefficientwise by $\\widehat{\\partial_jq}(k)=ik_j\\widehat q(k)$; for vector fields set $\\widehat{\\nabla q}(k)=ik\\widehat q(k)$, and for tensor fields set $\\widehat{\\operatorname{div}F}_i(k)=i\\sum_jk_j\\widehat F_{ij}(k)$. These derivative maps are bounded from $H^s$ to $H^{s-1}$. The multipliers $P$ and $Q$ are real-preserving and bounded on every $H^s$, $s\\in\\mathbb R$; $P$ is an orthogonal projection and commutes with these derivatives. For every $F$ and every $k\\in\\mathbb Z^d$, their exact identity is the coefficientwise equality\n$$\\widehat{\\nabla QF}(k)=-(I-P_k)\\widehat{\\operatorname{div}F}(k).$$\nIn particular, both sides have zero coefficient at $k=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the Navier–Stokes scaling, the chain rule gives $(u_\\lambda)_t=\\lambda^3u_t(\\lambda^2t,\\lambda x)$, $(u_\\lambda\\cdot\\nabla)u_\\lambda=\\lambda^3(u\\cdot\\nabla)u(\\lambda^2t,\\lambda x)$, $\\nabla\\pi_\\lambda=\\lambda^3\\nabla\\pi(\\lambda^2t,\\lambda x)$, and $\\Delta u_\\lambda=\\lambda^3\\Delta u(\\lambda^2t,\\lambda x)$. Also $\\operatorname{div}u_\\lambda=\\lambda^2\\operatorname{div}u$. Thus the full equation and divergence constraint retain the same viscosity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the Euler transformation, the time derivative, convective term, and pressure gradient each acquire the common factor $\\alpha^2\\beta$; the divergence acquires $\\alpha\\beta$. Thus the equation and divergence constraint are preserved on the scaled domain and time interval.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Under the stated dimensional change of variables, each acceleration term has factor $U^2/L$, while $\\nu\\Delta u_{\\rm phys}$ has factor $\\nu U/L^2$. Dividing by $U^2/L$ leaves $\\nu/(UL)=Re^{-1}$; substituting $\\nu=\\eta/\\rho_*$ gives $Re=\\rho_*UL/\\eta$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the period-$\\ell$ torus, a Fourier frequency $\\xi=2\\pi k/\\ell$ becomes $\\lambda\\xi$ on the period-$\\ell/\\lambda$ torus. Since $P_{\\lambda\\xi}=P_\\xi$ and the pressure multiplier in [F1] also depends only on frequency direction, the projected equation scales with the same factor $\\lambda^3$. For the volume norm, change variables $y=\\lambda x$ over a period cell: $dx=\\lambda^{-d}dy$ while $|u_\\lambda|^2=\\lambda^2|u|^2$, so the squared norm scales by $\\lambda^{2-d}$ and its square root by $\\lambda^{1-d/2}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the linear acoustic equations $\\delta\\rho_t+\\rho_*\\operatorname{div}v_{\\rm phys}=0$ and $(v_{\\rm phys})_t+(c_*^2/\\rho_*)\\nabla_X\\delta\\rho=0$, substitute $\\delta\\rho=\\rho_*\\delta\\rho'$, $v_{\\rm phys}=Uv$, $X=Lx$, and $t_{\\rm phys}=(L/U)t$. Dividing the first equation by $\\rho_*U/L$ gives $\\delta\\rho'_t+\\operatorname{div}v=0$; dividing the second by $U^2/L$ gives $v_t+(c_*^2/U^2)\\nabla\\delta\\rho'=0$. Since $Ma=U/c_*$, the coefficient is $Ma^{-2}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Euler branch allows any open Omega, including the empty set; step 1.2 remains a vacuous pointwise equation on beta^(-1)Omega=empty. Other branches fix nonempty R^d or positive-period tori.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim gives Navier–Stokes/Euler scaling and dimensional Re/Ma coefficients; steps 1.1–3.1 are chain-rule and volume-change calculations. The Euler branch allows any open Omega, including the empty set; step 1.2 remains a vacuous pointwise equation on beta^(-1)Omega=empty. Other branches fix nonempty R^d or positive-period tori. The current row misstates the applicable case or its proof locator.",
+            "item_sha256": "e3b6ff8124db08d9e3ac88d58e3c07ec25abec971e464ec5b0a6cca32e2b6e97",
+            "row_sha256": "8bc6bce06c9faa8f87daf4223524e1a127f53537838cf747f57d102f6137ef3a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement is valid at nu=0; the dimensional Reynolds-number clause separately assumes eta>0 and hence nu>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and the Statement: lambda=1 and alpha=beta=1 are the identity transformations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement specifies that torus period changes to ell/lambda; it makes no fixed-period symmetry claim for arbitrary lambda."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The transformed time endpoints are t=0 and T/lambda^2 or T/(alpha beta), by the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement record the choice premise for the Leray multiplier supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim gives Navier–Stokes/Euler scaling and dimensional Re/Ma coefficients; steps 1.1–3.1 are chain-rule and volume-change calculations. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "e3b6ff8124db08d9e3ac88d58e3c07ec25abec971e464ec5b0a6cca32e2b6e97",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim gives Navier–Stokes/Euler scaling and dimensional Re/Ma coefficients; steps 1.1–3.1 are chain-rule and volume-change calculations. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "e3b6ff8124db08d9e3ac88d58e3c07ec25abec971e464ec5b0a6cca32e2b6e97",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity scale factors",
+          "status": "checked",
+          "evidence": "At lambda=1 and alpha=beta=1, the displayed transforms reduce exactly to u and pi."
+        }
+      ]
+    },
+    "lem-fd-2d-fourier-log-velocity-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In each periodic coefficient integral, one-coordinate integration by parts has boundary term $f(x)e^{-ik_jx_j}|_{0}^{2\\pi}=0$ because both factors are periodic, so $\\widehat{\\partial_j f}(k)=ik_j\\widehat f(k)$. Thus $k\\cdot\\widehat u(k)=0$ for $k\\ne0$ and $\\widehat\\omega(k)=i(k_1\\widehat u_2(k)-k_2\\widehat u_1(k))$. Since a vector in $\\mathbb C^2$ orthogonal to the nonzero real vector $k$ is a complex multiple of $(-k_2,k_1)$, these identities imply $|\\widehat\\omega(k)|=|k|\\,|\\widehat u(k)|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $K\\ge2$, Cauchy–Schwarz and the definition of $B$ give\n$$\\sum_{0<|k|\\le K}|\\widehat\\omega(k)|\\le B\\left(\\sum_{0<|k|\\le K}w_k^{-2}\\right)^{1/2}.$$\nFor each integer $j\\ge1$, the unit squares centered at lattice points with $j\\le|k|<j+1$ lie in an annulus of radii $\\max(0,j-1)$ and $j+2$; comparing areas shows that this shell contains at most $Cj$ lattice points. Hence $\\sum_{0<|k|\\le K}w_k^{-2}\\le C\\sum_{1\\le j\\le K+1}j^{-1}\\le C\\log(e+K)$, and the low-frequency sum is at most $CB\\sqrt{\\log(e+K)}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the high frequencies, Cauchy–Schwarz gives\n$$\\sum_{|k|>K}|k|\\,|\\widehat u(k)|\\le Y\\left(\\sum_{|k|>K}|k|^2w_k^{-2m}\\right)^{1/2}.$$\nThe same shell count bounds the series inside the square root by $C\\sum_{j>K-1}j^{3-2m}\\le C_mK^{4-2m}$, since $m\\ge4$. Thus the high-frequency sum is at most $C_mYK^{2-m}$. The series is finite for every such $u$ by the same estimate and its finite low-frequency part.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Choose $K=2+(e+Y)^{1/(m-2)}$. Then $YK^{2-m}\\le Y/(e+Y)\\le1$, and $\\log(e+K)\\le C_m\\log(e+Y)$ because $\\log(e+Y)\\ge1$ and $K\\le 2+(e+Y)$. Combining the low- and high-frequency bounds from steps 2.1 and 3.1 proves the asserted estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is S<=Cm(1+B sqrt(log(e+Y))); steps 2.1–4.1 split the lattice at K>=2 and choose K=2+(e+Y)^(1/(m-2)). Z^2 minus {0} is a fixed nonempty lattice; coefficients may vanish, but that changes summand values, not the index domain. Step 3.1 proves the infinite sum converges.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is S<=Cm(1+B sqrt(log(e+Y))); steps 2.1–4.1 split the lattice at K>=2 and choose K=2+(e+Y)^(1/(m-2)). Z^2 minus {0} is a fixed nonempty lattice; coefficients may vanish, but that changes summand values, not the index domain. Step 3.1 proves the infinite sum converges.",
+            "item_sha256": "61f5fb39175e33a5d43480b516a8818da60482af654548fbf6108d42f2552032",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement: for u=0, S=0 and the right side is nonnegative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement identifies the first shell |k|=1 as the equality case of the smallest nonzero frequency bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Statement omits the mean mode from S and curl; the Statement still bounds the result when u has a nonzero mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no time interval, endpoint, or limiting parameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is S<=Cm(1+B sqrt(log(e+Y))); steps 2.1–4.1 split the lattice at K>=2 and choose K=2+(e+Y)^(1/(m-2)). No time variable or endpoint occurs in the Statement. K is an auxiliary cutoff in the proof, fixed explicitly in step 4.1 rather than an asserted endpoint limit.",
+            "item_sha256": "61f5fb39175e33a5d43480b516a8818da60482af654548fbf6108d42f2552032",
+            "row_sha256": "4dea0c29b458a72a979790977c0afe42f7c210f991e52d872c9203020eccb2b5",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement record the Fourier-space choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is S<=Cm(1+B sqrt(log(e+Y))); steps 2.1–4.1 split the lattice at K>=2 and choose K=2+(e+Y)^(1/(m-2)). The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "61f5fb39175e33a5d43480b516a8818da60482af654548fbf6108d42f2552032",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The conclusion is S<=Cm(1+B sqrt(log(e+Y))); steps 2.1–4.1 split the lattice at K>=2 and choose K=2+(e+Y)^(1/(m-2)). The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "61f5fb39175e33a5d43480b516a8818da60482af654548fbf6108d42f2552032",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-fd-2d-transport-commutator-l1-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-2d-fourier-log-velocity-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $Q_2=\\mathbb R^2/(2\\pi\\mathbb Z)^2$ have normalized measure $d\\mu=(2\\pi)^{-2}dx$, Fourier coefficients $\\widehat f(k)=\\int_{Q_2}f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and Sobolev norms $\\|f\\|_{H^r}^2=\\sum_{k\\in\\mathbb Z^2}w_k^{2r}|\\widehat f(k)|^2$, componentwise for vector fields. For an integer $m\\ge4$ and smooth real divergence-free $u:Q_2\\to\\mathbb R^2$, define $\\omega=\\partial_1u_2-\\partial_2u_1$, $Y=\\|u\\|_{H^m}$, $B=\\|\\omega\\|_{H^1}$, and $S=\\sum_{k\\ne0}|k|\\,|\\widehat u(k)|$. Then $S<\\infty$ and there is a constant $C_m$ depending only on $m$ such that\n$$S\\le C_m\\left(1+B\\sqrt{\\log(e+Y)}\\right).$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each nonzero $k\\in\\mathbb Z^2$, choose $j$ with $|k_j|\\ge|k|/\\sqrt2$. Integrating the coefficient formula by parts $N$ times in $x_j$ (each boundary term vanishes by periodicity) gives $|\\widehat u(k)|\\le C_N(1+|k|)^{-N}$ for every integer $N\\ge1$, with $C_N$ controlled by the suprema of the $N$th derivatives of $u$. The unit squares centered on lattice points in $n\\le|k|<n+1$ have disjoint interiors and lie in the annulus of radii $\\max(0,n-1)$ and $n+2$. For $n\\ge2$ its area is $\\pi((n+2)^2-(n-1)^2)=\\pi(6n+3)\\le 9\\pi n$, and the $n=1$ disk of radius $3$ also has area $9\\pi$; hence the shell has at most $9\\pi n$ lattice points. Choose $N=m+5$. The shell sums of $(1+|k|)^{m+1}|\\widehat u(k)|$ are then bounded by $C_m n^{-3}$, so the Fourier series of $u$, its first derivatives, $\\Lambda^mu$, and the first derivatives of $\\Lambda^mu$ converge absolutely. Thus the two products in the commutator have absolutely convergent coefficient convolutions, and the product formula and multiplier definition give\n$$\\widehat{[\\Lambda^m,u\\cdot\\nabla]u}(k)=i\\sum_{v+\\ell=k}(w_k^m-w_\\ell^m)(\\widehat u(v)\\cdot\\ell)\\widehat u(\\ell).$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x\\in\\mathbb R^2$, $w_x=(1+|x|^2)^{1/2}$ satisfies $|\\nabla w_x^m|=m|x|w_x^{m-2}\\le m w_x^{m-1}$. The mean-value theorem along the segment from $\\ell$ to $\\ell+v$, together with $w_{\\ell+\\theta v}\\le w_\\ell+w_v$ and $(a+b)^{m-1}\\le C_m(a^{m-1}+b^{m-1})$, therefore gives\n$$|w_{\\ell+v}^m-w_\\ell^m|\\le C_m|v|(w_v^{m-1}+w_\\ell^{m-1}).$$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the bound in step 2.1 to each summand in step 1.1 and use $|\\widehat u(v)\\cdot\\ell|\\le|\\widehat u(v)||\\ell|$. The term containing $w_v^{m-1}$ is bounded pointwise by $C_m(w_v^m|\\widehat u(v)|)(|\\ell||\\widehat u(\\ell)|)$ because $|v|\\le w_v$. The term containing $w_\\ell^{m-1}$ is bounded by $C_m(|v||\\widehat u(v)|)(w_\\ell^m|\\widehat u(\\ell)|)$ because $|\\ell|\\le w_\\ell$. Summing over the two output components changes only the dimension-dependent constant.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the first convolution, set $a_v=w_v^m|\\widehat u(v)|$ and $b_\\ell=|\\ell||\\widehat u(\\ell)|$. Then [F1] gives $\\|a\\|_{\\ell^2}=\\|u\\|_{H^m}$ and [F3] gives $\\|b\\|_{\\ell^1}=S(u)$, so $\\|a*b\\|_{\\ell^2}\\le\\|a\\|_{\\ell^2}\\|b\\|_{\\ell^1}=\\|u\\|_{H^m}S(u)$. For the second convolution take $c_v=|v||\\widehat u(v)|$ and $d_\\ell=w_\\ell^m|\\widehat u(\\ell)|$; then $\\|c\\|_{\\ell^1}=S(u)$ and $\\|d\\|_{\\ell^2}=\\|u\\|_{H^m}$, giving the same bound by $\\|c*d\\|_{\\ell^2}\\le\\|c\\|_{\\ell^1}\\|d\\|_{\\ell^2}$. Summing the finitely many vector components and applying Parseval [F2] proves the asserted $L^2$ estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim bounds the commutator by Cm S(u)||u||Hm; steps 1.1–4.1 establish the convolution formula, multiplier difference bound, and l1*l2 estimates. The convolution is indexed by fixed integer pairs v+ell=k on Z^2; zero coefficients are permitted and do not create an empty variable family.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim bounds the commutator by Cm S(u)||u||Hm; steps 1.1–4.1 establish the convolution formula, multiplier difference bound, and l1*l2 estimates. The convolution is indexed by fixed integer pairs v+ell=k on Z^2; zero coefficients are permitted and do not create an empty variable family.",
+            "item_sha256": "7c4192607d59c6f2dcbbe1c276d3ccddee7d413543f35e2ecd947ed913168581",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the Statement: a constant field has S=0 and its transport commutator vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the Statement with a single shear mode u=(0,A sin(x_1)) has zero commutator because u dot grad differentiates only in x_2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Statement has no contribution from v=0 because the multiplier difference and |v| factor vanish; the mean velocity commutes with Lambda^m."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no time interval, endpoint, or limiting parameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim bounds the commutator by Cm S(u)||u||Hm; steps 1.1–4.1 establish the convolution formula, multiplier difference bound, and l1*l2 estimates. The Statement is a spatial commutator estimate for one fixed smooth field; its coefficient convolution argument has no temporal endpoint conclusion.",
+            "item_sha256": "7c4192607d59c6f2dcbbe1c276d3ccddee7d413543f35e2ecd947ed913168581",
+            "row_sha256": "4dea0c29b458a72a979790977c0afe42f7c210f991e52d872c9203020eccb2b5",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement record the Fourier coefficient framework premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim bounds the commutator by Cm S(u)||u||Hm; steps 1.1–4.1 establish the convolution formula, multiplier difference bound, and l1*l2 estimates. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "7c4192607d59c6f2dcbbe1c276d3ccddee7d413543f35e2ecd947ed913168581",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim bounds the commutator by Cm S(u)||u||Hm; steps 1.1–4.1 establish the convolution formula, multiplier difference bound, and l1*l2 estimates. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "7c4192607d59c6f2dcbbe1c276d3ccddee7d413543f35e2ecd947ed913168581",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single shear mode",
+          "status": "checked",
+          "evidence": "For u=(0,A sin(x_1)), u dot grad differentiates only in x_2, so the commutator is zero and the bound holds."
+        }
+      ]
+    },
+    "thm-fd-global-two-dimensional-periodic-navier-stokes": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-smooth-periodic-incompressible-ivp",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. For a smooth periodic $f$, set $\\widehat f(k)=(2\\pi)^{-d}\\int_{[0,2\\pi]^d}f(x)e^{-ik\\cdot x}\\,dx$, $w_k=(1+|k|^2)^{1/2}$, and $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. Define the Leray multiplier by $P_0=I$ and $P_k=I-kk^{\\mathsf T}/|k|^2$ for $k\\ne0$. Then there is $T>0$, depending only on $d$, $s$, and $\\|u_0\\|_{H^s}$ and independent of $\\nu$ and all higher Sobolev norms of $u_0$, and a unique smooth real field $u:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ satisfying\n$$u(0,\\cdot)=u_0,\\qquad \\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u,\\qquad \\operatorname{div}u=0.$$\nThe same time $T$ works for every integer Sobolev order $m\\ge s$, and $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}<\\infty$ for each such $m$. There is a unique smooth mean-zero scalar field $\\pi$ for which the equivalent full equation $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$ holds.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-smooth-vorticity-identities",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u:[0,T]\\times Q_d\\to\\mathbb R^d$ be a smooth real solution of $u_t+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u$, $\\sum_j\\partial_ju_j=0$, where $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ has normalized measure and $\\pi$ is a smooth periodic scalar. For $d=3$, define $\\omega=\\nabla\\times u$ by $\\omega_i=\\sum_{j,k=1}^3\\epsilon_{ijk}\\partial_j u_k$, where $\\epsilon_{123}=1$ and $\\epsilon_{ijk}$ is totally antisymmetric; define $(a\\times b)_i=\\sum_{j,k=1}^3\\epsilon_{ijk}a_jb_k$. Then $\\omega_t+u\\cdot\\nabla\\omega=(\\omega\\cdot\\nabla)u+\\nu\\Delta\\omega$. For $d=2$, define the scalar $\\omega=\\partial_1u_2-\\partial_2u_1$; then $\\omega_t+u\\cdot\\nabla\\omega=\\nu\\Delta\\omega$ and\n$$\\frac12\\frac{d}{dt}\\|\\omega(t)\\|_{L^2}^2=-\\nu\\|\\nabla\\omega(t)\\|_{L^2}^2.$$\nFor every $\\nu\\ge0$ the scalar maximum bound $\\|\\omega(t)\\|_{L^\\infty}\\le\\|\\omega(0)\\|_{L^\\infty}$ holds. These are exact identities and bounds on the given solution lifespan and assert no global existence or regularity result.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-2d-fourier-log-velocity-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $Q_2=\\mathbb R^2/(2\\pi\\mathbb Z)^2$ have normalized measure $d\\mu=(2\\pi)^{-2}dx$, Fourier coefficients $\\widehat f(k)=\\int_{Q_2}f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and Sobolev norms $\\|f\\|_{H^r}^2=\\sum_{k\\in\\mathbb Z^2}w_k^{2r}|\\widehat f(k)|^2$, componentwise for vector fields. For an integer $m\\ge4$ and smooth real divergence-free $u:Q_2\\to\\mathbb R^2$, define $\\omega=\\partial_1u_2-\\partial_2u_1$, $Y=\\|u\\|_{H^m}$, $B=\\|\\omega\\|_{H^1}$, and $S=\\sum_{k\\ne0}|k|\\,|\\widehat u(k)|$. Then $S<\\infty$ and there is a constant $C_m$ depending only on $m$ such that\n$$S\\le C_m\\left(1+B\\sqrt{\\log(e+Y)}\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-2d-transport-commutator-l1-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $Q_2=\\mathbb R^2/(2\\pi\\mathbb Z)^2$ have normalized measure $d\\mu=(2\\pi)^{-2}dx$, Fourier coefficients $\\widehat f(k)=\\int_{Q_2}f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^2}w_k^{2m}|\\widehat f(k)|^2$. Let $m\\ge4$ be an integer and $u\\in C^\\infty(Q_2;\\mathbb R^2)$ be divergence-free. Define $\\Lambda^m$ by $\\widehat{\\Lambda^m f}(k)=w_k^m\\widehat f(k)$, $S(u)=\\sum_{k\\ne0}|k|\\,|\\widehat u(k)|$, and $[\\Lambda^m,u\\cdot\\nabla]u=\\Lambda^m((u\\cdot\\nabla)u)-u\\cdot\\nabla(\\Lambda^m u)$. Then\n$$\\|[\\Lambda^m,u\\cdot\\nabla]u\\|_{L^2(Q_2)}\\le C_m S(u)\\|u\\|_{H^m},$$\nwhere $S(u)<\\infty$ and $C_m$ depends only on $m$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fd-smooth-sobolev-continuation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For the periodic incompressible IVP with $d\\in\\{1,2,3\\}$, $\\nu\\ge0$, smooth real divergence-free initial data on the normalized torus $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$, and integer $s\\ge4$, let $u$ be the unique maximal smooth solution on $[0,T^*)$. Maximal means that no smooth solution in the same class on a larger interval agrees with $u$ on $[0,T^*)$. If $T^*<\\infty$ and $\\sup_{t<T^*}\\|u(t)\\|_{H^s}<\\infty$, then $u$ extends smoothly to an interval $[0,T^*+\\epsilon]$ for some $\\epsilon>0$.\n\nFor the positive-density polytropic Euler IVP with $d\\in\\{1,2,3\\}$, $\\kappa>0$, $\\gamma>1$, and integer $s\\ge4$, let $q=(r,u)$ be the unique maximal smooth solution in the symmetric variables from the stated definition, on $[0,T^*)$, with $r(t,x)>0$. If $T^*<\\infty$, $\\sup_{t<T^*}\\|q(t)\\|_{H^s}<\\infty$, and $\\inf_{t<T^*,\\,x\\in Q_d}r(t,x)>0$, then $q$ and its positive density $\\rho=(ar/\\sqrt{\\kappa\\gamma})^{1/a}$ extend smoothly beyond $T^*$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-fd-periodic-fourier-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\in\\{1,2,3\\}$, let $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ carry the probability measure obtained by pushing normalized Haar measure on $\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$ forward under $y\\mapsto x=2\\pi y$; in coordinates this is $(2\\pi)^{-d}dx$, and the characters are $e_k(x)=e^{ik\\cdot x}$. For $q:Q_d\\to\\mathbb R^N$ and $k\\in\\mathbb Z^d$, set $\\widehat q(k)=\\int_{Q_d}q(x)e^{-ik\\cdot x}\\,d\\mu(x)$, componentwise, so real fields have $\\widehat q(-k)=\\overline{\\widehat q(k)}$. Put $w_k=(1+|k|^2)^{1/2}$. For any $s\\in\\mathbb R$, define $H^s(Q_d;\\mathbb R^N)$ as the completion of finite real trigonometric polynomials in the norm $\\|q\\|_{H^s}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2s}|\\widehat q(k)|^2$. The completion is identified with its weighted coefficient space using finite symmetric cutoffs. If $s\\ge0$, it has a unique $L^2$ representative; for $s<0$ no $L^2$ representative is asserted.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], local smooth solutions exist and are unique for every smooth restart datum. Uniqueness makes solutions with the same data agree on overlaps, so their union defines a unique maximal smooth solution $u$ on an interval $[0,T^*)$, where $T^*$ is the supremum of its right endpoints.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $0\\le t<T^*$, [F2] and integration from $0$ to $t$ give $\\|\\omega(t)\\|_2^2+2\\nu\\int_0^t\\|\\nabla\\omega(s)\\|_2^2\\,ds=\\|\\omega_0\\|_2^2$. Therefore, with $B(t)=\\|\\omega(t)\\|_{H^1}$, $\\int_0^tB(s)^2\\,ds\\le\\|\\omega_0\\|_2^2(t+(2\\nu)^{-1})$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix an integer $m\\ge4$ and put $Y(t)=\\|u(t)\\|_{H^m}$ and $S(t)=\\sum_{k\\ne0}|k||\\widehat u(t,k)|$. Pair the full equation after applying $\\Lambda^m$ with $\\Lambda^m u$. The pressure term vanishes because $\\operatorname{div}\\Lambda^mu=0$ and periodic integration by parts applies. Writing $\\Lambda^m(u\\cdot\\nabla u)=u\\cdot\\nabla\\Lambda^m u+[\\Lambda^m,u\\cdot\\nabla]u$, the first term has integral $\\frac12\\int u\\cdot\\nabla|\\Lambda^mu|^2d\\mu=0$ by incompressibility and periodicity. The viscous term is $-\\nu\\|\\nabla u\\|_{H^m}^2\\le0$, while [F4] and Cauchy–Schwarz bound the remaining commutator pairing by $C_mSY^2$. Hence $\\frac12(Y^2)'\\le C_mSY^2$. For $Y_\\epsilon=(Y^2+\\epsilon^2)^{1/2}$ with $\\epsilon>0$, differentiation gives $Y_\\epsilon'\\le C_mSY^2/Y_\\epsilon\\le C_mSY_\\epsilon$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $Z_\\epsilon=\\log(e+Y_\\epsilon)\\ge1$. By [F3], $S\\le C_m(1+B\\sqrt{\\log(e+Y)})\\le C_m(1+B\\sqrt{Z_\\epsilon})$. Step 1.3 therefore gives $Z_\\epsilon'\\le C_m(1+B\\sqrt{Z_\\epsilon})$ and $(\\sqrt{Z_\\epsilon})'\\le C_m(1+B)$, since $Z_\\epsilon\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Integrating step 2.1 and applying Cauchy–Schwarz in time with step 1.2 yields\n$$\\sqrt{Z_\\epsilon(t)}\\le\\sqrt{Z_\\epsilon(0)}+C_m\\left[t+\\|\\omega_0\\|_2\\sqrt{t\\left(t+\\frac1{2\\nu}\\right)}\\right].$$\nLetting $\\epsilon\\downarrow0$ proves the displayed estimate in the Statement for each $m\\ge4$ and every $t<T^*$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $T^*<\\infty$, step 3.1 with $m=4$ and $t<T^*$ has a finite right-hand side bounded uniformly by replacing $t$ with $T^*$. Thus $\\sup_{t<T^*}\\|u(t)\\|_{H^4}<\\infty$. By [F5], the solution extends smoothly past $T^*$, contradicting maximality. Hence $T^*=\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The local theorem [F1] gives smoothness and uniqueness on every restart interval, so the maximal solution is smooth on each compact time interval. Fix any $T>0$ and let $\\tau$ be the supremum of times through which two global smooth solutions agree on $[0,\\tau]$. They agree at $\\tau$ by continuity. Starting [F1] from their common value at $\\tau$ gives a positive local interval on which uniqueness extends their agreement; therefore $\\tau$ cannot be less than $T$. As $T$ is arbitrary, they agree for all time. Since $T^*=\\infty$, step 3.1 supplies the asserted bound for every finite $t$ and every integer $m\\ge4$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is global 2D positive-viscosity smooth existence with the displayed logarithmic norm bound; steps 1.2–3.1 estimate enstrophy and step 4.1 rules out finite T*. The torus is fixed Q_2, and step 1.1 starts with a nonempty local solution interval. S(t) uses the fixed nonzero lattice, even when all its summands vanish.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is global 2D positive-viscosity smooth existence with the displayed logarithmic norm bound; steps 1.2–3.1 estimate enstrophy and step 4.1 rules out finite T*. The torus is fixed Q_2, and step 1.1 starts with a nonempty local solution interval. S(t) uses the fixed nonzero lattice, even when all its summands vanish.",
+            "item_sha256": "2a079cda3b3a0b81e307edd1d71d08c7d05084b0d63d87aa5fbe904ab4bee71d",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement allow omega_0=0; a constant initial velocity is an exact global solution and the logarithmic bound remains finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement assumes nu>0; the proof explicitly makes no claim at the excluded inviscid endpoint nu=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Statement handle zero vorticity and rule out every finite maximal endpoint without assuming a time limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement holds for every finite t and the Statement uses its uniform bound up to a proposed finite maximal endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement state the choice premise inherited from the local IVP."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is global 2D positive-viscosity smooth existence with the displayed logarithmic norm bound; steps 1.2–3.1 estimate enstrophy and step 4.1 rules out finite T*. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "2a079cda3b3a0b81e307edd1d71d08c7d05084b0d63d87aa5fbe904ab4bee71d",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The claim is global 2D positive-viscosity smooth existence with the displayed logarithmic norm bound; steps 1.2–3.1 estimate enstrophy and step 4.1 rules out finite T*. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "2a079cda3b3a0b81e307edd1d71d08c7d05084b0d63d87aa5fbe904ab4bee71d",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant velocity datum",
+          "status": "checked",
+          "evidence": "For u_0=U constant, pi=0 and u(t)=U solve the system globally; omega_0=0 and the stated Hm bound is finite."
+        }
+      ]
+    },
+    "ex-fd-acoustic-energy-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-global-linear-acoustics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\rho_*>0$, $c_*>0$, and let $z_0:\\mathbb T^d\\to\\mathbb R$ and $v_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth periodic data on the normalized torus $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. The constant-coefficient tangent system\n$$z_t+\\rho_*\\operatorname{div}v=0,\\qquad v_t+(c_*^2/\\rho_*)\\nabla z=0,\\qquad (z,v)|_{t=0}=(z_0,v_0)$$\nhas a unique real $C^\\infty$ solution $(z,v)$ on $\\mathbb R\\times\\mathbb T^d$. For every integer $m\\ge0$, the weighted energy $\\|v(t)\\|_{H^m}^2+(c_*^2/\\rho_*^2)\\|z(t)\\|_{H^m}^2$ is constant for all $t\\in\\mathbb R$. This is the exact linear tangent model; it does not assert equality with a finite-amplitude nonlinear fluid evolution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the amplitudes: $Z'=-\\rho_*V$ and $V'=(c_*^2/\\rho_*)Z$. Thus $z_t=-\\rho_*V\\cos x_1$ and $\\operatorname{div}v=V\\cos x_1$, while $v_t=V'\\sin x_1e_1$ and $\\nabla z=-Z\\sin x_1e_1$. Substitution gives both equations of the stated linear system. At $t=0$, $Z(0)=A$ and $V(0)=B$, so the initial fields are exactly those in the Example.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the fields from step 1.1 are the unique global smooth solution with these data, and their weighted energy is the stated norm sum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the stated normalized measure, $\\int_{Q_2}\\sin^2x_1\\,d\\mu=\\int_{Q_2}\\cos^2x_1\\,d\\mu=1/2$ and $\\int_{Q_2}1\\,d\\mu=1$. Since $e_1\\perp e_2$, the energy in step 2.1 is $W^2+\\frac12(V^2+(c_*^2/\\rho_*^2)Z^2)$. Differentiating the bracket gives $2VV'+2(c_*^2/\\rho_*^2)ZZ'=2(c_*^2/\\rho_*)VZ-2(c_*^2/\\rho_*)ZV=0$. Its value at $t=0$ is $B^2+(c_*^2/\\rho_*^2)A^2$, proving the asserted constant.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The explicit fields in step 1.1 have only smooth sine, cosine, and constant factors, so they are smooth for every real time; the formula and energy calculation therefore verify the complete Example.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Example constructs explicit sine/cosine amplitudes and constant transverse velocity; steps 1.1–4.1 verify both equations and the weighted energy. The fields live on fixed Q_2; real amplitudes A,B,W may all be zero, which is already the zero-amplitude case, not an empty family.",
+            "item_sha256": "19b0917ca37da6472c734313c73c5c9d184b1ab5b3ecaed3eae13ccdcd3928f8",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the Statement: A=B=W=0 gives z=v=0 and zero weighted energy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The choices A=B=0 and W arbitrary isolate the constant transverse mode; A or B nonzero gives the longitudinal oscillation verified in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires rho_*>0 and c_*>0; zero reference density or sound speed is excluded from the displayed formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the Statement give smooth formulas and the same energy for every real t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement record Countable Choice for the global tangent-system theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Example constructs explicit sine/cosine amplitudes and constant transverse velocity; steps 1.1–4.1 verify both equations and the weighted energy. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "19b0917ca37da6472c734313c73c5c9d184b1ab5b3ecaed3eae13ccdcd3928f8",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: The Example constructs explicit sine/cosine amplitudes and constant transverse velocity; steps 1.1–4.1 verify both equations and the weighted energy. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "19b0917ca37da6472c734313c73c5c9d184b1ab5b3ecaed3eae13ccdcd3928f8",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero longitudinal amplitudes",
+          "status": "checked",
+          "evidence": "At A=B=0 the formula gives z=0 and v=W e_2, so the weighted energy is W^2 for all t."
+        }
+      ]
+    },
+    "rem-fd-global-regularity-open": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The checked CMI list places Navier–Stokes Equation under its Active problems heading. This supports the first dated status sentence and states only the institution's public classification.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The CMI notice is dated 2026-09-11 and describes an announced result as apparently settling the problem while saying evaluation is deliberately unhurried. Its qualification reports an announcement under evaluation; it does not certify the proof. The remark preserves that qualification and limits the batch's result to two-dimensional periodic Navier–Stokes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This is a dated public-status report; steps 1.1–2.1 restate the CMI classification and qualified announcement, without accepting a solution. No set-valued input or indexed analytic construction appears in the Remark; its subjects are two specified public status records.",
+            "item_sha256": "dd886d02075884c6f05d201bddd9690baea105a9b0e2d384125f53242561c0e5",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement has no zero-valued input branch requiring a separate conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement contains no singleton or one-element cardinality assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This is a dated public-status report; steps 1.1–2.1 restate the CMI classification and qualified announcement, without accepting a solution. The report concerns two named status records and makes no cardinality-dependent assertion about a family of problems or solutions.",
+            "item_sha256": "dd886d02075884c6f05d201bddd9690baea105a9b0e2d384125f53242561c0e5",
+            "row_sha256": "4d6e330e48ac80cec0dd80661c1afbcbc0b110435f8604e901eb862feddb50da",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement fixes its regularity and parameter hypotheses and makes no degenerate-limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This is a dated public-status report; steps 1.1–2.1 restate the CMI classification and qualified announcement, without accepting a solution. The report makes no assertion at zero viscosity, zero density or a geometric degeneration; neither step 1.1 nor 2.1 proves an analytic parameter limit.",
+            "item_sha256": "dd886d02075884c6f05d201bddd9690baea105a9b0e2d384125f53242561c0e5",
+            "row_sha256": "41920ec5d37c6a88da3a99d709233a1a7786f4bf91f2ac4b8b98fee9918b0b64",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no time interval, endpoint, or limiting parameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This is a dated public-status report; steps 1.1–2.1 restate the CMI classification and qualified announcement, without accepting a solution. The dates identify when a public-status report was checked and when a notice was issued; they are not endpoints of an evolving solution or limiting estimate.",
+            "item_sha256": "dd886d02075884c6f05d201bddd9690baea105a9b0e2d384125f53242561c0e5",
+            "row_sha256": "4dea0c29b458a72a979790977c0afe42f7c210f991e52d872c9203020eccb2b5",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof use no choice function or nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This is a dated public-status report; steps 1.1–2.1 restate the CMI classification and qualified announcement, without accepting a solution. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "dd886d02075884c6f05d201bddd9690baea105a9b0e2d384125f53242561c0e5",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This is a dated public-status report; steps 1.1–2.1 restate the CMI classification and qualified announcement, without accepting a solution. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "dd886d02075884c6f05d201bddd9690baea105a9b0e2d384125f53242561c0e5",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "rem-fd-boundary-layer-low-mach-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-periodic-inviscid-limit",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, let $s\\ge4$ be an integer, and let $u_0:Q_d\\to\\mathbb R^d$ be smooth, real, and divergence-free, where $Q_d=\\mathbb R^d/(2\\pi\\mathbb Z)^d$ has normalized Lebesgue measure and divergence-free means $\\sum_{j=1}^d\\partial_j(u_0)_j=0$. The local incompressible theorem supplies, on a common interval $[0,T]$ independent of $0\\le\\nu\\le1$, smooth solutions $u^\\nu$ of the periodic Navier–Stokes equation and $v=u^0$ of periodic Euler with the same initial data. For every $t\\in[0,T]$,\n$$\\|u^\\nu(t)-v(t)\\|_{L^2}\\le\\nu\\int_0^t\\exp\\!\\left(\\int_s^t\\|\\nabla v(\\tau)\\|_{L^\\infty}\\,d\\tau\\right)\\|\\Delta v(s)\\|_{L^2}\\,ds.$$\nConsequently the $L^2$ error is $O(\\nu)$ uniformly on $[0,T]$ as $\\nu\\downarrow0$. For each integer $m\\ge s$, the same local construction supplies a uniform $H^m$ bound for this family, independent of $\\nu$; therefore the $H^{s-1}$ error is $O(\\nu^{1/s})$. The result is confined to a fixed periodic domain and this common local smooth interval; it asserts no wall inviscid limit or boundary-layer estimate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-global-linear-acoustics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\rho_*>0$, $c_*>0$, and let $z_0:\\mathbb T^d\\to\\mathbb R$ and $v_0:\\mathbb T^d\\to\\mathbb R^d$ be smooth periodic data on the normalized torus $\\mathbb T^d=(\\mathbb R/2\\pi\\mathbb Z)^d$. Use normalized measure $d\\mu=(2\\pi)^{-d}dx$, coefficients $\\widehat f(k)=\\int f(x)e^{-ik\\cdot x}\\,d\\mu(x)$, weights $w_k=(1+|k|^2)^{1/2}$, and componentwise norms $\\|f\\|_{H^m}^2=\\sum_{k\\in\\mathbb Z^d}w_k^{2m}|\\widehat f(k)|^2$. The constant-coefficient tangent system\n$$z_t+\\rho_*\\operatorname{div}v=0,\\qquad v_t+(c_*^2/\\rho_*)\\nabla z=0,\\qquad (z,v)|_{t=0}=(z_0,v_0)$$\nhas a unique real $C^\\infty$ solution $(z,v)$ on $\\mathbb R\\times\\mathbb T^d$. For every integer $m\\ge0$, the weighted energy $\\|v(t)\\|_{H^m}^2+(c_*^2/\\rho_*^2)\\|z(t)\\|_{H^m}^2$ is constant for all $t\\in\\mathbb R$. This is the exact linear tangent model; it does not assert equality with a finite-amplitude nonlinear fluid evolution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-fd-fluid-equation-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{1,2,3\\}$, $\\ell>0$, and $\\nu\\ge0$, and write $Q_\\ell=\\mathbb R^d/(\\ell\\mathbb Z)^d$. For a period cell, define $\\|f\\|_{L^2_{\\rm vol}(Q_\\ell)}=(\\int_{[0,\\ell]^d}|f(x)|^2dx)^{1/2}$.\n\nFirst, for $T>0$ and either $\\Omega=\\mathbb R^d$ or $\\Omega=Q_\\ell$, let $u\\in C^\\infty([0,T]\\times\\Omega;\\mathbb R^d)$ and $\\pi\\in C^\\infty([0,T]\\times\\Omega;\\mathbb R)$ be a velocity-pressure pair solving the unforced incompressible Navier–Stokes system\n$$u_t+(u\\cdot\\nabla)u=-\\nabla\\pi+\\nu\\Delta u,\\qquad \\operatorname{div}u=0,$$\nthen for any $\\lambda>0$,\n$$u_\\lambda(t,x)=\\lambda u(\\lambda^2t,\\lambda x),\\qquad \\pi_\\lambda(t,x)=\\lambda^2\\pi(\\lambda^2t,\\lambda x)$$\nsolves the same system with the same viscosity on $\\mathbb R^d$ or on the torus of period $\\ell/\\lambda$, respectively, for $0\\le t\\le T/\\lambda^2$. On the torus, use the Fourier Leray multiplier $P_0=I$, $P_\\xi=I-\\xi\\xi^{\\mathsf T}/|\\xi|^2$ for $\\xi\\ne0$; the projected equation is preserved as well because $P_{\\lambda\\xi}=P_\\xi$. For a cell-volume $L^2$ norm, $\\|u_\\lambda(0)\\|_{L^2_{\\rm vol}(Q_{\\ell/\\lambda})}=\\lambda^{1-d/2}\\|u(0)\\|_{L^2_{\\rm vol}(Q_\\ell)}$.\n\nSecond, for any $\\alpha,\\beta>0$, if $T>0$, $\\Omega\\subseteq\\mathbb R^d$ is open, $u\\in C^\\infty([0,T]\\times\\Omega;\\mathbb R^d)$, and $\\pi\\in C^\\infty([0,T]\\times\\Omega;\\mathbb R)$ solve the unforced incompressible Euler system $u_t+(u\\cdot\\nabla)u=-\\nabla\\pi$, $\\operatorname{div}u=0$, then on the scaled domain $\\beta^{-1}\\Omega$,\n$$u_{\\alpha,\\beta}(t,x)=\\alpha u(\\alpha\\beta t,\\beta x),\\qquad \\pi_{\\alpha,\\beta}(t,x)=\\alpha^2\\pi(\\alpha\\beta t,\\beta x)$$\nsolves the same equation on the correspondingly scaled domain and time interval $0\\le t\\le T/(\\alpha\\beta)$. These transformations are equation symmetries; on a torus they transform its period.\n\nFinally, let $U,L,\\rho_*,\\eta>0$ be physical scales in SI units, where $U$ is in m/s, $L$ in m, $\\rho_*$ is a constant positive reference density in kg/m$^3$, and dynamic viscosity $\\eta$ is in Pa$\\cdot$s. Set kinematic viscosity $\\nu=\\eta/\\rho_*$, in m$^2$/s. Let $\\Omega\\subseteq\\mathbb R^d$ be an open dimensionless spatial region and $I\\subseteq\\mathbb R$ an open time interval; set $\\Omega_{\\rm phys}=L\\Omega$ and $I_{\\rm phys}=(L/U)I$. Take $u,v\\in C^\\infty(\\Omega\\times I;\\mathbb R^d)$ and $\\pi,\\delta\\rho'\\in C^\\infty(\\Omega\\times I;\\mathbb R)$; the scaled fields $u,v,\\pi,\\delta\\rho'$ are dimensionless. Define physical velocity maps $u_{\\rm phys},v_{\\rm phys}\\in C^\\infty(\\Omega_{\\rm phys}\\times I_{\\rm phys};\\mathbb R^d)$, physical-pressure maps $p_{\\rm phys},\\pi_{\\rm phys}\\in C^\\infty(\\Omega_{\\rm phys}\\times I_{\\rm phys};\\mathbb R)$, and density-perturbation map $\\delta\\rho\\in C^\\infty(\\Omega_{\\rm phys}\\times I_{\\rm phys};\\mathbb R)$ by\n$$u_{\\rm phys}(X,t_{\\rm phys})=Uu(X/L,Ut_{\\rm phys}/L),\\quad p_{\\rm phys}(X,t_{\\rm phys})=\\rho_*U^2\\pi(X/L,Ut_{\\rm phys}/L),$$\n$$v_{\\rm phys}(X,t_{\\rm phys})=Uv(X/L,Ut_{\\rm phys}/L),\\quad \\delta\\rho(X,t_{\\rm phys})=\\rho_*\\delta\\rho'(X/L,Ut_{\\rm phys}/L).$$\nAdopt the constant-reference-density kinematic-pressure convention $\\pi_{\\rm phys}:=p_{\\rm phys}/\\rho_*$; thus $\\pi_{\\rm phys}=U^2\\pi$ has units m$^2$/s$^2$, while $p_{\\rm phys}$ has units Pa. If $u_{\\rm phys},\\pi_{\\rm phys}$ satisfy the constant-density incompressible system\n$$\\partial_{t_{\\rm phys}}u_{\\rm phys}+(u_{\\rm phys}\\cdot\\nabla_X)u_{\\rm phys}=-\\nabla_X\\pi_{\\rm phys}+\\nu\\Delta_Xu_{\\rm phys},\\qquad \\operatorname{div}_Xu_{\\rm phys}=0,$$\nthen the stated substitution gives the dimensionless system\n$$\\partial_tu+(u\\cdot\\nabla_x)u=-\\nabla_x\\pi+Re^{-1}\\Delta_xu,\\qquad \\operatorname{div}_xu=0,$$\nwhere $Re=UL/\\nu=\\rho_*UL/\\eta$. Let $p_{\\rm eos}:(0,\\infty)\\to\\mathbb R$ be a differentiable equation-of-state pressure map, measured in Pa, at $\\rho_*$, with $p_{\\rm eos}'(\\rho_*)>0$ in m$^2$/s$^2$, and set the sound speed $c_*=\\sqrt{p_{\\rm eos}'(\\rho_*)}$ in m/s. For the linear acoustic tangent system, let the physical fields $\\delta\\rho:\\Omega_{\\rm phys}\\times I_{\\rm phys}\\to\\mathbb R$ and $v_{\\rm phys}:\\Omega_{\\rm phys}\\times I_{\\rm phys}\\to\\mathbb R^d$ satisfy\n$$\\partial_{t_{\\rm phys}}\\delta\\rho+\\rho_*\\operatorname{div}_Xv_{\\rm phys}=0,\\qquad \\partial_{t_{\\rm phys}}v_{\\rm phys}+(c_*^2/\\rho_*)\\nabla_X\\delta\\rho=0.$$\nHere $\\delta\\rho$ has units kg/m$^3$. The scales $X=Lx$, $t_{\\rm phys}=(L/U)t$, $\\delta\\rho=\\rho_*\\delta\\rho'$, and $v_{\\rm phys}=Uv$ give the momentum coefficient $Ma^{-2}$, where $Ma=U/c_*$. Both $Re$ and $Ma$ are dimensionless. These are chain-rule identities and assert no continuum limit or empirical similarity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the inviscid estimate is established on a fixed periodic domain and common local smooth interval, and the boundary case is outside its stated conclusion. Therefore it does not imply a wall inviscid-limit theorem or a boundary-layer estimate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and [F3], the acoustic result solves only the displayed linear tangent equations and the scaling result is an exact change of variables. Neither statement contains a nonlinear convergence conclusion or controls a finite-amplitude remainder. The remark consequently records these limits of coverage and requires separate hypotheses and estimates for such stronger claims.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an equation, estimate, or status observation and has no empty-set branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This remark records the limitations of periodic inviscid, linear acoustic and scaling suppliers; steps 1.1–2.1 compare their actual conclusions. The three suppliers are individually specified and no operation on a variable family or empty region is asserted.",
+            "item_sha256": "c221986d2fae2057581b81deb3977b8aa894279b906a9298ec049f100b760b3e",
+            "row_sha256": "1e95d55dacaedf0d04ade7adc0560aada9d78523c18bc9a8e0ff3b12f50602ad",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement has no zero-valued input branch requiring a separate conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement contains no singleton or one-element cardinality assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This remark records the limitations of periodic inviscid, linear acoustic and scaling suppliers; steps 1.1–2.1 compare their actual conclusions. The three named supplier statements are compared individually; there is no variable family cardinality to specialize to one.",
+            "item_sha256": "c221986d2fae2057581b81deb3977b8aa894279b906a9298ec049f100b760b3e",
+            "row_sha256": "4d6e330e48ac80cec0dd80661c1afbcbc0b110435f8604e901eb862feddb50da",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement fixes its regularity and parameter hypotheses and makes no degenerate-limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This remark records the limitations of periodic inviscid, linear acoustic and scaling suppliers; steps 1.1–2.1 compare their actual conclusions. The inviscid and low-Mach limits are explicitly recorded as limited or absent supplier conclusions; no new wall/low-Mach limiting theorem is asserted here.",
+            "item_sha256": "c221986d2fae2057581b81deb3977b8aa894279b906a9298ec049f100b760b3e",
+            "row_sha256": "41920ec5d37c6a88da3a99d709233a1a7786f4bf91f2ac4b8b98fee9918b0b64",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no time interval, endpoint, or limiting parameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This remark records the limitations of periodic inviscid, linear acoustic and scaling suppliers; steps 1.1–2.1 compare their actual conclusions. The common local interval is mentioned only to delimit an earlier theorem; neither step 1.1 nor 2.1 asserts a new endpoint estimate.",
+            "item_sha256": "c221986d2fae2057581b81deb3977b8aa894279b906a9298ec049f100b760b3e",
+            "row_sha256": "4dea0c29b458a72a979790977c0afe42f7c210f991e52d872c9203020eccb2b5",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and the Statement record the choice assumption of the cited acoustic tangent-system item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This remark records the limitations of periodic inviscid, linear acoustic and scaling suppliers; steps 1.1–2.1 compare their actual conclusions. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this forward equivalence worksheet has no claimed branch.",
+            "item_sha256": "c221986d2fae2057581b81deb3977b8aa894279b906a9298ec049f100b760b3e",
+            "row_sha256": "5392e0428d9a6cab75931f1a3afb0893e9738a53eddb8cda8e6720ce6202bced",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json: This remark records the limitations of periodic inviscid, linear acoustic and scaling suppliers; steps 1.1–2.1 compare their actual conclusions. The Statement asserts the stated implication, construction, estimate or definition; it asserts no necessary-and-sufficient characterization. Consequently this reverse equivalence worksheet has no claimed branch.",
+            "item_sha256": "c221986d2fae2057581b81deb3977b8aa894279b906a9298ec049f100b760b3e",
+            "row_sha256": "9ce99327aa4a062055218f921fba6d4b391289724ea0d9816cf4ddeec89fb35a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-19-24.json",
+              "sha256": "459f09cb504111c4e5c513bed687c6089fbe8e05e05e62ed14438eaee28df432"
+            }
+          }
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

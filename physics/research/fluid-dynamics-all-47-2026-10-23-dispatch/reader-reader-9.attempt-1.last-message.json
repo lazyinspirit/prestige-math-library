@@ -1,0 +1,79 @@
+{
+  "batch": "9",
+  "findings": [
+    {
+      "id": "def-fd-conservative-weak-form",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "pthm-fd-conservation-jump-laws",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "8f13d8617a705d7c0a170b2f63865c810faab86c4f92524945cbe39ce2bdf129"
+      },
+      "location": "Definition opening paragraph and frontmatter deps (items/def-fd-conservative-weak-form.md:10,31).",
+      "defect": "ill-formed",
+      "evidence": "The definition introduces measurability and a Lebesgue integral to define local integrability, and uses dx dt in its weak identities, but declares deps: [] and does not define or supply the measure space, Lebesgue measure, measurable functions, or the integral. The assigned consumer depends on this formulation. Declare the exact mathematical suppliers or define these notions locally.",
+      "severity": "fatal"
+    },
+    {
+      "id": "post-fd-boundary-data",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Postulate, opening wall-chart paragraph and following thermal-data paragraph (items/post-fd-boundary-data.md:33,35).",
+      "defect": "ill-formed",
+      "evidence": "The item defines X_b as charts of a moving solid boundary but does not state that X_b(t, Xi) lies in ∂Ω_t or that n points outward from the fluid region. The no-penetration/no-slip equations therefore lack a specified boundary set and orientation. The T_b and q_b fields also have no stated map domains or regularity. Define the wall patch as part of ∂Ω_t, orient its normal from the fluid, and state the thermal-data function spaces.",
+      "severity": "fatal"
+    },
+    {
+      "id": "pthm-fd-energy-decomposition",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Statement, periodic-cell global-conservation alternative and final O_B restriction (items/pthm-fd-energy-decomposition.md:71).",
+      "defect": "missing-hypothesis",
+      "evidence": "The local energy equation is asserted only on O_B = {(t,x): x∈Ω_t}, but the periodic alternative integrates it over Q and assumes only that fields and Φ are periodic. The statement does not require Q to be the fluid domain or to lie in Ω_t throughout I. Periodicity alone does not ensure the equation holds throughout Q.",
+      "severity": "fatal"
+    },
+    {
+      "id": "ex-fd-conduction-energy-entropy",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Example, first paragraph after defining k_j (items/ex-fd-conduction-energy-entropy.md:40).",
+      "defect": "ill-formed",
+      "evidence": "The components k_j are defined, but the vector k used in |k|², k·x, and the temperature formula is never defined as (k_1,k_2,k_3). The intended meaning is clear but the example description leaves this notation unspecified.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "ex-fd-conduction-energy-entropy",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Example, first paragraph's t≥0 field domain (items/ex-fd-conduction-energy-entropy.md:40).",
+      "defect": "missing-hypothesis",
+      "evidence": "The fields are specified only for t≥0, while the cited energy theorem and smooth balance model require fields on an open time interval containing 0. They can be extended to I=(-δ,∞) with 0<δ<log(T*/|a|)/λ while preserving T>0, but the statement does not provide this domain.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "ex-fd-conduction-energy-entropy",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Proof step 2.2 and the statement that the fields satisfy the smooth balance equations.",
+      "defect": "unlicensed-inference",
+      "evidence": "Step 2.2 verifies a local entropy inequality, while the adopted supplier post-fd-continuum-balances states an integral entropy inequality on material subregions. The proof does not connect the local inequality to that adopted balance. In this stationary smooth example, integrating over each material subregion and applying the divergence theorem closes the gap immediately.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "lem-fd-moving-control-volume-transport",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Proof step 2.1 (items/lem-fd-moving-control-volume-transport.md:68).",
+      "defect": "unlicensed-inference",
+      "evidence": "The statement does not explicitly require C_0 to be nonempty, but step 2.1 unconditionally applies the divergence-theorem supplier to C(t), whose statement assumes a bounded C¹ domain. If the empty open set is included, that hypothesis is not met. The identity is immediate for the empty set; add that case or require nonemptiness.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Opened both assigned pages, all 11 assigned items, their direct physical and mathematical suppliers, the relevant page prerequisites, assigned contracts and cross-batch records. The current batch-level schedule matches requirements [2,3,8]; the older coverage note's stale-schedule blocker is no longer present. Cited source passages were checked at their listed locators; entire lecture-note volumes were not read. No item/page edits were made; the task-named Markdown report is research/fluid-dynamics-all-47-2026-10-23-reader-9.md. No experimental observations or empirical statistical claims occur in this batch."
+}

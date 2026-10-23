@@ -1,0 +1,710 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "def-fd-rotating-stratified-shallow-equations",
+    "thm-fd-stratified-linear-energy",
+    "thm-fd-shallow-water-smooth-energy",
+    "ex-fd-geophysical-rest-state"
+  ],
+  "contracts": {
+    "def-fd-rotating-stratified-shallow-equations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "definition: the spatial periodic cells Q2 and Q3 are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: f=0 and nu=kappa=0 are admitted; N=0 and h=0 are excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes dimensions d=2 and d=3 and contains no one-object counting assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "definition: the diffusion coefficients may vanish, while N>0 and h>0 remain explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "definition: I is open, dt means d-lambda_1(t), and time-space integrals use the stated t0<t1 interval; no temporal endpoint data or boundary trace are imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states equation families and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states equation families and makes no biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "The G01 definition specializes the current supplier formal-PDE convention to periodic lifts on R^3 for its 3D stratified branch and defines the 2D shallow-water branch locally.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Independently checked the full Definition, direct supplier statements, def-fd-x00 Cartesian conventions and its referenced coordinate formulas. AC_omega is explicit for complete Lebesgue measure and box volume; Q2/Q3 are nonempty, and N>0 and h>0 exclude the singular cases. f=0 and zero diffusion are admitted. Time integration now explicitly uses lambda_1; Phi and Phi_eff have specified domains and sufficient spatial regularity. The rotating basis and centrifugal sign agree with constant vertical rotation; no density-anomaly or background-gradient identification is silently assumed. Definition has no hyperlinks and no diagram. Batch-40 postulate uses a restriction to its own local background region and stronger regularity, so no outside consumer repair is required; mathematical energy consumers use the unchanged equations. Reader prose findings concern only redundant published explanations; exact Caratheodory and finite dot-product formulas remain adequate. No physical premise, measurement or existence claim is introduced."
+      }
+    },
+    "thm-fd-stratified-linear-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The rotating, linear, constant-stratification Boussinesq equation family is\n\n$$u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "For a scalar field $q$, set $\\nabla q=(\\partial_{x_1}q,\\ldots,\\partial_{x_d}q)$ and $\\Delta q=\\sum_{j=1}^d\\partial_{x_j}^2q$. For a vector field $w=(w_1,\\ldots,w_d)$, set $\\nabla\\cdot w=\\sum_{j=1}^d\\partial_{x_j}w_j$, $\\Delta w=(\\Delta w_1,\\ldots,\\Delta w_d)$, $|w|^2=\\sum_{j=1}^dw_j^2$, and $|\\nabla w|^2=\\sum_{i,j=1}^d(\\partial_{x_j}w_i)^2$. For a matrix field $A$, its divergence is rowwise: $(\\nabla\\cdot A)_i=\\sum_{j=1}^d\\partial_{x_j}A_{ij}$. In three dimensions $e_3\\times u=(-u_2,u_1,0)$, and in two dimensions $Jv=(-v_2,v_1)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge1$, let $Q=\\prod_{j=1}^n[a_j,b_j]$ with $a_j<b_j$, and let $f:Q\\to\\mathbb R$ be bounded and Borel. If $f$ is Riemann integrable, then $f\\in L^1(\\lambda_n|_Q)$ and its Lebesgue and Riemann integrals agree.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "The momentum equation gives the local kinetic-energy balance; Coriolis work vanishes, pressure is a divergence under incompressibility, and diffusion contributes -nu|grad u|^2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "The buoyancy equation gives the potential-energy balance, which cancels the kinetic buoyancy-transfer term and leaves the stated dissipation.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "1.2",
+          "claim": "Fix $t_0<t_1$ and set $K=[t_0,t_1]\\times Q_3$. For each rectangle $A$, write $R_A(F)$ for the Riemann integral of a Riemann-integrable $F$ over $A$. The energy density, its time derivative, and the dissipation integrand are continuous on $K$ and on its closed coordinate subrectangles; hence they are bounded and Riemann integrable by [L1], and Borel because the inverse image of an open set is relatively open. Under [A2], [L2] identifies their Riemann integrals with their Lebesgue integrals on $K$ and on each spatial slice. For any such continuous $F(t,x)$, [L3] gives a Riemann-integrable section integral $g_F(t)=R_{Q_3}(F(t,\\cdot))$ and $R_K(F)=R_{[t_0,t_1]}(g_F)$; [L2] identifies each spatial section integral with its Lebesgue integral, and [L5] identifies the outer interval integral of $g_F$ with its Lebesgue integral. Thus the nested Lebesgue dissipation integral in the statement exists and equals its product Riemann integral on $K$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "L1",
+            "L2",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "current-step-3-1",
+          "claim": "Write $e=\\tfrac12(|u|^2+b^2/N^2)$, $\\mathcal F=\\pi u-\\nu\\sum_{i=1}^3u_i\\nabla u_i-(\\kappa/N^2)b\\nabla b$, and $D=\\nu|\\nabla u|^2+(\\kappa/N^2)|\\nabla b|^2$, so step 2.1 gives $\\partial_t e+\\nabla\\cdot\\mathcal F=-D$. Fix a time $t$. Each $\\partial_{x_j}\\mathcal F_j(t,\\cdot)$ is continuous on $Q_3$; [L4] in $x_j$ gives its integral as the periodic endpoint difference $\\mathcal F_j|_{x_j=2\\pi}-\\mathcal F_j|_{x_j=0}=0$. Applying [L1], [L3], and [L6] only in space gives $R_{Q_3}(\\nabla\\cdot\\mathcal F(t,\\cdot))=0$, hence $R_{Q_3}(\\partial_t e(t,\\cdot))=-R_{Q_3}(D(t,\\cdot))$. Integrate this last equality in time; step 1.2 makes both section-integral functions Riemann integrable, and [L3] gives $R_K(\\partial_t e)=-R_K(D)$. For each fixed $x$, [L4] in time applied to $e$ and then [L3] yield $R_K(\\partial_t e)=R_{Q_3}(e(t_1,\\cdot)-e(t_0,\\cdot))$. By [L6] and [L2] at the endpoints, this is $E(t_1)-E(t_0)$; by step 1.2, $R_K(D)$ is the displayed nested Lebesgue dissipation integral. No time integral of an individual pressure-flux derivative is used. Since $N>0$, $E(t)\\ge0$; since $\\nu,\\kappa\\ge0$, the dissipation is nonnegative, and when $\\nu=\\kappa=0$ it vanishes.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "L2",
+            "L3",
+            "L4",
+            "L6",
+            "step 1.2",
+            "algebra",
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "If I is empty, there is no pair t0<t1 in the stated identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: u=b=0 gives E=0 and zero dissipation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no finite-family cardinality parameter in this continuum PDE claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "statement and step 1.2: f=0 and nu=kappa=0 are admitted; N=0 is explicitly excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement and step 3.1: t0<t1 are internal to I, and Newton-Leibniz gives the endpoint identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no indexed family members directly; the Statement assumes AC_omega for the cited measure and comparison suppliers as recorded in A2 and step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero rest state",
+          "inputs": "u=b=pi=0",
+          "result": "both equations hold and both energy and dissipation are zero"
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "Transitive through the G01 definition; the proof uses its locally stated equations and Cartesian conventions. The supplier carrier and interface are current, but its Step-1 readiness record is missing.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u39",
+        "notes": "Current assigned adjudication checks the full local derivation and exact L1-L6 statements. Product rules, u dot (e3 cross u)=0, and cancellation of b u3 give the local balance. N>0 is retained as a convention; 1/N^2 is positive for any nonzero real N. Pressure need only be C1 in space at each fixed time: 3.1 integrates each periodic flux derivative spatially using L1,L3,L4,L6 before any time integration. Only continuous e,e_t,D receive compact time-space integration in 1.2 and 3.1. L2 converts spatial integrals and L5 the outer interval under explicit AC_omega. Zero fields, zero rotation, vanishing diffusion and all interior t0<t1 are admitted. This is conditional mathematics without empirical premises; this repair has no claim of independent review."
+      }
+    },
+    "thm-fd-shallow-water-smooth-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The inviscid one-layer shallow-water equation family is\n\n$$h_t+\\nabla\\cdot(hv)=0,\\qquad (hv)_t+\\nabla\\cdot(hv\\otimes v)+\\nabla\\!\\left(\\frac{g h^2}{2}\\right)+f h Jv=0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "For a scalar field $q$, set $\\nabla q=(\\partial_{x_1}q,\\ldots,\\partial_{x_d}q)$ and $\\Delta q=\\sum_{j=1}^d\\partial_{x_j}^2q$. For a vector field $w=(w_1,\\ldots,w_d)$, set $\\nabla\\cdot w=\\sum_{j=1}^d\\partial_{x_j}w_j$, $\\Delta w=(\\Delta w_1,\\ldots,\\Delta w_d)$, $|w|^2=\\sum_{j=1}^dw_j^2$, and $|\\nabla w|^2=\\sum_{i,j=1}^d(\\partial_{x_j}w_i)^2$. For a matrix field $A$, its divergence is rowwise: $(\\nabla\\cdot A)_i=\\sum_{j=1}^d\\partial_{x_j}A_{ij}$. In three dimensions $e_3\\times u=(-u_2,u_1,0)$, and in two dimensions $Jv=(-v_2,v_1)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge1$, let $Q=\\prod_{j=1}^n[a_j,b_j]$ with $a_j<b_j$, and let $f:Q\\to\\mathbb R$ be bounded and Borel. If $f$ is Riemann integrable, then $f\\in L^1(\\lambda_n|_Q)$ and its Lebesgue and Riemann integrals agree.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Continuity converts the conservative momentum derivative to h D_t v, yielding D_t v=-fJv-g grad h.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Dotting by v gives the kinetic balance; continuity gives the potential balance; the pressure-work terms combine into the displayed energy flux.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "Set $K=[t_0,t_1]\\times Q_2$ and write $R_A(F)$ for the Riemann integral of a Riemann-integrable $F$ over a rectangle $A$. The local flux identity from step 2.1 has continuous scalar terms on $K$, which are Riemann integrable by [L1]. Integrate that identity over $K$ as a Riemann integral. For each fixed $x$, [L4] in time gives $\\int_{t_0}^{t_1}\\partial_tE(t,x)\\,dt=E(t_1,x)-E(t_0,x)$; [L3] then gives $R_K(\\partial_tE)=R_{Q_2}(E(t_1,\\cdot)-E(t_0,\\cdot))$. For each spatial flux component and each fixed value of the other coordinates, [L4] in the differentiated coordinate gives the endpoint difference at $0$ and $2\\pi$, which is zero by periodicity; [L3] yields $R_K(\\nabla\\cdot((E+gh^2/2)v))=0$. By [L5], the integrated local identity therefore gives $R_{Q_2}(E(t_1,\\cdot))=R_{Q_2}(E(t_0,\\cdot))$. Each endpoint energy density is continuous and hence Borel on $Q_2$; [L2] under [A2] identifies these Riemann integrals with the Lebesgue integrals in the statement.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty open time interval I and fixes the nonempty two-dimensional periodic cell Q_2=[0,2pi]^2. Its endpoint conservation claim quantifies only over t0<t1 in I, so Proof 3.1 integrates on the nondegenerate box [t0,t1] times Q_2. The component indices are the fixed set {1,2}; there is no variable family or empty-index parameter in either the pointwise balance or the integrated energy claim.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Keep the not_applicable disposition but replace its reason. The old conditional about I being empty discusses a case excluded by the actual nonempty-I hypothesis and does not address the pointwise balance at all. Current Statement fixes positive spatial dimension two, a nonempty periodic cell, positive depth, and nonempty open I; Proof 1.1–2.1 derives the full local nonlinear shallow-water energy-flux identity at each point. Proof 3.1 then uses t0<t1 and Q2 to meet the nondegenerate-rectangle hypotheses of L1/L3/L4 and converts endpoint integrals through L2 under A2. The detector matches the wording equation family in the reference convention; this is a fixed equation system rather than an arbitrary indexed aggregate whose family could be empty. No mathematical extension or restriction of the full energy claim is required.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/first-boundary-resolution-39.json",
+              "sha256": "853639561712154b4a219ee277c80b116d7bfa375cb98a823b4715a9fd8bcc56"
+            },
+            "item_sha256": "b4e7a45bb842bffb1361f0c01e38bb58a0fbd10af54ea756b96ea859718c2abf"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: v=0 and h=H>0 leave constant potential energy and zero flux divergence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no finite-family cardinality parameter in this continuum PDE claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1: f=0 is allowed and h>0 excludes dry states; the proof never divides by g or f."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: every t0<t1 in the open interval is covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no member from an indexed family and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an energy identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant depth at rest",
+          "inputs": "h=H>0, v=0",
+          "result": "the equations hold and the cell energy equals 2 pi^2 g H^2"
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "Transitive through the G01 definition; the proof uses its locally stated equations and Cartesian conventions. The supplier carrier and interface are current, but its Step-1 readiness record is missing.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Checked Proof 1.1, 2.1 and 3.1 against all L1-L5 supplier Statements. Positive h licenses division; rowwise tensor expansion reduces momentum to D_t v=-fJv-g grad h. v dot Jv=0. Kinetic and potential balances sum to the stated pressure-work flux (E+gh^2/2)v. Every integrated scalar term and every coordinate section is continuous on the nondegenerate compact box [t0,t1] x Q2. Thus the corrected all-sections Fubini condition holds; Newton-Leibniz and periodic flux endpoints give zero boundary contribution, with linearity and the AC_omega Borel comparison converting endpoint energies to Lebesgue integrals. Zero velocity/constant positive depth and f=0 are consistent; dry states and nonsmooth solutions are excluded. Full Statement is uninterrupted and no diagram is present. No claim about model truth, numerical positivity or approximation error is proved. No new supplier interface changes or consumer repairs are required."
+      }
+    },
+    "ex-fd-geophysical-rest-state": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The rotating, linear, constant-stratification Boussinesq equation family is\n\n$$u_t+f e_3\\times u+\\nabla\\pi=b e_3+\\nu\\Delta u,\\qquad \\nabla\\cdot u=0,\\qquad b_t+N^2u_3=\\kappa\\Delta b.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fd-rotating-stratified-shallow-equations",
+          "source_section": "Definition",
+          "quote": "The inviscid one-layer shallow-water equation family is\n\n$$h_t+\\nabla\\cdot(hv)=0,\\qquad (hv)_t+\\nabla\\cdot(hv\\otimes v)+\\nabla\\!\\left(\\frac{g h^2}{2}\\right)+f h Jv=0.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fd-shallow-water-smooth-energy",
+          "source_section": "Statement",
+          "quote": "Define the normalized energy density per horizontal area by $E:=h|v|^2/2+gh^2/2$; it is per unit reference density, so a specified constant density converts its area integral to joules. Then the pointwise energy flux identity is\n\n$$\\partial_t E+\\nabla\\cdot\\left(\\left(E+\\frac{gh^2}{2}\\right)v\\right)=0.$$\n\nConsequently, for every $t_0<t_1$ in $I$,\n\n$$\\int_{Q_2}E(t_1,x)\\,dx=\\int_{Q_2}E(t_0,x)\\,dx.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of Half-open boxes in $\\mathbb{R}^n$ and their volume, and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ (Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Direct substitution of the zero stratified fields satisfies each equation and sets the energy integrand to zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "1.2",
+          "claim": "Direct substitution of constant positive depth and zero velocity satisfies the shallow-water equations, so the local energy theorem applies.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.1",
+          "claim": "Substitution into [F3]'s energy density gives $E= gH^2/2$. By [F4], the cell $Q_2$ has Lebesgue area $(2\\pi)^2$, so its integral is $(2\\pi)^2gH^2/2=2\\pi^2gH^2$, independent of time.",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes nonempty periodic cells Q2 and Q3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the stratified rest state has u=b=pi=0 and zero energy."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no finite-family cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: the stratified state works for zero or positive diffusion and the shallow state requires H>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: the shallow rest-state energy is independent of all t in I."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example selects no member from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "stratified zero state",
+          "inputs": "u=b=pi=0",
+          "result": "every PDE term and the energy are zero"
+        },
+        {
+          "case": "shallow rest state",
+          "inputs": "h=H>0, v=0",
+          "result": "mass and momentum equations vanish and total normalized energy is 2 pi^2 g H^2"
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "resolved_prerequisites": [
+        {
+          "supplier": "def-fd-x00",
+          "status": "owner-resolved",
+          "current_carrier": "items/def-fd-x00.md is present and included in the current batch-5 manifest on fd-x01 at dependency_level 0.",
+          "current_readiness": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required.",
+          "planned_source": "research/scaffold-refresh-2026-10-18/fluid-dynamics/inherited/workers/examples/proofs.md#x00",
+          "exact_planned_excerpt": "On open spatial Ω⊂R³ and time interval I, write u:I×Ω→R³, p:I×Ω→R, density ρ:I×Ω→(0,∞). Classical equations mean pointwise equality, with u C¹ in time/C² in space, p C¹ in space; impose more regularity whenever differentiated.",
+          "planned_hypotheses_and_conventions": [
+            "I is a nonempty open time interval.",
+            "Omega is a nonempty open subset of R^3 with Cartesian spatial coordinates.",
+            "Classical equations are pointwise equalities.",
+            "Velocity and buoyancy fields are C1 in time and C2 in space.",
+            "Pressure is C1 in space.",
+            "Further regularity is imposed whenever a proof differentiates further.",
+            "Periodic fields are interpreted through their lifts on Omega=R^3."
+          ],
+          "planned_proof_status": "Historical planned fields retained for traceability; current supplier is available and current authoring readiness verified.",
+          "transitive_dependency_note": "The actual current carrier declares six external mathematical premises: divergence/curl, Laplacian, Jacobian/gradient, Euclidean inner product, piecewise-C1 line integrals, and oriented surface flux; its dependency_level is 0. The relevant Cartesian derivative, Laplacian, Jacobian, cross-product, and inner-product statement conventions were inspected and match the locally stated formulas. The line-integral and surface-flux clauses are not used by G01. The older proposed inventory listed only one direct dependency; the current carrier controls actual closure.",
+          "consumer_use": "Transitive through the G01 definition; the proof uses its locally stated equations and Cartesian conventions. The supplier carrier and interface are current, but its Step-1 readiness record is missing.",
+          "actual_current_excerpt": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of time and let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open set of Cartesian spatial coordinates $x=(x_1,x_2,x_3)$, with the standard right-handed orientation. A vector field $u:I\\times\\Omega\\to\\mathbb R^3$ is in the regularity class used here if $u$, its first time partial derivatives, its first spatial partial derivatives, and its second spatial partial derivatives all exist and are continuous. Scalar fields have the corresponding stated continuous derivatives: a pressure field $p$ has continuous first spatial partial derivatives;",
+          "evidence": "Owner /root resolves the former missing readiness/placement hold using research/fluid-dynamics-all-47-2026-10-23-owner-formal-consumer-readiness-resolution/review.json and current source5, F01 and finite-Reynolds readiness bindings. Actual R3 conventions, locally defined all-n residual and R2 shallow-water branches, and stress sign/units match their precise consuming scopes. This records authoring readiness; independent review and native gates remain required."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Independently checked Verification 1.1, 1.2 and 2.1: constant zero u,b,pi annihilate every stratified term for all admitted f,N,nu,kappa; constant H>0 with v=0 annihilates shallow-water mass and momentum terms for any admitted g,f. Both are smooth periodic and satisfy every supplier hypothesis. F4 under AC_omega gives area (2pi)^2 and the constant energy density gH^2/2 integrates to 2pi^2 g H^2. H=0 and N=0 are expressly excluded, zero diffusion is allowed, and arbitrary times in nonempty I give the same energy. Full Example has no hyperlinks and no diagram is present. These are constructed mathematical states, with no measured data or statistical inference. No item edit or new obligation is required."
+      }
+    }
+  }
+}

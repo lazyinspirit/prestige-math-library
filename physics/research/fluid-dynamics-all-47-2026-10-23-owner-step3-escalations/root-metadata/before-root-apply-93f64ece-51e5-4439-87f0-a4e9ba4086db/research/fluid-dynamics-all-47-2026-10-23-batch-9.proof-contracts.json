@@ -1,0 +1,1637 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "scope": [
+    "lem-fd-moving-control-volume-transport",
+    "post-fd-boundary-data",
+    "pthm-fd-material-mass-continuity",
+    "post-fd-weak-balances",
+    "pthm-fd-continuous-source-local-balances",
+    "pthm-fd-conservation-jump-laws",
+    "pthm-fd-cauchy-momentum-angular",
+    "pthm-fd-control-volume-balances",
+    "pthm-fd-energy-decomposition",
+    "cex-fd-vacuum-velocity-determination",
+    "ex-fd-conduction-energy-entropy"
+  ],
+  "contracts": {
+    "lem-fd-moving-control-volume-transport": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-fd-c1-domain-jordan-integrals",
+          "source_section": "Statement",
+          "quote": "Let $V\\subset\\mathbb R^3$ be a bounded open set whose boundary is locally, after a rigid coordinate change, the graph of a $C^1$ function, with $V$ lying locally on one side of that graph. Let $U\\subset\\mathbb R^3$ be open with $\\overline V\\subset U$. Let $\\phi:U\\to\\phi(U)$ be a bijection onto an open image with $\\phi$ and $\\phi^{-1}$ both $C^1$, and let $f:\\phi(U)\\to\\mathbb R$ be continuous. A bounded set is Jordan measurable when its indicator is Riemann integrable by the zero-extension convention; a set has content zero when it has finite cube covers of arbitrarily small total volume. Then $V$ and $\\phi(V)$ are bounded open sets with locally $C^1$ graph boundaries, their compact closures are Jordan measurable, $\\partial V$ and $\\phi(\\partial V)$ have content zero, and\n\n$$\\int_{\\phi(V)}f(x)\\,dx=\\int_{\\phi(\\overline V)}f(x)\\,dx.$$\n\nThus a balance integral over an open $C^1$ material region agrees with the compact-Jordan integral on its closure after a $C^1$ diffeomorphic motion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-transport-and-density",
+          "source_section": "Statement",
+          "quote": "For every $t\\in I$, change of variables and material transport satisfy\n\n$$\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_Kq(t,\\chi(t,a))J(t,a)\\,da,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_{\\chi_t(K)}\\bigl(D_tq(t,x)+q(t,x)\\theta(t,x)\\bigr)\\,dx=\\int_{\\chi_t(K)}\\bigl(\\partial_tq+\\nabla_x\\!\\cdot(qu)\\bigr)\\,dx,$$\n\nwhere $D_tq=\\partial_tq+u\\cdot\\nabla_xq$ and $\\nabla_x\\!\\cdot(qu)=\\sum_{i=1}^3\\partial_{x_i}(qu_i)$. Define $M_K(t):=\\int_{\\chi_t(K)}\\rho(t,x)\\,dx$. The pointwise continuity equation $D_t\\rho+\\rho\\theta=0$, equivalently $\\partial_t\\rho+\\nabla_x\\!\\cdot(\\rho u)=0$, holds on $\\Omega$ if and only if $M_K$ is constant on $I$ for every compact Jordan $K\\subset U$, and if and only if $\\rho(t,\\chi(t,a))J(t,a)=\\rho(0,\\chi(0,a))J(0,a)$ for all $a\\in U$ and $t\\in I$. This is a mathematical equivalence; it adopts no physical mass-conservation postulate and asserts no weak-field or vacuum extension.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $C_0=\\varnothing$, then $C(t)=\\partial C(t)=\\varnothing$ for every $t$, all integrals are zero, and the asserted identity holds without applying the divergence theorem. Henceforth suppose $C_0\\ne\\varnothing$. Fix $t_0\\in I$ and put $K=\\overline{C_0}$. By [F1], $K$ is compact Jordan and integration over $C(t_0)$ agrees with integration over $X_{t_0}(K)$. Translate time by $t_0$ and apply [F2] to the translated motion and field. Since the Eulerian velocity of that motion is $w$, the derivative at $t_0$ is\n$$\\int_{C(t_0)}\\bigl(\\partial_tg+\\operatorname{div}_x(gw)\\bigr)\\,dx.$$\nThe argument applies to every $t_0\\in I$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "The field $gw$ is $C^1$ on a neighborhood of $\\overline{C(t_0)}$. Apply [F3] and use $\\int_C\\operatorname{div}(gw)=\\int_{\\partial C}gw\\cdot n$ to obtain the stated formula. Apply this scalar argument to each component when $g$ is vector-valued.",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement says bounded open C0 with locally C1 boundary, without explicitly imposing nonemptiness. If the empty set is admitted, X_t(C0) and its boundary are empty, its integral is constantly zero, and the transport formula has both right-hand terms zero. No normal values are required on an empty boundary. This checks the degenerate case directly without invoking a nonempty-domain divergence theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Statement says bounded open C0 with locally C1 boundary, without explicitly imposing nonemptiness. If the empty set is admitted, X_t(C0) and its boundary are empty, its integral is constantly zero, and the transport formula has both right-hand terms zero. No normal values are required on an empty boundary. This checks the degenerate case directly without invoking a nonempty-domain divergence theorem.",
+            "item_sha256": "ca85c36407cb9f09aec4360281d7053673e211bcebd5c7bde678208fc46b3058",
+            "row_sha256": "37f3253b3d048ffc994711778be2c6e4ae1d4fa59c1ce739098e89ff369ceb3e",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Setting g=0 makes both sides zero; the identity also follows by linearity. Statement and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar identity is proved first, and the vector case follows componentwise. Statement and step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Empty reference set is handled explicitly in step1.1; nonempty C1 regions have positive-volume interior. No collapsed Jacobian is allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Only derivatives at interior times of the open interval are asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable choice supplies the divergence-theorem hypothesis in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The formula is an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The formula is an identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read both steps and all four exact supplier statements. Empty C0 is now handled directly before invoking transport/divergence; nonempty images retain C1 graph boundaries by the Jordan-region lemma. C2 motion gives C1 gw near compact closures. Translate time for transport; its statement does not require identity at time zero. Countable choice supplies divergence. Vector conclusion is componentwise; zero fields and arbitrary interior times cause no exception. No diagrams. Reader/refuter finding 7 confirmed nonfatal and repaired."
+      }
+    },
+    "post-fd-boundary-data": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Wall spacetime patches are explicitly subsets of fluid boundary with one-sided C2 graph geometry, fluid-outward normal, well-defined material velocity and continuous selected thermal-data maps. Alternative wall/thermal/periodic/initial models remain separately adopted."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The Statement is limited to adopted SI boundary/initial data, distinguishes physical walls from periodic faces, and explicitly asserts no solvability, uniqueness, regularity improvement, or approximation."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong \u00a72.3.1 and \u00a73.2.1 and Powers \u00a75.4.1 were read in full at the recorded locators. The source claims about empirical universality and the overbroad Euler/no-slip assertion are not adopted; periodic and solver-specific data are labeled as model choices."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item is an adopted postulate with proof: not-applicable. It explicitly says boundary and initial data are not consequences of interior equations and do not assert existence or solvability."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Reviewed complete adopted formulation, exact conventions and weak-form supplier, and Tong section 2.3.1 (printed pp33-34) directly. Charts now lie in fluid boundary with one-sided C2 geometry and fluid-outward normal. Thermal data are continuous maps on the selected spacetime wall patch via chart pullback; further evolution regularity remains explicit selection. Time-independent material transition charts make wb single valued. Impermeability does not imply no slip; periodic faces are not walls; weak initial term is no strong trace. Reader/refuter 2 confirmed fatal and locally repaired, confidence1. The weak-form prerequisite still lacks measure/integral suppliers (outside batch8 hold), and is not certified here. Consumers inspected separately in report; no thermal-data consumer or changed boundary equality/sign."
+      }
+    },
+    "pthm-fd-material-mass-continuity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "For every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Let $B\\subseteq\\mathbb R^3$ be a bounded open reference body whose boundary is locally the graph of a $C^1$ function, with $B$ lying on one side of each such graph. Identify the reference coordinates with the chosen initial Cartesian chart, and let $U$ be an open neighborhood of $\\overline B$. A **material motion** is a map $\\chi\\in C^2(I\\times U,\\mathbb R^3)$ such that each $\\chi_t=\\chi(t,\\cdot)$ is a bijection from $U$ onto an open image, has a $C^2$ inverse, and has positive Jacobian determinant; in the initial chart set $\\chi(0,a)=a$. The label $a\\in U$ and position $x=\\chi(t,a)$ are measured in metres. Write\n\n$$F(t,a)=D_a\\chi(t,a),\\qquad J(t,a)=\\det F(t,a)>0,\\qquad A(t,x)=\\chi_t^{-1}(x),\\qquad \\Omega_t=\\chi_t(B).$$\n\nHere $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-transport-and-density",
+          "source_section": "Statement",
+          "quote": "For every $t\\in I$, change of variables and material transport satisfy\n\n$$\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_Kq(t,\\chi(t,a))J(t,a)\\,da,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_{\\chi_t(K)}\\bigl(D_tq(t,x)+q(t,x)\\theta(t,x)\\bigr)\\,dx=\\int_{\\chi_t(K)}\\bigl(\\partial_tq+\\nabla_x\\!\\cdot(qu)\\bigr)\\,dx,$$\n\nwhere $D_tq=\\partial_tq+u\\cdot\\nabla_xq$ and $\\nabla_x\\!\\cdot(qu)=\\sum_{i=1}^3\\partial_{x_i}(qu_i)$. Define $M_K(t):=\\int_{\\chi_t(K)}\\rho(t,x)\\,dx$. The pointwise continuity equation $D_t\\rho+\\rho\\theta=0$, equivalently $\\partial_t\\rho+\\nabla_x\\!\\cdot(\\rho u)=0$, holds on $\\Omega$ if and only if $M_K$ is constant on $I$ for every compact Jordan $K\\subset U$, and if and only if $\\rho(t,\\chi(t,a))J(t,a)=\\rho(0,\\chi(0,a))J(0,a)$ for all $a\\in U$ and $t\\in I$. This is a mathematical equivalence; it adopts no physical mass-conservation postulate and asserts no weak-field or vacuum extension.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-c1-domain-jordan-integrals",
+          "source_section": "Statement",
+          "quote": "Let $V\\subset\\mathbb R^3$ be a bounded open set whose boundary is locally, after a rigid coordinate change, the graph of a $C^1$ function, with $V$ lying locally on one side of that graph. Let $U\\subset\\mathbb R^3$ be open with $\\overline V\\subset U$. Let $\\phi:U\\to\\phi(U)$ be a bijection onto an open image with $\\phi$ and $\\phi^{-1}$ both $C^1$, and let $f:\\phi(U)\\to\\mathbb R$ be continuous. A bounded set is Jordan measurable when its indicator is Riemann integrable by the zero-extension convention; a set has content zero when it has finite cube covers of arbitrarily small total volume. Then $V$ and $\\phi(V)$ are bounded open sets with locally $C^1$ graph boundaries, their compact closures are Jordan measurable, $\\partial V$ and $\\phi(\\partial V)$ have content zero, and\n\n$$\\int_{\\phi(V)}f(x)\\,dx=\\int_{\\phi(\\overline V)}f(x)\\,dx.$$\n\nThus a balance integral over an open $C^1$ material region agrees with the compact-Jordan integral on its closure after a $C^1$ diffeomorphic motion.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix a closed ball $K\\subset B$ with nonempty interior, and put $V=\\operatorname{int}K$. The region $V$ is an admissible material subregion. By [F3], the boundary has content zero and its image integral agrees with the integral over $\\chi_t(K)$. Thus [A1] makes $M_K(t):=\\int_{\\chi_t(K)}\\rho(t,x)\\,dx$ constant on $I$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "The set $K$ is compact Jordan and $\\rho$ is $C^1$, so [F2] gives\n$$0=M_K'(t)=\\int_{\\chi_t(K)}R(t,x)\\,dx,\\qquad R:=\\partial_t\\rho+\\operatorname{div}_x(\\rho u).$$\nThe residual $R$ is continuous.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "3.1",
+          "claim": "Fix $(t,x_0)\\in\\mathcal O_B$ and write $x_0=\\chi(t,a_0)$ with $a_0\\in B$. If $R(t,x_0)>0$, continuity gives a neighborhood on which $R>R(t,x_0)/2$. Choose a sufficiently small closed ball $K$ about $a_0$ contained in $B$ whose image lies in that neighborhood. The image has positive volume because $\\chi_t$ is a diffeomorphism and $K$ contains a nonempty open ball, so its integral of $R$ is positive, contradicting step 2.1. The same argument applied to $-R$ rules out $R(t,x_0)<0$. Hence $R=0$ everywhere in $\\mathcal O_B$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The localization uses nonempty closed balls, never the empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes both positive and negative residual values, leaving R=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 localizes at an arbitrary event using one sufficiently small reference ball."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The localizing balls have positive radius."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The derivative conclusion is only on the open time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Step 1.1 fixes one closed ball and step 3.1 chooses one sufficiently small ball inside a specified positive-residual neighborhood. These are finite local witnesses, not selectors from a family; neither the Statement nor this proof invokes a choice axiom.",
+            "item_sha256": "29753a6a32a875a085bff47c793305e37c7e7062efa61323192e8e54840381db",
+            "row_sha256": "7c3b4442af02616a0dc20af2bf942889d4e5b11fd94aff25b8b18bfba937ac3f",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a one-way implication from mass balance to continuity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from local continuity to the reference mass data is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read all three proof steps and all four cited suppliers. Every closed reference ball has admissible nonempty C1 interior; Jordan-region compatibility transfers fixed material mass to compact closure. Transport differentiates C1 density and C2 diffeomorphism. Continuous residual localized on a sufficiently small reference ball has fixed sign and positive-volume image, so residual is zero precisely on O_B. No division by density or inference on ambient O occurs. Empty B is vacuous, open I has no endpoint, no choice used. No diagrams or reviewer findings on this item."
+      }
+    },
+    "post-fd-weak-balances": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Statement gives exact weak mass, momentum and total-energy test identities including initial conservative data and gives the physical entropy inequality for every nonnegative test."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "Every conservative density, flux, product and source in the initial-data tests is locally integrable up to t=0 on compact subsets of Omega x [0,T_f) in the relative topology. No value or strong trace at t=0 is asserted. Interior tests impose no boundary data, and weak balances and entropy remain separately adopted assumptions."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Powers \u00a7\u00a74.4\u20134.8 and \u00a79.4.1 and Tong \u00a73.1.2 were inspected at the recorded locators. They support smooth balance laws and integral shock context only; neither is represented as proving a smooth-to-weak extension."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This item is explicitly a separate adopted weak-branch postulate; the Statement denies that smooth balances imply arbitrary weak energy or entropy admissibility."
+        }
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "pthm-fd-continuous-source-local-balances": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Assume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$\n\nAdopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$",
+          "uses": [
+            "2.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Here $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-fd-material-mass-continuity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant), and satisfy $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous; write $\\Omega_t=\\chi_t(B)$ and $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho\\in C^1(\\mathcal O)$ be positive mass densities, where $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Suppose that for every nonempty bounded open $V$ with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side and every $t\\in I$,\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\nThen the pointwise continuity equation\n$$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0$$\nholds throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$. The larger set $\\mathcal O$ is only the ambient regularity domain; no balance outside $\\chi_t(B)$ is assumed or concluded. This is a conditional deduction in the smooth material model and asserts no extension to weak fields or vacuum.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-transport-and-density",
+          "source_section": "Statement",
+          "quote": "For every $t\\in I$, change of variables and material transport satisfy\n\n$$\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_Kq(t,\\chi(t,a))J(t,a)\\,da,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(K)}q(t,x)\\,dx=\\int_{\\chi_t(K)}\\bigl(D_tq(t,x)+q(t,x)\\theta(t,x)\\bigr)\\,dx=\\int_{\\chi_t(K)}\\bigl(\\partial_tq+\\nabla_x\\!\\cdot(qu)\\bigr)\\,dx,$$\n\nwhere $D_tq=\\partial_tq+u\\cdot\\nabla_xq$ and $\\nabla_x\\!\\cdot(qu)=\\sum_{i=1}^3\\partial_{x_i}(qu_i)$. Define $M_K(t):=\\int_{\\chi_t(K)}\\rho(t,x)\\,dx$. The pointwise continuity equation $D_t\\rho+\\rho\\theta=0$, equivalently $\\partial_t\\rho+\\nabla_x\\!\\cdot(\\rho u)=0$, holds on $\\Omega$ if and only if $M_K$ is constant on $I$ for every compact Jordan $K\\subset U$, and if and only if $\\rho(t,\\chi(t,a))J(t,a)=\\rho(0,\\chi(0,a))J(0,a)$ for all $a\\in U$ and $t\\in I$. This is a mathematical equivalence; it adopts no physical mass-conservation postulate and asserts no weak-field or vacuum extension.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fd-c1-domain-jordan-integrals",
+          "source_section": "Statement",
+          "quote": "Let $V\\subset\\mathbb R^3$ be a bounded open set whose boundary is locally, after a rigid coordinate change, the graph of a $C^1$ function, with $V$ lying locally on one side of that graph. Let $U\\subset\\mathbb R^3$ be open with $\\overline V\\subset U$. Let $\\phi:U\\to\\phi(U)$ be a bijection onto an open image with $\\phi$ and $\\phi^{-1}$ both $C^1$, and let $f:\\phi(U)\\to\\mathbb R$ be continuous. A bounded set is Jordan measurable when its indicator is Riemann integrable by the zero-extension convention; a set has content zero when it has finite cube covers of arbitrarily small total volume. Then $V$ and $\\phi(V)$ are bounded open sets with locally $C^1$ graph boundaries, their compact closures are Jordan measurable, $\\partial V$ and $\\phi(\\partial V)$ have content zero, and\n\n$$\\int_{\\phi(V)}f(x)\\,dx=\\int_{\\phi(\\overline V)}f(x)\\,dx.$$\n\nThus a balance integral over an open $C^1$ material region agrees with the compact-Jordan integral on its closure after a $C^1$ diffeomorphic motion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix an admissible $V$ and let $K=\\overline V$. By [F4], $K$ is compact Jordan and its open-region integrals equal the corresponding closure integrals. Apply [F3] componentwise to $f=\\rho u$; the derivative of its material integral is\n$$\\int_{P_t}\\bigl(\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u)\\bigr)\\,dx.$$\nPointwise mass continuity and the product rule give\n$$\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u)=\\rho D_tu.$$",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "Substitute the first balance in [A1] into step 1.1 and apply [F5] to $\\sigma$, using countable choice from [F6]. This yields\n$$\\int_{P_t}\\bigl(\\rho D_tu-\\rho b-\\operatorname{div}_x\\sigma\\bigr)\\,dx=0.$$\nThe integrand is continuous because $b$ is continuous and the other fields are $C^1$. Every sufficiently small open ball $Q\\Subset\\Omega_t$ is such a material region: its inverse image under $\\chi_t$ is a bounded $C^1$ region compactly contained in $B$. If a component of the continuous integrand were nonzero at a point, it would have a strict fixed sign on a smaller ball and its integral there could not vanish. Thus $\\rho D_tu=\\rho b+\\operatorname{div}_x\\sigma$ pointwise on $\\mathcal O_B$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "3.1",
+          "claim": "For each component $i$,\n$$\\partial_t(\\rho u_i)+\\sum_j\\partial_{x_j}(\\rho u_i u_j) =\\rho(\\partial_tu_i+u\\cdot\\nabla_xu_i)+u_i\\bigl(\\partial_t\\rho+\\operatorname{div}_x(\\rho u)\\bigr).$$\nThe last term is zero by [F2]. Substituting step 2.1 and moving $\\operatorname{div}\\sigma$ to the flux gives the conservative momentum equation.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "3.2",
+          "claim": "Apply [F3] to $\\rho(x\\times u)$ and use $D_tx=u$ and $u\\times u=0$. The transport derivative is $\\int_{P_t}x\\times(\\rho D_tu)\\,dx$. Substitute step 2.1 and compare with the angular balance in [A1]; applying [F5] to the moment-stress flux gives\n$$\\int_{P_t}\\bigl(\\operatorname{div}_x(x\\times\\sigma)-x\\times\\operatorname{div}_x\\sigma\\bigr)\\,dx=0.$$\nThis residual is continuous, so the fixed-sign-ball argument of step 2.1 makes it zero pointwise. With $\\epsilon_{ikl}$ the alternating symbol and $M_{ij}=\\sum_{k,l}\\epsilon_{ikl}x_k\\sigma_{lj}$, direct differentiation gives\n$$\\bigl(\\operatorname{div}_x(x\\times\\sigma)-x\\times\\operatorname{div}_x\\sigma\\bigr)_i =\\sum_{j,l}\\epsilon_{ijl}\\sigma_{lj}.$$\nFor $i=1,2,3$ these equations are respectively $\\sigma_{32}=\\sigma_{23}$, $\\sigma_{13}=\\sigma_{31}$, and $\\sigma_{21}=\\sigma_{12}$, hence $\\sigma=\\sigma^{\\mathsf T}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "step": "4.1",
+          "claim": "If $\\sigma$ is symmetric, the component identity in step 3.2 gives $\\operatorname{div}_x(x\\times\\sigma)=x\\times\\operatorname{div}_x\\sigma$. The product rule and $u\\times u=0$ give\n$$\\partial_t(\\rho x\\times u)+\\operatorname{div}_x\\bigl(\\rho(x\\times u)\\otimes u\\bigr) =x\\times\\bigl(\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u)\\bigr).$$\nUse step 3.1 and the stress-divergence identity, then integrate over $P_t$. The transport formula [F3] and divergence theorem [F5] recover the angular-momentum integral balance in [A1].",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 3.1",
+            "step 3.2",
+            "algebra",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "step": "4.2",
+          "claim": "Dot $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$ from step 2.1 with $u$. The component product rule gives $u\\cdot\\operatorname{div}\\sigma=\\operatorname{div}(\\sigma^{\\mathsf T}u)-\\sigma:D_xu$. Since $\\sigma$ is symmetric, its contraction with the skew part of $D_xu$ is zero, so $\\sigma:D_xu=\\sigma:D$. Also $D_tk=u\\cdot D_tu$. Combining these identities with [F2] yields\n$$\\partial_t(\\rho k)+\\operatorname{div}_x(\\rho ku-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D.$$",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-7",
+          "step": "3.3",
+          "claim": "Apply [F3] to $\\rho E$ in the total-energy balance [A1]. Rewrite $(\\sigma n)\\cdot u=(\\sigma^{\\mathsf T}u)\\cdot n$ and apply [F5] to $\\sigma^{\\mathsf T}u$ and $q$. The integral of the continuous residual\n$$\\partial_t(\\rho E)+\\operatorname{div}_x(\\rho Eu-\\sigma^{\\mathsf T}u+q)-\\rho b\\cdot u-\\rho r$$\nis zero on every $P_t$. The fixed-sign-ball argument from step 2.1 proves that this residual vanishes pointwise. Conversely, integrating this local equation and using [F3] and [F5] recovers the material total-energy balance.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-8",
+          "step": "5.1",
+          "claim": "Subtract the kinetic equation in step 4.2 from the total-energy equation in step 3.3 and use $E=e+k$. The body-work terms cancel and leave $\\partial_t(\\rho e)+\\operatorname{div}_x(\\rho eu+q)=\\sigma:D+\\rho r$. Expanding the mass-transport term using [F2] gives $\\rho D_te=\\sigma:D-\\operatorname{div}_xq+\\rho r$. Conversely, adding this internal-energy equation to the kinetic equation in step 4.2 recovers the total-energy equation in step 3.3.",
+          "inputs": [
+            "F2",
+            "step 4.2",
+            "step 3.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Only nonempty material subregions are used.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Every balanced test V is expressly nonempty with compact closure in B. Step 2.1 localizes on an actual small ball around a point in O_B. If B were empty under the broader wording for B, O_B would be empty and the local conclusions would be vacuous; it would not extend balance to the ambient O. The row correctly describes the nonempty material subregions used in the proof.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Every balanced test V is expressly nonempty with compact closure in B. Step 2.1 localizes on an actual small ball around a point in O_B. If B were empty under the broader wording for B, O_B would be empty and the local conclusions would be vacuous; it would not extend balance to the ambient O. The row correctly describes the nonempty material subregions used in the proof.",
+            "item_sha256": "8f04fdff50e71f21e1eb8fd7a893c24d72a528dc98f8a57ac43a0367e6b72d97",
+            "row_sha256": "68906852654f432878abc25b97c2dcbcebde44b0b34daf5a74f09e73c4702405",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Positive density is assumed; vacuum is outside this smooth branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the component identity for each i; step 3.2 checks all three skew components."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The material regions have C1 boundary and nonempty interior."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result holds on the open time interval only."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable choice is used for the divergence theorem in steps 2.1 and 3.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, 3.2 derive local momentum and symmetry from the material balances."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 3.3 recover angular and total-energy integral balances from the stated local laws."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read eight current proof steps and all seven actual suppliers. F1 fixes u as Eulerian velocity of chi. Transport applies to compact closures by F4; C1 flux and stress suffice for divergence; only continuity, never derivatives, of b and r is used. Localization uses inverse images of small balls compact in B, not unbalanced ambient O. Component moment-stress residual yields symmetry with correct indices. Converse angular identity uses u cross u=0; total-energy converse uses transport and divergence. Kinetic product contraction sigma:D has correct sign/transpose, and subtraction cancels body work. Empty B gives vacuous physical region; no division by rho. Countable choice explicitly supplied. No diagrams or routed defect."
+      }
+    },
+    "pthm-fd-conservation-jump-laws": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-weak-balances",
+          "source_section": "Postulate",
+          "quote": "A test function is a $C^1$ function on $\\Omega\\times[0,T_f)$, compactly supported in space-time and vanishing near $T_f$; it may be nonzero at $t=0$. Let scalar test functions be $\\phi,\\eta,\\zeta$ and vector test function be $\\psi$. Adopt as a separate weak-branch model assumption that the displayed conservative variables, fluxes and sources below belong to $L^1_{\\mathrm{loc}}$ and satisfy the following identities for every indicated test function. Initial conservative data $\\rho_0,m_0,\\mathcal E_0,S_0\\in L^1_{\\mathrm{loc}}(\\Omega)$ represent initial mass, momentum, total-energy and entropy densities; the initial terms specify distributional data and do not assert a strong trace.\n\nMass balance, for every scalar $\\phi$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho\\,\\partial_t\\phi+\\rho u\\cdot\\nabla\\phi\\bigr)\\,dx\\,dt+\\int_\\Omega\\rho_0\\phi(0,x)\\,dx=0.$$\n\nMomentum balance, for every vector $\\psi$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho u\\cdot\\partial_t\\psi+(\\rho u\\otimes u-\\sigma):\\nabla\\psi+\\rho b\\cdot\\psi\\bigr)\\,dx\\,dt+\\int_\\Omega m_0\\cdot\\psi(0,x)\\,dx=0.$$\n\nTotal-energy balance, for every scalar $\\eta$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho E\\,\\partial_t\\eta+(\\rho E u-\\sigma^{\\mathsf T}u+q)\\cdot\\nabla\\eta+(\\rho b\\cdot u+\\rho r)\\eta\\bigr)\\,dx\\,dt+\\int_\\Omega\\mathcal E_0\\eta(0,x)\\,dx=0.$$\n\nPhysical entropy inequality, for every nonnegative scalar $\\zeta\\ge0$,\n\n$$\\int_0^{T_f}\\!\\!\\int_\\Omega\\bigl(\\rho s\\,\\partial_t\\zeta+(\\rho s u+q/T)\\cdot\\nabla\\zeta+(\\rho r/T)\\zeta\\bigr)\\,dx\\,dt+\\int_\\Omega S_0\\zeta(0,x)\\,dx\\le0.$$\n\nEvery conservative density, product, flux and source displayed in these tests is required to be locally integrable up to $t=0$, including $\\rho u\\otimes u$, $\\rho E u$, $\\sigma^{\\mathsf T}u$, $q/T$ and $\\rho r/T$: its absolute value has finite integral on every compact subset of $\\Omega\\times[0,T_f)$ in the relative topology, using its values for $t>0$. This condition assigns no point values at $t=0$ and asserts no strong initial trace. Interior test functions impose no boundary condition; walls, thermal exchange, periodic identifications and stronger initial trace conditions are separate data. This weak mass/momentum/energy adoption and the physical entropy inequality are not inferred for arbitrary discontinuous or vacuum states from the smooth balance postulate. The source term and the sign of the entropy inequality use the outward-positive heat-flux convention above.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-conservative-weak-form",
+          "source_section": "Definition",
+          "quote": "Let $T>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $m\\ge1$ be an integer. A measurable function on an open Euclidean set $D$ is locally integrable if its norm has finite Lebesgue integral on every compact subset of $D$. For a space-time field on $\\Omega\\times[0,T)$ this condition is imposed on compact subsets in the relative topology, including those meeting $t=0$. Fields are identified when they agree almost everywhere. Let $U: \\Omega\\times[0,T)\\to\\mathbb R^m$, $F: \\Omega\\times[0,T)\\to\\mathbb R^{m\\times3}$, and $S: \\Omega\\times[0,T)\\to\\mathbb R^m$ be such fields, and let $U_0:\\Omega\\to\\mathbb R^m$ be locally integrable. For each row $a$, define $(\\operatorname{div}_x F)_a=\\sum_{j=1}^3\\partial_{x_j}F_{aj}$ in the distributional sense, and define $F:\\nabla_x\\phi=\\sum_{a=1}^m\\sum_{j=1}^3F_{aj}\\partial_{x_j}\\phi_a$. The equation $\\partial_tU+\\operatorname{div}_xF=S$ with distributional initial datum $U_0$ means that for every $\\phi\\in C_c^1(\\Omega\\times[0,T);\\mathbb R^m)$, continuously differentiable up to $t=0$ and supported away from $\\partial\\Omega$ and $t=T$,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(U\\cdot\\partial_t\\phi+F:\\nabla_x\\phi+S\\cdot\\phi\\bigr)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\phi(x,0)\\,dx=0.$$\n\nNo boundary condition on $\\partial\\Omega$ is encoded because the test fields are supported away from it. This initial identity specifies the initial datum distributionally; it does not assert $U(\\cdot,t)\\to U_0$ in $L^1_{\\mathrm{loc}}(\\Omega)$ or any other stronger trace topology. Such a trace must be assumed or proved separately. The fields are abstract mathematical variables; no physical unit system or balance postulate is imposed.\n\nFor locally integrable scalar fields $H,R,H_0$ and a locally integrable flux $Q: \\Omega\\times[0,T)\\to\\mathbb R^3$, the inequality $\\partial_tH+\\operatorname{div}_x Q\\ge R$ with initial datum $H_0$ means that for every nonnegative $\\psi\\in C_c^1(\\Omega\\times[0,T))$ with the same support convention,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(H\\,\\partial_t\\psi+Q\\cdot\\nabla_x\\psi+R\\psi\\bigr)\\,dx\\,dt+\\int_\\Omega H_0(x)\\psi(x,0)\\,dx\\le0.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fd-weak-jump-consistency",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $m\\ge1$ be an integer. Let $J\\subset(0,T)$ and $D\\subset\\mathbb R^2$ be open, and let $h\\in C^1(J\\times D)$ have graph $\\Gamma=\\{(t,x',x_3):(t,x')\\in J\\times D,\\ x_3=h(t,x')\\}$ contained in an open patch $\\mathcal O\\subset (J\\times D\\times\\mathbb R)\\cap((0,T)\\times\\Omega)$. Here $x=(x',x_3)$ and all space-time points in this lemma use time-first coordinates $(t,x)$; the coordinate permutation $(t,x)\\mapsto(x,t)$ identifies these fields and tests with the spatial-first domains in the conservative weak-form definition. The minus and plus sides are $\\mathcal O^-=\\mathcal O\\cap\\{x_3<h(t,x')\\}$ and $\\mathcal O^+=\\mathcal O\\cap\\{x_3>h(t,x')\\}$. Let $U^\\pm,S^\\pm$ be $\\mathbb R^m$-valued and $F^\\pm$ be $\\mathbb R^{m\\times3}$-valued fields that are $C^1$ on their respective sides and admit $C^1$ one-sided extensions to every relatively compact part of $\\Gamma$. For a matrix flux $F$, $F_j\\in\\mathbb R^m$ denotes its $j$th spatial column and $(\\operatorname{div}_xF)_a=\\sum_{j=1}^3\\partial_{x_j}F_{aj}$. For any one-sided trace $G$, write $[G]=G^+-G^-$. Put $\\lambda=\\sqrt{1+|\\nabla_{x'}h|^2}$, and define the unit normal from minus to plus and its signed normal speed by\n$$n=\\frac{(-\\nabla_{x'}h,1)}{\\lambda},\\qquad V_n=\\frac{\\partial_t h}{\\lambda}.$$\nInterpret $U,F,S$ as the ordinary locally integrable piecewise functions defined by their side values and traces; no singular measure supported on $\\Gamma$ is added to $S$. The interior weak identity for $\\partial_tU+\\operatorname{div}_xF=S$ is the test identity of the conservative weak-form definition for every $\\phi\\in C_c^1(\\mathcal O;\\mathbb R^m)$. It holds if and only if $\\partial_tU^\\pm+\\operatorname{div}_xF^\\pm=S^\\pm$ on both sides and\n$$[F]n-V_n[U]=0$$\non $\\Gamma$. The initial-data term in the weak initial form is independent; this interior jump condition neither asserts nor requires a strong trace at $t=0$.\n\nFor scalar fields $H^\\pm,R^\\pm$ and vector fluxes $G^\\pm$ with the same piecewise $C^1$ regularity, the interior weak inequality $\\partial_tH+\\operatorname{div}_xG\\ge R$ means\n$$\\int_{\\mathcal O}\\bigl(H\\,\\partial_t\\psi+G\\cdot\\nabla_x\\psi+R\\psi\\bigr)\\,dx\\,dt\\le0$$\nfor every nonnegative $\\psi\\in C_c^1(\\mathcal O)$. It holds if and only if $\\partial_tH^\\pm+\\operatorname{div}_xG^\\pm\\ge R^\\pm$ on both sides and\n$$[G]\\cdot n-V_n[H]\\ge0$$\non $\\Gamma$. These are local equivalences for prescribed piecewise-smooth fields, not existence or uniqueness theorems for nonlinear systems. The fields are abstract mathematical variables with no assigned physical units or constitutive model.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "A spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In a local graph chart write $\\Sigma(t)$ as $x_3=h(t,x_1,x_2)$, with the plus side given by $x_3>h$. Then $n=(-\\partial_{x_1}h,-\\partial_{x_2}h,1)/\\sqrt{1+|\\nabla_{x'}h|^2}$ and $V_n=\\partial_t h/\\sqrt{1+|\\nabla_{x'}h|^2}$. The jump convention is $[g]=g_+-g_-$.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "In the graph chart of step 1.1, write a piecewise field as its minus-side value plus its jump times the indicator of $x_3>h(t,x_1,x_2)$. Differentiating this indicator gives the singular part $-h_t[U]\\,\\delta(x_3-h)+[F](-h_{x_1},-h_{x_2},1)\\,\\delta(x_3-h)$ in $\\partial_tU+\\operatorname{div}F-S$, componentwise for vector or tensor fluxes; the one-dimensional Dirac distribution $\\delta$ is characterized by $\\int f(x_3)\\delta(x_3-h)\\,dx_3=f(h)$. Since $(-h_{x_1},-h_{x_2},1)=n\\sqrt{1+|\\nabla_{x'}h|^2}$ and $h_t=V_n\\sqrt{1+|\\nabla_{x'}h|^2}$, and $\\delta(x_3-h)\\,dx=dS/\\sqrt{1+|\\nabla_{x'}h|^2}$, its action is exactly the interface measure with coefficient $[F]\\cdot n-V_n[U]$. The sources have no surface measure, so the interior weak conservation identity requires this coefficient to vanish; when it vanishes, integration by parts leaves only the satisfied side equations.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "3.1",
+          "claim": "Apply step 2.1 to $(U_m,F_m,S_m)$, $(U_p,F_p,S_p)$ and $(U_E,F_E,S_E)$ from the Statement. Their zero interface coefficients give the three displayed mass, momentum and energy jump equalities, with no division by $\\rho$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "4.1",
+          "claim": "For entropy, the weak postulate [A1] tests with every nonnegative interior $\\zeta$. By [F2], its interface contribution is $[F_s]\\cdot n-V_n[U_s]$. If this coefficient were negative at a point, continuity of the one-sided traces would make it negative on a patch; a nonnegative test supported there would contradict the weak inequality. A nonnegative coefficient, together with the side entropy inequalities, gives the interior weak entropy inequality. This proves the stated sign and both directions.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is local to a nonempty interface patch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 allows rho=0 and uses no division by density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies componentwise to scalar, vector and tensor conservative laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For V_n=0, step 2.1 reduces the interface coefficient to [F]\u00b7n."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement keeps initial terms independent; steps 2.1, 3.1, 4.1 use interior tests only."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Statement now specifies C1 one-sided extensions on every relatively compact interface patch. Step 1.1 gives normals/speed by explicit graph formulas; step 2.1 computes the interface coefficient and step 4.1 uses one local nonnegative test. The strengthened regularity supplies no simultaneous family of selectors or choice axiom.",
+            "item_sha256": "c053c4e6e4034e0d7541826319bbaf6f84e5a5095b02e2245e51d2ab335f6bca",
+            "row_sha256": "7c3b4442af02616a0dc20af2bf942889d4e5b11fd94aff25b8b18bfba937ac3f",
+            "current_scientific_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-step2-escalations/current-boundary-review-7-14.json",
+              "sha256": "f8923523628bc9719c6541c9a47e45de3bfdb7d4c72ef48637c8a4cada71c462"
+            }
+          },
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $\\Omega\\subseteq\\mathbb R^3$ be a nonempty open spatial region and $I=(0,T_f)$ a time interval in seconds, with $T_f>0$. Let $\\Sigma$ be a $C^1$ moving interface in $\\Omega\\times I$ that locally is the graph $x_3=h(t,x_1,x_2)$ and separ"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1, 4.1 derive the necessary side equations and jump coefficients."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1, 4.1 show the side equations and jump coefficients imply the interior weak laws."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "alpha-batch-9",
+        "notes": "All four current steps, weak postulate, complete current mathematical jump proof, conservative weak Definition and producer manifest/contract inspected. Graph normal/speed signs, stress transpose, zero-density case, source exclusion and both conservation/entropy directions agree. Thin-tube isolation is supplied by jump lemma step3.1, so entropy bulk terms do not mask a negative surface coefficient. However def-fd-conservative-weak-form still has deps:[] and no measure/measurability/integral suppliers; its batch8 manifest repeats this omission and it has no proof contract (nonproof definition). Reader/refuter1 escalated to batch8 owner: declare exact Euclidean restricted Lebesgue spaces, a.e. equality, measurable functions and integral suppliers. Published def-integrable-real-and-complex-functions-and-their-integrals and def-nonnegative-lebesgue-integral were inspected as possible suppliers; repair cannot be applied outside dispatch. Risk remains open pending owner resolution."
+      }
+    },
+    "pthm-fd-cauchy-momentum-angular": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Assume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Use the nonrelativistic Newtonian spacetime $I\\times E$, where $I\\subseteq\\mathbb R$ is an open interval with absolute time $t$ in seconds. Here $E$ is a three-dimensional oriented Euclidean affine space: its translation vectors form an oriented Euclidean vector space, but no origin in $E$ is distinguished. A **Cartesian inertial chart** supplies an orientation-preserving affine isometry $x:E\\to\\mathbb R^3$ and the absolute-time coordinate. Write $\\mathrm{SO}(3)=\\{Q\\in\\mathbb R^{3\\times3}:Q^TQ=I_3,\\det Q=1\\}$. Inertial charts are related by\n\n$$t^*=t+t_0,\\qquad x^*=Qx+vt+a,$$\n\nwhere $t_0$ is a constant time translation in seconds, $Q\\in\\mathrm{SO}(3)$ is constant, $v\\in\\mathbb R^3$ is a constant relative velocity in m s$^{-1}$, and $a\\in\\mathbb R^3$ is a constant spatial translation in metres. A **worldline** is a curve $t\\mapsto(t,x(t))$ with $x\\in C^2(I,\\mathbb R^3)$, parameterized by absolute time; this model imposes no relativistic speed or causal condition. A **rigid observer change** is the more general coordinate change $t^*=t,\\ x^*=Q(t)x+c(t)$, with $Q\\in C^2(I,\\mathrm{SO}(3))$ and $c\\in C^2(I,\\mathbb R^3)$ in metres; it is not called inertial unless $Q$ is constant and $c$ is affine in time. A frame here means an adapted Cartesian chart, not an observer congruence or a basis field.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-fd-material-mass-continuity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant), and satisfy $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous; write $\\Omega_t=\\chi_t(B)$ and $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho\\in C^1(\\mathcal O)$ be positive mass densities, where $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Suppose that for every nonempty bounded open $V$ with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side and every $t\\in I$,\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\nThen the pointwise continuity equation\n$$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0$$\nholds throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$. The larger set $\\mathcal O$ is only the ambient regularity domain; no balance outside $\\chi_t(B)$ is assumed or concluded. This is a conditional deduction in the smooth material model and asserts no extension to weak fields or vacuum.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-fd-continuous-source-local-balances",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and satisfy $\\chi(0,a)=a$, and set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Let $\\rho:\\mathcal O\\to(0,\\infty)$, $u:\\mathcal O\\to\\mathbb R^3$, $e:\\mathcal O\\to\\mathbb R$, $q:\\mathcal O\\to\\mathbb R^3$, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ be $C^1$ on $\\mathcal O$. Let $b:\\mathcal O\\to\\mathbb R^3$ and $r:\\mathcal O\\to\\mathbb R$ be continuous. Their SI units are respectively kilograms per cubic metre, metres per second, joules per kilogram, watts per square metre, pascals, metres per second squared, and watts per kilogram. Put $k=|u|^2/2$, $E=e+k$, $D_xu=(\\partial_{x_j}u_i)_{ij}$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $D_t=\\partial_t+u\\cdot\\nabla_x$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. Use rowwise divergence $(\\operatorname{div}\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$, vector divergence $\\operatorname{div}q=\\sum_j\\partial_{x_j}q_j$, and traction $t=\\sigma n$, where $n$ is the outward Euclidean unit normal and $q\\cdot n>0$ denotes heat leaving the material region.\n\nAssume pointwise mass continuity and, on every material region $P_t=\\chi_t(V)$ where $V$ is a nonempty bounded open reference region with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side, the adopted linear-momentum, angular-momentum, and total-energy balances\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma n\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma n)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}(\\rho b\\cdot u+\\rho r)\\,dx+\\int_{\\partial P_t}\\bigl(u\\cdot\\sigma n-q\\cdot n\\bigr)\\,dS.$$\nThe angular balance is about a fixed inertial origin and there are no surface couples or intrinsic spin. Then throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$, with $\\mathcal O$ retained only as the ambient regularity domain,\n$$\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u-\\sigma)=\\rho b,$$\n$$\\sigma=\\sigma^{\\mathsf T},$$\n$$\\partial_t(\\rho E)+\\operatorname{div}_x(\\rho E u-\\sigma^{\\mathsf T}u+q)=\\rho b\\cdot u+\\rho r,$$\nand\n$$\\partial_t(\\rho k)+\\operatorname{div}_x(\\rho k u-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D,\\qquad\n\\rho D_t e=\\sigma:D-\\operatorname{div}_xq+\\rho r.$$\nConversely, the pointwise momentum equation and symmetric stress imply the angular-momentum balance, and the pointwise total-energy equation implies its stated material integral balance. All deductions are conditional on the smooth model and do not assert existence of a solution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $(A_n)_{n\\in\\mathbb N}$ be any countable family of nonempty sets. By [F4], the set $\\{A_n:n\\in\\mathbb N\\}$ has a choice function $g$; then $n\\mapsto g(A_n)$ chooses an element of each $A_n$. Thus the countable-choice hypothesis $\\mathrm{AC}_\\omega$ required by [F3] follows from the stated Axiom of Choice.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The postulate [A1] already supplies a matrix $\\sigma(t,x)$ with $t(t,x,n)=\\sigma(t,x)n$ for every unit normal. If another matrix $\\widetilde{\\sigma}(t,x)$ had this property, setting $n=e_i$ for $i=1,2,3$ would give $\\widetilde{\\sigma}(t,x)e_i=\\sigma(t,x)e_i$ for all three standard basis vectors. The matrices have the same columns and are equal, so the adopted representation is unique at every event.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Apply [F2] to the material mass equality in [A1]. Its hypotheses hold by the $C^2$ motion and positive $C^1$ density in the Statement, so $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ on $\\mathcal O_B$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "2.1",
+          "claim": "By [F3], the mass continuity equation from step 1.3, the material linear and angular balances in [A1], and the $C^1$ stress in the Statement imply the local momentum equation and stress symmetry. The converse in [F3] gives the angular-momentum balance from the local momentum equation and symmetric stress. Step 1.1 supplies its countable-choice hypothesis, and step 1.2 identifies the adopted traction matrix uniquely.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Material subregions are required nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Both B and every balance subregion V are explicitly nonempty. The sum in rowwise stress divergence is the fixed j=1,2,3 component sum; the countable nonempty-set family in step 1.1 proves AC_omega from AC rather than allowing an empty physical region. The current empty disposition is therefore sound.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: Both B and every balance subregion V are explicitly nonempty. The sum in rowwise stress divergence is the fixed j=1,2,3 component sum; the countable nonempty-set family in step 1.1 proves AC_omega from AC rather than allowing an empty physical region. The current empty disposition is therefore sound.",
+            "item_sha256": "64a174764cee9c6f3dc2e013d90e2fefa34d677d2c9c236c100967c6ed6b64cc",
+            "row_sha256": "594d74ce2e88b8385a470e41e189d10d57f73b7bf0ac44f1456d7b1ba8296f6a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The smooth model assumes positive density and makes no vacuum claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates the three basis normals and identifies all three stress columns."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes nonempty C1 material regions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The balances are asserted only on the open time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 derives countable choice from full AC for the local-balance theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 derives local momentum and stress symmetry from the material balances."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the angular converse for local momentum with symmetric stress."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read four current steps and five cited suppliers. AC supplies AComega explicitly. Pointwise traction uniqueness evaluates all three unit coordinate normals. Mass supplier applies to adopted material motion and density via F1. Local momentum/symmetry and converse use precisely supplier proof steps1.1-3.2 and4.1, which require only mass, linear/angular momentum and C1 stress, not its separate energy hypotheses. No traction derivation from a tetrahedron is claimed. Balanced O_B restriction and no-couples premise retained; continuous b suffices. No diagrams, no interface edit."
+      }
+    },
+    "pthm-fd-control-volume-balances": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Assume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-fd-material-mass-continuity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant), and satisfy $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous; write $\\Omega_t=\\chi_t(B)$ and $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho\\in C^1(\\mathcal O)$ be positive mass densities, where $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Suppose that for every nonempty bounded open $V$ with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side and every $t\\in I$,\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\nThen the pointwise continuity equation\n$$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0$$\nholds throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$. The larger set $\\mathcal O$ is only the ambient regularity domain; no balance outside $\\chi_t(B)$ is assumed or concluded. This is a conditional deduction in the smooth material model and asserts no extension to weak fields or vacuum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-fd-continuous-source-local-balances",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and satisfy $\\chi(0,a)=a$, and set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Let $\\rho:\\mathcal O\\to(0,\\infty)$, $u:\\mathcal O\\to\\mathbb R^3$, $e:\\mathcal O\\to\\mathbb R$, $q:\\mathcal O\\to\\mathbb R^3$, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ be $C^1$ on $\\mathcal O$. Let $b:\\mathcal O\\to\\mathbb R^3$ and $r:\\mathcal O\\to\\mathbb R$ be continuous. Their SI units are respectively kilograms per cubic metre, metres per second, joules per kilogram, watts per square metre, pascals, metres per second squared, and watts per kilogram. Put $k=|u|^2/2$, $E=e+k$, $D_xu=(\\partial_{x_j}u_i)_{ij}$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $D_t=\\partial_t+u\\cdot\\nabla_x$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. Use rowwise divergence $(\\operatorname{div}\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$, vector divergence $\\operatorname{div}q=\\sum_j\\partial_{x_j}q_j$, and traction $t=\\sigma n$, where $n$ is the outward Euclidean unit normal and $q\\cdot n>0$ denotes heat leaving the material region.\n\nAssume pointwise mass continuity and, on every material region $P_t=\\chi_t(V)$ where $V$ is a nonempty bounded open reference region with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side, the adopted linear-momentum, angular-momentum, and total-energy balances\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma n\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma n)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}(\\rho b\\cdot u+\\rho r)\\,dx+\\int_{\\partial P_t}\\bigl(u\\cdot\\sigma n-q\\cdot n\\bigr)\\,dS.$$\nThe angular balance is about a fixed inertial origin and there are no surface couples or intrinsic spin. Then throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$, with $\\mathcal O$ retained only as the ambient regularity domain,\n$$\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u-\\sigma)=\\rho b,$$\n$$\\sigma=\\sigma^{\\mathsf T},$$\n$$\\partial_t(\\rho E)+\\operatorname{div}_x(\\rho E u-\\sigma^{\\mathsf T}u+q)=\\rho b\\cdot u+\\rho r,$$\nand\n$$\\partial_t(\\rho k)+\\operatorname{div}_x(\\rho k u-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D,\\qquad\n\\rho D_t e=\\sigma:D-\\operatorname{div}_xq+\\rho r.$$\nConversely, the pointwise momentum equation and symmetric stress imply the angular-momentum balance, and the pointwise total-energy equation implies its stated material integral balance. All deductions are conditional on the smooth model and do not assert existence of a solution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fd-moving-control-volume-transport",
+          "source_section": "Statement",
+          "quote": "Assume countable choice: every countable family of nonempty sets has a choice function. Let $I\\subseteq\\mathbb R$ be an open interval, let $C_0\\subseteq\\mathbb R^3$ be a bounded open region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U_C$ be an open neighborhood of $\\overline{C_0}$. Let $X\\in C^2(I\\times U_C;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices onto open images (bijections with $C^2$ inverses and positive Jacobian determinant). Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous, and set $C(t)=X_t(C_0)$. Let $g$ be a scalar $C^1$ field on an open neighborhood of $\\{(t,x):x\\in\\overline{C(t)},\\,t\\in I\\}$. Define the boundary velocity by $w(t,X(t,\\xi))=\\partial_tX(t,\\xi)$ and let $n$ be the outward Euclidean unit normal on $\\partial C(t)$. Use Euclidean surface measure, whose chart density is $\\sqrt{\\det(DY^{\\mathsf T}DY)}$. Then\n$$\\frac{d}{dt}\\int_{C(t)}g(t,x)\\,dx =\\int_{C(t)}\\partial_tg(t,x)\\,dx+\\int_{\\partial C(t)}g(t,x)\\,w(t,x)\\cdot n(t,x)\\,dS_x.$$\nFor vector-valued $g$, the identity holds componentwise. No condition equating $w$ with a fluid velocity is required.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "Here $F$ and $J$ are dimensionless and $A$ has units metres. The material map $\\chi$ describes motion of the medium; it is not a change of observer or frame. The Eulerian velocity is the vector field defined by $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$, measured in m s$^{-1}$. For a differentiable scalar or component field $f$, its material derivative is $D_tf=\\partial_tf+u\\cdot\\nabla f$. Set $L_{ij}=\\partial_j u_i$, $D=(L+L^T)/2$, $W=(L-L^T)/2$, $\\theta=\\operatorname{tr}D=\\operatorname{div}u$, and $D_0=D-(\\theta/3)I_3$; $L,D,W,\\theta,D_0$ have units s$^{-1}$. Define vorticity by\n\n$$\\operatorname{curl}u=(\\partial_yu_z-\\partial_zu_y,\\ \\partial_zu_x-\\partial_xu_z,\\ \\partial_xu_y-\\partial_yu_x),$$\n\nalso in s$^{-1}$. In this library, a motion is **material-incompressible** on a region when $\\operatorname{div}u=0$ there; **spatially homogeneous density** means $\\nabla\\rho=0$ there. These are distinct conditions. A **pathline** is a $C^1$ curve $X$ on an interval where the field is defined and the solution exists, satisfying $dX/dt=u(t,X(t))$. A **streamline at time $t_0$** is a $C^1$ integral curve satisfying $dX/ds=u(t_0,X(s))$ for a frozen $t_0$, with curve parameter $s$ measured in seconds. These are different constructions for an unsteady field.\n\nA spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any countable family of nonempty sets, [F5] supplies a choice function on the set of its distinct members; composing with the sequence gives a choice from each indexed member. Thus the $\\mathrm{AC}_\\omega$ hypotheses in [F2] and [F4] follow from the Axiom of Choice.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "Apply [F1] to the mass balance in [A1] on the balanced physical fluid region. Then apply [F2] there using that continuity equation, the material momentum balance in [A1], and step 1.1. These local conclusions are used only on the fluid region containing $\\overline{C(t)}$ in the Statement, not on an ambient regularity extension outside the balanced material body. This gives\n$$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad\n\\partial_t(\\rho u)+\\operatorname{div}(\\rho u\\otimes u-\\sigma)=\\rho b.$$",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "3.1",
+          "claim": "By [F3], the time derivative of the mass in $C(t)$ equals $\\int_{C(t)}\\partial_t\\rho+\\int_{\\partial C(t)}\\rho w\\cdot n$. Substitute continuity from step 2.1 and apply [F4] to $\\rho u$. The result is $-\\int_{\\partial C(t)}\\rho(u-w)\\cdot n\\,dS$, the first formula.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "3.2",
+          "claim": "Apply [F3] componentwise to $\\rho u$ and substitute the momentum equation from step 2.1. Apply [F4] to each row of $\\rho u\\otimes u-\\sigma$. Since $(\\rho u\\otimes u-\\sigma)n=\\rho u(u\\cdot n)-\\sigma n$, the boundary-velocity term $\\rho u(w\\cdot n)$ combines with the advective flux to give $-\\rho u((u-w)\\cdot n)$. This is the second formula.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "step": "4.1",
+          "claim": "The formulas contain $w$ only through $w\\cdot n$. If $w\\cdot n=u\\cdot n$, both relative-flux integrands vanish pointwise.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The control region is required nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Statement expressly requires nonempty C0 and an orientation-preserving diffeomorphic X_t, so C(t) is nonempty. Step 3.1, 3.2 integrate over that actual region; the occurrence of a family of diffeomorphisms and fixed coordinate sums does not create an empty control-volume case.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Statement expressly requires nonempty C0 and an orientation-preserving diffeomorphic X_t, so C(t) is nonempty. Step 3.1, 3.2 integrate over that actual region; the occurrence of a family of diffeomorphisms and fixed coordinate sums does not create an empty control-volume case.",
+            "item_sha256": "be2a026359a6aeb1b1cd8e4a22726ba4cdbe6cf7ca74c9c8c6b3b9269bec6d0f",
+            "row_sha256": "0d14460170a37d48e64f035a92ac865314b1b7fd5c972562fee32fd8b101344a",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 verifies that the relative flux vanishes when w\u00b7n=u\u00b7n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the scalar mass identity and step 3.2 gives the vector momentum analogue."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 shows tangential changes in w do not enter; only w\u00b7n occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The identities hold at interior times only."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the countable-choice hypothesis used by the local-balance and divergence theorems."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states balance identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states balance identities, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read five proof steps and all seven supplier statements. Adopted smooth material mass/momentum setting is A1/F6, distinct from independently moving control motion X. Only local momentum subargument of supplier steps1.1-3.1 is used (no energy or angular hypothesis needed). Swept control closures stay inside balanced physical domain. X C2, gw C1 and nonempty C1 regions meet repaired transport/divergence hypotheses; AC explicitly gives countable choice. Tensor row divergence yields rho u((u-w).n) with correct minus sign. Tangential w is irrelevant; relative normal zero gives both material flux cancellations. No diagrams or new defect."
+      }
+    },
+    "pthm-fd-energy-decomposition": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Assume there are no mass sources and no diffusion relative to $u$. Adopt a positive reference mass density $\\rho_0$, a positive current density $\\rho$, a body-acceleration field $b$, a contact traction $t(t,x,n)=\\sigma(t,x)n$ depending only on the local outward unit normal $n$, a $C^1$ Cauchy stress field $\\sigma$, specific internal energy $e$, positive temperature $T$, specific entropy $s$, heat-flux vector $q$, and specific heat supply $r$, with the types and SI units fixed in the preceding definition. Contact traction and volume-force densities are continuous and locally bounded on the smooth material regions under consideration. There are no surface couples or intrinsic spin angular momentum; a micropolar or couple-stress model is outside this postulate.\n\nFor every such material subregion, adopt conservation of mass,\n\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\n\nIn the same inertial chart, adopt the balances of linear and angular momentum,\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho u\\,dx=\\int_{\\chi_t(V)}\\rho b\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}x\\times(\\rho u)\\,dx=\\int_{\\chi_t(V)}x\\times(\\rho b)\\,dx+\\int_{\\partial\\chi_t(V)}x\\times t(t,x,n)\\,dS.$$\n\nAdopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "Work in the nonrelativistic SI fluid model on an open time interval $I\\subseteq\\mathbb R$ measured in seconds and oriented Euclidean three-space measured in metres. Let $\\Omega_t$ be the fluid region at time $t$ and $\\mathcal O:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$ its open spacetime region. Let $u:\\mathcal O\\to\\mathbb R^3$ be fluid velocity in metres per second, $T:\\mathcal O\\to(0,\\infty)$ absolute temperature in kelvins, and $q:\\mathcal O\\to\\mathbb R^3$ conductive heat flux in watts per square metre. A moving solid boundary is covered by local material surface charts $X_b:I\\times\\Xi\\to\\mathbb R^3$, where $\\Xi\\subseteq\\mathbb R^2$ is open with dimensionless labels and $X_b\\in C^2(I\\times\\Xi;\\mathbb R^3)$ means that all coordinate partial derivatives in $(t,\\xi)$ of total order at most two are continuous. For each fixed $t\\in I$ and each $\\xi_0\\in\\Xi$, there is a neighborhood $V\\subseteq\\Xi$ of $\\xi_0$ on which $X_b(t,\\cdot)$ is injective, its derivative has rank two, and it is a homeomorphism onto its image; thus each time slice is locally a surface chart of the wall. These charts carry fixed material labels: wherever two such charts overlap, their labels are related by a time-independent $C^2$ coordinate change $\\varphi$, so that $X_b^i(t,\\xi)=X_b^j(t,\\varphi(\\xi))$ on the overlap. Differentiation in $t$ then gives the same velocity at each represented boundary point, and $w_b$ is the well-defined material boundary velocity $w_b(t,X_b(t,\\xi)):=\\partial_tX_b(t,\\xi)$ in metres per second. For each $t$, every represented wall patch $X_b(t,\\Xi)$ lies in $\\partial\\Omega_t$; locally this boundary is a $C^2$ graph with $\\Omega_t$ on one side. Define $\\Gamma_b:=\\{(t,X_b(t,\\xi)):t\\in I,\\ \\xi\\in\\Xi\\}$, taking the union over wall charts. The unit normal $n:\\Gamma_b\\to\\mathbb R^3$ points outward from the fluid region $\\Omega_t$ into the solid and is continuous. In the smooth branch, assume $u,T,q$ have continuous traces wherever boundary values are imposed. The no-penetration or impermeability condition is the adopted equality $(u-w_b)\\cdot n=0$ on the wall. When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall. Neither equality is deduced from an interior balance equation; no-slip is not part of the inviscid wall model unless explicitly adopted.\n\nOn a thermal patch $\\Gamma_T\\subseteq\\Gamma_b$, a prescribed temperature is a map $T_b:\\Gamma_T\\to(0,\\infty)$ and a prescribed outward heat flux is a map $q_b:\\Gamma_T\\to\\mathbb R$. Require their pullbacks $(t,\\xi)\\mapsto T_b(t,X_b(t,\\xi))$ and $(t,\\xi)\\mapsto q_b(t,X_b(t,\\xi))$, wherever selected, to be continuous, with any additional regularity required by the chosen evolution problem stated separately. At each thermal boundary patch, select and state compatible data of one of these forms: insulation, $q\\cdot n=0$; prescribed temperature, $T=T_b$ for a specified field $T_b>0$ in kelvins; or prescribed outward conductive heat flux, $q\\cdot n=q_b$ for a specified field $q_b$ in watts per square metre. These are alternative boundary models. Their energy and entropy fluxes are accounted for through the chosen boundary data; no separate surface storage or reservoir entropy law is implicit.\n\nA periodic cell with side lengths $L_1,L_2,L_3>0$ metres is the quotient torus $\\mathbb T^3_L:=\\mathbb R^3/(L_1\\mathbb Z\\times L_2\\mathbb Z\\times L_3\\mathbb Z)$. Periodicity identifies opposite faces by the corresponding translations and requires equality of the fields and of each derivative trace required by the selected evolution problem. Paired fluxes then cancel in cell integrals. These identified faces are not physical walls.\n\nAt an initial time $t_0\\in I$, prescribe only the fields present in the selected model. Require them to satisfy the exact function-space regularity, positivity, differential constraints, constitutive state-domain restrictions, and wall or periodic compatibility hypotheses of the particular evolution result being used. In the weak formulation, initial data enter through the test-function initial term; that fixes a distributional initial datum but does not by itself supply a strong trace. This postulate selects model data only. It asserts no existence, uniqueness, regularity improvement, approximation, or solvability for any initial-boundary value problem.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-fd-continuous-source-local-balances",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and satisfy $\\chi(0,a)=a$, and set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Let $\\rho:\\mathcal O\\to(0,\\infty)$, $u:\\mathcal O\\to\\mathbb R^3$, $e:\\mathcal O\\to\\mathbb R$, $q:\\mathcal O\\to\\mathbb R^3$, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ be $C^1$ on $\\mathcal O$. Let $b:\\mathcal O\\to\\mathbb R^3$ and $r:\\mathcal O\\to\\mathbb R$ be continuous. Their SI units are respectively kilograms per cubic metre, metres per second, joules per kilogram, watts per square metre, pascals, metres per second squared, and watts per kilogram. Put $k=|u|^2/2$, $E=e+k$, $D_xu=(\\partial_{x_j}u_i)_{ij}$, $D=(D_xu+(D_xu)^{\\mathsf T})/2$, $D_t=\\partial_t+u\\cdot\\nabla_x$, and $A:B=\\sum_{i,j}A_{ij}B_{ij}$. Use rowwise divergence $(\\operatorname{div}\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$, vector divergence $\\operatorname{div}q=\\sum_j\\partial_{x_j}q_j$, and traction $t=\\sigma n$, where $n$ is the outward Euclidean unit normal and $q\\cdot n>0$ denotes heat leaving the material region.\n\nAssume pointwise mass continuity and, on every material region $P_t=\\chi_t(V)$ where $V$ is a nonempty bounded open reference region with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side, the adopted linear-momentum, angular-momentum, and total-energy balances\n$$\\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma n\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}x\\times(\\rho u)\\,dx=\\int_{P_t}x\\times(\\rho b)\\,dx+\\int_{\\partial P_t}x\\times(\\sigma n)\\,dS,$$\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}(\\rho b\\cdot u+\\rho r)\\,dx+\\int_{\\partial P_t}\\bigl(u\\cdot\\sigma n-q\\cdot n\\bigr)\\,dS.$$\nThe angular balance is about a fixed inertial origin and there are no surface couples or intrinsic spin. Then throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$, with $\\mathcal O$ retained only as the ambient regularity domain,\n$$\\partial_t(\\rho u)+\\operatorname{div}_x(\\rho u\\otimes u-\\sigma)=\\rho b,$$\n$$\\sigma=\\sigma^{\\mathsf T},$$\n$$\\partial_t(\\rho E)+\\operatorname{div}_x(\\rho E u-\\sigma^{\\mathsf T}u+q)=\\rho b\\cdot u+\\rho r,$$\nand\n$$\\partial_t(\\rho k)+\\operatorname{div}_x(\\rho k u-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D,\\qquad\n\\rho D_t e=\\sigma:D-\\operatorname{div}_xq+\\rho r.$$\nConversely, the pointwise momentum equation and symmetric stress imply the angular-momentum balance, and the pointwise total-energy equation implies its stated material integral balance. All deductions are conditional on the smooth model and do not assert existence of a solution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-fd-material-mass-continuity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ have orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant), and satisfy $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous; write $\\Omega_t=\\chi_t(B)$ and $u(t,\\chi(t,a))=\\partial_t\\chi(t,a)$. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho\\in C^1(\\mathcal O)$ be positive mass densities, where $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Suppose that for every nonempty bounded open $V$ with compact closure in $B$ and $C^1$ boundary locally a graph with the region on one side and every $t\\in I$,\n$$\\int_{\\chi_t(V)}\\rho(t,x)\\,dx=\\int_V\\rho_0(a)\\,da.$$\nThen the pointwise continuity equation\n$$\\partial_t\\rho+\\operatorname{div}_x(\\rho u)=0$$\nholds throughout the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\chi_t(B)\\}$. The larger set $\\mathcal O$ is only the ambient regularity domain; no balance outside $\\chi_t(B)$ is assumed or concluded. This is a conditional deduction in the smooth material model and asserts no extension to weak fields or vacuum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fd-quantity-and-frame-conventions",
+          "source_section": "Definition",
+          "quote": "A spatial vector is an element of the Euclidean translation space; its components rotate by $Q$ under a rigid observer change. A spatial second-order tensor is a linear map from that vector space to itself, represented by a $3\\times3$ matrix in a Cartesian orthonormal basis; it transforms as $S^*=QSQ^T$. A tensor-valued constitutive response is **objective** when its values at corresponding events satisfy this transformation rule for every $C^2$ rigid observer change. For a stress tensor $\\sigma$, use the tension-positive convention in which the traction (force per unit current area) on a surface with outward unit normal $n$ is $\\sigma n$. Set $(\\operatorname{div}\\sigma)_i=\\partial_j\\sigma_{ij}$; the tensor contraction is $S:T=\\sum_{i,j}S_{ij}T_{ij}$. Stress and traction have units Pa $=\\mathrm{N\\,m^{-2}}=\\mathrm{kg\\,m^{-1}\\,s^{-2}}$.\n\nWithin a specified model, a **primitive quantity** is a quantity adopted as input rather than constructed from the other data of that model; a **derived quantity** is assigned by an explicit construction from stated inputs and results. This status is framework-local and is independent of whether its SI unit is base or derived. In the continuum model used on this page, $\\rho_0(a)$ is a reference mass-density field in kg m$^{-3}$, $b(t,x)$ is an adopted body-acceleration field in m s$^{-2}$, $e(t,x)$ is specific internal energy (energy per unit mass) in J kg$^{-1}=\\mathrm{m^2\\,s^{-2}}$, $T(t,x)>0$ is temperature in K, $s(t,x)$ is specific entropy in J kg$^{-1}$ K$^{-1}$, $q(t,x)$ is heat flux (heat-transfer rate per unit area) in W m$^{-2}$, and $r(t,x)$ is specific heat supply (power per unit mass) in W kg$^{-1}$. Their adoption is a physical-model choice, not a consequence of the SI. The current mass density $\\rho(t,x)$ means mass per unit current volume and has units kg m$^{-3}$; for a mass-conserving motion, its construction from $\\rho_0$ and $\\chi$ is established from the stated balance hypotheses in the theorem on this page. A pressure $p$ is a scalar in Pa whose role depends on the selected constitutive branch. The shear and bulk dynamic-viscosity parameters $\\mu,\\zeta$, when that branch is adopted, have units Pa s $=\\mathrm{kg\\,m^{-1}\\,s^{-1}}$; thermal conductivity $\\kappa_T$ has units W m$^{-1}$ K$^{-1}$. The gradient $\\nabla$ has units m$^{-1}$. Thus the metre, kilogram, second, and kelvin are SI base units in this dictionary, while density, velocity, acceleration, pressure, energy, power, viscosity, and heat-flux units are derived according to the BIPM SI conventions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any countable family of nonempty sets, [F4] provides a choice function on the set of its distinct members; composing with the sequence chooses from each indexed member. Hence the $\\mathrm{AC}_\\omega$ hypothesis used by [F1] and [F3] follows from the stated Axiom of Choice.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "Apply [F2] to the mass balance in [A1] to get pointwise mass continuity. Then apply [F1] using this equation, the material momentum, angular-momentum and total-energy balances in [A1], and step 1.1. This gives the local momentum, symmetry and total-energy equations in the Statement. The outward sign of $q$ gives the total flux $\\rho E u-\\sigma^{\\mathsf T}u+q$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "3.1",
+          "claim": "Put $k=|u|^2/2$. Taking the dot product of $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$ from step 2.1 with $u$ and applying the chain rule yields $\\rho D_tk=\\rho b\\cdot u+u\\cdot\\operatorname{div}\\sigma$.",
+          "inputs": [
+            "given",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "3.2",
+          "claim": "Under [A3], continuity and the chain rule give $\\partial_t(\\rho\\Phi)+\\operatorname{div}(\\rho\\Phi u)=\\rho D_t\\Phi=\\rho u\\cdot\\nabla\\Phi$. Adding this identity to the total-energy equation in step 2.1 cancels the body-power source $\\rho b\\cdot u$ and, since $r=0$, gives the conservative equation for $\\rho(E+\\Phi)$.",
+          "inputs": [
+            "given",
+            "A3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "step": "4.1",
+          "claim": "By the product rule, $u\\cdot\\operatorname{div}\\sigma=\\operatorname{div}(\\sigma^{\\mathsf T}u)-\\sigma:D_xu$. Since $\\sigma$ is symmetric and its contraction with the skew part of $D_xu$ is zero, $\\sigma:D_xu=\\sigma:D$. The continuity equation from step 2.1 gives $\\partial_t(\\rho k)+\\operatorname{div}(\\rho k u)=\\rho D_tk$. Substitution of step 3.1 therefore gives the kinetic-energy balance.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "step": "5.1",
+          "claim": "Subtract the kinetic balance in step 4.1 from the total-energy balance in step 2.1. The identical body-power terms cancel, and the stress-work fluxes cancel, leaving $\\partial_t(\\rho e)+\\operatorname{div}(\\rho e u+q)=\\sigma:D+\\rho r$. Expanding the mass transport term with the continuity equation from step 2.1 gives $\\rho D_te=\\sigma:D-\\operatorname{div}q+\\rho r$.",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-7",
+          "step": "6.1",
+          "claim": "The $C^1$ fields permit differentiation under each fixed-domain integral. For a fixed bounded $C^1$ region $C$ with closure inside the fluid region, apply [F3] to the potential-energy equation from step 3.2. The boundary flux $(\\rho(E+\\Phi)u-\\sigma^{\\mathsf T}u+q)\\cdot n$ vanishes under no-slip $u=0$ and insulation $q\\cdot n=0$. For a periodic cell, the coverage hypothesis $Q\\subset\\Omega_t$ ensures that the local equation holds on all of $Q$ at every time. Use the fundamental rectangle $Q=\\prod_{j=1}^3[0,L_j]$ and put $G=\\rho(E+\\Phi)u-\\sigma^{\\mathsf T}u+q$. Every component of $G$ is $C^1$ and periodic. For each $j$, the one-dimensional fundamental theorem of calculus gives\n$$\\int_Q\\partial_{x_j}G_j\\,dx=\\int_{\\prod_{k\\ne j}[0,L_k]}\\bigl(G_j(x_1,\\ldots,L_j,\\ldots,x_3)-G_j(x_1,\\ldots,0,\\ldots,x_3)\\bigr)\\,dx_{\\widehat j}=0,$$\nwhere $dx_{\\widehat j}$ is the product volume measure in the two coordinates other than $x_j$.\nThus $\\int_Q\\operatorname{div}G\\,dx=0$, and integrating the local equation from step 3.2 gives $\\frac{d}{dt}\\int_Q\\rho(E+\\Phi)\\,dx=0$. The periodicity follows from [A2] and [A3].",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "F3",
+            "step 1.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The material and fixed regions are nonempty by hypothesis.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The material reference B and the balanced test regions V are explicitly nonempty; the periodic alternative has L_j>0. The fixed C1 region in step 6.1 is a domain for the divergence theorem. Finite component sums in the local identities do not vary their index set, so they create no empty aggregate obligation.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The material reference B and the balanced test regions V are explicitly nonempty; the periodic alternative has L_j>0. The fixed C1 region in step 6.1 is a domain for the divergence theorem. Finite component sums in the local identities do not vary their index set, so they create no empty aggregate obligation.",
+            "item_sha256": "70380f5f67719ca1dd2a9d1f5e96da1e9717a99fb072278f6bd29b8f9dd20927",
+            "row_sha256": "4c274b095f3fba6d0c0f1762f0ff3180b0df5837769c508f0884ef3005f157f7",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The potential-energy case sets r=0 and cancels the body-work term in step 3.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 derives the scalar kinetic-energy identity by a dot product."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes the stated smooth positive-density branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint trace is asserted on the open time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 derives countable choice for the local-balance and divergence theorems."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1, 4.1, 5.1, 3.2, 6.1 derive the local energy laws and stated global cases from the adopted balances."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The energy Statement is a conditional deduction, not an iff; no material-energy converse is claimed here."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read all seven steps and seven suppliers, checking AC->AComega, Eulerian motion convention, C1 fluxes and continuous body sources, stress symmetry, stress transpose and sigma:D sign. Potential time independence cancels rho b.u exactly with rho u.gradPhi; r=0 needed. Fixed C1 closure lies inside balanced fluid domain. Periodic statement now expressly requires entire closed Q in Omega_t at every t; proof uses that coverage before periodic endpoint cancellation, not ambient regularity alone. Reader/refuter3 confirmed fatal, repaired confidence1. Sole item consumer conduction example is in batch9, checked next with explicit identity motion and spatial fields defined on R3. No diagrams."
+      }
+    },
+    "cex-fd-vacuum-velocity-determination": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fd-conservative-weak-form",
+          "source_section": "Definition",
+          "quote": "Let $T>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, and let $m\\ge1$ be an integer. A measurable function on an open Euclidean set $D$ is locally integrable if its norm has finite Lebesgue integral on every compact subset of $D$. For a space-time field on $\\Omega\\times[0,T)$ this condition is imposed on compact subsets in the relative topology, including those meeting $t=0$. Fields are identified when they agree almost everywhere. Let $U: \\Omega\\times[0,T)\\to\\mathbb R^m$, $F: \\Omega\\times[0,T)\\to\\mathbb R^{m\\times3}$, and $S: \\Omega\\times[0,T)\\to\\mathbb R^m$ be such fields, and let $U_0:\\Omega\\to\\mathbb R^m$ be locally integrable. For each row $a$, define $(\\operatorname{div}_x F)_a=\\sum_{j=1}^3\\partial_{x_j}F_{aj}$ in the distributional sense, and define $F:\\nabla_x\\phi=\\sum_{a=1}^m\\sum_{j=1}^3F_{aj}\\partial_{x_j}\\phi_a$. The equation $\\partial_tU+\\operatorname{div}_xF=S$ with distributional initial datum $U_0$ means that for every $\\phi\\in C_c^1(\\Omega\\times[0,T);\\mathbb R^m)$, continuously differentiable up to $t=0$ and supported away from $\\partial\\Omega$ and $t=T$,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(U\\cdot\\partial_t\\phi+F:\\nabla_x\\phi+S\\cdot\\phi\\bigr)\\,dx\\,dt+\\int_\\Omega U_0(x)\\cdot\\phi(x,0)\\,dx=0.$$\n\nNo boundary condition on $\\partial\\Omega$ is encoded because the test fields are supported away from it. This initial identity specifies the initial datum distributionally; it does not assert $U(\\cdot,t)\\to U_0$ in $L^1_{\\mathrm{loc}}(\\Omega)$ or any other stronger trace topology. Such a trace must be assumed or proved separately. The fields are abstract mathematical variables; no physical unit system or balance postulate is imposed.\n\nFor locally integrable scalar fields $H,R,H_0$ and a locally integrable flux $Q: \\Omega\\times[0,T)\\to\\mathbb R^3$, the inequality $\\partial_tH+\\operatorname{div}_x Q\\ge R$ with initial datum $H_0$ means that for every nonnegative $\\psi\\in C_c^1(\\Omega\\times[0,T))$ with the same support convention,\n\n$$\\int_0^T\\!\\int_\\Omega\\bigl(H\\,\\partial_t\\psi+Q\\cdot\\nabla_x\\psi+R\\psi\\bigr)\\,dx\\,dt+\\int_\\Omega H_0(x)\\psi(x,0)\\,dx\\le0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For both $u_1$ and $u_2$, $\\rho=0$, so the mass density, mass flux, momentum density, quadratic momentum flux, momentum source and initial conservative data are all identically zero. The fields and all products are locally integrable on the finite space-time domain.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "2.1",
+          "claim": "In each weak test identity from [F1], every space-time integrand and every initial term is therefore zero for either velocity. Both choices satisfy the same weak mass and momentum equations.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "3.1",
+          "claim": "The constant fields $u_1$ and $u_2$ differ while their conservative mass and momentum data and fluxes coincide. Hence the weak mass and momentum equations alone do not determine $u$ on $\\{\\rho=0\\}$. No division by density or assertion about a material velocity in vacuum is made.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The spatial domain and time interval are nonempty by hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero density makes all conservative variables and sources vanish in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 compares two distinct constant velocity fields."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The vacuum degeneracy is the explicit failure mode in steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero initial data are included in the weak identities in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The two witnesses are the explicit constant fields 0 and one fixed v_* != 0 on (0,1)^3. Steps 1.1, 2.1, 3.1 compare their identically zero conservative products; selecting one nonzero Euclidean vector requires no choice principle.",
+            "item_sha256": "7311d211aa5b1512cf9305305662ca9af7ceed567acb3bb8a5545872b46c327a",
+            "row_sha256": "7c3b4442af02616a0dc20af2bf942889d4e5b11fd94aff25b8b18bfba937ac3f",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            },
+            "formatting_evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/editorial-integration.json",
+              "sha256": "c225619ce98b9fcd19c10374d269b8eb24354e2aa621cd3ae640e9addfb54fad"
+            },
+            "refuted_target_review": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/vacuum-editorial-review.json",
+              "sha256": "be03b548ecfabbc0610398b4f13ff2d2203cf6d26331e396b5de5290d84221e8"
+            }
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A counterexample to determination is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A counterexample to determination is not an equivalence."
+        }
+      ]
+    },
+    "ex-fd-conduction-energy-entropy": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "post-fd-boundary-data",
+          "source_section": "Postulate",
+          "quote": "Work in the nonrelativistic SI fluid model on an open time interval $I\\subseteq\\mathbb R$ measured in seconds and oriented Euclidean three-space measured in metres. Let $\\Omega_t$ be the fluid region at time $t$ and $\\mathcal O:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$ its open spacetime region. Let $u:\\mathcal O\\to\\mathbb R^3$ be fluid velocity in metres per second, $T:\\mathcal O\\to(0,\\infty)$ absolute temperature in kelvins, and $q:\\mathcal O\\to\\mathbb R^3$ conductive heat flux in watts per square metre. A moving solid boundary is covered by local material surface charts $X_b:I\\times\\Xi\\to\\mathbb R^3$, where $\\Xi\\subseteq\\mathbb R^2$ is open with dimensionless labels and $X_b\\in C^2(I\\times\\Xi;\\mathbb R^3)$ means that all coordinate partial derivatives in $(t,\\xi)$ of total order at most two are continuous. For each fixed $t\\in I$ and each $\\xi_0\\in\\Xi$, there is a neighborhood $V\\subseteq\\Xi$ of $\\xi_0$ on which $X_b(t,\\cdot)$ is injective, its derivative has rank two, and it is a homeomorphism onto its image; thus each time slice is locally a surface chart of the wall. These charts carry fixed material labels: wherever two such charts overlap, their labels are related by a time-independent $C^2$ coordinate change $\\varphi$, so that $X_b^i(t,\\xi)=X_b^j(t,\\varphi(\\xi))$ on the overlap. Differentiation in $t$ then gives the same velocity at each represented boundary point, and $w_b$ is the well-defined material boundary velocity $w_b(t,X_b(t,\\xi)):=\\partial_tX_b(t,\\xi)$ in metres per second. For each $t$, every represented wall patch $X_b(t,\\Xi)$ lies in $\\partial\\Omega_t$; locally this boundary is a $C^2$ graph with $\\Omega_t$ on one side. Define $\\Gamma_b:=\\{(t,X_b(t,\\xi)):t\\in I,\\ \\xi\\in\\Xi\\}$, taking the union over wall charts. The unit normal $n:\\Gamma_b\\to\\mathbb R^3$ points outward from the fluid region $\\Omega_t$ into the solid and is continuous. In the smooth branch, assume $u,T,q$ have continuous traces wherever boundary values are imposed. The no-penetration or impermeability condition is the adopted equality $(u-w_b)\\cdot n=0$ on the wall. When separately selected, no-slip is the stronger adopted equality $u=w_b$ on the wall. Neither equality is deduced from an interior balance equation; no-slip is not part of the inviscid wall model unless explicitly adopted.\n\nOn a thermal patch $\\Gamma_T\\subseteq\\Gamma_b$, a prescribed temperature is a map $T_b:\\Gamma_T\\to(0,\\infty)$ and a prescribed outward heat flux is a map $q_b:\\Gamma_T\\to\\mathbb R$. Require their pullbacks $(t,\\xi)\\mapsto T_b(t,X_b(t,\\xi))$ and $(t,\\xi)\\mapsto q_b(t,X_b(t,\\xi))$, wherever selected, to be continuous, with any additional regularity required by the chosen evolution problem stated separately. At each thermal boundary patch, select and state compatible data of one of these forms: insulation, $q\\cdot n=0$; prescribed temperature, $T=T_b$ for a specified field $T_b>0$ in kelvins; or prescribed outward conductive heat flux, $q\\cdot n=q_b$ for a specified field $q_b$ in watts per square metre. These are alternative boundary models. Their energy and entropy fluxes are accounted for through the chosen boundary data; no separate surface storage or reservoir entropy law is implicit.\n\nA periodic cell with side lengths $L_1,L_2,L_3>0$ metres is the quotient torus $\\mathbb T^3_L:=\\mathbb R^3/(L_1\\mathbb Z\\times L_2\\mathbb Z\\times L_3\\mathbb Z)$. Periodicity identifies opposite faces by the corresponding translations and requires equality of the fields and of each derivative trace required by the selected evolution problem. Paired fluxes then cancel in cell integrals. These identified faces are not physical walls.\n\nAt an initial time $t_0\\in I$, prescribe only the fields present in the selected model. Require them to satisfy the exact function-space regularity, positivity, differential constraints, constitutive state-domain restrictions, and wall or periodic compatibility hypotheses of the particular evolution result being used. In the weak formulation, initial data enter through the test-function initial term; that fixes a distributional initial datum but does not by itself supply a strong trace. This postulate selects model data only. It asserts no existence, uniqueness, regularity improvement, approximation, or solvability for any initial-boundary value problem.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-fd-continuum-balances",
+          "source_section": "Postulate",
+          "quote": "Adopt the total-energy balance and entropy inequality\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho\\left(e+\\frac{|u|^2}{2}\\right)\\,dx=\\int_{\\chi_t(V)}\\rho b\\cdot u\\,dx+\\int_{\\partial\\chi_t(V)}t(t,x,n)\\cdot u\\,dS-\\int_{\\partial\\chi_t(V)}q\\cdot n\\,dS+\\int_{\\chi_t(V)}\\rho r\\,dx,$$\n\n$$\\frac{d}{dt}\\int_{\\chi_t(V)}\\rho s\\,dx\\ge-\\int_{\\partial\\chi_t(V)}\\frac{q}{T}\\cdot n\\,dS+\\int_{\\chi_t(V)}\\frac{\\rho r}{T}\\,dx.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-fd-energy-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval containing $0$, let $B\\subseteq\\mathbb R^3$ be a nonempty bounded open reference region with $C^1$ boundary (locally a $C^1$ graph with the region on one side), and let $U\\subseteq\\mathbb R^3$ be an open neighborhood of $\\overline B$. Let $\\chi\\in C^2(I\\times U;\\mathbb R^3)$ be a motion with orientation-preserving diffeomorphic time slices (bijections onto open images with $C^2$ inverses and positive Jacobian determinant) and $\\chi(0,a)=a$. Here $C^r$ means all coordinate partial derivatives through order $r$ are continuous. Set $\\Omega_t=\\chi_t(B)$ and $\\mathcal O=\\{(t,x):t\\in I,\\ x\\in\\chi_t(U)\\}$. Use SI units in a classical Cartesian inertial frame. Let $\\rho_0\\in C^1(\\overline B)$ and $\\rho:\\mathcal O\\to(0,\\infty)$ be positive densities, and let $u:\\mathcal O\\to\\mathbb R^3$, $e:\\mathcal O\\to\\mathbb R$, $q:\\mathcal O\\to\\mathbb R^3$, and $\\sigma:\\mathcal O\\to\\mathbb R^{3\\times3}$ be $C^1$; let $b:\\mathcal O\\to\\mathbb R^3$ and $r:\\mathcal O\\to\\mathbb R$ be continuous. Their units are respectively kilograms per cubic metre, metres per second, joules per kilogram, watts per square metre, pascals, metres per second squared, and watts per kilogram. Define $k:=|u|^2/2$, $E:=e+k$, $D_xu=(\\partial_{x_j}u_i)_{ij}$, $D:=(D_xu+(D_xu)^{\\mathsf T})/2$, $D_t:=\\partial_t+u\\cdot\\nabla_x$, and $A:B:=\\sum_{i,j}A_{ij}B_{ij}$. Use rowwise divergence $(\\operatorname{div}\\sigma)_i=\\sum_j\\partial_{x_j}\\sigma_{ij}$ and vector divergence $\\operatorname{div}q=\\sum_j\\partial_{x_j}q_j$. For every nonempty bounded open $V$ whose closure is compact in $B$ and whose $C^1$ boundary is locally a graph with the region on one side, put $P_t=\\chi_t(V)$ and let $n$ be its outward Euclidean unit normal. Use Euclidean surface measure $dS$ with chart density $\\sqrt{\\det(DY^{\\mathsf T}DY)}$.\n\nAdopt, on each such material region,\n\n$$\\int_{P_t}\\rho\\,dx=\\int_V\\rho_0\\,da,\\qquad \\frac{d}{dt}\\int_{P_t}\\rho u\\,dx=\\int_{P_t}\\rho b\\,dx+\\int_{\\partial P_t}\\sigma n\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{P_t}x\\times\\rho u\\,dx=\\int_{P_t}x\\times\\rho b\\,dx+\\int_{\\partial P_t}x\\times\\sigma n\\,dS,$$\n\n$$\\frac{d}{dt}\\int_{P_t}\\rho E\\,dx=\\int_{P_t}(\\rho b\\cdot u+\\rho r)\\,dx+\\int_{\\partial P_t}\\bigl(u\\cdot\\sigma n-q\\cdot n\\bigr)\\,dS.$$\n\nThe angular-momentum balance is about a fixed inertial origin; assume no surface couples or intrinsic spin. Assume also the Axiom of Choice. On the balanced physical region $\\mathcal O_B:=\\{(t,x):t\\in I,\\ x\\in\\Omega_t\\}$, angular momentum gives $\\sigma=\\sigma^{\\mathsf T}$, and the local total-energy balance is\n\n$$\\partial_t(\\rho E)+\\operatorname{div}(\\rho E u-\\sigma^{\\mathsf T}u+q)=\\rho b\\cdot u+\\rho r.$$\n\nIt splits into the kinetic and internal-energy balances\n\n$$\\partial_t(\\rho k)+\\operatorname{div}(\\rho k u-\\sigma^{\\mathsf T}u)=\\rho b\\cdot u-\\sigma:D,$$\n\n$$\\rho D_t e=\\sigma:D-\\operatorname{div}q+\\rho r.$$\n\nThus the boundary power flux is $-\\sigma^{\\mathsf T}u$ and the outward heat flux is $q$. If additionally $b=-\\nabla_x\\Phi$ for a time-independent $C^1$ scalar potential $\\Phi$ defined on an open spatial set containing every $\\Omega_t$, measured in joules per kilogram, and $r=0$, then\n\n$$\\partial_t\\bigl(\\rho(E+\\Phi)\\bigr)+\\operatorname{div}\\bigl(\\rho(E+\\Phi)u-\\sigma^{\\mathsf T}u+q\\bigr)=0.$$\n\nConsequently $\\int_C\\rho(E+\\Phi)\\,dx$ is constant on any bounded fixed $C^1$ region $C$ with closure contained in the fluid region throughout $I$, with no-slip $u=0$ and insulation $q\\cdot n=0$, or on a periodic cell $Q=\\prod_{j=1}^3[0,L_j]$ with side lengths $L_j>0$ metres, $Q\\subset\\Omega_t$ for every $t\\in I$, and opposite faces identified by translations when all fields and $\\Phi$ are periodic. All local equations above are asserted on $\\mathcal O_B$; the larger $\\mathcal O$ supplies ambient regularity only. These are deductions for any solution with the stated regularity; the theorem does not assert that a solution exists.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $|a e^{-\\lambda t}|<|a|e^{\\lambda\\delta}<T_*$ for $t\\in I$, the formula gives $T(t,x)>0$. Direct differentiation gives $\\partial_tT=-\\lambda a e^{-\\lambda t}\\cos(k\\cdot x)$ and $\\Delta T=-|k|^2a e^{-\\lambda t}\\cos(k\\cdot x)$. The definition of $\\lambda$ therefore yields $\\rho c\\,\\partial_tT=\\kappa\\Delta T$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The integral of $\\cos(k\\cdot x)$ over $Q$ is zero because $m\\in\\mathbb Z^3\\setminus\\{0\\}$, so $\\int_Q\\rho e\\,dx=\\rho c T_* L_1L_2L_3$ for all $t\\ge0$. Equivalently, the periodic boundary flux has zero net integral.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "2.1",
+          "claim": "The constant density and zero velocity satisfy mass balance; $\\sigma=b=0$ satisfy momentum balance. Since $D=0$, $e=cT$, $q=-\\kappa\\nabla T$, and $r=0$, the internal-energy equation in [F1] reduces to $\\rho c\\,\\partial_tT=\\kappa\\Delta T$, which holds by step 1.1. For the material formulation, choose a bounded $C^1$ ball $B$ containing $Q$ in its interior, take $U=\\mathbb R^3$, $\\chi(t,a)=a$ and $\\rho_0=\\rho$. Every admissible material subregion $V\\Subset B$ is stationary. Constant mass, zero momentum and zero stress give its mass, linear and angular balances. Integrating $\\rho c\\,\\partial_tT+\\operatorname{div}q=0$ over $V$, with differentiation permitted by smoothness on compact closures and the divergence theorem [F2] under [A4], gives the adopted material total-energy balance. Thus the hypotheses of [F1], including $Q\\subset B$ for all $t\\in I$, are met. Periodicity is [A2].",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A4",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "3.1",
+          "claim": "Using $s=c\\log(T/T_*)$ and step 1.1, $\\partial_t(\\rho s)=\\rho c\\,\\partial_tT/T=\\kappa\\Delta T/T$. Also, $\\operatorname{div}(q/T)=-\\kappa\\Delta T/T+\\kappa|\\nabla T|^2/T^2$. Their sum is the stated nonnegative entropy-production density; since $r=0$, this verifies the local entropy inequality. On each stationary $V$ from step 2.1, integration and [F2] give $\\frac{d}{dt}\\int_V\\rho s\\,dx+\\int_{\\partial V}(q/T)\\cdot n\\,dS=\\int_V\\kappa|\\nabla T|^2/T^2\\,dx\\ge0$, which is exactly the adopted material inequality [A3]. Positivity of $T$ and compactness make all these fields and derivatives bounded on each integration region.",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "A4",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "step": "4.1",
+          "claim": "Integrate the local entropy relation in step 3.1 over $Q$. Periodicity cancels the boundary integral of $q/T$, as required by [A2], so $\\frac{d}{dt}\\int_Q\\rho s\\,dx=\\int_Q\\kappa|\\nabla T|^2/T^2\\,dx$. Because $a\\ne0$ and $k\\ne0$, $\\nabla T=-a e^{-\\lambda t}\\sin(k\\cdot x)k$ is nonzero on an open subset of each cell; the integrand is positive there and nonnegative everywhere. The integral is strictly positive for every finite $t\\ge0$.",
+          "inputs": [
+            "given",
+            "A2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "L_j>0 and m\u22600 make the periodic cell and Fourier mode nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero amplitude and excludes the zero mode.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual delegated selected-row review in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Example requires T_*>|a|>0, m!=0 and rho,c,kappa,L_j>0. Thus the denominators rho c and T,T^2 in steps 1.1 and 2.2 cannot vanish, and a=0 or k=0 is excluded precisely because step 3.1 claims strict entropy increase. The diagnostic token dt is differentiation notation, not division by a parameter dt.",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root accepts the actual item-specific axis disposition in research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json: The Example requires T_*>|a|>0, m!=0 and rho,c,kappa,L_j>0. Thus the denominators rho c and T,T^2 in steps 1.1 and 2.2 cannot vanish, and a=0 or k=0 is excluded precisely because step 3.1 claims strict entropy increase. The diagnostic token dt is differentiation notation, not division by a parameter dt.",
+            "item_sha256": "9285dad1974c044b3f0da18eb4385d5d8e9544625a5913ae2a6f7bcecf15702c",
+            "row_sha256": "645798e360506a6fc81227b90b2127eefdf3ec02a4873394934c43b63af39b8d",
+            "evidence": {
+              "path": "research/fluid-dynamics-all-47-2026-10-23-owner-construction-gate-repair/boundaries-7-12.json",
+              "sha256": "e9fb5d92c0b443b5390372f8cf72837d58d9323cf7d76a822e17f66811f2ad47"
+            }
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps1.1,1.2,2.1,3.1,4.1 compute one explicitly prescribed nonzero Fourier mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 only needs m\u22600, so individual zero components of m cause no degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The formulas include t=0 and every finite t\u22650, including entropy in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example now explicitly assumes AC, A4 derives countable choice for divergence on every C1 material subregion in steps2.1 and3.1. AC also meets the energy supplier hypothesis. All field choices and mode parameters are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a model solution; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a model solution; it is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "nonzero wave number",
+          "result": "m\u2208Z^3\\{0} and L_j>0 imply |k|^2>0 and \u03bb>0.",
+          "evidence": "Statement and step 1.1"
+        },
+        {
+          "check": "periodic mean",
+          "result": "Every nonzero integer Fourier mode has integral zero over Q.",
+          "evidence": "Step 1.2"
+        },
+        {
+          "check": "strict production",
+          "result": "a\u22600 and k\u22600 make \u2207T nonzero on an open subset for every finite t\u22650.",
+          "evidence": "Step 4.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Read complete five-step calculation and exact energy, boundary and continuum suppliers; added exact AC and divergence suppliers. Defined k from its components; m nonzero gives lambda>0 even when individual components vanish. Fields now have type I x R3 with I=(-delta,infinity), delta<log(Tstar/abs(a))/lambda; positivity holds on I, while original conclusions t>=0 are preserved. Identity motion on a C1 ball containing closed Q and constant reference density meets corrected energy coverage. Direct integration verifies material energy; entropy identity integrates on each stationary material C1 subregion with divergence, using AC->AComega. No inference of model validity or existence is made. Cosine mean zero follows by one nonzero integer coordinate; gradient is nonzero on an open set, so strict entropy production holds for finite t. Reader/refuter4,5,6 confirmed nonfatal and repaired confidence1. No consumers of this example; no diagrams."
+      }
+    }
+  }
+}

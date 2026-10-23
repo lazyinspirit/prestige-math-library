@@ -1,0 +1,33 @@
+--- items/cex-fd-spin-sensitive-stress.md
++++ items/cex-fd-spin-sensitive-stress.md
+@@ -10,9 +10,15 @@
+ deps:
+   - def-fd-quantity-and-frame-conventions
+   - lem-fd-observer-calculus
++  - lem-exponential-series-of-a-bounded-operator
++  - thm-euclidean-space-complete
++  - thm-cauchy-schwarz-and-the-euclidean-norm
+ dependency_roles:
+   def-fd-quantity-and-frame-conventions: formulation-prerequisite
+   lem-fd-observer-calculus: mathematical-premise
++  lem-exponential-series-of-a-bounded-operator: mathematical-premise
++  thm-euclidean-space-complete: mathematical-premise
++  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
+ physical_scope: >-
+   Smooth Newtonian spatial kinematics used to test a tensor-valued constitutive
+   response under time-dependent rigid observer changes. The candidate law is
+@@ -52,11 +58,13 @@
+ 
+ [F2] [[lem-fd-observer-calculus]]: for $C^2$ $Q(t)\in\mathrm{SO}(3)$ and $c(t)$, the transformed velocity at corresponding points is $u^*(t,x^*)=Q'(t)x+Q(t)u(t,x)+c'(t)$, and $L^*=QLQ^T+Q'Q^T$; the complete statement also gives the objective transformation of $D$ and the observer-spin term in $W$. This remains a draft mathematical supplier used as a mathematical premise.
+ 
++[F3] [[thm-euclidean-space-complete]] and [[thm-cauchy-schwarz-and-the-euclidean-norm]]: Euclidean $\mathbb R^3$ is a Banach space, and Cauchy–Schwarz applied to each matrix row gives $|Mx|_2^2\le(\sum_{i,j}M_{ij}^2)|x|_2^2$, so every real $3\times3$ matrix is a bounded linear operator. [[lem-exponential-series-of-a-bounded-operator]]: for such a matrix $M$, define $\exp(tM)=\sum_{n=0}^{\infty}t^nM^n/n!$. The series converges in operator norm and is $C^\infty$ in $t$, with $\exp(0M)=I_3$, $\exp((s+t)M)=\exp(sM)\exp(tM)$ and $\frac d{dt}\exp(tM)=M\exp(tM)=\exp(tM)M$.
++
+ ## Counterexample
+ 
+ **Given:** Choose a nonzero constant skew-symmetric matrix $\Omega\in\mathbb R^{3\times3}$, with units s$^{-1}$, and the smooth rigid-rotation field $u(t,x)=\Omega x$. Let $\mu>0$ be constant.
+ 
+-1.1 By the velocity-gradient convention [F1], in the original observer $L=\nabla u=\Omega$, so the candidate response is $\tau=\mu\Omega\ne0$. Define $Q(t)=\exp(-\Omega t)$. The matrix-exponential power series and $\Omega^T=-\Omega$ give $Q'=-\Omega Q=-Q\Omega$, $Q^T=Q^{-1}$, and $Q(0)=I_3$. The matrix $Q(t)$ is continuous and orthogonal, so $\det Q(t)\in\{-1,1\}$ is continuous; since $I=\mathbb R$ is connected and $\det Q(0)=1$, $\det Q(t)=1$ for all $t$. Thus $Q(t)\in\mathrm{SO}(3)$. [F1, given, algebra]
++1.1 Work on $I=\mathbb R$ and $U=\mathbb R^3$. By [F3], define $R(t)=\exp(t\Omega)$ and $Q(t)=R(-t)=\exp(-t\Omega)$. They are $C^\infty$, $Q'= -\Omega Q=-Q\Omega$, and $RQ=QR=I_3$. Transposing the operator-norm convergent series term by term, using the bound $\|N^T\|_{\rm op}\le3\|N\|_{\rm op}$ (each entry satisfies $|N_{ij}|\le\|N\|_{\rm op}$ and [F3] bounds the transposed matrix by its Frobenius norm), and $\Omega^T=-\Omega$, gives $R^T=Q$. Thus $R$ and $Q$ are orthogonal. Their determinants are continuous, belong to $\{-1,1\}$, and equal $1$ at $0$; connectedness of $\mathbb R$ makes them $1$ everywhere. Define $\chi(t,a)=R(t)a$. This is $C^2$, each slice is a bijection of $U$ onto $\mathbb R^3$ with $C^2$ inverse $x\mapsto Q(t)x$, $J=\det R=1>0$, and $\chi(0,a)=a$. Moreover $\partial_t\chi=\Omega R(t)a=\Omega\chi(t,a)=u(t,\chi(t,a))$. Hence this motion induces the stated rigid-rotation field and satisfies every motion hypothesis of [F2]. By [F1], $L=\Omega$, so $\tau=\mu\Omega\ne0$. [F1, F3, given, algebra]
+ 
+ 2.1 Take the rigid observer $x^*=Q(t)x$, $c=0$. By [F2], its velocity is $u^*=Qu+Q'x=Q\Omega x-\Omega Qx=0$, because $Q\Omega=\Omega Q$. Thus $L^*=0$ and the same candidate law gives $\tau^*=0$. [F2, step 1.1, algebra]
+ 

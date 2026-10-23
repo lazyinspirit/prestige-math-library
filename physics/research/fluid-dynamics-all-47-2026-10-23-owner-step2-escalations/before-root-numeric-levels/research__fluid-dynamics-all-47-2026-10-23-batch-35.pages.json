@@ -1,0 +1,234 @@
+[
+  {
+    "order": 675,
+    "id": "fd-da01",
+    "kind": "A",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Assimilation and finite inverse identifiability",
+    "companion": "fd-da01-examples",
+    "requires": [
+      "data-assimilation-variational-and-ensemble-methods",
+      "kalman-filtering",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "relations-functions-and-quotients",
+      "state-space-models-as-probability-laws"
+    ],
+    "items": [
+      {
+        "id": "def-fd-fluid-coefficient-observation-model",
+        "kind": "definition",
+        "title": "Finite coefficient observation and innovation interface",
+        "statement": "Fix a finite horizon $T\\ge0$. For each integer $k$ with $0\\le k\\le T$, let $V_k$ be a finite-dimensional real vector space with an ordered basis $\\Phi_k=(\\phi_{k,1},\\ldots,\\phi_{k,m_k})$, where $m_k\\ge1$. An ordered basis is a linearly independent spanning list. A coefficient vector $a_k=(a_{k,1},\\ldots,a_{k,m_k})^T\\in\\mathbb R^{m_k}$ represents the trial field $u_k=\\sum_{j=1}^{m_k}a_{k,j}\\phi_{k,j}\\in V_k$. This is a finite-dimensional representation; it does not assert that a fluid field in an untruncated model belongs to $V_k$.\n\nFor each $1\\le k\\le T$, choose a real linear observation map $L_k:V_k\\to\\mathbb R^{p_k}$, with $p_k\\ge1$, and a real matrix $F_k\\in\\mathbb R^{m_k\\times m_{k-1}}$ for the coefficient transition. The observation matrix $H_k\\in\\mathbb R^{p_k\\times m_k}$ is defined by $[H_k]_{ij}=[L_k(\\phi_{k,j})]_i$; hence $L_k(u_k)=H_ka_k$. A symmetric matrix $C$ is positive semidefinite, written $C\\succeq0$, when $v^TCv\\ge0$ for every vector $v$ of matching dimension, and is positive definite, written $C\\succ0$, when this inequality is strict for every nonzero $v$.\n\nFor stochastic assimilation, assume the Axiom of Choice (AC), meaning every family of nonempty sets has a choice function, for the Gaussian-law construction. Choose an instance of the finite linear-Gaussian state-space model with independent noises: $a_0\\sim N_{m_0}(\\mu_0,P_0)$, $q_k\\sim N_{m_k}(0,Q_k)$, and $r_k\\sim N_{p_k}(0,R_k)$ are mutually independent, with $P_0,Q_k,R_k\\succeq0$, and\n$$a_k=F_ka_{k-1}+q_k,\\qquad y_k=H_ka_k+r_k.$$\nHere $N_d(\\mu,C)$ denotes the $d$-dimensional Gaussian law with mean $\\mu$ and symmetric positive-semidefinite covariance $C$, including singular $C$. For a Kalman-filter run, write $m^a_{k-1}$ and $P^a_{k-1}$ for its previous analysis mean and covariance, and define its forecast mean and covariance, innovation, and innovation covariance by\n$$m^f_k=F_km^a_{k-1},\\qquad P^f_k=F_kP^a_{k-1}F_k^T+Q_k,\\qquad d_k=y_k-H_km^f_k,\\qquad S_k=H_kP^f_kH_k^T+R_k.$$\nThe admissible filter inputs are those for which each innovation covariance to be solved is positive definite. The gain is the solution $K_k=P^f_kH_k^TS_k^{-1}$, computed by the supplied Cholesky solves, and the analysis outputs are $m^a_k=m^f_k+K_kd_k$ and $P^a_k=P^f_k-K_kS_kK_k^T$. The formula describes the exact target of the supplied recursion; it is not an instruction to form a matrix inverse numerically.\n\nFor a one-step perturbed-observation ensemble Kalman update, choose dimensions $m,p\\ge1$, a linear observation matrix $H\\in\\mathbb R^{p\\times m}$, a datum $y\\in\\mathbb R^p$, an ensemble size $N\\ge2$, and a positive-definite observation covariance $\\Gamma\\in\\mathbb R^{p\\times p}$. Given forecast coefficients $\\hat a^1,\\ldots,\\hat a^N\\in\\mathbb R^m$, take perturbations $\\eta^i\\sim N_p(0,\\Gamma)$ independent across members and independent of the forecast ensemble. Define $\\bar a=N^{-1}\\sum_i\\hat a^i$ and the divisor-$N$ covariance $C_N=N^{-1}\\sum_i(\\hat a^i-\\bar a)(\\hat a^i-\\bar a)^T$. The gain and perturbed-data update are $K_N=C_NH^T(HC_NH^T+\\Gamma)^{-1}$ and $a^{a,i}=\\hat a^i+K_N(y+\\eta^i-H\\hat a^i)$. Since $C_N\\succeq0$, $HC_NH^T+\\Gamma\\succ0$. This is the specified finite-ensemble procedure; the definition alone gives no finite-ensemble posterior-exactness claim.\n\nIn a single-window finite inverse view, a real matrix $G\\in\\mathbb R^{p\\times m}$ maps coefficients $a\\in\\mathbb R^m$ to predicted observations $Ga$. A datum has the form $y=Ga+e$, where $e\\in\\mathbb R^p$ is its realized error and a symmetric positive-definite matrix $R\\in\\mathbb R^{p\\times p}$ is the declared error covariance and weighting matrix. This deterministic inverse interface does not assume a probability distribution for the realized vector $e$.\n\nChoosing a finite trial space, a linearization, or process-noise covariances is part of adopting the finite model. These choices do not show that a nonlinear fluid equation or an actual sensor is described exactly by that model.",
+        "deps": [
+          "alg-kalman-filter",
+          "alg-ensemble-kalman-filter",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "alg-kalman-filter": "mathematical-premise",
+          "alg-ensemble-kalman-filter": "mathematical-premise",
+          "def-linear-gaussian-state-space-model-with-independent-noises": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "page": "fd-da01",
+        "side": "A",
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "Assume AC only for the Gaussian-law realization of this finite model, as required by the supplied state-space and Gaussian-law definitions; the coefficient and observation maps themselves use no choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 2 §§2.1 and 2.4; Chapter 4 §§4.1 and 4.2.3",
+              "url": "https://arxiv.org/pdf/1506.07825v1"
+            }
+          ]
+        },
+        "reference": "items/def-fd-fluid-coefficient-observation-model.md"
+      },
+      {
+        "id": "prop-fd-linear-fluid-filter-interface",
+        "kind": "proposition",
+        "title": "Exact filtering for the declared linear Gaussian model",
+        "statement": "Assume AC. Let $T\\ge0$ be finite and take an admissible stochastic coefficient model from the definition of the finite coefficient observation and innovation interface. Thus the coefficient states and observations satisfy $a_k=F_ka_{k-1}+q_k$ and $y_k=H_ka_k+r_k$, the initial state and all process and measurement noises are mutually independent Gaussian vectors with positive-semidefinite covariances, and every innovation covariance $S_k=H_kP^f_kH_k^T+R_k$ used by the recursion is positive definite. Run the finite-horizon Kalman recursion from the declared initial mean and covariance. Then, for each $0\\le k\\le T$, its Gaussian output is an everywhere-defined conditional-law version for the coefficient state $a_k$ given the observation history $y_{1:k}$. The output mean and covariance are the exact conditional mean and covariance of this declared finite linear-Gaussian model, including at histories that have probability zero under a nonsingular observation law. Initial, process, measurement, forecast-state, and analysis-state covariances may be singular; only the innovation covariances being solved must be positive definite. This is a deduction about the declared finite model, not a claim that a nonlinear or untruncated fluid equation is itself linear-Gaussian.",
+        "deps": [
+          "def-fd-fluid-coefficient-observation-model",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "thm-kalman-filter-is-exact-posterior",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "def-fd-fluid-coefficient-observation-model": "mathematical-premise",
+          "def-linear-gaussian-state-space-model-with-independent-noises": "mathematical-premise",
+          "thm-kalman-filter-is-exact-posterior": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "page": "fd-da01",
+        "side": "A",
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Assume AC as required by the Gaussian-law construction and the exact filtering theorem; the hypothesis match and application add no stronger choice principle.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 4 §4.1",
+              "url": "https://arxiv.org/pdf/1506.07825v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/prop-fd-linear-fluid-filter-interface.md"
+      },
+      {
+        "id": "rem-fd-fluid-enkf-scope",
+        "kind": "remark",
+        "title": "EnKF large-ensemble scope and nonlinear limits",
+        "statement": "Assume the Axiom of Choice (AC), meaning every family of nonempty sets has a choice function, for the Gaussian-law construction. Fix a finite horizon $T\\ge0$, positive integers $m_k$ for $0\\le k\\le T$ and $p_k$ for $1\\le k\\le T$, matrices $F_k\\in\\mathbb R^{m_k\\times m_{k-1}}$ and $H_k\\in\\mathbb R^{p_k\\times m_k}$ for $1\\le k\\le T$, and a finite linear-Gaussian coefficient model\n$$a_k=F_ka_{k-1}+q_k,\\qquad y_k=H_ka_k+r_k,$$\nwhere $\\mu_0\\in\\mathbb R^{m_0}$, $a_0\\sim N_{m_0}(\\mu_0,P_0)$, $q_k\\sim N_{m_k}(0,Q_k)$, and $r_k\\sim N_{p_k}(0,R_k)$ are mutually independent, $P_0,Q_k$ are positive semidefinite, and $R_k$ is positive definite. Fix arbitrary observation data $y_{1:T}$. For each ensemble size $N\\ge2$, draw the initial members $a_{N,i}^{a,0}$ independently from $N_{m_0}(\\mu_0,P_0)$. At each $k$, draw process perturbations $q_{N,i}^k\\sim N_{m_k}(0,Q_k)$ and observation perturbations $\\eta_{N,i}^k\\sim N_{p_k}(0,R_k)$, with all these perturbations mutually independent across members and times and independent of the initial ensemble, and set $a_{N,i}^{f,k}=F_ka_{N,i}^{a,k-1}+q_{N,i}^k$. Define $\\bar a_N^{f,k}=N^{-1}\\sum_i a_{N,i}^{f,k}$ and the divisor-$N$ covariance $C_N^{f,k}=N^{-1}\\sum_i(a_{N,i}^{f,k}-\\bar a_N^{f,k})(a_{N,i}^{f,k}-\\bar a_N^{f,k})^T$. The common gain and perturbed-observation update are\n$$K_N^k=C_N^{f,k}H_k^T(H_kC_N^{f,k}H_k^T+R_k)^{-1},\\qquad a_{N,i}^{a,k}=a_{N,i}^{f,k}+K_N^k(y_k+\\eta_{N,i}^k-H_ka_{N,i}^{f,k}).$$\nSince $C_N^{f,k}$ is positive semidefinite and $R_k$ is positive definite, this inverse exists. Define the analysis empirical mean and covariance by $\\bar a_N^{a,k}=N^{-1}\\sum_i a_{N,i}^{a,k}$ and $C_N^{a,k}=N^{-1}\\sum_i(a_{N,i}^{a,k}-\\bar a_N^{a,k})(a_{N,i}^{a,k}-\\bar a_N^{a,k})^T$. Let $m_{k|k}$ and $P_{k|k}$ be the mean and covariance produced by the exact Kalman recursion in the preceding filtering proposition, which defines an everywhere-defined Gaussian filtering law at every fixed history $y_{1:k}$. At each fixed $k\\le T$, $\\bar a_N^{a,k}$ and $C_N^{a,k}$ converge in probability to $m_{k|k}$ and $P_{k|k}$ as $N\\to\\infty$; moreover, for each fixed bounded Lipschitz function $\\varphi:\\mathbb R^{m_k}\\to\\mathbb R$, $N^{-1}\\sum_i\\varphi(a_{N,i}^{a,k})$ converges in probability to its integral under that filtering law. Here bounded Lipschitz means $\\sup_x|\\varphi(x)|<\\infty$ and $|\\varphi(x)-\\varphi(x')|\\le L\\|x-x'\\|_2$ for some finite $L$ and all $x,x'$. Convergence in probability means that for every $\\epsilon>0$, the probability that the error exceeds $\\epsilon$ tends to zero; use Euclidean norm for vectors, Frobenius norm for matrices, and absolute value for scalars. All probabilities refer to the ensemble sampling just described. The horizon is fixed as $N$ grows, with no uniform-in-time conclusion. At finite $N$, the common sample-covariance gain couples the update, and the theorem does not assert independent posterior samples or an exact posterior law for the ensemble. It covers the stated linear maps and perturbed-observation formula only. Covariance localization here means replacing the sample covariance by its entrywise product with a prescribed taper matrix; covariance inflation means rescaling the ensemble anomalies by a factor greater than one or adding a prescribed positive-semidefinite covariance; a transport update means applying a selected map to ensemble members instead of the displayed perturbed-observation formula. These modified procedures and nonlinear state or observation maps require their own statements and proofs. The claim is conditional on the chosen finite model; it is not a conclusion that a nonlinear fluid equation or an actual flow is described by it.",
+        "deps": [
+          "def-fd-fluid-coefficient-observation-model",
+          "prop-fd-linear-fluid-filter-interface",
+          "alg-ensemble-kalman-filter",
+          "thm-perturbed-observation-ensemble-kalman-large-ensemble-limit",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "def-fd-fluid-coefficient-observation-model": "mathematical-premise",
+          "prop-fd-linear-fluid-filter-interface": "mathematical-premise",
+          "alg-ensemble-kalman-filter": "mathematical-premise",
+          "thm-perturbed-observation-ensemble-kalman-large-ensemble-limit": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "page": "fd-da01",
+        "side": "A",
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "Assume AC as required by the Gaussian-law construction and the supplied EnKF limit theorem; no stronger choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 4 §4.2.3",
+              "url": "https://arxiv.org/pdf/1506.07825v1"
+            },
+            {
+              "title": "Jan Mandel, Loren Cobb, and Jonathan D. Beezley, On the Convergence of the Ensemble Kalman Filter, §§3–4, Theorem 1 and Corollary 1",
+              "url": "https://arxiv.org/pdf/0901.2951v2"
+            }
+          ]
+        },
+        "reference": "items/rem-fd-fluid-enkf-scope.md"
+      },
+      {
+        "id": "prop-fd-finite-observation-identifiability",
+        "kind": "proposition",
+        "title": "Whitened observation identifiability and stability",
+        "statement": "Let $E$ be a nonzero linear subspace of the finite coefficient space $\\mathbb R^m$, let $G:\\mathbb R^m\\to\\mathbb R^p$ be the declared linear observation map, and let $R\\in\\mathbb R^{p\\times p}$ be symmetric positive definite. Let $R^{1/2}$ be the unique symmetric positive-semidefinite square root of $R$ and set $W=(R^{1/2})^{-1}$, so $W^TW=R^{-1}$. The whitened map is $A=W(G|_E):E\\to\\mathbb R^p$, and define its smallest gain by $\\sigma_{\\min}(A)=\\inf\\{\\|Av\\|_2:v\\in E,\\ \\|v\\|_2=1\\}$; the singular-value decomposition shows this infimum is the smallest singular value and is attained. Identifiability on $E$ means injectivity of $G|_E$. It holds exactly when $\\sigma_{\\min}(A)>0$. If it holds, then for every true $a\\in E$, every realized error $e\\in\\mathbb R^p$, and datum $y=Ga+e$, the unique weighted least-squares estimate $\\hat a=\\arg\\min_{b\\in E}\\|W(y-Gb)\\|_2$ satisfies\n$$\\|\\hat a-a\\|_2\\le\\frac{\\|We\\|_2}{\\sigma_{\\min}(A)}.$$\nIf $\\sigma_{\\min}(A)=0$, a nonzero vector in $E\\cap\\ker G$ makes distinct coefficients observationally indistinguishable. The estimate is pointwise in the realized error; it is not a confidence or probability statement. If a pressure representation includes an additive-constant coefficient direction in $\\ker G$, that direction must be fixed or quotiented out to obtain identifiable coefficients. This finite-dimensional result is not a general coefficient-identifiability theorem for a partial differential equation.",
+        "deps": [
+          "def-fd-fluid-coefficient-observation-model",
+          "thm-singular-value-decomposition",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "dependency_level": 1,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "def-fd-fluid-coefficient-observation-model": "mathematical-premise",
+          "thm-singular-value-decomposition": "mathematical-premise",
+          "thm-non-negative-square-root-exists-and-is-unique": "mathematical-premise"
+        },
+        "page": "fd-da01",
+        "side": "A",
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition, §7E",
+              "url": "https://linear.axler.net/LADR4e.pdf"
+            },
+            {
+              "title": "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 2 §2.1 and Chapter 4 §4.1",
+              "url": "https://arxiv.org/pdf/1506.07825v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/prop-fd-finite-observation-identifiability.md"
+      }
+    ]
+  },
+  {
+    "order": 676,
+    "id": "fd-da01-examples",
+    "kind": "B",
+    "category": "fluid-dynamics-mathematics",
+    "library": "mathematics",
+    "title": "Assimilation and finite inverse identifiability — Examples",
+    "companion": "fd-da01",
+    "requires": [
+      "fd-da01"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-two-mode-one-sensor",
+        "kind": "example",
+        "title": "One sensor cannot identify two independent coefficients",
+        "statement": "Let $V=\\operatorname{span}\\{\\phi_1,\\phi_2\\}$ have the ordered basis $(\\phi_1,\\phi_2)$, and represent a candidate field by the coefficient vector $a=(a_1,a_2)^T\\in\\mathbb R^2$. A single sensor has the linear observation matrix $G=[1\\ 0]\\in\\mathbb R^{1\\times2}$, the weighting covariance is $R=[1]$, and a datum is $y=Ga+e$ for a fixed realized error $e\\in\\mathbb R$. The sensor depends on $a_1$ alone, so it cannot determine $a_2$ on the full two-dimensional coefficient space.",
+        "deps": [
+          "prop-fd-finite-observation-identifiability"
+        ],
+        "dependency_level": 2,
+        "domain": "mathematics",
+        "library": "mathematics",
+        "dependency_roles": {
+          "prop-fd-finite-observation-identifiability": "mathematical-premise"
+        },
+        "page": "fd-da01-examples",
+        "side": "B",
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition, §7E",
+              "url": "https://linear.axler.net/LADR4e.pdf"
+            },
+            {
+              "title": "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 2 §2.1",
+              "url": "https://arxiv.org/pdf/1506.07825v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "reference": "items/ex-fd-two-mode-one-sensor.md"
+      }
+    ]
+  }
+]

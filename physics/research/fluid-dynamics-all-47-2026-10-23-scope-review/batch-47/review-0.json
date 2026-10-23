@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "run": "fluid-dynamics-all-47-2026-10-23",
+  "batch": "47",
+  "round": 0,
+  "reviewed_items": [
+    "post-fd-capillary-linear-free-surface",
+    "pthm-fd-capillary-wave-model-prediction",
+    "ex-fd-capillary-restoring-sign"
+  ],
+  "reviewed_pages": [
+    "fd-pbl01",
+    "fd-pbl01-examples"
+  ],
+  "decision": "repair",
+  "reason": "Approved scope and supplier uses agree. The capillary pressure sign and finite-depth relation match [Fitzpatrick, equations 11.116–11.121](https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node156.html) and [Georgi, equation 11.137](https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/ef731c1b91d77a6db003f6c27e300d25_MIT8_03SCF16_Textbook.pdf). [MIT 18.354, equations 547–551](https://ocw.mit.edu/courses/18-354j-nonlinear-dynamics-ii-continuum-systems-spring-2015/6163837c5efa5d6ed969e535ec8f890c_MIT18_354JS15_lectureNotes.pdf) treats deep-water waves; the local proof correctly supplies the finite-depth periodic-mode calculation. No item asserts empirical validation. Request local repairs for frame and quotient-torus definitions, missing mathematical prerequisites, the vertical ODE argument, and the example’s mode definition.",
+  "findings": [
+    {
+      "id": "f47-1-postulate-definitions",
+      "type": "local",
+      "reason": "In the Postulate, define “classical Cartesian inertial frame” or identify the exact earlier definition `def-fd-quantity-and-frame-conventions` and state its relevant content: an adapted Cartesian inertial chart on Newtonian spacetime, with inertial charts related by absolute-time translations and Galilean spatial transformations. Since T²_L is a quotient, define horizontal derivatives and C^k fields through their L-periodic lifts to R². Also define p_l as the liquid-side pressure trace on the interface, with its domain and units."
+    },
+    {
+      "id": "f47-2-theorem-math-prerequisites",
+      "type": "prerequisite",
+      "reason": "The Statement and proof use the complex exponential and sinh, cosh, and tanh without declared mathematical suppliers. The consuming locations include the mode definition and proof steps 1.1, 2.1, and 4.1–6.1. Add the necessary mathematical dependencies and roles, including `def-complex-exponential`, `thm-complex-exponential-is-entire-with-derivative-itself`, `thm-chain-rule-for-complex-derivatives`, `def-hyperbolic-functions`, and `thm-hyperbolic-identities-and-derivatives`, or supply equivalent complete local definitions and justifications. Define the mode factor on the quotient torus and establish its independence from the choice of representative."
+    },
+    {
+      "id": "f47-3-theorem-ode",
+      "type": "local",
+      "reason": "Proof step 2.1 asserts the general solution of F''−k²F=0 without deriving it or citing an exact ODE supplier. Complete that argument under the stated F∈C² and k>0 hypotheses."
+    },
+    {
+      "id": "f47-4-example-mode",
+      "type": "local",
+      "reason": "The Example uses “nonzero horizontal periodic mode” and k without defining the lattice mode or k. State the nonzero integer mode, its wavevector and k=|wavevector|>0, and the resulting Δ_h eigenvalue; the current F1 gives only the frequency formula."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pthm-fd-capillary-wave-model-prediction",
+      "decision": "repair",
+      "reason": "Direct consumer of the Postulate. After its frame, pressure-trace, and periodic-lift clarification, check that the theorem’s equations and mode interpretation use those conventions."
+    },
+    {
+      "id": "ex-fd-capillary-restoring-sign",
+      "decision": "repair",
+      "reason": "Consumer of the Postulate through the theorem, and it has its own mode-definition repair. Recheck its claim against any clarified Postulate and theorem interfaces."
+    }
+  ]
+}

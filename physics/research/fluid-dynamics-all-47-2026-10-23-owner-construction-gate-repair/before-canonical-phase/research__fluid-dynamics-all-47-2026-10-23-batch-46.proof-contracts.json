@@ -1,0 +1,566 @@
+{
+  "version": 1,
+  "scope": [
+    "def-fd-wall-defect-capillary-models",
+    "thm-fd-common-wall-residual-error",
+    "thm-fd-capillary-gravity-dispersion-energy",
+    "ex-fd-capillary-zero-tension-limit"
+  ],
+  "contracts": {
+    "def-fd-wall-defect-capillary-models": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition introduces a bounded nonempty domain and a nonempty finite-depth slab."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition statement: zero surface tension is allowed while depth, density, gravity, and viscosity where used remain positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter is normalized to a one-case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition statement: the explicit channel lift is defined when either wall defect is zero or when a=b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition statement: the capillary model specifies the bottom z=-h and surface z=0 boundary conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition asserts no lift-existence theorem or choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ]
+    },
+    "thm-fd-common-wall-residual-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fd-wall-defect-capillary-models",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval and let $D\\subseteq\\mathbb R^3$ be a bounded open $C^2$ domain. Use the Cartesian gradient, divergence, row-component Jacobian, and componentwise Laplacian on $D$. For constants $\\rho_0,\\nu>0$, a body acceleration $f\\in C(I\\times D;\\mathbb R^3)$, a velocity $w\\in C^1(I;C^2(D;\\mathbb R^3))$, and a scalar pressure $q\\in C(I;C^1(D))$, define the full momentum residual\n\n$$\\mathcal R(w,q):=\\partial_t w+(w\\cdot\\nabla)w+\\rho_0^{-1}\\nabla q-\\nu\\Delta w-f.$$\n\nThe forced constant-density incompressible model is $\\mathcal R(u,p)=0$ with $\\operatorname{div}u=0$. A common-wall comparison consists of two divergence-free velocity fields $u,v$ in the displayed regularity class whose traces on $\\partial D$ agree with the same prescribed boundary velocity $\\gamma(t,\\cdot)$. For a divergence-free comparison field $w$ with a different trace, a divergence-free wall lift is a field $\\ell\\in C^1(I;C^2(D;\\mathbb R^3))$ with $\\operatorname{div}\\ell=0$ and $\\ell|_{\\partial D}=w|_{\\partial D}-\\gamma$; whenever such a lift is supplied, the corrected field is $v=w-\\ell$ and its residual is $\\mathcal R(v,q)$. This definition asserts no lift exists for arbitrary boundary data.\n\nFor a flat periodic channel $D_{\\rm ch}=\\mathbb T_{L_x}\\times(0,h)\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_z,h>0$, a specific tangential lift for lower and upper wall defects $a(t)e_x$ and $b(t)e_x$ is\n\n$$\\ell(t,x,y,z)=\\bigl(a(t)(1-y/h)+b(t)y/h,\\,0,\\,0\\bigr).$$\n\nHere $e_x=(1,0,0)$, $a,b\\in C^1(I,\\mathbb R)$, and the channel is periodic in $x,z$ with physical walls $y=0,h$. This lift is defined only for the stated tangential wall-defect data.\n\nFor the capillary-gravity model, let $h,\\rho,g,L_x,L_y>0$, $\\sigma\\ge0$, use horizontal coordinates $(x,y)\\in\\mathbb T_{L_x}\\times\\mathbb T_{L_y}$ and vertical coordinate $z\\in(-h,0)$, positive upward, with the flat mean surface at $z=0$. Let $\\eta\\in C^1(I;C^2(\\mathbb T_{L_x}\\times\\mathbb T_{L_y}))$ be surface elevation and $\\phi\\in C^1(I;C^2(\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times[-h,0]))$ a real velocity potential, so all displayed derivatives extend continuously to the top and bottom. Set $\\Delta=\\partial_x^2+\\partial_y^2+\\partial_z^2$ and $\\Delta_H=\\partial_x^2+\\partial_y^2$. The capillary-gravity potential model is\n\n$$\\Delta\\phi=0\\quad(-h<z<0),\\qquad \\phi_z(t,x,y,-h)=0,$$\n\n$$\\eta_t(t,x,y)=\\phi_z(t,x,y,0),\\qquad \\phi_t(t,x,y,0)+g\\eta(t,x,y)-\\frac{\\sigma}{\\rho}\\Delta_H\\eta(t,x,y)=0.$$\n\nThese are definitions of mathematical model interfaces. They assert neither existence of a solution for general data nor nonlinear free-surface or sharp-interface convergence. In the optional SI interpretation, $[x]=[y]=[z]=[h]=\\mathrm m$, $[t]=\\mathrm s$, $[\\eta]=\\mathrm m$, $[\\phi]=\\mathrm{m^2\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[g]=\\mathrm{m\\,s^{-2}}$, $[\\sigma]=\\mathrm{N\\,m^{-1}}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, and $[f]=[\\mathcal R]=\\mathrm{m\\,s^{-2}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $e=v-u$ and $\\pi=q-p$. Subtracting the exact equation for $u$ from the residual equation for $v$ gives $e_t+(v\\cdot\\nabla)e+(e\\cdot\\nabla)u+\\rho_0^{-1}\\nabla\\pi-\\nu\\Delta e=r$, because $(v\\cdot\\nabla)v-(u\\cdot\\nabla)u=(v\\cdot\\nabla)e+(e\\cdot\\nabla)u$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $Y(t)=\\|e(t)\\|_2^2$ and $R(t)=\\|r(t)\\|_2$. Pair the equation in step 1.1 with $e$ and integrate over $D$. The transport integral is $\\frac12\\int_D\\operatorname{div}(v|e|^2)=0$ because $\\operatorname{div}v=0$ and $e=0$ on $\\partial D$; the pressure integral is $\\rho_0^{-1}\\int_D\\operatorname{div}(\\pi e)=0$ because $\\operatorname{div}e=0$ and $e=0$ on $\\partial D$; and the diffusion term is $-\\nu\\int_D e\\cdot\\Delta e=\\nu\\int_D|\\nabla e|^2$ because $\\int_D\\operatorname{div}(\\sum_i e_i\\nabla e_i)=0$. These three identities use [F2]. The bilinear gradient norm gives $|(e\\cdot\\nabla)u\\cdot e|\\le L(t)|e|^2$, and [F3] gives $\\int_D|e\\cdot r|\\le\\sqrt{Y}R$. Pointwise in $x$, the difference quotients of $|e(t,x)|^2$ converge uniformly on $\\overline D$ to $2e\\cdot e_t$ as the time increment tends to zero, because $e,e_t$ are continuous on the compact space-time closure; integrating preserves this uniform limit since $D$ has finite volume. Therefore $Y'=2\\int_D e\\cdot e_t$ and $\\frac12Y'(t)+\\nu\\|\\nabla e(t)\\|_2^2\\le L(t)Y(t)+R(t)\\sqrt{Y(t)}$. [given, A1, F2, F3, F4, step 1.1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $\\delta>0$, let $y_\\delta(t)=\\sqrt{Y(t)+\\delta^2}$. The radicand is positive; the identity $|y_\\delta(t+h)-y_\\delta(t)|=|Y(t+h)-Y(t)|/(y_\\delta(t+h)+y_\\delta(t))$ first gives continuity of $y_\\delta$, and the same difference-of-squares identity in the difference quotient gives $y_\\delta'=Y'/(2y_\\delta)$. Dropping the nonnegative diffusion term in step 1.2 and using $Y/y_\\delta\\le y_\\delta$ and $\\sqrt{Y}/y_\\delta\\le1$ yields $y_\\delta'\\le L y_\\delta+R$. The function $L$ is continuous because $\\overline D$ is compact and $D_xu$ is continuous; for $A(t)=\\int_0^tL(s)\\,ds$, the difference quotient is the average of $L$ on the interval between $t$ and $t+h$, so continuity gives $A'=L$. Thus [F4] and [F5] give $(e^{-A}y_\\delta)'\\le e^{-A}R$. Integrate on $[0,t]$ using [F6] and let $\\delta\\downarrow0$. This proves the stated bound for $e=v-u$. [given, F4, F5, F6, F7, step 1.2, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the channel case, $\\ell|_{y=0}=a e_x$, $\\ell|_{y=h}=b e_x$, $\\operatorname{div}\\ell=0$, $\\ell_t=(a'(1-y/h)+b'y/h)e_x$, $\\Delta\\ell=0$, and $(\\ell\\cdot\\nabla)\\ell=0$, since $\\ell$ depends only on $y$ in its first component and that component is affine in $y$. Thus $v=w-\\ell$ is divergence-free and has the exact wall trace.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Expanding the convective term in $\\mathcal R(w-\\ell,q)$ gives $\\mathcal R(w-\\ell,q)=\\mathcal R(w,q)-\\ell_t-(\\ell\\cdot\\nabla)w-(w\\cdot\\nabla)\\ell+(\\ell\\cdot\\nabla)\\ell+\\nu\\Delta\\ell$. For this explicit lift, $(\\ell\\cdot\\nabla)w=\\ell_1\\partial_xw$ and $(w\\cdot\\nabla)\\ell=w_2(b-a)h^{-1}e_x$, while the last two lift-only terms vanish by step 2.1.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "On the channel cell $[0,L_x]\\times[0,h]\\times[0,L_z]$, repeat the energy calculation in step 1.2 with $e=v-u$ and residual $r_\\ell$ from step 2.2. For each of its divergence terms, integrate each coordinate derivative by the fundamental theorem [F6]: the paired $x$ and $z$ face values agree by periodicity, while the $y=0,h$ contributions vanish because $e=0$ at both walls. Thus the transport and pressure terms vanish and the diffusion term is $\\nu\\|\\nabla e\\|_2^2$, exactly as in step 1.2; no $C^2$ Euclidean boundary assertion about the rectangular cell is needed. The same norm regularization and integrating-factor argument in step 1.3 therefore gives the stated estimate for $v=w-\\ell$ with residual $r_\\ell$. Since $w-u=(v-u)+\\ell$, [F8] gives $\\|w-u\\|_2\\le\\|v-u\\|_2+\\|\\ell\\|_2$, which is the asserted channel estimate. [given, F6, F8, step 1.2, step 1.3, step 2.2] ∎",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F6",
+            "F8",
+            "step 1.2",
+            "step 1.3",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "D is a nonempty bounded domain and the channel cell has positive h, L_x, and L_z."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3: the regularized norm handles zero residual and zero initial error without division by the error norm."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter is specialized to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1: the proof covers e(0)=0 and r=0; the lift includes a=b=0 and divides by neither a nor b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3: the common trace cancels boundary terms and integration on [0,t] includes t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the bounded-domain divergence theorem under A1’s explicit Countable Choice assumption AC_omega."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way residual estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ]
+    },
+    "thm-fd-capillary-gravity-dispersion-energy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-fd-wall-defect-capillary-models",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open time interval and let $D\\subseteq\\mathbb R^3$ be a bounded open $C^2$ domain. Use the Cartesian gradient, divergence, row-component Jacobian, and componentwise Laplacian on $D$. For constants $\\rho_0,\\nu>0$, a body acceleration $f\\in C(I\\times D;\\mathbb R^3)$, a velocity $w\\in C^1(I;C^2(D;\\mathbb R^3))$, and a scalar pressure $q\\in C(I;C^1(D))$, define the full momentum residual\n\n$$\\mathcal R(w,q):=\\partial_t w+(w\\cdot\\nabla)w+\\rho_0^{-1}\\nabla q-\\nu\\Delta w-f.$$\n\nThe forced constant-density incompressible model is $\\mathcal R(u,p)=0$ with $\\operatorname{div}u=0$. A common-wall comparison consists of two divergence-free velocity fields $u,v$ in the displayed regularity class whose traces on $\\partial D$ agree with the same prescribed boundary velocity $\\gamma(t,\\cdot)$. For a divergence-free comparison field $w$ with a different trace, a divergence-free wall lift is a field $\\ell\\in C^1(I;C^2(D;\\mathbb R^3))$ with $\\operatorname{div}\\ell=0$ and $\\ell|_{\\partial D}=w|_{\\partial D}-\\gamma$; whenever such a lift is supplied, the corrected field is $v=w-\\ell$ and its residual is $\\mathcal R(v,q)$. This definition asserts no lift exists for arbitrary boundary data.\n\nFor a flat periodic channel $D_{\\rm ch}=\\mathbb T_{L_x}\\times(0,h)\\times\\mathbb T_{L_z}$, where $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$ and $L_x,L_z,h>0$, a specific tangential lift for lower and upper wall defects $a(t)e_x$ and $b(t)e_x$ is\n\n$$\\ell(t,x,y,z)=\\bigl(a(t)(1-y/h)+b(t)y/h,\\,0,\\,0\\bigr).$$\n\nHere $e_x=(1,0,0)$, $a,b\\in C^1(I,\\mathbb R)$, and the channel is periodic in $x,z$ with physical walls $y=0,h$. This lift is defined only for the stated tangential wall-defect data.\n\nFor the capillary-gravity model, let $h,\\rho,g,L_x,L_y>0$, $\\sigma\\ge0$, use horizontal coordinates $(x,y)\\in\\mathbb T_{L_x}\\times\\mathbb T_{L_y}$ and vertical coordinate $z\\in(-h,0)$, positive upward, with the flat mean surface at $z=0$. Let $\\eta\\in C^1(I;C^2(\\mathbb T_{L_x}\\times\\mathbb T_{L_y}))$ be surface elevation and $\\phi\\in C^1(I;C^2(\\mathbb T_{L_x}\\times\\mathbb T_{L_y}\\times[-h,0]))$ a real velocity potential, so all displayed derivatives extend continuously to the top and bottom. Set $\\Delta=\\partial_x^2+\\partial_y^2+\\partial_z^2$ and $\\Delta_H=\\partial_x^2+\\partial_y^2$. The capillary-gravity potential model is\n\n$$\\Delta\\phi=0\\quad(-h<z<0),\\qquad \\phi_z(t,x,y,-h)=0,$$\n\n$$\\eta_t(t,x,y)=\\phi_z(t,x,y,0),\\qquad \\phi_t(t,x,y,0)+g\\eta(t,x,y)-\\frac{\\sigma}{\\rho}\\Delta_H\\eta(t,x,y)=0.$$\n\nThese are definitions of mathematical model interfaces. They assert neither existence of a solution for general data nor nonlinear free-surface or sharp-interface convergence. In the optional SI interpretation, $[x]=[y]=[z]=[h]=\\mathrm m$, $[t]=\\mathrm s$, $[\\eta]=\\mathrm m$, $[\\phi]=\\mathrm{m^2\\,s^{-1}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[g]=\\mathrm{m\\,s^{-2}}$, $[\\sigma]=\\mathrm{N\\,m^{-1}}$, $[\\nu]=\\mathrm{m^2\\,s^{-1}}$, and $[f]=[\\mathcal R]=\\mathrm{m\\,s^{-2}}$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fd-x03",
+          "source_section": "Statement",
+          "quote": "Let $h,g,k>0$, let $a\\in\\mathbb R$, and set $s=kh$ and $\\omega=\\sqrt{gk\\tanh(s)}$, using the positive square root. Here $h$ is depth, $g$ a constant acceleration parameter, and $k$ a positive horizontal wave number; $s$ is dimensionless and $a$ is a real elevation amplitude. The strict positivity of $\\tanh(s)$ for $s>0$ makes $\\omega$ well-defined and positive. Let $x,y\\in\\mathbb R$ be horizontal Cartesian coordinates and $z\\in(-h,0)$ the vertical coordinate, positive upward with the flat mean surface at $z=0$ and bottom at $z=-h$; time $t\\in\\mathbb R$. Write $\\theta=kx-\\omega t$. A surface elevation is the scalar field $\\eta(t,x,y)$, and a velocity potential is a scalar field $\\phi(t,x,y,z)$. Define the finite-depth linear potential-wave problem by\n\n$$\\Delta\\phi=0\\quad(-h<z<0),\\qquad \\phi_z(t,x,y,-h)=0,$$\n\n$$\\eta_t(t,x,y)=\\phi_z(t,x,y,0),\\qquad \\phi_t(t,x,y,0)+g\\eta(t,x,y)=0,$$\n\nwhere $\\Delta=\\partial_x^2+\\partial_y^2+\\partial_z^2$. Let $S,C$ be the real sine and cosine functions defined on this page. Then\n\n$$\\eta(t,x,y)=aC(\\theta),\\qquad \\phi(t,x,y,z)=\\frac{ag}{\\omega}\\frac{\\cosh(k(z+h))}{\\cosh(kh)}S(\\theta)$$\n\nare fields that are $C^2$ in the spatial variables and $C^1$ in time, with the displayed derivatives extending to $z=-h$ and $z=0$, and they satisfy this system exactly. Define the shallow and deep comparison frequencies by $\\omega_{\\rm sh}=k\\sqrt{gh}$ and $\\omega_{\\rm deep}=\\sqrt{gk}$. They obey\n\n$$0\\le\\frac{\\omega_{\\rm sh}^2-\\omega^2}{\\omega_{\\rm sh}^2}\\le\\frac{(kh)^2}{3},\\qquad 0\\le1-\\frac{\\omega}{\\omega_{\\rm sh}}\\le\\frac{(kh)^2}{3},\\qquad 0\\le\\frac{\\omega_{\\rm deep}^2-\\omega^2}{\\omega_{\\rm deep}^2}\\le2e^{-2kh}.$$\n\nThese are exact statements about the displayed linear boundary problem and its dispersion relation. They assert no nonlinear free-surface solution or error bound.\n\nIn the optional SI interpretation, $[h]=\\mathrm m$, $[g]=\\mathrm{m\\,s^{-2}}$, $[k]=\\mathrm{m^{-1}}$, $[a]=[\\eta]=\\mathrm m$, $[\\omega]=\\mathrm{s^{-1}}$, and $[\\phi]=\\mathrm{m^2\\,s^{-1}}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-greens-first-identity-for-glued-elementary-solid-regions",
+          "source_section": "Statement",
+          "quote": "Let a finite gluing of elementary solid regions be given, with union $E$ and outer boundary presentation $\\Sigma^{\\mathrm{out}}$, let $O$ be an open set containing $E$, let $u:O\\to\\mathbb R$ be $C^1$ and let $v:O\\to\\mathbb R$ be $C^2$. Then\n\n$$\\iiint_E(\\langle\\nabla u,\\nabla v\\rangle+u\\Delta v)=\\iint_{\\partial E}u\\langle\\nabla v,n\\rangle,$$\n\nthe right-hand side being the flux of the field $u\\nabla v$ over $\\Sigma^{\\mathrm{out}}$.\n\nNo symmetry between $u$ and $v$ is claimed: the hypotheses on them differ.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and $c<d$. Suppose $g,h:[a,b]\\times[c,d]\\to\\mathbb R$ are continuous and, for every fixed $t\\in[c,d]$, the function $x\\mapsto g(x,t)$ is differentiable on $(a,b)$ with derivative $h(x,t)$. Define\n\n$$G(x):=\\int_c^d g(x,t)\\,dt.$$\n\nThen $G$ is differentiable on $[a,b]$ as a function on that interval and\n\n$$G'(x)=\\int_c^d h(x,t)\\,dt\\qquad(x\\in[a,b]).$$\n\nAt $a$ and $b$ the derivative is relative and one-sided. The derivative hypothesis is imposed only for interior parameter values; continuity of $h$ supplies its endpoint values.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\omega_0=\\sqrt{gk\\tanh(kh)}>0$ and let $c_\\sigma=\\sqrt{1+\\sigma k^2/(\\rho g)}>0$, whose existence and positivity follow from [F1] and [F2]. Set $\\omega=c_\\sigma\\omega_0$. Then $\\omega^2=(1+\\sigma k^2/(\\rho g))gk\\tanh(kh)=(gk+\\sigma k^3/\\rho)\\tanh(kh)$, and the radicand in the Statement is positive, so its positive square root is this $\\omega$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $\\theta_0(t',x)=kx-\\omega_0t'$, and take the gravity mode $\\eta_0,\\phi_0$ from [F1]. Define $t'=c_\\sigma t$, $\\eta(t,x,y)=\\eta_0(t',x,y)$, and $\\phi(t,x,y,z)=c_\\sigma\\phi_0(t',x,y,z)$. The chain rule [F3] gives $\\eta_t=c_\\sigma(\\eta_0)_{t'}=c_\\sigma(\\phi_0)_z=\\phi_z$; harmonicity and the bottom condition persist because this transformation only rescales time and amplitude.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The gravity mode is independent of $y$, so $\\Delta_H\\eta_0=-k^2\\eta_0$. Its gravity dynamic condition is $(\\phi_0)_{t'}+g\\eta_0=0$. Therefore $\\phi_t+g\\eta-(\\sigma/\\rho)\\Delta_H\\eta=c_\\sigma^2(\\phi_0)_{t'}+g\\eta_0+(\\sigma k^2/\\rho)\\eta_0=(-g c_\\sigma^2+g+\\sigma k^2/\\rho)\\eta_0=0$, since $c_\\sigma^2=1+\\sigma k^2/(\\rho g)$. Thus the transformed fields satisfy the capillary dynamic condition.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Since $\\omega=c_\\sigma\\omega_0$ and $\\omega_0^2=gk\\tanh(kh)$, the coefficient of $G(z)S(\\theta_\\sigma)$ in $\\phi=c_\\sigma\\phi_0(c_\\sigma t)$ is $agc_\\sigma/\\omega_0=a\\omega/(k\\tanh(kh))$. Also $\\theta_0(c_\\sigma t,x)=\\theta_\\sigma$. This proves the displayed mode formula, including $a=0$. At $\\sigma=0$, $c_\\sigma=1$ and the same formulas are exactly the gravity mode [F1].",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Q=[0,\\lambda]\\times[0,L_y]\\times[-h,0]$. Apply [F6] successively to the rectangular cell integrals and use [F5] to differentiate the squared gradients; the fields and time derivatives are continuous on the compact cell, so the hypotheses hold. Apply [F4] with $u=\\phi_t$ and $v=\\phi$. The interior term $\\phi_t\\Delta\\phi$ vanishes; opposite periodic faces cancel; the bottom term vanishes by $\\phi_z(-h)=0$. Hence $K'(t)=\\rho\\int_0^{L_y}\\int_0^\\lambda \\phi_t(t,x,y,0)\\phi_z(t,x,y,0)\\,dx\\,dy$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Differentiate the two surface terms in $E$ using [F5] and [F6]. For the gradient term apply [F4] on $Q$ to $u=\\eta_t(x,y)$ and $v=\\eta(x,y)$, extended constantly in $z$; the top and bottom normal derivatives vanish and the paired periodic-face terms cancel. Dividing the identity by $h$ gives $\\int_0^{L_y}\\int_0^\\lambda\\nabla_H\\eta\\cdot\\nabla_H\\eta_t\\,dx\\,dy=-\\int_0^{L_y}\\int_0^\\lambda\\eta_t\\Delta_H\\eta\\,dx\\,dy$, so $V'(t)=\\int_0^{L_y}\\int_0^\\lambda(\\rho g\\eta-\\sigma\\Delta_H\\eta)\\eta_t\\,dx\\,dy$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The kinematic condition makes $\\phi_z(t,x,y,0)=\\eta_t$. The dynamic condition makes $\\rho\\phi_t+\\rho g\\eta-\\sigma\\Delta_H\\eta=0$. Adding the derivatives in steps 2.1 and 2.2 therefore gives $E'(t)=K'(t)+V'(t)=0$. Each term in $E$ is nonnegative because $\\rho,g>0$ and $\\sigma\\ge0$, so $E$ is nonnegative and constant on $[0,T]$.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The depth and horizontal periods are strictly positive, so the finite cell is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.4 establish the sigma=0 gravity mode; k,h,g,rho stay positive so denominators remain nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only positive k, tanh(kh), rho, and g, so the expression has no singular branch at kh=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.3: the mode proof does not divide by a, and the energy identity includes zero fields."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 verify the bottom and surface conditions; step 2.3 establishes energy constancy on the closed time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The mode is explicit and requires no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem verifies an explicit mode and states an energy identity; it asserts no if-and-only-if classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of solutions is asserted."
+        }
+      ]
+    },
+    "ex-fd-capillary-zero-tension-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fd-capillary-gravity-dispersion-energy",
+          "source_section": "Statement",
+          "quote": "Let $h,g,\\rho,k,L_y>0$, $\\sigma\\ge0$, and $a\\in\\mathbb R$. Set $\\lambda=2\\pi/k$ and $\\mathbb T_L=\\mathbb R/(L\\mathbb Z)$; use horizontal coordinates $(x,y)\\in\\mathbb T_\\lambda\\times\\mathbb T_{L_y}$ and vertical coordinate $z\\in[-h,0]$, positive upward, with the mean surface at $z=0$. Define\n\n$$\\omega_\\sigma=\\sqrt{\\left(gk+\\frac{\\sigma}{\\rho}k^3\\right)\\tanh(kh)},\\qquad G(z)=\\frac{\\cosh(k(z+h))}{\\cosh(kh)},\\qquad \\theta_\\sigma=kx-\\omega_\\sigma t.$$\n\nLet $S,C:\\mathbb R\\to\\mathbb R$ be the real sine and cosine functions. The fields\n\n$$\\eta_\\sigma(t,x,y)=aC(\\theta_\\sigma),\\qquad \\phi_\\sigma(t,x,y,z)=\\frac{a\\omega_\\sigma}{k\\tanh(kh)}G(z)S(\\theta_\\sigma)$$\n\nare smooth, independent of $y$, periodic with horizontal periods $\\lambda,L_y$, and solve exactly the linear capillary-gravity potential equations\n\n$$\\Delta\\phi=0\\quad(-h<z<0),\\qquad \\phi_z(t,x,y,-h)=0,$$\n\n$$\\eta_t(t,x,y)=\\phi_z(t,x,y,0),\\qquad \\phi_t(t,x,y,0)+g\\eta(t,x,y)-\\frac{\\sigma}{\\rho}\\Delta_H\\eta(t,x,y)=0,$$\n\nwhere $\\Delta=\\partial_x^2+\\partial_y^2+\\partial_z^2$ and $\\Delta_H=\\partial_x^2+\\partial_y^2$. Here $h$ is depth, $g$ gravitational acceleration, $\\rho$ constant density, $\\sigma$ surface tension, and $\\Delta_H$ is the horizontal Laplacian. In particular, the positive frequency obeys\n\n$$\\omega_\\sigma^2=\\left(gk+\\frac{\\sigma}{\\rho}k^3\\right)\\tanh(kh).$$\n\nAt $\\sigma=0$ this mode is exactly the finite-depth gravity-wave mode. For any $T>0$, let $\\eta\\in C^1([0,T];C^2(\\mathbb T_\\lambda\\times\\mathbb T_{L_y}))$ and $\\phi\\in C^1([0,T];C^2(\\mathbb T_\\lambda\\times\\mathbb T_{L_y}\\times[-h,0]))$ extend with these regularities to a neighborhood of the closed slab and satisfy the same equations. Define the energy in one horizontal cell by\n\n$$E(t)=\\frac{\\rho}{2}\\int_0^{L_y}\\int_0^\\lambda\\int_{-h}^0 (|\\phi_x|^2+|\\phi_y|^2+|\\phi_z|^2)\\,dz\\,dx\\,dy+\\frac{\\rho g}{2}\\int_0^{L_y}\\int_0^\\lambda\\eta^2\\,dx\\,dy+\\frac{\\sigma}{2}\\int_0^{L_y}\\int_0^\\lambda (|\\eta_x|^2+|\\eta_y|^2)\\,dx\\,dy.$$\n\nThen $E(t)$ is nonnegative and constant on $[0,T]$. These are exact deductions within the stated linear model; they do not assert a nonlinear free-surface solution, a sharp-interface convergence theorem, or an experimental observation. In SI units, $[h]=[L_y]=\\mathrm m$, $[g]=\\mathrm{m\\,s^{-2}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[\\sigma]=\\mathrm{N\\,m^{-1}}$, $[k]=\\mathrm{m^{-1}}$, $[a]=[\\eta]=\\mathrm m$, $[\\omega_\\sigma]=\\mathrm{s^{-1}}$, $[\\phi]=\\mathrm{m^2\\,s^{-1}}$, and $[E]=\\mathrm J$ for the chosen finite transverse span.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fd-x03",
+          "source_section": "Statement",
+          "quote": "Let $h,g,k>0$, let $a\\in\\mathbb R$, and set $s=kh$ and $\\omega=\\sqrt{gk\\tanh(s)}$, using the positive square root. Here $h$ is depth, $g$ a constant acceleration parameter, and $k$ a positive horizontal wave number; $s$ is dimensionless and $a$ is a real elevation amplitude. The strict positivity of $\\tanh(s)$ for $s>0$ makes $\\omega$ well-defined and positive. Let $x,y\\in\\mathbb R$ be horizontal Cartesian coordinates and $z\\in(-h,0)$ the vertical coordinate, positive upward with the flat mean surface at $z=0$ and bottom at $z=-h$; time $t\\in\\mathbb R$. Write $\\theta=kx-\\omega t$. A surface elevation is the scalar field $\\eta(t,x,y)$, and a velocity potential is a scalar field $\\phi(t,x,y,z)$. Define the finite-depth linear potential-wave problem by\n\n$$\\Delta\\phi=0\\quad(-h<z<0),\\qquad \\phi_z(t,x,y,-h)=0,$$\n\n$$\\eta_t(t,x,y)=\\phi_z(t,x,y,0),\\qquad \\phi_t(t,x,y,0)+g\\eta(t,x,y)=0,$$\n\nwhere $\\Delta=\\partial_x^2+\\partial_y^2+\\partial_z^2$. Let $S,C$ be the real sine and cosine functions defined on this page. Then\n\n$$\\eta(t,x,y)=aC(\\theta),\\qquad \\phi(t,x,y,z)=\\frac{ag}{\\omega}\\frac{\\cosh(k(z+h))}{\\cosh(kh)}S(\\theta)$$\n\nare fields that are $C^2$ in the spatial variables and $C^1$ in time, with the displayed derivatives extending to $z=-h$ and $z=0$, and they satisfy this system exactly. Define the shallow and deep comparison frequencies by $\\omega_{\\rm sh}=k\\sqrt{gh}$ and $\\omega_{\\rm deep}=\\sqrt{gk}$. They obey\n\n$$0\\le\\frac{\\omega_{\\rm sh}^2-\\omega^2}{\\omega_{\\rm sh}^2}\\le\\frac{(kh)^2}{3},\\qquad 0\\le1-\\frac{\\omega}{\\omega_{\\rm sh}}\\le\\frac{(kh)^2}{3},\\qquad 0\\le\\frac{\\omega_{\\rm deep}^2-\\omega^2}{\\omega_{\\rm deep}^2}\\le2e^{-2kh}.$$\n\nThese are exact statements about the displayed linear boundary problem and its dispersion relation. They assert no nonlinear free-surface solution or error bound.\n\nIn the optional SI interpretation, $[h]=\\mathrm m$, $[g]=\\mathrm{m\\,s^{-2}}$, $[k]=\\mathrm{m^{-1}}$, $[a]=[\\eta]=\\mathrm m$, $[\\omega]=\\mathrm{s^{-1}}$, and $[\\phi]=\\mathrm{m^2\\,s^{-1}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Setting $\\sigma=0$ in [F1] gives $\\omega_\\sigma^2=gk\\tanh(kh)=\\omega_0^2$. Both frequencies are positive by [F1] and [F2], so $\\omega_\\sigma=\\omega_0$. The capillary mode's potential coefficient satisfies $a\\omega_0/(k\\tanh(kh))=ag/\\omega_0$ because $\\omega_0^2=gk\\tanh(kh)$ and $k\\tanh(kh)>0$. Thus both the elevation and potential specialize exactly as stated; no division by $a$ is used.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\sigma\\ge0$, $\\omega_\\sigma^2-\\omega_0^2=\\sigma k^3\\tanh(kh)/\\rho\\ge0$, so the positive roots satisfy $\\omega_\\sigma\\ge\\omega_0$. For $\\sigma>0$, rationalizing gives $\\omega_\\sigma-\\omega_0=(\\omega_\\sigma^2-\\omega_0^2)/(\\omega_\\sigma+\\omega_0)=(\\sigma k^3\\tanh(kh)/\\rho)/(\\omega_\\sigma+\\omega_0)$. The numerator tends to zero as $\\sigma\\downarrow0$, while $\\omega_\\sigma+\\omega_0\\ge\\omega_0>0$. Hence the quotient tends to zero and $\\omega_\\sigma\\to\\omega_0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed parameters h,g,rho,k are strictly positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the included sigma=0 specialization to the gravity mode."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter is set to a special one-case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains the potential coefficient without division by amplitude a, so a=0 is covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the one-sided limit at sigma=0 using the lower bound omega_sigma+omega_0>=omega_0>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no converse claim."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "group": "p",
+  "batches": [
+    "44"
+  ],
+  "pages_read": [
+    "fd-l01",
+    "fd-l01-examples"
+  ],
+  "items_read": [
+    "def-fd-solenoidal-surrogate-residual",
+    "thm-fd-surrogate-residual-error",
+    "prop-fd-surrogate-law-shift-observable",
+    "ex-fd-unseen-input-shift"
+  ],
+  "conventions": [
+    {
+      "convention": "Assume Countable Choice. Spatial integration uses Q_d = R^d/(2πZ)^d with probability volume (2π)^(-d) dx; the L2 norm uses that normalization.",
+      "fixed_by": "def-fd-solenoidal-surrogate-residual",
+      "matters_for": [
+        "def-fd-solenoidal-surrogate-residual",
+        "thm-fd-surrogate-residual-error"
+      ]
+    },
+    {
+      "convention": "The Leray multiplier retains the zero mode: P_0 = I; for nonzero k, P_k = I − kkᵀ/|k|². Tensor divergence is (div F)_i = Σ_j ∂_j F_ij.",
+      "fixed_by": "def-fd-solenoidal-surrogate-residual",
+      "matters_for": [
+        "def-fd-solenoidal-surrogate-residual",
+        "thm-fd-surrogate-residual-error"
+      ]
+    },
+    {
+      "convention": "The residual is r_v = ∂_t v + P div(v⊗v) − νΔv − Pf, with ν ≥ 0. Fields are smooth; the certificate assumes an already supplied smooth exact solution and controls a continuous-domain residual, not finitely many collocation values.",
+      "fixed_by": "def-fd-solenoidal-surrogate-residual",
+      "matters_for": [
+        "thm-fd-surrogate-residual-error"
+      ]
+    },
+    {
+      "convention": "The spatial Jacobian has entries (∇_x u)_ij = ∂_j u_i. A(t) integrates the spatial supremum of its Euclidean operator norm. Only u_0, u, and v must be divergence-free; f is arbitrary.",
+      "fixed_by": "thm-fd-surrogate-residual-error",
+      "matters_for": [
+        "thm-fd-surrogate-residual-error"
+      ]
+    },
+    {
+      "convention": "The training law is μ and the target law is ν(E) = ∫_E g dμ, where g ≥ 0, ∫g dμ = 1, and g ≤ C almost everywhere for finite C ≥ 1. The error hypothesis is a population mean-square bound.",
+      "fixed_by": "prop-fd-surrogate-law-shift-observable",
+      "matters_for": [
+        "prop-fd-surrogate-law-shift-observable",
+        "ex-fd-unseen-input-shift"
+      ]
+    },
+    {
+      "convention": "The counterexample uses the power-set measurable space {0,1}, training law δ_0, target law δ_1, and arbitrary M > 0. Its conclusion excludes a uniform target-bias bound based solely on training-law error.",
+      "fixed_by": "ex-fd-unseen-input-shift",
+      "matters_for": [
+        "ex-fd-unseen-input-shift"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-fd-solenoidal-surrogate-residual",
+      "statement": "For the stated smooth periodic data and solenoidal comparison field, define r_v := ∂_t v + P div(v⊗v) − νΔv − Pf and d_0 := ‖v(0) − u_0‖_2. The residual belongs to C([0,T];L2), and its time-integrated L2 norm is finite.",
+      "used_by": [
+        "thm-fd-surrogate-residual-error"
+      ]
+    },
+    {
+      "id": "prop-fd-surrogate-law-shift-observable",
+      "statement": "For measurable maps S and S̃ into a real normed space with finite second moments under probability μ, an L-Lipschitz real observable J, population error ∫‖S−S̃‖² dμ ≤ ε², and target density 0 ≤ g ≤ C with ∫g dμ = 1, both target observables are integrable and |E_ν[J(S)] − E_ν[J(S̃)]| ≤ L√C ε.",
+      "used_by": [
+        "ex-fd-unseen-input-shift"
+      ]
+    },
+    {
+      "id": "thm-fd-surrogate-residual-error",
+      "statement": "Under Countable Choice, on the normalized periodic torus in dimension 2 or 3, let ν ≥ 0 and let u and v be smooth divergence-free fields with common smooth forcing, u(0)=u_0, and ∂_t u + P div(u⊗u) − νΔu = Pf. With the stated residual and A(t)=∫_0^t sup_x ‖∇_x u(s,x)‖_op ds, every t ∈ [0,T] satisfies ‖v(t)−u(t)‖_2 ≤ exp(A(t))(‖v(0)−u_0‖_2 + ∫_0^t exp(−A(s))‖r_v(s)‖_2 ds).",
+      "used_by": [
+        "fd-l01"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit sequence-of-nonempty-sets choice assumption inherited by the analytic Fourier framework.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-inequality-for-integrals",
+      "used_for": "The real scalar p=q=2 inequality, applied to vector magnitudes in the residual proof and to the error magnitude and target density in the law-shift proof.",
+      "opened": true
+    },
+    {
+      "id": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+      "used_for": "The Fourier-space supplier's probability measure on the unit torus and finite product tori, rescaled to the 2π-periodic torus.",
+      "opened": true
+    },
+    {
+      "id": "def-fourier-coefficients-and-trigonometric-polynomials",
+      "used_for": "The Fourier-space supplier's integral coefficient convention and finite character sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-basis-and-parseval-on-the-n-torus",
+      "used_for": "The Fourier-space supplier's L2 realization and coefficient isometry under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-criterion-via-lub",
+      "used_for": "Scalar coordinate completeness in the Fourier-space supplier's weighted coefficient completion proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "thm-holder-inequality-for-integrals",
+      "finding": "The source entry titled “John K. Hunter, Measure Theory, Section 7.2” links to Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf. Opening that URL confirms that its first page identifies François Golse's Mean-Field Limits in Statistical Dynamics, rather than Hunter's measure-theory notes. This is a bibliographic mismatch; the locally supplied Hölder proof supports the p=q=2 uses in this batch.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+      "finding": "The Definition includes inline hyperlinks, beginning “assume the Axiom of Countable Choice ([[def-countable-choice]])” and continuing throughout its formulation. These violate the required uninterrupted Definition and following Definition references layout. The probability-volume convention used by batch 44 is nevertheless stated explicitly.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-fourier-coefficients-and-trigonometric-polynomials",
+      "finding": "The Definition begins “Assume the Axiom of Countable Choice ([[def-countable-choice]])” and contains further inline supplier links within the character and coefficient definitions. The links have not been moved after the complete Definition as required.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-fourier-basis-and-parseval-on-the-n-torus",
+      "finding": "The Statement starts “Assume the Axiom of Countable Choice ([[def-countable-choice]])” and embeds the torus and coefficient supplier links before its numbered conclusions. This interrupts the Statement under the required statement-first policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-criterion-via-lub",
+      "finding": "The Statement includes “Every Cauchy sequence of reals converges to a real ([[def-real-limit]])” and additional inline links to the complete-ordered-field and Bolzano–Weierstrass suppliers. These links require relocation after the complete Statement under the uninterrupted-statement rule.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "fd-l01",
+      "to": "fd-s01",
+      "faithful": true,
+      "note": "Checked the Fourier-space and Leray-map Definitions and proofs against the residual Definition and energy proof. The 2π rescaling, normalized L2 pairing, Countable Choice, retained mean mode, projection, and derivative conventions agree."
+    },
+    {
+      "from": "fd-l01",
+      "to": "fd-st02",
+      "faithful": true,
+      "note": "The random-observable Definition explicitly permits a general supplied measurable state without PDE interpretation. The law-shift proposition supplies its own norm-Borel state space, measurable maps, Lipschitz observable, and moments; it imports no sampling, selection, or physical-validity guarantee."
+    },
+    {
+      "from": "fd-bl01",
+      "to": "fd-l01",
+      "faithful": true,
+      "note": "This is a page prerequisite rather than an invocation of the periodic theorem: the common-wall theorem supplies an independent bounded-domain proof. It uses unnormalized volume, a full pressure residual, shared wall traces, and an explicitly supplied channel lift. It does not extend the periodic certificate to unmatched walls or claim an inviscid-limit theorem."
+    }
+  ]
+}

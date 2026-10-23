@@ -1,0 +1,265 @@
+[
+  {
+    "order": 401,
+    "id": "fd-ps02",
+    "kind": "A",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Mechanical power balance under adopted wall laws",
+    "companion": "fd-ps02-examples",
+    "requires": [
+      "fd-f02",
+      "fd-f03",
+      "fd-s03"
+    ],
+    "items": [
+      {
+        "id": "post-fd-navier-slip-wall-law",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted Navier friction law for a stationary wall",
+        "reference": "items/post-fd-navier-slip-wall-law.md",
+        "design_state": "Step 1 local postulate complete; the current continuum and boundary-data inputs are both Step-1 ready.",
+        "dependency_level": 3,
+        "deps": [
+          "post-fd-continuum-balances",
+          "post-fd-boundary-data"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "formulation-prerequisite",
+          "post-fd-boundary-data": "operational-prerequisite"
+        },
+        "inventory_expansion_required": true,
+        "statement": "",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gui-Qiang Chen and Zhongmin Qian, A Study of the Navier-Stokes Equations with the Kinematic and Navier Boundary Conditions",
+              "url": "https://arxiv.org/pdf/0901.0147",
+              "locator": "arXiv:0901.0147v1, §1 equations (1.1), (1.3)–(1.4), and §2 equation (2.5) / Proposition 2.1, PDF pp. 1–5. The paper uses slip length ζ>0 and density-normalized viscosity; with σ=−pI+2ηD the friction coefficient here is β=η/ζ."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An adopted smooth stationary impermeable wall law for the incompressible Newtonian branch; no universality, measured coefficient, roughness derivation, or moving-wall slip law is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-fd-local-momentum-balance-from-continuum",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local momentum equation from the adopted continuum balance",
+        "reference": "items/pthm-fd-local-momentum-balance-from-continuum.md",
+        "design_state": "Step 1 local balance theorem complete; exact transport, divergence and localization argument is proved on the A page from current physical and mathematical interfaces.",
+        "dependency_level": 4,
+        "deps": [
+          "post-fd-continuum-balances",
+          "def-fd-quantity-and-frame-conventions",
+          "def-fd-incompressible-newtonian-model",
+          "post-fd-newtonian-fourier",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "def-fd-quantity-and-frame-conventions": "mathematical-premise",
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite",
+          "post-fd-newtonian-fourier": "physical-assumption",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf",
+              "locator": "§§3.1.1–3.1.2, PDF pp. 4–8 (printed pp. 57–61): local momentum, Cauchy stress and stress divergence."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§4.4.5.2, printed pp. 145–146: momentum-derived mechanical energy equation and continuum stress work."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Smooth positive-density constant-density incompressible Newtonian material regions under the adopted integral momentum balance. It derives the local forced momentum equation by transport and localization; it asserts no solution existence or empirical validity.",
+        "empirical_premises": [],
+        "proof_strategy": "direct",
+        "statement": ""
+      },
+      {
+        "id": "pthm-fd-wall-mechanical-power-balance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Mechanical power balance under adopted wall laws",
+        "reference": "items/pthm-fd-wall-mechanical-power-balance.md",
+        "design_state": "Step 1 proof complete; the current smooth-wall uniqueness carrier, complete integrating-factor proof and readiness record match the bounded stationary use.",
+        "dependency_level": 5,
+        "deps": [
+          "post-fd-continuum-balances",
+          "post-fd-newtonian-fourier",
+          "post-fd-boundary-data",
+          "post-fd-navier-slip-wall-law",
+          "def-fd-incompressible-newtonian-model",
+          "def-fd-smooth-wall-exterior-solution-domains",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice",
+          "thm-fd-smooth-wall-energy-uniqueness",
+          "pthm-fd-local-momentum-balance-from-continuum"
+        ],
+        "dependency_roles": {
+          "post-fd-continuum-balances": "physical-assumption",
+          "post-fd-newtonian-fourier": "physical-assumption",
+          "post-fd-boundary-data": "physical-assumption",
+          "post-fd-navier-slip-wall-law": "physical-assumption",
+          "def-fd-incompressible-newtonian-model": "formulation-prerequisite",
+          "def-fd-smooth-wall-exterior-solution-domains": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-fd-smooth-wall-energy-uniqueness": "mathematical-premise",
+          "pthm-fd-local-momentum-balance-from-continuum": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf",
+              "locator": "§§3.1.1–3.1.2 and §§3.2.1–3.2.3, PDF pp. 4–14 (printed pp. 57–68): Cauchy stress, kinetic work, viscous dissipation, no-slip, Couette and Poiseuille flows."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§4.4.5.2, printed pp. 145–146: mechanical energy equation derived from momentum; §5.4.1, printed pp. 173–175: Newtonian shear and Couette setup."
+            },
+            {
+              "title": "Gui-Qiang Chen and Zhongmin Qian, A Study of the Navier-Stokes Equations with the Kinematic and Navier Boundary Conditions",
+              "url": "https://arxiv.org/pdf/0901.0147",
+              "locator": "arXiv:0901.0147v1, §1 equations (1.1), (1.3)–(1.4), and §2 equation (2.5) / Proposition 2.1, PDF pp. 1–5."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Smooth incompressible Newtonian solutions of constant positive density and viscosity on a fixed bounded C2 domain, or on the stated periodic channel with no-slip physical walls. The adopted stationary Navier friction law is used only on the bounded-domain branch. It gives conditional mechanical power identities and stationary bounded-domain smooth uniqueness only; no existence or universal wall-law applicability is asserted.",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-fd-linear-acoustic-model-prediction",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Linear acoustic model prediction",
+        "reference": "items/pthm-fd-linear-acoustic-model-prediction.md",
+        "design_state": "Step 1 conditional proof complete; the current barotropic definition and global tangent-system theorem match and both are Step-1 ready.",
+        "dependency_level": 4,
+        "deps": [
+          "def-fd-barotropic-euler-model",
+          "thm-fd-global-linear-acoustics",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-fd-barotropic-euler-model": "formulation-prerequisite",
+          "thm-fd-global-linear-acoustics": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 3",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids3.pdf",
+              "locator": "§4.4.4, printed pp. 150–152 (PDF pp. 39–42): linearized Euler and mass equations, adiabatic sound speed, wave equation and Fourier-mode dispersion."
+            },
+            {
+              "title": "François Golse, The Boltzmann Equation and Its Hydrodynamic Limits, Handbook of Differential Equations: Evolutionary Equations, vol. 2",
+              "url": "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf",
+              "locator": "Chapter 3, §2.3, printed pp. 10–11: linearization at constant equilibrium; §7.1.2, printed pp. 81–82: Cauchy problem for the acoustic system on R3."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact global smooth tangent-model prediction for a positive-density, no-force barotropic Euler equilibrium at rest on a periodic three-dimensional cell, when p'(rho*)>0. No finite-amplitude error estimate or empirical applicability claim is asserted.",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 402,
+    "id": "fd-ps02-examples",
+    "kind": "B",
+    "category": "fluid-dynamics",
+    "library": "physics",
+    "title": "Mechanical power balance under adopted wall laws — Examples",
+    "companion": "fd-ps02",
+    "requires": [
+      "fd-ps02"
+    ],
+    "items": [
+      {
+        "id": "ex-fd-adopted-poiseuille-couette",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Adopted Poiseuille and Couette channel predictions",
+        "reference": "items/ex-fd-adopted-poiseuille-couette.md",
+        "design_state": "Step 1 worked example complete; its wall-power supplier and all current prerequisites are present, match and are ready.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-fd-wall-mechanical-power-balance",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-fd-wall-mechanical-power-balance": "physical-result",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Fluid Mechanics, Chapter 2",
+              "url": "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf",
+              "locator": "§§3.2.2–3.2.3, printed pp. 65–68 (PDF pp. 10–14): exact Couette and planar Poiseuille profiles with no-slip walls."
+            },
+            {
+              "title": "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics",
+              "url": "https://academicweb.nd.edu/~powers/ame.60635/notes.pdf",
+              "locator": "§5.4.1, printed pp. 173–175: Couette setup, no-slip convention, and shear-stress/strain-rate relation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact steady profiles in the stated periodic incompressible Newtonian channel model with no-slip walls; the Poiseuille pressure-drop notation is replaced by a constant body acceleration on the periodic cell. No measured flow or claim about a named material is included.",
+        "empirical_premises": [],
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]
