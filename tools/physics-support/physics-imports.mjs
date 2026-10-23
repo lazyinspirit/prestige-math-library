@@ -10,6 +10,7 @@ import { frontierMathematicsImportScope } from './frontier-import-scope.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
 import { splitFrontmatter } from './facts-block.mjs';
 import { originalMaintenance } from './original-maintenance.mjs';
+import { originalRenderingMaintenance } from './original-rendering-maintenance.mjs';
 import { readOriginalItemIdentity } from './original-item-index.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 // A source folder rename does not move the immutable local snapshot.
@@ -63,11 +64,14 @@ export function importMathematics(root, sourceRoot) {
   writeFileSync(ignorePath, base + '\n\n' + marker + '\n' + files.map(f => '/' + f.path).join('\n') + '\n# END mathematical imports\n');
   return receipt;
 }
-export function verifyMathematicsImports(root, { run = null, planning = false, frontierOnly = false, proposedPages = null } = {}) {
+export function verifyMathematicsImports(root, { run = null, planning = false, frontierOnly = false, proposedPages = null, maintenanceRun = null, maintenanceSelector = null } = {}) {
   if (frontierOnly && (!run || planning)) throw Error('Step-6 import scope requires an authored --run frontier');
   if (run !== null && !/^[a-zA-Z0-9_-]+$/.test(run ?? '')) throw Error('invalid current import frontier run');
   if (proposedPages !== null && (!planning || run || !Array.isArray(proposedPages) || !proposedPages.length)) throw Error('proposed import selection requires nonempty planning pages without --run');
   if (planning && !run && proposedPages === null) throw Error('planning import selection requires --run or proposed pages');
+  if (maintenanceRun !== null && (!planning || !proposedPages || !maintenanceSelector || !/^[a-zA-Z0-9_-]+$/.test(maintenanceRun)))
+    throw Error('original successor planning authority requires explicit run, proposed pages and selector');
+  if (maintenanceSelector !== null && maintenanceRun === null) throw Error('maintenance selector requires explicit authority run');
   const receiptPath = join(root, 'research/math-imports.json');
   if (!existsSync(receiptPath)) throw Error('missing math import receipt; run physics init before planning');
   const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
@@ -86,6 +90,8 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
     .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
   const scope = run || proposedPages !== null ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages }, proposedPages }) : null;
   const acceptedOriginals = originalMaintenance(root, run, { receipt, scope, planning });
+  for (const [path, hash] of originalRenderingMaintenance(root, planning ? maintenanceRun : run,
+    { receipt, scope, planning, proposedPages, selector: maintenanceSelector })) acceptedOriginals.set(path, hash);
   const localFiles = frontierOnly ? receipt.files.filter(file => scope.paths.has(file.path)) : receipt.files;
   for (const file of localFiles) {
     if (hash(readFileSync(join(root, file.path))) !== file.sha256)

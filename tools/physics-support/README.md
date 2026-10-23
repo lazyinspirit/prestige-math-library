@@ -37,3 +37,35 @@ canonical plan/frontier ordering retain their checks. Unknown-order imports stay
 in prerequisite resolution and closure, item/page cycle checks, and supplier
 identity, publication, classification and immutable-pin verification. This
 changes no import bytes or authored frontier scope.
+
+`original-rendering-maintenance.mjs` is an explicit Root-reviewed original-source
+successor route. It preserves every local import byte and pin. It authenticates
+the exact main published-repair receipt, equal pinned before archive, current
+original, adjudication, recorded checks, and unique current per-item ownership
+row / ledger marker block. Root archives those extracted row/block bytes as
+immutable evidence; unrelated append-only source repairs do not invalidate them.
+It never binds a whole mutable source ledger or ownership log as approval input.
+
+For authored runs the separate authority is
+`research/RUN-original-rendering-maintenance.json`, with exact current manifest
+and actual consumer-source bindings. For append planning it is
+`research/RUN-frontier-append-N/original-rendering-maintenance.json`; the native
+command explicitly passes `physics-check.mjs --plan research/plan-spec.json
+--pages-file research/RUN-frontier-append-N/new-pages.json --maintenance-run RUN`.
+The planning authority binds that exact run/selector, canonical plan and nonempty
+selected declarations. An absent consumer is explicitly declaration-only with
+`source_sha256: null`; it confers no authored-proof or source-reading coverage.
+Planning approval cannot stand in for the stricter authored authority. Standalone
+unscoped import checks and the existing Definition-reference maintenance route
+retain their original behavior.
+
+Statements, Facts, premises, dependencies, status and scientific metadata remain
+exact. Supported title markup, proof-technique, numbered-step and added final
+Remarks differences must be individually enumerated as exact before/after
+values, tied to real source repair evidence and genuinely reviewed by Root.
+Every substantive numbered-step rewrite needs its own equivalence reason;
+there is no generic renderer normalization or automatic acceptance of a stamp.
+The route permits only the explicit repair/precheck verification successor, not
+new audit/judge claims. Native owner snapshots bind the authority's presence,
+all declared evidence and helper code so edits invalidate prior receipts. All
+ordinary identity, publication, source, scientific and native gates still apply.

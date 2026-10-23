@@ -8,6 +8,7 @@ import { appendRegistry, appendDriftView } from '../../physics-support/frontier-
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
 import { originalMaintenancePath } from '../../physics-support/original-maintenance.mjs';
+import { originalRenderingMaintenancePath } from '../../physics-support/original-rendering-maintenance.mjs';
 import { originalImportPath } from '../../physics-support/physics-imports.mjs';
 import { importedPlanPage } from '../../physics-support/imported-plan-pages.mjs';
 import { scanProofFiles } from '../../physics-support/proof-layout.mjs';
@@ -186,6 +187,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   bind(importsPath);
   // Explicit original-maintenance authority and every reviewed input stay current.
   bindCertificateEvidence(originalMaintenancePath(ctx.repo, ctx.run), bind, ctx.repo);
+  bindCertificateEvidence(originalRenderingMaintenancePath(ctx.repo, ctx.run), bind, ctx.repo);
   if (existsSync(importsPath)) {
     const imports = readJSON(importsPath);
     for (const row of imports.files ?? []) {
@@ -222,6 +224,14 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     }
   };
   for (const gate of battery) for (const arg of [...gate.argv, ...gate.needs]) bindNativePath(arg);
+  for (const gate of battery) if (gate.argv.some(arg => typeof arg === 'string' && arg.endsWith('/physics-check.mjs'))) {
+    for (const tool of ['original-rendering-maintenance.mjs','physics-imports.mjs','physics-check.mjs']) bindNativePath('tools/physics-support/' + tool);
+    const authority = gate.argv.indexOf('--maintenance-run'), selector = gate.argv.indexOf('--pages-file');
+    if (authority >= 0) {
+      if (gate.argv[authority + 1] !== ctx.run || selector < 0) throw Error('Invalid native maintenance planning authority');
+      bindCertificateEvidence(originalRenderingMaintenancePath(ctx.repo, ctx.run, gate.argv[selector + 1]), bind, ctx.repo);
+    }
+  }
   for (const gate of gates) for (const path of gate.ownerReviewInputs ?? []) bindNativePath(path);
   // These tools resolve mathematical inputs from --run instead of putting
   // their paths in argv. Bind their actual canonical receipt families; never

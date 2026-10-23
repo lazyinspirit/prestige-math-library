@@ -404,7 +404,7 @@ export function appendStages(stages: Stage[], ctx: any): Stage[] {
         const ownerReviewItems = loadPlan(ctx.repo).pages.filter((p: any) => e.newPages.includes(p.id)).flatMap((p: any) => (p.items ?? []).map((i: any) => i.id));
         const check = (id: string, args: string[]) => ({ id, argv: ['node', ...args], ownerReviewItems });
         const planning = () => [
-            check('append-planned-physics', ['tools/physics-support/physics-check.mjs', '--plan', 'research/plan-spec.json', '--pages-file', selector]),
+            check('append-planned-physics', ['tools/physics-support/physics-check.mjs', '--plan', 'research/plan-spec.json', '--pages-file', selector, '--maintenance-run', ctx.run]),
             check('append-planned-topology', ['tools/physics-support/validate-plan.mjs', 'research/plan-spec.json', '--pages-file', selector])
         ];
         return [{ ...original, id: `1-append-drift-${e.number}`, label: `Supplemental prerequisite drift ${e.number}`, units: () => [unit],
