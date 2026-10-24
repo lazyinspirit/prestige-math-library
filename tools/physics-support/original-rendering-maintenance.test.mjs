@@ -12,7 +12,7 @@ import { itemHashGuard } from '../item-hash.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 // All receipts here are synthetic test fixtures; they confer no real review.
-function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, findingStatus = 'repaired', findingVerdict = 'confirmed', factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
+function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, findingStatus = 'repaired', findingVerdict = 'confirmed', sourceExtra = '', factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'original-rendering-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
   const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = definition ? 'def-supplier' : 'thm-supplier';
@@ -20,15 +20,18 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
-  if (mode === 'fact-label') {
+  if (mode === 'fact-label' || mode === 'reference-relocation') {
     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
     before += '\n## Sources\n\nExact unchanged source section.\n';
     save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
   }
   if (mode === 'terminal-heading') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] $\\square$ ## Source qualification\n\nExact unchanged source qualification.\n');
-  if (mode === 'support-consolidation') before += '\n1.2 By [L1], [L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]\n';
+  if (mode === 'reference-relocation') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The Evaluation theorem gives $A=A$. [L1, [[lem-title-target]]]');
+  if (mode === 'support-consolidation-both') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', () => '1.1 Reflexivity gives [L1]\n\n$$ A=A. $$\n\n[L1]\n');
+  if (mode.startsWith('support-consolidation')) before += '\n1.2 By [L1], [L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]\n';
+  before += sourceExtra;
   save(source, `items/${id}.md`, before);
-  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${mode === 'fact-label' ? ', lem-title-target' : ''}]\n---\n`);
+  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${['fact-label', 'reference-relocation'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
@@ -39,7 +42,10 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (mode === 'remarks-tikz') after = after.replace(/```tikzcd[\s\S]*?```/, '```tikz\n\\begin{tikzpicture}\n\\node (A) {A};\n\\end{tikzpicture}\n```');
   if (mode === 'fact-label') after = after.replace('[[lem-title-target]]', `[[lem-title-target|${factLabel}]]`);
   if (mode === 'terminal-heading') after = after.replace('$\\square$ ## Source qualification\n', '∎\n\n## Source qualification\n');
-  if (mode === 'support-consolidation') after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
+  if (mode === 'reference-relocation') after = after.replace('The Evaluation theorem gives', 'The [[lem-title-target|Evaluation theorem]] gives').replace('[L1, [[lem-title-target]]]', '[L1]');
+  if (mode.startsWith('support-consolidation')) after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
+  if (mode === 'support-consolidation-both') after = after.replace('[L1]\n\n$$ A=A. $$\n\n[L1]', '$A=A$. [L1]');
+  if (mode === 'support-consolidation-mixed') after = after.replace('1.1 Reflexivity gives', '1.1 The same reflexivity gives');
   save(source, `items/${id}.md`, after);
   const content = itemHashGuard(after), claim = { version: 1, run: 'source-repair', group: 'g', id, pre_sha256: itemHashGuard(before), claimed_at: '2026-10-23T00:00:00Z' };
   const claimLine = JSON.stringify(claim) + '\n', block = `\n${id}: exact fixture repair ${content}.\n`, marker = 'rendering:' + id;
@@ -54,7 +60,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     output: tool === 'precheck' ? definition ? JSON.stringify({summary:{files:1,checked:0,failed:0},results:[{file:`items/${id}.md`,item_id:id,status:'not-applicable'}]}) : `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
   const repair = { version: 1, kind: 'recorded-local-published-repair', id, run: 'source-repair', group: 'g', correction: 'Exact synthetic rendering presentation correction.', content_sha256: content,
     before_file: beforePath, before_raw_sha256: sha(before), pre_sha256: itemHashGuard(before), recorded_at: '2026-10-23T00:00:03Z', ledger_marker: marker, ledger_sha256: sha(block),
-    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : mode === 'support-consolidation' ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
+    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : mode.startsWith('support-consolidation') ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
     adjudication_file: adjudicationPath, adjudication_sha256: sha(readFileSync(join(source, adjudicationPath))) };
   save(source, repairPath, repair);
   const pages = [];
@@ -69,8 +75,9 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   save(root, evidence, 'Root fixture review of exact scientific hypotheses, proof presentation equivalence and every actual declared consumer use. No real scientific approval is issued by this test.');
   save(root, ownership, claimLine); save(root, ledger, block);
   const hashFile = path => sha(readFileSync(resolve(root, path)));
-  const consolidation = mode === 'support-consolidation' ? { version: 1, steps: ['1.2'] } : undefined;
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const consolidation = mode.startsWith('support-consolidation') ? { version: 1, steps: mode === 'support-consolidation-both' ? ['1.1', '1.2'] : ['1.2'] } : undefined;
+  const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -92,6 +99,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (presentationVersion === 2) {
     entry.presentation_version = 2;
     if (consolidation) entry.proof_support_consolidation = consolidation;
+    if (relocation) entry.proof_reference_relocation = relocation;
     Object.assign(entry.scientific_review, changes.review_classification);
     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
@@ -108,6 +116,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
       [join(source, beforePath)]: sha(before), [join(source, adjudicationPath)]: repair.adjudication_sha256,
       ...Object.fromEntries((entry.fact_reference_reviews ?? []).map(r => [r.pinned_target.path, r.pinned_target.sha256])),
       ...Object.fromEntries((entry.presentation_reviews ?? []).filter(r=>r.pinned_target).map(r=>[r.pinned_target.path,r.pinned_target.sha256])),
+      ...(entry.changes.proof_support_parser_runtime?.inputs ?? {}),
       [ownership]: entry.ownership_evidence.sha256, [ledger]: entry.ledger_evidence.sha256, [evidence]: entry.evidence[0].sha256,
       ...(authored ? Object.fromEntries(entry.consumers.map(c => [`items/${c.id}.md`, c.source_sha256])) : {}) };
     save(root, originalRenderingMaintenancePath(root, run, authored ? null : selector), review);
@@ -309,4 +318,39 @@ test('support consolidation opt-in is forbidden on legacy entries',t=>{
 for(const mutation of [{proof_independent:false},{diagram_mathematics_corrected:true}])test(`new consolidation delta preserves diagram independence ${JSON.stringify(mutation)}`,t=>{
   const f=fixture(t,{mode:'support-consolidation',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);
   const adjudication=JSON.parse(readFileSync(join(f.source,f.adjudicationPath),'utf8'));Object.assign(adjudication,mutation);f.save(f.source,f.adjudicationPath,adjudication);f.repair.adjudication_sha256=f.hashFile(join(f.source,f.adjudicationPath));f.save(f.source,f.repairPath,f.repair);f.entry.repair_receipt.sha256=f.hashFile(join(f.source,f.repairPath));f.seal();assert.throws(()=>f.verify(),/diagram independence/);
+});
+
+function fixtureDiagramFlags(f, flags) {
+  const adjudication=JSON.parse(readFileSync(join(f.source,f.adjudicationPath),'utf8'));
+  delete adjudication.proof_independent;delete adjudication.diagram_mathematics_corrected;Object.assign(adjudication,flags);
+  f.save(f.source,f.adjudicationPath,adjudication);f.repair.adjudication_sha256=f.hashFile(join(f.source,f.adjudicationPath));f.save(f.source,f.repairPath,f.repair);f.entry.repair_receipt.sha256=f.hashFile(join(f.source,f.repairPath));f.seal();
+}
+test('both strict requested steps permit genuinely absent diagram keys with unchanged scientific tokens',t=>{
+ const f=fixture(t,{mode:'support-consolidation-both',presentationVersion:2,authored:true});assert.deepEqual(f.entry.changes.deltas.map(d=>d.kind),['proof-support-consolidation','proof-support-consolidation']);fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);
+});
+for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false},{diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null},{proof_independent:true,diagram_mathematics_corrected:null},{proof_independent:null,diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true}])test(`strict support does not excuse partial/contradictory/null diagram keys ${JSON.stringify(flags)}`,t=>{
+ const f=fixture(t,{mode:'support-consolidation-both',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/diagram independence/);
+});
+for(const sourceExtra of ['\n## Remarks\n\nAn unchanged qualification.\n','\n## Remarks\n\n```tikzcd\nA \\arrow[r] & A\n```\n','\n## Background\n\n~~~text\nUnchanged code.\n~~~\n','\n## Background\n\n![diagram](figure.svg)\n','\n## Background\n\n<span>Unchanged HTML</span>\n','\n## Background\n\n\\includegraphics{figure.pdf}\n','\n## Background\n\n\\begin{tikzpicture}x\\end{tikzpicture}\n'])test(`unchanged Remarks/graphics keep the original native flag requirement ${sourceExtra.slice(0,55)}`,t=>{
+ const f=fixture(t,{mode:'support-consolidation-both',presentationVersion:2,authored:true,sourceExtra});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/diagram independence/);
+});
+test('mixed ordinary V2 proof deltas cannot acquire the strict absent-flag exception',t=>{
+ const f=fixture(t,{mode:'support-consolidation-mixed',presentationVersion:2,authored:true});assert.deepEqual(f.entry.changes.deltas.map(d=>d.kind),['proof-step-presentation','proof-support-consolidation']);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/diagram independence/);
+});
+test('generic V2 steps and new Remarks still need both native flags',t=>{
+ for(const mode of ['step','remarks']){const f=fixture(t,{mode,presentationVersion:2,authored:true});fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/diagram independence/);}
+});
+
+test('typed runtime inputs are live-consumed and recursively included in native owner snapshots',t=>{
+ const f=fixture(t,{mode:'support-consolidation-both',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);const runtime=f.entry.changes.proof_support_parser_runtime,first=runtime.roots[0].entry;const ctx={repo:f.root,run:f.run},gates=[{id:'physics',argv:['node','tools/physics-support/physics-check.mjs','--run',f.run]}];const snapshot=gateReviewSnapshot(ctx,gates,['1-scaffold']);assert.equal(snapshot.inputs.find(i=>i.path===first)?.sha256,runtime.inputs[first]);delete f.review.inputs[first];f.save(f.root,originalRenderingMaintenancePath(f.root,f.run),f.review);assert.throws(()=>f.verify(),/unbound input/);
+});
+
+test('V2 reference relocation is authenticated and requires exact target review',t=>{
+ const f=fixture(t,{mode:'reference-relocation',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);assert.equal(f.entry.changes.deltas[0].kind,'proof-reference-relocation');delete f.entry.presentation_reviews[0].pinned_target;f.seal();assert.throws(()=>f.verify(),/unbound V2 reference target/);
+});
+test('reference relocation never obtains the support-only absent-diagram-keys exception',t=>{
+ const f=fixture(t,{mode:'reference-relocation',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/diagram independence/);
+});
+test('legacy entries reject reference relocation options',t=>{
+ const f=fixture(t);f.entry.proof_reference_relocation={version:1,steps:[{label:'1.1',target:'lem-title-target'}]};f.seal();assert.throws(()=>f.verify(),/relocation requires V2/);
 });

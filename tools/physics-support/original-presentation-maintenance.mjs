@@ -2,14 +2,130 @@
 // equivalence, authenticates a repair, changes a pin, or accepts a consumer.
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual as equal } from 'node:util';
+import { readFileSync, readdirSync, existsSync, realpathSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { join, dirname } from 'node:path';
 import { yaml } from './pathway-lib.mjs';
 import { factParagraphs } from './facts-block.mjs';
+import { WEB_DIR } from './paths.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const fail = reason => { throw Error(`Invalid original presentation successor: ${reason}`); };
 const substantive = text => typeof text === 'string' && text.trim().length >= 80;
 const tail = text => /[ \t\r\n]*$/.exec(text)[0];
 const trim = text => text.slice(0, text.length - tail(text).length);
 const resultKinds = new Set(['lemma', 'theorem', 'proposition', 'corollary']);
+const parserRoots = ['unified', 'remark-parse', 'remark-gfm', 'remark-math'];
+const parserEnvironment = process.env.PRESTIGE_APP_DIR ?? null;
+const parserNodeOptions = process.env.NODE_OPTIONS ?? null;
+let parserCache;
+function parserContext() {
+  if (!WEB_DIR) fail('application Markdown parser unavailable');
+  if ((process.env.PRESTIGE_APP_DIR ?? null) !== parserEnvironment
+      || (process.env.NODE_OPTIONS ?? null) !== parserNodeOptions) fail('parser resolution context changed; restart required');
+  return { web: realpathSync(WEB_DIR), executable: realpathSync(process.execPath), node: process.version };
+}
+function parserRuntimeSnapshot() {
+  const context = parserContext(), inputs = {}, packages = new Map();
+  const add = path => { const full = realpathSync(path); inputs[full] = sha(readFileSync(full)); return full; };
+  const packageFor = (name, parent) => {
+    const require = createRequire(join(parent, 'package.json')); let entry = null;
+    try {
+      entry = require.resolve(name); let dir = dirname(entry);
+      while (dir !== dirname(dir)) {
+        const path = join(dir, 'package.json');
+        if (existsSync(path)) { const data = JSON.parse(readFileSync(path)); if (data.name === name) return { root: dir, path, data, entry }; }
+        dir = dirname(dir);
+      }
+    } catch { /* Declared types-only dependencies can have no runtime entry. */ }
+    for (const base of require.resolve.paths(name) ?? []) {
+      const path = join(base, name, 'package.json');
+      if (existsSync(path)) {
+        const data = JSON.parse(readFileSync(path));
+        if (data.name === name) return { root: dirname(path), path, data, entry: null };
+      }
+    }
+    fail('unresolved parser runtime dependency ' + name);
+  };
+  const visit = (name, parent) => {
+    const p = packageFor(name, parent), root = realpathSync(p.root);
+    if (packages.has(root)) return;
+    const row = { name: p.data.name, version: p.data.version, root,
+      package_json: add(p.path), entry: p.entry ? add(p.entry) : null, files: [] };
+    packages.set(root, row);
+    const walk = dir => {
+      for (const e of readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)) {
+        if (e.name === 'node_modules' || e.name.startsWith('.')) continue;
+        const path = join(dir, e.name);
+        if (e.isSymbolicLink()) fail('unsupported parser implementation symlink');
+        if (e.isDirectory()) walk(path);
+        else if (e.isFile() && /\.(?:js|mjs|cjs|json|node)$/.test(e.name)) row.files.push(add(path));
+      }
+    };
+    walk(root); row.files.sort();
+    for (const child of Object.keys(p.data.dependencies ?? {}).sort()) if (!child.startsWith('node:')) visit(child, root);
+  };
+  for (const name of parserRoots) visit(name, context.web);
+  add(join(context.web, 'package.json')); add(join(context.web, 'package-lock.json')); add(context.executable);
+  const rows = [...packages.values()].sort((a, b) => a.root < b.root ? -1 : a.root > b.root ? 1 : 0);
+  const descriptor = { version: 1, runtime: context, pipeline: parserRoots,
+    roots: parserRoots.map(name => { const r = rows.find(p => p.name === name); return { name, version: r.version, root: r.root, entry: r.entry, package_json: r.package_json }; }),
+    packages: rows, inputs: Object.fromEntries(Object.entries(inputs).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)) };
+  return { ...descriptor, fingerprint: sha(JSON.stringify(descriptor)) };
+}
+function checkedParser() {
+  const before = parserRuntimeSnapshot();
+  if (parserCache) {
+    if (before.fingerprint !== parserCache.fingerprint) fail('loaded parser runtime changed; restart required');
+    return parserCache;
+  }
+  const require = createRequire(join(before.runtime.web, 'package.json'));
+  let parser;
+  try {
+    parser = require('unified').unified().use(require('remark-parse').default)
+      .use(require('remark-gfm').default).use(require('remark-math').default);
+  } catch { fail('synchronous application Markdown parser unavailable'); }
+  const after = parserRuntimeSnapshot();
+  if (before.fingerprint !== after.fingerprint) fail('parser runtime changed during load; restart required');
+  parserCache = { parser, descriptor: before, fingerprint: before.fingerprint }; return parserCache;
+}
+function markdownTree(text) {
+  const cached = checkedParser(), tree = cached.parser.parse(text);
+  if (parserRuntimeSnapshot().fingerprint !== cached.fingerprint) fail('parser runtime changed during parse; restart required');
+  return tree;
+}
+function parserDescriptor() { return structuredClone(checkedParser().descriptor); }
+function rejectReferenceDefinitions(body) {
+  const walk = node => {
+    if (['definition', 'footnoteDefinition'].includes(node.type)) fail('reference definition context is unsupported for support consolidation');
+    for (const child of node.children ?? []) walk(child);
+  };
+  walk(markdownTree(body));
+}
+function stepAst(text) {
+  const rows = [], allowed = new Set(['root', 'paragraph', 'text', 'inlineMath', 'math', 'inlineCode']);
+  const walk = (node, parent = null) => {
+    if (!allowed.has(node.type)) fail('unsupported support consolidation Markdown node ' + node.type);
+    const start = node.position?.start.offset, end = node.position?.end.offset;
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || end < start || end > text.length) fail('invalid Markdown source offsets');
+    rows.push({ node, parent, start, end });
+    for (const child of node.children ?? []) walk(child, node);
+  };
+  walk(markdownTree(text));
+  const literals = rows.filter(r => ['inlineCode', 'inlineMath', 'math'].includes(r.node.type));
+  const wikis = []; let cursor = 0;
+  while (true) {
+    const start = text.indexOf('[[', cursor); if (start < 0) break;
+    const literal = literals.find(r => start >= r.start && start < r.end);
+    if (literal) { cursor = literal.end; continue; }
+    const end = text.indexOf(']]', start + 2); if (end < 0) fail('unclosed canonical wiki span');
+    const raw = text.slice(start, end + 2); if (links(raw).length !== 1) fail('invalid canonical wiki span');
+    wikis.push({ start, end: end + 2 }); cursor = end + 2;
+  }
+  const ranges = [...wikis, ...literals.filter(r => !wikis.some(w => w.start <= r.start && w.end >= r.end))]
+    .map(({ start, end }) => ({ start, end })).sort((a, b) => a.start - b.start);
+  if (ranges.some((r, i) => i && r.start < ranges[i - 1].end)) fail('crossed protected Markdown spans');
+  return { rows, ranges };
+}
 function parse(bytes) {
   const text = bytes.toString('utf8');
   const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)([\s\S]*)$/);
@@ -111,26 +227,74 @@ function consolidationOption(value) {
       || new Set(value.steps).size !== value.steps.length) fail('invalid proof support consolidation option');
   return { version: 1, steps: [...value.steps] };
 }
-function consolidationTokens(text) {
-  // Protected spans are compared byte-for-byte, never whitespace-normalized.
-  // Fences/comments are deliberately unsupported by this narrowly scoped route.
-  if (/```|~~~|<!--/.test(text)) fail('unsupported protected support consolidation span');
-  const spans = /\$\$[\s\S]*?\$\$|\$(?:\\.|[^$\r\n])*\$|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|`[^`\r\n]*`|\[\[[\s\S]*?\]\]/g;
+function relocationOption(value) {
+  if (value === undefined) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !equal(Object.keys(value).sort(), ['steps', 'version']) || value.version !== 1
+      || !Array.isArray(value.steps) || !value.steps.length
+      || value.steps.some(s => !s || typeof s !== 'object' || Array.isArray(s)
+        || !equal(Object.keys(s).sort(), ['label', 'target'])
+        || typeof s.label !== 'string' || typeof s.target !== 'string'
+        || !/^[1-9]\d*\.[1-9]\d*$/.test(s.label ?? '')
+        || !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.target ?? ''))
+      || new Set(value.steps.map(s => s.label)).size !== value.steps.length) fail('invalid proof reference relocation option');
+  return { version: 1, steps: value.steps.map(s => ({ label: s.label, target: s.target })) };
+}
+function plaintextRole(ast, start, end, wiki = false) {
+  const r = ast.rows.find(r => r.node.type === 'text' && r.start <= start && r.end >= end);
+  if (!r || ast.ranges.some(r => start < r.end && end > r.start
+      && !(wiki && r.start === start && r.end === end))) fail('support/reference range is not actual plaintext');
+  return { type: 'text', start, end };
+}
+function referenceRelocation(before, after, request, deps) {
+  if (!Array.isArray(deps) || !deps.includes(request.target)) fail('relocated target is not a predeclared dependency');
+  const oldAst = stepAst(before), nextAst = stepAst(after), a = trim(before), b = trim(after);
+  const oldWiki = `[[${request.target}]]`, targetPattern = request.target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const terminal = new RegExp('\\[((?:[FAL][1-9]\\d*)(?:, [FAL][1-9]\\d*)*), (\\[\\[' + targetPattern + '\\]\\])\\]([ \\t]*∎)?$').exec(a);
+  if (!terminal || a.indexOf(oldWiki) !== a.lastIndexOf(oldWiki)) fail('relocation requires one exact unlabelled terminal wiki');
+  const tags = terminal[1].split(', ');
+  if (new Set(tags).size !== tags.length) fail('duplicate relocation terminal tags');
+  const newTerminal = terminal[0].replace(', ' + oldWiki, '');
+  if (!b.endsWith(newTerminal)) fail('relocation changed ordinary terminal support or QED');
+  const candidates = links(b).filter(r => r.target === request.target);
+  if (candidates.length !== 1 || candidates[0].label === null) fail('relocation requires one labelled prose wiki');
+  const next = candidates[0], label = next.label, labelAst = stepAst(label);
+  const labelParagraph = labelAst.rows[0].node.children;
+  if (label !== label.trim() || labelParagraph.length !== 1 || labelParagraph[0].type !== 'paragraph'
+      || labelParagraph[0].children.length !== 1 || labelParagraph[0].children[0].type !== 'text'
+      || labelParagraph[0].children[0].value !== label) fail('relocation label is not pure plain text');
+  const prefix = a.slice(0, terminal.index), phrase = prefix.indexOf(label);
+  if (phrase < 0 || prefix.indexOf(label, phrase + label.length) >= 0) fail('relocation label lacks one unique existing phrase');
+  const oldWikiStart = terminal.index + 1 + terminal[1].length + 2;
+  const roles = { offset_unit: 'UTF-16', old_phrase: plaintextRole(oldAst, phrase, phrase + label.length),
+    old_wiki: plaintextRole(oldAst, oldWikiStart, oldWikiStart + oldWiki.length, true),
+    new_wiki: plaintextRole(nextAst, next.start, next.end, true),
+    old_terminal_prefix: plaintextRole(oldAst, terminal.index, oldWikiStart),
+    old_terminal_close: plaintextRole(oldAst, oldWikiStart + oldWiki.length, oldWikiStart + oldWiki.length + 1),
+    new_terminal: plaintextRole(nextAst, b.length - newTerminal.length, b.length - (terminal[3]?.length ?? 0)) };
+  const expected = prefix.slice(0, phrase) + next.raw + prefix.slice(phrase + label.length) + newTerminal;
+  if (expected !== b) fail('relocation changed surrounding scientific bytes');
+  return { version: 1, target: request.target, label, old_phrase: { text: label, start: phrase, end: phrase + label.length },
+    old_wiki: { text: oldWiki, start: oldWikiStart, end: oldWikiStart + oldWiki.length },
+    new_wiki: { text: next.raw, start: next.start, end: next.end }, terminal_before: terminal[0], terminal_after: newTerminal,
+    ordinary_support: tags, markdown_roles: roles };
+}
+function consolidationTokens(text, ast = stepAst(text)) {
+  // Use actual AST ranges, including double/multiline inline code. Canonical
+  // wiki spans supplement those literal ranges and remain byte-identical.
   const tokens = []; let at = 0;
-  const prose = s => {
-    if (/\$|`|\[\[|\\\(|\\\[/.test(s)) fail('unclosed protected support consolidation span');
-    return s.replace(/[ \t\r\n]+/g, ' ');
-  };
-  for (const m of text.matchAll(spans)) {
-    tokens.push({ prose: prose(text.slice(at, m.index)) }, { protected: m[0] }); at = m.index + m[0].length;
+  for (const r of ast.ranges) {
+    tokens.push({ prose: text.slice(at, r.start).replace(/[ \t\r\n]+/g, ' ') }, { protected: text.slice(r.start, r.end) }); at = r.end;
   }
-  tokens.push({ prose: prose(text.slice(at)) }); return tokens;
+  tokens.push({ prose: text.slice(at).replace(/[ \t\r\n]+/g, ' ') }); return tokens;
 }
 function supportConsolidation(before, after) {
-  const terminal = text => {
+  const oldAst = stepAst(before), nextAst = stepAst(after);
+  const terminal = (text, ast) => {
     const m = /\[([^\]\r\n]+)\]([ \t]*∎)?[ \t\r\n]*$/.exec(text);
-    if (!m || mathOrCodeAt(text, m.index)) fail('invalid consolidation terminal support');
-    return { text: m[0], tags: m[1], marker: m[2]?.trim() ?? '', offset: m.index };
+    if (!m) fail('invalid consolidation terminal support');
+    return { text: m[0], tags: m[1], marker: m[2]?.trim() ?? '', offset: m.index,
+      role: plaintextRole(ast, m.index, m.index + m[1].length + 2) };
   };
   const tags = text => {
     const out = text.split(',').map(t => t.trim());
@@ -138,29 +302,45 @@ function supportConsolidation(before, after) {
         || new Set(out).size !== out.length) fail('invalid consolidation support tags');
     return out;
   };
-  const old = terminal(before), next = terminal(after);
+  const old = terminal(before, oldAst), next = terminal(after, nextAst);
   if (old.marker !== next.marker) fail('consolidation QED changed');
   const oldBody = before.slice(0, old.offset), nextBody = after.slice(0, next.offset);
   const clusters = [...oldBody.matchAll(/(\[[^\[\]\r\n]+\])([ \t\r\n]+)\$\$([^\r\n]*?)\$\$/g)];
   if (clusters.length !== 1) fail('consolidation needs exactly one pre-display support cluster');
   const c = clusters[0];
-  if (!/[\r\n]/.test(c[2]) || mathOrCodeAt(oldBody, c.index)) fail('consolidation cluster is not prose before display');
+  if (!/[\r\n]/.test(c[2])) fail('consolidation cluster is not prose before display');
+  const removedRole = plaintextRole(oldAst, c.index, c.index + c[1].length);
+  const displayStart = c.index + c[1].length + c[2].length, displayEnd = c.index + c[0].length;
+  const displayNode = oldAst.rows.find(r => ['math', 'inlineMath'].includes(r.node.type) && r.start === displayStart && r.end === displayEnd);
+  if (!displayNode) fail('old display lacks its exact Markdown math range');
+  const standalone = displayNode.node.type === 'inlineMath' && displayNode.parent?.type === 'paragraph'
+    && displayNode.parent.children.length === 1 && displayNode.parent.position.start.offset === displayStart
+    && displayNode.parent.position.end.offset === displayEnd;
+  if (displayNode.node.type !== 'math' && !standalone) fail('old double-dollar math is not a standalone paragraph');
   const removed = tags(c[1].slice(1, -1)), prior = tags(old.tags), current = tags(next.tags);
   const union = [...new Set([...prior, ...removed])];
   if (!equal(union, current)) fail('consolidation changed support union');
   const payload = c[3].replace(/^[ \t]+|[ \t]+$/g, '');
-  // Only the actual observed comma may move out of the math delimiters.
-  if (!payload.endsWith(',') || payload.includes('%') || payload.includes('$')) fail('unsupported consolidation display payload');
-  const inline = '$' + payload.slice(0, -1) + '$,';
+  // Only the observed trailing comma or period may leave the math delimiters.
+  if (!/[,.]$/.test(payload) || payload.includes('%') || payload.includes('$')) fail('unsupported consolidation display payload');
+  const inline = '$' + payload.slice(0, -1) + '$' + payload.at(-1);
+  const inlineMath = inline.slice(0, -1), candidates = nextAst.rows.filter(r => r.node.type === 'inlineMath'
+    && after.slice(r.start, r.end) === inlineMath && after[r.end] === payload.at(-1));
+  if (candidates.length !== 1) fail('new inline math range is absent or ambiguous');
+  const inlineNode = candidates[0];
   const folded = oldBody.slice(0, c.index) + inline + oldBody.slice(c.index + c[0].length);
   const scientific = consolidationTokens(folded);
   if (!equal(scientific, consolidationTokens(nextBody))) fail('consolidation changed scientific tokens');
   return { version: 1, terminal_before: old.tags, terminal_after: next.tags,
     removed_cluster: { text: c[1], offset: c.index }, support_union: union,
     display_before: '$$' + c[3] + '$$', inline_after: inline,
-    qed: old.marker, scientific_tokens_sha256: sha(JSON.stringify(scientific)) };
+    qed: old.marker, scientific_tokens_sha256: sha(JSON.stringify(scientific)),
+    markdown_roles: { offset_unit: 'UTF-16', removed_cluster: removedRole,
+      terminal_before: old.role, terminal_after: next.role,
+      old_display: { type: displayNode.node.type, role: standalone ? 'standalone-double-dollar' : 'display-math', start: displayStart, end: displayEnd },
+      new_inline: { type: 'inlineMath', start: inlineNode.start, end: inlineNode.end } } };
 }
-function proofChange(before, after, deltas, consolidation) {
+function proofChange(before, after, deltas, consolidation, relocation, deps) {
   const a = proofParts(before), b = proofParts(after);
   if (!equal(a.steps.map(s => s.label), b.steps.map(s => s.label))) fail('proof step sequence change');
   let technique = null;
@@ -173,6 +353,16 @@ function proofChange(before, after, deltas, consolidation) {
   const steps = [];
   for (let i = 0; i < a.steps.length; i++) if (a.steps[i].text !== b.steps[i].text) {
     const x = a.steps[i], y = b.steps[i], support = text => /\[([^\]\n]+)\](?:[ \t]*∎)?[ \t\r\n]*$/.exec(text)?.[1];
+    const requested = relocation?.steps.find(s => s.label === x.label);
+    if (requested) {
+      const relocated = referenceRelocation(x.text, y.text, requested, deps);
+      const delta = { id: `Proof:step:${x.label}`, kind: 'proof-reference-relocation', section: 'Proof', label: x.label,
+        target: requested.target, before: trim(x.text), after: trim(y.text), reference_relocation: relocated };
+      steps.push({ label: x.label, before: x.text, after: y.text, kind: delta.kind }); deltas.push(delta);
+      if (tail(x.text) !== tail(y.text)) deltas.push({ id: `Proof:step:${x.label}:separator`, kind: 'separator-spacing',
+        section: 'Proof', label: x.label, before: tail(x.text), after: tail(y.text) });
+      continue;
+    }
     let qed = null, oldSupport = support(x.text);
     if (oldSupport === undefined && i === a.steps.length - 1) {
       const oldMarker = /[ \t]+\\qed([ \t\r\n]*)$/.exec(x.text), nextMarker = /[ \t]+∎([ \t\r\n]*)$/.exec(y.text);
@@ -184,17 +374,19 @@ function proofChange(before, after, deltas, consolidation) {
       }
     }
     let consolidated = null;
-    if (oldSupport === undefined || oldSupport !== support(y.text)) {
-      if (!consolidation?.steps.includes(x.label) || qed) fail('changed proof support labels');
+    if (consolidation?.steps.includes(x.label)) {
+      if (qed) fail('support consolidation cannot also change terminal QED');
       consolidated = supportConsolidation(x.text, y.text);
-    }
+    } else if (oldSupport === undefined || oldSupport !== support(y.text)) fail('changed proof support labels');
     const delta = { id: `Proof:step:${x.label}`, kind: consolidated ? 'proof-support-consolidation' : qed ? 'proof-terminal-qed' : trim(x.text) === trim(y.text) ? 'separator-spacing' : 'proof-step-presentation', section: 'Proof', label: x.label, before: x.text, after: y.text, ...(qed ? { terminal_qed: qed } : {}), ...(consolidated ? { support_consolidation: consolidated } : {}) };
     steps.push({ label: x.label, before: x.text, after: y.text, kind: delta.kind }); deltas.push(delta);
   }
   return { technique, steps };
 }
-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation) {
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation) {
   const consolidation = consolidationOption(proofSupportConsolidation);
+  const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
+  if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
   const verification = { before: prior.verification ?? null, after: current.verification ?? null };
@@ -208,6 +400,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
   }
   if (!equal(prior, current)) fail('scientific metadata/interface change');
   const a = sections(before.body), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
+  if (strictProof) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
   if (!a.values.has(primary) || a.prefix !== b.prefix) fail('primary section/prefix change');
   const appended = !a.values.has('Remarks') && b.names.at(-1) === 'Remarks' && equal(a.names, b.names.slice(0, -1));
   if (!equal(a.names, b.names) && !appended) fail('new/deleted/reordered scientific section');
@@ -216,7 +409,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
     const x = a.values.get(name), y = b.values.get(name);
     if (name === primary) interfaceChange(x, y, name, deltas);
     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
-    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation));
+    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps));
     else {
       if (x !== y) {
         const extra = y?.startsWith(x) ? y.slice(x.length) : null;
@@ -244,17 +437,28 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
     proof: steps.length || technique ? 'equivalent-presentation' : 'unchanged',
   };
   if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
-  return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas, ...(consolidation ? { proof_support_consolidation: consolidation } : {}) };
+  if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
+  return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
+    ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
+    ...(strictProof ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
 }
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
   const consolidation = consolidationOption(entry.proof_support_consolidation);
+  const relocation = relocationOption(entry.proof_reference_relocation);
   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
+  if (!equal(relocation, changes.proof_reference_relocation ?? null)
+      || !equal(relocation?.steps ?? [], changes.deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unbound proof reference relocation option');
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
+  if (consolidation || relocation) {
+    const runtime = parserDescriptor();
+    if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
+    for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);
+  } else if (changes.proof_support_parser_runtime !== undefined) fail('unrequested parser runtime binding');
   const science = entry.scientific_review;
   if (science?.statements !== changes.review_classification.statements || science.facts !== changes.review_classification.facts
       || science.hypotheses !== 'identical' || science.new_premises !== false || science.new_results !== false

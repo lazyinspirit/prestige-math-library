@@ -1,6 +1,6 @@
 # Opt-in V2 original item presentation protocol
 
-`originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation?)` describes exact structural
+`originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation?, proofReferenceRelocation?)` describes exact structural
 changes. It does **not** decide mathematical equivalence or grant source,
 publication, import, consumer, native-review or gate authority. Legacy
 `originalRenderingChanges` is unchanged. Only an explicit
@@ -40,26 +40,95 @@ V2 module bytes, so changing the extractor invalidates a cached owner receipt.
   passes this exact object as the extractor's third argument only for V2.
   Unknown, duplicate, malformed or unused step requests fail; legacy entries
   reject the field. Without it, changed terminal support still fails.
-  In the named step only, one prose support cluster immediately before one
+  Every requested changed step uses the strict parser, even if its old and new
+  terminal support strings are identical. In the named step only, one prose support cluster immediately before one
   single-line `$$...$$` display may be removed and consolidated into terminal
   support. The final ordered tags must equal the stable union of the old final
   tags and that one cluster, without duplicates, new or lost tags. The QED
   marker must remain identical. The display becomes inline math with exactly
   the same payload bytes after outer space trimming; only its existing final
-  comma may move immediately outside the new delimiters. All surrounding
-  scientific tokens stay fixed: only prose whitespace can collapse, while
-  other math, inline code and wikilink spans compare byte-for-byte. Code fences,
-  HTML comments, ambiguous clusters, unclosed spans, cross-step movement and
-  other payload/punctuation rewrites fail conservatively. Code, math indices
-  and wikilinks cannot supply the removed cluster.
+  comma or period may move immediately outside the new delimiters. All surrounding
+  scientific tokens stay fixed: only actual prose whitespace can collapse.
+  The synchronous installed renderer parser (`unified`, `remark-parse`,
+  `remark-gfm`, `remark-math`, in that order) inspects the strict changed step.
+  Its only allowed node kinds are root, paragraph, text, inlineMath, math and
+  inlineCode; links/reference links/definitions, images, HTML, fenced or indented
+  code, headings, lists, block quotes, tables and all other kinds fail even
+  unchanged. The removed cluster and both terminal-support ranges must lie in
+  real text nodes outside canonical wiki spans. Ordinary reference definitions
+  anywhere in either full source body fail, preventing external context from
+  changing a step-local shortcut link's role. Actual AST source ranges protect
+  every math and inline-code span byte-for-byte, including double-backtick and
+  multiline inline code; canonical wiki spans are separately protected.
+  The old double-dollar range must be an exact math node, or a standalone
+  paragraph whose sole inlineMath child has the exact full `$$...$$` range.
+  (The observed single-line displays genuinely have AST type inlineMath.) The
+  new single-dollar range must be an exact inlineMath node. These actual types,
+  roles and UTF-16 offsets are recorded, never relabeled. Ambiguous ranges,
+  cross-step movement and other payload/punctuation rewrites fail.
   This emits `proof-support-consolidation` with the full before/after step,
   exact removed cluster/offset, old/new final support, stable union, display and
   inline bytes, QED and scientific-token hash. The result also binds the exact
   opt-in object. Its ordinary exact per-delta Root review, evidence, source
   hashes, scientific classification and main repair authentication are still
-  mandatory; it also participates in the existing diagram-independence guard.
+  mandatory; it also participates in the diagram-independence guard below.
   This is support presentation bookkeeping, not acceptance of new premises or
   a general support/TeX normalization rule.
+- Opt-in changes additionally contain `proof_support_parser_runtime`, with the
+  exact resolved four parser roots, package identities and a sorted `inputs`
+  map of canonical realpaths to hashes. It covers the conservative installed
+  declared dependency closure's JS/MJS/CJS/JSON/native-code files, the web
+  package/lock and Node executable; metadata-only dependencies are identified,
+  not claimed to execute. No whole-node_modules or documentation reading is
+  implied. Initialization is lazy and synchronous on the supported Node 22
+  runtime; default/legacy extraction never loads this parser. The initial
+  loaded descriptor stays private and output copies cannot mutate it. Context
+  and live closure are checked before reuse, before/after initial loading and
+  after each parse; drift requires restart, never restamping a cached parser.
+  The V2 review validator consumes **every** runtime map entry through the
+  existing live `bind(path, hash)` guard. The authority's `inputs` must therefore
+  include the exact map; missing, stale or unrelated bindings fail. Existing
+  native certificate-evidence recursion binds the same map into owner snapshot
+  currency without an engine change. This applies only to the explicit opt-in;
+  all installed default extraction outputs remain unchanged.
+- The native diagram-independence flags remain mandatory for generic proof
+  presentations or actual Remarks/graphics. Their genuine omission is allowed
+  only when **every** delta is a strict `proof-support-consolidation`, there is
+  no title, technique or Remarks change, neither source body has any Remarks
+  section, fenced block, HTML markup, Markdown image or includegraphics/TikZ
+  command/environment, the authenticated native adjudication says
+  `mathematical_meaning_preserved: true`, and **both** diagram keys are absent.
+  This handles native no-diagram adjudications without inventing fields.
+  Partial, null or contradictory keys still fail. Existing correct
+  `proof_independent: true` / `diagram_mathematics_corrected: false` fields
+  retain their prior behavior. For the observed difference-cochain successor,
+  explicitly request **both** `steps: ['1.2', '2.2']`: the first moves its period
+  and duplicate F3 support, and the second moves its comma and support union.
+  Leaving either as an ordinary delta cannot obtain the omission rule.
+- Independent reference relocation uses the **fourth** extractor argument and
+  V2 entry field
+  `proof_reference_relocation: {version: 1, steps: [{label: '1.1', target: 'thm-euclidean-inverse-function-theorem'}]}`.
+  Default and third-argument APIs are unchanged; legacy entries reject this
+  field. Malformed, duplicate, unknown, unused or overlapping strict-step
+  requests fail. The target must already occur literally in the old `deps`.
+  One exact unlabelled wiki nested at the end of an ordinary F/A/L terminal
+  cluster may move to one unique existing plain prose phrase. Its new canonical
+  wiki must have exactly the same target and a pure actual-AST text label equal
+  byte-for-byte to that old phrase. The phrase and both wiki source ranges must
+  be actual plaintext, never math/code/HTML/link-title content. The entire
+  before-step core must transform into the after-step core using **only** that
+  phrase-to-wiki replacement and removal of the exact old terminal wiki plus
+  its preceding comma/space. Ordinary tags, order, spacing, QED and all other
+  scientific bytes stay identical. A changed trailing separator is its own
+  separately reviewed spacing delta.
+  The `proof-reference-relocation` delta records exact spans/terminals/target
+  and full step cores; its `target` activates the existing imported published
+  pin and per-delta evidence checks. It uses the same AST/runtime binding map
+  described above. It is substantive for the native diagram guard and **never**
+  qualifies for the support-only absent-key rule, including when no Remarks
+  happen to be present. Added collar Remarks/TikZ retain their separate exact
+  reviews and genuine native flags. No dependency or mathematical claim is
+  invented by moving a predeclared reference.
 - A literal terminal old `\qed` may become `∎` only on the actual final
   numbered Proof step. The entire preceding step text, including exact support
   tags and mathematics, must be byte-identical; only the marker separator and

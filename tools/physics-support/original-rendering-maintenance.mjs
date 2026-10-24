@@ -179,6 +179,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     const presentationV2 = entry.presentation_version === 2;
     if (entry.presentation_version !== undefined && entry.presentation_version !== 1 && !presentationV2) fail('unsupported presentation version');
     if (!presentationV2 && entry.proof_support_consolidation !== undefined) fail('proof support consolidation requires V2');
+    if (!presentationV2 && entry.proof_reference_relocation !== undefined) fail('proof reference relocation requires V2');
     const pin = receipt.files.find(p => p.path === entry.path);
     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
         || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
@@ -212,7 +213,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
     const block = ledger.split(begin)[1].split(end)[0];
     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation) : originalRenderingChanges(beforeBytes, afterBytes);
+    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation) : originalRenderingChanges(beforeBytes, afterBytes);
     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');
@@ -248,8 +249,18 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
         || substantiveSteps.some(s => !substantive(entry.proof_step_reviews[s.label]))) fail('missing individual proof-step equivalence review');
     }
     const substantiveSteps = changes.steps.filter(s => presentationV2
-      ? ['proof-step-presentation', 'proof-support-consolidation'].includes(s.kind) : s.kind === 'equivalent-presentation');
-    if ((changes.remarks || substantiveSteps.length) && (adjudication.proof_independent !== true || adjudication.diagram_mathematics_corrected !== false)) fail('diagram independence');
+      ? ['proof-step-presentation', 'proof-support-consolidation', 'proof-reference-relocation'].includes(s.kind) : s.kind === 'equivalent-presentation');
+    const bodies = before.body + '\n' + after.body;
+    const graphicsOrRemarks = /^##[ \t]+Remarks\b/m.test(bodies)
+      || /```|~~~|!\[|<\/?[A-Za-z!]|<\?|\\includegraphics\b|\\tikz\b|\\begin\{(?:tikzcd|tikzpicture)\}/.test(bodies);
+    const strictSupportOnly = presentationV2 && changes.deltas.length > 0
+      && changes.deltas.every(d => d.kind === 'proof-support-consolidation')
+      && !changes.remarks && !changes.title && !changes.technique && !graphicsOrRemarks;
+    const noDiagramKeys = !Object.hasOwn(adjudication, 'proof_independent')
+      && !Object.hasOwn(adjudication, 'diagram_mathematics_corrected');
+    const unchangedDiagramRule = adjudication.proof_independent === true && adjudication.diagram_mathematics_corrected === false;
+    if ((changes.remarks || substantiveSteps.length) && !unchangedDiagramRule
+      && !(strictSupportOnly && noDiagramKeys && adjudication.mathematical_meaning_preserved === true)) fail('diagram independence');
     if (!Array.isArray(entry.evidence) || !entry.evidence.length) fail('missing Root evidence');
     for (const ref of entry.evidence) localEvidence(ref);
     const consumers = affected(scope, id);

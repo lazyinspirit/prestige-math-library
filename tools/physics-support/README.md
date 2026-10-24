@@ -162,9 +162,28 @@ display-to-inline comma movement described in the
 [V2 protocol](original-presentation-maintenance.md). Every scientific token,
 protected span, source/consumer binding and individual Root delta review remains
 required. Unused requests and legacy opt-ins fail; ordinary V2 extraction output
-is unchanged without this field. The new delta retains the existing upstream
-diagram-independence requirement. No import, source acceptance or native gate
+is unchanged without this field. Requested same-terminal steps also undergo the
+strict parser; only the observed trailing comma/period may leave math. The
+strict changed step uses the actual renderer Markdown AST allowlist and source
+offsets, so HTML, link titles, definitions, lists and other hidden contexts
+cannot masquerade as prose support. Math/code/wiki bytes remain exact. Its
+lazy parser's bounded code/package/lock/Node input map is recorded and consumed
+by the existing live review bindings and owner snapshot recursion; cache drift
+requires restart, and default/legacy extraction has no parser dependency.
+The native diagram-independence rule permits both keys to be genuinely absent only
+for all-strict support deltas with no Remarks, code fences or graphics and a
+true authenticated mathematical-meaning verdict. Partial/contradictory flags
+and ordinary proof/diagram changes retain the existing rejection; see the exact
+eligibility limits in the protocol. No import, source acceptance or native gate
 waiver follows from extraction.
+
+The independent V2 `proof_reference_relocation` field selects exact per-step
+target moves through the fourth extractor argument. It admits only an existing
+unlabelled terminal wiki moved onto its unique unchanged plain prose phrase,
+with all remaining step bytes and F/A/L support unchanged. Actual AST roles,
+the same live parser-runtime map, predeclared dependency, published target pin
+and exact per-delta review remain mandatory. It never receives the support-only
+diagram-key omission rule; see the protocol for the precise selector schema.
 
 The original-successor wrapper recognizes exactly the authenticated confirmed
 finding statuses `repaired`, `repaired-and-visually-verified` and `resolved` as
