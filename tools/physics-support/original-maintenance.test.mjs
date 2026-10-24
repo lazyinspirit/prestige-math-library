@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { importMathematics, verifyMathematicsImports } from './physics-imports.mjs';
-import { originalMaintenancePath } from './original-maintenance.mjs';
+import { originalMaintenance, originalMaintenancePath } from './original-maintenance.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = value => createHash('sha256').update(value).digest('hex');
 function fixture(t, { metadataOnly = false } = {}) {
@@ -200,4 +200,99 @@ test('standalone import CLI retains failing exit status and reports all selected
   assert.equal(cli.status, 1);
   assert.equal(cli.stdout, '');
   assert.deepEqual(changedOriginalPaths({message:cli.stderr.trimEnd()}), [f.deep, f.main, 'items/def-unrelated.md'].sort());
+});
+
+const relocationCommit = '29450da28f82d81f6865b920e64b2dd106cbe4e6';
+const relocationBlob = '7593c68f7ed478e48d42176d47580c5899ef10b3';
+function relocationFixture(t) {
+  const base = mkdtempSync(join(tmpdir(), 'original-metadata-relocation-'));
+  t.after(() => rmSync(base, { recursive: true, force: true }));
+  const root = join(base, 'physics'), source = join(base, 'math'), run = 'relocation';
+  for (const dir of [root, source]) for (const sub of ['items', 'research']) mkdirSync(join(dir, sub), { recursive: true });
+  const repository = fileURLToPath(new URL('../../', import.meta.url));
+  const git = args => {
+    const r = spawnSync('git', args, { cwd: repository });
+    assert.equal(r.status, 0, r.stderr.toString()); return r.stdout;
+  };
+  writeFileSync(join(source, '.git'), `gitdir: ${git(['rev-parse', '--absolute-git-dir']).toString().trim()}\n`);
+  const path = 'items/lem-borel-product-of-second-countable-spaces.md';
+  const current = git(['show', `${relocationCommit}:${path}`]);
+  const before = Buffer.from(current.toString().replace('  judge:\n', 'verification:\n  precheck: pending\n  judge:\n'));
+  assert.equal(sha(before), '65062144095b46cdb23b0b159812f572217ad831bd3aff0f34fae9d72cf2c05b');
+  assert.equal(sha(current), 'faac2722234dc29b7e2e7b4adbf31695fc61371c3f9afc1e335dfac2c8cff432');
+  const original = join(source, path);
+  writeFileSync(join(root, path), before); writeFileSync(original, current);
+  const receipt = { source_root: source, files: [{ path, sha256: sha(before) }] };
+  writeFileSync(join(root, 'research/math-imports.json'), JSON.stringify(receipt));
+  const frontier = 'research/relocation-batch-1.pages.json', evidence = 'research/relocation-owner-review.md';
+  writeFileSync(join(root, frontier), '[{"id":"selected"}]');
+  writeFileSync(join(root, evidence), 'Fixture evidence reviews the exact metadata-only relocation and unchanged local consumer use.');
+  writeFileSync(join(root, 'items/def-local.md'), 'Fixture consumer bytes.');
+  const hashFile = p => sha(readFileSync(resolve(root, p)));
+  const entry = { path, pinned_sha256: sha(before), original_path: original, original_sha256: sha(current),
+    verification_metadata_relocation: { source_commit: relocationCommit, source_blob: relocationBlob },
+    evidence: [{ path: evidence, sha256: hashFile(evidence) }], titles: [],
+    consumers: [{ id: 'def-local', decision: 'unaffected', reason: 'The actual selected consumer uses the unchanged statement and proof, not the relocated metadata.' }],
+    consumer_sha256: { 'def-local': hashFile('items/def-local.md') } };
+  const review = { version: 1, run, reviewer: '/root', native_review: false,
+    reason: 'Explicit fixture Root opt-in to the exact historically committed metadata relocation without any proof or stamp acceptance.',
+    import_receipt_sha256: hashFile('research/math-imports.json'), frontier: { [frontier]: hashFile(frontier) }, entries: [entry] };
+  function seal() {
+    review.inputs = { 'research/math-imports.json': review.import_receipt_sha256, ...review.frontier,
+      [path]: entry.pinned_sha256, [original]: entry.original_sha256, [evidence]: entry.evidence[0]?.sha256,
+      'items/def-local.md': entry.consumer_sha256['def-local'] };
+    writeFileSync(originalMaintenancePath(root, run), JSON.stringify(review));
+  }
+  const scope = { paths: new Set([path]), importedItems: new Set(['lem-borel-product-of-second-countable-spaces']),
+    owned: new Set(['def-local']), consumers: new Map([['lem-borel-product-of-second-countable-spaces', ['def-local']]]) };
+  return { root, source, run, path, original, current, before, review, entry, receipt, seal,
+    verify: options => originalMaintenance(root, run, { receipt, scope, ...options }) };
+}
+test('exact opt-in metadata relocation accepts committed bytes with unchanged immutable pin and full Root bindings', t => {
+  const f = relocationFixture(t);
+  assert.equal(f.verify().size, 0);
+  f.seal(); assert.equal(f.verify().get(f.path), sha(f.current));
+  assert.deepEqual(readFileSync(join(f.root, f.path)), f.before);
+  assert.equal(f.verify({ planning: true }).size, 0);
+  // No run context cannot adopt the scoped Root exception.
+  assert.equal(originalMaintenance(f.root, undefined, { receipt: f.receipt }).size, 0);
+});
+test('relocation cannot accept resealed body, judge, source or repair-locator changes', t => {
+  for (const mutate of [
+    s => s.replace('second-countable topological spaces', 'arbitrary topological spaces'),
+    s => s.replace('verdict: pass', 'verdict: pending'),
+    s => s.replace('John K. Hunter', 'Changed source author'),
+    s => s.replace('sources:\n', 'verification: { repair: research/repair.json }\nsources:\n'),
+    s => s + '\n## Statement references\n\n[[def-borel-sigma-algebra]]\n',
+  ]) {
+    const f = relocationFixture(t); writeFileSync(f.original, mutate(f.current.toString()));
+    f.entry.original_sha256 = sha(readFileSync(f.original)); f.seal();
+    assert.throws(() => f.verify(), /verification metadata relocation/);
+  }
+});
+test('relocation opt-in must have exact typed commit/blob and belong to the bound entry', t => {
+  for (const mutate of [
+    f => delete f.entry.verification_metadata_relocation,
+    f => f.entry.verification_metadata_relocation = true,
+    f => f.entry.verification_metadata_relocation.source_commit = '0'.repeat(40),
+    f => f.entry.verification_metadata_relocation.source_blob = '0'.repeat(40),
+    f => f.entry.verification_metadata_relocation.extra = true,
+    f => { f.review.verification_metadata_relocation = f.entry.verification_metadata_relocation; delete f.entry.verification_metadata_relocation; },
+    f => f.entry.titles = [{ id: 'def-borel-sigma-algebra', sha256: '0'.repeat(64) }],
+    f => f.entry.consumers = [],
+  ]) {
+    const f = relocationFixture(t); mutate(f); f.seal();
+    assert.throws(() => f.verify(), /Invalid original maintenance/);
+  }
+  const f = relocationFixture(t); f.seal();
+  delete f.review.inputs[f.original]; writeFileSync(originalMaintenancePath(f.root, f.run), JSON.stringify(f.review));
+  assert.throws(() => f.verify(), /missing input binding/);
+});
+test('relocation verifies actual Git commit/blob bytes and still requires current evidence and consumers', t => {
+  const f = relocationFixture(t); f.seal(); rmSync(join(f.source, '.git'));
+  assert.throws(() => f.verify(), /Git binding/);
+  for (const file of ['research/relocation-owner-review.md', 'items/def-local.md']) {
+    const f = relocationFixture(t); f.seal(); writeFileSync(join(f.root, file), 'Changed bound bytes.');
+    assert.throws(() => f.verify(), /changed\/nonlocal input/);
+  }
 });
