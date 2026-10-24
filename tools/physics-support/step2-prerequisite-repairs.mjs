@@ -71,6 +71,21 @@ function boundary(root,run,stateDir,scan,entry){
 function request(root,run,path){const row=json(root,path);assert(path.startsWith(`research/${run}-`)&&row.version===1&&row.run===run&&row.reviewer==='/root'&&text(row.reason)&&row.writers_drained===true&&Array.isArray(row.writer_scopes)&&!row.writer_scopes.length&&Array.isArray(row.evidence)&&row.evidence.length,'invalid Root request');row.evidence.forEach(value=>ref(root,run,value));return row;}
 const headings={definition:'Definition',algorithm:'Definition',lemma:'Statement',theorem:'Statement',proposition:'Statement',corollary:'Statement',example:'Example',counterexample:'Statement refuted','false-statement':'Statement',remark:'Remark','open-problem':'Open problem',postulate:'Postulate','physics-theorem':'Statement','thought-experiment':'Statement',experiment:'Observations'};
 export function repairPublicSection(source){const {body,fm}=splitFrontmatter(source),kind=parseFrontmatter(fm).kind;assert(headings[kind],`unsupported public section kind ${kind}`);const value=sectionText(body,headings[kind]).trim();assert(value,`missing canonical ${headings[kind]} section`);return value;}
+function admittedStatement(root,commit,id,lifecycle){const path=`items/${id}.md`,source=gitSource(root,commit,path);assert(hash(source)===lifecycle.atAdmission(path),'admission source Git blob differs from passed history');return repairPublicSection(source.toString());}
+function historicalMetadataHash(root,run,entry,path,expected,lifecycle){
+  if(digest(root,path)===expected)return true;
+  if(!lifecycle||path!=='research/plan-spec.json'&&!entry.batches.some(batch=>path===`research/${run}-batch-${batch}.pages.json`))return false;
+  const doc=json(root,path);assert(raw(root,path)===JSON.stringify(doc,null,2)+'\n','metadata serialization changed outside public mirrors');
+  const admission=json(root,authoredMetadataPath(run,entry.number)),req=json(root,admission.request.path),pages=Array.isArray(doc)?doc:doc.pages;
+  for(const page of pages)for(const item of page.items??[])if(entry.items.includes(item.id)){
+    const sourcePath=`items/${item.id}.md`,original=admittedStatement(root,req.base_commit,item.id,lifecycle);
+    if(item.statement!==original){
+      assert(lifecycle.accepted(sourcePath)&&item.statement===repairPublicSection(raw(root,sourcePath)),'public mirror requires exact current source and accepted native ownership');item.statement=original;
+    }
+    assert(hash(JSON.stringify(item))===lifecycle.manifestAtAdmission(item.id),'new-owned metadata changed beyond public statement mirror');
+  }
+  return hash(JSON.stringify(doc,null,2)+'\n')===expected;
+}
 function contract(source){const {body,fm}=splitFrontmatter(source),meta=parseFrontmatter(fm);return {identity:Object.fromEntries(['id','kind','domain','library','aliases'].map(key=>[key,meta[key]??null])),premises:{deps:meta.deps??[],dependency_roles:meta.dependency_roles??{}},section:repairPublicSection(source),physical:physicalInterface(source)};}
 function graphRow(path,source){const {fm}=splitFrontmatter(source);return {id:basename(path,'.md'),identity:fm.match(/^id:[ \t]*(.*)$/m)?.[1]??null,aliases:frontmatterList(fm,'aliases'),deps:[...new Set(['deps','justified_by','forward_refs'].flatMap(key=>frontmatterList(fm,key)))],references:[...new Set([...source.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map(match=>match[1]))]};}
 function currentGraph(root){return readdirSync(join(root,'items')).filter(name=>name.endsWith('.md')).sort().map(name=>graphRow(name,raw(root,`items/${name}`)));}
@@ -270,10 +285,11 @@ export function checkedRepairOverlay(root,run,entry){
   const lifecycle=nativePrerequisiteLifecycle(root,run,entry);
   if(lifecycle)for(const path of [paths.authorization,paths.completion,auth.request.path,done.request.path,...auth.evidence.map(ref=>ref.path),...done.evidence.map(ref=>ref.path)])lifecycle.bind(path);
   assert(done.version===1&&done.scientific_acceptance===false&&done.authorization.path===paths.authorization&&done.run===run&&done.generation===entry.number&&done.reviewer==='/root'&&same(Object.keys(done.sources).sort(),Object.keys({...auth.sources,...auth.page_sources}).sort())&&same(Object.keys(done.metadata).sort(),Object.keys(auth.metadata).sort()),'invalid repair completion');
-  for(const [path,expected] of Object.entries({...done.sources,...done.metadata}))assert(digest(root,path)===expected,`repair receipt stale ${path}`);
+  for(const [path,expected] of Object.entries(done.sources))assert(digest(root,path)===expected,`repair receipt stale ${path}`);
+  for(const [path,expected] of Object.entries(done.metadata))assert(historicalMetadataHash(root,run,entry,path,expected,lifecycle),`repair receipt stale ${path}`);
   const req=json(root,done.request.path),reviewed=reviewedSources(root,run,req,entry,auth,lifecycle),pages=reviewedPages(root,run,req,auth);
   assert(same({...reviewed.sources,...pages.sources},done.sources)&&same(pages.context,done.page_context??{}),'completion source/context review map changed');
   return done;
 }
 // Shared only by the bounded physics author-metadata admission protocol.
-export function prerequisiteRepairProtocol(){return {assert,hash,same,text,file,raw,digest,json,absent,writeOnce,ref,gitSource,entryAt,boundary,request,currentGraph};}
+export function prerequisiteRepairProtocol(){return {assert,hash,same,text,file,raw,digest,json,absent,writeOnce,ref,gitSource,entryAt,boundary,request,currentGraph,admittedStatement,historicalMetadataHash};}

@@ -11,7 +11,7 @@ import {
   finishPrerequisiteRegistration, prerequisiteRegistry, prerequisiteBoundary,
   assertNoPrerequisiteTransaction, checkOwnerAdditions,checkSupplement,
 } from './step2-prerequisites.mjs';
-import { batchInput, accepted,resolveOwner,collectBatch } from './batch-scope-review.mjs';
+import { batchInput, accepted,resolveOwner,collectBatch,batchPlan } from './batch-scope-review.mjs';
 import {authorizePrerequisiteRepairs,completePrerequisiteRepairs,checkedRepairOverlay,repairReviewInputs,repairPaths,repairValueDigest,repairPublicSection,repairGraphFingerprint} from './step2-prerequisite-repairs.mjs';
 import {writeBatchDependencyLevels} from './batch-dependency-levels.mjs';
 import {gateReviewSnapshot} from '../physics-autopilot/src/owner-gate-recertification.mjs';
@@ -283,8 +283,10 @@ test('owner addition successor does not waive consumer selection or stale repair
 function authoredFixture(t,{ownerAddition=false}={}){
   const f=repairFixture(t,{ownerAddition}),manifest=`research/${run}-batch-3.pages.json`,pages=f.json(manifest),plan=f.json('research/plan-spec.json'),id='lem-new-one',source=`items/${id}.md`;
   f.put(source,`---\nid: ${id}\nkind: lemma\ndomain: mathematics\nlibrary: mathematics\nstatus: draft\npipeline_run: ${run}\ndeps: []\nsources: {references: [{title: Actual author fixture reference, url: https://example.invalid/full-text}]}\n---\n## Statement\n\nActual complete approved clarification.\n`);
+  for(const item of pages.flatMap(page=>page.items))if(!existsSync(join(f.root,`items/${item.id}.md`)))f.put(`items/${item.id}.md`,`---\nid: ${item.id}\nkind: ${item.kind}\nstatus: draft\ndomain: mathematics\nlibrary: mathematics\ndeps: []\n---\n## Statement\n\n${item.statement}\n`);
+  for(const args of [['add','.'],['commit','-qm','Exact native authored source baseline before mirror adoption']])assert.equal(spawnSync('git',args,{cwd:f.root}).status,0);
   const sourceItem={statement:'Actual complete approved clarification.',sources:{references:[{title:'Actual author fixture reference',url:'https://example.invalid/full-text'}]}};
-  const base=f.json(f.authorization).base_commit,changes=[];
+  const base=spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim(),changes=[];
   for(const [path,list,prefix] of [[manifest,pages,''],['research/plan-spec.json',plan.pages,'pages/']]){
     const index=list.findIndex(page=>page.items.some(item=>item.id===id)),row=list[index].items[0];
     for(const field of ['statement','sources']){changes.push({path,pointer:`/${prefix}${index}/items/0/${field}`,before_sha256:repairValueDigest(row[field]),after_sha256:repairValueDigest(sourceItem[field])});row[field]=sourceItem[field];}
@@ -390,6 +392,39 @@ test('native terminal escalation retains edit ownership and collects into hold, 
     if(mode==='failed'){const path=`research/${run}-dispatch/scope-repairer-scope-repair-3-1.result.json`,result=f.json(path);result.ok=false;result.exit_code=1;f.put(path,result);}
     else rmSync(join(f.root,`${f.dir}/repair-1.json`));
     assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/repair result invalid|ENOENT/);
+  }
+});
+
+function acceptedPublicMirrorFixture(t){
+  const f=lifecycleFixture(t),ctx={repo:f.root,run,dispatchDir:join(f.root,`research/${run}-dispatch`)};
+  const statement='Equivalent complete public section after the native scoped repair.';f.put(f.source,f.read(f.source).replace('Actual complete approved clarification.',statement));f.finish();collectBatch(ctx,'3');
+  const final=batchPlan(ctx,'3');assert.equal(final.role,'scope-reviewer');
+  const inventory=f.json(`${f.dir}/state.json`).prepared.inventory;
+  f.put(`${f.dir}/review-1.json`,{version:1,run,batch:'3',round:1,decision:'accept',reviewed_items:inventory.items,reviewed_pages:inventory.pages,findings:[],consumer_checks:[]});
+  f.put(`research/${run}-dispatch/scope-reviewer-scope-review-3-1.result.json`,{run,role:'scope-reviewer',label:'scope-review-3-1',covers:['3'],ok:true,exit_code:0});collectBatch(ctx,'3');assert.equal(accepted(f.root,run,'3'),true);
+  for(const path of [f.manifest,'research/plan-spec.json']){const doc=f.json(path),pages=Array.isArray(doc)?doc:doc.pages;pages.flatMap(page=>page.items).find(item=>item.id===f.id).statement=statement;f.put(path,doc);}
+  return f;
+}
+
+test('accepted new-owned public mirrors replay against sealed metadata without rewriting admission evidence',t=>{
+  const f=acceptedPublicMirrorFixture(t),evidence=f.read(authoredMetadataPath(run,1)),completion=f.read(repairPaths(run,1).completion);
+  checkOwnerAdditions(f.root,run,'1');checkedRepairOverlay(f.root,run,f.entry);
+  assert.equal(f.read(authoredMetadataPath(run,1)),evidence);assert.equal(f.read(repairPaths(run,1).completion),completion);
+});
+
+test('public mirror exception rejects old rows, identity, deps, unrelated metadata and non-source text',t=>{
+  for(const mode of ['old','identity','deps','other','text','unaccepted']){
+    const f=acceptedPublicMirrorFixture(t);
+    if(mode==='unaccepted'){const loop=f.json(`${f.dir}/state.json`);loop.phase='review';f.put(`${f.dir}/state.json`,loop);}
+    else {const plan=f.json('research/plan-spec.json'),row=plan.pages.flatMap(page=>page.items).find(item=>item.id===f.id);
+      if(mode==='old')plan.pages[0].items[0].statement='Altered old-row claim.';
+      if(mode==='identity')row.title='Unadmitted new title';
+      if(mode==='deps')row.deps=['lem-original-two'];
+      if(mode==='other')plan.note='Unrelated global plan edit';
+      if(mode==='text')row.statement='A claim absent from the current source';
+      f.put('research/plan-spec.json',plan);
+    }
+    assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/metadata|mirror|source|plan/);
   }
 });
 

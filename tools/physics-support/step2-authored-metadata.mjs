@@ -31,7 +31,8 @@ function validate(root,run,entry,req,{replay=false,lifecycle=null}={}){
     const key=`${change.path}#${change.pointer}`;p.assert(!unique.has(key)&&metadataPaths.includes(change.path),'duplicate/unowned authored metadata pointer');unique.add(key);
     const before=selection(root,change.path,change.pointer,baseline),after=selection(root,change.path,change.pointer),source=readItem(p.file(root,`items/${before.row.id}.md`));
     const expected=after.field==='statement'?repairPublicSection(source.raw):source[after.field];
-    p.assert(ids.has(before.row.id)&&after.row.id===before.row.id&&repairValueDigest(before.value)===change.before_sha256&&repairValueDigest(after.value)===change.after_sha256&&(p.same(after.value,expected)||lifecycle?.owns(`items/${before.row.id}.md`)),'authored pointer must exactly mirror current selected source');
+    const publicMirror=repairValueDigest(after.value)!==change.after_sha256&&after.field==='statement'&&lifecycle?.accepted(`items/${before.row.id}.md`)&&p.same(after.value,expected)&&repairValueDigest(p.admittedStatement(root,baseline,before.row.id,lifecycle))===change.after_sha256;
+    p.assert(ids.has(before.row.id)&&after.row.id===before.row.id&&repairValueDigest(before.value)===change.before_sha256&&(repairValueDigest(after.value)===change.after_sha256||publicMirror)&&(p.same(after.value,expected)||lifecycle?.owns(`items/${before.row.id}.md`)),'authored pointer must exactly mirror current selected source');
   }
   for(const path of metadataPaths){
     const beforeRaw=p.gitSource(root,baseline,path),before=JSON.parse(beforeRaw),after=p.json(root,path);

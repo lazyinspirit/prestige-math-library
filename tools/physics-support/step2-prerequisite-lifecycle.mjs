@@ -58,7 +58,9 @@ export function nativePrerequisiteLifecycle(root,run,entry){
     cached.set(path,true);return true;
   };
   // Only immutable history is bindable input; mutable state/events are read for lineage.
-  return {historyPath,atAdmission,bind,owns,fingerprint:p.hash(JSON.stringify({stage,closed,attempt,sha256,authorization:events[authorized],results,green:events[green],clear:events[clear]}))};
+  const accepted=path=>{const page=pages.find(page=>entry.batches.includes(page.batch)&&page.items.some(item=>path===`items/${item.id}.md`));return Boolean(page&&owns(path)&&p.json(root,`research/${run}-scope-review/batch-${page.batch}/state.json`).phase==='accepted');};
+  const manifestAtAdmission=id=>snapshot.items.find(row=>row.id===id)?.manifestSha256;
+  return {historyPath,atAdmission,bind,owns,accepted,manifestAtAdmission,fingerprint:p.hash(JSON.stringify({stage,closed,attempt,sha256,authorization:events[authorized],results,green:events[green],clear:events[clear]}))};
 }
 
 /** Bind stable native lineage, never whole driver state or mutable event files. */

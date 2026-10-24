@@ -365,3 +365,13 @@ immutable owner-history file, assignment/task/report/result inputs and a stable
 derived pass/dispatch/collection fingerprint. It never binds the whole mutable
 driver state or events file; appended reports and an incomplete trailing append
 do not invalidate the already completed historical event fragment.
+
+
+After actual native batch acceptance, Root may synchronize only new-owned public
+`statement` mirrors to the exact current canonical public section. Existing
+admissions remain immutable: replay reconstructs only those fields in memory
+from Git source blobs authenticated by the passed construction snapshot, checks
+each reconstructed item against its snapshot manifest hash and the entire raw
+metadata document against the sealed completion hash. Identity, dependencies,
+other fields, old rows and old source/page protections remain unchanged. This is
+an existing-guard comparison, not another admission or receipt workflow.
