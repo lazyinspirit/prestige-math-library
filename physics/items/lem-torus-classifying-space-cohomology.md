@@ -49,7 +49,7 @@ landmark: false
 
 ## Statement
 
-Assume the Axiom of Choice. Let $r\geq0$, let
+Assume the Axiom of Choice. Let $r$ be a nonnegative integer, let
 $T=(\mathbb R/\mathbb Z)^r$, and fix its displayed product decomposition. For
 each factor use the standard quotient Lie-group smooth structure and
 period-one tangent basis. Identify $\mathbb R/\mathbb Z$ with the
@@ -83,7 +83,7 @@ linear generators assigned degree two. For $r=0$, both rings are $\mathbb R$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, $r\geq0$, the chosen product presentation of $T$, and the product Milnor model specified in the statement.
+**Given:** The Axiom of Choice, a nonnegative integer $r$, the chosen product presentation of $T$, and the product Milnor model specified in the statement.
 
 [A1] Assume AC. It supplies the exact arbitrary-family choice premise required by the cited projective-space, universal-coefficient, and Künneth results. [[def-axiom-of-choice]]
 

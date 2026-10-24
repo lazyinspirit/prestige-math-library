@@ -81,7 +81,7 @@ landmark: false
 
 ## Definition
 
-Let $T=(\mathbb R/\mathbb Z)^r$ be a compact torus with its standard product Lie-group smooth structure and period-one basis, and let $M$ be a smooth manifold without boundary, not assumed compact, with a smooth left action $a:T\times M\to M$. Work over $\mathbb R$ and use the chosen product Milnor model $ET=(E_{S^1})^r$ and $BT=ET/T$ from the preceding coefficient lemma. Give $ET\times M$ the right diagonal action $(e,p)\cdot t=(e\cdot t,t^{-1}\cdot p)$ and define
+For a nonnegative integer $r$, let $T=(\mathbb R/\mathbb Z)^r$ be a compact torus with its standard product Lie-group smooth structure and period-one basis, and let $M$ be a smooth manifold without boundary, not assumed compact, with a smooth left action $a:T\times M\to M$. Work over $\mathbb R$ and use the chosen product Milnor model $ET=(E_{S^1})^r$ and $BT=ET/T$ from the preceding coefficient lemma. Give $ET\times M$ the right diagonal action $(e,p)\cdot t=(e\cdot t,t^{-1}\cdot p)$ and define
 $$ET\times_T M:=(ET\times M)/T.$$
 The **Borel equivariant cohomology** is the graded ring
 $$H_T^*(M;\mathbb R):=H_{\mathrm{sing}}^*(ET\times_T M;\mathbb R).$$
@@ -153,7 +153,7 @@ This definition does not assert a general isomorphism between the Borel and Cart
 
 ## Facts & Assumptions
 
-**Given:** AC, $r\geq0$, the fixed product torus presentation, the smooth manifold $M$, and its smooth left $T$-action.
+**Given:** AC, a nonnegative integer $r$, the fixed product torus presentation, the smooth manifold $M$, and its smooth left $T$-action.
 
 [A1] Assume the full Axiom of Choice, as required by the coefficient calculation. [[def-axiom-of-choice]]
 
@@ -211,4 +211,4 @@ The first term is zero by [F8]. The last sum is zero because $u_i u_j=u_j u_i$ w
 
 3.1 Put $\phi_s=a_{\exp(-s e_i)}$. The local torus definition [F18] identifies $\exp(-s e_i)$ with the coordinate one-parameter subgroup, so the group law gives $\phi_{s+h}=\phi_s\circ\phi_h$. Differentiating at $h=0$ gives $\frac{d}{ds}\phi_s(p)=(d\phi_s)_pX_{e_i}(p)=X_{e_i}(\phi_s(p))$ by step 2.1. Thus $\phi_s$ is the flow of $X_{e_i}$. For an invariant form $\alpha$, $\phi_s^*\alpha=\alpha$ for every $s$; differentiating at zero and using [F10] gives $\mathcal L_{X_{e_i}}\alpha=0$. Substitution in step 2.2 proves $d_T^2\alpha=0$ on $C_T(M)$. [F3, F10, F18, step 2.1, step 2.2]
 
-4.1 If $r=0$, the sum in $d_T$ is empty and $d_T=d$, whose square is zero by [F8]. If the action is trivial, every $X_{e_i}=0$ and again $d_T=d$ on invariant forms. If $M=\varnothing$, both the form complex and the Borel construction are empty, and [F19] makes its singular cohomology zero. No compactness of $M$, symplectic form, or Hamiltonian hypothesis was used. [F2, F3, F5, F8, F19, step 3.1] ∎
+4.1 If $r=0$, the sum in $d_T$ is empty and $d_T=d$, whose square is zero by [F8]. If the action is trivial, every $X_{e_i}=0$ and again $d_T=d$ on invariant forms. If $M=\varnothing$, the form complex is the zero complex and the Borel construction is the empty space, whose singular cohomology is zero by [F19]. No compactness of $M$, symplectic form, or Hamiltonian hypothesis was used. [F2, F3, F5, F8, F19, step 3.1] ∎

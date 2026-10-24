@@ -51,7 +51,7 @@ Take one chiral superfield $\Phi$ with mass dimension one and tree superpotentia
 
 [F1] [[def-qftx-wilsonian-n1-action-data]]: the chiral superfield has a holomorphic F-term integrand and a real quadratic kinetic term in the Wilsonian D-term data; real-spurion selection is interpreted in its coefficientwise formal background-jet algebra before evaluating constant backgrounds.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, the remaining holomorphic integrand $F_{\mathrm{rem}}$ is unchanged after collecting matter-independent quadratic gauge-kinetic terms. In this ungauged Wess–Zumino example, $F_{\mathrm{rem}}=W_0$.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, every positive-field-degree coefficient of the remaining holomorphic integrand is unchanged after collecting matter-independent quadratic gauge-kinetic terms. Equality of its numerical constant additionally uses the supplier's fixed-representative convention; it is not needed for the coefficients $m,y$. In this ungauged Wess–Zumino example the ultraviolet remainder is $W_0$.
 
 [A1] The single-field model has no gauge interactions; it is the trivial-gauge-group specialization of the stated action data.
 

@@ -43,7 +43,7 @@ sources:
         supersymmetry and combined gauge-fixed Q-complex; Section 1, printed
         p. 4 (PDF p. 4), unnumbered paragraph between equations (1.5) and
         (1.6), for the assumed, unconstructed noncommutative S4 regulator."
-    - title: "Vasilis Peelaers, 4d N=2 Localization lecture notes"
+    - title: "Wolfger Peelaers (lectures), Bruno Le Floch (notes), 4d N=2 Localization"
       url: "https://indico.math.cnrs.fr/event/3026/attachments/2163/2457/Peelaers-Lec\
         tureNotes.pdf"
       locator: "Section 1.1, equations (19)–(23), and Section 1.2, equations

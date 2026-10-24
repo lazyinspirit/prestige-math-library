@@ -26,7 +26,7 @@ sources:
   references:
   - title: N. Seiberg and E. Witten, Electric-Magnetic Duality, Monopole Condensation, and Confinement in N=2 Supersymmetric Yang-Mills Theory
     url: https://arxiv.org/pdf/hep-th/9407087v1
-    locator: '§4.7, §§5.1–5.6 and §6, printed pp. 22–39, especially the nonzero linear period behavior near the monopole point and equations (5.7)–(5.21), (6.1), (6.6), and (6.19): local-coordinate assumption, singularity proposal, local monopole action, curve, differential, and period data.'
+    locator: '§5.7, §§5.1–5.6 and §6, printed pp. 22–39, especially the nonzero linear period behavior near the monopole point and equations (5.7)–(5.21), (6.1), (6.6), and (6.19): local-coordinate assumption in §5.7, printed p. 33, singularity proposal, local monopole action, curve, differential, and period data.'
   - title: Adel Bilal, Duality in N=2 SUSY SU(2) Yang-Mills Theory
     url: https://arxiv.org/pdf/hep-th/9601007v1
     locator: '§§5.3 and 6.1–6.2, printed pp. 20–29: strong-coupling monopole/dyon singularities and the curve/period solution; the notes identify the construction as a review of the Seiberg–Witten proposal.'
@@ -113,7 +113,7 @@ matter contents, or N=2 theories.
 
 ## Postulate references
 
-[Seiberg and Witten, §4.7, §§5.1–5.6 and §6](https://arxiv.org/pdf/hep-th/9407087v1).
+[Seiberg and Witten, §5.7, §§5.1–5.6 and §6](https://arxiv.org/pdf/hep-th/9407087v1).
 
 [Bilal, §§5.3 and 6.1–6.2](https://arxiv.org/pdf/hep-th/9601007v1).
 

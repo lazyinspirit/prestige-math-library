@@ -38,7 +38,7 @@ sources:
     - title: "Albert Schwarz and Oleg Zaboronsky, Supersymmetry and localization"
       url: "https://arxiv.org/pdf/hep-th/9511112"
       locator: "Section 3, PDF pp. 4–7, for the compact finite-dimensional supermanifold and divergence-free Q hypotheses; its fixed-locus theorem is not imported as this proof."
-    - title: "Vasilis Peelaers, 4d N=2 Localization lecture notes"
+    - title: "Wolfger Peelaers (lectures), Bruno Le Floch (notes), 4d N=2 Localization"
       url: "https://indico.math.cnrs.fr/event/3026/attachments/2163/2457/Peelaers-LectureNotes.pdf"
       locator: "Section 1.1–1.2, PDF pp. 3–4, for the 4D supersymmetry background and the stated measure/off-shell assumptions; no continuum Ward proof is taken from the notes."
 physical_scope: "A conditional deduction for a fixed gauge-bundle sector of the source-qualified Euclidean N=4 SU(2) model on the round S4, only after a separately supplied finite-dimensional Q-preserving regulator satisfies the stated hypotheses. It proves neither that such a regulator exists for the source's formal S4 construction nor a continuum measure, t-to-infinity saddle limit, regulator-removal theorem, or empirical claim."

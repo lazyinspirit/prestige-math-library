@@ -112,7 +112,7 @@ regime and the distinct generic, exact-critical and explicitly additional exact-
 
 [F1] [[def-qftx-n2-monopole-local-dual-higgs-model]]: $W_\mu=\sqrt2 A_D M\widetilde M+\mu u(A_D)$, $D=g_D(|M|^2-|\widetilde M|^2)$, the scalar potential is $g_D^2|\partial_{A_D}W|^2+|\partial_MW|^2+|\partial_{\widetilde M}W|^2+D^2/2$ with positive weights, and the dual charges are $+1,-1$.
 
-[F2] [[def-qftx-susy-vacuum-moduli-data]]: in the canonical scalar model a supersymmetric vacuum is exactly an orbit of simultaneous zeros of all F and D maps under the compact gauge group.
+[F2] [[def-qftx-susy-vacuum-moduli-data]]: in its global polynomial canonical model, classical vacua are simultaneous F/D zeros modulo the compact gauge group. Here only that compact-orbit convention is retained; [F1] separately supplies the local holomorphic potential and its positive coefficients.
 
 [F3] [[def-qftx-n2-dual-higgs-flux-tube-sector]]: a nonzero-winding tube profile is a smooth finite-energy static configuration whose phase winding and asymptotic gauge condition define its dual magnetic/original electric flux and transverse tension.
 
@@ -135,9 +135,7 @@ chosen neighborhood.
 1.1 The pure ultraviolet input [A1] has no microscopic matter; [A2] separately supplies the emergent monopole fields. Use the exact constant-metric local data [F1]. Differentiating its superpotential gives
 $\partial_{A_D}W_\mu=\sqrt2M\widetilde M+\mu u'(A_D)$,
 $\partial_MW_\mu=\sqrt2A_D\widetilde M$, and
-$\partial_{\widetilde M}W_\mu=\sqrt2A_DM$. Rescale the neutral scalar to its canonical coordinate $A_D/g_D$; because $g_D>0$, the zero set of all holomorphic derivatives is unchanged. By [F2] and positivity of every coefficient in [F1], a supersymmetric
-vacuum of this potential must set all three derivatives and
-$D=g_D(|M|^2-|\widetilde M|^2)$ equal to zero. [A1, A2, F1, F2, given, algebra]
+$\partial_{\widetilde M}W_\mu=\sqrt2A_DM$. Every summand in the explicitly supplied potential [F1] is nonnegative and its weight is strictly positive because $g_D>0$. Thus this potential vanishes if and only if all three displayed derivatives and $D=g_D(|M|^2-|\widetilde M|^2)$ vanish. These are the local model's F/D vacuum equations; take their zero set modulo $U(1)_D$ using only the compact-orbit convention in [F2]. No global polynomial hypothesis on $u$ is needed. [A1, A2, F1, F2, given, algebra]
 
 2.1 If $A_D\ne0$, the second and third equations in step 1.1 force
 $M=\widetilde M=0$, after which the first equation is

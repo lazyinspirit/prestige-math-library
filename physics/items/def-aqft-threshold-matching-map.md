@@ -41,11 +41,11 @@ Use natural units $c=\hbar=1$ and Minkowski signature $\eta=\operatorname{diag}(
 
 For each sign $\sigma\in\{+,-\}$, supply a finite coefficient-coordinate space $\mathbb C^{N_\sigma}$ with $N_\sigma\ge1$, a declared ordered operator basis and power-counting truncation, and a renormalization-scheme coordinate map. Any identification of the Wilsonian coefficient data at $\mu_W$ with these scheme coordinates is supplied input; this definition does not identify $\mu_W$ with $\mu$. The vector $C_\sigma(t)\in\mathbb C^{N_\sigma}$ is the column of dimensionless Wilson coefficients in that basis. The corresponding finite-order operator expression uses the supplied convention $C_{\sigma,i}O_{\sigma,i}/\Lambda_{\mathrm{op},\sigma}^{d_i-4}$, with each $O_{\sigma,i}$ of engineering dimension $d_i$ and $\Lambda_{\mathrm{op},\sigma}>0$ the coefficient-suppression scale for that theory, denoted $\Lambda_{\mathrm{op}}$ in its physical operator contract and $\Lambda$ in the generic scheme convention. It is distinct from $\Lambda_{\mathrm{reg}}$, $M$, $E_{\mathrm{ext}}$, $\mu_W$, and $\mu$ unless additional model data identify some of them. Write $\rho_{N_\sigma}$ for the realification that lists the real and imaginary parts of each coefficient. A supplied RG vector field is a continuous map $\beta_\sigma:\Omega_\sigma\to\mathbb R^{2N_\sigma}$ on a supplied open domain $\Omega_\sigma\subset I\times\mathbb R^{2N_\sigma}$; an RG trajectory satisfies
 $$\frac{d}{dt}\rho_{N_\sigma}(C_\sigma(t))=\beta_\sigma(t,\rho_{N_\sigma}(C_\sigma(t))).$$
-For each sign, the physical operator datum is an instance of the selected physical EFT operator contract. It specifies finitely many field species and jet generators, finite-dimensional graded field spaces, smooth field domains and regularity, reality data, and rational engineering weights. Even fields are smooth maps; odd components take values in a fixed Grassmann algebra with smooth coefficient functions.
+For each sign, the physical operator datum is an instance of the selected physical EFT operator contract. It specifies finitely many field species and jet generators, finite-dimensional graded field spaces, smooth field domains and regularity, reality data, and rational engineering weights. For a chosen right principal bundle $P\to M$ and gauge representation $\rho_i$ on the component space $\Phi_i$, fields are smooth sections of $E_i=P\times_{\rho_i}\Phi_i$, with coefficients of the appropriate parity in the supplied finite Grassmann algebra. Here $[pg,v]=[p,\rho_i(g)v]$; if local principal sections obey $s_\beta=s_\alpha g_{\alpha\beta}$, the field components obey $\psi_{i,\beta}=\rho_i(g_{\alpha\beta}^{-1})\psi_{i,\alpha}$. Smooth maps on all of $M$ describe these sections only after a global trivialization is chosen; with no gauge sector use $E_i=M\times\Phi_i$.
 
-The Lorentz action is that of the proper orthochronous group
+Select the proper orthochronous Lorentz group
 $SO^+(1,3)=\{L\in GL_4(\mathbb R):L^T\eta L=\eta,\ \det L=1,\ L^0{}_0\ge1\}$,
-and each Lagrangian density is a Lorentz scalar. The datum gives the full gauge
+or its spin double cover $\mathcal L=SL(2,\mathbb C)$ with projection $p:\mathcal L\to SO^+(1,3)$ and kernel $\{I,-I\}$ from the physical operator contract. In its convention $X(p(a)x)=aX(x)a^\dagger$, where $X(x)=\begin{pmatrix}x^0+x^3&x^1-ix^2\\x^1+ix^2&x^0-x^3\end{pmatrix}$. Specify the parity-preserving component representations of the selected group; spacetime and derivative indices transform through $p$ and its dual (with $p=\operatorname{id}$ in the tensor-only choice), and require each Lagrangian density to be a scalar. A global action on gauge-bundle sections additionally requires chosen lifts covering the spacetime action. The datum gives the full gauge
 and flavor actions on fields, indices, and spurions. A spurion is a fixed
 non-dynamical parameter used to record a declared symmetry-breaking insertion;
 absent flavor symmetry is recorded as trivial, and broken symmetry requires
@@ -53,7 +53,7 @@ its spurions and weights.
 
 The datum fixes finite derivative, field-degree, dimension, and loop cutoffs,
 the relation subspace and representatives, and a complex reductive affine
-algebraic group with maps relating its representations to the physical gauge
+algebraic group with maps relating its representations to the selected Lorentz, physical gauge
 and flavor groups. Here reductive means there is no nontrivial closed normal
 unipotent subgroup; unipotent means every nonzero finite-dimensional rational
 module has a nonzero fixed vector. On each retained jet space the data either

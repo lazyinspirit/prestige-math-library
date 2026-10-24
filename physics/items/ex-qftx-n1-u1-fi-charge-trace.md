@@ -34,7 +34,7 @@ verification:
 
 ## Example
 
-Take one unbroken compact U(1) gauge factor with two left-chiral superfields of charges $+1$ and $-1$, one of each and no additional multiplicities. Use the canonical matter kinetic term, a positive field-independent quadratic U(1) gauge-kinetic coefficient, and no nonkinetic holomorphic interaction ($F_{\mathrm{rem}}=0$). Let the only additional real D-term be the bare field-independent Fayet–Iliopoulos term $\xi\int d^4x\,[V_1]_D$, and use a formal perturbative Wilsonian regulator satisfying the theorem at scale $\lambda>0$. Then the perturbative Wilsonian coefficient satisfies $\xi_\lambda=\xi$ at every loop order: the one-loop correction cancels by the charge sum, and the theorem excludes higher-loop corrections. Other real D-term couplings, if added, are not protected by this conclusion.
+Take one unbroken compact U(1) gauge factor with two left-chiral superfields of charges $+1$ and $-1$, one of each and no additional multiplicities. Use the canonical matter kinetic term, a positive field-independent quadratic U(1) gauge-kinetic coefficient, and no nonkinetic holomorphic interaction ($F_{\mathrm{rem}}=0$). Let the only additional real D-term be the bare field-independent Fayet–Iliopoulos term $\xi\int d^4x\,[V_1]_D$, and use a formal perturbative Wilsonian regulator satisfying the theorem at scale $\lambda>0$. Keep the bare FI coefficient $\xi$ fixed as a real number rather than promoting it to an unconstrained background. At zero mass and interaction spurions require the same regulated free momentum kernel and one-vector insertion for both matter components, tensored with their representation identities; only their charge signs differ. Use the theorem's ultraviolet-matched graph prescription with no independent finite FI shifts. Then the perturbative Wilsonian coefficient satisfies $\xi_\lambda=\xi$ at every loop order: the one-loop correction cancels by the charge sum, and the theorem excludes higher-loop corrections. Other real D-term couplings, if added, are not protected by this conclusion.
 
 ## Example references
 
@@ -46,11 +46,11 @@ Take one unbroken compact U(1) gauge factor with two left-chiral superfields of 
 
 [F1] [[def-qftx-wilsonian-n1-action-data]]: for a U(1) factor, $V_1$ is a real Abelian prepotential and a constant coefficient $\xi$ defines the Fayet–Iliopoulos D-term; its group is the compact matrix group $U(1)$ with Lie algebra $i\mathbb R$ and the stated period-$2\pi$ charge normalization.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, the perturbative FI correction is one-loop only, is proportional to the sum of all left-chiral U(1) charges, and vanishes when this sum is zero.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, and its fixed-FI promotion exception, common matter-kernel and ultraviolet-matched graph prescription without independent finite FI shifts, the perturbative FI correction is one-loop only, is proportional to the sum of all left-chiral U(1) charges, and vanishes when this sum is zero.
 
 [A1] The two multiplets have charges $q_+=1$ and $q_-=-1$, each with multiplicity one.
 
-[A2] The U(1) background is unbroken, $F_{\mathrm{rem}}=0$, the real D-term contains only the bare FI term, and the regulator and measure preserve the gauge and rigid N=1 Ward identities.
+[A2] The U(1) background is unbroken, $F_{\mathrm{rem}}=0$, the real D-term contains only the bare FI term, and the regulator and measure preserve the gauge and rigid N=1 Ward identities. The bare FI coefficient is not promoted, and both charged components use the common free kernel and one-vector insertion at zero interaction spurions, with ultraviolet matching and no independent finite FI shifts as specified in the Example.
 
 ## Verification
 

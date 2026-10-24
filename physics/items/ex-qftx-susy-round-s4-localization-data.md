@@ -31,7 +31,7 @@ sources:
     - title: "Vasily Pestun, Localization of Gauge Theory on a Four-Sphere and Supersymmetric Wilson Loops"
       url: "https://arxiv.org/pdf/0712.2824"
       locator: "§2, equations (2.5)–(2.14), (2.26)–(2.30); §4.1–§4.3, equations (4.1)–(4.15); Appendix C, equations (C.1)–(C.17)."
-    - title: "Vasilis Peelaers, 4d N=2 Localization lecture notes"
+    - title: "Wolfger Peelaers (lectures), Bruno Le Floch (notes), 4d N=2 Localization"
       url: "https://indico.math.cnrs.fr/event/3026/attachments/2163/2457/Peelaers-LectureNotes.pdf"
       locator: "§1.1–§1.2, equations (19)–(26), PDF pp. 3–4; the notes state measure and off-shell assumptions rather than proving the continuum localization step."
 physical_scope: "Conditional illustration of the source's N=4 localization supercharge on the round Euclidean S4 and the separate finite-dimensional circle action on its base; it asserts no continuum field-space measure or localization theorem."
