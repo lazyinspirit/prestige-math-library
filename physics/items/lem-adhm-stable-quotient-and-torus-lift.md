@@ -42,12 +42,12 @@ sources:
     - title: "John M. Lee, Introduction to Smooth Manifolds, second edition"
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
 verification:
-  precheck: pending
+  precheck: pass
 ---
 
 ## Statement
 
-Assume AC. Fix $N\ge1$, $k\ge0$, $V=\mathbb C^k$ and $W=\mathbb C^N$ with their standard bases. Let $X$ be the stable locus in the complex ADHM equation $[B_1,B_2]+IJ=0$, where $B_i\in\operatorname{End}(V)$, $I:W\to V$, $J:V\to W$, and stability means that the vectors $B_{i_1}\cdots B_{i_m}I(w)$ span $V$. The action $g\cdot(B_1,B_2,I,J)=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$ of $GL(V)$ on $X$ is free and proper. Its orbit quotient with quotient topology is a Hausdorff second-countable complex manifold of complex dimension $2kN$, with tangent space $\ker d_1/\operatorname{im}d_0$ for the infinitesimal ADHM deformation maps.
+Assume AC. Fix $N\ge1$, $k\ge0$, $V=\mathbb C^k$ and $W=\mathbb C^N$ with their standard bases. Let $X$ be the stable locus in the complex ADHM equation $[B_1,B_2]+IJ=0$, where $B_i\in\operatorname{End}(V)$, $I:W\to V$, $J:V\to W$, and stability means that the vectors $B_{i_1}\cdots B_{i_m}I(w)$ span $V$. At a datum $x=(B_1,B_2,I,J)$, put $C^0=C^2=\operatorname{End}_{\mathbb C}(V)$ and $C^1=\operatorname{End}_{\mathbb C}(V)^2\oplus\operatorname{Hom}_{\mathbb C}(W,V)\oplus\operatorname{Hom}_{\mathbb C}(V,W)$. Define $d_0:C^0\to C^1$ by $d_0(\xi)=([\xi,B_1],[\xi,B_2],\xi I,-J\xi)$ and $d_1:C^1\to C^2$ by $d_1(\dot B_1,\dot B_2,\dot I,\dot J)=[\dot B_1,B_2]+[B_1,\dot B_2]+\dot I J+I\dot J$. These are the infinitesimal ADHM deformation maps at $x$. The action $g\cdot(B_1,B_2,I,J)=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$ of $GL(V)$ on $X$ is free and proper. Its orbit quotient with quotient topology is a Hausdorff second-countable complex manifold of complex dimension $2kN$, with tangent space $\ker d_1/\operatorname{im}d_0$ for the infinitesimal ADHM deformation maps.
 
 For $k>0$, a word frame $C(x)$ is a matrix whose columns are $k$ fixed words in $B_1,B_2$ applied to fixed standard framing basis vectors. The opens $U_C=\{x:\det C(x)\ne0\}$ cover $X$; words of length at most $k-1$ suffice. Each slice $S_C=\{x\in U_C:C(x)=I_V\}$ gives quotient coordinates, with $GL(V)\times S_C\to U_C$ a biholomorphism. Slice changes are holomorphic, in fact given by matrix inversion and polynomial operations on their domains. The quotient is also a separated smooth finite-type complex algebraic variety with a finite $T$-invariant affine atlas of these slices, and the map from $X$ is a geometric quotient in the regular-function sense.
 

@@ -40,7 +40,7 @@ sources:
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Chapter 7, pp. 49–56; bundle and homotopy framework."
 verification:
-  precheck: pending
+  precheck: pass
 ---
 ## Statement
 
@@ -68,9 +68,9 @@ Let $X$ be a compact finite-dimensional smooth manifold, $K\subseteq X$ a closed
 
 1.1 If $X$ is empty, take the unique empty family. If $M$ is empty, its bundle has the unique empty smooth section, and take the unique family of those sections. In either case all agreement constraints and the straight-line homotopy hold vacuously, and the displayed error is $\sup\{0\}=0$. We may therefore assume $X$ and $M$ nonempty. Choose a finite bundle atlas and a subordinate finite smooth partition of unity using compactness and [F1, F2]. In each chart multiply a section coefficient by its partition function, extend by zero within the chart, convolve with a fixed compactly supported smooth mollifier of radius $\delta$, and sum the finitely many resulting local sections. For each $\delta>0$ this defines a linear operator $S_\delta:C^0(M,E)\to\Gamma^\infty(E)$: every output derivative is an integral of the input against a derivative of a fixed smooth kernel, so each $C^r$ seminorm is bounded by a finite constant times the input $C^0$ norm. Uniform continuity of each input on compact chart supports gives $\|S_\delta u-u\|_{C^0}\to0$ for every $u$. Since $x\mapsto s(x,\cdot)$ has compact image in $C^0(M,E)$, a finite subcover argument makes this convergence uniform over $x\in X$. [given, F1, F2, given, construct]
 
-2.1 The family $x\mapsto S_\delta s(x,\cdot)$ is continuous into $C^\infty$ by the seminorm bounds in step 1.1. On a collar $c:K\times[0,2a)\to X$, write $r(c(k,t))=k$ and choose a continuous cutoff $\chi$ equal to $1$ at $t=0$ and supported in $t<a$. Set
+2.1 The family $x\mapsto S_\delta s(x,\cdot)$ is continuous into $C^\infty$ by the seminorm bounds in step 1.1. Let $U$ be the chosen collar neighborhood of $K$, with projection $r:U\to K$, and choose a continuous cutoff $\chi:X\to[0,1]$ equal to $1$ on $K$ and supported inside $U$. For an interior hypersurface use the two-sided collar $c:K\times(-2a,2a)\to U$, $r(c(k,t))=k$, with $\chi$ supported in $|t|<a$; no boundary of $X$ is needed. Set
 $$s_1(x)=S_\delta s(x)+\chi(x)\bigl(s(r(x))-S_\delta s(r(x))\bigr)$$
-on the collar and $s_1=S_\delta s$ off it. Every term is a smooth section in $m$ and varies continuously in $C^\infty$ with $x$. At $x\in K$, $s_1(x)=s(x)$. As $x$ approaches $K$, continuity into $C^0$ and the uniform approximation in step 1.1 make the correction uniformly small; choose the collar width and then $\delta$ so $s_1$ remains arbitrarily $C^0$-close to $s$. [given, A1, step 1.1, construct]
+on $U$ and $s_1=S_\delta s$ off $U$. Every term is a smooth section in $m$ and varies continuously in $C^\infty$ with $x$. At $x\in K$, $s_1(x)=s(x)$. As $x$ approaches $K$, continuity into $C^0$ and the uniform approximation in step 1.1 make the correction uniformly small; choose the collar width and then $\delta$ so $s_1$ remains arbitrarily $C^0$-close to $s$. [given, A1, step 1.1, construct]
 
 3.1 For each marked point choose a bundle chart and a smooth bump $b_i$ supported in that chart with $b_i(m_i)=1$; shrink the charts to be pairwise disjoint. In the chart extend $v_i-s_1(x,m_i)$ as the constant coefficient vector and multiply by $b_i$. The resulting correction $c_i(x,\cdot)$ is a smooth section continuous in $x$ in every $C^r$ seminorm, is zero on $K$ because $s_1=s=v_i$ there, and changes the value at $m_i$ by exactly $v_i-s_1(x,m_i)$. Put $\widetilde s=s_1+\sum_i c_i$. The finite corrections preserve $C^\infty$ continuity and the relative condition. Since the errors at the marked points are bounded by the uniform $C^0$ error from step 2.1 and the bumps have fixed bounded norms, choosing that error sufficiently small gives the prescribed $\varepsilon$ bound. [F1, given, step 2.1, construct]
 

@@ -41,13 +41,15 @@ verification:
 
 ## Statement
 
-Let $n,q,d\ge1$ be integers, let $U'\subseteq\mathbb C^{n-1}$ and $D\subseteq\mathbb C$ be polydiscs, let $w$ denote the last coordinate, and let $P_1,\ldots,P_q\in\mathcal O(U')[w]$ be monic Weierstrass polynomials with $1\le\deg_w P_j\le d$. For every $x=(x',w_0)\in U'\times D$, each germ in the relation sheaf of $(P_1,\ldots,P_q)$ at $x$ is an $\mathcal O_{U'\times D,x}$-linear combination of relation germs whose components are polynomials in $w-w_0$ of degree at most $d$ with coefficients in $\mathcal O_{U',x'}$.
+Let $n,q,d\ge1$ be integers, let $U'\subseteq\mathbb C^{n-1}$ and $D\subseteq\mathbb C$ be polydiscs centered at $0$, and let $w$ denote the last coordinate. For $1\le j\le q$, write
+$$P_j(x',w)=w^{e_j}+\sum_{k=0}^{e_j-1}a_{jk}(x')w^k,$$
+where $1\le e_j\le d$, $a_{jk}\in\mathcal O(U')$, and $a_{jk}(0)=0$. For every $x=(x',w_0)\in U'\times D$, each germ in the relation sheaf of $(P_1,\ldots,P_q)$ at $x$ is an $\mathcal O_{U'\times D,x}$-linear combination of relation germs whose components are polynomials in $w-w_0$ of degree at most $d$ with coefficients in $\mathcal O_{U',x'}$.
 
 ## Statement references
 
-[Demailly, Chapter II §3.3, Lemma 3.20, printed/PDF pp. 89–90](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter II §3.3, Lemma 3.20](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
-[Wehler, §4.2, Theorem 4.28 proof, bounded-degree reduction, printed pp. 140–144/PDF pp. 144–148](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
+[Wehler, §4.2, Theorem 4.28 proof, parts iii.2–iii.3 (bounded-degree reduction)](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
 ## Facts & Assumptions
 
@@ -55,7 +57,7 @@ Let $n,q,d\ge1$ be integers, let $U'\subseteq\mathbb C^{n-1}$ and $D\subseteq\ma
 
 [F1] [[def-qftx-analytic-coherent-module]]: a relation germ of $(P_1,\ldots,P_q)$ is a tuple $g=(g_1,\ldots,g_q)$ of holomorphic germs satisfying $\sum_{j=1}^q g_jP_j=0$.
 
-[F2] [[def-weierstrass-polynomial]]: each $P_j$ is monic in $w$, has a positive finite degree, and has holomorphic coefficients on $U'$.
+[F2] [[def-weierstrass-polynomial]]: each $P_j$ has the stated monic polynomial form, with positive finite degree and lower coefficients vanishing at the common center $0$.
 
 [F3] [[thm-weierstrass-preparation-theorem]]: a germ regular in $w$ of order $r$ is a unit times a monic Weierstrass polynomial of degree $r$.
 

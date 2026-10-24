@@ -28,7 +28,7 @@ dependency_roles:
   def-trace-class-operator: mathematical-premise
   def-trace-of-a-trace-class-operator: mathematical-premise
 proof_strategy: not-applicable
-physical_scope: Conditional data definition for electric and magnetic charge labels, second-helicity BPS indices, and marginal-stability chambers in an already specified pure four-dimensional rigid N=2 SU(2) quantum or regulated one-particle model on regular Seiberg–Witten patches; it asserts no state existence, continuum QFT construction, or physical realization of Hall counts.
+physical_scope: Conditional data definition for electric and magnetic charge labels, second-helicity BPS indices, and marginal-stability walls and chambers relative to a supplied wall family in an already specified pure four-dimensional rigid N=2 SU(2) quantum or regulated one-particle model on regular Seiberg–Witten patches; it asserts no state existence, continuum QFT construction, or physical realization of Hall counts.
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -72,7 +72,11 @@ $$\Omega_u(\gamma)=-\frac12\operatorname{tr}_{E_{u,\gamma}}(B_{u,\gamma}),$$
 
 Here $\operatorname{tr}_{E_{u,\gamma}}$ is the absolutely convergent supplied-basis trace of a trace-class operator; basis independence is not needed here. Set $\Omega_u(\gamma)=0$ for $\gamma\notin\Gamma^{\mathrm{st}}_u$. The trace convention uses only $\mathrm{AC}_\omega$ through the stated mathematical suppliers, not full Choice. No existence or local constancy of this support is asserted.
 
-For a chosen locally finite set of nonzero charges whose central charges lie, after one fixed rotation by a real phase $\alpha$, in the open upper half-plane, define $\phi_u(\gamma)=\arg(e^{-i\alpha}z_u(\gamma))/\pi\in(0,1)$. For two charges with nonzero central charges, their marginal-stability wall is the locus in $U$ where $z_u(\gamma)/z_u(\delta)\in\mathbb R_{>0}$; a chamber is a connected component of the regular patch after removing the specified wall loci. A formal positive cone $\Gamma_+\subseteq\Gamma_{\mathrm{SW}}$ used for ordered products contains $0$, is closed under addition, and is pointed ($\Gamma_+\cap(-\Gamma_+)=\{0\}$). It is supplied with an additive degree $\ell:\Gamma_+\to\mathbb N$ that is positive on nonzero charges and has finite sublevel sets, meaning $\{\gamma\in\Gamma_+:\ell(\gamma)\le N\}$ is finite for every $N\in\mathbb N$. The definition is conditional on the existence of the Hilbert sectors, trace data, cone, and degree; it constructs no continuum theory and makes no Hall-index identification.
+Let $\mathcal C\subseteq\Gamma_{\mathrm{SW}}\setminus\{0\}$ be any chosen set of charges, and fix $\alpha\in\mathbb R$. At each $u\in U$ for which $e^{-i\alpha}z_u(\gamma)\in\mathbb H:=\{z\in\mathbb C:\operatorname{Im}z>0\}$ for every $\gamma\in\mathcal C$, define $\phi_u(\gamma)=\arg(e^{-i\alpha}z_u(\gamma))/\pi\in(0,1)$ for $\gamma\in\mathcal C$. For two charges $\gamma,\delta$ with nonzero central charges, define their marginal-stability wall by
+
+$$W_{\gamma,\delta}:=\{u\in U:z_u(\gamma)/z_u(\delta)\in\mathbb R_{>0}\}.$$
+
+Given a specified family $\mathscr W$ of such wall subsets of $U$, a chamber relative to $\mathscr W$ is a connected component of $U\setminus\bigcup_{W\in\mathscr W}W$. A formal positive cone $\Gamma_+\subseteq\Gamma_{\mathrm{SW}}$ used for ordered products contains $0$, is closed under addition, and is pointed ($\Gamma_+\cap(-\Gamma_+)=\{0\}$). It is supplied with an additive degree $\ell:\Gamma_+\to\mathbb N$ that is positive on nonzero charges and has finite sublevel sets, meaning $\{\gamma\in\Gamma_+:\ell(\gamma)\le N\}$ is finite for every $N\in\mathbb N$. The definition is conditional on the existence of the Hilbert sectors, trace data, cone, and degree; it constructs no continuum theory and makes no Hall-index identification.
 
 ## Definition references
 

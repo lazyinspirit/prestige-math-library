@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Arthur Jaffe and Edward Witten, Quantum Yang-Mills Theory, §4, The Problem"
       url: "https://www.claymath.org/library/monographs/MPPc.pdf"
-    - title: "Arthur Jaffe, Constructive Quantum Field Theory, §7.3, For the Millennium: Gauge Theory in Four Dimensions"
+    - title: "Arthur Jaffe, Constructive Quantum Field Theory, §8, PDF p. 14, For the Millennium: Gauge Theory in Four Dimensions"
       url: "https://arthurjaffe.net/Assets/pdf/CQFT.pdf"
 provenance:
   statement: ai-generated
@@ -33,7 +33,7 @@ Let $\mathbb{H}$ be the real quaternion algebra with basis $1,i,j,k$, multiplica
 
 [Arthur Jaffe and Edward Witten, “Quantum Yang-Mills Theory,” §4, “The Problem”](https://www.claymath.org/library/monographs/MPPc.pdf)
 
-[Arthur Jaffe, “Constructive Quantum Field Theory,” §7.3, “For the Millennium: Gauge Theory in Four Dimensions”](https://arthurjaffe.net/Assets/pdf/CQFT.pdf)
+[Arthur Jaffe, “Constructive Quantum Field Theory,” §8, PDF p. 14, “For the Millennium: Gauge Theory in Four Dimensions”](https://arthurjaffe.net/Assets/pdf/CQFT.pdf)
 
 ## Facts & Assumptions
 

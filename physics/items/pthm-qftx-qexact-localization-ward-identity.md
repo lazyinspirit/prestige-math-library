@@ -28,7 +28,7 @@ sources:
   references:
     - title: "Vasily Pestun, Localization of Gauge Theory on a Four-Sphere and Supersymmetric Wilson Loops"
       url: "https://arxiv.org/pdf/0712.2824"
-      locator: "Section 3, equations (3.1)–(3.3), for the Q-exact deformation and Q-square condition; Section 1, equations (1.5)–(1.6), for the explicitly assumed S4 regulator qualification."
+      locator: "Section 3, equations (3.1)–(3.3), for the Q-exact deformation and Q-square condition; Section 1, printed p. 4 (PDF p. 4), unnumbered paragraph between equations (1.5) and (1.6), for the assumed, unconstructed noncommutative S4 regulator and its agreement near the poles with the R4 regulator."
     - title: "Vasily Pestun and Maxim Zabzine, Introduction to localization in quantum field theory"
       url: "https://arxiv.org/pdf/1608.02953"
       locator: "Section 1, PDF pp. 1–3, for the finite-dimensional Q-exact deformation, the separate t→∞ saddle limit, and the formal status of infinite-dimensional extensions."

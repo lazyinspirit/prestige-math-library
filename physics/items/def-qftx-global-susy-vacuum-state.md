@@ -28,7 +28,7 @@ sources:
   references:
     - title: "Stephen P. Martin, A Supersymmetry Primer, version 7"
       url: "https://arxiv.org/pdf/hep-ph/9709356v7"
-      locator: "§6.1, printed pp. 62–64: vacuum states, supercharge invariance, and energy positivity in rigid supersymmetry."
+      locator: "§7.1, printed p. 72, equations (7.1.1)–(7.1.2): the N=1 vacuum-energy sum-of-norms identity and the zero-energy/supersymmetry-invariance relation; the local item fixes the extended-algebra operator-domain formulation."
     - title: "Adel Bilal, Introduction to Supersymmetry"
       url: "https://arxiv.org/pdf/hep-th/0101055"
       locator: "§6.1, printed pp. 35–36: the vacuum energy as a sum of supercharge norms and the supersymmetry-invariant vacuum condition."
@@ -46,7 +46,7 @@ Such a vector is called a **global supersymmetry vacuum state** in the represent
 
 ## Definition references
 
-[Stephen P. Martin, *A Supersymmetry Primer*, §6.1](https://arxiv.org/pdf/hep-ph/9709356v7).
+[Stephen P. Martin, *A Supersymmetry Primer*, §7.1, equations (7.1.1)–(7.1.2)](https://arxiv.org/pdf/hep-ph/9709356v7).
 
 [Adel Bilal, *Introduction to Supersymmetry*, §6.1](https://arxiv.org/pdf/hep-th/0101055).
 

@@ -36,8 +36,9 @@ sources:
     - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An
         Index for 4 Dimensional Super Conformal Theories"
       url: "https://arxiv.org/pdf/hep-th/0510251"
-      locator: "Full 60-page paper; §3, equations (3.1)–(3.4), printed pp. 13–15, for
-        the right/left protected supercharge trace and cancellation framework."
+      locator: "Full 60-page paper; §3.3, equations (3.10)–(3.12), printed pp. 16–17, for
+        the right-handed protected supercharge trace and commuting charges; the
+        local example states its own R-charge convention."
 physical_scope: "A conditional free, ungauged four-dimensional N=1
   protected-letter/Fock trace on unit S3 with the explicit charge and
   convergence data stated here. It is not a continuum construction,
@@ -49,7 +50,13 @@ verification:
 
 ## Example
 
-Assume $\mathrm{AC}_\omega$ and use the right-handed index convention on the unit round $S^3$ from the earlier superconformal-index definition. Take an uncharged free four-dimensional $\mathcal N=1$ chiral model with trivial global gauge group, one complex scalar and one Weyl fermion in its stated chiral multiplet, no spatial boundary, and the directly supplied radial Hilbert/Fock construction; no path-integral measure is asserted. Its protected-letter data consist of one bosonic scalar letter $\phi$ of charges $(E,J_1,J_2,R)=(1,0,0,\tfrac23)$ and one fermionic conjugate Weyl letter $\bar\psi_{\dot +}$ of charges $(\tfrac32,0,\tfrac12,\tfrac13)$. Its protected one-particle space consists exactly of the towers $D_p^mD_q^n\phi$ and $D_p^mD_q^n\bar\psi_{\dot +}$ for $m,n\in\mathbb N$, where the commuting right-index-preserving derivatives $D_p,D_q$ each raise $E$ by $1$ and shift $(J_+,J_-)$ by $(1,0)$ and $(0,1)$, respectively. Assume no additional $\Delta=0$ relations and no gauge projection. The protected multiparticle sector is the symmetric Fock construction with arbitrary finite occupation of each bosonic mode and the exterior Fock construction with zero or one occupation of each fermionic mode; any remaining Hilbert states are positive-gap pairs satisfying the beta-independence theorem, its simultaneous gap/charge eigenbasis and reducing-domain conditions, and its trace-class conditions. For positive fugacities $0<p,q<1$, the single-letter index and full index are
+Assume $\mathrm{AC}_\omega$ and use the right-handed index convention on the unit round $S^3$ from the earlier superconformal-index definition. Take an uncharged free four-dimensional $\mathcal N=1$ chiral model with trivial global gauge group, one complex scalar and one Weyl fermion in its stated chiral multiplet, no spatial boundary, and the directly supplied radial Hilbert-space construction; no path-integral measure is asserted. Its protected-letter data consist of one bosonic scalar letter $\phi$ of charges $(E,J_1,J_2,R)=(1,0,0,\tfrac23)$ and one fermionic conjugate Weyl letter $\bar\psi_{\dot +}$ of charges $(\tfrac32,0,\tfrac12,\tfrac13)$. Its protected one-particle space is specified as follows. Let $\mathbb N_0=\{0,1,2,\ldots\}$. For each $(m,n)\in\mathbb N_0^2$, let $b_{mn}=D_p^mD_q^n\phi$ and $f_{mn}=D_p^mD_q^n\bar\psi_{\dot +}$ be orthonormal basis vectors. The commuting linear mode-shift maps $D_p,D_q$ act on their algebraic span by $D_pb_{mn}=b_{m+1,n}$, $D_pf_{mn}=f_{m+1,n}$, $D_qb_{mn}=b_{m,n+1}$, and $D_qf_{mn}=f_{m,n+1}$. They encode the two protected translation descendants in this specified Hilbert model; no continuum field-operator realization is asserted. Their increments of $(E,J_1,J_2,R)$ are $(1,\tfrac12,\tfrac12,0)$ and $(1,-\tfrac12,\tfrac12,0)$, respectively. The mode charges are
+
+$$
+\begin{aligned}(E,J_1,J_2,R)(b_{mn})&=(1+m+n,\tfrac{m-n}{2},\tfrac{m+n}{2},\tfrac23),\\(E,J_1,J_2,R)(f_{mn})&=(\tfrac32+m+n,\tfrac{m-n}{2},\tfrac{1+m+n}{2},\tfrac13),\\(\Delta,J_+,J_-)(b_{mn})&=(0,m+\tfrac13,n+\tfrac13),\\(\Delta,J_+,J_-)(f_{mn})&=(0,m+\tfrac23,n+\tfrac23).\end{aligned}
+$$
+
+The protected multiparticle Hilbert space is the completion of the span of orthonormal vectors $|r,s\rangle$ indexed by functions $r:\mathbb N_0^2\to\mathbb N_0$ and $s:\mathbb N_0^2\to\{0,1\}$ that vanish outside a finite subset of $\mathbb N_0^2$. Here $r_{mn}$ and $s_{mn}$ are the bosonic and fermionic occupation numbers; the fermion parity is $(-1)^{\sum_{m,n}s_{mn}}$, and the charge eigenvalues on $|r,s\rangle$ are the sums of the corresponding one-particle eigenvalues with multiplicities $r_{mn},s_{mn}$. Each charge is the maximal diagonal operator in this basis. This defines the symmetric bosonic and exterior fermionic Fock constructions and makes this the complete $\ker\Delta$ sector: assume no additional zero-gap states or relations and no gauge projection. Any orthogonal complement in the full radial Hilbert space consists of positive-gap pairs satisfying the beta-independence theorem, its simultaneous gap/charge eigenbasis and reducing-domain conditions, and its trace-class conditions. For positive fugacities $0<p,q<1$, the single-letter index and full index are
 
 $$i_\chi(p,q)=\frac{(pq)^{1/3}-(pq)^{2/3}}{(1-p)(1-q)},\qquad \mathcal I_\chi(p,q)=\prod_{m,n\ge0}\frac{1-(pq)^{2/3}p^mq^n}{1-(pq)^{1/3}p^mq^n},$$
 
@@ -67,7 +74,7 @@ where the double product is the limit of its finite rectangular partial products
 
 [A1] Assume $\mathrm{AC}_\omega$, as required by the Hilbert, basis, and trace suppliers. [[def-countable-choice]]
 
-[A2] The free model supplies exactly the stated protected scalar and fermion towers, with the two indicated $\Delta=0$ derivatives, symmetric/exterior Fock construction, no gauge projection, and no additional $\Delta=0$ relations. Any remaining Hilbert states are positive-gap pairs satisfying the beta-independence theorem, its simultaneous gap/charge eigenbasis and reducing-domain conditions, and its trace-class conditions. This is model input for the example, not a theorem about a general SCFT.
+[A2] The free model supplies the orthonormal one-particle modes and mode-shift maps stated in the Example, together with the finite-support bosonic/fermionic occupation basis, additive charges, and parity. These occupation states exhaust $\ker\Delta$; there is no gauge projection or further zero-gap relation. Any orthogonal complement consists of positive-gap pairs satisfying the beta-independence theorem, its joint eigenbasis/reducing-domain conditions, and its trace-class assumptions. This is exact model input for the example, not a theorem about a general SCFT.
 
 [F1] [[def-qftx-superconformal-index]]: $\Delta=E-2J_2-\tfrac32R$, $J_+=J_1+J_2+R/2$, $J_-=J_2-J_1+R/2$, and the admissible weighted supertrace is the signed $p^{J_+}q^{J_-}$ trace on $\ker\Delta$ when its weighted diagonal sum converges.
 

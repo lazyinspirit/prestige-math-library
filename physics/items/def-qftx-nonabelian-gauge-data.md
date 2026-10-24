@@ -18,6 +18,7 @@ deps:
   - def-finite-dimensional-representation-of-a-group-over-a-field
   - def-associated-bundle-to-a-principal-bundle-and-representation
   - thm-associated-vector-bundle-is-well-defined
+  - prop-minimum-rank-selection-and-collection
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-lie-group: mathematical-premise
@@ -27,6 +28,7 @@ dependency_roles:
   def-finite-dimensional-representation-of-a-group-over-a-field: mathematical-premise
   def-associated-bundle-to-a-principal-bundle-and-representation: mathematical-premise
   thm-associated-vector-bundle-is-well-defined: mathematical-premise
+  prop-minimum-rank-selection-and-collection: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -52,9 +54,13 @@ Choose a smooth right principal $G$-bundle $\pi:P\to M$: the projection and righ
 
 Choose a specified set $I$ of representation labels and, for each $a\in I$, a finite-dimensional complex vector space $V_a$, a positive-definite Hermitian form $h_a$, and a smooth group homomorphism $\rho_a:G\to U(V_a,h_a)$. Here $U(V_a,h_a)$ is the group of complex-linear isometries of $h_a$, and a representation is the corresponding finite-dimensional group action. Its associated vector bundle is the quotient $E_a=P\times_{\rho_a}V_a$ with relation $[pg,v]=[p,\rho_a(g)v]$.
 
-Two smooth right principal $G$-bundles over $M$ are isomorphic over $M$ when a smooth diffeomorphism between their total spaces covers $\operatorname{id}_M$ and commutes with the right $G$-actions. A **bundle sector** is one equivalence class under this relation. The datum specifies a set $\Sigma$ of admitted bundle sectors and requires $[P]\in\Sigma$; a model may take $\Sigma=\{[P]\}$. The Lie algebra alone does not replace the chosen group or sector. This definition does not choose a connection, an action functional, or a quantum theory.
+Two smooth right principal $G$-bundles over $M$ are isomorphic over $M$ when a smooth diffeomorphism between their total spaces covers $\operatorname{id}_M$ and commutes with the right $G$-actions. To represent their isomorphism types by sets, encode a bundle by the ordered tuple of its total-space set, topology, maximal smooth atlas, projection, and right action; $M$ and $G$ are fixed parameters. Write $q\cong_M P$ when $q$ is such a bundle code isomorphic to $P$. In the cumulative hierarchy $V_0=\varnothing$, $V_{\alpha+1}=\mathcal P(V_\alpha)$, and $V_\lambda=\bigcup_{\alpha<\lambda}V_\alpha$ at limit ordinals; $\operatorname{rank}(q)$ is the least ordinal $\alpha$ with $q\subseteq V_\alpha$. Let $r(P)$ be the least rank of a code $q\cong_M P$, and define the **bundle sector** of $P$ to be its set code
+$$[P]:=\{q\in V_{r(P)+1}:q\cong_M P\text{ and }\operatorname{rank}(q)=r(P)\}.$$
+The given bundle supplies a code, so minimizing the attained ranks at most its rank defines $r(P)$. Minimum-rank selection and Separation in $V_{r(P)+1}$ make $[P]$ a nonempty set. Isomorphic bundles have the same code, and equality of codes gives a common representative and hence a bundle isomorphism. This construction requires no representative choice and applies to every bundle allowed above. The datum specifies a set $\Sigma$ of admitted bundle-sector codes and requires $[P]\in\Sigma$; a model may take $\Sigma=\{[P]\}$. References to the isomorphism class as a sector use this set code. The Lie algebra alone does not replace the chosen group or sector. This definition does not choose a connection, an action functional, or a quantum theory.
 
 ## Definition references
+
+[[prop-minimum-rank-selection-and-collection|Minimum-rank set coding in ZF]]
 
 [Full mathematical treatment of right principal and associated bundles](https://arxiv.org/html/2110.06334)
 

@@ -31,7 +31,7 @@ sources:
   references:
   - title: 'David Tong, TASI Lectures on Solitons, Lecture 1: Instantons'
     url: https://www.damtp.cam.ac.uk/user/tong/tasi/instanton.pdf
-    locator: §1.1.1, printed pp. 8–9, self-duality bound and the charge-one SU(2) solution.
+    locator: '§§1.1.1–1.1.2, printed pp. 8–9, equations (1.6)–(1.11): self-duality bound and the charge-one SU(2) solution.'
   - title: Stefan Vandoren and Peter van Nieuwenhuizen, Lectures on instantons
     url: https://arxiv.org/pdf/0802.1862
     locator: §2, printed pp. 7–9, SU(2) trace/charge convention, action bound, and theta-angle factor.
@@ -44,7 +44,7 @@ verification:
 
 ## Example
 
-Assume full AC, meaning that every family of nonempty sets has a choice function; in particular, countable choice holds. Let $S^4=\{z\in\mathbb R^5:|z|=1\}$ have its unit round metric. Let $p_\infty$ be the point omitted by the north stereographic chart, let $p_0$ have north-chart coordinate $x=0$, and orient $S^4$ so $dx^1\wedge dx^2\wedge dx^3\wedge dx^4>0$. In the north chart put $r^2=\sum_{\mu=1}^4(x^\mu)^2$; the metric is $4(1+r^2)^{-2}\sum_\mu(dx^\mu)^2$. In the south chart put $y=x/r^2$; the metric is $4(1+|y|^2)^{-2}\sum_\mu(dy^\mu)^2$. Define $SU(2)=\{U\in M_2(\mathbb C):U^*U=I_2,\det U=1\}$, with Lie algebra $\mathfrak{su}(2)=\{X\in M_2(\mathbb C):X^*=-X,\operatorname{tr}_{\mathbf2}X=0\}$ and commutator bracket; for $U\in SU(2)$ set $\operatorname{Ad}_U X:=UXU^{-1}$. Use the Pauli matrices $\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix}$, $\sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$, $\sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ and anti-Hermitian generators $T_a=-i\sigma_a/2$ with $\operatorname{tr}_{\mathbf2}(T_aT_b)=-\tfrac12\delta_{ab}$. Let $\epsilon_{ijk}$ be totally antisymmetric with $\epsilon_{123}=1$, set $\eta_{aij}=\epsilon_{aij}$, $\eta_{ai4}=\delta_{ai}$, $\bar\eta_{aij}=-\epsilon_{aij}$, and $\bar\eta_{ai4}=\delta_{ai}$ for $i,j\in\{1,2,3\}$, and extend both arrays antisymmetrically in their last two indices. For any $\rho>0$, put $u(x)=(x^4I_2-i x^j\sigma_j)/r$ on the overlap, and glue two trivial right $SU(2)$ bundles with local sections satisfying $s_S=s_Nu^{-1}$. The local connection potentials are
+Assume full AC, meaning that every family of nonempty sets has a choice function; in particular, countable choice holds. Let $S^4=\{z\in\mathbb R^5:|z|=1\}$ have its unit round metric. Put $p_\infty=(0,0,0,0,-1)$ and $p_0=(0,0,0,0,1)$. Specify the inverse stereographic maps $\kappa_N:\mathbb R^4\to U_N:=S^4\setminus\{p_\infty\}$ and $\kappa_S:\mathbb R^4\to U_S:=S^4\setminus\{p_0\}$ by $\kappa_N(x)=(2x/(1+|x|^2),(1-|x|^2)/(1+|x|^2))$ and $\kappa_S(y)=(2y/(1+|y|^2),(|y|^2-1)/(1+|y|^2))$. Here $x$ and $y$ denote their inverse coordinates on $U_N$ and $U_S$, respectively; orient $S^4$ so $dx^1\wedge dx^2\wedge dx^3\wedge dx^4>0$. In the north chart put $r^2=\sum_{\mu=1}^4(x^\mu)^2$; the metric is $4(1+r^2)^{-2}\sum_\mu(dx^\mu)^2$. In the south chart put $y=x/r^2$; the metric is $4(1+|y|^2)^{-2}\sum_\mu(dy^\mu)^2$. Define $SU(2)=\{U\in M_2(\mathbb C):U^*U=I_2,\det U=1\}$, with Lie algebra $\mathfrak{su}(2)=\{X\in M_2(\mathbb C):X^*=-X,\operatorname{tr}_{\mathbf2}X=0\}$ and commutator bracket; for $U\in SU(2)$ set $\operatorname{Ad}_U X:=UXU^{-1}$. Use the Pauli matrices $\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix}$, $\sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$, $\sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ and anti-Hermitian generators $T_a=-i\sigma_a/2$ with $\operatorname{tr}_{\mathbf2}(T_aT_b)=-\tfrac12\delta_{ab}$. Let $\epsilon_{ijk}$ be totally antisymmetric with $\epsilon_{123}=1$, set $\eta_{aij}=\epsilon_{aij}$, $\eta_{ai4}=\delta_{ai}$, $\bar\eta_{aij}=-\epsilon_{aij}$, and $\bar\eta_{ai4}=\delta_{ai}$ for $i,j\in\{1,2,3\}$, and extend both arrays antisymmetrically in their last two indices. For any $\rho>0$, put $u(x)=(x^4I_2-i x^j\sigma_j)/r$ on the overlap, and glue two trivial right $SU(2)$ bundles with local sections satisfying $s_S=s_Nu^{-1}$. The local connection potentials are
 
 $$A_N=\frac{2\eta_{a\mu\nu}x^\nu}{r^2+\rho^2}T_a\,dx^\mu,\qquad A_S=-\frac{2\rho^2\bar\eta_{a\mu\nu}y^\nu}{1+\rho^2|y|^2}T_a\,dy^\mu.$$
 
@@ -52,7 +52,7 @@ On the overlap the potentials obey $A_S=\operatorname{Ad}_uA_N+u\,d(u^{-1})$, wi
 
 ## Example references
 
-[Tong, §1.1.1, self-duality bound and charge-one solution](https://www.damtp.cam.ac.uk/user/tong/tasi/instanton.pdf)
+[Tong, §§1.1.1–1.1.2, self-duality bound and charge-one solution](https://www.damtp.cam.ac.uk/user/tong/tasi/instanton.pdf)
 
 [Vandoren and van Nieuwenhuizen, §2, charge, bound, and theta term](https://arxiv.org/pdf/0802.1862)
 

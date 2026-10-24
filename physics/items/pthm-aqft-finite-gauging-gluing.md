@@ -49,7 +49,7 @@ Z_{K,L}^{(2)}(s)=2^{-(V_K-V_L)}|\{x\in\operatorname{Ob}\mathcal B(K):x|_L=s\}|.
 $$
 If $K=K_1\cup_\Sigma K_2$ is a union of ordered subcomplexes with compatible restrictions and opposite induced seam orientations, the relative boundary amplitudes are gauge-invariant and obey
 $$ Z_K^{(2)}=\sum_{[s]\in\pi_0\mathcal B(\Sigma)} Z_{K_2,\Sigma}^{(2)}(s)Z_{K_1,\Sigma}^{(2)}(s)\frac{|\pi_2(\mathcal B(\Sigma),s)|}{|\pi_1(\mathcal B(\Sigma),s)|}. $$
-For a one-vertex boundary complex the amplitude is $1/2$. These conclusions concern only the specified finite model; they do not establish a continuum quantum field theory or empirical behavior.
+For a one-vertex complex with unit background weight, the absolute normalized background-gauging amplitude is $1/2$. These conclusions concern only the specified finite model; they do not establish a continuum quantum field theory or empirical behavior.
 
 ## Statement references
 

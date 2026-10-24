@@ -56,6 +56,8 @@ where $k,m\in\mathbb C\setminus\{0\}$, $y\in\mathbb C$ is arbitrary, and $[\phi_
 
 $$V(\phi_1,\phi_2,\phi_3)=\left|-k+\frac y2\phi_3^2\right|^2+|m\phi_3|^2+|m\phi_2+y\phi_1\phi_3|^2.$$
 
+In the adopted natural-unit convention, $V:\mathbb C^3\to\mathbb R$ is the classical F-term potential-energy density, with $[V]=M^4$, $[W]=M^3$, and $[F^i]=M^2$.
+
 These pointwise field values and eliminated auxiliary values belong to the ordinary complex bosonic sector of the model postulate, obtained by setting fermions and all positive coefficient-algebra degrees to zero; no order on nilpotent formal coefficients is used. Here “tree-level” means this classical potential before quantum-loop corrections. At a field value, F-term supersymmetry is unbroken exactly when all eliminated auxiliary fields $F^i=-\overline{\partial_iW}$ vanish; otherwise it is F-term broken.
 
 Put $a=|k|>0$, $b=|m|^2>0$, and $c=|y|$. If $b\ge ac$, including $y=0$, the global minimum is $V_{\min}=a^2=|k|^2$, and all minimizing field values are $\phi_3=\phi_2=0$ with arbitrary $\phi_1\in\mathbb C$. If $0<b<ac$, then $c>0$ and

@@ -1,0 +1,46 @@
+# Batch 44 Step 3a adjudication
+
+Definition completed first (level 6). Reader:44:1 and refuter:44:2 confirm the missing fermionic statistics; refuter:44:1 confirms the reversed source chirality. Repaired to gamma5=+i gamma^0 gamma^1 gamma^2 gamma^3=-i gamma_0 gamma_1 gamma_2 gamma_3 and explicit Grassmann-odd fields. Bilal https://arxiv.org/pdf/0802.0634 Eq. (2.20), printed p.7 (visually checked), Eqs. (5.17)-(5.20), (5.33)-(5.47), and (9.30); Preskill https://preskill.caltech.edu/pubs/preskill-1991-effective.pdf Eqs. (6.34), (6.42)-(6.45). These are adopted formal anomaly/threshold inputs, not continuum constructions. Risk review recorded; risk report initially identified HIGH 6. Consumer search found only the assigned theorem and example; next synchronize the theorem, its proof/contract citations, and check example. Batch-41 outside escalations remain owner-held.
+
+Theorem completed second (level 7). Reader:44:2 and refuter:44:4 confirm the unsupported dynamical-phase remark (nonfatal); refuter:44:3 confirms the source chirality mismatch (fatal). Synchronized its Statement and Proof 1.2 with corrected gamma5 and odd statistics, removed only the unsupported dynamical characterization, and synchronized manifest statements and exact contract quotations/derivation. Independently checked all five steps, Delta versus -Delta/Jacobian signs, mass independence, compact support and zero cases. Complete HIGH 7 risk review recorded. Next: example inherited-sign disposition and focused local checks.
+
+Final disposition: all seven batch-44 obligations decided; five confirmed defects resolved locally, with repair_confidence: 1. No touched or page obligations were routed. Immutable pre/post snapshots have identical item/contract/manifest entries, consistently with the read-only reader report; no reader repair is attributed to Alpha. Original findings, scope and snapshots remain unchanged.
+
+| Obligation | Verdict | Closed defect ID suffix |
+|---|---|---|
+| reader:44:1 | confirmed_fatal | statistics |
+| refuter:44:1 | confirmed_fatal | chirality |
+| refuter:44:2 | confirmed_fatal | statistics |
+| reader:44:2 | confirmed_nonfatal | phase |
+| refuter:44:3 | confirmed_fatal | theorem-chirality |
+| refuter:44:4 | confirmed_nonfatal | phase |
+| refuter:44:5 | confirmed_fatal | example-inheritance |
+
+Each suffix denotes `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-44-<suffix>` in `research/defect-ledger.jsonl`. Duplicate reader/refuter observations share one defect row and explicit same_defect_as evidence. Five fixed rows were appended at caught_at_stage `3a-adjudicate`, with exact decision references, through the serialized native ledger append; its generated view was refreshed. Mechanical diagnostics generated no defect rows.
+
+The example (level 8) was checked last against the corrected theorem. Near the support of alpha, dchi=0 and the wedge square is twice lambda squared times the oriented volume form. Normalization therefore gives integral(alpha G wedge G)=2. All three Verification steps are sound; the repaired source-positive model makes both variations +1/(12pi^2). Example and Verification text needed no change. Its exact theorem quotation and risk notes were updated. The historical finding is confirmed: with the old opposite chirality the heavy variation was negative while the written Wess–Zumino variation remained positive. It would be incorrect to say both old variations were negative.
+
+Current dependency/reference searches across items/ and library/ found only the assigned theorem consuming the model, the assigned example consuming the theorem, and their own page inventories. Both actual uses were checked. Model and theorem public changes are synchronized in the owning pages manifest and exact proof-contract citations/derivation. The theorem's F3 quotation was synchronized to the current shared anomaly-matching Definition after strict checking exposed its stale wording. The source-positive coefficient, linear BRST evaluation and background-only quotient agree with actual suppliers. The example has no further consumer. No outside source repair is required by these corrections. Cross-batch item-use evidence and the frontier dependency ledger record current conventions. No new supplier, ID, page, edge, inventory or withdrawal was introduced.
+
+Primary source reading was targeted, not whole-book reading. Bilal's full 108-page PDF was retrieved. Eq. (2.20), printed p.7, was inspected visually to resolve upper/lower gamma indices. Targeted reading covered chirality projectors/mass pairing in §§5.2.1–5.2.2, relevant PV subtraction and anomaly terms in §5.2.3 Eqs. (5.32)–(5.47), and the consistent representative, §9.3 Eq. (9.30), printed p.75. Opposite chirality reverses the source anomaly sign; the connection/parameter map does not reverse chirality. Preskill's full 78-page PDF was retrieved and the finite-difference/Jacobian/threshold argument around Eqs. (6.34), (6.40)–(6.45), printed pp.57–60, read. The local threshold law remains an adopted perturbative premise. No continuum measure, global determinant phase, quantitative remainder or empirical conclusion was inferred.
+
+Sources: [Bilal, Lectures on Anomalies](https://arxiv.org/pdf/0802.0634), Eq. (2.20), Eqs. (5.17)–(5.47), Eq. (9.30); [Preskill, Gauge Anomalies in an Effective Field Theory](https://preskill.caltech.edu/pubs/preskill-1991-effective.pdf), Eqs. (6.34), (6.42)–(6.45). Direct suppliers read: post-aqft-heft-model, def-aqft-anomaly-matching-data, def-aqft-thooft-anomaly. Relevant finite-jet algebra/cohomology, nilpotence proof, p-form background and cubic normalization suppliers were inspected as context; no wider transitive physics proof audit is claimed.
+
+Boundary checks: zero alpha, G or theta is permitted in the general model. At theta=0 the finite difference vanishes, but its variation need not vanish. Positive v and nonzero y exclude a massless threshold. The specified vertex has n>=1; for n=1 momentum conservation forces its covector to zero, leaving the maximum well-defined. The normalized example excludes zero alpha and zero lambda. There is no biconditional or choice selection; no interchange of an infinite sum with an integral is used. Compact support makes the displayed local integrals finite. The scalar v exp(i theta) itself is not asserted compactly supported. No phase dynamics is needed for the deduction.
+
+Both HIGH items have specific complete Alpha risk_review entries. Initial reporting returned HIGH 6 (model), HIGH 7 (theorem), MODERATE 4 (example). Final --require-reviewed reporting returns zero errors. Both A/B pages remain draft, frontmatter-only, with original inventories and compact-v1. No TikZ/tikzcd diagrams occur; none is needed for these algebraic arguments. Complete public sections remain uninterrupted by links; immediately following reference sections retain one reference per paragraph.
+
+Focused checks actually run (all final commands exit 0):
+
+- Precheck through tools/tsx-run.mjs tools/physics-support/precheck.mts, explicitly selecting all three item paths: two proof-bearing items checked, zero failures; definition has no proof.
+- rendercheck.mjs on the three explicit items and two assigned pages: five files, YAML and KaTeX pass.
+- proof-contract.mjs on the owning batch-44.proof-contracts.json with --strict: 3/3 items, zero errors/warnings. Initial stale F3 quotation diagnostic was corrected in the owned contract, without changing its supplier.
+- risk-report.mjs on that contract with --require-reviewed: zero errors, three items.
+- depcheck.mjs --items-file research/advanced-qft-supersymmetry-build-2026-10-23-batch-44.item-scope.json --quiet: selected item/page and prerequisite-cycle checks pass.
+- After final item edits, once in one batch: node tools/physics-support/proof-layout.mjs items/def-aqft-heavy-chiral-u1-threshold-data.md items/pthm-aqft-heavy-chiral-threshold-wess-zumino-match.md: two items, five steps, zero defects. Subsequent edits affected contract/report/ledger evidence only.
+
+Operational limits: statement-first-check.mjs has no scoped --help invocation; that probe returned a usage error and no full-run editorial gate was attempted. Initial python/pdftotext utilities were unavailable; PDF inspection was completed with python3/PyMuPDF. These diagnostics are not scientific defects or proof-check failures.
+
+No published defect or imported-source change was identified; owned IDs are absent from research/math-imports.json. Published content, mathematical originals, imports, prior reviews and verification records were not edited. No judge cycle, hash stamp, certification, scheduling action, publication or commit was performed.
+
+Owner follow-up outside this dispatch: batch-41 reader:41:1–3 and refuter:41:1–3, with open rows advanced-qft-supersymmetry-build-2026-10-23-3a-batch-41-downstream-chirality-1, -2, -3, still need explicit owner reconciliation with this completed owning-batch repair. Original unbound reader history is not retroactively certified here. Those escalation decisions and rows were preserved. This report supplies current-source repair and consumer evidence; it clears no outside escalation. No mathematical blocker remains to the seven batch-44 dispositions. The engine owns current hash stamping and the gate battery.

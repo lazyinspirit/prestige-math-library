@@ -53,7 +53,13 @@ $$
 
 where $Z_{L+1}=Z_1$, $J$ has units of energy, and $\hbar=1$. Euclidean propagation through a time interval $s\ge0$ is the exact finite matrix $e^{-sH_L}$, with $s$ in inverse-energy units. Correlators are matrix elements between arbitrary boundary vectors of finite ordered lists of observable matrices and these propagation factors.
 
-Let $\widehat{\mathcal H}_L=\ell^2(\mathbb Z_2^L)$ have basis $|\widehat h_{1/2},\ldots,\widehat h_{L-1/2}\rangle$, with dual Pauli operators $\widehat Z$ and $\widehat X$ defined by the same formulas on half-integer sites. Define the original-to-dual Kramers–Wannier map $K_L:\mathcal H_L\to\widehat{\mathcal H}_L$ by
+Let $\widehat{\mathcal H}_L=\ell^2(\mathbb Z_2^L)$ have basis $|\widehat h_{1/2},\ldots,\widehat h_{L-1/2}\rangle$, with dual Pauli operators $\widehat Z$ and $\widehat X$ defined by the same formulas on half-integer sites. Define the dual Hamiltonian, with half-integer indices periodic modulo $L$, by
+
+$$
+\widehat H_L=-J\sum_{j=1}^{L}\bigl(\widehat Z_{j-1/2}\widehat Z_{j+1/2}+\widehat X_{j+1/2}\bigr).
+$$
+
+Define the original-to-dual Kramers–Wannier map $K_L:\mathcal H_L\to\widehat{\mathcal H}_L$ by
 
 $$
 \langle\widehat{\mathbf h}|K_L|\mathbf h\rangle=2^{-L/2}(-1)^{\sum_{j=1}^{L}\widehat h_{j-1/2}(h_{j-1}+h_j)}.
@@ -127,7 +133,7 @@ For this selected finite model, $D_L$ is topological under the declared defect s
 [F4] [[lem-aqft-ising-fusion-data-coherence]]: these data satisfy the monoidal coherence and duality identities and define a finite semisimple unitary fusion category.
 
 ## Proof
-1.1 In the $K_L$ kernel, toggling the input height $h_j$ changes the exponent by $\widehat h_{j-1/2}+\widehat h_{j+1/2}$, while multiplying the input by $Z_jZ_{j+1}$ contributes $(-1)^{h_j+h_{j+1}}$, which is the exponent change from toggling $\widehat h_{j+1/2}$. Thus $K_LX_j=\widehat Z_{j-1/2}\widehat Z_{j+1/2}K_L$ and $K_LZ_jZ_{j+1}=\widehat X_{j+1/2}K_L$. Summing gives $K_LH_L=\widehat H_LK_L$. Reflection preserves the cyclic sum of single-site and nearest-neighbor terms, so $R_L\widehat H_L=H_LR_L$, and consequently $D_LH_L=H_LD_L$. To check the square convention, put $k=1-j$ in the exponent of $D_L$ to write it as $\sum_k r_k(h_{-k}+h_{1-k})$; the two conditions on a pair of indices are $k+j=0$ and $k+j=1$, each symmetric. Hence $D_L^\dagger=D_L$ and $D_L^2=(R_LK_L)^\dagger R_LK_L=K_L^\dagger K_L$. [A1, given, algebra]
+1.1 In the $K_L$ kernel, toggling the input height $h_j$ changes the exponent by $\widehat h_{j-1/2}+\widehat h_{j+1/2}$, while multiplying the input by $Z_jZ_{j+1}$ contributes $(-1)^{h_j+h_{j+1}}$, which is the exponent change from toggling $\widehat h_{j+1/2}$. Thus $K_LX_j=\widehat Z_{j-1/2}\widehat Z_{j+1/2}K_L$ and $K_LZ_jZ_{j+1}=\widehat X_{j+1/2}K_L$. Summing gives $K_LH_L=\widehat H_LK_L$. The reflection sends $\widehat X_{j+1/2}$ to $X_{-j}$ and $\widehat Z_{j-1/2}\widehat Z_{j+1/2}$ to $Z_{1-j}Z_{-j}$; reindexing the periodic sums gives $R_L\widehat H_L=H_LR_L$, and consequently $D_LH_L=H_LD_L$. To check the square convention, put $k=1-j$ in the exponent of $D_L$ to write it as $\sum_k r_k(h_{-k}+h_{1-k})$; the two conditions on a pair of indices are $k+j=0$ and $k+j=1$, each symmetric. Hence $D_L^\dagger=D_L$ and $D_L^2=(R_LK_L)^\dagger R_LK_L=K_L^\dagger K_L$. [A1, given, algebra]
 
 1.2 Computing $K_L^\dagger K_L=D_L^2$ by summing over the intermediate dual heights gives $\langle\mathbf h'|D_L^2|\mathbf h\rangle=2^{-L}\sum_{\widehat{\mathbf h}\in\mathbb Z_2^L}(-1)^{\sum_j\widehat h_{j-1/2}(h_{j-1}+h_j+h'_{j-1}+h'_j)}=\prod_j\delta_{d_{j-1},d_j}$, where $d_j=h_j+h'_j$ in $\mathbb Z_2$ and each sum $\sum_{u\in\mathbb Z_2}(-1)^{ur}$ equals $2$ if $r=0$ and $0$ if $r=1$. The constraints force all $d_j$ to be the same bit, so $\mathbf h'=\mathbf h$ or $\mathbf h'=\mathbf h+\mathbf 1$. These are exactly the matrix elements of $I+P_L$, proving $D_L^2=I+P_L$. Applying the same character sum to $K_LK_L^\dagger$ on the dual side imposes constant neighboring differences of the dual heights, proving $K_LK_L^\dagger=I+\widehat P_L$ as well. [A1, given, algebra]
 

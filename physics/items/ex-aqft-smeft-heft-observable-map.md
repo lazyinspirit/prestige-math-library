@@ -89,7 +89,7 @@ These are conditional tree-level coefficient predictions of this selected local 
 
 [A3] $K(0)>0$; continuity of the displayed polynomial then gives an open interval around zero on which $K(h)>0$.
 
-## Proof
+## Verification
 
 **Proof technique:** Evaluate the selected operator at $U=I$, integrate by parts, and normalize the scalar coordinate locally at the reference point.
 

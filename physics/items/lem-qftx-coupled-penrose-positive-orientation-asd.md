@@ -32,7 +32,7 @@ verification:
 
 ## Statement
 
-Let $E\to S^4$ be a smooth finite-rank complex vector bundle and let $A$ be a smooth connection on $E$, with curvature $F_A=\nabla_A^2\in\Omega^2(S^4,\operatorname{End}_{\mathbb C}E)$. Extend $F_A$ and the Hodge star $*_g$ complex-linearly to the complexified tangent and cotangent bundles. At a finite point of the positively oriented stereographic chart in the incidence geometry, evaluate $F_A$ complex-bilinearly on $H_1=\partial_{\bar z_1}-t\partial_{z_2}$ and $H_2=\partial_{\bar z_2}+t\partial_{z_1}$. Then $F_A(H_1,H_2)=0$ for every $t\in\mathbb C$ if and only if the self-dual part $F_A^+=(F_A+*_gF_A)/2$ vanishes at that point. The same equivalence holds at the omitted projective value $t=\infty$ by using the second incidence chart.
+Let $E\to S^4$ be a smooth finite-rank complex vector bundle and let $A$ be a smooth connection on $E$, with curvature $F_A=\nabla_A^2\in\Omega^2(S^4,\operatorname{End}_{\mathbb C}E)$. For real two-forms $\eta,\zeta$, let $*_g$ be the Hodge star characterized by $\eta\wedge *_g\zeta=\langle\eta,\zeta\rangle_g\,d\mathrm{vol}_g$, and extend it complex-linearly to the form factor of $F_A$. At a finite point of the positively oriented stereographic chart in the incidence geometry, evaluate $F_A$ complex-bilinearly on $H_1=\partial_{\bar z_1}-t\partial_{z_2}$ and $H_2=\partial_{\bar z_2}+t\partial_{z_1}$. Then $F_A(H_1,H_2)=0$ for every $t\in\mathbb C$ if and only if the self-dual part $F_A^+=(F_A+*_gF_A)/2$ vanishes at that point. The same equivalence holds at the omitted projective value $t=\infty$ by using the second incidence chart.
 
 ## Statement references
 

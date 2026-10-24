@@ -18,6 +18,10 @@ deps:
   - thm-power-series-expansion-in-several-complex-variables
   - cor-uniqueness-of-multivariable-power-series-coefficients
   - thm-dolbeault-lemma-polydisc
+  - def-bigraded-complex-differential-forms
+  - def-holomorphic-function-in-several-complex-variables
+  - cor-holomorphic-functions-in-several-variables-are-smooth
+  - thm-cauchy-riemann-characterization-in-several-complex-variables
   - thm-dolbeault-cohomology-polydisc-vanishes-positive-q
   - thm-smooth-function-module-sheaves-are-acyclic
   - thm-acyclic-resolution-theorem-for-right-derived-functors
@@ -34,6 +38,10 @@ dependency_roles:
   thm-power-series-expansion-in-several-complex-variables: mathematical-premise
   cor-uniqueness-of-multivariable-power-series-coefficients: mathematical-premise
   thm-dolbeault-lemma-polydisc: mathematical-premise
+  def-bigraded-complex-differential-forms: mathematical-premise
+  def-holomorphic-function-in-several-complex-variables: mathematical-premise
+  cor-holomorphic-functions-in-several-variables-are-smooth: mathematical-premise
+  thm-cauchy-riemann-characterization-in-several-complex-variables: mathematical-premise
   thm-dolbeault-cohomology-polydisc-vanishes-positive-q: mathematical-premise
   thm-smooth-function-module-sheaves-are-acyclic: mathematical-premise
   thm-acyclic-resolution-theorem-for-right-derived-functors: mathematical-premise
@@ -51,7 +59,7 @@ sources:
   references:
     - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry"
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
-      locator: "Chapter IX §4.A, Proposition 4.1, printed pp. 419–420: scalar acyclicity on strongly 1-complete domains. The quotient identification and global multiplication-sequence proof are verified here."
+      locator: "Chapter IX §4.A, Proposition 4.1, printed pp. 419–420: vanishing for strongly q-complete manifolds with q>=1 in cohomological degrees k>=q, including scalar vanishing for q=1. This item gives an independent scalar Dolbeault computation. The quotient identification and global multiplication-sequence proof are verified here."
     - title: "Joachim Wehler, Stein Manifolds"
       url: "https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf"
       locator: "§5.2, Proposition 5.9, printed p. 171: a sheaf with a finite free resolution on a polydisc is acyclic; the multiplication sequence supplies such a resolution in this example."
@@ -79,15 +87,13 @@ no small-neighborhood restriction or general coherent Stein vanishing is assumed
 
 ## Example references
 
-[Demailly, Chapter IX §4.A, Proposition 4.1, pp. 419–420](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter IX §4.A, Proposition 4.1, pp. 419–420 (strongly q-complete vanishing, including q=1; the scalar step is also established by the Dolbeault argument here)](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
 [Wehler, §5.2, Proposition 5.9, p. 171](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
 ## Facts & Assumptions
 
-**Given:** Full AC, $N\ge1$, any coordinate polydisc $D\subseteq\mathbb C^N$
-containing $0$, its hyperplane section $H_D$, the closed inclusion $i$, and
-$\mathcal Q=\mathcal O_D/(z_1)\mathcal O_D$.
+**Given:** Full AC, $N\ge1$, any coordinate polydisc $D\subseteq\mathbb C^N$ containing $0$, its hyperplane section $H_D$, the closed inclusion $i$, and $\mathcal Q=\mathcal O_D/(z_1)\mathcal O_D$.
 
 [A1] [[def-axiom-of-choice]]: full AC is assumed, as in the local coherent-acyclicity theorem.
 
@@ -101,9 +107,9 @@ $\mathcal Q=\mathcal O_D/(z_1)\mathcal O_D$.
 
 [F5] [[thm-sheaf-morphism-isomorphism-stalkwise]]: a morphism of sheaves is an isomorphism if its induced map on every stalk is an isomorphism.
 
-[F6] [[thm-power-series-expansion-in-several-complex-variables]] and [[cor-uniqueness-of-multivariable-power-series-coefficients]]: holomorphic germs have convergent multivariable power series with unique coefficients, so vanishing of the restriction to $z_1=0$ removes exactly the terms with zero $z_1$ exponent.
+[F6] [[def-holomorphic-function-in-several-complex-variables]] defines holomorphicity by complex differentiability at every point; [[cor-holomorphic-functions-in-several-variables-are-smooth]] shows holomorphic functions are continuous and separately holomorphic. Thus [[thm-power-series-expansion-in-several-complex-variables]] applies, and [[cor-uniqueness-of-multivariable-power-series-coefficients]] makes the coefficients unique; vanishing of the restriction to $z_1=0$ therefore removes exactly the terms with zero $z_1$ exponent.
 
-[F7] [[thm-dolbeault-lemma-polydisc]]: the smooth Dolbeault sheaf sequence is locally exact on each coordinate polydisc, and its degree-zero kernel is the holomorphic function sheaf.
+[F7] [[thm-dolbeault-lemma-polydisc]] gives local exactness in each positive antiholomorphic degree. At degree zero, [[def-bigraded-complex-differential-forms]] identifies $\bar\partial f=0$ with the Cauchy–Riemann system. Holomorphic functions are smooth by [[cor-holomorphic-functions-in-several-variables-are-smooth]], and [[thm-cauchy-riemann-characterization-in-several-complex-variables]] says that a $C^1$ function is holomorphic exactly when this system holds at every point, with holomorphy defined by [[def-holomorphic-function-in-several-complex-variables]]. Thus the full smooth Dolbeault sheaf sequence is an exact resolution of $\mathcal O_D$.
 
 [F8] [[thm-smooth-function-module-sheaves-are-acyclic]] and [[thm-acyclic-resolution-theorem-for-right-derived-functors]]: the smooth-form sheaves are acyclic for ordinary global sections, so their exact resolution computes ordinary derived sheaf cohomology.
 

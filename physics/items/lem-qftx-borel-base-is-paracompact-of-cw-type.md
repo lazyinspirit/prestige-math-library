@@ -42,7 +42,7 @@ Assume AC. Let $r\geq0$, let $T=(\mathbb R/\mathbb Z)^r$ use the product Milnor 
 
 ## Statement references
 
-[Paracompactness of CW complexes] [Hatcher, Appendix, Proposition 1.20, printed pp. 36–37](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf)
+[Paracompactness of CW complexes] [Hatcher, Vector Bundles and K-Theory, Appendix, Proposition 1.20, printed p. 36](https://people.math.harvard.edu/~dafr/M392C-2012/Readings/Hatcher.pdf)
 
 [Product topology and CW structures] [Hatcher, Appendix, Theorem A.6, printed pp. 524–525](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf)
 

@@ -29,7 +29,7 @@ verification:
 
 ## Example
 
-For the explicit $k=N=1$ stable scalar ADHM quotient and generic rotation weights with $\epsilon_1\epsilon_2\ne0$, extend the rotation torus by a flavor circle. The rotation weights $\epsilon_1,\epsilon_2$ and additive flavor mass $\widetilde m$ each have mass dimension one. Let $q$ be a dimensionless formal variable marking instanton charge. The unique fixed point has tangent weights $\epsilon_1,\epsilon_2$, so the charge-one contribution of the top-Chern-class insertion for the inverse flavor line is
+For the explicit $k=N=1$ stable scalar ADHM quotient and generic rotation weights with $\epsilon_1\epsilon_2\ne0$, extend the rotation torus by a flavor circle. Use natural units $c=\hbar=1$ and assign mass dimension one to the formal rotation weights $\epsilon_1,\epsilon_2$ and additive flavor mass $\widetilde m$. Let $q$ be a dimensionless formal variable marking instanton charge. The unique fixed point has tangent weights $\epsilon_1,\epsilon_2$, so the charge-one contribution of the top-Chern-class insertion for the inverse flavor line is
 $$q I_{1,1}^{\mathrm{adj}}(\widetilde m)=q\frac{(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)}{\epsilon_1\epsilon_2}.$$
 The diagram shows the unique one-box partition, with the first coordinate horizontal for $B_1$ and the second vertical for $B_2$. This is a finite formal rank-one calculation only; the adopted S4 postulate in this batch is specifically $U(2)$.
 

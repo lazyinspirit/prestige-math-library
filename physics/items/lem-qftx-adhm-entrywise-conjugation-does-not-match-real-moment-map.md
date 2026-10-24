@@ -30,7 +30,15 @@ verification:
 
 ## Statement
 
-Let $(\alpha_1,\alpha_2,P,Q)$ obey the source equations stated in the following references section. Under the proposed substitution
+Let $V=\mathbb C^k$ and $W=\mathbb C^N$ with their standard Hermitian products, and let $\alpha_1,\alpha_2\in\operatorname{End}_{\mathbb C}(V)$, $P:W\to V$, and $Q:V\to W$. Identify the conjugate spaces with these standard-coordinate spaces, so the bars below mean entrywise complex conjugation. Suppose the source-convention equations are
+
+$$[\alpha_1,\alpha_2]+PQ=0,\qquad [\alpha_1,\alpha_1^\dagger]+[\alpha_2,\alpha_2^\dagger]-PP^\dagger+Q^\dagger Q=0.$$
+
+For $B_i=\overline{\alpha_i}$, $I=\overline P$, and $J=\overline Q$, use the raw moment maps
+
+$$\mu_{\mathbb C}=[B_1,B_2]+IJ,\qquad \mu_{\mathbb R}=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J.$$
+
+Under this proposed substitution,
 
 $$B_i=\overline{\alpha_i},\qquad I=\overline P,\qquad J=\overline Q,$$
 
@@ -38,7 +46,7 @@ the raw complex moment map vanishes, but the raw real moment map is
 
 $$\mu_{\mathbb R}=\overline C+\overline X-\overline Y,$$
 
-where $C=[\alpha_1,\alpha_1^\dagger]+[\alpha_2,\alpha_2^\dagger]$, $X=PP^\dagger$, and $Y=Q^\dagger Q$. The conjugated source real equation gives $\overline C-\overline X+\overline Y=0$, so on source solutions the proposed raw real moment map equals $2\overline C$; the source equations alone therefore do not establish its vanishing. This failure occurs for the explicit $k=N=2$ source solution in the proof below.
+where $C=[\alpha_1,\alpha_1^\dagger]+[\alpha_2,\alpha_2^\dagger]$, $X=PP^\dagger$, and $Y=Q^\dagger Q$. The conjugated source real equation gives $\overline C-\overline X+\overline Y=0$, so on source solutions the proposed raw real moment map equals $2\overline C$; the source equations alone therefore do not establish its vanishing. This failure occurs for the explicit $k=N=2$ solution of the two displayed source equations in the proof below; no source full-rank condition is asserted for that witness.
 
 ## Statement references
 

@@ -21,6 +21,7 @@ deps:
   - def-equivalence-relation
   - prop-gauge-transformations-act-on-principal-connections
   - lem-formal-adjoints-of-differential-operators-exist-and-are-unique
+  - ex-unitary-and-special-unitary-lie-groups
 justified_by:
   - lem-qftx-gauge-sobolev-calculus
 dependency_roles:
@@ -35,15 +36,16 @@ dependency_roles:
   def-equivalence-relation: mathematical-premise
   prop-gauge-transformations-act-on-principal-connections: mathematical-premise
   lem-formal-adjoints-of-differential-operators-exist-and-are-unique: mathematical-premise
+  ex-unitary-and-special-unitary-lie-groups: mathematical-premise
 proof_strategy: definition
 provenance:
   statement: ai-altered
   proof: not-applicable
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
-      locator: "§§5.13.1–5.13.2, PDF pp. 113–114: Sobolev bundles, connections, gauge transformations, and the right-action formula."
+      locator: "§§5.13.1–5.13.2, PDF pp. 113–115: Sobolev bundles, connections, gauge transformations, and the right-action formula."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"
       url: "https://ufdcimages.uflib.ufl.edu/AA/00/05/72/86/00001/brianwilliams-SW.pdf"
       locator: "§§4.2–4.4, PDF pp. 25–36: Sobolev configuration, gauge action, properness interface, and local slice setup; abelian scope is recorded in the coverage disposition."
@@ -53,7 +55,13 @@ verification:
 
 ## Definition
 
-Assume the Axiom of Choice. Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\in\{3,4\}$ with a smooth Riemannian metric, let $N\ge2$, and fix a smooth right principal $SU(N)$-bundle $\pi:P\to M$, a smooth connection $A_0$, and a point $p_m\in P$ over $x_m\in M$. Use the standard unitary representation of $SU(N)$ on $\mathbb C^N$ and the invariant positive inner product $\langle X,Y\rangle=-\operatorname{tr}(XY)$ on $\mathfrak{su}(N)$. Define the adjoint vector bundle $\operatorname{ad}P=P\times_{\operatorname{Ad}}\mathfrak{su}(N)$ and the adjoint group bundle $\operatorname{Ad}P=P\times_{\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\operatorname{Ad}_g z]$.
+Assume the Axiom of Choice. Fix an integer $N\ge2$. Write $\operatorname{Mat}_N(\mathbb C)$ for the complex $N\times N$ matrices, $U^*=\overline U^{\mathsf T}$ for conjugate transpose, and $I_N$ for the identity matrix. Define the special unitary matrix group
+
+$$SU(N):=\{U\in\operatorname{Mat}_N(\mathbb C):U^*U=I_N,\ \det U=1\},$$
+
+with matrix multiplication and the following real embedded smooth structure. Identify $\operatorname{Mat}_N(\mathbb C)$ with $\mathbb R^{2N^2}$ by the real and imaginary matrix entries, and let $\operatorname{Herm}_N=\{H:H^*=H\}$ have its induced real vector-space structure. Equip $U(N)=\{U:U^*U=I_N\}$ with the embedded regular-level-set structure at $I_N$ of the smooth map $F:\operatorname{GL}_N(\mathbb C)\to\operatorname{Herm}_N$, $F(U)=U^*U$, where $\operatorname{GL}_N(\mathbb C)=\{U:\det U\ne0\}$. Equip $S^1=\{z\in\mathbb C:|z|=1\}$ with its embedded circle structure and $SU(N)$ with the embedded regular-level-set structure at $1$ of $\det:U(N)\to S^1$. These are the embedded structures in the stated real matrix space. Its real Lie algebra is $\mathfrak{su}(N):=\{X\in\operatorname{Mat}_N(\mathbb C):X^*=-X,\ \operatorname{tr}X=0\}$ with bracket $[X,Y]=XY-YX$. The standard unitary representation is the map $\rho:SU(N)\to U(\mathbb C^N,h)$ defined by $\rho(U)v=Uv$, where $h(v,w)=\sum_{j=1}^N\overline{v_j}w_j$ and $U(\mathbb C^N,h)$ consists of the complex-linear maps preserving $h$. Conjugation is $\operatorname{Ad}_U z=UzU^{-1}$ for either $z\in SU(N)$ or $z\in\mathfrak{su}(N)$.
+
+Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\in\{3,4\}$ with a smooth Riemannian metric, and fix a smooth right principal $SU(N)$-bundle $\pi:P\to M$, a smooth connection $A_0$, and a point $p_m\in P$ over $x_m\in M$. Use the representation $\rho$ and the invariant positive inner product $\langle X,Y\rangle=-\operatorname{tr}(XY)$ on $\mathfrak{su}(N)$. Define the adjoint vector bundle $\operatorname{ad}P=P\times_{\operatorname{Ad}}\mathfrak{su}(N)$ and the adjoint group bundle $\operatorname{Ad}P=P\times_{\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\operatorname{Ad}_g z]$.
 
 Choose one finite smooth bundle atlas of local sections $(U_\alpha,s_\alpha)$ whose coordinate images are bounded balls, and a subordinate partition of unity with each cutoff compactly supported in its chart. On an overlap write $s_\beta=s_\alpha g_{\alpha\beta}$ for its smooth transition map $g_{\alpha\beta}:U_\alpha\cap U_\beta\to SU(N)$. Local representatives of an adjoint section $\xi$ and an adjoint group section $u$ are defined by $\xi(x)=[s_\alpha(x),\xi_\alpha(x)]$ and $u(x)=[s_\alpha(x),u_\alpha(x)]$. They obey the transition rules $\xi_\beta=\operatorname{Ad}_{g_{\alpha\beta}^{-1}}\xi_\alpha$ and $u_\beta=g_{\alpha\beta}^{-1}u_\alpha g_{\alpha\beta}$.
 
@@ -65,6 +73,8 @@ Let $\mathcal A_\infty:=A_0+\Omega^1(M,\operatorname{ad}P)$ and let $\mathcal G_
 
 For $A\in\mathcal A_k$, parallel transport of its $C^1$ connection form around piecewise smooth loops based at $p_m$ defines a subgroup $\operatorname{Hol}_{p_m}(A)\subseteq SU(N)$. Call $A$ irreducible when this subgroup leaves no nonzero proper complex subspace of $\mathbb C^N$ invariant; changing the chosen frame conjugates the subgroup and leaves this condition unchanged. Write $\mathcal A_k^*$ and $\mathcal A_\infty^*$ for the irreducible loci. Once the calculus lemma verifies the group action, define orbit equivalence by $A\sim B$ exactly when $B=A^u$ for some gauge section $u$; all resulting quotients carry the quotient topology, whose open sets are those with open inverse image under the orbit projection.
 ## Definition references
+
+[[ex-unitary-and-special-unitary-lie-groups|Embedded unitary and special-unitary matrix groups and their Lie algebras]]
 
 [Walpuski, Sobolev connections and gauge transformations](https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf)
 

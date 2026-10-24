@@ -34,11 +34,11 @@ verification:
 ---
 ## Statement
 
-Let $N\ge2$, $r\ge1$, and $1\le k<N$. For each orthogonal projection $P$ onto a complex $k$-plane in $\mathbb C^N$, write $V_P=\operatorname{ran}P$. Define
+Let $N\ge2$, $r\ge1$, and $1\le k<N$. Regard $M_N(\mathbb C)$ as $\mathbb R^{2N^2}$ by real and imaginary entries, write $Q^*=\overline Q^{\mathsf T}$, and set $U(N)=\{Q:Q^*Q=I_N\}$ and $SU(N)=\{Q\in U(N):\det Q=1\}$. Equip $U(N)$ with the embedded regular-level smooth structure of $Q\mapsto Q^*Q$ on $GL_N(\mathbb C)$, and $SU(N)$ with the embedded regular-level smooth structure of $\det:U(N)\to S^1$, where $S^1=\{z\in\mathbb C:|z|=1\}$ has its embedded circle structure. For each orthogonal projection $P$ onto a complex $k$-plane in $\mathbb C^N$, write $V_P=\operatorname{ran}P$. Define
 $$
 I_{k,r}=\{(g_1,\ldots,g_r,P)\in SU(N)^r\times\operatorname{Gr}_{\mathbb C}(k,N):g_iV_P=V_P\text{ for every }i\},
 $$
-where $SU(N)$ has its usual matrix Lie-group structure and $\operatorname{Gr}_{\mathbb C}(k,N)$ has the orthogonal-projection topology. Then $I_{k,r}$ is a closed embedded smooth submanifold,
+Here $\operatorname{Gr}_{\mathbb C}(k,N)=\{P:P^*=P,\ P^2=P,\ \operatorname{tr}P=k\}$ has the orthogonal-projection topology and the smooth atlas whose chart at a plane $V_0$ sends the graph of $T\in\operatorname{Hom}_{\mathbb C}(V_0,V_0^\perp)$ to $T$; the chart domain consists of planes transverse to $V_0^\perp$. Then $I_{k,r}$ is a closed embedded smooth submanifold,
 $$
 \dim I_{k,r}=2k(N-k)+r\bigl(k^2+(N-k)^2-1\bigr).
 $$

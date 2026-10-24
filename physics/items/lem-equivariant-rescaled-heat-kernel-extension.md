@@ -11,6 +11,7 @@ page: qftx-equivariant-index
 dependency_level: 0
 deps:
   - def-countable-choice
+  - def-schwartz-space-and-its-seminorms
   - thm-fourier-inversion-on-schwartz-space
   - thm-fourier-transform-maps-schwartz-space-continuously-to-itself
   - thm-smooth-partitions-of-unity-exist-on-manifolds
@@ -18,6 +19,7 @@ deps:
   - thm-dominated-convergence
 dependency_roles:
   def-countable-choice: mathematical-premise
+  def-schwartz-space-and-its-seminorms: mathematical-premise
   thm-fourier-inversion-on-schwartz-space: mathematical-premise
   thm-fourier-transform-maps-schwartz-space-continuously-to-itself: mathematical-premise
   thm-smooth-partitions-of-unity-exist-on-manifolds: mathematical-premise
@@ -34,7 +36,7 @@ sources:
     - title: "Zelin Yi, A Groupoid Proof of the Lefschetz fixed point formula"
       url: "https://arxiv.org/pdf/2003.00955"
 verification:
-  precheck: pending
+  precheck: pass
 ---
 
 ## Statement
@@ -43,7 +45,7 @@ Assume countable choice. Let $M$ be a compact smooth Riemannian manifold without
 
 $$k_x(w)=(2\pi)^{-n}\int_{\mathbb R^n}e^{iw\cdot\xi}e^{-p(x,\xi)}\,d\xi.$$
 
-Then $k_x$ is Schwartz, $\int k_x(w)\,dw=I$, and, locally uniformly for bounded $a,b\in T_xM$,
+Then $k_x$ is Schwartz, meaning it is smooth and $p_{\alpha,\beta}(k_x)=\sup_{w\in\mathbb R^n}\|w^\alpha\partial_w^\beta k_x(w)\|<\infty$ for every pair of multi-indices $\alpha,\beta\in\mathbb N_0^n$, $\int k_x(w)\,dw=I$, and, locally uniformly for bounded $a,b\in T_xM$,
 
 $$t^{n/2}K_t(\exp_x(\sqrt t\,a),\exp_x(\sqrt t\,b))\longrightarrow k_x(a-b).$$
 
@@ -63,7 +65,7 @@ In dimension zero the corresponding assertion is the finite-dimensional limit $K
 
 **Given:** The operator, spectral heat kernel and geometric data in the Statement. Countable choice is used by the Fourier and partition suppliers below; no stronger choice principle is used. [[def-countable-choice]]
 
-[F1] Fourier transformation preserves Schwartz space continuously, with its differentiation and polynomial-multiplication identities; Fourier inversion holds there. Rescaling frequency from the suppliers' $2\pi$ convention gives the convention in the Statement. [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]], [[thm-fourier-inversion-on-schwartz-space]]
+[F1] Schwartz space consists of smooth functions with every polynomial-weighted derivative bounded, as explicitly stated above; for matrix-valued functions the condition is imposed entrywise, equivalently in any matrix norm. [[def-schwartz-space-and-its-seminorms]] Fourier transformation preserves Schwartz space continuously, with its differentiation and polynomial-multiplication identities; Fourier inversion holds there. Rescaling frequency from the suppliers' $2\pi$ convention gives the convention in the Statement. [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]], [[thm-fourier-inversion-on-schwartz-space]]
 
 [F2] Smooth subordinate partitions of unity exist; compactness reduces the chosen chart cover to a finite one. [[thm-smooth-partitions-of-unity-exist-on-manifolds]]
 

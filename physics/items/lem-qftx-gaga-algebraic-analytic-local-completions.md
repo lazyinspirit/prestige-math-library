@@ -4,7 +4,7 @@ kind: lemma
 title: Common completions of algebraic and holomorphic local rings and their finite-type quotients
 status: draft
 origin: pipeline
-dependency_level: 0
+dependency_level: 1
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics
@@ -20,11 +20,11 @@ deps:
   - thm-complex-numbers-form-a-field
   - thm-noetherian-ring-ideal-characterisations
   - thm-power-series-expansion-in-several-complex-variables
-  - cor-uniqueness-of-multivariable-power-series-coefficients
   - thm-recursion
   - cor-finite-variable-polynomial-ring-noetherian
   - thm-noetherian-ring-quotients-and-localisations
   - cor-completion-commutes-with-finite-quotients-and-submodules
+  - lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-multiplicative-subset-and-localisation: mathematical-premise
@@ -35,11 +35,11 @@ dependency_roles:
   thm-complex-numbers-form-a-field: mathematical-premise
   thm-noetherian-ring-ideal-characterisations: mathematical-premise
   thm-power-series-expansion-in-several-complex-variables: mathematical-premise
-  cor-uniqueness-of-multivariable-power-series-coefficients: mathematical-premise
   thm-recursion: mathematical-premise
   cor-finite-variable-polynomial-ring-noetherian: mathematical-premise
   thm-noetherian-ring-quotients-and-localisations: mathematical-premise
   cor-completion-commutes-with-finite-quotients-and-submodules: mathematical-premise
+  lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness: mathematical-premise
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -111,7 +111,7 @@ retained.
 
 [F6] A holomorphic function near the origin has an absolutely convergent power-series expansion on every sufficiently small polydisc, with its coefficients given by the polydisc Cauchy integrals ([[thm-power-series-expansion-in-several-complex-variables]]).
 
-[F7] If $c,c':\mathbb N^n\to\mathbb C$ satisfy $|c_\alpha|\le M\prod_{i=1}^n r_i^{-\alpha_i}$ and $|c'_\alpha|\le M'\prod_{i=1}^n r_i^{-\alpha_i}$ for positive radii $r_i$, and their sums agree on the corresponding open polydisc, then $c_\alpha=c'_\alpha$ for every $\alpha$ ([[cor-uniqueness-of-multivariable-power-series-coefficients]]).
+[F7] A coefficient family with a bound $|c_\alpha|\le M\prod_{i=1}^n r_i^{-\alpha_i}$ defines a holomorphic sum on the open polydisc of positive radii $r_i$. Its coefficients are its derivatives at the origin divided by the corresponding factorials. If $c,c':\mathbb N^n\to\mathbb C$ satisfy $|c_\alpha|\le M\prod_{i=1}^n r_i^{-\alpha_i}$ and $|c'_\alpha|\le M'\prod_{i=1}^n r_i^{-\alpha_i}$ for positive radii $r_i$, and their sums agree on the corresponding open polydisc, then $c_\alpha=c'_\alpha$ for every $\alpha$ ([[lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness]]).
 
 [F8] For every finite $n$, a polynomial ring in $n$ variables over a Noetherian ring is Noetherian; under DC, quotients and localizations of Noetherian rings are Noetherian ([[cor-finite-variable-polynomial-ring-noetherian]], [[thm-noetherian-ring-quotients-and-localisations]]).
 
@@ -129,11 +129,11 @@ retained.
 
 1.2 For each $k\ge1$, every $s\in P\setminus\mathfrak m$ has the form $s=c(1+h)$ with $c=s(0)\ne0$ and $h\in\mathfrak m$. Modulo $\mathfrak m^k$, $h^k=0$, so $c^{-1}\sum_{j=0}^{k-1}(-h)^j$ is an inverse for $s$. Thus localization changes no $k$-jet and $A_0/\mathfrak m^kA_0\cong P/\mathfrak m^k$. The quotient $P/\mathfrak m^k$ records precisely the coefficients of monomials of total degree less than $k$, and its transition maps discard coefficients of degree at least the new truncation order. In a compatible sequence, the coefficient of each $w^\alpha$ is therefore stable at every stage $k>|\alpha|$, giving an array in $T$; conversely, every array in $T$ gives these compatible truncations. The induced addition is pointwise, and multiplication is the finite convolution in the Statement, so this is a ring isomorphism. Hence $\widehat{A_0}\cong T$. [given, F1, algebra]
 
-1.3 Every germ in $\mathfrak n$ has a power series with no constant term by [F6]. Assign each nonconstant monomial to the first coordinate with positive exponent; grouping the terms by that coordinate writes the germ as $\sum_{i=1}^n w_i g_i$, where each $g_i$ converges on a smaller polydisc by absolute convergence. Hence $\mathfrak n=(w_1,\ldots,w_n)$. [F2, F6, construct]
+1.3 Every germ in $\mathfrak n$ has a power series $\sum_\alpha c_\alpha w^\alpha$ with no constant term by [F6], since evaluating at $0$ gives $c_0=0$. Choose positive radii $r_i$ on which [F6] bounds $|c_\alpha|\le M\prod_i r_i^{-\alpha_i}$. Assign each nonconstant monomial to the first coordinate with positive exponent. After removing the corresponding factor $w_i$, the coefficient at $w^\nu$ of the grouped series $g_i$ is either $c_{\nu+e_i}$ or $0$, and is bounded by $(M/r_i)\prod_j r_j^{-\nu_j}$. Thus [F7] makes each $g_i$ holomorphic on that polydisc, and absolute convergence permits the finite grouping to give the germ identity $f=\sum_{i=1}^n w_i g_i$. Conversely each $w_i$ vanishes at $0$, so $\mathfrak n=(w_1,\ldots,w_n)$. [F2, F6, F7, construct]
 
-2.1 By [F11], every ideal of $\mathbb C$ is finitely generated; the DC-dependent ideal characterization in [F11], using DC from step 1.1, makes $\mathbb C$ Noetherian. The finite-variable corollary in [F8] then makes $P$ Noetherian, and [F8] makes its localization $A_0$ Noetherian under the same DC. The ring $A_0$ is local: fractions with numerator outside $\mathfrak m$ are units, while the residue map $p/q\mapsto p(0)/q(0)$ is a surjective homomorphism to $\mathbb C$ with kernel $\mathfrak m A_0$. The ring $H$ is Noetherian by [F5] and local by [F3] when $n=1$ and by [F4] for every $n$. Since $I\subseteq\mathfrak m$ and every element of $I$ vanishes at the origin, $IA_0$ and $IH$ lie in the respective maximal ideals. Their quotients are therefore Noetherian local rings, with maximal ideals the images of those ambient maximal ideals. [given, F1, F3, F4, F5, F8, F11, step 1.1]
+2.1 By [F11], every ideal of $\mathbb C$ is finitely generated; the DC-dependent ideal characterization in [F11], using DC from step 1.1, makes $\mathbb C$ Noetherian. The finite-variable corollary in [F8] then makes $P$ Noetherian, and [F8] makes its localization $A_0$ Noetherian under the same DC. The ring $A_0$ is local: fractions with numerator outside $\mathfrak m$ are units, while the residue map $p/q\mapsto p(0)/q(0)$ is a surjective homomorphism to $\mathbb C$ with kernel $\mathfrak m A_0$. The ring $H$ is Noetherian by [F5] and local by [F3] when $n=1$ and by [F4] for every $n$. Since $I\subseteq\mathfrak m$ and every element of $I$ vanishes at the origin, $IA_0$ and $IH$ lie in the respective maximal ideals. Every $q\in P\setminus\mathfrak m$ maps to a unit in $H$ by [F4], so $P\to H$ extends to $A_0\to H$. Evaluation at $0$ on $H$ has kernel $\mathfrak n$, and its composite with $A_0\to H$ is $p/q\mapsto p(0)/q(0)$; hence the preimage of $\mathfrak n$ is $\mathfrak m A_0$. Because $I\subseteq\mathfrak m$ and $IH\subseteq\mathfrak n$, the induced $A_I\to H_I$ has preimage of $\mathfrak n/IH$ equal to $\mathfrak m A_0/IA_0$, so it is local. The quotients are Noetherian local rings, with maximal ideals the images of those ambient maximal ideals. [given, F1, F3, F4, F5, F8, F11, step 1.1]
 
-2.2 For $k\ge1$, truncate the unique Taylor series from [F6] to total degree less than $k$. This gives a surjection $H\to P/\mathfrak m^k$. For each multi-index $\alpha$ of degree at least $k$, assign the first monomial divisor $w^\beta$ in a fixed ordering among the finitely many divisors of total degree $k$; grouping the absolutely convergent subseries by the finitely many possible $\beta$ writes the tail as $\sum_{|\beta|=k}w^\beta g_\beta$. Thus the kernel is contained in $\mathfrak n^k$. Conversely, step 1.3 makes $\mathfrak n^k$ generated by the degree-$k$ coordinate monomials. To apply [F7], choose a polydisc about $0$ with positive radii whose closure lies inside a common convergence polydisc for a finite expression of an element of $\mathfrak n^k$ as a sum of degree-$k$ monomials times germs. By [F6], the Taylor coefficients of each germ are uniformly bounded on these radii; multiplying by a fixed monomial shifts the coefficient indices and preserves a bound of the same form, and the finite sum preserves such a bound. The Taylor series of the given element has the same kind of bound by [F6]. The two sums agree on the chosen polydisc, so [F7] applies and shows that all coefficients of total degree below $k$ vanish. Hence $\mathfrak n^k$ lies in the kernel, and $H/\mathfrak n^k\cong P/\mathfrak m^k$. [given, F6, F7, step 1.3]
+2.2 For $k\ge1$, [F6] and [F7] give each holomorphic germ a unique power-series coefficient array, independent of its representative after restricting to a common sufficiently small polydisc. Truncation to total degree less than $k$ gives a surjection $H\to P/\mathfrak m^k$; addition and multiplication agree with the truncated coefficient operations, by addition and multiplication of absolutely convergent series and uniqueness in [F7]. For each multi-index $\alpha$ of degree at least $k$, assign the first monomial divisor $w^\beta$ in a fixed ordering among the finitely many divisors of total degree $k$. If $|c_\alpha|\le M\prod_i r_i^{-\alpha_i}$ is a bound from [F6], the coefficient at $w^\nu$ after removing $w^\beta$ from its assigned subseries is either $c_{\nu+\beta}$ or $0$, hence bounded by $(M\prod_i r_i^{-\beta_i})\prod_i r_i^{-\nu_i}$. By [F7] this grouped series defines a holomorphic germ $g_\beta$. Finite grouping therefore writes the tail as $\sum_{|\beta|=k}w^\beta g_\beta$, so the kernel is contained in $\mathfrak n^k$. Conversely, step 1.3 makes $\mathfrak n^k$ generated by the degree-$k$ coordinate monomials. Choose positive radii whose closed polydisc lies inside a common convergence polydisc for a finite expression of an element of $\mathfrak n^k$ as a sum of degree-$k$ monomials times germs. By [F6], each germ's expansion has a coefficient bound on these radii. Multiplication by $w^\beta$ shifts its coefficients and preserves a bound of the same form, with the constant multiplied by $\prod_i r_i^{\beta_i}$; a finite sum also preserves such a bound. The expansion of the given element has a bound on the same radii by [F6]. The two sums agree there, so [F7] identifies their coefficients and shows that all coefficients of total degree below $k$ vanish. Thus $\mathfrak n^k$ lies in the kernel and $H/\mathfrak n^k\cong P/\mathfrak m^k$. [given, F6, F7, step 1.3]
 
 3.1 Taking inverse limits in steps 1.2 and 2.2 identifies $\widehat{A_0}$ and $\widehat H$ with $T$. Each polynomial variable maps to the same formal variable under both completion maps, so the induced map $\widehat{A_0}\to\widehat H$ is the identity of $T$. [step 1.2, step 2.2, algebra]
 

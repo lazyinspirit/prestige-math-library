@@ -33,7 +33,7 @@ verification:
 
 ## Statement
 
-Let $V=\mathbb C^k$, $W=\mathbb C^N$, and let $B_1,B_2\in\operatorname{End}(V)$, $I:W\to V$, $J:V\to W$ satisfy $[B_1,B_2]+IJ=0$. Define for $z=(z_1,z_2)\in\mathbb C^2$
+Fix integers $N\ge1$ and $k\ge0$. Let $V=\mathbb C^k$, $W=\mathbb C^N$, and let $B_1,B_2\in\operatorname{End}(V)$, $I:W\to V$, $J:V\to W$ satisfy $[B_1,B_2]+IJ=0$. Define for $z=(z_1,z_2)\in\mathbb C^2$
 $$a_z=(B_1-z_1,\ B_2-z_2,\ J)^T:V\to V\oplus V\oplus W,\qquad b_z^\dagger=(-B_2+z_2,\ B_1-z_1,\ I):V\oplus V\oplus W\to V.$$
 Then $a_z$ is injective for every $z$ if and only if the datum is costable, and $b_z^\dagger$ is surjective for every $z$ if and only if the datum is stable, where stability and costability have their word-span and invariant-subspace meanings. For the homogeneous linear maps
 $$

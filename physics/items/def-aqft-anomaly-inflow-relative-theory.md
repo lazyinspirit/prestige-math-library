@@ -12,9 +12,13 @@ dependency_level: 5
 deps:
   - def-aqft-global-anomaly-holonomy
   - def-aqft-thooft-anomaly
+  - def-given-spin-and-spinc-structures-and-associated-spinor-bundles
+  - thm-real-pin-spin-topological-double-covers
 dependency_roles:
   def-aqft-global-anomaly-holonomy: formulation-prerequisite
   def-aqft-thooft-anomaly: formulation-prerequisite
+  def-given-spin-and-spinc-structures-and-associated-spinor-bundles: mathematical-premise
+  thm-real-pin-spin-topological-double-covers: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -38,7 +42,7 @@ verification:
 
 ## Definition
 
-Fix an integer $d\ge1$. Let $Y$ be a compact oriented smooth Riemannian $(d+1)$-manifold with boundary $M=\partial Y$, oriented so that the outward unit normal followed by a positively oriented frame of $M$ gives the orientation of $Y$. Let $F^+_{\mathrm{SO}}(Y)$ be the principal bundle of positively oriented orthonormal frames and choose a principal right $\operatorname{Spin}(d+1)$-bundle $Q_Y$ with a smooth equivariant double-cover map $\lambda_Y:Q_Y\to F^+_{\mathrm{SO}}(Y)$ over $\operatorname{Spin}(d+1)\to\mathrm{SO}(d+1)$. This is the spin structure on $Y$; its connection is the lift of the Levi-Civita connection. On $M$, let $F^+_{\mathrm{SO}}(TM)$ denote the positively oriented orthonormal frame bundle for the induced boundary metric. The frames $(\nu_{\mathrm{out}},e_1,\ldots,e_d)$ in $F^+_{\mathrm{SO}}(TY)|_M$ form a reduction identified with $F^+_{\mathrm{SO}}(TM)$, where $\nu_{\mathrm{out}}$ is the outward unit normal. The preimage of this reduction under $\lambda_Y$, with structure group the subgroup $\operatorname{Spin}(d)\subset\operatorname{Spin}(d+1)$ fixing the first frame vector, is a principal $\operatorname{Spin}(d)$-bundle $Q_M\to F^+_{\mathrm{SO}}(TM)$ double-covering that frame bundle; this is the induced boundary spin structure. A background $b$ consists of these metrics and spin structures, together with any specified principal-bundle connections and associated fields on $Y$; restriction gives the boundary background $b|_M$.
+Assume the Countable Choice convention of the global-holonomy definition. For $n\ge1$ use $\mathrm{Cl}_{0,n}$ with $vw+wv=-2\langle v,w\rangle$, and define $\operatorname{Spin}(n)$ as the subgroup of even products of unit vectors. Its standard cover $\rho_n(s)(v)=svs^{-1}$ is onto $SO(n)$ with kernel $\{1,-1\}$; in particular $\operatorname{Spin}(1)=\{1,-1\}$. Principal bundles and connections have the smooth right-action and horizontal-complement meaning stated in the global-holonomy definition. Fix an integer $d\ge1$. Let $Y$ be a compact oriented smooth Riemannian $(d+1)$-manifold with boundary $M=\partial Y$, oriented so that the outward unit normal followed by a positively oriented frame of $M$ gives the orientation of $Y$. Let $F^+_{\mathrm{SO}}(Y)$ be the principal bundle of positively oriented orthonormal frames and choose a principal right $\operatorname{Spin}(d+1)$-bundle $Q_Y$ with a smooth equivariant double-cover map $\lambda_Y:Q_Y\to F^+_{\mathrm{SO}}(Y)$ over $\operatorname{Spin}(d+1)\to\mathrm{SO}(d+1)$. This is the spin structure on $Y$; its connection is the lift of the Levi-Civita connection. On $M$, let $F^+_{\mathrm{SO}}(TM)$ denote the positively oriented orthonormal frame bundle for the induced boundary metric. The frames $(\nu_{\mathrm{out}},e_1,\ldots,e_d)$ in $F^+_{\mathrm{SO}}(TY)|_M$ form a reduction identified with $F^+_{\mathrm{SO}}(TM)$, where $\nu_{\mathrm{out}}$ is the outward unit normal. The preimage of this reduction under $\lambda_Y$, with structure group $\jmath(\operatorname{Spin}(d))=\rho_{d+1}^{-1}(\operatorname{diag}(1,SO(d)))$, is a principal $\operatorname{Spin}(d)$-bundle $Q_M\to F^+_{\mathrm{SO}}(TM)$ double-covering that frame bundle; this is the induced boundary spin structure. The embedding $\jmath$ is induced by $\mathbb R^d\to\mathbb R^{d+1}$, $(x_1,\ldots,x_d)\mapsto(0,x_1,\ldots,x_d)$, on Clifford algebras and their even unit-vector products; it intertwines $\rho_d$ with the block embedding $h\mapsto\operatorname{diag}(1,h)$. The preimage equality is verified below. Thus the subgroup fixes the first vector through its orthogonal action, rather than by the spinor representation. A background $b$ consists of these metrics and spin structures, together with any specified principal-bundle connections and associated fields on $Y$; restriction gives the boundary background $b|_M$.
 
 A $d$-dimensional boundary theory is **relative to an invertible bulk theory** when its partition value is a vector $Z_\partial(M,b|_M)$ in a specified one-dimensional Hermitian line $\mathcal L_\partial(M,b|_M)$, and the bulk assigns a one-dimensional Hermitian line $\mathcal L_{\mathrm{bulk}}(M,b|_M)$ together with a specified unitary isomorphism $\mathcal L_{\mathrm{bulk}}(M,b|_M)\cong\mathcal L_\partial(M,b|_M)^*$ and a vector $Z_{\mathrm{bulk}}(Y,b)$ in that bulk line. The canonical evaluation
 
@@ -65,6 +69,10 @@ The diagram records this condition: the vertical maps are the line evaluation at
 
 ## Definition references
 
+[[def-given-spin-and-spinc-structures-and-associated-spinor-bundles|Spin structures and negative-square Clifford convention]]
+
+[[thm-real-pin-spin-topological-double-covers|Surjectivity and two-element kernel of the spin cover]]
+
 [Freed, Lecture 11, §§11.1–11.2](https://abel.math.harvard.edu/~dafr/CBMS133.pdf)
 
 [Dai and Freed, §5](https://arxiv.org/pdf/hep-th/9405012)
@@ -77,12 +85,16 @@ The diagram records this condition: the vertical maps are the line evaluation at
 
 [F2] [[def-aqft-thooft-anomaly]] defines only a four-dimensional local perturbative anomaly class for a nondynamical background subalgebra modulo admissible local counterterms; it explicitly excludes determinant-line holonomy and makes no global-anomaly claim. It therefore does not establish that a given loop phase cancels or that a bulk exists.
 
+[F3] [[def-given-spin-and-spinc-structures-and-associated-spinor-bundles]] fixes the negative-square Clifford and equivariant principal-cover convention; [[thm-real-pin-spin-topological-double-covers]] supplies the surjective double cover with kernel $\{1,-1\}$.
+
 [A1] The unitary, endpoint-gauge-equivariant bulk/boundary line-duality and its compatibility with bordism gluing are part of the adopted relative-theory data; this definition alone does not construct those data for any proposed model.
 
 [L1] Freed, Lecture 11, §§11.1–11.2, printed pp.154–158/PDF pp.162–166, gives the Pfaffian-line and invertible/relative-theory interface; the later thesis discussion in §11.4 is not used as a proved theorem.
 
 ## Proof
 
-1.1 By [A1], $\mathcal L_{\mathrm{bulk}}(M,b|_M)$ is the dual of $\mathcal L_\partial(M,b|_M)$. Evaluation of a one-dimensional vector space against its dual is a well-defined nondegenerate pairing to $\mathbb C$, so the tensor of the two boundary values gives the stated scalar. [given, A1, algebra]
+1.1 The tangent-subspace inclusion induces an injective Clifford-algebra map: the ordered products of distinct tangent basis vectors remain distinct members of the ambient Clifford basis. Every even product of tangent unit vectors commutes with the first vector $e_0$, because each factor anticommutes with $e_0$. Its orthogonal action fixes $e_0$ and restricts to $\rho_d$ on $e_0^\perp$. Conversely, if $a\in\operatorname{Spin}(d+1)$ has $\rho_{d+1}(a)=\operatorname{diag}(1,h)$, surjectivity in [F3] gives $s\in\operatorname{Spin}(d)$ with $\rho_d(s)=h$. Then $a\jmath(s)^{-1}\in\{1,-1\}\subset\jmath(\operatorname{Spin}(d))$, proving the stated preimage equality. In a boundary orthonormal-frame chart, lift an adapted frame locally through the double cover $\lambda_Y$; all its preimages are its translates by this subgroup. These local charts make the preimage a smooth principal $\operatorname{Spin}(d)$-bundle over $M$, with the equivariant double covering to the boundary frame bundle. This includes $d=1$ and also an empty boundary, where the bundles are empty. [given, F3, algebra, construct]
 
-2.1 The endpoint gauge maps preserve the specified evaluations by the equivariance included in the line-duality data. Write them as $u_*^\partial$ and $u_*^{\mathrm{bulk}}$. Then the scalar comparing $\mathrm{ev}_1\circ(\mathrm{PT}^{\partial}_\gamma\otimes\mathrm{PT}^{\mathrm{bulk}}_\gamma)$ with $\mathrm{ev}_0$ equals the scalar of $\mathrm{ev}_0\circ(((u_*^\partial)^{-1}\circ\mathrm{PT}^{\partial}_\gamma)\otimes((u_*^{\mathrm{bulk}})^{-1}\circ\mathrm{PT}^{\mathrm{bulk}}_\gamma))$. The latter is multiplication by $\operatorname{Hol}_\gamma(\mathcal L_\partial)\operatorname{Hol}_\gamma(\mathcal L_{\mathrm{bulk}})$ because both lines are one-dimensional. Hence the displayed diagram commutes exactly when this product is $1$. This is a definition of the scoped inflow interface, not an existence theorem for a bulk. [F2] explicitly excludes determinant-line holonomy, so it does not derive this geometric cancellation criterion or identify a particular global phase. [given, F1, F2, A1, L1, step 1.1, algebra] ∎
+1.2 By [A1], $\mathcal L_{\mathrm{bulk}}(M,b|_M)$ is the dual of $\mathcal L_\partial(M,b|_M)$. Evaluation of a one-dimensional vector space against its dual is a well-defined nondegenerate pairing to $\mathbb C$, so the tensor of the two boundary values gives the stated scalar. [given, A1, algebra]
+
+2.1 The endpoint gauge maps preserve the specified evaluations by the equivariance included in the line-duality data. Write them as $u_*^\partial$ and $u_*^{\mathrm{bulk}}$. Then the scalar comparing $\mathrm{ev}_1\circ(\mathrm{PT}^{\partial}_\gamma\otimes\mathrm{PT}^{\mathrm{bulk}}_\gamma)$ with $\mathrm{ev}_0$ equals the scalar of $\mathrm{ev}_0\circ(((u_*^\partial)^{-1}\circ\mathrm{PT}^{\partial}_\gamma)\otimes((u_*^{\mathrm{bulk}})^{-1}\circ\mathrm{PT}^{\mathrm{bulk}}_\gamma))$. The latter is multiplication by $\operatorname{Hol}_\gamma(\mathcal L_\partial)\operatorname{Hol}_\gamma(\mathcal L_{\mathrm{bulk}})$ because both lines are one-dimensional. Hence the displayed diagram commutes exactly when this product is $1$. This is a definition of the scoped inflow interface, not an existence theorem for a bulk. [F2] explicitly excludes determinant-line holonomy, so it does not derive this geometric cancellation criterion or identify a particular global phase. [given, F1, F2, A1, L1, step 1.2, algebra] ∎

@@ -33,7 +33,7 @@ sources:
       locator: "§§4.2–4.4, printed pp. 33–42, supersymmetry transformations, covariant derivatives, chiral coordinates and chiral multiplet expansion."
     - title: "S. J. Gates Jr., M. T. Grisaru, M. Roček and W. Siegel, Superspace, or One Thousand and One Lessons in Supersymmetry"
       url: "https://arxiv.org/pdf/hep-th/0108200"
-      locator: "§§3.4 and 3.6, printed pp. 74–79 and 88–96, covariant derivatives, chiral constraints and component coordinates."
+      locator: "§3.4, printed pp. 83–85, covariant derivatives; §§3.5–3.6, printed pp. 89–96, chiral constraints and component expansions."
 verification:
   precheck: pending
 ---

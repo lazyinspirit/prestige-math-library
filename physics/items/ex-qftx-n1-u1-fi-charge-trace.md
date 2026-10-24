@@ -34,7 +34,7 @@ verification:
 
 ## Example
 
-Take one unbroken compact U(1) gauge factor with two left-chiral superfields of charges $+1$ and $-1$, one of each and no additional multiplicities. Use the canonical matter kinetic term with no superpotential ($F=0$) or additional real interactions ($G=0$), and a formal perturbative Wilsonian regulator satisfying the theorem at scale $\lambda>0$. Let the bare field-independent Fayet–Iliopoulos coefficient be $\xi$ in the term $\xi\int d^4x\,[V_1]_D$. Then the perturbative Wilsonian coefficient satisfies $\xi_\lambda=\xi$ at every loop order: the one-loop correction cancels by the charge sum, and the theorem excludes higher-loop corrections. Other real D-term couplings, if added, are not protected by this conclusion.
+Take one unbroken compact U(1) gauge factor with two left-chiral superfields of charges $+1$ and $-1$, one of each and no additional multiplicities. Use the canonical matter kinetic term, a positive field-independent quadratic U(1) gauge-kinetic coefficient, and no nonkinetic holomorphic interaction ($F_{\mathrm{rem}}=0$). Let the only additional real D-term be the bare field-independent Fayet–Iliopoulos term $\xi\int d^4x\,[V_1]_D$, and use a formal perturbative Wilsonian regulator satisfying the theorem at scale $\lambda>0$. Then the perturbative Wilsonian coefficient satisfies $\xi_\lambda=\xi$ at every loop order: the one-loop correction cancels by the charge sum, and the theorem excludes higher-loop corrections. Other real D-term couplings, if added, are not protected by this conclusion.
 
 ## Example references
 
@@ -50,7 +50,7 @@ Take one unbroken compact U(1) gauge factor with two left-chiral superfields of 
 
 [A1] The two multiplets have charges $q_+=1$ and $q_-=-1$, each with multiplicity one.
 
-[A2] The U(1) background is unbroken, $F=G=0$, and the regulator and measure preserve the gauge and rigid N=1 Ward identities.
+[A2] The U(1) background is unbroken, $F_{\mathrm{rem}}=0$, the real D-term contains only the bare FI term, and the regulator and measure preserve the gauge and rigid N=1 Ward identities.
 
 ## Verification
 

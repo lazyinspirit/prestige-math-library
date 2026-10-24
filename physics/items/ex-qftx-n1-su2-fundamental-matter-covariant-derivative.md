@@ -36,12 +36,12 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0101055"
       locator: "§5.2, printed pp. 30–31, equations (5.19)–(5.25): representation-valued chiral fields and covariant derivatives."
 verification:
-  precheck: pending
+  precheck: pass
 ---
 
 ## Example
 
-Choose the fundamental representation $R_{\mathrm f}:SU(2)\to U(\mathbb C^2)$ with Hermitian generators $t_a=\sigma_a/2$. In a local trivialization write a scalar matter component as $\phi=(u,v)^T$ and the Hermitian vector potential as $B_\mu=B_\mu^at_a$, so the supplied connection is $A_\mu=-ig_{\mathrm{YM}}B_\mu$. The fundamental covariant derivative $D_\mu\phi=\partial_\mu\phi+\rho_{\mathrm f*}(A_\mu)\phi$ has components
+Choose the fundamental representation $R_{\mathrm f}:SU(2)\to U(\mathbb C^2)$ defined by $R_{\mathrm f}(h)w=hw$ for $h\in SU(2)\subset M_2(\mathbb C)$ and $w\in\mathbb C^2$, with the standard Hermitian form $w^\dagger z$ on $\mathbb C^2$. Its differential is $\rho_{\mathrm f*}(X)=X$ for $X\in\mathfrak{su}(2)$, and its Hermitian generators are $t_a=\sigma_a/2$. In a local trivialization write a scalar matter component as $\phi=(u,v)^T$ and the Hermitian vector potential as $B_\mu=B_\mu^at_a$, so the supplied connection is $A_\mu=-ig_{\mathrm{YM}}B_\mu$. The fundamental covariant derivative $D_\mu\phi=\partial_\mu\phi+\rho_{\mathrm f*}(A_\mu)\phi$ has components
 
 $$D_\mu u=\partial_\mu u-\frac{i g_{\mathrm{YM}}}{2}\left(B_\mu^3u+(B_\mu^1-iB_\mu^2)v\right),\qquad D_\mu v=\partial_\mu v-\frac{i g_{\mathrm{YM}}}{2}\left((B_\mu^1+iB_\mu^2)u-B_\mu^3v\right).$$
 

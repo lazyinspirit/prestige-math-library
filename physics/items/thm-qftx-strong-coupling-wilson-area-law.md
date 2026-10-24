@@ -61,13 +61,19 @@ proof_strategy: direct
 
 ## Statement
 
-Assume $\mathrm{AC}_\omega$. Let $M,N\geq1$ be integers and use the finite $M$-by-$N$ square lattice with free boundary (no periodic identifications and all boundary links retained), one $SU(2)$ link matrix per positively oriented edge, product normalized round measure, and only link variables (no matter variables), with the Wilson action $S_\beta(U)=\beta\sum_p(1-\tfrac12\operatorname{Tr}_2 U_p)$. Use the defining two-dimensional representation and normalized Wilson loop $W(C)=\tfrac12\operatorname{Tr}_2 U_C$, with edge matrices multiplied in traversal order. Let $\beta=4/g_0^2$ for dimensionless $g_0>0$, and restrict to the explicit strong-coupling window $0<\beta\leq1$ (equivalently $g_0^2\geq4$). For any axis-aligned rectangle contained in the lattice with corners $(a,c)$ and $(b,d)$, where $0\leq a<b\leq M$ and $0\leq c<d\leq N$, let $C_{a,b;c,d}$ be its boundary traversed counterclockwise from $(a,c)$. Its area in plaquette units is $A=(b-a)(d-c)$. The defining representation has nontrivial $\mathbb Z_2$ center charge because $-I_2$ acts as $-I_2$. Put
+Assume $\mathrm{AC}_\omega$. Let $M,N\geq1$ be integers and use the finite $M$-by-$N$ square lattice with free boundary (no periodic identifications and all boundary links retained). Its vertices are $(i,j)$ for $0\leq i\leq M$, $0\leq j\leq N$; its positively oriented edges are eastward $h_{i,j}:(i,j)\to(i+1,j)$ for $0\leq i<M$, $0\leq j\leq N$, and northward $v_{i,j}:(i,j)\to(i,j+1)$ for $0\leq i\leq M$, $0\leq j<N$; and its faces $p_{i,j}$ for $0\leq i<M$, $0\leq j<N$ have counterclockwise boundary words $(h_{i,j},v_{i+1,j},\bar h_{i,j+1},\bar v_{i,j})$. Use the matrix group $SU(2)=\{U\in M_2(\mathbb C):U^*U=I_2,\det U=1\}$ with matrix multiplication and its identity defining representation. In real coordinates its elements are
+
+$$
+U(x)=\begin{pmatrix}x_0+ix_3&x_2+ix_1\\-x_2+ix_1&x_0-ix_3\end{pmatrix},\qquad x\in S^3:=\{x\in\mathbb R^4:\textstyle\sum_{j=0}^3x_j^2=1\}.
+$$
+
+Let $\sigma_3$ be the induced round surface-area measure on $S^3$, with total area $2\pi^2$, and let $\mu_2$ be the pushforward of $\sigma_3/(2\pi^2)$ under this map. Each positively oriented edge carries one link matrix; reverse links use inverses. For each face $p$, $U_p$ is the product of its boundary links in traversal order; for a loop $C$, $U_C$ is the analogous ordered edge product. Use the Wilson action $S_\beta(U)=\beta\sum_p(1-\tfrac12\operatorname{Tr}_2 U_p)$ and normalized loop $W(C)=\tfrac12\operatorname{Tr}_2 U_C$. Let $\beta=4/g_0^2$ for dimensionless $g_0>0$, and restrict to the explicit strong-coupling window $0<\beta\leq1$ (equivalently $g_0^2\geq4$). For any axis-aligned rectangle contained in the lattice with corners $(a,c)$ and $(b,d)$, where $0\leq a<b\leq M$ and $0\leq c<d\leq N$, let $C_{a,b;c,d}$ be its boundary traversed counterclockwise from $(a,c)$. Its area in plaquette units is $A=(b-a)(d-c)$. Define $Z(SU(2)):=\{z\in SU(2):zU=Uz\text{ for every }U\in SU(2)\}$ and $\chi:Z(SU(2))\to\{\pm1\}$ by $z=\chi(z)I_2$. Then $Z(SU(2))=\{I_2,-I_2\}$ and the defining representation has the nontrivial central character $\chi(I_2)=1$, $\chi(-I_2)=-1$. Put
 
 $$
 \lambda(\beta):=\frac{\int_{SU(2)}\tfrac12\operatorname{Tr}_2(U)e^{\beta\operatorname{Tr}_2(U)/2}\,d\mu_2(U)}{\int_{SU(2)}e^{\beta\operatorname{Tr}_2(U)/2}\,d\mu_2(U)},
 $$
 
-where $\mu_2$ is normalized round measure on $SU(2)\cong S^3$. Then $0<\lambda(\beta)<1$ and the exact finite-lattice expectation is
+where $\tau(U)=\tfrac12\operatorname{Tr}_2(U)$. Then $0<\lambda(\beta)<1$ and the exact finite-lattice expectation is
 
 $$
 \langle W(C_{a,b;c,d})\rangle_\beta=\lambda(\beta)^A=\exp\!\bigl(-\sigma_{\rm lat}(\beta)A\bigr),\qquad \sigma_{\rm lat}(\beta):=-\log\lambda(\beta)>0.
@@ -135,4 +141,6 @@ The parameter $\beta$ and the lattice string tension $\sigma_{\rm lat}$ are dime
 
 3.1 By [F4] the plaquette variables in this ordered product have the product probability law $\nu_\beta^{\otimes A}$. Each defining-representation matrix entry has modulus at most $1$, so every entry of the finite matrix-product integrand is bounded and belongs to $L^1$ by [F8]. Fubini applied entry by entry therefore replaces each independent factor by its matrix expectation without changing its order. By [F5] each expectation is $\lambda I_2$, so the expected loop holonomy is $(\lambda I_2)^A=\lambda^A I_2$. [F4, F5, F8, step 2.1, algebra, F7]
 
-4.1 Taking half the trace gives $\langle W(C)\rangle_\beta=\lambda^A$. Since $0<\lambda<1$ by [F5], $\sigma_{\rm lat}=-\log\lambda$ is positive and $\lambda^A=e^{-\sigma_{\rm lat}A}$ for every positive integer area $A$. The conclusion is the stated finite-lattice model deduction only. [F2, F5, step 3.1, algebra] ∎
+4.1 Taking half the trace gives $\langle W(C)\rangle_\beta=\lambda^A$. Since $0<\lambda<1$ by [F5], $\sigma_{\rm lat}=-\log\lambda$ is positive and $\lambda^A=e^{-\sigma_{\rm lat}A}$ for every positive integer area $A$. The conclusion is the stated finite-lattice model deduction only. [F2, F5, step 3.1, algebra]
+
+5.1 To identify the center, write $D=\operatorname{diag}(i,-i)$ and $J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$; both belong to $SU(2)$. If $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in Z(SU(2))$, then $AD=DA$ forces $b=c=0$. The conditions $A\in SU(2)$ then give $A=\operatorname{diag}(z,z^{-1})$ with $|z|=1$, and $AJ=JA$ forces $z=z^{-1}$, hence $z=\pm1$. Conversely, both scalar matrices $\pm I_2$ commute with every element of $SU(2)$. Since the defining representation is the identity matrix representation, its character on this center is $\chi(\pm I_2)=\pm1$, as stated. [given, algebra] ∎

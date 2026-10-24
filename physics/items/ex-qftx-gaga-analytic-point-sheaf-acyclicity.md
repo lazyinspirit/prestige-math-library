@@ -12,6 +12,8 @@ deps:
   - def-axiom-of-choice
   - def-qftx-analytic-coherent-module
   - thm-qftx-gaga-analytic-oka-coherence
+  - def-holomorphic-function-in-several-complex-variables
+  - cor-holomorphic-functions-in-several-variables-are-smooth
   - thm-power-series-expansion-in-several-complex-variables
   - def-skyscraper-sheaf-abelian-group
   - thm-sheaf-morphism-isomorphism-stalkwise
@@ -20,6 +22,8 @@ dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-qftx-analytic-coherent-module: mathematical-premise
   thm-qftx-gaga-analytic-oka-coherence: mathematical-premise
+  def-holomorphic-function-in-several-complex-variables: mathematical-premise
+  cor-holomorphic-functions-in-several-variables-are-smooth: mathematical-premise
   thm-power-series-expansion-in-several-complex-variables: mathematical-premise
   def-skyscraper-sheaf-abelian-group: mathematical-premise
   thm-sheaf-morphism-isomorphism-stalkwise: mathematical-premise
@@ -35,7 +39,7 @@ sources:
   references:
     - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry"
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
-      locator: "Chapter IX §4.B, pp. 419–421: local coherent-sheaf vanishing; the quotient identification is verified here by stalks."
+      locator: "Chapter IX §4.B, equation (4.3) and Lemma 4.4, printed pp. 420–421: the local-resolution and dimension-shift method for coherent-sheaf vanishing; this example's vanishing follows from the cited local theorem, and its quotient identification is verified here by stalks."
     - title: "Joachim Wehler, Stein Manifolds"
       url: "https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf"
       locator: "§5.2, Theorem 5.14 and Corollary 5.15, printed pp. 174–180: coherent-sheaf vanishing on sufficiently small polydiscs."
@@ -57,7 +61,7 @@ $$\Gamma(D,\mathcal Q)\cong\mathbb C,\qquad H^q(D,\mathcal Q)=0\quad(q>0).$$
 
 ## Example references
 
-[Demailly, Chapter IX §4.B, pp. 419–421](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter IX §4.B, equation (4.3) and Lemma 4.4, pp. 420–421 (local-resolution and dimension-shift method)](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
 [Wehler, §5.2, Theorem 5.14 and Corollary 5.15, pp. 174–180](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
@@ -71,7 +75,7 @@ $$\Gamma(D,\mathcal Q)\cong\mathbb C,\qquad H^q(D,\mathcal Q)=0\quad(q>0).$$
 
 [F2] [[thm-qftx-gaga-analytic-oka-coherence]]: under full AC, $\mathcal O_D$ is coherent, finite-rank free analytic modules are coherent, and cokernels of morphisms of coherent analytic modules are coherent.
 
-[F3] [[thm-power-series-expansion-in-several-complex-variables]]: a holomorphic germ at $0$ has a convergent multivariable power series on a smaller polydisc.
+[F3] [[def-holomorphic-function-in-several-complex-variables]] defines holomorphicity by complex differentiability at every point; [[cor-holomorphic-functions-in-several-variables-are-smooth]] shows that a holomorphic representative is continuous and separately holomorphic. Hence [[thm-power-series-expansion-in-several-complex-variables]] applies and gives its convergent multivariable power series on a smaller polydisc.
 
 [F4] [[def-skyscraper-sheaf-abelian-group]]: the skyscraper sheaf $i_*\mathbb C$ has sections $\mathbb C$ on opens containing $0$ and zero on opens not containing $0$; its stalk is $\mathbb C$ at $0$ and zero away from $0$.
 

@@ -64,7 +64,7 @@ Thus every retained holomorphic superpotential coefficient in the fixed unrescal
 
 [F1] [[def-aqft-susy-wilsonian-action]]: the Wilsonian action has a derivative-free holomorphic chiral integrand $F_\lambda(\Phi,W)$ and a separate real D-term; its finite operator quotient, ordered basis, cutoff, and field coordinates are supplied data.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under the stated rigid N=1 and BRST/gauge Ward identities, local coefficientwise spurion extension with independent unconstrained real background jets and chirality before constant-background evaluation, local derivative expansion, one-particle-irreducible vertex prescription, and anomaly-free hypotheses, the full Wilsonian chiral integrand is coefficientwise unchanged in formal perturbation theory except that the holomorphic gauge coupling can receive a one-loop correction; D-terms are not protected.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its stated local spurion, formal background-jet, rigid N=1 and BRST/gauge Ward-identity, derivative-expansion, one-particle-irreducible vertex and anomaly-free hypotheses, collect all matter-independent quadratic gauge terms into $P_{\mathrm{kin}}$ and write $F_{\mathrm{rem}}$ for the remaining derivative-free holomorphic integrand. Then $F_{\mathrm{rem},\lambda}=F_{\mathrm{rem},\Lambda_0}$ coefficientwise; the collected gauge-kinetic coefficients may receive one-loop but no higher-loop corrections. The real D-term is not protected.
 
 [A1] [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. Full AC is inherited only because the selected invariant-quotient/on-shell-equivalence input uses it; the restriction to $W=0$ and fixed-basis coordinate projection below do not use a choice function.
 
@@ -74,7 +74,9 @@ Thus every retained holomorphic superpotential coefficient in the fixed unrescal
 
 ## Proof
 
-1.1 The selected finite invariant-quotient/on-shell-equivalence interpretation carries the full-AC premise [A1]. Separately, by [F2] and [A3], the complete derivative-free holomorphic chiral integrand satisfies $F_\lambda(\Phi,W)=F_{\Lambda_0}(\Phi,W)$ coefficientwise for every formal perturbative order. Setting $W=0$ and restricting to the fixed light-field variables preserves this identity, so $W_\lambda(\Phi)=W_{\Lambda_0}(\Phi)$. [given, F1, F2, A1, A3]
+**Given:** [F1], [F2] and [A1]–[A3].
+
+1.1 The selected invariant-quotient/on-shell-equivalence interpretation carries the full-AC premise [A1]. Apply [F2] using [A3], collecting all matter-independent quadratic gauge terms, including any initially written in $F_\lambda$, into $P_{\mathrm{kin},\lambda}$. The remaining integrand satisfies $F_{\mathrm{rem},\lambda}=F_{\mathrm{rem},\Lambda_0}$ coefficientwise. Every collected quadratic term vanishes at $W=0$, so $F_\lambda(\Phi,0)=F_{\mathrm{rem},\lambda}(\Phi,0)$ at each scale. Evaluating the remainder identity at $W=0$ and restricting to the fixed light-field variables gives $W_\lambda(\Phi)=W_{\Lambda_0}(\Phi)$. [given, F1, F2, A1, A3]
 
 2.1 The map $P_{\mathrm{hol}}$ is the same linear coordinate projection at both scales by [A2]. Applying it to the equality in step 1.1 gives $P_{\mathrm{hol}}W_\lambda=P_{\mathrm{hol}}W_{\Lambda_0}$. Since the retained operators are a fixed ordered basis, equality of their coordinate vectors gives equality of each retained coefficient. [F1, A2, step 1.1, algebra]
 

@@ -16,6 +16,8 @@ deps:
   - lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold
   - thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals
   - thm-cohomology-projective-space-twisting-sheaves
+  - lem-chern-class-naturality-additivity-and-splitting
+  - thm-long-exact-sequence-sheaf-cohomology
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-chern-character-and-todd-class: mathematical-premise
@@ -23,6 +25,8 @@ dependency_roles:
   lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold: mathematical-premise
   thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals: mathematical-premise
   thm-cohomology-projective-space-twisting-sheaves: mathematical-premise
+  lem-chern-class-naturality-additivity-and-splitting: mathematical-premise
+  thm-long-exact-sequence-sheaf-cohomology: mathematical-premise
 axiom_base: "ZF + full AC inherited from the named projective-cohomology and characteristic-class suppliers."
 proof_strategy: direct
 provenance:
@@ -42,11 +46,13 @@ verification:
 
 ## Statement
 
-Let $\mathcal F$ be the locally free algebraic middle cohomology of a linear monad
+Let $k,N\in\mathbb Z_{\ge0}$, and let $\mathcal F$ be the locally free algebraic middle cohomology of a linear monad
 $$
 \mathcal O_{\mathbb P^3}(-1)^{\oplus k}\longrightarrow\mathcal O_{\mathbb P^3}^{\oplus(2k+N)}\longrightarrow\mathcal O_{\mathbb P^3}(1)^{\oplus k}
 $$
-on $\mathbb P^3_\mathbb C$, with exactness at both ends. Let $H_{\rm alg}=c_1^{\rm alg}(\mathcal O_{\mathbb P^3}(1))$ in the Chow ring and let $H_{\rm top}=c_1^{\rm top}(\mathcal O_{\mathbb P^3}(1))$ in singular cohomology. The hyperplane cycle map identifies $H_{\rm alg}$ with $H_{\rm top}$; write $H$ for either class in the corresponding formula. The algebraic Chern character is $N-kH_{\rm alg}^2$, the algebraic first Chern class is zero, the algebraic second Chern class is $kH_{\rm alg}^2$, and the algebraic Euler characteristic is $N-2k$. The underlying topological bundle has total Chern class $1+kH_{\rm top}^2$ through degree six and topological Chern character $N-kH_{\rm top}^2$.
+on $\mathbb P^3_\mathbb C$, with exactness at both ends.
+
+For algebraic sheaf cohomology, write $H^q(\mathbb P^3,\mathcal G)$ for the right-derived global-sections group. If these groups are finite-dimensional and vanish for all sufficiently large $q$, define the algebraic Euler characteristic by $\chi(\mathcal G)=\sum_{q\ge0}(-1)^q\dim_{\mathbb C}H^q(\mathbb P^3,\mathcal G)$. Let $H_{\rm alg}=c_1^{\rm alg}(\mathcal O_{\mathbb P^3}(1))$ in the Chow ring and let $H_{\rm top}=c_1^{\rm top}(\mathcal O_{\mathbb P^3}(1))$ in singular cohomology. The hyperplane cycle map $\operatorname{cl}:A^1(\mathbb P^3)\to H^2(\mathbb P^3;\mathbb Z)$ identifies $H_{\rm alg}$ with $H_{\rm top}$; write $H$ for either class in the corresponding formula. The algebraic Chern character is $N-kH_{\rm alg}^2$, the algebraic first Chern class is zero, the algebraic second Chern class is $kH_{\rm alg}^2$, and the algebraic Euler characteristic is $N-2k$. The analytification of $\mathcal F$ has total topological Chern class $1+kH_{\rm top}^2$ through degree six and topological Chern character $N-kH_{\rm top}^2$.
 
 Let $\jmath:\mathbb C^4\to\mathbb C^4$ be the conjugate-linear map
 $$\jmath(\lambda_1,\lambda_2,\mu_1,\mu_2)=(-\bar\lambda_2,\bar\lambda_1,-\bar\mu_2,\bar\mu_1),\qquad \jmath^2=-1.$$
@@ -90,15 +96,19 @@ and the fiber over the remaining point is $\ell_\infty=\{\lambda_1=\lambda_2=0\}
 
 [F6] The algebraic first Chern class of $\mathcal O(1)$ is the hyperplane divisor class; its cycle class is the Poincaré dual of the complex hyperplane, which is the Euler class of its complex normal line. Thus its cycle class is $H_{\rm top}$. [[def-chern-character-and-todd-class]], [[lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold]]
 
+[F7] For a short exact sequence of finite locally free sheaves, total Chern classes satisfy the Whitney product formula, and pullback to a composition of projective bundles is injective and splits the bundles into line-bundle filtrations. On that pullback the Chern roots of the middle bundle are the union of the roots of the subbundle and quotient; since $\operatorname{ch}(E)=\sum_i e^{x_i}$, the Chern character is additive in the short exact sequence. [[lem-chern-class-naturality-additivity-and-splitting]], [[def-chern-character-and-todd-class]]
+
+[F8] A short exact sequence of sheaves has the natural long exact sequence in the same sheaf cohomology groups. If the cohomology groups in the sequence are finite-dimensional and vanish in sufficiently high degree, alternating sums of their dimensions are additive. [[thm-long-exact-sequence-sheaf-cohomology]]
+
 ## Proof
 
 **Given:** The two exact sequences obtained by factoring the locally free monad through $K=\ker(\mathcal O(1)^{\oplus k}\leftarrow\mathcal O^{\oplus(2k+N)})$.
 
-1.1 Exactness gives $0\to K\to\mathcal O^{2k+N}\to\mathcal O(1)^k\to0$ and $0\to\mathcal O(-1)^k\to K\to\mathcal F\to0$. Their classes in the Grothendieck group therefore give
+1.1 Exactness gives $0\to K\to\mathcal O^{2k+N}\to\mathcal O(1)^k\to0$ and $0\to\mathcal O(-1)^k\to K\to\mathcal F\to0$. By [F7], additivity of the Chern character in these short exact sequences gives
 $$
-[\mathcal F]=(2k+N)[\mathcal O]-k[\mathcal O(-1)]-k[\mathcal O(1)].
+\operatorname{ch}(\mathcal F)=(2k+N)\operatorname{ch}(\mathcal O)-k\operatorname{ch}(\mathcal O(-1))-k\operatorname{ch}(\mathcal O(1)).
 $$
-Additivity of Euler characteristic and [F4] give $\chi(\mathcal F)=(2k+N)-4k-0=N-2k$. [A1, F4, algebra]
+By [F4], the cohomology groups of $\mathcal O(-1)$, $\mathcal O$, and $\mathcal O(1)$ are finite-dimensional and vanish above degree three. The long exact sequences [F8] then give the same finiteness and vanishing for $K$ and $\mathcal F$, so [F8] also gives additivity of $\chi$. Since $\chi(\mathcal O(-1))=0$, $\chi(\mathcal O)=1$, and $\chi(\mathcal O(1))=4$ by [F4], we obtain $\chi(\mathcal F)=(2k+N)-4k-0=N-2k$. [A1, F4, F7, F8, algebra]
 
 1.2 The quaternionic coordinates in the Statement give local product charts for $\pi$: on the finite chart, with $v=\lambda_2/\lambda_1$, the base coordinates $z_1,z_2$ recover the remaining affine coordinates by $\mu_1/\lambda_1=z_1-\bar z_2v$ and $\mu_2/\lambda_1=z_2+\bar z_1v$; the charts with $\lambda_2\ne0$ and the reciprocal quaternionic chart at infinity cover the omitted points. Hence $\pi$ is a smooth submersion, and each fiber $L_x=\pi^{-1}(x)$ is a closed complex linear $\mathbb P^1\subset\mathbb P^3$. Let $\omega_x\in H^4(S^4,S^4\setminus\{x\};\mathbb Z)$ be the positive local orientation class, whose image in absolute cohomology is $u$. In a local product chart over an oriented ball around $x$, the pulled-back relative class $\pi^*\omega_x$ is the positive generator on every normal four-disk to $L_x$; it is therefore the normalized Thom class of that fiber, with normal orientation induced from the oriented base. Its absolute image is $\pi^*u$. The fiber has real dimension $2$ and codimension $4$, so [F3] gives the sign $(-1)^{4\cdot2}=+1$ and identifies $\pi^*u$ with the Poincaré dual of $[L_x]$. To identify this dual class, choose two complex hyperplanes meeting transversely in $L_x$. Their positive normal Thom classes multiply to the positive normal Thom class of $L_x$ (in local holomorphic coordinates this is the product of the two complex-disk generators); by [F6] each hyperplane class is $H_{\rm top}$. Thus the Poincaré dual of $[L_x]$ is $H_{\rm top}^2$, proving $\pi^*u=H_{\rm top}^2$. [F2, F3, F6, algebra]
 
@@ -106,10 +116,10 @@ Additivity of Euler characteristic and [F4] give $\chi(\mathcal F)=(2k+N)-4k-0=N
 $$
 \operatorname{ch}(\mathcal F)=(2k+N)-ke^{-H}-ke^H=N-kH^2,
 $$
-because $H^4=0$ on the complex threefold and the odd powers cancel. Thus $c_1^{\rm alg}(\mathcal F)=0$ and $c_2^{\rm alg}(\mathcal F)=kH^2$. In the underlying topological category the same exact sequences are exact sequences of complex vector bundles, so [F5] and the line-class identity $c_1(\mathcal O(1))=H$ give
+because $H^4=0$ on the complex threefold and the odd powers cancel. The integral Whitney formula [F7] applied to the same two sequences gives $c^{\rm alg}(\mathcal F)=(1-H^2)^{-k}=1+kH^2$ through codimension three, so $c_1^{\rm alg}(\mathcal F)=0$ and $c_2^{\rm alg}(\mathcal F)=kH^2$ integrally. In the underlying topological category the same exact sequences are exact sequences of complex vector bundles, so [F5] and the line-class identity $c_1(\mathcal O(1))=H$ give
 $$
 c(\mathcal F)=\frac{1}{(1-H)^k(1+H)^k}=(1-H^2)^{-k}=1+kH^2
 $$
-through degree six, since $H^4=0$. Hence the topological classes are $c_1(\mathcal F)=0$, $c_2(\mathcal F)=kH^2$, and $c_3(\mathcal F)=0$. The universal formulas $\operatorname{ch}_1=c_1$, $\operatorname{ch}_2=\tfrac12(c_1^2-2c_2)$, and $\operatorname{ch}_3=\tfrac16(c_1^3-3c_1c_2+3c_3)$ then give the topological $\operatorname{ch}(\mathcal F)=N-kH^2$. This compares only the identical finite line-bundle resolution and its line class, not arbitrary analytic and algebraic cohomology. [F1, F2, F5, step 1.1, algebra]
+through degree six, since $H^4=0$. Hence the topological classes are $c_1(\mathcal F)=0$, $c_2(\mathcal F)=kH^2$, and $c_3(\mathcal F)=0$. The universal formulas $\operatorname{ch}_1=c_1$, $\operatorname{ch}_2=\tfrac12(c_1^2-2c_2)$, and $\operatorname{ch}_3=\tfrac16(c_1^3-3c_1c_2+3c_3)$ then give the topological $\operatorname{ch}(\mathcal F)=N-kH^2$. This compares only the identical finite line-bundle resolution and its line class, not arbitrary analytic and algebraic cohomology. [F1, F2, F5, F7, step 1.1, algebra]
 
 3.1 Write $c_2(E)=m u$ for $m\in\mathbb Z$. Naturality of Chern classes and the pullback hypothesis give $mH^2=\pi^*c_2(E)=c_2(\mathcal F)=kH^2$ by steps 2.1 and 1.2. Since $H^2$ is a nonzero generator by [F2], $m=k$, proving both the stated Chern class and its evaluation on $[S^4]$. [F2, step 2.1, step 1.2, algebra] ∎

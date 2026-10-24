@@ -41,13 +41,21 @@ verification:
 
 ## Statement
 
-Let $\pi:Z=\mathbb CP^3\to S^4$ be the oriented twistor fibration with the conventions stated in the following references section, let $H=c_1(\mathcal O_Z(1))$, and let $E\to S^4$ be a framed unitary ASD rank-$N$ bundle whose Ward bundle is $\mathcal E=\pi^*E$ as a smooth bundle. Suppose $\mathcal E$ is the cohomology of a linear monad
+Let $S^4=\mathbb H\mathbb P^1$ have the unit round metric and the orientation $dx^0\wedge dx^1\wedge dx^2\wedge dx^3$ in the stereographic coordinates $z_1=x^0+ix^1$, $z_2=x^2+ix^3$. Write $Z=\mathbb P_{\mathbb C}(\mathbb H^2)\cong\mathbb C\mathbb P^3$, fix the right quaternionic structure $j$ with $j^2=-1$, and define $\pi:Z\to S^4$ by $\pi([v])=\operatorname{span}_{\mathbb C}(v,jv)$. Its fibers are the real twistor lines. The complex orientation on $Z$ is the one for which vertical complex orientation followed by the displayed base orientation is the complex orientation. Let $\mathcal O_Z(1)$ be the dual of the tautological line bundle and set $H=c_1(\mathcal O_Z(1))\in H^2(Z;\mathbb Z)$, viewed in rational cohomology for $\operatorname{ch}$. Let $u\in H^4(S^4;\mathbb Z)$ satisfy $\langle u,[S^4]\rangle=1$.
+
+Fix integers $k\ge0$ and $N\ge2$. Let $E\to S^4$ be a framed Hermitian rank-$N$ bundle, with a smooth unitary connection $A$ and Ward bundle $\mathcal E$ whose underlying smooth bundle is $\pi^*E$. Write $F_A$ for the anti-Hermitian curvature and $F_A^+=(F_A+*_gF_A)/2$, where $*_g$ is the Hodge star for the stated metric and orientation; assume $F_A^+=0$. Define
+
+$$q_N(E,A)=-\frac{1}{8\pi^2}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A).$$
+
+Suppose $\mathcal E$ is the middle cohomology of a holomorphic complex exact at its end terms,
 
 $$\mathcal O_Z(-1)^{\oplus k}\longrightarrow\mathcal O_Z^{\oplus(2k+N)}\longrightarrow\mathcal O_Z(1)^{\oplus k}.$$
 
-Then $\operatorname{ch}(\mathcal E)=N-kH^2$, $c_1(\mathcal E)=0$, and $c_2(\mathcal E)=kH^2$. For the twistor orientation specified in the Definition, if $u\in H^4(S^4;\mathbb Z)$ satisfies $\langle u,[S^4]\rangle=1$, then $\pi^*u=H^2$. Consequently
+Assume this middle cohomology is locally free. Then $\operatorname{ch}(\mathcal E)=N-kH^2$, $c_1(\mathcal E)=0$, and $c_2(\mathcal E)=kH^2$. For the stated positive twistor orientation,
 
-$$k=\langle c_2(E),[S^4]\rangle=-q_N(E,A).$$
+$$\pi^*u=H^2.$$
+
+Consequently $k=\langle c_2(E),[S^4]\rangle=-q_N(E,A)$.
 
 ## Statement references
 

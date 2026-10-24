@@ -32,17 +32,17 @@ sources:
   references:
     - title: "David Tong, TASI Lectures on Solitons: Instantons, Monopoles, Vortices and Kinks"
       url: https://arxiv.org/pdf/hep-th/0509216
-      locator: "§2.1.2, equations (2.16)–(2.18), printed pp. 42–43 (PDF pp. 44–45): static energy, Bianchi surface term, Bogomolny square completion, sign-dependent first-order equations. Tong's energy coefficient 1/e^2 and surface coefficient 2/e^2 are converted by g^2=e^2/2."
+      locator: "§1.1, normalization footnote on printed p. 6 (PDF p. 7), and §2.1.2, equations (2.16)–(2.18), printed p. 43 (PDF p. 44): static energy, Bianchi surface term, Bogomolny square completion, sign-dependent first-order equations. Tong's energy coefficient 1/e^2 and surface coefficient 2/e^2 are converted by g^2=e^2: kappa is twice the normalized Hermitian matrix trace, so 1/(2g^2) kappa equals 1/e^2 Tr."
     - title: "Jeffrey A. Harvey, Magnetic Monopoles, Duality, and Supersymmetry"
       url: https://arxiv.org/pdf/hep-th/9603086
-      locator: "§2.1, equations (2.3)–(2.6), printed pp. 18–19 (PDF pp. 19–20): Bianchi integration by parts, positive-charge square completion, and the sign-reversed bound. Harvey uses B_i=-epsilon_ijk F_jk/2 and e inside D; this item proves the identity in its own stated convention."
+      locator: "§2.1, equations (2.3)–(2.6), printed p. 19 (PDF p. 20): Bianchi integration by parts, positive-charge square completion, and the sign-reversed bound. Harvey uses B_i=-epsilon_ijk F_jk/2 and e inside D; this item proves the identity in its own stated convention."
 verification:
   precheck: pending
 ---
 
 ## Statement
 
-Assume $\mathrm{AC}_\omega$. Use natural units on Minkowski $\mathbb R^{1,3}$ with $\eta=\operatorname{diag}(-1,1,1,1)$ and oriented Euclidean spatial slice with $\epsilon_{123}=1$. Fix the global group $SU(2)$, basis $T_a=-i\sigma_a/2$, and positive $\operatorname{Ad}$-invariant form $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$ with $\kappa(T_a,T_b)=\delta_{ab}$. Let $g>0$ be dimensionless and let $A_i,\Phi$ be smooth static fields in the zero-potential adjoint-Higgs model, with $[A_i]=[\Phi]=\mathrm{length}^{-1}$, $F_{ij}=\partial_iA_j-\partial_jA_i+[A_i,A_j]$, $D_i\Phi=\partial_i\Phi+[A_i,\Phi]$, and $B_i=\tfrac12\epsilon_{ijk}F_{jk}$. Require the model's smooth finite-energy boundary reduction: $|\Phi|_\kappa\to v>0$ for a fixed $v$ of dimension $\mathrm{length}^{-1}$, with smooth $n_\infty=\Phi/v$, the limiting tangential covariant derivative of $n_\infty$ vanishes, and the limiting magnetic field lies in its stabilizer algebra. Suppose the energy
+Assume $\mathrm{AC}_\omega$. Use natural units on Minkowski $\mathbb R^{1,3}$ with $\eta=\operatorname{diag}(-1,1,1,1)$ and oriented Euclidean spatial slice with $\epsilon_{123}=1$. Fix the global group $SU(2)$, basis $T_a=-i\sigma_a/2$, and positive $\operatorname{Ad}$-invariant form $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$ with $\kappa(T_a,T_b)=\delta_{ab}$. Let $g>0$ be dimensionless and let $A_i,\Phi$ be smooth static fields in the zero-potential adjoint-Higgs model, with $[A_i]=[\Phi]=\mathrm{length}^{-1}$, $F_{ij}=\partial_iA_j-\partial_jA_i+[A_i,A_j]$, $D_i\Phi=\partial_i\Phi+[A_i,\Phi]$, and $B_i=\tfrac12\epsilon_{ijk}F_{jk}$. Require the model's smooth finite-energy boundary reduction: $|\Phi|_\kappa\to v>0$ for a fixed $v$ of dimension $\mathrm{length}^{-1}$, with $n_\infty(\omega)=\lim_{R\to\infty}\Phi(R\omega)/v$ in $C^\infty(S^2,\mathfrak{su}(2))$. Use the adapted limiting connections $\mathcal A_{\alpha,\infty}$ of the static-sector Definition: the tangential condition is $[\mathcal A_{\alpha,\infty},T_3]=0$ in each adapted frame. The scaled radial limit $B_\infty(\omega):=\lim_{R\to\infty}R^2\sum_i\omega_iB_i(R\omega)$ exists uniformly on each closed hemisphere and satisfies $[B_\infty(\omega),n_\infty(\omega)]=0$. Suppose the energy
 
 $$E=\frac{1}{2g^2}\int_{\mathbb R^3}\sum_i\bigl(\kappa(B_i,B_i)+\kappa(D_i\Phi,D_i\Phi)\bigr)\,d^3x$$
 
@@ -98,4 +98,4 @@ Consequently $E\ge |T|$. If $T>0$, equality holds exactly when $B_i=D_i\Phi$ for
 
 ## Remarks
 
-Tong's coefficient $1/e^2$ on the quadratic energy and $2/e^2$ on its surface term agree with this convention when $g^2=e^2/2$ and the same normalized invariant form is used. The proof is a classical model deduction and establishes no existence result for any specified topological sector.
+For anti-Hermitian $X,Y$, put $X_H=iX$ and $Y_H=iY$. Then $\kappa(X,Y)=2\operatorname{Tr}_2(X_HY_H)$. Consequently the energy coefficient $\kappa/(2g^2)$ becomes $\operatorname{Tr}_2/g^2$, and the surface coefficient $\kappa/g^2$ becomes $2\operatorname{Tr}_2/g^2$. Both match Tong's equation (2.16) at $g^2=e^2$. The proof is a classical model deduction and establishes no existence result for any specified topological sector.

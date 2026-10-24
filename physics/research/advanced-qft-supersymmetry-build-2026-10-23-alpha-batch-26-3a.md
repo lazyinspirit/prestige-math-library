@@ -1,0 +1,48 @@
+# Batch 26 Step 3a adjudication
+
+Run: `advanced-qft-supersymmetry-build-2026-10-23`; group: `batch-26`.
+Scope: three touched obligations; no reader, refuter, or page obligations. Reader findings and `refute-26.json` are empty. Reviews are independent local adjudication, not publication or judgment.
+
+## Completed level 4 review
+
+`def-aqft-threshold-matching-map`: accepted reader typing repair, confidence 1. Current raw SHA256 `b7ad40cc9e319826cd1d2bf12d911d6b27d08f532b6f5bf26c9bc6cdc1aa868c` equals the post-reader snapshot. Substituting the original manifest Definition into this carrier reconstructs raw SHA256 `75028cec63605508815e9169432e3e1dbd0a79cbd2aacc427ad2ea359108e796`, exactly the pre-reader snapshot. This authenticates the full historical delta without assuming a missing original file. The delta explicitly supplies common output spaces, amplitude-map domains, regulator labels and retained-order projections; it does not construct continuum amplitudes or infer RG compatibility from matching.
+
+Direct suppliers inspected: `def-aqft-model-and-scale-data` (distinct scale roles and finite-regulator scope); `def-aqft-operator-basis-physical-data` (finite fields, jet relations, representatives and physical-symmetry qualifications); `def-aqft-scheme-and-wilson-coefficients` (finite complex coordinates, realification and continuous supplied beta fields). All are draft conditional interfaces; readiness records alone were not treated as proofs. Open matching-domain typing follows from the C1 map and open beta domains. Empty output lists make amplitude equality vacuous but do not imply compatibility; positive scale and dimension restrictions are preserved. Full Choice is not newly used.
+
+Consumer review: the local theorem and example retain their selected-output interpretations. Outside batch 26, `def-aqft-susy-wilsonian-action` uses only the finite matching record; `pthm-aqft-supersymmetric-threshold-matching` F4 and step 4.1 explicitly leave amplitude equality to be checked. Neither needs source edits. No further consumer hop is triggered because neither consumer interface changes. The reader's batch-45 contract excerpt freshness note remains an owner follow-up, not authority to edit that contract.
+
+Sources actually inspected: Manohar, https://arxiv.org/pdf/1804.05863, printed pp. 38–40, §§5.5–5.7 (matching and separated logarithms); Burgess, https://arxiv.org/html/hep-th/0701053, §4.1.4 (selected threshold matching). These motivate supplied data; no generic existence theorem is imported. The specific CRITICAL risk review is recorded in the owning contract. No diagrams are present or required. Definition and other complete statements have no inline links; pages retain empty bodies and compact layout.
+
+## Completed level 5 example review
+
+`ex-aqft-qed-threshold-matching`: accepted citation repair, confidence 1. `git show HEAD:physics/items/ex-aqft-qed-threshold-matching.md` has exactly the pre-reader SHA256 `74d7fac4a5b45bfe2515f1be246cd83f5a6a899c6d025d099b7457bac0de2a16`; current raw SHA256 `92a0b895f3ccb3ae01805c3a71ebd75ac6dcf2cb7c53c37c7fe3a4766f176924` equals the post snapshot. The exact diff changes only the source locator and F3's source-error disclosure, not the Example or Verification. Direct suppliers are the already inspected scheme and matching definitions.
+
+Each reciprocal-coupling derivative is -n/(3pi) in logarithmic squared scale. Integrating with the electron boundary and then the muon continuity condition gives the two formulas. Both threshold substitutions check exactly, and the positivity hypotheses keep all denominators positive on the integration paths. Zero coupling and equal masses are excluded in the Given; no empirical numbers or precision are asserted. Burgess §4.1.4, equations (81)–(86), was independently read in the complete HTML passage. Equation (85) plus its boundary conditions supports this derivation; substituting the electron threshold in printed (86) exposes its mismatch. The source was left unchanged. Manohar §§7.1–7.2, equations (7.1)–(7.8), were read for the supplementary running/decoupling context. No general amplitude calculation or perturbative error bound is inferred. A complete HIGH risk review is now in the contract.
+
+## Completed level 5 theorem review
+
+`pthm-aqft-matching-and-running-scale-independence`: reviewed without defect; reader changes were contract audit enrichment only. Current raw SHA256 `86c1640d00b3cbd2f71229a24d754d8ac0eaadddfa8a581f46d5ef602c5a2ab4` equals both snapshots. All four proof steps were checked against the current direct suppliers. In step 1.1, joint C1 matching and the high trajectory's C1 regularity justify the chain rule. Compatibility gives the low-energy equation. Step 2.1 uses actual common-interval uniqueness, not merely pointwise local existence, with the interval-wide existence hypothesis supplied separately. Step 3.1 evaluates the same fixed map at identical final data and invokes the matching equality at the admissible final scale. Step 4.1 repeats the transport identity through finitely many admitted theories. A singleton K has only one matching scale; either endpoint s is allowed. Zero thresholds gives ordinary unchanged flow, and one threshold is precisely the first three steps. No AC or empirical premise is added by this argument.
+
+Read the complete current `thm-aqft-truncated-coupled-rge-wellposedness` statement and proof. Its compact-cylinder quantitative existence and iterated Volterra estimate are sound; only its common-interval uniqueness conclusion is needed here. Checked the read-only parent carriers `def-first-order-ode-initial-value-problem-and-solution`, `def-locally-lipschitz-in-the-state-variable`, `prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation`, and `thm-picard-lindelof-local-existence-and-uniqueness`. The RG supplier explicitly defines its product-cylinder convention and does not silently infer global existence. No published defect was identified. No source was changed. A complete HIGH risk review is recorded in the contract.
+
+## Metadata and remaining checks
+
+Synchronizing the owning manifest's reader-repaired Definition and QED locator, and the contract's stale short matching excerpts/step locators, preserves all inventories, claims and prerequisites. Consumer-batch dependency records were refreshed with current actual supplier uses, and the required frontier-dependency-ledger refresh succeeded. There are no unresolved mathematical blockers; the batch-45 stale contract excerpt is reported as an outside owner follow-up. Local validation completed successfully. No item bytes were changed during this adjudication; the accepted reader item changes remain intact.
+
+## Decisions, records and validation
+
+Exactly three decisions are in `research/advanced-qft-supersymmetry-build-2026-10-23-alpha-batch-26-3a-decisions.json`: two accepted reader repairs with confidence 1 and one `reviewed_no_defect` with `change_kind: audit_enrichment` and no defect IDs. The two nonfatal historical defects have closed `fixed` rows in `research/defect-ledger.jsonl`, owned at `3a-adjudicate`: `advanced-qft-supersymmetry-build-2026-10-23-batch-26-matching-output-typing` and `advanced-qft-supersymmetry-build-2026-10-23-batch-26-qed-source-locator`. No row was created for metadata synchronization or a mechanical check.
+
+Checks run from the physics workspace, all exit 0:
+
+- `node tools/physics-support/risk-report.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-26.proof-contracts.json` before review: one CRITICAL and two HIGH items, zero errors.
+- Same command with `--require-reviewed` after all three current reviews: zero errors, three items routed.
+- `node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/def-aqft-threshold-matching-map.md items/ex-aqft-qed-threshold-matching.md items/pthm-aqft-matching-and-running-scale-independence.md`: two proof carriers checked, zero failing; definition has no numbered proof.
+- `node tools/physics-support/rendercheck.mjs` on those same three items and both owned A/B pages: five files, no errors, actual KaTeX and YAML parsing successful.
+- Final `node tools/physics-support/proof-layout.mjs items/def-aqft-threshold-matching-map.md items/ex-aqft-qed-threshold-matching.md items/pthm-aqft-matching-and-running-scale-independence.md`: three items, eight steps, zero defects.
+- `node tools/physics-support/defect-ledger.mjs append --file /tmp/aqft-batch-26-ledger-rows.json --no-render`: two rows appended.
+- `node tools/physics-support/frontier-dependency-ledger.mjs refresh --run advanced-qft-supersymmetry-build-2026-10-23`: refreshed and deduplicated.
+
+The complete Definition/Example/Statement sections are uninterrupted by hyperlinks; references remain in their immediately following references sections. Both pages remain YAML-only with `page_layout: compact-v1`. No diagrams or diagram-dependent arguments occur. No published supplier defect was identified, no published/imported content was edited, no verification stamp was added, and no judge cycle or engine gate battery was initiated.
+
+Outside follow-up: the reader reported a stale F4 threshold-definition excerpt for `pthm-aqft-supersymmetric-threshold-matching` in `research/advanced-qft-supersymmetry-build-2026-10-23-batch-45.proof-contracts.json`. Its current item interface and actual use remain compatible; batch 45's owner should refresh its evidence mirror. This is an evidence-maintenance follow-up, not an unresolved proof gap or a requested outside source repair. Batch 26 has no unresolved mathematical blocker.

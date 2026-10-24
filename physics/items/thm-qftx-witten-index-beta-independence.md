@@ -23,17 +23,20 @@ sources:
   references:
     - title: "Stephen P. Martin, A Supersymmetry Primer, version 7"
       url: "https://arxiv.org/pdf/hep-ph/9709356v7"
-      locator: "§7.1, printed pp. 68–70, cancellation of positive-energy boson/fermion states in the Witten index."
+      locator: "§7.1, printed p. 72, equations (7.1.1)–(7.1.2), supersymmetry-algebra positivity and the zero-energy condition; the pure-point Witten-index theorem is proved locally here."
     - title: "S. J. Gates Jr., M. T. Grisaru, M. Roček and W. Siegel, Superspace, or One Thousand and One Lessons in Supersymmetry"
       url: "https://arxiv.org/pdf/hep-th/0108200"
-      locator: "§8.4, supertrace and index discussion."
+      locator: "§8.4, printed pp. 518–521, mass-squared supertrace formulae; the pure-point Witten-index theorem is proved locally here."
+    - title: "David Tong, Supersymmetric Quantum Mechanics"
+      url: "https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf"
+      locator: "§1.2.2, printed p. 14, definition of the Witten index and positive-energy boson/fermion cancellation under the supersymmetric quantum-mechanics assumptions stated there."
 verification:
   precheck: pending
 ---
 
 ## Statement
 
-For every pure-point graded trace-class index datum with positive-energy blocks paired by the unitary maps $U_\lambda=Q/\sqrt\lambda$ proved from its supercharge data, the absolutely convergent supertrace satisfies
+Write $m_0^\pm:=\dim\mathcal H_0^\pm$, where $\mathcal H_0^\pm$ are the finite-dimensional even and odd zero-energy subspaces in the datum. For every pure-point graded trace-class index datum with positive-energy blocks paired by the unitary maps $U_\lambda=Q/\sqrt\lambda$ proved from its supercharge data, the absolutely convergent supertrace satisfies
 
 $$W(\beta)=m_0^+-m_0^-\qquad\text{for every }\beta>0.$$
 
@@ -41,9 +44,11 @@ Thus it is independent of $\beta$ and equals the even-minus-odd dimension of the
 
 ## Statement references
 
-[Martin, §7.1](https://arxiv.org/pdf/hep-ph/9709356v7).
+[Martin, §7.1, supersymmetry-algebra positivity and the zero-energy condition](https://arxiv.org/pdf/hep-ph/9709356v7).
 
-[Gates et al., §8.4](https://arxiv.org/pdf/hep-th/0108200).
+[Gates et al., §8.4, mass-squared supertrace formulae](https://arxiv.org/pdf/hep-th/0108200).
+
+[Tong, §1.2.2, Witten-index definition and positive-energy cancellation](https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf).
 
 Pure-point graded trace-class index data: [[def-qftx-graded-trace-class-index-data]].
 
@@ -51,7 +56,7 @@ Pure-point graded trace-class index data: [[def-qftx-graded-trace-class-index-da
 
 **Given:** The graded pure-point decomposition, odd self-adjoint supercharge, compatible Hilbert basis, and trace-class heat operators for all $\beta>0$ in the index-data definition.
 
-[F1] [[lem-qftx-supercharge-positive-energy-pairing]]: for each positive energy $\lambda$, $Q/\sqrt\lambda$ maps the even eigenspace unitarily onto the odd eigenspace, so their finite dimensions agree. 
+[F1] [[lem-qftx-supercharge-positive-energy-pairing]]: for each positive energy $\lambda$, $Q/\sqrt\lambda$ maps the even eigenspace unitarily onto the odd eigenspace, so their finite dimensions agree.
 
 [F2] [[def-qftx-graded-trace-class-index-data]]: the heat operator is diagonal with eigenvalue $1$ on the zero-energy basis and $e^{-\beta\lambda}$ on each parity subspace at energy $\lambda>0$; it is trace class, so its diagonal family in the supplied Hilbert basis is absolutely summable.
 

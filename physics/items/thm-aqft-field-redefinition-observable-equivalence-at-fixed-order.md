@@ -41,7 +41,7 @@ where the full graded Jacobian factor satisfies
 $$
 \mathcal I_\rho(h(\varphi))=\mathcal I_\rho\!\left(h(F_{\rho,\epsilon}(\psi))\,\mathcal J_{F,\rho}(\psi)\right)
 $$
-for every admissible integrand $h$. Assume $Z_{\rho,\epsilon}[0]$ is a unit for each $\rho$, and that for the same ordered field components the connected Green functions defined by the graded source derivatives have a common regulator limit with stable external channels $a_j$, masses $m_{a_j}>0$, and nonzero simple-pole residues $Z_{a_j}$ at $s_j=m_{a_j}^2$, where $s_j=-\eta^{\mu\nu}p_{j,\mu}p_{j,\nu}$ and $\eta=\operatorname{diag}(-1,1,1,1)$. Assume the pole factorization and joint limits in the LSZ datum exist:
+for every admissible integrand $h$. Assume $Z_{\rho,\epsilon}[0]$ is a unit for each $\rho$, and that for the same ordered field components the connected Green functions defined by the graded source derivatives have a common regulator limit with stable external channels $a_j$, masses $m_{a_j}>0$, and nonzero simple-pole residues $Z_{a_j}$ at $s_j=m_{a_j}^2$, where $s_j=-\eta^{\mu\nu}p_{j,\mu}p_{j,\nu}$ and $\eta=\operatorname{diag}(-1,1,1,1)$. Use the same overlap matrix $U$, its channel-coordinate kernels $G_n$, and chosen roots $z_a^2=Z_a$ in both descriptions, with $Z_a^{1/2}=z_a$. Assume the pole factorization and joint limits in the LSZ datum exist:
 $$
 G_n(p_1,\ldots,p_n)=\left(\prod_{j=1}^n\frac{Z_{a_j}^{1/2}}{s_j-m_{a_j}^2}\right)\mathcal A_n(p_1,\ldots,p_n)+\text{terms missing at least one external pole},
 $$
@@ -65,7 +65,7 @@ Then $Z'_{\rho,\epsilon}[J]=Z_{\rho,\epsilon}[J]$ coefficientwise in $R_N$ for e
 
 **Given:** the truncated ring $R_N$; the graded regulated field-coordinate and source algebras; the original actions and exact change-of-variables identities; and a common LSZ limit with the stated stable one-particle simple-pole data.
 
-[F1] [[def-aqft-lsz-amplitude-data]]: the action is an even element of the graded coordinate algebra; odd field modes and sources lie in specified exterior algebras; integration over odd modes is ordered coefficient extraction; generating integrands and graded source derivatives lie in the integration domain; and LSZ amplitudes are normalized joint residues at the declared stable simple poles.
+[F1] [[def-aqft-lsz-amplitude-data]]: the action is an even element of the graded coordinate algebra; odd field modes and sources lie in specified exterior algebras; integration over odd modes is ordered coefficient extraction; generating integrands and graded source derivatives lie in the integration domain; and LSZ amplitudes are normalized joint residues of the channel-coordinate kernels, using the supplied invertible overlap matrix and fixed nonzero square roots of the stable-pole residues.
 
 [A1] For every regulator $\rho$, $F_{\rho,\epsilon}$ is the actual parity-preserving local formal map used in the transformed functional, has identity leading term, and has an inverse modulo $\epsilon^{N+1}$.
 
@@ -83,5 +83,5 @@ Then $Z'_{\rho,\epsilon}[J]=Z_{\rho,\epsilon}[J]$ coefficientwise in $R_N$ for e
 
 3.1 Taking the formal logarithms of the equal normalized functionals in step 2.1 and then applying the same ordered left graded source derivatives gives equal connected Green functions for the original fields and for the transformed insertions $F_{\rho,\epsilon}(\psi)$. The supplied Fourier transform and removal of the same momentum-conservation delta function preserve equality. Passing to the common regulator limit preserves equality wherever that limit exists. [given, F1, A3, step 2.1]
 
-4.1 The LSZ amplitudes are the normalized joint residues of these connected functions. By step 3.1 the functions and their external pole residues agree, so the residue-normalized amplitudes agree coefficientwise through order $N$. If any required common limit or stable pole does not exist, the corresponding amplitude conclusion is not asserted. [given, F1, A3, step 3.1] ∎
+4.1 The LSZ amplitudes are the normalized joint residues of these connected functions. By step 3.1 the component functions agree; applying the same $U^{-1}$ on each external leg gives equal channel-coordinate kernels. Their joint residues agree, and multiplication by the same fixed $z_{a_j}^{-1}$ gives equal normalized amplitudes coefficientwise through order $N$. If any required common limit or stable pole does not exist, the corresponding amplitude conclusion is not asserted. [given, F1, A3, step 3.1] ∎
 

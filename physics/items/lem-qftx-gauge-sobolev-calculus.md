@@ -27,9 +27,9 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
-      locator: "§§5.13.1–5.13.2, PDF pp. 113–114: Sobolev multiplication, gauge-group charts, and smoothness of the action."
+      locator: "§§5.13.1–5.13.2, PDF pp. 113–115: Sobolev multiplication, gauge-group charts, and smoothness of the action."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"
       url: "https://ufdcimages.uflib.ufl.edu/AA/00/05/72/86/00001/brianwilliams-SW.pdf"
       locator: "§4.2 and Appendix A.1–A.2, PDF pp. 25–27 and 41–45: Sobolev configuration, the abelian gauge action, and Sobolev multiplication; local argument here treats SU(N)."

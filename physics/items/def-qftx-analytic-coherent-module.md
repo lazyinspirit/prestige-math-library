@@ -26,7 +26,7 @@ provenance:
   proof: not-applicable
 sources:
   references:
-    - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry, Chapter II §3.3, Definition (3.18)"
+    - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry, Chapter II §3.2.1, Definitions (3.8) and (3.11), local finite type and coherence"
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
     - title: "Joachim Wehler, Stein Manifolds, §4.2, Definitions 4.25–4.26"
       url: "https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf"
@@ -54,6 +54,6 @@ In particular, for a finite tuple $f_1,\ldots,f_p\in\mathcal O_X(U)$, its holomo
 
 [[def-complex-manifolds-and-holomorphic-vector-bundles|Complex manifold and holomorphic vector bundle conventions]]
 
-[Demailly, Chapter II §3.3, Definition (3.18)](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter II §3.2.1, Definitions (3.8) and (3.11)](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
 [Wehler, §4.2, Definitions 4.25–4.26](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)

@@ -27,7 +27,7 @@ generation:
 
 ## Example
 
-Let $G=C_2=\{1,s\}$ and let both restriction functors be the identity functor on the one-object groupoid $BG$. Give both pieces and the glued groupoid the constant weight $1$, and define the glued groupoid to be the homotopy pullback $BG\times^h_{BG}BG$. Its normalized gauging sum is $1/2$. Each homotopy fiber of an identity restriction over the unique boundary object has normalized integral $1$, so the gluing formula gives the same value.
+Let $G=C_2=\{1,s\}$ with $s^2=1$, and let $BG$ be the category with one object $*$, morphism set $\operatorname{Hom}(*,*)=G$, and composition given by group multiplication. Let both restriction functors $BG\to BG$ be identity functors. Give both pieces and the glued groupoid the constant weight $1$, and define the glued groupoid to be the homotopy pullback $BG\times^h_{BG}BG$. Its normalized gauging sum is $1/2$. Each homotopy fiber of an identity restriction over the unique boundary object has normalized integral $1$, so the gluing formula gives the same value.
 
 ## Example references
 
@@ -37,7 +37,7 @@ Let $G=C_2=\{1,s\}$ and let both restriction functors be the identity functor on
 
 ## Facts & Assumptions
 
-**Given:** The group $C_2$, the one-object groupoid $BG$, two identity restriction functors, and the constant action weights.
+**Given:** The group $C_2$, the groupoid $BG$ with one object and morphism group $C_2$, two identity restriction functors, and the constant action weights.
 
 [F1] [[def-aqft-background-gauging-data]]: a finite groupoid's normalized sum weights each isomorphism class by the reciprocal automorphism-group order.
 

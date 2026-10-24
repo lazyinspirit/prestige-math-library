@@ -4,7 +4,7 @@ kind: theorem
 title: Faithful flatness of finite-type algebraic-to-analytic local rings
 status: draft
 origin: pipeline
-dependency_level: 1
+dependency_level: 2
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics

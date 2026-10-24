@@ -12,13 +12,17 @@ dependency_level: 5
 deps:
   - def-axiom-of-choice
   - def-complex-manifolds-and-holomorphic-vector-bundles
+  - def-qftx-positive-real-monad-first-order-families
   - lem-qftx-positive-real-monad-analytic-twist-cohomology
   - lem-qftx-positive-real-monad-chain-lift
+  - thm-long-exact-sequence-sheaf-cohomology
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-complex-manifolds-and-holomorphic-vector-bundles: mathematical-premise
+  def-qftx-positive-real-monad-first-order-families: mathematical-premise
   lem-qftx-positive-real-monad-analytic-twist-cohomology: mathematical-premise
   lem-qftx-positive-real-monad-chain-lift: mathematical-premise
+  thm-long-exact-sequence-sheaf-cohomology: mathematical-premise
 axiom_base: "ZF + full AC inherited through the analytic scalar-cohomology input; the finite orthogonal splitting is choice-free."
 proof_strategy: direct
 provenance:
@@ -42,7 +46,7 @@ Let
 $$
 \mathcal O(-1)\otimes U\xrightarrow{\alpha}\mathcal O\otimes S\xrightarrow{\beta}\mathcal O(1)\otimes U'
 $$
-be a locally split linear monad on $\mathbb P^3(\mathbb C)$ with locally free middle cohomology $F$. Suppose a nondegenerate Hermitian form $H$ on $S$, linear in the first variable, satisfies $\beta(z)=\alpha(jz)^\dagger H$ for $j(\lambda_1,\lambda_2,\mu_1,\mu_2)=(-\bar\lambda_2,\bar\lambda_1,-\bar\mu_2,\bar\mu_1)$. Assume $H^0(\mathbb P^3,\mathcal O)=\mathbb C$, $H^q(\mathbb P^3,\mathcal O(-1))=0$ for every $q\ge0$, and $H^0(\mathbb P^1,\mathcal O(-1))=0$. Define $L=\bigcap_i\ker\beta_i\subseteq S$ and $M=\sum_i\operatorname{im}\alpha_i\subseteq S$, where $\alpha(z)=\sum_i z_i\alpha_i$ and $\beta(z)=\sum_i z_i\beta_i$. If the Hermitian form induced by $H$ on $H^0(F|_\ell)$ is positive definite for every $\sigma$-invariant real line $\ell$, then $H^0(F)=L=M^{\perp_H}$, $H|_L$ is positive definite, and $S=L\oplus M$ is an $H$-orthogonal decomposition. The monad and its pairing split as the constant summand $L\otimes\mathcal O$ plus the reduced monad $U\otimes\mathcal O(-1)\to M\otimes\mathcal O\to U'\otimes\mathcal O(1)$; the reduced cohomology has no global sections and remains positive on every real line. The conclusion includes $U=0$, when $L=S$ and $M=0$.
+be a locally split linear monad on $\mathbb P^3(\mathbb C)$ with locally free middle cohomology $F$. Suppose a nondegenerate Hermitian form $H$ on $S$, linear in the first variable, satisfies $\beta(z)=\alpha(jz)^\dagger H$ for $j(\lambda_1,\lambda_2,\mu_1,\mu_2)=(-\bar\lambda_2,\bar\lambda_1,-\bar\mu_2,\bar\mu_1)$. Assume $H^0(\mathbb P^3,\mathcal O)=\mathbb C$, $H^q(\mathbb P^3,\mathcal O(-1))=0$ for every $q\ge0$, and $H^0(\mathbb P^1,\mathcal O(-1))=0$. Define $L=\bigcap_i\ker\beta_i\subseteq S$ and $M=\sum_i\operatorname{im}\alpha_i\subseteq S$, where $\alpha(z)=\sum_i z_i\alpha_i$ and $\beta(z)=\sum_i z_i\beta_i$. If the induced Hermitian form on $H^0(F|_\ell)$ is positive definite for every $\sigma$-invariant real line $\ell$, with line form the constant value $x\mapsto b_x(s(x),t(\sigma x))$ from the preceding first-order real-structure definition, then $H^0(F)=L=M^{\perp_H}$, $H|_L$ is positive definite, and $S=L\oplus M$ is an $H$-orthogonal decomposition. The monad and its pairing split as the constant summand $L\otimes\mathcal O$ plus the reduced monad $U\otimes\mathcal O(-1)\to M\otimes\mathcal O\to U'\otimes\mathcal O(1)$; the reduced cohomology has no global sections and remains positive on every real line. The conclusion includes $U=0$, when $L=S$ and $M=0$.
 
 ## Statement references
 
@@ -64,13 +68,15 @@ be a locally split linear monad on $\mathbb P^3(\mathbb C)$ with locally free mi
 
 [F2] A linear monad morphism with its specified map on middle cohomology has the unique chain lift from the preceding lemma; its sigma-dual identities are $\beta(z)=\alpha(jz)^\dagger H$ and $\beta(jz)^\dagger=-H\alpha(z)$. [[lem-qftx-positive-real-monad-chain-lift]]
 
-[F3] For a locally split monad, restriction to a real line preserves the two short exact kernel/image sequences, and the induced section pairing is the restriction of $H$ to the orthogonal quotient. [[def-complex-manifolds-and-holomorphic-vector-bundles]]
+[F3] The pointwise $\sigma$-Hermitian pairing and its constant line-section form are defined in the first-order real-structure definition. Restriction of a locally split exact sequence to a real line remains exact; on the constant orthogonal complement of its Euler block, the section form is $H|_{E_z}$. [[def-qftx-positive-real-monad-first-order-families]]
+
+[F4] A short exact sequence of sheaves gives a natural long exact sequence in the same sheaf cohomology groups. [[thm-long-exact-sequence-sheaf-cohomology]]
 
 ## Proof
 
 **Given:** The hypotheses and the definitions of $L$ and $M$ in the Statement.
 
-1.1 Let $K=\ker\beta$. The locally split sequence $0\to U\otimes\mathcal O(-1)\to K\to F\to0$ and [F1] give an isomorphism $H^0(K)\to H^0(F)$. Since $K\subseteq S\otimes\mathcal O$ and $H^0(\mathcal O)=\mathbb C$, every global section of $K$ is a constant vector $s\in S$. Its image in $F$ is a global section exactly when $\beta(z)s=0$ for every $z$, equivalently $\beta_i s=0$ for every coefficient. Hence $H^0(F)=L$. [A1, F1, F3, algebra]
+1.1 Let $K=\ker\beta$. The locally split sequence $0\to U\otimes\mathcal O(-1)\to K\to F\to0$ and the vanishings [F1], together with [F4], give an isomorphism $H^0(K)\to H^0(F)$. Since $K\subseteq S\otimes\mathcal O$ and $H^0(\mathcal O)=\mathbb C$, every global section of $K$ is a constant vector $s\in S$. Its image in $F$ is a global section exactly when $\beta(z)s=0$ for every $z$, equivalently $\beta_i s=0$ for every coefficient. Hence $H^0(F)=L$. [A1, F1, F4, algebra]
 
 1.2 If $l\in L$, then $\beta(z)l=0$ for all $z$. By [F2], $\beta(z)=\alpha(jz)^\dagger H$, so $H(l,\alpha(jz)u)=0$ for every $u$ and $z$; since $j$ is bijective, $l\perp_H M$. Conversely, if $s\perp_H M$, then $\alpha(jz)^\dagger Hs=0$ for every $z$, hence $\beta(z)s=0$ and $s\in L$. Thus $L=M^{\perp_H}$, and nondegeneracy of $H$ gives $M=L^{\perp_H}$. [F2, algebra]
 

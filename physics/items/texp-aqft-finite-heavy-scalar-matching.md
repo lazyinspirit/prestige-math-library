@@ -47,7 +47,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice and the finite-regulator model data in the definitions below. Let $d\ge1$, let $A$ be a real symmetric positive-semidefinite $d\times d$ matrix, let $M>0$, and put $K=M^2I+A$. Use natural units with $\chi$ in mass-inverse units, $A$ and $K$ in mass-squared units, and a source $J\in\mathbb R^d$ in mass units. Let $E\ge0$, let $P_E$ be the spectral projection of the complexification of $A$ onto $[0,E^2]$, and assume $J=P_EJ$. In the finite Gaussian sector, let $\gamma_{K^{-1}}=N_d(0,K^{-1})$ and define
+Assume the Axiom of Choice. Let $d\ge1$, equip $\mathbb R^d$ with inner product $u^Tv$ and norm $\|u\|=(u^Tu)^{1/2}$, let $A$ be a real symmetric positive-semidefinite $d\times d$ matrix, let $M>0$, and put $K=M^2I+A$, where $I$ is the identity on $\mathbb R^d$. Then $K$ is positive definite. Use natural units with $\chi$ in mass-inverse units, $A$ and $K$ in mass-squared units, and a source $J\in\mathbb R^d$ in mass units. Let $E\ge0$. Define $\mathbb C^d=\mathbb R^d+i\mathbb R^d$ with Hermitian inner product $\langle z,w\rangle=\sum_{k=1}^d z_k\overline{w_k}$ and the complex-linear map $A_{\mathbb C}(x+iy)=Ax+iAy$. Real symmetry and nonnegativity make $A_{\mathbb C}$ self-adjoint and nonnegative; use its normalized spectral projection-valued measure $E_{A_{\mathbb C}}$, whose Borel-set values are orthogonal projections, whose total value is the identity, and which is strongly countably additive, as in the positive heavy-mode Gaussian matching-data definition. Set $P_E:=E_{A_{\mathbb C}}([0,E^2])$, restricted to $\mathbb R^d$, and assume $J=P_EJ$. Thus $J$ lies in the sum of the eigenspaces of $A$ with eigenvalues in $[0,E^2]$. Let $\gamma_{K^{-1}}=N_d(0,K^{-1})$ be the centered normalized Gaussian law whose every linear projection $u^T\chi$ is normal with mean zero and variance $u^TK^{-1}u$, and define
 
 $$ Z_H(J):=\int_{\mathbb R^d}e^{J^T\chi}\,d\gamma_{K^{-1}}(\chi) $$
 
@@ -59,7 +59,7 @@ $$
 S_NJ:=M^{-2}\sum_{r=0}^{N}(-A/M^2)^rJ.
 $$
 
-Then both finite Gaussian integrals are finite and
+Then the finite Gaussian expectation $Z_H(J)$ is finite and positive, and
 
 $$ Z_H(J)=\exp\!\left(\tfrac12J^TK^{-1}J\right) $$
 

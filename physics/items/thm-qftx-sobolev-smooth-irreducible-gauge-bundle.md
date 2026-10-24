@@ -39,7 +39,7 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
       locator: "§5.13.3, PDF pp. 115–117: proper action, stabilizers, and local quotient charts; §5.13.2 for the Sobolev action."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"
@@ -120,6 +120,6 @@ is a locally trivial topological principal $\bar{\mathcal G}_\infty$-bundle with
 The square records the local principal-bundle trivialization. The top map sends $(A+a,[u])$ to $(A+a)^u$, the left map is projection to the slice, the right map is the orbit projection, and the bottom map sends a slice point to its orbit. The proof above establishes that the square commutes and that the top map is an equivariant homeomorphism (a diffeomorphism in the Sobolev Banach setting); the argument does not rely on the diagram.
 
 ```tikzcd
-S_{A,\varepsilon}\times\bar{\mathcal G}_{k+1} \arrow[r,"\\Phi_A"] \arrow[d,"\\operatorname{pr}_1"'] & \pi_k^{-1}(V_A) \arrow[d,"\\pi_k"] \\
-S_{A,\varepsilon} \arrow[r,"\\varphi_A"'] & V_A
+S_{A,\varepsilon}\times\bar{\mathcal G}_{k+1} \arrow[r,"\Phi_A"] \arrow[d,"\operatorname{pr}_1"'] & \pi_k^{-1}(V_A) \arrow[d,"\pi_k"] \\
+S_{A,\varepsilon} \arrow[r,"\varphi_A"'] & V_A
 ```

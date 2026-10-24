@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Arthur Jaffe and Edward Witten, Quantum Yang-Mills Theory, §§4–6"
       url: "https://www.claymath.org/library/monographs/MPPc.pdf"
-    - title: "Arthur Jaffe, Constructive Quantum Field Theory, §7.3, For the Millennium: Gauge Theory in Four Dimensions"
+    - title: "Arthur Jaffe, Constructive Quantum Field Theory, §8, PDF p. 14, For the Millennium: Gauge Theory in Four Dimensions"
       url: "https://arthurjaffe.net/Assets/pdf/CQFT.pdf"
 provenance:
   statement: ai-generated
@@ -33,7 +33,7 @@ Let $\Gamma$ be the boundary graph of a square with vertices $v_0,v_1,v_2,v_3$ a
 
 [Arthur Jaffe and Edward Witten, “Quantum Yang-Mills Theory,” §§4–6, printed pp. 141–150](https://www.claymath.org/library/monographs/MPPc.pdf)
 
-[Arthur Jaffe, “Constructive Quantum Field Theory,” §7.3, “For the Millennium: Gauge Theory in Four Dimensions”](https://arthurjaffe.net/Assets/pdf/CQFT.pdf)
+[Arthur Jaffe, “Constructive Quantum Field Theory,” §8, PDF p. 14, “For the Millennium: Gauge Theory in Four Dimensions”](https://arthurjaffe.net/Assets/pdf/CQFT.pdf)
 
 ## Facts & Assumptions
 

@@ -29,7 +29,7 @@ verification:
 
 ## Example
 
-Set the N=2 hypermultiplet representation to the adjoint, use the Hermitian form $h_R(X,Y)=\kappa(\overline X,Y)$ on the complexified adjoint and its dual, and set its mass to $m=0$. Use the nondegenerate invariant form $\kappa_{\mathbb C}$ to identify the dual adjoint with the adjoint. If $Q$ and $\widetilde Q$ are the canonically normalized chiral fields, write $\widetilde Q$ as an adjoint field under this identification; with $\Phi_1$ the connection-normalized N=2 vector chiral field, define connection-normalized adjoint chiral fields $\Phi_2=gQ$ and $\Phi_3=g\widetilde Q$. Then the N=2 hypermultiplet kinetic terms and cubic superpotential become exactly the two additional adjoint-chiral terms in the adopted N=4 N=1 action, and the on-shell component counts agree: one vector, three complex adjoint scalars, and four adjoint Weyl fermions. The calculation does not prove the N=4 supersymmetry variation.
+Set the N=2 hypermultiplet representation to $R=\mathrm{ad}$ on $V_R=\mathfrak{su}(2)_{\mathbb C}$, use $h_{\mathrm{ad}}(X,Y)=\kappa_{\mathbb C}(\overline X,Y)$ and the induced dual Hermitian form, and set its mass to $m=0$. The map $\jmath(X)(Y)=\kappa_{\mathbb C}(X,Y)$ is an equivariant isometry from the adjoint representation to its dual, so it identifies $\widetilde Q$ with an adjoint field. If $Q$ and $\widetilde Q$ are the canonically normalized chiral fields, define connection-normalized adjoint chiral fields $\Phi_2=gQ$ and $\Phi_3=g\widetilde Q$; let $\Phi_1$ be the connection-normalized N=2 vector chiral field. Then the N=2 hypermultiplet kinetic terms and cubic superpotential become exactly the two additional adjoint-chiral terms in the adopted N=4 N=1 action, and the on-shell component counts agree: one vector, three complex adjoint scalars, and four adjoint Weyl fermions. The calculation does not prove the N=4 supersymmetry variation.
 
 ## Example references
 
@@ -45,7 +45,7 @@ Set the N=2 hypermultiplet representation to the adjoint, use the Hermitian form
 
 [A2] [[post-qftx-n2-vector-hypermultiplet-model]]: the N=2 vector action has gauge and adjoint-chiral terms with coefficient $1/g^2$.
 
-[A3] [[post-qftx-n2-vector-hypermultiplet-model]]: for $R=\mathrm{ad}$, the invariant complex form identifies the dual adjoint with the adjoint.
+[A3] [[post-qftx-n2-vector-hypermultiplet-model]]: for $R=\mathrm{ad}$, $\jmath(X)=\kappa_{\mathbb C}(X,\cdot)$ is an equivariant isometric identification of the adjoint with its dual, using $h_{\mathrm{ad}}$ and the induced dual Hermitian form.
 
 [A4] [[post-qftx-n2-vector-hypermultiplet-model]]: $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$.
 
@@ -63,7 +63,7 @@ Set the N=2 hypermultiplet representation to the adjoint, use the Hermitian form
 
 **Given:** [A1]–[A9], $R=\mathrm{ad}$, $m=0$, and $g>0$.
 
-1.1 Substituting $Q=\Phi_2/g$ and $\widetilde Q=\Phi_3/g$ into the two hypermultiplet D-terms in [A1] gives $g^{-2}$ times the D-terms of $\Phi_2$ and $\Phi_3$ in [A6]. The N=2 vector term already equals the N=4 vector and $\Phi_1$ terms by [A2] and [A6]. [given, A1, A2, A6, algebra]
+1.1 The map $\jmath(X)(Y)=\kappa_{\mathbb C}(X,Y)$ intertwines the adjoint and dual actions, since $\kappa_{\mathbb C}(X,\operatorname{Ad}_{u^{-1}}Y)=\kappa_{\mathbb C}(\operatorname{Ad}_uX,Y)$ for every $u\in SU(2)$; in the $\kappa$-orthonormal real basis $T_a$, it preserves the Hermitian form because both forms have coordinate expression $\sum_a\overline{X^a}Y^a$. Differentiating the group intertwining identity and complex-linearly extending gives intertwining for the represented complexified Lie algebra; the matrix exponential power series then gives the same identity for the superfield exponentials in the D-terms. Substituting $Q=\Phi_2/g$ and $\widetilde Q=\Phi_3/g$ into the two hypermultiplet D-terms in [A1] therefore gives $g^{-2}$ times the D-terms of $\Phi_2$ and $\Phi_3$ in [A6]. The N=2 vector term already equals the N=4 vector and $\Phi_1$ terms by [A2] and [A6]. [given, A1, A2, A3, A6, algebra]
 
 1.2 By [A3], under the invariant-form identification of the dual adjoint with the adjoint, $\widetilde Q\Phi_1Q=\kappa_{\mathbb C}(\Phi_3,[\Phi_1,\Phi_2])/g^2$. [given, A3, algebra]
 

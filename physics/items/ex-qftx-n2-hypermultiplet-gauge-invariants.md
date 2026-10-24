@@ -29,7 +29,7 @@ verification:
 
 ## Example
 
-Choose the fundamental representation $R=\mathbb C^2$ of $SU(2)$. In each superspace fiber let $Q$ be a column in $R$, let $\widetilde Q$ be a row in $R^*$, and let $\Phi$ act by the represented adjoint action. Under any chiral supergauge transformation $U=e^{i\Lambda_R}$, set $Q'=UQ$, $\widetilde Q'=\widetilde Q U^{-1}$, and $\Phi'=U\Phi U^{-1}$. Then the mass bilinear $\widetilde Q Q$ and cubic bilinear $\widetilde Q\Phi Q$ in the adopted N=2 superpotential are gauge invariant. This checks gauge invariance of these two terms only; it does not prove the extended supersymmetry variation.
+Use the defining representation $R=\mathbb C^2$ with group homomorphism $\rho_{\mathrm{fund}}:SU(2)\to U(2)$ given by $\rho_{\mathrm{fund}}(u)=u$ acting by matrix multiplication. In each superspace fiber let $Q$ be a column in $R$, let $\widetilde Q$ be a row in $R^*$, and let $\Phi$ act by $\rho_{\mathrm{fund}*}(\Phi)$. Under any chiral supergauge transformation $U_R=e^{i\Lambda_R}$, set $Q'=U_RQ$, $\widetilde Q'=\widetilde Q U_R^{-1}$, and $\Phi'=U_R\Phi U_R^{-1}$. Then the mass bilinear $\widetilde Q Q$ and cubic bilinear $\widetilde Q\Phi Q$ in the adopted N=2 superpotential are gauge invariant. This checks gauge invariance of these two terms only; it does not prove the extended supersymmetry variation.
 
 ## Example references
 

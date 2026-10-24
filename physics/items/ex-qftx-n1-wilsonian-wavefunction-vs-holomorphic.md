@@ -51,7 +51,7 @@ Take one chiral superfield $\Phi$ with mass dimension one and tree superpotentia
 
 [F1] [[def-qftx-wilsonian-n1-action-data]]: the chiral superfield has a holomorphic F-term integrand and a real quadratic kinetic term in the Wilsonian D-term data; real-spurion selection is interpreted in its coefficientwise formal background-jet algebra before evaluating constant backgrounds.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, the holomorphic field-variable Wilsonian F-term integrand is unchanged coefficientwise.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, the remaining holomorphic integrand $F_{\mathrm{rem}}$ is unchanged after collecting matter-independent quadratic gauge-kinetic terms. In this ungauged Wess–Zumino example, $F_{\mathrm{rem}}=W_0$.
 
 [A1] The single-field model has no gauge interactions; it is the trivial-gauge-group specialization of the stated action data.
 
@@ -61,5 +61,5 @@ Take one chiral superfield $\Phi$ with mass dimension one and tree superpotentia
 
 1.1 By [F2], the coefficients $m$ and $y$ of $W_0(\Phi)$ are unchanged in the unrescaled holomorphic variable at every formal perturbative order. [given, F1, F2, A1]
 
-2.1 Since $Z(\lambda)>0$, substitute $\Phi=Z(\lambda)^{-1/2}\Phi_c$ into $W_0$. This gives $W_0=\tfrac12(m/Z)\Phi_c^2+(y/Z^{3/2})\Phi_c^3/3!$, hence the stated canonical coefficients. Differentiating gives $d\log m_c/d\log\lambda=-d\log Z/d\log\lambda$ and $d\log y_c/d\log\lambda=-\tfrac32d\log Z/d\log\lambda$ whenever the parameters are nonzero, so they can run if $Z$ varies. [A2, algebra, step 1.1] ∎
+2.1 Since $Z(\lambda)>0$, substitute $\Phi=Z(\lambda)^{-1/2}\Phi_c$ into $W_0$. This gives $W_0=\tfrac12(m/Z)\Phi_c^2+(y/Z^{3/2})\Phi_c^3/3!$, hence the stated canonical coefficients. For a nonzero bare parameter these expressions vary whenever $Z$ does; a zero bare parameter remains zero. [A2, algebra, step 1.1] ∎
 

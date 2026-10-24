@@ -39,7 +39,7 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
       locator: "§§5.13.2–5.13.3, PDF pp. 113–117: Sobolev gauge action, properness, and Coulomb-slice operator."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"

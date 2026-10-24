@@ -26,6 +26,7 @@ deps:
   - thm-de-rham-theorem
   - def-axiom-of-choice
   - lem-qftx-hodge-star-decomposition-four-dimensions
+  - thm-general-stokes-theorem
 dependency_roles:
   def-qftx-nonabelian-gauge-data: mathematical-premise
   def-qftx-principal-connection-form: mathematical-premise
@@ -43,6 +44,7 @@ dependency_roles:
   thm-de-rham-theorem: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   lem-qftx-hodge-star-decomposition-four-dimensions: mathematical-premise
+  thm-general-stokes-theorem: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -123,6 +125,8 @@ The Hodge operator $*_g$ on two-forms is characterized by $\alpha\wedge *_g\beta
 
 [[def-axiom-of-choice|Full Axiom of Choice used in the characteristic-class comparison]]
 
+[[thm-general-stokes-theorem|Exact top forms integrate to zero on the closed base]]
+
 ## Facts & Assumptions
 
 **Given:** Full AC; a compact matrix group $G$, a smooth right principal $G$-bundle $P\to X$, a specified bundle sector, a supplied connection $\omega$, and an invariant positive-definite bilinear form $B$.
@@ -135,7 +139,7 @@ The Hodge operator $*_g$ on two-forms is characterized by $\alpha\wedge *_g\beta
 
 [F3] In local sections, $F_i=dA_i+\tfrac12[A_i\wedge A_i]$, $F_j=\operatorname{Ad}_{g_{ij}^{-1}}F_i$, and $D_{A_i}F_i=dF_i+[A_i\wedge F_i]=0$. [[def-qftx-lie-algebra-valued-form-bracket]], [[lem-qftx-principal-curvature-cartan-bianchi]]
 
-[F4] The polarization of an invariant quadratic polynomial on a matrix Lie algebra evaluates on curvature to a global closed form, and the corresponding Chern–Weil class is connection-independent for supplied compatible connections. [[def-invariant-polynomial-on-a-matrix-lie-algebra]], [[def-evaluation-of-an-invariant-polynomial-on-curvature]], [[def-the-chern-weil-homomorphism]], [[thm-chern-weil-homomorphism-is-independent-of-connection-and-natural]]
+[F4] The polarization of an invariant quadratic polynomial on a matrix Lie algebra evaluates on curvature to a global form. The Chern–Weil map for a fixed compatible connection is defined by its de Rham class. The cited connection-independence theorem covers the stated GL, U and SO reductions; independence for the general $G$ and $B$ here is proved directly below. [[def-invariant-polynomial-on-a-matrix-lie-algebra]], [[def-evaluation-of-an-invariant-polynomial-on-curvature]], [[def-the-chern-weil-homomorphism]], [[thm-chern-weil-homomorphism-is-independent-of-connection-and-natural]]
 
 [F5] The Chern forms are the degree components of $\det(I-\Omega/(2\pi i))$. For an $SU(2)$ connection in the defining representation, $\operatorname{tr}_2\Omega=0$. [[def-chern-pontryagin-and-euler-characteristic-forms]]
 
@@ -147,11 +151,12 @@ The Hodge operator $*_g$ on two-forms is characterized by $\alpha\wedge *_g\beta
 
 [F9] In an oriented Riemannian four-dimensional space, the Hodge operator on two-forms is an isometric involution with orthogonal $+1$ and $-1$ eigenspaces; its eigenspace projections are $(I\pm *_g)/2$. [[lem-qftx-hodge-star-decomposition-four-dimensions]]
 
+[F10] Under countable choice, the integral of the exterior derivative of a compactly supported smooth three-form on an oriented closed four-manifold is zero. [[thm-general-stokes-theorem]]
 
 ## Proof
 
-1.1 On an overlap with $s_j=s_i g_{ij}$, [F3] gives $F_j=\operatorname{Ad}_{g_{ij}^{-1}}F_i$. Since $B$ is invariant, $B(F_j\wedge F_j)=B(F_i\wedge F_i)$; these restrictions therefore define the global four-form $\beta_B$. The polynomial $P_B(Z)=B(Z,Z)/(8\pi^2)$ is homogeneous, quadratic, and $G$-invariant, so its curvature evaluation [F4] is exactly $\beta_B$. Connection independence of its Chern–Weil class follows from the supplied-connection clause of [F4]. [given, F1, F3, F4, algebra]
+1.1 On an overlap with $s_j=s_i g_{ij}$, [F3] gives $F_j=\operatorname{Ad}_{g_{ij}^{-1}}F_i$. Since $B$ is invariant, $B(F_j\wedge F_j)=B(F_i\wedge F_i)$; these restrictions therefore define the global four-form $\beta_B$. The polynomial $P_B(Z)=B(Z,Z)/(8\pi^2)$ is homogeneous, quadratic, and $G$-invariant, so its curvature evaluation [F4] is exactly $\beta_B$. It is closed because it has top degree on the four-manifold. To compare two supplied connections $\omega_0,\omega_1$, put $\omega_t=(1-t)\omega_0+t\omega_1$ for $t\in[0,1]$. The reproduction and equivariance identities of [F2] are preserved, so each is a principal connection. In local sections put $a_i=A_{1,i}-A_{0,i}$ and $A_{t,i}=A_{0,i}+ta_i$; the inhomogeneous transition terms cancel in $a_i$, so $B(a_i\wedge F_{t,i})$ patches globally. Differentiating the curvature formula gives $\partial_tF_{t,i}=D_{A_{t,i}}a_i$. Differentiating Ad-invariance gives $B([Z,X],Y)+B(X,[Z,Y])=0$; with the graded wedge rule this cancels the connection terms in $dB(a_i\wedge F_{t,i})=B(D_{A_{t,i}}a_i\wedge F_{t,i})-B(a_i\wedge D_{A_{t,i}}F_{t,i})$. The last term vanishes by Bianchi [F3]. Symmetry of $B$ and even degree of $F_t$ therefore give $\partial_tB(F_t\wedge F_t)=2dB(a\wedge F_t)$. Integration in $t$ yields $\beta_{B,1}-\beta_{B,0}=d\zeta$, where $\zeta=(4\pi^2)^{-1}\int_0^1B(a\wedge F_t)\,dt$ is a global smooth three-form; its coefficients are polynomials in $t$. Thus the de Rham classes agree. Integration over compact boundaryless $X$ gives equal charges by [F10], whose choice hypothesis follows from [A1]. [given, A1, F1, F2, F3, F4, F10, algebra]
 
-1.2 For any two supplied connections on the same $G$-reduction, [F4] makes their Chern–Weil classes equal, so integration over the fixed orientation class gives the same $q_B$. In the $SU(2)$ defining representation, the associated connection matrix is $A_i$ because $\rho_*$ is the identity inclusion, and its curvature matrix is $\Omega_i=F_i$ by [F2, F3]. Put $C=i\Omega_i/(2\pi)=-\Omega_i/(2\pi i)$. Its entries have even form degree and commute, so the degree-four coefficient of $\det(I+C)$ is $\det C=\tfrac12((\operatorname{tr}_2C)^2-\operatorname{tr}_2(C\wedge C))$. By [F5], $\operatorname{tr}_2C=0$, and $C\wedge C=-\Omega_i\wedge\Omega_i/(4\pi^2)$; hence $c_2(\nabla)=\operatorname{tr}_2(\Omega_i\wedge\Omega_i)/(8\pi^2)$ and $\beta_B=-c_2(\nabla)$ because $B=-\operatorname{tr}_2$. The associated connection is Hermitian by [F7], so [F6] sends this de Rham class to the negative realification of $c_2(E)\in H^4(X;\mathbb Z)$. Evaluating by [F8] on the orientation class gives $q_B=-\langle c_2(E),[X]\rangle\in\mathbb Z$. Full AC is used only through the stated characteristic-class comparison and integral-class construction. [A1, F2, F3, F4, F5, F6, F7, F8, algebra]
+2.1 By step 1.1, $q_B$ is independent of the supplied connection on the fixed $G$-bundle. In the $SU(2)$ defining representation, the associated connection matrix is $A_i$ because $\rho_*$ is the identity inclusion, and its curvature matrix is $\Omega_i=F_i$ by [F2, F3]. Put $C=i\Omega_i/(2\pi)=-\Omega_i/(2\pi i)$. Its entries have even form degree and commute, so the degree-four coefficient of $\det(I+C)$ is $\det C=\tfrac12((\operatorname{tr}_2C)^2-\operatorname{tr}_2(C\wedge C))$. By [F5], $\operatorname{tr}_2C=0$, and $C\wedge C=-\Omega_i\wedge\Omega_i/(4\pi^2)$; hence $c_2(\nabla)=\operatorname{tr}_2(\Omega_i\wedge\Omega_i)/(8\pi^2)$ and $\beta_B=-c_2(\nabla)$ because $B=-\operatorname{tr}_2$. The associated connection is Hermitian by [F7], so [F6] sends this de Rham class to the negative realification of $c_2(E)\in H^4(X;\mathbb Z)$. Evaluating by [F8] on the orientation class gives $q_B=-\langle c_2(E),[X]\rangle\in\mathbb Z$. Full AC is used only through the stated characteristic-class comparison and integral-class construction. [A1, F2, F3, F5, F6, F7, F8, step 1.1, algebra]
 
-2.1 By [F9], $F_i^\pm=(F_i\pm *_gF_i)/2$ are the projections to the $\pm1$ eigenspaces, so $F_i^-=0$ is equivalent to $F_i=*_gF_i$, and $F_i^+=0$ is equivalent to $F_i=-*_gF_i$. The curvature transforms by the adjoint action on overlaps by [F3], while $*_g$ acts only on the form arguments, so each $F_i^\pm$ transforms by that same adjoint action. Thus $F^\pm$ are global adjoint-valued two-forms and the stated self-dual and ASD conditions do not depend on the local sections. [F3, F9, given, algebra] ∎
+3.1 By [F9], $F_i^\pm=(F_i\pm *_gF_i)/2$ are the projections to the $\pm1$ eigenspaces, so $F_i^-=0$ is equivalent to $F_i=*_gF_i$, and $F_i^+=0$ is equivalent to $F_i=-*_gF_i$. The curvature transforms by the adjoint action on overlaps by [F3], while $*_g$ acts only on the form arguments, so each $F_i^\pm$ transforms by that same adjoint action. Thus $F^\pm$ are global adjoint-valued two-forms and the stated self-dual and ASD conditions do not depend on the local sections. [F3, F9, given, algebra] ∎

@@ -72,7 +72,7 @@ In particular, the conclusion is finite-dimensional and applies only at finite p
 
 ## Proof
 
-1.1 Put $E_t=e^{-S-tQV}$. Since $QV$ is even, coefficientwise differentiation of its exponential gives $\partial_tE_t=-(QV)E_t$. The top-degree projection is linear and $O$ is independent of $t$, so $\partial_t f_t=-[O(QV)E_t]_{[n]}$. [given, F1, algebra]
+1.1 Put $E_t=e^{-S-tQV}$. Since $QV$ is even, coefficientwise differentiation of its exponential gives $\partial_tE_t=-(QV)E_t$. The top-degree projection is linear and $O$ is independent of $t$, so $(\partial_t f_t)\mu=-[O(QV)E_t]_{[n]}$. [given, F1, algebra]
 
 1.2 The assumptions $QS=0$ and $(Q^2V)E_t=0$ give $QE_t=-(QS+tQ^2V)E_t=0$. The graded Leibniz rule, $QO=0$, and the odd parity of $V$ then give $Q(OV E_t)=(QO)VE_t+O(QV)E_t-OV(QE_t)=O(QV)E_t$. [given, F1, algebra]
 

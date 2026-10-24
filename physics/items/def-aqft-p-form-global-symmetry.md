@@ -16,14 +16,14 @@ dependency_roles:
   def-aqft-topological-defect: formulation-prerequisite
 proof_strategy: not-applicable
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 physical_scope: "A kinematic definition for a named d-dimensional model with model-defined fields, correlators, symmetry defects and background sectors; it asserts no continuum QFT existence, anomaly absence, universal background coupling, or gauging."
 sources:
   references:
     - title: "Davide Gaiotto, Anton Kapustin, Nathan Seiberg, and Brian Willett, Generalized Global Symmetries"
       url: "https://arxiv.org/pdf/1412.5148"
-      locator: "§1, PDF pp. 1–3, and §3, PDF pp. 11–12: defect support, deformation invariance, fusion, charge support, and the exchange argument; Appendix F, PDF pp. 70–71, for the torsion-flux caveat."
+      locator: "§1, PDF pp. 1–3, and §3, printed p. 11 (PDF p. 12): ordinary invertible higher-form symmetry and the local exchange argument; Appendix F, printed pp. 70–71 (PDF pp. 71–72): topology-dependent electric/magnetic torsion-flux operations and their mixed anomaly."
     - title: "Lakshya Bhardwaj et al., Lectures on Generalized Symmetries"
       url: "https://arxiv.org/pdf/2307.07547"
       locator: "§§2.2.1–2.2.2, PDF pp. 12–20, and §4.1, PDF pp. 60–62: invertible topological defects, higher-form charges and Pontryagin duals, and continuous/discrete background data."
@@ -40,7 +40,7 @@ Fix an integer $d\ge1$, an integer $p$ with $0\le p<d$, and a smooth $d$-dimensi
 
 Use the preceding topological-defect definition with its exact content: a defect is model-specified field, operator or boundary-condition data on a closed embedded support, and it is topological when every declared correlator is invariant under each admissible isotopy that transports its data, avoids other insertions and preserves boundary data. For this symmetry, each defect is an endodefect insertion in the same selected model; the model supplies parallel fusion and the induced action on its admitted observables and backgrounds. A support $\Sigma$ is the image of a smooth embedding $\iota:\Sigma\hookrightarrow M^\circ$ from a manifold without boundary, with closed image in the interior $M^\circ$.
 
-A **group-like $p$-form global symmetry** of $\mathcal T$ consists of a locally compact Hausdorff topological group $G$ and an assignment $g\mapsto U_g(\Sigma)$ of invertible topological symmetry defects to the allowed closed supports $\Sigma$ of dimension $d-p-1$ and codimension $p+1$. For every support and every ordered pair $g,h\in G$, the model supplies parallel fusion $\star$ and the fusion is defined, with
+A **group-like $p$-form global symmetry** of $\mathcal T$ consists of a locally compact Hausdorff topological group $G$, required to be Abelian when $p>0$, and an assignment $g\mapsto U_g(\Sigma)$ of invertible topological symmetry defects to the allowed closed supports $\Sigma$ of dimension $d-p-1$ and codimension $p+1$. For every support and every ordered pair $g,h\in G$, the model supplies parallel fusion $\star$ and the fusion is defined, with
 
 $$U_e(\Sigma)=\mathbf 1_{\mathcal T},\qquad U_g(\Sigma)\star U_h(\Sigma)=U_{gh}(\Sigma),\qquad U_g(\Sigma)\star U_{g^{-1}}(\Sigma)=U_{g^{-1}}(\Sigma)\star U_g(\Sigma)=\mathbf 1_{\mathcal T}.$$
 
@@ -51,6 +51,8 @@ C_{\mathcal T}(\beta_g(b);\rho_g(I))=C_{\mathcal T}(b;I).
 $$
 
 This includes lists with any model-admitted decorated networks, not only ordinary observables. The model specifies crossing junctions and label transport on that domain. Use the convention that crossing $U_g\star U_h$ means crossing $U_h$ and then $U_g$; fusion-action compatibility is the group-action law $\rho_e=\mathrm{id}$, $\rho_{gh}=\rho_g\circ\rho_h$, $\beta_e=\mathrm{id}$ and $\beta_{gh}=\beta_g\circ\beta_h$. The group $G$ is **effective**: if two elements induce identical crossing automorphisms on every admitted observable and background and give identical actions in every admitted correlator, then they are equal. A group element labels a transformation, not the charge of an observable.
+
+The positive-form restriction selects ordinary local invertible symmetry defects: in codimension at least two, two nearby parallel defects can exchange order in a transverse disk while avoiding other insertions. When decorated transport identifies their crossing and background actions, topologicality and fusion identify the actions of $gh$ and $hg$, and effectiveness gives $gh=hg$. This is the local exchange argument; it does not assert that arbitrary wrapped supports or networks on a topologically nontrivial spacetime can be exchanged. In particular, electric and magnetic flux operators constructed from networks with charged junctions can have a mixed commutator on torsion cycles without changing either ordinary local Abelian label group. Such global network operations are not silently included as a non-Abelian positive-form group in this definition. At $p=0$ no Abelian restriction is imposed.
 
 A **genuine $p$-dimensional observable** is an observable supported on a closed embedded $p$-dimensional submanifold whose definition is independent of an attached higher-dimensional support. Its symmetry action is defined by moving a symmetry defect across it, with the model specifying the resulting junction or operator action. For $p>0$, if crossing by every $U_g$ preserves the one-dimensional space $\mathbb C O$ for a nonzero genuine observable $O$, write the scalar action as $\chi_O(g)O$. If the resulting map $\chi_O:G\to U(1)$ is a continuous homomorphism in a model where $G$ is Abelian, call $\chi_O$ the character charge of $O$; it is an element of $\widehat G$. This definition does not assert scalarity, continuity or multiplicativity for every observable. For $p=0$, local observables may carry higher-dimensional representations of a non-Abelian group; the representation label is distinct from the group element implementing a transformation. For a locally compact Hausdorff Abelian group $A$, write its character group as $\widehat A=\operatorname{Hom}_{\mathrm{cts}}(A,U(1))$, with pointwise multiplication. Here $U(1)=\{e^{i\alpha}:\alpha\in\mathbb R/2\pi\mathbb Z\}$, so every character value and its argument are dimensionless.
 

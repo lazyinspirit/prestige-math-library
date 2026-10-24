@@ -51,7 +51,7 @@ Each is maximal among subgroups on which the pairing vanishes. Under the source-
 
 [F1] [[def-qftx-scft-protected-data]]: the center-charge classes are $(e,m)\in\mathbb Z_2\times\mathbb Z_2$, the mutual-locality pairing is $em'-me'\pmod2$, and the source-reported maps are $S(e,m)=(m,-e)$ and $T(e,m)=(e+m,m)$.
 
-[F2] [Aharony, Seiberg, and Tachikawa, §§1.2 and 2.4](https://arxiv.org/pdf/1305.0318v5): for gauge algebra $\mathfrak{su}(2)$ the source assigns the three maximal line classes to $SU(2)$, $SO(3)_+$, and $SO(3)_-$ and describes their S/T permutation as part of the N=4 duality conjecture.
+[F2] [Aharony, Seiberg, and Tachikawa, §§1.2 and 2.4](https://arxiv.org/pdf/1305.0318v5): for gauge algebra $\mathfrak{su}(2)$ the source assigns the three maximal line classes to $SU(2)$, $SO(3)_+$, and $SO(3)_-$ and gives the source-reported $S$ action on line charges; its $T$ action follows from the stated $\theta\mapsto\theta+2\pi$ transformation. [Kapustin and Witten, §2.2](https://arxiv.org/pdf/hep-th/0604151v3) explicitly classify the quantum $S$-duality as a conjecture.
 
 [A1] All coordinates and pairings in this example are computed in the field $\mathbb Z_2$; in particular $-1=1$ there.
 

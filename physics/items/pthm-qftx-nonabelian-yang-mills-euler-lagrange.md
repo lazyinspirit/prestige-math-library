@@ -103,7 +103,9 @@ and compact-support boundary convention.
 
 [F3] [[def-qftx-lie-algebra-valued-form-bracket]]: the bracket is graded skew and satisfies the graded derivation identity for the exterior derivative.
 
-[F4] [[def-qftx-associated-covariant-derivative]]: the adjoint representation gives local adjoint-bundle coordinates and the induced local covariant derivative.
+[A5] [[post-qftx-nonabelian-yang-mills-model]] defines the real adjoint bundle and its local transition law.
+
+[F4] [[def-qftx-associated-covariant-derivative]] defines the induced derivative $d+\rho_*(A_i)$ on sections of a finite-dimensional complex representation bundle. Extend it to form-valued sections by $d+\rho_*(A_i)\wedge\cdot$. Complexifying $\mathfrak{su}(2)$ and extending $\operatorname{Ad}$ gives such a representation; by [F6], this extension restricts on real forms to $D_{A_i}\eta=d\eta+[A_i\wedge\eta]$.
 
 [F5] [[lem-sr-compact-variation-and-fundamental-lemma]]: on an open Minkowski coordinate region, compactly supported $C^1$ coefficients admit differentiation under the integral sign and integration by parts; if a continuous scalar coefficient integrates to zero against every smooth compactly supported scalar test, it vanishes pointwise.
 
@@ -111,68 +113,16 @@ and compact-support boundary convention.
 
 ## Proof
 
-1.1 In one local section, expand the Cartan formula at $A_i+\varepsilon a$:
-$F_{A_i+\varepsilon a}
-=F_i+\varepsilon(da+[A_i\wedge a])
-+\frac{\varepsilon^2}{2}[a\wedge a]
-=F_i+\varepsilon D_{A_i}a+\frac{\varepsilon^2}{2}[a\wedge a]$.
-Here $[A_i\wedge a]=[a\wedge A_i]$ because both inputs have degree one and the graded bracket is symmetric in that degree. [F2, F3, algebra]
+1.1 In one local section, expand the Cartan formula at $A_i+\varepsilon a$: $F_{A_i+\varepsilon a} =F_i+\varepsilon(da+[A_i\wedge a]) +\frac{\varepsilon^2}{2}[a\wedge a] =F_i+\varepsilon D_{A_i}a+\frac{\varepsilon^2}{2}[a\wedge a]$. Here $[A_i\wedge a]=[a\wedge A_i]$ because both inputs have degree one and the graded bracket is symmetric in that degree. [F2, F3, algebra]
 
-1.2 In a Lie-algebra basis, differentiate the scalar-valued form
-$\kappa(a\wedge *_\eta F_i)$. The ordinary graded product rule gives
-$\kappa(da\wedge *_\eta F_i)-\kappa(a\wedge d *_\eta F_i)$. Invariance of
-$\kappa$, together with moving the degree-one factors $A_i$ and $a$ past
-one another, gives
-$\kappa([A_i\wedge a]\wedge *_\eta F_i)
-=\kappa(a\wedge[A_i\wedge *_\eta F_i])$. Therefore
-$d\kappa(a\wedge *_\eta F_i)
-=\kappa(D_{A_i}a\wedge *_\eta F_i)
--\kappa(a\wedge D_{A_i} *_\eta F_i)$. [F1, F2, F3, algebra]
+1.2 In a Lie-algebra basis, differentiate the scalar-valued form $\kappa(a\wedge *_\eta F_i)$. The ordinary graded product rule gives $\kappa(da\wedge *_\eta F_i)-\kappa(a\wedge d *_\eta F_i)$. Invariance of $\kappa$, together with moving the degree-one factors $A_i$ and $a$ past one another, gives $\kappa([A_i\wedge a]\wedge *_\eta F_i) =\kappa(a\wedge[A_i\wedge *_\eta F_i])$. Therefore $d\kappa(a\wedge *_\eta F_i) =\kappa(D_{A_i}a\wedge *_\eta F_i) -\kappa(a\wedge D_{A_i} *_\eta F_i)$. [F1, F2, F3, algebra]
 
-2.1 The difference of the two action densities vanishes outside the compact support of $a$ and its derivatives. Apply the parameter-differentiation clause of [F5] to its smooth coordinate coefficients. Symmetry of $\kappa$ and the even degree of $F_i$ then give
-$\left.\frac{d}{d\varepsilon}\right|_0\Delta(S/\hbar)_i(\varepsilon;a)
-=-\frac{1}{g_{\mathrm{YM}}^2}\int
-\kappa(D_{A_i}a\wedge *_\eta F_i)$. [A1, A3, A4, F1, F5, step 1.1, algebra]
+2.1 The difference of the two action densities vanishes outside the compact support of $a$ and its derivatives. Apply the parameter-differentiation clause of [F5] to its smooth coordinate coefficients. Symmetry of $\kappa$ and the even degree of $F_i$ then give $\left.\frac{d}{d\varepsilon}\right|_0\Delta(S/\hbar)_i(\varepsilon;a) =-\frac{1}{g_{\mathrm{YM}}^2}\int \kappa(D_{A_i}a\wedge *_\eta F_i)$. [A1, A3, A4, F1, F5, step 1.1, algebra]
 
-3.1 Write the compactly supported scalar three-form as
-$\kappa(a\wedge *_\eta F_i)=\sum_{\mu=0}^3h_\mu\widehat{dx^\mu}$ with
-$h_\mu\in C_c^1(U_i)$. Its exterior derivative is
-$\sum_\mu(\partial_\mu h_\mu)d^4x$. Apply the integration-by-parts clause
-of [F5] with the constant function $1$ to each coefficient $h_\mu$; each
-integral is zero, so $\int d\kappa(a\wedge *_\eta F_i)=0$. Substitution in
-step 2.1 yields
-$\left.\frac{d}{d\varepsilon}\right|_0\Delta(S/\hbar)_i(\varepsilon;a)
-=-\frac{1}{g_{\mathrm{YM}}^2}\int
-\kappa(a\wedge D_{A_i} *_\eta F_i)$. [A1, A4, F5, step 2.1, step 1.2]
+3.1 Write the compactly supported scalar three-form as $\kappa(a\wedge *_\eta F_i)=\sum_{\mu=0}^3h_\mu\widehat{dx^\mu}$ with $h_\mu\in C_c^1(U_i)$. Its exterior derivative is $\sum_\mu(\partial_\mu h_\mu)d^4x$. Apply the integration-by-parts clause of [F5] with the constant function $1$ to each coefficient $h_\mu$; each integral is zero, so $\int d\kappa(a\wedge *_\eta F_i)=0$. Substitution in step 2.1 yields $\left.\frac{d}{d\varepsilon}\right|_0\Delta(S/\hbar)_i(\varepsilon;a) =-\frac{1}{g_{\mathrm{YM}}^2}\int \kappa(a\wedge D_{A_i} *_\eta F_i)$. [A1, A4, F5, step 2.1, step 1.2]
 
 4.1 If $D_{A_i} *_\eta F_i=0$, step 3.1 shows that the first variation vanishes for every compactly supported $a$ in every chart. Thus the connection is stationary. [A3, step 3.1, algebra]
 
-4.2 Conversely, assume stationarity. In a local coordinate chart and the orthonormal basis from [F1], write
-$J_i=D_{A_i} *_\eta F_i
-=\sum_{\mu=0}^3\sum_{b=1}^3J_{\mu b}T_b\,\widehat{dx^\mu}$,
-where $\widehat{dx^\mu}$ is the oriented coordinate three-form satisfying
-$dx^\mu\wedge\widehat{dx^\mu}=d^4x$. For fixed $\mu,b$, choose
-$a=\psi T_b dx^\mu$ with arbitrary smooth compactly supported real $\psi$.
-Stationarity and step 3.1 give $\int\psi J_{\mu b}\,d^4x=0$ for every such
-$\psi$. The fundamental-lemma clause of [F5] implies $J_{\mu b}=0$
-throughout the chart. All coefficients vanish, so the local equation holds.
-[A4, F1, F5, step 3.1, algebra]
+4.2 Conversely, assume stationarity. In a local coordinate chart and the orthonormal basis from [F1], write $J_i=D_{A_i} *_\eta F_i =\sum_{\mu=0}^3\sum_{b=1}^3J_{\mu b}T_b\,\widehat{dx^\mu}$, where $\widehat{dx^\mu}$ is the oriented coordinate three-form satisfying $dx^\mu\wedge\widehat{dx^\mu}=d^4x$. For fixed $\mu,b$, choose $a=\psi T_b dx^\mu$ with arbitrary smooth compactly supported real $\psi$. Stationarity and step 3.1 give $\int\psi J_{\mu b}\,d^4x=0$ for every such $\psi$. The fundamental-lemma clause of [F5] implies $J_{\mu b}=0$ throughout the chart. All coefficients vanish, so the local equation holds. [A4, F1, F5, step 3.1, algebra]
 
-5.1 It remains to check that the local equations agree on overlaps. If
-$s_j=s_i g_{ij}$, then [F2] gives
-$A_j=\operatorname{Ad}_{g_{ij}^{-1}}A_i+\theta_L(g_{ij})$ and
-$(*_\eta F_j)=\operatorname{Ad}_{g_{ij}^{-1}}(*_\eta F_i)$. For
-$X\in T_x(U_i\cap U_j)$, put $Z=\theta_L(g_{ij})(X)$ and use the path
-$g_{ij}\exp(tZ)$ with initial tangent $X$. Differentiating the adjoint
-representation by [F6] gives
-$d(\operatorname{Ad}_{g_{ij}^{-1}})(X)
-=-\operatorname{ad}_Z\operatorname{Ad}_{g_{ij}^{-1}}$. Hence
-$d(\operatorname{Ad}_{g_{ij}^{-1}} *_\eta F_i)
-=\operatorname{Ad}_{g_{ij}^{-1}}d(*_\eta F_i)
--[\theta_L(g_{ij})\wedge\operatorname{Ad}_{g_{ij}^{-1}}(*_\eta F_i)]$.
-The added Maurer–Cartan term cancels the corresponding term in
-$[A_j\wedge *_\eta F_j]$, leaving
-$D_{A_j} *_\eta F_j
-=\operatorname{Ad}_{g_{ij}^{-1}}(D_{A_i} *_\eta F_i)$.
-Thus the local zero equations define one global adjoint-bundle equation.
-[F2, F4, F6, step 4.2, algebra] ∎
+5.1 It remains to check that the local equations agree on overlaps. If $s_j=s_i g_{ij}$, then [F2] gives $A_j=\operatorname{Ad}_{g_{ij}^{-1}}A_i+\theta_L(g_{ij})$ and $(*_\eta F_j)=\operatorname{Ad}_{g_{ij}^{-1}}(*_\eta F_i)$. For $X\in T_x(U_i\cap U_j)$, put $Z=\theta_L(g_{ij})(X)$ and use the path $g_{ij}\exp(tZ)$ with initial tangent $X$. Differentiating the adjoint representation by [F6] gives $d(\operatorname{Ad}_{g_{ij}^{-1}})(X) =-\operatorname{ad}_Z\operatorname{Ad}_{g_{ij}^{-1}}$. Hence $d(\operatorname{Ad}_{g_{ij}^{-1}} *_\eta F_i) =\operatorname{Ad}_{g_{ij}^{-1}}d(*_\eta F_i) -[\theta_L(g_{ij})\wedge\operatorname{Ad}_{g_{ij}^{-1}}(*_\eta F_i)]$. The added Maurer–Cartan term cancels the corresponding term in $[A_j\wedge *_\eta F_j]$, leaving $D_{A_j} *_\eta F_j =\operatorname{Ad}_{g_{ij}^{-1}}(D_{A_i} *_\eta F_i)$. Thus the local zero equations define one global adjoint-bundle equation. [A5, F2, F4, F6, step 4.2, algebra] ∎

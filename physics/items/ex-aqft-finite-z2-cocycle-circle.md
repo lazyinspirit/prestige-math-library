@@ -23,7 +23,7 @@ generation:
 
 ## Example
 
-Let $G=C_2=\{1,s\}$ and let the finite background groupoid be the conjugation action groupoid $G//G$: its objects are $g\in G$, and an arrow labeled $h\in G$ sends $g$ to $hgh^{-1}$. Define the normalized group 1-cocycle $\chi:G\to U(1)$ by $\chi(1)=1$ and $\chi(s)=-1$, and set $W(g)=\chi(g)$. The action weight is invariant under every arrow, and the normalized gauging sum is zero.
+Let $G=C_2=\{1,s\}$ and let the finite background groupoid be the conjugation action groupoid $G//G$: its objects are $g\in G$, its arrows $g\to g'$ are labels $h\in G$ with $g'=hgh^{-1}$, and composition of labels $h$ then $k$ is $kh$. Give $U(1)$ the trivial $G$-action. Define $\chi:G\to U(1)$ by $\chi(1)=1$ and $\chi(s)=-1$; for this action the normalized group $1$-cocycle condition is $\chi(gh)=\chi(g)\chi(h)$, which these values satisfy. Set $W(g)=\chi(g)$. The action weight is invariant under every arrow, and the normalized gauging sum is zero.
 
 ## Example references
 
@@ -31,7 +31,7 @@ Let $G=C_2=\{1,s\}$ and let the finite background groupoid be the conjugation ac
 
 ## Facts & Assumptions
 
-**Given:** The conjugation action groupoid $G//G$ for $G=C_2$ and the function $\chi$ specified in the Example.
+**Given:** The conjugation action groupoid $G//G$ for $G=C_2$, the trivial action of $G$ on $U(1)$, and the function $\chi$ specified in the Example.
 
 [F1] [[def-aqft-background-gauging-data]]: a cocycle/action weight is a $U(1)$-valued function constant on every gauge arrow, and the normalized sum divides each isomorphism-class weight by its automorphism-group order.
 

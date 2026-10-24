@@ -39,7 +39,7 @@ Let $L=\mathbb CP^1$ and let $\mathcal O_L(k)$ be the degree-$k$ holomorphic lin
 
 $$H^{0,0}_{\bar\partial}(L,\mathcal O_L(-1))=H^{0,1}_{\bar\partial}(L,\mathcal O_L(-1))=H^{0,0}_{\bar\partial}(L,\mathcal O_L(-2))=0,\qquad H^{0,1}_{\bar\partial}(L,\mathcal O_L(-2))\cong\mathbb C.$$
 
-The canonical bundle is $K_L\cong\mathcal O_L(-2)$; the last group is one-dimensional, and the first three vanish.
+The canonical bundle $K_L:=\Lambda^{1,0}T^*L$ is the holomorphic cotangent line bundle, whose fibre at $p\in L$ is the complex-linear dual of $T_p^{1,0}L$, the $+i$ eigenspace of the complex structure on the complexified tangent space. It satisfies $K_L\cong\mathcal O_L(-2)$; the last group is one-dimensional, and the first three vanish.
 
 ## Statement references
 

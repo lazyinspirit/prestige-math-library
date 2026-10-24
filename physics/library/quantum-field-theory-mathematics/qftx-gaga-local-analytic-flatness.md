@@ -4,6 +4,7 @@ title: Faithful flatness of finite-type algebraic-to-analytic local rings
 status: draft
 library: mathematics
 items:
+  - lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness
   - lem-qftx-gaga-algebraic-analytic-local-completions
   - thm-qftx-gaga-analytic-local-ring-flatness
 examples: []

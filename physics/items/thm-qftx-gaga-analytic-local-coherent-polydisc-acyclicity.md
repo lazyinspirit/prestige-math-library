@@ -21,6 +21,10 @@ deps:
   - thm-exactness-of-sheaves-stalkwise
   - thm-long-exact-sequence-sheaf-cohomology
   - lem-qftx-gaga-euclidean-sheaf-cohomological-dimension
+  - def-bigraded-complex-differential-forms
+  - def-holomorphic-function-in-several-complex-variables
+  - cor-holomorphic-functions-in-several-variables-are-smooth
+  - thm-cauchy-riemann-characterization-in-several-complex-variables
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-qftx-analytic-coherent-module: mathematical-premise
@@ -34,6 +38,10 @@ dependency_roles:
   thm-exactness-of-sheaves-stalkwise: mathematical-premise
   thm-long-exact-sequence-sheaf-cohomology: mathematical-premise
   lem-qftx-gaga-euclidean-sheaf-cohomological-dimension: mathematical-premise
+  def-bigraded-complex-differential-forms: mathematical-premise
+  def-holomorphic-function-in-several-complex-variables: mathematical-premise
+  cor-holomorphic-functions-in-several-variables-are-smooth: mathematical-premise
+  thm-cauchy-riemann-characterization-in-several-complex-variables: mathematical-premise
 justified_by: []
 forward_refs: []
 aliases: [thm-qftx-gaga-local-coherent-acyclicity]
@@ -45,7 +53,7 @@ sources:
   references:
     - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry"
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
-      locator: "Chapter IX §4.A, Proposition 4.1, and §4.B, equation (4.3) and Lemma 4.4 with its complete proof, printed pp. 419–421: partial local free resolutions, scalar polydisc vanishing, and dimension shift. The proof here supplies the ordinary sheaf cohomological-dimension bound explicitly."
+      locator: "Chapter IX §4.A, Proposition 4.1 (vanishing for strongly q-complete manifolds with q>=1 in cohomological degrees k>=q, including the scalar q=1 case), and §4.B, equation (4.3) and Lemma 4.4, printed pp. 419–421: local free resolutions and dimension shifting. The source uses its topological-dimension bound; this item supplies the required ordinary Euclidean bound and scalar Dolbeault vanishing."
     - title: "Joachim Wehler, Stein Manifolds"
       url: "https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf"
       locator: "§5.2, Proposition 5.9, Theorem 5.14 and Corollary 5.15, printed pp. 171–180: acyclicity from a finite free resolution, coherent free resolutions after shrinking to a relatively compact polydisc, and the resulting coherent-sheaf vanishing. This corroborates the conclusion; no full finite resolution is used by the partial-resolution proof here."
@@ -77,7 +85,7 @@ global free resolution are asserted.
 
 ## Statement references
 
-[Demailly, Chapter IX §4.A, Proposition 4.1, and §4.B, equation (4.3) and Lemma 4.4, pp. 419–421](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter IX §4.A, Proposition 4.1 and §4.B, equation (4.3) and Lemma 4.4, pp. 419–421: local-resolution and dimension-shift method; scalar vanishing and the ordinary Euclidean bound are proved here](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
 [Wehler, §5.2, Proposition 5.9, Theorem 5.14 and Corollary 5.15, pp. 171–180](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
@@ -91,7 +99,7 @@ global free resolution are asserted.
 
 [F2] [[thm-qftx-gaga-analytic-oka-coherence]]: under full AC, the holomorphic structure sheaf on a finite-dimensional complex manifold is coherent; coherent analytic modules are closed under kernels, cokernels and finite extensions. For every coherent module, point and finite integer $\ell\ge0$, there is a chart neighborhood with a partial finite-rank free resolution exact at the module and at every free term except possibly the leftmost. No global free resolution is asserted.
 
-[F3] [[thm-dolbeault-lemma-polydisc]]: the smooth Dolbeault sequence is locally exact on a polydisc, hence is an exact resolution of the holomorphic function sheaf there.
+[F3] For $N\ge1$, [[thm-dolbeault-lemma-polydisc]] gives local exactness in every positive antiholomorphic degree. At degree zero, [[def-bigraded-complex-differential-forms]] says that $\bar\partial f=0$ is exactly the Cauchy–Riemann system for a smooth function. Holomorphic functions are smooth by [[cor-holomorphic-functions-in-several-variables-are-smooth]], and [[thm-cauchy-riemann-characterization-in-several-complex-variables]] says that a $C^1$ function is holomorphic exactly when that system holds at every point, with holomorphy defined by [[def-holomorphic-function-in-several-complex-variables]]. Thus the full smooth Dolbeault sequence is an exact resolution of $\mathcal O_D$.
 
 [F4] [[thm-smooth-function-module-sheaves-are-acyclic]]: sheaves of modules over the smooth-function sheaf on a smooth manifold are acyclic for global sections.
 

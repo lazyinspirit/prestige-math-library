@@ -41,10 +41,15 @@ $(X_1,\ldots,X_r)$ of $\mathfrak g$. For the unitary representation
 $\rho:G\to U(V)$, set $T(X)=-i\,d\rho(X)$, which is Hermitian for each
 $X\in\mathfrak g$. Also choose a gauge coupling $g>0$ and a
 gauge-invariant holomorphic polynomial $W:V\to\mathbb C$. Assume canonical
-scalar kinetic energy and no Fayet--Iliopoulos term. Define the
+scalar kinetic energy and no Fayet--Iliopoulos term. Write
+$x=(x^0,x^1,x^2,x^3)\in\mathbb R^{1,3}$, fix
+$\eta=\operatorname{diag}(-1,1,1,1)$, sum repeated spacetime indices, and
+set $\partial^\mu=\eta^{\mu\nu}\partial_\nu$. Define the
 auxiliary-field maps
 
-$$\mathcal L_{\mathrm{kin}}=-\sum_i\partial_\mu\overline{\phi^i}\,\partial^\mu\phi^i,\qquad [\phi^i]=\mathrm{mass},\quad [W]=\mathrm{mass}^3,\quad [g]=1.$$
+$$\mathcal L_{\mathrm{kin}}=-\sum_i\partial_\mu\overline{\phi^i}\,\partial^\mu\phi^i,\qquad [\phi^i]=\mathrm{mass},\quad [W]=\mathrm{mass}^3.$$
+
+The gauge coupling $g$ is dimensionless in these natural units.
 
 $$F_i(\phi)=\frac{\partial W}{\partial\phi^i}(\phi),\qquad D_a(\phi)=-g\,\phi^\dagger T(X_a)\phi.$$
 
@@ -53,7 +58,7 @@ $\mathbf D(\phi)(X)=-g\,\phi^\dagger T(X)\phi$; thus
 $D_a(\phi)=\mathbf D(\phi)(X_a)$. For $\lambda\in\mathfrak g^*$, define
 $\|\lambda\|_{\mathfrak g^*}^2=\sum_{a=1}^r\lambda(X_a)^2$, the norm from
 the inner product dual to the fixed inner product on $\mathfrak g$; this
-value is independent of the chosen orthonormal basis. The tree-level scalar
+value is independent of the chosen orthonormal basis. The classical scalar
 potential is
 
 $$V_{\mathrm{tree}}(\phi)=\sum_{i=1}^n|F_i(\phi)|^2+\frac12\|\mathbf D(\phi)\|_{\mathfrak g^*}^2 =\sum_{i=1}^n|F_i(\phi)|^2+\frac12\sum_{a=1}^rD_a(\phi)^2.$$

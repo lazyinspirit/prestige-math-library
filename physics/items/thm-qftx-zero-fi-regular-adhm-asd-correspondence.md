@@ -50,11 +50,33 @@ verification:
 
 ## Statement
 
-Let $N\geq2$, $k\geq0$, and let $\mathcal M^{\mathrm{ADHM,reg}}_{k,N}$ be the quotient by $U(k)$ of the raw data satisfying both zero moment equations and stable-and-costable regularity in the conventions stated in the following references section. Let $\mathcal M^{\mathrm{ASD}}_{k,N}$ be the framed unitary ASD sector on the round oriented $S^4$ with $q_N=-k$ in those same conventions. Conditional on the real monad normalization and Ward inputs stated below, the construction gives a $T=(S^1)^2\times(S^1)^N$-equivariant bijection
+Assume full AC. Let $N\geq2$, $k\geq0$, $V=\mathbb C^k$, and $W=\mathbb C^N$ with their standard Hermitian products. A raw datum is $(B_1,B_2,I,J)$ with $B_i\in\operatorname{End}_{\mathbb C}(V)$, $I:W\to V$, and $J:V\to W$. Its moment maps are
+
+$$\mu_{\mathbb C}=[B_1,B_2]+IJ,\qquad \mu_{\mathbb R}=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J.$$
+
+It is stable if the vectors $B_{i_1}\cdots B_{i_m}I(w)$, for $m\ge0$, $i_j\in\{1,2\}$, and $w\in W$, span $V$; it is costable if no nonzero common $B_1,B_2$-invariant subspace lies in $\ker J$; it is regular if both conditions hold. Let $\mathcal M^{\mathrm{ADHM,reg}}_{k,N}$ be the quotient of the regular zero-moment locus by
+
+$$(B_1,B_2,I,J)\mapsto(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1}),\qquad g\in U(V)$$
+
+The stable complex quotient uses the same formula with $g\in GL(V)$.
+
+Give $S^4=\mathbb H\mathbb P^1$ the unit round metric and positive stereographic orientation $dx^0\wedge dx^1\wedge dx^2\wedge dx^3$, where $z_1=x^0+ix^1$, $z_2=x^2+ix^3$. A framed ASD object is a smooth Hermitian rank-$N$ bundle $E\to S^4$ with smooth unitary connection $A$, unitary framing at infinity, $F_A^+=(F_A+*_gF_A)/2=0$, and
+
+$$q_N(E,A)=-\frac{1}{8\pi^2}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A)=-k,$$
+
+modulo unitary bundle isomorphisms preserving the connection and framing; let $\mathcal M^{\mathrm{ASD}}_{k,N}$ be the set of these classes.
+
+Let $T=(S^1)^2\times(S^1)^N$ act on raw data by
+
+$$(t_1,t_2,h)\cdot(B_1,B_2,I,J)=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ),\qquad h=\operatorname{diag}(e_1^{-1},\ldots,e_N^{-1}),$$
+
+where $t_1,t_2,e_1,\ldots,e_N\in S^1=\{u\in\mathbb C:|u|=1\}$, and on framed ASD classes by inverse pullback under the rotations $(z_1,z_2)\mapsto(t_1z_1,t_2z_2)$ of $S^4$ and postcomposition of the framing by $h$. Assume the following exact conditional supplier conclusions: the zero real quotient is identified diffeomorphically with the stable-and-costable complex $GL(V)$ quotient, and for every $\zeta>0$ the real level quotient with $\mu_{\mathbb R}=\zeta I_V$ is identified with the stable complex quotient; the stable complex quotient is identified with framed rank-$N$ torsion-free sheaves on $\mathbb P^2$ with a trivialization $\mathcal E|_{L_\infty}\cong W\otimes\mathcal O_{L_\infty}$, with Hilbert polynomial $N\binom{m+2}{2}-k$, and costability is equivalent to local freeness; the framed Ward construction gives a bijection between the specified framed ASD classes and holomorphic rank-$N$ bundles on $Z=\mathbb P_{\mathbb C}(\mathbb H^2)=\mathbb C\mathbb P^3$, with $\sigma([v])=[jv]$ for the fixed quaternionic structure $j^2=-1$, that are trivial on every real line, have $c_2=kH^2$ for $H=c_1(\mathcal O_Z(1))$ with $\mathcal O_Z(1)$ the dual tautological line, and carry a nondegenerate holomorphic pairing $b:\mathcal E\otimes\sigma^*\overline{\mathcal E}\to\mathcal O_Z$ satisfying $b_{\sigma z}(v,u)=\overline{b_z(u,v)}$ whose induced form is $h_x(s,t)=b_z(s(z),t(\sigma z))$ and is positive definite on every real-line section space, together with a unitary framing at infinity; and the positive-real linear-monad normal form and its inverse identify each such Ward bundle with a monad $\mathcal O_Z(-1)^{\oplus k}\to\mathcal O_Z^{\oplus(2k+N)}\to\mathcal O_Z(1)^{\oplus k}$ whose zero-moment raw data are regular, modulo $U(V)$. These suppliers retain their stated projective GAGA, family base-change, orientation, charge-normalization, and compact-torus hypotheses.
+
+Under these hypotheses, the construction gives a $T$-equivariant bijection
 
 $$\mathcal M^{\mathrm{ADHM,reg}}_{k,N}\;\longleftrightarrow\;\mathcal M^{\mathrm{ASD}}_{k,N}.$$
 
-The zero-FI real quotient is also diffeomorphic to the stable-and-costable complex $GL(k)$ quotient. Under the stated projective GAGA and family base-change hypotheses, the corresponding framed sheaves on $\mathbb P^2$ are exactly the locally free locus among the framed torsion-free sheaves with rank $N$ and Hilbert polynomial $N\binom{m+2}{2}-k$. The positive-FI stable quotient includes non-locally-free sheaves and is not identified with the ordinary framed ASD moduli. Under the same family and normal-form hypotheses, the correspondence is compatible with first-order framed deformations and their tangent spaces.
+For any positive stability level $\zeta>0$, the positive-FI quotient is the quotient by $U(V)$ of $\mu_{\mathbb C}=0$, $\mu_{\mathbb R}=\zeta I_V$ stable data and can contain non-locally-free framed sheaves; for $N\ge2$ such a point occurs already at $k=1$ by taking $V=\mathbb C$, $B_1=B_2=0$, $J=0$, and any nonzero $I:W\to V$ with $II^\dagger=\zeta$. This boundary is not identified with ordinary framed ASD moduli. The first-order assertion is restricted as follows. Let $D=\mathbb C[\epsilon]/(\epsilon^2)$ with $\epsilon^\dagger=\epsilon$. The raw modules are free of ranks $k,N$, their moment equations hold over $D$, and their reduction is regular. The monad terms are free of ranks $k,2k+N,k$, its end maps are locally split, its middle cohomology is locally free and commutes with reduction, its global section module is free and commutes with reduction, its coefficient-image submodule is a direct summand and commutes with reduction, and every fixed real-line restriction is trivial with its section module commuting with reduction. The framing and pairing are defined over $D$, positivity is required on the reduction, and allowed base maps are reduction and $\epsilon\mapsto r\epsilon$ for $r\in\mathbb R$. The framed-sheaf family clause additionally requires its three relative cohomology bundles to have ranks $(0,k,0)$, $(0,2k+N,0)$, and $(0,k,0)$ and every stated fiber base-change map to be an isomorphism. Within this range the correspondence is compatible with first-order framed deformations and identifies their tangent spaces.
 
 ## Statement references
 

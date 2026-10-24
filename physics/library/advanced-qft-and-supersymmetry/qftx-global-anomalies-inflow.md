@@ -15,5 +15,9 @@ requires:
   - qftx-finite-group-bf
   - relations-functions-and-quotients
   - compact-operators-and-riesz-schauder-theory
+  - qftx-gauge-geometry
+  - real-clifford-modules-ko-and-abs-orientations
+  - pin-spin-and-clifford-module-representations
+  - countability-and-uncountability
 page_layout: compact-v1
 ---

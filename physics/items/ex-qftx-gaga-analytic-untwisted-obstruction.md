@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-gaga-analytic-untwisted-obstruction
 kind: example
-title: Negative twists obstruct untwisted projective A and B
+title: Failure of global generation for $\mathcal O(-1)$ and top cohomology of $\mathcal O(-r-1)$
 status: draft
 origin: pipeline
 domain: mathematics
@@ -118,7 +118,7 @@ identification is used.
 
 **Proof technique:** direct.
 
-1.1 A global section restricts to every singleton chart $U_i$. Its coefficient mode $m$ must therefore occur on every $U_i$, so [F4] requires $N(m)\subseteq\{i\}$ for all $i$. Since $r\ge1$, there are at least two distinct singleton charts, whose intersection as index sets is empty; hence $N(m)=\varnothing$ and every $m_i\ge0$. For total degree $-1$, the equation $\sum_i m_i=-1$ is then impossible. Thus the degree-zero Čech cocycles for $\mathcal O(-1)$ are zero, and the fixed-cover comparison in [F4] gives $H^0(X,\mathcal O(-1))=0$. [A1, F1, F3, F4, given, algebra]
+1.1 For a degree-$-1$ mode, $N(m)$ cannot be empty because then every $m_i\ge0$ and $\sum_i m_i\ge0$; it cannot be all of $J:=\{0,\ldots,r\}$ because then $\sum_i m_i\le-(r+1)\le-2$. Thus every mode has nonempty proper negative support. If $|N(m)|\ge2$, that mode occurs in no singleton-chart term of $C^0$. If $N(m)=\{i\}$, it occurs only in the $U_i$ term of $C^0$, while it occurs on $U_{ij}$ for any $j\ne i$; the $0$-cocycle condition on that overlap forces its coefficient in the $U_i$ term to be zero because the $U_j$ term has no such mode. Hence every degree-zero Čech cocycle has zero coefficient in every mode. The normal-convergence and coefficient-uniqueness clauses of [F4] make this coefficientwise conclusion valid for analytic sections, and the fixed-cover comparison in [F4] gives $H^0(X,\mathcal O(-1))=0$. [A1, F1, F3, F4, given, algebra]
 
 2.1 The top Čech cochains have the single index set $J=\{0,\ldots,r\}$. A degree-$k$ mode appears there with no restriction beyond $N(m)\subseteq J$. It is a top coboundary exactly when its negative set is contained in at least one codimension-one face $J\setminus\{j\}$, equivalently when $N(m)\ne J$: one implication follows because the input cochain on that face has no coefficient unless $N(m)\subseteq J\setminus\{j\}$; conversely, if $N(m)\ne J$, choose $j\in J\setminus N(m)$ and the contraction of [F4] supplies a preimage in that face. Therefore top cohomology has exactly the modes with $N(m)=J$. [A1, F4, step 1.1, construct]
 

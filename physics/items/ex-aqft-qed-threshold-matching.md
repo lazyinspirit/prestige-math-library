@@ -26,7 +26,7 @@ sources:
   references:
     - title: C. P. Burgess, Introduction to Effective Field Theory (full review)
       url: https://arxiv.org/pdf/hep-th/0701053
-      locator: §4.1.4, equations (81)–(86), the two-flavor QED model, matching at the muon threshold, and the decoupling-subtraction running.
+      locator: §4.1.4, equations (81), (85), and the boundary conditions immediately following (85); the first branch of (86) appears inconsistent and is not used.
     - title: Aneesh V. Manohar, Introduction to Effective Field Theories (full Les Houches lecture notes)
       url: https://arxiv.org/pdf/1804.05863
       locator: Chapter 7, §§7.1–7.2, equations (7.1)–(7.8), the one-loop fermion contribution to QED running and low-energy decoupling.
@@ -60,7 +60,7 @@ The two expressions agree continuously at $Q=M_\mu$. These are solutions of the 
 
 [F2] [[def-aqft-threshold-matching-map]]: the matching map takes high-energy coefficient data to lower-energy coefficient data and identifies the selected renormalized amplitudes through the declared truncation with the same infrared regulator.
 
-[F3] [Burgess, full EFT review](https://arxiv.org/pdf/hep-th/0701053), §4.1.4, equations (85)–(86): the source reports $\mu^2\,d\alpha_{\mathrm{DS}}/d\mu^2=2\alpha_{\mathrm{DS}}^2/(3\pi)$ above $M_\mu$, $\alpha_{\mathrm{DS}}^2/(3\pi)$ between $m_e$ and $M_\mu$, and zero below $m_e$, with continuity at $M_\mu$ and $\alpha_{\mathrm{DS}}(m_e)=\alpha_{\mathrm{phys}}$. This is a one-loop perturbative input, not an empirical observation.
+[F3] [Burgess, full EFT review](https://arxiv.org/pdf/hep-th/0701053), §4.1.4, equation (85) and its following boundary conditions: the source reports $\mu^2\,d\alpha_{\mathrm{DS}}/d\mu^2=2\alpha_{\mathrm{DS}}^2/(3\pi)$ above $M_\mu$, $\alpha_{\mathrm{DS}}^2/(3\pi)$ between $m_e$ and $M_\mu$, and zero below $m_e$, with continuity at $M_\mu$ and $\alpha_{\mathrm{DS}}(m_e)=\alpha_{\mathrm{phys}}$. This is a one-loop perturbative input, not an empirical observation. The first branch of printed equation (86) has an apparent typographical error: its denominator $M_\mu^2$ conflicts with the equation (85) flow and the stated low-energy boundary condition. The Verification derives the branch directly from (85) and that boundary condition.
 
 [A1] The QED field content and DS threshold convention in the Example are the selected model assumptions. No measured value of either mass or coupling is supplied.
 

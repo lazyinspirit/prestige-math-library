@@ -32,7 +32,7 @@ sources:
 
 ## Definition
 
-In the finite graph model, a matrix $B$ on $\mathbb R^X$ has range at most $r$ when $B_{xy}=0$ whenever $d_\Gamma(x,y)>r$. The positive heavy-sector matrix $A$ from the model data has range at most one. A derivative expansion of its inverse kernel is the formal operator series
+For the finite undirected graph $\Gamma=(X,E_\Gamma)$, define $d_\Gamma(x,y)$ as the least number of edges in a path from $x$ to $y$, and set $d_\Gamma(x,y)=+\infty$ if no path exists. Concatenating paths gives the triangle inequality for this extended distance. Identify $\mathbb R^X$ with real coordinate vectors indexed by $X$; for a matrix $B$ on this space, $B_{xy}$ denotes its row-$x$, column-$y$ entry in the standard coordinate basis. For an integer $r\ge0$, say that $B$ has range at most $r$ when $B_{xy}=0$ whenever $d_\Gamma(x,y)>r$. The positive heavy-sector matrix $A$ from the model data has range at most one. A derivative expansion of its inverse kernel is the formal operator series
 
 $$
 (M^2I+A)^{-1}\sim M^{-2}\sum_{r=0}^{\infty}(-A/M^2)^r.
@@ -56,7 +56,7 @@ It has range at most $N$ in this regulator. For a source $J$ supported in the sp
 
 **Given:** The finite graph $\Gamma=(X,E_\Gamma)$ and range-one matrix $A$ from the model-data definition, and the finite-regulator Wilsonian action convention.
 
-[F1] [[def-aqft-model-and-scale-data]]: $X$ is finite, $d_\Gamma$ is graph distance, and the real symmetric matrix $A$ vanishes when $d_\Gamma(x,y)>1$.
+[F1] [[def-aqft-model-and-scale-data]]: $X$ is finite, $d_\Gamma$ is graph distance, and the real symmetric matrix $A$ vanishes when $d_\Gamma(x,y)>1$. The extended shortest-path convention and standard coordinate entries used here are fixed in this Definition.
 
 [F2] [[def-aqft-wilsonian-action]]: the Wilsonian action is defined by the finite high-coordinate integral while the retained coordinates are held fixed.
 
@@ -66,6 +66,6 @@ It has range at most $N$ in this regulator. For a source $J$ supported in the sp
 
 **Given:** The finite graph and matrix hypotheses in the Definition.
 
-1.1 The identity $A^0=I$ has range zero. If $A^r$ has range at most $r$, then $(A^{r+1})_{xy}=\sum_{z\in X}(A^r)_{xz}A_{zy}$. A nonzero summand requires $d_\Gamma(x,z)\le r$ and $d_\Gamma(z,y)\le1$, so the triangle inequality gives $d_\Gamma(x,y)\le r+1$. Induction yields range at most $r$ for every $A^r$. [given, F1, algebra]
+1.1 The identity $A^0=I$ has range zero. If $A^r$ has range at most $r$, then $(A^{r+1})_{xy}=\sum_{z\in X}(A^r)_{xz}A_{zy}$. A nonzero summand requires $d_\Gamma(x,z)\le r$ and $d_\Gamma(z,y)\le1$. When both distances are finite, concatenating the corresponding paths gives $d_\Gamma(x,y)\le r+1$; if either is infinite, the summand is zero by the range hypotheses. Induction yields range at most $r$ for every $A^r$. [given, F1, algebra]
 
 2.1 Each term of $S_N$ is a scalar multiple of $A^r$ with $r\le N$. Therefore every matrix entry of $S_N$ vanishes when $d_\Gamma(x,y)>N$. It is a finite-range approximation to the finite-regulator Wilsonian kernel; no convergence or generic remainder follows from this range calculation. [given, F1, F2, step 1.1, algebra] ∎

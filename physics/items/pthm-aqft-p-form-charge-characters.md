@@ -18,7 +18,7 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-physical_scope: "The group-Abelianity conclusion uses only total group-like fusion, effectiveness, and the stated local exchange isotopies; the separate character conclusion assumes a unitary Hilbert-space crossing action and a nonzero bounded simple operator with continuous scalar action."
+physical_scope: "The group-Abelianity conclusion uses total group-like fusion, effectiveness, the stated local exchange isotopies, and model transport identifying the composite crossing and background maps; the separate character conclusion assumes a unitary Hilbert-space crossing action and a nonzero bounded simple operator with continuous scalar action."
 sources:
   references:
     - title: "Davide Gaiotto, Anton Kapustin, Nathan Seiberg, and Brian Willett, Generalized Global Symmetries"
@@ -33,7 +33,7 @@ verification:
 
 ## Statement
 
-Let $d\ge2$, $1\le p<d$, and let $\mathcal T$ have a group-like $p$-form global symmetry $G$ as defined above. Suppose that for every $g,h\in G$ and every allowed configuration of remaining insertions and fixed data, the model admits two parallel copies of their codimension-$(p+1)$ symmetry supports inside a contractible neighborhood with a disk spanned by two independent normal directions, and an admissible isotopy exchanging their order without intersecting any other insertion or changing boundary or model data. Then $G$ is Abelian.
+Let $d\ge2$, $1\le p<d$, and let $\mathcal T$ have a group-like $p$-form global symmetry $G$ as defined above. Suppose that for every $g,h\in G$ and every allowed configuration of remaining insertions and fixed data, the model admits two parallel copies of their codimension-$(p+1)$ symmetry supports inside a contractible neighborhood with a disk spanned by two independent normal directions, and an admissible isotopy exchanging their order without intersecting any other insertion or changing boundary or model data. Require that the model-supplied transport along this isotopy identifies the two composite crossing bijections on all complete typed insertion data and the two composite background maps; that is, it identifies $\rho_g\circ\rho_h$ with $\rho_h\circ\rho_g$ and $\beta_g\circ\beta_h$ with $\beta_h\circ\beta_g$. Then $G$ is Abelian.
 
 For the separate character conclusion, assume additionally that the crossing action has a unitary Hilbert-space realization: there are a complex Hilbert space $\mathcal H$ and a group homomorphism $V:G\to U(\mathcal H)$, with $V_e=I$ and $V_{gh}=V_gV_h$, such that crossing $U_g$ acts on bounded linear operators by $O\mapsto V_gOV_g^{-1}$. Let $O\in B(\mathcal H)$ be a nonzero genuine $p$-dimensional operator, where $B(\mathcal H)$ is the space of bounded linear operators with norm $\|O\|:=\sup_{\|\psi\|=1}\|O\psi\|<\infty$. Call $O$ **simple for this result** if crossing each $U_g$ sends it to a scalar multiple $\chi_O(g)O$, and assume the map $g\mapsto\chi_O(g)\in\mathbb C$ is continuous. Then $\chi_O:G\to U(1)$ is a continuous character, so the charge of $O$ belongs to the Pontryagin dual $\widehat G=\operatorname{Hom}_{\mathrm{cts}}(G,U(1))$. Neither conclusion is asserted for $p=0$; the character conclusion also makes no claim for nonscalar crossing actions.
 
@@ -47,7 +47,7 @@ For the separate character conclusion, assume additionally that the crossing act
 
 **Given:** The selected model $\mathcal T$, integers $d\ge2$ and $1\le p<d$, its group-like symmetry $G$, and the local exchange isotopies. For the character conclusion also assume the specified unitary representation, bounded nonzero genuine operator, scalar crossing action, and continuity condition.
 
-[A1] For each $g,h\in G$ and every allowed configuration of remaining insertions and fixed data, two parallel copies of the corresponding codimension-$(p+1)$ symmetry defects admit an isotopy exchanging their order inside a contractible neighborhood while avoiding other insertions and preserving boundary and model data.
+[A1] For each $g,h\in G$ and every allowed configuration of remaining insertions and fixed data, two parallel copies of the corresponding codimension-$(p+1)$ symmetry defects admit an isotopy exchanging their order inside a contractible neighborhood while avoiding other insertions and preserving boundary and model data. The model-supplied transport identifies the composite crossing bijections and background maps at the two endpoints on the complete admitted domain.
 
 [A2] For the character conclusion, $V:G\to U(\mathcal H)$ is a unitary representation implementing crossing by conjugation on $B(\mathcal H)$, and $O\in B(\mathcal H)$ is nonzero, genuine, and simple in the Statement's sense.
 
@@ -61,7 +61,7 @@ For the separate character conclusion, assume additionally that the crossing act
 
 1.2 Fusion-action compatibility in [F1] gives $\chi_O(gh)O=\rho_{gh}(O)=\rho_g(\rho_h(O))=\chi_O(h)\chi_O(g)O$. Since the scalar values commute and $O\ne0$, $\chi_O(gh)=\chi_O(g)\chi_O(h)$. The identity action gives $\chi_O(e)=1$. [A2, F1, given, algebra]
 
-2.1 By [A1], the two supports can be exchanged while each admitted observable or background datum is held fixed. Topologicality in [F1] therefore makes the crossing automorphisms and correlator actions of the two fused insertions identical on all such data. Effectiveness in [F1] identifies their group labels, so $gh=hg$ for arbitrary $g,h\in G$. This argument uses no Hilbert-space or operator hypothesis. [A1, F1, step 1.1]
+2.1 By [A1], the exchange identifies the composite crossing bijections $\rho_g\circ\rho_h$ and $\rho_h\circ\rho_g$ and the composite background maps on the complete admitted domain. Topologicality in [F1] also makes their correlator actions identical. Fusion compatibility and effectiveness in [F1] therefore identify the group labels $gh$ and $hg$, so $gh=hg$ for arbitrary $g,h\in G$. This argument uses no Hilbert-space or operator hypothesis. [A1, F1, step 1.1]
 
 2.2 Unitary conjugation preserves the operator norm, so $\|O\|=\|V_gOV_g^{-1}\|=\|\chi_O(g)O\|=|\chi_O(g)|\|O\|$. Because $O\ne0$, its norm is positive and $|\chi_O(g)|=1$. By [A3], the resulting homomorphism is continuous; hence $\chi_O:G\to U(1)$ is continuous. [A2, A3, step 1.2, algebra]
 

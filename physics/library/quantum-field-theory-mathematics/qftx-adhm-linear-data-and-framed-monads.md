@@ -12,6 +12,7 @@ items:
   - thm-qftx-framed-p2-monad-adhm-correspondence
 examples: []
 requires:
+  - depth-and-cohen-macaulay-modules
   - relations-functions-and-quotients
   - holomorphic-inverse-and-weierstrass-preparation
   - lie-subgroups-actions-and-homogeneous-spaces

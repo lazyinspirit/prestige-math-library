@@ -40,7 +40,7 @@ verification:
 ## Example
 
 Let $M>0$ and let $\mathcal K=\Lambda\mathbb C^4$ with orthonormal basis $|S\rangle$ indexed by subsets $S\subseteq\{1,2,3,4\}$ and grading $(-1)^{|S|}$. For $j\in\{1,2,3,4\}$ define $c_j|S\rangle=0$ when $j\notin S$ and
-$c_j|S\rangle=(-1)^{|\{s\in S:s<j\}|}|S\setminus\{j\}\rangle$ when $j\in S$. Let $c_j^\dagger$ be the actual Hilbert adjoint. For $I,\alpha\in\{1,2\}$ put $j=2(I-1)+\alpha$ and set $Q^I_\alpha=\sqrt{2M}\,c_j$, with $\bar Q_{\dot\alpha I}=(Q^I_\alpha)^\dagger$. Take $P^\mu=(M,0,0,0)$ and $Z^{IJ}=0$. On $\mathcal D=\mathcal K$, these operators satisfy the massive N=2 rest-frame supercharge relations with $\eta=\operatorname{diag}(-1,1,1,1)$ and $\epsilon_{12}=1$. Since $\|Z\|_{\mathrm{op}}=0<M$, the bound is strict and no nonzero vector in this fiber is BPS-saturated. This finite module is a representation of the rest-frame supercharge algebra only; it is not asserted to extend to a full Poincare representation or a physical particle.
+$c_j|S\rangle=(-1)^{|\{s\in S:s<j\}|}|S\setminus\{j\}\rangle$ when $j\in S$. Let $c_j^\dagger$ be the actual Hilbert adjoint. For $I,\alpha\in\{1,2\}$ put $j=2(I-1)+\alpha$ and set $Q^I_\alpha=\sqrt{2M}\,c_j$, with $\bar Q_{\dot\alpha I}=(Q^I_\alpha)^\dagger$. Take $P^\mu=(M,0,0,0)$ and $Z^{IJ}=0$. On $\mathcal D=\mathcal K$, these operators satisfy the massive N=2 rest-frame supercharge relations with $\eta=\operatorname{diag}(-1,1,1,1)$ and $\epsilon_{12}=1$. Since $\|Z\|_{\mathrm{op}}=0<M$, the central-charge bound is strict in these rest-frame algebra data, so the mass/central-charge equality condition for BPS saturation is not met. This finite module is a representation of the rest-frame supercharge algebra only; it is not asserted to extend to a full Poincare representation or a physical particle.
 
 ## Example references
 
@@ -68,6 +68,6 @@ $c_j|S\rangle=(-1)^{|\{s\in S:s<j\}|}|S\setminus\{j\}\rangle$ when $j\in S$. Let
 
 2.1 Scaling by $\sqrt{2M}$ gives $\{Q^I_\alpha,(Q^J_\beta)^\dagger\}=2M\delta^I{}_J\delta_{\alpha\beta}I$ and all same-chirality anticommutators zero. These are exactly the rest-frame relations in [F2] with $Z^{IJ}=0$ and $P_0=-M$. [F2, step 1.1, algebra]
 
-3.1 The zero matrix has operator norm $0$, so $M>|Z|=0$. By [F1], equality is necessary for a BPS-saturated vector; the strict inequality therefore excludes every nonzero vector of this module from that class. [F1, step 2.1, algebra]
+3.1 Since $Z=0$, its operator norm is $\|Z\|_{\mathrm{op}}=0<M$. By [F1], the N=2 mass/central-charge equality condition is $M=|z|=\|Z\|_{\mathrm{op}}$, which fails for these rest-frame algebra data. This conclusion concerns only the finite module and does not assert that it is a BPS sector of a full Poincare representation. [F1, step 2.1, algebra]
 
 4.1 The verification concerns only a finite rest-frame module and uses no choice from a family; [A1] is retained as the inherited interface assumption of the BPS definition. The data supply no Lorentz action, full unitary Poincare representation, or physical particle, so the example makes no claim about the spectrum of any QFT. [A1, given, step 3.1] ∎

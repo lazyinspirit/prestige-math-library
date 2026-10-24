@@ -25,7 +25,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Joachim Wehler, Stein Manifolds, §4.3, Propositions 4.32 and 4.34"
+    - title: "Joachim Wehler, Stein Manifolds, Release 5.0 (2026-10-22), §4.3, Propositions 4.32 and 4.34; Release 4.3: Propositions 4.31 and 4.33"
       url: "https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf"
 verification:
   precheck: pending
@@ -37,9 +37,9 @@ Let $(X,\mathcal O_X)$ be a ringed space and use the coherence definition on the
 
 ## Statement references
 
-[Wehler, §4.3, Proposition 4.32, printed pp. 148–151/PDF pp. 152–155](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
+[Wehler, Release 5.0, §4.3, Proposition 4.32 (kernels and cokernels), printed pp. 148–151; Release 4.3: Proposition 4.31](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
-[Wehler, §4.3, Proposition 4.34, printed pp. 152–153/PDF pp. 156–157](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
+[Wehler, Release 5.0, §4.3, Proposition 4.34 (short exact sequences), printed pp. 152–154; Release 4.3: Proposition 4.33](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
 ## Facts & Assumptions
 

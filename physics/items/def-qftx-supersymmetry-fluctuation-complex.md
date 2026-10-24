@@ -35,9 +35,12 @@ sources:
     - title: "Vasily Pestun, Localization of Gauge Theory on a Four-Sphere and
         Supersymmetric Wilson Loops"
       url: "https://arxiv.org/pdf/0712.2824"
-      locator: "Section 2, equations (2.5)–(2.14) and (2.26)–(2.30); Section 3,
-        equations (3.1)–(3.3); Section 4.2, for the gauge-fixed Q-square,
-        fluctuation operators and formal S4 regulator qualification."
+      locator: "Section 2, equations (2.5)–(2.14) and (2.26)–(2.30), for off-shell
+        transformations; Section 3, equations (3.1)–(3.3), for the Q-exact
+        deformation; Sections 4.2–4.3, equations (4.4)–(4.15), for the
+        supersymmetry and combined gauge-fixed Q-complex; Section 1, printed
+        p. 4 (PDF p. 4), unnumbered paragraph between equations (1.5) and
+        (1.6), for the assumed, unconstructed noncommutative S4 regulator."
     - title: "Vasilis Peelaers, 4d N=2 Localization lecture notes"
       url: "https://indico.math.cnrs.fr/event/3026/attachments/2163/2457/Peelaers-Lec\
         tureNotes.pdf"

@@ -4,6 +4,7 @@
   "batch": 64,
   "dependency_level": 0,
   "scope": [
+    "lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness",
     "lem-qftx-gaga-algebraic-analytic-local-completions",
     "thm-qftx-gaga-analytic-local-ring-flatness",
     "ex-qftx-gaga-analytic-equal-completions",
@@ -80,10 +81,11 @@
         },
         {
           "fact": "F7",
-          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source": "lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness",
           "source_section": "Statement",
-          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "quote": "Fix an integer $m\\ge1$, $a\\in\\mathbb C^m$, positive real radii\n$r=(r_0,\\ldots,r_{m-1})$, and $M\\ge0$. For a multi-index\n$\\alpha\\in\\mathbb N^m$, write $|\\alpha|=\\sum_{i<m}\\alpha_i$,\n$\\alpha!=\\prod_{i<m}\\alpha_i!$, and $w^\\alpha=\\prod_{i<m}w_i^{\\alpha_i}$.\nSuppose $c:\\mathbb N^m\\to\\mathbb C$ satisfies\n$|c_\\alpha|\\le M\\prod_{i<m}r_i^{-\\alpha_i}$. Then the series\n$g(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly\non every closed polydisc $|z_i-a_i|\\le s r_i$ with $0<s<1$.\nIts sum is holomorphic on $\\Delta_r(a)=\\{z:|z_i-a_i|<r_i\\text{ for all }i<m\\}$,\nin the sense of a total complex-linear differential.\n\nLet $e_k$ denote the multi-index with $1$ at coordinate $k$ and $0$ elsewhere.\nFor every $k<m$ and $0<\\theta<1$, the reindexed first derivative\ncoefficients $d_\\nu=(\\nu_k+1)c_{\\nu+e_k}$ satisfy\n\n$$|d_\\nu|\\le\\frac{M}{r_k(1-\\theta)^2}\\prod_{i<m}(\\theta r_i)^{-\\nu_i}.$$\n\nEvery iterated complex coordinate partial derivative exists and is holomorphic\non $\\Delta_r(a)$, and, with all coordinate differentiations interpreted as\nWirtinger derivatives,\n\n$$\\partial_z^\\gamma g(z)=\\sum_{\\nu\\in\\mathbb N^m}\\frac{(\\nu+\\gamma)!}{\\nu!}c_{\\nu+\\gamma}(z-a)^\\nu,\\qquad \\partial_z^\\gamma g(a)=\\gamma!c_\\gamma.$$\n\nEach derived series converges absolutely and uniformly on every smaller closed\npolydisc. If a second family $c'$ satisfies a bound of the same form on the\nsame radii, with a possibly different constant, and has the same sum throughout\n$\\Delta_r(a)$, then $c_\\alpha=c'_\\alpha$ for every $\\alpha$.",
           "uses": [
+            "1.3",
             "2.2"
           ]
         },
@@ -165,17 +167,18 @@
         },
         {
           "id": "step-1-3",
-          "claim": "Every germ in $\\mathfrak n$ has a power series with no constant term by [F6]. Assign each nonconstant monomial to the first coordinate with positive exponent; grouping the terms by that coordinate writes the germ as $\\sum_{i=1}^n w_i g_i$, where each $g_i$ converges on a smaller polydisc by absolute convergence. Hence $\\mathfrak n=(w_1,\\ldots,w_n)$.",
+          "claim": "Every germ in $\\mathfrak n$ has a power series $\\sum_\\alpha c_\\alpha w^\\alpha$ with no constant term by [F6], since evaluating at $0$ gives $c_0=0$. Choose positive radii $r_i$ on which [F6] bounds $|c_\\alpha|\\le M\\prod_i r_i^{-\\alpha_i}$. Assign each nonconstant monomial to the first coordinate with positive exponent. After removing the corresponding factor $w_i$, the coefficient at $w^\\nu$ of the grouped series $g_i$ is either $c_{\\nu+e_i}$ or $0$, and is bounded by $(M/r_i)\\prod_j r_j^{-\\nu_j}$. Thus [F7] makes each $g_i$ holomorphic on that polydisc, and absolute convergence permits the finite grouping to give the germ identity $f=\\sum_{i=1}^n w_i g_i$. Conversely each $w_i$ vanishes at $0$, so $\\mathfrak n=(w_1,\\ldots,w_n)$.",
           "step": "1.3",
           "inputs": [
             "F2",
             "F6",
+            "F7",
             "construct"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "By [F11], every ideal of $\\mathbb C$ is finitely generated; the DC-dependent ideal characterization in [F11], using DC from step 1.1, makes $\\mathbb C$ Noetherian. The finite-variable corollary in [F8] then makes $P$ Noetherian, and [F8] makes its localization $A_0$ Noetherian under the same DC. The ring $A_0$ is local: fractions with numerator outside $\\mathfrak m$ are units, while the residue map $p/q\\mapsto p(0)/q(0)$ is a surjective homomorphism to $\\mathbb C$ with kernel $\\mathfrak m A_0$. The ring $H$ is Noetherian by [F5] and local by [F3] when $n=1$ and by [F4] for every $n$. Since $I\\subseteq\\mathfrak m$ and every element of $I$ vanishes at the origin, $IA_0$ and $IH$ lie in the respective maximal ideals. Their quotients are therefore Noetherian local rings, with maximal ideals the images of those ambient maximal ideals.",
+          "claim": "By [F11], every ideal of $\\mathbb C$ is finitely generated; the DC-dependent ideal characterization in [F11], using DC from step 1.1, makes $\\mathbb C$ Noetherian. The finite-variable corollary in [F8] then makes $P$ Noetherian, and [F8] makes its localization $A_0$ Noetherian under the same DC. The ring $A_0$ is local: fractions with numerator outside $\\mathfrak m$ are units, while the residue map $p/q\\mapsto p(0)/q(0)$ is a surjective homomorphism to $\\mathbb C$ with kernel $\\mathfrak m A_0$. The ring $H$ is Noetherian by [F5] and local by [F3] when $n=1$ and by [F4] for every $n$. Since $I\\subseteq\\mathfrak m$ and every element of $I$ vanishes at the origin, $IA_0$ and $IH$ lie in the respective maximal ideals. Every $q\\in P\\setminus\\mathfrak m$ maps to a unit in $H$ by [F4], so $P\\to H$ extends to $A_0\\to H$. Evaluation at $0$ on $H$ has kernel $\\mathfrak n$, and its composite with $A_0\\to H$ is $p/q\\mapsto p(0)/q(0)$; hence the preimage of $\\mathfrak n$ is $\\mathfrak m A_0$. Because $I\\subseteq\\mathfrak m$ and $IH\\subseteq\\mathfrak n$, the induced $A_I\\to H_I$ has preimage of $\\mathfrak n/IH$ equal to $\\mathfrak m A_0/IA_0$, so it is local. The quotients are Noetherian local rings, with maximal ideals the images of those ambient maximal ideals.",
           "step": "2.1",
           "inputs": [
             "given",
@@ -190,7 +193,7 @@
         },
         {
           "id": "step-2-2",
-          "claim": "For $k\\ge1$, truncate the unique Taylor series from [F6] to total degree less than $k$. This gives a surjection $H\\to P/\\mathfrak m^k$. For each multi-index $\\alpha$ of degree at least $k$, assign the first monomial divisor $w^\\beta$ in a fixed ordering among the finitely many divisors of total degree $k$; grouping the absolutely convergent subseries by the finitely many possible $\\beta$ writes the tail as $\\sum_{|\\beta|=k}w^\\beta g_\\beta$. Thus the kernel is contained in $\\mathfrak n^k$. Conversely, step 1.3 makes $\\mathfrak n^k$ generated by the degree-$k$ coordinate monomials. To apply [F7], choose a polydisc about $0$ with positive radii whose closure lies inside a common convergence polydisc for a finite expression of an element of $\\mathfrak n^k$ as a sum of degree-$k$ monomials times germs. By [F6], the Taylor coefficients of each germ are uniformly bounded on these radii; multiplying by a fixed monomial shifts the coefficient indices and preserves a bound of the same form, and the finite sum preserves such a bound. The Taylor series of the given element has the same kind of bound by [F6]. The two sums agree on the chosen polydisc, so [F7] applies and shows that all coefficients of total degree below $k$ vanish. Hence $\\mathfrak n^k$ lies in the kernel, and $H/\\mathfrak n^k\\cong P/\\mathfrak m^k$.",
+          "claim": "For $k\\ge1$, [F6] and [F7] give each holomorphic germ a unique power-series coefficient array, independent of its representative after restricting to a common sufficiently small polydisc. Truncation to total degree less than $k$ gives a surjection $H\\to P/\\mathfrak m^k$; addition and multiplication agree with the truncated coefficient operations, by addition and multiplication of absolutely convergent series and uniqueness in [F7]. For each multi-index $\\alpha$ of degree at least $k$, assign the first monomial divisor $w^\\beta$ in a fixed ordering among the finitely many divisors of total degree $k$. If $|c_\\alpha|\\le M\\prod_i r_i^{-\\alpha_i}$ is a bound from [F6], the coefficient at $w^\\nu$ after removing $w^\\beta$ from its assigned subseries is either $c_{\\nu+\\beta}$ or $0$, hence bounded by $(M\\prod_i r_i^{-\\beta_i})\\prod_i r_i^{-\\nu_i}$. By [F7] this grouped series defines a holomorphic germ $g_\\beta$. Finite grouping therefore writes the tail as $\\sum_{|\\beta|=k}w^\\beta g_\\beta$, so the kernel is contained in $\\mathfrak n^k$. Conversely, step 1.3 makes $\\mathfrak n^k$ generated by the degree-$k$ coordinate monomials. Choose positive radii whose closed polydisc lies inside a common convergence polydisc for a finite expression of an element of $\\mathfrak n^k$ as a sum of degree-$k$ monomials times germs. By [F6], each germ's expansion has a coefficient bound on these radii. Multiplication by $w^\\beta$ shifts its coefficients and preserves a bound of the same form, with the constant multiplied by $\\prod_i r_i^{\\beta_i}$; a finite sum also preserves such a bound. The expansion of the given element has a bound on the same radii by [F6]. The two sums agree there, so [F7] identifies their coefficients and shows that all coefficients of total degree below $k$ vanish. Thus $\\mathfrak n^k$ lies in the kernel and $H/\\mathfrak n^k\\cong P/\\mathfrak m^k$.",
           "step": "2.2",
           "inputs": [
             "given",
@@ -266,12 +269,14 @@
         }
       ],
       "risk_review": {
-        "scope": "Authoring check of the complete conditional argument for lem-qftx-gaga-algebraic-analytic-local-completions; independent approval is not claimed.",
+        "status": "complete",
+        "reviewer": "/root",
+        "scope": "Root adoption of actual same-owner current supplier and affected-consumer review, retaining original native review evidence.",
+        "notes": "Read full current proof. F7 now invokes independently proved local lemma. Proof1.3 explicitly bounds each shifted masked subseries by M/r_i and makes it a holomorphic germ. Proof2.2 explicitly bounds each degree-k grouped tail by M r^-beta and makes it a holomorphic germ; coefficient uniqueness makes truncation representative-independent and proves kernel equality. Polynomial jet construction, local map, Noetherian premises, inverse-limit identification and same ideal quotient are unchanged. Existing AC supplies completion-quotient and DC premises. Diagram remains commutative. Root independently checked the new six-step supplier and the completion proof grouped-tail uses. New local lemma supplies bounded-series holomorphy and coefficient uniqueness; direct local uses no longer rely on the published false derivative estimate. Existing Noetherian/Weierstrass/Osgood branch retains only separately checked earlier holomorphy clauses. Evidence: research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/step3-local-power-series-proposal-v1/authorship.json",
         "findings": [
-          "Checked polynomial localization, analytic Taylor truncations, the common ambient completion, and same-ideal finite quotients under AC. The DC-dependent Noetherian quotient/localization input is discharged from AC. No unresolved local mathematical obligation identified."
+          "Local derivative/uniqueness prerequisite supplied with independently checked proof; existing mathematical claims preserved."
         ],
-        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
-        "status": "authoring_complete"
+        "residual_risk": "Published derivative-bound Proof7.1 remains an open outside maintenance defect. Neither the published original nor immutable import is repaired or recertified globally."
       },
       "routine_steps": []
     },
@@ -578,12 +583,14 @@
         }
       ],
       "risk_review": {
-        "scope": "Authoring check of the complete conditional argument for thm-qftx-gaga-analytic-local-ring-flatness; independent approval is not claimed.",
+        "status": "complete",
+        "reviewer": "/root",
+        "scope": "Root adoption of actual same-owner current supplier and affected-consumer review, retaining original native review evidence.",
+        "notes": "Full proof read, source unchanged and hashes checked against original proposal. Completion lemma public claim unchanged: ambient local map and common quotient completion support steps2.1–4.1. AC/free-on-kernel resolution in1.1 supplies Tor data for6.1. Injectivity/descent/faithfulness/tensor-unit injection/B/A-flatness uses remain valid for I=0 and nonradical I, with no new analytic assertion. Root independently checked the new six-step supplier and the completion proof grouped-tail uses. New local lemma supplies bounded-series holomorphy and coefficient uniqueness; direct local uses no longer rely on the published false derivative estimate. Existing Noetherian/Weierstrass/Osgood branch retains only separately checked earlier holomorphy clauses. Evidence: research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/step3-local-power-series-proposal-v1/authorship.json",
         "findings": [
-          "Checked the finite-type chart, common completion, completion-based flatness descent, proper-ideal criterion, tensor-unit injection, and Tor argument for B/A. AC and the derived DC/projective-resolution inputs are explicit; conclusions remain local and scheme-theoretic."
+          "Local derivative/uniqueness prerequisite supplied with independently checked proof; existing mathematical claims preserved."
         ],
-        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
-        "status": "authoring_complete"
+        "residual_risk": "Published derivative-bound Proof7.1 remains an open outside maintenance defect. Neither the published original nor immutable import is repaired or recertified globally."
       },
       "routine_steps": []
     },
@@ -618,18 +625,18 @@
         },
         {
           "fact": "F3",
-          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source": "lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness",
           "source_section": "Statement",
-          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "quote": "Fix an integer $m\\ge1$, $a\\in\\mathbb C^m$, positive real radii\n$r=(r_0,\\ldots,r_{m-1})$, and $M\\ge0$. For a multi-index\n$\\alpha\\in\\mathbb N^m$, write $|\\alpha|=\\sum_{i<m}\\alpha_i$,\n$\\alpha!=\\prod_{i<m}\\alpha_i!$, and $w^\\alpha=\\prod_{i<m}w_i^{\\alpha_i}$.\nSuppose $c:\\mathbb N^m\\to\\mathbb C$ satisfies\n$|c_\\alpha|\\le M\\prod_{i<m}r_i^{-\\alpha_i}$. Then the series\n$g(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly\non every closed polydisc $|z_i-a_i|\\le s r_i$ with $0<s<1$.\nIts sum is holomorphic on $\\Delta_r(a)=\\{z:|z_i-a_i|<r_i\\text{ for all }i<m\\}$,\nin the sense of a total complex-linear differential.\n\nLet $e_k$ denote the multi-index with $1$ at coordinate $k$ and $0$ elsewhere.\nFor every $k<m$ and $0<\\theta<1$, the reindexed first derivative\ncoefficients $d_\\nu=(\\nu_k+1)c_{\\nu+e_k}$ satisfy\n\n$$|d_\\nu|\\le\\frac{M}{r_k(1-\\theta)^2}\\prod_{i<m}(\\theta r_i)^{-\\nu_i}.$$\n\nEvery iterated complex coordinate partial derivative exists and is holomorphic\non $\\Delta_r(a)$, and, with all coordinate differentiations interpreted as\nWirtinger derivatives,\n\n$$\\partial_z^\\gamma g(z)=\\sum_{\\nu\\in\\mathbb N^m}\\frac{(\\nu+\\gamma)!}{\\nu!}c_{\\nu+\\gamma}(z-a)^\\nu,\\qquad \\partial_z^\\gamma g(a)=\\gamma!c_\\gamma.$$\n\nEach derived series converges absolutely and uniformly on every smaller closed\npolydisc. If a second family $c'$ satisfies a bound of the same form on the\nsame radii, with a possibly different constant, and has the same sum throughout\n$\\Delta_r(a)$, then $c_\\alpha=c'_\\alpha$ for every $\\alpha$.",
           "uses": [
             "2.1"
           ]
         },
         {
           "fact": "F4",
-          "source": "thm-power-series-define-holomorphic-functions-in-several-variables",
+          "source": "lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness",
           "source_section": "Statement",
-          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$, a polyradius $r$, a real $M\\ge0$ and\ncoefficients $c:\\mathbb N^m\\to\\mathbb C$ with\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}\\qquad\\text{for every multi-index }\\alpha.$$\n\nThen:\n\n1. for every $\\theta$ with $0<\\theta<1$ the series\n   $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n   $\\overline\\Delta_{\\theta r}(a)$, so its sum $g$ is defined on\n   $\\Delta_r(a)$;\n2. $g$ is holomorphic on $\\Delta_r(a)$, with\n   $$Dg(z)h=\\sum_{k<m}b_k(z)h_k,\\qquad b_k(z)=\\sum_{\\alpha}\\alpha_k\\,c_\\alpha(z-a)^{\\alpha-e_k},$$\n   the $k$th series running over the multi-indices with $\\alpha_k\\ge1$ and\n   converging absolutely on $\\Delta_r(a)$; equivalently\n   $\\partial_{z_k}g=b_k$;\n3. for every $\\theta$ with $0<\\theta<1$ the derived coefficients\n   $\\alpha_kc_\\alpha$, re-indexed as a power series, obey a bound of the same\n   shape on the polyradius $\\theta r$, so the differentiation may be iterated;\n   and every iterated complex partial derivative\n   $\\partial^\\beta_zg:=\\partial_{z_0}^{\\beta_0}\\cdots\\partial_{z_{m-1}}^{\\beta_{m-1}}g$\n   exists on $\\Delta_r(a)$ with\n   $$\\partial^\\beta_zg(a)=\\beta!\\,c_\\beta .$$",
+          "quote": "Fix an integer $m\\ge1$, $a\\in\\mathbb C^m$, positive real radii\n$r=(r_0,\\ldots,r_{m-1})$, and $M\\ge0$. For a multi-index\n$\\alpha\\in\\mathbb N^m$, write $|\\alpha|=\\sum_{i<m}\\alpha_i$,\n$\\alpha!=\\prod_{i<m}\\alpha_i!$, and $w^\\alpha=\\prod_{i<m}w_i^{\\alpha_i}$.\nSuppose $c:\\mathbb N^m\\to\\mathbb C$ satisfies\n$|c_\\alpha|\\le M\\prod_{i<m}r_i^{-\\alpha_i}$. Then the series\n$g(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly\non every closed polydisc $|z_i-a_i|\\le s r_i$ with $0<s<1$.\nIts sum is holomorphic on $\\Delta_r(a)=\\{z:|z_i-a_i|<r_i\\text{ for all }i<m\\}$,\nin the sense of a total complex-linear differential.\n\nLet $e_k$ denote the multi-index with $1$ at coordinate $k$ and $0$ elsewhere.\nFor every $k<m$ and $0<\\theta<1$, the reindexed first derivative\ncoefficients $d_\\nu=(\\nu_k+1)c_{\\nu+e_k}$ satisfy\n\n$$|d_\\nu|\\le\\frac{M}{r_k(1-\\theta)^2}\\prod_{i<m}(\\theta r_i)^{-\\nu_i}.$$\n\nEvery iterated complex coordinate partial derivative exists and is holomorphic\non $\\Delta_r(a)$, and, with all coordinate differentiations interpreted as\nWirtinger derivatives,\n\n$$\\partial_z^\\gamma g(z)=\\sum_{\\nu\\in\\mathbb N^m}\\frac{(\\nu+\\gamma)!}{\\nu!}c_{\\nu+\\gamma}(z-a)^\\nu,\\qquad \\partial_z^\\gamma g(a)=\\gamma!c_\\gamma.$$\n\nEach derived series converges absolutely and uniformly on every smaller closed\npolydisc. If a second family $c'$ satisfies a bound of the same form on the\nsame radii, with a possibly different constant, and has the same sum throughout\n$\\Delta_r(a)$, then $c_\\alpha=c'_\\alpha$ for every $\\alpha$.",
           "uses": [
             "1.2"
           ]
@@ -720,12 +727,14 @@
         }
       ],
       "risk_review": {
-        "scope": "Authoring check of the complete conditional argument for ex-qftx-gaga-analytic-equal-completions; independent approval is not claimed.",
+        "status": "complete",
+        "reviewer": "/root",
+        "scope": "Root adoption of actual same-owner current supplier and affected-consumer review, retaining original native review evidence.",
+        "notes": "Full current verification read. F3 and F4 cite the new local supplier for uniqueness and bounded-series holomorphy. Step1.2 proves exact bounds for all coefficients by finite factorial/geometric estimates. Step2.1 gives common-radius bounds for finite polynomial product and p, so uniqueness applies; factorial multiplication gives nonzero polynomial with infinitely many integer roots, contradicted by locally proved finite root bound. No statement narrowing. Root independently checked the new six-step supplier and the completion proof grouped-tail uses. New local lemma supplies bounded-series holomorphy and coefficient uniqueness; direct local uses no longer rely on the published false derivative estimate. Existing Noetherian/Weierstrass/Osgood branch retains only separately checked earlier holomorphy clauses. Evidence: research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/step3-local-power-series-proposal-v1/authorship.json",
         "findings": [
-          "Checked convergence and coefficient comparison for every rational representative with denominator nonzero at the origin, including constant denominators. No unresolved local mathematical obligation identified."
+          "Local derivative/uniqueness prerequisite supplied with independently checked proof; existing mathematical claims preserved."
         ],
-        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
-        "status": "authoring_complete"
+        "residual_risk": "Published derivative-bound Proof7.1 remains an open outside maintenance defect. Neither the published original nor immutable import is repaired or recertified globally."
       },
       "routine_steps": []
     },
@@ -835,14 +844,343 @@
         }
       ],
       "risk_review": {
-        "scope": "Authoring check of the complete conditional argument for ex-qftx-gaga-analytic-nonreduced-quotient; independent approval is not claimed.",
+        "status": "complete",
+        "reviewer": "/root",
+        "scope": "Root adoption of actual same-owner current supplier and affected-consumer review, retaining original native review evidence.",
+        "notes": "Full verification read, source unchanged and hash checked against proposal. Common quotient completion retains x^2 ideal. Formal coefficient at (1,0) excludes x from x^2T. Zero in either local quotient would map to zero in completion, so x is nonzero while x^2=0. This uses the unchanged completion/flatness claims and no derivative supplier directly. Root independently checked the new six-step supplier and the completion proof grouped-tail uses. New local lemma supplies bounded-series holomorphy and coefficient uniqueness; direct local uses no longer rely on the published false derivative estimate. Existing Noetherian/Weierstrass/Osgood branch retains only separately checked earlier holomorphy clauses. Evidence: research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/step3-local-power-series-proposal-v1/authorship.json",
         "findings": [
-          "Checked nonvanishing by the formal x^1y^0 coefficient and x^2=0 from the quotient. The same ideal is retained in both completions; no radicalization occurs."
+          "Local derivative/uniqueness prerequisite supplied with independently checked proof; existing mathematical claims preserved."
         ],
-        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
-        "status": "authoring_complete"
+        "residual_risk": "Published derivative-bound Proof7.1 remains an open outside maintenance defect. Neither the published original nor immutable import is repaired or recertified globally."
       },
       "routine_steps": []
+    },
+    "lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariable-power-series",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$ and read $\\mathbb C^m$ through\n[[rem-complex-euclidean-space-dictionary]]. A **multi-index** is\n$\\alpha\\in\\mathbb N^m$, with $|\\alpha|=\\sum_{k<m}\\alpha_k$ and\n$\\alpha!=\\prod_{k<m}\\alpha_k!$ as in\n[[def-ck-and-multi-index-notation-in-several-variables]], every index running\nover $k<m$ from $0$. For $w\\in\\mathbb C^m$ the **complex monomial** is\n\n$$w^\\alpha:=\\prod_{k<m}w_k^{\\alpha_k},$$\n\na finite product in the multiplicative commutative monoid of $\\mathbb C$\n([[def-monoid-finite-product]], [[thm-complex-numbers-form-a-field]]) of natural powers\nin $\\mathbb C$ ([[def-complex-integer-powers]]); for the zero multi-index\n$w^0=1$.\n\n**Enumerating the index set.** $\\mathbb N$ is countable and\n[[lem-finite-powers-of-countable-sets-are-countable]] makes $\\mathbb N^m$ at\nmost countable; it is infinite, so there is a bijection\n$\\sigma:\\mathbb N\\to\\mathbb N^m$ ([[def-injection-surjection-bijection]],\n[[def-countable]]).\n\nLet $c:\\mathbb N^m\\to\\mathbb C$ and $a,z\\in\\mathbb C^m$. The **multi-indexed\npower series** $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ **converges absolutely at $z$**\nwhen the complex series $\\sum_n c_{\\sigma(n)}(z-a)^{\\sigma(n)}$ converges\nabsolutely ([[def-complex-series-power-series-and-absolute-convergence]]) for one\nbijection $\\sigma$, equivalently for every one. The two conditions agree, and the\nsums agree, because for bijections $\\sigma,\\tau$ the series along $\\tau$ is a\nrearrangement of the series along $\\sigma$: applying\n[[thm-absolute-convergence-of-complex-series]] to the nonnegative series of\nmoduli transfers convergence, and applying it again to the series itself\ntransfers the sum. That common value is written $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$\nand no other notion of unordered sum is introduced.\n\n**Box partial sums.** For $N\\in\\mathbb N$ put\n$B_N:=\\{\\alpha\\in\\mathbb N^m:\\alpha_k\\le N\\ \\text{for every }k<m\\}$, a finite\nset, and let $S_N(z):=\\sum_{\\alpha\\in B_N}c_\\alpha(z-a)^\\alpha$ be the\ncorresponding finite sum ([[def-finite-sum-in-a-commutative-monoid]]). If the\nseries converges absolutely at $z$ with sum $S$, then $S_N(z)\\to S$. Given\n$\\varepsilon>0$, absolute convergence supplies $n_0$ with\n$\\sum_{n\\ge n_0}|c_{\\sigma(n)}(z-a)^{\\sigma(n)}|<\\varepsilon$ and\n$\\bigl|\\sum_{n<n_0}c_{\\sigma(n)}(z-a)^{\\sigma(n)}-S\\bigr|\\le\\varepsilon$; taking\n$N$ large enough that $B_N$ contains $\\sigma(0),\\dots,\\sigma(n_0-1)$, every index\nof $B_N$ outside that finite list is $\\sigma(n)$ for some $n\\ge n_0$, so\n$|S_N(z)-S|\\le2\\varepsilon$. The same argument bounds $|S_N(z)|$ and the tail of\nthe series by the corresponding tails of the series of moduli.\n\nThe series **converges absolutely and uniformly on a set $S\\subseteq\\mathbb C^m$**\nwhen there are reals $M_\\alpha\\ge0$ with\n$|c_\\alpha(z-a)^\\alpha|\\le M_\\alpha$ for every $z\\in S$ and every $\\alpha$, and\nwith $\\sum_n M_{\\sigma(n)}$ convergent. By\n[[thm-weierstrass-m-test-for-complex-function-series]] the partial sums along\n$\\sigma$ then converge uniformly on $S$\n([[def-uniform-convergence-of-complex-valued-functions]]) and the series converges\nabsolutely at every point of $S$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-absolute-convergence-of-complex-series",
+          "source_section": "Statement",
+          "quote": "Every absolutely convergent complex series converges, and every rearrangement has the same sum. The conventions and prerequisite facts used below are recorded in [[def-complex-series-power-series-and-absolute-convergence]], [[thm-absolute-convergence-in-rn]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-weierstrass-m-test-for-complex-function-series",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and $f_n:X\\to\\mathbb C$. Suppose $M_n\\ge0$, $|f_n(x)|\\le M_n$ for all $n,x$, and the real series $\\sum M_n$ converges. Then $\\sum f_n(x)$ converges absolutely for every $x$ and its partial sums converge uniformly on $X$ in the sense of [[def-uniform-convergence-of-complex-valued-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with $a_k \\ge 0$ for every $k \\in \\mathbb{N}$,\nlet $s_n = \\sum_{k<n} a_k$ be its partial sums and let\n$S = \\{\\, s_n : n \\in \\mathbb{N} \\,\\}$ be the range of $(s_n)$ (Series, partial sums, convergence and the sum, divergence, and the tail series).\nThen:\n\n1. $(s_n)$ is nondecreasing (Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences) and $s_n \\ge 0$ for every\n   $n$;\n2. $\\sum a_k$ converges **if and only if** $S$ is bounded above\n   (Lower bound, bounded below, bounded set), and in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; \\sup S ,$$\n   so in particular $s_n \\le \\sum_{k=0}^{\\infty} a_k$ for every $n$;\n3. if $S$ is not bounded above then $s_n \\to +\\infty$\n   (Divergence to $+\\infty$ and to $-\\infty$) and $\\sum a_k$ diverges.\n\nThis is the theorem that makes the nonnegative theory work: for terms of one\nsign, convergence is a boundedness question and no candidate limit is ever\nneeded. Every comparison test on this page is an application of it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-holomorphic-function-in-several-complex-variables",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, read $\\mathbb C^m$ through\n[[rem-complex-euclidean-space-dictionary]], and let $U\\subseteq\\mathbb C^m$ be\nopen and $a\\in U$.\n\nA map $L:\\mathbb C^m\\to\\mathbb C$ is **$\\mathbb C$-linear** when\n$L(u+v)=L(u)+L(v)$ and $L(\\lambda u)=\\lambda L(u)$ for all $u,v\\in\\mathbb C^m$\nand **all $\\lambda\\in\\mathbb C$**, the vector-space operations being those of\n[[def-vector-space]] over the field $\\mathbb C$\n([[thm-complex-numbers-form-a-field]]). Requiring the second clause only for real\n$\\lambda$ gives the strictly weaker notion of an $\\mathbb R$-linear map\n([[def-euclidean-linear-map]]) read through the dictionary.\n\nA function $f:U\\to\\mathbb C$ is **complex differentiable at $a$** when there is a\n$\\mathbb C$-linear $L:\\mathbb C^m\\to\\mathbb C$ with\n\n$$f(a+h)=f(a)+L(h)+r(h),\\qquad \\frac{|r(h)|}{\\lVert h\\rVert}\\longrightarrow0 \\ \\text{ as } h\\to0,$$\n\nthe quotient being considered for $h\\ne0$ with $a+h\\in U$ and the norm being that\nof the dictionary ([[def-norm-and-normed-space]]). The map $f$ is **holomorphic\non $U$** when it is complex differentiable at every point of $U$.\n\n**Such an $L$ is unique**, so the notation $Df(a):=L$ is well posed. If $L_1$ and\n$L_2$ both satisfy the condition, then $T=L_1-L_2$ is $\\mathbb C$-linear and\n$|T(h)|/\\lVert h\\rVert\\to0$; fixing $h\\ne0$ and taking $h$ replaced by $th$ for\nreal $t\\in(0,1)$ small enough that $a+th\\in U$, $\\mathbb C$-linearity gives\n$|T(h)|/\\lVert h\\rVert=|T(th)|/\\lVert th\\rVert$, whose limit as $t\\to0$ is $0$;\nso $T(h)=0$ for every $h$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-wirtinger-operators-in-several-complex-variables",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, let $U\\subseteq\\mathbb C^m$ be open and let $f:U\\to\\mathbb C$. Read\n$\\mathbb C^m$ as $\\mathbb R^{2m}$ through\n[[rem-complex-euclidean-space-dictionary]], with real coordinates $x_k,y_k$ for\n$k<m$ given by $z_k=x_k+iy_k$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), and let\n$\\partial_{x_k}f$ and $\\partial_{y_k}f$ be the partial derivatives of\n[[def-directional-and-partial-derivatives]] applied to the two real components of\n$f$ and recombined.\n\nAt a point where all $2m$ of these partial derivatives exist, define the\n**Wirtinger operators**\n\n$$\\partial_{z_k}f:=\\tfrac12\\bigl(\\partial_{x_k}f-i\\,\\partial_{y_k}f\\bigr), \\qquad \\partial_{\\bar z_k}f:=\\tfrac12\\bigl(\\partial_{x_k}f+i\\,\\partial_{y_k}f\\bigr) \\qquad(k<m).$$\n\n**The differential identity.** Suppose in addition that $f$ is real totally\ndifferentiable at a point $a\\in U$, so that $Df(a)$ is the $\\mathbb R$-linear\nmap with\n$Df(a)h=\\sum_{k<m}\\Bigl(\\bigl(\\partial_{x_k}f(a)\\bigr)\\xi_k+\\bigl(\\partial_{y_k}f(a)\\bigr)\\eta_k\\Bigr)$\nfor $h_k=\\xi_k+i\\eta_k$, by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]] read in the standard basis\n([[lem-standard-basis-of-f-n]]). Substituting\n$\\xi_k=\\tfrac12(h_k+\\overline{h_k})$ and\n$\\eta_k=\\tfrac1{2i}(h_k-\\overline{h_k})$ and collecting the coefficients of\n$h_k$ and $\\overline{h_k}$ using finite sums in the additive commutative monoid\nof $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]) and distributivity\nin the complex field ([[thm-complex-numbers-form-a-field]]) gives\n\n$$Df(a)h=\\sum_{k<m}\\Bigl(\\bigl(\\partial_{z_k}f(a)\\bigr)h_k +\\bigl(\\partial_{\\bar z_k}f(a)\\bigr)\\overline{h_k}\\Bigr).$$\n\nIndeed the coefficient of $h_k$ is\n$\\tfrac12\\partial_{x_k}f(a)+\\tfrac1{2i}\\partial_{y_k}f(a)\n=\\tfrac12(\\partial_{x_k}f(a)-i\\partial_{y_k}f(a))$, and the coefficient of\n$\\overline{h_k}$ is\n$\\tfrac12\\partial_{x_k}f(a)-\\tfrac1{2i}\\partial_{y_k}f(a)\n=\\tfrac12(\\partial_{x_k}f(a)+i\\partial_{y_k}f(a))$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-binomial-theorem-over-complex-numbers",
+          "source_section": "Statement",
+          "quote": "For $z,w\\in\\mathbb C$ and $n\\in\\mathbb N$, write $\\iota_{\\mathbb C}:\\mathbb N\\to\\mathbb C$ for the canonical-natural map of [[def-canonical-natural]]. Then\n$$ (z+w)^n=\\sum_{k\\le n}\\iota_{\\mathbb C}\\!\\left(\\binom nk\\right) z^kw^{n-k}. $$ The conventions and prerequisite facts used below are recorded in [[thm-complex-numbers-form-a-field]], [[def-complex-integer-powers]], [[def-binomial-coefficient]], [[thm-pascals-rule]], [[def-monoid-finite-product]], [[thm-generalised-associativity]], [[thm-induction-principle]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, and $n!$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of Finite sums and finite products, by recursion, with the natural exponents interpreted by Integer powers $a^m$. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in Directional derivatives and partial derivatives of a map $U\\subseteq\\mathbb{R}^m\\to\\mathbb{R}^n$.\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem (The recursion theorem) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$. Induction (The principle of mathematical induction): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ (The von Neumann naturals form a Peano system) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n(Zero and one under multiplication) and cancellation gives $x = 0$\n(Cancellation for multiplication by a nonzero factor). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ (Every nonzero natural number is a successor), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ (Addition is cancellative). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n(Multiplication is associative, Multiplication is commutative) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-integer-powers",
+          "source_section": "Definition",
+          "quote": "Fix $z\\in\\mathbb C$. Apply [[thm-recursion]] to the set $\\mathbb C$, the\ninitial value $1$, and the function $w\\mapsto wz$. This defines the natural\npowers uniquely by\n$$ z^0=1,\\qquad z^{n+1}=z^nz\\quad(n\\in\\mathbb N). $$\n\nLet $\\jmath\\colon\\mathbb N\\to\\mathbb Z$ be the embedding of\n[[lem-nat-embeds-int]]. For an integer $r\\ge0$, that lemma gives a unique\n$n\\in\\mathbb N$ with $r=\\jmath(n)$; define $z^r:=z^n$. If $r<0$ and $z\\ne0$,\nthere is a unique $n\\in\\mathbb N$ with $n\\ge1$ and $-r=\\jmath(n)$; define\n$$ z^r:=(z^n)^{-1}. $$\nThe inverse exists because $\\mathbb C$ is a field by\n[[thm-complex-numbers-form-a-field]]. Thus nonnegative integer powers are\ndefined for every $z$, while negative integer powers are defined exactly when\n$z\\ne0$; in particular $0^0=1$ and no negative power of $0$ is defined. The\ninteger and its unique natural representative are never conflated.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$ and read $\\mathbb C^m$ through\n[[rem-complex-euclidean-space-dictionary]]. A **polyradius** is a function\n$r:m\\to\\mathbb R$ with $r_k>0$ for every $k<m$; a single positive real $r$\nabbreviates the constant polyradius with every $r_k=r$.\n\nFor $a\\in\\mathbb C^m$ and a polyradius $r$, the **open polydisc**, the **closed\npolydisc** and the **distinguished boundary** are\n\n$$\\Delta_r(a):=\\{z:|z_k-a_k|<r_k\\ \\text{for every }k<m\\},$$\n$$\\overline\\Delta_r(a):=\\{z:|z_k-a_k|\\le r_k\\ \\text{for every }k<m\\},$$\n$$\\Gamma_r(a):=\\{z:|z_k-a_k|=r_k\\ \\text{for every }k<m\\}.$$\n\nThus $\\Gamma_r(a)$ is the set of points all of whose coordinates lie on their own\ncircle: it is the product of the $m$ circles $\\{|\\zeta_k-a_k|=r_k\\}$.\n\nThe **open ball** and **closed ball** of centre $a$ and radius $\\rho>0$ are those\nof the norm $\\lVert\\cdot\\rVert$ of the dictionary, that is the sets\n$B(a,\\rho)=\\{z:\\lVert z-a\\rVert<\\rho\\}$ and\n$\\overline B(a,\\rho)=\\{z:\\lVert z-a\\rVert\\le\\rho\\}$ of\n[[def-metric-ball]] and [[def-euclidean-spheres-and-closed-balls]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "rem-complex-euclidean-space-dictionary",
+          "source_section": "Remark",
+          "quote": "Fix a natural number $m\\ge1$. **Complex $m$-space** $\\mathbb C^m$ is the set of\nfunctions $m\\to\\mathbb C$, so a point $z$ has coordinates $z_k$ for $k<m$,\nindexed from $0$ exactly as $\\mathbb R^n$ is in this library. With coordinatewise\naddition and multiplication by complex scalars it is a vector space over the\nfield $\\mathbb C$ ([[def-vector-space]], [[thm-complex-numbers-form-a-field]]),\nwith the standard basis $e_0,\\dots,e_{m-1}$ of [[lem-standard-basis-of-f-n]].\n\n**The coordinate identification.** Writing $z_k=x_k+iy_k$ with $x_k,y_k$ real\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define\n\n$$\\Phi:\\mathbb C^m\\to\\mathbb R^{2m},\\qquad \\Phi(z)=(x_0,y_0,x_1,y_1,\\dots,x_{m-1},y_{m-1}).$$\n\nThe interleaved ordering is the one used throughout this page; the ordering that\ngroups all real parts before all imaginary parts is a **different** bijection,\nand nothing below is stated for it. $\\Phi$ is a bijection and is\n$\\mathbb R$-linear.\n\n**Norms agree.** Put $\\lVert z\\rVert:=\\bigl(\\sum_{k<m}|z_k|^2\\bigr)^{1/2}$. Since\n$|z_k|^2=x_k^2+y_k^2$, this is the Euclidean norm $\\lVert\\Phi(z)\\rVert_2$ of\n[[def-p-norms-on-rn]] and [[def-euclidean-inner-product]], and it is a norm on\nthe real vector space underlying $\\mathbb C^m$ in the sense of\n[[def-norm-and-normed-space]]. Consequently\n$\\lVert z-w\\rVert=\\lVert\\Phi(z)-\\Phi(w)\\rVert_2$, so the metric of\n$\\mathbb C^m$, its balls ([[def-metric-ball]]), its open sets, its convergent\nsequences, its Cauchy sequences and its continuous maps are **verbatim** those of\n$\\mathbb R^{2m}$ under $\\Phi$. In particular convergence and continuity are\ncoordinatewise ([[thm-componentwise-limits-and-continuity]],\n[[def-vector-valued-functions-limits-and-continuity]]), $\\mathbb C^m$ is complete\n([[thm-componentwise-convergence-and-completeness]]), and a subset of\n$\\mathbb C^m$ is compact exactly when it is closed and bounded\n([[thm-heine-borel-rn]]).\n\n**At $m=1$ this is the published plane dictionary.** For $m=1$ the map $\\Phi$ is\nthe bijection of [[rem-complex-plane-euclidean-dictionary]] and every clause\nabove reduces to a clause recorded there. Openness, connectedness and real total\ndifferentiability on $\\mathbb C^m$ are always read through $\\Phi$, exactly as\nthat remark reads them through its own identification.\n\n**What $\\Phi$ does not carry.** $\\Phi$ respects the additive and the real scalar\nstructure but not multiplication by $i$ in any way visible to a general\n$\\mathbb R$-linear map of $\\mathbb R^{2m}$: an $\\mathbb R$-linear map of\n$\\mathbb C^m$ need not be $\\mathbb C$-linear. That distinction is the whole\ncontent of the criterion the page proves next, and it is why \"linear\" is always\nqualified below.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0<s<1$ and $|z_i-a_i|\\le s r_i$, the coefficient bound gives $|c_\\alpha(z-a)^\\alpha|\\le M s^{|\\alpha|}$. The sum of these bounds over the box $\\alpha_i\\le N$ is $M\\prod_{i<m}\\sum_{j=0}^N s^j\\le M(1-s)^{-m}$. Every finite set of multi-indices lies in a box, so [F2] makes the bounds summable, and [F1] and the M-test give the asserted absolute uniform convergence. Each point of $\\Delta_r(a)$ lies in such a closed polydisc, so $g$ is defined throughout $\\Delta_r(a)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $z$ with $w=z-a$ and $|w_i|\\le s r_i$, where $0<s<t<1$. For $h\\ne0$ put $\\eta=\\max_{i<m}|h_i|/r_i$ and restrict to $h$ small enough that $T=(t-s)/\\eta\\ge1$. This is possible since $\\eta\\le\\lVert h\\rVert/\\min_i r_i$. Expand the polynomial $\\phi_\\alpha(u)=\\prod_{i<m}(w_i+u h_i)^{\\alpha_i}=\\sum_j A_{\\alpha,j}u^j$ by [F4]. Its first two coefficients are $A_{\\alpha,0}=w^\\alpha$ and $A_{\\alpha,1}=\\sum_{k<m,\\,\\alpha_k>0}\\alpha_k w^{\\alpha-e_k}h_k$. The triangle inequality and the nonnegative binomial coefficients give $\\sum_j|A_{\\alpha,j}|T^j\\le\\prod_{i<m}(|w_i|+T|h_i|)^{\\alpha_i}\\le\\prod_{i<m}(t r_i)^{\\alpha_i}$. As $T\\ge1$, the remainder $R_\\alpha=\\phi_\\alpha(1)-A_{\\alpha,0}-A_{\\alpha,1}$ therefore satisfies $|R_\\alpha|\\le T^{-2}\\prod_{i<m}(t r_i)^{\\alpha_i}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $k<m$ and $0<\\theta<1$. Reindexing by $\\alpha=\\nu+e_k$ gives $|d_\\nu|\\le(M/r_k)(\\nu_k+1)\\prod_{i<m}r_i^{-\\nu_i}=(M/r_k)(\\nu_k+1)\\theta^{|\\nu|}\\prod_{i<m}(\\theta r_i)^{-\\nu_i}$. For a natural $j$, $(j+1)\\theta^j=\\sum_{p+q=j}\\theta^{p+q}\\le(\\sum_{p=0}^j\\theta^p)^2\\le(1-\\theta)^{-2}$. Since $\\theta^{|\\nu|}\\le\\theta^{\\nu_k}$, this proves the claimed bound on $d_\\nu$. Step 1.1 applied to $d$ on radii $\\theta r$ gives absolute uniform convergence of its series on every closed $s r$ polydisc with $s<\\theta$. For each $s<1$ such a $\\theta$ exists; thus the first derived series converges absolutely and uniformly on every smaller closed polydisc.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.2 and the box estimate in step 1.1 imply $\\sum_\\alpha|c_\\alpha R_\\alpha|\\le M\\eta^2/((t-s)^2(1-t)^m)\\le M\\lVert h\\rVert^2/((\\min_i r_i)^2(t-s)^2(1-t)^m)$. Both $z$ and $z+h$ belong to the closed $t r$ polydisc, and the first derived sums $b_k(z)=\\sum_\\nu(\\nu_k+1)c_{\\nu+e_k}w^\\nu$ converge absolutely by step 2.1. Thus [F1] permits splitting and reindexing to obtain $g(z+h)-g(z)-\\sum_{k<m}b_k(z)h_k=\\sum_\\alpha c_\\alpha R_\\alpha$. The map $h\\mapsto\\sum_k b_k(z)h_k$ is complex-linear, and the displayed bound is $O(\\lVert h\\rVert^2)$, hence $o(\\lVert h\\rVert)$. By [F3], $g$ has this total complex differential at $z$. Taking $h=u e_k$ and $h=i u e_k$ with real $u\\to0$ gives $\\partial_{x_k}g=b_k$ and $\\partial_{y_k}g=i b_k$, so $\\partial_{z_k}g=b_k$. Every interior $z$ admits such $s,t$, proving holomorphy and the first termwise derivative formula throughout $\\Delta_r(a)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The arguments in steps 1.1, 1.2, 2.1 and 3.1 used only the stated coefficient bound, so they apply again to any derived coefficient family with a bound on positive radii. Fix a multi-index $\\gamma$ of order $q=|\\gamma|>0$ and a real $0<\\tau<1$. Put $t_j=1-j(1-\\tau)/q$ for $0\\le j\\le q$, so $1=t_0>t_1>\\cdots>t_q=\\tau>0$. Apply step 2.1 successively with radii $t_{j-1}r$ and shrink factor $t_j/t_{j-1}$, and apply step 3.1 at each stage. The finitely many constants in the bounds remain finite. Induction on the number of differentiations gives the coefficient at $\\nu$ after differentiating with multi-index $\\delta$ as $((\\nu+\\delta)!/\\nu!)c_{\\nu+\\delta}$: one further differentiation in coordinate $k$ multiplies the coefficient at $\\nu+e_k$ by $\\nu_k+1$, changing the factorial denominator from $(\\nu+e_k)!$ to $\\nu!$. This formula is independent of the order of coordinate differentiations. The final series represents $\\partial_z^\\gamma g$ and is holomorphic on $\\Delta_{\\tau r}(a)$ by step 3.1. For any closed $s r$ polydisc with $s<1$, choose $s<\\tau<1$; step 1.1 applied to the final coefficient bound gives absolute uniform convergence there. Since every interior point lies in some $\\Delta_{\\tau r}(a)$, all these identities and holomorphy hold throughout $\\Delta_r(a)$. For $q=0$ they are step 1.1 and step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "At $z=a$ every monomial in the derived series of step 4.1 vanishes except $\\nu=0$, whose value is $1$; thus $\\partial_z^\\gamma g(a)=\\gamma!c_\\gamma$. If $c'$ satisfies the stated bound and has the same sum, the argument just proved applies to $c'$ as well. The derivatives are those of the same function, so $\\gamma!c_\\gamma=\\gamma!c'_\\gamma$. Cancelling the nonzero factorial gives $c_\\gamma=c'_\\gamma$ for every $\\gamma$, proving uniqueness.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement fixes m≥1 and positive radii, so each open polydisc contains its centre a; step 1.1 sums the full countable multi-index family rather than an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With M=0 the Statement forces every coefficient to zero. Step 4.1 explicitly treats derivative order q=0; for h=0 the differential remainder of step 3.1 is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the diagonal geometric bound of step 2.1 and the polynomial remainder of step 1.2 hold with the single positive radius."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant and finitely supported families satisfy the same estimates; step 5.1 uses w^0=1 and all nonconstant monomials vanish at the centre, including zero derivative coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 requires s<1 and step 2.1 requires 0<theta<1; no convergence on the radius boundary or bound at theta=1 is asserted. Step 5.1 separately evaluates the centre."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The coefficient function and finite positive radii are supplied. Step 4.1 gives the finite sequence of radii by an explicit formula; no countable selection or Choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 proves that equality of sums implies equality of every coefficient by the derivative identity and nonzero factorial."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "For equal coefficient families every corresponding summand is identical, and the absolute convergence proved in step 1.1 gives the same sum; no extra converse reconstruction premise is needed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "scope": "Independent owner mathematical check of all six local proof steps and actual author/supplier-consumer evidence; published context used only for its stated elementary facts.",
+        "notes": "Verified corrected theta^|nu| reindexing and finite diagonal sum; binomial T-weighted tail gives O(||h||^2) total complex differential without Osgood/Cauchy circularity. Finite prescribed shrinking yields each multi-index derivative/factorial identity, all smaller polydiscs and uniqueness. Checked m=1, M=0, h=0, q=0, centre evaluation, unequal positive radii and excluded radius endpoints. Actual author /root/step3_local_power_series_supplier read the direct source interfaces and supplied complete local proof plus all four consumer-use reviews; Root separately read and checked the proof and grouped-tail uses. No claim to repair the outside published proof or independently audit its full transitive foundations.",
+        "findings": [
+          "Local replacement supplies exactly the derivative/uniqueness clause missing in native reader:64:1."
+        ],
+        "residual_risk": "The outside published derivative-bound error remains openly recorded; the residual Noetherian branch uses only its independently checked earlier holomorphy clauses, not that defective estimate."
+      }
     }
   }
 }

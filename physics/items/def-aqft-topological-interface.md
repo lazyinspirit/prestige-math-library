@@ -43,7 +43,7 @@ An **endodefect** has $\mathcal T_- = \mathcal T_+$ as the same complete model d
 
 $$C_{\mathcal T}(\beta_{\mathcal I}(b);\alpha_{\mathcal I}(\mathbf O,D))=C_{\mathcal T}(b;\mathbf O,D).$$
 
-An endodefect is an **invertible symmetry interface** only if a two-sided inverse exists under the stated fusion operation, both composites equal $\mathbf 1_{\mathcal T}$ in all declared correlators, and the induced bijections above are automorphisms preserving correlators. A topological interface between distinct source and target models is an interface, not an internal symmetry of either model. No supersymmetry or BPS condition is implicit; claiming one requires additional model data and a separate check of the specified supercharges and their domains.
+An endodefect is an **invertible symmetry interface** only if a two-sided inverse exists under the stated fusion operation, both composites equal $\mathbf 1_{\mathcal T}$ in all declared correlators, and the induced bijections above are automorphisms preserving correlators. A topological interface between distinct source and target models is an interface, not an internal symmetry of either model. No further property is implied by this definition; any additional claim must be formulated and verified for the specified model.
 
 No dimensional quantity is added by this definition. Each model and interface must retain its declared unit system and normalization, and this definition does not assert that a continuum fusion limit exists.
 

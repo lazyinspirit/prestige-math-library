@@ -37,7 +37,7 @@ verification:
 
 ## Example
 
-Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be the complex scalar component of the first canonical adjoint chiral superfield; its engineering mass dimension is one and its selected N=1 $U(1)_R$ charge is $2/3$. Suppose a unitary quantum SCFT realization has a local operator algebra containing the nonzero scalar superconformal primary represented by the renormalized composite $\mathcal O=\operatorname{Tr}_2(Z^2)$, and suppose the selected chiral-branch supercharge $Q$ from the SCFT data satisfies $Q|\mathcal O\rangle=0$. Then $\mathcal O$ has $R$ charge $4/3$ and scaling dimension exactly $2$. This is conditional shortening data for this specified operator state; it does not assert that the classical action constructs a continuum SCFT or that every scalar observable is protected.
+Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be the complex scalar component of the first canonical adjoint chiral superfield; its engineering mass dimension is one and its selected N=1 $U(1)_R$ charge is $2/3$. Suppose a proposed unitary SCFT realization supplies a nonzero scalar superconformal primary state $|\mathcal O\rangle$ associated with the renormalized composite $\mathcal O=\operatorname{Tr}_2(Z^2)$ in a prescription that preserves the exact selected $U(1)_R$ symmetry, and suppose the selected chiral-branch supercharge $Q$ from the SCFT data satisfies $Q|\mathcal O\rangle=0$. Then $\mathcal O$ has $R$ charge $4/3$ and scaling dimension exactly $2$. This is conditional shortening data for this specified operator state; it does not assert that the classical action constructs a continuum SCFT or that every scalar observable is protected.
 
 ## Example references
 
@@ -47,7 +47,7 @@ Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be 
 
 ## Facts & Assumptions
 
-**Given:** The selected classical N=4 SU(2) field data, a unitary SCFT representation containing the named operator as a nonzero scalar superconformal primary annihilated by the selected positive-branch supercharge, and the local scalar-primary unitarity theorem.
+**Given:** The selected classical N=4 SU(2) field data, a proposed unitary SCFT realization supplying the named primary state, a renormalization prescription preserving its exact selected U(1)_R symmetry, annihilation by the selected positive-branch supercharge, and the local scalar-primary unitarity theorem.
 
 [F1] [[post-qftx-n4-super-yang-mills-model]]: the chosen global group is SU(2), the chiral superfields are adjoint-valued, and the canonical fields are obtained from the connection-normalized fields by division by $g$.
 
@@ -55,7 +55,7 @@ Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be 
 
 [F3] [[pthm-qftx-scft-chiral-primary-unitarity-bound]]: if a scalar superconformal primary has $r\ge0$ and is annihilated by the selected chiral-branch supercharge $Q$, then its scaling dimension is $d=3r/2$.
 
-[A1] In the assumed quantum realization, $\mathcal O=\operatorname{Tr}_2(Z^2)$ is a nonzero scalar superconformal primary and $Q|\mathcal O\rangle=0$ for the selected chiral-branch supercharge. This is a hypothesis of the example, not a consequence of the classical postulate.
+[A1] In the assumed quantum realization, $\mathcal O=\operatorname{Tr}_2(Z^2)$ in the chosen renormalization prescription corresponds to a nonzero scalar superconformal primary state and $Q|\mathcal O\rangle=0$ for the selected chiral-branch supercharge; the prescription preserves the exact selected $U(1)_R$ symmetry. This is a hypothesis of the example, not a consequence of the classical postulate.
 
 ## Verification
 

@@ -31,7 +31,15 @@ verification:
 
 ## Example
 
-Assume full Axiom of Choice. Let $S^4=\{z\in\mathbb R^5:|z|=1\}$ have its unit round metric $g_X$. Denote by $p_\infty$ the point omitted by the north stereographic chart and by $p_0$ the point with north-chart coordinates $x=0$. Orient $S^4$ so that north-chart coordinates $x=(x^1,x^2,x^3,x^4)$ satisfy $dx^1\wedge dx^2\wedge dx^3\wedge dx^4>0$. Set $r^2=\sum_{\mu=1}^4(x^\mu)^2$. The metric in the north chart is $4(1+r^2)^{-2}\sum_{\mu=1}^4(dx^\mu)^2$. Let $U_N=S^4\setminus\{p_\infty\}$ carry coordinate $x$, and $U_S=S^4\setminus\{p_0\}$ carry coordinate $y=x/r^2$; the metric in the south chart is $4(1+|y|^2)^{-2}\sum_{\mu=1}^4(dy^\mu)^2$.
+Assume full Axiom of Choice. Let $B^5=\{z\in\mathbb R^5:|z|\leq1\}$ and $S^4=\partial B^5=\{z\in\mathbb R^5:|z|=1\}$ have the Euclidean induced unit round metric $g_X$. Put $p_\infty=(0,0,0,0,-1)$ and $p_0=(0,0,0,0,1)$, and set $U_N=S^4\setminus\{p_\infty\}$ and $U_S=S^4\setminus\{p_0\}$. Define the north chart by
+
+$$\kappa_N:\mathbb R^4\longrightarrow S^4\setminus\{p_\infty\},\qquad \kappa_N(x)=\left(\frac{2x}{1+|x|^2},\frac{1-|x|^2}{1+|x|^2}\right),$$
+
+and the south chart by
+
+$$\kappa_S:\mathbb R^4\longrightarrow S^4\setminus\{p_0\},\qquad \kappa_S(y)=\left(\frac{2y}{1+|y|^2},\frac{|y|^2-1}{1+|y|^2}\right).$$
+
+Write $x=(x^1,x^2,x^3,x^4)$ and $y=(y^1,y^2,y^3,y^4)$ for the inverse chart coordinates, so $\kappa_N(0)=p_0$, $r^2=|x|^2=\sum_{\mu=1}^4(x^\mu)^2$, and on the overlap $y=x/r^2$. The north coordinates have $dx^1\wedge dx^2\wedge dx^3\wedge dx^4>0$. The metrics in these charts are respectively $4(1+r^2)^{-2}\sum_{\mu=1}^4(dx^\mu)^2$ and $4(1+|y|^2)^{-2}\sum_{\mu=1}^4(dy^\mu)^2$.
 
 Define $SU(2)=\{U\in M_2(\mathbb C):U^*U=I,\det U=1\}$. Write $\epsilon_{123}=1$ and let
 

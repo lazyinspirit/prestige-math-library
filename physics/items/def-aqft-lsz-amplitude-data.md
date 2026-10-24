@@ -21,6 +21,8 @@ sources:
   references:
     - title: "Juan Carlos Criado and Manuel Pérez-Victoria, Field redefinitions in effective theories at higher orders, §2"
       url: "https://arxiv.org/pdf/1811.09413"
+    - title: "Edward Witten, Notes On Supermanifolds And Integration, §3.1, equation (3.6)"
+      url: "https://arxiv.org/pdf/1209.2199"
 verification:
   precheck: n/a
 ---
@@ -52,13 +54,23 @@ $$
 $$
 for homogeneous $U,V$. The logarithm is the formal logarithm with zero constant term. The regulator datum supplies the reconstruction of the component kernels as spacetime kernels and a Fourier-transform convention. The Fourier transform is $\widetilde f(p)=\int e^{ip\cdot x}f(x)\,d^4x$, interpreted in the specified function or distribution space.
 
-An admissible field-coordinate change is a local, parity-preserving formal map $F_{\rho,\epsilon}$ on these graded coordinates with $F_{\rho,0}=\operatorname{id}$ and an inverse modulo $\epsilon^{N+1}$. If the coordinates come from spacetime fields, local means that each output field at $x$ depends on a finite jet of the input fields at $x$. Its regulated Jacobian factor $\mathcal J_{F,\rho}$ is a multiplier in the field-coordinate algebra specified by the exact graded change-of-variables identity
+An admissible field-coordinate change is a local, parity-preserving formal map $F_{\rho,\epsilon}=\operatorname{id}+\sum_{k=1}^{N}\epsilon^kF_{\rho,k}$ on these graded coordinates with an inverse modulo $\epsilon^{N+1}$. Each coefficient of each $F_{\rho,k}$ is polynomial in the odd coordinates and holomorphic in the even coordinates on a specified open neighborhood of the integration contour. Substitution into nilpotent even displacements uses finite Taylor expansions; the coordinate algebra and integration domain must contain every coefficient used in these substitutions and derivatives. Thus $DF$ is defined coefficientwise, with left odd derivatives and the stated ordering. If the coordinates come from spacetime fields, local means that each output field at $x$ depends on a finite jet of the input fields at $x$. Its regulated Jacobian factor $\mathcal J_{F,\rho}$ is a multiplier in the field-coordinate algebra specified by the exact graded change-of-variables identity
 $$
 \mathcal I_\rho(h(\varphi))=\mathcal I_\rho\!\left(h(F_{\rho,\epsilon}(\psi))\,\mathcal J_{F,\rho}(\psi)\right)
 $$
-for every admissible integrand $h$, with the functional extended coefficientwise over $\mathscr J_\rho\otimes R_N$. No assertion that $\mathcal J_{F,\rho}=1$ is part of the definition. For the standard product of an even-coordinate measure and the stated Berezin functional, this factor is the Berezinian: if the graded derivative has block form $DF=\begin{pmatrix}A&B\\C&D\end{pmatrix}$ with $D$ invertible, then $\operatorname{Ber}(DF)=\det(A-BD^{-1}C)(\det D)^{-1}$. In the transformed coordinates the source is $\langle J,F_{\rho,\epsilon}(\psi)\rangle$, so the field insertion remains the same named original coordinate.
+for every admissible integrand $h$, with the functional extended coefficientwise over $\mathscr J_\rho\otimes R_N$. No assertion that $\mathcal J_{F,\rho}=1$ is part of the definition. In the coordinate-volume case the even functional integrates $dq^1\wedge\cdots\wedge dq^{n_0}$ over an oriented real $n_0$-dimensional contour; its contour and boundary data must satisfy this identity with the Berezinian multiplier. This is additional integration data, not an assertion for arbitrary $\nu_\rho$ or $\ell_\rho$. The Berezinian is defined algebraically: if the graded derivative has block form $DF=\begin{pmatrix}A&B\\C&D\end{pmatrix}$ with $D$ invertible, then $\operatorname{Ber}(DF)=\det(A-BD^{-1}C)(\det D)^{-1}$. Here $DF\equiv I$ modulo $\epsilon$, so both diagonal blocks are invertible over the truncated algebra; empty determinants are one. For a general even functional the exact identity, including any measure-density factor, remains the requirement. In the transformed coordinates the source is $\langle J,F_{\rho,\epsilon}(\psi)\rangle$, so the field insertion remains the same named original coordinate.
 
-An LSZ amplitude datum is an additional common regulator limit of the connected momentum-space Green functions, when that limit exists. For each external one-particle channel $a$ (with a fixed polarization component when the field has spin), the datum specifies a mass $m_a>0$ and nonzero simple-pole residue $Z_a$ at $s_a=m_a^2$, where $s_a=-\eta^{\mu\nu}p_{a,\mu}p_{a,\nu}$. A stable external channel means precisely that this isolated pole exists with nonzero residue and zero width. For each selected field-parity sector, the datum supplies finite lists of interpolating-field components $A$ and one-particle channels $a$, together with scalar entries $U_{Aa}\in\mathbb C$ called their field-to-channel overlap coefficients; the square matrix $U$ must be invertible. For every ordered $n$-point component function it requires pole factorization
+An LSZ amplitude datum is an additional common regulator limit of the connected momentum-space Green functions, when that limit exists. For each external one-particle channel $a$ (with a fixed polarization component when the field has spin), the datum specifies a mass $m_a>0$ and nonzero simple-pole residue $Z_a\in\mathbb C^\times$ at $s_a=m_a^2$, where $s_a=-\eta^{\mu\nu}p_{a,\mu}p_{a,\nu}$. A stable external channel means precisely that this isolated pole exists with nonzero residue and zero width. Choose a nonzero scalar $z_a$ with $z_a^2=Z_a$ as part of the datum; throughout, $Z_a^{1/2}$ means this chosen $z_a$ and $Z_a^{-1/2}$ means $z_a^{-1}$. These choices are fixed for amplitude comparisons; no canonical complex square-root branch is assumed.
+
+For each selected field-parity sector, supply equally long finite ordered lists of interpolating-field components $\varphi_A$ and channels $a$, and an invertible complex matrix $U=(U_{Aa})$. Define channel-coordinate insertions $\chi_a=\sum_A(U^{-1})_{aA}\varphi_A$ and their ordered connected kernels by multilinearity:
+$$
+G_{a_1\ldots a_n}=\sum_{A_1,\ldots,A_n}\left(\prod_{j=1}^n(U^{-1})_{a_j A_j}\right)G_{A_1\ldots A_n}.
+$$
+Require the following external-leg pole factorization for the original component kernels:
+$$
+G_{A_1\ldots A_n}=\sum_{b_1,\ldots,b_n}\left(\prod_{j=1}^n\frac{U_{A_j b_j}z_{b_j}}{s_j-m_{b_j}^2}\right)\mathcal A_{b_1\ldots b_n}+\text{terms missing at least one external pole}.
+$$
+The sums run over the declared channels in the corresponding parity sectors, and every remainder must have zero joint residue at every declared external-pole tuple. This equation defines the overlap meaning of $U$: the external-leg factor of $\varphi_A$ for channel $a$ is $U_{Aa}z_a$. Multiplying by $U^{-1}$ on each leg selects its channel factor, also when channel masses coincide. Below $G_n$ abbreviates the channel-coordinate kernel $G_{a_1\ldots a_n}$. Require its pole factorization
 $$
 G_n(p_1,\ldots,p_n)=\left(\prod_{j=1}^n\frac{Z_{a_j}^{1/2}}{s_j-m_{a_j}^2}\right)\mathcal A_n(p_1,\ldots,p_n)+\text{terms missing at least one external pole}.
 $$
@@ -73,3 +85,5 @@ with the overall momentum-conservation delta function removed and the same order
 [[def-aqft-local-operator-and-dimension|Finite-jet local operators and engineering dimension]]
 
 [Criado–Pérez-Victoria, §2, equations (2.2)–(2.8)](https://arxiv.org/pdf/1811.09413)
+
+[Witten, §3.1, equation (3.6): algebraic Berezinian convention](https://arxiv.org/pdf/1209.2199)

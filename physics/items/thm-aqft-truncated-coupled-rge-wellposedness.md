@@ -31,7 +31,7 @@ sources:
     - title: Gerald Teschl, Ordinary Differential Equations and Dynamical Systems (author-hosted complete PDF)
       url: https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf
       locator: Chapter 2 §2.2, equations (2.10)–(2.20), Theorem 2.2 and its complete proof; compact-cylinder bounds and local Picard contraction.
-    - title: A. Bouin, Cours Differential Equations, 2018–2019 (full lecture notes)
+    - title: Yannick Viossat, notes revisited by Daniela Tonon, Differential Equations (January 2019; Bouin-hosted full lecture notes)
       url: https://www.ceremade.dauphine.fr/~bouin/ens1819/EquaDiff_CoursL3_2018-2019.pdf
       locator: §1.5, Theorem 1.5.4 and Lemma 1.5.5, PDF pp. 12–15; local contraction, first-exit uniqueness, and uniqueness on the common interval.
 verification:
@@ -74,7 +74,7 @@ calculation of a QFT beta function.
 
 [Teschl, full author-hosted ODE book](https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf)
 
-[Bouin, full differential-equations lecture notes](https://www.ceremade.dauphine.fr/~bouin/ens1819/EquaDiff_CoursL3_2018-2019.pdf)
+[Viossat–Tonon, full differential-equations lecture notes (Bouin-hosted)](https://www.ceremade.dauphine.fr/~bouin/ens1819/EquaDiff_CoursL3_2018-2019.pdf)
 
 ## Facts & Assumptions
 
@@ -84,7 +84,7 @@ calculation of a QFT beta function.
 
 [F2] [[def-first-order-ode-initial-value-problem-and-solution]]: a solution is a differentiable curve in the open domain, through the initial value, whose derivative equals the vector field; a local solution is defined on an interval containing a nondegenerate neighborhood of the initial time.
 
-[F3] [[def-locally-lipschitz-in-the-state-variable]]: on every compact time-state cylinder in the domain, one finite constant $L$ bounds $\|\beta(t,x)-\beta(t,y)\|_2$ by $L\|x-y\|_2$ for pairs with the same time coordinate.
+[F3] [[def-locally-lipschitz-in-the-state-variable]] supplies the same-time state-Lipschitz inequality. Here a **compact time-state cylinder** means $[a,b]\times\overline B(c,R)\subset\Omega$, where $a,b\in\mathbb R$, $a\le b$, $c\in\mathbb R^{2N}$, $R>0$, and $\overline B(c,R)=\{x:\|x-c\|_2\le R\}$. The locally uniform hypothesis is understood with this product-cylinder convention: on each such product one finite $L\ge0$ bounds $\|\beta(t,x)-\beta(t,y)\|_2$ by $L\|x-y\|_2$ for all pairs at the same time. This specifies the cylinder family left unstated by the supplier; it does not assert a repair of that published definition.
 
 [F4] [[thm-picard-lindelof-local-existence-and-uniqueness]]: for a continuous vector field on an open finite-dimensional domain that is locally Lipschitz in the state variable uniformly in time, a unique local solution exists; on a compact cylinder of radius $r$ where $\|\beta\|_2\le M$ and the state-Lipschitz constant is $L$, any $h>0$ with $hM\le r$ and $Lh<1$ gives a unique solution on the corresponding time interval whose graph stays in that cylinder. Any two solutions with the same initial data agree on every common interval containing that time.
 
@@ -112,8 +112,4 @@ For $m=1$, use $v\le U$ in the integral remainder. The induction step integrates
 
 ## Remarks
 
-This is a local theorem for the supplied vector field. Its operator input is the
-current fixed-weight batch-16 quotient interface; no claim is made that the
-declared relation space is physically exhaustive. No perturbative coefficient,
-matching relation, global flow, or omitted-term estimate follows from this
-ODE theorem.
+This is a local theorem for the supplied vector field. Its operator input is the current fixed-weight batch-16 quotient interface; no claim is made that the declared relation space is physically exhaustive. No perturbative coefficient, matching relation, global flow, or omitted-term estimate follows from this ODE theorem.

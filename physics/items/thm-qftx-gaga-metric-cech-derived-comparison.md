@@ -11,6 +11,8 @@ dependency_level: 0
 deps:
   - def-axiom-of-choice
   - def-metric-space
+  - def-metric-topology
+  - thm-metric-hausdorff-separation
   - def-paracompact-space
   - lem-paracompact-hausdorff-cover-shrinking
   - thm-stone-metric-spaces-are-paracompact
@@ -36,9 +38,13 @@ deps:
   - thm-effaceable-cohomological-delta-functors-are-universal
   - cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic
   - thm-long-exact-sequence-in-cohomology
+  - thm-cech-to-sheaf-cohomology-comparison
+  - def-godement-resolution
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-metric-space: mathematical-premise
+  def-metric-topology: mathematical-premise
+  thm-metric-hausdorff-separation: mathematical-premise
   def-paracompact-space: mathematical-premise
   lem-paracompact-hausdorff-cover-shrinking: mathematical-premise
   thm-stone-metric-spaces-are-paracompact: mathematical-premise
@@ -64,6 +70,8 @@ dependency_roles:
   thm-effaceable-cohomological-delta-functors-are-universal: mathematical-premise
   cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic: mathematical-premise
   thm-long-exact-sequence-in-cohomology: mathematical-premise
+  thm-cech-to-sheaf-cohomology-comparison: mathematical-premise
+  def-godement-resolution: mathematical-premise
 justified_by: []
 forward_refs: []
 aliases: []
@@ -97,12 +105,11 @@ identity identification of both degree-zero groups with $\Gamma(X,\mathcal F)$.
 
 ## Facts & Assumptions
 
-**Given:** Full AC, a metric space $(X,d)$, and a sheaf of abelian groups
-$\mathcal F$ on $X$.
+**Given:** Full AC, a metric space $(X,d)$, and a sheaf of abelian groups $\mathcal F$ on $X$.
 
 [A1] [[def-axiom-of-choice]]: every family of nonempty sets has a choice function; in particular metric open covers have locally finite open refinements.
 
-[F1] [[def-metric-space]] and [[thm-stone-metric-spaces-are-paracompact]]: a metric space is Hausdorff and, under AC, every open cover has a locally finite open refinement; this is paracompactness as defined in [[def-paracompact-space]].
+[F1] [[def-metric-space]] and [[def-metric-topology]]: $\mathcal T_d$ is the topology whose open sets are those containing a metric ball around each of their points. [[thm-metric-hausdorff-separation]] shows this topology is Hausdorff, and [[thm-stone-metric-spaces-are-paracompact]] together with [[def-paracompact-space]] shows that under AC every open cover has a locally finite open refinement.
 
 [F2] [[lem-paracompact-hausdorff-cover-shrinking]]: a locally finite open cover of a paracompact Hausdorff space has a locally finite shrinking with $\overline{V_i}\subset W_i\subset\overline{W_i}\subset U_i$.
 
@@ -126,11 +133,13 @@ $\mathcal F$ on $X$.
 
 [F12] [[thm-long-exact-sequence-in-cohomology]]: a short exact sequence of cochain complexes induces a natural long exact sequence in cohomology.
 
+[F13] [[thm-cech-to-sheaf-cohomology-comparison]]: the fixed-cover comparison is induced by a natural cochain map from the Čech complex to the Čech–Godement total complex, is compatible with refinement, and computes the canonical map to derived sheaf cohomology. In [[def-godement-resolution]], $G^0(\mathcal E)(V)=\prod_{x\in V}\mathcal E_x$, and successive terms apply this construction to cokernel sheaves of the injective germ maps.
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $0\to\mathcal A\to\mathcal B\to\mathcal C\to0$ be a short exact sequence of abelian sheaves and let $c$ be a Čech $p$-cochain of $\mathcal C$ on an open cover $\mathcal U$. By [F1], refine $\mathcal U$ to a locally finite cover and then use [F2] to choose locally finite covers $\{V_i\}$ and $\{W_i\}$ with $\overline{V_i}\subset W_i\subset\overline{W_i}\subset U_i$. For each point $x$, local surjectivity from [F3] lifts each section $c_{i_0\ldots i_p}$ on a neighborhood of $x$ whenever $x\in U_{i_0}\cap\cdots\cap U_{i_p}$. Local finiteness leaves only finitely many $U_i$ containing $x$, finitely many such tuples, and a preliminary neighborhood $O_x$ meeting only finitely many $W_i$. For each tuple containing $x$, choose a neighborhood on which its section lifts. For the finite set of $W_i$ meeting $O_x$, shrink a neighborhood $N_x$ of $x$ inside all these lift neighborhoods, inside $U_i$ whenever $x\in U_i$, and inside $W_i$ whenever $x\in W_i$; if $x\notin U_i$, also shrink to avoid $\overline{W_i}$, which is closed and does not contain $x$ because $\overline{W_i}\subset U_i$. Then $N_x\subset U_i$ whenever $N_x\cap W_i\ne\varnothing$, and every component indexed by a tuple containing $x$ has a lift on $N_x$. Choose $\rho(x)$ with $x\in W_{\rho(x)}$. Then $N_x\subset W_{\rho(x)}\subset U_{\rho(x)}$, so $\{N_x\}$ refines $\mathcal U$. If $N_{x_0}\cap\cdots\cap N_{x_p}\ne\varnothing$, then $N_{x_0}$ meets every $W_{\rho(x_j)}$; the construction puts $N_{x_0}$ inside every $U_{\rho(x_j)}$, so $x_0$ belongs to the original intersection indexed by $\rho(x_0),\ldots,\rho(x_p)$. Its cochain component therefore has a lift on $N_{x_0}$ and hence on the full new intersection. Repeated source indices give a zero component of the alternating Čech refinement cochain, which also lifts. Thus every Čech cochain becomes liftable after refinement. [A1, F1, F2, F3, F4, given, construct]
+1.1 Let $0\to\mathcal A\to\mathcal B\to\mathcal C\to0$ be a short exact sequence of abelian sheaves and let $c$ be a Čech $p$-cochain of $\mathcal C$ on an open cover $\mathcal U$. By [F1], refine $\mathcal U$ to a locally finite cover and then use [F2] to choose locally finite covers $\{V_i\}$ and $\{W_i\}$ with $\overline{V_i}\subset W_i\subset\overline{W_i}\subset U_i$. For each point $x$, local surjectivity from [F3] lifts each section $c_{i_0\ldots i_p}$ on a neighborhood of $x$ whenever $x\in U_{i_0}\cap\cdots\cap U_{i_p}$. Choose a preliminary neighborhood $O_x$ meeting only finitely many $W_i$, and denote their finite index set by $J_x$. The assigned sets $U_i$ may repeat and need not form a locally finite indexed family. For each tuple of indices in $J_x$ with $x$ in its assigned $U$-intersection, choose a neighborhood on which its cochain component lifts. Shrink a neighborhood $N_x\subseteq O_x$ of $x$ inside all these finitely many lift neighborhoods and, for each $i\in J_x$, inside $U_i$ whenever $x\in U_i$, and inside $W_i$ whenever $x\in W_i$; if $x\notin U_i$, also shrink to avoid $\overline{W_i}$, which is closed and does not contain $x$ because $\overline{W_i}\subset U_i$. Then $N_x\subset U_i$ whenever $N_x\cap W_i\ne\varnothing$, and every component indexed by a tuple in $J_x$ whose assigned intersection contains $x$ has a lift on $N_x$. Choose $\rho(x)$ with $x\in W_{\rho(x)}$. Then $N_x\subset W_{\rho(x)}\subset U_{\rho(x)}$, so $\{N_x\}$ refines $\mathcal U$. If $N_{x_0}\cap\cdots\cap N_{x_p}\ne\varnothing$, then $N_{x_0}$ meets every $W_{\rho(x_j)}$; the construction puts $N_{x_0}$ inside every $U_{\rho(x_j)}$, so $x_0$ belongs to the original intersection indexed by $\rho(x_0),\ldots,\rho(x_p)$. Its cochain component therefore has a lift on $N_{x_0}$ and hence on the full new intersection. Repeated source indices give a zero component of the alternating Čech refinement cochain, which also lifts. Thus every Čech cochain becomes liftable after refinement. [A1, F1, F2, F3, F4, given, construct]
 
 2.1 Construct connecting maps on cocycles rather than taking a colimit of cochain complexes. Write $d$ for the Čech differential and $u:\mathcal A\to\mathcal B$ and $v:\mathcal B\to\mathcal C$. If $c\in C^p(\mathcal U,\mathcal C)$ is closed, step 1.1 supplies on a refinement a lift $b$ of its pullback. Since $v(db)=dc=0$, [F5] gives a unique $a\in C^{p+1}(\mathcal V,\mathcal A)$ with $u(a)=db$. Injectivity of $u$ and $d^2=0$ give $da=0$. Define $\partial[c]$ to be the refinement-limit class of $a$. Two lifts on the same cover differ by an $\mathcal A$-cochain, so their resulting $a$ differ by a coboundary. If $c$ is replaced by $c+dt$, lift $t$ after another refinement by step 1.1 and replace $b$ by $b+d\widetilde t$; the resulting $a$ is unchanged. For $p=0$ there are no negative-degree coboundaries. [F4, F5, step 1.1, construct, algebra]
 
@@ -140,4 +149,4 @@ $\mathcal F$ on $X$.
 
 5.1 Let $\mathcal I$ be injective. By [F7] it and all its restrictions are acyclic, so every open cover is $\mathcal I$-acyclic. By [F8], $\check H^q(\mathcal U,\mathcal I)\cong H^q(X,\mathcal I)=0$ for every cover and every $q>0$. Hence $\check H^q(X,\mathcal I)=0$ for $q>0$. Since every sheaf embeds in such an $\mathcal I$ by [F6], the Čech delta functor of step 4.1 is effaceable in positive degrees. [F6, F7, F8, step 4.1]
 
-6.1 By [F10], $H^\bullet(X,-)$ is universal, and by [F11] so is $\check H^\bullet(X,-)$. Their degree-zero identifications with $\Gamma(X,-)$ agree by [F9], so [F11] gives a unique natural isomorphism $\check H^q(X,\mathcal F)\cong H^q(X,\mathcal F)$ in every degree. The canonical fixed-cover Čech-to-derived maps are compatible with refinement by [F8]; their connecting-map compatibility is the same lift-and-differentiate construction $u(a)=db$ in step 2.1, computed in a resolution. They therefore induce a morphism of delta functors with this degree-zero identity, so universality identifies their limit with this unique isomorphism. This is the asserted canonical comparison. Full AC supplies DC for [F10] and the choices in step 1.1; no compact-support cohomology is used. [A1, F9, F10, F11, F12, step 1.1, step 5.1] ∎
+6.1 For an injective sheaf $\mathcal I$, the resolution $0\to\mathcal I\xrightarrow{1}\mathcal I\to0$ computes $H^q(X,\mathcal I)=0$ for $q>0$. By [F6], every sheaf embeds in an injective, so [F11] makes $H^\bullet(X,-)$ universal, as well as $\check H^\bullet(X,-)$ by step 5.1. Their degree-zero identifications with $\Gamma(X,-)$ agree by [F9], so [F11] gives a unique natural isomorphism $\check H^q(X,\mathcal F)\cong H^q(X,\mathcal F)$ in every degree. To identify it with the canonical comparison, represent a class by a closed Čech cochain $c$ on a cover $\mathcal U$ and refine as in step 1.1 so that $c$ has a lift $b$ to the middle sheaf $\mathcal B$ of a short exact sequence $0\to\mathcal A\xrightarrow{i}\mathcal B\xrightarrow{v}\mathcal C\to0$. Then $\delta b=i(a)$ for the connecting cocycle $a$ of step 2.1. The product-of-stalks formula in [F13] is exact on sections under AC. For a short exact sequence, the diagram of injective germ maps and the kernel-cokernel exact sequence show that their cokernel sheaves also form a short exact sequence; induction gives exactness on sections in every Godement degree. Products over cover intersections are exact under AC, and each total degree is a finite direct sum, so both the global Godement complexes and the Čech–Godement total complexes form short exact sequences. Their natural quasi-isomorphisms commute with connecting maps by [F12]. By [F13], the comparison uses natural cochain maps to these total complexes; the image of $b$ is a lift of the image of $c$, and its differential is the image of $\delta b=i(a)$. Thus the derived connecting class of the image of $c$ is the comparison image of $[a]$. Compatibility with refinement in [F13] makes this calculation independent of the chosen lift and cover. The canonical comparison is therefore a morphism of delta functors extending the degree-zero identity, so universality identifies it with the unique isomorphism above. Full AC supplies DC for [F10] and the choices in step 1.1; no compact-support cohomology is used. [A1, F6, F9, F10, F11, F12, F13, step 1.1, step 2.1, step 5.1] ∎

@@ -119,7 +119,7 @@ Then $\mathcal H_{\rm phys}$ is closed and contains the nonzero constant functio
 
 1.1 For $V\in SU(2)$, the parametrization in [F2] gives $\tfrac12\operatorname{ReTr}_2V\in[-1,1]$ and a real trace. Thus $\Phi(V)=\beta(1-\tfrac12\operatorname{ReTr}_2V)$ is continuous. Cyclicity of trace gives $\operatorname{Tr}_2(gVg^{-1})=\operatorname{Tr}_2V$; unitarity gives $\operatorname{Tr}_2(V^{-1})=\overline{\operatorname{Tr}_2V}=\operatorname{Tr}_2V$. Hence each plaquette potential is conjugation- and inverse-invariant as required by [F3]. [given, F2, F3, algebra]
 
-2.1 Each plaquette term therefore lies in $[0,2]$. Since $\mathcal P_\Lambda$ is finite, $0\leq S_\Lambda\leq2\beta|\mathcal P_\Lambda|$, and consequently $e^{-2\beta|\mathcal P_\Lambda|}\leq e^{-S_\Lambda}\leq1$. [given, step 1.1, algebra]
+2.1 Since $\operatorname{ReTr}_2V\in[-2,2]$, the normalized Wilson factor $1-\tfrac12\operatorname{ReTr}_2V$ lies in $[0,2]$; hence each plaquette action term lies in $[0,2\beta]$. Since $\mathcal P_\Lambda$ is finite, $0\leq S_\Lambda\leq2\beta|\mathcal P_\Lambda|$, and consequently $e^{-2\beta|\mathcal P_\Lambda|}\leq e^{-S_\Lambda}\leq1$. [given, step 1.1, algebra]
 
 2.2 The actions $S_s,S_t$ are sums of nonnegative plaquette terms by step 1.1, so $0\leq K(u',u)\leq1$. Matrix multiplication, inversion on $SU(2)$, and trace are continuous, so the temporal-action integrand is nonnegative and product-measurable. The slice and vertex product Haar measures are probabilities by [F1,F6], hence sigma-finite; Tonelli [F4] makes the $\eta$-integral $K$ measurable in $(u',u)$. Each slice Haar product is a probability by [F6], so $\int|K|^2\,d(\mu_s\times\mu_s)\leq1$. [given, F1, F3, F4, F6, step 1.1, algebra]
 

@@ -4,7 +4,7 @@ kind: example
 title: Faithful flatness retaining a nilpotent class
 status: draft
 origin: pipeline
-dependency_level: 2
+dependency_level: 3
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics

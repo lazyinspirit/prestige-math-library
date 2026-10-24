@@ -67,7 +67,7 @@ proof_strategy: direct
 
 ## Statement
 
-Assume $\mathrm{AC}_\omega$ and use the finite $SU(2)$ Wilson plaquette measure with $\beta>0$ defined above. Put
+Assume $\mathrm{AC}_\omega$ and use the finite $SU(2)$ Wilson plaquette measure for $\beta>0$: $\mu_2$ is the pushforward of normalized round area $\sigma_3/(2\pi^2)$ on $S^3$ under the displayed matrix-coordinate map $x\mapsto U(x)$, and $\tau(U)=\tfrac12\operatorname{Tr}_2(U)$. Put
 
 $$
 I_0(\beta):=\int_{SU(2)}e^{\beta\tau(U)}d\mu_2(U),\qquad I_1(\beta):=\int_{SU(2)}\tau(U)e^{\beta\tau(U)}d\mu_2(U),\qquad \lambda(\beta):=I_1(\beta)/I_0(\beta).
@@ -123,7 +123,7 @@ As $\beta\downarrow0$, $\lambda(\beta)=\beta/4+O(\beta^3)$. The parameter $\beta
 
 [A1] $\mathrm{AC}_\omega$ is inherited through the supplied Lie-algebra and Lie-group constructions; this proof uses no further choice. [[def-countable-choice]]
 
-[F1] [[def-qftx-su2-wilson-plaquette-measure]]: $SU(2)$ is the matrix set $\{U:U^*U=I_2,\det U=1\}$, $\tau(U)=\tfrac12\operatorname{Tr}_2(U)=x_0$, and $\mu_2$ is the pushforward of normalized round surface measure $\sigma_3$ on $S^3$; explicitly, for every Borel $A\subseteq SU(2)$, $\mu_2(A)=\sigma_3(\{x\in S^3:U(x)\in A\})$. The same definition states the spherical-coordinate density that step 1.2 establishes locally before using.
+[F1] [[def-qftx-su2-wilson-plaquette-measure]]: $SU(2)$ is the matrix set $\{U:U^*U=I_2,\det U=1\}$, $\tau(U)=\tfrac12\operatorname{Tr}_2(U)=x_0$, and $\mu_2$ is the pushforward of normalized round surface measure $\sigma_3/(2\pi^2)$ on $S^3$; explicitly, for every Borel $A\subseteq SU(2)$, $\mu_2(A)=(2\pi^2)^{-1}\sigma_3(\{x\in S^3:U(x)\in A\})$. The same definition states the spherical-coordinate density that step 1.2 establishes locally before using.
 
 [F2] [[ex-unitary-and-special-unitary-lie-groups]]: $SU(2)$ with this matrix set and multiplication is a finite-dimensional real Lie group.
 

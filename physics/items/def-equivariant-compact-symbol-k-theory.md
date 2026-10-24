@@ -13,7 +13,7 @@ deps:
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 sources:
   references:
@@ -36,7 +36,7 @@ For a smooth compact $T$-manifold $M$, give $T^*M$ the cotangent action: $t$ sen
 
 $$[\sigma(A)]=[\pi^*E^+,\pi^*E^-,a]\in K^0_{T,c}(T^*M),$$
 
-where $\pi:T^*M\to M$ is the projection. The zero section is compact; the differential intertwining identity makes its symbol equivariant. If an $L^2$ realization $A:H^1(M,E^+)\to L^2(M,E^-)$ is Fredholm and the metrics are invariant, its **analytic equivariant index** is $[\ker A]-[\ker A^*]\in R(T)$, where $A^*$ denotes its Hilbert-space adjoint. These finite-dimensional kernels carry the induced $T$-representations. Fredholmness is a hypothesis here, not a consequence stipulated by the definition.
+where $\pi:T^*M\to M$ is the projection. The zero section is compact; the differential intertwining identity makes its symbol equivariant. Choose invariant smooth bundle metrics, a positive invariant smooth density, and invariant connections. Here $L^2(M,E)$ is the completion of smooth sections in the resulting squared-integral norm, and $H^1(M,E)$ is their completion in the norm $\|u\|_{H^1}^2=\|u\|_{L^2}^2+\|\nabla u\|_{L^2}^2$. A bounded realization $A:H^1(M,E^+)\to L^2(M,E^-)$ is **Fredholm** when $\ker A$ is finite dimensional, $\operatorname{ran}A$ is closed, and $\operatorname{coker}A:=L^2(M,E^-)/\operatorname{ran}A$ is finite dimensional. If this realization is Fredholm, its **analytic equivariant index** is $[\ker A]-[\ker A^*]\in R(T)$, where $A^*:L^2(M,E^-)\to H^1(M,E^+)$ is the bounded Hilbert-space adjoint for these norms; its kernel is the orthogonal complement of $\operatorname{ran}A$, hence represents the cokernel. These finite-dimensional kernels carry the induced $T$-representations. Fredholmness is a hypothesis here, not a consequence stipulated by the definition.
 
 For a Hermitian equivariant complex vector bundle $W\to Y$, write $\pi_W:W\to Y$ for its projection. On $\pi_W^*\Lambda^\bullet W$ define $\varepsilon_w$ to be exterior multiplication by the tautological vector $w\in W_y$, and let $\varepsilon_w^*$ be its Hermitian adjoint. The **Koszul symbol** is $\kappa_W=(\varepsilon_w+\varepsilon_w^*)|_{\mathrm{ev}}$ from even to odd exterior powers. It satisfies $(\varepsilon_w+\varepsilon_w^*)^2=|w|^2I$, so it is invertible off the zero section. On a complex line with coordinate $z$, its even-to-odd map is multiplication by $z$; this fixes its Bott sign. If $Y$ is noncompact, this is a class with support proper over $Y$, not a compact-support class on $W$ by itself. Its zero-section restriction is the virtual bundle
 

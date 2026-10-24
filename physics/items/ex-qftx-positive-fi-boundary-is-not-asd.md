@@ -37,7 +37,7 @@ verification:
 
 ## Example
 
-Take $N=k=1$ and $\zeta>0$. The datum $B_1=B_2=0$, $I=\sqrt\zeta$, $J=0$ is a stable positive-FI solution but is not costable and does not lie in the zero-FI regular locus. Its stable complex orbit has the framed $\mathbb P^2$ monad
+Take $V=W=\mathbb C$ with their standard Hermitian products and let $\zeta>0$. For scalar maps $B_1,B_2\in\mathbb C$ and $I,J\in\mathbb C$, the complex and real moment maps are $\mu_{\mathbb C}=[B_1,B_2]+IJ=IJ$ and $\mu_{\mathbb R}=|I|^2-|J|^2$; positive-FI solutions satisfy $\mu_{\mathbb C}=0$ and $\mu_{\mathbb R}=\zeta$. Stability means $I(W)$ spans $V$, and costability means no nonzero common invariant subspace is contained in $\ker J$. The datum $B_1=B_2=0$, $I=\sqrt\zeta$, $J=0$ is stable and positive-FI, but not costable, so it is outside the zero-FI regular locus. Under the complex $GL(1,\mathbb C)$ action its stable orbit has representative $I=1$, whose framed $\mathbb P^2$ monad on homogeneous coordinates $[z_0:z_1:z_2]$ is
 
 $$\mathcal O(-1)\xrightarrow{(-z_1,-z_2,0)^T}\mathcal O^{\oplus3}\xrightarrow{(z_2,-z_1,z_0)}\mathcal O(1),$$
 

@@ -28,10 +28,10 @@ sources:
     - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An
         Index for 4 Dimensional Super Conformal Theories"
       url: "https://arxiv.org/pdf/hep-th/0510251"
-      locator: "Full 60-page paper; §3, equations (3.1)–(3.4), printed pp. 13–15: the
-        exact positive anticommutator, commuting charge insertion, and
-        cancellation of positive-gap states. The weighted trace-class argument
-        is proved locally here."
+      locator: "Full 60-page paper; §3.3, equations (3.10)–(3.12), printed pp. 16–17: the
+        right-handed positive anticommutator, Witten trace, commuting charge
+        insertion, and positive-gap cancellation. The source uses its own
+        R-charge convention; the weighted trace-class argument is proved locally here."
     - title: "Leonardo Rastelli and Shlomo S. Razamat, The supersymmetric index in
         four dimensions"
       url: "https://arxiv.org/pdf/1608.02965"

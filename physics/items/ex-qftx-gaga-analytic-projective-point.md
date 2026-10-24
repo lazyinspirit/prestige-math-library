@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-gaga-analytic-projective-point
 kind: example
-title: Finite-support coherent sheaves have only finitely many sections
+title: Finite-support coherent sheaves have finite-dimensional global sections
 status: draft
 origin: pipeline
 domain: mathematics
@@ -68,7 +68,7 @@ Assume full AC. Let $0\le r\le3$ and let $\mathcal F$ be a coherent analytic mod
 
 [F4] The stalk $\mathcal F_x$ consists of germs of sections near $x$, and a sheaf with zero stalk at every point is the zero sheaf ([[def-stalk-of-presheaf]]).
 
-[F5] A complex manifold is Hausdorff, so a finite set of distinct points has pairwise disjoint neighborhoods ([[def-complex-manifolds-and-holomorphic-vector-bundles]]).
+[F5] For $r\ge1$, $P^r(\mathbb C)$ has the stated complex-manifold structure and is Hausdorff by definition ([[def-complex-manifolds-and-holomorphic-vector-bundles]]). For $r=0$, its definition as the space of lines in $\mathbb C$ gives a singleton, which is Hausdorff. In either case, a finite set of distinct points has pairwise disjoint neighborhoods.
 
 [F6] A sheaf satisfies unique gluing: sections on an open cover that agree on overlaps glue uniquely ([[def-sheaf-on-topological-space]]).
 
@@ -78,7 +78,7 @@ Assume full AC. Let $0\le r\le3$ and let $\mathcal F$ be a coherent analytic mod
 
 ## Proof
 
-1.1 By [F1], the cohomology groups in the Statement are finite-dimensional under the stated compactness and coherence assumptions. If $S=\varnothing$, [F4] makes $\mathcal F=0$, so all claims hold with $\ell=0$. Suppose $S\ne\varnothing$. Since $S$ is finite and $P^r$ is Hausdorff, choose pairwise disjoint open neighborhoods $V_x$ of its points, one for each $x\in S$ by [F5]. On $V_x\setminus\{x\}$ every stalk of $\mathcal F$ vanishes by the definition of $S$, so the restriction there is the zero sheaf by [F4]. [F1, F4, F5, given, construct]
+1.1 By [F1], the cohomology groups in the Statement are finite-dimensional under the stated compactness and coherence assumptions. If $S=\varnothing$, [F4] makes $\mathcal F=0$, so all claims hold with $\ell=0$. Suppose $S\ne\varnothing$. When $r=0$, $S$ consists of the unique point of $P^0$; take its neighborhood to be all of $P^0$. When $r\ge1$, [F5] and finite Hausdorff separation give pairwise disjoint open neighborhoods $V_x$ of the points of $S$. In either case, on each punctured neighborhood $V_x\setminus\{x\}$ every stalk of $\mathcal F$ vanishes by the definition of $S$, so the restriction there is the zero sheaf by [F4]. [F1, F4, F5, given, construct]
 
 2.1 For each $x\in S$, the germ map from $\mathcal F|_{V_x}$ to the skyscraper sheaf $i_{x,*}\mathcal F_x$ is an isomorphism. It is injective on sections because a section with zero germ at $x$ and zero stalk at every other point has zero germ everywhere, hence is zero by the uniqueness clause [F6]. It is surjective on sections over an open $W\subseteq V_x$ containing $x$: represent a desired germ by a section on a smaller neighborhood of $x$, restrict to the punctured overlap where $\mathcal F$ is zero, and glue that section to zero on $W\setminus\{x\}$ using [F6]. For $W$ not containing $x$, both section groups are zero. [F2, F4, F6, step 1.1, given]
 

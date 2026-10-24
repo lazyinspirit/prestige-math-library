@@ -59,7 +59,11 @@ Assume full Axiom of Choice. Use the constant-metric connection-normalized dual 
 
 $$q=\frac{M+e^{i\beta}\overline{\widetilde M}}{\sqrt2},\qquad p=\frac{M-e^{i\beta}\overline{\widetilde M}}{\sqrt2},\qquad s=|q|^2+|p|^2.$$
 
-Let $A=\widetilde A_1dx^1+\widetilde A_2dx^2$ be smooth and real on $\mathbb R^2$, $D_i=\partial_i-iA_i$, $B=\partial_1A_2-\partial_2A_1$ and $a=A_D$. For every smooth finite-energy profile in the uniform-vacuum winding-$n$ class, $n\ne0$, with $|q|\to\sqrt\xi$, $p,a\to0$ and limiting flux $2\pi n$, the positive-winding identity is
+Let $A=\widetilde A_1dx^1+\widetilde A_2dx^2$ be smooth and real on $\mathbb R^2$, $D_i=\partial_i-iA_i$, $B=\partial_1A_2-\partial_2A_1$ and $a=A_D$. For this linear truncation, write $E$ for the transverse energy defined in the preceding dual-Higgs flux-tube definition; explicitly,
+
+$$E=\int_{\mathbb R^2}\left\{\frac{B^2}{2g^2}+g^{-2}|\partial_i a|^2+|D_iM|^2+|\widetilde D_i\widetilde M|^2+g^2|\sqrt2M\widetilde M+\mu c|^2+\frac{g^2}{2}(|M|^2-|\widetilde M|^2)^2+2|a|^2(|M|^2+|\widetilde M|^2)\right\}d^2x.$$
+
+For every smooth finite-energy profile in the uniform-vacuum winding-$n$ class, $n\ne0$, with $|q|\to\sqrt\xi$, $p,a\to0$ and limiting flux $2\pi n$, the positive-winding identity is
 
 $$E=2\pi\xi n+\int_{\mathbb R^2}\left\{\frac{[B-g^2(\xi-s)]^2}{2g^2}+|(D_1+iD_2)q|^2+|(D_1+iD_2)p|^2+2g^2\xi|p|^2+g^{-2}|\partial_i a|^2+2|a|^2s\right\}d^2x.$$
 
@@ -123,9 +127,7 @@ If nonzero anywhere, the embedded profile is not stationary for that nonlinear m
 
 ## Proof
 
-**Given:** The full Axiom of Choice, the constant-metric linear truncation,
-the local field normalization and flux boundary data in the Statement, and
-the supplier claims and hypotheses [F1]–[F11].
+**Given:** The full Axiom of Choice, the constant-metric linear truncation, the local field normalization and flux boundary data in the Statement, and the supplier claims and hypotheses [F1]–[F11].
 
 1.1 The inverse change of variables is $M=(q+p)/\sqrt2$ and $e^{i\beta}\overline{\widetilde M}=(q-p)/\sqrt2$. It preserves the sum of charged kinetic norms and gives $|M|^2+|\widetilde M|^2=s$. Set $z=e^{-i\beta}M\widetilde M$. The charged part of the potential in [F1] at linear $u$ is $2g^2|z-v^2|^2+g^2(|M|^2-|\widetilde M|^2)^2/2=g^2s^2/2+2g^2v^4-4g^2v^2\operatorname{Re}z$. Since $2\operatorname{Re}z=|q|^2-|p|^2$ and $\xi=2v^2$, this is $g^2(s-\xi)^2/2+2g^2\xi|p|^2$. The remaining scalar potential is $2|a|^2s$ and its gradient term is $g^{-2}|\partial_i a|^2$. [given, F1, algebra]
 

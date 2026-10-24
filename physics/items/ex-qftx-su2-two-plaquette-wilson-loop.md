@@ -37,7 +37,13 @@ proof_strategy: direct
 
 ## Example
 
-Assume $\mathrm{AC}_\omega$. Take a free-boundary $SU(2)$ square lattice containing a rectangle two plaquettes wide and one plaquette high, and let $C$ follow its oriented face boundary counterclockwise from the lower-left corner. For $0<\beta\leq1$ and the defining normalized Wilson loop, its enclosed area is $A=2$ plaquettes, so the exact finite-lattice expectation is $\langle W(C)\rangle_\beta=\lambda(\beta)^2=\beta^2/16+O(\beta^4)$ as $\beta\downarrow0$, where $\lambda(\beta)$ is the one-plaquette coefficient from the finite $SU(2)$ Wilson measure.
+Assume $\mathrm{AC}_\omega$. Take a free-boundary $SU(2)$ square lattice containing a rectangle two plaquettes wide and one plaquette high, and let $C$ follow its oriented face boundary counterclockwise from the lower-left corner. Its loop holonomy $U_C$ is the ordered link product, using inverse matrices on reverse edges, and the defining normalized Wilson loop is $W(C):=\tfrac12\operatorname{Tr}_2(U_C)$. For $0<\beta\leq1$, the enclosed area is $A=2$ plaquettes, so the exact finite-lattice expectation is $\langle W(C)\rangle_\beta=\lambda(\beta)^2=\beta^2/16+O(\beta^4)$ as $\beta\downarrow0$, where
+
+$$
+\lambda(\beta):=\frac{\int_{SU(2)}\tfrac12\operatorname{Tr}_2(U)e^{\beta\operatorname{Tr}_2(U)/2}\,d\mu_2(U)}{\int_{SU(2)}e^{\beta\operatorname{Tr}_2(U)/2}\,d\mu_2(U)}
+$$
+
+is the finite one-plaquette coefficient for $\mu_2$, the normalized pushforward of round $S^3$ surface area under the matrix-coordinate map in the finite $SU(2)$ plaquette-measure definition.
 
 ## Example references
 

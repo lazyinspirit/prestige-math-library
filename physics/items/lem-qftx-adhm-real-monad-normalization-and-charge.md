@@ -52,11 +52,21 @@ verification:
 
 ## Statement
 
-Let $N\geq2$, $k\geq0$, and let a framed real Ward bundle on $Z=\mathbb CP^3$ have the normalized linear monad with vector-space dimensions $k,2k+N,k$. Then the real monad is equivalent to a raw datum $(B_1,B_2,I,J)$ on $V=\mathbb C^k$, $W=\mathbb C^N$ in exactly the convention
+Let $N\geq2$, $k\geq0$, and equip $V=\mathbb C^k$ and $W=\mathbb C^N$ with their standard Hermitian products. Let $S^4=\mathbb H\mathbb P^1$ and $Z=\mathbb P_{\mathbb C}(\mathbb H^2)=\mathbb C\mathbb P^3$ have the twistor projection $\pi([v])=\operatorname{span}_{\mathbb C}(v,jv)$ and antiholomorphic involution $\sigma([v])=[jv]$ specified in the preceding twistor definition, with $j^2=-1$. Let $E\to S^4$ be a framed Hermitian bundle with a smooth unitary connection $A$, unitary framing at infinity, and $F_A^+=(F_A+*_gF_A)/2=0$ for the unit round metric and positive orientation specified in the twistor definition. Define $q_N(E,A)=-(8\pi^2)^{-1}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A)$. Let $\mathcal E$ be its holomorphic Ward bundle, with underlying smooth bundle $\pi^*E$. A framed positive Ward bundle includes a nondegenerate holomorphic pairing $b:\mathcal E\otimes\sigma^*\overline{\mathcal E}\to\mathcal O_Z$ satisfying $b_{\sigma z}(v,u)=\overline{b_z(u,v)}$, whose induced form $b_z(s(z),t(\sigma z))$ is positive on $H^0(L_x,\mathcal E|_{L_x})$ for every real twistor line $L_x$, and a unitary framing on the infinity line $L_\infty$.
+
+Assume its monad is the holomorphic complex
+
+$$\mathcal O_Z(-1)\otimes U\xrightarrow{\alpha}\mathcal O_Z\otimes S\xrightarrow{\beta}\mathcal O_Z(1)\otimes U',$$
+
+with $\beta\alpha=0$, locally split injective and surjective end maps, locally free middle cohomology $\ker\beta/\operatorname{im}\alpha$, and $\dim_\mathbb C U=\dim_\mathbb C U'=k$, $\dim_\mathbb C S=2k+N$. Then the real monad is equivalent to a raw datum $(B_1,B_2,I,J)$ on $V=\mathbb C^k$, $W=\mathbb C^N$ in exactly the convention
 
 $$\mu_{\mathbb C}=[B_1,B_2]+IJ=0,\qquad \mu_{\mathbb R}=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J=0.$$
 
-The tuple is regular exactly when the associated quaternionic construction is pointwise nondegenerate. Its kernel projection connection extends over $\infty$, has the specified framing, and equals the Ward connection. Changes of normalized monad bases induce exactly the $U(k)$ action on raw data, and inverse matrix extraction recovers the same $U(k)$ orbit. The resulting charge is $k=-q_N=\langle c_2(E),[S^4]\rangle$. The entrywise conjugation candidate is refuted by the recorded comparison lemma and is not used in the intrinsic real monad normalization.
+The tuple is stable when the vectors $B_{i_1}\cdots B_{i_m}I(w)$ span $V$, costable when no nonzero common $B_1,B_2$-invariant subspace lies in $\ker J$, and regular when both hold. Equivalently, the raw block map
+
+$$D_z=\begin{pmatrix}-B_2+z_2&B_1-z_1&I\\ B_1^\dagger-\bar z_1&B_2^\dagger-\bar z_2&J^\dagger\end{pmatrix}:V\oplus V\oplus W\to V\oplus V$$
+
+is onto for every $z=(z_1,z_2)\in\mathbb C^2$. Its kernel projection connection on the finite stereographic chart is $\nabla=P\,d$, where $P$ is the orthogonal projection onto $\ker D_z$; it extends over infinity, has the specified framing, and equals the Ward connection. Changes of normalized monad bases, meaning chain isomorphisms preserving the lifted pairing and infinity framing, induce exactly the simultaneous $U(k)$ action on raw data, and inverse matrix extraction recovers the same $U(k)$ orbit. With $q_N(E,A)=-(8\pi^2)^{-1}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A)$ for the framed ASD connection $A$, the resulting charge is $k=-q_N(E,A)=\langle c_2(E),[S^4]\rangle$. The entrywise conjugation candidate is refuted by the recorded comparison lemma and is not used in the intrinsic real monad normalization.
 
 ## Statement references
 

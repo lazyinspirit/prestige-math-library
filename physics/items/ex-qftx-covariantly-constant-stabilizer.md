@@ -23,9 +23,9 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
-      locator: "§5.13.2, PDF pp. 113–114: gauge stabilizers as holonomy centralizers and the irreducibility convention."
+      locator: "§5.13.3, Proposition 5.74 and Definition 5.75, PDF p. 116: gauge stabilizers as holonomy centralizers and the irreducibility convention."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"
       url: "https://ufdcimages.uflib.ufl.edu/AA/00/05/72/86/00001/brianwilliams-SW.pdf"
       locator: "§4.4, PDF pp. 31–36: stabilizer and irreducible-quotient comparison in the abelian Seiberg–Witten setting; the SU(N) centralizer follows from the separate local Schur argument."
@@ -35,7 +35,7 @@ verification:
 
 ## Example
 
-Let $M$ be compact and connected, let $P\to M$ be a smooth right principal $SU(N)$-bundle with a fixed basepoint lift $p_m$, and let $A$ be a smooth connection with integer regularity index $k>d/2+1$. The evaluation map $u\mapsto u(p_m)$ identifies the stabilizer $\{u\in\mathcal G_{k+1}:A^u=A\}$ with the centralizer $C_{SU(N)}(\operatorname{Hol}_{p_m}(A))$. Consequently the based stabilizer inside $\mathcal G_{k+1,m}:=\{u:u(p_m)=e\}$ is trivial for every $A$. If $A$ is irreducible on $\mathbb C^N$, its full stabilizer is $Z_N=\{zI_N:z^N=1\}$, so its stabilizer under the reduced group $\bar{\mathcal G}_{k+1}=\mathcal G_{k+1}/Z_N$ is trivial as well.
+Use the configuration fixed in the earlier definition **Smooth and Sobolev configuration and reduced gauge spaces**: $M$ is a compact, connected, oriented, boundaryless smooth Riemannian manifold of dimension $d\in\{3,4\}$; $N\ge2$; $\pi:P\to M$ is a smooth right principal $SU(N)$-bundle; and $p_m\in P$ is the fixed lift over the chosen base point. There $\mathcal G_{k+1}=H^{k+1}(\operatorname{Ad}P)$, $\mathcal G_{k+1,m}=\{u:u(p_m)=e\}$, $Z_N=\{zI_N:z^N=1\}$, and $\bar{\mathcal G}_{k+1}=\mathcal G_{k+1}/Z_N$, with holonomy acting in the standard representation on $\mathbb C^N$. Let $A$ be a smooth connection and $k$ an integer with $k>d/2+1$. The evaluation map $u\mapsto u(p_m)$ identifies the stabilizer $\{u\in\mathcal G_{k+1}:A^u=A\}$ with the centralizer $C_{SU(N)}(\operatorname{Hol}_{p_m}(A))$. Consequently the based stabilizer is trivial for every $A$. If $A$ is irreducible, meaning its holonomy leaves no nonzero proper complex subspace of $\mathbb C^N$ invariant, its full stabilizer is $Z_N$, so its stabilizer under the reduced group is trivial as well.
 
 ## Example references
 

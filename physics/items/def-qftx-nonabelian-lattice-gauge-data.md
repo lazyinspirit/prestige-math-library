@@ -66,7 +66,7 @@ verification:
 
 ## Definition
 
-Assume the axiom of countable choice $\mathrm{AC}_\omega$. Fix the compact noncommutative finite-dimensional real Lie group $G$, its Lie algebra $\mathfrak g=T_eG$, and a specified smooth finite-dimensional complex unitary representation $\rho:G\to U(W,h)$ on a Hermitian vector space $(W,h)$ supplied by a non-Abelian gauge datum. Thus the group multiplication and inversion are smooth, $G$ is compact in its manifold topology, and $\rho(g)$ preserves $h$ for every $g\in G$. No connection, principal bundle sector, action functional, or continuum theory is part of the lattice data below.
+Assume the axiom of countable choice $\mathrm{AC}_\omega$. Fix the compact noncommutative finite-dimensional real Lie group $G$ supplied by the earlier non-Abelian gauge-data definition. Its Lie algebra is $\mathfrak g=T_eG$, with bracket induced by left-invariant smooth vector fields. Fix also a finite-dimensional complex vector space $W$, a positive-definite Hermitian form $h$ on $W$, and a specified smooth group homomorphism $\rho:G\to U(W,h)$, where $U(W,h)$ is the group of invertible complex-linear maps preserving $h$. Thus multiplication and inversion on $G$ are smooth, $G$ is compact in its manifold topology, and every $\rho(g)$ preserves $h$. Every finite power $G^S$ below has the product smooth-manifold structure, with charts given by products of charts of $G$; for $S=\varnothing$, set $G^S=\{()\}$ with its one-point smooth structure. No connection, principal bundle sector, action functional, or continuum theory is part of the lattice data below.
 
 A **finite oriented lattice two-complex** is a finite set $\mathcal V$ of vertices, a finite set $\mathcal E^+$ containing one chosen orientation of each edge, an endpoint map $s,t:\mathcal E^+\to\mathcal V$, and a finite set $\mathcal F$ of faces. Each face $p\in\mathcal F$ is supplied with a based closed edge word $(e_1,\ldots,e_k)$ in the oriented edges $\mathcal E^+\sqcup\overline{\mathcal E^+}$, where the endpoint of each edge is the starting point of the next and the last endpoint is the first starting point. For the reverse orientation $\bar e$ of $e\in\mathcal E^+$, set $s(\bar e)=t(e)$ and $t(\bar e)=s(e)$.
 
@@ -76,7 +76,7 @@ $$
 (h\cdot U)_e=h_{s(e)}U_eh_{t(e)}^{-1},\qquad h=(h_v)_{v\in\mathcal V}\in G^{\mathcal V}.
 $$
 
-Choose a normalized bi-invariant Borel probability measure $\mu_G$ on $G$. The link measure is the finite product $\mu_G^{\mathcal E^+}$. For each face choose a continuous function $\Phi_p:G\to\mathbb R$ satisfying $\Phi_p(gzg^{-1})=\Phi_p(z)$ and $\Phi_p(z^{-1})=\Phi_p(z)$. Define the dimensionless lattice action and its normalized expectation by
+Choose a normalized bi-invariant finite Radon Borel probability measure $\mu_G$ on $G$; explicitly, $\mu_G(G)=1$ and $\mu_G(gA)=\mu_G(Ag)=\mu_G(A)$ for every $g\in G$ and Borel $A\subseteq G$. The link measure is the finite product $\mu_G^{\mathcal E^+}$; for $\mathcal E^+=\varnothing$, this is the unit point mass on $G^{\varnothing}=\{()\}$. Empty sums are zero. For each face choose a continuous dimensionless function $\Phi_p:G\to\mathbb R$ satisfying $\Phi_p(gzg^{-1})=\Phi_p(z)$ and $\Phi_p(z^{-1})=\Phi_p(z)$. Define the dimensionless lattice action and its normalized expectation by
 
 $$
 S_\Lambda(U):=\sum_{p\in\mathcal F}\Phi_p(U_p),\qquad Z_\Lambda:=\int_{G^{\mathcal E^+}}e^{-S_\Lambda(U)}\,d\mu_G^{\mathcal E^+}(U),\qquad \langle O\rangle_\Lambda:=Z_\Lambda^{-1}\int_{G^{\mathcal E^+}}O(U)e^{-S_\Lambda(U)}\,d\mu_G^{\mathcal E^+}(U)

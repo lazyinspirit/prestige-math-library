@@ -34,7 +34,7 @@ landmark: false
 
 ## Definition
 
-Let $T=(\mathbb C^\times)^r$ act on a smooth separated finite-type complex variety $X$ with a finite invariant affine open cover. Let $F=X^T$ be proper, $i:F\hookrightarrow X$, $p_F:F\to\mathrm{pt}$, and $S_T$ the character multiplicative set. By the finite-affine-atlas concentration isomorphism, $i_*:S_T^{-1}H^{\mathrm{BM},T}_j(F;\mathbb Q)\to S_T^{-1}H^{\mathrm{BM},T}_j(X;\mathbb Q)$ is invertible. Define the intrinsic localized pushforward
+Let $T=(\mathbb C^\times)^r$ act on a smooth separated finite-type complex variety $X$ with a finite invariant affine open cover. Let $F=X^T$ be proper, $i:F\hookrightarrow X$, $p_F:F\to\mathrm{pt}$, and $S_T$ the character multiplicative set. Every notation $S_T^{-1}H_j^{\mathrm{BM},T}(Y;\mathbb Q)$ below means $\mathcal H_j^T(Y)$, the degree-$j$ piece of the localization of the total graded module. By the finite-affine-atlas concentration isomorphism, $i_*:S_T^{-1}H^{\mathrm{BM},T}_j(F;\mathbb Q)\to S_T^{-1}H^{\mathrm{BM},T}_j(X;\mathbb Q)$ is invertible. Define the intrinsic localized pushforward
 $$
 p^{\mathrm{loc}}_*:=p_{F*}\circ(i_*)^{-1}:S_T^{-1}H^{\mathrm{BM},T}_j(X;\mathbb Q)\longrightarrow S_T^{-1}H^{\mathrm{BM},T}_j(\mathrm{pt};\mathbb Q),
 $$
@@ -60,6 +60,6 @@ where $p_{F*}$ is the genuine proper Borel–Moore pushforward. For a homogeneou
 
 **Given:** The data in the Definition.
 
-1.1 By [F2], $i_*$ is an isomorphism in each degree after localization, so its inverse is a unique $S_T^{-1}R_T$-linear map. The proper inclusion $i$ and the proper map $p_F$ give the stated Borel–Moore pushforwards by [F1]. [A1, F1, F2, given]
+1.1 By [F2], $i_*$ is an isomorphism in each degree after localization, and on the total graded localization its inverse is a unique degree-preserving $S_T^{-1}R_T$-linear map; its restrictions give the degree-$j$ inverses. The proper inclusion $i$ and the proper map $p_F$ give the stated Borel–Moore pushforwards by [F1]. [A1, F1, F2, given]
 
 2.1 Composition of the inverse with $p_{F*}$ is therefore a well-defined degree-preserving map on the localized Borel–Moore groups. The insertion convention is well-defined because [F1] supplies the cap action and the smooth complex orientation gives $[X]_T$ degree $2d$. If $X\to\mathrm{pt}$ is proper, functoriality gives $p_{X*}=p_{F*}i_*$, so $p_*^{\mathrm{loc}}=p_{F*}i_*(i_*)^{-1}=p_{X*}$. If $F=\varnothing$, then $F\to\mathrm{pt}$ is proper and [F2] forces the localized groups of $X$ to be zero, so the defined trace is the zero map. For $r=0$, $T$ is trivial, $F=X$, $i$ is the identity, and the properness hypothesis makes this the usual proper pushforward. [F1, F2, step 1.1, given, algebra] ∎

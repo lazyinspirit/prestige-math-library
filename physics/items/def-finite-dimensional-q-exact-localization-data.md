@@ -37,15 +37,15 @@ A supercharge $Q$ is a smooth odd derivation of $\mathcal A$: for homogeneous fo
 
 $$\mathcal L_Q\boldsymbol\mu_\Pi=(\operatorname{div}_{\boldsymbol\mu_\Pi}Q)\boldsymbol\mu_\Pi.$$
 
-The condition $\operatorname{div}_{\boldsymbol\mu_\Pi}Q=0$ is local: it says that $Q$ preserves this density. It does not impose any boundary condition. Choose a fixed class $\mathscr C\subseteq\mathcal A$ as part of the integration data; it is an admissible integrand class when for each $F\in\mathscr C$ the coefficients of $F_{[n]}$ and $(QF)_{[n]}$, relative to $\mu$, are integrable and the graded integration-by-parts formula has a finite boundary term. For $F\in\mathscr C$, call that boundary term the $Q$-boundary flux of $F$. The integration is $Q$-invariant on $\mathscr C$ when the integrated identity
+The condition $\operatorname{div}_{\boldsymbol\mu_\Pi}Q=0$ is local: it says that $Q$ preserves this density. It does not impose any boundary condition. Choose a fixed class $\mathscr C\subseteq\mathcal A$ as part of the integration data. For every $F\in\mathscr C$, require the coefficients of $F_{[n]}$, $(QF)_{[n]}$, and $((\operatorname{div}_{\boldsymbol\mu_\Pi}Q)F)_{[n]}$, relative to $\mu$, to be integrable. Also require a specified finite complex-linear functional $\Phi_{\partial\Gamma}(Q,\cdot)$ on $\mathscr C$, the signed boundary or decay-at-infinity contribution, such that the chosen integration-by-parts identity is
+
+$$I_\Gamma(QF)=\Phi_{\partial\Gamma}(Q,F)-I_\Gamma\bigl((\operatorname{div}_{\boldsymbol\mu_\Pi}Q)F\bigr).$$
+
+This identity is an additional hypothesis on the integration data; its validity must be established from a fully stated integration-by-parts result with its hypotheses checked, or by a direct calculation. No boundary formula for arbitrary manifolds with boundary or noncompact manifolds is asserted here. For $F\in\mathscr C$, call $\Phi_{\partial\Gamma}(Q,F)$ the $Q$-boundary flux of $F$. The integration is $Q$-invariant on $\mathscr C$ when the integrated identity
 
 $$I_\Gamma(QF)=0\qquad\text{for every }F\in\mathscr C$$
 
-holds. With $\Phi_{\partial\Gamma}(Q,F)$ denoting the signed boundary term in the graded divergence theorem, that theorem gives
-
-$$\operatorname{div}_{\boldsymbol\mu_\Pi}Q=0\quad\Longrightarrow\quad I_\Gamma(QF)=\Phi_{\partial\Gamma}(Q,F).$$
-
-Hence zero divergence and, separately, zero $Q$-boundary flux imply the integrated $Q$-invariance identity. Zero divergence alone does not imply it. For a compact manifold without boundary the boundary term is absent; on a noncompact manifold or one with boundary, compact support in the interior or explicit decay/boundary conditions may make it vanish.
+holds. The displayed integration-by-parts identity implies that zero divergence and, separately, zero $Q$-boundary flux give the integrated $Q$-invariance identity. Zero divergence alone does not imply it. For a compact manifold without boundary the boundary contribution is absent in the usual compact-supermanifold formula; on a noncompact manifold or one with boundary, vanishing flux must be established from the chosen decay and boundary conditions.
 
 An admissible finite-dimensional $Q$-exact deformation consists of even smooth forms $S,O\in\mathcal A$, an odd smooth form $V\in\mathcal A$, and a nonempty open interval $J\subseteq\mathbb R$ such that the integration is $Q$-invariant on $\mathscr C$ and $QS=QO=0$. The even form $QV$ is the $Q$-exact deformation, $S_t:=S+tQV$, and $E_t:=e^{-S_t}$, where the exponential is the pointwise exponential of the degree-zero part times the finite exterior-degree expansion of its positive-degree part. Require $(Q^2V)E_t=0$ for every $t\in J$; the stronger condition $Q^2V=0$ is sufficient. Require $O E_t$ and $O V E_t$ to belong to $\mathscr C$ for every $t\in J$, so $I_\Gamma(Q(O V E_t))=0$. If this identity is established by graded integration by parts, its zero-divergence and zero-boundary-flux hypotheses are separate.
 
@@ -57,7 +57,7 @@ For each $t$, require $x\mapsto\partial_t f_t(x)$ to be measurable, using zero o
 
 ## Definition references
 
-[Schwarz and Zaboronsky, §§2–3](https://arxiv.org/pdf/hep-th/9511112)
+[Schwarz and Zaboronsky, §2, p. 3: canonical Berezin volume and divergence identity for a compact boundaryless supermanifold](https://arxiv.org/pdf/hep-th/9511112)
 
 [Pestun and Zabzine, §1](https://arxiv.org/pdf/1608.02953)
 

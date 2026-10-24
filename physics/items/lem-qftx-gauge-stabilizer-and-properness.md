@@ -37,7 +37,7 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
       locator: "§§5.13.2–5.13.3, PDF pp. 113–117: properness proof sketch, stabilizer as a holonomy centralizer, and irreducibility convention."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"

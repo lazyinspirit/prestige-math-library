@@ -20,6 +20,7 @@ deps:
 - def-polar-surface-measure-on-the-unit-sphere
 - thm-monotone-convergence-for-the-integral
 - cor-real-and-euclidean-vector-valued-ascoli-arzela
+- thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
 dependency_roles:
   def-qftx-critical-abelian-higgs-divisor-data: mathematical-premise
   lem-qftx-taubes-disk-barriers-and-monotone-iteration: mathematical-premise
@@ -34,6 +35,7 @@ dependency_roles:
   def-polar-surface-measure-on-the-unit-sphere: mathematical-premise
   thm-monotone-convergence-for-the-integral: mathematical-premise
   cor-real-and-euclidean-vector-valued-ascoli-arzela: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
 dependency_level: 2
 axiom_base: ZF + full Axiom of Choice; AC supports the finite-disk subsequence extraction and the stated compactness/regularity suppliers. No physical premise.
 proof_strategy: direct
@@ -97,6 +99,8 @@ and flux $\int_{\mathbb R^2}B\,dx_1dx_2=2\pi N$. For every $0<\alpha<\sqrt\kappa
 
 [F10] The logarithmic center condition defines the continuous extension $e^h(z_j)=0$, so $1-e^h$ is a nonnegative Borel function by the Statement. [[thm-monotone-convergence-for-the-integral]] identifies the limit of its disk integrals with its plane integral: for integer $k\to\infty$, $\mathbf 1_{D_k}(1-e^h)\uparrow1-e^h$.
 
+[F11] On sigma-finite measure spaces, an absolutely integrable function on the product has integrable sections almost everywhere, and its integral equals either iterated integral. [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+
 ## Proof
 
 **Given:** The assumptions and conventions in the Statement.
@@ -117,9 +121,9 @@ and flux $\int_{\mathbb R^2}B\,dx_1dx_2=2\pi N$. For every $0<\alpha<\sqrt\kappa
 
 5.1 The curvature is $dA=-\frac12\Delta(h-s)\,dx_1\wedge dx_2$. Since $\Delta s=4\pi D$ and $h$ satisfies the divisor equation, $\Delta(h-s)=-\kappa(1-e^h)$; therefore $B=\frac\kappa2(1-e^h)=e^2(\xi-|q|^2)$. On the exterior of a disk, $e^{-i\chi}$ is a smooth local gauge, not asserted to extend across the zeros; it gives $q_{\mathrm{ext}}=\sqrt\xi e^{h/2}$ and $A_{\mathrm{ext}}=-\frac12*dh$. The phase satisfies $\chi=N\theta+O(r^{-1})$ because $P(z)=z^N\prod_j(1-z_j/z)^{m_j}$. Thus the gauge-invariant $B,D_Aq$ decay exponentially by step 4.1, while no exponential decay of the raw phase correction is claimed. [F1, step 4.1, step 3.4, algebra]
 
-6.1 The reconstructed fields are smooth on compact sets. In the exterior gauge of step 5.1, $B$, $D_Aq$, and $|q|^2-\xi=\xi(e^h-1)$ all decay exponentially, so each squared term in the defining energy is integrable on $\mathbb R^2$; hence the energy is finite. To compute flux, write $v=h-s$, so $\Delta v=-\kappa(1-e^h)$. For $r>0$ the chain rule in polar coordinates gives $r\Delta v=\partial_r(r\partial_rv)+r^{-1}\partial_{\theta\theta}v$. The angular derivative integrates to zero over $0\le\theta\le2\pi$ by periodicity. Apply the polar formula [F9] to the positive and negative parts of $\mathbf 1_{D_R}\Delta v$; its arc-length identification $ds=r\,d\theta$ then gives
+6.1 The reconstructed fields are smooth on compact sets. In the exterior gauge of step 5.1, $B$, $D_Aq$, and $|q|^2-\xi=\xi(e^h-1)$ all decay exponentially, so each squared term in the defining energy is integrable on $\mathbb R^2$; hence the energy is finite. To compute flux, write $v=h-s$, so $\Delta v=-\kappa(1-e^h)$. For $r>0$ the chain rule in polar coordinates gives $r\Delta v=\partial_r(r\partial_rv)+r^{-1}\partial_{\theta\theta}v$. Smoothness of $v$ on $\overline D_R$ bounds both $\partial_r(r\partial_rv)$ and $r^{-1}\partial_{\theta\theta}v$ uniformly for $0<r\le R$: by the chain rule each is a sum of bounded first derivatives and $r$ times bounded second derivatives. Extending them arbitrarily at $r=0$ makes them Borel and absolutely integrable on the finite Lebesgue product $[0,R]\times[0,2\pi]$. Fubini [F11] therefore permits either integration order. The angular derivative integrates to zero over $0\le\theta\le2\pi$ by periodicity. Apply the polar formula [F9] to the positive and negative parts of $\mathbf 1_{D_R}\Delta v$; using [F11] and $ds=r\,d\theta$ then gives
 $$\int_{D_R}\Delta v\,dx_1dx_2=\int_0^{2\pi}\int_0^R\partial_r(r\partial_rv)\,dr\,d\theta=\int_0^{2\pi}R\partial_rv(R,\theta)\,d\theta,$$
-since $v$ is smooth and $r\partial_rv\to0$ at $r=0$. By step 4.1, $\partial_rh$ decays exponentially; from $s=2N\log r+O(r^{-1})$, $\partial_rs=2N/R+O(R^{-2})$ uniformly in $\theta$. Therefore the boundary integral tends to $-4\pi N$. By [F10], $\kappa\int_{\mathbb R^2}(1-e^h)=4\pi N$; using $B=\frac\kappa2(1-e^h)$ gives flux $2\pi N$. For the empty divisor $h=0$, the reconstruction is the flat constant vacuum and has zero flux. [F1, F9, F10, step 2.1, step 4.1, step 5.1, algebra] ∎
+since $v$ is smooth and $r\partial_rv\to0$ at $r=0$. By step 4.1, $\partial_rh$ decays exponentially; from $s=2N\log r+O(r^{-1})$, $\partial_rs=2N/R+O(R^{-2})$ uniformly in $\theta$. Therefore the boundary integral tends to $-4\pi N$. By [F10], $\kappa\int_{\mathbb R^2}(1-e^h)=4\pi N$; using $B=\frac\kappa2(1-e^h)$ gives flux $2\pi N$. For the empty divisor $h=0$, the reconstruction is the flat constant vacuum and has zero flux. [F1, F9, F10, F11, step 2.1, step 4.1, step 5.1, algebra] ∎
 ## Proof sources
 
 [Primary theorem attribution (Taubes, 1980; full proof text unavailable after recorded attempts)](https://doi.org/10.1007/BF01197552)

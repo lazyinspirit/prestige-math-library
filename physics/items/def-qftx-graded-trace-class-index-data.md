@@ -45,10 +45,13 @@ sources:
   references:
     - title: "Stephen P. Martin, A Supersymmetry Primer, version 7"
       url: "https://arxiv.org/pdf/hep-ph/9709356v7"
-      locator: "§7.1, printed pp. 68–70, Witten index and zero-energy states; this item adds exact pure-point trace-class data."
+      locator: "§7.1, printed p. 72, equations (7.1.1)–(7.1.2), supersymmetry-algebra positivity and the zero-energy condition; this item states the pure-point trace-class data locally."
     - title: "S. J. Gates Jr., M. T. Grisaru, M. Roček and W. Siegel, Superspace, or One Thousand and One Lessons in Supersymmetry"
       url: "https://arxiv.org/pdf/hep-th/0108200"
-      locator: "§8.4, supertrace context; finite multiplicities, domains and trace-class hypotheses are stated locally."
+      locator: "§8.4, mass-squared supertrace formulae; finite multiplicities, domains and trace-class hypotheses are stated locally."
+    - title: "David Tong, Supersymmetric Quantum Mechanics"
+      url: "https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf"
+      locator: "§1.2.2, printed p. 14, definition of the Witten index and positive-energy boson/fermion cancellation under the supersymmetric quantum-mechanics assumptions stated there."
 verification:
   precheck: pending
 ---
@@ -69,9 +72,11 @@ where each family sum is in the finite-subset sense for absolutely summable scal
 
 ## Definition references
 
-[Martin, §7.1](https://arxiv.org/pdf/hep-ph/9709356v7).
+[Martin, §7.1, supersymmetry-algebra positivity and the zero-energy condition](https://arxiv.org/pdf/hep-ph/9709356v7).
 
-[Gates et al., §8.4](https://arxiv.org/pdf/hep-th/0108200).
+[Gates et al., §8.4, mass-squared supertrace formulae](https://arxiv.org/pdf/hep-th/0108200).
+
+[Tong, §1.2.2, Witten-index definition and positive-energy cancellation](https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf).
 
 Positive-energy eigenspaces pair under an odd self-adjoint supercharge: [[lem-qftx-supercharge-positive-energy-pairing]].
 

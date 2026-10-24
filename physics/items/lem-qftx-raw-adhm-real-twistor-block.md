@@ -42,7 +42,11 @@ verification:
 
 ## Statement
 
-Assume AC. Let $V=\mathbb C^k$, $W=\mathbb C^N$, $N\ge1$, $k\ge0$, and let $x=(B_1,B_2,I,J)$ satisfy the raw complex equation $\mu_{\mathbb C}=[B_1,B_2]+IJ=0$. Put $K=V\oplus V\oplus W$. For $z=(z_1,z_2)\in\mathbb C^2$ put
+Assume AC. Let $V=\mathbb C^k$ and $W=\mathbb C^N$, $N\ge1$, $k\ge0$, with their standard Hermitian products. Let $B_i\in\operatorname{End}_{\mathbb C}(V)$, $I:W\to V$, and $J:V\to W$. Define the raw moment maps
+
+$$\mu_{\mathbb C}=[B_1,B_2]+IJ,\qquad \mu_{\mathbb R}=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J,$$
+
+and assume $\mu_{\mathbb C}=0$. Put $K=V\oplus V\oplus W$. For $z=(z_1,z_2)\in\mathbb C^2$ put
 
 $$a_z=(B_1-z_1,B_2-z_2,J)^T,\qquad b_z=(-B_2^\dagger+\bar z_2,B_1^\dagger-\bar z_1,I^\dagger)^T,\qquad D_z=\begin{pmatrix}b_z^\dagger\\a_z^\dagger\end{pmatrix}.$$
 

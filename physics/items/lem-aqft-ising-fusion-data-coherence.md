@@ -104,5 +104,5 @@ The pentagon is the equality of the two composites of associators between the fi
 
 ```tikzcd
 & (((a\otimes b)\otimes c)\otimes d) \arrow[rr,"\alpha_{a\otimes b,c,d}"] \arrow[dl,"\alpha_{a,b,c}\otimes 1_d"'] & & (a\otimes b)\otimes(c\otimes d) \arrow[dr,"\alpha_{a,b,c\otimes d}"] & \\
-(a\otimes(b\otimes c))\otimes d \arrow[rr,"\alpha_{a,b\otimes c,d}"'] & & a\otimes((b\otimes c)\otimes d) \arrow[ur,"1_a\otimes\alpha_{b,c,d}"'] & & a\otimes(b\otimes(c\otimes d))
+(a\otimes(b\otimes c))\otimes d \arrow[rr,"\alpha_{a,b\otimes c,d}"'] & & a\otimes((b\otimes c)\otimes d) \arrow[rr,"1_a\otimes\alpha_{b,c,d}"'] & & a\otimes(b\otimes(c\otimes d))
 ```

@@ -54,11 +54,17 @@ verification:
 
 ## Statement
 
-Assume full Axiom of Choice. Let $E\to S^4$ be a smooth Hermitian rank-$N$ vector bundle with $N\geq2$, a smooth unitary connection $A$, and a unitary framing at $\infty$. Give $S^4$ the round metric and the orientation specified in the definition of the framed ASD sector, and assume $F_A^+=0$. Then the induced determinant-line connection on $\det E=\Lambda^N E$ is flat. Its framing at $\infty$ determines a unique global unit parallel section, so the framed unitary bundle reduces to a framed $SU(N)$ bundle. With $q_N=-(8\pi^2)^{-1}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A)$ and the determinant Chern-form convention $c(A)=\det(I-F_A/(2\pi i))$, one has
+Assume full Axiom of Choice. Let $S^4=\mathbb H\mathbb P^1$ have the unit round metric and positive stereographic orientation $dx^0\wedge dx^1\wedge dx^2\wedge dx^3$, where $z_1=x^0+ix^1$, $z_2=x^2+ix^3$. Let $E\to S^4$ be a smooth Hermitian rank-$N$ bundle, $N\ge2$, with a smooth unitary connection $A$ and a unitary framing $\Phi:E_\infty\to\mathbb C^N$. Its curvature $F_A$ is an anti-Hermitian endomorphism-valued two-form; set $F_A^+=(F_A+*_gF_A)/2$, where $*_g$ is the Hodge star for the stated metric and orientation, and assume $F_A^+=0$. The determinant-line connection is the connection induced by $A$ on $\det E=\Lambda^N E$. Its framing at $\infty$ determines a unit vector in $(\det E)_\infty$. With
+
+$$q_N(E,A)=-\frac{1}{8\pi^2}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A)$$
+
+and determinant Chern-form convention $c(A)=\det(I-F_A/(2\pi i))$, one has
 
 $$q_N(E,A)=-\langle c_2(E),[S^4]\rangle\in-\mathbb Z_{\geq0}.$$
 
 Thus $k=-q_N=\langle c_2(E),[S^4]\rangle$ is a nonnegative integer, with the sign corresponding to the anti-self-dual equation $F_A^+=0$.
+
+The induced determinant-line connection is flat. Its framing at $\infty$ determines a unique global unit parallel section, so the framed unitary bundle reduces to a framed $SU(N)$ bundle.
 
 ## Statement references
 

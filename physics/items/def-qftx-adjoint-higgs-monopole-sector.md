@@ -36,7 +36,7 @@ sources:
   references:
     - title: "David Tong, TASI Lectures on Solitons: Instantons, Monopoles, Vortices and Kinks"
       url: https://arxiv.org/pdf/hep-th/0509216
-      locator: "§2.1.1, equations (2.9)–(2.15), printed pp. 41–42 (PDF pp. 43–44); §2.1.2, equations (2.16)–(2.18), printed pp. 42–43 (PDF pp. 44–45); and §2.1.3, equation (2.19), printed p. 43 (PDF p. 45). Tong uses signature (+---), Hermitian-generator/component conventions, and coupling e; this item fixes anti-Hermitian T_a, kappa(T_a,T_b)=delta_ab, signature (-+++), and the rescaled 1/(2g^2) energy convention explicitly."
+      locator: "§2.1.1, equations (2.9)–(2.15), printed pp. 41–43 (PDF pp. 42–44); §2.1.2, equations (2.16)–(2.18), printed p. 43 (PDF p. 44); and §2.1.3, equation (2.19), printed p. 44 (PDF p. 45). Tong uses signature (+---), Hermitian-generator/component conventions, and coupling e; this item fixes anti-Hermitian T_a, kappa(T_a,T_b)=delta_ab, signature (-+++), and the rescaled 1/(2g^2) energy convention explicitly."
     - title: "Jeffrey A. Harvey, Magnetic Monopoles, Duality, and Supersymmetry"
       url: https://arxiv.org/pdf/hep-th/9603086
       locator: "§1.4, equations (1.20)–(1.40); §2.1, equations (2.1)–(2.6); and §2.2, equations (2.7)–(2.9). These give SU(2) Yang–Mills–Higgs data, the zero-potential limit, the fundamental-doublet charge unit, the Bianchi surface term, square completion, and Prasad–Sommerfield radial functions. Harvey uses B_i=-epsilon_ijk F_jk/2 and e inside D; neither convention is silently adopted here."
@@ -54,13 +54,29 @@ where $\sigma_a$ are the Pauli matrices and $\mathfrak{su}(2)$ has basis $T_1,T_
 
 $$F_{ij}=\partial_iA_j-\partial_jA_i+[A_i,A_j],\qquad D_i\Phi=\partial_i\Phi+[A_i,\Phi],\qquad B_i=\frac12\epsilon_{ijk}F_{jk}.$$
 
-The static Prasad–Sommerfield sector has $\partial_tA_i=\partial_t\Phi=0$, $A_0=0$, no other dynamical fields, and identically zero Higgs potential. Its adopted energy functional is
+The static spacetime fields are the smooth maps $\widetilde\Phi,\widetilde A_\mu:\mathbb R\times\mathbb R^3\to\mathfrak{su}(2)$, $\mu=0,1,2,3$, defined by $\widetilde\Phi(t,x)=\Phi(x)$, $\widetilde A_i(t,x)=A_i(x)$, and $\widetilde A_0(t,x)=0$; thus $\partial_t\widetilde A_i=\partial_t\widetilde\Phi=0$. The spacetime connection is $\widetilde A=\widetilde A_\mu dx^\mu$, with $x^0=t$. This Prasad–Sommerfield sector has no other dynamical fields and identically zero Higgs potential. Its adopted energy functional is
 
 $$E[A,\Phi]=\frac{1}{2g^2}\int_{\mathbb R^3}\sum_{i=1}^3\bigl(\kappa(B_i,B_i)+\kappa(D_i\Phi,D_i\Phi)\bigr)\,d^3x.$$
 
 The field dimensions are $[A_i]=[\Phi]=\mathrm{length}^{-1}$ and $[F_{ij}]=[B_i]=[D_i\Phi]=\mathrm{length}^{-2}$, so $E$ has dimension $\mathrm{length}^{-1}$. A configuration is finite-energy when this integral is finite.
 
-The boundary data fix a number $v>0$ of dimension $\mathrm{length}^{-1}$ and require $|\Phi|_\kappa\to v$ and $n_\infty(\omega):=\lim_{R\to\infty}\Phi(R\omega)/v$ to exist smoothly on the unit sphere $S^2$ of spatial directions. Here $|X|_\kappa^2:=\kappa(X,X)$. The limiting tangential covariant derivative of $n_\infty$ vanishes, and the limiting magnetic field lies in the pointwise stabilizer Lie algebra $\{X\in\mathfrak{su}(2):[X,n_\infty(\omega)]=0\}$. The stabilizer subgroup of $T_3$ is $U(1)=\{\exp(\theta T_3):\theta\in\mathbb R/(4\pi\mathbb Z)\}$. On closed northern and southern hemispheres choose smooth local lifts $u_N,u_S$ with $\operatorname{Ad}_{u_\alpha}T_3=n_\infty$; their equatorial transition is $u_S=u_N h$ with $h(\varphi)=\exp(\theta(\varphi)T_3)$, where $\varphi\in[0,2\pi]$ parametrizes the equator and $\theta:[0,2\pi]\to\mathbb R$ is a smooth lift. The local adapted frames, connection forms, and curvature forms extend smoothly, respectively $C^1$, to open neighborhoods of the closed hemispheres. The surface limit below exists. The admissible external Wilson probes include the fundamental doublet, on which $T_3$ has weights $\pm\tfrac12$; this specifies the electric probe lattice without adding a propagating fundamental matter field. Define the classical magnetic surface charge and its energy normalization by
+The boundary data fix $v>0$ of dimension $\mathrm{length}^{-1}$ and require $\Phi(R\,\cdot)/v\to n_\infty$ in $C^\infty(S^2,\mathfrak{su}(2))$, where $S^2=\{\omega\in\mathbb R^3:|\omega|=1\}$ has its outward orientation and $|n_\infty|_\kappa=1$; here $|X|_\kappa^2:=\kappa(X,X)$. In particular $|\Phi(R\omega)|_\kappa\to v$ uniformly. The stabilizer subgroup of $T_3$ is $U(1)=\{\exp(\theta T_3):\theta\in\mathbb R/(4\pi\mathbb Z)\}$. Let $D_N,D_S$ be the closed northern and southern hemispheres. Specify smooth lifts $u_\alpha:U_\alpha\to SU(2)$ on open neighborhoods $U_\alpha\supset D_\alpha$ with $\operatorname{Ad}_{u_\alpha}T_3=n_\infty$. On their common equator $C$, oriented as $\partial D_N$, the transition is $u_S=u_Nh$, where $h(\varphi)=\exp(\theta(\varphi)T_3)$, $\varphi\in[0,2\pi]$ runs positively around $C$, and $\theta:[0,2\pi]\to\mathbb R$ is a specified smooth lift.
+
+For $R>0$, put $\iota_R(\omega)=R\omega$ and $F=\tfrac12F_{ij}dx^i\wedge dx^j$. Define the adapted angular forms
+
+$$\mathcal A_{\alpha,R}=\operatorname{Ad}_{u_\alpha^{-1}}(\iota_R^*A)+u_\alpha^{-1}du_\alpha,\qquad \mathcal F_{\alpha,R}=\operatorname{Ad}_{u_\alpha^{-1}}(\iota_R^*F).$$
+
+Require pointwise convergence $\mathcal A_{\alpha,R}\to\mathcal A_{\alpha,\infty}$ on $D_\alpha$, with $\mathcal A_{\alpha,\infty}$ extending as a $C^1$ one-form to $U_\alpha$. Require its curvature $\mathcal F_{\alpha,\infty}:=d\mathcal A_{\alpha,\infty}+\tfrac12[\mathcal A_{\alpha,\infty}\wedge\mathcal A_{\alpha,\infty}]$ to extend as a $C^1$ two-form to $U_\alpha$, and $\mathcal F_{\alpha,R}\to\mathcal F_{\alpha,\infty}$ uniformly on $D_\alpha$. Norms and convergence use the round metric of the unit sphere and $\kappa$. Define the limiting tangential covariant derivative by its local expression
+
+$$D_{\mathrm{tan}}n_\infty|_{D_\alpha}:=\operatorname{Ad}_{u_\alpha}\bigl(dT_3+[\mathcal A_{\alpha,\infty},T_3]\bigr)=\operatorname{Ad}_{u_\alpha}[\mathcal A_{\alpha,\infty},T_3],$$
+
+where $dT_3=0$ and the bracket is evaluated on tangent vectors. The transition law makes these expressions agree on the equator. Require $D_{\mathrm{tan}}n_\infty=0$. Let $d\Omega$ be the outward round area form on $S^2$ and define $B_\infty:S^2\to\mathfrak{su}(2)$ by
+
+$$\operatorname{Ad}_{u_\alpha}\mathcal F_{\alpha,\infty}=B_\infty\,d\Omega\quad\hbox{on }D_\alpha.$$
+
+Curvature covariance makes this definition agree on $C$. Equivalently, $B_\infty(\omega)=\lim_{R\to\infty}R^2\sum_i\omega_iB_i(R\omega)$ uniformly on each hemisphere, since $\iota_R^*F=R^2\sum_i\omega_iB_i(R\omega)\,d\Omega$. It is the scaled radial magnetic field, not the unscaled spatial field. Require $[B_\infty(\omega),n_\infty(\omega)]=0$, meaning that its value belongs to the pointwise stabilizer Lie algebra $\{X\in\mathfrak{su}(2):[X,n_\infty(\omega)]=0\}$. These convergence and reduction conditions are adopted boundary hypotheses, not consequences asserted for every finite-energy field. The surface limit below is also required to exist.
+
+The admissible external Wilson probes include the fundamental doublet, on which $T_3$ has weights $\pm\tfrac12$; this specifies the electric probe lattice without adding a propagating fundamental matter field. Define the classical magnetic surface charge and its energy normalization by
 
 $$m:=\lim_{R\to\infty}\int_{S_R^2}\kappa(\Phi,B_i)\,\hat x_i\,dS,\qquad T:=g^{-2}m,$$
 

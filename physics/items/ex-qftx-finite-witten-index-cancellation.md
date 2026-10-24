@@ -33,7 +33,10 @@ sources:
   references:
     - title: "S. J. Gates Jr., M. T. Grisaru, M. Roček and W. Siegel, Superspace, or One Thousand and One Lessons in Supersymmetry"
       url: "https://arxiv.org/pdf/hep-th/0108200"
-      locator: "§8.4, supertrace and index context; this finite-dimensional calculation is explicit."
+      locator: "§8.4, mass-squared supertrace formulae; this finite-dimensional Witten-index calculation is explicit."
+    - title: "David Tong, Supersymmetric Quantum Mechanics"
+      url: "https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf"
+      locator: "§1.2.2, printed p. 14, Witten-index definition and positive-energy boson/fermion cancellation under the assumptions stated there."
 verification:
   precheck: pending
 ---
@@ -44,7 +47,9 @@ Fix $\omega>0$. Let the zero-energy subspace have dimensions $m_0^+=2$ and $m_0^
 
 ## Example references
 
-[Gates et al., §8.4](https://arxiv.org/pdf/hep-th/0108200).
+[Gates et al., §8.4, mass-squared supertrace formulae](https://arxiv.org/pdf/hep-th/0108200).
+
+[Tong, §1.2.2, Witten-index definition and positive-energy cancellation](https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf).
 
 Pure-point graded trace-class index data: [[def-qftx-graded-trace-class-index-data]].
 

@@ -4,7 +4,7 @@ kind: example
 title: Unequal local rings with equal completions
 status: draft
 origin: pipeline
-dependency_level: 2
+dependency_level: 3
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics
@@ -13,15 +13,13 @@ proof_strategy: direct
 deps:
   - def-axiom-of-choice
   - def-multiplicative-subset-and-localisation
-  - thm-power-series-define-holomorphic-functions-in-several-variables
-  - cor-uniqueness-of-multivariable-power-series-coefficients
   - thm-qftx-gaga-analytic-local-ring-flatness
+  - lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-multiplicative-subset-and-localisation: mathematical-premise
-  thm-power-series-define-holomorphic-functions-in-several-variables: mathematical-premise
-  cor-uniqueness-of-multivariable-power-series-coefficients: mathematical-premise
   thm-qftx-gaga-analytic-local-ring-flatness: mathematical-premise
+  lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness: mathematical-premise
 generation:
   role: example
 provenance:
@@ -66,9 +64,9 @@ $e(t)=\sum_{n=0}^{\infty}t^n/n!$ is not in its image.
 
 [F2] The local algebraic-to-holomorphic map for the finite-type chart $\mathbb A^1_{\mathbb C}$ at $0$ is faithfully flat and induces the common completion $\mathbb C\llbracket t\rrbracket$ ([[thm-qftx-gaga-analytic-local-ring-flatness]]).
 
-[F3] If two coefficient families satisfy bounds $|c_n|\le M r^{-n}$ and $|c'_n|\le M' r^{-n}$ on a common positive radius $r$, and their sums agree throughout $|t|<r$, then their coefficients agree ([[cor-uniqueness-of-multivariable-power-series-coefficients]]).
+[F3] If two coefficient families satisfy bounds $|c_n|\le M r^{-n}$ and $|c'_n|\le M' r^{-n}$ on a common positive radius $r$, and their sums agree throughout $|t|<r$, then their coefficients agree ([[lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness]]).
 
-[F4] If its coefficients satisfy $|c_n|\le M r^{-n}$ on a positive radius $r$, the power series defines a holomorphic function on $|t|<r$ ([[thm-power-series-define-holomorphic-functions-in-several-variables]]).
+[F4] If its coefficients satisfy $|c_n|\le M r^{-n}$ on a positive radius $r$, the power series defines a holomorphic function on $|t|<r$ ([[lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness]]).
 
 ## Verification
 

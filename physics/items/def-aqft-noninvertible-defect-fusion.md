@@ -19,15 +19,23 @@ provenance:
   proof: not-applicable
 sources:
   references:
-    - title: "Pavel Etingof, Shlomo Gelaki, Dmitri Nikshych, and Victor Ostrik, Tensor Categories, §§2.1–2.2, 2.10–2.11, and 4.1"
+    - title: "Pavel Etingof, Shlomo Gelaki, Dmitri Nikshych, and Victor Ostrik, Tensor Categories, §§2.1–2.2, 2.10–2.11, 4.1, and 4.16"
       url: "https://math.mit.edu/~etingof/egnobookfinal.pdf"
-      locator: "Monoidal associator and pentagon/triangle, printed pp. 21–24; duals and invertible objects, §§2.10–2.11, printed pp. 40–44; fusion-category definition and examples, §4.1, printed pp. 65–66."
+      locator: "Monoidal associator and pentagon/triangle, printed pp. 21–24; duals and invertible objects, §§2.10–2.11, printed pp. 40–44; fusion-category definition and examples, §4.1, printed pp. 65–66; extension of (multi)fusion definitions to arbitrary fields, §4.16, printed p. 87."
     - title: "Christopher L. Douglas and David J. Reutter, Fusion 2-Categories and a State-Sum Invariant for 4-Manifolds, §§1.2.2–1.4.2 and 2.1.1–2.1.6"
       url: "https://arxiv.org/pdf/1812.11933"
       locator: "Simple and finite presemisimple 2-categories, §1.2.2, PDF pp. 13–14; separable monads and idempotent completeness, §§1.3.1–1.3.6, PDF pp. 21–23; finite semisimple 2-categories, §§1.4.1–1.4.2, PDF pp. 26–27; Gray-monoid coherence, object duals, and fusion 2-categories, §§2.1.1–2.1.6, PDF pp. 35–37."
 verification:
   precheck: n/a
 ---
+
+## Conventions
+
+A strict $2$-category has objects and, for each ordered pair $(A,B)$, a category $\operatorname{Hom}_{\mathcal C}(A,B)$ whose objects are $1$-morphisms and whose morphisms are $2$-morphisms. It has identity $1$-morphisms and composition functors $\operatorname{Hom}_{\mathcal C}(B,C)\times\operatorname{Hom}_{\mathcal C}(A,B)\to\operatorname{Hom}_{\mathcal C}(A,C)$ that are strictly associative and unital. Morphisms in a Hom category compose vertically, denoted $\cdot$; the composition functors give horizontal composition, denoted $\circ_h$. Their functoriality is the interchange law: for vertically composable $2$-morphisms $\alpha_1,\alpha_2$ and $\beta_1,\beta_2$ with the indicated horizontal composites defined,
+$$
+(\beta_2\cdot\beta_1)\circ_h(\alpha_2\cdot\alpha_1)=(\beta_2\circ_h\alpha_2)\cdot(\beta_1\circ_h\alpha_1),
+$$
+and horizontal composition preserves identity $2$-morphisms. A strict $k$-linear $2$-category has $k$-vector spaces of $2$-morphisms, bilinear vertical and horizontal composition, and the same strict identity and composition laws. A strict $k$-linear $2$-functor assigns objects and functors on Hom categories, preserving identities and horizontal and vertical compositions as equalities; it is $k$-linear when each Hom functor is $k$-linear.
 
 ## Definition
 
@@ -81,7 +89,7 @@ The ordinary associator pentagon below displays the two composites that the axio
 
 ```tikzcd
 & (((W\otimes X)\otimes Y)\otimes Z) \arrow[rr,"\alpha_{W\otimes X,Y,Z}"] \arrow[dl,"\alpha_{W,X,Y}\otimes 1_Z"'] & & (W\otimes X)\otimes(Y\otimes Z) \arrow[dr,"\alpha_{W,X,Y\otimes Z}"] & \\
-(W\otimes(X\otimes Y))\otimes Z \arrow[rr,"\alpha_{W,X\otimes Y,Z}"'] & & W\otimes((X\otimes Y)\otimes Z) \arrow[ur,"1_W\otimes\alpha_{X,Y,Z}"'] & & W\otimes(X\otimes(Y\otimes Z))
+(W\otimes(X\otimes Y))\otimes Z \arrow[rr,"\alpha_{W,X\otimes Y,Z}"'] & & W\otimes((X\otimes Y)\otimes Z) \arrow[rr,"1_W\otimes\alpha_{X,Y,Z}"'] & & W\otimes(X\otimes(Y\otimes Z))
 ```
 
 ## Definition references
@@ -90,6 +98,10 @@ The ordinary associator pentagon below displays the two composites that the axio
 
 [[def-monoidal-category|Monoidal category]]
 
-[Etingof, Gelaki, Nikshych, and Ostrik, *Tensor Categories*, §§2.1–2.2, 2.10–2.11, and 4.1](https://math.mit.edu/~etingof/egnobookfinal.pdf)
+[Etingof, Gelaki, Nikshych, and Ostrik, *Tensor Categories*, §§2.1–2.2, 2.10–2.11, 4.1, and 4.16](https://math.mit.edu/~etingof/egnobookfinal.pdf)
 
 [Douglas and Reutter, *Fusion 2-Categories and a State-Sum Invariant for 4-Manifolds*, §§1.2.2–1.4.2 and 2.1.1–2.1.6](https://arxiv.org/pdf/1812.11933)
+
+## Remarks
+
+For the rank assertion in the Definition, choose a semisimple decomposition $i\otimes j\cong\bigoplus_{r\in I}r^{\oplus N_{ij}^{r}}$. A nonzero morphism $f:r\to\ell$ between simple objects has zero kernel, since a nonzero kernel would have to be all of $r$, and has image all of $\ell$, since the image is a nonzero subobject of the simple object $\ell$. Thus $f$ is both monic and epic, hence an isomorphism in the abelian category. Therefore $\operatorname{Hom}(r,\ell)=0$ for $r\ne\ell$, while $\operatorname{Hom}(\ell,\ell)=D_\ell$ and every nonzero element of $D_\ell$ is invertible. Applying $\operatorname{Hom}_{\mathcal C}(-,\ell)$ to the finite direct sum gives $V_{ij}^{\ell}\cong D_\ell^{\oplus N_{ij}^{\ell}}$ as a left $D_\ell$-module by postcomposition. Its rank is therefore $N_{ij}^{\ell}$.

@@ -49,9 +49,9 @@ Assume the Axiom of Choice and let $D=D_1\times D_2\subset\mathbb C^2$ be a bidi
 
 ## Example references
 
-[Demailly, Chapter II §3.3, Theorem 3.19 and Lemma 3.20, pp. 89–90](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter II §3.3, Theorem 3.19 and Lemma 3.20](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
-[Wehler, §4.2, Theorem 4.28, complete proof, printed pp. 138–145/PDF pp. 142–149](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
+[Wehler, §4.2, Theorem 4.28 (Oka coherence theorem)](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 
 ## Facts & Assumptions
 

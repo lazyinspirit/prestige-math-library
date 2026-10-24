@@ -27,7 +27,7 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
+    - title: "Thomas Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
       url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
       locator: "§5.13.3, PDF pp. 115–117: Coulomb slice and the differential of the gauge-action chart."
     - title: "Brian Williams, Geometry, Spin, and Seiberg-Witten Theory (full expository manuscript)"
@@ -39,7 +39,7 @@ verification:
 
 ## Example
 
-Let $A\in\mathcal A_k^*$ for the configuration data and integer $k>d/2+1$. The differential at $(0,0)$ of the Coulomb-gauge action map
+Use the configuration fixed in the earlier definition **Smooth and Sobolev configuration and reduced gauge spaces**: $M$ is a compact, connected, oriented, boundaryless smooth Riemannian manifold of dimension $d\in\{3,4\}$, $\pi:P\to M$ is a smooth right principal $SU(N)$-bundle with $N\ge2$, and $A_0$ is the fixed smooth reference connection. There $\mathcal A_k=A_0+H^k(T^*M\otimes\operatorname{ad}P)$, $d_A\xi=d\xi+[A,\xi]$, the right action is $B^u=u^{-1}Bu+u^{-1}du$, and $d_A^*$ is the formal adjoint with its stated local coefficient formula. Let $k$ be an integer with $k>d/2+1$ and let $A\in\mathcal A_k^*$, meaning its holonomy representation on $\mathbb C^N$ is irreducible. The differential at $(0,0)$ of the Coulomb-gauge action map
 
 $$\Phi_A:\ker(d_A^*:H^k(T^*M\otimes\operatorname{ad}P)\to H^{k-1}(\operatorname{ad}P))\times H^{k+1}(\operatorname{ad}P)\longrightarrow\mathcal A_k,\qquad (a,\xi)\longmapsto(A+a)^{\exp\xi},$$
 
@@ -51,7 +51,7 @@ Its inverse, for $v\in H^k(T^*M\otimes\operatorname{ad}P)$, is
 
 $$L_A^{-1}v=\bigl(v-d_AG_Ad_A^*v,\ G_Ad_A^*v\bigr),$$
 
-where $G_A=(d_A^*d_A)^{-1}:H^{k-1}(\operatorname{ad}P)\to H^{k+1}(\operatorname{ad}P)$. Thus the connection variation lies in $H^k$, the infinitesimal gauge parameter lies in $H^{k+1}$, and the gauge term $d_A\xi$ loses one derivative. This is a linearized chart statement and asserts no determinant or measure formula.
+where $G_A=(d_A^*d_A)^{-1}:H^{k-1}(\operatorname{ad}P)\to H^{k+1}(\operatorname{ad}P)$ is the bounded inverse from the preceding covariant-Laplacian result. Thus the connection variation lies in $H^k$, the infinitesimal gauge parameter lies in $H^{k+1}$, and the gauge term $d_A\xi$ loses one derivative. This is a linearized chart statement and asserts no determinant or measure formula.
 
 ## Example references
 

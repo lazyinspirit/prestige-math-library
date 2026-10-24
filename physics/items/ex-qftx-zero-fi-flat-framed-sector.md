@@ -45,7 +45,17 @@ verification:
 
 ## Example
 
-For every $N\geq2$, the $k=0$ regular zero-FI ADHM quotient consists of the unique empty datum, and the framed ASD sector with $q_N=0$ consists of the framed flat connection on the trivial rank-$N$ bundle; the framing removes its based-gauge stabilizer.
+Fix $N\ge2$ and equip $V=\mathbb C^0=0$ and $W=\mathbb C^N$ with their standard Hermitian products. A raw ADHM datum consists of $B_i\in\operatorname{End}(V)$, $I:W\to V$, and $J:V\to W$, with moment maps
+
+$$\mu_{\mathbb C}=[B_1,B_2]+IJ,\qquad \mu_{\mathbb R}=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J.$$
+
+Stability means the span of all vectors $B_{i_1}\cdots B_{i_m}I(w)$ is $V$, costability means that no nonzero common invariant subspace lies in $\ker J$, and the regular zero-FI quotient is the set of data with both moments zero and both conditions, modulo $U(V)$. It consists of the unique empty datum at $k=0$.
+
+Give $S^4=\mathbb H\mathbb P^1$ its unit round metric and positive stereographic orientation. A framed ASD object is a smooth Hermitian rank-$N$ bundle $E\to S^4$ with a smooth unitary connection $A$, a unitary framing at infinity, $F_A^+=(F_A+*_gF_A)/2=0$, and
+
+$$q_N(E,A)=-\frac{1}{8\pi^2}\int_{S^4}\operatorname{tr}_N(F_A\wedge F_A)=0,$$
+
+modulo unitary bundle isomorphisms preserving the framing and connection. This sector consists of the trivial rank-$N$ bundle with its flat connection and fixed framing, and its group of framing-preserving parallel unitary automorphisms is trivial.
 
 ## Example references
 

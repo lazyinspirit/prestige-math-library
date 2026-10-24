@@ -72,5 +72,5 @@ Let $T=\mathbb C^\times$ act on $X=\mathbb P^1\times\mathbb C$ by $t\cdot([x:y],
 
 2.1 Both maps $i:p\to F$ and $p_F:F\to\mathrm{pt}$ are proper. By functoriality of Borel–Moore pushforward and step 1.2, $p_{F*}(h\cap[F]_T)=p_{F*}i_*[p]_T=(p_F\circ i)_*[p]_T=1$, because $p_F\circ i$ is the identity of the point and its complex-oriented degree-zero class is $1$. This also verifies the stated normalization $\int_{\mathbb P^1}h=1$ through the cap-class identification, rather than inferring a Borel–Moore trace directly from cohomological functoriality. [F1, step 1.2, given, algebra]
 
-3.1 The localization theorem [F2] gives $p_*^{\mathrm{loc}}(\alpha\cap[X]_T)=p_{F*}((h/u)\cap[\mathbb P^1]_T)=1/u$ by step 2.1. The output has Borel–Moore degree $2$, matching $2\dim_{\mathbb C}X-\deg\alpha=4-2$. [F1, F2, F3, step 2.1, algebra] ∎
+3.1 The localization theorem [F2] gives $p_*^{\mathrm{loc}}(\alpha\cap[X]_T)=p_{F*}((h/u)\cap[\mathbb P^1]_T)=1/u$ by step 2.1. The target is $(S_T^{-1}H_*^{\mathrm{BM},T}(\mathrm{pt};\mathbb Q))_2=(S_T^{-1}R_T)^{-2}$, containing $1/u$, although the unlocalized $H_2$ of the point is zero. The output has Borel–Moore degree $2$, matching $2\dim_{\mathbb C}X-\deg\alpha=4-2$. [F1, F2, F3, step 2.1, algebra] ∎
 

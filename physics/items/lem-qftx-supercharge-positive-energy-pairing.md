@@ -39,7 +39,7 @@ sources:
   references:
     - title: "Stephen P. Martin, A Supersymmetry Primer, version 7"
       url: "https://arxiv.org/pdf/hep-ph/9709356v7"
-      locator: "§7.1, printed pp. 68–70, positive-energy pairing context; the operator-domain proof is local."
+      locator: "§7.1, printed p. 72, equations (7.1.1)–(7.1.2), positive-energy pairing context; the operator-domain proof is local."
     - title: "S. J. Gates Jr., M. T. Grisaru, M. Roček and W. Siegel, Superspace, or One Thousand and One Lessons in Supersymmetry"
       url: "https://arxiv.org/pdf/hep-th/0108200"
       locator: "§8.4, supertrace and index context; the positive-energy eigenspace map is proved locally from the stated domains."
