@@ -51,7 +51,7 @@ satisfies $\delta_\alpha\Gamma_{\mathrm{WZ}}=\mathcal A_H$ and hence $\delta_\al
 
 ## Statement references
 
-[[def-aqft-heavy-chiral-u1-threshold-data|Selected U(1)_V-singlet model, charge, mass, regulator, and threshold conventions]]
+[[def-aqft-heavy-chiral-u1-threshold-data|Selected SU(3)-singlet model, U(1)_V charge, mass, regulator, and threshold conventions]]
 
 [[def-aqft-thooft-anomaly|Local perturbative background-anomaly class modulo counterterms]]
 

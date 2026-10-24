@@ -37,7 +37,7 @@ verification:
 
 ## Example
 
-Let $A$ be a smooth compactly supported anti-Hermitian $\mathfrak{su}(3)$ connection one-form on trivial $\mathbb R^{1,3}$, with curvature $F_A=dA+A\wedge A$, and let $B$ be a smooth real $U(1)_V$ background one-form with compactly supported gauge parameter $\alpha$. In natural units, $[A]=[B]=\text{mass}$ and $[F_A]=\text{mass}^2$. Define the local three-form
+Let $A$ be a smooth compactly supported anti-Hermitian $\mathfrak{su}(3)$ connection one-form on trivial $\mathbb R^{1,3}$, with curvature $F_A=dA+A\wedge A$, and let $B$ be a smooth real $U(1)_V$ background one-form with compactly supported gauge parameter $\alpha$. In natural units, write $A=A_\mu dx^\mu$, $B=B_\mu dx^\mu$, and $F_A=\tfrac12(F_A)_{\mu\nu}dx^\mu\wedge dx^\nu$, summing repeated indices from $0$ to $3$. The components satisfy $[A_\mu]=[B_\mu]=\text{mass}$ and $[(F_A)_{\mu\nu}]=\text{mass}^2$; since $[dx^\mu]=\text{mass}^{-1}$, the forms $A,B,F_A$ are dimensionless, as are $\alpha$, $K_3(A)$, and $C_4$ below. Define the local three-form
 
 $$K_3(A):=\operatorname{tr}\left(A\wedge dA+\frac23A\wedge A\wedge A\right)$$
 
