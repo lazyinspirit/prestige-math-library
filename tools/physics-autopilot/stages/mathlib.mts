@@ -31,6 +31,7 @@ import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
 import { appendStages } from '../src/frontier-append.mts';
+import { originalConstructionBatches, step2PrerequisiteStages } from '../src/step2-prerequisites.mts';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
@@ -83,15 +84,15 @@ export function batches(ctx: any): string[] {
  * priority uses the last valid full graph. Current dependencies and complete
  * readiness are checked strictly by the drained Step-1 join and gates. */
 export function authoringBatches(ctx: any): string[] {
-  if (ctx.doctor) return batches(ctx);
-  return readSchedulingBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch);
+  if (ctx.doctor) return originalConstructionBatches(ctx,batches(ctx));
+  return originalConstructionBatches(ctx,readSchedulingBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch));
 }
 
 /** Required local scaffold output, independent of cross-pair supplier readiness.
  * A finished author must leave nonempty inventories and explicit readiness
  * records. Escalated or stale readiness remains visible to the complete gate
  * battery; it does not reserve an authoring slot or prevent another pair start. */
-function scaffoldArtifacts(ctx: any, unit: string): string[] {
+export function scaffoldArtifacts(ctx: any, unit: string): string[] {
   const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
   const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
   let complete = true;
@@ -1646,9 +1647,42 @@ for (const stage of stages) {
 }
 
 export const workflowRevision = 'physics-six-step-v1-construction-scope';
+/** Genuine supplemental construction. Current full-frontier mechanical duties
+ * remain intact; only new authoring-readiness subjects and source URLs are local.
+ * No original drift report is retroactively extended or claimed as new review. */
+export function supplementalConstructionGates(ctx:any,entry:any) {
+  const coverage=entry.batches.map((batch:string)=>`research/${ctx.run}-batch-${batch}.coverage.json`);
+  const liveness=`research/${ctx.run}-prerequisite-${entry.number}-url-liveness.json`;
+  return [
+    gate('supplemental-construction', ['node','tools/physics-support/step2-prerequisites.mjs','check','--run',ctx.run,'--generation',String(entry.number)], {
+      liveness:{pattern:'step2-prerequisites: (\\d+) items constructed',min:1,unit:'supplemental items'},
+      ownerReviewInputs:[`research/${ctx.run}-step2-prerequisites.json`,entry.request.path,
+        'tools/physics-autopilot/src/step2-prerequisites.mts','tools/physics-support/step2-prerequisites.mjs',
+        ...Object.keys(entry.protected_native??{}),...Object.keys(entry.inputs).filter((path:string)=>!/-scope-review\/batch-\d+\/state\.json$/.test(path))],
+    }),
+    gate('physics-content',['node','tools/physics-support/physics-check.mjs','--run',ctx.run]),
+    batchLevelsGate(ctx),
+    gate('item-dependency-levels',['node','tools/physics-support/item-dependency-levels.mjs','check','--run',ctx.run]),
+    scopeGate(ctx), ...coverageGates(ctx,{requireDestination:true}), ...policyGates(ctx), planGate(ctx), extGate(ctx), policyItemGate(ctx),
+    ...contractGates(ctx), ...repoWide(ctx).filter((g:any)=>g.id!=='splice-verify'),
+    gate('supplemental-url-liveness',['node','tools/physics-support/url-sweep.mjs','--coverage',...coverage,'--out',liveness,'--recover','--fail-on-dead'],{
+      liveness:{pattern:'(\\d+) citation decision\\(s\\)',min:1,unit:'citation decisions'},
+    }),
+    gate('supplemental-source-backing',['node','tools/physics-support/source-backing.mjs','--coverage',coverage.join(','),'--liveness',liveness,
+      '--reharvest-plan',`research/${ctx.run}-prerequisite-${entry.number}-reharvest-plan.json`],{
+      liveness:{pattern:'(\\d+) authored result\\(s\\)',min:1,unit:'authored results'},
+    }),
+    gate('supplemental-source-fetch',['node','tools/physics-support/source-fetch-check.mjs','--coverage',coverage.join(',')],{
+      liveness:{pattern:'(\\d+)/\\d+ source\\(s\\) resolved',min:1,unit:'sources resolved'},
+    }),
+  ];
+}
 export const stagesForRun = (ctx: any) => {
   assertFreshStep6State(ctx, { physics: true });
   // No prose obligation means no author stage; the final pathway gate remains.
-  return appendStages(stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0), ctx);
+  return step2PrerequisiteStages(appendStages(stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0), ctx),ctx,{
+    artifacts:(context:any,unit:string)=>[...scaffoldArtifacts(context,unit),...authorArtifacts(context,unit)],
+    gates:supplementalConstructionGates,
+  });
 };
 export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };

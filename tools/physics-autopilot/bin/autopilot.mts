@@ -9,6 +9,8 @@
 //   autopilot pause | resume | stop | report
 //   autopilot retry [--unit N]
 //   autopilot refresh --run RUN --stage 1-scaffold --unit N --reason TEXT
+//   autopilot prerequisites register --run RUN --request FILE --state-dir DIR
+//   autopilot prerequisites finish --run RUN --state-dir DIR
 //
 // The daily shape this is built for:
 //   cd <repo> && autopilot frontier            # see what is buildable
@@ -33,6 +35,7 @@ import { writeCommand } from '../src/control.mts';
 import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
+import { registerStep2Prerequisites, finishStep2Prerequisites, assertNoPrerequisiteTransaction } from '../src/step2-prerequisites.mts';
 import { doctor } from '../src/doctor.mts';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { formatProblems } from '../src/spec.mts';
@@ -314,6 +317,17 @@ switch (cmd) {
     break;
   }
 
+  case 'prerequisites': {
+    const run=opt('run')??die('--run is required');
+    const action=argv[1], config=loadConfig();
+    if(!['register','finish'].includes(action))die('prerequisites register --request FILE | finish --run RUN --state-dir DIR');
+    const result=action==='register'
+      ? registerStep2Prerequisites({repo,run,stateDir:config.stateDir,request:opt('request')??die('--request is required')})
+      : finishStep2Prerequisites({repo,run,stateDir:config.stateDir});
+    console.log(`Supplemental prerequisite generation ${result.number}: batches ${result.batches.join(', ') || '(owner additions only)'}. Registration grants no acceptance or original Step-1 coverage.`);
+    break;
+  }
+
   case 'plan': {
     const { spawnSync } = await import('node:child_process');
     const run = opt('run') ?? die('--run is required');
@@ -486,6 +500,7 @@ switch (cmd) {
 
   case 'start': {
     assertNoAppendTransaction(loadConfig().stateDir);
+    assertNoPrerequisiteTransaction(loadConfig().stateDir);
     const run = opt('run');
     // Validate BEFORE detaching. A spec defect found by the detached child is a
     // blocker in a log nobody is reading yet; found here it is a message on the

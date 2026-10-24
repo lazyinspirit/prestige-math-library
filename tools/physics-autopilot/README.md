@@ -14,6 +14,16 @@ Current revision: `physics-six-step-v1-construction-scope`. Use fresh run state.
 Run the scope-review controls from `physics/` through its `tools` symlink. The CLI resolves the symlink before dispatching `check` or `owner-resolve`; missing current batch acceptance fails with a nonzero exit code.
 Scope repairers use the existing cognitive `authoring` job classification, so dispatch preflight permits their substantive proof and prerequisite repairs. Their batch ownership and bounded review history still apply.
 
+For Root-approved missing mathematical pairs during unfinished Step 2,
+`autopilot.mts prerequisites register --run RUN --state-dir DIR --request FILE`
+adds separate native supplemental construction and ordinary new-batch scope
+review. `prerequisites finish` completes an interrupted exact journal installation.
+The stopped/drained boundary, committed original metadata, source ownership,
+fresh import authority and no-backup transaction protocol are specified in
+[physics/WORKFLOW.md](../../physics/WORKFLOW.md#supplemental-prerequisites-while-step-2-is-unfinished).
+Registration writes no acceptance or retrospective Step-1 coverage. Without a
+registry the existing stage/worker/gate descriptors remain unchanged.
+
 Step 3 ends after independent batch readers, refuters and routed adjudicators, the exact post-3a baseline, and mechanical `3a-close` history freeze. The original adjudication gate battery remains the review boundary. There is no cross-batch review, unfinished-review continuation or impact-audit duty after that boundary; dependency levels prioritize initial authoring while independent review retains its own prerequisites. Historical Step-3b receipts remain historical evidence.
 
 Within the Step-3 pipeline, ready downstream work gets available slots before

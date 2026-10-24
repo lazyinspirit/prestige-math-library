@@ -381,6 +381,140 @@ resolution only after source writers drain. This never dispatches another engine
 review, restores a spent local repair, or replaces the orchestrator's pre-battery
 work.
 
+## Supplemental prerequisites while Step 2 is unfinished
+
+The physics-only `prerequisites register` transaction supports explicitly
+Root-approved missing mathematical prerequisites discovered in Step 2. It does
+not reopen Step 1, extend its historical review coverage, or resolve the
+originating escalation. Without a registration registry, stage composition,
+units, workers and gates are unchanged. The existing Step-1 `plan --append`
+boundary remains strict.
+
+Root first pauses dispatch, drains every native/adopted/outside source writer,
+and stops the controller and preflight processes. The exact unfinished paused
+stage must be `2-scope-review`, original `1-scaffold` must have passed, and no
+later stage may have entered. Both controller locks and the shared metadata lock
+are checked, alongside process scanning and Root's explicit drained attestation.
+The state directory and state file must resolve regularly inside the physics
+workspace; symlinks, dangling target links and nonregular inputs are rejected.
+Commit the current canonical plan, all existing manifests, scope ledger, covers,
+group assignment and dependency-level metadata on main before registration.
+Original source repairs and any existing page's inventory update must already
+be in their intended form: supplemental authors cannot change original sources.
+An exact argument may honestly depend on a pending supplier; that supplier is
+not accepted or proved merely because it is planned.
+
+From the physics workspace:
+
+```bash
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts prerequisites register \
+  --run RUN --state-dir .physics-autopilot/RUN \
+  --request research/RUN-step2-prerequisite-request-1.json
+```
+
+The version-1 request has `run`, `reviewer: "/root"`, a substantive `reason`
+(at least 80 characters), the exact 40-hex `base_commit`,
+`writers_drained: true`, `writer_scopes: []`, `escalation: {path, sha256}`
+naming the actual current held `RUN-scope-review/batch-N/state.json`, and
+nonempty `evidence: [{path, sha256}]` naming genuine source/design work.
+Every evidence path is a regular run-local research file. `pairs` contains
+`{pages: [A, B]}` entries with complete new reciprocal mathematical declarations:
+unique identity, category, order, `requires`, and nonempty exact item objects
+with `id`, `kind`, `domain`, `library`, `statement` and `deps`. Both pages use
+`library: mathematics`; item domains are mathematics. These are scope promises,
+not proof acceptance. Draft carriers may be incomplete or absent.
+
+Every already existing new-pair item/page carrier also requires exactly one
+`source_adoptions` entry: `{path, sha256, page, ownership:
+"unowned-local-draft", reason}`. The reason concretely explains Root's source
+ownership grant (at least 40 characters); `sha256` binds the actual current draft
+bytes. This grants subsequent scoped native authorship, not proof acceptance.
+Missing carriers need no entry. The lightweight actual identity/alias/page-home
+index rejects collisions even outside the canonical plan. Any foreign run's
+manifest claim remains blocking, including for a draft with an adoption entry.
+Nonempty foreign `pipeline_run` markers also block adoption even when their
+manifest no longer exists; this route supplies no orphaned foreign-owner release.
+The relevant ownership projection is rechecked before install and interrupted
+completion; unrelated prose is not an ownership claim.
+
+New pairs get fresh contiguous batch IDs after the current frontier. Original
+inventory promises retain their contents and relative order; only explicitly
+listed existing-page additions alter old manifests. Batch IDs, original group
+membership and source/native history remain intact.
+The ordinary prospective plan validator checks identities, prerequisite closure,
+ordering and cycles before installation. Do not omit a real edge to evade a
+page cycle; suppliers and consumers need a genuinely consistent placement.
+The transaction adds canonical declarations/manifests, extends the owed scope,
+covers and groups, derives the full dependency graph and writes exact new tasks.
+
+`research/RUN-step2-prerequisites.json` records the original construction units
+and separate supplemental generations. Each generation with new batches inserts
+`2-prerequisite-construct-N` after the completed Step-1 prefix and before the
+unfinished scope review. Actual Luna-max authors use distinct
+`beta-prerequisite-N-batch-B.result.json` identities. They author only their new
+pair's sources and actual batch evidence, preserve exact approved inventory,
+complete contracts, source coverage and current readiness, and escalate gaps.
+No original `beta-batch-B` result, Step-1 gate pass or scope acceptance is written.
+The original Step-1 unit projection remains frozen; Step 2 and later stages use
+all actual current manifests.
+
+Supplemental construction retains the complete current-frontier content,
+metadata, dependency, policy, contract, finite-check and gate-liveness duties,
+plus new-item readiness and exact supplemental source coverage/fetch/backing
+checks. Source outputs have separate generation filenames. Compact-page
+preparation waits for the supplemental authors to drain. Root still resolves
+all escalations and supplies fresh ordinary full-frontier owner preparation
+before any battery. Registered declarations, missing carriers, incomplete proofs
+or successful processes alone cannot pass construction. Original item/page
+sources, manifests and native receipts are digest-protected through this join;
+finish their intended original repairs before registration or wait until the
+supplemental join completes. Once constructed, new batches automatically enter
+the ordinary two-review/one-local-repair Step-2 loop with fresh counters.
+Supplemental failures write `RUN-prerequisite-N-blockers.json`; original
+`RUN-step1-blockers.json` remains historical evidence.
+
+An already genuinely authored local prerequisite may instead be appended to an
+existing held batch's A page through
+`additions: [{batch, page, items, review:{path,sha256}}]`.
+Optional `before: "EXISTING_ITEM_ID"` inserts its suppliers before an existing
+consumer without changing the relative order of any original items; otherwise
+the additions append. The actual page inventory must already match that order.
+This does not dispatch another author for that existing batch. Root's immutable
+review JSON has `run`, `reviewer: "/root"`, `native_review: false`,
+`decision: "accept"`, a substantive `reason`, exact added `items`, their current
+`source_sha256` map, and complete current `consumer_checks` with `id`,
+`decision: "accept"` or `"unaffected"`, and a concrete `reason` (at least 40
+characters). `consumer_sha256` binds exactly every actual direct/indirect
+consumer, including aliases and nonlogical uses; use an empty map/list only
+when no such consumer exists. Root first updates the actual page inventory and
+supplies genuine owning contracts and source coverage. Registration adds only
+the declared plan/manifest inventory. Ordinary `owner-resolve` then binds the
+expanded inventory and actual review while preserving previous observations,
+review counters and repair budget. Source/review drift remains blocking until
+Step 2 closes; genuine later native repairs do not erase historical acceptance.
+
+Import snapshots and pins never change. Enlarging the manifest frontier or
+adding an item invalidates the exact existing authored-frontier original
+successor authority. Root must supply fresh actual bindings to the complete new
+frontier, declarations and reached consumer sources before authorizing the
+ordinary battery. A previous run's or previous scope's receipt is not reusable
+authority. Registration neither generates that scientific review nor relaxes
+the import guard.
+
+This route creates **no backups or preimage copies**. Prior committed versions
+are identified by existing Git commit/blob objects; original native history is
+retained. Every prospective output is validated/precomputed before installation.
+A durable exclusive lock and digest-only journal guard atomic file replacements;
+temporary files contain prospective output only. Native state is not edited.
+An interruption blocks controller start. With the same stopped/drained boundary,
+`prerequisites finish --run RUN --state-dir .physics-autopilot/RUN` checks every
+target against its exact before/after digest before completing that same
+transaction. Unexpected edits, changed evidence/state, missing prospective bytes
+or an interruption before the complete journal cause a fail-closed refusal;
+there is no automatic rollback or replacement acceptance. The completed journal
+is retained as immutable digest evidence. Root owns inspection and any further
+reconciliation.
+
 ## Independent review through closeout
 
 Defect evidence may identify a repository path or an absolute HTTP(S) source
