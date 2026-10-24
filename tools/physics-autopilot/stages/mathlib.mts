@@ -34,6 +34,7 @@ import { appendStages } from '../src/frontier-append.mts';
 import { originalConstructionBatches, step2PrerequisiteStages } from '../src/step2-prerequisites.mts';
 import {repairReviewInputs,repairGraphFingerprint} from '../../physics-support/step2-prerequisite-repairs.mjs';
 import {authoredMetadataReviewInputs} from '../../physics-support/step2-authored-metadata.mjs';
+import {prerequisiteLifecycleBinding} from '../../physics-support/step2-prerequisite-lifecycle.mjs';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
@@ -1333,11 +1334,11 @@ export const stages = [
       const eligible = pending.filter(u => engineRepairEligible(ctx,u));
       return batchPlans(ctx, eligible,slots);
     },
-    gates: (ctx: any) => [scopeGate(ctx),
-      gate('batch-scope-review', ['node', 'tools/physics-support/batch-scope-review.mjs', 'check', '--run', ctx.run]),
+    gates: (ctx: any) => {const lifecycle=prerequisiteLifecycleBinding(ctx.repo,ctx.run);return [scopeGate(ctx),
+      gate('batch-scope-review', ['node', 'tools/physics-support/batch-scope-review.mjs', 'check', '--run', ctx.run,...(lifecycle?['--prerequisite-lifecycle-sha256',lifecycle.fingerprint]:[])],lifecycle?{ownerReviewInputs:lifecycle.inputs}:{}),
       gate('item-dependency-levels', ['node', 'tools/physics-support/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       ...coverageGates(ctx, {requireDestination:true}), manifestDepsGate(ctx), extGate(ctx), fetchGate(ctx),
-      ...repoWide(ctx).filter(g => g.id !== 'splice-verify'), policyItemGate(ctx), ...contractGates(ctx)],
+      ...repoWide(ctx).filter(g => g.id !== 'splice-verify'), policyItemGate(ctx), ...contractGates(ctx)];},
     onHold: holdStep1,
   },
 

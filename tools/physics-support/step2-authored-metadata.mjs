@@ -4,6 +4,7 @@ import {runPages,dependencyLevels} from './item-dependency-levels.mjs';
 import {checkBatchDependencyLevels} from './batch-dependency-levels.mjs';
 import {readItem} from './physics-content.mjs';
 import {consumers} from './batch-scope-review.mjs';
+import {nativePrerequisiteLifecycle} from './step2-prerequisite-lifecycle.mjs';
 
 export const authoredMetadataPath=(run,number)=>{repairPaths(run,number);return `research/${run}-prerequisite-${number}-authored-metadata.json`;};
 const fields=new Set(['statement','sources','title','deps','dependency_roles','proof_strategy','provenance']);
@@ -19,7 +20,7 @@ function nativeResult(root,run,entry,batch){
   p.assert(result.run===run&&result.role==='beta'&&result.label===label&&p.same(result.covers,[batch])&&result.attempt===dispatch.attempt&&result.ok===true&&result.exit_code===0&&!result.timed_out&&result.ended_at&&(!result.stage||result.stage===stage),'successful matching native supplemental result required');
   return {path,sha256:p.digest(root,path),dispatch};
 }
-function validate(root,run,entry,req,{replay=false}={}){
+function validate(root,run,entry,req,{replay=false,lifecycle=null}={}){
   const p=prerequisiteRepairProtocol(),pages=runPages(root,run),owned=new Map(pages.filter(page=>entry.batches.includes(page.batch)).flatMap(page=>page.items.map(item=>[item.id,{item,page}])));
   p.assert(Array.isArray(req.items)&&req.items.length&&new Set(req.items).size===req.items.length&&req.items.every(id=>entry.items.includes(id)&&owned.has(id)),'only declared supplemental item IDs may be reconciled');
   const ids=new Set(req.items),levels=dependencyLevels(pages);p.assert(!levels.errors.length,levels.errors.join('; '));
@@ -30,7 +31,7 @@ function validate(root,run,entry,req,{replay=false}={}){
     const key=`${change.path}#${change.pointer}`;p.assert(!unique.has(key)&&metadataPaths.includes(change.path),'duplicate/unowned authored metadata pointer');unique.add(key);
     const before=selection(root,change.path,change.pointer,baseline),after=selection(root,change.path,change.pointer),source=readItem(p.file(root,`items/${before.row.id}.md`));
     const expected=after.field==='statement'?repairPublicSection(source.raw):source[after.field];
-    p.assert(ids.has(before.row.id)&&after.row.id===before.row.id&&repairValueDigest(before.value)===change.before_sha256&&repairValueDigest(after.value)===change.after_sha256&&p.same(after.value,expected),'authored pointer must exactly mirror current selected source');
+    p.assert(ids.has(before.row.id)&&after.row.id===before.row.id&&repairValueDigest(before.value)===change.before_sha256&&repairValueDigest(after.value)===change.after_sha256&&(p.same(after.value,expected)||lifecycle?.owns(`items/${before.row.id}.md`)),'authored pointer must exactly mirror current selected source');
   }
   for(const path of metadataPaths){
     const beforeRaw=p.gitSource(root,baseline,path),before=JSON.parse(beforeRaw),after=p.json(root,path);
@@ -46,13 +47,17 @@ function validate(root,run,entry,req,{replay=false}={}){
     if(!replay)p.assert(p.same(normalize(before),normalize(after)),'authored adoption changed inventory, original rows or public scope metadata');
   }
   p.assert(Array.isArray(req.reviews)&&req.reviews.length===ids.size&&new Set(req.reviews.map(row=>row.id)).size===ids.size,'exact authored source reviews required');
+  const graph=p.currentGraph(root);
   for(const review of req.reviews){
-    p.assert(ids.has(review.id)&&review.scope_preserved===true&&p.text(review.scientific_review)&&p.text(review.reference_review)&&review.source_sha256===p.digest(root,`items/${review.id}.md`),'actual current full-scope and reference review required');
+    const sourcePath=`items/${review.id}.md`,native=()=>lifecycle?.owns(sourcePath);
+    p.assert(ids.has(review.id)&&review.scope_preserved===true&&p.text(review.scientific_review)&&p.text(review.reference_review)&&(review.source_sha256===p.digest(root,sourcePath)||lifecycle&&review.source_sha256===lifecycle.atAdmission(sourcePath)&&native()),'actual current full-scope and reference review required');
     const declared=owned.get(review.id).item,source=readItem(p.file(root,`items/${review.id}.md`));
     p.assert(source.id===review.id&&source.kind===declared.kind&&source.domain===declared.domain&&source.library===declared.library&&source.status==='draft'&&(!source.pipeline_run||source.pipeline_run===run),'authored identity/domain/library/status changed');
-    const affected=consumers(root,[review.id]).map(row=>row.id).sort();
-    p.assert(Array.isArray(review.consumer_checks)&&p.same(review.consumer_checks.map(row=>row.id).sort(),affected)&&review.consumer_checks.every(row=>['accept','unaffected'].includes(row.decision)&&p.text(row.reason)&&row.sha256===p.digest(root,`items/${row.id}.md`)),'authored same-owner consumer checks incomplete/stale');
-    p.assert(p.same(source.deps,declared.deps)&&declared.dependency_level===levels.levels.get(review.id),'authored deps/levels do not match source');
+    const affected=consumers(root,[review.id],[],graph).map(row=>row.id).sort();
+    const reviewed=review.consumer_checks?.map(row=>row.id).sort();
+    const exact=Array.isArray(review.consumer_checks)&&(p.same(reviewed,affected)||lifecycle&&affected.every(id=>reviewed.includes(id)||lifecycle.owns(`items/${id}.md`))&&reviewed.every(id=>affected.includes(id)||native()));
+    p.assert(exact&&review.consumer_checks.every(row=>['accept','unaffected'].includes(row.decision)&&p.text(row.reason)&&(row.sha256===p.digest(root,`items/${row.id}.md`)||lifecycle&&row.sha256===lifecycle.atAdmission(`items/${row.id}.md`)&&lifecycle.owns(`items/${row.id}.md`))),'authored same-owner consumer checks incomplete/stale');
+    p.assert((p.same(source.deps,declared.deps)||native())&&declared.dependency_level===levels.levels.get(review.id),'authored deps/levels do not match source');
   }
   if(!replay)checkBatchDependencyLevels(root,run);
   return {pages,owned};
@@ -75,7 +80,9 @@ export function checkedAuthoredMetadata(root,run,entry){
   const p=prerequisiteRepairProtocol(),path=authoredMetadataPath(run,entry.number);if(p.absent(root,path))return {manifests:{}};
   const row=p.json(root,path);p.assert(row.version===1&&row.run===run&&row.generation===entry.number&&row.reviewer==='/root'&&row.scientific_acceptance===false,'invalid authored metadata receipt');
   p.ref(root,run,row.request);row.evidence.forEach(ref=>p.ref(root,run,ref));
-  const req=p.json(root,row.request.path),validated=validate(root,run,entry,req,{replay:true});
+  const lifecycle=nativePrerequisiteLifecycle(root,run,entry);
+  if(lifecycle)for(const file of [path,row.request.path,...row.evidence.map(ref=>ref.path),...row.results.map(ref=>ref.path)])lifecycle.bind(file);
+  const req=p.json(root,row.request.path),validated=validate(root,run,entry,req,{replay:true,lifecycle});
   if(p.absent(root,repairPaths(run,entry.number).authorization))p.assert(p.digest(root,'research/plan-spec.json')===row.plan_sha256,'authored canonical plan changed before original repair admission');
   for(const result of row.results){p.ref(root,run,result);const batch=result.dispatch.covers[0];p.assert(p.same(nativeResult(root,run,entry,batch),result),'native authored result/dispatch changed');}
   p.assert(p.same(row.results.map(row=>row.dispatch.covers[0]).sort(),[...new Set(req.items.map(id=>validated.owned.get(id).page.batch))].sort()),'authored receipt native batch ownership incomplete');

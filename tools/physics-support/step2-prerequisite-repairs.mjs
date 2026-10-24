@@ -15,6 +15,7 @@ import {frontmatterList} from './frontmatter-list.mjs';
 import {checkedAuthoredMetadata,authoredMetadataPath} from './step2-authored-metadata.mjs';
 import {yaml} from './pathway-lib.mjs';
 import {importedPlanPage} from './imported-plan-pages.mjs';
+import {nativePrerequisiteLifecycle} from './step2-prerequisite-lifecycle.mjs';
 
 const assert=(ok,message)=>{if(!ok)throw Error(`Prerequisite repair: ${message}`);};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -225,7 +226,7 @@ function validateMetadata(root,run,entry,auth,ids){
     assert(owned&&planned&&same(source.requires,owned.requires)&&same(source.requires,planned.requires),'page requires mirrors do not match current source');
   }
 }
-function reviewedSources(root,run,req,entry,auth){
+function reviewedSources(root,run,req,entry,auth,lifecycle=null){
   assert(auth.run===run&&auth.generation===entry.number&&Array.isArray(req.reviews)&&req.reviews.length===Object.keys(auth.sources).length,'exact source reviews required');
   const sources={},ids=new Set(Object.keys(auth.sources).map(path=>path.slice(6,-3)));
   const graph=currentGraph(root);
@@ -240,7 +241,7 @@ function reviewedSources(root,run,req,entry,auth){
     assert(Array.isArray(review.consumer_checks)&&text(review.scoped_use_justification),'scoped supplier-use justification required');
     const affected=affectedConsumers(root,auth,review.id,graph);
     if(changed)assert(same(review.consumer_checks.map(row=>row.id).sort(),affected),'changed interface requires full same-owner consumer cone');
-    assert(review.consumer_checks.every(row=>affected.includes(row.id)&&['accept','unaffected'].includes(row.decision)&&text(row.reason)&&row.sha256===digest(root,`items/${row.id}.md`)),'stale/invalid consumer checks');
+    assert(review.consumer_checks.every(row=>affected.includes(row.id)&&['accept','unaffected'].includes(row.decision)&&text(row.reason)&&(row.sha256===digest(root,`items/${row.id}.md`)||lifecycle&&row.sha256===lifecycle.atAdmission(`items/${row.id}.md`)&&lifecycle.owns(`items/${row.id}.md`))),'stale/invalid consumer checks');
     sources[path]=review.after_sha256;
   }
   return {sources,ids};
@@ -266,9 +267,11 @@ export function checkedRepairOverlay(root,run,entry){
   const auth=json(root,paths.authorization);checkAuthorization(root,run,entry,auth);
   assert(!absent(root,paths.completion),'authorized repair incomplete; full battery blocked');
   const done=json(root,paths.completion);ref(root,run,done.authorization);ref(root,run,done.request);done.evidence.forEach(value=>ref(root,run,value));
+  const lifecycle=nativePrerequisiteLifecycle(root,run,entry);
+  if(lifecycle)for(const path of [paths.authorization,paths.completion,auth.request.path,done.request.path,...auth.evidence.map(ref=>ref.path),...done.evidence.map(ref=>ref.path)])lifecycle.bind(path);
   assert(done.version===1&&done.scientific_acceptance===false&&done.authorization.path===paths.authorization&&done.run===run&&done.generation===entry.number&&done.reviewer==='/root'&&same(Object.keys(done.sources).sort(),Object.keys({...auth.sources,...auth.page_sources}).sort())&&same(Object.keys(done.metadata).sort(),Object.keys(auth.metadata).sort()),'invalid repair completion');
   for(const [path,expected] of Object.entries({...done.sources,...done.metadata}))assert(digest(root,path)===expected,`repair receipt stale ${path}`);
-  const req=json(root,done.request.path),reviewed=reviewedSources(root,run,req,entry,auth),pages=reviewedPages(root,run,req,auth);
+  const req=json(root,done.request.path),reviewed=reviewedSources(root,run,req,entry,auth,lifecycle),pages=reviewedPages(root,run,req,auth);
   assert(same({...reviewed.sources,...pages.sources},done.sources)&&same(pages.context,done.page_context??{}),'completion source/context review map changed');
   return done;
 }

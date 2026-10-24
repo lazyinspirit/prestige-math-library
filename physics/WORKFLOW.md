@@ -1815,3 +1815,16 @@ plan/manifest requires pointers. Published mathematical context may be local or
 imported, but is not edited. The existing repair completion receipt binds the
 used context and replay checks it. Full current-frontier validation at original
 repair completion and all ordinary native gates remain mandatory.
+
+
+After a genuine supplemental construction pass, its new items may undergo the
+ordinary native Step-2 local repair lifecycle. The admission guard authenticates
+the complete native passed battery/owner history and immutable admission inputs,
+then recognizes only exact later native new-batch write-file ownership. Active
+or returned-but-uncollected work retains that assignment; native collection
+captures actual owned-file hashes, which must remain current afterward. Old
+Root-repaired sources/pages and current addition-consumer review remain strict.
+This creates no acceptance or metadata waiver: native repair/final-review and
+fresh Root preparation/full gates still apply. Owner currency binds stable
+history/assignment/result inputs and derived lineage, never the whole changing
+driver state/events files. See the native physics README lifecycle section.

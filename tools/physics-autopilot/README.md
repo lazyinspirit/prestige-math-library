@@ -327,3 +327,41 @@ completion's admitted source. Pending repairs, altered evidence, unadmitted or
 later source edits fail. The original full current consumer selection and actual
 review dispositions remain required, and explicit native owner adoption remains
 separate. This does not rehash old reviews or create acceptance/coverage.
+
+
+### Admission lifecycle after supplemental construction passes
+
+While construction is unfinished, authored metadata and original repair
+admissions still require their exact current source/consumer bytes. Once that
+supplemental stage actually passes, its new items can enter ordinary native
+Step-2 local repair. Historical admission does not freeze those assignments
+forever. The replay guard authenticates the native closed stage stamps, complete
+frontier owner snapshot/receipt and consumed attempt, and the recorded successful
+required-gate results plus gates-ok/stage-clear event fragment. Admission
+requests, receipts, evidence and original author results must remain exactly
+bound by that successful history. A stamp alone or partial/failed/tampered
+history cannot activate this lifecycle.
+
+Only new-generation source files listed in an actual subsequent native
+scope-repair input may vary. The full exact batch inventory and write_files,
+post-construction initial native review, repair dispatch role/label/attempt and
+result/report lineage are checked. write_batches is not source permission.
+Active and successful returned-but-uncollected repairs retain their current
+exact assignment. A valid terminal escalation retains source ownership while
+the existing collector routes the batch into its owner hold, not acceptance. Native collection now records actual write-file SHA256 values
+in the repair entry without asserting acceptance; collected sources must remain
+at those bytes. At a real new-batch hold, the existing explicit Root owner-resolve
+API may record the actual new-owned source hashes in its existing owner receipt;
+only those exact accepted owner-resolution bytes can supersede the collection
+hashes. No old-source permission is added. A later unowned edit, out-of-scope source, malformed history or
+missing ownership fails. Original Root-repaired item/page bytes and the full
+current owner-addition consumer selection remain protected. Historical authored
+consumer hashes may follow only those same native-owned new files.
+
+The ordinary native consumer checks, final review, fresh Root preparation and
+full Step-2 battery remain required. Historical admission does not grant batch
+acceptance or allow arbitrary manifest reconciliation. The scope gate binds the
+immutable owner-history file, assignment/task/report/result inputs and a stable
+derived pass/dispatch/collection fingerprint. It never binds the whole mutable
+driver state or events file; appended reports and an incomplete trailing append
+do not invalidate the already completed historical event fragment.

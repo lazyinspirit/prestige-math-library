@@ -5,16 +5,18 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import {fileURLToPath} from 'node:url';
 import {
   preparePrerequisiteRegistration, installPrerequisiteRegistration,
   finishPrerequisiteRegistration, prerequisiteRegistry, prerequisiteBoundary,
   assertNoPrerequisiteTransaction, checkOwnerAdditions,checkSupplement,
 } from './step2-prerequisites.mjs';
-import { batchInput, accepted,resolveOwner } from './batch-scope-review.mjs';
+import { batchInput, accepted,resolveOwner,collectBatch } from './batch-scope-review.mjs';
 import {authorizePrerequisiteRepairs,completePrerequisiteRepairs,checkedRepairOverlay,repairReviewInputs,repairPaths,repairValueDigest,repairPublicSection,repairGraphFingerprint} from './step2-prerequisite-repairs.mjs';
 import {writeBatchDependencyLevels} from './batch-dependency-levels.mjs';
 import {gateReviewSnapshot} from '../physics-autopilot/src/owner-gate-recertification.mjs';
 import {adoptAuthoredMetadata,checkedAuthoredMetadata,authoredMetadataPath,authoredMetadataReviewInputs} from './step2-authored-metadata.mjs';
+import {nativePrerequisiteLifecycle,prerequisiteLifecycleBinding} from './step2-prerequisite-lifecycle.mjs';
 
 const run = 'fixture-prerequisites';
 const digest = value => createHash('sha256').update(value).digest('hex');
@@ -278,8 +280,8 @@ test('owner addition successor does not waive consumer selection or stale repair
   }
 });
 
-function authoredFixture(t){
-  const f=repairFixture(t),manifest=`research/${run}-batch-3.pages.json`,pages=f.json(manifest),plan=f.json('research/plan-spec.json'),id='lem-new-one',source=`items/${id}.md`;
+function authoredFixture(t,{ownerAddition=false}={}){
+  const f=repairFixture(t,{ownerAddition}),manifest=`research/${run}-batch-3.pages.json`,pages=f.json(manifest),plan=f.json('research/plan-spec.json'),id='lem-new-one',source=`items/${id}.md`;
   f.put(source,`---\nid: ${id}\nkind: lemma\ndomain: mathematics\nlibrary: mathematics\nstatus: draft\npipeline_run: ${run}\ndeps: []\nsources: {references: [{title: Actual author fixture reference, url: https://example.invalid/full-text}]}\n---\n## Statement\n\nActual complete approved clarification.\n`);
   const sourceItem={statement:'Actual complete approved clarification.',sources:{references:[{title:'Actual author fixture reference',url:'https://example.invalid/full-text'}]}};
   const base=f.json(f.authorization).base_commit,changes=[];
@@ -319,6 +321,75 @@ test('new-author metadata rejects unfinished/failed native authors, old source e
     if(mode==='mirror'){const req=f.json(f.adoptRequest);req.metadata_changes[0].after_sha256=repairValueDigest('Invented narrowed assertion.');f.put(f.adoptRequest,req);}
     assert.throws(f.adopt,/drained|successful|old-source|original rows|exactly mirror/);
     assert.equal(existsSync(join(f.root,authoredMetadataPath(run,1))),false);
+  }
+});
+
+function lifecycleFixture(t){
+  const f=authoredFixture(t,{ownerAddition:true});f.adopt();
+  for(const args of [['add','.'],['commit','-qm','Exact adopted construction metadata']])assert.equal(spawnSync('git',args,{cwd:f.root}).status,0);
+  const auth=f.json(f.authorization);auth.base_commit=spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim();f.put(f.authorization,auth);f.authorize();f.after();f.complete();
+  const pages=f.json(f.manifest),items=pages.flatMap(page=>page.items.map(item=>item.id)),pageIds=pages.map(page=>page.id),files=[...items.map(id=>`items/${id}.md`),...pages.map(page=>`library/${page.category}/${page.id}.md`)];
+  for(const item of pages.flatMap(page=>page.items))if(!existsSync(join(f.root,`items/${item.id}.md`)))f.put(`items/${item.id}.md`,`---\nid: ${item.id}\nkind: ${item.kind}\nstatus: draft\ndomain: mathematics\nlibrary: mathematics\ndeps: []\n---\n## Statement\n\n${item.statement}\n`);
+  for(const page of pages)f.put(`library/${page.category}/${page.id}.md`,`---\npage: ${page.id}\nstatus: draft\nitems: ${JSON.stringify(page.items.map(item=>item.id))}\n---\n`);
+  const stage='2-prerequisite-construct-1',attempt='abcdef01-0000-4000-8000-000000000001',historyPath=`.physics-autopilot/${run}/owner-gate-history/${attempt}.json`;
+  const gates=[{id:'supplemental-construction',argv:['true'],ownerReviewInputs:[...repairReviewInputs(f.root,run,1),...authoredMetadataReviewInputs(f.root,run,1)]},{id:'ordinary-native-test',argv:['true']}];
+  const snapshot=gateReviewSnapshot({repo:f.root,run},gates,[stage]);
+  const receipt={version:2,attempt,snapshotSha256:snapshot.sha256,reviewer:'/root',recertificationScope:'formatting-metadata-only',writersDrained:true,writerScopes:[],reviewStartedAt:'2026-01-05T00:01:00.000Z',reviewedAt:'2026-01-05T00:02:00.000Z',items:snapshot.items.map(item=>({...item,verdict:'format-metadata-pass',formatting:{verdict:'pass',evidence:'Actual controlled native fixture formatting check.'},metadata:{verdict:'pass',evidence:'Actual controlled native fixture metadata check.'}}))};
+  f.put(historyPath,{request:{version:2,attempt,createdAt:'2026-01-05T00:00:00.000Z',consumedAt:'2026-01-05T00:03:00.000Z',snapshot},receipt});
+  const eventsPath=`.physics-autopilot/${run}/events.jsonl`,events=[{at:'2026-01-05T00:04:00.000Z',type:'owner-gate-authorized',attempt,ok:true},...gates.map(gate=>({at:'2026-01-05T00:05:00.000Z',type:'gate',id:gate.id,ok:true,code:0})),{at:'2026-01-05T00:06:00.000Z',type:'gates-ok',message:`${stage}: all gates green`},{at:'2026-01-05T00:06:00.000Z',type:'stage-clear',message:`${stage} cleared — exact fixture native battery`}];f.put(eventsPath,events.map(row=>JSON.stringify(row)).join('\n')+'\n');
+  const state=f.json(f.statePath);state.stage='2-scope-review';state.stages[stage].gatesPassedAt=state.stages[stage].doneAt='2026-01-05T00:06:00.000Z';f.put(f.statePath,state);
+  const dir=`research/${run}-scope-review/batch-3`,label='scope-repair-3-1';
+  const input={phase:'repair',round:1,role:'scope-repairer',label,simple_loop:true,inventory:{items,pages:pageIds},write_files:files,before_interfaces:{'lem-new-one':[null,'## Statement\n\nActual complete approved clarification.']},consumer_scope:[]};
+  f.put(`${dir}/repair-1.input.json`,input);f.put(`${dir}/repair-1.task.md`,'Actual native fixture assigned source files only.\n');
+  f.put(`${dir}/state.json`,{version:1,run,batch:'3',phase:'repair',reviews:[{round:0,decision:'repair'}],repairs:[],prepared:input});
+  f.put(`${dir}/review-0.json`,{version:1,run,batch:'3',round:0,decision:'repair',reviewed_items:items,reviewed_pages:pageIds,findings:[],consumer_checks:[]});
+  f.put(`research/${run}-dispatch/scope-reviewer-scope-review-3-0.result.json`,{run,role:'scope-reviewer',label:'scope-review-3-0',covers:['3'],attempt:1,ok:true,exit_code:0});
+  const active=f.json(f.statePath);active.dispatches['2-scope-review:scope-review-3-0']={stage:'2-scope-review',role:'scope-reviewer',label:'scope-review-3-0',covers:['3'],attempt:1,startedAt:'2026-01-05T00:08:00.000Z',endedAt:'2026-01-05T00:09:00.000Z',lastExitOk:true};active.dispatches[`2-scope-review:${label}`]={stage:'2-scope-review',role:'scope-repairer',label,covers:['3'],attempt:1,startedAt:'2026-01-05T00:10:00.000Z',endedAt:null,lastExitOk:null};f.put(f.statePath,active);
+  const finish=(decision='accept')=>{const state=f.json(f.statePath);Object.assign(state.dispatches[`2-scope-review:${label}`],{endedAt:'2026-01-05T00:11:00.000Z',lastExitOk:true});f.put(f.statePath,state);f.put(`research/${run}-dispatch/scope-repairer-${label}.result.json`,{run,role:'scope-repairer',label,covers:['3'],attempt:1,ok:true,exit_code:0,timed_out:false});f.put(`${dir}/repair-1.json`,{version:1,run,batch:'3',round:1,decision,reviewed_items:items,reviewed_pages:pageIds,findings:[],consumer_checks:[]});};
+  return {...f,historyPath,eventsPath,dir,finish};
+}
+
+test('closed native construction permits exact follow-on ownership, then native collection pins repaired bytes',t=>{
+  const f=lifecycleFixture(t),receipt=f.read(authoredMetadataPath(run,1)),original=f.read(f.authorization);
+  const history=f.json(f.historyPath);for(const row of history.request.snapshot.inputs)if(row.path.startsWith(f.root+'/'))row.path=row.path.slice(f.root.length+1);const {sha256,...body}=history.request.snapshot;history.request.snapshot.sha256=digest(JSON.stringify(body));history.receipt.snapshotSha256=history.request.snapshot.sha256;f.put(f.historyPath,history);
+  const events=f.read(f.eventsPath).trimEnd().split('\n').map(line=>JSON.parse(line));events.at(-1).at='2026-01-05T00:06:00.001Z';f.put(f.eventsPath,events.map(row=>JSON.stringify(row)).join('\n')+'\n');
+  f.put(f.source,f.read(f.source).replace('Actual complete approved clarification.','Equivalent clarification supplied by the native Step2 repair.'));
+  checkedAuthoredMetadata(f.root,run,f.entry);checkOwnerAdditions(f.root,run,'1');assert.equal(accepted(f.root,run,'3'),false);
+  const first=prerequisiteLifecycleBinding(f.root,run);assert(first.inputs.includes(f.historyPath));assert(!first.inputs.includes(f.statePath));assert(!first.inputs.includes(f.eventsPath));
+  const nativeSnapshot=gateReviewSnapshot({repo:f.root,run},[{id:'batch-scope-review',argv:['true','--prerequisite-lifecycle-sha256',first.fingerprint],ownerReviewInputs:first.inputs}],['2-scope-review']);
+  for(const name of ['step2-prerequisite-lifecycle.mjs','step2-authored-metadata.mjs','step2-prerequisite-repairs.mjs','batch-scope-review.mjs'])assert(nativeSnapshot.inputs.some(row=>row.path===fileURLToPath(new URL(name,import.meta.url))&&typeof row.sha256==='string'));
+  f.put(f.eventsPath,f.read(f.eventsPath)+'{"type":"report","at":"2026-01-05T00:10:01.000Z"}\n{"unfinished":');assert.equal(prerequisiteLifecycleBinding(f.root,run).fingerprint,first.fingerprint);
+  f.put(f.eventsPath,f.read(f.eventsPath).split('{"unfinished":')[0]);f.finish();checkedAuthoredMetadata(f.root,run,f.entry);
+  const collected=collectBatch({repo:f.root,run,dispatchDir:join(f.root,`research/${run}-dispatch`)},'3');assert.equal(collected.repairs[0].source_sha256[f.source],f.bind(f.source).sha256);
+  checkOwnerAdditions(f.root,run,'1');assert.equal(f.read(authoredMetadataPath(run,1)),receipt);assert.equal(f.read(f.authorization),original);
+  f.put(f.source,f.read(f.source)+'\nUnowned post-collection source mutation.\n');assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/collected native repair source changed/);
+});
+
+test('lifecycle rejects premature pass, incomplete or wrong history, out-of-scope ownership and old repaired-source edits',t=>{
+  for(const mode of ['premature','history','partial','repo','gate','ownership','scope','old']){
+    const f=lifecycleFixture(t);f.put(f.source,f.read(f.source).replace('Actual complete approved clarification.','Native follow-on source change.'));
+    if(mode==='premature'){const state=f.json(f.statePath);delete state.stages['2-prerequisite-construct-1'].doneAt;f.put(f.statePath,state);}
+    if(mode==='history'){const row=f.json(f.historyPath);row.receipt.snapshotSha256='a'.repeat(64);f.put(f.historyPath,row);}
+    if(mode==='partial'||mode==='repo'){const row=f.json(f.historyPath);if(mode==='partial'){row.request.snapshot.items=[];row.receipt.items=[];}else row.request.snapshot.repo='/wrong-workspace';const {sha256,...body}=row.request.snapshot;row.request.snapshot.sha256=digest(JSON.stringify(body));row.receipt.snapshotSha256=row.request.snapshot.sha256;f.put(f.historyPath,row);}
+    if(mode==='gate')f.put(f.eventsPath,f.read(f.eventsPath).replace('"code":0','"code":1'));
+    if(mode==='ownership'){const state=f.json(f.statePath);delete state.dispatches['2-scope-review:scope-repair-3-1'];f.put(f.statePath,state);}
+    if(mode==='scope'){const input=f.json(`${f.dir}/repair-1.input.json`);input.write_files.push(f.path);input.write_batches=['1','3'];f.put(`${f.dir}/repair-1.input.json`,input);const loop=f.json(`${f.dir}/state.json`);loop.prepared=input;f.put(`${f.dir}/state.json`,loop);}
+    if(mode==='old')f.put(f.path,f.read(f.path)+'\nUnauthorized old protected-source change.\n');
+    assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/closure|history|receipt|frontier|lineage|ownership|repair receipt stale/);
+  }
+});
+
+test('native terminal escalation retains edit ownership and collects into hold, while failed or missing results reject',t=>{
+  const f=lifecycleFixture(t);f.put(f.source,f.read(f.source)+'\nScoped native work records an unresolved prerequisite.\n');f.finish('escalate');
+  checkOwnerAdditions(f.root,run,'1');const held=collectBatch({repo:f.root,run,dispatchDir:join(f.root,`research/${run}-dispatch`)},'3');assert.equal(held.phase,'held');assert.equal(accepted(f.root,run,'3'),false);checkOwnerAdditions(f.root,run,'1');
+  f.put(f.source,f.read(f.source)+'\nRoot owns the focused supplier/consumer repair at this real hold.\n');assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/collected native repair source changed/);
+  const owner=resolveOwner(f.root,run,'3',{decision:'accept',reviewer:'/root',reason:'Root actually reviewed the complete held source scope, repaired the supplier and checked all affected consumers under the existing owner resolution protocol.'});assert.equal(owner.source_sha256[f.source],f.bind(f.source).sha256);checkOwnerAdditions(f.root,run,'1');
+  f.put(f.source,f.read(f.source)+'\nLater edit not bound by Root owner resolution.\n');assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/collected native repair source changed/);
+  for(const mode of ['failed','missing']){
+    const f=lifecycleFixture(t);f.put(f.source,f.read(f.source)+'\nAttempted native follow-on repair.\n');f.finish();
+    if(mode==='failed'){const path=`research/${run}-dispatch/scope-repairer-scope-repair-3-1.result.json`,result=f.json(path);result.ok=false;result.exit_code=1;f.put(path,result);}
+    else rmSync(join(f.root,`${f.dir}/repair-1.json`));
+    assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/repair result invalid|ENOENT/);
   }
 });
 
