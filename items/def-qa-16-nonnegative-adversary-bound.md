@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-qa-16-nonnegative-adversary-bound.json
+  precheck: pass
 id: def-qa-16-nonnegative-adversary-bound
 kind: definition
 title: Nonnegative-weight adversary bound
@@ -31,7 +34,7 @@ sources:
 
 
 For nonconstant f let
-$$\operatorname{Adv}(f):= \max_{\substack{\Gamma=\Gamma^{\mathsf T}\in\mathbb R^{D\times D},\ \Gamma\ne0,\ \Gamma\circ F=0\\ \Gamma_{xy}\ge0\ \forall x,y}} \frac{\|\Gamma\|}{\max_i\|\Gamma\circ\Delta_i\|}.$$
+$$\displaystyle \operatorname{Adv}(f):= \max_{\substack{\Gamma=\Gamma^{\mathsf T}\in\mathbb R^{D\times D},\ \Gamma\ne0,\ \Gamma\circ F=0\\ \Gamma_{xy}\ge0\ \forall x,y}} \frac{\|\Gamma\|}{\max_i\|\Gamma\circ\Delta_i\|}.$$
 Set $\operatorname{Adv}(f)=0$ if f is constant. This is the nonnegative-weight adversary bound under exactly the same masks and query normalization as $\operatorname{Adv}^{\pm}(f)$.
 
 ## Facts & Assumptions

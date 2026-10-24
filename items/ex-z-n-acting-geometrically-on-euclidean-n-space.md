@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-z-n-acting-geometrically-on-euclidean-n-space.json
+  precheck: pass
 id: ex-z-n-acting-geometrically-on-euclidean-n-space
 kind: example
-title: "Z^n acts geometrically on Euclidean n-space"
+title: '$\mathbb Z^n$ acts geometrically on Euclidean $n$-space'
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [def-geometric-action-on-a-metric-space, lem-metrics-on-rn, thm-svarc-miln
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:

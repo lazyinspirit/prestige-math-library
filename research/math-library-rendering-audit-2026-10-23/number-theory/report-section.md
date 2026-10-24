@@ -1,0 +1,4 @@
+## Number Theory
+
+Completed visual review of **759 items across 54 pages**, with **1106 image tiles**. Findings: 4 rendering defect: raw TeX in plain-text technique label, 1 formatting/render defect: heading delimiter is inline text rather than a block heading, 9 literal-ascii-formula-markup, 1 unrendered-inline-TeX-in-plain-text-field, 1 literal-ascii-tex / unrendered-math-markup, 4 literal-ASCII-mathematical-notation, 1 raw-TeX-delimiters-in-plain-text-field, 1 raw-Markdown-heading-marker, 1 markdown-heading-parsing, 7 title-ascii-mathematical-notation, 3 raw-tex-in-nonmath-metadata, 5 title-ascii-mathematics. Evidence: [manifest](math-library-rendering-audit-2026-10-23/number-theory/manifest.json), [coverage](math-library-rendering-audit-2026-10-23/number-theory/combined-coverage.json), [receipt](math-library-rendering-audit-2026-10-23/number-theory/category-review-receipt.json).
+

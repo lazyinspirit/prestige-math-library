@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-nonabelian-first-cohomology-of-a-trivial-c-two-action-on-s-three.json
+  precheck: pass
 id: ex-nonabelian-first-cohomology-of-a-trivial-c-two-action-on-s-three
 kind: example
-title: "With trivial C_2-action on S_3, the nonabelian H^1 pointed set has two classes"
+title: "With trivial $C_2$-action on $S_3$, the nonabelian $H^1$ pointed set has two classes"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-first-nonabelian-cohomology-as-a-pointed-set, thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set, def-symmetric-group]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

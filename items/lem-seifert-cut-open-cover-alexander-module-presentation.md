@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-seifert-cut-open-cover-alexander-module-presentation.json
+  precheck: pass
 id: lem-seifert-cut-open-cover-alexander-module-presentation
 kind: lemma
 title: "The cut-open cover presentation of the Alexander module"
@@ -37,17 +40,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Dale Rolfsen, Knots and Links, Chapter 7.B"
@@ -115,6 +107,7 @@ Thus $H_1(\widetilde E_F;\mathbb Z)$ is the cokernel of the displayed map.
 The left-to-right stack direction is chosen so a positive meridian moves from index $n$ to index $n+1$. The seam convention is shown below. The proof verifies the cover and its monodromy in step 2.1 and derives the map from exactness in step 3.1; the drawing supplies no additional premise.
 
 ```tikz
+\usetikzlibrary{positioning}
 \begin{tikzpicture}[>=stealth, node distance=1.5cm]
   \node[draw,minimum width=1.55cm,minimum height=0.8cm] (yn) {$Y_n$};
   \node[draw,minimum width=1.55cm,minimum height=0.8cm,right=2.6cm of yn] (ynp) {$Y_{n+1}$};

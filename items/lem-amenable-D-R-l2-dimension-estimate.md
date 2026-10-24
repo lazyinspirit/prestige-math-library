@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-amenable-D-R-l2-dimension-estimate.json
+  precheck: pass
 id: lem-amenable-D-R-l2-dimension-estimate
 kind: lemma
 title: "L²-dimension estimates for amenable D(R) groups"
@@ -19,17 +22,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   scraped: []
   references:
@@ -43,7 +35,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice. Let R be Q or F_p, let Γ be a countable discrete amenable group in Strebel's class D(R), and let C_* be a bounded-below chain complex of right ZΓ-modules whose C_i are finitely generated free for i≤n. Give R the trivial Γ-action. If H_i(C_*⊗_{ZΓ}R)=0 for every i≤n, then H_i(C_*⊗_{ZΓ}NΓ) has von Neumann dimension zero for every i≤n. This is a dimension-zero conclusion and does not assert that the L²-homology module vanishes.
+Assume the Axiom of Choice. Let $R$ be $\mathbb Q$ or $\mathbb F_p$, let $\Gamma$ be a countable discrete amenable group in Strebel's class $D(R)$, and let $C_*$ be a bounded-below chain complex of right $\mathbb Z\Gamma$-modules whose $C_i$ are finitely generated free for $i\le n$. Give $R$ the trivial $\Gamma$-action. If $H_i(C_*\otimes_{\mathbb Z\Gamma}R)=0$ for every $i\le n$, then $H_i(C_*\otimes_{\mathbb Z\Gamma}\mathcal N\Gamma)$ has von Neumann dimension zero for every $i\le n$. This is a dimension-zero conclusion and does not assert that the L²-homology module vanishes.
 
 ## Statement references
 

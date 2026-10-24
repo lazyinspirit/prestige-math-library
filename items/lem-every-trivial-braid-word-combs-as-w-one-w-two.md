@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-every-trivial-braid-word-combs-as-w-one-w-two.json
+  precheck: pass
 id: lem-every-trivial-braid-word-combs-as-w-one-w-two
 kind: lemma
-title: "Every trivial braid word combs as W_1W_2"
+title: "Every trivial braid word combs as $W_1W_2$"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -22,9 +25,7 @@ sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-21"
       url: "https://arxiv.org/pdf/1010.0321"
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement

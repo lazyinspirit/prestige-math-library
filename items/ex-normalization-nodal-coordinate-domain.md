@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-normalization-nodal-coordinate-domain.json
+  precheck: pass
 id: ex-normalization-nodal-coordinate-domain
 kind: example
 title: "Normalization of a nodal affine plane curve"
@@ -21,8 +24,7 @@ sources:
     - title: "Stacks Project, Lemma 10.161.13 (polynomial N-2)"
       url: "https://stacks.math.columbia.edu/tag/032O"
       locator: "Lemma 10.161.13"
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Statement
@@ -66,3 +68,16 @@ preimages $t=1$ and $t=-1$.
 3.1 If $z\in k(t)=\operatorname{Frac}(A)$ is integral over $A$, then a monic equation for $z$ over $A$ has coefficients in $A\subseteq k[t]$, so $z$ is integral over $k[t]$; since $k[t]$ is integrally closed in $k(t)$ by [L4] and [L3], $z\in k[t]$. With step 2.1 this identifies the integral closure of $A$ in $\operatorname{Frac}(A)$ with $k[t]=A+At$, a finite $A$-module. [L3, L4, L6, step 2.1]
 
 4.1 The parametrisation: a point of the curve with $\bar x=0$ has $\bar y^{2}=0$, so $\bar y=0$ in the field $k$; thus the origin is the unique point with both coordinates zero. Under the parametrisation $x=t^{2}-1$, $y=t(t^{2}-1)$ the condition $x=0$ is $t^{2}=1$, that is $t^{2}-1=(t-1)(t+1)=0$, so $t=1$ or $t=-1$ by [L3] (a product of two elements of the field $k$ vanishes only if one factor does); these two values are distinct because $\operatorname{char}k\ne2$ gives $1\ne-1$, and both give $y=t(t^{2}-1)=0$. Hence the origin has exactly the two preimages $t=1$ and $t=-1$; the hypothesis $\operatorname{char}k\ne2$ is used here, since in characteristic $2$ the two values coincide. [L3, step 1.2, given] ∎
+
+## Remarks
+
+Write $C(k)=\{(a,b)\in k^{2}:b^{2}=a^{2}(a+1)\}$. The coordinate-ring inclusion $\varphi:A\hookrightarrow k[t]$ corresponds on $k$-points to the parametrisation $\nu:k\to C(k)$, $u\mapsto(u^{2}-1,u(u^{2}-1))$. The diagram isolates the fibre over the node; the vertical arrows are set inclusions.
+
+```tikzcd
+\begin{tikzcd}[column sep=huge, row sep=large, cells={nodes={font=\large}}, labels={font=\normalsize}]
+k \arrow[r, "\nu"] & C(k) \\
+\{1,-1\} \arrow[u, hook] \arrow[r, "\nu"'] & \{(0,0)\} \arrow[u, hook]
+\end{tikzcd}
+```
+
+Both routes from $\{1,-1\}$ to $C(k)$ send each parameter to $(0,0)$. As computed in proof step 4.1, $u^{2}-1=0$ forces $u=1$ or $u=-1$, and these values are distinct because $\operatorname{char}k\ne2$. Thus the lower left set is the entire fibre, over the given field $k$. The proof above is independent of the illustration.

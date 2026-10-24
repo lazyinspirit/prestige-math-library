@@ -1,0 +1,63 @@
+{
+  "id": "ex-na-unit-square-mini-mesh-family",
+  "agent": "/root/rendering_repair_coordinator/npde_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile visibly prints the raw center and tikzpicture environments and draw/node commands as prose. The native Markdown diagram interface requires a fenced tikz block, so the unrecognized raw center wrapper prevents diagram extraction; this is not a mathematical error in the diagonals.",
+      "action": "Replaced only the raw begin/end center wrapper with a fenced tikz block; retained every tikzpicture command and label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Two wrapper lines changed to enable the existing mesh diagram through the supported native renderer.",
+  "source_lines_after": [
+    33,
+    45
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Mesh coordinates and orientation",
+      "result": "The drawing coordinates [0,2]^2 are schematic coordinates scaled by 1/2 to the physical unit square. Vertical/horizontal lines at coordinate 1 represent x=1/2 and y=1/2. Each of four squares has exactly its lower-left to upper-right diagonal: (0,0)-(1,1), (1,0)-(2,1), (0,1)-(1,2), (1,1)-(2,2). This agrees with Example line 31 and Verification step 1.1."
+    },
+    {
+      "check": "Triangles, closure, and matching convention",
+      "result": "The standalone fresh native rendering visibly closes all four sides of the rectangle, retains both crossing grid lines and all four diagonals. Splitting at intersections gives 9 grid vertices, 16 mesh edges (8 boundary, 4 internal horizontal/vertical, 4 diagonals), and 8 closed triangles. No missing last-to-first edge occurs; rectangle and path commands were preserved. Adjacent triangles share complete edges or vertices, as required by the full matching-affine-mesh definition and step 1.1. All physical triangles have legs 1/2 and diameter sqrt(2)/2 for n=2; all n are affine scaled copies, agreeing with the local scaling supplier."
+    },
+    {
+      "check": "Cell labels and MINI representation",
+      "result": "K1 is strictly inside the upper triangle of the top-left square, and K2 strictly inside the lower triangle of the bottom-right square. These are cell labels, not nodal or bubble markers. The figure is a mesh skeleton and makes no degrees-of-freedom claim: the MINI definition has continuous P1 vertex values plus one scalar interior bubble b_K=27 lambda0 lambda1 lambda2 per triangle, with vector coefficients for velocity, and continuous P1 zero-mean pressure. No diagram mark contradicts zero-boundary velocity constraints or implies pressure bubbles. Adding nodal/bubble symbols is unnecessary to repair this mesh-family illustration."
+    },
+    {
+      "check": "Proof interface",
+      "result": "Full local Example, Verification, matching mesh definition, affine scaling lemma, MINI definition and Fortin-stability theorem were read. The domain is the bounded connected Lipschitz square, and the geometry supplies shape regularity and h_n tending to zero as in step 2.1. The existing rigorous verification and stability conclusion remain independent of the picture."
+    }
+  ],
+  "checks": {
+    "raw_sha256_guard_before_edit": "fce3a7cb36e9483af3aea2b706b2e27cdceb830481b5104d78933e83adcb7f4b",
+    "after_raw_sha256": "f5257e679f4ae3d628c350d89c119dc3240b7ba9e6e989c50c0fb27e0be9c56b",
+    "proof_layout": "proof-layout: 1 items, 2 steps, 0 defects",
+    "precheck": "1 file checked; pass; 0 failed",
+    "rendercheck": "1 checked; errors []; warnings []",
+    "metadata": "Frontmatter byte-for-byte unchanged, including status: published.",
+    "original_visual_review": "Standalone original-resolution screenshots/ex-na-unit-square-mini-mesh-family--01.png under queue inspection_dir reviewed.",
+    "fresh_visual_preview": "research/math-library-rendering-repairs-2026-10-23/previews/npde005-final-unique",
+    "fresh_visual_review": "Standalone original-resolution final --01.png reviewed; entire mesh and both cell labels visible, no raw TikZ source, no clipping/overlap; closed boundary and all eight triangles individually visible.",
+    "preview_receipt": {
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": []
+    }
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview only; no production HTTP route visited. Preview reference map reported 16 unrelated parse diagnostics."
+  ]
+}

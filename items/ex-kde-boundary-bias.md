@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-kde-boundary-bias.json
+  precheck: pass
 id: ex-kde-boundary-bias
 kind: example
 title: "Gaussian KDE boundary bias for a uniform density"
@@ -24,11 +27,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 1–3"
@@ -80,3 +78,29 @@ pointwise second-order bias theorem fail at $x=0$.
 
 4.1 The density version was chosen with $f(0)=1$, so step 3.1 gives $\mathbb E\widehat f_h(0)-f(0)\to-1/2$. The selected density is discontinuous at $0$, so this calculation does not satisfy the smooth interior-point theorem's hypotheses. [given, step 3.1, algebra] ∎
 
+
+## Remarks
+
+The change of variables $u=-t/h$ sends the support interval $0\le t\le1$
+to $-1/h\le u\le0$. The picture shows the Gaussian kernel in this
+rescaled coordinate for the illustrative bandwidth $h=1/2$; the shaded
+area is $\mathbb E\widehat f_h(0)$, not the target value $f(0)$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=5cm]
+  \fill[blue!20] (-2,0) -- plot[domain=-2:0,samples=50] (\x,{exp(-\x*\x/2)/sqrt(2*pi)}) -- (0,0) -- cycle;
+  \draw[->] (-3.4,0) -- (3.5,0) node[right] {$u$};
+  \draw[->] (0,0) -- (0,0.51) node[above] {$K(u)$};
+  \draw[thick,blue] plot[domain=-3.2:3.2,samples=100] (\x,{exp(-\x*\x/2)/sqrt(2*pi)});
+  \draw[dashed] (-2,0) -- (-2,{exp(-2)/sqrt(2*pi)});
+  \draw (-2,0.008) -- (-2,-0.008) node[below] {$-1/h=-2$};
+  \node[below right] at (0,0) {$0$};
+  \node at (-1.9,0.46) {$\int_{-1/h}^{0} K(u)\,du$};
+  \draw[->] (-1.5,0.40) -- (-1.0,0.20);
+\end{tikzpicture}
+```
+
+As $h\downarrow0$, the left endpoint moves to $-\infty$, while the right
+endpoint stays at $0$. Thus the shaded mass increases to the Gaussian
+left-half mass $1/2$, whereas the chosen density version has $f(0)=1$.
+The verification above establishes these facts independently of the picture.

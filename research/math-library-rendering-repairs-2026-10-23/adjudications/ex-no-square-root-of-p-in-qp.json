@@ -1,0 +1,98 @@
+{
+  "id": "ex-no-square-root-of-p-in-qp",
+  "agent": "/root/rendering_repair_supervisor2/nt_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile shows literal Q_p with baseline underscore in the title. The Example identifies the intended field as $\\mathbb Q_p$; this is a mathematical field expression rather than ordinary prose.",
+      "action": "Typeset p and the identical p-adic field in the title using inline math.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "The same original standalone tile visibly prints Q_p and Q_2 in the two L1 supplier labels. Current supplier titles still contain those literal strings at inspection time, so the labels need a local alias.",
+      "action": "Added explicit mathematical labels to both existing wikilinks in L1, retaining identical targets and wording.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Inline-math title and two explicit supplier labels; no claims, proof steps or dependency targets changed.",
+  "source_lines_after": {
+    "4": "title: 'There is no square root of $p$ in $\\mathbb{Q}_p$'",
+    "35": "[L1] The odd-prime and $2$-adic square criteria describe exactly which elements are squares ([[thm-square-criterion-in-qp-for-odd-p|Square criterion in $\\mathbb{Q}_p$ for odd $p$]], [[thm-square-criterion-in-q2|Square criterion in $\\mathbb{Q}_2$]])."
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_review_scope": "Rendering-only comparison: field symbols match the original Example and proof; prime cases and the odd valuation argument are byte-unchanged. No broad proof/source audit or external reading was performed.",
+  "guards": {
+    "before_raw_sha256": "816e9c214087b41d433f2e0ca8e0a351d122b762db2b1e8d13adb62ceae8ad8a",
+    "current_raw_sha256": "b38dc2d889ff65b4862568a750e7fa124efddf43b379d2c8092643d10c7bdfd9",
+    "raw_guard_checked_immediately_before_edit": true,
+    "all_non_title_frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-no-square-root-of-p-in-qp.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-no-square-root-of-p-in-qp.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-no-square-root-of-p-in-qp.md",
+            "item_id": "ex-no-square-root-of-p-in-qp",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-no-square-root-of-p-in-qp.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": {
+      "path": "research/math-library-rendering-audit-2026-10-23/number-theory/screenshots/ex-no-square-root-of-p-in-qp--01.png",
+      "sha256": "23a3186ba0393aecfe16af92f94e898dbc1e9216f379c58d4b4ed8cd3fb0f23b",
+      "inspected_standalone_original_resolution": true
+    },
+    "current": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nt_019-current/manifest.json",
+      "manifest_sha256": "708799a6e3dfb4566159fc7a9530c1c4e4b66dd665103165ef20a461982ab66a",
+      "source_sha256": "b38dc2d889ff65b4862568a750e7fa124efddf43b379d2c8092643d10c7bdfd9",
+      "reference_map_sha256": "0d9a012d64a3733acdd93ca12cafc07da2b4f2effa73dff5c41f26c893b8411d",
+      "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/nt_019-current/screenshots/ex-no-square-root-of-p-in-qp--01.png",
+      "inspected_standalone_original_resolution": true,
+      "observation": "Title and both reference labels display subscripted p-adic field notation; full item is visible and no raw underscore formulas remain.",
+      "preview_exit_code": 0
+    }
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Native local title/ItemBody preview only; no production HTTP route, navigation/dependency widgets or metadata Sources footer inspection.",
+    "Reference map reported 14 unrelated parse diagnostics; both relevant targets resolve.",
+    "No TikZ source changed or new diagram warranted for this short valuation argument."
+  ]
+}

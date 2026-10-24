@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ip-variable-metric-domain-of-dependence.json
+  precheck: pass
 id: lem-ip-variable-metric-domain-of-dependence
 kind: lemma
 title: Finite propagation for the wave equation on a Riemannian manifold
@@ -38,13 +41,7 @@ sources:
       url: "https://arxiv.org/pdf/2312.08123v1"
       locator: "Theorems 3.1–3.2 and Remark 3.3, PDF pp. 21–22: static-potential ray transform, uniqueness, and the finite-time support threshold; the local Riemannian energy estimate is proved here."
 proof_strategy: weighted-energy-cutoff
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -130,3 +127,31 @@ Therefore $D_{y_j}w=\sum_i(B^{-1})_{ij}(D_{x_i}u)\circ B^{-1}(y-c)$. In particul
 9.1 Reverse time by setting $\widetilde v(s,x)=v(T-s,x)$. Since $q$ is time independent, $L_qv=0$ implies $L_q\widetilde v=0$. Applying (ii) from the reversed initial time gives the terminal-data assertion. [step 8.1, given, algebra]
 
 10.1 Set $\delta=d_g(Q,\partial M)>T/2$. For every $t\in[0,T]$, either $t<\delta$ or $T-t<\delta$: if $t\le T/2$ the first holds, and if $t\ge T/2$ the second holds. In the first case (ii) with $s_0=0$ gives $u(t,\cdot)=0$ on $Q$; in the second case the terminal assertion gives $v(t,\cdot)=0$ on $Q$. Thus $(q_1-q_2)uv=0$ pointwise and its integral vanishes. [step 8.1, step 9.1, given, algebra] ∎
+
+## Remarks
+
+For (iii), set $r=d_g(x,\partial M)$ and $\delta=d_g(Q,\partial M)>T/2$. The diagram uses intrinsic boundary distance, rather than a spatial coordinate on $M$. Blue and orange show the respective support bounds $r\le t$ for $u$ and $r\le T-t$ for $v$ from (ii) and its time reversal; they do not assert that the solutions are nonzero throughout those regions. Their overlap has $r\le\min(t,T-t)\le T/2$, whereas every $x\in Q$ has $r\ge\delta>T/2$. The pictured case is $T/2<\delta<T$; for $\delta\ge T$ the same exclusion holds.
+
+```tikz
+\begin{tikzpicture}[scale=1.3]
+\fill[blue!18] (0,0) -- (0,4) -- (4,4) -- (0,0);
+\fill[orange!18] (0,0) -- (4,0) -- (0,4) -- (0,0);
+\draw[->] (0,0) -- (4.8,0) node[right] {$r$};
+\draw[->] (0,0) -- (0,4.7) node[above] {$t$};
+\draw[blue,thick] (0,0) -- (4,4);
+\draw[orange,thick] (0,4) -- (4,0);
+\draw[dashed] (2,0) -- (2,4);
+\draw[dashed,thick] (2.8,0) -- (2.8,4);
+\node[left] at (0,4) {$T$};
+\node[below left] at (0,0) {$0$};
+\node[below] at (2,0) {$T/2$};
+\node[below] at (2.8,0) {$\delta$};
+\node[below] at (4,0) {$T$};
+\node[blue] at (1.0,3.45) {$r\le t$};
+\node[orange!85!black] at (1.0,0.55) {$r\le T-t$};
+\node at (0.7,2) {overlap};
+\node at (3.5,4.5) {$r\ge\delta$ on $Q$};
+\end{tikzpicture}
+```
+
+Thus the two permitted support regions cannot both contain $(t,x)$ with $x\in Q$, exactly as used in step 10.1. This distance-time schematic does not depict geodesics or equality of supports; the proof above is independent of the figure.

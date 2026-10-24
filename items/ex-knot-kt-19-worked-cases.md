@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-19-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-19-worked-cases
 kind: example
 title: "The figure-eight complement and its nonhyperbolic zero filling"
@@ -31,14 +34,7 @@ sources:
     - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf"
       locator: "Chapter 4, §§4.1–4.4, regular ideal tetrahedra, edge equations and finite-volume cusp geometry"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: pending
+
 ---
 
 ## Example
@@ -63,7 +59,7 @@ After capping, the punctured-torus fiber becomes $T^2$. The square presents it b
   \draw[->,red,thick] (1.5,0) -- node[right] {$b$} (1.5,1.5);
   \node at (0.75,0.75) {$T^2$ fiber};
   \draw[->,thick] (1.2,1.8) .. controls (1.9,2.9) and (-0.4,2.9) .. (0.3,1.8);
-  \node[above] at (0.75,2.8) {$\varphi_* = \begin{pmatrix}2&1\\1&1\end{pmatrix}$};
+  \node[above] at (0.75,2.8) {$\varphi_* = \left(\begin{array}{cc}2&1\\1&1\end{array}\right)$};
   \draw[thick] (3.7,0.75) circle (0.30);
   \node[below] at (3.7,0.25) {$S^1$ base};
 \end{tikzpicture}

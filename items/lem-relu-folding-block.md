@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-relu-folding-block.json
+  precheck: pass
 id: lem-relu-folding-block
 kind: lemma
 title: "A width-n ReLU block makes n+1 full folds"
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Serra, Tjandraatmadja, and Ramalingam, Bounding and Counting Linear Regions of Deep Neural Networks, Theorem 7 and Appendix D"
@@ -41,6 +38,7 @@ For every integer $n\ge3$, there is a scalar-input standard adjacent-layer ReLU 
 
 For $n=3$, the fold is the piecewise-affine graph through $(0,0)$, $(1/7,1)$, $(3/7,0)$, $(5/7,1)$, and $(1,0)$. The horizontal axis is the normalized input $x\in[0,1]$ and the vertical axis is the block output. The marked interior vertices are exactly the breakpoints $t_i=(2i-1)/7$; the graph shows each of the four subintervals mapping bijectively onto $[0,1]$. The proof verifies the hinge representation algebraically; this plot is illustrative.
 
+```tikz
 \begin{tikzpicture}[x=5cm,y=2cm]
   \draw[->] (-0.04,0) -- (1.08,0) node[right] {$x$};
   \draw[->] (0,-0.08) -- (0,1.18) node[above] {$F_3(x)$};
@@ -52,6 +50,7 @@ For $n=3$, the fold is the piecewise-affine graph through $(0,0)$, $(1/7,1)$, $(
   \node[below right] at (1,0) {$1$};
   \node[left] at (0,1) {$1$};
 \end{tikzpicture}
+```
 
 ## Facts & Assumptions
 

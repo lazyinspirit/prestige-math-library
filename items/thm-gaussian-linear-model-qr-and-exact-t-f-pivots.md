@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-gaussian-linear-model-qr-and-exact-t-f-pivots.json
+  precheck: pass
 id: thm-gaussian-linear-model-qr-and-exact-t-f-pivots
 kind: theorem
 title: "QR decomposition gives exact t and F pivots in the fixed Gaussian linear model"
@@ -33,9 +36,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  repair: research/statistical-models-experiments-62-published-gaussian-regression-repair.json
 sources:
   references:
     - title: "MIT 18.S096, Regression Analysis, Lecture 6, Normal Regression Models"
@@ -98,3 +98,27 @@ the sum of their dimensions. [[thm-dimension-of-a-linear-subspace]]
 3.1 For $c\ne0$, put $v=R^{-T}c$. Invertibility of $R$ gives $v\ne0$. Complete $v/\|v\|$ to an orthonormal basis of $\mathbb R^p$ by [F3]; applying [F4] to the resulting orthogonal matrix shows $G_c=v^TZ_Q/\|v\|\sim N(0,1)$. Under [A2], the continuous linear map defining $G_c$ is Borel. It is independent of $Q_0:=\|Z_0\|^2\sim\chi_{n-p}^2$, because $Z_Q$ and $Z_0$ are independent blocks and $G_c$ and the squared-norm map are measurable functions of those blocks. Since $X^TX=R^TR$, $\|v\|^2=c^TR^{-1}R^{-T}c=c^T(X^TX)^{-1}c$. Thus on $Q_0>0$ the displayed contrast ratio is $G_c/\sqrt{Q_0/(n-p)}$; on $Q_0=0$ its version $\widetilde T_c$ is zero. This is exactly the extension in the definition of $t_{n-p}$, so [F5]–[F6] give $\widetilde T_c\sim t_{n-p}$. [A2, F3, F4, F5, F6, step 2.1, algebra]
 
 4.1 For the nested models, let $W_D=W_U\cap W_R^\perp$. For $u\in W_U$, its orthogonal decomposition relative to $W_R$ has a $W_R$ component and a remaining component in $W_U\cap W_R^\perp=W_D$, because $W_R\subseteq W_U$. Thus [F3] gives $W_U=W_R\oplus W_D$ and $\mathbb R^n=W_U\oplus W_U^\perp$. All these subspaces are finite-dimensional by [F10]. Applying direct-sum dimension additivity in [F10] to the two decompositions gives $p=(p-q)+\dim W_D$ and $n=p+\dim W_U^\perp$, hence $\dim W_D=q$ and $\dim W_U^\perp=n-p$. Combining the orthogonal decompositions gives $\mathbb R^n=W_R\oplus W_D\oplus W_U^\perp$, including the zero-dimensional $W_R$ case $q=p$. Choose orthonormal bases in these three spaces and concatenate them into an orthogonal matrix $V$. By [F4], the coordinates of $V^T\varepsilon/\sigma$ in the three blocks are independent standard normals. Under the null, $P_R(X\beta)=P_U(X\beta)=X\beta$, so $(I-P_R)Y=(I-P_R)\varepsilon=P_{W_D}\varepsilon+P_{W_U^\perp}\varepsilon$ and $(I-P_U)Y=(I-P_U)\varepsilon=P_{W_U^\perp}\varepsilon$: here [F8] identifies $I-P_R=P_{W_R^\perp}$ and $I-P_U=P_{W_U^\perp}$, while the direct sum in [F3] splits the first projection into the two orthogonal components. The coordinate-block maps and the linear projections are continuous, and squared norms are continuous, so [A2] and [F7] make all these random vectors and real variables measurable. Orthogonality and [F9] give $RSS_R-RSS_U=\sigma^2\sum_{j=1}^{q}G_j^2$ and $RSS_U=\sigma^2\sum_{j=1}^{n-p}H_j^2$, where the $G$ and $H$ coordinate blocks are independent standard-normal blocks. By [F5] these sums are independent $\sigma^2\chi_q^2$ and $\sigma^2\chi_{n-p}^2$ variables; both degrees are positive. The piecewise ratio $\widetilde F$ is Borel, since it is continuous on the Borel set $RSS_U>0$ and constant on $RSS_U=0$. Its value is the scaled ratio on $Q_H:=\sum_{j=1}^{n-p}H_j^2>0$ and $0$ when $Q_H=0$; by [F6] this is exactly the defined $F_{q,n-p}$ version. The F denominator is positive almost surely by [F5], so $\widetilde F\sim F_{q,n-p}$. [A1, A2, F3, F4, F5, F6, F7, F8, F9, F10, step 1.1, algebra] ∎
+
+
+## Remarks
+
+The blocks below depict orthogonal summands, not subspaces drawn to scale. All subspaces are deterministic. In the first row, $W=\mathrm{col}(X)$; the fitted statistic depends on the $W$ error block, while the residual depends on the independent $W^\perp$ error block (steps 1.1–3.1).
+
+```tikz
+\begin{tikzpicture}[every node/.style={align=center},block/.style={draw,rounded corners,minimum width=3.6cm,minimum height=1.65cm}]
+\node at (0,3.2) {$\mathbb R^n=W\oplus W^\perp$};
+\node[block] at (-2.1,1.9) {$W=\mathrm{col}(X)$\\$\dim W=p$\\$P_W\varepsilon=\sigma QZ_Q$};
+\node[block] at (2.1,1.9) {$W^\perp$\\$\dim W^\perp=n-p$\\$P_{W^\perp}\varepsilon=\sigma Q_0Z_0$};
+\node at (0,1.9) {$\oplus$};
+\node at (0,0.5) {$Z_Q\ \mathrm{and}\ Z_0\ \mathrm{independent},\qquad RSS_X/\sigma^2=\|Z_0\|^2\sim\chi^2_{n-p}$};
+\node at (0,-0.7) {$\mathbb R^n=W_R\oplus W_D\oplus W_U^\perp,\qquad W_D=W_U\cap W_R^\perp$};
+\node[block,minimum width=3.2cm] at (-3.7,-2) {$W_R$\\$\dim W_R=p-q$\\$P_R\varepsilon$};
+\node[block,minimum width=3.2cm] at (0,-2) {$W_D$\\$\dim W_D=q$\\$P_{W_D}\varepsilon$};
+\node[block,minimum width=3.2cm] at (3.7,-2) {$W_U^\perp$\\$\dim W_U^\perp=n-p$\\$P_{W_U^\perp}\varepsilon$};
+\node at (-1.85,-2) {$\oplus$};
+\node at (1.85,-2) {$\oplus$};
+\node at (0,-3.5) {$\mathrm{Under\ the\ null:}\quad (RSS_R-RSS_U)/\sigma^2\sim\chi_q^2,\quad RSS_U/\sigma^2\sim\chi_{n-p}^2$};
+\end{tikzpicture}
+```
+
+In the second row, the three projected error blocks are independent. Under the null hypothesis, the squared norms of the middle and right blocks are respectively $RSS_R-RSS_U$ and $RSS_U$, giving the independent chi-square contributions in the F ratio (step 4.1). When $q=p$, the left block is the zero space and its projected error is zero. The rigorous proof above is independent of this illustration.

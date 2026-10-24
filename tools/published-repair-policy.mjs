@@ -6,7 +6,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { itemHashGuard } from './item-hash.mjs';
+import { itemHashGuard, stripVerification } from './item-hash.mjs';
 import { ADOPTION_KIND, authenticateAdoption, hasCommittedPriorPublication } from './published-repair-adoption.mjs';
 import { hasPhysicsContextPriorPublication } from './physics-math-context-history.mjs';
 
@@ -26,7 +26,17 @@ export function isPublishedItem(root, id) {
 }
 
 function nonProofPrecheckNotApplicable(check, text, id, before) {
-  if (!['definition', 'algorithm', 'remark', 'example'].includes(field(text, 'kind'))
+  // Legacy counterexamples can contain their refutation as ordinary prose.
+  // A title repair may preserve that body without inventing a phase proof.
+  const titleOnlyCounterexample = field(text, 'kind') === 'counterexample'
+    && !/^\d+\.\d+\s/m.test(before)
+    && !/^\d+\.\d+\s/m.test(text)
+    && /^title:[^\n]+$/m.test(frontmatter(text))
+    && /^title:[^\n]+$/m.test(frontmatter(before))
+    && stripVerification(text).replace(/^title:[^\n]*\n/m, '')
+      === stripVerification(before).replace(/^title:[^\n]*\n/m, '');
+  if ((!['definition', 'algorithm', 'remark', 'example'].includes(field(text, 'kind'))
+      && !titleOnlyCounterexample)
     || field(text, 'kind') !== field(before, 'kind')
     || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before)
     || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(text)

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fem-control-proximal-gradient-residual-distance-bound.json
+  precheck: pass
 id: thm-fem-control-proximal-gradient-residual-distance-bound
 kind: theorem
 title: A certified projected-gradient residual bounds distance to the control-mesh optimum
@@ -19,8 +22,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: Michael Hinze, A Variational Discretization Concept in Control Constrained Optimization
@@ -30,7 +31,7 @@ sources:
 
 ## Statement
 
-Assume Countable Choice. Let $U_h$ be a finite-dimensional cellwise-constant control space with nonempty box $Q_h$, and restrict the exact reduced objective $\widehat J$ of [[def-linear-elliptic-pde-constrained-control-problem]] to $Q_h$. Let $q_h^*$ be its minimizer and let $L_h\ge\|S|_{U_h}\|^2+\alpha$, where $S$ is the linear part of the continuous state-to-observation map and $\alpha>0$. Assume the residual- and projection-evaluation routines satisfy the finite-return admissibility conditions in [[alg-fem-control-proximal-gradient-certified-residual]]. Then that finite-budget algorithm terminates in finite time after at most $N$ iterations and at most $N$ calls to each routine, returning \texttt{inconclusive}, \texttt{budget-exhausted}, or \texttt{certified}. Every \texttt{certified} return at $q\in Q_h$ with reported bound $\rho=\tilde\rho+\delta/L_h$ satisfies $\|q-P_{Q_h}(q-\nabla\widehat J(q)/L_h)\|_U\le\rho\le\tau$, and consequently $\|q-q_h^*\|_U\le(L_h/\alpha)\rho=(L_h/\alpha)\tilde\rho+\delta/\alpha$. This bounds distance to the control-mesh minimizer of the exact PDE objective; it is not an error estimate between that minimizer and the unrestricted PDE optimum.
+Assume Countable Choice. Let $U_h$ be a finite-dimensional cellwise-constant control space with nonempty box $Q_h$, and restrict the exact reduced objective $\widehat J$ of [[def-linear-elliptic-pde-constrained-control-problem]] to $Q_h$. Let $q_h^*$ be its minimizer and let $L_h\ge\|S|_{U_h}\|^2+\alpha$, where $S$ is the linear part of the continuous state-to-observation map and $\alpha>0$. Assume the residual- and projection-evaluation routines satisfy the finite-return admissibility conditions in [[alg-fem-control-proximal-gradient-certified-residual]]. Then that finite-budget algorithm terminates in finite time after at most $N$ iterations and at most $N$ calls to each routine, returning `inconclusive`, `budget-exhausted`, or `certified`. Every `certified` return at $q\in Q_h$ with reported bound $\rho=\tilde\rho+\delta/L_h$ satisfies $\|q-P_{Q_h}(q-\nabla\widehat J(q)/L_h)\|_U\le\rho\le\tau$, and consequently $\|q-q_h^*\|_U\le(L_h/\alpha)\rho=(L_h/\alpha)\tilde\rho+\delta/\alpha$. This bounds distance to the control-mesh minimizer of the exact PDE objective; it is not an error estimate between that minimizer and the unrestricted PDE optimum.
 
 ## Facts & Assumptions
 
@@ -48,7 +49,7 @@ Assume Countable Choice. Let $U_h$ be a finite-dimensional cellwise-constant con
 
 [F6] A self-adjoint endomorphism of a finite-dimensional real-inner-product space has an orthonormal eigenbasis ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]).
 
-[F7] The algorithm issues \texttt{certified} only when the computed residual plus the adjoint-gradient error bound is at most $\tau$ ([[alg-fem-control-proximal-gradient-certified-residual]]).
+[F7] The algorithm issues `certified` only when the computed residual plus the adjoint-gradient error bound is at most $\tau$ ([[alg-fem-control-proximal-gradient-certified-residual]]).
 
 [F8] The algorithm performs at most $N$ iterations; its admissible residual and projection routines each return in finite time with either their exact valid outputs or failure, and the definition returns the stated failure or exhaustion status when certification does not succeed ([[alg-fem-control-proximal-gradient-certified-residual]]).
 
@@ -66,11 +67,11 @@ Assume Countable Choice. Let $U_h$ be a finite-dimensional cellwise-constant con
 
 1.3 Since $Q_h$ is a nonempty compact box in finite-dimensional $U_h$, [F5] gives a minimizer, and $\alpha$-strong convexity [F4] makes it unique. For any $v\in Q_h$, the feasible segment from $q_h^*$ to $v$ and differentiability imply $(g(q_h^*),v-q_h^*)_U\ge0$. Set $w=q_h^*-g(q_h^*)/L_h$. Then $\|w-v\|_U^2-\|w-q_h^*\|_U^2=\|v-q_h^*\|_U^2+(2/L_h)(g(q_h^*),v-q_h^*)_U\ge0$. Thus $q_h^*$ is the unique nearest point in $Q_h$ to $w$, so $T(q_h^*)=q_h^*$. [A1, F3, F4, F5, given, algebra]
 
-2.1 By [F7], a \texttt{certified} return is issued only when $\rho_k\le\tau$, so step 1.1 proves the reported bound for the exact mapping residual. By [F8], each residual and projection call returns in finite time, and each is called at most $N$ times; the projection routine supplies the exact cell values and step norm used in step 1.1, and all remaining steps are finite scalar arithmetic and comparisons, so the algorithm terminates with one of its stated statuses. [F7, F8, step 1.1, given, algebra]
+2.1 By [F7], a `certified` return is issued only when $\rho_k\le\tau$, so step 1.1 proves the reported bound for the exact mapping residual. By [F8], each residual and projection call returns in finite time, and each is called at most $N$ times; the projection routine supplies the exact cell values and step norm used in step 1.1, and all remaining steps are finite scalar arithmetic and comparisons, so the algorithm terminates with one of its stated statuses. [F7, F8, step 1.1, given, algebra]
 
 2.2 For $r=\|q-T(q)\|_U$, steps 1.2–1.3 and the triangle inequality imply $\|q-q_h^*\|_U\le r+\|T(q)-T(q_h^*)\|_U\le r+(1-\alpha/L_h)\|q-q_h^*\|_U$. Rearranging yields $\|q-q_h^*\|_U\le(L_h/\alpha)r$. [step 1.2, step 1.3, algebra]
 
-3.1 On a \texttt{certified} return, step 1.1 gives $r\le\rho=\tilde\rho+\delta/L_h$; substituting into step 2.2 proves both displayed distance bounds. [step 1.1, step 2.2, algebra] ∎
+3.1 On a `certified` return, step 1.1 gives $r\le\rho=\tilde\rho+\delta/L_h$; substituting into step 2.2 proves both displayed distance bounds. [step 1.1, step 2.2, algebra] ∎
 ## Remarks
 
 The objective in this theorem uses the exact continuous PDE state map and optimizes only over the finite-dimensional control box. Its finite-element state/adjoint solves are gradient approximations certified by the full Strang ledger in [[lem-fem-control-gradient-residual-bound]].

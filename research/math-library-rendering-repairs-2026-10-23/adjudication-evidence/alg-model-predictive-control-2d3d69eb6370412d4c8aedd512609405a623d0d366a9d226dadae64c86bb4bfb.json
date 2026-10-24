@@ -1,0 +1,111 @@
+{
+  "id": "alg-model-predictive-control",
+  "group": "dorl_006",
+  "agent": "/root/rendering_repair_coordinator/dorl_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile correctly renders the Definition but has no illustration. A control-flow picture materially clarifies the distinction between H-stage model recursion and execution of just the first selected action, with optional replanning rather than a prescribed update rule. This warrants an explanatory diagram under the expanded editorial scope.",
+      "action": "Added a final Remarks section with a four-stage directed flow and explicitly optional dashed return to planning.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a source-justified TikZ MPC control-flow illustration and a notation/caveat paragraph in final Remarks; no original content or frontmatter changed.",
+  "source_lines_after": {
+    "remarks": [
+      51,
+      53
+    ],
+    "tikz": [
+      55,
+      67
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Planner inputs and value arrays",
+      "check": "The plan node receives the finite learned model, s_0 in S, and H>=1; it initializes the real-valued function V_0 on S to zero and computes Q_h on admissible pairs and V_h on S for h=1,...,H.",
+      "justification": "Definition lines 34-36 gives exactly these inputs, initialization and recursion. def-learned-mdp-model Definition supplies finite nonempty state/action sets and probability rows; def-finite-horizon-mdp-return specifies the H-step undiscounted convention. The figure adds neither terminal reward nor discount."
+    },
+    {
+      "objects": "Action selector",
+      "check": "The selected a_0 lies in A(s_0) and satisfies Q_H(s_0,a_0)=V_H(s_0); first-listed tie-breaking is preserved.",
+      "justification": "Definition line 38 chooses the first action attaining V_H(s_0); the Remarks paragraph spells out the Q_H equality rather than treating V_H as an action. Finite nonempty A(s_0) and the maximum supplier justify attainment as already used by the Definition."
+    },
+    {
+      "objects": "Execution and observation",
+      "check": "The selector points to execution of only a_0 in the true environment, then observation of s_1 in S. No H-action open-loop execution or learned-model sample is depicted.",
+      "justification": "Definition line 38 explicitly distinguishes execution in the true environment from model planning and says the next state is observed. def-learned-mdp-model Definition puts the true and learned models on the same S and A(s)."
+    },
+    {
+      "objects": "Optional feedback relation",
+      "check": "A dashed directed edge goes from observation back to planner input. Its label and prose identify a possible new invocation at s_1 with a supplied model; there is no model-update map or performance claim.",
+      "justification": "Definition line 38 says the controller may invoke again with new state and newly supplied model, and explicitly specifies no update rule or true-return guarantee. Returning to the planner means replacing its current-state input, not asserting s_1=s_0."
+    },
+    {
+      "objects": "Directed flow graph",
+      "check": "Four process vertices, three solid forward edges (plan->choose->execute->observe), and one explicitly drawn dashed observe->plan return. All four arrows appear in the compiled native image, including the return segment into plan.east. No graph --cycle operation, geometric endpoint-open/closed convention, or commutative relation is involved.",
+      "justification": "The edges encode the order stated in Definition lines 34-38; the return is optional. The algorithm remains fully specified independently of the figure and no proof is inferred from it."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "14e324cbdab585a3b1fe663766ff337e1900c58066ce145ba10178bad0ba2e1f",
+    "current_raw_sha256": "2990c6dd2d9c2d18161858353a46881934d826ab5adfcdf2584982e126bec9f6",
+    "pre_edit_guard": "Compared exact raw SHA256 immediately before appending; matched queue before_raw_sha256.",
+    "frozen_comparison": "Frozen before bytes equal original prefix of current file; all original title/body and metadata, including status: published, preserved byte-for-byte.",
+    "original_image_path_discrepancy": "Declared diagram-supplement/screenshots path was absent. Located authentic original only within the same online-and-reinforcement-learning category at screenshots/alg-model-predictive-control--01.png; SHA256 d92af12fd4d070217259f736bf3256f68bc8b7793d4777d42cac434b6496ef98 matches queue. Inspected standalone at original resolution.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl006-mpc/manifest.json",
+    "preview_manifest_sha256": "bb0b507368b948c35a2b4bc96b88dc72ff6950809880138890c5260c71b85384",
+    "preview_source_sha256": "2990c6dd2d9c2d18161858353a46881934d826ab5adfcdf2584982e126bec9f6",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dorl006-mpc/screenshots/alg-model-predictive-control--01.png",
+    "preview_screenshot_sha256": "377f23f8648744671f1e45d7b2331e3278a5e7477432b03fb20582aef7b18412",
+    "native_visual_check": "Inspected final standalone original-resolution native PNG. Native SVG is present (392.318 x 267.52); one diagram, no diagram failures, 14 KaTeX instances and no KaTeX errors in capture receipt. Four separate boxes, readable labels, solid/dashed strokes and all arrowheads visible against black; no label/edge overlap or clipping observed. No pale fill or open/closed point markers. Return route and final leftward arrow into plan.east visibly present."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-model-predictive-control.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-model-predictive-control.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-model-predictive-control.md",
+            "item_id": "alg-model-predictive-control",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-model-predictive-control.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl006 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-model-predictive-control --out research/math-library-rendering-repairs-2026-10-23/previews/dorl006-mpc",
+      "result": "Completed native manifest and screenshot receipt; initial process exit code not retained by output-only wrapper. A subsequent repeat refused existing output as designed; original complete artifacts inspected and source binding verified."
+    }
+  ],
+  "remaining_issues": []
+}

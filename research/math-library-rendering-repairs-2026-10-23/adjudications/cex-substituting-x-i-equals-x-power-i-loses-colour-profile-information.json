@@ -1,0 +1,76 @@
+{
+  "id": "cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information",
+  "agent": "/root/rendering_repair_coordinator/comb_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "The authentic original standalone PNG, viewed at original resolution, visibly prints x_i=x^i with literal underscore/caret in the heading. The frozen and current pre-edit source agree byte-for-byte and use no math delimiters around the expression, while the statement renders the same intended formula mathematically.",
+      "action": "Wrapped only the existing title expression x_i=x^i in inline dollar delimiters.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only inline-math delimiter repair: x_i=x^i becomes $x_i=x^i$.",
+  "source_lines_after": {
+    "4": "title: \"The substitution $x_i=x^i$ can erase colour-profile information\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "a3f2d102e031326b5f6d1f0629f94af8c4755d94ecf4f9e193e1070014e0643c",
+  "after_raw_sha256": "8fe2ee4fcb49bee9252fc3fe276d9362284575db5a3f991c3ae2cbd8b38d13b3",
+  "scope_verification": "Exact string comparison establishes that only the two title delimiters changed. Body and all metadata except the authorized title remain byte-identical, including status: published.",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.md",
+            "item_id": "cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information--01.png",
+    "original_view": "Standalone original-resolution inspection.",
+    "final_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/comb-001-native-final/manifest.json",
+    "final_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/comb-001-native-final/screenshots/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information--01.png",
+    "source_sha256": "8fe2ee4fcb49bee9252fc3fe276d9362284575db5a3f991c3ae2cbd8b38d13b3",
+    "final_view": "Standalone original-resolution inspection confirms subscript i and superscript i render correctly in the title; complete body remains readable, with both proof steps and blue tags visible.",
+    "preview_exit_code": 0,
+    "preview_output": {
+      "items": 1,
+      "tiles": 1,
+      "reference_map_diagnostics": 16
+    },
+    "limitations": "Native local title/ItemBody preview only; manifest records 16 unrelated reference-map parse diagnostics. Initial preview invocation refused an already-created empty output directory; a new unique output path succeeded."
+  }
+}

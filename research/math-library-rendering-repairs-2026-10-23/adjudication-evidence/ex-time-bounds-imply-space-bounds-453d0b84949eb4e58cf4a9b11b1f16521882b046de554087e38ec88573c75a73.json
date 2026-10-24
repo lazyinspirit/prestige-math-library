@@ -1,0 +1,73 @@
+{
+  "id": "ex-time-bounds-imply-space-bounds",
+  "agent": "/root/rendering_repair_coordinator/cpt_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original standalone 1200x1400 screenshot visibly prints both title exponents as n^2. Frozen and pre-edit current title omit delimiters, while the body correctly typesets the same bound.",
+      "action": "Wrapped both title occurrences of O(n^2) in inline math delimiters.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added inline math delimiters around both O(n^2) title bounds only.",
+  "source_lines_after": {
+    "4": "title: \"A machine that runs in $O(n^2)$ time necessarily uses at most $O(n^2)$ space\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "write_scope_check": "Exact before/current raw comparison confirms four dollar delimiters added in title only; all body and other metadata bytes, including status: published, preserved.",
+  "before_raw_sha256": "df2d98a5ce2ad3606195aa73d44d0ff40ddef8bfbcb78a23d217e96643245f7f",
+  "after_raw_sha256": "ad8813690921f6b5d7a606a106d6dab495417dde532ef0630a121637d46bf9d0",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-time-bounds-imply-space-bounds.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-time-bounds-imply-space-bounds.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-time-bounds-imply-space-bounds.md",
+            "item_id": "ex-time-bounds-imply-space-bounds",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-time-bounds-imply-space-bounds.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_image": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/ex-time-bounds-imply-space-bounds--01.png",
+    "original_resolution_inspected": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt_004/manifest.json",
+    "manifest_sha256": "5b39d03cd8890c9b9bc2224e70809ba1008c4f74f834042a073b047b08fb6e63",
+    "source_sha256": "ad8813690921f6b5d7a606a106d6dab495417dde532ef0630a121637d46bf9d0",
+    "final_image": "research/math-library-rendering-repairs-2026-10-23/previews/cpt_004/screenshots/ex-time-bounds-imply-space-bounds--01.png",
+    "final_image_sha256": "38de4b333ad78866f3ab5bc67d81f97aa53c557e56800456a4ca2fc0ffd454d5",
+    "final_original_resolution_inspected": true,
+    "outcome": "Both title exponents render correctly. Complete title visible without clipping or overlap.",
+    "limitations": "Local native title/ItemBody preview, not production route; preview reports 17 unrelated reference-map parse diagnostics. Local supplier title renders correctly."
+  }
+}

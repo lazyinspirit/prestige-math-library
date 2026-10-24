@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-classical-wave-solutions-are-locally-determined-by-cauchy-data.json
+  precheck: pass
 id: cor-classical-wave-solutions-are-locally-determined-by-cauchy-data
 kind: corollary
 title: "The constructed classical solutions are locally determined by the Cauchy data"
@@ -11,11 +14,6 @@ deps: [thm-kirchhoff-formula-for-the-three-dimensional-wave-equation, thm-poisso
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)"
@@ -55,3 +53,25 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $c>0$ and l
 1.1 Free case. Let $(u_0,u_1)$ and $(\tilde u_0,\tilde u_1)$ be admissible data agreeing on $\overline B_{ct}(x)$ and put $\delta_j:=u_j-\tilde u_j$. Each $\delta_j$ vanishes on the open ball, so all its derivatives through the orders in the formulas vanish on the closed ball by continuity. In the odd-dimensional formula, every sphere-average ingredient is an average of a derivative of $\delta_j$ evaluated on $\partial B_{ct}(x)$, hence is zero by [F1, F2]. For even $n$, put $G_{\delta_j}(t'):=\int_{B_1}\delta_j(x+ct'z)w(z)\,dz$. Fix a compact interval $J$ about $t$ and a closed ball containing all $x+ct'z$ for $t'\in J$, $|z|\le1$. For each derivative order $0\le m<k$, the difference quotients in $t'$ of $c^mD^m\delta_j(x+ct'z)[z,\ldots,z]w(z)$ are bounded by $c^{m+1}C_{m+1}w(z)$ on $J$, where $C_{m+1}$ bounds the next derivative on that ball by [F5, F6]. This is an integrable majorant independent of $t'$; [F4] therefore justifies differentiating under the integral successively through order $k$. At $t'=t$, all integrand derivatives vanish because $x+ctz\in\overline B_{ct}(x)$, so $G_{\delta_j}^{(m)}(t)=0$ for $m\le k$. By [F3] the even-formula terms are finite combinations of these derivatives and hence vanish. Thus replacing the data by $(\tilde u_0,\tilde u_1)$ changes no term of the formula and leaves $u(x,t)$ unchanged. [F1, F2, F3, F4, F5, F6, algebra]
 
 2.1 Forced case and conclusion. The retarded potential of the forced three-dimensional formula is an integral of the source over the backward cone $|y-x|\le c(t-s)$, $0\le s\le t$; sources agreeing there give equal integrals, hence equal values at $(x,t)$. This proves the local determination of the constructed solutions by the stated data or source; no uniqueness claim for arbitrary $C^2$ solutions is made, that being the energy statement of the wave-energy page. [F1, given] ∎ 
+
+## Remarks
+
+The diagram is a spatial line section of the backward cone. Fix a unit vector $e$ and write $y=x+re$; the horizontal coordinate is $r$ and the vertical coordinate is source time $s$. The section is $0\le s\le t$, $|r|\le c(t-s)$. Its closed base interval is the section of $\overline B_{ct}(x)$ on which the initial data are prescribed. In the full space, each time slice is the closed ball $\overline B_{c(t-s)}(x)$. Agreement of sources throughout the cone is sufficient here; the three-dimensional retarded formula actually samples its lateral boundary $|y-x|=c(t-s)$. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\draw[->] (-3,0) -- (3,0) node[right] {$r$};
+\draw[->] (0,-0.3) -- (0,3.3) node[above] {$s$};
+\draw[thick] (-2.3,0) -- (0,2.7) -- (2.3,0);
+\draw[very thick] (-2.3,0) -- (2.3,0);
+\fill (-2.3,0) circle (1.7pt);
+\fill (2.3,0) circle (1.7pt);
+\fill (0,2.7) circle (1.7pt);
+\node[above right] at (0,2.7) {$(x,t)$};
+\node[below] at (-2.3,0) {$-ct$};
+\node[below] at (2.3,0) {$ct$};
+\node[below left] at (0,0) {$0$};
+\node at (0,0.9) {$|r|\le c(t-s)$};
+\node at (0,-0.8) {initial data: $x+re$, $-ct\le r\le ct$};
+\end{tikzpicture}
+```

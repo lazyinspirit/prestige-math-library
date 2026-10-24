@@ -1,16 +1,7 @@
 ---
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-17.md"
-      - "research/frontier-38-owner-30-alpha-batch-17-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-17-post-5a.json"
-    content_sha256: "25a1800f49735e8665e63f487793d14eb4e42301f850dde9c6bfec6ea88d93a6"
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-markov-stabilization-preserves-the-unknot-closure.json
+  precheck: pass
 id: ex-a-markov-stabilization-preserves-the-unknot-closure
 kind: example
 title: "A Markov stabilization preserves the unknot closure"
@@ -60,3 +51,61 @@ isotopies are the R1 unwinding of the added kink, one for each sign. Here the
 2.1 **The R1 isotopies.** The explicit isotopy for the positive sign is the R1 move that pulls the kink straight inside a small ball neighbourhood of the kink, keeping the rest of the closed braid fixed; for the negative sign the mirror isotopy unrolls the opposite kink. In both cases the R1 move is realized by an ambient isotopy by [F2], so the closure of each stabilization is equivalent to the closure of the trivial braid, the unknot. [F2, step 1.1]
 
 3.1 **Conclusion.** Both stabilizations $e\sigma_1$ and $e\sigma_1^{-1}$ in $B_2$ close to the unknot, with the explicit R1 isotopies of the two signs; the example illustrates that stabilization preserves the closure in the simplest possible case. [F2, F3, step 1.1, step 2.1] ∎
+
+## Remarks
+
+The following planar closure diagrams show one strand before stabilization and
+two afterward. Inside each braid, time and orientation run upward; the outside
+arcs return each top position to the same bottom position. Project with the
+positive second disk coordinate toward the viewer: a gap is an underpass.
+Thus the left starting strand passes under in $\sigma_1$ and over in
+$\sigma_1^{-1}$, in the half-twist convention of [F1].
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,scale=1.4,transform shape,>=stealth,line width=1pt]
+\node at (0,3.1) {$e\in B_1$};
+\draw[->] (0,0) -- (0,1.4);
+\draw (0,1.4) -- (0,2.4);
+\draw (0,2.4) .. controls (-1.2,2.4) and (-1.2,0) .. (0,0);
+\draw[->] (-0.9,1.4) -- (-0.9,1.05);
+\node at (-0.35,-0.65) {$\widehat e$};
+\begin{scope}[xshift=3.2cm]
+\node at (0.6,3.1) {$e\sigma_1\in B_2$};
+\draw (0,0) -- (0.54,1.08);
+\draw (0.66,1.32) -- (1.2,2.4);
+\draw (1.2,0) -- (0,2.4);
+\draw[->] (0.15,0.3) -- (0.3,0.6);
+\draw[->] (1.05,0.3) -- (0.9,0.6);
+\draw (0,2.4) .. controls (-1.2,2.4) and (-1.2,0) .. (0,0);
+\draw (1.2,2.4) .. controls (2.4,2.4) and (2.4,0) .. (1.2,0);
+\draw[->] (-0.9,1.4) -- (-0.9,1.05);
+\draw[->] (2.1,1.4) -- (2.1,1.05);
+\node at (0,-0.25) {$1$};
+\node at (1.2,-0.25) {$2$};
+\node at (0.6,-0.65) {$\widehat{e\sigma_1}$};
+\end{scope}
+\begin{scope}[xshift=7.5cm]
+\node at (0.6,3.1) {$e\sigma_1^{-1}\in B_2$};
+\draw (1.2,0) -- (0.66,1.08);
+\draw (0.54,1.32) -- (0,2.4);
+\draw (0,0) -- (1.2,2.4);
+\draw[->] (0.15,0.3) -- (0.3,0.6);
+\draw[->] (1.05,0.3) -- (0.9,0.6);
+\draw (0,2.4) .. controls (-1.2,2.4) and (-1.2,0) .. (0,0);
+\draw (1.2,2.4) .. controls (2.4,2.4) and (2.4,0) .. (1.2,0);
+\draw[->] (-0.9,1.4) -- (-0.9,1.05);
+\draw[->] (2.1,1.4) -- (2.1,1.05);
+\node at (0,-0.25) {$1$};
+\node at (1.2,-0.25) {$2$};
+\node at (0.6,-0.65) {$\widehat{e\sigma_1^{-1}}$};
+\end{scope}
+\end{tikzpicture}
+```
+
+Each stabilized diagram is one circle: following either crossing strand and
+its return arc leads into the other strand, reflecting the permutation
+$(1\ 2)$ in step 1.1. Its single crossing can be removed by R1, with opposite
+over/under choices in the two panels, as in step 2.1. These are schematic
+oriented-link diagrams, not a change of the fixed closure framing or an
+isotopy required to fix the axis. The verification above is independent of
+the illustration.

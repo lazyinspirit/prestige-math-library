@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-naturality-of-singular-mayer-vietoris.json
+  precheck: pass
 id: thm-naturality-of-singular-mayer-vietoris
 kind: theorem
 title: "Naturality of singular Mayer–Vietoris"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-mayer-vietoris-sequence-in-singular-homology, lem-the-mayer-vietoris-connector-is-independent-of-small-chain-decomposition, cor-the-long-exact-homology-sequence-is-natural, thm-cover-small-singular-chains-compute-singular-homology, thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, §2.2"
@@ -37,3 +37,25 @@ commuting morphism between the Mayer–Vietoris sequences of the two covers.
 2.1 Let $\iota_X:A_X\hookrightarrow C_\bullet(X;G)$ and $\iota_Y:A_Y\hookrightarrow C_\bullet(Y;G)$ be the inclusions. On every small simplex both composites are the same singular simplex $f\circ\sigma$, so $f_\#\iota_X=\iota_Y f_s$. The maps $H_n(\iota_X),H_n(\iota_Y)$ are isomorphisms by [[thm-cover-small-singular-chains-compute-singular-homology]]. Therefore $H_n(f_s)H_n(\iota_X)^{-1}=H_n(\iota_Y)^{-1}H_n(f)$. Transporting the ladder of step 1.1 along these isomorphisms yields exactly the ordinary homology maps and sequences of [[thm-mayer-vietoris-sequence-in-singular-homology]]. [step 1.1, algebra]
 
 3.1 In particular, for a small cycle $z=u+v$, its image is $f_\#u+f_\#v$ and $f_\#(\partial u)=\partial f_\#u$. Thus the connector sends the image class to the image of $[\partial u]$, with the same positive U-boundary sign; independence of the chosen small representative and decomposition is supplied by [[lem-the-mayer-vietoris-connector-is-independent-of-small-chain-decomposition]] and the inclusion isomorphisms. This proves every connecting square as well as the ordinary squares. The argument includes degree zero, the terminal maps to zero, empty overlap or empty cover members, and $G=0$. [step 1.1, step 2.1, algebra] ∎
+
+## Remarks
+
+The chain maps in step 1.1 form the following commuting ladder. Here $C_\bullet(Z)$ abbreviates $C_\bullet(Z;G)$, and each $f_\#$ denotes composition with the appropriate restriction of $f$; $f_s$ is its restriction to cover-small chains. Both rows are short exact, with $i(c)=(c,-c)$ and $j(u,v)=u+v$ (and the same formulas for $i',j'$).
+
+```tikzcd
+\begin{tikzcd}[every cell/.append style={font=\large}, row sep=large, column sep=large]
+C_\bullet(U\cap V) \arrow[r,"i"] \arrow[d,"f_\#"'] & C_\bullet(U)\oplus C_\bullet(V) \arrow[r,"j"] \arrow[d,"f_\#\oplus f_\#"] & A_X \arrow[d,"f_s"] \\
+C_\bullet(U'\cap V') \arrow[r,"i'"'] & C_\bullet(U')\oplus C_\bullet(V') \arrow[r,"j'"'] & A_Y
+\end{tikzcd}
+```
+
+After the inclusion isomorphisms of step 2.1, a segment of the resulting commuting homology ladder is shown below. Write $H_k(Z)=H_k(Z;G)$, and let each $f_*$ be induced by the corresponding restriction of $f$. For $n\ge1$, both rows are segments of the long exact sequences.
+
+```tikzcd
+\begin{tikzcd}[every cell/.append style={font=\large}, row sep=large, column sep=large]
+H_n(U\cap V) \arrow[r,"i_*"] \arrow[d,"f_*"'] & H_n(U)\oplus H_n(V) \arrow[r,"j_*"] \arrow[d,"f_*\oplus f_*"] & H_n(X) \arrow[r,"\delta_X"] \arrow[d,"f_*"] & H_{n-1}(U\cap V) \arrow[d,"f_*"] \\
+H_n(U'\cap V') \arrow[r,"i'_*"'] & H_n(U')\oplus H_n(V') \arrow[r,"j'_*"'] & H_n(Y) \arrow[r,"\delta_Y"'] & H_{n-1}(U'\cap V')
+\end{tikzcd}
+```
+
+Here $i_*(a)=(a,-a)$ uses the two inclusion-induced maps, and $j_*$ sums the inclusion-induced classes in $X$; the primed maps use $Y$. For a small cycle $z=u+v$, the last square says $\delta_Y f_*[z]=[\partial f_\#u]=f_*[\partial u]=f_*\delta_X[z]$, retaining the positive $U$-boundary convention of step 3.1. In degree zero the sequences terminate at $H_0(X)\to0$ and $H_0(Y)\to0$, so their terminal square also commutes. Empty cover members or overlap give zero chain and homology groups in the corresponding positions. These diagrams summarize the proof above; the proof is independent of the figures.

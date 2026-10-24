@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-proper-surface-regularity-transfers-to-and-from-completion.json
+  precheck: pass
 id: lem-proper-surface-regularity-transfers-to-and-from-completion
 kind: lemma
 title: "Regularity of a proper scheme transfers to and from local-base completion"
@@ -22,12 +25,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Lemmas 54.11.1 and 54.11.2 (complete proof read)"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -38,7 +36,7 @@ Assume AC. Let $(A,\mathfrak m)$ be a Noetherian local ring and $X\to\operatorna
 
 **Given:** A Noetherian local ring $(A,\mathfrak m)$, a scheme $X\to\operatorname{Spec}A$ locally of finite type, and the base change $Y=X\times_{\operatorname{Spec}A}\operatorname{Spec}\widehat A$, with $y\in Y$ and image $x\in X$.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-proper-morphism.* A morphism of schemes $f:X\to S$ is **proper** if and only if it is separated, of finite type, and universally closed. Here separatedness has the meaning of def-separated-morphism-schemes, finite type has the meaning of def-locally-finite-type-and-finite-type-morphism, and universally closed has the meaning of def-universally-closed-morphism. ([[def-proper-morphism]])
 

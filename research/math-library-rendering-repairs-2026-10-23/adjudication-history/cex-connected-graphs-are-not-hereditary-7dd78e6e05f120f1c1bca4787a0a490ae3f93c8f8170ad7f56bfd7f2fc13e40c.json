@@ -1,0 +1,94 @@
+{
+  "id": "cex-connected-graphs-are-not-hereditary",
+  "agent": "/root/rendering_repair_coordinator/comb_023",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Original standalone 1200x1400 PNG shows literal draw/node commands in Remarks. The frozen/current source puts the picture on the opening fence line and the closing fence on the picture line; the native renderer therefore cannot recognize the complete TikZ block. The actual fence has three backticks, despite the queue excerpt describing four.",
+      "action": "Moved only the opening/closing TikZ fences onto their own source lines. Preserved the complete picture source and all mathematical prose.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Two newline insertions make the existing Remarks TikZ illustration a supported fenced block.",
+  "source_lines_after": [
+    54,
+    55,
+    57,
+    59,
+    60
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Left graph has vertices v0,v1,v2, edges {v0,v1},{v1,v2}, and degree sequence (1,2,1).",
+      "justification": "The path-graph supplier defines P_n with n vertices and consecutive edges. Thus this is exactly P3, and every vertex pair has a path, verifying F1 and step 1.1. Both edges are visible in the compiled SVG and standalone PNG."
+    },
+    {
+      "objects": "Right graph has vertex set {v0,v2}, no edges and degree sequence (0,0).",
+      "justification": "The induced-subgraph supplier takes E intersect [W]^2. Neither edge of P3 has both endpoints in W={v0,v2}. Thus the graph is the two-vertex empty graph, denoted overline K2 by the standard-graphs supplier. There is no path between its distinct vertices, verifying F2 and step 1.2; both isolated vertices and absence of an edge are visible."
+    },
+    {
+      "objects": "The arrow labelled induce on {v0,v2} represents induced-subgraph selection, not a graph edge or a graph homomorphism.",
+      "justification": "It links the two separate diagrams. Removing the middle vertex and its incident edges gives exactly the right-hand graph. A connected graph with a disconnected induced subgraph violates the induced-subgraph closure clause of the hereditary-class definition (F3 and step 2.1). No closing-cycle edge is asserted or present."
+    }
+  ],
+  "remaining_issues": [],
+  "before_raw_sha256": "53a854d9d9af160c557a50d220b9b76b9e80226a01bab873701bfd1b6847ef23",
+  "after_raw_sha256": "e5d163daa6c5271da38e456c69621abcc5736cdd218487c864c347e8dce083d1",
+  "status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-connected-graphs-are-not-hereditary.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-connected-graphs-are-not-hereditary.md",
+            "item_id": "cex-connected-graphs-are-not-hereditary",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-connected-graphs-are-not-hereditary.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-connected-graphs-are-not-hereditary.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "visual_checks": {
+    "original_viewed": "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/cex-connected-graphs-are-not-hereditary--01.png",
+    "preview_command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-comb-023-fresh TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-connected-graphs-are-not-hereditary --out research/math-library-rendering-repairs-2026-10-23/previews/comb-023-fresh",
+    "preview_exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/comb-023-fresh/manifest.json",
+    "fresh_native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-comb-023-fresh/pi-tikz-cache/7fb9e01300caa3910ce663e69181694c.svg",
+    "fresh_figure_original_resolution_viewed": "research/math-library-rendering-repairs-2026-10-23/previews/comb-023-fresh/figure.png",
+    "current_tile_original_resolution_viewed": "research/math-library-rendering-repairs-2026-10-23/previews/comb-023-fresh/screenshots/cex-connected-graphs-are-not-hereditary--01.png",
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "assessment": "Native compilation used a unique fresh cache. The isolated original-resolution image shows both path edges and two disconnected endpoint vertices, complete labels and captions. No concrete clipping or illegibility justified changing layout. Preview is local ItemBody rendering, not full production-route coverage; manifest reports 32 reference-map diagnostics from the shared inventory."
+  }
+}

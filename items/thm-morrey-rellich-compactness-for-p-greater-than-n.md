@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-morrey-rellich-compactness-for-p-greater-than-n.json
+  precheck: pass
 id: thm-morrey-rellich-compactness-for-p-greater-than-n
 kind: theorem
 title: "Morrey--Rellich compactness for $p>n$"
@@ -42,9 +45,9 @@ $0\le\beta<\alpha$, and in $L^q(\Omega)$ for every $1\le q<\infty$.
 
 [F2] *Morrey's inequality on the compact set used here.* Each $v_j$ in [F1] is supported in a fixed compact set $K$. Choose one ball $B(x,R)$ containing $K\cup\overline\Omega$. The supplier's local estimate on $B(x,R)$, with $B(x,2R)\subset\mathbb R^n$, gives $[v_j^*]_{C^{0,\alpha}(B(x,R))}\le C_2\|Dv_j\|_{L^p(B(x,2R))}$ for the continuous representative. Its average on $B(x,R)$ has modulus at most $|B(x,R)|^{-1/p}\|v_j\|_{L^p(B(x,R))}$, so the same oscillation estimate also bounds $\|v_j^*\|_{L^\infty(B(x,R))}$ by $C_3\|v_j\|_{W^{1,p}(\mathbb R^n)}$. Continuous representatives are unique because continuous functions equal almost everywhere on an open ball are equal everywhere there. Thus both norms on $\overline\Omega$ are bounded by $C_4\|v_j\|_{W^{1,p}(\mathbb R^n)}$, with constants depending only on $n,p,R$. ([[thm-morrey-inequality-for-p-greater-than-n]], [[def-local-holder-and-c-two-alpha-norms-on-euclidean-balls]], [[def-l-p-space-as-a-quotient-by-null-functions]])
 
-[F3] *Arzel\`a--Ascoli.* A uniformly bounded, equicontinuous family of real functions on a compact metric space has a uniformly convergent subsequence; for complex-valued families apply this to real and imaginary parts. ([[thm-arzela-ascoli-for-real-ck]])
+[F3] *Arzelà–Ascoli.* A uniformly bounded, equicontinuous family of real functions on a compact metric space has a uniformly convergent subsequence; for complex-valued families apply this to real and imaginary parts. ([[thm-arzela-ascoli-for-real-ck]])
 
-[F4] *H\"older interpolation.* For a bounded function $g:K\to\mathbb K$ on
+[F4] *Hölder interpolation.* For a bounded function $g:K\to\mathbb K$ on
 any set $K\subseteq\mathbb R^n$, write
 $[g]_{C^{0,\gamma}(K)}:=\sup_{x\ne y\in K}|g(x)-g(y)|/|x-y|^\gamma$ and
 $\|g\|_{C^{0,\gamma}(K)}:=\|g\|_{L^\infty(K)}+[g]_{C^{0,\gamma}(K)}$.
@@ -60,9 +63,9 @@ the seminorm and supremum conventions agree with
 
 ## Proof
 
-**Proof technique:** extend, cut off, apply Morrey's inequality for uniform $C^{0,\alpha}$ bounds, extract uniformly convergent representatives by Arzel\`a--Ascoli, and interpolate down to $C^{0,\beta}$.
+**Proof technique:** extend, cut off, apply Morrey's inequality for uniform Hölder bounds of exponent α, extract uniformly convergent representatives by Arzelà–Ascoli, and interpolate down to Hölder exponent β.
 
-1.1 If $\Omega=\varnothing$ the claim is immediate. Otherwise, by [F1] and [F2] each $v_j^*$ satisfies $\|v_j^*\|_{L^\infty(\overline\Omega)}\le C_3C_1M$ and $[v_j^*]_{C^{0,\alpha}(\overline\Omega)}\le C_2C_1M$; hence the family $\{v_j^*|_{\overline\Omega}\}$ is uniformly bounded and $\alpha$-H\"older, in particular equicontinuous, on the compact set $\overline\Omega$. [F1, F2, given]
+1.1 If $\Omega=\varnothing$ the claim is immediate. Otherwise, by [F1] and [F2] each $v_j^*$ satisfies $\|v_j^*\|_{L^\infty(\overline\Omega)}\le C_3C_1M$ and $[v_j^*]_{C^{0,\alpha}(\overline\Omega)}\le C_2C_1M$; hence the family $\{v_j^*|_{\overline\Omega}\}$ is uniformly bounded and $\alpha$-Hölder, in particular equicontinuous, on the compact set $\overline\Omega$. [F1, F2, given]
 
 2.1 By [F3] applied to the real and imaginary parts on the compact metric space $\overline\Omega$, a subsequence of $(v_j^*|_{\overline\Omega})$ converges uniformly, that is, in $C^{0,0}(\overline\Omega)$; along it the $C^{0,\alpha}$ seminorms stay bounded by step 1.1. [F3, step 1.1]
 

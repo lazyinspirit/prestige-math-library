@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-sobolev-zeros-bound-on-a-cone-domain.json
+  precheck: pass
 id: lem-sobolev-zeros-bound-on-a-cone-domain
 kind: lemma
-title: "A Sobolev function vanishing on scattered sites has an h^ν bound"
+title: 'A Sobolev function vanishing on scattered sites has an $h^\nu$ bound'
 status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
@@ -32,12 +35,7 @@ sources:
         urface_fitting"
     - title: "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 23–25"
       url: "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement

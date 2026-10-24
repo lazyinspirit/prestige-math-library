@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-adaptive-covariance-lepski-scale-reduction.json
+  precheck: pass
 id: lem-adaptive-covariance-lepski-scale-reduction
 kind: lemma
 title: Lepski scale selection transfers fixed-scale covariance bounds
@@ -16,11 +19,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 axiom_use: The scale grid is finite and its least-index rule is deterministic; no choice axiom is used.
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, Theorem 2.1 and §4.3"
@@ -70,3 +68,43 @@ $\lceil L_g\rceil$, not the generally false unrounded bound $|J|\le L_g$.
 2.1 On the joint fixed-scale event, for every $k>\bar j$ the triangle inequality gives $\|\widehat\Sigma_k-\widehat\Sigma_{\bar j}\|\le3(\sigma_k+\sigma_{\bar j})\sqrt{\beta/m}\le6\sigma_k\sqrt{\beta/m}$. Hence $\bar j$ is admissible and the selected $j^*\le\bar j$. If they differ, the selection rule gives $\|\widehat\Sigma_{j^*}-\widehat\Sigma_{\bar j}\|\le6\sigma_{\bar j}\sqrt{\beta/m}$; if equal this distance is zero. Adding the error at $\bar j$ yields $\|\widehat\Sigma^*-\Sigma\|\le9\sigma_{\bar j}\sqrt{\beta/m}<18\sigma_0\sqrt{\beta/m}$. [given, F1, step 1.1, algebra]
 
 3.1 A finite union bound costs at most $\sum_{j\ge\bar j}q_j$ for individual failure bounds; under [F3], $q_j=5p e^{-\beta}$ gives the stated $5p\lceil L_g\rceil e^{-\beta}$ bound. For a shared event $E$, the complement of $E\cap\bigcap_{j\ge\bar j}G_j$ has probability at most $\delta+hN_+e^{-\beta}$; the common failure is counted once. Applying step 2.1 proves all probability assertions. [F3, given, step 1.1, step 2.1, algebra] ∎
+
+
+## Remarks
+
+The logarithmic scale axis below illustrates the bracket
+$\sigma_{\min}=1$, $\sigma_0=3$, $\sigma_{\max}=8$. Here $L_g=4$,
+$J=\{0,1,2,3\}$, $\bar j=2$ and $N_+=2$. The highlighted scales
+are those on which the joint fixed-scale event requires error bounds.
+On this event, step 2.1 makes $\bar j$ admissible, so the selected index
+lies in the indicated set; no particular value of $j^*$ is asserted.
+
+```tikz
+\begin{tikzpicture}[x=2.5cm,y=1cm]
+\fill[green!25!black] (1.88,-0.26) rectangle (3.12,0.26);
+\draw[->] (-0.2,0) -- (3.35,0);
+\foreach \x in {0,1,2,3} {
+  \fill (\x,0) circle (2pt);
+}
+\node[below] at (0,-0.35) {$\sigma_{\min}=1$};
+\node[below] at (1,-0.35) {$\sigma_1=2$};
+\node[below] at (2,-0.35) {$\sigma_2=4$};
+\node[below] at (3,-0.35) {$\sigma_3=8$};
+\draw[red,dashed] (1.585,0) -- (1.585,0.85);
+\node[above,red] at (1.585,0.85) {$\sigma_0=3$};
+\node[above] at (2,0.08) {$\bar j=2$};
+\draw (2,1.65) -- (2,1.8) -- (3,1.8) -- (3,1.65);
+\node[above] at (2.5,1.8) {$j\ge\bar j:\ N_+=2$};
+\draw[blue] (0,-0.85) -- (0,-1) -- (2,-1) -- (2,-0.85);
+\node[below,blue] at (1,-1) {$j^*\in\{0,1,2\}$ on the joint event};
+\node[below] at (1.5,-1.65) {Equal spacing represents doubling of scale.};
+\end{tikzpicture}
+```
+
+The parameter $\sigma_0$ is distinct from the grid scale with index zero,
+which is $\sigma_{\min}$. In this example the comparison establishing
+admissibility of $\bar j=2$ is
+$\|\widehat\Sigma_3-\widehat\Sigma_2\|\le6\sigma_3\sqrt{\beta/m}$.
+In general, the agreement rule compares a candidate with every larger
+index $k$, using tolerance $6\sigma_k\sqrt{\beta/m}$. The proof above
+establishes the general result independently of this illustration.

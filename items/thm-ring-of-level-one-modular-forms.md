@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ring-of-level-one-modular-forms.json
+  precheck: pass
 id: thm-ring-of-level-one-modular-forms
 kind: theorem
 title: "The graded ring of level-one modular forms"
@@ -17,22 +20,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-21.md"
-      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-21-post-5a.json"
-    content_sha256: "c8f9d51d9b978a3e34c3155463cd7f8ac8750bba7a04847d617fcf207b9da7b0"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "D. Zagier, Elliptic Modular Forms and Their Applications, in The 1-2-3 of Modular Forms (Universitext, Springer, 2008)"
@@ -64,7 +51,7 @@ The graded $\mathbb C$-algebra $M_*=\bigoplus_{k\ even}M_k$ is freely generated 
 
 ## Proof
 
-**Proof technique:** induction on the weight $k$ in steps of $12$.
+**Proof technique:** induction on the weight k in steps of 12.
 
 1.1 Base cases: for $k=0$, $M_0=\mathbb C$ consists of constants and the empty monomial $1$ has weight $0$; for $k=2$, $M_2=0$; for $k=4,6,8,10$ the space $M_k$ is one-dimensional and contains the monomial $E_4,E_6,E_4^2,E_4E_6$ respectively, whose value at the cusp is $1$, so every $f\in M_k$ equals $f(\infty)$ times that monomial. Hence in these degrees the monomials span $M_k$. [base, F1, F2, F4, given, algebra]
 

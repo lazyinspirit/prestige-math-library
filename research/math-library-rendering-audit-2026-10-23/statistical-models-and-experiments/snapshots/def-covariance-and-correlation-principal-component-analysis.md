@@ -1,0 +1,79 @@
+---
+id: def-covariance-and-correlation-principal-component-analysis
+kind: definition
+title: "Covariance and correlation principal component analysis"
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps: ["def-scientific-statistical-model-contract","def-parametric-statistical-model","def-estimand-on-a-statistical-model","def-statistic-and-estimator","def-covariance-matrix-of-a-random-vector","lem-finite-second-moment-covariance-matrix-is-well-defined","def-sample-covariance-and-operator-norm-loss","cor-real-spectral-theorem-for-self-adjoint-endomorphisms","lem-pca-sample-covariance-is-a-measurable-estimator"]
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)"
+      url: "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf"
+    - title: "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf"
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Definition
+
+Let $\mathsf E=((\mathcal X,\mathcal A),\Theta,(P_\theta)_{\theta\in\Theta})$
+be a parametric statistical model, let $p\ge1$, and let
+$X:\mathcal X\to\mathbb R^p$ be a measurable random vector with
+$\mathbb E_\theta\|X\|_2^2<\infty$ for every $\theta\in\Theta$. Write
+$\mu_\theta=\mathbb E_\theta X$ and
+$\Sigma_\theta=\operatorname{Cov}_\theta(X)$ as in
+[[def-covariance-matrix-of-a-random-vector]]. The map
+$\psi(\theta)=\Sigma_\theta$ is the covariance-matrix estimand on this model
+([[def-estimand-on-a-statistical-model]]).
+
+For each $\theta$, list the real eigenvalues of $\Sigma_\theta$ in
+nonincreasing order and counting multiplicity. The **covariance-PCA
+decomposition** is the list of eigenspaces of $\Sigma_\theta$, ordered by
+their distinct eigenvalues from largest to smallest. Equivalently, for each
+distinct eigenvalue $\lambda$, its component subspace is
+$\ker(\Sigma_\theta-\lambda I)$. The top eigenspace is the leading principal
+subspace; when its eigenvalue is simple it is a line, and either unit
+representative has the same sign-free direction.
+The well-definedness result
+[[lem-finite-second-moment-covariance-matrix-is-well-defined]] ensures these
+covariance matrices are finite, symmetric, and positive semidefinite. The
+real spectral theorem
+[[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] ensures their
+eigenspaces span $\mathbb R^p$.
+
+If every coordinate variance $(\Sigma_\theta)_{jj}$ is positive, put
+$D_\theta=\operatorname{diag}(\sqrt{(\Sigma_\theta)_{11}},\ldots,
+\sqrt{(\Sigma_\theta)_{pp}})$ and standardize the centered vector as
+$Z_\theta=D_\theta^{-1}(X-\mu_\theta)$. Its covariance is the correlation
+matrix
+$R_\theta=D_\theta^{-1}\Sigma_\theta D_\theta^{-1}$. **Correlation-PCA** is
+the ordered eigenspace decomposition of $R_\theta$. Thus both population
+conventions center first; correlation-PCA additionally divides each
+coordinate by its positive population standard deviation.
+
+For an iid sample $X_1,\ldots,X_n$, **sample covariance-PCA** uses the
+eigenspaces of the sample-centered covariance
+$\widehat\Sigma_n^\ast=n^{-1}\sum_i(X_i-\bar X)(X_i-\bar X)^{\mathsf T}$
+from [[def-sample-covariance-and-operator-norm-loss]], where
+$\bar X=n^{-1}\sum_iX_i$. Sample correlation-PCA standardizes by the
+positive sample standard deviations when all sample coordinate variances are
+positive. The divisor convention here is $n$, not $n-1$. The sample
+covariance matrix is a statistic, and it is an estimator of the covariance
+target in its sample experiment, as proved in
+[[lem-pca-sample-covariance-is-a-measurable-estimator]].
+
+This definition specifies mathematical matrices under an assumed law. The
+scientific model contract distinguishes that assumption from evidence that an
+empirical law is adequate; PCA itself makes no such adequacy claim
+([[def-scientific-statistical-model-contract]]).

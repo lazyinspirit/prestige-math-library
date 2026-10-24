@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-bounded-operators-form-a-noncommutative-banach-algebra.json
+  precheck: pass
 id: ex-bounded-operators-form-a-noncommutative-banach-algebra
 kind: example
 title: Bounded operators form a Banach algebra, noncommutative in dimension at least two
@@ -15,8 +18,7 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1.1 examples, printed pp. 209–214"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example
@@ -43,7 +45,7 @@ satisfy $UV \ne VU$.
 
 [L1] Composition of bounded operators is bounded and associative, $1_X$ is bounded, and the operator norm is submultiplicative: $\|ST\| \le \|S\|\,\|T\|$, with $\|1_X\| = 1$ because $X \ne \{0\}$ ([[def-bounded-linear-operator]], [[def-operator-norm]]).
 
-[L2] If $Y$ is a Banach space then $\mathcal B(X,Y)$ is Banach for the operator norm ([[thm-bounded-operator-space-is-banach]]).
+[L2] If $Y$ is a Banach space then $\mathcal B(X,Y)$ is Banach for the operator norm ([[thm-bounded-operator-space-is-banach|If $Y$ is Banach then $\mathcal B(X,Y)$ is Banach]]).
 
 [L3] Every finite-dimensional normed space is complete, in particular $\mathbb C^2$ with the maximum norm is a Banach space ([[cor-finite-dimensional-normed-spaces-are-banach]]).
 

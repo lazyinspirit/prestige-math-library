@@ -1,0 +1,82 @@
+{
+  "id": "thm-savitchs-theorem",
+  "agent": "/root/rendering_repair_coordinator/cpt_021",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile prints DSPACE(s(n)^2) with a literal caret exponent; its body counterpart renders a superscript. The title source lacks math delimiters.",
+      "action": "Wrapped the two complexity-class expressions in inline math and used upright class names via \\mathrm.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only math delimiters and upright class names; exponent 2 now typesets as a superscript.",
+  "source_lines_after": {
+    "4": "title: \"Savitch's theorem: $\\\\mathrm{NSPACE}(s(n))$ is contained in $\\\\mathrm{DSPACE}(s(n)^2)$\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "529bd31fd9e3fdb3cdc9f8656dd80d3912eac5ae10ebb51b5f7cf8f8fc60c223",
+  "after_raw_sha256": "b65d91e8c0f4f16808bcd2588f4e7729672d9881784b7ba9709c22e77d1c475d",
+  "write_scope_check": "Only line 4 title changed; body, all protected metadata, and literal status: published remain byte-identical.",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-savitchs-theorem--01.png",
+    "detail": "original",
+    "independently_inspected": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-savitchs-theorem.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-savitchs-theorem.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-savitchs-theorem.md",
+            "item_id": "thm-savitchs-theorem",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-savitchs-theorem.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt-021-native/manifest.json",
+    "source_sha256": "b65d91e8c0f4f16808bcd2588f4e7729672d9881784b7ba9709c22e77d1c475d",
+    "html_sha256": "6933bd1057a66bdc5758fd9901ebf733433bd92033072d9df3e3f04177a5dc67",
+    "reference_map_sha256": "0b08dc2960c782fabeaacbc4aeaceacc131666f428ac33726cc59510f85cccc8",
+    "inspected_tiles": [
+      "screenshots/thm-savitchs-theorem--01.png",
+      "screenshots/thm-savitchs-theorem--02.png"
+    ],
+    "detail": "original",
+    "result": "Both standalone native tiles inspected. Title class names and exponent render correctly without raw TeX or clipping; body remains correctly rendered.",
+    "limitations": [
+      "Local title/ItemBody preview, not production-route coverage.",
+      "16 unrelated reference-map parse diagnostics reported by preview; scoped rendercheck has no warnings or errors."
+    ]
+  }
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-projective-cech-finiteness-and-serre-vanishing-for-etale-lifting.json
+  precheck: pass
 id: lem-projective-cech-finiteness-and-serre-vanishing-for-etale-lifting
 kind: lemma
 title: "Projective Čech finiteness and Serre vanishing for the étale lifting construction"
@@ -11,18 +14,6 @@ deps:
   - cor-finite-type-algebra-over-noetherian-ring-is-noetherian
   - thm-equivalent-characterizations-of-noetherian-modules
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item lem-projective-cech-finiteness-and-serre-vanishing-for-etale-lifting; evidence research/frontier-38-owner-30-reader-30.md, research/frontier-38-owner-30-reader-findings-30.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -53,3 +44,29 @@ Assume AC. Let $A$ be Noetherian, let $Z$ be a closed subscheme of $\mathbb P_A^
 2.1 For $N>0$, the Čech complex of $\mathcal O(d)$ on $\mathbb P_A^N$ decomposes into complexes indexed by Laurent monomials $T_0^{e_0}\cdots T_N^{e_N}$ with $\sum e_i=d$. Such a monomial appears on precisely the intersections whose index set contains $J=\{i:e_i<0\}$. If $J$ is empty, the simplex complex has one copy of $A$ in degree-zero cohomology. If $J$ is the full index set, it has one copy of $A$ in degree $N$. In every other case choose an index outside $J$; insertion of that index with the usual alternating sign is a contracting homotopy, so the complex is acyclic. Thus $H^0(\mathcal O(d))$ has the finite basis of monomials with all $e_i\ge0$, $H^N(\mathcal O(d))$ has the finite basis with all $e_i<0$, and all intermediate groups vanish. The top group is zero for $d\ge-N$. For $N=0$ the space is affine, its sole group is $A$ in degree zero for every twist, and the assertions follow directly. [step 1.1, algebra]
 
 3.1 Descend on $q$ from $q>N$. For any coherent $F$, take the finite-twist surjection $E\to F$ from step 1.2, with coherent kernel $K$. The exact segment $H^q(E)\to H^q(F)\to H^{q+1}(K)$ shows finiteness of $H^q(F)$ because the end groups are finite by step 2.1 and the induction hypothesis, and $A$ is Noetherian. For $q>0$, apply the same segment after twisting by $d$. Its left group is zero for large $d$ by step 2.1, and its right group is zero for large $d$ by induction applied to $K$. This gives the required vanishing. Finally the Čech complex on $Z$ equals that of its coherent closed-immersion pushforward on projective space; twists commute with that pushforward on every standard chart. The assertions therefore hold on $Z$ as well. [F1, step 1.1, step 1.2, step 2.1] ∎
+
+
+## Remarks
+
+The signed contraction in step 2.1 can be seen in a single Laurent-monomial summand on $\mathbb P_A^2$. Fix $T_0^{e_0}T_1^{e_1}T_2^{e_2}$ with $e_0<0$ and $e_1,e_2\ge0$, so $J=\{0\}$. Write $U_I=\bigcap_{i\in I}D_+(T_i)$. The monomial occurs exactly on $U_0,U_{01},U_{02},U_{012}$; the coefficient modules and their cochain degrees are:
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (zeroL) at (-1.5,0) {$0$};
+\node (c0) at (0,0) {$A$};
+\node (c1) at (3.6,0) {$A\oplus A$};
+\node (c2) at (7.2,0) {$A$};
+\node (zeroR) at (8.7,0) {$0$};
+\node at (0,0.7) {$C^0:\ U_0$};
+\node at (3.6,0.7) {$C^1:\ U_{01},U_{02}$};
+\node at (7.2,0.7) {$C^2:\ U_{012}$};
+\draw[->] (zeroL) -- (c0);
+\draw[->] (c0) -- node[above] {$\delta^0$} node[below] {$a\mapsto(-a,-a)$} (c1);
+\draw[->] (c1) -- node[above] {$\delta^1$} node[below] {$(b,c)\mapsto b-c$} (c2);
+\draw[->] (c2) -- (zeroR);
+\draw[->] (c1) to[bend left=45] node[below,yshift=-8pt] {$h^1(b,c)=-b$} (c0);
+\draw[->] (c2) to[bend left=45] node[below,yshift=-8pt] {$h^2(z)=(0,-z)$} (c1);
+\end{tikzpicture}
+```
+
+Here the differential is the alternating restriction differential, with indices in increasing order. The backward arrows have degree $-1$ and insert the index $1$ in the cochain evaluation. Directly, $h^1\delta^0=1$, $\delta^0h^1+h^2\delta^1=1$, and $\delta^1h^2=1$, so this summand is exact. For the two boundary cases of step 2.1, $J=\varnothing$ instead leaves $A$ in $H^0$, while $J=\{0,1,2\}$ leaves $A$ in $H^2$. This illustration concerns the monomial calculation only; the proof above is independent of it.

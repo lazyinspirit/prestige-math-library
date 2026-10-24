@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-active-routes-in-a-finite-dag-have-active-paths.json
+  precheck: pass
 id: lem-active-routes-in-a-finite-dag-have-active-paths
 kind: lemma
 title: "Every active finite route contains an active path"
@@ -12,11 +15,6 @@ axiom_use: "Only finite graph arguments and a minimum in the natural numbers are
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
 sources:
   references:
     - title: "Judea Pearl, Causal Diagrams for Empirical Research, \u00a72-1, pp. 671\u2013672"
@@ -45,3 +43,35 @@ In a finite DAG, a **route** is a finite sequence of vertices with consecutive v
 ## Source notes
 
 Pearl's d-separation criterion supplies the occurrence-wise activity conditions. The loop-junction argument above is supplied locally; the source's statement of the moralization test is not used in place of this proof.
+
+
+## Remarks
+
+The following occurrence-wise schematic illustrates the junction in step 2.1. The two labels $v$ on the upper row denote the same graph vertex, visited twice; the row is a route, not a directed cycle. In this concrete configuration the deleted excursion is $v,p,w,q,v$, and $w$ is its first collider. All displayed vertices except the two occurrences of $v$ are distinct, and take $C=\{c\}$. Thus $w$ is active through $w\to c$, while $v$ is an ancestor of $C$ through $v\to p\to w\to c$. After deletion, the retained arrows form the collider $a\to v\leftarrow b$, which is therefore active too. The general proof allows arbitrary intermediate route segments and remains independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node at (3.9,0.9) {Before deletion: two occurrences of the same vertex};
+\node (a) at (0,0) {$a$};
+\node (v1) at (1.3,0) {$v$};
+\node (p) at (2.6,0) {$p$};
+\node (w) at (3.9,0) {$w$};
+\node (q) at (5.2,0) {$q$};
+\node (v2) at (6.5,0) {$v$};
+\node (b) at (7.8,0) {$b$};
+\node (c) at (3.9,-1.4) {$c\in C$};
+\draw[->] (a) -- (v1);
+\draw[->] (v1) -- (p);
+\draw[->] (p) -- (w);
+\draw[->] (q) -- (w);
+\draw[->] (v2) -- (q);
+\draw[->] (b) -- (v2);
+\draw[->] (w) -- (c);
+\node at (3.9,-2.4) {After deletion: the joined occurrence is a collider};
+\node (aa) at (2.6,-3.2) {$a$};
+\node (vv) at (3.9,-3.2) {$v$};
+\node (bb) at (5.2,-3.2) {$b$};
+\draw[->] (aa) -- (vv);
+\draw[->] (bb) -- (vv);
+\end{tikzpicture}
+```

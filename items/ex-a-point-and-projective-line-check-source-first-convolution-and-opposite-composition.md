@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-point-and-projective-line-check-source-first-convolution-and-opposite-composition.json
+  precheck: pass
 id: ex-a-point-and-projective-line-check-source-first-convolution-and-opposite-composition
 kind: example
 title: "A point and projective-line check of source-first convolution and opposite composition"
@@ -25,12 +28,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -91,3 +88,63 @@ point corner gives its generator.
 3.1 The convolution check. Apply [F2] with $(i,j,k)=(1,2,1)$ and degrees $r=-1$, $s=1$ to the composable pair $\alpha:L_1\to L_2[r]$ and $\beta:L_2\to L_1[s]$: since $\beta[r]\circ\alpha=\beta[-1]\circ\alpha=\operatorname{id}_k$ by step 2.1, the product theorem gives $\Phi_{11}^{0}(\operatorname{id}_k)=\Phi_{12}^{-1}(\alpha)*\Phi_{21}^{1}(\beta)$, so $\alpha*\beta=\operatorname{id}_k$ in the source-first convention, and the right-hand side is the convolution product of [F1]. The corner degrees are $d_1+d_2-r=2$ for $\alpha$ and $d_2+d_1-s=0$ for $\beta$. [F1, F2, step 1.1, step 2.1]
 
 4.1 The geometric product. The adjunction chain of [F1] sends $\alpha$ to $\operatorname{id}_{k_{\mathbb P^1}}$, hence to the positive fundamental class $[\mathbb P^1]$. Write $i:\mathrm{pt}\hookrightarrow\mathbb P^1$ for the evaluation point. Evaluation is the global-sections image of $k_{\mathbb P^1}\to i_*k$, and its adjoint under $R\Gamma\dashv a^!$, $a:\mathbb P^1\to\mathrm{pt}$, is the composite $k_{\mathbb P^1}\to i_*k=i_*i^!\omega_{\mathbb P^1}\to\omega_{\mathbb P^1}$, with the last arrow the proper trace. Thus $\Phi_{21}^{1}(\beta)=i_*[\mathrm{pt}]$ with coefficient $+1$. Geometrically $\mathbb P^1\times\{i\}$ meets the middle diagonal of $\mathbb P^1\times\mathbb P^1$ transversely at $(i,i)$; the map from its tangent line to the complex normal line of the diagonal is an isomorphism, preserving the real orientation. The positive Thom cap of [F5] therefore gives that point with multiplicity $+1$, and proper pushforward to $Z_{11}=\mathrm{pt}$ gives $[\mathrm{pt}]$. This computes $[\mathbb P^1]*[\mathrm{pt}]=[\mathrm{pt}]$, with middle degree drop $2$ and no permutation sign, agreeing with step 3.1. It verifies a transverse instance of the calculus, not its general nontransverse case. AC is inherited through [A1]. [A1, F1, F2, F5, step 2.1, step 3.1] ∎
+
+
+## Remarks
+
+The two rows below distinguish the source-first product from the reverse
+composite. The splitting is the one in steps 1.1–2.1: the upper row includes
+and projects the $H^0$ summand before shifting, while the lower row projects
+and includes the shifted $H^0$ summand. Thus the lower composite kills
+$k[-1]$; it is not the identity of $L_2$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (a) at (0,0) {$k=L_1$};
+\node (b) at (5,0) {$L_2[-1]\simeq k\oplus k[-2]$};
+\node (c) at (10,0) {$k=L_1$};
+\draw[->] (a) -- node[above] {$\alpha$} (b);
+\draw[->] (b) -- node[above] {$\beta[-1]$} (c);
+\draw[->] (a.south) to[bend right=25] node[below] {$\alpha*\beta=\beta[-1]\circ\alpha=\mathrm{id}_k$} (c.south);
+\node (d) at (0,-3) {$L_2$};
+\node (e) at (5,-3) {$k[1]$};
+\node (f) at (10,-3) {$L_2$};
+\draw[->] (d) -- node[above] {$\beta$} (e);
+\draw[->] (e) -- node[above] {$\alpha[1]$} (f);
+\draw[->] (d.south) to[bend right=25] node[below] {$\alpha[1]\circ\beta=\mathrm{pr}_{k[1]}\ne 0,\mathrm{id}_{L_2}$} (f.south);
+\end{tikzpicture}
+```
+
+For the geometric row, $i:\mathrm{pt}\hookrightarrow\mathbb P^1$ is the
+chosen point and $a:\mathbb P^1\to\mathrm{pt}$ is proper. The next picture
+is a schematic of two **complex** curves in the complex surface
+$\mathbb P^1\times\mathbb P^1$, not a real-dimensional model. In a local
+coordinate centered at $i$, the normal coordinate $z_1-z_2$ to the diagonal
+restricts to $z_1$ on $\mathbb P^1\times\{i\}$. This is a complex-linear
+isomorphism, hence preserves real orientation and gives multiplicity $+1$
+by [F5] and step 4.1.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\draw[rounded corners] (-2.5,-1.7) rectangle (2.7,2.3);
+\node at (0.1,2.75) {$\mathbb P^1\times\mathbb P^1$};
+\draw[thick] (-2,0) -- (2,0);
+\node at (0.9,-1.05) {$\mathbb P^1\times\{i\}$};
+\draw[thick] (-1.4,-1.4) -- (1.8,1.8);
+\node[above left] at (1.5,1.5) {$\Delta_{\mathbb P^1}$};
+\fill (0,0) circle (2pt);
+\node[above left] at (0,0) {$(i,i)$};
+\draw[->] (2.9,0.6) -- node[above] {$\Delta^!$} (5,0.6);
+\node at (4,-0.4) {$2+0-2=0$};
+\node at (6.3,0.6) {$[(i,i)]$};
+\node at (6.3,-0.1) {multiplicity $+1$};
+\draw[->] (7.4,0.6) -- node[above] {$h_*$} (9,0.6);
+\node at (10,0.6) {$[\mathrm{pt}]$};
+\node at (10,-0.1) {$Z_{11}=\mathrm{pt}$};
+\end{tikzpicture}
+```
+
+Here the input to $\Delta^!$ is $[\mathbb P^1]\boxtimes[\mathrm{pt}]$,
+and $h$ forgets the middle point. The degree drop is $2d_2=2$, with no
+permutation of the middle factors (step 3.1 and [F1]). The diagrams illustrate
+steps 1.1–4.1; the verification above is independent of them.

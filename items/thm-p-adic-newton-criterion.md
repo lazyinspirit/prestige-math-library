@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-p-adic-newton-criterion.json
+  precheck: pass
 id: thm-p-adic-newton-criterion
 kind: theorem
-title: "Newton's criterion in Q_p"
+title: "Newton's criterion in $\\mathbb{Q}_p$"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-completion-is-a-field]
 proof_strategy: constructive
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -44,7 +40,7 @@ of that radius around $a_0$.
 
 **Given:** A polynomial $f \in \mathbb Z_p[X]$ and $a_0 \in \mathbb Z_p$ with $|f(a_0)|_p < |f'(a_0)|_p^2$.
 
-[L1] $\mathbb Z_p$ is the valuation ring of $\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_p$ is the valuation ring of $\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp|$\mathbb{Z}_p$ is the valuation ring of $\mathbb{Q}_p$]]).
 
 [L2] $\mathbb Q_p$ is a complete nonarchimedean valued field ([[thm-p-adic-completion-is-a-field]]).
 

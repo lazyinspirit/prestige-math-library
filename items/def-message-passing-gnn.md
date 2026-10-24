@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-message-passing-gnn.json
+  precheck: n/a
 id: def-message-passing-gnn
 kind: definition
 title: "Aggregation-based message-passing graph neural networks"
@@ -21,12 +24,7 @@ sources:
     - title: "Pan Li and Jure Leskovec, Graph Representation Learning"
       url: "https://www-cs-faculty.stanford.edu/people/jure/pubs/gnnpower-springer22.pdf"
       locator: "Chapter 5 §5.3.2, message, aggregation, update, and graph representation."
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+
 ---
 
 ## Definition
@@ -50,3 +48,25 @@ For a chosen output set $Y$, a graph readout is a function $R:\mathsf M_{\mathrm
 [Morris et al., “Weisfeiler and Leman Go Neural,” §3](https://ojs.aaai.org/index.php/AAAI/article/download/4384/4262)
 
 [Li and Leskovec, *Graph Representation Learning*, Chapter 5 §5.3.2](https://www-cs-faculty.stanford.edu/people/jure/pubs/gnnpower-springer22.pdf)
+
+
+## Remarks
+
+For a fixed vertex $v$ and layer $1\le k\le K$, the first row shows the two inputs to the update. Arrows indicate data flow, not orientations of graph edges. The neighbor multiset retains repeated feature values and excludes $v$ itself; its previous state enters separately. The second row is applied only after all $K$ layers, collecting the final states of all vertices with multiplicity. The maps $A_k$, $U_k$, and $R$ are shared across vertices and graphs as specified above; no injectivity is implied. For $K=0$, only initialization and readout are needed.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (neighbors) at (-2,0) {$\{\!\{h_u^{k-1}:u\in N_G(v)\}\!\}$};
+\node (aggregate) at (2,0) {$a_v^k$};
+\node[draw,rounded corners,minimum width=1cm,minimum height=0.7cm] (update) at (4.3,0) {$U_k$};
+\node (state) at (6.6,0) {$h_v^k$};
+\node (self) at (4.3,1.5) {$h_v^{k-1}$};
+\draw[->] (neighbors) -- node[above] {$A_k$} (aggregate);
+\draw[->] (aggregate) -- (update);
+\draw[->] (self) -- (update);
+\draw[->] (update) -- (state);
+\node (finalstates) at (0,-2) {$\{\!\{h_w^K:w\in V\}\!\}$};
+\node (output) at (4.3,-2) {$z_G\in Y$};
+\draw[->] (finalstates) -- node[above] {$R$} (output);
+\end{tikzpicture}
+```

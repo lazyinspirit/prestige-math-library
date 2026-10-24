@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-finite-type-positive-definite-criterion.json
+  precheck: pass
 id: thm-cg-finite-type-positive-definite-criterion
 kind: theorem
 title: "Finiteness criterion: W is finite exactly when the Coxeter form is positive definite"
@@ -19,13 +22,7 @@ sources:
     - title: "Jean Michel, Lectures on Coxeter groups (Beijing lecture notes, April-May 2014)"
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Proposition 5.14 and the proof of its part (ii), printed pp. 12-13: 'if B(Gamma) is definite positive its orthogonal group is compact and W is a discrete subgroup of this orthogonal group, thus finite', with the discreteness neighbourhood {g : g(x) in C} for x in C"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -88,7 +85,7 @@ $\mathrm{GL}(V)$. This clause uses no positive definiteness of $B$.
 
 ## Proof
 
-**Proof technique:** direct; positive definiteness makes $B$ an inner product, and finiteness is read off a compact orthogonal group and an isolated identity.
+**Proof technique:** direct; positive definiteness makes B an inner product, and finiteness is read off a compact orthogonal group and an isolated identity.
 
 1.1 (The dual form.) The case $S=\emptyset$ is trivial: then $V=\{0\}$, $W=\{1\}$ is finite by [F12] and $B$ is positive definite vacuously, so assume $S\ne\emptyset$ and put $n:=|S|\ge1$. Assume $B$ positive definite. If $B(v,x)=0$ for all $x$ then $B(v,v)=0$, so $v=0$ by [F8]; hence the linear map $b:V\to V^*$, $b(v):=B(v,\cdot)$ [F9], has kernel $\{0\}$ and, since $\dim V^*=\dim V=n$ is finite, it is a linear isomorphism [F9]. The form $B^*(f,g):=B(b^{-1}f,b^{-1}g)$ is symmetric and bilinear, and positive definite because $f\ne0$ gives $b^{-1}f\ne0$ and $B^*(f,f)=B(b^{-1}f,b^{-1}f)>0$ [F8]. For $w\in W$ and $v\in V$ the two functionals $b(\rho(w)v)$ and $w\cdot b(v)$ agree: at $x$ both take the value $B(\rho(w)v,x)=B(v,\rho(w)^{-1}x)$, by [F3] applied to the pair $\rho(w)^{-1}x$ and by the dual-action formula [F4]; hence $b^{-1}(w\cdot f)=\rho(w)b^{-1}f$ and $B^*(w\cdot f,w\cdot g)=B(\rho(w)b^{-1}f,\rho(w)b^{-1}g)=B(b^{-1}f,b^{-1}g)=B^*(f,g)$ for all $f,g$, so the dual action preserves $B^*$ [F3]. This is clause (2). [F2, F3, F4, F8, F9, algebra]
 

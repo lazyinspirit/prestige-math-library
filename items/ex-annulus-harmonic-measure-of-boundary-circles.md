@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-annulus-harmonic-measure-of-boundary-circles.json
+  precheck: pass
 id: ex-annulus-harmonic-measure-of-boundary-circles
 kind: example
 title: "Harmonic measure of the two annulus boundary circles"
@@ -34,9 +37,7 @@ sources:
     - title: "Boris Khoruzhenko, LTCC Potential Theory lecture notes, Sections 4.1-4.2"
       url: https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf
       locator: "Section 4.2, PDF pp. 37-39: harmonic measure of an annulus by the logarithmic radius"
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -83,3 +84,45 @@ calculation; a full Fourier-series density on either circle is not asserted.
 3.1 The complementary indicator $\mathbf 1_{C_R}=1-\varphi$ is likewise continuous on $\partial A$, and $\omega_A^z$ is a probability measure, so $$\omega_A^z(C_R)=\int_{\partial A}(1-\varphi)\,d\omega_A^z=1-\omega_A^z(C_r)=1-\frac{\log R-\log|z|}{\log R-\log r}=\frac{\log|z|-\log r}{\log R-\log r}.$$ [F2, F5, step 2.2, algebra]
 
 4.1 Since $r<|z|<R$, both numerator quantities $\log R-\log|z|$ and $\log|z|-\log r$ are positive and their sum is $\log R-\log r>0$, so the two masses lie in $(0,1)$ and sum to $1$, as claimed. Dependent Choice was used only in step 2.1 through the existence and uniqueness theorem [F2]; the explicit barriers, the logarithmic function $s$ and all identities above are choice-free. [step 2.1, step 2.2, step 3.1, given, algebra] ∎
+
+## Remarks
+
+The shaded annulus and the logarithmic-radius axis below show the two boundary
+components and the position of an interior point. The axis is in logarithmic
+coordinates, not Euclidean distance. Put $t=\log|z|$; the inner-circle mass is
+the fraction of the axis to the right of $t$, and the outer-circle mass is the
+fraction to its left. Thus the boundary values of $s$ from step 1.4 are $1$ on
+$C_r$ and $0$ on $C_R$. The verification above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\fill[blue!12,even odd rule] (0,0) circle (1.8) (0,0) circle (0.8);
+\draw[thick] (0,0) circle (1.8);
+\draw[thick] (0,0) circle (0.8);
+\fill (0,0) circle (0.025);
+\node[below left] at (0,0) {$0$};
+\draw[dashed] (0,0) -- (1.58,0.862);
+\fill (1.1,0.6) circle (0.04);
+\node[above left] at (1.1,0.6) {$z$};
+\node at (-0.48,0.43) {$C_r$};
+\node[above left] at (-1.27,1.27) {$C_R$};
+\node at (0,-1.35) {$A$};
+\node at (5,1.4) {$t=\log|z|$};
+\draw[thick] (3,0) -- (7,0);
+\draw (3,-0.12) -- (3,0.12);
+\draw (4.6,-0.12) -- (4.6,0.12);
+\draw (7,-0.12) -- (7,0.12);
+\fill (4.6,0) circle (0.04);
+\node[below] at (3,-0.15) {$\log r$};
+\node[below] at (4.6,-0.15) {$t$};
+\node[below] at (7,-0.15) {$\log R$};
+\draw[<->] (3,0.55) -- (4.6,0.55);
+\node[above] at (3.8,0.55) {$t-\log r$};
+\draw[<->] (4.6,0.55) -- (7,0.55);
+\node[above] at (5.8,0.55) {$\log R-t$};
+\node at (3,-1.05) {$s=1$};
+\node at (7,-1.05) {$s=0$};
+\node at (5,-1.8) {$\omega_A^z(C_R)=\frac{t-\log r}{\log R-\log r}$};
+\node at (5,-2.6) {$\omega_A^z(C_r)=\frac{\log R-t}{\log R-\log r}$};
+\end{tikzpicture}
+```

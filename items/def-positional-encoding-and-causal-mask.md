@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-positional-encoding-and-causal-mask.json
+  precheck: n/a
 id: def-positional-encoding-and-causal-mask
 kind: definition
 title: "Positional encodings and causal masks"
@@ -10,8 +13,6 @@ deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Vaswani et al., Attention Is All You Need, §§3.2.3 and 3.5"
@@ -35,3 +36,50 @@ For decoder self-attention on $n$ positions indexed by $0,\ldots,n-1$, the causa
 [Dive into Deep Learning, §11.6.3: absolute and relative positional information](https://www.d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html)
 
 [Dive into Deep Learning, §11.7.5: autoregressive decoder mask](https://www.d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html)
+
+## Remarks
+
+For $n=4$, the grid below shows the causal mask $M$, with query index $i$ labeling rows and key index $j$ labeling columns. The right-hand column lists the allowed key positions in each row. The diagonal is allowed: a zero permits that key, while $-\infty$ masks a future key. This illustration is a direct instance of the definition.
+
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=0.85cm]
+  \node at (2,1.15) {Key position};
+  \node at (0.5,0.45) {$j=0$};
+  \node at (1.5,0.45) {$j=1$};
+  \node at (2.5,0.45) {$j=2$};
+  \node at (3.5,0.45) {$j=3$};
+  \node at (-0.8,0.45) {Query};
+  \node at (5.7,0.45) {Allowed keys};
+  \draw (0,0) rectangle (4,-4);
+  \draw (1,0) -- (1,-4);
+  \draw (2,0) -- (2,-4);
+  \draw (3,0) -- (3,-4);
+  \draw (0,-1) -- (4,-1);
+  \draw (0,-2) -- (4,-2);
+  \draw (0,-3) -- (4,-3);
+  \node at (-0.8,-0.5) {$i=0$};
+  \node at (-0.8,-1.5) {$i=1$};
+  \node at (-0.8,-2.5) {$i=2$};
+  \node at (-0.8,-3.5) {$i=3$};
+  \node at (0.5,-0.5) {$0$};
+  \node at (1.5,-0.5) {$-\infty$};
+  \node at (2.5,-0.5) {$-\infty$};
+  \node at (3.5,-0.5) {$-\infty$};
+  \node at (0.5,-1.5) {$0$};
+  \node at (1.5,-1.5) {$0$};
+  \node at (2.5,-1.5) {$-\infty$};
+  \node at (3.5,-1.5) {$-\infty$};
+  \node at (0.5,-2.5) {$0$};
+  \node at (1.5,-2.5) {$0$};
+  \node at (2.5,-2.5) {$0$};
+  \node at (3.5,-2.5) {$-\infty$};
+  \node at (0.5,-3.5) {$0$};
+  \node at (1.5,-3.5) {$0$};
+  \node at (2.5,-3.5) {$0$};
+  \node at (3.5,-3.5) {$0$};
+  \node at (5.7,-0.5) {$\{0\}$};
+  \node at (5.7,-1.5) {$\{0,1\}$};
+  \node at (5.7,-2.5) {$\{0,1,2\}$};
+  \node at (5.7,-3.5) {$\{0,1,2,3\}$};
+\end{tikzpicture}
+```

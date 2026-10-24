@@ -1,0 +1,45 @@
+---
+id: def-equivariant-map-of-group-actions
+kind: definition
+title: "Equivariant maps and isomorphisms of group actions"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+deps: [def-group-action, def-function, def-injection-surjection-bijection]
+justified_by: []
+aliases: []
+landmark: true
+verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-equivariant-map-of-group-actions.json
+  precheck: n/a
+  audited: 2026-08-11
+sources:
+  scraped: []
+  references:
+    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets"
+      url: "https://www.math.umd.edu/~pbrosnan/notes/ugalg/sect0035.html"
+pipeline_run: null
+---
+
+## Definition
+
+Let $X$ and $Y$ be $G$-sets (Left group actions, transitive actions, and faithful actions). A function
+$f:X\to Y$ (A function is a relation $f$ with $(a,b) \in f$ and $(a,c) \in f$ implying $b = c$; $f : A \to B$, the value $f(a)$, domain and codomain) is **$G$-equivariant** when
+
+$$f(g\cdot x)=g\cdot f(x)$$
+
+for every $g\in G$ and $x\in X$. An **isomorphism of $G$-sets** is an
+equivariant bijection (Injection, surjection, bijection). Two actions are
+**equivariantly isomorphic** when such a bijection exists between their
+$G$-sets.
+
+## Definition references
+
+[[def-group-action]]
+
+[[def-function]]
+
+[[def-injection-surjection-bijection]]
+

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-temperley-lieb-type-a-path-space-tower-branching.json
+  precheck: pass
 id: thm-temperley-lieb-type-a-path-space-tower-branching
 kind: theorem
-title: "The A_(ell-1) path-space tower branches by adjacent vertices"
+title: 'The $A_{\ell-1}$ path-space tower branches by adjacent vertices'
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -10,12 +13,6 @@ deps:
   - def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower
 justified_by: []
 aliases: []
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -58,3 +55,21 @@ with each summand occurring once; vertices outside $\{0,\ldots,\ell-2\}$ contrib
 ## Remarks
 
 This proves the branching of the abstract path-space tower. Identifying a particular positive-root Temperley–Lieb quotient and its Jones–Wenzl matrix units with this tower is a separate supplier check recorded in the batch evidence.
+
+For example, take $\ell=5$ and the step from $n=2$ to $n=3$. The following Bratteli step shows only the nonzero endpoint modules. An arrow means that the source module occurs once in the restriction of the target module; it is a branching edge, not a specified linear map.
+
+```tikz
+\begin{tikzpicture}
+\node at (0,3) {$n=2$};
+\node at (4,3) {$n=3$};
+\node (a) at (0,2) {$V_{2,0}$};
+\node (b) at (0,0) {$V_{2,2}$};
+\node (c) at (4,2) {$V_{3,1}$};
+\node (d) at (4,0) {$V_{3,3}$};
+\draw[->] (a) -- node[above] {$1$} (c);
+\draw[->] (b) -- node[above,sloped] {$1$} (c);
+\draw[->] (b) -- node[below] {$1$} (d);
+\end{tikzpicture}
+```
+
+The two length-two prefixes are $(0,1,0)$ and $(0,1,2)$. Appending $1$ to either prefix gives the two basis paths ending at $1$; only the second prefix can be extended to $3$. Thus $V_{3,1}\!\downarrow_{K_2}\cong V_{2,0}\oplus V_{2,2}$ and $V_{3,3}\!\downarrow_{K_2}\cong V_{2,2}$, exactly as in step 1.1. All vertices lie in $\{0,1,2,3\}$; no edge leaves this range. The proof above is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-mdp-policy-action-state-reward-path-law.json
+  precheck: pass
 id: lem-finite-mdp-policy-action-state-reward-path-law
 kind: lemma
 title: A finite MDP policy generates action-state-reward trajectories
@@ -108,3 +111,24 @@ for each feasible finite state-reward path $(s_0,r_1,s_1,\ldots,r_m,s_m)$.
 3.1 Apply [F7] to obtain the probability law with these finite-prefix kernels. For a feasible atom $(s_0,a_0,r_1,s_1,\ldots,a_{m-1},r_m,s_m)$, its iterated prefix mass is the product over $n<m$ of the atom masses $K_\pi(s_n,\{(s_n,a_n,r_{n+1},s_{n+1})\})$. The definition of $K_\pi$ makes each such mass $\pi(a_n\mid s_n)p(s_{n+1},r_{n+1}\mid s_n,a_n)$, giving the displayed formula. For $m=0$, the initial point mass is $1$. [step 1.1, step 2.1, F1, F7, algebra]
 
 4.1 Fix a finite state-reward path $(s_0,r_1,s_1,\ldots,r_m,s_m)$. Summing the action-path formula from step 3.1 over its finitely many action sequences and regrouping the finite sums by time gives the displayed state-reward marginal formula by [F9]. These are the finite-prefix probabilities in [F8]. The initial state is the same point mass, so uniqueness [F10] identifies the state-reward marginal with the stationary-policy path law. [step 3.1, F8, F9, F10, algebra] ∎
+
+## Remarks
+
+At each time $n$, the policy first selects an action $a_n\in A(s_n)$; the MDP then draws the next state and reward jointly. The arrows below denote probability kernels, with their point masses shown as labels; they are not deterministic maps between the displayed outcomes.
+
+```tikz
+\begin{tikzpicture}
+\node (s) at (0,0) {$s_n$};
+\node (a) at (4,0) {$(s_n,a_n)$};
+\node (t) at (9,0) {$(s_{n+1},r_{n+1})$};
+\draw[->] (s) -- node[above] {$\pi(a_n\mid s_n)$} (a);
+\draw[->] (a) -- node[above] {$p(s_{n+1},r_{n+1}\mid s_n,a_n)$} (t);
+\draw[->] (s) to[bend right=30] node[below] {$q_\pi(s_{n+1},r_{n+1}\mid s_n)$} (t);
+\end{tikzpicture}
+```
+
+The first arrow is a kernel from $S$ to $D=\{(s,a):s\in S,\ a\in A(s)\}$ supported on pairs with first coordinate $s_n$; the second is the joint kernel from $D$ to $S\times\mathcal R$. Their composite has masses
+
+$$q_\pi(s',r\mid s)=\sum_{a\in A(s)}\pi(a\mid s)p(s',r\mid s,a).$$
+
+Thus the upper route contributes the two factors in step 3.1, while the lower route sums over actions as in step 4.1. Repeating the upper route produces the trajectory-prefix product; repeating the composite produces its state-reward marginal. The joint outcome node retains possible dependence between next state and reward. The proof above is independent of the illustration.

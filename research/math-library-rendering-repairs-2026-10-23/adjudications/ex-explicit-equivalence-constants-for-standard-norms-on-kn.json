@@ -1,0 +1,70 @@
+{
+  "id": "ex-explicit-equivalence-constants-for-standard-norms-on-kn",
+  "agent": "/root/rendering_repair_coordinator/fa_033",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The original standalone PNG at original resolution visibly prints K^n in the title. The caret is an exponent operation, as confirmed by the body field-space notation, rather than an ordinary name or Lp-style abbreviation. The title lacks delimiters required to render that exponent.",
+      "action": "Wrap existing K^n in inline math delimiters without changing the notation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title only: K^n → $K^n$.",
+  "source_lines_after": {
+    "4": "title: 'Explicit comparison constants for the standard norms on $K^n$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "a16f94352801262509b054f069c148b668aaa4fca7db7d3f8a96bae860460fdc",
+  "after_raw_sha256": "ca8559ad5b6107634207e50ee54c50f582c2152fac62511b2a426be39aabd4ad",
+  "protected_metadata_and_status_preserved": true,
+  "body_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-explicit-equivalence-constants-for-standard-norms-on-kn.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-explicit-equivalence-constants-for-standard-norms-on-kn.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-explicit-equivalence-constants-for-standard-norms-on-kn.md",
+            "item_id": "ex-explicit-equivalence-constants-for-standard-norms-on-kn",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-explicit-equivalence-constants-for-standard-norms-on-kn.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/fa033-final/manifest.json",
+    "source_sha256": "ca8559ad5b6107634207e50ee54c50f582c2152fac62511b2a426be39aabd4ad",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/fa033-final/screenshots/ex-explicit-equivalence-constants-for-standard-norms-on-kn--01.png",
+    "inspection": "Standalone original-resolution PNG inspected: title renders K with superscript n; full body visible and unchanged.",
+    "limitations": "Local native title/ItemBody preview, not production-route coverage; 16 unrelated reference-map parse diagnostics reported."
+  },
+  "intermediate_work_note": "An intermediate replacement mishandled the JavaScript replacement-string dollar syntax, producing an invalid title and duplicated suffix. Rendercheck caught the title failure. The item was reconstructed exactly from the frozen preimage with callback-based title replacement; all final checks and fa033-final preview bind only the corrected one-line diff. Earlier previews/fa033 is superseded and is not final evidence."
+}

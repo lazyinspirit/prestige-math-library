@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-planar-divergence-theorem-on-a-rectangle.json
+  precheck: pass
 id: ex-the-planar-divergence-theorem-on-a-rectangle
 kind: example
 title: "The planar divergence theorem on a rectangle, checked against a direct boundary computation"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -81,3 +77,29 @@ $$\int_{\partial D}F\cdot d\mathbf r=\frac12.$$
 ## Remarks
 
 - The two zero edge contributions in steps 2.2 and 2.5 are computed, not inferred from symmetry. They vanish for two different reasons: $F_y=0$ on the bottom edge and $F_x=0$ on the left edge.
+
+
+The arrows on the square below follow the positive boundary chain. The dashed arrows show the outward unit normals $\nu_1=(0,-1)$, $\nu_2=(1,0)$, $\nu_3=(0,1)$ and $\nu_4=(-1,0)$. Each edge label records its total flux contribution, as computed in steps 2.2–2.5; the normal arrows are not samples of $F$. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.25]
+\draw[thick] (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+\draw[thick,->] (1,0) -- (2,0);
+\draw[thick,->] (3,1) -- (3,2);
+\draw[thick,->] (2,3) -- (1,3);
+\draw[thick,->] (0,2) -- (0,1);
+\draw[blue,dashed,->] (1.5,0) -- (1.5,-0.7) node[below] {$\nu_1$};
+\draw[blue,dashed,->] (3,1.5) -- (3.7,1.5) node[right] {$\nu_2$};
+\draw[blue,dashed,->] (1.5,3) -- (1.5,3.7) node[above] {$\nu_3$};
+\draw[blue,dashed,->] (0,1.5) -- (-0.7,1.5) node[left] {$\nu_4$};
+\node at (1.5,0.4) {$\gamma_1:\ 0$};
+\node at (2.35,1.5) {$\gamma_2:\ 1$};
+\node at (1.5,2.6) {$\gamma_3:\ 1/2$};
+\node at (0.65,1.5) {$\gamma_4:\ 0$};
+\node at (1.5,1.5) {$D$};
+\node[below left] at (0,0) {$(0,0)$};
+\node[below right] at (3,0) {$(1,0)$};
+\node[above right] at (3,3) {$(1,1)$};
+\node[above left] at (0,3) {$(0,1)$};
+\end{tikzpicture}
+```

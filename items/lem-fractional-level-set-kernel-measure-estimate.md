@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fractional-level-set-kernel-measure-estimate.json
+  precheck: pass
 id: lem-fractional-level-set-kernel-measure-estimate
 kind: lemma
 title: "The level-set kernel measure estimate for the Slobodeckij kernel"
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)"
@@ -50,7 +48,7 @@ $\omega:=|B(0,1)|$ denotes the Lebesgue measure of the unit ball.
 
 ## Proof
 
-**Proof technique:** Choose the radius $\rho$ carrying the mass of $E$, split the complement of $E$ into its part inside and outside $B(x,\rho)$, use the lower bound $|x-y|\ge\rho$ on the outer part and on $E\setminus B(x,\rho)$ to reach all of $B(x,\rho)^c$, and evaluate the resulting radial integral in polar coordinates.
+**Proof technique:** Choose a ball centered at the given point with the same measure as the given set, split the set’s complement into its parts inside and outside the ball, compare the kernel with its value at the ball’s radius to obtain the integral outside the whole ball, and evaluate that radial integral in polar coordinates.
 
 1.1 The map $T(w)=x+\rho w$ is a $C^1$ diffeomorphism of $\mathbb R^d$ with $\det DT=\rho^d$, so [F2] applied to the indicator of $B(x,\rho)$ gives $|B(x,\rho)|=\int\mathbf 1_{B(x,\rho)}(y)\,dy=\rho^d\int\mathbf 1_{B(0,1)}(w)\,dw=\rho^d\omega=|E|$. Since $E\cap B(x,\rho)\subseteq B(x,\rho)$ and $E\cap B(x,\rho)\subseteq E$ are measurable with $|E\cap B(x,\rho)|\le|E|<\infty$, [F4] gives $|(\mathbb R^d\setminus E)\cap B(x,\rho)|=|B(x,\rho)|-|E\cap B(x,\rho)|=|E|-|E\cap B(x,\rho)|=|E\setminus B(x,\rho)|$. [F1, F2, F4, given]
 

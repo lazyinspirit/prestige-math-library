@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-modifying-a-process-at-each-time-can-destroy-path-continuity-on-an-uncountable-index-set.json
+  precheck: pass
 id: cex-modifying-a-process-at-each-time-can-destroy-path-continuity-on-an-uncountable-index-set
 kind: counterexample
 title: "Pointwise modification can destroy path continuity"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Perla Sousi, Advanced Probability, Section 3.2"
@@ -68,3 +65,41 @@ their simultaneous-equality event is empty.
 ## Source notes
 
 Sousi, Section 3.2, Definition 3.6, Remark 3.7, and Example 3.8, printed pp. 31--32, gives this zero-process/uniform-spike construction and records that it is a version with different sample-path behavior. The trace probability space, coordinate measurability, empty simultaneous-equality event, and direct epsilon--delta verification at interior points and both endpoints are supplied above.
+
+
+## Remarks
+
+For a fixed interior outcome $\omega$, the two sample paths have the following graphs. Filled points belong to the graph; the open point at $(\omega,0)$ does not. There is no vertical segment in the $Y$ graph.
+
+```tikz
+\begin{tikzpicture}[scale=1.4,transform shape,every node/.style={font=\normalsize}]
+\path[use as bounding box] (-.8,-1.35) rectangle (11,3);
+\node at (2,2.5) {$t\mapsto X_t(\omega)$};
+\draw[blue,very thick] (0,0)--(4,0);
+\fill[blue] (0,0) circle (0.055);
+\fill[blue] (4,0) circle (0.055);
+\node[left] at (-.15,0) {$0$};
+\node[below] at (0,-.12) {$0$};
+\node[below] at (2,-.12) {$\omega$};
+\node[below] at (4,-.12) {$1$};
+\node[right] at (4.4,0) {$t$};
+\node at (2,-.9) {continuous zero path};
+\begin{scope}[xshift=6cm]
+\node at (2,2.5) {$t\mapsto Y_t(\omega)$};
+\draw[blue,very thick] (0,0)--(4,0);
+\fill[blue] (0,0) circle (0.055);
+\fill[blue] (4,0) circle (0.055);
+\draw[blue,very thick,fill=white] (2,0) circle (0.08);
+\fill[blue] (2,1.7) circle (0.07);
+\node[left] at (-.15,0) {$0$};
+\node[left] at (-.15,1.7) {$1$};
+\node[below] at (0,-.12) {$0$};
+\node[below] at (2,-.12) {$\omega$};
+\node[below] at (4,-.12) {$1$};
+\node[right] at (4.4,0) {$t$};
+\node at (2,-.9) {discontinuous at $t=\omega$};
+\end{scope}
+\end{tikzpicture}
+```
+
+The picture fixes $\omega$, not $t$. For each fixed time $t$, only the null outcome set $\{t\}$ has $X_t\ne Y_t$; for each fixed outcome $\omega$, the time $t=\omega$ witnesses unequal paths. At $\omega=0$ or $\omega=1$, the spike and the missing zero value move to that endpoint, with discontinuity understood from within $[0,1]$. These are the explicit observations proved in steps 1.2, 2.2 and 3.1; the proof does not depend on the figure.

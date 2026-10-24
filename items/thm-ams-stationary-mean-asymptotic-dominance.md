@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ams-stationary-mean-asymptotic-dominance.json
+  precheck: pass
 id: thm-ams-stationary-mean-asymptotic-dominance
 kind: theorem
 title: "The stationary mean asymptotically dominates an AMS law"
@@ -23,7 +26,7 @@ sources:
 ---
 ## Statement
 
-For an AMS law P with stationary mean Pbar, proves P(T^{-n}G) tends to zero for every event G with Pbar(G)=0.
+For an AMS law $P$ with stationary mean $\bar P$, $P(T^{-n}G)$ tends to zero for every event $G$ with $\bar P(G)=0$.
 
 ## Facts & Assumptions
 

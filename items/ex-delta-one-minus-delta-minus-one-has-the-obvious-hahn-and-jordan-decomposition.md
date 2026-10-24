@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-delta-one-minus-delta-minus-one-has-the-obvious-hahn-and-jordan-decomposition.json
+  precheck: pass
 id: ex-delta-one-minus-delta-minus-one-has-the-obvious-hahn-and-jordan-decomposition
 kind: example
-title: "The signed measure delta_1 minus delta_-1 has the obvious Hahn and Jordan decomposition"
+title: 'The signed measure $\delta_1$ minus $\delta_{-1}$ has the obvious Hahn and Jordan decomposition'
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ generation:
   role: example
 deps: [def-dirac-measure, thm-jordan-decomposition-for-signed-measures, thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Example 6.14"
@@ -41,4 +41,4 @@ $$\nu^+=\delta_1,\qquad \nu^-=\delta_{-1},\qquad |\nu|=\delta_1+\delta_{-1}.$$
 
 1.1 By [L1], for every measurable $E$ one has [L1, L2] $\nu(E)=\mathbf 1_E(1)-\mathbf 1_E(-1)$. If $E\subseteq P$ is measurable, then $-1\notin E$, so $\nu(E)=\mathbf 1_E(1)\ge0$. If $E\subseteq N$ is measurable, then $1\notin E$, so $\nu(E)=-\mathbf 1_E(-1)\le0$. Thus $P$ is positive and $N$ is negative. [L1, L2]
 
-2.1 Since $\mathbb R=P\sqcup N$, step 1.1 gives a Hahn decomposition. [L2, step 1.1] The Jordan measures are therefore $\delta_1$ and $\delta_{-1}$, so $|\nu|=\delta_1+\delta_{-1}$ by [L2]. ∎ 
+2.1 Since $\mathbb R=P\sqcup N$, step 1.1 gives a Hahn decomposition. [L2, step 1.1] The Jordan measures are therefore $\delta_1$ and $\delta_{-1}$, so $|\nu|=\delta_1+\delta_{-1}$ by [L2]. [L2, step 1.1] ∎ 

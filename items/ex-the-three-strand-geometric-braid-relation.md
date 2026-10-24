@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-three-strand-geometric-braid-relation.json
+  precheck: pass
 id: ex-the-three-strand-geometric-braid-relation
 kind: example
 title: "The three strand geometric braid relation"
@@ -33,13 +36,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.0321"
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.2, author manuscript pp. 5-6"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
+
 ---
 
 ## Example
@@ -118,3 +115,93 @@ holds in $G_3$.
 
 - The numbers are the smallest case of the relation: with $h=\frac1{16}$ the three base points are $-\frac18,0,\frac18$ on the horizontal axis, so the local picture of the lemma is the picture of three points spaced $\frac18$ apart, and the whole isotopy happens inside the closed ball of radius $\frac18$ around the middle point, well inside $D^\circ$.
 - The rotation $\mathrm{rot}$ is the geometric meaning of the relation: performing the three half twists on the outer pair and the middle pair alternately is the same as rotating the three-point configuration rigidly by the angle $\pi$, and the point reflection in the middle point exchanges the two outer strands, which is why the two words have the same endpoint permutation $(1\,3)$.
+
+
+The diagrams project the strand positions $(x,y)$ to $(x,u)$, with height $u$
+increasing upwards and with $x$ rescaled so that the three columns are
+$q_1,q_2,q_3$. We view from the positive $y$ direction: a gap marks the strand
+with smaller $y$, passing under the other. Thus in every positive half twist
+the strand moving from left to right passes under, since $\rho_2(v)<0$ for
+$0<v<1$. Numbers at the endpoints are strand labels. The rightmost factor
+runs first, so the bottom-to-top letters are $\sigma_1,\sigma_2,\sigma_1$ on
+the left and $\sigma_2,\sigma_1,\sigma_2$ on the right, at the exact window
+breaks $u=\frac14,\frac12$ of step 1.1. Both top rows are labelled $3,2,1$,
+expressing the endpoint permutation $(1\,3)$. The relation between the pictures
+is braid isotopy, not equality of their projected paths; the verification and
+the cited isotopies remain independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=1.4,transform shape,x=1.15cm,y=1.15cm,>=stealth,line width=0.9pt]
+\begin{scope}[xshift=0cm]
+\node at (1,4.85) {$W_0$};
+\draw[->,thin] (-0.65,0)--(-0.65,4.1) node[above] {$u$};
+\node[left] at (-0.65,0) {$0$};
+\node[left] at (-0.65,1) {$\frac14$};
+\node[left] at (-0.65,2) {$\frac12$};
+\node[left] at (-0.65,4) {$1$};
+\draw (2,0)--(2,1);
+\draw (0,0)--(0.41,0.41);
+\draw (0.59,0.59)--(1,1);
+\draw (1,0)--(0,1);
+\node[right] at (2.35,0.5) {$\sigma_1$};
+\draw (0,1)--(0,2);
+\draw (1,1)--(1.41,1.41);
+\draw (1.59,1.59)--(2,2);
+\draw (2,1)--(1,2);
+\node[right] at (2.35,1.5) {$\sigma_2$};
+\draw (2,2)--(2,4);
+\draw (0,2)--(0.41,2.82);
+\draw (0.59,3.18)--(1,4);
+\draw (1,2)--(0,4);
+\node[right] at (2.35,3) {$\sigma_1$};
+\fill (0,0) circle (1.5pt);
+\fill (0,4) circle (1.5pt);
+\node[below] at (0,0) {$1$};
+\node[above] at (0,4) {$3$};
+\fill (1,0) circle (1.5pt);
+\fill (1,4) circle (1.5pt);
+\node[below] at (1,0) {$2$};
+\node[above] at (1,4) {$2$};
+\fill (2,0) circle (1.5pt);
+\fill (2,4) circle (1.5pt);
+\node[below] at (2,0) {$3$};
+\node[above] at (2,4) {$1$};
+\end{scope}
+\node at (4.25,2) {$\sim$};
+\begin{scope}[xshift=6.3cm]
+\node at (1,4.85) {$W_1$};
+\draw[->,thin] (-0.65,0)--(-0.65,4.1) node[above] {$u$};
+\node[left] at (-0.65,0) {$0$};
+\node[left] at (-0.65,1) {$\frac14$};
+\node[left] at (-0.65,2) {$\frac12$};
+\node[left] at (-0.65,4) {$1$};
+\draw (0,0)--(0,1);
+\draw (1,0)--(1.41,0.41);
+\draw (1.59,0.59)--(2,1);
+\draw (2,0)--(1,1);
+\node[right] at (2.35,0.5) {$\sigma_2$};
+\draw (2,1)--(2,2);
+\draw (0,1)--(0.41,1.41);
+\draw (0.59,1.59)--(1,2);
+\draw (1,1)--(0,2);
+\node[right] at (2.35,1.5) {$\sigma_1$};
+\draw (0,2)--(0,4);
+\draw (1,2)--(1.41,2.82);
+\draw (1.59,3.18)--(2,4);
+\draw (2,2)--(1,4);
+\node[right] at (2.35,3) {$\sigma_2$};
+\fill (0,0) circle (1.5pt);
+\fill (0,4) circle (1.5pt);
+\node[below] at (0,0) {$1$};
+\node[above] at (0,4) {$3$};
+\fill (1,0) circle (1.5pt);
+\fill (1,4) circle (1.5pt);
+\node[below] at (1,0) {$2$};
+\node[above] at (1,4) {$2$};
+\fill (2,0) circle (1.5pt);
+\fill (2,4) circle (1.5pt);
+\node[below] at (2,0) {$3$};
+\node[above] at (2,4) {$1$};
+\end{scope}
+\end{tikzpicture}
+```

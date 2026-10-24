@@ -1,0 +1,57 @@
+---
+id: lem-regular-pencil-has-projective-eigenvalue
+kind: lemma
+title: "Every regular complex pencil has a homogeneous eigenvalue pair"
+status: published
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 2
+deps:
+  - def-regular-generalized-eigenvalue-pencil
+  - lem-projective-determinant-is-homogeneous-and-scale-invariant
+  - thm-fundamental-theorem-of-algebra-minimum-modulus-proof
+  - thm-leibniz-determinant-is-alternating-multilinear-and-normalized
+justified_by: []
+proof_strategy: cases
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-17
+sources:
+  references:
+    - title: "Peter Arbenz, Lecture Notes on Solving Large Scale Eigenvalue Problems, §12.9"
+      url: "https://people.inf.ethz.ch/arbenz/ewp/Lnotes/lsevp.pdf"
+    - title: "LAPACK Users' Guide, Generalized Nonsymmetric Eigenproblems"
+      url: "https://www.netlib.org/lapack/lug/node35.html"
+---
+
+## Statement
+
+Every regular finite square pencil $(A,B)$ over $\mathbb R$ or $\mathbb C$ has
+at least one homogeneous generalized eigenvalue pair $[\alpha:\beta]$ over
+$\mathbb C$.
+
+## Facts & Assumptions
+
+**Given:** $n\ge1$ and a regular pencil $A-\lambda B$ with $A,B\in\mathbb F^{n\times n}$, $\mathbb F\in\{\mathbb R,\mathbb C\}$.
+
+[F1] [[def-regular-generalized-eigenvalue-pencil]]: regularity means $f(\lambda)=\det(A-\lambda B)$ is not the zero polynomial, and a homogeneous eigenvalue pair is a nonzero projective zero of $p(\alpha,\beta)$.
+
+[F2] [[lem-projective-determinant-is-homogeneous-and-scale-invariant]]: $p(\alpha,\beta)=\beta^n f(\alpha/\beta)$ when $\beta\ne0$.
+
+[F3] [[thm-fundamental-theorem-of-algebra-minimum-modulus-proof]]: every nonconstant complex polynomial has a complex root.
+
+[F4] [[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]: the determinant is multilinear in its columns.
+
+## Proof
+
+1.1 By column multilinearity [F4], expanding the $n$ columns of $A-\lambda B$ expresses $f(\lambda)=\det(A-\lambda B)$ as a polynomial of degree at most $n$. Regularity [F1] makes it nonzero. [given, F1, F4, algebra]
+
+2.1 If $\deg f=n$, [F3] gives $\lambda_0\in\mathbb C$ with $f(\lambda_0)=0$. Set $[\alpha:\beta]=[\lambda_0:1]$; [F2] gives $p(\alpha,\beta)=0$. [step 1.1, F2, F3, construct, assume-case degree]
+
+2.2 If $\deg f<n$, its coefficient of $\lambda^n$ is zero. In the same column-multilinear expansion, that coefficient is $(-1)^n\det B$, obtained by taking the $-\lambda B$ column in every position. Hence $\det B=0$. Setting $[\alpha:\beta]=[1:0]$ gives $p(1,0)=\det(-B)=(-1)^n\det B=0$, so this is an infinite homogeneous eigenvalue pair. [step 1.1, F1, F4, algebra, construct, assume-case lower]
+
+3.1 The two degree cases exhaust the nonzero polynomial $f$ and each produces a nonzero projective pair with $p(\alpha,\beta)=0$. [step 2.1, step 2.2, cases-exhaustive] ∎

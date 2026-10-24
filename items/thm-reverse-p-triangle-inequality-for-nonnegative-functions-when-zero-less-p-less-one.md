@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-reverse-p-triangle-inequality-for-nonnegative-functions-when-zero-less-p-less-one.json
+  precheck: pass
 id: thm-reverse-p-triangle-inequality-for-nonnegative-functions-when-zero-less-p-less-one
 kind: theorem
 title: "The $p$-power triangle inequality for nonnegative functions when $0 < p < 1$"
@@ -16,16 +19,7 @@ sources:
       url: "https://djvu.online/file/u1gYJemR8hzMe"
     - title: "John K. Hunter, Measure Theory, reverse inequality discussion before Definition 7.6"
       url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Statement
@@ -48,7 +42,7 @@ $$\int (f+g)^p\,d\mu\le\int f^p\,d\mu+\int g^p\,d\mu.$$
 
 ## Proof
 
-**Proof technique:** For nonnegative numbers $a,b$ and $0<p<1$ one has $(a+b)^p\le a^p+b^p$. Apply this pointwise to $f$ and $g$ and integrate.
+**Proof technique:** For an exponent strictly between zero and one, the power of a sum of nonnegative scalars is at most the sum of their powers. Apply this inequality pointwise to the two functions and integrate.
 
 1.1 For nonnegative reals $a,b$ with $a+b>0$, set $s=a+b$, $u=a/s$ and $v=b/s$. Then $u,v\in[0,1]$, $u+v=1$, and [L1] gives $a^p+b^p=s^p(u^p+v^p)\ge s^p=(a+b)^p$; for $a+b=0$ equality is immediate. Apply this scalar inequality pointwise to $f,g$ to obtain [L1, given, algebra] $$(f+g)^p\le f^p+g^p.$$ [L1, given, algebra]
 

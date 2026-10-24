@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-l-one-half-with-its-p-functional-is-a-normed-space.json
+  precheck: pass
 id: fs-l-one-half-with-its-p-functional-is-a-normed-space
 kind: false-statement
 title: "FALSE: $L^{1/2}$ with its $p$-functional is a normed space"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cex-half-norm-fails-the-triangle-inequality-on-two-indicators, def-norm-and-normed-space]
 proof_strategy: "Refute with the explicit 1/2-triangle-inequality failure on two indicators."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -34,7 +34,7 @@ space.
 
 ## Refutation
 
-**Proof technique:** Refute with the explicit $1/2$-triangle-inequality failure on two indicators.
+**Proof technique:** Refute with the explicit one-half triangle-inequality failure on two indicators.
 
 1.1 The functions from [L1] violate the triangle inequality required by [L2]. [L1, L2]
 

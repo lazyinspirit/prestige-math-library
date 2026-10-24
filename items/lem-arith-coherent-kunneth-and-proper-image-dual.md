@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-arith-coherent-kunneth-and-proper-image-dual.json
+  precheck: pass
 id: lem-arith-coherent-kunneth-and-proper-image-dual
 kind: lemma
 title: "Coherent Kunneth, the tangent bound and the proper-image dual"
@@ -33,12 +36,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "B. Edixhoven, G. van der Geer, B. Moonen, Abelian Varieties (2012), 2.17-2.19 and Chapter 6 (Picard tangent and ampleness); closure in owner-arithmetic-models/dual-source/proof-closure-packet.md"
@@ -67,7 +64,7 @@ Assume AC and DC as inherited from the supplied scheme and cohomology results. L
 
 ## Proof
 
-**Proof technique:** direct: bound $H^1$ by a Hopf-algebra primitivity argument, identify the Picard tangent space, then control the image of $\varphi_{\mathcal L}$ and its kernel.
+**Proof technique:** direct: bound first coherent cohomology by a Hopf-algebra primitivity argument, identify the Picard tangent space, then control the image of the Mumford homomorphism and its kernel.
 
 1.1 By [F1] compute $H^*(A,\mathcal O_A)$ by the double Cech complex of two finite separated affine covers: on products of affine intersections the sections are tensor products, the two augmented Cech directions compute cohomology because affine quasi-coherent higher cohomology vanishes, and field Kunneth gives $H^*(A\times_kA,\mathcal O)=H^*(A,\mathcal O)\otimes_kH^*(A,\mathcal O)$ with Koszul signs. The addition law makes $H^*(A,\mathcal O_A)$ a connected graded Hopf algebra in which every element of $H^1$ is primitive. If $v_1,\dots,v_r\in H^1$ are linearly independent, apply the $r$-fold coproduct to $v_1\cdots v_r$ and project to $(H^1)^{\otimes r}$: the result is the signed sum over permutations of the independent tensors $v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(r)}$, all coefficients being $\pm1$, so it is nonzero even in characteristic two. Hence $H^r(A,\mathcal O_A)\ne0$ and therefore $r\le g$ by the vanishing above dimension $g$; no Borel structure theorem is needed. [F1, given, algebra]
 

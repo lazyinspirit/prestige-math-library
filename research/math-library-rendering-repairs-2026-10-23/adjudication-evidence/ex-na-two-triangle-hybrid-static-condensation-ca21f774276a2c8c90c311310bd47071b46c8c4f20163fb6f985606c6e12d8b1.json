@@ -1,0 +1,75 @@
+{
+  "id": "ex-na-two-triangle-hybrid-static-condensation",
+  "agent": "/root/rendering_repair_coordinator/npde_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "confirmed",
+      "reason": "Independently opened both original tiles separately at original resolution and read frozen/current source and local hybrid/RT0 suppliers. The caption calls the marks schematic flux arrows, while labels u1/u2 also suggest field samples; neither interpretation makes the original directions correct. Original displacements (-0.16,-0.16) and (0.16,0.16) are tangent to x=y, with zero component along either interface normal. They therefore cannot indicate the stated nonzero normal flux. At the original blue tail (0.72,0.38), u1=(-0.14,0.19), and at its midpoint (0.64,0.30), u1=(-0.18,0.15). At the original red tail (0.28,0.62), u2=(-0.14,0.19), and at its midpoint (0.36,0.70), u2=(-0.18,0.15). Both true fields point up-left, disagreeing with the displayed directions. Being wholly inside cells is not itself a defect for field samples. The small original lambda placement is cramped, but I do not independently assert clipping or a hard lambda-overlap defect; label spacing was adjusted with the necessary arrow correction.",
+      "action": "Redrew the arrows as explicit positive scaled field samples, specified their tail coordinates and scaling in the caption, and recorded the cell-outward normal convention and signed integrated fluxes. Enlarged the repaired figure and separated labels for legibility.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only the Mesh diagram TikZ and explanatory caption changed. Field arrows now have displacements 0.8 times the exact field at each tail; caption explicitly distinguishes field samples from outward normals. All earlier source bytes remain identical.",
+  "before_raw_sha256": "fcbb908a2cc53a07b00885d2ea56147e90477d9d6f2de4697ed4d9aa2dea9fa9",
+  "after_raw_sha256": "b18cf151fa18003c36e0e6a4daf431d46c75a38f461eb44591d8172cab77b677",
+  "source_lines_after": {
+    "diagram": "75-87",
+    "arrows": "85-86",
+    "caption": 90
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Mesh and labels",
+      "details": "The closed square has vertices (0,0),(1,0),(1,1),(0,1) and diagonal from (0,0) to (1,1). The lower-right region is K1={0<y<x<1} and the upper-left region K2={0<x<y<1}; f=1 and f=-1 labels agree with the Statement. The diagonal is the only interior facet; lambda labels its multiplier from def-na-hybridized-rt0-darcy-system. The fresh crop visibly contains all four boundary edges plus the diagonal."
+    },
+    {
+      "check": "Exact repaired field samples",
+      "details": "From the Statement, u1(x,y)=((x-1)/2,y/2) and u2(x,y)=(-x/2,(1-y)/2). Blue tail (0.78,0.35) lies in K1 and u1=(-0.11,0.175), so 0.8u1=(-0.088,0.14), exactly the displacement to (0.692,0.49). Red tail (0.35,0.68) lies in K2 and u2=(-0.175,0.16), so 0.8u2=(-0.14,0.128), exactly the displacement to (0.21,0.808). Both segments stay in their convex cells. At blue midpoint (0.736,0.42), u1=(-0.132,0.21), still positively parallel to its arrow. At red midpoint (0.28,0.744), u2=(-0.14,0.128), also positively parallel."
+    },
+    {
+      "check": "Outward normal and flux signs",
+      "details": "K1 is below x=y, hence n1=(-1,1)/sqrt(2); K2 is above it, hence n2=(1,-1)/sqrt(2). For (s,s) on the diagonal, u1 dot n1=1/(2sqrt(2)) and u2 dot n2=-1/(2sqrt(2)). Multiplying by facet length sqrt(2) gives +1/2 and -1/2, matching Proof 1.1 and 2.1 and the outward-normal local/jump convention of def-na-hybridized-rt0-darcy-system. The two outward fluxes sum to zero, as required; no opposite physical flow direction is inferred from the negative second outward flux."
+    },
+    {
+      "check": "Proof interface unchanged",
+      "details": "The Statement, hypotheses, Facts, complete numbered proof, dependencies, metadata and published status are byte-identical to the frozen before source. The diagram illustrates existing formulas and is outside the proof; Proof 1.1-3.1 remains a complete algebraic/integral argument independent of it."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-na-two-triangle-hybrid-static-condensation.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-na-two-triangle-hybrid-static-condensation.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; direct strategy pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-na-two-triangle-hybrid-static-condensation.md --json",
+      "exit_code": 0,
+      "result": "1 checked; errors [], warnings []"
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-npde003\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-na-two-triangle-hybrid-static-condensation --out research/math-library-rendering-repairs-2026-10-23/previews/npde003-final-unique-v2",
+      "exit_code": 0,
+      "result": "Fresh current-source local native ItemBody/TikZ compilation and 2-tile capture; both final tiles viewed separately original-resolution, plus original-resolution diagram crop. Four square boundary edges, diagonal, both correct up-left arrows and readable separated labels visible."
+    }
+  ],
+  "preview": "research/math-library-rendering-repairs-2026-10-23/previews/npde003-final-unique-v2/manifest.json",
+  "visual_review_note": "A full-tile viewer presentation intermittently omitted thin lines despite nonblack expected mesh pixels; the unscaled 220x215 diagram crop viewed standalone shows the complete rendered mesh and arrows. No source change was made in response to that viewer artifact.",
+  "check_history_note": "The first repaired draft used separate dollar spans around a TikZ line break. Native preview compiled, but rendercheck misread the escaped dollar. Replaced this with separate single-math node lines, then reran all three scoped checks and generated/reviewed final v2 preview. First preview retained at previews/npde003-final-unique.",
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview, not a production HTTP route. Preview title map reports 16 unrelated parse diagnostics; no claim of whole-library validation. No external source visits or broad proof audit performed."
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "id": "cex-knot-kt-14-boundary-case",
+  "agent": "/root/rendering_repair_coordinator/knot_018",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original --02.png shows raw TikZ beneath the caption. The tilde fence is not recognized by the native ItemBody diagram extractor; changing it to the supported backtick fence invokes TikZ.",
+      "action": "Replaced only opening and closing tilde fences with backtick fences; repaired the subsequently exposed unsupported empty-diagram glyph as separately recorded.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "The first fresh native local preview after fence correction displayed a diagram failure; direct bundled TeX compilation with showConsole:true identified Undefined control sequence at \\varnothing. The native renderer loads amsfonts rather than amssymb.",
+      "action": "Replaced \\varnothing with the equivalent supported \\emptyset symbol, preserving the empty diagram.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Supported TikZ fences and equivalent supported empty-set glyph; no geometry, framing, caption, proof or metadata changes.",
+  "source_lines_after": [
+    85,
+    87,
+    93
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Left object D0 is the empty framed link, represented by the empty-set symbol, rather than an unknot with zero framing.",
+      "justification": "Given and step 1.1; def-integral-framed-link-surgery-diagram Definition explicitly assigns S\u00b3 to the empty index set. Replacing the glyph changes no object."
+    },
+    {
+      "data": "Right object D1 has precisely one crossing-free circular component and integer framing +1; the single circle is a schematic standard unknot.",
+      "justification": "Given and caption. def-integral-framed-link-surgery-diagram measures the integer framing from the preferred longitude and uses slope n[\u03bc]+[\u03bb], so the +1 label means [\u03bc]+[\u03bb], exactly the slope in step 1.2. No blackboard-framing or crossing claim is added."
+    },
+    {
+      "data": "The arrow from D0 to D1 is stabilization, not ambient isotopy.",
+      "justification": "def-kirby-moves-on-integral-framed-links operation 3 permits addition of a \u00b11-framed unknot in a disjoint ball; for the empty link the disjointness condition is vacuous. F4 and step 2.1 use this same operation. Component counts remain zero and one."
+    },
+    {
+      "data": "Both diagrams have the same oriented surgery boundary result S\u00b3, but the picture itself asserts no diffeomorphism or new topological relation.",
+      "justification": "Step 1.1 handles D0; step 1.2 gives the explicit orientation-preserving gluing comparison g with g\u2218f1=f0 for D1. The rigorous component-count refutation in step 2.1 remains fully independent of this figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-knot-kt-14-boundary-case.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-knot-kt-14-boundary-case.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-knot-kt-14-boundary-case.md",
+            "item_id": "cex-knot-kt-14-boundary-case",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-knot-kt-14-boundary-case.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_review": {
+    "original": "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/cex-knot-kt-14-boundary-case--02.png",
+    "original_resolution_standalone": true,
+    "failed_intermediate_preview": "research/math-library-rendering-repairs-2026-10-23/previews/knot018-final-unique",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/previews/knot018-final-v2-unique",
+    "final_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/knot018-final-v2-unique/screenshots/cex-knot-kt-14-boundary-case--02.png",
+    "final_resolution_standalone": true,
+    "result": "Empty-set symbol, rightward stabilization arrow and its label, circular unknot and +1 framing are visible and separated. Native receipt: tikz_count 1, diagram_failures [], katex_errors [].",
+    "limitations": [
+      "Local ItemBody preview; no HTTP or full production route visited.",
+      "Preview title map records 32 unrelated parse diagnostics; scoped item rendered successfully."
+    ]
+  },
+  "before_raw_sha256": "43f4b47fd6a016ca24e67f412f717b0fca3b4c5ab013cbcc0f27f37c5e1fb867",
+  "after_raw_sha256": "fe7807f43157f67e0311267d994c79a04a1842998e509578cf552f10db3a8fb9",
+  "remaining_issues": [],
+  "recorded_at": "2026-10-23T19:29:12.856929+00:00"
+}

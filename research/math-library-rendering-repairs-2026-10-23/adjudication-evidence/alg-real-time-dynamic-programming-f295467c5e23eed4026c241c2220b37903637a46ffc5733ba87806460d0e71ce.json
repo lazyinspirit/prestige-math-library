@@ -1,0 +1,114 @@
+{
+  "id": "alg-real-time-dynamic-programming",
+  "agent": "/root/rendering_repair_coordinator/dorl_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic original screenshot has a long unillustrated procedure. A flowchart materially distinguishes the stopping test, pre-backup table, executed-from state, and retained cross-trial values; those are concrete control-flow relationships, not a convergence claim. Independently warranted under expanded explanatory-diagram scope.",
+      "action": "Append final Remarks with a TikZ flowchart and explicit local notation/relations; preserve entire original source as a byte-identical prefix.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the eight-node RTDP trial flow: choose supplied start, test goal/cap, save pre-backup W and maximum m, draw fresh uniform maximizing action, execute/observe, update only old current state, then advance/count. Trial termination returns to a new start with V retained.",
+  "source_lines_after": {
+    "remarks": [
+      47,
+      73
+    ],
+    "tikz": [
+      51,
+      71
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "S, G, A(s), V, W, q_W, m",
+      "check": "Definition lines 33\u201337 gives V:S\u2192R and q for a\u2208A(s); the SSP supplier Definition makes each A(s) nonempty finite and P a transition law on S. Thus the saved table W has the same domain, q_W(s,\u00b7):A(s)\u2192R, and m is attained by the finite-maximum supplier. The figure neither changes the state/action domains nor adds a policy assumption."
+    },
+    {
+      "relation": "trial start and stop",
+      "check": "Definition line 33 supplies starts in S_0\u2282S\\G and cap L. Setting k=0, testing s\u2208G or k=L before each decision, and incrementing k by one after each completed decision implements at most L decisions and immediate termination on a reached goal. The yes edge goes to trial end; only the no edge reaches the backup sequence."
+    },
+    {
+      "relation": "saved-value greedy choice and backup",
+      "check": "Definition lines 35\u201337 explicitly computes action values and uses the pre-backup table for the maximum. Saving W\u2190V once and using q_W and the same m in both draw and backup reproduces this ordering; fresh uniform draw is among all actions attaining m, not among arbitrary actions."
+    },
+    {
+      "relation": "execution, old-state backup, then advance",
+      "check": "Definition line 37 executes the action and observes next state before updating V(s). Figure keeps s fixed through execute and backup; only the subsequent node assigns s\u2190s\u2032. The backup changes V(s) alone, retaining every other entry. The next observed state lies in S by the SSP/MDP transition law."
+    },
+    {
+      "relation": "goal values and cross-trial persistence",
+      "check": "Definition lines 33 and 37 set initial goal values to zero and retain V when selecting the next supplied start. The stop test prevents a goal backup, so induction over decisions preserves V(g)=0. Both trial-end and new-start boxes explicitly retain V; only k and s reset."
+    },
+    {
+      "relation": "actual flow graph",
+      "check": "Native standalone crop shows 8 nodes and 9 directed edges: start\u2192stop\u2192compute\u2192choose\u2192execute\u2192backup\u2192advance; advance\u2192stop closes the left loop; stop\u2192trial-end and trial-end\u2192start close the right loop. Stop has two incoming/two outgoing arrows. No graph-cycle syntax, crossing ambiguity, open/closed endpoint claims, or convergence edge is present."
+    },
+    {
+      "relation": "independence",
+      "check": "No proof is supplied or altered for this algorithm. The complete original Definition remains unchanged and independently specifies every operation; added prose justifies the diagram directly from it. The figure is expository and asserts no convergence guarantee."
+    }
+  ],
+  "checks": {
+    "before_edit_guard": {
+      "expected_sha256": "7ab613d93aeacc58bd0a33b4bb7747ffc4471e7ffe4f90b57fe5a1259bd4d176",
+      "actual_sha256": "7ab613d93aeacc58bd0a33b4bb7747ffc4471e7ffe4f90b57fe5a1259bd4d176",
+      "result": "matched immediately before sole edit"
+    },
+    "source_sha256": "c16087f4260b49404fb4e4002585eda8414fe5997bd2243fd7aa9ba3eb6ebdeb",
+    "preservation": "Current bytes start with complete frozen before bytes; status and all frontmatter, original Definition and references unchanged.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-real-time-dynamic-programming.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-real-time-dynamic-programming.md --json",
+      "exit_code": 0,
+      "files": 1,
+      "checked": 0,
+      "failed": 0,
+      "status": "not-applicable"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-real-time-dynamic-programming.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dorl008",
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl008/manifest.json",
+      "manifest_sha256": "426a489ad5ca4e9adad435748b43e7be655135825c99edc06028832c7e298b6f",
+      "source_sha256": "c16087f4260b49404fb4e4002585eda8414fe5997bd2243fd7aa9ba3eb6ebdeb",
+      "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl008/pi-tikz-cache/a8bffdd1433acf49f6ce37b4e786ad76.svg",
+      "native_svg_sha256": "6c169e36ff5e2f444b515fbdbeb3f606c2652515d33547e7199b647c6bad65dd",
+      "inspected_original_resolution": [
+        "screenshots/alg-real-time-dynamic-programming--01.png",
+        "diagram-native-crop.png"
+      ],
+      "visual_result": "Native SSR compile succeeds. All labels, boxes, branch labels and nine arrow paths are visible on black; both return paths visibly reach their destination nodes. SVG strokes use currentColor and shape fills none: no pale-fill contrast obstruction; no open/closed point endpoints apply."
+    },
+    "original_evidence": {
+      "declared_missing_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-real-time-dynamic-programming--01.png",
+      "resolved_authentic_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-real-time-dynamic-programming--01.png",
+      "sha256": "e249cbb9bc54d9f01837ea63094f3d7a0c4a7b4d20818624152a62fa921e7e91",
+      "recorded_hash_matches": true,
+      "standalone_original_resolution_inspected": true
+    }
+  },
+  "remaining_issues": [
+    "Fresh preview PNG has a blank upper region for the pre-existing Definition/reference content although HTML/source retains it. This is a capture limitation outside the added diagram; original standalone screenshot and exact preserved bytes were inspected. Native added-figure crop is complete.",
+    "Preview reference-title map reports 16 unrelated corpus parse diagnostics; scoped rendercheck has no errors or warnings."
+  ]
+}

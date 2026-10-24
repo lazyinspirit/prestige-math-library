@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-sobolev-duality-from-the-fourier-pairing.json
+  precheck: pass
 id: cor-sobolev-duality-from-the-fourier-pairing
 kind: corollary
-title: "Conjugate duality of H^s and H^{-s}"
+title: "Conjugate duality of $H^s$ and $H^{-s}$"
 status: published
 origin: pipeline
 deps:
@@ -17,13 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"
@@ -40,9 +36,9 @@ Assume Countable Choice and use the first-variable-linear complex inner
 product conventions. Let $n\ge1$, $s\in\mathbb R$, and let $H^s=H^s(\mathbb R^n)$
 be the real-order Bessel-potential completion with canonical embedding
 $E_s:H^s\to\mathcal S'(\mathbb R^n)$
-([[def-real-order-bessel-potential-sobolev-space]],
+([[def-real-order-bessel-potential-sobolev-space|Real-order Bessel-potential completion $H^s$]],
 [[thm-bessel-potential-completions-embed-in-tempered-distributions]]).
-By [[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces]], for
+By [[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces|Real-order $H^s$ as weighted Fourier distributions]], for
 $u\in H^s$ the distributional product
 $\langle\xi\rangle^s\mathcal F(E_su)$ is the regular distribution of a unique
 class $g\in L^2(\mathbb R^n)$, and $\|u\|_{H^s}=\|g\|_2$; likewise
@@ -90,7 +86,7 @@ bilinear distribution action on arbitrary pairs of elements of $H^s$.
 
 [A1] Countable Choice permits one selection from each nonempty set in a countable family ([[def-countable-choice]]).
 
-[F1] For every $\sigma\in\mathbb R$ the canonical embedding restricts to a bijection $E_\sigma:H^\sigma\to\mathcal W_\sigma$ onto the set of tempered distributions $u$ for which $\langle\xi\rangle^\sigma\mathcal Fu=u_G$ for a unique $G\in L^2$, with $\|U\|_{H^\sigma}=\|G\|_2$ ([[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces]]).
+[F1] For every $\sigma\in\mathbb R$ the canonical embedding restricts to a bijection $E_\sigma:H^\sigma\to\mathcal W_\sigma$ onto the set of tempered distributions $u$ for which $\langle\xi\rangle^\sigma\mathcal Fu=u_G$ for a unique $G\in L^2$, with $\|U\|_{H^\sigma}=\|G\|_2$ ([[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces|Real-order $H^s$ as weighted Fourier distributions]]).
 
 [F2] $H^s$ is a complex Hilbert space for the first-variable-linear inner product $(U,V)_{H^s}=\int_{\mathbb R^n}(J_sU)(\xi)\overline{(J_sV)(\xi)}\,d\xi$, whose induced norm is the defining completion norm ([[cor-bessel-potential-spaces-are-hilbert-and-complete]]).
 
@@ -102,7 +98,7 @@ bilinear distribution action on arbitrary pairs of elements of $H^s$.
 
 ## Proof
 
-**Proof technique:** transport the weighted $L^2$ pairing along the surjective Fourier isometries and conjugate the Riesz representation.
+**Proof technique:** transport the weighted L² pairing along the surjective Fourier isometries and conjugate the Riesz representation.
 
 1.1 Well-definedness. Let $u\in H^s$, $v\in H^{-s}$, and let $g,h\in L^2$ be the unique classes of [F1], so $g=\langle\xi\rangle^s\mathcal F(E_su)$ and $h=\langle\xi\rangle^{-s}\mathcal F(E_{-s}v)$ in the sense of that statement. By [F5] the product $\overline gh$ is integrable, $|A_v(u)|\le\|g\|_2\|h\|_2$, and $A_v(u)$ depends only on the classes $g,h$. Moreover $\mathcal F(E_su)$ and $\mathcal F(E_{-s}v)$ are the regular distributions of $\langle\xi\rangle^{-s}g$ and $\langle\xi\rangle^{s}h$ by [F3] and [F1], and $\overline{\langle\xi\rangle^{-s}g}\;\langle\xi\rangle^{s}h=\overline gh$ pointwise, so the displayed integral is the density product $\overline{\mathcal Fu}\,\mathcal Fv$. [F1, F3, F5, given]
 

@@ -1,0 +1,71 @@
+{
+  "id": "thm-parabolic-theta-scheme-local-truncation-error",
+  "agent": "/root/rendering_repair_coordinator/npde_015",
+  "model": "gpt-6.1-sol (medium; launcher configured)",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Independently inspected original standalone 1200x1400 tile 01 at original resolution. PDE block opens on a standalone $$ line but closes with $$ appended to its formula. The native Markdown block parser does not terminate that display there: subsequent prose and inline dollars spill into red KaTeX errors, and both residual inequalities are shown as raw TeX. The residual formula tokens and their standalone delimiters themselves are sound; this is a mixed-placement display-boundary defect, not an error in PDE coefficients or residual mathematics.",
+      "action": "Moved only the PDE closing $$ onto its own line, giving the opening and closing display delimiters matching standalone placement.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Inserted one newline before the PDE closing $$; no mathematical or proof token changed.",
+  "source_lines_after": {
+    "pde_display": [
+      38,
+      39,
+      40
+    ],
+    "residual_displays": [
+      42,
+      43,
+      44,
+      46,
+      47,
+      48
+    ],
+    "following_clause": 49
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "root_checks": {
+    "before_raw_sha256": "65593cfeef3f93982eef19d01f1a2943c8eac3b366eac8873782ba59e9f6d761",
+    "guard": "Immediately before edit, read current bytes and asserted SHA256 equals queue before_raw_sha256.",
+    "current_raw_sha256": "0ec4380d624b3d156c29c01c82ed9dd09c7b45922a8be7896be6e9a7e49463b2",
+    "exact_change_verified": "Current complete bytes equal frozen before bytes with only a single newline inserted before the PDE closing delimiter. Frontmatter including status: published is byte-identical.",
+    "local_notation_context": "Read full local def-parabolic-theta-finite-difference-scheme; preserved positive centered heat operator, (1-theta) old plus theta new endpoint weighting, both boundary rows, all source levels, residual estimates/constants, hypotheses, proof and dependencies.",
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-parabolic-theta-scheme-local-truncation-error.md --json",
+      "exit_code": 0,
+      "result": "files 1; checked 1; failed 0; direct proof pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-parabolic-theta-scheme-local-truncation-error.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors []; warnings []"
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-parabolic-theta-scheme-local-truncation-error.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    "formatting_repairs": "None needed; actual phase-format check passed without renumbering."
+  },
+  "visual_review": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/thm-parabolic-theta-scheme-local-truncation-error--01.png"
+    ],
+    "original_review": "Viewed standalone at original resolution.",
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/npde015-final-unique",
+    "fresh_preview_review": "Viewed both new standalone original-resolution tiles 01 and 02. PDE and both residual inequalities typeset clearly; subsequent prose and inline tau render normally; proof rows retain blue justification chips; no red parse errors or new clipping/overlap defect observed.",
+    "katex_errors": [],
+    "katex_count": 52,
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody preview with resolved current reference titles; does not cover production HTTP route, navigation/dependency widgets, or Sources footer. Preview reference map lists 16 unrelated parse diagnostics."
+  }
+}

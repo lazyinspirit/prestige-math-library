@@ -1,0 +1,66 @@
+---
+id: lem-finite-population-design-law-is-a-probability-measure
+kind: lemma
+title: "A finite-population design induces probability laws on observed records"
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 3
+deps:
+  - def-finite-population-and-sampling-design
+  - def-measurable-space
+  - def-sigma-algebra
+  - def-measure
+  - def-probability-measure
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, Chapter 2: Simple Random Sampling, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter2-sampling-simple-random-sampling.pdf"
+    - title: "John J. Borkowski, Horvitz–Thompson Estimators, STAT 446 Lecture 6, Montana State University"
+      url: "https://math.montana.edu/jobo/st446/documents/ho6.pdf"
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Statement
+
+For every fixed $y\in\mathbb R^U$, the set function $P_y^d$ defined in
+[[def-finite-population-and-sampling-design]] is a probability measure on
+$(\mathcal X_d,\mathcal A_d)$.
+
+## Facts & Assumptions
+
+**Given:** A finite nonempty population index set $U$, a finite sampling support
+$\mathcal S_d$ with positive weights $p_d(s)$ summing to $1$, and a fixed
+value function $y:U\to\mathbb R$.
+
+[F1] [[def-finite-population-and-sampling-design]]: The observed-record space
+is $\mathcal X_d=\{(s,z):s\in\mathcal S_d,\ z:s\to\mathbb R\}$, its event
+family is the full power set, and
+$P_y^d(B)=\sum_{s:O_y(s)\in B}p_d(s)$.
+
+[F2] [[def-sigma-algebra]]: A sigma-algebra is an algebra of subsets closed
+under countable unions.
+
+[F3] [[def-measure]]: A measure assigns zero to the empty set and is countably
+additive on every pairwise disjoint sequence of measurable sets.
+
+[F4] [[def-probability-measure]]: A probability measure is a measure whose
+total mass is $1$.
+
+## Proof
+
+1.1 Since $\mathcal A_d$ is the full power set of $\mathcal X_d$, it contains every subset of $\mathcal X_d$ and is closed under complements and countable unions; hence it is a sigma-algebra by [F2]. [F1, F2, algebra]
+
+1.2 For every $B\in\mathcal A_d$, the sum defining $P_y^d(B)$ is finite and nonnegative. It gives $P_y^d(\varnothing)=0$ and $P_y^d(\mathcal X_d)=\sum_{s\in\mathcal S_d}p_d(s)=1$. [F1, F4, algebra]
+
+2.1 Let $(B_k)_{k\ge0}$ be pairwise disjoint in $\mathcal A_d$ and put $C_k=\{s\in\mathcal S_d:O_y(s)\in B_k\}$. The sets $C_k$ are pairwise disjoint and at most $|\mathcal S_d|$ of them are nonempty. Their union is $\{s:O_y(s)\in\bigcup_kB_k\}$, so rearranging these finite weighted sums gives $P_y^d(\bigcup_kB_k)=\sum_kP_y^d(B_k)$. By [F3], $P_y^d$ is a measure; by [F4] and step 1.2, its total mass is $1$, so it is a probability measure. [F1, F3, F4, step 1.2, algebra] ∎

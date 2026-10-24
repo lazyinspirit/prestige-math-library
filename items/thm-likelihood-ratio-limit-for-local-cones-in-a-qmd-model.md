@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-likelihood-ratio-limit-for-local-cones-in-a-qmd-model.json
+  precheck: pass
 id: thm-likelihood-ratio-limit-for-local-cones-in-a-qmd-model
 kind: theorem
 title: "Likelihood-ratio limit for local cones in a QMD model"
@@ -25,12 +28,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 26"
@@ -106,3 +103,26 @@ where $d_I$ is the Fisher-information distance of [[def-fisher-information-metri
 ## Remarks
 
 The uniform local expansion and tightness are explicit hypotheses. The proof does not infer uniformity over bounded local parameters from pointwise LAN, and it does not invoke the regular interior Wilks theorem at a boundary.
+
+
+The following two-dimensional illustration uses $I=\mathrm{Id}_2$, $C=\mathbb R^2$, and $C_0=\{(t,0):t\ge0\}$. The full plane surrounding the ray represents $C$. At the sample point $z=I^{-1}Z=(2,3/2)$, the nearest points are $p_C=z$ and $p_0=(2,0)$. Thus $d_I(z,C)=0$ and the dashed segment has length $d_I(z,C_0)=3/2$. This illustrates the squared-distance difference in step 4.1; the convergence proof above is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.9, font=\large]
+\node at (0.7,2.4) {$C=\mathbb R^2$};
+\draw[->,gray] (-0.6,0) -- (4,0);
+\draw[->,gray] (0,-0.5) -- (0,2.6);
+\draw[very thick,blue,->] (0,0) -- (3.8,0);
+\node[blue,below] at (3.2,-0.08) {$C_0$};
+\draw[dashed,thick] (2,0) -- (2,1.5);
+\draw (2,0.18) -- (2.18,0.18) -- (2.18,0);
+\fill (0,0) circle (1.5pt);
+\node[below left] at (0,0) {$0$};
+\fill (2,0) circle (1.8pt);
+\node[below] at (2,-0.08) {$p_0=(2,0)$};
+\fill (2,1.5) circle (1.8pt);
+\node[above] at (2,1.5) {$z=p_C=(2,3/2)$};
+\node[right] at (2.15,0.8) {$d_I(z,C_0)$};
+\node at (1.65,-1.15) {$d_I^2(z,C_0)-d_I^2(z,C)=9/4$};
+\end{tikzpicture}
+```

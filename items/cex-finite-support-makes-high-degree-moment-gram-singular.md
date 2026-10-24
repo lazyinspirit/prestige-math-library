@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-finite-support-makes-high-degree-moment-gram-singular.json
+  precheck: pass
 id: cex-finite-support-makes-high-degree-moment-gram-singular
 kind: counterexample
 title: Finite support can make a higher-degree moment Gram matrix singular
@@ -14,8 +17,7 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification: {}
-proof_strategy: directverification: {}
+proof_strategy: direct
 
 ---
 

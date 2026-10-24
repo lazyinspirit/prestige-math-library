@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rational-homotopy-isomorphisms-and-an-endpoint-surjection-give-homology-isomorphisms.json
+  precheck: pass
 id: lem-rational-homotopy-isomorphisms-and-an-endpoint-surjection-give-homology-isomorphisms
 kind: lemma
 title: "Rational homotopy comparison with one endpoint surjection implies homology comparison"
@@ -24,13 +27,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "§4.2 Theorem 4.41, printed p.376; fibration exact sequence, with the limited rational comparison proved locally from the declared Hurewicz and Serre suppliers"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
 
-Assume AC. Let f:W→X be a based map of 2-connected CW complexes and let D≥2. If π_i(f)⊗Q is an isomorphism for 2≤i≤D and a surjection for i=D+1, then H_i(f;Q) is an isomorphism for 0≤i≤D.
+Assume AC. Let $f:W\to X$ be a based map of $2$-connected CW complexes and let $D\ge2$. If $\pi_i(f)\otimes\mathbb Q$ is an isomorphism for $2\le i\le D$ and a surjection for $i=D+1$, then $H_i(f;\mathbb Q)$ is an isomorphism for $0\le i\le D$.
 
 ## Facts & Assumptions
 
@@ -46,6 +48,6 @@ Assume AC. Let f:W→X be a based map of 2-connected CW complexes and let D≥2.
 
 **Proof technique:** direct.
 
-1.1 Let F→E_f→X be the actual mapping-path fibration. The fiber exact sequence gives F path-connected and simply connected, because π_1(W)=π_1(X)=π_2(X)=0. All groups in its relevant higher exact segments are abelian. Exactness of rationalization from the rationalization lemma gives, for 2≤j≤D, zero π_j(F)⊗Q: the adjacent map π_{j+1}(W)⊗Q→π_{j+1}(X)⊗Q is surjective, and π_j(W)⊗Q→π_j(X)⊗Q is injective. The endpoint j=D uses precisely the stipulated surjection. [given, F1, F2]
+1.1 Let $F\to E_f\to X$ be the actual mapping-path fibration. The fiber exact sequence gives $F$ path-connected and simply connected, because $\pi_1(W)=\pi_1(X)=\pi_2(X)=0$. All groups in its relevant higher exact segments are abelian. Exactness of rationalization from the rationalization lemma gives, for $2\le j\le D$, zero $\pi_j(F)\otimes\mathbb Q$: the adjacent map $\pi_{j+1}(W)\otimes\mathbb Q\to\pi_{j+1}(X)\otimes\mathbb Q$ is surjective, and $\pi_j(W)\otimes\mathbb Q\to\pi_j(X)\otimes\mathbb Q$ is injective. The endpoint $j=D$ uses precisely the stipulated surjection. [given, F1, F2]
 
-2.1 Inductively apply the rational first-Hurewicz lemma to F for j=2,...,D. Its lower homotopy groups are torsion, so H_j(F;Q)=0 in that range; H_1(F;Q)=0 by simple connectivity. In the rational Serre sequence over X, every term with 0<b≤D is zero. For a≤D the bottom-row term E^2_{a,0}=H_a(X;Q) has no incoming differential and no nonzero outgoing differential: each outgoing target has fiber degree r−1≤a−1≤D−1. There are no other nonzero stable filtration terms of total degree at most D. The base edge p_*:H_i(E_f;Q)→H_i(X;Q) is therefore an isomorphism through D. The inclusion j_f:W→E_f is a homotopy equivalence and p_f j_f=f, so the asserted isomorphism is H_i(f;Q). This proves the limited comparison locally; it does not invoke a mod-torsion Whitehead theorem. [step 1.1, F2, F3] ∎
+2.1 Inductively apply the rational first-Hurewicz lemma to $F$ for $j=2,\ldots,D$. Its lower homotopy groups are torsion, so $H_j(F;\mathbb Q)=0$ in that range; $H_1(F;\mathbb Q)=0$ by simple connectivity. In the rational Serre sequence over $X$, every term with $0<b\le D$ is zero. For $a\le D$ the bottom-row term $E^2_{a,0}=H_a(X;\mathbb Q)$ has no incoming differential and no nonzero outgoing differential: each outgoing target has fiber degree $r-1\le a-1\le D-1$. There are no other nonzero stable filtration terms of total degree at most $D$. The base edge $p_*:H_i(E_f;\mathbb Q)\to H_i(X;\mathbb Q)$ is therefore an isomorphism through $D$. The inclusion $j_f:W\to E_f$ is a homotopy equivalence and $p_f j_f=f$, so the asserted isomorphism is $H_i(f;\mathbb Q)$. This proves the limited comparison locally; it does not invoke a mod-torsion Whitehead theorem. [step 1.1, F2, F3] ∎

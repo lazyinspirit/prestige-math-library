@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-coinvariant-algebra-of-s-two-and-s-three-as-graded-regular-representations.json
+  precheck: n/a
 id: ex-the-coinvariant-algebra-of-s-two-and-s-three-as-graded-regular-representations
 kind: example
-title: The coinvariant algebra of S_2 and S_3 as graded regular representations
+title: The coinvariant algebra of $S_2$ and $S_3$ as graded regular representations
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28

@@ -1,0 +1,97 @@
+{
+  "id": "def-frobenius-object-and-knowledgeable-sewing-data",
+  "agent": "/root/rendering_repair_coordinator/hall_005",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unbalanced-delimiters",
+      "verdict": "confirmed",
+      "reason": "Both original PNGs viewed individually at original resolution show literal TeX and red error cascades. Two display openers were indented within the final bullet while their closing delimiters were at column zero; the Markdown/math parser did not pair them as intended. This is a delimiter-context defect, not a missing defining equation.",
+      "action": "Put both display blocks at column zero, with blank paragraph boundaries, leaving every formula and quantifier unchanged.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Original second PNG shows literal arrow commands and no diagram. The complete tilde fence is balanced in source, but ItemBody recognizes only triple-backtick tikz/tikzcd fences, so compilation was never dispatched. This is not an unterminated fence or a malformed mathematical composite.",
+      "action": "Replace the tilde fence with the supported triple-backtick tikzcd fence; preserve its entire diagram payload.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair two display delimiter contexts and use the renderer-supported TikZ fence. No mathematical expressions, hypotheses, claims, sources, dependencies, title or frontmatter changed.",
+  "source_lines_after": [
+    52,
+    54,
+    58,
+    60,
+    143,
+    146
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Both nodes are the finite-dimensional vector space A tensor A from the uncolored Frobenius-object definition.",
+      "maps": "Upper arrow is Delta composed with mu: A tensor A -> A -> A tensor A, using the maps declared in Definition lines 34\u201336.",
+      "relation": "The upper arrow has the displayed source and target; no change to its direction or label."
+    },
+    {
+      "objects": "Lower composite passes through (A tensor A) tensor A and A tensor (A tensor A).",
+      "maps": "Delta tensor 1: A tensor A -> (A tensor A) tensor A; alpha: (A tensor A) tensor A -> A tensor (A tensor A); 1 tensor mu: A tensor (A tensor A) -> A tensor A.",
+      "relation": "Its domain and codomain equal those of Delta composed with mu. Equality of the two paths is exactly the first Frobenius identity in the Definition; the associator is explicitly included, consistent with the non-strict tensor convention. The bends encode two parallel maps, with no crossing, sign or reversed map."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/def-frobenius-object-and-knowledgeable-sewing-data.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/def-frobenius-object-and-knowledgeable-sewing-data.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-frobenius-object-and-knowledgeable-sewing-data.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0
+      },
+      "status": "not-applicable"
+    },
+    "local_native_visual": {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-frobenius-object-and-knowledgeable-sewing-data --out research/math-library-rendering-repairs-2026-10-23/previews/hall-005-final-20261024-recovery",
+      "exit_code": 0,
+      "preview": "research/math-library-rendering-repairs-2026-10-23/previews/hall-005-final-20261024-recovery",
+      "katex_errors": [],
+      "katex_count": 83,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "viewed_original_resolution_tiles": [
+        1,
+        2,
+        3
+      ],
+      "visual_result": "All formulas rendered; complete diagram in tile 02 has both A tensor A nodes, two rightward curved arrows and legible separated labels without clipping or overlap. Tile 03 is the overlapping bottom continuation.",
+      "limitation": "Local ItemBody preview, not the full production route; unrelated title-map parse diagnostics reported by utility: 32."
+    },
+    "publication_status": "Original and current frontmatter byte-for-byte identical; status remains published.",
+    "interrupted_preview": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/previews/hall-005-final-20261024a",
+      "result": "Runtime interrupted before screenshot capture; retained unchanged and not counted as a successful check."
+    }
+  },
+  "current_raw_sha256": "665f19d800089db93110de42d19e990402117b3219f5d96f5849198a888d8c83",
+  "remaining_issues": []
+}

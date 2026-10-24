@@ -1,0 +1,81 @@
+{
+  "id": "thm-stars-and-bars",
+  "agent": "/root/rendering_repair_coordinator/comb_014",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Independently viewed all four original tiles as standalone original-resolution images. Tile 03 visibly prints the TikZ commands rather than the figure. The source puts both fence delimiters and all code on the opening line, so the native fenced-diagram parser cannot recognize it.",
+      "action": "Separated opening fence, unchanged TikZ commands, and closing fence onto their own lines; rendered the actual local ItemBody and reviewed final tile 03 at original resolution.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Reformatted the malformed single-line TikZ fence in Remarks. No TikZ object, coordinate, label, or relation changed. No other title/body content changed.",
+  "source_lines_after": {
+    "diagram": [
+      112,
+      131
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and counts",
+      "result": "The local definition makes weak compositions ordered natural-number tuples summing to n. The depicted k=(2,0,3) has m=3, n=5, M=2. There are exactly five star nodes and two bars, in seven positions numbered 0 through 6."
+    },
+    {
+      "check": "Placement and zero part",
+      "result": "Stars occupy positions 0,1,4,5,6; bars occupy 2,3. The resulting ordered runs have lengths 2,0,3. Adjacent bars correctly encode the zero middle part; this example is a weak composition rather than a positive composition."
+    },
+    {
+      "check": "Explicit bijection of step 4.1",
+      "result": "For s_i=(sum over j<i+1 of k_j)+i, s_0=2 and s_1=2+0+1=3. Thus S(k)={2,3} is precisely the two-element subset of the ordinal 7 shown in the label. Inverse recovery gives k_0=2, k_1=3-2-1=0, and k_2=5-(2+0)=3."
+    },
+    {
+      "check": "Proof interface",
+      "result": "The diagram remains in Remarks after the complete proof. Steps 1.1\u20133.1 establish the count by induction and step 4.1 establishes the bijection independently; the figure introduces no premise or proof dependency."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-stars-and-bars.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-stars-and-bars.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; pass; induction"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-stars-and-bars.md --json",
+      "exit_code": 0,
+      "result": "errors=[], warnings=[], checked=1"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-stars-and-bars --out research/math-library-rendering-repairs-2026-10-23/previews/comb-014-independent-20261024-v2",
+      "exit_code": 0,
+      "result": "Actual native local file-only ItemBody preview: 4 tiles, 1 TikZ figure, no diagram failures, no KaTeX errors. Standalone original-resolution final tile 03 visibly shows both bars, five stars, all position labels and both mathematical labels without clipping or overlap."
+    }
+  ],
+  "preview": "research/math-library-rendering-repairs-2026-10-23/previews/comb-014-independent-20261024-v2",
+  "limitations": [
+    "First preview attempt without TSX_TSCONFIG_PATH failed to resolve the application @ import alias before rendering; corrected environment and fresh output directory succeeded.",
+    "Local file-only preview covers ItemBody, not production routes; 32 unrelated reference-map parse diagnostics remain outside scope."
+  ],
+  "preservation_checks": {
+    "before_raw_sha256": "b191dfe2cca19bb536961dfd646de056cadd0eb3c8cfc66f0660e93948b36791",
+    "raw_sha256_after": "725eb0c520dfa6c53302b8ac1234b9dbdcf2e00735133e6be0b2a6ec02eb581a",
+    "guard_matched_immediately_before_edit": true,
+    "frontmatter_byte_identical": true,
+    "publication_status": "published",
+    "outside_diagram_block_identical": true,
+    "diagram_nonwhitespace_identical": true
+  },
+  "remaining_issues": []
+}

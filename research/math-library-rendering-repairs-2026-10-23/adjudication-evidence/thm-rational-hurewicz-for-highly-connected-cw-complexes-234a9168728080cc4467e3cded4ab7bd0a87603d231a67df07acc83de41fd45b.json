@@ -1,0 +1,84 @@
+{
+  "id": "thm-rational-hurewicz-for-highly-connected-cw-complexes",
+  "agent": "/root/rendering_repair_coordinator/at_012",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Viewed both flagged PNGs separately at original resolution. The statement visibly prints baseline underscores and coefficient subscripts, while the Given paragraph uses typeset math. Proof step 3.1 prints a linear source-typed arrow square with vertical bars instead of an actual mathematical square. The frozen and current source initially matched and lacked math delimiters at those locations.",
+      "action": "Wrapped statement formulas and proof-step 3.1 formulas in supported math; transcribed the existing four-object, four-arrow square into a single-line KaTeX array display with the same objects, labels, and directions.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same original-resolution screenshots show additional literal subscripts, tensor products, inequalities and map notation throughout proof steps 1.1 and 2.1; step 4.1 also leaves the basepoint relation and final range unformatted. These are the same confirmed body defect within the assigned item.",
+      "action": "Added inline math delimiters and equivalent TeX for the existing expressions in steps 1.1, 2.1 and 4.1, preserving all prose and mathematical content.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "proof-step-source-layout",
+      "verdict": "confirmed",
+      "reason": "Root actual precheck rejected the initial successor: its three-line step 3.1 was split at the display boundary and auto-repair proposed an incorrect reorder. The diagram parsed under KaTeX and proof-layout, so this was the stricter precheck source-layout interaction.",
+      "action": "Joined the same complete step 3.1, including the unchanged array and trailing justification tags, into one physical source line. Retained all four numbered steps and their order.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset the previously raw statement and proof notation, including a proper display of the existing Hurewicz naturality square. No frontmatter, source references, dependencies, status, hypotheses, proof reasoning, or scope was changed. Follow-up format fix joins the three source lines of step 3.1 into one source line, retaining byte-identical diagram/math tokens, step labels, proof order and entire frontmatter; this prevents the actual precheck parser from splitting the step and suggesting an invalid reorder.",
+  "source_lines_after": [
+    42,
+    60,
+    62,
+    64,
+    66
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md",
+      "exit_code": 0,
+      "output": "OK \u2014 1 file(s): no wikilink inside math, no nested or unbalanced delimiters, no multiline display block, every math span parses under the real KaTeX, and every frontmatter block parses under the renderer's YAML parser."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md (root initial successor recording)",
+      "exit_code": 1,
+      "output": "REPAIR: passes only after auto-repair; proposed incorrect step reordering. Superseded by the focused source-line join.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/checks/thm-rational-hurewicz-for-highly-connected-cw-complexes--precheck.json"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs tools/precheck.mts items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md",
+      "exit_code": 0,
+      "output": "PASS items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md (direct)\n1 checked, 0 failing \u2014 all clean",
+      "revision": 2
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md",
+      "exit_code": 0,
+      "output": "OK \u2014 1 file(s): no wikilink inside math, no nested or unbalanced delimiters, no multiline display block, every math span parses under the real KaTeX, and every frontmatter block parses under the renderer's YAML parser.",
+      "revision": 2
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects",
+      "revision": 2
+    }
+  ],
+  "pre_edit_guard": "Current raw SHA256 equaled queue before_raw_sha256 immediately before first edit; frozen-before/current cmp also passed.",
+  "validation_limits": "No post-edit screenshot capture by this worker; actual focused precheck, proof-layout and KaTeX/YAML rendering checks passed on the final source.",
+  "revision": 2,
+  "prior_report": "research/math-library-rendering-repairs-2026-10-23/adjudications/thm-rational-hurewicz-for-highly-connected-cw-complexes-v1.json",
+  "followup_pre_edit_guard_raw_sha256": "3ef1a8aa5ceb2f0361912f347e7017be656cff43f31f7ed2c6df3401af1183ee",
+  "current_raw_sha256": "1fbad086ba72891ce02539e75ad81025700617c67ae4ee4c458628d5400cf023"
+}

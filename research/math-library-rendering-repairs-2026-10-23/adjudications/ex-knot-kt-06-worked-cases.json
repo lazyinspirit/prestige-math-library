@@ -1,0 +1,84 @@
+{
+  "id": "ex-knot-kt-06-worked-cases",
+  "agent": "/root/rendering_repair_coordinator/knot_008",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 02 visibly prints the entire TikZ environment. Tilde fences bypass the native diagram parser. Backtick-only native preview exposed compilation failure from text-mode labels wrapped in unsupported \\text.",
+      "action": "Use backtick tikz fences and equivalent plain-text node labels.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The compiled intermediate v2 standalone tile shows bright white eraser bands over all three crossing points rather than background-colored under-strand gaps.",
+      "action": "Replace white eraser strokes and underlying complete crossing paths with explicit split under-strands, preserving all three over-strand directions. Enlarge diagram and labels for clear crossing review.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Recognize and compile the existing three-crossing braid schematic; preserve its same closure and crossing choices using explicit background-independent gaps and readable plain labels.",
+  "source_lines_after": {
+    "start": 87,
+    "end": 103
+  },
+  "before_raw_sha256": "250f0482a8e26f996f455c43561fe6609775424a8a4be20e3326312cbc1cae1c",
+  "after_raw_sha256": "1ae344bbcf69bafa11314ce984040701679f5482e0ab7305b05e502aaa3ae366",
+  "mathematical_meaning_preserved": true,
+  "metadata_byte_identical": true,
+  "publication_status_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Crossings and braid data",
+      "evidence": "The three crossing centers are (0,2.5), (0,1.5), (0,0.5). Each descending left-to-right diagonal remains the uninterrupted over-strand; each rising left-to-right diagonal has endpoints at x=+-0.16 around the crossing. Thus all three crossing choices match the original intended braid, with no extra double point."
+    },
+    {
+      "check": "Closure and component count",
+      "evidence": "Side closure curves join (-1,3) to (-1,0) and (1,3) to (1,0), entirely outside the braid. Three successive strand swaps give the transposition; following either top endpoint through the braid, side closure, second strand and opposite closure visits all arcs in one component. This is the same two-strand three-crossing closure described in Remarks."
+    },
+    {
+      "check": "Labels and proof interface",
+      "evidence": "The two labels assert only two braid strands, three crossings and side closure arcs, all visible in the final native image. No homology basis, surface normal, orientation, framing or Seifert entries are asserted by the diagram. The item proof 1.1 derives V from the cited A through convention translation and basis swap; 2.1-3.1 derive the determinant and module isomorphism algebraically, consistently with the positive-push definition and local Seifert suppliers. The diagram supplies none of these premises."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-knot-kt-06-worked-cases.md --json",
+      "exit_code": 0,
+      "output": "1 file, 1 checked proof, 0 failed; pass, direct strategy"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-knot-kt-06-worked-cases.md --json",
+      "exit_code": 0,
+      "output": "errors [], warnings [], checked 1"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-knot-kt-06-worked-cases.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    }
+  ],
+  "visual_review": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/ex-knot-kt-06-worked-cases--02.png"
+    ],
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/previews/knot008-final-unique-v3",
+    "final_tiles": [
+      "screenshots/ex-knot-kt-06-worked-cases--01.png",
+      "screenshots/ex-knot-kt-06-worked-cases--02.png"
+    ],
+    "view_mode": "Each reviewed standalone with detail original",
+    "result": "One native TikZ diagram, zero diagram failures, zero KaTeX errors; three clear crossings, two visible side closures, readable labels without clipping.",
+    "intermediate_previews": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/knot008-final-unique",
+      "research/math-library-rendering-repairs-2026-10-23/previews/knot008-final-unique-v2"
+    ]
+  },
+  "remaining_issues": []
+}

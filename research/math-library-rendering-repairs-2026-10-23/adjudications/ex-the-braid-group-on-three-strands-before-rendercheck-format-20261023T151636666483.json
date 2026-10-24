@@ -1,0 +1,81 @@
+{
+  "id": "ex-the-braid-group-on-three-strands",
+  "agent": "/root/rendering_repair_coordinator/ct_006",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --01 visibly prints literal S_3 in the heading while corresponding body notation is typeset. Frozen source and guarded current preimage both omit math delimiters in the title.",
+      "action": "Wrapped only S_3 in title math delimiters.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Independently judged the proposed illustration warranted: the abstract Artin relation and quotient are materially clarified by tracing actual strand crossings and their common endpoint permutation. This is an explanatory addition; the original algebraic verification was already complete. Inspected its referenced original-resolution tile and both current suppliers.",
+      "action": "Added two explicit braid drawings and conventions in final Remarks, with endpoint calculation; retained all original claims and verification.",
+      "status": "illustration-added"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset title S_3; added warranted braid-relation and quotient illustration in final Remarks.",
+  "source_lines_after": {
+    "title": 4,
+    "remarks": 51,
+    "tikz_fence": 60,
+    "endpoint_explanation": 90
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "objects and conventions",
+      "result": "Three strands join three ordered bottom and top positions, numbered 1,2,3 in the transported one-based model of local supplier thm-the-braid-group-surjects-onto-the-symmetric-group. Its referenced permutation definition composes rightmost first; the Remarks stacks the rightmost factor at the bottom. The Artin-presentation definition fixes no geometric sign convention, so the explicitly stated lower-left-over-lower-right convention introduces no conflict."
+    },
+    {
+      "check": "crossings and inverse convention",
+      "result": "Each level swaps positions i and i+1, leaving the third strand vertical. The descending diagonal is drawn first; the ascending lower-i to upper-(i+1) diagonal is drawn over it with a white clearing stroke. Both panels consistently use this convention. Reversing only the over/under choice represents the inverse crossing; cancellation with the drawn crossing is the two-crossing Reidemeister-II cancellation."
+    },
+    {
+      "check": "actual strand order and braid relation",
+      "result": "Left panel bottom-to-top indices are 1,2,1; right panel indices are 2,1,2. Label initial strands A,B,C from left to right. Left intermediate orders are BAC, BCA, CBA; crossing over pairs are A over B, A over C, B over C. Right intermediate orders are ACB, CAB, CBA; over pairs are B over C, A over C, A over B. Thus both diagrams have the same pairwise over order and differ by Reidemeister III; their word labels exactly match the relation in Example and Artin supplier."
+    },
+    {
+      "check": "quotient and endpoints",
+      "result": "Following either diagram from bottom to top gives 1 to 3, 2 to 2, 3 to 1. Each generator level forgets to adjacent transposition (1 2) or (2 3), exactly as local supplier [L2]. In rightmost-first composition both (1 2)(2 3)(1 2) and (2 3)(1 2)(2 3) exchange 1 and 3 and fix 2, hence equal (1 3)."
+    },
+    {
+      "check": "proof independence",
+      "result": "Original Verification steps 1.1 and 2.1 and the full Example, Facts, dependency and source clauses are byte-identical. The two steps establish the presentation and quotient by specialization of [L1] and [L2]; no diagram is invoked."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "evidence_inspected": [
+    "research/math-library-rendering-audit-2026-10-23/category-theory/screenshots/ex-the-braid-group-on-three-strands--01.png"
+  ],
+  "guard": {
+    "before_raw_sha256": "9f44caca8008c8bb497a1e253e095d26829ce8a0834afcc98018d3124b653f90",
+    "matched_immediately_before_edit": true
+  },
+  "protected_metadata_check": "All frontmatter bytes except authorized title are identical to frozen before; original body is an exact prefix before appended Remarks; status remains published with identical bytes.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-the-braid-group-on-three-strands.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-the-braid-group-on-three-strands/compile.cjs",
+      "exit_code": 0,
+      "output": "Exact final fenced TikZ compiled with node-tikzjax to SVG, rasterized by sharp at density 200. e-TeX: Output written on input.dvi (2 pages, 12924 bytes).",
+      "artifacts": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-the-braid-group-on-three-strands",
+      "visual_inspection": "Standalone original-resolution braid-relation.png inspected: both three-strand panels, six unambiguous crossing gaps, generator and endpoint labels, equality sign fully visible without overlap or clipping."
+    }
+  ],
+  "compilation_note": "Initial system pdflatex attempts failed for unavailable standalone.cls then tikz.sty. The actual final diagram compiled successfully using installed node-tikzjax bundled e-TeX; retained logs in own artifacts.",
+  "current_raw_sha256": "5fefb73268c6da3c6031f6848759f898892771977a330c907b9cf18514549774"
+}

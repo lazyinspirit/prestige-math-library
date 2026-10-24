@@ -1,0 +1,99 @@
+{
+  "id": "lem-relu-folding-block",
+  "agent": "/root/rendering_repair_coordinator/nn_002",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Both flagged original screenshot tiles were independently viewed standalone at original resolution. Tile 01 visibly prints the unfenced tikzpicture commands instead of the fold plot; the current and frozen source agree. The renderer recognizes fenced tikz, as required by SCHEMA.md.",
+      "action": "Added a tikz code fence around the unchanged existing tikzpicture in the separate Illustrative plot section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only the opening and closing Markdown tikz fence. No diagram coordinates, labels, claims, formulas, proof text, or metadata changed.",
+  "source_lines_after": [
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Vertices and domain/codomain",
+      "result": "Proof step 1.1 with n=3 gives t=(0,1/7,3/7,5/7,1) and y=(0,1,0,1,0). The unchanged polyline contains exactly those five vertices and four consecutive segments, with three interior knots. Input and output are both restricted to [0,1]."
+    },
+    {
+      "check": "Segment slopes and interval endpoints",
+      "result": "The four slopes computed from these vertices are 7, -7/2, 7/2, -7/2, exactly s_0 through s_3 in step 1.1. Each closed interval between successive knots maps continuously and bijectively to [0,1]; adjacent segments share their endpoint with the same output. No endpoint conventions were altered."
+    },
+    {
+      "check": "ReLU representation",
+      "result": "Step 2.1 specializes to h_1=rho(x-1/7), h_2=rho(x-3/7), h_3=rho(5/7-x), with a_1=-21/2, a_2=7, a_3=-7 and bias d=5. These give the plotted initial slope 7 and jumps -21/2,7,-7, hence precisely the four plotted slopes. This retains one scalar input, three hidden ReLUs and one affine scalar output, with no added connections or units."
+    },
+    {
+      "check": "Actual rendered geometry and proof independence",
+      "result": "Standalone original-resolution fresh tile 01 displays four connected segments from (0,0) to (1,0), peaks at 1/7 and 5/7, and the trough at 3/7, with both axes and all endpoint/knot labels visible. The rigorous algebraic hinge and composition proof remains unchanged and does not depend on the figure."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-relu-folding-block.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-relu-folding-block.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-relu-folding-block.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_preview": {
+    "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-nn002\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-relu-folding-block --out research/math-library-rendering-repairs-2026-10-23/previews/nn002-final-unique",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nn002-final-unique/manifest.json",
+    "reviewed_original_resolution_tiles": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/nn002-final-unique/screenshots/lem-relu-folding-block--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/nn002-final-unique/screenshots/lem-relu-folding-block--02.png"
+    ],
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "reference_map_diagnostics": 32,
+    "scope": "Native current ItemBody local file preview, no HTTP/site visits."
+  },
+  "before_raw_sha256": "925c4a5485237ca27a2150bb0e47d764cc3655070e1bfeb4aa87aed33d996f8d",
+  "after_raw_sha256": "09d8bb5c83332589872e828bab1fb85a349a303950ceca7b1893d9b5386e43db",
+  "metadata_byte_identical": true,
+  "publication_status_preserved": "published",
+  "remaining_issues": []
+}

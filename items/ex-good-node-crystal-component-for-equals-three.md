@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-good-node-crystal-component-for-equals-three.json
+  precheck: pass
 id: ex-good-node-crystal-component-for-equals-three
 kind: example
 title: "The good-node crystal component of the empty partition for $e=3$"
@@ -17,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Kailash C. Misra and Tetsuji Miwa, Crystal base for the basic representation of $U_q(\\mathfrak{sl}(n))$, Comm. Math. Phys. 134 (1990), 79-88"
@@ -63,3 +64,35 @@ the exact weight $\Lambda_0-\sum_im_i\alpha_i$.
 2.1 Completeness and the boundary $111$. The shapes reached are exactly the $3$-regular shapes of size $\le3$; every other partition of size $\le3$, namely $111$, is not $3$-regular and lies outside the empty component by [F2]. At $111$ and color $1$ the decreasing-content signature has the top addable cell $(1,2)$ of content $1$ and the bottom removable cell $(3,1)$ of content $-2$, giving $+-$ which cancels, and the other colors have no surviving minus, so $111$ is a highest crystal vertex; its node residues are $0,2,1$, so its weight is $\Lambda_0-\alpha_0-\alpha_1-\alpha_2=\Lambda_0-\delta$. The statement that $111$ is highest as a crystal vertex is not the statement $E_i|111\rangle=0$ for the ordinary field operators. [step 1.1, F2, F3, algebra]
 
 3.1 Conclusion. The displayed graph is the empty component through size $3$, the shapes are the $3$-regular ones, and $111$ is the first highest crystal vertex outside it with weight $\Lambda_0-\delta$, with all weights computed from the node residues. [step 1.1, step 2.1] ∎
+
+## Remarks
+
+The diagram shows precisely the rank-at-most-three part of the empty
+component. Downward arrows are the indicated crystal operators $f_i$;
+$e_i$ reverses an arrow of color $i$. The separate vertex $111$ is outside
+this component and is highest in the crystal. Its outgoing arrows to rank
+four, like all outgoing arrows from the bottom row, are omitted. The labels
+are partitions, not standard field vectors; the verification above is
+independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.6cm,y=1.3cm,>=stealth]
+\node at (-2,0) {$|\lambda|=0$};
+\node at (-2,-1) {$1$};
+\node at (-2,-2) {$2$};
+\node at (-2,-3) {$3$};
+\node (empty) at (0,0) {$\emptyset$};
+\node (one) at (0,-1) {$1$};
+\node (two) at (-0.8,-2) {$2$};
+\node (eleven) at (0.8,-2) {$11$};
+\node (three) at (-0.8,-3) {$3$};
+\node (twentyone) at (0.8,-3) {$21$};
+\draw[->] (empty) -- node[right] {$f_0$} (one);
+\draw[->] (one) -- node[left] {$f_1$} (two);
+\draw[->] (one) -- node[right] {$f_2$} (eleven);
+\draw[->] (two) -- node[left] {$f_2$} (three);
+\draw[->] (eleven) -- node[right] {$f_1$} (twentyone);
+\node at (2.5,-2.4) {outside the component};
+\node (outside) at (2.5,-3) {$111$};
+\end{tikzpicture}
+```

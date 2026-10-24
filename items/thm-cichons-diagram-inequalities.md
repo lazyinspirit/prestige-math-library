@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cichons-diagram-inequalities.json
+  precheck: pass
 id: thm-cichons-diagram-inequalities
 kind: theorem
 title: The ZFC inequalities of Cichoń's diagram
@@ -17,13 +20,7 @@ sources:
   references:
     - title: "Tomek Bartoszyński, Invariants of Measure and Category, Theorem 3.11, printed p.8"
       url: "https://arxiv.org/pdf/math/9910015"
-verification:
-  audited: 2026-09-27
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
+
 ---
 
 ## Statement
@@ -82,3 +79,49 @@ are evaluated in ZFC, where AC supplies cardinal comparison.
 1.1 Draw the ten named cardinals as nodes. For each of $\mathcal N$ and $\mathcal M$, insert the four elementary arrows of [F1]. Insert the two null-to-meagre arrows of [F2], the six cross and bounding arrows of [F3], and $\mathfrak b\le\mathfrak d$ from [F4]. Every inserted arrow is an inequality already proved under the same ZFC conventions. [F1, F2, F3, F4]
 
 2.1 If $a\le b$ and $b\le c$ are among these arrows, ordinal/cardinal order transitivity gives $a\le c$. Repeated application yields exactly the transitive consequences asserted in the Statement. The statement makes no claim that an omitted arrow is independent of ZFC or that a diagram drawing captures every possible relation. AC is used in the cited supplier proofs and in regarding the ten minima as comparable cardinals; no additional selection occurs in this assembly. ∎ [step 1.1, F4]
+
+
+## Remarks
+
+The diagram displays exactly the seventeen generating inequalities in [F1]–[F4].
+An arrow from $a$ to $b$ means $a\le b$; a directed path gives a transitive
+consequence. Crossings of curves are not additional nodes. The eight ideal
+invariants use the null and meagre ideals on $\mathbb R$, and $\mathfrak b$
+and $\mathfrak d$ use eventual domination, as in the Facts above.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=0.8cm,>=stealth,every node/.style={inner sep=5pt}]
+\node (an) at (0,0) {$\mathrm{add}(\mathcal N)$};
+\node (cn) at (3,3) {$\mathrm{cov}(\mathcal N)$};
+\node (am) at (3,0) {$\mathrm{add}(\mathcal M)$};
+\node (b) at (6,0) {$\mathfrak b$};
+\node (cm) at (6,-3) {$\mathrm{cov}(\mathcal M)$};
+\node (nm) at (9,3) {$\mathrm{non}(\mathcal M)$};
+\node (d) at (9,0) {$\mathfrak d$};
+\node (fm) at (12,0) {$\mathrm{cof}(\mathcal M)$};
+\node (nn) at (12,-3) {$\mathrm{non}(\mathcal N)$};
+\node (fn) at (15,0) {$\mathrm{cof}(\mathcal N)$};
+\draw[->] (an) -- (cn);
+\draw[->] (an.south) .. controls (0,-5) and (10,-5) .. (nn.south);
+\draw[->] (cn.north) .. controls (5,5) and (15,5) .. (fn.north);
+\draw[->] (nn) -- (fn);
+\draw[->] (am) -- (cm);
+\draw[->] (am.north) .. controls (3,1.6) and (7,1.6) .. (nm.south);
+\draw[->] (cm) -- (fm);
+\draw[->] (nm) -- (fm);
+\draw[->] (an) -- (am);
+\draw[->] (fm) -- (fn);
+\draw[->] (cn) -- (nm);
+\draw[->] (cm) -- (nn);
+\draw[->] (am) -- (b);
+\draw[->] (b) -- (nm);
+\draw[->] (cm) -- (d);
+\draw[->] (d) -- (fm);
+\draw[->] (b) -- (d);
+\end{tikzpicture}
+```
+
+The figure illustrates the assembly in proof step 1.1; the rigorous proof
+uses the cited inequalities and order transitivity independently of the figure.
+It asserts neither independence of omitted arrows nor completeness of the
+relations shown.

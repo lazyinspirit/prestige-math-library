@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-spin-structures-exist-iff-w2-vanishes-and-form-h1-torsor.json
+  precheck: pass
 id: lem-spin-structures-exist-iff-w2-vanishes-and-form-h1-torsor
 kind: lemma
-title: "Spin structures exist exactly when w2 vanishes and then form an H1 torsor"
+title: "Spin structures exist exactly when $w_2$ vanishes and then form an $H^1$ torsor"
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -47,8 +50,6 @@ deps:
   - def-oriented-real-vector-bundle-and-oriented-frame-bundle
 justified_by: []
 proof_strategy: direct
-verification:
-  precheck: pass
 axiom_strength: "ZF + full AC"
 provenance:
   statement: literature-derived

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ma-products-of-ccc-spaces-are-ccc.json
+  precheck: pass
 id: thm-ma-products-of-ccc-spaces-are-ccc
 kind: theorem
-title: Under MA(aleph_1), arbitrary products of ccc spaces are ccc
+title: Under $\mathrm{MA}(\aleph_1)$, arbitrary products of ccc spaces are ccc
 status: published
 origin: pipeline
 deps: [def-martins-axiom, def-countable-chain-condition, def-product-topology, thm-regular-uncountable-finite-delta-system, def-axiom-of-choice]
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
 sources:
   references:
     - {title: "Karagila, Forcing & Symmetric Extensions, Theorem 7.8 and Lemma 7.9", url: "https://karagila.org/files/Forcing-2023.pdf"}

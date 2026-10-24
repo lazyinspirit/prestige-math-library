@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-quotient-vector-space-coset-notation.json
+  precheck: n/a
 id: def-quotient-vector-space-coset-notation
 kind: definition
-title: "The quotient vector space \\(X/M\\), its cosets, and the quotient map \\(q:X\\to X/M\\)"
+title: 'The quotient vector space $X/M$, its cosets, and the quotient map $q:X\to X/M$'
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ deps: [def-quotient-vector-space-and-canonical-projection,
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-09-01
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:

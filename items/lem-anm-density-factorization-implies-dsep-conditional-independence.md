@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-anm-density-factorization-implies-dsep-conditional-independence.json
+  precheck: pass
 id: lem-anm-density-factorization-implies-dsep-conditional-independence
 kind: lemma
 title: "An ANM density factorization implies conditional independence under d-separation"
@@ -93,7 +96,7 @@ $C$. Strokes to $C$ represent possible moral edges; the absence of an $L$--$R$
 edge is the separation used in the proof. The diagram is only a schematic and
 the factor regrouping argument establishes the claim for every finite graph.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
   \node[draw,rounded corners,minimum width=2.5cm,minimum height=1.2cm] (left) at (0,0) {$L$ (contains $A$)};
   \node[draw,circle] (cond) at (3,0) {$C$};
@@ -101,6 +104,6 @@ the factor regrouping argument establishes the claim for every finite graph.
   \draw[-,thick] (left) -- (cond) node[midway,above] {possible};
   \draw[-,thick] (cond) -- (right) node[midway,above] {possible};
   \node at (3,-0.75) {no moral edge $L$--$R$};
-  \node at (3,-1.25) {$\operatorname{mor}_G(H)\setminus C$ has no path from $L$ to $R$};
+  \node at (3,-1.25) {$\mathrm{mor}_G(H)\setminus C$ has no path from $L$ to $R$};
 \end{tikzpicture}
-~~~
+```

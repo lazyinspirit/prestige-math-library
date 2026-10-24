@@ -1,0 +1,66 @@
+{
+  "id": "cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero",
+  "agent": "/root/rendering_repair_coordinator/dg_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints $2\\PI$ in the uppercase technique banner, while the same constant is typeset in the proof steps. The technique banner renders plain text rather than parsing math delimiters; tile 02 contains only the continuation of the source locator. Frozen and current pre-edit sources agree.",
+      "action": "Replaced only the banner expression $2\\pi$ with equivalent prose twice pi.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Technique banner now reads “divide by twice pi”; all numbered proof steps and all frontmatter bytes are unchanged.",
+  "source_lines_after": {
+    "54": "**Proof technique:** insert the identically vanishing curvature into the global identity and divide by twice pi."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation persists: technique banners do not parse math markup; local prose workaround removes the visible defect."
+  ],
+  "before_raw_sha256": "a8e11730272a011e96c5dd643ff874b9aa4a6f0107df631c552140353bb94d6a",
+  "after_raw_sha256": "6bfecc39e57f05188585a1add4e4df9e273e05671888c25f63d497bd271e17eb",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg006-own/manifest.json",
+    "source_sha256": "6bfecc39e57f05188585a1add4e4df9e273e05671888c25f63d497bd271e17eb",
+    "inspected_original_resolution": [
+      "previews/dg006-own/screenshots/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero--01.png",
+      "previews/dg006-own/screenshots/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero--02.png"
+    ],
+    "result": "Current native local ItemBody preview shows readable TWICE PI in the technique banner with no literal math markup; ordinary proof mathematics remains typeset. Both current tiles inspected independently at original resolution.",
+    "limitations": "Local ItemBody preview; no production HTTP route visited. Reference map reports 16 unrelated parse diagnostics."
+  },
+  "protected_metadata_unchanged": true,
+  "publication_status_unchanged": true
+}

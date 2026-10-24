@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-string-link-exterior-homology-and-meridian-maps.json
+  precheck: pass
 id: lem-string-link-exterior-homology-and-meridian-maps
 kind: lemma
 title: String-link exterior homology and end-meridian maps
@@ -36,13 +39,7 @@ sources:
         3-Manifolds
       url: https://scholarworks.iu.edu/iuswrrest/api/core/bitstreams/54c7d68f-d982-4e1f-9550-e54140ada5ea/content
       locator: §2.5, printed pp. 16–18 (PDF pp. 24–26)
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -105,7 +102,7 @@ Let $\tau$ be an $r$-component string link with chosen disjoint product tubes in
 
 The diagram illustrates compatible access paths for $r=3$. Step 1.1 uses the supplied disk-coordinate retraction and the explicit finite punctured-disk spine, not this drawing or an unproved smooth triangulation.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[scale=1.0]
 \draw[thick] (0,0) circle (2);
 \draw[thick] (-0.85,0.55) circle (0.28);
@@ -120,4 +117,4 @@ The diagram illustrates compatible access paths for $r=3$. Step 1.1 uses the sup
 \node at (0.85,0.55) {$p_2$};
 \node at (0,-0.75) {$p_3$};
 \end{tikzpicture}
-~~~
+```

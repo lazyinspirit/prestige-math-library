@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-complete-noncompact-manifolds-with-nonnegative-ricci-curvature-have-at-most-euclidean-volume-growth.json
+  precheck: pass
 id: cor-complete-noncompact-manifolds-with-nonnegative-ricci-curvature-have-at-most-euclidean-volume-growth
 kind: corollary
 title: Complete noncompact manifolds with nonnegative ricci curvature have at most euclidean volume growth
@@ -16,9 +19,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -63,7 +63,7 @@ $\mathrm{AC}_\omega$ is used.
 
 ## Proof
 
-**Proof technique:** direct: specialise the Bishop upper bound to $k=0$, where $\operatorname{Ric}\ge0=(n-1)\cdot0\cdot g$, and evaluate the integral defining the flat model volume.
+**Proof technique:** direct: specialise the Bishop upper bound to k = 0, where Ric ≥ 0 = (n − 1) · 0 · g, and evaluate the integral defining the flat model volume.
 
 1.1 The Bishop bound with $k=0$. [F1, F2, given] The Ricci hypothesis $\operatorname{Ric}\ge0$ is exactly $\operatorname{Ric}\ge(n-1)k\,g$ for $k=0$, and $(M,g)$ is complete, connected and boundaryless of dimension $n\ge2$. Hence [F1] with $k=0$ gives $$\operatorname{vol}_g\bigl(B(p,r)\bigr)\le V^\star_0(r)\qquad(r>0),$$ and by [F2] the flat saturated model volume is the integral $$V^\star_0(r)=V_0(r)=\int_0^rA_0(t)\,dt=\omega_{n-1}\int_0^rt^{n-1}\,dt .$$ [F1, F2, given]
 

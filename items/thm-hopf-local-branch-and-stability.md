@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hopf-local-branch-and-stability.json
+  precheck: pass
 id: thm-hopf-local-branch-and-stability
 kind: theorem
 title: A simple nondegenerate Hopf point creates a local periodic branch
@@ -34,8 +37,7 @@ sources:
     - title: Yuri A. Kuznetsov, Andronov-Hopf Bifurcation, Scholarpedia 1(10):1858 (2006)
       url: http://www.scholarpedia.org/article/Andronov-Hopf
       locator: Multidimensional statement and stability orientation; not a proof supplier
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -103,3 +105,27 @@ $$\dot z=(\beta+i\omega(\beta))z+\frac12G_{21}z|z|^2+R,\quad \operatorname{Re}(G
 ## Remarks
 
 When $\beta$ increases through zero, $\ell_1<0$ gives the supercritical stable branch if the transverse spectrum is stable; $\ell_1>0$ gives the subcritical unstable branch. If the transverse spectrum contains an unstable eigenvalue, the branch exists with the same side but is unstable in the full system.
+
+
+The sketch shows the leading-order amplitude relation $\beta=-\omega_0\ell_1r^2$, rather than the exact branch including its remainder. Both panels assume $\operatorname{Re}\nu_j<0$ for every transverse eigenvalue: the solid periodic branch is orbitally asymptotically stable, and the dashed one is unstable. The open origins indicate that $r=0$ is not a nonconstant periodic orbit. Only a neighborhood of the origin is illustrated; the proof above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\draw[->] (-0.65,0) -- (2.5,0) node[right] {$\beta$};
+\draw[->] (0,-0.25) -- (0,2.35) node[above] {$r$};
+\node at (1,2.75) {$\ell_1<0$};
+\draw[very thick] (0,0) .. controls (0,0.6) and (0.6,1.2) .. (1.8,1.8);
+\draw[fill=white] (0,0) circle (0.065);
+\node at (1.35,0.8) {stable};
+\node[below left] at (0,0) {$0$};
+\begin{scope}[xshift=7cm]
+\draw[->] (-2.5,0) -- (0.65,0) node[right] {$\beta$};
+\draw[->] (0,-0.25) -- (0,2.35) node[above] {$r$};
+\node at (-1,2.75) {$\ell_1>0$};
+\draw[very thick,dashed] (0,0) .. controls (0,0.6) and (-0.6,1.2) .. (-1.8,1.8);
+\draw[fill=white] (0,0) circle (0.065);
+\node at (-1.4,0.8) {unstable};
+\node[below right] at (0,0) {$0$};
+\end{scope}
+\end{tikzpicture}
+```

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces.json
+  precheck: pass
 id: thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces
 kind: theorem
-title: "Real-order H^s as weighted Fourier distributions"
+title: "Real-order $H^s$ as weighted Fourier distributions"
 status: published
 origin: pipeline
 deps:
@@ -17,9 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

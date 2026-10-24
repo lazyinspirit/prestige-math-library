@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-bmo-defines-a-bounded-functional-on-hone.json
+  precheck: pass
 id: thm-bmo-defines-a-bounded-functional-on-hone
 kind: theorem
-title: "BMO classes define bounded functionals on H1"
+title: "BMO classes define bounded functionals on $H^1$"
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -37,11 +40,11 @@ one has $\Lambda_b(g)=\int gb$.
 
 **Given:** The Axiom of Choice, the fixed $\varphi,\widetilde N$, a function $b\in\mathrm{BMO}(\mathbb R^n)$, the $(1,\infty,0)$-atoms of [[def-hp-atom-with-moment-order]], and the space $H^1(\mathbb R^n)$ with its atoms.
 
-[F1] The atom pairing is bounded: for every atom $a$ the integral $\int ab$ converges absolutely and $\bigl|\int ab\bigr|\le\|b\|_{\mathrm{BMO}}$ ([[lem-bmo-functions-pair-uniformly-with-hone-atoms]], [[def-hp-atom-with-moment-order]]); in particular $\int a=0$ and atoms are bounded with compact support.
+[F1] The atom pairing is bounded: for every atom $a$ the integral $\int ab$ converges absolutely and $\bigl|\int ab\bigr|\le\|b\|_{\mathrm{BMO}}$ ([[lem-bmo-functions-pair-uniformly-with-hone-atoms|BMO functions pair uniformly with $H^1$ atoms]], [[def-hp-atom-with-moment-order]]); in particular $\int a=0$ and atoms are bounded with compact support.
 
-[F2] If $b\in L^\infty(\mathbb R^n)\cap\mathrm{BMO}(\mathbb R^n)$ then for every $f\in H^1(\mathbb R^n)$ the integral $\int fb$ converges absolutely and $\bigl|\int fb\bigr|\le C_{n,\widetilde N,\varphi}\|b\|_{\mathrm{BMO}}\|f\|_{H^1}$ ([[lem-linfinity-bmo-functions-dualise-hone-boundedly]]).
+[F2] If $b\in L^\infty(\mathbb R^n)\cap\mathrm{BMO}(\mathbb R^n)$ then for every $f\in H^1(\mathbb R^n)$ the integral $\int fb$ converges absolutely and $\bigl|\int fb\bigr|\le C_{n,\widetilde N,\varphi}\|b\|_{\mathrm{BMO}}\|f\|_{H^1}$ ([[lem-linfinity-bmo-functions-dualise-hone-boundedly|Bounded BMO functions dualise $H^1$ boundedly]]).
 
-[F3] Every $\ell^1$ sum of atoms lies in $H^1$: if $g=\sum_{j\le N}\lambda_ja_j$ is a finite atomic sum then $\|g\|_{H^1}\le C\sum_{j\le N}|\lambda_j|$, and the finite atomic sums are dense in $H^1$ ([[thm-atomic-characterisation-of-real-hp]], [[lem-finite-atomic-sums-are-dense-in-hone]]).
+[F3] Every $\ell^1$ sum of atoms lies in $H^1$: if $g=\sum_{j\le N}\lambda_ja_j$ is a finite atomic sum then $\|g\|_{H^1}\le C\sum_{j\le N}|\lambda_j|$, and the finite atomic sums are dense in $H^1$ ([[thm-atomic-characterisation-of-real-hp]], [[lem-finite-atomic-sums-are-dense-in-hone|Finite atomic sums are dense in $H^1$]]).
 
 [F4] The componentwise truncations $b_M$ of $b$ satisfy $b_M\in L^\infty$, $|b_M|\le|b|$, $b_M\to b$ pointwise and $\|b_M\|_{\mathrm{BMO}}\le\tfrac92\|b\|_{\mathrm{BMO}}$ ([[lem-range-truncations-preserve-bmo-seminorm]]).
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-pe12-l2-projector-w1p-stability.json
+  precheck: pass
 id: thm-pe12-l2-projector-w1p-stability
 kind: theorem
 title: L2 projections are uniformly W1p-stable on quasi-uniform conforming meshes
@@ -19,12 +22,7 @@ sources:
     - title: "Christian Clason, Introduction to Finite Element Methods, arXiv:1709.08618v2"
       url: https://arxiv.org/pdf/1709.08618v2.pdf
       locator: "Chapter 12 §12.1, PDF pp. 102–103: the finite-element L2 projection and parabolic method-of-lines context."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -161,10 +159,11 @@ $K_{(2,1)}=\{0\le x_1\le x_2\le1\}$, and their red diagonal is the shared
 whole edge $x_1=x_2$. The coordinate proof above establishes matching for
 all $d$ and $N$; no proof uses visual features of this illustration.
 
-~~~tikz
-\begin{tikzpicture}[scale=3]
+```tikz
+\definecolor{cellorange}{HTML}{FFE8D1}
+\begin{tikzpicture}[scale=4,font=\large]
   \fill[blue!15] (0,0)--(1,0)--(1,1)--cycle;
-  \fill[orange!20] (0,0)--(0,1)--(1,1)--cycle;
+  \fill[cellorange] (0,0)--(0,1)--(1,1)--cycle;
   \draw[thick] (0,0) rectangle (1,1);
   \draw[very thick,red] (0,0)--(1,1);
   \draw[->] (0,0)--(1.18,0) node[right] {$x_1$};
@@ -176,4 +175,4 @@ all $d$ and $N$; no proof uses visual features of this illustration.
   \node[left] at (0,1) {$(0,1)$};
   \node[above right] at (1,1) {$(1,1)$};
 \end{tikzpicture}
-~~~
+```

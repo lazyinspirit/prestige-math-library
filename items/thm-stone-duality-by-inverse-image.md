@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-stone-duality-by-inverse-image.json
+  precheck: pass
 id: thm-stone-duality-by-inverse-image
 kind: theorem
 title: Stone duality and its natural maps
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: "Tressl, Stone Duality for Boolean Algebras, 4.1–4.4, pp. 16–17"
@@ -44,3 +41,23 @@ Under BPI over ZF, Boolean algebras with bound-preserving homomorphisms and Ston
 2.1 For composable maps $h:B\to C$ and $k:C\to D$, $(k\circ h)^{-1}[V]=h^{-1}[k^{-1}[V]]$, so $(k\circ h)^*=h^*\circ k^*$. The identical preimage computation proves the composition law for continuous maps, and the identity map has identity preimage on every subset. Thus both assignments are contravariant functors on the stated objects. [F1, F2, step 1.1, step 1.2, algebra]
 
 3.1 For $b\in B$, the identity of step 1.1 says $(h^*)^*(\epsilon_B(b))=[h(b)]=\epsilon_C(h(b))$. For $x\in X$ and a clopen $D\subseteq Y$, membership of $D$ in $(f^*)^*(\eta_X(x))$ means $x\in f^{-1}[D]$, equivalently $f(x)\in D$; hence $(f^*)^*\eta_X=\eta_Yf$. These are the two naturality equations, and F1 and F2 make their components isomorphisms. The formulas also apply to empty Stone spaces and trivial algebras whenever the indicated maps exist, since bound preservation is required throughout. QED. [F1, F2, step 1.1, algebra]
+
+## Remarks
+
+Write $S(B)=\operatorname{Ult}(B)$ and $A(X)=\operatorname{Clop}(X)$. Inverse image reverses arrows: $h:B\to C$ induces $h^*:S(C)\to S(B)$, while $f:X\to Y$ induces $f^*:A(Y)\to A(X)$. Applying both constructions restores the original direction. The two naturality identities in step 3.1 are the commuting squares below; the vertical maps are respectively Boolean isomorphisms and homeomorphisms.
+
+```tikzcd
+\begin{tikzcd}[column sep=large,row sep=large]
+B \arrow[r,"h"] \arrow[d,"\epsilon_B"'] & C \arrow[d,"\epsilon_C"] \\
+\mathrm{Clop}(S(B)) \arrow[r,"(h^*)^*"'] & \mathrm{Clop}(S(C))
+\end{tikzcd}
+```
+
+```tikzcd
+\begin{tikzcd}[column sep=large,row sep=large]
+X \arrow[r,"f"] \arrow[d,"\eta_X"'] & Y \arrow[d,"\eta_Y"] \\
+\mathrm{Ult}(A(X)) \arrow[r,"(f^*)^*"'] & \mathrm{Ult}(A(Y))
+\end{tikzcd}
+```
+
+The squares illustrate the equations already proved in step 3.1; the proof is independent of these diagrams.

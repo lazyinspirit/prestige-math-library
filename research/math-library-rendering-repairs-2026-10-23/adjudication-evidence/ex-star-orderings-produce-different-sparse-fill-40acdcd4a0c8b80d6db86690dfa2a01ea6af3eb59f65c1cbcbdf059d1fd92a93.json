@@ -1,0 +1,128 @@
+{
+  "id": "ex-star-orderings-produce-different-sparse-fill",
+  "group": "dnla_014",
+  "agent": "/root/rendering_repair_coordinator/dnla_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile has no figure. The example compares two elimination orders on exactly the same sparse graph; displaying the first steps for m=3 makes the retained star versus newly created leaf clique concrete, and distinguishes original edges from fill. This is a warranted expository addition under the expanded diagram scope, although the original verification is complete.",
+      "action": "Added final Remarks and native TikZ showing the original three-leaf star, deletion of leaf 1, and deletion of center 0, using solid original edges and dashed fill edges.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Append a final Remarks section with an m=3 elimination comparison and precise symbolic/numerical explanation. Original title, frontmatter, statement, facts, and verification remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      57,
+      59
+    ],
+    "tikz": [
+      61,
+      88
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Initial graph",
+      "data": "For m=3, V={0,1,2,3}, E={{0,1},{0,2},{0,3}}; four vertices and three undirected edges; degree sequence (3,1,1,1).",
+      "local_justification": "Example defines the star with center 0 and leaves 1,...,m. Solid edges in the left panel realize exactly that definition."
+    },
+    {
+      "check": "Leaf-first branch",
+      "data": "Deleting leaf 1 leaves V={0,2,3}, E={{0,2},{0,3}}; degree sequence (2,1,1). No dashed fill edge is present. The chosen full order is (1,2,3,0).",
+      "local_justification": "The supplier def-symmetric-structural-elimination-graph-and-ordering deletes a pivot and connects distinct later neighbors. Leaf 1 has only later neighbor 0, so no pair exists. Verification 1.2 applies again to leaves 2 and 3."
+    },
+    {
+      "check": "Center-first branch and closure",
+      "data": "Deleting center 0 leaves V={1,2,3}, E={{1,2},{2,3},{3,1}}, the complete graph K3. Three dashed undirected edges, each leaf degree 2. Actual native standalone output shows all three edges, including the explicit (c3)--(c1) segment.",
+      "local_justification": "All three leaves are later neighbors of 0, so the supplier update adds each of the binomial(3,2)=3 pairs, as in verification 1.3. No original leaf-to-leaf edge existed."
+    },
+    {
+      "check": "Numerical distinction",
+      "data": "For m=3, t=1/(2 sqrt(3)), so t^2=1/12. The post-center Schur complement I3-t^2 11^T has each off-diagonal entry -1/12, hence all three unordered fill pairs correspond to nonzero entries.",
+      "local_justification": "Substitution in the Example parameter and verification 2.1. Dashed graph edges denote symbolic fill, while the separate prose gives their numerical values; no positive-definiteness claim is inferred from the picture."
+    },
+    {
+      "check": "Transition arrows and independence",
+      "data": "The two arrows mean elimination operations delete 1 and delete 0, respectively; they are not directed graph edges. No commutative or morphism relation is asserted.",
+      "local_justification": "The labels specify the pivot-deletion operation in the local supplier. The original verification is unchanged and the Remarks expressly state its independence of the figure."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "187dbafc624ff61a62eb524cb0dcf69f8c6baec968b21370ca1bb87e3e383ae1",
+    "before_sha_guard": "Asserted exact raw SHA immediately before first item edit; passed.",
+    "current_raw_sha256": "1e493aa4f5e19d6eff7b3abb4f48ea6e605c9cb401a558cdfc1538acfb150771",
+    "frontmatter_unchanged": true,
+    "original_carrier_is_exact_prefix": true,
+    "original_image_declared_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/diagram-supplement/screenshots/ex-star-orderings-produce-different-sparse-fill--01.png",
+    "original_image_resolved_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/ex-star-orderings-produce-different-sparse-fill--01.png",
+    "original_image_sha256": "372f347493c7263b8973008eb06d0d4d02b5a65e0083de726b5d953d5ae819c1",
+    "original_image_path_note": "Declared diagram-supplement path absent; authentic category-local image located and exact recorded SHA verified. Independently viewed standalone at original resolution.",
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-014-final/manifest.json",
+    "native_preview_manifest_sha256": "8e9efddcbd59475609cefd97e72baaf47e9e53722a19d0aa3c330fbd785b382e",
+    "native_source_binding": "Manifest source SHA equals final raw current source SHA.",
+    "native_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dnla-014-final/screenshots/ex-star-orderings-produce-different-sparse-fill--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dnla-014-final/screenshots/ex-star-orderings-produce-different-sparse-fill--02.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dnla-014-final/screenshots/diagram-standalone.png"
+    ],
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-014-final/diagram.svg",
+    "visual_result": "Actual native compile succeeded: 1 TikZ diagram, zero diagram failures and zero KaTeX errors. Both original-resolution final tiles and a standalone browser crop were viewed. All node labels, arrows, solid edges and dashed triangle edges are legible against the native black background. Triangle has all three edges and closes. The outlined circles denote graph vertices, not open/closed analytic endpoints; no endpoint convention is asserted."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-star-orderings-produce-different-sparse-fill.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-star-orderings-produce-different-sparse-fill.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-star-orderings-produce-different-sparse-fill.md",
+            "item_id": "ex-star-orderings-produce-different-sparse-fill",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-star-orderings-produce-different-sparse-fill.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnla-014 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-star-orderings-produce-different-sparse-fill --out research/math-library-rendering-repairs-2026-10-23/previews/dnla-014-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview is local ItemBody rendering, not the production route; no HTTP or live website access. Sixteen unrelated reference-map parse diagnostics are recorded by the preview; scoped checks and the used supplier reference render correctly."
+  ]
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-nonconvex-riemann-data-can-require-a-composite-rarefaction-shock-wave.json
+  precheck: pass
 id: ex-nonconvex-riemann-data-can-require-a-composite-rarefaction-shock-wave
 kind: example
 title: Nonconvex Riemann data can require a composite shock--rarefaction wave
@@ -21,12 +24,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -81,3 +79,52 @@ followed by the chord from $(-\tfrac12,-\tfrac18)$ to $(1,1)$
 
 
 4.1 **Uniqueness and the concave hull.** By [F4], uniqueness in the entropy class identifies the constructed profile as the entropy solution of these Riemann data, even though the single-jump weak solution of the same data exists and is non-entropic. The concave hull of $f$ on $[-1,1]$ follows the cubic arc on $[-1,-\tfrac12]$ (where $f''=6u<0$, so $f$ is concave) and then the chord of slope $\tfrac34$ from $(-\tfrac12,-\tfrac18)$ to $(1,1)$; the fan and shock of the profile are exactly the entropy waves corresponding to this arc and chord. [F4, step 1.1, step 3.1] ∎
+
+
+## Remarks
+
+The space-time picture separates the shock ray (solid) from the continuous
+right edge of the rarefaction (dashed). Interior rays in the fan have
+$x/t=f'(u)=3u^2$ with $-1<u<-\tfrac12$; they are not further shocks.
+
+```tikz
+\begin{tikzpicture}[x=0.9cm,y=1.8cm,>=stealth]
+\draw[->] (-1.4,0) -- (6,0) node[right] {$x$};
+\draw[->] (0,0) -- (0,2.05) node[above] {$t$};
+\draw[blue,semithick] (0,0) -- (1.98,1.8);
+\draw[blue,semithick] (0,0) -- (2.88,1.8);
+\draw[blue,semithick] (0,0) -- (3.78,1.8);
+\draw[blue,semithick] (0,0) -- (4.68,1.8);
+\draw[red,very thick] (0,0) -- (1.35,1.8);
+\draw[blue,thick,dashed] (0,0) -- (5.4,1.8);
+\node at (-0.7,1.1) {$u=1$};
+\node at (5.2,0.6) {$u=-1$};
+\node at (3.1,2.3) {$u=-\sqrt{x/(3t)}$};
+\node[above,red] at (0.9,1.85) {$x=\frac34t$};
+\node[above,blue] at (5,1.85) {$x=3t$};
+\node[below] at (0,0) {$0$};
+\end{tikzpicture}
+```
+
+In the flux picture the concave hull is the solid arc $A B$ followed by the
+solid chord $B C$, while the remaining cubic is dashed. Here
+$A=(-1,-1)$, $B=(-\tfrac12,-\tfrac18)$ and $C=(1,1)$.
+The chord has slope $3/4=f'(-\tfrac12)$, matching the arc's tangent at $B$;
+its slope is the shock speed, and the arc's slopes range from $3$ at $A$ to
+$3/4$ at $B$. Both drawings illustrate the computations in steps 1.1, 1.2
+and 4.1; the proof does not depend on them.
+
+```tikz
+\begin{tikzpicture}[x=2.6cm,y=2.1cm,>=stealth]
+\draw[->] (-1.4,0) -- (1.45,0) node[right] {$u$};
+\draw[->] (0,-1.3) -- (0,1.4) node[above] {$f$};
+\draw[blue,very thick,domain=-1:-0.5,samples=50] plot (\x,{\x*\x*\x});
+\draw[thick,dashed,domain=-0.5:1,samples=70] plot (\x,{\x*\x*\x});
+\draw[red,very thick] (-0.5,-0.125) -- (1,1);
+\fill (-1,-1) circle (1.4pt) node[left] {$A$};
+\fill (-0.5,-0.125) circle (1.4pt) node[below left] {$B$};
+\fill (1,1) circle (1.4pt) node[above right] {$C$};
+\node at (0.95,-0.6) {$f(u)=u^3$};
+\node[red,above left] at (0.6,0.7) {$\mathrm{slope}=\frac34$};
+\end{tikzpicture}
+```

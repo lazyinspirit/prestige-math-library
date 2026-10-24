@@ -1,0 +1,124 @@
+{
+  "id": "def-message-passing-gnn",
+  "agent": "/root/rendering_repair_coordinator/dnn_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile and frozen/current source contain no diagram. A data-flow schematic materially clarifies that neighbor aggregation excludes the current vertex while its previous state is a separate update input, and that graph-wide multiset readout occurs only at the end. This is an authorized explanatory-diagram addition, not an error in the existing mathematical definition.",
+      "action": "Added a final Remarks section with a two-row TikZ diagram for one local layer and final graph readout; included multiplicity, shared-map, K=0 and arrow-convention explanations.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory neighborhood aggregation/update and final graph readout schematic without changing any original carrier bytes.",
+  "source_lines_after": [
+    55,
+    57,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Fix v in V and 1 <= k <= K. Neighbor states lie in H_(k-1), their finite multiset lies in M_fin(H_(k-1)), and a_v^k lies in Z_k.",
+      "relations": "The A_k arrow takes precisely the multiset indexed by N_G(v) to a_v^k.",
+      "justification": "Definition paragraph at source line 34 gives A_k: M_fin(H_(k-1)) -> Z_k; displayed recursion at line 37 gives this exact value. def-finite-labeled-graph defines N_G(v) using two-element edges, hence excludes v. def-multiset preserves repeated equal values."
+    },
+    {
+      "objects": "The U_k box receives the previous vertex state h_v^(k-1) in H_(k-1) from above and the aggregate a_v^k in Z_k from the left; it outputs h_v^k in H_k.",
+      "relations": "Two incoming data-flow arrows express U_k(h_v^(k-1),a_v^k)=h_v^k, with the ordered argument meaning supplied by the unchanged displayed recursion. These arrows do not orient edges of G and assert no commutativity or injectivity.",
+      "justification": "Definition lines 34 and 37 specify the domain H_(k-1) x Z_k, codomain H_k and update equality. No vertex identity or global input is introduced."
+    },
+    {
+      "objects": "The bottom row collects final node states into a finite multiset in M_fin(H_K) and outputs z_G in Y.",
+      "relations": "R({{h_w^K:w in V}})=z_G. The bound index w is merely renamed from v to distinguish it from the fixed vertex in the first row.",
+      "justification": "Definition line 40 states the same readout with domain M_fin(H_K), codomain Y. Caption limits readout to completion of K layers, preserves shared maps, and explicitly handles K=0. The mathematical definition and its justification remain independent of the figure; there is no supplied proof to alter."
+    }
+  ],
+  "remaining_issues": [],
+  "evidence": {
+    "before_raw_sha256": "7552faca345504a56018f98ee3254e8e3bbd35deedbcdc409b59c0811dc16592",
+    "after_raw_sha256": "c943589e32463ceed01a90609dfdbffd064994d5bf48351143f662546b6bf485",
+    "original_requested_screenshot": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/def-message-passing-gnn--01.png",
+    "original_path_discrepancy": "Declared inspection/evidence directory does not contain screenshots. Located authentic screenshot only within the corresponding category; SHA256 equals the recorded queue SHA.",
+    "original_resolved_screenshot": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-message-passing-gnn--01.png",
+    "original_screenshot_sha256": "77bae8acee81433e617c1deebde521d251698c385a58cd92d53c519902a85787",
+    "original_view": "Standalone original-resolution view inspected.",
+    "guard": "Immediately before edit, exact current raw SHA256 matched queue before_raw_sha256.",
+    "status_preservation": "All original source bytes remain an exact prefix, including status: published and all frontmatter; only final Remarks appended.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn009-native/manifest.json",
+    "preview_source_sha256": "c943589e32463ceed01a90609dfdbffd064994d5bf48351143f662546b6bf485",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnn009-native/screenshots/def-message-passing-gnn--01.png",
+    "preview_screenshot_sha256": "63a82f135984883bcebfa7c5384b8e586845076c01a7a312edc3ac577fcb070b",
+    "visual_check": "Standalone native preview PNG inspected at original resolution. All five data-flow arrows, both update inputs, labels and update box are visible on the dark background with no overlaps or clipping in the new diagram. No graph cycle or closing edge is depicted.",
+    "preview_receipt": {
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": []
+    },
+    "preview_limitations": "Local ItemBody/native SSR TikZ preview only, not production HTTP route. Manifest records 16 unrelated reference-map parse diagnostics."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-message-passing-gnn.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-message-passing-gnn.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-message-passing-gnn.md",
+            "item_id": "def-message-passing-gnn",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-message-passing-gnn.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn009 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-message-passing-gnn --out research/math-library-rendering-repairs-2026-10-23/previews/dnn009-native",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ]
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets.json
+  precheck: pass
 id: thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets
 kind: theorem
 title: "Inducing the trivial representation gives the permutation representation on $G/H$"
@@ -18,13 +21,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Section 4.8"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+
 ---
 
 ## Statement
@@ -52,3 +49,22 @@ left coset set $G/H$.
 3.1 For $x\in G$, one has $\Phi(x\cdot f)(gH)=(x\cdot f)(g)=f(x^{-1}g)=\Phi(f)(x^{-1}gH)$, which is exactly the left permutation action of $G$ on the coset set $G/H$ from [F2]. Hence $\Phi$ is $G$-equivariant. [F1, F2, step 2.1, algebra]
 
 4.1 The bijection of step 2.1 and the equivariance of step 3.1 identify $\operatorname{Ind}_H^G\mathbf 1_H$ with the permutation representation of $G$ on $G/H$. [step 2.1, step 3.1] ∎
+
+## Remarks
+
+The square below displays the equivariance in step 3.1. For $x\in G$, write
+$L_xf(g)=f(x^{-1}g)$ on $\operatorname{Ind}_H^G\mathbf 1_H$ and
+$P_xF(gH)=F(x^{-1}gH)$ on $\mathbb C^{(G/H)}$.
+
+```tikzcd
+\mathrm{Ind}_H^G\mathbf 1_H \arrow[r, "\Phi"] \arrow[d, "L_x"'] & \mathbb C^{(G/H)} \arrow[d, "P_x"] \\
+\mathrm{Ind}_H^G\mathbf 1_H \arrow[r, "\Phi"'] & \mathbb C^{(G/H)}
+```
+
+Here $\Phi(f)(gH)=f(g)$, and its inverse is pullback along
+$q:G\to G/H$, $q(g)=gH$. In particular, if $\mathbf 1_{gH}:G\to\mathbb C$
+is the indicator of the subset $gH$, then $\Phi(\mathbf 1_{gH})=e_{gH}$,
+where $e_{gH}$ is the delta function at the coset $gH$. Thus the left action
+sends corresponding basis vectors to $\mathbf 1_{xgH}$ and $e_{xgH}$,
+respectively. The square commutes because both routes send $f$, evaluated
+at $gH$, to $f(x^{-1}g)$. The proof above is independent of this illustration.

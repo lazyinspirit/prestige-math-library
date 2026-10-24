@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-distinguishable-prefix-nonregularity-criterion.json
+  precheck: pass
 id: ex-distinguishable-prefix-nonregularity-criterion
 kind: example
-title: "The prefixes 0^n distinguish the language {0^n1^n : n >= 0}"
+title: 'The prefixes $0^n$ distinguish the language $\{0^n1^n : n \geq 0\}$'
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-distinguishable-prefix-nonregularity-criterion, def-distinguishing-word]
 proof_strategy: direct
-verification:
-  audited: 2026-09-12
-  precheck: pass
 sources:
   scraped: []
   references:

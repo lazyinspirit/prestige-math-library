@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-weakly-convergent-sequences-are-norm-bounded.json
+  precheck: pass
 id: "thm-weakly-convergent-sequences-are-norm-bounded"
 kind: "theorem"
 title: "Weakly convergent sequences are norm bounded"
@@ -6,12 +9,6 @@ deps: ["def-weak-convergence-of-nets-and-sequences", "cor-relative-hahn-banach-b
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-verification:
-  audited: 2026-09-13
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-12
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis (2017); exact harvest in batch coverage"
@@ -33,7 +30,7 @@ Assume HB ([[def-hahn-banach-extension-principle-relative]]) and the Axiom of Co
 
 [F2] Under HB the canonical map $J_X(x)(f)=f(x)$ satisfies $\|J_Xx\|=\|x\|$ ([[cor-relative-hahn-banach-bidual-isometry]]).
 
-[F3] If the target is Banach, its bounded-operator space from any normed domain is Banach ([[thm-bounded-operator-space-is-banach]]).
+[F3] If the target is Banach, its bounded-operator space from any normed domain is Banach ([[thm-bounded-operator-space-is-banach|If $Y$ is Banach then $\mathcal B(X,Y)$ is Banach]]).
 
 [F4] Under Countable Choice, a pointwise bounded sequence of bounded operators on a Banach domain has uniformly bounded operator norms ([[thm-sequential-uniform-boundedness-under-countable-choice]]).
 

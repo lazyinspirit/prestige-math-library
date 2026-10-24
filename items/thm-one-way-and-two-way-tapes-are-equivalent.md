@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-one-way-and-two-way-tapes-are-equivalent.json
+  precheck: pass
 id: thm-one-way-and-two-way-tapes-are-equivalent
 kind: theorem
 title: "One-way and two-way infinite tape conventions are equivalent"
@@ -10,9 +13,6 @@ provenance:
 deps: [thm-stay-put-moves-can-be-eliminated, def-language-recognized-and-decided, def-partial-function-computed-by-a-machine]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-12
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -37,7 +37,7 @@ same languages and compute the same partial functions on binary strings.
 
 [L1] Stay-put moves may be eliminated without changing accepted languages or computed partial functions, by [[thm-stay-put-moves-can-be-eliminated]].
 
-[F1] Extend the clauses of [[def-language-recognized-and-decided]] and [[def-partial-function-computed-by-a-machine]] to the two-way convention. Input occupies cells $0,1,\ldots$ and all negative cells are initially blank. A halting two-way configuration outputs a word $u$ exactly when $u$ occupies cells $0,\ldots,|u|-1$ and every other cell in $mathbb Z$ is blank. Thus a nonblank negative cell prevents the configuration from outputting an ordinary word.
+[F1] Extend the clauses of [[def-language-recognized-and-decided]] and [[def-partial-function-computed-by-a-machine]] to the two-way convention. Input occupies cells $0,1,\ldots$ and all negative cells are initially blank. A halting two-way configuration outputs a word $u$ exactly when $u$ occupies cells $0,\ldots,|u|-1$ and every other cell in $\mathbb Z$ is blank. Thus a nonblank negative cell prevents the configuration from outputting an ordinary word.
 
 ## Proof
 
@@ -52,3 +52,36 @@ same languages and compute the same partial functions on binary strings.
 3.1 Induction on simulated steps shows that the folded machine represents the current two-way configuration exactly. On a simulated halt it postpones its own halting state and scans the finite folded encoding. If every negative component is blank, it copies the nonnegative components cell-for-cell to cells $0,1,\ldots$, preserving internal blanks, and erases all auxiliary cells. If some negative component is nonblank, the source has no ordinary-word output by [F1]; the simulator likewise leaves a fixed malformed pattern consisting of a blank cell $0$ followed by a nonblank auxiliary marker. It then enters the corresponding halting state. Thus it preserves acceptance, rejection, divergence, and whether—and which—ordinary word is output. If a local macro uses stay-put housekeeping, [L1] removes it without changing behavior. [F1, L1, step 1.2, step 2.1, construct]
 
 4.1 Combining steps 1.1 and 3.1, the two conventions have identical behavior on every input; by [F1], they therefore recognize and decide the same languages and compute the same partial functions. [F1, step 1.1, step 3.1] ∎
+
+
+## Remarks
+
+The folded storage in step 1.2 is illustrated below. Write $s_j$ for the symbol at source cell $j$. Each dashed box is one simulator cell; in cells $n\ge1$, the upper and lower entries are the first and second components of $(s_{+n},s_{-n})$. The hat illustrates a head at source cell $+1$. Arrows labelled $L$ or $R$ show the source head's direction, not the simulator's physical direction. In particular, both components at distance $n$ are stored at simulator cell $n$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\draw[dashed,rounded corners] (-0.65,-1.95) rectangle (0.65,1.95);
+\draw[dashed,rounded corners] (2.05,-1.95) rectangle (3.35,1.95);
+\draw[dashed,rounded corners] (4.75,-1.95) rectangle (6.05,1.95);
+\node at (0,-2.3) {cell $0$};
+\node at (2.7,-2.3) {cell $1$};
+\node at (5.4,-2.3) {cell $2$};
+\node[draw,minimum width=0.8cm,minimum height=0.6cm] (z) at (0,0) {$s_0$};
+\node[draw,minimum width=0.8cm,minimum height=0.6cm] (p) at (2.7,1.35) {$\widehat{s}_{+1}$};
+\node[draw,minimum width=0.8cm,minimum height=0.6cm] (m) at (2.7,-1.35) {$s_{-1}$};
+\node[draw,minimum width=0.8cm,minimum height=0.6cm] (pp) at (5.4,1.35) {$s_{+2}$};
+\node[draw,minimum width=0.8cm,minimum height=0.6cm] (mm) at (5.4,-1.35) {$s_{-2}$};
+\draw[->] (z) to[bend left=24] node[above,pos=0.65] {$R$} (p);
+\draw[->] (p) to[bend left=24] node[below,pos=0.35] {$L$} (z);
+\draw[->] (z) to[bend right=24] node[below,pos=0.65] {$L$} (m);
+\draw[->] (m) to[bend right=24] node[above,pos=0.35] {$R$} (z);
+\draw[->] (p) to[bend left=16] node[above] {$R$} (pp);
+\draw[->] (pp) to[bend left=16] node[below] {$L$} (p);
+\draw[->] (m) to[bend left=16] node[above] {$L$} (mm);
+\draw[->] (mm) to[bend left=16] node[below] {$R$} (m);
+\node at (6.7,1.35) {$\cdots$};
+\node at (6.7,-1.35) {$\cdots$};
+\end{tikzpicture}
+```
+
+The pattern continues with the ordered pair $(s_{+n},s_{-n})$ in cell $n$. Thus outward moves on either side increase the simulator index, inward moves decrease it, and the four arrows incident to $s_0$ exchange cells $0$ and $1$, as in step 2.1. The figure only illustrates the encoding and head movement; the proof above establishes the simulation independently.

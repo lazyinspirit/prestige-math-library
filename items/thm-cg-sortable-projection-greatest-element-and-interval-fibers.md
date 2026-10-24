@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-sortable-projection-greatest-element-and-interval-fibers.json
+  precheck: pass
 id: thm-cg-sortable-projection-greatest-element-and-interval-fibers
 kind: theorem
-title: The upper endpoint of a c-Cambrian fiber, interval fibers and the explicit formula u_c(w) = pi_{c^{-1}}(ww0)w0
+title: The upper endpoint of a $c$-Cambrian fiber, interval fibers and the explicit formula $u_c(w) = \pi_{c^{-1}}(ww_0)w_0$
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -32,12 +35,6 @@ proof_strategy: induction
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "N. Reading, Sortable elements and Cambrian lattices, arXiv:math/0512339v1 (2005); Algebra Universalis 56 (2007) 35-56"

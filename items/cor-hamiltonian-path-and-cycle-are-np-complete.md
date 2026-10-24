@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-hamiltonian-path-and-cycle-are-np-complete.json
+  precheck: pass
 id: cor-hamiltonian-path-and-cycle-are-np-complete
 kind: corollary
 title: "Directed and undirected Hamiltonian path and cycle are NP-complete"
@@ -14,13 +17,7 @@ sources:
   references:
     - title: "MIT 6.045J / 18.400J, Lecture 16: More NP-completeness"
       url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+
 ---
 
 ## Statement
@@ -60,3 +57,38 @@ NP-complete.
 3.1 Reduce $\mathrm{UHAMPATH}_*$ to the ordinary undirected Hamiltonian path problem. Given $(G,s,t)$, attach two fresh leaves $s_-$ and $t_+$ by the edges $s_-s$ and $tt_+$. Any Hamiltonian path in the enlarged graph must have the two leaves as its endpoints, so deleting them recovers a Hamiltonian path from $s$ to $t$ in $G$; conversely any $s$-to-$t$ Hamiltonian path in $G$ extends by the two leaves. Therefore ordinary undirected Hamiltonian path is NP-hard. [F1, step 2.2, construct]
 
 4.1 Step 1.1 gives membership in $NP$, while steps 1.2, 2.1, 2.2, 2.3, and 3.1 give NP-hardness for directed Hamiltonian path, directed Hamiltonian cycle, undirected Hamiltonian path, and undirected Hamiltonian cycle. Hence all four problems are NP-complete by [L4]. [L4, step 1.1, step 1.2, step 2.1, step 2.2, step 2.3, step 3.1] ∎
+
+## Remarks
+
+For the case $s\ne t$ in step 2.2, take the concrete digraph $D$ with vertices $s,u,v,t$ and exactly the arcs $s\to u$, $u\to v$, and $v\to t$. Its expansion $G'$ is shown below. The heavy arc $u\to v$ becomes the heavy undirected edge $u_3-v_1$; the other external edges are $s_3-u_1$ and $v_3-t_1$. Each internal middle vertex $u_2$ or $v_2$ has degree $2$, so a Hamiltonian path from $s_3$ to $t_1$ traverses the triples consecutively, in the displayed left-to-right order. The lower edges are undirected; their order here illustrates traversal from the specified start to the specified end.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\node at (-0.9,1.8) {$D$};
+\node (s) at (0,1.8) {$s$};
+\node (u) at (2.8,1.8) {$u$};
+\node (v) at (7,1.8) {$v$};
+\node (t) at (9.8,1.8) {$t$};
+\draw[->] (s) -- (u);
+\draw[->,very thick] (u) -- (v);
+\draw[->] (v) -- (t);
+\node at (-0.9,0) {$G'$};
+\node (s3) at (0,0) {$s_3$};
+\node (u1) at (1.4,0) {$u_1$};
+\node (u2) at (2.8,0) {$u_2$};
+\node (u3) at (4.2,0) {$u_3$};
+\node (v1) at (5.6,0) {$v_1$};
+\node (v2) at (7,0) {$v_2$};
+\node (v3) at (8.4,0) {$v_3$};
+\node (t1) at (9.8,0) {$t_1$};
+\draw (s3) -- (u1);
+\draw (u1) -- (u2);
+\draw (u2) -- (u3);
+\draw[very thick] (u3) -- (v1);
+\draw (v1) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (t1);
+\end{tikzpicture}
+```
+
+This is a path example, with no closing edge. The separate $s=t$ boundary case is handled in step 2.2. The rigorous reduction and its proof above are independent of this illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-smooth-pullback-of-multiple-test-blowups.json
+  precheck: pass
 id: "lem-smooth-pullback-of-multiple-test-blowups"
 kind: "lemma"
 title: "Smooth base change of multiple test blow-ups"
@@ -68,3 +71,18 @@ The blow-up step uses flat base change of blowups ([[thm-blowup-base-change-flat
 3.1 The inductive step: transform identities. The exceptional divisor $D'_{i+1}$ of the pulled-back blowup is $\varphi_{i+1}^{-1}(D_{i+1})$ and satisfies $\mathcal I(D'_{i+1})=\varphi_{i+1}^*\mathcal I(D_{i+1})$ by [F2]. Therefore $\mathcal I'_{i+1}=\mathcal I(D'_{i+1})^{-\mu}(\sigma'_{i+1})^*\mathcal I'_i=\varphi_{i+1}^*(\mathcal I(D_{i+1})^{-\mu}\sigma_{i+1}^*\mathcal I_i)=\varphi_{i+1}^*\mathcal I_{i+1}$, using the commutativity of pullback with products and with the controlled transform of ideals; and $E'_{i+1}=(\sigma'_{i+1})^{\mathrm c}(E'_i)\cup\{D'_{i+1}\}=\varphi_{i+1}^{-1}\bigl((\sigma_{i+1})^{\mathrm c}(E_i)\cup\{D_{i+1}\}\bigr)=\varphi_{i+1}^{-1}E_{i+1}$ by [F5]; the order is the induced one after omitting empty members. If the pulled-back center is empty, its exceptional inverse image is empty and the step transports the existing boundary; a nonempty Cartier-center blowup retains its nonempty exceptional divisor despite having an isomorphic underlying morphism. This closes the induction and proves assertions (1) and (2). [F2, F5, step 1.2, step 2.1]
 
 4.1 Resolution case. Suppose $(X_i)$ is a resolution of $(\mathcal I,E,\mu)$, so $\operatorname{supp}(\mathcal I_r,\mu)=\varnothing$. By the induction identity $\mathcal I'_r=\varphi_r^*\mathcal I_r$, and by [F3] every point $x'$ of $X'_r$ satisfies $\operatorname{ord}_{x'}(\mathcal I'_r)=\operatorname{ord}_{\varphi_r(x')}(\mathcal I_r)$ if $\varphi_r(x')$ lies in the locus where $\mathcal I_r$ is defined; since $\operatorname{supp}(\mathcal I_r,\mu)=\varnothing$, no point satisfies $\operatorname{ord}\ge\mu$, so $\operatorname{supp}(\mathcal I'_r,\mu)=\varnothing$ as well. Hence the steps of $(X'_i)$ with nonempty centers form a resolution of $(\mathcal I',E',\mu)$, and the full sequence $(X'_i)$ is an extension of it in the sense of [F1], which is assertion (3). [A1, F1, F3, step 3.1] ∎ 
+
+## Remarks
+
+At a specified blowup step, the two Cartesian squares below display the inverse-image center and the pulled-back blowup together. The horizontal arrows on the left are closed immersions; the vertical arrows are induced by $\varphi_i$.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, font=\Large, labels={font=\large}]
+C'_i \arrow[r, hook] \arrow[d] & X'_i \arrow[d, "\varphi_i"] & X'_{i+1} \arrow[l, "\sigma'_{i+1}"'] \arrow[d, "\varphi_{i+1}"] \\
+C_i \arrow[r, hook] & X_i & X_{i+1} \arrow[l, "\sigma_{i+1}"]
+\end{tikzcd}
+```
+
+Here $C'_i=X'_i\times_{X_i}C_i$ and $X'_{i+1}=X'_i\times_{X_i}X_{i+1}$, using the canonical identifications with the fibre products in the Statement. Thus $\varphi_i\circ\sigma'_{i+1}=\sigma_{i+1}\circ\varphi_{i+1}$. Smoothness of $\varphi_i$ makes $\varphi_{i+1}$ smooth and supplies the flatness needed to identify $\sigma'_{i+1}$ with the blowup of $C'_i$.
+
+The exceptional inverse image is $D'_{i+1}=\varphi_{i+1}^{-1}(D_{i+1})=(\sigma'_{i+1})^{-1}(C'_i)$. If $C'_i$ is empty, the upper blowup map is an isomorphism and $D'_{i+1}$ is empty. A nonempty Cartier center can also give an isomorphic blowup map, while retaining its nonempty exceptional divisor; a center containing a whole component deletes that component, as in step 1.1. Inserted isomorphism steps instead transport the ideal and ordered boundary without a center or a new boundary member. The controlled-transform and ordered-boundary identities are those of step 3.1, with empty boundary members omitted. The proof above is independent of this diagram.

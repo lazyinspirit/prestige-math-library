@@ -1,0 +1,79 @@
+{
+  "id": "ex-single-new-knot-insertion-preserves-linear-curve",
+  "agent": "/root/rendering_repair_coordinator/nla_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution review of the sole flagged tile shows the Q1 circle intersecting both neighboring lower circles, with the Q0=0, Q1=1/2, Q2=1 labels colliding at those intersections. This is internal diagram geometry, not screenshot-edge clipping or a multi-image viewer artifact.",
+      "action": "Doubled horizontal node spacing: P1 and Q2 x=2 to x=4; Q1 x=1 to x=2. Kept all control labels, styles and four arrows unchanged.",
+      "status": "repaired; fresh local native-renderer preview independently reviewed at original resolution"
+    }
+  ],
+  "changed": true,
+  "correction": "Only three TikZ node x coordinates changed; lower circles and labels are separated in the fresh rendered figure.",
+  "source_lines_after": {
+    "start": 48,
+    "end": 56,
+    "changed": [
+      49,
+      51,
+      52
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and diagram convention",
+      "result": "The diagram is an update dependency graph for scalar controls P0=0, P1=1 and Q0=0, Q1=1/2, Q2=1, as explicitly stated immediately above it. It does not depict a spatial B-spline control polygon or a reparameterized curve; node coordinates are layout only."
+    },
+    {
+      "check": "Copy and blend arrows",
+      "result": "Algorithm alg-single-new-b-spline-knot-insertion with p=1, n=2, k=1, t=(0,0,1,1), u=1/2 gives copy range i=0, blend i=1 with alpha1=(1/2-0)/(1-0)=1/2, and shift range i=2. Thus P0→Q0, P0→Q1, P1→Q1, P1→Q2 are exactly the four required dependency arrows. Verification step 1.1 independently computes the same controls."
+    },
+    {
+      "check": "Geometry and preservation interface",
+      "result": "Both rows retain endpoint order and the blended control lies horizontally halfway between its two suppliers; widening x coordinates changes neither graph incidence nor arrow direction. The knot vector remains (0,0,1/2,1,1). The basis definition uses half-open cells and the left endpoint limit at 1; Verification steps 1.2 and 2.1 still give C(x)=x on both refined cells and at 1, matching the preservation theorem. No curve geometry or parameterization was added or changed."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "preimage_sha256": "2b52739e252676c10e07015857cede36e7a2d5fd6ef339b4d2e6c1535d4ebc02",
+    "preimage_guard": "passed immediately before edit; current source also equaled frozen before bytes",
+    "after_sha256": "50b9bf6998c52047ffbd423547f0749f1720eb94cf435b11e323736227a49d94",
+    "scope": "Current source equals frozen before plus exactly the three recorded coordinate substitutions; frontmatter and publication status byte-identical.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-single-new-knot-insertion-preserves-linear-curve.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-single-new-knot-insertion-preserves-linear-curve.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; pass, strategy direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-single-new-knot-insertion-preserves-linear-curve.md --json",
+      "exit_code": 0,
+      "result": "1 checked, errors [], warnings []"
+    },
+    "visual_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/nla018-final-unique",
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-nla018\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-single-new-knot-insertion-preserves-linear-curve --out research/math-library-rendering-repairs-2026-10-23/previews/nla018-final-unique",
+      "exit_code": 0,
+      "review": "Fresh standalone original-resolution 1200×1400 PNG reviewed using view_image detail original. All five circles and labels are separated; all four directed arrows connect the intended nodes.",
+      "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/nla018-final-unique/screenshots/ex-single-new-knot-insertion-preserves-linear-curve--01.png",
+      "screenshot_sha256": "adad70066186d04cb6ac15fb76b8ad740da5949a3f48aecc7d0b089cd368ec8f",
+      "katex_errors": [],
+      "diagram_failures": [],
+      "tikz_count": 1,
+      "reference_map_diagnostics": 16,
+      "limitation": "Local native ItemBody renderer preview only; no HTTP, production route or application mutation. Unrelated reference-map parse diagnostics do not affect the three correctly resolved local supplier labels."
+    }
+  },
+  "remaining_issues": []
+}

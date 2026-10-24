@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-graph-as-pullback-diagonal.json
+  precheck: pass
 id: "lem-graph-as-pullback-diagonal"
 kind: "lemma"
 title: "The graph is a pullback of the diagonal"
@@ -8,12 +11,6 @@ deps: ["def-graph-morphism-over-base", "def-diagonal-morphism-scheme", "lem-fibr
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Vakil proof 11.1.18, diagram (11.1.18.1), p.232"
@@ -40,3 +37,16 @@ For an $S$-morphism $u:X\to Y$, put $H=(u\operatorname{pr}_X,\operatorname{pr}_Y
 1.1 By F1 and F2 both composites around the square are $(u,u)$. A compatible test pair consists of $a:T\to X\times_S Y$ and $c:T\to Y$ satisfying $Ha=\Delta c$. Write $a=(a_X,a_Y)$. Equality means exactly $ua_X=c$ and $a_Y=c$. [given, F1, F2]
 
 2.1 Thus $a_X$ is the unique map $T\to X$ whose graph composite is $a$ and whose $u$-composite is $c$. Conversely any map $d:T\to X$ supplies the pair $((d,ud),ud)$. These operations are inverse, so the square has the pullback universal property, with its canonical uniqueness as in F3. The argument includes empty schemes and $u=\operatorname{id}$, and imposes no reducedness or separation hypothesis. [F1, F3, step 1.1] ∎
+
+## Remarks
+
+The Cartesian square in the statement is illustrated below; the maps are $\Gamma_u=(\operatorname{id}_X,u)$ and $H=(u\operatorname{pr}_X,\operatorname{pr}_Y)$.
+
+```tikzcd
+\begin{tikzcd}[scale=1.8, transform shape, column sep=large, row sep=large]
+X \arrow[r, "\Gamma_u"] \arrow[d, "u"'] & X\times_S Y \arrow[d, "H"] \\
+Y \arrow[r, "\Delta_{Y/S}"'] & Y\times_S Y
+\end{tikzcd}
+```
+
+Both composites are $(u,u):X\to Y\times_S Y$. The square is Cartesian by the test-map argument in the proof, which is independent of this illustration.

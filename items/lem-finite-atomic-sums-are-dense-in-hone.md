@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-atomic-sums-are-dense-in-hone.json
+  precheck: pass
 id: lem-finite-atomic-sums-are-dense-in-hone
 kind: lemma
-title: "Finite atomic sums are dense in H1"
+title: "Finite atomic sums are dense in $H^1$"
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30

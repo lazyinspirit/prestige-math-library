@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-bouncing-ball-transverse-event-error-and-reset.json
+  precheck: pass
 id: ex-bouncing-ball-transverse-event-error-and-reset
 kind: example
 title: "A bouncing-ball impact has a transverse event-time and reset-error bound"
@@ -18,8 +21,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Joel M. Esposito, Vijay Kumar, and George J. Pappas, Accurate Event Detection for Simulating Hybrid Systems, HSCC 2001, pp. 204–217"
@@ -55,3 +56,24 @@ It has uniform state error $\eta=1/25$ from the exact incoming solution $y(t)=(1
 4.1 The reset is defined on all of $\mathbb R^2$, is $L_R=1/2$-Lipschitz in state, and has $L_{R,t}=0$. On the incoming bracket, $\|U(t)-y(t)\|_2=1/25$ and $\|f^-(t,y(t))\|_2=\sqrt{4t^2+4}<3$. Step 3.1 gives $|\widehat\tau-\tau|\le1/50$. The outgoing field $(q,v)\mapsto(v,-2)$ is globally $1$-Lipschitz in state. The exact outgoing path through $\widehat\tau$ and the reported reset state lie in $[-1/10,1/10]\times[4/5,6/5]$, where the field norm is less than $3$; by local existence and continuity both outgoing solutions remain in the bounded convex rectangle $[-1/5,1/5]\times[3/4,5/4]$ for a short common forward interval. Thus the reset and outgoing tube hypotheses of [F3] hold with $M^-=M^+=3$ and $L^+=1$. By [F3], the aligned post-reset error is at most $\frac12\cdot\frac1{25}+(\frac12\cdot3+3)\frac1{50}=11/100$. [given, F3, step 1.1, step 3.1, algebra]
 
 5.1 Directly, the exact outgoing state at $\widehat\tau=1+\Delta$ is $(\Delta-\Delta^2,1-2\Delta)$ and the reported reset state is $(0,1+\Delta)$. Their difference has components bounded by $1/50$ and $3/50$, so its Euclidean norm is at most $\sqrt{(1/50)^2+(3/50)^2}<11/100$. This verifies the reset estimate for this instance. [given, step 2.1, step 4.1, algebra] ∎
+
+
+## Remarks
+
+The diagram separates the exact reset at $\tau=1$ from the reported reset at $\widehat\tau=1+\Delta$, where $\Delta=\sqrt{26/25}-1$. Both incoming guard crossings are downward, since the incoming velocity is $-2t<0$. The bottom row compares states at the same time $\widehat\tau$; the arrows are state operations, not a plot to scale.
+
+```tikz
+\begin{tikzpicture}
+\node (a) at (0,0) {$y(\tau^-)=(0,-2)$};
+\node (b) at (7,0) {$U(\widehat\tau)=(0,-2\widehat\tau)$};
+\node (c) at (0,-1.7) {$y(\tau^+)=(0,1)$};
+\node (d) at (0,-3.6) {$y(\widehat\tau)=(\Delta-\Delta^2,1-2\Delta)$};
+\node (e) at (7,-3.6) {$R(U(\widehat\tau))=(0,1+\Delta)$};
+\draw[->] (a) -- node[left] {$R$} (c);
+\draw[->] (c) -- node[left] {$q'=v,\ v'=-2$} node[right] {$\Delta$} (d);
+\draw[->] (b) -- node[right] {$R$} (e);
+\draw[<->,dashed] (d) -- node[above] {$\|\mathrm{difference}\|_2<11/100$} (e);
+\end{tikzpicture}
+```
+
+Here $R(q,v)=(0,-v/2)$ acts at its own event time on each incoming state. The exact outgoing flow for duration $\Delta$ gives the lower-left state, as in step 5.1, and the dashed comparison is the aligned post-reset error. The verification above is independent of the diagram.

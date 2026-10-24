@@ -1,0 +1,116 @@
+{
+  "id": "def-belief-state-and-bayes-filter",
+  "agent": "/root/rendering_repair_coordinator/dorl_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dorl_011",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile contains the finite prediction, observation probability and partial Bayes update formulas but no schematic. A branch schematic materially clarifies that normalization is restricted to positive observation likelihood, while the zero branch has no posterior, rather than merely illustrating an arbitrary algebraic identity.",
+      "action": "Appended a final Remarks section with a native TikZ prediction/likelihood/normalization schematic and explicit zero-likelihood annotation, plus prose connecting all positive branches to K.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a warranted explanatory diagram of the partial finite Bayes update; existing title, definition, references and entire frontmatter remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      78,
+      97
+    ],
+    "tikz": [
+      82,
+      95
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains",
+      "justification": "For fixed b in Delta(S), a in A and o in Omega (Definition lines 48–56), the first box is input (b,a), the second is the probability vector bar b_{b,a} on S, the third is the scalar q(o|b,a) in [0,1], and the positive branch ends at tau(b,a,o) in Delta(S). The zero branch is an unboxed undefined/no posterior annotation, not a probability vector. The abbreviation paragraph explicitly fixes the suppressed parameters."
+    },
+    {
+      "check": "Prediction and observation evaluation arrows",
+      "justification": "The T arrow denotes bar b(s prime)=sum_s T(s prime|s,a)b(s) from Definition line 48; the O,o arrow denotes q(o)=sum_{s prime}O(o|s prime)bar b(s prime) from line 50. The arrows are computations, as stated below the figure, not hidden-state transitions or maps between the displayed spaces independent of the fixed parameters. The finite-POMDP definition specifies T as the reward marginal and O as the next-state observation law."
+    },
+    {
+      "check": "Positive and zero branch relations",
+      "justification": "Definition lines 52–56 define tau(o)(s prime)=O(o|s prime)bar b(s prime)/q(o) exactly when q(o)>0, so the upper arrow is correctly directed from q to the normalization result. Nonnegative q excludes a negative branch; q=0 leaves tau undefined, so the lower arrow terminates in text and never a posterior node. Supplier lemma steps 1.2, 2.1 and 3.1 independently prove normalization of bar b and q and the conditional-law interpretation only for q>0."
+    },
+    {
+      "check": "Kernel aggregation and proof independence",
+      "justification": "The accompanying sentence restates Definition line 58: K(C|b,a) is the finite q(o|b,a)-weighted sum of 1_C(tau(b,a,o)) over only positive-likelihood observations. It does not assert distinct posterior points or any transition on a zero-likelihood observation. Supplier lemma step 3.2 proves this is a probability measure independently; no proof or defining clause was altered and the figure is not used as a premise."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path is absent. Authentic matching image located within the same online-and-reinforcement-learning category.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/def-belief-state-and-bayes-filter--01.png",
+    "original_screenshot_sha256": "b03b125037db536e729efe7960da22e2e1cffb3df90ae12cd06be1027633f63a",
+    "original_inspection": "Standalone original-resolution view inspected; hash matches queue. Frozen before and current were identical before edit.",
+    "before_raw_sha256": "d94f244fc7924f9d78b16378c89960a083448547bdcc671ba3433eb0229df177",
+    "after_raw_sha256": "bf4e0f610f9705ffa6423d54b8dd6da66de69d782f619d7aaf68b5970518e32b",
+    "guard": "Immediately before editing, SHA256 compared to d94f244fc7924f9d78b16378c89960a083448547bdcc671ba3433eb0229df177; matched.",
+    "protected_fields": "Entire frontmatter byte-identical, including status: published; existing body also preserved as an exact prefix.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-011/manifest.json",
+    "preview_source_sha256": "bf4e0f610f9705ffa6423d54b8dd6da66de69d782f619d7aaf68b5970518e32b",
+    "preview_html_sha256": "1dca62e6d0b906eef0a5245726765e84037288d6ce50e8093a1374f1c8ec02a0",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl-011/pi-tikz-cache/fdd004271fb80ac37e391fc4f8fe5687.svg",
+    "visual_inspection": "Both native PNG tiles inspected separately at original resolution. Tile 02 shows the complete diagram without clipping/overlap; all four arrows and four outlined data boxes plus zero-case text are present. Dark output has readable light labels and visible outlines/arrowheads. SVG uses currentColor for fill/stroke and fill=none for box/line paths; no pale fill masks strokes. No open/closed endpoint rings apply (SVG has zero circles). This directed computation tree has 5 vertices and 4 edges, degrees 1,2,3,1,1; no closing cycle is asserted or needed.",
+    "capture_result": {
+      "katex_errors": [],
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "tiles": 2
+    },
+    "preview_limitations": "Local native ItemBody SSR preview only; not full production route. Manifest reports 16 unrelated title-map parse diagnostics."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-belief-state-and-bayes-filter.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-belief-state-and-bayes-filter.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-belief-state-and-bayes-filter.md",
+            "item_id": "def-belief-state-and-bayes-filter",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-belief-state-and-bayes-filter.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl-011 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-belief-state-and-bayes-filter --out research/math-library-rendering-repairs-2026-10-23/previews/dorl-011",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": []
+}

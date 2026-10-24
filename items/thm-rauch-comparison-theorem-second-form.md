@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-rauch-comparison-theorem-second-form.json
+  precheck: pass
 id: thm-rauch-comparison-theorem-second-form
 kind: theorem
 title: Rauch comparison theorem second form
@@ -24,9 +27,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -94,7 +94,7 @@ $R_\gamma(t)$ the self-adjoint endomorphism $w\mapsto P_t^{-1}\bigl(R(P_tw,\dot\
 
 ## Proof
 
-**Proof technique:** direct: transport the given field to the normal space at $\gamma(0)$, exhibit the tensor equation $y''+R_\gamma y=0$ with initial data $\operatorname{id},\lambda\operatorname{id}$, and apply the in-run Riccati comparison for scalar initial shape against the scalar model $f_k$.
+**Proof technique:** direct: transport the given field to the initial normal space, exhibit its tensor Jacobi equation with initial value the identity and initial derivative lambda times the identity, and apply the in-run Riccati comparison for scalar initial shape against the scalar model function.
 
 1.1 The tensor equation of the given field. [F2, F3, F4, F5, given] Let $N:=\{\dot\gamma(0)\}^{\perp}$ and, for each $t$, identify $N_t:=\{\dot\gamma(t)\}^{\perp}$ with $N$ by parallel transport $P_t$ [F5]. By [F2] the transported field $y_u(t):=P_t^{-1}J(t)$ satisfies $y_u''+R_\gamma y_u=0$ with $R_\gamma(t)$ self-adjoint, and by the initial condition $$y_u(0)=J(0)=u,\qquad y_u'(0)=D_tJ(0)=\lambda u .$$ By [F3], the hypothesis of the theorem says $$R_\gamma(t)\ge k\operatorname{id}_N$$ for every $t$ under consideration, in the Loewner order. By [F4] the prescription $Y(t)w:=P_t^{-1}J_w(t)$, where $J_w$ is the normal Jacobi field with value $w$ and derivative $\lambda w$ at $0$ defines a $C^2$ endomorphism-valued solution of the same matrix initial value problem, with $$Y(0)=\operatorname{id}_N,\qquad Y'(0)=\lambda\operatorname{id}_N,$$ and $y_u(t)=Y(t)u$; in particular $|J(t)|=|Y(t)u|$ for all $t$, because parallel transport is an isometry [F5]. Moreover $Y(t)$ is singular exactly when some nonzero field of this scalar initial shape vanishes at $t$, so $t_f$ is the first positive singular time of $Y$; and $u=J(0)\ne0$, since $u=0$ would give $D_tJ(0)=\lambda u=0$ and hence $J\equiv0$ by [F4]. [F2, F3, F4, F5, given]
 

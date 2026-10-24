@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cycle-index-of-alternating-group.json
+  precheck: pass
 id: thm-cycle-index-of-alternating-group
 kind: theorem
-title: "The cycle index of A_n is the parity-filtered symmetric-group sum"
+title: "The cycle index of $A_n$ is the parity-filtered symmetric-group sum"
 status: published
 origin: session
 provenance:
@@ -15,8 +18,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
 sources:
   scraped: []
   references:
@@ -45,7 +46,7 @@ $$Z(A_n) = \sum_{\substack{m_1,\dots,m_n \ge 0\\ \sum_{d=1}^{n} d\,m_d=n}}\frac{
 
 [L3] For $n \ge 2$, the alternating group has half the elements of $S_n$, so $|A_n|=n!/2$ ([[cor-alternating-group-is-normal-and-has-half-the-elements]]).
 
-[L4] The symmetric-group cycle index is the sum over cycle types ([[thm-cycle-index-of-symmetric-group]]).
+[L4] The symmetric-group cycle index is the sum over cycle types ([[thm-cycle-index-of-symmetric-group|The cycle index of $S_n$ is the sum over cycle types]]).
 
 ## Proof
 

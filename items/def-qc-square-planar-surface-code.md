@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-qc-square-planar-surface-code.json
+  precheck: pass
 id: def-qc-square-planar-surface-code
 kind: definition
 title: Square planar surface code
@@ -18,11 +21,6 @@ axiom_use: "None; all spaces, matrices, and incidence maps are finite."
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: 'John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction'
@@ -78,3 +76,57 @@ one-qubit Pauli matrices.
 The relative cellulation fixes every boundary convention. In particular,
 rough edges are removed from the physical register, and only vertices outside
 the rough boundary index X checks.
+
+
+For $d=2$, the two copies below show the same cellulation. Solid edges are
+physical qubits; dashed left and right edges belong to $R$ and are removed.
+Dots are the three vertices outside $R$, indexing X checks. Each of the four
+squares indexes a Z check. The top and bottom sides are dual boundaries.
+The left copy highlights the X support at $v=(1,1)$; the right copy highlights
+the Z support of the lower-left face $f$.
+
+```tikz
+\begin{tikzpicture}[scale=1.35]
+  \begin{scope}
+    \draw (0,0)--(2,0) (0,1)--(2,1) (0,2)--(2,2) (1,0)--(1,2);
+    \draw[dashed,orange,thick] (0,0)--(0,2) (2,0)--(2,2);
+    \draw[cyan,very thick] (0,1)--(2,1) (1,0)--(1,2);
+    \node at (1,0) {$\bullet$};
+    \node at (1,1) {$\bullet$};
+    \node at (1,2) {$\bullet$};
+    \node[above right] at (1,1) {$v$};
+    \node[left] at (0,1) {$R$};
+    \node[right] at (2,1) {$R$};
+    \node[above] at (1,2.2) {dual boundary};
+    \node[below] at (1,-0.2) {dual boundary};
+    \node[above] at (1,2.7) {X support at $v$};
+    \node[below left] at (0,0) {$(0,0)$};
+    \node[above right] at (2,2) {$(2,2)$};
+  \end{scope}
+  \begin{scope}[xshift=4cm]
+    \draw (0,0)--(2,0) (0,1)--(2,1) (0,2)--(2,2) (1,0)--(1,2);
+    \draw[dashed,orange,thick] (0,0)--(0,2) (2,0)--(2,2);
+    \draw[green,very thick] (0,0)--(1,0)--(1,1)--(0,1);
+    \node at (1,0) {$\bullet$};
+    \node at (1,1) {$\bullet$};
+    \node at (1,2) {$\bullet$};
+    \node at (0.5,0.5) {$f$};
+    \node[left] at (0,1) {$R$};
+    \node[right] at (2,1) {$R$};
+    \node[above] at (1,2.2) {dual boundary};
+    \node[below] at (1,-0.2) {dual boundary};
+    \node[above] at (1,2.7) {Z support of $f$};
+    \node[below left] at (0,0) {$(0,0)$};
+    \node[above right] at (2,2) {$(2,2)$};
+  \end{scope}
+\end{tikzpicture}
+```
+
+Writing $e^h_{ij}$ for the edge from $(i,j)$ to $(i+1,j)$ and $e^v_{ij}$
+for that from $(i,j)$ to $(i,j+1)$, the highlighted X row has support
+$\{e^h_{01},e^h_{11},e^v_{10},e^v_{11}\}$, while
+$\partial_2 f=e^h_{00}+e^v_{10}+e^h_{01}$ over the binary field: the left
+edge of $f$ is deleted. Applying $\partial_1$ gives each of $(1,0)$ and
+$(1,1)$ twice, hence zero, as in Verification step 1.1. There are six
+horizontal and two physical vertical edges, giving $8=2d^2$ qubits.
+The verification above is independent of the illustration.

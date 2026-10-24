@@ -1,0 +1,88 @@
+{
+  "id": "lem-normalized-surface-point-blowup-resolution-descends-from-completion",
+  "agent": "/root/rendering_repair_coordinator/ag_082",
+  "model": "gpt-6.1-sol",
+  "configured_reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other: literal-unparsed-blockquote-markers",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution inspection of both original tiles shows two literal > glyphs in F1 between ordinary prose fragments. These are stray quote markup rather than mathematical inequalities; neither denotes a relation or belongs to a formula.",
+      "action": "Removed both > characters and the ASCII space immediately following each; preserved the preceding separator spaces, all words, item-slug headings, formulas, and links.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 0,
+      "defect_type": "optional-typography/not-a-rendering-defect",
+      "verdict": "not-a-defect",
+      "reason": "Italic fact headings such as def-axiom-of-choice and def-dependent-choice are correctly rendered authored item-slug labels, with separate working title links. They contain no unparsed LaTeX. The parenthetical def-choice-function is likewise ordinary authored text.",
+      "action": "Preserved every heading, label, and word unchanged.",
+      "status": "preserved"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 41 only: removed two occurrences of the exact sequence \"> \", totaling two marker characters and two following ASCII spaces (4 bytes). No other source bytes changed.",
+  "source_lines_after": {
+    "41": "[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for all $S \\in \\mathcal{F}$. ([[def-axiom-of-choice]])"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "original_review": {
+    "standalone_original_resolution": true,
+    "tiles": [
+      "research/math-library-rendering-audit-2026-10-23/algebraic-geometry/screenshots/lem-normalized-surface-point-blowup-resolution-descends-from-completion--01.png",
+      "research/math-library-rendering-audit-2026-10-23/algebraic-geometry/screenshots/lem-normalized-surface-point-blowup-resolution-descends-from-completion--02.png"
+    ]
+  },
+  "guard": {
+    "before_raw_sha256": "48bdf4a2ec361a33b54d84bcf5d9c95ccdcd1135c8ec672b82e86383f98011c7",
+    "current_raw_sha256": "26280221795fd3a9d1d58ddafb03f4e8b22c8aedd222c49b5187b0f1c776d2da",
+    "immediate_preedit_guard_passed": true,
+    "frontmatter_byte_identical": true,
+    "publication_status_preserved": "published"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-normalized-surface-point-blowup-resolution-descends-from-completion.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-normalized-surface-point-blowup-resolution-descends-from-completion.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-normalized-surface-point-blowup-resolution-descends-from-completion.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/ag082-final-unique",
+    "exit_code": 0,
+    "tiles_reviewed_standalone_original_resolution": [
+      1,
+      2
+    ],
+    "result": "F1 has no literal quote markers; all formulas and proof text render correctly. Authored item-slug headings remain.",
+    "katex_errors": [],
+    "katex_count": 40,
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "reference_map_diagnostics": 20,
+    "diagnostic_scope_note": "Preview reported 20 reference-map diagnostics from its whole title inventory; scoped renderer/precheck checks pass and these do not indicate a defect in this carrier."
+  },
+  "ownership_note": "Immutable independent adjudication only; root owns repair receipts and metadata, coordinator review/hold remains in force. No native gates or publication action performed."
+}

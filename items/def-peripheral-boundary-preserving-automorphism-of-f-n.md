@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-peripheral-boundary-preserving-automorphism-of-f-n.json
+  precheck: n/a
 id: def-peripheral-boundary-preserving-automorphism-of-f-n
 kind: definition
-title: "Peripheral-boundary-preserving automorphisms of F_n"
+title: "Peripheral-boundary-preserving automorphisms of $F_n$"
 status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
@@ -13,22 +16,6 @@ proof_strategy: not-applicable
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-15.md"
-      - "research/frontier-38-owner-30-alpha-batch-15-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-15-post-5a.json"
-    content_sha256: "8f5773076770b5765b3a5f44d5614f1f1975d7f37a4889c225bf59f95434ddd7"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Emil Artin, Theory of Braids, Annals of Mathematics 48 (1947), pp. 101-126, equations (11), (13), (16) and Theorem 16, printed pp. 111-115"

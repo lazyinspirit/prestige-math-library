@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-layer-cake-formula-for-l-p-powers.json
+  precheck: pass
 id: thm-layer-cake-formula-for-l-p-powers
 kind: theorem
-title: "For 0 < p < infinity, the layer-cake formula computes the integral of |f|^p from the distribution function"
+title: 'For $0 < p < \infty$, the layer-cake formula computes the integral of $|f|^p$ from the distribution function'
 status: published
 origin: session
 landmark: true
@@ -10,13 +13,6 @@ provenance:
   proof: ai-generated
 deps: [def-distribution-function-of-absolute-value, def-real-power, thm-real-power-continuity-and-derivatives, thm-ftc-second-part, thm-monotone-convergence-for-the-integral, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Proposition 6.24"

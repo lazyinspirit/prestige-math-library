@@ -1,0 +1,84 @@
+{
+  "id": "alg-ip-solit-parameter-choice",
+  "agent": "/root/rendering_repair_coordinator/inv_004",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Independently viewed both flagged original PNGs at original resolution, including a standalone second tile: the long labels extend across adjacent boxes at 3cm horizontal spacing and visibly overlap. This is actual label collision, not a left-edge viewer artifact.",
+      "action": "Stacked the same four nodes vertically at 1.5cm spacing with uniform 6cm text widths and 0.9cm minimum heights; preserved labels and all three arrows.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed only TikZ node placement and shared box sizing to make the existing SOLIT procedure flow legible.",
+  "source_lines_after": [
+    79,
+    80,
+    81,
+    82,
+    83
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Observed coordinates y_j=Y_x(u_j), observed-data partial sums, pairwise acceptance tests, and selected candidate index.",
+      "justification": "Definition paragraphs 2 and 4 specify exactly this operational order. The arrows indicate processing order, not Hilbert-space morphisms or equalities."
+    },
+    {
+      "relation": "data -> est",
+      "justification": "The Definition constructs each finite observed partial sum as sum_{j=1}^N s_j q_{alpha_m}(lambda_j)y_j v_j. Its X-limit, or 0_X on nonconvergence, is the estimator used by the tests; the diagram is schematic and does not replace that unchanged definition."
+    },
+    {
+      "relation": "est -> tests",
+      "justification": "For every 0 <= m_1 < m_2 <= m_max the test is ||xhat_{m_1}(y)-xhat_{m_2}(y)||_X <= eta_{m_1,m_2}, with eta=sigma z_{m_1,m_2}(x_{m_1})+beta sqrt(v_{m_1,m_2}). All finer indices m_2 > m_1 must pass. No sign, comparison direction, quantile argument, or indexing changed."
+    },
+    {
+      "relation": "tests -> choose",
+      "justification": "The final node is the smallest accepted index mhat; the Definition returns alphahat=alpha_{mhat} on alpha_0>...>alpha_{m_max}. The terminal candidate m_max is accepted without comparisons, also for m_max=0. Shared sizing and downward orientation add no mathematical condition."
+    },
+    {
+      "independence": "The item remains an algorithm without a supplied phase proof. Its properties are proved using the coordinate definitions and inequalities as the existing Rule diagram prose explicitly states; no proof relies on the illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-ip-solit-parameter-choice.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-ip-solit-parameter-choice.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-ip-solit-parameter-choice.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-inv004 TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-ip-solit-parameter-choice --out research/math-library-rendering-repairs-2026-10-23/preview-inv004-independent-20261024",
+      "exit_code": 0,
+      "result": "Native node-tikzjax compilation through ItemBody/TikzDiagram succeeded using new repository-local runtime cache. Capture receipt: 1 TikZ, 57 KaTeX expressions, no diagram failures or KaTeX errors. Independently viewed both fresh PNGs at original resolution, second tile standalone: all four labels and three arrowheads clear and separated. Reference map reported 32 unrelated inventory diagnostics; this preview is local ItemBody coverage, not the production route."
+    }
+  ],
+  "preview_dir": "research/math-library-rendering-repairs-2026-10-23/preview-inv004-independent-20261024",
+  "before_raw_sha256": "6e43e0566c399005d8b1c47c8fed5f0e0b3ddc8f3dc491a3c6aa663d816915bd",
+  "after_raw_sha256": "4894681fdd8fe784d1ad5612ef7bdd0c04516fdacf5d2888736cfb683008c97a",
+  "status_preserved": "status: published, and entire frontmatter byte-identical",
+  "remaining_issues": []
+}

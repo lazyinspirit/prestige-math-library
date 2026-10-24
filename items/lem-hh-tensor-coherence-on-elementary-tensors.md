@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-tensor-coherence-on-elementary-tensors.json
+  precheck: pass
 id: lem-hh-tensor-coherence-on-elementary-tensors
 kind: lemma
 title: "Associator naturality, pentagon, unit triangle and symmetry hexagons on elementary tensors"
@@ -18,13 +21,7 @@ sources:
     - title: "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)"
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorems 5.1–5.3, printed pp. 23–26: symmetry, associativity and distributivity isomorphisms and their elementary-tensor computations"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -70,3 +67,24 @@ All five identities are equalities of $k$-linear maps between iterated tensor pr
 1.6 Second symmetry hexagon: on an elementary tensor $l\otimes(m\otimes n)$ of $L\otimes(M\otimes N)$ the left composite gives $(l\otimes m)\otimes n$, then $n\otimes(l\otimes m)$, then $(n\otimes l)\otimes m$, while the right composite gives $l\otimes(n\otimes m)$, then $(l\otimes n)\otimes m$, then $(n\otimes l)\otimes m$; agreement on the spanning elementary tensors gives the identity everywhere. [given, F2, F5, algebra]
 
 2.1 Steps 1.1–1.6 verify all five identities on elementary tensors, and each identity is between $k$-linear maps whose domains are the iterated tensor products of [F1] spanned by elementary tensors [F5]; a linear map is determined by its values on a spanning set, so each identity holds on its whole domain, and no general monoidal coherence theorem was invoked. [step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6, F1, F5] ∎
+
+## Remarks
+
+The pentagon below displays the two composites in Statement 2. All tensor products are over $k$, and every arrow has the associator direction fixed in [F2]. The upper three-arrow path and the lower two-arrow path have the same source and target.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (A) at (0,0) {$((L\otimes M)\otimes N)\otimes X$};
+\node (B) at (7,0) {$(L\otimes(M\otimes N))\otimes X$};
+\node (C) at (10,-3) {$L\otimes((M\otimes N)\otimes X)$};
+\node (D) at (0,-6) {$(L\otimes M)\otimes(N\otimes X)$};
+\node (E) at (7,-6) {$L\otimes(M\otimes(N\otimes X))$};
+\draw[->] (A) -- node[above] {$\alpha_{L,M,N}\otimes\mathrm{id}_X$} (B);
+\draw[->] (B) -- node[above right] {$\alpha_{L,M\otimes N,X}$} (C);
+\draw[->] (C) -- node[below right] {$\mathrm{id}_L\otimes\alpha_{M,N,X}$} (E);
+\draw[->] (A) -- node[left] {$\alpha_{L\otimes M,N,X}$} (D);
+\draw[->] (D) -- node[below] {$\alpha_{L,M,N\otimes X}$} (E);
+\end{tikzpicture}
+```
+
+Step 1.3 proves commutativity: both paths carry $((l\otimes m)\otimes n)\otimes x$ to $l\otimes(m\otimes(n\otimes x))$, and these elementary tensors span the source. The proof above is independent of the figure.

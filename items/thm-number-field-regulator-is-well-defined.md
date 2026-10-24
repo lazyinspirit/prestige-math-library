@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-number-field-regulator-is-well-defined.json
+  precheck: pass
 id: thm-number-field-regulator-is-well-defined
 kind: theorem
 title: The regulator is well defined
@@ -36,9 +39,7 @@ sources:
     - title: "William A. Stein, Algebraic Number Theory: A Computational Approach"
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "Section 8.1 p.89 (regulator as covolume of the log lattice; change of basis)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -70,7 +71,7 @@ logarithmic normalization), with $R_K=1$ for rank zero.
 
 ## Proof
 
-**Proof technique:** prove the two invariance statements of the definition separately. The deleted-row statement reduces to the sign pattern of the cofactors of a rank-$r$ matrix with zero column sums. For a change of fundamental system, form the integer matrix whose columns give the new basis vectors in the old basis; it is unimodular, so every deleted-row determinant is multiplied by $\pm1$. Positivity follows because the common determinant is nonzero.
+**Proof technique:** prove the two invariance statements of the definition separately. The deleted-row statement reduces to the sign pattern of the cofactors of a rank-r matrix with zero column sums. For a change of fundamental system, form the integer matrix whose columns give the new basis vectors in the old basis; it is unimodular, so every deleted-row determinant is multiplied by plus or minus one. Positivity follows because the common determinant is nonzero.
 
 1.1 Rank zero: if $r=0$ then by [F1] the matrix $A$ has no columns and each $A_k$ is the empty matrix with determinant $1$, while by [F2] the empty tuple is the unique system of fundamental units; hence $R_K=1$ is independent of the deleted row and of the fundamental system, and $R_K>0$. [F1, F2]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-finite-image-string-method.json
+  precheck: n/a
 id: alg-finite-image-string-method
 kind: algorithm
 title: "Finite-image projected-gradient string with arc-length redistribution"
@@ -12,8 +15,6 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Weinan E, Weiqing Ren, and Eric Vanden-Eijnden, String method for the study of rare events"
@@ -33,3 +34,48 @@ At iteration $k=0,\ldots,N$, perform the following in order. After every arithme
 4. Compute cumulative lengths $s_0=0$, $s_j=\sum_{i=1}^j\|Y_i-Y_{i-1}\|_2$, and total length $S=s_M$. If $S=0$ or the computed cumulative lengths are not strictly increasing, return `geometry-failure`. For $j=1,\ldots,M-1$, place the new image at the unique point of the piecewise-linear polygon $Y_0,\ldots,Y_M$ whose cumulative length is $jS/M$; if that target is a vertex, use that vertex, and otherwise use linear interpolation on its unique containing segment. If any redistributed image lies outside $U$, return `geometry-failure`. Set $R_0^{k+1}=a,R_M^{k+1}=b$ and use the checked redistributed points as the new interior images.
 
 This is the specified projected-force string variant. No convergence from arbitrary initial images, no automatic endpoint minimization, and no error estimate follow from the procedure alone.
+
+
+## Remarks
+
+The planar illustration separates the force update from redistribution. Take $M=4$, $U=\mathbb R^2$, $\eta=1$, $V(x,y)=-y$, and initial images $(0,0),(4/5,0),(3,0),(26/5,0),(6,0)$. Every centered unit chord is $(1,0)$, so the interior projected forces are $(0,1)$; the endpoints stay fixed. In the lower panel, squares mark equal cumulative-length targets on the updated polygon, not equal Euclidean distances between consecutive new images. Here $L=\sqrt{41}/5$, $S=2L+22/5$, and the new interior images are $(19/10-L/2,1)$, $(3,1)$, and $(41/10+L/2,1)$. The picture illustrates an update when the preceding stopping tests permit it; it supplies no convergence or error certificate.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\node at (3,2.05) {Force update};
+\draw[dashed] (0,0)--(0.8,0)--(3,0)--(5.2,0)--(6,0);
+\draw[thick,cyan] (0,0)--(0.8,1)--(3,1)--(5.2,1)--(6,0);
+\draw[->,orange,thick] (0.8,0.12)--(0.8,0.88);
+\draw[->,orange,thick] (3,0.12)--(3,0.88);
+\draw[->,orange,thick] (5.2,0.12)--(5.2,0.88);
+\foreach \x in {0.8,3,5.2} {
+  \fill (\x,0) circle (2pt);
+  \fill[cyan] (\x,1) circle (2pt);
+}
+\node[below] at (0.8,0) {$R_1$};
+\node[below] at (3,0) {$R_2$};
+\node[below] at (5.2,0) {$R_3$};
+\node[above] at (0.8,1) {$Y_1$};
+\node[above] at (3,1) {$Y_2$};
+\node[above] at (5.2,1) {$Y_3$};
+\fill (0,0) circle (2pt);
+\fill (6,0) circle (2pt);
+\node[left] at (0,0) {$a$};
+\node[right] at (6,0) {$b$};
+\node[right] at (3.12,0.48) {$\eta F_2^\perp$};
+\node at (3,-1.25) {Arc-length redistribution};
+\draw[thick,cyan] (0,-3)--(0.8,-2)--(3,-2)--(5.2,-2)--(6,-3);
+\foreach \x in {0.8,3,5.2} {\fill[cyan] (\x,-2) circle (2pt);}
+\foreach \x in {1.259688,3,4.740312} {
+  \draw[orange,thick] (\x-0.065,-2.065) rectangle (\x+0.065,-1.935);
+}
+\fill (0,-3) circle (2pt);
+\fill (6,-3) circle (2pt);
+\node[left] at (0,-3) {$a$};
+\node[right] at (6,-3) {$b$};
+\node[above] at (1.259688,-1.9) {$S/4$};
+\node[above] at (3,-1.9) {$S/2$};
+\node[above] at (4.740312,-1.9) {$3S/4$};
+\node at (3,-3.65) {Squares: new interior images; labels: cumulative length};
+\end{tikzpicture}
+```

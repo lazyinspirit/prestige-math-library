@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-root-sl-two-triple.json
+  precheck: pass
 id: thm-root-sl-two-triple
 kind: theorem
-title: The root sl_2 triple
+title: The root $\mathfrak{sl}_2$ triple
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -16,8 +19,7 @@ sources:
       locator: "Lecture 19, Lemma 19.16(ii)"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -31,7 +33,7 @@ $$[e_\alpha,f_\alpha]=h_\alpha,\qquad [h_\alpha,e_\alpha]=2e_\alpha,\qquad [h_\a
 
 Consequently the span of $e_\alpha,f_\alpha,h_\alpha$ is a copy of
 $\mathfrak{sl}_2$ inside $\mathfrak g$
-([[def-special-linear-lie-algebra-sl-two]]).
+([[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]]).
 
 ## Facts & Assumptions
 
@@ -53,6 +55,6 @@ $\mathfrak{sl}_2$ inside $\mathfrak g$
 
 1.1 Choose $0\ne e\in\mathfrak g_\alpha$, which is possible because $\alpha$ is a root. By [L1] the linear functional $y\mapsto B(e,y)$ on the nonzero space $\mathfrak g_{-\alpha}$ is not identically zero, hence surjective onto $\mathbb C$; choose $f\in\mathfrak g_{-\alpha}$ with $B(e,f)=2/\alpha(H_\alpha)$, a nonzero number by [L3]. [A1, L1, L3, algebra]
 
-2.1 For every $H\in\mathfrak h$, invariance and the root-space identity give $B([e,f],H)=B(e,[f,H])=\alpha(H)B(e,f)=B(B(e,f)H_\alpha,H)$. Both $[e,f]$ and $H_\alpha$ lie in $\mathfrak h$ by [L2], so nondegeneracy of $B|_{\mathfrak h}$ yields $[e,f]=B(e,f)H_\alpha=\frac{2}{\alpha(H_\alpha)}H_\alpha=h_\alpha$. By [L4] and [L3], $[h_\alpha,e]=\alpha(h_\alpha)e=2e$ and $[h_\alpha,f]=-2f$. Thus all three bracket relations of [[def-special-linear-lie-algebra-sl-two]] hold for $(e,f,h_\alpha)$. [L2, L3, L4, step 1.1, algebra]
+2.1 For every $H\in\mathfrak h$, invariance and the root-space identity give $B([e,f],H)=B(e,[f,H])=\alpha(H)B(e,f)=B(B(e,f)H_\alpha,H)$. Both $[e,f]$ and $H_\alpha$ lie in $\mathfrak h$ by [L2], so nondegeneracy of $B|_{\mathfrak h}$ yields $[e,f]=B(e,f)H_\alpha=\frac{2}{\alpha(H_\alpha)}H_\alpha=h_\alpha$. By [L4] and [L3], $[h_\alpha,e]=\alpha(h_\alpha)e=2e$ and $[h_\alpha,f]=-2f$. Thus all three bracket relations of [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]] hold for $(e,f,h_\alpha)$. [L2, L3, L4, step 1.1, algebra]
 
-3.1 Since $0\ne e\in\mathfrak g_\alpha$ and $0\ne f\in\mathfrak g_{-\alpha}$ lie in distinct root spaces while $h_\alpha\in\mathfrak h$, the three elements are linearly independent, so their span is three-dimensional and by step 2.1 is closed under the bracket with the relations of $\mathfrak{sl}_2$; by [[def-special-linear-lie-algebra-sl-two]] it is a copy of $\mathfrak{sl}_2$. Setting $e_\alpha=e$ and $f_\alpha=f$ proves the statement. [step 1.1, step 2.1, algebra] ∎
+3.1 Since $0\ne e\in\mathfrak g_\alpha$ and $0\ne f\in\mathfrak g_{-\alpha}$ lie in distinct root spaces while $h_\alpha\in\mathfrak h$, the three elements are linearly independent, so their span is three-dimensional and by step 2.1 is closed under the bracket with the relations of $\mathfrak{sl}_2$; by [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]] it is a copy of $\mathfrak{sl}_2$. Setting $e_\alpha=e$ and $f_\alpha=f$ proves the statement. [step 1.1, step 2.1, algebra] ∎

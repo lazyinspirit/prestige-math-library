@@ -1,0 +1,122 @@
+{
+  "id": "alg-mgrit-two-level-cycle",
+  "agent": "/root/rendering_repair_coordinator/dnde_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original screenshot and frozen/current definition have no figure. A concrete C/F example materially clarifies which nodes are unknowns, while a five-stage flow makes the residual restriction and practical coarse solve/correction order explicit. These are useful explanatory diagrams under the authorized editorial criterion, without implying convergence or identifying the practical coarse operator with the exact Schur complement.",
+      "action": "Added two fenced TikZ illustrations in a final Remarks section: m=3, N=6 partition and the ordered two-level cycle.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended explanatory Remarks only; original title, frontmatter, full Definition, formulas, hypotheses, stopping conditions and all existing bytes preserved. Added C/F grid and ordered cycle with explicitly distinct exact Schur and practical coarse operators.",
+  "source_lines_after": {
+    "remarks": [
+      55,
+      93
+    ],
+    "partition_figure": [
+      59,
+      74
+    ],
+    "cycle_interface": [
+      76,
+      76
+    ],
+    "cycle_figure": [
+      78,
+      91
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "figure": "C/F grid",
+      "data": "m=3, N=6, N_c=2; fixed initial index 0; C={3,6}; F={1,2,4,5}.",
+      "relations_checked": "Six consecutive fine intervals connect 0 through 6; two dimension arrows span 0 to 3 and 3 to 6. No initial unknown is introduced.",
+      "justification": "def-linear-all-at-once-time-operator Definition defines coarse indices 0,m,...,N and C unknowns {m,2m,...,N}; alg-mgrit-two-level-cycle Definition assumes m divides N."
+    },
+    {
+      "figure": "cycle",
+      "objects_and_maps": "Fine residual r in (R^d)^N; R maps it to rho in (R^d)^{N_c}; A_c is a square coarse correction matrix; z in (R^d)^{N_c}; P maps z to a fine correction in (R^d)^N.",
+      "relations_checked": "Five boxes and four downward arrows: pre-relaxation -> r=b-A_tu, rho=Rr -> exact solve of practical A_c z=rho with z_0=0 and z_j=rho_j+Psi_j z_{j-1} -> u <- u+Pz -> post-relaxation. These arrows indicate execution order, not a commutative square.",
+      "justification": "Item Definition lines 42-49 supplies P, R, A_c and the recurrence/order. lem-mgrit-exact-coarse-elimination proof 2.1 yields the Schur complement; caption retains RA_tP=A_CC-A_CF A_FF^{-1}A_FC without asserting equality to A_c. The zero initial correction is fixed and excluded from z unknowns."
+    },
+    {
+      "proof_independence": "All original update rules and E=S_post(I-P A_c^{-1} R A_t)S_pre remain verbatim; figures add no assumptions, stability, convergence, or proof premise."
+    }
+  ],
+  "guards": {
+    "before_raw_sha256": "0df3850f0a525e3523debac88227aa9db1b229feaa54705a93ef10bbfb55d207",
+    "current_raw_sha256": "9d08dc038cdb23079018b106a4235ea646263cd5ed4f5e2cb3030b64e5c88a5a",
+    "immediate_pre_edit_guard": "matched queue before_raw_sha256 before first write",
+    "original_bytes_preserved_as_prefix": true,
+    "frontmatter_and_status_unchanged": true
+  },
+  "evidence": {
+    "original_standalone_image": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/alg-mgrit-two-level-cycle--01.png",
+    "original_image_sha256": "9344109652ba73a341edeccaaea03aba9c284f0ecc4ce5a7dd5e92c27ca799b6",
+    "path_discrepancy": "Declared diagram-supplement/screenshots path is absent; found authentic same-category screenshots path and verified its exact recorded SHA256.",
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde-008-verified/manifest.json",
+    "native_preview_source_sha256": "9d08dc038cdb23079018b106a4235ea646263cd5ed4f5e2cb3030b64e5c88a5a",
+    "native_preview_html_sha256": "9cd617954a2f1a01e6eebc0e2f621723670d4a5ba81051e10ba79f03f7efa87a",
+    "native_preview_reference_map_sha256": "b0c241f8dba4a152fbd6d7999bbac4d9ebcc686c3a55d85cfd63e4291b5708be",
+    "viewed_standalone_original_resolution_tiles": [
+      "previews/dnde-008-verified/screenshots/alg-mgrit-two-level-cycle--01.png",
+      "previews/dnde-008-verified/screenshots/alg-mgrit-two-level-cycle--02.png"
+    ],
+    "visual_result": "Both compiled figures visible on dark background; labels, grid segments, five boxes and four downward arrows present without overlap or clipping. No error panel in final preview.",
+    "iteration_note": "An intermediate preview exposed a native TikZ built-in step-key collision. Renamed local style to cyclebox and regenerated final native preview. Initial scoped checker also caught delimiter adjacency; corrected before final checks.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-mgrit-two-level-cycle.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-mgrit-two-level-cycle.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-mgrit-two-level-cycle.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnde-008 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-mgrit-two-level-cycle --out research/math-library-rendering-repairs-2026-10-23/previews/dnde-008-verified",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": []
+}

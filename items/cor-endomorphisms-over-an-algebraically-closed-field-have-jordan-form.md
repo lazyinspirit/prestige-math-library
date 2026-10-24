@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form.json
+  precheck: pass
 id: cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form
 kind: corollary
 title: "Every finite-dimensional endomorphism over an algebraically closed field has Jordan form"
@@ -11,9 +14,6 @@ deps: [thm-jordan-form-exists-iff-the-characteristic-polynomial-splits, def-alge
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -38,7 +38,7 @@ Every endomorphism of a finite-dimensional vector space over an algebraically cl
 
 ## Proof
 
-**Proof technique:** induction on $\deg\chi_T$.
+**Proof technique:** induction on the degree of the characteristic polynomial.
 
 1.1 If $\deg\chi_T=0$, then $\chi_T=1$ and [L3] gives the empty Jordan form. [base, L3]
 

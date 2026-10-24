@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-06-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-06-worked-cases
 kind: example
 title: "Trefoil Seifert matrix and basis changes"
@@ -23,17 +26,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Dale Rolfsen, Knots and Links, Chapter 8.A–8.B"
@@ -84,19 +76,20 @@ The determinant-one basis change $P_0=\begin{pmatrix}1&1\\0&1\end{pmatrix}$ give
 
 The following schematic is the closure of a two-strand braid with three crossings. Gaps mark under-strands and the uninterrupted local arc at each crossing is the over-strand. It identifies the knot picture only; the matrix and determinant calculations above use the cited source matrix and the explicit convention translation in step 1.1.
 
-~~~tikz
-\begin{tikzpicture}[scale=0.85,>=stealth]
+```tikz
+\begin{tikzpicture}[scale=1.4,font=\large]
   \draw[thick] (-1,3)--(-1.35,2.8).. controls (-1.55,2) and (-1.55,1) ..(-1.35,0.2)--(-1,0);
   \draw[thick] (1,3)--(1.35,2.8).. controls (1.55,2) and (1.55,1) ..(1.35,0.2)--(1,0);
-  \draw[thick] (-1,3)--(0,2.5)--(1,2)--(0,1.5)--(-1,1)--(0,0.5)--(1,0);
-  \draw[thick] (1,3)--(0,2.5)--(-1,2)--(0,1.5)--(1,1)--(0,0.5)--(-1,0);
-  \draw[white,line width=4pt] (0.28,2.64)--(-0.28,2.36);
-  \draw[thick] (-0.28,2.64)--(0.28,2.36);
-  \draw[white,line width=4pt] (0.28,1.64)--(-0.28,1.36);
-  \draw[thick] (-0.28,1.64)--(0.28,1.36);
-  \draw[white,line width=4pt] (0.28,0.64)--(-0.28,0.36);
-  \draw[thick] (-0.28,0.64)--(0.28,0.36);
-  \node at (0,3.35) {$\text{two braid strands}$};
-  \node at (0,-0.35) {$\text{three crossings; closure arcs at the sides}$};
+  \draw[thick] (-1,3)--(1,2);
+  \draw[thick] (-1,2)--(-0.16,2.42);
+  \draw[thick] (0.16,2.58)--(1,3);
+  \draw[thick] (-1,2)--(1,1);
+  \draw[thick] (-1,1)--(-0.16,1.42);
+  \draw[thick] (0.16,1.58)--(1,2);
+  \draw[thick] (-1,1)--(1,0);
+  \draw[thick] (-1,0)--(-0.16,0.42);
+  \draw[thick] (0.16,0.58)--(1,1);
+  \node at (0,3.35) {two braid strands};
+  \node at (0,-0.35) {three crossings; closure arcs at the sides};
 \end{tikzpicture}
-~~~
+```

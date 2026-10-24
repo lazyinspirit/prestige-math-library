@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fixed-component-core-multipartitions-are-cyclotomic-jantzen-connected.json
+  precheck: pass
 id: lem-fixed-component-core-multipartitions-are-cyclotomic-jantzen-connected
 kind: lemma
 title: "Multipartitions with fixed component cores are cyclotomic Jantzen-connected"
@@ -21,8 +24,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Lyle–Mathas, Blocks of cyclotomic Hecke algebras, math/0607451v4"
@@ -96,3 +97,58 @@ $e$-core data and the level-one Hecke theorem, using the exact level-one to
 finite-Hecke identification and the explicit hook transfer between
 components. No choice principle is used: all chains and hook moves are
 finite and explicitly constructed.
+
+
+For a concrete instance of step 1.2, take $e=3$, two components in the
+order $a=1<b=2$, and charges $(c_1,c_2)=(0,1)$. The transfer is
+$\lambda=((3),\varnothing)\longmapsto\mu=(\varnothing,(2,1))$.
+The diagram shows the selected charged runner (positions congruent to $2$
+modulo $3$) **before** the moves; filled circles are beads and empty circles
+are gaps. Each arrow moves one bead into the indicated gap.
+
+```tikz
+\begin{tikzpicture}[x=1.55cm,y=1cm]
+\node[anchor=east] at (-0.6,0) {$B_1:\ (3)$};
+\node[anchor=east] at (-0.6,-2) {$B_2:\ \emptyset$};
+\draw (-0.3,0)--(3.3,0);
+\draw (-0.3,-2)--(3.3,-2);
+\node at (-0.5,0) {$\cdots$};
+\node at (3.5,0) {$\cdots$};
+\node at (-0.5,-2) {$\cdots$};
+\node at (3.5,-2) {$\cdots$};
+\fill (0,0) circle (2.5pt);
+\draw[fill=white] (1,0) circle (2.5pt);
+\fill (2,0) circle (2.5pt);
+\draw[fill=white] (3,0) circle (2.5pt);
+\fill (0,-2) circle (2.5pt);
+\fill (1,-2) circle (2.5pt);
+\draw[fill=white] (2,-2) circle (2.5pt);
+\draw[fill=white] (3,-2) circle (2.5pt);
+\node[below] at (0,0) {$-4$};
+\node[below] at (1,0) {$-1$};
+\node[below] at (2,0) {$2$};
+\node[below] at (3,0) {$5$};
+\node[below] at (0,-2) {$-4$};
+\node[below] at (1,-2) {$-1$};
+\node[below] at (2,-2) {$2$};
+\node[below] at (3,-2) {$5$};
+\draw[->,thick] (2,0.12) to[bend right=45] node[above] {$-3$} (1,0.12);
+\draw[->,thick] (1,-1.88) to[bend left=45] node[above] {$+3$} (2,-1.88);
+\node[anchor=west] at (3.9,0) {$u=2,\quad u-e+1=0$};
+\node[anchor=west] at (3.9,-2) {$v=-1,\quad v+1=0$};
+\end{tikzpicture}
+```
+
+Indeed $B_1=\{2,-2,-3,-4,\ldots\}$ and
+$B_2=\{0,-1,-2,-3,\ldots\}$ initially. After the moves they are
+$\{-1,-2,-3,\ldots\}$ and $\{2,0,-2,-3,\ldots\}$, giving exactly the
+stated partitions. The second component's uncharged runner is
+$f-c_2-1\equiv1\pmod3$, although its charged runner is $2$.
+The removed hook has foot $(1,1,1)$ and the added hook has foot $(2,1,2)$;
+their charged contents are $0$ and $1+1-2=0$. Both component cores are empty
+and the total rank is $3$ on both sides. Since the earlier component loses
+boxes, $\lambda$ strictly dominates $\mu$. Their common remainder is empty;
+the unique hook pair has leg lengths $0$ and $1$, so [F2] gives
+$J_{\lambda\mu}=-\nu_\pi(t^3-t^5)\ne0$ with the rank-three deformation.
+This illustrates a Jantzen edge from step 1.2; the rigorous proof above is
+independent of the figure.

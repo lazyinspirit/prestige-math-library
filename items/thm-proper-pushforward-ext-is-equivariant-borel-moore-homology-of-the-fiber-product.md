@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-proper-pushforward-ext-is-equivariant-borel-moore-homology-of-the-fiber-product.json
+  precheck: pass
 id: thm-proper-pushforward-ext-is-equivariant-borel-moore-homology-of-the-fiber-product
 kind: theorem
 title: "Proper-pushforward Ext is equivariant Borel–Moore homology of the fiber product"
@@ -16,12 +19,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -74,3 +71,24 @@ semismallness, decomposition theorem, purity, or smoothness of $E$ or $Z_{ij}$ i
 2.1 Orientation and the degree. The smooth orientation of [F1] on the smooth pure $d_j$-dimensional source $X_j$ says $k_{X_j}=\omega_{X_j}[-2d_j]$, and dualizing transitivity for $q$ gives $q^!k_{X_j}=q^!\omega_{X_j}[-2d_j]=\omega_{Z_{ij}}[-2d_j]$. Substituting $t=r+d_j-d_i$, the group of step 1.1 is $\operatorname{Hom}(k_Z,\omega_Z[r-d_i-d_j])$, which is exactly $H_{d_i+d_j-r}^{\mathrm{BM},G}(Z_{ij};k)$ in the normalization of [F3]. At a finite free smooth approximation of dimension offset $b=\dim_{\mathbb C}U-\dim_{\mathbb C}G$, the space $X_j\times_GU$ is smooth of complex dimension $d_j+b$ while the descended complex retains the shift $d_j$, so the identical calculation gives ordinary Borel–Moore degree $d_i+d_j+2b-r$; removing $2b$ gives the stated equivariant degree, and no stack-dimension shift is inserted into $\omega_X^G$. [F1, F3, step 1.1]
 
 3.1 Naturality, linearity and finiteness. Every map in the chain of steps 1.1 and 2.1 is an adjunction, base-change or orientation map supplied naturally by [F1], so the composite is natural in constructible coefficient morphisms before the smooth orientation is applied and is compatible with composition of the $f_i$. By [F2] these maps commute with the approximation transition pullbacks on the bounded ranges, so the composite induces an isomorphism in each stable degree; coherent scalar pullback from the base point together with the projection formula of [F1] gives equivariant-cohomology linearity. Degreewise finiteness is exactly the conclusion of [F4] for bounded algebraically constructible objects, and it is asserted nowhere that the direct sum over all degrees is finite-dimensional. Smoothness of the sources is used only for the orientation in step 2.1, and properness only in the base change and in the identification $f_{i!}=f_{i*}$; no semismallness, decomposition theorem, purity or smoothness of $E$ or of the fiber products $Z_{ij}$ is used. [A1, F1, F2, F3, F4, step 1.1, step 2.1] ∎
+
+
+## Remarks
+
+The Cartesian square underlying step 1.1 is displayed with $f_i$ on the
+right and $f_j$ below, as in that step. Its projections are
+$p(x_i,x_j)=x_i$ and $q(x_i,x_j)=x_j$.
+
+```tikzcd
+[font=\LARGE, every label/.append style={font=\Large}, column sep=large, row sep=large]
+Z_{ij}=X_i\times_E X_j \arrow[r, "p"] \arrow[d, "q"'] & X_i \arrow[d, "f_i"] \\
+X_j \arrow[r, "f_j"'] & E
+```
+
+The defining condition $f_i(x_i)=f_j(x_j)$ gives
+$f_i\circ p=f_j\circ q$. Here $p$ is the base change of $f_j$, while $q$
+is the base change of $f_i$; both projections are proper. In this orientation,
+the extraordinary proper base-change comparison of [F1] is
+$f_i^!f_{j!}\cong p_*q^!$, with both sides taking complexes on $X_j$ to
+complexes on $X_i$. This square illustrates the adjunction chain; the proof
+and its degree calculation remain independent of the figure.

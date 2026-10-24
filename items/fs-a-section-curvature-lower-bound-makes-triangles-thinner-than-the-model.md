@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.json
+  precheck: pass
 id: fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model
 kind: false-statement
 title: A section curvature lower bound makes triangles thinner than the model
@@ -20,9 +23,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -70,7 +70,7 @@ curvature lower bound makes fixed-side triangles fatter, not thinner.
 
 ## Refutation
 
-**Proof technique:** direct: exhibit the octant triangle with vertices $e_1,e_2,e_3$ on the unit round sphere at $k=0$, compute its actual angles as $\pi/2$ from orthonormality of the basis, compute the Euclidean comparison angles from the model cosine law and the $k=0$ angle sum $\pi$, and observe that $\pi/2>\pi/3$.
+**Proof technique:** direct: exhibit the octant triangle whose vertices are the three standard basis vectors on the unit round sphere at curvature bound zero, compute its actual angles as half pi from orthonormality of the basis, compute the Euclidean comparison angles from the model cosine law and the zero-curvature angle sum pi, and observe that half pi exceeds one third pi.
 
 1.1 The witness satisfies the hypothesis at $k=0$. [F1] By [F1] the unit round sphere is a complete, connected, boundaryless Riemannian surface and $K=1\ge0=k$. [F1]
 

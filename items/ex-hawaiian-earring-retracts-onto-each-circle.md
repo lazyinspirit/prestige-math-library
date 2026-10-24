@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hawaiian-earring-retracts-onto-each-circle.json
+  precheck: pass
 id: ex-hawaiian-earring-retracts-onto-each-circle
 kind: example
 title: "The Hawaiian earring retracts onto each of its circles"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: constructive
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
-    verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
 sources:
   scraped: []
   references:
@@ -58,3 +54,31 @@ For every $n\ge1$, the Hawaiian earring admits a retraction onto its circle $C_n
 3.1 Let $V\subseteq C_n$ be open and let $x\in r_n^{-1}[V]$. If $x\ne0$ and $x\in C_m$, step 2.1 gives a relative open neighbourhood $N$ of $x$ meeting only $C_m$. When $m=n$, write $V=O\cap C_n$ by [F3] and replace $N$ by $N\cap O$; the identity clause of $r_n$ then maps it into $V$. When $m\ne n$, one has $r_n(x)=0\in V$ and the constant clause maps all of $N$ into $V$. If $x=0$, then $0\in V$; write $V=O\cap C_n$ and choose an ambient open neighbourhood $W$ of $0$ with $W\subseteq O$. Every point of $W\cap C_n$ is fixed and every point of $W\cap C_m$ for $m\ne n$ maps to $0$, so $W\cap\mathbb H\subseteq r_n^{-1}[V]$. Thus every point of $r_n^{-1}[V]$ has a relative open neighbourhood inside it, making that preimage open. The criterion [L1] now shows that $r_n$ is continuous. [step 1.1, step 2.1, F3, L1]
 
 4.1 The continuous map $r_n$ restricts to the identity on $C_n$, so it is a retraction of $\mathbb H$ onto $C_n$. [step 3.1, F2, discharge-construct] ∎
+
+## Remarks
+
+The illustration shows $r_2$ as a representative case. The highlighted circle $C_2$ is fixed pointwise; every other circle is sent to the common origin. Only $C_1,\ldots,C_6$ are drawn; the omitted circles shrink towards $0$. The target is drawn separately for clarity, with the same scale. The verification above is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1.3cm]
+\draw (1,0) circle (1);
+\draw (0.3333,0) circle (0.3333);
+\draw (0.25,0) circle (0.25);
+\draw (0.2,0) circle (0.2);
+\draw (0.1667,0) circle (0.1667);
+\draw[cyan,very thick] (0.5,0) circle (0.5);
+\fill (0,0) circle (0.025);
+\node[left] at (0,0) {$0$};
+\node at (1,1.25) {$\mathbb H$};
+\node[right] at (1.85,0.55) {$C_1$};
+\node[cyan,above] at (0.5,0.5) {$C_2$};
+\draw[->,thick] (2.6,0) -- (4.1,0);
+\node[above] at (3.35,0) {$r_2$};
+\draw[cyan,very thick] (5,0) circle (0.5);
+\fill (4.5,0) circle (0.025);
+\node[left] at (4.5,0) {$0$};
+\node at (5,1.25) {$C_2$};
+\node at (2.75,-1.45) {$r_2|_{C_2}=\mathrm{id}_{C_2}$};
+\node at (2.75,-1.9) {$r_2(C_m)=\{0\}\quad(m\ne2)$};
+\end{tikzpicture}
+```

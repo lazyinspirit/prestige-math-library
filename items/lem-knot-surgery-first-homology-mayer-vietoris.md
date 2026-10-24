@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-knot-surgery-first-homology-mayer-vietoris.json
+  precheck: pass
 id: lem-knot-surgery-first-homology-mayer-vietoris
 kind: lemma
 title: "First homology of knot fillings"
@@ -19,17 +22,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds, 2nd revised edition, Lecture 2 §2.2"
@@ -90,3 +82,24 @@ $$H_1(E_K(p/q);\mathbb Z)\cong\begin{cases}\mathbb Z/|p|\mathbb Z,&p\ne0,\\[2pt]
 2.1 By [F3], $H_1(T_K;\mathbb Z)\cong\mathbb Z^2$, and by [F4] and [F2] the solid torus $N(K)\simeq S^1$ has $H_1(N(K);\mathbb Z)\cong\mathbb Z$. Since $H_1(E_K;\mathbb Z)\oplus\mathbb Z\cong\mathbb Z^2$, the direct summand $H_1(E_K;\mathbb Z)$ is free of rank one. Under the isomorphism in step 1.1, $\mu$ maps to $([\mu],0)$ because it bounds a disk in $N(K)$. The longitude maps to $(0,\pm1)$: [A1] gives its zero exterior image, and degree $+1$ on the core gives a generator of $H_1(N(K);\mathbb Z)$ under the deformation-retraction identification. Since the map is an isomorphism, $[\mu]$ generates $H_1(E_K;\mathbb Z)$. [step 1.1, A1, F2, F3, F4, algebra]
 
 3.1 Thus $H_1(M;\mathbb Z)$ has generators $[\mu],v$ and relations $p[\mu]=0$ and $r[\mu]\pm v=0$. Eliminating $v$ leaves $\mathbb Z\langle[\mu]\rangle/\langle p[\mu]\rangle$. If $p\ne0$, this is $\mathbb Z/|p|\mathbb Z$; if $p=0$, coprimality gives $q=\pm1$ and the group is $\mathbb Z$. [step 2.1, step 1.2, algebra] ∎
+
+
+## Remarks
+
+The diagram records the presentation in steps 1.2 and 3.1. Write $V$ for the attached solid torus and $i:T_K\hookrightarrow E_K$, $j:T_K\hookrightarrow V$ for the inclusions. Choose $\alpha=p\mu+q\lambda$ and $\beta=r\mu+s\lambda$ with $ps-qr=1$, and choose the generator $v=-j_*[\beta]$ of $H_1(V;\mathbb Z)$. Thus the Mayer–Vietoris map $f=(i_*,-j_*)$ has columns $(p,0)$ and $(r,1)$ in the displayed bases. All homology groups have integer coefficients.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \node (T) at (0,0) {$H_1(T_K)$};
+  \node (P) at (4.3,0) {$\mathbb Z\langle[\mu]\rangle\oplus\mathbb Z\langle v\rangle$};
+  \node (M) at (8.4,0) {$H_1(E_K(p/q))$};
+  \node (Z) at (11,0) {$0$};
+  \draw[->] (T) -- node[above] {$f$} (P);
+  \draw[->] (P) -- node[above] {quotient} (M);
+  \draw[->] (M) -- (Z);
+  \node[below] at (0,-0.45) {basis $([\alpha],[\beta])$};
+  \node[below] at (4.3,-0.45) {$f:\ (a,b)\longmapsto(pa+rb,b)$};
+\end{tikzpicture}
+```
+
+This sequence is exact: the injective $H_0$ map in step 1.2 makes the quotient map onto. The second column eliminates $v$, and the first leaves precisely the relation $p[\mu]=0$. The rigorous proof above is independent of the diagram.

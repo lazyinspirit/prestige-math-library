@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-ip-tangent-orientation-double-cover.json
+  precheck: n/a
 id: def-ip-tangent-orientation-double-cover
 kind: definition
 title: "Tangent orientation double cover of a surface with boundary"
@@ -19,18 +22,7 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, Chapter 3, §3.3"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
       locator: "Printed pp. 234–235 (PDF pp. 50–51), local orientations and the two-sheeted orientation cover; the present definition uses the tangent determinant-line model and allows boundary charts."
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
+
 ---
 
 ## Definition
@@ -50,3 +42,16 @@ For a boundary chart $\phi:U\to V\subseteq\mathbb H^2$, let $o_\phi(x)$ be the r
 [[def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary|Definition of smooth charts and atlases with boundary]]
 
 [[thm-tangent-and-cotangent-bundles-extend-over-a-manifold-boundary|Theorem on smooth tangent bundles at the boundary]]
+
+## Remarks
+
+For a fixed boundary chart on $U$, write $U_\pm=\{(x,\pm o_\phi(x)):x\in U\}$. The chartwise picture below shows the two sheets over the same base neighbourhood; each sloping map is a diffeomorphism onto $U$.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large]
+U_+ \arrow[rr, "\tau|_{U_+}"] \arrow[dr, "\pi|_{U_+}"'] & & U_- \arrow[dl, "\pi|_{U_-}"] \\
+& U &
+\end{tikzcd}
+```
+
+The triangle commutes because $\pi(\tau(x,o_\phi(x)))=x=\pi(x,o_\phi(x))$. The inverse of the horizontal map is $\tau|_{U_-}$: reversing the orientation ray twice gives $\tau^2=\mathrm{id}_{\widetilde M}$. The illustration uses only this local chart; the definition above specifies how the sheets are glued on overlaps.

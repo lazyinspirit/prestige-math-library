@@ -1,0 +1,96 @@
+{
+  "id": "lem-integral-seifert-form-is-realized-by-a-knot",
+  "agent": "/root/rendering_repair_coordinator/knot_024",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other:unsupported-tilde-tikz-fence",
+      "verdict": "confirmed",
+      "reason": "Both original-resolution flagged PNGs show literal TikZ commands. The local renderer recognizes the backtick tikz fence; the tilde fence was left as prose. Fresh canonical SSR preview of the same drawing produces one SVG and no raw commands.",
+      "action": "Replaced the opening and closing tilde fences by backtick fences; preserved every TikZ command.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only lines 88 and 101: use supported backtick TikZ fences outside Facts and Proof. No drawing-coordinate or mathematical prose changes.",
+  "source_lines_after": [
+    88,
+    101
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and orientation",
+      "evidence": "The blue a_i^+ is the positive push-off and red a_j is the other oriented core, matching local Fact F3 and proof step 4.1. Blue arrows run toward increasing x; red runs from (-1.2,-1) upward through the left underpass, along the top arch, then downward to (1.2,-1)."
+    },
+    {
+      "check": "Exactly two mixed crossings and over/under data",
+      "evidence": "Red has y<0 on the left incoming segment, y>0 throughout the arch interior (its Bezier endpoints/control heights are positive until the right endpoint), and y<0 on the outgoing segment. Its omitted underpass connects (-0.72,-0.16) to (-0.68,0.16), crossing y=0 near x=-0.7 under uninterrupted blue. At x=0.7 red is uninterrupted and blue is omitted between x=0.48 and 0.92. Thus blue is over left and red over right; the fresh rendered SVG visibly confirms both gaps."
+    },
+    {
+      "check": "Actual determinant signs",
+      "evidence": "The local supplier def-oriented-crossing-sign-writhe-and-blackboard-framing defines sign as det_P(v_over,v_under) in the positively oriented chart. Take x right and y up. At left blue tangent is (1,0), while red passes from negative to positive y (the omitted underpass displacement is (0.04,0.32)); determinant is positive. At right the incoming red cubic tangent is 3*((0.7,0)-(0.25,0.9))=(1.35,-2.7), and its outgoing quadratic tangent is 2*((0.92,-0.4)-(0.7,0))=(0.44,-0.8). With blue under tangent (1,0), determinants are 2.7 and 0.8, both positive. This checks tangent directions rather than relying on plus labels/colors."
+    },
+    {
+      "check": "Linking relation and proof interface",
+      "evidence": "Fact F2 (thm-linking-number-equals-signed-intersection) and step 1.2 supply the mixed-crossing half-sum formula with its surface/transversality/projection hypotheses. The two positive local crossings contribute (1+1)/2=1, as the illustration states and step 4.1 uses. Fact F1 supplies unchanged skew part and step 4.1 consequently changes the symmetric entry equally. The rigorous finite band construction and basis-change proof remain byte-identical and independent of the illustration."
+    }
+  ],
+  "before_raw_sha256": "a3ebba352435581224b3c710ae67cfa123036f5b3987d62dab789aa32131efa4",
+  "after_raw_sha256": "22c4094a2d667ea3ca30bd31323ad4603d5f4ad348870d7af88c02de5f7f7738",
+  "preservation_checks": {
+    "frontmatter_byte_identical": true,
+    "status": "published",
+    "tikz_commands_byte_identical": true,
+    "all_other_body_bytes_identical": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-integral-seifert-form-is-realized-by-a-knot.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-integral-seifert-form-is-realized-by-a-knot.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-integral-seifert-form-is-realized-by-a-knot.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/.tmp TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-integral-seifert-form-is-realized-by-a-knot --out research/math-library-rendering-repairs-2026-10-23/previews/knot-024-fresh-20261024",
+      "exit_code": 0,
+      "output": "1 item, 2 tiles; native local async TikZ SSR emitted one SVG, no tikz-error or tikz-fallback markers; inspected fresh tile 02 standalone at original resolution."
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/lem-integral-seifert-form-is-realized-by-a-knot--02.png",
+      "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/lem-integral-seifert-form-is-realized-by-a-knot--03.png"
+    ],
+    "fresh_tile_viewed": "research/math-library-rendering-repairs-2026-10-23/previews/knot-024-fresh-20261024/screenshots/lem-integral-seifert-form-is-realized-by-a-knot--02.png",
+    "result": "Clasp, labels, arrows, and plus signs render legibly without clipping or overlap; correct crossing gaps visible."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Focused rendering and local crossing-mathematics check, not a fresh whole-proof audit. Preview reference-map diagnostics concern 32 unrelated unreadable/malformed carriers; exact preview manifest retains them."
+  ]
+}

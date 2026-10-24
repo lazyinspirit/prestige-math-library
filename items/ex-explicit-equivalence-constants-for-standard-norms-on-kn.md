@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-explicit-equivalence-constants-for-standard-norms-on-kn.json
+  precheck: pass
 id: ex-explicit-equivalence-constants-for-standard-norms-on-kn
 kind: example
-title: "Explicit comparison constants for the standard norms on K^n"
+title: 'Explicit comparison constants for the standard norms on $K^n$'
 status: published
 origin: session
 provenance:
@@ -13,9 +16,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:

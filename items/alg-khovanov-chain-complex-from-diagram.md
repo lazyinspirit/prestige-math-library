@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-khovanov-chain-complex-from-diagram.json
+  precheck: n/a
 id: alg-khovanov-chain-complex-from-diagram
 kind: algorithm
 title: "Khovanov chain complex from a diagram"
@@ -14,17 +17,6 @@ justified_by:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§3.3–4.2"
@@ -61,3 +53,39 @@ sources:
 [Kauffman, *An Introduction to Khovanov Homology* (2022), §4](https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf)
 
 [Zhang, *Notes on Khovanov homology* (2025), §§3.5–3.7](https://arxiv.org/pdf/2501.03115v1)
+
+## Remarks
+
+The local windows below use the source chart: the southwest-to-northeast strand passes over the other strand, the A-smoothing pairs the left endpoints and the right endpoints, and the B-smoothing pairs the top endpoints and the bottom endpoints. Along a cube edge only the smoothing at $c_j$ changes; all other state coordinates stay fixed.
+
+```tikz
+\begin{tikzpicture}[scale=0.85, line cap=round, line join=round]
+  \begin{scope}[xshift=-3.8cm]
+    \draw[thick] (-1,1)--(-0.14,0.14);
+    \draw[thick] (0.14,-0.14)--(1,-1);
+    \draw[very thick] (-1,-1)--(1,1);
+    \node at (0,-1.5) {crossing $c_j$};
+  \end{scope}
+  \begin{scope}
+    \draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);
+    \draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);
+    \node[align=center] at (0,-1.65) {$A$-smoothing\\state $v$, $v(c_j)=0$};
+  \end{scope}
+  \draw[->,thick] (1.4,0)--node[above] {$0\to1$} (2.4,0);
+  \begin{scope}[xshift=3.8cm]
+    \draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);
+    \draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);
+    \node[align=center] at (0,-1.65) {$B$-smoothing\\state $v+e_j$};
+  \end{scope}
+  \node at (-3,-3.2) {merge:};
+  \node (ms) at (-0.8,-3.2) {$\mathcal A\otimes\mathcal A$};
+  \node (mt) at (3,-3.2) {$\mathcal A$};
+  \draw[->] (ms)--node[above] {$m$} (mt);
+  \node at (-3,-4.3) {split:};
+  \node (ds) at (-0.8,-4.3) {$\mathcal A$};
+  \node (dt) at (3,-4.3) {$\mathcal A\otimes\mathcal A$};
+  \draw[->] (ds)--node[above] {$\Delta$} (dt);
+\end{tikzpicture}
+```
+
+Here $\mathcal A=\mathbb Z[X]/(X^2)$. The outside connections determine whether this A-to-B change merges two circles or splits one circle; the bottom rows display these two alternatives, not successive maps. The full edge map is the indicated map tensored with the identity on unaffected circle factors and multiplied by $(-1)^{\sum_{i<j}v(c_i)}$, as in instruction 3. The illustration does not establish $d^2=0$; that remains the separate square-zero lemma specified by `justified_by`.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-schwarz-lantern-polyhedral-areas-diverge.json
+  precheck: pass
 id: cex-schwarz-lantern-polyhedral-areas-diverge
 kind: counterexample
 title: 'Schwarz lanterns can have mesh tending to zero while their polyhedral areas diverge'
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
-    verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
 sources:
   scraped: []
   references:
@@ -54,3 +50,44 @@ Inscribed triangulated surfaces with mesh tending to zero need not have areas te
 3.1 Also $n\sin(\pi/n)\to\pi$ by [L2]. Substitution in step 1.1 and step 2.1 shows $A_{n^3,n}\to+\infty$. [step 1.1, step 2.1, L2, L3, algebra]
 
 4.1 Thus these inscribed lanterns have mesh tending to zero while their areas diverge, proving the stated counterexample. [step 1.2, step 3.1] ∎
+
+## Remarks
+
+Write $\alpha=\pi/n$ and $h=H/m$. The left panel records the angular positions in part of one band: lower-ring vertices have angles $2k\alpha$ and upper-ring vertices have angles $(2k+1)\alpha$. Its straight edges indicate adjacency only; this angular strip is not an isometric unfolding of the flat faces. Continuing periodically gives $2n$ triangles per band.
+
+For a face with lower vertices at angles $-\alpha,\alpha$ and upper apex at angle $0$, the base has length $2r\sin\alpha$. Its midpoint $M$ has radius $r\cos\alpha$. In the radial-vertical plane through the apex $C$, let $Q$ be the point on the cylinder directly below $C$. The right panel shows the face altitude $\ell$ and its components $s=r(1-\cos\alpha)$ and $h$. Thus $\ell=\sqrt{h^2+s^2}$, consistent with the area formula in step 1.1. The proof and limits above do not depend on this illustration; the panels are schematic and use different scales.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=0.85cm]
+\draw[opacity=0] (-1.5,-2.1) rectangle (13,4.2);
+\node at (3,3.7) {Angular positions in one band};
+\draw (0,0) -- (6,0);
+\draw (1,2) -- (5,2);
+\draw (0,0) -- (1,2) -- (2,0) -- (3,2) -- (4,0) -- (5,2) -- (6,0);
+\foreach \x in {0,2,4,6} { \fill (\x,0) circle (2pt); }
+\foreach \x in {1,3,5} { \fill (\x,2) circle (2pt); }
+\node[below] at (0,-0.12) {$0$};
+\node[below] at (2,-0.12) {$2\alpha$};
+\node[below] at (4,-0.12) {$4\alpha$};
+\node[below] at (6,-0.12) {$6\alpha$};
+\node[above] at (1,2.12) {$\alpha$};
+\node[above] at (3,2.12) {$3\alpha$};
+\node[above] at (5,2.12) {$5\alpha$};
+\node[left] at (-0.1,0) {$z=0$};
+\node[left] at (-0.1,2) {$z=h$};
+\node at (3,-0.85) {Angles $\theta$; periodic continuation};
+\node at (10.2,3.7) {Face altitude in a radial plane};
+\draw (8.2,0) -- (11.4,0) -- (11.4,2.6) -- (8.2,0);
+\draw (11.1,0) -- (11.1,0.3) -- (11.4,0.3);
+\fill (8.2,0) circle (2pt);
+\fill (11.4,0) circle (2pt);
+\fill (11.4,2.6) circle (2pt);
+\node[left] at (8.2,0) {$M$};
+\node[right] at (11.4,0) {$Q$};
+\node[above] at (11.4,2.6) {$C$};
+\node[below] at (9.8,-0.12) {$s=r(1-\cos\alpha)$};
+\node[right] at (11.55,1.3) {$h$};
+\node[above left] at (9.8,1.3) {$\ell$};
+\node at (10.2,-1.35) {$\ell^2=h^2+s^2$};
+\end{tikzpicture}
+```

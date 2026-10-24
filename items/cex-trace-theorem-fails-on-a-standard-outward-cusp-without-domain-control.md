@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-trace-theorem-fails-on-a-standard-outward-cusp-without-domain-control.json
+  precheck: pass
 id: cex-trace-theorem-fails-on-a-standard-outward-cusp-without-domain-control
 kind: counterexample
 title: "The trace estimate fails on an outward cusp above the critical sharpness"
@@ -12,22 +15,6 @@ provenance:
 generation:
   role: counterexample
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-4.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-4.result.json
-      - research/frontier-38-owner-30-step5-hash-4-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-4-5a-decisions.json
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Carlos Zuppa, A compact trace theorem for domains with external cusps, Revista de la Union Matematica Argentina 50 (2009), no. 1"
@@ -88,3 +75,29 @@ this witness refutes the unweighted estimate and asserts no weighted replacement
 ## Source notes
 
 Zuppa's Section 1 (Definition 1, Condition A1, Theorems 2 and 4) supplies external-cusp models, weighted estimates and a sufficient below-threshold condition for compact trace; the failure above the exponent used here is proved by the displayed concentrating family; Gagliardo's Teorema [1.I] (printed pp. 288-290) states the trace equivalence under uniformly Lipschitz local coordinate systems, the hypothesis that degenerates at the cusp; Hajlasz and Martio (printed pp. 224-229) record that traces on non-Lipschitz sets need structure beyond the Euclidean boundary measure. The concentrating family and its exponents are computed above and are the reason the failure is attributed to the geometry rather than to the measure.
+
+## Remarks
+
+The schematic uses $\alpha=2$ and $\delta=1/3$ to illustrate the geometry (so it is an admissible example when $1\le p<2$). The outline is $\partial\Omega_2$, not part of the open domain. The emphasized lower portions of both cusp arcs carry $u_\delta=1$ for $0<y\le\delta$; the function vanishes for $y\ge2\delta$. No particular profile is asserted in the intervening strip. Steps 1.1 and 1.2 compute the interior and boundary masses independently of the picture.
+
+```tikz
+\begin{tikzpicture}[x=3cm,y=4cm]
+\draw[thick] (0,0) .. controls (0,0.333333) and (0.333333,0.666667) .. (1,1);
+\draw[thick] (0,0) .. controls (0,0.333333) and (-0.333333,0.666667) .. (-1,1);
+\draw[thick] (-1,1) -- (1,1);
+\draw[orange,very thick] (0,0) .. controls (0,0.111111) and (0.037037,0.222222) .. (0.111111,0.333333);
+\draw[orange,very thick] (0,0) .. controls (0,0.111111) and (-0.037037,0.222222) .. (-0.111111,0.333333);
+\draw[cyan,dashed] (-0.4,0.333333) -- (0.4,0.333333);
+\draw[cyan,dashed] (-0.65,0.666667) -- (0.65,0.666667);
+\node[left] at (-0.4,0.333333) {$y=\delta$};
+\node[left] at (-0.65,0.666667) {$y=2\delta$};
+\node[above] at (0,1) {$y=1$};
+\node at (0,0.83) {$u_\delta=0$};
+\node[right] at (0.45,0.5) {$\delta<y<2\delta$};
+\draw[orange] (-0.03,0.17) -- (-0.55,0.17);
+\node[left] at (-0.55,0.17) {$u_\delta=1$};
+\node[below] at (0,0) {$(0,0)$};
+\node[right] at (1,0.91) {$x=y^2$};
+\node[left] at (-1,0.91) {$x=-y^2$};
+\end{tikzpicture}
+```

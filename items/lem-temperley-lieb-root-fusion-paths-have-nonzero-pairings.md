@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings.json
+  precheck: pass
 id: lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings
 kind: lemma
 title: "Root fusion paths have nonzero pairings"
@@ -32,12 +35,7 @@ sources:
     - title: "K. Iohara, G. I. Lehrer, and R. B. Zhang, The Jones Quotients of the Temperley-Lieb Algebras"
       url: "https://arxiv.org/pdf/1702.08128"
       locator: "§§2.2–3.3, printed pp. 3–8: retained path labels and quotient blocks."
-verification:
-  precheck: escalated
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -81,3 +79,48 @@ Their pairing is nondegenerate. The endpoint $p_{k+1}$ is deleted before normali
 3.1 Start with the single rank-zero path and tensor its identity decomposition by $1$. Inductively split each endpoint summand $p_a\otimes1$ by steps 1.2 and 2.1 and compose its up/down maps with the preceding path maps. Cross-composites of the new up/down terms vanish by turnback annihilation; the equal down composite is $\lambda_a^{-1}\beta_a\alpha_a=p_{a-1}$ and the up composite is $p_{a+1}$. Different preceding paths have zero composite by induction. Their new projections sum to the old projection tensored with $1$, because the split is complete; at the boundary only the down term remains. This proves simultaneously $r_ai_b=0$ for distinct paths, $r_ai_a=p_{a_n}$ and $\sum_a i_ar_a=1_n$ for every rank. [F1, F2, step 1.2, step 2.1, induction, construct, algebra]
 
 4.1 For paths with equal endpoint put $E_{a,b}=i_ar_b$. The composites in step 3.1 give their matrix-unit multiplication. Insert the complete path identity on each side of any morphism and use the corners of step 1.3: these units span all endomorphisms, and the same argument describes unequal-degree Hom spaces. They are independent because multiplying a putative relation by $r_a$ and $i_b$ isolates its coefficient times the nonzero endpoint projector. Closing $i_ar_b$ has the same finite component graph as closing $r_bi_a$, even though the cut occurs at a different object. Thus the trace is zero off the diagonal and $[a_n+1]$ on it. Each matrix block has nonzero weighted ordinary trace pairing, detected by its transposed matrix units. This proves completeness and nondegeneracy at every rank. Together with step 1.1 it proves all assertions without a recoupling division at the boundary. [F1, F2, F3, step 1.1, step 3.1, step 1.3, algebra] ∎
+
+
+## Remarks
+
+For $\ell=4$ and $k=2$, the retained Bratteli graph through rank $4$ is shown below. Columns are ranks $n$; vertex labels are endpoint values $a_n$. Each arrow is a permitted extension of a path, not a morphism between the endpoint projectors. At endpoint $2$ only a down step survives; there is no vertex $3$. The two paths ending at $0$ and the two ending at $2$ index the two matrix blocks at rank $4$.
+
+```tikz
+\begin{tikzpicture}[x=1.6cm,y=0.9cm,>=stealth]
+  \node (v00) at (0,0) {$0$};
+  \node (v11) at (1,1) {$1$};
+  \node (v20) at (2,0) {$0$};
+  \node (v22) at (2,2) {$2$};
+  \node (v31) at (3,1) {$1$};
+  \node (v40) at (4,0) {$0$};
+  \node (v42) at (4,2) {$2$};
+  \draw[->] (v00) -- (v11);
+  \draw[->] (v11) -- (v20);
+  \draw[->] (v11) -- (v22);
+  \draw[->] (v20) -- (v31);
+  \draw[->] (v22) -- (v31);
+  \draw[->] (v31) -- (v40);
+  \draw[->] (v31) -- (v42);
+  \node at (0,-0.8) {$n=0$};
+  \node at (1,-0.8) {$1$};
+  \node at (2,-0.8) {$2$};
+  \node at (3,-0.8) {$3$};
+  \node at (4,-0.8) {$4$};
+\end{tikzpicture}
+```
+
+For a general interior endpoint $1\le a<k$, the corresponding splitting in proof step 1.2 has the following map directions. Here $f_a=p_a\otimes1$, $\lambda_a=[a+1]/[a]$, and $\iota_+,\pi_+$ denote the tautological up-channel inclusion and retraction.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \node (down) at (0,0) {$p_{a-1}$};
+  \node (middle) at (3.6,0) {$f_a$};
+  \node (up) at (7.2,0) {$p_{a+1}$};
+  \draw[->] (down) to[bend left=22] node[above] {$\alpha_a$} (middle);
+  \draw[->] (middle) to[bend left=22] node[below] {$\lambda_a^{-1}\beta_a$} (down);
+  \draw[->] (up) to[bend right=22] node[above] {$\iota_+$} (middle);
+  \draw[->] (middle) to[bend right=22] node[below] {$\pi_+$} (up);
+\end{tikzpicture}
+```
+
+The retraction after its matching inclusion is the identity on that endpoint projector: $\lambda_a^{-1}\beta_a\alpha_a=p_{a-1}$ and $\pi_+\iota_+=p_{a+1}$. The cross-composites vanish, and the two projections sum to $f_a$. At $a=k$, remove the up channel before normalization, as in step 2.1; at $a=0$ only the up channel occurs. Composing these local maps gives the path maps in step 3.1 and hence the matrix units in step 4.1. The proof and its pairing identities remain independent of these illustrations.

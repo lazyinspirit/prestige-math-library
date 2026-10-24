@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-internal-external-semidirect-product-equivalence.json
+  precheck: pass
 id: thm-internal-external-semidirect-product-equivalence
 kind: theorem
 title: ' Recognition theorem: $G=NH$ with $N\trianglelefteq G$, $N\cap H=1$ exactly realises an external semidirect product'
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: iff
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -58,11 +58,24 @@ The first clause of the right-hand side is what makes $N\rtimes_\alpha H$ define
 1.1 [forward] Assume the three conditions in [L1]. By [L2], conjugation defines an action $\alpha:H\to\operatorname{Aut}(N)$, so the domain of $\Phi$ is a group by [L3]. [L1, L2, L3]
 
 1.2 For $(n,h),(n',h')$ one has
-
 $$\Phi((n,h)(n',h'))=n(hn'h^{-1})hh'=nhn'h'=\Phi(n,h)\Phi(n',h'),$$
-
 so $\Phi$ is a homomorphism. It is surjective because $G=NH$. [step 1.1, L1, algebra]
 
 2.1 If $nh=n'h'$, then $n^{-1}n'=hh'^{-1}\in N\cap H$, hence both sides are $1$; therefore $n=n'$ and $h=h'$. Thus $\Phi$ is injective, and step 1.2 makes it bijective and therefore an isomorphism by [L5]. [step 1.2, L1, L5, algebra]
 
 3.1 [reverse] Conversely, assume conjugation restricts to $\alpha:H\to\operatorname{Aut}(N)$ and that $\Phi$ is such an isomorphism; the first assumption is what makes $N\rtimes_\alpha H$, and hence $\Phi$, defined. Transport the canonical-factor properties from [L4] through $\Phi$. The images are $N,H$, so the three conditions in [L1] hold. [L1, L4, L5] ∎
+
+## Remarks
+
+Under the equivalent conditions, put $E=N\rtimes_\alpha H$. The diagram compares the canonical factors of the external product with their images in $G$:
+
+```tikzcd
+\begin{tikzcd}[column sep=6em, row sep=4em, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+N \arrow[r, "i"] \arrow[d, equal] & E \arrow[r, "\pi"] \arrow[d, "\Phi", "\cong"'] & H \arrow[d, equal] \\
+N \arrow[r, "\iota"] & G \arrow[r, "q"] & H
+\end{tikzcd}
+```
+
+Here $i(n)=(n,1)$, $\iota(n)=n$, $\pi(n,h)=h$, and $q(nh)=h$. The unique factorisation proved in steps 1.2 and 2.1 makes $q$ well-defined. The squares commute because $\Phi(i(n))=n$ and $q(\Phi(n,h))=h$. Both rows split: $j:H\to N\rtimes_\alpha H$, $j(h)=(1,h)$, and $s:H\to G$, $s(h)=h$, satisfy $\pi\circ j=q\circ s=\operatorname{id}_H$ and $\Phi\circ j=s$.
+
+The multiplication convention is $(n,h)(n',h')=(n\alpha_h(n'),hh')$, with $\alpha_h(n')=hn'h^{-1}$. Thus $q((nh)(n'h'))=hh'$, so $q$ is a homomorphism with kernel $N$; likewise $\ker\pi=i(N)$. The diagram illustrates the proved isomorphism and does not replace its proof.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-muckenhoupt-a-infinity-class.json
+  precheck: n/a
 id: def-muckenhoupt-a-infinity-class
 kind: definition
-title: The Muckenhoupt A_infinity class
+title: The Muckenhoupt $A_\infty$ class
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -18,8 +21,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Definition 4.32 and Theorem 4.40, printed pp. 85 and 90"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition

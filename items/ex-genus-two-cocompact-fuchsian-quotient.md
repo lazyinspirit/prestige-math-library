@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-genus-two-cocompact-fuchsian-quotient.json
+  precheck: pass
 id: ex-genus-two-cocompact-fuchsian-quotient
 kind: example
 title: "A genus-two compact surface gives a cocompact Fuchsian group"
@@ -73,9 +76,7 @@ sources:
     - title: "Donald E. Marshall, The Uniformization Theorem"
       url: "https://sites.math.washington.edu/~marshall/math_536/uniformizationII.pdf"
       locator: "PDF pp. 1-15, especially Lemmas 1-5, Theorem 4, Corollary 6, and the non-Green proof"
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Example
@@ -195,3 +196,91 @@ Gauss-Bonnet theorem is consumed.
 10.4 **$\mathbb D/\Gamma$ is homeomorphic to $X$ and compact.** Let $q:\mathbb D\to\mathbb D/\Gamma$ be the quotient map of the action of $\Gamma$ and give $\mathbb D/\Gamma$ the quotient topology [F22]. For $\gamma_h\in\Gamma$ one has $\Psi(\gamma_h z)=p(\psi^{-1}\psi h\psi^{-1}z)=p(h\psi^{-1}z)=p(\psi^{-1}z)=\Psi(z)$, so $\Psi$ is $\Gamma$-invariant and induces a map $\Phi:\mathbb D/\Gamma\to X$ with $\Phi\circ q=\Psi$; by the characteristic property of the quotient topology $\Phi$ is continuous [F22]. It is surjective because $\Psi$ is. It is injective: if $\Psi(z)=\Psi(z')$, then $\psi^{-1}z$ and $\psi^{-1}z'$ lie in one fibre of $p$, and the deck group of the universal cover acts transitively on each fibre [F18], so $\psi^{-1}z'=h\psi^{-1}z$ for some $h\in\operatorname{Deck}(p)$ and hence $z'=\gamma_h z$, that is $q(z')=q(z)$. The map $\Psi$ is open: if $O\subseteq\mathbb D$ is open and $w=\Psi(u)\in\Psi(O)$, choose an evenly covered $U\ni w$ with sheet $V\ni u$; then $V\cap O$ is open and $\Psi(V\cap O)$ is open in $U$, hence in $X$, and contains $w$. Consequently for every open $O\subseteq\mathbb D/\Gamma$ the set $\Phi(O)=\Psi(q^{-1}(O))$ is open in $X$ [F22], since $q$ is surjective; so the continuous bijection $\Phi$ is a homeomorphism [F22]. Therefore $\mathbb D/\Gamma\cong X$ is compact by step 3.2, that is, $\Gamma$ is cocompact. [F18, F22, step 3.2, step 9.1]
 
 11.1 **Conclusion.** Steps 3.1 to 4.1 exhibit $X$ as a compact connected Riemann surface (steps 3.2 and 4.1). Step 6.1 shows that the projection $\pi:X\to\widehat{\mathbb C}$ is a proper holomorphic map of degree $2$; step 5.1 identifies its branch values as the six numbers $a_1,\dots,a_6$, each with a single point of index $2$ and with $\infty$ unramified; and step 7.1 computes $g(X)=2$. By step 8.1 the surface $X$ has hyperbolic universal-covering type, with uniformization $\Psi:\mathbb D\to X$ whose deck group is $\Gamma\le\operatorname{Aut}(\mathbb D)$ (step 9.1). The group $\Gamma$ acts freely (step 9.1) and properly discontinuously (step 10.1), so it is Fuchsian in the sense of the Example; it is torsion-free (step 10.3) and discrete for the compact-open topology (step 10.2); and $\mathbb D/\Gamma\cong X$ is compact (step 10.4), so the quotient is cocompact. This proves all the assertions of the Example. [step 3.2, step 4.1, step 5.1, step 6.1, step 7.1, step 8.1, step 9.1, step 10.1, step 10.2, step 10.3, step 10.4] ∎
+
+
+## Remarks
+
+The first schematic compares fibres of $\pi$; it does not place the arbitrary
+complex numbers $a_j$ on a real line or assert a global splitting into two
+sheets. Write $p_j=(a_j,0)$ and, for
+$b\in\mathbb C\setminus\{a_1,\ldots,a_6\}$, choose $s$ with $s^2=P(b)$ and
+write $b_\pm=(b,\pm s)$. Each downward arrow records the image under $\pi$;
+its label is the ramification index at its source.
+
+```tikz
+\begin{tikzpicture}[scale=1.8,transform shape,x=1cm,y=1cm, every node/.style={font=\small}]
+\node at (-0.8,1.6) {$X$};
+\node at (-0.8,0) {$\widehat{\mathbb C}$};
+\fill (1,1.6) circle (1.5pt);
+\node[above] at (1,1.6) {$p_1$};
+\fill (1,0) circle (1.5pt);
+\node[below] at (1,0) {$a_1$};
+\draw[->] (1,1.45) -- (1,0.15) node[midway,right,font=\scriptsize] {$2$};
+\fill (2,1.6) circle (1.5pt);
+\node[above] at (2,1.6) {$p_2$};
+\fill (2,0) circle (1.5pt);
+\node[below] at (2,0) {$a_2$};
+\draw[->] (2,1.45) -- (2,0.15) node[midway,right,font=\scriptsize] {$2$};
+\fill (3,1.6) circle (1.5pt);
+\node[above] at (3,1.6) {$p_3$};
+\fill (3,0) circle (1.5pt);
+\node[below] at (3,0) {$a_3$};
+\draw[->] (3,1.45) -- (3,0.15) node[midway,right,font=\scriptsize] {$2$};
+\fill (4,1.6) circle (1.5pt);
+\node[above] at (4,1.6) {$p_4$};
+\fill (4,0) circle (1.5pt);
+\node[below] at (4,0) {$a_4$};
+\draw[->] (4,1.45) -- (4,0.15) node[midway,right,font=\scriptsize] {$2$};
+\fill (5,1.6) circle (1.5pt);
+\node[above] at (5,1.6) {$p_5$};
+\fill (5,0) circle (1.5pt);
+\node[below] at (5,0) {$a_5$};
+\draw[->] (5,1.45) -- (5,0.15) node[midway,right,font=\scriptsize] {$2$};
+\fill (6,1.6) circle (1.5pt);
+\node[above] at (6,1.6) {$p_6$};
+\fill (6,0) circle (1.5pt);
+\node[below] at (6,0) {$a_6$};
+\draw[->] (6,1.45) -- (6,0.15) node[midway,right,font=\scriptsize] {$2$};
+\fill (7.2,1.6) circle (1.5pt);
+\fill (8,1.6) circle (1.5pt);
+\node[above] at (7.2,1.6) {$b_+$};
+\node[above] at (8,1.6) {$b_-$};
+\fill (7.6,0) circle (1.5pt);
+\node[below] at (7.6,0) {$b$};
+\draw[->] (7.2,1.45) -- (7.55,0.15) node[midway,left,font=\scriptsize] {$1$};
+\draw[->] (8,1.45) -- (7.65,0.15) node[midway,right,font=\scriptsize] {$1$};
+\fill (9.2,1.6) circle (1.5pt);
+\fill (10,1.6) circle (1.5pt);
+\node[above] at (9.2,1.6) {$\infty_+$};
+\node[above] at (10,1.6) {$\infty_-$};
+\fill (9.6,0) circle (1.5pt);
+\node[below] at (9.6,0) {$\infty$};
+\draw[->] (9.2,1.45) -- (9.55,0.15) node[midway,left,font=\scriptsize] {$1$};
+\draw[->] (10,1.45) -- (9.65,0.15) node[midway,right,font=\scriptsize] {$1$};
+\end{tikzpicture}
+```
+
+Steps 1.1 and 5.1 give the six index-two points; step 2.1 gives two distinct
+index-one points over infinity, and step 6.1 gives the generic fibre. Thus each
+pictured fibre has total index $2$, while the six ramification contributions
+to Riemann-Hurwitz sum to $6$, giving $2g(X)-2=2(-2)+6$.
+
+The second schematic separates the universal covering $\Psi$ from the
+branched map $\pi$. Here $q$ is the orbit quotient and $\Phi$ is the
+homeomorphism of step 10.4, so the triangle commutes:
+$\Phi\circ q=\Psi$. The action of $\Gamma$ is free and properly discontinuous
+by steps 9.1 and 10.1. The rigorous verification above is independent of both
+figures.
+
+```tikz
+\begin{tikzpicture}[scale=1.8,transform shape,every node/.style={font=\small}]
+\node (D) at (0,1.8) {$\mathbb D$};
+\node (X) at (4,1.8) {$X$};
+\node (S) at (8,1.8) {$\widehat{\mathbb C}$};
+\node (Q) at (4,0) {$\mathbb D/\Gamma$};
+\draw[->] (D) -- (X) node[midway,above] {$\Psi$};
+\draw[->] (X) -- (S) node[midway,above] {$\pi\quad(\mathrm{degree}\ 2)$};
+\draw[->] (D) -- (Q) node[midway,below left] {$q$};
+\draw[->] (Q) -- (X) node[midway,right] {$\Phi\quad\mathrm{homeomorphism}$};
+\end{tikzpicture}
+```

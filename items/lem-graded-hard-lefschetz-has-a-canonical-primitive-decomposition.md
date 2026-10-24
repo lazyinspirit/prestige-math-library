@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition.json
+  precheck: pass
 id: lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition
 kind: lemma
 title: "Graded hard Lefschetz has a canonical primitive decomposition"
@@ -11,12 +14,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -51,7 +48,7 @@ where $L^jP^{-r-2j}$ denotes the image of the restriction of $L^j$ to the subobj
 
 ## Proof
 
-**Proof technique:** induction on the number $j$ of peeled degree-two steps.
+**Proof technique:** induction on the number of peeled degree-two steps.
 
 1.1 For every $m\ge2$ the map $L:H^{-m}\to H^{-m+2}$ is a monomorphism, because $L^m=L^{m-1}L$ is an isomorphism: if $Lu=0$ then $L^mu=L^{m-1}Lu=0$, hence $u=0$. [given, algebra]
 

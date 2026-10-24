@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-artin-presentation-is-complete-for-geometric-braids.json
+  precheck: pass
 id: thm-the-artin-presentation-is-complete-for-geometric-braids
 kind: theorem
 title: "The Artin presentation is complete for geometric braids"
@@ -28,9 +31,7 @@ sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-22"
       url: "https://arxiv.org/pdf/1010.0321"
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -59,7 +60,7 @@ of the geometric braid group.
 
 ## Proof
 
-**Proof technique:** direct induction on $n$.
+**Proof technique:** direct induction on the number of strands.
 
 1.1 **Base case.** For $n=1$ there is no index $i$ with $1\le i\le n-1$, so the only word in the displayed alphabet is the empty word, and it is equivalent to itself by the empty sequence of permitted moves; the claim holds at $n=1$. [F1]
 

@@ -1,19 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-brauer-pair-branching-for-c3-semidirect-d8-in-characteristic-two.json
+  precheck: pass
 id: ex-brauer-pair-branching-for-c3-semidirect-d8-in-characteristic-two
 kind: example
-title: Brauer pair branching for c3 semidirect d8 in characteristic two
+title: Brauer pair branching for $C_3 \rtimes D_8$ in characteristic two
 deps: [thm-brauer-pair-order-is-independent-of-the-normal-chain]
 provenance:
   statement: ai-generated
   proof: ai-altered
 status: published
 origin: pipeline
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: Original example; order criterion from AKO, Fusion Systems in Algebra and Topology, IV §2 Theorem 2.10; all group and algebra calculations supplied here

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-power-decay-implies-a-p-membership.json
+  precheck: pass
 id: lem-power-decay-implies-a-p-membership
 kind: lemma
-title: Power decay implies membership in some A_p
+title: Power decay implies membership in some $A_p$
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.40, the implication (1) implies (2) with Lemma 4.36, printed pp. 86-91"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

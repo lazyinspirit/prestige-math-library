@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-double-edge-klr-braid-correction.json
+  precheck: pass
 id: ex-the-double-edge-klr-braid-correction
 kind: example
 title: "The double-edge $(e=2)$ KLR braid correction"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 4
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -62,3 +63,56 @@ so the naive simply-laced braid relation fails; the correction is the divided di
 1.3 (c) In the word $\tau_2\tau_1\tau_2e(\nu)$ the factors are applied right to left: the rightmost $\tau_2$ acts on the pair of positions $(2,3)$ of $\nu=(i,j,i)$, which carries colours $(j,i)$, so its degree is $-b_{ji}=2$; the middle $\tau_1$ then acts on the pair of positions $(1,2)$ of the permuted sequence $(i,i,j)$, which carries equal colours $(i,i)$, so its degree is $-b_{ii}=-2$; the leftmost $\tau_2$ acts on the pair of positions $(2,3)$ of $(i,i,j)$, which carries colours $(i,j)$, so its degree is $-b_{ij}=2$. The composite has degree $2+(-2)+2=2$. [given, F2, algebra]
 
 2.1 The right-hand side $x_1+x_3-2x_2$ is a sum of degree-$2$ monomials, so the correction in (b) is homogeneous of degree $2=-2b_{ij}-2d_i$ (with $b_{ij}=-2$, $d_i=1$); on a simple edge $a_{ij}=-1$ with $d_i=d_j=1$ the analogous correction is the degree-$0$ constant $Q_{ij}(x_1,x_2)-Q_{ij}(x_3,x_2)$ divided by $x_3-x_1$, so the doubled Cartan entry is exactly what raises the degree of the correction by $2$. [step 1.2, step 1.3, F1, F2, algebra] ∎
+
+
+## Remarks
+
+Read the two crossing diagrams upward, so the rightmost factor acts first. Blue strands carry $i$ and red strands carry $j$; crossings have no over/under choice. Both diagrams have bottom and top word $(i,j,i)$. The first follows the colour words $(i,j,i)\to(i,i,j)\to(i,i,j)\to(i,j,i)$; the second follows $(i,j,i)\to(j,i,i)\to(j,i,i)\to(i,j,i)$. In each, the middle crossing has equal colours and degree $-2$, and the other two crossings each have degree $2$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\begin{scope}
+\draw[blue,thick] (0,0)--(0,1)--(0.6,2)--(1.2,3);
+\draw[red,thick] (0.6,0)--(1.2,1)--(1.2,2)--(0.6,3);
+\draw[blue,thick] (1.2,0)--(0.6,1)--(0,2)--(0,3);
+\node at (0,-0.25) {$i$}; \node at (0.6,-0.25) {$j$}; \node at (1.2,-0.25) {$i$};
+\node at (0,3.25) {$i$}; \node at (0.6,3.25) {$j$}; \node at (1.2,3.25) {$i$};
+\node at (0.6,-0.8) {$\tau_2\tau_1\tau_2e(\nu)$};
+\end{scope}
+\node at (2,1.5) {$-$};
+\begin{scope}[xshift=2.8cm]
+\draw[blue,thick] (0,0)--(0.6,1)--(1.2,2)--(1.2,3);
+\draw[red,thick] (0.6,0)--(0,1)--(0,2)--(0.6,3);
+\draw[blue,thick] (1.2,0)--(1.2,1)--(0.6,2)--(0,3);
+\node at (0,-0.25) {$i$}; \node at (0.6,-0.25) {$j$}; \node at (1.2,-0.25) {$i$};
+\node at (0,3.25) {$i$}; \node at (0.6,3.25) {$j$}; \node at (1.2,3.25) {$i$};
+\node at (0.6,-0.8) {$\tau_1\tau_2\tau_1e(\nu)$};
+\end{scope}
+\node at (4.8,1.5) {$=$};
+\begin{scope}[xshift=5.6cm]
+\draw[blue,thick] (0,0)--(0,3); \draw[red,thick] (0.6,0)--(0.6,3); \draw[blue,thick] (1.2,0)--(1.2,3);
+\fill[blue] (0,1.5) circle (0.07);
+\node at (0,-0.25) {$i$}; \node at (0.6,-0.25) {$j$}; \node at (1.2,-0.25) {$i$};
+\node at (0,3.25) {$i$}; \node at (0.6,3.25) {$j$}; \node at (1.2,3.25) {$i$};
+\node at (0.6,-0.8) {$x_1e(\nu)$};
+\end{scope}
+\node at (7.4,1.5) {$+$};
+\begin{scope}[xshift=8cm]
+\draw[blue,thick] (0,0)--(0,3); \draw[red,thick] (0.6,0)--(0.6,3); \draw[blue,thick] (1.2,0)--(1.2,3);
+\fill[blue] (1.2,1.5) circle (0.07);
+\node at (0,-0.25) {$i$}; \node at (0.6,-0.25) {$j$}; \node at (1.2,-0.25) {$i$};
+\node at (0,3.25) {$i$}; \node at (0.6,3.25) {$j$}; \node at (1.2,3.25) {$i$};
+\node at (0.6,-0.8) {$x_3e(\nu)$};
+\end{scope}
+\node at (9.9,1.5) {$-2$};
+\begin{scope}[xshift=10.6cm]
+\draw[blue,thick] (0,0)--(0,3); \draw[red,thick] (0.6,0)--(0.6,3); \draw[blue,thick] (1.2,0)--(1.2,3);
+\fill[red] (0.6,1.5) circle (0.07);
+\node at (0,-0.25) {$i$}; \node at (0.6,-0.25) {$j$}; \node at (1.2,-0.25) {$i$};
+\node at (0,3.25) {$i$}; \node at (0.6,3.25) {$j$}; \node at (1.2,3.25) {$i$};
+\node at (0.6,-0.8) {$x_2e(\nu)$};
+\end{scope}
+\end{tikzpicture}
+```
+
+Here $\nu=(i,j,i)$, and the three straight diagrams have one dot on the indicated position. Their signed sum is exactly $(x_1+x_3-2x_2)e(\nu)$, with every term of degree $2$. This is relation (b), with its fixed sign convention; the Verification above establishes it independently of the illustration.

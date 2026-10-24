@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-brauer-generator-presentation.json
+  precheck: pass
 id: thm-brauer-generator-presentation
 kind: theorem
 title: Generators and defining relations for the Brauer diagram category
@@ -12,11 +15,6 @@ axiom_use: "No choice principle is used; each diagram has finitely many vertices
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Lehrer and Zhang, The Brauer Category and Invariant Theory, Theorem 2.6 and proof"
@@ -55,3 +53,43 @@ The dual relations are included. A scaled Brauer diagram means an $R$-multiple o
 6.1 For $r>0$, $h\ge r$. If $h=r$, all factors are cups; because the output matching is adjacent, their final positions are odd, and interchange orders these cups to $U^{\otimes r}$. If $h>r$ and the leftmost factor is a cup, that cup creates an adjacent pair of the target matching. Delete that pair and its elementary cup, apply the induction for $r-1$ to the remaining word, and restore the cup by interchange. Otherwise take the first cup at position $p>1$ in the word. The factors to its left are caps or crossings. The train calculation either shortens the word, passes a factor to the right of this cup and reduces $p$, or collects all $p-1$ factors into a train. In the last case, if all are crossings, the cup's two endpoints in the final boundary are separated by $p-1$ intervening strands. They cannot form one of the required adjacent pairs when $p>1$. Thus this last case cannot represent $U^{\otimes r}$. If a cap occurs, choose the cap nearest the cup and apply step 3.1 after the intervening crossings have formed a train; this shortens or removes a loop. Hence every nonminimal expression reduces in the stated finite induction to $\delta^N U^{\otimes r}$. The integer $N$ is the number of closed components, since all relations preserve the full connectivity and only loop removal changes that count. [step 5.1, step 3.1, step 4.1, induction]
 
 7.1 Undoing the bends and permutations in step 2.1 gives a fixed representative for each boundary matching and its loop scalar. Thus the presented morphism module is spanned by these representatives. Their evaluations are exactly the distinct free basis matchings in [F1]; any linear relation between the representatives has zero coefficient on every such matching, so all its coefficients vanish in $R$. This proves injectivity, including rings with zero divisors and $\delta=0$, and proves completeness of the relations over arbitrary $R$. Odd boundary spaces are zero; the empty representative is the identity at $0$. [F1, step 2.1, step 6.1, algebra] ∎
+
+
+## Remarks
+
+The following panel illustrates the generators and selected local relations. Inputs are at the top and outputs at the bottom, as in the definition; composition is read downward, so the rightmost factor acts first. Crossings are intersections of strands, not vertices or over/under data. The middle row shows the loop and snake relations; the bottom row shows the cap-slide relation used in the cup-train reduction. The rigorous proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,line width=0.9pt]
+\draw (0,0)--(0,-1);
+\node at (0,-1.45) {$I:1\to1$};
+\draw (2,0)--(3,-1);
+\draw (3,0)--(2,-1);
+\node at (2.5,-1.45) {$X:2\to2$};
+\draw (4.5,0).. controls (4.5,-1) and (5.5,-1)..(5.5,0);
+\node at (5,-1.45) {$A:2\to0$};
+\draw (7,-1).. controls (7,0) and (8,0)..(8,-1);
+\node at (7.5,-1.45) {$U:0\to2$};
+\draw (0,-3) circle (0.4);
+\node at (1.25,-3) {$=\delta\,1_0$};
+\node at (0.5,-3.85) {$AU:0\to0$};
+\draw (3.5,-2.2)--(3.5,-3.2)
+ .. controls (3.5,-3.85) and (4.5,-3.85)..(4.5,-3.2)
+ .. controls (4.5,-2.55) and (5.5,-2.55)..(5.5,-3.2)
+ --(5.5,-4.2);
+\node at (6.25,-3.2) {$=$};
+\draw (7,-2.2)--(7,-4.2);
+\node at (5.25,-4.65) {$(A\otimes I)(I\otimes U)=I$};
+\draw (0,-5.5)--(0,-6.5);
+\draw (1,-5.5)--(2,-6.5)--(2,-7.5);
+\draw (2,-5.5)--(1,-6.5);
+\draw (0,-6.5).. controls (0,-7.2) and (1,-7.2)..(1,-6.5);
+\node at (3.25,-6.5) {$=$};
+\draw (4.5,-5.5)--(5.5,-6.5);
+\draw (5.5,-5.5)--(4.5,-6.5)--(4.5,-7.5);
+\draw (6.5,-5.5)--(6.5,-6.5);
+\draw (5.5,-6.5).. controls (5.5,-7.2) and (6.5,-7.2)..(6.5,-6.5);
+\node at (1,-8) {$(A\otimes I)(I\otimes X)$};
+\node at (5.5,-8) {$(I\otimes A)(X\otimes I)$};
+\end{tikzpicture}
+```

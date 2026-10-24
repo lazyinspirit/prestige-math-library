@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-policy-iteration.json
+  precheck: n/a
 id: alg-policy-iteration
 kind: algorithm
 title: "Exact finite policy iteration with retained greedy actions"
@@ -17,11 +20,6 @@ forward_refs: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -55,3 +53,23 @@ The operator fixed point used for exact policy evaluation exists and is unique b
 
 [Sutton and Barto, *Reinforcement Learning: An Introduction*](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf).
 
+## Remarks
+
+The flow below separates the statewise retained-greedy choice from the policy equality test. In the choice box, apply the rule to every state: retain the current action whenever it is maximizing, even if other actions tie. The arrows describe the algorithm's control flow, not transitions of the MDP.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,rounded corners,align=center,minimum width=6cm] (policy) at (0,0) {Current deterministic policy $\pi_k$};
+\node[draw,rounded corners,align=center,minimum width=6cm] (eval) at (0,-1.3) {Exact evaluation $V_k\in\mathbb R^S$\\ $T^{\widehat\pi_k}V_k=V_k$};
+\node[draw,rounded corners,align=center,minimum width=6cm] (q) at (0,-2.8) {Compute $Q_k(s,a)$ for each admissible $(s,a)$};
+\node[draw,rounded corners,align=center,minimum width=6cm] (greedy) at (0,-4.4) {For every $s$: retain $\pi_k(s)$ if maximizing;\\otherwise choose the earliest maximizer.\\This defines $\pi_{k+1}$.};
+\node[draw,rounded corners,align=center,minimum width=4cm] (test) at (0,-6) {Is $\pi_{k+1}=\pi_k$?};
+\node[draw,rounded corners,align=center] (stop) at (5,-6) {Return $(\pi_k,V_k)$};
+\draw[->] (policy) -- (eval);
+\draw[->] (eval) -- (q);
+\draw[->] (q) -- (greedy);
+\draw[->] (greedy) -- (test);
+\draw[->] (test) -- node[above] {yes} (stop);
+\draw[->] (test.west) -- (-4.6,-6) -- node[left,align=center] {no\\ $k\leftarrow k+1$} (-4.6,0) -- (policy.west);
+\end{tikzpicture}
+```

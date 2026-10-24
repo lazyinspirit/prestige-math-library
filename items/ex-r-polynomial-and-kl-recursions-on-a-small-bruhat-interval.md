@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval.json
+  precheck: pass
 id: ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval
 kind: example
 title: The $R$- and Kazhdan–Lusztig recursions on a small singular interval
@@ -33,9 +36,7 @@ sources:
     - title: "Ben Elias and Geordie Williamson, The Hodge theory of Soergel bimodules, arXiv:1212.0791 — §3.2 (printed pp. 15–16): normalized Hecke algebra, bar and KL-basis conventions, and Remark 3.2 with $\\underline H_x=C'_x$ and $h_{y,x}=v^{\\ell(x)-\\ell(y)}P_{y,x}(v^{-2})$."
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "§3.2, printed pp. 15–16; the complete section and displayed formulas were reread."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Facts & Assumptions
@@ -69,3 +70,31 @@ In $S_4$, written in one-line notation, let $b:=s_2=1324$ and $w:=s_2s_1s_3s_2=3
 3.1 **The sole nonconstant polynomial.** By [F3], all comparable pairs of gap at most two have $P=1$, so the only possibly nonconstant pair within the interval is $(b,w)$. To evaluate $P_{1234,2413}$, apply [F4] with left $s_1$ to $2413=s_1s_3s_2$, obtaining lower top $s_3s_2=1423$. No element below $1423$ has left $s_1$-descent: its subwords are $1234,1243,1324,1423$, with no inversion between the values $1,2$. Also $s_1\not\le1423$. Hence $P_{1234,2413}=qP_{2134,1423}+P_{1234,1423}=0+1$. Now use [F4] at $(b,w,s_2)$: step 2.1 makes its correction sum empty, $c=1$, and $P_{b,2413}=1$, so $P_{b,w}=1+q$. Therefore $p_{b,w}=v^3+v$ and $\mu(b,w)=1$. Every other comparable distinct pair has $p_{y,z}=v^{\ell(z)-\ell(y)}$, so its nonzero $\mu$ occurs exactly on covers. [F1, F3, F4, step 1.1, step 2.1, algebra]
 
 4.1 **Inverse entries and both matrix products.** Step 3.1 gives diagonal $p=1$, cover entries $v$, and gap-two entries $v^2$. Each gap-two interval in step 1.1 has two intermediate elements. Thus [F5] gives inverse entries $1,-v,v^2$ at gaps $0,1,2$. At the sole gap-three pair there are four elements at each intermediate rank, so $q'_{b,w}=-(v^3+v)-4(-v)v^2-4v^2v=-v^3-v$. This gives every entry of the inverse matrix, including every displayed value in part (d). For $Q'P$, the off-diagonal entries at gaps one and two are $-v+v=0$ and $v^2-2v^2+v^2=0$; at gap three the entry is $(v^3+v)-4v^3+4v^3-(v^3+v)=0$. For $PQ'$, these entries are $v-v=0$, $v^2-2v^2+v^2=0$, and $-(v^3+v)+4v^3-4v^3+(v^3+v)=0$. Diagonal entries are $1$ and noncomparable entries are zero by support, so both matrix products are the identity. Although all $p$-entries in this finite example are nonnegative, its cover inverse entries and $q'_{b,w}$ are negative. Every calculation is finite and uses no choice principle. [F1, F3, F5, step 1.1, step 3.1, algebra] ∎
+
+## Remarks
+
+The Hasse diagram below displays the interval from step 1.1, with length increasing upward and the same letter labels. Only the ten labelled points are vertices; crossings of lines are not vertices. The correction interval in step 2.1 is the diamond on $b,c,d,C$, since $C=s_2w=2413$. The annotation records the non-cover $\mu$-pair separately from the cover lines. The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=2.8cm,y=1.7cm,every node/.style={font=\small,inner sep=4pt}]
+\node (b) at (1.5,0) {$b=1324$};
+\node (a) at (0,1) {$a=1342$};
+\node (c) at (1,1) {$c=1423$};
+\node (f) at (2,1) {$f=3124$};
+\node (d) at (3,1) {$d=2314$};
+\node (A) at (0,2) {$A=1432$};
+\node (D) at (1,2) {$D=3142$};
+\node (C) at (2,2) {$C=2413$};
+\node (F) at (3,2) {$F=3214$};
+\node (w) at (1.5,3) {$w=3412$};
+\draw (b)--(a) (b)--(c) (b)--(d) (b)--(f);
+\draw (a)--(A) (a)--(D) (c)--(A) (c)--(C);
+\draw (d)--(C) (d)--(F) (f)--(D) (f)--(F);
+\draw (A)--(w) (C)--(w) (D)--(w) (F)--(w);
+\node[anchor=east] at (-0.55,0) {$\ell=1$};
+\node[anchor=east] at (-0.55,1) {$\ell=2$};
+\node[anchor=east] at (-0.55,2) {$\ell=3$};
+\node[anchor=east] at (-0.55,3) {$\ell=4$};
+\node at (1.5,-0.65) {$P_{b,w}(q)=1+q,\qquad \mu(b,w)=1,\qquad \ell(w)-\ell(b)=3$};
+\end{tikzpicture}
+```

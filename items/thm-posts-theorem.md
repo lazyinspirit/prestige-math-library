@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-posts-theorem.json
+  precheck: pass
 id: thm-posts-theorem
 kind: theorem
 title: "Post's theorem"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-sigma-n-pi-n-and-delta-n-sets, def-relative-computability-and-enumerability, lem-oracle-computation-has-a-finite-query-witness, thm-sigma-one-sets-are-exactly-ce-sets]
 proof_strategy: induction
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, Theorem 5.5"
@@ -28,7 +24,11 @@ sources:
 
 Put $0^{(0)}=\varnothing$ and let $0^{(n+1)}$ be the halting set for machines
 with oracle $0^{(n)}$. For every $n\ge0$ and $A\subseteq\mathbb N$,
-$$A\in\Sigma_{n+1}^0\iff A\text{ is }0^{(n)}\text{-c.e.},\qquad A\in\Delta_{n+1}^0\iff A\le_T0^{(n)}.$$
+
+$$
+\begin{aligned} A\in\Sigma_{n+1}^0&\iff A\text{ is }0^{(n)}\text{-c.e.},\\ A\in\Delta_{n+1}^0&\iff A\le_T0^{(n)}. \end{aligned}
+$$
+
 Consequently $A\in\Pi_{n+1}^0$ iff its complement is $0^{(n)}$-c.e.
 
 ## Facts & Assumptions

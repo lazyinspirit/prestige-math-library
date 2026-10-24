@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-smooth-three-manifold-with-h-one-z-two-and-h-two-zero-does-not-embed-in-s-four.json
+  precheck: pass
 id: lem-a-smooth-three-manifold-with-h-one-z-two-and-h-two-zero-does-not-embed-in-s-four
 kind: lemma
-title: "A closed three-manifold with H_1 = Z/2 and H_2 = 0 does not embed in S^4"
+title: 'A closed three-manifold with $H_1 = \mathbb Z/2$ and $H_2 = 0$ does not embed in $S^4$'
 status: published
 origin: session
 deps: [thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, thm-mayer-vietoris-sequence-in-singular-homology, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, cor-homology-of-spheres, cor-homotopic-maps-induce-the-same-map-on-singular-homology, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]

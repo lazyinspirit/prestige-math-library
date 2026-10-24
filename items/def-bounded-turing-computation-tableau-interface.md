@@ -1,9 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-bounded-turing-computation-tableau-interface.json
+  precheck: n/a
 id: "def-bounded-turing-computation-tableau-interface"
 kind: "definition"
 title: "Bounded Turing-computation tableaux"
-verification:
-  audited: 2026-09-13
 status: published
 origin: "pipeline"
 deps: ["def-boolean-formulas-cnf-and-satisfiability-interface", "def-polynomial-time-verifier-and-reduction-interface", "def-turing-machine-configuration", "def-one-step-configuration-relation", "def-turing-machine-initial-and-halting-configuration-interface", "thm-multitape-machines-have-one-tape-simulations", "lem-multitape-simulation-has-quadratic-time-overhead"]
@@ -29,3 +30,25 @@ For tableaux only, extend the ordinary step relation of [[def-one-step-configura
 Here is a fully specified finite local rule. For an interior cell, inspect its old left, centre and right symbols. If the centre has a nonhalting head, write the symbol prescribed by the transition; retain the new head there only for a left move at cell zero. Otherwise retain the old underlying centre symbol. Put the new state/head at the centre if the old head in the left neighbour moves right or the old head in the right neighbour moves left. A halting head stays in place with unchanged symbol and state. At cell zero replace the absent left neighbour by a fixed exterior marker and clamp a left move there. At the last cell use a fixed exterior right marker; attempts to move out are forbidden. Windows with multiple heads, conflicting arrivals, or a head on an exterior marker are forbidden. All other windows have the output prescribed above. This defines a finite allowed relation $R_j(a,b,c,d)$ on the three old symbols and the new centre symbol; only the two boundary versions depend on $j$.
 
 For each $t,j,a$ introduce $X_{t,j,a}$. Require at least one and at most one symbol per cell by $\bigvee_{a\in A}X_{t,j,a}$ and $\neg X_{t,j,a}\vee\neg X_{t,j,b}$ for $a\ne b$. In row zero pin the fixed bits of $1^n0x$, leave each certificate position restricted to the two unmarked bit symbols, put state $q_0$ at cell zero, and pin all remaining cells blank. Row zero therefore has exactly one head even for $n=0$. For every row pin cell $W-1$ to unmarked blank. For each $t<T$, each cell, and each forbidden tuple $(a,b,c,d)$ add the clause $\neg X_{t,j-1,a}\vee\neg X_{t,j,b}\vee\neg X_{t,j+1,c}\vee\neg X_{t+1,j,d}$. At boundaries omit exterior literals and enumerate only the fixed exterior symbol. Finally add $\bigvee_{j,a}X_{T,j,(q_{\mathrm{acc}},a)}$. Their conjunction is $\Phi_{M,x}$. Fresh variable indices enumerate the triples lexicographically. No global head-uniqueness clause is needed after the initial row: correctness of the local rule on genuine rows supplies that invariant in the next lemma.
+
+## Remarks
+
+The local window below shows one interior constraint, with $0\le t<T$ and $1\le j\le W-2$. The arrows indicate the three inputs to $R_j(a,b,c,d)$, not three separate machine transitions. The symbols $a,b,c,d$ belong to the augmented alphabet $A$, so a symbol may carry the head/state mark. The full tableau has $T+1$ rows and $W=T+2$ columns; the boundary update rules and the pinning of column $W-1=T+1$ to blank are not drawn. The definition and its correctness arguments are independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.7cm,y=1.3cm,>=stealth]
+\node at (0,0.7) {$j-1$};
+\node at (1,0.7) {$j$};
+\node at (2,0.7) {$j+1$};
+\node at (-0.8,0) {$t$};
+\node at (-0.8,-1.4) {$t+1$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (a) at (0,0) {$a$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (b) at (1,0) {$b$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (c) at (2,0) {$c$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (d) at (1,-1.4) {$d$};
+\draw[->] (a.south) -- (d.north west);
+\draw[->] (b.south) -- (d.north);
+\draw[->] (c.south) -- (d.north east);
+\node at (3,-0.7) {$R_j(a,b,c,d)$};
+\end{tikzpicture}
+```

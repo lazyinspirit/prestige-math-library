@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-mackey-double-coset-formula-for-restricting-an-induced-character.json
+  precheck: pass
 id: thm-mackey-double-coset-formula-for-restricting-an-induced-character
 kind: theorem
 title: "Mackey's double-coset formula for restricting an induced character"
@@ -18,9 +21,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Theorem 20.6"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
-  audited: 2026-08-30
-  precheck: pass
+
 ---
 
 ## Statement
@@ -54,3 +55,19 @@ $$ \operatorname{Res}_K^G\operatorname{Ind}_H^G\chi = \sum_{s\in S} \operatornam
 4.1 Steps 2.1 and 3.1 show that $\Theta_s$ is a $K$-equivariant isomorphism $I_s\cong \operatorname{Ind}_{K\cap sHs^{-1}}^K(\operatorname{Res}_{K\cap sHs^{-1}}^{sHs^{-1}}\,{}^sW)$ for each $s\in S$. Combining these isomorphisms with step 1.1 gives a $K$-module decomposition of $\operatorname{Res}_K^G I$ as the direct sum of the stated induced modules. [step 1.1, step 2.1, step 3.1, discharge-construct]
 
 5.1 Taking characters of the $K$-module decomposition in step 4.1 and using [F1] yields the stated Mackey double-coset formula. [F1, step 4.1, algebra] ∎
+
+## Remarks
+
+The two stages of the decomposition are shown below. Put $I=\operatorname{Ind}_H^G W$, $U_s=K\cap sHs^{-1}$ and $J_s=\operatorname{Ind}_{U_s}^K(\operatorname{Res}_{U_s}^{sHs^{-1}}\,{}^sW)$ for $s\in S$. The $K$-orbit of $sH$ in $G/H$ is $KsH/H$, with stabilizer $U_s$: the map $kU_s\mapsto ksH$ identifies $K/U_s$ with this orbit. Thus the partition into these orbits indexes the support summands $I_s$ of step 1.1.
+
+```tikz
+\begin{tikzpicture}[>=stealth, x=1.6cm, every node/.style={font=\Large}]
+\node (restricted) at (0,0) {$\mathrm{Res}_K^G I$};
+\node (supports) at (4.2,0) {$\displaystyle\bigoplus_{s\in S} I_s$};
+\node (induced) at (8.4,0) {$\displaystyle\bigoplus_{s\in S} J_s$};
+\draw[->] (restricted) -- node[above] {$\sim$} node[below,align=center] {restrict support\\to each $KsH$} (supports);
+\draw[->] (supports) -- node[above] {$\bigoplus_{s\in S}\Theta_s$} node[below] {$\sim$} (induced);
+\end{tikzpicture}
+```
+
+Both arrows are $K$-module isomorphisms: the first sends $f$ to its components supported on the double cosets, and the second uses $\Theta_s(f)(k)=f(ks)$ from steps 2.1–4.1. Taking characters gives the sum in the statement. The proof above is independent of this illustration.

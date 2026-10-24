@@ -1,0 +1,164 @@
+{
+  "id": "alg-ip-finite-element-pde-tikhonov",
+  "agent": "/root/rendering_repair_coordinator/dinv_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authentic original tiles show only the long eight-step procedure. A stage-order flowchart materially clarifies the precedence of stationarity before discrepancy, the separate failure returns, and the accepted-trial return to the outer iteration. This is an explanatory diagram omission under the expanded diagram scope, not a defect in the algorithm or proof.",
+      "action": "Added one fenced TikZ flowchart in a final Remarks section with a precise legend. Seven stage boxes and their possible terminal returns preserve the numbered procedure; rejection advances only the bounded inner loop, while the explicit return edge requires acceptance.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a final explanatory Remarks paragraph and a seven-stage TikZ flowchart; original title, complete Definition, references and all frontmatter bytes are unchanged.",
+  "source_lines_after": {
+    "remarks": [
+      79,
+      81
+    ],
+    "tikz": [
+      83,
+      115
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and operator directions",
+      "result": "The contract fixes Theta_h=R^m, V_h=R^n, Y_h=R^s with Euclidean inner products, Q_h closed convex in Theta_h. R_h:O_h x V_h -> V_h, G_h:O_h x V_h -> Y_h, S_h:O_h -> V_h, F_h=G_h(q,S_h(q)); D_q R_h transpose sends V_h to Theta_h, and (D_u R_h)^T p_h=nabla_u J_h. The diagram introduces no different spaces, adjoint conventions or operator arrows; its arrows are procedural transitions."
+    },
+    {
+      "check": "Objective and accepted-trial relation",
+      "result": "Contract defines Phi_h(q)=1/2 ||F_h(q)-y^delta||^2 + alpha/2 ||q-q_0||^2 and interval containment ell_h(q)<=Phi_h(q)<=u_h(q). Step 7 accepts the first changed admissible projected q_j=P_Q_h(q-(2^{-j}/L) g_tilde_h) satisfying u_h(q_j)<=ell_h(q). The flowchart uses that exact upper-versus-lower inequality, not the reverse, and its caption retains changed/admissible and first-accept conditions. L remains a positive scale, with no Lipschitz or convergence assertion."
+    },
+    {
+      "check": "Order and status exits",
+      "result": "Steps 1 and 2 have the shown inadmissible exits; step 2 also budget-exhausted. Step 3 has only linear-solve-failed for unsuccessful/invalid certificates. Step 4 projection/budget failure precedes its converged test rho_tilde+epsilon_g<=tau_g. Step 5 follows only if step 4 does not return and uses d^+<=kappa delta for discrepancy-stopped. Step 6 checks outer limit before current objective evaluation and can return budget-exhausted or linear-solve-failed. Steps 7-8 have exactly those same two terminal statuses. Each of the seven rightward arrows lists precisely the associated stage statuses; the caption explicitly leaves conditions and within-stage precedence to the unchanged Definition."
+    },
+    {
+      "check": "Loop indexing and certificate meaning",
+      "result": "The sole backward edge runs from accepted projected trials (steps 7-8) into step 2, with q:=q_j and next k. Step 7 rejection advances j only, as the caption states; exhausting its N_backtrack trials returns budget-exhausted, not another outer iteration. Step 6 already excludes k=N_iter before an accepted trial, so the return never increments beyond the allowed range. Converged certifies only discrete projected residual via the supplier proposition, and discrepancy-stopped only discrete data discrepancy; no minimizer, mesh guarantee or iteration convergence is depicted."
+    },
+    {
+      "check": "Independence",
+      "result": "The complete original algorithm is byte-preserved and supplies every condition and exit. The new caption explicitly declares the diagram illustrative and independent of the procedure/certificate guarantees. The local supplier proposition and reduced-gradient lemma proofs are unchanged and do not use the figure."
+    }
+  ],
+  "write_guard": {
+    "before_raw_sha256": "2e2bc2d18be8bf96923ad4993076438358a259e5fa9f32d8b5d23eea3ba4f044",
+    "matched_immediately_before_first_edit": true,
+    "after_raw_sha256": "c99fd5e815ca11e75be4c17ee468cde6b0e621fa3c26ee22264099f5f5fbe629",
+    "frontmatter_byte_identical": true,
+    "publication_status_byte_identical": true
+  },
+  "original_evidence": {
+    "declared_directory": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "path_discrepancy": "Declared diagram-supplement/screenshots files do not exist. Located authentic files within the same inverse-problems category; both hashes exactly match queue evidence.",
+    "resolved_paths": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/inverse-problems/screenshots/alg-ip-finite-element-pde-tikhonov--01.png",
+        "sha256": "3420897807a19f2db27df3d2865dcbab8a05a6d27a003d5c2c4a9e45b7162b92"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/inverse-problems/screenshots/alg-ip-finite-element-pde-tikhonov--02.png",
+        "sha256": "29c9e11ea8304dc3a61bc2bd414f176833001cdb0b2071076a9d263c7e05668e"
+      }
+    ],
+    "inspection": "Both viewed independently as standalone original-resolution images; frozen archive and initial current raw SHA256 identical."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-ip-finite-element-pde-tikhonov.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects",
+      "pre_existing_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-ip-finite-element-pde-tikhonov.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-ip-finite-element-pde-tikhonov.md",
+            "item_id": "alg-ip-finite-element-pde-tikhonov",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-ip-finite-element-pde-tikhonov.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dinv002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-ip-finite-element-pde-tikhonov --out research/math-library-rendering-repairs-2026-10-23/previews/dinv002-final",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinv002-final/manifest.json",
+    "manifest_sha256": "e6bdadd973ebb8ec3b95f7dcc96b282c43f17e51f0e6fdb31044600bad17df7f",
+    "source_binding": {
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "status": "published",
+      "source": "items/alg-ip-finite-element-pde-tikhonov.md",
+      "source_sha256": "c99fd5e815ca11e75be4c17ee468cde6b0e621fa3c26ee22264099f5f5fbe629",
+      "snapshot": "snapshots/alg-ip-finite-element-pde-tikhonov.md",
+      "html": "html/alg-ip-finite-element-pde-tikhonov.html",
+      "html_sha256": "79d86c87dc28ec868c6939a11ff68abd303f955b2bb151a75e5dbf684579e07c",
+      "reference_map_sha256": "55a9fa7aa0475f41004fa0708430128b49a574d10264d864741f7d4486b10a18"
+    },
+    "capture": {
+      "capture_revision": 2,
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "height": 2313,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/alg-ip-finite-element-pde-tikhonov--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "d8e06eaac634faa54795d8eedd97669820757cfee76f58f929c2b9ff215220f4",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/alg-ip-finite-element-pde-tikhonov--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 1013,
+          "sha256": "9c99f0b75f4ecb0090edfee946855fa5f61c0132b7b21bafdb0fbfd1591c2c04",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 50,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T01:07:07.795Z"
+    },
+    "inspection": "Both final PNG tiles viewed independently at original resolution. Native SVG has 14 legible boxes, six downward continuation arrows, seven terminal-return arrows and the explicit accepted-trial return arrow. All arrowheads, loop endpoints, formula inequalities and terminal labels visible without clipping or overlap; one compiled TikZ, no diagram failures and no KaTeX errors."
+  },
+  "remaining_issues": [
+    "Preview covers the local ItemBody and current reference map, not the production HTTP route or full library loader. Sixteen unrelated reference-map diagnostics were recorded by the preview utility; assigned references render correctly."
+  ]
+}

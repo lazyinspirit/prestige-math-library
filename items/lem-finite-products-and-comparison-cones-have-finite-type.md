@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-products-and-comparison-cones-have-finite-type.json
+  precheck: pass
 id: lem-finite-products-and-comparison-cones-have-finite-type
 kind: lemma
 title: "Finite products and comparison cones have homological finite type"
@@ -32,17 +35,12 @@ sources:
     - title: "Charles Weibel, An Introduction to Homological Algebra, Chapter 1"
       url: "https://math.mit.edu/~hrm/palestine/weibel/01-chain_complexes.pdf"
       locator: "§1.5, mapping cones"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. Let Y be a finite product of CW K(Z/2,q) models with q≥1, including the empty product *. Then every H_n(Y;Z) is finitely generated and H^*(Y;F)=F in degree zero only for every field F of characteristic different from two. For any continuous f:X→Z between arbitrary spaces, the integral chain cone has an exact sequence 0→coker(H_nX→H_nZ)→H_n(Cone(C_*(f;Z)))→ker(H_{n−1}X→H_{n−1}Z)→0. If H_nZ and H_{n−1}X are finitely generated, its middle group is finitely generated. In particular this holds in every degree for X=MO(r) or MSO(r) and Z=Y a finite product as above. The raw cone is nonnegative and degreewise free, without any finite-rank assertion or topological-cone identification.
+Assume AC. Let $Y$ be a finite product of CW $K(\mathbb Z/2,q)$ models with $q\ge1$, including the empty product $*$. Then every $H_n(Y;\mathbb Z)$ is finitely generated and $H^*(Y;F)=F$ in degree zero only for every field $F$ of characteristic different from two. For any continuous $f:X\to Z$ between arbitrary spaces, the integral chain cone has an exact sequence $0\to\operatorname{coker}(H_nX\to H_nZ)\to H_n(\operatorname{Cone}(C_*(f;\mathbb Z)))\to\ker(H_{n-1}X\to H_{n-1}Z)\to0$. If $H_nZ$ and $H_{n-1}X$ are finitely generated, its middle group is finitely generated. In particular this holds in every degree for $X=MO(r)$ or $MSO(r)$ and $Z=Y$ a finite product as above. The raw cone is nonnegative and degreewise free, without any finite-rank assertion or topological-cone identification.
 
 ## Facts & Assumptions
 
@@ -56,10 +54,12 @@ Assume AC. Let Y be a finite product of CW K(Z/2,q) models with q≥1, including
 
 [F4] AC chooses the factor models and generators of the finitely generated groups ([[def-axiom-of-choice]]).
 
+[F5] Under AC, evaluation identifies $H^n(W;k)$ with $\operatorname{Hom}_k(H_n(W;k),k)$ for every field $k$, space $W$, and $n\ge0$, without a finite-dimensional hypothesis ([[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let Y be a **finite** product of the K_q models of the finite-type lemma. Integral Künneth expresses H_n of a product as an extension of finite sums of tensor and Tor products of its factors' integral homology groups. PID decomposition and finite induction on the number of factors therefore prove that every H_n(Y;Z) is finitely generated. With R=Q or an odd F_p, field Künneth shows H*(Y;R)=R concentrated in degree zero. An empty product is the point. Infinite products are not covered by this argument and must not replace this finite comparison space without a new justification. [given, F1, F2]
+1.1 Let $Y$ be a **finite** product of the $K_q$ models of the finite-type lemma. Integral Künneth expresses $H_n$ of a product as an extension of finite sums of tensor and Tor products of its factors' integral homology groups. PID decomposition and finite induction on the number of factors therefore prove that every $H_n(Y;\mathbb Z)$ is finitely generated. With $R=\mathbb Q$ or an odd $\mathbb F_p$, field Künneth shows $H_*(Y;R)=R$ concentrated in degree zero. Field duality then gives $H^*(Y;R)=R$ likewise concentrated in degree zero. An empty product is the point. Infinite products are not covered by this argument and must not replace this finite comparison space without a new justification. [given, F1, F2, F5]
 
-2.1 For any continuous map f:X→Y, use the free integral chain complex C_f=Cone(C_*(f;Z)). The published cone long exact sequence gives 0→coker(H_nX→H_nY)→H_n(C_f)→ker(H_{n-1}X→H_{n-1}Y)→0. If H_n(Y;Z) and H_{n-1}(X;Z) are finitely generated, the two outer groups are finitely generated, and lifting generators proves the middle group is finitely generated. In particular X=MO(r), the integral finite-generation theorem, and finite Y, the finite-type lemma, give integral finite generation of cone homology in every degree. This does not require the raw singular chain groups to have finite rank. The algebraic cone is free in each degree because it is the finite direct sum C_n(Y;Z)⊕C_{n-1}(X;Z), so the inspected algebraic cohomology UCT applies directly; no unproved topological mapping-cone identification is needed. This is the relative homology obstruction for the comparison map. [step 1.1, F2, F3, F4] ∎
+2.1 For any continuous map $f:X\to Y$, use the free integral chain complex $C_f=\operatorname{Cone}(C_*(f;\mathbb Z))$. The published cone long exact sequence gives $0\to\operatorname{coker}(H_nX\to H_nY)\to H_n(C_f)\to\ker(H_{n-1}X\to H_{n-1}Y)\to0$. If $H_n(Y;\mathbb Z)$ and $H_{n-1}(X;\mathbb Z)$ are finitely generated, the two outer groups are finitely generated, and lifting generators proves the middle group is finitely generated. In particular $X=MO(r)$, the integral finite-generation theorem, and finite $Y$, the finite-type lemma, give integral finite generation of cone homology in every degree. This does not require the raw singular chain groups to have finite rank. The algebraic cone is free in each degree because it is the finite direct sum $C_n(Y;\mathbb Z)\oplus C_{n-1}(X;\mathbb Z)$, so the inspected algebraic cohomology UCT applies directly; no unproved topological mapping-cone identification is needed. This is the relative homology obstruction for the comparison map. [step 1.1, F2, F3, F4] ∎

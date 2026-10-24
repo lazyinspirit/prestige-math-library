@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-minimum-intensity-tau-leap-level-variance.json
+  precheck: pass
 id: thm-minimum-intensity-tau-leap-level-variance
 kind: theorem
 title: "Order-one correction variance for coupled Poisson tau-leap levels"
@@ -88,3 +91,40 @@ For a level with $h>1$, the variance bound follows directly from $\operatorname{
 ## Notes
 
 The T16 [[alg-minimum-intensity-coupling-for-reaction-networks]] is an exact event-time coupling built by dominating Poisson thinning. The present theorem uses the separately proved frozen-rate count coupling [[lem-shared-minimum-poisson-count-coupling]] on each tau-leap half-step; it does not identify the two path procedures.
+
+## Remarks
+
+The diagram shows one coarse interval $[t,t+2h]$. Write $x_1=x$,
+$x_2=x'$, and $x_3=x''$ for the fine states, and let $z$ be the coarse
+state frozen throughout count generation. For half $i\in\{1,2\}$ and
+channel $j$, draw conditionally independent shared and residual counts
+$$C_{ij}\sim\operatorname{Pois}(h\min(a_j(x_i),a_j(z))),\qquad F_{ij}\sim\operatorname{Pois}(h(a_j(x_i)-a_j(z))^+),\qquad B_{ij}\sim\operatorname{Pois}(h(a_j(z)-a_j(x_i))^+).$$
+Set $K^f_{ij}=C_{ij}+F_{ij}$ and $K^c_{ij}=C_{ij}+B_{ij}$, and define
+$R_i=\sum_j\nu_jK^f_{ij}$ and $S_i=\sum_j\nu_jK^c_{ij}$.
+The second half uses fresh random inputs conditional on the first-half
+history, with rates evaluated at $(x',z)$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, scale=1.4, transform shape, every node/.style={font=\small}]
+\node at (0,1) {$t$};
+\node at (3.6,1) {$t+h$};
+\node at (7.2,1) {$t+2h$};
+\node (f0) at (0,0) {$x$};
+\node (f1) at (3.6,0) {$x'=x+R_1$};
+\node (f2) at (7.2,0) {$x''=x'+R_2$};
+\draw[->] (f0) -- node[above] {$R_1$} (f1);
+\draw[->] (f1) -- node[above] {$R_2$} (f2);
+\node (c0) at (0,-1.6) {$z$};
+\node (c1) at (3.6,-1.6) {$z$};
+\node (c2) at (7.2,-1.6) {$z'=z+S_1+S_2$};
+\draw[->,dashed] (c0) -- node[above] {hold $z$; store $S_1$} (c1);
+\draw[->] (c1) -- node[above] {apply $S_1+S_2$} (c2);
+\node[align=center] at (1.8,-2.8) {$K^f_{1j}=C_{1j}+F_{1j}$\\ $K^c_{1j}=C_{1j}+B_{1j}$};
+\node[align=center] at (5.4,-2.8) {$K^f_{2j}=C_{2j}+F_{2j}$\\ $K^c_{2j}=C_{2j}+B_{2j}$};
+\end{tikzpicture}
+```
+
+The dashed segment records storage rather than a coarse state update.
+Each shared count $C_{ij}$ contributes to both paths; only the residual
+counts differ. Thus $x''-z'=(x-z)+(R_1-S_1)+(R_2-S_2)$, the endpoint
+error decomposed in proof step 3.1. The proof above is independent of the figure.

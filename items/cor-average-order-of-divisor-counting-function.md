@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-average-order-of-divisor-counting-function.json
+  precheck: pass
 id: cor-average-order-of-divisor-counting-function
 kind: corollary
-title: "The average order of tau is log n"
+title: 'The average order of $\tau$ is $\log n$'
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ deps: [def-summatory-function-and-average-order,
        lem-summatory-logarithm-asymptotic]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:

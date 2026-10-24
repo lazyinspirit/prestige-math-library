@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps.json
+  precheck: pass
 id: lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps
 kind: lemma
 title: "Pullback and coefficient pushout realize bar cohomology maps"
@@ -9,12 +12,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   scraped: []
   references:
@@ -24,7 +21,7 @@ sources:
 
 ## Statement
 
-Assume AC. Pulling back an abelian-kernel extension along $\alpha:H\to G$ represents $\alpha^*:H^2(G,A)\to H^2(H,A)$. Pushing it out along a G-module map $u:A\to B$ represents $u_*:H^2(G,A)\to H^2(G,B)$. These are the abelian-kernel constructions, with the fixed actions. H2 denotes normalized bar cohomology, with its inherited derived interpretation.
+Assume AC. Pulling back an abelian-kernel extension along $\alpha:H\to G$ represents $\alpha^*:H^2(G,A)\to H^2(H,A)$. Pushing it out along a G-module map $u:A\to B$ represents $u_*:H^2(G,A)\to H^2(G,B)$. These are the abelian-kernel constructions, with the fixed actions. $H^2$ denotes normalized bar cohomology, with its inherited derived interpretation.
 
 ## Facts & Assumptions
 
@@ -40,4 +37,4 @@ Assume AC. Pulling back an abelian-kernel extension along $\alpha:H\to G$ repres
 
 1.2 Let E act on B through p and form $B\rtimes E$. The subgroup $S=\{(-u(a),i(a)):a\in A\}$ is normal: conjugation by $(b,e)$ sends its a-element to the one indexed by $p(e)a$, since i(A) acts trivially on B and u is equivariant. Set $E_u=(B\rtimes E)/S$. The map $B\to E_u$, $b\mapsto[(b,1)]$, is injective, because intersection with S forces i(a)=1 and a=0. Projection to G is onto, and any kernel element $[(b,i(a))]$ equals $[(b+u(a),1)]$. Thus its kernel is exactly B, with the prescribed action. [given, algebra]
 
-2.1 The section $g\mapsto[(0,s(g))]$ has product $[(0,s(g)s(h))]=[(u(f(g,h)),s(gh))]$, hence factor set u f. It represents the coefficient map by F1. Replacing f by $f+\delta c$ replaces the two resulting cocycles by $\alpha^*f+\delta(\alpha^*c)$ and $uf+\delta(uc)$, respectively. Extension equivalences induce the same maps by $[(b,e)]\mapsto[(b,\theta(e))]$ and $(e,h)\mapsto(\theta(e),h)$, so both constructions are independent of representatives. No injectivity of the coefficient map on H2 is claimed. [F1, step 1.1, step 1.2, algebra] ∎
+2.1 The section $g\mapsto[(0,s(g))]$ has product $[(0,s(g)s(h))]=[(u(f(g,h)),s(gh))]$, hence factor set u f. It represents the coefficient map by F1. Replacing f by $f+\delta c$ replaces the two resulting cocycles by $\alpha^*f+\delta(\alpha^*c)$ and $uf+\delta(uc)$, respectively. Extension equivalences induce the same maps by $[(b,e)]\mapsto[(b,\theta(e))]$ and $(e,h)\mapsto(\theta(e),h)$, so both constructions are independent of representatives. No injectivity of the coefficient map on $H^2$ is claimed. [F1, step 1.1, step 1.2, algebra] ∎

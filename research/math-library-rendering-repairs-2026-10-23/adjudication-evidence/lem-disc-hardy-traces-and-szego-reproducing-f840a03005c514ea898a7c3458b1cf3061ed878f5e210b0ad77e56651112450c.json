@@ -1,0 +1,98 @@
+{
+  "id": "lem-disc-hardy-traces-and-szego-reproducing",
+  "agent": "/root/rendering_repair_coordinator/cxa_027",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200×1400 tile visibly prints $H^1$ in the CSS-uppercase proof-technique banner, whereas the mathematical Hardy-space occurrences in the surrounding proof render normally. This banner is plain renderer text, so delimiters are exposed.",
+      "action": "Replaced only the banner’s $H^1$ with equivalent readable Unicode H¹.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 100: $H^1$ → H¹ in the proof-technique banner only; no claim, hypothesis, proof step, source, dependency or metadata change.",
+  "source_lines_after": {
+    "100": "**Proof technique:** direct, using radial convergence, the H¹ Cauchy representation, and a local closed-range argument."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "renderer_limitation": "The proof-technique banner inserts plain text and CSS uppercase rather than parsing inline math; the local Unicode workaround preserves notation.",
+  "before_raw_sha256": "19e3c8d27aa2337f556c70d233088341e348cc28d12e2d59afd503992dde43c8",
+  "current_raw_sha256": "1569df90115f4cd837c54e1f1e1d888613180c3c99866f97a976fbc504af38da",
+  "pre_edit_guard": "Exact original raw SHA256 asserted immediately before the sole item edit.",
+  "frontmatter_byte_identical": true,
+  "status_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-disc-hardy-traces-and-szego-reproducing.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 10 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-disc-hardy-traces-and-szego-reproducing.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-disc-hardy-traces-and-szego-reproducing.md",
+            "item_id": "lem-disc-hardy-traces-and-szego-reproducing",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-disc-hardy-traces-and-szego-reproducing.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "pre_existing_formatting_failures": [],
+  "visual_evidence": {
+    "original_standalone": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/lem-disc-hardy-traces-and-szego-reproducing--03.png",
+    "current_standalone": "research/math-library-rendering-repairs-2026-10-23/previews/cxa027-native-retry/screenshots/lem-disc-hardy-traces-and-szego-reproducing--03.png",
+    "inspection": "Both original and current tile viewed at original resolution in standalone image calls. The current banner has H¹ with no dollar delimiters. No source changes made for unrelated image-viewer clipping artifacts.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa027-native-retry/manifest.json",
+    "manifest_sha256": "e674cf02e48120bb1c378de6bcc238cabe3dbbba70b6d47b88b1ba538ac684de",
+    "source_binding": {
+      "id": "lem-disc-hardy-traces-and-szego-reproducing",
+      "status": "published",
+      "source": "items/lem-disc-hardy-traces-and-szego-reproducing.md",
+      "source_sha256": "1569df90115f4cd837c54e1f1e1d888613180c3c99866f97a976fbc504af38da",
+      "snapshot": "snapshots/lem-disc-hardy-traces-and-szego-reproducing.md",
+      "html": "html/lem-disc-hardy-traces-and-szego-reproducing.html",
+      "html_sha256": "20d5749eefc198edaf98c487f4532c712af85bd19f87db83f871efba557d044a",
+      "reference_map_sha256": "4b50f2b3d3558931002e62acd981c621b38dbb26221909fba5e73552e01d4316"
+    },
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/cxa027-native-retry/screenshots/lem-disc-hardy-traces-and-szego-reproducing.json",
+    "katex_errors": [],
+    "katex_count": 173,
+    "diagram_failures": [],
+    "capture_attempts": [
+      {
+        "directory": "research/math-library-rendering-repairs-2026-10-23/previews/cxa027-native",
+        "exit_code": 1,
+        "result": "Page.captureScreenshot Protocol error: Unable to capture screenshot; preserved incomplete attempt."
+      },
+      {
+        "directory": "research/math-library-rendering-repairs-2026-10-23/previews/cxa027-native-retry",
+        "exit_code": 0,
+        "result": "Canonical local native preview completed: 4 tiles; 16 unrelated reference-map parse diagnostics recorded in manifest."
+      }
+    ]
+  }
+}

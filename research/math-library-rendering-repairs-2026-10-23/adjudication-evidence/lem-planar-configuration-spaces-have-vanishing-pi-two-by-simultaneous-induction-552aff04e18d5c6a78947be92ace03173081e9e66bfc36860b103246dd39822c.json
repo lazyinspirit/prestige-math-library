@@ -1,0 +1,65 @@
+{
+  "id": "lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction",
+  "agent": "/root/rendering_repair_coordinator/braid_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original-resolution historical tile visibly prints $N$ in the technique banner while surrounding mathematical content is typeset. This banner is rendered as plain React text with CSS uppercase, so math delimiters cannot be interpreted there.",
+      "action": "Replaced induction on $n$ with equivalent plain prose induction on n.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Removed literal math delimiters from the plain-text proof-technique banner. Joined terminal proof square to final numbered step with a single newline to fix a pre-existing proof-layout split-step defect.",
+  "source_lines_after": {
+    "62": "**Proof technique:** induction on n.",
+    "80": "∎"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "induction"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects",
+      "pre_existing_failure": "Initial check reported final step 4.1 split-step at line 80 due to blank line before ∎; repaired without altering argument."
+    }
+  },
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/braid016-final/manifest.json",
+    "source_sha256": "93e627ad80ed2af7ecc7e8e0aa962bfab2c65542bf378af3056188e958f16726",
+    "inspected_original_resolution_tiles": [
+      "lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction--01.png",
+      "lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction--02.png"
+    ],
+    "result": "Both final tiles inspected individually at original resolution. Technique banner reads INDUCTION ON N with no dollar delimiters; title, formulas and complete proof display correctly.",
+    "limitations": "Local native ItemBody preview, not production route; manifest records 16 unrelated reference-map parse diagnostics."
+  },
+  "metadata_and_status_preserved": true
+}

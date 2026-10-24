@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-one-cube-average-and-maximal-function-forms-agree.json
+  precheck: pass
 id: lem-a-one-cube-average-and-maximal-function-forms-agree
 kind: lemma
-title: The two defining forms of A_1 agree
+title: The two defining forms of $A_1$ agree
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Definition 4.7, Remark 4.9 and Theorem 4.11, printed pp. 71-73"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

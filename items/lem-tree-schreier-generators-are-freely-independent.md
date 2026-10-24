@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-tree-schreier-generators-are-freely-independent.json
+  precheck: pass
 id: lem-tree-schreier-generators-are-freely-independent
 kind: lemma
 title: "Tree Schreier generators are freely independent"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -49,3 +49,30 @@ generators determined by that tree are freely independent.
 2.1 Take a nonempty reduced word in the nontrivial tree Schreier generators and their inverses. Replace each letter by its based loop from [L2] and concatenate those loops. Cancel adjacent inverse tree segments whenever they appear. Tree segments can disappear this way, but an edge outside $T$ can disappear only by meeting its own reverse immediately, which would mean that two consecutive Schreier generators were inverse letters, contrary to the reducedness of the word. So after all cancellations there remains a closed path whose label is a nonempty reduced word on $X\sqcup X^{-1}$. [L2, step 1.1, given]
 
 3.1 By [L3], the nonempty reduced word from step 2.1 is not the identity in the ambient free group. Hence the original reduced word in the tree Schreier generators is nontrivial in $H$. Therefore those generators are freely independent. [L3, step 2.1] ∎
+
+
+## Remarks
+
+For a nontrivial generator $s(t,x)$, the following schematic shows its based
+loop. Dashed arrows represent entire paths in $T$, with labels read in the
+arrow direction; the solid arrow is the single positive $x$-edge outside $T$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node (h) at (0,0) {$H$};
+\node (t) at (-2.5,2) {$Ht$};
+\node (tx) at (2.5,2) {$Htx$};
+\draw[->,dashed] (h) -- node[left] {$t$} (t);
+\draw[->] (t) -- node[above] {$x\quad(e\notin T)$} (tx);
+\draw[->,dashed] (tx) -- node[right] {$\overline{tx}^{-1}$} (h);
+\end{tikzpicture}
+```
+
+The two tree paths may overlap, and the displayed vertices need not be
+distinct in the actual Schreier graph. Only the indicated paths and edge are
+shown; the graph need not be finite. The outward tree path has label $t$, and
+the reverse of the tree path to $Htx$ has label $\overline{tx}^{-1}$, so the
+loop reads $tx\,\overline{tx}^{-1}=s(t,x)$ as in [L2]. Its reversed loop reads
+$s(t,x)^{-1}$ and traverses the same off-tree edge backward; it is not a
+second positive-edge generator. The proof above is independent of this
+illustration.

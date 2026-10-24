@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-periodic-chain-has-cesaro-but-not-ordinary-convergence.json
+  precheck: pass
 id: ex-periodic-chain-has-cesaro-but-not-ordinary-convergence
 kind: example
 title: "A periodic chain has Cesaro but not ordinary convergence"
@@ -20,13 +23,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 proof_strategy: direct
 ---
 
@@ -90,3 +86,32 @@ rules out.
 4.1 Cesàro convergence: step 1.1 gives $p^{(k)}=I$ for even $k$ and $p^{(k)}=p$ for odd $k$, so for even $n=2m$ the average is $\frac1{2m}\sum_{k=0}^{2m-1}p^{(k)}=\frac1{2m}\,m(I+p)=\frac12(I+p)$, and for odd $n=2m+1$ it is $\frac{m(I+p)+I}{2m+1}\to\frac12(I+p)$; the matrix $\frac12(I+p)$ has both rows equal to $(1/2,1/2)=\pi$. Hence $\frac1n\sum_{k=0}^{n-1}p^{(k)}(x,\cdot)\to\pi$ for each starting state $x$, which is the displayed Cesàro assertion; since the chain is irreducible and positive recurrent with invariant $\pi$ by steps 2.1, 2.2 and 3.1, this is exactly the conclusion of the general supplier [F8]. [F8, step 1.1, step 2.2, step 3.1, algebra]
 
 5.1 Boundary and scope cases: the identity at $n=0$ is included and is consistent with $p^{(0)}(0,0)=1$, so the alternation starts with the value $1$; the two-state chain is the smallest deterministic cycle and the period is exactly two, so the example exhibits the necessity of aperiodicity rather than a failure of irreducibility or of existence of $\pi$; the Cesàro average equals $\pi$ exactly for every even $n$ and converges otherwise, so no aperiodicity is needed for the averaged statement, and the example claims no converse implication in the other direction; the state space is finite, all sums are finite, and no limit is interchanged with an infinite sum; the two hypotheses needed by [F8], irreducibility and positive recurrence, are verified at steps 2.1 and 3.1 and the invariant law at step 2.2, while the matrices themselves are determined by the fixed data; and AC [A1] is spent exactly on the general suppliers [F6] and [F8], the direct computations of steps 1.1–4.1 being choice-free. [A1, F6, F8, step 3.2, step 2.3, step 4.1, given] ∎
+
+
+## Remarks
+
+The upper graph shows the two nonzero one-step transitions, each with probability $1$. The lower strip starts at state $0$ at time $n=0$ and shows the alternating one-time laws; the strip arrows mean one further application of $p$, not convergence. Averaging the first $n$ laws gives $\overline\mu_n$, which tends to $\pi$ even though the one-time laws do not converge. This illustration records the computations in steps 1.1, 2.3 and 4.1; the verification is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,circle,minimum size=9mm] (s0) at (0,0) {$0$};
+\node[draw,circle,minimum size=9mm] (s1) at (4,0) {$1$};
+\draw[->] (s0) to[bend left=25] node[above] {$1$} (s1);
+\draw[->] (s1) to[bend left=25] node[below] {$1$} (s0);
+\node at (6,0) {$\mathrm{period}=2$};
+\node (a) at (-1,-2.3) {$\delta_0$};
+\node (b) at (1,-2.3) {$\delta_1$};
+\node (c) at (3,-2.3) {$\delta_0$};
+\node (d) at (5,-2.3) {$\delta_1$};
+\node (e) at (6.5,-2.3) {$\cdots$};
+\node at (-1,-1.7) {$n=0$};
+\node at (1,-1.7) {$n=1$};
+\node at (3,-1.7) {$n=2$};
+\node at (5,-1.7) {$n=3$};
+\draw[->] (a) -- node[above] {$p$} (b);
+\draw[->] (b) -- node[above] {$p$} (c);
+\draw[->] (c) -- node[above] {$p$} (d);
+\draw[->] (d) -- (e);
+\node at (2.5,-3.4) {$\overline\mu_n=\frac{1}{n}\sum_{k=0}^{n-1}p^{(k)}(0,\cdot)\ \longrightarrow\ \pi=(\frac12,\frac12)\quad(n\to\infty)$};
+\end{tikzpicture}
+```

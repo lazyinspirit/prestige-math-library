@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-recursive-residual-gap-and-attainable-accuracy.json
+  precheck: pass
 id: thm-cg-recursive-residual-gap-and-attainable-accuracy
 kind: theorem
 title: "Finite-precision CG has a recursive-residual gap and an attainable-accuracy bound"
@@ -19,10 +22,6 @@ deps: [def-conjugate-gradient-recurrence,
 justified_by: []
 aliases: []
 proof_strategy: direct
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Nicholas J. Higham, Accuracy and Stability of Numerical Algorithms, 2nd ed., §13.3, printed pp. 276–281"
@@ -94,7 +93,7 @@ positive definiteness.
 $\|Av\|_2$ over $\|v\|_2\le1$, hence
 $\|Av\|_2\le\|A\|_2\|v\|_2$.
 
-[F7] [[lem-product-of-one-plus-deltas-gives-theta-n]]: padding a product of at
+[F7] [[lem-product-of-one-plus-deltas-gives-theta-n|If $\lvert\delta_i\rvert\le u$ and $nu<1$, then $\prod(1+\delta_i)=1+\theta_n$ with $\lvert\theta_n\rvert\le\gamma_n$]]: padding a product of at
 most $n$ relative-error factors with factors $1$ gives deviation at most
 $\gamma_n$ when $nu<1$.
 

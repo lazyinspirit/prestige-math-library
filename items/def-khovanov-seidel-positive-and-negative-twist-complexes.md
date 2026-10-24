@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-khovanov-seidel-positive-and-negative-twist-complexes.json
+  precheck: pass
 id: def-khovanov-seidel-positive-and-negative-twist-complexes
 kind: definition
-title: "The twist complexes R_i and R_i^{-1}"
+title: "The twist complexes $R_i$ and $R_i^{-1}$"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -18,9 +21,7 @@ sources:
   references:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2d, printed pp. 11-12"
       url: "https://arxiv.org/pdf/math/0006056"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Definition

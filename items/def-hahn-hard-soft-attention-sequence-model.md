@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-hahn-hard-soft-attention-sequence-model.json
+  precheck: n/a
 id: def-hahn-hard-soft-attention-sequence-model
 kind: definition
 title: "Hard and soft attention sequence models"
@@ -12,8 +15,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Hahn, Theoretical Limitations of Self-Attention in Neural Sequence Models, §3"
@@ -41,3 +42,32 @@ Each score, value, and positionwise map is shared across positions and is fixed 
 [[def-feedforward-neural-network]]: finite feedforward graphs and layered MLPs specify positionwise maps when those implementations are chosen; the abstract hard-attention model above also permits arbitrary fixed maps.
 
 [[def-scaled-dot-product-attention]]: row softmax and scaled query-key products.
+
+## Remarks
+
+For a fixed query position $i$, layer $k$, and head $h$, the two branches below are alternative rules for the same score row; only one branch is used in a model. Write $a=(a_{i,j}^{(k,h)})_{j=1}^n$ and $\alpha=(\widehat a_{i,j}^{(k,h)})_{j=1}^n$. The hard branch uses $j_*=\min\{j:a_{i,j}^{(k,h)}=\max_{r\le n}a_{i,r}^{(k,h)}\}$ and $\alpha_j=1$ exactly when $j=j_*$. Both branches feed the same value aggregation. The final update uses the aggregates from all $H$ heads together with the previous state at $i$. Arrows show data flow; the picture adds no hypotheses and is independent of any proof.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \node[draw,rounded corners] (scores) at (0,3.8) {$a\in\mathbb R^n$};
+  \node[draw,rounded corners,align=center] (soft) at (-2.8,2.5) {Soft rule\\
+  $\alpha=\mathrm{softmax}(a)$};
+  \node[draw,rounded corners,align=center] (hard) at (2.8,2.5) {Hard rule\\
+  $\alpha_j=\mathbf 1_{\{j=j_*\}}$};
+  \node[draw,rounded corners] (weights) at (0,1.2) {$\alpha\in\mathbb R^n$};
+  \node[draw,rounded corners] (values) at (-4.5,-0.1) {$\bigl(V_{k,h}(y_j^{(k-1)})\bigr)_{j=1}^n$};
+  \node[draw,rounded corners] (sum) at (1,-0.1) {$b_{i,k,h}=\sum_j\alpha_j V_{k,h}(y_j^{(k-1)})$};
+  \node[draw,rounded corners] (previous) at (-4.5,-1.7) {$y_i^{(k-1)}$};
+  \node[draw,rounded corners] (update) at (1,-1.7) {$F_k\bigl(y_i^{(k-1)},b_{i,k,1},\ldots,b_{i,k,H}\bigr)$};
+  \node (output) at (1,-2.8) {$y_i^{(k)}$};
+  \draw[->] (scores) -- (soft);
+  \draw[->] (scores) -- (hard);
+  \draw[->] (soft) -- (weights);
+  \draw[->] (hard) -- (weights);
+  \draw[->] (weights) -- (sum);
+  \draw[->] (values) -- (sum);
+  \draw[->] (sum) -- node[right] {all heads} (update);
+  \draw[->] (previous) -- (update);
+  \draw[->] (update) -- (output);
+\end{tikzpicture}
+```

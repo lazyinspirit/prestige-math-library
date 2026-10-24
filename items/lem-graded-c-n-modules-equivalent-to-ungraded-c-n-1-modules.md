@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-graded-c-n-modules-equivalent-to-ungraded-c-n-1-modules.json
+  precheck: pass
 id: lem-graded-c-n-modules-equivalent-to-ungraded-c-n-1-modules
 kind: lemma
-title: "Graded C_n modules and ungraded C_(n−1) modules"
+title: "Graded $C_n$ modules and ungraded $C_{n-1}$ modules"
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "M. F. Atiyah, R. Bott, and A. Shapiro, Clifford Modules, Topology 3, Supplement 1 (1964)"

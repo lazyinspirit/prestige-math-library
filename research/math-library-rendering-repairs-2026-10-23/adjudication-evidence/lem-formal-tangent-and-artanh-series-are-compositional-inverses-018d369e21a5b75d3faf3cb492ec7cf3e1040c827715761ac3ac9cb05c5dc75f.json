@@ -1,0 +1,82 @@
+{
+  "id": "lem-formal-tangent-and-artanh-series-are-compositional-inverses",
+  "agent": "/root/rendering_repair_coordinator/dt_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dt_008",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --02 visibly prints literal $A$ and $T$ in the proof-technique banner, whereas the proof below typesets those variables. The banner is a plain text renderer context.",
+      "action": "Removed only dollar delimiters from the two single-letter variable names in the technique banner; retained the exact explanatory words.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Proof-technique banner now uses plain A and T, avoiding raw math delimiters in its plain-text rendering context.",
+  "source_lines_after": {
+    "76": "**Proof technique:** direct; exponentiate A, compare the defining quotient of T, then differentiate and expand."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying renderer limitation remains: proof-technique banners do not parse inline math. Local prose workaround resolves this assigned carrier."
+  ],
+  "source_guard": {
+    "before_raw_sha256": "f8813607708a5c5b40cec9c9c88553657803a4a3c714a886b0e5ee20db8f0103",
+    "after_raw_sha256": "01799b740b4d60cec1f1af38ef1c776277eefbd89e062c133fa87951dcd4e150",
+    "exact_single_line_replacement_verified": true,
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true
+  },
+  "original_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/differential-topology/screenshots/lem-formal-tangent-and-artanh-series-are-compositional-inverses--02.png",
+    "inspected": "Standalone original-resolution view_image"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-formal-tangent-and-artanh-series-are-compositional-inverses.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-formal-tangent-and-artanh-series-are-compositional-inverses.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-formal-tangent-and-artanh-series-are-compositional-inverses.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dt-008-native/manifest.json",
+    "manifest_sha256": "812f9fb01152ff57c997d681f5c8601986b325ce89fef3b8cfe13fb3dd705c99",
+    "source_sha256": "01799b740b4d60cec1f1af38ef1c776277eefbd89e062c133fa87951dcd4e150",
+    "reference_map_sha256": "5e0c2664478af6d382c266eee6a143fa8a588f155752c85672c9c19f8fda77c4",
+    "inspected_image": "research/math-library-rendering-repairs-2026-10-23/previews/dt-008-native/screenshots/lem-formal-tangent-and-artanh-series-are-compositional-inverses--02.png",
+    "inspected_image_sha256": "fd1b11c43d4359246b649b5c05dda78987d1d36d111e0c5715993d21bcdd17d7",
+    "inspection": "Standalone original-resolution view_image confirms banner now reads EXPONENTIATE A ... QUOTIENT OF T with no dollar delimiters.",
+    "katex_errors": [],
+    "katex_count": 98,
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "reference_map_unrelated_parse_diagnostics": 16,
+    "limitation": "Local native ItemBody preview; no production HTTP route coverage."
+  },
+  "blocker": null
+}

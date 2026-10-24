@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-z-to-the-n-is-normal-on-the-disc-but-not-on-the-plane.json
+  precheck: pass
 id: ex-z-to-the-n-is-normal-on-the-disc-but-not-on-the-plane
 kind: example
-title: "The family z^n is normal on the unit disc and not normal on the complex plane"
+title: "The family $z^n$ is normal on the unit disc and not normal on the complex plane"
 status: published
 origin: pipeline
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:

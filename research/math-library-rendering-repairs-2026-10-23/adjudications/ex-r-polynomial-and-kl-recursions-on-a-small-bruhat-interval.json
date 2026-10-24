@@ -1,0 +1,169 @@
+{
+  "id": "ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval",
+  "agent": "/root/rendering_repair_coordinator/dco_011",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A ranked Hasse diagram materially clarifies the explicitly enumerated ten-element interval and its sixteen covers, makes the recursion subinterval b,c,d,C inspectable, and distinguishes the length-three mu-pair from covers. The complete verification does not remove this explanatory benefit.",
+      "action": "Appended final Remarks containing a ten-vertex, sixteen-edge TikZ Hasse diagram, rank labels, separate non-cover mu annotation, and explicit crossing convention.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added explanatory Hasse diagram only; preserved every original byte as an exact prefix, including full Example, Verification and frontmatter.",
+  "source_lines_after": {
+    "remarks": [
+      73,
+      75
+    ],
+    "tikz": [
+      77,
+      99
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "publication_status": "published",
+  "remaining_issues": [],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Vertices and ranks",
+      "result": "pass",
+      "data": {
+        "length_1": [
+          "b=1324"
+        ],
+        "length_2": [
+          "a=1342",
+          "c=1423",
+          "d=2314",
+          "f=3124"
+        ],
+        "length_3": [
+          "A=1432",
+          "C=2413",
+          "D=3142",
+          "F=3214"
+        ],
+        "length_4": [
+          "w=3412"
+        ]
+      },
+      "justification": "Enumerated all 24 S4 permutations using the prefix-rank criterion in lem-bruhat-order-basic-properties-for-permutations, then restricted to b<=x<=w and counted inversions; reproduces precisely step 1.1. Length increases upward in the figure.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/combinatorial-checks.json"
+    },
+    {
+      "check": "Exact transitive reduction",
+      "result": "pass",
+      "data": {
+        "bottom_edges": [
+          "b-a",
+          "b-c",
+          "b-d",
+          "b-f"
+        ],
+        "middle_edges": [
+          "a-A",
+          "a-D",
+          "c-A",
+          "c-C",
+          "d-C",
+          "d-F",
+          "f-D",
+          "f-F"
+        ],
+        "top_edges": [
+          "A-w",
+          "C-w",
+          "D-w",
+          "F-w"
+        ]
+      },
+      "justification": "Exhaustive prefix-rank comparisons with length difference one give exactly these sixteen edges, matching Verification 1.1 and the graded Bruhat property [F1]. No transitive edge b-w is drawn. Crossings have no vertex labels and the caption expressly says they are not vertices.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/combinatorial-checks.json"
+    },
+    {
+      "check": "Correction diamond and left-descent recursion",
+      "result": "pass",
+      "data": {
+        "interval_b_C": [
+          "1324",
+          "1423",
+          "2314",
+          "2413"
+        ],
+        "s2_products": [
+          "1234",
+          "1432",
+          "3214",
+          "3412"
+        ],
+        "product_lengths": [
+          0,
+          3,
+          3,
+          4
+        ]
+      },
+      "justification": "C=s2w=2413. Only b has a left s2 descent among these four vertices. Its length gap to C is two, so mu(b,C)=0 by the local mu convention [F3], making the correction sum empty as in step 2.1. Independent exact KL recursion gives P_id,C=P_b,C=1, hence P_b,w=1+q as in step 3.1.",
+      "evidence": [
+        "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/combinatorial-checks.json",
+        "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/check-interval.py",
+        "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/kl-recursion-check.json"
+      ]
+    },
+    {
+      "check": "Non-cover mu annotation",
+      "result": "pass",
+      "data": {
+        "P_b_w": "1+q",
+        "mu_b_w": 1,
+        "length_gap": 3
+      },
+      "justification": "Exact recursion on all 35 comparable interval pairs finds P_b,w=1+q as the sole nonconstant polynomial. By def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, mu is the coefficient of q^((4-1-1)/2)=q, hence one. The gap is three, so b<w is not a cover. These facts are shown as text below the Hasse edges, without a spurious cover line.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/kl-recursion-check.json"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "python3 research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/check-interval.py",
+      "exit_code": 0,
+      "output": "passed: true; 35 comparable pairs checked; sole nonconstant P_1324,3412=1+q; P_id,2413=P_b,2413=1; mu_b,w=1"
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/tmp TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval --out research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/preview",
+      "exit_code": 0,
+      "output": "items: 1; tiles: 3; reference_map_diagnostics: 32",
+      "katex_errors": [],
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "compiled_svg": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/tmp/pi-tikz-cache/1bc122d3d2b87fb9346606381328edb0.svg"
+    },
+    {
+      "check": "Original source preservation",
+      "result": "pass",
+      "output": "Original archived raw bytes are exact prefix of current file; all frontmatter including status and original Example/Verification unchanged."
+    }
+  ],
+  "visual_checks": {
+    "method": "view_image detail original; all three flagged original screenshot tiles inspected, then all three fresh SSR tiles inspected in standalone views.",
+    "fresh_screenshot_receipt": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/preview/screenshots/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval.json",
+    "diagram_tile": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval/preview/screenshots/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval--03.png",
+    "result": "Compiled Hasse diagram entirely visible; all ten labels, four rank labels and separate mu annotation readable, no clipping or label overlap. Three intermediate line crossings are explicitly not vertices. No additional confirmed rendering defect found.",
+    "scope": "Local actual ItemBody/MathMarkdown SSR with TikZ; no HTTP(S) access or production-route coverage."
+  },
+  "before_raw_sha256": "d03a6df3154105a113d7166e93759a59eda91c9f5a323da85a016034b17d4246",
+  "after_raw_sha256": "65f193c835183f960fe74eeddae8c28b941bd2271c1b40e01970b826a8e6bd2c",
+  "coordinator_review_status": "held-for-coordinator-quality-review",
+  "completed_at": "2026-10-23T13:40:07.713087+00:00"
+}

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-root-systems-a-two-b-two-and-g-two.json
+  precheck: pass
 id: ex-root-systems-a-two-b-two-and-g-two
 kind: example
-title: Rank-two systems A_2, B_2 and G_2
+title: Rank-two systems $A_2$, $B_2$ and $G_2$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -16,8 +19,7 @@ sources:
       locator: "Lecture 21, Theorem 21.10 and its picture, printed p. 113"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example
@@ -46,4 +48,50 @@ Cartan products are $1,2,3$ respectively.
 
 1.3 For $G_2$, choose $\alpha,\beta$ with $(\alpha,\alpha)=6$, $(\beta,\beta)=2$, $(\alpha,\beta)=-3$ and put $$\Phi_G=\{\pm\alpha,\pm\beta,\pm(\alpha+\beta),\pm(\alpha+2\beta),\pm(\alpha+3\beta),\pm(2\alpha+3\beta)\}.$$ The Gram determinant is positive, so $\alpha,\beta$ form a basis; the displayed coefficient pairs then show that $\Phi_G$ is finite, spans the plane, omits zero, and is reduced. The reflection $s_\alpha$ interchanges $\beta$ with $\alpha+\beta$ and $\alpha+3\beta$ with $2\alpha+3\beta$, and fixes $\alpha+2\beta$; the reflection $s_\beta$ interchanges $\alpha$ with $\alpha+3\beta$ and $\alpha+\beta$ with $\alpha+2\beta$, and fixes $2\alpha+3\beta$. Together with the images of $\alpha$ and $\beta$, these permutations show that the long and short roots are the two orbits of the simple reflections. Conjugating $s_\alpha$ or $s_\beta$ therefore proves reflection closure for every root. Direct pairings give integral Cartan integers in $\{0,\pm1,\pm2,\pm3\}$. The six displayed unnegated roots are positive and have base $(\alpha,\beta)$, whose Cartan matrix is $\begin{pmatrix}2&-1\\-3&2\end{pmatrix}$ and whose off-diagonal Cartan product is $3$. [L2, algebra]
 
-2.1 By [L1] the three systems are exactly the irreducible rank-two reduced crystallographic systems, and the displayed Cartan products $1,2,3$ are those of $A_2,B_2,G_2$ respectively. [L1, step 1.1, step 1.2, step 1.3, algebra] ∎ 
+2.1 By [L1] the three systems are exactly the irreducible rank-two reduced crystallographic systems, and the displayed Cartan products $1,2,3$ are those of $A_2,B_2,G_2$ respectively. [L1, step 1.1, step 1.2, step 1.3, algebra] ∎
+
+## Remarks
+
+The panels show every root as a vector from the origin, with the simple roots
+$\alpha,\beta$ labelled as in steps 1.1–1.3. Panel scales differ. In $A_2$
+both simple roots have length $1$ and meet at $120^\circ$; in $B_2$ their
+lengths are $\sqrt2,1$ and they meet at $135^\circ$. For $G_2$ use
+$\alpha=(\sqrt6,0)$ and $\beta=(-\sqrt6/2,\sqrt2/2)$: their lengths are
+$\sqrt6,\sqrt2$ and they meet at $150^\circ$, realizing exactly the Gram
+data in step 1.3. Thus the long-to-short length ratios are $1,\sqrt2,\sqrt3$.
+The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\begin{scope}[scale=1.25]
+\foreach \a in {0,60,120,180,240,300} {
+  \draw[->] (0,0) -- (\a:1);
+}
+\fill (0,0) circle (1pt);
+\node[right] at (0:1) {$\alpha$};
+\node[above left] at (120:1) {$\beta$};
+\node at (0,-1.6) {$A_2$: 6 roots};
+\end{scope}
+\begin{scope}[xshift=4.5cm,scale=1.25]
+\foreach \x/\y in {1/0,-1/0,0/1,0/-1,1/1,1/-1,-1/1,-1/-1} {
+  \draw[->] (0,0) -- (\x,\y);
+}
+\fill (0,0) circle (1pt);
+\node[below right] at (1,-1) {$\alpha$};
+\node[above] at (0,1) {$\beta$};
+\node at (0,-1.6) {$B_2$: 8 roots};
+\end{scope}
+\begin{scope}[xshift=9cm,scale=0.7]
+\foreach \a in {0,60,120,180,240,300} {
+  \draw[->] (0,0) -- (\a:{sqrt(6)});
+}
+\foreach \a in {30,90,150,210,270,330} {
+  \draw[->] (0,0) -- (\a:{sqrt(2)});
+}
+\fill (0,0) circle (1pt);
+\node[right] at (0:{sqrt(6)}) {$\alpha$};
+\node[above left] at (150:{sqrt(2)}) {$\beta$};
+\node at (0,-2.857) {$G_2$: 12 roots};
+\end{scope}
+\end{tikzpicture}
+```

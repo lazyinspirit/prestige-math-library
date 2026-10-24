@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-neural-operator.json
+  precheck: n/a
 id: def-neural-operator
 kind: definition
 title: "Neural operator between function spaces"
@@ -17,8 +20,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Kovachki et al., Neural Operator: Learning Maps Between Function Spaces With Applications to PDEs"
@@ -46,12 +47,12 @@ The first integral is invariant under null changes and obeys $\|S_0(a)\|_\infty\
 For equal input and output domains, the diagram records the composition order: a pointwise lift, integral-kernel layers on $D$, and a pointwise output projection. Each $\mathcal K_t$ box denotes the integral layer defined above; arrows denote function composition and do not assert a theorem.
 
 ```tikz
-\begin{tikzpicture}[>=stealth,node distance=2.7cm]
-  \node[draw,rounded corners,minimum width=2cm,align=center] (a) {$a\in A$};
-  \node[draw,rounded corners,minimum width=2cm,align=center,right of=a] (p) {$P$ pointwise lift};
-  \node[draw,rounded corners,minimum width=2cm,align=center,right of=p] (k) {$\sigma_t,\mathcal K_t$\ integral layers};
-  \node[draw,rounded corners,minimum width=2cm,align=center,right of=k] (q) {$Q$ pointwise projection};
-  \node[draw,rounded corners,minimum width=2cm,align=center,right of=q] (g) {$G(a)\in U$};
+\begin{tikzpicture}[>=stealth,every node/.style={draw,rounded corners,text width=2.4cm,minimum height=1cm,align=center}]
+  \node (a) at (0,0) {$a\in A$};
+  \node (p) at (3.3,0) {$P$\\pointwise lift};
+  \node (k) at (6.6,0) {$\sigma_t,\mathcal K_t$\\integral layers};
+  \node (q) at (9.9,0) {$Q$\\pointwise projection};
+  \node (g) at (13.2,0) {$G(a)\in U$};
   \draw[->] (a) -- (p);
   \draw[->] (p) -- (k);
   \draw[->] (k) -- (q);

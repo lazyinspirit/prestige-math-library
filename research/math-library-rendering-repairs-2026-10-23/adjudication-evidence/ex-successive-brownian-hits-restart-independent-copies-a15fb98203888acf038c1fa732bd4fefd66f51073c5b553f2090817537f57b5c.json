@@ -1,0 +1,164 @@
+{
+  "id": "ex-successive-brownian-hits-restart-independent-copies",
+  "agent": "/root/rendering_repair_coordinator/prob_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Authentic original tiles 02 and 03 visibly display t>=0, W_{t wedge sigma}, H_n=sigma(...), and other mathematical expressions as ordinary text; the frozen source lacks delimiters for precisely those expressions.",
+      "action": "Added delimiters and equivalent TeX for inequalities, stopped variables, generated sigma-algebras, path spaces, evaluation maps and the telescoping sum without changing the argument.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The shifted stopped-path encoding and the embedded walk use different time parameters; a bounded-strip stopping schematic plus an exit-index chain materially clarifies their connection. Original tiles 01\u201303 and frozen source contain no such illustration.",
+      "action": "Added a fenced TikZ illustration in final Remarks, outside the verification and Facts; it shows first exit at +1, constant extension, and the embedded positions and sign increments.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original tile 01 shows N(0,m), m>0, sqrt(m), and A intersect {tau<=t} as plain notation, and tile 02 shows reflection x maps to -x. These mathematical expressions are also missing delimiters in the frozen Facts.",
+      "action": "Formatted the expressions in the Example and Facts with equivalent mathematics.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Original tile 02 and the first current previews show literal C^1 and L^1 in the inherited change-of-variables supplier label.",
+      "action": "Added an explicit local wikilink label with $C^1$ and $L^1$; the supplier and link target remain unchanged.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Formatted previously unparsed mathematics and one inherited reference label; added an explanatory stopped-segment/embedded-walk TikZ diagram with precise independence caveats.",
+  "source_lines_after": [
+    39,
+    50,
+    52,
+    54,
+    56,
+    60,
+    66,
+    68,
+    70,
+    72,
+    74,
+    76,
+    78,
+    80,
+    90,
+    92,
+    93,
+    100,
+    101,
+    125,
+    129,
+    130,
+    131,
+    132
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "On the existing measurable probability-one event, sigma_n=S_{n+1}-S_n>0 and Z_n(t)=X_{(S_n+t) wedge S_{n+1}}-X_{S_n}, for t>=0; E_n=(sigma_n,Z_n).",
+      "check": "These are exactly the Example segment coordinates and step 5.1; the path variable has domain [0,infinity) and real values."
+    },
+    {
+      "relation": "Z_n(0)=0; |Z_n(t)|<1 for 0<=t<sigma_n; Z_n(sigma_n)=+1 in the drawn case; Z_n(t)=+1 for t>=sigma_n.",
+      "check": "The defining first exit in the Example and continuity in step 2.1 give the strict pre-exit strip and endpoint. Every polygonal vertex before the final endpoint has ordinate strictly between -1 and 1, each connecting segment stays in that strip, and the first drawn boundary contact is (sigma_n,1). The dashed horizontal segment follows the stopped-coordinate definition. The reflected picture represents exit at -1."
+    },
+    {
+      "relation": "Y_n=X_{S_n}; arrows Y_0=0 -> Y_1 -> Y_2 have increments d_0,d_1, with d_n=Y_{n+1}-Y_n in {-1,1}.",
+      "check": "This is the Example embedded walk and step 7.1. The arrows index n, not physical elapsed time; they do not encode equally spaced S_n or any duration moment."
+    },
+    {
+      "relation": "E_n iid; d_n independent fair signs; independence of a restarted remainder from its own stopped history only.",
+      "check": "Steps 4.1 and 6.1 justify segment independence, and step 7.1 justifies sign fairness. Checked the local strong-Markov supplier Statement and usual-augmentation definition: the relevant filtration is the usual augmented filtration of each normalized Brownian restart. The Remarks explicitly exclude independence of nested entire futures W^n and describe the polygonal trace as a schematic rather than Brownian regularity. The rigorous eight-step verification remains independent of the illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-successive-brownian-hits-restart-independent-copies.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-successive-brownian-hits-restart-independent-copies.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-successive-brownian-hits-restart-independent-copies.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Native repair-preview.mts with --ids ex-successive-brownian-hits-restart-independent-copies --out research/math-library-rendering-repairs-2026-10-23/previews/prob-001-complete and repository-local TMPDIR runtime-prob-001-complete",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 3,
+        "reference_map_diagnostics": 16
+      }
+    },
+    {
+      "check": "Compared complete raw frontmatter with frozen before and all ordered wikilink targets",
+      "result": "Byte-identical frontmatter including status published, metadata and deps; every link target preserved."
+    }
+  ],
+  "original_evidence": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/probability",
+    "supplement_evidence_dir": "research/math-library-rendering-audit-2026-10-23/probability/diagram-supplement",
+    "path_discrepancy": "The supplemental evidence_dir/screenshots paths do not exist. Resolved authentic category-level screenshots by the exact recorded SHA256 values; viewed all three at original resolution.",
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/probability/screenshots/ex-successive-brownian-hits-restart-independent-copies--01.png",
+        "sha256": "d6cb4383fac69a521fa2133c162661aa228f9e2aa0ed230175737b95eb7b2e9b"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/probability/screenshots/ex-successive-brownian-hits-restart-independent-copies--02.png",
+        "sha256": "661b9d07f6cd6ede3fc8a4b452a6f5868cfbd9152f95e17e501143dbfe24061c"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/probability/screenshots/ex-successive-brownian-hits-restart-independent-copies--03.png",
+        "sha256": "9eb06f3531c6a1e09fb60bb244fad66aa491363da90897b0d8fda8ad44d0fc78"
+      }
+    ]
+  },
+  "visual_verification": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/prob-001-complete/manifest.json",
+    "manifest_sha256": "0de784fd2999b7ad23935252c016244bdbc986aa84c5a2ec1956b0e5cf700e16",
+    "source_sha256": "06cf16d5a7bab69aa7d76a8f44d9f0ae36b33a9ae1c99f6bf9036255925e9c1b",
+    "reference_map_sha256": "c3d19b531890b78a44f1d22d47ecec8e2b7020769bb240537e70a8963d0373a0",
+    "inspected_original_resolution_tiles": [
+      "01",
+      "02",
+      "03"
+    ],
+    "result": "Final native ItemBody preview displays repaired math and local alias, intact supplier links, and a compiled diagram with both strip boundaries, first contact, constant extension, two exit-index arrows and readable labels; no diagram overlap or clipping observed.",
+    "limits": "Local native ItemBody preview, not production HTTP route; the manifest records 16 unrelated reference-map parse diagnostics."
+  },
+  "remaining_issues": []
+}

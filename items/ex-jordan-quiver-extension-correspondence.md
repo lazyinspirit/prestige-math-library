@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-jordan-quiver-extension-correspondence.json
+  precheck: pass
 id: ex-jordan-quiver-extension-correspondence
 kind: example
 title: "The one-loop quiver extension correspondence in dimension two"
@@ -16,8 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 
 sources:
   references:
@@ -31,12 +32,12 @@ sources:
 
 Let $Q$ have one vertex and one loop $x$:
 
-~~~tikz
-\begin{tikzpicture}[>=stealth]
+```tikz
+\begin{tikzpicture}[>=stealth,scale=2,transform shape]
   \node[circle,draw,inner sep=2.5pt] (v) at (0,0) {$\bullet$};
   \draw[->] (v) edge[loop above] node {$x$} (v);
 \end{tikzpicture}
-~~~
+```
 
 Take $\mathbf a=\mathbf b=1$. Then
 $\operatorname{Rep}_Q(1)=\mathbb C$ and

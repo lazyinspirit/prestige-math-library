@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-cg-bipartite-coxeter-element-and-root-recursion.json
+  precheck: n/a
 id: def-cg-bipartite-coxeter-element-and-root-recursion
 kind: definition
-title: "The bipartite Coxeter element, its ordered prefix roots, and the conditional vector map mu(a) = -2(c-1)^{-1}a"
+title: "The bipartite Coxeter element, its ordered prefix roots, and the conditional vector map μ(a) = −2(c−1)⁻¹a"
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -26,13 +29,7 @@ sources:
     - title: "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)"
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Section 2.5 'Coxeter element and Coxeter number', printed pp. 22-24 with Figures 2.5-2.7: 'The underlying graph of the Coxeter diagram for a finite Coxeter group has no cycles. Hence it is bipartite', the well-defined element c = (product over I+) (product over I-), Example 2.16 for A5 and the Coxeter plane of c"
-verification:
-  audited: "2026-10-08"
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Definition

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-resolvent-power-estimates-for-semigroup-generators.json
+  precheck: pass
 id: cor-resolvent-power-estimates-for-semigroup-generators
 kind: corollary
 title: "Resolvent power estimates for semigroup generators"
@@ -29,12 +32,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)"
       url: "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "Chapter 11 Section 11.4, Corollary 11.14, printed pp. 263-264"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -55,7 +53,7 @@ Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\ge0}$ be a st
 
 ## Proof
 
-**Proof technique:** direct: differentiate the Laplace representation in $\lambda$, identify the derivative with $-R(\lambda,A)^2$ by the resolvent identity, and iterate.
+**Proof technique:** direct: differentiate the Laplace representation in the real spectral parameter, identify the derivative with the negative square of the resolvent by the resolvent identity, and iterate.
 
 1.1 For $\lambda>\omega$ the integrand $t\mapsto e^{-\lambda t}T(t)x$ is dominated in norm by $Me^{(\omega-\lambda)t}\|x\|$; for a fixed $\lambda_0\in(\omega,\lambda)$ the tails satisfy $\int_R^\infty te^{(\omega-\lambda_0)t}\,dt\to0$ as $R\to\infty$, which is the uniform-in-$h$ domination used below. [F1, F3]
 

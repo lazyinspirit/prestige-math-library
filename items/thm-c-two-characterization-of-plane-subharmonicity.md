@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-c-two-characterization-of-plane-subharmonicity.json
+  precheck: pass
 id: thm-c-two-characterization-of-plane-subharmonicity
 kind: theorem
-title: "A C^2 function is subharmonic exactly when its Laplacian is nonnegative"
+title: "A $C^2$ function is subharmonic exactly when its Laplacian is nonnegative"
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-harmonic-majorant-characterization-of-plane-subharmonicity]
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:

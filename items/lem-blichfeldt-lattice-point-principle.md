@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-blichfeldt-lattice-point-principle.json
+  precheck: pass
 id: lem-blichfeldt-lattice-point-principle
 kind: lemma
 title: "Blichfeldt lattice-point principle"
@@ -30,9 +33,7 @@ sources:
     - title: "Ben Green, Additive Combinatorics, Lecture 3 §3.7"
       url: "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf"
       locator: "Lecture 3 §3.7 Lemma 3.4, pp.26-27."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -119,3 +120,47 @@ contradiction. The hypothesis is
 strict: for $S=(0,1]^2$ and $\Lambda=\mathbb Z^2$ one has
 $\lambda_2(S)=\operatorname{covol}(\Lambda)=1$ and no two distinct points of
 $S$ differ by a lattice vector.
+
+
+For the planar case, the schematic below illustrates steps 2.1, 3.1 and 4.1.
+The two shaded pieces are translated from distinct tiles into the same
+fundamental parallelotope. If their images meet at $z$, then
+$x=z+\lambda_j$ and $y=z+\lambda_k$ are distinct points of $S$ with
+$x-y=\lambda_j-\lambda_k\in\Lambda$. Thus the no-pair assumption in the
+proof forbids the pictured overlap. Tile outlines indicate location only;
+the half-open boundary convention remains $0<t_i\le1$. The argument above
+is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\draw[dashed] (0,0) rectangle (2,2);
+\draw[dashed] (4,0) rectangle (6,2);
+\node at (1,2.4) {$P+\lambda_j$};
+\node at (5,2.4) {$P+\lambda_k$};
+\fill[cyan,opacity=0.3] (0.8,1) circle (0.6);
+\draw[cyan] (0.8,1) circle (0.6);
+\fill[orange,opacity=0.3] (5.2,1) circle (0.6);
+\draw[orange] (5.2,1) circle (0.6);
+\node at (0.75,0.15) {$S_j$};
+\node at (5.25,0.15) {$S_k$};
+\fill (1,1) circle (0.045);
+\fill (5,1) circle (0.045);
+\node[above] at (1,1) {$x$};
+\node[above] at (5,1) {$y$};
+\draw[->] (1,-0.25) -- (2.5,-1.7);
+\draw[->] (5,-0.25) -- (3.5,-1.7);
+\node[left] at (1.7,-0.9) {$-\lambda_j$};
+\node[right] at (4.3,-0.9) {$-\lambda_k$};
+\draw[dashed] (2,-4) rectangle (4,-2);
+\node[right] at (4,-2.15) {$P$};
+\fill[cyan,opacity=0.3] (2.8,-3) circle (0.6);
+\fill[orange,opacity=0.3] (3.2,-3) circle (0.6);
+\draw[cyan] (2.8,-3) circle (0.6);
+\draw[orange] (3.2,-3) circle (0.6);
+\node at (2.5,-3.8) {$T_j$};
+\node at (3.5,-3.8) {$T_k$};
+\fill (3,-3) circle (0.045);
+\node[above] at (3,-3) {$z$};
+\node at (3,-4.5) {$z=x-\lambda_j=y-\lambda_k$};
+\end{tikzpicture}
+```

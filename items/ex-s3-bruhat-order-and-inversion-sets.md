@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-s3-bruhat-order-and-inversion-sets.json
+  precheck: pass
 id: ex-s3-bruhat-order-and-inversion-sets
 kind: example
 title: S3 bruhat order and inversion sets
@@ -8,12 +11,6 @@ deps: []
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: Björner and Brenti, Combinatorics of Coxeter Groups, §2.2; the six-element computation is supplied locally
@@ -40,3 +37,26 @@ Each element of rank one lies below both elements of rank two. Containment of in
 3.1 Its covers are $1\to a,b$; $a\to ab,ba$ and $b\to ab,ba$; and $ab,ba\to321$. Each is left multiplication by a transposition. For the middle four covers, compute $(ab)a^{-1}=aba=(13)$, $(ba)a^{-1}=b$, $(ab)b^{-1}=a$, and $(ba)b^{-1}=bab=(13)$. For the last two use $321=bab$ to get $321(ab)^{-1}=b$, and $321=aba$ to get $321(ba)^{-1}=a$. The first two use $a,b$ themselves. Each cover raises length by one. Conversely any transposition multiplication raising length by one must connect adjacent ranks, and the displayed list includes every possible pair of adjacent ranks. Thus chains of such multiplications give exactly the subword order computed in 2.1; both usual strong Bruhat conventions agree here. [step 1.1, step 2.1]
 
 4.1 Direct inequalities between the three entries give the inversion sets: $123$ has $\varnothing$, $213$ has $\{(1,2)\}$, $132$ has $\{(2,3)\}$, $231$ has $\{(1,3),(2,3)\}$, $312$ has $\{(1,2),(1,3)\}$, and $321$ has all three pairs. Their sizes match the lengths in 1.1. Yet $213\leq231$ by 2.1 while $(1,2)$ belongs only to the former inversion set. This is the required failed containment witness. The empty word is the unique minimum and either longest reduced word gives the same unique maximum. Every computation is finite and explicit, so no choice or general exchange theorem is assumed. [step 1.1, step 2.1, step 3.1] ∎
+
+## Remarks
+
+The Hasse diagram below displays the covers verified in step 3.1; higher vertices are larger in strong Bruhat order. Each vertex is labeled by its one-line permutation and a reduced word. Crossing edges have no vertex at their intersection. The edge from $213=a$ to $231=ab$ illustrates the failed inversion-set containment in step 4.1: $(1,2)$ is an inversion of $213$ but not of $231$. The verification above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.7cm,y=1.25cm]
+\node (e) at (0,0) {$123=1$};
+\node (a) at (-1,1) {$213=a$};
+\node (b) at (1,1) {$132=b$};
+\node (ab) at (-1,2) {$231=ab$};
+\node (ba) at (1,2) {$312=ba$};
+\node (w) at (0,3) {$321=aba=bab$};
+\draw (e)--(a);
+\draw (e)--(b);
+\draw (a)--(ab);
+\draw (a)--(ba);
+\draw (b)--(ab);
+\draw (b)--(ba);
+\draw (ab)--(w);
+\draw (ba)--(w);
+\end{tikzpicture}
+```

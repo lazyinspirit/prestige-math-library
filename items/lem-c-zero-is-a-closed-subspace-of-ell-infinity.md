@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-c-zero-is-a-closed-subspace-of-ell-infinity.json
+  precheck: pass
 id: lem-c-zero-is-a-closed-subspace-of-ell-infinity
 kind: lemma
-title: c_0 is a closed subspace of ell-infinity
+title: $c_0$ is a closed subspace of $\ell^\infty$
 status: published
 origin: pipeline
 deps: [def-c-zero-and-ell-infinity, def-metric-topology]
@@ -9,8 +12,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  audited: 2026-09-06
 sources:
   references:
     - title: Piotr Hajlasz, Functional Analysis, §10.5
@@ -25,7 +26,7 @@ $c_0$ is a closed linear subspace of $\ell^\infty$ in the sup norm.
 
 **Given:** The sequence spaces $c_0\subseteq\ell^\infty$.
 
-[F1] $c_0$ consists of bounded sequences tending to zero, with the sup norm ([[def-c-zero-and-ell-infinity]]).
+[F1] $c_0$ consists of bounded sequences tending to zero, with the sup norm ([[def-c-zero-and-ell-infinity|The sequence spaces $c_0$ and $\ell^\infty$]]).
 
 ## Proof
 

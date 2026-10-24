@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-the-oscillating-zigzag-curve.json
+  precheck: pass
 id: lem-the-oscillating-zigzag-curve
 kind: lemma
 title: "The graph of the piecewise-linear map oscillating between $0$ and $1$ on the intervals $[1/(n+2), 1/(n+1)]$ is path-connected, its closure adds the segment $\\{0\\} \\times [0,1]$, and that closure is connected, is not path-connected because no path joins the segment to the graph, and is not locally connected"
@@ -23,14 +26,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-04
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -168,3 +163,32 @@ $\varepsilon_n$ alone.
 - **The failure is exactly at the added segment.** By claim 2 the only points of $\overline{G}$ not in $G$ are those of $\{0\} \times [0,1]$, and claim 5 locates the failure of local connectedness at each of them. At every point of $G$ the space $\overline{G}$ still looks like $(0,1]$, since $G$ is open in $\overline{G}$ — its complement $\{0\} \times [0,1]$ is closed — so no pathology occurs away from the segment.
 
 - **Both endpoint values are attained on every piece, and that is the whole mechanism.** The proof never uses any property of $f$ beyond continuity and the fact recorded in step 5.3: arbitrarily close to $0$ the function takes the value $0$ and the value $1$. Any function with that property and a path-connected graph would serve.
+
+**Illustration.** The blue polygonal line shows the pieces $I_0,\ldots,I_{10}$
+of $G$, with vertices $(1/(n+1),\varepsilon_n)$ for $0\le n\le11$.
+The remaining pieces continue oscillating toward $x=0$ and are omitted;
+the dots indicate this omission, not an extra part of the graph.
+The orange segment is $\{0\}\times[0,1]$, added by closure, and is disjoint
+from $G$. In particular, the drawn finite truncation does not join that segment.
+The filled point at $(1,0)$ belongs to $G$; both endpoints of the orange segment
+belong to the closure. This illustrates claim 2 and the oscillation used in
+steps 1.5 and 3.2; all connectivity claims are proved independently above.
+
+```tikz
+\begin{tikzpicture}[x=9cm,y=3cm]
+\draw[->] (-0.03,-0.18) -- (1.08,-0.18) node[right] {$x$};
+\node[below] at (0,-0.18) {$0$};
+\node[below] at (1,-0.18) {$1$};
+\node[left] at (0,0) {$0$};
+\node[left] at (0,1) {$1$};
+\draw[orange,very thick] (0,0) -- (0,1);
+\fill[orange] (0,0) circle (1.8pt);
+\fill[orange] (0,1) circle (1.8pt);
+\draw[blue,thick] (1,0) -- (0.5,1) -- (0.333333,0) -- (0.25,1) -- (0.2,0) -- (0.166667,1) -- (0.142857,0) -- (0.125,1) -- (0.111111,0) -- (0.1,1) -- (0.090909,0) -- (0.083333,1);
+\fill[blue] (1,0) circle (1.8pt);
+\node[blue] at (0.045,0.5) {$\cdots$};
+\node[blue] at (0.7,0.75) {$G$};
+\node[orange,above] at (0,1.12) {$\{0\}\times[0,1]$};
+\node[above] at (0.5,1) {$(1/2,1)$};
+\end{tikzpicture}
+```

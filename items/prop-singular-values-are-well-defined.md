@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-singular-values-are-well-defined.json
+  precheck: pass
 id: prop-singular-values-are-well-defined
 kind: proposition
-title: "Singular values are well defined because the positive square root of T^*T is unique"
+title: "Singular values are well defined because the positive square root of $T^*T$ is unique"
 status: published
 origin: session
 provenance:
@@ -11,13 +14,6 @@ deps: [def-singular-values-of-an-endomorphism, thm-non-negative-square-root-exis
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:

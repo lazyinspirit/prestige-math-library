@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-distinct-borel-measures-can-represent-the-same-c-c-functional.json
+  precheck: pass
 id: cex-distinct-borel-measures-can-represent-the-same-c-c-functional
 kind: counterexample
-title: "Distinct Borel measures can represent the same C_c functional"
+title: "Distinct Borel measures can represent the same $C_c$ functional"
 status: published
 origin: pipeline
 provenance:
@@ -9,12 +12,6 @@ provenance:
   proof: ai-altered
 deps: [lem-dieudonne-measure-and-top-dirac-agree-on-continuous-functions, fs-rmk-representing-measure-is-unique-among-all-borel-measures, cex-dieudonne-borel-measure-on-omega-one-plus-one-is-not-regular]
 proof_strategy: direct
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"

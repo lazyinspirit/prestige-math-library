@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-abelian-category-of-representations-of-a-two-object-quiver.json
+  precheck: pass
 id: ex-the-abelian-category-of-representations-of-a-two-object-quiver
 kind: example
 title: "Representations of the quiver 1 -> 2 in abelian groups form an abelian category"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -44,3 +44,25 @@ These representations form an abelian category.
 1.1 The free preadditive category on the quiver $1\to2$ is small, and an additive functor out of it is exactly the data of two abelian groups and one homomorphism between them. [L1, L2]
 
 2.1 Therefore the category of quiver representations is a special case of [L2] with target $\mathbf{Ab}$ from [L1]. So it is abelian. [L1, L2, step 1.1] ∎
+
+## Remarks
+
+For representations $u:A_1\to A_2$ and $v:B_1\to B_2$, a morphism
+$(f_1,f_2):u\to v$ consists of homomorphisms $f_i:A_i\to B_i$ such that
+$f_2\circ u=v\circ f_1$. Thus the two paths from $A_1$ to $B_2$ agree:
+
+```tikz
+\begin{tikzpicture}[scale=1.3, every node/.style={font=\large}]
+\node (A1) at (0,1.6) {$A_1$};
+\node (A2) at (3,1.6) {$A_2$};
+\node (B1) at (0,0) {$B_1$};
+\node (B2) at (3,0) {$B_2$};
+\draw[->] (A1) -- node[above] {$u$} (A2);
+\draw[->] (B1) -- node[below] {$v$} (B2);
+\draw[->] (A1) -- node[left] {$f_1$} (B1);
+\draw[->] (A2) -- node[right] {$f_2$} (B2);
+\end{tikzpicture}
+```
+
+The square illustrates the morphism condition; the verification above establishes
+abelianness independently of the diagram.

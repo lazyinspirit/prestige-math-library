@@ -1,0 +1,52 @@
+---
+id: prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion
+kind: proposition
+title: The Euler class of an oriented odd-rank bundle is two-torsion
+status: published
+origin: pipeline
+deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-axiom-of-choice"]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Allen Hatcher, Vector Bundles & K-Theory
+      url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
+      locator: "Euler orientation sign and Proposition 3.13(d), printed pp.90–92"
+    - title: Milnor and Stasheff, Characteristic Classes
+      url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
+      locator: "§9 orientation reversal of Euler classes, printed pp.115–124"
+verification:
+  audited: 2026-09-22
+---
+
+## Statement
+
+Assume AC. Let $(E,o)\to B$ be an integrally oriented numerable real vector
+bundle of odd rank $n\geq1$ over a base in the scope of the general Thom
+theorem. Then
+$$2e(E,o)=0\qquad\text{in }H^n(B;\mathbb Z).$$
+No unconditional vanishing of $e(E,o)$ is asserted, and no homotopy of
+fiberwise $-1$ to the identity is used or claimed.
+
+## Facts & Assumptions
+
+**Given:** AC, an integrally oriented numerable real rank-$n$ bundle $(E,o)\to B$ with $n$ odd and $n\geq1$, over a base in the general Thom scope.
+
+[F1] An orientation of $E$ is a section of its orientation cover, and a fiberwise invertible bundle map is orientation-preserving when it carries the selected orientation to the selected orientation. In an oriented local frame this is equivalent to having positive determinant; consequently $-\operatorname{id}$ acts on the two orientations of a positive-rank fiber by the sign $(-1)^r$ in rank $r$ ([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
+
+[F2] The Euler class is natural for orientation-preserving pullbacks and isomorphism squares, and reversing an integral orientation negates it: $e(f^*E)=f^*e(E)$ for orientation-preserving $f$, and $e(E,-o)=-e(E,o)$ ([[thm-naturality-orientation-sign-and-whitney-product-for-euler-classes]], [[def-euler-class-by-zero-section-pullback-of-the-thom-class]]).
+
+[A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]].
+
+## Proof
+1.1 The map $\varphi=-\operatorname{id}_E:E\to E$, fiberwise multiplication by $-1$, is a bundle isomorphism over $\operatorname{id}_B$. In any oriented local frame its matrix is $-I_n$, whose determinant has sign $(-1)^n=-1$. By the orientation-cover action in [F1], $\varphi$ therefore exchanges the two fiber orientations and carries the section $o$ to the opposite section $-o$. Thus it is an orientation-preserving bundle isomorphism from the oriented bundle $(E,o)$ to the differently oriented bundle $(E,-o)$ over the identity. [F1]
+
+1.2 The orientation-sign law gives $e(E,-o)=-e(E,o)$, by the reversal clause of [F2] applied to the same underlying bundle with its two orientations. [F2]
+
+2.1 Oriented naturality gives $e(E,o)=e(E,-o)$. Applying the naturality clause of [F2] to the isomorphism $\varphi$ over the identity base map, the class of the source and the class of the target agree, which is the displayed identity and uses only that $\varphi$ is orientation-preserving. [F2, step 1.1]
+
+3.1 Combining gives $e(E,o)=e(E,-o)=-e(E,o)$, hence $2e(E,o)=0$ in the abelian group $H^n(B;\mathbb Z)$. No assertion that $\varphi$ is homotopic to the identity is made: the argument compares two orientations of one bundle through an orientation-preserving isomorphism, exactly as displayed. [step 2.1, step 1.2, algebra]
+
+4.1 Boundary cases. Rank one is included directly in steps 1.1--3.1, so no separate triviality or section claim is needed. Rank zero is excluded: $\det(-I_0)=1$, so the map does not carry an orientation to its negative. Even positive rank is excluded for the same determinant-sign reason: there $-\operatorname{id}$ is orientation-preserving on $(E,o)$ itself, so the argument gives no two-torsion conclusion. Over the empty base the group is zero and the identity is vacuous. The only choice principle used is the Thom-theoretic AC of [F2]. [F2, A1, step 3.1] ∎

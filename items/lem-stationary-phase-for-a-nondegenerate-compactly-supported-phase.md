@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-stationary-phase-for-a-nondegenerate-compactly-supported-phase.json
+  precheck: pass
 id: lem-stationary-phase-for-a-nondegenerate-compactly-supported-phase
 kind: lemma
 title: Stationary phase with a compactly supported amplitude
@@ -28,23 +31,6 @@ deps:
 - lem-schwartz-cutoffs-from-the-standard-smooth-step
 - thm-euclidean-heine-borel-pseudocompactness-and-extreme-values
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-6.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-6.result.json
-      - research/frontier-38-owner-30-step5-hash-6-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-6-5a-decisions.json
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 provenance:
   statement: literature-derived
   proof: literature-derived
@@ -80,7 +66,7 @@ Let $d\ge1$, $a\in C_c^\infty(\mathbb R^d)$, $\varphi\in C^\infty(\mathbb R^d;\m
 
 ## Proof
 
-**Proof technique:** direct; localize with cutoffs, gain $\lambda^{-1}$ per integration by parts against the phase gradient, and balance the gain against the $|x|^{-2}$ loss and the annulus volume to obtain the exponent $d/2$.
+**Proof technique:** direct; localize with cutoffs, gain the reciprocal of lambda per integration by parts against the phase gradient, and balance the gain against the inverse-square radial loss and the annulus volume to obtain an exponent equal to half the dimension.
 
 1.1 Non-stationary decay (a). Assume $|\nabla\varphi|\ge\kappa>0$ on a neighbourhood of $\operatorname{supp}a$. Cover $\operatorname{supp}a$ by finitely many balls on each of which some partial derivative satisfies $|\partial_j\varphi|\ge\kappa/\sqrt d$; such a cover exists because $|\nabla\varphi|$ is the Euclidean norm of the gradient. By [F5] choose a smooth partition of unity $\sum_r\rho_r=1$ on a neighbourhood of $\operatorname{supp}a$ subordinated to that cover and replace $a$ by $a\rho_r$, reducing to the case where $|\partial_j\varphi|\ge c>0$ on $\operatorname{supp}a$ for one index $j$. Put $\psi:=1/\partial_j\varphi$ on a neighbourhood of $\operatorname{supp}a$ and $F:=e^{2\pi i\lambda\varphi}$. Since $\partial_jF=2\pi i\lambda\,\partial_j\varphi\,F$, [F1] gives $$\int e^{2\pi i\lambda\varphi}a\,dx=(2\pi i\lambda)^{-1}\int(\partial_jF)\psi a\,dx=-(2\pi i\lambda)^{-1}\int F\,\partial_j(\psi a)\,dx.$$ Iterating this identity $N$ times (each step replaces the amplitude by $\partial_j(\psi\,\cdot)$, a smooth compactly supported function) yields $|I(\lambda)|\le(2\pi\lambda)^{-N}C_N$, where $C_N$ is a finite supremum of derivatives of $a,\psi$ on the support; summing the finitely many patches gives (a). [F1, F5, given, algebra]
 

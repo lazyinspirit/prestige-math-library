@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-p-weights-are-doubling.json
+  precheck: pass
 id: lem-a-p-weights-are-doubling
 kind: lemma
-title: A_p weights are doubling
+title: $A_p$ weights are doubling
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.25, printed p. 80"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

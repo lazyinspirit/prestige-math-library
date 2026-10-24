@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-blowup-intersection-matrix-at-smooth-point.json
+  precheck: pass
 id: lem-blowup-intersection-matrix-at-smooth-point
 kind: lemma
 title: "The intersection matrix of a point blowup of a regular surface"
@@ -51,19 +54,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-26.md"
-      - "research/frontier-38-owner-30-alpha-batch-26-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-26-post-5a.json"
-    content_sha256: "dba2a4a9603e0aff12fa6dd6fc26f3d3dbbf9781d74aa3fc24acf4d94842069b"
-  precheck: pass
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21"
@@ -132,3 +122,39 @@ $E:=\pi^{-1}(p)$ be the exceptional curve
 4.2 Pushforward vanishing and the projection formula give $\chi(X',\pi^*\mathcal N)=\chi(X,\mathcal N)$ for every invertible $\mathcal N$. Pullback respects tensor products and duals. Apply this equality to the four sheaves $\mathcal O_X$, $\mathcal O_X(D)^\vee$, $\mathcal O_X(D')^\vee$, and their tensor product in the defining Euler-characteristic expression for intersection. The result is $\pi^*D\cdot\pi^*D'=D\cdot D'$, including the self-intersection case. [F5, F6, F7, step 3.1]
 
 5.1 For the reduced curve through $p$, the proved point formula gives $\pi^*C=C'+mE$. Orthogonality and symmetry imply $0=E\cdot C'+mE^2$, hence $C'\cdot E=mr$. Bilinearity and step 4.2 give $C^2=(C'+mE)^2=(C')^2+2m^2r-m^2r$, so $(C')^2=C^2-m^2r$. If $p\notin C$, a local equation is a unit near $p$; its pullback misses $E$, and the off-center isomorphism gives $\pi^*C=C'$. The same pullback identity yields $(C')^2=C^2$. Choice enters only through the recorded suppliers. [F1, F6, F7, F8, step 4.1, step 4.2] ∎
+
+
+## Remarks
+
+The fiber square and pairing table below separate the exceptional direction from
+pullbacks. Here $D,D'$ are arbitrary Cartier divisors on $X$, all pairings in
+the table are on $X'$, and $r=[\kappa(p):k]$. The square is Cartesian by the
+definition of $E=\pi^{-1}(p)$; its horizontal arrows are closed immersions.
+
+```tikz
+\begin{tikzpicture}[font=\LARGE]
+\node (E) at (0,0) {$E\cong\mathbb P^1_{\kappa(p)}$};
+\node (Xp) at (6,0) {$X'$};
+\node (p) at (0,-1.8) {$p=\mathrm{Spec}\,\kappa(p)$};
+\node (X) at (6,-1.8) {$X$};
+\draw[->] (E) -- node[above] {$i$} (Xp);
+\draw[->] (p) -- node[below] {$j$} (X);
+\draw[->] (E) -- node[left] {$q$} (p);
+\draw[->] (Xp) -- node[right] {$\pi$} (X);
+\node at (3,-3.8) {$\begin{array}{c|cc}
+\cdot & \pi^*D' & E\\ \hline
+\pi^*D & D\cdot D' & 0\\
+E & 0 & -r
+\end{array}$};
+\end{tikzpicture}
+```
+
+The maps $i,j$ are the inclusions and $q$ is the structure map of the
+projective line over $\kappa(p)$, so $\pi i=jq$. The normal line bundle
+$\mathcal O_E(E)\cong\mathcal O_{\mathbb P^1_{\kappa(p)}}(-1)$ has degree $-1$
+over $\kappa(p)$; its degree over $k$, and hence $E^2$, is $-r$ (step 4.1).
+The table records steps 4.1–4.2. For the curve $C$ of part 3, combining
+$\pi^*C=C'+mE$ with this table gives $C'\cdot E=mr$ and
+$(C')^2=C^2-m^2r$, as in step 5.1. These are numerical intersections, not a
+claim of $mr$ distinct intersection points. The rigorous proof above is
+independent of the illustration.

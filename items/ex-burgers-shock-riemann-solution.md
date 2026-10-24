@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-burgers-shock-riemann-solution.json
+  precheck: pass
 id: ex-burgers-shock-riemann-solution
 kind: example
 title: The Burgers shock Riemann solution
@@ -21,8 +24,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -61,3 +63,36 @@ gives the shock $x=t/2$ separating $1$ from $0$
 
 
 3.1 **Conclusion via the solver and the initial trace.** By [F1] the shock with speed $s$ is the unique Kruzhkov entropy solution of the Riemann problem, so the weak conservation law, all Kruzhkov entropy inequalities and the strong local $L^1$ trace hold. The trace can also be seen directly: the set where $u(t,\cdot)$ differs from the step datum $u_0$ is contained in the interval between $0$ and $st$, of length $|s|t$ and amplitude $|u_L-u_R|$, so its $L^1$ discrepancy on any compact set is at most $|u_L-u_R||s|t\to0$. For $u_L=1$, $u_R=0$ the formula gives $s=\tfrac12$, so the shock is the ray $x=t/2$, with state $1$ on the left and $0$ on the right. [F1, step 1.1, step 2.1] ∎
+
+
+## Remarks
+
+For the example $u_L=1$, $u_R=0$, the left panel shows the shock in the $(x,t)$ plane; the origin is the initial jump. The right panel shows the chord of $f(u)=u^2/2$ between the two states. Its slope is $s=1/2$, between $f'(0)=0$ and $f'(1)=1$, as in proof steps 1.1–2.1. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\draw[->] (-2,0) -- (2.8,0) node[right] {$x$};
+\draw[->] (0,0) -- (0,3.6) node[above] {$t$};
+\node[below left] at (0,0) {$0$};
+\draw[very thick,blue] (0,0) -- (1.6,3.2);
+\node[right] at (1.55,3.1) {$x=t/2$};
+\node at (-1.1,2) {$u=1$};
+\node at (-1.1,1.5) {$x<t/2$};
+\node at (2,1.2) {$u=0$};
+\node at (2,0.7) {$x>t/2$};
+\begin{scope}[shift={(6,0.5)},scale=2.2]
+\draw[->] (0,0) -- (1.65,0) node[right] {$u$};
+\draw[->] (0,0) -- (0,1.35) node[above] {$f(u)$};
+\draw[thick,blue,domain=0:1.4,samples=70] plot (\x,{0.5*\x*\x});
+\draw[thick,dashed,orange] (0,0) -- (1,0.5);
+\fill (0,0) circle (0.025);
+\fill (1,0.5) circle (0.025);
+\draw[dotted] (1,0) -- (1,0.5) -- (0,0.5);
+\node[below left] at (0,0) {$0$};
+\node[below] at (1,0) {$1$};
+\node[left] at (0,0.5) {$1/2$};
+\node at (0.6,0.72) {$s=1/2$};
+\node at (0.85,1.25) {$f(u)=u^2/2$};
+\end{scope}
+\end{tikzpicture}
+```

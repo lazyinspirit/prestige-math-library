@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-a-conjugate-point-at-which-there-are-many-geodesics.json
+  precheck: pass
 id: cex-a-conjugate-point-at-which-there-are-many-geodesics
 kind: counterexample
 title: A conjugate point at which there are many geodesics
@@ -45,9 +48,7 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lecture 23, section 23.2 (cut locus and regularity of the distance function), and Lecture 24, section 24.1 (the round sphere), printed pp.163-175; the multiplicity n-1 and the cut facts are taken from the pair's own sphere examples."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement refuted
@@ -112,10 +113,37 @@ geodesic from $p$ to $q$.
 
 5.1 By steps 1.1 and 2.1 every $\gamma_m$ is a minimizing geodesic from $p$ to $-p$ along which $-p$ is conjugate to $p$ with multiplicity $n-1$, and by step 4.1 the members of the family are pairwise distinct. The set $G$ of minimizing geodesic segments from $p$ to $-p$ is infinite: if $G$ were finite, then its subset $G'=\{\gamma_m:m\in\mathbb N\}$ would be finite by [F10], so $G'\approx|G'|$ with $|G'|\in\mathbb N$ by [F10]; but $m\mapsto\gamma_m$ is a bijection $\mathbb N\to G'$ by step 4.1, hence $\mathbb N\approx|G'|$, contradicting the statement of [F10] that $\mathbb N$ is not equinumerous with any natural number. Thus the conjugate point $-p$ is joined to $p$ by infinitely many distinct minimizing geodesics, and the claim in the Statement refuted is false: no meridian $\gamma_m$ is the unique minimizing geodesic from $p$ to the conjugate point $q=-p$. [F10, step 1.1, step 2.1, step 4.1]
 
-6.1 Boundary and choice audit. The dimension hypothesis $n\ge2$ is used exactly at steps 1.2 and 2.2 to obtain two orthonormal tangent directions and a one-parameter family of unit directions; dimensions $n=0$ (where $T_pS_R^0$ is the zero space, so no unit direction exists) and $n=1$ (where the antipode has only the two semicircles) are outside the quantified claim, and nothing is asserted for them. The zero vector is never used: all $u_m$, including $u_0=e_1$, are unit vectors by step 2.2, and the family is still injective at $m=0$ by step 3.1. The witness is nonempty because $p$ is supplied, and $p\ne-p$ because $|p|=R>0$; the interval $[0,\pi R]$ is nondegenerate because $R>0$, and the meridians are nonconstant geodesics of positive length. Both endpoints of $[0,\pi R]$ are included and the derivative at $0$ is one-sided for the injectivity argument of step 4.1. Exactly the inherited $\mathrm{AC}_\omega$ is assumed: it is spent only through the two sphere examples quoted in [F1] and [F5], while the orthonormal pair of step 1.2 comes from one finite basis list and the family of step 2.2 is given by an explicit formula, so no choice function on a family of directions is invoked. The refuted claim is a one-way uniqueness implication, so no converse case arises. [A1, F1, F5, F9, F10, step 1.1, step 2.2, step 4.1, step 5.1]
-
-$\square$
+6.1 Boundary and choice audit. The dimension hypothesis $n\ge2$ is used exactly at steps 1.2 and 2.2 to obtain two orthonormal tangent directions and a one-parameter family of unit directions; dimensions $n=0$ (where $T_pS_R^0$ is the zero space, so no unit direction exists) and $n=1$ (where the antipode has only the two semicircles) are outside the quantified claim, and nothing is asserted for them. The zero vector is never used: all $u_m$, including $u_0=e_1$, are unit vectors by step 2.2, and the family is still injective at $m=0$ by step 3.1. The witness is nonempty because $p$ is supplied, and $p\ne-p$ because $|p|=R>0$; the interval $[0,\pi R]$ is nondegenerate because $R>0$, and the meridians are nonconstant geodesics of positive length. Both endpoints of $[0,\pi R]$ are included and the derivative at $0$ is one-sided for the injectivity argument of step 4.1. Exactly the inherited $\mathrm{AC}_\omega$ is assumed: it is spent only through the two sphere examples quoted in [F1] and [F5], while the orthonormal pair of step 1.2 comes from one finite basis list and the family of step 2.2 is given by an explicit formula, so no choice function on a family of directions is invoked. The refuted claim is a one-way uniqueness implication, so no converse case arises. [A1, F1, F5, F9, F10, step 1.1, step 2.2, step 4.1, step 5.1] ∎
 
 ## Source locator
 
 Lee, *Riemannian Manifolds: An Introduction to Curvature*, Chapter 10, printed pp.189--190, discusses conjugate points and states (printed p.190) that no geodesic wrapping more than halfway around the flat cylinder is minimizing, and develops the cut locus defined by the last minimizing instant; the round-sphere antipodal geometry used here is the standard companion example. The explicit infinite family of minimizing meridians, its distinctness, and the refutation of uniqueness at the conjugate point are derived above from the pair's own sphere examples [[ex-cut-locus-of-a-point-on-a-round-sphere]] and [[ex-conjugate-antipodes-on-the-round-sphere]], not quoted from the source.
+
+
+## Remarks
+
+The schematic projection below shows three distinct great-circle semicircles
+from $p$ to $q=-p$ on a round two-dimensional sphere inside $S_R^n$.
+The arrow represents the initial unit tangent $v$ of the right-hand meridian
+$\gamma_v$. Each displayed meridian has length $\pi R$, and $q$ is conjugate
+to $p$ along each with multiplicity $n-1$, by steps 1.1 and 2.1.
+Only three representatives are drawn; the infinite family and its distinctness
+are established by steps 2.2--5.1, independently of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[gray] (0,0) circle (2);
+\draw[gray,dashed] (-2,0) .. controls (-1,-0.5) and (1,-0.5) .. (2,0);
+\draw[gray] (-2,0) .. controls (-1,0.5) and (1,0.5) .. (2,0);
+\draw[blue,thick,domain=0:180,samples=65] plot ({-1.5*sin(\x)},{2*cos(\x)});
+\draw[blue,thick] (0,2) -- (0,-2);
+\draw[blue,thick,domain=0:180,samples=65] plot ({1.5*sin(\x)},{2*cos(\x)});
+\draw[->,thick] (0,2) -- (1.2,2) node[right] {$v$};
+\fill (0,2) circle (0.045);
+\fill (0,-2) circle (0.045);
+\node[above left] at (0,2) {$p$};
+\node[below] at (0,-2) {$q=-p$};
+\node[right] at (1.5,0) {$\gamma_v$};
+\node at (0,-2.8) {$L(\gamma)=\pi R\quad\mathrm{for\ each\ meridian}$};
+\end{tikzpicture}
+```

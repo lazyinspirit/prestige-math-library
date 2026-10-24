@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-equicharacteristic-complete-local-power-series-quotient.json
+  precheck: pass
 id: cor-equicharacteristic-complete-local-power-series-quotient
 kind: corollary
 title: "A complete equicharacteristic Noetherian local ring is a power-series quotient"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [cor-equicharacteristic-complete-local-ring-has-coefficient-field, lem-cohen-presentation-surjective-by-completeness]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -46,7 +42,7 @@ $$k\llbracket X_1,\ldots,X_e\rrbracket \twoheadrightarrow A.$$
 
 ## Proof
 
-**Proof technique:** choose a coefficient field and generators of $\mathfrak m/\mathfrak m^2$.
+**Proof technique:** choose a coefficient field and generators of the maximal ideal modulo its square.
 
 1.1 By [L1], choose a coefficient field $k \subseteq A$. Choose elements $x_1,\ldots,x_e \in \mathfrak m$ lifting a $k$-basis of $\mathfrak m/\mathfrak m^2$. [L1, given, choose]
 

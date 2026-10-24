@@ -1,0 +1,128 @@
+{
+  "id": "alg-viterbi-max-product-on-finite-trellis",
+  "agent": "/root/rendering_repair_coordinator/dinfo_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution historical tile shows a correct but entirely textual trellis algorithm. A concrete layered graph materially clarifies the distinct forward score calculation and backward predecessor recovery, including a deterministic tie at a vertex outside the optimal path; warranted under the expanded explanatory-diagram criterion.",
+      "action": "Append final Remarks with a three-layer numeric trellis, highlighted optimal path, score computations and explicit traceback. Preserve every original byte as a prefix.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a five-vertex, six-transition worked trellis in final Remarks, with edge weights, prefix scores, selected predecessor pointers and maximizing terminal path. All original title/body text and frontmatter are unchanged.",
+  "source_lines_after": {
+    "remarks_heading": 53,
+    "example_data": [
+      55,
+      59
+    ],
+    "tikz": [
+      61,
+      85
+    ],
+    "computation_and_caveats": [
+      87,
+      95
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "T=3; ordered V1={a,b}, a<b; ordered V2={c,d}, c<d; V3={e}. Five vertices in three disjoint visual layers.",
+      "justification": "This is an instance of def-finite-layered-trellis, with finite layers and the supplied total orders required by the assigned algorithm."
+    },
+    {
+      "transitions": "E2={(a,c),(a,d),(b,c),(b,d)}, E3={(c,e),(d,e)}. Six directed arrows all point from V(t-1) to Vt; the diagonal crossing between a-d and b-c is not a vertex. No reverse or same-layer trellis edges are asserted.",
+      "weights": "w2(a,c)=3, w2(a,d)=1, w2(b,c)=1, w2(b,d)=2, w3(c,e)=2, w3(d,e)=1. alpha(a)=2, alpha(b)=1 and beta(e)=1; all transition weights are positive and endpoint weights are admissible.",
+      "justification": "Matches the edge domains and endpoint-weight codomains in def-finite-layered-trellis; the chosen numeric data are explicitly given in Remarks."
+    },
+    {
+      "scores": "D1(a)=2, D1(b)=1; D2(c)=max(2*3,1*1,0)=6; D2(d)=max(2*1,1*2,0)=2; D3(e)=max(6*2,2*1,0)=12; Q(e)=12*1=12.",
+      "justification": "Direct substitution into assigned Definition step 1 and terminal step 2; agrees with lem-finite-trellis-prefix-score-recurrence Statement and proof steps 1.1–1.2."
+    },
+    {
+      "pointers": "p2(c)=a uniquely; p2(d)=a by the given order a<b resolving the 2=2 tie; p3(e)=c uniquely since 12>2. Reverse sequence e -> c -> a denotes predecessor lookup, explicitly distinguished from graph edges.",
+      "justification": "Assigned Definition step 1 stores the first maximizing predecessor when the score is positive; step 3 reconstructs (a,c,e). Both thick blue graph arrows are the forward transitions of that path."
+    },
+    {
+      "path_check": "The complete four-path enumeration has scores (a,c,e):12, (a,d,e):2, (b,c,e):2, (b,d,e):2. Thus the illustrated path uniquely maximizes the full score alpha times transition weights times beta.",
+      "justification": "Independent arithmetic enumeration checked by a Node assertion script; score formula is exactly def-finite-layered-trellis."
+    },
+    {
+      "boundaries": "Remarks retain the all-zero terminal-score failure branch and the T=0 empty-path score-one branch in prose; the figure is explicitly a T=3 example and makes no claim to illustrate empty layers or T=0.",
+      "justification": "Matches assigned Definition branches without narrowing the procedure. The rigorous recurrence proof in the unchanged supplier and all defining instructions remain independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-viterbi-max-product-on-finite-trellis.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-viterbi-max-product-on-finite-trellis.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-viterbi-max-product-on-finite-trellis.md",
+            "item_id": "alg-viterbi-max-product-on-finite-trellis",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-viterbi-max-product-on-finite-trellis.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Node assertions: original-prefix/frontmatter byte equality and exhaustive four-path score enumeration",
+      "exit_code": 0,
+      "output": "original_prefix_preserved=true; frontmatter_preserved=true; path scores [12,2,2,2], unique maximum 12"
+    }
+  ],
+  "visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dinfo002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-viterbi-max-product-on-finite-trellis --out research/math-library-rendering-repairs-2026-10-23/previews/dinfo002-v1",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo002-v1/manifest.json",
+    "manifest_sha256": "de3c027c6b8a4efed890e2e50f262abe91dc16754cf6e4a9bccc3f167f309b4e",
+    "source_sha256": "5af9fdf0a950b0c8267eed85ace1ada15446d80072f2bd346852f1532140e433",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo002-v1/screenshots/alg-viterbi-max-product-on-finite-trellis--01.png",
+    "screenshot_sha256": "48037dff514ae1c1b78044858cd05707906a33cf34c88a4a6f5dc352fff37f96",
+    "viewed_original_resolution": true,
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "observation": "Actual native diagram is present. Five vertex circles and all six forward edges are visible; weight and score labels, layer labels, two highlighted transitions and traceback labels are legible, without overlap or clipping. Crossing of the two middle diagonals has no vertex. Renderer preview has 16 unrelated reference-map diagnostics, with no wikilinks used by this illustration.",
+    "limitations": "Local ItemBody preview only; no production route or live HTTP coverage."
+  },
+  "evidence_path_resolution": {
+    "declared_missing": "research/math-library-rendering-audit-2026-10-23/information-theory/diagram-supplement/screenshots/alg-viterbi-max-product-on-finite-trellis--01.png",
+    "authentic_resolved": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/alg-viterbi-max-product-on-finite-trellis--01.png",
+    "sha256": "be1428c83d4b409b3beecc06289d5ac1f212d4f149cac044f93662fd7e4e30cf",
+    "matches_queue_hash": true,
+    "viewed_original_resolution": true
+  },
+  "before_raw_sha256": "d412a8dc477e97e342d1d3ccbd299fe5c68dc4ba3bf37cfc767c8b5c44f1822a",
+  "current_raw_sha256": "5af9fdf0a950b0c8267eed85ace1ada15446d80072f2bd346852f1532140e433",
+  "publication_status_preserved": true,
+  "remaining_issues": []
+}

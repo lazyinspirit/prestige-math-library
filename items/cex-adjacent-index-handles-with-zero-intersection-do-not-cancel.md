@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-adjacent-index-handles-with-zero-intersection-do-not-cancel.json
+  precheck: pass
 id: cex-adjacent-index-handles-with-zero-intersection-do-not-cancel
 kind: counterexample
 title: "Adjacent-index handles with zero intersection do not cancel"
@@ -21,8 +24,7 @@ sources:
     - title: "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156; complete PDF)"
       url: "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
       locator: "§5.4, printed pp. 143-148 (complementary pair versus merely homologically trivial pair)"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement refuted
@@ -56,3 +58,23 @@ Assume $\mathrm{AC}_\omega$. In dimension $n=3$ start from $W_0=D^3$, attach the
 3.1 By [F4] a cancellation of the pair would give a diffeomorphism $W_1\cup h^2\cong W_0=D^3$ relative to the lower stage, hence an isomorphism of fundamental groups $\mathbb Z\cong 1$, which is impossible. Therefore the pair does not cancel, even though both the algebraic and the geometric intersection counts are zero. [F4, F5, step 2.1, step 2.2]
 
 4.1 Consequently the single-point criterion of the cancellation theorem cannot be replaced by a count-only condition: an adjacent-index pair with vanishing (algebraic and geometric) intersection need not cancel, and no diffeomorphism relative to the lower stage removes the pair. [F2, F4, step 3.1] ∎
+
+## Remarks
+
+The square below represents the boundary torus $\partial W_1=S^1\times S^1$ with opposite edges identified: the horizontal coordinate is the first $S^1$ and the vertical coordinate is the second. Thus the endpoints of the blue segment are identified, giving the belt meridian $B=\{p\}\times S^1$. The shaded disk $D$ lies in the interior of the square, away from $B$, and its boundary is the attaching circle $\gamma$. In particular, $\gamma$ is contractible on the torus; it is not the meridian.
+
+```tikz
+\begin{tikzpicture}[scale=1.25]
+\draw[dashed,gray] (0,0) rectangle (4,2.6);
+\node at (2,3.05) {$\partial W_1=S^1\times S^1$};
+\draw[blue,very thick] (0.8,0) -- (0.8,2.6);
+\node[blue,below] at (0.8,-0.12) {$B=\{p\}\times S^1$};
+\fill[orange!20!black] (2.7,1.3) circle (0.55);
+\draw[orange!80!black,thick] (2.7,1.3) circle (0.55);
+\node at (2.7,1.3) {$D$};
+\node[right] at (3.25,1.3) {$\gamma$};
+\node at (2,-0.95) {$\gamma=\partial D,\qquad D\cap B=\emptyset$};
+\end{tikzpicture}
+```
+
+Attach $h^2$ along $\gamma$. The empty intersection gives the matrix entry $0$, while the disk shows that the relation added to $\pi_1(W_1)\cong\mathbb Z$ is trivial. Consequently $\pi_1(W_1\cup h^2)\cong\mathbb Z$, unlike $\pi_1(W_0)=1$. This illustrates steps 1.1–3.1; the rigorous proof above is independent of the picture.

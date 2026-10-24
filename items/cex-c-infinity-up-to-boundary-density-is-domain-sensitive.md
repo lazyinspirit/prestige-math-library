@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-c-infinity-up-to-boundary-density-is-domain-sensitive.json
+  precheck: pass
 id: cex-c-infinity-up-to-boundary-density-is-domain-sensitive
 kind: counterexample
 title: Ambient-smooth density fails on a slit disc
@@ -12,12 +15,6 @@ provenance:
   proof: ai-altered
 generation:
   role: counterexample
-verification:
-  audited: 2026-10-02
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   scraped: []
   references:
@@ -81,3 +78,24 @@ smooth function has equal one-sided values, which is the obstruction.
 5.1 Contradiction. For every $j$ the elementary inequality $|2\pi|^p\le2^{p-1}(|\varphi_j(x,0)|^p+|\varphi_j(x,0)-2\pi|^p)$ holds pointwise on $(1/4,3/4)$, so $$\frac{1}{2}(2\pi)^p=\int_{1/4}^{3/4}|2\pi|^pdx\le2^{p-1}\Bigl(\int_{1/4}^{3/4}|\varphi_j(x,0)|^pdx+\int_{1/4}^{3/4}|\varphi_j(x,0)-2\pi|^pdx\Bigr)\xrightarrow[j\to\infty]{}0$$ by steps 4.1 and 4.2, which is impossible since $(2\pi)^p/2>0$. [F7, step 4.1, step 4.2]
 
 6.1 Therefore no sequence of globally smooth functions converges to $u$ in $W^{1,p}(\Omega)$ for any $1\le p<2$, so ambient smooth restrictions are not dense on this bounded open set. By contrast [F6] gives that density for every bounded $C^k$ domain, so the conclusion cannot be extended to arbitrary open sets. Indeed $\Omega$ is not a bounded $C^1$ domain in the graph sense: near a slit point $(x_0,0)$ with $0<x_0<1$, its complement is only a line segment and has empty interior, so $\Omega$ is dense on both sides of that segment. A one-sided graph domain has a nonempty open complementary side in every sufficiently small chart neighbourhood, which rules out such a chart here. [F6, step 3.1, step 5.1] ∎
+
+
+## Remarks
+
+The schematic shows the slit disc and the two approaches used in steps 4.1 and 4.2. The dashed circle and the highlighted slit are excluded from $\Omega$, including the origin. For each fixed $0<x<1$, the labels give the limits of $u(x,y)$ as $y$ tends to zero from above or below; they do not assign values to $u$ on the slit. A globally smooth $\varphi_j$ has the same limit $\varphi_j(x,0)$ from both sides. The rigorous contradiction is established by the endpoint estimates in the proof, independently of the picture.
+
+```tikz
+\begin{tikzpicture}[x=2.6cm,y=2.6cm,>=stealth,every node/.style={font=\small}]
+\draw[dashed,line width=.8pt] (0,0) circle (1);
+\draw[red,line width=1.5pt] (0,0)--(1,0);
+\draw[red,line width=1pt] (-.035,-.035)--(.035,.035);
+\draw[red,line width=1pt] (-.035,.035)--(.035,-.035);
+\node at (-.15,-.14) {$0$};
+\node at (-.48,.28) {$\Omega$};
+\node[anchor=west] at (1.06,0) {removed slit};
+\draw[->,line width=.9pt] (.55,.48)--(.55,.07);
+\draw[->,line width=.9pt] (.55,-.48)--(.55,-.07);
+\node[anchor=west] at (1.15,.42) {$u(x,y)\to0\quad(y\downarrow0)$};
+\node[anchor=west] at (1.15,-.42) {$u(x,y)\to2\pi\quad(y\uparrow0)$};
+\end{tikzpicture}
+```

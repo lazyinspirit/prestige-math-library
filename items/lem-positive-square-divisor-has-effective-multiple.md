@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-positive-square-divisor-has-effective-multiple.json
+  precheck: pass
 id: lem-positive-square-divisor-has-effective-multiple
 kind: lemma
 title: "Positive square and positive ample intersection force an effective multiple"
@@ -22,11 +25,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21"
@@ -56,7 +54,7 @@ Then there exists an integer $n\ge1$ with $H^0(X,L^{\otimes n})\ne0$.
 
 ## Proof
 
-**Proof technique:** direct: for large $n$ the top cohomology of $L^{\otimes n}$ vanishes and Riemann-Roch makes the Euler characteristic positive; the sign in $h^0=\chi+h^1-h^2$ then gives a section.
+**Proof technique:** direct: for sufficiently large tensor powers of the given invertible sheaf, top cohomology vanishes and Riemann-Roch makes the Euler characteristic positive; the alternating-sum formula then gives a nonzero section.
 
 1.1 Vanishing of the top cohomology for large $n$. By [F1], $L^{\otimes n}\cdot H=n(L\cdot H)\to+\infty$ as $n\to\infty$ because $L\cdot H>0$, so for all $n\gg0$ we have $L^{\otimes n}\cdot H>K_X\cdot H$; by [F2], $H^2(X,L^{\otimes n})=0$ for all such $n$. [F1, F2]
 

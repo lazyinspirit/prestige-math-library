@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-finite-coxeter-classification-including-h-and-dihedral.json
+  precheck: pass
 id: thm-cg-finite-coxeter-classification-including-h-and-dihedral
 kind: theorem
 title: "Classification of finite Coxeter systems, including the H and dihedral families"
@@ -19,13 +22,7 @@ sources:
     - title: "Jean Michel, Lectures on Coxeter groups (Beijing lecture notes, April-May 2014)"
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Theorem 5.15 with its two-part proof, printed pp. 13-15: the list A, B, D, E, F, G, H, I; the determinant computations det C(An)=n+1, det C(Bn)=2, det C(Dn)=4, det C(E6)=3, det C(E7)=2, det C(E8)=1, det C(F4)=1, det C(I2(m))=4(1-cos^2(pi/m)), det C(H3)=3-sqrt5, det C(H4)=(7-3sqrt5)/2; and the remark that I2(2)=A1xA1, I2(3)=A2, I2(4)=B2"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -132,3 +129,93 @@ written $H_2,G_2$.
 3.1 (Inductive step: every listed diagram is positive definite; clause (3).) Let $\Delta$ be a disjoint union of listed diagrams of total rank $n\ge3$, and assume the induction hypothesis of 1.2 [step 1.2]. If $\Delta$ is disconnected, its matrix is block diagonal with blocks the matrices of its components, and every principal submatrix of a block diagonal matrix is block diagonal with blocks the corresponding principal submatrices of the components, so multiplicativity of determinants [F6] and the induction hypothesis give positivity of every principal minor and positive definiteness of $B_\Delta$ [F9]. If $\Delta$ is connected, it is one of the listed diagrams: deleting vertices from an all-$3$ path leaves $A$ paths; a subpath retaining the label-$4$ endpoint edge of $B_n$ is a smaller $B$ path; proper subpaths of $F_4$ are $A$ paths, $B_2$ or $B_3$; and proper subpaths of $H_3,H_4$ are $A$ paths, $I_2(5)$ or $H_3$. Deleting a vertex of $I_2(m)$ leaves $A_1$. Deleting vertices from a star with arm lengths $(a,b,c)$ leaves stars with arm lengths $a'\le a$, $b'\le b$, $c'\le c$ (or paths, when an arm disappears); the triples $(1,1,n-3)$ of $D_n$ and $(1,2,2),(1,2,3),(1,2,4)$ of $E_6,E_7,E_8$ dominate componentwise every smaller triple, and the result is again a $D$ or $E$ diagram of smaller rank, or a path $A$ [F3]. Hence every proper principal submatrix of a listed diagram is block diagonal with blocks listed diagrams of smaller rank, and every principal minor is positive by the induction hypothesis; the full determinant is the positive table value of 2.1 [step 2.1]; since the leading principal minors are principal minors, Sylvester's criterion [F5] gives positive definiteness of the form of every listed diagram, which is (3). [F3, F5, F6, F9, step 1.2, step 2.1, algebra]
 
 4.1 (Discharge of the induction; assembly.) The base case is 2.3 [step 2.3] and the inductive step is 3.1 [step 3.1], so by the induction principle on the rank, every disjoint union of listed diagrams, and in particular every diagram of the list (1), has positive definite form [discharge-induction: step 3.1]. Clause (1) is 1.3 [step 1.3], clause (2) is 2.2 [step 2.2], clause (3) is 2.1 and 3.1 [step 2.1, step 3.1], and clause (4) is 1.4 [step 1.4]; hence the connected finite diagrams are exactly the standard list, the finite Coxeter systems are exactly the direct products of the irreducible types, every listed diagram is positive definite and therefore finite, and the list is duplicate-free after the stated identifications. [step 1.3, step 1.4, step 2.2, step 2.3, step 3.1] ∎
+
+## Remarks
+
+The following gallery illustrates the exceptional and dihedral diagrams in
+(1). Each circle is a vertex; an unlabelled edge has Coxeter label $3$, as in
+[F3]. In the first picture, the arm lengths count vertices beyond the central
+branch vertex: $(1,2,2)$, $(1,2,3)$ and $(1,2,4)$, respectively.
+
+```tikz
+\begin{tikzpicture}[x=0.8cm,y=0.8cm]
+\node at (-1.2,0) {$E_6$};
+\node[draw,circle,inner sep=2pt] (e6v0) at (0,0) {};
+\node[draw,circle,inner sep=2pt] (e6v1) at (1,0) {};
+\node[draw,circle,inner sep=2pt] (e6v2) at (2,0) {};
+\node[draw,circle,inner sep=2pt] (e6v3) at (3,0) {};
+\node[draw,circle,inner sep=2pt] (e6v4) at (4,0) {};
+\node[draw,circle,inner sep=2pt] (e6t) at (2,1) {};
+\draw (e6v0) -- (e6v1);
+\draw (e6v1) -- (e6v2);
+\draw (e6v2) -- (e6v3);
+\draw (e6v3) -- (e6v4);
+\draw (e6v2) -- (e6t);
+\node at (-1.2,-2.5) {$E_7$};
+\node[draw,circle,inner sep=2pt] (e7v0) at (0,-2.5) {};
+\node[draw,circle,inner sep=2pt] (e7v1) at (1,-2.5) {};
+\node[draw,circle,inner sep=2pt] (e7v2) at (2,-2.5) {};
+\node[draw,circle,inner sep=2pt] (e7v3) at (3,-2.5) {};
+\node[draw,circle,inner sep=2pt] (e7v4) at (4,-2.5) {};
+\node[draw,circle,inner sep=2pt] (e7v5) at (5,-2.5) {};
+\node[draw,circle,inner sep=2pt] (e7t) at (2,-1.5) {};
+\draw (e7v0) -- (e7v1);
+\draw (e7v1) -- (e7v2);
+\draw (e7v2) -- (e7v3);
+\draw (e7v3) -- (e7v4);
+\draw (e7v4) -- (e7v5);
+\draw (e7v2) -- (e7t);
+\node at (-1.2,-5) {$E_8$};
+\node[draw,circle,inner sep=2pt] (e8v0) at (0,-5) {};
+\node[draw,circle,inner sep=2pt] (e8v1) at (1,-5) {};
+\node[draw,circle,inner sep=2pt] (e8v2) at (2,-5) {};
+\node[draw,circle,inner sep=2pt] (e8v3) at (3,-5) {};
+\node[draw,circle,inner sep=2pt] (e8v4) at (4,-5) {};
+\node[draw,circle,inner sep=2pt] (e8v5) at (5,-5) {};
+\node[draw,circle,inner sep=2pt] (e8v6) at (6,-5) {};
+\node[draw,circle,inner sep=2pt] (e8t) at (2,-4) {};
+\draw (e8v0) -- (e8v1);
+\draw (e8v1) -- (e8v2);
+\draw (e8v2) -- (e8v3);
+\draw (e8v3) -- (e8v4);
+\draw (e8v4) -- (e8v5);
+\draw (e8v5) -- (e8v6);
+\draw (e8v2) -- (e8t);
+\end{tikzpicture}
+```
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (-1.2,0) {$F_4$};
+\node[draw,circle,inner sep=2pt] (f0) at (0,0) {};
+\node[draw,circle,inner sep=2pt] (f1) at (1,0) {};
+\node[draw,circle,inner sep=2pt] (f2) at (2,0) {};
+\node[draw,circle,inner sep=2pt] (f3) at (3,0) {};
+\draw (f0) -- (f1);
+\draw (f1) -- node[above] {$4$} (f2);
+\draw (f2) -- (f3);
+\node at (-1.2,-1.3) {$H_3$};
+\node[draw,circle,inner sep=2pt] (hthree0) at (0,-1.3) {};
+\node[draw,circle,inner sep=2pt] (hthree1) at (1,-1.3) {};
+\node[draw,circle,inner sep=2pt] (hthree2) at (2,-1.3) {};
+\draw (hthree0) -- (hthree1);
+\draw (hthree1) -- node[above] {$5$} (hthree2);
+\node at (-1.2,-2.6) {$H_4$};
+\node[draw,circle,inner sep=2pt] (hfour0) at (0,-2.6) {};
+\node[draw,circle,inner sep=2pt] (hfour1) at (1,-2.6) {};
+\node[draw,circle,inner sep=2pt] (hfour2) at (2,-2.6) {};
+\node[draw,circle,inner sep=2pt] (hfour3) at (3,-2.6) {};
+\draw (hfour0) -- (hfour1);
+\draw (hfour1) -- (hfour2);
+\draw (hfour2) -- node[above] {$5$} (hfour3);
+\node at (-1.2,-3.9) {$I_2(m)$};
+\node[draw,circle,inner sep=2pt] (i0) at (0,-3.9) {};
+\node[draw,circle,inner sep=2pt] (i1) at (1,-3.9) {};
+\draw (i0) -- node[above] {$m$} (i1);
+\end{tikzpicture}
+```
+
+Here $3\le m<\infty$ for $I_2(m)$. The paths in the second picture have
+edge-label sequences $3,4,3$; $3,5$; $3,3,5$; and $m$, respectively,
+exactly as in (1). These illustrations assert only the labelled graph shapes;
+the finiteness and positivity arguments above are independent of the pictures.

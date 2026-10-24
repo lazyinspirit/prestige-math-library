@@ -1,0 +1,35 @@
+{
+  "id": "thm-serre-finiteness-transfer-for-simply-connected-base-and-fiber",
+  "agent": "/root/rendering_repair_coordinator/at_022",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution screenshot shows literal $E_2$ in the uppercase proof-technique banner while nearby mathematical content renders normally. The banner is a plain-text renderer surface, so math delimiters are exposed.",
+      "action": "Replaced only $E_2$ in the proof-technique banner with equivalent Unicode E₂.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Proof-technique banner uses readable E₂ instead of exposed $E_2$; no other source bytes changed.",
+  "source_lines_after": {
+    "48": "**Proof technique:** finite-generation control on the E₂ page followed by Noetherian subquotients and finite extensions."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: proof-technique banners do not parse inline math; this item uses a local Unicode workaround."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-serre-finiteness-transfer-for-simply-connected-base-and-fiber.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "check": "Exact before/current comparison",
+      "result": "Only the intended body substring changed; all frontmatter, including status: published, is byte-identical."
+    }
+  ]
+}

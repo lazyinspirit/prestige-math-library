@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-category-o-translation-intertwines-residue-induction-and-restriction.json
+  precheck: pass
 id: thm-category-o-translation-intertwines-residue-induction-and-restriction
 kind: theorem
 title: "Category-O translation intertwines residue induction and restriction"
@@ -35,8 +38,7 @@ sources:
     - title: "Alexander Kleshchev, Linear and Projective Representations of Symmetric Groups, Cambridge Tracts in Mathematics 163, Lemma 8.2.2 (as cited by [BKAR, (3.19)])"
       url: "https://doi.org/10.1017/CBO9780511542806"
       locator: "The biadjunction and duality compatibility of the Hecke residue functors used on the Hecke side; supplemented locally by the trace-form verification of the batch-17 definition item."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -107,3 +109,22 @@ Koszul lift is asserted by these ungraded suppliers.
 ## Remarks
 
 The raising tensor factor is $V$ and the lowering tensor factor is $V^*$. Their adjunction is evaluation/coevaluation. Restricted transpose duality fixes the natural factor and commutes with each residue functor; these are different constructions.
+
+
+For a selected content $\alpha$ of degree $d$, write $\beta=\alpha+\alpha_i$ (of degree $d+1$) and $\mathcal O_\alpha^d,\mathcal O_\beta^{d+1}$ for the corresponding admitted blocks, with the typed coset interpretation when required. The paired squares display the two natural comparisons; each square commutes up to the indicated natural isomorphism.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={nodes={font=\large}}, every label/.append style={font=\normalsize}]
+\mathcal O_\alpha^d \arrow[r, "f_i^{\mathcal O}"] \arrow[d, "\pi_\alpha"'] \arrow[dr, phantom, "\cong" description] & \mathcal O_\beta^{d+1} \arrow[d, "\pi_\beta"] \\
+B_\alpha\mathrm{-mod} \arrow[r, "f_i^H"'] & B_\beta\mathrm{-mod}
+\end{tikzcd}
+```
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={nodes={font=\large}}, every label/.append style={font=\normalsize}]
+\mathcal O_\beta^{d+1} \arrow[r, "e_i^{\mathcal O}"] \arrow[d, "\pi_\beta"'] \arrow[dr, phantom, "\cong" description] & \mathcal O_\alpha^d \arrow[d, "\pi_\alpha"] \\
+B_\beta\mathrm{-mod} \arrow[r, "e_i^H"'] & B_\alpha\mathrm{-mod}
+\end{tikzcd}
+```
+
+Here the lower arrows are the image residue functors, with both content cuts already applied: $f_i^H(X)=B_\beta u_{\alpha,i}\otimes_{B_\alpha}X$ and $e_i^H(Y)=u_{\alpha,i}Y$. Step 2.1 supplies the two isomorphisms from $\tau$ and $\rho$: the generalized-$i$ last-dot projector corresponds to the generalized-$i$ Casimir projector for raising and the generalized-$(-n-i)$ dual-Casimir projector for lowering. Thus the reverse square uses $V^*$ on the category-$\mathcal O$ side. The squares illustrate the comparisons proved above; the rigorous proof is independent of the figures.

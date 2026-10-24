@@ -1,0 +1,115 @@
+{
+  "id": "ex-qc-reversible-and-oracle-compute-copy-uncompute",
+  "group": "dqc_007",
+  "agent": "/root/rendering_repair_supervisor2/dqc_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tiles show the full truth table and verification but no wire picture. A four-wire circuit materially clarifies which bits control each gate, the upward work-to-target copy, and reuse of the same Toffoli to restore clean work. This is a warranted explanatory addition under the expanded diagram scope; the original proof is already complete.",
+      "action": "Added one native TikZ circuit in final Remarks, with left-to-right chronology, input/output labels, control/target legend and relation to Verification Steps 1.1\u20132.1.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only final Remarks containing the four-wire compute-copy-uncompute illustration and explanation. All original bytes remain an unchanged prefix; frontmatter including status: published is byte-identical.",
+  "source_lines_after": [
+    86,
+    88,
+    90,
+    91,
+    123,
+    124
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Four ordered qubit wires (a,b,y,w), with bits a,b,y arbitrary and input w=0; each gate embeds as a unitary from the four-qubit register to itself.",
+      "check": "The restricted clean-work input subspace maps |a,b,y,0> to |a,b,y xor ab,0>. Output wire order equals input wire order. This is the Example display and Verification Steps 1.1\u20133.1."
+    },
+    {
+      "objects": "First gate: Toffoli controls a,b, target w.",
+      "check": "Only a and b carry filled dots; the target is on w, while its crossing of y has no dot. By F1 and def-qc-toffoli-and-fredkin, (a,b,y,0) becomes (a,b,y,ab), as Verification Step 1.1."
+    },
+    {
+      "objects": "Middle gate: CNOT control w, target y.",
+      "check": "The bottom filled dot is w, circled plus is y. By F4 and def-qc-cnot-and-control-target-order, (a,b,y,ab) becomes (a,b,y xor ab,ab); this does not change w. No gate acts on a or b in the middle column."
+    },
+    {
+      "objects": "Last gate: Toffoli controls a,b, target w.",
+      "check": "The same two controls toggle w by ab once more, producing ab xor ab=0 while preserving y xor ab. Therefore work follows 0,ab,ab,0, consistent with F2, def-qc-clean-and-dirty-ancillas and Verification Step 2.1."
+    },
+    {
+      "objects": "Gate chronology and proof interface.",
+      "check": "Read left to right: Toffoli(a,b;w), CNOT(w;y), Toffoli(a,b;w). This agrees with F5/def-qc-circuit-denotational-semantics (last gate multiplies on the left). The unchanged eight-row table and Verification Steps 1.1\u20133.1 establish the map on the clean-work subspace and its linear extension without using the picture."
+    }
+  ],
+  "original_evidence": {
+    "declared_directory": "research/math-library-rendering-audit-2026-10-23/quantum-computing/diagram-supplement",
+    "path_discrepancy": "Declared screenshots subdirectory does not exist. Authentic originals located within the same quantum-computing category and SHA256 matched exactly before inspection.",
+    "standalone_original_resolution_views": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/ex-qc-reversible-and-oracle-compute-copy-uncompute--01.png",
+        "sha256": "d93c52109af2ddbcdabd6ff920cff3df20f3c7c7157eb2fa0fd695ee09a1f527"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/ex-qc-reversible-and-oracle-compute-copy-uncompute--02.png",
+        "sha256": "9e1b0047352eb7d0124421bb5866b502335e7460dc7b320fa5ea011a4aa467ad"
+      }
+    ]
+  },
+  "guard_before_sha256": "01673bea579c54f929fcbb032b2df4213ad703fa48b610c43eddea25748a9f5d",
+  "after_raw_sha256": "95e4ddc2bb86d613d30fbf96ad89a0b8da8e956ef500d0b77c737ff6c548eae7",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md --json",
+      "exit_code": 0,
+      "output": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_render_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqc007-native node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-qc-reversible-and-oracle-compute-copy-uncompute --out research/math-library-rendering-repairs-2026-10-23/previews/dqc007-native",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqc007-native/manifest.json",
+    "manifest_sha256": "6f25e3c404a6ae105501d2d9c680212f20992006afe784b094a280b9530affa7",
+    "source_sha256": "95e4ddc2bb86d613d30fbf96ad89a0b8da8e956ef500d0b77c737ff6c548eae7",
+    "html_sha256": "a93d60b23c6f7b7bc75659c5335e0c53d7e8dd783391219342b0fbf5caf7211b",
+    "reference_map_sha256": "db900411803475b290b68f1b24618bb260d0d036f67b7cd1cd9aa63b151c8e5c",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dqc007-native/pi-tikz-cache/901b64098d5fa6e06e6c74a24df6d741.svg",
+    "native_svg_sha256": "8ed1edaab9923e75cab16812856c3845f0a9314a3ce68e53c2acb0bdb3b5c10f",
+    "standalone_original_resolution_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqc007-native/screenshots/ex-qc-reversible-and-oracle-compute-copy-uncompute--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqc007-native/screenshots/ex-qc-reversible-and-oracle-compute-copy-uncompute--02.png"
+    ],
+    "visual_result": "Actual dark native preview compiled successfully. All four wires, five filled controls, three open circled-plus targets and all input/output/stage labels are visible and separated. Toffoli crossings through y have no control dots; middle gate joins w upward to y. White symbols and gray strokes remain visible on black; target rings stay open. No clipping or overlap observed."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview only, not full production route. Native reference-title map recorded 13 unrelated parse diagnostics; no item content or diagram compilation failure. No network or live website visited."
+  ]
+}

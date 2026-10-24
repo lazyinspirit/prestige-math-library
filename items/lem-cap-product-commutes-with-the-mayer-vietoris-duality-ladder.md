@@ -1,9 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder.json
+  precheck: pass
 id: "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder"
 kind: "lemma"
 title: "Cap product and the Mayer–Vietoris duality ladder"
-verification:
-  audited: 2026-09-13
 status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
@@ -70,3 +71,16 @@ Thus replacing the homology connecting arrow from $H_{n-p}(M;R)$ by $(-1)^{p+1}\
 7.1 The other route begins with $\varphi\cap c$, an absolute cycle by [F1]. Split it into the $U$ chain $\varphi\cap c_1$ and the $V$ chain $\varphi\cap(c_2+c_3)$. The connector of [F7] therefore gives $[\partial(\varphi\cap c_1)]$. Since $\delta\varphi=0$, [F9] and the support vanishings give $$\partial(\varphi\cap c_1)=(-1)^p\varphi\cap\partial c_1=(-1)^p\varphi_A\cap\partial c_1=(-1)^{p+1}\varphi_A\cap\partial c_2.$$ The second equality uses that $\varphi_B$ vanishes on $B$ and $c_1$ lies in $U\setminus L\subset B$. The last equality uses $\partial(c_1+c_2)\in C_*(U\setminus K)$ from step 5.1, annihilated by $\varphi_A$. Comparing with step 6.1 gives the claimed sign. It persists on the support colimit because every class has such a representative. [F1, F7, F9, step 5.1, step 6.1]
 
 8.1 Multiplying each homology connector by $(-1)^{p+1}$ preserves its kernel and image, hence exactness, and step 7.1 makes the last square commute. For $p<0$ its source is zero; for $p\ge n$ the connector target has negative homology degree and the cap formulas are zero there. At $p=0$ the sign is minus and the positive coboundary convention has already been used; at $p=n-1$ the target is ordinary zero-dimensional homology. If a covering open set or their intersection is empty, the corresponding groups are zero and the same exact sequence reduces to the identity/sum sequences. For a point, the cover consists of empty sets and points and degree-zero cap is vertex evaluation. The zero ring and zero representatives give zero throughout. Degenerate simplices remain free generators and all containments and formulas apply to them unchanged. Subdivision uses specified least depths; compactness and individual representatives involve only finite choices. No AC or categorical AB5 implication is used. [F1, F6, F8, F9, step 4.1, step 5.1, step 7.1] ∎
+
+## Remarks
+
+Put $W=U\cap V$ and suppress the common coefficient ring $R$. With the orientations on $U$, $V$ and $W$ restricted from $M$, the commuting ladder is
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=large, /tikz/font=\Large, labels={font=\large}]
+H_c^p(W) \arrow[r, "{(e_U,-e_V)}"] \arrow[d, "D_W"'] & H_c^p(U)\oplus H_c^p(V) \arrow[r, "e_U+e_V"] \arrow[d, "D_U\oplus D_V"] & H_c^p(M) \arrow[r, "\delta"] \arrow[d, "D_M"] & H_c^{p+1}(W) \arrow[d, "D_W"] \\
+H_{n-p}(W) \arrow[r, "{(i_{U*},-i_{V*})}"'] & H_{n-p}(U)\oplus H_{n-p}(V) \arrow[r, "i_{U*}+i_{V*}"'] & H_{n-p}(M) \arrow[r, "{(-1)^{p+1}\partial}"'] & H_{n-p-1}(W)
+\end{tikzcd}
+```
+
+Here the first horizontal maps use the inclusions of $W$ into $U$ and $V$, and the second use the inclusions of $U$ and $V$ into $M$. Both rows are segments of exact sequences. The rightmost vertical map uses cohomological degree $p+1$, so its target is $H_{n-p-1}(W)$. The first two squares express open naturality from step 1.1. For the last square, the connector convention is $[z_U+z_V]\mapsto[\partial z_U]$; steps 6.1–7.1 give $\partial D_M=(-1)^{p+1}D_W\delta$, hence $(-1)^{p+1}\partial D_M=D_W\delta$. No vertical arrow is asserted to be an isomorphism. The proof above establishes these relations independently of the diagram.

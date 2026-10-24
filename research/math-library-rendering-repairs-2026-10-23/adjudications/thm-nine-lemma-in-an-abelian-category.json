@@ -1,0 +1,61 @@
+{
+  "id": "thm-nine-lemma-in-an-abelian-category",
+  "agent": "/root/rendering_repair_coordinator/ct_003",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "not-a-defect",
+      "reason": "The original screenshot --01, viewed standalone at original resolution, visibly has all six downward arrows, including B_3→C_3. Both frozen before and current source contain B_3 \\arrow[r] \\arrow[d]. The finding excerpt omits arrow[d] but its own source_lines field includes it. A fresh isolated-cache actual application renderTikz/node-tikzjax compilation and standalone native-resolution capture again displays B_3→C_3. No source or rendering defect is substantiated.",
+      "action": "Preserve correct source; do not add a duplicate arrow.",
+      "status": "resolved-no-change"
+    }
+  ],
+  "changed": false,
+  "correction": "None: reported missing third lower vertical arrow is present in source and original/fresh rendering.",
+  "source_lines_after": {
+    "41": "Top row has A_1→A_2→A_3, with all three A_j→B_j arrows.",
+    "42": "Middle row has B_1→B_2→B_3, with all three B_j→C_j arrows.",
+    "43": "Bottom row has C_1→C_2→C_3."
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects_maps": "For j=1,2,3 the columns are A_j --i_j→ B_j --p_j→ C_j. The six horizontal internal maps are a_1:A_1→A_2, a_2:A_2→A_3, b_1:B_1→B_2, b_2:B_2→B_3, c_1:C_1→C_2, c_2:C_2→C_3. These are exactly the domains/codomains named in proof 2.1; all vertical maps point downward."
+    },
+    {
+      "relations": "The four internal squares assert i_2 a_1=b_1 i_1, i_3 a_2=b_2 i_2, p_2 b_1=c_1 p_1, p_3 b_2=c_2 p_2. These are the stated commutativity assumptions; proof 2.1 uses the second and third directly, and p_3 b_2=c_2 p_2 together with p_3 i_3=0 ensures c_2 p_2 t=0 for the bottom-row lift."
+    },
+    {
+      "exactness_convention": "The statement explicitly assumes each 0→A_j→B_j→C_j→0 short exact, even though vertical endpoint zeros are omitted from the picture. Row endpoint zeros are drawn; arrows alone do not assert exactness of the top/bottom row. Only the middle row and all columns are standing exactness assumptions. Thus the diagram does not assert both conclusions in advance. Top/bottom row composites are already zero by middle-row zero composite, commuting squares and the monic i_3 / epic p_1, respectively."
+    },
+    {
+      "proof_interface": "Local lem-half-nine-lemma has the same objects, directions and exact column convention, supplying left exactness in proof 1.1. The epicity chase in 2.1 completes the top row; passage to the opposite category in 3.1 reverses both coordinates and exchanges top and bottom, preserving the symmetric statement. The existing proof remains unchanged and independent of visual arrow recognition."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-nine-lemma-in-an-abelian-category.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-nine-lemma-in-an-abelian-category/tmp\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-nine-lemma-in-an-abelian-category/compile-view.mts",
+      "exit_code": 0,
+      "output": "Fresh TeX compile and local capture completed.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-nine-lemma-in-an-abelian-category/compile-result.json",
+      "visual_result": "Standalone original-resolution diagram.png inspected: every horizontal and vertical arrow is present, unobstructed and correctly directed."
+    }
+  ],
+  "inspected_screenshots": [
+    "research/math-library-rendering-audit-2026-10-23/category-theory/screenshots/thm-nine-lemma-in-an-abelian-category--01.png",
+    "research/math-library-rendering-audit-2026-10-23/category-theory/screenshots/thm-nine-lemma-in-an-abelian-category--02.png",
+    "research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-nine-lemma-in-an-abelian-category/diagram.png"
+  ],
+  "before_raw_sha256": "23caa8c3615dbbb132313d2b5a6c59eade512f31d3dabe594bb959f0796ec980",
+  "current_raw_sha256": "23caa8c3615dbbb132313d2b5a6c59eade512f31d3dabe594bb959f0796ec980",
+  "remaining_issues": []
+}

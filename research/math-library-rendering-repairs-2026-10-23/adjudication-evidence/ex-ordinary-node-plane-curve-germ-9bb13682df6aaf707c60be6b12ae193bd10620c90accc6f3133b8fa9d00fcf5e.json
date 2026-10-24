@@ -1,0 +1,133 @@
+{
+  "id": "ex-ordinary-node-plane-curve-germ",
+  "agent": "/root/rendering_repair_coordinator/dcxa_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The real slice gives a concrete explanation of why two individually smooth graph branches produce a node: they cross once with distinct tangents. This materially clarifies the factorization and local geometry, even though the existing proof is complete. Original standalone tiles show no illustration.",
+      "action": "Added a final Remarks section with a real-slice TikZ plot of y=\u00b1x sqrt(1+x), dashed tangent lines y=\u00b1x, and the origin, explicitly distinguishing the real slice from the complex curve.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other: split-proof-step-display",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile 03 shows step 4.1 split into separate rows at its display differential; its trailing justification tags render as plain text rather than chips. Blank paragraphs inside the numbered step cause this actual native-renderer defect.",
+      "action": "Kept the identical differential formula inline and joined the unchanged argument into one paragraph. Fresh tile 03 shows all four justification chips on step 4.1.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory real-slice diagram of the two branches and their distinct tangent lines; repaired the paragraph/display split in verification step 4.1 without changing its formula or argument.",
+  "source_lines_after": {
+    "proof_layout": 87,
+    "remarks": [
+      92,
+      100
+    ],
+    "tikz": [
+      102,
+      119
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "before_raw_sha256": "b3a6a5f1f8f0f40614fc433b3064d4e862d646bdfdce3a23bdf36dfcf1eca942",
+  "after_raw_sha256": "7e15749022abc26822c4d8ec709d4aeb076510ac0e516e0faf3c656d1e6dd456",
+  "diagram_math_checks": [
+    {
+      "objects": "The two graph branches gamma_\u00b1(t)=(t,\u00b1t s(t)) from Verification 3.2, with s(0)=1 and s\u00b2=1+x from 1.1.",
+      "check": "The plotted functions use t real in [-1/4,1/4] and the positive real square root sqrt(1+t), which represents this same local holomorphic square-root germ near 0. Since 1+t\u22653/4 on the plotted interval, every plotted ordinate is real and defined. The caption expressly describes a real slice, not a drawing of all of C\u00b2."
+    },
+    {
+      "relation": "Each solid curve lies on f=0.",
+      "check": "Substituting y=\u00b1x sqrt(1+x) gives y\u00b2=x\u00b2(1+x), hence y\u00b2-x\u00b2(1+x)=0, exactly the factorization in Verification 2.2; blue uses the plus sign and red the minus sign."
+    },
+    {
+      "relation": "The branches meet only at the marked origin.",
+      "check": "Equality x sqrt(1+x)=-x sqrt(1+x) implies 2x sqrt(1+x)=0. The square root is nonzero on the chosen interval, so x=0 and y=0. This is the concrete real-slice instance of Verification 2.3."
+    },
+    {
+      "relation": "The dashed lines are distinct tangents y=x and y=-x at 0.",
+      "check": "Differentiating \u00b1x s(x) at 0 gives \u00b1(s(0)+0s\u2032(0))=\u00b11. Thus tangent vectors are (1,1) and (1,-1), as in Verification 4.1. Source segments have exactly slopes +1 and -1, and each corresponding label is on its matching line."
+    },
+    {
+      "relation": "No orientation, global geometry, or complex-dimensional coverage is asserted.",
+      "check": "Only the coordinate axes have arrowheads, indicating increasing real coordinates; branch curves have no arrows. The endpoints are a plotting truncation rather than additional singularities. The original proof supplies reduction, irreducibility, smoothness and singularity independently; the figure is outside Facts and Verification."
+    }
+  ],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-ordinary-node-plane-curve-germ.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-ordinary-node-plane-curve-germ.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-ordinary-node-plane-curve-germ.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "native_preview": "research/math-library-rendering-repairs-2026-10-23/previews/dcxa013-native",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcxa013-native/manifest.json",
+    "manifest_sha256": "6164d88608248c056a0471bc5255a8d144be4b579ae9ed060f0b9d72a5b36ae0",
+    "source_sha256": "7e15749022abc26822c4d8ec709d4aeb076510ac0e516e0faf3c656d1e6dd456",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dcxa013-native/screenshots/ex-ordinary-node-plane-curve-germ.json",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "tikz_count": 1,
+    "original_resolution_views": "Individually inspected original tiles 01\u201303 and fresh native preview tiles 01\u201303 using view_image(detail=original). Fresh tile 03 shows the complete compiled TikZ figure and repaired step 4.1 chips. Labels, solid branches, dashed tangent lines, axes, and origin are visible without clipping or overlap.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "evidence_path_resolution": {
+    "declared_directory": "research/math-library-rendering-audit-2026-10-23/complex-analysis/diagram-supplement",
+    "issue": "Declared screenshot subpaths are absent there.",
+    "resolved_directory": "research/math-library-rendering-audit-2026-10-23/complex-analysis",
+    "authentication": "Resolved authentic original screenshot tiles within the same category; sha256sum matches all three queue-recorded hashes exactly.",
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-ordinary-node-plane-curve-germ--01.png",
+        "sha256": "4a4b921775054a827d1980b8938fe7ac619f75e3d7d58c55b2db9f2750af0311"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-ordinary-node-plane-curve-germ--02.png",
+        "sha256": "d46125acd2b8641c1e111316113df00d363fe548d98d3af6acd505f8c46abe64"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-ordinary-node-plane-curve-germ--03.png",
+        "sha256": "84ad46aef3cd1fa983b322266017337dcd02f372101ee539d34db904187eb364"
+      }
+    ]
+  },
+  "remaining_issues": []
+}

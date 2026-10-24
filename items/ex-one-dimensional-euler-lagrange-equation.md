@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-one-dimensional-euler-lagrange-equation.json
+  precheck: pass
 id: ex-one-dimensional-euler-lagrange-equation
 kind: example
 title: "The one-dimensional Euler-Lagrange equation for an energy with a potential"
@@ -19,12 +22,7 @@ sources:
     - title: "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)"
       url: "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf"
       locator: "Chapter 1 Section 2.4, Example 1.10 and Remark 1.11, printed pp. 9-10"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -51,7 +49,7 @@ the classical Euler-Lagrange equation of the Lagrangian $f(x,s,\xi)=\tfrac12\xi^
 
 ## Verification
 
-**Proof technique:** direct, by testing the minimality of $u$ against compactly supported variations.
+**Proof technique:** direct, by testing the minimality of the minimiser against compactly supported variations.
 
 1.1 The first variation. Let $\varphi\in C_c^\infty((a,b))$. Since $\varphi$ vanishes near the endpoints, $u+\varepsilon\varphi$ belongs to the admissible class for every $\varepsilon$, and for $|\varepsilon|$ small it is close to $u$ in $C^2([a,b])$, so $\Phi(\varepsilon):=I(u+\varepsilon\varphi)$ has a local minimum at $\varepsilon=0$. Computing the difference quotient, $\varepsilon^{-1}(\Phi(\varepsilon)-\Phi(0))=\int_a^b\big(u'\varphi'+\tfrac{\varepsilon}{2}\varphi'^2+\varepsilon^{-1}(V(u+\varepsilon\varphi)-V(u))\big)dx$, and by the mean value theorem [F2] the last term equals $\varphi(x)V'(u(x)+\theta_x\varepsilon\varphi(x))$ with $\theta_x\in(0,1)$; as $\varepsilon\to0$ this converges to $\varphi V'(u)$ uniformly on $[a,b]$, because $V'$ is uniformly continuous by [[thm-heine-cantor-metric]] on a compact interval containing the values $u(x)+\theta_x\varepsilon\varphi(x)$ and $|u+\theta\varepsilon\varphi-u|\le|\varepsilon|\|\varphi\|_\infty$. Hence $\Phi$ is differentiable at $0$ with $\Phi'(0)=\int_a^b(u'\varphi'+V'(u)\varphi)\,dx$. This is the direct computation announced in [F1]. [F1, F2, given, algebra]
 

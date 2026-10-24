@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-affine-hecke-parabolic-weight-filtration.json
+  precheck: pass
 id: lem-hh-affine-hecke-parabolic-weight-filtration
 kind: lemma
 title: Parabolic induction, central orbit blocks and weight filtrations
@@ -52,3 +55,17 @@ Every irreducible $H_P$-module has its weights in a single $W_P$-orbit. More gen
 3.2 If $V$ is tempered, every logarithmic weight belongs to $K_P$. For $w\in W^P$, $wK_P\subset K_B$ because $w(P)$ is positive. The multiset formula proves $I_P(V)$ tempered. Conversely the injected copy of $V$ has logarithmic weights in $K_B$ if $I_P(V)$ is tempered; this alone need not give $K_P$, so additionally apply the formula for the longest minimal representative $w_* = w_0w_{P,0}\in W^P$. Writing a logarithmic weight $\lambda$ as central part plus simple-coroot coefficients, the conditions $\lambda\in K_B$ and $w_*\lambda\in K_B$ imply $\lambda\in K_P$: pair $\lambda$ with every dominant vector $z\in E^P\cap C$, noting that $w_*z=w_0z$ is antidominant, to obtain both signs of the same pairing, and use also all global central vectors. More directly, $\lambda\in K_B$ gives nonpositive simple-coroot coefficients; for $z$ in the relative interior of $E^P\cap C$, $w_*^{-1}w_0z=w_{P,0}z=z$, so $(w_*\lambda,w_0z)=(\lambda,z)$. The left side is nonnegative because $w_*\lambda\in K_B$ and $w_0z$ is antidominant, while $(\lambda,z)\le0$. Equality forces every coefficient outside $P$ to vanish. Thus $\lambda\in K_P$. The existence of this $w_*$ and its positivity on $P$ follows because $w_{P,0}$ reverses subsystem positives and $w_0$ reverses all positives. [F2, F3, step 2.1, algebra]
 
 4.1 For $\nu\in E^P$ the character $e^\nu$ is fixed by $W_P$ and takes value one on every root $\beta\in P$. Consequently scaling $\theta_\ell$ by $e^{\nu(\ell)}$ preserves the lattice, finite Hecke, and both ordinary and doubled-root cross-relations: every coefficient root monomial in those relations is fixed, and the two numerator terms acquire the same scalar. Replacing $\nu$ by $-\nu$ is the inverse. Twisting a module by $\psi_\nu$ adds $\nu$ to all its logarithmic weights, so the last assertion follows from the definitions. [F1, F3, algebra] ∎
+
+## Remarks
+
+The PBW splitting in step 1.1 is a splitting of vector spaces (and $H$ is a right $H_P$-module direct sum):
+$$
+H=\bigoplus_{w\in W^P}N_wH_P,\qquad I_P(V)=\bigoplus_{w\in W^P}N_w\otimes V.
+$$
+In particular, the $w=1$ summand is the injected $H_P$-stable copy $1\otimes V$. The other summands need not be $A$-stable individually. Instead, for $k\ge0$ put $F_{-1}=0$ and $F_k=\bigoplus_{\ell(w)\le k}N_w\otimes V$. Step 2.1 gives the following exact sequence of $A$-modules, where $\iota_k$ is inclusion, $q_k$ is the quotient map, and $\mathrm{gr}_k I_P(V)=F_k/F_{k-1}$:
+
+```tikzcd
+0 \arrow[r] & F_{k-1} \arrow[r, "\iota_k", hook] & F_k \arrow[r, "q_k", two heads] & \mathrm{gr}_k I_P(V) \arrow[r] & 0
+```
+
+As a vector space, $\mathrm{gr}_k I_P(V)$ is identified with $\bigoplus_{\ell(w)=k}N_w\otimes V$. In this quotient the $A$-action is diagonal across those summands: $f\in A$ acts on the $w$-summand by $N_w\otimes v\mapsto N_w\otimes w^{-1}(f)v$. Thus that graded summand has generalized weight multiset $w\operatorname{Wt}(V)$. Exactness of generalized weight spaces assembles the multisets over all lengths into $\coprod_{w\in W^P}w\operatorname{Wt}(V)$, with multiplicities. The schematic illustrates steps 1.1–2.1; the proof above is independent of it.

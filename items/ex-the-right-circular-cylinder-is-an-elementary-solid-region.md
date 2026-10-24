@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-right-circular-cylinder-is-an-elementary-solid-region.json
+  precheck: pass
 id: ex-the-right-circular-cylinder-is-an-elementary-solid-region
 kind: example
 title: "A right circular cylinder is an elementary solid region, presented by two caps and four side quarters"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -92,3 +92,43 @@ Its boundary can be presented by two polar cap patches and four quarter-cylinder
 ## Remarks
 
 - The side must be cut into four quarters. A single side patch would have first and second area-vector coordinates changing sign inside one parameter interior, so it could not be assigned consistently to upper or lower sublists in the $x$ and $y$ directions.
+
+The patch layout below shows both caps in the same $(x,y)$ view and the lateral surface cut open along $\theta=0=2\pi$. The bold cap radii are the polar seams: $+x$ for $\kappa_+$ and $+y$ for $\kappa_-$. The strip is the side parameter domain, not an additional planar face; its left and right edges have identical images. The four bands map by the given $\sigma_j$ to the four side quarters. On patch interiors the outward unit normals are $N_{\kappa_+}=e_z$, $N_{\kappa_-}=-e_z$, and $N_{\sigma_j}=(\cos\theta,\sin\theta,0)$, as computed in step 2.1. The diagram is illustrative and the verification above is independent of it.
+
+```tikz
+\begin{tikzpicture}[scale=1.3,font=\large]
+\draw (2,4.8) circle (1.1);
+\draw[->,gray] (0.6,4.8) -- (3.5,4.8) node[right] {$x$};
+\draw[->,gray] (2,3.4) -- (2,6.2) node[above] {$y$};
+\draw[very thick,blue] (2,4.8) -- (3.1,4.8);
+\node[below] at (2.55,4.8) {$R$};
+\node at (2,6.8) {$\kappa_+: z=H,\quad N=e_z$};
+\node at (2,3) {seam: $\theta=0=2\pi$ on $+x$};
+\draw (6.5,4.8) circle (1.1);
+\draw[->,gray] (5.1,4.8) -- (8,4.8) node[right] {$x$};
+\draw[->,gray] (6.5,3.4) -- (6.5,6.2) node[above] {$y$};
+\draw[very thick,orange] (6.5,4.8) -- (6.5,5.9);
+\node[right] at (6.5,5.35) {$R$};
+\node at (6.5,6.8) {$\kappa_-: z=0,\quad N=-e_z$};
+\node at (6.5,3) {seam: $\theta=0=2\pi$ on $+y$};
+\draw (0,0) rectangle (8.5,1.7);
+\draw[dashed] (2.125,0) -- (2.125,1.7);
+\draw[dashed] (4.25,0) -- (4.25,1.7);
+\draw[dashed] (6.375,0) -- (6.375,1.7);
+\node at (1.0625,0.85) {$\sigma_0$};
+\node at (3.1875,0.85) {$\sigma_1$};
+\node at (5.3125,0.85) {$\sigma_2$};
+\node at (7.4375,0.85) {$\sigma_3$};
+\node[left] at (0,0) {$0$};
+\node[left] at (0,1.7) {$H$};
+\node[left] at (0,0.85) {$z$};
+\node[below] at (0,0) {$0$};
+\node[below] at (2.125,0) {$\pi/2$};
+\node[below] at (4.25,0) {$\pi$};
+\node[below] at (6.375,0) {$3\pi/2$};
+\node[below] at (8.5,0) {$2\pi$};
+\node[right] at (8.7,0) {$\theta$};
+\node at (4.25,2.2) {lateral parameter strip: $[0,2\pi]\times[0,H]$};
+\node at (4.25,-0.9) {left and right edges identified by $\sigma$};
+\end{tikzpicture}
+```

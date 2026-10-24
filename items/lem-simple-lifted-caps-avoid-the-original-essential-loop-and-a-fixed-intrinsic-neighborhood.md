@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-simple-lifted-caps-avoid-the-original-essential-loop-and-a-fixed-intrinsic-neighborhood.json
+  precheck: pass
 id: lem-simple-lifted-caps-avoid-the-original-essential-loop-and-a-fixed-intrinsic-neighborhood
 kind: lemma
 title: Simple lifted caps avoid the original essential loop and a fixed intrinsic neighbourhood
@@ -20,8 +23,6 @@ aliases: []
 landmark: false
 proof_strategy: direct
 dependency_level: 13
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -32,7 +33,7 @@ sources:
 
 ## Statement
 
-Let γ be an essential original loop and γ_t its short fixed-flow null fence boundaries. Every Jordan lifted disk cap of γ_t has projected image disjoint from γ and from one fixed intrinsic neighborhood of γ in its original leaf.
+Let γ be an essential original loop and $\gamma_t$ its short fixed-flow null fence boundaries. Every Jordan lifted disk cap of $\gamma_t$ has projected image disjoint from γ and from one fixed intrinsic neighborhood of γ in its original leaf.
 
 ## Facts & Assumptions
 

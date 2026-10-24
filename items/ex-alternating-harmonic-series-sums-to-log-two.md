@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-alternating-harmonic-series-sums-to-log-two.json
+  precheck: pass
 id: ex-alternating-harmonic-series-sums-to-log-two
 kind: example
 title: "The alternating harmonic series sums to log 2"
@@ -13,9 +16,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-02
 sources:
   scraped: []
   references:
@@ -34,7 +34,7 @@ $$\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}n=\log2.$$
 
 **Given:** The endpoint formula for $\log(1+x)$.
 
-[L1] At $x=1$, $\log(1+x)=\sum_{n\ge1}(-1)^{n+1}x^n/n$ converges to $\log2$ ([[thm-log-one-plus-x-power-series]]).
+[L1] At $x=1$, $\log(1+x)=\sum_{n\ge1}(-1)^{n+1}x^n/n$ converges to $\log2$ ([[thm-log-one-plus-x-power-series|logarithm power-series endpoint formula]]).
 
 ## Verification
 

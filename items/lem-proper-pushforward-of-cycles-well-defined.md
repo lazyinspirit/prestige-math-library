@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-proper-pushforward-of-cycles-well-defined.json
+  precheck: pass
 id: lem-proper-pushforward-of-cycles-well-defined
 kind: lemma
 title: "Proper pushforward of cycles and the norm formula"
@@ -30,8 +33,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Chow Homology and Chern Classes, Sections 42.18-42.21 (proper pushforward, tag 02R4 ff.)"
@@ -107,3 +108,39 @@ $\dim f(W)<\dim W$; here $N$ is the field norm.
 
 4.1 Base change and finite flat normalization. Consider a cartesian square with $f:X\to Y$ proper and $g:Y'\to Y$ flat of pure relative dimension $n$, and write $f':X'=X\times_Y Y'\to Y'$ and $g':X'\to X$. For an integral $d$-dimensional $V\subseteq X$, put $W=\overline{f(V)}$ and $e=\dim V-\dim W$. If $e>0$, both $g^*f_*[V]$ and $f'_*g'^*[V]$ are zero: every component of the flat pullback of $V$ has dimension $d+n$, while its image has dimension at most $\dim W+n<d+n$. If $e=0$, set $m=[k(V):k(W)]$. For each component $W_i$ of $g^{-1}(W)$, let $C_i$ be the Artinian local ring of $W\times_Y Y'$ at its generic point. Flat pullback gives coefficient $\ell(C_i)$ on $[W_i]$. The generic algebra of $V\times_Y Y'$ over $C_i$ is $C_i\otimes_{k(W)}k(V)$, a free $C_i$-module of rank $m$. Decomposing it into its Artinian local factors shows that the sum of the generic lengths of the components above $W_i$, weighted by their function-field degrees over $k(W_i)$, is $m\ell(C_i)$. These are precisely the coefficients of $[W_i]$ in $f'_*g'^*[V]$ and $g^*f_*[V]$, respectively. Hence the base-change identity holds on cycles and therefore on Chow groups. Finally, if $f$ is finite flat of constant degree $n$ between integral schemes of the same dimension, then $f$ is dominant and $[k(X):k(Y)]=n$, so $f_*[X]=n[Y]$ by step 1.1. [F1, step 1.1, given, algebra] ∎
 
+
+## Remarks
+
+The base-change assertion in step 4.1 involves two squares. The first is
+Cartesian, with $X'=X\times_Y Y'$ and the two projections $g'$ and $f'$:
+
+```tikzcd
+[column sep=large, row sep=large, font=\Large]
+X'=X\times_Y Y' \arrow[r, "\textstyle g'"] \arrow[d, "\textstyle f'"']
+& X \arrow[d, "\textstyle f"] \\
+Y' \arrow[r, "\textstyle g"'] & Y
+```
+
+Here $f\circ g'=g\circ f'$. The vertical maps are proper, and the horizontal
+maps are flat of pure relative dimension $n$. Pushforward follows the vertical
+arrows, whereas flat pullback reverses the horizontal arrows. Thus the second
+square has the following directions and dimension indices:
+
+```tikzcd
+[column sep=huge, row sep=large, font=\Large]
+Z_d(X) \arrow[r, "\textstyle g'^*"] \arrow[d, "\textstyle f_*"']
+& Z_{d+n}(X') \arrow[d, "\textstyle f'_*"] \\
+Z_d(Y) \arrow[r, "\textstyle g^*"'] & Z_{d+n}(Y')
+```
+
+Its commutativity is $f'_*g'^*=g^*f_*$, proved in step 4.1; the same square
+holds with $A$ in place of $Z$. The degree is dimension, so proper pushforward
+preserves the index and flat pullback increases it by $n$. This does not
+assert that proper pushforward preserves codimension. For an integral
+$V\subseteq X$, the equal-dimensional case retains the full coefficient
+$m=[k(V):k(W)]$, where $W=\overline{f(V)}$: the generic-length computation in
+step 4.1 gives $m\ell(C_i)$ at each component $W_i$ above $W$. No assumption
+that these field degrees or generic lengths equal one is made, including
+over a nonclosed field. In the dimension-drop case both routes give zero.
+The diagrams illustrate the maps and their grading; the proof above remains
+independent of them.

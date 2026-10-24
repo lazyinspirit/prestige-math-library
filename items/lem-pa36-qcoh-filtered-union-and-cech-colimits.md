@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-pa36-qcoh-filtered-union-and-cech-colimits.json
+  precheck: pass
 id: lem-pa36-qcoh-filtered-union-and-cech-colimits
 kind: lemma
 title: Quasicoherent modules are filtered unions of coherent subsheaves and cohomology commutes with these colimits
@@ -24,8 +27,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Properties of Schemes, Lemma 28.23.3"
@@ -60,7 +61,7 @@ diagram $\mathcal F_j$ in $\operatorname{QCoh}(X)$ with colimit $\mathcal M$.
 orbit construction embeds it as a closed subvariety of a projective space, so
 the restricted $\mathcal O(1)$ is very ample and its standard opens give a
 finite affine cover ([[thm-semisimple-flag-variety-smooth-projective]],
-[[lem-semisimple-projective-orbit-flag-quotients]],
+[[lem-semisimple-projective-orbit-flag-quotients|Projective orbit constructions for $G/B$ and $G/P_{\alpha}$]],
 [[def-very-ample-invertible-sheaf-relative]]).
 
 [F2] On an affine open $\operatorname{Spec}A$, quasi-coherent modules are

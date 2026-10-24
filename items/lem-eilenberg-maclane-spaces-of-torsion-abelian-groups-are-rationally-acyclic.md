@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-eilenberg-maclane-spaces-of-torsion-abelian-groups-are-rationally-acyclic.json
+  precheck: pass
 id: lem-eilenberg-maclane-spaces-of-torsion-abelian-groups-are-rationally-acyclic
 kind: lemma
 title: "Torsion Eilenberg–Mac Lane spaces are rationally acyclic"
@@ -34,17 +37,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "§4.2 Theorem 4.41, printed pp.375–377, and §5.1 Theorem 5.3, printed pp.526–532"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. If T is any torsion abelian group and n≥1, every CW K(T,n) has H_0(K(T,n);Q)=Q and H_j(K(T,n);Q)=0 for j>0. No cardinality or finite-type restriction is imposed.
+Assume AC. If $T$ is any torsion abelian group and $n\ge1$, every CW $K(T,n)$ has $H_0(K(T,n);\mathbb Q)=\mathbb Q$ and $H_j(K(T,n);\mathbb Q)=0$ for $j>0$. No cardinality or finite-type restriction is imposed.
 
 ## Facts & Assumptions
 
@@ -64,6 +62,6 @@ Assume AC. If T is any torsion abelian group and n≥1, every CW K(T,n) has H_0(
 
 **Proof technique:** direct.
 
-1.1 A finitely generated subgroup F of T is finite: if its generators have orders d_1,...,d_r, the product of those cyclic groups surjects onto F. For finite F, the covering J(F)→B_wF has |F| sheets. For each singular simplex, sum all its lifts to obtain a chain map τ. Existence and uniqueness of based lifts apply because a simplex is simply connected; restriction to a face bijects its lift set with that face's lift set. Thus ∂τ=τ∂ and p_#τ=|F| id, including degree zero. These are exactly the lift-sum identities proved in the published transfer supplier. On rational homology, τ_* is injective because p_*τ_*=|F| id. The map J(F)→* is a weak equivalence by the weak-join $K(G,1)$ lemma; the published weak-equivalence/homology lemma and the rationalization lemma give zero positive rational homology of J(F). Therefore B_wF has zero positive rational homology. A rational cellular cycle in B_wT has finite support. Row 3 places all its cells in B_wF for one finitely generated, hence finite, subgroup F. The cellular differential agrees with that in B_wF, and the inclusion of cellular chain groups is injective, so the same chain is a cycle in B_wF. It bounds there by the preceding paragraph, hence bounds in B_wT. Cellular/singular comparison proves positive rational acyclicity. Marked CW uniqueness identifies B_wT with every chosen K(T,1), and homotopy invariance transfers the result. [given, F1, F2, F5]
+1.1 A finitely generated subgroup $F$ of $T$ is finite: if its generators have orders $d_1,\ldots,d_r$, the product of those cyclic groups surjects onto $F$. For finite $F$, the covering $J(F)\to B_wF$ has $|F|$ sheets. For each singular simplex, sum all its lifts to obtain a chain map $\tau$. Existence and uniqueness of based lifts apply because a simplex is simply connected; restriction to a face bijects its lift set with that face's lift set. Thus $\partial\tau=\tau\partial$ and $p_\#\tau=|F|\,\mathrm{id}$, including degree zero. These are exactly the lift-sum identities proved in the published transfer supplier. On rational homology, $\tau_*$ is injective because $p_*\tau_*=|F|\,\mathrm{id}$. The map $J(F)\to *$ is a weak equivalence by the weak-join $K(G,1)$ lemma; the published weak-equivalence/homology lemma and the rationalization lemma give zero positive rational homology of $J(F)$. Therefore $B_wF$ has zero positive rational homology. A rational cellular cycle in $B_wT$ has finite support. Row 3 places all its cells in $B_wF$ for one finitely generated, hence finite, subgroup $F$. The cellular differential agrees with that in $B_wF$, and the inclusion of cellular chain groups is injective, so the same chain is a cycle in $B_wF$. It bounds there by the preceding paragraph, hence bounds in $B_wT$. Cellular/singular comparison proves positive rational acyclicity. Marked CW uniqueness identifies $B_wT$ with every chosen $K(T,1)$, and homotopy invariance transfers the result. [given, F1, F2, F5]
 
-2.1 Take the actual path fibration ΩK(T,n)→PK(T,n)→K(T,n), with contractible total, from the mapping-path supplier. Its exact sequence shows its loop fiber is path-connected and has T as its only positive homotopy group, in degree n−1. Apply the relative version of CW approximation with a prescribed vertex mapping to the constant loop, obtaining a based weak equivalence L→ΩK(T,n). L is a marked CW K(T,n−1). Its rational homology is that of the loop fiber by the published weak-equivalence/homology lemma and the rationalization lemma, and is acyclic by the induction hypothesis. The base K(T,n) is simply connected. In the rational Serre sequence only the row b=0 remains, with E^2_{a,0}=H_a(K(T,n);Q). No differential can enter that row, and every outgoing target is zero. Strong convergence and contractibility of the total force H_a(K(T,n);Q)=0 for a>0. Path-connectedness gives H_0=Q. This is a finite induction for each specified n, and requires no homotopy equivalence from a CW complex to the strict loop fiber. [step 1.1, F3, F4, F5] ∎
+2.1 Take the actual path fibration $\Omega K(T,n)\to PK(T,n)\to K(T,n)$, with contractible total, from the mapping-path supplier. Its exact sequence shows its loop fiber is path-connected and has $T$ as its only positive homotopy group, in degree $n-1$. Apply the relative version of CW approximation with a prescribed vertex mapping to the constant loop, obtaining a based weak equivalence $L\to\Omega K(T,n)$. $L$ is a marked CW $K(T,n-1)$. Its rational homology is that of the loop fiber by the published weak-equivalence/homology lemma and the rationalization lemma, and is acyclic by the induction hypothesis. The base $K(T,n)$ is simply connected. In the rational Serre sequence only the row $b=0$ remains, with $E^2_{a,0}=H_a(K(T,n);\mathbb Q)$. No differential can enter that row, and every outgoing target is zero. Strong convergence and contractibility of the total force $H_a(K(T,n);\mathbb Q)=0$ for $a>0$. Path-connectedness gives $H_0=\mathbb Q$. This is a finite induction for each specified $n$, and requires no homotopy equivalence from a CW complex to the strict loop fiber. [step 1.1, F3, F4, F5] ∎

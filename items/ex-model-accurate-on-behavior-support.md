@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-model-accurate-on-behavior-support.json
+  precheck: pass
 id: ex-model-accurate-on-behavior-support
 kind: example
 title: "An inaccurate model can give the exact return on behavior support"
@@ -18,12 +21,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+
 ---
 
 ## Example
@@ -32,7 +30,7 @@ Let $S=\{s,g\}$, with one dummy action $d$ at $g$ and actions $a,b$ at $s$. At $
 
 The TikZ diagram shows the two model transition/reward tables: a label $u:r$ gives action $u$ and its immediate reward on the arrow, and an arrow returning to its source denotes a self-transition. The learned reward for $b$ is marked with a hat.
 
-\begin{center}
+```tikz
 \begin{tikzpicture}[>=stealth, node distance=32mm]
   \node[circle,draw] (s) {$s$};
   \node[circle,draw,right of=s] (g) {$g$};
@@ -40,7 +38,7 @@ The TikZ diagram shows the two model transition/reward tables: a label $u:r$ giv
   \draw[->] (g) to[loop right] node[right] {$d:0$} (g);
   \draw[->] (s) to[loop left] node[left] {$b:0\ (\widehat b:1)$} (s);
 \end{tikzpicture}
-\end{center}
+```
 
 ## Example references
 

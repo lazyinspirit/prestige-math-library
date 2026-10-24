@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-centered-chord-and-unequal-step-tangent-error.json
+  precheck: pass
 id: lem-centered-chord-and-unequal-step-tangent-error
 kind: lemma
 title: "Second-order centered and unequal-step tangent estimates"
@@ -64,3 +67,37 @@ If $\delta_{h_-,h_+}:=M_3h_-h_+/6\le1/2$, then it is nonzero and its unit normal
 
 3.1 The same normalization argument as in step 2.1, using $\delta_{h_-,h_+}\le1/2$, gives nonzero $d_{h_-,h_+}$ and normalized error at most $4\delta_{h_-,h_+}$. Setting $h_-=h_+=h$ recovers the centered formula, and if both steps are bounded by a fixed multiple of their maximum mesh size, their product is $O(h^2)$. [F1, step 2.1, step 1.2, algebra] ∎
 
+
+## Remarks
+
+The schematic below shows samples on a planar unit-speed circular arc (not to scale in the parameter). In the centered panel, the arrow from $R(s-h)$ to $R(s+h)$ has direction $d_h$. In the unequal panel, the two arrows represent the increments used in the divided secants $v_-=(R(s)-R(s-h_-))/h_-$ and $v_+=(R(s+h_+)-R(s))/h_+$. The estimator is their weighted average $d_{h_-,h_+}=\frac{h_+}{h_-+h_+}v_-+\frac{h_-}{h_-+h_+}v_+$, rather than the direction of the chord joining the outer samples. Dashed arrows indicate $R'(s)$. This illustration makes no additional error claim; the bounds and nonvanishing conditions are proved above.
+
+```tikz
+\begin{tikzpicture}[scale=1.05, every node/.style={font=\small}]
+\begin{scope}
+\node at (0,2.1) {Centered samples};
+\draw[thick] (-1.73205,1) arc (210:330:2);
+\coordinate (A) at (-1.435,0.607);
+\coordinate (B) at (0,0);
+\coordinate (C) at (1.435,0.607);
+\draw[->,thick] (A) -- (C) node[midway,above] {$d_h$ direction};
+\draw[->,dashed,thick] (B) -- (1.35,0) node[right] {$R'(s)$};
+\fill (A) circle (2pt) node[below left] {$R(s-h)$};
+\fill (B) circle (2pt) node[below] {$R(s)$};
+\fill (C) circle (2pt) node[below right] {$R(s+h)$};
+\end{scope}
+\begin{scope}[xshift=6.4cm]
+\node at (0,2.1) {Unequal samples};
+\draw[thick] (-1.73205,1) arc (210:330:2);
+\coordinate (D) at (-0.959,0.245);
+\coordinate (E) at (0,0);
+\coordinate (F) at (1.683,0.919);
+\draw[->,thick] (D) -- (E);
+\draw[->,thick] (E) -- (F);
+\draw[->,dashed,thick] (E) -- (1.35,0) node[right] {$R'(s)$};
+\fill (D) circle (2pt) node[below left] {$R(s-h_-)$};
+\fill (E) circle (2pt) node[below] {$R(s)$};
+\fill (F) circle (2pt) node[below right] {$R(s+h_+)$};
+\end{scope}
+\end{tikzpicture}
+```

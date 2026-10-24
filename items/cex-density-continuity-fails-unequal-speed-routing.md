@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-density-continuity-fails-unequal-speed-routing.json
+  precheck: pass
 id: cex-density-continuity-fails-unequal-speed-routing
 kind: counterexample
 title: "Density continuity can violate conservative advection balance"
@@ -28,12 +31,7 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement refuted
@@ -48,20 +46,6 @@ and $2$. Mass flux on an edge is stipulated to be speed times density. Giving
 all incident edges density $1$ yields incoming flux $1$ and total outgoing
 flux $3$, so mass is not conserved. A conservative routing can instead send
 the full incoming flux to the speed-$1$ outgoing edge and zero to the other.
-
-The arrows indicate the stipulated flow direction and speeds; the exact flux sums in the refutation, not the drawing, establish the failure.
-
-\begin{center}
-\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
-  \node[circle,draw] (v) at (0,0) {junction};
-  \node[left] (in) at (-2.1,0) {in: $v=1,\ \rho=1,\ q=1$};
-  \node[right] (out1) at (2.2,1.0) {out: $v_1=1,\ \rho=1,\ q_1=1$};
-  \node[right] (out2) at (2.2,-1.0) {out: $v_2=2,\ \rho=1,\ q_2=2$};
-  \draw[->] (in) -- (v);
-  \draw[->] (v) -- (out1);
-  \draw[->,dashed] (v) -- (out2);
-\end{tikzpicture}
-\end{center}
 
 ## Facts & Assumptions
 
@@ -83,3 +67,24 @@ Counterexample.
 
 2.1 The matrix $P=(1,0)^{\mathsf T}$ is entrywise nonnegative and its sole incoming column sums to $1$. With incoming flux $q^{\rm in}=1$, it produces $q^{\rm out}=(1,0)^{\mathsf T}$, whose total is $1$ by [F1, F2]. The corresponding outgoing densities are $(1,0)$, so this conservative routing does not impose equal densities. [F1, F2, step 1.1, algebra] ∎
 
+
+## Remarks
+
+The diagram shows the equal-density assignment $\rho=1$ on all three
+incident edges, rather than the conservative routing $P=(1,0)^{\mathsf T}$.
+All arrows are active and indicate the stipulated flow directions. The labels
+use $q=v\rho$: the incoming flux is $1$ and the outgoing total is $1+2=3$.
+The exact flux sums in the refutation establish the failure independently of
+the drawing.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+  \node[circle,draw] (v) at (0,0) {junction};
+  \node[left] (in) at (-2.1,0) {in: $v=1,\ \rho=1,\ q=1$};
+  \node[right] (out1) at (2.2,1.0) {out: $v_1=1,\ \rho=1,\ q_1=1$};
+  \node[right] (out2) at (2.2,-1.0) {out: $v_2=2,\ \rho=1,\ q_2=2$};
+  \draw[->] (in) -- (v);
+  \draw[->] (v) -- (out1);
+  \draw[->] (v) -- (out2);
+\end{tikzpicture}
+```

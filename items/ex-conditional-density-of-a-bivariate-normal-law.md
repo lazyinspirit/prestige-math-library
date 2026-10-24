@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-conditional-density-of-a-bivariate-normal-law.json
+  precheck: pass
 id: "ex-conditional-density-of-a-bivariate-normal-law"
 kind: "example"
 title: "Conditional density of a bivariate normal law"
@@ -6,12 +9,6 @@ deps: ["thm-conditional-density-formula", "lem-normal-density-has-total-mass-one
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"
@@ -39,9 +36,9 @@ The singular endpoints $|r|=1$ are outside this density assertion.
 
 [F1] Normalize joint density sections at finite positive marginal density. [[thm-conditional-density-formula]].
 
-[F2] Under AC phi(t)=exp(-t^2/2)/sqrt(2pi) is a positive normalized density. [[lem-normal-density-has-total-mass-one]].
+[F2] Under AC $\phi(t)=\exp(-t^2/2)/\sqrt{2\pi}$ is a positive normalized density. [[lem-normal-density-has-total-mass-one]].
 
-[F3] N(a,s^2) is the affine pushforward of N(0,1). [[def-standard-normal-and-normal-laws]].
+[F3] $N(a,s^2)$ is the affine pushforward of $N(0,1)$. [[def-standard-normal-and-normal-laws]].
 
 [F4] Tonelli computes the nonnegative joint marginal and moments. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]].
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-smooth-commutative-algebraic-groups-are-trigonalizable.json
+  precheck: pass
 id: prop-smooth-commutative-algebraic-groups-are-trigonalizable
 kind: proposition
 title: "Smooth commutative affine algebraic groups over algebraically closed fields are trigonalizable"
@@ -18,11 +21,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -34,7 +32,7 @@ sources:
 ---
 ## Statement
 
-Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth commutative affine algebraic group of finite type over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]]), together with a finite-dimensional rational representation on $V$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]). Then there is a basis of $V$ for which $G$ acts through upper triangular matrices. In particular every smooth commutative affine algebraic group over an algebraically closed field is trigonalizable ([[def-group-scheme-over-a-field]], [[lem-trigonalizable-iff-invariant-flags]]).
+Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth commutative affine algebraic group of finite type over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]]), together with a finite-dimensional rational representation on $V$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]). Then there is a basis of $V$ for which $G$ acts through upper triangular matrices. In particular every smooth commutative affine algebraic group over an algebraically closed field is trigonalizable ([[def-group-scheme-over-a-field]], [[lem-trigonalizable-iff-invariant-flags|Trigonalizable groups, invariant flags and embeddings into $T_n$]]).
 
 ## Facts & Assumptions
 
@@ -46,7 +44,7 @@ Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$
 
 [F3] Assume AC. For a smooth finite-type $k$-scheme $G$ over an algebraically closed field, $G(k)$ is schematically dense: a closed subscheme $H\subseteq G$ with $H(k)=G(k)$ equals $G$. ([[lem-smooth-finite-type-schemes-have-schematically-dense-rational-points]])
 
-[F4] A group $G$ is trigonalizable if every finite-dimensional representation admits a basis with $G$ acting by upper triangular matrices. ([[lem-trigonalizable-iff-invariant-flags]])
+[F4] A group $G$ is trigonalizable if every finite-dimensional representation admits a basis with $G$ acting by upper triangular matrices. ([[lem-trigonalizable-iff-invariant-flags|Trigonalizable groups, invariant flags and embeddings into $T_n$]])
 
 ## Proof
 

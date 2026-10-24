@@ -1,16 +1,7 @@
 ---
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-7.md"
-      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
-      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u7.json"
-    content_sha256: "cc86395a714087928acab18ce444de944b0211508343224bd30474bd7e880a5e"
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hom-from-projectives-counts-simple-composition-factors.json
+  precheck: pass
 id: lem-hom-from-projectives-counts-simple-composition-factors
 kind: lemma
 title: "Hom from a projective counts simple composition factors"
@@ -61,7 +52,7 @@ the multiplicity of $L(\lambda)$ in a composition series of $X$
 
 ## Proof
 
-**Proof technique:** induction on the length of a composition series, using exactness of $\operatorname{Hom}(P(\lambda),-)$ and additivity of multiplicities.
+**Proof technique:** induction on the length of a composition series, using exactness of Hom(P(λ), −) and additivity of multiplicities.
 
 1.1 Since $P(\lambda)$ is projective, the functor $\operatorname{Hom}_{\mathcal O}(P(\lambda),-)$ is exact; in particular, for a short exact sequence $0\to A\to X\to B\to0$ with all terms of finite length if the two outer Hom spaces are finite-dimensional, so is the middle one and $\dim\operatorname{Hom}(P(\lambda),X)=\dim\operatorname{Hom}(P(\lambda),A)+\dim\operatorname{Hom}(P(\lambda),B)$ and $[X:L(\lambda)]=[A:L(\lambda)]+[B:L(\lambda)]$ by [F3]. [F1, F3, given]
 

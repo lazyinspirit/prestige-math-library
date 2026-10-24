@@ -1,0 +1,108 @@
+{
+  "id": "def-bounded-computation-tableau",
+  "agent": "/root/rendering_repair_coordinator/dcpt_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot and identical frozen/current preimage contain only prose. A concrete square array materially clarifies time versus tape indexing, the single state-tagged head cell, and the distinction between a legal step and halting padding. This is an authorized explanatory addition, not a claim that the original definition was incorrect.",
+      "action": "Added a concrete T=3, w=1 tableau and specified both reached transition sets in final Remarks; retained every original byte.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Append a checked 4-by-4 time-by-tape TikZ tableau for the explicitly stated singleton transition choices q0,1 -> q1,1,R and q1,blank -> qacc,1,L; the final row repeats the accepting row.",
+  "source_lines_after": {
+    "remarks_example": [
+      57,
+      107
+    ],
+    "tikz": [
+      65,
+      101
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Concrete local computation",
+      "justification": "Evaluated the stated transition choices in Node from q0/head 0/tape [1,blank,blank,blank]. Computed rows: 0=(q0,0,[1,blank,blank,blank]); 1=(q1,1,[1,blank,blank,blank]); 2=(qacc,0,[1,1,blank,blank]); 3=(qacc,0,[1,1,blank,blank]). These exactly match all 16 TikZ cell labels."
+    },
+    {
+      "check": "Indexing and head uniqueness",
+      "justification": "Definition lines 31,34,38 requires (T+1)^2 cells, row zero initial, and one state-tagged symbol per row. T=3 gives four rows and columns indexed 0..3. Actual Node array check found four cells in each row and exactly one state-tagged cell in each; head positions are 0,1,0,0. Native view shows four rows/four columns with these labels and thick borders."
+    },
+    {
+      "check": "Transition locality and orientation",
+      "justification": "Local one-tape supplier says an instruction writes at the scanned cell and moves L or R. First instruction preserves position-0 symbol 1 and moves head from 0 to 1; second writes 1 at position 1 and moves from 1 to 0 entering qacc. All other tape cells remain blank; no invented edge or machine step is shown."
+    },
+    {
+      "check": "Halting, bounds and acceptance",
+      "justification": "Definition lines 35-41 permits repeating a halting row and declares a tableau accepting if some row accepts. Actual computed rows 2 and 3 are equal; row 3 is padding, not an outgoing transition from qacc. Only positions 0 and 1 are visited, 2 actual steps <=3, and |w|=1<=3. Singleton reached transition sets ensure every branch on this input is the displayed accepting run."
+    },
+    {
+      "check": "Independent definition and proof",
+      "justification": "The complete original definition and Remarks remain byte-for-byte as a prefix; the added prose states the definition is independent of the figure. This proof-free definition gains no proof dependency or changed claim."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-bounded-computation-tableau.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-bounded-computation-tableau.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-bounded-computation-tableau.md",
+            "item_id": "def-bounded-computation-tableau",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-bounded-computation-tableau.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "pre_edit_guard": {
+    "expected_raw_sha256": "f920a48ecd5bd6f30f5e91581d1c3972884769378441c6d79ddd4f88e4464cf9",
+    "matched_immediately_before_edit": true
+  },
+  "current_raw_sha256": "85d277bbd6b91eafc524e7b24a062028ed898d42f137e5b6c4bc4b541adf23b7",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path is missing. Authentic corresponding-category screenshot located at computability-theory/screenshots; its hash exactly matches the queue.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/def-bounded-computation-tableau--01.png",
+    "original_screenshot_sha256": "285847f9c10f8128f9a549917ea3722f8182dc56b48ea69ef0cda19596f4657a",
+    "original_view": "Standalone original-resolution view inspected.",
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt002",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt002/manifest.json",
+    "preview_source_sha256": "85d277bbd6b91eafc524e7b24a062028ed898d42f137e5b6c4bc4b541adf23b7",
+    "preview_screenshot_sha256": "f46e293c0dcd50314bc4abebd15159cb6200c9b46259848b1d4f181753add215",
+    "native_visual_check": "Standalone original-resolution resulting PNG inspected: complete 4x4 grid, distinct time and tape labels, all 16 symbols and four thick state-cell outlines visible with no figure overlap or clipping. Native SSR compiler yielded tikz_count=1, diagram_failures=[], katex_errors=[].",
+    "reference_map_diagnostics": 16,
+    "preview_limitations": "Local native ItemBody/SSR preview with external requests blocked; not production-route coverage. Unrelated malformed-source title-map diagnostics do not affect this link-free item."
+  },
+  "remaining_issues": []
+}

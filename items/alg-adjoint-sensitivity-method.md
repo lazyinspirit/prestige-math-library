@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-adjoint-sensitivity-method.json
+  precheck: n/a
 id: alg-adjoint-sensitivity-method
 kind: algorithm
 title: Exact continuous adjoint sensitivity for a neural ODE
@@ -20,8 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/1806.07366"
     - title: "George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, and Balaji Lakshminarayanan, Normalizing Flows for Probabilistic Modeling and Inference, §4.2.2"
       url: "https://www.jmlr.org/papers/volume22/19-1028/19-1028.pdf"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -53,3 +55,23 @@ Here $D_u$ and $D_\theta$ denote Jacobian matrices in the displayed variables, $
 [Chen et al., §2 and Appendix B](https://arxiv.org/pdf/1806.07366)
 
 [Papamakarios et al., §4.2.2](https://www.jmlr.org/papers/volume22/19-1028/19-1028.pdf)
+
+## Remarks
+
+The diagram separates the forward state solve, the backward terminal adjoint solve, and the assembly of the returned vector. In its labels, derivatives of $v$ and $\ell$ are evaluated at $(t,u_\theta(t),\theta)$, and derivatives of $\phi$ at $(u_\theta(T),\theta)$. The dashed arrow indicates that the adjoint coefficients use the same state trajectory; the downward arrow indicates assembly from the displayed data, not time evolution. Every equation and integral is continuous and exact, as in the procedure above; no numerical accuracy claim is illustrated.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}, line width=0.7pt]
+\node (u0) at (0,0) {$u_0(\theta)$};
+\node (uT) at (9,0) {$u_\theta(T)$};
+\draw[->] (u0) -- node[above] {state: $\dot u_\theta=v$} node[below] {$0\longrightarrow T$} (uT);
+\node (p0) at (0,-2.3) {$p(0)$};
+\node (pT) at (9,-2.3) {$p(T)=D_u\phi^T$};
+\draw[->] (pT) -- node[above] {adjoint: $-p'=D_uv^Tp+D_u\ell^T$} node[below] {$0\longleftarrow T$} (p0);
+\draw[->,dashed] (4.5,-0.7) -- node[right] {along $u_\theta(t)$} (4.5,-1.65);
+\node[draw,rounded corners,align=center,inner sep=9pt] (G) at (4.5,-4.8) {$G(\theta)=D_\theta\phi^T$\\[4pt] $\displaystyle {}+D_\theta u_0(\theta)^Tp(0)$\\[4pt] $\displaystyle {}+\int_0^T\bigl(D_\theta\ell^T+D_\theta v^Tp(t)\bigr)\,dt$};
+\draw[->] (4.5,-2.95) -- node[right] {assemble parameter contributions} (G.north);
+\end{tikzpicture}
+```
+
+The illustration only organizes the three instructions. Their full hypotheses, equations, and output formula above remain the mathematical definition independently of the figure.

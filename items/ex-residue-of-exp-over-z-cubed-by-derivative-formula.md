@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-residue-of-exp-over-z-cubed-by-derivative-formula.json
+  precheck: pass
 id: ex-residue-of-exp-over-z-cubed-by-derivative-formula
 kind: example
-title: "The residue of e^z/z^3 from the pole-derivative formula"
+title: "The residue of $e^z/z^3$ from the pole-derivative formula"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [thm-residue-pole-derivative-formula, thm-complex-exponential-is-entire-wi
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:

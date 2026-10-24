@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-reinforce.json
+  precheck: n/a
 id: alg-reinforce
 kind: algorithm
 title: "Episodic REINFORCE with a frozen episode policy"
@@ -19,12 +22,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, second-edition draft"
@@ -63,6 +60,18 @@ and return $\theta_1$. All returns, scores, and the full sum use the same parame
 [[thm-policy-gradient-theorem|The expected discounted trajectory-score update under the stated differentiation and integrability hypotheses]].
 
 ## Remarks
+
+The arrows below show the order of operations for one training round, rather than transitions of the MDP. The episode is completed before the single parameter update; all scores are evaluated at $\theta_0$. When $T=0$, the sums are empty and $\theta_1=\theta_0$.
+
+```tikz
+\begin{tikzpicture}
+\node[draw,rounded corners,minimum width=9cm,minimum height=1cm,align=center] (sample) at (0,0) {Sample $(S_0,A_0,R_1,\ldots,S_T)$ until terminal\\using the fixed policy $\pi_{\theta_0}$};
+\node[draw,rounded corners,minimum width=9cm,minimum height=1.2cm,align=center] (scores) at (0,-2) {For $0\le t<T$, compute $G_t=\sum_{k=t}^{T-1}\gamma^{k-t}R_{k+1}$\\and $\psi_t=\left.\nabla_\theta\log\pi_\theta(A_t\mid S_t)\right|_{\theta=\theta_0}$};
+\node[draw,rounded corners,minimum width=9cm,minimum height=1cm,align=center] (update) at (0,-4) {One update: $\theta_1=\theta_0+\alpha\sum_{t=0}^{T-1}\gamma^tG_t\psi_t$\\Return $\theta_1$};
+\draw[->] (sample) -- (scores);
+\draw[->] (scores) -- (update);
+\end{tikzpicture}
+```
 
 Under the theorem's assumptions, the sample direction $\sum_{t=0}^{T-1}\gamma^tG_t\psi_t$ has expectation $\nabla_\theta J(\theta_0)$, including the theorem's trajectory-differentiation and Axiom of Choice premises. The expected parameter increment is therefore $\alpha\nabla_\theta J(\theta_0)$. This identity does not imply convergence of repeated nonlinear or deep parameter updates.
 

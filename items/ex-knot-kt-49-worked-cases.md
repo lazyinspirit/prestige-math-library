@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-49-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-49-worked-cases
 kind: example
 title: "Worked case: a normal disk in the zero-crossing unknot exterior"
@@ -26,13 +29,7 @@ sources:
         notes (2009)
       url: https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf
       locator: §§14.1–14.4, complete six-page note on normal disks and knot exteriors.
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -41,8 +38,8 @@ For the crossingless oriented unknot code, triangulate its solid-torus exterior 
 $$T_1=[a_0^0,a_1^0,a_2^0,a_2^1],\qquad T_2=[a_0^0,a_1^0,a_1^1,a_2^1],\qquad T_3=[a_0^0,a_0^1,a_1^1,a_2^1].$$
 The properly embedded normal disk $D^2\times\{s_*\}$ at the midpoint $s_*$ of $b_0b_1$ meets $T_1$ in the triangle cutting off $a_2^1$, $T_2$ in the quadrilateral separating $\{a_0^0,a_1^0\}$ from $\{a_1^1,a_2^1\}$, and $T_3$ in the triangle cutting off $a_0^0$; every other normal coordinate is zero. It is connected, has nonempty boundary and Euler characteristic one, and its boundary meets the marked original meridian $\mu=\{a_0\}\times S^1$ once mod two.
 
-~~~tikz
-\begin{tikzpicture}[scale=1]
+```tikz
+\begin{tikzpicture}[scale=2.1]
 \coordinate (A0) at (0,0); \coordinate (A1) at (2,0); \coordinate (A2) at (1,1.5);
 \coordinate (B0) at (0.6,0.7); \coordinate (B1) at (2.6,0.7); \coordinate (B2) at (1.6,2.2);
 \draw (A0)--(A1)--(A2)--cycle; \draw (B0)--(B1)--(B2)--cycle;
@@ -51,10 +48,10 @@ The properly embedded normal disk $D^2\times\{s_*\}$ at the midpoint $s_*$ of $b
 \coordinate (M0) at (0.3,0.35); \coordinate (M1) at (2.3,0.35); \coordinate (M2) at (1.3,1.85);
 \draw[red,very thick] (M0)--(M1)--(M2)--cycle;
 \node[below left] at (A0) {$a_0^0$}; \node[below right] at (A1) {$a_1^0$}; \node[left] at (A2) {$a_2^0$};
-\node[left] at (B0) {$a_0^1$}; \node[right] at (B1) {$a_1^1$}; \node[above] at (B2) {$a_2^1$};
-\node[red] at (1.35,0.8) {$D^2\times\{s_*\}$};
+\node[below right] at (B0) {$a_0^1$}; \node[right] at (B1) {$a_1^1$}; \node[above] at (B2) {$a_2^1$};
+\node[red] at (1.3,-0.6) {$D^2\times\{s_*\}$};
 \end{tikzpicture}
-~~~
+```
 
 The dashed edges indicate the staircase prism subdivision specified by $T_1,T_2,T_3$; the red section is the geometric disk whose intersections with those tetrahedra give the stated triangle–quadrilateral–triangle vector. The formula for the tetrahedra, not the schematic projection, fixes the exact triangulation.
 

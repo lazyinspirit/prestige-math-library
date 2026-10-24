@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-givens-qr-on-a-sparse-matrix.json
+  precheck: pass
 id: ex-givens-qr-on-a-sparse-matrix
 kind: example
 title: "Givens QR can zero selected entries of a sparse matrix one at a time"
@@ -10,9 +13,6 @@ provenance:
 deps: [thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -49,3 +49,24 @@ $$R=\begin{pmatrix}5&\frac{24}{5}\\0&\frac{\sqrt{149}}{5}\\0&0\end{pmatrix}.$$
 3.1 Since both rotations are unitary, $Q=(G_2G_1)^*$ and $A=QR$. This verifies the Givens QR factorisation promised by [L2]. [step 2.1, L2, algebra]
 
 4.1 Steps 1.1-3.1 verify the example. [step 1.1, step 2.1, step 3.1] ∎
+
+## Remarks
+
+The arrows show left multiplication by the rotations from steps 1.1 and 2.1.
+The first rotation zeros entry $(2,1)$; the second zeros entry $(3,2)$ while
+preserving both zeros below the first pivot. The verification above is independent
+of this illustration.
+
+```tikz
+\begin{tikzpicture}
+\node (A) at (0,0) {$\left(\begin{array}{rr}3&4\\4&3\\0&2\end{array}\right)$};
+\node (B) at (4,0) {$\left(\begin{array}{rr}5&24/5\\0&-7/5\\0&2\end{array}\right)$};
+\node (R) at (8,0) {$\left(\begin{array}{rr}5&24/5\\0&\sqrt{149}/5\\0&0\end{array}\right)$};
+\draw[->] (A) -- node[above] {$G_1$} node[below] {$\mathrm{rows}\ 1,2$} (B);
+\draw[->] (B) -- node[above] {$G_2$} node[below] {$\mathrm{rows}\ 2,3$} (R);
+\node at (0,-1.2) {$A$};
+\node at (4,-1.2) {$G_1A$};
+\node at (8,-1.2) {$R=G_2G_1A$};
+\node at (4,-2) {$Q=(G_2G_1)^*,\qquad A=QR$};
+\end{tikzpicture}
+```

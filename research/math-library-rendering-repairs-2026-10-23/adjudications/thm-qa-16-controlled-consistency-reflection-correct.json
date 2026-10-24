@@ -1,0 +1,95 @@
+{
+  "id": "thm-qa-16-controlled-consistency-reflection-correct",
+  "agent": "/root/rendering_repair_coordinator/qa_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Both original PNGs independently viewed standalone at original resolution show raw proof expressions, including C^N, underscored indices, brace exponents and O_x\u00b2=I, rendered as ordinary text. The algorithm supplier explicitly fixes the Hilbert decomposition, address basis and projection; no reconstruction is required.",
+      "action": "Typeset the existing expressions in all three proof steps using inline math, with mathcal H and mathbb C matching the algorithm supplier; preserve all prose arguments and justification tags.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original tile 01 also visibly exposes x_i, \u03a0_x, R_\u03a0=2\u03a0-I, C^d and scratch kets as unformatted mathematical notation in Statement and Facts.",
+      "action": "Add inline math to these existing expressions, retaining the exact local links and mathematical assertions.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restore mathematical formatting in Statement, Given/F21\u2013F25 and Proof 1.1\u20133.1 only. No title or frontmatter changes.",
+  "source_lines_after": [
+    37,
+    39,
+    45,
+    49,
+    51,
+    53,
+    55,
+    57,
+    61,
+    63,
+    65
+  ],
+  "mathematical_meaning_preserved": true,
+  "mathematical_checks": [
+    "Algorithm full input read: orthogonal direct sum span{|start>} plus C^N tensor K tensor C^2, with the response last; retained exactly.",
+    "Algorithm and Boolean-domain suppliers fix |i>=e_{i-1} for i in [N]; retained the one-based query labels and zero-based standard basis.",
+    "Register supplier uses first-argument-linear root pairing. Existing comma-pairing sum of real Kronecker deltas remains the same; no conversion to a differently oriented Dirac product.",
+    "Rank-one ket/bra summands, unit/orthogonal start vector, and mutual orthogonality arguments unchanged.",
+    "Reflection supplier fixes plus-on-range R_Pi=2Pi-I. Phase conditions c=1 and z unequal u, unconditional two-query sequence, O_x^2=I, start-mode |+> protection, clean scratch return, and all superposition quantifiers unchanged."
+  ],
+  "guard": {
+    "before_raw_sha256": "394ba6afb94a2d076ab6377204a52654a4b15b1892831839f6c500137851200e",
+    "checked_immediately_before_edit": true,
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true,
+    "status": "published"
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-16-controlled-consistency-reflection-correct.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-qa-16-controlled-consistency-reflection-correct.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-qa-16-controlled-consistency-reflection-correct.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "visual_verification": {
+    "preview_dir": "research/math-library-rendering-repairs-2026-10-23/qa-011-fresh-preview",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/qa-011-fresh-preview/manifest.json",
+    "all_original_flagged_tiles_viewed_standalone_original_resolution": true,
+    "all_fresh_tiles_viewed_standalone_original_resolution": true,
+    "result": "Both current tiles show the intended mathematical notation correctly typeset, including every proof step and the changed Statement/Facts. No visible math errors or clipping.",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "reference_map_diagnostics": 16,
+    "limitations": "Local native ItemBody preview, not a production HTTP route; unrelated malformed reference-map entries omitted by helper."
+  },
+  "remaining_issues": []
+}

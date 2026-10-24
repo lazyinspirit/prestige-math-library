@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fourier-pairing-for-a-finite-measure-and-schwartz-data.json
+  precheck: pass
 id: lem-fourier-pairing-for-a-finite-measure-and-schwartz-data
 kind: lemma
 title: Fourier pairing for a finite measure and Schwartz data
@@ -26,18 +29,6 @@ deps:
 - thm-arithmetic-and-lattice-operations-preserve-measurability
 - thm-fourier-transform-maps-schwartz-space-continuously-to-itself
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader plus completed current item adjudication proof read; item lem-fourier-pairing-for-a-finite-measure-and-schwartz-data; evidence research/frontier-38-owner-30-reader-6.md, research/frontier-38-owner-30-reader-findings-6.json, research/frontier-38-owner-30-alpha-batch-6-5a-decisions.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -74,7 +65,7 @@ Assume Countable Choice. Let $\mu$ be a finite complex Borel measure on $\mathbb
 
 ## Proof
 
-**Proof technique:** direct; the pairing identity is Fubini applied to the product $\mathbb R^n\times\mathbb R^n$ against $\lambda_n\times\mu$, the conjugation identity is the published transform law, and the convolution identity substitutes the translation law into the defining integral.
+**Proof technique:** direct; the pairing identity is Fubini applied to the product of two copies of real n-space against the product of Lebesgue measure and the given complex measure, the conjugation identity is the published transform law, and the convolution identity substitutes the translation law into the defining integral.
 
 1.1 Joint measurability and absolute integrability. The characters $e^{2\pi ix\cdot\omega}$ are Borel on $\mathbb R^{2n}$ by the Cartesian form, the $1$-Lipschitz sine and cosine, and the closure rules of [F7]; the projections $(x,\omega)\mapsto x$, $(x,\omega)\mapsto\omega$ are Borel, so $G(\omega)$, $\overline{F(x)}$ and $\widehat F(\omega)$ pull back to Borel functions, and $p(x,\omega):=e^{2\pi ix\cdot\omega}G(\omega)\overline{F(x)}$, $q(z,\omega):=e^{2\pi iz\cdot\omega}F(x-z)$ for fixed $x$ are Borel by [F7]. For $p$, using $|e^{2\pi ix\cdot\omega}|=1$ and $|G|\le\|G\|_\infty$, $|F|\le\|F\|_\infty$, with $\|F\|_1<\infty$ from [F4], $$\int_{\mathbb R^n}\!\!\int_{\mathbb R^n}|p|\,d|\mu|\,dx=\|F\|_1\!\int|G|\,d|\mu|\le\|F\|_1\|G\|_\infty M<\infty,$$ and for $q$, translation invariance gives $\int\int|q|\,d|\mu|\,dz=\|F\|_1M<\infty$. Thus both kernels are integrable against $\lambda_n\times|\mu|$. Fubini against the complex measure follows first for simple functions by linearity and then by approximation in this absolute-integral norm, using [F8]; this licenses the interchange below. [F1, F3, F4, F7, F8]
 

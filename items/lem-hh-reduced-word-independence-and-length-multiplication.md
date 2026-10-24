@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-reduced-word-independence-and-length-multiplication.json
+  precheck: pass
 id: lem-hh-reduced-word-independence-and-length-multiplication
 kind: lemma
-title: "Reduced-word independence of T_w and the length-multiplication rules"
+title: "Reduced-word independence of $T_w$ and the length-multiplication rules"
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -22,13 +25,7 @@ sources:
     - title: "Anders Bjorner and Francesco Brenti, Combinatorics of Coxeter Groups, Springer GTM 231 (2005), complete book PDF"
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 6.1 'Review of background material', printed pp. 174-175 (PDF pp. 182-183): the Hecke algebra over Z[q^{1/2},q^{-1/2}], the basis {T_w}, the multiplication rules T_sT_w = qT_sw + (q-1)T_w (sw<w) and T_wT_u = T_wu for additive lengths"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement

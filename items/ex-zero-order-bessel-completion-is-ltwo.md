@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-zero-order-bessel-completion-is-ltwo.json
+  precheck: pass
 id: ex-zero-order-bessel-completion-is-ltwo
 kind: example
-title: The zero-order Bessel completion is exactly L2
+title: The zero-order Bessel completion is exactly $L^2$
 status: published
 origin: pipeline
 deps:
@@ -18,13 +21,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155 (current revision)"

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-invariant-subspace-and-induced-quotient-operator.json
+  precheck: n/a
 id: def-invariant-subspace-and-induced-quotient-operator
 kind: definition
 title: "Invariant subspaces, restrictions, and induced quotient operators"
@@ -11,13 +14,6 @@ deps: [def-quotient-vector-space-and-canonical-projection, def-linear-map]
 justified_by: [prop-induced-quotient-operator-is-well-defined]
 aliases: []
 landmark: false
-verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-16
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -35,3 +31,15 @@ $$T|_W:W\longrightarrow W,\qquad w\longmapsto T(w).$$
 The **operator induced by $T$ on the quotient** is the map
 $$\bar T:V/W\longrightarrow V/W,\qquad \bar T(v+W):=T(v)+W,$$
 where $V/W$ is the quotient of [[def-quotient-vector-space-and-canonical-projection]]. Its well-definedness, linearity, and relation to the canonical projection are proved in [[prop-induced-quotient-operator-is-well-defined]].
+
+
+## Remarks
+
+For a $T$-invariant subspace $W$, the induced operator makes the following square commute. Both vertical arrows are the canonical projection $\pi(v)=v+W$.
+
+```tikzcd
+V \arrow[r, "T"] \arrow[d, "\pi"'] & V \arrow[d, "\pi"] \\
+V/W \arrow[r, "\bar T"'] & V/W
+```
+
+Indeed, $\pi(T(v))=T(v)+W=\bar T(\pi(v))$ for every $v\in V$. The well-definedness and linearity proof in [[prop-induced-quotient-operator-is-well-defined]] is independent of this illustration.

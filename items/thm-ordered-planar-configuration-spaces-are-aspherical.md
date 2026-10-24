@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ordered-planar-configuration-spaces-are-aspherical.json
+  precheck: pass
 id: thm-ordered-planar-configuration-spaces-are-aspherical
 kind: theorem
 title: "Ordered planar configuration spaces are aspherical"
@@ -12,13 +15,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   scraped: []
   references:
@@ -63,7 +59,7 @@ groups vanish.
 
 ## Proof
 
-**Proof technique:** induction on $n$ for fixed degree $k\ge3$.
+**Proof technique:** induction on n for fixed degree k ≥ 3.
 
 1.1 **Fibre degree vanishing.** Let $Q$ be any finite set of distinct points of $\operatorname{int}D^2$. By [F4] the complement $\operatorname{int}D^2\setminus Q$ has $\pi_j=0$ for every $j\ge2$; in particular, for every $k\ge3$, both groups $\pi_k(\operatorname{int}D^2\setminus Q)$ and $\pi_{k-1}(\operatorname{int}D^2\setminus Q)$ vanish. [F4]
 
@@ -81,6 +77,4 @@ groups vanish.
 
 3.1 **Induction conclusion.** Step 1.3 is the base case and step 2.1 proves the successor implication for arbitrary $n\ge2$ and arbitrary base configuration, so for every fixed $k\ge3$ and every $n\ge1$ one has $\pi_k(F_n(\operatorname{int}D^2),q)=0$. [step 1.3, step 2.1, discharge-induction]
 
-4.1 **All degrees and all models.** Combining step 3.1 with step 1.5 covers every $k\ge2$ and every base configuration in the open-disc model; applying step 1.6 gives the same vanishing for $F_n(\mathbb C)$ and $F_n(D^2)$, and [F7] identifies the fundamental group of the open-disc and plane models with $PB_n$, so these spaces are $\mathrm K(PB_n,1)$ in the higher-homotopy sense. [step 1.5, step 1.6, step 3.1, F7, discharge-induction]
-
-The induction is on the number of strands for each fixed degree $k\ge3$; the case $k=2$ was proved separately in advance and is not derived from any point-pushing statement. ∎
+4.1 **All degrees and all models.** Combining step 3.1 with step 1.5 covers every $k\ge2$ and every base configuration in the open-disc model; applying step 1.6 gives the same vanishing for $F_n(\mathbb C)$ and $F_n(D^2)$, and [F7] identifies the fundamental group of the open-disc and plane models with $PB_n$, so these spaces are $\mathrm K(PB_n,1)$ in the higher-homotopy sense. The induction is on the number of strands for each fixed degree $k\ge3$; the case $k=2$ was proved separately in advance and is not derived from any point-pushing statement. [step 1.5, step 1.6, step 3.1, F7, discharge-induction] ∎

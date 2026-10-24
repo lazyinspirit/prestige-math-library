@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-central-extensions-are-classified-by-h-two-with-trivial-action.json
+  precheck: pass
 id: cor-central-extensions-are-classified-by-h-two-with-trivial-action
 kind: corollary
-title: "Central extensions are classified by H^2 with trivial action"
+title: "Central extensions are classified by $H^2$ with trivial action"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-axiom-of-choice, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, cor-zero-h-two-class-is-equivalent-to-splitting]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -40,9 +36,9 @@ are classified by $H^2(G,A)$.
 
 [A1] Choice supplies the normalized sections required by [L1] for arbitrary quotient surjections.
 
-[L1] $H^2(G,M)$ classifies extensions with a fixed abelian kernel action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L1] $H^2(G,M)$ classifies extensions with a fixed abelian kernel action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action|$H^2$ classifies extensions with fixed abelian kernel action]]).
 
-[L2] The zero class is the split semidirect-product class ([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
+[L2] The zero class is the split semidirect-product class ([[cor-zero-h-two-class-is-equivalent-to-splitting|The zero $H^2$ class is equivalent to splitting]]).
 
 ## Proof
 

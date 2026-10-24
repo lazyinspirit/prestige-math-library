@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qc-one-bit-teleportation.json
+  precheck: pass
 id: lem-qc-one-bit-teleportation
 kind: lemma
 title: "One-bit J-gate teleportation branch identity"
@@ -12,11 +15,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §20.6, p. 179"
@@ -107,3 +105,35 @@ $|+\rangle=2^{-1/2}(|0\rangle+|1\rangle)$ is a unit vector
 
 3.1 Dividing the branch vector in step 1.1 by its norm $1/\sqrt2$ yields $X^bJ(\alpha)|\psi\rangle$; equivalently, the instrument conditional density from [F6] is the rank-one operator of this normalized vector. The map identity in step 1.1 remains an identity after tensoring with the identity on any finite reference register by [F8], so it also holds for entangled inputs. [step 1.1, step 2.1, F6, F8, algebra] ∎
 
+## Remarks
+
+The circuit reads from left to right; the upper wire is the first tensor
+factor and is measured, while the lower wire is the surviving second factor.
+The box $M_\alpha$ denotes measurement in the ordered basis
+$\{|b\rangle_\alpha:b=0,1\}$. Its dashed outgoing line carries the classical
+outcome $b$, not a surviving quantum wire.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (-0.8,1) {$|\psi\rangle$};
+\node at (-0.8,-0.7) {$|+\rangle$};
+\draw (-0.2,1) -- (2.65,1);
+\draw (-0.2,-0.7) -- (4.4,-0.7);
+\draw (1,1) -- (1,-0.7);
+\fill (1,1) circle (2pt);
+\fill (1,-0.7) circle (2pt);
+\node at (1,1.5) {$CZ$};
+\draw (2.65,0.62) rectangle (3.65,1.38);
+\node at (3.15,1) {$M_\alpha$};
+\draw[dashed,->] (3.65,1) -- (4.45,1);
+\node[right] at (4.45,1) {$b\in\{0,1\}$};
+\node[right] at (4.4,-0.7) {$X^bJ(\alpha)|\psi\rangle$};
+\node at (2.2,-1.4) {$p_b=1/2$};
+\end{tikzpicture}
+```
+
+The lower output label is the state conditioned on outcome $b$. Before
+normalization the second-wire vector is
+$K_b|\psi\rangle=2^{-1/2}X^bJ(\alpha)|\psi\rangle$, as proved in step 1.1;
+steps 2.1 and 3.1 establish its probability and normalization. The figure
+illustrates these identities; the proof does not depend on it.

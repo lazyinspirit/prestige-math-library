@@ -1,0 +1,99 @@
+{
+  "id": "thm-the-meet-of-subobjects-is-their-pullback",
+  "agent": "/root/rendering_repair_coordinator/ct_004",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "The original-resolution proof tile visibly prints the inline triple-backtick tikzcd source and arrow commands. An inline fence embedded in numbered step 1.1 is not a standalone diagram block and violates the requirement that diagrams sit outside proof-like sections. The intended four objects and arrows agree with the local suppliers and proof.",
+      "action": "Replaced the inline diagram fragment by typed prose specifying b:B\u2192A, c:C\u2192A, p:P\u2192B, q:P\u2192C and bp=cq; moved the same square to a standalone tikzcd fence in final Remarks, with its meet representative explained.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Render the existing pullback square as a standalone final-Remarks diagram; retain the complete independently readable three-step meet proof and all mathematical claims, maps and dependencies.",
+  "source_lines_after": [
+    51,
+    57,
+    59,
+    61,
+    62,
+    63,
+    64,
+    66
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "The square has P at upper left, C at upper right, B at lower left, A at lower right. Its arrows are q:P\u2192C, p:P\u2192B, c:C\u2192A and b:B\u2192A, exactly the representatives/projections of step 1.1.",
+      "justification": "The Statement supplies monomorphisms b:B\u2192A and c:C\u2192A. def-pullbacks-and-pushouts defines a pullback for that cospan with projections to B and C."
+    },
+    {
+      "relation": "Both paths P\u2192A are typed; bp and cq have equal domain P and codomain A, and bp=cq.",
+      "justification": "The pullback defining equation in def-pullbacks-and-pushouts and revised step 1.1 explicitly assert this commutativity. The figure asserts no additional relations or maps."
+    },
+    {
+      "monomorphism_and_meet": "p is the pullback of the monomorphism c along b, hence monic by [L2]; b is monic, so m=bp=cq:P\u2192A is monic and factors through both subobject representatives.",
+      "justification": "The exact orientation matches the displayed square of lem-pullbacks-of-monomorphisms-are-monomorphisms-and-pushouts-of-epimorphisms-are-epimorphisms. Step 1.1 and [L3] give the lower-bound relation."
+    },
+    {
+      "universal_property": "For any lower bound n:N\u2192A, the factor maps u:N\u2192B and v:N\u2192C obey bu=cv=n. The universal property gives w:N\u2192P with pw=u and qw=v, so mw=bu=n. Thus [n]\u2264[m], with the same factorisation order as the local [L3] supplier.",
+      "justification": "Step 1.2 proves this in full prose; step 2.1 concludes that m represents the meet. No inference requires interpreting the picture."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-the-meet-of-subobjects-is-their-pullback.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-the-meet-of-subobjects-is-their-pullback.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-the-meet-of-subobjects-is-their-pullback.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-the-meet-of-subobjects-is-their-pullback/preview.mts --ids thm-the-meet-of-subobjects-is-their-pullback --out research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-the-meet-of-subobjects-is-their-pullback/preview-final-r2",
+      "exit_code": 0,
+      "output": "1 item; 1 screenshot tile; katex_errors []; tikz_count 1; diagram_failures []. Actual local ItemBody/TikzDiagram renderer compiled the diagram to SVG.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-the-meet-of-subobjects-is-their-pullback/preview-final-r2/manifest.json"
+    },
+    {
+      "check": "Standalone original-resolution inspection",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-the-meet-of-subobjects-is-their-pullback/diagram-1.png",
+      "result": "Viewed the compiled SVG rasterized at 288 DPI: all four objects, arrowheads, and p,q,b,c labels are visible with no clipping or overlap. Also viewed original-resolution final full item tile."
+    },
+    {
+      "check": "Protected metadata and publication status",
+      "result": "Original and current full frontmatter bytes are identical. status: published preserved."
+    }
+  ],
+  "before_raw_sha256": "c7ad18063a197af3abb752b6005e069f090abbfd2557e3c1cd924888768f8757",
+  "after_raw_sha256": "91dc3f5aa84b3aed76ca4589442bf5433f1a9db3236368c49731cf7b8522af5e",
+  "remaining_issues": [],
+  "limitations": [
+    "The local ItemBody preview is not a production HTTP route. It reports 32 unrelated malformed-title-map source diagnostics; this assigned carrier and its three resolved supplier links render.",
+    "First preview attempt lacked the app TSX alias configuration and exited before rendering; the separate preview-final-r2 with explicit TSX_TSCONFIG_PATH completed successfully."
+  ]
+}

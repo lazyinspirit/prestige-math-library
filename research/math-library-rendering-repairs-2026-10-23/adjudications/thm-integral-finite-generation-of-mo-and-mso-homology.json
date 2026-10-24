@@ -1,0 +1,52 @@
+{
+  "id": "thm-integral-finite-generation-of-mo-and-mso-homology",
+  "agent": "/root/rendering_repair_coordinator/at_036",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original-resolution tile 01 shows literal H_i, O_Z and gamma subscripts in the Statement, while the immediately following Given paragraph correctly typesets delimited formulas. The frozen and current source both omitted math delimiters in the Statement.",
+      "action": "Delimited the Statement formulas and encoded existing subscripts, superscripts, Greek letters and integer coefficients using supported TeX. Preserved its equality sign and all prose claims.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original-resolution tiles 02\u201304 additionally show raw formula syntax in proof steps 1.1\u20136.1 and 8.1. Unprotected C_* expressions cause unintended Markdown italic spans in steps 1.1 and 4.1; raw braces, subscripts, sums, and powers remain visible in the other steps. Step 7.1 already has delimiters and is unchanged.",
+      "action": "Delimited the existing proof formulas, preserving their operations, indexing, equality/isomorphism distinctions, and proof text. Typeset the existing multi-index coefficients as n_{feg} and r_{fe}, without adding or changing mathematical assertions.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added supported inline math delimiters and equivalent TeX to the Statement and the seven proof steps whose formulas were raw text. No title or frontmatter changes.",
+  "source_lines_after": [
+    53,
+    75,
+    77,
+    79,
+    81,
+    83,
+    85,
+    89
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-integral-finite-generation-of-mo-and-mso-homology.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-integral-finite-generation-of-mo-and-mso-homology.md",
+      "exit_code": 0,
+      "output": "OK \u2014 1 file(s): no wikilink inside math, no nested or unbalanced delimiters, no multiline display block, every math span parses under the real KaTeX, and every frontmatter block parses under the renderer's YAML parser."
+    }
+  ],
+  "status_preservation": "Entire frontmatter compared byte-identical to frozen before; status remains published.",
+  "inspection": "All four flagged PNG tiles viewed at original resolution. No clipping or overlap finding made. No HTTP(S) or live website accessed."
+}

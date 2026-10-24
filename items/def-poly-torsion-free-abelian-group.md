@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-poly-torsion-free-abelian-group.json
+  precheck: n/a
 id: def-poly-torsion-free-abelian-group
 kind: definition
 title: Poly-torsion-free abelian groups
@@ -15,17 +18,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   scraped: []
   references:
@@ -37,9 +29,9 @@ sources:
 
 ## Definition
 
-A group G is poly-torsion-free abelian (PTFA) if it admits a finite subnormal series
-1=G_0 ◁ G_1 ◁ ⋯ ◁ G_m=G
-in which every quotient G_{j+1}/G_j is torsion-free abelian. The trivial group is PTFA, using the length-zero series. The term “subnormal” means each G_j is normal in G_{j+1}; normality in all of G is not required.
+A group $G$ is poly-torsion-free abelian (PTFA) if it admits a finite subnormal series
+$1=G_0 \triangleleft G_1 \triangleleft \cdots \triangleleft G_m=G$
+in which every quotient $G_{j+1}/G_j$ is torsion-free abelian. The trivial group is PTFA, using the length-zero series. The term “subnormal” means each $G_j$ is normal in $G_{j+1}$; normality in all of $G$ is not required.
 
 ## Definition references
 

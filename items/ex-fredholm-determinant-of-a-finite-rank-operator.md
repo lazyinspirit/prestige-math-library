@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-fredholm-determinant-of-a-finite-rank-operator.json
+  precheck: pass
 id: ex-fredholm-determinant-of-a-finite-rank-operator
 kind: example
 title: Fredholm determinant of a finite-rank operator
@@ -27,13 +30,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Kostenko, Trace Ideals with Applications, §3.4"
@@ -125,4 +121,4 @@ basis-independent
 
 3.2 Suppose $u\ne0$ and set $E=\operatorname{span}\{u\}$. By [A6], $E$ is the set of scalar multiples of $u$. The one-element list $(u)$ is independent: its only coefficient relation is $\lambda u=0$, which forces $\lambda=0$. More generally, an injective finite list into $\{u\}$ has at most one entry, since any two entries would both equal $u$; the empty list is independent, so $\{u\}$ is independent under [A6]. It spans $E$, hence it is a basis and $(u)$ is an ordered basis; thus $E$ has dimension one. The range of $F$ is contained in $E$, and $E$ is invariant because $F(u)=\alpha u$. Relative to $(u)$, [A7] gives the matrix $[\alpha]$ for $F|_E$ and $[1+z\alpha]$ for $I_E+z(F|_E)$. By [A8]–[A9], its ordinary determinant is $1+z\alpha$; step 2.1 therefore yields $D_H(I+zF)=1+z\langle u,v\rangle$. If $v=0$ then this is the zero operator and the value is $1$; if $v\ne0$ but $\alpha=0$, then $F(v)=\langle v,v\rangle u\ne0$ and, for every $x$, $F^2(x)=\langle F(x),v\rangle u=\langle x,v\rangle\langle u,v\rangle u=0$. Thus the nonzero rank-one operator is nilpotent and its one-dimensional restriction is zero, so the determinant is again $1$. [A2, A6, A7, A8, A9, step 2.1, step 1.2]
 
-4.1 At $z=0$ both sides of the finite-rank identity and rank-one formula equal $1$. The zero-rank case, the zero vector and zero Hilbert space, and the nilpotent rank-one case are covered in steps 2.1, 3.1, and 3.2; nonzero $\alpha$ gives the scalar factor $1+z\alpha$ in step 3.2. There is no interval endpoint parameter. The only assumption is AC [A1]; no choices are made in the finite-dimensional rank-one calculation, and both conclusions are equalities rather than iff claims. [A1, A5, A6, A8, A9, step 2.1, step 3.1, step 3.2] \qed 
+4.1 At $z=0$ both sides of the finite-rank identity and rank-one formula equal $1$. The zero-rank case, the zero vector and zero Hilbert space, and the nilpotent rank-one case are covered in steps 2.1, 3.1, and 3.2; nonzero $\alpha$ gives the scalar factor $1+z\alpha$ in step 3.2. There is no interval endpoint parameter. The only assumption is AC [A1]; no choices are made in the finite-dimensional rank-one calculation, and both conclusions are equalities rather than iff claims. [A1, A5, A6, A8, A9, step 2.1, step 3.1, step 3.2] ∎ 

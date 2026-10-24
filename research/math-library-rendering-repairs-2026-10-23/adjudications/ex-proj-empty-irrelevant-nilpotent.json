@@ -1,0 +1,91 @@
+{
+  "id": "ex-proj-empty-irrelevant-nilpotent",
+  "agent": "/root/rendering_repair_coordinator/scm_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints literal \\qed after the final conclusion tags. Source line 59 places this unsupported command outside math; it also prevents the final tags being recognized as trailing blue-chip tags.",
+      "action": "Replaced the literal command with the schema-supported Unicode proof-ending marker ∎; preserved every conclusion word and justification tag.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The same standalone original-resolution tile visibly prints dollar delimiters around S_+ and the raw operatorname command in the technique banner. Ordinary proof-body math renders; the banner is plain React text with uppercase CSS.",
+      "action": "Replaced the two banner formulas with equivalent prose: the irrelevant ideal and the spectrum.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Localized proof-technique prose workaround and replacement of unsupported \\qed with ∎.",
+  "source_lines_after": {
+    "49": "**Proof technique:** direct: identify the irrelevant ideal, apply the emptiness criterion, and exhibit the point of the spectrum.",
+    "59": "4.1 Conclusion. Steps 1.1 and 2.1 show that the nilpotent irrelevant ideal produces empty Proj, while step 3.1 shows that the underlying ring still has a point; the two conclusions are consistent because Proj discards exactly the primes containing all of $S_+$. [F1, F2, step 2.1, step 3.1] ∎"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains globally: proof-technique banner prose does not parse inline math. This carrier now uses equivalent prose."
+  ],
+  "before_raw_sha256": "bd60df83a5296298bbaca51515fd0f7e625346335299c432d0fe85885b3cc716",
+  "after_raw_sha256": "b715fb44a1b24d69b1714a1f1446974b34b4b7df634de14919b7565a69f5d57b",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "original_visual_evidence": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/ex-proj-empty-irrelevant-nilpotent--01.png",
+      "viewed_standalone": true,
+      "detail": "original"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-proj-empty-irrelevant-nilpotent.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-proj-empty-irrelevant-nilpotent.md",
+            "item_id": "ex-proj-empty-irrelevant-nilpotent",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-proj-empty-irrelevant-nilpotent.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-proj-empty-irrelevant-nilpotent.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    }
+  ],
+  "native_preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/scm-014-fresh",
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-proj-empty-irrelevant-nilpotent --out research/math-library-rendering-repairs-2026-10-23/previews/scm-014-fresh",
+    "exit_code": 0,
+    "tiles": 1,
+    "reference_map_diagnostics": 16,
+    "viewed_standalone_original": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/scm-014-fresh/screenshots/ex-proj-empty-irrelevant-nilpotent--01.png"
+    ],
+    "result": "Changed technique banner contains readable prose without delimiters or raw commands; final conclusion shows a supported square and five blue justification chips. Reference-map diagnostics concern unrelated malformed carriers and do not invalidate this scoped preview."
+  }
+}

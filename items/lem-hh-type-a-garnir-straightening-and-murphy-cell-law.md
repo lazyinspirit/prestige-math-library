@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-type-a-garnir-straightening-and-murphy-cell-law.json
+  precheck: pass
 id: lem-hh-type-a-garnir-straightening-and-murphy-cell-law
 kind: lemma
 title: "Integral type-A Garnir straightening and the Murphy cell law"
@@ -23,11 +26,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
 sources:
   references:
     - title: "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete author-uploaded preliminary lecture manuscript (1998)"
@@ -99,3 +97,47 @@ where $r_{t,v}(h)\in R_A$ does not depend on $s$. The proof is integral over $R_
 10.1 Each Murphy element of shape $\eta$ belongs to $H_nx_\eta H_n$ by definition, while step 9.1 places the latter ideal in the span of shapes dominating $\eta$. Summing these inclusions and the reverse generator inclusions gives $H_n^{\trianglerighteq\lambda}=\sum_{\eta\unrhd\lambda}H_nx_\eta H_n$ and $H_n^{\triangleright\lambda}=\sum_{\eta\triangleright\lambda}H_nx_\eta H_n$. Thus both dominance spans are two-sided ideals. In the lexicographic cell law of step 8.1, put $j=m_{st}h-\sum_vr_{t,v}(h)m_{sv}$. It lies in the strictly higher lexicographic span by step 8.1 and in $H_n^{\trianglerighteq\lambda}$ by step 9.1, since every displayed term belongs to $H_nx_\lambda H_n$. These are spans of subsets of the same basis, so their intersection is the span of the common subset: shapes strictly lexicographically larger than $\lambda$ and dominating $\lambda$, which are precisely the shapes strictly dominating $\lambda$. Hence $j\in H_n^{\triangleright\lambda}$, proving the dominance cell law with the same coefficients, independent of $s$. [step 7.1, step 8.1, step 9.1, algebra]
 
 11.1 Steps 7.1 and 10.1 prove every assertion of the Statement. All identities were proved over $R_A$ using only unit powers of $Q$ and finite free matrices with unit determinants. The extension $Q=v^2$ in step 1.1 is free on $1,v$ and hence faithfully flat; it is used only to identify the standard basis, and no inference from generic semisimplicity is used. Tensoring the established basis and its structure constants along any homomorphism $R_A\to R$ proves the same result for every commutative ring with unit image of $Q$, including $Q=-1$. No division or cancellation of a specialized quantum integer occurs. [step 1.1, step 7.1, step 10.1, algebra] ∎
+
+## Remarks
+
+For the belt in step 4.1, take $\lambda=(4,3)$ and $(i,j)=(1,2)$, so $a=2$ and $b=6$. The shaded boxes are the upper row from column $2$ onward and the lower row through column $2$; their labels in $t^\lambda$ are $2,3,4,5,6$. The middle tableau $g$ fills the lower belt first with $2,3$, then the upper belt with $4,5,6$. The right tableau $u$ instead assigns the subset $\{2,4\}$ to the lower belt.
+
+```tikz
+\begin{tikzpicture}[x=0.68cm,y=0.68cm]
+\begin{scope}
+\fill[blue!18] (1,1) rectangle (4,2);
+\fill[blue!18] (0,0) rectangle (2,1);
+\draw (0,1) rectangle (4,2);
+\draw (0,0) rectangle (3,1);
+\draw (1,0)--(1,2) (2,0)--(2,2) (3,1)--(3,2);
+\node at (0.5,1.5) {$1$}; \node at (1.5,1.5) {$2$};
+\node at (2.5,1.5) {$3$}; \node at (3.5,1.5) {$4$};
+\node at (0.5,0.5) {$5$}; \node at (1.5,0.5) {$6$}; \node at (2.5,0.5) {$7$};
+\node at (2,2.65) {$t^\lambda$};
+\end{scope}
+\begin{scope}[xshift=4cm]
+\fill[blue!18] (1,1) rectangle (4,2);
+\fill[blue!18] (0,0) rectangle (2,1);
+\draw (0,1) rectangle (4,2);
+\draw (0,0) rectangle (3,1);
+\draw (1,0)--(1,2) (2,0)--(2,2) (3,1)--(3,2);
+\node at (0.5,1.5) {$1$}; \node at (1.5,1.5) {$4$};
+\node at (2.5,1.5) {$5$}; \node at (3.5,1.5) {$6$};
+\node at (0.5,0.5) {$2$}; \node at (1.5,0.5) {$3$}; \node at (2.5,0.5) {$7$};
+\node at (2,2.65) {$g$};
+\end{scope}
+\begin{scope}[xshift=8cm]
+\fill[blue!18] (1,1) rectangle (4,2);
+\fill[blue!18] (0,0) rectangle (2,1);
+\draw (0,1) rectangle (4,2);
+\draw (0,0) rectangle (3,1);
+\draw (1,0)--(1,2) (2,0)--(2,2) (3,1)--(3,2);
+\node at (0.5,1.5) {$1$}; \node at (1.5,1.5) {$3$};
+\node at (2.5,1.5) {$5$}; \node at (3.5,1.5) {$6$};
+\node at (0.5,0.5) {$2$}; \node at (1.5,0.5) {$4$}; \node at (2.5,0.5) {$7$};
+\node at (2,2.65) {$u$};
+\end{scope}
+\end{tikzpicture}
+```
+
+All three fillings are row-standard. The middle filling has the column violation $g(1,2)=4>3=g(2,2)$, whereas $u$ is standard. At label cutoff $3$, the first row of $u$ contains two labels at most $3$, compared with one for $g$; at every other integer cutoff the first-row counts agree. The two-row totals always agree, so $u\triangleright_{\rm tab}g$ by step 6.1. This illustrates the lower-subset choice and dominance comparison of step 4.1; the proof above remains independent of the picture.

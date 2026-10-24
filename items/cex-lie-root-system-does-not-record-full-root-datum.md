@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-lie-root-system-does-not-record-full-root-datum.json
+  precheck: pass
 id: cex-lie-root-system-does-not-record-full-root-datum
 kind: counterexample
 title: The Lie algebra and root system do not determine the root datum
@@ -11,11 +14,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)"
@@ -34,11 +32,11 @@ The isomorphism class of the Lie algebra together with the abstract root system 
 
 **Given:** AC, a field $k$ of characteristic $\neq2$, and the split reductive groups $G_1=\mathrm{SL}_2$, $G_2=\mathrm{PGL}_2$ over $k$ with their split maximal tori $T_1$ (the diagonal torus in $\mathrm{SL}_2$) and $T_2$ (its image in $\mathrm{PGL}_2$).
 
-[F1] The root data of the semisimple rank-one groups: for $\mathrm{SL}_2$ with $X(T_1)=\mathbb Z\chi_1$ one has $\Phi_1=\{\pm2\chi_1\}$, $\alpha_1^\vee=\chi_1^\vee$, and $X_*(T_1)=\mathbb Z\chi_1^\vee$; for $\mathrm{PGL}_2$ with $X(T_2)=\mathbb Z\chi_2$ one has $\Phi_2=\{\pm\chi_2\}$, $\alpha_2^\vee=2\chi_2^\vee$, and $X_*(T_2)=\mathbb Z\chi_2^\vee$ with $\mathbb Z\alpha_2^\vee=2\mathbb Z\chi_2^\vee$ ([[thm-split-rank-one-reductive-classification]], [[def-root-datum-of-a-split-reductive-group]], [[lem-sl2-structure-and-root-coordinates]]).
+[F1] The root data of the semisimple rank-one groups: for $\mathrm{SL}_2$ with $X(T_1)=\mathbb Z\chi_1$ one has $\Phi_1=\{\pm2\chi_1\}$, $\alpha_1^\vee=\chi_1^\vee$, and $X_*(T_1)=\mathbb Z\chi_1^\vee$; for $\mathrm{PGL}_2$ with $X(T_2)=\mathbb Z\chi_2$ one has $\Phi_2=\{\pm\chi_2\}$, $\alpha_2^\vee=2\chi_2^\vee$, and $X_*(T_2)=\mathbb Z\chi_2^\vee$ with $\mathbb Z\alpha_2^\vee=2\mathbb Z\chi_2^\vee$ ([[thm-split-rank-one-reductive-classification]], [[def-root-datum-of-a-split-reductive-group]], [[lem-sl2-structure-and-root-coordinates|Structure of $\mathrm{SL}_2$ and root coordinates]]).
 
-[F2] $\operatorname{Lie}(\mathrm{SL}_2)=\mathfrak{sl}_2$ and $\operatorname{Lie}(\mathrm{PGL}_2)=\mathfrak{sl}_2$ in characteristic $\neq2$: the differential of the central isogeny $\mathrm{SL}_2\to\mathrm{PGL}_2$ is an isomorphism of Lie algebras, both being the $2\times2$ traceless matrices, and the root space decomposition is $\mathfrak{sl}_2=\mathfrak t\oplus\mathfrak g_\alpha\oplus\mathfrak g_{-\alpha}$ ([[lem-sl2-structure-and-root-coordinates]], [[thm-root-subgroups-of-a-split-reductive-group]]).
+[F2] $\operatorname{Lie}(\mathrm{SL}_2)=\mathfrak{sl}_2$ and $\operatorname{Lie}(\mathrm{PGL}_2)=\mathfrak{sl}_2$ in characteristic $\neq2$: the differential of the central isogeny $\mathrm{SL}_2\to\mathrm{PGL}_2$ is an isomorphism of Lie algebras, both being the $2\times2$ traceless matrices, and the root space decomposition is $\mathfrak{sl}_2=\mathfrak t\oplus\mathfrak g_\alpha\oplus\mathfrak g_{-\alpha}$ ([[lem-sl2-structure-and-root-coordinates|Structure of $\mathrm{SL}_2$ and root coordinates]], [[thm-root-subgroups-of-a-split-reductive-group]]).
 
-[F3] The centres are $Z(\mathrm{SL}_2)=\mu_2$ and $Z(\mathrm{PGL}_2)=1$, and $\mathrm{PGL}_2=\mathrm{SL}_2/\mu_2$ via the natural central isogeny ([[lem-sl2-structure-and-root-coordinates]], [[lem-reductive-center-radical-and-semisimple-quotient]]); a root datum is determined by its lattices, roots and coroots, and an isomorphism of root data must carry roots bijectively onto roots and coroots onto coroots with compatible pairings ([[def-root-datum-of-a-split-reductive-group]], [[lem-root-datum-combinatorics]]).
+[F3] The centres are $Z(\mathrm{SL}_2)=\mu_2$ and $Z(\mathrm{PGL}_2)=1$, and $\mathrm{PGL}_2=\mathrm{SL}_2/\mu_2$ via the natural central isogeny ([[lem-sl2-structure-and-root-coordinates|Structure of $\mathrm{SL}_2$ and root coordinates]], [[lem-reductive-center-radical-and-semisimple-quotient]]); a root datum is determined by its lattices, roots and coroots, and an isomorphism of root data must carry roots bijectively onto roots and coroots onto coroots with compatible pairings ([[def-root-datum-of-a-split-reductive-group]], [[lem-root-datum-combinatorics]]).
 
 ## Counterexample
 

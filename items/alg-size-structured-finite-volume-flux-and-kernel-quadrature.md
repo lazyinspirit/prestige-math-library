@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-size-structured-finite-volume-flux-and-kernel-quadrature.json
+  precheck: n/a
 id: alg-size-structured-finite-volume-flux-and-kernel-quadrature
 kind: algorithm
 title: Finite-volume size transport with positive division quadrature
@@ -15,8 +18,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"
@@ -46,3 +47,27 @@ using [[alg-composite-midpoint-rule]] on the parent-size interval. Since the one
 $$M_j^{k+1}=M_j^k-\Delta t(F_j^k-F_{j-1}^k)-\Delta t\,d_jM_j^k+\Delta t\sum_{\ell=1}^JA_{j\ell}M_\ell^k.$$
 
 The flux $F_J^k$ is absorbing outflow. The admissible variable-width CFL is $\Delta t(g(x_j)/h_j+d_j)\le1$ for every cell. If a grid or any required coefficient/kernel evaluation fails, return failure without a partial update. Otherwise return $M^{k+1}$ together with the fluxes and daughter coefficients used in the step.
+
+
+## Remarks
+
+The schematic separates transport through cell faces from daughter production. Arrow labels are contributions over one time step; the loss arrow combines mortality and removal of dividing parents. The daughter arrow shows one summand for a parent cell, not transport through an intervening face. Its coefficient may be zero; the support condition on the kernel gives $A_{j\ell}=0$ for $j>\ell$. At the boundary, $F_0^k=0$, while $F_J^k$ leaves the size interval.
+
+```tikz
+\begin{tikzpicture}[>=stealth, scale=1.5, transform shape, every node/.style={font=\small}]
+\node[draw, minimum width=2cm, minimum height=1cm] (cell) at (0,0) {$C_j:\ M_j^k$};
+\draw[->] (-3.4,0) -- (cell) node[midway,above] {$\Delta t F_{j-1}^k$};
+\draw[->] (cell) -- (3.4,0) node[midway,above] {$\Delta t F_j^k$};
+\draw[->] (cell) -- (0,-1.5) node[midway,right] {$\Delta t d_j M_j^k$};
+\node at (0,-1.85) {loss};
+\node[draw, minimum width=2cm, minimum height=1cm] (parent) at (-2,-3.3) {$C_\ell:\ M_\ell^k$};
+\node[draw, minimum width=2cm, minimum height=1cm] (daughter) at (2,-3.3) {$C_j$};
+\draw[->] (parent) -- (daughter) node[midway,above] {$\Delta t A_{j\ell}M_\ell^k$};
+\node at (0,-4.2) {daughter production};
+\node[draw, minimum width=2cm, minimum height=0.8cm] (last) at (-2,-5.5) {$C_J$};
+\node (outside) at (2,-5.5) {absorbing outflow};
+\draw[->] (last) -- (outside) node[midway,above] {$\Delta t F_J^k$};
+\end{tikzpicture}
+```
+
+This illustration only records the terms of the defined update; it supplies no additional assumption or proof.

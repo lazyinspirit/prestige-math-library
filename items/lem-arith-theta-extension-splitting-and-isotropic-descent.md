@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-arith-theta-extension-splitting-and-isotropic-descent.json
+  precheck: pass
 id: lem-arith-theta-extension-splitting-and-isotropic-descent
 kind: lemma
 title: "Theta extensions, splitting and isotropic descent"
@@ -25,8 +28,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "B. Edixhoven, G. van der Geer, B. Moonen, Abelian Varieties (2012), 8.1-8.11 (theta groups, extensions by Gm and descent of line bundles)"
@@ -63,7 +64,7 @@ Assume AC and DC as inherited from the supplied scheme and cohomology results. L
 
 ## Proof
 
-**Proof technique:** direct: build the theta group from translation isomorphisms, split commutative $\mathbf G_m$-extensions of finite groups by finite Cartier duality, and conclude descent of isotropic line bundles along the quotient.
+**Proof technique:** direct: build the theta group from translation isomorphisms, split commutative extensions of finite groups by the multiplicative group using finite Cartier duality, and conclude descent of isotropic line bundles along the quotient.
 
 1.1 Define the theta functor $\Theta(N)$ on $k$-schemes by letting $\Theta(N)(T)$ be the set of pairs $(x,\alpha)$ with $x\in A(T)$ and $\alpha:t_x^*N_T\to N_T$ an isomorphism of line bundles on $A_T$, where $t_x:A_T\to A_T$ is translation. The product $(x,\alpha)(y,\beta)=(x+y,\alpha\circ t_x^*\beta)$ makes $\Theta(N)$ a group sheaf for the fppf topology, with unit $(0,\operatorname{id})$; the projection $\pi:\Theta(N)\to A$, $(x,\alpha)\mapsto x$ is a homomorphism onto $K(N)$, as an fppf sheaf: for $x\in K(N)(T)$ the difference $t_x^*N_T\otimes N_T^{-1}$ is pulled back from a line bundle on $T$, which becomes trivial on an fppf cover, and conversely such a local isomorphism makes its rigidified Picard class zero. [F1, given, construct]
 

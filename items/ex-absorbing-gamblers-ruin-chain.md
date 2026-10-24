@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-absorbing-gamblers-ruin-chain.json
+  precheck: pass
 id: ex-absorbing-gamblers-ruin-chain
 kind: example
 title: "Absorbing gambler's-ruin chain"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Levin, Peres, Wilmer, Markov Chains and Mixing Times, Section 2.1"
@@ -48,3 +45,39 @@ the chain restarts at—and remains at—the boundary point hit.
 1.2 Define [given] $$\tau_D=\inf\{n\ge0:X_n\in\{0,N\}\}.$$ Then $\{\tau_D\le n\}=\bigcup_{k=0}^n\{X_k\in D\}\in\mathcal F_n$, so it is a hitting time. If $X_0\in D$, then $\tau_D=0$; otherwise it may be infinite in the general eventwise formulation. [given]
 
 2.1 By [F3], on $\{\tau_D<\infty\}$ the conditional future is the chain started [F3, step 1.1, step 1.2] from $X_{\tau_D}$. Step 1.1 gives $P(X_{\tau_D},X_{\tau_D})=1$, so every subsequent coordinate equals the same boundary state. Constants zero and one give respectively zero and the finite-hit event in the eventwise formula. Choice is used only through [F3]. [F3, step 1.1, step 1.2] ∎
+
+
+## Remarks
+
+The first graph illustrates the transition rule for $N=4$; only interior
+states have arrows to neighbors. The second shows the boundary case $N=1$.
+Arrow labels are transition probabilities, and an arrow labelled zero is
+omitted from the transition graph: thus $p=0$ leaves only leftward interior
+moves, and $p=1$ leaves only rightward interior moves. The loops of weight one
+show absorption. These graphs describe one-step transitions, without asserting
+that a boundary is hit on every path; the verification above is independent
+of the illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node at (3.6,1.4) {$N=4$};
+\node[draw,circle] (a) at (0,0) {$0$};
+\node[draw,circle] (b) at (1.8,0) {$1$};
+\node[draw,circle] (c) at (3.6,0) {$2$};
+\node[draw,circle] (d) at (5.4,0) {$3$};
+\node[draw,circle] (e) at (7.2,0) {$4$};
+\path[->] (a) edge[loop above] node {$1$} (a);
+\path[->] (e) edge[loop above] node {$1$} (e);
+\draw[->] (b) -- node[above] {$q$} (a);
+\path[->] (b) edge[bend left=25] node[above] {$p$} (c);
+\path[->] (c) edge[bend left=25] node[below] {$q$} (b);
+\path[->] (c) edge[bend left=25] node[above] {$p$} (d);
+\path[->] (d) edge[bend left=25] node[below] {$q$} (c);
+\draw[->] (d) -- node[above] {$p$} (e);
+\node at (3.6,-1.5) {$N=1$};
+\node[draw,circle] (f) at (2.4,-2.7) {$0$};
+\node[draw,circle] (g) at (4.8,-2.7) {$1$};
+\path[->] (f) edge[loop above] node {$1$} (f);
+\path[->] (g) edge[loop above] node {$1$} (g);
+\end{tikzpicture}
+```

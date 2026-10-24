@@ -1,0 +1,66 @@
+{
+  "id": "def-nevanlinna-deficiency-and-ramification-index",
+  "agent": "/root/rendering_repair_coordinator/cxa_026",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The authentic original standalone tile visibly prints $T$ and $T\\to\\infty$ in the CSS-uppercase technique banner, whereas adjacent proof mathematics renders. The banner treats its extracted content as plain text.",
+      "action": "Replaced the three math-bearing banner fragments with equivalent plain text: T, T tends to infinity, T.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only the Proof technique sentence on line 61 changed to readable equivalent prose; all mathematics elsewhere is byte-identical. No renderer files changed.",
+  "source_lines_after": {
+    "61": "**Proof technique:** divide the First Main Theorem by T and use that T tends to infinity, then bound nonnegative numerators by T."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer still handles technique-banner content as plain text; this carrier now avoids math delimiters there."
+  ],
+  "before_raw_sha256": "4a6a63a829b4ff743f6e97a4797e1ca88dfb4a78babe9dffcd95a492d0bcd310",
+  "after_raw_sha256": "a55580d12d2036c849ce76a71c47a6851560eaec3c93c39eb6125b679e358a11",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-nevanlinna-deficiency-and-ramification-index.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-nevanlinna-deficiency-and-ramification-index.md --json",
+      "exit_code": 0,
+      "result": "files 1, checked 1, failed 0; pass, direct"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-nevanlinna-deficiency-and-ramification-index.md --json",
+      "exit_code": 0,
+      "result": "checked 1, errors [], warnings []"
+    }
+  ],
+  "visual_evidence": {
+    "original_viewed": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/def-nevanlinna-deficiency-and-ramification-index--01.png",
+    "original_resolution": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa_026/manifest.json",
+    "preview_manifest_sha256": "0bb2481b795ef937f8d7fb3efcfdae55f522a6b60683e7d7364ad114497ae8b8",
+    "preview_source_sha256": "a55580d12d2036c849ce76a71c47a6851560eaec3c93c39eb6125b679e358a11",
+    "preview_reference_map_sha256": "80ed37e1b2561862693ef8132f4ebbab50ae6f50da53e0a91764aeee9d34f284",
+    "viewed_tiles": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/cxa_026/screenshots/def-nevanlinna-deficiency-and-ramification-index--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/cxa_026/screenshots/def-nevanlinna-deficiency-and-ramification-index--02.png"
+    ],
+    "result": "Both native preview tiles viewed separately at original resolution. The technique banner now displays T and T TENDS TO INFINITY without dollar delimiters or TeX commands. Complete proof remains rendered.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "unrelated_reference_map_parse_diagnostics": 16
+  }
+}

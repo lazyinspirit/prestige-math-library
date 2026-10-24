@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-matched-observation-mrps-have-distinct-bellman-errors.json
+  precheck: pass
 id: ex-matched-observation-mrps-have-distinct-bellman-errors
 kind: example
 title: At discount one-half, identical observable laws hide different Bellman-error minima
@@ -17,11 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -67,3 +65,29 @@ The unique minimizers are $(0,0)$ for MRP 1 and $(-2/7,1/7)$ for MRP 2. Their mi
 1.1 At $\gamma=1/2$, $D=1+\gamma+\gamma^2=7/4$. Substitution in [F2] gives MRP 2’s minimizing parameter $(-2/7,1/7)$ and minimum $(5/2)^2/(6\cdot7/4)=25/42$. The same substitution gives MRP 1’s minimizing parameter $(0,0)$ and minimum $0$. [given, F2, algebra]
 
 2.1 At $w=(0,0)$ the MRP 2 residuals are $0,1,-1$, so [F1] gives $\operatorname{BE}_2(0,0)=(0^2+1^2+(-1)^2)/3=2/3$. The MRP pair and common observation law are the $\gamma=1/2$ instance of [F2], whose path-law claim uses [A1], completing the example. [given, A1, F1, F2, algebra] ∎
+
+
+## Remarks
+
+The paired graphs display the transition/reward data in the Example. Each arrow is labelled $(p,r)$, meaning transition probability $p$ and reward $r$. In both graphs $\psi(A)=(1,0)$; the states $B$ and $B'$ share feature $(0,1)$. The graphs illustrate the models; the verification and the observable-law argument in [F2] remain independent of the picture.
+
+```tikz
+\begin{tikzpicture}[>=stealth, thick, every node/.style={font=\small}]
+  \node at (1.3,3) {MRP 1};
+  \node[circle,draw,minimum size=7mm] (a1) at (0,1.3) {$A$};
+  \node[circle,draw,minimum size=7mm] (b1) at (2.6,1.3) {$B$};
+  \draw[->] (a1) to[bend left=22] node[above] {$(1,0)$} (b1);
+  \draw[->] (b1) to[bend left=22] node[below] {$(1/2,1)$} (a1);
+  \draw[->] (b1) to[loop right] node[right] {$(1/2,-1)$} (b1);
+
+  \node at (9,3) {MRP 2};
+  \node[circle,draw,minimum size=7mm] (a2) at (9,2) {$A$};
+  \node[circle,draw,minimum size=7mm] (b2) at (7.5,0) {$B$};
+  \node[circle,draw,minimum size=7mm] (bp) at (10.5,0) {$B'$};
+  \draw[->] (a2) to[bend right=18] node[left] {$(1/2,0)$} (b2);
+  \draw[->] (b2) to[bend right=18] node[right] {$(1,1)$} (a2);
+  \draw[->] (a2) to node[right] {$(1/2,0)$} (bp);
+  \draw[->] (bp) to node[below] {$(1/2,-1)$} (b2);
+  \draw[->] (bp) to[loop right] node[right] {$(1/2,-1)$} (bp);
+\end{tikzpicture}
+```

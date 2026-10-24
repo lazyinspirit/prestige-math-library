@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-pa36-singular-parabolic-kernel.json
+  precheck: pass
 id: lem-pa36-singular-parabolic-kernel
 kind: lemma
 title: The singular simple-parabolic kernel on the flag variety
@@ -21,8 +24,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Masaki Kashiwara, Representation theory and D-modules on flag varieties, Astérisque 173–174 (1989)"
@@ -78,3 +79,40 @@ transition maps and glues
 
 3.1 Conversely, the displayed form has local relative factor $\mathcal O(-1)\boxtimes N$ by [F1], whose direct image is zero by [F2]; hence $p_{\alpha*}M=0$ globally. Tensoring this form by $\mathcal O_X(-\rho)$ and applying $p_{\alpha*}$ recovers $N$, since $p_{\alpha*}p_\alpha^\dagger N=N$. The same identity proves uniqueness up to the recovered canonical isomorphism. This proves both directions and all higher-image assertions; no rank-one classification is left as a source-only premise. [F1, F2, step 2.1, algebra] ∎
 
+## Remarks
+
+The geometry is locally a product over a Zariski open $U\subseteq X_\alpha$;
+write $X_U=p_\alpha^{-1}(U)$ and choose a product chart $\Phi_U$:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, font=\Large, labels={font=\large}]
+\mathbb P^1\times U \arrow[r,"\Phi_U","\sim"'] \arrow[d,"\mathrm{pr}_U"'] & X_U \arrow[d,"p_\alpha|_{X_U}"] \\
+U \arrow[r,"\mathrm{id}_U"'] & U
+\end{tikzcd}
+```
+
+This square asserts $p_\alpha\circ\Phi_U=\mathrm{pr}_U$, not a global
+product decomposition of $X$. In these coordinates, $p_\alpha^\dagger N$
+has relative factor $\mathcal O_{\mathbb P^1}$, while
+$\mathcal O_X(\rho)$ has relative factor $\mathcal O_{\mathbb P^1}(-1)$.
+Thus, in the kernel case $p_{\alpha*}M=0$, the local form is
+$M|_{X_U}\cong\mathcal O_{\mathbb P^1}(-1)\boxtimes N|_U$.
+
+The recovery operations are displayed in their required order:
+
+```tikzcd
+\begin{tikzcd}[column sep=9em, font=\Large, labels={font=\large}]
+M \arrow[r,"\mathcal O_X(-\rho)\otimes(-)"] & \mathcal O_X(-\rho)\otimes M \arrow[r,"p_{\alpha*}"] & N
+\end{tikzcd}
+```
+
+Here arrows denote operations on modules, rather than homomorphisms between
+modules on one space. The middle object is canonically isomorphic to
+$p_\alpha^\dagger N$, a $\mathcal D_{\kappa-\rho}$-module on $X$;
+the last object is the recovered
+$\mathcal D^\alpha_{\kappa-\rho}$-module on $X_\alpha$. The opposite twist
+has relative factor $\mathcal O_{\mathbb P^1}(1)$, cancelling the kernel's
+$\mathcal O_{\mathbb P^1}(-1)$ before pushforward. The local differential
+identifications glue by the compatible transition maps of [F1] and [F2],
+as used in step 2.1. Both diagrams illustrate the proof above; the proof
+remains independent of them.

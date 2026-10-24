@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-descent-data-for-schemes.json
+  precheck: n/a
 id: def-descent-data-for-schemes
 kind: definition
 title: "Descent data for schemes over an fppf covering"
@@ -16,11 +19,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "The Stacks Project, Chapter 35 (Descent), Section 35.34"
@@ -69,3 +67,27 @@ $(V\times_XX_i)\times_{X_i}X_{ij}\cong V\times_XX_{ij}\cong
 precisely when it lies in the essential image of the base-change functor
 $V\mapsto(V\times_XX_i)$. Descent data and their morphisms form a category in
 the evident way, with composition componentwise.
+
+## Remarks
+
+For a fixed ordered triple $(i,j,k)$, put $T=X_{ijk}$ and write
+$P_r=V_r\times_{X_r}T$ for $r=i,j,k$, using the corresponding projection
+$\mathrm{pr}_r:T\to X_r$. The canonical identifications of iterated fibre
+products identify $\mathrm{pr}_{12}^*\varphi_{ij}$ with a map $P_i\to P_j$,
+$\mathrm{pr}_{23}^*\varphi_{jk}$ with a map $P_j\to P_k$, and
+$\mathrm{pr}_{13}^*\varphi_{ik}$ with a map $P_i\to P_k$. Thus the cocycle
+condition says exactly that this triangle of $T$-schemes commutes:
+
+```tikzcd
+\begin{tikzcd}[row sep=5em, column sep=8em, cells={nodes={font=\LARGE}}, labels={font=\Large}]
+P_i \arrow[r, "{\mathrm{pr}_{12}^*\varphi_{ij}}"] \arrow[dr, "{\mathrm{pr}_{13}^*\varphi_{ik}}"'] & P_j \arrow[d, "{\mathrm{pr}_{23}^*\varphi_{jk}}"] \\
+& P_k
+\end{tikzcd}
+```
+
+Here $\mathrm{pr}_{12}:T\to X_{ij}$, $\mathrm{pr}_{23}:T\to X_{jk}$,
+and $\mathrm{pr}_{13}:T\to X_{ik}$ retain the ordered factors indicated by
+their subscripts. All three arrows are isomorphisms over the same base $T$;
+the route through $P_j$ composes first the $ij$ map and then the $jk$ map.
+This picture illustrates the defining equation and does not assert that
+the datum is effective. The definition is independent of the illustration.

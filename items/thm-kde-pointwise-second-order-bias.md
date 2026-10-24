@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-kde-pointwise-second-order-bias.json
+  precheck: pass
 id: thm-kde-pointwise-second-order-bias
 kind: theorem
 title: "Pointwise second-order bias of the KDE"
@@ -25,11 +28,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, Proposition 1, PDF p. 3"
@@ -66,7 +64,7 @@ Here $r(h)=o(h^2)$ means $r(h)/h^2\to0$ as $h\downarrow0$.
 
 [F5] Expectation is integration against the law, and integration against $f\,d\lambda_d$ is integration of the product with $f$ for nonnegative integrands ([[thm-change-of-variables-for-expectation]], [[thm-integration-against-a-density]]).
 
-[F6] Under $\mathrm{AC}_\omega$, the C$^1$ diffeomorphism $u\mapsto x-hu$ permits substitution for nonnegative integrands and for integrable signed integrands ([[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], [[cor-c-one-change-of-variables-for-l-one-functions]]).
+[F6] Under $\mathrm{AC}_\omega$, the C$^1$ diffeomorphism $u\mapsto x-hu$ permits substitution for nonnegative integrands and for integrable signed integrands ([[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], [[cor-c-one-change-of-variables-for-l-one-functions|A $C^1$ diffeomorphism satisfies the change-of-variables formula for $L^1$ functions]]).
 
 [F7] The Lebesgue integral is linear on $L^1$ ([[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
 

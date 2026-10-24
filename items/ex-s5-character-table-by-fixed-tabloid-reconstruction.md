@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-s5-character-table-by-fixed-tabloid-reconstruction.json
+  precheck: pass
 id: ex-s5-character-table-by-fixed-tabloid-reconstruction
 kind: example
-title: "The S_5 character table by fixed-tabloid reconstruction"
+title: "The $S_5$ character table by fixed-tabloid reconstruction"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -21,11 +24,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete author-hosted scan, 161 pp.)"

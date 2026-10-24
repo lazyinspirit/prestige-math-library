@@ -1,0 +1,113 @@
+{
+  "id": "ex-irregular-pentagon-area-by-triangulation-and-shoelace",
+  "agent": "/root/rendering_repair_coordinator/ra_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200×1400 PNG contains only prose and calculations. For this concrete geometric example a coordinate-accurate picture materially clarifies which two diagonals split the pentagon into the three determinant triangles, how their areas 4,8,3 correspond to the proof, and the cyclic boundary orientation. The complete independent verification does not remove this explanatory value.",
+      "action": "Appended a final Remarks section with explanatory prose and fenced TikZ, outside Facts and Verification. Drew the five exact coordinates, five counterclockwise directed boundary edges, two dashed diagonals from v0, and three triangle-area labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only final Remarks appended; every original byte is preserved as a prefix, including the Example, full Verification, dependencies, sources, provenance and published status.",
+  "source_lines_after": {
+    "remarks": [
+      48,
+      80
+    ],
+    "explanatory_text": [
+      50
+    ],
+    "tikz": [
+      52,
+      80
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Exact objects and cyclic boundary",
+      "result": "Coordinates are v0=(0,0), v1=(4,0), v2=(5,2), v3=(2,4), v4=(0,3), exactly the Example and step 1.1. Five explicit directed segments are v0→v1→v2→v3→v4→v0. The final native PNG visibly includes the closing vertical v4→v0 edge, all five vertices and all five boundary edges. No named-node cycle closure is relied on."
+    },
+    {
+      "check": "Convexity, counterclockwise orientation and interior fan",
+      "result": "Independent determinant recomputation reproduces the step 1.1 left-half-plane lists [8,16,12], [8,8,11], [16,8,7], [6,10,7], [12,15,6], all strictly positive. Thus the depicted cyclic order is counterclockwise; the two depicted diagonals [v0,v2] and [v0,v3] lie in the convex polygon and form exactly triangles (v0,v1,v2), (v0,v2,v3), (v0,v3,v4). The final PNG shows both dashed diagonals meeting only at v0."
+    },
+    {
+      "check": "Triangle labels and additive content",
+      "result": "The signed displacement determinants for the three displayed triangles are respectively 8,16,6, hence their areas are 4,8,3 by the triangle-content determinant formula used through supplier thm-simple-polygon-content-is-the-sum-of-triangle-contents. Area labels are placed inside their respective triangles; the sum is 15 as in step 1.1."
+    },
+    {
+      "check": "Shoelace agreement",
+      "result": "Independent cyclic boundary determinants sum to 30: (0+8+20+6+0)-(0+0+4+0+0). The content is 30/2=15 by the full local shoelace supplier and step 1.2. Remarks only repeats this already proved agreement."
+    },
+    {
+      "check": "Proof independence",
+      "result": "The full original Verification remains byte-identical and establishes every geometric and area assertion without the figure. The final Remarks adds no hypotheses, claims, dependencies or proof premises."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-irregular-pentagon-area-by-triangulation-and-shoelace.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-irregular-pentagon-area-by-triangulation-and-shoelace.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-irregular-pentagon-area-by-triangulation-and-shoelace.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/ra_003-runtime node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-irregular-pentagon-area-by-triangulation-and-shoelace --out research/math-library-rendering-repairs-2026-10-23/ra_003-preview-v1",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16,
+        "katex_errors": [],
+        "tikz_count": 1,
+        "diagram_failures": []
+      }
+    }
+  ],
+  "visual_checks": {
+    "original": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/ex-irregular-pentagon-area-by-triangulation-and-shoelace--01.png",
+    "final": "research/math-library-rendering-repairs-2026-10-23/ra_003-preview-v1/screenshots/ex-irregular-pentagon-area-by-triangulation-and-shoelace--01.png",
+    "inspection": "Both original and final PNGs were viewed individually with detail original. Final native rendered figure has five complete boundary edges, five coordinate labels, two dashed interior edges and three readable interior area labels, with no diagram clipping or overlap.",
+    "limitation": "Local native ItemBody SSR preview with browser capture, not the production route; the fresh current title map reports 16 unrelated parse diagnostics."
+  },
+  "evidence": {
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/ra_003-preview-v1/manifest.json",
+    "native_capture_receipt": "research/math-library-rendering-repairs-2026-10-23/ra_003-preview-v1/screenshots/ex-irregular-pentagon-area-by-triangulation-and-shoelace.json",
+    "independent_arithmetic": "research/math-library-rendering-repairs-2026-10-23/ra_003-math-checks.json",
+    "before_sha256": "71bcd9158e9b6380c8ee435d2136ca0aa68e426d0553ac672070ed1143dfdc76",
+    "after_sha256": "f089d0b06703201deccdf64d3d510a810b7a4c67e7b868ff355c5afbc2c9d6f1",
+    "frontmatter_identical": true,
+    "original_bytes_preserved_as_prefix": true
+  }
+}

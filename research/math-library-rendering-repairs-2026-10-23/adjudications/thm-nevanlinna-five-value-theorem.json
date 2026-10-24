@@ -1,0 +1,73 @@
+{
+  "id": "thm-nevanlinna-five-value-theorem",
+  "agent": "/root/rendering_repair_coordinator/cxa_030",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile visibly exposes $F-G$ and $F-G\\equiv0$ in the CSS-uppercase proof-technique banner, while the surrounding body math renders normally. This banner is plain React text rather than math-rendered Markdown.",
+      "action": "Replaced only the two banner math spans with equivalent prose: the difference of F and G; F and G are identical.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 55 uses equivalent plain prose compatible with the native proof-technique banner. All mathematical statements, hypotheses, proof steps, sources, dependencies and frontmatter remain unchanged.",
+  "source_lines_after": [
+    55
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "c12327a869eb853c4eabf39233a4c55eb15267e6eb9cc9baaf4d4e080e0e2997",
+  "after_raw_sha256": "66432ae42271bf648009c1623472e0da96cfbc8af3d98c7fbe5171a09b165c61",
+  "guard": "Current raw source SHA256 matched the assigned before hash immediately before edit; frozen before and current source were byte-identical then.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-nevanlinna-five-value-theorem.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-nevanlinna-five-value-theorem.md --json",
+      "exit_code": 0,
+      "output": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-nevanlinna-five-value-theorem.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/thm-nevanlinna-five-value-theorem--01.png",
+    "original_view": "Standalone original-resolution view inspected before editing.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa_030-final/manifest.json",
+    "manifest_sha256": "d329cf5ee5db782bcd122c650c776d4f6081f78cf27b85eab93d9c14b54fe83e",
+    "source_sha256": "66432ae42271bf648009c1623472e0da96cfbc8af3d98c7fbe5171a09b165c61",
+    "final_tiles": [
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/cxa_030-final/screenshots/thm-nevanlinna-five-value-theorem--01.png",
+        "sha256": "3679f361a1f24aa6fbf005b4de7a667d7499d97dc1943b3fb620cd8be52fec15"
+      },
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/cxa_030-final/screenshots/thm-nevanlinna-five-value-theorem--02.png",
+        "sha256": "457a39f18b87c8b1712e152e009b6cc083cacb612b1b5ecd37ad410c81dd7a16"
+      }
+    ],
+    "result": "Both final native local preview tiles independently viewed at original resolution. The technique banner now shows readable prose without raw math markup; complete proof remains rendered.",
+    "limitations": "Local ItemBody preview, not production route. Reference map reported 16 unrelated parse diagnostics; scoped item rendering and checks passed.",
+    "preview_attempts": "First attempt refused to overwrite the precreated output directory; rerun used a fresh output path and succeeded."
+  }
+}

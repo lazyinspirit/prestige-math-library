@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hmm-viterbi-exact-sequence-map.json
+  precheck: pass
 id: ex-hmm-viterbi-exact-sequence-map
 kind: example
 title: An exact two-state HMM sequence-MAP calculation
@@ -19,12 +22,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Manolis Kellis, 6.096 Algorithms for Computational Biology, Lecture 7: Gene Finding and HMMs, MIT OpenCourseWare (Spring 2005)"
@@ -58,7 +55,7 @@ The observation evidence is $528/4096=33/256$.
 The diagram uses arrows for transition probabilities and initial weights.
 Emission probabilities are listed in the prose above each state.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
 \node[draw] (start) at (-2,0) {start};
 \node[circle,draw] (u) at (0,1) {$u$};
@@ -70,7 +67,7 @@ Emission probabilities are listed in the prose above each state.
 \draw[->] (u) to[bend left=15] node[right] {$1/4$} (v);
 \draw[->] (v) to[bend left=15] node[left] {$1/4$} (u);
 \end{tikzpicture}
-~~~
+```
 
 ## Facts & Assumptions
 

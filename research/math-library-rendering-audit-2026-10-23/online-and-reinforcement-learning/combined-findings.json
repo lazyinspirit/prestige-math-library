@@ -1,0 +1,256 @@
+[
+  {
+    "id": "ex-model-accurate-on-behavior-support",
+    "kind": "rendering-defect",
+    "item": "ex-model-accurate-on-behavior-support",
+    "source_lines": {
+      "35": "\\begin{center}",
+      "36": "\\begin{tikzpicture}[>=stealth, node distance=32mm]",
+      "37": "  \\node[circle,draw] (s) {$s$};",
+      "38": "  \\node[circle,draw,right of=s] (g) {$g$};",
+      "39": "  \\draw[->] (s) to[bend left=12] node[above] {$a:1$} (g);",
+      "40": "  \\draw[->] (g) to[loop right] node[right] {$d:0$} (g);",
+      "41": "  \\draw[->] (s) to[loop left] node[left] {$b:0\\ (\\widehat b:1)$} (s);",
+      "42": "\\end{tikzpicture}",
+      "43": "\\end{center}"
+    },
+    "tile": "screenshots/ex-model-accurate-on-behavior-support--01.png",
+    "tile_sha256": "f64f92a18ae63fd6f18a5c013905ad45ce9515229c903e57605e894e84ebf539",
+    "claim": "The intended TikZ block is emitted literally as source text in the HTML/tile; receipt tikz_count is 0. The surrounding prose and raw commands are both visible, so this is not a crop or viewer artifact.",
+    "repair": "Fence the existing complete tikzpicture block with the renderer-supported ```tikz marker (or convert to its supported diagram syntax); then check that the generated diagram preserves s\u2192g action a with reward 1, g self-loop d with reward 0, and s self-loop b annotated true reward 0 / learned reward 1.",
+    "finding_id": "raw-tikz-not-fenced",
+    "lines": [
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43
+    ],
+    "screenshots": [
+      "screenshots/ex-model-accurate-on-behavior-support--01.png"
+    ],
+    "classification": "confirmed",
+    "section": "Example",
+    "symptom": "Confirmed rendering or diagram defect reported by the visual reviewer.",
+    "suggested_repair": "Fence the existing complete tikzpicture block with the renderer-supported ```tikz marker (or convert to its supported diagram syntax); then check that the generated diagram preserves s\u2192g action a with reward 1, g self-loop d with reward 0, and s self-loop b annotated true reward 0 / learned reward 1.",
+    "lane": "01",
+    "pages": [
+      "model-based-planning-dyna-and-model-exploitation-examples"
+    ]
+  },
+  {
+    "id": "ex-finite-mdp-common-reward-shift",
+    "kind": "tikz-layout-defect",
+    "item": "ex-finite-mdp-common-reward-shift",
+    "source_lines": {
+      "79": "  \\draw[->] (s) -- node[above left] {choose $a$} (a);",
+      "80": "  \\draw[->] (a) to[bend left=22] node[left] {$p(s,1\\mid s,a)=1$} (s);",
+      "81": "  \\draw[->] (s) -- node[above right] {choose $b$} (b);",
+      "82": "  \\draw[->] (b) to[bend right=22] node[right] {$p(s,3\\mid s,b)=1$} (s);"
+    },
+    "tiles": [
+      "screenshots/ex-finite-mdp-common-reward-shift--01.png",
+      "screenshots/ex-finite-mdp-common-reward-shift--02.png"
+    ],
+    "tile_sha256": [
+      "e6810f388d00c7a6de8774fd7cc6fe14b7e573916dfcbd289ea2bf61149c811b",
+      "c142a7a922887744ce31c928ad4f957b2912335d8d8a3701601ba5501e77fb43"
+    ],
+    "claim": "In the original-size standalone end tile, both \u201cchoose a/b\u201d forward-edge labels overlap the corresponding return-edge transition-mass labels near the action nodes. The same lower diagram is visible in the overlapping/context tile; source node coordinates and label placements explain the collision, so it is not a tile-boundary artifact.",
+    "repair": "Move forward choice labels toward the state ends and return-mass labels farther along the curved return arcs, or abbreviate the joint masses; preserve circles for state s, action rectangles a/b, and the two probability-one return edges with rewards 1 and 3.",
+    "finding_id": "overlapping-edge-labels",
+    "lines": [
+      79,
+      80,
+      81,
+      82
+    ],
+    "screenshots": [
+      "screenshots/ex-finite-mdp-common-reward-shift--01.png",
+      "screenshots/ex-finite-mdp-common-reward-shift--02.png"
+    ],
+    "classification": "confirmed",
+    "section": "Remarks",
+    "symptom": "Confirmed rendering or diagram defect reported by the visual reviewer.",
+    "suggested_repair": "Move forward choice labels toward the state ends and return-mass labels farther along the curved return arcs, or abbreviate the joint masses; preserve circles for state s, action rectangles a/b, and the two probability-one return edges with rewards 1 and 3.",
+    "lane": "01",
+    "pages": [
+      "finite-mdps-and-bellman-operators-examples"
+    ]
+  },
+  {
+    "id": "ex-model-exploitation-off-support",
+    "classification": "confirmed",
+    "severity": "rendering-defect",
+    "item_id": "ex-model-exploitation-off-support",
+    "section": "Example diagram",
+    "source_lines": {
+      "33": "The diagram uses a vertex for the state and a loop for each deterministic self-transition; each loop label gives the action and its true/learned immediate rewards.",
+      "35": "\\begin{center}",
+      "36": "\\begin{tikzpicture}[>=stealth]",
+      "37": "  \\node[circle,draw] (s) at (0,0) {$s$};",
+      "38": "  \\draw[->] (s) to[loop above] node[above] {$a_{\\mathrm{safe}}: 1/2,\\ \\widehat r=1/2$} (s);",
+      "39": "  \\draw[->] (s) to[loop below] node[below] {$a_{\\mathrm{off}}: 0,\\ \\widehat r=1$} (s);",
+      "40": "\\end{tikzpicture}",
+      "41": "\\end{center}"
+    },
+    "source_content": "The text specifies a one-state MDP with deterministic self-transitions; the adjacent TikZ block draws one state node with safe and off-support action loops labeled with true and learned rewards.",
+    "symptom": "The local HTML and screenshot print the literal center/TikZ commands as prose. The state-transition diagram is absent from the rendered ItemBody.",
+    "rendered_tile": "screenshots/ex-model-exploitation-off-support--01.png",
+    "note": "The source block is present identically in snapshot and current source. The capture receipt reports tikz_count 0 and no diagram failure; visual inspection confirms raw commands. Source semantics match the example: both actions return to s, with reward labels (1/2,1/2) and (0,1) respectively.",
+    "finding_id": "render-01",
+    "lines": [
+      33,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41
+    ],
+    "screenshots": [
+      "screenshots/ex-model-exploitation-off-support--01.png"
+    ],
+    "suggested_repair": "Repair the reported literal markup or diagram mismatch while preserving the authored mathematics.",
+    "lane": "02",
+    "pages": [
+      "model-based-planning-dyna-and-model-exploitation-examples"
+    ]
+  },
+  {
+    "id": "ex-short-versus-long-model-rollouts",
+    "classification": "confirmed",
+    "severity": "rendering-defect",
+    "item_id": "ex-short-versus-long-model-rollouts",
+    "section": "Example diagram",
+    "source_lines": {
+      "33": "The diagram compares the true transition model on the left with the learned transition model on the right. Nodes are states, and arrows carry transition probabilities; each state label gives its reward. The dashed arrow is present only in the learned model.",
+      "35": "\\begin{center}",
+      "36": "\\begin{tikzpicture}[>=stealth, node distance=25mm]",
+      "37": "  \\node[circle,draw] (u1) {$u,\\ r=1$};",
+      "38": "  \\node[circle,draw,right of=u1] (v1) {$v,\\ r=0$};",
+      "39": "  \\draw[->] (u1) to[loop above] node[above] {$1$} (u1);",
+      "40": "  \\draw[->] (v1) to[loop right] node[right] {$1$} (v1);",
+      "41": "  \\node at (1.25,-0.8) {true};",
+      "42": "  \\begin{scope}[xshift=7cm]",
+      "43": "    \\node[circle,draw] (u2) at (0,0) {$u,\\ r=1$};",
+      "44": "    \\node[circle,draw] (v2) at (2.8,0) {$v,\\ r=0$};",
+      "45": "    \\draw[->] (u2) to[loop above] node[above] {$1-\\epsilon$} (u2);",
+      "46": "    \\draw[->,dashed] (u2) to[bend left=12] node[above] {$\\epsilon$} (v2);",
+      "47": "    \\draw[->] (v2) to[loop right] node[right] {$1$} (v2);",
+      "48": "    \\node at (1.4,-0.8) {learned};",
+      "49": "  \\end{scope}",
+      "50": "\\end{tikzpicture}",
+      "51": "\\end{center}"
+    },
+    "source_content": "The text specifies true and learned two-state transition models; the TikZ block draws true and learned copies of u,v with reward labels, self-loop probabilities, and an extra dashed learned transition u\u2192v of probability \u03b5.",
+    "symptom": "The local HTML and screenshot print the literal center/TikZ commands as prose. The true-versus-learned transition diagram is absent from the rendered ItemBody.",
+    "rendered_tile": "screenshots/ex-short-versus-long-model-rollouts--01.png",
+    "note": "The source block is present identically in snapshot and current source. The capture receipt reports tikz_count 0 and no diagram failure; visual inspection confirms raw commands. The intended diagram labels encode the transition laws stated in the example.",
+    "finding_id": "render-02",
+    "lines": [
+      33,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "screenshots": [
+      "screenshots/ex-short-versus-long-model-rollouts--01.png"
+    ],
+    "suggested_repair": "Repair the reported literal markup or diagram mismatch while preserving the authored mathematics.",
+    "lane": "02",
+    "pages": [
+      "model-based-planning-dyna-and-model-exploitation-examples"
+    ]
+  },
+  {
+    "id": "cex-rtdp-optimal-relevant-state-convergence-fails",
+    "kind": "rendering-defect-unrendered-tikz",
+    "severity": "confirmed",
+    "item": "cex-rtdp-optimal-relevant-state-convergence-fails",
+    "source": "items/cex-rtdp-optimal-relevant-state-convergence-fails.md",
+    "source_lines": {
+      "58": "\\begin{center}",
+      "73": "\\end{center}"
+    },
+    "claim": "The explicitly described five-state SSP diagram is authored as raw centered TikZ rather than a renderer-recognized TikZ block. In the assigned ItemBody it appears as literal TeX commands instead of a graph, so the diagram is absent.",
+    "intended_map": "Vertices s,x,y,z,g; edges s\u2192x (action a,c=1,p=1), s\u2192y (action b,c=1,p=1), x\u2192x (c=1,p=1/2), x\u2192g (c=1,p=1/2), y\u2192z (c=1,p=1), z\u2192g (c=1,p=1), g\u2192g (c=0,p=1).",
+    "tiles": [
+      "screenshots/cex-rtdp-optimal-relevant-state-convergence-fails--01.png",
+      "screenshots/cex-rtdp-optimal-relevant-state-convergence-fails--02.png"
+    ],
+    "receipt_path": "screenshots/cex-rtdp-optimal-relevant-state-convergence-fails.json",
+    "note": "The literal-command appearance is present in both the standalone captured body and local assigned HTML; the tile split is at the capture boundary and does not create the appearance.",
+    "finding_id": "finding-01",
+    "lines": [
+      58,
+      73
+    ],
+    "screenshots": [
+      "screenshots/cex-rtdp-optimal-relevant-state-convergence-fails--01.png",
+      "screenshots/cex-rtdp-optimal-relevant-state-convergence-fails--02.png"
+    ],
+    "classification": "confirmed",
+    "section": "Counterexample",
+    "symptom": "Confirmed rendering or diagram defect reported by the visual reviewer.",
+    "suggested_repair": "Repair the reported literal markup or diagram mismatch while preserving the authored mathematics.",
+    "lane": "09",
+    "pages": [
+      "model-based-planning-dyna-and-model-exploitation"
+    ]
+  },
+  {
+    "id": "ex-policy-iteration-tie-retention",
+    "kind": "tikz-label-overlap",
+    "severity": "confirmed-legibility-defect",
+    "item": "ex-policy-iteration-tie-retention",
+    "source": "items/ex-policy-iteration-tie-retention.md",
+    "source_lines": {
+      "79": "```tikz",
+      "89": "```"
+    },
+    "claim": "The rendered state/action graph has colliding labels around the two action branches: the \u201cchoose a/b\u201d state-to-action labels and the reverse-transition probability labels occupy overlapping space near the center. This makes the four edge labels difficult to associate with their arrows.",
+    "intended_map": "One state s offers actions a and b; each action deterministically returns to s with reward 0 and probability 1. The graph semantics match the example; the issue is label placement.",
+    "tiles": [
+      "screenshots/ex-policy-iteration-tie-retention--02.png"
+    ],
+    "receipt_path": "screenshots/ex-policy-iteration-tie-retention.json",
+    "note": "Confirmed on the standalone original-resolution tile in the diagram\u2019s surrounding Remarks context. This is not a crop-edge or downscaling artifact.",
+    "finding_id": "finding-02",
+    "lines": [
+      79,
+      89
+    ],
+    "screenshots": [
+      "screenshots/ex-policy-iteration-tie-retention--01.png",
+      "screenshots/ex-policy-iteration-tie-retention--02.png"
+    ],
+    "classification": "confirmed",
+    "section": "Remarks",
+    "symptom": "Confirmed rendering or diagram defect reported by the visual reviewer.",
+    "suggested_repair": "Repair the reported literal markup or diagram mismatch while preserving the authored mathematics.",
+    "lane": "09",
+    "pages": [
+      "finite-mdps-and-bellman-operators-examples"
+    ]
+  }
+]

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-steinitz-confinement-worked-in-the-plane.json
+  precheck: pass
 id: ex-steinitz-confinement-worked-in-the-plane
 kind: example
 title: "Steinitz's confinement bound realised on an explicit list of six unit vectors in $\\mathbb{R}^{2}$ summing to zero"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -125,3 +121,67 @@ $\mu^{5} = \bigl(1,\ \tfrac{1}{\iota(2)},\ 0,\ 1,\ \tfrac{1}{\iota(2)}\bigr)$.
 - **What the bad ordering shows.** Without the theorem there is no reason to expect any ordering to stay bounded independently of $m$: the third partial sum of the bad ordering already exceeds $\iota(2)$, and lists of many unit vectors summing to $0$ can be ordered so that a partial sum has norm of order $m$.
 
 - **Why one step of the construction is traced.** An example that only asserted the bound would say nothing about how it is obtained. The step above exhibits the object the proof actually manipulates — a feasible vector of coefficients with as few fractional coordinates as possible — and checks the support bound $\#\operatorname{supp} \le k-1$ that the descending construction turns on.
+
+
+**The two polygonal paths.** In each panel the dashed circle is the Euclidean
+circle of radius $\iota(2)$ centred at $0$, and the arrows join successive
+partial sums. The left panel uses the $s_k$ above; on the right, $t_k$ denotes
+the partial sums of the bad ordering $e_0,e_1,u,-e_0,-e_1,-u$. In particular,
+$t_3=(1+a,1+a)$ lies outside the circle. The plotted coordinates use
+$a=1/\sqrt{\iota(2)}$; the verification above establishes the norm comparisons
+independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.6, every node/.style={font=\normalsize}]
+\begin{scope}
+  \node at (0,2.95) {Good ordering};
+  \draw[dashed] (0,0) circle (2);
+  \draw[->,thin] (-2.15,0)--(2.3,0) node[right] {$x$};
+  \draw[->,thin] (0,-2.15)--(0,2.3) node[above] {$y$};
+  \coordinate (s0) at (0,0);
+  \coordinate (s1) at (1,0);
+  \coordinate (s2) at (1,-1);
+  \coordinate (s3) at ({1+1/sqrt(2)},{1/sqrt(2)-1});
+  \coordinate (s4) at ({1/sqrt(2)},{1/sqrt(2)-1});
+  \coordinate (s5) at ({1/sqrt(2)},{1/sqrt(2)});
+  \draw[->,very thick,blue] (s0)--(s1);
+  \draw[->,very thick,blue] (s1)--(s2);
+  \draw[->,very thick,blue] (s2)--(s3);
+  \draw[->,very thick,blue] (s3)--(s4);
+  \draw[->,very thick,blue] (s4)--(s5);
+  \draw[->,very thick,blue] (s5)--(s0);
+  \foreach \p in {s0,s1,s2,s3,s4,s5} {\fill (\p) circle (1.3pt);}
+  \node[below left] at (s0) {$s_0=s_6$};
+  \node[above right] at (s1) {$s_1$};
+  \node[below] at (s2) {$s_2$};
+  \node[right] at (s3) {$s_3$};
+  \node[below left] at (s4) {$s_4$};
+  \node[above] at (s5) {$s_5$};
+\end{scope}
+\begin{scope}[xshift=6.1cm]
+  \node at (0,2.95) {Bad ordering};
+  \draw[dashed] (0,0) circle (2);
+  \draw[->,thin] (-2.15,0)--(2.3,0) node[right] {$x$};
+  \draw[->,thin] (0,-2.15)--(0,2.3) node[above] {$y$};
+  \coordinate (t0) at (0,0);
+  \coordinate (t1) at (1,0);
+  \coordinate (t2) at (1,1);
+  \coordinate (t3) at ({1+1/sqrt(2)},{1+1/sqrt(2)});
+  \coordinate (t4) at ({1/sqrt(2)},{1+1/sqrt(2)});
+  \coordinate (t5) at ({1/sqrt(2)},{1/sqrt(2)});
+  \draw[->,very thick,red] (t0)--(t1);
+  \draw[->,very thick,red] (t1)--(t2);
+  \draw[->,very thick,red] (t2)--(t3);
+  \draw[->,very thick,red] (t3)--(t4);
+  \draw[->,very thick,red] (t4)--(t5);
+  \draw[->,very thick,red] (t5)--(t0);
+  \foreach \p in {t0,t1,t2,t3,t4,t5} {\fill (\p) circle (1.3pt);}
+  \node[below left] at (t0) {$t_0=t_6$};
+  \node[below] at (t1) {$t_1$};
+  \node[right] at (t2) {$t_2$};
+  \node[above right] at (t3) {$t_3$};
+  \node[above left] at (t4) {$t_4$};
+  \node[left] at (t5) {$t_5$};
+\end{scope}
+\end{tikzpicture}
+```

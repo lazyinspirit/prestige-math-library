@@ -1,0 +1,95 @@
+{
+  "id": "alg-ip-measurement-guided-diffusion-reconstruction",
+  "agent": "/root/rendering_repair_coordinator/inv_005",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile shows the red failed-diagram block. Fresh local native preview reproduces zero rendered figures and one failure. Adding the missing shapes.geometric library alone changes this to one rendered figure and zero failures; the original diamond shape was not loaded.",
+      "action": "Load shapes.geometric explicitly in the fenced TikZ source.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "After compilation-only repair, independently viewed standalone original-resolution capture inv-005-shapes-independent/--01 shows initialization, correction, kernel and projection labels overlapping across adjacent boxes. This is actual pixel overlap, not a multi-image-view clipping artifact.",
+      "action": "Arrange stages vertically with explicit box text widths, a left decrementing loop, and right failure branches joining the failure endpoint. Move the illustration to final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Load the geometric-shapes library and separate the operational flowchart stages; retain all stage/failure/loop relations. Clarify the already-used C_k abbreviation and inclusive step budget in its caption. Complete Definition, sources, title and all metadata remain byte-identical.",
+  "source_lines_after": [
+    60,
+    86
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "At fixed y in the observation space, x_k is in R^d; the caption identifies C_k with the existing supplied correction map from R^d times Y to C_k dagger. On a_k != bottom, the sampler uses Q_theta,k on R^d with parameter (x_k,y,a_k) in R^d times Y times C_k. Pi_(k-1), if supplied, maps R^d to R^d and its output is tested against the existing Borel A_(k-1).",
+      "justification": "Exact unchanged Definition, line 44; local probability-kernel supplier confirms a parameter-indexed probability measure, not a deterministic transition map."
+    },
+    {
+      "relations": "Initialization draws x_N from nu_N and starts k=N. The successful path is correction, kernel draw producing x_(k-1), optional projection/check, decision. For k>1 the left arrow returns the resulting x_(k-1) to correction with the next index k-1. For k=1 the downward arrow returns x_0 with completed status.",
+      "justification": "Exact initialization and ordered reverse-loop instructions in unchanged Definition line 44. The rendered arrows were visually traced through all seven boxes/decision nodes."
+    },
+    {
+      "failure_branches": "Four rightward edges represent initialization failure, a_k=bottom, sampling failure, and failure of the optional projection evaluation/admissibility check. They merge into the downward failure rail, ending at first failure status. No optional projection means passing through the if-supplied box without invoking a check.",
+      "justification": "Four immediate-return failure clauses in unchanged Definition line 44. The per-step caption explicitly keeps correction, sampling and projection inside b_k; the diagram is not an added termination or success guarantee."
+    },
+    {
+      "guarantees_and_independence": "No posterior identity, convergence, commutative equality or exact-score replacement is asserted by any edge. The entire exact-score sigma(t_k) convention, prior/likelihood hypotheses and posterior-exactness qualification remain unchanged in Definition. The complete operational definition is independent of the illustration; no proof is supplied or replaced by it.",
+      "justification": "Unchanged final sentences of Definition line 44 and explicit no-distributional-identity caption at line 86."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-ip-measurement-guided-diffusion-reconstruction.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-ip-measurement-guided-diffusion-reconstruction.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-ip-measurement-guided-diffusion-reconstruction.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    }
+  ],
+  "visual_check": {
+    "command": "env TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-inv-005-final TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-ip-measurement-guided-diffusion-reconstruction --out research/math-library-rendering-repairs-2026-10-23/previews/inv-005-final-independent",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/inv-005-final-independent/manifest.json",
+    "native_compilation": "Fresh isolated repo-local TMPDIR; canonical preview calls actual application TikZ compiler. One rendered figure, zero diagram failures, zero KaTeX errors.",
+    "viewed_original_resolution": [
+      "original flagged --01",
+      "inv-005-shapes-independent/screenshots/alg-ip-measurement-guided-diffusion-reconstruction--01.png",
+      "inv-005-final-independent/screenshots/alg-ip-measurement-guided-diffusion-reconstruction--01.png",
+      "inv-005-final-independent/screenshots/alg-ip-measurement-guided-diffusion-reconstruction--02.png"
+    ],
+    "result": "Final two overlapping tiles jointly show the complete flowchart and caption. Stage labels, success arrows, decrementing loop and all four failure branches are visible and separated."
+  },
+  "before_raw_sha256": "6e88d540ba61e1d74653a46f81c526b2d368bd91ed1e69b82df10d7d8e8296a9",
+  "after_raw_sha256": "5928157dcbe771c4026759356c1764e07b52a9506c7f3ddb497e40162fd1312d",
+  "remaining_issues": [],
+  "limitations": "Focused local rendering and flowchart-content adjudication only; no external-source visit, whole-item audit, native gate or production-route coverage claimed. Preview reference map reports 32 unrelated existing map diagnostics."
+}

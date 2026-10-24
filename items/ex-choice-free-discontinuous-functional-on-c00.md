@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-choice-free-discontinuous-functional-on-c00.json
+  precheck: pass
 id: ex-choice-free-discontinuous-functional-on-c00
 kind: example
-title: "A choice-free discontinuous linear functional on c_00"
+title: "A choice-free discontinuous linear functional on $c_{00}$"
 status: published
 origin: session
 provenance:
@@ -13,9 +16,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:

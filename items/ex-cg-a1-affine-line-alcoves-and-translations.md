@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-a1-affine-line-alcoves-and-translations.json
+  precheck: pass
 id: ex-cg-a1-affine-line-alcoves-and-translations
 kind: example
 title: "The $A_1$ affine line: alcoves, translations, and the root versus coroot lattice"
@@ -19,9 +22,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 sources:
   references:
     - title: "J. Morgan, Lie Groups Fall 2025, Lecture XII: The Affine Weyl Group (Columbia course notes)"
@@ -90,3 +90,40 @@ The presentation is the infinite dihedral presentation $\langle s_0,s_1\mid s_0^
 4.1 If $g(A)=A_n$, the walls separating $A_0$ and $A_n$ are the integer points between their intervals, and there are exactly $|n|$ of them: for $n>0$ they are $1,\ldots,n$, for $n<0$ they are $n+1,\ldots,0$, and for $n=0$ there are none. A word of length $m$ gives a gallery of $m$ adjacent intervals by step 3.1, so it must cross each separating wall and $m\ge |n|$. For $q\ge0$, the maps $t_{2q}=(s_1s_0)^q$ and $t_{-2q}=(s_0s_1)^q$ send $A_0$ to $A_{2q}$ and $A_{-2q}$; the maps $t_{2q}s_1$ and $t_{-2q}s_0$ send it to $A_{2q+1}$ and $A_{-(2q+1)}$, respectively. These words have lengths equal to the absolute values of their indices, so the lower bound is attained for every $n$ and $\ell(g)=|\operatorname{Sep}(A,g(A))|=|n|$. [step 2.2, step 3.1, algebra]
 
 5.1 The standard root lattice is $Q=\mathbb Z$ and the standard coroot translation lattice is $Q^\vee=2\mathbb Z$ by step 1.3. Under the dual-normal convention, the walls are $2x=k$; the coroot of $\alpha^\vee$ is $\alpha$, so reflection in $k/2$ is $x\mapsto k-x$, and composing the reflections at $0$ and $1/2$ gives translation by $1$. By [F13], $\Phi^\vee$ meets the affine lemma's root-system hypotheses; applying [F11] to it gives translation subgroup $Q^\vee(\Phi^\vee)=Q=\mathbb Z$ by [F6, F8]. Thus the alternative convention has translations by $Q$, with the two cosets $2\mathbb Z$ and $1+2\mathbb Z$ showing $[Q:Q^\vee]=2$. All computations use finite root lists and explicit integer arithmetic; no axiom of choice is used. [F6, F8, F11, F13, step 1.3, algebra] ∎
+
+## Remarks
+
+The picture uses the convention $H_{\alpha,k}=\{k\}$ and marks the fundamental alcove in blue. The curved arrows show images of alcove midpoints: $s_0(A_0)=A_{-1}$, $s_1(A_0)=A_1$, and $s_1s_0(A_0)=A_2$. The same translation sends every $A_n$ to $A_{n+2}$; its length is two units on this axis.
+
+```tikz
+\begin{tikzpicture}[x=1.6cm,y=1cm]
+\draw[->] (-2.35,0) -- (3.4,0) node[right] {$x$};
+\draw[blue,very thick] (0.04,0) -- (0.96,0);
+\draw (-2,-0.10) -- (-2,0.10);
+\node[below] at (-2,-0.10) {$-2$};
+\draw (-1,-0.10) -- (-1,0.10);
+\node[below] at (-1,-0.10) {$-1$};
+\draw (0,-0.10) -- (0,0.10);
+\node[below] at (0,-0.10) {$0$};
+\draw (1,-0.10) -- (1,0.10);
+\node[below] at (1,-0.10) {$1$};
+\draw (2,-0.10) -- (2,0.10);
+\node[below] at (2,-0.10) {$2$};
+\draw (3,-0.10) -- (3,0.10);
+\node[below] at (3,-0.10) {$3$};
+\node at (-1.5,-0.65) {$A_{-2}$};
+\node at (-0.5,-0.65) {$A_{-1}$};
+\node[blue] at (0.5,-0.65) {$A_0$};
+\node at (1.5,-0.65) {$A_1$};
+\node at (2.5,-0.65) {$A_2$};
+\draw[->] (0.5,0.22) .. controls (0.4,1.1) and (-0.4,1.1) .. (-0.5,0.22);
+\node[above] at (0,0.95) {$s_0:x\mapsto -x$};
+\draw[->] (0.5,0.22) .. controls (0.6,1.1) and (1.4,1.1) .. (1.5,0.22);
+\node[above] at (1.35,0.95) {$s_1:x\mapsto 2-x$};
+\draw[->] (0.5,-1.10) -- (2.5,-1.10);
+\node[below] at (1.5,-1.10) {$s_1s_0=t_2:x\mapsto x+2$};
+\end{tikzpicture}
+```
+
+Here $Q=\mathbb Z$ but the translation subgroup is $Q^\vee=2\mathbb Z$. In the alternative dual-normal convention the walls are instead $k/2$ and the translation subgroup is $Q=\mathbb Z$; that is a different wall arrangement from the one drawn. The rigorous coordinate and gallery verification above is independent of the picture.
+

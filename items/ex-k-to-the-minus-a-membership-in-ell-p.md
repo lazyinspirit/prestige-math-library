@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-k-to-the-minus-a-membership-in-ell-p.json
+  precheck: pass
 id: ex-k-to-the-minus-a-membership-in-ell-p
 kind: example
 title: "$k^{-a}$ membership in $\\ell^p$"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [rem-ell-p-is-l-p-of-counting-measure, thm-p-series-real-exponents]
 proof_strategy: "Apply the real p-series test to the series sum k^(-ap) and read off the threshold ap > 1."
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ $$ap>1.$$
 
 ## Verification
 
-**Proof technique:** Apply the real $p$-series test to the series $\sum k^{-ap}$ and read off the threshold $ap>1$.
+**Proof technique:** Apply the real p-series test with exponent a times p and read off whether that exponent is greater than one.
 
 1.1 By [L1], the sequence $(a_k)$ lies in $\ell^p$ exactly when [L1, given] $$\sum_{k=0}^\infty |a_k|^p=\sum_{k=1}^\infty k^{-ap}$$ converges. [L1, given]
 

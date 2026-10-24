@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q.json
+  precheck: pass
 id: lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q
 kind: lemma
 title: "The Radon-Nikodym density of a bounded $L^p$ functional belongs to $L^q$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities, prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm, thm-monotone-convergence-for-the-integral, def-conjugate-exponents, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "For $1<p<\\infty$, test the Radon-Nikodym density against bounded truncated extremizers and pass to the limit by monotone convergence. For $p=1$, level-set testing forces the essential supremum below the operator norm."
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 6.14 and Theorem 6.15"
@@ -48,7 +48,7 @@ $$\Lambda([f])=\int fg\,d\mu\qquad([f]\in L^p(\mu)).$$
 
 ## Proof
 
-**Proof technique:** For $1<p<\infty$, test the Radon-Nikodym density against bounded truncated extremizers and pass to the limit by monotone convergence. For $p=1$, level-set testing forces the essential supremum below the operator norm.
+**Proof technique:** For 1 < p < ∞, test the Radon-Nikodym density against bounded truncated extremizers and pass to the limit by monotone convergence. For p = 1, level-set testing forces the essential supremum below the operator norm.
 
 1.1 Assume first $1<p<\infty$. Choose a representative $u$ of $g$ and, for $k \ge 1$, define $$u_k:=u\mathbf 1_{\{|u|\le k\}},\qquad f_k:=|u_k|^{q-1}\operatorname{sgn} u.$$ Each $f_k$ is bounded, so [L1] gives $$\Lambda([f_k])=\int f_kg\,d\mu=\int |u_k|^q\,d\mu.$$ Also $|f_k|^p=|u_k|^q$ by [L2], hence $$\int |u_k|^q\,d\mu=|\Lambda([f_k])| \le \|\Lambda\|\|[f_k]\|_p =\|\Lambda\|\left(\int |u_k|^q\,d\mu\right)^{1/p}.$$ Therefore $$\int |u_k|^q\,d\mu\le\|\Lambda\|^q\qquad(k \ge 1).$$ [L1, L2, given, choose, construct]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-probability-law-and-distribution-function-correspondence.json
+  precheck: pass
 id: thm-probability-law-and-distribution-function-correspondence
 kind: theorem
 title: "Probability laws correspond to distribution functions"
@@ -10,14 +13,6 @@ provenance:
   proof: ai-altered
 deps: [def-countable-choice, def-cumulative-distribution-function-of-a-random-variable, def-law-or-distribution-of-a-random-element, lem-law-of-a-random-element-is-a-probability-measure, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, prop-measure-of-a-set-difference, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, prop-measure-monotonicity]
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (thm-probability-law-and-distribution-function-correspondence). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   references:
     - title: "J. R. Norris, Probability and Measure, Section 2.3"
@@ -68,3 +63,35 @@ Assume the Axiom of Countable Choice.
 2.1 For fixed $x$, the sets $(-n,x]$ increase to $(-\infty,x]$. Hence [L2] and step 1.3 give $$\mu((-\infty,x])=\lim_{n\to\infty}\mu((-n,x])=\lim_{n\to\infty}(F(x)-F(-n))=F(x).$$ Applying continuity from below once more to $(-\infty,n]\uparrow\mathbb R$ shows $\mu(\mathbb R)=\lim_n F(n)=1$, so $\mu$ is a probability measure. If $\nu$ is another Borel probability measure with $\nu((-\infty,x])=F(x)$ for all $x$, then $\nu((a,b])=F(b)-F(a)=\mu((a,b])$ for every $a<b$, and [L3] gives $\nu=\mu$. [L2, L3, step 1.3]
 
 3.1 Steps 1.1 and 1.2 prove part 1, and steps 1.3 and 2.1 prove part 2. [step 1.1, step 1.2, step 1.3, step 2.1] ∎
+
+## Remarks
+
+For the measure $\mu$ corresponding to $F$, the picture shows the nested
+closed rays whose difference is $(a,b]$. Thus the endpoint $a$ is excluded
+and $b$ is included, even when either endpoint is an atom.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (0,0) -- (7,0) node[right] {$\mathbb R$};
+\draw[line width=1.5pt] (0.4,2) -- (5.5,2);
+\draw[->] (0.4,2) -- (0,2);
+\fill (5.5,2) circle (2.5pt);
+\node[right] at (5.8,2) {$(-\infty,b]$};
+\draw[line width=1.5pt] (0.4,1) -- (2.5,1);
+\draw[->] (0.4,1) -- (0,1);
+\fill (2.5,1) circle (2.5pt);
+\node[right] at (3,1) {$(-\infty,a]$};
+\draw[dashed] (2.5,-0.15) -- (2.5,2.4);
+\draw[dashed] (5.5,-0.15) -- (5.5,2.4);
+\draw[line width=2pt] (2.5,0) -- (5.5,0);
+\draw[fill=white,line width=1pt] (2.5,0) circle (3pt);
+\fill (5.5,0) circle (3pt);
+\node[below] at (2.5,-0.15) {$a$};
+\node[below] at (5.5,-0.15) {$b$};
+\node at (4,-1) {$\mu((a,b])=F(b)-F(a)$};
+\end{tikzpicture}
+```
+
+Here $F(x)=\mu((-\infty,x])$ is right-continuous; jumps at atoms are
+allowed. The tail limits are $F(-\infty)=0$ and $F(+\infty)=1$, where these
+symbols denote limits. The proof above is independent of the illustration.

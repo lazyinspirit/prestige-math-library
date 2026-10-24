@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-covariance-of-overlapping-brownian-increments.json
+  precheck: pass
 id: ex-covariance-of-overlapping-brownian-increments
 kind: example
 title: "Covariance of overlapping Brownian increments"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.1"
@@ -59,3 +56,43 @@ zero.
 ## Source notes
 
 Durrett, Section 7.1, printed p. 355, derives $\mathbb E[B_sB_t]=s\wedge t$ for $s<t$ from independent increments. The four-term overlap calculation and its complete endpoint case split are given above.
+
+## Remarks
+
+The upper schematic shows $s<u<t<v$: the thick segment has length
+$t-u=\min(t,v)-\max(s,u)$. The lower schematic shows $s<t=u<v$:
+the intersection is one point and has length zero. Each panel uses one common
+time scale for both intervals; the vertical separation only distinguishes the
+intervals. These are time intervals, not sample paths or equal random increments.
+The endpoint case analysis in the Verification proves the formula independently
+of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (0,0) -- (7.4,0) node[right] {$\mathrm{time}$};
+\draw[thick] (0.7,1.3) -- (4.5,1.3);
+\fill (0.7,1.3) circle (2pt) node[above] {$s$};
+\fill (4.5,1.3) circle (2pt) node[above] {$t$};
+\node[left] at (0.3,1.3) {$[s,t]$};
+\draw[thick] (2.6,0.65) -- (6.4,0.65);
+\fill (2.6,0.65) circle (2pt) node[above] {$u$};
+\fill (6.4,0.65) circle (2pt) node[above] {$v$};
+\node[left] at (0.3,0.65) {$[u,v]$};
+\draw[dashed] (2.6,0.5) -- (2.6,0);
+\draw[dashed] (4.5,1.15) -- (4.5,0);
+\draw[line width=3pt] (2.6,0) -- (4.5,0);
+\node[below] at (3.55,-0.12) {$\mathrm{overlap\ length}=t-u$};
+\draw[->] (0,-3) -- (7.4,-3) node[right] {$\mathrm{time}$};
+\draw[thick] (0.7,-1.7) -- (3.5,-1.7);
+\fill (0.7,-1.7) circle (2pt) node[above] {$s$};
+\fill (3.5,-1.7) circle (2pt) node[above] {$t$};
+\node[left] at (0.3,-1.7) {$[s,t]$};
+\draw[thick] (3.5,-2.35) -- (6.4,-2.35);
+\fill (3.5,-2.35) circle (2pt) node[above right] {$u$};
+\fill (6.4,-2.35) circle (2pt) node[above] {$v$};
+\node[left] at (0.3,-2.35) {$[u,v]$};
+\draw[dashed] (3.5,-1.85) -- (3.5,-3);
+\fill (3.5,-3) circle (2pt);
+\node[below] at (3.5,-3.12) {$t=u:\quad\mathrm{overlap\ length}=0$};
+\end{tikzpicture}
+```

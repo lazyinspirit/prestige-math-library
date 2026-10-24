@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-it-strong-subadditivity-for-pure-tripartite-state.json
+  precheck: pass
 id: ex-it-strong-subadditivity-for-pure-tripartite-state
 kind: example
 title: Strong subadditivity for a pure GHZ tripartite state
@@ -66,14 +69,14 @@ so strong subadditivity is strict.
 
 The central node denotes the state-preparation map $\mathbb C\to H_A\otimes H_B\otimes H_C$ taking $1$ to $|\mathrm{GHZ}\rangle$; the three outgoing legs are its ordered tensor factors. They describe one joint state, not a product of three states. No proof step relies on this diagram.
 
-\begin{center}
+```tikz
 \begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
   \node[draw,rounded corners,minimum width=1.8cm,minimum height=.8cm] (state) at (0,0) {$|\mathrm{GHZ}\rangle$};
   \draw[->] (state.north west) -- (-1.1,1) node[above] {$A$};
   \draw[->] (state.north) -- (0,1) node[above] {$B$};
   \draw[->] (state.north east) -- (1.1,1) node[above] {$C$};
 \end{tikzpicture}
-\end{center}
+```
 
 ## Proof
 

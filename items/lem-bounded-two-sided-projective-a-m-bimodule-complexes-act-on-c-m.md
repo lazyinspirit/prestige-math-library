@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m.json
+  precheck: pass
 id: lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m
 kind: lemma
-title: "Bounded two-sided projective bimodule complexes act on C_m"
+title: "Bounded two-sided projective bimodule complexes act on $C_m$"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -20,16 +23,14 @@ sources:
       url: "https://arxiv.org/pdf/math/0006056"
     - title: "Charles Weibel, An Introduction to Homological Algebra, ch. 10 §10.4, pp. 387-390"
       url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
 
 Fix $m\ge1$ and let $C_m=K^b(\operatorname{proj}^{gr}A_m)$ be the bounded
 homotopy category of finite graded projective left $A_m$-modules of
-[[def-bounded-projective-homotopy-category-for-a-m]], with its homological shift
+[[def-bounded-projective-homotopy-category-for-a-m|The bounded projective homotopy category $C_m$ and the two shifts]], with its homological shift
 $[1]$, its cone triangles and its equivalence $\Theta:C_m\to D^b(A_m\text{-mod})$
 to the bounded derived category.
 
@@ -39,7 +40,7 @@ $A_m$-module **and** as a right $A_m$-module. Then:
 
 1. **Stays in $C_m$.** For every $X\in C_m$ the signed totalization
    $R^\bullet\otimes_{A_m}X$ of
-   [[def-signed-totalization-of-graded-a-m-bimodule-actions]] is again an object
+   [[def-signed-totalization-of-graded-a-m-bimodule-actions|Signed totalization of graded $A_m$-bimodule actions]] is again an object
    of $C_m$, and the assignment is a functor
    $R^\bullet\otimes_{A_m}-:C_m\to C_m$ which is additive and well defined on
    homotopy classes.
@@ -71,9 +72,9 @@ right projectivity makes the complex flat for the derived-tensor comparison.
 
 [L2] Let $A,B$ be graded $k$-algebras and $M$ a graded $(B,A)$-bimodule with $\Phi_M=M\otimes_A-$. If $M$ is flat as an underlying right $A$-module then $\Phi_M$ is exact on graded left $A$-modules; if $M$ is finite graded projective as a left $B$-module then $\Phi_M$ carries every finite graded projective left $A$-module to a finite graded projective left $B$-module; neither hypothesis implies the other ([[thm-bimodule-tensor-exactness-and-projective-preservation]]).
 
-[L3] For a bounded complex $R^\bullet$ of graded $(A_m,A_m)$-bimodules and a bounded complex $X^\bullet$ of graded left $A_m$-modules the signed totalization $(R\otimes_{A_m}X)^n=\bigoplus_{p+q=n}R^p\otimes_{A_m}X^q$ with $d(r\otimes x)=d_Rr\otimes x+(-1)^pr\otimes d_Xx$ is a bounded complex of graded left $A_m$-modules; the construction is functorial in both variables; its internal shifts are canonical; and a homotopy $h$ of $X^\bullet$ lifts to the homotopy $(-1)^p\mathrm{id}\otimes h$ of the total complex while a homotopy $k$ of $R^\bullet$ lifts to $k\otimes\mathrm{id}$ ([[def-signed-totalization-of-graded-a-m-bimodule-actions]]).
+[L3] For a bounded complex $R^\bullet$ of graded $(A_m,A_m)$-bimodules and a bounded complex $X^\bullet$ of graded left $A_m$-modules the signed totalization $(R\otimes_{A_m}X)^n=\bigoplus_{p+q=n}R^p\otimes_{A_m}X^q$ with $d(r\otimes x)=d_Rr\otimes x+(-1)^pr\otimes d_Xx$ is a bounded complex of graded left $A_m$-modules; the construction is functorial in both variables; its internal shifts are canonical; and a homotopy $h$ of $X^\bullet$ lifts to the homotopy $(-1)^p\mathrm{id}\otimes h$ of the total complex while a homotopy $k$ of $R^\bullet$ lifts to $k\otimes\mathrm{id}$ ([[def-signed-totalization-of-graded-a-m-bimodule-actions|Signed totalization of graded $A_m$-bimodule actions]]).
 
-[L4] $C_m$ is the full subcategory of $K(A_m\text{-mod})$ on bounded complexes with finite graded projective terms; its morphisms are homotopy classes of chain maps; for a chain map $f:X\to Y$ the cone $\operatorname{Cone}(f)^n=Y^n\oplus X^{n+1}$ with $d(y,x)=(d_Yy+fx,-d_Xx)$ is an object of $C_m$, and the homological shift is $(X[1])^n=X^{n+1}$ with $d_{X[1]}=-d_X$; the canonical functor $\Theta:C_m\to D^b(A_m\text{-mod})$ is fully faithful and every bounded complex of $A_m$-modules is isomorphic in $D^b(A_m\text{-mod})$ to the image of an object of $C_m$ ([[def-bounded-projective-homotopy-category-for-a-m]], [[def-mapping-cone-of-a-chain-map]], [[lem-bounded-finite-projective-model-for-khovanov-seidel-modules]]).
+[L4] $C_m$ is the full subcategory of $K(A_m\text{-mod})$ on bounded complexes with finite graded projective terms; its morphisms are homotopy classes of chain maps; for a chain map $f:X\to Y$ the cone $\operatorname{Cone}(f)^n=Y^n\oplus X^{n+1}$ with $d(y,x)=(d_Yy+fx,-d_Xx)$ is an object of $C_m$, and the homological shift is $(X[1])^n=X^{n+1}$ with $d_{X[1]}=-d_X$; the canonical functor $\Theta:C_m\to D^b(A_m\text{-mod})$ is fully faithful and every bounded complex of $A_m$-modules is isomorphic in $D^b(A_m\text{-mod})$ to the image of an object of $C_m$ ([[def-bounded-projective-homotopy-category-for-a-m|The bounded projective homotopy category $C_m$ and the two shifts]], [[def-mapping-cone-of-a-chain-map]], [[lem-bounded-finite-projective-model-for-khovanov-seidel-modules]]).
 
 [L5] $K(\mathcal A)$, with its shift and distinguished cone triangles, is a triangulated category, so its distinguished triangles are the cone triangles and their isomorphic images, a triangle isomorphic to a distinguished triangle being distinguished by the first axiom ([[thm-the-homotopy-category-of-an-abelian-category-is-triangulated]], [[def-triangulated-category-axiom-tr-one]]).
 

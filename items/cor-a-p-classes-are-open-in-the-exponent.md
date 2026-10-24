@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-a-p-classes-are-open-in-the-exponent.json
+  precheck: pass
 id: cor-a-p-classes-are-open-in-the-exponent
 kind: corollary
-title: The A_p classes are open in the exponent
+title: The Aₚ classes are open in the exponent
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.43, printed pp. 92-93"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

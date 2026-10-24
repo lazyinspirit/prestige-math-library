@@ -1,0 +1,79 @@
+{
+  "id": "thm-spectral-mapping-for-polynomials",
+  "agent": "/root/la_023",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 02 visibly prints dollar signs around N in TECHNIQUE · INDUCTION ON $N$, while n in the adjacent proof is typeset. The proof-technique renderer emits this phrase as plain text with CSS uppercase.",
+      "action": "Changed only the banner wording to induction on the dimension; n is precisely the dimension in the unchanged Statement and induction proof.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 57: **Proof technique:** induction on the dimension.",
+  "source_lines_after": {
+    "57": "**Proof technique:** induction on the dimension."
+  },
+  "mathematical_meaning_preserved": true,
+  "status_preserved": true,
+  "metadata_preserved": true,
+  "before_raw_sha256": "f92b733e06d0dc0b1a75744042da45fecc1b7366cace9e6720dbddc064f266d8",
+  "after_raw_sha256": "700af2c8b0f6d829f795ad5a75ad6f37a4295b0fab27c5002a5a10185e4e0048",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-spectral-mapping-for-polynomials.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-spectral-mapping-for-polynomials.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-spectral-mapping-for-polynomials.md",
+            "item_id": "thm-spectral-mapping-for-polynomials",
+            "status": "pass",
+            "strategy": "induction"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-spectral-mapping-for-polynomials.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/linear-algebra/screenshots/thm-spectral-mapping-for-polynomials--02.png",
+    "original_view": "Standalone view_image detail original; literal delimiters confirmed.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/la_023/manifest.json",
+    "source_sha256": "700af2c8b0f6d829f795ad5a75ad6f37a4295b0fab27c5002a5a10185e4e0048",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/la_023/screenshots/thm-spectral-mapping-for-polynomials--02.png",
+    "preview_tile_sha256": "85c2a0937ae3e7f03c15362dc45404ee707a8c2a59d0997015bbe06db63626bb",
+    "preview_view": "Standalone view_image detail original confirms TECHNIQUE · INDUCTION ON THE DIMENSION with no dollar delimiters.",
+    "katex_errors": [],
+    "tikz_count": 0,
+    "limitations": [
+      "Fresh local capture shows much ordinary proof text and some math invisible outside the edited banner, unlike the authentic original tile. This capture anomaly was not used to infer source defects or claim full proof visual coverage. The repaired banner is visible and independently verified.",
+      "Local ItemBody preview only; no production route or network visit."
+    ]
+  },
+  "remaining_issues": [
+    "Renderer still treats proof-technique banner content as plain text; the equivalent prose workaround avoids inline-math markup."
+  ]
+}

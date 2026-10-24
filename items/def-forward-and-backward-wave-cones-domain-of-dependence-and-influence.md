@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-forward-and-backward-wave-cones-domain-of-dependence-and-influence.json
+  precheck: n/a
 id: def-forward-and-backward-wave-cones-domain-of-dependence-and-influence
 kind: definition
 title: "Forward and backward wave cones, domain of dependence and influence"
@@ -24,12 +27,7 @@ sources:
     - title: "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)"
       url: "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf"
       locator: "§3, printed/PDF pp. 5-6, Definitions 3.0.3-3.0.6 and Examples 3.0.5-3.0.7: development and range of influence"
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Definition
@@ -75,3 +73,38 @@ $x=x_0\pm c(t_0-t)$, and the open base ball is the interval $(x_0-ct_0,x_0+ct_0)
 this item; those are [[thm-finite-propagation-speed-for-the-wave-equation]],
 [[thm-domain-of-dependence-and-local-uniqueness]] and
 [[cor-compact-support-expands-at-speed-at-most-c]].
+
+
+## Remarks
+
+For $n=1$ and $t_0>0$, the shaded triangle is the closed backward cone; the
+upward rays bound the forward cone, which continues indefinitely. The two
+sloping sides below the vertex form the lateral boundary: their base endpoints
+are included, but the vertex is excluded from that boundary. The separate
+interval below the time-zero axis shows the open base ball, with its endpoints
+excluded. Its vertical displacement is only for clarity.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\fill[blue!12] (-2.4,0) -- (2.4,0) -- (0,2.4) -- (-2.4,0);
+\draw[->] (-3.3,0) -- (3.6,0) node[right] {$x$};
+\draw[->] (-3.1,-0.2) -- (-3.1,4.4) node[above] {$t$};
+\draw[thick] (-2.4,0) -- (0,2.4) -- (2.4,0);
+\draw[thick] (-2.4,0) -- (2.4,0);
+\draw[thick,->] (0,2.4) -- (-1.7,4.1);
+\draw[thick,->] (0,2.4) -- (1.7,4.1);
+\fill (0,2.4) circle (2pt);
+\fill (-2.4,0) circle (2pt);
+\fill (2.4,0) circle (2pt);
+\node[right] at (0.1,2.4) {$(x_0,t_0)$};
+\node at (0,0.9) {$K^-(x_0,t_0)$};
+\node at (0,3.7) {$K^+(x_0,t_0)$};
+\node[left] at (-3.1,0) {$0$};
+\node[below] at (-2.4,0) {$x_0-ct_0$};
+\node[below] at (2.4,0) {$x_0+ct_0$};
+\draw[thick] (-2.4,-0.85) -- (2.4,-0.85);
+\draw[fill=white,thick] (-2.4,-0.85) circle (3pt);
+\draw[fill=white,thick] (2.4,-0.85) circle (3pt);
+\node[below] at (0,-0.95) {$B_{ct_0}(x_0)\times\{0\}$};
+\end{tikzpicture}
+```

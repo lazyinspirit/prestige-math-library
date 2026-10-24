@@ -1,16 +1,13 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-punctured-domains-and-truncated-cones-with-explicit-faces.json
+  precheck: pass
 id: ex-punctured-domains-and-truncated-cones-with-explicit-faces
 kind: example
 title: Holes and truncated space-time cones
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: Hunter, Notes on Partial Differential Equations
@@ -53,3 +50,41 @@ Assume $\mathrm{AC}_\omega$. Removing $\overline B_r(a)\subset\Omega$ from a bou
 ## Source notes
 
 Hunter §1.12, Theorem 1.46 and piecewise-boundary discussion, printed pp. 17–18 (PDF pp. 23–24). The hole orientation, cone presentation, and all three tip estimates are explicitly derived here, rather than attributed to an unstated rough-boundary theorem.
+
+
+## Remarks
+
+The panels show a section $x=s\omega$ for a fixed unit spatial direction $\omega\in S^{d-1}$, with $s$ horizontal and time increasing upward. The left panel illustrates $c>0$ and $R_0>0$; the Example also permits zero or negative $c$ while $R$ stays positive. Its right side has $x/|x|=\omega$, so the indicated outward direction is $\nu=(\omega,-c)/\sqrt{1+c^2}$; the cap normals are $\pm e_t$. These are sections of $d$-dimensional spatial balls, not a restriction to $d=1$.
+
+```tikz
+\begin{tikzpicture}[scale=0.9,>=stealth]
+\draw[->] (-2.7,-0.5) -- (-2.7,3.8) node[above] {$t$};
+\draw[thick] (-1,0) -- (1,0) -- (1.9,3) -- (-1.9,3) -- (-1,0);
+\node at (0,1.5) {$K$};
+\node[left] at (-2.7,0) {$a_0$};
+\node[left] at (-2.7,3) {$b_0$};
+\node[above] at (0,0) {bottom cap};
+\node[below] at (0,3) {top cap};
+\draw[->,thick] (0,0) -- (0,-0.65) node[below] {$-e_t$};
+\draw[->,thick] (0,3) -- (0,3.65) node[above] {$+e_t$};
+\draw[->,thick] (1.45,1.5) -- (2.35,1.23) node[right] {$\nu$};
+\node[right] at (1.75,2.5) {lateral face};
+\node at (0,-1.25) {positive-radius truncation};
+\begin{scope}[xshift=8cm]
+\draw[->] (-2.5,-0.5) -- (-2.5,3.8) node[above] {$t$};
+\draw[thick] (-0.48,0.8) -- (-1.8,3) -- (1.8,3) -- (0.48,0.8) -- (-0.48,0.8);
+\draw[dashed] (-0.48,0.8) -- (0,0) -- (0.48,0.8);
+\node[left] at (-2.5,0) {$a_0$};
+\node[left] at (-2.5,0.8) {$a_0+\delta$};
+\node[left] at (-2.5,3) {$b_0$};
+\node at (0,2) {$K_\delta$};
+\draw[->,thick] (0,0.8) -- (0,0.25);
+\draw (0.48,0.8) -- (2.1,0.8) node[right] {artificial cap};
+\draw (0.24,0.4) -- (1.7,-0.15) node[right] {omitted side};
+\draw (-0.05,0.25) -- (-0.7,-0.8) node[below] {omitted volume};
+\node at (0,-1.65) {bottom tip: $R(t)=c(t-a_0)$};
+\end{scope}
+\end{tikzpicture}
+```
+
+In the right panel $c>0$ and $K_\delta$ starts at $t=a_0+\delta$; the artificial bottom cap points downward. Dashed segments indicate the omitted lateral boundary, and the small region between them is the omitted volume. Step 4.1 bounds the artificial cap flux and omitted lateral flux by constants times $\delta^d$, and the omitted volume integral by a constant times $\delta^{d+1}$. No regular face or normal is assigned at the apex. The verification above is independent of this illustration.

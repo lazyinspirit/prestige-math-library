@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-bird-graph-has-the-erdos-hajnal-property.json
+  precheck: pass
 id: thm-the-bird-graph-has-the-erdos-hajnal-property
 kind: theorem
 title: "The Bird graph has the Erdős-Hajnal property"
@@ -13,12 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-27
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
 sources:
   scraped: []
   references:
@@ -55,7 +52,7 @@ has the Erdős-Hajnal property.
 
 ## Proof
 
-**Proof technique:** direct application of the published reduction to the singleton family $\{\mathrm{Bird}\}$, then unwinding the definition of the Erdős-Hajnal constant.
+**Proof technique:** direct application of the published reduction to the singleton Bird family, then unwinding the definition of the Erdős-Hajnal constant.
 
 1.1 The family $\{\mathrm{Bird}\}$ satisfies the three hypotheses of [L4]: it is generalized nice by [L1], leaf-reducible by [L2], and wonderful by [L3]. [L1, L2, L3, given]
 

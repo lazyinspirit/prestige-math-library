@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-gauss-bonnet-for-a-spherical-cap.json
+  precheck: pass
 id: ex-gauss-bonnet-for-a-spherical-cap
 kind: example
 title: Gauss-Bonnet for a spherical cap
@@ -32,9 +35,7 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.0.1, printed pp. 10-13 (PDF pp. 17-20): the local formula with boundary applied to constant-curvature disks."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -74,7 +75,7 @@ for $\theta_0>\pi/2$ that term is negative.
 
 ## Verification
 
-**Proof technique:** compute the round metric, connection form and curvature in the polar chart, integrate over the cap, compute the geodesic curvature of the positively oriented latitude circle, and identify the constant $2\pi$ with $2\pi\chi(D)$ through an explicit finite triangulation of the cap.
+**Proof technique:** compute the round metric, connection form and curvature in the polar chart, integrate over the cap, compute the geodesic curvature of the positively oriented latitude circle, and identify the constant two pi with two pi times the Euler characteristic of the cap through an explicit finite triangulation of the cap.
 
 1.1 On overlapping polar patches away from the north pole, the parametrization $X(\theta,\varphi)=R(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ has $X_\theta=R(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta)$ and $X_\varphi=R\sin\theta(-\sin\varphi,\cos\varphi,0)$, so by [F7] the induced metric is $g=R^2d\theta^2+R^2\sin^2\theta\,d\varphi^2$ with $g_{\theta\theta}=R^2$, $g_{\varphi\varphi}=R^2\sin^2\theta$ and $g_{\theta\varphi}=0$. Hence $e_1=(1/R)\partial_\theta$ and $e_2=(1/(R\sin\theta))\partial_\varphi$ form a smooth positive orthonormal frame on each such patch, with dual coframe $e^1=R\,d\theta$, $e^2=R\sin\theta\,d\varphi$. The polar frame is undefined at the pole, but the induced metric is smooth there in ordinary surface coordinates. [F7, given, algebra]
 

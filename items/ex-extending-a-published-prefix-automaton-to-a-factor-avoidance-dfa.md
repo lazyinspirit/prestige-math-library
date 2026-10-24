@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa.json
+  precheck: pass
 id: ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa
 kind: example
 title: "Adding a sink turns the published prefix automaton for avoiding `11` into a DFA"
@@ -11,13 +14,6 @@ generation:
   role: example
 deps: [prop-published-prefix-automata-extend-to-factor-avoidance-dfas]
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -52,3 +48,27 @@ This DFA accepts exactly the binary words with no factor `11`.
 1.2 Once the machine reaches $\bot$, the forbidden factor has already appeared, so looping at $\bot$ on both letters is the correct total completion. The words $\varepsilon$, `1`, `10`, and `1010` stay in the accepting states, while `11` and `1011` reach $\bot$. [given]
 
 2.1 This is exactly the sink-state completion described by [L1], so the resulting DFA recognizes the binary words avoiding `11`. [L1, step 1.1, step 1.2] ∎
+
+## Remarks
+
+The arrow entering $\varepsilon$ marks the initial state; double circles mark
+accepting states. The single-circle state $\bot$ is the rejecting sink.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,circle,double,double distance=2pt,minimum size=11mm] (e) at (0,0) {$\varepsilon$};
+\node[draw,circle,double,double distance=2pt,minimum size=11mm] (one) at (3,0) {$1$};
+\node[draw,circle,minimum size=11mm] (sink) at (6,0) {$\bot$};
+\draw[->] (-1.5,0) -- (e);
+\path[->] (e) edge[loop above] node {$0$} (e)
+               edge[bend left=20] node[above] {$1$} (one)
+          (one) edge[bend left=20] node[below] {$0$} (e)
+                 edge node[above] {$1$} (sink)
+          (sink) edge[loop above] node {$0,1$} (sink);
+\end{tikzpicture}
+```
+
+These are exactly the six transitions displayed in the example: the two
+letters share the sink loop. Reading a second consecutive $1$ enters $\bot$,
+and subsequent letters keep the run there. The verification above is
+independent of this illustration.

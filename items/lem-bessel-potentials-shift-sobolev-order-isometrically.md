@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-bessel-potentials-shift-sobolev-order-isometrically.json
+  precheck: pass
 id: lem-bessel-potentials-shift-sobolev-order-isometrically
 kind: lemma
 title: "Bessel potentials shift Sobolev order"
@@ -26,9 +29,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"
@@ -123,7 +123,7 @@ locally integrable functions.
 
 ## Proof
 
-**Proof technique:** transport the two Fourier multipliers through the canonical identifications $H^\sigma\cong\mathcal W_\sigma$ and compare the resulting frequency weights.
+**Proof technique:** transport the two Fourier multipliers through the canonical identifications of Sobolev completions with their weighted distribution spaces and compare the resulting frequency weights.
 
 1.1 The bracket transfer. Let $U\in H^s$ with class $g=\langle\xi\rangle^s\mathcal F(E_sU)$ as in [F1] and put $u:=E_sU$, so $\mathcal Fu=u_{\langle\xi\rangle^{-s}g}$ by [F1] and [F3]. Since $\langle\xi\rangle^{-s}g$ is locally integrable by [F5], [F3] applied to the smooth symbol $\langle\xi\rangle^t$ and to the symbol $\langle\xi\rangle^{s-t}$ gives $$\mathcal F\bigl(\langle D\rangle^t u\bigr) =\langle\xi\rangle^t\mathcal Fu =u_{\langle\xi\rangle^{t-s}g},\qquad \langle\xi\rangle^{s-t}\mathcal F\bigl(\langle D\rangle^t u\bigr) =u_{\langle\xi\rangle^{s-t}\langle\xi\rangle^{t-s}g}=u_g .$$ Hence $\langle D\rangle^tu\in\mathcal W_{s-t}$ with weighted class $g$ and, by [F1], $\langle D\rangle^tu=E_{s-t}V$ for a unique $V\in H^{s-t}$ with $\|V\|_{H^{s-t}}=\|g\|_2=\|U\|_{H^s}$. The assignment $U\mapsto V=\Phi_t(U)$ is linear because $E_s$, $\langle D\rangle^t$ and $E_{s-t}^{-1}$ are linear on their domains [F1], [F2]; it preserves the norm and is therefore injective. [F1, F2, F3, F5, given]
 

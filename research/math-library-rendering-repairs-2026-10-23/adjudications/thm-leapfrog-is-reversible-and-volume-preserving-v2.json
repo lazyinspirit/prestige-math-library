@@ -1,0 +1,59 @@
+{
+  "id": "thm-leapfrog-is-reversible-and-volume-preserving",
+  "agent": "/root/rendering_repair_coordinator/bcs_013",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution --02 PNG visibly prints R^m, R^n and R^{m+n} in the first F8 reference. The current supplier title already wraps each expression in inline math and uses \\mathbb R, so the inherited reference is resolved upstream without changing this local link. Frozen and current assigned source had identical raw bytes before this repair.",
+      "action": "Retain implicit first F8 reference, using the corrected current supplier title.",
+      "status": "resolved-upstream"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "The same inspected standalone PNG visibly prints R^{m+n}, lambda_m, lambda_n and lambda_{m+n} in the second F8 reference. Its current supplier title still contains those undelimited forms. The supplier statement confirms the intended real Euclidean space and product Lebesgue measures.",
+      "action": "Add an explicit math-delimited label to the second F8 wikilink only, preserving the link target and full title meaning.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only the second F8 inherited reference receives an explicit label with inline math for Euclidean space and Lebesgue measures. The original flagged first reference is already corrected through its current supplier.",
+  "source_lines_after": [
+    74
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    {
+      "scope": "primary-supplier-observation; assigned carrier locally repaired",
+      "supplier_id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "current_supplier_title": "On Borel subsets of R^{m+n}, the product lambda_m times lambda_n agrees with lambda_{m+n}",
+      "screenshot": "research/math-library-rendering-audit-2026-10-23/bayesian-computational-statistics/screenshots/thm-leapfrog-is-reversible-and-volume-preserving--02.png",
+      "reason": "Still-raw current supplier title causes inherited raw notation; assigned carrier now supplies a local math label. Supplier was outside this agent write scope."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-leapfrog-is-reversible-and-volume-preserving.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "check": "Protected frontmatter exact bytes match archived before carrier",
+      "result": "pass"
+    },
+    {
+      "check": "Immediately-before-edit raw SHA256 guard",
+      "result": "pass",
+      "before_raw_sha256": "7eb0a1a0b628d477f57b379f7eb19396678458abf77bb646a58038c70654a2eb"
+    }
+  ],
+  "inspected_screenshots": [
+    "research/math-library-rendering-audit-2026-10-23/bayesian-computational-statistics/screenshots/thm-leapfrog-is-reversible-and-volume-preserving--02.png"
+  ],
+  "after_raw_sha256": "056b8b34932357805926d9342fe025b6195f40ddf983c691b0a68d0ebc74d321",
+  "supersedes_for_supplier_observation": "research/math-library-rendering-repairs-2026-10-23/adjudications/thm-leapfrog-is-reversible-and-volume-preserving.json"
+}

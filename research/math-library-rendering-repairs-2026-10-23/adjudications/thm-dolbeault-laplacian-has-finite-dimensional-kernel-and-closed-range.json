@@ -1,0 +1,79 @@
+{
+  "id": "thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range",
+  "agent": "/root/rendering_repair_coordinator/cxa_044",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly prints dollar delimiters and TeX command text in the proof-technique banner, while neighboring proof formulas typeset normally. The source uses ordinary inline math in this plain-text renderer field.",
+      "action": "Replaced banner-only $I-B$ and $\\Delta''$ with equivalent Unicode I − B and Δ″.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only the proof-technique banner at line 88 now uses Unicode math symbols, avoiding raw TeX in its plain-text uppercase renderer.",
+  "source_lines_after": [
+    {
+      "line": 88,
+      "text": "**Proof technique:** Use compact-perturbation facts for I − B and the exact Green identities for Δ″."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The proof-technique renderer remains plain text and uppercases its content; the local Unicode workaround avoids the defect without changing application code."
+  ],
+  "before_raw_sha256": "984bfab754698e97d2c83169764232bff3a3aaf5cba9aa45bf466e74bbea63f9",
+  "after_raw_sha256": "ff69b3a4669857bc19fa8d7efbeeb055dc8512daba74867adb29e7993e47e8b0",
+  "protected_frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range.md",
+            "item_id": "thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range--02.png",
+    "original_sha256": "270a8cf205278f1ea58c8d6ce491c5440226902c159ba13cf48a43a2110bed08",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa044-final/manifest.json",
+    "preview_manifest_sha256": "17653626b9fe444f0e4aed7fbba295b753dec87040cc6fcf394096bddbb469c9",
+    "source_sha256": "ff69b3a4669857bc19fa8d7efbeeb055dc8512daba74867adb29e7993e47e8b0",
+    "changed_region_tile": "research/math-library-rendering-repairs-2026-10-23/previews/cxa044-final/screenshots/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range--02.png",
+    "changed_region_tile_sha256": "6fc4c190987cf2719781607838e5938c36d57d476eb8326d1eca521545f44c53",
+    "inspection": "Viewed original and final changed-region tiles independently at original resolution. Final banner reads I − B and Δ″ without dollars or TeX commands.",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody preview only; 17 unrelated reference-map parse diagnostics recorded in manifest. First preview attempt refused an already-created output directory; rerun to a fresh directory succeeded."
+  }
+}

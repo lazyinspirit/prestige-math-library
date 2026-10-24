@@ -1,0 +1,128 @@
+{
+  "id": "thm-three-sat-reduces-to-three-colourability",
+  "agent": "/root/rendering_repair_coordinator/dcpt_017",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The concrete variable/clause graph of step 2.2 has a useful small local picture: the two triangles and the occurrence matching edges make the complementary colour constraints in steps 3.1 and 4.1 visible. Original standalone tile has no diagram; adding this explanatory figure is warranted under the expanded diagram criterion, without implying a proof gap.",
+      "action": "Appended final Remarks with one variable triangle and one clause gadget, explicitly labelled as an illustrative assignment and a partial graph.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory TikZ gadget illustration in final Remarks only; original title, body, proofs and frontmatter retained byte-for-byte as a prefix.",
+  "source_lines_after": [
+    61,
+    63,
+    65,
+    97
+  ],
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Variable panel: u, negated u, nu; colours 0,1,2 respectively.",
+      "relations": [
+        "u--negated u",
+        "negated u--nu",
+        "nu--u"
+      ],
+      "justification": "Exactly the triangle in local proof step 2.2; its three distinct colours implement step 3.1 and def-three-colourability. Each drawn vertex has degree 2 within this local panel. Both diagonals and the horizontal edge appear in native SVG and standalone PNG."
+    },
+    {
+      "objects": "Clause panel: three literal boundary vertices a,b,c coloured 0,1,0, and distinct position vertices p=(j,1), q=(j,2), r=(j,3) coloured 1,0,2.",
+      "relations": [
+        "p--q: colours 1/0",
+        "q--r: colours 0/2",
+        "r--p: colours 2/1",
+        "a--p: colours 0/1",
+        "b--q: colours 1/0",
+        "c--r: colours 0/2"
+      ],
+      "justification": "These are exactly the six local edges specified in step 2.2. The literal assignment is NAE; choose the first two unequal literal values for complementary position colours, and give the third position colour 2, as in step 3.1. Every displayed edge has unequal endpoint colours; a direct local Python check of all nine edges in both panels passed."
+    },
+    {
+      "objects": "Boundary and degree conventions",
+      "relations": [
+        "Nine displayed vertices and nine edges total",
+        "Variable panel degrees (2,2,2)",
+        "Clause position degrees (3,3,3); literal boundary degrees (1,1,1) within the displayed partial graph"
+      ],
+      "justification": "The native SVG has nine circular vertex outlines and nine line segments, with explicit third-to-first edges in both triangles. The SVG first combined edge path contains all three variable edges; the final combined path contains six clause edges. The standalone original-resolution preview confirms both closures without clipping or overlap. Caption explicitly omits other literal-incident edges and preserves identification of repeated literal labels while keeping position vertices distinct, as required by step 2.2."
+    },
+    {
+      "objects": "Logical role",
+      "relations": [
+        "No arrows, map equalities, or additional graph edges are asserted",
+        "No change to statements, dependencies or proof steps"
+      ],
+      "justification": "The caption identifies an example of the existing colouring construction; original proof remains complete and independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-three-sat-reduces-to-three-colourability.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-three-sat-reduces-to-three-colourability.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-three-sat-reduces-to-three-colourability.md",
+            "item_id": "thm-three-sat-reduces-to-three-colourability",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-three-sat-reduces-to-three-colourability.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcpt-017 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-three-sat-reduces-to-three-colourability --out research/math-library-rendering-repairs-2026-10-23/previews/dcpt-017",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    },
+    {
+      "check": "Before edit raw SHA256 guard matched 7aa52829ad90370b2084b41aaccedead4262ec006111d7b86ba88b4d58bbdf28; frozen/current cmp matched. After edit frontmatter bytes matched and current source starts with entire original source.",
+      "pass": true
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-three-sat-reduces-to-three-colourability--01.png",
+    "original_sha256": "33f721cf760b5c6111b00b58a76cafa5e00df613696a48f89c5f36a67da363ab",
+    "path_discrepancy": "Entry inspection_dir/evidence_dir diagram-supplement/screenshots does not contain the PNG. Authentic PNG located in parent category screenshots; SHA256 equals recorded finding hash.",
+    "inspection": "Original tile 01 and both fresh preview tiles inspected separately at original resolution. Fresh tile 02 shows complete diagram with all labels, edge closures and matching connectors.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-017/manifest.json",
+    "source_sha256": "38b4befa758c0435403f9cfc9540cae02a2467a80f988c5fa2beaf221efd1770",
+    "html_sha256": "12ce0b8542d3c89cc0c130e667237ac963821764e9d08be44d9d3c283aa9b2e1"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody native preview only, not production route or HTTP. Preview reports 16 unrelated reference-title-map parse diagnostics; scoped precheck and rendercheck pass without warnings."
+  ]
+}

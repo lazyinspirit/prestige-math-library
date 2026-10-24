@@ -1,0 +1,81 @@
+{
+  "id": "thm-stationary-entropy-rate-limit",
+  "agent": "/root/rendering_repair_coordinator/info_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original-resolution audit tile visibly prints n^{-1}H(X_0,...,X_{n-1}) as prose, including literal braces and underscores. Frozen/current pre-edit source agrees and has no dollar delimiters. The expression is precisely the block entropy per symbol used in the existing proof.",
+      "action": "Enclosed the unchanged block entropy expression in inline math and used \\ldots for its existing ellipsis.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Proof step 3.1 contains the TeX text accent Ces\\`aro outside math; the original tile visibly retains the raw accent marker instead of accented prose.",
+      "action": "Replaced only Ces\\`aro with Unicode Cesàro.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset the existing Statement expression and replace one unparsed prose accent. No title or protected metadata edits.",
+  "source_lines_after": [
+    28,
+    50
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "f22f975bfb0b023b4502bb42ca0a037038334b399231a01c013bd11fa769a393",
+  "after_raw_sha256": "594012e4a16714ac478de78628045222b647e3e92fd3949f19373c84d5f9adc6",
+  "guard": "Immediately before the sole item edit, asserted raw SHA256 equals queue before_raw_sha256.",
+  "protected_metadata_byte_identical": true,
+  "publication_status": "published, byte-identical frontmatter",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-stationary-entropy-rate-limit.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects",
+      "baseline": "Same result before edit; no pre-existing layout defects."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-stationary-entropy-rate-limit.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-stationary-entropy-rate-limit.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/thm-stationary-entropy-rate-limit--01.png",
+    "original_resolution_inspected": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/info_003-native/manifest.json",
+    "preview_source_sha256": "594012e4a16714ac478de78628045222b647e3e92fd3949f19373c84d5f9adc6",
+    "native_tile": "research/math-library-rendering-repairs-2026-10-23/previews/info_003-native/screenshots/thm-stationary-entropy-rate-limit--01.png",
+    "native_changed_region_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/info_003-native/statement-crop.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/info_003-native/proof-crop.png"
+    ],
+    "assessment": "Standalone original-resolution native region crops show superscripts/subscripts/ellipsis correctly rendered in the Statement and Cesàro correctly accented in proof step 3.1, without changed-region clipping. Full PNG viewer showed missing glyph artifacts; native pixel crops show complete text.",
+    "limitations": "Local native ItemBody preview only, not production route; manifest reports 13 unrelated reference-map parse diagnostics."
+  },
+  "blocker": null
+}

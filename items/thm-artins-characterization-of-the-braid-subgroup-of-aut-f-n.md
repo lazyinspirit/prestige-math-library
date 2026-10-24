@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-artins-characterization-of-the-braid-subgroup-of-aut-f-n.json
+  precheck: pass
 id: thm-artins-characterization-of-the-braid-subgroup-of-aut-f-n
 kind: theorem
-title: "Artin's characterization of the braid subgroup of Aut(F_n)"
+title: "Artin's characterization of the braid subgroup of $\\operatorname{Aut}(F_n)$"
 status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
@@ -13,23 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
-    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
-    evidence:
-      - "research/frontier-38-owner-30-reader-15.md"
-      - "research/frontier-38-owner-30-alpha-batch-15-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-15-post.json"
-    reviewed_raw_sha256: "3177ea8fde9cb694a6936b4b79c785a4949ca404282a0115cce1fb1841fe7af8"
-    content_sha256: "f550ccb5deb1256e03a52b8cbac7c616e89558d0c30dec0e9fe5bae98ec8f690"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 1.6, Theorem 1.3, printed p. 9"

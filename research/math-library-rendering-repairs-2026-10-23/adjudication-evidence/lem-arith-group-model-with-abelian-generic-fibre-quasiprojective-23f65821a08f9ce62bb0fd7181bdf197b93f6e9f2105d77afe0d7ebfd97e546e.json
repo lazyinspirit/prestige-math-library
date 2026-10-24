@@ -1,0 +1,35 @@
+{
+  "id": "lem-arith-group-model-with-abelian-generic-fibre-quasiprojective",
+  "agent": "/root/rendering_repair_coordinator/ag_026",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution screenshot --02 visibly prints dollar delimiters and the raw \\mathcal command in the proof-technique banner, while the same notation renders mathematically in the proof. The banner is a plain-text field.",
+      "action": "Replaced only the banner notation $\\mathcal O(D)$ and $H$ with equivalent readable Unicode 𝒪(D) and plain H.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use 𝒪(D) and H in the plain-text proof-technique banner; all other source bytes are unchanged.",
+  "source_lines_after": {
+    "59": "**Proof technique:** direct: fibre-density lets the square produce enough sections of 𝒪(D) to cover H, and the affine-section chart construction embeds the model projectively."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation persists: proof-technique banners do not interpret inline LaTeX; this item uses plain-text-compatible notation."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-arith-group-model-with-abelian-generic-fibre-quasiprojective.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "check": "Exact frontmatter including publication status preserved",
+      "passed": true
+    }
+  ]
+}

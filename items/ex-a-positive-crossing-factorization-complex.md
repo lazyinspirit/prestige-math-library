@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-positive-crossing-factorization-complex.json
+  precheck: pass
 id: ex-a-positive-crossing-factorization-complex
 kind: example
 title: "A positive crossing factorization complex"
@@ -13,8 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -70,7 +71,7 @@ $\chi_0$; this example uses the corrected $\chi_1$ complex of
 
 ## Verification
 
-**Proof technique:** direct transcription with the two matrix verifications that make each presentation a factorization of potential $w$.
+**Proof technique:** direct transcription with the two matrix verifications that make each presentation a factorization of potential w.
 
 1.1 *The products are factorizations.* Multiplying out over $R$ gives $P_1P_0=\left(\begin{smallmatrix}a(x_1+x_2-x_3-x_4)&0\\ 0&a(x_1+x_2-x_3-x_4)\end{smallmatrix}\right)=w\cdot I_2$ and $Q_1Q_0=\left(\begin{smallmatrix}w&0\\ 0&w\end{smallmatrix}\right)=w\cdot I_2$, because the off-diagonal entries $(x_1-x_4)(x_3-x_2)+(x_2-x_3)(x_1-x_4)$ and $(x_1+x_2-x_3-x_4)(x_3x_4-x_1x_2)+(x_1x_2-x_3x_4)(x_1+x_2-x_3-x_4)$ vanish; hence both presentations are factorizations with potential $w$, in accordance with [F1]. [F1, algebra]
 

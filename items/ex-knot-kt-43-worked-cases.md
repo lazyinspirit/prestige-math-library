@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-43-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-43-worked-cases
 kind: example
-title: "Trefoil and 5_2 knot Floer genus and fibering cases"
+title: "Trefoil and $5_2$ knot Floer genus and fibering cases"
 status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
@@ -36,18 +39,7 @@ sources:
     - title: "Knot Atlas, 3_1 and 5_2 tables"
       url: "https://katlas.org/wiki/5_2"
       locator: "Polynomial invariants / Alexander polynomial; compare https://katlas.org/wiki/3_1, same section"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
+
 ---
 
 ## Example

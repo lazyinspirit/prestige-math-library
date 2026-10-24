@@ -1,0 +1,77 @@
+{
+  "id": "thm-cut-time-is-positive-and-continuous",
+  "agent": "/root/rendering_repair_coordinator/dg_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed original standalone tile --02 at original resolution. Its CSS-uppercase technique banner shows literal $\\EXP_P$ while the surrounding proof uses correctly typeset mathematics. Frozen and current source initially matched exactly; the banner contained inline $\\exp_p$ in the plain-text technique field.",
+      "action": "Replaced only the technique-banner expression with the equivalent plain prose “the exponential map at p”.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Technique banner: $\\exp_p$ → the exponential map at p; no other item text or metadata changed.",
+  "source_lines_after": {
+    "99": "**Proof technique:** minimizing times are read off as distance equalities; upper semicontinuity contradicts minimality at a fixed later time, and lower semicontinuity uses local invertibility of the exponential map at p plus the two-minimizer alternative at a hypothetical drop."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: proof-technique text is plain React text with uppercase CSS and does not typeset inline math. Local prose workaround verified."
+  ],
+  "before_raw_sha256": "74be2f199f39bc55f8189907f544c493d458eaf9ae3d34bf5a11f4b9746a1056",
+  "after_raw_sha256": "b2cf85d85a052790c13d3fa967b7e31ec2a2503e48420d1890803a144f367e09",
+  "protected_metadata_preserved": true,
+  "publication_status_preserved": "published; entire frontmatter byte-identical",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-cut-time-is-positive-and-continuous.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-cut-time-is-positive-and-continuous.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-cut-time-is-positive-and-continuous.md",
+            "item_id": "thm-cut-time-is-positive-and-continuous",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-cut-time-is-positive-and-continuous.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-cut-time-is-positive-and-continuous--02.png",
+    "original_resolution": true,
+    "preview_command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dg013-native node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-cut-time-is-positive-and-continuous --out research/math-library-rendering-repairs-2026-10-23/previews/dg013-native",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg013-native/manifest.json",
+    "manifest_sha256": "fcf5aa4369b510bd6cda3af5bc29cc2827ad5c996fe855bdb3cc6fd8879a699d",
+    "source_sha256": "b2cf85d85a052790c13d3fa967b7e31ec2a2503e48420d1890803a144f367e09",
+    "inspected_current_tile": "research/math-library-rendering-repairs-2026-10-23/previews/dg013-native/screenshots/thm-cut-time-is-positive-and-continuous--02.png",
+    "outcome": "Original-resolution standalone native preview shows readable technique prose with no raw dollar delimiters or TeX commands; technique banner fits in two lines.",
+    "limits": "Local ItemBody preview, not production route; unrelated reference-map parse diagnostics: 16."
+  }
+}

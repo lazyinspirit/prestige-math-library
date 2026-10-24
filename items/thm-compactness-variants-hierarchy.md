@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-compactness-variants-hierarchy.json
+  precheck: pass
 id: thm-compactness-variants-hierarchy
 kind: theorem
-title: "Compact implies countably compact, Lindel\\\"of and limit point compact; countably compact together with Lindel\\\"of implies compact; and, at the cost of countable or dependent choice, sequentially compact implies countably compact, countably compact implies limit point compact, and the converse holds when every singleton is closed"
+title: "Compact implies countably compact, Lindelöf and limit point compact; countably compact together with Lindelöf implies compact; and, at the cost of countable or dependent choice, sequentially compact implies countably compact, countably compact implies limit point compact, and the converse holds when every singleton is closed"
 status: published
 origin: session
 provenance:
@@ -13,14 +16,6 @@ aliases: [thm-compactness-hierarchy]
 landmark: true
 short: "the compactness hierarchy"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -39,7 +34,7 @@ pipeline_run: null
 
 Let $(X, \mathcal{T})$ be a topological space ([[def-topological-space]]), with
 compactness as in [[def-compact-space]] and the variants as in
-[[def-compactness-variants]]. Then:
+[[def-compactness-variants|Countably compact, Lindelöf, sequentially compact, limit point compact and $\sigma$-compact spaces, and relatively compact subsets]]. Then:
 
 1. **Theorems of ZF.**
    - (a) If $X$ is compact it is countably compact and Lindel&ouml;f.
@@ -71,7 +66,7 @@ about the axiom it belongs to is asserted.
 
 **Given:** A topological space $(X, \mathcal{T})$.
 
-[L1] $X$ is compact when every open cover has a finite subcover; countably compact when every at most countable open cover has a finite subcover; Lindel&ouml;f when every open cover has an at most countable subcover; sequentially compact when every sequence has a convergent subsequence; limit point compact when every infinite subset has a limit point in $X$ ([[def-compact-space]], [[def-compactness-variants]]).
+[L1] $X$ is compact when every open cover has a finite subcover; countably compact when every at most countable open cover has a finite subcover; Lindel&ouml;f when every open cover has an at most countable subcover; sequentially compact when every sequence has a convergent subsequence; limit point compact when every infinite subset has a limit point in $X$ ([[def-compact-space]], [[def-compactness-variants|Countably compact, Lindelöf, sequentially compact, limit point compact and $\sigma$-compact spaces, and relatively compact subsets]]).
 
 [L2] A finite family is at most countable, and *infinite* means not finite ([[def-countable]]).
 

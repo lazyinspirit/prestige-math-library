@@ -1,0 +1,65 @@
+---
+id: lem-no-saddle-polyhedral-two-spheres-bound-parametrized-pl-balls
+kind: lemma
+title: "Polyhedral two-spheres without height saddles bound parametrized piecewise linear balls"
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [ lem-finite-polygonal-disk-and-collar-surgery, lem-finite-convex-cell-complexes-admit-compatible-triangulations, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation, lem-parametrized-pl-balls-absorb-standard-boundary-windows, lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings, lem-finite-pl-level-collars-give-global-band-products ]
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: "J. W. Alexander, On the subdivision of 3-space by a polyhedron"
+      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/"
+      locator: "PNAS 10 (1924), pp.6–8, especially the zero-critical-loop base case on p.7. The finite PL parameter construction below replaces the source's potential-coordinate construction."
+dependency_level: 4
+---
+
+## Statement
+
+Let $S\subset\mathbb R^3$ be a finite linearly embedded triangulated two-sphere and $h$ an affine height function taking distinct values on its vertices. Assume there is exactly one minimum vertex $v_-$, exactly one maximum vertex $v_+$, and every other vertex has the following regular height link: its small centered polyhedral link circle meets the horizontal plane through that vertex in exactly two crossing points, with its positive and negative parts each one open arc. Then $S$ is the boundary of a compact finite polyhedron $Q\subset\mathbb R^3$ admitting a finite PL homeomorphism, with PL inverse, to a convex three-ball. The set $Q$ is the closure of the bounded side of $S$, and the other side is connected and unbounded. No choice hypothesis or general three-dimensional Schoenflies theorem is assumed.
+
+## Facts & Assumptions
+
+**Given:** The finite embedded sphere and the stated generic height and regular-link conditions.
+
+[F1] Simple polygons bound parametrized polygonal disks, prescribed boundary maps extend over these disks, and polygonal arcs admit finite disk-and-strip neighborhoods ([[lem-finite-polygonal-disk-and-collar-surgery]]).
+
+[F2] Finite convex cell complexes and finite PL marked subpolyhedra admit compatible triangulations and subdivisions ([[lem-finite-convex-cell-complexes-admit-compatible-triangulations]], [[lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation]]).
+
+[F3] Parametrized PL three-balls glued along parametrized boundary two-disks form a parametrized PL three-ball ([[lem-parametrized-pl-balls-absorb-standard-boundary-windows]]).
+
+[F4] A regular polyhedral surface cone has a local height-preserving PL straightening ([[lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings]]).
+
+[F5] Compact finite PL height bands with locally collared level fibers on both sides have global height-preserving PL product parameters ([[lem-finite-pl-level-collars-give-global-band-products]]).
+
+## Proof
+
+**Given:** The stated embedded sphere and height. Apply an affine coordinate change so $h$ is the last coordinate.
+
+1.1 We will use the following finite two-dimensional link construction. A simple polygonal circle $C$ in a standard PL two-sphere bounds two parametrized PL disks. To verify it, replace the sphere by a tetrahedral boundary using its supplied standard parameter and choose a tetrahedral vertex $q$ off $C$. If necessary move a point off $C$ to that vertex by finitely many small polygonal chart point pushes, each obtained by moving the center of a triangle fan in a convex polygon and fixing its boundary. Truncate a sufficiently small cone at $q$ disjoint from $C$. The remainder of the tetrahedral boundary has a finite planar disk parameter: its opposite face maps to a smaller concentric planar triangle, and its three quadrilateral strips to the surrounding triangular annulus, by the disk boundary extension in [F1]. The image of $C$ is a simple polygon inside this triangle. Its inner disk is supplied by [F1]. The region between it and the outer triangle is a PL annulus: cut along a thin strip about a polygonal joining arc, parametrize the resulting polygonal disk by [F1], then restore the strip. Filling the annulus's outer end with the removed cone at $q$ gives the second disk. The same disk boundary-extension result makes their common circle parameters agree. Consequently a cone on either link disk is a half-ball, and coning the two compatible disk parameters gives the standard local pair of a plane and its two half-spaces. This construction applies to the link circle at every point of $S$, including points made vertices by subdivision. [given, F1, F2, construct]
+
+2.1 Construct a compact finite polyhedral region with boundary $S$ without assuming a three-dimensional separation theorem. Choose a point $p$ off the finitely many triangle planes and cone each triangle $\tau$ of $S$ to $p$, obtaining finitely many nondegenerate tetrahedra. Regard their sum with coefficients in $\mathbb F_2$. Its boundary is exactly the triangle sum of $S$: the cone on each sphere edge occurs twice and cancels. Subdivide the union of these tetrahedra by their finitely many face planes and triangulate compatibly by [F2]. Give each full-dimensional cell the parity of the number of tetrahedra containing its interior, and let $Q$ be the union of the closures of odd cells. It is a compact finite polyhedron. At a generic point of a subdivision face not in $S$, the two adjacent parity coefficients agree by the preceding boundary cancellation; at a face in $S$ they differ by one. Thus parity extends as a locally constant function on $\mathbb R^3\setminus S$ and changes across $S$. To justify extension at subdivision edges or vertices off $S$, join nearby full-dimensional cells by a small polygonal path missing the codimension-two skeleton; each crossed face is outside $S$ and preserves parity. At a point of $S$, use the two half-ball charts of step 1.1; on each side the same small-path argument makes parity constant, and a transverse face crossing shows the two values differ. Therefore $\partial Q=S$ and $Q$ has a local PL half-ball chart along $S$ and an ordinary interior chart elsewhere. [F2, step 1.1, construct]
+
+3.1 Both sides of $S$ are connected. The local $Q$ side along $S$ belongs to a single component of $\operatorname{Int}Q$: each surface chart has a connected half-ball side, and paths in the connected sphere propagate that component from one chart to the next. Any additional component would have a nonempty boundary in $S$, since an open nonempty bounded component cannot be closed in $\mathbb R^3$; a boundary point would contradict the chart description just given. The same reasoning applies to $\mathbb R^3\setminus Q$: all its local sides along $S$ belong to one component, and any component has a boundary point in $S$ unless it is both open and closed in $\mathbb R^3$. Hence it is connected; it contains the complement of a large box and is unbounded. These arguments use only elementary polygonal path connectedness of open subsets and connectedness of Euclidean space; a nonempty bounded open component has a boundary point by intersecting a segment from one of its points to a point outside its closure. Thus $Q$ is precisely the closure of the bounded side. Moreover $h$ achieves its minimum and maximum on $Q$ at $S$: an interior extremum of a nonconstant affine coordinate is impossible. They are consequently $h(v_-)$ and $h(v_+)$. [given, step 2.1, construct]
+
+4.1 At the minimum vertex $v_-$, the whole surface link lies strictly above its horizontal plane. The link disk on the $Q$ side supplied by step 1.1 also lies strictly above that plane. Indeed the complementary link component contains every lower direction, which cannot belong to $Q$ by step 3.1; hence the $Q$ link is the other disk, disjoint from the closed lower hemisphere. Choose $\alpha>h(v_-)$ sufficiently close to the minimum that $Q\cap\{h\le\alpha\}$ lies within the conical star of this vertex. Such a choice exists by compactness of the complement of any smaller vertex neighborhood, whose minimum height is strictly larger. In that star the set is exactly the cone from $v_-$ to its planar section $D_-=Q\cap\{h=\alpha\}$. This section is a parametrized polygonal disk: radial projection of the upper link disk to the section plane is a homeomorphism, and each cone face cuts it in a finite straight segment. Its boundary is a simple polygon, its interior is its bounded side, and [F1] supplies a finite PL disk parameter. Coning that parameter from $v_-$ gives a PL parameter of the cap as a three-ball. Apply the reversed-height argument at $v_+$ to obtain $\beta< h(v_+)$ with a parametrized upper cap and disk section $D_+$. Take the caps small enough that $\alpha<\beta$ and neither end level contains a sphere vertex. [F1, F2, step 1.1, step 3.1, construct]
+
+5.1 Every point of the middle band $P=Q\cap\{\alpha\le h\le\beta\}$ has a local PL height-product chart, with a one-sided chart at the two end levels. At an interior point of $Q$ this is the ordinary linear coordinate chart. At a sphere vertex it follows from the assumed regular link and [F4], using the $Q$ half-space side identified in step 2.1. At an interior point of a sphere triangle its plane is not horizontal because its vertices have distinct heights, so the regular cone condition holds there as well. At an interior point of a sphere edge that edge has nonzero height slope, again by distinct vertex heights; the two incident face half-planes give a link circle with exactly two horizontal crossings, so [F4] applies after subdividing at that point. These charts give precisely the local one-sided fiber collars required by [F5]. Thus [F5] gives a finite PL height-preserving homeomorphism $D_-\times[\alpha,\beta]\to P$, fixed on the bottom. In particular the whole middle band, not just the individual vertex-free slabs, has a verified finite product parameter. [given, F4, F5, step 2.1, step 4.1, construct]
+
+6.1 The product of the disk parameter of $D_-$ with the interval identifies $P$ with a convex polygon times an interval, a convex three-ball; compatible prism triangulations in [F2] make this a finite PL parameter. The lower cap meets $P$ in exactly its entire disk $D_-$, and the upper cap meets it in exactly $D_+$. Both disks lie in the respective boundaries, and the cap interiors are disjoint from the middle band and from one another by their height ranges. Glue the lower cap to $P$ by [F3], obtaining a parametrized three-ball; the remaining upper disk is still a boundary disk, since locally it is the untouched top face of the middle product. Glue the upper cap by [F3] once more. The resulting parametrized ball is exactly $Q$. Its boundary is the original $S$ by step 2.1. All coning, plane arrangements, collar-leveling operations, interval subdivisions and gluings were finite. Thus this no-saddle ball parameter requires neither choice nor an already known general three-dimensional Schoenflies theorem. [given, F2, F3, step 2.1, step 5.1, construct] ∎

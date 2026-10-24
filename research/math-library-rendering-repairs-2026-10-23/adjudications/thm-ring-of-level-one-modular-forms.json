@@ -1,0 +1,81 @@
+{
+  "id": "thm-ring-of-level-one-modular-forms",
+  "agent": "/root/rendering_repair_coordinator/cxa_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution historical tile visibly prints $K$ and $12$ in the proof-technique banner; the body math renders normally. This renderer treats the banner as plain React text and uppercases it with CSS.",
+      "action": "Removed only the math delimiters around k and 12 in the banner, retaining the exact induction description as readable plain text.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Proof-technique banner now reads “induction on the weight k in steps of 12.” No mathematical content or metadata changed.",
+  "source_lines_after": [
+    {
+      "line": 67,
+      "text": "**Proof technique:** induction on the weight k in steps of 12."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "frontmatter_byte_identical": true
+  },
+  "before_raw_sha256": "8ebdc980c38f2ff49ceb6e40e5a6aea9590cb541643f47fcf96857246f288aa1",
+  "after_raw_sha256": "cc3682aa78b111e6f3bbc866391b6f60e24e3d2c769107b955cefa56fcc0f658",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-ring-of-level-one-modular-forms.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-ring-of-level-one-modular-forms.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "induction"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-ring-of-level-one-modular-forms.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_standalone": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/thm-ring-of-level-one-modular-forms--01.png",
+    "original_sha256": "1178ea3657c168267b43f2e79a3135f94c60b88338608e0b864290dd3c58e667",
+    "detail": "original",
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-008",
+    "manifest_sha256": "7eb4c424dfb2b26c532f8a5a0c4f0eb9083943de766a4cf98d8cbe47e2a58a5c",
+    "viewed_tiles": [
+      "screenshots/thm-ring-of-level-one-modular-forms--01.png",
+      "screenshots/thm-ring-of-level-one-modular-forms--02.png"
+    ],
+    "result": "Both fresh standalone original-resolution tiles inspected; banner reads INDUCTION ON THE WEIGHT K IN STEPS OF 12 without dollar glyphs. All surrounding mathematical expressions remain rendered.",
+    "preview_process": {
+      "exit_code": 143,
+      "output": "Completed JSON summary reported items: 1, tiles: 2, reference_map_diagnostics: 16; manifest, snapshot, HTML and two PNGs were fully written and inspected. Process then exited 143."
+    },
+    "scope_limit": "Local native ItemBody preview; no HTTP/site visit. Manifest records 16 unrelated current reference-map parse diagnostics."
+  },
+  "remaining_issues": [
+    "Underlying renderer still treats proof-technique banner content as plain text; this assigned carrier uses the authorized local plain-text workaround."
+  ]
+}

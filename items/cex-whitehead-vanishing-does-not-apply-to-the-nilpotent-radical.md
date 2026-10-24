@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical.json
+  precheck: pass
 id: cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical
 kind: counterexample
 title: "Whitehead vanishing does not apply to the nilpotent radical"
@@ -11,11 +14,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Peter Woit, Lie Algebra Cohomology and the Borel–Weil–Bott Theorem (Math G4344, Spring 2012), printed pp.1–7"
@@ -42,7 +40,7 @@ sources:
 
 ## Counterexample
 
-**Proof technique:** compute $H^0$ and $H^1$ directly for the abelian nilradical.
+**Proof technique:** compute degree-zero and degree-one cohomology directly for the abelian nilradical.
 
 1.1 In degree zero, $C^0(\mathfrak n^+,\mathbb C)=\mathbb C$ and $(d^0a)(x)=x\cdot a=0$ for every $x\in\mathfrak n^+$ and $a\in\mathbb C$ by [L1]; hence $d^0=0$ and $H^0(\mathfrak n^+,\mathbb C)=\mathbb C$. [L1, L2]
 

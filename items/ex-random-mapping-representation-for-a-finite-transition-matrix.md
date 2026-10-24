@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-random-mapping-representation-for-a-finite-transition-matrix.json
+  precheck: pass
 id: ex-random-mapping-representation-for-a-finite-transition-matrix
 kind: example
 title: "Random-mapping representation for a finite transition matrix"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Levin, Peres, Wilmer, Markov Chains and Mixing Times, Section 1.2"
@@ -48,3 +45,40 @@ is the $p$-chain.
 3.1 Let $\mathcal H_n=\sigma(X_0,U_1,\ldots,U_n)$; then $X_n$ is [F1, F2, step 1.1, step 2.1] $\mathcal H_n$-measurable and [F1] makes $U_{n+1}$ independent of $\mathcal H_n$. For each $s_j$, $$ 1_{\{F(X_n,U_{n+1})=s_j\}} =\sum_{i=1}^d1_{\{X_n=s_i\}}1_{\{U_{n+1}\in I_{ij}\}}, $$ where $I_{ij}$ is the row interval from step 1.1. Conditioning term by term and using step 2.1 gives $p(X_n,s_j)$. Summing over $s_j\in A$ proves the transition identity for every $A\subseteq S$, hence [F2] gives the $p$-chain. Empty/full $A$ and time zero are included. Choice is used only for conditional expectations and, if a canonical realization is requested, by its path-law supplier. [F1, F2, step 1.1, step 2.1]
 
 4.1 Together with steps 1.1--3.1, consider $S=\varnothing$: the unique map [given, step 1.1, step 2.1, step 3.1] $\varnothing\times[0,1]\to\varnothing$ satisfies the row-law assertion vacuously, but no probability initial law—and hence no chain—exists on $S$. [given, step 1.1, step 2.1, step 3.1] ∎
+
+
+## Remarks
+
+For a concrete illustration, take $S=\{s_1,s_2\}$ and transition matrix
+$$p=\begin{pmatrix}1/3&2/3\\3/4&1/4\end{pmatrix}.$$
+The two bars show the row intervals from step 1.1. At the illustrated input
+$u=1/2$, the first row gives $F(s_1,u)=s_2$, while the second gives
+$F(s_2,u)=s_1$. Each internal boundary belongs to the interval on its right;
+the endpoint $1$ belongs to the final interval.
+
+```tikz
+\begin{tikzpicture}[x=8cm,y=1cm]
+\draw (0,1.6) rectangle (1,2.2);
+\draw (0.333333,1.6) -- (0.333333,2.2);
+\draw (0,0) rectangle (1,0.6);
+\draw (0.75,0) -- (0.75,0.6);
+\node[left] at (0,1.9) {$x=s_1$};
+\node[left] at (0,0.3) {$x=s_2$};
+\node at (0.166667,1.9) {$s_1$};
+\node at (0.666667,1.9) {$s_2$};
+\node at (0.375,0.3) {$s_1$};
+\node at (0.875,0.3) {$s_2$};
+\node[below] at (0,1.6) {$0$};
+\node[below] at (0.333333,1.6) {$1/3$};
+\node[below] at (1,1.6) {$1$};
+\node[below] at (0,0) {$0$};
+\node[below] at (0.75,0) {$3/4$};
+\node[below] at (1,0) {$1$};
+\draw[dashed] (0.5,-0.1) -- (0.5,2.7);
+\node[above] at (0.5,2.7) {$u=1/2$};
+\end{tikzpicture}
+```
+
+The bars illustrate alternative evaluations of $F$, not two simultaneous
+chain updates. At time $n$, only the row $x=X_n$ is used, with the fresh input
+$U_{n+1}$. The rigorous verification above is independent of the illustration.

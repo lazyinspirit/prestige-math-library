@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-tensor-crystal-b-one-tensor-b-one-for-sl-two.json
+  precheck: pass
 id: ex-tensor-crystal-b-one-tensor-b-one-for-sl-two
 kind: example
 title: "The tensor crystal $B(1)\\otimes B(1)$ for $\\mathfrak{sl}_2$"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 9
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -66,3 +67,24 @@ Consequently: $v_0\otimes v_0$ is the unique highest vertex of weight $2\lambda_
 4.1 Identify the components. The three-element chain has top weight $2\lambda_1$, middle weight $0$, bottom weight $-2\lambda_1$ and one colour; a connected crystal with a unique highest vertex of weight $2\lambda_1$ and $\varepsilon_1+\varphi_1+1=3$ vertices in its only string is the rank-one crystal $B(2)$ of [F5] (the $m=2$ case of the same rank-one description). The remaining vertex is killed by both operators and has weight $0$, so it is $B(0)$. This identifies the two components without invoking the general uniqueness theorem, so the example is choice-free. [step 3.1, step 2.1, F4, F5]
 
 5.1 Cross-check the module decomposition directly. Put $z=q_1$, $t=v_0\otimes v_0$ and $s=v_0\otimes v_1-zv_1\otimes v_0$. The coproduct convention underlying [F2] and the rank-one action of [F1] give $E_1t=0$, $F_1t=v_1\otimes v_0+zv_0\otimes v_1$, $F_1^{(2)}t=v_1\otimes v_1$, and $E_1s=F_1s=0$, $K_1s=s$. The two weight-zero vectors $F_1t,s$ are independent because their coefficient determinant is $1+z^2\ne0$. Hence the three-dimensional cyclic string of $t$ and the trivial line of $s$ sum directly to the four-dimensional tensor module; [F1] identifies them as $V(2)$ and $V(0)$. This gives $4=3+1$, and the corresponding classical two-dimensional tensor square has the same dimensions and highest weights. [step 4.1, F1, F2, algebra] ∎
+
+## Remarks
+
+The arrows below are the colour-$1$ lowering operator $\tilde f_1$; $\tilde e_1$ reverses them. Beneath each vertex are its weight and its pair $(\varepsilon_1,\varphi_1)$. The separated vertex has no incident arrows. Thus the figure illustrates the crystal components $B(2)$ and $B(0)$ computed above; the module decomposition is verified independently in step 5.1.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (a) at (0,0) {$v_0\otimes v_0$};
+\node (b) at (3,0) {$v_1\otimes v_0$};
+\node (c) at (6,0) {$v_1\otimes v_1$};
+\draw[->] (a) -- node[above] {$1$} (b);
+\draw[->] (b) -- node[above] {$1$} (c);
+\node at (0,-0.65) {$2\lambda_1;\ (0,2)$};
+\node at (3,-0.65) {$0;\ (1,1)$};
+\node at (6,-0.65) {$-2\lambda_1;\ (2,0)$};
+\node at (-1.6,-0.3) {$B(2)$};
+\node (d) at (3,-1.8) {$v_0\otimes v_1$};
+\node at (3,-2.45) {$0;\ (0,0)$};
+\node at (-1.6,-2.1) {$B(0)$};
+\end{tikzpicture}
+```

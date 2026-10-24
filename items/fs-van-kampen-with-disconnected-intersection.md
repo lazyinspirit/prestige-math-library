@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-van-kampen-with-disconnected-intersection.json
+  precheck: pass
 id: fs-van-kampen-with-disconnected-intersection
 kind: false-statement
 title: "FALSE: the two-set van Kampen conclusion needs no path-connectedness hypothesis on the overlap"
@@ -17,9 +20,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-21
 sources:
   scraped: []
   references:
@@ -58,3 +58,43 @@ $$\pi_1(U,x_0)\longleftarrow\pi_1(C,x_0)\longrightarrow\pi_1(V,x_0).$$
 
 4.1 The actual group $\pi_1(Q,[0])$ is isomorphic to $\mathbb Z$ by [F3], so it is nontrivial and cannot be the pushout computed in step 3.1. Thus the false claim fails for this cover, and path-connectedness of the full overlap cannot be omitted from the two-set theorem. [step 3.1, F3] ∎
 
+
+## Remarks
+
+In the illustration, $[t]$ is placed at angle $2\pi t$, increasing counterclockwise from the rightmost point $[0]$. Thick arcs show the indicated open sets; hollow endpoint rings are excluded. The two thick arcs in the last panel are precisely the two components of $U\cap V$ in step 1.1: $C=p((-1/8,1/8))$ on the right and $p((3/8,5/8))$ on the left. The dashed circles provide the ambient $Q$ only. The refutation above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.8]
+\begin{scope}
+\draw[gray,dashed] (0,0) circle (1);
+\draw[cyan,very thick] (-45:1) arc (-45:225:1);
+\draw[cyan,fill=white,thick] (-45:1) circle (0.06);
+\draw[cyan,fill=white,thick] (225:1) circle (0.06);
+\fill (1,0) circle (0.035);
+\node[right] at (1.08,0) {$[0]$};
+\node at (0,1.4) {$U$};
+\end{scope}
+\begin{scope}[xshift=3.5cm]
+\draw[gray,dashed] (0,0) circle (1);
+\draw[orange,very thick] (135:1) arc (135:405:1);
+\draw[orange,fill=white,thick] (135:1) circle (0.06);
+\draw[orange,fill=white,thick] (405:1) circle (0.06);
+\fill (1,0) circle (0.035);
+\node[right] at (1.08,0) {$[0]$};
+\node at (0,1.4) {$V$};
+\end{scope}
+\begin{scope}[xshift=7cm]
+\draw[gray,dashed] (0,0) circle (1);
+\draw[cyan,very thick] (-45:1) arc (-45:45:1);
+\draw[orange,very thick] (135:1) arc (135:225:1);
+\draw[cyan,fill=white,thick] (-45:1) circle (0.06);
+\draw[cyan,fill=white,thick] (45:1) circle (0.06);
+\draw[orange,fill=white,thick] (135:1) circle (0.06);
+\draw[orange,fill=white,thick] (225:1) circle (0.06);
+\fill (1,0) circle (0.035);
+\node[right] at (1.08,0) {$[0]$};
+\node at (0.55,0) {$C$};
+\node at (0,1.4) {$U\cap V$};
+\end{scope}
+\end{tikzpicture}
+```

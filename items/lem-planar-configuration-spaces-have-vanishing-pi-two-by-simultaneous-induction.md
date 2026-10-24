@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction.json
+  precheck: pass
 id: lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction
 kind: lemma
 title: "Vanishing $\\pi_2$ for every ordered planar configuration space"
@@ -12,13 +15,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   scraped: []
   references:
@@ -59,7 +55,7 @@ of the long exact sequence is exact, exactness meaning that the incoming image e
 
 ## Proof
 
-**Proof technique:** induction on $n$.
+**Proof technique:** induction on n.
 
 1.1 **The fibre fact.** By [F4], for every finite set $Q$ of distinct points of $\operatorname{int}D^2$ the complement $\operatorname{int}D^2\setminus Q$ has vanishing $\pi_j$ in every degree $j\ge2$ and, when $Q$ is empty, is contractible; in particular every group $\pi_2(\operatorname{int}D^2\setminus Q)$ is trivial. [F4]
 
@@ -76,5 +72,4 @@ of the long exact sequence is exact, exactness meaning that the incoming image e
 3.1 **Induction conclusion.** Step 1.3 is the base case and step 2.1 proves the successor implication for arbitrary $n\ge2$ and arbitrary base configuration, so by induction $\pi_2(F_n(\operatorname{int}D^2),q)=0$ for every $n\ge1$ and every $q\in F_n(\operatorname{int}D^2)$. [step 1.3, step 2.1, discharge-induction]
 
 4.1 **The plane and closed-disc models.** Applying the homeomorphism and the homotopy equivalence of step 1.2 to the result of step 3.1 gives $\pi_2(F_n(\mathbb C),q')=0$ for every $q'\in F_n(\mathbb C)$ and $\pi_2(F_n(D^2),q'')=0$ for every $q''\in F_n(D^2)$, which is the full statement. [step 3.1, step 1.2, discharge-induction]
-
 ∎

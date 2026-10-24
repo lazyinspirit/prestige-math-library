@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cyclotomic-hecke-polynomial-spectra-and-central-content-sectors.json
+  precheck: pass
 id: lem-cyclotomic-hecke-polynomial-spectra-and-central-content-sectors
 kind: lemma
 title: "Polynomial spectra and central content sectors of finite cyclotomic Hecke algebras"
@@ -17,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Brundan and Kleshchev, Blocks of cyclotomic Hecke algebras and Khovanov-Lauda algebras, arXiv:0808.2032v4"
@@ -104,3 +105,36 @@ determinant argument, which requires only the adjugate identity over a
 commutative ring, and the CRT then produces the canonical residue projectors.
 The centrality argument uses the global intertwiners rather than any
 primitivity of the content sectors. No choice principle is used.
+
+
+The following commuting triangle displays how the joint residue decomposition
+is regrouped into central content sectors. Write
+$\mathrm{cont}(\nu)=\sum_{r=1}^d\alpha_{\nu_r}$ for $\nu\in I^d$ and let
+$\alpha$ range over contents of height $d$. Put
+$R=\bigoplus_{\nu\in I^d}e(\nu)H$ and
+$C=\bigoplus_\alpha e_\alpha H$. All arrows are isomorphisms of
+right $H$-modules, with
+$\Phi_{\mathrm{res}}(h)=(e(\nu)h)_\nu$,
+$\Phi_{\mathrm{cont}}(h)=(e_\alpha h)_\alpha$, and
+$G((h_\nu)_\nu)=(\sum_{\mathrm{cont}(\nu)=\alpha}h_\nu)_\alpha$.
+
+```tikz
+\begin{tikzpicture}
+\path[use as bounding box] (-5,-1) rectangle (5,3);
+\node (H) at (0,2) {$H$};
+\node (R) at (-3,0) {$R$};
+\node (C) at (3,0) {$C$};
+\draw[->] (H) -- node[above left] {$\Phi_{\mathrm{res}}$} (R);
+\draw[->] (H) -- node[above right] {$\Phi_{\mathrm{cont}}$} (C);
+\draw[->] (R) -- node[above] {$G$} (C);
+\end{tikzpicture}
+```
+
+The component maps of $\Phi_{\mathrm{res}}$ are precisely the joint
+generalized-residue projectors of step 4.1. The equality
+$G\Phi_{\mathrm{res}}=\Phi_{\mathrm{cont}}$ follows from
+$e_\alpha=\sum_{\mathrm{cont}(\nu)=\alpha}e(\nu)$. Step 5.1 makes each
+$e_\alpha H$ a central two-sided ideal: the $e_\alpha$ are central,
+orthogonal and sum to $1$. These sectors may be zero and are not asserted
+primitive; the individual $e(\nu)$ are not asserted central. The proof above
+is independent of this illustration.

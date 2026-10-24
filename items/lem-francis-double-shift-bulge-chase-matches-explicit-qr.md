@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-francis-double-shift-bulge-chase-matches-explicit-qr.json
+  precheck: pass
 id: lem-francis-double-shift-bulge-chase-matches-explicit-qr
 kind: lemma
 title: "Under unreduced hypotheses, the Francis double-shift chase matches explicit shifted QR"
@@ -17,10 +20,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "James Demmel, Applied Numerical Linear Algebra, §4.4.8"

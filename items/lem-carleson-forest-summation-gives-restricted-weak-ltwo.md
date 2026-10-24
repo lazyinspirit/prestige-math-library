@@ -1,14 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-carleson-forest-summation-gives-restricted-weak-ltwo.json
+  precheck: pass
 id: "lem-carleson-forest-summation-gives-restricted-weak-ltwo"
 kind: "lemma"
-title: "Carleson forest summation gives restricted weak ltwo"
+title: "Carleson forest summation gives restricted weak $L^2$"
 deps: ["lem-carleson-density-selection", "lem-carleson-size-selection", "lem-carleson-single-tree-estimate", "def-axiom-of-choice", "def-density-size-and-tree-count-for-carleson-tiles"]
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'

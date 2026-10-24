@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-muckenhoupt-a-p-and-a-one-weights.json
+  precheck: n/a
 id: def-muckenhoupt-a-p-and-a-one-weights
 kind: definition
-title: Muckenhoupt A_p and A_1 weights
+title: Muckenhoupt $A_p$ and $A_1$ weights
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -18,8 +21,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Definitions 4.7 and 4.14 with Remarks 4.9 and 4.16, printed pp. 71-74"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition

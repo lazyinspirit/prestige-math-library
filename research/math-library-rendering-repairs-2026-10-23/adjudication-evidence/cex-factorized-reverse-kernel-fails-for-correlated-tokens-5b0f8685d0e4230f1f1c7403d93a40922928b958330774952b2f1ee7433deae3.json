@@ -1,0 +1,107 @@
+{
+  "id": "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+  "agent": "/root/rendering_repair_coordinator/drlgm_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone PNG contains no diagram. A concrete pair of joint-law tables materially clarifies the equal-marginal / unequal-support distinction that is central to this counterexample; completeness of the existing proof does not diminish that explanatory benefit.",
+      "action": "Appended a final Remarks section with two explicitly indexed probability tables, the common probability-one conditioning event, support shading, and independent-proof notice.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only a proof-independent TikZ illustration comparing the true reverse conditional on the all-mask state with the product of its marginals / learned sampler law. Every original byte remains an exact prefix.",
+  "source_lines_after": {
+    "remarks": [
+      58,
+      93
+    ],
+    "tikz": [
+      62,
+      91
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Two probability laws on V^2={0,1}^2, rows a=first token and columns b=second token; no transition or causal arrows are drawn.",
+      "justification": "Facts Given and Counterexample 1.1–3.1; read all three local suppliers in full."
+    },
+    {
+      "relation": "Left table P(Z0=(a,b) | Z1=(m,m)) has masses P00=1/2, P01=0, P10=0, P11=1/2.",
+      "justification": "Finite masking-chain definition gives Z0=X and terminal all-mask probability one; posterior supplier at s=0,t=1 returns X given X, and Counterexample 1.1 marginalizes the stated two-point clean law. No extra conditioning on X is asserted in the figure."
+    },
+    {
+      "relation": "Both left marginals are (1/2,1/2); their product is 1/4 in all four cells, matching the learned independent-coordinate sampler.",
+      "justification": "Left row sums and column sums are each 1/2. The sampler definition gives c1=(alpha0-alpha1)/(1-alpha1)=1, and the stated uniform predictors produce product 1/4; Counterexample 2.1–3.1."
+    },
+    {
+      "relation": "Each table sums to one. Left support consists of (0,0),(1,1); right support consists of all four strings; shaded cells are exactly the positive cells.",
+      "justification": "Direct verification of the eight displayed entries; machine mass/marginal/prefix check preserved in diagram-checks/drlgm_002/math-and-preservation-check.json."
+    },
+    {
+      "relation": "Conditioning on Z1=(m,m) does not change the clean law because this event has probability one; rigorous argument remains independent of figure.",
+      "justification": "Counterexample 1.1 and finite masking-chain alpha1=0; original Counterexample including all three numbered steps is byte-identical."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-factorized-reverse-kernel-fails-for-correlated-tokens.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-factorized-reverse-kernel-fails-for-correlated-tokens.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-factorized-reverse-kernel-fails-for-correlated-tokens.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/diagram-checks/drlgm_002/runtime TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-factorized-reverse-kernel-fails-for-correlated-tokens --out research/math-library-rendering-repairs-2026-10-23/diagram-checks/drlgm_002/preview-final",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 2,
+        "tikz_count": 1,
+        "diagram_failures": [],
+        "katex_errors": [],
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "visual_checks": {
+    "original": "Independently viewed the flagged PNG standalone at original resolution. Queue evidence_dir/screenshots does not exist; resolved authentic category-root screenshots path and verified exact queue SHA256 88d3801ab759a0342604e852f050b67b212067533577348ea5f0652a3abbc299.",
+    "original_path": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/screenshots/cex-factorized-reverse-kernel-fails-for-correlated-tokens--01.png",
+    "final": "Independently viewed both fresh native-preview PNG tiles standalone at original resolution. All eight table cells, row/column labels, support shading, total labels and shared conditioning label render correctly; no diagram overlap or clipping. Tile boundary crosses the figure, with 100-pixel overlap and full table content visible in tile 02.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/drlgm_002/preview-final/manifest.json",
+    "limitations": "Local ItemBody/TikZ preview with file-only browser routing; no live production route visited. Sixteen unrelated reference-map parse diagnostics are recorded by preview helper."
+  },
+  "preservation": {
+    "before_raw_sha256": "71535945c7645fdc3ae7fdcf6813bdf1e64c3283038c2d95f2f8d78f2630ed8f",
+    "current_raw_sha256": "3781f5808d18a3829a039406cbac28a0614a8ce4c3439410b669eb61387011dc",
+    "guard": "Original raw SHA matched immediately before edit.",
+    "original_bytes_preserved_as_prefix": true,
+    "frontmatter_status_dependencies_sources_proof_unchanged": true
+  },
+  "remaining_issues": []
+}

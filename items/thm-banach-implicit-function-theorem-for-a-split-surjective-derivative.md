@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-banach-implicit-function-theorem-for-a-split-surjective-derivative.json
+  precheck: pass
 id: "thm-banach-implicit-function-theorem-for-a-split-surjective-derivative"
 kind: "theorem"
 title: "A split surjective derivative parametrises its level set"
@@ -90,3 +93,26 @@ $$\{\,z\in u+(A+B):G(z)=G(u)\,\}=\{\,u+a+\varphi(a):a\in A\,\}.$$
 
 5.1 (Conclusion) Step 1.1 and step 2.1 supply the finite-dimensional subspace $Y$ with $X=\ker DG(u)\oplus Y$ a topological direct sum, $DG(u)|_Y$ a bounded linear isomorphism and the coordinate projection onto $Y$ bounded; step 3.1 supplies the open sets $A$ and $B$ and the map $\varphi$ together with the parametrisation identity; step 4.1 supplies $D\varphi(0)=0$; and the uniqueness assertion follows because any other $C^1$ map with the same set identity satisfies $F(a,\psi(a))=0$ on $A$ and hence equals the unique map $\varphi$ of [F1]. This proves the statement, the Axiom of Choice having been used only through [F1] [A1]. [step 2.1, step 3.1, step 4.1, F1, A1] ∎
 
+
+## Remarks
+
+In the schematic split-coordinate picture below, the origin represents $u$ under the affine identification $(a,y)\mapsto u+a+y$. The local level set is the graph $y=\varphi(a)$, with a typical point representing $u+a+\varphi(a)$. Its tangent at the origin is the kernel direction because $D\varphi(0)=0$. The axes represent the two subspaces, which need not be one-dimensional; the drawn curve asserts no particular shape or curvature. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[->] (-2.7,0) -- (3.0,0) node[right] {$\ker DG(u)$};
+\draw[->] (0,-0.6) -- (0,2.2) node[above] {$Y$};
+\draw[thick] (-2.2,1.21) .. controls (-1.3,0.22) and (-0.6,0) .. (0,0)
+  .. controls (0.6,0) and (1.1,0.24) .. (1.6,0.64)
+  .. controls (1.8,0.80) and (2.0,1.00) .. (2.2,1.21);
+\node[anchor=east] at (-1.15,1.55) {$y=\varphi(a)$};
+\draw[dashed] (1.6,0) -- (1.6,0.64) -- (0,0.64);
+\fill (0,0) circle (1.6pt);
+\node[below left] at (0,0) {$0$};
+\fill (1.6,0.64) circle (1.6pt);
+\node[above right] at (1.6,0.64) {$(a,\varphi(a))$};
+\node[below] at (1.6,0) {$a$};
+\node[left] at (0,0.64) {$\varphi(a)$};
+\node at (0.6,-1.05) {Schematic split coordinates near $u$};
+\end{tikzpicture}
+```

@@ -1,0 +1,168 @@
+{
+  "id": "ex-hp-reentrant-corner-h-versus-hp",
+  "agent": "/root/rendering_repair_coordinator/npde_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-diagram-low-contrast-fill",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile shows near-white gray!12 fill obscuring the light corner/mode labels, boundary outline and angular arc. The final standalone original-resolution diagram crop visibly restores their contrast using a dark fill.",
+      "action": "Changed only the polygon fill from gray!12 to black!90.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Root diagnostic and the previous original-resolution diagram show the 270-degree arc crossing c=(0,0). The initial report missed this remaining label overlap.",
+      "action": "Moved c=(0,0) into the empty lower-right quadrant, using a short thin leader from the origin to (0.28,-0.28). Γ_D stays adjacent to the positive-x Dirichlet edge.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Darkened L-domain fill and moved the corner label clear of the sector arc with a short leader. Domain, angular arc, highlighted Dirichlet edges, scale, claims and proof are unchanged.",
+  "source_lines_after": [
+    74,
+    79,
+    80
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "L-shaped domain and origin corner",
+      "check": "The six vertices (-1,-1),(0,-1),(0,0),(1,0),(1,1),(-1,1), with the explicit-coordinate cycle, trace the boundary of the closure of the Example union of rectangles. The removed lower-right quadrant leaves an interior angle of 3π/2 at the origin. Original and final renders show all six boundary edges."
+    },
+    {
+      "objects": "Dirichlet boundary Γ_D and angular convention",
+      "check": "The thick blue path joins (0,-1) to (0,0) to (1,0), exactly the two edges ending at the origin. Its positive-x edge is θ=0 and negative-y edge θ=3π/2. Substitution into sin(2θ/3) gives sin(0)=sin(π)=0, matching the Example and Verification 5.1; outer edges are not highlighted."
+    },
+    {
+      "objects": "Sector orientation and mode label",
+      "check": "The arc starts at (0.42,0) and runs counterclockwise from 0° to 270°, passing through the occupied upper and lower-left portions and ending at (0,-0.42). Its positive radius lies in the stated polar sector except endpoints. The u(r,θ) label lies inside the upper-left domain. The fill and corner-label layout changed; this sector relation and orientation are preserved."
+    },
+    {
+      "objects": "Corner annotation leader",
+      "check": "The new thin segment starts at the actual reentrant vertex (0,0) and ends at (0.28,-0.28), inside the missing lower-right quadrant. The c=(0,0) text is below/right of that endpoint, so it denotes the leader origin rather than a new domain point. This leader lies outside the occupied 0<θ<3π/2 sector; it does not change the polygon, angle or Γ_D. Original-resolution final tile and crop show the corner label separate from the arc, Γ_D and endpoint-angle labels."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "checks": {
+    "before_raw_sha256": "8bde950e8b1dccaa59aca06857b068772cd525bceac7221f2455d41a4aa6ce8d",
+    "current_raw_sha256": "50a07e6152232cfdc5cb30d63d5a8d6bfc12fa20694880e3cfe0d8487e710592",
+    "write_scope": "Exact raw comparison against original before confirms only the fill and corner-node/leader layout differ. All frontmatter, including status: published, is byte-identical.",
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-hp-reentrant-corner-h-versus-hp.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-hp-reentrant-corner-h-versus-hp.md",
+            "item_id": "ex-hp-reentrant-corner-h-versus-hp",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      },
+      "fresh_after_followup": true
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-hp-reentrant-corner-h-versus-hp.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      },
+      "fresh_after_followup": true
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-hp-reentrant-corner-h-versus-hp.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects",
+      "fresh_after_followup": true
+    },
+    "preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-hp-reentrant-corner-h-versus-hp --out research/math-library-rendering-repairs-2026-10-23/npde-002-preview-label-followup-20261024",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-label-followup-20261024/manifest.json",
+      "katex_errors": [],
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "original_resolution_views": [
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-label-followup-20261024/screenshots/ex-hp-reentrant-corner-h-versus-hp--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-label-followup-20261024/screenshots/ex-hp-reentrant-corner-h-versus-hp--02.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-label-followup-20261024/diagram-original-crop.png"
+      ],
+      "limitations": "Local native ItemBody/TikZ SSR preview using existing web renderer and CSS, with HTTP blocked; not production-route or metadata-footer coverage. Sixteen unrelated title-map parse diagnostics are reported by the helper."
+    },
+    "followup_before_file": "research/math-library-rendering-repairs-2026-10-23/followup-before/ex-hp-reentrant-corner-h-versus-hp-label-overlap-20261023T223027479177.md",
+    "followup_before_raw_sha256": "c40e10e66ca4aded45ecd9501e086721b31155cd0aa2bb9d84a07d5999c72553"
+  },
+  "previous_report": {
+    "path": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/ex-hp-reentrant-corner-h-versus-hp-c6ff4e3bb4a65a43ef52d382920e4166acb1b76952f768fa038bce0a754647a7.json",
+    "sha256": "c6ff4e3bb4a65a43ef52d382920e4166acb1b76952f768fa038bce0a754647a7",
+    "reason": "Root QA confirmed corner-label/sector-arc overlap missed in the initial review; preserved exact initial report before this authorized same-owner followup."
+  },
+  "previous_checks": {
+    "before_raw_sha256": "8bde950e8b1dccaa59aca06857b068772cd525bceac7221f2455d41a4aa6ce8d",
+    "current_raw_sha256": "c40e10e66ca4aded45ecd9501e086721b31155cd0aa2bb9d84a07d5999c72553",
+    "write_scope": "Exact raw comparison confirms the sole change is gray!12 to black!90; full frontmatter including status: published is byte-identical.",
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-hp-reentrant-corner-h-versus-hp.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-hp-reentrant-corner-h-versus-hp.md",
+            "item_id": "ex-hp-reentrant-corner-h-versus-hp",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-hp-reentrant-corner-h-versus-hp.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-hp-reentrant-corner-h-versus-hp.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    "preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-hp-reentrant-corner-h-versus-hp --out research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/manifest.json",
+      "katex_errors": [],
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "original_resolution_views": [
+        "research/math-library-rendering-repairs-2026-10-23/../math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/ex-hp-reentrant-corner-h-versus-hp--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/screenshots/ex-hp-reentrant-corner-h-versus-hp--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/screenshots/ex-hp-reentrant-corner-h-versus-hp--02.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/diagram-original-crop.png"
+      ],
+      "limitations": "Local native ItemBody/TikZ SSR preview using existing web renderer and CSS, with HTTP blocked; not production-route or metadata-footer coverage. Sixteen unrelated title-map parse diagnostics are reported by the helper."
+    }
+  }
+}

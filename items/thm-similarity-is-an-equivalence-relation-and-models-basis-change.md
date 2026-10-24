@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-similarity-is-an-equivalence-relation-and-models-basis-change.json
+  precheck: pass
 id: thm-similarity-is-an-equivalence-relation-and-models-basis-change
 kind: theorem
 title: 'Similarity is an equivalence relation, and two matrices represent the same endomorphism in two bases exactly when they are similar'
@@ -16,9 +19,6 @@ aliases: []
 landmark: true
 short: 'Similarity is basis change'
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references:
@@ -63,3 +63,15 @@ $B=[T]_{\mathcal C}^{\mathcal C}$.
 3.1 Conversely, suppose $B=P^{-1}AP$. On $V=M_{n\times1}(F)$ let $T=L_A$, which is linear by [L4], and let $\mathcal E=(E_{i0})_{i<n}$. By [L3], every column $y$ has the unique expansion $y=\sum_{i<n}y_iE_{i0}$, so [L5] makes $\mathcal E$ the standard ordered basis. The columns of invertible $P$ form an ordered basis $\mathcal C$: independence follows by multiplying $Px=0$ by $P^{-1}$, and every column vector $y$ equals $P(P^{-1}y)$, so [L5] applies. Moreover, $[T]_{\mathcal E}^{\mathcal E}=A$ because $T(E_{j0})$ is the $j$-th column of $A$. The change matrix $P_{\mathcal E\leftarrow\mathcal C}$ is $P$, so [L2] gives $[T]_{\mathcal C}^{\mathcal C}=P^{-1}AP=B$. [step 2.1, L1, L2, L3, L4, L5]
 
 4.1 Steps 2.1 and 3.1 prove both directions of the characterisation, including $n=0$, where the unique empty matrix represents the unique endomorphism of the zero space. [step 2.1, step 3.1, L1, L2, L3, L4, L5] ∎
+
+
+## Remarks
+
+For the same endomorphism $T:V\to V$, let $c_{\mathcal B}(v)=[v]_{\mathcal B}$ and $c_{\mathcal C}(v)=[v]_{\mathcal C}$ be its coordinate identifications. Put $P=P_{\mathcal B\leftarrow\mathcal C}$, so $c_{\mathcal B}=Pc_{\mathcal C}$. The top row below uses $\mathcal C$-coordinates and the bottom row uses $\mathcal B$-coordinates; each matrix acts by left multiplication on a coordinate column.
+
+```tikzcd
+M_{n\times1}(F) \arrow[r, "B"] \arrow[d, "P"'] & M_{n\times1}(F) \arrow[d, "P"] \\
+M_{n\times1}(F) \arrow[r, "A"'] & M_{n\times1}(F)
+```
+
+The square commutes because both paths describe applying $T$ and expressing the result in $\mathcal B$-coordinates: $AP=PB$, equivalently $B=P^{-1}AP$. The proof above is independent of this illustration.

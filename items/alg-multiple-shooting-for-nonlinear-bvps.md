@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-multiple-shooting-for-nonlinear-bvps.json
+  precheck: n/a
 id: alg-multiple-shooting-for-nonlinear-bvps
 kind: algorithm
 title: "Finite-budget multiple shooting for a nonlinear two-point BVP"
@@ -20,8 +23,7 @@ sources:
   references:
     - title: "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes"
       url: "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf"
-verification:
-  precheck: pending
+
 ---
 
 ## Definition
@@ -35,3 +37,26 @@ Fix a mesh $a=t_0<\cdots<t_N=b$, $N\ge1$, and an open product domain of segment 
 5. If the proposed tuple is outside the open product domain, return the last tuple with status invalid-trial; otherwise accept it as the next iterate.
 
 The procedure applies the finite-budget Newton checks to the $(N+1)d$ variables. Its residual-tolerance status concerns the approximate map that was evaluated. It does not certify that the segment approximations join, that an exact BVP solution exists, or that the procedure converges from arbitrary starts.
+
+
+## Remarks
+
+The schematic shows one segment, $0\le i<N$. Its computed endpoint and the next segment start are independent states; the dashed connector indicates their difference, not an equality or a trajectory. Vertical placement is schematic and does not impose a sign on any state component.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\draw[->] (0,2.3) -- (10,2.3);
+\foreach \x in {3,6.5} {\draw (\x,2.2) -- (\x,2.4);}
+\node[above] at (3,2.4) {$t_i$};
+\node[above] at (6.5,2.4) {$t_{i+1}$};
+
+\node (start) at (3,1) {$s_i$};
+\node (endpoint) at (6.5,1) {$\widetilde\Phi_i(s_i)$};
+\node (next) at (6.5,-0.6) {$s_{i+1}$};
+\draw[->] (start) -- node[above] {$\widetilde\Phi_i$} (endpoint);
+\draw[dashed] (endpoint) -- (next);
+\node[right] at (6.8,0.2) {$r_i=\widetilde\Phi_i(s_i)-s_{i+1}$};
+\end{tikzpicture}
+```
+
+The time axis marks the segment $[t_i,t_{i+1}]$ within the mesh $a=t_0<\cdots<t_N=b$. Each $s_j$ is in $\mathbb R^d$, each $r_i$ is in $\mathbb R^d$, and the boundary block is $B(s_0,s_N)\in\mathbb R^d$. Thus the computed residual $\widetilde F=(r_0,\ldots,r_{N-1},B(s_0,s_N))$ has $(N+1)d$ scalar entries for the $(N+1)d$ scalar unknowns. This picture does not assert that any residual block vanishes; the algorithm and its limitations remain as stated above.

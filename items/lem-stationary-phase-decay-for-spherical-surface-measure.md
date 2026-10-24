@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-stationary-phase-decay-for-spherical-surface-measure.json
+  precheck: pass
 id: lem-stationary-phase-decay-for-spherical-surface-measure
 kind: lemma
 title: Stationary-phase decay for spherical surface measure
@@ -20,14 +23,6 @@ deps:
 - def-countable-choice
 - def-partition-of-unity-subordinate-to-a-cover
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: completed-cumulative-mathematical-review
-    date: 2026-10-03
-    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-6.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u6.json, exact post_sha256 b7bf39d3287165a66308bc356556fa7d4ff203fa60de40a1d402fa3649751a34 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
-    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-initial-r1-u6 dispatch"
-  precheck: pass
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -63,7 +58,7 @@ Assume Countable Choice and let $n\ge2$. With $\sigma$ the polar surface measure
 
 ## Proof
 
-**Proof technique:** direct; rotate to the preferred axis, split the sphere with the finite graph partition, and apply the non-stationary and stationary alternatives of the stationary-phase lemma to each chart, with the polar caps contributing the exponent $(n-1)/2$.
+**Proof technique:** direct; rotate to the preferred axis, split the sphere with the finite graph partition, and apply the non-stationary and stationary alternatives of the stationary-phase lemma to each chart, with the polar caps contributing the exponent half the difference between the dimension and one.
 
 1.1 Reduction to the axis. For $\xi\ne0$ write $\xi=r\nu$ with $r=|\xi|$ and $\nu\in S^{n-1}$, and choose an orthogonal map $R$ with $R\nu=e_n$. By the orthogonal invariance of [F2], $\widehat\sigma(\xi)=\widehat\sigma(re_n)=\int_{S^{n-1}}e^{-2\pi ir\omega\cdot e_n}\,d\sigma(\omega)$; the same identity with $\xi=0$ is trivial and is covered by the bound of [F5] for $r\le1$. It therefore suffices to estimate $J(r):=\widehat\sigma(re_n)$ for $r\ge1$ and to add the trivial bound at small $r$. [F2, F5, given]
 

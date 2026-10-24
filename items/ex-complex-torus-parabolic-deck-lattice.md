@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-complex-torus-parabolic-deck-lattice.json
+  precheck: pass
 id: ex-complex-torus-parabolic-deck-lattice
 kind: example
 title: "A complex torus has a lattice of parabolic deck translations"
@@ -56,13 +59,7 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes"
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 2 Theorem 2.6, printed p. 7: plane quotients as C, C* or C/Lambda; Ch. 16 printed pp. 146-147, Ch. 17 printed p. 157"
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Example
@@ -147,3 +144,48 @@ on $\mathbb C$ with quotient map $q$. Then:
 7.1 **The genus is one.** By [F12] the same square schema realizes the torus $T^2$, so $Y\cong T^2$, and with step 5.3 this gives $T\cong T^2=\#_1T^2$ [F13]. The topological classification of compact Riemann surfaces [F13] supplies exactly one $g\ge0$ with $T\cong\#_gT^2$; since $g=1$ has this property, the genus of the compact Riemann surface $T$ is $1$. [F13, step 5.3, step 6.1]
 
 8.1 **The type is parabolic.** By steps 6.1 and 7.1 the space $T$ is a compact Riemann surface of genus $1$, so the compact-genus corollary [F14] gives $T$ parabolic universal-covering type under the Axiom of Choice [F1]. Moreover the exhibited covering $q:\mathbb C\to T$ is holomorphic (step 6.1) with simply connected total space $\mathbb C$ (step 1.2), hence is a holomorphic universal cover of $T$ whose model is $\mathbb C$, in agreement with the definition of parabolic type [F14]. This proves all three assertions of the Example. [F1, F14, step 1.2, step 6.1, step 7.1] ∎
+
+
+## Remarks
+
+The picture uses the real coordinates $T_0(s,t)=s\omega_1+t\omega_2$ of
+steps 1.1 and 5.3. The shaded parallelogram is $P=T_0([0,1]^2)$; its dashed
+neighbour is $P+\omega_1$. The drawing is schematic: the periods need not
+have equal length or be orthogonal, and their ordering need not agree with
+the complex orientation.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\coordinate (A) at (0,0);
+\coordinate (B) at (3,0);
+\coordinate (C) at (4,2);
+\coordinate (D) at (1,2);
+\coordinate (E) at (6,0);
+\coordinate (F) at (7,2);
+\fill[blue!10] (A) -- (B) -- (C) -- (D) -- (A);
+\draw[dashed,gray] (B) -- (E) -- (F) -- (C);
+\draw[->,thick] (A) -- node[below] {$a$} (B);
+\draw[->,thick] (B) -- node[right] {$b$} (C);
+\draw[->,thick] (C) -- node[above] {$a^{-1}$} (D);
+\draw[->,thick] (D) -- node[left] {$b^{-1}$} (A);
+\node[below left] at (A) {$0$};
+\node[below] at (B) {$\omega_1$};
+\node[above right] at (C) {$\omega_1+\omega_2$};
+\node[above left] at (D) {$\omega_2$};
+\node at (2,1) {$P$};
+\node at (5,1) {$P+\omega_1$};
+\draw[->] (7.4,1) -- node[above] {$q$} (8.5,1);
+\node[right] at (8.5,1) {$T=\mathbb C/\Lambda$};
+\node at (3.5,-1) {$g(s,t)=q(T_0(s,t)),\quad (s,t)\in[0,1]^2$};
+\end{tikzpicture}
+```
+
+The solid arrows follow the boundary traversal $a\,b\,a^{-1}b^{-1}$,
+starting at $0$. They record the exponents in the boundary word, rather
+than a common reference direction on paired sides. Translation by
+$\omega_2$ pairs the bottom side with the top, and translation by
+$\omega_1$ pairs the left side with the right. Since $q(z+\lambda)=q(z)$
+for $\lambda\in\Lambda$, these pairings give $g(s,0)=g(s,1)$ and
+$g(0,t)=g(1,t)$. Thus the square quotient $\pi:[0,1]^2\to Y$ factors $g$
+as $g=\bar g\circ\pi$, as proved in step 5.3. The verification above is
+independent of the illustration.

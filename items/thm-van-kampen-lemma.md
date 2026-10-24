@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-van-kampen-lemma.json
+  precheck: pass
 id: thm-van-kampen-lemma
 kind: theorem
 title: "A word is trivial in a presented group exactly when it bounds a finite van Kampen diagram"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group, prop-normal-closure-is-products-of-conjugates, def-van-kampen-diagram-boundary-label-and-area, def-alphabet-words-and-reduction, thm-reduced-words-form-the-free-group]
 proof_strategy: "direct"
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-receipts.jsonl (thm-van-kampen-lemma). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -60,3 +56,30 @@ finite van Kampen diagram over $\langle X\mid R\rangle$.
 3.1 By [F2] there is a finite sequence of free cancellations and reverse insertions carrying $v$ to the specified literal word $w$. Apply step 1.3 to each word in that sequence. The result is a finite van Kampen diagram with boundary label exactly $w$ and at most $m$ faces. This also covers a freely trivial $w$: start at the one-vertex diagram and insert the required exterior spurs. [F2, step 2.1, step 1.3]
 
  4.1 Steps 1.1 and 3.1 prove both directions of the equivalence, for arbitrary specified relator words and the literal boundary-label convention. [step 1.1, step 3.1] ∎ 
+
+## Remarks
+
+The schematic below shows one face-and-path factor from step 2.1. The solid stem stands for the path labelled $u_k$ from the common basepoint $o$ to the chosen face corner $a$. The polygon stands for the relator face, with as many subdivided sides as its specified word requires; the four drawn sides do not prescribe its word length. Read its boundary clockwise from $a$ as $r_k^{\varepsilon_k}$. The dashed arrows show the outward and return occurrences of the same stem in the outer walk, not additional edges. Thus the excursion reads the literal word $u_k r_k^{\varepsilon_k}u_k^{-1}$. The proof, including the boundary surgery in step 1.3, remains independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.6]
+\coordinate (o) at (-2.4,0);
+\coordinate (p) at (-1.2,0);
+\coordinate (a) at (0,0);
+\coordinate (b) at (1,1.1);
+\coordinate (c) at (2,0);
+\coordinate (d) at (1,-1.1);
+\fill[blue!15!black] (a)--(b)--(c)--(d)--(a);
+\draw[thick] (o)--(p)--(a);
+\draw[thick,->] (a)--(b);
+\draw[thick,->] (b)--(c);
+\draw[thick,->] (c)--(d);
+\draw[thick,->] (d)--(a);
+\draw[dashed,->] (-2.25,0.35)--(-0.15,0.35) node[midway,above] {$u_k$};
+\draw[dashed,->] (-0.15,-0.35)--(-2.25,-0.35) node[midway,below] {$u_k^{-1}$};
+\fill (o) circle (1.5pt) node[below left] {$o$};
+\fill (p) circle (1.2pt);
+\fill (a) circle (1.5pt) node[below left] {$a$};
+\node at (1,0) {$r_k^{\varepsilon_k}$};
+\end{tikzpicture}
+```

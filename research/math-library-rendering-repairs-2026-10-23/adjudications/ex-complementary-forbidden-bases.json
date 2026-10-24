@@ -1,0 +1,92 @@
+{
+  "id": "ex-complementary-forbidden-bases",
+  "agent": "/root/rendering_repair_coordinator/comb_006",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile prints raw draw/node commands in Remarks and no graph figure. Both the opening fence and closing fence share lines with TeX; the native parser therefore fails to recognize the diagram block.",
+      "action": "Put the opening tikz fence and closing fence on their own lines, preserving every TeX command, graph label, vertex, edge and complement arrow.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Separated the two Markdown fence markers from the unchanged TikZ picture source.",
+  "source_lines_after": [
+    56,
+    57,
+    59,
+    61,
+    62
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Left panel: a1,a2; right panel: b1,b2.",
+      "check": "Native original-resolution screenshot and standalone original-pixel crop show exactly two isolated vertices on the left (0 edges, degrees 0,0), and exactly two vertices joined by one edge on the right (1 edge, degrees 1,1). There are no loops, additional graph edges or cycle paths.",
+      "justification": "def-standard-complete-bipartite-path-and-cycle-graphs defines overline K_n with empty edge set and K_n with all unordered vertex pairs."
+    },
+    {
+      "relation": "The double-headed complement arrow exchanges overline K_2 and K_2.",
+      "check": "On two vertices there is exactly one unordered pair. Taking its set complement exchanges the empty edge set and the singleton edge set; applying complementation twice returns the original graph. The central arrow is an operation annotation between panels, not an edge.",
+      "justification": "def-graph-isomorphism-and-complement defines complement as (V,[V]^2 minus E); assigned Verification 1.2 asserts the same involution."
+    },
+    {
+      "relation": "Left label overline K_2 in B(K); right label K_2 in B(E).",
+      "check": "overline K_2 is outside the complete graphs and K_2 is outside the edgeless graphs; each proper induced subgraph has at most one vertex and lies in the corresponding class. Conversely any noncomplete graph contains a nonadjacent pair, and any graph with an edge contains K_2. These are therefore the minimal forbidden bases up to isomorphism.",
+      "justification": "Read full ex-complete-graphs-as-a-hereditary-class Verification 1.2–2.1, ex-edgeless-graphs-as-a-hereditary-class Verification 1.1–3.1, def-minimal-forbidden-induced-subgraph, and thm-complementation-preserves-hereditary-classes-and-bases Proof 1.2–3.1; labels agree with assigned L1/L2 and Verification 2.1."
+    }
+  ],
+  "proof_independent": true,
+  "original_visual_review": {
+    "tiles": [
+      "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/ex-complementary-forbidden-bases--01.png"
+    ],
+    "detail": "original",
+    "all_flagged_tiles_reviewed": true
+  },
+  "local_checks": {
+    "raw_sha256_guard": "b06c0bc6e25c14ce08f86d09d8eaa315b438d31ad8dd67b40270fb00bc610a97 matched immediately before edit",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-complementary-forbidden-bases.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-complementary-forbidden-bases.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass",
+      "strategy": "direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-complementary-forbidden-bases.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/comb006-final-unique",
+      "exit_code": 0,
+      "tile_count": 1,
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "standalone_original_resolution_review": true,
+      "diagram_crop": "diagram-original-crop.png",
+      "visual_result": "Graph restored: two isolated left vertices, one right edge, double-headed complement arrow, and both complete/edgeless forbidden-basis captions visible without clipping or overlap."
+    },
+    "metadata_and_status": "Full frontmatter byte-identical; status remains published."
+  },
+  "remaining_issues": []
+}

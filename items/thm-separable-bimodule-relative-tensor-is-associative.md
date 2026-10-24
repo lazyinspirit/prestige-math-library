@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-separable-bimodule-relative-tensor-is-associative.json
+  precheck: pass
 id: thm-separable-bimodule-relative-tensor-is-associative
 kind: theorem
 title: Relative tensor product gives associative composition of separable bimodules
@@ -48,3 +51,37 @@ For separable algebra objects in a finite semisimple monoidal category, take obj
 3.2 The regular bimodule $A$ is a left and right unit. The action maps $A\otimes_A X\to X$ and $X\otimes_A A\to X$ are balanced. Their inverses are induced by the algebra unit $\eta_A$ and the relevant unitors. The action and unit laws show the two composites are identities; the triangle equation for these unitors follows because its two paths agree on the universal balanced map, so step 2.1 forces equality. [F2, step 1.1, step 2.1, algebra]
 
 4.1 Bimodule maps $f:X\to X'$ and $g:Y\to Y'$ induce the unique map $f\otimes_B g$ preserving the universal balanced map. For composable triples of bimodule maps, either horizontal-then-vertical or vertical-then-horizontal composition has the same composite with that universal map, since each is the ordinary composite of $f,g$ on the tensor factors. Uniqueness from step 1.1 gives equality; this is interchange. Thus these data form the stated bicategory. [step 1.1, step 2.1, step 3.1, step 3.2, algebra] ∎
+
+
+## Remarks
+
+The pentagon in step 3.1 compares the following five $A$-$F$ bimodules for $X:A\to B$, $Y:B\to D$, $Z:D\to E$, and $W:E\to F$:
+
+$$P_0=((X\otimes_B Y)\otimes_D Z)\otimes_E W,\qquad P_1=(X\otimes_B(Y\otimes_D Z))\otimes_E W,$$
+
+$$P_2=X\otimes_B((Y\otimes_D Z)\otimes_E W),\qquad P_3=X\otimes_B(Y\otimes_D(Z\otimes_E W)),$$
+
+$$P_4=(X\otimes_B Y)\otimes_D(Z\otimes_E W).$$
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.3,every node/.style={font=\large}]
+\node (P0) at (0,0) {$P_0$};
+\node (P1) at (2,1.6) {$P_1$};
+\node (P2) at (5,1.6) {$P_2$};
+\node (P3) at (7,0) {$P_3$};
+\node (P4) at (3.5,-1.6) {$P_4$};
+\draw[->] (P0) -- node[above left] {$\alpha_1$} (P1);
+\draw[->] (P1) -- node[above] {$\alpha_2$} (P2);
+\draw[->] (P2) -- node[above right] {$\alpha_3$} (P3);
+\draw[->] (P0) -- node[below left] {$\beta_1$} (P4);
+\draw[->] (P4) -- node[below right] {$\beta_2$} (P3);
+\end{tikzpicture}
+```
+
+The arrows are the associators of step 3.1 and their tensor translates:
+
+$$\alpha_1=a_{X,Y,Z}\otimes_E1_W,\qquad\alpha_2=a_{X,Y\otimes_D Z,W},\qquad\alpha_3=1_X\otimes_B a_{Y,Z,W},$$
+
+$$\beta_1=a_{X\otimes_B Y,Z,W},\qquad\beta_2=a_{X,Y,Z\otimes_E W}.$$
+
+Each $P_i$ receives its iterated universal map $q_i:X\otimes Y\otimes Z\otimes W\to P_i$, balanced over $B,D,E$, with ambient associators suppressed as in step 1.1. Every displayed arrow $h:P_i\to P_j$ satisfies $h q_i=q_j$. Consequently both routes carry $q_0$ to $q_3$, and step 3.1 gives $\alpha_3\alpha_2\alpha_1=\beta_2\beta_1$. The diagram illustrates this equality; the proof above is independent of it.

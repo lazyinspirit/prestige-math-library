@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-pure-braid-generators-as-point-pushes.json
+  precheck: pass
 id: ex-pure-braid-generators-as-point-pushes
 kind: example
 title: "Standard $A_{ij}$ as point pushes after relabeling"
@@ -43,8 +46,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.0321"
     - title: "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, sections 4.2.1-4.2.3, printed pp. 101-105 (point pushing)"
       url: "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Example
@@ -109,52 +111,46 @@ The rightmost factor is the bottom one, $[\gamma\star\beta]=[\gamma][\beta]$, an
 
 **Proof technique:** direct.
 
-**Choice bookkeeping.** AC supplies DC and countable choice, so the cited fibre exact sequence, braid identifications, and point-pushing identifications are available. [A1, F1, F2, F7, F9]
+1.1 **Choice bookkeeping.** AC supplies DC and countable choice, so the cited fibre exact sequence, braid identifications, and point-pushing identifications are available. [A1, F1, F2, F7, F9] The choice hypothesis discharges the cited fibration and mapping-class identifications. [A1, F1, F2, F7, F9]
 
-1.1 The choice hypothesis discharges the cited fibration and mapping-class identifications. [A1, F1, F2, F7, F9]
+2.1 **Terminal fibre case.** Fix $i<n$ and let $[\lambda_i^{\mathrm{ccw}}]$ be the counterclockwise based meridian class in the last-coordinate fibre at $q_n$ from [F2]. Write $[\lambda_i^{\mathrm{cw}}]=[\lambda_i^{\mathrm{ccw}}]^{-1}$. The standard generator in $PB_n$ is $A_{in}=\Psi_n^{\mathrm{conf}}([W_{in}])$; applying $\Psi_n^{\mathrm{conf}}$ to $A_{in}$ again would be ill-typed. The source formula and the fact that the fibre inclusion is a homomorphism give $$A_{in}=(\kappa_*[\lambda_i^{\mathrm{ccw}}])^{-1}=\kappa_*[\lambda_i^{\mathrm{cw}}]=\iota^F_*[M_n(\lambda_i^{\mathrm{cw}})].$$ This proves the terminal instance of claim 1. [F2, F3, F10] Thus the terminal generator is the closed-disc image of the clockwise last-coordinate meridian. [step 1.1, F2, F3, F10]
 
-**Terminal fibre case.** Fix $i<n$ and let $[\lambda_i^{\mathrm{ccw}}]$ be the counterclockwise based meridian class in the last-coordinate fibre at $q_n$ from [F2]. Write $[\lambda_i^{\mathrm{cw}}]=[\lambda_i^{\mathrm{ccw}}]^{-1}$. The standard generator in $PB_n$ is $A_{in}=\Psi_n^{\mathrm{conf}}([W_{in}])$; applying $\Psi_n^{\mathrm{conf}}$ to $A_{in}$ again would be ill-typed. The source formula and the fact that the fibre inclusion is a homomorphism give
-$$A_{in}=(\kappa_*[\lambda_i^{\mathrm{ccw}}])^{-1}=\kappa_*[\lambda_i^{\mathrm{cw}}]=\iota^F_*[M_n(\lambda_i^{\mathrm{cw}})].$$
-This proves the terminal instance of claim 1. [F2, F3, F10]
+2.2 **A point-motion loop maps to its point push.** Let $p=q_j$ and let $\gamma$ be any based loop in $Y^{(j)}$ at $q_j$. By the geometric-braid/configuration identification [F3] and the open-to-closed map [F10], the ordered loop $M_j(\gamma)$ defines a pure geometric braid $\beta_\gamma$ whose unordered slice is $\bar\gamma$. Its inverse braid $\beta_\gamma^{-1}$ has coordinate loop class $[M_j(\gamma)]^{-1}$ and unordered slice class $[\bar\gamma]^{-1}$. The braid/configuration and braid/mapping-class maps [F7] therefore give $$\Psi_n^{\mathrm{conf}}(\beta_\gamma^{-1})=(\iota^F_*[M_j(\gamma)]^{-1})^{-1}=\iota^F_*[M_j(\gamma)],\qquad \Psi_n^{\mathrm{mc}}(\beta_\gamma^{-1})=\delta(([\bar\gamma]^{-1})^{-1})=\delta([\bar\gamma]).$$ For any marked point $q_j$, the inverse-endpoint point-motion map constructed in the kernel lemma's proof is $\operatorname{Push}_{q_j}([\gamma])=\delta([\bar\gamma])$; for $j=n$ this agrees with [F8]. Thus $$\Theta_n(\iota^F_*[M_j(\gamma)])=\Psi_n^{\mathrm{mc}}(\beta_\gamma^{-1})=\operatorname{Push}_{q_j}([\gamma]).$$ This identity will compare classes by the isomorphism $\Theta_n$ and uses no fibre-inclusion injectivity. [F3, F7, F8, F10, F11] For every marked point, the image under $\Theta_n$ of its one-coordinate motion is the corresponding point push. [step 1.1, F3, F7, F8, F10, F11]
 
-2.1 Thus the terminal generator is the closed-disc image of the clockwise last-coordinate meridian. [step 1.1, F2, F3, F10]
+2.3 **Transport the adjacent point push.** Fix $i<j$. Choose the local circle $C_i$ and stem $\tau_i$ from the statement, and let $\lambda_i^{\mathrm{cw}}$ be the loop following $\tau_i$, once clockwise around $C_i$, and back. Put $g_{i,j}:=[\sigma_{j-1}]\cdots[\sigma_{i+1}]\in G_n$ and let $h_{i,j}=H_{j-1}\circ\cdots\circ H_{i+1}$ be its mapping-class representative, with the rightmost map acting first. Hence $h_{i,j}(q_{i+1})=q_j$ and $h_{i,j}(q_i)=q_i$. It fixes $C_i$ pointwise: each support $U_r$ for $r\ge i+2$ is disjoint from $U_i$, while every point of $C_i$ is at distance at least $3h_n-\epsilon_i\ge 2.9h_n>3h_n/2$ from the center of $U_{i+1}$. Thus $h_{i,j}\circ\tau_i$ is a stem from $q_j$ to $C_i$, and $h_{i,j}\circ\lambda_i^{\mathrm{cw}}=\gamma_{i,j}^{\mathrm{cw}}$. The path avoids all punctures other than its basepoint because $h_{i,j}$ permutes $Q$ and sends the omitted point $q_{i+1}$ to $q_j$. The word identity [F3], first-under-second product, and the local winding and typed naturality in [F11] now give $$\Theta_n(A_{ij})=\Psi_n^{\mathrm{mc}}([W_{ij}])=h_{i,j}\Psi_n^{\mathrm{mc}}([\sigma_i^2])h_{i,j}^{-1}=h_{i,j}\operatorname{Push}_{q_{i+1}}([\lambda_i^{\mathrm{cw}}])h_{i,j}^{-1}=\operatorname{Push}_{q_j}([\gamma_{i,j}^{\mathrm{cw}}]).$$ For $j=i+1$, $h_{i,j}$ is the identity and this is exactly the local winding case. [F3, F7, F11] The conjugated geometric generator has the point-push image along the transported standard stem. [step 1.1, F3, F4, F5, F7, F11]
 
-**A point-motion loop maps to its point push.** Let $p=q_j$ and let $\gamma$ be any based loop in $Y^{(j)}$ at $q_j$. By the geometric-braid/configuration identification [F3] and the open-to-closed map [F10], the ordered loop $M_j(\gamma)$ defines a pure geometric braid $\beta_\gamma$ whose unordered slice is $\bar\gamma$. Its inverse braid $\beta_\gamma^{-1}$ has coordinate loop class $[M_j(\gamma)]^{-1}$ and unordered slice class $[\bar\gamma]^{-1}$. The braid/configuration and braid/mapping-class maps [F7] therefore give
-$$\Psi_n^{\mathrm{conf}}(\beta_\gamma^{-1})=(\iota^F_*[M_j(\gamma)]^{-1})^{-1}=\iota^F_*[M_j(\gamma)],\qquad \Psi_n^{\mathrm{mc}}(\beta_\gamma^{-1})=\delta(([\bar\gamma]^{-1})^{-1})=\delta([\bar\gamma]).$$
-For any marked point $q_j$, the inverse-endpoint point-motion map constructed in the kernel lemma's proof is $\operatorname{Push}_{q_j}([\gamma])=\delta([\bar\gamma])$; for $j=n$ this agrees with [F8]. Thus
-$$\Theta_n(\iota^F_*[M_j(\gamma)])=\Psi_n^{\mathrm{mc}}(\beta_\gamma^{-1})=\operatorname{Push}_{q_j}([\gamma]).$$
-This identity will compare classes by the isomorphism $\Theta_n$ and uses no fibre-inclusion injectivity. [F3, F7, F8, F10, F11]
+3.1 **Point-push claim for every pair.** By step 2.2, the image under $\Theta_n$ of the one-coordinate motion along $\gamma_{i,j}^{\mathrm{cw}}$ is $\operatorname{Push}_{q_j}([\gamma_{i,j}^{\mathrm{cw}}])$. By step 2.3, this equals $\Theta_n(A_{ij})$. Since $\Theta_n$ is an isomorphism by [F9], it is injective, and therefore $$A_{ij}=\iota^F_*[M_j(\gamma_{i,j}^{\mathrm{cw}})].$$ This proves claim 1 without an isotopy assertion about the full word motion. [F9, step 2.2, step 2.3] Equality under $\Theta_n$ proves the point-push statement for every pair. [F9, step 2.2, step 2.3]
 
-2.2 For every marked point, the image under $\Theta_n$ of its one-coordinate motion is the corresponding point push. [step 1.1, F3, F7, F8, F10, F11]
+4.1 **Relabeled form and open-to-closed maps.** Let $M_n^\rho(\gamma)=(q_1,\dots,q_{j-1},q_{j+1},\dots,q_n,\gamma)$ be the open ordered loop based at $Q^\rho$. Pointwise, $R^\circ\circ M_j(\gamma)=M_n^\rho(\gamma)$. The coordinate-permutation square commutes with the open-to-closed inclusions, so $$R^D_*\bigl(\iota^F_*[M_j(\gamma)]\bigr)=\iota^{F,\rho}_*[M_n^\rho(\gamma)]=\kappa^\rho([\gamma]).$$ Apply this identity to the loop from the point-push claim to obtain $$R^D_*(A_{ij})=\kappa^\rho([\gamma_{i,j}^{\mathrm{cw}}]).$$ This is the relabeled terminal-coordinate form. The argument uses functoriality only and asserts no injectivity of $\widetilde\kappa^\rho$ or $\kappa^\rho$. [F6, F10, step 3.1] The coordinate permutation carries the proven open motion to the stated closed-disc terminal-coordinate class. [F6, F10, step 3.1]
 
-**Transport the adjacent point push.** Fix $i<j$. Choose the local circle $C_i$ and stem $\tau_i$ from the statement, and let $\lambda_i^{\mathrm{cw}}$ be the loop following $\tau_i$, once clockwise around $C_i$, and back. Put $g_{i,j}:=[\sigma_{j-1}]\cdots[\sigma_{i+1}]\in G_n$ and let $h_{i,j}=H_{j-1}\circ\cdots\circ H_{i+1}$ be its mapping-class representative, with the rightmost map acting first. Hence $h_{i,j}(q_{i+1})=q_j$ and $h_{i,j}(q_i)=q_i$. It fixes $C_i$ pointwise: each support $U_r$ for $r\ge i+2$ is disjoint from $U_i$, while every point of $C_i$ is at distance at least $3h_n-\epsilon_i\ge 2.9h_n>3h_n/2$ from the center of $U_{i+1}$. Thus $h_{i,j}\circ\tau_i$ is a stem from $q_j$ to $C_i$, and $h_{i,j}\circ\lambda_i^{\mathrm{cw}}=\gamma_{i,j}^{\mathrm{cw}}$. The path avoids all punctures other than its basepoint because $h_{i,j}$ permutes $Q$ and sends the omitted point $q_{i+1}$ to $q_j$. The word identity [F3], first-under-second product, and the local winding and typed naturality in [F11] now give
-$$\Theta_n(A_{ij})=\Psi_n^{\mathrm{mc}}([W_{ij}])=h_{i,j}\Psi_n^{\mathrm{mc}}([\sigma_i^2])h_{i,j}^{-1}=h_{i,j}\operatorname{Push}_{q_{i+1}}([\lambda_i^{\mathrm{cw}}])h_{i,j}^{-1}=\operatorname{Push}_{q_j}([\gamma_{i,j}^{\mathrm{cw}}]).$$
-For $j=i+1$, $h_{i,j}$ is the identity and this is exactly the local winding case. [F3, F7, F11]
-
-2.3 The conjugated geometric generator has the point-push image along the transported standard stem. [step 1.1, F3, F4, F5, F7, F11]
-
-**Point-push claim for every pair.** By step 2.2, the image under $\Theta_n$ of the one-coordinate motion along $\gamma_{i,j}^{\mathrm{cw}}$ is $\operatorname{Push}_{q_j}([\gamma_{i,j}^{\mathrm{cw}}])$. By step 2.3, this equals $\Theta_n(A_{ij})$. Since $\Theta_n$ is an isomorphism by [F9], it is injective, and therefore
-$$A_{ij}=\iota^F_*[M_j(\gamma_{i,j}^{\mathrm{cw}})].$$
-This proves claim 1 without an isotopy assertion about the full word motion. [F9, step 2.2, step 2.3]
-
-3.1 Equality under $\Theta_n$ proves the point-push statement for every pair. [F9, step 2.2, step 2.3]
-
-**Relabeled form and open-to-closed maps.** Let $M_n^\rho(\gamma)=(q_1,\dots,q_{j-1},q_{j+1},\dots,q_n,\gamma)$ be the open ordered loop based at $Q^\rho$. Pointwise, $R^\circ\circ M_j(\gamma)=M_n^\rho(\gamma)$. The coordinate-permutation square commutes with the open-to-closed inclusions, so
-$$R^D_*\bigl(\iota^F_*[M_j(\gamma)]\bigr)=\iota^{F,\rho}_*[M_n^\rho(\gamma)]=\kappa^\rho([\gamma]).$$
-Apply this identity to the loop from the point-push claim to obtain
-$$R^D_*(A_{ij})=\kappa^\rho([\gamma_{i,j}^{\mathrm{cw}}]).$$
-This is the relabeled terminal-coordinate form. The argument uses functoriality only and asserts no injectivity of $\widetilde\kappa^\rho$ or $\kappa^\rho$. [F6, F10, step 3.1]
-
-4.1 The coordinate permutation carries the proven open motion to the stated closed-disc terminal-coordinate class. [F6, F10, step 3.1]
-
-**Terminal mapping-class sign.** For $i<n$, the fibre formula and [F9] give
-$$\Theta_n(A_{in})=\Theta_n(\kappa_*[\lambda_i^{\mathrm{cw}}])=\operatorname{Push}_n([\lambda_i^{\mathrm{cw}}]).$$
-The source formula [F2] identifies the configuration-group image of $[W_{in}]$ as $(\kappa_*[\lambda_i^{\mathrm{ccw}}])^{-1}$, while [F3] identifies the same image as $(\iota^F_*[z_{W_{in}}])^{-1}$ for the raw ordered coordinate loop. Equating and inverting gives $\iota^F_*[z_{W_{in}}]=\kappa_*[\lambda_i^{\mathrm{ccw}}]$: the raw ordered slice is counterclockwise in the fibre. The configuration identification inverts it, so $A_{in}=\kappa_*[\lambda_i^{\mathrm{cw}}]$. The inverse-endpoint convention then gives exactly the clockwise point push. [F2, F3, F8, F9, step 2.1]
-
-5.1 This proves the terminal mapping-class sign in claim 3 with the positive generator clockwise. [F2, F3, F8, F9, step 2.1] ∎
+5.1 **Terminal mapping-class sign.** For $i<n$, the fibre formula and [F9] give $$\Theta_n(A_{in})=\Theta_n(\kappa_*[\lambda_i^{\mathrm{cw}}])=\operatorname{Push}_n([\lambda_i^{\mathrm{cw}}]).$$ The source formula [F2] identifies the configuration-group image of $[W_{in}]$ as $(\kappa_*[\lambda_i^{\mathrm{ccw}}])^{-1}$, while [F3] identifies the same image as $(\iota^F_*[z_{W_{in}}])^{-1}$ for the raw ordered coordinate loop. Equating and inverting gives $\iota^F_*[z_{W_{in}}]=\kappa_*[\lambda_i^{\mathrm{ccw}}]$: the raw ordered slice is counterclockwise in the fibre. The configuration identification inverts it, so $A_{in}=\kappa_*[\lambda_i^{\mathrm{cw}}]$. The inverse-endpoint convention then gives exactly the clockwise point push. [F2, F3, F8, F9, step 2.1] This proves the terminal mapping-class sign in claim 3 with the positive generator clockwise. [F2, F3, F8, F9, step 2.1] ∎
 
 ## Remarks
 
 - The stem for $A_{ij}$ is the image of the adjacent local stem under the actual mapping-class representative $H_{j-1}\circ\cdots\circ H_{i+1}$. This specifies the compatible meridian path and preserves its clockwise orientation.
 - The relabeling is a coordinate-permutation homeomorphism from basepoint $Q$ to $Q^\rho$. The open terminal-coordinate map and its closed-disc composite have distinct codomains; only the latter is denoted $\kappa^\rho$ in the statement.
 - The example identifies standard generators and makes no new generation or presentation claim. The proof uses the local two-point winding and typed point-push conjugation already proved in [[lem-standard-pure-braids-generate-each-free-kernel]].
+
+For the adjacent base case $n=2$, the compatible stem is the straight segment from $q_2$ to $c_1$. The schematic below shows the one-coordinate loop $\gamma_{1,2}^{\mathrm{cw}}$: travel along the stem, once clockwise around $C_1$, and back. The circle is enlarged for visibility. The filled puncture $q_1$ stays fixed; the open point marks the starting and ending position of the moving point $q_2$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}, line width=.8pt]
+\draw[blue!70!black] (-3,0) circle (.9);
+\draw[->,blue!70!black,thick] (-3,.9) arc (90:0:.9);
+\draw[dashed] (-2.1,0) -- (4.5,0);
+\draw[->] (1.5,.3) -- (.3,.3);
+\draw[->] (.3,-.3) -- (1.5,-.3);
+\fill (-3,0) circle (2pt);
+\fill (-2.1,0) circle (1.5pt);
+\draw[blue!70!black,fill=white,thick] (4.5,0) circle (3pt);
+\node[below] at (-3,-1) {$q_1$ (fixed)};
+\node[below] at (-1.65,-.4) {$c_1$};
+\node[above] at (4.5,.35) {$q_2$ (basepoint)};
+\node[above] at (.9,.6) {out along $\tau_1$};
+\node[below] at (.9,-.6) {back along $\overline\tau_1$};
+\node[above,blue!70!black] at (-3,1.35) {$C_1$: clockwise};
+\node at (.75,-2.15) {$A_{12}=\iota^F_*[M_2(\gamma_{1,2}^{\mathrm{cw}})]$};
+\end{tikzpicture}
+```
+
+The positive geometric word is $W_{12}=\sigma_1^2$; its raw ordered loop has relative winding $+1$ (counterclockwise), whereas $\Psi_2^{\mathrm{conf}}$ inverts that loop and gives the clockwise class of winding $-1$ illustrated here. There is no crossing projection in this figure. For general $i<j$, the stem is the specified $h_{i,j}\circ\tau_i$, rather than an arbitrary straight segment; relabeling moves the same moving point to the last coordinate. The rigorous verification above is independent of the illustration.

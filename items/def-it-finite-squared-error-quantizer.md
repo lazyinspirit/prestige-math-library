@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-it-finite-squared-error-quantizer.json
+  precheck: n/a
 id: def-it-finite-squared-error-quantizer
 kind: definition
 title: Finite measurable squared-error quantizer and nearest-center rule
@@ -15,12 +18,6 @@ axiom_use: No choice principle is used.
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: Robert M. Gray, Source Coding Theory, first edition
@@ -45,3 +42,31 @@ This is the expected single-letter distortion of [[def-it-single-letter-distorti
 $$C_i(c):=X\cap\bigcap_{j<i}\{x:\|x-c_i\|_2^2<\|x-c_j\|_2^2\}\cap\bigcap_{j>i}\{x:\|x-c_i\|_2^2\le\|x-c_j\|_2^2\}.$$
 
 The convention assigns every tie to the smallest index. A general finite measurable quantizer need not use this nearest-center partition; in particular, a compander partition below is specified by its own interval boundaries. When $X=\mathbb R^d$, this is the ordinary full-domain nearest-center quantizer.
+
+
+## Remarks
+
+For the one-dimensional example $X=\mathbb R$ with ordered reproduction points $c_1=-2$, $c_2=0$, and $c_3=2$, the nearest-center cells are $C_1=(-\infty,-1]$, $C_2=(-1,1]$, and $C_3=(1,\infty)$. The midpoint $-1$ belongs to $C_1$ and the midpoint $1$ belongs to $C_2$, since each tie goes to the smaller index. In the illustration, filled endpoints are included and open endpoints are excluded; the three cell rows are separated for readability. For a Borel subset $X\subseteq\mathbb R$, intersect these cells with $X$. This illustrates the nearest-center rule only, not arbitrary measurable quantizers or compander partitions.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (-4.2,0) -- (4.4,0) node[right] {$x$};
+\draw[dashed,gray] (-1,0.15) -- (-1,-2.7);
+\draw[dashed,gray] (1,0.15) -- (1,-2.7);
+\fill (-2,0) circle (2pt) node[above=6pt] {$c_1=-2$};
+\fill (0,0) circle (2pt) node[above=6pt] {$c_2=0$};
+\fill (2,0) circle (2pt) node[above=6pt] {$c_3=2$};
+\draw (-1,0.07) -- (-1,-0.07) node[below=3pt] {$-1$};
+\draw (1,0.07) -- (1,-0.07) node[below=3pt] {$1$};
+\node[left] at (-4.4,-1) {$C_1$};
+\draw[<-,thick] (-4.2,-1) -- (-1,-1);
+\fill (-1,-1) circle (2.5pt);
+\node[left] at (-4.4,-1.8) {$C_2$};
+\draw[thick] (-1,-1.8) -- (1,-1.8);
+\draw[fill=white] (-1,-1.8) circle (2.5pt);
+\fill (1,-1.8) circle (2.5pt);
+\node[left] at (-4.4,-2.6) {$C_3$};
+\draw[->,thick] (1,-2.6) -- (4.2,-2.6);
+\draw[fill=white] (1,-2.6) circle (2.5pt);
+\end{tikzpicture}
+```

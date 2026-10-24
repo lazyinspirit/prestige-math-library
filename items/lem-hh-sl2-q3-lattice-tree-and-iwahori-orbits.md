@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-sl2-q3-lattice-tree-and-iwahori-orbits.json
+  precheck: pass
 id: lem-hh-sl2-q3-lattice-tree-and-iwahori-orbits
 kind: lemma
 title: The lattice tree and Iwahori orbits for SL2(Q3)
@@ -14,8 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: Maarten Solleveld, Affine Hecke algebras and their representations, §1.2
@@ -48,3 +49,42 @@ The $I$-orbits on edges are indexed by finite alternating words in $s_0,s_1$ (in
 
 3.1 The unique shortest edge gallery from $E$ to any other edge changes endpoint types alternately: changing twice at the same endpoint would shorten it. For a gallery proceeding along $L_0,L_1,\ldots,L_n$, the matrices $\begin{pmatrix}1&0\\\pi^n b&1\end{pmatrix}$ for $b\in\mathcal O$ fix every earlier vertex and act transitively on the three possible next edges. In the basis $e_1,\pi^n e_2$, the backward edge corresponds to the line spanned by the second basis vector; the other lines are spanned by $e_1+t\pi^n e_2$ for $t\in\mathbb F_3$, and the displayed matrices send $t$ to $t+b$. For the other initial direction the apartment chain is $L_1,L_0,L_{-1},\ldots,L_{-n}$; use instead $\begin{pmatrix}1&\pi^n b\\0&1\end{pmatrix}$ at $L_{-n}$, which fixes that earlier chain and is transitive on the three forward lines there. Inductively move each gallery onto the corresponding apartment segment while fixing its earlier segment. Hence $I$ is transitive on the edges with each alternating type word. There are three choices at each extension, so the orbit size is $3^n$. Different words have different type sequences or distances and cannot be in the same orbit. By step 2.2 edges identify with $G/I$, so these orbits are exactly the double cosets. [F2, step 2.1, step 2.2, algebra] ∎
 
+
+## Remarks
+
+The finite neighborhood below shows actual lattice-tree vertices and edges. Filled vertices have type $0$ and hollow vertices type $1$. The horizontal path is part of the apartment $\ldots,[L_{-1}],[L_0],[L_1],[L_2],[L_3],\ldots$; boundary vertices have further neighbors omitted. The bold edge is $E$.
+
+```tikz
+\begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
+\coordinate (a) at (0,0);
+\coordinate (b) at (3,0);
+\coordinate (lm) at (-2,0);
+\coordinate (lu) at (-2,1.5);
+\coordinate (ld) at (-2,-1.5);
+\coordinate (rm) at (5,0);
+\coordinate (ru) at (5,1.5);
+\coordinate (rd) at (5,-1.5);
+\coordinate (fm) at (7,0);
+\coordinate (fu) at (7,0.8);
+\coordinate (fd) at (7,-0.8);
+\draw[very thick] (a) -- (b);
+\draw (a) -- (lm) (a) -- (lu) (a) -- (ld);
+\draw (b) -- (rm) (b) -- (ru) (b) -- (rd);
+\draw (rm) -- (fm) (rm) -- (fu) (rm) -- (fd);
+\foreach \v in {a,rm,ru,rd}
+  \fill (\v) circle (2.5pt);
+\foreach \v in {b,lm,lu,ld,fm,fu,fd}
+  \draw[fill=white] (\v) circle (2.5pt);
+\node[below] at (a) {$[L_0]$};
+\node[below] at (b) {$[L_1]$};
+\node[below] at (lm) {$[L_{-1}]$};
+\node[below] at (rm) {$[L_2]$};
+\node[below] at (fm) {$[L_3]$};
+\node[above] at (1.5,0) {$E$};
+\node at (-0.8,1.8) {$s_1$: three choices};
+\node at (3.9,1.8) {$s_0$: three choices};
+\node at (6,1.15) {$s_1$};
+\end{tikzpicture}
+```
+
+Starting from $E$, the left three edges are its $s_1$-orbit and the right three its $s_0$-orbit: the shared endpoint has type $0$ and type $1$, respectively. Continuing through a new endpoint again leaves one backward edge and three forward choices. Only the continuation through $[L_2]$ is drawn; continuing through all three right endpoints gives the $3^2$ edges of the word obtained by first applying $s_0$ and then $s_1$. Iterating gives $3^n$ edges for each prescribed alternating gallery word, as proved in step 3.1. An orbit is a set of edges in this branching tree, rather than a single apartment segment. The proof above is independent of the illustration.

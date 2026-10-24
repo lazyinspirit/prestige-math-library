@@ -1,0 +1,129 @@
+{
+  "id": "alg-radix-two-fft",
+  "agent": "/root/rendering_repair_coordinator/dnn_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile renders the definition correctly but contains no diagram. The even/odd split and paired output dependencies are a concrete butterfly pattern; a four-point illustration materially clarifies which two subtransform entries feed each output pair. This editorial addition is warranted independently of algorithm correctness.",
+      "action": "Added final Remarks with explicit length-two even/odd transforms and two directed butterflies for k=0 and k=1, with scalar output formulas at each target.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory M=4 FFT butterfly without editing the Definition, references or metadata.",
+  "source_lines_after": {
+    "remarks": [
+      30,
+      53
+    ],
+    "explanation": 32,
+    "diagram": [
+      34,
+      53
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "a lies in C^4; E and O lie in C^2 and are the DFTs of (a_0,a_2) and (a_1,a_3). All displayed E_k, O_k and output values are complex scalars.",
+      "justification": "Definition line 24 specializes q=2 to M=4, omega=exp(-pi i/2)=-i and recursive root omega^2=-1; hence E=(a_0+a_2,a_0-a_2) and O=(a_1+a_3,a_1-a_3), as stated on line 32."
+    },
+    {
+      "relation": "The upper butterfly has E_0 and O_0 as inputs to both a-hat_0=E_0+O_0 and a-hat_2=E_0-O_0.",
+      "justification": "Definition line 24 recombination with k=0, omega^0=1 and M/2=2; four directed edges terminate at exactly these two formulas."
+    },
+    {
+      "relation": "The lower butterfly has E_1 and O_1 as inputs to both a-hat_1=E_1+omega O_1 and a-hat_3=E_1-omega O_1.",
+      "justification": "Definition line 24 recombination with k=1 and k+M/2=3. Since omega=-i this also gives a-hat_1=E_1-i O_1 and a-hat_3=E_1+i O_1, consistent with the stated forward root convention."
+    },
+    {
+      "relation": "Each butterfly is a directed dependency graph with two source vertices, two target vertices, and all four source-to-target edges. Its two diagonal edges cross without joining.",
+      "justification": "The prose on line 32 explicitly defines arrow and crossing semantics; visual inspection confirms eight total vertices and eight directed edges with no vertex at either crossing. No graph closure, inverse-transform operation, equality of maps, or extra computational stage is asserted."
+    }
+  ],
+  "proof_independent": true,
+  "proof_independence_note": "This is an algorithm definition with no proof-like section. The exact recursion remains entirely in the unchanged Definition, independent of the illustration.",
+  "guards": {
+    "before_raw_sha256": "67e62334aa9b9cc9ba35d1750adde103858f58e8ada4c63559dff1eb38fa118e",
+    "current_raw_sha256": "4926607cc601e295028b55d05cce2020236d1a98b7c079984c265a21b299e77e",
+    "pre_edit_guard": "Matched queue before_raw_sha256 immediately before the sole item edit.",
+    "frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published"
+  },
+  "evidence": {
+    "original_declared_image": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/alg-radix-two-fft--01.png",
+    "original_path_discrepancy": "Declared supplement/screenshots path does not exist. Located the authentic tile in the corresponding category screenshots directory and verified the exact recorded SHA256 before inspection.",
+    "original_inspected_image": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-radix-two-fft--01.png",
+    "original_image_sha256": "69ddff9618eec52bdeb40fe8a1f40c471f6f803c092e508dfe80417e827f939a",
+    "original_view": "Standalone view_image, detail original.",
+    "before_current_comparison": "Frozen before and pre-edit current raw bytes matched; post-edit Definition and all frontmatter remain unchanged.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-002-fft/manifest.json",
+    "preview_source_sha256": "4926607cc601e295028b55d05cce2020236d1a98b7c079984c265a21b299e77e",
+    "preview_html_sha256": "98aa7731c71adc8eb3ed09ea9121ab460abb664f44af43ccfd55bea9cfdb6791",
+    "preview_reference_map_sha256": "c413bc31b7316f463a9e6a9a07d8819d08cf0af245580343acbed094a6d5f53f",
+    "preview_inspected_image": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-002-fft/screenshots/alg-radix-two-fft--01.png",
+    "preview_image_sha256": "d55a9bfeb082361f5dd39d6f34698db332f78e597f382e89ae7be637c41e3e7f",
+    "preview_view": "Standalone view_image, detail original. New Remarks and diagram visibly rendered, including all formulas and eight directed edges, without clipping/overlap.",
+    "native_capture": {
+      "katex_errors": [],
+      "katex_count": 31,
+      "tikz_count": 1,
+      "diagram_failures": []
+    }
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-radix-two-fft.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-radix-two-fft.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-radix-two-fft.md",
+            "item_id": "alg-radix-two-fft",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-radix-two-fft.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn-002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-radix-two-fft --out research/math-library-rendering-repairs-2026-10-23/previews/dnn-002-fft",
+      "exit_code": 0,
+      "output": {
+        "output_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-002-fft",
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [
+    "Fresh native-preview PNG leaves the unchanged title/Definition/reference region blank, although those texts are present in preview HTML and render correctly in the authentic original screenshot. New Remarks/diagram render visibly and native capture reports no KaTeX or diagram errors. This capture artifact was not treated as an item defect.",
+    "The native local preview is ItemBody coverage, not the production HTTP route; reference-map diagnostics concern 16 unrelated carriers."
+  ]
+}

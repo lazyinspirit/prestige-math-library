@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-flag-variety-bruhat-cell-decomposition.json
+  precheck: pass
 id: thm-flag-variety-bruhat-cell-decomposition
 kind: theorem
 title: Bruhat cells of the flag variety
@@ -20,13 +23,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups"
@@ -103,3 +99,29 @@ automorphism of $X_B$ induced by left translation by $n_{w_0}$.
 5.1 The cell as a translate of the big cell quotient. Applying $\pi_B$ to the identity $Bn_{w_0}B=n_{w_0}\Omega$ of step 1.2 gives $$Bw_0B/B=\pi_B(n_{w_0}\Omega)=n_{w_0}\cdot\pi_B(\Omega)=n_{w_0}\cdot(\Omega/B),$$ the image of the open cell $\Omega/B$ under the automorphism of $X_B$ induced by left translation by $n_{w_0}$. By [F3] one has $\Omega/B\cong U^-\cong\mathbb A^{|\Phi^+|}$, so the longest cell is isomorphic to $\mathbb A^{|\Phi^+|}$ and has dimension $|\Phi^+|=\ell(w_0)$ by [F4], in agreement with step 4.1. [F3, F4, step 4.1, step 1.2]
 
 6.1 Conclusion. Step 2.1 gives the disjoint covering by the $B$-orbits $BwB/B$, step 3.1 the locally closed scheme-level cells, step 4.1 the affine isomorphism $BwB/B\cong U_w\cong\mathbb A^{\ell(w)}$, and steps 3.2 and 5.1 the unique open dense longest cell as a translate of the big cell. The Axiom of Choice [A1] is assumed in the statement and is inherited through the three in-run suppliers [F1], [F2] and [F3], which assume it; the proof adds no further choice, all decompositions being indexed by the finite Weyl group $W$ of [F4]. The quotient structure of [F1] is supplied by the proved flag-torsor charts, while [F2] proves disjointness and cell isomorphisms and [F3] proves the open big cell; their uses occur at steps 1.1, 2.1, 4.1 and 1.2 respectively. [A1, F1, F2, F3, F4, F5, F6, F7, step 1.1, step 2.1, step 3.1, step 4.1, step 1.2, step 3.2, step 5.1] ∎
+
+
+## Remarks
+
+Write $C_w=BwB/B$. The square displays how the root coordinates on a
+double coset descend to coordinates on its cell, separately for each $w\in W$:
+
+```tikzcd
+U_w\times B \arrow[r, "\mu_w", "\sim"'] \arrow[d, "\mathrm{pr}_1"'] & Bn_wB \arrow[d, "\pi_B|_{Bn_wB}"] \\
+U_w \arrow[r, "\varphi_w", "\sim"'] & C_w
+```
+
+Here $\mu_w(u,b)=un_wb$ and $\varphi_w(u)=un_wB$. Both routes send
+$(u,b)$ to $un_wB$, since right multiplication by $b\in B$ does not change
+the coset. The horizontal arrows are the isomorphisms of [F2] and step 4.1;
+the vertical arrows forget the right $B$-factor. Thus
+$X_B=\bigsqcup_{w\in W}C_w$ is a finite disjoint partition into locally
+closed cells, each with $\dim C_w=\ell(w)$.
+
+The coordinate roots are precisely $\alpha\in\Phi^+\cap w\Phi^-$,
+equivalently positive roots with $w^{-1}\alpha\in\Phi^-$. Their number
+is $\ell(w)$ by [F2]. For $w=e$ this set is empty and $C_e=\{B\}$;
+for $w=w_0$ it is all of $\Phi^+$ and $C_{w_0}\cong\mathbb A^{|\Phi^+|}$.
+The latter cell is open and dense, and is $n_{w_0}\cdot\pi_B(U^-B)$ by
+steps 3.2 and 5.1. The square records quotient coordinates, without asserting
+closure incidences between cells. The proof above is independent of the figure.

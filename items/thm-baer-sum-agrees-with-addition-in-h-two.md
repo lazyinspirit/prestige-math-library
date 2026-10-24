@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-baer-sum-agrees-with-addition-in-h-two.json
+  precheck: pass
 id: thm-baer-sum-agrees-with-addition-in-h-two
 kind: theorem
-title: "The Baer sum agrees with addition in H^2"
+title: "The Baer sum agrees with addition in $H^2$"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-axiom-of-choice, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, def-baer-sum-of-abelian-kernel-extensions, lem-baer-sum-is-independent-of-extension-representatives]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:

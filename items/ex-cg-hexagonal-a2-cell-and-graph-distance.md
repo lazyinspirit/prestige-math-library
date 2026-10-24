@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-hexagonal-a2-cell-and-graph-distance.json
+  precheck: pass
 id: ex-cg-hexagonal-a2-cell-and-graph-distance
 kind: example
 title: "The hexagonal $A_2$ cell: Euclidean cell metric versus graph distance"
@@ -21,13 +24,7 @@ sources:
     - title: "Martin R. Bridson and André Haefliger, Metric Spaces of Non-Positive Curvature (Springer Grundlehren 319, 1999; author-hosted PDF)"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "I.7.12-I.7.13, printed pp. 101-102 (model cells and completeness under finitely many shapes)"
-verification:
-  audited: "2026-10-08"
-  precheck: pending
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -87,3 +84,40 @@ and the six vertices $v_0,\dots,v_5$, and $H$ is $2$-dimensional because it cont
 3.3 (Clause (iii): the star radius.) Substituting $D=2$ and $L=\tfrac{4}{\sqrt3}$ into [F2] gives $$\delta=\frac{1}{2L(D+1)}=\frac{1}{2\cdot\tfrac{4}{\sqrt3}\cdot 3}=\frac{\sqrt3}{24},$$ using $(\sqrt3)^2=3$ and $\tfrac{1}{24/\sqrt3}=\tfrac{\sqrt3}{24}$ [F7]. [F2, F7, step 2.2]
 
 4.1 (Clause (iv): the graph distance and the comparison.) The hexagonal $1$-skeleton is the cycle $v_0v_1v_2v_3v_4v_5v_0$ on six vertices, a connected simple graph, so it carries the graph path metric $d_{\mathrm{gr}}$ [F8]; for $k\in\{1,2,3\}$ the boundary path $v_0,v_1,\dots,v_k$ has length $k$, so $d_{\mathrm{gr}}(v_0,v_k)\le k$, while a path of $r$ edges consists of index increments $+1$ or $-1$ modulo $6$, whose integer sum $j$ satisfies $j\equiv k\pmod6$ and $|j|\le r$. The minimum of $|j|$ among integers congruent to $k$ is $\min(k,6-k)=k$ for $k=1,2,3$, hence $r\ge k$; thus $d_{\mathrm{gr}}(v_0,v_k)=k$. Comparing with step 3.2: $\sqrt3\ne 2$ and $2\ne 3$ [F7], so the chain metric and the graph metric already differ at the vertex pairs $(v_0,v_2)$ and $(v_0,v_3)$, and in particular the graph metric of the $1$-skeleton is not the restriction of the cell metric; the boundary path has length $3$ between $v_0$ and $v_3$, strictly more than $d(v_0,v_3)=2$. [F8, step 3.1, step 3.2] ∎
+
+## Remarks
+
+The figure uses exactly the coordinates above. The six solid sides form the graph $C_6$; the highlighted upper boundary route reaches $v_1,v_2,v_3$ after $1,2,3$ unit edges. The dashed segments are cell geodesics, not additional graph edges. In the cell, the side $[v_0,v_1]$, short diagonal $[v_0,v_2]$ and diameter $[v_0,v_3]$ have lengths $1,\sqrt3,2$, respectively. Thus the pairs of cell and graph distances are $(1,1)$, $(\sqrt3,2)$ and $(2,3)$, as proved in steps 3.2 and 4.1. Under step 3.1's orbit labelling, the cyclic vertices correspond to $1,s,st,sts,ts,t$. The verification is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=2.3]
+\coordinate (v0) at (1,0);
+\coordinate (v1) at (0.5,{sqrt(3)/2});
+\coordinate (v2) at (-0.5,{sqrt(3)/2});
+\coordinate (v3) at (-1,0);
+\coordinate (v4) at (-0.5,{-sqrt(3)/2});
+\coordinate (v5) at (0.5,{-sqrt(3)/2});
+\coordinate (o) at (0,0);
+\draw[thick] (v0)--(v1)--(v2)--(v3)--(v4)--(v5)--(v0);
+\draw[blue,very thick] (v0)--(v1)--(v2)--(v3);
+\draw[red,dashed,thick] (v0)--(v2);
+\draw[red,dashed,thick] (v0)--(v3);
+\fill (v0) circle (0.025);
+\fill (v1) circle (0.025);
+\fill (v2) circle (0.025);
+\fill (v3) circle (0.025);
+\fill (v4) circle (0.025);
+\fill (v5) circle (0.025);
+\fill (o) circle (0.02);
+\node[right] at (v0) {$v_0$};
+\node[above right] at (v1) {$v_1$};
+\node[above left] at (v2) {$v_2$};
+\node[left] at (v3) {$v_3$};
+\node[below left] at (v4) {$v_4$};
+\node[below right] at (v5) {$v_5$};
+\node[below right] at (o) {$o$};
+\node[right] at (0.82,0.48) {$1$};
+\node[fill=white,inner sep=2pt] at (0.25,0.48) {$\sqrt3$};
+\node[below] at (-0.5,-0.02) {$2$};
+\end{tikzpicture}
+```

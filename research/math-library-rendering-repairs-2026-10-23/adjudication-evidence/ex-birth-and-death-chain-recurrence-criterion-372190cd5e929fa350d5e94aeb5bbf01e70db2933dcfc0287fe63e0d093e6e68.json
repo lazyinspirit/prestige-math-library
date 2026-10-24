@@ -1,0 +1,101 @@
+{
+  "id": "ex-birth-and-death-chain-recurrence-criterion",
+  "agent": "/root/rendering_repair_supervisor2/prob_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other: missing-command-backslash",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile 01 visibly renders italic letters mathbb before N_0. The frozen/current source at line 44 has $mathbb N_0$, whereas the same state space is explicitly $\\mathbb N_0$ in proof step 7.1. This is a missing command backslash, not unsupported KaTeX or optional typography.",
+      "action": "Inserted exactly one backslash before mathbb on line 44; native current tile 01 now renders the blackboard-bold natural-number symbol with subscript 0.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "$mathbb N_0$ → $\\mathbb N_0$ on line 44 only.",
+  "source_lines_after": {
+    "44": "Assume AC. Let $X$ be a Markov chain on $\\mathbb N_0$ whose only possible"
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_reason": "The intended countably infinite nonnegative-integer state space is already explicit as \\mathbb N_0 in step 7.1 and in the nonnegative indices throughout. The repair only restores the symbol. I independently checked the scale recursion p_i s_i = q_i s_{i-1}, the finite-boundary H(i)/H(M) relation and the resulting escape/return formula in the unchanged proof; no hypotheses, products, limits or probability claims changed. This was a focused rendering adjudication, not a new broad proof/source audit.",
+  "raw_sha_guard": {
+    "expected": "1375b40fc84bba78e47d57bee8d203e9f23fb46b32238e0892d62f4e880c1dbd",
+    "matched_immediately_before_edit": true,
+    "after": "42e32bf0fbb746858f98e8014617ea6e0c278264970793852bc3a390e4fe29fc"
+  },
+  "metadata_preservation": {
+    "frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published",
+    "status_line_byte_identical": true
+  },
+  "original_visual_inspection": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/probability",
+    "tiles": [
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--01.png",
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--02.png",
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--03.png",
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--04.png"
+    ],
+    "method": "Each tile viewed separately using view_image detail original; no composite view.",
+    "flagged_tile_sha256_verified": "e351578bd7307a374f7241ac5cf39fe9ae037b9c900855491fb7ff0f581a2b60"
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-birth-and-death-chain-recurrence-criterion.md --json",
+      "exit_code": 0,
+      "actual_output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-birth-and-death-chain-recurrence-criterion.md --json",
+      "exit_code": 0,
+      "actual_output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-birth-and-death-chain-recurrence-criterion.md",
+      "exit_code": 0,
+      "actual_output": "proof-layout: 1 items, 9 steps, 0 defects"
+    }
+  ],
+  "current_native_preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/prob004-fresh2",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/prob004-fresh2/manifest.json",
+    "manifest_sha256": "bb407bbe42801df32105f555ee814e8c43b1b6923dfdaa295af38205af0316ba",
+    "source_sha256": "42e32bf0fbb746858f98e8014617ea6e0c278264970793852bc3a390e4fe29fc",
+    "reference_map_sha256": "4ef6c20def4273516ba060ad74fa4a026ebc148b6ffc60ce581ca13659121d97",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/prob004-fresh2/screenshots/ex-birth-and-death-chain-recurrence-criterion.json",
+    "tiles_inspected_standalone_original": [
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--01.png",
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--02.png",
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--03.png",
+      "screenshots/ex-birth-and-death-chain-recurrence-criterion--04.png"
+    ],
+    "katex_errors": [],
+    "diagram_failures": [],
+    "katex_count": 172,
+    "tikz_count": 0,
+    "visual_result": "Correct natural-number symbol in opening sentence; all four current tiles inspected with no additional confirmed visible LaTeX defect.",
+    "limits": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_title_map_diagnostics": 13
+  },
+  "remaining_issues": []
+}

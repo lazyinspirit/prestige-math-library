@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes.json
+  precheck: pass
 id: thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes
 kind: theorem
 title: Discrete de Rham cohomology and contractible-mesh exactness
@@ -36,12 +39,7 @@ sources:
     - title: Long Chen, Finite Element Methods for Maxwell Equations, complete lecture
         notes
       url: https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -96,3 +94,15 @@ using the $L^2$ inner product. Then $\ker\operatorname{curl}=\nabla W_h^0\oplus\
 
 6.1 For arbitrary topology, let $Z_h^1=\ker\operatorname{curl}$ and $B_h^1=\nabla W_h^0$. By step 3.1, $B_h^1\subseteq Z_h^1$. The space $Z_h^1$ is finite dimensional as a subspace of $N_h^1$, so [F10] applied inside $Z_h^1$ gives $Z_h^1=B_h^1\oplus(Z_h^1\cap(B_h^1)^\perp)$ with orthogonality from [F9]. The second summand has dimension $\dim(Z_h^1/B_h^1)=\dim H^1(C^*)=\dim H_1(|\mathcal T|;\mathbb R)$ by steps 3.1–2.2 and the duality proved in step 4.1. Applying the same [F10] argument to $Z_h^2=\ker\operatorname{div}$ and $B_h^2=\operatorname{curl}N_h^1\subseteq Z_h^2$ gives the asserted second harmonic space and dimension. These are discrete cohomology components, not an assertion that a continuum sequence is exact. [A1, F1, F9, F10, step 1.1, step 2.1, step 3.1, step 4.1, algebra] ∎
 
+## Remarks
+
+The parallel complexes below display the degrees-of-freedom identification. Here $J^0$ records vertex values, $J^1$ oriented edge circulations, $J^2$ oriented face fluxes, and $J^3$ cell integrals; each vertical map is an isomorphism. Every square commutes by the oriented moment identities in proof step 3.1.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, scale=1.5, transform shape]
+W_h^0 \arrow[r, "\nabla"] \arrow[d, "J^0"', "\cong"] & N_h^1 \arrow[r, "\mathrm{curl}"] \arrow[d, "J^1"', "\cong"] & N_h^2 \arrow[r, "\mathrm{div}"] \arrow[d, "J^2"', "\cong"] & N_h^3 \arrow[d, "J^3"', "\cong"] \\
+C^0 \arrow[r, "\delta^0"'] & C^1 \arrow[r, "\delta^1"'] & C^2 \arrow[r, "\delta^2"'] & C^3
+\end{tikzcd}
+```
+
+Thus the harmonic summands in the Statement represent the degree-one and degree-two cohomology left after quotienting each kernel by the preceding image; their dimensions are the corresponding real homology dimensions. Exactness in positive degrees is asserted only under the stated nonempty, connected, contractible hypothesis. The proof is independent of this diagram.

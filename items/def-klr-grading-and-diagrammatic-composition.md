@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-klr-grading-and-diagrammatic-composition.json
+  precheck: pass
 id: def-klr-grading-and-diagrammatic-composition
 kind: definition
 title: "The KLR grading and the diagrammatic multiplication"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 1
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -58,3 +59,56 @@ All grading shifts on this page are the internal shifts of [[def-graded-ring-mod
 3.1 Relation (7), unequal outer colours: for colours $(\nu_a,\nu_{a+1},\nu_{a+2})=(a',b',c')$ both braid words are sums of terms each moving the same three crossings over the same three pairs, so each has degree $-b_{a'b'}-b_{a'c'}-b_{b'c'}$, and the right side is $0$; on the equal-outer-colour case $(i,j,i)$ each braid word has the same degree $-2b_{ij}-2d_i$, while the correction numerator has degree $-2b_{ij}$ and its division by $x_{a+2}-x_a$, of degree $2d_i$, lowers the degree to $-2b_{ij}-2d_i$; for three equal colours $Q_{ii}=0$ and the ordinary nil-Hecke braid relation is homogeneous of degree $-6d_i$. [step 2.2, F1, F2, algebra]
 
 4.1 Use the free path algebra with vertices $\nu$, loops $x_ae(\nu)$ and arrows $\tau_ae(\nu):\nu\to s_a\nu$, assigned the displayed degrees. Its vertex sum is the unit because $I$ is finite; decomposing the global generators by word idempotents identifies its presented quotient with $R_n(Q)$. Every defining component relation is homogeneous, so the two-sided ideal they generate is graded, and the quotient $R_n(Q)$ inherits a $\mathbb Z$-grading with $R_n(Q)_m=\bigoplus_{\nu,\eta}e(\nu)R_n(Q)_me(\eta)$; the weight refinement is inherited because each generator preserves the weight $\sum_a\alpha_{\nu_a}$ and each relation is weight-homogeneous, and $R(\beta)=e(\beta)R_{|\beta|}(Q)e(\beta)$ is a graded subalgebra for every $\beta\in Q_+$. [step 1.1, step 2.1, step 2.2, step 3.1, algebra] ∎
+
+## Remarks
+
+For the two-strand word $\nu=(i,j)$, the three elementary diagrams below have the indicated bottom and top words. Colors only help track strands; they impose no additional condition on $i,j$, which may coincide. The crossing has no over/under choice. The degrees are those of the word components, not necessarily of the global generators.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\begin{scope}
+\draw[blue,thick] (0,0) -- (0,1.5);
+\draw[red,thick] (1,0) -- (1,1.5);
+\node at (0,-0.25) {$i$}; \node at (1,-0.25) {$j$};
+\node at (0,1.75) {$i$}; \node at (1,1.75) {$j$};
+\node at (0.5,2.25) {$e(i,j)$};
+\node at (0.5,-0.8) {$\deg=0$};
+\end{scope}
+\begin{scope}[xshift=3cm]
+\draw[blue,thick] (0,0) -- (0,1.5);
+\draw[red,thick] (1,0) -- (1,1.5);
+\fill[blue] (0,0.75) circle (0.07);
+\node at (0,-0.25) {$i$}; \node at (1,-0.25) {$j$};
+\node at (0,1.75) {$i$}; \node at (1,1.75) {$j$};
+\node at (0.5,2.25) {$x_1e(i,j)$};
+\node at (0.5,-0.8) {$\deg=2d_i$};
+\end{scope}
+\begin{scope}[xshift=6cm]
+\draw[blue,thick] (0,0) -- (1,1.5);
+\draw[red,thick] (1,0) -- (0,1.5);
+\node at (0,-0.25) {$i$}; \node at (1,-0.25) {$j$};
+\node at (0,1.75) {$j$}; \node at (1,1.75) {$i$};
+\node at (0.5,2.25) {$\tau_1e(i,j)$};
+\node at (0.5,-0.8) {$\deg=-b_{ij}$};
+\end{scope}
+\end{tikzpicture}
+```
+
+For matching word components $b\in e(\eta)R_n(Q)e(\nu)$ and $a\in e(\zeta)R_n(Q)e(\eta)$, the stacked panel represents $ab\in e(\zeta)R_n(Q)e(\nu)$. Read upward: apply $b$ first, then $a$; the shared word is $\eta$. These schematic boxes may contain any compatible strand diagrams. The Verification above is independent of both illustrations.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw (0,0) rectangle (2,1);
+\draw (0,1.8) rectangle (2,2.8);
+\node at (1,0.5) {$b$};
+\node at (1,2.3) {$a$};
+\node at (1,-0.4) {$\nu$};
+\node at (1,1.4) {$\eta$};
+\node at (1,3.2) {$\zeta$};
+\draw[->] (1,-0.2) -- (1,0);
+\draw[->] (1,1) -- (1,1.2);
+\draw[->] (1,1.6) -- (1,1.8);
+\draw[->] (1,2.8) -- (1,3);
+\node at (3.2,1.4) {$ab$};
+\end{tikzpicture}
+```

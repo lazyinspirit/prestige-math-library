@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-weak-four-lemma-with-the-exactness-hypotheses-named.json
+  precheck: pass
 id: thm-weak-four-lemma-with-the-exactness-hypotheses-named
 kind: theorem
 title: "Weak four lemma with the exactness hypotheses named"
@@ -16,9 +19,6 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -64,3 +64,25 @@ already follow from exactness at the four middle nodes that are actually used:
 2.2 From step 1.2 we get $$ j' \beta x = \gamma j x \equiv \gamma t \equiv 0. $$ Exactness at $X'$ gives a member $w'$ of $W'$ with $i' w' \equiv \beta x$ by [L3]. Since $\alpha$ is epic, choose $w$ in $W$ with $\alpha w \equiv w'$ by [L2]. Then $$ \beta(x-i w)\equiv \beta x-i'\alpha w\equiv \beta x-i' w'\equiv 0. $$ Because $\beta$ is monic, [L1] yields $x \equiv i w$, and therefore $$ t \equiv j x \equiv j i w \equiv 0. $$ So $y \equiv y'$, and [L1] makes $\gamma$ monic. [L1, L2, L3, step 1.2, algebra]
 
 3.1 Hence the weak four lemma follows from the named middle-node exactness hypotheses alone. [step 1.2, step 2.2] ∎
+
+## Remarks
+
+The diagram used in the proof is:
+
+```tikzcd
+W \arrow[r, "i"] \arrow[d, "\alpha"'] & X \arrow[r, "j"] \arrow[d, "\beta"'] & Y \arrow[r, "p"] \arrow[d, "\gamma"'] & Z \arrow[d, "\delta"] \\
+W' \arrow[r, "i'"'] & X' \arrow[r, "j'"'] & Y' \arrow[r, "p'"'] & Z'
+```
+
+The three squares commute: $\beta i=i'\alpha$, $\gamma j=j'\beta$,
+and $\delta p=p'\gamma$. Exactness is required only at $X$, $Y$, $X'$,
+and $Y'$; no endpoint exactness is asserted. With that common exactness
+hypothesis, the two cases are:
+
+- $\alpha,\gamma$ epic and $\delta$ monic imply $\beta$ epic
+  (steps 1.1 and 2.1).
+- $\alpha$ epic and $\beta,\delta$ monic imply $\gamma$ monic
+  (steps 1.2 and 2.2).
+
+The diagram illustrates the setup; the member-chasing proof above is independent
+of the figure.

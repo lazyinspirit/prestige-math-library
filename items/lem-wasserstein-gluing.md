@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-wasserstein-gluing.json
+  precheck: pass
 id: "lem-wasserstein-gluing"
 kind: lemma
 title: "Gluing two Euclidean couplings"
@@ -13,11 +16,6 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 axiom_use: "Full AC is used for the two standard-Borel disintegrations; this finite gluing uses no further selection."
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Luigi Ambrosio, Nicola Gigli, and Giuseppe Savaré, Gradient Flows in Metric Spaces and in the Space of Probability Measures, Chapter 1 and Chapter 8"
@@ -71,6 +69,7 @@ Assume the Axiom of Choice. Let $d_1,d_2,d_3\ge1$, let $\alpha$ be a Borel proba
 
 In the diagram, $X=\mathbb R^{d_1}$, $Y=\mathbb R^{d_2}$, and $Z=\mathbb R^{d_3}$. It records the required projections from the joint law $\gamma$ onto the adjacent coordinate pairs. The arrows are pushforwards of $\gamma$; the proof below constructs the middle measure explicitly and does not infer existence from the picture.
 
+```tikz
 \begin{tikzpicture}[>=stealth]
   \node (alpha) at (0,0) {$\alpha$ on $X\times Y$};
   \node (gamma) at (3.5,0) {$\gamma$ on $X\times Y\times Z$};
@@ -78,6 +77,7 @@ In the diagram, $X=\mathbb R^{d_1}$, $Y=\mathbb R^{d_2}$, and $Z=\mathbb R^{d_3}
   \draw[->] (gamma) -- node[above] {$(x,y)_\#$} (alpha);
   \draw[->] (gamma) -- node[above] {$(y,z)_\#$} (beta);
 \end{tikzpicture}
+```
 
 The two outer laws have the same middle marginal $\rho$ on $Y$; the arrows specify that projecting the constructed triple law onto either adjacent pair recovers the corresponding outer law.
 

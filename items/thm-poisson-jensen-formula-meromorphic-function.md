@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-poisson-jensen-formula-meromorphic-function.json
+  precheck: pass
 id: thm-poisson-jensen-formula-meromorphic-function
 kind: theorem
 title: "Poisson–Jensen formula for a meromorphic function on a disc"
@@ -11,9 +14,6 @@ deps: [def-meromorphic-function-complex-domain, thm-isolated-zeros-holomorphic-f
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -66,16 +66,10 @@ Green contribution zero in that limit.
 
 1.2 For every $|a|<R$, set $B_a(z)=R(z-a)/(R^2-\overline a z)$. Its denominator is nonzero on a neighbourhood of the closed disc; it has one simple zero at $a$, and direct modulus calculation gives $|B_a(Re^{it})|=1$ and $\log|B_a(z)|=-G_R(z,a)$. [algebra]
 
-1.3 Form
+2.1 Form $g(z)=f(z)\frac{\prod_p B_p(z)^{\nu_p}}{\prod_b B_b(z)^{m_b}}$. By [F3], each zero factor cancels locally against the corresponding denominator factor; by [F4], each pole is cancelled by the numerator factor. Thus $g$ is holomorphic and nowhere zero on a neighbourhood of the closed disc, and $|g|=|f|$ on the boundary. [F3, F4, step 1.1, step 1.2, given]
 
-$$
-g(z)=f(z)\frac{\prod_p B_p(z)^{\nu_p}}{\prod_b B_b(z)^{m_b}}.
-$$
+3.1 To see that $u=\log|g|$ is harmonic, near any point $w$ shrink a disc until $|g(z)/g(w)-1|<1$ and use the convergent power series for $\log(1+\xi)$ to obtain a local holomorphic logarithm of $g$. Its real part is $u$ up to the constant $\log|g(w)|$; [F6] and [F7] make that real part $C^2$ with zero Laplacian. This is local at every point, so $u$ is harmonic on a neighbourhood of the closed disc. [F6, F7, step 2.1]
 
-By [F3], each zero factor cancels locally against the corresponding denominator factor; by [F4], each pole is cancelled by the numerator factor. Thus $g$ is holomorphic and nowhere zero on a neighbourhood of the closed disc, and $|g|=|f|$ on the boundary. [F3, F4, step 1.1, step 1.2, given]
+4.1 Apply [F5] to $u$. On the boundary $u=\log|f|$, so its Poisson integral is exactly the boundary term in the statement. On the interior, solve the defining equation for $\log|f|$ using step 2.1 and $\log|B_a|=-G_R(z,a)$ from step 1.2. Each zero contributes $-m_bG_R(z,b)$ and each pole contributes $+\nu_pG_R(z,p)$, proving the formula on regular radii. [F5, step 1.2, step 2.1, step 3.1, algebra]
 
-2.1 To see that $u=\log|g|$ is harmonic, near any point $w$ shrink a disc until $|g(z)/g(w)-1|<1$ and use the convergent power series for $\log(1+\xi)$ to obtain a local holomorphic logarithm of $g$. Its real part is $u$ up to the constant $\log|g(w)|$; [F6] and [F7] make that real part $C^2$ with zero Laplacian. This is local at every point, so $u$ is harmonic on a neighbourhood of the closed disc. [F6, F7, step 1.3]
-
-3.1 Apply [F5] to $u$. On the boundary $u=\log|f|$, so its Poisson integral is exactly the boundary term in the statement. On the interior, solve the defining equation for $\log|f|$ using step 1.3 and $\log|B_a|=-G_R(z,a)$ from step 1.2. Each zero contributes $-m_bG_R(z,b)$ and each pole contributes $+\nu_pG_R(z,p)$, proving the formula on regular radii. [F5, step 1.2, step 1.3, step 2.1, algebra]
-
-4.1 If $b$ is a zero or pole on $|z|=R$, locally $f(\zeta)=(\zeta-b)^k h(\zeta)$ with integer $k$ and nonvanishing holomorphic $h$ (use [F3] for zeros and [F4] for poles). Therefore the boundary logarithm is a multiple of $\log|re^{it}-b|$ plus a continuous term; these logarithms converge in angular $L^1$ as $r\uparrow R$. For each fixed interior $z$, the Poisson kernels converge boundedly, and $G_r(z,b)\to0$ for $|b|=R$. Passing to the limit in step 3.1 proves the stated boundary-radius convention. [F3, F4, step 3.1, algebra] ∎
+5.1 If $b$ is a zero or pole on $|z|=R$, locally $f(\zeta)=(\zeta-b)^k h(\zeta)$ with integer $k$ and nonvanishing holomorphic $h$ (use [F3] for zeros and [F4] for poles). Therefore the boundary logarithm is a multiple of $\log|re^{it}-b|$ plus a continuous term; these logarithms converge in angular $L^1$ as $r\uparrow R$. For each fixed interior $z$, the Poisson kernels converge boundedly, and $G_r(z,b)\to0$ for $|b|=R$. Passing to the limit in step 4.1 proves the stated boundary-radius convention. [F3, F4, step 4.1, algebra] ∎

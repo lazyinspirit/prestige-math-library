@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cyclic-cover-linking-form-inverse-matrix.json
+  precheck: pass
 id: lem-cyclic-cover-linking-form-inverse-matrix
 kind: lemma
 title: "Inverse-matrix formula for a surgery linking form"
@@ -24,13 +27,7 @@ sources:
     - title: "Jozef H. Przytycki and Akira Yasuhara, Linking Numbers in Rational Homology 3-Spheres, Cyclic Branched Covers and Infinite Cyclic Covers"
       url: "https://arxiv.org/pdf/math/0111203v1"
       locator: "Section 1, printed pp. 4–7, Theorem 1.1 and Corollary 1.2; surgery comparison and reverse-link matrix"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -88,7 +85,7 @@ $$
 The reverse filling restores $S^3$ by surgery on the core link. The diagram records the two surgery descriptions; the slope-basis calculation in steps 4.2–5.1 supplies the inverse-matrix sign.
 
 ```tikzcd
-\begin{tikzcd}
-S^3 \arrow[r, "\text{forward surgery}"] & Y \arrow[r, "\text{reverse surgery}"] & S^3
+\begin{tikzcd}[column sep=8em, cells={nodes={font=\Large}}, labels={font=\large}]
+S^3 \arrow[r, "\mathrm{forward\ surgery}"] & Y \arrow[r, "\mathrm{reverse\ surgery}"] & S^3
 \end{tikzcd}
 ```

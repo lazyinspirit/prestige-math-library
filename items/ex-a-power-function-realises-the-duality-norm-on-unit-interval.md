@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-power-function-realises-the-duality-norm-on-unit-interval.json
+  precheck: pass
 id: ex-a-power-function-realises-the-duality-norm-on-unit-interval
 kind: example
 title: "A power function on $(0,1]$ realizes the duality norm on the unit interval"
@@ -11,13 +14,6 @@ generation:
   role: example
 deps: [prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm]
 proof_strategy: "Take $g(x)=x^{-a}$ with $0<a<1/q$, normalize the extremizer $|g|^{q-1}$ explicitly, and compute both norms by one-variable power integrals."
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Proposition 7.13"
@@ -43,7 +39,7 @@ So this explicit power pair realizes the norm of the duality functional.
 
 ## Verification
 
-**Proof technique:** Take $g(x)=x^{-a}$ with $0<a<1/q$, normalize the extremizer $|g|^{q-1}$ explicitly, and compute both norms by one-variable power integrals.
+**Proof technique:** Take the power function with exponent −a, where 0 < a < 1/q, normalize the extremizer obtained by raising its absolute value to q − 1, and compute both norms by one-variable power integrals.
 
 1.1 Since $aq<1$, one has $1-aq>0$ and therefore $$\int_0^1 x^{-aq}\,dx=\left[\frac{x^{1-aq}}{1-aq}\right]_0^1=(1-aq)^{-1}.$$ Hence $g \in L^q(0,1)$ and $$\|g\|_q^q=\int_0^1 x^{-aq}\,dx=(1-aq)^{-1},\qquad \|g\|_q=(1-aq)^{-1/q}.$$ [given, algebra]
 

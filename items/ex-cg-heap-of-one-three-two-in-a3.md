@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-heap-of-one-three-two-in-a3.json
+  precheck: pass
 id: ex-cg-heap-of-one-three-two-in-a3
 kind: example
 title: "The heap of $s_1s_3s_2$ in type $A_3$: a V-shaped heap with exactly two linear extensions"
@@ -23,13 +26,7 @@ sources:
     - title: "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788"
       url: "https://arxiv.org/pdf/1511.08788"
       locator: "§2.3 and Figure 1, PDF p. 6 (general heap construction and drawings by defining chains; Figure 1 uses the rank-three graph with edge labels 4 and 5, not this type-A3 word)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -73,3 +70,29 @@ Let $S=\{s_1,s_2,s_3\}$ with $m(s_1,s_2)=m(s_2,s_3)=3$ and $m(s_1,s_3)=2$, the C
 2.1 The criterion of [F3] applies: every chain of $P$ has at most two elements, since the only relations are $1\prec3$ and $2\prec3$, so there is no convex chain of any length $m\ge3$, and in particular none of length $m(s_1,s_2)=m(s_2,s_3)=3$; hence condition (a) of [[thm-cg-fully-commutative-forbidden-chain-criterion]] (2) holds. The covering pairs $1\lessdot3$ and $2\lessdot3$ have labels $(s_1,s_2)$ and $(s_3,s_2)$, and $s_1,s_2,s_3$ are pairwise distinct, so condition (b) holds. By [F3] the word $(s_1,s_3,s_2)$ is reduced, $w$ is fully commutative and $P=P_w$; since a reduced word of $w$ has length $\ell(w)$, this gives $\ell(w)=3$. [given, F3, step 1.1]
 
 3.1 A listing of $\{1,2,3\}$ is a linear extension of $P$ exactly when $3$ is last, because both relations point to $3$ and $1,2$ are incomparable; the two linear extensions are therefore $(1,2,3)$ and $(2,1,3)$, with labeled words $s_1s_3s_2$ and $s_3s_1s_2$. By [F4], $L(P,s)=C(s)$, and by 2.1 the word is reduced with $w$ fully commutative, so $C(s)=\mathcal R(w)$; hence the reduced words of $w$ are exactly these two words, which differ by interchanging the adjacent commuting letters $s_1,s_3$. [given, F2, F4, step 1.1, step 2.1] ∎
+
+## Remarks
+
+The left Hasse diagram labels each position by its generator; edges rise from a smaller element to a covering element. Thus the two lower positions may be read in either order before position $3$, giving the two linear extensions in (3). The right diagram shows $J(P)$ under inclusion: an ideal containing $3$ must also contain both $1$ and $2$. These diagrams illustrate the calculations in Verification steps 1.1, 1.2 and 3.1; the verification is independent of the figures.
+
+```tikz
+\begin{tikzpicture}[every node/.style={font=\small}]
+\node at (0,3.7) {$P$};
+\node (p1) at (-1,0.7) {$1:s_1$};
+\node (p2) at (1,0.7) {$2:s_3$};
+\node (p3) at (0,2.5) {$3:s_2$};
+\draw (p1) -- (p3);
+\draw (p2) -- (p3);
+\node at (5,3.7) {$J(P)$};
+\node (i0) at (5,0) {$\emptyset$};
+\node (i1) at (4,1) {$\{1\}$};
+\node (i2) at (6,1) {$\{2\}$};
+\node (i12) at (5,2) {$\{1,2\}$};
+\node (i123) at (5,3) {$\{1,2,3\}$};
+\draw (i0) -- (i1);
+\draw (i0) -- (i2);
+\draw (i1) -- (i12);
+\draw (i2) -- (i12);
+\draw (i12) -- (i123);
+\end{tikzpicture}
+```

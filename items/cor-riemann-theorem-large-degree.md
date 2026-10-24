@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-riemann-theorem-large-degree.json
+  precheck: pass
 id: cor-riemann-theorem-large-degree
 kind: corollary
 title: "Riemann's theorem for sufficiently positive divisors"
@@ -28,9 +31,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -67,7 +68,7 @@ $D=D_0+nA+E$ with $n\ge n_0$ and $E$ effective.
 
 ## Proof
 
-**Proof technique:** read the vanishing of $h^1$ off the vanishing theorem, substitute it into the Euler-characteristic form of Riemann-Roch, and record the explicit form $D_0+nA+E$.
+**Proof technique:** read the vanishing of the first cohomology dimension off the vanishing theorem, substitute it into the Euler-characteristic form of Riemann-Roch, and record the divisor as the fixed initial divisor plus an integer multiple of the effective divisor and an effective remainder.
 
 1.1 Vanishing above the threshold. Let $D$ be a divisor with $D\ge D_0+n_0A$. Writing $E:=D-(D_0+n_0A)\ge0$ exhibits $D=D_0+n_0A+E$ with $E$ effective, so [F1] gives $H^1(C,\mathcal O_C(D))=0$, that is $h^1(D)=0$. In particular, for every $n\ge n_0$ and every effective $E$ the divisor $D=D_0+nA+E$ satisfies $D\ge D_0+n_0A$ and therefore $h^1(D)=0$. [F1]
 

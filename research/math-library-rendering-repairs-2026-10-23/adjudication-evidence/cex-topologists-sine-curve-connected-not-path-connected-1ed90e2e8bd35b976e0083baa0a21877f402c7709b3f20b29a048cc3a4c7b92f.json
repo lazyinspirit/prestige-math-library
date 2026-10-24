@@ -1,0 +1,127 @@
+{
+  "id": "cex-topologists-sine-curve-connected-not-path-connected",
+  "agent": "/root/rendering_repair_coordinator/ra_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "optional-typography",
+      "verdict": "not-a-defect",
+      "reason": "Standalone original-resolution tiles 01 and 02 show citations on separate lines with detached parentheses, but every formula, citation and punctuation mark is intact. This is the renderer’s block citation layout, with no raw TeX, delimiter failure, clipping, or erroneous mathematical relation.",
+      "action": "Preserved the Facts and citation source; optional citation typography is outside this repair.",
+      "status": "adjudicated-no-change"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original three tiles contain no diagram. A scoped geometric plot materially clarifies the two pieces of S and the oscillation geometry used in Counterexample step 3.1. The finite illustration must not visually connect the graph to the limit segment or claim to prove connectedness.",
+      "action": "Added a final Remarks section with a native TikZ plot of the limit segment and a finite sampled graph portion, marked endpoints, and explicit truncation and proof-independence explanation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only Remarks prose and one TikZ illustration. The original title, complete original body, frontmatter, status, dependencies and proof are byte-preserved.",
+  "source_lines_after": {
+    "remarks": [
+      89,
+      91
+    ],
+    "tikz": [
+      93,
+      111
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "S is the union of the graph {(x,sin(1/x)):0<x<=1} and the closed vertical segment {0} x [-1,1], exactly as Statement line 44.",
+      "check": "The plotted vertical segment runs from (0,-1) to (0,1), with both endpoints filled. The marked (0,0) lies on that segment. This uses the literal second set in the Statement."
+    },
+    {
+      "objects": "Finite graph parametrization t -> (1/t,sin t), 1<=t<=9pi/2, numerically sampled by TikZ.",
+      "check": "With x=1/t, y=sin(1/x) and 2/(9pi)<=x<=1. The decimal upper parameter 14.1371669412 approximates 9pi/2 to less than 5e-11; the plot is explicitly called finite sampling. TikZ’s radian suffix converts t for sin. The right endpoint is (1,sin1), numerically drawn at y=0.8414709848, and marked filled as included by x<=1."
+    },
+    {
+      "objects": "Oscillation extrema and omitted graph tail.",
+      "check": "On this parameter interval sine reaches +1 at pi/2,5pi/2,9pi/2 and -1 at 3pi/2,7pi/2, matching [L7]. Infinite oscillations for 0<x<2/(9pi) are explicitly omitted. No segment or curve joins this truncated graph to x=0; the gray line below is a labeled x-coordinate ruler, outside the graph range."
+    },
+    {
+      "objects": "Topology and proof interface.",
+      "check": "No figure relation asserts a path between the two pieces. The Remarks explicitly retain connectedness and the absence of a path from (0,0) to (1,sin1) as conclusions of the unchanged proof, especially steps 1.1 and 4.1. The rigorous proof remains independent of the figure."
+    }
+  ],
+  "original_evidence": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/real-analysis",
+    "supplement_evidence_dir": "research/math-library-rendering-audit-2026-10-23/real-analysis/diagram-supplement",
+    "path_discrepancy": "Supplement evidence_dir/screenshots paths do not exist there. Resolved authentic tiles in the same real-analysis category screenshots directory; all three exactly match the supplement recorded SHA256 values.",
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/cex-topologists-sine-curve-connected-not-path-connected--01.png",
+        "sha256": "909201ac305c10abce14969c1fe084cfe48e03c4a6a433b36a2c468568b62b05"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/cex-topologists-sine-curve-connected-not-path-connected--02.png",
+        "sha256": "ac9ec41d470be86f3e77bea07a1a72b37b58a050b270e9be9ecb082a2f603bfa"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/cex-topologists-sine-curve-connected-not-path-connected--03.png",
+        "sha256": "a8a02859c5e4dd7fdbbaef4441f4cdb70829e82da8b1b2c031a5c3af9a1bf5c0"
+      }
+    ],
+    "all_viewed_standalone_original_resolution": true
+  },
+  "before_raw_sha256": "6865b61afd20fe94e2231adaa63a5e326ee39be1f092fe160707c9aea5b1de9b",
+  "after_raw_sha256": "1d7c5f975eb412e7c899dc72b63a1f8d85aab21f9b2cf653aaa1d3eb8dc43e42",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-topologists-sine-curve-connected-not-path-connected.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-topologists-sine-curve-connected-not-path-connected.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "contradiction"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-topologists-sine-curve-connected-not-path-connected.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-ra008 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-topologists-sine-curve-connected-not-path-connected --out research/math-library-rendering-repairs-2026-10-23/previews/ra008-sine-curve",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/ra008-sine-curve/manifest.json",
+    "source_sha256": "1d7c5f975eb412e7c899dc72b63a1f8d85aab21f9b2cf653aaa1d3eb8dc43e42",
+    "html_sha256": "fb7602195c9255b659fd4a894bd4a48fc53a0e8e813e03e4d9defcb05112d4ee",
+    "reference_map_sha256": "26f3b332de66258bb9da8b394183ae3e84cc05ed4b219b9f439fc1808f1dc9cd",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "tikz_count": 1,
+    "all_three_tiles_viewed_standalone_original_resolution": true,
+    "visual_result": "Figure fully visible in tile 03; separate vertical segment and sampled graph, three segment markers, included graph endpoint, clear labels and no overlap or connecting path."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview only, not a production route or metadata Sources footer.",
+    "Optional detached citation punctuation remains as adjudicated; no source change warranted.",
+    "Finite numerical illustration cannot display infinite oscillation or establish either topology claim."
+  ]
+}

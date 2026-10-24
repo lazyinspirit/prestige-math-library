@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces.json
+  precheck: pass
 id: lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces
 kind: lemma
 title: Fibres of a proper birational morphism of regular surfaces
@@ -40,12 +43,7 @@ sources:
     url: https://stacks.math.columbia.edu/tag/0AX7
   - title: The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)
     url: https://stacks.math.columbia.edu/download/resolve.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -76,9 +74,9 @@ Assume the Axiom of Choice. Let $k$ be a field, let $X$ and $Y$ be integral regu
 
 [F7] *def-etale-locus-morphism.* Let $f:X\to S$ be a morphism locally of finite presentation (def-locally-finite-presentation-morphism). The **étale locus** of $f$ is $\operatorname{Et}(f)=\{x\in X:\text{the morphism }f\text{ is étale at }x\}\subseteq X,$ the set of points at which the conditions of def-etale-morphism-schemes hold. ([[def-etale-locus-morphism]])
 
-[F8] *thm-etale-locus-open.* Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $f\colon X\to S$ be a morphism locally of finite presentation (def-locally-finite-presentation-morphism) and let $\operatorname{Et}(f)=\{x\in X: f\text{ is \'etale at }x\}$ be its \'etale locus ([[def-etale-locus-morphism]]). ([[thm-etale-locus-open]])
+[F8] *thm-etale-locus-open.* Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $f\colon X\to S$ be a morphism locally of finite presentation (def-locally-finite-presentation-morphism) and let $\operatorname{Et}(f)=\{x\in X: f\text{ is \'etale at }x\}$ be its étale locus ([[def-etale-locus-morphism]]). ([[thm-etale-locus-open]])
 
-[F9] *thm-etale-morphisms-open-and-quasi-finite.* Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $f\colon X\to S$ be \'etale (def-etale-morphism-schemes). 1. $f$ is flat and locally of finite presentation (def-flat-morphism-schemes, def-locally-finite-presentation-morphism) and therefore universally open (def-open-morphism-schemes). 2. ([[thm-etale-morphisms-open-and-quasi-finite]])
+[F9] *thm-etale-morphisms-open-and-quasi-finite.* Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $f\colon X\to S$ be étale (def-etale-morphism-schemes). 1. $f$ is flat and locally of finite presentation (def-flat-morphism-schemes, def-locally-finite-presentation-morphism) and therefore universally open (def-open-morphism-schemes). 2. ([[thm-etale-morphisms-open-and-quasi-finite]])
 
 [F10] *def-quasi-finite-morphism-schemes.* A morphism of schemes $f:X\to S$ is **quasi-finite** if it is of finite type (def-locally-finite-type-and-finite-type-morphism) and, for every point $x\in X$, there are affine neighbourhoods $U=\operatorname{Spec}(B)$ of $x$ and $V=\operatorname{Spec}(A)$ of $f(x)$ such that $f(U)\subseteq V$ and the induced finite-type ring map $A\to B$ is quasi-finite at the prime  ([[def-quasi-finite-morphism-schemes]])
 
@@ -96,7 +94,7 @@ Assume the Axiom of Choice. Let $k$ be a field, let $X$ and $Y$ be integral regu
 
 [F16] *thm-regular-local-rings-are-normal.* Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every regular local ring is an integrally closed domain. Every commutative regular Noetherian ring is normal and is a finite product of regular domains, with the zero ring corresponding to the empty product. ([[thm-regular-local-rings-are-normal]])
 
-[F17] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F17] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F20] A quasi-finite finite-type algebra is source-locally a principal localization of a finite subalgebra of its relative integral closure; the quasi-finite locus is open. ([[cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra]], [[cor-quasi-finite-locus-open-finite-type-algebra]])
 

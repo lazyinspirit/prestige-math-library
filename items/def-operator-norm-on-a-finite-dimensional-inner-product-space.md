@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-operator-norm-on-a-finite-dimensional-inner-product-space.json
+  precheck: n/a
 id: def-operator-norm-on-a-finite-dimensional-inner-product-space
 kind: definition
-title: "The operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv||"
+title: "The operator norm is zero on the zero domain and otherwise is $\\max_{\\lVert v\\rVert=1}\\lVert Tv\\rVert$"
 status: published
 origin: session
 provenance:
@@ -10,13 +13,6 @@ provenance:
 deps: [def-inner-product-norm]
 aliases: []
 landmark: false
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:

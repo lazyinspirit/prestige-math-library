@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-sph-pair-forces-antisymmetric-and-central.json
+  precheck: pass
 id: lem-sph-pair-forces-antisymmetric-and-central
 kind: lemma
 title: "SPH pressure forces are equal-opposite and central"
@@ -15,12 +18,6 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 axiom_use: "No choice principle is used."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text"
@@ -31,20 +28,20 @@ sources:
 
 ## Statement
 
-For the system in [[def-regularized-conservative-sph-system]], set g_ij=∇W_ε(q_i−q_j) and define the force contribution F_ij=−m_im_j(A_i+A_j)g_ij. Radial evenness gives g_ji=−g_ij and g_ii=0, so for i≠j, F_ji=−F_ij; also F_ij is parallel to q_i−q_j (the zero vector is allowed).
+For the system in [[def-regularized-conservative-sph-system]], set $g_{ij}=\nabla W_\varepsilon(q_i-q_j)$ and define the force contribution $F_{ij}=-m_im_j(A_i+A_j)g_{ij}$. Radial evenness gives $g_{ji}=-g_{ij}$ and $g_{ii}=0$, so for $i\ne j$, $F_{ji}=-F_{ij}$; also $F_{ij}$ is parallel to $q_i-q_j$ (the zero vector is allowed).
 
 ## Facts & Assumptions
 
-**Given:** A state in the positive-density domain, positive masses, and a radial C² kernel.
+**Given:** A state in the positive-density domain, positive masses, and a radial $C^2$ kernel.
 
-[F1] [[def-regularized-conservative-sph-system]]: A_i=p_i/ρ_i² and the acceleration sum is −Σ_jm_j(A_i+A_j)∇W_ε(q_i−q_j).
+[F1] [[def-regularized-conservative-sph-system]]: $A_i=p_i/\rho_i^2$ and the acceleration sum is $-\sum_jm_j(A_i+A_j)\nabla W_\varepsilon(q_i-q_j)$.
 
-[F2] [[def-scaled-symmetric-compact-kernel-family]]: W_ε is differentiable and radial, hence even.
+[F2] [[def-scaled-symmetric-compact-kernel-family]]: $W_\varepsilon$ is differentiable and radial, hence even.
 
-[F3] [[thm-chain-rule-for-total-derivatives]]: the derivative of W_ε composed with r↦−r is obtained by the chain rule.
+[F3] [[thm-chain-rule-for-total-derivatives]]: the derivative of $W_\varepsilon$ composed with $r\mapsto-r$ is obtained by the chain rule.
 
 ## Proof
 
-1.1 Since W_ε(−r)=W_ε(r), differentiating the identity in r using [F3] gives ∇W_ε(−r)=−∇W_ε(r). The scalar coefficient m_im_j(A_i+A_j) is symmetric in i,j, so F_ji=−F_ij. [F1, F2, F3, algebra]
+1.1 Since $W_\varepsilon(-r)=W_\varepsilon(r)$, differentiating the identity in $r$ using [F3] gives $\nabla W_\varepsilon(-r)=-\nabla W_\varepsilon(r)$. The scalar coefficient $m_im_j(A_i+A_j)$ is symmetric in $i,j$, so $F_{ji}=-F_{ij}$. [F1, F2, F3, algebra]
 
-2.1 If r≠0 and u·r=0, then |r+tu|²=|r|²+t²|u|², so the derivative at t=0 of W_ε(r+tu), which is w_ε(|r+tu|), is zero by the chain rule [F3]. Thus ∇W_ε(r) is orthogonal to every u orthogonal to r and lies in span(r). At r=0, differentiable evenness gives ∇W_ε(0)=0 by [F3]. Hence each F_ij is central. [F2, F3, algebra] ∎
+2.1 If $r\ne0$ and $u\cdot r=0$, then $|r+tu|^2=|r|^2+t^2|u|^2$, so the derivative at $t=0$ of $W_\varepsilon(r+tu)$, which is $w_\varepsilon(|r+tu|)$, is zero by the chain rule [F3]. Thus $\nabla W_\varepsilon(r)$ is orthogonal to every $u$ orthogonal to $r$ and lies in $\operatorname{span}(r)$. At $r=0$, differentiable evenness gives $\nabla W_\varepsilon(0)=0$ by [F3]. Hence each $F_{ij}$ is central. [F2, F3, algebra] ∎

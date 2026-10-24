@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-parabola-is-affine-line.json
+  precheck: n/a
 id: ex-parabola-is-affine-line
 kind: example
-title: "The parabola y=x^2 has coordinate ring k[t] and isomorphic intrinsic geometry to the affine line"
+title: "The parabola y=x² has coordinate ring k[t] and isomorphic intrinsic geometry to the affine line"
 status: published
 origin: session
 provenance:
@@ -10,12 +13,6 @@ provenance:
 deps:
   - def-coordinate-ring-affine-algebraic-set
   - thm-universal-property-of-a-polynomial-ring
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-every-leaf-is-initial-among-smooth-maps-tangent-to-the-distribution.json
+  precheck: pass
 id: prop-every-leaf-is-initial-among-smooth-maps-tangent-to-the-distribution
 kind: proposition
 title: "Every connected tangent map meeting a leaf factors uniquely through that leaf"
@@ -16,9 +19,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -63,3 +63,19 @@ $P$ such that $dF(TP) \subseteq \mathcal D$ and $F(P)$ meets $L$. Then:
 3.1 The inclusion $j$ is injective by [L3], so step 2.1 forces a unique set map $\widetilde F:P\to L$ with $j\circ\widetilde F=F$. Around each $x\in P$, repeat the flat-chart argument of step 1.1 to obtain a connected neighborhood whose image lies in one plaque. That plaque is a smooth coordinate patch of $L$ by [L3], and in its plaque coordinates $\widetilde F$ has the same smooth coordinate expression as $F$. Hence $\widetilde F$ is smooth, and injectivity of $j$ gives uniqueness. [L1, L2, L3, L5, step 1.1, step 2.1]
 
 4.1 Therefore every connected tangent map that meets a leaf factors uniquely through that leaf. [step 2.1, step 3.1] ∎
+
+## Remarks
+
+Under the stated hypotheses (connected $P$, $dF(TP)\subseteq\mathcal D$,
+and $F(P)\cap L\ne\varnothing$), the factorization is summarized by the
+commuting triangle below. The dashed arrow is the unique smooth lift;
+$j$ is the injective leaf immersion, and $j\circ\widetilde F=F$.
+
+```tikzcd
+P \arrow[rr, "F"] \arrow[dr, dashed, "\widetilde F"'] & & M \\
+& L \arrow[ur, hook, "j"'] &
+```
+
+The image containment $F(P)\subseteq L$ is proved in step 2.1; smoothness
+and uniqueness of the lift are proved in step 3.1. The proof is independent
+of the illustration.

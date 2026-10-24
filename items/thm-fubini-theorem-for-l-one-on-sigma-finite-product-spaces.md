@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces.json
+  precheck: pass
 id: thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
 kind: theorem
-title: "Fubini's theorem for L^1 functions on a sigma-finite product"
+title: "Fubini's theorem for $L^1$ functions on a sigma-finite product"
 status: published
 origin: session
 landmark: true
@@ -10,9 +13,6 @@ provenance:
   proof: ai-generated
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, def-l-one-of-a-measure, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-integral-triangle-inequality]
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, Theorem 1.7.21"

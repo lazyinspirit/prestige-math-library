@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-delta-is-the-lcm-of-the-artin-atoms-and-has-the-same-left-and-right-divisors.json
+  precheck: pass
 id: lem-delta-is-the-lcm-of-the-artin-atoms-and-has-the-same-left-and-right-divisors
 kind: lemma
 title: "Delta is the lcm of the artin atoms and has the same left and right divisors"
@@ -27,9 +30,7 @@ sources:
       url: "https://arxiv.org/abs/1010.0321"
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, printed pp. 433-438"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -114,3 +115,45 @@ fixed-length positive words used to invoke the gcd/lcm theorem.
 - Nothing here uses a choice principle: the gcd of two positive braids is
   obtained by a finite enumeration of the positive words of bounded length
   ([[thm-positive-braids-have-left-and-right-gcds-and-lcms]]).
+
+
+**Three-strand illustration.** For $n=3$, write $a=\sigma_1$ and
+$b=\sigma_2$, so $\Delta=aba=bab$. These are the Hasse diagrams of the
+left and right divisor orders on the same six-element set
+$\{1,a,b,ab,ba,\Delta\}$; upward edges indicate covers in the named order.
+In the left diagram one appends a generator; in the right diagram one
+prepends a generator.
+
+```tikz
+\begin{tikzpicture}[every node/.style={font=\large}, line width=0.8pt]
+\node at (0,4.7) {Left divisors};
+\node (L0) at (0,0) {$1$};
+\node (La) at (-1.3,1.4) {$a$};
+\node (Lb) at (1.3,1.4) {$b$};
+\node (Lab) at (-1.3,2.8) {$ab$};
+\node (Lba) at (1.3,2.8) {$ba$};
+\node (LD) at (0,4.2) {$\Delta$};
+\draw (L0)--(La)--(Lab)--(LD);
+\draw (L0)--(Lb)--(Lba)--(LD);
+\node at (6,4.7) {Right divisors};
+\node (R0) at (6,0) {$1$};
+\node (Ra) at (4.7,1.4) {$a$};
+\node (Rb) at (7.3,1.4) {$b$};
+\node (Rba) at (4.7,2.8) {$ba$};
+\node (Rab) at (7.3,2.8) {$ab$};
+\node (RD) at (6,4.2) {$\Delta$};
+\draw (R0)--(Ra)--(Rba)--(RD);
+\draw (R0)--(Rb)--(Rab)--(RD);
+\end{tikzpicture}
+```
+
+For example, $a\preccurlyeq_L ab$ since $ab=a\cdot b$, whereas
+$a\preccurlyeq_R ba$ since $ba=b\cdot a$. The top is the join of the two
+atoms in either order, as proved in (a) and (b). The six displayed elements
+are distinct by their permutations and exhaust the divisor set by (c), since
+$3!=6$. The relation $aba=bab$ supplies both upper covers in each diagram;
+length increases by one on every edge, and no length-two braid relation
+adds a cross-edge. Thus equality of the divisor sets does not identify the
+two orders on those sets. For $n=2$ both diagrams reduce to the chain
+$1\prec_L\sigma_1=\Delta$ and $1\prec_R\sigma_1=\Delta$; the six-element
+picture is specific to $n=3$. The proof above is independent of this figure.

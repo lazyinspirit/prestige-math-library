@@ -1,0 +1,78 @@
+{
+  "id": "def-perfect-group",
+  "agent": "/root/rendering_repair_coordinator/gt_020",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile visibly prints G_ab with a literal underscore and renders both equalities in ordinary text. Frozen and current pre-edit source both lack math delimiters. This is intended mathematical notation, with ab the abelianization subscript; the correction retains both stated equalities and their equivalence.",
+      "action": "Typeset G, G=[G,G], and G_{\\mathrm{ab}}=0 using inline dollar delimiters.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added inline math delimiters and an explicit roman ab subscript to the single Definition sentence; all mathematical content and all frontmatter preserved.",
+  "source_lines_after": {
+    "26": "$G$ is perfect if $G=[G,G]$, equivalently $G_{\\mathrm{ab}}=0$."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "f0cf2183fe686821e5c41019fd46feb8443d110a1d821d301526d88cfe637b6f",
+  "before_guard": "Exact queue before_raw_sha256 matched immediately before write.",
+  "after_raw_sha256": "47e298053a733ea6473b5ba1a5c0cd53bf555a1349abe4b7cb3d162ca2ee6719",
+  "publication_status_preserved": true,
+  "protected_metadata_preserved": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-perfect-group.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-perfect-group.md",
+            "item_id": "def-perfect-group",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-perfect-group.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-perfect-group.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/group-theory/screenshots/def-perfect-group--01.png",
+    "original_inspection": "Standalone original-resolution view confirmed the visible literal underscore.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/gt_020/manifest.json",
+    "preview_manifest_sha256": "2804c02f13995de7bfef01768015ca585744a0412cd8609b051cf7f7eb21667b",
+    "source_sha256": "47e298053a733ea6473b5ba1a5c0cd53bf555a1349abe4b7cb3d162ca2ee6719",
+    "preview": "research/math-library-rendering-repairs-2026-10-23/previews/gt_020/screenshots/def-perfect-group--01.png",
+    "preview_sha256": "4dd1f39171140262b7ed7658dbb51e806d63c2d4dffd822c28cd28e3c53f642d",
+    "inspection": "Standalone original-resolution native output shows the repaired definition with typeset G, commutator equality, and abelianization subscript; no raw underscore remains.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  }
+}

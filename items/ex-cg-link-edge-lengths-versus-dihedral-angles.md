@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-link-edge-lengths-versus-dihedral-angles.json
+  precheck: pass
 id: ex-cg-link-edge-lengths-versus-dihedral-angles
 kind: example
-title: "Link edge lengths versus dihedral mirror angles in type I_2(m)"
+title: "Link edge lengths versus dihedral mirror angles in type $I_2(m)$"
 status: published
 origin: pipeline
 provenance:
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   scraped: []
   references:

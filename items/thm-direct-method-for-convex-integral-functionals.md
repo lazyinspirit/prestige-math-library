@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-direct-method-for-convex-integral-functionals.json
+  precheck: pass
 id: thm-direct-method-for-convex-integral-functionals
 kind: theorem
 title: "The direct method for convex integral functionals"
@@ -22,12 +25,7 @@ sources:
     - title: "Richard S. Laugesen, Linear Analysis and Partial Differential Equations, University of Illinois (complete 158-page graduate notes)"
       url: "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf"
       locator: "Section 3.10, printed pp. 79-82 (Lemma 3.30 and Proposition 3.31)"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -69,7 +67,7 @@ the weak Euler-Lagrange equation for zero-boundary variations. If $f(x,\cdot,\cd
 
 ## Proof
 
-**Proof technique:** direct; finiteness, convexity and norm lower semicontinuity of $I$, then the coercivity estimate and the direct method.
+**Proof technique:** direct; finiteness, convexity and norm lower semicontinuity of I, then the coercivity estimate and the direct method.
 
 1.1 Finiteness of $I$. For $u\in W^{1,p}(\Omega)$ the integrand $x\mapsto f(x,u(x),Du(x))$ is measurable by [F1]. Its positive part is bounded by $C(1+|u|^p+|Du|^p)+|G|$ because $G\le|G|$, and this has finite integral because $\Omega$ is bounded, $u,Du\in L^p$ and $|G|\in L^1$; its negative part is bounded by $c|u|^q+h$, whose integral is finite because $q\le p$, $u\in L^q$ by [F3] and $h\in L^1$. Hence $I(u)=\int_\Omega f(x,u(x),Du(x))\,dx$ is a well-defined real number, and $I$ is proper as $K\ne\varnothing$. [F1, F2, F3, given]
 

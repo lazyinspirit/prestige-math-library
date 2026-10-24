@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-invariance-does-not-imply-reversibility.json
+  precheck: pass
 id: cex-invariance-does-not-imply-reversibility
 kind: counterexample
 title: "An invariant law need not be reversible"
@@ -16,13 +19,6 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 proof_strategy: direct
 ---
 
@@ -63,3 +59,35 @@ runs around the cycle in the opposite direction
 3.1 The equivalence in [F3] gives a second proof of nonreversibility: $p_*(1,0)=1$ while $p(1,0)=0$, so $p_*\ne p$ on $E_+$ and detailed balance fails; both computations agree. [F3, step 2.1, step 2.2, given]
 
 4.1 Boundary and scope cases: the two-state deterministic cycle with $p(0,1)=p(1,0)=1$ is reversible, since $\frac12\cdot1=\frac12\cdot1$; hence three states is the minimal size for a deterministic cycle that refutes the implication, and the example is sharp in that respect; the uniform law remains invariant for the reversed kernel $p_*$, so reversing does not lose stationarity; the diagonal entries $p(i,i)=0$ satisfy detailed balance trivially in the sense $0=0$; steps 1.1–2.1 are finite computations on the given data and use no choice principle, while steps 2.2–3.1 spend the axiom [A1] exactly through the reverse-kernel theorem [F3], whose statement assumes Choice; and the example refutes only the implication "invariant $\Rightarrow$ reversible", not the converse, which is [[lem-detailed-balance-implies-invariance]]. [A1, F1, F2, F3, step 3.1, given] ∎
+
+## Remarks
+
+The triangle separates the stationary masses from the transition directions.
+Solid arrows show $p$, and dashed arrows show $p_*$; every displayed transition
+has probability $1$. Each state carries stationary mass $1/3$ for either kernel.
+
+```tikz
+\begin{tikzpicture}[>=stealth, x=1cm, y=1cm, every node/.style={font=\small}]
+\node[draw,circle,minimum size=8mm] (s0) at (0,2.6) {$0$};
+\node[draw,circle,minimum size=8mm] (s1) at (2,0) {$1$};
+\node[draw,circle,minimum size=8mm] (s2) at (-2,0) {$2$};
+\node at (0,3.25) {$\pi(0)=1/3$};
+\node at (2.4,-0.65) {$\pi(1)=1/3$};
+\node at (-2.4,-0.65) {$\pi(2)=1/3$};
+\draw[->,thick] (s0) to[bend left=13] (s1);
+\draw[->,thick] (s1) to[bend left=13] (s2);
+\draw[->,thick] (s2) to[bend left=13] (s0);
+\draw[->,thick,dashed] (s1) to[bend left=13] (s0);
+\draw[->,thick,dashed] (s2) to[bend left=13] (s1);
+\draw[->,thick,dashed] (s0) to[bend left=13] (s2);
+\draw[->,thick] (-2,-1.3) -- (-1,-1.3);
+\node[anchor=west] at (-0.8,-1.3) {$p(i,i+1)=1$};
+\draw[->,thick,dashed] (-2,-1.9) -- (-1,-1.9);
+\node[anchor=west] at (-0.8,-1.9) {$p_*(i,i-1)=1$};
+\end{tikzpicture}
+```
+
+All indices are modulo $3$. Equal incoming and outgoing stationary mass at
+each vertex gives invariance, but detailed balance compares opposite flows
+for the same kernel $p$: $\pi(0)p(0,1)=1/3$ whereas $\pi(1)p(1,0)=0$.
+The dashed arrow $1\to0$ belongs to $p_*$, not to $p$.

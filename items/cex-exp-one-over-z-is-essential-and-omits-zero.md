@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-exp-one-over-z-is-essential-and-omits-zero.json
+  precheck: pass
 id: cex-exp-one-over-z-is-essential-and-omits-zero
 kind: counterexample
-title: "e^{1/z} has an essential singularity at 0 and omits the value 0"
+title: "$e^{1/z}$ has an essential singularity at 0 and omits the value 0"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [thm-isolated-singularity-trichotomy, thm-casorati-weierstrass, thm-comple
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:

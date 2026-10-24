@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-negative-sobolev-order-containing-a-dirac-mass.json
+  precheck: pass
 id: ex-negative-sobolev-order-containing-a-dirac-mass
 kind: example
 title: "A Dirac mass has precisely sufficiently negative Sobolev order"
@@ -37,9 +40,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"
@@ -116,7 +116,7 @@ integral with the increasing limit of its truncations
 
 ## Proof
 
-**Proof technique:** reduce the membership to the finiteness of a radial integral, bracket that integral between blocks of a real $p$-series, and read off the threshold and its strict endpoint.
+**Proof technique:** reduce the membership to the finiteness of a radial integral, bracket that integral between blocks of a real p-series, and read off the threshold and its strict endpoint.
 
 1.1 The Fourier transform of the Dirac mass. By [F1], $\mathcal F\delta_0=u_1$ is the regular distribution of the constant function $1$. [F1]
 

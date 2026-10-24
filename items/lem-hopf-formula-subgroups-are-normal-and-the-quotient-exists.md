@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hopf-formula-subgroups-are-normal-and-the-quotient-exists.json
+  precheck: pass
 id: lem-hopf-formula-subgroups-are-normal-and-the-quotient-exists
 kind: lemma
 title: "The Hopf-formula quotient exists"
@@ -14,18 +17,12 @@ sources:
     - title: "Clara Löh, Group Cohomology"
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+
 ---
 
 ## Statement
 
-[F,R] is normal and contained in R∩[F,F].
+$[F,R]$ is normal and contained in $R\cap[F,F]$.
 
 ## Proof
 

@@ -1,0 +1,71 @@
+{
+  "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+  "agent": "/root/rendering_repair_coordinator/nla_021",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution PNG visibly prints tuple-style matrices, A^T A, powers such as 2^-27 and 2^-54, and the _22 subscript as plain ASCII. The complete frozen/current item specifies the two matrix rows and exact binary64 exponents unambiguously.",
+      "action": "Typeset both matrices using pmatrix and wrap the associated powers, transpose, Gram entry, inequality, and matrix variable references in inline math throughout the Example, Given and Verification.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same original PNG also visibly shows the repeated Given matrix and step 2.1 power inequality as ASCII. These are repetitions of the same explicitly specified mathematical data.",
+      "action": "Applied the same exact notation in Given and steps 2.1 and 3.1.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added mathematical formatting only: A has rows (1,1) and (0,2^{-27}); its Gram matrix has rows (1,1) and (1,1+2^{-54}); preserved A^T, entry (22), every exponent, the strict midpoint comparison, binary64 RNE and every QR caveat.",
+  "source_lines_after": [
+    34,
+    37,
+    47,
+    49,
+    51
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "4e13995ff02436bd1734cdb16851480a6a10b3f50879298aea062add5db76ddd",
+  "after_raw_sha256": "cd7e60ba8a7e2e4e72c88ee76a848e03c1551fc6607d9fe0447fbafdeeba4014",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-full-rank-least-squares-normal-equations-versus-qr.md --json",
+      "exit_code": 0,
+      "result": "1 file, 1 checked, 0 failed; pass",
+      "output": "research/math-library-rendering-repairs-2026-10-23/nla-021-checks/precheck.json"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-full-rank-least-squares-normal-equations-versus-qr.md --json",
+      "exit_code": 0,
+      "result": "1 checked, no errors or warnings",
+      "output": "research/math-library-rendering-repairs-2026-10-23/nla-021-checks/rendercheck.json"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 3 steps, 0 defects",
+      "output": "research/math-library-rendering-repairs-2026-10-23/nla-021-checks/proof-layout.txt"
+    }
+  ],
+  "visual_checks": {
+    "original_png": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/ex-full-rank-least-squares-normal-equations-versus-qr--01.png",
+    "original_view": "Standalone original-resolution view inspected before edit.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/nla-021-preview/manifest.json",
+    "preview_png": "research/math-library-rendering-repairs-2026-10-23/nla-021-preview/screenshots/ex-full-rank-least-squares-normal-equations-versus-qr--01.png",
+    "changed_region_png": "research/math-library-rendering-repairs-2026-10-23/nla-021-checks/changed-region.png",
+    "changed_region_view": "Lossless 1125x810 pixel crop inspected at original resolution; matrix entries, exponents, transpose, subscript and inequality are legible without clipping or overlap.",
+    "katex_errors": [],
+    "katex_count": 16,
+    "tikz_count": 0,
+    "limitations": "Local native ItemBody preview only; not a production HTTP route. Reference-title map records 16 unrelated parse diagnostics."
+  }
+}

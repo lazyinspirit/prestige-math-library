@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-cyclotomic-klr-diagram-duality-and-graded-module-duals.json
+  precheck: n/a
 id: def-cyclotomic-klr-diagram-duality-and-graded-module-duals
 kind: definition
 title: "Cyclotomic diagram duality and graded module duals"
@@ -17,12 +20,6 @@ aliases: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Seok-Jin Kang and Masaki Kashiwara, Categorification of Highest Weight Modules via Khovanov-Lauda-Rouquier Algebras, arXiv:1102.4677v4"
@@ -69,3 +66,35 @@ statements below. The symmetric theorem
 additionally gives $D_\psi P\cong P^\#\{-2\operatorname{def}_\Lambda(\beta)\}$;
 it does not change the canonical projective normalization. No self-dual shift
 is asserted for every indecomposable finite module, and no choice is used.
+
+## Remarks
+
+The two rows show object assignments, not module homomorphisms. The top row
+is defined on all finite graded $B$-modules; the bottom row is restricted to
+finite graded projectives. Both use the generator-fixing anti-involution
+$\psi$ specified above, without an additional grading sign.
+
+```tikz
+\begin{tikzpicture}
+\node at (4.5,0.85) {Finite graded modules};
+\node (M) at (0,0) {$M$};
+\node (DM) at (4,0) {$D_\psi M=\mathrm{HOM}_k(M,k)^\psi$};
+\node (DDM) at (9,0) {$D_\psi^2M\cong M$};
+\draw[|->] (M) -- node[above] {$D_\psi$} (DM);
+\draw[|->] (DM) -- node[above] {$D_\psi$} (DDM);
+\node at (4.5,-1.35) {Finite graded projectives};
+\node (P) at (0,-2.2) {$P$};
+\node (DP) at (4,-2.2) {$P^\#=\mathrm{HOM}_B(P,B)^\psi$};
+\node (DDP) at (9,-2.2) {$(P^\#)^\#\cong P$};
+\draw[|->] (P) -- node[above] {$\#$} (DP);
+\draw[|->] (DP) -- node[above] {$\#$} (DDP);
+\end{tikzpicture}
+```
+
+For the internal shift convention in the definition, the shift reversal in
+each row means
+$$D_\psi(M\{r\})\cong(D_\psi M)\{-r\},\qquad (P\{r\})^\#\cong P^\#\{-r\}.$$
+The two rows do not identify the dualities: even for projectives their
+comparison includes the Frobenius shift stated above. The illustration is
+expository; all defining claims and their cited justifications remain
+independent of it.

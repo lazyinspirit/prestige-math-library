@@ -1,0 +1,131 @@
+{
+  "id": "thm-finite-mdp-policy-induces-reward-state-chain",
+  "group": "dorl_028",
+  "agent": "/root/rendering_repair_coordinator/dorl_028",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The scalar mixture obscures two distinct operations: select an admissible action from the current state, then draw the next state and reward jointly. A three-node schematic materially clarifies both the action marginalization and why the old reward coordinate is irrelevant; the existing complete proof does not remove this explanatory benefit. Both authentic original tiles have no figure.",
+      "action": "Append a final Remarks section with a point-probability schematic and its interpretation.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a TikZ action-selection/joint-outcome schematic with the direct mixed transition below; preserved the entire original carrier as an exact byte prefix.",
+  "source_lines_after": [
+    91,
+    93,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    106
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and admissibility",
+      "justification": "Statement line 46 defines E=S\u00d7(R\u222a{0}); the current (s,eta) lies in E and the next (t,rho) lies in S\u00d7R\u2286E. The middle (s,a) lies in the admissible pair set D of def-finite-markov-decision-process because a\u2208A(s). These ranges are explicitly fixed at line 93."
+    },
+    {
+      "check": "Directed point probabilities and product",
+      "justification": "The first arrow is pi(a|s), the stationary policy mass from F1; the second is p(t,rho|s,a), the joint reward-transition mass from F1 and the local MDP definition. Its direction is from the admissible current state/action to the next state/reward, preserving their possible dependence. A fixed upper route contributes pi(a|s)p(t,rho|s,a), not the whole mixed mass."
+    },
+    {
+      "check": "Lower edge and marginalization",
+      "justification": "Substitute B={(t,rho)} into the Statement formula at line 48. The indicator selects exactly this pair in the inner finite sum, yielding K_pi((s,eta),{(t,rho)})=sum_a pi(a|s)p(t,rho|s,a). Line 93 explicitly says to sum over actions, so no incorrect equality with one upper route or deterministic commutativity is asserted."
+    },
+    {
+      "check": "Old reward, initial point and dummy support",
+      "justification": "The formula at line 48 does not use eta. Proof step 1.1 assigns zero mass to points in E outside S\u00d7R; hence when 0\u2209R the dummy-reward points have zero incoming mass. Step 2.1 sets the initial measure delta_(s,0). The added prose repeats these precise conventions."
+    },
+    {
+      "check": "Edges and proof independence",
+      "justification": "Native output contains three labelled vertices and three visible directed edges: current\u2192action, action\u2192next, and the lower current\u2192next curve. There is no asserted reverse closing edge, cycle or endpoint-ring convention. The unchanged proof steps 1.1\u20134.1 establish the theorem independently of the appended picture."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "4401564ba12ed5472773c0ab43ef3a04acd17ab9b464fb0dee774785082a98e7",
+    "after_raw_sha256": "6e4419d0c4e6c8faa90ce5aabefaddb4ca50dd7afcfccc154047bc631f5e136b",
+    "guard": "Exact before_raw_sha256 asserted immediately before edit; frozen before and current were byte-identical then.",
+    "protected_metadata": "Entire frontmatter including status published is byte-identical. Original statement, Facts and proof are byte-identical.",
+    "original_image_path_discrepancy": "Declared diagram-supplement/screenshots paths do not exist; authentic screenshots resolved in the same category parent screenshots directory and both SHA256 values match the queue exactly.",
+    "original_standalone_views": [
+      "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-finite-mdp-policy-induces-reward-state-chain--01.png",
+      "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-finite-mdp-policy-induces-reward-state-chain--02.png"
+    ],
+    "native_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl028-native/manifest.json",
+    "native_source_binding": {
+      "id": "thm-finite-mdp-policy-induces-reward-state-chain",
+      "status": "published",
+      "source": "items/thm-finite-mdp-policy-induces-reward-state-chain.md",
+      "source_sha256": "6e4419d0c4e6c8faa90ce5aabefaddb4ca50dd7afcfccc154047bc631f5e136b",
+      "snapshot": "snapshots/thm-finite-mdp-policy-induces-reward-state-chain.md",
+      "html": "html/thm-finite-mdp-policy-induces-reward-state-chain.html",
+      "html_sha256": "215628a062717e6c28a30e2dc39b6d1c934b69ce50f9105d24e9e362dcb340ca",
+      "reference_map_sha256": "aab9b2dcee7e24c069fa99763c6eaf39b3262fb93fef2d3360e56254b95f75f2"
+    },
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl028/pi-tikz-cache/078aa52201ac60ea511bc71a962191e6.svg",
+    "native_views": "Both resulting PNG tiles viewed independently at original resolution. Tile 02 shows all three labels and arrowheads without overlap/clipping; labels and thin strokes are visible on the actual black background. SVG uses currentColor and none, with no pale opaque fills. No open/closed endpoint rings apply."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-finite-mdp-policy-induces-reward-state-chain.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-finite-mdp-policy-induces-reward-state-chain.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-finite-mdp-policy-induces-reward-state-chain.md",
+            "item_id": "thm-finite-mdp-policy-induces-reward-state-chain",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-finite-mdp-policy-induces-reward-state-chain.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl028 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-finite-mdp-policy-induces-reward-state-chain --out research/math-library-rendering-repairs-2026-10-23/previews/dorl028-native",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview covers local ItemBody with the actual renderer, not the production HTTP route. It records 16 unrelated current reference-map parse diagnostics; all scoped checks passed. No broad mathematical audit was undertaken."
+  ]
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-classical-affine-closed-points-are-maximal-ideals.json
+  precheck: pass
 id: "lem-classical-affine-closed-points-are-maximal-ideals"
 kind: "lemma"
 title: "Classical affine points are maximal ideals"
@@ -8,12 +11,6 @@ deps: ["thm-classical-affine-nullstellensatz-correspondence", "def-classical-aff
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   scraped: []
   references:
@@ -33,7 +30,7 @@ Assume the Axiom of Choice, inherited from the Nullstellensatz route. For every 
 
 [F1] $A=R/I(X)$ ([[def-classical-affine-coordinate-ring]]).
 
-[F2] Evaluation in the polynomial ring has maximal kernel $(x_i-a_i)_i$ ([[lem-evaluation-ideal-is-maximal]]).
+[F2] Evaluation in the polynomial ring has maximal kernel $(x_i-a_i)_i$ ([[lem-evaluation-ideal-is-maximal|Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$]]).
 
 [F3] Ideals of the quotient correspond to ideals upstairs containing $I(X)$ ([[thm-correspondence-theorem-ideals]]).
 

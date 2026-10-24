@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-augmentation-ideal-and-loewy-series-for-kcp.json
+  precheck: pass
 id: ex-the-augmentation-ideal-and-loewy-series-for-kcp
 kind: example
-title: "The augmentation ideal and Loewy series of kCp can be written explicitly"
+title: "The augmentation ideal and Loewy series of $kC_p$ can be written explicitly"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-module-radical-socle-head-and-loewy-series, thm-kg-is-local-iff-g-is-a-p-group]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

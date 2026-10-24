@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-nevanlinna-poisson-jensen-derivative-bound.json
+  precheck: pass
 id: lem-nevanlinna-poisson-jensen-derivative-bound
 kind: lemma
 title: "Separated-radius Poisson–Jensen derivative bound"
@@ -26,8 +29,7 @@ sources:
     - title: "I. Laine, Complex Analysis III lecture notes"
       url: "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf"
       locator: "§§5–6.1, printed pp. 35–43: the lemma on the logarithmic derivative with separated radii"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Statement
@@ -64,7 +66,7 @@ $R-r$.
 
 ## Proof
 
-**Proof technique:** normalize the centre value; differentiate the Poisson–Jensen formula; bound the boundary kernel by the characteristic and the divisor kernels by $1/|z-c|$; use $\alpha$-power angular means and Jensen's inequality to obtain the proximity bound.
+**Proof technique:** normalize the centre value; differentiate the Poisson–Jensen formula; bound the boundary kernel by the characteristic and the divisor kernels by reciprocal distances; use α-power angular means and Jensen's inequality to obtain the proximity bound.
 
 1.1 (Reduction to centre value $1$) Let $k\in\mathbb Z$ be the signed order of $f$ at $0$ (negative for a pole), and write $f(z)=c z^k h(z)$ with $c\ne0$, $h$ meromorphic on $\mathbb C$, and $h(0)=1$. The local zero and pole factorizations justify this form; when $k=0$, take $c=f(0)$. Then $f'/f=k/z+h'/h$. The proximity sum inequality gives, for $r\ge2$, $$m_0(r,f'/f)\le m_0(r,h'/h)+\log^+(|k|/r)+\log2\le m_0(r,h'/h)+\log^+|k|+\log2,$$ where the $k/z$ term is zero when $k=0$. If $h$ is constant then $h\equiv1$, so $f'/f=k/z$ and $m_0(r,f'/f)\le\log^+|k|$ for $r\ge2$, proving the stated bound directly with a constant depending on $f$. In all subsequent steps assume $h$ is nonconstant. The characteristic laws and the direct rational-map estimate $T(R,c^{-1}z^{-k})=|k|\log R+O_f(1)$ for $R\ge2$ give $$T(R,h)\le T(R,f)+|k|\log R+O_f(1).$$ [F4, F6, F7, algebra]
 

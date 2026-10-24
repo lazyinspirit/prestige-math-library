@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-standard-fundamental-domain-for-the-modular-group.json
+  precheck: pass
 id: thm-standard-fundamental-domain-for-the-modular-group
 kind: theorem
 title: "The standard fundamental domain, boundary identifications and elliptic stabilisers"
@@ -15,22 +18,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-21.md"
-      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-21-post-5a.json"
-    content_sha256: "76ef2e49eb6fd5e9eafcf46e409482ff176bd930d0701ff423c648efe08d2987"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "J. S. Milne, Modular Functions and Modular Forms (v1.31, 2017)"
@@ -73,3 +60,33 @@ Let $D=\{\tau\in\mathfrak H:|\Re\tau|<1/2,\ |\tau|>1\}$ and let $\overline D$ be
 3.1 Combining 1.1, 2.1 and 2.2: for any two $\Gamma$-equivalent points $z,z'\in\overline D$ one of them, say the one with larger imaginary part, is of the listed shape; the case analysis gives either $z'=z$, or $z'=z\pm1$ with $\Re z=\mp1/2$, or $z'=-1/z$ with $|z|=1$. Since the two identifications force $|z|=1$ or $|\Re z|=1/2$, neither can occur for two distinct points of $D$, whose points have $|\Re z|<1/2$ and $|z|>1$; this proves (a). For (b), a stabiliser element is a case with $z'=z$ in the same analysis: besides the identity, this happens exactly for $z=i$ with $\gamma=\pm S$, for $z=\omega$ with $\gamma$ representing $ST$ or $(ST)^2$, and for $z=\omega+1$ with $\gamma$ representing $TS$ or $(TS)^2$. Since $S^2=(ST)^3=(TS)^3=1$ in $\Gamma$ and $S\ne1$, $ST\ne1$, these give $\operatorname{Stab}(i)=\langle S\rangle$ of order $2$ and $\operatorname{Stab}(\omega)=\langle ST\rangle$, $\operatorname{Stab}(\omega+1)=\langle TS\rangle$ of order $3$, by [F3]; all other points of $\overline D$ have trivial stabiliser. [F1, F3, step 2.1, step 2.2, given, algebra]
 
 4.1 For (c) let $\gamma\in\Gamma$ and fix $z_0:=2i\in D$. By 1.1 there is $\gamma_1\in\Gamma'$ with $\gamma_1\cdot(\gamma\cdot z_0)\in\overline D$; set $\delta:=\gamma_1\gamma\in\Gamma$. Then $z_0\in D\subseteq\overline D$ and $\delta\cdot z_0\in\overline D$ are equivalent, so by (a) either $\delta\cdot z_0=z_0$ or one of the two boundary identifications holds; the latter are impossible because $|z_0|=2>1$ and $|\Re z_0|=0<1/2$. Hence $\delta$ stabilises $z_0$, and by (b) the only points of $\overline D$ with nontrivial stabiliser are $i,\omega,\omega+1$, none of which equals $z_0$; so $\delta=1$ and $\gamma=\gamma_1^{-1}\in\Gamma'$. Therefore $\Gamma=\Gamma'=\langle S,T\rangle$. [F3, step 3.1, given, algebra] ∎
+
+
+## Remarks
+
+The shaded open region is $D$; the solid vertical rays and unit-circle arc belong to $\overline D\setminus D$. The picture is truncated above, with no upper boundary. The arrow labelled $T$ pairs the vertical sides at equal height. On the unit circle, $S(z)=-1/z=-\bar z$ exchanges the two half-arcs and fixes $i$; the curved arrow shows one such paired pair, not a pointwise fixing of the arc. The marked points $i$, $\omega=-1/2+i\sqrt3/2$ and $\omega+1=1/2+i\sqrt3/2$ have stabiliser orders $2$, $3$ and $3$, respectively, as in (b). The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=3cm,y=3cm,>=stealth]
+\fill[blue!15] (-0.5,0.8660254) -- (-0.5,2.35) -- (0.5,2.35) -- (0.5,0.8660254) arc (60:120:1) -- cycle;
+\draw[->] (-1.15,0) -- (1.15,0) node[right] {$\mathrm{Re}\,\tau$};
+\draw[->,gray] (0,0) -- (0,2.55) node[above] {$\mathrm{Im}\,\tau$};
+\draw[thick,->] (-0.5,0.8660254) -- (-0.5,2.5);
+\draw[thick,->] (0.5,0.8660254) -- (0.5,2.5);
+\draw[thick] (0.5,0.8660254) arc (60:120:1);
+\draw[->,thick] (-0.5,1.95) -- (0.5,1.95) node[midway,above] {$T:z\mapsto z+1$};
+\node at (0,1.5) {$D$};
+\fill (-0.5,0.8660254) circle (0.018);
+\fill (0.5,0.8660254) circle (0.018);
+\fill (0,1) circle (0.018);
+\node[left] at (-0.5,0.8660254) {$\omega$};
+\node[right] at (0.5,0.8660254) {$\omega+1$};
+\node[above right] at (0,1) {$i$};
+\fill (-0.258819,0.965926) circle (0.012);
+\fill (0.258819,0.965926) circle (0.012);
+\draw[->] (-0.258819,0.965926) .. controls (-0.35,0.5) and (0.35,0.5) .. (0.258819,0.965926);
+\node at (0,0.4) {$S:z\mapsto-1/z$};
+\node[below] at (-0.5,0) {$-1/2$};
+\node[below] at (0.5,0) {$1/2$};
+\end{tikzpicture}
+```

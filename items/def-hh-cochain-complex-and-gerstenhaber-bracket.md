@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-hh-cochain-complex-and-gerstenhaber-bracket.json
+  precheck: n/a
 id: def-hh-cochain-complex-and-gerstenhaber-bracket
 kind: definition
 title: Hochschild cochains, differential, and Gerstenhaber insertion bracket
@@ -23,8 +26,7 @@ sources:
     - title: Nima Moshayedi, Lectures on Symplectic Geometry, Poisson Geometry, Deformation Quantization and Quantum Field Theory
       url: https://arxiv.org/pdf/2012.14662
       locator: §4.2.5, Definitions 4.2.38 and 4.2.42 (PDF pp. 96–97)
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -33,7 +35,11 @@ Let $A$ be a unital associative real algebra. For each integer $p\geq1$,
 the **Hochschild $p$-cochains** are
 $$C^p(A,A):=\operatorname{Hom}_{\mathbb R}(A^{\otimes p},A).$$
 The Hochschild differential $\delta:C^p\to C^{p+1}$ is
-$$\begin{aligned} (\delta\phi)(a_1,\ldots,a_{p+1})={}&a_1\phi(a_2,\ldots,a_{p+1})\\ &+\sum_{i=1}^{p}(-1)^i\phi(a_1,\ldots,a_{i-1},a_i a_{i+1},a_{i+2},\ldots,a_{p+1})\\ &+(-1)^{p+1}\phi(a_1,\ldots,a_p)a_{p+1}. \end{aligned}$$
+
+$$
+\begin{aligned} (\delta\phi)(a_1,\ldots,a_{p+1})={}&a_1\phi(a_2,\ldots,a_{p+1})\\ &+\sum_{i=1}^{p}(-1)^i\phi(a_1,\ldots,a_{i-1},a_i a_{i+1},a_{i+2},\ldots,a_{p+1})\\ &+(-1)^{p+1}\phi(a_1,\ldots,a_p)a_{p+1}. \end{aligned}
+$$
+
 The general cochain-complex convention is degree $+1$ with square-zero
 differential ([[def-cochain-complex-in-an-abelian-category]]); the proposition
 [[prop-hochschild-cochains-form-a-differential-graded-lie-algebra]] proves

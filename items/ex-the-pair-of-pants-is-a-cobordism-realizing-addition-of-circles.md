@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles.json
+  precheck: pass
 id: ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles
 kind: example
 title: The pair of pants is a cobordism realizing addition of circles
@@ -30,23 +33,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-13.md"
-      - "research/frontier-38-owner-30-alpha-batch-13-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-13-post-5a.json"
-    content_sha256: "817fa487e7fe078a3da37e17f445b9f0458a953150bad8cea1a61800c1220e41"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)"
@@ -94,3 +80,29 @@ invariant.
 3.1 ($P$ is an oriented bordism from $C_1\sqcup C_2$ to $C_0$.) Take the incoming boundary part $(\partial P)_0=C_1\sqcup C_2$ with the source orientations counterclockwise on both circles, and the outgoing part $(\partial P)_1=C_0$; the induced orientations computed in step 2.1 are clockwise on $C_1,C_2$, which is the negative of the source orientation on the incoming part, and counterclockwise on $C_0$, which is the target orientation. The radial parametrisations $\theta_0(s,p)=c+(1+\tfrac{s}{4})(p-c)$ for $p$ in an inner circle with centre $c$, and $\theta_1(s,p)=(1+\tfrac{s}{4})p$ for $p\in C_0$, $s\in[0,1)$ respectively $s\in(-1,0]$, are smooth embeddings onto collar neighbourhoods of the corresponding boundary circles: their images have radii $\tfrac12(1+\tfrac{s}{4})\in[\tfrac12,\tfrac58)$ and $2+\tfrac{s}{2}\in(\tfrac32,2]$ in the relevant radial directions and lie in $P$ by the estimates of step 1.1. Hence $P$ with these collars and this orientation is an oriented bordism from $C_1\sqcup C_2$ to $C_0$. [F3, step 1.1, step 2.1]
 
 4.1 (The additive relation; all classes vanish.) By step 3.1 the cobordism class of $C_1\sqcup C_2$ equals that of $C_0$, that is, $[C_1]+[C_2]=[C_0]$ in $\Omega_1^{SO}$ by [F4]. Each of the three circles is the boundary of a Euclidean disk (with the counterclockwise orientation induced by the standard orientation of the plane, after the outer circle is viewed as the boundary of the disk it encloses and each inner circle as the boundary of the removed disk), so by the disk example, which applies to a circle with either orientation, all three classes are zero in $\Omega_1^{SO}$ and in $\Omega_1^{O}$; the relation therefore reads $0+0=0$ and exhibits the disjoint-union addition of the group structure rather than an independent invariant. [F4, step 3.1] ∎
+
+
+## Remarks
+
+The planar picture labels the left inner circle $C_1$ and the right inner
+circle $C_2$. Arrows show the orientations induced on $\partial P$, as
+computed in step 2.1: counterclockwise on the outgoing circle and clockwise
+on the incoming circles. The source circles themselves carry the opposite,
+counterclockwise orientations, so $\partial P=-(C_1\sqcup C_2)\sqcup C_0$.
+The verification above is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.3,>=stealth]
+  \draw[thick] (0,0) circle (2);
+  \draw[thick] (-1,0) circle (0.5);
+  \draw[thick] (1,0) circle (0.5);
+  \draw[->,very thick] (40:2) arc (40:140:2);
+  \draw[->,very thick] (-1,0) ++(120:0.5) arc (120:-140:0.5);
+  \draw[->,very thick] (1,0) ++(120:0.5) arc (120:-140:0.5);
+  \node at (0,2.35) {$C_0$ (outgoing)};
+  \node at (-1,0) {$C_1$};
+  \node at (1,0) {$C_2$};
+  \node at (0,-1.1) {$P$};
+  \node at (0,-2.45) {$C_1\sqcup C_2$ incoming};
+\end{tikzpicture}
+```

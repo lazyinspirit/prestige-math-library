@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-degenerate-level-one-hecke-klr-map-for-s3.json
+  precheck: pass
 id: ex-degenerate-level-one-hecke-klr-map-for-s3
 kind: example
-title: "The degenerate level-one Hecke–KLR map for S_3"
+title: "The degenerate level-one Hecke–KLR map for $S_3$"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -18,12 +21,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Jonathan Brundan and Alexander Kleshchev, Blocks of cyclotomic Hecke algebras and Khovanov–Lauda algebras, arXiv:0808.2032v3, Invent. Math. 178 (2009) 451–484 (complete 32-page article)"

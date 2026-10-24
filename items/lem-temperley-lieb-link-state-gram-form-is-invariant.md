@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-link-state-gram-form-is-invariant.json
+  precheck: pass
 id: lem-temperley-lieb-link-state-gram-form-is-invariant
 kind: lemma
 title: "The link-state Gram form is symmetric and invariant"
@@ -14,11 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   scraped: []
   references:
@@ -55,3 +53,47 @@ for all $x,y\in W_{n,t}(R,\delta)$ and $a\in\mathrm{TL}_n(R,\delta)$. Here $a^*$
 2.1 Reflection reverses the order of stacking, fixes each scalar $\delta$, and sends $y\circ x^*$ to $x\circ y^*$. Hence $y\circ x^*=\delta^c1_t$ exactly when $x\circ y^*=\delta^c1_t$ with the same $c$; the lower-propagating case is also preserved. Therefore $\phi_{n,t}(x,y)=\phi_{n,t}(y,x)$ on basis states and, by bilinearity, on all module elements. [F1, F2, step 1.1]
 
 3.1 For basis states $x,y$ and a basis diagram $a\in\mathrm{TL}_n$, reflection gives $(x\circ a)^*=a^*\circ x^*$. Both form values are therefore the coefficient of $1_t$ in the same associative composite $y\circ(x\circ a)^*=y\circ a^*\circ x^*=(y\circ a^*)\circ x^*$. They have the same exterior matching and number of removed loops, so their coefficients of $1_t$ agree. If an intermediate term has fewer than $t$ propagating components, it remains lower-propagating after further stacking and contributes zero on both sides. This proves the invariance identity for basis states and basis diagrams; bilinearity proves it for all $x,y,a$. [F1, F2, step 1.1, step 2.1] ∎
+
+
+## Remarks
+
+For a concrete capping example, take $n=3$, $t=1$, and $x=y$ with bottom arc joining sites $1,2$ and a defect at site $3$. The left picture stacks $y$ above the reflected state $x^*$; the three dots on the dashed interface are the identified $n$ sites. The two arcs at sites $1,2$ form one closed component, while site $3$ gives the sole propagating strand. Removing that component gives $y\circ x^*=\delta 1_1$, hence $\phi_{3,1}(x,x)=\delta$.
+
+```tikz
+\begin{tikzpicture}[scale=1]
+  \draw[dashed] (-0.3,1.2) -- (2.3,1.2);
+  \draw (0,1.2) .. controls (0,1.9) and (1,1.9) .. (1,1.2);
+  \draw (0,1.2) .. controls (0,0.5) and (1,0.5) .. (1,1.2);
+  \draw (2,0) -- (2,2.4);
+  \foreach \x in {0,1,2} { \fill (\x,1.2) circle (1.5pt); }
+  \fill (2,0) circle (1.5pt);
+  \fill (2,2.4) circle (1.5pt);
+  \node[left] at (-0.4,1.9) {$y:3\to1$};
+  \node[left] at (-0.4,0.5) {$x^*:1\to3$};
+  \node[above] at (2,2.4) {$1$};
+  \node[below] at (2,0) {$1$};
+  \node at (3.2,1.2) {$=$};
+  \node at (4.1,1.2) {$\delta$};
+  \draw (4.8,0) -- (4.8,2.4);
+  \fill (4.8,0) circle (1.5pt);
+  \fill (4.8,2.4) circle (1.5pt);
+  \node[above] at (4.8,2.4) {$1$};
+  \node[below] at (4.8,0) {$1$};
+\end{tikzpicture}
+```
+
+For general $x,y:n\to t$ and $a:n\to n$, reflection reverses stacking: $(x\circ a)^*=a^*\circ x^*$. The chain below records the common composite in proof step 3.1, read from left to right. Either parenthesization gives $y\circ a^*\circ x^*:t\to t$. Taking its coefficient of $1_t$ gives the two sides of the invariance identity. This coefficient is zero if the exterior matching has fewer than $t$ propagating components; the example above does not assert that every capping produces an identity matching.
+
+```tikz
+\begin{tikzpicture}
+  \node (T) at (0,0) {$t$};
+  \node (N) at (2,0) {$n$};
+  \node (M) at (4,0) {$n$};
+  \node (U) at (6,0) {$t$};
+  \draw[->] (T) -- node[above] {$x^*$} (N);
+  \draw[->] (N) -- node[above] {$a^*$} (M);
+  \draw[->] (M) -- node[above] {$y$} (U);
+\end{tikzpicture}
+```
+
+These illustrations record the matching and composition rules; the rigorous proof above is independent of them.

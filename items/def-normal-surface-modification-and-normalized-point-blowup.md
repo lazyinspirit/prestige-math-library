@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-normal-surface-modification-and-normalized-point-blowup.json
+  precheck: n/a
 id: def-normal-surface-modification-and-normalized-point-blowup
 kind: definition
 title: Normal scheme modifications and normalized point blowups
@@ -26,8 +29,7 @@ sources:
     url: https://stacks.math.columbia.edu/download/resolve.pdf
   - title: The Stacks Project, Normalization, Section 29.54 (tag 035E)
     url: https://stacks.math.columbia.edu/download/normalization.pdf
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -129,3 +131,30 @@ blowups.
 - The normalization is defined by gluing over the *nonempty* affine opens of
   an integral scheme; on the empty scheme there is no function field and no
   normalization is defined.
+
+For a resolution by normalized point blowups as defined above, the chain has
+an initial finite normalization and a regular terminal scheme:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+X=S_n \arrow[r] & \cdots \arrow[r] & S_0=S^\nu \arrow[r, "\nu", "\mathrm{finite}"'] & S
+\end{tikzcd}
+```
+
+Here $S_n$ is regular. Each stage $0\leq i<n$ factors as follows, with
+$B_i:=\operatorname{Bl}_{s_i}(S_i)$ and $S_{i+1}=B_i^\nu$:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+S_{i+1}=B_i^\nu \arrow[rr, "\nu_i", "\mathrm{finite\ normalization}"'] \arrow[dr, "f_i"'] & & B_i \arrow[dl, "b_i"] \\
+& S_i &
+\end{tikzcd}
+```
+
+The map $b_i$ is the ordinary point blowup, whereas
+$f_i=b_i\circ\nu_i$ is the normalized point blowup. The triangle commutes by
+this definition; under the required finiteness hypothesis, $f_i$ is a proper
+birational modification. These diagrams depict the data of a resolution,
+not an existence assertion or a claim that arbitrary normalizations are
+finite. For $n=0$ there are no stage triangles; when $S$ is regular the chain
+reduces to the identity $S_0=S^\nu=S$.

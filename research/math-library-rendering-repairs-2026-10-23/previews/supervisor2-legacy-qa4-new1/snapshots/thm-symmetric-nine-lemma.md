@@ -1,0 +1,73 @@
+---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-symmetric-nine-lemma.json
+  precheck: pass
+id: thm-symmetric-nine-lemma
+kind: theorem
+title: "Symmetric nine lemma"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-sharp-nine-lemma,
+       thm-the-opposite-of-an-abelian-category-is-abelian]
+justified_by: []
+landmark: true
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "Saunders Mac Lane, Homology, Chapter XII, Section 3"
+      url: "https://link.springer.com/book/10.1007/978-3-642-62029-4"
+pipeline_run: frontier-24
+---
+
+## Statement
+
+In a commutative $3 \times 3$ diagram, suppose the middle row and middle column
+are short exact. If any three of the remaining four rows and columns are short
+exact, then the fourth is short exact.
+
+## Facts & Assumptions
+
+**Given:** The commutative $3 \times 3$ diagram in the statement.
+
+[L1] The sharp nine lemma recovers a missing outer row from the two rows below it and the three columns ([[thm-sharp-nine-lemma]]).
+
+[L2] Passing to the opposite category preserves abelianity and reverses exact sequences ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+
+[L3] Transposing the indexing of a commutative $3\times3$ diagram exchanges rows with columns while preserving commutativity and exactness.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 If the missing exact line is the top row, [L1] applies directly. If it is the bottom row, apply [L1] in the opposite category and redraw the reversed exact sequences from top to bottom; [L2] then transports the result back. [L1, L2, assume-case top, assume-case bottom]
+
+2.1 If the missing exact line is the left or right column, transpose the diagram using [L3]. The missing column becomes an outer row, so step 1.1 applies to the transposed diagram and transports back. [L1, L2, L3, step 1.1, cases]
+
+3.1 Thus any one of the four outer rows and columns is forced by the other three together with the short exact middle row and middle column. [step 1.1, step 2.1, cases-exhaustive] ∎
+
+## Remarks
+
+The grid below names the objects and maps in the statement. Its four squares
+commute; the arrows alone do not assert exactness.
+
+```tikzcd
+A_1 \arrow[r, "a_1"] \arrow[d, "i_1"'] & A_2 \arrow[r, "a_2"] \arrow[d, "i_2"'] & A_3 \arrow[d, "i_3"] \\
+B_1 \arrow[r, "b_1"] \arrow[d, "p_1"'] & B_2 \arrow[r, "b_2"] \arrow[d, "p_2"'] & B_3 \arrow[d, "p_3"] \\
+C_1 \arrow[r, "c_1"'] & C_2 \arrow[r, "c_2"'] & C_3
+```
+
+Thus $i_2a_1=b_1i_1$, $i_3a_2=b_2i_2$, $p_2b_1=c_1p_1$,
+and $p_3b_2=c_2p_2$. The fixed short exact lines are the middle row
+$0\to B_1\xrightarrow{b_1}B_2\xrightarrow{b_2}B_3\to0$ and the middle
+column $0\to A_2\xrightarrow{i_2}B_2\xrightarrow{p_2}C_2\to0$.
+The four outer lines are the top row, bottom row, left column and right column.
+For each of the four choices of an omitted outer line, the hypothesis is that
+the other three are short exact; the conclusion is that the omitted line is
+short exact as well. Here short exactness includes zero endpoints, which are
+omitted from the grid. A pair of arrows in the grid is not by itself a
+short exact sequence, or even an assertion that their composite is zero.
+The proof above establishes all four cases independently of this illustration.

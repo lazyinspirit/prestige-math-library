@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-upper-unitriangular-group-scheme.json
+  precheck: n/a
 id: def-upper-unitriangular-group-scheme
 kind: definition
-title: The upper unitriangular group scheme U_n and its coordinate ring
+title: The upper unitriangular group scheme $U_n$ and its coordinate ring
 dependency_level: 1
 deps:
   - def-linear-basis
@@ -15,11 +18,6 @@ provenance:
   proof: not-applicable
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)

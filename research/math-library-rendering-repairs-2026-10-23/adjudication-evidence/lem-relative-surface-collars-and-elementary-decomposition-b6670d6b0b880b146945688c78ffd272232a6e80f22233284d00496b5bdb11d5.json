@@ -1,0 +1,107 @@
+{
+  "id": "lem-relative-surface-collars-and-elementary-decomposition",
+  "agent": "/root/rendering_repair_coordinator/hall_020",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-tilde-diagram-fence",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints the entire five-row tikzcd source. The local diagram extractor recognizes backtick fences, so the tilde-fenced case index bypasses compilation.",
+      "action": "Use backtick tikzcd fence, preserving the five classifications and labels.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "After fence repair the actual native preview showed diagram failed to render. Direct node-tikzjax compilation with showConsole:true reported Undefined control sequence at the first \\text. The native preamble supplies amsfonts and tikz-cd but not the amsmath text command.",
+      "action": "Replace only diagram \\text labels with equivalent \\mbox labels.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The first successful native preview exposed a short mixed-case arrow beneath a long label extending over the adjacent cells, and approximately 12px classification text. Standalone original-resolution v2 tile establishes this newly visible layout problem.",
+      "action": "Use an explicit tikzcd environment with column sep=16em, row sep=2em, cells font=large, scale=1.4 and transform shape. Final standalone v4 tile displays all five rows with legible labels and separated arrow-label baselines.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair the local-model case-index fence and unsupported text command; space and enlarge its labels. All mathematical label strings, arrow direction, cases, statement, proof, tables and frontmatter remain unchanged.",
+  "source_lines_after": {
+    "diagram": [
+      44,
+      65
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "The arrows are classification arrows from local critical-point cases to generator families, not cobordism morphisms or a commutative square.",
+      "check": "Interior index 0 gives a disk birth eta_C: empty -> C, and index 2 its disk death epsilon_C: C -> empty.",
+      "justification": "Statement generator types and proof step 5.2 via F5 Morse normal forms."
+    },
+    {
+      "data": "Interior index 1 with circular affected level components.",
+      "check": "An oriented untwisted band merges two circles by mu_C: C tensor C -> C or splits one by Delta_C: C -> C tensor C.",
+      "justification": "Proof step 5.2 explicitly excludes twisted reconnections by orientation and distinguishes circular from interval feet."
+    },
+    {
+      "data": "Mixed interior saddle, meaning at least one affected level component is an interval.",
+      "check": "The two interval reconnections have type I_ab tensor I_cd -> I_ad tensor I_cb; circle/interval merge and split have the four ordered types in proof-table rows 3-6. The case-index target remains composites, rather than pretending these mixed interior saddles are single generators.",
+      "justification": "Steps 6.1 and 7.1 and all six unchanged proof-table rows establish cuts, boundary words, colors and parameterizations. The two incidences in the figure identify alternatives, not identification of differently colored edges."
+    },
+    {
+      "data": "Free boundary extrema in inward coordinate t >= 0.",
+      "check": "Local forms f(p) +/- s^2 +/- t give minimum with positive normal sign eta_a, maximum with negative sign epsilon_a, maximum with positive sign mu_abc or i_a^*, and minimum with negative sign Delta_abc or i_a.",
+      "justification": "Step 6.2 gives the coordinate construction, two-versus-six corner distinction and labels. Statement types preserve C -> I_aa for i_a and I_aa -> C for i_a^*. The color at an extremum is that of its single free face; other endpoint colors are transported by collars."
+    },
+    {
+      "data": "Orientation and proof interface.",
+      "check": "Intervals I_ab retain the a-to-b object orientation; incoming induced boundary orientation is opposite and outgoing agrees. None of these parameterizations, colors, proof steps or formulas is edited.",
+      "justification": "Read local supplier def-oriented-open-closed-surface-category and steps 5.2, 6.1, 6.2, 7.1. The diagram remains a case index; the complete chart/cut/flow proof is unchanged and independent."
+    }
+  ],
+  "checks": {
+    "guard_before_raw_sha256": "b6a837c5e6992d29a25182dd4c3396e6c2d0164a3a08101bb49504eeef8b6236",
+    "current_raw_sha256": "89da511dcbf00ded02fde389c7b8bb6e0af38d6739f547644cde541f7ea9c5fa",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published, byte-identical",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-relative-surface-collars-and-elementary-decomposition.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 10 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-relative-surface-collars-and-elementary-decomposition.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/lem-relative-surface-collars-and-elementary-decomposition.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/preview-hall020-independent-20261024-v4",
+      "native_compilation": "Actual local ItemBody/TikzDiagram/node-tikzjax render; one SVG figure, zero diagram failures, zero KaTeX errors. Source includes new environment/options, so final render was a fresh cache miss.",
+      "original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/preview-hall020-independent-20261024-v4/screenshots/lem-relative-surface-collars-and-elementary-decomposition--01.png",
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "limitations": "Local SSR body preview, no HTTP or live website. Reference map reports 32 unrelated parse diagnostics; preview does not establish full native-loader or whole-item mathematical audit coverage."
+    }
+  },
+  "remaining_issues": []
+}

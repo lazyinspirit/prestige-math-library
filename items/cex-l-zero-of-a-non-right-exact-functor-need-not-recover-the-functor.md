@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor.json
+  precheck: pass
 id: cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor
 kind: counterexample
-title: "L_0 of a non-right-exact functor need not recover the functor"
+title: "$L_0$ of a non-right-exact functor need not recover the functor"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ generation:
   role: counterexample
 deps: [fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself, thm-hom-is-left-exact-in-each-variable, thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor, def-left-derived-object-relative-to-projective-resolution-data]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -29,7 +29,7 @@ original functor value.
 
 **Given:** The functor $F(M)=\operatorname{Hom}_{\mathbb Z}(\mathbb Z/2\mathbb Z,M)$, and supplied projective resolution data $P$ on a class containing $\mathbb Z/2\mathbb Z$ that assigns it the standard projective resolution below.
 
-[L1] The companion false statement is false ([[fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself]]).
+[L1] The companion false statement is false ([[fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself|FALSE: every additive functor has $L_0$ naturally isomorphic to itself]]).
 
 [L2] Hom is left exact in each variable ([[thm-hom-is-left-exact-in-each-variable]]).
 

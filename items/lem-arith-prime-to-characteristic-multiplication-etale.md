@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-arith-prime-to-characteristic-multiplication-etale.json
+  precheck: pass
 id: lem-arith-prime-to-characteristic-multiplication-etale
 kind: lemma
 title: "Prime to characteristic multiplication is etale"
@@ -20,8 +23,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Bosch, Lutkebohmert, Raynaud, Neron Models (1990), 7.3/2(b) (multiplication by n prime to the residue characteristic)"
@@ -44,7 +45,7 @@ Assume AC and DC as inherited from the stated suppliers. Let $S$ be a locally No
 
 ## Proof
 
-**Proof technique:** direct: compute the differential of multiplication by $n$, apply the Jacobian criterion, and specialise.
+**Proof technique:** direct: compute the differential of multiplication by the given integer, apply the Jacobian criterion, and specialise.
 
 1.1 At the identity the differential $\mathrm d[n]_e$ is multiplication by $n$ on the tangent space, because $[n]$ is the composite of the $n$-fold group law and the differential of the group law at the identity is addition; translation identifies the tangent space at every other point with the tangent space at the identity and conjugates $\mathrm d[n]$ at that point with the corresponding tangent map, so the differential of $[n]$ is everywhere multiplication by the unit $n$ on the locally free tangent sheaf. [F1, given, algebra]
 

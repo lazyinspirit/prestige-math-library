@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-brownian-bridge-from-brownian-motion.json
+  precheck: pass
 id: ex-brownian-bridge-from-brownian-motion
 kind: example
 title: "Brownian bridge from Brownian motion"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Nobuaki Yoshida, Probability Theory, Exercise 6.1.10"
@@ -69,3 +66,45 @@ standard Brownian bridge from $0$ to $0$ over $[0,1]$.
 ## Source notes
 
 Yoshida, Exercise 6.1.10, printed p. 180, defines a Brownian bridge from $a$ to $b$ over duration $s$ as $B_t-(t/s)B_s+(1-t/s)a+(t/s)b$. Durrett, Section 8.4, printed pp. 412--413, specializes this to $B_t-tB_1$ and computes the covariance $s(1-t)$ for $s<t$. The proof above supplies all finite-dimensional and endpoint details.
+
+
+## Remarks
+
+On the probability-one event in step 1.3, subtracting the straight line
+$t\mapsto tB_1(\omega)$ moves the endpoint at time $1$ to zero while preserving
+the endpoint at time $0$. The two polygonal sketches below illustrate this
+pointwise subtraction using the same time coordinates; they are not Brownian
+sample paths and make no assertion about Gaussianity or covariance. The
+verification above is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[x=0.75cm,y=1.1cm]
+  \begin{scope}
+    \draw[->] (-0.2,0) -- (6.6,0) node[right] {$t$};
+    \draw[->] (0,-0.55) -- (0,2.1);
+    \node at (3,2.5) {Before subtraction};
+    \draw[blue,thick] (0,0) -- (1,0.7) -- (2,0.2) -- (3,1.4) -- (4,0.6) -- (5,1.6) -- (6,1.2);
+    \draw[orange,dashed,thick] (0,0) -- (6,1.2);
+    \node[blue] at (2.6,1.85) {$B_t(\omega)$};
+    \node[orange] at (3.7,0.15) {$tB_1(\omega)$};
+    \fill (0,0) circle (1.8pt);
+    \fill[blue] (6,1.2) circle (1.8pt);
+    \node[above right] at (6,1.2) {$B_1(\omega)$};
+    \draw (6,0.06) -- (6,-0.06);
+    \node[below left] at (0,0) {$0$};
+    \node[below] at (6,0) {$1$};
+  \end{scope}
+  \begin{scope}[xshift=6.6cm]
+    \draw[->] (-0.2,0) -- (6.6,0) node[right] {$t$};
+    \draw[->] (0,-0.55) -- (0,2.1);
+    \node at (3,2.5) {After subtraction};
+    \draw[green!65!blue,thick] (0,0) -- (1,0.5) -- (2,-0.2) -- (3,0.8) -- (4,-0.2) -- (5,0.6) -- (6,0);
+    \node[green!65!blue] at (3,1.45) {$\beta_t(\omega)=B_t(\omega)-tB_1(\omega)$};
+    \fill (0,0) circle (1.8pt);
+    \fill (6,0) circle (1.8pt);
+    \node[below left] at (0,0) {$0$};
+    \node[below] at (6,0) {$1$};
+    \node at (3,-0.8) {$\beta_0(\omega)=\beta_1(\omega)=0$};
+  \end{scope}
+\end{tikzpicture}
+```

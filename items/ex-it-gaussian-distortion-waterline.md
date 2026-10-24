@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-it-gaussian-distortion-waterline.json
+  precheck: pass
 id: ex-it-gaussian-distortion-waterline
 kind: example
 title: "Finite Gaussian-vector distortion waterline"
@@ -24,8 +27,6 @@ axiom_use: "AC is inherited from the Gaussian and KL suppliers; it implies Count
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Thomas M. Cover and Joy A. Thomas, Elements of Information Theory, 2nd ed."
@@ -60,3 +61,28 @@ Assume AC. Let $X_1\sim N(0,4)$ and $X_2\sim N(0,1)$ be independent, and use tot
 1.2 Put $a=\sqrt{5/2}$ and $b=\sqrt{3/2}$. Choose independent standard normals $U,V,X_2$ by [F5], and set $X_1=aU+bV$, $Y_1=aU$, $Y_2=0$. The matrix with rows $(a,b)/2$ and $(b,-a)/2$ is orthogonal, so [F4] gives $X_1\sim N(0,4)$, independently of $X_2$. The errors are $bV$ and $X_2$, with total mean square $b^2+1=5/2$. [F4, F5, given, construct, algebra]
 
 2.1 Write $f_s(t)=(2\pi s)^{-1/2}\exp(-t^2/(2s))$ for the $N(0,s)$ density. By [F4]–[F6], $(X_1,Y_1)$ has density $f_{a^2}(y)f_{b^2}(x-y)$. Relative to Lebesgue measure in $(x_1,x_2,y_1)$ times the point mass at $y_2=0$, the joint law and product of the marginals therefore have respective positive densities $f_{a^2}(y_1)f_{b^2}(x_1-y_1)f_1(x_2)$ and $f_4(x_1)f_1(x_2)f_{a^2}(y_1)$. Their log ratio is $$\frac12\ln\frac4{b^2}-\frac{(x_1-y_1)^2}{2b^2}+\frac{x_1^2}{8}.$$ It is integrable since both quadratic terms have finite expectations. By [F3] and step 1.2 its joint expectation is $\frac12\ln(8/3)-\frac12+\frac12=\frac12\ln(8/3)$ nats. Dividing by $\ln2$ yields the rate in step 1.1, proving attainment without assuming a Lebesgue density for the constant reconstruction coordinate. [F3, F4, F5, F6, step 1.1, step 1.2, algebra] ∎
+
+## Remarks
+
+The bars show coordinate variances; the blue shaded portions show the allocated distortions $\delta_i=\min(\lambda_i,\theta)$. The dashed waterline meets the first bar at $\delta_1=3/2$ and lies above the entire second bar, which saturates at $\delta_2=\lambda_2=1$.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=1.2cm,every node/.style={font=\normalsize}]
+\draw[->] (0,0) -- (0,4.5) node[above] {variance};
+\draw (0,0) -- (5.2,0);
+\node[left] at (0,0) {$0$};
+\fill[blue!25] (0.8,0) rectangle (2,1.5);
+\draw (0.8,0) rectangle (2,4);
+\fill[blue!25] (3.3,0) rectangle (4.5,1);
+\draw (3.3,0) rectangle (4.5,1);
+\draw[dashed] (0,1.5) -- (5.2,1.5) node[right] {$\theta=3/2$};
+\node[above] at (1.4,4) {$\lambda_1=4$};
+\node[above] at (3.9,1) {$\lambda_2=1$};
+\node at (1.4,-0.8) {$\delta_1=3/2$};
+\node at (3.9,-0.8) {$\delta_2=1$};
+\node[below] at (1.4,0) {coordinate 1};
+\node[below] at (3.9,0) {coordinate 2};
+\end{tikzpicture}
+```
+
+Thus $\delta_1+\delta_2=5/2=D$. Only coordinate 1 contributes a positive rate: $R(5/2)=\frac12\log_2(8/3)$ bits per vector, as established in step 1.1. The proof is independent of the illustration.

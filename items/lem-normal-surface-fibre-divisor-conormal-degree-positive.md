@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-normal-surface-fibre-divisor-conormal-degree-positive.json
+  precheck: pass
 id: lem-normal-surface-fibre-divisor-conormal-degree-positive
 kind: lemma
 title: "Positive conormal degree for a fibre divisor on a normal surface"
@@ -24,12 +27,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Lemmas 54.7.3\u20138 (complete proofs read; normal-surface arguments reconstructed)"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -40,7 +38,7 @@ Assume AC and DC. Let $A$ be a normal Noetherian local domain of dimension two a
 
 **Given:** A normal Noetherian local domain $A$ of dimension two, a normal integral modification $f\colon X\to\operatorname{Spec}A$, and a nonempty effective Cartier divisor $Z$ supported in the special fibre.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

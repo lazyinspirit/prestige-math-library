@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-interval-uncountable.json
+  precheck: pass
 id: cor-interval-uncountable
 kind: corollary
 title: "Every nondegenerate interval of $\\mathbb{R}$ is uncountable"
@@ -13,18 +16,6 @@ aliases: []
 landmark: false
 short: "$[a,b]$ and $(a,b)$ are uncountable"
 proof_strategy: contradiction
-verification:
-  precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -116,3 +107,42 @@ remarks record why that seed and not $(a,b)$ itself.
 - **Why the seed is the middle third and not $(a,b)$ itself.** The point produced by the construction is a supremum of left endpoints, so it may be an endpoint of the starting interval; seeding at $(a,b)$ would therefore only place $x$ in the closed interval $[a,b]$, which settles claim 1 but not claim 2. Seeding at $(p,q)$, the middle third, costs nothing and gives $x \in [p,q] \subseteq (a,b)$, so the open case comes out directly and the closed case follows from it, since $(a,b) \subseteq [a,b]$ and a subset of an at most countable set is at most countable ([[lem-subset-of-countable]]). The naive order of the two claims is thus reversed: the open interval is the substantive one.
 - **What the proof uses.** Exactly what [[thm-r-uncountable]] uses, and nothing else: ordered-field arithmetic, the recursion theorem ([[thm-recursion]]), and completeness at exactly one point, step 7.1 above, where $\sup\{a_n\}$ is produced. In particular the construction still makes no choices, for the same reason as there, namely that the three closed thirds are tried in a fixed order and the first and third are disjoint. The result consequently fails for $\mathbb{Q}$, where the intervals with rational endpoints are countable, and it must, since the supremum taken in step 7.1 above need not exist there.
 - **Degeneracy is the only exclusion.** The hypothesis $a < b$ cannot be weakened: $[a,a] = \{a\}$ is finite and $(a,a) = \varnothing$ is finite, so both are at most countable. Every interval that is not a single point or empty contains a nondegenerate open interval, so this corollary gives the uncountability of the half-open and unbounded intervals as well, again by [[lem-subset-of-countable]].
+
+
+**One step of the nested-interval construction.** The picture shows the case
+$u < y < s$, with $u=a_n$, $v=b_n$ and $y=f(n)$. The first closed third
+$[u,s]$ contains $y$, so the fixed-order rule of step 2.1 retains the second
+third $[s,t]$: $(a_{\sigma(n)},b_{\sigma(n)})=(s,t)$. The third $[t,v]$
+also avoids $y$, but is not the first eligible third. Dashed lines identify
+the same endpoints on the two rows; the lower row is not rescaled.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=1cm]
+  \draw[thick] (0,0) -- (9,0);
+  \foreach \z in {0,3,6,9} {
+    \draw (\z,-0.12) -- (\z,0.12);
+    \fill (\z,0) circle (2pt);
+  }
+  \node[below] at (0,-0.15) {$u=a_n$};
+  \node[below] at (3,-0.15) {$s$};
+  \node[below] at (6,-0.15) {$t$};
+  \node[below] at (9,-0.15) {$v=b_n$};
+  \fill (1.5,0) circle (2.5pt);
+  \node[above] at (1.5,0.2) {$y=f(n)$};
+  \node[above] at (4.5,0.2) {$[s,t]$};
+  \node[above] at (7.5,0.2) {$[t,v]$};
+  \draw[dashed] (3,-0.7) -- (3,-1.5);
+  \draw[dashed] (6,-0.7) -- (6,-1.5);
+  \draw[very thick] (3,-1.5) -- (6,-1.5);
+  \fill (3,-1.5) circle (2pt);
+  \fill (6,-1.5) circle (2pt);
+  \node[below] at (3,-1.65) {$a_{\sigma(n)}$};
+  \node[below] at (6,-1.65) {$b_{\sigma(n)}$};
+  \node at (4.5,-2.65) {$x\in[s,t],\qquad y\notin[s,t]$};
+\end{tikzpicture}
+```
+
+The membership $x\in[s,t]$ follows from step 8.1 for the retained interval,
+where $x=\sup\{a_n:n\in\mathbb N\}$; $x$ may be an endpoint. Iteration gives
+$x$ in every retained interval and hence $x\ne f(n)$ for every $n$, as in
+step 9.1. The diagram is illustrative; the proof above is independent of it.

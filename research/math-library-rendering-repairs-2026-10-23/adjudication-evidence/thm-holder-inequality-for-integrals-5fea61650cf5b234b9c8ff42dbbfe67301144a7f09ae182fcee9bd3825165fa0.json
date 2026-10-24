@@ -1,0 +1,85 @@
+{
+  "id": "thm-holder-inequality-for-integrals",
+  "group": "mt_036",
+  "agent": "/root/rendering_repair_supervisor2/mt_036",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly prints dollar delimiters and the raw backslash-infty command in the uppercase proof-technique banner. Frozen and current pre-edit sources are identical; the banner is plain renderer text rather than a math-parsed paragraph.",
+      "action": "Replaced only the three banner expressions with equivalent plain-text/Unicode forms: 1 < p < ∞, (1, ∞), and (∞, 1).",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Body line 69 only: readable Unicode mathematics in the plain-text proof-technique banner. Renderer limitation remains; no app code modified.",
+  "source_lines_after": {
+    "69": "**Proof technique:** For 1 < p < ∞, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs (1, ∞) and (∞, 1) separately from the essential-bound definition."
+  },
+  "mathematical_meaning_preserved": true,
+  "metadata_preserved": true,
+  "publication_status_preserved": "status: published unchanged byte-for-byte; entire frontmatter identical to frozen before",
+  "before_raw_sha256": "e12789b50fee38d8fc9798c16fcab258b0bf0d582492487970b90af9930de864",
+  "after_raw_sha256": "ca5faefff3e2dd9335c7b731e81ccc260853ca0b8e0629899b465e935481196f",
+  "raw_sha_guard": "Matched queue before_raw_sha256 immediately before the sole edit.",
+  "original_visual_evidence": [
+    "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-holder-inequality-for-integrals--01.png",
+    "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-holder-inequality-for-integrals--02.png"
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-holder-inequality-for-integrals.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-holder-inequality-for-integrals.md",
+            "item_id": "thm-holder-inequality-for-integrals",
+            "status": "pass",
+            "strategy": "\"For"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-holder-inequality-for-integrals.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-holder-inequality-for-integrals.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/mt036-fresh/manifest.json",
+    "manifest_sha256": "5195d4a2a6fc998e8c5ee348905081fbd8975c278e89bac38e944a5893059a4a",
+    "source_sha256": "ca5faefff3e2dd9335c7b731e81ccc260853ca0b8e0629899b465e935481196f",
+    "html_sha256": "c43314d7f8b1f2bdec2a64d383774ba8623f6f901fa35332e9dedd1ba3b7a8f3",
+    "reference_map_sha256": "776d96cf40b2595c12af21ad3dbe5b49d889a552637e13aba3de1a07f2131dad",
+    "views_inspected": [
+      "screenshots/thm-holder-inequality-for-integrals--01.png",
+      "screenshots/thm-holder-inequality-for-integrals--02.png"
+    ],
+    "inspection": "Both standalone PNGs inspected at original resolution. Tile 02 confirms the corrected banner is legible, with Unicode infinity symbols and no raw delimiters/TeX. Tile 01 retains the original statement and Facts rendering.",
+    "capture_limitation": "In fresh tile 02 proof row borders appear but row text is absent, unlike the authentic original tile; no proof-row source was edited and proof-layout passes all five rows. This limits whole-proof visual coverage, not the fully visible corrected banner.",
+    "retry": "A second invocation after completion refused to overwrite existing preview directory; original manifest and captures retained."
+  },
+  "remaining_issues": [
+    "Renderer proof-technique banner remains plain uppercase text; Unicode workaround resolves the assigned defect.",
+    "Fresh preview has absent proof-row text as described in native_preview.capture_limitation; unchanged proof source and passing scoped checks do not establish the cause."
+  ]
+}

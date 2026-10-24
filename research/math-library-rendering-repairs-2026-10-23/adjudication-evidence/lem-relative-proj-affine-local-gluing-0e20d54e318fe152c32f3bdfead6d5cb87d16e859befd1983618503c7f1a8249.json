@@ -1,0 +1,97 @@
+{
+  "id": "lem-relative-proj-affine-local-gluing",
+  "agent": "/root/rendering_repair_coordinator/scm_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution flagged tile visibly ends step 6.1 with literal \\qed and its justification list as ordinary text, rather than a structural completion marker and blue chips. The source places \\qed outside math after the final tag group.",
+      "action": "Replace only the terminal literal \\qed with the schema-supported structural ∎ marker.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution flagged tile shows dollar signs and raw commands such as \\widetilde and \\operatorname in the uppercase technique banner, while the same notation renders correctly in the numbered proof. This banner is a plain-text renderer field.",
+      "action": "Use equivalent prose describing the associated sheaf of the scalar-extended graded algebra, its restricted projective charts and localisation cocycles. All algebraic formulas and proof details remain in the numbered proof verbatim.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced literal terminal \\qed by ∎ and replaced raw-TeX technique-banner notation by equivalent readable prose.",
+  "source_lines_after": [
+    71,
+    83
+  ],
+  "mathematical_meaning_preserved": true,
+  "preservation_evidence": "Frontmatter is byte-identical, including status published, dependencies, sources, provenance and verification. Statement, Facts, every numbered proof claim/formula/map/gluing argument and every justification tag are unchanged; only the explanatory technique banner and terminal completion marker differ.",
+  "before_raw_sha256": "22320d7734f477fc1b40c8f579d52ab68c3d799ddd9b5ed311a48e83b6fb0c54",
+  "before_guard": "Actual current raw SHA256 equalled the frozen before_raw_sha256 immediately before the edit.",
+  "after_raw_sha256": "bc71b3110e827367fb6558ba59b16f69df83d884adee026bba2105e42d6ec52e",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/lem-relative-proj-affine-local-gluing--02.png",
+    "inspection": "Standalone view_image with detail original; this is the only unique PNG flagged by both assigned findings."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-relative-proj-affine-local-gluing.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-relative-proj-affine-local-gluing.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-relative-proj-affine-local-gluing.md",
+            "item_id": "lem-relative-proj-affine-local-gluing",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-relative-proj-affine-local-gluing.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-relative-proj-affine-local-gluing --out research/math-library-rendering-repairs-2026-10-23/previews/scm_016-native-after",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "current_visual_evidence": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/scm_016-native-after/manifest.json",
+    "changed_region_png": "research/math-library-rendering-repairs-2026-10-23/previews/scm_016-native-after/screenshots/lem-relative-proj-affine-local-gluing--02.png",
+    "inspection": "Standalone view_image detail original confirms readable prose banner, final-step blue chips and structural completion marker, with no exposed TeX in either changed region.",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "katex_count": 115,
+    "tikz_count": 0
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Technique banner still uses the existing plain-text uppercase renderer; the local prose workaround avoids raw math there.",
+    "Fresh capture uses actual local ItemBody renderer and current reference-title map, not production-route or full native library-loader coverage. The helper reports 16 reference-map parse diagnostics for unrelated sources. No live website or HTTP visit was used."
+  ]
+}

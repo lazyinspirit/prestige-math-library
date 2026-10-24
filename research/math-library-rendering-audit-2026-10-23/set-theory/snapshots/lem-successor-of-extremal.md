@@ -1,0 +1,84 @@
+---
+id: lem-successor-of-extremal
+kind: lemma
+title: "The image of an extremal element is extremal"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-partial-order]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: cases
+verification:
+  precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
+sources:
+  scraped: []
+  references:
+    - title: "Mathlib, Order.BourbakiWitt"
+      url: "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Order/BourbakiWitt.html"
+    - title: "Bourbaki-Witt Principle (Menemui Matematik 39(1), 2017)"
+      url: "https://persama.org.my/images/Menemui_Matematik/2017/MMv391_8_21.pdf"
+    - title: "Bourbaki–Witt theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
+pipeline_run: null
+---
+
+## Statement
+
+Let $(P, \le)$ be a chain-complete poset, $f : P \to P$ progressive, $M$ the
+smallest admissible set, and $x \in M$ extremal ([[def-bw-extremal]]). Then
+$f(x)$ is extremal.
+
+## Facts & Assumptions
+
+**Given:** A chain-complete poset $(P, \le)$, a progressive $f : P \to P$, the smallest admissible set $M$, an extremal $x \in M$, and an element $y \in M$ with $y < f(x)$.
+
+[A1] $x$ is extremal: for every $z \in M$ with $z < x$, $f(z) \le x$ ([[def-bw-extremal]]).
+
+[L1] For every $z \in M$, either $z \le x$ or $f(x) \le z$ ([[lem-extremal-comparability]]).
+
+[L2] $M$ is closed under $f$ ([[lem-admissible-set-exists]]).
+
+[L3] $f$ is progressive: $z \le f(z)$ for every $z \in P$ ([[def-chain-complete-poset]]).
+
+[L4] $\le$ is a partial order: it is reflexive ($u \le u$), transitive ($u \le v$ and $v \le w$ imply $u \le w$) and **antisymmetric** ($u \le v$ and $v \le u$ imply $u = v$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
+
+## Proof
+
+**Proof technique:** cases.
+
+1.1 $f(x) \in M$ because $M$ is closed under $f$, so it makes sense to ask whether $f(x)$ is extremal. [L2]
+
+1.2 It suffices to show $f(y) \le f(x)$ for the given $y \in M$ with $y < f(x)$, since that is exactly the defining condition. [suffices: f(y) le f(x)]
+
+1.3 Comparability at the extremal $x$ gives $y \le x$ or $f(x) \le y$. [L1]
+
+1.4 Suppose $y < x$. [assume-case strict]
+
+1.5 Suppose $y = x$. [assume-case equal]
+
+2.1 The alternative $f(x) \le y$ is impossible: $y < f(x)$ gives $y \le f(x)$ with $y \ne f(x)$, so $f(x) \le y$ together with $y \le f(x)$ would force $f(x) = y$ by antisymmetry, contradicting $y \ne f(x)$. (Transitivity alone would only give $f(x) \le f(x)$, which is no contradiction; antisymmetry is what is doing the work.) Hence $y \le x$. [step 1.3, step 1.2, L4]
+
+2.2 In the case $y < x$, extremality of $x$ gives $f(y) \le x$, and progressivity gives $x \le f(x)$, so $f(y) \le f(x)$ by transitivity. [step 1.4, A1, L3, L4]
+
+2.3 In the case $y = x$, we get $f(y) = f(x)$, hence $f(y) \le f(x)$ by reflexivity. [step 1.5, L4]
+
+3.1 The relation $y \le x$ holds exactly when $y < x$ or $y = x$, by the definition of the strict order, so the two cases are exhaustive and $f(y) \le f(x)$ in both; therefore $f(x)$ is extremal. [step 2.1, step 2.2, step 2.3, L4, cases-exhaustive] ∎
+
+## Remarks
+
+- Step 2.1 is where the comparability lemma earns its place. Without it there would be no way to rule out an element of $M$ sitting strictly between $x$ and $f(x)$, and such an element would break extremality of $f(x)$ immediately.
+- Extremality is not a monotonicity condition in disguise. Nothing here assumes $f$ preserves order, and the proof never compares $f$ of two different elements except through $x$ itself.

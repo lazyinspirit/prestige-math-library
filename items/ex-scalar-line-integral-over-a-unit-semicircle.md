@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-scalar-line-integral-over-a-unit-semicircle.json
+  precheck: pass
 id: ex-scalar-line-integral-over-a-unit-semicircle
 kind: example
 title: "The scalar line integral of x over the right unit semicircle equals two"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-13
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -55,3 +51,21 @@ $$\int_\gamma x\,ds=2.$$
 2.1 By [L1], [L2], and [L3], $$\int_\gamma x\,ds=\int_{-\pi/2}^{\pi/2}\cos t\,dt =\sin(\pi/2)-\sin(-\pi/2)=2.$$ [step 1.1, L1, L2, L3, algebra]
 
 3.1 Reversing the path leaves the value $2$ unchanged by [L4], confirming that the scalar $ds$ integral does not depend on orientation. [step 2.1, L4] ∎
+
+## Remarks
+
+The arrow shows increasing $t$ along the right unit semicircle, from $\gamma(-\pi/2)=(0,-1)$ through $\gamma(0)=(1,0)$ to $\gamma(\pi/2)=(0,1)$. Reversing this arrow leaves the scalar integral $\int_\gamma x\,ds=2$ unchanged, as established in step 3.1. The figure illustrates the path; the verification above is independent of it.
+
+```tikz
+\begin{tikzpicture}[scale=2,>=stealth]
+\draw[->] (-0.45,0) -- (1.55,0) node[right] {$x$};
+\draw[->] (0,-1.35) -- (0,1.4) node[above] {$y$};
+\draw[thick] (0,-1) arc[start angle=-90,end angle=90,radius=1];
+\draw[thick,->] (-25:1) arc[start angle=-25,end angle=25,radius=1];
+\fill (0,-1) circle (0.025) node[left] {$(0,-1)$};
+\fill (0,1) circle (0.025) node[left] {$(0,1)$};
+\fill (1,0) circle (0.025) node[below right] {$(1,0)$};
+\node at (1.23,0.72) {$\gamma$};
+\node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+```

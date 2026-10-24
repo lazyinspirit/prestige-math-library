@@ -1,0 +1,143 @@
+{
+  "id": "thm-stay-put-elimination-with-explicit-simulation-interface",
+  "agent": "/root/rendering_repair_coordinator/dcpt_015",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The complete proof already renders correctly, but a concrete diagram is warranted under the expanded diagram scope: the single original S transition, marked nonhalting interior, and two simulator times are the mechanism behind the exact slowdown and first-halting claims. A five-configuration diagram materially clarifies that interface without replacing the proof. This confirms an explanatory addition, not an error in the original theorem.",
+      "action": "Appended a final Remarks section with the original transition above its two-step embedded simulator path, explicit tape writes, times, and explanatory tag/head traces.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the warranted stay-put macro illustration and explanatory prose in final Remarks only. No original source bytes were removed or rewritten.",
+  "source_lines_after": {
+    "remarks": [
+      83,
+      107
+    ],
+    "tikz": [
+      87,
+      105
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and embedding",
+      "result": "For a reached nonhalting C_i=(q,h,t), with delta(q,t(h))=(p,b,S), u=t[h:=b] is a finite-support tape and c=u(h+1) lies in Gamma. Original endpoints C=(q,h,t) and C'=(p,h,u) lie in C_M; the three lower nodes lie in C_N=(Q x {0,1}) x N x T. Each downward E maps (r,j,v) to ((r,0),j,v).",
+      "local_basis": "def-stay-put-one-tape-machine-and-run-interface Definition and Verification 1.1-3.1; lem-stay-put-right-left-macro-simulation Statement."
+    },
+    {
+      "check": "Original transition and first simulator edge",
+      "result": "The upper edge writes b at h and stays at h, hence ends at (p,h,u). The first lower edge is exactly delta_N((q,0),t(h))=((p,1),b,R), so its endpoint is ((p,1),h+1,u). Arrows point in the direction of computation, not conversely.",
+      "local_basis": "Local macro supplier Statement and Proof 4.2; theorem F2 and Proof 2.1."
+    },
+    {
+      "check": "Return edge, tape equality and boundary",
+      "result": "At the middle node the scanned symbol is c=u(h+1). The forced entry delta_N((p,1),c)=((p,0),c,L) preserves every tape cell. Since h+1>0 its predecessor is h, so the final node is ((p,0),h,u)=E(C'). This also holds at h=0 with head trace 0,1,0, without an assumption on c being blank.",
+      "local_basis": "lem-stay-put-right-left-macro-simulation Proof 4.2; definition head/write clauses."
+    },
+    {
+      "check": "Marked interior and path equality",
+      "result": "The tag sequence 0,1,0 makes the sole interior marked and nonhalting even if p is an original accepting/rejecting state; only the unmarked accepting/rejecting copies are designated halts. The two lower transitions compose to the embedded upper step on this configuration. Vertical E arrows are configuration maps, not machine transitions; this meaning is stated in the prose.",
+      "local_basis": "Macro supplier Statement and Proof 3.1,4.2; theorem F2 and Proof 3.2,4.1."
+    },
+    {
+      "check": "Times and proof independence",
+      "result": "The index-i S step increments both the original step count and stay counter by one, so k_{i+1}=k_i+2 and its unique interior is at k_i+1. Thus labels k_i,k_i+1,k_{i+1}=k_i+2 match the existing recurrence. The existing complete proof is preserved verbatim and explicitly remains independent of the figure.",
+      "local_basis": "Theorem Proof 1.1,2.1,2.2,3.2."
+    }
+  ],
+  "before_guard": {
+    "expected_raw_sha256": "c99d078e49a77138930a74a2f5655aa2e7db59325743bb8c6ece967ff26651a6",
+    "observed_raw_sha256": "c99d078e49a77138930a74a2f5655aa2e7db59325743bb8c6ece967ff26651a6",
+    "result": "exact match immediately before initial edit"
+  },
+  "current_raw_sha256": "bab0de171d5486bcdc06135433501b561e4642cc1313d84ea0f50e514db16479",
+  "preservation_checks": {
+    "entire_original_source_is_unchanged_prefix": true,
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true
+  },
+  "original_visual_evidence": {
+    "declared_path_discrepancy": "Queue evidence_dir incorrectly adds diagram-supplement before screenshots; corresponding category screenshots were located and their SHA256 values exactly match the queue.",
+    "resolved_directory": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots",
+    "tiles": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-stay-put-elimination-with-explicit-simulation-interface--01.png",
+        "sha256": "17ae3e50c60859b62034e2fcf692478f94aa272a7dd0ae54b948158bded22c3d",
+        "inspection": "standalone view_image original resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-stay-put-elimination-with-explicit-simulation-interface--02.png",
+        "sha256": "2aa83291da902788f955e6826fea1f79b443d09eb5772c53a3ee7d4628460d21",
+        "inspection": "standalone view_image original resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-stay-put-elimination-with-explicit-simulation-interface--03.png",
+        "sha256": "5d1e946721d443f6ad268179b26bda38e82100ad1ce92063dfa3fbfea3e4fd84",
+        "inspection": "standalone view_image original resolution"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-stay-put-elimination-with-explicit-simulation-interface.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-stay-put-elimination-with-explicit-simulation-interface.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-stay-put-elimination-with-explicit-simulation-interface.md",
+            "item_id": "thm-stay-put-elimination-with-explicit-simulation-interface",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-stay-put-elimination-with-explicit-simulation-interface.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcpt-015 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-stay-put-elimination-with-explicit-simulation-interface --out research/math-library-rendering-repairs-2026-10-23/previews/dcpt-015-bounded",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-015-bounded/manifest.json",
+    "manifest_sha256": "4bc636e1ca51993f105706d3f561f42f2deb810800945d5c95bddd5f1aa8cf1b",
+    "source_sha256": "bab0de171d5486bcdc06135433501b561e4642cc1313d84ea0f50e514db16479",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-015-bounded/screenshots/thm-stay-put-elimination-with-explicit-simulation-interface.json",
+    "capture_receipt_sha256": "13dcd85a268747ba79d9f07b4b8c9dac32ba20adc522a488c8a0b5c1afba07ca",
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "inspection": "All three current PNG tiles inspected standalone at original resolution; diagram also inspected in a standalone browser element screenshot at deviceScaleFactor 3. Five configuration nodes, five arrows, both E maps, all three times and the marked-nonhalting caption are visible, with correct arrow directions and no overlap/clipping.",
+    "standalone_diagram": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-015-bounded/diagram-3x.png",
+    "standalone_diagram_sha256": "737a4b3b93202f7f222155a27d399859797f4f614002805389a519b948fcfb6c",
+    "limitations": "Local native ItemBody preview, not production HTTP; 16 unrelated frontmatter diagnostics in reference-title map. No HTTP visits."
+  },
+  "remaining_issues": [],
+  "recorded_at": "2026-10-24T00:15:03.303438+00:00"
+}

@@ -1,0 +1,91 @@
+{
+  "id": "alg-doubly-robust-ope",
+  "agent": "/root/rendering_repair_coordinator/dorl_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot has correct formulas but no figure. A two-branch computation graph materially clarifies that fitted-value residuals and cumulative action weights are computed separately, multiplied with the discount, and then aggregated at two distinct levels (time within a trajectory and trajectories within a dataset). A final Remarks illustration is warranted under the expanded explanatory-diagram criterion.",
+      "action": "Added a six-node TikZ computational-input diagram and exact local definitions of the residual and weighted correction in a final Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended an explanatory computation graph; original title, metadata, Definition, references and mathematical claims remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      58,
+      77
+    ],
+    "diagram": [
+      62,
+      77
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For a logged trajectory i and 0<=t<H, values Vhat_t are real functions on the finite state set, weights What_i,t are finite nonnegative reals, delta_i,t and c_i,t are finite real scalars, and D_i and Jhat_DR are real scalars.",
+      "justification": "The Definition inputs finite real Qhat and finite nonnegative multipliers. def-offline-reinforcement-learning-dataset fixes finite action sets, finite rewards, H>=1, n>=1 and 0<=gamma<=1, so the displayed finite sums/products and state evaluations are defined."
+    },
+    {
+      "relation": "values -> residual; weights -> correction; residual -> correction",
+      "justification": "Definition lines 37-43 give Vhat_t(s)=sum over a in A(s) of pi(a|s)Qhat_t(s,a), the weight recurrence What_i,t=What_i,t-1 rhohat_t(S_t^i,A_t^i), and the residual R_(t+1)^i+gamma Vhat_(t+1)(S_(t+1)^i)-Qhat_t(S_t^i,A_t^i). The added c_i,t=gamma^t What_i,t delta_i,t is precisely the corresponding summand, including sign and discount. Arrows are explicitly selected computational dependencies, not stochastic transition arrows or an exhaustive input list."
+    },
+    {
+      "relation": "values -> score; correction -> score; score -> average",
+      "justification": "The outer baseline arrow supplies Vhat_0(s_0); D_i=Vhat_0(s_0)+sum_(t=0)^(H-1)c_i,t is algebraically identical to the original Definition formula. The final node is exactly Jhat_DR=(1/n)sum_(i=1)^nD_i. No baseline is multiplied by a trajectory weight or added once per time step."
+    },
+    {
+      "relation": "Boundary and direction checks",
+      "justification": "The diagram retains Vhat_H=0, the caption states What_i,-1=1, and 0<=t<H is explicit for the residual/correction. In particular, at t=H-1 the residual uses the fixed zero terminal value. All six visible arrows have the declared input-to-output direction. This computation DAG has six vertices and six edges; there is no intended cycle or open/closed endpoint convention."
+    },
+    {
+      "relation": "Independence",
+      "justification": "The complete original algorithmic Definition is preserved verbatim and determines the estimator without the figure. No proof is introduced or replaced; all mathematical use of this procedure remains independent of the illustration."
+    }
+  ],
+  "checks": {
+    "before_raw_sha256": "8302c865179711617286b0d127360255f3ef8319fe0b051b56a7eba77bcd6692",
+    "after_raw_sha256": "fcad7f724ee1162419dd29f2c36fb94b462777809ab5eb1a91f7987826b50435",
+    "before_guard": "Matched immediately before initial append; subsequent own-edit SHA guards also matched.",
+    "metadata_status": "Entire frontmatter byte-identical, including status: published; original source is an exact prefix of current source.",
+    "proof_layout": "proof-layout: 1 items, 0 steps, 0 defects (after final edit)",
+    "precheck": {
+      "summary": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0
+      },
+      "status": "not-applicable (algorithm without proof)"
+    },
+    "rendercheck": {
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl004-verified/manifest.json",
+      "source_sha256": "fcad7f724ee1162419dd29f2c36fb94b462777809ab5eb1a91f7987826b50435",
+      "html_sha256": "d96f5ae7113317caf5b959c62567983425c23b56a416a3db7e0d0dcef538e5a3",
+      "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dorl004-verified/screenshots/alg-doubly-robust-ope--01.png",
+      "crop": "research/math-library-rendering-repairs-2026-10-23/previews/dorl004-verified/diagram-crop.png",
+      "result": "Native SSR TikZ compiled successfully. Final standalone original-resolution full tile and standalone figure crop inspected. Six nodes and all six arrows are visible, with no clipping, label/edge overlap or missing edge. Transparent/unfilled boxes, currentColor SVG strokes and light labels visibly contrast with the native black background. No graph-closing cycle or endpoint rings apply."
+    },
+    "original_evidence": {
+      "declared_missing": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-doubly-robust-ope--01.png",
+      "resolved": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-doubly-robust-ope--01.png",
+      "sha256": "0e496a85bc632e44b6c30e63d7009e9e3b7f38e0f01a93fab7f8eb95553e8397",
+      "result": "Declared evidence_dir screenshot was absent; authentic category screenshot found with exact recorded SHA and inspected at original resolution."
+    }
+  },
+  "remaining_issues": [
+    "Fresh native preview captures the added Remarks and diagram clearly, but its preceding original sections appear blank in the PNG despite being present in HTML; original standalone audit screenshot and unchanged source establish the original content. No application changes made.",
+    "Preview reference-title map reports 16 unrelated parse diagnostics; this is local ItemBody rendering coverage, not production-route or whole-corpus validation."
+  ]
+}

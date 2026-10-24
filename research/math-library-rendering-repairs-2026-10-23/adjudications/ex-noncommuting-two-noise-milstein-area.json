@@ -1,0 +1,136 @@
+{
+  "id": "ex-noncommuting-two-noise-milstein-area",
+  "agent": "/root/rendering_repair_coordinator/dnde_028",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dnde_028",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The distinction between endpoint-determined symmetric data and the antisymmetric area contribution is the central interface of this example. A computation diagram materially clarifies the missing information while avoiding a misleading smooth Brownian-path sketch.",
+      "action": "Added a four-node, three-arrow computation diagram in final Remarks, with exact area convention and residual-moment explanation.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Original standalone tiles visibly display raw It^o in the Facts Given text and Verification step 1.2. The source uses the TeX text-accent spelling It\\^o outside mathematics.",
+      "action": "Replaced the two body occurrences by Unicode Itô.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a final Remarks illustration of E=(U,V) -> S=UV/2 and the two inputs S,A12 -> I12=S+A12; repaired two visibly raw It\\^o body strings. All original mathematical assertions and proof arguments are retained.",
+  "source_lines_after": {
+    "accent_repairs": [
+      42,
+      70
+    ],
+    "remarks": [
+      77,
+      93
+    ],
+    "tikz": [
+      81,
+      91
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "E=(U,V) with U=Delta W1,V=Delta W2; scalar random variables S=UV/2, A12=(I12-I21)/2, and I12.",
+      "justification": "Example and Verification step 1.2 define U,V and the iterated-integral convention. def-milstein-scheme-and-iterated-integrals Definition sets Aij=(Iij-Iji)/2."
+    },
+    {
+      "relation": "E -> S is the deterministic map (u,v) -> uv/2 from R² to R.",
+      "justification": "L1 and Verification step 1.2 give I12+I21=UV, so S is the symmetric part and is endpoint measurable."
+    },
+    {
+      "relation": "The two incoming arrows at I12 represent the addition map (S,A12) -> S+A12 on R²; they do not separately claim that either input determines I12.",
+      "justification": "(I12+I21)/2+(I12-I21)/2=I12. The caption explicitly defines arrows as computation, not time evolution; there is no E -> A12 arrow."
+    },
+    {
+      "relation": "I21=S-A12; E[A12 | sigma(U,V)]=0 and E[A12²]=h²/4>0.",
+      "justification": "The first equality is algebra using the same convention. Verification step 2.1 gives E[I12|sigma(U,V)]=UV/2=S; step 3.1 computes E[(I12-S)²]=h²/4. Therefore A12=I12-S has exactly the displayed conditional mean and second moment, and cannot be endpoint measurable."
+    },
+    {
+      "relation": "The required first-step second-coordinate increment is I12.",
+      "justification": "Verification step 1.1 computes L1 sigma2=(0,1), L2 sigma1=0 and identifies the exact second coordinate and Milstein increment. The original rigorous verification is independent of the illustration."
+    }
+  ],
+  "before_raw_sha256": "41ad10177b8a9c1e4df997db56dba98a1f21076a51fe4f63dd58b9bb18b9d3e5",
+  "after_raw_sha256": "5f55f4314d85eaed0ddd55bd7e4d0624a94734ddccdd8e97b91bdd4e48312896",
+  "frontmatter_byte_identical": true,
+  "publication_status_unchanged": "status: published",
+  "evidence": {
+    "original_path_discrepancy": "The declared diagram-supplement/screenshots paths do not exist. Authentic screenshots were located in the same category parent screenshots directory, and both match the queue SHA256 values.",
+    "original_screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/ex-noncommuting-two-noise-milstein-area--01.png",
+        "sha256": "406023c92a1ad15c6e94dc73615a676a68d43745cd91f27ef06d2396e0f8100e"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/ex-noncommuting-two-noise-milstein-area--02.png",
+        "sha256": "00d7961acdcf30d7331f471912c2ad8bc80d5891824a055b9370dbffcaf7b39c"
+      }
+    ],
+    "original_view": "Both authentic original PNGs independently viewed standalone at original resolution.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde_028-final/manifest.json",
+    "preview_manifest_sha256": "eeb921c52e255f46401fdfc6b05129d727286497c44401d973348f0af8e8c953",
+    "preview_source_sha256": "5f55f4314d85eaed0ddd55bd7e4d0624a94734ddccdd8e97b91bdd4e48312896",
+    "preview_html_sha256": "fda32d83fca882c84a75b047b974255f36491016462f3554ddacd0558b8d6acf",
+    "reference_map_sha256": "a085a44d1f64e92dcd907df3602883cad09c2c552188b366ee4224fe94dfd337",
+    "visual_check": "Both final PNGs independently viewed standalone at original resolution. Native SSR TikZ compiles visibly; four nodes and all three directed arrows appear, with no overlap or clipping. White labels and strokes are legible against black; no pale fills or endpoint rings. This computation DAG has no asserted closing edge."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-noncommuting-two-noise-milstein-area.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-noncommuting-two-noise-milstein-area.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-noncommuting-two-noise-milstein-area.md",
+            "item_id": "ex-noncommuting-two-noise-milstein-area",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-noncommuting-two-noise-milstein-area.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnde_028 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-noncommuting-two-noise-milstein-area --out research/math-library-rendering-repairs-2026-10-23/previews/dnde_028-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "check_notes": "An initial rendercheck failed because its escaped-dollar scanner treated a TikZ line break immediately before a dollar as an escaped dollar. Added an ordinary space after the line breaks, reran proof-layout, rendercheck and precheck successfully, and compiled/viewed a fresh final native preview. The 16 unrelated reference-map parse diagnostics are preserved in the preview manifest and do not affect this carrier.",
+  "remaining_issues": []
+}

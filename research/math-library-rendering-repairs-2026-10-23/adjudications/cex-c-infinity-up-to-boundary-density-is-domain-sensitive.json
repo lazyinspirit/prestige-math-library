@@ -1,0 +1,120 @@
+{
+  "id": "cex-c-infinity-up-to-boundary-density-is-domain-sensitive",
+  "agent": "/root/rendering_repair_coordinator/dpde_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dpde_001",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A concrete slit-domain picture materially clarifies why approaching the same removed segment above and below gives branch limits 0 and 2π, whereas an ambient smooth function has a single boundary value. The complete endpoint-estimate proof does not remove this explanatory benefit.",
+      "action": "Added a schematic and precise interpretation in a final Remarks section, outside the Counterexample proof.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a slit-disc TikZ illustration with excluded boundary/slit, excluded origin cross, inward approaches from above and below, and branch-limit labels. Original source is retained byte-for-byte as a prefix.",
+  "source_lines_after": [
+    86,
+    104
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Ω=B(0,1) minus {(x,0):0≤x<1}; u:Ω→(0,2π), u=arg(x+iy).",
+      "check": "The radius-one circle bounds the disc; the highlighted radial segment runs along the nonnegative x-axis from the origin to its boundary. Both are explicitly declared excluded, and the origin is crossed out. The endpoint at (1,0) is already excluded by the open disc.",
+      "justification": "Statement refuted and Counterexample step 1.1 define exactly this slit disc and branch."
+    },
+    {
+      "objects": "Approaches at a representative fixed x=0.55, from positive and negative y.",
+      "check": "The upper arrow travels downward while remaining above the slit; the lower arrow travels upward while remaining below it. Their displayed y-coordinates satisfy x²+y²<1. They stop short of the slit, so no u-value there is asserted.",
+      "justification": "At x=0.55 and |y|≤0.48, x²+y²≤0.5329<1. The slit removes only y=0 with x≥0."
+    },
+    {
+      "objects": "One-sided branch limits.",
+      "check": "For 0<x<1, arg(x+iy)=arctan(y/x) above the slit tends to 0 as y↓0; below, 2π−arctan(|y|/x) tends to 2π as y↑0. The arrows and labels have those orientations.",
+      "justification": "Counterexample steps 4.1 and 4.2 give these exact formulas and their one-sided extensions; the added caption extends the elementary formulas to every fixed 0<x<1."
+    },
+    {
+      "objects": "Ambient approximants φ_j: R²→R (or C).",
+      "check": "Smoothness implies continuity at (x,0), so both one-sided limits equal φ_j(x,0). The figure asserts no approximation convergence, only the local geometry and branch limits.",
+      "justification": "The original Statement and steps 4.1–5.1 use the same globally smooth boundary value in both endpoint estimates. Those estimates and the contradiction are unchanged; the proof remains independent of the figure."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "d16ccbb8cd9daeca17e580e186687175c8a155b104a8879737d7f36f9a994a5b",
+    "guard": "Passed immediately before initial write. Followup label-placement adjustment guarded against actual first-preview source SHA a78b9114917b999ea5ac7c00142ab9f25320588dd02706b282574b0a5e7b14a6.",
+    "current_raw_sha256": "9a905bf9970e2960cdedd5845d514cdee20a76406a5b00c89b7a5cae26cb5a12",
+    "original_image_path_discrepancy": "Queue inspection_dir/diagram-supplement contains no screenshots. Authentic screenshots resolved within corresponding pde category, with both SHA256 values exactly matching queue.",
+    "original_images": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/pde/screenshots/cex-c-infinity-up-to-boundary-density-is-domain-sensitive--01.png",
+        "sha256": "0faca01ac4056edc76d524de5d497475271b67e8a4492de4e270e1e22fd1c0cb"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/pde/screenshots/cex-c-infinity-up-to-boundary-density-is-domain-sensitive--02.png",
+        "sha256": "b6e8b9df84bbac79648615edc1685fa4d6865012258a77410c826e7b197a380b"
+      }
+    ],
+    "original_view": "Both authentic original PNG tiles independently inspected at original resolution.",
+    "frozen_current_comparison": "Before initial edit, current source and archived before were byte-identical. Final source starts with entire original archived bytes; frontmatter, publication status, title, claim, Facts, proof and dependencies remain byte-identical.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dpde-001-slit-final/manifest.json",
+    "preview_manifest_sha256": "d1a6fd4f892d4abc6a3d4f6989e66a71d0e1cdb3dd394c87a8d5f5ad3b57976f",
+    "html_sha256": "80490c864a382629ebf9c1cbc36138bacbc1ad2a952a2763b5dc6731f9ed7dab",
+    "reference_map_sha256": "9023442955a8714bedb7e59078d1bf4ab09a7cbc7910c7dee64c7090a25ff45d",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dpde-001/pi-tikz-cache/6b137064eae4fb3fe914860296c03019.svg",
+    "native_visual_checks": "Final native dark-background tiles 02 and 03 inspected individually at original resolution. Full figure visible in tile 03: white dashed full circle, red/pink slit and origin cross, white arrows and legible labels. Labels were moved outside the circle after first preview showed boundary/label overlap. No clipping or remaining overlap. No pale fills or open/closed endpoint rings are used; explicit prose marks all boundaries and the origin excluded. This is a geometric schematic, with no graph vertex-degree/closing-edge assertion; the actual circular boundary is visibly complete."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-c-infinity-up-to-boundary-density-is-domain-sensitive.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-c-infinity-up-to-boundary-density-is-domain-sensitive.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-c-infinity-up-to-boundary-density-is-domain-sensitive.md",
+            "item_id": "cex-c-infinity-up-to-boundary-density-is-domain-sensitive",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-c-infinity-up-to-boundary-density-is-domain-sensitive.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dpde-001 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-c-infinity-up-to-boundary-density-is-domain-sensitive --out research/math-library-rendering-repairs-2026-10-23/previews/dpde-001-slit-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 3,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview covers local ItemBody, not the production route. Sixteen unrelated source-title-map diagnostics are preserved in the manifest; no unrelated source was edited."
+  ]
+}

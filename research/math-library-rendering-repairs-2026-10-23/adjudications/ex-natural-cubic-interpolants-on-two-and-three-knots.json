@@ -1,0 +1,98 @@
+{
+  "id": "ex-natural-cubic-interpolants-on-two-and-three-knots",
+  "agent": "/root/rendering_repair_coordinator/dms_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic standalone original tile contains only formulas and verification. A paired plot materially clarifies why two knots produce a line whereas three knots produce a smooth arch with a horizontal middle tangent and linear tails; it is warranted explanatory content under the expanded diagram direction.",
+      "action": "Appended a final Remarks section with a two-panel TikZ comparison and explicit specialization of the two-knot data.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a two-knot (0,0),(1,1) line and the stated three-knot cubic arch; marked all knots, linear tails, and the horizontal tangent at (1,1). Original source retained byte-for-byte as prefix; all frontmatter, including status: published, unchanged.",
+  "source_lines_after": [
+    53,
+    84
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Two-knot panel: knots 0,1 and specialized values 0,1.",
+      "check": "Verification 1.1 proves the interpolant is the affine line x for this specialization; solid segment and dashed extensions all satisfy s=x. Caption explicitly discloses the specialization so no ordering assumption on arbitrary y1,y2 is added."
+    },
+    {
+      "data": "Three-knot panel: (0,0),(1,1),(2,0).",
+      "check": "On [0,1], the cubic Bezier with ideal controls (0,0),(1/3,1/2),(2/3,1),(1,1) has x=t and y=3t/2-t^3/2. On [1,2], controls (1,1),(4/3,1),(5/3,1/2),(2,0) give x=1+t and y=1-3t^2/2+t^3/2, equal to the displayed reflected piece. Horizontal control coordinates are rounded to six decimal places only for drawing, with no change to the exact authored formulas."
+    },
+    {
+      "data": "Endpoint and joining derivatives.",
+      "check": "Differentiation gives s′=3/2-3x^2/2 and s″=-3x on [0,1]; on [1,2], s′=-3/2+3(2-x)^2/2 and s″=-3(2-x). Thus both pieces meet with s=1, s′=0, s″=-3 at x=1, and s″=0 at x=0,2, exactly as Verification 2.1. The dotted segment is horizontal at y=1."
+    },
+    {
+      "data": "Dashed tails and domain convention.",
+      "check": "The left tail has slope 3/2 through (0,0); the right tail has slope -3/2 through (2,0). Both match endpoint first derivatives, and their zero second derivatives match the cubic endpoint curvatures. This follows def-natural-cubic-spline and supplier theorem proof 2.1. Remarks limit tails to ambient intervals extending beyond the knots."
+    },
+    {
+      "data": "Proof interface.",
+      "check": "No new logical claims, dependencies or proof steps were introduced; the figure restates the existing formulas and Verification 1.1, 1.2, 2.1. The rigorous verification remains independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-natural-cubic-interpolants-on-two-and-three-knots.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-natural-cubic-interpolants-on-two-and-three-knots.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-natural-cubic-interpolants-on-two-and-three-knots.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_checks": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path is absent; located authentic screenshot in the same category screenshots directory and verified recorded SHA256.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/ex-natural-cubic-interpolants-on-two-and-three-knots--01.png",
+    "original_screenshot_sha256": "9be5d9643cbbf04e54ca99d365823c03083167616f06ca4a82328ccb2aa13d2b",
+    "original_resolution_viewed": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dms-008/manifest.json",
+    "manifest_sha256": "8e85febe2e240dc0e1b602445295fc3028a0afa2d3259619caecf5c4f5871e04",
+    "source_sha256": "5e9e28a3ba81a99034bbaa74ec3146a09e0ca525d74625fef0ba99f56ab5ad09",
+    "html_sha256": "cc3b16dd1b721845c8a97e55dfe0ce14b261e03ffafcb19b676ad89b071a2b93",
+    "preview_pngs_viewed_original_resolution": [
+      "previews/dms-008/screenshots/ex-natural-cubic-interpolants-on-two-and-three-knots--01.png",
+      "previews/dms-008/screenshots/ex-natural-cubic-interpolants-on-two-and-three-knots--02.png"
+    ],
+    "result": "Actual native TikZ SVG renders in local ItemBody capture; both panels, all knot labels, curves, horizontal tangent, dashed tails and axes are visible without overlap. Figure crosses capture tile boundary; the two original-resolution tiles jointly cover the complete figure.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "remaining_issues": []
+}

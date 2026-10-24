@@ -76,6 +76,32 @@ function committedFixture(t: any, committedBefore = judgedBefore, timestamp?: st
   return f;
 }
 
+for (const defect of ['none', 'body-edit', 'dependency-edit', 'phase-proof', 'text-only-check', 'wrong-item', 'failed-json']) {
+  test(`title-only legacy counterexample precheck: ${defect}`, t => {
+    let before = auditedBefore.replace('kind: theorem', 'kind: counterexample\ntitle: Original.')
+      .replace('## Statement\nOriginal.', '## Example\nAn unchanged prose refutation.');
+    if (defect === 'phase-proof') before += '\n## Proof\n\n1.1 Existing phase proof.\n';
+    const f = fixture(t, before);
+    let current = f.current;
+    if (defect === 'body-edit') current += '\nA new mathematical assertion.\n';
+    if (defect === 'dependency-edit') current = current.replace('kind: counterexample', 'deps: [thm-other]\nkind: counterexample');
+    const content = itemHashGuard(current);
+    const evidence = `\n${id} ${content}\n`;
+    writeFileSync(join(f.root, 'research/published-consumer-supplier-ledger.md'),
+      `<!-- local-published-repair:r:thm-repaired:begin -->${evidence}<!-- local-published-repair:r:thm-repaired:end -->\n`);
+    f.receipt.content_sha256 = content;
+    f.receipt.ledger_sha256 = sha(evidence);
+    for (const check of Object.values(f.receipt.local_checks) as any[]) check.content_sha256 = content;
+    const check = f.receipt.local_checks.precheck;
+    check.command.push('--json');
+    check.output = JSON.stringify({ summary: { files: 1, checked: 0, failed: defect === 'failed-json' ? 1 : 0 },
+      results: [{ file: `items/${id}.md`, item_id: defect === 'wrong-item' ? 'thm-other' : id, status: 'not-applicable' }] });
+    if (defect === 'text-only-check') { check.command.pop(); check.output = '0 checked, 0 failing'; }
+    f.putReceipt();
+    assert.equal(f.check(current).ok, defect === 'none');
+  });
+}
+
 test('already-published current repair passes as local evidence, never an audit stamp', (t) => {
   const f = fixture(t);
   assert.equal(f.check().ok, true);

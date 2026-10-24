@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-position-derivative-commutator-estimate.json
+  precheck: pass
 id: lem-position-derivative-commutator-estimate
 kind: lemma
 title: 'The coordinate inequality $\|x_jf\|_2\|D_jf\|_2\ge\frac12\|f\|_2^2$'
@@ -20,12 +23,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)"
@@ -89,7 +86,7 @@ function ([[def-sobolev-space-wkp-and-its-norm]],
 
 ## Proof
 
-**Proof technique:** cutoff integration by parts, followed by vanishing $L^2$ tails.
+**Proof technique:** cutoff integration by parts, followed by vanishing L² tails.
 
 1.1 Since $f\in H^1=W^{1,2}$ by [F1], each weak derivative $D_kf$ lies in $L^2$. Conjugating the bilinear weak-derivative test identity for $f$ shows that $\overline f\in W^{1,2}$ and $D_k\overline f=\overline{D_kf}$: for each $\phi\in C_c^\infty$, apply the identity to $\overline\phi$ and conjugate it. [A1, F1, F7, given]
 

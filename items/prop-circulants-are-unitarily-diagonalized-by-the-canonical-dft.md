@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft.json
+  precheck: pass
 id: prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft
 kind: proposition
 title: "The canonical finite DFT diagonalizes every circulant"
@@ -21,12 +24,7 @@ sources:
     - title: "Ralf Hiptmair, Numerical Methods for Computational Science and
         Engineering, Lecture Document, §4.2.1.6–4.2.1.14"
       url: "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -42,7 +40,7 @@ The square records the identity $\mathcal F_NC(c)=\operatorname{diag}(\lambda)\m
 ```tikzcd
 \begin{tikzcd}
 \mathbb C^N \arrow[r,"C(c)"] \arrow[d,"\mathcal F_N"'] & \mathbb C^N \arrow[d,"\mathcal F_N"] \\
-\mathbb C^N \arrow[r,"\operatorname{diag}(\lambda)"] & \mathbb C^N
+\mathbb C^N \arrow[r,"\mathrm{diag}(\lambda)"] & \mathbb C^N
 \end{tikzcd}
 ```
 

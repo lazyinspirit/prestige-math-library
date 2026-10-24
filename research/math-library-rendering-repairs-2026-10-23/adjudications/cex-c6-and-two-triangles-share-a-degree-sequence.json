@@ -1,0 +1,132 @@
+{
+  "id": "cex-c6-and-two-triangles-share-a-degree-sequence",
+  "agent": "/root/rendering_repair_coordinator/comb_011",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution audit tile visibly prints raw TikZ commands and has no graph. The opening fence includes the first picture commands in its info string, and the remaining percent-prefixed line is outside a proper multiline fence. Restoring only the fence would also leave commands swallowed by TeX comments.",
+      "action": "Restored separate opening/closing fence lines and placed every TikZ command and percent comment on its own source line.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "confirmed",
+      "reason": "The first fresh local compiled figure after fence restoration omitted g6\u2013g1, h3\u2013h1 and j3\u2013j1. Its SVG path data confirmed that named-node --cycle closures produced no visible closing segments; this made all three drawn cycles into paths and contradicted the degree-2 caption.",
+      "action": "Replaced each --cycle with the explicit last-to-first named-node segment. Fresh compiled preview shows six edges in C6 and three edges in each triangle.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restored the multiline Remarks TikZ block and made its three cycle-closing edges explicit; all claims, hypotheses, proof, dependencies, sources and frontmatter remain byte-identical.",
+  "source_lines_after": {
+    "diagram": [
+      50,
+      78
+    ],
+    "explicit_closing_edges": [
+      63,
+      73,
+      74
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "corrected_figure_relations": [
+    "g6--g1",
+    "h3--h1",
+    "j3--j1"
+  ],
+  "diagram_math_checks": [
+    {
+      "objects": "G has vertices g1,g2,g3,g4,g5,g6.",
+      "relations": [
+        "g1--g2",
+        "g2--g3",
+        "g3--g4",
+        "g4--g5",
+        "g5--g6",
+        "g6--g1"
+      ],
+      "justification": "These are exactly the consecutive and closing edges in the local definition of C_n, with n=6 (F1). All six vertices are distinct; each is incident with exactly two edges. This matches step 1.1."
+    },
+    {
+      "objects": "H has distinct vertices h1,h2,h3,j1,j2,j3, partitioned into the h and j triples.",
+      "relations": [
+        "h1--h2",
+        "h2--h3",
+        "h3--h1",
+        "j1--j2",
+        "j2--j3",
+        "j3--j1",
+        "no h-to-j edges"
+      ],
+      "justification": "Each triple is exactly C3 under F1; disjoint named vertices and no inter-triple edges realize the Given disjoint union. Hence H has six vertices, six edges, degree sequence (2,2,2,2,2,2), and two connected components, as in steps 1.1\u20131.2."
+    },
+    {
+      "objects": "Caption comparison of one G component against two H components.",
+      "relations": [
+        "G connected",
+        "H disconnected",
+        "G not isomorphic to H"
+      ],
+      "justification": "Consecutive cycle edges connect all g vertices. Each triangle is connected internally and no path crosses between the h and j triples. The local graph-isomorphism definition preserves adjacency in both directions and therefore paths; F2 and step 2.1 use this invariant. No morphisms, orientations or crossing conventions are asserted by this undirected graph drawing."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-c6-and-two-triangles-share-a-degree-sequence.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/cex-c6-and-two-triangles-share-a-degree-sequence.md",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs --json items/cex-c6-and-two-triangles-share-a-degree-sequence.md",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=<repo>/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=<app>/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-c6-and-two-triangles-share-a-degree-sequence --out research/math-library-rendering-repairs-2026-10-23/preview-comb-011-closed-20261024",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 32
+      },
+      "native_renderer": "Local application node-tikzjax TeX-to-SVG compilation succeeded; one figure, zero diagram failures, zero KaTeX errors.",
+      "visual_inspection": "Viewed final screenshot alone with view_image detail original: complete six-cycle and two separate complete triangles; captions readable and no raw TikZ.",
+      "evidence_directory": "research/math-library-rendering-repairs-2026-10-23/preview-comb-011-closed-20261024"
+    },
+    {
+      "command": "pdflatex -interaction=nonstopmode -halt-on-error -output-directory=research/math-library-rendering-repairs-2026-10-23/preview-comb-011-closed-20261024 research/math-library-rendering-repairs-2026-10-23/preview-comb-011-closed-20261024/native.tex",
+      "exit_code": 1,
+      "output": "System TeX lacks standalone.cls; retried with article and explicit usepackage{tikz}, which fails because tikz.sty is not installed. Native app node-tikzjax compilation above succeeded."
+    }
+  ],
+  "before_raw_sha256": "7f9d9250162a9b40a03613b5ffa0b948b957d1959774df2ca2d579a4e38d9577",
+  "after_raw_sha256": "ab878ab30e7e22fd34635798b7638895f35bf36349932e421885600ac3945f56",
+  "status_preserved": "status: published (entire frontmatter byte-identical)",
+  "remaining_issues": [
+    "System pdflatex cannot compile TikZ because its local TeX installation lacks tikz.sty; actual application node-tikzjax compilation and fresh visual preview passed. Preview is local ItemBody coverage, not production HTTP route coverage."
+  ]
+}

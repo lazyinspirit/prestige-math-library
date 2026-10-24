@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qc-computational-basis-stabilizer-tableau.json
+  precheck: pass
 id: lem-qc-computational-basis-stabilizer-tableau
 kind: lemma
 title: Computational basis states have an extended stabilizer tableau
@@ -97,3 +100,33 @@ computational-basis input. De Wolf §20.1, PDF p. 185, notes that every basis
 state is a stabilizer state:
 https://arxiv.org/pdf/quant-ph/0406196;
 https://arxiv.org/pdf/1907.09415.
+
+## Remarks
+
+The schematic separates the exact phase from the binary label. Here
+$e_j\in\mathbb F_2^n$ is the coordinate vector for bit position $j$, and
+$k$ is read modulo $4$. Each row type is repeated for $0\le j<n$,
+so together they give all $2n$ rows. The pairing matrix uses the grouped
+order $d_1,\ldots,d_n,s_1,\ldots,s_n$ on both axes.
+
+```tikz
+\begin{tikzpicture}
+\node[draw, rounded corners, inner sep=12pt] at (0,0) {$\begin{array}{c|c|c|c}
+\mathrm{row\ on\ wire}\ j+1 & k & u & v \\\hline
+ d_{j+1}=X_{j+1} & 0 & e_j & 0 \\
+ s_{j+1}=(-1)^{x_j}Z_{j+1} & 2x_j & 0 & e_j
+\end{array}$};
+\node at (0,-1.35) {$\mathrm{bit\ position}\ j\quad\longleftrightarrow\quad\mathrm{Pauli\ wire}\ j+1$};
+\node[draw, rounded corners, inner sep=12pt] at (0,-2.9) {$\begin{array}{c|cc}
+\omega & (d_1,\ldots,d_n) & (s_1,\ldots,s_n) \\\hline
+(d_1,\ldots,d_n) & 0 & I_n \\
+(s_1,\ldots,s_n) & I_n & 0
+\end{array}$};
+\end{tikzpicture}
+```
+
+The phase identity $i^{2x_j}=(-1)^{x_j}$ gives the stabilizer row above.
+The blocks follow from $e_i\cdot e_j=\delta_{ij}$ and the label formula
+in step 2.1; they are over $\mathbb F_2$. For $n=0$, both row families
+and the pairing matrix are empty. The proof above is independent of this
+schematic.

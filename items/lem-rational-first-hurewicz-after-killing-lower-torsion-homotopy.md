@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rational-first-hurewicz-after-killing-lower-torsion-homotopy.json
+  precheck: pass
 id: lem-rational-first-hurewicz-after-killing-lower-torsion-homotopy
 kind: lemma
 title: "First rational Hurewicz after killing lower torsion homotopy"
@@ -33,17 +36,12 @@ sources:
     - title: "Allen Hatcher, Spectral Sequences, Chapter 1"
       url: "https://pi.math.cornell.edu/~hatcher/SSAT/SSch1.pdf"
       locator: "§1.1 Theorem 1.8 and Lemmas 1.9–1.10, printed pp.14–17; mod-torsion Hurewicz comparison, with the connected-cover proof supplied locally"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. Let Y be a simply connected space and n≥2. If π_j(Y) is torsion for 2≤j<n, then H_j(Y;Q)=0 for 0<j<n and actual Hurewicz induces an isomorphism π_n(Y)⊗Q→H_n(Y;Q). CW type is not required.
+Assume AC. Let $Y$ be a simply connected space and $n\ge2$. If $\pi_j(Y)$ is torsion for $2\le j<n$, then $H_j(Y;\mathbb Q)=0$ for $0<j<n$ and actual Hurewicz induces an isomorphism $\pi_n(Y)\otimes\mathbb Q\to H_n(Y;\mathbb Q)$. CW type is not required.
 
 ## Facts & Assumptions
 
@@ -61,8 +59,8 @@ Assume AC. Let Y be a simply connected space and n≥2. If π_j(Y) is torsion fo
 
 **Proof technique:** direct.
 
-1.1 A based weak CW approximation L→Y induces isomorphisms on homotopy, integral homology and rational homology. Hurewicz naturality therefore reduces the claim to L. Choose its prescribed vertex as basepoint. It is simply connected. We describe a finite sequence of CW spaces Y_2=L, Y_3,...,Y_n with Y_j (j−1)-connected, and maps Y_{j+1}→Y_j inducing isomorphisms on π_i for i>j and on rational homology in every degree. [given, F1, F4]
+1.1 A based weak CW approximation $L\to Y$ induces isomorphisms on homotopy, integral homology and rational homology. Hurewicz naturality therefore reduces the claim to $L$. Choose its prescribed vertex as basepoint. It is simply connected. We describe a finite sequence of CW spaces $Y_2=L$, $Y_3,\ldots,Y_n$ with $Y_j$ $(j-1)$-connected, and maps $Y_{j+1}\to Y_j$ inducing isomorphisms on $\pi_i$ for $i>j$ and on rational homology in every degree. [given, F1, F4]
 
-2.1 Suppose Y_j has been constructed for 2≤j<n. Its group T_j=π_j(Y_j) is the original π_j(L), because all earlier maps preserve higher homotopy; it is torsion. Integral Hurewicz gives H_j(Y_j;Z)≅T_j and H_{j−1}(Y_j;Z)=0. The cohomological UCT therefore identifies H^j(Y_j;T_j) with Hom(H_j(Y_j;Z),T_j). Take the class corresponding to the Hurewicz inverse. Represent it by a based map f_j:Y_j→K(T_j,j). The universal class evaluates as identity on T_j. Naturality of evaluation and integral Hurewicz shows (f_j)_*:π_j(Y_j)→π_j(K(T_j,j)) is the identity under the chosen markings. Let F_j be its strict homotopy fiber in the actual mapping-path fibration. Its exact sequence shows F_j is j-connected and that F_j→Y_j is an isomorphism on π_i for i>j. Indeed K(T_j,j) has no higher groups, its degree-j map is an isomorphism, and both spaces have zero groups below j. The component segment shows F_j is path-connected. The base is simply connected and rationally acyclic by the torsion-acyclicity lemma. For any rational vector space V, the rationalization lemma makes H_a(K(T_j,j);V) zero for a>0 and equal to V for a=0. Therefore the Serre sequence of F_j→E_{f_j}→K(T_j,j) has only column a=0. Its fiber edge is an isomorphism in every degree. Compose it with the deformation retraction E_{f_j}→Y_j: the projection F_j→Y_j is a rational homology isomorphism. Take a based weak CW approximation Y_{j+1}→F_j preserving a chosen fiber point. It transfers both homotopy and homology, and its composite into Y_j has exactly the properties promised. This finishes the construction. The case T_j=0 uses a CW K(0,j) and works with the same argument. [step 1.1, F2, F3, F4]
+2.1 Suppose $Y_j$ has been constructed for $2\le j<n$. Its group $T_j=\pi_j(Y_j)$ is the original $\pi_j(L)$, because all earlier maps preserve higher homotopy; it is torsion. Integral Hurewicz gives $H_j(Y_j;\mathbb Z)\cong T_j$ and $H_{j-1}(Y_j;\mathbb Z)=0$. The cohomological UCT therefore identifies $H^j(Y_j;T_j)$ with $\operatorname{Hom}(H_j(Y_j;\mathbb Z),T_j)$. Take the class corresponding to the Hurewicz inverse. Represent it by a based map $f_j:Y_j\to K(T_j,j)$. The universal class evaluates as identity on $T_j$. Naturality of evaluation and integral Hurewicz shows $(f_j)_*:\pi_j(Y_j)\to\pi_j(K(T_j,j))$ is the identity under the chosen markings. Let $F_j$ be its strict homotopy fiber in the actual mapping-path fibration. Its exact sequence shows $F_j$ is $j$-connected and that $F_j\to Y_j$ is an isomorphism on $\pi_i$ for $i>j$. Indeed $K(T_j,j)$ has no higher groups, its degree-$j$ map is an isomorphism, and both spaces have zero groups below $j$. The component segment shows $F_j$ is path-connected. The base is simply connected and rationally acyclic by the torsion-acyclicity lemma. For any rational vector space $V$, the rationalization lemma makes $H_a(K(T_j,j);V)$ zero for $a>0$ and equal to $V$ for $a=0$. Therefore the Serre sequence of $F_j\to E_{f_j}\to K(T_j,j)$ has only column $a=0$. Its fiber edge is an isomorphism in every degree. Compose it with the deformation retraction $E_{f_j}\to Y_j$: the projection $F_j\to Y_j$ is a rational homology isomorphism. Take a based weak CW approximation $Y_{j+1}\to F_j$ preserving a chosen fiber point. It transfers both homotopy and homology, and its composite into $Y_j$ has exactly the properties promised. This finishes the construction. The case $T_j=0$ uses a CW $K(0,j)$ and works with the same argument. [step 1.1, F2, F3, F4]
 
-3.1 After the finite sequence j=2,...,n−1, Y_n is (n−1)-connected. The composite Y_n→L induces an isomorphism on π_n and on all rational homology. Integral Hurewicz on Y_n, the rationalization lemma, and naturality give the claimed isomorphism on L and then on Y; lower vanishing transfers as well. If n=2 the construction is empty and integral first Hurewicz on L suffices. Every comparison is induced by an actual continuous map. No use of a generalized Whitehead theorem modulo torsion has been concealed. [step 2.1, F1, F2] ∎
+3.1 After the finite sequence $j=2,\ldots,n-1$, $Y_n$ is $(n-1)$-connected. The composite $Y_n\to L$ induces an isomorphism on $\pi_n$ and on all rational homology. Integral Hurewicz on $Y_n$, the rationalization lemma, and naturality give the claimed isomorphism on $L$ and then on $Y$; lower vanishing transfers as well. If $n=2$ the construction is empty and integral first Hurewicz on $L$ suffices. Every comparison is induced by an actual continuous map. No use of a generalized Whitehead theorem modulo torsion has been concealed. [step 2.1, F1, F2] ∎

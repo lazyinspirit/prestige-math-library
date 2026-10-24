@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-perfect-group.json
+  precheck: n/a
 id: def-perfect-group
 kind: definition
 title: "Perfect group"
@@ -8,12 +11,6 @@ deps: [def-commutator-and-commutator-subgroup, thm-derived-subgroup-is-character
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -23,4 +20,4 @@ sources:
 
 ## Definition
 
-G is perfect if G=[G,G], equivalently G_ab=0.
+$G$ is perfect if $G=[G,G]$, equivalently $G_{\mathrm{ab}}=0$.

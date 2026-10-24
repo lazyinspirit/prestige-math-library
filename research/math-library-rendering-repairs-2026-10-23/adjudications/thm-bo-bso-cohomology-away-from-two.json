@@ -1,0 +1,54 @@
+{
+  "id": "thm-bo-bso-cohomology-away-from-two",
+  "agent": "/root/rendering_repair_coordinator/at_011",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Both original-resolution screenshot tiles visibly show literal H*, p_i, caret exponents and source-style arrows in the statement and proof, while the Given section is typeset. Frozen and current pre-edit source confirm those expressions lacked math delimiters.",
+      "action": "Wrapped mathematical symbols and formulas throughout the statement and four proof steps in math delimiters; transcribed Unicode notation into equivalent TeX and rendered the long Gysin sequence as a two-line aligned display.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restored mathematical typesetting for cohomology rings, characteristic classes, degree formulas, bundle maps, Gysin arrows and invariant-ring computations without changing claims or proof reasoning. Follow-up format repair places the unchanged Gysin display on the same source line as step 2.1 so the line-based precheck retains the entire step; original step labels, order and justifications remain unchanged.",
+  "source_lines_after": [
+    41,
+    59,
+    61,
+    63,
+    65
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-bo-bso-cohomology-away-from-two.md",
+      "exit_code": 0,
+      "output": "PASS items/thm-bo-bso-cohomology-away-from-two.md (direct)\n\n1 checked, 0 failing — all clean"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-bo-bso-cohomology-away-from-two.md",
+      "exit_code": 0,
+      "output": "OK — 1 file(s): no wikilink inside math, no nested or unbalanced delimiters, no multiline display block, every math span parses under the real KaTeX, and every frontmatter block parses under the renderer's YAML parser."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-bo-bso-cohomology-away-from-two.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    }
+  ],
+  "notes": [
+    "No pre-existing proof-layout failures remained. An intermediate display edit split step 2.1; removed blank lines within the step and reran proof-layout successfully.",
+    "An attempted rendercheck --help unexpectedly began its default corpus scan; interrupted it without a result, then ran the explicit one-file check above.",
+    "No live website or HTTP(S) source was visited; screenshots adjudicated locally.",
+    "Root actual precheck subsequently failed the v1 multiline display because its initial numbered source line lacked trailing justifications. Proposed automatic renumbering was not adopted. Only display source line breaks were removed; actual precheck, rendercheck and proof-layout then passed.",
+    "Worker edit preserved complete frontmatter. During final report preparation root concurrently replaced verification metadata with its repair receipt; worker did not edit or revert those bytes and notified parent."
+  ],
+  "before_raw_sha256": "b1ccc950d5f65a28dc5691ad2645d78bfa63866949533dca2865ea0504b28a60",
+  "report_version": 2,
+  "prior_report": "research/math-library-rendering-repairs-2026-10-23/adjudications/thm-bo-bso-cohomology-away-from-two-v1.json",
+  "final_raw_sha256": "65fecf231fc5758a71916f027a766dcd422984f782ef9cb6dff6940b717f2cf1"
+}

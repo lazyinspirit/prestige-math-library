@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-frontdoor-adjustment-binary-model.json
+  precheck: pass
 id: ex-frontdoor-adjustment-binary-model
 kind: example
 title: "A binary SCM where front-door adjustment works"
@@ -23,12 +26,7 @@ sources:
       url: "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
     - title: "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Point 7.4, p. 101"
       url: "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
+
 ---
 
 ## Example
@@ -68,3 +66,31 @@ support hypotheses. [[thm-frontdoor-adjustment-sufficiency]]
 2.1 If $M=1$, then $Y=1$. If $M=0$, then $Y=U$, so $E(Y\mid M=0,A=1)=3/4$ and $E(Y\mid M=0,A=0)=1/4$. Averaging over the marginal law of $A$ gives $\int E(Y\mid M=0,A=a')P_A(da')=1/2$, while the same inner average for $M=1$ is $1$. The front-door formula [F2] therefore gives $\tfrac45\cdot1+\tfrac15\cdot\tfrac12=\tfrac9{10}.$ [step 1.1, F1, F2, algebra]
 
 3.1 Under $do(A=1)$, $M=1$ with probability $4/5$ and $M=0$ with probability $1/5$. The exogenous $U$ remains Bernoulli$(1/2)$ and independent of $E_M$, so $E(Y\mid do(A=1),M=1)=1$ and $E(Y\mid do(A=1),M=0)=1/2$. Hence $E[Y^{1}]=\tfrac45\cdot1+\tfrac15\cdot\tfrac12=9/10$, agreeing with the observed functional. [F1, F3, step 1.1, step 2.1, algebra] ∎
+
+## Remarks
+
+The full graph below displays the common cause $U$ and mediator $M$; the
+independent noises $E_A,E_M$ are omitted, as in the graph listed in the Example.
+
+```tikz
+\begin{tikzpicture}[scale=1.2]
+\node (U) at (0,1.5) {$U$};
+\node (A) at (-2,0) {$A$};
+\node (M) at (0,0) {$M$};
+\node (Y) at (2,0) {$Y$};
+\draw[->,thick] (U) -- (A);
+\draw[->,thick] (U) -- (Y);
+\draw[->,thick] (A) -- (M);
+\draw[->,thick] (M) -- (Y);
+\end{tikzpicture}
+```
+
+The directed route $A\to M\to Y$ passes through $M$. Deleting $A\to M$
+to form $G_{\underline A}$ leaves the path
+$A\leftarrow U\to Y\leftarrow M$, which is blocked at collider $Y$
+without conditioning. Deleting $M\to Y$ to form $G_{\underline M}$ leaves
+$M\leftarrow A\leftarrow U\to Y$, which is blocked by conditioning on its
+noncollider $A$. These outgoing-edge deletions are the graph checks in the
+Example; intervention $do(A=1)$ instead replaces the equation for $A$, as in
+verification step 3.1. The figure illustrates the graph conditions only; the
+numerical identification is verified independently above.

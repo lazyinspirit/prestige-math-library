@@ -1,0 +1,108 @@
+---
+id: thm-nitsche-zero-boundary-fractional-comparison-interpolation
+kind: theorem
+title: Zero-boundary fractional interpolation in the Nitsche comparison norm
+status: published
+origin: pipeline
+pipeline_run: numerical-analysis-remaining-71-2026-10-17
+dependency_level: 3
+deps:
+  [
+    def-matching-affine-simplicial-meshes,
+    def-nitsche-restriction-bessel-potential-sobolev-spaces,
+    def-real-order-bessel-potential-sobolev-space,
+    thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces,
+    lem-nitsche-scaled-fractional-simplex-trace,
+    def-nitsche-boundary-penalty-forms,
+    lem-nitsche-h-one-zero-functions-have-zero-facet-traces,
+    def-broken-and-conforming-polynomial-spaces,
+    lem-shape-regular-affine-simplex-scaling,
+    thm-reference-simplex-poincare-wirtinger,
+    lem-reference-polynomial-norm-equivalence,
+    thm-matching-continuous-piecewise-polynomials-are-wkp,
+    thm-zero-boundary-piecewise-polynomials-in-w10p,
+    def-wkp-zero-as-a-sobolev-closure,
+    lem-affine-pullback-weak-derivatives-and-scaling,
+    lem-smooth-density-on-reference-simplex,
+    thm-reference-simplex-trace-and-gauss-green,
+    lem-test-function-cutoffs-and-euclidean-localization,
+    lem-weak-leibniz-rule-with-a-smooth-factor,
+    lem-compact-support-zero-extension-in-wkp,
+    lem-smooth-bump-between-concentric-euclidean-balls,
+    def-mollifier-family-generated-by-a-unit-mass-smooth-bump,
+    lem-mollification-commutes-with-weak-derivatives-in-the-interior,
+    thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions,
+    thm-jensens-integral-inequality,
+    thm-tonelli-and-fubini-for-completed-product-measures,
+    thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity,
+    def-countable-choice
+  ]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary
+        penalty method
+      url: https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf
+    - title: Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary
+        conditions, Mathematics of Computation 78 (2009), 1353–1374
+      url: https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Assume Countable Choice, $d\ge2$, a nonempty connected bounded polyhedral open set $\Omega$, a finite matching shape-regular affine simplicial mesh $\mathcal T_h$, and a polynomial degree $k\ge1$ as in [[def-nitsche-boundary-penalty-forms]]. Put $h:=\max_{K\in\mathcal T_h}h_K$ and $\ell_\Omega:=\operatorname{diam}(\Omega)$. For every $1/2<s\le1$ there is an explicitly defined linear map
+$$I_{h,0}:H^{1+s}(\Omega)\cap H^1_0(\Omega)\longrightarrow \mathbb P_1(\mathcal T_h)\cap H^1_0(\Omega)\subseteq Y_h$$
+such that
+$$\|\zeta-I_{h,0}\zeta\|_{\#,h}\le C h^s\|\zeta\|_{H^{1+s}(\Omega)}=C_D h^s\ell_\Omega^{1-s}\|\zeta\|_{H^{1+s}(\Omega)},\qquad C_D:=C\ell_\Omega^{s-1}.$$
+Here $\|\cdot\|_{\#,h}$ and $Y_h=V_h\cap H^1_0(\Omega)$ are exactly those of [[def-nitsche-boundary-penalty-forms]]. The constants are uniform over the mesh family and depend only on $d,s$ and its shape-regularity bound; the displayed conversion to $C_D$ uses the fixed nonempty domain. The construction uses cell means and affine reconstructions, never point values of $\zeta$. Its boundary-value error vanishes exactly. No approximation statement for higher polynomial degree or for nonzero-trace primal data is asserted.
+
+## Facts & Assumptions
+
+**Given:** Countable Choice; $d\ge2$; nonempty connected bounded polyhedral $\Omega$; a finite matching shape-regular affine simplicial mesh; $k\ge1$; and $\zeta\in H^{1+s}(\Omega)\cap H^1_0(\Omega)$ with $1/2<s\le1$.
+
+[F1] On each cell, $H^s$ restriction norms are defined by whole-space Bessel-potential extensions; gradients of $H^{1+s}$ extensions belong to $H^s$ by the Fourier multiplier bound ([[def-nitsche-restriction-bessel-potential-sobolev-spaces]], [[def-real-order-bessel-potential-sobolev-space]], [[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces]]).
+
+[F2] The scaled simplex trace estimate and its mean-zero fractional Poincaré consequence hold for $1/2<s\le1$ ([[lem-nitsche-scaled-fractional-simplex-trace]]).
+
+[F3] Shape regularity gives uniform affine scaling, face-height comparability, and comparable diameters for cells sharing a facet ([[lem-shape-regular-affine-simplex-scaling]]). The mesh is the interior of its finite cell union, has disjoint cell interiors, whole-face matching, and exactly one or two incident cells at boundary or interior facets ([[def-matching-affine-simplicial-meshes]]).
+
+[F4] For a fixed finite-dimensional reference polynomial space, face norms and linear evaluation functionals are bounded by the cell $L^2$ norm; in particular, on a physical facet $F$, $|p(z)|\le C|F|^{-1/2}\|p\|_{L^2(F)}$ for every affine $p$ and vertex $z\in F$ ([[lem-reference-polynomial-norm-equivalence]], [[lem-shape-regular-affine-simplex-scaling]]).
+
+[F5] A continuous piecewise polynomial on a matching mesh is in $W^{1,2}(\Omega)$; if its polynomial traces vanish on every boundary facet, it belongs to $W^{1,2}_0(\Omega)$ ([[thm-matching-continuous-piecewise-polynomials-are-wkp]], [[thm-zero-boundary-piecewise-polynomials-in-w10p]], [[def-wkp-zero-as-a-sobolev-closure]]).
+
+[F6] Every function in closure-defined $H^1_0(\Omega)$ has zero $L^2$ trace on each boundary facet ([[lem-nitsche-h-one-zero-functions-have-zero-facet-traces]]).
+
+[F7] The Nitsche comparison seminorm has squared terms $\|\nabla v\|_\Omega^2$, $\sum_{F\in\mathcal F_h^\partial}h_F^{-1}\|v\|_F^2$, and $\sum_{F\in\mathcal F_h^\partial}h_F\|\partial_nv\|_F^2$; $h_F=|K_F|/|F|$ and $Y_h=V_h\cap H^1_0(\Omega)$ ([[def-nitsche-boundary-penalty-forms]]).
+
+[F8] Compact subsets of $\Omega$ admit smooth cutoffs equal to one nearby; multiplication by a smooth factor preserves $W^{1,2}$, and compactly supported $W^{1,2}(\Omega)$ functions extend by zero to $W^{1,2}(\mathbb R^d)$ ([[lem-test-function-cutoffs-and-euclidean-localization]], [[lem-weak-leibniz-rule-with-a-smooth-factor]], [[lem-compact-support-zero-extension-in-wkp]]).
+
+[F9] A nonnegative smooth compactly supported unit-mass mollifier exists by normalizing a smooth bump. Its rescalings have unit mass by the nonnegative $C^1$ change-of-variables theorem. For $q\in L^2(\mathbb R^d)$, Jensen and Tonelli give $\|\rho_\varepsilon*q-q\|_2^2\le\int\rho_\varepsilon(a)\|\tau_{-a}q-q\|_2^2\,da$; translation continuity makes this tend to zero. Mollification commutes with weak derivatives ([[lem-smooth-bump-between-concentric-euclidean-balls]], [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], [[thm-jensens-integral-inequality]], [[thm-tonelli-and-fubini-for-completed-product-measures]], [[thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity]], [[lem-mollification-commutes-with-weak-derivatives-in-the-interior]]).
+
+[F10] Restrictions of functions smooth on a neighborhood of a cell closure are dense in its $W^{1,2}$ space by affine pullback of the reference-simplex density result. The bounded facet trace is the continuous extension of classical restriction on such smooth functions ([[lem-affine-pullback-weak-derivatives-and-scaling]], [[lem-smooth-density-on-reference-simplex]], [[thm-reference-simplex-trace-and-gauss-green]], with continuity from [F2]).
+
+[A1] Countable Choice is the only choice principle assumed by the restriction, Sobolev, and finite-dimensional approximation suppliers above ([[def-countable-choice]]).
+
+## Proof
+
+
+**Given:** The mesh and function $\zeta$ in the Statement and [F1]–[F7].
+
+1.1 For each cell $K$, let $b_K$ be its centroid, let $m_K:=|K|^{-1}\int_K\zeta$, and let $g_K:=|K|^{-1}\int_K\nabla\zeta$. Define the affine polynomial $p_K(x):=m_K+g_K\cdot(x-b_K)$ and set $A_K:=|\nabla\zeta|_{s,K}$, where at $s=1$ this is the cell $L^2$ norm of the weak Hessian. The mean of $\zeta-p_K$ is zero and the mean of its gradient is zero. The mean-zero fractional Poincaré estimate [F2] applied to $\nabla\zeta$ gives $\|\nabla(\zeta-p_K)\|_K\le C h_K^sA_K$; ordinary mean-zero Poincaré applied to $\zeta-p_K$ then gives $\|\zeta-p_K\|_K\le C h_K^{1+s}A_K$. [F1, F2, given]
+
+1.2 We record the required vertex-star geometry. The solid angle of every shape-regular cell at any vertex is at least $c(d,\sigma)>0$: the inscribed ball has radius at least $h_K/\sigma$, its center is at distance at most $h_K$ from the vertex, and rays through that ball contain a spherical cap of radius bounded below in terms of $\sigma$. Disjoint cell interiors give disjoint solid-angle interiors, so at most $N(d,\sigma)$ cells meet at a vertex. In the spherical link of a vertex, facet adjacency is adjacency of cells across a facet containing that vertex. At an interior vertex the link is the full sphere. Its cell-adjacency graph is connected: for $d=2$ the link is a circle divided into arcs; for $d\ge3$, each codimension-two-or-higher link face has dimension at most $d-3$, and the directions of endpoints whose chord from a fixed generic direction meets that face lie in its radial cone, of spherical dimension at most $d-2<d-1$. A finite union of these forbidden sets has measure zero, so choose an intermediate direction outside the forbidden sets for two generic endpoints and join them by two projected chord segments. The resulting path avoids the lower-dimensional skeleton and crosses only facet interiors, proving graph connectivity. At a boundary vertex, every connected component of the graph contains a boundary facet incident to the vertex. Otherwise a path from a cell-interior direction in that component to any generic direction cannot leave the component: each crossing is through a link facet, and the assumed absence of an exposed facet gives a neighboring cell in the same component. Thus every generic direction belongs to that component; its finite closed link is the full sphere, and the finitely many incident simplices then contain a whole ball about the vertex, making it interior, a contradiction. Any shortest path in a component has at most $N-1$ edges; shape regularity makes diameters comparable across each shared facet, so all cells on such a path have diameters comparable by a uniform constant. [F3, given, choose]
+
+2.1 Apply [F2] with exponent $1$ to $\zeta-p_K$ and use step 1.1. This yields $\|T_F(\zeta-p_K)\|_F\le C h_K^{s+1/2}A_K$. Apply [F2] with exponent $s$ to each component of $\nabla(\zeta-p_K)$; its cell $L^2$ norm is bounded by step 1.1 and its fractional seminorm equals $A_K$ for $s<1$, while at $s=1$ its weak derivative is the Hessian. Thus $h_K^{1/2}\|T_F\nabla(\zeta-p_K)\|_F\le C h_K^sA_K$. [F1, F2, step 1.1, algebra]
+
+3.1 For an interior mesh vertex $z$, define $c_z$ as the arithmetic mean of $p_L(z)$ over all incident cells $L$; for a boundary vertex set $c_z:=0$. Let $I_{h,0}\zeta$ be the continuous piecewise-affine function with these nodal coefficients. We prove that the cell traces of the global $H^1(\Omega)$ function $\zeta$ agree across each interior facet $F$. Exhaust the relative interior of $F$ by the compact sets $E_m:=\{x\in F:\operatorname{dist}_F(x,\partial F)\ge1/m\}$, omitting empty sets; each lies in $F\cap\Omega$ by the matching-mesh convention, and the omitted facet rim has surface measure zero. Fix $E_m$ and choose $\chi\in C_c^\infty(\Omega)$ equal to one on a neighborhood of $E_m$, using [F8]. Then $v:=\chi\zeta\in W^{1,2}(\Omega)$ has compact support, and its zero extension $V$ lies in $W^{1,2}(\mathbb R^d)$ by [F8]. Choose a nonnegative smooth unit-mass mollifier $\rho$ supported in the unit ball and put $V_\varepsilon=\rho_\varepsilon*V$. For every $q\in L^2(\mathbb R^d)$, change variables in the convolution integral and apply scalar Jensen and Tonelli as in [F9] to get $\|\rho_\varepsilon*q-q\|_2^2\le\int\rho_\varepsilon(a)\|\tau_{-a}q-q\|_2^2\,da\le\sup_{|a|\le\varepsilon}\|\tau_{-a}q-q\|_2^2\to0$. Apply this to $q=V$ and to each weak first derivative of $V$; the weak-derivative commutation in [F9] proves $V_\varepsilon\to V$ in $W^{1,2}(\mathbb R^d)$. The cell trace maps are local on $E_m$: if two $W^{1,2}(K)$ functions agree in a neighborhood of $E_m$, their difference $w$ is zero there; for any compact subpatch $E\subset E_m$, choose a smooth cutoff $\eta$ supported in that neighborhood and equal to one near $E$. By [F10] choose smooth functions $w_j\to w$ in $W^{1,2}(K)$. Weak multiplication and the trace estimate show $\eta w_j\to0$ in $W^{1,2}(K)$ and $T_F(\eta w_j)=\eta|_F w_j|_F\to0$ in $L^2(F)$; also $\eta|_Fw_j|_F\to\eta|_FT_Fw$ by trace continuity. Since $\eta=1$ on $E$, $T_Fw=0$ there. Exhausting $E_m$ by compact subpatches proves locality on $E_m$. Thus $V$ and $\zeta$ have the same traces on $E_m$. Each smooth $V_\varepsilon$ has identical classical restrictions on the two sides of $F$; by [F2] and the $W^{1,2}$ convergence, their cell traces converge to those of $V$, proving equality of the traces of $\zeta$ on $E_m$. Hence the traces agree in $L^2(F)$. Therefore step 2.1 gives $\|p_K-p_L\|_F\le C h_K^{s+1/2}(A_K+A_L)$. For completeness, the facet evaluation bound holds also for one-dimensional facets when $d=2$: on the fixed reference facet the barycentric affine basis has a positive-definite $L^2$ Gram matrix, because the square integral of every nonzero affine polynomial is positive. Its inverse bounds every vertex coefficient by a constant times the $L^2$ norm; the facet surface Jacobian from [F3] gives exactly $|p(z)|\le C|F|^{-1/2}\|p\|_F$ in every $d\ge2$. This inverse evaluation bound [F4] yields $|p_K(z)-p_L(z)|\le C h_K^{1+s-d/2}(A_K+A_L)$. On a boundary facet containing $z$, [F6] gives zero trace of $\zeta$, so step 2.1 and [F4] give $|p_L(z)|\le C h_L^{1+s-d/2}A_L$. Telescope these bounds along the paths from step 1.2; the interior coefficient is an average over the connected star, and for a boundary vertex use the exposed facet in the component containing $K$. With $\omega_K$ the union of vertex stars of $K$, the bounded valence and local size comparability give $|c_z-p_K(z)|\le C h_K^{1+s-d/2}\left(\sum_{L\in\omega_K}A_L^2\right)^{1/2}.$ [F2, F3, F4, F6, F8, F9, F10, step 2.1, step 1.2, algebra]
+
+4.1 On $K$, the barycentric basis functions satisfy $\|\nabla\phi_z\|_K\le C h_K^{d/2-1}$ by [F3]. Combining step 3.1 with the local volume estimate in step 1.1 gives $\|\nabla(\zeta-I_{h,0}\zeta)\|_K\le C h_K^s\left(\sum_{L\in\omega_K}A_L^2\right)^{1/2}.$ The interpolant has zero polynomial trace on every boundary facet because all its boundary-vertex coefficients vanish; the same is true of $\zeta$ by [F6]. Thus the boundary-value term in the comparison seminorm is exactly zero. Since $\nabla I_{h,0}\zeta$ is constant on each cell, the intrinsic $s$-seminorm of $\nabla(\zeta-I_{h,0}\zeta)$ equals $A_K$ for $s<1$, and its weak derivative is the Hessian of $\zeta$ for $s=1$. Applying [F2] to this gradient and using $h_F\asymp h_K$ from [F3] gives for each boundary facet $F\subset\partial K$ $h_F\|\partial_n(\zeta-I_{h,0}\zeta)\|_F^2\le C h_K^{2s}\sum_{L\in\omega_K}A_L^2.$ [F2, F3, F6, F7, step 1.1, step 3.1, algebra]
+
+5.1 Each $\omega_K$ has at most $(d+1)N$ cells and each cell occurs in at most $(d+1)N$ such patches. Summing the squared bounds from step 4.1 therefore gives $\|\zeta-I_{h,0}\zeta\|_{\#,h}^2\le C h^{2s}\sum_KA_K^2$. If $s<1$, choose a whole-space extension $Z$ of $\zeta$ within $\varepsilon$ of the restriction norm. Nonnegativity of the pair integrand and disjoint cell interiors imply $\sum_K|\nabla\zeta|_{s,K}^2\le|\nabla Z|_{s,\mathbb R^d}^2\le C\|Z\|_{H^{1+s}(\mathbb R^d)}^2$ by [F1] and [F2]; let $\varepsilon\downarrow0$. At $s=1$, the sum of cell Hessian norms is bounded by the global $H^2$ norm of any extension in the same way, then take the infimum. Thus $\sum_KA_K^2\le C\|\zeta\|_{H^{1+s}(\Omega)}^2$. Finally, [F5] puts the continuous zero-boundary affine interpolant in $Y_h$, and the definition of $C_D$ proves the Statement. [F1, F2, F3, F5, F7, A1, step 4.1, algebra] ∎
+## Source notes
+
+The construction is a cell-mean affine reconstruction with vertex averaging on interior stars and zero coefficients at boundary vertices. The full comparison seminorm estimate includes the weighted normal-derivative error and works on graded shape-regular meshes; no global quasi-uniformity, vertex values of the input, or $C^1$ trace characterization is used. It supplies the commissioned dual approximation branch while leaving the general higher-order/local primal approximation branch separate.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-generalized-fitting-subgroup.json
+  precheck: n/a
 id: def-generalized-fitting-subgroup
 kind: definition
 title: "The generalized Fitting subgroup"
@@ -8,12 +11,6 @@ deps: [def-fitting-subgroup-of-a-finite-group, def-quasisimple-group-component-a
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -23,4 +20,4 @@ sources:
 
 ## Definition
 
-For finite G, F*(G)=F(G)E(G).
+For finite $G$, $F^*(G)=F(G)E(G)$.

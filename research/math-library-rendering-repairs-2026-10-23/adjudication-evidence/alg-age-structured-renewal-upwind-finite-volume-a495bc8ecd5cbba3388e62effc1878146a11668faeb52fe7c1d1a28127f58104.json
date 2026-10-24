@@ -1,0 +1,121 @@
+{
+  "id": "alg-age-structured-renewal-upwind-finite-volume",
+  "agent": "/root/rendering_repair_coordinator/dnde_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile has no figure. A cell-balance and boundary schematic materially clarifies which flux enters a cell, which leaves it, how mortality is distinct from transport, and why the right cutoff does not recycle outflow into births. This is a warranted explanatory addition under the expanded diagram scope, not a defect in the existing formulas.",
+      "action": "Added a two-panel TikZ illustration and formula-linked explanation in final Remarks. The generic cell panel applies to all J; the separated-boundary grid is explicitly representative for J>=3.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only a final Remarks section with the time-k cell balance and age-boundary schematic. Definition, CFL, rates, update, quadrature/failure rules, cutoff bookkeeping, title and complete frontmatter remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      46,
+      83
+    ],
+    "tikz": [
+      50,
+      81
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Generic cell C_j=[a_{j-1},a_j], mass M_j^k, 1<=j<=J.",
+      "check": "The left incoming arrow is F_{j-1}^k and the right outgoing arrow is F_j^k. Multiplication by Delta t gives +Delta t F_{j-1}^k - Delta t F_j^k, exactly the two transport terms of Definition line 41."
+    },
+    {
+      "data": "Downward loss arrow mu_j M_j^k.",
+      "check": "Definition lines 33 and 41 define mu_j and subtract Delta t mu_j M_j^k. The arrow is outward and the explanatory prose distinguishes rate from step mass, so no extra mass source or sign reversal is asserted."
+    },
+    {
+      "data": "Age axis, C_1, C_J, a_0=0, a_1, a_{J-1}, a_J=A.",
+      "check": "Definition line 33 gives the uniform grid and cell intervals. The lower panel is explicitly schematic for J>=3; intermediate cells are omitted and the generic update remains valid for J=1,2."
+    },
+    {
+      "data": "Newborn boundary F_0^k=B_h^k and terminal F_J^k=u_J^k.",
+      "check": "Definition line 39 sets these fluxes, with u_j^k=M_j^k/Delta a. Both drawn boundary arrows point toward increasing age, entering through 0 and leaving through A. No return or above-A inflow is drawn."
+    },
+    {
+      "data": "Cumulative cutoff outflow O_h.",
+      "check": "Remarks restates O_h^{k+1}=O_h^k+Delta t F_J^k from Definition line 43; discarded cutoff mass is distinct from mortality and birth quadrature. The unchanged defining formulas are sufficient independently of this illustration."
+    }
+  ],
+  "remaining_issues": [],
+  "guards": {
+    "before_raw_sha256": "875fe4e8aa0ed613659cf0c2bf3c5051e0d47d4e296ddcebce2decc3a878f253",
+    "pre_edit_guard": "Matched queue before_raw_sha256 immediately before initial append.",
+    "current_raw_sha256": "f803a269864271eea80ddd2b5077c0ea43940411f585f02bca74cfa7fdbcc10b",
+    "frontmatter_byte_identical": true,
+    "original_definition_byte_identical": true,
+    "publication_status": "published, byte-identical"
+  },
+  "evidence": {
+    "original_declared_missing_path": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement/screenshots/alg-age-structured-renewal-upwind-finite-volume--01.png",
+    "resolved_original_path": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/alg-age-structured-renewal-upwind-finite-volume--01.png",
+    "resolved_original_sha256": "f45a89894ecb27b8650d9ad6fdc24f7997e579ecd34deab7314ea0c03347fa9e",
+    "original_view": "Standalone original-resolution view; hash equals queue screenshot hash.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde-002-final/manifest.json",
+    "preview_manifest_sha256": "cfb7662a99c6a2daff5d9fb5573bfee72f70139240b2ff2073e56725a2329fd8",
+    "preview_source_sha256": "f803a269864271eea80ddd2b5077c0ea43940411f585f02bca74cfa7fdbcc10b",
+    "preview_reference_map_sha256": "5c81f8f17448d695e39e5e869a1d73b8038307e295ba8ae7d2b3e40d38c6f78b",
+    "final_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnde-002-final/screenshots/alg-age-structured-renewal-upwind-finite-volume--01.png",
+    "final_screenshot_sha256": "d56fc4812e045954cb5a1e0ff6c96298536018dd0301b261a1debf296ee67233",
+    "diagram_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dnde-002-final/diagram-crop.png",
+    "visual_check": "Viewed final standalone original-resolution PNG and separate original-pixel diagram crop. Crop confirms clear white strokes, two horizontal cell-flux arrows, downward mortality arrow, rightward age axis and two rightward boundary arrows; no overlaps or clipping. Large-image viewer presentation can omit already-shown pixels; crop verifies actual pixels.",
+    "native_compile": {
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": []
+    },
+    "limitations": [
+      "Local native ItemBody SSR preview, not a production route. Preview reference map has 16 unrelated parse diagnostics."
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-age-structured-renewal-upwind-finite-volume.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-age-structured-renewal-upwind-finite-volume.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-age-structured-renewal-upwind-finite-volume.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnde-002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-age-structured-renewal-upwind-finite-volume --out research/math-library-rendering-repairs-2026-10-23/previews/dnde-002-final",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ]
+}

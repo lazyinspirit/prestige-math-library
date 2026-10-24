@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-relative-surface-collars-and-elementary-decomposition.json
+  precheck: pass
 id: lem-relative-surface-collars-and-elementary-decomposition
 kind: lemma
 title: "Face-relative Morse decomposition into the ten sewing generators"
@@ -45,20 +48,22 @@ Here a **regular level** is a level at which the interior differential and every
 
 This case diagram summarizes which generator family a one-critical-point slab belongs to. The proof below supplies the chart and boundary-label argument; the diagram is only a case index and is not used as a proof.
 
-~~~tikzcd
-\text{interior index }0 \arrow[r, "\text{disk birth}"] & \eta_C
+```tikzcd
+\begin{tikzcd}[column sep=16em, row sep=2em, cells={font=\large}, scale=1.4, transform shape]
+\mbox{interior index }0 \arrow[r, "\mbox{disk birth}"] & \eta_C
 \\
-\text{interior index }2 \arrow[r, "\text{disk death}"] & \epsilon_C
+\mbox{interior index }2 \arrow[r, "\mbox{disk death}"] & \epsilon_C
 \\
-\text{interior index }1,\ \text{circular feet}
-  \arrow[r, "\text{merge/split}"] & \mu_C\text{ or }\Delta_C
+\mbox{interior index }1,\ \mbox{circular feet}
+  \arrow[r, "\mbox{merge/split}"] & \mu_C\mbox{ or }\Delta_C
 \\
-\text{mixed interior index }1 \arrow[r, "\text{two incidences; cut at core and free face}"]
-  & \text{composites of the ten generators}
+\mbox{mixed interior index }1 \arrow[r, "\mbox{two incidences; cut at core and free face}"]
+  & \mbox{composites of the ten generators}
 \\
-\text{free-face critical point}\arrow[r, "\text{index and normal sign}"]
+\mbox{free-face critical point}\arrow[r, "\mbox{index and normal sign}"]
   & \eta_a,\epsilon_a,\mu_{abc},\Delta_{abc},i_a,i_a^*
-~~~
+\end{tikzcd}
+```
 
 ## Facts & Assumptions
 

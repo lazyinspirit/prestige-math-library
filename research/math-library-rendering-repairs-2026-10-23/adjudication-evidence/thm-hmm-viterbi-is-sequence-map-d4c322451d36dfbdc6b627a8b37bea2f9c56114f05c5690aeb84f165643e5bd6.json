@@ -1,0 +1,115 @@
+{
+  "id": "thm-hmm-viterbi-is-sequence-map",
+  "agent": "/root/rendering_repair_coordinator/dinfo_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot contains the joint-mass correspondence only in formulas and prose. A small trellis materially clarifies that a complete hidden sequence chooses one state per time layer and accumulates precisely the joint-mass factors; it also distinguishes path MAP from separate statewise maximization. The existing rigorous proof remains independent.",
+      "action": "Added a final Remarks illustration with a fully positive two-state, three-layer trellis, an arbitrary highlighted path, initial/terminal weights, edge-weight definitions, joint-score equality, and explanations of zero evidence and ties.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory HMM sequence-score trellis in final Remarks; statement, hypotheses, proof, metadata, dependencies, and publication status unchanged.",
+  "source_lines_after": {
+    "remarks": [
+      73,
+      117
+    ],
+    "tikz": [
+      82,
+      106
+    ],
+    "score_and_ties": [
+      108,
+      117
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For the explicitly illustrative T=3 and S={a,b}, there are six vertices: a and b at each of layers 1,2,3. Initial, transition and observed emission factors are assumed positive only for this example.",
+      "check": "Each of the two layer gaps has exactly four forward arrows S to S, eight edges total, matching algorithm step 2 under the stated positivity assumption. No backward or same-layer transition is asserted."
+    },
+    {
+      "objects": "Initial alpha_y(s), edge w_t(r,s), terminal beta_y(s).",
+      "check": "From alg-hmm-viterbi-sequence-map steps 1-2 and local F2: alpha_y(s)=pi(s)B(s,y1); w_t(r,s)=A(r,s)B(s,y_t) for r,s in S and t=2,3; beta_y(s)=1. Each label is on the correct time layer or forward edge."
+    },
+    {
+      "objects": "Blue path (a,b,a).",
+      "check": "Its edges are a at time 1 to b at time 2, then b at time 2 to a at time 3, labeled w_2(a,b), w_3(b,a). Their product with alpha_y(a) and beta_y(a) equals pi(a)B(a,y1)A(a,b)B(b,y2)A(b,a)B(a,y3), exactly p((a,b,a),y) by F1 and proof step 1.1. It is explicitly arbitrary, with no unsupported optimality assertion."
+    },
+    {
+      "objects": "Zero factors, evidence, recurrence and tie handling.",
+      "check": "A zero initial weight disallows starting there but does not remove the state; zero A(r,s) or B(s,y_t) removes that edge as in algorithm step 2. The recurrence D_t(s)=max({D_{t-1}(r)w_t(r,s)} union {0}) and ordered predecessor/terminal selections were checked in alg-viterbi-max-product-on-finite-trellis steps 1-3 and lem-finite-trellis-prefix-score-recurrence. Hence the illustration does not imply marginal decoding or lexicographically first complete path. Proof step 2.1 gives no admissible path iff p(y)=0; when p(y)>0, common positive division preserves every strict comparison and tie, and the supplied order selects one maximizer."
+    },
+    {
+      "objects": "Proof interface.",
+      "check": "Only final Remarks were appended; the complete theorem and two proof steps are byte-preserved. The proof uses F1-F4 and is independent of the figure."
+    }
+  ],
+  "input_evidence": {
+    "before_raw_sha256": "52ca355903c1c5941a79ec4f21c3d3b0b11461ac8f19d2d5421a20a79a964674",
+    "guard": "Exact queue before_raw_sha256 checked immediately in the same Python mutation before writing.",
+    "original_image_declared": "research/math-library-rendering-audit-2026-10-23/information-theory/diagram-supplement/screenshots/thm-hmm-viterbi-is-sequence-map--01.png",
+    "original_image_resolved": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/thm-hmm-viterbi-is-sequence-map--01.png",
+    "original_image_sha256": "42bc032596b5327ec76aac9d3cce7abf16a7bb052a32ad9dca7e09227ad7083a",
+    "path_discrepancy": "Declared supplemental screenshot was absent; located authentic screenshot within the same category and verified exact recorded SHA256, then viewed standalone at original resolution.",
+    "frozen_current_comparison": "cmp succeeded before edit; frontmatter exact and entire before file retained as current prefix after edit."
+  },
+  "local_checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-hmm-viterbi-is-sequence-map.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-hmm-viterbi-is-sequence-map.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-hmm-viterbi-is-sequence-map.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dinfo-016 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-hmm-viterbi-is-sequence-map --out research/math-library-rendering-repairs-2026-10-23/previews/dinfo-016",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo-016/manifest.json",
+      "manifest_sha256": "f3168709101ebe9c2e3252e20e49570ae7b60dc0e414f7b1d66df0394bce10e2",
+      "source_sha256": "0ada99f776b7d7117874e1b87a47fdf5837fc652549b7e5e4c83abaac55cba26",
+      "html_sha256": "8d40331f74b0bb51af24bddf88daf7057b0981eee633540aa3a72e288fb1428b",
+      "viewed_original_resolution": [
+        "screenshots/thm-hmm-viterbi-is-sequence-map--01.png",
+        "screenshots/thm-hmm-viterbi-is-sequence-map--02.png"
+      ],
+      "visual_result": "Native SSR TikZ compiled. Standalone tile 01 shows all six vertices and eight edges with arrowheads, separate blue path edge labels, initial weights, and terminal weights 1. No figure clipping or overlap; tile 02 shows the remaining explanatory text.",
+      "limitations": [
+        "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+        "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+        "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+        "External network requests are blocked by the local Playwright route."
+      ]
+    }
+  },
+  "remaining_issues": []
+}

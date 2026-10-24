@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-gamblers-ruin-hitting-probabilities-from-harmonicity.json
+  precheck: pass
 id: ex-gamblers-ruin-hitting-probabilities-from-harmonicity
 kind: example
 title: "Gambler’s ruin from harmonicity"
@@ -22,13 +25,6 @@ deps:
   - thm-nonnegative-weighted-sums-of-measures
 proof_strategy: direct
 landmark: false
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"
@@ -98,3 +94,30 @@ $$\mathbb P_i(T_N<T_0)=\frac{i}{N}.$$
 ## Source notes
 
 Levin, Peres and Wilmer, §2.1, Proposition 2.1 and the complete proof of (2.1), printed p. 21 (PDF p. 36), sets the fair nearest-neighbor walk on the finite path with absorbing endpoints, derives $p_0=0$, $p_N=1$ and $p_i=(p_{i-1}+p_{i+1})/2$, then solves for $p_i=i/N$. The source's displayed first-step derivation does not establish a finite exit-time bound before calling the boundary value a hitting probability; step 3.1 supplies that missing justification. Roch, Note 24 §2 Example 24.3 and the complete Theorem 24.4 proof, printed/PDF pp. 3–4, defines hitting-before-another-set as a boundary payoff and derives the first-step equation for bounded nonnegative exit data. It is context only: neither that passage nor its finite-irreducible tail lemma proves the present absorbing, reducible chain's exit bound or its harmonic solution.
+
+## Remarks
+
+For $N=4$, the transition graph below displays all nonzero transition probabilities. The values below the states are $g_4(i)=\mathbb P_i(T_4<T_0)=i/4$; the endpoint values are the boundary payoffs. Arrows carry transition probabilities, not hitting probabilities. At each interior state, its value is the average of its two neighbours' values, as in step 1.2. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,circle,minimum size=8mm] (s0) at (0,0) {$0$};
+\node[draw,circle,minimum size=8mm] (s1) at (2,0) {$1$};
+\node[draw,circle,minimum size=8mm] (s2) at (4,0) {$2$};
+\node[draw,circle,minimum size=8mm] (s3) at (6,0) {$3$};
+\node[draw,circle,minimum size=8mm] (s4) at (8,0) {$4$};
+\draw[->] (s0) edge[loop above] node[above] {$1$} (s0);
+\draw[->] (s4) edge[loop above] node[above] {$1$} (s4);
+\draw[->] (s1) to node[above] {$1/2$} (s0);
+\draw[->] (s1) to[bend left=22] node[above] {$1/2$} (s2);
+\draw[->] (s2) to[bend left=22] node[below] {$1/2$} (s1);
+\draw[->] (s2) to[bend left=22] node[above] {$1/2$} (s3);
+\draw[->] (s3) to[bend left=22] node[below] {$1/2$} (s2);
+\draw[->] (s3) to node[above] {$1/2$} (s4);
+\node at (0,-1.05) {$g_4(0)=0$};
+\node at (2,-1.05) {$g_4(1)=1/4$};
+\node at (4,-1.05) {$g_4(2)=1/2$};
+\node at (6,-1.05) {$g_4(3)=3/4$};
+\node at (8,-1.05) {$g_4(4)=1$};
+\end{tikzpicture}
+```

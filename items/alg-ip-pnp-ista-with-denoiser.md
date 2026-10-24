@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-ip-pnp-ista-with-denoiser.json
+  precheck: n/a
 id: alg-ip-pnp-ista-with-denoiser
 kind: algorithm
 aliases: [def-ip-pnp-ista-with-denoiser]
@@ -24,14 +27,7 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§4.2, equation (4.6), proximal-gradient iteration before the proximal replacement."
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -44,7 +40,7 @@ Here “denoiser” names the role of the plug-in map; Borel measurability and t
 
 The diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]
   \node at (0,0) (old) {$x_{t-1}$};
   \node at (3,0) (grad) {$z_t=x_{t-1}-\gamma\nabla g(x_{t-1})$};
@@ -52,7 +48,7 @@ The diagram depicts the data flow for one update; the displayed recurrence, not 
   \draw[->] (old) -- (grad);
   \draw[->] (grad) -- (den);
 \end{tikzpicture}
-~~~
+```
 
 ## Definition references
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-shared-parameter-backpropagation-gradient-formula.json
+  precheck: pass
 id: thm-shared-parameter-backpropagation-gradient-formula
 kind: theorem
 title: "Reverse accumulation sums gradients over shared parameter uses"
@@ -9,12 +12,6 @@ dependency_level: 1
 deps: [alg-backpropagation-through-shared-parameter-recurrence, def-finite-straight-line-computational-program, thm-chain-rule-for-total-derivatives, thm-reverse-mode-computes-gradient]
 justified_by: []
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -57,3 +54,38 @@ where the sum is empty when $T=0$. The statement also applies when every primiti
 2.2 The terminal state's cotangent is $\lambda_T=(D_h\ell)^T$. At transition $t$, the chain rule gives the cotangent at $h_{t-1}$ as $B_t^T\lambda_t$ and adds $A_t^T\lambda_t$ to the derivative with respect to the shared parameter while $h_{t-1}$ is held fixed. Descending induction therefore gives the stated $\lambda_{t-1}$ recurrence and sums one parameter contribution for each of the $T$ transition uses. [F2, F4, step 1.1, algebra]
 
 3.1 The loss's direct dependence on $\theta$ contributes $(D_\theta\ell)^T$, and the dependence of $h_0(\theta)$ contributes $(Dh_0)^T\lambda_0$. Adding these to the $T$ transition contributions from step 2.2 gives the displayed formula. If $T=0$, there are no transition terms and the same chain rule reduces $J(\theta)=\ell(\theta,h_0(\theta))$ to the two remaining terms. This is exactly the algorithm's return value and gradient. [F2, F4, step 2.2, algebra] ∎
+
+## Remarks
+
+For the illustrative case $T=2$, the upper graph shows the forward dependencies. Each arrow from the single $\theta$ input represents a separate use of the same parameter. The lower graph shows reverse accumulation: the initial-state pullback, the two transition parameter pullbacks, and the loss's direct parameter derivative all contribute to the one accumulator $g=\nabla_\theta J$. All derivatives are evaluated along the trajectory as in the statement.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \node (theta) at (4,2) {$\theta$};
+  \node[draw] (h0) at (0,0) {$h_0$};
+  \node[draw] (h1) at (3,0) {$h_1$};
+  \node[draw] (h2) at (6,0) {$h_2$};
+  \node[draw] (loss) at (9,0) {$J$};
+  \draw[->] (theta) -- (h0) node[midway,above left] {$h_0$};
+  \draw[->] (theta) -- (h1);
+  \draw[->] (theta) -- (h2);
+  \draw[->] (theta) -- (loss);
+  \draw[->] (h0) -- (h1) node[midway,below] {$\Phi_1$};
+  \draw[->] (h1) -- (h2) node[midway,below] {$\Phi_2$};
+  \draw[->] (h2) -- (loss) node[midway,below] {$\ell$};
+  \node (l0) at (0,-2) {$\lambda_0$};
+  \node (l1) at (4.5,-2) {$\lambda_1$};
+  \node (l2) at (9,-2) {$\lambda_2=(D_h\ell)^T$};
+  \draw[->] (l2) -- (l1) node[midway,above] {$B_2^T$};
+  \draw[->] (l1) -- (l0) node[midway,above] {$B_1^T$};
+  \node[draw] (g) at (4.5,-4.2) {$g=\nabla_\theta J$};
+  \draw[->] (l0) -- (g) node[midway,below left] {$(Dh_0)^T\lambda_0$};
+  \draw[->] (l1) -- (g) node[midway,right] {$A_1^T\lambda_1$};
+  \draw[->] (l2) -- (g) node[midway,below right] {$A_2^T\lambda_2$};
+  \node (direct) at (4.5,-5.7) {$(D_\theta\ell)^T$};
+  \draw[->] (direct) -- (g);
+\end{tikzpicture}
+```
+
+In the lower graph, arrows into $g$ mean addition of the displayed vectors, rather than composition of maps. Here $\lambda_t\in\mathbb R^q$, $B_t^T:\mathbb R^q\to\mathbb R^q$, and $A_t^T,(Dh_0)^T:\mathbb R^q\to\mathbb R^p$. For general $T$, there is one transition contribution $A_t^T\lambda_t$ for each $1\le t\le T$. When $T=0$, no transition or $B_t^T$ arrow remains: $\lambda_0=(D_h\ell)^T$ and only the direct loss term and $(Dh_0)^T\lambda_0$ enter $g$. This illustration does not replace or enter the chain-rule proof above.
+

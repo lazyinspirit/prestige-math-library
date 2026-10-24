@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-model-jacobi-fields-in-positive-zero-and-negative-curvature.json
+  precheck: pass
 id: ex-model-jacobi-fields-in-positive-zero-and-negative-curvature
 kind: example
 title: Model jacobi fields in positive zero and negative curvature
@@ -21,9 +24,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -79,7 +79,7 @@ times contained in $I$.
 
 ## Verification
 
-**Proof technique:** direct: the curvature of a constant-curvature manifold acts as $k$ times the identity on normal vectors, so the explicit field $\operatorname{sn}_k(t)P_tE$ satisfies the Jacobi equation with the prescribed initial data, and uniqueness identifies it with $A(t)E$; the three signs are then read off the comparison functions.
+**Proof technique:** direct: on normal vectors, the curvature endomorphism is multiplication by the constant curvature. The comparison sine times the parallel transport of the initial normal vector satisfies the Jacobi equation with the prescribed initial data; uniqueness identifies it with the radial Jacobi field. The three curvature signs are then read off the comparison functions.
 
 1.1 On normal vectors the curvature endomorphism is $k$ times the identity. [F1, F3, given] Let $X$ be a vector field along $\gamma$ with $X(t)\perp T(t)$ for every $t$. Since $g(T,T)\equiv1$, the formula of [F1] gives $$R(X,T)T=k\bigl(g(T,T)X-g(X,T)T\bigr)=kX.$$ The computation is pointwise, so it applies at every $t\in I$ and for every normal vector there. [F1, F3, given]
 

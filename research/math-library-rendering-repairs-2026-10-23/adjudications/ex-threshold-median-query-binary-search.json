@@ -1,0 +1,108 @@
+{
+  "id": "ex-threshold-median-query-binary-search",
+  "agent": "/root/rendering_repair_coordinator/slcm_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the sole flagged standalone original-resolution tile. The two middle terminal nodes [2,3] and [4,5] occupy the same horizontal position: a constant sibling distance at both levels places both at the root x coordinate. Their boxes and text visibly overlap; this is a genuine diagram collision, beyond the reported incoming-label crowding. Frozen and current source were identical before repair.",
+      "action": "Replace the global sibling distance with level-1 spacing 64mm and level-2 spacing 32mm, preserving every node, interval, branch, and label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Separate all four terminal intervals by giving the binary tree level-specific sibling distances. Only TikZ layout options changed.",
+  "source_lines_after": [
+    47,
+    48
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For n=7, root candidate interval [0,7] is queried at x4; children query x2 on [0,3] and x6 on [4,7].",
+      "justification": "Example median rule j=a+floor((b-a+1)/2) gives 4, 2 and 6 respectively. All three queried indices are valid pool indices."
+    },
+    {
+      "relations": "Root response 1 leads to [0,3], response 0 to [4,7]; at x2 responses 1/0 lead to [0,1]/[2,3]; at x6 responses 1/0 lead to [4,5]/[6,7].",
+      "justification": "The Example defines h_k(x_j)=1 iff j>k; Verification step 1.1 explicitly identifies the two branches [a,j-1] and [j,b]. Every displayed terminal interval has two indices, and the four are disjoint with union {0,...,7}."
+    },
+    {
+      "rendered_graph": "Native compiled diagram visibly has 7 distinct node boxes and 6 parent-to-child arrows: root outdegree 2, internal nodes indegree 1/outdegree 2, four leaves indegree 1. All six response labels are readable. No cycle or intended closing edge occurs.",
+      "justification": "Inspected final native standalone diagram crop at original resolution, as well as the full native tile. Only spacing changed; the rigorous Verification remains independent of the figure as stated in the Illustration."
+    }
+  ],
+  "guard": {
+    "expected_before_raw_sha256": "c6f4607297ea017f2db6dc3dac14782630e579ecefc7a302548bbfb277f85ebf",
+    "actual_before_raw_sha256": "c6f4607297ea017f2db6dc3dac14782630e579ecefc7a302548bbfb277f85ebf",
+    "checked_immediately_before_edit": true,
+    "after_raw_sha256": "22ae4701f53dd484c53aaf9b58feee36b6e2bb49513dcefa5c7004139c7f4414",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published; unchanged byte-for-byte"
+  },
+  "original_tiles_viewed": [
+    "research/math-library-rendering-audit-2026-10-23/statistical-learning-and-classical-models/screenshots/ex-threshold-median-query-binary-search--01.png"
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-threshold-median-query-binary-search.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-threshold-median-query-binary-search.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-threshold-median-query-binary-search.md",
+            "item_id": "ex-threshold-median-query-binary-search",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-threshold-median-query-binary-search.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/slcm-003-runtime-fresh node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-threshold-median-query-binary-search --out research/math-library-rendering-repairs-2026-10-23/slcm-003-native-final-v2",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      },
+      "fresh_native_compile": true,
+      "native_svg": "research/math-library-rendering-repairs-2026-10-23/slcm-003-runtime-fresh/pi-tikz-cache/5860d1b0aa13466e02e62945d7117e0e.svg",
+      "katex_errors": [],
+      "diagram_failures": [],
+      "tikz_count": 1,
+      "viewed_original_resolution": [
+        "research/math-library-rendering-repairs-2026-10-23/slcm-003-native-final-v2/screenshots/ex-threshold-median-query-binary-search--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/slcm-003-native-final-v2/diagram-native.png"
+      ]
+    }
+  ],
+  "check_limitations": [
+    "First native preview attempt failed to resolve the app TypeScript alias; retry with its tsconfig succeeded. Failed-attempt output directory slcm-003-native-final is retained.",
+    "Native preview covers current title and ItemBody with local renderer and blocked external network, not production HTTP routes. The reference map records 16 unrelated parse diagnostics."
+  ],
+  "remaining_issues": []
+}

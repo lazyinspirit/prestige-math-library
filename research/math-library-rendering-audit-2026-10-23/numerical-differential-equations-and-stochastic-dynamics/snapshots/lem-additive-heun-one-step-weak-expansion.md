@@ -1,0 +1,57 @@
+---
+id: lem-additive-heun-one-step-weak-expansion
+kind: lemma
+title: "One-step moment matching for additive-noise stochastic Heun"
+status: published
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 1
+deps:
+  - def-additive-noise-stochastic-heun-scheme
+  - def-standard-normal-and-normal-laws
+  - def-axiom-of-choice
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-17
+sources:
+  references:
+    - title: "M. Tretyakov, Lecture Notes for a Mini-Course on Numerical Methods for SDEs, Theorem 7.1 and Section 7.3, PDF pp. 39-42"
+      url: "https://www.math.chalmers.se/~cohend/MT2016/LNminicourseSDEv1.pdf"
+    - title: "Kloeden and Platen, Numerical Solution of Stochastic Differential Equations, Theorem 14.5.2 and Section 15.1, printed pp. 474-480 and 485-487"
+      url: "https://stevencjxie8.com/files/refs/ref7.pdf"
+---
+
+## Statement
+
+Let $b\in C_b^6(\mathbb R;\mathbb R)$, let $\sigma\in\mathbb R$ be constant, and define the generator $Lf=b f'+\frac12\sigma^2f''$. Let $u:[0,T]\times\mathbb R\to\mathbb R$ satisfy $u_t+Lu=0$. Assume all mixed derivatives $\partial_t^r\partial_x^j u$ for $0\le r\le3$ and $0\le j\le6$ are continuous and bounded. For $0<h\le1$, $t+h\le T$, fixed $x\in\mathbb R$, and $w\sim N(0,h)$, take one Heun step from [[def-additive-noise-stochastic-heun-scheme]] and let $D=Y_{n+1}-x$. Then a constant $C$, uniform in $t,x,h$, satisfies
+$$\left|\mathbb E\bigl[u(t+h,x+D)\bigr]-u(t,x)\right|\le Ch^3.$$
+
+## Facts & Assumptions
+
+**Given:** The additive-noise Heun update, $b\in C_b^6$, the constant $\sigma$, the backward equation $u_t+Lu=0$, its bounded derivative assumptions, $w\sim N(0,h)$, and $0<h\le1$.
+
+[L1] [[def-additive-noise-stochastic-heun-scheme]]: for increment $w$, $Z=x+b(x)h+\sigma w$ and $D=\sigma w+\frac h2(b(x)+b(Z))$; $C_b^6$ means bounded continuous derivatives through order six.
+
+[F1] [[def-standard-normal-and-normal-laws]]: $w=\sqrt h\,Z_0$ with $Z_0$ standard normal of density $(2\pi)^{-1/2}e^{-z^2/2}$; its odd moments vanish and its even moments are obtained by integration by parts.
+
+[A1] [[def-axiom-of-choice]]: AC is inherited through the Brownian/normal-law interface in [L1] and [F1]; the one-step Taylor calculation itself uses no further choice.
+
+## Proof
+
+**Given:** The assumptions above.
+
+1.1 Put $B=b(x)$, $B_j=b^{(j)}(x)$, $\delta=Bh+\sigma w$, and $D=\sigma w+Bh+\frac h2(b(x+\delta)-B)$. Taylor's formula through degree three gives $b(x+\delta)=B+B_1\delta+\frac12B_2\delta^2+\frac16B_3\delta^3+\rho_4$, with $|\rho_4|\le\|b^{(4)}\|_\infty|\delta|^4/24$. From [F1], $\mathbb Ew=0$, $\mathbb Ew^2=h$, $\mathbb Ew^3=0$, $\mathbb Ew^4=3h^2$, $\mathbb Ew^5=0$, and $\mathbb E|w|^6=15h^3$. Substituting $\delta=Bh+\sigma w$ and collecting terms of order at most $h^2$ gives $$\begin{aligned}\mathbb ED&=Bh+\left(\frac12BB_1+\frac14\sigma^2B_2\right)h^2+O(h^3),\\\mathbb ED^2&=\sigma^2h+(B^2+\sigma^2B_1)h^2+O(h^3),\\\mathbb ED^3&=3B\sigma^2h^2+O(h^3),\\\mathbb ED^4&=3\sigma^4h^2+O(h^3),\qquad \mathbb ED^5=O(h^3).\end{aligned}$$ For the second moment, the $h^2$ terms are $(Bh)^2$ and $2(\sigma w)(\frac12B_1\sigma hw)$; for the third they are $3(\sigma w)^2(Bh)$; for the fourth it is $\mathbb E(\sigma w)^4$. All other terms either contain an odd Gaussian moment or have expected magnitude $O(h^3)$ by $\mathbb E|\delta|^4=O(h^2)$ and the displayed remainder bound. Since $b$ is bounded, $|D|\le |\sigma||w|+h\|b\|_\infty$, so $\mathbb E|D|^6\le Ch^3$. [L1, F1, A1]
+
+2.1 Taylor-expand $u(t+h,x+D)$ in its spatial argument through degree five. The sixth-derivative bound and step 1.1 yield $$\mathbb E u(t+h,x+D)=u+u_x\mathbb ED+\frac12u_{xx}\mathbb ED^2+\frac16u_{xxx}\mathbb ED^3+\frac1{24}u_{xxxx}\mathbb ED^4+\frac1{120}u_{xxxxx}\mathbb ED^5+O(h^3),$$ where the displayed derivatives are evaluated at $(t+h,x)$. Substituting the moment formulas, the coefficients through order $h^2$ are $hLu$ and $\frac12h^2L^2u$, because $$L^2u=\left(BB_1+\frac12\sigma^2B_2\right)u_x+(B^2+\sigma^2B_1)u_{xx}+B\sigma^2u_{xxx}+\frac14\sigma^4u_{xxxx}.$$ Thus $\mathbb E u(t+h,x+D)=u(t+h,x)+hLu(t+h,x)+\frac12h^2L^2u(t+h,x)+O(h^3)$. [L1, F1, step 1.1]
+
+3.1 Since $u_t=-Lu$ and $L$ is independent of $t$, differentiating the backward equation gives $u_{tt}=L^2u$. Taylor's formula in time at fixed $x$, with bounded $u_{ttt}$, therefore gives $$u(t,x)=u(t+h,x)+hLu(t+h,x)+\frac12h^2L^2u(t+h,x)+O(h^3).$$ The coefficient and derivative bounds in the Statement make the constants in the preceding expansions uniform in $t,x,h$. [given, step 2.1, algebra]
+
+4.1 The expansions in steps 2.1 and 3.1 have identical terms through order $h^2$; subtracting them leaves a remainder bounded by $Ch^3$, which is the asserted one-step weak defect. [step 2.1, step 3.1] ∎
+

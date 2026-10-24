@@ -1,0 +1,61 @@
+---
+id: thm-qc-tqc-toric-logical-algebra
+kind: theorem
+title: Two anticommuting toric logical Pauli pairs
+status: published
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 5
+deps:
+  - def-qc-tqc-toric-logical-loops
+  - thm-qc-tqc-toric-mutual-sign
+  - thm-qc-pauli-commutator-is-symplectic-pairing
+  - thm-qc-tqc-toric-code-dimension
+  - def-qc-stabilizer-syndrome-and-logical-operators
+  - thm-qc-stabilizer-logical-pauli-quotient-dimension
+justified_by: []
+proof_strategy: direct
+axiom_use: "None; the logical commutation matrix is a finite binary calculation."
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Alexei Kitaev, Fault-tolerant quantum computation by anyons"
+      url: https://arxiv.org/pdf/quant-ph/9707021
+    - title: "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory"
+      url: https://arxiv.org/pdf/quant-ph/0110143
+---
+
+## Statement
+
+The representatives $\bar Z_1,\bar Z_2,\bar X_1,\bar X_2$ of
+[[def-qc-tqc-toric-logical-loops]] obey
+$\bar Z_i\bar X_j=(-1)^{\delta_{ij}}\bar X_j\bar Z_i$ and commute within
+each Z pair and each X pair. Their four classes form a basis of the logical
+Pauli quotient of the two-qubit toric code.
+
+## Facts & Assumptions
+
+**Given:** The four specified normalizer representatives and the two-qubit toric stabilizer code.
+
+[F1] [[def-qc-tqc-toric-logical-loops]]: $\bar Z_1$ uses the horizontal primal row $h_{i,0}$, $\bar Z_2$ the vertical primal column $v_{0,j}$, $\bar X_1$ uses $h_{0,j}$, and $\bar X_2$ uses $v_{i,0}$.
+
+[F2] [[thm-qc-pauli-commutator-is-symplectic-pairing]]: the commutator sign of two Pauli strings is $(-1)^\omega$, where $\omega$ is their binary symplectic pairing; for pure X/Z supports it is the overlap parity.
+
+[F3] [[def-qc-stabilizer-syndrome-and-logical-operators]]: logical Paulis are classes in $N(S)/(Z_nS)$, with scalar phases and stabilizers identified.
+
+[F4] [[thm-qc-tqc-toric-code-dimension]]: the code encodes two qubits.
+
+[F5] [[thm-qc-stabilizer-logical-pauli-quotient-dimension]]: an $n$-qubit stabilizer code encoding $k$ qubits has a binary logical Pauli quotient of dimension $2k$.
+
+[F6] [[thm-qc-tqc-toric-mutual-sign]]: primal Z and dual X strings with exactly one shared physical edge anticommute.
+
+## Proof
+
+1.1 By [F1], $\bar Z_1$ and $\bar X_1$ share only $h_{0,0}$, while $\bar Z_2$ and $\bar X_2$ share only $v_{0,0}$. [F6] gives anticommutation for these equal-index pairs. The cross pairs $(\bar Z_1,\bar X_2)$ and $(\bar Z_2,\bar X_1)$ have disjoint physical-edge supports, so [F2] gives commutation for unequal indices. Two Z strings commute with one another and two X strings commute with one another because their factors have the same Pauli type. [given, F1, F2, F6, algebra]
+
+2.1 Suppose a product $\bar Z_1^a\bar Z_2^b\bar X_1^c\bar X_2^d$, with $a,b,c,d\in\mathbb F_2$, represented the identity class in [F3]. It would then commute with every normalizer representative. Commuting with $\bar X_1,\bar X_2,\bar Z_1,\bar Z_2$ in turn and using step 1.1 forces $a=b=c=d=0$. Hence the four classes are independent. [F3, step 1.1, algebra]
+
+3.1 By [F4] the code has $k=2$, and [F5] gives logical quotient dimension $2k=4$. The four independent classes from step 2.1 therefore form a basis of that quotient. [F4, F5, step 2.1, algebra] ∎
+

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-harmonic-sum-asymptotic.json
+  precheck: pass
 id: lem-harmonic-sum-asymptotic
 kind: lemma
-title: "The harmonic sum is log x plus gamma plus O(1/x)"
+title: 'The harmonic sum is $\log x+\gamma+O(1/x)$'
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ deps: [def-euler-mascheroni-constant,
        thm-monotone-convergence]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:

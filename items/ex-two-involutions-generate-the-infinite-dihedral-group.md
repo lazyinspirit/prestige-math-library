@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-two-involutions-generate-the-infinite-dihedral-group.json
+  precheck: pass
 id: ex-two-involutions-generate-the-infinite-dihedral-group
 kind: example
-title: "C_2 free-product C_2 is the infinite dihedral group, and the product of its generators has infinite order"
+title: "$C_2$ free-product $C_2$ is the infinite dihedral group, and the product of its generators has infinite order"
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-halting-is-sigma-one-complete.json
+  precheck: pass
 id: thm-halting-is-sigma-one-complete
 kind: theorem
-title: "The halting set is Sigma_1^0-complete"
+title: 'The halting set is $\Sigma_1^0$-complete'
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-arithmetical-level-completeness, def-universal-and-acceptable-numbering, thm-sigma-one-sets-are-exactly-ce-sets]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, §5.4"

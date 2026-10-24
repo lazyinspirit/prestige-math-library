@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-twisted-clifford-adjoint-reflection-and-scalar-kernel.json
+  precheck: pass
 id: lem-twisted-clifford-adjoint-reflection-and-scalar-kernel
 kind: lemma
 title: Twisted Clifford action, reflections, and scalar kernel
@@ -16,12 +19,6 @@ deps:
   - lem-real-clifford-involutions-and-norm
   - def-real-clifford-group-and-normalized-pin-spin
 justified_by: []
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -70,3 +67,20 @@ Let $(V,B)$ be a finite-dimensional nondegenerate real quadratic space, $Q(v)=B(
 ## Remarks
 
 The scalar-kernel proof uses the PBW basis and nondegeneracy; it does not use the center of the ungraded Clifford algebra, which can be larger in odd dimension.
+
+
+For anisotropic $u$, write $v=au+w$ with $a=B(v,u)/Q(u)$ and $w\in u^\perp$. Then $\rho_u(v)=r_u(v)=-au+w$: the $\mathbb Ru$ component changes sign and the $u^\perp$ component is fixed. The coordinate schematic below depicts the case where $u,w$ are independent; its drawn angles and lengths impose no positivity assumption on $B$. Step 1.1 and the proof of [F3] establish the reflection independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.2]
+\draw[->] (-0.6,0) -- (3.4,0) node[right] {$\mathbb Rw\subseteq u^\perp$};
+\draw[->] (0,-2) -- (0,2) node[above] {$\mathbb Ru$};
+\draw[->,thick] (0,0) -- (2.2,1.3) node[above right] {$v=au+w$};
+\draw[->,thick] (0,0) -- (2.2,-1.3) node[below right] {$r_u(v)=-au+w$};
+\draw[dashed] (0,1.3) -- (2.2,1.3) -- (2.2,-1.3) -- (0,-1.3);
+\node[left] at (0,1.3) {$au$};
+\node[left] at (0,-1.3) {$-au$};
+\node[below left] at (0,0) {$0$};
+\node[above right] at (2.2,0) {$w$};
+\end{tikzpicture}
+```

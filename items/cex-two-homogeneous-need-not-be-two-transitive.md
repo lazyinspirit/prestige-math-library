@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-two-homogeneous-need-not-be-two-transitive.json
+  precheck: pass
 id: cex-two-homogeneous-need-not-be-two-transitive
 kind: counterexample
-title: "The square-affine group of F_7 is 2-homogeneous but not 2-transitive"
+title: "The square-affine group of $\\mathbb F_7$ is 2-homogeneous but not 2-transitive"
 status: published
 origin: session
 provenance:
@@ -11,13 +14,6 @@ deps: [def-k-transitive-and-k-homogeneous-actions]
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
 sources:
   scraped: []
   references:

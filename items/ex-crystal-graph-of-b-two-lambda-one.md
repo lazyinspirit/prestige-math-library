@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-crystal-graph-of-b-two-lambda-one.json
+  precheck: pass
 id: ex-crystal-graph-of-b-two-lambda-one
 kind: example
 title: "The crystal graph of the quantum symmetric square of the standard $A_2$-module"
@@ -14,8 +17,6 @@ aliases: []
 landmark: false
 dependency_level: 6
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -68,3 +69,25 @@ The color-$1$ divided strings are $v_{11}\to v_{12}\to v_{22}$, $v_{13}\to v_{23
 4.1 Edges and partial inverses. The only nonzero arrows of the residue basis are the six listed: two color-$1$ edges on the first and one on the second of the chains $v_{11}\to v_{12}\to v_{22}$ and $v_{13}\to v_{23}$, and the color-$2$ edges $v_{12}\to v_{13}$ and $v_{22}\to v_{23}\to v_{33}$, exactly as in the statement; every arrow is the inverse of the corresponding $\tilde e_i$-step by step 3.1, so the partial-inverse axiom holds and no further edges occur. [step 3.1]
 
 5.1 The invariants. Reading the string positions from step 4.1 gives the table $(\varepsilon_1,\varphi_1,\varepsilon_2,\varphi_2)$: $(0,2,0,0)$ at $v_{11}$, $(1,1,0,1)$ at $v_{12}$, $(2,0,0,2)$ at $v_{22}$, $(0,1,1,0)$ at $v_{13}$, $(1,0,1,1)$ at $v_{23}$ and $(0,0,2,0)$ at $v_{33}$. Comparing with the six labels of the statement, the twelve equalities $\varphi_i=\varepsilon_i+\langle h_i,\mathrm{wt}\rangle$ are the identities $2=0+2$, $0=0+0$; $1=1+0$, $1=0+1$; $0=2-2$, $2=0+2$; $1=0+1$, $0=1-1$; $0=1-1$, $1=1+0$; $0=0+0$, $0=2-2$. [F5, step 3.1, step 4.1] ∎
+
+
+## Remarks
+
+The following graph combines the two families of strings. Write $b_{ab}=v_{ab}+qL$ for the residue classes in the crystal basis. Each node also shows its weight in the $\omega$-basis, and an arrow labelled $i$ means $b\mapsto\tilde f_i b$. The labels are crystal colors, not the coefficients of $F_i$ in the action table. The verification above establishes all edges independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={align=center}, thick]
+\node (b11) at (0,3) {$\begin{array}{c}b_{11}\\(2,0)\end{array}$};
+\node (b12) at (-2,1.5) {$\begin{array}{c}b_{12}\\(0,1)\end{array}$};
+\node (b22) at (-4,0) {$\begin{array}{c}b_{22}\\(-2,2)\end{array}$};
+\node (b13) at (0,0) {$\begin{array}{c}b_{13}\\(1,-1)\end{array}$};
+\node (b23) at (-2,-1.5) {$\begin{array}{c}b_{23}\\(-1,0)\end{array}$};
+\node (b33) at (0,-3) {$\begin{array}{c}b_{33}\\(0,-2)\end{array}$};
+\draw[->] (b11) -- node[above left] {$1$} (b12);
+\draw[->] (b12) -- node[above left] {$1$} (b22);
+\draw[->] (b13) -- node[above left] {$1$} (b23);
+\draw[->] (b12) -- node[above right] {$2$} (b13);
+\draw[->] (b22) -- node[above right] {$2$} (b23);
+\draw[->] (b23) -- node[above right] {$2$} (b33);
+\end{tikzpicture}
+```

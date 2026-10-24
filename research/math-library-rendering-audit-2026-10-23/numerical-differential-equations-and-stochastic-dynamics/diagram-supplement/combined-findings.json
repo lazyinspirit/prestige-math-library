@@ -1,0 +1,1974 @@
+[
+  {
+    "id": "alg-age-cohort-characteristic-quadrature",
+    "section": "Item body",
+    "lines": [
+      40,
+      48
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "age-time characteristic/cohort diagram",
+    "exact_source_claim": "Each initial cohort moves on the exact characteristic a_i^{k+1}=a_i^k+Δt, loses survival mass, and may leave at cutoff A; each step inserts a newborn at age 0 with mass Δt B_h^k.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-age-cohort-characteristic-quadrature--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-age-cohort-characteristic-quadrature--01.png": "9a32a242acaeaeb6db113da2e56dd31fdf525fa550be1de49d3a25965bf96e47"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "40": "Input a finite horizon $T>0$, a time step $\\Delta t>0$, an age cutoff $A>0$, bounded nonnegative rates $\\mu,\\beta$ on $[0,A]$, and a finite positive initial quadrature $(a_i,m_i^0)_{i=1}^I$ supported in $[0,A)$ for the initial age measure on that interval. Set $N=\\lfloor T/\\Delta t\\rfloor$; the procedure returns levels at $t_k=k\\Delta t$ for $0\\le k\\le N$, with final time $N\\Delta t\\le T$. One option, when a nonnegative real-valued initial density $n_0$ is evaluable at every point of $[0,A]$, is to choose any finite partition $0=b_0<\\cdots<b_I=A$ and apply [[alg-composite-midpoint-rule]] with $n=1$ separately on each cell $[b_{i-1},b_i]$: set $\\Delta a_i=b_i-b_{i-1}$, $a_i=(b_{i-1}+b_i)/2$, and $m_i^0=Q_M(n_0;b_{i-1},b_i,1)=\\Delta a_i\\,n_0(a_i)$ for $1\\le i\\le I$. The cell widths need not be equal. A cohort at age $a_i^k$ and mass $m_i^k$ follows the exact age characteristic",
+      "48": "If $\\Delta t\\|\\mu\\|_\\infty>1$, return status invalid-step with no updates. Otherwise initialize the birth and outflow records as empty and set $\\nu_h^0=\\sum_i m_i^0\\delta_{a_i^0}$. For each $k=0,\\ldots,N-1$, first calculate $B_h^k=\\sum_i\\beta(a_i^k)m_i^k$. Advance every existing cohort by $a_i^{k+1}=a_i^k+\\Delta t$ and update its survival mass by $m_i^{k+1}=(1-\\Delta t\\mu(a_i^k))m_i^k$. If an updated age is at least $A$, record that updated mass as discrete outflow and discard the cohort; otherwise retain it. Then insert a newborn cohort of age $0$ and mass $\\Delta t B_h^k$ at time $t_{k+1}$. Record $B_h^k$ and the step's outflow, and form $\\nu_h^{k+1}$ from the retained cohorts and this newborn. A failed rate evaluation returns failure with no partial update. The procedure returns the finite sequence $(\\nu_h^k)_{k=0}^N$ and its birth/outflow records. The bounded-Lipschitz quadrature defect of the initial measure and the Euler survival error are separate inputs to any consistency claim."
+    },
+    "source_snapshot": "snapshots/alg-age-cohort-characteristic-quadrature.md",
+    "source_sha256": "4e2c11526ef29ebf93326afa0355a30939e2f9775124a09d5c911639ca7c8c4d",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-age-structured-renewal-upwind-finite-volume",
+    "section": "Item body",
+    "lines": [
+      33,
+      43
+    ],
+    "symptom": "The source specifies a spatial partition and the flux entering, crossing, and leaving it. A compact diagram can make the left renewal boundary, cell indexing, right absorbing boundary, and mass-flow signs easier to verify.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-age-grid-upwind-flux-diagram",
+    "exact_source_claim": "The age grid uses cell masses, newborn inflow F_0^k=B_h^k, interior/right fluxes F_j^k=u_j^k, and an absorbing cutoff outflow recorded in O_h.",
+    "selection_reason": "The source specifies a spatial partition and the flux entering, crossing, and leaving it. A compact diagram can make the left renewal boundary, cell indexing, right absorbing boundary, and mass-flow signs easier to verify.",
+    "concrete_diagram_content": "Draw the age axis a_0=0<...<a_J=A with cells C_j=[a_{j-1},a_j] and masses M_j^k, arrow B_h^k=F_0^k entering at a=0, rightward interior arrows F_j^k=u_j^k, and terminal arrow F_J^k leaving to cumulative outflow O_h^{k+1}=O_h^k+Δt F_J^k. Annotate the update as M_j^{k+1}=M_j^k-Δt(F_j^k-F_{j-1}^k)-Δt μ_jM_j^k; do not show any return inflow above A.",
+    "mathematical_check": "Draw the age axis a_0=0<...<a_J=A with cells C_j=[a_{j-1},a_j] and masses M_j^k, arrow B_h^k=F_0^k entering at a=0, rightward interior arrows F_j^k=u_j^k, and terminal arrow F_J^k leaving to cumulative outflow O_h^{k+1}=O_h^k+Δt F_J^k. Annotate the update as M_j^{k+1}=M_j^k-Δt(F_j^k-F_{j-1}^k)-Δt μ_jM_j^k; do not show any return inflow above A.",
+    "screenshots": [
+      "screenshots/alg-age-structured-renewal-upwind-finite-volume--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-age-structured-renewal-upwind-finite-volume--01.png": "f45a89894ecb27b8650d9ad6fdc24f7997e579ecd34deab7314ea0c03347fa9e"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "33": "For [[def-age-structured-renewal-transport-problem]], input a finite horizon $T>0$, a cutoff $A>T$, integers $J,N\\ge1$, and use the uniform grid $a_j=j\\Delta a$ with $\\Delta a=A/J$ and cells $C_j=[a_{j-1},a_j]$. Set $\\Delta t=T/N$ and $t_k=k\\Delta t$ for $0\\le k\\le N$. Use the model rates $\\mu,\\beta$ and input nonnegative initial cell masses $M_j^0$. Also input one positive-birth-quadrature setting for each cell as specified in [[alg-age-structured-positive-birth-quadrature]]; if omitted, use its default one-panel midpoint setting. Keep these settings fixed at every time step. Evaluate $\\mu_j=\\mu((a_{j-1}+a_j)/2)$. Require the transport-plus-loss CFL",
+      "43": "The right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim."
+    },
+    "source_snapshot": "snapshots/alg-age-structured-renewal-upwind-finite-volume.md",
+    "source_sha256": "875fe4e8aa0ed613659cf0c2bf3c5051e0d47d4e296ddcebce2decc3a878f253",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain-editorial-candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-centered-difference-dirichlet-bvp",
+    "section": "Definition",
+    "lines": [
+      33,
+      37
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial-diagram-candidate",
+    "exact_source_claim": "The grid x_j=jh has zero boundary values U_0=U_{N+1}=0 and interior unknowns U_1,…,U_N satisfying the centered three-point stencil.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Consider a one-dimensional mesh x_0,…,x_{N+1} on [0,1], mark U_0=U_{N+1}=0 and the interior U_j, then show the stencil links U_{j-1}, U_j, U_{j+1} at x_j with weights −1,2,−1 over h². Keep the displayed sign convention aligned with −U_{j−1}+2U_j−U_{j+1}=h²g_j.",
+    "mathematical_check": "Consider a one-dimensional mesh x_0,…,x_{N+1} on [0,1], mark U_0=U_{N+1}=0 and the interior U_j, then show the stencil links U_{j-1}, U_j, U_{j+1} at x_j with weights −1,2,−1 over h². Keep the displayed sign convention aligned with −U_{j−1}+2U_j−U_{j+1}=h²g_j.",
+    "screenshots": [
+      "screenshots/alg-centered-difference-dirichlet-bvp--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-centered-difference-dirichlet-bvp--01.png": "9f7a00c56387610fbf2e08b8f6ce84263679f8dc7a90600806280ef8824ebba4"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "numerical-boundary-value-problems"
+    ],
+    "source_lines": {
+      "33": "Set $h=1/(N+1)$, $x_j=jh$ for $0\\le j\\le N+1$, and $g_j=g(x_j)$ for $1\\le j\\le N$. The unknowns are the $N$ interior values $U_1,\\ldots,U_N$; set the boundary values $U_0=U_{N+1}=0$. The finite-difference equations are",
+      "37": "or $A_hU=g_h$, where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)$, with the known zero boundary values moved to the right-hand side (they contribute zero here)."
+    },
+    "source_snapshot": "snapshots/alg-centered-difference-dirichlet-bvp.md",
+    "source_sha256": "f9a58babf775b916eb9e62687fd9f591d2366bb18015a829400cf6e460cb3d33",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-dyadic-brownian-bridge-increment-tree",
+    "section": "Item body",
+    "lines": [
+      31,
+      48,
+      51,
+      55
+    ],
+    "symptom": "The definition explicitly constructs a finite rooted tree and specifies an exact parent-to-children split. A small diagram would make the geometric hierarchy and conservation relation quicker to scan; the prose is complete and the candidate is not a rendering defect.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "dyadic-increment-split-tree",
+    "exact_source_claim": "",
+    "selection_reason": "The definition explicitly constructs a finite rooted tree and specifies an exact parent-to-children split. A small diagram would make the geometric hierarchy and conservation relation quicker to scan; the prose is complete and the candidate is not a rendering defect.",
+    "concrete_diagram_content": "For a parent interval [u,u+h] carrying ΔW∈R^m, show two half intervals [u,u+h/2] and [u+h/2,u+h] carrying ΔW_L=ΔW/2+Z and ΔW_R=ΔW/2−Z, with fresh Z~N_m(0,(h/4)I_m). Label ΔW_L+ΔW_R=ΔW. At a generic node length ℓ, label conditional cross-covariance Cov(ΔW_L,ΔW_R | ΔW)=−(ℓ/4)I_m. Indicate a finite ordered request list refines only named leaves and retains parents.",
+    "mathematical_check": "The child interval lengths are h/2; the maps have codomain R^m; the child sum is exactly ΔW. Conditional on a fixed parent, the shared fixed halves and opposite innovations give covariance −(h/4)I_m, so the children are conditionally dependent. Keep this distinct from the separately proved unconditional independence at fixed dyadic depth and do not imply predictability for data-dependent refinement.",
+    "screenshots": [
+      "screenshots/alg-dyadic-brownian-bridge-increment-tree--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-dyadic-brownian-bridge-increment-tree--01.png": "94f09624ced391163ee05370fe59f905f8261202126a6d4a2ac7dac51619689b"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "adaptive-stochastic-paths-and-brownian-bridge-coupling"
+    ],
+    "source_lines": {
+      "31": "Assume the Axiom of Choice as in the finite-dimensional Gaussian and Brownian",
+      "48": "predictable. In an adaptive run, a finite work budget supplies a finite list",
+      "51": "Conditional on a fixed parent, the child sum is fixed and their conditional",
+      "55": "data-dependent set of requested leaves."
+    },
+    "source_snapshot": "snapshots/alg-dyadic-brownian-bridge-increment-tree.md",
+    "source_sha256": "41a92edd58af178fcd98f085e5544f323fcfa97c7c7235a05e6b3ab22490708e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "01",
+      "01"
+    ],
+    "candidate_certainty": "editorial-candidate-only",
+    "additional_candidate_observations": [
+      {
+        "reason": "The definition explicitly constructs a finite rooted tree and specifies an exact parent-to-children split. A small diagram would make the geometric hierarchy and conservation relation quicker to scan; the prose is complete and the candidate is not a rendering defect.",
+        "content": "For a parent interval [u,u+h] carrying ΔW∈R^m, show two half intervals [u,u+h/2] and [u+h/2,u+h] carrying ΔW_L=ΔW/2+Z and ΔW_R=ΔW/2−Z, with fresh Z~N_m(0,(h/4)I_m). Label ΔW_L+ΔW_R=ΔW. At a generic node length ℓ, label conditional cross-covariance Cov(ΔW_L,ΔW_R | ΔW)=−(ℓ/4)I_m. Indicate a finite ordered request list refines only named leaves and retains parents.",
+        "check": "The child interval lengths are h/2; the maps have codomain R^m; the child sum is exactly ΔW. Conditional on a fixed parent, the shared fixed halves and opposite innovations give covariance −(h/4)I_m, so the children are conditionally dependent. Keep this distinct from the separately proved unconditional independence at fixed dyadic depth and do not imply predictability for data-dependent refinement."
+      }
+    ]
+  },
+  {
+    "id": "alg-finite-markov-closed-class-decomposition",
+    "section": "Item body",
+    "lines": [
+      27,
+      31,
+      33
+    ],
+    "symptom": "The algorithm defines a positive-transition graph, computes strongly connected components, and distinguishes closed communicating classes from transient components. A small illustrative graph with SCC boundaries could clarify the direction convention and closure test, but the prose and matrix formulas are complete; this is an editorial candidate, not a defect.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potentially useful directed graph/SCC decomposition diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm defines a positive-transition graph, computes strongly connected components, and distinguishes closed communicating classes from transient components. A small illustrative graph with SCC boundaries could clarify the direction convention and closure test, but the prose and matrix formulas are complete; this is an editorial candidate, not a defect.",
+    "concrete_diagram_content": "Use a finite example column-stochastic P and draw j→i exactly when P_ij>0. Show one closed SCC C with no outgoing edges to S\\C and a transient SCC with a path to C. Label row-transition K=P^T and ensure K_ij=P_ji so the same graph is i→j under row-source convention. Use distinct edge arrows and mark any self-loops consistently; demonstrate SCC condensation without implying a general stochastic-chain diagram.",
+    "mathematical_check": "Use a finite example column-stochastic P and draw j→i exactly when P_ij>0. Show one closed SCC C with no outgoing edges to S\\C and a transient SCC with a path to C. Label row-transition K=P^T and ensure K_ij=P_ji so the same graph is i→j under row-source convention. Use distinct edge arrows and mark any self-loops consistently; demonstrate SCC condensation without implying a general stochastic-chain diagram.",
+    "screenshots": [
+      "screenshots/alg-finite-markov-closed-class-decomposition--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-finite-markov-closed-class-decomposition--01.png": "e876c6b3f24c980d2c48e3bb76946d09306ef9e14bcf8982fe436967a9e4b6c2"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "certified-stationary-distribution-and-hitting-statistic-numerics"
+    ],
+    "source_lines": {
+      "27": "**Graph convention.** For any finite real column-stochastic matrix $P$ on $S=\\{1,\\ldots,n\\}$, the positive-transition graph has a directed edge $j\\to i$ exactly when $P_{ij}>0$. This defines the communicating classes and closed classes for real matrices, whether or not their entries can be computed exactly.",
+      "31": "**Output.** A partition of $S$ into the strongly connected components of the directed graph of positive transitions, the list of closed communicating classes, and the remaining transient states.",
+      "33": "**Procedure.** Form the usual row-transition matrix $K=P^{\\mathsf T}$. Initialize a Boolean relation $R_{ij}$ to true exactly when $i=j$ or $K_{ij}>0$. For $k=1,\\ldots,n$, and then for every $i,j$, replace $R_{ij}$ by $R_{ij}\\lor(R_{ik}\\land R_{kj})$. Place $i,j$ in the same component exactly when both $R_{ij}$ and $R_{ji}$ are true. Mark a component $C$ closed exactly when $K_{ij}=0$ for every $i\\in C$ and $j\\notin C$. Return the closed components, the nonclosed components, and their state labels in increasing order. The procedure uses finitely many exact comparisons and Boolean updates; no sparse storage format or cost bound is asserted. It is a graph computation under the exact-comparison interface, not a claim that positivity of arbitrary unrepresented real numbers can be decided from rounded approximations."
+    },
+    "source_snapshot": "snapshots/alg-finite-markov-closed-class-decomposition.md",
+    "source_sha256": "dae1c996570dbc9b4fda4aea89fa11b2581ac05fb5fe6f45b07438be4188be86",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-gillespie-direct-method-for-reaction-networks",
+    "section": "Item body",
+    "lines": [
+      38,
+      40,
+      42,
+      43,
+      44,
+      45,
+      46,
+      48
+    ],
+    "symptom": "The algorithm gives exact state updates, exponential waiting times, cumulative propensity channel selection, absorption, horizon, and finite-budget prefix statuses.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "marked continuous-time jump path",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm gives exact state updates, exponential waiting times, cumulative propensity channel selection, absorption, horizon, and finite-budget prefix statuses.",
+    "concrete_diagram_content": "For a small explicitly supplied reaction network, draw states x∈E with each channel j arrow x→x+ν_j labeled a_j(x); annotate total exit rate λ(x)=Σ_j a_j(x), waiting time τ=E_{n+1}/λ(x), and channel selection by cumulative propensity intervals in U_{n+1}. Show λ=0 as absorption, t+τ≥T as horizon, and budget exhaustion as an incomplete path prefix. Never imply this ideal random source is a finite pseudorandom generator.",
+    "mathematical_check": "For a small explicitly supplied reaction network, draw states x∈E with each channel j arrow x→x+ν_j labeled a_j(x); annotate total exit rate λ(x)=Σ_j a_j(x), waiting time τ=E_{n+1}/λ(x), and channel selection by cumulative propensity intervals in U_{n+1}. Show λ=0 as absorption, t+τ≥T as horizon, and budget exhaustion as an incomplete path prefix. Never imply this ideal random source is a finite pseudorandom generator.",
+    "screenshots": [
+      "screenshots/alg-gillespie-direct-method-for-reaction-networks--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-gillespie-direct-method-for-reaction-networks--01.png": "71bae24c51744172447574c5880a168ad404645e1e2362af6d3f9478c52a3817"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "stochastic-reaction-jump-simulation-and-coupling"
+    ],
+    "source_lines": {
+      "38": "**Inputs.** A finite state set $E\\subseteq\\mathbb Z^d$, a finite-channel reaction propensity system from [[def-reaction-network-propensity-system-and-generator]], an initial state $x_0\\in E$, a horizon $T>0$, and an optional event budget $B\\in\\mathbb N_0\\cup\\{\\infty\\}$, defaulting to $\\infty$, where $\\mathbb N_0:=\\{0,1,2,\\ldots\\}$. The random source is a sequence $(E_n,U_n)_{n\\ge1}$ with $E_n\\sim\\operatorname{Exp}(1)$ and $U_n$ uniform on $[0,1]$, all coordinates mutually independent. The countable product construction for these input laws uses Countable Choice and Dependent Choice by [[thm-countable-product-of-probability-spaces]]; the exponential law uses Countable Choice by [[thm-exponential-and-weibull-survival-laws]]. For the uniform law, [[thm-lebesgue-measure-is-a-complete-measure]] makes the set function in [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]] a measure, and [[thm-lebesgue-measure-of-a-box-of-every-kind]] gives its restriction to $[0,1]$ mass one and interval probabilities equal to interval lengths.",
+      "40": "**Procedure.** Set $t=0$, $x=x_0$, $n=0$, and record the initial state. While $t<T$:",
+      "42": "1. Compute $\\lambda(x)=\\sum_{j=1}^R a_j(x)$. If $\\lambda(x)=0$, keep the state equal to $x$ through $T$ and return status absorbed.",
+      "43": "2. If $n=B$, return the path prefix through $(t,x)$ with status budget-exhausted; this status does not assert that the horizon was reached.",
+      "44": "3. Set $\\tau=E_{n+1}/\\lambda(x)$. If $t+\\tau\\ge T$, keep the state equal to $x$ through $T$ and return status horizon.",
+      "45": "4. Set $J$ to the least index with $U_{n+1}<\\lambda(x)^{-1}\\sum_{j=1}^J a_j(x)$. If the null event $U_{n+1}=1$ occurs, use the largest index with $a_j(x)>0$. This rule never selects a zero-rate channel.",
+      "46": "5. Set $t\\leftarrow t+\\tau$, $x\\leftarrow x+\\nu_J$, append the marked event $(t,J,x)$, and set $n\\leftarrow n+1$.",
+      "48": "If the loop reaches $t=T$, return the path through $T$ with status horizon. Each event uses a linear scan of the $R$ propensities and a linear cumulative channel search; no update-tree acceleration is part of this procedure. If $B<\\infty$ and the budget expires before $T$, the returned prefix is incomplete."
+    },
+    "source_snapshot": "snapshots/alg-gillespie-direct-method-for-reaction-networks.md",
+    "source_sha256": "f5546e2b4622372c5d68d7f3de1fd713725ebb886fd085f8b095833e14da05fa",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-mgrit-multilevel-recursive-cycle",
+    "section": "Item body",
+    "lines": [
+      34,
+      44
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "multilevel time-grid and recursive correction schematic",
+    "exact_source_claim": "The recursive cycle partitions each level into F/C points, restricts residuals, solves recursively on the coarse level, prolongs corrections, and applies pre/post-relaxation; ν_ℓ controls recursive visits.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-mgrit-multilevel-recursive-cycle--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-mgrit-multilevel-recursive-cycle--01.png": "01cfa74b63d79af396ad97fb5ee5f9f1e59cceb8ec41574ef0ddd80f1cebaee1"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "parallel-in-time-parareal-and-mgrit"
+    ],
+    "source_lines": {
+      "34": "Input: levels $\\ell=0,\\ldots,L$ with $L\\ge1$; fine-grid systems $A_\\ell u_\\ell=b_\\ell$ of the form in [[def-linear-all-at-once-time-operator]]; coarsening factors $m_\\ell\\ge2$ dividing $N_\\ell$ with $N_{\\ell+1}=N_\\ell/m_\\ell$; transfers $P_\\ell,R_\\ell$ from the F/C construction in [[alg-mgrit-two-level-cycle]]; and pre/post-relaxations selected from its F- and FCF-relaxations. At each level $\\ell<L$, form the practical coarse matrix $A_{\\ell+1}$ with identity diagonal blocks and subdiagonal blocks $-\\Psi_{\\ell,j}$ as in [[alg-mgrit-two-level-cycle]]. Each noncoarsest level has a positive integer recursive visit count $\\nu_\\ell$. Also supply an initial fine-level iterate, a chosen norm on the fine-level residual space as in [[def-norm-and-normed-space]], outer cycle budget $J_{\\rm out}\\ge0$, and residual tolerance $\\varepsilon\\ge0$. The hierarchy must provide a nonsingular coarse system at every level and an exact solve on level $L$. V-cycles use $\\nu_\\ell=1$ and W-cycles use $\\nu_\\ell=2$. This algorithm gives no existence or convergence claim for a hierarchy that fails these input conditions.",
+      "44": "No two-grid contraction is transferred to this recursive cycle; convergence requires a bound for its actual full recursive error operator."
+    },
+    "source_snapshot": "snapshots/alg-mgrit-multilevel-recursive-cycle.md",
+    "source_sha256": "a1f5d628ccae7ba6ab94ac440c435a2465c2d1b4c3c406510c3bfa89f27eb292",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-mgrit-two-level-cycle",
+    "section": "Item body",
+    "lines": [
+      40,
+      42,
+      43,
+      45,
+      47,
+      49,
+      50
+    ],
+    "symptom": "The source defines a C/F partition, interpolation P, restriction R, exact coarse Schur complement, practical coarse solve, and pre/post relaxations in an ordered cycle.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "fine/coarse grid and correction-flow diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The source defines a C/F partition, interpolation P, restriction R, exact coarse Schur complement, practical coarse solve, and pre/post relaxations in an ordered cycle.",
+    "concrete_diagram_content": "Show N fine intervals partitioned into m-step coarse intervals, with C nodes at multiples jm and F nodes between them. Label P as coarse correction interpolation and R as residual restriction; label the exact coarse operator R A_t P= A_CC−A_CF A_FF^{-1}A_FC. Show the cycle order pre-relaxation → residual restriction → A_c z=ρ with z_0=0 and z_j=ρ_j+Ψ_j z_{j−1} → correction u←u+Pz → post-relaxation. Keep the exact Schur operator distinct from practical A_c.",
+    "mathematical_check": "Show N fine intervals partitioned into m-step coarse intervals, with C nodes at multiples jm and F nodes between them. Label P as coarse correction interpolation and R as residual restriction; label the exact coarse operator R A_t P= A_CC−A_CF A_FF^{-1}A_FC. Show the cycle order pre-relaxation → residual restriction → A_c z=ρ with z_0=0 and z_j=ρ_j+Ψ_j z_{j−1} → correction u←u+Pz → post-relaxation. Keep the exact Schur operator distinct from practical A_c.",
+    "screenshots": [
+      "screenshots/alg-mgrit-two-level-cycle--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-mgrit-two-level-cycle--01.png": "9344109652ba73a341edeccaaea03aba9c284f0ecc4ce5a7dd5e92c27ca799b6"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "parallel-in-time-parareal-and-mgrit"
+    ],
+    "source_lines": {
+      "40": "Input: a linear fine-grid system $A_tu=b$ with $N\\ge1$ fine intervals as in [[def-linear-all-at-once-time-operator]], a coarsening factor $m\\ge2$ dividing $N$ and its C/F partition as in [[lem-mgrit-exact-coarse-elimination]], practical coarse propagators $\\Psi_j\\in\\mathbb R^{d\\times d}$ for $1\\le j\\le N_c:=N/m$, an initial fine-grid iterate $u_{\\rm in}$, pre- and post-relaxation choices from $\\{F,FCF\\}$, a real-valued norm on the fine-grid residual space as in [[def-norm-and-normed-space]], a nonnegative integer cycle budget $J_{\\rm cyc}$, and a residual tolerance $\\varepsilon\\ge0$. The symbol $J_{\\rm cyc}$ is the number of permitted cycles; the coarse-interval count is $N_c$ (the letter $J$ in [[lem-mgrit-exact-coarse-elimination]] denotes that lemma's coarse-interval count). The output is the last iterate, its residual norm, the number of completed cycles, and status `converged` or `budget-exhausted`.",
+      "42": "In F/C ordering define ideal interpolation $P$ and restriction $R$ by",
+      "43": "$$P=\\begin{bmatrix}-A_{FF}^{-1}A_{FC}\\\\ I_C\\end{bmatrix}, \\qquad R=\\begin{bmatrix}-A_{CF}A_{FF}^{-1}&I_C\\end{bmatrix}.$$",
+      "45": "The exact coarse operator is the Schur complement $RA_tP=A_{CC}-A_{CF}A_{FF}^{-1}A_{FC}$ from [[lem-mgrit-exact-coarse-elimination]]. The practical correction matrix $A_c$ has identity diagonal blocks and subdiagonal blocks $-\\Psi_j$ for $2\\le j\\le N_c$; its first row corresponds to the fixed zero initial correction $z_0=0$. For any right-hand side $\\rho$, forward substitution uniquely solves $A_cz=\\rho$ by setting $z_0=0$ and, in increasing order for $j=1,\\ldots,N_c$, setting $z_j=\\rho_j+\\Psi_jz_{j-1}$. Thus $A_c$ is invertible even when an individual $\\Psi_j$ is singular.",
+      "47": "Define the relaxations on $A_tu=b$ as follows. An F-relaxation holds every C-value fixed and, for each coarse interval $j=1,\\ldots,N_c$, updates its F-indices $i=(j-1)m+1,\\ldots,jm-1$ in increasing order: set $u_1=b_1$ if $i=1$, and otherwise set $u_i=b_i+\\Phi_i u_{i-1}$. Different coarse intervals have independent F-updates and may be processed in parallel. A C-relaxation holds every F-value fixed and, for $j=1,\\ldots,N_c$ in increasing order, sets $u_{jm}=b_{jm}+\\Phi_{jm}u_{jm-1}$; these C-updates are independent because $m\\ge2$ and each predecessor is an F-index. An FCF-relaxation applies F-relaxation, then C-relaxation, then F-relaxation. Each relaxation is a finite linear update; write $S_{\\rm pre}$ and $S_{\\rm post}$ for the error maps of the selected pre- and post-relaxations.",
+      "49": "For one cycle from a current iterate $u$, apply the selected pre-relaxation; form $r=b-A_tu$ and $\\rho=Rr$; solve $A_cz=\\rho$ by the forward substitution above; correct $u\\leftarrow u+Pz$; then apply the selected post-relaxation. The exact error-propagation matrix of this fixed cycle is",
+      "50": "$$E=S_{\\rm post}(I-PA_c^{-1}RA_t)S_{\\rm pre}.$$"
+    },
+    "source_snapshot": "snapshots/alg-mgrit-two-level-cycle.md",
+    "source_sha256": "0df3850f0a525e3523debac88227aa9db1b229feaa54705a93ef10bbfb55d207",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-multiple-shooting-for-nonlinear-bvps",
+    "section": "Item body",
+    "lines": [
+      29,
+      31,
+      35,
+      37
+    ],
+    "symptom": "The algorithm has approximate segment maps, continuity residuals, endpoint boundary residual, and a finite-budget Newton update. A labeled mesh picture could distinguish segment starts and computed endpoint matches; the source already gives the exact row convention.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potentially useful multiple-shooting mesh and residual diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm has approximate segment maps, continuity residuals, endpoint boundary residual, and a finite-budget Newton update. A labeled mesh picture could distinguish segment starts and computed endpoint matches; the source already gives the exact row convention.",
+    "concrete_diagram_content": "Draw a<t_0<…<t_N=b with segment-start unknowns s_0,…,s_N, arrows labeled tilde-Phi_i from s_i to its computed endpoint, residual arrows/labels tilde-Phi_i(s_i)-s_{i+1} for i=0,…,N−1, and terminal boundary block B(s_0,s_N). Indicate the residual vector is square in (N+1)d variables. Do not imply approximate segment trajectories necessarily join or certify an exact BVP solution; line 37 explicitly disclaims that.",
+    "mathematical_check": "Draw a<t_0<…<t_N=b with segment-start unknowns s_0,…,s_N, arrows labeled tilde-Phi_i from s_i to its computed endpoint, residual arrows/labels tilde-Phi_i(s_i)-s_{i+1} for i=0,…,N−1, and terminal boundary block B(s_0,s_N). Indicate the residual vector is square in (N+1)d variables. Do not imply approximate segment trajectories necessarily join or certify an exact BVP solution; line 37 explicitly disclaims that.",
+    "screenshots": [
+      "screenshots/alg-multiple-shooting-for-nonlinear-bvps--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-multiple-shooting-for-nonlinear-bvps--01.png": "e7348a159cae5b901fb5a280dd7f97445ea34e7c7329d59147e0342d8e0e9ead"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "nonlinear-boundary-value-solvers"
+    ],
+    "source_lines": {
+      "29": "Fix a mesh $a=t_0<\\cdots<t_N=b$, $N\\ge1$, and an open product domain of segment starts $(s_0,\\ldots,s_N)$ on which $B$ and every certified segment endpoint map are $C^1$, meaning they are totally differentiable with continuous derivative entries. Inputs are an initial tuple in this domain, a residual tolerance $\\tau\\ge0$, and a correction budget $M\\in\\mathbb N_0$. Each evaluator supplies an approximate endpoint map $\\widetilde\\Phi_i$ and its derivative. Form the computed square residual with rows $\\widetilde\\Phi_i(s_i)-s_{i+1}$ for $0\\le i<N$ and $B(s_0,s_N)$; its block Jacobian is the matrix in [[prop-multiple-shooting-residual-block-jacobian]]. For $k=0,1,\\ldots,M$, in this order:",
+      "31": "1. Evaluate the residual, its Jacobian, and the approximate segment trajectories. If any evaluator fails, return the last valid tuple with status evaluator-failure and no residual certificate.",
+      "35": "5. If the proposed tuple is outside the open product domain, return the last tuple with status invalid-trial; otherwise accept it as the next iterate.",
+      "37": "The procedure applies the finite-budget Newton checks to the $(N+1)d$ variables. Its residual-tolerance status concerns the approximate map that was evaluated. It does not certify that the segment approximations join, that an exact BVP solution exists, or that the procedure converges from arbitrary starts."
+    },
+    "source_snapshot": "snapshots/alg-multiple-shooting-for-nonlinear-bvps.md",
+    "source_sha256": "379052abb431758d5d60b1f0d9b70b1d7284a3c2ed856632a63011ced75259e7",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-periodic-orbit-pseudoarclength-continuation",
+    "section": "Item body",
+    "lines": [
+      34,
+      36,
+      40,
+      48
+    ],
+    "symptom": "The algorithm relies on tangent direction, predictor offset, a section normal, and orientation checks; a branch sketch can expose sign/orientation mismatches and distinguish the current tangent from the previous section normal.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-pseudo-arclength-branch-section-diagram",
+    "exact_source_claim": "For F(x,T,μ)=0 with a one-dimensional local branch, a certified tangent τ∈ker DF drives the predictor while the supplied previous unit orientation defines a transverse section τ_kᵀ(y-z_p)=0.",
+    "selection_reason": "The algorithm relies on tangent direction, predictor offset, a section normal, and orientation checks; a branch sketch can expose sign/orientation mismatches and distinguish the current tangent from the previous section normal.",
+    "concrete_diagram_content": "Draw a local solution curve in (x,T,μ), a certified root z_p, tangent τ for the predictor step, and the transverse section hyperplane τ_kᵀ(y-z_p)=0 using the previous unit orientation τ_k as its normal. Mark the accepted corrected point at the unique local section intersection; annotate F(y)=0 on the branch and keep curve/tangent arrows consistent with the prescribed orientation.",
+    "mathematical_check": "Draw a local solution curve in (x,T,μ), a certified root z_p, tangent τ for the predictor step, and the transverse section hyperplane τ_kᵀ(y-z_p)=0 using the previous unit orientation τ_k as its normal. Mark the accepted corrected point at the unique local section intersection; annotate F(y)=0 on the branch and keep curve/tangent arrows consistent with the prescribed orientation.",
+    "screenshots": [
+      "screenshots/alg-periodic-orbit-pseudoarclength-continuation--01.png",
+      "screenshots/alg-periodic-orbit-pseudoarclength-continuation--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-periodic-orbit-pseudoarclength-continuation--01.png": "0ef31f2c3714b7e46de86173efb0180194dc3aa6e063e8e4c3123b9152a7df8a",
+      "screenshots/alg-periodic-orbit-pseudoarclength-continuation--02.png": "7e4c6f46ce33b423dc5928fc8f204470a1434ea31bc795d1fa810352c63eb5ab"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "periodic-orbit-shooting-collocation-and-floquet-error"
+    ],
+    "source_lines": {
+      "34": "Let $f(x,\\mu)$ be a $C^2$ one-parameter family in the map convention of [[def-ck-euclidean-maps-and-diffeomorphisms]], and let $G(x,T,\\mu)$ be the parameterized phase-bordered shooting map of [[def-validated-periodic-shooting-jet-enclosure]]. For its static-parameter augmented field $g(x,\\mu)=(f(x,\\mu),0)$, supply the common-tube hypotheses of [[thm-c2-ode-flow-on-common-tube]] on each continuation neighborhood: an open set of initial states whose solutions exist on an open interval containing the required period range and remain in one compact convex subset of the field domain. That theorem makes the shooting map $C^2$ on the declared neighborhood. The branch residual is $F=G:\\mathbb R^{d+2}\\to\\mathbb R^{d+1}$. If a fold check is requested, additionally supply a verified $C^3$ neighborhood of the shooting map $G$ on the fold subtube, as required by [[alg-pseudo-arclength-continuation-with-certified-local-corrector]]; $C^2$ regularity of $f$ alone is not this evidence. Without it, retain fold status inconclusive and do not invoke the fold callback, while ordinary continuation may proceed without a fold request. A finite periodic-orbit continuation request supplies a valid certified Euclidean seed section-root ball with its isolating curve-chart neighborhood and rank certificate, as required by [[alg-pseudo-arclength-continuation-with-certified-local-corrector]], a unit orientation, step size, requested step count, finite continuation/corrector budgets, residual tolerance, angle margin, and the sound flow/jet range provider.",
+      "36": "At a certified root, a tangent routine must certify a unit vector in $\\ker DF$ and a rank-$d+1$ condition. The predictor is advanced along that tangent. The periodic procedure [[alg-validated-periodic-orbit-corrector]] in section mode supplies a separate Krawczyk certificate for the square shooting/section residual. Forward its complete finite input package: the candidate mode and any required differentiable pointwise/segment evaluators (or choose its enclosure-guided mode), rational initial candidate, arbitrary rational physical validation box and its open convex shooting domain, nonzero rational phase covector and rational reference point, validated-jet step counts and arithmetic caps, dyadic preconditioner and exact rational inverse witness for its normalized residual, physical minimum box width, and box/update budgets. It uses its affine dyadic unit-box chart for positive side lengths, retains the exact physical box and complete mapped partition, and returns inconclusive for validation on degenerate boxes while retaining their candidate use. For possibly nonrational tangent/predictor data, forward certified outward rational enclosures of the affine section row and its derivative; unavailable bounds return inconclusive. For every jet query reorder physical $(x,T,\\mu)$ to the jet's $(x,\\mu,T)$ coordinates, and return its Jacobian columns to $(x,T,\\mu)$ before appending a section row. Preserve this rule in candidate, Krawczyk and continuation-evaluator calls.",
+      "40": "**Physical evaluator bridge.** At each exact queried point $y=(x,T,\\mu)$, obtain a certified finite rational box containing $y$ within the shooting domain and the declared physical continuation tube; use its singleton when $y$ is rational. Every augmented range-provider tube inclusion required by the jet is checked separately in its own augmented coordinates. A nonrational query requires supplied certified coordinate enclosures, not substitution of a nearby rational point. Run the validated jet on that physical box with the stated coordinate/column permutation. Its residual and physical Jacobian intervals enclose $F(y)$ and $DF(y)$. Coordinatewise rational midpoints and the sums of the coordinate/entry radii give the generic evaluator's certified Euclidean residual error and operator-Jacobian error by [[lem-rational-box-affine-chart-and-dyadic-enclosure]]. For its current affine section form the square residual $\\mathcal G(y)=(F(y),\\tau_k^T(y-z_p))$ and its physical Jacobian, appending sound interval enclosures of the affine row and its constant term; include all row uncertainty in the square midpoint/error data $\\widehat g,\\widehat A,\\epsilon_g,\\epsilon_J$. These are derivatives in physical coordinates, not the normalized Krawczyk columns $DF\\,D$. If only normalized data are retained, undo their known positive diagonal chart exactly and enclose the physical columns before forming these bounds. Missing finite point/row/error enclosures returns `root-certificate-inconclusive`; a certified domain/tube exit keeps the generic `tube-exit` status.",
+      "48": "The generic section keeps the supplied previous unit orientation fixed as its normal during each attempt, while the predictor uses the current certified tangent candidate. Forward this previous normal and certify its angle with the current true kernel, along with the generic predictor-offset/chart inequalities. Finite termination is conditional on every invoked flow/jet, tangent, section and fold callback returning in finite time; an outer work budget is not a timeout for a nonreturning callback."
+    },
+    "source_snapshot": "snapshots/alg-periodic-orbit-pseudoarclength-continuation.md",
+    "source_sha256": "1a0c5115c51097cc38cce9baca25bbb28ba5541e109957872a1d9432014eca76",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain-editorial-candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+    "section": "Item body",
+    "lines": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      97,
+      98,
+      99,
+      100,
+      101
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "curve continuation / predictor-corrector geometry",
+    "exact_source_claim": "The seed certifies a regular solution-curve point by intersecting F(z)=0 with a transverse hyperplane; each step predicts along a tangent and uses the previous orientation as the section normal.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-pseudo-arclength-continuation-with-certified-local-corrector--01.png",
+      "screenshots/alg-pseudo-arclength-continuation-with-certified-local-corrector--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-pseudo-arclength-continuation-with-certified-local-corrector--01.png": "f3ed08c8c921e6beb19ed6001f67760a503ac40b36ae37d8fcf0bf11d861ad64",
+      "screenshots/alg-pseudo-arclength-continuation-with-certified-local-corrector--02.png": "5b9943e69b9e28c3a0c99aadcda29ef9ea35bb83551aeb3d522725a392fd5efd"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pseudo-arclength-continuation-and-fold-certificates"
+    ],
+    "source_lines": {
+      "48": "$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$",
+      "49": "where $\\tau_{-1}$ is unit and the section is transverse to the regular local",
+      "50": "solution branch. Thus the seed certifies one solution point of $F=0$ by",
+      "51": "intersecting the branch with a hyperplane; it does not claim that $F=0$ has an",
+      "52": "isolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood",
+      "53": "in which every zero of $F$ lies on the certified local curve chart and a",
+      "54": "verified rank-$n$ condition on that chart.",
+      "97": "3. Set $z_p=\\bar z_k+h\\widehat t_k$ and retain the **previous** orientation as section normal:",
+      "98": "$$G_k(z)=\\bigl(F(z),\\tau_k^T(z-z_p)\\bigr).$$",
+      "99": "The chart certificate supplies a unit-speed chart $c_k$ with $c_k(0)=z_k^*$, $c_k'(0)=t_k$, an interval $[-r_{\\rm ch}^-,r_{\\rm ch}^+]$, a number $\\kappa>0$, and a neighborhood $V_k$ in which every zero of $F$ belongs to that chart interval. Verify $\\tau_k^Tc_k'(u)\\ge\\kappa$ throughout the interval and",
+      "100": "$$h a_k>r_k,\\qquad h a_k+r_k\\le\\kappa r_{\\rm ch}^+.$$",
+      "101": "These checks bound $d=\\tau_k^T(z_p-z_k^*)$ between $h a_k-r_k$ and $h a_k+r_k$, so the selected section has one forward intersection on the supplied chart by [[lem-transverse-hyperplane-selects-unique-local-branch-point]]. A failed chart angle gives `tangent-angle-failure`; failed offset/length evidence gives `root-certificate-inconclusive`. If the predictor, proposed ball or required chart leaves the declared tube, return `tube-exit`."
+    },
+    "source_snapshot": "snapshots/alg-pseudo-arclength-continuation-with-certified-local-corrector.md",
+    "source_sha256": "cd6e4daadc42a151e006aa4590b23eb3dd10d67c4dc74c2e549a953b17b10240",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-safeguarded-hybrid-event-location-and-restart",
+    "section": "Item body",
+    "lines": [
+      33,
+      37,
+      39,
+      41,
+      43,
+      49,
+      51,
+      55,
+      56,
+      57,
+      59
+    ],
+    "symptom": "The algorithm explicitly processes outgoing mode transitions, isolates and orients guard roots, selects the earliest enabled root with fixed-priority tie handling, applies a reset, and restarts in a target mode.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "hybrid mode/guard/reset transition graph with event-time strip",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm explicitly processes outgoing mode transitions, isolates and orients guard roots, selects the earliest enabled root with fixed-priority tie handling, applies a reset, and restarts in a target mode.",
+    "concrete_diagram_content": "Show a current mode m with smooth-flow segment on [a,b], each outgoing transition (m,n) labeled by guard g_mn=0 and orientation σ_mn; distinguish strictly opposite-oriented roots (no transition) from enabled candidates. Show earliest certified event selection, priority only for certified common-time ties, reset R into target mode n, and restart at reported upper endpoint τ̂ with ledger E updated by the displayed bound. Include no-event, inconclusive, domain-failure, and budget-exhausted outcomes only as status exits.",
+    "mathematical_check": "Show a current mode m with smooth-flow segment on [a,b], each outgoing transition (m,n) labeled by guard g_mn=0 and orientation σ_mn; distinguish strictly opposite-oriented roots (no transition) from enabled candidates. Show earliest certified event selection, priority only for certified common-time ties, reset R into target mode n, and restart at reported upper endpoint τ̂ with ledger E updated by the displayed bound. Include no-event, inconclusive, domain-failure, and budget-exhausted outcomes only as status exits.",
+    "screenshots": [
+      "screenshots/alg-safeguarded-hybrid-event-location-and-restart--01.png",
+      "screenshots/alg-safeguarded-hybrid-event-location-and-restart--02.png",
+      "screenshots/alg-safeguarded-hybrid-event-location-and-restart--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-safeguarded-hybrid-event-location-and-restart--01.png": "91a0cf5922323de741c2b22007765da8a9e737339a8138f2a8486608a43bb317",
+      "screenshots/alg-safeguarded-hybrid-event-location-and-restart--02.png": "70a4dda1b66d7982a0870612eae361219e2f0bf7e2bc2b1738e59cf68fa6d96d",
+      "screenshots/alg-safeguarded-hybrid-event-location-and-restart--03.png": "e826ff2bb27a14941dde59a436c71f31d2fe19082c9bc6fd03c88f7190ee2259"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "source_lines": {
+      "33": "**Inputs.** A smooth hybrid ODE system with a fixed total event-priority order; an initial mode, time $t_0$, and state; a finite bound $E_0\\ge0$ on the discrepancy between that state and the exact reference state at $t_0$ (take $E_0=0$ when the reference trajectory starts from the supplied state); a finite horizon $T\\ge t_0$; a finite trial-step provider; a finite enclosure provider satisfying [[def-certified-hybrid-event-enclosure]] for every accumulated mode prefix; a physical-time root-box width target $\\omega>0$; a separate guard-residual tolerance $\\epsilon>0$; and finite nonnegative integer limits $B_{\\mathrm{step}},B_{\\mathrm{root}},B_{\\mathrm{event}}$. All scalar certificate data used in decisions have finite exact rational representations, including $E_0,\\omega,\\epsilon,\\delta$ and the error, Lipschitz, and field bounds. Time values have finite exact representations. Each provider or certificate-validation call returns data or a failure status in finite time; all computations and comparisons use exact rational or certified outward interval arithmetic, and any comparison that cannot be certified returns `inconclusive`. The trial provider returns a finite interval $J=[a,b]$ with exact finite endpoints and positive rational duration $b-a$ with $a$ equal to the current reported time and $a<b\\le T$. For each trial interval use $\\theta=(t-a)/(b-a)$ and the transformed guard $\\widetilde h_{mn}(\\theta)=g_{mn}(a+(b-a)\\theta,y_{\\rm ref}(a+(b-a)\\theta))$. The root isolator then starts from the finite dyadic interval $[0,1]$, regardless of the physical-time endpoints. For $Q\\subseteq[0,1]$, write $J(Q)=[a+(b-a)\\inf Q,a+(b-a)\\sup Q]$. $B_{\\mathrm{root}}$ is the maximum number of root-isolator boxes processed for one guard on one trial interval, summed over initial isolation, root-box refinement, endpoint checks, and event-order refinement. The enclosure provider supplies justified local and total reference-error bounds, valid dense-guard, exact-guard, and exact-guard-derivative enclosures on every queried subinterval, and a certified positive separation bound $\\delta$ between consecutive selected exact event times on the horizon. It may use a rational residual-tube checker as one provider branch; no particular checker is required. A common-root certificate is a finite proof object with a finite sound validation procedure; it is admissible only when validated to certify that the unique exact roots in all named physical-time boxes occur at one common time. A certified exact singleton root is one such certificate. The error ledger $E$ is an upper bound on discrepancy between reported and reference states at the aligned mode-segment start. The provider accumulates a continuous piecewise-$C^1$ reconstruction $U$ from the last reported reset. The formula in [[def-heun-quadratic-dense-output]] is one possible reconstruction, not an error certificate.",
+      "37": "1. Initialize the current reported time, mode, and state from the inputs; set the accepted-event count and trial-step count to zero; set $E=E_0$. If the current time is $T$, return the completed prefix. If the trial-step budget is exhausted before reaching $T$, return `budget-exhausted` with the certified prefix. Check the event budget only after a next enabled event has been certified, so it does not prevent a no-event step from reaching $T$.",
+      "39": "2. Increment the trial-step count and request the next interval $J=[a,b]$. If the increment exceeds $B_{\\rm step}$, return `budget-exhausted`. If $a$ is not the current reported time or $a<b\\le T$ fails, return `inconclusive`. Extend $U$ by the proposed panel. Obtain and validate the provider's data for the whole accumulated prefix, including a $C^1$ reference-mode continuation on an open interval containing $J$, the total bound $\\eta_{\\rm ref}$, and each active guard's interval evaluators. Continue only on a `certified` response under [[def-certified-hybrid-event-enclosure]]; if the provider returns `inconclusive` or any required bound, inclusion, reset datum, or evaluator is missing, unjustified, or nonfinite, return `inconclusive` with the certified prefix.",
+      "41": "3. For each outgoing transition in its fixed order, initialize a processed-box counter $c_{mn}=0$ and apply [[alg-smooth-function-root-isolation]] to $\\widetilde h_{mn}$ on $[0,1]$. On each queried local interval $Q$, use the exact-guard range enclosure $E_{mn}(J(Q))$ and the derivative enclosure $(b-a)D_{mn}(J(Q))$; these enclose $\\widetilde h_{mn}(Q)$ and $\\widetilde h'_{mn}(Q)$. Set the minimum width to $\\eta=\\omega/(b-a)$ and the box budget to $B_{\\rm root}$. Add the returned processed-box count to $c_{mn}$. If any result is `inconclusive` or contains unresolved boxes, return `inconclusive`. The result is usable only when it is `complete`, so all roots in the physical interval $J$ are covered by excluded or certified boxes.",
+      "43": "4. Classify each certified local-time root box $Q$ using $D_{mn}(J(Q))$. If $\\sigma_{mn}D_{mn}(J(Q))\\subseteq(-\\infty,-\\nu_Q]$ for some $\\nu_Q>0$, record that root as strictly opposite-oriented and nontriggering. If $\\sigma_{mn}D_{mn}(J(Q))\\subseteq[\\nu_Q,\\infty)$ for some $\\nu_Q>0$, it is an enabled candidate. If neither inclusion is proved and $(b-a)\\operatorname{width}(Q)=0$, return `inconclusive`; otherwise call the refinement procedure below with requested physical width $w=(b-a)\\operatorname{width}(Q)/2$, then repeat this classification on the returned smaller unique-root box. If further refinement is required after the box budget is spent, return `budget-exhausted`; any other failure to certify a strict sign returns `inconclusive`.",
+      "49": "6. If every isolator is complete and every certified root is strictly opposite-oriented, accept the no-event panel. Set the current reported time to $b$ and state to $U(b)$, append the dense panel, and retain the aligned-start ledger $E$. Obtain updated certified local and total error bounds on the enlarged prefix; if the provider does not certify them, return `inconclusive`. A no-event decision is therefore based on complete root isolation and direction classification of the entire trial interval, not on endpoint signs or on the absence of guard roots.",
+      "51": "7. If enabled candidates remain, order their local-time root boxes. For boxes that are strictly disjoint, their interval order gives their physical root order. If two boxes meet only at a local-time endpoint $m$, query the root isolator on $\\{m\\}$ for each guard with minimum width $\\omega/(b-a)$ and the remaining budget, charging each call to that guard: two certified singleton roots give a common-root certificate at physical time $a+(b-a)m$ and a priority-selected tie; a singleton root-free result proves that guard's root is strictly to its box's side of $m$ and orders it against a root at $m$ or on the other side. If a singleton result is inconclusive, refine the boxes. For boxes with a nontrivial overlap, use a valid common-root certificate to establish exact simultaneity and apply the fixed priority among those enabled transitions; otherwise refine the overlapping boxes one bisection level at a time by requesting half their physical widths in step 4. If a box has zero physical width and still overlaps another candidate without a certified tie, return `inconclusive`. For same-guard boxes that touch at a bisection endpoint, the singleton check in step 5 either merges one root there or proves that the roots lie strictly on opposite sides. If the order is not certified before a box budget is exhausted, return `budget-exhausted`. Select the earliest enabled root or the priority-selected transition at a certified tie. Refine its box to physical width at most $\\omega$.",
+      "55": "9. If the accepted-event count is already $B_{\\rm event}$, return `budget-exhausted` with the certified prefix without applying another reset. Otherwise let $\\nu>0$ be the certified signed derivative margin on the selected physical-time root box. If that box is a singleton, its certified root is $\\tau=\\widehat\\tau$; set $\\Delta=0$. For a positive-length box, compute $\\Delta=(L_g\\eta_{\\rm ref}+\\epsilon_{\\rm obs})/\\nu$ by [[lem-transverse-hybrid-event-time-error]]. In both cases the selected box contains its unique exact root $\\tau$, and step 8 selects its upper endpoint, so $0\\le\\widehat\\tau-\\tau\\le\\Delta$. If the certified separation bound is missing or $\\Delta\\ge\\delta/3$, return `inconclusive` without restarting, since another selected exact event may occur before the reported time. Otherwise, separation by $\\delta$ ensures no next selected exact event occurs before $\\widehat\\tau$. Check that $(\\widehat\\tau,U(\\widehat\\tau))$ lies in the reset domain and that $(\\widehat\\tau,x^+)\\in D_n$, where $x^+$ is the actual proposed exact or approximate reset value and $n$ is the selected target mode; a failed check returns `domain-failure`. Apply the exact reset and set $\\epsilon_R=0$, or obtain a finite certified error bound $\\varepsilon_R\\ge0$ between the applied approximate reset value and $R(\\widehat\\tau,U(\\widehat\\tau))$; if that bound is unavailable, return `inconclusive`. A root at $T$ is processed by this same rule, and the output at $T$ is post-reset. The exact reference trajectory has reset at $\\tau$ and followed the outgoing field through the alignment time $\\widehat\\tau$; its flow over this lag contributes at most $M^+\\Delta$. By [[lem-reset-error-after-a-mistimed-hybrid-event]], then add the reported reset-evaluation error to set the next aligned-segment state-error bound to",
+      "56": "$$E\\leftarrow L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta+\\varepsilon_R.$$",
+      "57": "Then discard the pre-reset reconstruction, set the current reported time and state to $\\widehat\\tau$ and the applied reset value, start a new accumulated reconstruction in the selected mode, append the event certificate, and increment the accepted-event count. Before processing any later trial interval, step 2 must obtain certified provider data whose total reference-error bound is valid on that whole accumulated prefix and includes this aligned-start discrepancy (or is independently justified on that full prefix); if the provider cannot certify it, return `inconclusive` with the certified prefix. Continue from step 1. Whenever further step, root-box, or event work is required after its budget is spent, return `budget-exhausted` with the certified prefix.",
+      "59": "**Outputs.** A finite list of certified no-event panels and transverse event boxes with selected transitions, reset states, event-time bounds, and an updated state-error ledger; or an explicit `inconclusive`, `domain-failure`, or `budget-exhausted` status with the certified prefix. No no-event conclusion is drawn from endpoint signs alone."
+    },
+    "source_snapshot": "snapshots/alg-safeguarded-hybrid-event-location-and-restart.md",
+    "source_sha256": "698440ed7f3a73491f3b7fee7bcfa3f313866de467eaa243d327e77c6a6ef78e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+    "section": "Item body",
+    "lines": [
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "finite-volume mesh / flux-and-daughter map",
+    "exact_source_claim": "Cell masses M_j^k move through upwind boundary fluxes F_j^k, lose mass through d_j, and receive daughter mass through A_{jℓ}=K_{x_ℓ^c}(C_j); the rightmost flux is absorbing outflow.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-size-structured-finite-volume-flux-and-kernel-quadrature--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-size-structured-finite-volume-flux-and-kernel-quadrature--01.png": "5b501b76cb9ced84f379ae9711da04f046dc02e7a0eb97dcb5bf75ebdb92790e"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "38": "Input a partition $0=x_0<x_1<\\cdots<x_J=X$ with $J\\ge1$, a time step $\\Delta t>0$, a nonnegative current mass vector $M^k=(M_j^k)_{j=1}^J$, and the coefficients and kernel from [[def-size-structured-transport-and-division-kernel]]. Partition $[0,X]$ into disjoint cells $C_j=[x_{j-1},x_j)$ for $j<J$ and $C_J=[x_{J-1},X]$, with widths $h_j=x_j-x_{j-1}>0$ and centers $x_j^c=(x_{j-1}+x_j)/2$. Set $u_j^k=M_j^k/h_j$, the incoming flux $F_0^k=0$, the internal and outgoing upwind fluxes $F_j^k=g(x_j)u_j^k$ for $1\\le j\\le J$, and $d_j=\\mu(x_j^c)+\\gamma(x_j^c)$.",
+      "39": "",
+      "40": "For each parent cell $C_\\ell$, form nonnegative daughter coefficients",
+      "41": "",
+      "42": "$$A_{j\\ell}=\\frac{1}{h_\\ell}\\,Q_M\\bigl(y\\mapsto K_y(C_j);x_{\\ell-1},x_\\ell,1\\bigr),$$",
+      "43": "",
+      "44": "using [[alg-composite-midpoint-rule]] on the parent-size interval. Since the one-panel midpoint rule is $Q_M(f;x_{\\ell-1},x_\\ell,1)=h_\\ell f(x_\\ell^c)$, this gives $A_{j\\ell}=K_{x_\\ell^c}(C_j)\\ge0$. If $\\Delta t(g(x_j)/h_j+d_j)>1$ for any cell, return `invalid-cfl` without an update. Otherwise the finite-volume update is",
+      "45": "",
+      "46": "$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,d_jM_j^k+\\Delta t\\sum_{\\ell=1}^JA_{j\\ell}M_\\ell^k.$$",
+      "47": "",
+      "48": "The flux $F_J^k$ is absorbing outflow. The admissible variable-width CFL is $\\Delta t(g(x_j)/h_j+d_j)\\le1$ for every cell. If a grid or any required coefficient/kernel evaluation fails, return failure without a partial update. Otherwise return $M^{k+1}$ together with the fluxes and daughter coefficients used in the step."
+    },
+    "source_snapshot": "snapshots/alg-size-structured-finite-volume-flux-and-kernel-quadrature.md",
+    "source_sha256": "dbe16f36c8fbe13ebf9f37002e2bddadf128e5a7f5f8c8c32fc108b9ad2f0751",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-age-structured-renewal-finite-cutoff-model",
+    "section": "Item body",
+    "lines": [
+      28
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "characteristics / age-time transport diagram",
+    "exact_source_claim": "Age advances at speed one, newborn cohorts enter through the renewal inflow B_A(t), cohorts are removed when age reaches A, and because A>T no cohort born during [0,T] reaches that outflow.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-age-structured-renewal-finite-cutoff-model--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-age-structured-renewal-finite-cutoff-model--01.png": "4c4d64ef3f2b7a6e44a8b958a1e31b81b804e805dcdfe3791f7d4a4c7ac62689"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "28": "Fix $0<T<A$, bounded nonnegative Lipschitz rates $\\mu,\\beta:[0,A]\\to[0,\\infty)$, and initial density $n_0^A\\in L^1_+(0,A)$. The **finite-age renewal model with absorbing outflow** is the age transport problem on $0<a<A$ with the same renewal inflow $B_A(t)=\\int_0^A\\beta(a)n^A(t,a)\\,da$ as in [[def-age-structured-renewal-transport-problem]]. A cohort follows age speed $1$, retains its mortality survival $S(a,s)$ until it reaches $A$, and is then removed; no cohort enters from ages above $A$. The initial density is $n_0^A$ on $[0,A]$. A mild solution is the characteristic formula on $0<a<A$, with an initial-cohort branch for $a\\ge t$, a newborn branch for $a<t$, and zero extension to $a\\ge A$. Since $A>T$, no cohort born during $[0,T]$ reaches the outflow boundary."
+    },
+    "source_snapshot": "snapshots/def-age-structured-renewal-finite-cutoff-model.md",
+    "source_sha256": "887a3c68f0f79a63053454dbec474eadf772079e86c19b74133c82a4a063ed74",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-age-structured-renewal-transport-problem",
+    "section": "Definition",
+    "lines": [
+      37,
+      39,
+      43,
+      51,
+      53
+    ],
+    "symptom": "The two characteristic families meet at the renewal corner and the cases in the mild formula are naturally spatial; the preview contains the equations without a picture.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "characteristic-flow schematic",
+    "exact_source_claim": "The PDE transports age along a(t)=a(0)+t with mortality survival; the mild solution separates individuals from the initial cohort (a≥t) and births entering at age zero (0≤a<t), then follows each characteristic to time t (lines 37–53).",
+    "selection_reason": "The two characteristic families meet at the renewal corner and the cases in the mild formula are naturally spatial; the preview contains the equations without a picture.",
+    "concrete_diagram_content": "Draw the (time, age) quadrant with characteristics of slope da/dt=1. Show an initial-cohort ray from (0,a0) reaching (t,a0+t), with survival S(a0,t), and a boundary-birth ray from (s,0) reaching (t,t−s), with survival S(0,t−s). Mark the renewal boundary B(s), the switch a=t, and distinguish inflow at a=0 from absorbing age infinity; do not imply a finite age cutoff.",
+    "mathematical_check": "Draw the (time, age) quadrant with characteristics of slope da/dt=1. Show an initial-cohort ray from (0,a0) reaching (t,a0+t), with survival S(a0,t), and a boundary-birth ray from (s,0) reaching (t,t−s), with survival S(0,t−s). Mark the renewal boundary B(s), the switch a=t, and distinguish inflow at a=0 from absorbing age infinity; do not imply a finite age cutoff.",
+    "screenshots": [
+      "screenshots/def-age-structured-renewal-transport-problem--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-age-structured-renewal-transport-problem--01.png": "34c8dfdb629a8aa897667ac54047051d8439be1ba8bb1ec88f57fdc71e29c18a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "37": "$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$",
+      "39": "with initial density $n(0,a)=n_0(a)$ and inflow condition",
+      "43": "Here $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by",
+      "51": "A **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,",
+      "53": "$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$"
+    },
+    "source_snapshot": "snapshots/def-age-structured-renewal-transport-problem.md",
+    "source_sha256": "93f8a7bcee50644f96dead950e9d78fa4f27d4acda26d5ddf5e2d72a8fa4b260",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-ars222-additive-tableau-and-stages",
+    "section": "Definition",
+    "lines": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "method tableau/stage-dependency diagram",
+    "exact_source_claim": "The separate explicit and lower-triangular implicit tableaus define three stages, with two implicit solves at the nonzero diagonal stages.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw two aligned 3-stage tableaus with row/column labels 1,2,3 and vectors b,c; connect them to stage boxes Y1,Y2,Y3. Check explicit coefficients γ, δ, 1−δ and implicit coefficients γ,1−γ against the displayed matrices; make clear the Y2 and Y3 diagonal solves and that y+=Y3.",
+    "mathematical_check": "Draw two aligned 3-stage tableaus with row/column labels 1,2,3 and vectors b,c; connect them to stage boxes Y1,Y2,Y3. Check explicit coefficients γ, δ, 1−δ and implicit coefficients γ,1−γ against the displayed matrices; make clear the Y2 and Y3 diagonal solves and that y+=Y3.",
+    "screenshots": [
+      "screenshots/def-ars222-additive-tableau-and-stages--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-ars222-additive-tableau-and-stages--01.png": "1be01e51a75a3ebc7ef4bae1a2484fbce5b4d4bc5b496f19a70139b6cf63fdb0"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "imex-and-operator-splitting-methods"
+    ],
+    "source_lines": {
+      "36": "The explicit tableau and the lower-triangular implicit tableau, using the separate stage conventions of [[def-explicit-runge-kutta-tableau-and-stage-map]] and [[def-implicit-runge-kutta-stage-equations]], are",
+      "37": "$$\\widetilde A=\\begin{pmatrix}0&0&0\\\\\\gamma&0&0\\\\\\delta&1-\\delta&0\\end{pmatrix},\\quad \\widetilde b=(\\delta,1-\\delta,0),\\quad \\widetilde c=(0,\\gamma,1),$$",
+      "38": "$$A=\\begin{pmatrix}0&0&0\\\\0&\\gamma&0\\\\0&1-\\gamma&\\gamma\\end{pmatrix},\\quad b=(0,1-\\gamma,\\gamma),\\quad c=(0,\\gamma,1).$$",
+      "39": "For a step $h>0$ from $y$, the method is defined by",
+      "40": "$$Y_1=y,\\qquad Y_2=y+\\gamma h a(Y_1)+\\gamma h b(Y_2),$$",
+      "41": "$$Y_3=y+h\\bigl[\\delta a(Y_1)+(1-\\delta)a(Y_2)\\bigr]+h\\bigl[(1-\\gamma)b(Y_2)+\\gamma b(Y_3)\\bigr],\\qquad y^+=Y_3.$$"
+    },
+    "source_snapshot": "snapshots/def-ars222-additive-tableau-and-stages.md",
+    "source_sha256": "9026daa41c33514eff311edade12a0d7a238d388dfab8d68b15da6acb11661cd",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-explicit-runge-kutta-tableau-and-stage-map",
+    "section": "Item body",
+    "lines": [
+      35,
+      36,
+      37,
+      38,
+      40,
+      42
+    ],
+    "symptom": "The source explicitly calls the stage equations a stage graph and states that each stage is formed from preceding slopes, with a final weighted endpoint.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "explicit stage dependency graph",
+    "exact_source_claim": "",
+    "selection_reason": "The source explicitly calls the stage equations a stage graph and states that each stage is formed from preceding slopes, with a final weighted endpoint.",
+    "concrete_diagram_content": "Draw the admitted base (t,y), then stages i=1,…,s in increasing order. For each i show (t_i,Y_i)→K_i=f(t_i,Y_i), with incoming arrows from each j<i labeled h a_ij; show t_i=t+c_i h and Y_i=y+hΣ_{j<i}a_ijK_j. Connect all K_i to y^+=y+hΣ_i b_iK_i. Do not draw dependencies from j≥i, and mark stage pair domain failure/evaluation failure as status branches if statuses are included.",
+    "mathematical_check": "Draw the admitted base (t,y), then stages i=1,…,s in increasing order. For each i show (t_i,Y_i)→K_i=f(t_i,Y_i), with incoming arrows from each j<i labeled h a_ij; show t_i=t+c_i h and Y_i=y+hΣ_{j<i}a_ijK_j. Connect all K_i to y^+=y+hΣ_i b_iK_i. Do not draw dependencies from j≥i, and mark stage pair domain failure/evaluation failure as status branches if statuses are included.",
+    "screenshots": [
+      "screenshots/def-explicit-runge-kutta-tableau-and-stage-map--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-explicit-runge-kutta-tableau-and-stage-map--01.png": "d320c82a1c688e23f3b698bff945454d1408081e3a0e9a0103e415737cafdf12"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "runge-kutta-methods-and-order"
+    ],
+    "source_lines": {
+      "35": "For a step size $h>0$ and an admitted base pair $(t,y)\\in D$, the **stage graph** consists of the finite tuples satisfying",
+      "36": "$$Y_i=y+h\\sum_{j<i}a_{ij}K_j,\\qquad t_i=t+c_i h,\\qquad K_i=f(t_i,Y_i)\\quad(i=1,\\ldots,s).$$",
+      "37": "These equations characterize each stage from the preceding slopes because $a_{ij}=0$ for $j\\ge i$. For a complete stage tuple, the candidate endpoint is",
+      "38": "$$y^+=y+h\\sum_{i=1}^s b_iK_i.$$",
+      "40": "To include unavailable evaluations, let $(E_i)_{i=1}^s$ be evaluator response functions on $D$: at each point $E_i$ has value either $f(\\tau,u)$ or the symbol evaluation-failure for stage $i$. Stage-dependent responses allow availability to differ between repeated inputs. A **successful prefix of length $r$**, $0\\le r\\le s$, is a stage tuple through index $r$ whose stage pairs lie in $D$ and whose responses under $E_i$ equal the corresponding slopes $K_i$. The empty prefix is allowed. For any prefix of length $r<s$, the next pair $(t_{r+1},Y_{r+1})$ is characterized by the same displayed equations using its already specified slopes. There is a unique maximal successful prefix, since every admissible successful extension has the uniquely specified slope $f(t_i,Y_i)$.",
+      "42": "The **status-labelled stage map** is the following mathematical map. For a maximal prefix of length $r<s$, its value is domain-failure with index $r+1$ when the next pair is outside $D$, and evaluation-failure with index $r+1$ when that pair lies in $D$ and its response under $E_{r+1}$ is evaluation-failure. For a complete prefix its value is domain-failure at output when $(t+h,y^+)\\notin D$, and success with $(t+h,y^+)$ otherwise. Thus no slope at an inadmissible pair is part of the stage graph. In the exact mathematical model $E_i=f$ on $D$ for every $i$; evaluation-failure represents only an unavailable numerical evaluation. On its success domain the state component $y^+$ defines a one-step map in the sense of [[def-one-step-ode-method-local-defect-order-and-stability]]."
+    },
+    "source_snapshot": "snapshots/def-explicit-runge-kutta-tableau-and-stage-map.md",
+    "source_sha256": "e2fe4d406dbbfa122d1aa57522f576928ec1f98f01b66686bddb895db0474942",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-hybrid-mode-guard-reset-system",
+    "section": "Item body",
+    "lines": [
+      29,
+      33
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "directed hybrid mode/guard/reset graph",
+    "exact_source_claim": "A transition (m,n) has a guard g_mn=0, signed crossing orientation σ_mn, and reset R_mn mapping the event state into the destination domain D_n; simultaneous first events use a fixed priority order.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-hybrid-mode-guard-reset-system--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-hybrid-mode-guard-reset-system--01.png": "5f37a8d4d78bb80866a8ac87728c8c5c867cc59d786f53ff9db754d6eb96540a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "source_lines": {
+      "29": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$, with $T\\ge0$ and positive integer state dimension $d\\ge1$, consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}:D_m\\to\\mathbb R$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}:U_{mn}\\to\\mathbb R^d$ on an open neighborhood $U_{mn}\\subseteq D_m$ of the guard zero set, satisfying $(t,R_{mn}(t,x))\\in D_n$ for every $(t,x)\\in U_{mn}$. Here $C^1$ has the meaning in [[def-c-one-map-and-local-inverse]]. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.",
+      "33": "A hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions."
+    },
+    "source_snapshot": "snapshots/def-hybrid-mode-guard-reset-system.md",
+    "source_sha256": "e1016fc202da6fd8db9257cd37c68b4d1f80468478cc0248b386e106b6478bd4",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-linear-all-at-once-time-operator",
+    "section": "Definition",
+    "lines": [
+      31,
+      33,
+      34,
+      35
+    ],
+    "symptom": "The F/C index partition and the distinction between practical coarse propagation and exact elimination are index-sensitive and are easier to check on a small labeled grid.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "time-grid/index schematic",
+    "exact_source_claim": "The all-at-once bidiagonal operator encodes u_i=Φ_i u_{i−1}+g_i; coarsening marks 0,m,2m,…,N as C-points and the remaining unknown indices as F-points, then permutes into F/C blocks (lines 31–35).",
+    "selection_reason": "The F/C index partition and the distinction between practical coarse propagation and exact elimination are index-sensitive and are easier to check on a small labeled grid.",
+    "concrete_diagram_content": "For N=6,m=2, mark the initial value u0, C nodes 2,4,6, F nodes 1,3,5, arrows Φ_i from i−1 to i, and forcing g_i. Pair it with a block matrix layout after (v_F,v_C) permutation, labeling A_FF,A_FC,A_CF,A_CC. Distinguish the practical coarse map Ψ_j from the Schur-complement operator formed by eliminating F points; do not assert stability or convergence.",
+    "mathematical_check": "For N=6,m=2, mark the initial value u0, C nodes 2,4,6, F nodes 1,3,5, arrows Φ_i from i−1 to i, and forcing g_i. Pair it with a block matrix layout after (v_F,v_C) permutation, labeling A_FF,A_FC,A_CF,A_CC. Distinguish the practical coarse map Ψ_j from the Schur-complement operator formed by eliminating F points; do not assert stability or convergence.",
+    "screenshots": [
+      "screenshots/def-linear-all-at-once-time-operator--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-linear-all-at-once-time-operator--01.png": "a2714b5605141a142c67da5e624972d1a84d42a80c1234638e031ea5f867c592"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "parallel-in-time-parareal-and-mgrit"
+    ],
+    "source_lines": {
+      "31": "Let $d,N\\ge1$, let $\\Phi_i\\in\\mathbb R^{d\\times d}$ for $1\\le i\\le N$, and let $u_0\\in\\mathbb R^d$ be fixed. The linear part of a fine propagator in [[def-parareal-propagator-pair]] is represented by $\\Phi_i$. For forcing vectors $g_i\\in\\mathbb R^d$, write the fine recurrence as $u_i=\\Phi_i u_{i-1}+g_i$. On the unknown vector $v=(v_1,\\ldots,v_N)\\in(\\mathbb R^d)^N$, define $A_t$ by $(A_tv)_1=v_1$ and $(A_tv)_i=v_i-\\Phi_i v_{i-1}$ for $2\\le i\\le N$. With $b_1=\\Phi_1u_0+g_1$ and $b_i=g_i$ for $i\\ge2$, the recurrence is exactly $A_tv=b$.",
+      "33": "For a coarsening factor $m\\ge2$ dividing $N$, the coarse indices are $0,m,2m,\\ldots,N$. Among unknowns, let $C=\\{m,2m,\\ldots,N\\}$ and $F=\\{1,\\ldots,N\\}\\setminus C$. Reordering the unknown vector as $(v_F,v_C)$ gives",
+      "34": "$$A_t=\\begin{pmatrix}A_{FF}&A_{FC}\\\\ A_{CF}&A_{CC}\\end{pmatrix}.$$",
+      "35": "A practical coarse propagator $\\Psi_j$ on each interval is the linear subcase of the coarse maps $G_n$ in [[def-parareal-propagator-pair]]; the exact coarse operator is determined by eliminating F-points and is not generally the same as this practical choice. This definition asserts no stability or convergence property."
+    },
+    "source_snapshot": "snapshots/def-linear-all-at-once-time-operator.md",
+    "source_sha256": "90ed88a1a8890db74afd32c50773e5d593b229b2620600ca3520ec307caf725f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-parareal-propagator-pair",
+    "section": "Definition",
+    "lines": [
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "macro-time propagation diagram",
+    "exact_source_claim": "Fine and coarse maps F_n and G_n advance the same admitted start state across each common macro interval [t_n,t_{n+1}], generating separate sequential trajectories.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw macro nodes t0,...,tN, with each F_n and G_n arrow from D_n^F or D_n^G into X across the same interval; show the x_n and coarse trajectory separately. Check map direction, common time interval, and that the diagram does not imply accuracy or convergence.",
+    "mathematical_check": "Draw macro nodes t0,...,tN, with each F_n and G_n arrow from D_n^F or D_n^G into X across the same interval; show the x_n and coarse trajectory separately. Check map direction, common time interval, and that the diagram does not imply accuracy or convergence.",
+    "screenshots": [
+      "screenshots/def-parareal-propagator-pair--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-parareal-propagator-pair--01.png": "e2092189ed42357ee516f3c209ac2acab96901aa4c2dadbcf07f47d9eb67da0f"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "parallel-in-time-parareal-and-mgrit"
+    ],
+    "source_lines": {
+      "35": "Let $d,N\\ge1$, let $X=\\mathbb R^d$, and fix macro times $t_0<t_1<\\cdots<t_N$. A **fine/coarse propagator pair** is a pair of deterministic maps $F_n:D_n^F\\to X$ and $G_n:D_n^G\\to X$, for each $0\\le n<N$, where $D_n^F,D_n^G\\subseteq X$ are their admitted input sets. Both maps advance a state across the same interval $[t_n,t_{n+1}]$. The labels fine and coarse identify the two roles chosen by the user; they assert no accuracy, stability, cost, or convergence property.",
+      "36": "",
+      "37": "For an initial state $x_0\\in X$, whenever every call succeeds, the **sequential fine trajectory** is the finite sequence $x_{n+1}=F_n(x_n)$, and the **sequential coarse trajectory** is defined by replacing each $F_n$ with $G_n$. A partially defined map is unavailable outside its admitted set; a failed stage evaluation or an unavailable implicit branch is a propagation failure, not a numerical value.",
+      "38": "",
+      "39": "A canonical ODE instantiation uses the explicit Runge–Kutta stage map of [[def-explicit-runge-kutta-tableau-and-stage-map]] for $r\\ge1$ fine substeps of size $(t_{n+1}-t_n)/r$, composed in order to form $F_n$. A coarse backward Euler value is an endpoint $z$ satisfying the equation in [[def-backward-euler-step-equation]] over the full macro interval. Its branch selector is part of the input and must select exactly one admissible root for each admitted start state; if no such selected root exists, the coarse map is unavailable. The backward Euler definition alone asserts neither root existence nor uniqueness.",
+      "40": ""
+    },
+    "source_snapshot": "snapshots/def-parareal-propagator-pair.md",
+    "source_sha256": "276103c0aa3d7e404c3b112083cf9afb21a8c2940eea6016fd8411d180b48f42",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-projected-contact-dynamics-and-euler-step",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "convex geometry schematic (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Use a simple closed convex planar set as an explicitly illustrative special case; mark trial point y, nearest point p, segment y−p perpendicular to a smooth boundary where applicable, and outward normal cone at p. A separate small step sketch can show x_k+h f projected back to C as x_(k+1), with the affine segment. Do not imply smoothness or uniqueness beyond the convex-projection statement.",
+    "mathematical_check": "Use a simple closed convex planar set as an explicitly illustrative special case; mark trial point y, nearest point p, segment y−p perpendicular to a smooth boundary where applicable, and outward normal cone at p. A separate small step sketch can show x_k+h f projected back to C as x_(k+1), with the affine segment. Do not imply smoothness or uniqueness beyond the convex-projection statement.",
+    "screenshots": [
+      "screenshots/def-projected-contact-dynamics-and-euler-step--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-projected-contact-dynamics-and-euler-step--01.png": "a0db921b4fdb47e12464d3ceae2dc1ef7c1dc1eb678f4e8cbafed7072b0f2bcd"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "nonsmooth-contact-time-stepping-and-projections"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/def-projected-contact-dynamics-and-euler-step.md",
+    "source_sha256": "9bee7ba9ff440dae4859cd54326e6b9cb5c7a86349fe1f6cf24cf156bad54040",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-size-structured-transport-and-division-kernel",
+    "section": "Item body",
+    "lines": [
+      32,
+      34,
+      36,
+      38,
+      40
+    ],
+    "symptom": "The source combines growth characteristics, a nonlocal daughter-size kernel, mortality/removal, and absorbing outflow at X.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "size-characteristic and daughter-production flow diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The source combines growth characteristics, a nonlocal daughter-size kernel, mortality/removal, and absorbing outflow at X.",
+    "concrete_diagram_content": "Show a parent of size y moving along χ_y with velocity g(x) toward X; mark survival/removal rate μ+γ and absorbing exit at X. From division at y, draw a daughter-size measure K_y supported on [0,y] feeding ν_t at daughter sizes x; distinguish this nonlocal birth-production term from the parent transport characteristic. Show no incoming boundary source at x=0.",
+    "mathematical_check": "Show a parent of size y moving along χ_y with velocity g(x) toward X; mark survival/removal rate μ+γ and absorbing exit at X. From division at y, draw a daughter-size measure K_y supported on [0,y] feeding ν_t at daughter sizes x; distinguish this nonlocal birth-production term from the parent transport characteristic. Show no incoming boundary source at x=0.",
+    "screenshots": [
+      "screenshots/def-size-structured-transport-and-division-kernel--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-size-structured-transport-and-division-kernel--01.png": "087171655f71e2ce4ccdcc7fb2fbc89507ec1f2e5a1cc7998b1edf7e1fda10c3"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "32": "Fix a finite horizon $T>0$ and a nondegenerate fixed size interval $[0,X]$ with $X>0$. Let $g,\\mu,\\gamma:[0,X]\\to[0,\\infty)$ be bounded Lipschitz functions, with $g(x)\\ge g_{\\min}>0$. Here $g$ is size growth, $\\mu$ is ordinary mortality, and $\\gamma$ is the rate at which a dividing parent is removed. For each parent size $y\\in[0,X]$, let $K_y$ be a finite nonnegative Borel measure of daughter sizes, supported on $[0,y]$. Assume $y\\mapsto K_y(E)$ is measurable for every Borel set $E\\subseteq[0,X]$, and that the number moment $k_0(y):=K_y([0,y])$ is uniformly bounded; the size moment $k_1(y):=\\int_{[0,y]}x\\,K_y(dx)$ is then finite.",
+      "34": "Because $K_y$ may have atoms, represent the population by a finite nonnegative Borel measure $\\nu_t$ on $[0,X)$ rather than requiring a density. Given an initial measure $\\nu_0$, a weak solution is a curve $t\\mapsto\\nu_t$ that is continuous when tested against continuous functions on $[0,X]$ vanishing at $X$ and satisfies, for every $\\phi\\in C^1([0,T]\\times[0,X])$ with $\\phi(t,X)=0$,",
+      "36": "$$\\int_{[0,X)}\\phi(T,x)\\,\\nu_T(dx)-\\int_{[0,X)}\\phi(0,x)\\,\\nu_0(dx)=\\int_0^T\\!\\int_{[0,X)}(\\phi_t+g\\phi_x-(\\mu+\\gamma)\\phi)(t,x)\\,\\nu_t(dx)\\,dt+\\int_0^T\\!\\int_{[0,X)}\\!\\left(\\int_{[0,y]}\\phi(t,x)\\,K_y(dx)\\right)\\nu_t(dy)\\,dt.$$",
+      "38": "This is the measure-valued transport equation with daughter production $\\int_{[0,X)}K_y(dx)\\,\\nu_t(dy)$, no incoming source at $x=0$, and absorbing outflow at $x=X$. The test condition $\\phi(t,X)=0$ encodes removal when a characteristic reaches the upper boundary.",
+      "40": "Let $\\Pi_{[0,X]}(x):=\\min\\{X,\\max\\{0,x\\}\\}$ and extend the growth field to $\\widetilde g(x):=g(\\Pi_{[0,X]}(x))$ on $\\mathbb R$. This is a bounded globally Lipschitz vector field. By [[thm-size-structured-positivity-number-and-weighted-moment-identities]], its IVP has a unique solution $\\chi_y$ on $[0,T]$ from every initial size $y\\in[0,X]$. A model characteristic is $\\chi_y$ restricted to $[0,\\min\\{T,\\tau_y\\}]$, where $\\tau_y$ is its first hitting time of $X$ (taking $\\tau_y=+\\infty$ if there is no hit on $[0,T]$, and $\\tau_y=0$ if $y=X$). On this restricted interval, $\\widetilde g=g$. For $y<X$ the restricted interval is nondegenerate, and the characteristic is a first-order IVP solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. For $y=X$ the restriction is only the stopped path on $\\{0\\}$; no derivative on that singleton is asserted, while the extended path $\\chi_X$ remains an IVP solution on $[0,T]$. The interval is fixed; moving boundaries, zero growth and discontinuous coefficients are outside this definition."
+    },
+    "source_snapshot": "snapshots/def-size-structured-transport-and-division-kernel.md",
+    "source_sha256": "e70c1f07c0111d44947ef93966d065c3307f81e03c87ae9f411781fbef8f4301",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-xd-finite-state-projection-and-cemetery-lift",
+    "section": "Item body",
+    "lines": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "finite-state transition graph / absorbing cemetery lift",
+    "exact_source_claim": "The killed process follows X until its first exit τ_F, then stays at dagger; every transition rate from x∈F to outside F is redirected to dagger, making dagger absorbing and retaining no later return to F.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-xd-finite-state-projection-and-cemetery-lift--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-xd-finite-state-projection-and-cemetery-lift--01.png": "70c8a237d1915ade5c6a6d4f5574f6770c1ba7aa955dbece7b0b60b893ef452d"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-generator-master-equations-and-uniformization"
+    ],
+    "source_lines": {
+      "36": "Let $X$ be a given nonexplosive chain as in [[def-xd-countable-nonexplosive-ctmc]], with initial law $p_0$ on $S$, and let $F\\subseteq S$ be finite and nonempty. Its first exit time from $F$ is",
+      "37": "",
+      "38": "$$\\tau_F:=\\inf\\{s\\ge0:X_s\\notin F\\},$$",
+      "39": "",
+      "40": "with $\\tau_F=0$ when $X_0\\notin F$. Adjoin a new state $\\dagger\\notin S$ and define the **killed projection** $Y_t=X_t$ for $t<\\tau_F$ and $Y_t=\\dagger$ for $t\\ge\\tau_F$. The **killed mass vector** is $u_F(t,x):=\\mathbb P(Y_t=x)$ for $x\\in F$, and the **cemetery mass** is $c_F(t):=\\mathbb P(Y_t=\\dagger)$. Initially, $u_F(0,x)=p_0(x)$ for $x\\in F$ and $c_F(0)=p_0(S\\setminus F)$.",
+      "41": "",
+      "42": "For $x\\in F$ let $\\lambda(x)=\\sum_{y\\ne x}q(x,y)$. The killed principal subgenerator on $F$ has entries $(Q_F)_{y x}=q(x,y)$ for $y\\ne x$ in $F$ and $(Q_F)_{x x}=-\\lambda(x)$; its column sum is $-\\sum_{y\\notin F}q(x,y)$. The **cemetery lift** is the finite matrix $\\widetilde Q_F$ on $F\\cup\\{\\dagger\\}$ with these same entries on $F$, with",
+      "43": "",
+      "44": "$$\\widetilde Q_{\\dagger x}=\\lambda(x)-\\sum_{\\substack{y\\in F\\\\y\\ne x}}q(x,y)=\\sum_{y\\notin F}q(x,y)\\quad(x\\in F),\\qquad \\widetilde Q_{x\\dagger}=0\\quad(x\\in F),\\qquad \\widetilde Q_{\\dagger\\dagger}=0.$$",
+      "45": "",
+      "46": "Every column of $\\widetilde Q_F$ sums to zero and its off-diagonal entries are nonnegative, so it is a finite column generator in the sense of [[def-xd-finite-column-generator]]. The cemetery state is absorbing; trajectories that return to $F$ after their first exit remain at $\\dagger$ in this projection."
+    },
+    "source_snapshot": "snapshots/def-xd-finite-state-projection-and-cemetery-lift.md",
+    "source_sha256": "04568ea6a78213dec740483b6e2287c6dd0ac51049b2dc5583f46d1c494b69ab",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "phase-plane trajectory and event timeline (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Plot q versus t and v versus t (or the (q,v) phase curve), mark the exact and reported guard crossings, indicate the downward signed crossing and apply the reset to the reported event state; distinguish the exact event time from the later reported time.",
+    "mathematical_check": "Plot q versus t and v versus t (or the (q,v) phase curve), mark the exact and reported guard crossings, indicate the downward signed crossing and apply the reset to the reported event state; distinguish the exact event time from the later reported time.",
+    "screenshots": [
+      "screenshots/ex-bouncing-ball-transverse-event-error-and-reset--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-bouncing-ball-transverse-event-error-and-reset--01.png": "e3bb377b924fb93cfd77df13c391b135462c2c366f85f11d5495e5aadb2d78b2"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "event-location-and-hybrid-trajectory-error-examples"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/ex-bouncing-ball-transverse-event-error-and-reset.md",
+    "source_sha256": "ba33cc65ffc3302666d5abf142760e989dde588b0c921f3d03e518c14dd9d81f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-constrained-pendulum-equations-and-multiplier",
+    "section": "Item body",
+    "lines": [
+      37,
+      39
+    ],
+    "symptom": "The source gives a concrete holonomic constraint, a tangent condition, gravity, a multiplier, and a distinguished equilibrium. Their geometric relation is naturally shown in a small force/constraint sketch.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-constrained-pendulum-force-diagram",
+    "exact_source_claim": "For q on the circle ||q||=ℓ with tangent momentum qᵀp=0, the pendulum multiplier follows from tangency; at bottom rest q=(0,-ℓ), λ=mg/ℓ balances gravity and acceleration is zero.",
+    "selection_reason": "The source gives a concrete holonomic constraint, a tangent condition, gravity, a multiplier, and a distinguished equilibrium. Their geometric relation is naturally shown in a small force/constraint sketch.",
+    "concrete_diagram_content": "Draw the circle ||q||=ℓ centered at the pivot, the rod vector q to the bob, gravity -mg e_2, and the constraint force -λq. At q=(0,-ℓ), show p=0 and the upward constraint force balancing downward gravity when λ=mg/ℓ. If showing a generic p, draw it tangent to the circle and label qᵀp=0.",
+    "mathematical_check": "Draw the circle ||q||=ℓ centered at the pivot, the rod vector q to the bob, gravity -mg e_2, and the constraint force -λq. At q=(0,-ℓ), show p=0 and the upward constraint force balancing downward gravity when λ=mg/ℓ. If showing a generic p, draw it tangent to the circle and label qᵀp=0.",
+    "screenshots": [
+      "screenshots/ex-constrained-pendulum-equations-and-multiplier--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-constrained-pendulum-equations-and-multiplier--01.png": "6ee55adee96998aef8fbc823d6edc9cc92fed64eae2078170c695b38476db4c0"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "constrained-dynamics-shake-and-rattle-examples"
+    ],
+    "source_lines": {
+      "37": "For a planar pendulum of mass $m>0$ and rod length $\\ell>0$, let $M=mI_2$, $V(q)=mgq_2$, and $c(q)=(\\|q\\|_2^2-\\ell^2)/2$. If $c(q)=0$ and $q^Tp=0$, the multiplier in the constrained equations is",
+      "39": "At the bottom rest state $q=(0,-\\ell)$, $p=0$, this gives $\\lambda=mg/\\ell$ and zero acceleration."
+    },
+    "source_snapshot": "snapshots/ex-constrained-pendulum-equations-and-multiplier.md",
+    "source_sha256": "00a155177299c74e4164d8f715e4bfe0b0cb043fb21d2f1f737c8993e3615ebd",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain-editorial-candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-local-trace-misses-disconnected-branch",
+    "section": "Item body",
+    "lines": [
+      25,
+      26,
+      27,
+      45,
+      53
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "solution-set components / continuation counterexample",
+    "exact_source_claim": "The zero set of F(x,λ)=x²−1 consists of two disconnected vertical components x=1 and x=−1; the certified finite trace follows only the component x=1 and cannot certify the other absent.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-local-trace-misses-disconnected-branch--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-local-trace-misses-disconnected-branch--01.png": "3ed79112b9840d901779d3f50a39fa7d2d779a299ae183a5b68e69b4b287c458"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pseudo-arclength-continuation-and-fold-certificates-examples"
+    ],
+    "source_lines": {
+      "25": "The smooth equation $F(x,\\lambda)=x^2-1=0$ has two disconnected solution",
+      "26": "components. A valid finite pseudo-arclength trace on one component cannot",
+      "27": "certify that the other component has been found.",
+      "45": "1.1 The equation factors as $(x-1)(x+1)=0$, so its complete solution set is $$S=(\\{1\\}\\times\\mathbb R)\\cup(\\{-1\\}\\times\\mathbb R).$$ Each set is connected and open-and-closed relative to $S$, and the two sets are disjoint; therefore they are the two connected components of $S$. [given, algebra]",
+      "53": "3.1 The other component $\\{-1\\}\\times\\mathbb R$ contains no point of that local chart around $(1,0)$, and the accepted one-step trace contains no point with $x=-1$. Nevertheless both components satisfy $F=0$. By [F1], the finite trace correctly certifies its local step but cannot certify that the second component is absent or that all branches have been found. [F1, step 1.1, step 1.3, step 2.1, given] ∎"
+    },
+    "source_snapshot": "snapshots/ex-local-trace-misses-disconnected-branch.md",
+    "source_sha256": "1c4bb7518d9f6ce6bf2e19f43fe6867f9a40e129756f5eb7006d2f83f7b0479d",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-natural-parameterization-fails-at-x-squared-fold",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "bifurcation curve sketch (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw λ=x^2 in the (λ,x) plane with both branches and the fold point, and show that projection to the λ-axis is not locally one-to-one across the fold.",
+    "mathematical_check": "Draw λ=x^2 in the (λ,x) plane with both branches and the fold point, and show that projection to the λ-axis is not locally one-to-one across the fold.",
+    "screenshots": [
+      "screenshots/ex-natural-parameterization-fails-at-x-squared-fold--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-natural-parameterization-fails-at-x-squared-fold--01.png": "b5e6a6c2ecad5ed3897d3b6faacae2f04181c7e6b4917732eb3340c3763e0835"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pseudo-arclength-continuation-and-fold-certificates-examples"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/ex-natural-parameterization-fails-at-x-squared-fold.md",
+    "source_sha256": "184825b10cf83af75eae393d3d6119504e318b3d570ae9dbbce67ce30775af7d",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-noncommuting-two-noise-milstein-area",
+    "section": "Example",
+    "lines": [
+      36,
+      38
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial-diagram-candidate",
+    "exact_source_claim": "The second coordinate contains I_12=∫_0^h W_s^1 dW_s^2; endpoint increments determine I_12+I_21=ΔW^1ΔW^2 but do not determine I_12 individually.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Consider a two-coordinate Brownian path sketch from (0,0) to (ΔW^1,ΔW^2) with oriented iterated-integral labels I_12 and I_21. Check that any area/bracket convention states I_12+I_21=ΔW^1ΔW^2 and does not imply either individual integral is fixed by the endpoint pair.",
+    "mathematical_check": "Consider a two-coordinate Brownian path sketch from (0,0) to (ΔW^1,ΔW^2) with oriented iterated-integral labels I_12 and I_21. Check that any area/bracket convention states I_12+I_21=ΔW^1ΔW^2 and does not imply either individual integral is fixed by the endpoint pair.",
+    "screenshots": [
+      "screenshots/ex-noncommuting-two-noise-milstein-area--01.png",
+      "screenshots/ex-noncommuting-two-noise-milstein-area--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-noncommuting-two-noise-milstein-area--01.png": "406023c92a1ad15c6e94dc73615a676a68d43745cd91f27ef06d2396e0f8100e",
+      "screenshots/ex-noncommuting-two-noise-milstein-area--02.png": "00d7961acdcf30d7331f471912c2ad8bc80d5891824a055b9370dbffcaf7b39c"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "milstein-stochastic-taylor-and-iterated-integrals-examples"
+    ],
+    "source_lines": {
+      "36": "Let $W^1,W^2$ be independent standard Brownian coordinates and solve from $(0,0)$ the two-dimensional SDE",
+      "38": "Its diffusion fields are $\\sigma_1(x_1,x_2)=(1,0)$ and $\\sigma_2(x_1,x_2)=(0,x_1)$. They are noncommuting: $L_1\\sigma_2=(0,1)$ while $L_2\\sigma_1=(0,0)$. On the first step, the exact second coordinate and its Milstein Taylor increment are $I_{12}=\\int_0^hW_s^1dW_s^2$. Although $I_{12}+I_{21}=\\Delta W^1\\Delta W^2$, the individual area term is not determined by the two endpoint increments."
+    },
+    "source_snapshot": "snapshots/ex-noncommuting-two-noise-milstein-area.md",
+    "source_sha256": "41ad10177b8a9c1e4df997db56dba98a1f21076a51fe4f63dd58b9bb18b9d3e5",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-nonnormal-transient-growth-exponential-step",
+    "section": "Item body",
+    "lines": [
+      46,
+      48,
+      72,
+      74,
+      76
+    ],
+    "symptom": "The example asks the reader to verify transient norm growth before decay and supplies a closed-form trajectory. A phase-plane curve with the norm-growth point marked would directly illustrate that claim; the algebraic proof already establishes it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "phase-trajectory-plot",
+    "exact_source_claim": "",
+    "selection_reason": "The example asks the reader to verify transient norm growth before decay and supplies a closed-form trajectory. A phase-plane curve with the norm-growth point marked would directly illustrate that claim; the algebraic proof already establishes it.",
+    "concrete_diagram_content": "Plot t↦y(t)=e^(−t)(2et,1)^T in R^2 for t≥0, with initial point y(0)=(0,1), the marked point y(1)=(2,e^(−1)) where ||y(1)||₂=e^(−1)√(4e²+1)>2, and the limit y(t)→(0,0). Use arrows for increasing time and show the unit circle only if it clarifies the initial norm comparison.",
+    "mathematical_check": "The curve is a vector trajectory in R² with x-coordinate 2t e^(1−t) and y-coordinate e^(−t); it starts at (0,1), passes through (2,e^(−1)) at t=1, and tends to the origin. The marked norm exceeds 2, while the initial norm is 1. A drawing must not suggest the numerical step is approximate: the source says exact-action methods reproduce the same trajectory at grid points.",
+    "screenshots": [
+      "screenshots/ex-nonnormal-transient-growth-exponential-step--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-nonnormal-transient-growth-exponential-step--01.png": "00310e730eb90a70edb86648ea15de9e6b9ee10ad499bef8f542375031ce7010"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "exponential-and-integrating-factor-integrators-examples"
+    ],
+    "source_lines": {
+      "46": "Let",
+      "48": "Here nonnormal means $AA^*\\ne A^*A$. Compute the exact solution, show its norm grows above its initial value before decaying, and verify that exact-action exponential Euler and ETD2 reproduce it at every grid point.",
+      "72": "1.1 Write $A=-I+N$ with $N=\\begin{pmatrix}0&2e\\\\0&0\\end{pmatrix}$; direct multiplication gives $N^2=0$ [F4]. The formula holds for $n=1$ since $A=-I+N$. If $A^n=(-1)^nI+n(-1)^{n-1}N$, multiplying by $A=-I+N$ and using $N^2=0$ gives $A^{n+1}=(-1)^{n+1}I+(n+1)(-1)^nN$, so induction proves it for every $n\\ge1$. Substituting in the absolutely convergent matrix-exponential series [F2] gives $e^{tA}=e^{-t}I+\\sum_{n\\ge1}t^n(-1)^{n-1}N/(n-1)!=e^{-t}(I+tN)$ by the scalar series [F3]. [given, F2, F3, F4, induction, algebra]",
+      "74": "2.1 By [F7] and step 1.1, the solution is $y(t)=e^{-t}(2et,1)^{\\mathsf T}$. Direct multiplication using [F4] gives $AA^*=\\begin{pmatrix}1+4e^2&-2e\\\\-2e&1\\end{pmatrix}$ and $A^*A=\\begin{pmatrix}1&-2e\\\\-2e&1+4e^2\\end{pmatrix}$, which differ, so $A$ is nonnormal. By [F5] and [F6], its initial norm is $1$, whereas $\\|y(1)\\|_2=e^{-1}\\sqrt{4e^2+1}>2$. For $t>0$, the exponential series gives $e^t\\ge t^2/2$, and [F6] gives $e^{-t}=1/e^t\\le2/t^2$; hence $e^{-t}\\to0$ and $te^{-t}\\le2/t\\to0$, so $y(t)\\to0$. [A1, F3, F4, F5, F6, F7, step 1.1, algebra]",
+      "76": "3.1 By [F1], every exact-action step is multiplication by $e^{hA}$. Repeated use of the semigroup identity in [F2] gives $(e^{hA})^n=e^{nhA}$, so the method returns $y(t_n)$ at every grid point. The transient growth is therefore present in the exact linear flow and is not removed by exponentiating this nonnormal matrix. [F1, F2, step 1.1, algebra, induction] ∎"
+    },
+    "source_snapshot": "snapshots/ex-nonnormal-transient-growth-exponential-step.md",
+    "source_sha256": "71982f9e224cda5ff18168e896763f42880588efdb38980aedd689fcb5375a96",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "01",
+      "01"
+    ],
+    "candidate_certainty": "editorial-candidate-only",
+    "additional_candidate_observations": [
+      {
+        "reason": "The example asks the reader to verify transient norm growth before decay and supplies a closed-form trajectory. A phase-plane curve with the norm-growth point marked would directly illustrate that claim; the algebraic proof already establishes it.",
+        "content": "Plot t↦y(t)=e^(−t)(2et,1)^T in R^2 for t≥0, with initial point y(0)=(0,1), the marked point y(1)=(2,e^(−1)) where ||y(1)||₂=e^(−1)√(4e²+1)>2, and the limit y(t)→(0,0). Use arrows for increasing time and show the unit circle only if it clarifies the initial norm comparison.",
+        "check": "The curve is a vector trajectory in R² with x-coordinate 2t e^(1−t) and y-coordinate e^(−t); it starts at (0,1), passes through (2,e^(−1)) at t=1, and tends to the origin. The marked norm exceeds 2, while the initial norm is 1. A drawing must not suggest the numerical step is approximate: the source says exact-action methods reproduce the same trajectory at grid points."
+      }
+    ]
+  },
+  {
+    "id": "ex-phase-singularity-in-stable-planar-oscillator",
+    "section": "Statement; Proof",
+    "lines": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      50,
+      51,
+      52
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "phase slice/orbit transversality diagram",
+    "exact_source_claim": "At x*=(1,0), the unit-circle orbit tangent is f(x*)=(0,1); ψ_b=x−1 has a tangent level set and singular border, while ψ_g=y is transverse and gives an invertible border.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw the unit circle, clockwise/counterclockwise direction consistent with θdot=1, mark x*=(1,0), orbit tangent upward, and the level sets x=1 and y=0. Check that x=1 is tangent at x* and y=0 crosses transversely; label the radial multiplier e^(−2π) and neutral multiplier 1 only if useful.",
+    "mathematical_check": "Draw the unit circle, clockwise/counterclockwise direction consistent with θdot=1, mark x*=(1,0), orbit tangent upward, and the level sets x=1 and y=0. Check that x=1 is tangent at x* and y=0 crosses transversely; label the radial multiplier e^(−2π) and neutral multiplier 1 only if useful.",
+    "screenshots": [
+      "screenshots/ex-phase-singularity-in-stable-planar-oscillator--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-phase-singularity-in-stable-planar-oscillator--01.png": "d06ed1056c5f08a3ddc86e3bffca9741e84b3919a3f5c5712b84143c3f345614"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "periodic-orbit-shooting-collocation-and-floquet-error-examples"
+    ],
+    "source_lines": {
+      "34": "On the annulus $U=\\{(x,y):1/2<\\sqrt{x^2+y^2}<3/2\\}$ consider",
+      "35": "$$",
+      "36": "\\dot x=(1-r)x-y,\\qquad \\dot y=(1-r)y+x,\\qquad r=\\sqrt{x^2+y^2}.",
+      "37": "$$",
+      "38": "The unit circle is an orbitally asymptotically stable periodic orbit of period $2\\pi$. At $x_*=(1,0)$ the affine phase $\\psi_b(x,y)=x-1$ has a singular phase-bordered shooting Jacobian, while $\\psi_g(x,y)=y$ is transverse and gives an invertible phase-bordered shooting Jacobian.",
+      "50": "1.1 The identities $\\dot r=(xx'+yy')/r$ and $\\dot\\vartheta=(xy'-yx')/r^2$ give $\\dot r=r(1-r)$ and $\\dot\\vartheta=1$. Thus $r=1$ is invariant and $\\vartheta(t)=\\vartheta(0)+t$, so the least period is $2\\pi$. Differentiating $r(1-r)$ at $r=1$ gives the radial variational equation $\\dot\\rho=-\\rho$, whose multiplier is $e^{-2\\pi}<1$; the angular variational equation is $\\dot\\alpha=0$, whose multiplier is $1$. Because the polar-coordinate Jacobian at times $0$ and $2\\pi$ is the same invertible matrix, the Cartesian monodromy is conjugate to $\\operatorname{diag}(e^{-2\\pi},1)$. For $r<1$ the radial derivative is positive, and for $r>1$ it is negative, so each nearby radius moves monotonically toward $1$ and remains between its initial value and $1$. It has a limit $\\bar r$; if $\\bar r(1-\\bar r)\\ne0$, then $\\dot r=r(1-r)$ is eventually bounded away from zero, contradicting convergence. Hence $\\bar r$ is an equilibrium, and the interval between the initial radius and $1$ contains only the equilibrium $1$, so $r(t)\\to1$. These bounds also give Lyapunov stability of the unit circle. Thus the orbit is orbitally asymptotically stable and its neutral multiplier is simple. [given, algebra]",
+      "51": "",
+      "52": "2.1 At $(1,0)$ the vector field is $(0,1)$. For $\\psi_b=x-1$, $c_b=(1,0)$ and $c_b^\\top f(x_*)=0$, so [F2] gives a singular shooting Jacobian. For $\\psi_g=y$, $c_g=(0,1)$ and $c_g^\\top f(x_*)=1$; the phase multiplier is simple by step 1.1, so [F2] gives an invertible Jacobian. [F1, F2, step 1.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-phase-singularity-in-stable-planar-oscillator.md",
+    "source_sha256": "aaa8e4803f2201448f7658eababe060526b16330c2ca9bc560bf5418bd1d8cc2",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+    "section": "Item body",
+    "lines": [
+      48,
+      58
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "solution-curve and pseudo-arclength predictor/corrector diagram",
+    "exact_source_claim": "For F(x,λ)=x²−λ=0, the curve λ=x² folds at (0,0); the finite certified step starts at x=−α and reaches x=α+α²>0 across the fold using an x-directed pseudo-arclength section.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-pseudo-arclength-crosses-x-squared-fold--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-pseudo-arclength-crosses-x-squared-fold--01.png": "cb42d39fa566b6c5204995c439e1161edb8ec194638d133b7b473eef7e9ecc32"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pseudo-arclength-continuation-and-fold-certificates-examples"
+    ],
+    "source_lines": {
+      "48": "1.1 At $(0,0)$, $F_x=0$, $F_\\lambda=-1$, and $F_{xx}=2$. With $v=w=1$, $a=-1$ and $b=2$, so [F1] gives $\\lambda''(0)=2$. The full derivative is $DF(x,\\lambda)=[2x,-1]$, which has rank $1$ everywhere, and at the fold its unit kernel tangent is $t=(1,0)$. [F1, given, algebra]",
+      "58": "5.1 The certified trace therefore starts at $x=-\\alpha$ and accepts a next section root at $x=\\alpha+\\alpha^2>0$, with the fold $x=0$ lying between them on the supplied chart. It is a finite local continuation step through the fold even though $\\lambda'(0)=0$; it asserts nothing about other components. [F4, step 1.1, step 1.2, step 2.1, step 4.1] ∎"
+    },
+    "source_snapshot": "snapshots/ex-pseudo-arclength-crosses-x-squared-fold.md",
+    "source_sha256": "0d42df1b2b3a3295ecf027c6a1bd499666acc6fe828553f90e8ad424a9e2f1ff",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-retarded-delayed-feedback-euler",
+    "section": "Example; Proof",
+    "lines": [
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      63,
+      64,
+      65,
+      66,
+      67
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "delay-block timeline/recurrence diagram",
+    "exact_source_claim": "For h=τ/m, the delay query Y_{n−m} shifts back exactly one block, yielding first-block values Y_j and second-block recurrence Y_{m+j+1}=Y_{m+j}+ahY_j.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw history through 0, then blocks [0,τ] and [τ,2τ], grid spacing h, and delayed arrows from index n to n−m. Annotate exact first-block solution and second-block recurrence; verify index alignment and endpoint formula at 2τ.",
+    "mathematical_check": "Draw history through 0, then blocks [0,τ] and [τ,2τ], grid spacing h, and delayed arrows from index n to n−m. Annotate exact first-block solution and second-block recurrence; verify index alignment and endpoint formula at 2τ.",
+    "screenshots": [
+      "screenshots/ex-retarded-delayed-feedback-euler--01.png",
+      "screenshots/ex-retarded-delayed-feedback-euler--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-retarded-delayed-feedback-euler--01.png": "24bf3f9c1563bf6de5ae0a33a0aabe1ffe8655d082e0872119c72671fe4d4175",
+      "screenshots/ex-retarded-delayed-feedback-euler--02.png": "f64d86aa9c2638c89767ba282d61a8f7dbbf509d759ba1fedd6661bf15da110a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "delay-differential-equations-and-history-discretization-examples"
+    ],
+    "source_lines": {
+      "33": "Let $\\tau>0$, $a\\in\\mathbb R$, and consider $y'(t)=a y(t-\\tau)$ with",
+      "34": "history $\\phi(s)=1$ on $[-\\tau,0]$, through $T=2\\tau$. This is the retarded",
+      "35": "problem of [[def-retarded-delay-equation-and-history-space]], and its unique",
+      "36": "solution is supplied by",
+      "37": "[[thm-retarded-delay-method-of-steps-well-posedness]]. For $h=\\tau/m$ with",
+      "38": "integer $m\\ge1$, apply",
+      "39": "[[alg-retarded-delay-euler-with-stored-history]]. The exact endpoint error is",
+      "40": "$$|y(2\\tau)-Y_{2m}|=\\frac{a^2\\tau h}{2}.$$",
+      "41": "It vanishes when $a=0$ and is first order in $h$ otherwise, in agreement with",
+      "42": "[[thm-retarded-delay-euler-first-order-global-error]].",
+      "63": "1.1 On the first block $0\\le t\\le\\tau$, the delayed value is $1$, so $y(t)=1+at$. On the second block, writing $s=t-\\tau\\in[0,\\tau]$, the delayed value is $y(s)=1+as$, hence $y'(\\tau+s)=a+a^2s$ and $y(2\\tau)=1+2a\\tau+a^2\\tau^2/2$. [F1, given, algebra]",
+      "64": "",
+      "65": "1.2 The first Euler block gives $Y_j=1+ajh$ for $0\\le j\\le m$. On the second block, [F2] gives $Y_{m+j+1}=Y_{m+j}+ahY_j$ for $0\\le j<m$. Summing yields $Y_{2m}=1+a\\tau+a h\\sum_{j=0}^{m-1}(1+ajh)$. Pairing the terms $j$ and $m-1-j$ (and retaining the middle term when $m$ is odd) gives $\\sum_{j=0}^{m-1}j=m(m-1)/2$, so $Y_{2m}=1+2a\\tau+a^2h^2m(m-1)/2$. [F2, given, algebra]",
+      "66": "",
+      "67": "2.1 Subtracting step 1.2 from step 1.1 and using $\\tau=mh$ gives $y(2\\tau)-Y_{2m}=a^2h^2m/2=a^2\\tau h/2$. Since this is nonnegative, its absolute value is the claimed error, including $a=0$. On the first Euler block, $|Y_j|\\le1+|a|\\tau$; on the second, $|Y_{m+j}|\\le1+|a|\\tau+|a|\\tau(1+|a|\\tau)$ for $0\\le j\\le m$. The exact solution is polynomial on each of the first three delay blocks: besides step 1.1, on $[2\\tau,3\\tau]$ it is $y(2\\tau+s)=y(2\\tau)+(a+a^2\\tau)s+(a^2/2)s^2+(a^3/6)s^3$. These formulas give a common bounded tube independent of $h$. The data therefore satisfy [F3] with $\\eta=h_0=\\tau$, because $f(t,x,z)=az$ is time-independent, the history has zero second derivative, and the tube is compact. Thus the exact error formula is consistent with the first-order guarantee. [F1, F2, F3, step 1.1, step 1.2, given, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-retarded-delayed-feedback-euler.md",
+    "source_sha256": "a06875a6a0242a00c4f4c0a55390b70d15340c2c6fea2fae531f5a6065ef8ef3",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-supercritical-hopf-cubic-normal-form",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "phase portrait with parameter bifurcation inset (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Show the origin and concentric cycle r=sqrt(μ) for μ>0, radial arrows pointing toward the cycle, counterclockwise angular orientation from θdot=1, and optionally the cycle-radius branch versus μ. Do not depict a cycle for μ≤0.",
+    "mathematical_check": "Show the origin and concentric cycle r=sqrt(μ) for μ>0, radial arrows pointing toward the cycle, counterclockwise angular orientation from θdot=1, and optionally the cycle-radius branch versus μ. Do not depict a cycle for μ≤0.",
+    "screenshots": [
+      "screenshots/ex-supercritical-hopf-cubic-normal-form--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-supercritical-hopf-cubic-normal-form--01.png": "abf4e70b335cf1855af1c77d97611c16e3b7fd75c9398bf80f8dd354485814b8"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "local-bifurcation-normal-forms-and-numerical-certificates-examples"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/ex-supercritical-hopf-cubic-normal-form.md",
+    "source_sha256": "38db69cbd0c6ef612a6aac88e7e52dbd950632277b4493efbfe2c901bc33c180",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-xd-immigration-death-finite-state-projection",
+    "section": "Example; Proof",
+    "lines": [
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "CTMC transition graph with killed lift",
+    "exact_source_claim": "The full chain permits 0→1→2→1, while the projection F={0,1} sends first exit to an absorbing cemetery state and records it as c_F.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw original chain states 0,1,2,… with rates 0→1:1, 1→0:1, 1→2:1, 2→1:2; alongside the killed lift 0↔1 and 1→†:1 with † absorbing. Label lifted column generator and identify c_F(t)=P(τ_F≤t); distinguish cemetery absorption from return in the original chain.",
+    "mathematical_check": "Draw original chain states 0,1,2,… with rates 0→1:1, 1→0:1, 1→2:1, 2→1:2; alongside the killed lift 0↔1 and 1→†:1 with † absorbing. Label lifted column generator and identify c_F(t)=P(τ_F≤t); distinguish cemetery absorption from return in the original chain.",
+    "screenshots": [
+      "screenshots/ex-xd-immigration-death-finite-state-projection--01.png",
+      "screenshots/ex-xd-immigration-death-finite-state-projection--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-xd-immigration-death-finite-state-projection--01.png": "6038a8cc426f2bc8cd16b89c671d1fc3e9a9664318e15d3681e89d5dbe18999d",
+      "screenshots/ex-xd-immigration-death-finite-state-projection--02.png": "c993881fea60c1c9a659074eb5a5508ceaebf0fbc201398d78d208c7cc8d9dd5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-generator-master-equations-and-uniformization-examples"
+    ],
+    "source_lines": {
+      "41": "Consider immigration at rate $1$ and death at rate $n$ from state $n\\in\\mathbb N_0$, starting at $0$. For $F=\\{0,1\\}$, the cemetery lift on $\\{0,1,\\dagger\\}$ is",
+      "42": "",
+      "43": "$$\\widetilde Q_F=\\begin{pmatrix}-1&1&0\\\\1&-2&0\\\\0&1&0\\end{pmatrix}.$$",
+      "44": "",
+      "45": "Writing the lifted law as $(p_0(t),p_1(t),c_F(t))^T$, the exact cemetery mass is",
+      "46": "",
+      "47": "$$c_F(t)=\\frac1{\\sqrt5}\\left(\\frac{e^{r_+t}-1}{r_+}-\\frac{e^{r_-t}-1}{r_-}\\right),\\qquad r_\\pm=\\frac{-3\\pm\\sqrt5}{2}.$$",
+      "48": "",
+      "49": "It equals the probability of having exited $F$ by time $t$ and therefore is the exact embedded killed-vector $\\ell^1$ error. A path can exit and return: $0\\to1\\to2\\to1$ has positive probability for every $t>0$, so the full marginal at state $1$ can exceed the killed projection there.",
+      "78": "1.3 On $F=\\{0,1\\}$, state $0$ jumps to $1$ at rate $1$; state $1$ jumps to $0$ at rate $1$ and exits to $2\\notin F$ at rate $1$. These off-diagonal rates are nonnegative, and the cemetery construction [F4] gives the displayed $\\widetilde Q_F$ with zero column sums. Multiplying by the lifted probability vector gives $p_0'=-p_0+p_1$, $p_1'=p_0-2p_1$, and $c_F'=p_1$, with initial vector $(1,0,0)^T$. [F1, F4, given, algebra]",
+      "79": "",
+      "80": "2.1 From $p_1'=p_0-2p_1$ we have $p_0=p_1'+2p_1$; differentiating and using $p_0'=-p_0+p_1$ yields $p_1''+3p_1'+p_1=0$, with $p_1(0)=0$ and $p_1'(0)=1$. The characteristic roots are $r_\\pm=(-3\\pm\\sqrt5)/2$ and $r_+-r_-=\\sqrt5$, so the unique solution is $p_1(t)=(e^{r_+t}-e^{r_-t})/\\sqrt5$. [F5, step 1.3, algebra]",
+      "81": "",
+      "82": "3.1 Since $c_F'=p_1$ and $c_F(0)=0$, integrating the expression in step 2.1 gives the displayed formula for $c_F(t)$. By [F6], this coordinate is $\\mathbb P(\\tau_F\\le t)$ and equals the embedded killed-vector $\\ell^1$ error. [step 2.1, F6, algebra]",
+      "83": "",
+      "84": "4.1 Fix $t>0$ and choose ordered times $0<s_1<s_2<s_3<t$. The joint density for jumps $0\\to1$ at $s_1$, $1\\to2$ at $s_2$, and $2\\to1$ at $s_3$, followed by no further jump through $t$, is $e^{-s_1}\\cdot1\\cdot e^{-2(s_2-s_1)}\\cdot1\\cdot e^{-3(s_3-s_2)}\\cdot2\\cdot e^{-2(t-s_3)}$, which is strictly positive; integrating this positive density over the nonempty ordered-time simplex gives positive probability. Such paths contribute to the full marginal at state $1$ but have already been killed at their first exit from $F$. [F1, F3, F4, given, construct] ∎"
+    },
+    "source_snapshot": "snapshots/ex-xd-immigration-death-finite-state-projection.md",
+    "source_sha256": "4e634c0c9ffa240eea48c7b84d4bc0bbee4eb1e00d5172e459bca0360a833fdb",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-xd-two-state-gating-uniformization",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "two-state transition graph (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw nodes off/on, directed arrows off→on labelled α and on→off labelled β, and beside it the displayed column generator with column sums zero; indicate the initial off state and p_on(t)=α(1−e^(−(α+β)t))/(α+β) when α+β>0.",
+    "mathematical_check": "Draw nodes off/on, directed arrows off→on labelled α and on→off labelled β, and beside it the displayed column generator with column sums zero; indicate the initial off state and p_on(t)=α(1−e^(−(α+β)t))/(α+β) when α+β>0.",
+    "screenshots": [
+      "screenshots/ex-xd-two-state-gating-uniformization--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-xd-two-state-gating-uniformization--01.png": "da0af9461f20775a706d124111f1be3c94bac811b47f8756f45a66173b3dcf87"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-generator-master-equations-and-uniformization-examples"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/ex-xd-two-state-gating-uniformization.md",
+    "source_sha256": "da664065f19ba8763796c5feb6c149968e556e122109dc5f57aeafa2a5d270fe",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-positive-convex-polygon-winding-index",
+    "section": "Item body",
+    "lines": [
+      33,
+      45,
+      53,
+      55
+    ],
+    "symptom": "The proof depends on edge orientation and the left/right index jump. A diagram can make the orientation convention and the local interior/exterior side concrete, with explicit winding values.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-oriented-polygon-winding-diagram",
+    "exact_source_claim": "A counterclockwise boundary of a strictly convex polygon has winding number 1 inside and 0 outside; along a positively oriented regular edge, the interior lies to the left and left-minus-right winding index is 1.",
+    "selection_reason": "The proof depends on edge orientation and the left/right index jump. A diagram can make the orientation convention and the local interior/exterior side concrete, with explicit winding values.",
+    "concrete_diagram_content": "Draw a strictly convex polygon with cyclically ordered vertices v_0,...,v_{m-1} and counterclockwise edge arrows. Mark an interior z with n(Γ,z)=1 and exterior q with n(Γ,q)=0. At one edge, orient its tangent in the positive real direction and label the interior locally to the left and exterior to the right, showing n_left−n_right=1.",
+    "mathematical_check": "Draw a strictly convex polygon with cyclically ordered vertices v_0,...,v_{m-1} and counterclockwise edge arrows. Mark an interior z with n(Γ,z)=1 and exterior q with n(Γ,q)=0. At one edge, orient its tangent in the positive real direction and label the interior locally to the left and exterior to the right, showing n_left−n_right=1.",
+    "screenshots": [
+      "screenshots/lem-positive-convex-polygon-winding-index--01.png",
+      "screenshots/lem-positive-convex-polygon-winding-index--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-positive-convex-polygon-winding-index--01.png": "ced7d347df9b1cdde9dd7108b68fb91b83a5ee1d26bed8d76c3179d9607154a6",
+      "screenshots/lem-positive-convex-polygon-winding-index--02.png": "60f00e8033e4a3bef43a8a0bb7ab7dbe7bd89baa35f0e56acf26f939175635d5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "periodic-orbit-shooting-collocation-and-floquet-error"
+    ],
+    "source_lines": {
+      "33": "Let $v_0,\\ldots,v_{m-1}\\in\\mathbb Q+i\\mathbb Q$, $m\\ge3$, be the cyclically ordered vertices of a simple strictly convex polygon whose edges are traversed counterclockwise. Let $P$ be its filled convex hull and let $\\Gamma$ be the concatenation of its oriented edges. For every $z\\notin\\Gamma$, the winding number $n(\\Gamma,z)$ is $1$ if $z\\in\\operatorname{int}P$ and $0$ if $z\\notin P$.",
+      "45": "[F4] At a single regular arc traversed with positive real tangent, the index on the left side minus the index on the right side is one ([[lem-winding-number-jumps-by-one-across-a-regular-planar-arc]]).",
+      "53": "3.1 Fix $z\\in\\operatorname{int}P$. Choose a ray from $z$ whose direction is not aimed at a vertex. Its intersection with the convex polygon is a bounded interval starting at $z$, so the ray exits at the interior $p$ of a single edge with directed tangent $v\\ne0$. The polygon interior lies locally to the left of this positively oriented edge. Apply the orientation-preserving similarity $\\rho(w)=\\overline v(w-p)/|v|$, which sends $p$ to $0$ and the edge tangent to the positive real direction. For every $a\\notin\\Gamma$, put $c=\\overline v/|v|$. Parametrizing the transformed contour and using [F1] gives $\\int_{\\rho\\circ\\Gamma}\\frac{d\\zeta}{\\zeta-\\rho(a)}=\\int_\\Gamma\\frac{c\\,dw}{c(w-a)}=\\int_\\Gamma\\frac{dw}{w-a}$, so $n(\\rho\\circ\\Gamma,\\rho(a))=n(\\Gamma,a)$. For sufficiently small $\\varepsilon>0$, the points $\\rho^{-1}(i\\varepsilon)$ and $\\rho^{-1}(-i\\varepsilon)$ lie respectively on the interior and exterior local sides of the edge. Applying [F4] to $\\rho\\circ\\Gamma$ gives $n(\\rho\\circ\\Gamma,i\\varepsilon)-n(\\rho\\circ\\Gamma,-i\\varepsilon)=1$; the just-proved invariance rewrites this as $n(\\Gamma,\\rho^{-1}(i\\varepsilon))-n(\\Gamma,\\rho^{-1}(-i\\varepsilon))=1$. The exterior-side index is zero by step 2.1. Thus an interior point near that edge has winding number one. [F1, F4, step 2.1, choose, algebra]",
+      "55": "4.1 The interior of a convex polygon is connected. Its points avoid $\\Gamma$, so [F2] makes the winding number constant throughout the interior. Step 3.1 identifies this constant as one. Together with step 2.1 this proves both cases. [F2, step 2.1, step 3.1] ∎"
+    },
+    "source_snapshot": "snapshots/lem-positive-convex-polygon-winding-index.md",
+    "source_sha256": "40e06219e1235dea23c3a948d23eb63e7466b5a30ed1d96b49c33badc0e34d1b",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain-editorial-candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-transverse-hybrid-event-time-error",
+    "section": "Item body",
+    "lines": [
+      32,
+      33,
+      34,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "transverse event bracket / guard residual geometry",
+    "exact_source_claim": "For h(t)=g(t,y(t)), the guard has a unique root τ on J with declared orientation σ and σh′≥ν; a dense reconstruction U and residual at τ-hat yield |τ-hat−τ|≤(L_gη+ε)/ν.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/lem-transverse-hybrid-event-time-error--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-transverse-hybrid-event-time-error--01.png": "121f394caa9c7e0ace48877bcadd064db0c830ab9ae203164bf2a4b58e348fc1"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "source_lines": {
+      "32": "Let $J=[a,b]$ with $a<b$, let $y$ be an exact incoming mode trajectory on $J$, and let $U$ be a dense reconstruction with $\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta$. Let $g(t,x)$ be $L_g$-Lipschitz in $x$ on the certified tube, with declared crossing orientation $\\sigma\\in\\{-1,+1\\}$. Suppose $h(t)=g(t,y(t))$ has a root $\\tau\\in J$ and, throughout $J$, $\\sigma h'(t)\\ge\\nu$ for some $\\nu>0$. If a reported time $\\widehat\\tau\\in J$ satisfies $|g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon$, then",
+      "33": "$$|\\widehat\\tau-\\tau|\\le\\frac{L_g\\eta+\\varepsilon}{\\nu}\\le\\frac{C(\\eta+\\varepsilon)}{\\nu},\\qquad C:=\\max\\{L_g,1\\}.$$",
+      "34": "The same-sign derivative condition makes $\\tau$ the unique guard root in $J$. The conclusion concerns a root matched to this transverse bracket; it gives no bound at grazing or across a change of event ordering.",
+      "50": "1.1 By [F2] and the state-Lipschitz bound, $|h(\\widehat\\tau)-g(\\widehat\\tau,U(\\widehat\\tau))|\\le L_g\\eta$. The residual hypothesis therefore gives $|h(\\widehat\\tau)|\\le L_g\\eta+\\varepsilon$, since $h(\\tau)=0$. [given, F1, F2, algebra]",
+      "51": "",
+      "52": "2.1 If $\\widehat\\tau=\\tau$ the desired bound is immediate. Otherwise apply [F4] to $h$ on the interval with endpoints $\\tau$ and $\\widehat\\tau$. Since $\\sigma h'\\ge\\nu$ throughout, the derivative has one fixed sign and magnitude at least $\\nu$, so $|h(\\widehat\\tau)-h(\\tau)|\\ge\\nu|\\widehat\\tau-\\tau|$. Using $h(\\tau)=0$ and step 1.1 proves $|\\widehat\\tau-\\tau|\\le(L_g\\eta+\\varepsilon)/\\nu$. [given, F1, F3, F4, step 1.1, algebra]",
+      "53": "",
+      "54": "3.1 Since $L_g\\eta+\\varepsilon\\le\\max\\{L_g,1\\}(\\eta+\\varepsilon)$, the second inequality follows with the stated $C$. For any $s<t$ in $J$, [F4] gives $h(t)-h(s)=h'(c)(t-s)$ for some interior $c$; the fixed sign of $h'$ makes this increment nonzero, so $h$ is strictly monotone and its root in $J$ is unique. [given, F4, step 2.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/lem-transverse-hybrid-event-time-error.md",
+    "source_sha256": "88c7b1708f4ae8c072312c66a7732c078e951c10a4e6c3a36d81e3dfcdb7ec95",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "prop-multiple-shooting-residual-block-jacobian",
+    "section": "Item body",
+    "lines": [
+      25,
+      26,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "multiple-shooting dependency / block sparsity diagram",
+    "exact_source_claim": "The residual rows are segment endpoint mismatches Ψ_i(s_i)−s_{i+1}, followed by the endpoint boundary residual B(s_0,s_N); the Jacobian has adjacent block entries plus a first/last-block border.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/prop-multiple-shooting-residual-block-jacobian--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/prop-multiple-shooting-residual-block-jacobian--01.png": "01d60e7a62354379e63e2c0cc156d323efdb561b5b559c065c003a732a0b6387"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "nonlinear-boundary-value-solvers"
+    ],
+    "source_lines": {
+      "25": "Fix a mesh $a=t_0<\\cdots<t_N=b$, $N\\ge1$, and an open product domain of segment starts $(s_0,\\ldots,s_N)$ on which $B$ and each exact or certified approximate segment endpoint map $\\Psi_i:U_i\\to\\mathbb R^d$ are $C^1$. Here $C^1$ means total differentiability with continuous derivative matrix entries. Define $F$ by rows $F_i=\\Psi_i(s_i)-s_{i+1}$ for $0\\le i<N$ and $F_N=B(s_0,s_N)$. Its Jacobian block row $i<N$ has $D\\Psi_i(s_i)$ in column $i$, $-I_d$ in column $i+1$, and zero in every other column. Its boundary row has $D_1B$ and $D_2B$ in columns $0$ and $N$ and zero elsewhere. When $N=1$, columns $0$ and $N$ are distinct.",
+      "26": "",
+      "41": "1.1 For an interior row $F_i(s_0,\\ldots,s_N)=\\Psi_i(s_i)-s_{i+1}$, varying only block $s_i$ changes that row by $D\\Psi_i(s_i)$, varying only block $s_{i+1}$ changes it by $-I_d$, and varying any other block leaves it unchanged. These are precisely the stated nonzero and zero blocks. [given, F1, F4, algebra]",
+      "42": "",
+      "43": "1.2 For the boundary row $F_N=B(s_0,s_N)$, the chain rule gives derivatives $D_1B$ and $D_2B$ with respect to the first and last blocks; all intermediate blocks are absent from its formula, so their derivatives are zero. The differentiability assertions for exact and approximate segment maps follow from [F2] and [F3]. [given, F1, F2, F3, algebra]",
+      "44": "",
+      "45": "2.1 The residual has $(N+1)d$ scalar rows and $(N+1)d$ scalar variables, so the displayed block matrix is square. [given, step 1.1, step 1.2, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/prop-multiple-shooting-residual-block-jacobian.md",
+    "source_sha256": "724ce31be6c461535a59de572158574e36c6b5451ab17993c134c186bfec23ea",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-age-structured-renewal-bv-l1-convergence",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "age-time mesh/characteristics schematic (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw age a horizontally and time t vertically, transport characteristics moving with slope da/dt=1, the age-zero renewal inflow, cell fluxes on the upwind grid, and the cutoff outflow. Mark that the initial trace may mismatch the birth boundary at (a,t)=(0,0), so the drawing does not suggest compatibility or a Taylor error rate.",
+    "mathematical_check": "Draw age a horizontally and time t vertically, transport characteristics moving with slope da/dt=1, the age-zero renewal inflow, cell fluxes on the upwind grid, and the cutoff outflow. Mark that the initial trace may mismatch the birth boundary at (a,t)=(0,0), so the drawing does not suggest compatibility or a Taylor error rate.",
+    "screenshots": [
+      "screenshots/thm-age-structured-renewal-bv-l1-convergence--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-age-structured-renewal-bv-l1-convergence--01.png": "b6794b35b0fed6621ec205e075dafae483ff2a08bff6abb5d6ae7e6a4c9b50bf"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/thm-age-structured-renewal-bv-l1-convergence.md",
+    "source_sha256": "7440db228be9a5fda1923229e16b30c6bc12163e8ce0bce2637e6bb060153d74",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-age-structured-renewal-characteristic-solution",
+    "section": "Item body",
+    "lines": [
+      36,
+      46,
+      58,
+      74
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "characteristic regions in the time-age plane",
+    "exact_source_claim": "The density has an old-cohort branch for a≥t and a newborn branch for 0≤a<t, split along the diagonal a=t; newborns enter at the renewal boundary and survive along characteristics.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-age-structured-renewal-characteristic-solution--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-age-structured-renewal-characteristic-solution--01.png": "ff2a712ff8ae88055b32fdcd09eec2a13d716d68e84f62b21bb2cf392549c5c2"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "36": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and",
+      "46": "$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+      "58": "1.1 The old-cohort branch in the Statement follows the characteristic $a(s)=x+s$ and survival $S(x,t)$ from [F1]; the newborn branch starts from the boundary value $B(t-a)$ at time $t-a$ and follows survival $S(0,a)$. These are the characteristic branches in the definition of a mild solution. We use them to construct a candidate after solving the Volterra equation; no pointwise differentiability of a weak solution is assumed. [F1, F2, algebra]",
+      "74": "5.1 The old-cohort region $a\\ge t$ and newborn region $a<t$ partition the time-age domain up to a measure-zero diagonal. Adding their integrals from steps 2.3 and 2.4, then multiplying by $-1$, gives exactly the weak identity in [F1] with initial term $\\int n_0(x)\\phi(0,x)dx$ and boundary term $\\int_0^T B(s)\\phi(s,0)ds$. Step 2.1 gives $B(t)=\\int_0^\\infty\\beta(a)n(t,a)da$, and step 4.1 gives $n\\in C([0,T];L^1)$ and nonnegativity. Thus the characteristic formula is a weak, hence mild, solution. [F1, step 2.1, step 4.1, step 2.3, step 2.4, algebra]"
+    },
+    "source_snapshot": "snapshots/thm-age-structured-renewal-characteristic-solution.md",
+    "source_sha256": "3329e09452de530de3cb976ded14657459f01e1002a4420f209f9e12c58a5920",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+    "section": "Item body",
+    "lines": [
+      36,
+      46,
+      52,
+      54
+    ],
+    "symptom": "Two characteristic branches meet at the renewal boundary and the cutoff outflow depends on which initial cohort reaches A. A time-age sketch would clarify branch domains and the absorbing boundary.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-age-time-characteristic-diagram",
+    "exact_source_claim": "The density has an initial-cohort branch n_0^A(a-t)S(a-t,t) for t≤a and a newborn branch B_A(t-a)S(0,a) for a<t; initial cohorts exit at cutoff A while newborn cohorts cannot reach A when T<A.",
+    "selection_reason": "Two characteristic branches meet at the renewal boundary and the cutoff outflow depends on which initial cohort reaches A. A time-age sketch would clarify branch domains and the absorbing boundary.",
+    "concrete_diagram_content": "In the (t,a) plane draw characteristics da/dt=1; mark the initial trace at t=0, newborn boundary a=0 with rate B_A(t), cutoff a=A, the split a=t, and terminal exits from initial ages x∈[A-t,A). Label survival factors S(x,t) and S(0,a) on the respective branches; do not draw newborn trajectories reaching A for t≤T<A.",
+    "mathematical_check": "In the (t,a) plane draw characteristics da/dt=1; mark the initial trace at t=0, newborn boundary a=0 with rate B_A(t), cutoff a=A, the split a=t, and terminal exits from initial ages x∈[A-t,A). Label survival factors S(x,t) and S(0,a) on the respective branches; do not draw newborn trajectories reaching A for t≤T<A.",
+    "screenshots": [
+      "screenshots/thm-age-structured-renewal-finite-cutoff-characteristic-solution--01.png",
+      "screenshots/thm-age-structured-renewal-finite-cutoff-characteristic-solution--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-age-structured-renewal-finite-cutoff-characteristic-solution--01.png": "c2ba4541ac463a66256720adf4382d0e9e60e40366219447339a5df94fe62516",
+      "screenshots/thm-age-structured-renewal-finite-cutoff-characteristic-solution--02.png": "3ba715491dc105d0c5d5209b54c9c235aef39b85e095b3191ba902381c565ad5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "source_lines": {
+      "36": "For [[def-age-structured-renewal-finite-cutoff-model]], define $K(a)=\\beta(a)S(0,a)$ and",
+      "46": "$$n^A(t,a)=\\begin{cases}n_0^A(a-t)S(a-t,t),&t\\le a<A,\\\\B_A(t-a)S(0,a),&0\\le a<t.\\end{cases}$$",
+      "52": "For $t\\le T<A$, its exact cumulative number outflow is",
+      "54": "$$O_A(t)=\\int_{A-t}^{A}n_0^A(x)S(x,A-x)\\,dx.$$"
+    },
+    "source_snapshot": "snapshots/thm-age-structured-renewal-finite-cutoff-characteristic-solution.md",
+    "source_sha256": "97927af2f922633f79128fdcb7152b1c934340db0992f272a92e9740f22cbb67",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain-editorial-candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "hybrid time-line with mode-segment state tracks (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw exact and reported trajectories with labeled mode segments, exact event τ_j, later reported event τhat_j, guard bracket/lag, reset jump, and aligned outgoing comparison at τhat_j. Show E_j entering the segment, D_j incoming error, and E_(j+1) after reset. Make explicit that no same-clock state error is claimed between the exact jump and the later reported jump.",
+    "mathematical_check": "Draw exact and reported trajectories with labeled mode segments, exact event τ_j, later reported event τhat_j, guard bracket/lag, reset jump, and aligned outgoing comparison at τhat_j. Show E_j entering the segment, D_j incoming error, and E_(j+1) after reset. Make explicit that no same-clock state error is claimed between the exact jump and the later reported jump.",
+    "screenshots": [
+      "screenshots/thm-finite-hybrid-trajectory-error-under-separated-events--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-finite-hybrid-trajectory-error-under-separated-events--01.png": "7cdb486c88d561b6df69c2be815686f53406cd8ce0562ac67461de13407730cd"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/thm-finite-hybrid-trajectory-error-under-separated-events.md",
+    "source_sha256": "117eccbdbe0710f2b1cd63cade141502249a7938ceb0c3bfd036177f44d59d68",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-hopf-local-branch-and-stability",
+    "section": "Item body",
+    "lines": [
+      50,
+      58
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "local Hopf amplitude/parameter bifurcation sketch",
+    "exact_source_claim": "Small periodic orbits exist only for βℓ₁<0 with r²=−β/(ω₀ℓ₁)+O(|β|^{3/2}); the radial multiplier and transverse spectrum determine local stability under the stated conditions.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-hopf-local-branch-and-stability--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-hopf-local-branch-and-stability--01.png": "89279a4cd9bccecb3e2cd03696c40acd7ed7fa060c127d7d5e0e39768c40df6e"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "local-bifurcation-normal-forms-and-numerical-certificates"
+    ],
+    "source_lines": {
+      "50": "There is a local branch of nonconstant periodic orbits, unique up to phase on a fixed local [[def-local-periodic-orbit-poincare-and-floquet-data|Poincare section]]. Writing $r>0$ for amplitude in the normal-form center coordinate and $\\beta$ for the real part of the critical eigenvalue, its period and parameter satisfy",
+      "58": "and the other Floquet multipliers converge, with algebraic multiplicity, to $e^{2\\pi\\nu_j/\\omega_0}$. If any $\\operatorname{Re}\\nu_j>0$, the periodic orbit is unstable. If all $\\operatorname{Re}\\nu_j<0$, the orbit is orbitally asymptotically stable for $\\beta>0$ and unstable for $\\beta<0$. These are local conclusions only; no global branch completeness or global dynamics is asserted."
+    },
+    "source_snapshot": "snapshots/thm-hopf-local-branch-and-stability.md",
+    "source_sha256": "f3545f126da6807a4c40ba3eda42acf8b40c58638df58078178af6190f4f6c83",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-minimum-intensity-tau-leap-level-variance",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "coupling timeline with shared and residual count streams (editorial candidate; uncertain)",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw one coarse interval split into two fine half-intervals; above/below it track fine state updates versus the held coarse state. For each channel mark the shared count mean h min(a_j(x),a_j(z)) and the two residual means, then show the two coarse count vectors accumulated into one coarse leap.",
+    "mathematical_check": "Draw one coarse interval split into two fine half-intervals; above/below it track fine state updates versus the held coarse state. For each channel mark the shared count mean h min(a_j(x),a_j(z)) and the two residual means, then show the two coarse count vectors accumulated into one coarse leap.",
+    "screenshots": [
+      "screenshots/thm-minimum-intensity-tau-leap-level-variance--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-minimum-intensity-tau-leap-level-variance--01.png": "dc46a69659c958f9b63f125171286db4ec8f0de178aed86c4700a27c81c191de"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "tau-leaping-and-reaction-diffusion-model-error"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/thm-minimum-intensity-tau-leap-level-variance.md",
+    "source_sha256": "628eb6cd3b8615c7fb009f2708834ade9d569af15780fc7fc76d6e2687778b70",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+    "section": "Statement; Proof",
+    "lines": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      53,
+      54,
+      55,
+      56,
+      57
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "hybrid event-time/reset comparison diagram",
+    "exact_source_claim": "A perturbation shifts the guard-crossing time by δτ=−D_xg δx^−/κ; reset and post-event flow then produce the same-clock variation Sδx^− with the displayed sign convention.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw incoming trajectory crossing g=0 at τ, perturbed crossing at τ+δτ, reset map R, outgoing vector fields f−/f+, and compare both outgoing states at t0=max(τ,τδ). Check the numerator f+−D_xR f−−∂tR, denominator κ=∂tg+D_xg f−, and column-times-row product.",
+    "mathematical_check": "Draw incoming trajectory crossing g=0 at τ, perturbed crossing at τ+δτ, reset map R, outgoing vector fields f−/f+, and compare both outgoing states at t0=max(τ,τδ). Check the numerator f+−D_xR f−−∂tR, denominator κ=∂tg+D_xg f−, and column-times-row product.",
+    "screenshots": [
+      "screenshots/thm-saltation-matrix-for-a-transverse-hybrid-reset--01.png",
+      "screenshots/thm-saltation-matrix-for-a-transverse-hybrid-reset--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-saltation-matrix-for-a-transverse-hybrid-reset--01.png": "e33a0640ebe3c2c295c422723dcd9408c43cd194d280ab37d4598c54cc11176f",
+      "screenshots/thm-saltation-matrix-for-a-transverse-hybrid-reset--02.png": "85ecc3710b7bcd5f4c4bb6491cb91190c0bd894ce55314a4e457585550516819"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "source_lines": {
+      "31": "Consider a transition in [[def-hybrid-mode-guard-reset-system]] with state dimension $d\\ge1$, from mode $m^-$ to mode $m^+$ at $(\\tau,x^-)$. Let $g(t,x)=0$ be its $C^1$ guard, let $R(t,x)$ be its $C^1$ reset, and write $f^-=f_{m^-}(\\tau,x^-)$ and $f^+=f_{m^+}(\\tau,R(\\tau,x^-))$. For each incoming and outgoing mode, assume its IVPs initialized at time $\\tau$ from states near $x^-$ and $R(\\tau,x^-)$, respectively, have unique solutions on a common finite interval and remain in a bounded convex open tube whose compact closure lies inside the open ODE domain. Use the initial state as the parameter and the identity as its $C^1$ initial map in [[lem-parameter-ode-flow-tangent-on-common-tube]]. For event-time variations to the left of $\\tau$, impose the same tube hypothesis on the time-reversed incoming field. Thus the relevant mode flows are $C^1$ in initial state, and the incoming flow is jointly $C^1$ in time and initial state near $(\\tau,x^-)$. Assume also that",
+      "32": "$$\\kappa:=\\partial_tg(\\tau,x^-)+D_xg(\\tau,x^-)f^-\\ne0,$$",
+      "33": "and the nominal event crosses in its declared orientation. For every sufficiently small incoming perturbation $\\delta x^-$ at the common pre-event time $\\tau$, initialize the perturbed incoming mode at $x^-+\\delta x^-$, and let $\\tau_\\delta$ be its local guard root near $\\tau$; assume this root is the selected transition. Put $t_0=\\max\\{\\tau,\\tau_\\delta\\}$, and define $\\delta x^+$ as the right-limit difference $\\lim_{t\\downarrow t_0}(x_\\delta^+(t)-x^+(t))$, with both outgoing trajectories evaluated at the same clock time $t>t_0$. Then",
+      "34": "$$\\delta x^+=S\\,\\delta x^-+o(\\|\\delta x^-\\|_2),\\qquad S=D_xR+\\frac{(f^+-D_xR f^- -\\partial_tR)D_xg}{\\partial_tg+D_xg f^-},$$",
+      "35": "where all derivatives and vector fields are evaluated at the nominal event and the matrix product in the numerator is a column times a row. No claim is made when the crossing derivative vanishes or a nearby trajectory follows a different transition.",
+      "53": "1.1 Let $H(s,x)=g(s,\\phi^-(s;\\tau,x))$, where $\\phi^-$ is the incoming mode flow initialized at the nominal pre-event time. The stated common-tube hypothesis and [F4], applied to the field and to its time reversal on the left interval, give the required $C^1$ flow dependence near $(\\tau,x^-)$. By [F5], $H$ is $C^1$. At $(s,x)=(\\tau,x^-)$, [F2] gives $\\partial_sH=\\kappa\\ne0$. By [F3], the nearby event time $s=\\tau(x)$ is $C^1$. Since $\\phi^-(\\tau;\\tau,x)=x$, its initial-state derivative at $s=\\tau$ is the identity. Implicit differentiation gives $D\\tau(x^-)=-D_xg/\\kappa$. Thus the actual shift $\\delta\\tau:=\\tau_\\delta-\\tau$ satisfies $\\delta\\tau=-D_xg\\,\\delta x^-/\\kappa+o(\\|\\delta x^-\\|_2)$. [given, F2, F3, F4, F5, algebra]",
+      "54": "",
+      "55": "2.1 At the perturbed event, [F4] gives incoming state $x^-+\\delta x^-+f^-\\delta\\tau+o(\\|\\delta x^-\\|_2)$. By [F5], the reset-state variation is $D_xR\\,\\delta x^-+(D_xR f^-+\\partial_tR)\\delta\\tau+o(\\|\\delta x^-\\|_2)$. Compare at $t_0=\\max\\{\\tau,\\tau+\\delta\\tau\\}$. If $\\delta\\tau\\ge0$, the nominal outgoing state advances from $\\tau$ to $t_0$ by $f^+\\delta\\tau+o(|\\delta\\tau|)$, while the perturbed state has just reset. If $\\delta\\tau<0$, the perturbed outgoing state advances from its reset at $\\tau+\\delta\\tau$ to $t_0=\\tau$ by $f^+(-\\delta\\tau)+o(\\|\\delta x^-\\|_2)$, while the nominal state has just reset. In both cases the same-clock difference is $D_xR\\,\\delta x^-+(D_xR f^-+\\partial_tR-f^+)\\delta\\tau+o(\\|\\delta x^-\\|_2)$, since step 1.1 gives $\\delta\\tau=O(\\|\\delta x^-\\|_2)$. [given, F1, F4, F5, step 1.1, algebra]",
+      "56": "",
+      "57": "3.1 Substitute the expression for $\\delta\\tau$ from step 1.1 into step 2.1 and factor $\\delta x^-$. The resulting linear map is $D_xR+(f^+-D_xR f^- -\\partial_tR)D_xg/\\kappa$, which is the stated matrix $S$. The remainder remains $o(\\|\\delta x^-\\|_2)$ because the event-time variation is linear to first order by step 1.1. [step 1.1, step 2.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/thm-saltation-matrix-for-a-transverse-hybrid-reset.md",
+    "source_sha256": "6312171201a75b7d4751c71750f2933575aafc3c00378f9673770c61e03ecaff",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  }
+]

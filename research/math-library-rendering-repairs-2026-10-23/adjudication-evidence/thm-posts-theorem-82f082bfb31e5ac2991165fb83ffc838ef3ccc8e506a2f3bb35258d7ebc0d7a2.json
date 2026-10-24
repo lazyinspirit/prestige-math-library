@@ -1,0 +1,72 @@
+{
+  "id": "thm-posts-theorem",
+  "agent": "/root/rendering_repair_coordinator/cpt_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "display-math-rendered-inline",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution inspection confirms the intended $$ display is incorporated into the prose line: the second equivalence starts with A in at the far right and continues with Delta on the next line. I do not infer missing glyphs from the tile; the confirmed defect is failed display layout and an internally split equivalence rather than demonstrated loss of mathematical content.",
+      "action": "Separate display delimiters from surrounding prose and put the two unchanged equivalences on aligned display rows.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Converted the adjacent single-line display into a blank-line-separated display with an aligned environment and one equivalence per row. No mathematical tokens, hypotheses, proof, dependencies, sources, or frontmatter changed.",
+  "source_lines_after": {
+    "start": 29,
+    "end": 36
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "f13c6ce4e1f6720f465e5ea50a209d46a0851c42098b3653cdaf37bc03186065",
+  "after_raw_sha256": "234ce76319e0e4efa594d129f2e49e930aedf723463e8dfdc34033188d2bc728",
+  "status_preserved": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-posts-theorem.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-posts-theorem.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-posts-theorem.md",
+            "item_id": "thm-posts-theorem",
+            "status": "pass",
+            "strategy": "induction"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-posts-theorem.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_check": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-posts-theorem--01.png",
+    "original_view": "standalone original resolution",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt013-final/manifest.json",
+    "source_sha256": "234ce76319e0e4efa594d129f2e49e930aedf723463e8dfdc34033188d2bc728",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/cpt013-final/screenshots/thm-posts-theorem--01.png",
+    "preview_view": "standalone original resolution",
+    "result": "Both equivalences render completely in centered aligned rows; surrounding statement and full proof remain visible with no overlap or raw TeX.",
+    "limitations": "Native local ItemBody preview only; no production HTTP route. Reference-map diagnostics count 16 concerns unrelated carriers. The earlier cpt013 preview was an intermediate capture and is not the final source evidence."
+  }
+}

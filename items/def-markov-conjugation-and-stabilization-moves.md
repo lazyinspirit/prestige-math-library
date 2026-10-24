@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-markov-conjugation-and-stabilization-moves.json
+  precheck: n/a
 id: def-markov-conjugation-and-stabilization-moves
 kind: definition
 title: "Markov conjugation and stabilization moves"
@@ -13,13 +16,6 @@ proof_strategy: not-applicable
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full item proof read and accepted exact subsequent delta; item def-markov-conjugation-and-stabilization-moves; evidence research/frontier-38-owner-30-reader-17.md, research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u17.json, research/frontier-38-owner-30-alpha-batch-17-5a-decisions.json. Original source/coverage limitations retained; no recursive audit of all prerequisites or full bibliography claimed. Restored from completed 2026-10-03 evidence; no new audit or independent audit of local repair claimed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
 sources:
   references:
     - title: "Birman and Brendle, Braids: A Survey, Handbook of Knot Theory chapter, author manuscript; section 2 before Theorem 4, printed pp. 17-19"
@@ -88,3 +84,82 @@ traversed first in geometric time, and stabilization always adds the new
 strand on the right. The definition is choice-free: no choice principle is used
 in the Artin presentation, in the inclusion, or in the identification of
 $\sigma_n$ with the elementary geometric half twist.
+
+
+## Remarks
+
+The schematic below draws the three-strand case, with geometric time increasing
+upward. Boxes stand for whole braid factors, so the conjugate is traversed in
+the order $\gamma^{-1}$, $\beta$, $\gamma$. In each stabilization panel the
+$\beta$ box is the word on the first three points of $Q^{(4)}$, not the original
+parametrized braid at $Q^{(3)}$; the fourth strand is fixed above the new half
+twist. The half twist affects only positions $3$ and $4$, and is traversed
+before $\iota_3(\beta)$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth,line width=0.8pt]
+\node at (0.7,4.1) {Conjugation in $B_3$};
+\draw[->] (-0.55,0.2) -- (-0.55,3.55) node[above] {$t$};
+\foreach \x in {0,0.7,1.4} {
+  \draw (\x,0) -- (\x,0.4);
+  \draw (\x,1.1) -- (\x,1.4);
+  \draw (\x,2.1) -- (\x,2.4);
+  \draw[->] (\x,3.1) -- (\x,3.55);
+}
+\draw (-0.2,0.4) rectangle (1.6,1.1);
+\draw (-0.2,1.4) rectangle (1.6,2.1);
+\draw (-0.2,2.4) rectangle (1.6,3.1);
+\node at (0.7,0.75) {$\gamma^{-1}$};
+\node at (0.7,1.75) {$\beta$};
+\node at (0.7,2.75) {$\gamma$};
+\node at (0.7,-0.5) {$\gamma\beta\gamma^{-1}$};
+\begin{scope}[xshift=4cm]
+\node at (0.7,4.1) {Positive stabilization};
+\foreach \x in {0,0.45} {\draw (\x,0) -- (\x,1.6);}
+\draw (0.9,0) -- (1.09,0.38);
+\draw (1.21,0.62) -- (1.4,1);
+\draw (1.4,0) -- (0.9,1);
+\foreach \x in {0.9,1.4} {\draw (\x,1) -- (\x,1.6);}
+\draw (-0.2,1.6) rectangle (1.1,2.8);
+\node at (0.45,2.2) {$\beta$};
+\draw (1.4,1.6) -- (1.4,2.8);
+\foreach \x in {0,0.45,0.9,1.4} {\draw[->] (\x,2.8) -- (\x,3.55);}
+\node at (0.9,-0.18) {$3$};
+\node at (1.4,-0.18) {$4$};
+\node at (1.95,0.5) {$\sigma_3$};
+\node at (0.7,-0.7) {$\iota_3(\beta)\sigma_3$};
+\end{scope}
+\begin{scope}[xshift=8cm]
+\node at (0.7,4.1) {Negative stabilization};
+\foreach \x in {0,0.45} {\draw (\x,0) -- (\x,1.6);}
+\draw (1.4,0) -- (1.21,0.38);
+\draw (1.09,0.62) -- (0.9,1);
+\draw (0.9,0) -- (1.4,1);
+\foreach \x in {0.9,1.4} {\draw (\x,1) -- (\x,1.6);}
+\draw (-0.2,1.6) rectangle (1.1,2.8);
+\node at (0.45,2.2) {$\beta$};
+\draw (1.4,1.6) -- (1.4,2.8);
+\foreach \x in {0,0.45,0.9,1.4} {\draw[->] (\x,2.8) -- (\x,3.55);}
+\node at (0.9,-0.18) {$3$};
+\node at (1.4,-0.18) {$4$};
+\node at (1.95,0.5) {$\sigma_3^{-1}$};
+\node at (0.7,-0.7) {$\iota_3(\beta)\sigma_3^{-1}$};
+\end{scope}
+\end{tikzpicture}
+```
+
+For the crossings, project onto the horizontal-position/time plane with the
+positive second disk coordinate toward the viewer; a gap denotes an underpass.
+The positive half twist sends the left point below the disk midpoint, hence
+away from the viewer, as specified in the elementary-half-twist definition.
+The negative half twist reverses this over/under choice. In general replace
+$3$ and $4$ by $n$ and $n+1$; the first $n-1$ positions are fixed during that
+half twist. Reading a stabilization backward as a move gives its
+destabilization, not reversal of geometric time on its strands.
+
+No closure arcs are drawn: closure identifies equal disk coordinates at
+$t=1$ and $t=0$, carries the increasing-time orientation, and uses the fixed
+map $\varphi$ and disk framing of [[def-closure-of-a-geometric-braid]]. The
+schematic records the factors in the moves; it does not assert an isotopy
+fixing the braid axis. All defining formulas and their justifications above
+are independent of the picture.

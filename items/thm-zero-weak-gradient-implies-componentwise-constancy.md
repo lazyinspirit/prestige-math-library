@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-zero-weak-gradient-implies-componentwise-constancy.json
+  precheck: pass
 id: thm-zero-weak-gradient-implies-componentwise-constancy
 kind: theorem
 title: Zero weak gradient gives componentwise constants
@@ -42,13 +45,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -149,4 +145,4 @@ below. No full-AC selection is made in the ball propagation argument.
 
 6.1 Let $C$ be a connected component of $\Omega$. By [F15], $C$ is open and connected. For a fixed $x_0\in C$, the set $\{x\in C:\kappa(x)=\kappa(x_0)\}$ and its complement are both open in $C$ because $\kappa$ is locally constant. The first set is nonempty, so connectedness gives $\kappa(x)=\kappa(x_0)$ for every $x\in C$; call this value $c_C$. [F15, F16, step 5.1]
 
-7.1 Consider the countable family of all balls $B(q,1/m)$ with $q\in\mathbb Q^n$, $m\ge1$, and $\overline{B(q,2/m)}\subset C$. It covers $C$: around any $x\in C$ take $B(x,\delta)\subset C$. By [F17], choose $m\ge1$ with $3/m<\delta$ and then $q\in\mathbb Q^n$ with $|q-x|<1/m$. Thus $x\in B(q,1/m)$ and $\overline{B(q,2/m)}\subset B(x,\delta)\subset C$. By steps 4.1 and 6.1, $u=c_C$ almost everywhere on each such inner ball. The exceptional sets are measurable and null; by [F19] their countable union is null. Hence $u=c_C$ almost everywhere on all of $C$. If $\Omega=\varnothing$, there is no component to consider. [F4, F15, F17, F19, step 4.1, step 6.1] \square
+7.1 Consider the countable family of all balls $B(q,1/m)$ with $q\in\mathbb Q^n$, $m\ge1$, and $\overline{B(q,2/m)}\subset C$. It covers $C$: around any $x\in C$ take $B(x,\delta)\subset C$. By [F17], choose $m\ge1$ with $3/m<\delta$ and then $q\in\mathbb Q^n$ with $|q-x|<1/m$. Thus $x\in B(q,1/m)$ and $\overline{B(q,2/m)}\subset B(x,\delta)\subset C$. By steps 4.1 and 6.1, $u=c_C$ almost everywhere on each such inner ball. The exceptional sets are measurable and null; by [F19] their countable union is null. Hence $u=c_C$ almost everywhere on all of $C$. If $\Omega=\varnothing$, there is no component to consider. [F4, F15, F17, F19, step 4.1, step 6.1] ∎

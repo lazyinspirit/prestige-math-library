@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-boy-surface-immersion-of-real-projective-two-space.json
+  precheck: pass
 id: ex-a-boy-surface-immersion-of-real-projective-two-space
 kind: example
 title: "Boy's surface: an immersion of the real projective plane in three-space"
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Rob Kusner, Conformal geometry and complete minimal surfaces, Bulletin of the AMS (N.S.) 17 (1987), no. 2, pp. 291–295, Theorem B and Remark 1 (explicit Weierstrass data and immersedness of the odd-p surfaces M_p, p=3)"
@@ -83,3 +80,33 @@ interior poles close to distinct points of the domain with common image $0$.
 5.1 The three interior poles are distinct points of the projective-plane domain: their antipodes lie outside the disk. All have image $0$ by step 3.1, so $\beta$ has a triple point and is not injective. This is the Bryant–Kusner Boy surface; Karcher's source, PDF p.2, describes the three antipodal pairs of planar ends and their common image after inversion. The formulas above verify its immersedness directly. [F2, step 3.1, step 4.1]
 
 6.1 For any immersion $f:\mathbb{RP}^2\to\mathbb R^3$, a global nonzero normal field would orient each tangent plane by the sign of $\det(df_xv_1,df_xv_2,n(x))$, continuously and consistently. This contradicts [F2], so its normal line is nontrivial by [F4]. For the characteristic-class description assume AC as in [F5]. The ambient volume form gives $\det(T\mathbb{RP}^2)\otimes\nu_f\cong\varepsilon^1$, so [F5] yields $w_1(\nu_f)=w_1(T\mathbb{RP}^2)\ne0$. To identify this with the tautological class, represent a point by a unit $x\in S^2$ and tangent vectors by $v,w\in x^\perp$; the map $v\wedge w\mapsto\det(x,v,w)x$ identifies the determinant tangent line with the tautological line. It is unchanged under $(x,v,w)\mapsto(-x,-v,-w)$ and is a fibrewise isomorphism. Thus their $w_1$ classes agree by [F5], giving precisely the tautological degree-one class. [F2, F4, F5, step 4.1, algebra] ∎
+
+
+## Remarks
+
+The following schematic separates the three domain points from their common image. Let $q:D\to\mathbb{RP}^2$ be the disk quotient from [F2], and let $\overline P=\beta\circ q$ denote the extension of $P$ at the poles. Put $r=((3-\sqrt5)/2)^{1/3}$ and $w_j=r\exp(2\pi i(j-1)/3)$ for $j=1,2,3$. The boundary points $a$ and $-a$ illustrate the identification $q(a)=q(-a)$; the interior points $x_j=q(w_j)$ remain distinct. Verification steps 3.1–5.1 establish $\beta(x_1)=\beta(x_2)=\beta(x_3)=0$. The arrows show only these values, not paths on the immersed surface; the verification is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\draw (0,0) circle (1.5);
+\node at (0,2.05) {$D$};
+\fill (0,1.5) circle (1.5pt);
+\fill (0,-1.5) circle (1.5pt);
+\node[above right] at (0,1.5) {$a$};
+\node[below right] at (0,-1.5) {$-a$};
+\fill (1.087,0) circle (1.5pt);
+\fill (-0.544,0.942) circle (1.5pt);
+\fill (-0.544,-0.942) circle (1.5pt);
+\node[below left] at (1.087,0) {$w_1$};
+\node[above left] at (-0.544,0.942) {$w_2$};
+\node[below left] at (-0.544,-0.942) {$w_3$};
+\fill (5,0) circle (2pt);
+\node[right] at (5,0) {$0$};
+\node at (5,2.05) {$\mathbb R^3$};
+\draw[->] (1.15,0) -- (4.9,0);
+\draw[->] (-0.48,0.97) to[out=25,in=135] (4.94,0.08);
+\draw[->] (-0.48,-0.97) to[out=-25,in=-135] (4.94,-0.08);
+\node at (3,1.65) {$\overline P=\beta\circ q$};
+\node at (2.5,-2.15) {$\beta:\mathbb{RP}^2\longrightarrow\mathbb R^3$};
+\end{tikzpicture}
+```

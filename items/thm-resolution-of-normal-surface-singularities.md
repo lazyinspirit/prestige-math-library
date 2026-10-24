@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-resolution-of-normal-surface-singularities.json
+  precheck: pass
 id: thm-resolution-of-normal-surface-singularities
 kind: theorem
 title: Resolution of normal surface singularities
@@ -54,8 +57,7 @@ sources:
     url: https://stacks.math.columbia.edu/tag/0AX7
   - title: Joseph Lipman, Introduction to resolution of singularities, Proc. Sympos. Pure Math. 29 (1975), 187-230
     url: https://www.math.purdue.edu/~jlipman/papers-older/%5B1975%5D%20Introduction%20to%20resolution%20of%20singularities.pdf
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -66,7 +68,7 @@ Assume the Axiom of Choice and Dependent Choice, inherited from the completion a
 
 **Given:** A field $k$ of arbitrary characteristic and a normal integral scheme $Y$ of finite type over $k$ of dimension two.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

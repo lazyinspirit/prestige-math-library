@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hyperbolic-disc-and-half-plane-geodesics.json
+  precheck: pass
 id: ex-hyperbolic-disc-and-half-plane-geodesics
 kind: example
 title: "Hyperbolic distances and geodesics in disc and half-plane"
@@ -22,9 +25,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -120,3 +120,45 @@ Then the following four statements hold.
 7.1 By steps 5.1 and 6.1 the minimisers from $p$ to $q$ are the images under $m^{-1}$ of the monotone parametrisations of the vertical segment from $i$ to $iy$, and these images lie on $m^{-1}\bigl(\{is:s\in\mathbb R\}\cup\{\infty\}\bigr)$. Since $m^{-1}$ is again given by real Mobius coefficients with positive determinant, step 1.6 shows that this set is a vertical line or a Euclidean circle with centre on the real axis, meeting $\mathbb R$ at right angles. So the geodesic segment from $p$ to $q$ is an arc of such a circle or line. [F5, step 6.1, step 1.6]
 
 8.1 Steps 3.1, 1.2, 4.1, 4.2 and 7.1 establish the four clauses of the Example. All curves and maps in the argument are given by explicit formulae; in particular the disc and half-plane geodesics are obtained by inverting explicit biholomorphisms, and the infima in [F1] and step 3.1 are taken over explicitly parametrised families, so no choice principle is used. When $z=w$ in $\mathbb D$ or $p=q$ in $\mathbb H$ the constant curve has length $0=d_{\mathbb D}(z,z)=d_{\mathbb H}(p,p)$, and steps 2.2 and 5.1 identify the strict minimisers only in the nondegenerate case. [step 3.1, step 1.2, step 4.1, step 2.2, step 4.2, step 5.1, step 7.1] ∎
+
+## Remarks
+
+The paired picture shows two complete geodesics in each model: the imaginary
+axis maps to the real diameter, and the semicircle $|w|=2$ in $\mathbb H$ maps
+to the arc of $|\zeta-5/3|=4/3$ in $\mathbb D$. In particular,
+$C(i)=0$ and $C(2i)=1/3$. The boundary curves and the endpoints of the arcs
+are drawn only for orientation; boundary points are not in either domain.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\draw[gray] (0.2,0) -- (3.8,0);
+\node[above right] at (3.7,0) {$\mathbb R$};
+\node at (0.5,2) {$\mathbb H$};
+\draw[blue,thick] (2,0) -- (2,2.3);
+\draw[red,thick] (3.4,0) arc (0:180:1.4);
+\fill (2,0.7) circle (0.035);
+\node[left] at (2,0.7) {$i$};
+\fill (2,1.4) circle (0.035);
+\node[above left] at (2,1.4) {$2i$};
+\node[below] at (0.6,0) {$-2$};
+\node[below] at (3.4,0) {$2$};
+\draw[->] (4.2,1.4) -- (5.9,1.4);
+\node[above] at (5.05,1.4) {$C$};
+\draw[gray] (8,1.4) circle (1.4);
+\node at (7.3,2) {$\mathbb D$};
+\draw[blue,thick] (6.6,1.4) -- (9.4,1.4);
+\draw[red,thick] (8.84,2.52) arc (143.130102:216.869898:1.866667);
+\fill (8,1.4) circle (0.035);
+\node[below left] at (8,1.4) {$0$};
+\fill (8.466667,1.4) circle (0.035);
+\node[above left] at (8.466667,1.4) {$1/3$};
+\node[below] at (6.6,1.4) {$-1$};
+\node[below right] at (9.4,1.4) {$1$};
+\end{tikzpicture}
+```
+
+Indeed $C(iy)=(y-1)/(y+1)$ for $y>0$, while substituting
+$w=C^{-1}(\zeta)$ into $|w|=2$ gives $|1+\zeta|=2|1-\zeta|$, or
+$|\zeta-5/3|^2=16/9$. This circle is orthogonal to the unit circle because
+$(5/3)^2=1+(4/3)^2$, as in step 1.5. The rigorous verification above is
+independent of the picture.

@@ -1,0 +1,89 @@
+{
+  "id": "thm-cographs-are-exactly-the-p-four-free-graphs",
+  "agent": "/root/rendering_repair_coordinator/comb_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile --02 visibly prints dollar delimiters and P_4 in the technique banner although numbered proof formulas typeset. The banner uses plain text; readable Unicode P₄ preserves the same four-vertex-path notation.",
+      "action": "Replace $P_4$ with P₄ only in the proof-technique paragraph.",
+      "status": "resolved"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "Additional original standalone tile --01 visibly prints P_4 in the title, whereas its statement typesets the same path notation with subscript 4. The title has missing inline math delimiters.",
+      "action": "Delimit P_4 as $P_4$ in title.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset the title P_4 and use equivalent Unicode P₄ in the renderer plain-text proof-technique label.",
+  "source_lines_after": [
+    {
+      "line": 4,
+      "text": "title: \"The cographs are exactly the $P_4$-free graphs\""
+    },
+    {
+      "line": 64,
+      "text": "**Proof technique:** induction on the order of a P₄-free graph."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "preservation_checks": {
+    "before_raw_sha256": "263b6a1858c9f18859fe0c9fbc20e7d59f221f2ab8dd9d984d4d475283635625",
+    "before_hash_guard": "Matched immediately before successful write.",
+    "after_raw_sha256": "0105944e5994c44b9c2201f14987317d85983b198b05294aeccccca30d4d60c5",
+    "status": "published; exact status line unchanged",
+    "metadata": "All frontmatter other than title byte-identical; all remaining body bytes identical."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-cographs-are-exactly-the-p-four-free-graphs.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-cographs-are-exactly-the-p-four-free-graphs.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "induction"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-cographs-are-exactly-the-p-four-free-graphs.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/thm-cographs-are-exactly-the-p-four-free-graphs--01.png",
+      "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/thm-cographs-are-exactly-the-p-four-free-graphs--02.png"
+    ],
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/comb-002-corrected-final/manifest.json",
+    "source_sha256": "0105944e5994c44b9c2201f14987317d85983b198b05294aeccccca30d4d60c5",
+    "reference_map_sha256": "608d63c04c981e619238bffd7bef19fb81788fc42e7dcd34f1a828a4bb2bbd78",
+    "views": "Both corrected final screenshot tiles inspected separately using view_image at original resolution; title shows typeset P subscript 4 and technique banner shows P₄ with no raw dollar or underscore.",
+    "limitations": "Local native title/ItemBody preview only; 16 unrelated reference-map parse diagnostics. Earlier comb-002-final capture was generated before the successful edit and is not final evidence."
+  },
+  "notes": [
+    "Initial edit attempt used unavailable python; no source write occurred. Repeated with python3 and the raw-hash guard, then reran all checks and generated corrected final preview.",
+    "No TikZ source or mathematical content changed."
+  ]
+}

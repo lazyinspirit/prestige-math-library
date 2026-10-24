@@ -1,0 +1,126 @@
+{
+  "id": "def-discrete-convolutional-layer",
+  "agent": "/root/rendering_repair_coordinator/dnn_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot has correctly rendered notation but no illustration of the spatial indexing. A concrete two-dimensional receptive field materially clarifies the simultaneous origin, coordinatewise stride and boundary-extension conventions, so the requested explanatory diagram is warranted independently of the complete definition.",
+      "action": "Added a final Remarks section with an exact finite-lattice specialization and a locally rendered TikZ lattice showing the receptive field, zero-padded sites, and two stride-separated anchors.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only explanatory Remarks and a TikZ lattice illustration; preserved the complete original item bytes as an exact prefix.",
+  "source_lines_after": {
+    "remarks": [
+      48,
+      81
+    ],
+    "specialization": [
+      50,
+      50
+    ],
+    "tikz": [
+      52,
+      81
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Input and output objects",
+      "justification": "Definition line 31 permits arbitrary D,O subsets of Z^2. Remarks line 50 fixes D={0,1,2,3}x{0,1,2}, O={p,q}, p=(0,0), q=(1,0), a=(0,1), s=(2,1), and K={-1,0,1}^2, satisfying the stated finite K and positive stride requirements."
+    },
+    {
+      "check": "Anchor and stride arithmetic",
+      "justification": "Formula line 34 gives a+s⊙p=(0,1) and a+s⊙q=(2,1). The circles are at those coordinates and the rightward arrow has displacement s⊙(q-p)=(2,0), exactly the coordinatewise multiplication specified on line 37."
+    },
+    {
+      "check": "Receptive field and padding",
+      "justification": "The first anchor plus K is {-1,0,1}x{0,1,2}, nine sites. The blue square contains those nine lattice sites; six at x=0,1 lie in the drawn D boundary, and three red hollow sites at x=-1 lie outside D and have x-tilde=0 by the zero-padding definition on line 31."
+    },
+    {
+      "check": "Channel domains and offset orientation",
+      "justification": "Each six nonzero-capable sample is the original row vector in R^{C_in}; multiplication on the right by W_delta in R^{C_in x C_out} yields a row vector in R^{C_out}, as does b. The illustration uses anchor+delta, without reversing offsets, matching the cross-correlation convention on line 37. It adds no claim about invariance under the cropped boundary."
+    },
+    {
+      "check": "Proof independence",
+      "justification": "This is a definition with no proof; the definition and its formula remain untouched and fully specify the layer independently of the illustrative specialization."
+    }
+  ],
+  "evidence": {
+    "original_declared_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/def-discrete-convolutional-layer--01.png",
+    "original_path_discrepancy": "Declared screenshot does not exist beneath diagram-supplement. Located the authentic same-category screenshot and verified its recorded SHA256.",
+    "original_inspected_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-discrete-convolutional-layer--01.png",
+    "original_screenshot_sha256": "e53af40d1e5a5fdaa711f7fdcab253d0417960e7d765b910f6842b804237f702",
+    "before_raw_sha256": "7ff65bf2632f462dcfe6ece27de5b2978987d6193027757f84ad9441328ba65c",
+    "current_raw_sha256": "73e557506d84deedf0d7d93e7b43966aa6cae9cc9a42a59705927a39e46f10e2",
+    "guard": "Immediately before the append, current SHA256 equalled queue before_raw_sha256 7ff65bf2632f462dcfe6ece27de5b2978987d6193027757f84ad9441328ba65c.",
+    "publication_status": "Original frontmatter preserved byte-for-byte, including status: published.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-004-discrete-convolutional-layer/manifest.json",
+    "preview_manifest_sha256": "642062641c990ca7544093fa2f9d08d0a40a54fbcc729c94d8b74768d29facc8",
+    "preview_source_sha256": "73e557506d84deedf0d7d93e7b43966aa6cae9cc9a42a59705927a39e46f10e2",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-004-discrete-convolutional-layer/screenshots/def-discrete-convolutional-layer--01.png",
+    "preview_screenshot_sha256": "7dd2dfd26fe6fc5a4ae546361fefb8bd38e909ecfb9cb1da41c894b4a7d05e6b",
+    "visual_inspection": "Viewed both the authentic original and fresh single PNG independently at original resolution. The native diagram has twelve input-domain lattice sites and three outside padded sites, all nine highlighted receptive-field sites, two anchor circles, and rightward stride arrow. No overlapping diagram labels or clipped lattice elements observed.",
+    "preview_capture": {
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": []
+    }
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-discrete-convolutional-layer.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-discrete-convolutional-layer.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-discrete-convolutional-layer.md",
+            "item_id": "def-discrete-convolutional-layer",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-discrete-convolutional-layer.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn-004 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-discrete-convolutional-layer --out research/math-library-rendering-repairs-2026-10-23/previews/dnn-004-discrete-convolutional-layer",
+      "exit_code": 0,
+      "output": {
+        "output_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-004-discrete-convolutional-layer",
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Preview is local native ItemBody rendering, not the production route; manifest records renderer and reference-map bindings. Sixteen unrelated reference-map diagnostics were reported by the preview."
+  ]
+}

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-p-adic-hensel-lifting-a-simple-root.json
+  precheck: pass
 id: ex-p-adic-hensel-lifting-a-simple-root
 kind: example
-title: "Hensel lifting a simple root of X squared minus 2 in Z_7"
+title: 'Hensel lifting a simple root of $X^2-2$ in $\mathbb{Z}_7$'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-p-adic-simple-root-lifting, thm-p-adic-newton-criterion]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -33,7 +29,7 @@ $\mathbb Z_7$.
 
 **Given:** The polynomial $f(X)=X^2-2$ over $\mathbb Z_7$.
 
-[L1] Simple roots lift uniquely, and Newton iteration computes the lifted root ([[cor-p-adic-simple-root-lifting]], [[thm-p-adic-newton-criterion]]).
+[L1] Simple roots lift uniquely, and Newton iteration computes the lifted root ([[cor-p-adic-simple-root-lifting|Simple roots lift uniquely in $\mathbb{Z}_p$]], [[thm-p-adic-newton-criterion|Newton's criterion in $\mathbb{Q}_p$]]).
 
 ## Verification
 

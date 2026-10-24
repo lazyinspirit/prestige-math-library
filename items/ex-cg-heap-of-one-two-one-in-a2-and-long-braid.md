@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-heap-of-one-two-one-in-a2-and-long-braid.json
+  precheck: pass
 id: ex-cg-heap-of-one-two-one-in-a2-and-long-braid
 kind: example
 title: "The heap of $s_1s_2s_1$ in type $A_2$: a convex alternating chain and two commutation classes"
@@ -23,13 +26,7 @@ sources:
     - title: "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788"
       url: "https://arxiv.org/pdf/1511.08788"
       locator: "§2.4, properties (h1)-(h2) and Proposition 2.6, PDF p. 6 (a convex alternating chain of length $m_{st}$ obstructs full commutativity)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -73,3 +70,25 @@ Let $S=\{s_1,s_2\}$ with $m(s_1,s_2)=3$, the Coxeter matrix of type $A_2$, let $
 2.1 The chain $(1,2,3)$ is convex in $P$: it exhausts the three elements of $P$, so there is no element outside it lying between two of its members. It has length $3=m(s_1,s_2)$ and its labels $s_1,s_2,s_1$ alternate between the distinct letters $s_1,s_2$, so it is a convex alternating chain of the forbidden length and condition (a) of [F4] clause (2) fails. Its covering pairs are $1\lessdot2$ and $2\lessdot3$ by 1.1, with labels $(s_1,s_2)$ and $(s_2,s_1)$ distinct, so condition (b) holds. [given, F4, step 1.1]
 
 3.1 Since $s_1s_2s_1$ is a reduced word of $w_0$ by 1.2 and contains the contiguous factor $\langle s_1,s_2\rangle_3$ (its three letters), [F4] clause (1) shows that $w_0$ is not fully commutative. Moreover $P$ is not the heap of any fully commutative element: if $P\cong P_{s'}$ for some $s'\in\mathcal R(w')$ with $w'$ fully commutative, then by [F4] clause (2) applied to the reduced word $s'$, the heap $P_{s'}$ contains no convex alternating chain of length $m(u,v)$ with $3\le m(u,v)<\infty$, while $P$ contains the convex alternating chain exhibited in 2.1 and convexity, length and labels are preserved by the labeled isomorphism, a contradiction. [given, F1, F4, step 1.2, step 2.1] ∎
+
+
+## Remarks
+
+The Hasse diagram below places larger positions above smaller ones and records each position together with its generator label. It displays the convex alternating chain from (2); only covering relations are drawn, so the relation $1\prec3$ is represented transitively.
+
+```tikz
+\begin{tikzpicture}
+\node (p1) at (0,0) {$1:s_1$};
+\node (p2) at (0,1) {$2:s_2$};
+\node (p3) at (0,2) {$3:s_1$};
+\draw (p1) -- (p2);
+\draw (p2) -- (p3);
+\node at (0,2.7) {$P$};
+\node (a) at (4,1.8) {$s_1s_2s_1$};
+\node (b) at (4,0.2) {$s_2s_1s_2$};
+\draw[<->] (a) -- node[right] {$\mathrm{long\ braid},\ m=3$} (b);
+\node at (4,2.7) {$\mathrm{two\ singleton\ commutation\ classes}$};
+\end{tikzpicture}
+```
+
+The two words on the right represent the same element $w_0$, but belong to distinct singleton commutation classes, as verified in 1.2. The arrow denotes the length-three braid relation, not a commutation or a labeled-heap isomorphism. The proof above is independent of the illustration.

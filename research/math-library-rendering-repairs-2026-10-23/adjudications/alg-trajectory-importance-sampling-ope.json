@@ -1,0 +1,105 @@
+{
+  "id": "alg-trajectory-importance-sampling-ope",
+  "agent": "/root/rendering_repair_coordinator/dorl_010",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone audit tile has correctly rendered estimator formulas but no trajectory picture. A short aligned trajectory materially explains why PDIS uses a reward-specific prefix weight whereas OIS uses the final weight on all rewards; it makes the differing information horizons visible. This is a warranted explanatory addition under the expanded diagram scope, rather than a claim that the existing formulas were unreadable.",
+      "action": "Added an H=3 trajectory illustration in final Remarks with three action/reward transitions, their action ratios and prefix products, OIS/PDIS single-trajectory contributions, and an explicit WIS normalization explanation.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Append-only final Remarks; original Definition, references, frontmatter and publication status preserved byte-for-byte.",
+  "source_lines_after": {
+    "remarks": 67,
+    "illustration_context": 69,
+    "tikz_fence": [
+      71,
+      86
+    ],
+    "wis_and_independence": 88
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and time indexing",
+      "justification": "Definition of this item at line 41 defines action ratios for 0<=t<H and return rewards R_(t+1). The dataset supplier Definition gives tuple (s0,a0,r1,s1,...,a_(H-1),rH,sH), with S_t in S, A_t in A(S_t), and R_(t+1) in the reward set. Setting H=3 yields exactly S0 -> S1 -> S2 -> S3, with (A0,R1),(A1,R2),(A2,R3) on the respective transitions. Arrows show trajectory order, not deterministic maps or action probabilities."
+    },
+    {
+      "check": "Prefix products",
+      "justification": "Item Definition line 41 states W_(i,t)=product_(k=0)^t rho_(i,k). Suppressing i gives W0=rho0, W1=rho0*rho1, W2=rho0*rho1*rho2, exactly the three labels below the transitions. No extra transition/reward probability is multiplied into the ratio. The local RN lemma Statement and proof 2.1 identify the weight through reward R_(t+1) and state S_(t+1)."
+    },
+    {
+      "check": "OIS and PDIS relations",
+      "justification": "For H=3, G=R1+gamma*R2+gamma^2*R3. Substitution into item lines 43 and 47 gives the two displayed contribution rows: W2*G and W0*R1+gamma*W1*R2+gamma^2*W2*R3. Both are explicitly single-trajectory contributions before the dataset average, so omission of 1/n in the figure is explained."
+    },
+    {
+      "check": "WIS and zero denominator",
+      "justification": "The post-figure prose specializes the exact Definition line 51 denominator to sum_i W_(i,2). It retains the positive-denominator quotient and zero-denominator return 0, and repeats the existing absence of a finite-sample unbiasedness assertion."
+    },
+    {
+      "check": "Proof independence",
+      "justification": "Figure is in final Remarks outside Facts or any proof. Original Definition and suppliers remain untouched; no argument or estimator rule depends on the figure."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "fb8311f882d995b6febead5b3b036acaf92ee1737b614524bd7d33683fdcfc43",
+    "after_raw_sha256": "9b682a4ee32736d39bbfd42ede2d2f88d77d438ad8627ba94978fce8e3fc5d7f",
+    "guard": "Immediately before first write, asserted current raw SHA equals queue before_raw_sha256; passed. Final byte comparison confirms current begins with the complete original bytes and frontmatter is identical.",
+    "original_screenshot_path_discrepancy": "Declared diagram-supplement/screenshots path was absent. Authentic screenshot located at the parent category screenshots directory; SHA matches the intake exactly.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-trajectory-importance-sampling-ope--01.png",
+    "original_screenshot_sha256": "a4ee81be8dc94442f796d8e8042c7e924d785e676525b02dc078bfcbdf4d70e4",
+    "original_view": "Inspected standalone at original resolution.",
+    "native_preview": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-010-native",
+    "native_manifest_sha256": "3369b1f9efbf71ef2afa59adb50ee61c06c0885bf5a779829d6f1d67c82edde8",
+    "native_source_sha256": "9b682a4ee32736d39bbfd42ede2d2f88d77d438ad8627ba94978fce8e3fc5d7f",
+    "visual_check": "Viewed native full tile and standalone diagram-crop.png at original resolution. All four state labels, three rightward arrows with arrowheads, three action/reward pairs, ratios, three prefix products and both contribution rows are present without clipping or overlap. White/currentColor labels and strokes are visible on dark background. SVG inspected: three shaft paths with fill=none and three arrowhead paths; fill/stroke use currentColor. No endpoint rings or cyclic closure are asserted; timeline has four vertices, three edges, underlying degrees 1,2,2,1. The fourth state is a horizon endpoint, not an asserted absorbing terminal state.",
+    "capture_results": {
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": []
+    },
+    "preview_limitations": "Native local ItemBody preview; no live website visited. Reference map has 16 unrelated parse diagnostics, recorded by native manifest. Full tile viewer displayed an upper-page black artifact; the new diagram was independently inspected in a standalone native crop and original unchanged body inspected in authentic audit tile."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-trajectory-importance-sampling-ope.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-trajectory-importance-sampling-ope.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-trajectory-importance-sampling-ope.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Native repair-preview.mts --ids alg-trajectory-importance-sampling-ope --out research/math-library-rendering-repairs-2026-10-23/previews/dorl-010-native with repository-local TMPDIR and required TSX_TSCONFIG_PATH",
+      "exit_code": 0,
+      "output": "1 item, 1 tile; actual native TikZ compilation and screenshot completed"
+    }
+  ],
+  "remaining_issues": []
+}

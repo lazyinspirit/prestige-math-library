@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix.json
+  precheck: pass
 id: thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix
 kind: theorem
 title: "Composite Simpson error bound for Chebyshev weighted mass entries"
@@ -14,10 +17,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 axiom_use: "No choice axiom is used; this is a finite trigonometric derivative bound and a quadrature estimate."
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, §§3.1–3.3"

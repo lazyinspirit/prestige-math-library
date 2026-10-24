@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-h-two-classifies-extensions-with-arbitrary-nonabelian-kernel.json
+  precheck: pass
 id: fs-h-two-classifies-extensions-with-arbitrary-nonabelian-kernel
 kind: false-statement
-title: "FALSE: H^2 classifies extensions with arbitrary nonabelian kernel"
+title: "FALSE: $H^2$ classifies extensions with arbitrary nonabelian kernel"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-normalized-two-cocycle-and-two-coboundary, def-second-cohomology-by-factor-sets, def-g-module-over-a-commutative-ring, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -36,7 +32,7 @@ kernel $N$.
 
 [L1] Ordinary $H^2(G,M)$ here is the quotient of additive cocycle and coboundary groups for an abelian $G$-module $M$ ([[def-normalized-two-cocycle-and-two-coboundary]], [[def-second-cohomology-by-factor-sets]], [[def-g-module-over-a-commutative-ring]]).
 
-[L2] The published extension-classification theorem fixes an abelian $G$-module $M$ and its action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L2] The published extension-classification theorem fixes an abelian $G$-module $M$ and its action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action|$H^2$ classifies extensions with fixed abelian kernel action]]).
 
 ## Refutation
 

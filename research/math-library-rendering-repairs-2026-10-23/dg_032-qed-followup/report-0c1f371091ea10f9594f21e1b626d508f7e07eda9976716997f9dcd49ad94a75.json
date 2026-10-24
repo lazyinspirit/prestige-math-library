@@ -1,0 +1,79 @@
+{
+  "id": "thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound",
+  "agent": "/root/rendering_repair_coordinator/dg_032",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly displays dollar delimiters and TeX commands in the uppercase technique banner, while adjacent numbered proof formulas are typeset. The banner is a plain-text renderer field, so ordinary inline math cannot render there.",
+      "action": "Replaced only the technique-banner math with equivalent prose describing the distance Laplacian, radial trace, trace divided by the normal dimension, model comparison cotangent, and matched singular asymptotics.",
+      "status": "repaired; fresh native local tile 02 inspected at original resolution and banner displays readable prose with no raw math markup"
+    }
+  ],
+  "changed": true,
+  "correction": "One body paragraph at line 88 changed; title, frontmatter and all numbered proof paragraphs remain byte-identical.",
+  "source_lines_after": {
+    "88": "**Proof technique:** direct: identify the distance Laplacian at the chosen point with the trace of the radial Riccati operator, use the trace Riccati inequality of the page to obtain the scalar Riccati inequality for the trace divided by the normal dimension, and compare this normalized trace with the model comparison cotangent by the integrating-factor argument with matched asymptotics at the singular initial point."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Pre-existing proof-layout early-qed at line 94, step 1.3: an elementary scalar-comparison subproof has its own QED before the final numbered step; unchanged and reproduced on frozen before source.",
+    "Renderer limitation remains: proof-technique banners accept plain text rather than MathMarkdown.",
+    "Fresh local capture contains scattered missing glyphs in other content; no source change made from this unrelated capture artifact."
+  ],
+  "source_binding": {
+    "before_raw_sha256": "2fff266d352ac2ea8f669a4f8c2840e7a1cf95a0b0f7c98d2f1cd62c1f50296a",
+    "after_raw_sha256": "b93a3ba74d4e9a53192ae22e84e03d713a7bab08e2d54abe1090bbd503c44b7b",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md",
+      "exit_code": 1,
+      "output": "FAIL proof-step-separation: items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md:94 Proof 1.3 [early-qed] QED must close the final numbered step.\nproof-layout: 1 items, 5 steps, 1 defects",
+      "pre_existing": true
+    },
+    {
+      "command": "node tools/proof-layout.mjs research/math-library-rendering-repairs-2026-10-23/before/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md",
+      "exit_code": 1,
+      "output": "Same line 94 Proof 1.3 early-qed; 1 items, 5 steps, 1 defects."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_inspected": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound--02.png",
+    "original_detail": "original",
+    "fresh_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg032/manifest.json",
+    "manifest_sha256": "eb8376a060a9cd354791ad20e33ce4e0e9abcd8eaad99b0a09b742218cea0eae",
+    "fresh_inspected": "research/math-library-rendering-repairs-2026-10-23/previews/dg032/screenshots/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound--02.png",
+    "fresh_detail": "original",
+    "fresh_source_sha256": "b93a3ba74d4e9a53192ae22e84e03d713a7bab08e2d54abe1090bbd503c44b7b",
+    "fresh_html_sha256": "0f6f95252c25fc65945882e6130ed9374b0e03ebe85b68e55de89e795f2f95f7",
+    "reference_map_sha256": "4b9013de42cc97a6697d974a6ed3593470985dab4556e015ddbf97bc7a4e3d2d",
+    "preview_exit_code": 0,
+    "limitations": "Local native ItemBody rendering with blocked external network; not full production route. Reference map reports 16 unrelated parse diagnostics."
+  }
+}

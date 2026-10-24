@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-figure-eight-ideal-gluing-and-cusp-completeness.json
+  precheck: pass
 id: lem-figure-eight-ideal-gluing-and-cusp-completeness
 kind: lemma
 title: "The standard two-tetrahedron figure-eight gluing is complete"
@@ -35,13 +38,7 @@ sources:
     - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/3.pdf"
       locator: "Chapter 3, §3.1, printed p.29; Chapter 4, §§4.3–4.4"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -121,7 +118,7 @@ The two edge-graph drawings are projections, not embeddings of tetrahedra in the
   \draw[red,thick,->] (f.east) -- node[below,black] {$\phi_2$} (d.south west);
   \draw[red,thick,->] (d.south) -- node[left,black] {$\phi_1$} (e.north);
   \draw[red,thick,dashed,->] (e.north east) to[out=90,in=90,looseness=1.15] node[above,black] {$\phi_3$ (strip closure)} (a.north west);
-  \node[align=left] at (3.3,-1.0) {$\beta$: $a\ (0|3,\ \text{right},\ z_2^{-1})\longrightarrow h\ (0'|1',\ \text{left},\ w_1)$.};
+  \node[align=left] at (3.3,-1.0) {$\beta$: $a\ (0|3,\ \mathrm{right},\ z_2^{-1})\longrightarrow h\ (0'|1',\ \mathrm{left},\ w_1)$.};
   \node[align=center] at (3.3,-1.55) {Red arrows show the successive $\alpha$ side identifications; the diagram is schematic.};
 \end{tikzpicture}
 ```

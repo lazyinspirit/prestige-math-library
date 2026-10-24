@@ -1,0 +1,128 @@
+---
+id: lem-piccirillo-diagram-produces-dualizable-handle-link
+kind: lemma
+title: "Piccirillo’s Conway diagrams give a dualizable handle link"
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 5
+deps:
+  - def-piccirillo-conway-pair
+  - def-countable-choice
+  - def-axiom-of-choice
+  - thm-choice-implies-dependent-implies-countable-choice
+  - def-smooth-zero-trace
+  - def-dualizable-handle-link
+  - def-knot-meridian-and-preferred-longitude
+  - lem-knot-exterior-h1-is-generated-by-meridian
+  - lem-linking-number-even-sum-and-reidemeister-invariance
+  - thm-oriented-linking-number-scan-terminates-and-is-correct
+  - thm-dualizable-handle-link-has-two-knot-trace-descriptions
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: "Lisa Piccirillo, The Conway knot is not slice, Annals of Mathematics 191 (2020), 581–591"
+      url: "https://annals.math.princeton.edu/wp-content/uploads/annals-v191-n2-p05-s.pdf"
+      doi: "10.4007/annals.2020.191.2.5"
+      locator: "Proposition 1.4 printed p.583; Figure 2 p.584; §2 pp.584–586, Theorem 2.1, Proposition 2.2 and proof of Proposition 1.4; Figure 4 and caption pp.587–588. External zero-trace equality, independently of the local endpoint encoding; no replay of lost local arc-map records. Read extent: those statements/proofs, §2 and Figures 2/4, not the entire paper."
+    - title: "Lisa Piccirillo, The Conway knot is not slice, arXiv:1808.02923v1"
+      url: "https://arxiv.org/pdf/1808.02923"
+      locator: "Base URL retrieved v1 (8 August 2018), nine PDF pages: Proposition 1.4 p.3, §3 pp.4–5, Figure 2 p.3 and Figure 4 pp.8–9. Published numbering and terminal import use the official Annals reference above."
+    - title: "Jennifer Hom, Getting a handle on the Conway knot"
+      url: "https://arxiv.org/pdf/2107.09171"
+      locator: "§3, same-trace handle model and Conway application"
+---
+
+## Statement
+
+Assume the Axiom of Choice. There exists a dualizable framed handle link $(B,G,R)$ whose associated
+handlebody is diffeomorphic to both zero-traces $X_0(C)$ and $X_0(K_P)$, with
+the component orientations and zero-framings compatible with the diagrams
+defining $C$ and $K_P$.
+
+## Statement references
+
+[Piccirillo, Proposition 1.4 and Figure 4](https://arxiv.org/pdf/1808.02923)
+
+[Hom, §3](https://arxiv.org/pdf/2107.09171)
+
+## Facts & Assumptions
+
+**Given:** The literal Conway and Figure 2 partner diagrams, with the handle and zero-framing conventions of the Statement, and full AC.
+
+[A1] The Axiom of Choice, written AC, is assumed. [[def-axiom-of-choice]]
+
+[A2] AC implies dependent choice and hence countable choice $\mathrm{AC}_\omega$; this supplies every retained local countable-choice hypothesis. [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]]
+
+[F1] [[def-piccirillo-conway-pair]] specifies the two diagram isotopy classes $C$ and $K_P$; neither is identified by its invariants.
+
+[F2] [[def-dualizable-handle-link]] requires the two meridional sublinks and zero green–blue linking.
+
+[F3] [[thm-dualizable-handle-link-has-two-knot-trace-descriptions]] supplies the geometric finite-slide and cancellation construction for such links. We use its actual framed handle calculus, rather than deducing a meridional sublink from a linking number.
+
+[F4] Finite encodings accompanying this proof are the previously established `alternate-trace-certificate.json.gz` for the common source construction through $K$, the `lm-local-worker` band/cancellation and $L$–$M$ records, and the `conway-named` records `head-three-returns-prefix.json` and `coupon-suffix-01.json`, `coupon-suffix-02.json`, `coupon-suffix-03.json`. The last record includes the complete prescribed-exterior ribbon isomorphism to literal $N$. The locally retained records end at literal $N$; the historical $N$–$O$ and $O$–Figure 2 machine-readable records are unavailable. The equality of the named zero-traces is instead the explicitly imported published input [F8], independently of the local endpoint. No recovered arc map or fresh replay is claimed. The local records and their exact research locations remain given under Proof evidence.
+
+[F5] [[lem-knot-exterior-h1-is-generated-by-meridian]]: for every component $L$ with its chosen tube and positive meridian, $H_1(E_L;\mathbb Z)=\mathbb Z[\mu_L]$.
+
+[F6] [[def-knot-meridian-and-preferred-longitude]]: a degree-one parallel whose exterior homology class is zero is a preferred longitude.
+
+[F7] [[thm-oriented-linking-number-scan-terminates-and-is-correct]] and [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the scan returns the integer half-sum of mixed crossing signs, and the half-sum is invariant under oriented link isotopy.
+
+[F8] **External zero-trace equality:** Piccirillo, *The Conway knot is not slice*, Annals of Mathematics 191 (2020), Proposition 1.4 (p.583), with its proof in §2 (p.586), establishes $X_0(C)\cong X_0(K_P)$ for the Conway knot and the named Figure 2 knot (p.584), using the zero-framed trace convention of Definition 1.2. This full trace equality is imported as an established classical smooth result, independently of any identification of the local `N-pd.json` with Figure 4 panel $N$. The published Figure 4 and caption (pp.587–588) describe its handle construction, but supply no correspondence to our local encoding. Read extent: Definition 1.2, Lemma 1.3, Proposition 1.4 and its proof, §2, and Figures 2/4; no full-paper audit or replay of the local movies is claimed. Full AC is retained; no weakened-choice version is inferred.
+
+## Proof
+
+**Proof technique:** local framed handle construction and the external zero-trace equality [F8].
+
+1.1 By [A1] and [A2], every countable-choice premise of the retained local diagram, linking, and handle arguments is available. The published zero-trace equality [F8] is used in the adopted classical full-AC scope, without asserting that the source proves the same result in ZF or under countable choice alone. The local constructions and their original countable-choice strength are preserved. [A1, A2, F8, given]
+
+1.2 Let $K,J$ be any disjoint oriented knot components in the links below, and let $D$ be a regular oriented diagram of $K\cup J$. The inclusion $E_K\hookrightarrow S^3\setminus K$ is a homotopy equivalence by radial retraction in the punctured normal tube. By [F5], write $[J]=m[\mu_K]$. Let $\ell(D)$ be the half-sum of mixed crossing signs; [F7] makes it an integer independent of the chosen diagram. At a mixed crossing where $K$ passes over $J$ with sign $\epsilon$, switch it. The half-sum changes by $-\epsilon$. In the crossing ball, straighten $K$ to the positive $x$-axis: for $\epsilon=+1$ the old under-arc of $J$ runs in the positive $y$ direction, and the new arc minus the old arc represents the negative positive-meridian class; for $\epsilon=-1$ the class reverses. Thus the switch changes $[J]$ by $-\epsilon[\mu_K]$, so it changes $m$ by the same integer. After all such switches, $J$ passes over $K$ at every projected intersection. Raise $J$ above $K$ and move its projection into a disjoint disk. This is an isotopy in the complement of $K$; the final pair has a split diagram, so its half-sum is zero, and $[J]=0$ because it lies in a $3$-ball disjoint from $K$. Tracking the equal changes proves $\ell(D)=m$. In particular, when $J=L_f$ is a framed degree-one parallel of an attaching component $L$, its framing integer is this meridian coefficient. A computed framing value zero then gives the preferred longitude condition by [F6]. [F5, F6, F7, given, construct]
+
+2.1 A record retains all four cyclic halfports, under/over parity and component names. An RI, RII or RIII record uses, respectively, its actual empty monogon, opposite bigon or triangular face. Its standard local spatial motion is an ambient isotopy. A constant-over or constant-under pickup follows one simple successive overarc or underarc and its specified simple dual-face replacement path: raise the arc into an empty upper slab, or lower it into an empty lower slab, move it relative to its endpoint collars, and return. A finite product-disk sweep realizes this motion. A cyclic, under/over-preserving ribbon isomorphism is an orientation-preserving planar redraw; it is not a mirror change. Carry a sufficiently small normal strip through every motion. In particular an RI changes a blackboard presentation but does not change the transported integer framing. Thus the finite records below specify actual framed attaching isotopies, independently of how an illustration is drawn. [A2, F3, F4, step 1.1, construct]
+
+3.1 Begin with the literal source panel $F$, with dotted red $R$ and zero-framed green $G$ and blue $B$. Its 36-crossing input has 16 blue self-crossings, 18 blue/red crossings and two green/red crossings. Red is simple and green is its tiny meridian. Choose red and green disks meeting along one radial slit, with the green disk disjoint from the entire blue tube. Put blue transverse to the red disk. At each blue puncture, an untwisted blue-over-green band along a simple disk arc avoiding the other punctures adds a green zero-parallel. Its product arch pushes across an empty bigon, removing that puncture. Such an arc exists because the disk minus the finitely many punctures and its two parallel radial slits is connected. Induction clears the disk; the actual red/green pair cancels outside the retained blue tube. After forgetting that pair, reverse the product-disk pushes to recover the original blue embedding. Its zero framing is retained, since green has zero framing and zero linking with blue. The established source-bound 98-move blue movie and seven-move Figure 1 movie identify this literal blue knot with $C$. Their terminal visit word is $U2,O8,U7,U11,O10,O9,U6,O2,U5,O7,U9,O6,U8,O5,O4,U3,O1,U4,O11,U10,O3,U1$ in the recorded Figure 1 crossing-center order. Hence the $F$ handlebody is $X_0(C)$. [F1, F3, F4, step 2.1, construct]
+
+4.1 The two early dotted-circle pushes preserve that handlebody. In the outgoing boundary of the dotted unknot, the zero longitude $R_0$ bounds the added solid torus's meridian disk. An untwisted blue-to-$R_0$ band and this disk form a product bigon disjoint from the old-exterior attaching link. Pushing across it isotopes the whole blue tube. For $F$, use the inward red zero-parallel at distance 8, with the recorded cuts at heights 1017 and 1027; the 56-crossing output has the established 255-move marked isotopy to $G$. For $G$, use the outer red zero-parallel at distance 8 and heights 1272 and 1282; the established 69-move marked isotopy gives $H$. The first band adds $+R_0$ with $\operatorname{lk}(B,R)=-1$, and the second adds $-R_0$, so the blue integer is successively $-2$ and $0$. By step 1.2, each of these framing integers is the meridian coefficient of the actual transported pushoff, so the terminal value zero certifies the preferred-longitude framing. Indeed the two parallel band rectangles cancel in the push-off expansion and give $f(B\mathbin{\#}\epsilon R_0)=f(B)+2\epsilon\operatorname{lk}(B,R)$. Green and its entire parallel are carried throughout. Thus $H$ still presents $X_0(C)$, with green and blue both zero-framed. [F3, F4, step 1.2, step 3.1, construct, algebra]
+
+5.1 Use literal $H$ as the dualizable witness. Its blue/red sublink has exactly the two Hopf crossings. Its 16-crossing green/red sublink has the recorded seven-move RI/RII/constant-height movie to the two-crossing Hopf sublink. These are meridional sublinks by their actual attaching isotopies, not by a numerical linking criterion. The green/blue crossing table has seven positive and seven negative crossings, so their mutual linking is zero. Together with step 4.1 this establishes every condition in [F2]. [F2, F4, step 2.1, step 4.1, construct, algebra]
+
+5.2 The established 149-move marked movie carries $H$ to $I$. For the $I$–$J$ redraw, remove the six-crossing green finger in each panel and cap its tails by the specified disjoint short cap. Their 29-crossing contexts have the recorded orientation-preserving ribbon isomorphism, including the cap edge $(17,1)$--$(18,1)$. Each finger has two simple parallel under-band sides and a positive blue meridian head; all undercrossings occur in reversed pairs on the same retained edges. Under the context map the heads lie on opposite blue halfedges at $J19$, where blue is under red. Slide the head through that blue product tube below the red overpass. Lower both side strips into an empty lower slab, straighten their simple cores by product-disk pushes relative to the endpoint collars, and reverse this straightening to the target strips. This carries the whole finger and normal strip while fixing the context. In $K$, the three reverse ordinary green-over-blue bands use the cuts on green paths 18, 19, 20 at heights 1500, 1510, 1520 and blue zero-parallels at distances $0.4,0.8,1.2$. Their 128-crossing output has the established 926-move marked equivalence to $J$. Reverse these slides to reach literal $K$. At every ordinary slide, blue retains framing zero and green–blue linking remains zero; the untwisted push-off calculation gives $f(G')=f(G)+f(B)+2\epsilon\operatorname{lk}(G,B)=0$ and $\operatorname{lk}(G',B)=\operatorname{lk}(G,B)+\epsilon f(B)=0$. Consequently the handlebody and the actual zero framings are retained. [F3, F4, step 2.1, step 1.2, step 4.1, construct, algebra]
+
+6.1 Perform the two actual nested green-over-blue bands from `K2-nested-1.py`. Their green cuts are centered at $(1914,1835.5)$ and $(1892.5,1928)$, of widths $0.3$ and $0.08$, and their blue zero-parallels are the planar normal offsets $0.8$ and $0.4$. Their cores follow the literal orange interruption paths. The second runs through the first deleted green interval, the interior of the first strip, and the first parallel's attachment gap. Put the first strip above old blue/red and below old green; put the second below the entire current green, including the first strip and parallel, and above old blue/red. The first strip is above the future blue parallel and above the second strip at their projected intersections. These strict heights in the disjoint crossing balls, joined along the empty core intervals, give embedded untwisted ribbons with the specified endpoint rectangles. The narrower second attachment lies in the first gap. Thus these are sequential ordinary slides. Their exact marked output is the 100-crossing nested input, and step 5.2's framing formula retains both zero framings and zero mutual linking. [F3, F4, step 5.2, construct, algebra]
+
+7.1 The recorded twelve whole-link moves carry that input to 70 crossings: 56 green/green, 12 blue/green and two blue/red, with no red/green crossing. The blue/red pair has Hopf sign and opposite relative heights. The actual red projection is simple; its green-empty Jordan disk consists of the recorded dual faces 48 and 49, and blue meets it in a single simple crosscut. Flatten this disk and straighten the crosscut to monotone height, carrying the blue tube and fixing the disjoint green strip. The disk then meets blue once. The one/two-handle cancellation is supported in the tube about the outside blue arc and the feet, disjoint from green. It leaves precisely the recorded green56 knot with its transported zero framing. On that knot, the three RIII triples are $\{50,45,51\},\{50,44,52\},\{50,43,53\}$. Literal $L_{64}$ has its five recorded RI/RII/constant-height cleanup moves to $L_{56}$ and then the three RIII triples $\{25,18,23\},\{25,17,21\},\{25,16,20\}$. The resulting complete cyclic/under-over ribbon graphs are identical. Reverse the $L$-side moves to identify the actual cancelled attaching knot with literal $L$, rather than with a knot sharing an invariant. [F3, F4, step 2.1, step 6.1, construct]
+
+8.1 For $L$–$M$, use the established literal $M59$ movie consisting of 18 RIII moves and the RI removing source crossing 21. On its $M58$ endpoint, perform RIII at halfports $[(17,0),(11,0),(9,1)]$ and pick up the successive five-crossing constant-under arc $[(8,0),(17,0),(9,0),(43,0),(42,0)]$. The pickup removes two crossings. Its full endpoint is the same $L_{56}$ three-RIII endpoint in step 7.1. Reversing the indicated moves therefore identifies literal $L$ with literal $M$, carrying the normal strip. [F4, step 2.1, step 7.1, construct]
+
+9.1 We now give the actual $M$–$N$ transport. Fix the recorded 26-crossing exterior and its twelve individual port collars. The six proper arcs pair port $i$ with port $11-i$, for $0\le i\le5$. Start with the source-bound 39-move $M$ prefix: the initial 19 moves of step 8.1, followed by four inverse-RII insertions and sixteen RIII moves transporting the head through the three return pairs and the next body-exit pair. Its endpoint has 66 crossings, with the inserted crossings labeled $100,\ldots,107$. This prefix alone is not a terminal identification. The following explicit suffix supplies the missing coupon and passenger transport while fixing the exterior. All triples below name the actual triangular faces in their immediately preceding cyclic graphs, not arbitrary crossing permutations. [F4, step 2.1, step 8.1, construct]
+
+10.1 First perform RIII at $\{2,107,18\},\{3,107,38\},\{19,106,18\},\{37,38,107\}$. These correct the over-transported last passenger portions. For the first two passengers, perform in order $\{52,12,101\},\{5,12,103\},\{1,12,105\}, \{51,8,101\},\{4,8,103\},\{0,8,105\}, \{52,11,100\},\{5,11,102\},\{1,11,104\}, \{51,9,100\},\{4,9,102\},\{0,9,104\}$. Each step exchanges the next adjacent out-of-order retained visits on one passenger. Under the retained crossing-role map to $N$, the four complete passenger words are now exactly $[24,25,26,8,10,12]$, $[36,37,38,9,11,13]$, $[43,44,4,40,33,29]$, and $[45,46,3,39,32,28]$, with the actual under/over parities retained. This realizes the passenger block exchange geometrically, instead of postulating it as a substitution. [F4, step 9.1, construct]
+
+11.1 Transport the coupon by these twelve successive RIII moves: $\{53,103,105\},\{54,101,105\},\{55,101,103\}, \{56,103,105\},\{57,101,105\},\{58,101,103\}, \{53,102,104\},\{54,100,104\},\{55,100,102\}, \{56,102,104\},\{57,100,104\},\{58,100,102\}$. They pass the two three-crossing return patterns through the six-crossing box in its actual three-strand chart. Then use $\{26,101,103\},\{26,100,102\},\{31,101,105\},\{31,100,104\}$. The resulting actual empty bigon removes crossings $106,107$ by RII, and the actual empty monogon removes $103$ by RI. Perform RIII at $\{105,102,104\}$ and remove the resulting empty monogon $104$ by RI. These twenty moves, following step 10.1's sixteen, give a 62-crossing endpoint. Their supports lie in the remaining patch, so every fixed exterior collar and the carried zero-normal strip are retained. [F4, step 2.1, step 10.1, construct]
+
+12.1 This endpoint is the local graph $N$ encoded by `N-pd.json`, with its marked port data. The explicit ribbon isomorphism in `coupon-suffix-03.json` is anchored at source crossing 6 mapping to $N48$ and agrees with the prescribed map of all 26 exterior crossings. It preserves all 248 halfedge adjacencies, even crossing rotations and under/over parities. Following opposite halfedges from each of the twelve collars gives all six complete proper-arc visit words of literal $N$, including both long core arcs, not just their endpoint pairings. The six packet roles are $26\mapsto1$, $31\mapsto7$, $100\mapsto5$, $101\mapsto6$, $102\mapsto2$, $105\mapsto0$. In particular source crossings 26 and 31 survive in this actual movie; the earlier speculative prescription to delete them is unnecessary. The fixed-exterior isomorphism supplies the final relative planar redraw. Thus the preceding transport and endpoint identification prove the framed attaching isotopy to that local $N$ graph; they do not bind it to the published panel $N$. [F4, step 2.1, step 11.1, construct]
+
+13.1 By step 4.1, the handlebody of the local witness $H$ is diffeomorphic to $X_0(C)$. Independently, the published zero-trace equality [F8] identifies $X_0(C)$ with $X_0(K_P)$ for the exact named knots in [F1]. Composing these diffeomorphisms gives a diffeomorphism from the handlebody of $H$ to $X_0(K_P)$. No source-panel identification of the local endpoint in step 12.1 is needed. Reversing an auxiliary knot parameter leaves the zero-framed trace unchanged: conjugating both disk factors of the two-handle extends that reversal with positive four-dimensional orientation. [A1, F1, F8, step 4.1, construct]
+
+14.1 The local witness $H$ is dualizable by step 5.1, its handlebody is $X_0(C)$ by step 4.1, and step 13.1 identifies that same handlebody with $X_0(K_P)$. The local slides in steps 5.2–6.1 and cancellation in step 7.1 retain their framed geometric conclusions, while steps 8.1–12.1 end at the local $N$ graph. The second named trace description uses [F8], without inferring that this graph is the source panel $N$. Thus $H$ has both stated zero-trace descriptions, with the component and zero-framing conventions preserved. [F2, F8, step 4.1, step 5.1, step 13.1, construct] ∎
+
+## Proof evidence
+
+The common source construction through $K$ is retained from `research/inverse-problems-knot-theory-all-109-2026-10-19-owner-conway-traces-round1/alternate-trace-certificate.json.gz`. The nested-band, cancellation, literal $L$ and $L$–$M$ records are in that family's `k2-local-worker` and `lm-local-worker` directories, with the geometric account `lm-local-worker/KL-through-cancellation-and-LM-proof.txt`. The local endpoint construction and exterior-anchored readout are in `research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/conway-named/`: `head-three-returns-prefix.json`, the three successive `coupon-suffix` records, and their authoring scripts. They end at the local `inputs/N-pd.json` graph. A correspondence between that encoding and the published panel $N$ is not supplied. Earlier temporary $N$–$O$ and $O$–Figure 2 records are unavailable; no recovered map or new replay is claimed. The local geometric arguments and records are retained, but the named-partner conclusion in step 13.1 uses the full external trace equality [F8], independently of the local endpoint. This import is source assembly, not a locally reconstructed proof of Proposition 1.4 or native workflow, gate, source-audit or publication credit.

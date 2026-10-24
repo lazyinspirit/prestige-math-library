@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-integral-seifert-form-is-realized-by-a-knot.json
+  precheck: pass
 id: lem-integral-seifert-form-is-realized-by-a-knot
 kind: lemma
 title: "Every integral Seifert form is realized by a knot"
@@ -30,13 +33,7 @@ sources:
     - title: "Dale Rolfsen, Knots and Links"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
       locator: "§8.A, printed pp. 200–203"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -85,7 +82,7 @@ Assume the full Axiom of Choice. Let $g\geq0$ and let $V\in M_{2g}(\mathbb Z)$ s
 
 The diagram records the positive oriented clasp between the positive push-off of one band core and the other core. At the left crossing the blue strand is over; at the right crossing the red strand is over. With both arrows oriented as shown, the two mixed crossing signs are positive, so their half-sum changes the linking number by $+1$; reversing both local crossing conventions gives $-1$. The proof uses the crossing formula and finite local modifications, not the drawing.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[scale=0.9,>=stealth]
   \draw[thick,blue,->] (-2,0) -- (0.48,0);
   \draw[thick,blue,->] (0.92,0) -- (2,0);
@@ -98,4 +95,4 @@ The diagram records the positive oriented clasp between the positive push-off of
   \node at (0.7,0.48) {$+$};
   \node at (0,-1.35) {oriented clasp};
 \end{tikzpicture}
-~~~
+```

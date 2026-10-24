@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-pseudo-arclength-crosses-x-squared-fold.json
+  precheck: pass
 id: ex-pseudo-arclength-crosses-x-squared-fold
 kind: example
 title: 'Pseudo arclength crosses the fold $x^2-\lambda=0$'
@@ -56,3 +59,43 @@ negative-$x$ branch through the fold to the positive-$x$ branch.
 4.1 At the corrected center $z_*=(x_*,x_*^2)$, where $x_*:=\alpha+\alpha^2<1/4$, the inverse bordered Jacobian is $\begin{bmatrix}0&1\\-1&2x_*\end{bmatrix}$. Its operator norm is at most its Frobenius norm $\sqrt{2+4x_*^2}<2$. Choose corrected-ball radius $R_1=\alpha/4$. The ball lies in $V$ since $x_*+R_1<1/4$. With exact data, $\widehat\beta=2$, zero residual and derivative errors, and Jacobian Lipschitz constant $2$, the certificate has $q=4R_1=\alpha<1$ and $\beta\rho=0$. It therefore certifies the next section root and, because the whole ball lies in $V$, identifies it with the unique forward branch point. With $N_{\rm req}=N_s=N_c=1$, residual tolerance $\epsilon=0$, and exact callbacks, steps 2.1 and 3.1 produce this accepted ball in one attempt and one Newton update. [F3, F4, step 1.2, step 2.1, step 3.1, given, choose, algebra]
 
 5.1 The certified trace therefore starts at $x=-\alpha$ and accepts a next section root at $x=\alpha+\alpha^2>0$, with the fold $x=0$ lying between them on the supplied chart. It is a finite local continuation step through the fold even though $\lambda'(0)=0$; it asserts nothing about other components. [F4, step 1.1, step 1.2, step 2.1, step 4.1] ∎
+
+
+## Remarks
+
+The schematic below separates the horizontal predictor from the vertical
+Newton correction; the small correction separation is enlarged and the
+picture is not to scale. Here $x_*=\alpha+\alpha^2$,
+$\bar z_0=(-\alpha,\alpha^2)$, $z_p=(x_*,\alpha^2)$, and
+$z_*=(x_*,x_*^2)$. The dashed section has normal $\tau=(1,0)$.
+
+```tikz
+\begin{tikzpicture}[scale=1.6]
+\draw[->] (-1.9,0) -- (2.5,0) node[right] {$x$};
+\draw[->] (0,-0.35) -- (0,2.8) node[above] {$\lambda$};
+\draw[thick] (-1.55,2.4025) .. controls (-1.033333,0.800833) and (-0.516667,0) .. (0,0);
+\draw[thick] (0,0) .. controls (0.5,0) and (1,0.75) .. (1.5,2.25);
+\node[right] at (1.55,2.35) {$\lambda=x^2$};
+\draw[dashed] (1.25,-0.25) -- (1.25,2.1);
+\node[below] at (1.25,-0.25) {$x=x_*$};
+\draw[->,thick] (-1,1) -- (1.25,1);
+\node[below] at (-0.45,1) {$H\widehat t$};
+\draw[->,thick] (1.25,1) -- (1.25,1.5625);
+\fill (-1,1) circle (1.5pt);
+\node[left] at (-1.05,1) {$\bar z_0$};
+\fill (1.25,1) circle (1.5pt);
+\node[right] at (1.3,0.85) {$z_p$};
+\fill (1.25,1.5625) circle (1.5pt);
+\node[right] at (1.3,1.6) {$z_*$};
+\fill (0,0) circle (1.5pt);
+\node[below left] at (0,0) {fold};
+\end{tikzpicture}
+```
+
+The predictor displacement is $H\widehat t=(2\alpha+\alpha^2,0)$.
+The correction keeps $x=x_*$ fixed and adds
+$\Delta\lambda=x_*^2-\alpha^2=2\alpha^3+\alpha^4>0$, exactly as in
+Verification steps 2.1 and 3.1. The two solution points have opposite signs
+of $x$, with the fold between them on the graph. Acceptance still requires
+the certificate in step 4.1; the rigorous verification is independent of
+the illustration.

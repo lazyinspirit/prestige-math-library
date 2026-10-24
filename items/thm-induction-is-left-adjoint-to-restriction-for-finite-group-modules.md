@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules.json
+  precheck: pass
 id: thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules
 kind: theorem
 title: "Induction is left adjoint to restriction for finite-group modules over a commutative ring"
@@ -18,13 +21,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Theorem 4.33"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+
 ---
 
 ## Statement
@@ -62,3 +59,16 @@ $$ \operatorname{Hom}_G(\operatorname{Ind}_H^G W,V) \cong \operatorname{Hom}_H(W
 3.2 For $\Phi\in\operatorname{Hom}_G(\operatorname{Ind}_H^G W,V)$ and $f\in\operatorname{Ind}_H^G W$, one has $\beta(\alpha(\Phi))(f)=\sum_{t\in T} t\cdot\alpha(\Phi)(f(t))=\sum_{t\in T} t\cdot\Phi(\eta_{f(t)})=\Phi(\sum_{t\in T} t\cdot\eta_{f(t)})$. The function inside $\Phi$ equals $f$, because at a point $th$ it takes the value $h^{-1}\cdot f(t)=f(th)$ by covariance. So $\beta(\alpha(\Phi))=\Phi$. [F1, step 2.1, step 1.2, algebra]
 
 4.1 Steps 3.1 and 3.2 show that $\alpha$ and $\beta$ are inverse group isomorphisms, giving the stated adjunction. Via [F3], this is equally the usual $R[G]$-module adjunction. [F3, step 3.1, step 3.2, discharge-construct] ∎
+
+## Remarks
+
+The adjunction can be read as a unique extension of an $R$-linear $H$-map $\psi:W\to\operatorname{Res}_H^G V$. Write $\eta_W(w)=\eta_w$ as in step 1.1. The following triangle is in the category of $R$-linear $H$-modules:
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+W \arrow[r, "\eta_W"] \arrow[dr, "\psi"'] & \mathrm{Res}_H^G\mathrm{Ind}_H^G W \arrow[d, "\mathrm{Res}_H^G\Phi"] \\
+& \mathrm{Res}_H^G V
+\end{tikzcd}
+```
+
+Here $\Phi=\beta(\psi)$ is the unique $R$-linear $G$-map making the triangle commute. Indeed, $\eta_W$ is $R$-linear by its pointwise definition and $H$-equivariant by step 2.1; restriction makes $\Phi$ an $H$-map. Commutativity is precisely $\Phi(\eta_w)=\psi(w)$ from step 3.1. Conversely, this equality says $\alpha(\Phi)=\psi$, and step 3.2 gives uniqueness. Thus the triangle displays the same Hom bijection without changing the function-model convention for induction. The proof above is independent of the figure.

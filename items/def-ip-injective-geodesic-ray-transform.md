@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-ip-injective-geodesic-ray-transform.json
+  precheck: n/a
 id: def-ip-injective-geodesic-ray-transform
 kind: definition
 title: "Injective geodesic ray transform on a transversal manifold"
@@ -14,17 +17,6 @@ dependency_level: 0
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Dos Santos Ferreira, Kurylev, Lassas, and Salo, The Calderon problem in transversally anisotropic geometries (2016)"
@@ -49,3 +41,28 @@ Let $(M_0,g_0)$ be a compact connected smooth Riemannian manifold with smooth bo
 
 [[thm-fundamental-theorem-of-riemannian-geometry|Levi-Civita connection of the metric]]
 
+
+## Remarks
+
+The schematic shows one of the nontangential maximal segments indexing the ray-transform data. The arrows follow increasing $t$: the initial velocity points strictly into $M_0$, and the terminal velocity points strictly out. The oval is only a schematic of the boundary; the picture imposes no Euclidean metric, simplicity, or nontrapping assumption on $M_0$.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[thick] (0,0) ellipse (2.6 and 1.35);
+\node at (1.75,1.2) {$\partial M_0$};
+\node at (0,-0.85) {$M_0^\circ$};
+\draw[thick] (-2.6,0) -- (2.6,0);
+\draw[->,very thick] (-2.6,0) -- (-1.75,0);
+\draw[->,very thick] (1.75,0) -- (2.95,0);
+\fill (-2.6,0) circle (1.5pt);
+\fill (2.6,0) circle (1.5pt);
+\node[below] at (-2.6,-0.12) {$\gamma(0)$};
+\node[below] at (2.6,-0.12) {$\gamma(L)$};
+\node[above] at (-2.15,0.08) {$\dot\gamma(0)$};
+\node[above] at (2.55,0.08) {$\dot\gamma(L)$};
+\node at (0,0.72) {$I_{g_0}f(\gamma)=\int_0^L f(\gamma(t))\,dt$};
+\node at (0,-1.85) {$0\longrightarrow t\longrightarrow L,\qquad |\dot\gamma(t)|_{g_0}=1$};
+\end{tikzpicture}
+```
+
+Only the segment from $\gamma(0)$ to $\gamma(L)$ is integrated; the outward arrow depicts its terminal velocity. The full data consist of the values $I_{g_0}f(\gamma)$ for every segment allowed by the Definition, not just the one drawn. Injectivity is the stated implication for this full family and for $f\in C_c^\infty(M_0^\circ,\mathbb R)$, with real and imaginary parts treated separately for complex-valued functions; the picture does not assert that every manifold has this property. The definition is independent of the illustration.

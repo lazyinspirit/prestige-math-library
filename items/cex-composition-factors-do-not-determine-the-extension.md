@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-composition-factors-do-not-determine-the-extension.json
+  precheck: pass
 id: cex-composition-factors-do-not-determine-the-extension
 kind: counterexample
 title: "Composition factors do not determine the extension"
@@ -14,14 +17,12 @@ sources:
     - title: "Stephen D. Smith, CFSG—A User’s Manual"
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
+
 ---
 
 ## Statement refuted
 
-C4 and C2×C2 share composition factors but are not isomorphic.
+$C_4$ and $C_2\times C_2$ share composition factors but are not isomorphic.
 
 ## Counterexample
 

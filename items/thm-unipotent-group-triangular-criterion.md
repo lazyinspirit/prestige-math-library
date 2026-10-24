@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-unipotent-group-triangular-criterion.json
+  precheck: pass
 id: thm-unipotent-group-triangular-criterion
 kind: theorem
-title: Unipotent groups are exactly the subgroups of some U_n, equivalently the groups with coconnected coordinate Hopf algebra
+title: Unipotent groups are exactly the subgroups of some $U_n$, equivalently the groups with coconnected coordinate Hopf algebra
 dependency_level: 6
 deps:
   - def-axiom-of-choice
@@ -22,11 +25,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -56,7 +54,7 @@ Without a choice assumption, (c) implies (a); more generally a surjective Hopf-a
 
 [F2] Assume AC. For every affine finite-type group scheme over $k$ there is a faithful finite-dimensional rational representation, i.e. a monomorphism $G\to\mathrm{GL}_n$; every monomorphism of finite-type group schemes over a field is a closed immersion. ([[lem-nonaffine-affine-group-faithful-representation]], [[lem-nonaffine-group-monomorphism-closed-immersion]])
 
-[F3] $U_n$ is the closed subgroup scheme of $\mathrm{GL}_n$ of upper unitriangular matrices; its coordinate ring $O(U_n)=k[X_{ij}:i<j]$ is coconnected, A surjective Hopf-algebra quotient of $O(U_n)$ is coconnected, without choice. Assuming AC, the coordinate ring of a geometric closed subgroup scheme of $U_n$ is such a quotient. ([[def-upper-unitriangular-group-scheme]], [[lem-upper-unitriangular-coordinate-ring-is-coconnected]], [[thm-closed-subgroup-schemes-correspond-to-hopf-ideals]])
+[F3] $U_n$ is the closed subgroup scheme of $\mathrm{GL}_n$ of upper unitriangular matrices; its coordinate ring $O(U_n)=k[X_{ij}:i<j]$ is coconnected, A surjective Hopf-algebra quotient of $O(U_n)$ is coconnected, without choice. Assuming AC, the coordinate ring of a geometric closed subgroup scheme of $U_n$ is such a quotient. ([[def-upper-unitriangular-group-scheme]], [[lem-upper-unitriangular-coordinate-ring-is-coconnected|Coconnected Hopf algebras: the coordinate ring of $U_n$ and passage to quotients]], [[thm-closed-subgroup-schemes-correspond-to-hopf-ideals]])
 
 [F4] If $A$ is a coconnected commutative Hopf algebra over $k$ and $V\ne0$ is an $A$-comodule, then $V$ has a nonzero vector fixed by the comodule structure; for $A=O(G)$ this says that every nonzero rational representation of $G$ has a nonzero $G$-fixed vector. ([[lem-coconnected-comodules-have-fixed-vectors]])
 

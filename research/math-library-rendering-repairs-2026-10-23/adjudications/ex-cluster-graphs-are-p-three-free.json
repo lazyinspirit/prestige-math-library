@@ -1,0 +1,108 @@
+{
+  "id": "ex-cluster-graphs-are-p-three-free",
+  "agent": "/root/rendering_repair_coordinator/comb_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Original standalone 1200x1400 screenshot shows literal node/draw/end commands in Remarks instead of a graph. Both fence delimiters share lines with commands, preventing native fenced TikZ parsing.",
+      "action": "Put opening and closing fence delimiters on separate lines.",
+      "status": "repaired-and-visually-verified"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "confirmed",
+      "reason": "After the fence-only repair, native preview comb019-fence-check shows only ab and bc in the component labelled K3. Its SVG edge path ends in a zero-length move/close at c; the closing ca edge is absent. Thus the actual rendered left component has degrees (1,2,1), contradicting its K3 and P3-free captions.",
+      "action": "Replace native --cycle with an explicit separate draw from c to a, preserving all vertex coordinates and captions.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair the malformed fenced TikZ block and explicitly draw its missing triangle closing edge, so the existing illustration actually depicts K3 disjoint union K2.",
+  "source_lines_after": [
+    54,
+    55,
+    57,
+    59,
+    60
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and adjacency",
+      "result": "The five distinct vertex nodes a,b,c,d,e have edges ab,bc,ca,de and no others. Final original-resolution native view confirms 5 vertices, 4 edges, degree sequence (2,2,2,1,1), and exactly two connected components."
+    },
+    {
+      "check": "Complete components",
+      "result": "All three unordered pairs of {a,b,c} are adjacent, and the only pair of {d,e} is adjacent. These are K3 and K2 under def-standard-complete-bipartite-path-and-cycle-graphs; the captions agree."
+    },
+    {
+      "check": "Induced P3 exclusion",
+      "result": "A triple wholly inside {a,b,c} has 3 edges; a triple spanning components has at most 1 edge. None has exactly the two edges of P3 (local F2 and Verification 1.1), consistent with the induced-copy convention of def-h-free-and-family-free-graph and def-induced-embedding-and-induced-copy."
+    },
+    {
+      "check": "Proof interface",
+      "result": "The illustration is confined to Remarks, after the complete algebraic/combinatorial verification. No numbered proof step invokes it, and statements, hypotheses, dependencies and all proof text remain byte-identical."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "048961429e326fd5b1c819b6894e8c73beb9aa63ef9bc222ba5d847b68c20ac6",
+  "after_raw_sha256": "f800ecfe704950a6b2d0ec3514f7736c8f4bef0066eddcf0c7fbc268a9f60a35",
+  "write_guard": "Immediately before initial source edit current raw SHA256 matched queue original 048961429e326fd5b1c819b6894e8c73beb9aa63ef9bc222ba5d847b68c20ac6. Before the closing-edge edit current bytes were guarded against exactly the original plus my fence-only repair.",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-cluster-graphs-are-p-three-free.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-cluster-graphs-are-p-three-free.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-cluster-graphs-are-p-three-free.md",
+            "item_id": "ex-cluster-graphs-are-p-three-free",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-cluster-graphs-are-p-three-free.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_validation": {
+    "original_tile_viewed": "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/ex-cluster-graphs-are-p-three-free--01.png",
+    "intermediate_preview": "research/math-library-rendering-repairs-2026-10-23/previews/comb019-fence-check",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/previews/comb019-final",
+    "final_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/comb019-final/screenshots/ex-cluster-graphs-are-p-three-free--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/comb019-final/diagram-original-crop.png"
+    ],
+    "method": "Actual local ItemBody/MathMarkdown async native TikZ SSR and file-only Playwright capture via repair-preview.mts. Original-resolution final graph crop confirms all edges, separate components and readable captions; native SVG additionally contains explicit horizontal ca segment M2.797-25.123h-45.125.",
+    "preview_exit_code": 0,
+    "reference_map_diagnostics": 16,
+    "scope_limit": "Reference map reports 16 unrelated parse diagnostics; no whole-item loader or production-route coverage claimed."
+  }
+}

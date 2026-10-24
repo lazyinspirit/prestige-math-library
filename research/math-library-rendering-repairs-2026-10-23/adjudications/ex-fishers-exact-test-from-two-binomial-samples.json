@@ -1,0 +1,115 @@
+{
+  "id": "ex-fishers-exact-test-from-two-binomial-samples",
+  "agent": "/root/rendering_repair_coordinator/dms_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot renders the formulas correctly but only lists the three masses and the three tails in prose. A conditional-mass bar plot materially clarifies why the inclusive p-value sums the observed bar and all bars to the right, despite the middle outcome having the largest individual mass. This is warranted explanatory art under the expanded diagram scope, not a gap in the proof.",
+      "action": "Added a final Remarks paragraph and a three-bar TikZ plot with separately labeled inclusive tails and the direction of larger K.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only an explanatory Remarks section: conditional masses 1/6,4/6,1/6 at k=0,1,2 and inclusive tails 1,5/6,1/6 for n1=n2=2, S=2.",
+  "source_lines_after": {
+    "remarks": [
+      73,
+      75
+    ],
+    "tikz": [
+      77,
+      98
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Conditional support for n1=n2=2, S=2 is k=0,1,2.",
+      "check": "The Example range is max(0,2-2)=0 through min(2,2)=2; the plot has precisely these three bars.",
+      "local_basis": "Example, line 44; Verification step 3.1, line 69."
+    },
+    {
+      "data": "Masses Q(2,{k}) at k=0,1,2.",
+      "check": "Binomial counts are (2 choose 0)(2 choose 2)=1, (2 choose 1)^2=4, (2 choose 2)(2 choose 0)=1 out of (4 choose 2)=6. Heights 1,4,1 in equally scaled drawing coordinates are labeled 1/6,4/6,1/6; the y-axis ticks use the same scale. Masses sum to 1.",
+      "local_basis": "Example kernel formula and Verification steps 2.1 and 3.1."
+    },
+    {
+      "data": "Inclusive upper-tail labels aligned beneath each observed k.",
+      "check": "For k=0 sum is (1+4+1)/6=1; for k=1 it is (4+1)/6=5/6; for k=2 it is 1/6. The caption explicitly includes the observed bar, so these do not depict strict tails or randomized values.",
+      "local_basis": "Fact F4 and Verification step 3.1."
+    },
+    {
+      "data": "Rightward arrow labeled larger K.",
+      "check": "The horizontal coordinates increase from k=0 to k=2; the Example explicitly states that larger K favors the alternative that the first sample success probability exceeds the second. No transition, morphism, or commutativity relation is asserted.",
+      "local_basis": "Example, line 45."
+    },
+    {
+      "data": "Proof independence.",
+      "check": "The original Example, Facts and four Verification steps are byte-preserved; the new explanatory caption refers to step 3.1 and says the verification does not depend on the figure.",
+      "local_basis": "Exact before/current prefix comparison."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-fishers-exact-test-from-two-binomial-samples.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-fishers-exact-test-from-two-binomial-samples.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-fishers-exact-test-from-two-binomial-samples.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "guard": {
+    "expected_before_raw_sha256": "13d46d69edd0738c2291f295627e22f85b260647d19ef95da08f8012c6855106",
+    "matched_immediately_before_edit": true,
+    "current_raw_sha256": "9f11b181b7af5bc19ed7afdfbdcdf98afff52b311a3a1f086df5dcffd6a6d346",
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true
+  },
+  "original_visual_evidence": {
+    "declared_path_missing": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/diagram-supplement/screenshots/ex-fishers-exact-test-from-two-binomial-samples--01.png",
+    "resolved_same_category_path": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/ex-fishers-exact-test-from-two-binomial-samples--01.png",
+    "sha256": "a105050b50522329c3afe39595285c6987a01bc280cce93250921e5105059a24",
+    "viewed_standalone_original_resolution": true
+  },
+  "local_visual_check": {
+    "preview_command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dms006-fisher node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-fishers-exact-test-from-two-binomial-samples --out research/math-library-rendering-repairs-2026-10-23/previews/dms006-fisher",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dms006-fisher/manifest.json",
+    "manifest_sha256": "04c1a1fb4ebade7070d8814ac394759d140419a568cde7d342f404507fb63f02",
+    "source_sha256": "9f11b181b7af5bc19ed7afdfbdcdf98afff52b311a3a1f086df5dcffd6a6d346",
+    "viewed_standalone_original_resolution_tiles": [
+      "01",
+      "02"
+    ],
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "visual_result": "All three bars, mass labels, tail labels and rightward arrow visible without overlap or clipping. Plot matches checked values.",
+    "limitations": "Local native ItemBody preview, not production-route coverage; 16 unrelated reference-map parse diagnostics reported by the preview."
+  },
+  "remaining_issues": []
+}

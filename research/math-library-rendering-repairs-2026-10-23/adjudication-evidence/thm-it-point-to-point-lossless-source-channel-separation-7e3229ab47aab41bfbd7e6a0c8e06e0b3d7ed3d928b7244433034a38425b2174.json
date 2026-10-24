@@ -1,0 +1,91 @@
+{
+  "id": "thm-it-point-to-point-lossless-source-channel-separation",
+  "agent": "/root/rendering_repair_coordinator/dinfo_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authenticated original standalone tiles and identical frozen/current source contain no figure. The four-stage source/encoder/channel/decoder cascade materially clarifies the random block interfaces and distinguishes the stochastic channel kernel from deterministic code maps; a complete existing proof does not remove this explanatory value.",
+      "action": "Added a four-node, three-arrow TikZ cascade in final Remarks with exact alphabet interfaces, source law, channel product kernel, channel-use ratio, and the strict sufficient versus non-strict necessary thresholds.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Append Remarks only: S^k -> X^{n_k} -> Y^{n_k} -> estimated S^k, with arrows f_k, W^{n_k}, g_k. Clarify deterministic maps versus channel kernel and preserve all boundary qualifications.",
+  "source_lines_after": [
+    79,
+    81,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    95
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and deterministic interfaces",
+      "evidence": "Item F1 and def-it-point-to-point-joint-source-channel-code Definition give f_k: S-alphabet^k -> X-alphabet^{n_k} and g_k: Y-alphabet^{n_k} -> S-alphabet^k in the lossless case. Figure arrows f_k and g_k run left-to-right between precisely those random blocks; estimated S^k=g_k(Y^{n_k})."
+    },
+    {
+      "check": "Stochastic middle transition and source law",
+      "evidence": "Item A1 gives S^k law P_S^{tensor k}. def-discrete-memoryless-channel Definition gives W^{n_k}(y|x)=product_i W(y_i|x_i), a stochastic kernel from X-alphabet^{n_k} to Y-alphabet^{n_k}. Figure caption explicitly denies determinism for this middle arrow. Proof 1.3 supplies X^{n_k}=f_k(S^k) and the conditional DMC law."
+    },
+    {
+      "check": "Rates, dimensions, and boundary",
+      "evidence": "Statement fixes n_k/k -> rho>0, H in nats/source symbol and C in nats/channel use, so rho C has the same units as H. Caption reproduces H<rho C as sufficient and H<=rho C as necessary (proof 1.3); step 1.1 separately gives the zero-entropy exception for arbitrary W. It explicitly makes no positive-entropy equality claim."
+    },
+    {
+      "check": "Diagram relations and independence",
+      "evidence": "Three forward edges form a cascade of four variables; no inverse maps, feedback, equality between input and decoded block, or commutative square is asserted. Existing proof steps 1.1--4.1 remain byte-for-byte unchanged and independent of the appended figure."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-it-point-to-point-lossless-source-channel-separation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-it-point-to-point-lossless-source-channel-separation.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-it-point-to-point-lossless-source-channel-separation.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "status_guard": "Original/current frontmatter bytes identical; entire original carrier remains an exact prefix of current source. status: published unchanged.",
+    "pre_edit_raw_sha256": "c475ec0f3f2b38d619f109f40d60e7de04dc94554d733402d7ee3bccaff80739",
+    "current_raw_sha256": "8e0f963a24e9fa7bb80ae69183c1851fc5c6964a574cded50159ea978141dc82"
+  },
+  "visual_checks": {
+    "original_tiles": "Both 01 and 02 inspected standalone at original resolution. Declared diagram-supplement/screenshots paths absent; authentic files resolved within information-theory/screenshots with exact recorded SHA256 values 957d56e31d44dde6856af2ae0fca8c7ba2abe75d771048a0d663fda37093eacf and af4bf07c31a494e0fc42196a00fa5cc7e94376a3c77a694e931a9d4ac8854128.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo-018/manifest.json",
+    "source_sha256": "8e0f963a24e9fa7bb80ae69183c1851fc5c6964a574cded50159ea978141dc82",
+    "receipt_sha256": "043c2743a01be36e2dd2b9ca1bdbca1a7ce7acc1cd32a17609a859e33b7ea3ab",
+    "native_result": "Both preview PNGs inspected standalone at original resolution; diagram has four readable nodes and three visible directed edges, no overlaps or clipping. tikz_count=1, katex_errors=[], diagram_failures=[].",
+    "limitations": "Local native ItemBody SSR preview only, not production HTTP route. Current reference-title-map has 16 unrelated parse diagnostics recorded in manifest."
+  },
+  "remaining_issues": []
+}

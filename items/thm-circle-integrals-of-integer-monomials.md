@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-circle-integrals-of-integer-monomials.json
+  precheck: pass
 id: thm-circle-integrals-of-integer-monomials
 kind: theorem
-title: "On a positively oriented circle about a, the integral of (z-a)^m is zero for every integer m except -1, and is 2 pi i for m=-1"
+title: 'On a positively oriented circle about $a$, the integral of $(z-a)^m$ is zero for every integer $m$ except $-1$, and is $2\pi i$ for $m=-1$'
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [thm-riemann-stieltjes-and-parametric-contour-integrals-agree, def-complex
 aliases: []
 landmark: true
 proof_strategy: cases
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:

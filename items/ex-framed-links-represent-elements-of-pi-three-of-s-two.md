@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-framed-links-represent-elements-of-pi-three-of-s-two.json
+  precheck: pass
 id: ex-framed-links-represent-elements-of-pi-three-of-s-two
 kind: example
-title: "The framed unknot represents a generator of pi_3 of S^2"
+title: 'The framed unknot represents a generator of $\pi_3(S^2)$'
 status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
@@ -26,8 +29,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)"

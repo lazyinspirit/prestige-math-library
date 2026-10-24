@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range.json
+  precheck: pass
 id: thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range
 kind: theorem
 title: "The Dolbeault Laplacian has finite-dimensional kernel and closed range"
@@ -32,13 +35,6 @@ sources:
     - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry (author manuscript, Universite Grenoble Alpes)"
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VI §7, opening paragraph and (7.1)–(7.2), printed pp. 308–310: the smooth Chern Dolbeault Laplacian is elliptic and self-adjoint; the text states the Dolbeault Hodge decomposition and finite-dimensional cohomology."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 
 ---
 
@@ -85,7 +81,7 @@ $$\|u\|_{H^2,\Delta}:=\|u\|_{H^2}+\|\Delta''u\|_{L^2}.$$
 
 ## Proof
 
-**Proof technique:** Use compact-perturbation facts for $I-B$ and the exact Green identities for $\Delta''$.
+**Proof technique:** Use compact-perturbation facts for I − B and the exact Green identities for Δ″.
 
 1.1 By [F3], $H=\ker(I-B)$. Apply the compact-kernel lemma [F4] to $B$ on the normed space $L^2$ from [F1]. Thus $H$ is finite dimensional. [F1, F3, F4]
 

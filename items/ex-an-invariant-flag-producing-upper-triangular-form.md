@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-an-invariant-flag-producing-upper-triangular-form.json
+  precheck: pass
 id: ex-an-invariant-flag-producing-upper-triangular-form
 kind: example
 title: "Building an upper-triangular matrix from a complete invariant flag"
@@ -13,13 +16,6 @@ deps: [prop-complete-invariant-flags-and-upper-triangular-matrices]
 aliases: []
 landmark: false
 proof_strategy: computation
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-16
-  audited: 2026-08-16
 sources:
   scraped: []
   references: []
@@ -48,3 +44,17 @@ $$[T]=\begin{pmatrix}2&1&2\\0&3&-1\\0&0&4\end{pmatrix}.$$
 1.1 The formulas show $T\langle e_1\rangle\subseteq\langle e_1\rangle$ and $T\langle e_1,e_2\rangle\subseteq\langle e_1,e_2\rangle$, while the final space is automatically invariant. [algebra]
 
 2.1 The coordinate columns of $Te_1,Te_2,Te_3$ give the displayed matrix, and [L1] identifies this upper-triangular form with the verified complete flag. [step 1.1, L1, algebra] ∎
+
+
+## Remarks
+
+The inclusions in this flag commute with the restrictions of $T$. In the diagram, $T_1=T|_{\langle e_1\rangle}$ and $T_2=T|_{\langle e_1,e_2\rangle}$; the horizontal arrows are inclusions, and the left vertical arrow is the unique endomorphism of the zero space.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, font=\Large, labels={font=\large}]
+0 \arrow[r, hook] \arrow[d, "0"'] & \langle e_1\rangle \arrow[r, hook] \arrow[d, "T_1"'] & \langle e_1,e_2\rangle \arrow[r, hook] \arrow[d, "T_2"'] & \mathbb Q^3 \arrow[d, "T"] \\
+0 \arrow[r, hook] & \langle e_1\rangle \arrow[r, hook] & \langle e_1,e_2\rangle \arrow[r, hook] & \mathbb Q^3
+\end{tikzcd}
+```
+
+In the ordered basis $(e_1,e_2,e_3)$, the coordinate columns of these images are $(2,0,0)^{\mathsf T}$, $(1,3,0)^{\mathsf T}$, and $(2,-1,4)^{\mathsf T}$. The first $j$ columns are supported in the first $j$ rows, giving the displayed upper-triangular matrix with diagonal $(2,3,4)$. The verification above is independent of this illustration.

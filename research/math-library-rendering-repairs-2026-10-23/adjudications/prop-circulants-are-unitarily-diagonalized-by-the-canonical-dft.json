@@ -1,0 +1,57 @@
+{
+  "id": "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+  "agent": "/root/rendering_repair_coordinator/nla_017",
+  "model": "gpt-6.1-sol",
+  "configured_reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile shows the red failed-diagram block. Actual native node-tikzjax compilation using the renderer preamble fails with Undefined control sequence at \\operatorname{diag}. The renderer explicitly accepts complete tikzcd environments; the suggested duplicated-environment explanation is incorrect. Its preamble loads amsfonts and tikz-cd, without amsmath.",
+      "action": "Replace only the diagram label command \\operatorname{diag} by the supported upright label \\mathrm{diag}, retaining the complete environment, four objects, maps, orientation and surrounding mathematics.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "One diagram-label command substitution at line 45; no changes to title, prose, claims, hypotheses, proof, suppliers or metadata.",
+  "source_lines_after": [
+    45
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and map domains",
+      "result": "All four objects are C^N for N>=1. The zero-based vectors (x_0,...,x_{N-1}) identify with functions on Z/NZ via the standard representatives. def-unitary-discrete-fourier-transform-on-z-mod-n defines F_N as an endomorphism on those functions, hence C^N under this identification. def-toeplitz-circulant-and-displacement-notation defines C(c)_{ij}=c_{(i-j) mod N}, so the upper map is C^N -> C^N. The lower diag(lambda_0,...,lambda_{N-1}) is also C^N -> C^N."
+    },
+    {
+      "check": "DFT sign, normalization and eigenvalue indexing",
+      "result": "The DFT definition uses N^(-1/2) sum_{j=0}^{N-1} x_j exp(-2 pi i k j/N). Thus lambda_k=sum_{j=0}^{N-1}c_j exp(-2 pi i k j/N)=sqrt(N)(F_N c)(k), for 0<=k<N exactly as in the Statement; the inversion supplier uses the positive sign with the same N^(-1/2) factor."
+    },
+    {
+      "check": "Square commutativity and orientation",
+      "result": "Both horizontal arrows point right; both vertical arrows point down and are F_N. Proof step 1.1 identifies C(c)x with cyclic convolution. The full local convolution supplier proof reindexes z=x-y and factors the negative-sign exponential, giving F_N(c*x)=sqrt(N)(F_N c) odot(F_N x). Consequently each k coordinate of the upper-then-right-vertical path is lambda_k(F_N x)(k), equal to the left-vertical-then-lower path; this is exactly proof step 2.1. No inverse transform belongs on the downward arrows."
+    },
+    {
+      "check": "Independence of rigorous proof",
+      "result": "Proof steps 1.1, 2.1, 3.1 and 4.1 establish the matrix identity, diagonalization and solvability directly from finite sums and Fourier inversion without invoking the square. Only the unsupported label command changes."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "raw_sha256_guard_before_edit": "aa40617a79bcf20fdf877944e882e175ba5a9a7004b0a61cc978fc2c53076ae1",
+    "after_raw_sha256": "42493450324ca145780fb1099831f94eb0728864f77082110b29ced0898cf00a",
+    "frontmatter_and_publication_status": "byte-for-byte preserved",
+    "proof_layout": "exit 0: proof-layout: 1 items, 4 steps, 0 defects",
+    "precheck": "exit 0: 1 checked, 0 failed; direct strategy pass",
+    "rendercheck": "exit 0: checked 1, errors [], warnings []",
+    "actual_native_compilation": "Original fails at undefined \\operatorname; identical source with only \\mathrm substitution compiles to SVG using renderer preamble.",
+    "local_preview": "research/math-library-rendering-repairs-2026-10-23/previews/nla017-final-unique/manifest.json",
+    "visual_review": "Fresh standalone original-resolution --01.png reviewed: four C^N objects, two rightward arrows C(c)/diag(lambda), two downward F_N arrows, no red failure, clipping or overlap. Receipt: 1 TikZ figure, 43 KaTeX spans, no KaTeX errors, no diagram failures."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Preview covers current title and complete native ItemBody locally, not production route or dependency widgets. Reference-title map reports 16 unrelated parse diagnostics; assigned item rendering completed successfully."
+  ]
+}

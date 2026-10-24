@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-product-of-one-plus-deltas-gives-theta-n.json
+  precheck: pass
 id: lem-product-of-one-plus-deltas-gives-theta-n
 kind: lemma
-title: "If |delta_i| <= u and n u < 1, then prod (1+delta_i) = 1 + theta_n with |theta_n| <= gamma_n"
+title: 'If $|\delta_i|\le u$ and $n u<1$, then $\prod (1+\delta_i)=1+\theta_n$ with $|\theta_n|\le\gamma_n$'
 status: published
 origin: pipeline
 provenance:
@@ -10,9 +13,6 @@ provenance:
 deps: [def-standard-relative-floating-point-model-and-unit-roundoff, thm-geometric-series, thm-binomial-theorem]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   scraped: []
   references:

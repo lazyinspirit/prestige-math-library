@@ -1,0 +1,83 @@
+{
+  "id": "ex-distinguishable-prefix-nonregularity-criterion",
+  "agent": "/root/rendering_repair_coordinator/cpt_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile visibly displays 0^n and {0^n1^n : n >= 0} with literal carets and ASCII comparison. Frozen/current body defines precisely the corresponding powers and nonnegative index condition in rendered mathematics, confirming omitted math delimiters in the title rather than optional prose typography.",
+      "action": "Added inline math delimiters around the prefix and language expressions; escaped set braces and replaced ASCII >= with equivalent \\geq.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title only: render the existing prefix and language expressions as inline mathematics, preserving their exact meaning.",
+  "source_lines_after": {
+    "4": "title: 'The prefixes $0^n$ distinguish the language $\\{0^n1^n : n \\geq 0\\}$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "bece82f5267d32d5dda3070f1cc2661558ddc495d09d8ad582fa914182f26c0a",
+  "after_raw_sha256": "71fbafd026856cefa73692e33aa8bc48f533a2834f0037b3ea22eb7161ec9610",
+  "scope_checks": {
+    "title_only_change": true,
+    "body_and_protected_metadata_byte_identical": true,
+    "status_byte_identical": "status: published"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-distinguishable-prefix-nonregularity-criterion.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-distinguishable-prefix-nonregularity-criterion.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-distinguishable-prefix-nonregularity-criterion.md",
+            "item_id": "ex-distinguishable-prefix-nonregularity-criterion",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-distinguishable-prefix-nonregularity-criterion.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_validation": {
+    "original_image": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/ex-distinguishable-prefix-nonregularity-criterion--01.png",
+    "original_resolution_inspected": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt-016-title/manifest.json",
+    "preview_manifest_sha256": "9275a92d0b8d06a33381259fadcd46ecc3cf87e2aefa8448fc1fdcf95356a33c",
+    "preview_source_sha256": "71fbafd026856cefa73692e33aa8bc48f533a2834f0037b3ea22eb7161ec9610",
+    "preview_image": "research/math-library-rendering-repairs-2026-10-23/previews/cpt-016-title/screenshots/ex-distinguishable-prefix-nonregularity-criterion--01.png",
+    "preview_image_sha256": "f5a3341700c368051a4fc444eec84d7714c8bc8882916c352d4f8b302ce11daf",
+    "preview_original_resolution_inspected": true,
+    "observation": "The title now displays superscript n, set braces, and the nonnegative comparison as rendered math, with no clipping or visible raw notation. Complete body remains visually sound.",
+    "preview_exit_code": 0,
+    "preview_summary": {
+      "items": 1,
+      "tiles": 1,
+      "reference_map_diagnostics": 16
+    },
+    "limitations": "Local native title/ItemBody preview; unrelated reference-map parse diagnostics are recorded in its manifest. No production-route coverage asserted."
+  }
+}

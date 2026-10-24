@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-special-aronszajn-tree-construction.json
+  precheck: pass
 id: thm-special-aronszajn-tree-construction
 kind: theorem
 title: "A special Aronszajn tree exists"
@@ -13,9 +16,6 @@ sources:
     - title: "Karagila, Axiomatic Set Theory, Theorem 9.2 and Exercise 9.4, printed p43 (rational-label construction)"
       url: https://karagila.org/files/set-theory-2017.pdf
 proof_strategy: direct
-verification:
-  audited: 2026-09-09
-  precheck: pass
 justified_by: []
 forward_refs: []
 ---
@@ -63,3 +63,27 @@ In ZFC there exists a normal splitting special Aronszajn tree. This tree has an 
 6.1 On any chain the labeling is injective into $\mathbb Q$, because distinct comparable nodes have strictly different labels. F4 makes the chain countable. Its height image is countable and hence not cofinal in $\omega_1$ by F7, whose choice hypothesis follows from A1. No branch is cofinal. Thus the constructed $\omega_1$-tree is Aronszajn, and the increasing rational labeling makes it special by F8. [F4, F7, F8, A1, step 5.1]
 
 7.1 The tree is uncountable: its height map is onto $\omega_1$ since every level is nonempty, whereas the image of a countable set is countable. For each rational $q$, the fiber $\ell^{-1}(\{q\})$ is an antichain by strict increase. If all these fibers were countable, F4 would index them countably and F3, using the countable choice supplied by A1, would make their union $T$ countable, a contradiction. At least one fiber is an uncountable antichain; by F8 the tree is not Suslin. [F3, F4, F8, A1, step 5.1, step 6.1] ∎
+
+## Remarks
+
+The schematic shows two requests $(x,r_0)$ and $(x,r_1)$ at a nonzero limit stage $\delta$, where $\operatorname{ht}(x)=\alpha$ and $a=\ell(x)<r_i$. In the construction underlying F1, put $q_i=(a+r_i)/2$. The branches $b_0,b_1$ choose different immediate successors $z_0,z_1$ of $x$ and stay strictly below their respective label bounds $q_0,q_1$. A new top $v_i$ has predecessor set $b_i$ and label $q_i$. Only selected nodes are shown; solid segments represent immediate succession, and dashed segments abbreviate cofinal branch portions followed by the new top, not immediate succession into the limit level.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node (x) at (0,0) {$x\;[a]$};
+\node (z0) at (-2,1.4) {$z_0\;[s_0]$};
+\node (z1) at (2,1.4) {$z_1\;[s_1]$};
+\node (v0) at (-2,3.8) {$v_0\;[q_0]$};
+\node (v1) at (2,3.8) {$v_1\;[q_1]$};
+\draw (x) -- (z0);
+\draw (x) -- (z1);
+\draw[dashed] (z0) -- node[left] {$b_0$} (v0);
+\draw[dashed] (z1) -- node[right] {$b_1$} (v1);
+\node[anchor=west] at (3.2,0) {$T_\alpha$};
+\node[anchor=west] at (3.2,1.4) {$T_{\alpha+1}$};
+\node[anchor=west] at (3.2,3.8) {$T_\delta$};
+\node at (0,-0.9) {$a<s_i<q_i<r_i\quad(i=0,1)$};
+\end{tikzpicture}
+```
+
+Brackets display rational labels, so $s_i=\ell(z_i)$. The distinct successors ensure $b_0\ne b_1$, hence the tops have distinct predecessor histories as required by normality. This illustrates the limit-extension input used in step 4.1; all omitted nodes and other successors are supplied by the construction, and the proof above is independent of the picture.

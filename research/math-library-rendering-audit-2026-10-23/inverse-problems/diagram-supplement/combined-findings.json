@@ -1,0 +1,530 @@
+[
+  {
+    "id": "alg-ip-exact-block-hankel-realization",
+    "section": "Item body",
+    "lines": [
+      54,
+      56,
+      58,
+      74
+    ],
+    "symptom": "The algorithm creates adjacent block-Hankel matrices, factors H0, and derives A, B, and C from the factors and shifted H1. A compact shape-labeled schematic could make the algorithm’s data flow easier to scan.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "block-matrix/factorization flow schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm creates adjacent block-Hankel matrices, factors H0, and derives A, B, and C from the factors and shifted H1. A compact shape-labeled schematic could make the algorithm’s data flow easier to scan.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-ip-exact-block-hankel-realization--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-ip-exact-block-hankel-realization--01.png": "ecef21fac67fc4e28583b8d929b24eb8d34f46fe728ee400bc594266c34b10e8"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "dynamic-data-identifiability-and-system-realization"
+    ],
+    "source_lines": {
+      "54": "Form the $q$-by-$q$ block Hankel matrices",
+      "56": "each of shape $qp$ by $qm$. Execute the following steps.",
+      "58": "1. Apply the exact rank test to $H_0$. If it fails, return",
+      "74": "   these are the corresponding empty matrices."
+    },
+    "source_snapshot": "snapshots/alg-ip-exact-block-hankel-realization.md",
+    "source_sha256": "3159067a5e47319eb8b631507c577e156beede49c7ef6b2f0de094620477759f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "Optional visual aid; no mathematical or rendering defect is present. The existing prose and formulas specify these relations.",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-ip-finite-element-pde-tikhonov",
+    "section": "Item body",
+    "lines": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "symptom": "The source gives explicit ordered control flow, several terminal statuses, and a bounded backtracking loop; a small flowchart would make the branch order easier to scan.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "algorithm flowchart",
+    "exact_source_claim": "",
+    "selection_reason": "The source gives explicit ordered control flow, several terminal statuses, and a bounded backtracking loop; a small flowchart would make the branch order easier to scan.",
+    "concrete_diagram_content": "initial admissibility → inadmissible or initialize q\nouter iteration check → admissibility/budget exits\nstate-adjoint solve → solve-certificate failure or certified gradient/data outputs\nprojected-gradient stationarity test → converged\ndata-discrepancy test → discrepancy-stopped\niteration limit/objective interval checks → budget-exhausted or linear-solve-failed\nbacktracking projected trials: reject unchanged/inadmissible, evaluate certified interval, accept first upper <= current lower, otherwise budget-exhausted",
+    "mathematical_check": "initial admissibility → inadmissible or initialize q\nouter iteration check → admissibility/budget exits\nstate-adjoint solve → solve-certificate failure or certified gradient/data outputs\nprojected-gradient stationarity test → converged\ndata-discrepancy test → discrepancy-stopped\niteration limit/objective interval checks → budget-exhausted or linear-solve-failed\nbacktracking projected trials: reject unchanged/inadmissible, evaluate certified interval, accept first upper <= current lower, otherwise budget-exhausted",
+    "screenshots": [
+      "screenshots/alg-ip-finite-element-pde-tikhonov--01.png",
+      "screenshots/alg-ip-finite-element-pde-tikhonov--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-ip-finite-element-pde-tikhonov--01.png": "3420897807a19f2db27df3d2865dcbab8a05a6d27a003d5c2c4a9e45b7162b92",
+      "screenshots/alg-ip-finite-element-pde-tikhonov--02.png": "29c9e11ea8304dc3a61bc2bd414f176833001cdb0b2071076a9d263c7e05668e"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "numerical-pde-inversion-and-adjoint-error-control"
+    ],
+    "source_lines": {
+      "40": "1. If $q_{\\rm init}\\notin Q_h$ or the model's exact admissibility predicate is false at $q_{\\rm init}$, return status `inadmissible` without solving a PDE. Otherwise set $q:=q_{\\rm init}$.",
+      "41": "",
+      "42": "2. For $k=0,\\ldots,N_{\\rm iter}$, first check the finite-time admissibility predicate, which includes membership in $Q_h$. If it is false, return `inadmissible`. If no global solve or evaluation budget remains, return `budget-exhausted`.",
+      "43": "",
+      "44": "3. Call the state/adjoint solver at $q$ with tolerances $\\tau_u,\\tau_p$ and the remaining solve budget. If it returns `failure`, if either certified residual bound exceeds its declared tolerance, or if any required state/adjoint error estimate or derivative bound is missing or invalid, return `linear-solve-failed`. Otherwise receive $\\widetilde g_h$, $\\widetilde F_h$, $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ and set $\\varepsilon_g=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p$ and $\\varepsilon_F=L_{G,u}\\eta_u$.",
+      "45": "",
+      "46": "4. Use the exact projection routine to compute $P_{Q_h}(q-\\widetilde g_h/L)$. If the routine fails or the evaluation budget is exhausted, return `budget-exhausted`. Set $\\widetilde\\rho:=L\\|q-P_{Q_h}(q-\\widetilde g_h/L)\\|_2$. If $\\widetilde\\rho+\\varepsilon_g\\le\\tau_g$, return `converged` with stationarity upper bound $\\widetilde\\rho+\\varepsilon_g$. This status means only that the exact projected-gradient residual of the discrete objective is within tolerance; it is not a claim that an iterate sequence converges or that $q$ is a global minimizer.",
+      "47": "",
+      "48": "5. Compute $d^+:=\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F$. If $d^+\\le\\kappa\\delta$, return `discrepancy-stopped` with data-residual upper bound $d^+$. This status certifies only the discrete model's data discrepancy.",
+      "49": "",
+      "50": "6. If $k=N_{\\rm iter}$, return `budget-exhausted` at the current coefficient with its current diagnostics. Otherwise, evaluate the current objective using its certified interval $[\\ell_h(q),u_h(q)]$. If the evaluation fails because a required state or adjoint solve fails its contract, return `linear-solve-failed`; if the global solve or evaluation budget is exhausted, return `budget-exhausted`.",
+      "51": "",
+      "52": "7. For $j=0,\\ldots,N_{\\rm backtrack}-1$, set $t_j=2^{-j}/L$ and use the exact projection routine to compute $q_j=P_{Q_h}(q-t_j\\widetilde g_h)$. If projection fails or the evaluation budget is exhausted, return `budget-exhausted`. Reject this trial and continue to the next $j$ if $q_j=q$ or its admissibility predicate is false. Otherwise evaluate a certified interval $[\\ell_h(q_j),u_h(q_j)]$. If evaluation fails because a required state or adjoint solve fails its contract, return `linear-solve-failed`; if the global solve or evaluation budget is exhausted, return `budget-exhausted`. Accept the first trial with $u_h(q_j)\\le\\ell_h(q)$, set $q:=q_j$, and continue to the next outer iteration.",
+      "53": "",
+      "54": "8. If no trial is accepted within the backtracking budget, return `budget-exhausted` at the current coefficient."
+    },
+    "source_snapshot": "snapshots/alg-ip-finite-element-pde-tikhonov.md",
+    "source_sha256": "2e2bc2d18be8bf96923ad4993076438358a259e5fa9f32d8b5d23eea3ba4f044",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "editorial candidate; source-supported, not a confirmed mathematical error",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "cor-ip-limited-angle-compact-support-uniqueness",
+    "section": "Statement; Facts & Assumptions; Proof",
+    "lines": [
+      38,
+      50,
+      52,
+      54
+    ],
+    "symptom": "A schematic can distinguish the measured normal arc and its frequency wedge from the global conclusion that follows by analytic continuation, helping readers keep the limited acquisition geometry separate from the uniqueness conclusion.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potentially-useful-geometric-schematic",
+    "exact_source_claim": "The Radon data are known for an open set of line normals Θ, and the Fourier-slice identity gives the Fourier transform on the corresponding open frequency sector; compact support then supplies analytic continuation to all frequencies.",
+    "selection_reason": "A schematic can distinguish the measured normal arc and its frequency wedge from the global conclusion that follows by analytic continuation, helping readers keep the limited acquisition geometry separate from the uniqueness conclusion.",
+    "concrete_diagram_content": "In an explicitly schematic frequency-plane view, mark Θ as an open arc of unit normals on S¹; map each normal θ to the line ξ=σθ, σ∈R, showing the symmetric open wedge W_Θ where Fourier values are directly known from zero Radon data. Label the compact-support analytic-continuation step as extending vanishing from that open wedge to all ξ∈R², then the Fourier uniqueness conclusion f=0. Preserve the line-normal convention and avoid suggesting stability or a measured full-angle dataset.",
+    "mathematical_check": "In an explicitly schematic frequency-plane view, mark Θ as an open arc of unit normals on S¹; map each normal θ to the line ξ=σθ, σ∈R, showing the symmetric open wedge W_Θ where Fourier values are directly known from zero Radon data. Label the compact-support analytic-continuation step as extending vanishing from that open wedge to all ξ∈R², then the Fourier uniqueness conclusion f=0. Preserve the line-normal convention and avoid suggesting stability or a measured full-angle dataset.",
+    "screenshots": [
+      "screenshots/cor-ip-limited-angle-compact-support-uniqueness--01.png",
+      "screenshots/cor-ip-limited-angle-compact-support-uniqueness--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/cor-ip-limited-angle-compact-support-uniqueness--01.png": "a56f7dae2858a8953088d5626b2efca9f18c1f299010d61944a2d1e3ad657ed0",
+      "screenshots/cor-ip-limited-angle-compact-support-uniqueness--02.png": "d33cc330e393790088892057c46401cb2cc42c692a8e683b22e4fb80cbb5a27e"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "limited-angle-tomography-and-invisible-singularities"
+    ],
+    "source_lines": {
+      "38": "Let $\\Theta\\subset S^1$ be a nonempty open set of unit line normals and let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$. If the line integral $Rf(\\theta,s)$ is zero for every $\\theta\\in\\Theta$ and $s\\in\\mathbb R$, then $f$ is zero everywhere. The assertion holds without Countable Choice.",
+      "50": "**Given:** A nonempty open set $\\Theta\\subset S^1$, a compactly supported smooth complex function $f$, and the hypothesis $Rf(\\theta,s)=0$ for every measured normal and offset.",
+      "52": "[F1] For this proof, put $W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}$. Since $\\Theta$ is nonempty and open, it contains an open arc $J$, and the positive-radius sector $\\{r\\theta:r>0,\\ \\theta\\in J\\}$ is a nonempty open subset of $W_\\Theta$.",
+      "54": "[F2] [[thm-ip-fourier-slice-identity]]: for compactly supported smooth input and the line-normal convention, $\\widehat{Rf}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta)$ for all real $\\sigma$; the supplier proof uses no Countable Choice."
+    },
+    "source_snapshot": "snapshots/cor-ip-limited-angle-compact-support-uniqueness.md",
+    "source_sha256": "3f3897986394c60a1ea77a01dd26a9fe9046e708649e81c8ba614b6e84f203e6",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-ip-bolker-condition",
+    "section": "Item body",
+    "lines": [
+      35,
+      39
+    ],
+    "symptom": "A small schematic could orient the left/data and right/object cotangent factors and distinguish the global injective-immersion condition from the pointwise fiber-plus-rank condition. The definition is already complete in text, so this is an editorial aid.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "cotangent double-fibration correspondence schematic",
+    "exact_source_claim": "For an analytic double fibration with incidence cotangent relation $C_Z\\subset(T^*G\\setminus0)\\times(T^*X\\setminus0)$, let $\\pi_L:C_Z\\longrightarrow T^*G\\setminus0$, $\\pi_L(g,\\eta;x,\\xi)=(g,\\eta)$. The double fibration satisfies the global Bolker condition if $\\pi_L$ is an injective immersion. The pointwise clause is a singleton fiber and injective differential.",
+    "selection_reason": "A small schematic could orient the left/data and right/object cotangent factors and distinguish the global injective-immersion condition from the pointwise fiber-plus-rank condition. The definition is already complete in text, so this is an editorial aid.",
+    "concrete_diagram_content": "Show $C_Z$ with projections $\\pi_L:C_Z\\to T^*G\\setminus0$ and $\\pi_R:C_Z\\to T^*X\\setminus0$; label a data covector $(g,\\eta)$, its full fiber $\\pi_L^{-1}(g,\\eta)$, the unique point $c=(g,\\eta;x,\\xi)$ in the pointwise case, and the injective differential $d\\pi_L|_c$. Do not imply that pointwise fiber uniqueness alone gives the global condition.",
+    "mathematical_check": "Show $C_Z$ with projections $\\pi_L:C_Z\\to T^*G\\setminus0$ and $\\pi_R:C_Z\\to T^*X\\setminus0$; label a data covector $(g,\\eta)$, its full fiber $\\pi_L^{-1}(g,\\eta)$, the unique point $c=(g,\\eta;x,\\xi)$ in the pointwise case, and the injective differential $d\\pi_L|_c$. Do not imply that pointwise fiber uniqueness alone gives the global condition.",
+    "screenshots": [
+      "screenshots/def-ip-bolker-condition--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-ip-bolker-condition--01.png": "91ecdd5e16bc1676e7ddec1fc6264ce53e9a2deec043fc0bb7ff545742bfd7b3"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "analytic-double-fibration-and-bolker-visibility"
+    ],
+    "source_lines": {
+      "35": "For an analytic double fibration with incidence cotangent relation $C_Z\\subset(T^*G\\setminus0)\\times(T^*X\\setminus0)$, let",
+      "39": "The double fibration satisfies the global Bolker condition if $\\pi_L$ is an injective immersion. The Bolker condition holds at a specified point $c=(g,\\eta;x,\\xi)\\in C_Z$ if the full fiber over its data covector is the singleton $\\pi_L^{-1}(g,\\eta)=\\{c\\}$ and $d\\pi_L|_c$ is injective. Thus the pointwise condition has both a fiber-uniqueness clause, which excludes every other relation point over the same data covector even outside a chosen chart, and a local differential-rank clause."
+    },
+    "source_snapshot": "snapshots/def-ip-bolker-condition.md",
+    "source_sha256": "2df5e8126d51a9904050902f2124c72b865be1c494971b4ca687bfe281e7e147",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-ip-discrete-linear-input-state-output-experiment",
+    "section": "Item body",
+    "lines": [
+      39,
+      45,
+      50
+    ],
+    "symptom": "The definition distinguishes state update, input action, sampled output, and additive observation error; a small schematic could make the time indexing and separation of noise from the forward map easier to scan.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "state-space block diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The definition distinguishes state update, input action, sampled output, and additive observation error; a small schematic could make the time indexing and separation of noise from the forward map easier to scan.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-ip-discrete-linear-input-state-output-experiment--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-ip-discrete-linear-input-state-output-experiment--01.png": "d5b993b8cd080e9d9c4261ed5eb13ea84144ba0730b5c1d31e4e8a92ae988ab9"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "dynamic-data-identifiability-and-system-realization"
+    ],
+    "source_lines": {
+      "39": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed",
+      "45": "$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by",
+      "50": "$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$."
+    },
+    "source_snapshot": "snapshots/def-ip-discrete-linear-input-state-output-experiment.md",
+    "source_sha256": "9aa19347f95751392443eeb49315a3be6dfb400cf9c3897d1be4a522abf78f66",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-ip-injective-geodesic-ray-transform",
+    "section": "Definition",
+    "lines": [
+      40
+    ],
+    "symptom": "The definition is a geometric transform over a maximal nontangential geodesic and distinguishes the incoming and outgoing boundary behavior; a small schematic could make those roles immediate.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "geodesic-arc schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The definition is a geometric transform over a maximal nontangential geodesic and distinguishes the incoming and outgoing boundary behavior; a small schematic could make those roles immediate.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-ip-injective-geodesic-ray-transform--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-ip-injective-geodesic-ray-transform--01.png": "40364b6e5b8da25be7ffb59d5a4f87aa1f5b30dcfe589a2106a81c10eb12fb92"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "calderon-problem-and-cgo-uniqueness"
+    ],
+    "source_lines": {
+      "40": "Let $(M_0,g_0)$ be a compact connected smooth Riemannian manifold with smooth boundary. A geodesic segment in $M_0$ satisfies the geodesic equation for the Levi-Civita connection of $g_0$ on $(0,L)$ and extends smoothly to its endpoints, where derivatives are interpreted one-sided. A nontangential maximal geodesic segment is a unit-speed geodesic $\\gamma:[0,L]\\to M_0$, with $L>0$, whose initial velocity points strictly inward at $\\partial M_0$, whose terminal velocity points strictly outward at $\\partial M_0$, and whose points for $0<t<L$ lie in $M_0^\\circ$. For $f\\in C_c^\\infty(M_0^\\circ,\\mathbb R)$ define its geodesic ray transform by $I_{g_0}f(\\gamma)=\\int_0^L f(\\gamma(t))\\,dt$. The unweighted scalar ray transform is called injective on compactly supported smooth functions if $I_{g_0}f(\\gamma)=0$ for every such segment implies $f=0$. For complex-valued $f$, injectivity means injectivity of its real and imaginary parts separately."
+    },
+    "source_snapshot": "snapshots/def-ip-injective-geodesic-ray-transform.md",
+    "source_sha256": "97a7a76cae675552bc288eba178924b103cea56a6e48870cb338307b6fd31f64",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "Editorial only; the source does not require a diagram and no mathematical defect is asserted.",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-ip-network-tomography-design-criterion",
+    "section": "Item body",
+    "lines": [
+      34
+    ],
+    "symptom": "The split/coverage definition is intrinsically a rooted-tree relation and currently has no explanatory sketch in its tile.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "rooted-tree criterion sketch",
+    "exact_source_claim": "",
+    "selection_reason": "The split/coverage definition is intrinsically a rooted-tree relation and currently has no explanatory sketch in its tile.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-ip-network-tomography-design-criterion--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-ip-network-tomography-design-criterion--01.png": "f5175803747e6ef6092e6499a385a071c454289559524196e945eb9999642c51"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "network-tomography-and-experiment-design"
+    ],
+    "source_lines": {
+      "34": "For a finite-tree probe design $\\mathcal C=((C_d,N_d))_{d=1}^D$, a receiver $r\\in R$ is **covered** if $r\\in C_d$ for some $d$. For a nonroot internal vertex $v$, a design $C_d$ **splits** $v$ if there are distinct children $c,c'$ of $v$ and receivers $r,s\\in C_d$ such that $r$ lies in the subtree rooted at $c$ and $s$ lies in the subtree rooted at $c'$. The design satisfies the **split/coverage condition** if every receiver is covered and every nonroot internal vertex is split by at least one design."
+    },
+    "source_snapshot": "snapshots/def-ip-network-tomography-design-criterion.md",
+    "source_sha256": "d8d77c4ff428159564e237cc5cc7265b76c44e248eb8dca5b4818931b2fa220d",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-ip-tangent-orientation-double-cover",
+    "section": "Item body",
+    "lines": [
+      38,
+      40,
+      42
+    ],
+    "symptom": "The definition identifies two orientations over each point, the projection to M, and an involution exchanging sheets. A local picture could make the covering structure concrete.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "local two-sheeted orientation-cover schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The definition identifies two orientations over each point, the projection to M, and an involution exchanging sheets. A local picture could make the covering structure concrete.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-ip-tangent-orientation-double-cover--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-ip-tangent-orientation-double-cover--01.png": "0a97eba87df7462c01f2f1fef87ac628faf35d0f8ed999714376fe8188cad1a1"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "geodesic-x-ray-transforms-on-simple-manifolds"
+    ],
+    "source_lines": {
+      "38": "Let $M$ be a smooth two-dimensional manifold with boundary and let $\\det T_xM=\\Lambda^2T_xM$ be the determinant line of its tangent space. An orientation of $T_xM$ is a positive ray $o_x$ in this line. The **tangent orientation double cover** is the set",
+      "40": "\\widetilde M=\\{(x,o_x):x\\in M,\\ o_x\\text{ is an orientation of }T_xM\\},\\qquad \\pi(x,o_x)=x.",
+      "42": "For a boundary chart $\\phi:U\\to V\\subseteq\\mathbb H^2$, let $o_\\phi(x)$ be the ray obtained by applying $\\det(d\\phi_x^{-1})$ to the standard positive ray in $\\det\\mathbb R^2$. Give $\\widetilde M$ the smooth boundary-chart structure whose two local sheets over $U$ are $\\{(x,o_\\phi(x)):x\\in U\\}$ and $\\{(x,-o_\\phi(x)):x\\in U\\}$, each with coordinate map $(x,\\pm o_\\phi(x))\\mapsto\\phi(x)$. On an overlap with a second chart $\\psi$, the sheet sign changes by $\\operatorname{sgn}\\det D(\\psi\\circ\\phi^{-1})$; this sign is locally constant, so the sheet transitions are smooth half-space transitions. Thus $\\pi$ is the associated two-sheeted smooth covering map, including over the boundary. The involution $\\tau(x,o_x)=(x,-o_x)$ exchanges the sheets. The canonical orientation of $\\widetilde M$ at $(x,o_x)$ is the ray $(\\det d\\pi_{(x,o_x)})^{-1}(o_x)$ in $\\det T_{(x,o_x)}\\widetilde M$."
+    },
+    "source_snapshot": "snapshots/def-ip-tangent-orientation-double-cover.md",
+    "source_sha256": "0b04ed124b19011282e6755dfea30cc70ea0afe3288a529ed3ba2d4ef8654535",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "Optional editorial aid; the source states the two local sheets, projection, overlap sign, and involution. No mathematical or rendering defect is present.",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel",
+    "section": "Item body",
+    "lines": [
+      49,
+      51,
+      68,
+      76,
+      88,
+      94
+    ],
+    "symptom": "The dimension-count mechanism is a concrete linear algebra map embedded in a finite-sample inverse problem; a compact schematic can connect the sample rows, slab coefficients, and indistinguishable nonzero contrast. Text already proves the claim, so this is editorial.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "finite-dimensional linear map and kernel schematic",
+    "exact_source_claim": "There are $m=rs$ sampled direction pairs and $N=m+1$ partition slabs; $F\\in\\mathbb C^{m\\times N}$ maps slab coefficients $c$ to sampled Born data, and a nonzero $c\\in\\ker F$ gives a nonzero piecewise-constant contrast with all samples zero.",
+    "selection_reason": "The dimension-count mechanism is a concrete linear algebra map embedded in a finite-sample inverse problem; a compact schematic can connect the sample rows, slab coefficients, and indistinguishable nonzero contrast. Text already proves the claim, so this is editorial.",
+    "concrete_diagram_content": "Draw $\\mathbb C^{m+1}$ (slab coefficients $c_1,\\ldots,c_{m+1}$ for $E_1,\\ldots,E_{m+1}$) under $F$ to $\\mathbb C^m$ (rows indexed by $(\\theta_b,d_a)$, $\\xi_{ba}=k(\\theta_b-d_a)/(2\\pi)$); mark a nonzero $c\\in\\ker F$ and the contrast $h=\\sum_nc_n1_{E_n}\\ne0$ with $\\mathcal B_kh(\\theta_b,d_a)=0$. State that this is the finite first-Born map, not exact nonlinear data.",
+    "mathematical_check": "Draw $\\mathbb C^{m+1}$ (slab coefficients $c_1,\\ldots,c_{m+1}$ for $E_1,\\ldots,E_{m+1}$) under $F$ to $\\mathbb C^m$ (rows indexed by $(\\theta_b,d_a)$, $\\xi_{ba}=k(\\theta_b-d_a)/(2\\pi)$); mark a nonzero $c\\in\\ker F$ and the contrast $h=\\sum_nc_n1_{E_n}\\ne0$ with $\\mathcal B_kh(\\theta_b,d_a)=0$. State that this is the finite first-Born map, not exact nonlinear data.",
+    "screenshots": [
+      "screenshots/ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel--01.png",
+      "screenshots/ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel--01.png": "69edb7cb6e0f3028cbadfaeaa8e4bfd3c38b14da37c1683cb9d42ee0ad4e3534",
+      "screenshots/ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel--02.png": "5b166e5237c31db046f60a5431ec90020df0eb50ae40e105c84ed5b299516f54"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "inverse-scattering-and-born-linearization-examples"
+    ],
+    "source_lines": {
+      "49": "Assume Countable Choice. Let $D=[0,1]^3$, $k>0$, and let $r,s\\ge1$. Take nonempty finite lists $\\theta_1,\\ldots,\\theta_r\\in\\Gamma_{\\mathrm{obs}}$ and $d_1,\\ldots,d_s\\in\\Gamma_{\\mathrm{inc}}$, where $\\Gamma_{\\mathrm{obs}},\\Gamma_{\\mathrm{inc}}\\subsetneq S^2$ are proper direction sets. Put $m:=rs$ and $N:=m+1$. Use the partition",
+      "51": "and give the regularized Born algorithm these direction lists and this partition. The finite linearized Born data map has a nonzero piecewise-constant contrast in its kernel. Consequently, for zero sampled Born data, any admissible filter, any discrepancy threshold $\\delta\\ge0$, and any positive budget $B\\ge1$ make the one-pass reconstruction return the zero estimate with discrepancy status, even though a nonzero contrast gives the same finite Born samples. This is a statement about the finite linearized model only; it does not assert equality of exact nonlinear scattering data.",
+      "68": "[F1] For each acquisition pair $(\\theta_b,d_a)$, the Born sample is $\\mathcal B_kh(\\theta_b,d_a)=\\frac1{4\\pi}\\widehat{h_0}(k(\\theta_b-d_a)/(2\\pi))$ ([[def-ip-fixed-frequency-far-field-data]], [[def-fourier-transform-on-l-one-of-rn]]).",
+      "76": "[F5] The image of a linear map into the $m$-dimensional space $\\mathbb C^m$ is a subspace of dimension at most $m$ ([[thm-dimension-of-a-linear-subspace]]).",
+      "88": "1.1 Put $N=m+1$ and partition $D$ into the $N$ measurable slabs $E_n=[(n-1)/N,n/N)\\times[0,1]^2\\quad(1\\le n<N),\\qquad E_N=[(N-1)/N,1]\\times[0,1]^2.$ They are pairwise disjoint, cover $D$, and have measure $1/N$ by [F3]. For each pair $(\\theta_b,d_a)$ set $\\xi_{ba}=k(\\theta_b-d_a)/(2\\pi)$ and define $F\\in\\mathbb C^{m\\times N}$ by $F_{(b,a),n}=\\frac1{4\\pi}\\int_{E_n}e^{-2\\pi i x\\cdot\\xi_{ba}}\\,dx$. [F1, F2, F3, given, construct]",
+      "94": "3.1 For any scalar $t$, [F6] gives $\\rho_k(th)\\le C_D\\|th\\|_\\infty=C_D|t|\\|h\\|_\\infty$. The right-hand side tends to zero as $|t|\\to0$, so choose $t\\ne0$ small enough that $th\\in\\mathcal U_{D,k}$. Set $q:=th$. Linearity of $\\mathcal B_k$ gives $\\mathcal B_kq(\\theta_b,d_a)=0$ for every acquisition pair while $q\\ne0$. The vector $c$ is a nonzero coefficient representation of a contrast whose sampled first Born data are exactly those of zero. [A1, F1, F6, step 2.1, algebra]"
+    },
+    "source_snapshot": "snapshots/ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel.md",
+    "source_sha256": "e5b4725dc1bec0a7c668a4d5320c7e18a39baed93a5cd623dff663207cd67439",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame",
+    "section": "Item body",
+    "lines": [
+      40
+    ],
+    "symptom": "The three concrete sensing vectors and the all-pairs spanning condition support a concise picture; the current example is text and equations only.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "vector configuration in R²",
+    "exact_source_claim": "",
+    "selection_reason": "The three concrete sensing vectors and the all-pairs spanning condition support a concise picture; the current example is text and equations only.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame--01.png": "8c3814d16a7f8da5064e4999fa31a94e2913d691d2e130d6eab3d1f7cc13e0f5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "real-phase-retrieval-and-complement-property-examples"
+    ],
+    "source_lines": {
+      "40": "In $\\mathbb R^2$ take $\\Phi=(a_1,a_2,a_3)$ with $a_1=(1,0)$, $a_2=(0,1)$, and $a_3=(1,1)$. Its intensity map on classes modulo $x\\sim -x$ is $[x]\\mapsto(x_0^2,x_1^2,(x_0+x_1)^2)$. Every pair is linearly independent, so every pair spans $\\mathbb R^2$; consequently, for every partition one side spans $\\mathbb R^2$. Equality of the displayed triples therefore forces two signals to be equal up to a global sign."
+    },
+    "source_snapshot": "snapshots/ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame.md",
+    "source_sha256": "d4773ff03266d3cfea6d84faea364f0d88638690dcea6305e00497296a9e0193",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-ip-variable-metric-domain-of-dependence",
+    "section": "Item body",
+    "lines": [
+      56,
+      57,
+      59,
+      60,
+      61,
+      63,
+      65
+    ],
+    "symptom": "The result bounds solution support by intrinsic metric neighborhoods growing at unit speed and gives a boundary collar after forcing starts. A schematic could make the support regions and the two-boundary-trip threshold easier to scan.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "spacetime finite-propagation schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The result bounds solution support by intrinsic metric neighborhoods growing at unit speed and gives a boundary collar after forcing starts. A schematic could make the support regions and the two-boundary-trip threshold easier to scan.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--01.png",
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--02.png",
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--03.png",
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--04.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--01.png": "96a339d27f7c69d28da22dbad2711c9540e18292a1abcbd6b36cd2499d53b96c",
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--02.png": "88dcd43eeba749efb272a23e1295c95836b4ed57d0021e3e03956a6a696adb92",
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--03.png": "8d5f98bcccb87b7e30e80eeff3e6fcd276c4cfd4c6302b4ddeba842080f33d01",
+      "screenshots/lem-ip-variable-metric-domain-of-dependence--04.png": "20d2e38998cb7759f1936bfbe0af4f8d5cf215fbd4a80ed505e880f4474bd372"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "inverse-wave-problems-and-finite-time-observability"
+    ],
+    "source_lines": {
+      "56": "(i) If $h=0$ and $\\operatorname{supp}u_0\\cup\\operatorname{supp}u_1\\subseteq K$ for a nonempty closed $K\\subseteq M$, then",
+      "57": "$$\\operatorname{supp}u(t,\\cdot)\\subseteq\\{x\\in M:d_g(x,K)\\le t\\}\\qquad(0\\le t\\le T).$$",
+      "59": "(ii) If $u_0=u_1=0$ and $h(t,\\cdot)=0$ for $0\\le t\\le s_0$ with $0\\le s_0<T$, then",
+      "60": "$$\\operatorname{supp}u(t,\\cdot)\\subseteq\\{x\\in M:d_g(x,\\partial M)\\le t-s_0\\}\\qquad(s_0\\le t\\le T).$$",
+      "61": "The same assertion holds backward in time for a smooth solution with zero terminal data and boundary value vanishing for $s_1\\le t\\le T$, with $0\\le t\\le s_1$ and $t-s_0$ replaced by $s_1-t$.",
+      "63": "(iii) Let $q_1,q_2\\in C^\\infty(M;\\mathbb R)$ be time independent, put $Q=\\operatorname{supp}(q_1-q_2)$, and suppose $Q\\ne\\varnothing$ and $d_g(Q,\\partial M)>T/2$. If $u$ solves $L_{q_1}u=0$ with zero initial data and smooth boundary value compactly supported in $(0,T)\\times\\partial M$, and $v$ solves $L_{q_2}v=0$ with zero terminal data and smooth boundary value compactly supported in $(0,T)\\times\\partial M$, then",
+      "65": "This is the two-boundary-trip finite-time invisibility statement at the level of the interior pairing."
+    },
+    "source_snapshot": "snapshots/lem-ip-variable-metric-domain-of-dependence.md",
+    "source_sha256": "9193388d3956c86c4796567956b5ff9264f6f24b1cf49134259630424c2328f9",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "Optional editorial aid; the inclusions and threshold are explicit in the source. No mathematical or rendering defect is present.",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-ip-flexicast-link-loss-identifiability",
+    "section": "Item body",
+    "lines": [
+      37,
+      53,
+      57,
+      64,
+      70,
+      72
+    ],
+    "symptom": "The theorem characterizes identifiability by receiver coverage and splitting every nonroot internal vertex. A small labeled tree can make the combinatorial design condition and shared-path probability formulas easier to scan.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "rooted-tree probe-coverage and split schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The theorem characterizes identifiability by receiver coverage and splitting every nonroot internal vertex. A small labeled tree can make the combinatorial design condition and shared-path probability formulas easier to scan.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-ip-flexicast-link-loss-identifiability--01.png",
+      "screenshots/thm-ip-flexicast-link-loss-identifiability--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-ip-flexicast-link-loss-identifiability--01.png": "fb1f3e6abf2f64c75176f50dd2f4368f4626da9a0a2a02573f595ba5b0b9890e",
+      "screenshots/thm-ip-flexicast-link-loss-identifiability--02.png": "18f2254c8bbcdbfcca88b4f5bf46efea93fc6050228a12ed4e2810fb63bb477c"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "network-tomography-and-experiment-design"
+    ],
+    "source_lines": {
+      "37": "Let $T=(V,E)$ and $\\mathcal C=((C_d,N_d))_{d=1}^D$ be a finite-tree multicast loss experiment with parameter space $(0,1)^E$, independent link successes, and the same link probabilities in every probe. Let $\\mathsf L(p):=\\bigotimes_{d=1}^D P_{p,d}^{\\otimes N_d}$ be the full repeated-probe sampling law determined by the one-probe outcome laws $P_{p,d}$. Then $\\mathsf L$ is injective if and only if $\\mathcal C$ satisfies the split/coverage condition.",
+      "53": "**Given:** A finite rooted tree and finite family of probe designs as specified in the tree-experiment definition, with $p_e\\in(0,1)$ for every edge and $N_d\\ge1$ for every design. Prove that the full sampling-law map is injective exactly when every receiver is covered and every nonroot internal vertex is split by some design.",
+      "57": "[F2] [[def-ip-network-tomography-design-criterion]]: Coverage means every leaf receiver belongs to some $C_d$; a nonroot internal vertex is split when a single $C_d$ meets two distinct child subtrees.",
+      "64": "1.1 For each vertex $v$, put $q_v=\\prod_{e\\in P(o,v)}p_e$, with $q_o=1$. Because $N_d\\ge1$, the repeated-probe law for design $d$ has one-probe marginal $P_{p,d}$; conversely, equality of all one-probe laws gives equality of $\\mathsf L(p)$. For each covered leaf $r$, the marginal success probability read from any design containing $r$ is $m_r=\\Pr_p(Y_r=1)=q_r$. Thus equality of experiment laws determines every $q_r$ when all receivers are covered. [given, F1, F2, algebra]",
+      "70": "2.1 Let $v$ be a nonroot internal vertex. By [F2], some design contains receivers $r,s$ in distinct child subtrees of $v$; since $T$ is a tree their last common vertex on the root paths is $v$. Write $a_r=\\prod_{e\\in P(v,r)}p_e$ and $a_s=\\prod_{e\\in P(v,s)}p_e$. Independence in [F1] gives $m_r=q_va_r$, $m_s=q_va_s$, and $m_{rs}:=\\Pr_p(Y_r=Y_s=1)=q_va_ra_s$. All factors are positive, so $m_{rs}>0$ and $q_v=m_rm_s/m_{rs}$. Hence the law determines $q_v$ for every nonroot internal vertex. [given, F1, F2, step 1.1, choose, algebra]",
+      "72": "3.1 The value $q_o=1$ is fixed; steps 1.1 and 2.1 determine $q_v$ for every other vertex. For each edge $e=(u,v)$, $p_e=q_v/q_u$, with $q_u>0$. Therefore equal experiment laws give equal $p_e$ on every edge, so $\\mathsf L$ is injective. By [F3], the link-probability identity target is identifiable. [given, F1, F3, step 1.1, step 2.1, algebra]"
+    },
+    "source_snapshot": "snapshots/thm-ip-flexicast-link-loss-identifiability.md",
+    "source_sha256": "79d1bb89975ff17d00799d99757755a752efd80e0c6cbab2c98dee51afa61028",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "Optional source-supported visual aid; no mathematical or rendering defect is present.",
+    "additional_candidate_observations": []
+  }
+]

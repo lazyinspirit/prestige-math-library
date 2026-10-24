@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-rank-two-root-system-classification.json
+  precheck: pass
 id: thm-rank-two-root-system-classification
 kind: theorem
 title: Rank-two root-system classification
@@ -19,9 +22,7 @@ sources:
       locator: "Lecture 21, Theorems 21.9-21.10, printed pp. 113-114"
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  repair: research/frontier-42-coxeter-32-rank-two-classification-local-published-repair.json
+
 ---
 
 ## Statement
@@ -99,3 +100,70 @@ while the reducible case is $A_1\sqcup A_1$.
 6.1 (Exhaustiveness) In each of the five cases of step 5.1, every positive root lies in $K$. Suppose not, and choose a positive root $\gamma=m\alpha_1+n\alpha_2$ of least height among the positive roots outside $K$; it is not simple, so by step 1.3 it is a sum of two positive roots of smaller heights, and by minimality of $h=m+n$ both summands lie in $K$. Hence $\gamma$ is a sum of two elements of $K$, and each such sum is either an element of $K$, or violates one of conditions (a)-(c) of step 4.2, or descends by (d) to such a sum, or is excluded by reducedness [L1]; the following complete lists of the coordinate pairs of the sums of two elements of $K$ verify this case by case. For $(c,c')=(-1,-1)$ the sums are $(2,0),(1,1),(2,1),(0,2),(1,2),(2,2)$: $(2,0)$ and $(0,2)$ violate (c), $(2,1)$ violates $m\le n|c|=n$ and $(1,2)$ violates $n\le m|c'|=m$ in (a), and $(2,2)=2(\alpha_1+\alpha_2)$ is excluded by reducedness because $\alpha_1+\alpha_2\in K$ is a root. For $(c,c')=(-2,-1)$ the sums with $n\ge1$ are $(2,0),(1,1),(2,1),(3,1),(0,2),(1,2),(2,2),(3,2),(4,2)$: $(2,0)$ and $(0,2)$ violate (c), $(3,1)$ violates $m\le2n$ and $(1,2)$ violates $n\le m$ in (a), $(2,2)=2(\alpha_1+\alpha_2)$ and $(4,2)=2(2\alpha_1+\alpha_2)$ are excluded by reducedness, and $(3,2)$ satisfies (a)-(c) but (d) applied to $\alpha_1$ gives $(2,2)\in\Phi$, already excluded. The case $(c,c')=(-1,-2)$ is the mirror image with the two coordinates and the two simple roots interchanged. For $(c,c')=(-3,-1)$ the sums of two elements of $K$ are $(2,0),(1,1),(2,1),(3,1),(4,1),(4,2),(0,2),(1,2),(2,2),(3,2),(3,3),(4,3),(5,2),(5,3),(6,2),(6,3),(6,4)$: $(2,0)$ and $(0,2)$ violate (c), $(4,1)$ violates $m\le3n$ and $(1,2)$ violates $n\le m$ in (a), $(5,2)$ and $(6,2)$ violate $|2m-3n|\le3$ in (b), $(3,3)=3(\alpha_1+\alpha_2)$, $(2,2)=2(\alpha_1+\alpha_2)$, $(4,2)=2(2\alpha_1+\alpha_2)$ and $(6,3)=3(2\alpha_1+\alpha_2)$ are excluded by reducedness because $\alpha_1+\alpha_2$ and $2\alpha_1+\alpha_2$ lie in $K$ and are roots, $(5,3)$ descends by (d) applied to $\alpha_1$ to $(4,3)$, and $(4,3)$ and $(6,4)$ descend by (d) applied to $\alpha_2$ to $(4,2)$ and $(6,3)$, all already excluded, while $(1,1),(2,1),(3,1),(3,2)$ lie in $K$. The mirror case $(c,c')=(-1,-3)$ is handled by the same interchange of coordinates and simple roots. Thus no positive root lies outside $K$, so $\Phi=K\sqcup(-K)$ in each of the five cases, and the irreducible rank-two root systems are exactly the systems with $3$, $4$, $4$, $6$, $6$ positive roots. [L1, step 1.3, step 4.2, step 5.1, algebra]
 
 7.1 The systems of 3, 4 and 6 positive roots are the root systems traditionally called $A_2$, $B_2\cong C_2$ and $G_2$: for $(c,c')=(-1,-1)$ the roots are $\pm\alpha_1,\pm\alpha_2,\pm(\alpha_1+\alpha_2)$ with $|\alpha_1|=|\alpha_2|$ and angle $120^{\circ}$; for $(c,c')=(-2,-1)$ they are $\pm\alpha_1,\pm\alpha_2,\pm(\alpha_1+\alpha_2),\pm(2\alpha_1+\alpha_2)$ with $|\alpha_2|^{2}=2|\alpha_1|^{2}$ and angle $135^{\circ}$; and for $(c,c')=(-3,-1)$ they are the six positive roots listed in $K$ with $|\alpha_2|^{2}=3|\alpha_1|^{2}$ and angle $150^{\circ}$. The two middle cases are isomorphic as root systems: the linear map that rotates the plane by $45^{\circ}$ and then rescales uniformly sends the four short root directions and the four long root directions of the $(-2,-1)$ system onto those of the $(-1,-2)$ system, and Cartan integers are unchanged by a uniform rescaling. Combining with steps 2.1, 3.1, 1.4 and 6.1 gives the full rank-two classification, and the angle statement of (iv) is step 3.1. [step 2.1, step 3.1, step 1.4, step 6.1, algebra] ∎
+
+## Remarks
+
+The comparison below draws every root from steps 1.4 and 5.1: blue arrows are the positive roots and gray arrows their negatives; the two simple roots have thicker arrows. All arrows start at the origin. In each panel $\alpha_1=(1,0)$. The choices for $\alpha_2$ are respectively $(0,1)$, $(-1/2,\sqrt{3}/2)$, $(-1,1)$ and $(-3/2,\sqrt{3}/2)$. Thus $(c,c')$ in the convention of step 4.2 is respectively $(0,0)$, $(-1,-1)$, $(-2,-1)$ and $(-3,-1)$, while $|\alpha_2|^2/|\alpha_1|^2$ is $1$, $1$, $2$ and $3$. The reducible panel chooses equal lengths only for illustration; the two orthogonal components may be scaled independently. Swapping the simple-root names gives the other Cartan orderings. The proof is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.05,>=stealth]
+\begin{scope}[shift={(0,0)}]
+\node at (0,2.25) {$A_1\sqcup A_1$};
+\draw[->,gray] (0,0) -- (-1,0);
+\draw[->,gray] (0,0) -- (0,-1);
+\draw[->,blue,thick] (0,0) -- (1,0);
+\draw[->,blue,thick] (0,0) -- (0,1);
+\fill (0,0) circle (1pt);
+\node[right] at (1,0) {$\alpha_1$};
+\node[above left] at (0,1) {$\alpha_2$};
+\node at (0,-2.1) {$\theta=90^{\circ},\quad |\Phi^+|=2$};
+\end{scope}
+\begin{scope}[shift={(5,0)}]
+\node at (0,2.25) {$A_2$};
+\draw[->,gray] (0,0) -- (-1,0);
+\draw[->,gray] (0,0) -- (0.5,-0.866025);
+\draw[->,gray] (0,0) -- (-0.5,-0.866025);
+\draw[->,blue,thick] (0,0) -- (1,0);
+\draw[->,blue,thick] (0,0) -- (-0.5,0.866025);
+\draw[->,blue,thin] (0,0) -- (0.5,0.866025);
+\fill (0,0) circle (1pt);
+\node[right] at (1,0) {$\alpha_1$};
+\node[above left] at (-0.5,0.866025) {$\alpha_2$};
+\node at (0,-2.1) {$\theta=120^{\circ},\quad |\Phi^+|=3$};
+\end{scope}
+\begin{scope}[shift={(0,-5)}]
+\node at (0,2.25) {$B_2\cong C_2$};
+\draw[->,gray] (0,0) -- (-1,0);
+\draw[->,gray] (0,0) -- (1,-1);
+\draw[->,gray] (0,0) -- (0,-1);
+\draw[->,gray] (0,0) -- (-1,-1);
+\draw[->,blue,thick] (0,0) -- (1,0);
+\draw[->,blue,thick] (0,0) -- (-1,1);
+\draw[->,blue,thin] (0,0) -- (0,1);
+\draw[->,blue,thin] (0,0) -- (1,1);
+\fill (0,0) circle (1pt);
+\node[right] at (1,0) {$\alpha_1$};
+\node[above left] at (-1,1) {$\alpha_2$};
+\node at (0,-2.1) {$\theta=135^{\circ},\quad |\Phi^+|=4$};
+\end{scope}
+\begin{scope}[shift={(5,-5)}]
+\node at (0,2.25) {$G_2$};
+\draw[->,gray] (0,0) -- (-1,0);
+\draw[->,gray] (0,0) -- (1.5,-0.866025);
+\draw[->,gray] (0,0) -- (0.5,-0.866025);
+\draw[->,gray] (0,0) -- (-0.5,-0.866025);
+\draw[->,gray] (0,0) -- (-1.5,-0.866025);
+\draw[->,gray] (0,0) -- (0,-1.732051);
+\draw[->,blue,thick] (0,0) -- (1,0);
+\draw[->,blue,thick] (0,0) -- (-1.5,0.866025);
+\draw[->,blue,thin] (0,0) -- (-0.5,0.866025);
+\draw[->,blue,thin] (0,0) -- (0.5,0.866025);
+\draw[->,blue,thin] (0,0) -- (1.5,0.866025);
+\draw[->,blue,thin] (0,0) -- (0,1.732051);
+\fill (0,0) circle (1pt);
+\node[right] at (1,0) {$\alpha_1$};
+\node[above left] at (-1.5,0.866025) {$\alpha_2$};
+\node at (0,-2.1) {$\theta=150^{\circ},\quad |\Phi^+|=6$};
+\end{scope}
+\end{tikzpicture}
+```

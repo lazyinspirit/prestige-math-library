@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x.json
+  precheck: pass
 id: ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x
 kind: example
-title: "The integral of x^(alpha-1) / (1 + x) over (0, infinity) is pi / sin(pi alpha)"
+title: 'The integral of $x^{\alpha-1}/(1+x)$ over $(0,\infty)$ is $\pi/\sin(\pi\alpha)$'
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: computation
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:

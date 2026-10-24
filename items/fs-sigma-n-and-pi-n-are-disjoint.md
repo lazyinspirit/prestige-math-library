@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-sigma-n-and-pi-n-are-disjoint.json
+  precheck: pass
 id: fs-sigma-n-and-pi-n-are-disjoint
 kind: false-statement
-title: "False: Sigma_n^0 and Pi_n^0 are disjoint"
+title: 'False: $\Sigma_n^0$ and $\Pi_n^0$ are disjoint'
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-sigma-n-pi-n-and-delta-n-sets, cor-delta-one-sets-are-exactly-decidable]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, §5.2"

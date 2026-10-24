@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-ip-discrete-linear-input-state-output-experiment.json
+  precheck: n/a
 id: def-ip-discrete-linear-input-state-output-experiment
 kind: definition
 title: Discrete linear input-state-output experiments
@@ -24,14 +27,7 @@ sources:
     - title: "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes"
       url: "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
       locator: "§9.2, discrete-time model and impulse-response conventions, PDF pp. 3–6"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -74,3 +70,37 @@ single zero vector and the matrices have the corresponding empty shapes.
 [Dahleh, Dahleh, and Verghese, *Lectures on Dynamic Systems and Control*, Chapter 25](https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf)
 
 [Lall, *State-Space Realization*, Engr207c lecture notes](https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf)
+
+## Remarks
+
+For $0\le k<q-1$, the schematic separates the update to the next state
+from the observation of the current state at time $kh$. The upper box
+computes a vector in $\mathbb R^d$ from $x_k\in\mathbb R^d$ and
+$u_k\in\mathbb R^m$; the lower branch and its additive error take values
+in $\mathbb R^p$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.6,transform shape]
+\node (x) at (0,0) {$x_k$};
+\node[draw,rounded corners,minimum width=2.1cm,minimum height=0.8cm] (update) at (3,0) {$Ax_k+Bu_k$};
+\node (next) at (6,0) {$x_{k+1}$};
+\node (input) at (3,1.4) {$u_k$};
+\node (y) at (0,-2) {$y_k=Cx_k$};
+\node[draw,circle,minimum size=0.6cm] (sum) at (3,-2) {$+$};
+\node (observed) at (6,-2) {$\widetilde y_k$};
+\node (error) at (3,-3.3) {$\eta_k$};
+\draw[->] (x) -- (update);
+\draw[->] (input) -- (update);
+\draw[->] (update) -- (next);
+\draw[->] (x) -- node[left] {$C$} (y);
+\draw[->] (y) -- (sum);
+\draw[->] (error) -- (sum);
+\draw[->] (sum) -- (observed);
+\end{tikzpicture}
+```
+
+The lower branch also applies at $k=q-1$, when there is no further state
+update or input sample. If $q=1$, only this observation branch remains.
+The error enters after the exact output $Cx_k$ has been computed; it does
+not modify $A$, $B$, or $C$. The defining equations above are independent
+of this illustration.

@@ -1,0 +1,126 @@
+{
+  "id": "lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings",
+  "group": "dqar_019",
+  "agent": "/root/dqar_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Standalone authentic screenshots show no figure. A finite retained Bratteli graph materially clarifies path multiplicities and the missing upper boundary channel; a separate split-map picture clarifies that Bratteli edges are path extensions whereas alpha/beta are morphisms with opposite inclusion/retraction directions. Both are useful even though the rigorous proof is complete.",
+      "action": "Appended two fenced TikZ illustrations and exact explanatory text in a final Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added ell=4, k=2 retained-path graph through rank 4 and the interior endpoint split p_(a-1) <-> f_a <-> p_(a+1), with map directions, normalized down retraction, and boundary conventions.",
+  "source_lines_after": {
+    "remarks": [
+      86,
+      128
+    ],
+    "bratteli_tikz": [
+      90,
+      112
+    ],
+    "split_tikz": [
+      116,
+      126
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "preservation": {
+    "before_sha256": "57185b9039f7b20a436a4a5b1de3cf274cd99ff1a22a100257a90941594cd182",
+    "after_sha256": "f9d489bd5acce0b232889fc65c3bd75d3829a16276a1969c5c51b5e551355a24",
+    "exact_before_bytes_preserved_as_prefix": true,
+    "metadata_status": "status: published preserved byte-for-byte; all frontmatter, Statement, Facts and Proof untouched"
+  },
+  "diagram_math_checks": [
+    {
+      "diagram": "Retained Bratteli graph",
+      "objects": "Vertices (n,a_n): (0,0),(1,1),(2,0),(2,2),(3,1),(4,0),(4,2).",
+      "relations": "Exactly seven directed edges: 00->11, 11->20, 11->22, 20->31, 22->31, 31->40, 31->42. Every edge increases rank by one and changes endpoint by one, all endpoints are in [0,2].",
+      "justification": "The Statement defines retained paths by a_0=0, 0<=a_i<=k and |a_i-a_(i-1)|=1. At ell=4, k=2, these give exactly the displayed reachable vertices and edges. Step 2.1 deletes the up channel from endpoint 2; no vertex 3 is drawn.",
+      "independent_enumeration": "At rank 4 the paths are (0,1,0,1,0),(0,1,2,1,0),(0,1,0,1,2),(0,1,2,1,2): two for each endpoint 0 and 2, agreeing with the two matrix blocks of step 4.1.",
+      "arrow_meaning": "Edges are combinatorial path extensions, explicitly not morphisms between endpoint projectors. No commutativity, closure edge, cup/cap orientation, or crossing is asserted."
+    },
+    {
+      "diagram": "Interior endpoint splitting",
+      "domains_and_codomains": [
+        "alpha_a: p_(a-1) -> f_a",
+        "lambda_a^-1 beta_a: f_a -> p_(a-1)",
+        "iota_+: p_(a+1) -> f_a",
+        "pi_+: f_a -> p_(a+1)"
+      ],
+      "relations": [
+        "lambda_a^-1 beta_a alpha_a = p_(a-1)",
+        "pi_+ iota_+ = p_(a+1)",
+        "lambda_a^-1 beta_a iota_+ = 0 and pi_+ alpha_a = 0",
+        "alpha_a lambda_a^-1 beta_a + iota_+ pi_+ = f_a"
+      ],
+      "justification": "Step 1.2 defines f_a=p_a tensor 1, alpha_a, beta_a and lambda_a=[a+1]/[a], proves beta_a alpha_a=lambda_a p_(a-1), and splits f_a into orthogonal down/up projections by JW recursion and turnback annihilation. F1 and the read local Jones-Wenzl partial-trace supplier give absorption/annihilation and the normalization. Thus the displayed arrows and accompanying identities have the stated types. The interior picture is restricted to 1<=a<k; step 2.1 explains removal of the up channel at a=k before normalization, while step 1.2 handles a=0 separately. All normalization indices are below ell, and no division by [ell] or undefined projector is introduced."
+    },
+    {
+      "diagram": "Relation to path matrix units",
+      "justification": "Step 3.1 composes these local inclusions/retractions and proves orthogonality and completeness independently. Hence at a common endpoint E_(a,b)E_(c,d)=i_a(r_b i_c)r_d=delta_(b,c)E_(a,d), with identity of the endpoint corner supplied by r_b i_b=p_(b_n). The new figures do not replace this argument or alter the theta pairing claims.",
+      "proof_independent": true
+    }
+  ],
+  "original_evidence": {
+    "declared_directory_discrepancy": "The entry inspection_dir/evidence_dir ends in diagram-supplement, but both declared screenshot paths there are absent. Located authentic same-category screenshots one directory up; SHA256 matches both recorded hashes exactly.",
+    "directory": "research/math-library-rendering-audit-2026-10-23/quantum-algebra-and-representation-theory",
+    "standalone_original_resolution_views": [
+      "screenshots/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings--01.png",
+      "screenshots/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings--02.png"
+    ],
+    "sha256": [
+      "2baa5e553dd99ad84ae185c8b1334d4860b3113318f013181615c8cc13c37406",
+      "3fce3856634e3f2880236469c3243a5a91dcc7523f81ba6eee1d31a98f8dc402"
+    ]
+  },
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings.md --json",
+      "exit_code": 0,
+      "files": 1,
+      "checked": 1,
+      "failed": 0,
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    }
+  },
+  "native_render": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dqar019",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqar019/manifest.json",
+    "manifest_sha256": "25ae4ef4689ac0cd883034cf757e75946edf08c0bc5613b8d417dcdc4d9c1686",
+    "source_sha256": "f9d489bd5acce0b232889fc65c3bd75d3829a16276a1969c5c51b5e551355a24",
+    "reference_map_sha256": "11d49f6da2bd77985fc6432be449bea4a808aef0a497bdc9f96cfce291bfd7c2",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dqar019/screenshots/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings.json",
+    "tikz_count": 2,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "standalone_original_resolution_views": [
+      "screenshots/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings--01.png",
+      "screenshots/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings--02.png",
+      "screenshots/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings--03.png"
+    ],
+    "visual_result": "All three native tiles inspected at original resolution individually. Seven graph arrows are present and correctly directed, all seven vertex labels and five rank labels visible. Four curved split-map arrows point in the stated directions; alpha/lambda^-1 beta and iota/pi labels remain distinct. Light strokes/labels contrast on dark background; no clipping or overlap observed.",
+    "limitations": "Local native ItemBody preview rather than production route; unrelated reference-map parse diagnostics (13) remain outside this carrier scope."
+  },
+  "remaining_issues": []
+}

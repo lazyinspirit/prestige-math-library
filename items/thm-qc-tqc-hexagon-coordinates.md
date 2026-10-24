@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qc-tqc-hexagon-coordinates.json
+  precheck: pass
 id: thm-qc-tqc-hexagon-coordinates
 kind: theorem
 title: Hexagon in F/R coordinates
@@ -71,9 +74,11 @@ exactly the maps in the two displayed equations. They illustrate the equations;
 the proof above uses the typed composites and their matrix coefficients.
 
 ```tikzcd
+\Large
+\begin{tikzcd}[column sep=huge, row sep=huge, scale=1.5, transform shape]
 ((X\otimes Y)\otimes Z)
   \arrow[r,"\alpha_{X,Y,Z}"]
-  \arrow[d,"c_{X,Y}\otimes\operatorname{id}_Z"']
+  \arrow[d,"c_{X,Y}\otimes\mathrm{id}_Z"']
 & X\otimes(Y\otimes Z)
   \arrow[r,"c_{X,Y\otimes Z}"]
 & (Y\otimes Z)\otimes X
@@ -81,21 +86,25 @@ the proof above uses the typed composites and their matrix coefficients.
 (Y\otimes X)\otimes Z
   \arrow[r,"\alpha_{Y,X,Z}"']
 & Y\otimes(X\otimes Z)
-  \arrow[r,"\operatorname{id}_Y\otimes c_{X,Z}"']
+  \arrow[r,"\mathrm{id}_Y\otimes c_{X,Z}"']
 & Y\otimes(Z\otimes X)
+\end{tikzcd}
 ```
 
 ```tikzcd
+\Large
+\begin{tikzcd}[column sep=huge, row sep=huge, scale=1.5, transform shape]
 X\otimes(Y\otimes Z)
-  \arrow[r,"\operatorname{id}_X\otimes c_{Y,Z}"]
+  \arrow[r,"\mathrm{id}_X\otimes c_{Y,Z}"]
   \arrow[d,"\alpha_{X,Y,Z}^{-1}"']
 & X\otimes(Z\otimes Y)
   \arrow[r,"\alpha_{X,Z,Y}^{-1}"]
 & (X\otimes Z)\otimes Y
-  \arrow[d,"c_{X,Z}\otimes\operatorname{id}_Y"] \\
+  \arrow[d,"c_{X,Z}\otimes\mathrm{id}_Y"] \\
 (X\otimes Y)\otimes Z
   \arrow[r,"c_{X\otimes Y,Z}"']
 & Z\otimes(X\otimes Y)
   \arrow[r,"\alpha_{Z,X,Y}^{-1}"']
 & (Z\otimes X)\otimes Y
+\end{tikzcd}
 ```

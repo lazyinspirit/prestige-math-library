@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-du-overparameterized-network-architectures-and-gram-kernels.json
+  precheck: n/a
 id: def-du-overparameterized-network-architectures-and-gram-kernels
 kind: definition
 title: "Fully connected and residual networks with the Du Gram kernel"
@@ -19,11 +22,6 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 axiom_use: "AC, DC and countable choice are assumed explicitly for Gaussian-law existence. The finite real recurrences require no additional choice."
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Simon S. Du, Jason D. Lee, Haochuan Li, Liwei Wang, and Xiyu Zhai, Gradient Descent Finds Global Minima of Deep Neural Networks, §§3.3, 5, and 6"
@@ -77,11 +75,11 @@ The fully connected and residual convergence statements use $K_{\rm fc}^{(H)}$ a
 The residual recurrence has one identity contribution from $x^{(h-1)}$ and one nonlinear contribution at every layer $2\le h\le H$; the arrows below depict that convention for one generic layer and do not enter any proof.
 
 ```tikz
-\begin{tikzpicture}[>=stealth,node distance=1.3cm]
-  \node (in) {$x^{(h-1)}$};
-  \node[draw,rectangle,right=1.7cm of in] (act) {$\frac{c_{\rm res}}{H\sqrt m}\sigma(W^{(h)}x^{(h-1)})$};
-  \node[draw,circle,right=2.0cm of act] (sum) {$+$};
-  \node[right=1.2cm of sum] (out) {$x^{(h)}$};
+\begin{tikzpicture}[>=stealth,scale=2,transform shape]
+  \node (in) at (0,0) {$x^{(h-1)}$};
+  \node[draw,rectangle] (act) at (4,0) {$\frac{c_{\rm res}}{H\sqrt m}\sigma(W^{(h)}x^{(h-1)})$};
+  \node[draw,circle] (sum) at (8,0) {$+$};
+  \node (out) at (10,0) {$x^{(h)}$};
   \draw[->] (in) -- (act);
   \draw[->] (act) -- (sum);
   \draw[->] (in) to[bend right=28] (sum);

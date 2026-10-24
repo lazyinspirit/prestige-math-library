@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-strong-nullstellensatz-nonradical-ideal.json
+  precheck: pass
 id: ex-strong-nullstellensatz-nonradical-ideal
 kind: example
-title: "I(V(x^2, xy)) keeps only the radical information"
+title: "$I(V(x^2, xy))$ keeps only the radical information"
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:

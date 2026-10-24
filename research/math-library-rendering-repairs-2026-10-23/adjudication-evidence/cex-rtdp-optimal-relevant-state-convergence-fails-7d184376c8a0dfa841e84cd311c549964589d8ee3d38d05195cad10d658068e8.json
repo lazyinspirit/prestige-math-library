@@ -1,0 +1,82 @@
+{
+  "id": "cex-rtdp-optimal-relevant-state-convergence-fails",
+  "agent": "/root/rendering_repair_coordinator/orl_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "rendering-defect-unrendered-tikz",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tiles show literal center/tikzpicture/node/draw commands in the Counterexample rather than a graph; source lacks a renderer-recognized fenced diagram. All five states and seven directed transitions match the prose model.",
+      "action": "Replace raw center wrapper with fenced tikz and relocate the unchanged model legend and graph to final Remarks outside the proof-like Counterexample. Enlarge node spacing/font and align edge labels to prevent overlaps exposed by native compilation.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Supported fenced TikZ in Remarks; larger readable graph with nonoverlapping labels. All states, actions, costs, probabilities, directed edges and loops preserved.",
+  "source_lines_after": [
+    66,
+    68,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "737176ddf8f5ff66921549d6714fbb6c1da089e050a21e5556dd578260b02cc8",
+  "after_raw_sha256": "acd9acc6eaf5139c8fb6fe1518afffb8f0dda9ca4fd556f8201c24a6b2ddd527",
+  "publication_status_unchanged": true,
+  "frontmatter_byte_identical": true,
+  "proof_numbered_steps_byte_identical": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    "Objects are exactly S={s,x,y,z,g}, sole goal g, as Counterexample Given; all seven arrows were counted in the final native view. Each arrow is a state transition, not an additional action.",
+    "At s, action a has c=1 and P(x|s,a)=1; b has c=1 and P(y|s,b)=1. These are separate action rows, each normalized, matching Given and proof step 2.1.",
+    "At x, the unique action has deterministic c=1, with P(x|x)=P(g|x)=1/2; its two arrows sum to one. x is not an absorbing trap: survival after n transitions is 2^-n. This yields f*(x)=2 and the backup f_new(x)=1+f_old(x)/2, matching steps 1.1 and 2.1.",
+    "At y and z the unique actions deterministically follow y->z->g, both with c=1 and p=1, giving f*(z)=1 and f*(y)=2. Thus s->y->z->g has cost 3, confirming optimal relevance in step 4.1.",
+    "At g, the unique dummy action is the self-loop c=0,p=1. It is absorbing with zero reward, exactly the SSP supplier goal convention. All nonglobal actions have reward -1 and goal reward 0 because r=-c; labels explicitly denote costs, not rewards.",
+    "The SSP and RTDP suppliers use undiscounted q_V=r+sum(P V), with no gamma factor. Consequently both initial branches have optimal cost 3 and rewards -3; no discounted value relation has been introduced.",
+    "The original claims and five numbered proof steps remain byte-identical and establish the counterexample without using the diagram; the legend expressly states proof independence."
+  ],
+  "checks": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-rtdp-optimal-relevant-state-convergence-fails.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; pass direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/cex-rtdp-optimal-relevant-state-convergence-fails.md --json",
+      "exit_code": 0,
+      "result": "1 checked, errors=[], warnings=[]"
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/cex-rtdp-optimal-relevant-state-convergence-fails.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews-orl005-native-v3",
+      "result": "1 TikZ figure, 115 KaTeX expressions, no KaTeX errors, no diagram failures; both final PNG tiles viewed standalone with detail original. Graph fits; labels readable with clear separation, all five nodes and seven edges visible.",
+      "limitations": "Local native ItemBody preview, not production HTTP route; 16 unrelated reference-map parse diagnostics retained in manifest."
+    }
+  },
+  "original_tiles_viewed": [
+    "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/cex-rtdp-optimal-relevant-state-convergence-fails--01.png",
+    "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/cex-rtdp-optimal-relevant-state-convergence-fails--02.png"
+  ]
+}

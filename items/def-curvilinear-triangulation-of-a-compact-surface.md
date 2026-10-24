@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-curvilinear-triangulation-of-a-compact-surface.json
+  precheck: pass
 id: def-curvilinear-triangulation-of-a-compact-surface
 kind: definition
 title: Curvilinear face-to-face triangulation
@@ -21,9 +24,7 @@ sources:
     - title: "Jürgen Jost, Compact Riemann Surfaces: An Introduction to Contemporary Mathematics"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf"
       locator: "§2.3.A, Definition 2.3.A.1, printed pp. 31–32 (PDF pp. 43–44), lines 1776–1793: finite triangular subsets, a homeomorphism from a planar triangle for each face, and pairwise disjoint/common-vertex/common-full-edge intersections. This is topological and treats closed surfaces; the piecewise-C² and boundary conditions here are separately specified."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Definition
@@ -98,3 +99,51 @@ geodesic.
 ## Source locator
 
 Jost, *Compact Riemann Surfaces: An Introduction to Contemporary Mathematics*, §2.3.A, Definition 2.3.A.1, printed pp. 31–32 (PDF pp. 43–44), lines 1776–1793, defines a finite topological subdivision by triangular subsets, homeomorphisms from planar triangles, and the disjoint/common-vertex/full-edge intersection condition. Jost's definition is topological and is stated for closed surfaces. The local piecewise-$C^2$ edges, ordinary corners, vertex links, and boundary subcomplex required here are additional explicit clauses, using the earlier library regular-region definition for the face charts.
+
+## Remarks
+
+The schematic shows the incidence data in clauses 3 and 4. In the upper row,
+the emphasized edge has two incident faces in the interior and one on the
+boundary. Only the emphasized edge in the upper-right panel is designated as
+part of $\partial M$; the other drawn sides merely delimit the displayed face.
+The lower row shows sample abstract links, not additional faces of $M$:
+each dot represents an edge germ at $v$, and each segment a face corner.
+The interval endpoints represent the two boundary edge germs. The number of
+link vertices shown is illustrative, not prescribed by the definition.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+  \node at (0,3.5) {interior edge};
+  \draw (-1.25,2) -- (0,3) -- (1.25,2) -- (0,1) -- (-1.25,2);
+  \draw[very thick] (-1.25,2) -- (1.25,2);
+  \node at (0,2.42) {$f_1$};
+  \node at (0,1.58) {$f_2$};
+  \node[right] at (1.25,2) {$e$};
+  \node at (5,3.5) {boundary edge};
+  \draw (3.75,2) -- (5,3) -- (6.25,2);
+  \draw[very thick] (3.75,2) -- (6.25,2);
+  \node at (5,2.42) {$f$};
+  \node[below] at (5,2) {$e\subset\partial M$};
+  \node at (0,0.15) {interior vertex link};
+  \draw (-0.9,-1) -- (0,-0.3) -- (0.9,-1) -- (0,-1.7) -- (-0.9,-1);
+  \fill (-0.9,-1) circle (2pt);
+  \fill (0,-0.3) circle (2pt);
+  \fill (0.9,-1) circle (2pt);
+  \fill (0,-1.7) circle (2pt);
+  \node at (0,-2.15) {circle};
+  \node at (5,0.15) {boundary vertex link};
+  \draw (3.6,-1.2) -- (4.5,-0.5) -- (5.5,-0.5) -- (6.4,-1.2);
+  \fill (3.6,-1.2) circle (2pt);
+  \fill (4.5,-0.5) circle (2pt);
+  \fill (5.5,-0.5) circle (2pt);
+  \fill (6.4,-1.2) circle (2pt);
+  \node[below] at (3.6,-1.2) {$b_1$};
+  \node[below] at (6.4,-1.2) {$b_2$};
+  \node at (5,-2.15) {closed interval};
+\end{tikzpicture}
+```
+
+Here $b_1$ and $b_2$ denote the boundary edge germs at the boundary vertex.
+These pictures encode local incidence only; they impose no metric shape,
+geodesic condition, or orientation on $M$. The proof above is independent of
+the illustration.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-one-over-one-minus-z-one-z-two-extends-from-a-hartogs-figure.json
+  precheck: pass
 id: ex-one-over-one-minus-z-one-z-two-extends-from-a-hartogs-figure
 kind: example
-title: "The function 1 / (1 - z1 z2) extends holomorphically from a Hartogs figure"
+title: 'The function $1/(1-z_1z_2)$ extends holomorphically from a Hartogs figure'
 status: published
 origin: session
 provenance:
@@ -14,13 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:

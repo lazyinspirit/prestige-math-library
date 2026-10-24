@@ -1,0 +1,113 @@
+{
+  "id": "alg-adjoint-sensitivity-method",
+  "agent": "/root/rendering_repair_coordinator/drlgm_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone capture presents two opposite time directions and terminal data only within a numbered procedure. A two-lane timeline concretely clarifies that the adjoint is solved backward along the forward state, and separates gradient assembly from time evolution. The complete procedure is preserved and does not remove the explanatory value of this picture.",
+      "action": "Appended a final Remarks section with a fenced TikZ forward-state/backward-adjoint timeline and the exact three additive parameter-gradient contributions.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only final Remarks, explicit derivative-evaluation conventions, the diagram, and an independence/caveat sentence. Original file remains an exact byte prefix of current file.",
+  "source_lines_after": {
+    "remarks": [
+      57,
+      75
+    ],
+    "diagram": [
+      61,
+      73
+    ],
+    "unchanged_procedure": [
+      41,
+      49
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For fixed theta in Omega, u_theta:[0,T] -> R^d and p:[0,T] -> R^d; G(theta) lies in R^q.",
+      "check": "The top lane joins u_0(theta) at time 0 to u_theta(T) at time T with a rightward arrow labeled dot u_theta=v. The lower lane points leftward from p(T) at T to p(0) at 0.",
+      "justification": "Assigned Definition initial-value equation and procedure steps 1–2, lines 33,43–45; def-neural-ode defines a trajectory, and thm-neural-ode-global-smooth-flow guarantees full-interval solutions under the stated bounds."
+    },
+    {
+      "objects": "Adjoint coefficients D_u v are d-by-d and D_u ell is 1-by-d; terminal D_u phi is 1-by-d.",
+      "check": "The backward equation retains the exact minus sign -p′=D_u v^T p+D_u ell^T, and terminal p(T)=D_u phi^T is a d-vector. The dashed arrow supplies coefficient evaluation along the same state path, not a new evolution equation.",
+      "justification": "Procedure step 2, line 45; supplier thm-continuous-ode-adjoint-gradient-formula Statement and proof step 1.1. Remarks explicitly give evaluations at (t,u_theta(t),theta) and (u_theta(T),theta)."
+    },
+    {
+      "objects": "D_theta phi^T, D_theta u_0(theta)^T p(0), and integral of D_theta ell^T+D_theta v^T p(t).",
+      "check": "Each contribution is a q-vector: D_theta u_0 and D_theta v are d-by-q, while D_theta ell and D_theta phi are 1-by-q. The G box keeps all three positive additive contributions, integral bounds 0 and T, and the p(0) endpoint. Its incoming arrow denotes assembly rather than time evolution.",
+      "justification": "Exact return formula in procedure step 3, line 47. Supplier thm-continuous-ode-adjoint-gradient-formula proof steps 1.2–2.1 derive the endpoint and integral terms, including cancellation of the state-tangent running term."
+    },
+    {
+      "objects": "Continuous equations and integral; independent textual algorithm.",
+      "check": "No checkpoints, solver discretization, or numerical gradient guarantees are introduced. All original hypotheses and the full textual procedure remain unchanged and sufficient without the diagram.",
+      "justification": "Original line 49 explicitly restricts guarantees to exact continuous objects; added Remarks repeats that limit and makes figure independence explicit."
+    }
+  ],
+  "checks": {
+    "preimage_guard": {
+      "before_raw_sha256": "a84ad613546e0db835cbe5f91c29d02f4de3d5c6a2da1b9cd003b93cfbccc049",
+      "matched_immediately_before_initial_edit": true
+    },
+    "current_raw_sha256": "662ef93a6c765459913d4a4bac8088c0b5663e47d6b42f31dc3332c84eca1307",
+    "original_preserved_as_prefix": true,
+    "frontmatter_byte_identical": true,
+    "publication_status": "published; byte-identical",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-adjoint-sensitivity-method.md",
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-adjoint-sensitivity-method.md --json",
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-adjoint-sensitivity-method.md --json",
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/drlgm_001-native-v2",
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-adjoint-sensitivity-method --out research/math-library-rendering-repairs-2026-10-23/drlgm_001-native-v2",
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "standalone_original_resolution_views": [
+        "screenshots/alg-adjoint-sensitivity-method--01.png",
+        "screenshots/alg-adjoint-sensitivity-method--02.png"
+      ],
+      "visual_result": "Readable forward/backward lanes, separated endpoint labels, unobstructed dashed coefficient arrow and three-line gradient box; no clipping or overlap observed."
+    }
+  },
+  "original_evidence": {
+    "queue_evidence_dir_missing_screenshot": true,
+    "actual_screenshot": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/screenshots/alg-adjoint-sensitivity-method--01.png",
+    "sha256": "c38f7bacc4f9d46c90b7ff2f37cfd179623ce414c1a657be5de1ca189f6edac0",
+    "queue_hash_matched": true,
+    "viewed_standalone_original_resolution": true
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview covers current ItemBody with local reference resolution, not the production HTTP route or navigation. Its title map records 16 unrelated parse diagnostics; this item and all three direct suppliers were read directly."
+  ]
+}

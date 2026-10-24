@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-characteristic-function-of-a-multivariate-normal-law.json
+  precheck: pass
 id: lem-characteristic-function-of-a-multivariate-normal-law
 kind: lemma
 title: Characteristic function of a multivariate normal law
@@ -6,12 +9,6 @@ deps: ["def-multivariate-normal-law", "lem-characteristic-function-of-a-normal-l
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-13
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-12
 sources:
   references:
     - title: Norris, Probability and Measure, Theorem 8.2.1
@@ -31,7 +28,7 @@ Assume AC. If $X\sim N_d(m,\Sigma)$, then $$\Phi_X(t):=\mathbb E e^{it\cdot X}=\
 
 [F1] Every linear projection has the specified scalar normal law, and the vector law exists. [[def-multivariate-normal-law]].
 
-[F2] A scalar normal has transform exp(ims-sigma^2s^2/2). [[lem-characteristic-function-of-a-normal-law]].
+[F2] A scalar normal has transform $\exp(ims-\sigma^2s^2/2)$. [[lem-characteristic-function-of-a-normal-law]].
 
 [F3] Under AC scalar laws with equal characteristic functions agree. [[thm-uniqueness-of-a-law-from-its-characteristic-function]].
 

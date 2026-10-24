@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-floater-hormann-cd1-seminorm-rate-fails.json
+  precheck: pass
 id: cex-floater-hormann-cd1-seminorm-rate-fails
 kind: counterexample
-title: Uniform meshes refute the C^(d+1)-seminorm-only Floater–Hormann rate
+title: Uniform meshes refute the $C^{d+1}$-seminorm-only Floater–Hormann rate
 status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
@@ -23,12 +26,7 @@ sources:
     - title: Michael S. Floater and Kai Hormann, Barycentric rational interpolation
         with no poles and high rates of approximation, Sections 2 and 4
       url: https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement refuted

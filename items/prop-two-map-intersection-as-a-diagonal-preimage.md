@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-two-map-intersection-as-a-diagonal-preimage.json
+  precheck: pass
 id: prop-two-map-intersection-as-a-diagonal-preimage
 kind: proposition
 title: "Two-map intersection as a diagonal preimage"
@@ -10,14 +13,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: literature-derived
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item prop-two-map-intersection-as-a-diagonal-preimage; evidence research/frontier-38-owner-30-reader-12.md, research/frontier-38-owner-30-reader-findings-12.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  precheck: pass
 sources:
   references:
     - title: "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)"
@@ -55,3 +50,16 @@ Let $f:X^x\to M^n$ and $g:Z^z\to M^n$ be smooth maps from compact oriented manif
 2.1 Assume the equivalent transversality conditions hold. At a coincidence write $A=df_a$ and $B=dg_b$ in supplied oriented determinant frames, and $C=[A\ B]$. The local sign of $(f,g)$ is $\operatorname{sgn}\det C$. For $(f\times g,\Delta_M)$ the ordered derivative matrix in the ambient product frame has block columns $(A,0)$, $(0,B)$, $(I,I)$. Subtracting its top row block from the bottom and moving the final $n$ diagonal columns to the front gives the sign factor $(-1)^{n^2}=(-1)^n$ and bottom block $[-A\ B]$, of determinant $(-1)^x\det C$. Thus the original determinant has sign $(-1)^{n+x}\operatorname{sgn}\det C=(-1)^z\operatorname{sgn}\det C$. The determinant-ray calculation includes zero-dimensional source factors: their point signs multiply both comparisons equally, while the diagonal carries the ambient ray. [F3, F4, step 1.1, algebra]
 
 3.1 Summing 2.1 over the finite coincidence set gives $I(f,g)=(-1)^zI(f\times g,\Delta_M)$: the two sums are over the same finite index set, and $(-1)^z$ is a common factor. Exchanging the roles of the two maps and using the factor-interchange sign of [F5] gives $I(f,g)=(-1)^{x}I(i_\Delta,f\times g)$: the map--submanifold number $I(f\times g,\Delta_M)$ equals the map--map number $I(f\times g,i_\Delta)$ because the differential of the inclusion is the inclusion of $T\Delta_M$, and the same pointwise block-swap calculation as [F5], of dimensions $n,n$, gives $I(i_\Delta,f\times g)=(-1)^{n\cdot n}I(f\times g,i_\Delta)=(-1)^nI(f\times g,\Delta_M)$. This finite transverse sum is defined even if the diagonal is noncompact, since its coincidence set is exactly the finite preimage in the compact $X\times Z$ with $n=x+z$. [F1, F4, F5, step 2.1, algebra] ∎
+
+## Remarks
+
+The coincidence locus is the pullback of the diagonal inclusion. In the square below, $j$ is the inclusion of $X\times_M Z$ into $X\times Z$, and $h(a,b)=(f(a),g(b))=(y,y)$ for $y=f(a)=g(b)$. Thus $i_\Delta\circ h=(f\times g)\circ j$, and $X\times_M Z=(f\times g)^{-1}(\Delta_M)$.
+
+```tikzcd
+\begin{tikzcd}[scale=1.8, transform shape, column sep=large, row sep=large]
+X\times_M Z \arrow[r, "h"] \arrow[d, "j"'] & \Delta_M \arrow[d, "i_\Delta"] \\
+X\times Z \arrow[r, "f\times g"'] & M\times M
+\end{tikzcd}
+```
+
+The square illustrates the common coincidence set; the transversality equivalence and the orientation signs are established by the proof independently of the diagram.

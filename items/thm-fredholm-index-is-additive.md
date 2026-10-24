@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fredholm-index-is-additive.json
+  precheck: pass
 id: thm-fredholm-index-is-additive
 kind: theorem
 title: Fredholm index is additive
@@ -16,8 +19,7 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 pp.195–196, Theorem 4.40"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -35,7 +37,7 @@ $$\operatorname{ind}(UT)=\operatorname{ind}U+\operatorname{ind}T .$$
 
 [A2] Rank-nullity: for a linear map $f:V\to W$ with $V$ finite dimensional, $\dim V=\dim\ker f+\dim\operatorname{ran}f$ ([[thm-rank-nullity]], [[def-dimension]]); and $\dim\ker f=\dim\operatorname{im}g$ for an exact predecessor $g$ at that spot, so that a finite exact sequence $0\to V_1\to V_2\to V_3\to V_4\to V_5\to V_6\to0$ of finite-dimensional spaces satisfies $\sum_{i=1}^{6}(-1)^{i+1}\dim V_i=0$ ([[def-linear-map]], [[def-linear-subspace]]).
 
-[A3] For a bounded $T$ the cokernel is the quotient $\operatorname{coker}T=Y/\operatorname{ran}T$ with cosets written $y+\operatorname{ran}T$ ([[def-quotient-vector-space-coset-notation]], [[def-fredholm-operator-cokernel-and-index]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[def-dependent-choice]], [[def-banach-space]]).
+[A3] For a bounded $T$ the cokernel is the quotient $\operatorname{coker}T=Y/\operatorname{ran}T$ with cosets written $y+\operatorname{ran}T$ ([[def-quotient-vector-space-coset-notation|Quotient vector space, cosets and canonical projection]], [[def-fredholm-operator-cokernel-and-index]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[def-dependent-choice]], [[def-banach-space]]).
 
 ## Proof
 
@@ -56,3 +58,13 @@ $$\operatorname{ind}(UT)=\operatorname{ind}U+\operatorname{ind}T .$$
 3.1 Rank-nullity telescopes the dimensions: with $f_0:0\to V_1$, $f_i:V_i\to V_{i+1}$ for $1\le i\le5$ and $f_6:V_6\to0$ the maps of [step 1.2], exactness gives $\ker f_i=\operatorname{im}f_{i-1}$, so $\dim V_i=\dim\operatorname{im}f_{i-1}+\dim\operatorname{im}f_i$, and summing with signs $(+,-,+,-,+,-)$ cancels to $\dim V_1-\dim V_2+\dim V_3-\dim V_4+\dim V_5-\dim V_6=0$, because $\operatorname{im}f_0=0$ and $\operatorname{im}f_6=0$. [step 2.1, step 2.2, step 2.3, A2]
 
 4.1 The index identity follows: $\operatorname{ind}(UT)=\dim V_2-\dim V_5=(\dim V_1-\dim V_4)+(\dim V_3-\dim V_6)=\operatorname{ind}T+\operatorname{ind}U$, by the telescoping identity of [step 3.1] and the definition of the index. [step 3.1, A2, A3] ∎
+
+## Remarks
+
+The exact sequence proved in steps 2.2–2.3 organizes the six spaces from step 2.1:
+
+```tikzcd
+0 \arrow[r] & V_1 \arrow[r, "\alpha"] & V_2 \arrow[r, "\beta"] & V_3 \arrow[r, "\gamma"] & V_4 \arrow[r, "\delta"] & V_5 \arrow[r, "\varepsilon"] & V_6 \arrow[r] & 0
+```
+
+Here $V_1=\ker T$, $V_2=\ker(UT)$, $V_3=\ker U$, $V_4=Y/\operatorname{ran}T$, $V_5=Z/\operatorname{ran}(UT)$ and $V_6=Z/\operatorname{ran}U$. The arrows are precisely those of step 1.2: $\alpha(x)=x$, $\beta(x)=Tx$, $\gamma(y)=y+\operatorname{ran}T$, $\delta(y+\operatorname{ran}T)=Uy+\operatorname{ran}(UT)$ and $\varepsilon(z+\operatorname{ran}(UT))=z+\operatorname{ran}U$. The end arrows are the zero maps. The alternating dimension signs are $(+,-,+,-,+,-)$, as in step 3.1; the rigorous exactness and index argument above is independent of this illustration.

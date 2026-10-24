@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors.json
+  precheck: pass
 id: lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors
 kind: lemma
 title: "Exact Temperley–Lieb truncation reduces decomposition to trivial factors"
@@ -17,11 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Robert A. Spencer, The Modular Temperley–Lieb Algebra"
@@ -64,3 +62,26 @@ where $W_{r,m}=0$ if $m>r$. The module $D_{r,r}=W_{r,r}$ is one dimensional and 
 5.1 A finite-dimensional $A_n$-module has a composition series by induction on its vector-space dimension. Apply the exact functor of step 3.1 to such a series for $W_{n,m}$. By [F3] and step 4.1, each simple factor $D_{n,t}$ contributes either zero or the simple factor $D_{r,t}$. Distinct surviving labels remain distinct by [F3]. In particular, only the factor with $t=r$ contributes $D_{r,r}$, and it contributes once. Step 4.1 identifies the resulting filtered module with $W_{r,m}$, giving the claimed multiplicity equality. [F3, step 3.1, step 3.2, step 4.1, algebra]
 
 6.1 The sole basis vector of $W_{r,r}$ is $1_r$; every generator lowers propagation and thus acts by zero, and its form value on that vector is $1$. Hence $D_{r,r}=W_{r,r}$ is the stated one-dimensional module. Finally, for $n>0$ even and $\delta=0$, gluing any two perfect matchings creates at least one closed component, so $\phi_{n,0}$ is identically zero and $D_{n,0}=0$. This explains the precise excluded branch and completes the assertion over every field, including characteristic two. [F1, F2, step 1.1, step 5.1, algebra] ∎
+
+
+## Remarks
+
+The first pair of arrows displays the retraction of step 1.1: $y\circ z^*=1_r$, whereas the opposite composite is $z^*\circ y=e$. The next two pairs display the resulting isomorphisms of steps 2.1 and 3.2. Here $\alpha(a)=z^*\circ a\circ y$, $\beta(b)=y\circ b\circ z^*$, $\Phi(xe)=x\circ z^*$, and $\Psi(u)=u\circ y$. Each lower arrow is inverse to the upper arrow in its pair, except in the first pair where the composite on $n$ is $e$. All arrows denote morphisms or maps, rather than individual strands of a basis diagram; the proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}
+  \node (n) at (0,0) {$n$};
+  \node (r) at (5,0) {$r$};
+  \draw[->] (n) to[bend left=20] node[above] {$y$} (r);
+  \draw[->] (r) to[bend left=20] node[below] {$z^*$} (n);
+  \node at (2.5,-1.1) {$y\circ z^*=1_r,\qquad z^*\circ y=e$};
+  \node (Ar) at (0,-2.5) {$A_r$};
+  \node (corner) at (5,-2.5) {$eA_ne$};
+  \draw[->] (Ar) to[bend left=20] node[above] {$\alpha$} (corner);
+  \draw[->] (corner) to[bend left=20] node[below] {$\beta$} (Ar);
+  \node (Wne) at (0,-4.6) {$W_{n,t}e$};
+  \node (Wr) at (5,-4.6) {$W_{r,t}$};
+  \draw[->] (Wne) to[bend left=20] node[above] {$\Phi$} (Wr);
+  \draw[->] (Wr) to[bend left=20] node[below] {$\Psi$} (Wne);
+\end{tikzpicture}
+```

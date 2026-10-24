@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cyclotomic-klr-induction-is-projective-on-the-right.json
+  precheck: pass
 id: thm-cyclotomic-klr-induction-is-projective-on-the-right
 kind: theorem
 title: "Cyclotomic induction is projective on the right"
@@ -20,8 +23,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Seok-Jin Kang and Masaki Kashiwara, Categorification of Highest Weight Modules via Khovanov-Lauda-Rouquier Algebras, arXiv:1102.4677v4"
@@ -98,3 +99,36 @@ If $A=0$, the comparison modules and functor values are zero, so all assertions 
 7.2 The exact sequence (c). Tensor the bimodule resolution $0\to q^sK_1\xrightarrow{P}K_0\to Be_R\to0$ of step 5.1 over $A$ with a left $A$-module $M$. It remains exact because its cokernel $Be_R$ is right $A$-projective by step 6.1, so the original sequence is split as a sequence of right $A$-modules. By their definitions in step 1.1, $K_1\otimes_A M$ is the left-append generic induction $\bar F_iM$ and $K_0\otimes_A M$ is the right-append generic induction $F_iM$, while $Be_R\otimes_A M=F_i^\Lambda M$. The map $P$ is left $R(\beta+\alpha_i)$-linear and has homogeneous degree $s=(\alpha_i\mid 2\Lambda-\beta)$, giving exactly the functorial sequence in (c) in the declared target category. On the ungraded monic-deformation branch the same sequence is interpreted without a grading shift. [F1, step 1.1, step 5.1, step 6.1]
 
 8.1 Conclusion. The projectivity, preservation and exact-sequence arguments prove (a), (b) and (c) with the displayed shift, in the graded standard case with graded projectives and verbatim ungraded for a monic deformation; the comparison is monic and no filtered-colon citation is used. [step 6.1, step 7.2] ∎
+
+## Remarks
+
+**Comparison resolution and induction.** With $A$, $B$, $e_R$, $K_0$ and $K_1$ as in the proof, put $s=(\alpha_i\mid2\Lambda-\beta)$. The upper row is the comparison resolution of step 5.1. Tensoring it over $A$ with a left $A$-module $M$ gives the lower row under the identifications of step 7.2:
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.3,transform shape]
+\node (z0) at (0,2) {$0$};
+\node (k1) at (2,2) {$q^sK_1$};
+\node (k0) at (5,2) {$K_0$};
+\node (b) at (8,2) {$Be_R$};
+\node (z1) at (10,2) {$0$};
+\draw[->] (z0) -- (k1);
+\draw[->] (k1) -- node[above] {$P$} (k0);
+\draw[->] (k0) -- (b);
+\draw[->] (b) -- (z1);
+\node at (5,1) {tensor over $A$ with $M$};
+\node (w0) at (0,0) {$0$};
+\node (f1) at (2,0) {$q^s\bar F_iM$};
+\node (f0) at (5,0) {$F_iM$};
+\node (f) at (8,0) {$F_i^\Lambda M$};
+\node (w1) at (10,0) {$0$};
+\draw[->] (w0) -- (f1);
+\draw[->] (f1) -- node[above] {$P\otimes 1_M$} (f0);
+\draw[->] (f0) -- (f);
+\draw[->] (f) -- (w1);
+\node at (2,-0.7) {left append};
+\node at (5,-0.7) {right append};
+\node at (8,-0.7) {cyclotomic};
+\end{tikzpicture}
+```
+
+Both rows are exact: the upper row is split as a sequence of right $A$-modules by step 6.1, so tensoring preserves its injective arrow. The lower row is in $\mathrm{Mod}(R(\beta+\alpha_i))$, with $F_i^\Lambda M$ regarded through the quotient. The displayed shift applies in the standard graded case; omit it for the ungraded monic-deformation branch. The figure summarizes steps 5.1–7.2, whose proof is independent of the illustration.

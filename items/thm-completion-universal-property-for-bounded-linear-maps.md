@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-completion-universal-property-for-bounded-linear-maps.json
+  precheck: pass
 id: thm-completion-universal-property-for-bounded-linear-maps
 kind: theorem
 title: "Bounded linear maps extend uniquely across the completion"
@@ -18,9 +21,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -74,3 +74,17 @@ $$\|\widehat T u\|\le C\|u\|\qquad (u\in \widehat X).$$
 5.1 Let $\lambda$ be a scalar and let $u\in\widehat X$, and use [A1] with density to choose a sequence $i(x_n)\to u$ from the dense copy. By [L4], $i(\lambda x_n)=\lambda i(x_n)\to \lambda u$ in $\widehat X$, so continuity of $\widehat T$ gives $$\widehat T(\lambda u)=\lim_n \widehat T(i(\lambda x_n))=\lim_n T(\lambda x_n)=\lim_n \lambda T(x_n)=\lambda \lim_n T(x_n)=\lambda\widehat T(u).$$ Thus $\widehat T$ is homogeneous, and with step 4.1 it is linear. [step 3.1, A1, L1, L4, construct]
 
 6.1 The continuity extension in step 3.1 was unique, so no second bounded linear map can also extend $T$. Therefore $\widehat T$ is the unique bounded linear extension of $T$ across the completion. [step 3.1, step 5.1] ∎
+
+## Remarks
+
+The extension property is summarized by the commutative triangle below. Here
+$i$ is the completion embedding, and the dashed arrow is the unique bounded
+linear extension constructed in step 3.1 and shown linear in steps 4.1 and 5.1.
+Both routes from $X$ to $Y$ agree: $\widehat T(i(x))=T(x)$ for every $x\in X$.
+The proof above is independent of this illustration.
+
+```tikzcd
+[row sep=large, column sep=large, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+X \arrow[r, "i"] \arrow[dr, "T" swap] & \widehat X \arrow[d, dashed, "\widehat T"] \\
+& Y
+```

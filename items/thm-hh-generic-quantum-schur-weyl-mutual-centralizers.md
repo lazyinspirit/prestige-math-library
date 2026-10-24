@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hh-generic-quantum-schur-weyl-mutual-centralizers.json
+  precheck: pass
 id: thm-hh-generic-quantum-schur-weyl-mutual-centralizers
 kind: theorem
 title: "Generic quantum Schur–Weyl mutual centralizers over Q(q)"
@@ -52,3 +55,14 @@ These are equalities for the two matrix-algebra images. If $N<n$, no faithfulnes
 2.1 If $n=0$, then $M=F$ and both unital images and both commutants are $F$; the unique unital map from the abstract algebra $H_0=F$ is the identity, so this action is faithful. If $N=1$, $M$ is one-dimensional; the quantum image contains the scalars and every Hecke generator acts by $q$, so both images and both commutants are again $F$. These direct cases cover the parameters excluded from step 1.1. [given, F1, algebra]
 
 3.1 In the range $N<n$ the equalities in step 1.1 remain image equalities and do not identify $B_F$ with the abstract Hecke algebra. The distinction is real: for $N=1,n=2$, the abstract algebra has basis $1,t_1$ by [F3], while its one-dimensional tensor-space action sends $t_1$ to $q$; the nonzero element $t_1-q$ is in the kernel. No claim of faithfulness in the full range $N<n$ is used in either centralizer equality. [step 2.1, step 1.1, F3, algebra] ∎
+
+## Remarks
+
+For any $a\in A_F$ and $b\in B_F$, the two endomorphisms of $M=(F^N)^{\otimes n}$ give the commuting square below: both paths send $m$ to $abm=bam$.
+
+```tikzcd
+M \arrow[r, "b"] \arrow[d, "a"'] & M \arrow[d, "a"] \\
+M \arrow[r, "b"'] & M
+```
+
+The theorem strengthens this commutation to $A_F=\operatorname{End}_{B_F}(M)$ and $B_F=\operatorname{End}_{A_F}(M)$. The abstract Hecke action factors as the surjection $\rho_n:H_n(F,q)\twoheadrightarrow B_F$ followed by the inclusion $B_F\hookrightarrow\operatorname{End}_F(M)$. Its faithfulness for $N\ge n$ is a separate assertion; the square uses only the image algebras and makes no injectivity claim when $N<n$. The proof above is independent of the illustration.

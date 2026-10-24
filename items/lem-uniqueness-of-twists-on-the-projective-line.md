@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-uniqueness-of-twists-on-the-projective-line.json
+  precheck: pass
 id: lem-uniqueness-of-twists-on-the-projective-line
 kind: lemma
 title: The twist index on the projective line is an isomorphism invariant
@@ -18,13 +21,6 @@ deps:
   - prop-localisation-zero-equality-and-kernel-criteria
   - thm-polynomial-degree-of-a-product-over-a-domain
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Divisors, Lemma 31.29.4"
@@ -78,7 +74,7 @@ well defined.
 
 ## Proof
 
-**Proof technique:** direct: on the two standard charts a morphism of twists is given by its two components, which are units of $k[u]$ and $k[v]$, hence constants; their compatibility on the overlap forces $u^{m-n}$ to be a constant, which by degree reasons happens only for $n=m$.
+**Proof technique:** direct: on the two standard charts an isomorphism of twists is given by two components that are units of the polynomial coordinate rings, hence constants; their compatibility on the overlap forces the coordinate raised to the difference of the twist indices to be a constant, which by degree reasons happens only when the indices coincide.
 
 1.1 By [F1] the two charts $U_0,U_1$ cover $\mathbb P^1_k$ and their overlap is $U_0\cap U_1=D^{(0)}_1$, with coordinate ring the localisation $k[u,u^{-1}]=k[u]_u$ in which $v=u^{-1}$. By [F2] and [F5] the prescription $e_1=u^ne_0$ glues the two trivial invertible sheaves $k[u]$ on $U_0$ and $k[v]$ on $U_1$ to an invertible sheaf $\mathcal O(n)$ on $\mathbb P^1_k$, trivialized on $U_i$ by the frame $e_i$, which is a global frame of $\mathcal O(n)|_{U_i}$; the same holds with $m$ in place of $n$, with frames $e_i^{(m)}$, and on the overlap $e_1^{(n)}=u^ne_0^{(n)}$, $e_1^{(m)}=u^me_0^{(m)}$. [F1, F2, F3, F5]
 

@@ -1,0 +1,86 @@
+{
+  "id": "ex-a2-quiver-hall-wall-crossing-pentagon",
+  "agent": "/root/rendering_repair_coordinator/hall_001",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other:unsupported-tilde-tikz-fence",
+      "verdict": "confirmed",
+      "reason": "The sole flagged original PNG was opened independently at original resolution. It visibly prints the complete TikZ environment and commands in the Example instead of displaying a quiver. The frozen and current source use tilde fences; canonical backtick fences are recognized by the local diagram renderer. The actual TikZ nodes and single rightward arrow are already mathematically correct.",
+      "action": "Replace only the opening and closing tilde fence markers with backticks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Two fence-marker replacements restore the existing A₂ quiver diagram; all TikZ environment bytes, labels, geometry and arrows are unchanged.",
+  "source_lines_after": [
+    37,
+    43
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Two vertices, v1 labelled 1 at (0,0) and v2 labelled 2 at (2,0).",
+      "check": "These are exactly the two vertices of Q specified in Example line 35 and the vertex spaces used by Verification step 1.1. Neither is an extra representation or object."
+    },
+    {
+      "arrows": "The sole draw command is \\draw[->] (v1) -- (v2).",
+      "check": "Its domain is vertex 1 and codomain vertex 2, agreeing with the declared quiver 1→2 and the representation map f:V₁→V₂ in Verification step 1.1. It does not reverse the orientation relevant to step 1.2’s Euler form or step 2.1’s S₂ subrepresentation."
+    },
+    {
+      "relations": "No additional arrows, relations, commutative squares, loops or crossings are asserted.",
+      "check": "The picture illustrates only the defining single arrow. The algebraic decomposition, stability analysis and quantum-dilogarithm identity remain proved independently in unchanged Verification steps 1.1–7.1."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-a2-quiver-hall-wall-crossing-pentagon.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-a2-quiver-hall-wall-crossing-pentagon.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-a2-quiver-hall-wall-crossing-pentagon.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache-hall001-native-20261024\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-a2-quiver-hall-wall-crossing-pentagon --out research/math-library-rendering-repairs-2026-10-23/hall_001-preview-20261024-b",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 32
+      },
+      "native_compilation": "Fresh unique repository-local TMPDIR forced the actual node-tikzjax TeX→SVG engine; its new pi-tikz-cache/feca56fd9d71462a20a0c47a19356ef2.svg exists (35784 bytes).",
+      "visual_inspection": "Opened the fresh first PNG alone at original resolution. The two labels 1 and 2 are legible, the arrow visibly points right from 1 to 2, and no raw TikZ source remains. No size alteration is needed.",
+      "receipt": "research/math-library-rendering-repairs-2026-10-23/hall_001-preview-20261024-b/screenshots/ex-a2-quiver-hall-wall-crossing-pentagon.json",
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": []
+    }
+  ],
+  "before_raw_sha256": "a3e2eae35a61219c59897db0dbbb3bc4f826b13c1a50c741a30fd04969989b9e",
+  "after_raw_sha256": "961738a408e48964a4e727ff3cef0ddb2c9df250b69f392e396558137d8c8db4",
+  "status_preserved": "status: published is byte-identical; all frontmatter is unchanged.",
+  "remaining_issues": []
+}

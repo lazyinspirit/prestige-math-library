@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-branch-power-agrees-with-integer-powers.json
+  precheck: pass
 id: thm-branch-power-agrees-with-integer-powers
 kind: theorem
 title: "Branch-defined complex powers agree with integer powers"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -44,7 +44,7 @@ In particular $\exp(nL(z))$ is independent of the choice of branch $L$: the righ
 
 ## Proof
 
-**Proof technique:** induction on the nonnegative integer $m$ with $\exp(mL(z))=z^m$.
+**Proof technique:** induction on the nonnegative integer exponent, comparing the branch power with the integer power.
 
 1.1 Base case: $z^0_L=\exp(0\cdot L(z))=\exp 0=1=z^0$ [F1, F2, F4, base]
 

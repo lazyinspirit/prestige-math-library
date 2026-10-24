@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-poisson-integral-of-cos-theta.json
+  precheck: pass
 id: ex-poisson-integral-of-cos-theta
 kind: example
-title: "The Poisson integral of cos(theta) is r cos(theta)"
+title: 'The Poisson integral of $\cos\theta$ is $r\cos\theta$'
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [def-poisson-integral-on-the-disc, thm-poisson-integral-solves-the-disc-di
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:

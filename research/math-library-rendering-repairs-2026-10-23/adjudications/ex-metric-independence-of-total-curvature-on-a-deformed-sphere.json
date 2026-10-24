@@ -1,0 +1,74 @@
+{
+  "id": "ex-metric-independence-of-total-curvature-on-a-deformed-sphere",
+  "agent": "/root/rendering_repair_coordinator/dg_012",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile 02 visibly prints literal $4\\pi$ in the uppercase technique banner while the same quantity is correctly typeset in proof steps. The banner is plain React text, so ordinary inline math delimiters are not parsed here.",
+      "action": "Replace only banner notation $4\\pi$ with equivalent plain words four pi.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 74: replace $4\\pi$ with four pi only in Proof technique.",
+  "source_lines_after": {
+    "74": "**Proof technique:** obtain the total curvature four pi for every metric from metric independence and the round sphere, then compute the spheroid metric explicitly to exhibit nonconstant pointwise curvature."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "protected_metadata_preserved": true,
+  "publication_status_before": "published",
+  "publication_status_after": "published",
+  "before_raw_sha256": "098150f6867dc4988bf005f1534dfffe6f1565ea908a1dfb8c368d2455274aa3",
+  "after_raw_sha256": "61584287ce2e54bf7ba6b4152859fd234246aefe7fbc5ba4b8c2fe387e355490",
+  "source_comparison": "Frozen before and current source were identical before guarded edit. Final bytes differ only by the single technique-banner replacement; all frontmatter is byte-identical.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-metric-independence-of-total-curvature-on-a-deformed-sphere.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-metric-independence-of-total-curvature-on-a-deformed-sphere.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-metric-independence-of-total-curvature-on-a-deformed-sphere.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_checks": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-metric-independence-of-total-curvature-on-a-deformed-sphere--02.png",
+    "original_resolution": true,
+    "fresh_tile": "research/math-library-rendering-repairs-2026-10-23/previews/dg-012/screenshots/ex-metric-independence-of-total-curvature-on-a-deformed-sphere--02.png",
+    "fresh_original_resolution": true,
+    "result": "Independently viewed fresh standalone native tile: banner reads FOUR PI without raw dollar delimiters or TeX; proof formulae remain typeset.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg-012/manifest.json",
+    "manifest_sha256": "b3611de15424e531f8dc1d06bbb30d072c2ca449bb0e0f44eef9cc8155459d51",
+    "source_sha256": "61584287ce2e54bf7ba6b4152859fd234246aefe7fbc5ba4b8c2fe387e355490",
+    "reference_map_sha256": "94483b48240b629f9a868fb4e5b83f6e9c871065db8f27e02a33922ac4f8f0cc",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "renderer_limitation": "Technique banners render plain text with CSS uppercase; this authorized local prose workaround avoids math markup in that field. Application code was not changed."
+}

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-kronecker-products-for-s3.json
+  precheck: pass
 id: ex-kronecker-products-for-s3
 kind: example
-title: The complete internal product table for S_3
+title: The complete internal product table for $S_3$
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -30,11 +33,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014)"

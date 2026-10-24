@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm.json
+  precheck: pass
 id: prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm
 kind: proposition
 title: "The functional $\\Lambda_g$ has norm $\\|g\\|_q$; for $q=\\infty$ assume $\\mu$ is semifinite"
@@ -10,14 +13,6 @@ provenance:
   proof: ai-generated
 deps: [thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p, def-conjugate-exponents, def-finite-sigma-finite-and-semifinite-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "Use Holder for the upper bound. For $1<p<\\infty$ test against the normalized extremizer with conjugate phase; for $p=1$ use a finite-measure subset of an almost-maximal level set, which is exactly where semifiniteness enters."
-verification:
-  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm-published-repair.json
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Section 6.2"
@@ -54,7 +49,7 @@ semifinite.
 
 ## Proof
 
-**Proof technique:** Use Holder for the upper bound. For $1<p<\infty$ test against the normalized extremizer with conjugate phase; for $p=1$ use a finite-measure subset of an almost-maximal level set, which is exactly where semifiniteness enters.
+**Proof technique:** Use Holder for the upper bound. For p strictly between one and infinity test against the normalized extremizer with conjugate phase; for p equal to one use a finite-measure subset of an almost-maximal level set, which is exactly where semifiniteness enters.
 
 1.1 The upper bound $$\|\Lambda_g\|\le\|g\|_q$$ is exactly [L1]. [L1, given]
 

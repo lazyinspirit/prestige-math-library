@@ -1,0 +1,95 @@
+{
+  "id": "ex-cavalieri-computes-the-area-of-the-unit-disc",
+  "agent": "/root/rendering_repair_coordinator/dmt_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile contains the disc definition and section-length computation but no picture. A concrete vertical slice materially clarifies why the interval has two square-root endpoints and why its length is the Cavalieri integrand. This is warranted exposition even though the existing proof is complete.",
+      "action": "Added a fenced TikZ illustration in final Remarks showing the open unit disc, a representative positive-x vertical section, its excluded endpoints, and its length.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only Remarks and an explanatory TikZ figure; all previous bytes, mathematical claims, hypotheses, proof, dependencies, sources, metadata and published status remain unchanged.",
+  "source_lines_after": {
+    "remarks": [
+      45,
+      68
+    ],
+    "caption": 47,
+    "diagram": [
+      49,
+      68
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "data": "Open unit disc D and boundary x^2+y^2=1",
+      "check": "Example line 24 defines D by strict inequality; the circle is dashed and the caption explicitly excludes it. Axis intercepts ±1 agree with the defining equation."
+    },
+    {
+      "data": "Representative section x=x_0 with 0<x_0<1",
+      "check": "Verification step 1.1 gives D_x=(-sqrt(1-x^2),sqrt(1-x^2)). The sketch uses x=0.5 and y approximately ±sqrt(3)/2, labels those endpoints symbolically at x_0, and marks them open. No endpoints are included in D."
+    },
+    {
+      "data": "Vertical section-length arrow",
+      "check": "Upper minus lower endpoint is sqrt(1-x_0^2)-(-sqrt(1-x_0^2))=2sqrt(1-x_0^2), precisely the length and integrand in Verification step 1.1. The arrow spans the same two heights."
+    },
+    {
+      "data": "Range and excluded sections",
+      "check": "The caption restricts the illustrated representative to 0<x_0<1; it makes no claim of a nonempty section at x=±1 or beyond. Step 1.1 continues to give empty sections outside [-1,1], with endpoint intervals (0,0) empty as well."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-cavalieri-computes-the-area-of-the-unit-disc.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-cavalieri-computes-the-area-of-the-unit-disc.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-cavalieri-computes-the-area-of-the-unit-disc.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "preexisting_formatting_failures": []
+  },
+  "evidence": {
+    "before_raw_sha256": "dd71eb3d44b256cdafcdae6f9fe98881845580ef9c3a5eda4d5ad0a519ad64f6",
+    "current_raw_sha256": "fbc72d8df555a9ff3a166aa30fc71bf036bff0c40b23bba615b715c3d5e6399b",
+    "before_screenshot": {
+      "recorded_path": "research/math-library-rendering-audit-2026-10-23/measure-theory/diagram-supplement/screenshots/ex-cavalieri-computes-the-area-of-the-unit-disc--01.png",
+      "resolved_path": "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/ex-cavalieri-computes-the-area-of-the-unit-disc--01.png",
+      "sha256": "c4a4cca5303ef5064d7ced5db8e74db0ab0e881926629ec2eb818edb59c29ed1",
+      "inspection": "Standalone original-resolution view inspected; recorded path missing, authentic matching-hash image located within measure-theory."
+    },
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dmt_004/manifest.json",
+    "preview_manifest_sha256": "caa8f38a7cdaa682978794ee8dc37a16d0a0994292dc33f60ecedb518e1e8f17",
+    "preview_source_sha256": "fbc72d8df555a9ff3a166aa30fc71bf036bff0c40b23bba615b715c3d5e6399b",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dmt_004/screenshots/ex-cavalieri-computes-the-area-of-the-unit-disc--01.png",
+    "preview_screenshot_sha256": "6c3275da93d1214e5e28bb4a3ecdee3e50a36353be055c7266d64e2d16949325",
+    "visual_check": "Inspected standalone native local PNG at original resolution: disc, axes, full section, both endpoint labels and length arrow render without clipping or label overlap.",
+    "preview_limitations": "Local ItemBody/SSR TikZ preview; not a production HTTP visit. Manifest reports 16 unrelated reference-map parse diagnostics; scoped item and both links render."
+  },
+  "remaining_issues": []
+}

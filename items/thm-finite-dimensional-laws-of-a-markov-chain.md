@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-finite-dimensional-laws-of-a-markov-chain.json
+  precheck: pass
 id: thm-finite-dimensional-laws-of-a-markov-chain
 kind: theorem
 title: "Finite-dimensional laws of a Markov chain"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, Section 5.1"
@@ -51,3 +48,38 @@ law of $(X_{n_0},\ldots,X_{n_r})$.
 2.1 A final application of [F2] from time $0$ to time $n_0$, followed by [F1, F2, step 1.1] integration against [F1], gives $$ \mathbb E[G_0(X_{n_0})] =\int\mu(dx)\int K^{n_0}(x,dx_0)G_0(x_0), $$ which expands to the displayed iterated integral. If $r=0$, this same line is the whole calculation; if $n_0=0$, the inner identity kernel simply evaluates $G_0(x)$. Choice is used in [F2]--[F3] and nowhere in the finite algebraic unwinding. [F1, F2, step 1.1]
 
 3.1 Put $f_j=1_{A_j}$. The left side is the joint law's value on the rectangle [F4, step 1.1, step 2.1] $A_0\times\cdots\times A_r$, and the right side is the announced cylinder integral. These rectangles include empty factors and the full rectangle, form a pi-system, and generate the finite product sigma-algebra. By [F4] their values determine the joint law uniquely. Conversely, the stated joint law integrates every bounded product test by the same iterated-integration calculation, so the two displayed formulations are equivalent. [F4, step 1.1, step 2.1] ∎
+
+## Remarks
+
+For $r\ge2$, the following schematic records the chronological kernel
+integrations in the statement. Each state variable lies in $E$; the label
+above an observed state is its test-function factor.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (x) at (0,0) {$x$};
+\node (x0) at (2.1,0) {$x_0$};
+\node (x1) at (4.5,0) {$x_1$};
+\node (dots) at (6.6,0) {$\cdots$};
+\node (xr) at (8.8,0) {$x_r$};
+\node at (0,-0.65) {$x\sim\mu$};
+\node at (2.1,-0.65) {$n_0$};
+\node at (4.5,-0.65) {$n_1$};
+\node at (8.8,-0.65) {$n_r$};
+\node at (2.1,0.65) {$f_0(x_0)$};
+\node at (4.5,0.65) {$f_1(x_1)$};
+\node at (8.8,0.65) {$f_r(x_r)$};
+\draw[->] (x) -- node[above] {$K^{n_0}$} (x0);
+\draw[->] (x0) -- node[above] {$K^{n_1-n_0}$} (x1);
+\draw[->] (x1) -- (dots);
+\draw[->] (dots) -- node[above] {$K^{n_r-n_{r-1}}$} (xr);
+\end{tikzpicture}
+```
+
+An arrow labeled $K^m$ means integration of the next state against
+$K^m$ at the preceding state; it is not a deterministic map or an assertion
+of independence. The dots suppress the intermediate observed states and
+their test factors. For $n_0=0$, $K^0(x,dx_0)=\delta_x(dx_0)$ identifies
+$x_0=x$ inside the integral. For $r=0$ or $r=1$, retain only the corresponding
+initial segment. The backward recursion in proof step 1.1 establishes the
+formula independently of this illustration.

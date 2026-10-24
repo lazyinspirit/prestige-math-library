@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-khovanov-seidel-bigraded-cover-and-bigraded-curves.json
+  precheck: n/a
 id: def-khovanov-seidel-bigraded-cover-and-bigraded-curves
 kind: definition
-title: "The Z^2 cover of the projectivized tangent bundle and bigraded curves"
+title: "The $Z^2$ cover of the projectivized tangent bundle and bigraded curves"
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
@@ -27,8 +30,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 3d"
       url: "https://arxiv.org/pdf/math/0006056"
       locator: "Section 3d, printed pp. 23-24 (the Z^2-cover, the map delta_P, bigradings, the preferred lifts)"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition

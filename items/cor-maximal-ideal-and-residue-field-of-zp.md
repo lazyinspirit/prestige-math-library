@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-maximal-ideal-and-residue-field-of-zp.json
+  precheck: pass
 id: cor-maximal-ideal-and-residue-field-of-zp
 kind: corollary
-title: "The maximal ideal and residue field of Z_p"
+title: 'The maximal ideal and residue field of $\mathbb{Z}_p$'
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -31,7 +31,7 @@ $\mathbb Z_p/p\mathbb Z_p$ is canonically isomorphic to $\mathbb F_p$.
 
 **Given:** $\mathbb Z_p$ viewed inside $\mathbb Q_p$.
 
-[L1] $\mathbb Z_p$ is the subring of $\mathbb Q_p$ cut out by $|x|_p \le 1$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_p$ is the subring of $\mathbb Q_p$ cut out by $|x|_p \le 1$ ([[cor-zp-is-the-valuation-ring-of-qp|$\mathbb Z_p$ is the valuation ring of $\mathbb Q_p$]]).
 
 [L2] $\mathbb Z_p$ is also the compatible-residue inverse limit ([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]]).
 

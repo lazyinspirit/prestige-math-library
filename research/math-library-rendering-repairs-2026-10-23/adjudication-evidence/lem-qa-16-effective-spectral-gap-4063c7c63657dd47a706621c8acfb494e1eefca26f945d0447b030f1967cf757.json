@@ -1,0 +1,84 @@
+{
+  "id": "lem-qa-16-effective-spectral-gap",
+  "agent": "/root/rendering_repair_coordinator/qa_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile visibly renders R_\u03a0, E_\u03c9 and e^{i\u03c6} with literal underscores/braces while the following norm bound renders correctly. The full source has no inline math delimiters around those formulas.",
+      "action": "Wrapped Statement mathematics in inline delimiters, retaining the reflection signs and order, inclusive phase cutoff, vector condition and bound.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same independently viewed original tile exposes raw R_P/R_D subscripts and phase/norm expressions in F1 and all three proof steps; Given also lacks math formatting. Full carrier and named suppliers confirm the reflection convention.",
+      "action": "Formatted Given/F1 and all proof formulas, converting Greek letters, inequalities and norm/squared-norm syntax to equivalent LaTeX; retained the original P/D symbols rather than inferring a renaming.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added missing inline mathematical markup throughout Statement, Given, F1 and proof. No title, metadata, links, claims, coefficients, proof steps or justification tags changed.",
+  "source_lines_after": [
+    37,
+    42,
+    46,
+    54,
+    56,
+    58
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Pre-existing proof uses P and D where the Statement uses \u03a0 and \u0394 without explicitly identifying them. Preserved exactly; resolving this notation is beyond delimiter repair scope."
+  ],
+  "before_raw_sha256": "42600787b337625641ade465bcee0c7561d932d4feb659b90a48a50e05d19eb0",
+  "after_raw_sha256": "55881f60f09dbd62f154da9049d90ebbabdcf8fdb4378386c8c6b37f31c51898",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-qa-16-effective-spectral-gap.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-16-effective-spectral-gap.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-qa-16-effective-spectral-gap.md",
+            "item_id": "lem-qa-16-effective-spectral-gap",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-qa-16-effective-spectral-gap.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_checks": {
+    "original_standalone_original_resolution": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/lem-qa-16-effective-spectral-gap--01.png",
+    "fresh_native_component_preview": "research/math-library-rendering-repairs-2026-10-23/qa_013-fresh-preview",
+    "fresh_standalone_original_resolution": "screenshots/lem-qa-16-effective-spectral-gap--01.png",
+    "result": "Independently viewed full fresh tile at original resolution: Statement, Given, F1 and all proof formulas render; no visible clipping/overlap or raw TeX. Capture has 36 KaTeX elements, no KaTeX errors, no diagrams or diagram failures.",
+    "limitations": "Local native ItemBody/MathMarkdown preview; no HTTP route inspected. Preview reference map reports 16 unrelated parse diagnostics."
+  }
+}

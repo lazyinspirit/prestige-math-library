@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-nonabelian-extension-obstruction-in-h-three.json
+  precheck: n/a
 id: rem-nonabelian-extension-obstruction-in-h-three
 kind: remark
-title: "Nonabelian extension obstruction in H^3"
+title: "Nonabelian extension obstruction in $H^3$"
 status: published
 origin: session
 provenance:
@@ -17,15 +20,7 @@ sources:
       url: "https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf"
     - title: "Caroline Lassueur, Cohomology of Groups, SS 2021"
       url: "https://classueur.github.io/maths/teaching/skripte/COHOM_SS21.pdf"
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-05-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Remark

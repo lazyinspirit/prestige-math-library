@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-continuous-functional-calculus-for-bounded-self-adjoint-operators.json
+  precheck: pass
 id: thm-continuous-functional-calculus-for-bounded-self-adjoint-operators
 kind: theorem
 title: Continuous functional calculus for bounded self adjoint operators
@@ -16,8 +19,7 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Example 4.9, pp.13–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -36,7 +38,7 @@ Assume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert 
 
 [A5] A uniform limit of continuous complex functions is continuous, and $\mathbb C$ is complete ([[thm-uniform-limit-continuous-complex-functions]], [[thm-complex-plane-is-complete]]).
 
-[A6] $\mathcal B(H)$ is a complex Banach space with submultiplicative norm for composition, so operator-norm Cauchy sequences converge and multiplication is continuous ([[thm-bounded-operator-space-is-banach]], [[lem-bounded-hilbert-operators-form-a-c-star-algebra]]).
+[A6] $\mathcal B(H)$ is a complex Banach space with submultiplicative norm for composition, so operator-norm Cauchy sequences converge and multiplication is continuous ([[thm-bounded-operator-space-is-banach|If $Y$ is Banach then $\mathcal B(X,Y)$ is Banach]], [[lem-bounded-hilbert-operators-form-a-c-star-algebra]]).
 
 [A7] $C^*(I,T)$ is the norm closure of the unital $\ast$-algebra $P(T)$ of $\ast$-polynomials in $T$; a unital star-homomorphism between complex C\*-algebras is a bounded complex-linear map preserving products and adjoints ([[def-c-star-algebra-generated-by-a-normal-operator]], [[def-c-star-algebra]]).
 

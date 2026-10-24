@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-pure-braids-are-pure-punctured-disk-mapping-classes.json
+  precheck: pass
 id: cor-pure-braids-are-pure-punctured-disk-mapping-classes
 kind: corollary
 title: "Pure braids as pure mapping classes"
@@ -27,9 +30,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.0321"
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.3, author manuscript pp. 5-7"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -130,3 +131,34 @@ $G_n^{\mathrm{pure}}=\ker\pi_{\mathrm{geo}}$
   and is not used again here: the endpoint permutation of a braid and the
   permutation induced by a homeomorphism of the pair are read off the given
   data without any selection.
+
+
+The diagram displays the common permutation map and its kernels. Here
+$\pi_Q([f])=\pi(f)$ is the permutation defined by
+$f(q_j)=q_{\pi(f)(j)}$, and
+$\Psi_{\mathrm{pure}}=\Psi|_{G_n^{\mathrm{pure}}}$. The vertical arrows in the
+upper square are subgroup inclusions.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (P) at (0,4) {$G_n^{\mathrm{pure}}=\ker\pi_{\mathrm{geo}}$};
+\node (Q) at (12,4) {$\mathrm{PMod}(D^2,Q_n;\partial D^2)=\ker\pi_Q$};
+\node (G) at (0,2) {$G_n$};
+\node (M) at (12,2) {$\mathrm{Mod}(D^2,Q_n;\partial D^2)$};
+\node (S) at (0,0) {$S_n$};
+\node (T) at (12,0) {$S_n$};
+\draw[->] (P) -- node[above] {$\Psi_{\mathrm{pure}}$} node[below] {$\cong$} (Q);
+\draw[->] (P) -- node[left] {$\mathrm{incl.}$} (G);
+\draw[->] (Q) -- node[right] {$\mathrm{incl.}$} (M);
+\draw[->] (G) -- node[above] {$\Psi$} node[below] {$\cong$} (M);
+\draw[->] (G) -- node[left] {$\pi_{\mathrm{geo}}$} (S);
+\draw[->] (M) -- node[right] {$\pi_Q$} (T);
+\draw[->] (S) -- node[below] {$\mathrm{id}_{S_n}$} (T);
+\end{tikzpicture}
+```
+
+All mapping classes here fix the boundary pointwise. The middle-right group
+preserves the marked set setwise; its pure subgroup fixes every marked point.
+The lower square is the equality $\pi_Q\circ\Psi=\pi_{\mathrm{geo}}$ from
+step 1.1, and the upper square records restriction of $\Psi$ to the kernels,
+as proved in steps 2.1–3.1. The proof above is independent of this illustration.

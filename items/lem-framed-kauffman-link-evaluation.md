@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-framed-kauffman-link-evaluation.json
+  precheck: pass
 id: lem-framed-kauffman-link-evaluation
 kind: lemma
 title: Scalar evaluation of framed Kauffman link diagrams
@@ -64,3 +67,43 @@ Put $A=\mathbb Z[a^{\pm1},s,d^{\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an inte
 11.1 Under the substitution, the original extra-circle factor becomes $h=((ia)+(ia)^{-1})/(-is)-1=-(a-a^{-1})/s-1$. The extra factor $(-1)$ from component number changes this to $1+(a-a^{-1})/s$. Let $d$ denote this element and put $P(D)=dD^\flat(D)$ for nonempty $D$, and $P(\varnothing)=1$. It has the desired curl, skein and loop rules, including the first circle. We justify every factorization fact needed for the coefficient injection. A polynomial ring $B[x]$ over a UFD $B$ is a UFD: factor the content using factorization in $B$, factor its primitive part over $\operatorname{Frac}(B)[x]$ by [F5], and clear denominators and contents of the factors. Their product is primitive by [F4], so comparison of contents makes the remaining scalar a unit of $B$. Irreducibility of the primitive factors is [F4]; comparing contents and the fraction-field factorizations proves uniqueness. Starting from $\mathbb Z$ by [F3] and iterating proves $\mathbb Z[a,d,s]$ is a UFD. Inverting $a$ and $d$ preserves this property: factor each numerator, discard factors associated to $a$ or $d$ since they become units, and compare two such factorizations by clearing powers of $a,d$ and using uniqueness in the polynomial ring. A remaining prime stays prime because divisibility after clearing those powers is ordinary divisibility by a prime different from $a,d$. Thus $B=\mathbb Z[a^{\pm1},d^{\pm1}]$ and $B[s]$ are UFDs. The element $d-1$ is prime in $B$, since substituting $d=1$ has kernel $(d-1)$ and domain quotient $\mathbb Z[a^{\pm1}]$. It does not divide $a-a^{-1}$, whose value at $d=1$ is nonzero. Hence $f=s(d-1)-(a-a^{-1})$ is primitive over $B$, and it is irreducible over $\operatorname{Frac}(B)$ because it is linear. By [F4] it is irreducible and therefore prime in $B[s]$. Its quotient $A$ is a domain. Its localization at the nonzero element $s$ is injective: $s^ku=0$ in a domain implies $u=0$. Eliminating $d$ there gives a subring of $\mathbb Q(i)(a,s)$ with $d=1+(a-a^{-1})/s$, and thus the claimed injection. No choice principle is needed in these finite factorizations. [F3, F4, F5, step 9.1, step 10.1, algebra]
 
 12.1 In fact every value $P(D)$ belongs to $A$. Induct on crossing number, and at fixed crossing number on the incorrect crossings of a chosen traversal: the difference-skein rule changes an incorrect crossing to a correct one plus two diagrams with fewer crossings, with coefficients $\pm s$. A fully descending diagram is a disjoint union of unknots with framing curls, so its value is a product of powers of $a^{\pm1}$ and $d$. The induction therefore uses only coefficients in $A$. The same reduction proves uniqueness of a function satisfying the stated rules. Extend $P$ linearly to the free $A$-module on diagrams. Its kernel contains the defining skein, curl and loop relations and regular-isotopy differences, so it descends to their quotient; its value on the empty diagram is $1$. The descending reduction shows the empty diagram spans this quotient, and the descended function is a left inverse to the scalar map $A\to KT_0(A)$. This map is consequently injective as well as surjective, proving the freeness assertion. [step 3.1, step 6.1, step 10.1, step 11.1, discharge-induction] ∎
+
+
+## Remarks
+
+The four local pictures below use endpoints $1,2,3,4$ in counterclockwise order, starting at the upper left. In $L_+$, orient the overpassing strand from $1$ to $3$ and the underpassing strand from $4$ to $2$, so both run downward and the crossing is positive. Its oriented smoothing $L_0$ pairs $(1,2)$ and $(4,3)$; $L_\infty$ pairs $(1,4)$ and $(2,3)$. The gaps indicate underpasses. All four pictures are substituted into the same outside diagram, and the rule is $P(L_+)-P(L_-)=s(P(L_0)-P(L_\infty))$. The illustration only records the statement's convention; the proof above is independent of it.
+
+```tikz
+\begin{tikzpicture}[scale=0.9, line width=1.2pt]
+\begin{scope}
+\node at (0,1.25) {$L_+$};
+\node at (-0.9,0.8) {$1$}; \node at (-0.9,-0.8) {$2$};
+\node at (0.9,-0.8) {$3$}; \node at (0.9,0.8) {$4$};
+\draw (-0.65,-0.65) -- (-0.13,-0.13);
+\draw (0.13,0.13) -- (0.65,0.65);
+\draw (-0.65,0.65) -- (0.65,-0.65);
+\end{scope}
+\begin{scope}[xshift=3cm]
+\node at (0,1.25) {$L_-$};
+\node at (-0.9,0.8) {$1$}; \node at (-0.9,-0.8) {$2$};
+\node at (0.9,-0.8) {$3$}; \node at (0.9,0.8) {$4$};
+\draw (-0.65,0.65) -- (-0.13,0.13);
+\draw (0.13,-0.13) -- (0.65,-0.65);
+\draw (-0.65,-0.65) -- (0.65,0.65);
+\end{scope}
+\begin{scope}[xshift=6cm]
+\node at (0,1.25) {$L_0$};
+\node at (-0.9,0.8) {$1$}; \node at (-0.9,-0.8) {$2$};
+\node at (0.9,-0.8) {$3$}; \node at (0.9,0.8) {$4$};
+\draw (-0.65,0.65) .. controls (-0.3,0.2) and (-0.3,-0.2) .. (-0.65,-0.65);
+\draw (0.65,0.65) .. controls (0.3,0.2) and (0.3,-0.2) .. (0.65,-0.65);
+\end{scope}
+\begin{scope}[xshift=9cm]
+\node at (0,1.25) {$L_\infty$};
+\node at (-0.9,0.8) {$1$}; \node at (-0.9,-0.8) {$2$};
+\node at (0.9,-0.8) {$3$}; \node at (0.9,0.8) {$4$};
+\draw (-0.65,0.65) .. controls (-0.2,0.3) and (0.2,0.3) .. (0.65,0.65);
+\draw (-0.65,-0.65) .. controls (-0.2,-0.3) and (0.2,-0.3) .. (0.65,-0.65);
+\end{scope}
+\end{tikzpicture}
+```

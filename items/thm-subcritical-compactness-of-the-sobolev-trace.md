@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-subcritical-compactness-of-the-sobolev-trace.json
+  precheck: pass
 id: thm-subcritical-compactness-of-the-sobolev-trace
 kind: theorem
 title: "Subcritical compactness of the Sobolev trace"
@@ -47,11 +50,11 @@ $p=n$ is not claimed.
 
 [F3] *Trace and chart cutoffs.* The trace commutes with multiplication by smooth ambient cutoffs and with the chart parametrisations; on a compact boundary patch the surface-measure density of the parametrisation is continuous and positive, so $L^q$ convergence of the finitely many chart representations gives $L^q(\partial\Omega)$ convergence of their sum. ([[lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts]], [[def-surface-integral-on-a-compact-c-one-hypersurface]], [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]])
 
-[F4] *The Morrey branch.* For $n<p<\infty$, the extension theorem at $k=1$ makes the bounded $C^1$ domain $\Omega$ a $W^{1,p}$-extension domain; hence a bounded sequence in $W^{1,p}(\Omega)$ has a subsequence whose representatives converge in $C^{0,\beta}(\overline\Omega)$ for every $0\le\beta<1-\frac np$, and the trace of such a class is its classical boundary restriction. ([[thm-extension-theorem-for-bounded-smooth-domains]], [[thm-morrey-rellich-compactness-for-p-greater-than-n]], [[lem-sobolev-trace-agrees-with-continuous-boundary-values]])
+[F4] *The Morrey branch.* For $n<p<\infty$, the extension theorem at $k=1$ makes the bounded $C^1$ domain $\Omega$ a $W^{1,p}$-extension domain; hence a bounded sequence in $W^{1,p}(\Omega)$ has a subsequence whose representatives converge in $C^{0,\beta}(\overline\Omega)$ for every $0\le\beta<1-\frac np$, and the trace of such a class is its classical boundary restriction. ([[thm-extension-theorem-for-bounded-smooth-domains|Bounded $C^k$ domains admit integer-order Sobolev extension]], [[thm-morrey-rellich-compactness-for-p-greater-than-n]], [[lem-sobolev-trace-agrees-with-continuous-boundary-values]])
 
 ## Proof
 
-**Proof technique:** bound the traces in the boundary fractional space, apply fractional compactness chart by chart, and take the Morrey branch for $p>n$.
+**Proof technique:** bound the traces in the boundary fractional space, apply fractional compactness chart by chart, and take the Morrey branch when p is greater than n.
 
 1.1 Assume $1<p<n$. By [F1] the traces satisfy $\sup_j\|Tu_j\|_{W^{\theta,p}(\partial\Omega)}\le C\sup_j\|u_j\|_{W^{1,p}(\Omega)}<\infty$ with $\theta=1-\frac1p$; by the definition of the boundary norm this means that each of the finitely many compactly supported chart representations of the traces is bounded in $W^{\theta,p}(\mathbb R^{n-1})$. [F1, given]
 

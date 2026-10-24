@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p.json
+  precheck: pass
 id: lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p
 kind: lemma
 title: "For $1 \\le p < \\infty$, every $L^p(\\mu)$ class has a sigma-finite essential support"
@@ -9,14 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-l-p-space-as-a-quotient-by-null-functions, thm-chebyshev-markov-inequality-for-the-integral, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: "Take a representative $u$ and use the level sets $\\{|u|\\ge1/n\\}$. Chebyshev-Markov makes each level set finite-measure, and their union contains every point where $u\\ne0$."
-verification:
-  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p-published-repair.json
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 6.15"
@@ -43,7 +38,7 @@ $S \subseteq X$ such that $f=0$ almost everywhere on $X \setminus S$.
 
 ## Proof
 
-**Proof technique:** Take a representative $u$ and use the level sets $\{|u|\ge1/n\}$. Chebyshev-Markov makes each level set finite-measure, and their union contains every point where $u\ne0$.
+**Proof technique:** Take a representative u and use the level sets {|u| ≥ 1/n}. Chebyshev-Markov makes each level set finite-measure, and their union contains every point where u ≠ 0.
 
 1.1 Choose a measurable representative $u$ of $[f]$ and, for each $n \ge 1$, [L1, L2, given, choose, construct] set $$E_n:=\{|u|\ge1/n\}=\{|u|^p\ge n^{-p}\}.$$ Since $u \in \mathcal L^p(\mu)$, [L2] gives $$\mu(E_n)\le n^p\int |u|^p\,d\mu<\infty.$$ So every $E_n$ has finite measure. [L1, L2, given, choose, construct]
 

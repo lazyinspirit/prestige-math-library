@@ -1,0 +1,123 @@
+{
+  "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+  "group": "dnde_042",
+  "agent": "/root/rendering_repair_coordinator/dnde_042",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The event-aligned argument has two different reference states at the reported event time: the incoming continuation used for D_j and the true outgoing state used for E_(j+1). A concrete two-track jump schematic materially clarifies this distinction and the excluded same-clock interval; the complete proof alone does not supply that visual clarification.",
+      "action": "Added one schematic TikZ figure and explanatory text in a final Remarks section.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a final Remarks illustration of exact and reported mode tracks, separate reset jumps, the lag bracket, the incoming continuation comparison D_j, and aligned outgoing error E_(j+1).",
+  "source_lines_after": {
+    "remarks": [
+      74,
+      108
+    ],
+    "tikz": [
+      78,
+      106
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "The blue solid track is the reference hybrid solution; orange is the reported reconstruction before reset and reported outgoing track after reset; dashed blue is y^- extended in the incoming mode. Heights/slopes are explicitly schematic.",
+      "justification": "Statement paragraphs 1\u20132, Facts F1/F3, and proof 3.1 distinguish exactly these paths; the continuation is not drawn as the actual hybrid path after tau."
+    },
+    {
+      "relation": "The exact jump occurs at tau=tau_(j+1), the reported jump at hat(tau)=hat(tau_(j+1)), with 0 <= hat(tau)-tau <= Delta_(j+1).",
+      "justification": "Proof 2.1 establishes nonnegative lag from the upper root-box endpoint and its displayed upper bound. Positive lag is a schematic case; Remarks explicitly says equality collapses the bracket."
+    },
+    {
+      "relation": "Both reset arrows are vertical (time fixed); the exact reset sends incoming y^-(tau) to R(tau,y^-(tau)) in the outgoing mode. The reported reset uses the reported pre-reset state and may include certified evaluation error.",
+      "justification": "Local supplier def-hybrid-mode-guard-reset-system defines R_mn:U_mn -> R^d with (t,R_mn(t,x)) in D_n. Local proof 3.1 compares R(hat(tau),U_j(hat(tau))) with R(tau,y^-(tau)), then adds epsilon_R."
+    },
+    {
+      "relation": "E_j is the aligned-start discrepancy, D_j compares U_j with the incoming reference continuation, and E_(j+1) compares the post-reset reported state with the exact outgoing state at hat(tau).",
+      "justification": "Statement defines E_j and D_j; proof 1.1 propagates the total incoming error and proof 3.1 combines reset Lipschitz bounds, M^- lag, M^+ outgoing displacement, and epsilon_R to obtain E_(j+1). The D_j marker is placed between orange pre-reset and dashed blue incoming continuation, never the outgoing blue state."
+    },
+    {
+      "relation": "The exact outgoing segment has no further event before the aligned reported reset; no bound is asserted between the two actual hybrid states during (tau,hat(tau)).",
+      "justification": "Proof 3.1 uses Delta_(j+1)<delta/3 and separation; the last Statement sentence explicitly excludes same-clock state claims in the lag interval. Remarks repeats this limitation. The rigorous proof is unchanged and independent of the figure."
+    }
+  ],
+  "before_guard": {
+    "expected_raw_sha256": "117eccbdbe0710f2b1cd63cade141502249a7938ceb0c3bfd036177f44d59d68",
+    "actual_raw_sha256": "117eccbdbe0710f2b1cd63cade141502249a7938ceb0c3bfd036177f44d59d68",
+    "checked_immediately_before_edit": true
+  },
+  "preservation": {
+    "all_frontmatter_byte_identical": true,
+    "status_byte_identical": "status: published",
+    "original_complete_file_is_prefix_of_current": true,
+    "original_statement_facts_proof_unchanged": true
+  },
+  "evidence": {
+    "original_declared_path_missing": true,
+    "resolved_original_screenshot": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/thm-finite-hybrid-trajectory-error-under-separated-events--01.png",
+    "original_screenshot_sha256": "7cdb486c88d561b6df69c2be815686f53406cd8ce0562ac67461de13407730cd",
+    "original_sha_matches_record": true,
+    "original_view": "Standalone original resolution inspected. Frozen before and current source were byte-identical before edit.",
+    "preview_dir": "research/math-library-rendering-repairs-2026-10-23/previews/dnde_042",
+    "manifest_sha256": "7b4a657b5dabc5d20044018c29a960894edd726424ef95cf75408c4d1b2c4481",
+    "source_sha256": "9556ae98bface770ab8d92aa9e453af7ae264f8fe12ec1e9c6003fb950a1a1b0",
+    "compiled_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dnde_042/pi-tikz-cache/6d3832ed27e138c35db3548ac730ea4c.svg",
+    "compiled_svg_sha256": "cba45060ca3b44f5d16275c1a54a93a5d6edf4740c3275ab1deef158106d5a8e",
+    "native_visual_inspection": "All three fresh standalone tiles viewed at original resolution. Figure is wholly visible in tile 02; blue/orange tracks, white comparison arrows, dotted time lines and labels are legible on the actual black background. No overlaps or clipping. The dashed incoming continuation and two vertical reset arrows are visible. No open/closed endpoint circles or graph-cycle closures are asserted or used."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-finite-hybrid-trajectory-error-under-separated-events.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-finite-hybrid-trajectory-error-under-separated-events.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-finite-hybrid-trajectory-error-under-separated-events.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnde_042 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-finite-hybrid-trajectory-error-under-separated-events --out research/math-library-rendering-repairs-2026-10-23/previews/dnde_042",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 3,
+        "reference_map_diagnostics": 16,
+        "tikz_count": 1,
+        "diagram_failures": [],
+        "katex_errors": []
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview covers the local ItemBody, not the production route. Sixteen unrelated current reference-map parse diagnostics were recorded by the preview; this scoped carrier rendered with no math or diagram failures."
+  ]
+}

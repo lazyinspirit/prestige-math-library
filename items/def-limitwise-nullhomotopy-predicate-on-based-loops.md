@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-limitwise-nullhomotopy-predicate-on-based-loops.json
+  precheck: n/a
 id: def-limitwise-nullhomotopy-predicate-on-based-loops
 kind: definition
 title: "Limitwise-nullhomotopy predicate on based loops"
@@ -12,8 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 dependency_level: 7
-verification:
-  precheck: n/a
 sources:
   scraped: []
   references:
@@ -33,4 +34,4 @@ homotopic in its leaf. At this stage $Q_j$ is a predicate on a specified loop an
 no representative-independence is part of this definition.
 
 
-For clarity, a displacement is obtained by starting at a chosen positive point of the base transversal and continuing the loop plaque by plaque through a finite chart subdivision. Within each chart its transverse label is held fixed; the fence specifies the nearby endpoint in that plaque. Since $[f]\in N_j$, the return map is the identity on a sufficiently short interval on side j, so these displacements are closed loops. The quantifier means: there exists ε₀>0 such that every displacement with 0<ε<ε₀ is nullhomotopic in its own leaf. No uniform bound on the filling disks is part of the definition.
+For clarity, a displacement is obtained by starting at a chosen positive point of the base transversal and continuing the loop plaque by plaque through a finite chart subdivision. Within each chart its transverse label is held fixed; the fence specifies the nearby endpoint in that plaque. Since $[f]\in N_j$, the return map is the identity on a sufficiently short interval on side j, so these displacements are closed loops. The quantifier means: there exists $\epsilon_0>0$ such that every displacement with $0<\epsilon<\epsilon_0$ is nullhomotopic in its own leaf. No uniform bound on the filling disks is part of the definition.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame.json
+  precheck: pass
 id: ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame
 kind: example
 title: A two-dimensional three-vector full-spark real frame
@@ -26,13 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0412411"
     - title: "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), Corollary 3.3"
       url: "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -68,3 +65,19 @@ In $\mathbb R^2$ take $\Phi=(a_1,a_2,a_3)$ with $a_1=(1,0)$, $a_2=(0,1)$, and $a
 
 2.1 Here $d=2$ and $m=3=2d-1$. Applying [F3] to step 1.1 proves phase retrieval on the stated global-sign quotient; the intensity coordinates are exactly the three squared inner products displayed in the example. [step 1.1, F3, algebra] ∎
 
+
+## Remarks
+
+The three arrows show the measurement vectors at their exact coordinates. No two lie on the same line through the origin, as verified algebraically in step 1.1. For a signal $x=(x_0,x_1)$, their inner products are $x_0$, $x_1$, and $x_0+x_1$; squaring gives the displayed intensity triple. Replacing $x$ by $-x$ reverses all three inner products and leaves their squares unchanged. The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=2]
+\draw[->,gray] (-0.2,0) -- (1.65,0) node[right] {$x_0$};
+\draw[->,gray] (0,-0.2) -- (0,1.5) node[above] {$x_1$};
+\draw[dashed,gray] (1,0) -- (1,1) -- (0,1);
+\draw[->,thick,blue] (0,0) -- (1,0) node[below] {$a_1=(1,0)$};
+\draw[->,thick,red] (0,0) -- (0,1) node[left] {$a_2=(0,1)$};
+\draw[->,thick] (0,0) -- (1,1) node[above right] {$a_3=(1,1)$};
+\node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+```

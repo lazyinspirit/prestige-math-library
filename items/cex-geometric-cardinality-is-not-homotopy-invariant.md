@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-geometric-cardinality-is-not-homotopy-invariant.json
+  precheck: pass
 id: cex-geometric-cardinality-is-not-homotopy-invariant
 kind: counterexample
 title: "Geometric cardinality is not homotopy invariant"
@@ -10,19 +13,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: literature-derived
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-12.md"
-      - "research/frontier-38-owner-30-alpha-batch-12-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-12-post-5a.json"
-    content_sha256: "9c82f8bc0670f3109e1d50c4d6289d7b105b87b6f35f43a2a8e11effeec12540"
-  precheck: pass
 sources:
   references:
     - title: "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)"
@@ -57,3 +47,34 @@ The raw number of intersection points of transverse endpoint maps is a homotopy 
 2.1 At a solution the ordered pair $(df_\theta(1),(1,0))=((-\sin\theta,\cos\theta),(1,0))$ has determinant $-\cos\theta$ in the standard basis, so the local sign is $\varepsilon=-\operatorname{sgn}(\cos\theta)$ by [F2]. Hence at the two solutions of 1.1 the signs are $+1$ and $-1$, and both the signed count $I(f_s,A)$ and the parity count $I_2(f_s,A)$ are $0$ for every transverse slice; for $s>1$ the fibre is empty and both counts are again $0$. [F2, F3, step 1.1, algebra]
 
 3.1 The family $f_s$ is a smooth homotopy between $f_0$ and $f_2$, yet the raw cardinalities of the intersections are $2$ and $0$; hence geometric cardinality is not a homotopy invariant. The signed and parity counts, by contrast, are constant with value $0$ across the family and are compatible with the invariance asserted under the hypotheses of [F5]; the cardinality changes exactly at the tangency $s=1$, where the slice is not transverse. The full evaluation map remains transverse since its derivative in $s$ is $(0,1)$, which together with $T A$ spans $\mathbb R^2$. [F4, F5, step 1.1, step 2.1] ∎
+
+
+## Remarks
+
+The three slices below show the image circles $f_s(S^1)$ and the oriented axis $A$ for $s=0,1,2$. The circle arrows follow increasing $u$; the axis arrows point in the positive $x$ direction. At $s=0$ the two local signs are $+1$ on the left and $-1$ on the right, as in step 2.1. The middle slice has one tangency, where no transverse local sign is assigned. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=0.8cm,y=0.8cm,>=stealth]
+\node at (0,3.6) {$s=0$};
+\node at (4,3.6) {$s=1$};
+\node at (8,3.6) {$s=2$};
+\draw[->] (-1.5,0) -- (1.5,0) node[right] {$A$};
+\draw (0,0) circle (1);
+\draw[->] (0.707,0.707) arc (45:100:1);
+\fill (-1,0) circle (0.055);
+\fill (1,0) circle (0.055);
+\node[below left] at (-1,0) {$+1$};
+\node[below right] at (1,0) {$-1$};
+\draw[->] (2.5,0) -- (5.5,0) node[right] {$A$};
+\draw (4,1) circle (1);
+\draw[->] (4.707,1.707) arc (45:100:1);
+\fill (4,0) circle (0.055);
+\node[below] at (4,-0.15) {tangency};
+\draw[->] (6.5,0) -- (9.5,0) node[right] {$A$};
+\draw (8,2) circle (1);
+\draw[->] (8.707,2.707) arc (45:100:1);
+\node at (0,-1.7) {two crossings};
+\node at (4,-1.7) {one contact};
+\node at (8,-1.7) {no intersections};
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-stars-and-bars.json
+  precheck: pass
 id: thm-stars-and-bars
 kind: theorem
 title: "For $m \\ge 1$ the number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$, and the number of compositions is $\\binom{n-1}{m-1}$ for $n \\ge 1$"
@@ -18,13 +21,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -109,7 +105,26 @@ $\mathcal{C}(0,1) = \varnothing$.
 
 - **The picture behind $S$.** Lay out $n$ stars and $M$ bars in a row of $n+M$ places; the bars split the stars into $\sigma(M) = m$ runs, whose lengths are the parts. The set $S(k)$ is the set of positions of the bars, and step 4.1 is that picture made precise. Surjectivity is obtained from the count rather than by constructing the inverse directly, which spares an appeal to the increasing enumeration of an arbitrary subset.
 
-```tikz \begin{tikzpicture}[x=0.85cm,y=1cm] \node at (2.55,1.25) {$k=(2,0,3)$}; \node at (0,0) {$\star$}; \node at (0.85,0) {$\star$}; \draw[line width=1pt] (1.7,-0.3) -- (1.7,0.3); \draw[line width=1pt] (2.55,-0.3) -- (2.55,0.3); \node at (3.4,0) {$\star$}; \node at (4.25,0) {$\star$}; \node at (5.1,0) {$\star$}; \node at (0,-0.65) {$0$}; \node at (0.85,-0.65) {$1$}; \node at (1.7,-0.65) {$2$}; \node at (2.55,-0.65) {$3$}; \node at (3.4,-0.65) {$4$}; \node at (4.25,-0.65) {$5$}; \node at (5.1,-0.65) {$6$}; \node at (2.55,-1.35) {$S(k)=\{2,3\}\subseteq 7$}; \end{tikzpicture} ```
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=1cm]
+\node at (2.55,1.25) {$k=(2,0,3)$};
+\node at (0,0) {$\star$};
+\node at (0.85,0) {$\star$};
+\draw[line width=1pt] (1.7,-0.3) -- (1.7,0.3);
+\draw[line width=1pt] (2.55,-0.3) -- (2.55,0.3);
+\node at (3.4,0) {$\star$};
+\node at (4.25,0) {$\star$};
+\node at (5.1,0) {$\star$};
+\node at (0,-0.65) {$0$};
+\node at (0.85,-0.65) {$1$};
+\node at (1.7,-0.65) {$2$};
+\node at (2.55,-0.65) {$3$};
+\node at (3.4,-0.65) {$4$};
+\node at (4.25,-0.65) {$5$};
+\node at (5.1,-0.65) {$6$};
+\node at (2.55,-1.35) {$S(k)=\{2,3\}\subseteq 7$};
+\end{tikzpicture}
+```
 
 - **Why the count is proved by induction and not by the bijection alone.** Building the inverse of $S$ by hand needs the increasing enumeration of an arbitrary $M$-element subset of $n+M$, which is more machinery than the hockey-stick induction. The induction gives the number, and the number then gives the surjectivity of $S$.
 

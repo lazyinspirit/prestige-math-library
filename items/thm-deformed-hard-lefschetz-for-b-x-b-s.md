@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-deformed-hard-lefschetz-for-b-x-b-s.json
+  precheck: pass
 id: thm-deformed-hard-lefschetz-for-b-x-b-s
 kind: theorem
-title: "Hard Lefschetz for the deformed operator on B_x B_s, in the three cases"
+title: "Hard Lefschetz for the deformed operator on $B_x B_s$, in the three cases"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -22,8 +25,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Section 2.6, Proposition 2.11 and its proof (the three-case hard Lefschetz theorem, including the injectivity of d and the kernel-of-d_3 argument)"
-verification:
-  precheck: pass
+
 ---
 
 ## Facts & Assumptions
@@ -40,7 +42,7 @@ verification:
 
 [F5] Rouquier HR: under $\mathrm S(\le x)$ and $\mathrm{HR}(z,t)$ for all $z<x$ and simple $t$ with $zt>z$, each ${}^jF_x(-j)$ embedded in $\bigoplus_{x'\in\pi(x,j)}\mathrm{BS}(x')$ satisfies HR with the induced rescaled forms and the global sign of the Rouquier theorem; in particular ${}^1F_x(-1)$ satisfies HR and ${}^1F_x(-1)=\bigoplus_{z<x}B_z^{m_{z,1}}$ componentwise ([[thm-minimal-positive-rouquier-complexes-carry-the-induced-hodge-riemann-signs]], [[thm-minimal-positive-rouquier-complexes-are-linear-under-the-lower-soergel-induction]]).
 
-[F6] Tensoring lemma: if $B=\bigoplus_zB_z^{R,m_z}$ is self-dual with $m_z\ne0\Rightarrow\mathrm S(z)$ and $\mathrm{HR}(z,s)_\zeta$, and $B$ carries an invariant non-degenerate form making it even or odd and satisfying HR with the standard sign for $\rho$, then $BB_s$ satisfies HR with the standard sign for $L_\zeta$ and the induced form ([[lem-tensoring-with-b-s-preserves-hodge-riemann-signs]]).
+[F6] Tensoring lemma: if $B=\bigoplus_zB_z^{R,m_z}$ is self-dual with $m_z\ne0\Rightarrow\mathrm S(z)$ and $\mathrm{HR}(z,s)_\zeta$, and $B$ carries an invariant non-degenerate form making it even or odd and satisfying HR with the standard sign for $\rho$, then $BB_s$ satisfies HR with the standard sign for $L_\zeta$ and the induced form ([[lem-tensoring-with-b-s-preserves-hodge-riemann-signs|Tensoring a direct sum of Hodge-Riemann bimodules with $B_s$ preserves the signs]]).
 
 [F7] Linearity and perverse bounds: under $\mathrm S(\le x)$ one has ${}^1F_x=\bigoplus_{z<x}B_z(1)^{m_{z,1}}$ with $m_{z,1}\ge0$ and $m_{z,1}=0$ unless $1\equiv\ell(x)-\ell(z)\pmod2$. The linearity proof also establishes $B_zF_s\simeq B_z(-1)$ for $zs<z$ under $S(z)$. The tensor bound $F_xF_s\in pK^b_{\ge0}$ is derived in step 4.2 below, rather than assumed from the bound for $F_x$. The proof below derives the needed forward split injection and Gaussian cancellation from these bounds, keeping the degree-zero term $B_xB_s$ ([[thm-minimal-positive-rouquier-complexes-are-linear-under-the-lower-soergel-induction]], [[lem-radical-minimal-complexes-and-perverse-filtrations-in-the-soergel-category]], [[def-minimal-complexes-and-perverse-truncations-in-the-type-a-soergel-category]]).
 
@@ -61,7 +63,7 @@ The hard Lefschetz theorem for $L_\zeta$ on $M=B_x^RB_s^R$ holds in the followin
 In the remaining case $\zeta=0$ and $xs<x$, centered hard Lefschetz fails without any character or hard-Lefschetz hypothesis on $B_x$: its nonzero bottom class in degree $-\ell(x)-1$ is killed by $L_0^{\ell(x)+1}$, although the opposite degree $\ell(x)+1$ is nonzero.
 
 ## Proof
-**Proof technique:** direct; case (1) is the explicit descent matrix, case (2) uses the factorization identity and the weak-Lefschetz substitute, and case (3) separates the kernel of the reduced third component. Bimodule differentials are unreduced; their actions on reduced vectors below always mean the induced maps $\overline d_i$. All hL/HR spaces are finite right reductions.
+**Proof technique:** direct; case (1) is the explicit descent matrix, case (2) uses the factorization identity and the weak-Lefschetz substitute, and case (3) separates the kernel of the reduced third component. Bimodule differentials are unreduced; their actions on reduced vectors below always mean the induced reduced differentials. All hL/HR spaces are finite right reductions.
 
 1.1 **Case (1), positive parameter.** Assume $xs<x$, $\mathrm S(x)$ and $\mathrm{hL}(x)$. By [F1] the reduced operator is the matrix with diagonal blocks $\rho\cdot(-)$ on $B_x(1)$ and $B_x(-1)$ and lower off-diagonal block $\zeta\rho(\alpha_s^\vee)$, a scalar multiple of the identity; since $\rho\cdot(-)$ satisfies hL on $B_x$, the $\rho$-action completes to an $\mathfrak{sl}_2(\mathbb R)$-action and, after rescaling by $\zeta\ne0$, the matrix describes the action of the raising operator on the tensor product of $B_x$ with the two-dimensional standard representation; hence its powers are isomorphisms in the centered degrees and $\mathrm{hL}(x,s)_\zeta$ holds, which is case (1). [given, F1]
 

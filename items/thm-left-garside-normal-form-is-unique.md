@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-left-garside-normal-form-is-unique.json
+  precheck: pass
 id: thm-left-garside-normal-form-is-unique
 kind: theorem
 title: "Left garside normal form is unique"
@@ -31,9 +34,7 @@ sources:
       url: "https://arxiv.org/abs/1010.0321"
     - title: "J. Birman and T. Brendle, Braids: A Survey, Section 5.1"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -155,3 +156,28 @@ which the elementary well-ordering and induction principles suffice.
   [[cor-the-braid-group-word-problem-is-decidable-by-garside-normal-form]].
 - Nothing here uses the Axiom of Choice or any weaker choice principle; the
   only maximum taken is that of a nonempty bounded-above set of integers.
+
+
+**Greedy tails.** The schematic separates the maximal half-twist power from
+one step of the positive greedy recursion. Products are read in the displayed
+left-to-right order; $\wedge_L$ is the greatest common **left** divisor.
+The arrow removes the left factor $a_i$, so its output is the unique positive
+quotient $A_i=a_i^{-1}A_{i-1}$, not a right-divisor quotient.
+
+```tikz
+\begin{tikzpicture}[>=stealth, scale=1.5, transform shape, every node/.style={font=\normalsize}]
+\node at (0,2.3) {$x=\Delta^{p(x)}\,\underbrace{a_1a_2\cdots a_r}_{A_0=A(x)}$};
+\node at (0,1.25) {$p(x)\in\mathbb Z,\qquad A_0\in B_n^+,\qquad A_0\notin\Delta B_n^+$};
+\node[draw, rounded corners, inner sep=8pt] (tail) at (-2.15,0) {$A_{i-1}=a_iA_i$};
+\node[draw, rounded corners, inner sep=8pt] (next) at (2.15,0) {$A_i\in B_n^+$};
+\draw[->] (tail) -- node[above] {remove $a_i$} (next);
+\node at (0,-0.9) {$a_i=\Delta\wedge_L A_{i-1},\qquad 1\prec_L a_i\prec_L\Delta$};
+\node at (0,-1.65) {$\ell(A_i)<\ell(A_{i-1})\quad\Longrightarrow\quad A_r=1$};
+\end{tikzpicture}
+```
+
+The step applies for $1\le i\le r$ when $A_{i-1}\ne1$. Each tail remains
+positive and is not left-divisible by $\Delta$ (steps 1.2 and 3.1); strict
+length decrease gives termination (step 4.1). If $r=0$, the factor product is
+empty, $A_0=1$ and $x=\Delta^{p(x)}$. Here $\Delta$ is the half twist fixed
+above. The uniqueness argument in step 5.1 remains independent of the figure.

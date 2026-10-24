@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-radix-two-fft.json
+  precheck: n/a
 id: alg-radix-two-fft
 kind: algorithm
 title: Radix-two discrete Fourier transform
@@ -11,8 +14,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2"
@@ -26,3 +27,28 @@ For a nonnegative integer $q$, let $M=2^q$, set $\omega=1$ when $M=1$ and $\omeg
 ## Definition references
 
 [Gu, Goel, and Ré, “Efficiently Modeling Long Sequences with Structured State Spaces,” Appendix C.2](https://arxiv.org/pdf/2111.00396)
+
+## Remarks
+
+For $q=2$, we have $M=4$ and $\omega=-i$. The even and odd length-two transforms are $E=(a_0+a_2,a_0-a_2)$ and $O=(a_1+a_3,a_1-a_3)$, since their root is $\omega^2=-1$. The two butterflies below show the recombination for $k=0$ and $k=1$. Each arrow indicates an input to the displayed output formula; crossing arrows do not join.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (e0) at (0,3.5) {$E_0$};
+\node (o0) at (0,2) {$O_0$};
+\node[anchor=west] (a0) at (4,3.5) {$\widehat a_0=E_0+O_0$};
+\node[anchor=west] (a2) at (4,2) {$\widehat a_2=E_0-O_0$};
+\draw[->] (e0) -- (a0);
+\draw[->] (e0) -- (a2);
+\draw[->] (o0) -- (a0);
+\draw[->] (o0) -- (a2);
+\node (e1) at (0,0) {$E_1$};
+\node (o1) at (0,-1.5) {$O_1$};
+\node[anchor=west] (a1) at (4,0) {$\widehat a_1=E_1+\omega O_1$};
+\node[anchor=west] (a3) at (4,-1.5) {$\widehat a_3=E_1-\omega O_1$};
+\draw[->] (e1) -- (a1);
+\draw[->] (e1) -- (a3);
+\draw[->] (o1) -- (a1);
+\draw[->] (o1) -- (a3);
+\end{tikzpicture}
+```

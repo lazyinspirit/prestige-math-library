@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-every-peripheral-boundary-preserving-free-group-automorphism-is-an-artin-automorphism.json
+  precheck: pass
 id: thm-every-peripheral-boundary-preserving-free-group-automorphism-is-an-artin-automorphism
 kind: theorem
 title: "Every peripheral-boundary-preserving automorphism is an Artin automorphism"
@@ -13,12 +16,6 @@ proof_strategy: induction
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for thm-every-peripheral-boundary-preserving-free-group-automorphism-is-an-artin-automorphism and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-15; completed reader repair plus item-specific Alpha disposition. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"f825997d70c736295942047e5e750578d1ea05739c6c129911ae51b8cc2dca77","evidence":["research/frontier-38-owner-30-reader-15.md","research/frontier-38-owner-30-reader-findings-15.json","research/frontier-38-owner-30-dispatch/reader-reader-15.result.json","research/frontier-38-owner-30-step5-hash-15-post-5a.json","research/frontier-38-owner-30-alpha-batch-15-5a-decisions.json","research/frontier-38-owner-30-dispatch/alpha-5a-batch-15.result.json"],"historical_binding":{"commit":"d90f26208","file":"items/thm-every-peripheral-boundary-preserving-free-group-automorphism-is-an-artin-automorphism.md","historical_raw_sha256":"aa279e0c8f3bc800d96e1cc36a0cdf9287e0d2a5bb56c493d3cf6fa2b4095e9b","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:39:44.080Z"}}
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Emil Artin, Theory of Braids, Annals of Mathematics 48 (1947), pp. 101-126, Theorem 16 and its proof, printed pp. 113-115"
@@ -55,7 +52,7 @@ with reduced words $Q_i$, and with $A(x_1\cdots x_n)=x_1\cdots x_n$.
 
 ## Proof
 
-**Proof technique:** strong induction on the minimal total length $\ell(A)$.
+**Proof technique:** strong induction on the minimal total length of A.
 
 1.1 *Base case: $\ell(A)=0$.* If $\ell(A)=0$, some representation has all $Q_i=1$, so $A(x_i)=x_{\pi(i)}$ for every $i$; the boundary condition gives $x_{\pi(1)}\cdots x_{\pi(n)}=x_1\cdots x_n$, and by [F5] the two reduced words are equal, so $\pi=\operatorname{id}$ and $A=\operatorname{id}=\rho(\text{empty word})$. This covers $n=0$, where $F_0$ is trivial, and $n=1$, where every peripheral-boundary-preserving automorphism is the identity. [F1, F4, F5, base]
 
@@ -71,6 +68,6 @@ with reduced words $Q_i$, and with $A(x_1\cdots x_n)=x_1\cdots x_n$.
 
 ## Remarks
 
-- This is the sufficiency half of Artin's characterization [[thm-artins-characterization-of-the-braid-subgroup-of-aut-f-n]]; the necessity half is the choice-free lemma [[lem-artin-automorphisms-permute-meridian-conjugacy-classes-and-fix-the-boundary-word]].
+- This is the sufficiency half of Artin's characterization [[thm-artins-characterization-of-the-braid-subgroup-of-aut-f-n|Artin's characterization of the braid subgroup of $\operatorname{Aut}(F_n)$]]; the necessity half is the choice-free lemma [[lem-artin-automorphisms-permute-meridian-conjugacy-classes-and-fix-the-boundary-word]].
 - The proof uses neither completeness nor faithfulness of $\rho$: the braid word is produced by the induction, not recognised by an injectivity statement. This is why the theorem is choice-free while the full characterization consumes AC through faithfulness.
 - Artin's subset variant uses the ordered sub-product and the corresponding braid generators for that subset of ends. It is not an assertion that the original adjacent generators suffice when nonconsecutive indices are retained.

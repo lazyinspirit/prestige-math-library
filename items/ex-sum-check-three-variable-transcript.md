@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-sum-check-three-variable-transcript.json
+  precheck: pass
 id: ex-sum-check-three-variable-transcript
 kind: example
-title: "A complete sum-check transcript over F_101"
+title: 'A complete sum-check transcript over $\mathbb F_{101}$'
 status: published
 origin: pipeline
 deps: [def-sum-check-instance-and-protocol, thm-sum-check-soundness]
@@ -9,12 +12,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct calculation
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Justin Thaler, Proofs, Arguments, and Zero-Knowledge (2023), \u00a74.1 Example Execution pp.36\u201337"
@@ -33,7 +30,7 @@ The successive scalar claims are $69,37,46$, and the terminal equality holds. Fo
 
 [F1] Honest messages are partial cube sums, with coefficient, endpoint-consistency and terminal checks ([[def-sum-check-instance-and-protocol]]).
 
-[F2] For any false initial claim, acceptance is at most min(1,sum_i d_i/|F|) under fresh independent challenges and trusted evaluation ([[thm-sum-check-soundness]]).
+[F2] For any false initial claim, acceptance is at most $\min(1,\sum_i d_i/|F|)$ under fresh independent challenges and trusted evaluation ([[thm-sum-check-soundness]]).
 
 ## Verification
 

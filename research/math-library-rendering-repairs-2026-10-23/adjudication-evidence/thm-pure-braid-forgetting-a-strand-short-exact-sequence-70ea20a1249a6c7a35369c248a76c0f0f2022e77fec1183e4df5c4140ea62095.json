@@ -1,0 +1,136 @@
+{
+  "id": "thm-pure-braid-forgetting-a-strand-short-exact-sequence",
+  "agent": "/root/rendering_repair_coordinator/dbg_010",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The complete existing proof establishes the maps, but the relation between the fibre inclusion, the open-disc fibration and the closed-disc group convention is spread across steps 1.2–3.1. A concrete commuting square and its exact sequence materially clarify that transport and the kernel; completeness of the proof does not remove this expository benefit.",
+      "action": "Added two fenced tikzcd diagrams and map/basepoint explanations in final Remarks.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other:proof-step-separation",
+      "verdict": "confirmed",
+      "reason": "The scoped actual renderer layout check found the original final unnumbered continuation separated from proof step 4.1. Original standalone tile 03 shows this separate paragraph.",
+      "action": "Joined continuation with a single newline and moved justification tags to the complete step end, adding the already cited step 1.3 for the AC/DC sentence; all mathematical prose preserved.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the fibre/open-to-closed configuration-space comparison and induced short exact sequence in final Remarks; repaired pre-existing split final proof step.",
+  "source_lines_after": {
+    "proof_layout": [
+      89,
+      90
+    ],
+    "remarks": [
+      93,
+      123
+    ],
+    "diagrams": [
+      102,
+      104,
+      116
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "M_{n-1}=int D² minus the first n−1 ordered base points, based at q_n. i sends x to (q_1,…,q_{n−1},x), landing in F_n(int D²), based at q. p and p^D forget the last coordinate into F_{n−1}(int D²) and F_{n−1}(D²), based at q′.",
+      "justification": "Statement and step 1.3; supplier thm-fadell-neuwirth-forgetful-fibration part 1 identifies the fibre. Distinctness of q makes i well-defined. For a based loop γ in the punctured disc, iγ keeps the first n−1 points fixed and moves the last along γ."
+    },
+    {
+      "relation": "The square commutes: p^D ∘ iota_n^F = iota_{n−1}^F ∘ p. Also p ∘ i is constant at q′.",
+      "justification": "Both paths in the square send (x_1,…,x_n) to the same first n−1 coordinates in the closed-disc configuration space (step 1.2). Substitution in i gives p(i(x))=q′. The arrows are directed open-to-closed, never reversed."
+    },
+    {
+      "relation": "The vertical inclusions induce fundamental-group isomorphisms at the same q and q′; κ=(iota_n^F)_* i_* and φ=(p^D)_*.",
+      "justification": "Local supplier lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent claim 3 and local definition def-pure-braid-group-from-ordered-configurations fix PB_m in the closed-disc convention. Steps 1.2 and 3.1 apply functoriality to these same based inclusions; no basepoint path is silently chosen."
+    },
+    {
+      "relation": "The displayed group row is short exact: κ injective, im κ=ker φ, φ surjective.",
+      "justification": "Step 1.1 uses the local punctured-disc wedge supplier and planar-configuration pi_2 supplier: π₂(base)=0 and π₀(fibre) is one point. Step 2.1 obtains injectivity, kernel/image equality and surjectivity from the fibration LES; step 3.1 transports them. F_{n−1} is the fibre fundamental group, not a configuration space. No section, splitting, action, chosen meridian paths, crossings, or orientation assertion is added. The first-then-second loop convention is preserved."
+    }
+  ],
+  "raw_guard": {
+    "before_raw_sha256": "17b49780c91561a9253d88a8fcf64c117a876454f46f64c1ba8f533752da9f50",
+    "frozen_equals_current_before_edit": true,
+    "frontmatter_byte_identical_after": true,
+    "status_byte_identical_after": true,
+    "current_raw_sha256": "7c5f1d09a883986cfa3d5d16aa5a1020b61539ccf3e576979ca91211824f17fa"
+  },
+  "original_views": {
+    "all_flagged_tiles_standalone_original_resolution": true,
+    "tiles": [
+      "01",
+      "02",
+      "03"
+    ],
+    "paths": "research/math-library-rendering-audit-2026-10-23/braid-groups/screenshots/thm-pure-braid-forgetting-a-strand-short-exact-sequence--NN.png",
+    "resolution_note": "Used the authentic repository-relative paths explicitly recorded in screenshots/screenshot_hashes; no missing evidence or replacement."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-pure-braid-forgetting-a-strand-short-exact-sequence.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects",
+      "initial_failure": "Before formatting repair: proof-step-separation at original line 91, unnumbered continuation split step 4.1."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-pure-braid-forgetting-a-strand-short-exact-sequence.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-pure-braid-forgetting-a-strand-short-exact-sequence.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Native node-tikzjax tex2svg for both extracted tikzcd fences, usepackage amsfonts and tikz-cd, followed by sharp density-200 rasterization using repository-local FONTCONFIG_FILE.",
+      "exit_code": 0,
+      "output": "compiled 1; compiled 2",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/dbg_010/native-v2/",
+      "viewed": [
+        "figure-1-fonts.png",
+        "figure-2-fonts.png"
+      ],
+      "initial_failure": "Initial operatorname label was unsupported in the standalone native engine; changed only diagram labels to equivalent math roman int before successful compilation."
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-pure-braid-forgetting-a-strand-short-exact-sequence --out research/math-library-rendering-repairs-2026-10-23/diagram-checks/dbg_010/final-preview-v3",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 3,
+        "katex_errors": [],
+        "tikz_count": 2,
+        "diagram_failures": []
+      },
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/dbg_010/final-preview-v3/",
+      "all_final_tiles_standalone_original_resolution": true,
+      "snapshot_matches_current_raw": true,
+      "limitations": "Local ItemBody SSR/file preview with current reference titles and network blocked. Initial preview without TSX_TSCONFIG_PATH failed module alias resolution; final v3 succeeded. Sixteen unrelated reference-map parse diagnostics were recorded by the preview and did not prevent scoped rendering."
+    }
+  ],
+  "remaining_issues": []
+}

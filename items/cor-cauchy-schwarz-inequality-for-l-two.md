@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-cauchy-schwarz-inequality-for-l-two.json
+  precheck: pass
 id: cor-cauchy-schwarz-inequality-for-l-two
 kind: corollary
 title: "Cauchy-Schwarz inequality for $L^2$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-holder-inequality-for-integrals, thm-equality-case-in-holder-inequality]
 proof_strategy: "Specialize Holder to p = q = 2, and inherit the equality clause from the strict-exponent equality theorem."
-verification:
-  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-cor-cauchy-schwarz-inequality-for-l-two-repair.json
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -42,7 +42,7 @@ $$|f|^2=c\,|g|^2\qquad\mu\text{-almost everywhere}.$$
 
 ## Proof
 
-**Proof technique:** Specialize Holder to $p=q=2$, and inherit the equality clause from the strict-exponent equality theorem.
+**Proof technique:** Specialize Holder to p = q = 2, and inherit the equality clause from the strict-exponent equality theorem.
 
 1.1 The exponent $2$ is conjugate to itself, so Holder’s inequality with $p=q=2$ gives $$\int |fg|\,d\mu\le\|f\|_2\|g\|_2.$$ [L1]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-offline-reinforcement-learning-dataset.json
+  precheck: n/a
 id: def-offline-reinforcement-learning-dataset
 kind: definition
 title: "Finite-horizon offline reinforcement-learning dataset and coverage"
@@ -20,12 +23,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -66,3 +63,24 @@ For a trajectory $\tau$, its finite-horizon return is $G_H(\tau)=\sum_{t=0}^{H-1
 ## Remarks
 
 The stated state-action support condition implies full horizon coverage. Here a state-action pair $(s,a)$ is reachable under $\pi$ before time $H$ when $P^\pi_H(S_t=s,A_t=a)>0$ for some $0\le t<H$. Suppose a trajectory atom $\tau$ has $P^\pi_H(\{\tau\})>0$. Its atom mass is a product of nonnegative factors, so every target action probability and every shared transition/reward factor along $\tau$ is positive. Each state-action pair on $\tau$ is therefore reachable under $\pi$, and the support condition gives $\mu(a_t\mid s_t)>0$ at every time. The same initial state and transition/reward factors then give $P^\mu_H(\{\tau\})>0$. Since $\Omega_H$ is finite, every event is a finite union of atoms; thus every $P^\mu_H$-null event is also $P^\pi_H$-null, proving $P^\pi_H\ll P^\mu_H$.
+
+
+For a fixed trajectory and time $0\le t<H$, the two rows show the same state, action, reward and next-state coordinates under the target and behavior policies. Arrows denote sampling stages, with their atom probabilities above them; they are not deterministic maps. Only the policy factor changes between the rows.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (pt) at (0,1.5) {$s_t$};
+\node (pa) at (3.4,1.5) {$(s_t,a_t)$};
+\node (pn) at (8,1.5) {$(s_{t+1},r_{t+1})$};
+\node (mt) at (0,0) {$s_t$};
+\node (ma) at (3.4,0) {$(s_t,a_t)$};
+\node (mn) at (8,0) {$(s_{t+1},r_{t+1})$};
+\draw[->] (pt) -- node[above] {$\pi(a_t\mid s_t)$} (pa);
+\draw[->] (pa) -- node[above] {$p(s_{t+1},r_{t+1}\mid s_t,a_t)$} (pn);
+\draw[->] (mt) -- node[above] {$\mu(a_t\mid s_t)$} (ma);
+\draw[->] (ma) -- node[above] {$p(s_{t+1},r_{t+1}\mid s_t,a_t)$} (mn);
+\node at (4,-1) {$\{\tau:P^\pi_H(\{\tau\})>0\}\ \subseteq\ \{\tau:P^\mu_H(\{\tau\})>0\}$};
+\end{tikzpicture}
+```
+
+The support inclusion beneath the rows holds under the stated reachable state-action support condition: positivity of every target-policy factor along a target-positive trajectory gives positivity of the corresponding behavior-policy factor, while the joint transition/reward factors are shared. The argument above establishes this without relying on the illustration.

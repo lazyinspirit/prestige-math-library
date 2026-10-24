@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-c-two-minus-a-complex-line-is-a-domain-of-holomorphy.json
+  precheck: pass
 id: cex-c-two-minus-a-complex-line-is-a-domain-of-holomorphy
 kind: counterexample
-title: "C^2 minus a complex line is a domain of holomorphy"
+title: '$\mathbb C^2$ minus a complex line is a domain of holomorphy'
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:

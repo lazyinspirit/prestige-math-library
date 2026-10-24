@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-mirror-map-and-bregman-divergence.json
+  precheck: n/a
 id: def-mirror-map-and-bregman-divergence
 kind: definition
 title: Mirror maps, Bregman divergence, and local Hessian norms
@@ -27,8 +30,7 @@ sources:
     - title: "Peter Bartlett, Stat 260/CS 294-102: Learning in Sequential Decision Problems, mirror-descent lecture notes"
       url: "https://www.stat.berkeley.edu/~bartlett/courses/2014fall-cs294stat260/lectures/mirror-descent-notes.pdf"
       locator: "Slides 24–30: dual update, Bregman projection and complete regret argument; the detailed regularizer and local-Hessian definitions are supplied locally and in Hazan."
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -62,3 +64,27 @@ $$\|v\|_z^2:=v^\top H_R(z)v,\qquad \|h\|_{*,z}^2:=h^\top H_R(z)^{-1}h.$$
 [[def-metric-interior-closure-boundary]]: $\operatorname{int}(K)$ and $\overline U$ are the interior and closure in that topology.
 
 [[def-metric-bounded-diameter]]: boundedness uses the Euclidean metric.
+
+## Remarks
+
+The vertical gap below illustrates the divergence using the one-dimensional regularizer $R(t)=t^2/2$, with $K=[0,4]$ and $U=\mathbb R$. At $y=1$, the tangent approximation is $T_y(t):=R(y)+R'(y)(t-y)=t-1/2$. For $x=3$, the gap is $R(3)-T_y(3)=9/2-5/2=2=B_R(3\|1)$. Thus the second argument specifies the point of tangency. The curve is shown only on part of its domain; its drawn ends are not domain boundaries. Here $H_R(z)=1$, so both local norms are the ordinary absolute value. The illustration supplements the definitions.
+
+```tikz
+\begin{tikzpicture}[x=1.6cm,y=0.75cm]
+\draw[->] (-0.15,0) -- (4.1,0) node[right] {$t$};
+\draw[->] (0,-0.35) -- (0,6.3);
+\draw[thick,blue] plot[domain=0:3.3,samples=60] (\x,{0.5*\x*\x});
+\node[blue] at (2.5,5.5) {$R(t)=t^2/2$};
+\draw[thick] (0.5,0) -- (3.6,3.1);
+\node at (2,-1.1) {$T_y(t)=t-1/2$};
+\draw[dashed] (1,0) -- (1,0.5);
+\draw[dashed] (3,0) -- (3,2.5);
+\fill (1,0.5) circle (1.6pt);
+\fill (3,2.5) circle (1.6pt);
+\fill (3,4.5) circle (1.6pt);
+\node[above left] at (1,0.5) {$(y,R(y))$};
+\node[below] at (1,0) {$y=1$};
+\node[below] at (3,0) {$x=3$};
+\draw[<->,thick,red] (3.12,2.5) -- (3.12,4.5) node[midway,right] {$B_R(x\|y)=2$};
+\end{tikzpicture}
+```

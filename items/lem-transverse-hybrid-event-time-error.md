@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-transverse-hybrid-event-time-error.json
+  precheck: pass
 id: lem-transverse-hybrid-event-time-error
 kind: lemma
 title: "A transverse hybrid event time is stable under dense-output and root error"
@@ -17,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Ernst Hairer, course notes, Chapter III: Équations Différentielles Ordinaires"
@@ -52,3 +53,34 @@ The same-sign derivative condition makes $\tau$ the unique guard root in $J$. Th
 2.1 If $\widehat\tau=\tau$ the desired bound is immediate. Otherwise apply [F4] to $h$ on the interval with endpoints $\tau$ and $\widehat\tau$. Since $\sigma h'\ge\nu$ throughout, the derivative has one fixed sign and magnitude at least $\nu$, so $|h(\widehat\tau)-h(\tau)|\ge\nu|\widehat\tau-\tau|$. Using $h(\tau)=0$ and step 1.1 proves $|\widehat\tau-\tau|\le(L_g\eta+\varepsilon)/\nu$. [given, F1, F3, F4, step 1.1, algebra]
 
 3.1 Since $L_g\eta+\varepsilon\le\max\{L_g,1\}(\eta+\varepsilon)$, the second inequality follows with the stated $C$. For any $s<t$ in $J$, [F4] gives $h(t)-h(s)=h'(c)(t-s)$ for some interior $c$; the fixed sign of $h'$ makes this increment nonzero, so $h$ is strictly monotone and its root in $J$ is unique. [given, F4, step 2.1, algebra] ∎
+
+
+## Remarks
+
+Set $H(t)=\sigma h(t)$ and $\Delta=L_g\eta+\varepsilon$. The schematic shows the case $\tau<\widehat\tau$ and $\Delta>0$: the vertical guard bound $H(\widehat\tau)\le\Delta$ and the secant slope bound $H(\widehat\tau)/(\widehat\tau-\tau)\ge\nu$ give the horizontal time bound. The opposite ordering follows by taking absolute values, as in the proof; the curve is illustrative, not a prescribed guard.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=0.9cm]
+\draw[->] (0.4,0) -- (6,0) node[right] {$t$};
+\draw[->] (0.7,-1.1) -- (0.7,4.3) node[above] {$H=\sigma h$};
+\draw[thick] (1,-0.7) .. controls (1.5,-0.3) and (1.7,-0.1) .. (1.8,0)
+  .. controls (2.6,0.8) and (3.4,1.4) .. (4.2,2.7)
+  .. controls (4.5,3.2) and (4.7,3.7) .. (4.8,4);
+\node[right] at (4.9,4) {$H'\ge\nu$};
+\draw[dashed] (0.7,3.3) -- (4.6,3.3);
+\node[left] at (0.7,3.3) {$\Delta$};
+\draw[dashed] (0.7,2.7) -- (4.2,2.7);
+\node[left] at (0.7,2.7) {$H(\widehat\tau)$};
+\draw[dashed] (1.8,0) -- (4.2,2.7);
+\node[rotate=40,above] at (2.9,1.3) {secant slope $\ge\nu$};
+\draw[thick] (4.2,0) -- (4.2,2.7);
+\fill (1.8,0) circle (2pt);
+\fill (4.2,2.7) circle (2pt);
+\node[below] at (1.8,0) {$\tau$};
+\node[below] at (4.2,0) {$\widehat\tau$};
+\draw[<->] (1.8,-0.85) -- (4.2,-0.85)
+  node[midway,below] {$\widehat\tau-\tau\le\Delta/\nu$};
+\end{tikzpicture}
+```
+
+The vertical estimate is step 1.1 and the secant estimate is step 2.1. The rigorous proof is independent of the figure.

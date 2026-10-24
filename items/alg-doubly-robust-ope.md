@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-doubly-robust-ope.json
+  precheck: n/a
 id: alg-doubly-robust-ope
 kind: algorithm
 title: "Finite-horizon doubly robust off-policy value evaluation"
@@ -16,12 +19,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Nan Jiang and Lihong Li, Doubly Robust Off-policy Value Evaluation for Reinforcement Learning"
@@ -53,3 +50,25 @@ and return $\widehat J_{\mathrm{DR}}=n^{-1}\sum_{i=1}^nD_i$. When supplied as pr
 [Jiang and Li, Doubly Robust Off-policy Value Evaluation for Reinforcement Learning](https://proceedings.mlr.press/v48/jiang16.pdf)
 
 [Levine, Kumar, Tucker, and Fu, Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems](https://arxiv.org/pdf/2005.01643)
+
+
+## Remarks
+
+The diagram separates the two inputs to each weighted correction: the fitted-value residual and the cumulative action weight. For $0\le t<H$, write $\delta_{i,t}=R_{t+1}^i+\gamma\widehat V_{t+1}(S_{t+1}^i)-\widehat Q_t(S_t^i,A_t^i)$ and $c_{i,t}=\gamma^t\widehat W_{i,t}\delta_{i,t}$. Arrows indicate selected computational inputs; the leftmost arrow supplies the baseline $\widehat V_0(s_0)$ to the trajectory score. The weights start at $\widehat W_{i,-1}=1$, and the values include the fixed terminal value $\widehat V_H=0$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={align=center}, box/.style={draw, rounded corners, inner sep=8pt}]
+\node[box] (values) at (-2.5,0) {$\widehat V_t(s)=\sum_{a\in A(s)}\pi(a\mid s)\widehat Q_t(s,a)$\\ $0\le t<H,\quad\widehat V_H=0$};
+\node[box] (weights) at (3,0) {$\widehat W_{i,t}=\widehat W_{i,t-1}$\\ $\cdot\,\widehat\rho_t(S_t^i,A_t^i)$};
+\node[box] (residual) at (-2.5,-2) {Value residual\\ $\delta_{i,t}$};
+\node[box] (correction) at (3,-2) {Weighted correction\\ $c_{i,t}=\gamma^t\widehat W_{i,t}\delta_{i,t}$};
+\node[box] (score) at (0,-4) {$D_i=\widehat V_0(s_0)+\sum_{t=0}^{H-1}c_{i,t}$};
+\node[box] (average) at (0,-5.6) {$\widehat J_{\mathrm{DR}}=\frac{1}{n}\sum_{i=1}^nD_i$};
+\draw[->] (values) -- (residual);
+\draw[->] (weights) -- (correction);
+\draw[->] (residual) -- (correction);
+\draw[->] (correction) -- (score);
+\draw[->] (values.west) -- ++(-0.7,0) |- (score.west);
+\draw[->] (score) -- (average);
+\end{tikzpicture}
+```

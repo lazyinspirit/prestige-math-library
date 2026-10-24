@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-sobolev-pasting-across-an-overlap.json
+  precheck: pass
 id: lem-sobolev-pasting-across-an-overlap
 kind: lemma
 title: Sobolev functions paste across an overlap
@@ -19,9 +22,7 @@ sources:
     - title: John K. Hunter, Notes on Partial Differential Equations (2014)
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Chapter 3 §§3.1–3.5
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -76,7 +77,7 @@ zero class alone.
 
 ## Proof
 
-**Proof technique:** paste the two representatives, verify each test identity with a finite grouping of a locally finite partition of unity, and bound each global $L^p$ norm by the two local norms.
+**Proof technique:** paste the two representatives, verify each test identity with a finite grouping of a locally finite partition of unity, and bound each global Lebesgue-space norm by the two local norms.
 
 1.1 By [F11], AC gives Countable Choice, so the uniqueness interface [F4] applies. For $|\alpha|\le k$ the restricted classes $D^\alpha u_U|_{U\cap V}$ and $D^\alpha u_V|_{U\cap V}$ are both weak $\alpha$-derivatives of the common class $u_U=u_V$ on $U\cap V$: this is the restriction clause of [F4] applied in the open set $U\cap V$. Hence $$D^\alpha u_U=D^\alpha u_V\quad\text{almost everywhere on }U\cap V.$$ Define $g_\alpha$ on $\Omega$ by $g_\alpha=D^\alpha u_U$ on $U$ and $g_\alpha=D^\alpha u_V$ on $V\setminus U$; the two defining pieces agree almost everywhere on their overlap, so $g_\alpha$ is a well-defined member of $L^p(\Omega;\mathbb K)$ by [F5], [F6] and [F9]: it is measurable, its finite-$p$ integral is at most the sum of the two local $p$-th-power integrals, and its essential bound at $p=\infty$ is at most the maximum of the two local bounds. Write $g_0=:u$; restricting the defining identity shows that $u$ agrees with $u_U$ almost everywhere on $U$ and with $u_V$ almost everywhere on $V$. [F2, F4, F5, F6, F9, F11, given]
 

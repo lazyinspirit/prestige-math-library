@@ -1,0 +1,95 @@
+---
+id: ex-constant-step-sgd-noise-floor
+kind: example
+title: "Constant-step SGD can have a nonzero noise floor"
+status: published
+origin: pipeline
+pipeline_run: machine-learning-all-101-2026-10-19
+dependency_level: 3
+deps:
+  - alg-stochastic-gradient-descent
+  - lem-independent-finite-random-index-extension
+  - def-axiom-of-choice
+  - def-probability-measure
+  - def-measure
+  - def-random-element-and-real-random-variable
+  - def-filtration-and-filtered-probability-space
+  - def-adapted-and-integrable-stochastic-process
+  - def-conditional-expectation-as-an-ae-class
+  - def-conditional-variance
+  - lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula
+  - def-expectation-of-a-nonnegative-or-integrable-random-variable
+  - lem-geometric-sequence-null
+  - thm-stochastic-gradient-nonconvex-randomized-iterate-bound
+  - thm-stochastic-gradient-biased-noise-floor
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+proof_strategy: direct
+verification:
+  precheck: pass
+
+---
+
+## Example
+
+Fix $0<\alpha\le1/4$, $b\in\mathbb R$, $\sigma\ge0$, and $x_0\in\mathbb R$. For every integer horizon $N\ge1$, take the finite probability space $\{-1,1\}^N$ with each sign vector assigned mass $2^{-N}$, let $\xi_0,\ldots,\xi_{N-1}$ be its coordinate signs, set $f(x)=x^2/2$, and run $x_{t+1}=x_t-\alpha(x_t+b+\sigma\xi_t)$. Write $q=1-\alpha$. For every $0\le t\le N$, the horizon-consistent moment is
+$$\mathbb E[x_t^2]=\bigl(q^t x_0-b(1-q^t)\bigr)^2+\frac{\alpha\sigma^2}{2-\alpha}(1-q^{2t}),$$
+so these moments converge as $t\to\infty$ to $b^2+\alpha\sigma^2/(2-\alpha)$. In the unbiased case $b=0$ with $\sigma>0$, the fixed-step expected squared gradient therefore has a positive noise floor.
+
+Under AC, two published finite-horizon bounds also apply. For $b=0$, if $R_N$ is chosen independently and uniformly from $\{0,\ldots,N-1\}$ on a finite extension, then $\mathbb E|x_{R_N}|^2\le x_0^2/(\alpha N)+\alpha\sigma^2$. For general $b$, the uniform average satisfies $N^{-1}\sum_{t=0}^{N-1}\mathbb E[x_t^2]\le x_0^2/(\alpha N)+(5/2)b^2+\alpha\sigma^2$.
+
+## Example references
+
+[[alg-stochastic-gradient-descent|Stochastic-gradient-descent procedure]]: fixes the unconstrained update applied in this example.
+
+[[lem-independent-finite-random-index-extension|Independent finite random-index extension]]: constructs the independent uniform output index.
+
+[[thm-stochastic-gradient-nonconvex-randomized-iterate-bound|Published uniform-random-iterate theorem]]: supplies the unbiased constant-step bound under its exact hypotheses.
+
+[[thm-stochastic-gradient-biased-noise-floor|Published biased-noise-floor theorem]]: supplies the bounded-bias average bound under its exact hypotheses.
+
+## Facts & Assumptions
+
+**Given:** The finite product sample space and recurrence in the Example; AC is used only for the two conditional-expectation theorem comparisons at the end of the verification.
+
+[A1] [[def-axiom-of-choice]]: AC supplies the conditional-expectation classes required by the published theorem comparisons.
+
+[F1] [[alg-stochastic-gradient-descent]]: for $s=1,\ldots,N$, the update is $y_{s+1}=y_s-\alpha H_s$, starting at $y_1$.
+
+[F2] [[def-probability-measure]] and [[def-measure]]: a probability measure has total mass one and is countably additive.
+
+[F3] [[def-random-element-and-real-random-variable]]: each coordinate sign is a measurable real random variable.
+
+[F4] [[def-filtration-and-filtered-probability-space]] and [[def-adapted-and-integrable-stochastic-process]]: $\mathcal F_t$ records the first $t$ signs and $x_t$ is measurable with respect to it.
+
+[F5] [[def-conditional-expectation-as-an-ae-class]]: conditional expectations are almost-sure classes under AC.
+
+[F6] [[def-conditional-variance]] and [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]]: conditional variance is the conditional second moment of the centered direction.
+
+[F7] [[lem-geometric-sequence-null]]: $q^t\to0$ whenever $|q|<1$.
+
+[F8] [[lem-independent-finite-random-index-extension]]: a finite uniform index can be added independently and its output expectation is the arithmetic mean of the iterate expectations.
+
+[F9] [[thm-stochastic-gradient-nonconvex-randomized-iterate-bound]]: assume AC, $f:\mathbb R^d\to\mathbb R$ continuously differentiable with $L$-Lipschitz gradient for $L>0$, a real global lower bound $f_{\inf}$, deterministic $x_0$, and the filtration-adapted update with square-integrable directions, conditional mean $\nabla f(x_t)$ and conditional variance at most $\sigma^2$. For constant $0<\alpha\le1/L$, $N\ge1$, and $\Delta=f(x_0)-f_{\inf}$, the independent uniform output from $\{0,\ldots,N-1\}$ obeys $\mathbb E\|\nabla f(x_R)\|_2^2\le2\Delta/(\alpha N)+L\alpha\sigma^2$.
+
+[F10] [[thm-stochastic-gradient-biased-noise-floor]]: assume AC, $f:\mathbb R^d\to\mathbb R$ with $L$-Lipschitz gradient for $L>0$, a real global lower bound $f_{\inf}$, square-integrable $x_0$, and the filtration-adapted update with square-integrable directions, conditional mean $\nabla f(x_t)+b_t$, measurable conditional bias $b_t$ of norm at most a deterministic $\beta\ge0$, and conditional variance at most a deterministic $\sigma^2\ge0$. For constant $0<\alpha\le1/(4L)$, $N\ge1$, and finite $\Delta=\mathbb E f(x_0)-f_{\inf}$, the uniform average of $\mathbb E\|\nabla f(x_t)\|_2^2$ over $0\le t<N$ is at most $2\Delta/(\alpha N)+(5/2)\beta^2+L\alpha\sigma^2$.
+
+[F11] [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]: expectation on a finite probability space is the finite weighted sum.
+
+## Verification
+
+1.1 For a fixed horizon $N$, let $\mathcal F_t$ be generated by $\xi_0,\ldots,\xi_{t-1}$, with $\mathcal F_0$ trivial and $\mathcal F_t=\mathcal F_N$ for $t>N$. Apply [F1] with $y_s=x_{s-1}$, $H_s=G_{s-1}$, and $\mathcal H_s=\mathcal F_{s-1}$ for $s\ge1$, setting $\mathcal H_0=\mathcal F_0$; this gives exactly the zero-based recurrence in the Example. For $0\le t<N$ and each prefix atom $A$, define $C_tH$ on $A$ as the average of $H$ over its $2^{N-t}$ extensions. This is an explicit $\mathcal F_t$-measurable function, and finite summation gives $\int_B C_tH\,dP=\int_B H\,dP$ for every $B\in\mathcal F_t$, since $B$ is a union of prefix atoms. Half the extensions of each prefix have each next sign, so $C_t\xi_t=0$ and $C_t(\xi_t^2)=1$. The recurrence makes $x_t$ constant on each prefix, hence $C_tG_t=x_t+b$ and $C_t[(G_t-(x_t+b))^2]=\sigma^2$ for $G_t=x_t+b+\sigma\xi_t$. All variables have finite moments on the finite space; these averages and identities require no AC. [F1, F2, F3, F4, F11, given, construct, algebra]
+
+1.2 Put $m_t=\mathbb E[x_t]$. The update is $x_{t+1}=qx_t-\alpha b-\alpha\sigma\xi_t$, hence $m_{t+1}=qm_t-\alpha b$ with $m_0=x_0$. Induction gives $m_t=q^t x_0-b(1-q^t)$ for every $t\le N$. [F1, given, induction, algebra]
+
+2.1 Let $V_t=\mathbb E[(x_t-m_t)^2]$. Averaging first over each prefix atom as in step 1.1 gives $\mathbb E[(x_t-m_t)\xi_t]=0$ and $\mathbb E[\xi_t^2]=1$, so the cross term vanishes and $V_{t+1}=q^2V_t+\alpha^2\sigma^2$, with $V_0=0$. Thus $V_t=\alpha^2\sigma^2\sum_{j=0}^{t-1}q^{2j}=\frac{\alpha\sigma^2}{2-\alpha}(1-q^{2t})$, since $1-q^2=\alpha(2-\alpha)$. Adding $m_t^2$ proves the displayed moment formula, and it is independent of the chosen horizon whenever $N\ge t$. [F2, F4, F11, step 1.1, step 1.2, given, algebra]
+
+2.2 Now assume AC for the published bounds. The event-integral identities in step 1.1 identify its finite averages with the conditional-expectation classes [F5] and their conditional variances [F6]. Here $f'(x)=x$ and $|f'(u)-f'(v)|=|u-v|$, so the gradient is $1$-Lipschitz. The deterministic start and all directions are square-integrable by step 1.1, and $f(x)\ge0$. In the unbiased case, $L=1$, $f_{\inf}=0$, $\Delta=x_0^2/2$, and step 1.1 verifies conditional unbiasedness and variance $\sigma^2$; $\alpha\le1/4\le1/L$. Use [F8] with $p_k=1/N$ and apply [F9] to obtain $\mathbb E|x_{R_N}|^2\le x_0^2/(\alpha N)+\alpha\sigma^2$. [A1, F5, F6, F8, F9, step 1.1, given, algebra]
+
+3.1 Here $q=1-\alpha\in[3/4,1)$, so [F7] gives $q^t\to0$. The formula in step 2.1 therefore yields $\mathbb E[x_t^2]\to b^2+\alpha\sigma^2/(2-\alpha)$; if $b=0<\sigma$, this limit is strictly positive. This proves the exact constant-step noise-floor claim without using AC. [F7, step 2.1, given, algebra]
+
+4.1 For general $b$, step 1.1 verifies conditional mean $f'(x_t)+b$, bias bound $\beta=|b|$, variance bound $\sigma^2$, and $f(x)\ge0$. The step restriction is $\alpha\le1/(4L)$ because $L=1$. Apply [F10] with $\Delta=x_0^2/2$ to obtain $N^{-1}\sum_{t=0}^{N-1}\mathbb E[x_t^2]\le x_0^2/(\alpha N)+(5/2)b^2+\alpha\sigma^2$. The exact limiting floor from step 3.1 is at most $b^2+\alpha\sigma^2$, since $2-\alpha\ge1$, and is therefore consistent with this bound. [A1, F5, F6, F10, step 1.1, step 2.2, step 3.1, given, algebra] ∎
+

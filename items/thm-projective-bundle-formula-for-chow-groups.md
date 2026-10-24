@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-projective-bundle-formula-for-chow-groups.json
+  precheck: pass
 id: thm-projective-bundle-formula-for-chow-groups
 kind: theorem
 title: "The projective bundle formula for Chow groups"
@@ -28,8 +31,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Chow Homology and Chern Classes, Section 42.36 (projective space bundle formula, tags 02TW-02TX)"
@@ -84,7 +85,7 @@ $A^*(\mathbb P(\mathcal E))$.
 
 ## Proof
 
-**Proof technique:** direct; compute the pushforwards of the powers of $\xi$ on integral classes, then derive injectivity from the resulting triangular identities and surjectivity from a trivializing open with Noetherian induction.
+**Proof technique:** direct; compute the pushforwards of the powers of the tautological class on integral cycles, then derive injectivity from the resulting triangular identities and surjectivity from a trivializing open with Noetherian induction.
 
 1.1 Pushforward identities. Let $V\subseteq X$ be an integral closed subscheme of dimension $m$, so that $\pi^*[V]=[\mathbb P(\mathcal E|_V)]$ is an $(m+r-1)$-cycle. First suppose $\mathcal E|_V$ is trivial. The zero schemes of $r-1$ coordinate sections of $\mathcal O(1)$ are relative hyperplanes meeting in a section $\sigma:V\to\mathbb P(\mathcal E|_V)$, so $\xi^{r-1}\cap\pi^*[V]=\sigma_*[V]$ and $\pi_*\sigma_*[V]=[V]$. For any $\mathcal E$ and $0\le s<r-1$, the cycle $\xi^s\cap\pi^*[V]$ has dimension $m+r-1-s>m$ and is supported on $\mathbb P(\mathcal E|_V)$, whose image has dimension $m$; hence its components push to zero by [L4]. For the top power with general $\mathcal E$, choose a dense open $U\subseteq V$ trivializing the bundle. The identity $\pi_*(\xi^{r-1}\cap\pi^*[V])=[V]$ holds over $U$, and its difference is in $A_m(V)$ supported on $V\setminus U$. This complement has dimension less than $m$, so localization [L3] makes the difference zero. Both identities extend by linearity to all $\alpha\in A_*(X)$. [L1, L2, L3, L4, given, algebra]
 
@@ -95,3 +96,34 @@ $A^*(\mathbb P(\mathcal E))$.
 2.2 Global surjectivity. It suffices to express an integral cycle $[V]$ on $\mathbb P(\mathcal E)$, and we induct on the dimension of the reduced image closure $W\subseteq X$. The cycle is supported on $\mathbb P(\mathcal E|_W)$. Choose a dense open $U\subseteq W$ trivializing the bundle. Step 1.2 expresses $[V]|_U$ in the required form; lift its coefficient classes from $A_*(U)$ to $A_*(W)$ using localization [L3]. The resulting difference is the pushforward of a cycle class on $\mathbb P(\mathcal E|_{W\setminus U})$. Each integral component of that cycle has image closure of dimension strictly less than $\dim W$, so induction expresses its class in the required form over its image. Push these expressions to $W$ and then $X$, using compatibility of flat pullback with a closed immersion and of caps with proper pushforward. The induction terminates because the integral image has finite dimension. For locally finite cycles the constructions remain locally finite: $\pi$ is proper, so the image closures of a locally finite family are locally finite; each residual family is supported within its respective image closure, and the dimension bound for a fixed-degree input cycle is uniform. Thus the same argument sums locally finitely without asserting that the whole base has finitely many components. [L2, L3, step 1.2, given, algebra]
 
 3.1 Conclusion. Injectivity is step 2.1 and surjectivity is step 2.2; both hold degreewise, so the displayed map is an isomorphism for every $d$. The final paragraph of the statement follows because $\mathcal E$ locally free of rank $r$ makes $\pi$ smooth of relative dimension $r-1$ by [L1], and smoothness of $X$ inherits to the total space of a smooth morphism. [L1, step 2.1, step 2.2, given] ∎
+
+
+## Remarks
+
+Write $P=\mathbb P(\mathcal E)$ and denote the isomorphism in the statement
+by $\Phi_d$. Proper pushforward detects its last summand, as the following
+commutative square illustrates:
+
+```tikzcd
+[column sep=huge, row sep=large, font=\Large]
+\displaystyle\bigoplus_{i=0}^{r-1} A_{d+i}(X)
+  \arrow[r, "\textstyle\Phi_d", "\textstyle\sim"']
+  \arrow[d, "\textstyle\mathrm{pr}_{r-1}"']
+& A_{d+r-1}(P) \arrow[d, "\textstyle\pi_*"] \\
+A_{d+r-1}(X) \arrow[r, equal] & A_{d+r-1}(X)
+```
+
+Here $\operatorname{pr}_{r-1}(\alpha_0,\ldots,\alpha_{r-1})=\alpha_{r-1}$.
+For each $i$, flat pullback first sends $A_{d+i}(X)$ to
+$A_{d+i+r-1}(P)$, and capping with $\xi^i$ then lands in the common group
+$A_{d+r-1}(P)$. Proper pushforward preserves this homological dimension;
+its target in the square is therefore $A_{d+r-1}(X)$. Step 1.1 shows that
+$\pi_*(\xi^i\cap\pi^*\alpha_i)$ vanishes for $i<r-1$ and equals
+$\alpha_{r-1}$ for $i=r-1$, proving the square commutes. This single
+pushforward extracts only the last coefficient. The successive cap and
+pushforward operations in step 2.1 apply after the already detected
+coefficients have vanished in the relation; the square asserts no simultaneous
+extraction of all coefficients. For $r=1$, it reduces to
+$\pi_*\pi^*=\operatorname{id}$ with $\xi^0$ the identity operation.
+The diagram illustrates the grading and the pushforward identities; the
+proof above remains independent of it.

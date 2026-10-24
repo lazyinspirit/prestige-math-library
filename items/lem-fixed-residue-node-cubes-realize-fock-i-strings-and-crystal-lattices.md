@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fixed-residue-node-cubes-realize-fock-i-strings-and-crystal-lattices.json
+  precheck: pass
 id: lem-fixed-residue-node-cubes-realize-fock-i-strings-and-crystal-lattices
 kind: lemma
 title: "Fixed-residue node cubes realize the actual Fock strings"
@@ -15,8 +18,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Bernard Leclerc, Fock space representations (author-hosted complete 38-page treatment)"
@@ -63,7 +64,7 @@ and all divided $E$- and $F$-powers have Laurent-integral matrices.
 
 ## Proof
 
-**Proof technique:** show the $i$-slots are independent, identify the node action with the tensor cube, and apply the rank-one tensor rule.
+**Proof technique:** show the residue slots are independent, identify the node action with the tensor cube, and apply the rank-one tensor rule.
 
 1.1 Independence of the $i$-slots. If two $i$-cells are toggled, the neighbours determining each corner's availability are of residues $i\pm1$, and the toggled cell has residue $i$, so it is not a neighbour of any other $i$-cell; hence toggling one $i$-cell never changes the availability of another, every subset of the finitely many slots is realizable, and the orbit is a Boolean cube with $2^k$ distinct partition diagrams. [F1, given, algebra]
 
@@ -76,3 +77,36 @@ and all divided $E$- and $F$-powers have Laurent-integral matrices.
 ## Remarks
 
 For $e=2$, $i=1$, put $h=|1\rangle$, $x=|2\rangle$, $y=|1,1\rangle$ and $z=|2,1\rangle$. The node formulas give $F_1h=x+qy$, $F_1^{(2)}h=z$, and $s=x-q^{-1}y$ is killed by both $E_1$ and $F_1$. Thus $y=q(1+q^2)^{-1}(F_1h-s)$ and $\tilde f_1y=q(1+q^2)^{-1}z\ne0$. Its residue is zero, exactly as the cancelled signature predicts.
+
+
+In this two-slot example, the decreasing-content order is $(1,2)$ then
+$(2,1)$, of contents $1$ and $-1$. Thus $h,x,y,z$ have sign words
+$++,-+,+-,--$, respectively. The left square shows independent slot
+additions, without Chevalley coefficients; the right diagram shows only
+crystal arrows on the residue classes $b_h,b_x,b_y,b_z$ modulo $qF_0$.
+In particular, cancelling $+-$ isolates $b_y$, while the first-surviving-plus
+rule gives $b_h\mapsto b_x\mapsto b_z$ under $\tilde f_1$; $\tilde e_1$
+reverses these two arrows. This does not assert an equality on the standard
+field vectors (as the nonzero $\tilde f_1y$ above illustrates).
+
+```tikz
+\begin{tikzpicture}
+\node at (1.5,3) {Slot additions};
+\node (h) at (0,2) {$h:\ ++$};
+\node (x) at (3,2) {$x:\ -+$};
+\node (y) at (0,0) {$y:\ +-$};
+\node (z) at (3,0) {$z:\ --$};
+\draw[->] (h) -- node[above] {$1$} (x);
+\draw[->] (h) -- node[left] {$2$} (y);
+\draw[->] (x) -- node[right] {$2$} (z);
+\draw[->] (y) -- node[below] {$1$} (z);
+\node at (7,3) {Residue crystal};
+\node (bh) at (5,2) {$b_h$};
+\node (bx) at (7,2) {$b_x$};
+\node (bz) at (9,2) {$b_z$};
+\node (by) at (7,0) {$b_y:\ +-$};
+\draw[->] (bh) -- node[above] {$\tilde f_1$} (bx);
+\draw[->] (bx) -- node[above] {$\tilde f_1$} (bz);
+\node at (7,-0.7) {isolated};
+\end{tikzpicture}
+```

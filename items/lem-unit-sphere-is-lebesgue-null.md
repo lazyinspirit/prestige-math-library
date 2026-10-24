@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-unit-sphere-is-lebesgue-null.json
+  precheck: pass
 id: lem-unit-sphere-is-lebesgue-null
 kind: lemma
 title: The unit sphere is Lebesgue null
@@ -16,23 +19,6 @@ deps:
 - def-nonnegative-lebesgue-integral
 - def-integral-over-a-measurable-set
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-6.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-6.result.json
-      - research/frontier-38-owner-30-step5-hash-6-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-6-5a-decisions.json
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -65,7 +51,7 @@ Assume Countable Choice and let $n\ge2$. The unit sphere $S^{n-1}$ satisfies $\l
 
 ## Proof
 
-**Proof technique:** direct; evaluate the polar-coordinate formula at the indicator of the sphere and observe that the inner integral is supported on the single null radius $r=1$.
+**Proof technique:** direct; evaluate the polar-coordinate formula at the indicator of the sphere and observe that the inner integral is supported on the single null radius r = 1.
 
 1.1 The section integral. Fix $r>0$. For every $\omega\in S^{n-1}$ one has $|r\omega|=r$, so $r\omega\in S^{n-1}$ if and only if $r=1$. Hence $\mathbf 1_{S^{n-1}}(r\omega)=\mathbf 1_{\{1\}}(r)$ for every $\omega$, and by [F3] and [F1], $$\int_{S^{n-1}}\mathbf 1_{S^{n-1}}(r\omega)\,d\sigma(\omega)=\int_{S^{n-1}}\mathbf 1_{\{1\}}(r)\,d\sigma(\omega)=\mathbf 1_{\{1\}}(r)\,\sigma(S^{n-1}).$$ The factor $\sigma(S^{n-1})$ is finite by [F1]. [F1, F3, given, algebra]
 

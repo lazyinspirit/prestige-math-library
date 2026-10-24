@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ams-ergodic-information-aep.json
+  precheck: pass
 id: thm-ams-ergodic-information-aep
 kind: theorem
 title: "Shannon–McMillan limit for finite-alphabet AMS ergodic sources"
@@ -34,7 +37,7 @@ sources:
 ---
 ## Statement
 
-Assume AC. For a finite-alphabet AMS source whose stationary mean is ergodic with bit entropy rate h, the normalized self-information -n^{-1}log_2 P(X_0^{n-1}) converges P-almost surely to h.
+Assume AC. For a finite-alphabet AMS source whose stationary mean is ergodic with bit entropy rate $h$, the normalized self-information $-n^{-1}\log_2 P(X_0^{n-1})$ converges $P$-almost surely to $h$.
 
 ## Facts & Assumptions
 

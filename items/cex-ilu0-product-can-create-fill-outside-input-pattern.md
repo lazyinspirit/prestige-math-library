@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-ilu0-product-can-create-fill-outside-input-pattern.json
+  precheck: pass
 id: cex-ilu0-product-can-create-fill-outside-input-pattern
 kind: counterexample
 title: "The product of ILU(0) factors can contain a fill position"
@@ -18,10 +21,6 @@ deps:
 justified_by: []
 aliases: []
 proof_strategy: direct
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §10.3.2, printed pp. 307–310"

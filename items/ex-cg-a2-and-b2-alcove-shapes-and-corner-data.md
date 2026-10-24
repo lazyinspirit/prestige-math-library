@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-a2-and-b2-alcove-shapes-and-corner-data.json
+  precheck: pass
 id: ex-cg-a2-and-b2-alcove-shapes-and-corner-data
 kind: example
 title: "The $A_2$ and $B_2$ fundamental alcoves: coordinates, corner vectors, and facet types"
@@ -19,9 +22,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 sources:
   references:
     - title: "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
@@ -85,3 +85,66 @@ For $B_2$, the coroots are $\alpha_1^\vee=\alpha_1$, $\alpha_2^\vee=2e_2$, and $
 ## Remarks
 
 **Open Step-3 supplier obligations.** The current-run draft supplier `lem-cg-affine-point-stabilizers-and-vertex-residues` is used in Fact F7 and proof step 4.1 for the six incident sectors, alternating local panel labels, and rank-two boundary word. Its item decision remains escalated because its proof uses the draft `lem-cg-integer-pairings-and-allowed-dihedral-labels` in step 2.4 and draft `def-hh-coxeter-matrix-word-group-and-length` in step 5.1. The current-run draft supplier `thm-cg-affine-alcove-transitivity-presentation-and-length` is used in Fact F6 and proof steps 3.1, 4.1, and 5.1 for the affine Coxeter matrix and presentation; its item decision remains escalated because its proof uses draft `lem-cg-affine-generic-gallery-paths-and-disk-moves` and draft `def-hh-coxeter-matrix-word-group-and-length`. These supplier uses remain provisional pending their completed Step-3 decisions, so this example's item decision remains escalated.
+
+
+**Coordinate illustration.** The shaded interiors are the fundamental alcoves; the boundary segments are drawn to display their corners. Both coordinate planes use the same unit scale. A label $t=i$ marks a panel of type $i$, with walls $H_{\alpha_1,0}$, $H_{\alpha_2,0}$, and $H_{\theta,1}$ carrying the three displayed fundamental panels of types $1,2,0$, respectively.
+
+```tikz
+\begin{tikzpicture}[scale=2.5]
+\begin{scope}
+\node at (0.5,1.65) {$A_2$};
+\fill[blue!12] (0,0) -- (1,0.577350269) -- (0,1.154700538) -- (0,0);
+\draw[thick] (0,0) -- (1,0.577350269) -- (0,1.154700538) -- (0,0);
+\fill (0,0) circle (0.018);
+\fill (1,0.577350269) circle (0.018);
+\fill (0,1.154700538) circle (0.018);
+\node[below left] at (0,0) {$0$};
+\node[above] at (0,1.154700538) {$v_2=(0,2/\sqrt3)$};
+\node[right] at (1,0.577350269) {$v_1$};
+\node[left] at (0,0.577350269) {$t=1$};
+\node[below right] at (0.5,0.288675135) {$t=2$};
+\node[above right] at (0.5,0.866025404) {$t=0$};
+\node at (0.5,-0.38) {$v_1=(1,1/\sqrt3)$};
+\end{scope}
+\begin{scope}[xshift=4cm]
+\node at (0.5,1.65) {$B_2$};
+\fill[blue!12] (0,0) -- (1,0) -- (0.5,0.5) -- (0,0);
+\draw[thick] (0,0) -- (1,0) -- (0.5,0.5) -- (0,0);
+\fill (0,0) circle (0.018);
+\fill (1,0) circle (0.018);
+\fill (0.5,0.5) circle (0.018);
+\node[below left] at (0,0) {$0$};
+\node[below right] at (1,0) {$e_1$};
+\node[above] at (0.5,0.5) {$(1/2,1/2)$};
+\node[above left] at (0.25,0.25) {$t=1$};
+\node[below] at (0.5,0) {$t=2$};
+\node[above right] at (0.75,0.25) {$t=0$};
+\node at (0.5,-0.38) {$m_{01}=2,\quad m_{02}=m_{12}=4$};
+\end{scope}
+\end{tikzpicture}
+```
+
+The next picture is a magnified neighbourhood of $v_1$ in the $A_2$ plane, with the same coordinate orientation. Its shaded sector belongs to the fundamental alcove. Each number labels a ray panel, not an entire wall: the two sloping lines are $H_{\alpha_2,0}$ (positive slope) and $H_{\theta,1}$ (negative slope), while the vertical line is $H_{\alpha_1,1}$. In particular, the opposite rays of $H_{\theta,1}$ have different types.
+
+```tikz
+\begin{tikzpicture}[scale=1.7]
+\fill[blue!12] (0,0) -- (-0.866025404,0.5) -- (-0.866025404,-0.5) -- (0,0);
+\draw[thick] (0,0) -- (0.866025404,0.5);
+\draw[thick] (0,0) -- (0,1);
+\draw[thick] (0,0) -- (-0.866025404,0.5);
+\draw[thick] (0,0) -- (-0.866025404,-0.5);
+\draw[thick] (0,0) -- (0,-1);
+\draw[thick] (0,0) -- (0.866025404,-0.5);
+\fill (0,0) circle (0.025);
+\node[right] at (0.08,0) {$v_1$};
+\node at (-0.55,0) {$A$};
+\node[right] at (0.866025404,0.5) {$0$};
+\node[above] at (0,1) {$2$};
+\node[left] at (-0.866025404,0.5) {$0$};
+\node[left] at (-0.866025404,-0.5) {$2$};
+\node[below] at (0,-1) {$0$};
+\node[right] at (0.866025404,-0.5) {$2$};
+\end{tikzpicture}
+```
+
+The coordinates and panel labels follow Verification steps 2.1, 2.2, and 4.1. The wall angles are $\pi/3$ in $A_2$ and $\pi/4,\pi/2,\pi/4$ in $B_2$, as computed in steps 3.1 and 5.1. The verification above is independent of these illustrations.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound.json
+  precheck: pass
 id: thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound
 kind: theorem
 title: "Two-pass MGS Arnoldi has an explicit local relation and an a posteriori orthogonality bound"
@@ -17,10 +20,6 @@ deps: [def-arnoldi-process,
 justified_by: []
 aliases: []
 proof_strategy: direct
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Nicholas J. Higham, Accuracy and Stability of Numerical Algorithms, 2nd ed., §§19.8–19.13, printed pp. 415–430"
@@ -99,7 +98,7 @@ $\gamma_n$ times the sum of the absolute products.
 [F4] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: for real vectors,
 $|x^{\mathsf T}y|\le\|x\|_2\|y\|_2$.
 
-[F5] [[lem-product-of-one-plus-deltas-gives-theta-n]]: padding any product of
+[F5] [[lem-product-of-one-plus-deltas-gives-theta-n|If $|\delta_i|\le u$ and $nu<1$, then $\prod(1+\delta_i)=1+\theta_n$ with $|\theta_n|\le\gamma_n$]]: padding any product of
 at most $n$ factors $1+\varepsilon$, $|\varepsilon|\le u$, with factors $1$
 allows the published $n$-factor bound $\gamma_n$ when $nu<1$.
 

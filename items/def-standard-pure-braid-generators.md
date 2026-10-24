@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-standard-pure-braid-generators.json
+  precheck: n/a
 id: def-standard-pure-braid-generators
 kind: definition
-title: "Standard geometric pure braid generators A_ij"
+title: "Standard geometric pure braid generators $A_{ij}$"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -13,9 +16,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-geometric-three-strand-braid-relation.json
+  precheck: pass
 id: lem-geometric-three-strand-braid-relation
 kind: lemma
 title: "The geometric three strand braid relation"
@@ -23,13 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.0321"
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.2, author manuscript pp. 5-6"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
+
 ---
 
 ## Statement
@@ -104,3 +101,74 @@ are explicit and no choice principle is used.
 - The moving strands stay within distance $2h$ of $q_{i+1}$ throughout the interpolation and the reflection, while every other base point is at distance at least $4h$ from $q_{i+1}$; this clearance is what makes the local computation an isotopy of $n$-strand braids.
 - The braid relation is the geometric statement that three consecutive half twists of a triple can be deformed into the same three half twists performed by rotating the triple rigidly by $\pi$ about its middle point; the point reflection in that middle point exchanges the two outer strands and turns one word into the other.
 - The bracketing enters the formulas but not the conclusion: the proof computes the bracketings $\sigma_i\star(\sigma_{i+1}\star\sigma_i)$ and $\sigma_{i+1}\star(\sigma_i\star\sigma_{i+1})$, and the associativity clause of [[prop-stacking-of-geometric-braids-is-well-defined]] supplies the isotopy to the bracketings $(\sigma_i\star\sigma_{i+1})\star\sigma_i$ and $(\sigma_{i+1}\star\sigma_i)\star\sigma_{i+1}$.
+
+The following projection onto horizontal position and height shows the active
+three strands of $W_0$ and $W_1$ from step 1.1; all other strands are fixed and
+omitted. Height $u$ increases upwards, so factors are traversed from right to
+left in the written products. We view from the positive transverse-coordinate
+side: an uninterrupted crossing strand has positive transverse coordinate,
+whereas the gap marks the negative-coordinate strand behind it. Thus each
+crossing is the positive half twist of [F2]: the strand starting on the left
+passes behind the strand starting on the right. The endpoint labels denote
+positions, not transported strand labels. Both panels send the bottom labels
+$(i,i+1,i+2)$ to top positions $(i+2,i+1,i)$. This is an illustration of the
+relation; the proof above supplies the isotopy independently.
+
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1.1cm,line width=0.9pt]
+\begin{scope}[xshift=0cm]
+\node[below] at (0,0) {$q_{i}$};
+\node[above] at (0,4) {$q_{i}$};
+\node[below] at (1,0) {$q_{i+1}$};
+\node[above] at (1,4) {$q_{i+1}$};
+\node[below] at (2,0) {$q_{i+2}$};
+\node[above] at (2,4) {$q_{i+2}$};
+\draw (0,0) -- (0.43,0.43);
+\draw (0.57,0.57) -- (1,1);
+\draw (1,0) -- (0,1);
+\draw (2,0) -- (2,1);
+\node[right] at (2.15,0.5) {$\sigma_{i}$};
+\draw (1,1) -- (1.43,1.43);
+\draw (1.57,1.57) -- (2,2);
+\draw (2,1) -- (1,2);
+\draw (0,1) -- (0,2);
+\node[right] at (2.15,1.5) {$\sigma_{i+1}$};
+\draw (0,2) -- (0.43,2.86);
+\draw (0.57,3.14) -- (1,4);
+\draw (1,2) -- (0,4);
+\draw (2,2) -- (2,4);
+\node[right] at (2.15,3) {$\sigma_{i}$};
+\node at (1,4.7) {$W_0$};
+\end{scope}
+\begin{scope}[xshift=5cm]
+\node[below] at (0,0) {$q_{i}$};
+\node[above] at (0,4) {$q_{i}$};
+\node[below] at (1,0) {$q_{i+1}$};
+\node[above] at (1,4) {$q_{i+1}$};
+\node[below] at (2,0) {$q_{i+2}$};
+\node[above] at (2,4) {$q_{i+2}$};
+\draw (1,0) -- (1.43,0.43);
+\draw (1.57,0.57) -- (2,1);
+\draw (2,0) -- (1,1);
+\draw (0,0) -- (0,1);
+\node[right] at (2.15,0.5) {$\sigma_{i+1}$};
+\draw (0,1) -- (0.43,1.43);
+\draw (0.57,1.57) -- (1,2);
+\draw (1,1) -- (0,2);
+\draw (2,1) -- (2,2);
+\node[right] at (2.15,1.5) {$\sigma_{i}$};
+\draw (1,2) -- (1.43,2.86);
+\draw (1.57,3.14) -- (2,4);
+\draw (2,2) -- (1,4);
+\draw (0,2) -- (0,4);
+\node[right] at (2.15,3) {$\sigma_{i+1}$};
+\node at (1,4.7) {$W_1$};
+\end{scope}
+\node at (3.6,2) {$\sim$};
+\draw[->] (-0.8,0) -- (-0.8,4) node[above] {$u$};
+\node[left] at (-0.8,0) {$0$};
+\node[left] at (-0.8,1) {$\frac14$};
+\node[left] at (-0.8,2) {$\frac12$};
+\node[left] at (-0.8,4) {$1$};
+\end{tikzpicture}
+```

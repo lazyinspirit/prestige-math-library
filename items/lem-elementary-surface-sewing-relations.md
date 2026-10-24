@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-elementary-surface-sewing-relations.json
+  precheck: pass
 id: lem-elementary-surface-sewing-relations
 kind: lemma
 title: "Elementary colored surface sewings give the Frobenius relations"
@@ -81,10 +84,12 @@ For the singleton color set, write $A=A_{**}$ and $i=i_*$, $i^*=i^*_*$; then the
 
 The equation has source $A_{bb}$ and target $A_{aa}$; the intermediate factors on its right-hand expression are $A_{ba}\otimes A_{ab}$ before the flip and $A_{ab}\otimes A_{ba}$ after it.
 
-~~~tikzcd
+```tikzcd
+\begin{tikzcd}[column sep=3em, cells={nodes={font=\large}}, every label/.append style={font=\large}]
 A_{bb} \arrow[rrr, bend left=18, "i_a\circ i_b^*"']
   \arrow[r, "\Delta_{bab}"]
 & A_{ba}\otimes A_{ab} \arrow[r, "\tau"]
 & A_{ab}\otimes A_{ba} \arrow[r, "\mu_{aba}"]
 & A_{aa}
-~~~
+\end{tikzcd}
+```

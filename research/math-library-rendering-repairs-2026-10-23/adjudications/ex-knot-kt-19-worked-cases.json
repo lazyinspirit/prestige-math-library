@@ -1,0 +1,84 @@
+{
+  "id": "ex-knot-kt-19-worked-cases",
+  "agent": "/root/rendering_repair_coordinator/knot_025",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original PNG shows the red failure block. Independent native node-tikzjax compilation with the actual renderer preamble fails at the matrix alignment tab: Misplaced alignment tab character &. The local preamble loads amsfonts and tikz-cd, without the amsmath pmatrix environment.",
+      "action": "Replace only the TikZ label pmatrix environment by an equivalent parenthesized two-column array; preserve all four matrix entries, geometry and labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "One-line environment substitution in the existing monodromy label at line 66; no other carrier edits.",
+  "source_lines_after": [
+    66
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Capped once-punctured-torus fiber T^2, with horizontal a and vertical b; separate S^1 base.",
+      "check": "Both horizontal edges point right and both vertical edges point up. Equal-label opposite-edge identifications form the standard oriented torus; the ordered right/up basis has a dot b = +1. The circle is a separate base symbol, not an extra gluing map.",
+      "justification": "Carrier Diagram paragraph and F4; zero-filling supplier proof steps 3.1–4.1 cap F by D^2 and extend boundary-fixing monodromy by identity."
+    },
+    {
+      "objects": "Induced endomorphism phi_*: H_1(T^2;Z) -> H_1(T^2;Z).",
+      "check": "In ordered (a,b) column convention, matrix [[2,1],[1,1]] sends a to 2a+b and b to a+b. Its determinant is 1, compatible with oriented torus monodromy. The curved arrow labels this action and does not depict individual a or b image curves.",
+      "justification": "Figure-eight punctured-torus supplier Statement and proof 4.1 give R_a=[[1,1],[0,1]], L_b=[[1,0],[1,1]], and R_a L_b=[[2,1],[1,1]]. Capping preserves H_1; zero-filling supplier 4.1 retains the matrix."
+    },
+    {
+      "objects": "Preferred longitude lambda and zero filling.",
+      "check": "The square depicts the capped fiber, not the peripheral torus. No meridian or longitude is incorrectly identified with square edges a,b. Filling caps boundary F along lambda, not along meridian mu; no framing information is changed by the label repair.",
+      "justification": "Carrier Example, F4/F6 and proof 1.1; zero-filling supplier proof 2.1 identifies boundary F with lambda up to sign, and 3.1 uses meridian disk boundary of filling solid torus at each mapping-torus time."
+    },
+    {
+      "check": "Rigorous proof remains byte-identical and independent of the drawing: step 2.1 injects pi_1(T^2) via pullback cover and step 3.1 applies the no-Z^2 hyperbolic obstruction."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-knot-kt-19-worked-cases.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-knot-kt-19-worked-cases.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-knot-kt-19-worked-cases.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-knot-kt-19-worked-cases --out research/math-library-rendering-repairs-2026-10-23/previews/knot-025-fresh-20261024b",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/knot-025-fresh-20261024b/manifest.json",
+    "viewed_original_resolution": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/knot-025-fresh-20261024b/screenshots/ex-knot-kt-19-worked-cases--01.png"
+    ],
+    "result": "Actual native TikZ SSR produces one diagram, no diagram failures, no KaTeX errors. Standalone original-resolution view confirms square, right/up edge arrows and labels, correct 2x2 matrix above curved monodromy arrow and separate base circle; no overlap requiring further alteration.",
+    "limitations": "Local ItemBody preview, not production route or whole-item mathematical audit. Reference-title map has 32 unrelated parse diagnostics."
+  },
+  "before_raw_sha256": "079302e47d12ac0037cc2d95909fe860b61c8a5b3cbea75ead1f474b8088eb15",
+  "after_raw_sha256": "83e2a6001d450f0b3703a2b175ee9c791449af77151800e4dbf95a8a27f11303",
+  "status_preserved": "published; exact full frontmatter byte-identical",
+  "remaining_issues": []
+}

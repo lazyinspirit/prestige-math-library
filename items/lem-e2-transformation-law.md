@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-e2-transformation-law.json
+  precheck: pass
 id: lem-e2-transformation-law
 kind: lemma
-title: "The transformation law of the weight-two Eisenstein series E_2"
+title: "The transformation law of the weight-two Eisenstein series $E_2$"
 status: published
 origin: pipeline
 deps:
@@ -24,22 +27,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-21.md"
-      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-21-post-5a.json"
-    content_sha256: "3a65272348a7ae7c0f7ffec5ced6993ab92490599e5358721b3324ece0956866"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "D. Zagier, Elliptic Modular Forms and Their Applications, in The 1-2-3 of Modular Forms (Universitext, Springer, 2008)"

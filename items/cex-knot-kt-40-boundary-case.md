@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-knot-kt-40-boundary-case.json
+  precheck: pass
 id: cex-knot-kt-40-boundary-case
 kind: counterexample
 title: "A birth and a death do not cancel"
@@ -25,13 +28,7 @@ sources:
     - title: "Louis H. Kauffman, An Introduction to Khovanov Homology, §5"
       url: "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
       locator: "PDF pp.18–22; sphere relation and the Frobenius TQFT"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement refuted
@@ -42,12 +39,12 @@ $$
 $$
 which is zero and therefore is not the identity, even after allowing multiplication by an overall sign.
 
-```tikz
-\begin{tikzcd}
+```tikzcd
+\begin{tikzcd}[column sep=large,cells={nodes={scale=1.8}},labels={scale=1.8}]
 \mathcal A
-\arrow[r, "{\operatorname{id}\otimes\eta}"]
+\arrow[r, "{\mathrm{id}\otimes\eta}"]
 & \mathcal A\otimes\mathcal A
-\arrow[r, "{\operatorname{id}\otimes\epsilon}"]
+\arrow[r, "{\mathrm{id}\otimes\epsilon}"]
 & \mathcal A
 \end{tikzcd}
 ```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-orbit-map-of-a-covering-space-action-is-a-covering.json
+  precheck: pass
 id: thm-orbit-map-of-a-covering-space-action-is-a-covering
 kind: theorem
 title: "The orbit map of a covering-space action is a covering, with the acting group equal to the deck group when the total space is path-connected"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -60,3 +60,15 @@ For a covering-space action of $G$ on $E$, the orbit map $E\to E/G$ is a coverin
 4.1 If the total space is path-connected, compare any deck transformation at one point with the unique group translate taking that point to its image; one-point determination then proves equality with that translate. [step 3.1, F4, F5, F1]
 
 5.1 The preceding construction and implications establish the assertion. [step 4.1] ∎
+
+
+## Remarks
+
+Write $q:E\to E/G$ for the orbit map and choose $U$ as in step 1.1. Set $V=q(U)$. The following commuting triangle compares two of the sheets over $V$, for any $g\in G$; all three arrows are homeomorphisms.
+
+```tikzcd
+U \arrow[rr, "g|_U"] \arrow[dr, "q|_U"'] && gU \arrow[dl, "q|_{gU}"] \\
+& V &
+```
+
+Here $g|_U$ sends $x$ to $g\cdot x$, so $q|_{gU}\circ g|_U=q|_U$. The full collection of sheets is $q^{-1}(V)=\bigsqcup_{g\in G}gU$, as in steps 1.1 and 2.1; the triangle does not assert that there are only two sheets. The proof above is independent of this illustration.

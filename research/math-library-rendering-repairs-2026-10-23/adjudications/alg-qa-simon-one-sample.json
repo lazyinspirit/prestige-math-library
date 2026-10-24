@@ -1,0 +1,117 @@
+{
+  "id": "alg-qa-simon-one-sample",
+  "agent": "/root/dqa_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dqa_008",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile and frozen/current source contain a concrete two-register sequence but no figure. A register-level circuit materially clarifies which Hadamards act on the address and that the target is measured/discarded before the second layer, without classical feed-forward. This is a warranted explanatory illustration under expanded diagram scope, not an error in the complete algorithm.",
+      "action": "Appended a final Remarks section with a bundled-register TikZ circuit and exact measurement, oracle, gate-count and zero-width-register explanations.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the Simon Fourier-sampling circuit schematic, preserving every original source byte as an unchanged prefix. The diagram shows address H tensor n, one joint U_f query, target computational measurement/discard, address H tensor n, and address computational measurement returning y.",
+  "source_lines_after": [
+    {
+      "start": 51,
+      "end": 82,
+      "description": "New Remarks and explanatory circuit; original Definition/instructions remain at lines 38–48."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and widths",
+      "evidence": "Input (line 40) fixes ordered n-qubit address and m-qubit target registers. Top |0^n> and bottom |0^m> therefore represent C^(2^n) and C^(2^m), with address first, as in def-qa-standard-bit-query Definition. New prose explicitly says these are entire register lines. The allowed m=0 occurs only at n=1 and gives the single empty-word basis state and a sole measurement outcome."
+    },
+    {
+      "check": "Hadamard domains and chronology",
+      "evidence": "Definition instruction 1 (line 44) applies H tensor n to the address alone and leaves the target zero. The first top-only H box is before U_f. Instruction 3 (line 46) applies another H tensor n to that same address after target measurement; its box is drawn strictly to the right of target M_Z. Each H box denotes n exact one-qubit gates per lem-qa-hadamard-f2-kernel Statement and Facts F2–F5."
+    },
+    {
+      "check": "Oracle relation and count",
+      "evidence": "The single U_f rectangle spans both register lines and is neither a controlled-query symbol nor an inverse query. The formula below repeats exactly instruction 2 and def-qa-standard-bit-query: |x>|z> maps to |x>|z XOR f(x)>. It preserves address width n and target width m, with one query. Two H tensor n boxes give 2n Hadamards, matching line 48."
+    },
+    {
+      "check": "Measurements and outputs",
+      "evidence": "Bottom M_Z is defined in the new prose as the instruction-2 computational measurement with branch P_v X P_v, P_v=I_address tensor |v><v|, so its outcome v has m bits. The arrow ends at v: discard and has no connection to the address. Top M_Z follows the second Hadamard and returns n-bit y, matching instruction 3. No postselection or failure branch is asserted."
+    },
+    {
+      "check": "Independent sampling-law argument",
+      "evidence": "The original algorithm explicitly delegates the sample law to thm-qa-simon-hadamard-sampling-law. Its Facts F1–F5 and Proof steps 1.1–4.1 use the coset state, tensor-Hadamard amplitudes and Born rule; none uses a figure. The new schematic asserts only the existing operational order and gate count, and the final prose explicitly retains proof independence."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-simon-one-sample.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-simon-one-sample.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qa-simon-one-sample.md",
+            "item_id": "alg-qa-simon-one-sample",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-simon-one-sample.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "original_evidence": {
+    "declared_missing_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement/screenshots/alg-qa-simon-one-sample--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-simon-one-sample--01.png",
+    "sha256": "1073a717ccfd921ec292b91150a68d06392a905ba7b7f5bc464f3eeb2ce04066",
+    "standalone_original_resolution_inspected": true,
+    "frozen_before_and_category_snapshot_identical": true
+  },
+  "pre_edit_guard": {
+    "expected_raw_sha256": "01dff5c3143e6a6f4e7eab5370dbc0985a203a2440244a20aed79dbe29a96bd7",
+    "matched_immediately_before_edit": true
+  },
+  "status_and_metadata": {
+    "unchanged_frontmatter": true,
+    "status": "published",
+    "original_source_unchanged_prefix": true
+  },
+  "visual_check": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dqa008-simon-v1",
+    "manifest_sha256": "51636c5ed6e01870e3991e22144eeb36b5b0106b9baba43367c036bb2de541f7",
+    "source_sha256": "f64b7efde5125a7503eceb8642ba035c88de2413f503e1865f3b41dc77bda543",
+    "screenshot_sha256": "ce88c2c2648ce8f0cd35a9360fab138e19efa881f31323fb74294904c1a9e0b5",
+    "standalone_original_resolution_inspected": true,
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "observation": "The actual dark-background native output shows two separated register lines, both H tensor n boxes, a single spanning U_f rectangle, both M_Z boxes, and distinct y and v: discard outputs. Gate labels and connecting segments are visible and do not overlap or clip; no pale fill obscures strokes.",
+    "limitations": [
+      "Fresh PNG has a known upper-body capture artifact: much unchanged prose is absent while math and new Remarks/figure are visible. Original authenticated standalone tile shows that unchanged prose normally. No source changes were made in response to the artifact.",
+      "Local native ItemBody preview only, with 13 unrelated reference-map diagnostics; no production route or website/network access."
+    ]
+  },
+  "remaining_issues": []
+}

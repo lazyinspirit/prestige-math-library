@@ -1,0 +1,95 @@
+{
+  "id": "thm-the-kernel-cokernel-sequence-of-a-composite",
+  "agent": "/root/rendering_repair_coordinator/ct_010",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Both assigned original-resolution tiles show literal inline tikzcd/arrow command strings in proof steps 2.2 and 2.3. Triple backticks embedded in a paragraph do not form a fenced diagram.",
+      "action": "Moved both exact comparison diagrams into separate tikzcd fences in final Remarks. Replaced inline strings by typed row and vertical-map descriptions and explicit commutativity identities in the original tagged steps.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Actual first compilation succeeded for figure 1 but failed for figure 2; the first current-source preview visibly displayed diagram failed to render for the operatorname{coker} label. The local renderer document loads amsfonts and tikz-cd without the operatorname command.",
+      "action": "Used equivalent upright mathrm{coker}(f) in figure 2 only. Actual fresh compilation and the subsequent current-item preview now render both diagrams.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Rendered the two comparison diagrams in Remarks and retained their complete typed data and commuting relations in proof steps 2.2 and 2.3; substituted a supported equivalent coker label in the second TikZ figure.",
+  "source_lines_after": [
+    61,
+    63,
+    69,
+    75,
+    76,
+    77,
+    78,
+    82,
+    83,
+    84,
+    85
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "figure": 1,
+      "objects_and_maps": "Top: ker(f) --k_f--> A --f--> B. Bottom: 0 --0--> C --1_C--> C. Vertical maps: 0:ker(f)->0, gf:A->C, g:B->C. These are exactly the original diagram objects and maps.",
+      "relations": [
+        "Left square: (gf)k_f=g(fk_f)=0=(0:0->C)(0:ker(f)->0), by kernel annihilation L3 and chosen k_f in step 1.1.",
+        "Right square: gf=1_C(gf), by identity and composition."
+      ],
+      "interface_check": "The exact top row is the kernel pair k_f,f in the abelian category; 0->C is monic. Thus the kernel clause of local L1 applies with alpha=0, beta=gf, gamma=g. L4 represents ker(ker(f)->0) by ker(f) with identity. The induced arrows are u,v because k_gf u=k_f and k_g v=f k_gf in step 1.1; hence exactness is at ker(gf).",
+      "proof_independent": true
+    },
+    {
+      "figure": 2,
+      "objects_and_maps": "Top: A --f--> B --q_f--> coker(f). Bottom: C --1_C--> C --0--> 0. Vertical maps: gf:A->C, g:B->C, 0:coker(f)->0. These are exactly the original diagram objects and maps.",
+      "relations": [
+        "Left square: gf=1_C(gf), with both composites A->C.",
+        "Right square: (0:coker(f)->0)q_f=(0:C->0)g=0:B->0."
+      ],
+      "interface_check": "The top row f,q_f is exact in the stated abelian category, and 1_C is monic. Apply local L1 with alpha=gf,beta=g,gamma=0:coker(f)->0. L4 represents its final kernel by coker(f) with identity. The induced first map v satisfies k_g v=f k_gf, and the second is delta=q_f k_g:ker(g)->coker(f), exactly as steps 1.1 and 2.3 require.",
+      "proof_independent": true
+    },
+    {
+      "comparison_maps": "The proof retains u:K_f->K_gf, v:K_gf->K_g, delta=q_f k_g:K_g->Q_f, w:Q_f->Q_gf, x:Q_gf->Q_g. The cokernel comparison equations are w q_f=q_gf g and x q_gf=q_g by L3. Dualizing the proved kernel sequence reverses the same comparison maps and delta, yielding the exact cokernel portion via L2 in step 3.1; no new dependency or changed statement is required.",
+      "proof_independent": true
+    }
+  ],
+  "local_checks": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/local-checks.json",
+  "local_compile": {
+    "script": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/compile-and-capture.mts",
+    "result": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/fresh-compile.json",
+    "output": "{\"compiled\":2,\"all_svg\":true}",
+    "exit_code": 0,
+    "method": "Actual local renderTikz/node-tikzjax; separate own runtime cache. Figure 1 initially compiled, figure 2 required supported coker label; final source produced two SVGs."
+  },
+  "visual_checks": {
+    "original_tiles": [
+      "screenshots/thm-the-kernel-cokernel-sequence-of-a-composite--01.png",
+      "screenshots/thm-the-kernel-cokernel-sequence-of-a-composite--02.png"
+    ],
+    "original_inspection_dir": "research/math-library-rendering-audit-2026-10-23/category-theory",
+    "standalone_figures": [
+      "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/figure-1.png",
+      "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/figure-2.png"
+    ],
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/preview-final-2/manifest.json",
+    "final_tile": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/ct_010/preview-final-2/screenshots/thm-the-kernel-cokernel-sequence-of-a-composite--02.png",
+    "detail": "original",
+    "outcome": "Viewed both standalone compiled figures and final full-item tile separately at original resolution; all objects, arrowheads and labels are visible without clipping or overlap; no exposed TikZ commands or error box remain."
+  },
+  "before_raw_sha256": "97cdbdd4ba7df5eeb5c1530c90d453082bc768d81e28fb384c577d5d69bc1afd",
+  "after_raw_sha256": "6799ef06250758a881ab2c8558d5ceca28f0ddda809b09433e107dd90d9922b3",
+  "frontmatter_byte_identical": true,
+  "status_byte_identical": true,
+  "remaining_issues": []
+}

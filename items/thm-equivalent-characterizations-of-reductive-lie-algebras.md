@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-equivalent-characterizations-of-reductive-lie-algebras.json
+  precheck: pass
 id: thm-equivalent-characterizations-of-reductive-lie-algebras
 kind: theorem
 title: Equivalent characterizations of reductive Lie algebras
@@ -11,12 +14,6 @@ proof_strategy: equivalence
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Milne, Lie Algebras, Proposition 6.2"
@@ -50,7 +47,7 @@ field, the following are equivalent:
 
 ## Proof
 
-**Proof technique:** prove $1\Rightarrow2\Rightarrow3\Rightarrow1$.
+**Proof technique:** prove 1 ⇒ 2 ⇒ 3 ⇒ 1.
 
 1.1 Assume condition 1 and write $\mathfrak z=Z(\mathfrak g)$. By [L1], $\mathfrak q=\mathfrak g/\mathfrak z$ is semisimple. It acts on $\mathfrak g$ through adjoints, and $\mathfrak z$ is a trivial submodule. By [L2] there is a $\mathfrak q$-submodule $\mathfrak s$ with $\mathfrak g=\mathfrak z\oplus\mathfrak s$. Invariance says $[\mathfrak g,\mathfrak s]\subseteq\mathfrak s$, so $\mathfrak s$ is an ideal, and projection identifies it with $\mathfrak q$. Hence it is semisimple by [L3]. Since $\mathfrak z$ is central and $\mathfrak s$ is perfect by [L4], $[\mathfrak g,\mathfrak g]=\mathfrak s$. This is condition 2. [L1, L2, L3, L4]
 

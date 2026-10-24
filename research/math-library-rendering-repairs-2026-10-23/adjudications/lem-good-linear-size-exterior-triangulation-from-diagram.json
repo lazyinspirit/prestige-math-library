@@ -1,0 +1,81 @@
+{
+  "id": "lem-good-linear-size-exterior-triangulation-from-diagram",
+  "agent": "/root/rendering_repair_coordinator/knot_036",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 displays the complete TikZ source literally. The tilde fence is not recognized by this native renderer as a diagram block; supported backtick fences render it.",
+      "action": "Replaced the two tilde fences with backtick fences; retained the projected crossing geometry.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Fresh first native preview after the fence repair showed both over/under labels intersecting the upper strands, especially the under label on the NW strand. Independently inspected its standalone original-resolution tile.",
+      "action": "Anchored over above-right at the NE endpoint and under above-left at the NW endpoint; final original-resolution preview confirms clear labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Enabled the existing crossing schematic with supported fences and separated its labels from strands. Only four source lines changed.",
+  "source_lines_after": [
+    46,
+    51,
+    52,
+    54
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Local projected crossing: opposite SW/NE ports are the over-strand; opposite NW/SE ports are the under-strand.",
+      "check": "The unbroken segment (-1,-1)--(1,1) lies on y=x; the two under pieces lie on y=-x and omit the open central interval between (-0.18,0.18) and (0.18,-0.18). Their transverse projected intersection is encoded by a gap on the under-strand only.",
+      "local_justification": "Statement crossing caption; def-planar-diagram-gauss-and-dowker-codes Definition requires opposite over/under dart pairs; alg-planar-code-validation-and-diagram-reconstruction instructions 6 and 9 preserve those pairs and lift over above under."
+    },
+    {
+      "objects": "Crossing heights and orientation information.",
+      "check": "The schematic asserts only over/under incidence; no arrows or crossing sign are depicted or inferred. Label over remains attached to the NE end of the continuous diagonal; under remains attached to the NW end of the broken diagonal.",
+      "local_justification": "Proof step 3.1 places opposite-port arcs at distinct interval heights, joins each designated pair, and proves disjointness from their different heights. Supplier realizability proof step 4.1 gives the same over/under height construction."
+    },
+    {
+      "objects": "Sphere triangulation, crossing/edge blocks, and good exterior neighborhood.",
+      "check": "The figure carries no cell, block, tetrahedron-count or meridian labels and asserts no triangulation relations. These remain justified in proof steps 1.1 (disk/band incidences), 2.1 (face coning and bounded triangle count), 3.1 (prisms/caps and arc subcomplexes), 4.1 (ball/tube neighborhood and marked meridian), and 5.1 (crossingless fixed model). No picture substitutes for those arguments.",
+      "local_justification": "Read current item and all four immediate suppliers in full. The reconstruction algorithm output and instructions 8\u20139 supply the face-cycle/disk/band gluing interfaces; the reconstruction-properties theorem states that this is the declared oriented diagram."
+    }
+  ],
+  "checks": {
+    "proof_layout": "proof-layout: 1 items, 5 steps, 0 defects",
+    "precheck": {
+      "files": 1,
+      "checked": 1,
+      "failed": 0,
+      "status": "pass"
+    },
+    "rendercheck": {
+      "checked": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "frontmatter_byte_identical": true,
+    "before_raw_sha256": "d6a17cd9abd98e92bcb709935813d1dafdc68e14e118e5ffbe448452a091e9ca",
+    "after_raw_sha256": "0c7f49aa7301e3e1e8cbfe2a5176e7a90dd5a93a2e977dd28edf693ebb192282"
+  },
+  "visual_review": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/lem-good-linear-size-exterior-triangulation-from-diagram--01.png"
+    ],
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/previews/knot036-final-unique-v2/manifest.json",
+    "final_tiles_reviewed_standalone_original": [
+      1,
+      2
+    ],
+    "result": "Crossing renders with continuous SW\u2013NE over-strand and correctly gapped NW\u2013SE under-strand; labels clear. All five proof steps render with blue justification chips.",
+    "limitations": "Local native ItemBody SSR preview; no website visit or production-route claim. Preview reports 32 unrelated reference-map parsing diagnostics."
+  },
+  "remaining_issues": []
+}

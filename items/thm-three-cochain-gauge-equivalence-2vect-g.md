@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-three-cochain-gauge-equivalence-2vect-g.json
+  precheck: pass
 id: thm-three-cochain-gauge-equivalence-2vect-g
 kind: theorem
-title: A normalized 3-cochain gives the gauge equivalence of 2Vect_G^omega
+title: A normalized 3-cochain gives the gauge equivalence of $2\mathrm{Vect}^{\omega}_G$
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -29,9 +32,9 @@ If $\omega'=\omega\,\delta\beta$, then the identity on the underlying graded 2-c
 ## Facts & Assumptions
 
 
-**Given:** The structures in [[def-four-cocycle-twisted-monoidal-structure-on-2vect-g]] and a normalized 3-cochain $\beta$ with $\omega'=\omega\,\delta\beta$.
+**Given:** The structures in [[def-four-cocycle-twisted-monoidal-structure-on-2vect-g|Four-cocycle twisted monoidal structure on $2\mathrm{Vect}_G$]] and a normalized 3-cochain $\beta$ with $\omega'=\omega\,\delta\beta$.
 
-[F1] [[def-four-cocycle-twisted-monoidal-structure-on-2vect-g]]: A normalized multiplicative 4-cochain is a function $\omega:G^4\to k^\times$ equal to $1$ if any input is $e$, and it is a 4-cocycle when it satisfies the displayed five-variable equation.
+[F1] [[def-four-cocycle-twisted-monoidal-structure-on-2vect-g|Four-cocycle twisted monoidal structure on $2\mathrm{Vect}_G$]]: A normalized multiplicative 4-cochain is a function $\omega:G^4\to k^\times$ equal to $1$ if any input is $e$, and it is a 4-cocycle when it satisfies the displayed five-variable equation.
 
 ## Proof
 

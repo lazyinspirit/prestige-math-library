@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-s-units-of-q.json
+  precheck: pass
 id: ex-s-units-of-q
 kind: example
 title: "S-units of Q"
@@ -35,9 +38,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   references:
     - title: "J. S. Milne, Algebraic Number Theory v3.08"
@@ -91,7 +91,7 @@ of rank $r_1+r_2-1+|S_{\mathbb Q}|=1+0-1+m=m$.
 
 ## Verification
 
-**Proof technique:** identify the localisation with a subring of $\mathbb Q$, express membership in it and in its unit group through the exponents of the prime factorisation of a rational, and then compare the resulting monomial group with the $S$-unit theorem applied to $K=\mathbb Q$.
+**Proof technique:** identify the localisation with a subring of ℚ, express membership in it and in its unit group through the exponents of the prime factorisation of a rational, and then compare the resulting monomial group with the S-unit theorem applied to K = ℚ.
 
 1.1 The localisation $R$ embeds in $\mathbb Q$ by $\varphi(a/b)=a/b$: the map is well defined because if $a/b=a'/b'$ in $R$, then $u(ab'-a'b)=0$ for some $u\in M$ by [F1] and hence $ab'=a'b$ by [F2], so the two rationals agree; it respects the fraction arithmetic of [F1], which is the arithmetic of the field $\mathbb Q$; and it is injective, since $\varphi(a/b)=0$ forces $a=0$, and then $1\cdot(a\cdot1-0\cdot b)=0$ gives $a/b=0/1$ by [F1]. Hence $R$ is identified with the subring $\{a/b\in\mathbb Q:a\in\mathbb Z,\ b\in M\}$ of $\mathbb Q$, in which $1/s$ is the inverse of $s$ for every $s\in M$. [F1, F2, algebra]
 

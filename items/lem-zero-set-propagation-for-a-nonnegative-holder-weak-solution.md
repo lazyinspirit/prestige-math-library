@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-zero-set-propagation-for-a-nonnegative-holder-weak-solution.json
+  precheck: pass
 id: lem-zero-set-propagation-for-a-nonnegative-holder-weak-solution
 kind: lemma
 title: "Zero-set propagation for a nonnegative Holder weak solution"
@@ -23,8 +26,7 @@ sources:
     - title: "Leon Simon, Lectures on Partial Differential Equations (Stanford University; complete author scan, 118 sheets reproducing the 223 printed pages of the manuscript, two logical pages per sheet)"
       url: "https://math.stanford.edu/~lms/lecs-on-pde.pdf"
       locator: "Lecture 18, Theorem 1, printed p. 211: local Harnack for homogeneous nonnegative solutions; the zero-set conclusion is derived here using the local weak-Harnack supplier"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -46,7 +48,7 @@ Then $u^*\equiv0$ on $\Omega$; equivalently the zero set $\{u^*=0\}$ is both rel
 
 ## Proof
 
-**Proof technique:** direct; the weak Harnack inequality with $p=1$ turns the vanishing of $u^*$ at a point into the vanishing of $u$ on a whole ball, which makes the zero set relatively open, while continuity makes it relatively closed; connectedness then forces the zero set to be all of $\Omega$.
+**Proof technique:** direct; the weak Harnack inequality at exponent one turns a zero of the continuous representative into almost-everywhere vanishing of the solution on a whole ball, which makes the zero set relatively open, while continuity makes it relatively closed; connectedness then forces the zero set to be the whole domain.
 
 1.1 The zero set is relatively open. Fix a radius $S>0$ with $B_{2S}(x_0)\Subset\Omega$; such an $S$ exists because $\Omega$ is open and $x_0\in\Omega$. Apply the weak Harnack inequality [F1] to $u$ on the ball $B_S(x_0)$ with $p=1$ and $F=0$: $S^{-n}\int_{B_S(x_0)}u\,dx\le C_1\operatorname{ess\,inf}_{B_{S/2}(x_0)}u$. Since $x_0\in B_{S/2}(x_0)$ and $u\ge0$ a.e. with continuous representative $u^*$ vanishing at $x_0$, [F2] gives $\operatorname{ess\,inf}_{B_{S/2}(x_0)}u\le u^*(x_0)=0$; hence $\int_{B_S(x_0)}u\,dx=0$ and therefore $u=0$ a.e. on $B_S(x_0)$ by [F2]. Since $u^*$ is continuous and agrees with $u$ a.e. on the ball $B_S(x_0)$, the set where $u^*\ne0$ is open and of measure zero in $B_S(x_0)$; it must be empty, so $u^*=0$ on all of $B_S(x_0)$. [given, F1, F2]
 

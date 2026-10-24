@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-rank-two-bott-samelson-bimodule-and-its-character-decomposition.json
+  precheck: pass
 id: ex-the-rank-two-bott-samelson-bimodule-and-its-character-decomposition
 kind: example
-title: "The rank-two Bott-Samelson bimodule B_sB_t: character, decomposition and the braid relation"
+title: "The rank-two Bott-Samelson bimodule $B_sB_t$: character, decomposition and the braid relation"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -22,8 +25,7 @@ sources:
     - title: "Soergel, Kazhdan-Lusztig-Polynome und unzerlegbare Bimoduln ueber Polynomringen (arXiv:math/0403496, published J. Inst. Math. Jussieu 6 (2007) 501-525)"
       url: "https://arxiv.org/pdf/math/0403496"
       locator: "Theorem 4.2 and Proposition 4.6 (the dihedral computation of the character and the Kazhdan-Lusztig basis in rank two)"
-verification:
-  precheck: pass
+
 ---
 
 ## Example

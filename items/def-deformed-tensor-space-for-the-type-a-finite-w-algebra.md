@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-deformed-tensor-space-for-the-type-a-finite-w-algebra.json
+  precheck: pass
 id: def-deformed-tensor-space-for-the-type-a-finite-w-algebra
 kind: definition
 title: "The deformed tensor space for the type-A finite W-algebra"
@@ -32,12 +35,7 @@ sources:
     - title: "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)"
       url: "https://arxiv.org/pdf/math/0508003"
       locator: "Chapter 8, Sections 8.1-8.3, printed pp. 81-86: Skryabin's model, the actual balanced tensor map in Corollary 8.2, coherent associativity (8.8)-(8.10), and transported Casimir/place operators (8.13)-(8.23). The relevant full tensor passage and the initial translation-operator passage were newly read; no claim of fresh full-memoir reading."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
+
 ---
 
 ## Definition
@@ -70,7 +68,7 @@ For $d=0$ there are no $x_j,s_i$, $H_0(\Lambda)=\mathbb C$, and $E_c=\mathbb C_c
 Grade the box basis by $\deg v_a=l-\operatorname{col}(a)$, use the total
 tensor grading and its induced endomorphism filtration, and use the fixed
 loop chart $\zeta\colon\operatorname{gr}W(\lambda)\to U(\mathfrak g^e)$ of
-[[thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e]]:
+[[thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e|The loop filtration on the type-A finite W-algebra has associated graded $U(\mathfrak g^e)$]]:
 $\zeta(\operatorname{gr}_rT_{i,j}^{(r+1)})=(-1)^re_{i,j;r}$, $(i,j,r)\in K$.
 The coefficient index remains the actual unshifted $T=FDE$ index of
 [[def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra]].
@@ -112,7 +110,7 @@ empty interpretations.
 
 [F1] The pyramid gives $\deg e_{a,b}=\operatorname{col}(b)-\operatorname{col}(a)$, $\mathfrak p=\bigoplus_{r\ge0}\mathfrak g_r$, $e\in\mathfrak g_1$, and $e_{i,j;r}=\sum e_{a,b}$ over row pair $(i,j)$ and column displacement $r$; the $J\leftrightarrow K$ bijection retains the physical box labels ([[def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character]]).
 
-[F2] The finite $W$ model uses $\eta(e_{a,b})=e_{a,b}+\delta_{a,b}\rho_{\operatorname{col}(a)}$ with $\rho_b=n-\sum_{h\ge b}q_h$. The canonical loop chart is the inclusion $\operatorname{gr}W\subseteq U(\mathfrak p)$ identified with $U(\mathfrak g^e)$, and its mode symbols are $(-1)^re_{i,j;r}$, without a $u^{s_{i,j}}$ multiplier ([[def-the-type-a-finite-w-algebra-and-whittaker-category]], [[thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e]], [[def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra]]).
+[F2] The finite $W$ model uses $\eta(e_{a,b})=e_{a,b}+\delta_{a,b}\rho_{\operatorname{col}(a)}$ with $\rho_b=n-\sum_{h\ge b}q_h$. The canonical loop chart is the inclusion $\operatorname{gr}W\subseteq U(\mathfrak p)$ identified with $U(\mathfrak g^e)$, and its mode symbols are $(-1)^re_{i,j;r}$, without a $u^{s_{i,j}}$ multiplier ([[def-the-type-a-finite-w-algebra-and-whittaker-category]], [[thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e|The loop filtration on the type-A finite W-algebra has associated graded $U(\mathfrak g^e)$]], [[def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra]]).
 
 [F3] For a $\mathfrak p$-module $M$, Skryabin supplies the actual balanced $W$-linear tensor map $(\eta(u)1_\chi\otimes m)\otimes v\mapsto um\otimes v$, its triangular inverse and coherent associativity. On the ambient genuine $\mathfrak g$-module the trace-form Casimir and places are natural intertwiners satisfying the affine Hecke relations; restriction to Whittaker vectors therefore transports these operators as $W$-endomorphisms ([[thm-skryabins-equivalence-for-the-type-a-whittaker-pair]], [[def-arakawa-suzuki-casimir-operators-on-tensor-functors]], [[thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations]]).
 

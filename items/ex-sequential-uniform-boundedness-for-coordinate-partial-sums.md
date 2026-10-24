@@ -1,9 +1,10 @@
 ---
 verification:
-  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/ex-sequential-uniform-boundedness-for-coordinate-partial-sums.json
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-sequential-uniform-boundedness-for-coordinate-partial-sums.json
+  precheck: pass
 id: ex-sequential-uniform-boundedness-for-coordinate-partial-sums
 kind: example
-title: "Coordinate partial sums on c_0"
+title: "Coordinate partial sums on $c_0$"
 status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
@@ -35,7 +36,7 @@ Then $X$ is Banach, each $P_N:X\to X$ is bounded linear, $P_Nx\to x$ for each $x
 
 **Given:** The specified field, space, coordinate vectors, and finite truncations.
 
-[F1] $c_0$ consists of bounded null sequences, with coordinatewise operations and the supremum norm ([[def-c-zero-and-ell-infinity]]).
+[F1] $c_0$ consists of bounded null sequences, with coordinatewise operations and the supremum norm ([[def-c-zero-and-ell-infinity|The sequence spaces $c_0$ and $\ell^\infty$]]).
 
 [F2] Every nonempty bounded-above set of reals has a supremum ([[cor-cauchy-reals-lub-complete]]); applying this to negatives also supplies infima of nonempty bounded-below sets.
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-eberlein-smulian-countable-compactness-closes-in-the-bidual.json
+  precheck: pass
 id: lem-eberlein-smulian-countable-compactness-closes-in-the-bidual
 kind: lemma
 title: Countable compactness closes in the bidual
@@ -9,12 +12,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
 sources:
   references:
     - title: "Haase, The Functional Analysis of Quantum Information Theory"
@@ -46,7 +43,7 @@ that the cluster point or the representing point belongs to $A$.
 
 [F4] Under HB the canonical map $J_X:X\to X^{**}$ is an isometry, for both scalar fields ([[cor-relative-hahn-banach-bidual-isometry]]).  HB is the named relative dominated-extension principle ([[def-hahn-banach-extension-principle-relative]]).
 
-[F5] Assuming DC, a pointwise bounded family of bounded operators on a Banach space is uniformly norm bounded ([[thm-uniform-boundedness-principle]]).  If the target is Banach, the bounded-operator space is Banach ([[thm-bounded-operator-space-is-banach]]).
+[F5] Assuming DC, a pointwise bounded family of bounded operators on a Banach space is uniformly norm bounded ([[thm-uniform-boundedness-principle]]).  If the target is Banach, the bounded-operator space is Banach ([[thm-bounded-operator-space-is-banach|Bounded-operator spaces with Banach target are Banach]]).
 
 [F6] DC supplies a sequence following any entire relation from a specified initial state ([[def-dependent-choice]]).
 

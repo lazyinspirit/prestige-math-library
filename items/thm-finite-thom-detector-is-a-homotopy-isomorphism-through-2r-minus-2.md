@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-finite-thom-detector-is-a-homotopy-isomorphism-through-2r-minus-2.json
+  precheck: pass
 id: thm-finite-thom-detector-is-a-homotopy-isomorphism-through-2r-minus-2
 kind: theorem
 title: "The finite Thom detector is a homotopy isomorphism through 2r−2"
@@ -26,17 +29,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf"
       locator: "Theorem 4.32 and Corollary 4.33, printed pp. 366–368: relative Hurewicz and finite-range comparison method."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. For r≥2, f_r induces π_i(T_r)≅π_i(P_r) for 1≤i≤2r−2. On π_{r+n}, for 0≤n≤r−2, the target is F₂^{B_n} and its coordinates are evaluation on the chosen stable Thom classes.
+Assume AC. For $r\ge2$, $f_r$ induces $\pi_i(T_r)\cong\pi_i(P_r)$ for $1\le i\le2r-2$. On $\pi_{r+n}$, for $0\le n\le r-2$, the target is $\mathbb F_2^{B_n}$ and its coordinates are evaluation on the chosen stable Thom classes.
 
 ## Facts & Assumptions
 
@@ -52,6 +50,6 @@ Assume AC. For r≥2, f_r induces π_i(T_r)≅π_i(P_r) for 1≤i≤2r−2. On �
 
 **Proof technique:** direct.
 
-1.1 By the connectivity lemma, $T_r$ is a simply connected CW complex. The target P_r is a finite product of K(F₂,q) with q≥r≥2, hence path-connected and simply connected; we do not assume its ordinary product topology is a CW topology. Apply the arbitrary-target extension by relative CW approximation to replace $f_r$ by a CW extension pair, then the integral homology-to-homotopy comparison theorem with $N=2r-1$. The integral comparison supplies the exact homology hypotheses, so $f_r$ induces $\pi_i$ isomorphisms for $1\le i<N$, namely through $2r-2$. The same comparison also gives surjectivity at $\pi_{2r-1}$; only the isomorphisms through $2r-2$ are needed here, and no conclusion at $\pi_{2r}$ is supplied. [given, F1, F2]
+1.1 By the connectivity lemma, $T_r$ is a simply connected CW complex. The target $P_r$ is a finite product of $K(\mathbb F_2,q)$ with $q\ge r\ge2$, hence path-connected and simply connected; we do not assume its ordinary product topology is a CW topology. Apply the arbitrary-target extension by relative CW approximation to replace $f_r$ by a CW extension pair, then the integral homology-to-homotopy comparison theorem with $N=2r-1$. The integral comparison supplies the exact homology hypotheses, so $f_r$ induces $\pi_i$ isomorphisms for $1\le i<N$, namely through $2r-2$. The same comparison also gives surjectivity at $\pi_{2r-1}$; only the isomorphisms through $2r-2$ are needed here, and no conclusion at $\pi_{2r}$ is supplied. [given, F1, F2]
 
-2.1 A factor K(F₂,r+d_b) has its only nonzero positive homotopy group F₂ in degree r+d_b. Coordinatewise homotopy groups of a finite product are the products of the factor groups, as proved in the finite-product homotopy computation. Hence at i=r+n the target is F₂^{B_n}. The induced coordinate on a sphere class [α:S^{r+n}→T_r] is ⟨m_{r,b}, α_*[S^{r+n}]_{F₂}⟩ = ⟨α^*m_{r,b},[S^{r+n}]_{F₂}⟩, by representability and the normalized fundamental class. The cutoff i≤2r−2 is equivalent to r≥n+2. [step 1.1, F1, F3] ∎
+2.1 A factor $K(\mathbb F_2,r+d_b)$ has its only nonzero positive homotopy group $\mathbb F_2$ in degree $r+d_b$. Coordinatewise homotopy groups of a finite product are the products of the factor groups, as proved in the finite-product homotopy computation. Hence at $i=r+n$ the target is $\mathbb F_2^{B_n}$. The induced coordinate on a sphere class $[\alpha:S^{r+n}\to T_r]$ is $\langle m_{r,b},\alpha_*[S^{r+n}]_{\mathbb F_2}\rangle = \langle\alpha^*m_{r,b},[S^{r+n}]_{\mathbb F_2}\rangle$, by representability and the normalized fundamental class. The cutoff $i\le2r-2$ is equivalent to $r\ge n+2$. [step 1.1, F1, F3] ∎

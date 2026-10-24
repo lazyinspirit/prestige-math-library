@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-scaled-chebyshev-filter-bound-on-a-separated-interval.json
+  precheck: pass
 id: lem-scaled-chebyshev-filter-bound-on-a-separated-interval
 kind: lemma
 title: "A scaled Chebyshev polynomial suppresses a separated interval"
@@ -15,10 +18,6 @@ deps: [def-chebyshev-polynomials-first-and-second-kind,
 justified_by: []
 aliases: []
 proof_strategy: direct
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §6.11.1, printed pp. 209–210"

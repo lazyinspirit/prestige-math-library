@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-schauder-compact-adjoint-theorem.json
+  precheck: pass
 id: thm-schauder-compact-adjoint-theorem
 kind: theorem
 title: Schauder compact adjoint theorem
@@ -10,12 +13,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 pp.186–187, Theorem 4.28(iii)"
@@ -30,14 +27,14 @@ Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ and $Y$ be Banach
 spaces over the same scalar field and let $T:X\to Y$ be a bounded linear
 operator ([[def-bounded-linear-operator]]), with transpose
 $T^*:Y^*\to X^*$ ([[def-transpose-of-a-bounded-operator]],
-[[def-dual-space-of-a-normed-space]]). Then $T$ is compact
+[[def-dual-space-of-a-normed-space|The dual space of a normed space and its dual norm]]). Then $T$ is compact
 ([[def-compact-linear-operator]]) if and only if $T^*$ is compact.
 
 ## Facts & Assumptions
 
 [A1] $S$ is compact exactly when $\overline{S(\overline B_X)}$ is compact ([[def-compact-linear-operator]]); the transpose is the bounded linear map $(S^*h)(x)=h(Sx)$ with $\|S^*\|=\|S\|$ ([[def-transpose-of-a-bounded-operator]], [[lem-transpose-is-bounded-and-has-the-same-norm]], [[def-operator-norm]]).
 
-[A2] If $X$ is Banach then $X^*=\mathcal B(X,\mathbb K)$ is Banach ([[thm-bounded-operator-space-is-banach]], [[def-dual-space-of-a-normed-space]], [[cor-finite-dimensional-normed-spaces-are-banach]]), and a closed subset of a Banach space is complete (claim 2 of [[thm-complete-subspace-iff-closed]], [[def-banach-space]]).
+[A2] If $X$ is Banach then $X^*=\mathcal B(X,\mathbb K)$ is Banach ([[thm-bounded-operator-space-is-banach|Bounded operators into a Banach space form a Banach space]], [[def-dual-space-of-a-normed-space|The dual space of a normed space and its dual norm]], [[cor-finite-dimensional-normed-spaces-are-banach]]), and a closed subset of a Banach space is complete (claim 2 of [[thm-complete-subspace-iff-closed]], [[def-banach-space]]).
 
 [A3] Assume $\mathrm{AC}_\omega$ and $\mathrm{DC}$: compact, sequentially compact and "complete and totally bounded" agree for metric spaces ([[thm-metric-compactness-equivalences]]). Under $\mathrm{AC}$, both hold ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[def-countable-choice]], [[def-dependent-choice]]).
 

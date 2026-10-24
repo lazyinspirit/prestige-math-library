@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-a-measurable-function-on-a-finite-measure-subset-of-rn-agrees-off-a-small-set-with-a-continuous-function.json
+  precheck: pass
 id: cor-a-measurable-function-on-a-finite-measure-subset-of-rn-agrees-off-a-small-set-with-a-continuous-function
 kind: corollary
-title: "Assuming countable choice and dependent choice, a measurable function on a finite-measure subset of R^n agrees there, off a small set, with a continuous function on R^n"
+title: "Assuming countable choice and dependent choice, a measurable function on a finite-measure subset of $\\mathbb R^n$ agrees there, off a small set, with a continuous function on $\\mathbb R^n$"
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-lusins-theorem, thm-tietze-extension-theorem, lem-metrics-on-rn, thm-metric-spaces-are-completely-normal]
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Theorem 5.15"
@@ -34,7 +34,7 @@ $$\lambda_n(\{x \in E : g(x)\ne f(x)\})<\varepsilon.$$
 
 **Given:** The Axiom of Countable Choice, dependent choice, a measurable function $f:E \to \mathbb R$ on a finite-measure Lebesgue set $E \subseteq \mathbb R^n$, and a real $\varepsilon>0$.
 
-[L1] Assuming countable choice, Lusin's theorem gives a real $M>0$ and a closed set $F \subseteq E \cap f^{-1}([-M,M])$ such that $\lambda_n(E\setminus F)<\varepsilon$ and $f|_F$ is continuous. ([[thm-lusins-theorem]])
+[L1] Assuming countable choice, Lusin's theorem gives a real $M>0$ and a closed set $F \subseteq E \cap f^{-1}([-M,M])$ such that $\lambda_n(E\setminus F)<\varepsilon$ and $f|_F$ is continuous. ([[thm-lusins-theorem|Assuming countable choice, Lusin's theorem on finite-measure subsets of $\mathbb R^n$]])
 
 [L2] Assuming dependent choice, every continuous map from a closed subspace of a normal space into a closed interval $[a,b]$ extends continuously to the whole space. ([[thm-tietze-extension-theorem]])
 

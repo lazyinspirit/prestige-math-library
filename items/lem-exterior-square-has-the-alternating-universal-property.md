@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-exterior-square-has-the-alternating-universal-property.json
+  precheck: pass
 id: lem-exterior-square-has-the-alternating-universal-property
 kind: lemma
 title: "Alternating universal property"
@@ -14,18 +17,12 @@ sources:
     - title: "Clara Löh, Group Cohomology"
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+
 ---
 
 ## Statement
 
-Alternating bilinear maps A×A→B factor uniquely through ∧²A.
+Alternating bilinear maps $A\times A\to B$ factor uniquely through $\bigwedge^2 A$.
 
 ## Proof
 

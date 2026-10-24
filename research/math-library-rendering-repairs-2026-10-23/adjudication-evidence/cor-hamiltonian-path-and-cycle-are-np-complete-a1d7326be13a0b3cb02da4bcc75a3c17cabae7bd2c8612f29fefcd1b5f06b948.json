@@ -1,0 +1,163 @@
+{
+  "id": "cor-hamiltonian-path-and-cycle-are-np-complete",
+  "agent": "/root/rendering_repair_coordinator/dcpt_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A concrete two-triple expansion materially clarifies which side of each internal vertex receives and emits the edges encoding directed arcs. Original standalone tiles contain only prose for the orientation-sensitive step 2.2.",
+      "action": "Added a final Remarks section with the exact four-vertex directed path s -> u -> v -> t and its eight-vertex undirected expansion, highlighting the u -> v correspondence.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a proof-independent TikZ illustration and its explicit concrete graph data; preserved all original carrier bytes as an exact prefix.",
+  "source_lines_after": {
+    "remarks": [
+      64,
+      97
+    ],
+    "diagram": [
+      68,
+      95
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Input data and orientation",
+      "result": "D has exactly vertices s,u,v,t and arcs s->u, u->v, v->t, with s != t. These three right-pointing arcs appear in the native output. No arc enters s or leaves t. This is an allowed input to step 2.2 and a Hamiltonian ordering under the local Hamiltonian definition."
+    },
+    {
+      "check": "Exact expansion and all edges",
+      "result": "Step 2.2 replaces u and v by u1-u2-u3 and v1-v2-v3, keeps s3 and t1, and sends the three arcs to s3-u1, u3-v1, v3-t1. Thus G' has precisely eight vertices and seven undirected edges: s3-u1, u1-u2, u2-u3, u3-v1, v1-v2, v2-v3, v3-t1. All seven are visible in the standalone native PNG and present as seven horizontal segments in the compiled SVG. Heavy top arc u->v corresponds exactly to heavy lower edge u3-v1."
+    },
+    {
+      "check": "Degrees, traversal, closure",
+      "result": "Independent local adjacency enumeration gives degree(s3)=degree(t1)=1 and degree 2 for u1,u2,u3,v1,v2,v3. A DFS over that adjacency data found exactly one Hamiltonian path from s3 to t1: s3,u1,u2,u3,v1,v2,v3,t1. It contracts to s,u,v,t. Native SVG has three top edge segments plus three right arrowheads and seven lower edge segments without arrowheads; it has no closing edge t1-s3. All vertices and edge segments checked individually in the standalone original-resolution preview."
+    },
+    {
+      "check": "Proof interface and boundary",
+      "result": "The example is explicitly restricted to s != t and a directed path input. It asserts no general graph degree restriction beyond the example; the separate s=t case remains in unchanged step 2.2. Original Statement, Facts and all seven proof steps remain byte-identical and the argument does not cite or rely on the diagram."
+    }
+  ],
+  "remaining_issues": [],
+  "before_raw_sha256": "1d52ff3cb0a77d827658063890af016ee6d9b7b5b344760b620c31d2537a48ef",
+  "after_raw_sha256": "3dbb8cca3f68650e6f57291a3844f86b6907bb51a9f0b3e743335e769bcded84",
+  "original_carrier_exact_prefix": true,
+  "status_preserved": "status: published (byte-identical; all original frontmatter preserved)",
+  "evidence_path_discrepancy": {
+    "declared_dir": "research/math-library-rendering-audit-2026-10-23/computability-theory/diagram-supplement",
+    "resolved_dir": "research/math-library-rendering-audit-2026-10-23/computability-theory",
+    "reason": "Declared diagram-supplement screenshots do not exist; authentic tiles were located within the same category and both SHA256 values match the queue."
+  },
+  "original_views": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/cor-hamiltonian-path-and-cycle-are-np-complete--01.png",
+      "sha256": "aa7c259d3561458593f91a2d3b747c0f25d38587f7c964f6039712bc07a1b1d7",
+      "detail": "original",
+      "standalone": true
+    },
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/cor-hamiltonian-path-and-cycle-are-np-complete--02.png",
+      "sha256": "d885bae693a9ed4a8035ce027a90f7653fc8f05608b58ae284ba1daccd5f526f",
+      "detail": "original",
+      "standalone": true
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-hamiltonian-path-and-cycle-are-np-complete.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-hamiltonian-path-and-cycle-are-np-complete.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cor-hamiltonian-path-and-cycle-are-np-complete.md",
+            "item_id": "cor-hamiltonian-path-and-cycle-are-np-complete",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-hamiltonian-path-and-cycle-are-np-complete.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcpt-001 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cor-hamiltonian-path-and-cycle-are-np-complete --out research/math-library-rendering-repairs-2026-10-23/previews/dcpt-001",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-001/manifest.json",
+    "manifest_sha256": "59d0a9d1d3b67a24071913bb3c01480f06e434c7e8e23bceb2fb273062740f9d",
+    "source_sha256": "3dbb8cca3f68650e6f57291a3844f86b6907bb51a9f0b3e743335e769bcded84",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dcpt-001/pi-tikz-cache/cbdddf41c80e132e287c52a01ec34ba4.svg",
+    "native_svg_sha256": "059d16251ee5fd4e02d873442edb036adb094d6100277e444d5b32ae415d1c30",
+    "capture": {
+      "capture_revision": 2,
+      "id": "cor-hamiltonian-path-and-cycle-are-np-complete",
+      "height": 2366,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/cor-hamiltonian-path-and-cycle-are-np-complete--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "8ffc30288604fccb71452d1bd1cddb325f911368cd00244673917ee30f3e19d8",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/cor-hamiltonian-path-and-cycle-are-np-complete--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 1066,
+          "sha256": "879119d385672b258d3034adda61a055ef20bde87a595d97c9ddcbd131ddaf48",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 104,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T00:08:59.806Z"
+    },
+    "standalone_original_resolution_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-001/screenshots/cor-hamiltonian-path-and-cycle-are-np-complete--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-001/screenshots/cor-hamiltonian-path-and-cycle-are-np-complete--02.png"
+    ],
+    "observed": "No clipping or overlap, all labels and arrows visible; no KaTeX errors or diagram failures.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostics": 16
+  }
+}

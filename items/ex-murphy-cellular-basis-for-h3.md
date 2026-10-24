@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-murphy-cellular-basis-for-h3.json
+  precheck: pass
 id: ex-murphy-cellular-basis-for-h3
 kind: example
-title: "The Murphy cellular basis of H(S_3)"
+title: "The Murphy cellular basis of $H(S_3)$"
 status: published
 origin: pipeline
 provenance:
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 13
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-first-false-round-is-caught-by-root-bound.json
+  precheck: pass
 id: lem-first-false-round-is-caught-by-root-bound
 kind: lemma
 title: "A false sum-check claim rarely becomes true"
@@ -9,12 +12,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct calculation
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Justin Thaler, Proofs, Arguments, and Zero-Knowledge (2023), Proposition 4.1 non-inductive proof, pp.36\u201337"
@@ -29,9 +26,9 @@ At any round $i\in\{1,\ldots,n\}$ of sum-check, condition on a reached past tran
 
 **Given:** The objects and hypotheses in the statement above.
 
-[F1] The current true value is S_{i-1}, the honest message is q_i, and a fresh uniform r_i is drawn only after h_i is fixed ([[def-sum-check-instance-and-protocol]]).
+[F1] The current true value is $S_{i-1}$, the honest message is $q_i$, and a fresh uniform $r_i$ is drawn only after $h_i$ is fixed ([[def-sum-check-instance-and-protocol]]).
 
-[F2] A nonzero polynomial of degree m over an integral domain has at most m distinct roots in that domain ([[thm-root-bound-for-polynomials-over-a-domain]]).
+[F2] A nonzero polynomial of degree $m$ over an integral domain has at most $m$ distinct roots in that domain ([[thm-root-bound-for-polynomials-over-a-domain]]).
 
 ## Proof
 

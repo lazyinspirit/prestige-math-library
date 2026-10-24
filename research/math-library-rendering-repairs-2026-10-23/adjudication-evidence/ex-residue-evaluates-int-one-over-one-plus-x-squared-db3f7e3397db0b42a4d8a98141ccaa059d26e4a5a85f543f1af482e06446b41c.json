@@ -1,0 +1,84 @@
+{
+  "id": "ex-residue-evaluates-int-one-over-one-plus-x-squared",
+  "agent": "/root/rendering_repair_coordinator/cxa_041",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution inspection shows x^2 displayed literally in the title. This is an intended mathematical power, as confirmed by the identical integrand in the Example and Verification, which already renders as mathematics. The word pi names the same constant shown there as \\pi.",
+      "action": "Wrapped 1/(1+x^2) and \\pi in supported inline math delimiters in the title.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only insertion of supported inline mathematics for the rational integrand and pi; body, all other frontmatter including status and verification remain byte-identical.",
+  "source_lines_after": {
+    "4": "title: 'The integral of $1/(1+x^2)$ over the real line is $\\pi$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "4e11ec0a0e73d75709bb367cc1cbde369ce0cf62bfe3636068cb1701aa29cad9",
+  "after_raw_sha256": "f3d3ae7d51ef9ef224ecde6f6933cd972a1416061820fbc43099a6c3a3780507",
+  "scope_verification": "Comparison with frozen before after masking only the title line confirms exact identity of all other bytes, including published status and body.",
+  "original_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-residue-evaluates-int-one-over-one-plus-x-squared--01.png",
+    "inspection": "Viewed standalone at original resolution."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-residue-evaluates-int-one-over-one-plus-x-squared.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-residue-evaluates-int-one-over-one-plus-x-squared.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-residue-evaluates-int-one-over-one-plus-x-squared.md",
+            "item_id": "ex-residue-evaluates-int-one-over-one-plus-x-squared",
+            "status": "pass",
+            "strategy": "computation"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-residue-evaluates-int-one-over-one-plus-x-squared.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "check_history": "An initial temporary title edit used an unsafe JavaScript replacement-string dollar sequence, causing malformed YAML and duplicate suffix content. Initial rendercheck/native preview failed on that temporary state. Corrected using a function replacement from the authenticated frozen preimage, then reran all three scoped checks and the native preview successfully. The final carrier differs only in its title line.",
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cxa041 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-residue-evaluates-int-one-over-one-plus-x-squared --out research/math-library-rendering-repairs-2026-10-23/previews/cxa041-native-final",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa041-native-final/manifest.json",
+    "manifest_sha256": "400df49f2916e1206fdca60c131feca30211bee2cddfcd80c32aea1ed00d804d",
+    "source_sha256": "f3d3ae7d51ef9ef224ecde6f6933cd972a1416061820fbc43099a6c3a3780507",
+    "reference_map_sha256": "546370d14a289c7c5f2899503475c126c032aacd5a3566ae85b3cdc2edc1054f",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/cxa041-native-final/screenshots/ex-residue-evaluates-int-one-over-one-plus-x-squared--01.png",
+    "inspection": "Viewed final standalone complete tile at original resolution. Title now displays the superscript and Greek pi correctly; no clipping or overlap in the changed title region.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostics": 16
+  }
+}

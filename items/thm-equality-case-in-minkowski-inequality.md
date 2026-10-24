@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-equality-case-in-minkowski-inequality.json
+  precheck: pass
 id: thm-equality-case-in-minkowski-inequality
 kind: theorem
 title: "Equality in Minkowski's inequality for $1 < p < \\infty$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-minkowski-inequality-for-integrals, thm-equality-case-in-holder-inequality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: "Examine the Holder step in the standard proof of Minkowski. Equality forces the nonnegative functions |f| and |g| to be proportional almost everywhere, and that proportionality is sufficient."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -47,7 +47,7 @@ $$f=\lambda g\qquad\mu\text{-almost everywhere}.$$
 
 ## Proof
 
-**Proof technique:** Examine the Holder step in the standard proof of Minkowski. Equality forces the nonnegative functions $|f|$ and $|g|$ to be proportional almost everywhere, and the pointwise triangle inequality then forces the same sign.
+**Proof technique:** Examine the Holder step in the standard proof of Minkowski. Equality forces the absolute values of f and g to be proportional almost everywhere, and the pointwise triangle inequality then forces the same sign.
 
 1.1 If at least one of $f,g$ is zero almost everywhere, then equality is immediate. [L1, given]
 

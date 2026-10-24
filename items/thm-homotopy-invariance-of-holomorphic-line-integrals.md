@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-homotopy-invariance-of-holomorphic-line-integrals.json
+  precheck: pass
 id: thm-homotopy-invariance-of-holomorphic-line-integrals
 kind: theorem
 title: "Endpoint-fixed homotopic paths have equal holomorphic line integrals"
@@ -15,13 +18,6 @@ deps: [def-homotopy-relative-and-path-homotopy,
        prop-reversal-and-concatenation-of-complex-line-integrals,
        def-complex-contours-reversal-concatenation-and-closedness]
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   references:
     - title: "E. Stein and R. Shakarchi, Complex Analysis, Ch. 3, §5"
@@ -70,3 +66,45 @@ $$\int_{\gamma_0} f(z)\,dz=\int_{\gamma_1} f(z)\,dz.$$
 4.2 For each $1\le j\le N$, the bottom subpath $\gamma_0|_{[(j-1)/N,\,j/N]}$ and the chord segment from $\gamma_0((j-1)/N)$ to $\gamma_0(j/N)$ both lie in $D_{j1}$. Since $F_{j1}$ is a primitive of $f$ on $D_{j1}$, [L4] gives the same endpoint increment for both, so their integrals are equal. Summing over $j$ and using [L6] yields $$\int_{\gamma_0} f(z)\,dz=\int_{P_0} f(z)\,dz.$$ The same argument with the top-row discs $D_{jN}$ gives $$\int_{\gamma_1} f(z)\,dz=\int_{P_1} f(z)\,dz.$$ [step 3.1, L4, L6, algebra]
 
 5.1 Combining steps 4.1 and 4.2 gives $$\int_{\gamma_0} f(z)\,dz=\int_{\gamma_1} f(z)\,dz,$$ as required. [step 4.1, step 4.2] ∎
+
+
+## Remarks
+
+The parameter grid below illustrates the cancellation in step 4.1 (three rows and columns are shown schematically). Its outer boundary runs right along the bottom and left along the top. The two arrows beside one shared edge show the opposite traversals contributed by adjacent cells. Put $A=\gamma_0(0)=\gamma_1(0)$ and $B=\gamma_0(1)=\gamma_1(1)$.
+
+```tikz
+\begin{tikzpicture}[scale=1.5,>=stealth]
+\draw[gray!60,step=1] (0,0) grid (3,3);
+\draw[thick] (0,0) rectangle (3,3);
+\draw[->,thick] (.8,0) -- (1.7,0);
+\draw[->,thick] (2.2,3) -- (1.3,3);
+\draw[->,thick] (3,.7) -- (3,1.4);
+\draw[->,thick] (0,2.3) -- (0,1.6);
+\draw[->,thick] (1.91,1.2) -- (1.91,1.8);
+\draw[->,thick] (2.09,1.8) -- (2.09,1.2);
+\node at (1.45,1.5) {$Q_{jk}$};
+\node[below] at (1.5,-.12) {$H(s,0)=\gamma_0(s)$};
+\node[above] at (1.5,3.12) {$H(s,1)=\gamma_1(s)$};
+\node[rotate=90] at (-.48,1.5) {$H(0,t)=A$};
+\node[rotate=90] at (3.48,1.5) {$H(1,t)=B$};
+\node[below left] at (0,0) {$(0,0)$};
+\node[above right] at (3,3) {$(1,1)$};
+\node at (1.5,3.8) {Parameter square $(s,t)$};
+\node at (6.6,3.8) {Chord contour $P_{jk}$};
+\coordinate (a) at (5.1,.7);
+\coordinate (b) at (8,.9);
+\coordinate (c) at (7.7,2.8);
+\coordinate (d) at (5.4,2.6);
+\draw[->,thick] (a) -- (b);
+\draw[->,thick] (b) -- (c);
+\draw[->,thick] (c) -- (d);
+\draw[->,thick] (d) -- (a);
+\node[below left] at (a) {$a_{jk}$};
+\node[below right] at (b) {$b_{jk}$};
+\node[above right] at (c) {$c_{jk}$};
+\node[above left] at (d) {$d_{jk}$};
+\node at (6.6,-.25) {Straight chords in $D_{jk}$};
+\end{tikzpicture}
+```
+
+The right panel shows the order of the corner images from step 2.1, joined by straight chords; it is not a depiction of $H(\partial Q_{jk})$. No injectivity of $H$ or nondegeneracy or planar orientation of $P_{jk}$ is asserted by its schematic shape. Opposite traversals of a grid edge give opposite traversals of the same chord. On the outer boundary the bottom chords form $P_0$ and the top chords form the reversal of $P_1$; the side chords are constant. The rigorous proof above is independent of the illustration.

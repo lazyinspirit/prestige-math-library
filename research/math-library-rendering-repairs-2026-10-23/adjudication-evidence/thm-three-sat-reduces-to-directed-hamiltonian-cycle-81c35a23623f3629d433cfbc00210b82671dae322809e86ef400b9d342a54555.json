@@ -1,0 +1,117 @@
+{
+  "id": "thm-three-sat-reduces-to-directed-hamiltonian-cycle",
+  "agent": "/root/rendering_repair_coordinator/dcpt_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tiles contain only a long inline crossbar and detour description. Separate positive/negative local panels materially clarify which oriented pair edge may be replaced and keep conditional arcs distinct. A full variable-size graph is unnecessary.",
+      "action": "Appended final Remarks containing one native TikZ figure with two indexed clause-segment panels and explicit occurrence, shared-clause-vertex and boundary-interface explanations.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added explanatory positive/negative literal-detour panels outside the proof. No prior content changed.",
+  "source_lines_after": [
+    71,
+    73,
+    75,
+    76,
+    103,
+    104
+  ],
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and local indexing",
+      "result": "Each panel shows exactly five graph vertices: s_{i,j-1}, ell_{i,j}, r_{i,j}, s_{i,j}, c_j, for 1 <= j <= m and m >= 1. This is the consecutive clause-j segment of the crossbar in step 1.1, not a complete gadget. Panel repetitions of c_j represent the same clause vertex in their respective conditional views."
+    },
+    {
+      "check": "Crossbar arcs",
+      "result": "The three drawn double arrows give six arcs: s_prev->ell, ell->s_prev, ell->r, r->ell, r->s_next, s_next->r. All are exactly the bidirected crossbar adjacencies in step 1.1. All three links and both arrowheads per link are visible in native preview tile 02."
+    },
+    {
+      "check": "Positive occurrence",
+      "result": "Upper extra arcs are ell_{i,j}->c_j and c_j->r_{i,j}, matching step 1.1. Hence the left-to-right route of step 2.1 can replace ell->r by ell->c_j->r when x_i is true. Native arrowheads point into c_j from ell and into r from c_j."
+    },
+    {
+      "check": "Negative occurrence",
+      "result": "Lower extra arcs are r_{i,j}->c_j and c_j->ell_{i,j}, matching step 1.1. Hence the right-to-left route of step 2.1 can replace r->ell by r->c_j->ell when x_i is false. Native arrowheads point into c_j from r and into ell from c_j."
+    },
+    {
+      "check": "Local degree and edge counts",
+      "result": "Each panel contains five graph vertices and eight directed arcs (three double arrows plus two single arrows). In the displayed local subgraph, each separator has in/out degree 1/1 and c_j has 1/1. Positive-panel ell has in/out degree 2/3 and r has 3/2; negative-panel ell has 3/2 and r has 2/3. These are local counts, not full degrees: separators continue outside the panel and other literal occurrences can meet c_j. The caption explicitly preserves these qualifications."
+    },
+    {
+      "check": "Ports, both signs and closure",
+      "result": "Remarks reproduce exactly p_i->s_{i,0}, p_i->s_{i,m}, s_{i,0}->q_i, s_{i,m}->q_i and q_i=p_{i+1} from step 1.1. If both signs occur, the two conditional detour pairs coexist at the same c_j, as expressly stated by step 1.1. No new boundary edges or cycle closure are drawn; no named-node cycle syntax is used. The existing z_phi->s_phi and t_phi->z_phi closure remains only in unchanged step 3.1."
+    },
+    {
+      "check": "Proof independence",
+      "result": "The original full source is an exact byte prefix of the edited file. Steps 1.1, 2.1, 2.2, 3.1, 4.1 and all hypotheses, dependencies and metadata remain unchanged. Remarks explicitly say the rigorous proof is independent of the illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-three-sat-reduces-to-directed-hamiltonian-cycle.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-three-sat-reduces-to-directed-hamiltonian-cycle.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-three-sat-reduces-to-directed-hamiltonian-cycle.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcpt016 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-three-sat-reduces-to-directed-hamiltonian-cycle --out research/math-library-rendering-repairs-2026-10-23/previews/dcpt016",
+      "exit_code": 0,
+      "result": "1 item, 3 tiles; 1 TikZ figure; zero diagram failures and zero KaTeX errors. Standalone original-resolution inspection of all three new tiles confirms complete labels and expected arrow orientations."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots paths do not exist. Authentic originals were located in the parent computability-theory/screenshots directory; both hashes exactly match queue screenshot_sha256.",
+    "original_screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-three-sat-reduces-to-directed-hamiltonian-cycle--01.png",
+        "sha256": "60d462b3a61c66ebba80b300c18a81a1b5281a565434e2eebef6ce8232c2e354",
+        "viewed_original": true
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/thm-three-sat-reduces-to-directed-hamiltonian-cycle--02.png",
+        "sha256": "b7d49d8ea2b8d17594a7e7cf3748521b92ad967d07346576e304021f01e2a6a7",
+        "viewed_original": true
+      }
+    ],
+    "guard_before_raw_sha256": "3752ed79e60cb0542f7b794bff624d1b9da17db26515d3bf72661850c1f55bee",
+    "current_raw_sha256": "baf4e887c9e61da9a9f2639c1c52765560620ac879cc0e24d9a79bdd4d1649da",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt016/manifest.json",
+    "preview_capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt016/screenshots/thm-three-sat-reduces-to-directed-hamiltonian-cycle.json",
+    "preview_source_sha256": "baf4e887c9e61da9a9f2639c1c52765560620ac879cc0e24d9a79bdd4d1649da",
+    "preview_reference_map_sha256": "de0b5ac53aefa4f5a0860d659f2b36abe724aeb8da2abedbdde986f3ce4b1666",
+    "status_preserved": "status: published unchanged byte-for-byte; entire frontmatter unchanged"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody/native TikZ preview only; no HTTP or production route visit. Preview reference map records 16 unrelated parse diagnostics; scoped rendering has zero errors."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "ex-density-inversion-for-a-triangular-characteristic-function",
+  "agent": "/root/dprob_012",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authentic original-resolution tiles and the identical frozen/current initial source contain only formulas and verification. A paired graph materially clarifies the distinction between the compactly supported triangle in frequency and the everywhere-defined, even nonnegative density with oscillatory tails, as well as the removable value at zero. This is an authorized explanatory-diagram omission, not an assertion that the existing complete proof fails.",
+      "action": "Appended a final Remarks section containing the Fourier convention, precise zero information and paired native TikZ graphs.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the paired triangle/density illustration after Verification; retained every original source byte as an unchanged prefix and all frontmatter unchanged.",
+  "source_lines_after": [
+    {
+      "start": 69,
+      "end": 99,
+      "description": "New Remarks and paired TikZ plot"
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Left graph: tau:R -> [0,1], tau(t)=(1-|t|)_+.",
+      "checks": "The polyline has vertices (-1,0),(0,1),(1,0) and horizontal zero pieces outside [-1,1]; filled points at all three vertices agree with the Example and Verification 3.1. Axes increase right/up; the function is even."
+    },
+    {
+      "objects": "Right graph: f:R -> [0,infinity), with f(0)=1/(2pi).",
+      "checks": "Plot coordinate u represents physical x=2pi*u; the displayed vertical coordinate v represents 2pi*f(x). Thus v=(sin(pi*u)/(pi*u))^2, by 1-cos(x)=2sin(x/2)^2. TikZ sin takes degrees, so sin(180*u) is correct. Tick labels at u=+-1,+-2 therefore read x=+-2pi,+-4pi; v=1 is correctly labelled 1/(2pi). The plot avoids division by zero on two separate sampled domains and uses a filled center point. The microscopic omission |u|<0.001 is visually closed by the center marker and is only a plotting device, not a hole in f."
+    },
+    {
+      "objects": "Density signs, zero set and tails.",
+      "checks": "The squared sine quotient is even and nonnegative. Its nonzero zeros are exactly x=2pi*k for integer k != 0; the origin is excluded from this zero description because its value is continuous and positive. The original Verification 1.1 establishes q=2(1-cos x)/x^2 and q<=4/x^2 in the tails, while 2.1 establishes f=q/(2pi); hence the density tends to zero without compact support. The Remarks explicitly say its lobes extend beyond the finite plot window. A 5001-point independent JS check over u in [-2.5,2.5] gave maximum absolute discrepancy 1.170175067954915e-13 between v/(2pi) and the stated density, nonnegative samples, and the four displayed zeros within 1.52e-33 in scaled coordinates."
+    },
+    {
+      "objects": "Fourier relation and proof independence.",
+      "checks": "The local characteristic-function Definition uses exp(+itx). Verification 3.1 proves phi_f=tau; the local inversion corollary uses exp(-itx)/(2pi). Since tau has compact support and is integrable, the displayed inverse convention matches that supplier. The entire original Verification 1.1--3.1 is unchanged and supplies normalization/identity without invoking the figure."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "822e73a14d2c6e8fe2aa2dedcc2f2ecc32c22221ac47c0ea39510f949ade0df5",
+    "after_raw_sha256": "89ddc9ee86b6e9de931c18d062075a9a84099634d8b669554d980114518d4634",
+    "guard": "Immediately before append, SHA256 matched queue before_raw_sha256.",
+    "source_reading": [
+      "Current and archived-before full carrier",
+      "def-characteristic-function-of-a-real-random-variable full current source",
+      "cor-density-inversion-from-an-integrable-characteristic-function full current source"
+    ],
+    "original_screenshots": {
+      "path_discrepancy": "The declared probability/diagram-supplement/screenshots directory does not contain the screenshots; authentic files were found under probability/screenshots in the same category and both recorded SHA256 values match.",
+      "paths": [
+        "research/math-library-rendering-audit-2026-10-23/probability/screenshots/ex-density-inversion-for-a-triangular-characteristic-function--01.png",
+        "research/math-library-rendering-audit-2026-10-23/probability/screenshots/ex-density-inversion-for-a-triangular-characteristic-function--02.png"
+      ],
+      "sha256": [
+        "748a4b58e068147ee70c5ecc49e31d106acd14aa5fda4f8ba3d6d0901d8deb87",
+        "9766c7130bda88cc8b052277b3a639facabc081c0b55a728005619143742f4e5"
+      ],
+      "inspection": "Both inspected separately using view_image detail original."
+    },
+    "preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dprob-012-paired-graph/manifest.json",
+      "source_sha256": "89ddc9ee86b6e9de931c18d062075a9a84099634d8b669554d980114518d4634",
+      "html_sha256": "150dc7e3e9318427c34b452e40e10397b7a0a554329d1e06c1ba7709318c7506",
+      "reference_map_sha256": "dd70e6d959d9e113070e75df28d2b12718eb7f09c920bc53f537261410a17195",
+      "visual_inspection": "Both resulting PNG tiles inspected separately at original resolution. Tile 02 shows the actual SSR SVG: triangle corners and zero segments, symmetric positive density central peak and nonnegative small lobes, four readable zero ticks, filled origin height and distinct axes. No clipping, overlap, missing strokes or dark-background contrast failure observed.",
+      "native_compilation": "One native inline SVG in generated HTML, no TikZ failure text. Manifest and both lossless PNG tiles exist.",
+      "limitations": "Local ItemBody preview, not production route; density is sampled over a finite window. Unrelated reference-map parse diagnostics do not constitute audited or repaired items."
+    }
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-density-inversion-for-a-triangular-characteristic-function.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-density-inversion-for-a-triangular-characteristic-function.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-density-inversion-for-a-triangular-characteristic-function.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "check": "Frontmatter exact equality and original-byte-prefix equality",
+      "result": "Both true; publication status remains byte-for-byte identical."
+    }
+  ],
+  "remaining_issues": []
+}

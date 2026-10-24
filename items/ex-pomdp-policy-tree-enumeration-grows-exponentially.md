@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-pomdp-policy-tree-enumeration-grows-exponentially.json
+  precheck: pass
 id: ex-pomdp-policy-tree-enumeration-grows-exponentially
 kind: example
 title: "A finite POMDP family has exponentially many witnessed alpha vectors"
@@ -32,11 +35,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references: []
 ---
@@ -84,3 +82,42 @@ For each $n\in\mathbb N$ with $0<n$, let $I_n=\{t\in\mathbb N:t<n\}$ be a clock 
 3.1 Therefore, at each decision time $t\in I_n$ from initial state $(x,0)$, the hidden state is $(x,t)$. Under the tree $y$ its reward at that time is $1_{\{x(t)=y(t)\}}$, and the finite horizon sum with $\gamma=1$ gives $\alpha_y(x,0)=\sum_{t<n}1_{\{x(t)=y(t)\}}$. [given, step 2.2, F1, F2, F7]
 
 4.1 For each string $y$, the point mass $\delta_{(y,0)}$ is a belief by [F8], and [F3] evaluates its tree there as $\alpha_y(y,0)=n$. If $z\ne y$, some coordinate $t$ differs, so the sum for $\alpha_z(y,0)$ has at least one zero term and all other terms at most one; its value is strictly less than $n$. Thus $y$ is the unique maximizing tree at $\delta_{(y,0)}$, so its vector is witnessed. If $y\ne z$, their values at $\delta_{(y,0)}$ differ, so their vectors are distinct. By step 2.1 there are $2^n$ strings; hence the example has exactly $2^n$ distinct witnessed vectors. [given, step 2.1, step 3.1, F3, F7, F8, algebra] ∎
+
+## Remarks
+
+For $n=2$, the four policy trees below are chains: each action has just the one observation continuation $o$. The leaf denotes the depth-zero continuation, not another action. Under a hidden string $x$, the two decisions occur at $(x,0)$ and $(x,1)$ and earn rewards $1_{\{x(0)=y(0)\}}$ and $1_{\{x(1)=y(1)\}}$. The bottom row gives the value of each tree at the single belief $b=\delta_{(01,0)}$; the tree $y=01$ uniquely attains $2$.
+
+```tikz
+\begin{tikzpicture}[x=2.4cm,y=1cm]
+\node at (0,0) {$y=00$};
+\node at (1,0) {$y=01$};
+\node at (2,0) {$y=10$};
+\node at (3,0) {$y=11$};
+\node[draw,rounded corners] (a00) at (0,-0.7) {$a=0$};
+\node[draw,rounded corners] (a01) at (1,-0.7) {$a=0$};
+\node[draw,rounded corners] (a10) at (2,-0.7) {$a=1$};
+\node[draw,rounded corners] (a11) at (3,-0.7) {$a=1$};
+\node[draw,rounded corners] (b00) at (0,-1.9) {$a=0$};
+\node[draw,rounded corners] (b01) at (1,-1.9) {$a=1$};
+\node[draw,rounded corners] (b10) at (2,-1.9) {$a=0$};
+\node[draw,rounded corners] (b11) at (3,-1.9) {$a=1$};
+\node (c00) at (0,-3.1) {leaf};
+\node (c01) at (1,-3.1) {leaf};
+\node (c10) at (2,-3.1) {leaf};
+\node (c11) at (3,-3.1) {leaf};
+\draw[->] (a00) -- node[right] {$o$} (b00);
+\draw[->] (a01) -- node[right] {$o$} (b01);
+\draw[->] (a10) -- node[right] {$o$} (b10);
+\draw[->] (a11) -- node[right] {$o$} (b11);
+\draw[->] (b00) -- node[right] {$o$} (c00);
+\draw[->] (b01) -- node[right] {$o$} (c01);
+\draw[->] (b10) -- node[right] {$o$} (c10);
+\draw[->] (b11) -- node[right] {$o$} (c11);
+\node at (0,-3.8) {$b\cdot\alpha_{00}=1$};
+\node at (1,-3.8) {$b\cdot\alpha_{01}=2$};
+\node at (2,-3.8) {$b\cdot\alpha_{10}=0$};
+\node at (3,-3.8) {$b\cdot\alpha_{11}=1$};
+\end{tikzpicture}
+```
+
+This is only the $n=2$ slice. In general the witness for tree $y$ is $\delta_{(y,0)}$; these beliefs need not be reachable from the specified initial belief. The verification above proves the general count and witness property independently of the figure.

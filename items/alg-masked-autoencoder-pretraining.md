@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-masked-autoencoder-pretraining.json
+  precheck: n/a
 id: alg-masked-autoencoder-pretraining
 kind: algorithm
 title: "Masked autoencoder pretraining"
@@ -12,12 +15,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, and Ross Girshick, Masked Autoencoders Are Scalable Vision Learners, §§3.1–3.3 and Appendix A.1"
@@ -49,13 +46,13 @@ The diagram records the data flow. Solid arrows pass data or predictions; the bo
 ```tikz
 \begin{tikzpicture}[>=stealth,scale=0.78,transform shape]
   \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (input) at (0,0) {Input patch\\sequence};
-  \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (mask) at (2.7,0) {Uniformly sample\\visible positions};
-  \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (enc) at (5.4,0) {Encoder sees\\visible patches only};
-  \node[draw,rounded corners,align=center,minimum width=2.4cm,minimum height=0.8cm] (restore) at (8.3,0) {Insert learned tokens\\at missing positions};
-  \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (dec) at (11.2,0) {Decoder};
-  \node[draw,rounded corners,align=center,minimum width=2.3cm,minimum height=0.8cm] (pred) at (14,0) {Predictions at\\all positions};
-  \node[draw,rounded corners,align=center,minimum width=3.0cm,minimum height=0.8cm] (loss) at (8.3,-1.7) {Masked-patch MSE\\only};
-  \node[draw,rounded corners,align=center,minimum width=2.8cm,minimum height=0.8cm] (target) at (3.4,-1.7) {Clean targets at\\missing positions};
+  \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (mask) at (4,0) {Uniformly sample\\visible positions};
+  \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (enc) at (9.5,0) {Encoder sees\\visible patches only};
+  \node[draw,rounded corners,align=center,minimum width=2.4cm,minimum height=0.8cm] (restore) at (14,0) {Insert learned tokens\\at missing positions};
+  \node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (dec) at (18,0) {Decoder};
+  \node[draw,rounded corners,align=center,minimum width=2.3cm,minimum height=0.8cm] (pred) at (22,0) {Predictions at\\all positions};
+  \node[draw,rounded corners,align=center,minimum width=3.0cm,minimum height=0.8cm] (loss) at (14,-2.2) {Masked-patch MSE\\only};
+  \node[draw,rounded corners,align=center,minimum width=2.8cm,minimum height=0.8cm] (target) at (5,-2.2) {Clean targets at\\missing positions};
   \draw[->] (input) -- (mask);
   \draw[->] (mask) -- node[above] {visible subset} (enc);
   \draw[->] (enc) -- (restore);

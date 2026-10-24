@@ -1,0 +1,98 @@
+{
+  "id": "alg-amsgrad-update",
+  "agent": "/root/rendering_repair_supervisor2/nouq_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original PNG visibly prints literal backslash odot and widehat commands at Definition lines 48 and 54. Frozen and current-before source both place those commands outside math delimiters. The display recurrences establish the intended exact symbols.",
+      "action": "Added inline math delimiters around odot, max, v_t, widehat v^{max}_t and epsilon>0; rendered max and epsilon with their corresponding TeX commands.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same original standalone PNG also visibly prints the initialization m_0=v_0=\\widehat v^{\\max}_0=0 and all input variables as unformatted prose. This is the same confirmed missing-delimiter defect in the Definition input paragraph, rather than a newly inferred mathematical claim.",
+      "action": "Typeset the complete existing input and initialization notation inline, retaining dimension, initial point, positive constants, parameter interval, zero initialization and integer time condition exactly.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only three Definition prose paragraphs changed: delimiter and equivalent notation repairs. Existing display recurrences, update formula, caveats, Remarks, links, title and all frontmatter bytes are unchanged.",
+  "source_lines_after": [
+    42,
+    48,
+    54
+  ],
+  "mathematical_meaning_preserved": true,
+  "mathematical_check": "The original and repaired inputs both specify d>=1, x_1 in R^d, eta>0, epsilon>0, beta_1,beta_2 in [0,1), zero initial moments and gradients for integer t>=1. All recurrence and denominator formulas are byte-identical. In particular the bias-corrected running maximum remains distinct from the cited uncorrected AMSGrad variant, as the untouched caveat states. Independently checked that beta_j^t<1 for these parameters and positive times, so the local nonnegativity/positive-denominator explanation is compatible with the unchanged recurrence. This is a focused rendering/meaning check, not an external-source review or broad proof audit.",
+  "remaining_issues": [],
+  "before_raw_sha256": "f85191cb663fbc7a63fbe0fbc625f1d1d9ab3f8f0157bf23694003beac049001",
+  "after_raw_sha256": "e43b12d5b8f81465d809c4c6d1cf5e50e2e8ef20e21c5e6d192b2d36eddde8af",
+  "raw_guard": "Verified exact before_raw_sha256 immediately before the only source mutation; verified current source again before report creation.",
+  "metadata_preservation": {
+    "all_frontmatter_bytes_identical": true,
+    "status_line_before": "status: published",
+    "status_line_after": "status: published"
+  },
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/screenshots/alg-amsgrad-update--01.png",
+    "sha256": "03522aabc7ac6caea8030da7394818de194036c85c53b1d9dd21920bac61ef5b",
+    "view": "Standalone view_image detail original"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-amsgrad-update.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-amsgrad-update.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-amsgrad-update.md",
+            "item_id": "alg-amsgrad-update",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-amsgrad-update.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "current_visual_evidence": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nouq-002-repeat/manifest.json",
+    "manifest_sha256": "1a3996fc790779844c2538b264d81b5d6b0eae21bba894829eb5814e3da69f7a",
+    "source_sha256": "e43b12d5b8f81465d809c4c6d1cf5e50e2e8ef20e21c5e6d192b2d36eddde8af",
+    "snapshot": "research/math-library-rendering-repairs-2026-10-23/previews/nouq-002-repeat/snapshots/alg-amsgrad-update.md",
+    "reference_map_sha256": "a11294cc7147fbc7d21e016d922ca8f94c066a913bda50e78da905b4cdffafce",
+    "native_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/nouq-002-repeat/screenshots/alg-amsgrad-update.json",
+    "native_katex_errors": [],
+    "native_katex_count": 32,
+    "native_tikz_count": 0,
+    "inspected_png": "research/math-library-rendering-repairs-2026-10-23/previews/nouq-002-repeat/screenshots/alg-amsgrad-update-recapture.png",
+    "inspected_png_sha256": "67982d0cfa7c2c3daf1ec4db3171caa949c5e7ffe7fa468598548d6fa4b35226",
+    "view": "Standalone view_image detail original",
+    "recapture": "Loaded the exact repeat-preview native HTML via local file URL using Playwright Chromium, external requests blocked; viewport 1200x1400 and scale 1; browser flags --allow-file-access-from-files --disable-background-networking --disable-gpu --disable-dev-shm-usage; opened details, awaited document.fonts.ready then 1000ms; fullPage screenshot with animations disabled. No application or HTML changes.",
+    "result": "All repaired inline math is visible and correctly typeset; headings and all unchanged display formulas are visible in the settled recapture. No visible formula overlap/clipping. The original two utility captures showed missing painted regions despite visible DOM elements; they remain preserved and are not used as successful full-page visual evidence.",
+    "limitations": "Local ItemBody preview, not production route/dependency widgets/Sources footer. Current map has 13 unrelated parse diagnostics. No network or cited external full texts visited; no diagram added or changed."
+  }
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-indefinite-trust-region-boundary-minimizer.json
+  precheck: pass
 id: ex-indefinite-trust-region-boundary-minimizer
 kind: example
 title: "An indefinite quadratic has a unique boundary trust-region minimizer"
@@ -54,3 +57,29 @@ $p_C=-\min\{\|g\|_2^2/(g^TBg),\Delta/\|g\|_2\}g$
 
 2.1 The global minimizer has $g^Tp_*=-2$ and $p_*^TBp_*=0$, so its predicted reduction is $2$. For the Cauchy step, $\|g\|_2^2=5$ and $g^TBg=4$, hence [F3] gives $p_C=(1,3)/\sqrt{10}$ and $\|p_C\|_2=1$. Its model value is $m(p_C)=f(x)-\sqrt5+2/5$, so its predicted reduction is $\sqrt5-2/5<2$; the strict inequality follows from $\sqrt5<12/5$. [given, F1, F3, algebra] ∎
 
+## Remarks
+
+The unit circle below bounds the feasible disk. The two radii show the exact
+minimizer and the Cauchy step; the latter points along $-g$. Here
+$\mathrm{pred}(p)=m(0)-m(p)$, as in [F1]. The coordinates and reductions are
+those computed in steps 1.1 and 2.1; the proof is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[x=2.4cm,y=2.4cm]
+  \draw[->] (-1.18,0) -- (1.23,0) node[right] {$p_1$};
+  \draw[->] (0,-1.18) -- (0,1.2) node[right] {$p_2$};
+  \draw[thick] (0,0) circle (1);
+  \node[below left] at (0,0) {$0$};
+  \node[below right] at (1,0) {$1$};
+  \draw[thick,blue,->] (0,0) -- (0.707107,0.707107);
+  \draw[thick,red,->] (0,0) -- (0.316228,0.948683);
+  \fill[blue] (0.707107,0.707107) circle (1.5pt);
+  \fill[red] (0.316228,0.948683) circle (1.5pt);
+  \draw[blue] (0.707107,0.707107) -- (1.42,0.707107);
+  \node[anchor=west] at (1.45,0.71) {$p_*=(1,1)/\sqrt2$};
+  \node[anchor=west] at (1.45,0.44) {$\mathrm{pred}(p_*)=2$};
+  \draw[red] (0.316228,0.948683) -- (0.316228,1.3);
+  \node[anchor=west] at (-1.15,1.72) {$p_C=(1,3)/\sqrt{10}$};
+  \node[anchor=west] at (-1.15,1.44) {$\mathrm{pred}(p_C)=\sqrt5-2/5$};
+\end{tikzpicture}
+```

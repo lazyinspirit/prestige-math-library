@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-simple-positive-braids-are-indexed-by-permutations.json
+  precheck: pass
 id: lem-simple-positive-braids-are-indexed-by-permutations
 kind: lemma
 title: "Simple positive braids are indexed by permutations"
@@ -31,9 +34,7 @@ sources:
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, printed pp. 433-438"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -165,3 +166,42 @@ over a finite word.
 - Nothing here uses the Axiom of Choice or any weaker choice principle; all
   words occurring are finite, and the only minima taken are minima of
   nonempty subsets of $\mathbb N$.
+
+
+**Illustration (three strands).** Take $\tau=s_1s_2$, so that
+$(\tau(1),\tau(2),\tau(3))=(2,3,1)$ with the right factor acting first.
+The picture reads the braid word $a=\sigma_1\sigma_2$ from top to bottom;
+at each positive generator the strand in the left position passes over the
+strand in the right position. Endpoint labels follow the strands from the top:
+the label at bottom position $j$ is $\tau(j)$, so the strand labelled $k$
+ends at position $\tau^{-1}(k)$. This convention keeps $\pi(a)=\tau$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,line width=1pt,every node/.style={font=\large}]
+\draw (0,0)--(1,-1.3)--(2,-2.6);
+\draw (1,0)--(.57,-.559);
+\draw (.43,-.741)--(0,-1.3)--(0,-2.6);
+\draw (2,0)--(2,-1.3)--(1.57,-1.859);
+\draw (1.43,-2.041)--(1,-2.6);
+\node at (0,.3) {$1$}; \node at (1,.3) {$2$}; \node at (2,.3) {$3$};
+\node at (0,-2.9) {$2$}; \node at (1,-2.9) {$3$}; \node at (2,-2.9) {$1$};
+\node at (-.7,-.65) {$\sigma_1$};
+\node at (2.65,-1.95) {$\sigma_2$};
+\draw[->] (-1.3,-.25)--(-1.3,-2.35);
+\node at (1,-3.5) {$a=\sigma_1\sigma_2=\widehat{\tau}$};
+\node[draw,rounded corners,inner sep=10pt,align=center] (perm) at (7.5,-1.3)
+ {$\tau=s_1s_2$\\ $(\tau(1),\tau(2),\tau(3))=(2,3,1)$};
+\draw[->] (3.25,-1.3)--(perm.west) node[midway,above] {$\pi$};
+\node at (7.5,-2.65) {$\ell(a)=2=\mathrm{inv}(\tau)$};
+\end{tikzpicture}
+```
+
+The two crossed pairs of strand labels are $\{1,2\}$ and $\{1,3\}$,
+each crossed once; the pair $\{2,3\}$ never crosses. These are exactly the
+value-pair inversions $E(\tau)$ of [F2]. The two position inversions of
+$(2,3,1)$ are $(1,3)$ and $(2,3)$, hence $\operatorname{inv}(\tau)=2$.
+By (b), $a$ is the simple lift $\widehat{\tau}$; explicitly,
+$a\sigma_1=\sigma_1\sigma_2\sigma_1=\Delta_3$.
+The general correspondence sends $\mathrm{id}$ to $1$ and $w_0$ to the
+half twist $\Delta$, as recorded in [F2]. The illustration is separate from
+the algebraic proof above.
