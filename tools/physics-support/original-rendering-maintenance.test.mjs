@@ -11,14 +11,19 @@ import { originalPresentationChanges } from './original-presentation-maintenance
 import { itemHashGuard } from '../item-hash.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const counterexampleFixture = JSON.parse(readFileSync(new URL('./fixtures/counterexample-math-spelling.json', import.meta.url)));
 // All receipts here are synthetic test fixtures; they confer no real review.
 function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, findingStatus = 'repaired', findingVerdict = 'confirmed', sourceExtra = '', factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'original-rendering-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
-  const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = definition ? 'def-supplier' : 'thm-supplier';
+  const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = mode === 'counterexample-spelling' ? counterexampleFixture.option.id : definition ? 'def-supplier' : 'thm-supplier';
   for (const dir of [root, source]) for (const sub of ['items', 'library/math', 'research']) mkdirSync(join(dir, sub), { recursive: true });
   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+  if (mode === 'counterexample-spelling') {
+    before='---\nid: '+id+'\nkind: counterexample\ntitle: Exact known published body pair\nstatus: published\ndeps: '+JSON.stringify(counterexampleFixture.targets)+'\naliases: [supplier-alias]\nprovenance: {statement: ai-altered, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n'+counterexampleFixture.before_body;
+    for (const target of counterexampleFixture.targets) save(source,'items/'+target+'.md','---\nid: '+target+'\nkind: '+(target.startsWith('def-')?'definition':'lemma')+'\nstatus: published\ndeps: []\ntitle: Synthetic unchanged published target\n---\n## '+(target.startsWith('def-')?'Definition':'Statement')+'\nSynthetic unchanged pin, not a real target review.\n');
+  }
   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
   if (mode === 'definition-display') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n$$A=A.$$\nThe zero convention is fixed.');
   if (mode === 'fact-label' || mode === 'reference-relocation' || mode === 'support-layout-labels') {
@@ -35,11 +40,12 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (mode === 'paragraph-layout') before = before.replace('**Proof technique:** direct on $A$.', '**Proof technique:** Fubini followed by $L^2$ approximation.').replace('1.1 Reflexivity gives $A=A$. [L1]\n', ()=>'1.1 The identity follows. [L1]\n\n$$A=A.$$\n\nThe conclusion holds. [L1] ∎\n');
   before += sourceExtra;
   save(source, `items/${id}.md`, before);
-  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${['fact-label', 'reference-relocation', 'support-layout-labels'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
+  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${mode === 'counterexample-spelling' ? ',' + counterexampleFixture.targets.join(',') : ['fact-label', 'reference-relocation', 'support-layout-labels'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
   if (mode === 'definition-display') after = after.replace('\n$$A=A.$$\n', ()=>'\n\n$$\nA=A.\n$$\n\n');
+  if (mode === 'counterexample-spelling') after = after.slice(0, after.length - counterexampleFixture.before_body.length) + counterexampleFixture.after_body;
   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
   if (mode === 'title') after = after.replace('title: A theorem on R^n', () => "title: 'A theorem on $\\mathbb R^n$'");
   if (mode === 'step') after = after.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The identity map on the given object has equal domain and codomain; reflexivity gives $A=A$. [L1]');
@@ -69,7 +75,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     output: tool === 'precheck' ? definition ? JSON.stringify({summary:{files:1,checked:0,failed:0},results:[{file:`items/${id}.md`,item_id:id,status:'not-applicable'}]}) : `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
   const repair = { version: 1, kind: 'recorded-local-published-repair', id, run: 'source-repair', group: 'g', correction: 'Exact synthetic rendering presentation correction.', content_sha256: content,
     before_file: beforePath, before_raw_sha256: sha(before), pre_sha256: itemHashGuard(before), recorded_at: '2026-10-23T00:00:03Z', ledger_marker: marker, ledger_sha256: sha(block),
-    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : mode.startsWith('support-consolidation') ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
+    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : mode === 'counterexample-spelling' ? 3 : mode.startsWith('support-consolidation') ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
     adjudication_file: adjudicationPath, adjudication_sha256: sha(readFileSync(join(source, adjudicationPath))) };
   save(source, repairPath, repair);
   const pages = [];
@@ -89,7 +95,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
   const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
   const supportLayout=mode.startsWith('support-layout')?{version:1,steps:['1.1']}:undefined,paragraphLayout=mode==='paragraph-layout'?{version:1,steps:['1.1'],technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.',after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}:undefined;
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading, supportLayout, paragraphLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const spelling = mode === 'counterexample-spelling' ? counterexampleFixture.option : undefined;
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading, supportLayout, paragraphLayout, spelling) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -116,6 +123,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     if (terminalHeading) entry.terminal_remarks_heading = terminalHeading;
     if (supportLayout) entry.proof_support_relocation_layout=supportLayout;
     if (paragraphLayout) entry.proof_paragraph_join_layout=paragraphLayout;
+    if (spelling) entry.counterexample_math_spelling=structuredClone(spelling);
     Object.assign(entry.scientific_review, changes.review_classification);
     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
@@ -133,6 +141,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
       ...Object.fromEntries((entry.fact_reference_reviews ?? []).map(r => [r.pinned_target.path, r.pinned_target.sha256])),
       ...Object.fromEntries((entry.presentation_reviews ?? []).filter(r=>r.pinned_target).map(r=>[r.pinned_target.path,r.pinned_target.sha256])),
       ...(entry.changes.proof_support_parser_runtime?.inputs ?? {}),
+      ...Object.fromEntries((entry.changes.counterexample_spelling_context?.reference_targets ?? []).map(id=>['items/'+id+'.md',hashFile('items/'+id+'.md')])),
       [ownership]: entry.ownership_evidence.sha256, [ledger]: entry.ledger_evidence.sha256, [evidence]: entry.evidence[0].sha256,
       ...(authored ? Object.fromEntries(entry.consumers.map(c => [`items/${c.id}.md`, c.source_sha256])) : {}) };
     save(root, originalRenderingMaintenancePath(root, run, authored ? null : selector), review);
@@ -386,3 +395,8 @@ for(const mode of ['support-layout-labels','paragraph-layout'])for(const flags o
 test('strict support plus Fact labels retain exact published pin review and live runtime bindings',t=>{const f=fixture(t,{mode:'support-layout-labels',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);const label=f.entry.presentation_reviews.find(r=>r.pinned_target);delete label.pinned_target;f.seal();assert.throws(()=>f.verify(),/unbound V2 reference target/);});
 test('strict routes do not admit graphics or Remarks even with original valid native flags',t=>{for(const mode of ['support-layout','paragraph-layout'])for(const sourceExtra of ['\n## Remarks\n\nUnchanged qualification.\n','\n## Background\n\n```text\nunchanged\n```\n','\n## Background\n\n![image](figure.svg)\n','\n## Background\n\n<span>unchanged HTML</span>\n'])assert.throws(()=>fixture(t,{mode,presentationVersion:2,authored:true,sourceExtra}),/Remarks|graphics/);});
 test('legacy cannot declare either strict format selector',t=>{for(const field of ['proof_support_relocation_layout','proof_paragraph_join_layout']){const f=fixture(t);f.entry[field]={version:1,steps:['1.1']};f.seal();assert.throws(()=>f.verify(),/strict proof layout requires V2/);}});
+
+test('exact counterexample case retains authenticated source/pins and actual absent native keys',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);const local=readFileSync(join(f.root,f.entry.path));fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);assert.deepEqual(readFileSync(join(f.root,f.entry.path)),local);f.entry.presentation_reviews[0].delta_sha256='0'.repeat(64);f.seal();assert.throws(()=>f.verify(),/unreviewed V2 delta/);});
+for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('counterexample exact case rejects false/partial/null supplied flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/counterexample spelling native\/purity/);});
+test('counterexample exact case never expands default or legacy kind support',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.entry.counterexample_math_spelling;f.seal();assert.throws(()=>f.verify(),/unsupported item kind/);const g=fixture(t);g.entry.counterexample_math_spelling=counterexampleFixture.option;g.seal();assert.throws(()=>g.verify(),/counterexample spelling requires V2/);});
+test('counterexample unchanged published refs and runtime require actual authority input bindings',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.review.inputs['items/'+counterexampleFixture.targets[0]+'.md'];f.save(f.root,originalRenderingMaintenancePath(f.root,f.run),f.review);assert.throws(()=>f.verify(),/unbound input/);});

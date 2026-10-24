@@ -338,3 +338,51 @@ no-graphics checks) are exact consumed changes. The existing live-bound
 403-input parser/runtime descriptor is mandatory. No source adoption,
 proof acceptance, import replacement or coverage follows from extraction.
 Default/legacy JSON remains unchanged and legacy selectors reject.
+
+## One explicit counterexample transcription case
+
+Generic/default counterexamples remain unsupported. The independent ninth
+argument / V2 entry `counterexample_math_spelling` accepts ONLY this fixed
+four-value object:
+
+```json
+{"version":1,"id":"cex-isomorphic-associated-graded-objects-need-not-give-isomorphic-filtered-objects","before_body_sha256":"1b347b787d6ada50e6c02c90d39602c3584f21f1aa1919515480ce114906aa7a","after_body_sha256":"bafda8b9e952a454891c4629b3c95f290dc90bb3723b4198b5351a7aa3093fb0"}
+```
+
+Both item IDs, kinds and statuses must be that published counterexample;
+its two exact predeclared dependencies must match. The body hashes are
+fixed code constants, not values a caller can mechanically restamp. They
+identify a separately Root-reviewed transcription, and do NOT prove
+mathematical equivalence. No Unicode/TeX semantic normalizer or general
+counterexample-kind permission exists. Other selectors cannot combine.
+Metadata is identical except genuine verification; title/deps/sources
+cannot change. All ordinary source/main authentication remains required.
+
+The exact canonical root H2 sequence is Statement refuted, Facts &
+Assumptions, Counterexample, Source notes. Five typed
+`counterexample-math-spelling` deltas describe the whole primary section,
+the Given paragraph and numbered steps1.1/2.1/3.1. Their exact substitutions
+must reconstruct the entire after-body. F1/F2, proof technique/order/support
+clusters/endmarker, ordered canonical references and complete Source notes
+remain byte-identical. Actual full-body heading/paragraph/named-step/support,
+inlineMath and canonical-reference roles are recorded. Old mathematical
+spans remain as an exact ordered raw/type subsequence; that is preservation
+evidence, not an equivalence proof for newly introduced TeX. Graphics/code,
+style/indirection controls and reference definitions reject.
+
+Scientific review classifications explicitly distinguish the changed public
+text: `statements: case-reviewed-math-spelling`,
+`facts: case-reviewed-given-math-spelling`,
+`proof: case-reviewed-math-spelling`. Every exact delta needs Root's real
+mathematical/transcription reason, reading limits and bound evidence; all
+actual consumer reviews remain required. The unchanged two referenced
+suppliers must have unique actual receipt pins, be reached in imported
+scope, and live-bind as published IDs. The existing403-input parser/runtime
+binding is consumed, not merely descriptive.
+
+The native branch requires ONLY the five exact case deltas and no title,
+technique, Remarks, other deltas or graphics. Actual keys may both be absent
+with mathematical_meaning_preserved true, or retain the existing valid
+true/false pair. Partial/null/contradictory keys reject. This exception is
+case-bound, not a generic proof rewrite or kind/diagram waiver. Generic
+counterexamples/default outputs and all earlier routes are unchanged.

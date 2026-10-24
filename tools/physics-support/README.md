@@ -233,3 +233,13 @@ reviewed predeclared Fact labels (support mode) or the exact technique pair
 (paragraph mode); no title/Remarks/other deltas/graphics even with valid
 flags. Existing flag routes stay unchanged. See the presentation guide for
 exact schemas and per-delta scientific/authentication requirements.
+
+One explicitly reviewed published counterexample has a ninth-argument
+`counterexample_math_spelling` route with a fixed ID and exact before/after
+body-hash pair. It emits five typed, non-identical-public-text deltas for
+Statement refuted, Given and three steps. Hashes identify that case; they do
+not prove mathematical equivalence. Real per-delta Root science, finalized
+main authentication, full-body AST roles, unchanged sources/support/published
+reference pins, consumer reviews and live parser inputs remain mandatory.
+Generic/default counterexamples remain unsupported. See the presentation
+guide for the four fixed selector values and strict native purity rules.

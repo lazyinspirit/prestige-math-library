@@ -662,7 +662,93 @@ function terminalRemarksBody(before, after, option, deltas) {
     remarks_bytes_sha256: sha(before.slice(start + old.length)), markdown_roles: roles });
   return after;
 }
-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading, proofSupportRelocationLayout, proofParagraphJoinLayout) {
+// This identifies ONE separately Root-reviewed published transcription. Hashes
+// establish case identity only; they do not establish mathematical equivalence.
+const counterexampleSpellingCase = {
+  version: 1,
+  id: 'cex-isomorphic-associated-graded-objects-need-not-give-isomorphic-filtered-objects',
+  before_body_sha256: '1b347b787d6ada50e6c02c90d39602c3584f21f1aa1919515480ce114906aa7a',
+  after_body_sha256: 'bafda8b9e952a454891c4629b3c95f290dc90bb3723b4198b5351a7aa3093fb0',
+};
+const counterexampleTargets = ['def-associated-graded-object-of-a-filtered-object', 'lem-abelian-group-model-for-spectral-sequence-computations'];
+function counterexampleSpellingOption(value) {
+  if(value===undefined) return null;
+  if(!equal(value,counterexampleSpellingCase)) fail('unsupported exact counterexample spelling selector');
+  return {...counterexampleSpellingCase};
+}
+function counterexampleSpellingChanges(beforeBytes,afterBytes,option) {
+  const before=parse(beforeBytes),after=parse(afterBytes),prior=structuredClone(before.data),current=structuredClone(after.data);
+  if(prior.id!==option.id||current.id!==option.id||prior.kind!=='counterexample'||current.kind!=='counterexample'
+      ||prior.status!=='published'||current.status!=='published'||!equal(prior.deps,counterexampleTargets)
+      ||!equal(current.deps,counterexampleTargets)||sha(before.body)!==option.before_body_sha256||sha(after.body)!==option.after_body_sha256)
+    fail('counterexample spelling published case/body binding');
+  const verification={before:prior.verification??null,after:current.verification??null};delete prior.verification;delete current.verification;
+  if(!equal(prior,current)) fail('counterexample spelling scientific metadata changed');
+  rejectReferenceDefinitions(before.body);rejectReferenceDefinitions(after.body);
+  const a=sections(before.body),b=sections(after.body),names=['Statement refuted','Facts & Assumptions','Counterexample','Source notes'];
+  if(!equal(a.names,names)||!equal(b.names,names)||a.prefix!==b.prefix) fail('counterexample spelling section scope');
+  const headers={before:canonicalHeadings(before.body),after:canonicalHeadings(after.body)};
+  if(a.values.get('Source notes')!==b.values.get('Source notes')) fail('counterexample Source notes changed');
+  rejectStyleIndirection([a.values.get('Counterexample'),b.values.get('Counterexample')],'counterexample');
+  const deltas=[],steps=[];
+  const add=(id,section,x,y,extra={})=>{if(x===y)fail('unused counterexample spelling region');deltas.push({id,kind:'counterexample-math-spelling',section,before:x,after:y,...extra});};
+  add('Statement refuted:case-math-spelling','Statement refuted',a.values.get('Statement refuted'),b.values.get('Statement refuted'));
+  const factsA=a.values.get('Facts & Assumptions'),factsB=b.values.get('Facts & Assumptions'),given=text=>[...text.matchAll(/^\*\*Given:\*\*[^\r\n]*$/gm)];
+  const ga=given(factsA),gb=given(factsB);
+  if(ga.length!==1||gb.length!==1||factsA.slice(0,ga[0].index)+gb[0][0]+factsA.slice(ga[0].index+ga[0][0].length)!==factsB) fail('counterexample changed non-Given Facts');
+  add('Facts:Given:case-math-spelling','Facts & Assumptions',ga[0][0],gb[0][0],{fact_label:'Given'});
+  const pa=proofParts(a.values.get('Counterexample')),pb=proofParts(b.values.get('Counterexample'));
+  if(pa.intro!==pb.intro||!equal(pa.steps.map(x=>x.label),['1.1','2.1','3.1'])||!equal(pa.steps.map(x=>x.label),pb.steps.map(x=>x.label))) fail('counterexample proof sequence/technique changed');
+  const support=text=>/\[[^\]\r\n]+\](?:[ \t]*∎)?[ \t\r\n]*$/.exec(text)?.[0];
+  for(let i=0;i<pa.steps.length;i++){
+    const x=pa.steps[i],y=pb.steps[i];if(!support(x.text)||support(x.text)!==support(y.text))fail('counterexample support/marker changed');
+    add('Counterexample:step:'+x.label,'Counterexample',x.text,y.text,{label:x.label});steps.push({label:x.label,before:x.text,after:y.text,kind:'counterexample-math-spelling'});
+  }
+  // Five exact region substitutions must account for the complete body. There
+  // is no token normalizer or inferred Unicode/TeX semantic comparison here.
+  let expected=before.body;
+  for(const d of deltas){const at=expected.indexOf(d.before);if(at<0||at!==expected.lastIndexOf(d.before))fail('ambiguous counterexample region');expected=expected.slice(0,at)+d.after+expected.slice(at+d.before.length);}
+  if(expected!==after.body)fail('counterexample five-region reconstruction');
+  const contexts={};
+  for(const [side,body,section]of [['before',before.body,a],['after',after.body,b]]){
+    const ast=stepAst(body,true),textRole=(start,end,wiki=false)=>{
+      const r=ast.rows.find(r=>r.node.type==='text'&&r.start<=start&&r.end>=end);
+      if(!r||r.parent?.type!=='paragraph'||ast.rows.find(p=>p.node===r.parent)?.parent?.type!=='root'
+          ||ast.ranges.some(p=>start<p.end&&end>p.start&&!(wiki&&p.start===start&&p.end===end)))fail('counterexample full-body plaintext role');
+      return {type:'text',start,end,paragraph:{start:r.parent.position.start.offset,end:r.parent.position.end.offset}};
+    };
+    if(ast.rows.some(r=>['html','image','imageReference','code','inlineCode'].includes(r.node.type))
+        ||/\\(?:includegraphics|tikz)\b|\\begin\s*\{\s*(?:tikzcd|tikzpicture)\s*\}/.test(body))fail('counterexample graphics/code context');
+    const refs=links(body);
+    if(!equal(refs.map(r=>r.target),counterexampleTargets))fail('counterexample ordered references changed');
+    const math=ast.rows.filter(r=>['math','inlineMath'].includes(r.node.type)).map(r=>({type:r.node.type,start:r.start,end:r.end,raw:body.slice(r.start,r.end)}));
+    if(math.some(r=>r.type!=='inlineMath'))fail('counterexample expected inline spelling math');
+    const regions=deltas.map(d=>{
+      const raw=d[side],start=body.indexOf(raw),end=start+raw.length;
+      if(start<0||start!==body.lastIndexOf(raw))fail('counterexample actual region ownership');
+      const node=ast.rows.find(r=>r.node.type==='paragraph'&&r.start>=start&&r.end<=end);
+      if(d.label){const named=textRole(start,start+d.label.length+1),terminal=support(raw),offset=end-terminal.length,cluster=/^\[[^\]]+\]/.exec(terminal)[0];
+        if(named.paragraph.start!==start||named.paragraph.end<offset+cluster.length)fail('counterexample named-step/support paragraph');
+        return {id:d.id,start,end,named_step:named,support:textRole(offset,offset+cluster.length)};}
+      if(d.fact_label){if(!node||node.start!==start)fail('counterexample Given paragraph');return {id:d.id,start,end,paragraph:{start:node.start,end:node.end}};}
+      const heading=headers[side].find(h=>h.name==='Statement refuted');if(heading?.start!==start||!node)fail('counterexample primary actual heading/paragraph');
+      return {id:d.id,start,end,heading,paragraph:{start:node.start,end:node.end}};
+    });
+    contexts[side]={headers:headers[side],regions,math,references:refs.map(r=>({target:r.target,raw:r.raw,role:textRole(r.start,r.end,true)})),
+      source_notes_sha256:sha(section.values.get('Source notes'))};
+  }
+  if(!equal(contexts.before.references.map(r=>({target:r.target,raw:r.raw})),contexts.after.references.map(r=>({target:r.target,raw:r.raw}))))fail('counterexample existing references changed');
+  let cursor=0;const preservedMath=[];
+  for(const old of contexts.before.math){const matches=contexts.after.math.map((r,i)=>({r,i})).filter(({r,i})=>i>=cursor&&r.raw===old.raw&&r.type===old.type);if(!matches.length)fail('counterexample existing math changed');const hit=matches[0];cursor=hit.i+1;preservedMath.push({before:old,after:hit.r});}
+  return {version:2,kind:prior.kind,id:prior.id,source_hashes:{before:sha(beforeBytes),after:sha(afterBytes)},verification,title:null,technique:null,steps,remarks:null,
+    preserved_sections:[{name:'Source notes',sha256:sha(a.values.get('Source notes'))}],
+    review_classification:{interface_section:'Statement refuted',statements:'case-reviewed-math-spelling',facts:'case-reviewed-given-math-spelling',proof:'case-reviewed-math-spelling'},
+    deltas,counterexample_math_spelling:option,counterexample_spelling_context:{version:1,...contexts,preserved_math:preservedMath,reference_targets:[...counterexampleTargets],graphics_free:true},
+    proof_support_parser_runtime:parserDescriptor()};
+}
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading, proofSupportRelocationLayout, proofParagraphJoinLayout, counterexampleMathSpelling) {
+  const spelling=counterexampleSpellingOption(counterexampleMathSpelling);
+  if(spelling){if([proofSupportConsolidation,proofReferenceRelocation,definitionDisplay,terminalRemarksHeading,proofSupportRelocationLayout,proofParagraphJoinLayout].some(x=>x!==undefined))fail('counterexample selector cannot combine');return counterexampleSpellingChanges(beforeBytes,afterBytes,spelling);}
   const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay), terminalHeading = terminalRemarksOption(terminalRemarksHeading);
   const supportLayout=supportLayoutOption(proofSupportRelocationLayout), paragraphLayout=paragraphLayoutOption(proofParagraphJoinLayout);
   if ((supportLayout||paragraphLayout) && (supportLayout&&paragraphLayout || consolidation||displayLayout||terminalHeading||proofReferenceRelocation!==undefined)) fail('strict layout selectors cannot combine with other modes');
@@ -738,6 +824,8 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
+  const spelling=counterexampleSpellingOption(entry.counterexample_math_spelling);
+  if(!equal(spelling,changes.counterexample_math_spelling??null)||Boolean(spelling)!==Boolean(changes.counterexample_spelling_context))fail('unbound counterexample spelling case');
   const consolidation = consolidationOption(entry.proof_support_consolidation), terminalHeading = terminalRemarksOption(entry.terminal_remarks_heading);
   const supportLayout=supportLayoutOption(entry.proof_support_relocation_layout), paragraphLayout=paragraphLayoutOption(entry.proof_paragraph_join_layout);
   if(!equal(supportLayout,changes.proof_support_relocation_layout??null)||!equal(paragraphLayout,changes.proof_paragraph_join_layout??null)) fail('unbound strict layout selector');
@@ -763,11 +851,18 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
-  if (consolidation || relocation || displayLayout || terminalHeading || supportLayout || paragraphLayout) {
+  if (consolidation || relocation || displayLayout || terminalHeading || supportLayout || paragraphLayout || spelling) {
     const runtime = parserDescriptor();
     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);
   } else if (changes.proof_support_parser_runtime !== undefined) fail('unrequested parser runtime binding');
+  if(spelling){
+    if(changes.kind!=='counterexample'||changes.id!==spelling.id||changes.deltas.length!==5||changes.deltas.some(d=>d.kind!=='counterexample-math-spelling')
+        ||!equal(changes.counterexample_spelling_context.reference_targets,counterexampleTargets)||changes.counterexample_spelling_context.graphics_free!==true)fail('unbound counterexample spelling changes');
+    for(const id of counterexampleTargets){const pins=receipt?.files?.filter(p=>p.path===`items/${id}.md`);
+      if(pins?.length!==1||!scope?.importedItems?.has(id)||!scope?.paths?.has(pins[0].path))fail('unbound counterexample published reference');
+      const data=parse(bind(pins[0].path,pins[0].sha256)).data;if(data.id!==id||data.status!=='published')fail('invalid counterexample published reference');}
+  }
   const science = entry.scientific_review;
   if (science?.statements !== changes.review_classification.statements || science.facts !== changes.review_classification.facts
       || science.hypotheses !== 'identical' || science.new_premises !== false || science.new_results !== false
