@@ -375,3 +375,20 @@ each reconstructed item against its snapshot manifest hash and the entire raw
 metadata document against the sealed completion hash. Identity, dependencies,
 other fields, old rows and old source/page protections remain unchanged. This is
 an existing-guard comparison, not another admission or receipt workflow.
+
+
+The same sealed-metadata comparison may recognize an original draft mathematics
+item's exact public mirror only after its batch is accepted and its existing
+Root-owned authoring-readiness record is ready and current for the actual input
+hash. Unchanged declarations are skipped before Git lookup. Changed declarations
+still reconstruct the authenticated admission source/item/document hashes; no
+identity, dependency, other metadata or original repaired source/page permission
+is granted. The selected readiness records are bound as actual native owner
+snapshot inputs. This adds no readiness writer or admission workflow.
+
+The identical current owner-ready draft-mathematics attestation may normalize
+only that changed item's historical page-local source SHA in memory, when the
+old SHA matches the passed snapshot and current deps/roles still match the
+sealed declaration. The complete context map must still equal the sealed map;
+supplier homes, published/foreign context, old repaired items and pages remain
+exact. This recognizes the already reviewed input, not new source permission.

@@ -66,10 +66,11 @@ export function nativePrerequisiteLifecycle(root,run,entry){
 /** Bind stable native lineage, never whole driver state or mutable event files. */
 export function prerequisiteLifecycleBinding(root,run){
   const p=prerequisiteRepairProtocol(),registry=`research/${run}-step2-prerequisites.json`;if(p.absent(root,registry))return null;
-  const inputs=[registry,...['step2-prerequisite-lifecycle.mjs','step2-authored-metadata.mjs','step2-prerequisite-repairs.mjs','batch-scope-review.mjs'].map(name=>fileURLToPath(new URL(name,import.meta.url)))],epochs=[];
+  const inputs=[registry,...['step2-prerequisite-lifecycle.mjs','step2-authored-metadata.mjs','step2-prerequisite-repairs.mjs','batch-scope-review.mjs','step1-decisions.mjs','frontier-snapshot.mjs'].map(name=>fileURLToPath(new URL(name,import.meta.url)))],epochs=[];
   for(const entry of p.json(root,registry).generations){
     const life=nativePrerequisiteLifecycle(root,run,entry);if(!life)continue;
     inputs.push(life.historyPath);const state=p.json(root,`${entry.state_dir}/state.json`),ownership=[];
+    for(const page of [...runPages(root,run),...p.json(root,'research/plan-spec.json').pages])for(const item of page.items??[])if(!entry.items.includes(item.id)&&life.manifestAtAdmission(item.id)&&p.hash(JSON.stringify(item))!==life.manifestAtAdmission(item.id))inputs.push(`research/${run}-step1-${item.id}.json`);
     for(const batch of entry.batches){
       const dir=`research/${run}-scope-review/batch-${batch}`,input=`${dir}/repair-1.input.json`;
       if(p.absent(root,input))continue;

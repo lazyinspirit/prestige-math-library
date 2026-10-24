@@ -5,7 +5,9 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {prerequisiteRegistry,prerequisiteBoundary,assertNoPrerequisiteTransaction} from './step2-prerequisites.mjs';
 import {readItem} from './physics-content.mjs';
-import {consumers} from './batch-scope-review.mjs';
+import {consumers,loopState} from './batch-scope-review.mjs';
+import {loadStep1Record} from './frontier-snapshot.mjs';
+import {step1Decision} from './step1-decisions.mjs';
 import {sectionText,splitFrontmatter} from './facts-block.mjs';
 import {physicalInterface} from './physics-interface.mjs';
 import {parseFrontmatter} from './content-policy-lib.mjs';
@@ -72,17 +74,27 @@ function request(root,run,path){const row=json(root,path);assert(path.startsWith
 const headings={definition:'Definition',algorithm:'Definition',lemma:'Statement',theorem:'Statement',proposition:'Statement',corollary:'Statement',example:'Example',counterexample:'Statement refuted','false-statement':'Statement',remark:'Remark','open-problem':'Open problem',postulate:'Postulate','physics-theorem':'Statement','thought-experiment':'Statement',experiment:'Observations'};
 export function repairPublicSection(source){const {body,fm}=splitFrontmatter(source),kind=parseFrontmatter(fm).kind;assert(headings[kind],`unsupported public section kind ${kind}`);const value=sectionText(body,headings[kind]).trim();assert(value,`missing canonical ${headings[kind]} section`);return value;}
 function admittedStatement(root,commit,id,lifecycle){const path=`items/${id}.md`,source=gitSource(root,commit,path);assert(hash(source)===lifecycle.atAdmission(path),'admission source Git blob differs from passed history');return repairPublicSection(source.toString());}
+function ownerReadyOriginal(root,run,item,readiness=loadStep1Record(root,run)){
+  const source=readItem(file(root,`items/${item.id}.md`)),current=step1Decision(readiness,item.id),owned=readiness.items.get(item.id);
+  return source.id===item.id&&source.kind===item.kind&&item.domain==='mathematics'&&item.library==='mathematics'&&source.status==='draft'&&source.domain==='mathematics'&&source.library==='mathematics'&&(!source.pipeline_run||source.pipeline_run===run)&&same(source.deps??[],item.deps??[])&&same(source.dependency_roles??{},item.dependency_roles??{})&&current.closed&&current.row?.owner===true&&current.row.decision==='ready'&&owned&&loopState(root,run,owned.page.batch).phase==='accepted';
+}
 function historicalMetadataHash(root,run,entry,path,expected,lifecycle){
   if(digest(root,path)===expected)return true;
-  if(!lifecycle||path!=='research/plan-spec.json'&&!entry.batches.some(batch=>path===`research/${run}-batch-${batch}.pages.json`))return false;
+  if(!lifecycle||path!=='research/plan-spec.json'&&!Object.hasOwn(entry.manifest_sha256,path))return false;
   const doc=json(root,path);assert(raw(root,path)===JSON.stringify(doc,null,2)+'\n','metadata serialization changed outside public mirrors');
   const admission=json(root,authoredMetadataPath(run,entry.number)),req=json(root,admission.request.path),pages=Array.isArray(doc)?doc:doc.pages;
-  for(const page of pages)for(const item of page.items??[])if(entry.items.includes(item.id)){
+  let readiness;
+  for(const page of pages)for(const item of page.items??[])if(lifecycle.manifestAtAdmission(item.id)&&hash(JSON.stringify(item))!==lifecycle.manifestAtAdmission(item.id)){
     const sourcePath=`items/${item.id}.md`,original=admittedStatement(root,req.base_commit,item.id,lifecycle);
     if(item.statement!==original){
-      assert(lifecycle.accepted(sourcePath)&&item.statement===repairPublicSection(raw(root,sourcePath)),'public mirror requires exact current source and accepted native ownership');item.statement=original;
+      const source=readItem(file(root,sourcePath));
+      if(entry.items.includes(item.id))assert(lifecycle.accepted(sourcePath),'public mirror requires accepted native ownership');
+      else{
+        readiness??=loadStep1Record(root,run);assert(ownerReadyOriginal(root,run,item,readiness),'original public mirror requires current owner-ready draft mathematics and accepted batch');
+      }
+      assert(item.statement===repairPublicSection(source.raw),'public mirror requires exact current source');item.statement=original;
     }
-    assert(hash(JSON.stringify(item))===lifecycle.manifestAtAdmission(item.id),'new-owned metadata changed beyond public statement mirror');
+    assert(hash(JSON.stringify(item))===lifecycle.manifestAtAdmission(item.id),'metadata changed beyond public statement mirror');
   }
   return hash(JSON.stringify(doc,null,2)+'\n')===expected;
 }
@@ -288,7 +300,12 @@ export function checkedRepairOverlay(root,run,entry){
   for(const [path,expected] of Object.entries(done.sources))assert(digest(root,path)===expected,`repair receipt stale ${path}`);
   for(const [path,expected] of Object.entries(done.metadata))assert(historicalMetadataHash(root,run,entry,path,expected,lifecycle),`repair receipt stale ${path}`);
   const req=json(root,done.request.path),reviewed=reviewedSources(root,run,req,entry,auth,lifecycle),pages=reviewedPages(root,run,req,auth);
-  assert(same({...reviewed.sources,...pages.sources},done.sources)&&same(pages.context,done.page_context??{}),'completion source/context review map changed');
+  const oldContext=done.page_context??{},normalized={...pages.context};
+  if(lifecycle)for(const [path,expected] of Object.entries(oldContext))if(Object.hasOwn(normalized,path)&&normalized[path]!==expected&&/^items\/[a-z0-9-]+\.md$/.test(path)){
+    const id=basename(path,'.md'),item=runPages(root,run).flatMap(page=>page.items).find(item=>item.id===id);
+    if(item&&!entry.items.includes(id)&&hash(JSON.stringify(item))!==lifecycle.manifestAtAdmission(id)&&expected===lifecycle.atAdmission(path)&&ownerReadyOriginal(root,run,item)&&item.statement===repairPublicSection(raw(root,path)))normalized[path]=expected;
+  }
+  assert(same({...reviewed.sources,...pages.sources},done.sources)&&same(normalized,oldContext),'completion source/context review map changed');
   return done;
 }
 // Shared only by the bounded physics author-metadata admission protocol.

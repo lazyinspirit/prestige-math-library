@@ -17,6 +17,7 @@ import {writeBatchDependencyLevels} from './batch-dependency-levels.mjs';
 import {gateReviewSnapshot} from '../physics-autopilot/src/owner-gate-recertification.mjs';
 import {adoptAuthoredMetadata,checkedAuthoredMetadata,authoredMetadataPath,authoredMetadataReviewInputs} from './step2-authored-metadata.mjs';
 import {nativePrerequisiteLifecycle,prerequisiteLifecycleBinding} from './step2-prerequisite-lifecycle.mjs';
+import {recordStep1,recordStep1Batch} from './step1-decisions.mjs';
 
 const run = 'fixture-prerequisites';
 const digest = value => createHash('sha256').update(value).digest('hex');
@@ -76,7 +77,7 @@ function fixture(t) {
   return { root, stateDir, statePath, put, read, json, bind, requestPath, request, prepare, calls, originals, evidence, escalation };
 }
 
-function repairFixture(t,{pageSetup=false,importedContext=null,ownerAddition=false}={}){
+function repairFixture(t,{pageSetup=false,importedContext=null,ownerAddition=false,alignedOld=false}={}){
   const f=fixture(t),commit=()=>{
     for(const args of [['add','.'],['commit','-qm','Exact fixture repair preimages']]){
       const result=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(result.status,0,result.stderr);
@@ -87,6 +88,7 @@ function repairFixture(t,{pageSetup=false,importedContext=null,ownerAddition=fal
     item.dependency_level=0;
     const path=`items/${item.id}.md`;f.put(path,f.read(path).replace('kind:',`status: draft\npipeline_run: ${run}\nkind:`));
   }
+  if(alignedOld){f.originals[1][0].items[0].statement='Original interface.';f.put('items/lem-original-two.md',f.read('items/lem-original-two.md').replace('kind: lemma','kind: lemma\ndomain: mathematics\nlibrary: mathematics'));}
   if(pageSetup){
     f.originals[0][0].requires=['original-two-b'];f.originals[0][0].items[0].deps=['lem-original-two'];f.originals[0][0].items[0].dependency_level=1;
     f.put('items/lem-original-one.md',f.read('items/lem-original-one.md').replace('deps: []','deps: [lem-original-two]'));
@@ -280,8 +282,8 @@ test('owner addition successor does not waive consumer selection or stale repair
   }
 });
 
-function authoredFixture(t,{ownerAddition=false}={}){
-  const f=repairFixture(t,{ownerAddition}),manifest=`research/${run}-batch-3.pages.json`,pages=f.json(manifest),plan=f.json('research/plan-spec.json'),id='lem-new-one',source=`items/${id}.md`;
+function authoredFixture(t,{ownerAddition=false,alignedOld=false,pageSetup=false}={}){
+  const f=repairFixture(t,{ownerAddition,alignedOld,pageSetup}),manifest=`research/${run}-batch-3.pages.json`,pages=f.json(manifest),plan=f.json('research/plan-spec.json'),id='lem-new-one',source=`items/${id}.md`;
   f.put(source,`---\nid: ${id}\nkind: lemma\ndomain: mathematics\nlibrary: mathematics\nstatus: draft\npipeline_run: ${run}\ndeps: []\nsources: {references: [{title: Actual author fixture reference, url: https://example.invalid/full-text}]}\n---\n## Statement\n\nActual complete approved clarification.\n`);
   for(const item of pages.flatMap(page=>page.items))if(!existsSync(join(f.root,`items/${item.id}.md`)))f.put(`items/${item.id}.md`,`---\nid: ${item.id}\nkind: ${item.kind}\nstatus: draft\ndomain: mathematics\nlibrary: mathematics\ndeps: []\n---\n## Statement\n\n${item.statement}\n`);
   for(const args of [['add','.'],['commit','-qm','Exact native authored source baseline before mirror adoption']])assert.equal(spawnSync('git',args,{cwd:f.root}).status,0);
@@ -326,10 +328,18 @@ test('new-author metadata rejects unfinished/failed native authors, old source e
   }
 });
 
-function lifecycleFixture(t){
-  const f=authoredFixture(t,{ownerAddition:true});f.adopt();
+function lifecycleFixture(t,{alignedOld=false,pageContext=false}={}){
+  const f=authoredFixture(t,{ownerAddition:!pageContext,alignedOld,pageSetup:pageContext});f.adopt();
   for(const args of [['add','.'],['commit','-qm','Exact adopted construction metadata']])assert.equal(spawnSync('git',args,{cwd:f.root}).status,0);
-  const auth=f.json(f.authorization);auth.base_commit=spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim();f.put(f.authorization,auth);f.authorize();f.after();f.complete();
+  const auth=f.json(f.authorization);auth.base_commit=spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim();
+  if(pageContext){auth.pages=['original-one-a'];auth.metadata_changes=[{path:`research/${run}-batch-1.pages.json`,pointer:'/0/requires'},{path:'research/plan-spec.json',pointer:'/pages/0/requires'}].map(row=>({...row,before_sha256:repairValueDigest(['original-two-b']),after_sha256:repairValueDigest(['original-two-b','original-two-a'])}));}
+  f.put(f.authorization,auth);f.authorize();f.after();
+  if(pageContext){
+    const source='library/test/original-one-a.md',before=f.bind(source).sha256;f.put(source,f.read(source).replace('requires: [original-two-b]','requires: [original-two-b, original-two-a]'));
+    for(const path of [`research/${run}-batch-1.pages.json`,'research/plan-spec.json']){const doc=f.json(path),pages=Array.isArray(doc)?doc:doc.pages;pages.find(page=>page.id==='original-one-a').requires=['original-two-b','original-two-a'];f.put(path,doc);}writeBatchDependencyLevels(f.root,run);
+    const req=f.json(f.completion);req.page_reviews=[{id:'original-one-a',before_sha256:before,after_sha256:f.bind(source).sha256,scoped_use_justification:'Root checked the actual local dependency and its unchanged published supplier home.',focused_checks:'Root checked the exact requires additions and unchanged body, inventory and metadata.'}];f.put(f.completion,req);
+  }
+  f.complete();
   const pages=f.json(f.manifest),items=pages.flatMap(page=>page.items.map(item=>item.id)),pageIds=pages.map(page=>page.id),files=[...items.map(id=>`items/${id}.md`),...pages.map(page=>`library/${page.category}/${page.id}.md`)];
   for(const item of pages.flatMap(page=>page.items))if(!existsSync(join(f.root,`items/${item.id}.md`)))f.put(`items/${item.id}.md`,`---\nid: ${item.id}\nkind: ${item.kind}\nstatus: draft\ndomain: mathematics\nlibrary: mathematics\ndeps: []\n---\n## Statement\n\n${item.statement}\n`);
   for(const page of pages)f.put(`library/${page.category}/${page.id}.md`,`---\npage: ${page.id}\nstatus: draft\nitems: ${JSON.stringify(page.items.map(item=>item.id))}\n---\n`);
@@ -426,6 +436,44 @@ test('public mirror exception rejects old rows, identity, deps, unrelated metada
     }
     assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/metadata|mirror|source|plan/);
   }
+});
+
+function originalOwnerMirrorFixture(t,{owner=true}={}){
+  const f=lifecycleFixture(t,{alignedOld:true}),id='lem-original-two',source=`items/${id}.md`,manifest=`research/${run}-batch-2.pages.json`,record=`research/${run}-step1-${id}.json`,statement='Original mathematics with its explicit necessary measurable-data hypothesis.';
+  f.put(source,f.read(source).replace('Original interface.',statement));
+  for(const path of [manifest,'research/plan-spec.json']){const doc=f.json(path),pages=Array.isArray(doc)?doc:doc.pages;pages.flatMap(page=>page.items).find(item=>item.id===id).statement=statement;f.put(path,doc);}
+  f.put(`research/${run}-scope-review/batch-2/state.json`,{version:1,run,batch:'2',phase:'held',reviews:[],repairs:[]});resolveOwner(f.root,run,'2',{reviewer:'/root',decision:'accept',reason:'Root actually owns the complete mathematical statement amendment and affected consumer use checks.'});
+  const options={item:id,decision:'ready',dependencies:[],reason:'Actual Root review of the current mathematical hypothesis amendment and all current consumer uses.'};
+  if(owner)recordStep1Batch(f.root,{run,owner:true,records:[options]});else recordStep1(f.root,{...options,run,owner:false});
+  return {...f,oldId:id,oldSource:source,oldManifest:manifest,readyRecord:record};
+}
+
+test('owner-ready original mathematics permits only its exact source mirror and binds the actual readiness input',t=>{
+  const f=originalOwnerMirrorFixture(t),oldCompletion=f.read(repairPaths(run,1).completion);checkOwnerAdditions(f.root,run,'1');
+  const binding=prerequisiteLifecycleBinding(f.root,run);assert(binding.inputs.includes(f.readyRecord));
+  const snapshot=gateReviewSnapshot({repo:f.root,run},[{id:'binding',argv:['true'],ownerReviewInputs:binding.inputs}],['2-scope-review']);assert(snapshot.inputs.some(row=>row.path===join(f.root,f.readyRecord)&&row.sha256===f.bind(f.readyRecord).sha256));assert.equal(f.read(repairPaths(run,1).completion),oldCompletion);
+});
+
+test('original mirror rejects stale/nonowner readiness, published/foreign sources and other metadata',t=>{
+  for(const mode of ['stale','nonowner','published','foreign','deps','title','text']){
+    const f=originalOwnerMirrorFixture(t,{owner:mode!=='nonowner'});
+    if(mode==='stale')f.put(f.oldSource,f.read(f.oldSource)+'\nLater unreviewed proof edit.\n');
+    if(mode==='published'||mode==='foreign'){
+      f.put(f.oldSource,f.read(f.oldSource).replace(mode==='published'?'status: draft':`pipeline_run: ${run}`,mode==='published'?'status: published':'pipeline_run: foreign-run'));
+      recordStep1Batch(f.root,{run,owner:true,records:[{item:f.oldId,decision:'ready',dependencies:[],reason:'Current fixture rebind cannot license publication or foreign source ownership.'}]});
+    }
+    if(['deps','title','text'].includes(mode)){const plan=f.json('research/plan-spec.json'),row=plan.pages.flatMap(page=>page.items).find(item=>item.id===f.oldId);if(mode==='deps')row.deps=['lem-original-one'];if(mode==='title')row.title='Unadmitted metadata';if(mode==='text')row.statement='Text absent from the source';f.put('research/plan-spec.json',plan);}
+    assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/owner-ready|metadata|source/);
+  }
+});
+
+test('owner-ready original context successor changes only its historical source SHA, never the supplier home',t=>{
+  const f=lifecycleFixture(t,{alignedOld:true,pageContext:true}),id='lem-original-two',source=`items/${id}.md`,completion=f.read(repairPaths(run,1).completion),statement='Original mathematics with its necessary explicit measurable-data condition.';
+  f.put(source,f.read(source).replace('Original interface.',statement));
+  for(const path of [`research/${run}-batch-2.pages.json`,'research/plan-spec.json']){const doc=f.json(path),pages=Array.isArray(doc)?doc:doc.pages;pages.flatMap(page=>page.items).find(item=>item.id===id).statement=statement;f.put(path,doc);}
+  f.put(`research/${run}-scope-review/batch-2/state.json`,{version:1,run,batch:'2',phase:'held',reviews:[],repairs:[]});resolveOwner(f.root,run,'2',{reviewer:'/root',decision:'accept',reason:'Root checked the full mathematical amendment and actual consumers at this existing owner boundary.'});recordStep1Batch(f.root,{run,owner:true,records:[{item:id,decision:'ready',dependencies:[],reason:'Actual Root source and consumer review for this exact scoped mathematical amendment.'}]});
+  checkedRepairOverlay(f.root,run,f.entry);assert.equal(f.read(repairPaths(run,1).completion),completion);
+  f.put('library/test/original-two-a.md',f.read('library/test/original-two-a.md')+'\nUnadmitted published context edit.\n');assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/context review map changed/);
 });
 
 function pageRepairFixture(t,{importedContext=null}={}){
