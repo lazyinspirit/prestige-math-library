@@ -25,7 +25,7 @@ dependency_level: 1
 
 ## Example
 
-Let $T=\mathbb R/\mathbb Z$, let $M=\{p\}$, and put $\mathbb C_k=\mathbb C$ with $[s]\in T$ acting by $e^{2\pi i k s}$. Take $E^0=\mathbb C_0\oplus\mathbb C_1$, $E^1=\mathbb C_2$, with differential zero. The compact symbol triple on $T^*M=\{p\}$ is $(E^0,E^1,0)$. Its virtual bundle is $[\mathbb C_0]+[\mathbb C_1]-[\mathbb C_2]$, whose character at $g=[s]$ is $1+z-z^2$, $z=e^{2\pi i s}$. This is also the cohomological index character. The normal Koszul denominator is $1$ because the normal bundle has rank zero.
+Let $T=\mathbb R/\mathbb Z$, let $M=\{p\}$, and put $\mathbb C_k=\mathbb C$ with $[s]\in T$ acting by $e^{2\pi i k s}$. Take the two-term complex $0\to E^0\xrightarrow{0}E^1\to0$, where $E^0=\mathbb C_0\oplus\mathbb C_1$ and $E^1=\mathbb C_2$. Its cohomology is $H^0=\ker(0:E^0\to E^1)=E^0$ and $H^1=\ker(0:E^1\to0)/\operatorname{im}(0:E^0\to E^1)=E^1$. The compact symbol triple on $T^*M=\{p\}$ is $(E^0,E^1,0)$. Its virtual bundle is $[\mathbb C_0]+[\mathbb C_1]-[\mathbb C_2]$, whose character at $g=[s]$ is $1+z-z^2$, $z=e^{2\pi i s}$. The cohomological index character is defined here as the alternating cohomology trace $\sum_{j=0}^1(-1)^j\operatorname{tr}(g|H^j)$, which is also $1+z-z^2$. The normal Koszul denominator is $1$ because the normal bundle has rank zero.
 
 ## Facts & Assumptions
 

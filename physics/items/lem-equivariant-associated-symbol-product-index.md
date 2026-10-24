@@ -33,15 +33,21 @@ dependency_level: 2
 
 ## Statement
 
-Assume AC. Let $T$ and $H$ be compact Lie groups, with no connectedness or commutativity requirement on $H$. Let $P\to X$ be a smooth principal right $H$-bundle over a compact smooth manifold without boundary. Let $T$ act smoothly on $P$ on the left, commuting with $H$, and let $F$ be a compact smooth manifold without boundary with commuting smooth left actions of $H$ and $T$. Put $Y=P\times_H F$, where $(p h,f)$ is identified with $(p,hf)$, and let $p_Y:Y\to X$ be its projection. The action of $t\in T$ on $Y$ is $[p,f]\mapsto[tp,tf]$.
+Assume AC. Let $T$ and $H$ be compact Lie groups, with no connectedness or commutativity requirement on $H$. For any compact Lie group $K$, write $R(K)$ for the Grothendieck group of finite-dimensional continuous complex $K$-representations. Let $P\to X$ be a smooth principal right $H$-bundle over a compact smooth manifold without boundary. Let $T$ act smoothly on $P$ on the left, commuting with $H$, and let $F$ be a compact smooth manifold without boundary with commuting smooth left actions of $H$ and $T$. Put $Y=P\times_H F$, where $(p h,f)$ is identified with $(p,hf)$, and let $p_Y:Y\to X$ be its projection. The action of $t\in T$ on $Y$ is $[p,f]\mapsto[tp,tf]$.
 
-Let $E^0,E^1\to X$ be smooth Hermitian $T$-bundles and $G^0,G^1\to F$ smooth Hermitian $H\times T$-bundles. Choose invariant densities and metrics. Let $A:C^\infty(X,E^0)\to C^\infty(X,E^1)$ and $B:C^\infty(F,G^0)\to C^\infty(F,G^1)$ be respectively $T$- and $H\times T$-equivariant elliptic operators of order one, allowing the following precise closure: an operator is in the order-one Sobolev closure if classical order-one operators converge to it in every norm $H^s\to H^{s-1}$, $s\in\mathbb Z$, with the compatible continuous degree-one principal symbol provided by the compact symbol calculus. Extend their degree-one symbols $a(x,\xi)$ and $b(f,\eta)$ by zero at the zero covector. They are invertible for nonzero covectors.
+Let $E^0,E^1\to X$ be smooth Hermitian $T$-bundles and $G^0,G^1\to F$ smooth Hermitian $H\times T$-bundles. Choose invariant densities and metrics. Let $A:C^\infty(X,E^0)\to C^\infty(X,E^1)$ and $B:C^\infty(F,G^0)\to C^\infty(F,G^1)$ be respectively $T$- and $H\times T$-equivariant operators of order one, either classical or in the order-one Sobolev closure. In the latter case, classical order-one operators converge to the given operator in every norm $H^s\to H^{s-1}$, $s\in\mathbb Z$, and their compatible degree-one principal symbols converge to its continuous degree-one principal symbol. Degree one means $a(x,t\xi)=t a(x,\xi)$ and $b(f,t\eta)=t b(f,\eta)$ for $t>0$; the symbols are smooth in the classical case and continuous in the closure case. Elliptic means that the corresponding symbol is a linear isomorphism at every nonzero covector. Extend $a(x,\xi)$ and $b(f,\eta)$ by zero at the zero covector, and assume $A$ and $B$ are elliptic.
 
-Write $\mathcal G^j=P\times_H G^j\to Y$ and $\mathcal E^{ij}=p_Y^*E^i\otimes\mathcal G^j$. There are compatible $T$-equivariant horizontal lifts
+Write $\mathcal G^j=P\times_H G^j\to Y$ and $\mathcal E^{ij}=p_Y^*E^i\otimes\mathcal G^j$. The horizontal lifts below are defined by this finite-chart construction. Choose a finite cover $\{U_\alpha\}$ of $X$ trivializing $P$ and the bundles $E^0,E^1$, and smooth real functions $\phi_\alpha$ compactly supported in $U_\alpha$ with $\sum_\alpha\phi_\alpha^2=1$. In the induced product chart $Y|_{U_\alpha}\cong U_\alpha\times F$, lift $\phi_\alpha A\phi_\alpha$ by acting in the base variable on the $E^i$ factor and by the identity on $G^j$; extend this operator by zero outside the chart and sum the finite family to obtain $\widetilde A_j$. Let $\rho_t^{ij}(y):\mathcal E^{ij}_y\to\mathcal E^{ij}_{ty}$ be the induced bundle action and define the section action by $U_t^{ij}s(y)=\rho_t^{ij}(t^{-1}y)s(t^{-1}y)$. Set
 
-$$A_j:C^\infty(Y,\mathcal E^{0j})\longrightarrow C^\infty(Y,\mathcal E^{1j}),\qquad j=0,1,$$
+$$A_j=\int_T U_t^{1j}\widetilde A_j(U_t^{0j})^{-1}\,dt,$$
 
-in the order-one Sobolev closure. Let $B_i:\mathcal E^{i0}\to\mathcal E^{i1}$ denote the fiberwise operator induced by $B$. On smooth sections these lifts obey all four exact identities
+where $dt$ is normalized Haar probability and the integral is taken in each $H^s(Y,\mathcal E^{0j})\to H^{s-1}(Y,\mathcal E^{1j})$ operator norm. The resulting operator acts on smooth sections and is a common order-one Sobolev-closure limit, bounded in every such norm for $s\in\mathbb Z$. The connection used in the product-symbol formula below splits covectors on $Y$; the lifts are the chartwise operators just defined.
+
+Thus the domains and codomains of the compatible $T$-equivariant lifts are
+
+$$A_j:C^\infty(Y,\mathcal E^{0j})\longrightarrow C^\infty(Y,\mathcal E^{1j}),\qquad j=0,1.$$
+
+Let $B_i:C^\infty(Y,\mathcal E^{i0})\to C^\infty(Y,\mathcal E^{i1})$ denote the operator whose restriction over each base point $x\in X$ is $B$ acting on the $F$-fiber, tensored with the fixed vector space $E_x^i$. On smooth sections these lifts obey all four exact identities
 
 $$B_1A_0=A_1B_0,\qquad B_0^*A_1^*=A_0^*B_1^*,\qquad B_1^*A_1=A_0B_0^*,\qquad B_0A_0^*=A_1^*B_1.$$
 
@@ -49,13 +55,15 @@ The adjoints are with respect to the invariant product density on $Y$ obtained f
 
 $$D=\begin{pmatrix}A_0&-B_1^*\\ B_0&A_1^*\end{pmatrix}:\mathcal E^{00}\oplus\mathcal E^{11}\longrightarrow\mathcal E^{10}\oplus\mathcal E^{01}.$$
 
+In this calculus, an order-one operator on $Y$ is elliptic when its continuous joint degree-one principal symbol is a bundle isomorphism at every nonzero covector of $T^*Y$. The operator $D$ extends boundedly from $H^1(Y,\mathcal E^{00}\oplus\mathcal E^{11})$ to $L^2(Y,\mathcal E^{10}\oplus\mathcal E^{01})$. Fredholm means that this bounded map has finite-dimensional kernel, closed range, and finite-dimensional cokernel, the quotient of the target by its range; its Hilbert adjoint is taken in the stated $L^2$ structures.
+
 Then $D:H^1\to L^2$ is Fredholm, both its kernel and its adjoint kernel are finite-dimensional smooth $T$-representations, and its principal symbol represents the graded product of $a$ and $b$. Explicitly, a connection splitting of a covector on $Y$ into horizontal $\xi$ and vertical $\eta$ gives the product symbol
 
 $$d_{\mathrm{prod}}(y;\xi,\eta)=\begin{pmatrix}a(p_Yy,\xi)\otimes I&-I\otimes b(f,\eta)^*\\ I\otimes b(f,\eta)&a(p_Yy,\xi)^*\otimes I\end{pmatrix}.$$
 
 This matrix is interpreted using an associated-bundle trivialization; its homotopy class is independent of the connection. The actual glued lift symbol need only be homotopic through invertible joint symbols to this matrix.
 
-Let $K=\ker B$ and $L=\ker B^*$, with their finite-dimensional $H\times T$ actions, and put $K_P=P\times_H K$, $L_P=P\times_H L$. The restricted lifts give elliptic operators $C_K:E^0\otimes K_P\to E^1\otimes K_P$ and $C_L$ with $K$ replaced by $L$, whose symbols are $a\otimes I$. For $\operatorname{Ind}_T Q=[\ker Q]-[\ker Q^*]\in R(T)$, where $R(T)$ is the Grothendieck group of finite-dimensional continuous complex $T$-representations, one has
+Let $K=\ker B$ and $L=\ker B^*$, with their finite-dimensional $H\times T$ actions, and put $K_P=P\times_H K$, $L_P=P\times_H L$. The restricted lifts give elliptic operators $C_K:E^0\otimes K_P\to E^1\otimes K_P$ and $C_L$ with $K$ replaced by $L$, whose symbols are $a\otimes I$. For $\operatorname{Ind}_T Q=[\ker Q]-[\ker Q^*]\in R(T)$ one has
 
 $$\operatorname{Ind}_T D=\operatorname{Ind}_T C_K-\operatorname{Ind}_T C_L.$$
 
