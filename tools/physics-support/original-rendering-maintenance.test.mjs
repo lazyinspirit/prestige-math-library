@@ -26,6 +26,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     const body = exactFixture.before.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)([\s\S]*)$/)[1];
     const kind = /^kind: (.+)$/m.exec(exactFixture.before)[1];
     before = before.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/)[0].replace('kind: theorem', 'kind: ' + kind) + body;
+    before = before.replace(/^title: .+$/m, () => /^title: .+$/m.exec(exactFixture.before)[0]);
   }
   if (mode === 'counterexample-spelling') {
     before='---\nid: '+id+'\nkind: counterexample\ntitle: Exact known published body pair\nstatus: published\ndeps: '+JSON.stringify(counterexampleFixture.targets)+'\naliases: [supplier-alias]\nprovenance: {statement: ai-altered, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n'+counterexampleFixture.before_body;
@@ -52,6 +53,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
   if (exactFixture) after = after.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/)[0] + exactFixture.after.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)([\s\S]*)$/)[1];
+  if (exactFixture) after = after.replace(/^title: .+$/m, () => /^title: .+$/m.exec(exactFixture.after)[0]);
   if (mode === 'definition-display') after = after.replace('\n$$A=A.$$\n', ()=>'\n\n$$\nA=A.\n$$\n\n');
   if (mode === 'counterexample-spelling') after = after.slice(0, after.length - counterexampleFixture.before_body.length) + counterexampleFixture.after_body;
   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
@@ -411,7 +413,7 @@ test('counterexample exact case never expands default or legacy kind support',t=
 test('counterexample unchanged published refs and runtime require actual authority input bindings',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.review.inputs['items/'+counterexampleFixture.targets[0]+'.md'];f.save(f.root,originalRenderingMaintenancePath(f.root,f.run),f.review);assert.throws(()=>f.verify(),/unbound input/);});
 
 
-for (const id of ['lem-normal-density-has-total-mass-one', 'prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class']) {
+for (const id of ['lem-normal-density-has-total-mass-one', 'prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class', 'lem-one-variable-completion-of-the-square-with-a-smooth-parameter', 'thm-c-c-is-dense-in-l-p-for-radon-measures']) {
   test(`exact native ${id} preserves honestly absent diagram flags and strict current evidence`, t => {
     const f = fixture(t, { mode: 'exact-native', exactNativeId: id, presentationVersion: 2, authored: true });
     const adjudication = JSON.parse(readFileSync(join(f.source, f.adjudicationPath)));

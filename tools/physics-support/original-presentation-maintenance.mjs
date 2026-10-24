@@ -751,6 +751,18 @@ function counterexampleSpellingChanges(beforeBytes,afterBytes,option) {
 const exactNativeCases = [
   {
     "version": 1,
+    "id": "lem-one-variable-completion-of-the-square-with-a-smooth-parameter",
+    "before_body_sha256": "abcc4e87d88412eec8be600aee8fb5d3b813b09615f2130ebf91efab1ebf4e07",
+    "after_body_sha256": "98901113a63b851033245690dd0b4c6bec2f593cb50ae154282cc1a1fd1cec5b"
+  },
+  {
+    "version": 1,
+    "id": "thm-c-c-is-dense-in-l-p-for-radon-measures",
+    "before_body_sha256": "d1de036af2b0387d3512209a1ee8a50a6eba24f6b711b0717c0f9243775b619d",
+    "after_body_sha256": "58de8cc07c882320d7669331b93f512b145f064a92762dd9e7e21966551b4a0c"
+  },
+  {
+    "version": 1,
     "id": "cor-interval-uncountable",
     "before_body_sha256": "c5d6e1c0e745c67abe97ead92e3d53e4e38eea3c5d39867368898af3941cd289",
     "after_body_sha256": "8c64fa31e8b497a3a7624a7f953a900b77150c18415280328f5d012f472ad60c"
@@ -804,6 +816,8 @@ const exactNativeCases = [
     "after_body_sha256": "63303142498671bb9f6c8bcbf3897792632f2cf23416d5e18b518b223d740260"
   }
 ];
+if (new Set(exactNativeCases.map(row => row.id)).size !== exactNativeCases.length)
+  fail('duplicate exact native presentation inventory identity');
 function exactNativeOption(value) {
   if (value === undefined) return null;
   const found = exactNativeCases.find(row => equal(row, value));
@@ -825,7 +839,11 @@ function exactNativeChanges(beforeBytes, afterBytes, option) {
     if (!old || !next || old === next || !x?.includes(old) || !y?.includes(next)
         || x.indexOf(old) !== x.lastIndexOf(old) || y.indexOf(next) !== y.lastIndexOf(next))
       fail('exact native unique section region');
-    const at = normalized.indexOf(y) + y.indexOf(next);
+    // Earlier exact substitutions can change this section's source length.
+    const currentSection = sections(normalized).values.get(section);
+    if (!currentSection || currentSection.indexOf(next) < 0
+        || currentSection.indexOf(next) !== currentSection.lastIndexOf(next)) fail('exact native reconstruction region');
+    const at = normalized.indexOf(currentSection) + currentSection.indexOf(next);
     if (at < 0 || normalized.slice(at, at + next.length) !== next) fail('exact native reconstruction region');
     normalized = normalized.slice(0, at) + old + normalized.slice(at + next.length);
     deltas.push({ id: `${section}:exact-native:${deltas.length}`, kind, section, before: old, after: next, ...extra });
@@ -865,6 +883,26 @@ function exactNativeChanges(beforeBytes, afterBytes, option) {
     if (!x || x.replace('f(t)=exp(-t^2)', String.raw`$f(t)=\exp(-t^2)$`).replace('1/sqrt2',String.raw`$1/\sqrt2$`) !== y)
       fail('exact native normal density transcription');
     change('Proof', x, y, 'proof-inline-math-transcription', {label:'2.1'});
+  } else if (id === 'lem-one-variable-completion-of-the-square-with-a-smooth-parameter') {
+    if (before.data.title !== after.data.title) fail('exact completion title changed');
+    const x=proofParts(a.values.get('Proof')).steps.find(s=>s.label==='1.2')?.text;
+    const y=proofParts(b.values.get('Proof')).steps.find(s=>s.label==='1.2')?.text;
+    if (!x || !x.startsWith('1.2 Assume $m>0$. ')
+        || x.replace('[L1, given, assume-case[ positive-parameter], construct]', '[L1, given, construct]') !== y)
+      fail('exact completion malformed support removal');
+    change('Proof', x, y, 'proof-malformed-case-support-removal', {label:'1.2'});
+  } else if (id === 'thm-c-c-is-dense-in-l-p-for-radon-measures') {
+    if (before.data.title !== 'C_c(X) is dense in L^p(mu) for a Radon measure'
+        || after.data.title !== String.raw`$C_c(X)$ is dense in $L^p(\mu)$ for a Radon measure`)
+      fail('exact Radon title transcription');
+    for (const label of ['1.1','2.1']) {
+      const x=proofParts(a.values.get('Proof')).steps.find(s=>s.label===label)?.text;
+      const y=proofParts(b.values.get('Proof')).steps.find(s=>s.label===label)?.text;
+      const expected=label==='1.1' ? x?.replace('. [L1, choose] Given', '. Given').replace(/\[L1\](\s*)$/, '[L1, choose]$1')
+        : x?.replace('. [step 1.1, L2] Then', '. Then');
+      if (!x || expected !== y) fail('exact Radon redundant support relocation');
+      change('Proof', x, y, 'proof-redundant-support-relocation', {label});
+    }
   } else fail('unused exact native case');
   const context = {version:1, headers, regions:[], graphics_free:false};
   for (const side of ['before','after']) {
@@ -885,6 +923,12 @@ function exactNativeChanges(beforeBytes, afterBytes, option) {
         if(codes.length!==1||rows.some(r=>r.node.type==='code'&&r.start>=appendedStart&&!codes.includes(r)))fail('exact native appended TikZ role');
       }
     }
+  }
+  if (['lem-one-variable-completion-of-the-square-with-a-smooth-parameter', 'thm-c-c-is-dense-in-l-p-for-radon-measures'].includes(id)) {
+    const math = body => stepAst(body,true).rows.filter(r=>['math','inlineMath'].includes(r.node.type))
+      .map(r=>({type:r.node.type,raw:body.slice(r.start,r.end)}));
+    if (!equal(math(before.body),math(after.body))) fail('exact support repair changed mathematical AST literals');
+    context.preserved_math = math(before.body);
   }
   context.graphics_free=[before.body,after.body].every(body=>!sections(body).values.has('Remarks')
     && !stepAst(body,true).rows.some(r=>['html','image','imageReference','code'].includes(r.node.type))

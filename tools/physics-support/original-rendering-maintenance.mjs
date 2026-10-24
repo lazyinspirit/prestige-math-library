@@ -316,6 +316,21 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
       if (!pure || !unchangedDiagramRule && !(noDiagramKeys && adjudication.mathematical_meaning_preserved === true))
         fail('exact redundant-support suffix native/purity guards');
     }
+    // Fixed support repairs retain authentic absent diagram flags only behind
+    // exact source/body/AST/math bindings and individual typed Root reviews.
+    if (presentationV2 && ['lem-one-variable-completion-of-the-square-with-a-smooth-parameter',
+      'thm-c-c-is-dense-in-l-p-for-radon-measures'].includes(changes.exact_native_presentation?.id)) {
+      const completion = changes.id === 'lem-one-variable-completion-of-the-square-with-a-smooth-parameter';
+      const kind = completion ? 'proof-malformed-case-support-removal' : 'proof-redundant-support-relocation';
+      const pure = changes.exact_native_context?.version === 1 && changes.exact_native_context.graphics_free === true
+        && Array.isArray(changes.exact_native_context.preserved_math)
+        && equal(changes.steps.map(s => s.label), completion ? ['1.2'] : ['1.1', '2.1'])
+        && changes.steps.every(s => s.kind === kind)
+        && equal(changes.deltas.map(d => d.kind), completion ? [kind] : ['reviewed-title-pair', kind, kind])
+        && Boolean(changes.title) === !completion && !changes.technique && !changes.remarks;
+      if (!pure || !unchangedDiagramRule && !(noDiagramKeys && adjudication.mathematical_meaning_preserved === true))
+        fail('exact support repair native/purity guards');
+    }
     if ((changes.remarks || substantiveSteps.length) && !unchangedDiagramRule
       && !(strictSupportOnly && noDiagramKeys && adjudication.mathematical_meaning_preserved === true)) fail('diagram independence');
     if (!Array.isArray(entry.evidence) || !entry.evidence.length) fail('missing Root evidence');

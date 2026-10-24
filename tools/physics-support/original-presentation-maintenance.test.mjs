@@ -113,3 +113,37 @@ test('nonterminal QED repair and arbitrary old macro markers fail',()=>{
 test('new terminal QED requires literal final Unicode square, not deletion or arbitrary new macro',()=>{
  const f=fixture(),before=f.before.replace('[F1, given]\n','[F1, given] \\qed\n');for(const marker of ['', '\\qedsymbol','\\square','∎ extra']){const after=f.after.replace('[F1, given]\n',`[F1, given] ${marker}\n`);assert.throws(()=>originalPresentationChanges(Buffer.from(before),Buffer.from(after)),/support/);}
 });
+
+import { readFileSync } from 'node:fs';
+const exactSupportFixtures = JSON.parse(readFileSync(new URL('./fixtures/exact-native-presentation.json', import.meta.url)))
+  .filter(f => ['lem-one-variable-completion-of-the-square-with-a-smooth-parameter', 'thm-c-c-is-dense-in-l-p-for-radon-measures'].includes(f.selector.id));
+for (const f of exactSupportFixtures) {
+  const extract = (before=f.before, after=f.after, option=f.selector) => originalPresentationChanges(Buffer.from(before), Buffer.from(after), ...Array(7), option);
+  test(`exact support case ${f.selector.id} preserves math AST and requires opt-in`, () => {
+    const c=extract(); assert.equal(c.exact_native_context.graphics_free,true);
+    assert.ok(c.exact_native_context.preserved_math.length>0);
+    assert.throws(()=>originalPresentationChanges(Buffer.from(f.before),Buffer.from(f.after)), /support labels/);
+    assert.throws(()=>extract(f.before,f.after,{...f.selector,after_body_sha256:'0'.repeat(64)}), /selector/);
+    assert.throws(()=>extract(f.before,f.after.replace('## Statement','## Statement\n\nAssume a new premise.')), /body binding/);
+    const bodyStart=f.after.indexOf('## Statement');
+    const formula=f.after.slice(bodyStart).match(/\$[^$\n]+\$/)[0];
+    const changedFormula=f.after.slice(0,bodyStart)+f.after.slice(bodyStart).replace(formula,'$0=1$');
+    assert.throws(()=>extract(f.before,changedFormula), /body binding/);
+    assert.throws(()=>extract(f.before,f.after.replace('[L1, given, construct]','[L2, given, construct]').replace('[L1, choose]','[L2, choose]')), /body binding/);
+    assert.throws(()=>extract(f.before,f.after.replace('deps: [','deps: [def-new-premise, ')), /metadata/);
+    assert.throws(()=>extract(f.before,f.after.replace(/title: [^\n]+/, 'title: A changed scientific claim')), /title/);
+  });
+}
+
+test('exact native inventory, fixtures and new branches have unique identities', () => {
+  const source=readFileSync(new URL('./original-presentation-maintenance.mjs', import.meta.url),'utf8');
+  const inventory=source.slice(source.indexOf('const exactNativeCases = ['), source.indexOf('function exactNativeOption'));
+  const ids=[...inventory.matchAll(/"id": "([^"]+)"/g)].map(m=>m[1]);
+  assert.equal(new Set(ids).size,ids.length);
+  const fixtures=JSON.parse(readFileSync(new URL('./fixtures/exact-native-presentation.json',import.meta.url)));
+  assert.equal(new Set(fixtures.map(f=>f.selector.id)).size,fixtures.length);
+  assert.deepEqual([...ids].sort(),fixtures.map(f=>f.selector.id).sort());
+  for (const f of exactSupportFixtures)
+    assert.equal(source.split("} else if (id === '"+f.selector.id+"') {").length-1,1);
+  assert.equal(source.split('context.preserved_math = math(before.body);').length-1,1);
+});
