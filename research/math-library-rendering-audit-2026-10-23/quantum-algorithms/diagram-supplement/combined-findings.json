@@ -1,0 +1,627 @@
+[
+  {
+    "id": "alg-qa-13-phase-estimation-amplitude-estimation",
+    "section": "Item body",
+    "lines": [
+      39,
+      41,
+      42,
+      43
+    ],
+    "symptom": "The algorithm invokes a named phase-estimation circuit, controlled powers, a phase-register measurement, and a cyclotomic postprocessing formula; a circuit view would make the control/data register roles and the retained control phase explicit.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "QFT-based amplitude-estimation circuit schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm invokes a named phase-estimation circuit, controlled powers, a phase-register measurement, and a cyclotomic postprocessing formula; a circuit view would make the control/data register roles and the retained control phase explicit.",
+    "concrete_diagram_content": "Show preparation ψ=A|0⟩ on the system register, an m-qubit phase register, controlled Q^{2^j} calls for j=0,…,m−1, inverse QFT, and phase outcome y. Label the resulting exact value sin²(πy/M)=(2−ζ_M^y−ζ_M^(−y))/4 and preserve the stated controlled-call convention for the leading minus in Q. Do not imply that decimal approximation is part of the quantum circuit.",
+    "mathematical_check": "Show preparation ψ=A|0⟩ on the system register, an m-qubit phase register, controlled Q^{2^j} calls for j=0,…,m−1, inverse QFT, and phase outcome y. Label the resulting exact value sin²(πy/M)=(2−ζ_M^y−ζ_M^(−y))/4 and preserve the stated controlled-call convention for the leading minus in Q. Do not imply that decimal approximation is part of the quantum circuit.",
+    "screenshots": [
+      "screenshots/alg-qa-13-phase-estimation-amplitude-estimation--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-13-phase-estimation-amplitude-estimation--01.png": "b6b632c34cd5091c66c57d6f410b221eabe17f6be4271d61e3c0b1ccebe00957"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "amplitude-estimation-and-counting"
+    ],
+    "source_lines": {
+      "39": "**Input.** An instance from [[def-qa-13-amplitude-estimation-task]], an integer $m\\ge2$, $M=2^m$, and either the declared controlled-power access mode or repeated controlled-$Q$ access.",
+      "41": "**Instructions.** Prepare $\\psi=A|0\\rangle$, run the $M$-label QPE circuit on $Q$ using controlled powers $Q^{2^j}$, $j=0,\\ldots,m-1$, and measure its phase register to obtain $y\\in\\{0,\\ldots,M-1\\}$. Output the exact cyclotomic value",
+      "42": "$$\\widetilde a=\\sin^2(\\pi y/M)=\\frac{2-\\zeta_M^y-\\zeta_M^{-y}}4,\\qquad \\zeta_M=e^{2\\pi i/M},$$",
+      "43": "with the real embedding specified by this root. A decimal approximation is postprocessing and is charged separately. The leading minus in $Q$ is retained: on a controlled call it is the control phase $C(-I)$, not a discarded standalone global phase."
+    },
+    "source_snapshot": "snapshots/alg-qa-13-phase-estimation-amplitude-estimation.md",
+    "source_sha256": "fbdd679a1b19fe34d28c981ad297c9756e89430434587ba8e233323d35483821",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "editorial / uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-14-zero-completion-query-simulation",
+    "section": "Item body",
+    "lines": [
+      37,
+      39,
+      43,
+      46,
+      47,
+      49,
+      50,
+      51
+    ],
+    "symptom": "The algorithm is defined by a nontrivial routing permutation between differently sized address registers and a response swap controlled by the validity flag. A register-flow schematic could expose the clean-register lifecycle and the unconditional oracle call while making clear that no controlled-oracle capability is used.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Register-flow circuit schematic with validity control, clean work registers, ordinary oracle call, and uncomputation",
+    "exact_source_claim": "For N<M, compute validity v=[j<N], route the padded address j into clean N-level Q_N only when valid, prepare a fresh response bit in |+>, swap it into the caller response when valid, make one ordinary XOR query, then reverse the swap, Hadamard, routing and comparison so every added register returns to zero. Invalid padded addresses map to query address 0 and leave the caller response unchanged.",
+    "selection_reason": "The algorithm is defined by a nontrivial routing permutation between differently sized address registers and a response swap controlled by the validity flag. A register-flow schematic could expose the clean-register lifecycle and the unconditional oracle call while making clear that no controlled-oracle capability is used.",
+    "concrete_diagram_content": "Show A_M carrying j, comparator writing v=[j<N], the controlled basis routing R_N,M into clean Q_N (Q_N receives j when valid and 0 otherwise), a fresh response r initialized to 0 and prepared as |+>, controlled swap with the caller response when v=1, one ordinary O_x call on Q_N,r, then reverse controlled swap, H on r, R_N,M^{-1}, and comparator uncomputation. Mark added registers clean at output; distinguish the N=M direct-call branch. Check all controls and register dimensions against lines 37-51.",
+    "mathematical_check": "Show A_M carrying j, comparator writing v=[j<N], the controlled basis routing R_N,M into clean Q_N (Q_N receives j when valid and 0 otherwise), a fresh response r initialized to 0 and prepared as |+>, controlled swap with the caller response when v=1, one ordinary O_x call on Q_N,r, then reverse controlled swap, H on r, R_N,M^{-1}, and comparator uncomputation. Mark added registers clean at output; distinguish the N=M direct-call branch. Check all controls and register dimensions against lines 37-51.",
+    "screenshots": [
+      "screenshots/alg-qa-14-zero-completion-query-simulation--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-14-zero-completion-query-simulation--01.png": "432523b9609cf0d9d67c0e59c71f495ef5f932882396d399cc177c1d6fdf7c5a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-query-lower-bounds-and-search-optimality"
+    ],
+    "source_lines": {
+      "37": "**Input:** An integer $N\\ge1$, a power of two $M=2^m$ with $N\\le M<2N$, a padded address register $A_M$ with basis $|j\\rangle$ for $0\\le j<M$, a response bit, and the raw XOR oracle $O_x$ whose address input is the $N$-level register with basis $|q\\rangle$ for $0\\le q<N$. If $N=M$, identify $A_M$ with the raw address register. If $N<M$, supply a separate clean $N$-level raw-address register $Q_N$ initialized to $|0\\rangle$, together with clean comparator and routing workspace.",
+      "39": "**Output:** The zero-completed query action $|j,b\\rangle\\mapsto|j,b\\oplus\\widetilde x_j\\rangle$ on $A_M$ and the response bit, where $\\widetilde x_j=x_{j+1}$ for $j<N$ and $\\widetilde x_j=0$ for $j\\ge N$, with every added register restored to its specified computational-basis zero state.",
+      "43": "1. If $N=M$, call $O_x$ directly on $A_M$ and the response bit, then return. If $N<M$, continue with Steps 2--5.",
+      "46": "   Implement this Boolean comparison into the validity bit with [[alg-qc-reversible-embedding]], leaving its comparison workspace clean. The raw query address is an $N$-level register, not an $m$-bit target. Route it as follows. For each $j=1,\\ldots,N-1$, apply the basis transposition $(0\\ j)$ to $Q_N$ conditioned on $A_M=j$ and $v=1$; apply no transposition for other control values. These mutually disjoint controlled permutations define a finite input-independent unitary $R_{N,M}$, with",
+      "47": "   $$R_{N,M}|j\\rangle_{A_M}|0\\rangle_{Q_N}|v\\rangle=|j\\rangle_{A_M}|q(j,v)\\rangle_{Q_N}|v\\rangle,$$",
+      "49": "3. Allocate a fresh clean response bit $r$ in $|0\\rangle$ and apply $H$ to prepare $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$. Controlled on $v=1$, swap the caller's response bit with $r$ using Fredkin gates.",
+      "50": "4. Make one ordinary call to $O_x$ on the $N$-level raw-address register $Q_N$ and response $r$.",
+      "51": "5. Reverse the response swap, then apply $H$ to $r$ to return it to $|0\\rangle$. Apply $R_{N,M}^{-1}$ to clear $Q_N$, and reverse the reversible comparison to restore $v$ and all comparison workspace to zero. Return the caller's padded address and response registers."
+    },
+    "source_snapshot": "snapshots/alg-qa-14-zero-completion-query-simulation.md",
+    "source_sha256": "3a4c16a86b8858dd1e7332767fa6993ed0786114600a54092c577c2bb93878a1",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-bernstein-vazirani-query",
+    "section": "Item body",
+    "lines": [
+      44,
+      52
+    ],
+    "symptom": "This is a compact canonical circuit with two distinct registers and a single oracle call; the prose specifies a complete gate order suitable for a legible circuit schematic.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "TikZ quantum circuit with address and target registers",
+    "exact_source_claim": "The one-query procedure applies H^{⊗n} to the address, X then H to target, one standard XOR oracle on (A,T), H^{⊗n} to A, then measures A and outputs a.",
+    "selection_reason": "This is a compact canonical circuit with two distinct registers and a single oracle call; the prose specifies a complete gate order suitable for a legible circuit schematic.",
+    "concrete_diagram_content": "Draw n address wires A_1,…,A_n and one target wire T; initialize |0^n⟩|0⟩; show H on every address wire, X then H on T, the single U_{f_a} box spanning A and T, H on every address wire, and measurement only on A with classical output a. Keep the target unmeasured and identify its |−⟩ phase-kickback state after X then H.",
+    "mathematical_check": "Draw n address wires A_1,…,A_n and one target wire T; initialize |0^n⟩|0⟩; show H on every address wire, X then H on T, the single U_{f_a} box spanning A and T, H on every address wire, and measurement only on A with classical output a. Keep the target unmeasured and identify its |−⟩ phase-kickback state after X then H.",
+    "screenshots": [
+      "screenshots/alg-qa-bernstein-vazirani-query--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-bernstein-vazirani-query--01.png": "97cced29097aeaa36ee2dba2a459f1cc34667584991db45f62c0688777fd1b82"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "exact-oracle-algorithms"
+    ],
+    "source_lines": {
+      "44": "**Input.** An integer $n\\ge1$ and an oracle $f_a(x)=a\\cdot x$ satisfying the no-offset Bernstein–Vazirani promise of [[def-qa-bernstein-vazirani-promise]], on an ordered $n$-qubit address register $A$ and one target qubit $T$ initialized to $|0^n\\rangle_A|0\\rangle_T$.",
+      "52": "The terminal measurement is specified by [[def-qa-finite-branch-output-law]] and is separate from the declared one-qubit gate resource. No circuit-uniformity or classical bit-time bound is asserted."
+    },
+    "source_snapshot": "snapshots/alg-qa-bernstein-vazirani-query.md",
+    "source_sha256": "d0d2d92a9f3e0c26322875d034813e47a2fe449a17113f758093a89ffcc57bab",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "pedagogical candidate, not a defect; no current diagram to validate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-deutsch-query",
+    "section": "Item body",
+    "lines": [
+      44,
+      50,
+      52
+    ],
+    "symptom": "The ordered gate sequence and two separate registers are explicit in the procedure; a circuit diagram would show the single oracle query, target phase-kickback preparation, and terminal address measurement at a glance.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "two-wire quantum circuit diagram",
+    "exact_source_claim": "The algorithm prepares target T with X, applies H to T and address A, calls the standard XOR oracle once, applies H to A, then measures A and returns the measured bit.",
+    "selection_reason": "The ordered gate sequence and two separate registers are explicit in the procedure; a circuit diagram would show the single oracle query, target phase-kickback preparation, and terminal address measurement at a glance.",
+    "concrete_diagram_content": "Draw address wire A and target wire T from |0>|0>; X on T, H on both wires, one Uf box on the ordered pair (A,T), H on A, then computational-basis measurement of A with output 0/1. Keep the query count at one and indicate no measurement on T.",
+    "mathematical_check": "Draw address wire A and target wire T from |0>|0>; X on T, H on both wires, one Uf box on the ordered pair (A,T), H on A, then computational-basis measurement of A with output 0/1. Keep the query count at one and indicate no measurement on T.",
+    "screenshots": [
+      "screenshots/alg-qa-deutsch-query--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-deutsch-query--01.png": "cbd29e8495a9d2370d331be3a8eec23b03a2034fb417177c9c168cde6d1a7ebf"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "exact-oracle-algorithms"
+    ],
+    "source_lines": {
+      "44": "**Input.** A one-bit total Boolean oracle $f$ satisfying the Deutsch promise of [[def-qa-deutsch-promise]], with an address qubit $A$ and target qubit $T$ initialized to $|0\\rangle_A|0\\rangle_T$.",
+      "50": "**Procedure.** Apply $X$ to $T$, then apply $H$ to $T$ and $H$ to $A$. Invoke the standard XOR oracle $U_f$ once on the ordered pair $(A,T)$. Apply $H$ to $A$, measure $A$ in its ordered computational basis, and output the measured bit. There are no intermediate measurements, loops, or failure branches.",
+      "52": "The terminal measurement is specified by [[def-qa-finite-branch-output-law]] and is separate from the declared one-qubit gate resource. No circuit-uniformity or classical bit-time bound is asserted."
+    },
+    "source_snapshot": "snapshots/alg-qa-deutsch-query.md",
+    "source_sha256": "834169d26e209a4d65c45a8fa0c8fc025c9b19ea837ad938d8420fdf6cf6c30c",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "potentially useful; not confirmed necessary",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-exact-binary-qft-circuit",
+    "section": "Item body",
+    "lines": [
+      29,
+      36
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial-missing-diagram-candidate",
+    "exact_source_claim": "The algorithm specifies ordered wires q_(n−1),…,q_0; descending Hadamard and controlled-phase blocks; and a final layer of pairwise swaps.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "A parameterized circuit diagram with one row per ordered wire; H on q_j followed by CP_(j−i+1) from q_i to q_j in the stated chronological order, then swaps q_j↔q_(n−1−j). Preserve the stated wire convention and n=0 empty-circuit case.",
+    "mathematical_check": "A parameterized circuit diagram with one row per ordered wire; H on q_j followed by CP_(j−i+1) from q_i to q_j in the stated chronological order, then swaps q_j↔q_(n−1−j). Preserve the stated wire convention and n=0 empty-circuit case.",
+    "screenshots": [
+      "screenshots/alg-qa-exact-binary-qft-circuit--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-exact-binary-qft-circuit--01.png": "8eaedb4d2ccfb3a7d5b2ae094a87f7d94ba0fe8e41a5fe21bd3f794aec5bafb5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-fourier-transform-circuits"
+    ],
+    "source_lines": {
+      "29": "Input: an $n$-qubit register with ordered wires $q_{n-1},\\ldots,q_0$, $n\\ge0$. The input integer is encoded by $x=\\sum_{j=0}^{n-1}x_j2^j$ in the computational basis, as specified by [[def-qc-ordered-bitstring-encoding]].",
+      "36": "The chronological order is exactly the order listed. If $n=0$, all loops are empty and the output is the empty circuit, i.e. the identity on the one-dimensional register."
+    },
+    "source_snapshot": "snapshots/alg-qa-exact-binary-qft-circuit.md",
+    "source_sha256": "368597a408bc26332ec01b8f5b1a53199a9e12a73b835de9800b25e1eed1ca5a",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-modular-multiplication-circuit",
+    "section": "Item body",
+    "lines": [
+      50,
+      52,
+      54,
+      60,
+      62
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "reversible-circuit-flow",
+    "exact_source_claim": "The reversible circuit acts as controlled multiplication on valid residues, as identity when control is zero or the input encoding is invalid, and returns all work to zero through a compute-copy-uncompute implementation.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "A schematic register flow with control c, data z, clean n-bit target, and clean work: compute f_a(c,z) into target; copy/swap data and target with the specified three CNOTs per bit; uncompute the old-data target with f_{a^{-1}} using the new data; label the clean-work return and the identity cases. Keep the schematic at the block level rather than attempting to draw the full Boolean DAG. This is an uncertain editorial aid; the detailed finite DAG remains authoritative and no proof depends on a diagram.",
+    "mathematical_check": "A schematic register flow with control c, data z, clean n-bit target, and clean work: compute f_a(c,z) into target; copy/swap data and target with the specified three CNOTs per bit; uncompute the old-data target with f_{a^{-1}} using the new data; label the clean-work return and the identity cases. Keep the schematic at the block level rather than attempting to draw the full Boolean DAG. This is an uncertain editorial aid; the detailed finite DAG remains authoritative and no proof depends on a diagram.",
+    "screenshots": [
+      "screenshots/alg-qa-modular-multiplication-circuit--01.png",
+      "screenshots/alg-qa-modular-multiplication-circuit--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-modular-multiplication-circuit--01.png": "478afb4f6086a9ea3d9a2835c321d2d67ff107b5a845286dda112616a2b3d101",
+      "screenshots/alg-qa-modular-multiplication-circuit--02.png": "3486e37736c31cb1035eec1043e3cc965b6177cf7bbd4173b91e294f8515478f"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-order-finding-and-rational-reconstruction"
+    ],
+    "source_lines": {
+      "50": "**Output.** A reversible circuit on $c,z$ and clean work registers which implements the controlled map $z\\mapsto az\\bmod N$ for $c=1$ and valid $z$, and is the identity on invalid encodings and when $c=0$.",
+      "52": "**Instructions.** Define the total Boolean function on $(c,z)$ by",
+      "54": "Generate the following explicit NOT/AND/OR DAG for this function. Bit arrays in the instructions below are indexed from least significant bit $0$; the input and output port lists retain the repository's most-significant-first register order. Begin with the distinct input identifiers $c,z_{n-1},\\ldots,z_0$ and two constant nodes $0,1$. Every gate emission appends a fresh identifier in consecutive order, referencing only existing identifiers. A named bit below is an alias of its node identifier, never an additional gate. Expand every macro call immediately in the stated loop order.",
+      "60": "5. Pad $z$ by a zero high bit, call $\\operatorname{SUB}_{n+1}(z,N)$, and let $h$ be its carry. Emit $v=\\operatorname{NOT}(h)$ and $g=\\operatorname{AND}(c,v)$. Set $F=\\operatorname{SELECT}_n(g,R,z)$. The ordered output ports are $F_{n-1},\\ldots,F_0$. This completes the finite DAG and its topological order. Construct a second DAG by the identical recipe with constant $a^{-1}$ in place of $a$.",
+      "62": "Compile each DAG to the clean-target XOR oracle of [[def-qc-coherent-function-oracle]] using [[alg-qc-reversible-embedding]], whose exact gate-emission rules apply also to repeated-source ports. Allocate an $n$-bit clean target, compute $f_a(c,z)$ into it, swap the data and target registers with three CNOT gates per bit, then apply the compiled XOR computation for $f_{a^{-1}}$ to the old-data target, using the new data as input. Each compiled XOR oracle is an involution by [[thm-qc-reversible-xor-oracle-unitary]]. Return the concatenated gate list with every compute-copy-uncompute stage included. Separate items `thm-qa-modular-multiplication-circuit-correctness` and `thm-qa-modular-arithmetic-cost` establish its basis action and gate/work bounds. No depth bound is part of this algorithm."
+    },
+    "source_snapshot": "snapshots/alg-qa-modular-multiplication-circuit.md",
+    "source_sha256": "8c522ef5a23194716ac8256efa26a6c6530f485d9ecfc4adab7ccbda907d6670",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-quantum-phase-estimation",
+    "section": "Item body",
+    "lines": [
+      47,
+      53,
+      57,
+      59
+    ],
+    "symptom": "The source explicitly assigns control powers to q_(m-1-j), distinguishes inverse QFT from U inverse, and states the coherent prefix before measurement; a labeled register-level diagram could expose these conventions compactly.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "quantum phase-estimation circuit diagram",
+    "exact_source_claim": "Quantum phase estimation initializes an m-qubit phase register and system eigenvector, applies H to each phase wire, controlled U^(2^j) powers with the specified reversed wire indexing, inverse positive-sign QFT, and phase-register measurement.",
+    "selection_reason": "The source explicitly assigns control powers to q_(m-1-j), distinguishes inverse QFT from U inverse, and states the coherent prefix before measurement; a labeled register-level diagram could expose these conventions compactly.",
+    "concrete_diagram_content": "Show m phase wires q_(m-1),...,q_0 and the system wire H; H gates on every phase wire; controlled powers U^(1),U^2,...,U^(2^(m-1)) with the source-mandated control index q_(m-1-j); an inverse positive-sign QFT box on phase wires; and measurement/output y/Q. Label that inverse QFT is not a controlled U^-1 call.",
+    "mathematical_check": "Show m phase wires q_(m-1),...,q_0 and the system wire H; H gates on every phase wire; controlled powers U^(1),U^2,...,U^(2^(m-1)) with the source-mandated control index q_(m-1-j); an inverse positive-sign QFT box on phase wires; and measurement/output y/Q. Label that inverse QFT is not a controlled U^-1 call.",
+    "screenshots": [
+      "screenshots/alg-qa-quantum-phase-estimation--01.png",
+      "screenshots/alg-qa-quantum-phase-estimation--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-quantum-phase-estimation--01.png": "6f23f0a370de0f601a31374f4b00a5191fcc6b18cf107b9c429306e875450463",
+      "screenshots/alg-qa-quantum-phase-estimation--02.png": "4a3e87548e0451e4ebe4ffc3b713215d1d623ec9782e453c81647a8399502df1"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-phase-estimation"
+    ],
+    "source_lines": {
+      "47": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].",
+      "53": "1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.",
+      "57": "5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.",
+      "59": "The inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]]."
+    },
+    "source_snapshot": "snapshots/alg-qa-quantum-phase-estimation.md",
+    "source_sha256": "7d7c727605c0017e184f74d196c9869763a8bcd6b77a3956d0cee49cba03e835",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "potentially useful; not confirmed necessary",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-simon-one-sample",
+    "section": "Item body",
+    "lines": [
+      40,
+      44,
+      45,
+      46
+    ],
+    "symptom": "This is a concrete multi-register circuit procedure with two Hadamard layers, an oracle, an intermediate target measurement, and a final address measurement; a wire diagram makes the register and measurement order easy to follow.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Simon Fourier-sampling circuit schematic",
+    "exact_source_claim": "",
+    "selection_reason": "This is a concrete multi-register circuit procedure with two Hadamard layers, an oracle, an intermediate target measurement, and a final address measurement; a wire diagram makes the register and measurement order easy to follow.",
+    "concrete_diagram_content": "Show n address wires initialized to |0^n⟩ and m target wires initialized to |0^m⟩; apply H to each address wire, one U_f query across address/target, measure and discard the target outcome/register, then apply H to the address and measure y. Indicate exactly one query and 2n Hadamard gates; the intermediate target outcome does not control classical postprocessing. The diagram is explanatory, not a proof.",
+    "mathematical_check": "Show n address wires initialized to |0^n⟩ and m target wires initialized to |0^m⟩; apply H to each address wire, one U_f query across address/target, measure and discard the target outcome/register, then apply H to the address and measure y. Indicate exactly one query and 2n Hadamard gates; the intermediate target outcome does not control classical postprocessing. The diagram is explanatory, not a proof.",
+    "screenshots": [
+      "screenshots/alg-qa-simon-one-sample--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-simon-one-sample--01.png": "1073a717ccfd921ec292b91150a68d06392a905ba7b7f5bc464f3eeb2ce04066"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "simon-algorithm-and-finite-field-recovery"
+    ],
+    "source_lines": {
+      "40": "**Input:** Integers $n\\ge1$, $m\\ge n-1$, and ordinary access through the [[def-qa-standard-bit-query]] to a total function satisfying [[def-qa-simon-promise]]. Prepare an ordered $n$-qubit address register and $m$-qubit target register, both in their zero computational-basis states.",
+      "44": "1. Apply the exact one-qubit Hadamard gate to every address wire, producing $H^{\\otimes n}|0^n\\rangle$, and leave the target at $|0^m\\rangle$.",
+      "45": "2. Apply the standard bit-flip oracle $U_f|x\\rangle|z\\rangle=|x\\rangle|z\\oplus f(x)\\rangle$ once. Measure the target with the computational-basis projective measurement [[def-qc-projective-measurement]], viewed as the finite POVM [[def-qc-povm-and-outcome-law]]. Use the Lüders branch maps $\\mathcal I_v(X)=P_vXP_v$, where $P_v=I_{\\rm address}\\otimes|v\\rangle\\langle v|$, under the instrument and conditional-state interface [[def-qc-instrument-and-conditional-state]]. Theorem [[thm-qc-luders-instrument-of-a-povm-is-valid]] supplies a valid instrument; its outcome weights and positive-branch states are covered by [[thm-qc-instrument-outcome-law-normalizes]] and [[thm-qc-instrument-conditional-state-is-density]]. Discard the reported value and target register. The POVM effects are these same $P_v$.",
+      "46": "3. Apply $H^{\\otimes n}$ to the address register and measure it in the computational basis. Return the observed $n$-bit string $y$ as one sample row."
+    },
+    "source_snapshot": "snapshots/alg-qa-simon-one-sample.md",
+    "source_sha256": "01dff5c3143e6a6f4e7eab5370dbc0985a203a2440244a20aed79dbe29a96bd7",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "editorial / uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-qa-truncated-binary-qft-circuit",
+    "section": "Item body",
+    "lines": [
+      33,
+      35
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "circuit",
+    "exact_source_claim": "The truncated circuit omits every controlled phase CP_s whose denominator index s exceeds m, retains every Hadamard and all final reversal SWAPs, and is exact when m≥n.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "An n-register wire diagram for a small n (for example n=4) with each Hadamard, controlled-phase gates labeled by denominator index s, omitted gates for s>m visually marked, and the final reversal SWAP sequence. Label wire order to match the declared ordered register. This is an uncertain editorial aid; the current procedure is explicit and no proof depends on a diagram.",
+    "mathematical_check": "An n-register wire diagram for a small n (for example n=4) with each Hadamard, controlled-phase gates labeled by denominator index s, omitted gates for s>m visually marked, and the final reversal SWAP sequence. Label wire order to match the declared ordered register. This is an uncertain editorial aid; the current procedure is explicit and no proof depends on a diagram.",
+    "screenshots": [
+      "screenshots/alg-qa-truncated-binary-qft-circuit--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-qa-truncated-binary-qft-circuit--01.png": "95f8716339f40553da430a77cd00c5aa1ba0ec6742bb6dee3cf4fd31d046c358"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-fourier-transform-circuits"
+    ],
+    "source_lines": {
+      "33": "Input: an $n$-qubit ordered register as in [[alg-qa-exact-binary-qft-circuit]] and an integer cutoff $m\\ge1$.",
+      "35": "Output: run the exact binary QFT circuit except omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$. Retain every Hadamard and every final reversal SWAP. The resulting gate list is finite and unitary for every $n\\ge0,m\\ge1$ under [[def-qc-circuit-denotational-semantics]]. If $m\\ge n$, no controlled phase is omitted and the circuit is exactly the full circuit. The ideal gate-count convention is [[def-qa-qft-gate-cost-model]]."
+    },
+    "source_snapshot": "snapshots/alg-qa-truncated-binary-qft-circuit.md",
+    "source_sha256": "c2c38f068f4baaf1eaebc338c0a952e30852fcf3e95ffade069b64188adb726e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-qa-30-qaoa-circuit-and-objective",
+    "section": "Item body",
+    "lines": [
+      4,
+      10,
+      23,
+      30,
+      40,
+      41,
+      42,
+      43,
+      44,
+      2026
+    ],
+    "symptom": "The item is explicitly a circuit definition. A compact circuit schematic would expose the order of state preparation, repeated cost/mixer layers, measurement, and the sampled objective at a glance.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "TikZ QAOA quantum-circuit schematic",
+    "exact_source_claim": "Prepare |+> on the vertex qubits, apply p alternating cost and mixer layers with parameters (gamma_j,beta_j), then computational-basis measure; the expected objective is <psi|C_G|psi> and each measured string is a cut.",
+    "selection_reason": "The item is explicitly a circuit definition. A compact circuit schematic would expose the order of state preparation, repeated cost/mixer layers, measurement, and the sampled objective at a glance.",
+    "concrete_diagram_content": "Draw one wire per v in V initialized to |+>. For j=1,...,p show the cost unitary exp(-i gamma_j C_G), followed chronologically by the mixer exp(-i beta_j B_G); optionally expand them into commuting edge gates exp(-i gamma_j (I-Z_u Z_v)/2) for (u,v) in E and per-wire Rx(2 beta_j) gates. End with computational-basis measurement and label the bitstring x and cut score C_G(x), with expected score <psi|C_G|psi>. Respect the right-to-left product convention and do not imply the output is a maximum cut.",
+    "mathematical_check": "Draw one wire per v in V initialized to |+>. For j=1,...,p show the cost unitary exp(-i gamma_j C_G), followed chronologically by the mixer exp(-i beta_j B_G); optionally expand them into commuting edge gates exp(-i gamma_j (I-Z_u Z_v)/2) for (u,v) in E and per-wire Rx(2 beta_j) gates. End with computational-basis measurement and label the bitstring x and cut score C_G(x), with expected score <psi|C_G|psi>. Respect the right-to-left product convention and do not imply the output is a maximum cut.",
+    "screenshots": [
+      "screenshots/def-qa-30-qaoa-circuit-and-objective--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-qa-30-qaoa-circuit-and-objective--01.png": "07a27db5efde4db48e96e7341c9befbe8b79103930d50734227c8c84dba9ea41"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-optimization-sdp-and-variational-algorithms"
+    ],
+    "source_lines": {
+      "4": "title: \"QAOA circuit and expected combinatorial objective\"",
+      "10": "  - def-qa-30-variational-quantum-algorithm",
+      "23": "  proof: ai-altered",
+      "30": "verification:",
+      "40": "Let $G=(V,E)$ be a finite simple undirected graph, $p\\ge1$, and $\\gamma_1,\\ldots,\\gamma_p,\\beta_1,\\ldots,\\beta_p\\in\\mathbb R$. On $|V|$ qubits define",
+      "41": "$$C_G=\\sum_{(u,v)\\in E}\\frac{I-Z_uZ_v}{2},\\qquad B_G=\\sum_{v\\in V}X_v.$$",
+      "42": "Prepare $|+\\rangle^{\\otimes |V|}$ and apply, in the declared right-to-left product convention,",
+      "43": "$$U_{G,p}(\\gamma,\\beta)=\\prod_{j=p}^{1}e^{-i\\beta_jB_G}e^{-i\\gamma_jC_G}.$$",
+      "44": "The output state is $|\\psi_{G,p}(\\gamma,\\beta)\\rangle=U_{G,p}|+\\rangle^{\\otimes|V|}$ and the objective is $\\langle\\psi|C_G|\\psi\\rangle_D$. Measuring every qubit in the computational basis returns a random bitstring, hence a cut. Each cost and mixer exponential, graph-input access, parameter encoding, state preparation, measurement, repetition, and classical optimizer cost must be supplied and charged; this definition is not a guarantee of a maximum cut or approximation ratio."
+    },
+    "source_snapshot": "snapshots/def-qa-30-qaoa-circuit-and-objective.md",
+    "source_sha256": "e5a7b4435a91d7770389e79a5b8f0a800f6b39d98b66eb963e40fa4607538a2d",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "pedagogical candidate, not a defect; no current diagram to validate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-qa-33-feynman-kitaev-history-hamiltonian",
+    "section": "Item body",
+    "lines": [
+      35,
+      41
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial-missing-diagram-candidate",
+    "exact_source_claim": "The definition encodes time by legal unary clock words and gives exact local pre/post windows for each propagation edge, then separates input, output, propagation, and clock-penalty terms.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "A clock strip showing legal words |1^t0^(T−t)>, adjacent t−1→t propagation, the stated boundary/interior windows (0↔1, 00↔10, 10↔11, 100↔110), and labels for H_in, H_prop,t, H_out, and H_clock with their computation/clock support.",
+    "mathematical_check": "A clock strip showing legal words |1^t0^(T−t)>, adjacent t−1→t propagation, the stated boundary/interior windows (0↔1, 00↔10, 10↔11, 100↔110), and labels for H_in, H_prop,t, H_out, and H_clock with their computation/clock support.",
+    "screenshots": [
+      "screenshots/def-qa-33-feynman-kitaev-history-hamiltonian--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-qa-33-feynman-kitaev-history-hamiltonian--01.png": "8f7f4e23076e3564c75ed74df23c7d0835220d42943afc933914c0840d3007fe"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "qma-verification-and-local-hamiltonian"
+    ],
+    "source_lines": {
+      "35": "Let a verifier circuit have $T\\ge1$ gates $U_1,\\ldots,U_T$, each acting on at most two computation qubits, with its accept/reject predicate reversibly computed into one output qubit (accept is $|1\\rangle$). Let $N=T+1$ and encode time $t$ by the unary clock word $|c_t\\rangle=|1^t0^{T-t}\\rangle$ on $T$ clock qubits. For an initial computation vector $\\phi$ define its history vector",
+      "41": "Here $A$ indexes initially zero verifier workspace qubits, and the output predicate is computed into the displayed accept qubit. The history Hamiltonian is the positive sum $H_{in}+H_{prop}+H_{out}+H_{clock}$. A propagation term uses at most two computation and three clock qubits; each other summand uses at most two qubits."
+    },
+    "source_snapshot": "snapshots/def-qa-33-feynman-kitaev-history-hamiltonian.md",
+    "source_sha256": "12be96c1d76dba46d92f48fc325ba8de67cbd4753284d6de8f8bc939d241d4f1",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-qa-qft-fourier-circuit-order-and-truncation",
+    "section": "Item body",
+    "lines": [
+      33,
+      37,
+      39,
+      41
+    ],
+    "symptom": "The item explicitly compares chronological gate order with basis/wire order, and its matrix changes under reversing the two wires. A compact circuit would make the control-target convention, order of gates, and final bit reversal easier to compare with the two displayed Fourier matrices.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Two-wire quantum circuit with gate order, controlled phase, final wire swap, and reversed-order inset",
+    "exact_source_claim": "For N=4 in standard q1,q0 wire order, the positive-sign exact QFT circuit applies H(q1), CP2(q0,q1), H(q0), then SWAP(q1,q0); reversing displayed wire order conjugates the matrix by P that exchanges |01> and |10>. At cutoff m=1, CP2 is omitted while both Hadamards and the final SWAP remain.",
+    "selection_reason": "The item explicitly compares chronological gate order with basis/wire order, and its matrix changes under reversing the two wires. A compact circuit would make the control-target convention, order of gates, and final bit reversal easier to compare with the two displayed Fourier matrices.",
+    "concrete_diagram_content": "Draw wires q1 and q0 from left to right in chronological application order: H on q1, controlled phase CP2 with the stated q0,q1 convention, H on q0, and SWAP(q1,q0). Add a dashed cutoff-m=1 version with only CP2 removed. Label the matrix basis as |00>,|01>,|10>,|11>; show reversing wire display as P F4+ P with P exchanging the middle two basis vectors. Verify the gate order and positive-sign convention against lines 33-41.",
+    "mathematical_check": "Draw wires q1 and q0 from left to right in chronological application order: H on q1, controlled phase CP2 with the stated q0,q1 convention, H on q0, and SWAP(q1,q0). Add a dashed cutoff-m=1 version with only CP2 removed. Label the matrix basis as |00>,|01>,|10>,|11>; show reversing wire display as P F4+ P with P exchanging the middle two basis vectors. Verify the gate order and positive-sign convention against lines 33-41.",
+    "screenshots": [
+      "screenshots/ex-qa-qft-fourier-circuit-order-and-truncation--01.png",
+      "screenshots/ex-qa-qft-fourier-circuit-order-and-truncation--02.png",
+      "screenshots/ex-qa-qft-fourier-circuit-order-and-truncation--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-qa-qft-fourier-circuit-order-and-truncation--01.png": "344c8047f034aea7d335c479f553224ed1c1aca9eb3a44b0173c55a904191501",
+      "screenshots/ex-qa-qft-fourier-circuit-order-and-truncation--02.png": "70ba949517e3cca718eb4510c0f749a5ba3471208ebd72625b755bf5e8516bf8",
+      "screenshots/ex-qa-qft-fourier-circuit-order-and-truncation--03.png": "688f16ad9d8932a0642a7b551cfd1892900b46bb29f34f0b39a1a7771dc22536"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-fourier-transform-circuits-examples"
+    ],
+    "source_lines": {
+      "33": "For $N=4$ ($n=2$), the positive-sign exact circuit in standard wire order $q_1,q_0$ is $H(q_1)$, then $\\mathrm{CP}_2(q_0,q_1)$, then $H(q_0)$, then $\\mathrm{SWAP}(q_1,q_0)$. Its matrix in basis order $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$ is",
+      "37": "If the same register is displayed in reversed wire order $q_0,q_1$, the matrix in that order is $PF_4^+P$, where $P$ swaps the middle two basis vectors:",
+      "39": "$$PF_4^+P=\\frac12\\begin{pmatrix}1&1&1&1\\\\1&1&-1&-1\\\\1&-1&i&-i\\\\1&-1&-i&i\\end{pmatrix}.$$",
+      "41": "With cutoff $m=1$, the only controlled phase $\\mathrm{CP}_2$ is omitted, while the two Hadamards and final swap remain. The exact circuit has $2$ Hadamards, one controlled phase and one SWAP ($4$ ideal gates, or $6$ gates after expanding the SWAP); the truncated circuit has $2$ Hadamards and one SWAP ($3$ ideal gates, or $5$ with that expansion). Its operator-norm difference from the exact circuit is $\\sqrt2$, and the general omitted-gate sum is $\\pi/2$ for this $n,m$."
+    },
+    "source_snapshot": "snapshots/ex-qa-qft-fourier-circuit-order-and-truncation.md",
+    "source_sha256": "a025e63a10e82f0b02147a25e7a8d3bd23451ae4c833f1bac27f07814659227d",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-qa-30-membership-height-geometry",
+    "section": "Item body",
+    "lines": [
+      30,
+      34,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "symptom": "The statement combines geometric containment, a lower boundary graph, vertical membership queries, and a one-dimensional bracket update. A cross-section makes the roles of the radii and the IN/OUT inequalities easier to follow.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "TikZ 2D convex-body and height-function schematic",
+    "exact_source_claim": "A closed convex body contains B(0,r) and lies in B(0,R); its lower height h(y) is convex and Lipschitz on B(0,r/2), weak-membership IN/OUT answers bracket h(y), and binary search returns an approximation.",
+    "selection_reason": "The statement combines geometric containment, a lower boundary graph, vertical membership queries, and a one-dimensional bracket update. A cross-section makes the roles of the radii and the IN/OUT inequalities easier to follow.",
+    "concrete_diagram_content": "Draw a labeled planar cross-section of K between the inner and outer balls, the projected domain C, lower boundary t=h(y), a query point (y,t) on the vertical line, and an interval [ell,u] for the binary search. Mark the two weak-membership implications as bounds on t relative to h(y), with the signs IN: t≥h(y)−3Rε/r and OUT: t≤h(y)+2Rε/r. Label it schematic and do not use the picture as proof.",
+    "mathematical_check": "Draw a labeled planar cross-section of K between the inner and outer balls, the projected domain C, lower boundary t=h(y), a query point (y,t) on the vertical line, and an interval [ell,u] for the binary search. Mark the two weak-membership implications as bounds on t relative to h(y), with the signs IN: t≥h(y)−3Rε/r and OUT: t≤h(y)+2Rε/r. Label it schematic and do not use the picture as proof.",
+    "screenshots": [
+      "screenshots/lem-qa-30-membership-height-geometry--01.png",
+      "screenshots/lem-qa-30-membership-height-geometry--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-qa-30-membership-height-geometry--01.png": "efc09c10dd355f4929f15063a4f37932cc981562e5c6c3590208a01a264bbe50",
+      "screenshots/lem-qa-30-membership-height-geometry--02.png": "7308988f15c0134303f602371d045a1bbc12e2a92f94f6afb6555e35d70704a2"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-optimization-sdp-and-variational-algorithms"
+    ],
+    "source_lines": {
+      "30": "Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body in $\\mathbb R^n$, $n\\ge2$. In any rotated coordinates set $C=\\{y:\\exists t,(y,t)\\in K\\}$ and $h(y)=\\min\\{t:(y,t)\\in K\\}$. Then $h$ is convex, finite on $B(0,r)$, and $L=2R/r$-Lipschitz on $B(0,r/2)$. Every interior point of $C$ has a subgradient, and every such subgradient at a point in the interior of this ball has norm at most $L$.",
+      "34": "Finally, let $a\\ge0$. If $x=-\\|x\\|e_n$ receives OUT and $h(y)\\ge h(0)+\\langle v,y\\rangle-a\\|y\\|-b$ on $C$, then $s=(-v,1)/\\|(-v,1)\\|$ satisfies $\\langle s,z\\rangle\\ge\\langle s,x\\rangle-aR-b-2R\\varepsilon/r$ for every $z\\in K$.",
+      "53": "1.1 Compactness of $K$ makes each nonempty vertical section compact, so its minimum exists; projection makes $C$ compact and convex. Convex combinations of two minimizing boundary points show convexity of $h$. For $\\|y\\|\\le r$, the inner ball supplies a point at height zero, while the outer ball bounds all heights below by $-R$. Thus $-R\\le h(y)\\le0$ on that ball. [given, F1, F5, algebra]",
+      "54": "",
+      "55": "2.1 More generally on $B(0,d)$, $0<d<r$, let $y,y'$ be distinct and extend the directed line from $y$ through $y'$ by $r-d$ to $p=y'+(r-d)(y'-y)/\\|y'-y\\|$. Then $p\\in B(0,r)$ and convexity on the segment $[y,p]$ gives $h(y')-h(y)\\le R\\|y'-y\\|/(r-d)$. Exchange $y,y'$ and put $d=r/2$ to obtain the Lipschitz claim. [step 1.1, algebra]",
+      "56": "",
+      "57": "2.2 The ball $B((y,0),r/2)$ lies in $K$. Its convex hull with $(y,h(y))$ contains a ball of radius $\\theta r/2$ about $(y,(1-\\theta)h(y))$ for every $0\\le\\theta\\le1$: combine the vertex with every point of that ball. Consequently all heights between $h(y)(1-2\\varepsilon/r)$ and $-r/2$ lie in the inward $\\varepsilon$-erosion, whenever this interval is nonempty. If $\\varepsilon\\ge r/2$ the claimed OUT bound is automatic from $h(y)\\ge-R$ and $t\\le-r/2$. For $0<\\varepsilon<r/2$, write $H=-h(y)\\le R$. If the interval is empty, then $H(1-2\\varepsilon/r)<r/2$, so $H-r/2<2H\\varepsilon/r\\le2R\\varepsilon/r$; every $t\\le-r/2$ therefore satisfies $t<h(y)+2R\\varepsilon/r$. If the interval is nonempty, OUT excludes its heights, so $t\\le h(y)(1-2\\varepsilon/r)\\le h(y)+2R\\varepsilon/r$. This uses an inclusion of balls, not an incorrect identity for the erosion of a cone. [F1, step 1.1, algebra]",
+      "58": "",
+      "59": "3.1 For completeness, subgradients here need no arbitrary selection. The truncated epigraph $E=\\{(y,t):y\\in C,\\ h(y)\\le t\\le R+1\\}$ is compact and convex: it is the image of the compact set of pairs consisting of a point of $K$ and a permitted upward vertical displacement. Fix interior $y$ and $p=(y,h(y))$. Let $p_j=p-e_n/j$, and let $q_j$ be its unique nearest point in $E$ by [F2]. Minimality along a segment gives $\\langle q_j-p_j,w-q_j\\rangle\\ge0$ for all $w\\in E$, by expanding squared distance and taking the right derivative at zero. Moreover $\\|q_j-p\\|\\le2/j$. A subsequence of the unit normals $(q_j-p_j)/\\|q_j-p_j\\|$ converges by [F3] to a unit normal $(u,t)$ with $\\langle(u,t),w-p\\rangle\\ge0$ on $E$. Upward vertical segments imply $t\\ge0$; if $t=0$, interior displacements of $y$ in both horizontal directions force $u=0$, a contradiction. Thus $t>0$ and $-u/t$ is a subgradient of $h$ on $C$. At a point where the Lipschitz bound holds on a neighborhood, applying the subgradient inequality in the directions $\\pm p/\\|p\\|$ gives $\\|p\\|\\le L$. [F2, F3, F4, step 1.1, step 2.1, construct, algebra]",
+      "60": "",
+      "61": "4.1 Fix $\\|y\\|\\le r/2$. A subgradient $p$ of norm at most $2R/r$ gives the supporting inequality $\\langle(-p,1),(z,t')-(y,h(y))\\rangle\\ge0$ on $K$. If $(y,t)$ is within $\\varepsilon$ of $K$, Cauchy–Schwarz gives $t\\ge h(y)-\\varepsilon\\|(-p,1)\\|\\ge h(y)-3R\\varepsilon/r$. This proves the IN implication, also at the transverse-ball boundary by the bound from step 2.1 on slightly larger balls and passage to its limit. [F1, F5, step 2.1, step 3.1, algebra]",
+      "62": "",
+      "63": "5.1 Maintain endpoints $\\ell,u$. Initially $\\ell=-R\\le h(y)+2\\delta/3$ and $u=-r/2\\ge h(y)-\\delta$. An IN answer replaces $u$ by the midpoint and preserves its lower bound by step 4.1; OUT replaces $\\ell$ and preserves its upper bound by step 2.2. When $u-\\ell\\le\\delta/3$, these invariants give $h(y)-\\delta\\le u\\le h(y)+\\delta$. Each iteration halves the bracket, proving the logarithmic query count. Fixed finite arithmetic and the deterministic oracle completion make the whole binary-search transcript a function of the input label. Store its transcript, copy its output, and reverse its computation and oracle calls; this implements that value oracle with clean work and only a constant factor more queries. [F1, step 4.1, step 2.2, construct, algebra]"
+    },
+    "source_snapshot": "snapshots/lem-qa-30-membership-height-geometry.md",
+    "source_sha256": "5d3fc2a4248d2dcba6e3df9d63b2be71932f30e40ed2461e2bc3f02e48820ac7",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "pedagogical candidate, not a defect; no current diagram to validate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-qa-exact-binary-qft-circuit-correct",
+    "section": "Item body",
+    "lines": [
+      33,
+      35,
+      37,
+      43,
+      45,
+      47
+    ],
+    "symptom": "The theorem states the positive-sign QFT basis action and explicitly relies on the output wire order and a final reversal of the factors. The linked finite circuit gives the gate order, controlled phases, and final swaps.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "quantum circuit / wire-order diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The theorem states the positive-sign QFT basis action and explicitly relies on the output wire order and a final reversal of the factors. The linked finite circuit gives the gate order, controlled phases, and final swaps.",
+    "concrete_diagram_content": "For a small n=3 instance, label input/output wires q2,q1,q0 and computational bits x2,x1,x0; show the descending target blocks with H and the controlled-phase gates CP2 and CP3 on the stated control-target pairs, then the final q0↔q2 swap. Mark the resulting positive-sign Fourier phase and the declared output ordering. Verify the wire-order convention against lines 33–35 of alg-qa-exact-binary-qft-circuit.md; do not treat the picture as a proof.",
+    "mathematical_check": "For a small n=3 instance, label input/output wires q2,q1,q0 and computational bits x2,x1,x0; show the descending target blocks with H and the controlled-phase gates CP2 and CP3 on the stated control-target pairs, then the final q0↔q2 swap. Mark the resulting positive-sign Fourier phase and the declared output ordering. Verify the wire-order convention against lines 33–35 of alg-qa-exact-binary-qft-circuit.md; do not treat the picture as a proof.",
+    "screenshots": [
+      "screenshots/thm-qa-exact-binary-qft-circuit-correct--01.png",
+      "screenshots/thm-qa-exact-binary-qft-circuit-correct--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-qa-exact-binary-qft-circuit-correct--01.png": "0694f793f77e90b2a6528de065c1de88a824bff89251d502e284f79d1396882b",
+      "screenshots/thm-qa-exact-binary-qft-circuit-correct--02.png": "db90cb282993162e205d8e5c205bfd02a08300c005bf67ca65316f09686c126e"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "quantum-fourier-transform-circuits"
+    ],
+    "source_lines": {
+      "33": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to",
+      "35": "$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$",
+      "37": "with the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+      "43": "[F1] On a basis input $x=\\sum_i x_i2^i$, the QFT output factors as $R_0\\otimes\\cdots\\otimes R_{n-1}$ in the ordered output wires; before the final reversal it is $R_{n-1}\\otimes\\cdots\\otimes R_0$ ([[lem-qa-binary-qft-product-factorization]]).",
+      "45": "[F2] $H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$ and $\\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s})$ in control-first basis order; the ideal model also counts $\\mathrm{CP}_s^\\dagger=\\operatorname{diag}(1,1,1,e^{-2\\pi i/2^s})$ as one gate ([[def-qa-qft-gate-cost-model]]).",
+      "47": "[F3] Ordered tensor factors retain the displayed wire order, and the final wire permutation reverses the corresponding product-basis factors ([[def-qc-tensor-register-and-permutation]])."
+    },
+    "source_snapshot": "snapshots/thm-qa-exact-binary-qft-circuit-correct.md",
+    "source_sha256": "11172f9e5bf4e0645cfecb471a762dd343343d4c883441fbaf7cf4b78862a93b",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  }
+]

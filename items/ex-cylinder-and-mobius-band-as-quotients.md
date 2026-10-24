@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cylinder-and-mobius-band-as-quotients.json
+  precheck: pass
 id: ex-cylinder-and-mobius-band-as-quotients
 kind: example
 title: "The cylinder and the Mobius band as quotients of the square by $(0,y) \\sim (1,y)$ and by $(0,y) \\sim (1, 1-y)$, both by a closed quotient map"
@@ -19,14 +22,6 @@ aliases: [ex-mobius-band, ex-cylinder-top]
 landmark: false
 short: "cylinder and Mobius band"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-04
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -122,3 +117,39 @@ constructions, and only the cylinder is identified with a space built earlier.
 - **Why closedness rather than openness.** Neither projection is open. Take $U := \{\, (s,t) \in S : s < 1/2 \,\}$, which is open in $S$; its saturation is $U \cup (\{1\} \times [0,1])$, and that is not open in $S$, because every neighbourhood in $S$ of the point $(1,1/2)$ contains points $(s,1/2)$ with $1/2 < s < 1$, which lie in neither piece. So $P_{\mathrm{c}}[U]$ is not open, and the same computation applies to $P_{\mathrm{m}}$; this is the failure recorded in [[fs-quotient-map-is-open]]. Closedness holds instead because the two edges are closed and the gluing map between them is a homeomorphism, which is what step 2.1 uses.
 
 - **The cylinder is a product and the Mobius band is not built as one.** Claim 2 writes $M_{\mathrm{c}}$ as $T \times [0,1]$; no analogous description is attempted for $M_{\mathrm{m}}$, and none is available at this point in the reading order.
+
+
+**Edge-pairing comparison.** In each square, the arrows on the vertical edges
+mark corresponding directions under the gluing; the horizontal edges are not
+paired. Thus the cylinder pairs $(0,y)$ with $(1,y)$, whereas the Mobius band
+pairs $(0,y)$ with $(1,1-y)$. These are gluing instructions, not an invariant
+that distinguishes the two quotient spaces.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (1.2,2.9) {Cylinder};
+\draw (0,0) rectangle (2.4,2.4);
+\draw[->,very thick] (0,0.45) -- (0,1.95);
+\draw[->,very thick] (2.4,0.45) -- (2.4,1.95);
+\node[left] at (0,1.2) {$E_0$};
+\node[right] at (2.4,1.2) {$E_1$};
+\node at (1.2,-0.45) {$(0,y)\sim_{\mathrm c}(1,y)$};
+\node at (6.3,2.9) {Mobius band};
+\draw (5.1,0) rectangle (7.5,2.4);
+\draw[->,very thick] (5.1,0.45) -- (5.1,1.95);
+\draw[->,very thick] (7.5,1.95) -- (7.5,0.45);
+\node[left] at (5.1,1.2) {$E_0$};
+\node[right] at (7.5,1.2) {$E_1$};
+\node at (6.3,-0.45) {$(0,y)\sim_{\mathrm m}(1,1-y)$};
+\node (s) at (3.75,-1.5) {$S$};
+\node (mc) at (1,-3.1) {$M_{\mathrm c}$};
+\node (prod) at (6.5,-3.1) {$T\times[0,1]$};
+\draw[->] (s) -- node[above left] {$P_{\mathrm c}$} (mc);
+\draw[->] (s) -- node[above right] {$E=Q_1|_S$} (prod);
+\draw[->] (mc) -- node[below] {$\bar E\quad\cong$} (prod);
+\end{tikzpicture}
+```
+
+Here $E(s,t)=(q(s),t)$ and $\bar E(P_{\mathrm c}(s,t))=(q(s),t)$.
+The triangle commutes by step 2.2, and $\bar E$ is the homeomorphism of step
+3.1. The verification above is independent of this illustration.

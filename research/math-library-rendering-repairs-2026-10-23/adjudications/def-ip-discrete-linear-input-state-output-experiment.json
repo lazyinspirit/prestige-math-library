@@ -1,0 +1,106 @@
+{
+  "id": "def-ip-discrete-linear-input-state-output-experiment",
+  "agent": "/root/rendering_repair_coordinator/dinv_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original screenshot is readable, but the definition has two branches from the current state and a separate additive error operation. A concrete state-space schematic materially clarifies that x_k produces y_k at kh while the input u_k contributes to x_{k+1}; it also locates the observation error after the exact forward map. This is a warranted explanatory-diagram addition under the expanded scope, not a claim that the original prose failed to render.",
+      "action": "Added a final Remarks section with a TikZ state-update/observation schematic and explicit time-index and horizon qualifications.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only explanatory Remarks: upper state update receives x_k and u_k and produces x_{k+1}; lower branch applies C to x_k, then adds eta_k to produce observed y-tilde_k. Original title, Definition, reference section and all frontmatter remain byte-identical.",
+  "source_lines_after": [
+    {
+      "start": 78,
+      "end": 110,
+      "description": "New Remarks, diagram and index/dimension qualifications"
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "State-update dimensions and equality",
+      "evidence": "Definition lines 42–46 give A:d×d, B:d×m, x_k in R^d, u_k in R^m and x_{k+1}=Ax_k+Bu_k. Thus both terms lie in R^d. The two incoming arrows feed the expression box and the outgoing arrow yields x_{k+1}; no direct u_k-to-y_k feedthrough is asserted."
+    },
+    {
+      "check": "Output dimensions and current-time index",
+      "evidence": "Definition lines 43,47–48 give C:p×d and y_k=Cx_k at time kh, for 0≤k<q. The lower arrow starts at x_k rather than x_{k+1}, and its C label targets y_k=Cx_k in R^p."
+    },
+    {
+      "check": "Observation addition and separation from forward map",
+      "evidence": "Definition lines 49–53 state observed y-tilde_k=y_k+eta_k with eta_k in R^p and no probability law. The sum receives y_k and eta_k only; its output is y-tilde_k. No error arrow enters A/B/C or the state-update box."
+    },
+    {
+      "check": "Horizon and degenerate cases",
+      "evidence": "The diagram caption restricts the joint schematic to 0≤k<q−1, exactly the input/update range in lines 45–46. The final observation k=q−1 is explicitly retained without an update; q=1 has no input samples or update. For d=0 the maps have empty state shapes as in lines 63–64, the update is the unique zero state, and output/noise operations remain dimensionally valid. The figure does not alter the separate infinite-horizon Markov-parameter convention."
+    },
+    {
+      "check": "Arrow relation and proof independence",
+      "evidence": "This is a directed computational schematic with eight nodes and seven arrows, not a commutative-square assertion. Every asserted operation is one of the defining equations at lines 46–50. The Definition remains complete and unchanged; no argument depends on the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-ip-discrete-linear-input-state-output-experiment.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ip-discrete-linear-input-state-output-experiment.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-ip-discrete-linear-input-state-output-experiment.md",
+            "item_id": "def-ip-discrete-linear-input-state-output-experiment",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-ip-discrete-linear-input-state-output-experiment.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "before_raw_sha256": "9aa19347f95751392443eeb49315a3be6dfb400cf9c3897d1be4a522abf78f66",
+  "after_raw_sha256": "c97b3b1a5089559d8027a17f2d058cbfe5786a7d908b7e5454c887cff644a916",
+  "original_evidence": {
+    "declared_path_missing": true,
+    "declared_path": "research/math-library-rendering-audit-2026-10-23/inverse-problems/diagram-supplement/screenshots/def-ip-discrete-linear-input-state-output-experiment--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/inverse-problems/screenshots/def-ip-discrete-linear-input-state-output-experiment--01.png",
+    "sha256": "d5b993b8cd080e9d9c4261ed5eb13ea84144ba0730b5c1d31e4e8a92ae988ab9",
+    "inspection": "Viewed standalone at original resolution; exact recorded screenshot hash matches."
+  },
+  "visual_check": {
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinv-005-native-final/manifest.json",
+    "manifest_sha256": "4c531c71f406b5754acc9d47441120cd1e9dd0d185a3a572fd82ca0c1e8d8ce1",
+    "source_sha256": "c97b3b1a5089559d8027a17f2d058cbfe5786a7d908b7e5454c887cff644a916",
+    "html_sha256": "0ca0fc776193968e5f72c1a8e7c0969cbc5da7f380d1f8ec50db5dd0ca011479",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dinv-005-native-final/screenshots/def-ip-discrete-linear-input-state-output-experiment--01.png",
+    "screenshot_sha256": "34af7311b8caa5c60f226ca8d2d988f7f0f579687ff417ea7e8668190454686a",
+    "native_svg_sha256": "62f2a921bb505eaa0b1d11e8f1c943185f0fe78be126900d6999ff3e4fedb03b",
+    "result": "Actual native SSR TikZ SVG compiled at 444.993×312.367; final standalone original-resolution browser screenshot shows all eight nodes, seven arrowheads, C label, additive error branch and unobstructed labels with no clipping or overlap.",
+    "limitations": "Fresh full-page capture left earlier content blank while retaining its layout space; unchanged original content was inspected in the authentic historical screenshot and compared byte-for-byte. The new diagram and concluding caption are visible in the native final capture. Local ItemBody preview is not a production-route check; 16 unrelated reference-map diagnostics were reported."
+  },
+  "remaining_issues": []
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-categorical-sl-two-commutator-in-a-small-weight.json
+  precheck: pass
 id: ex-the-categorical-sl-two-commutator-in-a-small-weight
 kind: example
 title: "The categorical $\\mathfrak{sl}_2$ commutator in a small cyclotomic weight"
@@ -19,8 +22,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Seok-Jin Kang and Masaki Kashiwara, Categorification of Highest Weight Modules via Khovanov-Lauda-Rouquier Algebras, arXiv:1102.4677v4"
@@ -79,3 +80,29 @@ verified at the first nontrivial weight.
 2.1 The commutator. The relation of [F2] evaluated on the vacuum gives $E^\Lambda_iF^\Lambda_ik\cong k\oplus k\{2\}$, which is $R^\Lambda(\alpha_i)$ by [F1], so $q^{-2}F^\Lambda_iE^\Lambda_i\oplus\mathrm{Id}\oplus q^2\mathrm{Id}\cong E^\Lambda_iF^\Lambda_i$ holds at the first nontrivial weight. [step 1.1, F2]
 
 3.1 The Grothendieck commutator. With the normalizations of [F3]: projective $E_iF_i[1_\Lambda]=q^{-1}(1+q^2)[1_\Lambda]=(q+q^{-1})[1_\Lambda]$ and $F_iE_i[1_\Lambda]=0$; KK module $F$ from the vacuum also carries $q^{-1}$ while KK $E$ is raw, and the canonical module action shifts $E$ and leaves $F$ raw, giving the same result in both module conventions. All agree with $(q^2-q^{-2})/(q-q^{-1})$, the mixed relation evaluated at $K_i=q^2$. This verifies the commutator identity at the first nontrivial weight and is a finite rank-one computation using no choice. [step 2.1, F3] ∎
+
+
+## Remarks
+
+The following is a string of graded module categories, not a commutative
+square. Put $\mathcal C_n=\mathrm{Mod}(R^\Lambda(n\alpha_i))$ for $n\ge0$.
+The nonzero blocks occur at $n=0,1,2$, with weights $\Lambda-n\alpha_i$
+and $h_i$-values $2,0,-2$, respectively; $\mathcal C_n=0$ for $n\ge3$.
+The arrows are the raw functors $F_i^\Lambda,E_i^\Lambda$ used in (a)–(b),
+before the normalizations in (c).
+
+```tikzcd
+\mathcal C_0 \arrow[r, bend left=22, "F_i^\Lambda"] &
+\mathcal C_1 \arrow[l, bend left=22, "E_i^\Lambda"] \arrow[r, bend left=22, "F_i^\Lambda"] &
+\mathcal C_2 \arrow[l, bend left=22, "E_i^\Lambda"] \arrow[r, bend left=22, "F_i^\Lambda"] &
+0=\mathcal C_3 \arrow[l, bend left=22, "E_i^\Lambda"]
+```
+
+Thus the rightward arrows increase root degree and lower weight. The arrows
+incident to $\mathcal C_3$ are zero functors. Restriction from the vacuum is
+also zero: it would have root degree $-\alpha_i$, outside $Q_+$. The path
+from $\mathcal C_0$ to $\mathcal C_1$ and back is $E_i^\Lambda F_i^\Lambda$,
+with vacuum value $k\oplus k\{2\}$, whereas $F_i^\Lambda E_i^\Lambda k=0$.
+After normalization, the difference is $(q+q^{-1})[k]$ as in (c).
+The illustration records the functor directions and the vacuum computation;
+the verification above is independent of it.

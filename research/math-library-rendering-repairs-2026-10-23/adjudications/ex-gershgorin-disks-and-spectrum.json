@@ -1,0 +1,99 @@
+{
+  "id": "ex-gershgorin-disks-and-spectrum",
+  "agent": "/root/rendering_repair_coordinator/dla_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot contains no diagram. A concrete complex-plane picture materially clarifies overlapping closed disks, their actual spectral points, and especially the radius-zero third disk. This is a warranted explanatory addition under the expanded diagram scope, rather than a defect in the correct existing formulas.",
+      "action": "Added a fenced TikZ illustration and caption in a final Remarks section, showing the two radius-one disks, three spectral points, and a leader identifying the singleton D3.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Append an independently checked complex-plane Gershgorin illustration; existing example, facts, verification and complete frontmatter are byte-identical.",
+  "source_lines_after": {
+    "remarks": 54,
+    "caption": 56,
+    "tikz": [
+      58,
+      74
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Complex plane with origin (0,0), real axis rightward and imaginary axis upward; closed disks D1 centered at (2,0), D2 at (3,0), each radius 1; D3={(4,0)}.",
+      "justification": "Local def-gershgorin-disks uses row-diagonal centers and off-diagonal absolute row sums. Direct calculation from the exact displayed matrix gives centers (2,3,4) and radii (1,1,0), agreeing with Example and Verification 1.1."
+    },
+    {
+      "objects": "Eigenvalue points at (2,0),(3,0),(4,0).",
+      "justification": "The exact matrix is upper triangular; det(tI-A)=(t-2)(t-3)(t-4), as used in Verification 2.1. All three points are real and appear on the real axis. The diagram does not depict extra eigenvalues."
+    },
+    {
+      "relation": "2 lies in D1 and on the boundary of D2; 3 lies in D2 and on the boundary of D1; 4 lies on the boundary of D2 and is exactly D3.",
+      "justification": "Distances to centers (2,3,4) are respectively (0,1,2),(1,0,1),(2,1,0); compare with radii (1,1,0). The singleton is drawn as one point with a leader, never as a positive-radius disk."
+    },
+    {
+      "relation": "Equal-radius disks overlap and have horizontal extents [1,3] and [2,4].",
+      "justification": "Native TikZ uses a single common scale and circle radius 1 for both disks. Their center separation is 1, and both filled interiors and boundary circles are drawn. No disjointness or unique disk membership is asserted."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-gershgorin-disks-and-spectrum.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects",
+      "preexisting_formatting_failures": []
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-gershgorin-disks-and-spectrum.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-gershgorin-disks-and-spectrum.md",
+            "item_id": "ex-gershgorin-disks-and-spectrum",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-gershgorin-disks-and-spectrum.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "metadata": "Compared exact complete frontmatter against archived before; unchanged, including status: published."
+  },
+  "evidence": {
+    "original_declared_path_discrepancy": "The declared diagram-supplement/screenshots path does not exist. Located the authentic PNG in the same linear-algebra category screenshots directory and verified its recorded SHA256.",
+    "original_standalone_image": "research/math-library-rendering-audit-2026-10-23/linear-algebra/screenshots/ex-gershgorin-disks-and-spectrum--01.png",
+    "original_sha256": "23bd3771fe7f2f59a5b8e6219d911d5f460581cf027fe35144726e5301c91324",
+    "before_raw_sha256": "e88c8d94a30432eb9fa8327b24ea431d55907fb73e35025c381a50a5e265b45e",
+    "guard": "Current raw SHA256 matched before_raw_sha256 immediately before initial edit.",
+    "current_raw_sha256": "df1138dc04aa61d929bfaf0cdf4e133951794068f4078b9b482998cf053a0902",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dla005-bound/manifest.json",
+    "preview_manifest_sha256": "83a1be9daeac19364375de1441d12e06feb7c1cca641848f81ed4bab2085e6ef",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dla005-bound/screenshots/ex-gershgorin-disks-and-spectrum--01.png",
+    "preview_screenshot_sha256": "80ba628740c840b5fec2bd6aabc82a0f4bc03fc329c239a1986ff6977bbed5db",
+    "visual_check": "Native preview completed with one item/one tile. Inspected resulting standalone PNG at original resolution: both circles compile, labels and axes are visible, all three marked points and singleton leader render, and there is no clipping or overlap obscuring labels. Initial pale fills were changed to dark fills after an actual native preview showed poor point-label contrast.",
+    "limitations": "Local ItemBody native rendering only; no HTTP or production route checks. Preview manifest reports 16 unrelated reference-map parse diagnostics. Native dark-theme rendering recolors the default point glyphs light; caption therefore describes dots without fixing their color."
+  },
+  "remaining_issues": []
+}

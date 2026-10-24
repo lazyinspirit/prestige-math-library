@@ -1,16 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-integration-against-a-signed-or-complex-measure.json
+  precheck: n/a
 id: def-integration-against-a-signed-or-complex-measure
 kind: definition
-title: "Integration against a signed or complex measure, and the class L^1(nu) = L^1(|nu|)"
+title: 'Integration against a signed or complex measure, and the class $L^1(\nu) = L^1(|\nu|)$'
 status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-l-one-of-a-measure, def-simple-integral-against-a-signed-or-complex-measure, prop-simple-integrals-are-bounded-by-total-variation, thm-total-variation-is-a-measure, thm-l-one-functions-admit-dominated-complex-simple-approximations]
-verification:
-  audited: 2026-08-30
-  precheck: n/a
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Chapter 12"

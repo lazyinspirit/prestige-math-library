@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-diagram-tower-conditional-expectation-identities.json
+  precheck: pass
 id: lem-temperley-lieb-diagram-tower-conditional-expectation-identities
 kind: lemma
 title: "Right closure is a trace-preserving diagram-tower expectation"
@@ -14,12 +17,6 @@ deps:
   - lem-temperley-lieb-closure-trace-is-cyclic-and-markov
 justified_by: []
 aliases: []
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -73,3 +70,50 @@ When $\delta\in\mathbb R$, $\iota_n$ also preserves the reflection involution. M
 4.1 Right-closing $\iota_n(x)d_n$ connects the last cap and cup to the exterior closure arc; the result is the diagram $x$ on the first $n$ strands, with no new circle. Thus $c_n(\iota_n(x)d_n)=x$, so $E_n(\iota_n(x)d_n)=\delta^{-1}x$. Trace preservation and [F4] give $\tau_{n+1}(\iota_n(x)d_n)=\tau_n(E_n(\iota_n(x)d_n))=\delta^{-1}\tau_n(x)$. [F1, F4, F5, step 3.1, algebra]
 
 5.1 Suppose $x\ge0$ in the finite-dimensional $C^*$-algebra $\mathrm{TL}_{n+1}$ and the traces are faithful and positive. On each basis matching, reflecting before closing produces the same retained $(n,n)$ matching and the same closed components as closing before reflecting; the scalar $\delta^{-1}$ is real. Hence $E_n(x^*)=E_n(x)^*$, so $E_n(x)$ is self-adjoint. For every $b\in\mathrm{TL}_n$, trace preservation and bimodularity give $\tau_n(b^*E_n(x)b)=\tau_{n+1}(\iota_n(b)^*x\iota_n(b))\ge0$. If $E_n(x)$ had a negative spectral subspace, its nonzero spectral projection $p$ would satisfy $\tau_n(pE_n(x)p)<0$, since $pE_n(x)p$ is strictly negative on that subspace and $\tau_n$ is faithful; this contradicts the same inequality with $b=p$. Thus $E_n(x)\ge0$. It is unital, idempotent, bimodular and trace-preserving by the preceding steps, so it is a positive conditional expectation in the stated $C^*$-positive regime. [F1, F5, step 1.1, step 2.1, step 3.1, algebra] ∎
+
+## Remarks
+
+For a basis diagram $D\in\mathrm{TL}_2$, the two panels show the right closure before removing closed components. A box denotes $D$ on its two strands; the extra strand is on the right, and dashed arcs are the exterior closure arcs. In the second panel, $D\otimes1$ is above $d_2$, as required by the stacking convention. The same local connection occurs on the last two strands for general $n$.
+
+```tikz
+\begin{tikzpicture}[scale=0.9,thick]
+  \node at (0.9,3.55) {$\iota_2(D)$};
+  \draw (-0.3,1) rectangle (1.1,2);
+  \node at (0.4,1.5) {$D$};
+  \draw (0,2) -- (0,3);
+  \draw (0.8,2) -- (0.8,3);
+  \draw (0,0) -- (0,1);
+  \draw (0.8,0) -- (0.8,1);
+  \draw (1.8,0) -- (1.8,3);
+  \draw[dashed] (1.8,3) .. controls (3.1,3) and (3.1,0) .. (1.8,0);
+  \foreach \x in {0,0.8,1.8} {
+    \fill (\x,0) circle (1.5pt);
+    \fill (\x,3) circle (1.5pt);
+  }
+  \node at (0.4,-0.4) {$1\qquad2$};
+  \node at (1.8,-0.4) {$3$};
+  \node at (1.1,-1) {$c_2(\iota_2(D))=\delta D$};
+  \begin{scope}[xshift=5.1cm]
+    \node at (0.9,3.55) {$\iota_2(D)d_2$};
+    \draw (-0.3,1.6) rectangle (1.1,2.5);
+    \node at (0.4,2.05) {$D$};
+    \draw (0,2.5) -- (0,3);
+    \draw (0.8,2.5) -- (0.8,3);
+    \draw (0,0) -- (0,1.6);
+    \draw (0.8,1.6) -- (0.8,1.2);
+    \draw (1.8,1.2) -- (1.8,3);
+    \draw (0.8,1.2) .. controls (0.8,0.7) and (1.8,0.7) .. (1.8,1.2);
+    \draw (0.8,0) .. controls (0.8,0.5) and (1.8,0.5) .. (1.8,0);
+    \draw[dashed] (1.8,3) .. controls (3.1,3) and (3.1,0) .. (1.8,0);
+    \foreach \x in {0,0.8,1.8} {
+      \fill (\x,0) circle (1.5pt);
+      \fill (\x,3) circle (1.5pt);
+    }
+    \node at (0.4,-0.4) {$1\qquad2$};
+    \node at (1.8,-0.4) {$3$};
+    \node at (1.1,-1) {$c_2(\iota_2(D)d_2)=D$};
+  \end{scope}
+\end{tikzpicture}
+```
+
+The appended strand and its dashed closure form one circle in the left panel. In the right panel, the cap, appended strand, closure arc and cup form one path from the second bottom endpoint of $D$ to the second exterior bottom endpoint, with no extra circle. Thus multiplying the displayed right-closure identities by $\delta^{-1}$ gives the normalization in steps 1.1 and 4.1. The rigorous proof above is independent of this illustration.

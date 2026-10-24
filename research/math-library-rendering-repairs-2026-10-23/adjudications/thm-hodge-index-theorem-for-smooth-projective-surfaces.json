@@ -1,0 +1,38 @@
+{
+  "id": "thm-hodge-index-theorem-for-smooth-projective-surfaces",
+  "agent": "/root/rendering_repair_coordinator/ag_067",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed both original-resolution screenshot tiles. Tile 02 visibly displays literal $M$, $H$, and $L$ in the uppercase proof-technique banner while proof-body formulas render normally. The source places these inline-math delimiters in a banner rendered as plain text.",
+      "action": "Replaced $M$, $H$, and $L$ with the equivalent plain variable names M, H, and L only in the proof-technique paragraph.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Removed inline-math dollar delimiters from the plain-text proof-technique banner; all variable names and wording are preserved.",
+  "source_lines_after": [
+    {
+      "line": 67,
+      "text": "**Proof technique:** direct: fix an ample reference class and reduce to the ample case, once directly and once through a perturbation M depending on H and L."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer still treats proof-technique banners as plain text; this item uses a local plain-notation workaround. No fresh browser render was performed."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-hodge-index-theorem-for-smooth-projective-surfaces.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "check": "Exact before/after comparison",
+      "result": "Only the three pairs of dollar delimiters on source line 67 changed; frontmatter including status: published is byte-identical."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+---
+id: lem-parametrized-pl-balls-absorb-standard-boundary-windows
+kind: lemma
+title: "Parametrized piecewise linear balls absorb standard boundary windows"
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [ lem-finite-polygonal-disk-and-collar-surgery, lem-finite-convex-cell-complexes-admit-compatible-triangulations, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation, lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar ]
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: "J. W. Alexander, On the subdivision of 3-space by a polyhedron"
+      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/"
+      locator: "PNAS 10 (1924), pp.6–8; fundamental lemma on p.6. The finite PL parameter constructions below supply the needed restricted ball-window lemma directly."
+    - title: "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology"
+      url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf"
+      locator: "Theorem 2.25 and Corollary 2.26, pp.24–26, for the locally collared to collared construction proved by the listed supplier."
+dependency_level: 3
+---
+
+## Statement
+
+Here a parametrized PL ball means a finite polyhedron supplied with a piecewise linear homeomorphism, with piecewise linear inverse, to a convex polyhedral ball of the stated dimension. All subpolyhedra and maps in the following assertions are finite.
+
+(a) Let $B_1,B_2$ be parametrized PL three-balls and $D_i\subset\partial B_i$ parametrized PL two-disks. Every PL homeomorphism $f:D_1\to D_2$ extends to a PL homeomorphism $B_1\to B_2$.
+
+(b) The space obtained by gluing two parametrized PL three-balls along parametrized PL two-disks in their boundaries, by a specified PL homeomorphism, is a parametrized PL three-ball.
+
+(c) Let $B$ and $A\subset B$ be parametrized PL three-balls, with $A\ne B$. Suppose $A\cap\partial B=\partial A\cap\partial B=D$ is a parametrized PL two-disk and $A\setminus D\subset\operatorname{Int}B$. Impose the following standard boundary-window condition at $C=\partial D$: every point of $C$ has a PL coordinate neighborhood in which
+$$B=\{(u,v,w):w\ge0\},\qquad A=\{(u,v,w):w\ge0,\ v\le0\},\qquad D=\{w=0,\ v\le0\}.$$
+The equalities are understood after intersection with the coordinate neighborhood, and $C$ corresponds to $v=w=0$. Then $Q=\overline{B\setminus A}$, with closure in $B$, is a parametrized PL three-ball.
+
+No assertion about a sphere in an arbitrary PL three-manifold is assumed. In (c) the closure of the set difference is essential: $B\setminus\operatorname{Int}_{\mathbb R^3}A$ would retain the interior of the contact disk as an extra sheet. These statements introduce no choice hypothesis.
+
+## Statement references
+
+[[lem-finite-polygonal-disk-and-collar-surgery]]
+
+[[lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar]]
+
+## Facts & Assumptions
+
+**Given:** The finite parametrized balls, marked disks, maps and, for (c), the displayed boundary-window charts.
+
+[F1] A simple polygon has a polygonal disk on its bounded side; prescribed PL boundary maps extend over polygonal disks ([[lem-finite-polygonal-disk-and-collar-surgery]]).
+
+[F2] Finite convex cell decompositions and finite PL embedded polyhedra admit compatible triangulations and subdivisions ([[lem-finite-convex-cell-complexes-admit-compatible-triangulations]], [[lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation]]).
+
+[F3] A compact locally PL collared subpolyhedron has a PL collar, including at boundary vertices of the subpolyhedron ([[lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar]]).
+
+## Proof
+
+**Given:** The data in the statement. A PL disk or ball below is always accompanied by the finite PL parameter construction being used.
+
+1.1 We first establish the boundary-disk fact needed for (a): the closure of the complement of a parametrized PL disk $D$ in the boundary $S$ of a parametrized three-ball is another parametrized PL disk. Use the supplied ball parameter to replace $S$ by the boundary of a tetrahedron. This replacement is legitimate for any convex polyhedral ball model: triangulate its boundary and the tetrahedral boundary, choose an interior point in each, and cone a boundary parameter when available; alternatively a direct radial face subdivision identifies the two convex boundaries, since each ray from an interior point has one endpoint on each boundary. To verify that last identification is PL, subdivide both radial face decompositions into their common polyhedral cones, take their sections, and map corresponding sections by face-compatible coning; no assertion that the radial formula itself is affine is needed. Pick a point off $D$. A finite succession of small PL disk-chart point pushes on $S$ sends it to a tetrahedral vertex $q$: choose a polygonal path to $q$, cover it by finitely many small polygonal charts, and in each chart triangulate a convex polygon as a fan from the current point and move the fan center to the next nearby point, fixing the polygon boundary. These affine triangle maps give the required point push and inverse. After this boundary homeomorphism, $q\notin D$. Choose a small triangular section $\Gamma$ of the cone at $q$ whose closed cone misses $D$. The closure $K$ of the rest of the tetrahedral boundary consists of the opposite face $T$ and the three quadrilateral strips between $\partial T$ and $\Gamma$. It has an explicit PL parameter as a larger planar triangle: send $T$ to a smaller concentric triangle and the three strips to the corresponding trapezoids of the surrounding planar triangular annulus. On every strip prescribe its four boundary sides linearly after subdivision and extend by [F1]. The maps agree on shared sides. Thus $K$ is a planar polygonal disk containing $D$ away from its boundary. [given, F1, F2, construct]
+
+2.1 In this planar parameter, $\partial D$ is a simple polygon. Its bounded side is precisely $D$. Indeed the interior of the embedded disk is open on the local interior side of its polygonal boundary: at an interior simplex this follows from its planar triangle star, and at boundary simplices from the half-disk fan. It is also closed relative to the polygon complement, since $D$ is compact. Its connected interior therefore fills one component of that complement; it is bounded and hence fills the bounded component by [F1]. The region between $D$ and the outer triangle is a parametrized PL annulus. Here is an explicit disk reduction: choose an embedded polygonal arc joining the two boundaries, with interior disjoint from both, by a finite chain of triangles of a compatible triangulation; delete loops from the finite edge path and perturb it off boundary edges. A narrow polygonal strip along this arc joins the two boundaries. The closure of the remaining region is a polygonal disk: its boundary traces the outer boundary, one strip shore, the inner boundary in reverse, and the other shore, with no repeated vertices except its closing endpoint. [F1] parametrizes that disk and extends any prescribed boundary map respecting this cyclic order. Match it to a rectangle cut open along one spanning strip in a standard polygonal annulus, then restore the strip by its disk boundary-extension map. Thus the annulus has a PL parameter with its two boundary circles prescribed. Glue its inner boundary to the disk $q*\Gamma$. A polygonal annulus glued to a polygonal disk along its inner boundary is a polygonal disk: in the standard annulus parameter fill its inner polygon using [F1]. This gives a finite PL parameter of $\overline{S\setminus D}$. This argument also proves extension of any prescribed boundary map between the complementary disks, by applying [F1] in their disk parameters. [F1, F2, step 1.1, construct]
+
+3.1 For (a), extend $f|_{\partial D_1}$ over the complementary disks furnished by step 2.1. Paste this extension with $f$ to obtain a PL homeomorphism $\partial B_1\to\partial B_2$. Transfer it by the supplied ball parameters to the boundaries of convex polyhedral balls. Subdivide until that boundary map is affine on every boundary triangle and cone these triangles from an interior point in each ball. The affine maps of corresponding tetrahedra match on faces and are bijective, since the cones cover each ball with disjoint interiors. They give the extension and a PL inverse. This proves (a). For (b), apply (a) to send the two marked balls to $[-1,0]\times[-1,1]^2$ and $[0,1]\times[-1,1]^2$, taking their attaching disks to the common square and their specified attaching map to its identity. The resulting quotient is the rectangular box $[-1,1]\times[-1,1]^2$, with the finite compatible PL parameter obtained by gluing these maps. [F1, F2, step 2.1, construct]
+
+3.2 Now assume (c), and put $F=\overline{\partial A\setminus D}$. It is a parametrized disk by step 2.1. The space $Q=\overline{B\setminus A}$ is locally a PL three-manifold with boundary. At a point of $F\setminus C$, take a compatible finite triangulation for the ambient ball chart and the supplied parameter of $A$. Its ambient link is a standard PL two-sphere and its link on the $A$ side is a parametrized disk: this follows by subdividing the local PL ball parameter until it is linear on the incident simplices. The complementary link disk is supplied by steps 1.1–2.1. Parametrize those two disks compatibly on their common circle, using [F1], to identify the link pair with two standard hemispherical disks. Coning this link identification gives the local half-ball chart on the $Q$ side and a product collar of $F$. Elsewhere away from $C$ the ordinary interior charts of $B\setminus A$ or boundary charts of $B$ apply. Along $C$ the given window chart identifies $Q$ with the quadrant $v\ge0,w\ge0$; subdivision into finitely many angular sectors flattens that quadrant to a half-space. In these same charts $F$ is the face $v=0,w\ge0$. It is locally PL collared in $Q$, including along $\partial F=C$, where its local collar is the quadrant product. Consequently [F3] gives $c:F\times[0,1]\to Q$ with bottom $F$ and half-open image a neighborhood of $F$. Its side $c(C\times[0,1])$ lies in $\partial B$. To check this last assertion, the local product has boundary $C\times[0,1)$ away from the bottom, while the boundary of $Q$ off $F$ is $\partial B\setminus D$; PL local charts distinguish boundary points by their ball or half-ball links. The top side follows by continuity. Thus $N=A\cup c(F\times[0,1])$ is a neighborhood of $A$ in $B$ whose relative frontier is the outer disk $c(F\times\{1\})$. [given, F2, F3, step 2.1, construct]
+
+4.1 Give $A$ a PL parameter as a convex pyramid $P$ with flat base $D_0$, carrying $D$ to that base, by (a). Choose a point $p$ in the relative interior of $D_0$ as follows. The composite of this parameter's inverse with the supplied parameter of $B$ is PL; after a finite common subdivision its restriction near the relative interior of some base triangle lies in a single incident three-simplex and is affine there. Its image base triangle can also be taken inside one flat boundary face of the convex model of $B$. Choose $p$ inside that base triangle, avoiding its edges. For sufficiently small $\epsilon>0$, the homothetic pyramid $\epsilon P=p+\epsilon(P-p)$ therefore maps affinely into that one boundary three-simplex of $B$. The radial shells between $P$ and $2P=p+2(P-p)$ are finite convex prisms over the free boundary faces of $P$, including their boundary faces on the base. There is a PL homeomorphism $N\to2P$ agreeing with the chosen parameter on $A=P$: on $F\times[0,1]$ map the bottom to the free face of $P$ and the top to its doubled face, and fill the corresponding face prisms compatibly. More explicitly, first prescribe all vertex and boundary face maps, then extend over each convex cell by coning its already parametrized boundary to an interior point. Both sides are convex cells with corresponding faces, so the resulting map is bijective with PL inverse. This is a finite prism construction using [F2], not the generally non-PL radial interpolation formula. [F2, step 3.1, step 3.2, construct]
+
+5.1 Construct a PL self-homeomorphism of $2P$ taking $P$ to $\epsilon P$ and fixing its outer free boundary. On $P$ use the affine homothety of ratio $\epsilon$ about $p$. On each shell prism between a free face of $P$ and its doubled face use the corresponding prism between the $\epsilon$-scaled face and the doubled face. Their face structures agree; the finite face-coning construction of step 4.1 extends the prescribed bottom and fixed top maps compatibly. On the base this map carries the base annulus to the corresponding base annulus, and is allowed to move base points. It fixes the relative frontier of $N$ in $B$, so transfer it to $N$ and extend by the identity on $B\setminus\operatorname{Int}_B N$. We obtain a PL homeomorphism $h:B\to B$ taking $A$ to a ball $A_\epsilon$ which, in the supplied convex parameter of $B$, is an affine pyramid with its base in the interior of a flat boundary face and its remaining points inside $B$. In particular $h(Q)=\overline{B\setminus A_\epsilon}$. [F2, step 4.1, construct]
+
+6.1 The complement of this small affine pyramid has a direct PL parameter as $B$. In its flat boundary chart choose an inward transverse direction along the segment from an interior base point to the pyramid apex. In the resulting oblique coordinates the pyramid is $\{(x,z):x\in D_\epsilon,\ 0\le z\le\phi(x)\}$, where $\phi$ is the nonnegative piecewise affine pyramid roof, zero on $\partial D_\epsilon$. Choose a larger convex polygon $R$ in that flat boundary face, extend $\phi$ by zero on $R\setminus D_\epsilon$, and choose $H>\max\phi$ such that $R\times[0,H]$ lies in the boundary chart in $B$. These choices can be made by first taking $\epsilon$ sufficiently small: the affine pyramid shrinks to the interior point of a boundary face, where $B$ contains a fixed oblique half-prism. Subdivide $R$ until $\phi$ is affine on each cell. The cells $\{(x,z):x\in\sigma,\ \phi(x)\le z\le H\}$ are convex prisms with the same face incidences as $\sigma\times[0,H]$. Map their graph bottoms to $z=0$ by the identity in $x$, their tops identically, and their side faces compatibly by the finite face-coning construction. Where $\phi=0$ choose the identity throughout. The resulting PL homeomorphism straightens the graph prism onto $R\times[0,H]$, fixes its top and outer sides, and extends by the identity outside that prism. Its domain is exactly $\overline{B\setminus A_\epsilon}$: above an interior base point only the roof and points above it survive the closure, while at the edge of the base $\phi=0$. It therefore gives a finite PL homeomorphism $\overline{B\setminus A_\epsilon}\to B$. Composing with $h|_Q$ proves (c). Only finitely many subdivisions, disk cuts, chart points and convex cell extensions were used, so none of (a)–(c) requires countable or arbitrary-index choice. [given, F2, step 5.1, construct] ∎

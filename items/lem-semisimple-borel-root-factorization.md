@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-semisimple-borel-root-factorization.json
+  precheck: pass
 id: lem-semisimple-borel-root-factorization
 kind: lemma
 title: Borel, opposite unipotent groups and root coordinates
@@ -19,13 +22,6 @@ proof_strategy: constructive
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups (2022)"
@@ -87,7 +83,7 @@ $t\,u_\alpha(z)\,t^{-1}=u_\alpha(\alpha(t)z)$ for all $t\in T$.
 
 [F2] For every root $\alpha$ there are $e_\alpha\in\mathfrak g_\alpha$ and
 $f_\alpha\in\mathfrak g_{-\alpha}$ with $[e_\alpha,f_\alpha]=h_\alpha\ne0$ and
-$[h_\alpha,e_\alpha]=2e_\alpha$. ([[thm-root-sl-two-triple]])
+$[h_\alpha,e_\alpha]=2e_\alpha$. ([[thm-root-sl-two-triple|The root $\mathfrak{sl}_2$ triple]])
 
 [F3] $\mathfrak n^\pm$ are nilpotent Lie subalgebras, $\mathfrak b$ is a Lie
 subalgebra, for roots $\alpha,\gamma$ with $\alpha+\gamma$ a root one has

@@ -1,0 +1,70 @@
+{
+  "id": "def-pe05-hydrostatic-hll-scheme",
+  "agent": "/root/rendering_repair_coordinator/npde_010",
+  "model": "gpt-6.1-sol (medium; launcher configured)",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Independently inspected the sole original tile standalone at original resolution: red diagram-failure block replaces the entire figure. Direct native node-tikzjax reproduction with the actual amsfonts/tikz-cd preamble fails with Undefined control sequence at the face label i+\\tfrac12. The identical drawing with only \\frac{1}{2} instead compiles. The failure is an unsupported amsmath command in this native preamble, not geometric contradiction or clipping.",
+      "action": "Replaced only \\tfrac12 with the equivalent core-LaTeX \\frac{1}{2} at line 69.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "One equivalent fraction command substitution in the existing TikZ face label. All coordinates, labels, formulas, hypotheses, dependencies, source metadata and publication status preserved byte-for-byte otherwise.",
+  "source_lines_after": [
+    69
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Wet/wet bed-step geometry and orientation",
+      "justification": "Definition lines 34–40 sets cell i on L and i+1 on R, face bed max(b_i,b_{i+1}). Diagram bed heights 0.35 left and 1.0 right with face x=2 give b_i<b_{i+1}=b*=1.0. Axis points toward increasing cell index; unchanged face label i+1/2 identifies the correct interface."
+    },
+    {
+      "check": "Common rest surface and reconstructed depths",
+      "justification": "Supplier def-pe05-shallow-water-balance-law defines eta=h+b and a lake-at-rest wet cell by m=0, eta=eta_0. Figure uses eta_0=1.8 above both beds, hence wet depths 1.45 and 0.8. Definition line 40 reconstructs both to max(0,1.8-1.0)=0.8. Both arrows run from y=1.0 to y=1.8, so the left arrow correctly excludes the lower-bed portion and both reconstructed depths coincide. Dotted surface is horizontal; right bed equals b*."
+    },
+    {
+      "check": "Left/right HLL data at this illustrated rest face",
+      "justification": "Definition lines 41–45 assigns u_L*=u_R*=0 at rest, U_L*=U_R*=(0.8,0), c_L*=c_R*=sqrt(0.8g), a_L=-sqrt(0.8g)<0<a_R=sqrt(0.8g). Thus the middle HLL branch yields F=(0,g(0.8)^2/2). This agrees with thm-pe05-hydrostatic-reconstruction-is-well-balanced proof steps 1.1 and 2.1. Side corrections use original left/right depths and give (0,g h_s^2/2), as proof step 3.1 states; the illustration changes none of these formulas."
+    },
+    {
+      "check": "Nonnegative and dry-state conventions",
+      "justification": "Supplier admissible set K permits only (0,0) at zero depth, with u=0 and F=0. Definition positive-part reconstruction guarantees nonnegative depths, explicitly zeros velocity on a dry reconstructed side, and uses a zero-flux branch when both speeds vanish. The illustration is explicitly wet/wet rather than a dry-front diagram; its positive equal reconstructed depths do not assert positivity in all configurations. Read full local dry-face lemma and depth-flux decomposition: their both-zero branch and orientations agree with the unchanged L/R definitions."
+    }
+  ],
+  "proof_independent": true,
+  "proof_independence_reason": "The carrier is a proof-free definition; the well-balanced theorem proves the equal reconstructed depths, common HLL pressure and cancellation algebraically in steps 1.1–3.1 without the figure. No proof or defining formula was edited.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-pe05-hydrostatic-hll-scheme.md",
+      "exit_code": 0,
+      "result": "1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-pe05-hydrostatic-hll-scheme.md --json",
+      "exit_code": 0,
+      "result": "files 1; checked 0; failed 0; definition not-applicable"
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-npde010\" node tools/rendercheck.mjs items/def-pe05-hydrostatic-hll-scheme.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors []; warnings []"
+    }
+  ],
+  "native_diagnosis": "research/math-library-rendering-repairs-2026-10-23/runtime-npde010/native-diagnosis.log",
+  "preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/npde010-final-unique",
+    "standalone_original_resolution_reviewed": true,
+    "tile": "screenshots/def-pe05-hydrostatic-hll-scheme--01.png",
+    "result": "Full diagram visible with bed step, common surface, both depth arrows, face and bed labels. One TikZ figure, no diagram failures, no KaTeX errors. No visible clipping or overlap requiring repair.",
+    "limitations": "Local native ItemBody preview only; 16 unrelated reference-map parse diagnostics reported by preview utility, not scoped render failures."
+  },
+  "before_raw_sha256": "9560f189342fbaaf0939d60d6e2c5642f60f0578a0ef6bfe657161790112a701",
+  "after_raw_sha256": "5349e2ac6f566980c0dfcf2017f50b59b17afa1f63de296650a228200d78459a",
+  "remaining_issues": []
+}

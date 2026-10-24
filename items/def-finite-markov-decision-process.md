@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-finite-markov-decision-process.json
+  precheck: pass
 id: def-finite-markov-decision-process
 kind: definition
 title: "Finite Markov decision process with joint reward-transition law"
@@ -25,12 +28,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -104,3 +101,15 @@ $$ \sum_{s'\in S}P(s'\mid s,a)=\sum_{s'\in S}\sum_{\rho\in\mathcal R}p(s',\rho\m
 $$ |r(s,a)|\le\sum_{s'\in S}\sum_{\rho\in\mathcal R}|\rho|p(s',\rho\mid s,a)\le M\sum_{s'\in S}\sum_{\rho\in\mathcal R}p(s',\rho\mid s,a)=M. $$
 
 Thus both derived marginals are well defined and the expected reward is bounded by the maximum absolute reward. The separate marginals are derived from the joint law; specifying unrelated reward and transition marginals would not preserve their possible dependence.
+
+For a fixed admissible $(s,a)\in D$, the diagram shows two operations on the same joint law on $S\times\mathcal R$. The left branch sums out the reward; the right branch averages the reward coordinate over all joint outcomes. These arrows describe operations on probability masses, not independent draws. If $S=\emptyset$, there is no admissible input and the illustration has no instance.
+
+```tikz
+\begin{tikzpicture}
+\node (joint) at (0,0) {$p(\cdot,\cdot\mid s,a)$};
+\node (state) at (-3,-2) {$P(t\mid s,a)=\sum_{\rho\in\mathcal R}p(t,\rho\mid s,a)$};
+\node (reward) at (3,-2) {$r(s,a)=\sum_{t\in S}\sum_{\rho\in\mathcal R}\rho\,p(t,\rho\mid s,a)$};
+\draw[->] (joint) -- (state);
+\draw[->] (joint) -- (reward);
+\end{tikzpicture}
+```

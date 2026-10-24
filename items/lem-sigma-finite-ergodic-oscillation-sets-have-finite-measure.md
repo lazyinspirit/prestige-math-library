@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-sigma-finite-ergodic-oscillation-sets-have-finite-measure.json
+  precheck: pass
 id: lem-sigma-finite-ergodic-oscillation-sets-have-finite-measure
 kind: lemma
 title: Sigma-finite ergodic oscillation sets have finite measure
@@ -8,12 +11,6 @@ deps: [thm-maximal-ergodic-theorem, def-ergodic-partial-sums-time-averages-and-i
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
 sources:
   references:
     - title: "Alessio Del Vigna, The Birkhoff Ergodic Theorem"
@@ -47,7 +44,7 @@ sets) and has finite measure.
 
 ## Proof
 
-**Proof technique:** cases on the sign of $\alpha$.
+**Proof technique:** cases on the sign of alpha.
 
 1.1 The exact identity $$A_nf(Tx)=\frac{n+1}{n}A_{n+1}f(x)-\frac1n f(x)$$ shows, by taking lower and upper limits, that both limiting envelopes have the same value at $Tx$ as at $x$; finite-valuedness of $f(x)$ makes the last term tend to zero.  Thus $T^{-1}E_{\alpha,\beta}=E_{\alpha,\beta}$. [given, algebra]
 

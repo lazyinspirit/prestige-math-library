@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-a2-davis-complex-hexagon-and-boundary-circle.json
+  precheck: pass
 id: "ex-cg-a2-davis-complex-hexagon-and-boundary-circle"
 kind: example
 title: "The A2 Davis complex is a hexagon whose boundary is the Coxeter complex circle"
@@ -13,9 +16,6 @@ provenance:
 proof_strategy: direct
 generation:
   role: example
-verification:
-  audited: "2026-10-08"
-  precheck: pending
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, author manuscript of the first edition (Princeton Univ. Press, 2008)"
@@ -87,3 +87,43 @@ and the six singleton cosets $wW_\emptyset$. The equality criterion [F2] shows t
 ## Remarks
 
 The presentation and type-A suppliers are used in step 1.1; the rank-two reflection formula and canonical action in step 1.2; the finite chamber theorem in step 2.1; and the cellulation and chamber-quotient theorem in step 3.1. Source comparisons [F12] and [F13] corroborate the local computations; they do not replace those arguments.
+
+
+The left panel shows the coarse cell $C_S$ when $d_s=d_t$: its boundary edges have alternating types $\{s\}$ and $\{t\}$, and its interior is one $2$-cell. The right panel is a separate schematic of $K=|\mathbb S|$: the diagonal $\emptyset<S$ is shared by the two chain triangles. The chamber square is not an additional coarse Coxeter cell. These pictures illustrate steps 2.1 and 3.1; the proof is independent of them.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\coordinate (a) at (0,1.5);
+\coordinate (b) at (1.299038,0.75);
+\coordinate (c) at (1.299038,-0.75);
+\coordinate (d) at (0,-1.5);
+\coordinate (e) at (-1.299038,-0.75);
+\coordinate (f) at (-1.299038,0.75);
+\draw (a) -- (b) node[midway,above right] {$s$};
+\draw (b) -- (c) node[midway,right] {$t$};
+\draw (c) -- (d) node[midway,below right] {$s$};
+\draw (d) -- (e) node[midway,below left] {$t$};
+\draw (e) -- (f) node[midway,left] {$s$};
+\draw (f) -- (a) node[midway,above left] {$t$};
+\fill (a) circle (1.5pt) (b) circle (1.5pt) (c) circle (1.5pt) (d) circle (1.5pt) (e) circle (1.5pt) (f) circle (1.5pt);
+\node[above] at (a) {$1$};
+\node[right] at (1.48,0.75) {$s$};
+\node[right] at (1.48,-0.75) {$st$};
+\node[below] at (d) {$sts$};
+\node[left] at (-1.48,-0.75) {$ts$};
+\node[left] at (-1.48,0.75) {$t$};
+\node at (0,0) {$C_S$};
+\coordinate (p) at (4,1.2);
+\coordinate (q) at (6.4,1.2);
+\coordinate (r) at (6.4,-1.2);
+\coordinate (u) at (4,-1.2);
+\draw (p) -- (q) -- (r) -- (u) -- (p);
+\draw (p) -- (r);
+\fill (p) circle (1.5pt) (q) circle (1.5pt) (r) circle (1.5pt) (u) circle (1.5pt);
+\node[above left] at (p) {$\emptyset$};
+\node[above right] at (q) {$\{s\}$};
+\node[below right] at (r) {$S$};
+\node[below left] at (u) {$\{t\}$};
+\node at (5.6,0.6) {$K$};
+\end{tikzpicture}
+```

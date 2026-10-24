@@ -1,0 +1,120 @@
+{
+  "id": "def-duffy-reference-triangle-map",
+  "agent": "/root/rendering_repair_coordinator/dnla_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dnla_007",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The definition concerns a many-to-one boundary map: a side-by-side square and triangle materially clarifies how an entire edge collapses to one vertex while the other boundary edges map to the three triangle sides. The original standalone screenshot and frozen/current pre-edit source contain no figure.",
+      "action": "Added a fenced TikZ diagram in final Remarks, with boundary formulas, collapsed-edge highlighting and determinant annotation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended final Remarks and a square-to-reference-triangle illustration. Original Definition, title and every frontmatter byte remain unchanged.",
+  "source_lines_after": {
+    "remarks": [
+      32,
+      34
+    ],
+    "tikz": [
+      36,
+      62
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "S=[0,1]^2 with r horizontal and s vertical; T={(x,y):0≤y≤x≤1} with x horizontal and y vertical.",
+      "check": "The displayed square has four vertices (0,0),(1,0),(1,1),(0,1); the triangle has exactly (0,0),(1,0),(1,1). Uniform coordinate scaling preserves their geometry.",
+      "basis": "Assigned Definition line 30; image-and-Jacobian lemma Statement and proof step 2.1."
+    },
+    {
+      "map": "D:S→T, D(r,s)=(r,rs)",
+      "check": "For 0≤r,s≤1, 0≤rs≤r≤1. Every point with x>0 has r=x and s=y/x in the square; x=0 forces y=0. Thus the arrow has the actual domain and codomain.",
+      "basis": "lem-duffy-reference-map-jacobian-and-image proof step 2.1."
+    },
+    {
+      "relation": "Boundary images",
+      "check": "D(0,s)=(0,0) for the complete cyan edge; D(r,0)=(r,0) is the bottom edge y=0; D(r,1)=(r,r) is the diagonal y=x; D(1,s)=(1,s) is the right edge x=1. The four square corner labels and three triangle labels agree with those formulas.",
+      "basis": "Definition D(r,s)=(r,rs); local lemma Statement and proof step 2.1."
+    },
+    {
+      "relation": "Jacobian and orientation",
+      "check": "D'=[[1,0],[s,r]], so det D'=r. The orientation sentence is explicitly restricted to r>0; no inverse at the collapsed vertex is implied.",
+      "basis": "Local lemma proof step 1.1 computes this derivative and determinant; step 2.1 states the inverse only for r>0."
+    },
+    {
+      "relation": "Closed boundaries and endpoint inclusion",
+      "check": "Compiled SVG square path contains all four segments ending at its starting vertex; triangle path contains all three segments including diagonal return. All domain/image boundary points are included; the cyan vertex is a solid filled point, not an open endpoint.",
+      "basis": "Closed domain in Definition; explicit coordinate closing segments on source lines 38 and 52; native SVG paths inspected."
+    }
+  ],
+  "before_guard": {
+    "expected_raw_sha256": "5507330d97fa73b53f6bf8e06b05eb261c81d00282b9fc56fb1733bbe585cc50",
+    "actual_raw_sha256": "5507330d97fa73b53f6bf8e06b05eb261c81d00282b9fc56fb1733bbe585cc50",
+    "passed": true
+  },
+  "current_raw_sha256": "b5fec58aae56b6b6c9642a7419037d2183067a374c38dc45cc4a70441a1b811f",
+  "publication_status_preserved": true,
+  "protected_metadata_byte_identical": true,
+  "evidence": {
+    "original_declared_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/diagram-supplement/screenshots/def-duffy-reference-triangle-map--01.png",
+    "original_declared_path_missing": true,
+    "resolved_original_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/def-duffy-reference-triangle-map--01.png",
+    "original_screenshot_sha256": "3bb41a8ddb74febf11a9a917833b88128a392a66ea529108ce184c6deab49c9a",
+    "original_hash_matches_queue": true,
+    "original_view": "Standalone original-resolution inspection completed.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-007-native/manifest.json",
+    "preview_source_sha256": "b5fec58aae56b6b6c9642a7419037d2183067a374c38dc45cc4a70441a1b811f",
+    "preview_html_sha256": "dfb90ba24f9e80637eed6bd868a76178de0047d874d14895ccd60a52682caa90",
+    "native_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-007-native/screenshots/def-duffy-reference-triangle-map--01.png",
+    "native_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-007-native/diagram-crop.png",
+    "visual_check": "Standalone original screenshot and native pixel crop inspected at original resolution. Figure shows white strokes/math and cyan collapsed edge/solid vertex on black background; no clipping or overlapping figure labels. SVG has currentColor strokes, #0ff edge/vertex, and explicit closing paths. Preview completed successfully with 1 item / 1 tile.",
+    "limitations": "Local SSR ItemBody preview only, not production route; reference map records 16 unrelated parse diagnostics."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-duffy-reference-triangle-map.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-duffy-reference-triangle-map.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-duffy-reference-triangle-map.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnla-007 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-duffy-reference-triangle-map --out research/math-library-rendering-repairs-2026-10-23/previews/dnla-007-native",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": []
+}

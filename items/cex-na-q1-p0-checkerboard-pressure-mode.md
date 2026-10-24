@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-na-q1-p0-checkerboard-pressure-mode.json
+  precheck: pass
 id: cex-na-q1-p0-checkerboard-pressure-mode
 kind: counterexample
 title: "The alternating Q1/P0 checkerboard pressure defeats the discrete inf-sup
@@ -26,12 +29,7 @@ sources:
         Methods and Applications (complete textbook)"
       url: https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf
       locator: "Chapter 8, §§8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement refuted
@@ -53,3 +51,33 @@ The continuous Q1 velocity / cellwise P0 pressure pair is uniformly inf-sup stab
 2.1 Let $I_L=[0,1/2]$, $I_R=[1/2,1]$, and similarly $J_B,J_T$. Direct integration gives $\int_{I_L}\eta'=1$, $\int_{I_R}\eta'=-1$, and $\int_{J_B}\eta=\int_{J_T}\eta=1/4$. The alternating signs factor, so $\int_Dq\,\partial_x\phi=(1-(-1))(1/4-1/4)=0$. Interchanging $x,y$ gives $\int_Dq\,\partial_y\phi=0$. [algebra, step 1.1]
 
 3.1 Every admissible velocity is $(a\phi,b\phi)$ for constants $a,b$, so step 2.1 gives $b(v,q)=0$ for every velocity while $q$ is a nonzero mean-zero pressure. Its supremum in the discrete inf-sup quotient is zero; nonnegativity of that quotient forces the discrete inf-sup constant to be $0$. Thus this family is not uniformly inf-sup stable. [given, F1, discharge-construct, step 2.1] ∎
+
+## Remarks
+
+The cell labels below show the pressure in step 1.1. Open circles are the eight boundary Q1 nodes, where both velocity components vanish; the filled center is the only interior scalar Q1 node. Thus there is one scalar basis function $\phi$, with $\phi(1/2,1/2)=1$, and two free velocity coefficients in $v_h=(a\phi,b\phi)$. The four equal-area cells give $\int_Dq=0$; the cancellations $\int_Dq\,\partial_x\phi=\int_Dq\,\partial_y\phi=0$ are established in step 2.1. The proof is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.1, every node/.style={font=\large}]
+\draw[thick] (0,0) rectangle (4,4);
+\draw (2,0) -- (2,4);
+\draw (0,2) -- (4,2);
+\node at (1,1) {$q=+1$};
+\node at (3,1) {$q=-1$};
+\node at (1,3) {$q=-1$};
+\node at (3,3) {$q=+1$};
+\foreach \x/\y in {0/0,2/0,4/0,0/2,4/2,0/4,2/4,4/4}
+  \draw[thick,fill=white] (\x,\y) circle (0.065);
+\fill (2,2) circle (0.075);
+\draw (2.12,2.12) -- (4.6,2.5);
+\node[anchor=west] at (4.7,2.5) {$\phi=1$ at the center};
+\draw[thick,fill=white] (4.9,1.55) circle (0.065);
+\node[anchor=west] at (5.15,1.55) {$v_h=0$ at boundary nodes};
+\node[below] at (0,-0.15) {$0$};
+\node[below] at (2,-0.15) {$\frac{1}{2}$};
+\node[below] at (4,-0.15) {$1$};
+\node[below] at (3,-0.65) {$x$};
+\node[left] at (-0.15,2) {$\frac{1}{2}$};
+\node[left] at (-0.15,4) {$1$};
+\node[left] at (-0.65,3) {$y$};
+\end{tikzpicture}
+```

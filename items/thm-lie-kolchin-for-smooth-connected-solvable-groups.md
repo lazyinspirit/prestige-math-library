@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lie-kolchin-for-smooth-connected-solvable-groups.json
+  precheck: pass
 id: thm-lie-kolchin-for-smooth-connected-solvable-groups
 kind: theorem
 title: "Lie-Kolchin: smooth connected solvable affine groups over algebraically closed fields are trigonalizable"
@@ -25,11 +28,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -41,7 +39,7 @@ sources:
 ---
 ## Statement
 
-Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth connected solvable affine algebraic group over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]], [[def-derived-subgroup-and-solvable-algebraic-group]]). Then $G$ is trigonalizable: every simple rational representation of $G$ has dimension one, equivalently every finite-dimensional rational representation of $G$ admits a basis in which $G$ acts through upper triangular matrices ([[def-trigonalizable-algebraic-group]], [[lem-trigonalizable-iff-invariant-flags]]). The hypotheses smooth, connected, solvable and $k$ algebraically closed are all essential, and the theorem is not claimed over non-algebraically-closed fields.
+Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth connected solvable affine algebraic group over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]], [[def-derived-subgroup-and-solvable-algebraic-group]]). Then $G$ is trigonalizable: every simple rational representation of $G$ has dimension one, equivalently every finite-dimensional rational representation of $G$ admits a basis in which $G$ acts through upper triangular matrices ([[def-trigonalizable-algebraic-group]], [[lem-trigonalizable-iff-invariant-flags|Trigonalizable groups, invariant flags and embeddings into $T_n$]]). The hypotheses smooth, connected, solvable and $k$ algebraically closed are all essential, and the theorem is not claimed over non-algebraically-closed fields.
 
 ## Facts & Assumptions
 **Given:** The Axiom of Choice, an algebraically closed field $k$, and a smooth connected solvable affine $k$-group $G$.
@@ -72,4 +70,4 @@ Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$
 
 4.1 By [F2] every element of $N(k)=(DG)(k)$ is a product of commutators $[x,y]$ of elements of $G(k)$, hence acts on $V$ with determinant $1$. Since it acts as the homothety $\chi(n)$ with $d=\dim V$, its determinant is $\chi(n)^d$, so $\chi$ maps $N(k)$ into the group $\mu_d(k)$ of $d$-th roots of unity. As $N$ is smooth and connected and $\mu_d$ is finite, the image $\chi(N)$ is connected and finite, hence trivial; so $N$ acts trivially on $V$. [F2, step 3.1]
 
-5.1 Consequently $V$ is a simple representation of the quotient $G/N$, which is commutative by [F2]. By [F1] a simple finite-dimensional representation of the smooth commutative group $G/N$ has dimension one; hence $\dim V=1$. This completes the induction: every simple representation of $G$ is one-dimensional, so $G$ is trigonalizable, and the equivalent flag formulation follows from [[lem-trigonalizable-iff-invariant-flags]]. [F1, F2, step 1.1, step 4.1] ∎ 
+5.1 Consequently $V$ is a simple representation of the quotient $G/N$, which is commutative by [F2]. By [F1] a simple finite-dimensional representation of the smooth commutative group $G/N$ has dimension one; hence $\dim V=1$. This completes the induction: every simple representation of $G$ is one-dimensional, so $G$ is trigonalizable, and the equivalent flag formulation follows from [[lem-trigonalizable-iff-invariant-flags|Trigonalizable groups, invariant flags and embeddings into $T_n$]]. [F1, F2, step 1.1, step 4.1] ∎ 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-nevanlinna-five-value-theorem.json
+  precheck: pass
 id: thm-nevanlinna-five-value-theorem
 kind: theorem
 title: "Nevanlinna five-value uniqueness theorem"
@@ -24,8 +27,7 @@ sources:
     - title: "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §§1-2, printed pp. 87-98; Ch. 4 §3, printed pp. 121-122: uniqueness theorems and truncated counting"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Statement
@@ -52,7 +54,7 @@ $\{z:g(z)=a_j\}$ agree. Then $f=g$ identically.
 
 ## Proof
 
-**Proof technique:** normalise the five values to finite values by a Möbius map, compare the common value counts with the zeros of $F-G$, apply the truncated Second Main Theorem to both normalised functions, and use the characteristic growth to reach a contradiction unless $F-G\equiv0$.
+**Proof technique:** normalise the five values to finite values by a Möbius map, compare the common value counts with the zeros of the difference of F and G, apply the truncated Second Main Theorem to both normalised functions, and use the characteristic growth to reach a contradiction unless F and G are identical.
 
 1.1 (Möbius normalisation) Pick $b\in\mathbb C\setminus\{a_1,\dots,a_5\}$ and put $R(z):=1/(z-b)$, a Möbius transformation with $R(b)=\infty$; set $F:=R\circ f$, $G:=R\circ g$ and $c_j:=R(a_j)$. Then each $c_j$ is finite (it is $0$ when $a_j=\infty$) and the $c_j$ are distinct; $F$ and $G$ are nonconstant meromorphic, their preimage sets of $c_j$ agree for every $j$, and [F2] gives $T(r,F)=T(r,f)+O(1)$ and $T(r,G)=T(r,g)+O(1)$ as $r\to\infty$. [F2, construct]
 

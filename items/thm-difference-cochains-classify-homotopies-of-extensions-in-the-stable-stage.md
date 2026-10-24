@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-difference-cochains-classify-homotopies-of-extensions-in-the-stable-stage.json
+  precheck: pass
 id: thm-difference-cochains-classify-homotopies-of-extensions-in-the-stable-stage
 kind: theorem
 title: Difference cochains classify homotopies of extensions in the stable stage
@@ -9,9 +12,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  precheck: pass
 sources:
   references:
     - title: James Davis and Paul Kirk, Lecture Notes in Algebraic Topology
@@ -54,19 +54,11 @@ and this class is zero if and only if $g_0$ and $g_1$ are homotopic rel $A$ thro
 
 1.1 Let $g_0,g_1\in\mathscr E_n(a)$. By [F1], choose a homotopy $H$ rel $A$ between their restrictions to $X^{n-1}\cup A$. Because $\theta(g_0)=\theta(g_1)=0$, [F2] gives $\delta d(g_0,H,g_1)=0$. Thus the difference cochain defines a class in $H^n(X,A;\Pi)$. [F1, F2]
 
-1.2 Changing $H$ or changing either endpoint through a homotopy rel $A$ changes this cocycle by a coboundary: apply the obstruction-class independence theorem to the corresponding boundary map on the product pair. Hence $[d(g_0,g_1)]$ depends only on the two classes in $\mathscr E_n(a)$. Reversing a prism changes its sign, and gluing prisms gives [F3]
-
-$$ [d(g_0,g_2)]=[d(g_0,g_1)]+[d(g_1,g_2)]. $$
-
-[F3]
+1.2 Changing $H$ or changing either endpoint through a homotopy rel $A$ changes this cocycle by a coboundary: apply the obstruction-class independence theorem to the corresponding boundary map on the product pair. Hence $[d(g_0,g_1)]$ depends only on the two classes in $\mathscr E_n(a)$. Reversing a prism changes its sign, and gluing prisms gives $[d(g_0,g_2)]=[d(g_0,g_1)]+[d(g_1,g_2)]$. [F3]
 
 2.1 Regard the homotopy problem as extension over the product pair in [F3]. Suppose $[d(g_0,H,g_1)]=0$, and choose $c\in C^{n-1}(X,A;\Pi)$ with $d(g_0,H,g_1)=\delta c$. Keep both endpoint maps fixed. On each relative prism $e^{n-1}\times I$, whose dimension is $n$, insert by the relative pinch construction of [F4] a sphere representative of $-c(e^{n-1})$ into the interior of $H$, leaving its entire boundary, including the two endpoint faces, fixed. AC makes these simultaneous insertions over arbitrary cells; the CW pushout glues them to a new prior-stage homotopy $H_c$ rel $A$ with the same endpoints. On a boundary prism $e^n\times I$, the only changed faces are the prisms over the $(n-1)$-cells of $\partial e^n$. Their signed incidence sum, with the interval-last sign in [F3], is $-\delta c(e^n)$; the same oriented boundary calculation as [F2] therefore gives $d(g_0,H_c,g_1)=d(g_0,H,g_1)-\delta c=0$ as a cochain, not just as a class. The zero obstruction on each $e^n\times I$ now supplies a filling extending $H_c$ over the relative $n$-prisms, while the fixed bottom and top faces remain $g_0$ and $g_1$. The glued fillings are a homotopy $g_0\simeq g_1$ on $X^n\cup A$ rel $A$. Conversely, such a homotopy fills every prism, making its difference cochain zero and hence its class zero. [A1, F2, F3, F4, step 1.1]
 
-2.2 Fix $g\in\mathscr E_n(a)$ and let $z\in Z^n(X,A;\Pi)$. Since $g$ has zero obstruction as in Step 1.1, apply [F4] to a stationary prior-stage homotopy and prescribe difference cochain $z$. It produces $g_z:X^n\cup A\to Y$ with $d(g,\mathrm{const},g_z)=z$. By [F2], [F2, F4, step 1.1]
-
-$$ \theta(g_z)=\theta(g)-\delta z=0, $$
-
-so $g_z\in\mathscr E_n(a)$. [F2, F4]
+2.2 Fix $g\in\mathscr E_n(a)$ and let $z\in Z^n(X,A;\Pi)$. Since $g$ has zero obstruction as in Step 1.1, apply [F4] to a stationary prior-stage homotopy and prescribe difference cochain $z$. It produces $g_z:X^n\cup A\to Y$ with $d(g,\mathrm{const},g_z)=z$. By [F2], $\theta(g_z)=\theta(g)-\delta z=0$, so $g_z\in\mathscr E_n(a)$. [F2, F4, step 1.1]
 
 3.1 If $z$ and $z'$ differ by a coboundary, Step 1.2 gives $[d(g_z,g_{z'})]=[z'-z]=0$, so Step 2.1 makes $g_z$ and $g_{z'}$ equivalent. Thus Step 2.2 defines an action of $H^n(X,A;\Pi)$ on $\mathscr E_n(a)$. The addition formula in Step 1.2 proves the action law. [step 1.2, step 2.1, step 2.2]
 

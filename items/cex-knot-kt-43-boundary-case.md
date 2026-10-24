@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-knot-kt-43-boundary-case.json
+  precheck: pass
 id: cex-knot-kt-43-boundary-case
 kind: counterexample
 title: "A null-homologous unknot in a homology sphere can have reducible exterior"
@@ -31,18 +34,7 @@ sources:
     - title: "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, Theorem 1.1"
       url: "https://arxiv.org/pdf/math/0607156v4"
       locator: "Printed p.2; the exact irreducible-complement hypothesis"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
+
 ---
 
 ## Statement refuted
@@ -68,18 +60,18 @@ Assume the Axiom of Choice. An integral homology $3$-sphere is a closed connecte
 The connected-sum sphere separates the two punctured Poincaré summands; the unknot lies in a smaller ball in the left summand.
 
 ```tikz
-\begin{tikzpicture}[scale=0.95]
+\begin{tikzpicture}[scale=1.4]
   \draw[rounded corners,thick] (-2,-1.15) rectangle (1.45,1.15);
   \draw[rounded corners,thick] (2.55,-1.15) rectangle (6,1.15);
-  \node at (-0.25,0.55) {$P\setminus\operatorname{int}B^3$};
-  \node at (4.25,0.55) {$P\setminus\operatorname{int}B^3$};
+  \node at (-0.25,0.85) {$P\setminus\mathrm{int}B^3$};
+  \node at (4.25,0.85) {$P\setminus\mathrm{int}B^3$};
   \draw[dashed,thick] (2,-1.15)--(2,1.15);
   \node[above] at (2,1.15) {$S^2$};
   \draw[thick] (-1.2,-0.1) circle (0.55);
-  \node at (-1.2,0.15) {$B_0$};
+  \node at (-1.2,0.32) {$B_0$};
   \draw[thick] (-1.2,-0.1) circle (0.2);
   \node at (-1.2,-0.1) {$U$};
-  \node at (-1.2,-0.82) {$N(U)\subset B_0$};
+  \node at (-0.65,-0.82) {$N(U)\subset B_0$};
 \end{tikzpicture}
 ```
 

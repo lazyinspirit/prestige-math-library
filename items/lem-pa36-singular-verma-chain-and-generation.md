@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-pa36-singular-verma-chain-and-generation.json
+  precheck: pass
 id: lem-pa36-singular-verma-chain-and-generation
 kind: lemma
 title: A fixed singular Verma chain with globally generated final bundle
@@ -129,3 +132,36 @@ antipode convolution identities proved on all words
 
 6.1 Composing induction of $V\twoheadrightarrow V''$ with the projection of step 4.2 gives a surjection of twisted modules $$M(-\kappa-\rho)\otimes V\twoheadrightarrow H_N.$$ Here the tensor identity is the map $u\otimes(c\otimes v)\mapsto \sum(u_{(1)}\otimes c)\otimes u_{(2)}v$, with inverse obtained by inserting the antipode in the second enveloping factor. The coproduct and antipode from [F7] check on generators that both maps respect the $\mathfrak b$ relations, are mutual inverses, and commute with the twisted rational $B$-actions. Apply the exact functor [F5]. Its PBW and tensor identities give $\mathcal D_\kappa\otimes_{\mathbb C}V\twoheadrightarrow\mathcal E_N$ with differential action only on $\mathcal D_\kappa$. The sections $1\otimes v_i$ for a finite basis of $V$ are global differential generators. This proves finite global generation and completes all chain assertions, including the empty-word case. Choice enters through the inherited highest-weight and Weyl suppliers and the permitted bases. [F4, F5, F7, step 4.2, algebra] ∎
 
+
+## Remarks
+
+The two filtrations have the same indexing: increasing the index moves to a
+smaller submodule. Applying the exact functor
+$\mathsf E^B_{\kappa+\rho}$ to the first row gives the second row; the rows
+are not joined by module morphisms.
+
+```tikzcd
+H_N \arrow[r, hook] & \cdots \arrow[r, hook] & H_0 \\
+\mathcal E_N \arrow[r, hook] & \cdots \arrow[r, hook] & \mathcal E_0
+```
+
+For $1\leq j\leq N$, put
+$Q_j=\mathcal O_X(\rho)\otimes p_{\alpha_j}^\dagger N_j$.
+The $j$th step and the final generation map are:
+
+```tikzcd
+0 \arrow[r] & \mathcal E_j \arrow[r, hook] & \mathcal E_{j-1} \arrow[r, two heads] & Q_j \arrow[r] & 0
+```
+
+```tikzcd
+\mathcal D_\kappa\otimes_{\mathbb C}V \arrow[r, two heads] & \mathcal E_N
+```
+
+Here the arrow to $Q_j$ is the quotient map followed by the stated descent
+isomorphism. The same $\alpha_j$ occurs in
+$\mu_j=s_{\alpha_j}\mu_{j-1}$ and in $p_{\alpha_j}$, with the order fixed by
+$w_J=s_{\alpha_N}\cdots s_{\alpha_1}$. The generation map targets the
+smallest term $\mathcal E_N$, and its constant $V$-factor is horizontal.
+When $J$ is empty, each filtration has one term and there are no quotient
+rows. These pictures summarize steps 2.1, 5.1 and 6.1; the proof is
+independent of them.

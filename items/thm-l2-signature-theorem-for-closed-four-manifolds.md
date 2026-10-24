@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-l2-signature-theorem-for-closed-four-manifolds.json
+  precheck: pass
 id: thm-l2-signature-theorem-for-closed-four-manifolds
 kind: theorem
 title: "The L²-signature of a closed manifold equals its ordinary signature"
@@ -23,19 +26,13 @@ sources:
     - title: "Wolfgang Lück and Thomas Schick, “Various L²-signatures and a topological L²-signature theorem”"
       url: "https://arxiv.org/pdf/math/0209161"
       locator: "§1, Theorem 1.3 and its proof; Atiyah/Hilsum inputs"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
 
 Assume full AC. Let X be a closed oriented smooth 4-manifold, Γ a discrete group, and φ:π₁(X)→Γ a homomorphism. Then the von Neumann signature of the NΓ-coefficient intersection form equals the ordinary signature:
-sign_Γ^(2)(X,φ)=sign(X).
+$\operatorname{sign}^{(2)}_\Gamma(X,\phi)=\operatorname{sign}(X)$.
 
 ## Statement references
 

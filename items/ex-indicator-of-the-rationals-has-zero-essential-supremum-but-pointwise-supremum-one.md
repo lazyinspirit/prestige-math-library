@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one.json
+  precheck: pass
 id: ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one
 kind: example
 title: "Indicator of the rationals has zero essential supremum but pointwise supremum one"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-essential-supremum-with-respect-to-a-measure, thm-rationals-countable, lem-countable-sets-are-null]
 proof_strategy: "Use that the rationals in [0, 1] are countable and therefore null, so every positive threshold is exceeded only on a null set."
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ So essential supremum and pointwise supremum need not agree.
 
 ## Verification
 
-**Proof technique:** Use that the rationals in $[0,1]$ are countable and therefore null, so every positive threshold is exceeded only on a null set.
+**Proof technique:** Use that the rationals in [0,1] are countable and therefore null, so every positive threshold is exceeded only on a null set.
 
 1.1 The pointwise supremum is $1$ because $f(x)=1$ on every rational point of $[0,1]$. [given]
 

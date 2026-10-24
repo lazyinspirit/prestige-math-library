@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-bounded-left-inverse-iff-range-is-complemented.json
+  precheck: pass
 id: thm-bounded-left-inverse-iff-range-is-complemented
 kind: theorem
 title: "Under Dependent Choice, an injective bounded operator between Banach spaces has a bounded left inverse exactly when its range is closed and complemented"
@@ -15,13 +18,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:
@@ -66,3 +62,32 @@ $Y$.
 2.2 Let $P:Y\to Y$ be a bounded projection onto $\operatorname{ran}(T)$, given by [L2]. Then $S:=R\circ P:Y\to X$ is bounded and $STx = R(P(Tx)) = R(Tx)=x$ for every $x \in X$. Hence $S$ is a bounded left inverse of $T$. [step 1.2, L2, algebra]
 
 3.1 Steps 2.1 and 2.2 prove the equivalence. [step 2.1, step 2.2] ∎
+
+
+## Remarks
+
+Under either equivalent condition, put $M=\operatorname{ran}(T)$, let
+$A:X\to M$ be the corestriction $Ax=Tx$, and let $i:M\to Y$ be inclusion.
+Then $R=A^{-1}:M\to X$ is bounded. For a bounded projection $P:Y\to Y$
+onto $M$, write $Q:Y\to M$ for the same map with codomain restricted to $M$.
+The factorization picture is:
+
+```tikz
+\begin{tikzpicture}
+\node (X) at (0,0) {$X$};
+\node (M) at (3.4,0) {$M$};
+\node (Y) at (6.8,0) {$Y$};
+\draw[->] (X) to[bend left=18] node[above] {$A$} (M);
+\draw[->] (M) to[bend left=18] node[below] {$R$} (X);
+\draw[->] (M) to[bend left=18] node[above] {$i$} (Y);
+\draw[->] (Y) to[bend left=18] node[below] {$Q$} (M);
+\draw[->] (X) to[bend left=48] node[above] {$T=iA$} (Y);
+\draw[->] (Y) to[bend left=48] node[below] {$S=RQ$} (X);
+\end{tikzpicture}
+```
+
+Here $RA=I_X$, $AR=I_M$, and $Qi=I_M$. Thus $ST=RQ iA=RA=I_X$
+and $TS=iARQ=iQ=P$, giving $P^2=iQiQ=iQ=P$. Starting with a left inverse
+$S$, step 2.1 supplies $P=TS$ and its corestriction is $Q=AS$; starting
+with $P$, step 2.2 supplies $S=RQ$. The inclusion $i$ need not be onto $Y$.
+The proof above is independent of this illustration.

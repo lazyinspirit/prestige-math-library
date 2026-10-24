@@ -1,0 +1,126 @@
+{
+  "id": "ex-acceptance-is-configuration-reachability",
+  "agent": "/root/rendering_repair_coordinator/dcpt_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot and byte-identical frozen/current source have no figure. A complete directed graph of this three-configuration computation materially clarifies the existential acceptance criterion beside a nonhalting branch; the diagram is warranted even though the proof was already complete.",
+      "action": "Added a final Remarks illustration with three labelled configuration vertices and all three labelled directed transitions, followed by explicit configuration tuples and the proof-independence qualification.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the warranted directed configuration graph in final Remarks, preserving the entire pre-existing carrier as a byte prefix.",
+  "source_lines_after": {
+    "remarks": [
+      59,
+      79
+    ],
+    "tikz": [
+      65,
+      74
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Exact objects and transitions",
+      "evidence": "The local false-statement supplier gives Delta(q0,1)={(qacc,1,R),(qL,1,L)} and Delta(qL,1)={(qL,1,L)}. By def-one-step-configuration-relation, rewriting 1 by 1 leaves tape t1 unchanged, R sends head 0 to 1, and L at 0 clamps to 0. Thus C0=(q0,0,t1), Cacc=(qacc,1,t1), CL=(qL,0,t1) and the three drawn arrows have exactly the stated sources, targets and transition labels."
+    },
+    {
+      "check": "Complete graph, closure and degrees",
+      "evidence": "An actual local Python reachable-state traversal of those two transition rows with the boundary clamp computed precisely three vertices and edges {(C0,Cacc),(C0,CL),(CL,CL)}. Directed (in,out) degrees are C0:(0,2), Cacc:(1,0), CL:(2,1), counting the loop once in each degree. Cacc has no outgoing step by the halting-state clause. The only directed cycle is the explicit CL self-loop."
+    },
+    {
+      "check": "Acceptance and nonhalting branch",
+      "evidence": "The path C0\u2192Cacc has length one (original Verification 1.1), and CL repeats indefinitely along its self-loop (1.2). Cacc is accepting by def-initial-accepting-and-rejecting-configurations; CL is nonhalting. The existing L1 and step 2.1 establish acceptance independently of the figure."
+    },
+    {
+      "check": "Native SVG matches exact graph",
+      "evidence": "Inspected actual compiled SVG: three circle-outline paths, two straight directed edge shafts and their arrowheads, and one curved CL self-loop with its return arrowhead. No named-node cycle closing shorthand is used. Standalone original-resolution figure capture visibly confirms all three arrows, including the returning loop, all vertex labels and all three transition labels."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-acceptance-is-configuration-reachability.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-acceptance-is-configuration-reachability.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-acceptance-is-configuration-reachability.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_check": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-008-v2",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-008-v2/manifest.json",
+    "source_sha256": "edea70ef95408c77fb510114356aabddc396dbc387e68138b873961201d47b6e",
+    "html_sha256": "620d9f59f8afd282125ab3839c34c44853a4fe4b4bd8b41f2a0a392968208bc1",
+    "capture": {
+      "capture_revision": 2,
+      "id": "ex-acceptance-is-configuration-reachability",
+      "height": 1400,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/ex-acceptance-is-configuration-reachability--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "82d3acf22ad7083a7c015664d189c699871b09fefd8b3188fb83ef3c3310d6c2",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 24,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T00:12:35.485Z"
+    },
+    "standalone_figure": "research/math-library-rendering-repairs-2026-10-23/runtime-dcpt-008/figure.png",
+    "result": "Native compilation succeeds with one figure and no diagram failures/KaTeX errors. Actual standalone figure was inspected at original resolution and has no clipping or overlap. Full-page capture has an unrelated text-rasterization artifact affecting unchanged content; standalone figure capture renders every diagram label correctly. Original full-page screenshot independently verifies pre-existing text."
+  },
+  "original_evidence_resolution": {
+    "declared_missing_path": "research/math-library-rendering-audit-2026-10-23/computability-theory/diagram-supplement/screenshots/ex-acceptance-is-configuration-reachability--01.png",
+    "authentic_path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/ex-acceptance-is-configuration-reachability--01.png",
+    "sha256": "f6ff3590e208d943eb9c5f98408dc3082a7438c07bf49ed2667533714b617e36",
+    "inspected_original_resolution": true
+  },
+  "guard": {
+    "before_raw_sha256": "99bcdbf6e43f81edf00041cf505e5a9032b1d54b58d25b5f6730efe01256d22d",
+    "matched_immediately_before_first_edit": true,
+    "frontmatter_byte_identical": true,
+    "original_body_unchanged": true,
+    "status": "published"
+  },
+  "remaining_issues": []
+}

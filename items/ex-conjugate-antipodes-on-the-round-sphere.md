@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-conjugate-antipodes-on-the-round-sphere.json
+  precheck: pass
 id: ex-conjugate-antipodes-on-the-round-sphere
 kind: example
 title: Conjugate antipodes on the round sphere
@@ -33,13 +36,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -105,7 +101,7 @@ $$n-1.$$
 
 ## Verification
 
-**Proof technique:** locate the antipode as the cut-time endpoint, solve the scalar Jacobi equation in constant positive curvature, bound the endpoint-vanishing space by an initial-derivative injection into $v^\perp$, and match it with the $n-1$ normal zero modes.
+**Proof technique:** locate the antipode as the cut-time endpoint, solve the scalar Jacobi equation in constant positive curvature, bound the endpoint-vanishing space by an initial-derivative injection into the orthogonal complement of v, and match it with the n − 1 normal zero modes.
 
 1.1 By [F4] the supplied curve $\gamma(t)=\exp_p(tv)$ is the affinely parametrized geodesic with $\gamma(0)=p$ and $\dot\gamma(0)=v$, and by [F5] it is unit speed, so $T:=\dot\gamma$ satisfies $g(T,T)=1$, $T(\pi R)\ne0$, and $D_tT=0$ by the geodesic equation in [F9]. By [F1] the cut time of $v$ is $c_p(v)=\pi R$, so the radial endpoint $\gamma(\pi R)$ is the cut-time endpoint; by [F3] it belongs to $\operatorname{Cut}(p)$, and by [F2] $\operatorname{Cut}(p)=\{-p\}$. Hence $\gamma(\pi R)=-p$, the antipode of $p$. The interval $[0,\pi R]$ is nondegenerate because $R>0$. [F1, F2, F3, F4, F5, F9]
 
@@ -119,9 +115,7 @@ $$n-1.$$
 
 4.1 The linear functional $w\mapsto g_p(v,w)$ on $T_pM$ has kernel $v^\perp$ by [F14] and is surjective because $g_p(v,v)>0$ gives $g_p(v,\lambda v)=\lambda g_p(v,v)$ for every $\lambda\in\mathbb R$. Since $\dim T_pM=n$ by [F13], rank--nullity [F15] gives $\dim v^\perp=n-1$. Combining the two bounds of steps 2.2 and 3.1 yields $\dim\mathcal K_\gamma(0,\pi R)=n-1$. By the conjugacy definition [F16], the antipode $\gamma(\pi R)=-p$ is conjugate to $p$ along $\gamma$, with multiplicity $n-1$. [F13, F14, F15, F16, step 2.2, step 3.1]
 
-5.1 Boundary and choice audit. The sphere is nonempty and $p$ is supplied, so no empty case arises; $n\ge2$ excludes the zero- and one-dimensional spheres, where the constant-curvature normal classification [F8] would not apply with positive curvature; the parameter interval $[0,\pi R]$ is nondegenerate and $\gamma$ is a nonconstant unit-speed geodesic, so no constant-geodesic or degenerate-segment case occurs. The zero Jacobi field is excluded from witnessing conjugacy by [F16], and the endpoint-vanishing space is computed exactly, not merely bounded. Exactly the inherited $\mathrm{AC}_\omega$ of [A1] is assumed. This example asserts conjugacy at the antipode and its multiplicity; it makes no if-and-only-if claim about geodesics other than the exhibited radial one. [A1, F16, step 1.1, step 4.1]
-
-$\square$
+5.1 Boundary and choice audit. The sphere is nonempty and $p$ is supplied, so no empty case arises; $n\ge2$ excludes the zero- and one-dimensional spheres, where the constant-curvature normal classification [F8] would not apply with positive curvature; the parameter interval $[0,\pi R]$ is nondegenerate and $\gamma$ is a nonconstant unit-speed geodesic, so no constant-geodesic or degenerate-segment case occurs. The zero Jacobi field is excluded from witnessing conjugacy by [F16], and the endpoint-vanishing space is computed exactly, not merely bounded. Exactly the inherited $\mathrm{AC}_\omega$ of [A1] is assumed. This example asserts conjugacy at the antipode and its multiplicity; it makes no if-and-only-if claim about geodesics other than the exhibited radial one. [A1, F16, step 1.1, step 4.1] ∎
 
 ## Source locator
 

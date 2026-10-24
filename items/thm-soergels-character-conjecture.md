@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-soergels-character-conjecture.json
+  precheck: pass
 id: thm-soergels-character-conjecture
 kind: theorem
 title: "Soergel's character conjecture for type A"
@@ -25,8 +28,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Theoreme 2.7(1) and Section 0.2 (the main theorem)"
-verification:
-  precheck: pass
+
 ---
 
 ## Facts & Assumptions
@@ -37,7 +39,7 @@ verification:
 
 [F2] The standard character is the split-Grothendieck isomorphism $\Phi:K_0^{\mathrm{split}}\to H$, not its inverse. In the normalized standard basis $H_w=v^{\ell(w)}T_w$, its simple value is $\Phi([B_s])=v(T_s+1)=H_s+v=\underline H_s$. The published split-Grothendieck supplier names this simple Kazhdan--Lusztig generator $H_i$; that $H_i$ is distinct from the standard $H_s$ used here. The character is additive and multiplicative, satisfies $\operatorname{ch}(M(d))=v^d\operatorname{ch}(M)$, and on an object means $\operatorname{ch}(M)=\Phi([M])$. Real scalar extension preserves labels, shifts and support-filtration characters, and character identities over $\mathbb R$ descend to $\mathbb Q$ ([[thm-split-grothendieck-group-of-the-soergel-category-is-the-type-a-hecke-algebra]], [[lem-the-type-a-standard-character-is-multiplicative]], [[lem-rational-and-real-type-a-soergel-characters-and-indecomposable-labels-agree]]).
 
-[F3] Descent: if $xs<x$ and $\mathrm S(x)$ holds, then $B_xB_s=B_x(1)\oplus B_x(-1)$ and the reduced operator is the matrix $\begin{pmatrix}\rho\cdot(-)&0\\ \zeta\rho(\alpha_s^\vee)&\rho\cdot(-)\end{pmatrix}$; if in addition $\mathrm hL(x)$ holds and $\zeta>0$ then $\mathrm hL(x,s)_\zeta$ holds, while centered hard Lefschetz fails at $\zeta=0$ ([[lem-right-descent-soergel-bimodules-descend-to-simple-invariants-under-the-character-hypothesis]], [[thm-deformed-hard-lefschetz-for-b-x-b-s]]).
+[F3] Descent: if $xs<x$ and $\mathrm S(x)$ holds, then $B_xB_s=B_x(1)\oplus B_x(-1)$ and the reduced operator is the matrix $\begin{pmatrix}\rho\cdot(-)&0\\ \zeta\rho(\alpha_s^\vee)&\rho\cdot(-)\end{pmatrix}$; if in addition $\mathrm hL(x)$ holds and $\zeta>0$ then $\mathrm hL(x,s)_\zeta$ holds, while centered hard Lefschetz fails at $\zeta=0$ ([[lem-right-descent-soergel-bimodules-descend-to-simple-invariants-under-the-character-hypothesis]], [[thm-deformed-hard-lefschetz-for-b-x-b-s|Hard Lefschetz for the deformed operator on $B_x B_s$, in the three cases]]).
 
 ## Statement
 

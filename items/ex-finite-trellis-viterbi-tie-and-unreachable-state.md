@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-finite-trellis-viterbi-tie-and-unreachable-state.json
+  precheck: pass
 id: ex-finite-trellis-viterbi-tie-and-unreachable-state
 kind: example
 title: A finite trellis with tied maxima and an unreachable high-score state
@@ -19,12 +22,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Manolis Kellis, 6.096 Algorithms for Computational Biology, Lecture 7: Gene Finding and HMMs, MIT OpenCourseWare (Spring 2005)"
@@ -45,7 +42,7 @@ Columns in the diagram are layers and arrow labels are multiplicative edge
 weights. The dashed vertex $c$ has no incoming edge, so it is unreachable.
 The proof below uses the explicit edge list and scores, not the drawing.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
 \node[circle,draw] (s) at (0,0) {$s$};
 \node[circle,draw] (a) at (2,1) {$a$};
@@ -58,7 +55,7 @@ The proof below uses the explicit edge list and scores, not the drawing.
 \draw[->] (b) -- node[below] {$3$} (t);
 \draw[->] (c) -- node[below] {$100$} (t);
 \end{tikzpicture}
-~~~
+```
 
 ## Facts & Assumptions
 

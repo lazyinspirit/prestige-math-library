@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-topologists-sine-curve-connected-not-path-connected.json
+  precheck: pass
 id: cex-topologists-sine-curve-connected-not-path-connected
 kind: counterexample
 title: "The topologist's sine curve is connected but not path connected"
@@ -24,9 +27,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: contradiction
-verification:
-  precheck: pass
-  audited: 2026-08-21
 sources:
   scraped: []
   references:
@@ -84,3 +84,28 @@ It is connected but no path in $S$ joins $(0,0)$ to $(1,\sin1)$.
 3.1 Let $\delta>0$ and put $r:=s+\tfrac12\min\{\delta,1-s\}$. Then $s<r<\min\{s+\delta,1\}$ and $x(r)>0$ by step 2.1. By [L7] and [L9], choose $0<u,v<x(r)$ with $\sin(1/u)=1$ and $\sin(1/v)=-1$. Applying [L6] to $x$ on the connected interval $[s,r]$ from [L10] gives $p,q\in(s,r)$ with $x(p)=u$ and $x(q)=v$. Because $x(p),x(q)>0$ and $\gamma$ lies in $S$, one has $y(p)=1$ and $y(q)=-1$. [step 2.1, L6, L7, L9, L10, choose, algebra]
 
 4.1 Continuity of $y$ at $s$ gives a $\delta>0$ such that $|y(t)-y(s)|<1/2$ whenever $|t-s|<\delta$. Step 3.1 supplies $p,q$ in that interval with $y(p)=1$ and $y(q)=-1$, which would imply $2=|1-(-1)|<1$ by the triangle inequality. This contradiction proves that no such path exists. Together with step 1.1, $S$ is connected but not path connected, and the claim is refuted. [step 1.1, step 1.2, step 3.1, discharge-contradiction] ∎
+
+
+## Remarks
+
+The picture separates the vertical segment $\{0\}\times[-1,1]$ from the oscillating graph. Only the graph portion $2/(9\pi)\le x\le1$ is plotted; the infinitely many oscillations for $0<x<2/(9\pi)$ are omitted. The plotted curve is a finite sampling of $y=\sin(1/x)$, not an additional path joining the graph to the vertical segment. Both ends of the vertical segment and the graph endpoint $(1,\sin1)$ belong to $S$. Connectedness and the absence of the stated path are proved above, independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=6cm,y=1.5cm]
+\draw[->,gray] (-0.03,-1.45) -- (1.12,-1.45) node[right] {$x$};
+\draw[gray] (0,-1.40) -- (0,-1.50) node[below] {$0$};
+\draw[gray] (1,-1.40) -- (1,-1.50) node[below] {$1$};
+\draw[very thick,blue] (0,-1) -- (0,1);
+\fill[blue] (0,-1) circle (1.5pt);
+\fill[blue] (0,1) circle (1.5pt);
+\fill[blue] (0,0) circle (1.5pt);
+\node[left] at (0,1) {$(0,1)$};
+\node[left] at (0,-1) {$(0,-1)$};
+\node[left] at (0,0) {$(0,0)$};
+\draw[thick,blue,domain=1:14.1371669412,samples=500,variable=\t] plot ({1/\t},{sin(\t r)});
+\fill[blue] (1,0.8414709848) circle (1.5pt);
+\node[above right] at (1,0.8414709848) {$(1,\sin1)$};
+\node at (0.58,1.35) {$y=\sin(1/x)$};
+\node[below,align=center] at (0.47,-1.95) {Only $2/(9\pi)\le x\le1$ is plotted;\\oscillations nearer $x=0$ are omitted.};
+\end{tikzpicture}
+```

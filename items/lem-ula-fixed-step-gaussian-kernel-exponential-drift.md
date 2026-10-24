@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ula-fixed-step-gaussian-kernel-exponential-drift.json
+  precheck: pass
 id: lem-ula-fixed-step-gaussian-kernel-exponential-drift
 kind: lemma
 title: ULA's Gaussian kernel satisfies an exponential drift bound
@@ -70,7 +73,7 @@ $$P_\gamma V(x):=\int V(y)P_\gamma(x,dy) \le e^{-\gamma}V(x) +e^{LK_\gamma^2/4}(
 
 [F6] A nonnegative integral is unchanged by the stated $C^1$ change of variables, and $\int_{\mathbb R}e^{-z^2}\,dz=\sqrt\pi$. [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]] [[thm-gaussian-integral]]
 
-[F7] Finite-dimensional Lebesgue measure is the finite product of one-dimensional Lebesgue measures on Borel sets, and Tonelli factors nonnegative product-measurable integrals. [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
+[F7] Finite-dimensional Lebesgue measure is the finite product of one-dimensional Lebesgue measures on Borel sets, and Tonelli factors nonnegative product-measurable integrals. [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets|Finite-dimensional Lebesgue measure agrees with the product measure on Borel sets]] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
 
 [F8] Under [A1], $U(x)\ge c\|x-x_\star\|^\alpha-a_\alpha$, where $c=\rho/(\alpha+1)>0$ and $a_\alpha$ is finite. [[lem-ula-potential-coercivity-from-radial-drift]]
 

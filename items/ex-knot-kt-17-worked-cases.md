@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-17-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-17-worked-cases
 kind: example
 title: "A (2,1)-cable of the right trefoil"
@@ -43,13 +46,7 @@ sources:
     - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"
       url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
       locator: "§1.2, essential annuli and tori in Seifert pieces, printed pp.16–23"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -59,28 +56,32 @@ Assume full AC. In the standard solid torus $V=S^1\times D^2$, let $P_{2,1}$ be 
 The first panel shows a lift of the pattern to the universal cover of the parallel torus: horizontal and vertical unit translations correspond to longitude and meridian, so the segment from $(0,0)$ to $(2,1)$ projects to the closed slope $2\lambda_V+\mu_V$. The second panel shows the exterior cut along the companion torus; its boxes are pieces, and the labels are the two regular-fiber slopes induced on their common torus. Both panels are schematic, not planar knot projections, and no proof step depends on them.
 
 ```tikz
-\begin{tikzpicture}[baseline=(current bounding box.center),scale=.82]
-  % Lift of the pattern to two longitude periods and one meridian period.
-  \draw (0,0) rectangle (2.2,1.1);
-  \draw[densely dashed] (1.1,0) -- (1.1,1.1);
-  \draw[->,very thick] (0,0) -- (2.2,1.1);
-  \node[above] at (1.1,.55) {one longitude period};
-  \node[left] at (0,.55) {one meridian period};
-  \node[below] at (1.1,0) {$2\lambda_V$};
-  \node[above left] at (0,0) {start};
-  \node[above right] at (2.2,1.1) {same point in $T^2$};
-  \node at (1.1,-.45) {slope $2\lambda_V+\mu_V$};
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+  % Lift: one coordinate unit is three drawing units horizontally,
+  % and two drawing units vertically. The endpoint remains (2,1).
+  \node at (4,8.9) {Lift of the pattern};
+  \draw (1,6) rectangle (7,8);
+  \draw[densely dashed] (4,6) -- (4,8);
+  \draw[->,very thick] (1,6) -- (7,8);
+  \node[below] at (1,5.9) {start};
+  \node[above] at (7,8.1) {same point in $T^2$};
+  \node[rotate=90] at (.45,7) {one meridian period};
+  \node[align=center] at (2.5,5.15) {one longitude\\period};
+  \node[align=center] at (5.5,5.15) {one longitude\\period};
+  \node at (4,4.35) {slope $2\lambda_V+\mu_V$};
 
-  % The JSJ cut: the shared vertical edge represents the companion torus.
-  \draw (3.5,0) rectangle (4.9,1.1);
-  \draw (4.9,0) rectangle (6.3,1.1);
-  \node at (4.2,.72) {$E_K$};
-  \node at (4.2,.36) {$f_K=\lambda+6\mu$};
-  \node at (5.6,.72) {$X_{P_{2,1}}$};
-  \node at (5.6,.36) {$f_P=2\lambda+\mu$};
-  \node[above] at (4.9,1.1) {$T_c$};
-  \node[below] at (5.6,0) {$\partial E_{P_{2,1}(K)}$};
-  \node at (4.9,-.45) {cut and glue along $T_c$};
+  % The shared vertical edge represents only the companion torus;
+  % the satellite boundary belongs to the cable piece.
+  \node at (4,3.5) {Exterior cut along the companion torus};
+  \draw (0,0) rectangle (4,2.2);
+  \draw (4,0) rectangle (8,2.2);
+  \node at (2,1.65) {$E_K$};
+  \node at (2,.75) {$f_K=\lambda+6\mu$};
+  \node at (6,1.65) {$X_{P_{2,1}}$};
+  \node at (6,.75) {$f_P=2\lambda+\mu$};
+  \node[above] at (4,2.35) {$T_c$};
+  \node[below] at (6,-.15) {$\partial E_{P_{2,1}(K)}$};
+  \node at (4,-1.15) {cut and glue along $T_c$};
 \end{tikzpicture}
 ```
 

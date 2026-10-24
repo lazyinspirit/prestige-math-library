@@ -1,0 +1,73 @@
+{
+  "id": "ex-cg-reflection-subgroups-parabolic-and-not",
+  "agent": "/root/rendering_repair_coordinator/cox_028",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution historical tile 02 visibly prints $S_4$ in the uppercase technique banner, while nearby mathematics is typeset. Current source matches frozen source and supplies inline math in the renderer plain-text technique field.",
+      "action": "Replaced only the technique-banner $S_4$ with equivalent Unicode S₄.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use Unicode S₄ in the proof-technique banner to work around its plain-text rendering. All mathematical statements and proof text remain unchanged.",
+  "source_lines_after": [
+    {
+      "line": 101,
+      "text": "**Proof technique:** direct finite computations in S₄ and reduced-word arithmetic in the infinite dihedral group."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Technique banners remain plain-text renderer fields; application code was outside scope."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-cg-reflection-subgroups-parabolic-and-not.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-cg-reflection-subgroups-parabolic-and-not.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-cg-reflection-subgroups-parabolic-and-not.md",
+            "item_id": "ex-cg-reflection-subgroups-parabolic-and-not",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-cg-reflection-subgroups-parabolic-and-not.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/coxeter-groups/screenshots/ex-cg-reflection-subgroups-parabolic-and-not--02.png",
+    "original_tile_sha256": "f85b530f4619f403efb6ebfa0a4bd75ddb9b748ba7c7b67dc7062bbeebeb0ce6",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cox028/manifest.json",
+    "preview_source_sha256": "f46d8e269f51daa634a6f19275a520fd1c14b6c98c05a60ec3eeb38792406177",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/cox028/screenshots/ex-cg-reflection-subgroups-parabolic-and-not--02.png",
+    "result": "Inspected standalone original-resolution fresh tile 02: technique banner displays S₄ without literal dollar signs or underscore.",
+    "limitations": "Local ItemBody preview; manifest records 16 unrelated reference-map parse diagnostics and does not assert production-route coverage."
+  },
+  "protected_metadata_unchanged": true
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-winding-numbers-of-a-keyhole-contour.json
+  precheck: pass
 id: ex-winding-numbers-of-a-keyhole-contour
 kind: example
 title: "The winding numbers of a keyhole contour about the origin and about an excluded point"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -77,3 +73,32 @@ $\Gamma^\ast$ and no index is asserted at any of its points.
 2.1 $\Gamma$ is a cycle: by [L3] the two closed circles contribute nothing to $\partial\Gamma$, while $\sigma_1$ contributes $+1$ at $R$ and $-1$ at $\varepsilon$ and $\sigma_2$ contributes $+1$ at $\varepsilon$ and $-1$ at $R$, so every value of $\partial\Gamma$ is $0$. Its trace is the union named in the statement, by step 1.1 and [L1]. [step 1.1, L1, L3]
 
 3.1 For $z\notin\Gamma^\ast$, [L1] and [L4] split the index into the four one-term contributions, of which the two segment terms cancel by step 1.2; so $n(\Gamma,z)=n(C_R,z)+n(C_\varepsilon^-,z)$, which by [L2] is $1+(-1)=0$ for $|z|<\varepsilon$, $1+0=1$ for $\varepsilon<|z|<R$, and $0+0=0$ for $|z|>R$. The same three values are what [L6] gives for the annulus cycle built from the positively oriented circles of radii $\varepsilon$ and $R$ about $0$; that chain is a different list from $\Gamma$, and what is asserted here is only that the two index functions agree off the traces. [step 1.2, step 2.1, L1, L2, L4, L6] ∎
+
+
+## Remarks
+
+The sketch shows the common radial trace only once, with opposite arrows for its two traversals. Every contour has chain coefficient $1$; the negative contribution of $C_\varepsilon^-$ comes from its clockwise orientation. The displayed indices apply only off $\Gamma^\ast$, including off the radial segment. The verification above is independent of the sketch.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\fill[blue!12] (0,0) circle (2.4);
+\fill[white] (0,0) circle (0.85);
+\draw[thick] (0,0) circle (2.4);
+\draw[thick] (0,0) circle (0.85);
+\draw[thick,->] (120:2.4) arc (120:160:2.4);
+\draw[thick,->] (155:0.85) arc (155:105:0.85);
+\draw[thick] (0.85,0) -- (2.4,0);
+\draw[thick,->] (0.95,0) -- (1.5,0);
+\draw[thick,->] (2.3,0) -- (1.75,0);
+\node at (1.55,0.33) {$\sigma_1\ \rightarrow$};
+\node at (1.55,-0.33) {$\leftarrow\ \sigma_2$};
+\node[below] at (0.85,-0.45) {$\varepsilon$};
+\node[right] at (2.4,0) {$R$};
+\node at (-1.55,-0.25) {$n=1$};
+\node at (0,-0.15) {$n=0$};
+\node at (3.1,1.4) {$n=0$};
+\node at (-1.2,2.35) {$C_R$};
+\node at (-0.65,1.15) {$C_\varepsilon^-$};
+\node at (0,-2.9) {$n=n(\Gamma,z),\qquad z\notin\Gamma^\ast$};
+\end{tikzpicture}
+```

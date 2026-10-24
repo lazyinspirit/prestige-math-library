@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-quiver-representation-stacks-and-exact-sequence-correspondences.json
+  precheck: n/a
 id: def-quiver-representation-stacks-and-exact-sequence-correspondences
 kind: definition
 title: "Representation stacks and exact-sequence correspondences of a finite quiver"
@@ -14,12 +17,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Maxim Kontsevich and Yan Soibelman, Cohomological Hall algebra, exponential Hodge structures and motivic Donaldson-Thomas invariants, §2.1–2.2"
@@ -84,12 +81,14 @@ The block form shows that the off-diagonal extension parameters are the
 coordinates $C_h$; it does not assert that extension classes are a vector
 space after quotienting by automorphisms.
 
-~~~tikzcd
+```tikzcd
+\begin{tikzcd}[font=\Large, column sep=large]
 \mathfrak M_{\mathbf a}\times\mathfrak M_{\mathbf b}
 & \mathfrak E_{\mathbf a,\mathbf b}
-  \arrow[l,"q"'] \arrow[r,"p"]
+  \arrow[l,"{\textstyle q}"'] \arrow[r,"{\textstyle p}"]
 & \mathfrak M_{\mathbf a+\mathbf b}
-~~~
+\end{tikzcd}
+```
 
 The diagram records only the two maps just defined; it supplies no equality of
 maps or algebraic operation by itself.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-geometric-and-configuration-braid-models-are-canonically-isomorphic.json
+  precheck: pass
 id: thm-geometric-and-configuration-braid-models-are-canonically-isomorphic
 kind: theorem
 title: "The geometric and configuration braid models agree at the fixed base configuration"
@@ -22,13 +25,7 @@ sources:
       url: https://arxiv.org/pdf/1010.0321
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5"
       url: https://www.math.columbia.edu/~jb/Handbook-21.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -74,3 +71,27 @@ The common tuple $Q$ and all coordinate paths are specified. The inherited isomo
 1.3 *The endpoint square.* Equation [L4] states exactly that the diagram with top map $\Phi$, vertical maps $\pi_{\mathrm{geo}}$ and $\pi_{\mathrm{conf}}$, and bottom map $\operatorname{id}_{S_n}$ commutes. Thus the isomorphism preserves endpoint permutations. [L4]
 
 2.1 *Degenerate strand counts.* The supplied isomorphism and both component claims [L1]–[L4] apply for every $n\ge0$, including the empty braid at $n=0$ and the trivial permutation targets at $n=1$. Hence the packaged theorem and its pure restriction include these cases. [L1, L2, L3, L4] ∎
+
+## Remarks
+
+The two commuting squares display the pure subgroup and the endpoint maps at the same fixed base tuple $Q$. The left upper vertical map is subgroup inclusion; $p_*$ on the right has image $\ker\pi_{\mathrm{conf}}$. The horizontal maps $\Phi$ and $\Psi$ are isomorphisms.
+
+```tikz
+\begin{tikzpicture}[>=stealth,every node/.style={font=\large}]
+\node (P) at (0,3.6) {$G_n^{\mathrm{pure}}$};
+\node (O) at (5,3.6) {$PB_n$};
+\node (G) at (0,1.8) {$G_n$};
+\node (B) at (5,1.8) {$B_n^{\mathrm{conf}}$};
+\node (SL) at (0,0) {$S_n$};
+\node (SR) at (5,0) {$S_n$};
+\draw[->] (P) -- node[above] {$\Psi\;\cong$} (O);
+\draw[->] (P) -- node[left] {$\mathrm{incl.}$} (G);
+\draw[->] (O) -- node[right] {$p_*$} (B);
+\draw[->] (G) -- node[above] {$\Phi\;\cong$} (B);
+\draw[->] (G) -- node[left] {$\pi_{\mathrm{geo}}$} (SL);
+\draw[->] (B) -- node[right] {$\pi_{\mathrm{conf}}$} (SR);
+\draw[->] (SL) -- node[below] {$\mathrm{id}_{S_n}$} (SR);
+\end{tikzpicture}
+```
+
+The upper square says $p_*\circ\Psi=\Phi|_{G_n^{\mathrm{pure}}}$, and the lower square says $\pi_{\mathrm{conf}}\circ\Phi=\pi_{\mathrm{geo}}$. Both use inverse-loop slicing: the strand graphs $(z_j(t),t)$ are read from height $0$ to $1$, giving the raw slice $S(\beta)(t)=[(z_1(t),\ldots,z_n(t))]$, whereas $\Phi([\beta])$ is the inverse of its included loop class. For a pure braid the ordered tuple is a loop at $Q$, and $\Psi$ uses its inverse class as well. This inversion matches the local stacking convention: $\beta$ lies below $\gamma$ in $\gamma\star\beta$, so raw slicing traverses $S(\beta)$ before $S(\gamma)$. The figure summarizes the maps in the statement; the proof above is independent of it.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-reflection-subgroups-parabolic-and-not.json
+  precheck: pass
 id: ex-cg-reflection-subgroups-parabolic-and-not
 kind: example
 title: "Reflection subgroups that are parabolic but not standard, and one that is not parabolic"
@@ -18,13 +21,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   scraped: []
   references:
@@ -98,7 +94,7 @@ others are the two computations above.
 
 ## Verification
 
-**Proof technique:** direct finite computations in $S_4$ and reduced-word arithmetic in the infinite dihedral group.
+**Proof technique:** direct finite computations in S₄ and reduced-word arithmetic in the infinite dihedral group.
 
 1.1 *The subgroup $H$.* The one-line displays $(1\,3)=3214$ and $(2\,4)=1432$ record that these permutations swap $1\leftrightarrow3$ and $2\leftrightarrow4$ respectively and fix the remaining points. Both are involutions with disjoint supports, so they commute and $H=\{1,(1\,3),(2\,4),(1\,3)(2\,4)\}$, of order $4$; the product is computed by applying the right factor first, $(1\,3)(2\,4)\colon1\mapsto3$, $2\mapsto4$, $3\mapsto1$, $4\mapsto2$, hence $(1\,3)(2\,4)=3412$ and $H=\{1234,1432,3214,3412\}$. Further $s_2s_1s_2=(2\,3)(1\,2)(2\,3)=(1\,3)$ and $s_2s_3s_2=(2\,4)$, as direct computations in cycle notation; the two generators $s_1,s_3$ commute, so $W_{\{s_1,s_3\}}=\{1,s_1,s_3,s_1s_3\}=\{1234,2134,1243,2143\}$, and conjugating by $s_2$ gives $H=\langle s_2s_1s_2,\,s_2s_3s_2\rangle=s_2W_{\{s_1,s_3\}}s_2$, so $H$ is a parabolic subgroup by [F2]. Finally $w=(1\,2)(3\,4)=2143$ satisfies $w(1)=2$, $w(3)=4$ and $w^{-1}(2)=1$, $w^{-1}(4)=3$, so $w(1\,3)w^{-1}$ swaps $2$ and $4$ and fixes $1,3$, that is, $w(1\,3)w^{-1}=(2\,4)$. [F1, F2, algebra]
 

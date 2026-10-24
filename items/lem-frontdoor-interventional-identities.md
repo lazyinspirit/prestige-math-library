@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-frontdoor-interventional-identities.json
+  precheck: pass
 id: lem-frontdoor-interventional-identities
 kind: lemma
 title: "Counterfactual identities under the front-door conditions"
@@ -26,12 +29,7 @@ sources:
       url: "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
     - title: "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Point 7.4, p. 101"
       url: "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
+
 ---
 
 ## Statement
@@ -87,3 +85,55 @@ response.
 2.3 Adjoin all exogenous coordinates as independent root vertices. In the factual law, no strict descendant of $M$ is an ancestor of $(M,A,U_{I_Y})$: it cannot be an ancestor of an exogenous root, and if it were an ancestor of $A$, the directed path from $M$ to $A$ would remain in $G_{\underline A}$ and contradict (ii). Reverse-topological integration therefore marginalizes all other vertices and leaves the joint law of $(M,A,U_{I_Y})$ factored on its ancestral subgraph, which has no outgoing edge from $M$. This is a subgraph of the expanded mutilated graph in step 1.4, so the separation there still holds. The global Markov implication [F2], interpreted by the conditional-independence definition [F4], gives $M\perp U_{I_Y}\mid A$. [F1, F2, F4, step 1.4, given]
 
 3.1 In $G_{\overline M}$ there is no directed path from $A$ to $Y$, since every directed $A$-to-$Y$ path in $G$ contains $M$ and arrows into $M$ were deleted. With $M$ fixed, changing the equation at $A$ therefore cannot change $Y$ by recursive substitution: any directed route by which $A$ could affect $Y$ would have to reach the fixed node $M$. Under $do(A=a)$, the mediator equals $M^a$. Replacing the mediator equation by that same realized value leaves every other equation unchanged; the no-directed-path argument shows that leaving $A$ factual has no further effect on $Y$. Thus $Y^a=Y^{M^a}$. [F1, given, induction] ∎
+
+
+## Remarks
+
+The following example illustrates the three graph conditions; it is not a
+restriction on the full DAG allowed in the statement. Here $L$ is a latent
+endogenous common cause of the observed vertices $A$ and $Y$, distinct from
+the exogenous coordinates $U_v$. The panels show the full graph $G$ and the
+two graphs obtained by deleting arrows out of $A$ or out of $M$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node at (1.2,2.1) {$G$};
+\node (a) at (0,0) {$A$};
+\node (m) at (1.2,0) {$M$};
+\node (y) at (2.4,0) {$Y$};
+\node (l) at (1.2,1.3) {$L$};
+\draw[->] (a) -- (m);
+\draw[->] (m) -- (y);
+\draw[->] (l) -- (a);
+\draw[->] (l) -- (y);
+\begin{scope}[xshift=4cm]
+\node at (1.2,2.1) {$G_{\underline A}$};
+\node (aa) at (0,0) {$A$};
+\node (mm) at (1.2,0) {$M$};
+\node (yy) at (2.4,0) {$Y$};
+\node (ll) at (1.2,1.3) {$L$};
+\draw[->] (mm) -- (yy);
+\draw[->] (ll) -- (aa);
+\draw[->] (ll) -- (yy);
+\end{scope}
+\begin{scope}[xshift=8cm]
+\node at (1.2,2.1) {$G_{\underline M}$};
+\node (aaa) at (0,0) {$A$};
+\node (mmm) at (1.2,0) {$M$};
+\node (yyy) at (2.4,0) {$Y$};
+\node (lll) at (1.2,1.3) {$L$};
+\draw[->] (aaa) -- (mmm);
+\draw[->] (lll) -- (aaa);
+\draw[->] (lll) -- (yyy);
+\end{scope}
+\end{tikzpicture}
+```
+
+In the left panel the only directed path from $A$ to $Y$ is
+$A\to M\to Y$, so it contains $M$. In the middle panel the only path from
+$A$ to $M$ is $A\leftarrow L\to Y\leftarrow M$; its collider $Y$ blocks
+it given the empty set. In the right panel the only path from $M$ to $Y$
+is $M\leftarrow A\leftarrow L\to Y$; conditioning on its noncollider
+$A$ blocks it. These are exactly conditions (i), (ii), and (iii) for this
+example, by the local definition of d-separation. The proof above treats
+the general full DAG independently of this illustration.

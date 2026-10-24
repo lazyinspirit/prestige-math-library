@@ -1,0 +1,114 @@
+{
+  "id": "lem-positive-minimal-dags-have-a-conditioned-reversal",
+  "agent": "/root/rendering_repair_coordinator/slcm_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Independently viewed all three frozen tiles at original resolution and read complete frozen/current carrier. Tile 03 prints the entire TikZ source literally; the tilde fence does not trigger this native renderer. The diagram source accurately records the incident-edge classes defined in proof step 2.1.",
+      "action": "Changed the opening/closing tilde fences to native-recognized backtick fences; compiled and viewed the native local preview.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The first actual native compiled preview exposed overlapping circles for c/y/w in G and c/d/w in G prime. Standalone original-resolution tile 03 confirmed actual circle overlap, rather than the multi-image viewer artifact.",
+      "action": "Increased vertical row spacing from 1 to 1.6 and lowered graph captions to -2.5; preserved every node label and all seven arrows.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Enabled native TikZ rendering and separated overlapping node circles in the existing incident-edge schematic.",
+  "source_lines_after": {
+    "diagram": [
+      105,
+      128
+    ],
+    "fence_lines": [
+      105,
+      128
+    ],
+    "layout_lines": [
+      107,
+      109,
+      114,
+      116,
+      118,
+      120,
+      121,
+      126
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Vertices l, c in Z, y in Y, w in W, d in D, e in E; schematic representatives only, not an assertion that all classes must be nonempty.",
+      "check": "Compared labels against the pairwise disjoint incident classes defined in step 2.1; no edge between representatives other than the listed incident edges is asserted."
+    },
+    {
+      "relation": "G: c→l, y→l, w→l.",
+      "justification": "Step 2.1 gives pa_G(l)=Z union Y union W. Final rendered left panel has four nodes and precisely these three arrows, all pointing into l."
+    },
+    {
+      "relation": "G prime: c→l, d→l, l→y, l→e; w is nonadjacent to l.",
+      "justification": "Step 2.1 gives pa_Gprime(l)=Z union D, ch_Gprime(l)=Y union E, and W excludes both Z and Y. Final rendered right panel has six nodes, four arrows, and isolated w within the incident-only schematic. Arrows terminate on the correct head nodes."
+    },
+    {
+      "relation": "Reversal y→l in G and l→y in G prime.",
+      "justification": "The two depicted orientations agree with y in Y as defined in step 2.1 and selected in steps 7.1–8.1; no path/conditioning assertion is added."
+    },
+    {
+      "relation": "No cycles, crossings or closure edges are asserted.",
+      "justification": "Each panel is an incident-edge schematic; final native view confirms left degrees (1,1,1,3) and right degrees c=1,d=1,w=0,l=4,y=1,e=1. Every edge is an explicit segment. The existing finite path proof remains independent of the diagram."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-positive-minimal-dags-have-a-conditioned-reversal.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-positive-minimal-dags-have-a-conditioned-reversal.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-positive-minimal-dags-have-a-conditioned-reversal.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    }
+  ],
+  "visual_check": {
+    "preview": "research/math-library-rendering-repairs-2026-10-23/previews/slcm_007-final",
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-positive-minimal-dags-have-a-conditioned-reversal --out research/math-library-rendering-repairs-2026-10-23/previews/slcm_007-final",
+    "exit_code": 0,
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "viewed": "Standalone original-resolution final tile 03: all labels, seven arrows, and graph captions visible without overlap.",
+    "limitations": "Local actual ItemBody/SSR TikZ preview only; no HTTP or production-route check."
+  },
+  "before_raw_sha256": "115934522290dd78880f324b2da846c9326dcc209b56daa1e3f220ebe4eeb6be",
+  "after_raw_sha256": "28ea256d1a0733e666565757504bf3dca10fad036fe3884bb044765d9babe285",
+  "publication_status_preserved": true,
+  "remaining_issues": []
+}

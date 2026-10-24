@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-variation-of-constants-formula.json
+  precheck: pass
 id: thm-variation-of-constants-formula
 kind: theorem
 title: "Variation of constants for the inhomogeneous abstract Cauchy problem"
@@ -45,8 +48,7 @@ sources:
     - title: "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)"
       url: "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf"
       locator: "Chapter II Section 6, Propositions 6.2-6.4, printed pp. 145-147"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -67,7 +69,7 @@ Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\ge0}$ be a st
 
 ## Proof
 
-**Proof technique:** direct: the product rule for $s\mapsto T(t-s)u(s)$ gives Duhamel's formula; the integral solution identity is verified for simple forcing and transferred by closedness; uniqueness follows from a vanishing integral.
+**Proof technique:** direct: the product rule for the curve obtained by applying the semigroup at time t minus s to u(s) gives Duhamel's formula; the integral solution identity is verified for simple forcing and transferred by closedness; uniqueness follows from a vanishing integral.
 
 1.1 **Duhamel rigidity.** Let $u$ be a classical solution and fix $t\in[0,T_0]$. The curve $g(s):=T(t-s)u(s)$ on $[0,t]$ is differentiable: $g'(s)=T(t-s)u'(s)-AT(t-s)u(s)=T(t-s)\bigl(u'(s)-Au(s)\bigr)=T(t-s)f(s)$, where $u(s)\in D(A)$ and [F2] was used. The classical conditions make $u\prime-Au$ continuous on $[0,T_0]$, so $f$ agrees on the interior with this continuous extension. Its product with $T(t-s)$ is continuous: an increment is bounded by $K\|f(s)-f(s_0)\|+\|(T(t-s)-T(t-s_0))f(s_0)\|$, which tends to zero. Thus $g\prime$ extends continuously to the endpoints, and by the fundamental theorem of calculus [F2], $u(t)=g(t)=g(0)+\int_0^tg'(s)\,ds=T(t)x+\int_0^tT(t-s)f(s)\,ds$. [F2]
 

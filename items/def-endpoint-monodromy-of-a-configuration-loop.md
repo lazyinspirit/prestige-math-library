@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-endpoint-monodromy-of-a-configuration-loop.json
+  precheck: pass
 id: def-endpoint-monodromy-of-a-configuration-loop
 kind: definition
 title: "Endpoint monodromy of an unordered configuration loop as a permutation of the labels"
@@ -29,9 +32,7 @@ sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 1.1-1.3 and 2.1, printed pp. 3-6, 11-13"
       url: "https://arxiv.org/pdf/1010.0321"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Definition
@@ -127,3 +128,38 @@ concerns the one-point space $C_0(D^2)$.
 3.1 *The label form is an antihomomorphism.* For based loops $\alpha,\beta$ at $[q]$, step 1.1 gives $e_{\alpha\beta}=\sigma_{\alpha\beta}^{-1}$ and $e_\alpha=\sigma_\alpha^{-1}$, $e_\beta=\sigma_\beta^{-1}$; by step 2.2 and the group law $(\sigma_\alpha\sigma_\beta)^{-1}=\sigma_\beta^{-1}\sigma_\alpha^{-1}$ of [L3], $$e_{\alpha\beta}=\sigma_\beta^{-1}\sigma_\alpha^{-1}=e_\beta\circ e_\alpha$$ in the composition convention of $S_n$. Thus the endpoint record $e$ reverses the order of the product, while $\pi=e^{-1}$ does not. [step 1.1, step 2.2, L3]
 
 4.1 *Conclusion.* Steps 1.1, 2.1 and 2.2 show that $\pi([\alpha])=\sigma_\alpha=e_\alpha^{-1}$ is a well-defined group homomorphism $B_n^{\mathrm{conf}}\to S_n$, step 3.1 records that the label form $e$ itself is an antihomomorphism, and step 2.3 identifies $\pi$ with the published covering monodromy at the element $q$. For $n\le1$, $S_n$ is trivial and $\pi$ is trivially a homomorphism. [step 1.1, step 2.1, step 2.2, step 3.1, step 2.3, L6] ∎
+
+
+## Remarks
+
+The picture separates the lifted path from the loop it covers. The two lower
+endpoints are the same basepoint $[q]$; thus the lower path is a loop, even
+though its endpoints are drawn twice. The upper endpoints need not be distinct.
+The arrows labeled $p$ show the endpoint projections, while the whole paths
+satisfy $p\circ\widetilde\alpha=\alpha$.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1.2cm,>=stealth, every node/.style={font=\large}]
+  \node (q) at (0,2) {$q$};
+  \node (end) at (5,2) {$\sigma_\alpha\cdot q$};
+  \node (base0) at (0,0) {$[q]$};
+  \node (base1) at (5,0) {$[q]$};
+  \node[anchor=east] at (-0.8,2) {$F_n(D^2)$};
+  \node[anchor=east] at (-0.8,0) {$C_n(D^2)$};
+  \draw[->] (q) to[bend left=15] node[above] {$\widetilde\alpha$} (end);
+  \draw[->] (base0) to[bend right=15] node[below] {$\alpha$} (base1);
+  \draw[->] (q) -- node[left] {$p$} (base0);
+  \draw[->] (end) -- node[right] {$p$} (base1);
+\end{tikzpicture}
+```
+
+The endpoint gives $q\cdot[\alpha]=\sigma_\alpha\cdot q$, so the homomorphism
+$\pi:B_n^{\mathrm{conf}}\to S_n$ assigns $[\alpha]\mapsto\sigma_\alpha$,
+whereas the coordinate record is $e_\alpha=\sigma_\alpha^{-1}$ under the
+stated label identification. For the product that traverses $\alpha$ first
+and $\beta$ second, step 2.2 lifts the second part as
+$\sigma_\alpha\cdot\widetilde\beta$, giving endpoint
+$(\sigma_\alpha\sigma_\beta)\cdot q$ and hence
+$e_{\alpha\beta}=e_\beta\circ e_\alpha$. The picture specifies no strand
+crossings or geometric shape for these paths; the proof above is independent
+of it.

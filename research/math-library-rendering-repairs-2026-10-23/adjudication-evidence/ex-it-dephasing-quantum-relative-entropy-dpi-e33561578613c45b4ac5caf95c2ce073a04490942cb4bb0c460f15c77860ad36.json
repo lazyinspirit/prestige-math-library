@@ -1,0 +1,105 @@
+{
+  "id": "ex-it-dephasing-quantum-relative-entropy-dpi",
+  "agent": "/root/rendering_repair_coordinator/info_001",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Both original-resolution flagged tiles were independently viewed. Tile 01 and the tile-02 overlap show literal center/tikzpicture commands in prose; the renderer requires a fenced tikz block. The schematic itself correctly depicts one operator wire through dephasing, with no commutativity assertion.",
+      "action": "Replace the unsupported center wrapper with a native backtick tikz fence, outside Facts and Proof; preserve all TikZ commands and the labels X, Delta, Delta(X).",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Original tile 01 visibly prints S^*S in the inherited F8 link title, rather than rendering its superscript. The supplier title contains literal S^*S.",
+      "action": "Use the exact full inherited title as a local explicit wikilink label, adding math delimiters around S^*S only; supplier unchanged.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Fenced the existing one-wire TikZ schematic and rendered the mathematical expression in the F8 reference label. No diagram geometry, mathematical statement, proof, frontmatter, or publication status changed.",
+  "source_lines_after": [
+    65,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "H=C^2 with ordered orthonormal basis |0>,|1>; X is an arbitrary element of L(H)=M_2(C). Both input and output wire carry operators on the same two-dimensional H, not a state vector or two qubits.",
+      "maps": "The box is Delta:L(H)->L(H), Delta(X)=P0 X P0+P1 X P1, with Pj=|j><j|, each a 2x2 projection. For X=[[a,b],[c,d]], Delta(X)=[[a,0],[0,d]].",
+      "relations": "The single left-to-right wire reads X -> Delta -> Delta(X). There is no second wire, tensor-product output, inverse arrow, or asserted commuting square.",
+      "local_justification": "Statement defines Delta; F3 fixes the qubit basis. Proof step 1.1 establishes linearity, positivity of every ancillary amplification and trace preservation via P0+P1=I and trace cyclicity, so the schematic denotes the actual defined channel."
+    },
+    {
+      "relations": "For rho=|+><+|, Delta(rho)=I/2 and Delta(sigma)=sigma; D before is (1/2)ln(16/3), after (1/2)ln(4/3). Orthogonal plus/minus projections have failed input support inclusion and identical dephased output I/2.",
+      "local_justification": "Independently checked 2x2 diagonal entries and the logarithmic sums in steps 2.1 and 3.1 against the support-sensitive local relative-entropy definition. Difference of finite entropies is ln 2>0. The full rigorous channel and DPI-example verification remains in steps 1.1\u20133.1 and does not rely on the figure."
+    }
+  ],
+  "before_raw_sha256": "f75b1f004f62aebb77b46aeff9505a23c4ad253e886941d3c709ff4005a926b9",
+  "after_raw_sha256": "4e44f3db6c4b410e041c321aaef2052aa0cef24985f6dd24b23c2a4a1e5b99bd",
+  "status_preserved": "Frontmatter byte-for-byte identical; status remains published.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-it-dephasing-quantum-relative-entropy-dpi.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-info-001-fresh\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs tools/precheck.mts items/ex-it-dephasing-quantum-relative-entropy-dpi.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-it-dephasing-quantum-relative-entropy-dpi.md",
+            "item_id": "ex-it-dephasing-quantum-relative-entropy-dpi",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-it-dephasing-quantum-relative-entropy-dpi.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-info-001-native-final\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-it-dephasing-quantum-relative-entropy-dpi --out research/math-library-rendering-repairs-2026-10-23/info-001-final-native-preview",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 32
+      },
+      "native_compile": "Unique fresh repo-local TMPDIR forced native TikZ compilation. Capture receipt: tikz_count=1, katex_count=54, diagram_failures=[], katex_errors=[].",
+      "visual_inspection": "Original-resolution final tiles 01 and 02 viewed independently. The figure has its X input, Delta box and Delta(X) output, two rightward arrows and compact readable labels; no confirmed clipping or overlap. No scaling or layout change warranted. F8 now renders the superscript; proof is unchanged."
+    }
+  ],
+  "preview_directory": "research/math-library-rendering-repairs-2026-10-23/info-001-final-native-preview",
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview with blocked external requests; not production-route, metadata footer or whole-item audit coverage. Unrelated reference-map parse diagnostics are recorded by the preview and outside assigned scope."
+  ],
+  "completed_at": "2026-10-23T18:25:47.070885+00:00"
+}

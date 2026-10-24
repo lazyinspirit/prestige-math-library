@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-subnormal-and-overflow-range-failure.json
+  precheck: pass
 id: ex-subnormal-and-overflow-range-failure
 kind: example
 title: "Subnormal and overflow branches return range failure"
@@ -16,8 +19,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Fundamentals of Numerical Computation, floating-point arithmetic"
@@ -28,7 +29,7 @@ sources:
 
 ## Example
 
-Use binary64 and the no-subnormal success policy. Put N_min=2^-1022 and the least positive subnormal 2^-1074. Inputs N_min and -(N_min+2^-1074) are normal, but their exact sum is -2^-1074, so the only tree sum in pairwise summation returns range-failure. Also N_max+N_max overflows at the root and returns range-failure. These are policy branches, not claims that IEEE hardware lacks gradual underflow.
+Use binary64 and the no-subnormal success policy. Put $N_{\min}=2^{-1022}$ and the least positive subnormal $2^{-1074}$. Inputs $N_{\min}$ and $-(N_{\min}+2^{-1074})$ are normal, but their exact sum is $-2^{-1074}$, so the only tree sum in pairwise summation returns range-failure. Also $N_{\max}+N_{\max}$ overflows at the root and returns range-failure. These are policy branches, not claims that IEEE hardware lacks gradual underflow.
 
 ## Facts & Assumptions
 **Given:** binary64 normal endpoints and the no-subnormal range rule.
@@ -39,6 +40,6 @@ Use binary64 and the no-subnormal success policy. Put N_min=2^-1022 and the leas
 
 ## Verification
 
-1.1 The exact first sum is 2^-1022-(2^-1022+2^-1074)=-2^-1074, a nonzero subnormal; [F1] therefore returns range-failure. [given, F1, algebra]
+1.1 The exact first sum is $2^{-1022}-(2^{-1022}+2^{-1074})=-2^{-1074}$, a nonzero subnormal; [F1] therefore returns range-failure. [given, F1, algebra]
 
-2.1 The exact sum N_max+N_max exceeds the largest finite normal magnitude, so the root triggers the same status under [F2]. [given, F1, F2, algebra] ∎
+2.1 The exact sum $N_{\max}+N_{\max}$ exceeds the largest finite normal magnitude, so the root triggers the same status under [F2]. [given, F1, F2, algebra] ∎

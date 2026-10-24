@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-rational-cherednik-algebra.json
+  precheck: n/a
 id: def-rational-cherednik-algebra
 kind: definition
-title: "The rational Cherednik algebra H_{t,c}(W,h)"
+title: "The rational Cherednik algebra $H_{t,c}(W,h)$"
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -23,8 +26,7 @@ sources:
     - title: "Victor Ginzburg, Nicolas Guay, Eric Opdam, and Raphael Rouquier, On the category O for rational Cherednik algebras"
       url: "https://arxiv.org/pdf/math/0212036"
       locator: "§3.1, PDF pp. 9–10."
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition

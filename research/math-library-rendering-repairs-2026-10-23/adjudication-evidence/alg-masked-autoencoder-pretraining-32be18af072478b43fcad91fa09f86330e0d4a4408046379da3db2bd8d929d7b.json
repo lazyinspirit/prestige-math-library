@@ -1,0 +1,74 @@
+{
+  "id": "alg-masked-autoencoder-pretraining",
+  "agent": "/root/rendering_repair_coordinator/rlgm_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged PNG shows actual touching/overlapping mask-sampling, encoder and restoration boxes and their labels. The visible-subset edge label also runs into those nodes. This persists within the standalone figure area and is not the multi-image viewer artifact. Other pipeline nodes are retained even where the original report overstated their overlap.",
+      "action": "Changed only seven node coordinates to separate all boxes and the visible-subset label, retaining all eight objects, all labels, and all seven directed edges.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Coordinate-only widening of the original one-row pipeline and spacing of the lower comparison branch. No diagram relations changed.",
+  "source_lines_after": [
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Input image x in (R^q)^M; visible set V of size k; one encoded token at each visible position; ordered M-slot restored sequence; decoder predictions in (R^q)^M; masked loss and clean targets.",
+      "justification": "Complete local Definition and instructions 1\u20133; def-reconstruction-autoencoder Definition specifies these same input, latent-token and output conventions. def-feedforward-neural-network supplies only finite acyclic network computation and does not justify any added architecture claim."
+    },
+    {
+      "relation": "input \u2192 uniform-visible sampling \u2192 encoder; visible subset label belongs to sampling-to-encoder edge.",
+      "justification": "Instruction 1 samples V_t uniformly, independently of the image choice; instruction 2 feeds only visible patch values at V_t. The Definition explicitly excludes encoder mask tokens. No new claim about attention, embeddings or network architecture is made."
+    },
+    {
+      "relation": "encoder \u2192 learned-token insertion \u2192 decoder \u2192 predictions at all positions.",
+      "justification": "Instruction 2 restores original order, inserts the SAME shared learned vector m at every missing position, supplies all position indices and produces predictions for every j in [M]. Existing plural label denotes repeated occurrences of shared m; coordinates do not modify this convention."
+    },
+    {
+      "relation": "predictions \u2192 masked-patch MSE \u2190 clean targets at missing positions.",
+      "justification": "Instruction 3 sums only j in [M]\\V_t with normalization 1/((M-k)q) and compares predictions against T(x_j^(I_t)). The unchanged clean-target label means the selected raw or normalized target T of the uncorrupted missing patch, as the complete Definition specifies; it does not assert raw-only targets or loss on visible indices."
+    },
+    {
+      "relation": "No correctness, convergence or semantic-sufficiency conclusion is asserted by the arrows.",
+      "justification": "Unchanged final Definition paragraph limits the procedure to finite stochastic updates, and unchanged introductory diagram prose expressly makes all instructions and any proof/property independent of the illustration."
+    }
+  ],
+  "preservation_check": "Compared current and frozen bytes: everything outside the TikZ block is identical; after replacing node-coordinate substrings, entire files are identical. In particular frontmatter/status, Definition mathematics, numbered procedure, references and dependencies are unchanged.",
+  "before_raw_sha256": "545a03e7ad1c817ef72663ae3b7413ce38d07fa3f1a02eb9ed49111890450597",
+  "after_raw_sha256": "9a5b74da10e51ed36fd8242b683b3ca1420eaa2e5d9a561318ade7dd7bd2e0d8",
+  "checks": {
+    "evidence": "research/math-library-rendering-repairs-2026-10-23/checks/rlgm_001/scoped-checks.json",
+    "precheck": "exit 0; files 1, checked proofs 0, failed 0; algorithm not-applicable",
+    "rendercheck": "exit 0; checked 1; errors [], warnings []",
+    "proof_layout": "exit 0; proof-layout: 1 items, 0 steps, 0 defects"
+  },
+  "visual_verification": {
+    "original_inspected": [
+      "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/screenshots/alg-masked-autoencoder-pretraining--01.png"
+    ],
+    "fresh_preview": "research/math-library-rendering-repairs-2026-10-23/previews/rlgm_001-native-v1/manifest.json",
+    "changed_figure_inspected": "research/math-library-rendering-repairs-2026-10-23/previews/rlgm_001-native-v1/screenshots/alg-masked-autoencoder-pretraining-figure.png",
+    "method": "Actual local native ItemBody SSR preview through repair-preview.mts, TSX_TSCONFIG_PATH set to sibling web tsconfig; full screenshot and standalone 1:1 lossless figure crop each viewed at original resolution. All eight boxes, visible-subset label and seven arrows now separate visibly; lower prediction/target arrows both terminate at loss.",
+    "katex_errors": [],
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "limitation": "Local native component preview rather than production HTTP route; current reference map reports 16 unrelated parse diagnostics."
+  },
+  "remaining_issues": []
+}

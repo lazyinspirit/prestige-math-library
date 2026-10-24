@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qc-teleportation-bell-expansion.json
+  precheck: pass
 id: thm-qc-teleportation-bell-expansion
 kind: theorem
 title: Teleportation Bell-basis expansion
@@ -16,12 +19,6 @@ deps:
 justified_by: []
 proof_strategy: direct
 axiom_use: "None; the expansion is a finite calculation in an explicit computational basis."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -75,3 +72,50 @@ operators in the Statement.
 3.1 By [F3] and [F6], $H_A$ sends each first-wire $|0\rangle$ to $(|0\rangle+|1\rangle)/\sqrt2$ and each $|1\rangle$ to $(|0\rangle-|1\rangle)/\sqrt2$. Regrouping the resulting eight terms by the first two wires gives $\frac12\bigl(|00\rangle(\alpha|0\rangle+\beta|1\rangle)+|01\rangle(\alpha|1\rangle+\beta|0\rangle)+|10\rangle(\alpha|0\rangle-\beta|1\rangle)+|11\rangle(\alpha|1\rangle-\beta|0\rangle)\bigr)$. [step 2.1, F3, F6, algebra]
 
 4.1 The four receiver vectors in step 3.1 are respectively $|\psi\rangle$, $X|\psi\rangle$, $Z|\psi\rangle$, and $XZ|\psi\rangle$ by the actions in [F5]. These are exactly $X^bZ^a|\psi\rangle$ for labels $00,01,10,11$, so step 3.1 is the sum in the Statement. [A1, step 3.1, F5, algebra] ∎
+
+
+## Remarks
+
+The circuit reads from left to right in wire order $A,B,C$. The Bell-resource
+box supplies the input on $B,C$; it is not a preparation gate. The filled dot
+and circled plus are the control and target of CNOT. Only the encoding
+unitary $V_{AB}$ is drawn: there is no measurement or receiver correction.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (3,0.7) {$V_{AB}$};
+\node[anchor=east] at (0.65,0) {$|\psi\rangle_A$};
+\node[draw,minimum width=1.4cm,minimum height=1.7cm] at (0,-1.5) {$|\Phi^+\rangle_{BC}$};
+\draw (0.7,0) -- (1.6,0);
+\draw (0.7,-1) -- (1.6,-1);
+\draw (1.6,0) -- (1.6,-1);
+\fill (1.6,0) circle (0.065);
+\draw (1.6,-1) circle (0.14);
+\draw (1.46,-1) -- (1.74,-1);
+\draw (1.6,-1.14) -- (1.6,-0.86);
+\draw (1.6,0) -- (2.65,0);
+\node[draw,minimum width=0.6cm,minimum height=0.5cm] (h) at (2.95,0) {$H$};
+\draw[->] (h.east) -- (5,0) node[right] {$A$};
+\draw[->] (1.74,-1) -- (5,-1) node[right] {$B$};
+\draw[->] (0.7,-2) -- (5,-2) node[right] {$C$};
+\node at (2.4,-2.75) {Coefficients in the coherent expansion};
+\node at (-0.1,-3.4) {$ab$};
+\node at (1.2,-3.4) {$00$};
+\node at (2.6,-3.4) {$01$};
+\node at (4,-3.4) {$10$};
+\node at (5.4,-3.4) {$11$};
+\node at (-0.1,-4.1) {$2c_{ab}$};
+\node at (1.2,-4.1) {$|\psi\rangle$};
+\node at (2.6,-4.1) {$X|\psi\rangle$};
+\node at (4,-4.1) {$Z|\psi\rangle$};
+\node at (5.4,-4.1) {$XZ|\psi\rangle$};
+\end{tikzpicture}
+```
+
+Here $c_{ab}$ is the vector on $C$ multiplying $|ab\rangle_{AB}$ in the
+output, so $c_{ab}=\tfrac12X_C^bZ_C^a|\psi\rangle_C$. The table records
+coherent coefficients, not conditional measurement states. In particular,
+the $11$ entry is $XZ|\psi\rangle$, with $Z$ acting first. The subsequent
+teleportation procedure applies $X^b$ and then $Z^a$, giving the inverse
+product $Z^aX^b$. The figure illustrates the identity; the proof above
+establishes it independently.

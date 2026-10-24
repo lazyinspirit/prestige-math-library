@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-holder-inequality-for-integrals.json
+  precheck: pass
 id: thm-holder-inequality-for-integrals
 kind: theorem
 title: "Holder's inequality for integrals, including the endpoint cases"
@@ -10,14 +13,6 @@ provenance:
   proof: ai-altered
 deps: [def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-young-inequality-real-exponents, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-integral-over-a-null-set-vanishes]
 proof_strategy: "For 1 < p < infinity, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs (1, infinity) and (infinity, 1) separately from the essential-bound definition."
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-holder-inequality-for-integrals). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -66,7 +61,7 @@ In every case the right-hand side is finite, so $fg$ is integrable.
 
 ## Proof
 
-**Proof technique:** For $1 < p < infinity$, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs $(1,\infty)$ and $(\infty,1)$ separately from the essential-bound definition.
+**Proof technique:** For 1 < p < ∞, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs (1, ∞) and (∞, 1) separately from the essential-bound definition.
 
 1.1 Assume first $1<p,q<\infty$, and put $A:=\|f\|_p$ and $B:=\|g\|_q$. If $A=0$ or $B=0$, then the corresponding power integral is $0$, so [L3] makes the corresponding function vanish outside a measurable null set. By [L8], $\int|fg|\,d\mu=0$. Thus only the case $A,B>0$ remains. [L2, L3, L8, given]
 

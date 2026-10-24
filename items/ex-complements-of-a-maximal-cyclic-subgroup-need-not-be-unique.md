@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-complements-of-a-maximal-cyclic-subgroup-need-not-be-unique.json
+  precheck: pass
 id: ex-complements-of-a-maximal-cyclic-subgroup-need-not-be-unique
 kind: example
-title: "Complements of a maximal cyclic subgroup in C_p times C_p need not be unique"
+title: 'Complements of a maximal cyclic subgroup in $C_p\times C_p$ need not be unique'
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references:

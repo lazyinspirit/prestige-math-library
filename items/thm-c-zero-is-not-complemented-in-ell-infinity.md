@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-c-zero-is-not-complemented-in-ell-infinity.json
+  precheck: pass
 id: thm-c-zero-is-not-complemented-in-ell-infinity
 kind: theorem
-title: c_0 is not complemented in ell-infinity
+title: $c_0$ is not complemented in $\ell^\infty$
 status: published
 origin: pipeline
 deps: [def-c-zero-and-ell-infinity, lem-c-zero-is-a-closed-subspace-of-ell-infinity, lem-quotient-by-c-zero-has-no-countable-separating-family, def-complemented-subspace, thm-complemented-subspace-iff-range-of-a-bounded-projection, def-quotient-seminorm]
@@ -9,12 +12,6 @@ proof_strategy: contradiction
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: Piotr Hajlasz, Functional Analysis, Theorem 10.19
@@ -30,7 +27,7 @@ in $\ell^\infty$.
 
 **Given:** The quotient map $\pi:\ell^\infty\to\ell^\infty/c_0$.
 
-[F1] Under $\mathrm{AC}_\omega$, $(\ell^\infty/c_0)^*$ has no countable separating family ([[lem-quotient-by-c-zero-has-no-countable-separating-family]]).
+[F1] Under $\mathrm{AC}_\omega$, $(\ell^\infty/c_0)^*$ has no countable separating family ([[lem-quotient-by-c-zero-has-no-countable-separating-family|The quotient $\ell^\infty/c_0$ has no countable separating family]]).
 
 ## Proof
 

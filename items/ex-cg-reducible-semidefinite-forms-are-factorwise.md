@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-reducible-semidefinite-forms-are-factorwise.json
+  precheck: pass
 id: ex-cg-reducible-semidefinite-forms-are-factorwise
 kind: example
 title: "Reducible positive semidefinite forms: factorwise treatment and the square alcove"
@@ -18,13 +21,7 @@ sources:
     - title: "M. W. Davis and G. Moussong, Notes on nonpositively curved polyhedra (Turan Workshop lecture notes, 1998/1999; 65 PDF pages)"
       url: "https://people.math.osu.edu/davis.12/notes.pdf"
       locator: "Section 6.1, Example 6.1.3 (PDF pp. 33-34, lines 1535-1555) records the polygon angle-sum criterion and identifies the rectangle as the nonobtuse Euclidean polygon case. It is background only: the factorwise semidefinite result and square reflection group below are proved directly, without consuming the polygon-classification claim."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -90,3 +87,33 @@ Let $(W,S,m)$ be a Coxeter system with $S$ finite and disconnected diagram $\Gam
 3.1 (Grid and strict fundamental domain.) The orbit of $[0,1]$ under $H_x$ is $\{[2k,2k+1],[2k-1,2k]:k\in\mathbb Z\}$, exactly the unit intervals $[m,m+1]$; [F12] applied to each real $x$ gives $m\le x<m+1$, proving coverage of $\mathbb R$, and the interval interiors are pairwise disjoint. The corresponding statement holds for $H_y$, so the $G$-translates of $Q$ are exactly all grid squares, covering $E$ with pairwise disjoint interiors. To prove the stronger orbit assertion including boundary points, apply [F12] to $x/2$ and put $n=\lfloor x/2\rfloor$, $u=x-2n$; then $n\in\mathbb Z$ and $0\le u<2$. Its orbit under $H_x$ is $\{u+2j,-u+2j:j\in\mathbb Z\}$; if $0\le u\le1$, its unique value in $[0,1]$ is $u$: among the values $u+2j$ only $j=0$ qualifies, and among $-u+2j$ the only possible additional values occur at $(u,j)=(0,0)$ or $(1,1)$ and equal that same point. If $1<u<2$, the unique value there is $2-u=-u+2$. Applying this independently to both coordinates shows every $G$-orbit meets $Q$ in exactly one point. [F12, step 1.4, step 2.3, algebra]
 
 4.1 (The remaining geometric and factorwise conclusions.) The four side walls are $x=0$, $x=1$, $y=0$, and $y=1$; at each of the four vertices one vertical and one horizontal wall meet, so the interior angle is $\pi/2$. Step 3.1 proves the precise closed-square tiling and orbit statement in (iv), including boundary points. Clauses (i)-(ii) give the positive-semidefinite corank-one factorization in (v); if one block has a vector of negative quadratic value, the same vector in $V$ shows that $B$ is indefinite, and if two blocks have nonzero radicals, step 1.2 gives radical dimension at least two. If $k=0$, then $V=0$ and $\dim\operatorname{rad}(B)=0$, so both sides of the equivalence in (ii) are false and the empty direct sums in (i) have value zero. All arguments use finite sums and explicit constructions, so no Choice is used. [F2, step 1.2, step 3.1, algebra] ∎
+
+## Remarks
+
+The shaded square below is $Q=[0,1]^2$; the surrounding grid shows some of its translates from step 3.1. The labelled walls carry the reflections of step 1.4: $r_1(x,y)=(-x,y)$, $r_2(x,y)=(2-x,y)$, $s_1(x,y)=(x,-y)$ and $s_2(x,y)=(x,2-y)$. The graph at right records their Coxeter relations: the parallel wall pairs give the two $\infty$-edges, while every cross-pair has label $2$ and hence no edge.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=1.2cm]
+\fill[blue!12] (0,0) rectangle (1,1);
+\draw[gray,dashed] (-1,-1) grid (2,2);
+\draw[blue,thick] (0,-1) -- (0,2);
+\draw[blue,thick] (1,-1) -- (1,2);
+\draw[red,thick] (-1,0) -- (2,0);
+\draw[red,thick] (-1,1) -- (2,1);
+\node at (0.5,0.5) {$Q$};
+\node[above left] at (0,2) {$r_1:\ x=0$};
+\node[above right] at (1,2) {$r_2:\ x=1$};
+\node[left] at (-1,0) {$s_1:\ y=0$};
+\node[left] at (-1,1) {$s_2:\ y=1$};
+\node[below] at (0.5,-1.15) {Unit grid in $E=\mathbb R^2$};
+\node[circle,draw,inner sep=2pt,label=above:{$r_1$}] (r1) at (3.6,1.2) {};
+\node[circle,draw,inner sep=2pt,label=above:{$r_2$}] (r2) at (5.3,1.2) {};
+\node[circle,draw,inner sep=2pt,label=below:{$s_1$}] (s1) at (3.6,0) {};
+\node[circle,draw,inner sep=2pt,label=below:{$s_2$}] (s2) at (5.3,0) {};
+\draw (r1) -- node[above] {$\infty$} (r2);
+\draw (s1) -- node[above] {$\infty$} (s2);
+\node at (4.45,-1.15) {$\tilde A_1\perp\tilde A_1$};
+\end{tikzpicture}
+```
+
+In the ordered generator basis $(r_1,r_2,s_1,s_2)$, the abstract Coxeter form has Gram matrix $A\oplus A$, where $A=\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$. Each block has radical spanned by $(1,1)$, so this four-dimensional form has corank two, as in (iii). The picture depicts the separate two-dimensional Euclidean action of (iv). Step 3.1 proves the unique orbit representative in the closed square, including its boundary; the rigorous verification is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-componentwise-shannon-mcmillan-breiman.json
+  precheck: pass
 id: thm-componentwise-shannon-mcmillan-breiman
 kind: theorem
 title: "Componentwise Shannon–McMillan–Breiman theorem"
@@ -30,7 +33,7 @@ sources:
 ---
 ## Statement
 
-For every stationary finite-alphabet source, proves -n^{-1}log_2 P(X_0^{n-1}) converges almost surely and in L1 to the invariant Birkhoff limit of infinite-past information density, with mean equal to the entropy rate in bits.
+For every stationary finite-alphabet source, proves $-n^{-1}\log_2 P(X_0^{n-1})$ converges almost surely and in L1 to the invariant Birkhoff limit of infinite-past information density, with mean equal to the entropy rate in bits.
 
 ## Facts & Assumptions
 

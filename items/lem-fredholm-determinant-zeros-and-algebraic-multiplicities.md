@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fredholm-determinant-zeros-and-algebraic-multiplicities.json
+  precheck: pass
 id: lem-fredholm-determinant-zeros-and-algebraic-multiplicities
 kind: lemma
 title: "Zeros of the local Fredholm determinant"
@@ -28,13 +31,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -161,4 +157,4 @@ when it factors locally as $(z-a)^d g(z)$ with $g(a)\ne0$
 
 6.1 If $I+zT$ is boundedly invertible, step 2.1 with $U=T$ gives $D_T(z)\ne0$; together with step 5.1 this proves both directions of the stated iff. For every nonzero spectral value, [A4] supplies an eigenvalue, so step 4.1 proves the multiplicity claim on the full nonzero spectrum. [A4, step 2.1, step 5.1]
 
-7.1 The zero operator and zero Hilbert space are covered by step 1.1; on $H=\mathbb C$ with $T=tI$, the determinant is $1+zt$, so for $t\ne0$ its zero is simple and $m_{\mathrm{alg}}(t;T)=1$, while $t=0$ has no zero and every $I+zT$ is invertible. An empty nonzero spectrum yields no noninvertible $I+zT$ by step 5.1. There is no interval parameter or one-sided endpoint. The exact assumption is AC [A1]; it is used through the Riesz–Schauder, Riesz-projection, and algebraic-multiplicity suppliers, and AC supplies the AC$_\omega$ required by the local determinant and trace-class suppliers through [A15]. The finite Jordan-string argument makes no additional choice. Both iff directions were proved in step 6.1; the multiplicity assertion is a factorization claim, not an iff. [A1, A4, A15, step 1.1, step 4.1, step 5.1, step 6.1] \qed 
+7.1 The zero operator and zero Hilbert space are covered by step 1.1; on $H=\mathbb C$ with $T=tI$, the determinant is $1+zt$, so for $t\ne0$ its zero is simple and $m_{\mathrm{alg}}(t;T)=1$, while $t=0$ has no zero and every $I+zT$ is invertible. An empty nonzero spectrum yields no noninvertible $I+zT$ by step 5.1. There is no interval parameter or one-sided endpoint. The exact assumption is AC [A1]; it is used through the Riesz–Schauder, Riesz-projection, and algebraic-multiplicity suppliers, and AC supplies the AC$_\omega$ required by the local determinant and trace-class suppliers through [A15]. The finite Jordan-string argument makes no additional choice. Both iff directions were proved in step 6.1; the multiplicity assertion is a factorization claim, not an iff. [A1, A4, A15, step 1.1, step 4.1, step 5.1, step 6.1] ∎ 

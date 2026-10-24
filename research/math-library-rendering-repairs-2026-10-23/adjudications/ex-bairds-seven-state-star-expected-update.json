@@ -1,0 +1,115 @@
+{
+  "id": "ex-bairds-seven-state-star-expected-update",
+  "agent": "/root/rendering_repair_coordinator/dorl_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The source mixes two conditional transition kernels, behavior/target choices, and two feature formulas in one paragraph. A shared-source transition schematic materially clarifies these distinct probabilities and the lower-state feature, despite the complete independent arithmetic verification.",
+      "action": "Added a final Remarks section with a seven-destination TikZ schematic, explicit shared-source convention, conditional transition labels, behavior/target explanation and feature labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory diagram and local caption only; original Example, Facts, Verification, title and complete frontmatter are byte-identical to the frozen before carrier.",
+  "source_lines_after": [
+    52,
+    54,
+    56,
+    77
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and source convention",
+      "justification": "The Example at line 32 and supplier Statement define S={s1,...,s7} with both actions available at every state. Seven circles are the actual states; the rectangular any-current-state selector is explicitly not an eighth state. This encodes the same outgoing law for every s in S, including s7."
+    },
+    {
+      "check": "Dashed action destinations and normalization",
+      "justification": "Supplier Statement says each of s1,...,s6 has conditional probability 1/6 under dashed; the six dashed arrows point from the selector to exactly those six circles. Their conditional probabilities sum to 6(1/6)=1. No dashed edge to s7 is drawn."
+    },
+    {
+      "check": "Solid destination, orientation and self-transition",
+      "justification": "Example line 32 and supplier Statement specify probability 1 to s7 under solid. The sole solid arrow points from current-state selector to s7. Caption explicitly explains that setting the selector to s7 yields its solid self-transition. This prevents confusing lower-state behavior with an absorbing state under both actions."
+    },
+    {
+      "check": "Behavior versus target probabilities",
+      "justification": "Example line 32 specifies b(dashed|s)=6/7, b(solid|s)=1/7 and target always solid. Caption preserves these action probabilities separately from diagram conditional 1/6 and 1. Hence each upper behavior destination has (6/7)(1/6)=1/7 and lower has (1/7)(1)=1/7, agreeing with supplier proof step 1.1. Dashed edges are not target-policy transitions."
+    },
+    {
+      "check": "Feature values and proof interface",
+      "justification": "Upper label v_w(s_i)=2w_i+w8 for 1<=i<=6 and lower v_w(s7)=w7+2w8 exactly match Example line 32 and supplier phi(s_i)=2e_i+e8, phi(s7)=e7+2e8. Verification steps 1.1 and 2.1 remain unchanged and use explicit algebra, never the figure."
+    }
+  ],
+  "before_guard": {
+    "expected_raw_sha256": "f32f7ae0fd44dcf66902d29bb67a2ee7cdecc3ce973116207b583d47b8bfe46a",
+    "actual_raw_sha256": "f32f7ae0fd44dcf66902d29bb67a2ee7cdecc3ce973116207b583d47b8bfe46a",
+    "checked_immediately_before_edit": true
+  },
+  "current_raw_sha256": "82f5201f2f936fc4cf046562f84f5651afe4aad9664cc93b828cbeaf06533dc7",
+  "status_preservation": "Complete frontmatter byte-identical; status remains published.",
+  "evidence": {
+    "original_declared_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/ex-bairds-seven-state-star-expected-update--01.png",
+    "path_discrepancy": "Declared diagram-supplement screenshot path did not exist. Located authentic matching screenshot within the same category.",
+    "original_resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/ex-bairds-seven-state-star-expected-update--01.png",
+    "original_screenshot_sha256": "73ce82077191345d120dcd2bdd3b82109bd4b261b7dcf9bebd34ba03d718cd05",
+    "original_inspected": "Standalone original-resolution view; frozen and current pre-edit carriers compared byte-identical.",
+    "native_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl016/manifest.json",
+    "native_source_sha256": "82f5201f2f936fc4cf046562f84f5651afe4aad9664cc93b828cbeaf06533dc7",
+    "native_tiles": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dorl016/screenshots/ex-bairds-seven-state-star-expected-update--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dorl016/screenshots/ex-bairds-seven-state-star-expected-update--02.png"
+    ],
+    "standalone_native_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dorl016/diagram-original.png",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl016/pi-tikz-cache/17e95570acf1907c71ef30824226bb7b.svg",
+    "visual_checks": "Inspected both original-resolution native tiles and a standalone SVG-element browser crop. Seven distinct circular state outlines, six dashed arrows to upper states and one solid arrow to lower state are visible, with correct arrowheads, no overlapping labels, no clipping and clear light labels/strokes on black. SVG confirms circles and selector use fill=none. No interval endpoint convention is asserted. No polygon or cycle closure is required: this is a directed transition schematic, with seven explicit branch segments, not a named-node --cycle graph."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-bairds-seven-state-star-expected-update.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-bairds-seven-state-star-expected-update.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-bairds-seven-state-star-expected-update.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl016 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-bairds-seven-state-star-expected-update --out research/math-library-rendering-repairs-2026-10-23/previews/dorl016",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Preview covers the native local ItemBody renderer, not the production route; 16 unrelated reference-title parse diagnostics are recorded in the manifest."
+  ],
+  "blocker": null
+}

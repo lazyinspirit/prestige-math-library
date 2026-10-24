@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-mod-two-self-intersection-needs-no-orientation.json
+  precheck: pass
 id: prop-mod-two-self-intersection-needs-no-orientation
 kind: proposition
 title: "The mod two self-intersection is the top Stiefel-Whitney evaluation"
@@ -10,8 +13,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Ralph L. Cohen, Bundles, Manifolds, and Homotopy (author draft bookR4)"
@@ -48,7 +49,7 @@ Assume AC. Let $M$ be a boundaryless smooth $n$-manifold (not assumed orientable
 
 ## Proof
 
-**Proof technique:** repeat the integral argument in $\mathbb F_2$ coefficients, where every bundle is canonically oriented and every manifold has a mod 2 fundamental class, and identify the mod 2 Euler class with the top Stiefel-Whitney class.
+**Proof technique:** repeat the integral argument in mod 2 coefficients, where every bundle is canonically oriented and every manifold has a mod 2 fundamental class, and identify the mod 2 Euler class with the top Stiefel-Whitney class.
 
 1.1 Canonical mod 2 data. By [F1] every real vector bundle carries a canonical $\mathbb F_2$-orientation, so $\nu_A$, $TM$ and the normal Thom class are defined over $\mathbb F_2$, and the mod 2 fundamental class of the closed manifold $A$ is the canonical orientation class of [[def-fundamental-class-of-a-compact-oriented-manifold]] applied to that orientation. [F1, given]
 

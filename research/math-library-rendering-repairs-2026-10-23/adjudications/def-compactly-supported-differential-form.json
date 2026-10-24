@@ -1,0 +1,69 @@
+{
+  "id": "def-compactly-supported-differential-form",
+  "agent": "/root/rendering_repair_coordinator/dg_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "display-math-block-parsing",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile shows both intended display definitions running inline after define and wrapping between the two set descriptions; original HTML has no katex-display wrapper. Content is present, so no omission or clipping is claimed. The source puts both $$ delimiters on the formula line and directly adjacent to prose.",
+      "action": "Separated the formula from prose with blank paragraphs and put opening/closing $$ on their own lines. Exact formula and surrounding prose are unchanged. Native final HTML now contains one katex-display wrapper and the standalone final image shows the complete centered formula on its own row.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Display-block delimiter layout only; all mathematical text/formula characters and all frontmatter, including status: published, are unchanged.",
+  "source_lines_after": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "9e707a365ba0e8fa76b37f705f3db6db5e92992c37679d5eced35334ccba06ae",
+  "after_raw_sha256": "b98bd30b9d1898d70f2d0dd8b99fbfe2181bdf4a40058fa49ebd4c7291c15eeb",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-compactly-supported-differential-form.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-compactly-supported-differential-form.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-compactly-supported-differential-form.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_image": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/def-compactly-supported-differential-form--01.png",
+    "original_image_view": "standalone original resolution",
+    "final_image": "research/math-library-rendering-repairs-2026-10-23/previews/dg001-final/screenshots/def-compactly-supported-differential-form--01.png",
+    "final_image_view": "standalone original resolution",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg001-final/manifest.json",
+    "manifest_sha256": "60582287919f84b0ef8dbe9688027334498dcc52fca90c2209a010b16537b042",
+    "source_sha256": "b98bd30b9d1898d70f2d0dd8b99fbfe2181bdf4a40058fa49ebd4c7291c15eeb",
+    "html_sha256": "3366cf1770f7986ea9f7f7096331639b14f74c0057f095164ad7213ee3dfe0ce",
+    "result": "Full formula centered on separate display row; no wrapping into prose or clipping. Preview title/section text appears dark against black in this current native CSS capture, outside the assigned formula defect; title source is byte-unchanged.",
+    "limitations": "Local native ItemBody preview only; no live website. Preview reference map reports 16 unrelated parse diagnostics."
+  }
+}

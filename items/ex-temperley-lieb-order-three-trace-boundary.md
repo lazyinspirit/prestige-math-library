@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-temperley-lieb-order-three-trace-boundary.json
+  precheck: pass
 id: ex-temperley-lieb-order-three-trace-boundary
 kind: example
 title: "At q squared of order three, TL2 is semisimple with a degenerate Jones trace"
@@ -20,11 +23,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "K. Iohara, G. I. Lehrer, and R. B. Zhang, The Jones Quotients of the Temperley-Lieb Algebras"
@@ -43,8 +41,8 @@ Take $q=e^{i\pi/3}$, so $q^2$ has order $\ell=3$, $\delta=q+q^{-1}=1$, and $n=2=
 
 In the left panel the solid top cap and bottom cup are the basis diagram $u=d_1$. The right panel adds the exterior closure arcs in dashed blue; each joins top point $i$ to bottom point $i$. Thus the four arcs form one closed component, so $c(u)=1$ in the closure-trace definition. The drawing records the matching graph only; the algebra and trace calculations below prove the claims independently.
 
-~~~tikz
-\begin{tikzpicture}[x=1cm,y=1cm,line width=0.8pt,baseline=(current bounding box.center)]
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1.3cm,font=\large,line width=0.8pt,baseline=(current bounding box.center)]
   \fill (0,1) circle (1.5pt); \fill (1,1) circle (1.5pt);
   \fill (0,-1) circle (1.5pt); \fill (1,-1) circle (1.5pt);
   \draw (0,1) to[out=90,in=90] (1,1);
@@ -52,15 +50,15 @@ In the left panel the solid top cap and bottom cup are the basis diagram $u=d_1$
   \node at (0.5,0) {$u$};
   \node at (0.5,-1.65) {basis diagram};
 
-  \fill (3,1) circle (1.5pt); \fill (4,1) circle (1.5pt);
-  \fill (3,-1) circle (1.5pt); \fill (4,-1) circle (1.5pt);
-  \draw (3,1) to[out=90,in=90] (4,1);
-  \draw (3,-1) to[out=-90,in=-90] (4,-1);
-  \draw[dashed,blue] (3,1) to[out=180,in=180] (3,-1);
-  \draw[dashed,blue] (4,1) to[out=0,in=0] (4,-1);
-  \node at (3.5,-1.65) {closed graph: one component};
+  \fill (5,1) circle (1.5pt); \fill (6,1) circle (1.5pt);
+  \fill (5,-1) circle (1.5pt); \fill (6,-1) circle (1.5pt);
+  \draw (5,1) to[out=90,in=90] (6,1);
+  \draw (5,-1) to[out=-90,in=-90] (6,-1);
+  \draw[dashed,blue] (5,1) to[out=180,in=180] (5,-1);
+  \draw[dashed,blue] (6,1) to[out=0,in=0] (6,-1);
+  \node at (5.5,-1.65) {closed graph: one component};
 \end{tikzpicture}
-~~~
+```
 
 ## Facts & Assumptions
 

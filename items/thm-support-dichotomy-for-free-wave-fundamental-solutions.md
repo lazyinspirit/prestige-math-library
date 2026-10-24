@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-support-dichotomy-for-free-wave-fundamental-solutions.json
+  precheck: pass
 id: thm-support-dichotomy-for-free-wave-fundamental-solutions
 kind: theorem
 title: "Sphere-supported versus interior-supported free wave kernels"
@@ -11,11 +14,6 @@ deps: [thm-kirchhoff-formula-for-the-three-dimensional-wave-equation, thm-poisso
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)"
@@ -63,3 +61,34 @@ for $0\le\rho<ct$, where $K$ is smooth on that region and $K(0,t)=a\,t^{-(n-1)}$
 2.1 Admissible interior data. Choose $0<\delta<ct/2$ and, by [[lem-smooth-bump-between-concentric-euclidean-balls]] translated to centre $x$, choose $u_1\in C_c^\infty(B_{2\delta}(x))$ with $0\le u_1\le1$ and $u_1=1$ on $\overline B_\delta(x)$. This is admissible in every dimension here. The actual contribution is $\int_{B_{2\delta}(x)}u_1(y)K(|y-x|,t)\,dy$, including the transition annulus. By step 1.3 its integrand has one sign and is strictly of that sign on the inner ball, of positive volume, so the contribution is nonzero. The same construction around any point strictly inside the ball shows that the interior kernel is nonzero throughout, rather than just at the centre. [F3, step 1.2, step 1.3, algebra]
 
 3.1 Collecting: in odd dimensions the value depends only on data near the sphere $\partial B_{ct}(x)$ (a statement about open neighbourhoods, not about pointwise traces), while in even dimensions the velocity kernel is the explicitly displayed smooth function of $\rho<ct$, nonzero at the centre, so interior data contribute. [given] ∎
+
+
+## Remarks
+
+The paired planar sections below illustrate the geometry at fixed $x$ and $t>0$, with $R=ct$. The left shading is an example of a neighbourhood of $\partial B_R(x)$ on which agreement of the data suffices in odd dimensions; it does not assert dependence on pointwise sphere traces. The right shading denotes the open ball, where the even-dimensional velocity kernel is smooth and nonzero; the dashed boundary is excluded from that assertion. In both panels $\rho=|y-x|$. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\begin{scope}
+\node at (0,2.05) {odd $n\ge3$};
+\fill[blue!15,even odd rule] (0,0) circle (1.55) (0,0) circle (1.05);
+\draw[blue,dashed] (0,0) circle (1.55);
+\draw[blue,dashed] (0,0) circle (1.05);
+\draw[thick] (0,0) circle (1.3);
+\fill (0,0) circle (0.035);
+\node[below left] at (0,0) {$x$};
+\draw[->] (0,0) -- (1.3,0) node[midway,above] {$R=ct$};
+\node at (0,-1.95) {neighbourhood agreement suffices};
+\end{scope}
+\begin{scope}[xshift=5.3cm]
+\node at (0,2.05) {even $n\ge2$};
+\fill[blue!15] (0,0) circle (1.3);
+\draw[thick,dashed] (0,0) circle (1.3);
+\fill (0,0) circle (0.035);
+\node[below left] at (0,0) {$x$};
+\draw[->] (0,0) -- (1.3,0) node[midway,above] {$R=ct$};
+\node at (0,-1.75) {$K(\rho,t)\ne0\quad(0\le\rho<R)$};
+\node at (0,-2.2) {$K(0,t)\ne0$};
+\end{scope}
+\end{tikzpicture}
+```

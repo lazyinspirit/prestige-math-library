@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.json
+  precheck: n/a
 id: alg-na-alternating-tensor-optimization-and-effective-eigenproblems
 kind: algorithm
 title: "Finite alternating tensor optimization with effective eigenproblems"
@@ -17,12 +20,6 @@ deps:
   - alg-tensor-train-rounding
   - thm-singular-value-decomposition
 aliases: []
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§6.2–6.4"
@@ -65,3 +62,38 @@ Return the final normalized TT state, the energy and local-residual records, all
 ## Remarks
 
 The local eigenproblem is specified as an exact finite Hermitian ground solve. The procedure makes no finite-precision stability, polynomial-cost, spectral-gap, global-minimizer, or convergence claim. A periodic input is first converted exactly to an open-boundary TT; the canonical environment argument is applied only to that open-boundary representation.
+
+For a two-site window $J=[k,k+1]$, the schematic below groups all fixed prefix and suffix cores into $L$ and $R$. Their contractions define the isometry $E$ in step 3; a missing boundary environment is the scalar identity. The downward legs are physical indices: $\mathbf i_L=(i_1,\ldots,i_{k-1})$, $i_k$, $i_{k+1}$, and $\mathbf i_R=(i_{k+2},\ldots,i_d)$, with empty boundary tuples omitted. Horizontal lines are contracted bond indices. The bracket marks the active window. For width one, the active window instead contains just one core. The arrows indicate the order of window visits, rather than maps between tensor spaces.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (L) at (0,0) {$L$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (A) at (2,0) {$G_k$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (B) at (4,0) {$G_{k+1}$};
+\node[draw,minimum width=1.3cm,minimum height=0.7cm] (R) at (6,0) {$R$};
+\draw (L) -- (A) -- (B) -- (R);
+\draw (L.south) -- (0,-0.85) node[below] {$\mathbf i_L$};
+\draw (R.south) -- (6,-0.85) node[below] {$\mathbf i_R$};
+\draw (A.south) -- (2,-0.85) node[below] {$i_k$};
+\draw (B.south) -- (4,-0.85) node[below] {$i_{k+1}$};
+\node at (0,-1.6) {left-isometric};
+\node at (6,-1.6) {right-isometric};
+\draw (1.2,0.65) -- (1.2,0.9) -- (4.8,0.9) -- (4.8,0.65);
+\node at (3,1.25) {active pair};
+\draw[->] (0,2.25) -- (6,2.25) node[midway,above] {forward: increasing $k$};
+\draw[->] (6,1.7) -- (0,1.7) node[midway,above] {backward: decreasing $k$};
+\node at (3,-2.15) {$X=U\Sigma V^*$};
+\node[draw,minimum width=2.4cm,minimum height=0.65cm] (UF) at (1.6,-3.15) {$U$};
+\node[draw,minimum width=2.4cm,minimum height=0.65cm] (VF) at (4.4,-3.15) {$\Sigma V^*$};
+\draw (UF) -- (VF);
+\node at (-0.8,-3.15) {forward};
+\node[draw,minimum width=2.4cm,minimum height=0.65cm] (UB) at (1.6,-4.15) {$U\Sigma$};
+\node[draw,minimum width=2.4cm,minimum height=0.65cm] (VB) at (4.4,-4.15) {$V^*$};
+\draw (UB) -- (VB);
+\node at (-0.8,-4.15) {backward};
+\node at (1.6,-4.85) {site $k$};
+\node at (4.4,-4.85) {site $k+1$};
+\end{tikzpicture}
+```
+
+The lower rows show the exact split in step 5: the factor containing $\Sigma$ is absorbed toward the next window. Both rows contract to the same $X$, with every positive singular direction retained. Optional rank-capped rounding occurs only after both passes of a full sweep, as in step 6. The diagram is explanatory; the procedure and its specified operations stand independently of it.

@@ -1,0 +1,74 @@
+{
+  "id": "lem-formal-power-series-evaluation-converges",
+  "agent": "/root/rendering_repair_coordinator/ca_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution inspection shows literal dollar delimiters and uppercase MATHFRAK in the technique banner, while the same notation renders correctly in the proof. ItemBody.tsx ProofBlock inserts technique[1] directly into a CSS-uppercase div rather than MathMarkdown; the source command itself is valid TeX.",
+      "action": "Replaced only the technique summary with equivalent ordinary prose about total-degree tails and corresponding powers of the maximal ideal.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 46 now reads: **Proof technique:** total-degree tails lie in the corresponding powers of the maximal ideal.",
+  "source_lines_after": {
+    "46": "**Proof technique:** total-degree tails lie in the corresponding powers of the maximal ideal."
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_preservation_reason": "The banner restates the degree-tail estimate proved in step 1.1. The complete statement, hypotheses, notation, Facts, and all three proof steps are byte-identical to the before image; all frontmatter including status: published is byte-identical.",
+  "remaining_issues": [],
+  "renderer_limitation": "Technique banners remain plain React text with CSS uppercase; equivalent prose is a local content workaround. Application code was not edited.",
+  "before_raw_sha256": "76d545c8a22a89a9ff65c158cc2ffc69ec4faa80c91219c24f28b65ad9a7ced3",
+  "after_raw_sha256": "b2f2f3c35a6888a29f1fc54a01ce8085c8b8cc1d50c2b41847c1057a67705086",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-formal-power-series-evaluation-converges.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-formal-power-series-evaluation-converges.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-formal-power-series-evaluation-converges.md",
+            "item_id": "lem-formal-power-series-evaluation-converges",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-formal-power-series-evaluation-converges.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_standalone_view": "research/math-library-rendering-audit-2026-10-23/commutative-algebra/screenshots/lem-formal-power-series-evaluation-converges--01.png",
+    "preview_command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-formal-power-series-evaluation-converges --out research/math-library-rendering-repairs-2026-10-23/ca_018-fresh-preview",
+    "preview_exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/ca_018-fresh-preview/manifest.json",
+    "fresh_standalone_original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/ca_018-fresh-preview/screenshots/lem-formal-power-series-evaluation-converges--01.png",
+    "changed_region_original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/ca_018-fresh-preview/banner-original-resolution.png",
+    "result": "Fresh complete native ItemBody tile and unscaled banner crop inspected independently; the full banner is readable on one line with no raw TeX, clipping or overlap. Capture contains 23 KaTeX elements, zero KaTeX errors and zero diagram failures.",
+    "limitations": "Local native ItemBody preview, not full production route. The preview reference title map reported 16 unrelated parse diagnostics."
+  },
+  "completed_at": "2026-10-23T21:01:55.643149+00:00"
+}

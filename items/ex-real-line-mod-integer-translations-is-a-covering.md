@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-real-line-mod-integer-translations-is-a-covering.json
+  precheck: pass
 id: ex-real-line-mod-integer-translations-is-a-covering
 kind: example
 title: "The quotient $\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering with integer translations as deck transformations"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -60,3 +56,44 @@ For the quotient by integer translation, $q:\mathbb R\to\mathbb R/\mathbb Z$ is 
 3.1 Each integer translation $\tau_n(x)=x+n$ is a homeomorphism satisfying $q\tau_n=q$. The intervals in step 2.1 show that this is a covering-space action of $\mathbb Z$ on $\mathbb R$. Since $\mathbb R$ is path-connected by straight-line paths, [F1] identifies the entire deck group with these translations. More explicitly, a deck transformation $h$ has $h(0)\in q^{-1}(q(0))=\mathbb Z$; the translation $\tau_{h(0)}$ agrees with $h$ at $0$, and the one-point determination used in [F1] makes them equal. Distinct integers give distinct translations. [step 2.1, F1, F2, F3]
 
 4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎
+
+
+## Remarks
+
+For an open interval $I$ of length below $1$, put $U=q[I]$. The picture shows three of the infinitely many disjoint sheets $I+k$ above $U$; each downward arrow denotes the homeomorphism $q|_{I+k}:I+k\to U$. Open endpoint rings indicate that the intervals and the displayed quotient arc exclude their endpoints. The circle is a schematic picture of the quotient, not an additional premise of the proof.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw (-4.9,0)--(-3.78,0);
+\draw (-2.22,0)--(-0.78,0);
+\draw (0.78,0)--(2.22,0);
+\draw[->] (3.78,0)--(5,0) node[right] {$\mathbb R$};
+\node at (-4.4,0.35) {$\cdots$};
+\node at (4.4,0.35) {$\cdots$};
+\draw[very thick] (-3.62,0)--(-2.38,0);
+\draw[very thick] (-0.62,0)--(0.62,0);
+\draw[very thick] (2.38,0)--(3.62,0);
+\draw (-3.7,0) circle (0.08);
+\draw (-2.3,0) circle (0.08);
+\draw (-0.7,0) circle (0.08);
+\draw (0.7,0) circle (0.08);
+\draw (2.3,0) circle (0.08);
+\draw (3.7,0) circle (0.08);
+\node[above] at (-3,0.12) {$I-1$};
+\node[above] at (0,0.12) {$I$};
+\node[above] at (3,0.12) {$I+1$};
+\draw[->] (0,0.8) to[bend left=25] node[above] {$\tau_1(x)=x+1$} (3,0.8);
+\draw (-0.65,-2.15) arc (135:405:0.92);
+\draw[very thick] (-0.59,-2.09) arc (130:50:0.92);
+\draw (-0.65,-2.15) circle (0.08);
+\draw (0.65,-2.15) circle (0.08);
+\node at (0,-2.42) {$U$};
+\node[right] at (1.12,-2.8) {$\mathbb R/\mathbb Z$};
+\draw[->] (-3,-0.2) to[bend right=15] node[left] {$q|_{I-1}$} (-0.42,-1.94);
+\draw[->] (0,-0.2)--node[right] {$q|_I$} (0,-1.76);
+\draw[->] (3,-0.2) to[bend left=15] node[right] {$q|_{I+1}$} (0.42,-1.94);
+\node at (0,-4.1) {$q\circ\tau_n=q\quad(n\in\mathbb Z)$};
+\end{tikzpicture}
+```
+
+Step 2.1 gives $q^{-1}(U)=\bigcup_{k\in\mathbb Z}(I+k)$ and the disjointness of these open sheets. Step 3.1 gives the translations $\tau_n(x)=x+n$ and $q\circ\tau_n=q$: shifting a sheet by an integer leaves its image in the quotient unchanged. The rigorous verification above is independent of the illustration.

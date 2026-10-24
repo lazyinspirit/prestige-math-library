@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cardinality-of-the-borel-sigma-algebra-on-rn.json
+  precheck: pass
 id: thm-cardinality-of-the-borel-sigma-algebra-on-rn
 kind: theorem
-title: "Assuming the Axiom of Choice, the Borel sigma-algebra on R^n has cardinality continuum for n at least one"
+title: "Assuming the Axiom of Choice, the Borel sigma-algebra on $\\mathbb R^n$ has cardinality continuum for n at least one"
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ aliases: []
 landmark: true
 short: "$|\\mathcal B(\\mathbb R^n)|=\\mathfrak c$"
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-sonnet-5"
-    verdict: pass
-    date: 2026-08-17
-  audited: 2026-08-17
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ $$|\mathcal B(\mathbb R^n)|=\mathfrak c:=|\mathcal P(\mathbb N)|.$$
 
 [L2] Rational open boxes generate $\mathcal B(\mathbb R^n)$, and closed subsets of $\mathbb R^n$ are Borel ([[thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn]]).
 
-[L3] An infinite family of cardinality $\kappa$ generates at most $\kappa^{\aleph_0}$ sets under the Axiom of Choice ([[thm-cardinality-bound-for-generated-sigma-algebras]]).
+[L3] An infinite family of cardinality $\kappa$ generates at most $\kappa^{\aleph_0}$ sets under the Axiom of Choice ([[thm-cardinality-bound-for-generated-sigma-algebras|Assuming the Axiom of Choice, an infinite family $E$ generates at most $|E|^{\aleph_0}$ sets]]).
 
 [L4] Equinumerous sets have equinumerous power sets, and function spaces are transported by bijections ([[lem-cardinal-operations-are-well-defined]]).
 

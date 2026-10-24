@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-b-tilde-versus-c-tilde-diagrams.json
+  precheck: pass
 id: "ex-cg-b-tilde-versus-c-tilde-diagrams"
 kind: "example"
 title: "B-tilde versus C-tilde: the n=2 coincidence and the duality behind the difference"
@@ -11,8 +14,7 @@ pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 19
 deps: ["def-cg-standard-affine-diagrams","lem-cg-affine-type-crystallographic-alcove-diagrams","thm-cg-crystallographic-finite-type-and-lattice-stability","thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix","def-cg-crystallographic-scaling-coroot-and-lattice","def-cg-affine-root-hyperplane-reflection-and-alcove","lem-cg-highest-root-and-fundamental-alcove","thm-cg-affine-alcove-transitivity-presentation-and-length","ex-classical-root-systems-in-euclidean-coordinates","thm-cg-finite-coxeter-classification-including-h-and-dihedral","lem-cg-affine-reflection-identities-and-local-finiteness","thm-cg-affine-gram-classification-and-euclidean-realization","thm-hh-parabolic-minimal-representatives-and-length-additivity","def-pi-via-first-positive-cosine-zero","thm-double-angle-and-power-reduction-identities","thm-cofunction-supplementary-and-reflection-identities","thm-quarter-turn-values-and-shift-formulas","thm-sine-cosine-signs-monotonicity-and-ranges","thm-of-square-roots"]
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
+
 ---
 
 ## Example
@@ -72,3 +74,50 @@ Compare the standard affine diagrams $\tilde B_n$ and $\tilde C_n$ ([[def-cg-sta
 2.1 Set $N=2^n n!$ and let $n\ge3$. Deleting the endpoint $v_n$ of the $4$-edge from $\tilde B_n$ leaves the finite all-$3$ $D_n$ graph (at $n=3$, the path $A_3=D_3$). Its parabolic is the stabilizer of the opposite vertex, hence maximal finite by Step 1.4, and has order $N/2$ by Step 1.3. Deleting vertex $v_i$, $0\le i\le n$, from $\tilde C_n$ leaves two finite terminal-$4$ paths of ranks $i$ and $n-i$, interpreted as $B_1=A_1$ or rank-zero trivial blocks at the ends. Its vertex stabilizer has order $2^n i!(n-i)!$ by the restricted presentation [F10] and Step 1.3; the two blocks commute and their presented group is the direct product. At $i=0,n$ this is $N$. For $1\le i\le n-1$, $\binom ni\ge n$: the ratio $\binom n{i+1}/\binom ni=(n-i)/(i+1)$ shows the binomial coefficients increase to the middle and then decrease symmetrically, so their minimum on these indices is $\binom n1=\binom n{n-1}=n$. Hence the order is at most $N/n<N/2$. By Step 1.4 these are all maximal finite subgroup orders in $W_a(C_n)$. The two groups therefore cannot be abstractly isomorphic, since an isomorphism preserves finiteness, maximality and subgroup order. [F1, F9, F10, step 1.3, step 1.4, algebra]
 
 3.1 The different coroot lattices can also be seen directly. For $B_n$ with short roots $\pm e_i$, its coroots are $\pm2e_i$ and $\pm e_i\pm e_j$, whose integer span is $\{z\in\mathbb Z^n:\sum_i z_i\text{ is even}\}$: the generators have even sum, and subtracting $z_i(e_i-e_n)$ for $i<n$ leaves an even multiple of $e_n$. For $C_n$ with long roots $\pm2e_i$, their coroots include all $\pm e_i$, so the lattice is $\mathbb Z^n$. Both finite Weyl groups are the same signed permutation group by [F6], and [F3] identifies their affine facet diagrams with the standard $\tilde B_n,\tilde C_n$ diagrams; Step 1.1 shows these differ in degree data. Step 2.1 proves the stronger abstract distinction for $n\ge3$. Their chambers have dimension $n$; when $n=2$ the common affine diagram yields isomorphic Coxeter groups by [F3,F11] despite the dual coordinate normalizations. The decomposition [F7] identifies the translation lattices in these semidirect products with the two coroot lattices just computed. Finally, label $4$ is the actual product order by [F3], not a bond multiplicity, and the extended weight-lattice group is a distinct comparison object by [F11]. All comparisons use finite coordinates and averaging, without Choice. [F3, F6, F7, F11, step 1.1, step 1.3, step 2.1, algebra] ∎
+
+## Remarks
+
+The diagrams below isolate the graph comparison in (i)–(ii). Every ordinary unlabelled edge has Coxeter label $3$; each displayed $4$ is a reflection-product order. There are $n+1$ vertices, while the alcove dimension and finite root-system rank are $n$. In the schematic rows, the dots abbreviate the consecutive chain from $v_2$ to $v_{n-1}$ for $\tilde B_n$ (exactly $n-3$ edges) and from $v_1$ to $v_{n-1}$ for $\tilde C_n$ (exactly $n-2$ edges), all labelled $3$. Thus the first abbreviated chain is a single edge when $n=4$, and the second is a single edge when $n=3$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[anchor=east] at (-0.7,0) {$\tilde B_2=\tilde C_2$};
+\node[circle,draw,inner sep=2pt,label=below:$v_0$] (a0) at (0,0) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_1$] (a1) at (2,0) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_2$] (a2) at (4,0) {};
+\draw (a0) -- node[above] {$4$} (a1);
+\draw (a1) -- node[above] {$4$} (a2);
+\node[anchor=east] at (-0.7,-1.9) {$\tilde B_3$};
+\node[circle,draw,inner sep=2pt,label=left:$v_0$] (b0) at (0,-1.35) {};
+\node[circle,draw,inner sep=2pt,label=left:$v_1$] (b1) at (0,-2.45) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_2$] (b2) at (2,-1.9) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_3$] (b3) at (4,-1.9) {};
+\draw (b0) -- (b2);
+\draw (b1) -- (b2);
+\draw (b2) -- node[above] {$4$} (b3);
+\node[anchor=east] at (-0.7,-4.1) {$\tilde B_n,\ n\ge4$};
+\node[circle,draw,inner sep=2pt,label=left:$v_0$] (c0) at (0,-3.55) {};
+\node[circle,draw,inner sep=2pt,label=left:$v_1$] (c1) at (0,-4.65) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_2$] (c2) at (2,-4.1) {};
+\node at (3.25,-4.1) {$\cdots$};
+\node[circle,draw,inner sep=2pt,label=below:$v_{n-1}$] (cm) at (4.5,-4.1) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_n$] (cn) at (6.5,-4.1) {};
+\draw (c0) -- (c2);
+\draw (c1) -- (c2);
+\draw (c2) -- (2.9,-4.1);
+\draw (3.6,-4.1) -- (cm);
+\draw (cm) -- node[above] {$4$} (cn);
+\node[anchor=east] at (-0.7,-6.3) {$\tilde C_n,\ n\ge3$};
+\node[circle,draw,inner sep=2pt,label=below:$v_0$] (d0) at (0,-6.3) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_1$] (d1) at (2,-6.3) {};
+\node at (3.25,-6.3) {$\cdots$};
+\node[circle,draw,inner sep=2pt,label=below:$v_{n-1}$] (dm) at (4.5,-6.3) {};
+\node[circle,draw,inner sep=2pt,label=below:$v_n$] (dn) at (6.5,-6.3) {};
+\draw (d0) -- node[above] {$4$} (d1);
+\draw (d1) -- (2.9,-6.3);
+\draw (3.6,-6.3) -- (dm);
+\draw (dm) -- node[above] {$4$} (dn);
+\end{tikzpicture}
+```
+
+The branch at $v_2$ has degree $3$ even when $n=3$, where the terminal $4$-edge is incident to it. The $\tilde C_n$ rows have degree at most $2$. These are the recipes of the existing definition, illustrated without changing any root-length or lattice convention; the proof above is independent of the figure.

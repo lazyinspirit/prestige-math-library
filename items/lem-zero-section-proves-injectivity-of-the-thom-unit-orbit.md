@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-zero-section-proves-injectivity-of-the-thom-unit-orbit.json
+  precheck: pass
 id: lem-zero-section-proves-injectivity-of-the-thom-unit-orbit
 kind: lemma
 title: "The zero section proves injectivity of the Thom unit orbit"
@@ -34,8 +37,7 @@ sources:
     - title: "John Milnor and James Stasheff, Characteristic Classes"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
       locator: "Chapter 16: Euler class, zero-section pullback, and Thom identity."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -56,8 +58,8 @@ Assume AC. For the stable Thom class U∈M⁰, the map ν:A→M, a↦aU, is inje
 
 **Proof technique:** direct.
 
-1.1 Take a nonzero homogeneous a∈A^d. Set r=d+1 and X=(RP^L)^r with L≥d+1. Let x_i be the degree-one generator from factor i and P=x₁⋯x_r. By the leading-monomial lemma, the admissible terms in a have distinct leading monomials on P, so a(P)≠0. [given, F1]
+1.1 Take a nonzero homogeneous $a\in\mathcal A^d$. Set $r=d+1$ and $X=(\mathbb{RP}^L)^r$ with $L\ge d+1$. Let $x_i$ be the degree-one generator from factor $i$ and $P=x_1\cdots x_r$. By the leading-monomial lemma, the admissible terms in $a$ have distinct leading monomials on $P$, so $a(P)\ne0$. [given, F1]
 
-2.1 Let E=⊕_{i=1}^r pr_i^*γ₁ over X. The stable Grassmannian classification gives a classifying map g:X→BO(r) with g^*γ_r≅E. The prespectrum setup’s pullback Thom map T(E)→T_r pulls u_r back to u_E. The based zero section z_+:X_+→T(E) pulls the normalized Thom class back to the mod-two Euler class: z_+^*u_E=e_r(E)=w_r(E)=x₁⋯x_r=P. The first equality is the published Euler definition by zero-section pullback; the second is the published mod-two Euler/top-Stiefel–Whitney theorem; For each line L_i=pr_i^*γ₁, P(L_i)=X and its tautological line is L_i. The rank-one projective-bundle relation is x_(L_i)+w₁(L_i)=0, hence w₁(L_i)=x_(L_i). The factor map X→RP^L→RP^∞ classifies L_i, so the tautological-class definition gives x_(L_i)=x_i. The rank convention gives w_j(L_i)=0 for j>1. The Whitney formula now gives w(E)=∏(1+x_i), whose top-degree part is P. These are precisely the rank-one Stiefel–Whitney definition and the tautological-class definition; no identification of w₁ is inferred from the tautological definition alone. Naturality of every Sq composite, hence of a, now gives z_+^* T(g)^* (a u_r)=a(P)≠0. [step 1.1, F2, F3]
+2.1 Let $E=\bigoplus_{i=1}^r\mathrm{pr}_i^*\gamma_1$ over $X$. The stable Grassmannian classification gives a classifying map $g:X\to BO(r)$ with $g^*\gamma_r\cong E$. The prespectrum setup’s pullback Thom map $T(E)\to T_r$ pulls $u_r$ back to $u_E$. The based zero section $z_+:X_+\to T(E)$ pulls the normalized Thom class back to the mod-two Euler class: $z_+^*u_E=e_r(E)=w_r(E)=x_1\cdots x_r=P$. The first equality is the published Euler definition by zero-section pullback; the second is the published mod-two Euler/top-Stiefel–Whitney theorem; For each line $L_i=\mathrm{pr}_i^*\gamma_1$, $P(L_i)=X$ and its tautological line is $L_i$. The rank-one projective-bundle relation is $x_{(L_i)}+w_1(L_i)=0$, hence $w_1(L_i)=x_{(L_i)}$. The factor map $X\to\mathbb{RP}^L\to\mathbb{RP}^\infty$ classifies $L_i$, so the tautological-class definition gives $x_{(L_i)}=x_i$. The rank convention gives $w_j(L_i)=0$ for $j>1$. The Whitney formula now gives $w(E)=\prod(1+x_i)$, whose top-degree part is $P$. These are precisely the rank-one Stiefel–Whitney definition and the tautological-class definition; no identification of $w_1$ is inferred from the tautological definition alone. Naturality of every $Sq$ composite, hence of $a$, now gives $z_+^* T(g)^* (a u_r)=a(P)\ne0$. [step 1.1, F2, F3]
 
-3.1 Thus a u_r≠0. If aU were zero in M, every inverse-limit component would vanish, in particular its rank-r component a u_r; contradiction. So ν is injective in each degree and hence on the graded direct sum. For an inhomogeneous element, its distinct degree components remain distinct in M and cannot cancel. [step 2.1, F3] ∎
+3.1 Thus $a u_r\ne0$. If $aU$ were zero in $M$, every inverse-limit component would vanish, in particular its rank-$r$ component $a u_r$; contradiction. So $\nu$ is injective in each degree and hence on the graded direct sum. For an inhomogeneous element, its distinct degree components remain distinct in $M$ and cannot cancel. [step 2.1, F3] ∎

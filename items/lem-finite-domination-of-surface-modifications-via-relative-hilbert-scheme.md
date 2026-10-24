@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-domination-of-surface-modifications-via-relative-hilbert-scheme.json
+  precheck: pass
 id: lem-finite-domination-of-surface-modifications-via-relative-hilbert-scheme
 kind: lemma
 title: Finite domination of surface modifications by a relative Hilbert scheme
@@ -30,12 +33,7 @@ sources:
   - title: 'The Stacks Project, Resolution of Surfaces, proof of Lemma 54.8.6 and 54.8.10: finite domination input
       replaced by the proved Hilbert-scheme argument'
     url: https://stacks.math.columbia.edu/download/resolve.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -86,3 +84,14 @@ Assume AC and DC. Let $A$ be a normal Noetherian local domain of dimension two e
 
 - Hilbert representability is used only after a projective replacement and over a Noetherian affine base with a specified global embedding.
 - The rank of the finite locally free family is the degree n of the generic extension.
+
+The conclusion is summarized by the following commutative diagram. The left vertical map is finite by step 4.1; the top composite is the modification of step 5.1 followed by the given modification. The bottom map is the sequence of normalized point blowups of step 3.1, and the right vertical map comes from the finite $A$-algebra $B$.
+
+```tikzcd
+\begin{tikzcd}[column sep=8em, row sep=4em, font=\Large, labels={font=\large}]
+Y' \arrow[r, "\mathrm{modification}"] \arrow[d, "\mathrm{finite}"'] & Y \arrow[r, "\mathrm{modification}"] & \mathrm{Spec}B \arrow[d, "\mathrm{finite}"] \\
+X \arrow[rr, "\mathrm{normalized\ point\ blowups}"'] & & \mathrm{Spec}A
+\end{tikzcd}
+```
+
+The two boundary paths from $Y'$ to $\operatorname{Spec}A$ agree: all the maps arise over $\operatorname{Spec}A$ from the universal family and its normalization. No map $X\to\operatorname{Spec}B$ is asserted. The diagram illustrates the conclusion; the proof above is independent of it.

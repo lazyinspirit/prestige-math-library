@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-strict-transform-node-separates-branches.json
+  precheck: pass
 id: ex-strict-transform-node-separates-branches
 kind: example
-title: "First blowup of the node y^2=x^3+x^2 separates its branches"
+title: "First blowup of the node y² = x³ + x² separates its branches"
 status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
@@ -28,18 +31,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
       locator: "Chapter 8 Example 8.66 nodal cubic, pp. 195-197"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-2.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-2.result.json
-      - research/frontier-38-owner-30-step5-hash-2-post-5a.json
-  precheck: pass
+
 ---
 
 ## Example

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-epsilon-from-filtered-knot-floer-complex.json
+  precheck: pass
 id: def-epsilon-from-filtered-knot-floer-complex
 kind: definition
 title: "Epsilon from the filtered knot Floer complex"
@@ -28,13 +31,7 @@ sources:
     - title: "Jennifer Hom, A survey on Heegaard Floer homology and concordance, §3.1"
       url: "https://arxiv.org/pdf/1512.00383"
       locator: "§3.1, PDF pp.8–10; vertical/horizontal simplified bases and the epsilon cases"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Definition
@@ -42,9 +39,17 @@ verification:
 Work over $\mathbb F_2=\mathbb Z/2\mathbb Z$. Let $K\subset S^3$ be a smooth oriented knot and let $C=\mathrm{CFK}^{\infty}(K)$ be its finitely generated free $\mathbb F_2[U,U^{-1}]$ chain complex with Maslov grading $M$ and bifiltration coordinates $(i,j)$. Multiplication by $U$ lowers each filtration coordinate by one and lowers $M$ by two; the differential lowers $M$ by one and does not increase either filtration. The total homology is $\mathbb F_2[U,U^{-1}]$ with its generator normalized in Maslov grading zero.
 
 For a filtration region $R$, write $C\{R\}$ for the corresponding subquotient of the bifiltered complex; in particular $C\{i=0\}$ is the vertical complex, $C\{j=s\}$ is the horizontal complex at Alexander level $s$, and $C\{i=0,j\le s\}$ is the subcomplex of the vertical complex at levels at most $s$. Define
-$$ \tau(C)=\min\{s\in\mathbb Z: H_*(C\{i=0,j\le s\})\longrightarrow H_*(C\{i=0\})\text{ is nonzero} \}. $$
+
+$$
+\tau(C)=\min\{s\in\mathbb Z: H_*(C\{i=0,j\le s\})\longrightarrow H_*(C\{i=0\})\text{ is nonzero} \}.
+$$
+
 For each integer $s$, let $F_s$ be the homology map induced by the chain map from $C\{i=0\}$ to $C\{\min(i,j-s)=0\}$ obtained by quotienting by $C\{i=0,j<s\}$ and then including the quotient. Let $G_s$ be the homology map from $C\{\max(i,j-s)=0\}$ to $C\{i=0\}$ obtained by quotienting by $C\{i<0,j=s\}$ and then including. The epsilon invariant is
-$$ \epsilon(C)=\begin{cases} 1,&F_{\tau(C)}=0,\\ -1,&G_{\tau(C)}=0,\\ 0,&F_{\tau(C)}\ne0\text{ and }G_{\tau(C)}\ne0. \end{cases} $$
+
+$$
+\epsilon(C)=\begin{cases} 1,&F_{\tau(C)}=0,\\ -1,&G_{\tau(C)}=0,\\ 0,&F_{\tau(C)}\ne0\text{ and }G_{\tau(C)}\ne0. \end{cases}
+$$
+
 Here zero and nonzero refer to the induced homology maps. This definition fixes the sign convention; invariance under stable equivalence is a separate claim.
 
 ## Definition references

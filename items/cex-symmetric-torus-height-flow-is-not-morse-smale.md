@@ -1,10 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-symmetric-torus-height-flow-is-not-morse-smale.json
+  precheck: pass
 id: cex-symmetric-torus-height-flow-is-not-morse-smale
 kind: counterexample
 title: "The symmetric torus height flow is not Morse--Smale"
 status: published
-verification:
-  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -45,3 +46,34 @@ Take vertical height $f=(R+r\cos v)\sin u$ and the induced metric $g$. The inner
 2.1 The circle $v=\pi$ is invariant. On its interval $\pi/2<u<3\pi/2$, $\dot u=-\cos u/(R-r)>0$, so every point has backward limit $a$ and forward limit $b$. Locally at $a$, writing $w=v-\pi$ gives $\dot w=-\sin w\sin u/r$; for $w\ne0$ small this forces $|w|$ to increase backwards while $u$ stays near $\pi/2$. Thus a backward-converging trajectory must have $w=0$. At $b$ the same equation forces nonzero $|w|$ to increase forwards, so a forward-converging trajectory must also have $w=0$. Uniqueness and flow transport show that the indicated unstable and stable branches are precisely arcs of this circle. [step 1.1, step 1.2, algebra]
 
 3.1 Consequently, at every point of this open interval, $T W^u(a)=T W^s(b)=\mathbb R\partial_u$. Their tangent sum has dimension one, whereas the torus has dimension two. The metric pair $(f,g)$ therefore fails the Morse--Smale condition. [F1, step 2.1, algebra] ∎
+
+
+## Remarks
+
+The coordinate-strip schematic below shows only the inner-equator branch
+$\gamma=\{(u,\pi):\pi/2<u<3\pi/2\}$, not the whole torus. Its critical
+endpoints are excluded from $\gamma$. By steps 2.1 and 3.1, this same open arc
+lies in both $W^u(a)$ and $W^s(b)$; at any indicated point $p\in\gamma$,
+both tangent lines are $\mathbb R\partial_u$, while $\partial_v$ supplies
+the other coordinate direction of the surface. The arrows on the arc show
+forward time. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[dashed,gray] (0,0) rectangle (7,3);
+\node at (3.5,3.4) {Coordinate strip near the inner equator};
+\draw[very thick,blue] (1,1.4) -- (6,1.4);
+\draw[->,very thick,blue] (1.8,1.4) -- (2.7,1.4);
+\draw[->,very thick,blue] (4.2,1.4) -- (5.1,1.4);
+\fill (1,1.4) circle (2pt);
+\fill (6,1.4) circle (2pt);
+\node[above] at (1,1.7) {$a=(\pi/2,\pi)$};
+\node[above] at (6,1.7) {$b=(3\pi/2,\pi)$};
+\node[below] at (1,1.2) {saddle};
+\node[below] at (6,1.2) {saddle};
+\fill[blue] (3.5,1.4) circle (2pt);
+\node[below] at (3.5,1.3) {$p\in\gamma$};
+\draw[->] (3.5,1.4) -- (3.5,2.6) node[right] {$\partial_v$};
+\node[blue] at (3.5,0.35) {$\gamma\subset W^u(a)\cap W^s(b),\quad v=\pi$};
+\end{tikzpicture}
+```

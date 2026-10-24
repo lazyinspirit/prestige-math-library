@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-generic-movie-of-an-oriented-knot-cobordism.json
+  precheck: n/a
 id: def-generic-movie-of-an-oriented-knot-cobordism
 kind: definition
 title: A generic movie of an oriented knot cobordism
@@ -28,13 +31,7 @@ sources:
       url: https://arxiv.org/pdf/math/0206303
       locator: Printed pp.1220–1225 and 1235–1244; movies, equivalence, and the
         movie-move theorem's use
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Definition
@@ -58,12 +55,23 @@ Assume countable choice. Let $K_0,K_1\subset S^3$ be smooth oriented knots. A sm
 
 ## Diagram
 
-For example, a saddle movie may merge two circles or split one circle, according to how its band is attached. The following schematic records the merge case only; the circles shown are level-set components, not a projection of the full embedded surface.
+For example, a saddle movie may merge two circles or split one circle, according to how its band is attached. The following schematic records the merge case only; the circles shown are oriented regular level-set components, not a projection of the full embedded surface. The dashed band joins oppositely directed attaching arcs, so the displayed orientations extend across the oriented saddle. The outgoing circle is drawn up to planar isotopy.
 
 ```tikz
-\begin{tikzpicture}[>=stealth, node distance=1.6cm]
-  \node (a) {$\bigcirc\ \sqcup\ \bigcirc$};
-  \node[right=of a] (b) {$\bigcirc$};
-  \draw[->] (a) -- node[above] {one saddle band} (b);
+\begin{tikzpicture}[>=stealth, line width=0.8pt, scale=1.3, transform shape]
+  \path[fill=gray!15] (0.49,0.25) -- (1.11,0.25)
+    .. controls (1.03,0.08) and (1.03,-0.08) .. (1.11,-0.25)
+    -- (0.49,-0.25)
+    .. controls (0.57,-0.08) and (0.57,0.08) .. (0.49,0.25);
+  \draw[dashed] (0.49,0.25) -- (1.11,0.25);
+  \draw[dashed] (0.49,-0.25) -- (1.11,-0.25);
+  \draw (0,0) circle (0.55);
+  \draw (1.6,0) circle (0.55);
+  \draw[->] (0.55,0) arc (0:90:0.55);
+  \draw[->] (2.15,0) arc (0:90:0.55);
+  \draw[->] (2.5,0) -- (4,0);
+  \node at (3.25,1.15) {one saddle band};
+  \draw (5,0) circle (0.75);
+  \draw[->] (5.75,0) arc (0:90:0.75);
 \end{tikzpicture}
 ```

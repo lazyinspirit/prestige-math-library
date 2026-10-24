@@ -1,0 +1,96 @@
+{
+  "id": "cex-proj-graded-ring-not-faithful",
+  "agent": "/root/rendering_repair_coordinator/scm_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution audit tile 02 visibly ends the conclusion in literal backslash-qed. Frozen/current pre-edit line 74 places that command outside math; it also prevents trailing justification chips from being recognized.",
+      "action": "Replaced only the final literal \\qed with the schema-supported Unicode \u220e.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The same standalone original tile visibly exposes $d=2$ in the uppercase proof-technique banner; this banner is plain React text rather than MathMarkdown.",
+      "action": "Replaced $d=2$ in the banner with equivalent readable text d = 2, preserving its value and all numbered proof text.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced literal terminal \\qed with \u220e and exposed banner $d=2$ with d = 2; mathematical claims, hypotheses, numbered proof steps, tags, sources, dependencies, title and complete frontmatter remain unchanged.",
+  "source_lines_after": {
+    "proof_technique_banner": [
+      64
+    ],
+    "terminal_qed": [
+      74
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "before_raw_sha256": "12e4f6ab70a280dc6945b4fb04cf3a33e4dfd9f9a0e5a53dfd43fe8833128eb5",
+  "after_raw_sha256": "43fb9169acddc3ca2eb3972aa0fc132695d9a7d4a6b35a57316c3852d053b715",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-proj-graded-ring-not-faithful.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-proj-graded-ring-not-faithful.md",
+            "item_id": "cex-proj-graded-ring-not-faithful",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-proj-graded-ring-not-faithful.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-proj-graded-ring-not-faithful.md",
+      "exit_code": 1,
+      "output": "FAIL proof-step-separation: items/cex-proj-graded-ring-not-faithful.md:32 Counterexample  [no-steps] Proof-like section has no numbered steps.\nproof-layout: 1 items, 5 steps, 1 defects"
+    },
+    {
+      "command": "node tools/proof-layout.mjs research/math-library-rendering-repairs-2026-10-23/before/cex-proj-graded-ring-not-faithful.md",
+      "exit_code": 1,
+      "output": "Frozen before: same Counterexample no-steps defect at line 32; additionally line 74 missing-or-invalid-tags and rendered-chip-mismatch. 1 items, 5 steps, 3 defects."
+    }
+  ],
+  "visual_validation": {
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/cex-proj-graded-ring-not-faithful--02.png",
+    "original_view": "Standalone view_image detail original",
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/preview-scm013-independent-20261024-v2",
+    "viewed_tiles": [
+      1,
+      2
+    ],
+    "native_renderer": "Actual local ItemBody/MathMarkdown with current reference-title map; file-only Playwright capture.",
+    "result": "Standalone original-resolution fresh tile 02 shows readable D = 2 banner, no literal qed, a rendered QED square, and all conclusion citation chips. Tile 01 also viewed. Zero KaTeX errors, 115 KaTeX expressions, zero diagrams.",
+    "failed_attempt": "preview-scm013-independent-20261024 failed Page.captureScreenshot; successful fresh v2 supplies actual visual evidence.",
+    "limitations": "Local title/ItemBody preview, not production route/navigation/dependency widgets or metadata Sources footer; reference-map reports 16 unrelated parse diagnostics."
+  },
+  "remaining_issues": [
+    "Pre-existing proof-layout no-steps failure at line 32: Counterexample statement section contains no phase steps. Preserved statement/section structure rather than expanding this display-only repair.",
+    "Proof-technique banner still uses renderer plain text; local equivalent readable text avoids exposed delimiters."
+  ]
+}

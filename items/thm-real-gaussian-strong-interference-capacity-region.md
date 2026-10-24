@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-real-gaussian-strong-interference-capacity-region.json
+  precheck: pass
 id: thm-real-gaussian-strong-interference-capacity-region
 kind: theorem
 title: Exact strong-interference region for the two-user Gaussian interference channel
@@ -13,8 +16,6 @@ axiom_use: AC is inherited through the Gaussian random-coding and scalar-channel
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: Abbas El Gamal and Young-Han Kim, Lecture Notes on Network Information Theory, arXiv:1001.3404v4
@@ -67,3 +68,26 @@ where $\kappa=1/2$ for real and $1$ for complex channels.
 3.1 For each coordinate put $S_i=h_{11}X_{1,i}+h_{21}X_{2,i}$. The channel output depends on the input pair only through $S_i$, so [F5] in both directions gives $I(X_{1,i},X_{2,i};Y_{1,i})=I(S_i;S_i+Z_{1,i})$. Independence gives $\operatorname{Var}(S_i)\le |h_{11}|^2p_{1,i}+|h_{21}|^2p_{2,i}$; [F6] therefore bounds this term by $\kappa\ln(1+|h_{11}|^2p_{1,i}+|h_{21}|^2p_{2,i})$ nats. Jensen's inequality and the average power constraints yield $R_1+R_2\le\kappa\log_2(1+\mathrm{SNR}_1+\mathrm{INR}_1)$. The joint decoder at receiver 2 analogously gives $R_1+R_2\le\kappa\log_2(1+\mathrm{SNR}_2+\mathrm{INR}_2)$. If $h_{21}=0$, then $h_{22}=0$, so $R_2=0$ by step 1.1; the first sum bound is the $R_1$ individual bound and the second is no tighter because $\mathrm{INR}_2\ge\mathrm{SNR}_1$. If $h_{12}=0$, then $h_{11}=0$, so $R_1=0$ and the second sum bound is the $R_2$ individual bound while the first is no tighter because $\mathrm{INR}_1\ge\mathrm{SNR}_2$. Thus both sum bounds hold also when a cross gain vanishes. [F1, F5, F6, step 1.1, step 1.2, step 2.1, algebra, cases]
 
 4.1 Use the same independent Gaussian codebook ensemble at the two receivers. The finite-receiver construction in the proof of [F2] sums the two ensemble-average errors and jointly selects codebooks meeting both deterministic power constraints, so one codebook pair achieves the intersection of the two Gaussian MAC regions. The strong gain inequalities make each unintended-receiver individual constraint at least as large as the corresponding intended-receiver constraint; the two sum constraints are exactly those displayed. Therefore every rate pair strictly inside the claimed region is achievable, and closure removes strictness. [F1, F2, step 1.1, algebra] ∎
+
+## Remarks
+
+Write $A=\kappa\log_2(1+\mathrm{SNR}_1)$, $B=\kappa\log_2(1+\mathrm{SNR}_2)$, and $C=\kappa\min\{\log_2(1+\mathrm{SNR}_1+\mathrm{INR}_1),\log_2(1+\mathrm{SNR}_2+\mathrm{INR}_2)\}$. The region is the rectangle $[0,A]\times[0,B]$ intersected with $R_1+R_2\le C$. The strong gain inequalities give $\mathrm{INR}_2\ge\mathrm{SNR}_1$ and $\mathrm{INR}_1\ge\mathrm{SNR}_2$, hence $C\ge\max\{A,B\}$.
+
+The schematic shows the case $A,B>0$ and $\max\{A,B\}<C<A+B$. Its sloping edge joins $(A,C-A)$ to $(C-B,B)$; the dashed edges complete the individual-bound rectangle. Coordinates are symbolic, and the figure is not to scale.
+
+```tikz
+\begin{tikzpicture}[scale=0.85]
+\fill[blue!15] (0,0) -- (5,0) -- (5,1.3) -- (2.5,3.8) -- (0,3.8) -- (0,0);
+\draw[dashed,gray] (5,1.3) -- (5,3.8) -- (2.5,3.8);
+\draw[thick,blue] (0,0) -- (5,0) -- (5,1.3) -- (2.5,3.8) -- (0,3.8) -- (0,0);
+\draw[->] (0,0) -- (6,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,4.6) node[above] {$R_2$};
+\node[below left] at (0,0) {$0$};
+\node[below] at (5,0) {$A$};
+\node[left] at (0,3.8) {$B$};
+\node at (2,1.5) {$\mathcal C$};
+\node[right] at (4,2.8) {$R_1+R_2=C$};
+\end{tikzpicture}
+```
+
+Here $\mathcal C$ denotes the capacity region in the statement. If $C\ge A+B$, the sum constraint is redundant and the full rectangle remains. At $C=\max\{A,B\}<A+B$, a sloping-edge endpoint reaches an axis, with both endpoints reaching axes when $A=B=C$. If $A=0$ or $B=0$, the region is the corresponding axis segment (or just the origin when both vanish). These cases follow from the same inequalities; the proof above is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-proj-empty-irrelevant-nilpotent.json
+  precheck: pass
 id: ex-proj-empty-irrelevant-nilpotent
 kind: example
 title: "A nilpotent irrelevant ideal gives empty Proj"
@@ -17,9 +20,7 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -46,7 +47,7 @@ irrelevant ideal.
 
 ## Verification
 
-**Proof technique:** direct: identify $S_+$, apply the emptiness criterion, and exhibit the point of $\operatorname{Spec}S$.
+**Proof technique:** direct: identify the irrelevant ideal, apply the emptiness criterion, and exhibit the point of the spectrum.
 
 1.1 The irrelevant ideal is nilpotent. Here $S_+=k\varepsilon$ consists of the multiples of $\varepsilon$, and $S_+^2=k\varepsilon^2=0$; hence every element of $S_+$ is nilpotent and $S_+=(\varepsilon)$ is finitely generated. [algebra]
 
@@ -56,4 +57,4 @@ irrelevant ideal.
 
 3.1 The spectrum is nonempty. In $k[\varepsilon]/(\varepsilon^2)$ the element $\varepsilon$ is nilpotent but nonzero, so the ideal $(\varepsilon)$ is proper; every prime contains the nilpotent $\varepsilon$, so $(\varepsilon)$ is the unique prime ideal and $\operatorname{Spec}S=\{(\varepsilon)\}\neq\varnothing$, in contrast with step 2.1. [F1, F3, algebra]
 
-4.1 Conclusion. Steps 1.1 and 2.1 show that the nilpotent irrelevant ideal produces empty Proj, while step 3.1 shows that the underlying ring still has a point; the two conclusions are consistent because Proj discards exactly the primes containing all of $S_+$. [F1, F2, step 2.1, step 3.1] \qed 
+4.1 Conclusion. Steps 1.1 and 2.1 show that the nilpotent irrelevant ideal produces empty Proj, while step 3.1 shows that the underlying ring still has a point; the two conclusions are consistent because Proj discards exactly the primes containing all of $S_+$. [F1, F2, step 2.1, step 3.1] ∎

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lovasz-perfect-graph-criterion-and-complement-invariance.json
+  precheck: pass
 id: thm-lovasz-perfect-graph-criterion-and-complement-invariance
 kind: theorem
 title: "Lovasz's numerical criterion for perfect graphs and complement invariance"
@@ -13,16 +16,7 @@ sources:
   references:
     - title: "Reinhard Diestel, Graph Theory, 5th ed., Theorems 5.5.4 and 5.5.6, pp. 142-145"
       url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch5.pdf"
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical new_item review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Statement
@@ -75,7 +69,9 @@ $n$ standard coordinate vectors span $\mathbb R^n$
 
 5.1 Enumerate $V(G)=\{v_1,\ldots,v_n\}$. Let $A$ be the real $d\times n$ matrix whose $i$th row is the incidence vector of $A_i$, and let $B$ be the real $n\times d$ matrix whose $j$th column is the incidence vector of $K_j$. By step 4.1, $AB=J_d-I_d$: its diagonal entries are $0$ and all off-diagonal entries are $1$. This $d\times d$ matrix has independent columns. Indeed, if $(J_d-I_d)z=0$, put $s=\sum_i z_i$. Each coordinate equation says $s-z_i=0$, so all $z_i=s$; then $s=ds$, and $d\ge2$ forces $s=0$ and $z=0$. Hence the $d$ columns of $B$ are independent: any linear relation among them would remain a relation after multiplying by $A$. But $d>n$ by step 1.2, contradicting [L3] for vectors of $\mathbb R^n$. [L3, step 1.2, step 4.1, algebra]
 
-6.1 The contradiction discharges step 1.2, proving the numerical criterion. If $G$ is perfect, step 1.1 gives the inequality for every induced $H$. For each induced subgraph $\overline H$ of $\overline G$, [L2] gives $|V(\overline H)|=|V(H)|$, $\alpha(\overline H)=\omega(H)$, and $\omega(\overline H)=\alpha(H)$; so the same inequality holds in $\overline G$. The criterion makes $\overline G$ perfect. Applying that direction to $\overline G$ proves the converse, because $\overline{\overline G}=G$. [L2, step 1.1, step 5.1, discharge-contradiction] ∎ ## Source notes
+6.1 The contradiction discharges step 1.2, proving the numerical criterion. If $G$ is perfect, step 1.1 gives the inequality for every induced $H$. For each induced subgraph $\overline H$ of $\overline G$, [L2] gives $|V(\overline H)|=|V(H)|$, $\alpha(\overline H)=\omega(H)$, and $\omega(\overline H)=\alpha(H)$; so the same inequality holds in $\overline G$. The criterion makes $\overline G$ perfect. Applying that direction to $\overline G$ proves the converse, because $\overline{\overline G}=G$. [L2, step 1.1, step 5.1, discharge-contradiction] ∎
+
+## Source notes
 
 Diestel, Theorem 5.5.6, pp. 144-145, gives Gasparian's finite incidence
 matrix proof of Lovasz's numerical criterion. Theorem 5.5.4, pp. 142-144,

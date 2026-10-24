@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ideal-orthoscheme-volume.json
+  precheck: pass
 id: lem-ideal-orthoscheme-volume
 kind: lemma
 title: "Volume of an ideal orthoscheme region"
@@ -24,13 +27,7 @@ sources:
     - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/7.pdf"
       locator: "Chapter 7, Milnor's derivation of ideal tetrahedron volume"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -47,8 +44,8 @@ Its hyperbolic volume in the upper half-space metric is $\frac12\Lambda(\zeta)$.
 
 The shaded triangle is the vertical projection of $\mathcal O_\zeta$. The dashed arc is the unit circle; the vertex $(\cos\zeta,\sin\zeta)$ lies on it. The region in $\mathbb H^3$ lies above the corresponding unit hemisphere and is unbounded toward the ideal point at infinity. This is a projection only; the proof uses the stated coordinate inequalities and integral.
 
-\begin{center}
-\begin{tikzpicture}[scale=2.2]
+```tikz
+\begin{tikzpicture}[scale=4]
   \def\a{38}
   \coordinate (O) at (0,0);
   \coordinate (A) at ({cos(\a)},0);
@@ -63,9 +60,9 @@ The shaded triangle is the vertical projection of $\mathcal O_\zeta$. The dashed
   \node[below] at (A) {$A=(\cos\zeta,0)$};
   \node[above right] at (B) {$B=(\cos\zeta,\sin\zeta)$};
   \node at (0.28,0.09) {$\zeta$};
-  \node[below right] at (0.92,0.12) {$x^2+y^2=1$};
+  \node[right] at (1.05,0.28) {$x^2+y^2=1$};
 \end{tikzpicture}
-\end{center}
+```
 
 ## Facts & Assumptions
 

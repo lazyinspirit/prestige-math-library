@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-w-one-p-is-reflexive.json
+  precheck: pass
 id: lem-w-one-p-is-reflexive
 kind: lemma
-title: "W^{1,p}(Omega) is reflexive for 1<p<infinity"
+title: '$W^{1,p}(\Omega)$ is reflexive for $1<p<\infty$'
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,12 +22,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)"
       url: "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "Section 13.2, first paragraph (reflexive spaces and weak compactness), printed p. 296"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -47,7 +45,7 @@ Assume the ultrafilter lemma, DC and HB ([[def-ultrafilter-extension-principle]]
 
 ## Proof
 
-**Proof technique:** direct, by embedding $W^{1,p}(\Omega)$ isometrically into a finite product of reflexive $L^p$ spaces.
+**Proof technique:** direct, by embedding the first-order Sobolev space isometrically into a finite product of reflexive Lebesgue spaces.
 
 1.1 The gradient embedding. Write $\mathcal A_1=\{0,e_1,\dots,e_n\}$ and define $\Phi(u):=(D^\alpha u)_{\alpha\in\mathcal A_1}$ for $u\in W^{1,p}(\Omega)$, regarded as an element of the real vector space $Y:=\prod_{\alpha\in\mathcal A_1}L^p(\Omega)$ equipped with the $\ell^p$-sum norm $\|(w_\alpha)\|_Y:=(\sum_\alpha\|w_\alpha\|_{L^p(\Omega)}^p)^{1/p}$. By [F1] the map $\Phi$ is linear and $\|\Phi(u)\|_Y=\|u\|_{W^{1,p}(\Omega)}$ for every $u$; hence $\Phi$ is a linear isometry onto its image $S:=\Phi(W^{1,p}(\Omega))$, and $Y$ is a Banach space (a finite $\ell^p$-sum of the Banach spaces $L^p(\Omega)$). [F1, F2, given]
 

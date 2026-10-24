@@ -1,0 +1,135 @@
+{
+  "id": "thm-linucb-regret",
+  "agent": "/root/rendering_repair_coordinator/dorl_029",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The support geometry is useful independently of proof completeness: it distinguishes the true parameter inside the confidence region from the boundary parameter giving an optimistic score, and distinguishes this single-round geometry from the cumulative determinant argument. Original screenshots show no such illustration.",
+      "action": "Added a mathematically specified two-dimensional ellipsoid, support point, support level line, and feature direction in a final Remarks section; supplied the general support formula and local justification.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only explanatory Remarks, including a native TikZ confidence-support figure; all original bytes through the complete proof are preserved as a prefix.",
+  "source_lines_after": {
+    "remarks": [
+      107,
+      133
+    ],
+    "tikz": [
+      115,
+      131
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "protected_metadata_unchanged": true,
+  "publication_status_unchanged": "published",
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains",
+      "justification": "At a fixed round V=V_{t-1} is positive definite by F7 and proof 1.1; theta, theta-hat and a are in R^d by F1/F2. The displayed supporting-point formula is restricted to a nonzero feature, so a^T V^{-1}a>0 and its denominator is defined."
+    },
+    {
+      "check": "Enlarged confidence inclusion",
+      "justification": "F3 defines C_t with V-radius rho_t. F2 and proof 2.2 give beta_t>=rho_t^2 with rho_t>=0, hence C_t is contained in E_t and theta* is inside E_t on E. The diagram is of E_t, not an incorrectly equated C_t."
+    },
+    {
+      "check": "Supporting point and optimistic value",
+      "justification": "For h=sqrt(beta_t)V^{-1}a/sqrt(a^TV^{-1}a), h^TVh=beta_t and a^Th=sqrt(beta_t)sqrt(a^TV^{-1}a). Thus theta-hat+h is on the boundary and has value U_t(a) from F2 and proof 1.1. The Cauchy\u2013Schwarz inequality in proof 3.1 bounds every point of E_t by this value."
+    },
+    {
+      "check": "Actual plotted coordinates",
+      "justification": "With V=diag(1,4), beta_t=4 and center 0, E_t is x^2+4y^2<=4, exactly the ellipse with horizontal radius 2 and vertical radius 1. For a=(1,0), V^{-1}a=(1,0), theta_t^+(a)=(2,0), U_t(a)=2, and the dashed x=2 line is its supporting level set. The true point (3/5,3/10) satisfies x^2+4y^2=18/25<4. The separate direction arrow points right, consistent with a."
+    },
+    {
+      "check": "Relation to selected action and cumulative estimate",
+      "justification": "The figure uses arbitrary nonzero available a, not an assertion that this is the selected A_t or true best action. Remarks cite proof 4.1 for maximizing U_t and proof 5.1 for selected width; F4 and proof 7.1\u20138.1 separately supply the cumulative determinant estimate. All original rigorous proof steps remain byte-identical."
+    },
+    {
+      "check": "Endpoints, closure and crossings",
+      "justification": "All three plotted dots are filled points belonging to the closed ellipsoid; there are no open endpoint claims. This is not a graph-cycle diagram. The native SVG ellipse has a closed Z path, and the support arrow ends at the right boundary. The only line/ellipse intersection at x=2 is the intended tangency, not a crossing or missing closing edge."
+    }
+  ],
+  "before_raw_sha256": "56f1082dca700c9ff906d86b3dc487294602f133f1f171ff757b2a081fb045ea",
+  "after_raw_sha256": "99a9c9ee64d5ce000bc7375adbf02aaf17d23ee7d6e90e753f4fef52607e4987",
+  "evidence": {
+    "original_path_discrepancy": "The declared diagram-supplement/screenshots directory does not contain these images. Authentic images were located only in the corresponding category screenshots directory, and all three hashes match the queue exactly.",
+    "original_screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-linucb-regret--01.png",
+        "sha256": "627f8adfe083df8331c702445f58413c50fbe0f3c0690fe8e45007c7de60fa2d",
+        "viewed": "original resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-linucb-regret--02.png",
+        "sha256": "791e1338fd152dc4149af7e76fe4e18aa59aff25bb455d8146993b1c438e7531",
+        "viewed": "original resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-linucb-regret--03.png",
+        "sha256": "c5b17d057505093ada5854519fa8339ae53f426b6e3fd9660fa6a7305dcb7047",
+        "viewed": "original resolution"
+      }
+    ],
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl029-linucb-final/manifest.json",
+    "native_preview_manifest_sha256": "951630a0b6f7a1e156ec2a91691b5f2f96094ad23a73cb48634612ae0ce0eabb",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl029/pi-tikz-cache/5315839e0dd17eeb6c459edc2275c2dc.svg",
+    "native_svg_sha256": "1dec2e6807ff48f009264c385c775099d15fded245d8262f4837f5e7c6a07a71",
+    "visual_check": "Inspected original-resolution native tile 03 and then its standalone lossless figure-crop.png. The full tile viewer sometimes blanks glyph regions; the genuine crop displays the intact ellipse, dots, arrows and all labels. White currentColor strokes/dots/labels contrast with black; the thinner dashed supporting line remains visible. No pale fills, open-ring ambiguity, clipped labels or overlaps. Native SVG confirms currentColor stroke/fill, closed ellipse path and all three closed filled dot paths.",
+    "figure_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dorl029-linucb-final/figure-crop.png"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-linucb-regret.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-linucb-regret.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-linucb-regret.md",
+            "item_id": "thm-linucb-regret",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-linucb-regret.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl029 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-linucb-regret --out research/math-library-rendering-repairs-2026-10-23/previews/dorl029-linucb-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 3,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview covers local ItemBody rather than full production route. Sixteen unrelated reference-map parse diagnostics are recorded in the native manifest; no unrelated carrier was changed."
+  ]
+}

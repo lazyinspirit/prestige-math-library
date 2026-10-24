@@ -1,14 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-carleson-size-selection.json
+  precheck: pass
 id: "lem-carleson-size-selection"
 kind: "lemma"
 title: "Carleson size selection"
 deps: ["def-density-size-and-tree-count-for-carleson-tiles", "def-carleson-tiles-wave-packets-and-tile-order", "thm-plancherel", "def-axiom-of-choice", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz"]
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'
@@ -24,7 +21,7 @@ origin: "pipeline"
 
 ## Statement
 
-Assume AC. For a finite family of size sigma>0, choose trees with total top length <=C sigma^(-2)||f||_2^2, leaving size <=sigma/2.
+Assume AC. For a finite family of size $\sigma>0$, choose trees with total top length $\le C\sigma^{-2}\|f\|_2^2$, leaving size $\le\sigma/2$.
 
 ## Facts & Assumptions
 
@@ -54,6 +51,6 @@ Assume AC. For a finite family of size sigma>0, choose trees with total top leng
 
 4.1 For fixed $s\in U$ consider all witness tiles s' whose lower frequency halves properly contain $\omega_{s,-}$. They belong to other witnesses by step 3.1, and their spatial intervals lie outside $I_U$. These intervals are pairwise disjoint. To check this, two corresponding lower frequency halves both contain $\omega_{s,-}$, so are nested. If unequal, their owning witnesses must differ by step 3.1; applying its separation property to that pair makes the smaller spatial interval disjoint from the other one's entire top interval, hence from the other spatial interval. If equal, they have the same scale and different spatial intervals. Put $\chi_I(x)=|I|^{-1}(1+|x-c(I)|/|I|)^{-20}$. Since $|I_{s'}|\le|I_s|$, the values $\chi_{I_s}(x)$ and $\chi_{I_s}(c(I_{s'}))$ on $I_{s'}$ differ by at most a fixed factor: their denominators before taking the twentieth power differ by at most $|I_{s'}|/(2|I_s|)\le1/2$. Therefore $$\sum_{s'}|I_{s'}|\chi_{I_s}(c(I_{s'}))\le C\int_{\mathbb R\setminus I_U}\chi_{I_s}(x)\,dx.$$ All sums here are finite. [F2, step 3.1]
 
-5.1 Singleton trees in F1 give $|a_s|\le\sigma\sqrt{|I_s|}$. Combining this with step 1.2 bounds an oriented unequal-frequency Gram term by $C\sigma^2|I_s||I_{s'}|\chi_{I_s}(c(I_{s'}))$. Thus step 4.1 bounds all such terms by $$C\sigma^2\sum_U\sum_{s\in U}|I_s|\int_{\mathbb R\setminus I_U}\chi_{I_s}(x)\,dx.$$ For a fixed top interval J and a fixed scale l<=|J|, at most one frequency interval can occur above a given spatial interval of that scale: it must be the unique dyadic ancestor of the top frequency of length 1/l. Thus the spatial intervals at that scale form a subset of the dyadic subintervals of J. Write $m=|J|/l$ and index the full list from k=0 to m-1. Direct integration on the two exterior half-lines bounds $$l\int_{\mathbb R\setminus J}\chi_{I_k}(x)\,dx\le Cl\bigl((1+k)^{-19}+(1+m-1-k)^{-19}\bigr).$$ Indeed the exact two denominators are $1+k+1/2$ and $1+m-k-1/2$, with factor $l/19$. The sum over k is at most Cl by integral comparison with $x^{-19}$. Summing over the dyadic scales $l=|J|2^{-j}$, j>=0, gives at most C|J| by the geometric sum. The oriented contribution is consequently at most $C\sigma^2L$; its conjugate orientation satisfies the same bound. [F1, F2, step 1.2, step 4.1]
+5.1 Singleton trees in F1 give $|a_s|\le\sigma\sqrt{|I_s|}$. Combining this with step 1.2 bounds an oriented unequal-frequency Gram term by $C\sigma^2|I_s||I_{s'}|\chi_{I_s}(c(I_{s'}))$. Thus step 4.1 bounds all such terms by $$C\sigma^2\sum_U\sum_{s\in U}|I_s|\int_{\mathbb R\setminus I_U}\chi_{I_s}(x)\,dx.$$ For a fixed top interval $J$ and a fixed scale $l\le|J|$, at most one frequency interval can occur above a given spatial interval of that scale: it must be the unique dyadic ancestor of the top frequency of length $1/l$. Thus the spatial intervals at that scale form a subset of the dyadic subintervals of $J$. Write $m=|J|/l$ and index the full list from $k=0$ to $m-1$. Direct integration on the two exterior half-lines bounds $$l\int_{\mathbb R\setminus J}\chi_{I_k}(x)\,dx\le Cl\bigl((1+k)^{-19}+(1+m-1-k)^{-19}\bigr).$$ Indeed the exact two denominators are $1+k+1/2$ and $1+m-k-1/2$, with factor $l/19$. The sum over $k$ is at most $Cl$ by integral comparison with $x^{-19}$. Summing over the dyadic scales $l=|J|2^{-j}$, $j\ge0$, gives at most $C|J|$ by the geometric sum. The oriented contribution is consequently at most $C\sigma^2L$; its conjugate orientation satisfies the same bound. [F1, F2, step 1.2, step 4.1]
 
 6.1 Steps 3.2 and 5.1, and the vanishing of every remaining Gram entry in step 1.2, give $\|H\|_2^2\le C\sigma^2L$. By the first-variable-linear convention, $\langle f,H\rangle=Q$, so F4 gives $Q\le\|f\|_2\|H\|_2$. If L>0, combine this with $Q>\sigma^2L/8$ and divide by $\sigma\sqrt L$ to obtain $L\le C\sigma^{-2}\|f\|_2^2$. If no witness was selected, L=0 and the bound is immediate. The removed full trees V have these same tops, so this is their forest count, while step 2.1 gives the required residual size. No assumption that distinct top intervals are disjoint was made. All selections are finite; AC is inherited solely from the Fourier interfaces identified in F5. [F4, F5, step 2.1, step 1.2, step 3.2, step 5.1] ∎

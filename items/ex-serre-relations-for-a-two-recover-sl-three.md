@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-serre-relations-for-a-two-recover-sl-three.json
+  precheck: pass
 id: ex-serre-relations-for-a-two-recover-sl-three
 kind: example
-title: Serre relations for A_2 recover sl_3
+title: Serre relations for $A_2$ recover $\mathfrak{sl}_3$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -16,8 +19,7 @@ sources:
       locator: "Lecture 24, Theorem 24.1 and Example 19.14"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example

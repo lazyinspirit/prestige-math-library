@@ -1,0 +1,100 @@
+{
+  "id": "def-reconstruction-autoencoder",
+  "agent": "/root/rendering_repair_coordinator/drlgm_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authentic original-resolution tiles contain the complete prose definition but no flow diagram. A diagram materially clarifies three different index sets: k visible encoder inputs, M restored decoder slots/predictions, and M-k scored positions. This is a warranted explanatory addition, not a claim that the original definition is incomplete.",
+      "action": "Appended final Remarks with a five-stage fenced TikZ dataflow and the exact masked loss.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only final Remarks: visible input with positions -> encoded visible tokens -> restore all slots using the shared learned token -> predictions at every patch position -> masked-only loss. No new projection or named masked encoder map is introduced.",
+  "source_lines_after": {
+    "remarks": [
+      93,
+      116
+    ],
+    "diagram": [
+      97,
+      116
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Visible encoder input and output",
+      "check": "Definition lines 39 and 53 give input (V,(x_j)_{j in V}), with x_j in R^q, and output (z_j)_{j in V} in Z^V. The first arrow is labelled encoder without borrowing the unmasked E_phi:X->Z interface. Only visible patches and their positions enter it; no mask token does."
+    },
+    {
+      "objects": "Restored decoder sequence",
+      "check": "Definition lines 39 and 53 specify one learned m in Z reused at every missing position. For explanatory abbreviation t_j, the figure sets t_j=z_j for j in V and t_j=m for j not in V; hence (t_1,...,t_M) is in Z^M. All M slot positions accompany this sequence. This is slot assembly, not a learned projection."
+    },
+    {
+      "objects": "Decoder output",
+      "check": "Definition line 53 gives predictions hat x_j(phi,psi;x,V) in R^q for every j in [M]. The decoder arrow therefore ends at (hat x_j)_{j=1}^M in (R^q)^M, not merely at masked-patch predictions."
+    },
+    {
+      "objects": "Loss and target domains",
+      "check": "The last box repeats line 61 with sum over [M] minus V and denominator (M-k)q. There are M-k masked patches, each having q real coordinates; k<M makes the denominator positive. Both hat x_j and T(x_j) lie in R^q; caption preserves the positive-standard-deviation restriction for normalized targets from lines 55-60. No full-image-risk identity or unbiasedness is drawn."
+    },
+    {
+      "objects": "Arrow relations and proof independence",
+      "check": "The four downward arrows express the sequential data processing and loss evaluation already specified in Definition, not commutative equalities. Parameters phi,psi and fixed x,V,T are suppressed only in the diagram abbreviations. The complete original Definition and references remain byte-identical; no rigorous proof depends on the figure."
+    }
+  ],
+  "before_raw_sha256": "6311d23782b64743040656449a07498e15598b14c2c2bf5b512ea7bab4c3d2a2",
+  "after_raw_sha256": "907d5929e15169da673132a5547f204064450b951958cafd43838e3546b3da72",
+  "preservation_check": "Current item starts with the entire exact frozen original bytes; only final Remarks appended. Frontmatter, status: published, full Definition, interface, dependencies and references preserved exactly.",
+  "original_evidence": {
+    "path_discrepancy": "Declared diagram-supplement/screenshots paths are absent. Authentic files were resolved within the corresponding category/screenshots and each matches the recorded SHA256.",
+    "standalone_original_resolution_views": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/screenshots/def-reconstruction-autoencoder--01.png",
+        "sha256": "2154b6c0c832a2b63c3692f7fbe32a1bd79ce24a47c0f9179d33f4a4ec1497ee"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/screenshots/def-reconstruction-autoencoder--02.png",
+        "sha256": "a1c26849129b89ebdaaf8b4d80dace38d570dbb669b0772d1132292a14318828"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-reconstruction-autoencoder.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-reconstruction-autoencoder.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-reconstruction-autoencoder.md --json",
+      "exit_code": 0,
+      "output": "1 file, 0 checked, 0 failed; definition not-applicable"
+    },
+    {
+      "command": "TMPDIR=<repo>/research/math-library-rendering-repairs-2026-10-23/previews/drlgm_003-runtime TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-reconstruction-autoencoder --out research/math-library-rendering-repairs-2026-10-23/previews/drlgm_003-final-large-20261024",
+      "exit_code": 0,
+      "output": "1 item, 2 tiles; 1 TikZ figure, zero diagram failures and KaTeX errors. Final tile 02 inspected standalone at original resolution: all five boxes and four arrows visible, labels and loss legible, no overlap or clipping."
+    }
+  ],
+  "native_preview": "research/math-library-rendering-repairs-2026-10-23/previews/drlgm_003-final-large-20261024",
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody SSR preview uses current reference titles; it is not full production-route coverage. Reference map contains 16 unrelated parse diagnostics; scoped item renders successfully."
+  ]
+}

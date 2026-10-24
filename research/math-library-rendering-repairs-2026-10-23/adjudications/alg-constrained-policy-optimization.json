@@ -1,0 +1,132 @@
+{
+  "id": "alg-constrained-policy-optimization",
+  "agent": "/root/rendering_repair_coordinator/dorl_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A warranted explanatory omission: the long second numbered step mixes feasible optimization, one-cost recovery and two rejection cases, followed by a separate finite sample line search. A branch map materially clarifies which proposals reach the sample tests without replacing the complete definition. Both authentic original tiles were independently inspected at original resolution.",
+      "action": "Added a final Remarks flowchart showing the Hessian gate, QP feasibility split, lexicographic proposal, single-cost nonzero-gradient recovery, rejection cases and ordered finite sample acceptance.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only explanatory Remarks and a fenced TikZ control-flow diagram; the complete original file is an unchanged prefix. All title/frontmatter, status, definitions, references and numbered algorithm text are byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      81,
+      114
+    ],
+    "diagram": [
+      85,
+      112
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "H is a d by d real Hessian, g and u_i are d-vectors, q_i are scalar sample cost offsets; x* is a displacement in R^d and theta_j is a candidate parameter.",
+      "justification": "Definition paragraphs preceding step 1 define every coefficient and U subset R^d. The diagram uses exactly these objects and does not assert an additional policy map or expected-cost relation."
+    },
+    {
+      "relation": "The no branch of the symmetric-positive-definite H test returns no-step; its yes branch alone forms the QP.",
+      "justification": "Step 1 rejects nonsymmetric H or a nonzero x with x^T H x <= 0; the complement is precisely symmetric positive definiteness. Thus inversion in recovery occurs only after this gate."
+    },
+    {
+      "relation": "QP feasible -> lexicographically least global maximizer -> sample search; QP infeasible -> recovery test.",
+      "justification": "Step 2 selects exactly this tie-broken maximizer in the feasible case. Its closed compact feasible set supports the choice; the independently read local well-definedness lemma proves compactness in step 1.1 and uniqueness of the tie rule in step 2.1."
+    },
+    {
+      "relation": "In the infeasible branch, m=1 and u_1 != 0 -> v=H^{-1}u_1 and x*=-sqrt(2 delta/(u_1^T v)) v -> sample search. Otherwise return no-step.",
+      "justification": "Step 2 states this formula and these rejection cases. Symmetric positive definiteness gives invertibility and u_1^T H^{-1}u_1 > 0; local lemma step 2.2 derives this and explains that the recovery minimizer need not satisfy the infeasible cost constraint. The Remarks explicitly retain that limitation. An infeasible QP cannot occur with no cost constraints because x=0 satisfies the trust ellipsoid."
+    },
+    {
+      "relation": "Both proposal paths enter the same ordered finite search; it first checks theta_j in U and only then empirical KL and all empirical cost inequalities. Passing outputs the first theta_j as theta_{k+1}; none passing returns no-step.",
+      "justification": "Definition step 3 fixes theta_j=theta_k+beta^j x*, j=0,...,L, these exact tests and the least passing index. Local lemma step 4.1 independently proves at most L+1 tests. No population-cost safety, exact-policy guarantee, improvement or convergence is asserted by this diagram."
+    },
+    {
+      "relation": "All directed branches and terminal states match steps 1\u20133.",
+      "justification": "Native standalone view shows 11 boxes and 11 directed connections: two outgoing at H, two at QP feasibility, two at the recovery condition, one at QP formation, one from each proposal to search and two search exits. Three no-step terminals are deliberate copies of the same return. This directed control-flow graph has no cycle/closing-edge assertion, open/closed endpoints or crossing conventions."
+    }
+  ],
+  "checks": {
+    "before_raw_sha256": "226944bf9456640427497b56d9c5a7d6cc4bcfb21b925550713dd012ca654564",
+    "after_raw_sha256": "796ea8fa3f8ab7bde42f696a6086ba54b38375de87ece0a08522cdf9fe4da224",
+    "before_guard": "Matched queue before_raw_sha256 immediately before initial append; frozen/current cmp passed. Entire original bytes remain an unchanged prefix after final edit.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-constrained-policy-optimization.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-constrained-policy-optimization.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0
+      },
+      "status": "not-applicable (algorithm without proof section)"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-constrained-policy-optimization.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-001-checked",
+      "manifest_sha256": "b6828ca7134882ab38299c048ac7a83a9e1162523ed9047f0cf95f88df72509a",
+      "source_binding": {
+        "id": "alg-constrained-policy-optimization",
+        "status": "published",
+        "source": "items/alg-constrained-policy-optimization.md",
+        "source_sha256": "796ea8fa3f8ab7bde42f696a6086ba54b38375de87ece0a08522cdf9fe4da224",
+        "snapshot": "snapshots/alg-constrained-policy-optimization.md",
+        "html": "html/alg-constrained-policy-optimization.html",
+        "html_sha256": "496c7def756bc77aa12367baefb5fe03cd7352a360de3dab09d49fc2aea23e13",
+        "reference_map_sha256": "4ed011bb382fa9dad5e71b442327da7cc02e2af43fd70cb50b027821a378c2d2"
+      },
+      "compilation": "Native local ItemBody SSR TikZ compiled successfully; standalone SVG has 34 paths and 150 text elements. Local file-only Playwright capture inspected at original resolution.",
+      "standalone_png": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-001-checked/diagram-standalone.png",
+      "standalone_png_sha256": "729b9c6261be7f69f5d24213262619df3efb3c75ad62dcbb8c19487454d819a0",
+      "svg": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-001-checked/diagram.svg",
+      "dark_contrast": "Observed light text, arrowheads, connector strokes and transparent box fills on black. SVG strokes/fills are currentColor or none; foreground rgb(236,238,242). No pale fill obscures any label/edge.",
+      "visual_result": "All labels, branch directions and terminal boxes visible without clipping or overlap in the standalone original-resolution view; final explicit search-exit labels sit above the horizontal connector. No open/closed endpoint ring or graph closure is applicable.",
+      "capture_caution": "A multi-image view displayed extensive missing glyphs; the same standalone original PNG displays all content. Initial and revised equivalent native HTML confirmed capture/viewer artifact rather than source defect. Final standalone view is the visual basis.",
+      "limitations": [
+        "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+        "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+        "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+        "External network requests are blocked by the local Playwright route."
+      ],
+      "unrelated_reference_diagnostics": 16
+    }
+  },
+  "evidence_path_resolution": {
+    "declared_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "actual_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning",
+    "reason": "Declared diagram-supplement screenshots absent; authentic category screenshots located locally, both SHA256 values exactly match queue.",
+    "tiles": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-constrained-policy-optimization--01.png",
+        "sha256": "5703bc1b50262ebdc57f26e7904ecb9b6306009db6cfef81a4b3e1a84b1d2629",
+        "viewed_original": true
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-constrained-policy-optimization--02.png",
+        "sha256": "db749b755e3758ddd553fdcfedfd657e8df5ddff66f2ba81cbf79e2675f44e1c",
+        "viewed_original": true
+      }
+    ]
+  },
+  "remaining_issues": []
+}

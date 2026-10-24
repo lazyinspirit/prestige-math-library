@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-a-tilde-2-nerve-perimeter-two-pi-and-vanishing-gram-determinant.json
+  precheck: pass
 id: ex-cg-a-tilde-2-nerve-perimeter-two-pi-and-vanishing-gram-determinant
 kind: example
 title: "The affine $\\widetilde A_2$ nerve: every edge exists, the Gram determinant vanishes, and the perimeter is exactly $2\\pi$"
@@ -33,13 +36,7 @@ sources:
     - title: "Michael W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, 2007-2008)"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 6.12, Theorem 6.12.9 (finite type and positive-definite cosine forms); Sections 7.1 and 12.1 (nerve and prescribed link metric). The affine kernel and equality computations are local here."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -81,3 +78,27 @@ Let $(W,S)$ be the Coxeter system with $S=\{s_1,s_2,s_3\}$ and $m_{s_is_j}=3$ fo
 3.1 Clause (ii), metric: the cycle $L$ has three edges of length $\frac{2\pi}{3}$ joined at the three vertices; the path metric of that cycle is the circle metric of circumference $2\pi$, because the distance between two points is the minimum of the lengths of their two circular arcs and the total length is $3\cdot\frac{2\pi}{3}=2\pi$; hence $L$ is (isometric to) the round circle $S^1_{2\pi}$ and is an isometrically embedded circle of length $2\pi$ in itself [F6]. [F6, step 1.1, step 2.1, algebra]
 
 4.1 Clause (iii): step 3.1 exhibits an isometric copy of $S^1_{2\pi}$ in $L$, so $g(L)\le2\pi$. If an isometric embedding $f:S^1_\ell\to L$ existed for some $\ell<2\pi$, the two semicircles between $0$ and $\ell/2$ in $S^1_\ell$ would be distinct geodesic segments of length $\ell/2<\pi$, and their images would be distinct geodesics between $f(0)$ and $f(\ell/2)$. In the circle metric of circumference $2\pi$, the unique shorter arc is the only geodesic at distances $<\pi$, because the other circular arc is strictly longer. This contradiction rules out every embedded circle shorter than $2\pi$, hence $g(L)=2\pi$. The boundary 3-cycle has perimeter exactly $2\pi$, outside the strict comparison tests. [F6, step 3.1, algebra] ∎
+
+
+## Remarks
+
+The schematic shows the three edge cells of $L$, each of length $2\pi/3$, with no $2$-simplex filling their cycle. The straight segments record incidence only, not spherical angles or a planar realization of the metric. Steps 1.1, 2.1 and 3.1 establish the edge lengths, absent face and perimeter independently of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\coordinate (a) at (0,2.6);
+\coordinate (b) at (-1.8,0);
+\coordinate (c) at (1.8,0);
+\draw (a) -- node[left] {$2\pi/3$} (b);
+\draw (b) -- node[below] {$2\pi/3$} (c);
+\draw (c) -- node[right] {$2\pi/3$} (a);
+\fill (a) circle (1.8pt);
+\fill (b) circle (1.8pt);
+\fill (c) circle (1.8pt);
+\node[above] at (a) {$s_1$};
+\node[left] at (b) {$s_2$};
+\node[right] at (c) {$s_3$};
+\node at (0,0.9) {no $2$-simplex};
+\node at (0,-0.9) {$\mathrm{Perimeter}=3\cdot 2\pi/3=2\pi$};
+\end{tikzpicture}
+```

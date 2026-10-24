@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-distributional-weak-solutions-are-not-unique.json
+  precheck: pass
 id: prop-distributional-weak-solutions-are-not-unique
 kind: proposition
 title: Distributional weak solutions of the Cauchy problem are not unique
@@ -24,12 +27,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -75,3 +73,33 @@ the same initial data: distributional weak solutions are not unique
 
 
 3.1 **Non-uniqueness.** By steps 1.1 and 1.2, both $u_\delta$ and the zero function are bounded distributional weak solutions of the same Cauchy problem with initial datum $u_0\equiv0$; they differ on a set of positive measure for every $\delta>0$. By step 2.1, $u_\delta$ is not a Kruzhkov entropy solution, so the non-uniqueness occurs strictly within the class of distributional weak solutions. [step 1.1, step 1.2, step 2.1] ∎
+
+
+## Remarks
+
+The space-time partition below depicts $u_\delta$ for $t>0$ (the ray angles
+are schematic). The states are read from left to right at a fixed positive
+time. With right-minus-left jumps, every ray has weak residual
+$[u^2]-s[u]=0$, while the central ray has positive entropy production for
+$k=0$. The common initial trace is zero in the strong local $L^1$ sense;
+values assigned on the rays do not affect the weak solution. The proof above
+is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1.1cm]
+\draw[->] (-3.5,0) -- (3.6,0) node[right] {$x$};
+\draw[thick] (0,0) -- (-2,3);
+\draw[thick] (0,0) -- (2,3);
+\draw[thick,red,->] (0,0) -- (0,3.2) node[above] {$t$};
+\node at (-2.45,3.35) {$x=-\delta t$};
+\node at (2.45,3.35) {$x=\delta t$};
+\node[right] at (0.1,2.9) {$x=0$};
+\node at (-2.65,1.8) {$0$};
+\node at (-0.6,1.8) {$-\delta$};
+\node at (0.6,1.8) {$+\delta$};
+\node at (2.65,1.8) {$0$};
+\node[below] at (0,-0.12) {$t=0:\quad u_0=0$};
+\node at (0,-0.8) {$[u^2]-s[u]=0\quad\hbox{on all three rays}$};
+\node[red] at (0,-1.35) {$x=0:\quad [q_0]-s[\eta_0]=2\delta^2>0$};
+\end{tikzpicture}
+```

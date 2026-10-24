@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-disc-hardy-traces-and-szego-reproducing.json
+  precheck: pass
 id: lem-disc-hardy-traces-and-szego-reproducing
 kind: lemma
 title: The disc trace space is the Hardy boundary space and the Szegő family reproduces $H^2$
@@ -7,13 +10,6 @@ origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 deps:
   - cor-complex-differentiability-implies-continuity
   - cor-euclidean-closed-balls-and-spheres-are-compact
@@ -97,7 +93,7 @@ Consequently $(\mathbb D,m)$ is Szegő-regular and its two-variable Szegő kerne
 
 ## Proof
 
-**Proof technique:** direct, using radial convergence, the $H^1$ Cauchy representation, and a local closed-range argument.
+**Proof technique:** direct, using radial convergence, the H¹ Cauchy representation, and a local closed-range argument.
 
 **Given:** $\mathrm{AC}_\omega$, $\mathbb D$, normalized Haar measure $m$, and the analytic and boundary Hardy spaces just defined.
 

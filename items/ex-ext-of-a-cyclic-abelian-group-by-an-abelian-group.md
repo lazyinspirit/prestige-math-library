@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ext-of-a-cyclic-abelian-group-by-an-abelian-group.json
+  precheck: pass
 id: ex-ext-of-a-cyclic-abelian-group-by-an-abelian-group
 kind: example
 title: "Ext of a cyclic abelian group by an abelian group"
@@ -11,13 +14,6 @@ deps: [ex-ext-from-a-two-term-projective-resolution, lem-ext-one-of-z-mod-n-by-z
 generation:
   role: example
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -27,7 +23,7 @@ pipeline_run: frontier-31a
 ---
 ## Example
 
-Use the resolution 0 -> Z --n--> Z -> Z/n -> 0 to calculate Ext^1_Z(Z/n,A)=A/nA and show the higher terms vanish.
+Use the resolution $0\to\mathbb Z\xrightarrow{n}\mathbb Z\to\mathbb Z/n\mathbb Z\to0$ to calculate $\operatorname{Ext}^1_{\mathbb Z}(\mathbb Z/n\mathbb Z,A)=A/nA$ and show the higher terms vanish.
 
 ## Facts & Assumptions
 

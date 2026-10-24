@@ -1,0 +1,35 @@
+{
+  "id": "lem-arith-prime-to-characteristic-multiplication-etale",
+  "agent": "/root/rendering_repair_coordinator/ag_011",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution flagged screenshot visibly prints $N$ in the uppercase proof-technique banner, while the body correctly typesets n. The banner treats its content as plain text, so inline-dollar syntax is exposed rather than rendered.",
+      "action": "Replaced “multiplication by $n$” only in the proof-technique banner with equivalent prose “multiplication by the given integer”.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "One local banner prose substitution removes unsupported inline math delimiters. Statement, proof steps, dependencies, sources and all frontmatter bytes, including status: published, are unchanged.",
+  "source_lines_after": {
+    "47": "**Proof technique:** direct: compute the differential of multiplication by the given integer, apply the Jacobian criterion, and specialise."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation: proof-technique banners render plain text with uppercase CSS; mathematical notation in this banner needs a prose or Unicode workaround."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-arith-prime-to-characteristic-multiplication-etale.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "check": "byte comparison of entire frontmatter against frozen before",
+      "result": "identical; publication status preserved byte-for-byte"
+    }
+  ]
+}

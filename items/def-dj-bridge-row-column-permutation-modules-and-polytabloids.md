@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-dj-bridge-row-column-permutation-modules-and-polytabloids.json
+  precheck: n/a
 id: def-dj-bridge-row-column-permutation-modules-and-polytabloids
 kind: definition
 title: "Hecke row permutation modules and ordinary Dipper-James polytabloids"
@@ -15,12 +18,6 @@ aliases: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Matthew Fayers, An algorithm for semistandardising homomorphisms, author version accepted by J. Algebra, 16 PDF pages"
@@ -143,3 +140,57 @@ change. No choice principle is used.
 - **The empty and rank-zero cases.** For $\lambda=\varnothing$ the row group is
   $S_\varnothing=S_0=\{1\}$, the group $D_\varnothing=\{1\}$ is a singleton, and
   $M(\varnothing)=P(\varnothing)=R$ with basis $\{T_{\mathrm{id}}\}=\{1\}$, indexed by the identity of $S_0$.
+
+
+**A row/column example.** For $\lambda=(3,2)$, the three tableaux below show
+$t^\lambda$, $t_\lambda$, and $t^{\lambda'}$ with $\lambda'=(2,2,1)$, in the
+English convention. The row blocks are $B_1=\{1,2,3\}$ and $B_2=\{4,5\}$.
+Here $w_\lambda$ has one-line notation $(1,4,2,5,3)$, meaning
+$w_\lambda(1)=1$, $w_\lambda(2)=4$, $w_\lambda(3)=2$,
+$w_\lambda(4)=5$, and $w_\lambda(5)=3$. Thus its inverse relabels
+$(1,2,3,4,5)$ as $(1,3,5,2,4)$, exactly as required by
+$(t\cdot w)(c)=w^{-1}(t(c))$. The second arrow transposes box coordinates;
+it is not a permutation action on a fixed shape.
+
+```tikz
+\begin{tikzpicture}[x=0.65cm,y=0.65cm]
+\begin{scope}
+\draw (0,0) rectangle (3,1);
+\draw (0,-1) rectangle (2,0);
+\draw (1,-1)--(1,1);
+\draw (2,0)--(2,1);
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$2$};
+\node at (2.5,0.5) {$3$};
+\node at (0.5,-0.5) {$4$};
+\node at (1.5,-0.5) {$5$};
+\node at (1.5,1.6) {$t^\lambda$};
+\end{scope}
+\draw[->] (3.4,0)--(5.2,0) node[midway,above] {$\cdot w_\lambda$};
+\begin{scope}[xshift=3.64cm]
+\draw (0,0) rectangle (3,1);
+\draw (0,-1) rectangle (2,0);
+\draw (1,-1)--(1,1);
+\draw (2,0)--(2,1);
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$5$};
+\node at (0.5,-0.5) {$2$};
+\node at (1.5,-0.5) {$4$};
+\node at (1.5,1.6) {$t_\lambda$};
+\end{scope}
+\draw[->] (9,0)--(11.2,0) node[midway,above] {transpose};
+\begin{scope}[xshift=7.54cm]
+\draw (0,-1) rectangle (2,1);
+\draw (0,-2) rectangle (1,-1);
+\draw (0,0)--(2,0);
+\draw (1,-1)--(1,1);
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$2$};
+\node at (0.5,-0.5) {$3$};
+\node at (1.5,-0.5) {$4$};
+\node at (0.5,-1.5) {$5$};
+\node at (1,1.6) {$t^{\lambda'}$};
+\end{scope}
+\end{tikzpicture}
+```

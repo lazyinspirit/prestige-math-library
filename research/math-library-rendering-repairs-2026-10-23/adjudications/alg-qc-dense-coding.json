@@ -1,0 +1,122 @@
+{
+  "id": "alg-qc-dense-coding",
+  "group": "dqc_002",
+  "agent": "/root/dqc_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The complete prose is sound and already legible, but a two-wire circuit materially clarifies which qubit is sent, the phase/flip gate order, and the control/target versus output ordering. Under the authorized explanatory-diagram criterion, this concrete protocol warrants an illustration.",
+      "action": "Appended a final Remarks explanation and a native TikZ two-wire circuit; retained the complete original file as an exact byte prefix.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory dense-coding circuit showing the preshared Bell pair, Alice X^b then Z^a, transmission of only A, Bob CNOT A→B then H_A, and computational measurements with outputs a on A and b on B.",
+  "source_lines_after": {
+    "remarks": [
+      57,
+      64
+    ],
+    "tikz": [
+      66,
+      102
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "subject": "Registers and resource",
+      "check": "Top wire A and bottom wire B are the ordered Q_2⊗Q_2 factors. The preshared input is Φ+ = (|00〉+|11〉)/sqrt(2); the left bracket is a resource grouping, not a gate.",
+      "justification": "Original Definition lines 38–40 and def-qc-bell-basis Definition."
+    },
+    {
+      "subject": "Encoding order and domains",
+      "check": "X^b and Z^a each act Q_2→Q_2 on A, with identity on B. Left-to-right boxes X^b then Z^a implement (Z^a X^b)⊗I, exactly the original procedure. For labels 00,01,10,11 the encoded numerators in ordered basis 00,01,10,11 are [1,0,0,1], [0,1,1,0], [1,0,0,-1], [0,1,-1,0], each divided by sqrt(2). Thus the 11 case is exactly Ψ−, with no unstated phase change.",
+      "justification": "Original instruction 1; exact X and Z matrices in def-qc-pauli-matrices; independently expanded all four bit cases using their basis actions."
+    },
+    {
+      "subject": "Transmission and ownership",
+      "check": "Only A carries a send arrow across the temporal divider; B remains an uninterrupted identity wire while Alice encodes. Both wires enter the Bob decode/measure stage. No extra qubit transmission or classical communication is asserted.",
+      "justification": "Original instructions 2–3; figure labels Alice: encode, Bob holds B, send A, Bob: decode and measure."
+    },
+    {
+      "subject": "Decoder control, target and composition",
+      "check": "Filled control on top A and circled plus on bottom B implement |u,v〉→|u,v⊕u〉. The following H box acts only on A, so total decoder is (H⊗I) CNOT_{A→B}: Q_2⊗Q_2→Q_2⊗Q_2. Independently applying this to all four encoded vectors yields exactly the four basis vectors |00〉, |01〉, |10〉, |11〉.",
+      "justification": "Original instruction 3; def-qc-cnot-and-control-target-order Definition; explicit H matrix in def-qc-one-qubit-gate-alphabet-and-rotations. Also agrees with thm-qc-bell-transform-inverse proof step 5.1. Actual independent Node finite-basis enumeration exited 0 and returned decoded amplitude vectors [1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]."
+    },
+    {
+      "subject": "Measurements and proof independence",
+      "check": "M_Z is explicitly defined in the Remarks as computational-basis measurement. The ordered A,B outputs are a,b, matching the deterministic basis output above; zero-weight conditional-state convention and all original claims are unchanged. The original algorithm and its correctness argument require no diagram; no proof is replaced.",
+      "justification": "Original instructions 3–4 and following outcome-weight paragraph; def-qc-projective-measurement Definition. Read the local correctness theorem steps 1.1, 2.2 and 3.1 for interface agreement; no whole-proof audit is claimed."
+    }
+  ],
+  "remaining_issues": [],
+  "evidence": {
+    "original_screenshot": {
+      "declared_path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/diagram-supplement/screenshots/alg-qc-dense-coding--01.png",
+      "path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/alg-qc-dense-coding--01.png",
+      "sha256": "952168bc0271bb55d35e1693aa771190784144c89e97e7419193ad11ad783585",
+      "inspection": "Standalone view_image, detail original. Declared path is absent; authentic category-level image matches the recorded SHA256 exactly."
+    },
+    "before_raw_sha256": "2a82a545c7bca2e759e9f96f0202e5284a78108291f53ef283ad8d670880a2a1",
+    "current_raw_sha256": "25619c28f01c8362ee3cae9f936828d4fc08668d702e57d3a4a1093d089478bd",
+    "original_source_preservation": "Current carrier starts with the complete exact frozen before source; only final Remarks and circuit appended. All frontmatter, publication status, hypotheses, instructions, dependencies and sources remain byte-identical.",
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqc-002/manifest.json",
+    "manifest_sha256": "d684f9cc303f14a75621dfaeebe8b3dc81f650a4455425fdb647e443aacc1d91",
+    "source_sha256": "25619c28f01c8362ee3cae9f936828d4fc08668d702e57d3a4a1093d089478bd",
+    "reference_map_sha256": "08d5d3580bb4f20ca11ab60ccf4a3ce3d74d703fbb394a32da9e2a094120763b",
+    "native_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dqc-002/screenshots/alg-qc-dense-coding--01.png",
+    "native_screenshot_sha256": "8166b9215b6f979e13e0204dfafbc3e313cc91e22c7eaf33f2515f48281c6806",
+    "native_visual_inspection": "Standalone original-resolution PNG: one complete circuit without clipping/overlap, readable gate and wire labels, continuous B wire, A transfer arrow, visible filled control and open circled-plus target on dark background, H on A after CNOT, both M_Z boxes and ordered a,b outputs. Receipt reports tikz_count 1, no diagram_failures and no katex_errors. Preview is local ItemBody SSR/capture, not a production route; 13 unrelated title-map parse diagnostics are preserved in the manifest."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qc-dense-coding.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qc-dense-coding.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qc-dense-coding.md",
+            "item_id": "alg-qc-dense-coding",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qc-dense-coding.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqc-002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-qc-dense-coding --out research/math-library-rendering-repairs-2026-10-23/previews/dqc-002",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 13
+      }
+    }
+  ]
+}

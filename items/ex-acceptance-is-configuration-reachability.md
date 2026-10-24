@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-acceptance-is-configuration-reachability.json
+  precheck: pass
 id: ex-acceptance-is-configuration-reachability
 kind: example
 title: "A branching configuration graph with one accepting path and one looping path"
@@ -12,13 +15,6 @@ generation:
 deps: [lem-acceptance-is-configuration-reachability, fs-nondeterministic-acceptance-requires-every-branch-to-halt]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-12
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -55,3 +51,25 @@ cell $0$.
 1.2 The arc $C_0\to C_L$ followed by the loop $C_L\to C_L$ shows that the graph also contains a nonhalting branch. [given]
 
 2.1 By [L1] and step 1.1, the existence of the length-$1$ path already proves acceptance of the input, regardless of the looping branch from step 1.2. [L1, step 1.1, step 1.2] ∎
+
+## Remarks
+
+The configuration graph makes the accepting branch and the nonhalting branch
+visible at once. Edge labels give the chosen transition; the upper right vertex
+$C_{\mathrm{acc}}$ is accepting.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,circle,minimum size=12mm] (start) at (0,0) {$C_0$};
+\node[draw,circle,minimum size=12mm] (accept) at (5,1.5) {$C_{\mathrm{acc}}$};
+\node[draw,circle,minimum size=12mm] (loop) at (5,-1.5) {$C_L$};
+\draw[->] (start) -- node[above,sloped] {$(q_{\mathrm{acc}},1,R)$} (accept);
+\draw[->] (start) -- node[below,sloped] {$(q_L,1,L)$} (loop);
+\draw[->] (loop) edge[loop right] node[right] {$(q_L,1,L)$} (loop);
+\end{tikzpicture}
+```
+
+Here $C_0=(q_0,0,t_1)$, $C_{\mathrm{acc}}=(q_{\mathrm{acc}},1,t_1)$,
+and $C_L=(q_L,0,t_1)$, where $t_1$ is the input tape for $w=1$.
+The accepting path has length $1$, whereas the other branch repeats $C_L$
+indefinitely. The verification above is independent of this illustration.

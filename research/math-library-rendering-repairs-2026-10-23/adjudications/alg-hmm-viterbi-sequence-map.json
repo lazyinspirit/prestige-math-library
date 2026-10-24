@@ -1,0 +1,106 @@
+{
+  "id": "alg-hmm-viterbi-sequence-map",
+  "agent": "/root/rendering_repair_coordinator/dinfo_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic original screenshot contains only the procedure. A concrete layered trellis materially clarifies repeated state copies, forward transition direction, and omission of zero-factor edges. This is an explanatory-diagram addition under the expanded authorized scope; the original formulas already rendered correctly.",
+      "action": "Added a final Remarks section with a valid two-state, three-layer example, six directed positive-factor edges, one sample edge-weight label, and endpoint-weight explanation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory HMM trellis only; original Definition and complete frontmatter remain byte-identical.",
+  "source_lines_after": [
+    {
+      "start": 46,
+      "end": 79,
+      "description": "Illustration assumptions, TikZ trellis, endpoint weights and score interpretation."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "T=3, S={a,b}; six vertices (a,1),(b,1),(a,2),(b,2),(a,3),(b,3).",
+      "justification": "Assigned Definition step 1 has V_t=S. The finite HMM supplier defines finite nonempty S and row-stochastic A,B. The illustrative assumptions are consistent: for example pi=(1/2,1/2), A(a,a)=A(a,b)=1/2, A(b,a)=0, A(b,b)=1, and singleton observation alphabet with emissions 1 satisfy them."
+    },
+    {
+      "relations": "For t=2 and t=3, exactly a→a, a→b and b→b appear, directed from V_(t-1) to V_t; b→a is absent. Six edges total.",
+      "justification": "Assigned Definition step 2 requires both A(r,s)>0 and B(s,y_t)>0. The example assumes all emissions positive and exactly A(b,a)=0; no other edge is suppressed, and no same-layer/backward edge is shown. All six arrows were counted in the actual rendered figure."
+    },
+    {
+      "relations": "Every edge has weight A(r,s)B(s,y_t); labeled a1→b2 has w_2(a,b). Initial weights pi(s)B(s,y_1), terminal weights 1.",
+      "justification": "These are exactly assigned Definition steps 1–2. Multiplying endpoint and edge weights gives pi(z1)B(z1,y1) times the transition/emission product, matching the joint mass in def-finite-hidden-markov-model-for-sequence-decoding and the score in def-finite-layered-trellis."
+    },
+    {
+      "relations": "No path is highlighted as an argmax. Ties remain determined by supplied state order.",
+      "justification": "Local alg-viterbi-max-product-on-finite-trellis chooses the first maximizing predecessor at each positive D_t, then the first maximizing terminal Q, and traces stored pointers backward. The diagram makes no stronger lexicographic claim. For fixed observations with positive evidence, conditional masses divide joint masses by the same p(y). The rigorous algorithm and its correctness arguments remain independent of this illustration."
+    }
+  ],
+  "evidence": {
+    "original_declared_path": "research/math-library-rendering-audit-2026-10-23/information-theory/diagram-supplement/screenshots/alg-hmm-viterbi-sequence-map--01.png",
+    "original_resolved_path": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/alg-hmm-viterbi-sequence-map--01.png",
+    "original_screenshot_sha256": "be75eae86648dc37604f790c045ea9adbd00d6dc28c5fc46b814242ed6c13c21",
+    "original_view": "Standalone original-resolution view; declared subdirectory missing; category-local located file exactly matches recorded SHA.",
+    "before_raw_sha256": "c56366b69c3737a25f6502df6fd4a42ff11131f82fb74ef6d5635dd6aac9bfd6",
+    "current_raw_sha256": "d0dec0ee62854f49d864accb61d50432573384070318d5d78f9f1aa1ef416a40",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo-001/manifest.json",
+    "preview_manifest_sha256": "fccd47a370e7810d650612ee03da39c00563ada114eb88e37a6d68e849cb05a6",
+    "preview_source_sha256": "d0dec0ee62854f49d864accb61d50432573384070318d5d78f9f1aa1ef416a40",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo-001/screenshots/alg-hmm-viterbi-sequence-map--01.png",
+    "preview_screenshot_sha256": "0cdeed8e3e8a1acf2ae68a750aa1e19c9134bfb03719faf41bfe2e707ddb4352",
+    "native_visual_check": "Standalone original-resolution PNG inspected: all six node labels, three time labels, six rightward arrows and w_2(a,b) label render without overlap or clipping. Unchanged upper Definition appears blank in this fresh capture; authentic original screenshot shows it correctly. Local ItemBody preview only, not production route."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-hmm-viterbi-sequence-map.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-hmm-viterbi-sequence-map.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-hmm-viterbi-sequence-map.md",
+            "item_id": "alg-hmm-viterbi-sequence-map",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-hmm-viterbi-sequence-map.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dinfo-001 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-hmm-viterbi-sequence-map --out research/math-library-rendering-repairs-2026-10-23/previews/dinfo-001",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [
+    "Fresh preview upper unchanged Definition appears blank in the image view; figure and added Remarks are visible. This does not justify changing the byte-identical Definition. Preview reports 16 unrelated reference-map diagnostics and is local ItemBody coverage only."
+  ]
+}

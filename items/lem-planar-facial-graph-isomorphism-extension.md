@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-planar-facial-graph-isomorphism-extension.json
+  precheck: pass
 id: lem-planar-facial-graph-isomorphism-extension
 kind: lemma
 title: "Planar facial graph facts and isomorphism extension for arbitrary arc drawings"
@@ -21,9 +24,7 @@ sources:
       url: "https://www.cis.upenn.edu/~jean/surfclassif-root.pdf"
       locator: "Appendix E Proposition E.2 and Theorem E.2, printed pp.159-160"
 pipeline_run: frontier-36-complete
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -135,3 +136,53 @@ face, which fixes a plane rather than merely a sphere extension. The rotation
 condition (i) is recorded because it is the natural combinatorial hypothesis on
 the drawings, but the construction of steps 6.2 and 7.1 uses only the facial
 correspondence (ii), which is what the face-by-face Schonflies argument needs.
+
+
+For a concrete instance of (d), take the four-cycle $uxvyu$ with the
+chord $uv$ on the left below, and its image under the affine plane
+homeomorphism $\Phi(s,t)=(s+\tfrac25t+6,t)$ on the right. Primed vertices
+are the $\varphi$-images of their unprimed counterparts. The bounded faces
+$F_1,F_2$ and the outer face $F_0$ are paired by $\beta(F_i)=F_i'$;
+choose $F_1,F_1'$ as the designated faces.
+
+```tikz
+\begin{tikzpicture}[scale=1.2]
+\coordinate (u) at (-1,0);
+\coordinate (x) at (0,1);
+\coordinate (v) at (1,0);
+\coordinate (y) at (0,-1);
+\coordinate (up) at (5,0);
+\coordinate (xp) at (6.4,1);
+\coordinate (vp) at (7,0);
+\coordinate (yp) at (5.6,-1);
+\draw[thick] (u)--(x)--(v)--(y)--(u);
+\draw[thick] (u)--(v);
+\draw[thick] (up)--(xp)--(vp)--(yp)--(up);
+\draw[thick] (up)--(vp);
+\fill (u) circle (1.5pt) (x) circle (1.5pt) (v) circle (1.5pt) (y) circle (1.5pt);
+\fill (up) circle (1.5pt) (xp) circle (1.5pt) (vp) circle (1.5pt) (yp) circle (1.5pt);
+\node[left] at (u) {$u$};
+\node[above] at (x) {$x$};
+\node[right] at (v) {$v$};
+\node[below] at (y) {$y$};
+\node[left] at (up) {$u'$};
+\node[above] at (xp) {$x'$};
+\node[right] at (vp) {$v'$};
+\node[below] at (yp) {$y'$};
+\node at (0,0.4) {$F_1$};
+\node at (0,-0.4) {$F_2$};
+\node at (0,1.8) {$F_0$};
+\node at (6.16,0.4) {$F_1'$};
+\node at (5.84,-0.4) {$F_2'$};
+\node at (6,1.8) {$F_0'$};
+\draw[->,thick] (2,0)--(4,0) node[midway,above] {$\Phi$};
+\end{tikzpicture}
+```
+
+Here $u=(-1,0)$, $x=(0,1)$, $v=(1,0)$ and $y=(0,-1)$.
+The linear part of $\Phi$ has determinant $1$, so the local cyclic orders
+agree with the single sign $\varepsilon=+1$. The frontiers of $F_1,F_2,F_0$
+are respectively the cycles $uxvu$, $uvyu$, and $uxvyu$, and their images
+are the corresponding primed cycles. Thus the illustration displays both
+the edge matching and all three face matchings, including the outer face;
+steps 6.2 and 7.1 give the general extension independently of this picture.

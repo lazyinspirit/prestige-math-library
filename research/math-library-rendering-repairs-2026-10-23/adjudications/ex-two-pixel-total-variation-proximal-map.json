@@ -1,0 +1,101 @@
+{
+  "id": "ex-two-pixel-total-variation-proximal-map",
+  "agent": "/root/rendering_repair_coordinator/dnouq_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot and frozen/current source show only formulas and verification. A graph is warranted here because it makes the central qualitative behavior visible: an entire interval of nonzero input differences collapses to equal pixels, while the outer slope-one branches retain the sign. This materially explains the two-pixel map even though the existing proof is complete.",
+      "action": "Added a final Remarks section with the graph of the output half-difference against input half-difference and a mean-preservation explanation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only Remarks and a native TikZ graph; the complete original file is an unchanged prefix. No title, mathematical statement, hypotheses, proof, dependencies, sources, verification metadata or publication status was altered.",
+  "source_lines_after": [
+    60,
+    62,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and scale",
+      "justification": "The Example defines d=(v2-v1)/2 and m=(v1+v2)/2. Step 1.1 writes u=(a-b,a+b), so b is the output half-difference. The plotted map is R -> R, d -> b=S_{t lambda}(d), with t lambda>0 and one coordinate unit equal to t lambda on both axes."
+    },
+    {
+      "check": "All three graph pieces and endpoint values",
+      "justification": "Fact F2 invokes the scalar soft-thresholding lemma; its F3 and the local soft-thresholding definition give b=d+t lambda for d<-t lambda, b=0 for |d|<=t lambda, and b=d-t lambda for d>t lambda. The plotted rays have slope one and meet the plateau at (-1,0),(1,0) in scaled units. The closed dots record the included threshold values b=0. There are no open endpoints or discontinuities."
+    },
+    {
+      "check": "Mean and equal-pixel interpretation",
+      "justification": "Verification step 1.1 minimizes the a term at a=m; step 2.1 minimizes b at S_{t lambda}(d). Thus the plateau b=0 gives (m,m), the output mean is ((m-b)+(m+b))/2=m, and outside it |b|=|d|-t lambda with the same sign. This justifies every claim in the new caption."
+    },
+    {
+      "check": "Arrows and graph topology",
+      "justification": "The outer arrows extend the unbounded left and right affine branches; they are graph continuation arrows, not iteration or morphism arrows. Both threshold points meet the horizontal plateau continuously. This function plot is not a polygon or named-node cyclic graph; no closing edge is asserted. The existing numbered verification remains unchanged and independent of the figure."
+    }
+  ],
+  "evidence": {
+    "declared_screenshot_path_missing": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement/screenshots/ex-two-pixel-total-variation-proximal-map--01.png",
+    "resolved_original_screenshot": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/screenshots/ex-two-pixel-total-variation-proximal-map--01.png",
+    "original_screenshot_sha256": "36e2673b56e6ed9c1979b6a2e9263d67fc53aaffa1eb388c368efc22651014c4",
+    "before_raw_sha256": "cdf1a039fa659011a52e11a65f2623330dfe4f78b21888f12670b02eee525d86",
+    "after_raw_sha256": "9785c5c43d2f5fec9e7841e20f609c57344ec12290a06f290414c8238a57b51b",
+    "guard": "Raw SHA256 matched the queue before hash immediately before appending Remarks.",
+    "frontmatter_byte_identical": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq013-native/manifest.json",
+    "preview_manifest_sha256": "2f13d0a8335c4ae8e01d6dcd3eadd8055483d272f047d8fbb92dc39302bd221b",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq013-native/diagram-native.svg",
+    "native_svg_sha256": "84d4466e51e6839fd996380fcac3b1fcf0c3443ecc2bf0be4f5896afc2b03830",
+    "standalone_diagram_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq013-native/screenshots/diagram-standalone.png",
+    "standalone_diagram_crop_sha256": "fde8e298fe0b12701fd1054537d553210ccf6ef3a897083348d23dfce85f2cdc",
+    "views": "Viewed the authentic original PNG, both fresh native tiles, and a separate complete native figure crop at original resolution. The figure is split across page tiles, but the standalone crop shows it complete and unclipped.",
+    "visual_checks": "Native compilation produced one TikZ figure and no diagram failures or KaTeX errors. Labels, both outer rays, axes, plateau and closed threshold dots are visible against the dark background without overlap. Compiled SVG has the plateau path joining both thresholds, two affine ray paths, and filled circle subpaths at both thresholds (fill var(--tikz-blue, #00f), stroke none). There are no open endpoint rings or named-node closing edges to verify."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-two-pixel-total-variation-proximal-map.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-two-pixel-total-variation-proximal-map.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; pass, strategy direct"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-two-pixel-total-variation-proximal-map.md --json",
+      "exit_code": 0,
+      "result": "1 checked, no errors or warnings"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnouq013 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-two-pixel-total-variation-proximal-map --out research/math-library-rendering-repairs-2026-10-23/previews/dnouq013-native",
+      "exit_code": 0,
+      "result": "1 item, 2 tiles; native capture reports 43 KaTeX nodes, 1 TikZ, no KaTeX errors or diagram failures. Sixteen unrelated reference-map parse diagnostics are recorded in manifest; no missing referenced labels observed in this carrier."
+    }
+  ],
+  "remaining_issues": []
+}

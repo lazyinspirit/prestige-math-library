@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-quasinilpotent-trace-class-operator-has-zero-trace.json
+  precheck: pass
 id: lem-quasinilpotent-trace-class-operator-has-zero-trace
 kind: lemma
 title: "A quasinilpotent trace-class operator has zero trace"
@@ -36,13 +39,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -152,4 +148,4 @@ proof.
 
 7.3 If $Q=0$, [A7] with $E=\{0\}$ gives $D_Q\equiv1$, and [L2] then gives $\operatorname{tr}(Q)=D_Q'(0)=0$; this includes $H=\{0\}$. On $H=\mathbb C$ with $Q=qI$, the spectral condition forces $q=0$. Indeed, if $q\ne0$, then $Q1=q1$ and $qI-Q=0$ is not invertible, so [A4, L1] give $q\in\sigma(Q)$. For $q=0$, [A7] with $E=H$ calculates $D_Q(z)=1+zq=1$, and [L2] gives trace zero. If $\sigma(Q)=\varnothing$, step 1.1 still applies for every nonzero $z$ and no spectral enumeration is used. There is no endpoint parameter. The exact assumption is AC [A1]; it supplies AC$_\omega$ through [A14] for the trace-class and determinant inputs. The scalar argument uses no further choice. The claim is an implication, not an equivalence, so both iff directions are inapplicable. [A1, A4, L1, L2, A7, A14, step 1.1, step 6.1]
 
-8.1 Step 6.1 with $a=0$ gives $D_Q(z)=1$ for every $z$; step 7.1 gives $\operatorname{tr}(Q)=0$. This proves both conclusions. [step 6.1, step 7.1, step 7.2] \qed 
+8.1 Step 6.1 with $a=0$ gives $D_Q(z)=1$ for every $z$; step 7.1 gives $\operatorname{tr}(Q)=0$. This proves both conclusions. [step 6.1, step 7.1, step 7.2] ∎ 

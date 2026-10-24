@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-h1-line-bundle-vanishes-degree-over-two-g-minus-two.json
+  precheck: pass
 id: cor-h1-line-bundle-vanishes-degree-over-two-g-minus-two
 kind: corollary
-title: "H^1 of a line bundle vanishes above degree 2g - 2"
+title: "H¹ of a line bundle vanishes above degree 2g - 2"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -27,13 +30,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement

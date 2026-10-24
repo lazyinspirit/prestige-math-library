@@ -5,18 +5,6 @@ status: published
 library: physics
 ---
 
-Classical electromagnetism in one named inertial laboratory frame: an open
-system of postulates for the electric and magnetic fields, the vacuum Maxwell
-equations in smooth and weak readings, and the Lorentz coupling of the fields
-to prescribed charge and current distributions, expressed in the SI conventions
-fixed by the framework. From these assumptions the library develops
-electrostatics and its boundary problems; source moments and the multipole
-expansion of the electrostatic potential; magnetostatics, magnetic moments and
-loop forces; the potentials and gauge structure of the Maxwell system; the
-critical empirical interface; plane waves, interfaces, waveguides and cavities;
-energy, momentum and angular balance; material response and its constitutive
-qualifications; and retarded fields with their radiation consequences. Every
-result is conditional on its stated regime and conventions, and empirical
-evidence enters through separately qualified experiments and relations rather
-than as a proof of the postulates. The content is a draft under construction;
-items and pages are added and reviewed in dependency order.
+The core classical-electromagnetism track adopts one named inertial laboratory frame, SI conventions, field and source definitions, vacuum Maxwell equations and Lorentz coupling. Conditional results cover electrostatics and boundary problems, multipole expansions, magnetostatics, potentials and gauge, induction, waves and interfaces, waveguides, field energy and momentum, material response and retarded radiation; extensions treat scattering and polarization. Smooth and weak branches retain their regularity and source restrictions, and constitutive results state their material regime. Far-field multipoles include explicit remainder bounds, while radiation results retain their model and source assumptions. The empirical page records induction, wave-propagation and inverse-square reports qualitatively, with missing data and calibration limits preserved.
+
+Fourier, Sobolev, elliptic, spectral, causal-kernel, variational and boundary analysis comes from the mathematics companion, alongside special-relativistic geometry and broader mathematics. The field and coupling results support Einstein–Maxwell models, relativistic particle mechanics and selected quantum-field-theory pages. Selected electromagnetic mathematical results also support Thermodynamics and General Relativity mathematics. Empirical comparisons test the stated models, not Maxwell’s unrestricted applicability.

@@ -1,0 +1,108 @@
+{
+  "id": "alg-bagged-random-forest",
+  "agent": "/root/rendering_repair_coordinator/slcm_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The single flagged original PNG, viewed standalone at original resolution, visibly superimposes the tree label and the left part of the aggregation label. Frozen and current pre-edit source both place these wide boxes only 3 cm apart. This is actual box/text overlap, not an image-viewer clipping artifact.",
+      "action": "Moved the two input boxes onto the top row, the tree onto the next row, and aggregation below it. Changed only four node coordinates; preserved every label and directed edge.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Separate the original four data-flow nodes vertically to eliminate tree/aggregation overlap without changing diagram content.",
+  "source_lines_after": {
+    "diagram": "45-55",
+    "changed_node_coordinates": [
+      47,
+      48,
+      49,
+      50
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Fixed finite training sample D; independent identically distributed randomization vectors Theta_b; prediction T_b(x)=h(x,Theta_b); aggregate over b=1,...,B.",
+      "justification": "Definition paragraphs at lines 33, 35, 39 and 41 specify these exact inputs, tree prediction and finite aggregation; labels are byte-identical to the original."
+    },
+    {
+      "relations": "D -> tree and Theta_b -> tree are input-dependence arrows, not category-theoretic morphisms or independence claims about D.",
+      "justification": "Line 35 gives IID randomization conditional on fixed data/settings; line 39 constructs T_b from its bootstrap sample and feature subsets. Line 43 explicitly defines the arrow meaning. Both original arrows remain directed toward the tree."
+    },
+    {
+      "relations": "tree -> aggregate transmits the predictions h(x,Theta_b) for b=1,...,B; average applies to regression and vote to classification.",
+      "justification": "Line 41 defines B^{-1} sum h in regression and majority votes with least-index tie breaking in classification. The unchanged generic aggregation label summarizes these rules; it asserts no risk identity or performance theorem. All three original directed edges are retained."
+    },
+    {
+      "independence": "The rigorous procedure remains fully specified in the prose definition independently of the illustration. No proof or performance claim depends on the figure.",
+      "justification": "Lines 33-41 are unchanged; line 43 explicitly disclaims a performance proof."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-bagged-random-forest.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-bagged-random-forest.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-bagged-random-forest.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    }
+  ],
+  "visual_checks": {
+    "original_screenshots_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/statistical-learning-and-classical-models/screenshots/alg-bagged-random-forest--01.png"
+    ],
+    "original_resolution": true,
+    "frozen_and_current_source_read": true,
+    "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-slcm001-fresh TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-bagged-random-forest --out research/math-library-rendering-repairs-2026-10-23/previews/slcm001-final",
+    "exit_code": 0,
+    "native_compilation": "Fresh item-specific repository-local TMPDIR produced pi-tikz-cache/8ebadc122304eb2cb42549ec2c219038.svg through the native ItemBody/TikzDiagram pipeline.",
+    "final_screenshots_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/slcm001-final/screenshots/alg-bagged-random-forest--01.png"
+    ],
+    "final_observation": "Viewed the complete final single tile standalone at original resolution: four separated boxes and three directed arrows, two inputs converging to tree and tree descending to aggregation; no overlap or clipping.",
+    "capture_result": {
+      "tikz_count": 1,
+      "katex_count": 55,
+      "katex_errors": [],
+      "diagram_failures": []
+    },
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/slcm001-final/manifest.json"
+  },
+  "guard": {
+    "before_raw_sha256": "6aef0ec39cc2ef9f16981ec4962874d34b2a7a6958064ff397a021886d7c80f7",
+    "checked_immediately_before_edit": true,
+    "current_raw_sha256": "06dd5313659202e62a10825e36cd02dad0a76bcd54385ce1276fc27a49294893",
+    "frontmatter_byte_identical": true,
+    "publication_status_preserved": "published"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview, not production HTTP-route coverage. Reference map recorded 16 unrelated parse diagnostics; no external network was visited. Focused rendering/diagram-content review only, not a whole-item mathematical audit."
+  ]
+}

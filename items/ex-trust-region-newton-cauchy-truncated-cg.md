@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-trust-region-newton-cauchy-truncated-cg.json
+  precheck: pass
 id: ex-trust-region-newton-cauchy-truncated-cg
 kind: example
 title: "Newton, Cauchy, and truncated-CG steps on one indefinite model"
@@ -92,3 +95,36 @@ $\Delta=1$, and $f(z)=g^Tz+\tfrac12z^TBz$.
 2.1 For $\phi(t):=f(tp_N)$, direct substitution gives $\phi(t)=-4t+2t^2$ and $\phi'(t)=-4+4t$. Set $c_1=1/10$ and $c_2=1/4$. At $t=1$, $\phi(1)=-2\le-2/5=c_1\phi'(0)$ and $|\phi'(1)|=0\le1=c_2|\phi'(0)|$. Thus the full step satisfies [F6]; with expansion budget at least one, [F7] returns $t=1$. [given, F6, F7, step 1.1, algebra]
 
 3.1 The point $p_*=(1,1)/\sqrt2$ has norm one and $(B+2I)p_*=(1,3)/\sqrt2=-g$, while $B+2I=\operatorname{diag}(1,3)\succeq0$. By [F2], it is a global trust- region minimizer. Its predicted reduction is $-g^Tp_*-\tfrac12p_*^TBp_*=2$. The Cauchy decrease is strictly smaller because $\sqrt5<12/5$, which follows from $5<144/25$. Thus the raw Newton line-search step is accepted at full length, whereas the feasible Cauchy and truncated-CG steps have the strictly smaller reduction $\sqrt5-2/5<2$. [given, F1, F2, step 2.1, step 1.2, algebra] ∎
+
+## Remarks
+
+The circle below is the boundary of the feasible ball $\|p\|_2\le1$.
+The Cauchy and first truncated-CG steps coincide at $p_C=(1,3)/\sqrt{10}$
+on the ray in direction $-g$. The raw Newton point $p_N=(-1,3)/\sqrt2$
+is outside the ball, whereas the global trust-region minimizer
+$p_*=(1,1)/\sqrt2$ lies on its boundary. Steps 1.1–3.1 establish these
+relations independently of the illustration. The model decreases are
+$\sqrt5-2/5$ at $p_C$ and $2$ at both $p_N$ and $p_*$; equality of these
+last two decreases does not make $p_N$ feasible.
+
+```tikz
+\begin{tikzpicture}[scale=1.8]
+\draw[->,gray] (-1.35,0) -- (1.55,0) node[right] {$p_1$};
+\draw[->,gray] (0,-1.2) -- (0,2.55) node[above] {$p_2$};
+\draw[thick] (0,0) circle (1);
+\node[below left] at (-0.7,-0.7) {$\|p\|_2=1$};
+\draw[dashed] (0.316228,0.948683) -- (0.78,2.34);
+\node[right] at (0.65,1.95) {$-g\,\mathrm{ray}$};
+\draw[->,thick] (0,0) -- (-0.707107,2.121320);
+\fill (-0.707107,2.121320) circle (1.3pt);
+\node[left] at (-0.707107,2.121320) {$p_N$};
+\draw[->,thick] (0,0) -- (0.316228,0.948683);
+\fill (0.316228,0.948683) circle (1.3pt);
+\node[above right] at (0.316228,0.948683) {$p_C=p_{\mathrm{CG}}$};
+\draw[->,thick] (0,0) -- (0.707107,0.707107);
+\fill (0.707107,0.707107) circle (1.3pt);
+\node[right] at (0.707107,0.707107) {$p_*$};
+\fill (0,0) circle (1pt);
+\node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+```

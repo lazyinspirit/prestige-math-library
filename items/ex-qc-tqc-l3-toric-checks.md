@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-qc-tqc-l3-toric-checks.json
+  precheck: pass
 id: ex-qc-tqc-l3-toric-checks
 kind: example
 title: L=3 torus checks and syndrome calculation
@@ -77,3 +80,96 @@ $\bar Z_1=Z_{h_{0,0}}Z_{h_{1,0}}Z_{h_{2,0}}$.
 1.3 The three edges $h_{0,0},h_{1,0},h_{2,0}$ form a closed horizontal primal loop. Applying $Z_{h_{0,0}}$ first gives e defects at $q_{0,0}$ and $q_{1,0}$. Applying $Z_{h_{1,0}}$ next leaves only the two endpoints $q_{0,0}$ and $q_{2,0}$. Applying $Z_{h_{2,0}}$ closes the trail, leaving no defects. These are precisely the endpoint and closed-trail cases of [F7]; [F6] says the final loop is logically nontrivial. [F1, F6, F7, construct, algebra]
 
 2.1 For a joint sector with $n_e$ negative stars and $n_m$ negative plaquettes, [F9] gives energy $-9(J_e+J_m)+2J_en_e+2J_mn_m$, using [F11] to count the negative signs. By [F10], any nonzero excited sector has $n_e\ge2$ or $n_m\ge2$, so it lies at least $4\min(J_e,J_m)$ above the code. A one-edge Z string attains $4J_e$ and a one-edge X string attains $4J_m$; hence the smaller value is attained, in agreement with [F8]. [F3, F7, F8, F9, F10, F11, algebra] ∎
+
+## Remarks
+
+The square below is a fundamental domain: identify the left and right sides,
+and the bottom and top sides, by translation. Boundary labels therefore repeat;
+they do not denote additional qubits or vertices. Gold edges form the horizontal
+loop in step 1.3. Blue edges are the support of $A_{1,1}$ and orange edges are
+the boundary support of $B_{2,2}$; translating these patterns modulo $3$ gives
+all nine checks of each type. Each $A$ acts by $X$ and each $B$ by $Z$ on its
+four indicated edge qubits.
+
+```tikz
+\begin{tikzpicture}[x=2.3cm,y=2.3cm]
+\draw[yellow!85!orange,thick] (0,0) -- node[above,font=\normalsize] {$h_{0,0}$} (1,0);
+\draw[yellow!85!orange,thick] (1,0) -- node[above,font=\normalsize] {$h_{1,0}$} (2,0);
+\draw[yellow!85!orange,thick] (2,0) -- node[above,font=\normalsize] {$h_{2,0}$} (3,0);
+\draw[cyan,thick] (0,1) -- node[above,font=\normalsize] {$h_{0,1}$} (1,1);
+\draw[cyan,thick] (1,1) -- node[above,font=\normalsize] {$h_{1,1}$} (2,1);
+\draw[gray,thick] (2,1) -- node[above,font=\normalsize] {$h_{2,1}$} (3,1);
+\draw[gray,thick] (0,2) -- node[above,font=\normalsize] {$h_{0,2}$} (1,2);
+\draw[gray,thick] (1,2) -- node[above,font=\normalsize] {$h_{1,2}$} (2,2);
+\draw[orange,thick] (2,2) -- node[above,font=\normalsize] {$h_{2,2}$} (3,2);
+\draw[gray,thick] (0,3) -- node[above,font=\normalsize] {$h_{0,0}$} (1,3);
+\draw[gray,thick] (1,3) -- node[above,font=\normalsize] {$h_{1,0}$} (2,3);
+\draw[orange,thick] (2,3) -- node[above,font=\normalsize] {$h_{2,0}$} (3,3);
+\draw[gray,thick] (0,0) -- node[left,font=\normalsize] {$v_{0,0}$} (0,1);
+\draw[gray,thick] (0,1) -- node[left,font=\normalsize] {$v_{0,1}$} (0,2);
+\draw[orange,thick] (0,2) -- node[left,font=\normalsize] {$v_{0,2}$} (0,3);
+\draw[cyan,thick] (1,0) -- node[left,font=\normalsize] {$v_{1,0}$} (1,1);
+\draw[cyan,thick] (1,1) -- node[left,font=\normalsize] {$v_{1,1}$} (1,2);
+\draw[gray,thick] (1,2) -- node[left,font=\normalsize] {$v_{1,2}$} (1,3);
+\draw[gray,thick] (2,0) -- node[left,font=\normalsize] {$v_{2,0}$} (2,1);
+\draw[gray,thick] (2,1) -- node[left,font=\normalsize] {$v_{2,1}$} (2,2);
+\draw[orange,thick] (2,2) -- node[left,font=\normalsize] {$v_{2,2}$} (2,3);
+\draw[gray,thick] (3,0) -- node[left,font=\normalsize] {$v_{0,0}$} (3,1);
+\draw[gray,thick] (3,1) -- node[left,font=\normalsize] {$v_{0,1}$} (3,2);
+\draw[orange,thick] (3,2) -- node[left,font=\normalsize] {$v_{0,2}$} (3,3);
+\fill (0,0) circle (1.5pt);
+\node[below right,font=\normalsize] at (0,0) {$q_{0,0}$};
+\fill (0,1) circle (1.5pt);
+\node[below right,font=\normalsize] at (0,1) {$q_{0,1}$};
+\fill (0,2) circle (1.5pt);
+\node[below right,font=\normalsize] at (0,2) {$q_{0,2}$};
+\fill (0,3) circle (1.5pt);
+\node[below right,font=\normalsize] at (0,3) {$q_{0,0}$};
+\fill (1,0) circle (1.5pt);
+\node[below right,font=\normalsize] at (1,0) {$q_{1,0}$};
+\fill (1,1) circle (1.5pt);
+\node[below right,font=\normalsize] at (1,1) {$q_{1,1}$};
+\fill (1,2) circle (1.5pt);
+\node[below right,font=\normalsize] at (1,2) {$q_{1,2}$};
+\fill (1,3) circle (1.5pt);
+\node[below right,font=\normalsize] at (1,3) {$q_{1,0}$};
+\fill (2,0) circle (1.5pt);
+\node[below right,font=\normalsize] at (2,0) {$q_{2,0}$};
+\fill (2,1) circle (1.5pt);
+\node[below right,font=\normalsize] at (2,1) {$q_{2,1}$};
+\fill (2,2) circle (1.5pt);
+\node[below right,font=\normalsize] at (2,2) {$q_{2,2}$};
+\fill (2,3) circle (1.5pt);
+\node[below right,font=\normalsize] at (2,3) {$q_{2,0}$};
+\fill (3,0) circle (1.5pt);
+\node[below right,font=\normalsize] at (3,0) {$q_{0,0}$};
+\fill (3,1) circle (1.5pt);
+\node[below right,font=\normalsize] at (3,1) {$q_{0,1}$};
+\fill (3,2) circle (1.5pt);
+\node[below right,font=\normalsize] at (3,2) {$q_{0,2}$};
+\fill (3,3) circle (1.5pt);
+\node[below right,font=\normalsize] at (3,3) {$q_{0,0}$};
+\node[font=\normalsize] at (0.5,0.5) {$f_{0,0}$};
+\node[font=\normalsize] at (0.5,1.5) {$f_{0,1}$};
+\node[font=\normalsize] at (0.5,2.5) {$f_{0,2}$};
+\node[font=\normalsize] at (1.5,0.5) {$f_{1,0}$};
+\node[font=\normalsize] at (1.5,1.5) {$f_{1,1}$};
+\node[font=\normalsize] at (1.5,2.5) {$f_{1,2}$};
+\node[font=\normalsize] at (2.5,0.5) {$f_{2,0}$};
+\node[font=\normalsize] at (2.5,1.5) {$f_{2,1}$};
+\node[font=\normalsize] at (2.5,2.5) {$f_{2,2}$};
+\end{tikzpicture}
+```
+
+The gold loop follows the bottom side; the identified top-side copy of its
+final edge is orange to display $B_{2,2}$. The star support is
+$\{h_{0,1},h_{1,1},v_{1,0},v_{1,1}\}$; the plaquette support is
+$\{h_{2,2},v_{0,2},h_{2,0},v_{2,2}\}$. Thus the latter includes the top-right
+horizontal edge $h_{2,0}$ and the identified right/left vertical edge $v_{0,2}$.
+Starting from a common $+1$ check eigenvector, the successive applied strings
+and their e-defect sets are
+
+$$Z_{h_{0,0}}:\ \{q_{0,0},q_{1,0}\},\qquad Z_{h_{1,0}}Z_{h_{0,0}}:\ \{q_{0,0},q_{2,0}\},\qquad \bar Z_1:\ \varnothing.$$
+
+These are the endpoint parities computed in step 1.3; the illustration is not
+used in the verification.

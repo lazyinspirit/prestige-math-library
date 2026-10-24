@@ -1,0 +1,116 @@
+{
+  "id": "ex-pomdp-two-state-bayes-update",
+  "agent": "/root/rendering_repair_coordinator/dorl_022",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A two-row calculation-flow diagram materially separates prediction, multiplication by state-dependent likelihood, and common evidence normalization. This makes the change in odds visible while keeping the unchanged complete numerical verification independent. The original standalone screenshot contains no diagram.",
+      "action": "Added a final Remarks section with a six-box, four-arrow TikZ calculation flow for the observed x branch, with y likelihoods and identity prediction explained in prose.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended explanatory Bayes-update diagram and caption only; original title, example, Facts, verification and all frontmatter bytes unchanged.",
+  "source_lines_after": {
+    "remarks": [
+      56,
+      78
+    ],
+    "tikz": [
+      60,
+      76
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and semantics",
+      "justification": "Each row is one hidden state s_i in S={s_0,s_1}; columns record prior/prediction mass, joint probability of S_1=s_i and O_1=x, and posterior probability given x. Arrows act on numeric masses, not on S; this is explicitly stated in Remarks. Existing Example gives H=1 and action a with deterministic (s_i,0) transition; verification 1.1 therefore establishes prediction equals prior."
+    },
+    {
+      "check": "Likelihood weighting and directions",
+      "justification": "The four arrows are left-to-right calculations. Top first arrow multiplies 3/4 by O(x|s_0)=3/4 to obtain 9/16; bottom first arrow multiplies 1/4 by O(x|s_1)=1/4 to obtain 1/16. These are exactly Example inputs and the joint-law convention in def-finite-pomdp; no cross-state edge is asserted."
+    },
+    {
+      "check": "Evidence and normalization",
+      "justification": "Verification 2.1 gives q(x|b_0,a)=9/16+1/16=5/8>0. The two second arrows divide by 5/8, giving 9/10 and 1/10 as in verification 3.1 and Fact F2. Both posterior masses sum to 1; their ratio is 9:1, whereas prior ratio is 3:1."
+    },
+    {
+      "check": "Complementary branch and independence",
+      "justification": "Caption retains O(y|s_0)=1/4 and O(y|s_1)=3/4 from Example, so each observation distribution sums to 1. It explicitly restricts picture to observed x; no posterior for y is invented. Original three-step verification remains byte-identical and independent of the figure."
+    },
+    {
+      "check": "Graph and endpoint conventions",
+      "justification": "This is two disjoint directed chains of length two: six vertices, four edges; degrees are (out 1,in 0), (out 1,in 1), (out 0,in 1) in each row. Native SVG contains six box paths, four horizontal arrow shafts and four rightward arrowheads (14 paths total). No cycle/closing edge or open/closed endpoint convention is asserted."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-pomdp-two-state-bayes-update.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-pomdp-two-state-bayes-update.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-pomdp-two-state-bayes-update.md",
+            "item_id": "ex-pomdp-two-state-bayes-update",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-pomdp-two-state-bayes-update.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "write_guard": {
+    "expected_before_raw_sha256": "2b6ff321b3d6e38daca70e3dbe200b08a43fb4c5361f72a13bd0a551e9e1f7d5",
+    "matched_immediately_before_edit": true,
+    "current_raw_sha256": "12b9daf370ca06cef2b0fc7ba0ea5b641a48bde4b327e48f36326f2a82b8d8cd",
+    "frontmatter_byte_identical": true,
+    "original_complete_source_preserved_as_prefix": true
+  },
+  "original_evidence": {
+    "declared_path_missing": true,
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/ex-pomdp-two-state-bayes-update--01.png",
+    "sha256": "10d9c3f207e96b80a47d8fb7df999ebdc516fab60888f3ba98749b19905a54c5",
+    "matches_queue_hash": true,
+    "inspected_original_resolution_standalone": true
+  },
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-022/manifest.json",
+    "manifest_sha256": "b33b9fe76c33667e42e2cdab36f16c28527bb3e74159640923458ac83f0fab78",
+    "source_sha256": "12b9daf370ca06cef2b0fc7ba0ea5b641a48bde4b327e48f36326f2a82b8d8cd",
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl-022 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-pomdp-two-state-bayes-update --out research/math-library-rendering-repairs-2026-10-23/previews/dorl-022",
+    "exit_code": 0,
+    "inspected_original_resolution_standalone": true,
+    "visual_result": "New diagram renders as native inline SVG, with six distinct boxes and four labeled arrows, no overlap/clipping. White currentColor strokes/text are visible against black; boxes use fill=none, with no pale fill hiding strokes. No endpoint ring semantics. Native SVG has width 406.948, height 131.442 and 14 paths; all four edges and arrowheads are present.",
+    "limitations": [
+      "Preview is local ItemBody rather than production route. Manifest records 16 unrelated reference-map diagnostics.",
+      "The fresh whole-page screenshot omits portions of unchanged early text while retaining its layout, an unrelated capture artifact; authentic original standalone screenshot was inspected, original source is preserved, and the new Remarks text and figure are fully visible."
+    ]
+  },
+  "remaining_issues": []
+}

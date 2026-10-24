@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-superperfect-group.json
+  precheck: n/a
 id: def-superperfect-group
 kind: definition
 title: "Superperfect group"
@@ -8,12 +11,6 @@ deps: [def-perfect-group, def-schur-multiplier-of-a-group, def-group-homology-as
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -23,4 +20,4 @@ sources:
 
 ## Definition
 
-Superperfect means H_1(G;Z)=H_2(G;Z)=0.
+Superperfect means $H_1(G;Z)=H_2(G;Z)=0$.

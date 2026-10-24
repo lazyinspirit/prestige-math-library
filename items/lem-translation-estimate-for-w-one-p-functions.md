@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-translation-estimate-for-w-one-p-functions.json
+  precheck: pass
 id: lem-translation-estimate-for-w-one-p-functions
 kind: lemma
 title: "The translation estimate for $W^{1,p}$ functions on $\\mathbb R^n$"
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)"
@@ -47,7 +45,7 @@ chosen representatives.
 
 **Given:** the Axiom of Choice, $n\ge1$, $1\le p<\infty$, a scalar field $\mathbb K\in\{\mathbb R,\mathbb C\}$, a class $u\in W^{1,p}(\mathbb R^n;\mathbb K)$ and a vector $h\in\mathbb R^n$.
 
-[F1] *Smooth density in $W^{1,p}(\mathbb R^n)$.* Under Countable Choice, for every $u\in W^{1,p}(\mathbb R^n;\mathbb K)$ there are $\varphi_m\in C_c^\infty(\mathbb R^n;\mathbb K)$ with $\|\varphi_m-u\|_{W^{1,p}}\to0$; Countable Choice is supplied by the assumed Axiom of Choice. ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]], [[def-countable-choice]])
+[F1] *Smooth density in $W^{1,p}(\mathbb R^n)$.* Under Countable Choice, for every $u\in W^{1,p}(\mathbb R^n;\mathbb K)$ there are $\varphi_m\in C_c^\infty(\mathbb R^n;\mathbb K)$ with $\|\varphi_m-u\|_{W^{1,p}}\to0$; Countable Choice is supplied by the assumed Axiom of Choice. ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn|Compactly supported smooth functions are dense in $W^{k,p}(\mathbb R^n)$]], [[def-countable-choice]])
 
 [F2] *Fundamental theorem of calculus.* For a smooth function $\varphi$, $\varphi(x-h)-\varphi(x)=-\int_0^1D\varphi(x-th)\cdot h\,dt$, with the complex-valued identity read componentwise. ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]])
 
@@ -59,7 +57,7 @@ chosen representatives.
 
 ## Proof
 
-**Proof technique:** Prove the estimate for smooth approximants along line segments, then use density to pass to the $W^{1,p}$ limit. Identify the translated weak derivatives by testing against compactly supported smooth functions.
+**Proof technique:** Prove the estimate for smooth approximants along line segments, then use density to pass to the Sobolev-norm limit. Identify the translated weak derivatives by testing against compactly supported smooth functions.
 
 1.1 By [F1] and Countable Choice, choose $\varphi_m\in C_c^\infty(\mathbb R^n;\mathbb K)$ with $\|\varphi_m-u\|_{W^{1,p}}\to0$. For a smooth $\varphi$ the fundamental theorem [F2] gives $$\varphi(x-h)-\varphi(x)=-\int_0^1D\varphi(x-th)\cdot h\,dt.$$ By Cauchy--Schwarz and [F3], $$\|\tau_h\varphi-\varphi\|_p\le |h|\int_0^1\||D\varphi|(\cdot-th)\|_p\,dt=|h|\|D\varphi\|_p.$$ [F1, F2, F3, given]
 

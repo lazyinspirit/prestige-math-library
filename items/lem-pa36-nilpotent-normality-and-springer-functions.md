@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-pa36-nilpotent-normality-and-springer-functions.json
+  precheck: pass
 id: lem-pa36-nilpotent-normality-and-springer-functions
 kind: lemma
 title: Normality of the nilpotent cone and Springer functions
@@ -33,8 +36,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, MIT 18.757 (2023)"
@@ -132,3 +133,29 @@ algebra over a ring is integral over that ring
 3.1 The fiber over $e$ is a single point. Indeed, if $e\in\operatorname{Ad}(g)\mathfrak n^+$, write $g=b_1n_wb_2$ by [F3]. The element $x=\operatorname{Ad}(b_1^{-1})e$ still has every simple coefficient nonzero by [F2]. Since $\operatorname{Ad}(n_w^{-1})x\in\mathfrak n^+$, each nonzero simple-root component of $x$ must map to a positive root space; distinct root spaces cannot cancel. Therefore $w^{-1}$ sends every positive simple root to a positive root, so $w=1$ by [F3], and $gB=B$. This algebraic argument holds after every algebraically closed extension of $\mathbb C$ as well. Equivariance gives a singleton geometric fiber over every point of $O=G\cdot e$. The restriction $\mu_O:\mu^{-1}(O)\to O$ is proper by base change. Its fibers are finite type and their geometric point sets are singletons, so each fiber point is isolated and has residue field finite over the base residue field; the finite-fiber criterion in [F8] makes $\mu_O$ quasi-finite, and proper quasi-finite finiteness in [F8] makes it finite. Both source and target are integral of dimension $2|\Phi^+|$, so the induced function-field extension is finite. It is separable in characteristic zero, and by [F9] has a primitive element $\theta$. After replacing an affine open $\operatorname{Spec}A\subseteq O$ by a smaller nonempty principal open, its finite preimage is $\operatorname{Spec}B$ with $B$ finite over $A$, $\theta$ lies in $B$, and $B=A[\theta]\cong A[T]/(f)$ for the monic minimal polynomial $f$ of $\theta$: first clear denominators to place $\theta$ in $B$, then localize to kill the finite torsion quotient $B/A[\theta]$ and to put the coefficients of $f$ in $A$. The discriminant of $f$ is nonzero by separability, so after inverting it this finite map is étale of rank $d=[\operatorname{Frac}B:\operatorname{Frac}A]$. Every geometric closed fiber in this open then has $d$ distinct points, but every geometric fiber over $O$ is a singleton; therefore $d=1$. This proves birationality without inferring degree from a closed-point count alone. [F2, F3, F8, F9, step 1.1, step 2.1, step 1.2]
 
 4.1 Let $R=\mathbb C[N]$ and $S=\Gamma(T^*X,\mathcal O)$. Properness makes $S=\Gamma(N,\mu_*\mathcal O_{T^*X})$ a finite $R$-algebra by [F10]. Birationality embeds $S$ in $\operatorname{Frac}(R)$ and contains $R$. Every element of a finite $R$-algebra is integral over $R$ by the determinant trick. Since $R$ is integrally closed by step 2.1, $S=R$. This proves the Springer-functions isomorphism without inferring regularity of a rational function from connected fibers. [F7, F10, step 2.1, step 1.2, step 3.1] ∎
+
+## Remarks
+
+The incidence description in step 1.2 separates the cotangent-bundle
+projection from the Springer map. Write
+$I=\{(gB,y)\in X\times N:y\in\operatorname{Ad}(g)\mathfrak n^+\}$,
+and identify $T^*X$ with $I$ by
+$[g,x]\mapsto(gB,\operatorname{Ad}(g)x)$. This is well-defined under
+$(g,x)\sim(gb,\operatorname{Ad}(b^{-1})x)$ for $b\in B$.
+Let $i:I\hookrightarrow X\times N$ be the closed inclusion, and put
+$O=G\cdot e$, the open orbit of step 1.1.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, scale=1.4, transform shape]
+\mu^{-1}(O) \arrow[r, hook] \arrow[d, "\mu_O"'] & T^*X\cong I \arrow[r, hook, "i"] \arrow[d, "\mu"] & X\times N \arrow[d, "\mathrm{pr}_2"] \\
+O \arrow[r, hook] & N \arrow[r, equal] & N
+\end{tikzcd}
+```
+
+The left square is the restriction to $O$; its geometric fibers are
+singletons by step 3.1. The right square expresses
+$\mu=\mathrm{pr}_2\circ i$, while the cotangent-bundle projection is
+$\mathrm{pr}_1\circ i:[g,x]\mapsto gB$. Closedness of $I$ and projectivity
+of $X$ give properness of $\mu$ as in step 1.2. The map $\mu$ is birational;
+the singleton-fiber assertion here is restricted to $O$, with no such
+assertion for $N\setminus O$. The proof above is independent of the diagram.

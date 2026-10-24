@@ -4,25 +4,6 @@ title: Category Theory
 status: published
 ---
 
-A category is objects, arrows and composition, and the point of the definition
-is that sets, groups, rings, vector spaces, modules, spaces and posets all
-satisfy it. This collection develops that language and the theorems that make it
-worth having. Functors and natural transformations turn constructions and
-comparisons between them into objects of study. The Yoneda lemma says an object
-is determined by the arrows into it, which is what allows a universal property
-to serve as a definition. Limits and colimits specify an object by the arrows to
-or from a diagram, so products, coproducts, equalisers, pullbacks and their
-duals become one construction with one uniqueness argument. An adjunction pairs
-two functors through a natural bijection of hom-sets, equivalently through a
-unit and a counit satisfying the triangle identities, and left adjoints preserve
-colimits while right adjoints preserve limits. Reflective subcategories are the
-case where an inclusion has a left adjoint, the adjoint functor theorems say
-when an adjoint exists at all, and every adjunction induces a monad and a
-comonad whose algebras measure how much of it the monad remembers.
+Category theory packages objects, arrows, and composition into a language for mathematical structures and universal constructions. The published pages develop categories, functors, natural transformations, and the Yoneda lemma; limits and colimits; adjunctions, reflective subcategories, and monads; and additive and abelian categories, exactness, and diagram lemmas. Further topics include Kan extensions and density, ends and coends, enriched and functor categories, monoidal and closed categories, rigidity, braiding, tensor and fusion categories, and Grothendieck axioms. Universal properties organize products, equalizers, pullbacks, and their duals, while adjunctions relate functors through hom-set bijections. Examples range from algebraic and topological categories to these shared constructions.
 
-Homological algebra is the declared consumer. Its chain complexes, long exact
-sequences, derived functors, Ext, Tor and spectral sequences are scaffolded to
-take their additive and abelian categories, their exactness criteria and their
-diagram lemmas from the continuation of this track, and to quote the Yoneda
-lemma and the pointwise computation of limits in functor categories. Algebraic
-geometry reaches the same way, through commutative algebra.
+Set Theory, Abstract Algebra, Linear Algebra, and Topology supply foundational conventions and examples used by these pages. Homological Algebra builds on the additive and abelian material, exactness, and diagram lemmas; Algebraic Geometry and Algebraic Topology use categorical constructions in their own developments. Braid Groups, Hall Algebras and Tensor Categories, Hecke Algebras and Categorification, Hopf Algebras & Hecke Algebras, and Quantum Groups and Crystal Bases also use its monoidal, functorial, and universal-property methods.

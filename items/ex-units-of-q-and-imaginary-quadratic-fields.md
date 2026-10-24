@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-units-of-q-and-imaginary-quadratic-fields.json
+  precheck: pass
 id: ex-units-of-q-and-imaginary-quadratic-fields
 kind: example
 title: Units of $\mathbb Q$ and the imaginary quadratic fields
@@ -38,13 +41,7 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory"
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "Ch. 24 p.147 (rank-zero cases)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Example
@@ -82,7 +79,7 @@ groups are finite of rank $0$.
 
 ## Verification
 
-**Proof technique:** compute the unit group of each of the three rings of integers by solving the norm equation $N(u)=\pm1$ with the elementary norm formula for quadratic fields, and identify the results with the groups of fourth and sixth roots of unity.
+**Proof technique:** compute the unit group of each of the three rings of integers by solving the norm equation N(u) = ±1 with the elementary norm formula for quadratic fields, and identify the results with the groups of fourth and sixth roots of unity.
 
 1.1 $\mathcal O_{\mathbb Q}=\mathbb Z$ and $\mathcal O_{\mathbb Q}^\times=\mathbb Z^\times=\{\pm1\}$: the rational units are the units of $\mathbb Z$, and $\pm1$ are roots of unity while every element of $\mu(\mathbb Q)$ is a unit of $\mathbb Z$ by [F7], so $\mu(\mathbb Q)=\{\pm1\}$ as well. [F1, F5, F6, F7]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-polya-urn-proportion-martingale.json
+  precheck: pass
 id: "ex-polya-urn-proportion-martingale"
 kind: "example"
 title: "Polya urn proportion martingale"
@@ -7,12 +10,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: "direct"
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"
@@ -48,3 +45,21 @@ Assume AC. Start with $r,g$ positive integers of red and green balls, and reinfo
 2.1 Let $\mathcal F_n$ consist of all unions of depth-n intervals. Complements and countable unions just select subsets of this finite partition, so it is a sigma-algebra. Refinement makes it a filtration. A word interval is exactly the intersection of the corresponding first n color events; conversely a color event up to n is a union of word intervals. Hence $\mathcal F_n$ is the draw-history sigma-algebra. On $I_h$ set $R_n=r+cj$ and $U_n=R_n/T_n$. These are finite-valued $\mathcal F_n$-measurable variables and $0<U_n<1$. If $J_{n+1}$ indicates the next red draw, then $\int_{I_h}J_{n+1}\,dP=P(I_{hR})=p_hP(I_h)=\int_{I_h}U_n\,dP$. Finite addition proves this identity for every event in $\mathcal F_n$. Both variables are bounded, so [F3] identifies $E[J_{n+1}\mid\mathcal F_n]=U_n$. [F1, F3, step 1.1]
 
 3.1 The pathwise update is $R_{n+1}=R_n+cJ_{n+1}$. The bounded $\mathcal F_n$-measurable $R_n$ is its own conditional version, since its event identities are tautologies. Since $T_n+c$ is deterministic and positive, conditional linearity gives $E[U_{n+1}\mid\mathcal F_n]=(R_n+cU_n)/(T_n+c)=R_n(1+c/T_n)/(T_n+c)=R_n/T_n=U_n$. Thus the bounded adapted process is a martingale [[def-martingale-submartingale-and-supermartingale]]. For $r=g=c=1$, $U_0=1/2$ and the first two possible new proportions are $2/3$ and $1/3$, each with probability $1/2$; their mean is $1/2$. After the first red draw the next proportions are $3/4$ and $1/2$ with probabilities $2/3$ and $1/3$, whose mean is $1/2+1/6=2/3$. AC supplies the countable choice assumed in Lebesgue construction and CE existence; the interval recursion itself makes no selections. [F3, F4, F5, step 1.1, step 2.1] ∎
+
+## Remarks
+
+At a fixed history of length $n$, write $T_n=r+g+nc$. The arrows below describe the next draw, with conditional probabilities on the edges and the resulting red proportions at the leaves. Red and green refer to color weights when $c$ is not an integer.
+
+```tikz
+\begin{tikzpicture}[scale=1.5, every node/.style={scale=1.5}]
+\node (now) at (0,0) {$U_n=\frac{R_n}{T_n}$};
+\node (red) at (-3,-2.4) {$\frac{R_n+c}{T_n+c}$};
+\node (green) at (3,-2.4) {$\frac{R_n}{T_n+c}$};
+\draw[->] (now) -- node[above left] {$\mathrm{red}:\ \frac{R_n}{T_n}$} (red);
+\draw[->] (now) -- node[above right] {$\mathrm{green}:\ 1-\frac{R_n}{T_n}$} (green);
+\end{tikzpicture}
+```
+
+The conditional weighted average of the two leaves is
+$$\frac{R_n}{T_n}\frac{R_n+c}{T_n+c}+\left(1-\frac{R_n}{T_n}\right)\frac{R_n}{T_n+c}=\frac{R_n}{T_n}=U_n.$$
+The proportions can change along either branch; their conditional mean equals the parent proportion. This illustration restates steps 2.1–3.1; the verification above is independent of it.

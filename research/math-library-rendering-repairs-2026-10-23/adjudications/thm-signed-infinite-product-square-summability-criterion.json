@@ -1,0 +1,87 @@
+{
+  "id": "thm-signed-infinite-product-square-summability-criterion",
+  "agent": "/root/rendering_repair_coordinator/ra_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile visibly prints both p_n fragments with literal underscores. The title uses undelimited math, while the Statement identifies p_n as sequence notation. Fresh native-renderer preview typesets both subscripts correctly.",
+      "action": "Wrap (1+p_n) and p_n in inline math delimiters in the title.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "generated-markdown-link-leak",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile visibly exposes [The power series ...](/library/item/...) in L2. The current supplier title still contains an interval closing bracket; a descriptive explicit label avoids the generated Markdown bracket collision. Fresh native-renderer preview shows a normal underlined logarithm power series link.",
+      "action": "Use [[thm-log-one-plus-x-power-series|logarithm power series]] locally, preserving the exact target and every formula.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added inline math delimiters to the two title fragments and a descriptive local L2 wikilink label.",
+  "source_lines_after": {
+    "4": "title: \"Under square summability, the signed product of $(1+p_n)$ converges iff the series of $p_n$ converges\"",
+    "41": "[L2] $\\log(1+t)=t+\\sum_{k\\ge2}(-1)^{k+1}t^k/k$ for $|t|<1$ ([[thm-log-one-plus-x-power-series|logarithm power series]])."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "6a37ca1d98be712e022c53a076bb7c66f36af78b900e401b1225b278199288bd",
+  "after_raw_sha256": "c2136e2a18c3e4709d73c425036a5595e63a6d5d6c7b784d28dce4ed33e76ee8",
+  "write_guard": "Current raw SHA256 equaled queue before_raw_sha256 immediately before the single edit.",
+  "scope_verification": "Exact comparison against frozen before plus only the two intended replacements passed; formulas, claims, proof, dependencies, sources, kind, provenance and verification metadata preserved.",
+  "publication_status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "byte_identical": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-signed-infinite-product-square-summability-criterion.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-signed-infinite-product-square-summability-criterion.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-signed-infinite-product-square-summability-criterion.md",
+            "item_id": "thm-signed-infinite-product-square-summability-criterion",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-signed-infinite-product-square-summability-criterion.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/thm-signed-infinite-product-square-summability-criterion--01.png",
+    "original_inspection": "Standalone view_image detail original; both findings confirmed.",
+    "fresh_preview": "research/math-library-rendering-repairs-2026-10-23/ra_007-preview/manifest.json",
+    "fresh_changed_region": "research/math-library-rendering-repairs-2026-10-23/ra_007-preview/screenshots/thm-signed-infinite-product-square-summability-criterion--01.png",
+    "fresh_inspection": "Standalone view_image detail original confirms typeset title subscripts and a normal L2 link with no raw Markdown URL.",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/ra_007-preview/screenshots/thm-signed-infinite-product-square-summability-criterion.json",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody/MathMarkdown preview, not a production route. The reference-title map records 16 unrelated parse diagnostics."
+  }
+}

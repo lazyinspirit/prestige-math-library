@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hyperelliptic-curve-double-cover.json
+  precheck: pass
 id: ex-hyperelliptic-curve-double-cover
 kind: example
 title: Ramification of the double cover y^2=f(x)
@@ -53,8 +56,7 @@ sources:
       url: https://stacks.math.columbia.edu/download/curves.pdf
     - title: Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21
       url: https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf
-verification:
-  audited: 2026-10-02
+
 ---
 
 
@@ -144,3 +146,43 @@ over algebraically closed fields.
 6.1 Regular differentials. Let $\omega$ be a global section of the canonical bundle $\omega_C=\Omega^1_{C/k}$, that is, a regular differential on $C$ [F8]; the zero section is the case $R=0$ below. If $\omega\ne0$, then $\omega=h\,\omega_0$ for a unique $h\in k(C)^\times$ [F8]. Since $\omega_0$ has order $0$ at every point of the finite chart and generates the free rank-one module $\omega_{C,p}$ there (step 5.2), regularity of $\omega$ forces $h\in\mathcal O_C(U')=A=k[x,y]/(y^2-f)$ (step 3.1), so $h=R(x)+S(x)y$ for unique $R,S\in k[x]$, the elements $1,y$ forming a $k(x)$-basis of $k(C)$ (step 2.2, step 3.1). Regularity on $U'$ is then automatic, and by [F8] it remains to impose at the points over infinity the condition $\operatorname{ord}_p(h)\ge-\operatorname{ord}_p(\omega_0)$ coming from $\operatorname{div}(\omega)=\operatorname{div}(h)+\operatorname{div}(\omega_0)$. In the even case, at $p_\pm$ one has $\operatorname{ord}(R(x))=-\deg R$ and $\operatorname{ord}(S(x)y)=-(g+1)-\deg S$ for nonzero $R$ and $S$, using $y=w\,t^{-(g+1)}$ with $w$ a unit, while $\operatorname{ord}_{p_\pm}(\omega_0)=g-1$; hence $\operatorname{ord}_{p_\pm}(h)\ge-(g-1)$ is required. For $S=0$ this is exactly $\deg R\le g-1$. For $S\ne0$: if the two orders differ, then $\operatorname{ord}(h)$ is the smaller one, and since $-(g+1)-\deg S\le-(g+1)<-(g-1)$ this is impossible; if the two orders are equal, so that $\deg R=g+1+\deg S$, then the coefficient of $t^{-\deg R}$ in $h$ at $p_\pm$ is $r+w(p_\pm)s$ with leading coefficients $r,s\ne0$, and regularity at both $p_+$ and $p_-$ would force $r+\sqrt{a_n}\,s=r-\sqrt{a_n}\,s=0$, impossible in characteristic $\ne2$ with $a_n\ne0$. Hence $S=0$ and $\deg R\le g-1$. In the odd case, at $p_\infty$ one has $\operatorname{ord}(R(x))=-2\deg R$ and $\operatorname{ord}(S(x)y)=-(2g+1)-2\deg S$ for nonzero $R$ and $S$, while $\operatorname{ord}_{p_\infty}(\omega_0)=2g-2$; if $S\ne0$, then $-(2g+1)-2\deg S\le-2g-1<-(2g-2)$, so if the orders of the two summands differ the order of $h$ is too small, and they cannot be equal because $-2\deg R$ is even while $-(2g+1)-2\deg S$ is odd. Hence again $S=0$, and $-2\deg R\ge-(2g-2)$ gives $\deg R\le g-1$. Conversely, every $R\in k[x]$ with $\deg R\le g-1$ yields a regular differential $R(x)\,\mathrm dx/y$: it is regular on $U'$, and at infinity its order is $g-1-\deg R\ge0$ in the even case and $2(g-1-\deg R)\ge0$ in the odd case (step 5.2, step 4.2). Therefore $$H^0(C,\omega_C)=\{\,R(x)\,\mathrm dx/y:\ R\in k[x],\ \deg R\le g-1\,\},$$ the differentials $\mathrm dx/y,x\,\mathrm dx/y,\dots,x^{g-1}\mathrm dx/y$ are linearly independent over $k$, and $h^0(C,\omega_C)=g$. [F8, step 2.2, step 3.1, step 5.2]
 
 7.1 Conclusion. Step 1.1 shows that the affine curve $y^2=f(x)$ is smooth, and step 1.2 and step 2.1 identify the plane model $X=V_+(G)$ as an integral plane curve of degree $n$ with $p_a(X)=\frac{(n-1)(n-2)}2$ whose only possibly singular point is $\infty$, singular exactly when $n\ge4$. Step 2.2 exhibits the degree-two projection $\pi:C\to\mathbb P^1_k$ from the normalization, step 3.1 identifies the two standard affine charts with the explicit rings $A=k[x,y]/(y^2-f)$ and $B=k[t,w]/(w^2-\psi)$, and step 4.1 and step 4.2 compute the ramification over the finite points and over infinity. Step 5.1 shows that $\pi$ is finite and surjective of degree two, branched exactly at the $n$ roots of $f$ and, when $n$ is odd, at infinity — that is, at $2g+2$ branch points — with exactly one ramification point of index two over each of them and two points with $e=1$ over every other closed point of $\mathbb P^1_k$. Step 5.2 and step 6.1 compute $\operatorname{div}(\mathrm dx/y)$ and identify $H^0(C,\omega_C)$ with the $g$-dimensional space of differentials $R(x)\,\mathrm dx/y$ with $\deg R\le g-1$, and step 4.3 computes $H^1(C,\mathcal O_C)$ from the two affine charts and concludes $g(C)=g$. Finally step 5.3 computes the delta invariant $\delta_\infty=\frac{(n-1)(n-2)}2-g$, equal to $2g^2$ for $n=2g+2$, to $2g(g-1)$ for $n=2g+1$ and to $0$ for $(n,g)=(3,1)$, so that the geometric genus of $X$ is $g$. The Axiom of Choice is used through the normalization and curve/function-field/finiteness routes [F3], [F5], [F6], the differential and Čech-cohomology routes [F8], [F9], and the properness and ampleness suppliers [F10], at the steps where those inputs are applied. [F3, F5, F6, F8, F9, F10, step 1.1, step 1.2, step 2.1, step 2.2, step 3.1, step 4.1, step 4.2, step 5.1, step 5.2, step 6.1, step 4.3, step 5.3] ∎
+
+
+## Remarks
+
+The following schematic records the closed-point fibres of the finite degree-two
+map $\pi:C\to\mathbb P^1_k$ from the smooth projective model, under the example's
+assumptions that $k$ is algebraically closed, $\operatorname{char}k\ne2$, and
+$f$ is squarefree. Each arrow is the restriction of $\pi$ to the displayed set
+of points; the labels give the ramification index at each point. Choose
+$y_0^2=f(x_0)\ne0$, and let $a$ be any root of $f$. The symbols $p_\pm$ and
+$p_\infty$ denote the points on $C$ over the base point $\infty\in\mathbb P^1_k$,
+as in step 4.2.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node at (0,0.7) {$f(x_0)\ne0$};
+\node (finite) at (0,0) {$\{(x_0,y_0),(x_0,-y_0)\}$};
+\node (xzero) at (0,-1.6) {$x_0\in\mathbb P^1_k$};
+\draw[->] (finite) -- node[left] {$\pi$} node[right] {$e=1$ at each} (xzero);
+\node at (6,0.7) {$f(a)=0$};
+\node (root) at (6,0) {$\{(a,0)\}$};
+\node (a) at (6,-1.6) {$a\in\mathbb P^1_k$};
+\draw[->] (root) -- node[left] {$\pi$} node[right] {$e=2$} (a);
+\node at (0,-3) {$n=2g+2$};
+\node (even) at (0,-3.7) {$\{p_+,p_-\}$};
+\node (eveninf) at (0,-5.3) {$\infty\in\mathbb P^1_k$};
+\draw[->] (even) -- node[left] {$\pi$} node[right] {$e=1$ at each} (eveninf);
+\node at (6,-3) {$n=2g+1$};
+\node (odd) at (6,-3.7) {$\{p_\infty\}$};
+\node (oddinf) at (6,-5.3) {$\infty\in\mathbb P^1_k$};
+\draw[->] (odd) -- node[left] {$\pi$} node[right] {$e=2$} (oddinf);
+\end{tikzpicture}
+```
+
+These are sets of closed points, with ramification recorded separately. Steps
+4.1 and 4.2 compute their indices from the pullbacks of $x-x_0$ and $t=1/x$.
+All residue fields here are $k$, so the indices in each fibre sum to two.
+Thus the branch locus consists of the $n$ roots of $f$, together with infinity
+only for odd $n$: in either parity there are $2g+2$ branch points (step 5.1).
+The verification above is independent of this illustration.

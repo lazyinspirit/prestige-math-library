@@ -1,0 +1,58 @@
+{
+  "id": "ex-a-three-shell-after-arc-reduction",
+  "agent": "/root/rendering_repair_coordinator/gt_010",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 01 shows literal TikZ text under Diagram and no figure. Source puts the environment and closing fence on the opening fence line, so it is not a valid fenced diagram.",
+      "action": "Separated the tikz fence, complete existing environment, and closing fence onto their own lines, preserving every drawing command, coordinate and label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repaired only the malformed TikZ fence at lines 47\u201352. No mathematical or metadata text changed.",
+  "source_lines_after": {
+    "diagram": [
+      45,
+      52
+    ],
+    "exterior_edge": 49,
+    "three_internal_arcs_and_explicit_closure": 50
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Exact arc combinatorics and closure",
+      "result": "The figure has four distinct corners (0,0), (4,0), (3,-2), (1,-2). The exterior edge runs from (0,0) to (4,0); the complementary path runs through the other two corners and explicitly returns to (0,0). The native SVG has one horizontal top path and one three-segment complementary path, and fresh original-resolution inspection confirms all four segments, each corner of degree two. No --cycle command or missing last-to-first segment occurs.",
+      "justification": "Example paragraph, F2, and the supplier lem-boundary-spur-or-at-most-three-shell-from-curvature Statement define a three-shell as one exterior arc with exactly three complementary internal arcs."
+    },
+    {
+      "check": "Word lengths, perimeter and strict shell inequality",
+      "result": "The exposed arc label is 10 and each complementary arc is labelled 3. Thus the internal sum is 9 and the full perimeter is 10+3+3+3=19. Each internal length satisfies 3<19/6 since 18<19; exterior length 10>19/2. Coordinates are schematic and do not assert Euclidean lengths.",
+      "justification": "Full local Verification steps 1.1 and 2.1; def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram retains arc word lengths."
+    },
+    {
+      "check": "Boundary status and orientations",
+      "result": "Only the top edge is designated exterior, matching the sole exterior arc in the existing example. The complementary three edges stay unarrowed; the original drawing asserts no directed word labels, neighbouring faces or global C-prime presentation realization. The perimeter traversal is a closed simple polygon and preserves the original orientation and incidence order.",
+      "justification": "Example explicitly limits the figure to a local shell length ledger; read the full two direct suppliers and the labelled-planar-disc-diagram definition for context. The figure is a local face schematic, not a claim that the three internal arcs are exterior arcs of an entire one-face disc."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "raw_sha256_guard_before_edit": "a6d13bc7affe273051bb559d5bc8bf05b7e1cb84e024ef2b57bba76bc6a2a2ab",
+    "raw_sha256_after": "ab12eadbfcb8101a350b9c8357d2017587911dcd7b58bf267a46baaf1d927dc4",
+    "frontmatter_byte_identical": true,
+    "proof_layout": "proof-layout: 1 items, 2 steps, 0 defects; exit 0",
+    "precheck": "Explicit single-item precheck --json: checked 1, failed 0, status pass; exit 0",
+    "rendercheck": "Explicit single-item rendercheck --json: checked 1, errors [], warnings []; exit 0",
+    "native_local_preview": "previews/gt010-final-unique: one item, one tile, tikz_count 1, katex_errors [], diagram_failures []; native current ItemBody/Tikz renderer, file-only capture; exit 0",
+    "original_visual_review": "Independently viewed original screenshots/ex-a-three-shell-after-arc-reduction--01.png standalone at original resolution.",
+    "final_visual_review": "Independently viewed native preview tile standalone at original resolution and independent-recapture.png standalone at original resolution; recapture shows complete readable content and closed four-edge figure with labels 10,3,3,3.",
+    "preview_capture_note": "First preview tile showed transient absent surrounding text despite correct visible DOM colors/opacity and complete native HTML; independent file-only browser recapture of the same unchanged HTML displays all content. Recapture saved beside preview manifest; no renderer/application edit."
+  },
+  "remaining_issues": []
+}

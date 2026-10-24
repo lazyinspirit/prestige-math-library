@@ -1,0 +1,84 @@
+{
+  "id": "ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity",
+  "agent": "/root/rendering_repair_coordinator/dg_024",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile 02, rather than the reported tile 01, visibly prints literal $q$ twice and $\\exp$ in the uppercase technique banner; ordinary mathematical expressions in the proof render. The renderer treats this banner as plain text.",
+      "action": "Changed only the technique banner to plain q and the equivalent prose “the exponential map”.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "not-a-rendering-defect",
+      "verdict": "not-a-defect",
+      "reason": "Original standalone tile 03 shows SOURCE LOCATOR as a separate styled heading below the proof box, followed by its paragraph. There is no visible literal ## markup or inline heading after the conclusion. Frozen and current source both have the proper blank-line-separated Markdown heading.",
+      "action": "Preserved heading and proof conclusion unchanged.",
+      "status": "rejected"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced inline math markup in the plain-text technique banner with equivalent readable text; no mathematical argument or metadata changed.",
+  "source_lines_after": [
+    {
+      "line": 87,
+      "text": "**Proof technique:** direct: the quotient charts make q a local isometry from the complete Euclidean space, so the completeness/covering theorem makes q a covering map and the torus complete; the constant coordinate metric kills all curvature; straight lines are the geodesics, so the exponential map is a translated quotient map and is noninjective; a lift of the standard loop through the covering proves that the loop is essential."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying renderer limitation remains: proof-technique banners do not parse inline math. Local text workaround removes all math markup from this banner.",
+    "Fresh native preview has a capture artifact: ordinary body and heading text are invisible in tile 02 while the technique banner remains visible; original standalone tiles provide the source-locator finding evidence. No source changes were made in response to this capture artifact."
+  ],
+  "evidence": {
+    "original_standalone_tiles_viewed_at_original_resolution": [
+      "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity--01.png",
+      "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity--02.png",
+      "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity--03.png"
+    ],
+    "before_raw_sha256": "4891a5001d1579d1b9b91559f96f7d961535bb02165295ad19d446e43afcea39",
+    "current_raw_sha256": "47281af84b9ea99fdc29ca41299a61728ab93094f26914ee5c72099ed6b13306",
+    "protected_frontmatter_byte_identical": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg024/manifest.json",
+    "manifest_sha256": "e08034a346d6c64c26d4b4c0b2ecc97e7d02c54c674d96d6e6f5b3e59105477a",
+    "source_sha256": "47281af84b9ea99fdc29ca41299a61728ab93094f26914ee5c72099ed6b13306",
+    "exit_code": 0,
+    "tile_count": 3,
+    "reference_map_diagnostics": 16,
+    "standalone_original_resolution_tile_viewed": "research/math-library-rendering-repairs-2026-10-23/previews/dg024/screenshots/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity--02.png",
+    "visual_result": "The corrected banner visibly reads Q and THE EXPONENTIAL MAP without dollar delimiters or TeX commands. Other body text is invisible in this fresh capture, limiting whole-item preview assessment."
+  }
+}

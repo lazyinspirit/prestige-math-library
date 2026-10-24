@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-diagonal-cartan-subalgebra-and-roots-of-sl-n.json
+  precheck: pass
 id: ex-diagonal-cartan-subalgebra-and-roots-of-sl-n
 kind: example
-title: Diagonal Cartan subalgebra and roots of sl_n
+title: Diagonal Cartan subalgebra and roots of $\mathfrak{sl}_n$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -9,12 +12,6 @@ deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-root-space-d
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19–24"
@@ -29,7 +26,7 @@ proof_strategy: direct
 For $n\ge2$ let $\mathfrak{sl}_n(\mathbb C)=\{X\in M_n(\mathbb C):\operatorname{tr}X=0\}$
 be the Lie algebra of traceless complex $n\times n$ matrices under the
 commutator, so that $n=2$ recovers
-[[def-special-linear-lie-algebra-sl-two]]. Let
+[[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]]. Let
 $\mathfrak h=\{\operatorname{diag}(x_1,\dots,x_n):\textstyle\sum_ix_i=0\}$ be
 the diagonal traceless subalgebra, and let
 $\varepsilon_i\in\mathfrak h^*$ be the restriction of the coordinate

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-enumerate-diagrams-up-to-crossing-bound.json
+  precheck: n/a
 id: alg-enumerate-diagrams-up-to-crossing-bound
 kind: algorithm
 title: "Enumerate diagrams up to a crossing bound"
@@ -15,17 +18,6 @@ proof_strategy: not-applicable
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), sections 1 and 7"
@@ -82,3 +74,49 @@ represent isotopic knots.
 [Hass–Lagarias–Pippenger, §§1, 7](https://arxiv.org/pdf/math/9807016) — finite diagram inputs and reconstruction context.
 
 [Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — rotation systems and face selection.
+
+## Remarks
+
+The left panel shows the normalized darts at a positive crossing, viewed in
+an oriented plane with the usual right/up positive basis. Positions
+$0,1,2,3$ run clockwise; the horizontal strand is over. Thus the outgoing
+darts are $0,3$ and the incoming darts are $1,2$. The short gap in the vertical
+strand records undercrossing, not an endpoint. These are local strand
+segments, not a choice of global edge pairing.
+
+The right panel summarizes steps 3–6 for each fixed $c>0$: a sign vector fixes
+the outgoing and incoming dart sets, a bijection $f:D_{\rm out}\to D_{\rm in}$
+induces $\alpha$, and $\phi(d)=\alpha(\sigma(d))$ applies the clockwise rotation
+before the edge pairing. Each face cycle is selected in turn as outer face.
+The ordering of all choices and the separate crossingless cases remain as
+specified in the instructions. The arrows indicate successive enumeration
+stages, not equivalence of knots.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node at (0,3.65) {Local sign $+1$};
+\draw[->,thick] (-1.25,1.5) -- (1.25,1.5);
+\draw[thick] (0,0.25) -- (0,1.32);
+\draw[->,thick] (0,1.68) -- (0,2.75);
+\draw[->] (0,0.45) -- (0,0.95);
+\node[right] at (1.25,1.5) {$0:O_{\rm out}$};
+\node[left] at (-1.25,1.5) {$2:O_{\rm in}$};
+\node[above] at (0,2.75) {$3:U_{\rm out}$};
+\node[below] at (0,0.25) {$1:U_{\rm in}$};
+\node at (6,3.1) {For each $c=1,\ldots,N$};
+\node[draw,minimum width=5cm,minimum height=0.7cm] (sign) at (6,2.35)
+  {3. Sign vector $\varepsilon\in\{-1,+1\}^c$};
+\node[draw,minimum width=5cm,minimum height=0.7cm] (pair) at (6,1.15)
+  {4. Bijection $f:D_{\rm out}\to D_{\rm in}$};
+\node[draw,minimum width=5cm,minimum height=0.7cm] (face) at (6,-0.05)
+  {5. Cycles of $\phi=\alpha\circ\sigma$; outer face};
+\node[draw,minimum width=5cm,minimum height=0.7cm] (test) at (6,-1.25)
+  {6. Validate; retain one-component outputs};
+\draw[->] (sign) -- (pair);
+\draw[->] (pair) -- (face);
+\draw[->] (face) -- (test);
+\end{tikzpicture}
+```
+
+The illustration changes neither the procedure nor its validation tests;
+it is independent of any argument establishing their correctness.

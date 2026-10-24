@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-truncated-wave-cone-geometry-and-frustum-presentation.json
+  precheck: pass
 id: lem-truncated-wave-cone-geometry-and-frustum-presentation
 kind: lemma
 title: "Truncated wave cones: convexity, piecewise C1 presentation and outward normals"
@@ -25,12 +28,7 @@ sources:
     - title: "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)"
       url: "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf"
       locator: "§2, printed/PDF pp. 3-4, Theorem 2.1: the truncated backwards light cone with flat base, flat top and mantle used in the cone energy estimate"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -113,3 +111,38 @@ $n=1$ is the characteristic trapezium.
 ## Remarks
 
 The outward normals of (iii) supply the geometric data used in [[lem-energy-identity-on-a-truncated-wave-cone]].
+
+
+For a unit spatial direction $e$, the section $x=x_0+se$ is the characteristic
+trapezium. The illustration takes $c=1$: its solid outline is the boundary of
+the section of $K(t_1,t_2)$, while the dashed sides continue to the cone vertex.
+The horizontal segments represent sections of the bottom and top faces
+$D_b,D_t$ from proof step 3.1; the sloping segments represent $L$. The four
+marked corners lie in the edge set $E$ (step 5.1), not in the open set $K$.
+Arrows indicate the outward normals off $E$, as computed in step 5.2; their
+lengths are schematic. For general $c$, the slopes and lateral normal change
+as in (iii). The proof is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.95,>=stealth]
+\draw[->] (-3.8,0) -- (4,0) node[right] {$s$};
+\draw[->] (0,0) -- (0,4.65) node[above] {$t$};
+\draw[dashed] (-3,1) -- (0,4) -- (3,1);
+\draw[thick] (-3,1) -- (3,1) -- (1.5,2.5) -- (-1.5,2.5) -- (-3,1);
+\fill (-3,1) circle (2pt);
+\fill (3,1) circle (2pt);
+\fill (-1.5,2.5) circle (2pt);
+\fill (1.5,2.5) circle (2pt);
+\node[left] at (-3.2,1) {$t_1$};
+\node[left] at (-3.2,2.5) {$t_2$};
+\draw[dotted] (-3.1,2.5) -- (-1.6,2.5);
+\node[above right] at (0,4) {$(x_0,t_0)$};
+\node[below] at (-1.4,1) {$D_b$};
+\node[above] at (-0.8,2.5) {$D_t$};
+\node[left] at (-2.25,1.75) {$L$};
+\node at (0.8,1.65) {$K$};
+\draw[thick,->] (0.5,1) -- (0.5,0.35) node[right] {$(0,-1)$};
+\draw[thick,->] (0.5,2.5) -- (0.5,3.15) node[right] {$(0,1)$};
+\draw[thick,->] (2.2,1.8) -- (2.85,2.45) node[right] {$\nu_{\mathrm{lat}}$};
+\end{tikzpicture}
+```

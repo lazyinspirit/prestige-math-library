@@ -1,0 +1,119 @@
+{
+  "id": "alg-extended-value-iteration",
+  "agent": "/root/rendering_repair_coordinator/dorl_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The routine combines a constrained probability-mass transfer with a separate action maximization. A concrete two-panel diagram materially clarifies the direction of optimism, the three simultaneous transfer limits, and where the fixed action tie order enters. The original standalone screenshot contains only prose and formulas; this judgment is explanatory, not a claim that the original formulas failed to render.",
+      "action": "Added one fenced TikZ illustration and its interpretation in final Remarks, leaving the entire original carrier intact as a byte prefix.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory mass-transfer panel and a distinct row-to-backup-to-action-choice panel in final Remarks.",
+  "source_lines_after": {
+    "remarks": [
+      40,
+      60
+    ],
+    "diagram": [
+      44,
+      58
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For fixed state-action pair (s,a), q is a probability vector on the finite state set S; v=u_(i-1); j<ell index states sorted in nondecreasing v.",
+      "check": "The transfer arrow points from x_j to x_ell, with the explicitly displayed strict value inequality v(x_j)<v(x_ell). This is exactly the positive-transfer branch in Definition line 26, after the stopping tests and pointer advancement."
+    },
+    {
+      "objects": "Source mass q(x_j), destination capacity 1-q(x_ell), remaining budget c, transferred mass d.",
+      "check": "The displayed d=min{c,q(x_j),1-q(x_ell)} and c -> c-d match Definition line 26. Thus q(x_j)-d>=0, q(x_ell)+d<=1, and c-d>=0. The two probability changes sum to zero; all other coordinates are unchanged. Their expectation change is -d v(x_j)+d v(x_ell)>0 on the positive-transfer branch. This is also the feasibility/gain invariant used in lem-ucrl2-evi-termination Proof step 2.1."
+    },
+    {
+      "objects": "At fixed state s, each a in A(s) supplies q_(i,s,a) in Delta(S), then real B_i(s,a), then selected action a_i(s) in A(s).",
+      "check": "The two lower arrows denote computational flow, not MDP transitions or morphisms. The formula B_i(s,a)=r-tilde(s,a)+q_(i,s,a) dot v uses v=u_(i-1), as in Definition line 28. The final box specifies the first action attaining max_a B_i(s,a), precisely preserving the fixed-order tie rule. It does not assert a unique maximizer or apply action tie-breaking within the mass-transfer panel."
+    },
+    {
+      "objects": "Illustration versus algorithm and correctness proof.",
+      "check": "The new prose explicitly retains the exact routine and its separate correctness/termination arguments. No convergence, feasibility, or optimality proof is replaced by the picture. The original Definition and references remain byte-identical; supporting local lemma steps 1.1 and 2.1 were read for the finite simplex and transfer interfaces."
+    }
+  ],
+  "before_guard": {
+    "expected_raw_sha256": "9ed1c4692b6c69b722f08cc8f5562f5fc406a7511120fdb1527cd4e3fd06c9ec",
+    "actual_raw_sha256": "9ed1c4692b6c69b722f08cc8f5562f5fc406a7511120fdb1527cd4e3fd06c9ec",
+    "passed": true
+  },
+  "protected_metadata": {
+    "frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published",
+    "original_carrier_byte_prefix_preserved": true
+  },
+  "original_evidence": {
+    "declared_missing_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-extended-value-iteration--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-extended-value-iteration--01.png",
+    "sha256": "7ec75f022a069f2b57792d3d40eab8d887df1cfdb54c66bf1943111984ac9306",
+    "inspection": "Authentic resolved PNG viewed standalone at original resolution; sha256sum equals queue hash."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-extended-value-iteration.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-extended-value-iteration.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-extended-value-iteration.md",
+            "item_id": "alg-extended-value-iteration",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-extended-value-iteration.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "check_history": "Initial rendercheck treated dollars immediately following TikZ double-backslash line breaks as escaped delimiters. Inserting TeX whitespace after those line breaks resolved the actual check failure without changing output semantics. Final proof-layout, rendercheck and precheck were run after the final edit.",
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl005 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-extended-value-iteration --out research/math-library-rendering-repairs-2026-10-23/previews/dorl005-final",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl005-final/manifest.json",
+    "source_sha256": "71fbebe43e5d5084ffaac705dde4e7e6d03663d04a578ebaa98bc36128c20963",
+    "html_sha256": "57a6c3b601527cb04be22cf13ca26718badd86f09399d64cb836d16451e09d94",
+    "reference_map_sha256": "f33a025ac70b6e0cb94800ae4ff3933e1b600c899df0e433e0752384c8ddb446",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dorl005-final/screenshots/alg-extended-value-iteration--01.png",
+    "standalone_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dorl005-final/diagram-crop.png",
+    "inspection": "Final original-resolution full PNG and standalone native diagram crop inspected. Two upper state boxes and one lower three-box chain are clear and disjoint; all three arrow shafts and rightward heads are visible, no overlap or clipping. White/currentColor labels and strokes contrast with the black background. SVG uses fill=currentColor or none and stroke=currentColor or none, with no pale filled panels. No endpoint rings or graph-cycle closure is asserted or applicable. Full-image viewer obscured some text in display, while standalone diagram crop is fully legible; no source changes were made for that viewer artifact.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "remaining_issues": []
+}

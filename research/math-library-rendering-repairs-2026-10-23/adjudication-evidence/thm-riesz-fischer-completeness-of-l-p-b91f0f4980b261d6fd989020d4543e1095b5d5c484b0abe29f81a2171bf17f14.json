@@ -1,0 +1,80 @@
+{
+  "id": "thm-riesz-fischer-completeness-of-l-p",
+  "group": "mt_018",
+  "agent": "/root/rendering_repair_supervisor2/mt_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed both original PNG tiles in standalone original resolution. Tile 02 visibly prints dollar delimiters and the literal backslash-le command in the uppercase proof-technique banner, while ordinary proof math is typeset. Frozen and current pre-edit bytes matched. This is a plain-text banner renderer limitation.",
+      "action": "Replaced only the two banner expressions with equivalent plain Unicode: 1 ≤ p < ∞ and p = ∞.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Body line 63 only: Unicode exponent conditions replace raw math markup in the proof technique paragraph. No title, proof step, Statement, supplier link, or frontmatter change.",
+  "source_lines_after": [
+    {
+      "line": 63,
+      "text": "**Proof technique:** For 1 ≤ p < ∞, choose a rapidly Cauchy subsequence by least indices, sum the successive differences with monotone convergence and Minkowski, and recover the limit by dominated convergence. For p = ∞, union the exceptional null sets and take the pointwise limit outside them."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Native technique banners remain plain React text transformed to uppercase; the assigned carrier uses readable Unicode as a local workaround."
+  ],
+  "before_raw_sha256": "e2ee9bc1e157e776d8bc441f07f0a6c242f884b5e2b425efdd840bb20ac6b8bf",
+  "after_raw_sha256": "9f13457e853be098eca139a30d71b55eadbfab5c2b81898611c6a12aab0c4fd9",
+  "pre_edit_guard": "Matched queue before_raw_sha256 immediately before mutation.",
+  "metadata_preserved": "Complete frontmatter bytes identical to frozen before, including exact status: published.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-riesz-fischer-completeness-of-l-p.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-riesz-fischer-completeness-of-l-p.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "\"For"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-riesz-fischer-completeness-of-l-p.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_verification": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/mt-018-independent",
+    "manifest_sha256": "08aaf91ed6a313513a4e851d36f448710e17498fd427740f1f1ed909295bd36b",
+    "source_sha256": "9f13457e853be098eca139a30d71b55eadbfab5c2b81898611c6a12aab0c4fd9",
+    "reference_map_sha256": "550ef41adc4dc24aff7801cfedc6cb3a2446536ca9a6e28e1f52d53dfa437352",
+    "original_tiles_independently_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-riesz-fischer-completeness-of-l-p--01.png",
+      "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-riesz-fischer-completeness-of-l-p--02.png"
+    ],
+    "current_tiles_independently_viewed": [
+      "screenshots/thm-riesz-fischer-completeness-of-l-p--01.png",
+      "screenshots/thm-riesz-fischer-completeness-of-l-p--02.png"
+    ],
+    "detail": "original",
+    "result": "Both current native tiles inspected standalone. Banner reads 1 ≤ P < ∞ and P = ∞ with no dollar delimiters or raw backslash commands; title, references, facts and all six proof rows remain visibly rendered. Native capture reports 113 KaTeX nodes, zero KaTeX errors, zero diagrams/failures.",
+    "limitations": [
+      "Local native ItemBody preview with network blocked, not production HTTP route, navigation/dependency widgets or metadata Sources footer.",
+      "Reference map reports 13 unrelated missing-title sources; none is this carrier or its linked suppliers."
+    ]
+  }
+}

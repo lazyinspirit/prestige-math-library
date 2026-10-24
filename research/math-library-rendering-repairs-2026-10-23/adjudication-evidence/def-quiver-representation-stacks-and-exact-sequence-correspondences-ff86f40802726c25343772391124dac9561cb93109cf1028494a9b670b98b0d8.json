@@ -1,0 +1,98 @@
+{
+  "id": "def-quiver-representation-stacks-and-exact-sequence-correspondences",
+  "agent": "/root/rendering_repair_coordinator/hall_008",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile visibly prints the mathfrak/arrow source. The tilde fence is not recognized as a diagram fence by the native renderer. The authored left q and right p maps agree with the local exact-sequence convention, so this is a rendering defect, not incorrect map mathematics.",
+      "action": "Replace tilde fence with native backtick tikzcd fence. Add an explicit tikzcd environment with larger font and column spacing, and textstyle map labels after the first local capture exposed tiny labels. Preserve all nodes, map directions, labels and definitions.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Recognized tikzcd fence and readable diagram sizing; the exact correspondence remains M_a times M_b <-q- E_(a,b) -p-> M_(a+b).",
+  "source_lines_after": {
+    "diagram": [
+      87,
+      94
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "M_a, M_b, M_(a+b) are representation quotient stacks; E_(a,b)=[Rep_Q(a,b)/P_(a,b)] parametrizes the locally defined short exact sequences.",
+      "local_justification": "Definition lines 45-50 and 55-73 retain the original quotient-stack and block-upper-triangular definitions; d=a+b."
+    },
+    {
+      "map": "q: E_(a,b) -> M_a times M_b",
+      "domain_codomain_check": "A sequence 0 -> M_a -> M_(a+b) -> M_b -> 0 supplies its subrepresentation of dimension a and quotient of dimension b, in that order.",
+      "relation": "The center-to-left arrow is labelled q.",
+      "local_justification": "Definition lines 75-82 explicitly give this target, action, and ordering."
+    },
+    {
+      "map": "p: E_(a,b) -> M_(a+b)",
+      "domain_codomain_check": "Forgetting the chosen subrepresentation leaves the middle representation, whose dimension vector is a+b.",
+      "relation": "The center-to-right arrow is labelled p.",
+      "local_justification": "Definition lines 55-56 and 75-82 identify d=a+b and state p forgets the subrepresentation."
+    },
+    {
+      "relations": "The figure is a span with two outgoing arrows, not a commutative triangle or square. It asserts no composite equality, product, or identification of extension classes with the off-diagonal parameter vector space.",
+      "local_justification": "The retained caveat at lines 83-85 and diagram explanation at lines 96-97 say precisely this. The definition is complete independently of the illustration; no proof depends on it."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-quiver-representation-stacks-and-exact-sequence-correspondences.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-quiver-representation-stacks-and-exact-sequence-correspondences.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-quiver-representation-stacks-and-exact-sequence-correspondences.md",
+            "item_id": "def-quiver-representation-stacks-and-exact-sequence-correspondences",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-quiver-representation-stacks-and-exact-sequence-correspondences.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-quiver-representation-stacks-and-exact-sequence-correspondences --out research/math-library-rendering-repairs-2026-10-23/preview-hall-008-final-20261024",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 32
+      },
+      "visual_inspection": "Viewed final standalone PNG at original resolution. One legible correspondence diagram with leftward q and rightward p; no clipping/overlap or literal markup. Capture diagnostics: 24 KaTeX nodes, 1 TikZ figure, no KaTeX errors, no diagram failures."
+    }
+  ],
+  "original_screenshot": "research/math-library-rendering-audit-2026-10-23/hall-algebras-and-tensor-categories/screenshots/def-quiver-representation-stacks-and-exact-sequence-correspondences--01.png",
+  "fresh_screenshot": "research/math-library-rendering-repairs-2026-10-23/preview-hall-008-final-20261024/screenshots/def-quiver-representation-stacks-and-exact-sequence-correspondences--01.png",
+  "before_raw_sha256": "a9ec0df9c46de0590ca417e8db9e5da3f90d3c6e02191498ba7ea5fdddd7bd16",
+  "after_raw_sha256": "7472f5a8178b272ea12fcce45f42a161a7f5cb7947148a3f5c867901064b2be0",
+  "publication_status_preserved": "status: published; complete frontmatter byte-identical to frozen before",
+  "remaining_issues": []
+}

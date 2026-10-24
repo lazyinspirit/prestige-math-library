@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-p-weighted-average-comparison-and-density-to-mass.json
+  precheck: pass
 id: lem-a-p-weighted-average-comparison-and-density-to-mass
 kind: lemma
-title: Weighted average comparison and the density-to-mass estimate for A_p weights
+title: Weighted average comparison and the density-to-mass estimate for $A_p$ weights
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Lemma 4.20 and Remark 4.21, printed pp. 78-79"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

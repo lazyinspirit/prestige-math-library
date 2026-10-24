@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hh-finite-dihedral-reduced-words.json
+  precheck: pass
 id: ex-hh-finite-dihedral-reduced-words
 kind: example
 title: "Reduced words and lengths in a finite dihedral group"
@@ -21,13 +24,7 @@ sources:
     - title: "Michael W. Davis, The Geometry and Topology of Coxeter Groups (Princeton University Press 2008; author's complete PDF)"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 3.1, printed pp. 26-29: the explicit structure and normal form of a finite dihedral group"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -59,7 +56,7 @@ in particular $\ell(s)=1$ and $\ell\bigl((st)^{m-1}s\bigr)=1$.
 
 ## Verification
 
-**Proof technique:** direct computation with the normal forms of the dihedral group, using the exact order of $st$ and the ambient reducedness of alternating words.
+**Proof technique:** direct computation with the normal forms of the dihedral group, using the exact order of 𝑠𝑡 and the ambient reducedness of alternating words.
 
 1.1 **Exhaustion.** Every element of $W$ is the value of a word in $s,t$ whose inverse letters are again letters ($s^{-1}=s$, $t^{-1}=t$ in $W$ because $s^2,t^2\in R$ [F1]), so it suffices to treat words in $s,t$. Cancelling all consecutive equal letters using $s^2=t^2=1$ turns any such word into an alternating word $(u_1,\dots,u_q)$ with $u_{i+1}\ne u_i$. If $q$ is even, the value of the alternating word beginning with $s$ is $(st)^{q/2}$ and that of the one beginning with $t$ is $(ts)^{q/2}=(st)^{-q/2}$ [F5]; if $q$ is odd, the corresponding values are $(st)^{(q-1)/2}s$ and $(ts)^{(q-1)/2}t=(st)^{-(q-1)/2}t=(st)^{-(q+1)/2}s$, because $t=(st)^{-1}s$. Since $(st)^m=1$ [F1], an integer power $(st)^j$ equals $(st)^{k}$ for the unique $k\in\{0,\dots,m-1\}$ with $j\equiv k\pmod m$, and $(st)^js=(st)^ks$; hence every element of $W$ is one of the $2m$ listed elements $(st)^k,(st)^ks$ with $0\le k<m$. [F1, F5]
 

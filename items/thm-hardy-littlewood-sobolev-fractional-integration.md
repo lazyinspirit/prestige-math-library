@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hardy-littlewood-sobolev-fractional-integration.json
+  precheck: pass
 id: thm-hardy-littlewood-sobolev-fractional-integration
 kind: theorem
 title: "Hardy–Littlewood–Sobolev fractional integration inequality"
@@ -10,13 +13,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   references:
     - title: "Mark Williams, Notes on Harmonic Analysis, Proposition 11.4, printed p. 73"
@@ -81,7 +77,7 @@ operator.
 
 ## Proof
 
-**Proof technique:** direct; the exponent algebra fixes $q$; Tonelli makes the integral measurable; the maximal bound makes $Mf$ finite almost everywhere and Hedberg converts that into almost-everywhere absolute convergence and an $L^q$ estimate; classes, linearity and the dense smooth core are then handled separately.
+**Proof technique:** direct; the exponent algebra fixes the target exponent; Tonelli makes the integral measurable; the maximal bound makes the input’s maximal function finite almost everywhere and Hedberg converts that into almost-everywhere absolute convergence and a target Lebesgue-space estimate; classes, linearity and the dense smooth core are then handled separately.
 
 1.1 The exponents. Put $\theta:=\alpha p/n$, which lies in $(0,1)$ because $0<\alpha p<n$. The exponent $q$ of the statement satisfies $1/q=1/p-\alpha/n=(n-\alpha p)/(pn)=(1-\theta)/p$, so $q=p/(1-\theta)$; hence $q<\infty$, $q>p$, and $(1-\theta)q=p$, while $\theta q=\alpha p q/n=q-p$. [given, algebra]
 

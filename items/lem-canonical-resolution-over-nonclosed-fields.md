@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-canonical-resolution-over-nonclosed-fields.json
+  precheck: pass
 id: lem-canonical-resolution-over-nonclosed-fields
 kind: lemma
 title: Canonical resolutions over non-algebraically-closed ground fields
@@ -74,3 +77,14 @@ This resolution commutes with smooth morphisms and, for mark-one inputs with emp
 
 
 3.1 The resolution over $K$. The blowup construction commutes with the faithfully flat base change $K\to\overline K$ ([[thm-blowup-base-change-flat]]), so the sequence $X_{i+1}=\operatorname{Bl}_{C_i}X_i$ over $K$ base changes to $\overline X_{i+1}$; by construction the supports satisfy $\operatorname{supp}(\mathcal I_i,\mu)_{\overline K}=\operatorname{supp}(\overline{\mathcal I}_i,\mu)$ by the derivative-support equality in characteristic zero, since derivative ideals commute with separable algebraic scalar extension; at the last stage both are empty, hence $\operatorname{supp}(\mathcal I_m,\mu)=\varnothing$ over $K$ and the sequence is a resolution of $(\mathcal I,E,\mu)$ over $K$. The closed superlevels of $\operatorname{inv}$ and the lexicographic pairs $(\operatorname{inv},\nu)$ and $(\operatorname{inv},\rho)$ are $G$-stable by step 1.1 and descend by the same ideal argument in step 2.1. Their finite ranges reconstruct unique functions over $K$: finite differences of primary superlevels determine $\{\operatorname{inv}=a\}$, and restricting the descended pair thresholds $(a,b)$ to this stratum gives its auxiliary superlevels. These sets determine each auxiliary value, are relatively closed on that stratum, and pull back to the original level sets. The descended primary and pair superlevels are closed, preserving the center maxima and every pointwise descent comparison. Thus the resolution is canonical, determined by the intrinsic resolution over $\overline K$; and it commutes with smooth morphisms and embeddings over $K$ by applying [F4] after base change to $\overline K$ and descending the equal center ideals by step 2.1. The blowups and their natural comparison maps are then defined over $K$ by their Rees-algebra constructions. SNC of the boundary and center descends as well: the individual divisors and their intersection quotients are smooth after scalar extension, and the exact codimensions are preserved by field extension, giving the strict normal crossings criterion (Stacks, tag 0BIA). [A1, F1, F2, F4, step 2.1] ∎ 
+
+## Remarks
+
+At each stage $0\le i<m$, the descent of the center and the subsequent blowup fit into the following two cartesian squares. Write $b_i\colon X_{i+1}=\operatorname{Bl}_{C_i}X_i\to X_i$ and $\overline b_i\colon\overline X_{i+1}=\operatorname{Bl}_{\overline C_i}\overline X_i\to\overline X_i$ for the blowup maps. All vertical arrows are the projections from scalar extension along $K\subseteq\overline K$; in particular, $\overline C_i=C_i\times_K\overline K$ as schemes, with its descended center ideal, rather than merely an identification of point sets.
+
+```tikzcd
+\overline C_i \arrow[r, hook] \arrow[d] & \overline X_i \arrow[d, "\pi_i"] & \overline X_{i+1} \arrow[l, "\overline b_i"'] \arrow[d, "\pi_{i+1}"] \\
+C_i \arrow[r, hook] & X_i & X_{i+1} \arrow[l, "b_i"']
+```
+
+The left square expresses the ideal descent in step 2.1. The right square is cartesian by flat base change for blowups in step 3.1. For $\sigma\in G$, let $g_{\sigma,i}$ be the induced semilinear automorphism of $\overline X_i$. Step 1.1 gives $g_{\sigma,i}(\overline C_i)=\overline C_i$ scheme-theoretically, and the lifted actions satisfy $\overline b_i\circ g_{\sigma,i+1}=g_{\sigma,i}\circ\overline b_i$ and $\pi_i\circ g_{\sigma,i}=\pi_i$. These are the Galois-equivariance relations used in descent; smooth-morphism compatibility is the separate comparison established in step 3.1. The diagram illustrates the construction, and the proof above is independent of it.

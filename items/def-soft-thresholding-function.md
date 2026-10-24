@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-soft-thresholding-function.json
+  precheck: n/a
 id: def-soft-thresholding-function
 kind: definition
 title: "Soft-thresholding map"
@@ -10,12 +13,6 @@ deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Philippe Rigollet, 18.S997 High-Dimensional Statistics, Chapter 2, Section 2.4"
@@ -28,3 +25,24 @@ sources:
 
 For $\tau>0$ and $z\in\mathbb R$, define the **soft-thresholding map**
 $$S_\tau(z)=\begin{cases}z-\tau,&z>\tau,\\0,&-\tau\le z\le\tau,\\z+\tau,&z<-\tau.\end{cases}$$
+
+## Remarks
+
+The graph shows the interval $[-\tau,\tau]$ mapped to zero and the two slope-one rays, which meet that interval continuously. Both axes use the same scale, with one diagram unit representing $\tau$.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+  \draw[->] (-3.5,0) -- (3.7,0) node[right] {$z$};
+  \draw[->] (0,-2.6) -- (0,2.8) node[above] {$S_\tau(z)$};
+  \draw[very thick,blue,->] (-1,0) -- (-3.2,-2.2);
+  \draw[very thick,blue] (-1,0) -- (1,0);
+  \draw[very thick,blue,->] (1,0) -- (3.2,2.2);
+  \fill[blue] (-1,0) circle (2pt);
+  \fill[blue] (1,0) circle (2pt);
+  \node[above] at (-1,0.1) {$-\tau$};
+  \node[below] at (1,-0.1) {$\tau$};
+  \node[below right] at (0,-0.1) {$0$};
+  \node[below right] at (-2.4,-1.4) {$z+\tau$};
+  \node[above left] at (2.5,1.5) {$z-\tau$};
+\end{tikzpicture}
+```

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cyclic-amalgamation-with-relation-xm-equals-yn.json
+  precheck: pass
 id: ex-cyclic-amalgamation-with-relation-xm-equals-yn
 kind: example
-title: "Amalgamating infinite cyclic groups by multiplication by m and n gives the presentation with relation x^m=y^n"
+title: "Amalgamating infinite cyclic groups by multiplication by m and n gives the presentation with relation $x^m=y^n$"
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references:

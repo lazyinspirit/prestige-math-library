@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-offline-coverage-impossibility-example.json
+  precheck: pass
 id: thm-offline-coverage-impossibility-example
 kind: theorem
 title: "Without trajectory coverage, logged data need not identify policy value"
@@ -15,11 +18,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Sergey Levine, Aviral Kumar, George Tucker, and Justin Fu, Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems"
@@ -55,3 +53,27 @@ There are two finite one-step Markov decision processes with the same logged-dat
 1.2 The target policy chooses $b$ at $s_0$, so its one-step expected return is $1$ in $M_+$ and $-1$ in $M_-$. Since action $a$ has value $0$, the unique maximizing action is $b$ in $M_+$ and $a$ in $M_-$. The behavior law gives zero probability to action $b$, while the target law gives it probability $1$; thus full trajectory coverage fails. [given, F1, algebra]
 
 2.1 Let $T$ be any real-valued estimator of finite expectation computed from the logged dataset. Equality of the two dataset laws in step 1.1 implies $\mathbb E_{M_+}T=\mathbb E_{M_-}T$ by [F1]. Unbiasedness in both processes would require this common expectation to equal both $1$ and $-1$, which is impossible. A data-based action selector has the same output distribution in both processes; if it chooses $b$ with probability $q$, its probability of being correct is $q$ in $M_+$ and $1-q$ in $M_-$, so it cannot identify the unique maximizing action with certainty in both. [step 1.1, step 1.2, F1, algebra] ∎
+
+
+## Remarks
+
+The paired diagrams show all deterministic transition rows (each has probability $1$). Solid arrows are selected by the behavior policy; the dashed initial arrow is selected by the target policy instead. Both policies select $c$ at $z$. Edge labels give the action and reward; the horizon is $H=1$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node at (1.5,1.6) {$M_+$};
+\node[circle,draw,minimum size=9mm] (sp) at (0,0) {$s_0$};
+\node[circle,draw,minimum size=9mm] (zp) at (3,0) {$z$};
+\draw[->] (sp) to[bend left=30] node[above] {$a,\ r=0$} (zp);
+\draw[->,dashed] (sp) to[bend right=30] node[below] {$b,\ r=+1$} (zp);
+\draw[->] (zp) to[loop right] node[right] {$c,\ r=0$} (zp);
+\node at (8.5,1.6) {$M_-$};
+\node[circle,draw,minimum size=9mm] (sm) at (7,0) {$s_0$};
+\node[circle,draw,minimum size=9mm] (zm) at (10,0) {$z$};
+\draw[->] (sm) to[bend left=30] node[above] {$a,\ r=0$} (zm);
+\draw[->,dashed] (sm) to[bend right=30] node[below] {$b,\ r=-1$} (zm);
+\draw[->] (zm) to[loop right] node[right] {$c,\ r=0$} (zm);
+\end{tikzpicture}
+```
+
+In both panels the logged trajectory is $(s_0,a,0,z)$, while the target values are respectively $1$ and $-1$. Thus the part sampled by the behavior policy agrees even though the target reward differs. The diagram illustrates the construction; the proof above is independent of it.

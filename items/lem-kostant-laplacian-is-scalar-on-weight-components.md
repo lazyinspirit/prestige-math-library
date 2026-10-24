@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-kostant-laplacian-is-scalar-on-weight-components.json
+  precheck: pass
 id: lem-kostant-laplacian-is-scalar-on-weight-components
 kind: lemma
 title: "The Chevalley–Eilenberg Laplacian is scalar on weight components"
@@ -11,11 +14,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Roe Goodman and Nolan Wallach, Symmetry, Representations, and Invariants, GTM 255, Appendix E: Cohomology and Character Formulas, §E.2.1–§E.2.6, printed pp.17–30"
@@ -57,7 +55,7 @@ the norm coming from $B$. The scalar is nonnegative, and it vanishes exactly whe
 
 ## Proof
 
-**Proof technique:** establish the Hodge decomposition, compute the two anticommutators of $d$ from the exterior algebra relations, and identify the resulting operator with the Casimir.
+**Proof technique:** establish the Hodge decomposition, compute the two anticommutators of the differential d from the exterior algebra relations, and identify the resulting operator with the Casimir.
 
 1.1 (The metric data.) Realize the root system by a compact connected semisimple group. By complex semisimple classification and Cartan conjugacy [F2], identify its complexified Lie algebra and Cartan with $(\mathfrak g,\mathfrak h)$, transporting the compact form and conjugation $\tau$. Its simply connected compact form exists by [F2]. Integrate the restriction of the given representation $\pi$ to the compact real Lie algebra to this simply connected group by Lie's second theorem, and unitarize the resulting representation. This gives a positive Hermitian form invariant under the compact real form $\mathfrak u$. Unitarize also its adjoint representation by [F2]. For $X\in\mathfrak u$, $\operatorname{ad}X$ is skew-adjoint, so $B(X,X)=\operatorname{tr}((\operatorname{ad}X)^2)<0$ for $X\ne0$: nondegeneracy of $B$ makes the center zero. For $x=X+iY$ with $X,Y\in\mathfrak u$, $-B(x,\tau x)=-B(X,X)-B(Y,Y)>0$ if $x\ne0$. Transport the complexified maximal-torus Cartan in the same identification; its real root span is $\mathfrak h_{\mathbb R}=i\operatorname{Lie}(T)$, with $\tau(H)=-H$, so $\tau(\mathfrak g_\alpha)=\mathfrak g_{-\alpha}$ and each root vector can be scaled to $B(e_\alpha,-\tau e_\alpha)=1$. Invariance gives $\pi(X)^*=-\pi(X)$ on $\mathfrak u$; complex linearity gives $\pi(x)^*=-\pi(\tau x)$, hence $\pi(e_\alpha)^*=\pi(f_\alpha)$ and $\pi(H)^*=\pi(H)$ on the real Cartan span. The $\varepsilon_\alpha$ are orthonormal and the tensor form is positive Hermitian. The total Cartan operators $\Theta(H)$ are self-adjoint on this span, so distinct weights are orthogonal. [F1, F2, F6]
 

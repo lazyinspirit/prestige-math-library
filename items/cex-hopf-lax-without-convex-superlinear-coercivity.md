@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-hopf-lax-without-convex-superlinear-coercivity.json
+  precheck: pass
 id: cex-hopf-lax-without-convex-superlinear-coercivity
 kind: counterexample
 title: Nonconvexity can break the equation; nonsuperlinearity can limit the Lagrangian domain
@@ -23,8 +26,7 @@ sources:
   - title: 'Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)'
     url: https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf
     locator: Chapter 2, Example 2.2, printed p. 61 (superlinearity versus linear growth), and assumptions (2.18), printed p. 67. The two conjugates and counterexample residuals are computed here.
-verification:
-  precheck: pass
+
 ---
 
 ## Statement refuted
@@ -62,7 +64,7 @@ $-1+H(0)=0$.
 
 ## Counterexample
 
-**Proof technique:** split each conjugate supremum at the sign of $p$ and evaluate the resulting formula.
+**Proof technique:** split each conjugate supremum at the sign of the momentum variable and evaluate the resulting formula.
 
 1.1 Conjugate of the nonconvex Hamiltonian. For $H(p)=p^2-2|p|$ and $p\ge0$ one has $pv-H(p)=p(v+2)-p^2$, whose supremum over $p\ge0$ is $(v+2)_+^2/4$; for $p\le0$, writing $p=-q$ with $q\ge0$ gives $pv-H(p)=-qv-q^2+2q=q(2-v)-q^2$, whose supremum is $(2-v)_+^2/4$. Hence $L(v)=\max\{(v+2)_+^2/4,(2-v)_+^2/4\}$, where $r_+=\max(r,0)$; in particular $L(0)=1$, $L(v)=(2+|v|)^2/4\ge1$ for every $v$ and $L(v)\ge4$ for $|v|\ge2$, so $\inf_vL(v)=1$, attained at $v=0$. [F1, algebra]
 

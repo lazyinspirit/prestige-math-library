@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-nine-lemma-verified-on-a-diagram-of-cyclic-groups.json
+  precheck: pass
 id: ex-the-nine-lemma-verified-on-a-diagram-of-cyclic-groups
 kind: example
 title: "The nine lemma verified on a diagram of cyclic groups"
@@ -14,13 +17,6 @@ deps: [thm-nine-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -56,3 +52,15 @@ if and only if the bottom row is.
 2.1 The top row is the zero short exact sequence and the bottom row is the standard short exact sequence above, so both outer rows are short exact. This agrees with [L2], which predicts that under the hypotheses verified in step 1.1 the two outer rows stand or fall together. [L2, step 1.1, algebra]
 
 3.1 Thus this cyclic-group diagram is a concrete instance of the nine lemma. [step 2.1] ∎
+
+## Remarks
+
+The diagram in the example is displayed below. Write $i:\mathbb Z/2\to\mathbb Z/4$ for $i([x]_2)=[2x]_4$ and $q:\mathbb Z/4\to\mathbb Z/2$ for $q([x]_4)=[x]_2$. Every unlabelled arrow is the unique zero map to or from a zero group.
+
+```tikzcd
+0 \arrow[r] & 0 \arrow[r] \arrow[d] & 0 \arrow[r] \arrow[d] & 0 \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & \mathbb Z/2 \arrow[r,"i"] \arrow[d,"1"'] & \mathbb Z/4 \arrow[r,"q"] \arrow[d,"1"'] & \mathbb Z/2 \arrow[r] \arrow[d,"1"'] & 0 \\
+0 \arrow[r] & \mathbb Z/2 \arrow[r,"i"] & \mathbb Z/4 \arrow[r,"q"] & \mathbb Z/2 \arrow[r] & 0
+```
+
+The upper squares commute because their two composites are zero; the lower squares commute because the vertical maps are identities. Here $i$ is injective, $q$ is surjective, and $\operatorname{im}i=\{[0]_4,[2]_4\}=\ker q$. Thus the two nonzero rows are short exact, as are the columns $0\to0\to G\xrightarrow{1_G}G\to0$. The verification above is independent of this illustration.

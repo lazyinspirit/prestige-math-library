@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-link-state-restriction-filtration.json
+  precheck: pass
 id: lem-temperley-lieb-link-state-restriction-filtration
 kind: lemma
 title: "Restriction of a link-state module has a two-step filtration"
@@ -73,3 +76,56 @@ The sequence gives a two-step filtration; it is not asserted to split.
 
 9.1 Let $S$ be right multiplication by $F_{n-1}$ on the restricted middle module. It is a module endomorphism because $F_{n-1}$ is central. The polynomial operator $P=(S-\lambda_+I)/(\lambda_--\lambda_+)$ is the identity on the submodule and induces zero on the quotient. Therefore its image lies in the submodule and its restriction there is the identity, so $P$ is a retraction. The middle module is the direct sum of the submodule and $\ker P$, and projection to the quotient restricts to an isomorphism on $\ker P$. This proves the asserted splitting. [step 3.1, step 6.1, step 8.1, algebra] ∎
 
+## Remarks
+
+For $n=4$ and $t=2$, the first row illustrates the inclusion $W_{3,1}\to U\subset W_{4,2}$ from step 1.1: add a rightmost defect, leaving the arc $(1,2)$ unchanged. The reverse basis operation removes site $4$ and its propagating strand. In the second row, a representative modulo $U$ has defects at $1,2$ and the arc $(3,4)$. The quotient identification of step 2.2 cuts that arc and deletes site $4$, making site $3$ the new rightmost defect in $W_{3,3}$. The reverse basis operation attaches a new site $4$ to that rightmost defect. Bottom sites are numbered; upper dots are the ordered top endpoints.
+
+```tikz
+\begin{tikzpicture}[scale=0.85]
+  \node at (4.5,2) {$W_{3,1}\longrightarrow U\subset W_{4,2}$};
+  \foreach \x in {0,1,2} {
+    \fill (\x,0) circle (1.6pt);
+  }
+  \draw (0,0) .. controls (0,0.7) and (1,0.7) .. (1,0);
+  \draw (2,0) -- (2,1);
+  \fill (2,1) circle (1.6pt);
+  \node[below] at (0,0) {$1$};
+  \node[below] at (1,0) {$2$};
+  \node[below] at (2,0) {$3$};
+  \draw[->] (3,0.7) -- (5,0.7);
+  \node[above] at (4,0.75) {add defect};
+  \foreach \x in {6,7,8,9} { \fill (\x,0) circle (1.6pt); }
+  \draw (6,0) .. controls (6,0.7) and (7,0.7) .. (7,0);
+  \draw (8,0) -- (8,1);
+  \draw (9,0) -- (9,1);
+  \fill (8,1) circle (1.6pt);
+  \fill (9,1) circle (1.6pt);
+  \node[below] at (6,0) {$1$};
+  \node[below] at (7,0) {$2$};
+  \node[below] at (8,0) {$3$};
+  \node[below] at (9,0) {$4$};
+  \node at (4.5,-1.4) {$W_{4,2}/U\longrightarrow W_{3,3}$};
+  \foreach \x in {0,1,2,3} { \fill (\x,-3.4) circle (1.6pt); }
+  \draw (0,-3.4) -- (0,-2.4);
+  \draw (1,-3.4) -- (1,-2.4);
+  \fill (0,-2.4) circle (1.6pt);
+  \fill (1,-2.4) circle (1.6pt);
+  \draw (2,-3.4) .. controls (2,-2.7) and (3,-2.7) .. (3,-3.4);
+  \node[below] at (0,-3.4) {$1$};
+  \node[below] at (1,-3.4) {$2$};
+  \node[below] at (2,-3.4) {$3$};
+  \node[below] at (3,-3.4) {$4$};
+  \draw[->] (3.8,-2.7) -- (5.6,-2.7);
+  \node[above] at (4.7,-2.65) {cut arc};
+  \foreach \x in {7,8,9} {
+    \fill (\x,-3.4) circle (1.6pt);
+    \fill (\x,-2.4) circle (1.6pt);
+    \draw (\x,-3.4) -- (\x,-2.4);
+  }
+  \node[below] at (7,-3.4) {$1$};
+  \node[below] at (8,-3.4) {$2$};
+  \node[below] at (9,-3.4) {$3$};
+\end{tikzpicture}
+```
+
+The arrows show these particular basis maps, with the second row read on cosets. Their inverse basis operations do not provide a module splitting of the short exact sequence. The rigorous proof above is independent of the illustration.

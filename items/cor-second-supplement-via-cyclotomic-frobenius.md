@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-second-supplement-via-cyclotomic-frobenius.json
+  precheck: pass
 id: cor-second-supplement-via-cyclotomic-frobenius
 kind: corollary
-title: Second supplement from Frobenius on Q(zeta_8)
+title: Second supplement from Frobenius on $\mathbb{Q}(\zeta_8)$
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -25,13 +28,7 @@ sources:
     - title: "J. S. Milne, Algebraic Number Theory, Ch. 8, Example 8.18"
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.18, p. 144: the quadratic subfield Q(sqrt 2) of Q(zeta_8) and the second supplement."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement

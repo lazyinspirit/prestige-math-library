@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-qg-tensor-product-bar-is-triangular-and-compatible-with-fock-truncations.json
+  precheck: pass
 id: thm-the-qg-tensor-product-bar-is-triangular-and-compatible-with-fock-truncations
 kind: theorem
 title: "The tensor-product bar on the Fock module and its truncation compatibility"
@@ -103,3 +106,26 @@ integral quasi-$R$ action claim is imported.
 5.1 **The direct limit.** Every vector of the full Fock module lies in the image of some finite double cut, and every calculation in the expansion of $\psi$ is finite and stabilizes in a cut containing the residue and the input and output supports by steps 3.1, 3.2. Hence the compatible family of bars defines a bar on the direct limit, still involutive and triangular, and it fixes each ordered fundamental wedge. No infinite series is taken. [F1, F2, step 2.2, step 3.2, step 4.1]
 
 6.1 **Conclusion.** On every finite cut the Fock module has the ordinary compatible bar $\psi$ of (1)-(2); the upper-cut and common-tail embeddings commute with it by (3), so it descends to the full bounded or semi-infinite module. All uses are confined to actual finite-Cartan based fundamental factors; neither a universal two-sided-unbounded tensor-bar theorem nor an arbitrary integral quasi-$R$ action is asserted. [step 1.1, step 2.1, step 2.2, step 3.1, step 3.2, step 4.1, step 5.1] ∎
+
+
+## Remarks
+
+Write $F_{k,r}$ for the finite-cut realization on $[k,r]$, with its cut-dependent column heights, and $\psi_{k,r}$ for its bar. For admissible cuts with $R>r$, the upper inclusion $j_{r,R}$ keeps each monomial label unchanged. The two compatibility assertions have different horizontal maps:
+
+```tikzcd
+\begin{tikzcd}[/tikz/scale=1.7, /tikz/transform shape]
+F_{k,r} \arrow[r, hook, "j_{r,R}"] \arrow[d, "\psi_{k,r}"'] & F_{k,R} \arrow[d, "\psi_{k,R}"] \\
+F_{k,r} \arrow[r, hook, "j_{r,R}"'] & F_{k,R}
+\end{tikzcd}
+```
+
+When the further lower residue $k-1$ is available, $\iota_k$ instead appends $k-1$ to every one of the $l$ columns, increasing each column height by one:
+
+```tikzcd
+\begin{tikzcd}[/tikz/scale=1.7, /tikz/transform shape]
+F_{k,r} \arrow[r, hook, "\iota_k"] \arrow[d, "\psi_{k,r}"'] & F_{k-1,r} \arrow[d, "\psi_{k-1,r}"] \\
+F_{k,r} \arrow[r, hook, "\iota_k"'] & F_{k-1,r}
+\end{tikzcd}
+```
+
+Here $j_{r,R}(M_A)=M_A$, whereas $\iota_k(M_A)=M_{A\sqcup(k-1)^l}$; since $k-1$ is smaller than every old entry, the appended columns remain ordered. The squares are diagrams of underlying additive groups: the horizontal maps are linear, and the vertical bars are semilinear for $s\mapsto s^{-1}$. They express precisely steps 3.2 and 4.1, including the preservation of the charts and bases stated above. If $\eta_{k,r}:F_{k,r}\to F(\Lambda)$ is the canonical map to the full direct limit, step 5.1 defines its bar by $\psi\eta_{k,r}=\eta_{k,r}\psi_{k,r}$; the two squares ensure independence of the chosen cut, also for semi-infinite columns. The proof is independent of these illustrations.

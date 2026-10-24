@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-existence-of-a-fibre-cutter.json
+  precheck: pass
 id: lem-existence-of-a-fibre-cutter
 kind: lemma
 title: A function cutting the components of a special fibre
@@ -21,12 +24,7 @@ sources:
   references:
   - title: The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)
     url: https://stacks.math.columbia.edu/tag/0AX7
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -42,7 +40,7 @@ in which $g_i\in\mathfrak m_{X,x_i}$ maps to a nonzero element of $\mathcal O_{C
 
 **Given:** A field $k$, integral regular finite-type $k$-schemes $X,Y$ of pure dimension two, a proper birational morphism $f\colon X\to Y$, a closed point $y\in Y$ with $\dim f^{-1}(y)=1$ and components $C_1,\dots,C_r$ as in the fibre-components lemma.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-local-ring.* A **local ring** is a nonzero commutative ring $R$ with exactly one maximal ideal. That ideal is usually denoted $\mathfrak m_R$ or simply $\mathfrak m$. The quotient $R/\mathfrak m$, which is a field, is the **residue field** of the local ring. ([[def-local-ring]])
 

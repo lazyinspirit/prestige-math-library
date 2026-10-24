@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-surface-regular-fibres-preserve-normality.json
+  precheck: pass
 id: lem-surface-regular-fibres-preserve-normality
 kind: lemma
 title: "Surface regular fibres preserve normality"
@@ -23,8 +26,7 @@ sources:
   references:
     - title: "The Stacks Project: full proof imports for normal-surface resolution, lemma-Sk-goes-up, lemma-Rk-goes-up, lemma-normal-goes-up-noetherian"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -39,7 +41,7 @@ Assume AC and DC. A flat map of Noetherian rings with regular fibres carries nor
 
 [F2] Under AC, a commutative Noetherian ring is normal if and only if it satisfies $(R_1)$ and $(S_2)$; no domain hypothesis is required. ([[thm-serre-normality-criterion]])
 
-[F3] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F3] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F4] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

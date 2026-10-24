@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-na-unit-square-mini-mesh-family.json
+  precheck: pass
 id: ex-na-unit-square-mini-mesh-family
 kind: example
 title: A matching shape-regular MINI mesh family on the unit square
@@ -22,15 +25,14 @@ sources:
   references: []
 generation:
   role: example
-verification:
-  precheck: pass
+
 ---
 
 ## Example
 
 For each positive integer $n$, divide $D=(0,1)^2$ into $n^2$ equal squares and split every square along its lower-left to upper-right diagonal.
 
-\begin{center}
+```tikz
 \begin{tikzpicture}[scale=1.25]
 \draw[thick] (0,0) rectangle (2,2);
 \draw (1,0)--(1,2);
@@ -42,7 +44,7 @@ For each positive integer $n$, divide $D=(0,1)^2$ into $n^2$ equal squares and s
 \node at (0.25,1.75) {$K_1$};
 \node at (1.75,0.25) {$K_2$};
 \end{tikzpicture}
-\end{center}
+```
 
 The figure shows the $n=2$ case only; it draws all grid edges and the same diagonal in each square. The cell diameter is $h_n=\sqrt2/n$, so this family refines to zero mesh size.
 

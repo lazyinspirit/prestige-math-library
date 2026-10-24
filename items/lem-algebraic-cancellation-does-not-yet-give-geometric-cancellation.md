@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation.json
+  precheck: pass
 id: lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation
 kind: lemma
 title: "Algebraic cancellation does not yet give geometric cancellation"
@@ -21,12 +24,7 @@ sources:
     - title: "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156; complete PDF)"
       url: "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
       locator: "§5.4, printed pp. 143-148 (homological bookkeeping versus geometric cancellation); §§5.5-5.6, printed pp. 149-158 (where the excess intersections are removed)"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -60,3 +58,40 @@ Assume $\mathrm{AC}_\omega$. The oriented intersection number does not determine
 4.1 Hence $A\cap B$ consists of the original point, of sign $+1$, together with the finger pair of opposite signs; after orienting $A$ so that the original point keeps sign $+1$, the three local signs are $+1,+1,-1$ up to the order of the pair. By [F4] the oriented intersection number is $I(A,B)=1$ and the mod-2 number is $1$, while $A\cap B$ has three points. [F4, step 2.1, step 3.1]
 
 5.1 The finger is an isotopy of the original sphere, so its product normal line framing is transported and gives an attaching embedding $A\times D^1\to N$. Reading the configuration as handle data, $A$ is the attaching sphere of a $3$-handle attached to $N$ and $B$ is the belt sphere of the $2$-handle $h^2$; by [F5] the attaching-belt matrix entry is $I(A,B)=1$, a unit, yet the spheres do not meet in exactly one point. The single-point hypothesis of the cancellation theorem is therefore strictly stronger than a unit or odd algebraic count, and the extra pair in this example can be removed by the inverse finger isotopy. The example proves the failure of the converse for the displayed configuration, not an obstruction to cancellation after further isotopy. [F5, step 4.1] ∎
+
+
+## Remarks
+
+The schematic below shows traces in a transverse slice near the original intersection and the finger. The blue lines represent the surface trace; the vertical line is a segment of $B=\{p\}\times S^1$, oriented upwards. Neither panel depicts the whole sphere or the whole circle in $N=S^2\times S^1$. The original intersection remains positive, while the finger creates two intersections of opposite signs (steps 2.1–4.1). The rigorous proof, including existence of the finger isotopy, is independent of this picture.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\node at (2,3.3) {Before: $A_0$};
+\draw[->,thick] (1,-0.5) -- (1,2.9);
+\node at (0.6,2.65) {$B$};
+\draw[blue,very thick] (-0.2,0) -- (4.2,0);
+\node[blue] at (3.9,0.3) {$A_0$};
+\fill (1,0) circle (2pt);
+\node at (0.6,0.3) {$+$};
+\node at (2,-1) {$I(A_0,B)=1,\quad |A_0\cap B|=1$};
+\draw[->,thick] (4.7,1.4) -- (6,1.4);
+\node at (5.35,1.85) {finger};
+\node at (5.35,1.05) {isotopy};
+\begin{scope}[xshift=6.8cm]
+\node at (2,3.3) {After: $A$};
+\draw[->,thick] (1,-0.5) -- (1,2.9);
+\node at (0.6,2.65) {$B$};
+\draw[blue,very thick] (-0.2,0) -- (2.7,0) -- (2.7,1) -- (0.3,1) -- (0.3,2) -- (3.7,2) -- (3.7,0) -- (4.2,0);
+\node[blue] at (4.1,0.35) {$A$};
+\fill (1,0) circle (2pt);
+\fill (1,1) circle (2pt);
+\fill (1,2) circle (2pt);
+\node at (0.7,-0.3) {$+$};
+\node at (1.3,1.3) {$-$};
+\node at (1.3,2.3) {$+$};
+\node at (2,-1) {$I(A,B)=1,\quad |A\cap B|=3$};
+\end{scope}
+\end{tikzpicture}
+```
+
+Corners in the slice are schematic and are smoothed in the embedded surface. The two new signs sum to zero, so the algebraic count remains $1$ even though the geometric count rises from $1$ to $3$; reversing this particular finger isotopy removes the inserted pair (step 5.1).

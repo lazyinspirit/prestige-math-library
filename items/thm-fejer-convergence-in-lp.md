@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fejer-convergence-in-lp.json
+  precheck: pass
 id: thm-fejer-convergence-in-lp
 kind: theorem
-title: "Fejer means converge in L^p for 1 <= p < infinity"
+title: "Fejer means converge in Lᵖ for 1 ≤ p < ∞"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-cesaro-and-abel-means-of-a-fourier-series, lem-fejer-kernel-is-a-positive-approximate-identity, thm-fejer-uniform-convergence-for-continuous-periodic-functions, thm-c-c-rn-is-dense-in-l-p-of-rn]
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes"

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cographs-are-exactly-the-p-four-free-graphs.json
+  precheck: pass
 id: thm-cographs-are-exactly-the-p-four-free-graphs
 kind: theorem
-title: "The cographs are exactly the P_4-free graphs"
+title: "The cographs are exactly the $P_4$-free graphs"
 status: published
 origin: session
 provenance:
@@ -24,9 +27,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -61,7 +61,7 @@ A finite graph is a cograph if and only if it is $P_4$-free.
 
 ## Proof
 
-**Proof technique:** induction on the order of a $P_4$-free graph.
+**Proof technique:** induction on the order of a P₄-free graph.
 
 1.1 Suppose first that $G$ is a cograph. If $G$ had an induced copy of $P_4$ on some vertex set $X$, then [L1] would make $G[X]$ a cograph. But $G[X]$ is isomorphic to $P_4$, and [L3] shows that both $P_4$ and its complement are connected, contradicting [L2]. Therefore every cograph is $P_4$-free. [L1, L2, L3, F1]
 

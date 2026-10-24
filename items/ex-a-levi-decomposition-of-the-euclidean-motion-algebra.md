@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-levi-decomposition-of-the-euclidean-motion-algebra.json
+  precheck: pass
 id: ex-a-levi-decomposition-of-the-euclidean-motion-algebra
 kind: example
-title: A Levi decomposition of the Euclidean-motion algebra of R^3
+title: A Levi decomposition of the Euclidean-motion algebra of $\mathbb{R}^3$
 status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Kirillov, An Introduction to Lie Groups and Lie Algebras, so(3) and its standard action"

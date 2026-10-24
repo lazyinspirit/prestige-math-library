@@ -1,0 +1,155 @@
+{
+  "id": "ex-matched-observation-mrps-have-distinct-bellman-errors",
+  "agent": "/root/rendering_repair_coordinator/dorl_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The Example packs eight directed reward/probability transitions into one paragraph. Paired graphs materially clarify which outgoing transitions change when B is split into B and B-prime, despite the common feature map. A complete algebraic verification does not remove this explanatory benefit.",
+      "action": "Added one fenced TikZ figure in final Remarks, with two separate MRP graphs and explicit (probability,reward) labels on every arrow.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a mathematically checked paired transition-graph illustration; original title, complete body prefix, metadata and publication status remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      72,
+      95
+    ],
+    "caption": 74,
+    "tikz": [
+      76,
+      95
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "MRP 1 directed transition data",
+      "justification": "Example line 37 and supplier thm-bellman-error-unlearnability-example Statement/proof 1.1 specify state set {A,B}. Figure has exactly A -> B (1,0), B -> A (1/2,1), B -> B (1/2,-1). Outgoing probability sums are 1 and 1, with no other arrows."
+    },
+    {
+      "check": "MRP 2 directed transition data",
+      "justification": "Example line 37 and supplier Statement/proof 1.1 specify {A,B,B-prime}. Figure has exactly A -> B (1/2,0), A -> B-prime (1/2,0), B -> A (1,1), B-prime -> B (1/2,-1), B-prime -> B-prime (1/2,-1). Each outgoing probability sum is 1. Both reciprocal A/B arrows have separate curves and correct arrowheads."
+    },
+    {
+      "check": "Feature map and stationary weighting compatibility",
+      "justification": "Caption repeats Example psi(A)=(1,0) and psi(B)=psi(B-prime)=(0,1), without identifying B and B-prime as states. From the displayed transitions, (1/3,2/3)P1=(1/3,2/3), and each column sum of P2 is 1, giving stationary (1/3,1/3,1/3), as asserted in the unchanged Example and supplier proof 1.1."
+    },
+    {
+      "check": "Bellman residual interface and observational claim",
+      "justification": "At gamma=1/2 and values a,b,b, graph 1 yields residuals b/2-a and (a+b)/4-b since expected reward at B is 0. Graph 2 yields b/2-a, 1+a/2-b, -1-b/2. These are exactly the unchanged Example objectives under its weights. The picture asserts transition data only; equality of stationary observed laws remains supplied by F2, whose proof 1.2 checks the shared observed three-state kernel. Verification steps 1.1 and 2.1 remain unchanged and independent of the figure."
+    },
+    {
+      "check": "Rendered graph incidence and closure",
+      "justification": "Standalone native v2 tile 02 visibly contains 5 state vertices and 8 directed edges total: 3 in MRP 1 and 5 in MRP 2, including 2 self-loops. Directed (outdegree,indegree), counting loops once each, is (1,1),(2,2) for MRP 1 and (2,1),(1,2),(2,2) for MRP 2. SVG contains 21 paths: 5 circle outlines, 8 transition strokes, 8 arrowheads. No --cycle closure is used; the lower B-prime -> B segment and the reverse B -> A arrows render explicitly. Circle outlines denote states, not open/closed scalar endpoints; no endpoint membership convention is asserted."
+    }
+  ],
+  "original_evidence": {
+    "declared_path_issue": "The queue evidence_dir diagram-supplement/screenshots paths do not exist. Authentic captures are one directory higher in the same online-and-reinforcement-learning category; both SHA256 values match the queue exactly.",
+    "resolved_directory": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots",
+    "screenshots": [
+      {
+        "path": "ex-matched-observation-mrps-have-distinct-bellman-errors--01.png",
+        "sha256": "e861311c15be6cdd22d96280a68fd61bdbf1f436610862dc8018364273ca87d5"
+      },
+      {
+        "path": "ex-matched-observation-mrps-have-distinct-bellman-errors--02.png",
+        "sha256": "39ff2f11b755498f6c6fd904553ff76211472b2074ebc7769ae0aca8e2d7f528"
+      }
+    ],
+    "inspection": "Both authentic original PNGs viewed separately at original resolution; frozen and current source equal before editing."
+  },
+  "before_guard": {
+    "sha256": "1395b09b82beca37cb74be1c07d2896a9a9d898bd7a51d5532809d0114e289da",
+    "result": "Matched immediately in the edit script before its write."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-matched-observation-mrps-have-distinct-bellman-errors.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-matched-observation-mrps-have-distinct-bellman-errors.md",
+            "item_id": "ex-matched-observation-mrps-have-distinct-bellman-errors",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-matched-observation-mrps-have-distinct-bellman-errors.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-matched-observation-mrps-have-distinct-bellman-errors.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    }
+  ],
+  "native_render": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl018-native-v2/manifest.json",
+    "source_sha256": "b1cb5d54d794f77502740bcf604e59cd815782e7e16a31c7209310bbbcc90f8e",
+    "html_sha256": "0bad1499ab511a7debd79c47e1354bc30d632d6910528b58cd62678a5255f400",
+    "reference_map_sha256": "0a51cc00322c377cf1c698b6983697fb46c285bce8d68368383b119bd621aab1",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dorl018-native-v2/screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors.json",
+    "capture": {
+      "capture_revision": 2,
+      "id": "ex-matched-observation-mrps-have-distinct-bellman-errors",
+      "height": 1807,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "18962dc905039a57fe82763f708c10d9b5c99f235c0c11d466172e1da8203f71",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 507,
+          "sha256": "191f53216a932ddbeeb30d8fe5cb145d29046e6c285ae8a413658a95aec557b9",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 52,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T02:45:12.501Z"
+    },
+    "visual_inspection": "Both final PNGs viewed standalone at original resolution. Dark native preview has readable light labels/arrowheads and unfilled state circles; thick strokes remain visible against black. Separate group spacing prevents neighbouring transition-label overlap. All loops and directed edges are present, with no clipping. First preview prompted greater spacing and thicker strokes; v2 is the checked final source."
+  },
+  "protected_content_check": "Current file starts with entire original frozen file byte-for-byte; only a final Remarks section was appended. Thus all protected frontmatter and publication status are unchanged.",
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview is local ItemBody rendering, not production HTTP or full library-loader coverage. Its 16 unrelated reference-map parse diagnostics are recorded by the manifest, and scoped checks have no warnings."
+  ]
+}

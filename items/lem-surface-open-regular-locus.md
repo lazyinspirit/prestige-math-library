@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-surface-open-regular-locus.json
+  precheck: pass
 id: lem-surface-open-regular-locus
 kind: lemma
 title: Surface open regular locus
@@ -32,12 +35,7 @@ sources:
   - title: 'The Stacks Project: full proof imports for normal-surface resolution, lemma-complete-Noetherian-domain-J-0,
       lemma-J-2, lemma-J-0-goes-down, lemma-J-0-goes-up, lemma-intersection-regular-with-closed, proposition-ubiquity-J-2'
     url: https://stacks.math.columbia.edu/download/more-algebra.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -48,7 +46,7 @@ Assume AC and DC. Every finite-type algebra over a field or a complete equichara
 
 **Given:** A finite-type algebra over a field or over a complete equicharacteristic Noetherian local ring (and a scheme locally of finite type over such a base).
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

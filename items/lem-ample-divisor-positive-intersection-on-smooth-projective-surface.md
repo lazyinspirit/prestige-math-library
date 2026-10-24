@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ample-divisor-positive-intersection-on-smooth-projective-surface.json
+  precheck: pass
 id: lem-ample-divisor-positive-intersection-on-smooth-projective-surface
 kind: lemma
 title: "Ample divisors meet nonzero effective divisors positively"
@@ -37,11 +40,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21"
@@ -92,7 +90,7 @@ be an ample invertible $\mathcal O_X$-module ([[def-ample-invertible-sheaf]]).
 
 
 ## Proof
-**Proof technique:** direct: replace $H$ by a very ample power, express its intersection with the curve $D$ as the first difference of the Hilbert polynomial of $\mathcal O_D$, and read positivity off the leading coefficient.
+**Proof technique:** direct: replace the ample invertible sheaf by a very ample power, express its intersection with the effective divisor curve as the first difference of the Hilbert polynomial of the structure sheaf of that curve, and read positivity off the leading coefficient.
 
 1.1 Reduction to a very ample power. Fix $m\ge1$, $N$ and the closed immersion $i:X\hookrightarrow\mathbb P^N_k$ with $i^*\mathcal O(1)\cong H^{\otimes m}$ supplied by [F4], and put $A:=H^{\otimes m}$. Since the intersection product is $\mathbb Z$-bilinear, $A\cdot D=m\,(H\cdot D)$ for every Cartier divisor $D$; hence $H\cdot D=m^{-1}(A\cdot D)$, and for part 1 it suffices to prove $A\cdot D>0$ for every nonzero effective Cartier divisor $D$. [F1, F4]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-safeguarded-hybrid-event-location-and-restart.json
+  precheck: n/a
 id: alg-safeguarded-hybrid-event-location-and-restart
 kind: algorithm
 title: "Safeguarded certified event location and mode restart"
@@ -18,8 +21,6 @@ aliases: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Siegfried M. Rump, Verification methods: Rigorous results using floating-point arithmetic, Acta Numerica 19 (2010), §§6.2 and 13.1"
@@ -57,3 +58,39 @@ $$E\leftarrow L_R\eta_{\rm ref}+(L_RM^-+L_{R,t}+M^+)\Delta+\varepsilon_R.$$
 Then discard the pre-reset reconstruction, set the current reported time and state to $\widehat\tau$ and the applied reset value, start a new accumulated reconstruction in the selected mode, append the event certificate, and increment the accepted-event count. Before processing any later trial interval, step 2 must obtain certified provider data whose total reference-error bound is valid on that whole accumulated prefix and includes this aligned-start discrepancy (or is independently justified on that full prefix); if the provider cannot certify it, return `inconclusive` with the certified prefix. Continue from step 1. Whenever further step, root-box, or event work is required after its budget is spent, return `budget-exhausted` with the certified prefix.
 
 **Outputs.** A finite list of certified no-event panels and transverse event boxes with selected transitions, reset states, event-time bounds, and an updated state-error ledger; or an explicit `inconclusive`, `domain-failure`, or `budget-exhausted` status with the certified prefix. No no-event conclusion is drawn from endpoint signs alone.
+
+
+## Remarks
+
+The diagram separates guard classification, certified event ordering, and restart. It shows the successful event branch, not a replacement for the certificate and budget checks in the procedure. For each outgoing transition $(m,n)$, roots satisfy $g_{mn}(t,y_{\rm ref}(t))=0$. Step 4 retains a root only when $\sigma_{mn}D_{mn}(J(Q))\subseteq[\nu_Q,\infty)$ with $\nu_Q>0$; a strictly negative signed derivative makes it nontriggering. Step 7 selects the earliest enabled root, using priority only for a certified common-time tie. If complete isolation leaves no enabled roots, step 6 instead advances to $b$ with state $U(b)$ and retains $E$. The statuses `inconclusive`, `domain-failure`, and `budget-exhausted` are exits with the certified prefix, not mode transitions.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}, box/.style={draw,rounded corners,align=center,minimum height=1cm,text width=2.8cm}]
+\node[box] (m) at (0,0) {Mode $m$\\trial $J=[a,b]$};
+\node[box] (roots) at (4,0) {Isolate guard roots\\classify orientation};
+\node[box] (select) at (8,0) {Earliest enabled root\\certified ties: priority};
+\node[box] (reset) at (8,-2) {Validate lag and domains\\apply reset at $\widehat\tau$};
+\node[box] (n) at (4,-2) {Restart in mode $n$\\new ledger $E$};
+\draw[->] (m) -- (roots);
+\draw[->] (roots) -- (select);
+\draw[->] (select) -- (reset);
+\draw[->] (reset) -- (n);
+\node at (4,-3.3) {Selected physical root box $J(Q)$};
+\draw[->] (-1,-4.2) -- (9.5,-4.2) node[right] {$t$};
+\draw[line width=1.2pt] (3,-4.2) -- (6,-4.2);
+\draw (3,-4.05) -- (3,-4.35);
+\draw (6,-4.05) -- (6,-4.35);
+\fill (4.2,-4.2) circle (2pt);
+\node[below] at (-0.5,-4.3) {$a$};
+\draw (-0.5,-4.05) -- (-0.5,-4.35);
+\node[below] at (4.2,-4.3) {$\tau$};
+\node[below] at (6,-4.3) {$\widehat\tau=\sup J(Q)$};
+\node[below] at (9,-4.3) {$b$};
+\draw (9,-4.05) -- (9,-4.35);
+\node at (4,-5.5) {$0\le\widehat\tau-\tau\le\Delta<\delta/3$};
+\end{tikzpicture}
+```
+
+The time strip depicts a positive-length selected box with an interior exact root; singleton roots have $\tau=\widehat\tau$ and $\Delta=0$. The successful reset branch requires the tests in steps 8–9. For the selected transition, $R_{mn}:U_{mn}\to\mathbb R^d$ is evaluated at $(\widehat\tau,U(\widehat\tau))\in U_{mn}$, and the applied reset state $x^+$ must satisfy $(\widehat\tau,x^+)\in D_n$. The next ledger is exactly the bound in step 9,
+$$E\leftarrow L_R\eta_{\rm ref}+(L_RM^-+L_{R,t}+M^+)\Delta+\varepsilon_R.$$
+The arrow to mode $n$ represents the reported restart at the upper endpoint, while the exact reference trajectory resets at $\tau$ and flows to the common alignment time $\widehat\tau$. The procedure and its certificate requirements remain independent of the illustration.

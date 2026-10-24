@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-meyers-serrin-does-not-assert-density-for-p-infinity.json
+  precheck: n/a
 id: rem-meyers-serrin-does-not-assert-density-for-p-infinity
 kind: remark
-title: Meyers–Serrin excludes the W^{k,∞} norm endpoint
+title: Meyers–Serrin excludes the $W^{k,\infty}$ norm endpoint
 status: published
 origin: pipeline
 deps: [thm-local-smooth-approximation-in-wkp, thm-meyers-serrin-density-on-an-arbitrary-open-set, cor-positive-negative-part-and-truncation-calculus-in-w-one-p, lem-classical-derivatives-are-weak-derivatives, def-sobolev-space-wkp-and-its-norm]
@@ -9,12 +12,6 @@ landmark: false
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-10-02
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   scraped: []
   references:

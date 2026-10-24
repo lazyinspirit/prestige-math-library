@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-graded-grothendieck-group-of-a-m-perfect-complexes.json
+  precheck: n/a
 id: def-graded-grothendieck-group-of-a-m-perfect-complexes
 kind: definition
-title: "The graded Grothendieck group of A_m"
+title: "The graded Grothendieck group of $A_m$"
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
@@ -24,12 +27,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 2e.1"
       url: "https://arxiv.org/pdf/math/0006056"
       locator: "Section 2e.1, printed pp. 14-15 (K(A_m-mod), the action of {1} and of U_i and R_i)"
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Definition

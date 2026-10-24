@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-period-two-of-simple-random-walk-on-a-bipartite-graph.json
+  precheck: pass
 id: ex-period-two-of-simple-random-walk-on-a-bipartite-graph
 kind: example
 title: "Period two on a bipartite graph"
@@ -12,13 +15,6 @@ deps:
   - lem-period-is-constant-on-a-communicating-class
 proof_strategy: direct
 landmark: false
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"
@@ -85,3 +81,22 @@ vertex, then transfer the period across the connected graph.
 ## Source notes
 
 LPW §1.3, printed pp. 7–8 (PDF pp. 23–24), defines period using positive return times, proves period invariance for irreducible chains in Lemma 1.6, and explains alternating support classes for a chain of period two; its Example 1.8 uses an even cycle. Section 1.4, printed p. 8 (PDF p. 24), defines simple random walk on an undirected graph by choosing a neighbor uniformly. These finite-chain passages do not prove the general locally finite bipartite-graph claim. The row definition, parity induction, backtrack, and connected-path transfer needed here are made explicit above.
+
+## Remarks
+
+For a fixed $x_0\in V_i$, choose a neighbor $z\in V_{1-i}$ as in step 2.2. The schematic shows just this edge and its two possible one-step transitions, not the entire graph or all neighbors of either vertex.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\draw[dashed, rounded corners] (-1.1,-1.05) rectangle (1.1,1.15);
+\draw[dashed, rounded corners] (3.3,-1.05) rectangle (5.5,1.15);
+\node at (0,1.5) {$V_i$};
+\node at (4.4,1.5) {$V_{1-i}$};
+\node[circle,draw,minimum size=9mm] (x) at (0,0) {$x_0$};
+\node[circle,draw,minimum size=9mm] (z) at (4.4,0) {$z$};
+\draw[->] (x) to[bend left=25] node[above] {$1/\deg(x_0)>0$} (z);
+\draw[->] (z) to[bend left=25] node[below] {$1/\deg(z)>0$} (x);
+\end{tikzpicture}
+```
+
+Starting at $x_0$, the support is in $V_i$ at even times and in $V_{1-i}$ at odd times (step 2.1). The pictured backtrack $x_0\to z\to x_0$ contributes $1/(\deg(x_0)\deg(z))>0$ to $p^{(2)}(x_0,x_0)$ (step 2.2). Thus odd returns are impossible and a two-step return is possible, giving period two as in step 3.1. The proof above is independent of this illustration.

@@ -1,0 +1,81 @@
+{
+  "id": "ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x",
+  "agent": "/root/rendering_repair_coordinator/cxa_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200×1400 tile visibly prints x^(alpha-1), infinity, pi and sin(pi alpha) as formula syntax in its title, while the Example below typesets the same formula. The title is expressing this precise integral identity, so the absent math delimiters are a display defect rather than optional prose typography.",
+      "action": "Replaced the title formula fragments by equivalent supported inline math, retaining its integral/integration-interval/value wording.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title line 4 only: typeset x^{\\alpha-1}/(1+x), (0,\\infty), and \\pi/\\sin(\\pi\\alpha).",
+  "source_lines_after": {
+    "4": "title: 'The integral of $x^{\\alpha-1}/(1+x)$ over $(0,\\infty)$ is $\\pi/\\sin(\\pi\\alpha)$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "publication_status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "byte_identical": true
+  },
+  "write_scope_check": "All bytes except title line 4 match the archived before file; body, hypotheses, proof, dependencies, sources and status are unchanged.",
+  "before_raw_sha256": "9612a88b26dfd2b7d18554cf55394329c40f7c0388c9aafa7b4077e40db3a3e2",
+  "after_raw_sha256": "e65db4fe37cfd2ebbdbb9a823d38d73ad84b21ea36ef129030533210d6e6d2e6",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x--01.png",
+    "sha256": "9ea8982fb487e00f7d2576ec68d51566c991aafa5addd7d68500b12e4267da15",
+    "view": "Standalone view_image detail original; inspected title and full body."
+  },
+  "current_visual_evidence": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa014/manifest.json",
+    "manifest_sha256": "d43c1acb3d1a77f5dd53ba09b12e0400def89496e8d46537915a2a376e54a8f6",
+    "source_sha256": "e65db4fe37cfd2ebbdbb9a823d38d73ad84b21ea36ef129030533210d6e6d2e6",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/cxa014/screenshots/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x--01.png",
+    "screenshot_sha256": "05a8fbf9565a65916c3cefbcbeea18a0d22699807fa8e6d9f69db496c312a54d",
+    "view": "Standalone view_image detail original: title formula renders correctly, fits within the tile, and all body math remains rendered.",
+    "limitations": "Native local title/ItemBody preview, not production-route coverage; reference-title map contains 16 unrelated parse diagnostics."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x.md",
+            "item_id": "ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x",
+            "status": "pass",
+            "strategy": "computation"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "intermediate_repair_note": "An initial replacement-string interpolation error duplicated the suffix and produced an unclosed YAML quote. The initial rendercheck truthfully failed frontmatter-unparsable. Immediately corrected under an own-edit source guard using the original archive and explicit line replacement; final exact diff is title-only and final scoped checks above pass."
+}

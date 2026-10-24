@@ -1,0 +1,106 @@
+{
+  "id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+  "agent": "/root/rendering_repair_coordinator/npde_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution views of both flagged PNGs show literal begin/end tikzpicture and drawing commands in Statement. The source is an unfenced environment, so the native Markdown renderer never invokes TikZ. This is not a compilation failure or a mathematical error.",
+      "action": "Wrapped the existing TikZ environment in a supported fenced tikz block and relocated the explanatory paragraph and illustration to final Remarks outside Facts and Proof.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Render the existing mathematically correct local CIC stencil as fenced TikZ in final Remarks, preserving all diagram commands and underlying mathematical text.",
+  "source_lines_after": {
+    "illustration_paragraph": 62,
+    "tikz_fence": [
+      64,
+      80
+    ],
+    "tikz_environment": [
+      65,
+      79
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "metadata_byte_identical": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Grid geometry",
+      "justification": "def-periodic-pic-grid-and-inner-product defines x_j=hj modulo L. Diagram nodes 0,1,2 lie at evenly spaced horizontal coordinates 0,1,2; its dimension arrow connects nodes 0 and 1 and labels their physical spacing h. These are local grid indices, not the entire five-node periodic grid."
+    },
+    {
+      "check": "Particle position and CIC weights",
+      "justification": "The Statement fixes X=h/3; the particle at horizontal drawing coordinate 0.333 is the schematic one-third location between nodes 0 and 1. With d_L(X,x_0)=h/3 and d_L(X,x_1)=2h/3, the defined max{1-d_L/h,0} weights are 2/3 and 1/3, exactly the two labels. Other grid nodes have periodic distance at least h, hence zero weights."
+    },
+    {
+      "check": "Stencil connectors and proof interface",
+      "justification": "The two dashed red connectors join the particle to nodes 0 and 1, the only nonzero-weight nodes. They are incidence guides rather than vector-valued force arrows; no force direction, extra map or commutative relation is asserted. Proof steps 1.1, 1.2 and 2.1 already calculate the weights, density and adjoint identity without using the diagram."
+    }
+  ],
+  "proof_independent": true,
+  "guard": {
+    "before_raw_sha256": "a923c307934df266d06619c044d4366f63d18cf38f269da5a7a4ddd7ba4c2195",
+    "matched_immediately_before_edit": true
+  },
+  "current_raw_sha256": "ec72a513031fc381b7f91f7ca581d584f1678e75b398231d9c76182fe6371a0b",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-periodic-one-dimensional-pic-cic-charge-deposition.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-periodic-one-dimensional-pic-cic-charge-deposition.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-periodic-one-dimensional-pic-cic-charge-deposition.md",
+            "item_id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-periodic-one-dimensional-pic-cic-charge-deposition.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/npde006-final-unique",
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-periodic-one-dimensional-pic-cic-charge-deposition --out research/math-library-rendering-repairs-2026-10-23/previews/npde006-final-unique",
+    "exit_code": 0,
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "original_resolution_views": [
+      "Original audit tiles --01 and --02 independently viewed standalone",
+      "Final native preview tiles --01 and --02 independently viewed standalone"
+    ],
+    "visual_result": "Diagram compiled with all three grid nodes, particle, dashed connectors, weight labels, dimension arrow and horizontal axis visible; no clipping or overlap that obscures a label. Final complete body retains rendered mathematical text and unchanged proof.",
+    "limitations": [
+      "Local file-only ItemBody preview, not production route or metadata Sources footer.",
+      "Reference-title map includes 16 unrelated parse diagnostics; assigned item successfully rendered."
+    ]
+  },
+  "remaining_issues": []
+}

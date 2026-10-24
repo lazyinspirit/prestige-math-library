@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-gmres-true-residual-gap-from-computed-arnoldi-relation.json
+  precheck: pass
 id: thm-gmres-true-residual-gap-from-computed-arnoldi-relation
 kind: theorem
 title: "A computed GMRES correction has an explicit finite-precision residual gap"
@@ -18,10 +21,6 @@ deps: [thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound,
 justified_by: []
 aliases: []
 proof_strategy: direct
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Nicholas J. Higham, Accuracy and Stability of Numerical Algorithms, 2nd ed., §§19.8–19.13, printed pp. 415–430"

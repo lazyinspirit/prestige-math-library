@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-ars222-additive-tableau-and-stages.json
+  precheck: n/a
 id: def-ars222-additive-tableau-and-stages
 kind: definition
 title: "The ARS(2,2,2) additive tableau and its three stages"
@@ -17,8 +20,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Uri M. Ascher, Steven J. Ruuth, and Raymond J. Spiteri, Implicit-explicit Runge-Kutta methods for time-dependent partial differential equations"
@@ -40,3 +41,21 @@ For a step $h>0$ from $y$, the method is defined by
 $$Y_1=y,\qquad Y_2=y+\gamma h a(Y_1)+\gamma h b(Y_2),$$
 $$Y_3=y+h\bigl[\delta a(Y_1)+(1-\delta)a(Y_2)\bigr]+h\bigl[(1-\gamma)b(Y_2)+\gamma b(Y_3)\bigr],\qquad y^+=Y_3.$$
 Thus there are two implicit solves per step, one for each nonzero diagonal implicit stage. The unscaled stage-equation residual uses the update-residual convention of [[def-implicit-residual-and-algebraic-error-units]]. The tableaus and stages alone assert neither branch existence nor stability.
+
+
+## Remarks
+
+The stage-dependency diagram below separates contributions from earlier stages from the implicit diagonal terms. An arrow labelled with $a$ or $b$ contributes the indicated multiple of that component evaluated at the arrow's source stage to the target equation; every stage equation also contains the base state $y$. The self-loops at $Y_2$ and $Y_3$ mark the implicit terms, not an assertion that a solution exists or is unique. The formulas in the Definition specify the method independently of the picture.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node[draw,rounded corners,minimum width=1.5cm,minimum height=0.7cm] (Y1) at (0,2.8) {$Y_1=y$};
+\node[draw,rounded corners,minimum width=1.5cm,minimum height=0.7cm] (Y2) at (-3,0) {$Y_2$};
+\node[draw,rounded corners,minimum width=1.5cm,minimum height=0.7cm] (Y3) at (3,0) {$Y_3=y^+$};
+\draw[->] (Y1) -- node[above left] {$\gamma h a$} (Y2);
+\draw[->] (Y1) -- node[above right] {$\delta h a$} (Y3);
+\draw[->] (Y2) -- node[above] {$h(1-\delta)a$} node[below] {$h(1-\gamma)b$} (Y3);
+\draw[->] (Y2) edge[loop below,min distance=1.3cm] node[below] {$\gamma h b$} (Y2);
+\draw[->] (Y3) edge[loop below,min distance=1.3cm] node[below] {$\gamma h b$} (Y3);
+\end{tikzpicture}
+```

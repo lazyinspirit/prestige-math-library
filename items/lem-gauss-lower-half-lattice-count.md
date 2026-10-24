@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-gauss-lower-half-lattice-count.json
+  precheck: pass
 id: lem-gauss-lower-half-lattice-count
 kind: lemma
 title: "Gauss's lemma as a lower-half lattice-point count"
@@ -13,9 +16,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-17
 sources:
   scraped: []
   references:
@@ -51,3 +51,27 @@ Thus Gauss's sign count ([[thm-gauss-quadratic-residue-lemma]]) can be read as t
 1.1 For each $1\le x\le m$, [L2] gives $qx=pt_x+\rho_x$ with $0\le\rho_x<p$; since $p\nmid qx$, one has $0<\rho_x<p$. The positive integers $y$ satisfying $py<qx=pt_x+\rho_x$ are exactly $1,\ldots,t_x$, so $S_{p,q}=\sum_{x=1}^{m}t_x$. [L2, given, algebra]
 
 2.1 In the notation of [L3], $\rho_x=u_x$ when $\varepsilon_x=1$ and $\rho_x=p-u_x$ when $\varepsilon_x=-1$; the negative signs are exactly the residues counted by $N(q,p)$. Summing the equations of step 1.1 and reducing modulo $2$ gives $\sum_x x\equiv S_{p,q}+\sum_x\rho_x\pmod2$, because $p$ and $q$ are odd. Also $\sum_x\rho_x\equiv\sum_xu_x+N(q,p)\pmod2$, while the permutation in [L3] gives $\sum_xu_x=\sum_xx$. Hence $S_{p,q}\equiv N(q,p)\pmod2$, and [L1] yields $\left(\frac qp\right)=(-1)^{S_{p,q}}$. [step 1.1, L1, L3, algebra] ∎
+
+## Remarks
+
+For $p=7$ and $q=5$, the allowed columns are $x=1,2,3$. The filled points below the line $7y=5x$ are $(2,1)$, $(3,1)$ and $(3,2)$, so $S_{7,5}=3$. The dashed vertical segments show the heights $5x/7$; step 1.1 counts the positive integer heights strictly below each one. The figure illustrates the count only; the proof above is independent of it.
+
+```tikz
+\begin{tikzpicture}[x=1.65cm,y=1.65cm]
+\draw[help lines,step=1] (0,0) grid (3,2);
+\draw[->] (0,0) -- (3.65,0) node[right] {$x$};
+\draw[->] (0,0) -- (0,2.75) node[above] {$y$};
+\draw (1,0.04) -- (1,-0.04) node[below] {$1$};
+\draw (2,0.04) -- (2,-0.04) node[below] {$2$};
+\draw (3,0.04) -- (3,-0.04) node[below] {$3$};
+\draw (0.04,1) -- (-0.04,1) node[left] {$1$};
+\draw (0.04,2) -- (-0.04,2) node[left] {$2$};
+\draw[dashed] (1,0) -- (1,0.714286);
+\draw[dashed] (2,0) -- (2,1.428571);
+\draw[dashed] (3,0) -- (3,2.142857);
+\draw[thick] (0,0) -- (3.36,2.4) node[above left] {$7y=5x$};
+\fill (2,1) circle (2.3pt);
+\fill (3,1) circle (2.3pt);
+\fill (3,2) circle (2.3pt);
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-formal-power-series-evaluation-converges.json
+  precheck: pass
 id: lem-formal-power-series-evaluation-converges
 kind: lemma
 title: "Formal power-series substitution converges in a complete local algebra"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-separated-and-complete-filtered-module, def-local-ring]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ form an $\mathfrak m$-adically Cauchy sequence in $A$ and hence converge.
 
 ## Proof
 
-**Proof technique:** degree-$N$ tails land in $\mathfrak m^N$.
+**Proof technique:** total-degree tails lie in the corresponding powers of the maximal ideal.
 
 1.1 If $M>N$, then $$S_M-S_N=\sum_{N \le |\alpha|<M} a_\alpha x^\alpha.$$ Every monomial $x^\alpha$ appearing here is a product of $|\alpha| \ge N$ elements of $\mathfrak m$, so by the definition of the ideal power $\mathfrak m^N$ one has $x^\alpha \in \mathfrak m^N$. Hence $S_M-S_N \in \mathfrak m^N$. [given, algebra]
 

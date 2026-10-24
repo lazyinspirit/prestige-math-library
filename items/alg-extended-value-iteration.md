@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-extended-value-iteration.json
+  precheck: n/a
 id: alg-extended-value-iteration
 kind: algorithm
 title: "Extended value iteration for a confidence set"
@@ -36,3 +39,25 @@ For each state, compute $B_i(s,a)=\widetilde r(s,a)+q_{i,s,a}\cdot u_{i-1}$ for 
 [UCRL2 Extended Value Iteration](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3.1.2, Figure 2 and equation (5).
 
 [Average-reward value iteration discussion](https://raw.githubusercontent.com/martyput/MDP_book/master/07%20Chapter/Book___chapter07.pdf): Chapter 7, §§7.3–7.4.
+
+## Remarks
+
+For fixed $(s,a)$ and $v=u_{i-1}$, the first panel shows one positive transfer between the current lowest-value source $x_j$ and highest-value destination $x_\ell$. The amount $d$ is limited by the remaining mass budget $c$, available source mass, and destination capacity. The other coordinates are unchanged. Such a transfer preserves total probability and increases $q\cdot v$ by $d(v(x_\ell)-v(x_j))>0$. The second panel shows the subsequent action comparison at a fixed state $s$: each action has its own optimized row, and the fixed action order resolves ties only after the backed-up values are computed.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node at (5,3.6) {One positive transfer: $j<\ell$, $v(x_j)<v(x_\ell)$};
+\node[draw, rounded corners, minimum width=3.3cm, minimum height=1.1cm, align=center] (low) at (1.8,2.3) {$x_j$ (lower value)\\ $q(x_j)\longmapsto q(x_j)-d$};
+\node[draw, rounded corners, minimum width=3.3cm, minimum height=1.1cm, align=center] (high) at (8.2,2.3) {$x_\ell$ (higher value)\\ $q(x_\ell)\longmapsto q(x_\ell)+d$};
+\draw[->, thick] (low) -- node[above] {mass $d$} (high);
+\node at (5,1.2) {$d=\min\{c,q(x_j),1-q(x_\ell)\},\qquad c\longmapsto c-d$};
+\node at (5,0.15) {After each action's row optimization, at fixed $s$:};
+\node[draw, rounded corners, minimum height=1cm, align=center] (row) at (1.3,-1) {For each $a\in A(s)$\\ $q_{i,s,a}$};
+\node[draw, rounded corners, minimum height=1cm, align=center] (backup) at (5,-1) {$B_i(s,a)$\\ $=\widetilde r(s,a)+q_{i,s,a}\cdot v$};
+\node[draw, rounded corners, minimum height=1cm, align=center] (choice) at (9,-1) {$a_i(s)$: first action\\attaining $\max_a B_i(s,a)$};
+\draw[->] (row) -- (backup);
+\draw[->] (backup) -- (choice);
+\end{tikzpicture}
+```
+
+This illustration does not replace the transfer routine or its separate correctness and termination arguments.

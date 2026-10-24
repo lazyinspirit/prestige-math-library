@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-self-consistent-projector-two-cycle-with-gap.json
+  precheck: pass
 id: ex-self-consistent-projector-two-cycle-with-gap
 kind: example
 title: A finite-basis occupied projector map can two-cycle despite a uniform gap
@@ -52,3 +55,20 @@ iterates.
 1.2 Direct substitution gives $F(P_0)=\operatorname{diag}(1,0)$ and $F(P_1)=\operatorname{diag}(0,1)$. Each matrix has eigenvalues $0<1$, so the strict occupied gap is $1$ by [F5]. By [F2], the lowest eigenspace of $F(P_0)$ is $\operatorname{span}\{(0,1)^T\}$ and that of $F(P_1)$ is $\operatorname{span}\{(1,0)^T\}$; [F4] guarantees these give the unique projectors $\Phi(P_0)=P_1$ and $\Phi(P_1)=P_0$. Thus $K=\{P_0,P_1\}$ is invariant. [given, F2, F4, F5, algebra]
 
 2.1 By [F3], starting at $P_0$ yields $P_0,P_1,P_0,P_1,\ldots$. Since $\|P_0-P_1\|_F=\sqrt2>0$, this sequence does not converge. Thus a positive uniform gap at the iterates alone does not imply convergence. [step 1.2, F3, algebra] ∎
+
+## Remarks
+
+The arrows below are the occupied-projector map $\Phi$, not the response matrix map $F$. At each state, $F(P_i)=P_i$ has ordered eigenvalues $0,1$, so its gap is $1$; selecting its lowest eigenspace gives the other projector, as computed in step 1.2.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (p0) at (0,0) {$P_0=\mathrm{diag}(1,0)$};
+\node (p1) at (6,0) {$P_1=\mathrm{diag}(0,1)$};
+\draw[->] (p0) to[bend left=28] node[above] {$\Phi$} (p1);
+\draw[->] (p1) to[bend left=28] node[below] {$\Phi$} (p0);
+\node at (0,-1.2) {$\mathrm{gap}=1$};
+\node at (6,-1.2) {$\mathrm{gap}=1$};
+\end{tikzpicture}
+```
+
+This two-state illustration records the invariant set $K=\{P_0,P_1\}$; the verification and nonconvergence argument above are independent of the figure.

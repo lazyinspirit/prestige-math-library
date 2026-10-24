@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-klein-bottle.json
+  precheck: n/a
 id: def-klein-bottle
 kind: definition
 title: "The Klein bottle as a square quotient"
@@ -10,12 +13,6 @@ landmark: false
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -75,3 +72,39 @@ the oppositely traversed $a,a^{-1}$ pair; the right and left sides form the
 equally traversed $b,b$ pair. The one-polygon word is therefore
 $aba^{-1}b$. The later example checks its orientability and Euler
 characteristic directly.
+
+## Remarks
+
+The arrows below specify the edge identifications on the square, before
+passing to the quotient. The two $a$ arrows point right, representing
+$(x,0)\sim(x,1)$; the two $b$ arrows point in opposite vertical directions,
+representing $(0,y)\sim(1,1-y)$.
+
+```tikz
+\begin{tikzpicture}[scale=1.2]
+\draw[thick] (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+\draw[thick,->] (1.1,0) -- (1.9,0);
+\draw[thick,->] (1.1,3) -- (1.9,3);
+\draw[thick,->] (0,1.9) -- (0,1.1);
+\draw[thick,->] (3,1.1) -- (3,1.9);
+\node[below] at (1.5,0) {$a$};
+\node[above] at (1.5,3) {$a$};
+\node[left] at (0,1.5) {$b$};
+\node[right] at (3,1.5) {$b$};
+\fill (0,0) circle (1.5pt);
+\fill (3,0) circle (1.5pt);
+\fill (0,3) circle (1.5pt);
+\fill (3,3) circle (1.5pt);
+\node[below left] at (0,0) {$(0,0)$};
+\node[below right] at (3,0) {$(1,0)$};
+\node[above left] at (0,3) {$(0,1)$};
+\node[above right] at (3,3) {$(1,1)$};
+\node at (1.5,1.5) {$Q$};
+\end{tikzpicture}
+```
+
+All four marked corners have the same image under $q:Q\to K$. Reading the
+boundary counterclockwise from $(0,0)$ gives $aba^{-1}b$: the top is traversed
+against its arrow, while the other three sides are traversed along theirs.
+The square depicts gluing data, not an embedding of $K$ in three-dimensional
+space. The verification above is independent of this illustration.

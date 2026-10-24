@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-forward-and-back-substitution-for-triangular-systems.json
+  precheck: n/a
 id: def-forward-and-back-substitution-for-triangular-systems
 kind: definition
 title: "Forward and backward substitution for triangular linear systems"
@@ -9,14 +12,6 @@ provenance:
   proof: not-applicable
 deps: [def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix]
 aliases: []
-verification:
-  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-forward-and-back-substitution-for-triangular-systems.json
-  audited: 2026-08-30
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -34,7 +29,11 @@ If $L=(\ell_{ij})\in M_n(F)$ is lower triangular with every diagonal entry
 $\ell_{ii}\ne 0$, the **forward substitution solve** of $Lx=b$ is the recursive
 construction
 
-$$x_i:=\frac{1}{\ell_{ii}}\left(b_i-\sum_{j<i}\ell_{ij}x_j\right)\qquad(0\le i<n).$$If $U=(u_{ij})\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\frac{1}{u_{ii}}\left(b_i-\sum_{j>i}u_{ij}x_j\right)\qquad(n-1\ge i\ge 0).$$
+$$x_i:=\frac{1}{\ell_{ii}}\left(b_i-\sum_{j<i}\ell_{ij}x_j\right)\qquad(0\le i<n).$$
+
+If $U=(u_{ij})\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction
+
+$$x_i:=\frac{1}{u_{ii}}\left(b_i-\sum_{j>i}u_{ij}x_j\right)\qquad(n-1\ge i\ge 0).$$
 
 The triangular vocabulary is from
 Upper triangular, lower triangular and diagonal square matrices over a commutative ring. The matrix

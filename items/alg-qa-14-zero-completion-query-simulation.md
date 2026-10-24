@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-qa-14-zero-completion-query-simulation.json
+  precheck: n/a
 id: alg-qa-14-zero-completion-query-simulation
 kind: algorithm
 title: Reversible zero-completion of an N-address bit query
@@ -19,8 +22,6 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 axiom_use: No choice principle is used; the comparator and reversible embedding are finite and explicit.
 sources:
   references:
@@ -51,3 +52,31 @@ sources:
 5. Reverse the response swap, then apply $H$ to $r$ to return it to $|0\rangle$. Apply $R_{N,M}^{-1}$ to clear $Q_N$, and reverse the reversible comparison to restore $v$ and all comparison workspace to zero. Return the caller's padded address and response registers.
 
 The address comparison, the finite basis-permutation routing operation, response preparation, controlled swaps, and cleanup are nonoracle operations and must be charged in a gate-cost coordinate. The procedure uses no controlled-oracle capability. For $N=1$, $M=1$ and the direct-call branch applies.
+
+## Remarks
+
+For $N<M$, the following register-flow schematic records the order of the operations in Steps 2--5. Let $B$ denote the caller's response bit, let $C$ be the clean-workspace comparison writing $v=[j<N]$, and let $S_v$ swap $B$ and $r$ exactly when $v=1$. Each box acts only on the registers named below it; all other registers pass through unchanged. Follow the arrows, including the right-to-left middle row.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (c) at (0,0) {$C$\\ $A_M,v$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (r) at (3.5,0) {$R_{N,M}$\\ $A_M,v,Q_N$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (h) at (7,0) {$H_r$\\ $r$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (s) at (7,-1.9) {$S_v$\\ $v,B,r$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (o) at (3.5,-1.9) {$O_x$\\ $Q_N,r$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (t) at (0,-1.9) {$S_v$\\ $v,B,r$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (i) at (0,-3.8) {$H_r$\\ $r$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (u) at (3.5,-3.8) {$R_{N,M}^{-1}$\\ $A_M,v,Q_N$};
+\node[draw, minimum width=2.3cm, minimum height=0.95cm, align=center] (d) at (7,-3.8) {$C^{-1}$\\ $A_M,v$};
+\draw[->] (c) -- (r);
+\draw[->] (r) -- (h);
+\draw[->] (h) -- (s);
+\draw[->] (s) -- (o);
+\draw[->] (o) -- (t);
+\draw[->] (t) -- (i);
+\draw[->] (i) -- (u);
+\draw[->] (u) -- (d);
+\end{tikzpicture}
+```
+
+The added registers start and finish in $|0\rangle_{Q_N}|0\rangle_v|0\rangle_r$, with comparison workspace also clean. At the oracle box, valid addresses have $Q_N=j$ and the caller's response in $r$; invalid addresses have $Q_N=0$ and $r=|+\rangle$, which an XOR query leaves unchanged. The $O_x$ box is an ordinary unconditional query, with no control from $v$. The diagram abbreviates the prescribed operations and does not replace their algebraic definitions. When $N=M$, only the direct query on $A_M,B$ is used.

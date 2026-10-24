@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-good-linear-size-exterior-triangulation-from-diagram.json
+  precheck: pass
 id: lem-good-linear-size-exterior-triangulation-from-diagram
 kind: lemma
 title: Linear-size good exterior triangulation from a planar knot code
@@ -28,13 +31,7 @@ sources:
         notes (2009)
       url: https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf
       locator: §14.4, complete knot and exterior-triangulation overview, printed pp.5–6.
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -43,15 +40,15 @@ For every valid connected one-component oriented planar knot code with $n$ cross
 
 A local crossing is lifted by separating the over- and under-strands in the interval direction; the schematic below records only the projected crossing, with the continuous strand passing over the gapped strand.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[scale=1.15]
 \draw[very thick] (-1,-1)--(1,1);
 \draw[thick] (-1,1)--(-0.18,0.18);
 \draw[thick] (0.18,-0.18)--(1,-1);
-\node at (0.62,0.78) {over};
-\node at (-0.70,0.76) {under};
+\node[above right] at (1,1) {over};
+\node[above left] at (-1,1) {under};
 \end{tikzpicture}
-~~~
+```
 
 The picture records only the planar local incidence. The proof constructs disjoint arcs in a three-dimensional crossing block and does not infer embeddedness from the drawing.
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-ip-real-frame-phase-retrieval.json
+  precheck: n/a
 id: def-ip-real-frame-phase-retrieval
 kind: definition
 title: Real phase retrieval via finite real measurements
@@ -28,18 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/1901.07911v2"
     - title: "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015)"
       url: "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
+
 ---
 
 ## Definition
@@ -54,13 +46,6 @@ $$T_\Phi x=(\langle a_i,x\rangle)_{i\in[m]}.$$
 The amplitude map is $\mathcal M_\Phi([x])=(|\langle a_i,x\rangle|)_{i\in[m]}$, while the intensity map is
 $$\mathcal I_\Phi([x])=(\langle a_i,x\rangle^2)_{i\in[m]}\in Y_m.$$
 A finite real measurement family performs **phase retrieval** when $\mathcal I_\Phi:Q_d\to Y_m$ is injective, equivalently when the induced amplitude map is injective. The quotient distance, both induced maps, and the data metric are well defined as verified below.
-
-The diagram records the identity $\mathcal I_\Phi\circ q=S\circ T_\Phi$, where $S(y)=(y_i^2)_{i\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements, amplitudes, and intensities; no proof relies on the diagram.
-
-```tikzcd
-\mathbb R^d \arrow[r,"T_\Phi"] \arrow[d,"q"'] & \mathbb R^{[m]} \arrow[d,"S"] \\
-Q_d \arrow[r,"\mathcal I_\Phi"'] & [0,\infty)^m
-```
 
 ## Definition references
 
@@ -81,3 +66,20 @@ Q_d \arrow[r,"\mathcal I_\Phi"'] & [0,\infty)^m
 [Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, abstract phaseless maps and quotient classes, §§1–2.1](https://arxiv.org/pdf/1901.07911v2)
 
 [Radu Balan, real phase retrieval and complement property, §3.2](https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf)
+
+## Remarks
+
+The diagram records the identity $\mathcal I_\Phi\circ q=S\circ T_\Phi$, where $S(y)=(y_i^2)_{i\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements from intensities; the lower-right space uses the fixed coordinate relabeling above. No proof relies on the diagram.
+
+```tikz
+\begin{tikzpicture}
+\node (signals) at (0,2) {$\mathbb{R}^d$};
+\node (signed) at (4,2) {$\mathbb{R}^{[m]}$};
+\node (quotient) at (0,0) {$Q_d$};
+\node (data) at (4,0) {$[0,\infty)^m$};
+\draw[->] (signals) -- node[above] {$T_\Phi$} (signed);
+\draw[->] (signals) -- node[left] {$q$} (quotient);
+\draw[->] (signed) -- node[right] {$S$} (data);
+\draw[->] (quotient) -- node[below] {$\mathcal{I}_\Phi$} (data);
+\end{tikzpicture}
+```

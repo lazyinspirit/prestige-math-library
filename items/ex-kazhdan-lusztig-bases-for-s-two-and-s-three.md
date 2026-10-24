@@ -1,6 +1,7 @@
 ---
 verification:
-  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/ex-kazhdan-lusztig-bases-for-s-two-and-s-three.json
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-kazhdan-lusztig-bases-for-s-two-and-s-three.json
+  precheck: pass
 id: ex-kazhdan-lusztig-bases-for-s-two-and-s-three
 kind: example
 title: The Kazhdan–Lusztig bases of $S_2$ and $S_3$
@@ -55,3 +56,32 @@ Work in the normalization of [[def-normalized-type-a-hecke-algebra-and-its-bar-i
 2.1 **Polynomials and covers.** Reading the expansions in step 1.3 gives $p_{y,w}=v^{\ell(w)-\ell(y)}$ for every $y\le w$, so [F4] gives $P_{y,w}=1$ and $\mu(y,w)=[v]p_{y,w}$ is $1$ exactly at length difference one. By the reduced-subword criterion [F6], the Bruhat ranks in $S_3$ are $\{123\}$, $\{132,213\}$, $\{231,312\}$, and $\{321\}$, and each element in one of these layers is below every element in the next layer. Hence the covers are precisely the two edges from $123$, the four edges from rank one to rank two, and the two edges into $321$; these are exactly the eight pairs listed. Grading rules out other covers. [F4, F6, step 1.3, algebra]
 
 3.1 **The ascent multiplication check.** The subword criterion [F6] gives $[\mathrm{id},231]=\{123,132,213,231\}$. Left $s_2$ sends $231$ to $321$, whereas it sends $132$ to $123$ and $213$ to $312$; thus among the strict lower indices only $132$ has a left $s_2$-descent. Step 2.1 gives $\mu(132,231)=1$, so [F5] yields $C_{132}C_{231}=C_{321}+C_{132}$. For comparison, left $s_1$ sends $231$ to $132<231$, and the descent formula gives $C_{213}C_{231}=(v+v^{-1})C_{231}$. The rank-one square was already proved in step 1.1. [F5, F6, step 1.1, step 2.1, algebra] ∎
+
+
+## Remarks
+
+The following Hasse diagram displays the Bruhat covers in $S_3$ from step 2.1, with permutations in one-line notation and inversion length increasing upwards. Each arrow $y\to w$ has $\mu(y,w)=1$; the crossing of the two middle arrows is not a vertex. Thus the picture also displays exactly the nonzero $\mu$-coefficients for comparable distinct permutations in this example. The verification above is independent of the diagram.
+
+```tikz
+\begin{tikzpicture}[x=1.8cm,y=1.15cm,>=stealth]
+\node (e) at (0,0) {$123$};
+\node (a) at (-1,1) {$132$};
+\node (b) at (1,1) {$213$};
+\node (c) at (-1,2) {$231$};
+\node (d) at (1,2) {$312$};
+\node (w) at (0,3) {$321$};
+\draw[->] (e) -- (a);
+\draw[->] (e) -- (b);
+\draw[->] (a) -- (c);
+\draw[->] (a) -- (d);
+\draw[->] (b) -- (c);
+\draw[->] (b) -- (d);
+\draw[->] (c) -- (w);
+\draw[->] (d) -- (w);
+\node[anchor=west] at (1.6,3.55) {$\ell$};
+\node[anchor=west] at (1.6,3) {$3$};
+\node[anchor=west] at (1.6,2) {$2$};
+\node[anchor=west] at (1.6,1) {$1$};
+\node[anchor=west] at (1.6,0) {$0$};
+\end{tikzpicture}
+```

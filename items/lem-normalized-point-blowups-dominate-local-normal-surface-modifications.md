@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-normalized-point-blowups-dominate-local-normal-surface-modifications.json
+  precheck: pass
 id: lem-normalized-point-blowups-dominate-local-normal-surface-modifications
 kind: lemma
 title: "Normalized point blowups dominate local normal surface modifications"
@@ -27,8 +30,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Lemma 54.5.3 and Situation 54.7.1 (complete arguments read and refined)"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -39,7 +41,7 @@ Assume AC and DC. Let $A$ be a normal two-dimensional Noetherian local domain es
 
 **Given:** A normal two-dimensional Noetherian local domain $A$ essentially of finite type over a field or complete equicharacteristic local ring, a normal integral modification $S\to\operatorname{Spec}A$, and an integral modification $Y\to S$ with $Y$ normal.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

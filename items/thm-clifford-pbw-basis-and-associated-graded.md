@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-clifford-pbw-basis-and-associated-graded.json
+  precheck: pass
 id: thm-clifford-pbw-basis-and-associated-graded
 kind: theorem
 title: PBW basis and exterior associated graded for a Clifford algebra
@@ -14,12 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Jean Gallier, Clifford Algebras, Clifford Groups, and a Generalization of the Quaternions: The Pin and Spin Groups, §1.2"
@@ -81,3 +78,12 @@ that sends $v\in V$ to the degree-one class of $\bar v$ is an isomorphism, where
 ## Remarks
 
 No choice axiom is used. The ordered basis is part of the theorem's hypotheses, and the contraction, reduction, and exterior-action constructions are explicit.
+
+The square illustrates the generator map underlying the graded isomorphism. Here $j_1$ includes $V$ as $\Lambda^1V$, $\sigma_1(v)=\bar v+F_0$, and $\iota_1$ includes the degree-one summand in the associated graded.
+
+```tikzcd
+V \arrow[r, "j_1"] \arrow[d, "\sigma_1"'] & \Lambda V \arrow[d, "\Phi\;\cong"] \\
+F_1/F_0 \arrow[r, "\iota_1"'] & \mathrm{gr}_F\mathrm{Cl}(V,Q)
+```
+
+Both routes send $v$ to the degree-one class of $\bar v$. In degree $r$, $\Phi$ sends $e_{i_1}\wedge\cdots\wedge e_{i_r}$ to $\bar e_{i_1}\cdots\bar e_{i_r}+F_{r-1}$ in $F_r/F_{r-1}$, for $i_1<\cdots<i_r$; for $r=0$ it sends $1$ to $1+F_{-1}$. The scalar corrections in the Clifford relations lower word length by two and disappear in the corresponding top-degree quotient. This illustration summarizes steps 3.1–5.1; the proof does not depend on the diagram.

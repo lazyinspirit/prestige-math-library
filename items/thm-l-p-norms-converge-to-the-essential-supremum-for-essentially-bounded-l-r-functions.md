@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-l-p-norms-converge-to-the-essential-supremum-for-essentially-bounded-l-r-functions.json
+  precheck: pass
 id: thm-l-p-norms-converge-to-the-essential-supremum-for-essentially-bounded-l-r-functions
 kind: theorem
 title: "$L^p$ norms converge to the essential supremum for essentially bounded $L^r$ functions"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [prop-essential-supremum-is-attained-as-the-least-essential-bound, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: "The upper bound is ||f||_p^p <= ||f||_infinity^(p - r) ||f||_r^r. For the lower bound, every epsilon below the essential supremum leaves a set of positive measure where |f| exceeds ||f||_infinity - epsilon, forcing the p-norm above that level as p grows."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -40,7 +40,7 @@ $$\lim_{p\to\infty}\|f\|_p=M.$$
 
 ## Proof
 
-**Proof technique:** The upper bound is $\|f\|_p^p\le\|f\|_\infty^{p-r}\|f\|_r^r$. For the lower bound, every $\varepsilon$ below the essential supremum leaves a set of positive measure where $|f|$ exceeds $\|f\|_\infty-\varepsilon$, forcing the $p$-norm above that level as $p$ grows.
+**Proof technique:** Essential boundedness bounds each higher power by the corresponding power of the essential supremum times the integrable r-th power. For the lower bound, every positive epsilon below the essential supremum leaves a set of positive measure where the absolute value of the function exceeds the essential supremum minus epsilon, forcing the p-norm above that level as p grows.
 
 1.1 If $M=0$, then [L1] gives $|f|=0$ almost everywhere, so $$\|f\|_p^p=\int |f|^p\,d\mu=0$$ for every finite $p\ge r$. Hence $\|f\|_p=0=M$ for all such $p$, and the conclusion follows in this case. [L1, L3, given]
 

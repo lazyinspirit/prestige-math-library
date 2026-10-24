@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-arith-group-model-with-abelian-generic-fibre-quasiprojective.json
+  precheck: pass
 id: lem-arith-group-model-with-abelian-generic-fibre-quasiprojective
 kind: lemma
 title: "Divisor ampleness and quasi-projectivity of group models"
@@ -24,12 +27,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Bosch, Lutkebohmert, Raynaud, Neron Models (1990), 6.1/7 and 6.4/2-3 (divisor ampleness and quasi-projectivity)"
@@ -56,7 +53,7 @@ Assume AC and DC as inherited from the supplied algebra and scheme results. Let 
 
 ## Proof
 
-**Proof technique:** direct: fibre-density lets the square produce enough sections of $\mathcal O(D)$ to cover $H$, and the affine-section chart construction embeds the model projectively.
+**Proof technique:** direct: fibre-density lets the square produce enough sections of 𝒪(D) to cover H, and the affine-section chart construction embeds the model projectively.
 
 1.1 By [F1] it suffices for ampleness to exhibit a finite cover of $H$ by affine nonvanishing loci of sections of positive powers of $\mathcal O(D)$, or to descend the same statement along a faithfully flat extension. Fibre-density of the complement means that $H\setminus D$ meets every $H^0$-orbit, and after base change to a strict henselization the theorem of the square [F3] gives a linear equivalence $D_g+D_{g^{-1}}\sim2D$ for suitable translates. The associated sections have nonvanishing loci $gU\cap g^{-1}U$, where $U=H\setminus D$; for a prescribed geometric point, the two conditions on $g$ define dense opens in the geometrically integral $H^0$-fibre. Section values are dense there by [F3], including after extension of its field: an evaluation injection into the product of the fields of section values stays injective after field extension, as can be checked using finitely many linearly independent coefficients. Hence some section $g$ meets both conditions. These loci cover $H$, and quasi-compactness extracts a finite subcover. Each such locus is affine: it is the intersection of two affine opens in the separated scheme over the affine base. The affine-locus definition in [F1] gives ampleness of $\mathcal O(D)$ over the strict henselization, and fpqc ampleness descent in [F1] gives it over $R$. This proves (a). [F1, F3, given, algebra]
 

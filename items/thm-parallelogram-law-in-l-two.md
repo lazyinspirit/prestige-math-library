@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-parallelogram-law-in-l-two.json
+  precheck: pass
 id: thm-parallelogram-law-in-l-two
 kind: theorem
 title: "The parallelogram law in $L^2$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-generalized-holder-inequality-for-products, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Expand |f + g|^2 + |f - g|^2 pointwise to 2|f|^2 + 2|g|^2 and integrate."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -39,7 +39,7 @@ $$\|u+v\|_2^2+\|u-v\|_2^2=2\|u\|_2^2+2\|v\|_2^2.$$
 
 ## Proof
 
-**Proof technique:** Expand $|f + g|^2 + |f - g|^2$ pointwise to $2|f|^2 + 2|g|^2$ and integrate.
+**Proof technique:** Expand the squared absolute values of the sum and difference pointwise, cancel the cross terms, and integrate.
 
 1.1 Because $f,g\in L^2(\mu)$, step [L2] puts $fg$ in $L^1(\mu)$, so every term [L2, L3, given, algebra] in the algebraic expansions below is integrable. Pointwise, $$|f+g|^2+|f-g|^2=(f+g)^2+(f-g)^2=2f^2+2g^2.$$ Integrating and using [L3] gives $$\int |f+g|^2\,d\mu+\int |f-g|^2\,d\mu=2\int |f|^2\,d\mu+2\int |g|^2\,d\mu.$$ [L2, L3, given, algebra]
 

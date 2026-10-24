@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-paired-regular-disk-sweep-is-open-across-its-base-gluing.json
+  precheck: pass
 id: lem-paired-regular-disk-sweep-is-open-across-its-base-gluing
 kind: lemma
 title: A paired regular disk sweep is open across its base gluing
@@ -17,8 +20,6 @@ aliases: []
 landmark: false
 proof_strategy: direct
 dependency_level: 13
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -29,7 +30,7 @@ sources:
 
 ## Statement
 
-Let $D$ be an actual compact C² disk region homeomorphic to the closed disk, and let G:D×[a,b]→M be a C² immersed disk sweep, transverse in the time direction with one constant sign. Suppose an interior subdisk U⊂D at the b-base is identified to the whole a-base by a diffeomorphism h:D→U satisfying G(y,a)=G(h(y),b), with their leafwise tangent maps agreeing under h. On the quotient X, the induced map is locally open at every interior seam point; its compact image has boundary contained in the image of ∂X. No global injectivity is required.
+Let $D$ be an actual compact $C^2$ disk region homeomorphic to the closed disk, and let $G:D\times[a,b]\to M$ be a $C^2$ immersed disk sweep, transverse in the time direction with one constant sign. Suppose an interior subdisk $U\subset D$ at the $b$-base is identified to the whole $a$-base by a diffeomorphism $h:D\to U$ satisfying $G(y,a)=G(h(y),b)$, with their leafwise tangent maps agreeing under $h$. On the quotient $X$, the induced map is locally open at every interior seam point; its compact image has boundary contained in the image of $\partial X$. No global injectivity is required.
 
 ## Facts & Assumptions
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-na-finite-mps-state-and-hermitian-hamiltonian.json
+  precheck: n/a
 id: def-na-finite-mps-state-and-hermitian-hamiltonian
 kind: definition
 title: "Finite matrix-product states and Hermitian Hamiltonians"
@@ -12,12 +15,6 @@ deps:
   - def-finite-tensor-arrays-and-frobenius-inner-product
   - def-tensor-train-cores-bond-ranks-and-canonical-gauges
 aliases: []
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§4.1–4.4"
@@ -52,7 +49,7 @@ The diagram records the open-boundary chain with a two-site center. Each box is 
 \node[core] (g1) at (0,0) {$G_1$};
 \node at (1.25,0) {$\cdots$};
 \node[core] (gl) at (2.5,0) {$G_{k-1}$};
-\node[core,minimum width=1.35cm,fill=gray!12] (x) at (4.35,0) {$X_{k,k+1}$};
+\node[core,minimum width=1.35cm,fill=gray!12,text=black!90] (x) at (4.35,0) {$X_{k,k+1}$};
 \node[core] (gr) at (6.2,0) {$G_{k+2}$};
 \node at (7.45,0) {$\cdots$};
 \node[core] (gd) at (8.7,0) {$G_d$};

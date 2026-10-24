@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-viscosity-solutions-need-not-be-unique-when-the-boundary-condition-is-not-imposed-in-a-comparison-class.json
+  precheck: pass
 id: cex-viscosity-solutions-need-not-be-unique-when-the-boundary-condition-is-not-imposed-in-a-comparison-class
 kind: counterexample
 title: The eikonal equation on an interval has many solutions when endpoint data are omitted
@@ -24,12 +27,7 @@ sources:
   - title: Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)
     url: https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf
     locator: Sections 3--5, the eikonal equation and its nonuniqueness without boundary data, printed pp. 10--20
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement refuted
@@ -68,3 +66,49 @@ traces.
 ## Remarks
 
 - **What this shows.** Comparison and uniqueness on a bounded domain require the boundary condition to be imposed; without it the solution class is not a singleton even for the simplest non-smooth first-order equation. This is the reason the page states comparison and uniqueness on $\mathbb R^n$ or, on a bounded cylinder, with boundary data on the parabolic boundary.
+
+
+The three profiles are shown separately to make their distinct boundary traces
+visible. Open circles mark the endpoint limits, which are not points of the
+solution domain $(0,1)$. The corner of $u_3$ is at $(\tfrac12,\tfrac12)$;
+its viscosity verification is step 2.1 above, independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\begin{scope}
+\draw[->] (-0.3,-0.3) -- (2.35,-0.3) node[right] {$x$};
+\draw[->] (-0.3,-0.3) -- (-0.3,2.3) node[above] {$u$};
+\node[below] (z1) at (0,-0.3) {$0$};
+\node[below] (o1) at (2,-0.3) {$1$};
+\node[above] at (1,2.6) {$u_1(x)=x$};
+\draw[very thick,shorten <=3pt,shorten >=3pt] (0,0) -- (2,2);
+\draw[thick,fill=none] (0,0) circle (2.5pt);
+\draw[thick,fill=none] (2,2) circle (2.5pt);
+\node at (1,-1) {trace $(0,1)$};
+\end{scope}
+\begin{scope}[xshift=3.7cm]
+\draw[->] (-0.3,-0.3) -- (2.35,-0.3) node[right] {$x$};
+\draw[->] (-0.3,-0.3) -- (-0.3,2.3) node[above] {$u$};
+\node[below] at (0,-0.3) {$0$};
+\node[below] at (2,-0.3) {$1$};
+\node[above] at (1,2.6) {$u_2(x)=1-x$};
+\draw[very thick,shorten <=3pt,shorten >=3pt] (0,2) -- (2,0);
+\draw[thick,fill=none] (0,2) circle (2.5pt);
+\draw[thick,fill=none] (2,0) circle (2.5pt);
+\node at (1,-1) {trace $(1,0)$};
+\end{scope}
+\begin{scope}[xshift=7.4cm]
+\draw[->] (-0.3,-0.3) -- (2.35,-0.3) node[right] {$x$};
+\draw[->] (-0.3,-0.3) -- (-0.3,2.3) node[above] {$u$};
+\node[below] at (0,-0.3) {$0$};
+\node[below] at (2,-0.3) {$1$};
+\node[above] at (1,2.6) {$u_3(x)=\min\{x,1-x\}$};
+\draw[very thick,shorten <=3pt] (0,0) -- (1,1);
+\draw[very thick,shorten >=3pt] (1,1) -- (2,0);
+\draw[thick,fill=none] (0,0) circle (2.5pt);
+\draw[thick,fill=none] (2,0) circle (2.5pt);
+\node[above] at (1,1.1) {$(\frac12,\frac12)$};
+\node at (1,-1) {trace $(0,0)$};
+\end{scope}
+\end{tikzpicture}
+```

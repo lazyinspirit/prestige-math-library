@@ -1,0 +1,1523 @@
+[
+  {
+    "id": "alg-constrained-policy-optimization",
+    "section": "Item body",
+    "lines": [
+      49,
+      50,
+      51,
+      53,
+      55
+    ],
+    "symptom": "The algorithm has distinct Hessian, feasibility, one-cost recovery, multi-cost no-step, and backtracking branches; a branch map could make its control flow easier to scan.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "algorithm flowchart",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm has distinct Hessian, feasibility, one-cost recovery, multi-cost no-step, and backtracking branches; a branch map could make its control flow easier to scan.",
+    "concrete_diagram_content": "Connect the positive-definite-Hessian check to the constrained quadratic program. Show feasible and infeasible branches; the infeasible branch uses the recovery proposal only for one constraint and returns no-step for multiple constraints. Then show the finite backtracking loop and its KL plus sample-cost acceptance checks. Label sample checks separately from exact-policy guarantees.",
+    "mathematical_check": "Connect the positive-definite-Hessian check to the constrained quadratic program. Show feasible and infeasible branches; the infeasible branch uses the recovery proposal only for one constraint and returns no-step for multiple constraints. Then show the finite backtracking loop and its KL plus sample-cost acceptance checks. Label sample checks separately from exact-policy guarantees.",
+    "screenshots": [
+      "screenshots/alg-constrained-policy-optimization--01.png",
+      "screenshots/alg-constrained-policy-optimization--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-constrained-policy-optimization--01.png": "5703bc1b50262ebdc57f26e7904ecb9b6306009db6cfef81a4b3e1a84b1d2629",
+      "screenshots/alg-constrained-policy-optimization--02.png": "db749b755e3758ddd553fdcfedfd657e8df5ddff66f2ba81cbf79e2675f44e1c"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "constrained-mdps-and-policy-safety"
+    ],
+    "source_lines": {
+      "49": "1. If $H$ is not symmetric, or if some nonzero $x\\in\\mathbb R^d$ satisfies $x^THx\\le0$, return `no-step`. Otherwise form the local quadratic program",
+      "50": "",
+      "51": "   $$\\max_{x\\in\\mathbb R^d} g^Tx\\quad\\text{subject to}\\quad q_i+u_i^Tx\\le0\\ (i=1,\\ldots,m),\\qquad \\frac12x^THx\\le\\delta.$$",
+      "53": "2. If this program is feasible, let $x^*$ be its lexicographically least global maximizer. The feasible set is a closed subset of the compact ellipsoid, so the maximizer set is nonempty and compact. Minimize the first coordinate on that set, restrict to its nonempty compact minimizers, and repeat for each coordinate; the resulting point is the lexicographically least maximizer. If the program is infeasible and $m=1$, compute $v=H^{-1}u_1$. If $u_1=0$, return `no-step`, since the linearized cost cannot be reduced. Otherwise $u_1^Tv>0$ by positive definiteness, and use the cost-recovery proposal $x^*=-\\sqrt{2\\delta/(u_1^Tv)}\\,v$. If the program is infeasible and $m>1$, return `no-step`.",
+      "55": "3. For $j=0,\\ldots,L$, set $\\theta_j=\\theta_k+\\beta^jx^*$. Accept the first $\\theta_j$ in the policy family's parameter domain for which $\\widehat K(\\theta_j)\\le\\delta$ and every sample cost estimate $\\widehat J_{i,k}+(1-\\gamma)^{-1}\\widehat L_i^c(\\theta_j)$ is at most $b_i$. If no candidate passes this sample check, return `no-step`; otherwise output the accepted parameter as $\\theta_{k+1}$."
+    },
+    "source_snapshot": "snapshots/alg-constrained-policy-optimization.md",
+    "source_sha256": "226944bf9456640427497b56d9c5a7d6cc4bcfb21b925550713dd012ca654564",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-dagger",
+    "section": "Item body",
+    "lines": [
+      41,
+      42,
+      43,
+      45,
+      47,
+      49
+    ],
+    "symptom": "The definition specifies a repeated interaction loop whose data flow is central: a mixed rollout policy visits states, the expert labels those states, labels are accumulated across rounds, and follow-the-leader updates the next learner. A compact flow can expose the distinction between the executed rollout action and the separately recorded expert label.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "DAgger data-aggregation and policy-update loop",
+    "exact_source_claim": "",
+    "selection_reason": "The definition specifies a repeated interaction loop whose data flow is central: a mixed rollout policy visits states, the expert labels those states, labels are accumulated across rounds, and follow-the-leader updates the next learner. A compact flow can expose the distinction between the executed rollout action and the separately recorded expert label.",
+    "concrete_diagram_content": "For each round i, show learner policy pi_hat_i and expert-use coin beta_i forming rollout policy pi_i; send pi_i through the MDP for m trajectories of length T; route each visited state to an expert-label query and append (state, expert action) to D_i; aggregate empirical loss Lhat_i and feed cumulative loss to FTL to obtain theta_{i+1}. Make explicit that the recorded label is not itself executed unless the coin chose the expert. This summarizes the algorithm and does not prove a regret claim.",
+    "mathematical_check": "For each round i, show learner policy pi_hat_i and expert-use coin beta_i forming rollout policy pi_i; send pi_i through the MDP for m trajectories of length T; route each visited state to an expert-label query and append (state, expert action) to D_i; aggregate empirical loss Lhat_i and feed cumulative loss to FTL to obtain theta_{i+1}. Make explicit that the recorded label is not itself executed unless the coin chose the expert. This summarizes the algorithm and does not prove a regret claim.",
+    "screenshots": [
+      "screenshots/alg-dagger--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-dagger--01.png": "c2f91dfd2974e41050ff53c2072e7c4a65e66e9d27733311ee105d98789228e4"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "imitation-learning-and-dagger"
+    ],
+    "source_lines": {
+      "41": "1. Set $\\hat\\pi_i=\\pi_{\\theta_i}$. For the rollout policy, at each decision time of every trajectory, independently draw an expert-use coin with success probability $\\beta_i$. At current state $s$, if the coin succeeds, execute $\\pi^*(s)$; otherwise sample an action from $\\hat\\pi_i(\\cdot\\mid s)$ and execute it. This per-decision stochastic policy is $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$.",
+      "42": "2. Run $m$ trajectories of length $T$ from the specified initial distribution using $\\pi_i$. At every visited state $S_{ij t}$, for $1\\le j\\le m$ and $0\\le t<T$, query and record the expert label $\\pi^*(S_{ij t})$. Append these labeled pairs to $\\mathcal D_{i-1}$, with multiplicity, to form $\\mathcal D_i$. The expert label is recorded for training and is not executed unless the mixture in step 1 selected the expert.",
+      "43": "3. Define the empirical round loss on every candidate parameter by",
+      "45": "   $$\\hat L_i(\\theta)=\\frac1{mT}\\sum_{j=1}^m\\sum_{t=0}^{T-1}\\ell(S_{ij t},\\theta).$$",
+      "47": "4. Update by Follow-the-Leader on the cumulative empirical loss: set $\\theta_{i+1}$ to the supplied selector's choice from $\\arg\\min_{\\theta\\in K}\\sum_{r=1}^i\\hat L_r(\\theta)$.",
+      "49": "The finite-sample output is the sequence $\\hat\\pi_1,\\ldots,\\hat\\pi_N$ and the aggregated labeled multiset $\\mathcal D_N$. The population-loss idealization replaces each empirical $\\hat L_i$ by $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$; it is used only for the infinite-sample theorem. The procedure requires an interactive expert capable of labeling learner-visited states."
+    },
+    "source_snapshot": "snapshots/alg-dagger.md",
+    "source_sha256": "674c1829607e4f3d452b123dafa17e8f9e59c8157cc677ec8b93bf19497bf756",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "editorial / uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-delayed-q-learning",
+    "section": "Item body",
+    "lines": [
+      36,
+      38,
+      40
+    ],
+    "symptom": "The update depends on coupled batch count, learning flag, batch-start time, and global last-update clock; a state diagram could help readers track the less-obvious failed-batch reactivation rule.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Per-pair delayed-batch state machine",
+    "exact_source_claim": "The algorithm initializes optimistic Q(s,a)=U(s,a), collects batches of m reward-plus-discounted-greedy-successor targets while learning is enabled, changes Q only when Q−B̄≥2ε₁, and uses the global last-update time t* to re-enable or disable pair learning.",
+    "selection_reason": "The update depends on coupled batch count, learning flag, batch-start time, and global last-update clock; a state diagram could help readers track the less-obvious failed-batch reactivation rule.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-delayed-q-learning--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-delayed-q-learning--01.png": "989170ba4ffef31d704a682abdbac4fe80a121fc52a206eced71540bf3b69621"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pac-mdp-exploration"
+    ],
+    "source_lines": {
+      "36": "**Input:** A bounded-reward finite discounted MDP interaction, its discount $0\\le\\gamma<1$, an admissible upper heuristic $U$ with cap $V_{\\max}$, an integer batch size $m\\ge1$, a bonus $0<\\epsilon_1<1$, and a fixed total order on each action set.",
+      "38": "**Output:** At each interaction time $t$, the selected action $a_t$. The table $Q$, batch sums, sample counts, batch-start times, learning flags, and global last-update time are internal state; the procedure does not return them as outputs.",
+      "40": "Initialize $Q(s,a)=U(s,a)$, batch sum $B(s,a)=0$, sample count $\\ell(s,a)=0$, batch start $b(s,a)=0$, learning flag $L(s,a)=\\mathrm{true}$, and global last-update time $t^*=0$. For interaction times $t=1,2,\\ldots$, in current state $s$, choose an action maximizing $Q(s,\\cdot)$ under the fixed tie order, output and take that action $a_t$, then observe reward $r$ and next state $s'$. If $b(s,a)\\le t^*$, set $L(s,a)=\\mathrm{true}$. If $L(s,a)$ is true, set $b(s,a)=t$ when $\\ell(s,a)=0$, increment $\\ell(s,a)$ by one, and add $r+\\gamma\\max_{c\\in A(s')}Q(s',c)$ to $B(s,a)$. When $\\ell(s,a)=m$, set $\\bar B=B(s,a)/m$. If $Q(s,a)-\\bar B\\ge2\\epsilon_1$, replace $Q(s,a)$ by $\\bar B+\\epsilon_1$ and set $t^*=t$. Otherwise set $L(s,a)=\\mathrm{false}$ exactly when $b(s,a)>t^*$. In either outcome reset $B(s,a)=0$ and $\\ell(s,a)=0$ after a completed batch; if $L(s,a)$ remains false, make no sample or Q update on this visit. Leave all other entries unchanged. Use $s'$ as the current state in the next iteration."
+    },
+    "source_snapshot": "snapshots/alg-delayed-q-learning.md",
+    "source_sha256": "2aa603334941644fff236a638e8941bfa5c4034bf187e2932c07e95efe611746",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "candidate (not a confirmed defect)",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-doubly-robust-ope",
+    "section": "Item body",
+    "lines": [
+      37,
+      45
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "algorithm-flow",
+    "exact_source_claim": "The definition computes per-time target-policy values, cumulative action weights, and weighted TD residuals before averaging trajectory scores.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-doubly-robust-ope--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-doubly-robust-ope--01.png": "0e496a85bc632e44b6c30e63d7009e9e3b7f38e0f01a93fab7f8eb95553e8397"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "offline-reinforcement-learning-and-off-policy-evaluation"
+    ],
+    "source_lines": {
+      "37": "Assume AC for the behavior-policy trajectory law. Input a finite-horizon logged dataset with $n\\ge1$ behavior trajectories, a target policy $\\pi$, finite real functions $\\widehat Q_t(s,a)$ for $0\\le t<H$, and finite nonnegative action-weight multipliers $\\widehat\\rho_t(s,a)$ for $0\\le t<H$. Hold the functions and multipliers fixed when taking expectation over the evaluation dataset; they may be conditioned on an independent training sample. Define $\\widehat V_H(s)=0$ for every $s$, and for $t=H-1,\\ldots,0$ define",
+      "45": "and return $\\widehat J_{\\mathrm{DR}}=n^{-1}\\sum_{i=1}^nD_i$. When supplied as propensity ratios, the multipliers have the form $\\widehat\\rho_t(s,a)=\\pi(a\\mid s)/\\widetilde\\mu_t(a\\mid s)$, with positive denominators on target-positive actions. In the exact-ratio case they equal the target-to-behavior action-likelihood factors $\\pi(a\\mid s)/\\mu(a\\mid s)$; the procedure also permits finite fitted multipliers for the correct-value-model case. The fixed terminal value $\\widehat V_H=0$ is part of the procedure."
+    },
+    "source_snapshot": "snapshots/alg-doubly-robust-ope.md",
+    "source_sha256": "8302c865179711617286b0d127360255f3ef8319fe0b051b56a7eba77bcd6692",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-extended-value-iteration",
+    "section": "Item body",
+    "lines": [
+      25,
+      26,
+      28
+    ],
+    "symptom": "The row routine transfers mass between ordered states inside an L1 confidence radius, then selects an action attaining the maximum backed-up value.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "probability-mass transfer and Bellman-backup diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The row routine transfers mass between ordered states inside an L1 confidence radius, then selects an action attaining the maximum backed-up value.",
+    "concrete_diagram_content": "Illustrate the lowest-value source state losing mass and the highest-value destination state gaining mass, with constraints from available mass, destination capacity, and remaining radius budget. Distinguish the row maximum from the subsequent first-maximizer action tie-break.",
+    "mathematical_check": "Illustrate the lowest-value source state losing mass and the highest-value destination state gaining mass, with constraints from available mass, destination capacity, and remaining radius budget. Distinguish the row maximum from the subsequent first-maximizer action tie-break.",
+    "screenshots": [
+      "screenshots/alg-extended-value-iteration--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-extended-value-iteration--01.png": "7ec75f022a069f2b57792d3d40eab8d887df1cfdb54c66bf1943111984ac9306"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "average-reward-regret-and-ucrl2"
+    ],
+    "source_lines": {
+      "25": "$$u_i(s)=\\max_{a\\in A(s)}\\left[\\widetilde r(s,a)+\\max_{q\\in\\Delta(S):\\|q-\\widehat P(\\cdot\\mid s,a)\\|_1\\le b_p(s,a)}q\\cdot u_{i-1}\\right].$$",
+      "26": "For every state-action pair $(s,a)$, run the following transfer routine using $v=u_{i-1}$. Put $q=\\widehat P(\\cdot\\mid s,a)$, $c=\\min\\{1,b_p(s,a)/2\\}$, and order the states $x_1,\\ldots,x_m$ by nondecreasing $v(x_j)$, using the fixed state order to break ties. Set $j=1$ and $\\ell=m$. While $c>0$ and $j<\\ell$, advance $j$ while $q(x_j)=0$, then decrease $\\ell$ while $j<\\ell$ and $q(x_\\ell)=1$. If $j\\ge\\ell$, stop. If $v(x_j)\\ge v(x_\\ell)$, stop. Otherwise set $d=\\min\\{c,q(x_j),1-q(x_\\ell)\\}$, replace $q(x_j)$ by $q(x_j)-d$ and $q(x_\\ell)$ by $q(x_\\ell)+d$, and replace $c$ by $c-d$; repeat. Call the resulting vector $q_{i,s,a}$.",
+      "28": "For each state, compute $B_i(s,a)=\\widetilde r(s,a)+q_{i,s,a}\\cdot u_{i-1}$ for every action, record the first action $a_i(s)$ in the fixed action order attaining $\\max_{a\\in A(s)}B_i(s,a)$, and set $q_i(\\cdot\\mid s)=q_{i,s,a_i(s)}$. If $\\operatorname{span}(u_i-u_{i-1})<\\varepsilon$, return the stationary deterministic policy $\\pi_i(s)=a_i(s)$, its corresponding transition rows $q_i$, the vector $u_{i-1}$ used in that backup, and the iteration index. Otherwise continue. The procedure is partial unless a separate termination result applies."
+    },
+    "source_snapshot": "snapshots/alg-extended-value-iteration.md",
+    "source_sha256": "9ed1c4692b6c69b722f08cc8f5562f5fc406a7511120fdb1527cd4e3fd06c9ec",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-model-predictive-control",
+    "section": "Item body",
+    "lines": [
+      34,
+      38
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "control-flow / finite-horizon planning",
+    "exact_source_claim": "Backward finite-horizon value recursion selects only the first action at s_0, which is executed in the true environment before replanning from the new state/model.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-model-predictive-control--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-model-predictive-control--01.png": "d92af12fd4d070217259f736bf3256f68bc8b7793d4777d42cac434b6496ef98"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "model-based-planning-dyna-and-model-exploitation"
+    ],
+    "source_lines": {
+      "34": "Input: a finite learned MDP model, a current state $s_0$, a horizon $H\\in\\mathbb N$ with $H\\ge1$, and, for each state $s$, an ordered finite list containing every action in $A(s)$ exactly once; this ordering determines deterministic tie-breaking. Initialize $V_0(s)=0$ for every state. For $h=1,\\ldots,H$, compute for every admissible pair",
+      "38": "At the current state $s_0$, return the first action in its supplied listing that attains $V_H(s_0)$. The controller executes only this first action in the true environment, observes the next state, and may invoke the procedure again with the new state and a newly supplied learned model. The procedure specifies no model-update rule and makes no guarantee about the true return of the model-selected action."
+    },
+    "source_snapshot": "snapshots/alg-model-predictive-control.md",
+    "source_sha256": "14e324cbdab585a3b1fe663766ff337e1900c58066ce145ba10178bad0ba2e1f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-policy-iteration",
+    "section": "Item body",
+    "lines": [
+      34,
+      36,
+      37,
+      39,
+      41,
+      42
+    ],
+    "symptom": "The algorithm is a finite exact-evaluation loop with a tie-retention rule and terminates after at most N_det−1 changes; a small flow diagram could foreground the branch that prevents cycling.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "finite-state policy-iteration flow / tie-retention diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm is a finite exact-evaluation loop with a tie-retention rule and terminates after at most N_det−1 changes; a small flow diagram could foreground the branch that prevents cycling.",
+    "concrete_diagram_content": "Show current deterministic policy π_k → exact evaluation V_k → compute Q_k(s,a) → per state: retain π_k(s) if already maximizing, otherwise choose earliest maximizing action in supplied order → if unchanged return (π_k,V_k), else continue. Annotate strict improvement on changed policies and finite bound N_det−1; do not imply each state transition itself is pictured.",
+    "mathematical_check": "Show current deterministic policy π_k → exact evaluation V_k → compute Q_k(s,a) → per state: retain π_k(s) if already maximizing, otherwise choose earliest maximizing action in supplied order → if unchanged return (π_k,V_k), else continue. Annotate strict improvement on changed policies and finite bound N_det−1; do not imply each state transition itself is pictured.",
+    "screenshots": [
+      "screenshots/alg-policy-iteration--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-policy-iteration--01.png": "9186118f13726a20d3129f95df82968a6a9d71115cc887526132401179162bd7"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-mdps-and-bellman-operators"
+    ],
+    "source_lines": {
+      "34": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial deterministic policy $\\pi_0$, and, for each state $s$, an ordered list containing each member of $A(s)$ exactly once. For $k=0,1,\\ldots$:",
+      "36": "1. Associate to each deterministic policy $\\pi_k$ the stationary Markov policy $\\widehat\\pi_k(a\\mid s)=1$ if $a=\\pi_k(s)$ and $0$ otherwise. Compute the unique exact policy evaluation $V_k\\in\\mathbb R^S$ satisfying $T^{\\widehat\\pi_k}V_k=V_k$.",
+      "37": "2. For each $s$, set",
+      "39": "$$ Q_k(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V_k(s'). $$",
+      "41": "If $\\pi_k(s)$ attains $\\max_{a\\in A(s)}Q_k(s,a)$, set $\\pi_{k+1}(s)=\\pi_k(s)$. Otherwise set $\\pi_{k+1}(s)$ to the earliest maximizing action in the supplied list.",
+      "42": "3. If $\\pi_{k+1}=\\pi_k$, return $(\\pi_k,V_k)$. Otherwise continue with $\\pi_{k+1}$."
+    },
+    "source_snapshot": "snapshots/alg-policy-iteration.md",
+    "source_sha256": "7998409f0f6470950c496c65568996f824d0acfbc55f8cc6a1f36549657669d6",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-real-time-dynamic-programming",
+    "section": "Item body",
+    "lines": [
+      33,
+      35,
+      37
+    ],
+    "symptom": "The algorithm's trial cap, goal stop, greedy tie draw, current-state-only backup, and preserved value table across start resets form a concrete control flow.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Trial-based RTDP control-flow diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm's trial cap, goal stop, greedy tie draw, current-state-only backup, and preserved value table across start resets form a concrete control flow.",
+    "concrete_diagram_content": "Show supplied start → current state; goal check and L-step cap terminate the trial; otherwise compute q_V(s,a) with the pre-backup V, uniformly draw among maximizing actions, execute and observe s′, set only V(s) to the pre-backup maximum, and loop. On trial end, choose the next supplied start while retaining V. Mark this as procedure flow only; no convergence implication.",
+    "mathematical_check": "Show supplied start → current state; goal check and L-step cap terminate the trial; otherwise compute q_V(s,a) with the pre-backup V, uniformly draw among maximizing actions, execute and observe s′, set only V(s) to the pre-backup maximum, and loop. On trial end, choose the next supplied start while retaining V. Mark this as procedure flow only; no convergence implication.",
+    "screenshots": [
+      "screenshots/alg-real-time-dynamic-programming--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-real-time-dynamic-programming--01.png": "e249cbb9bc54d9f01837ea63094f3d7a0c4a7b4d20818624152a62fa921e7e91"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "model-based-planning-dyna-and-model-exploitation"
+    ],
+    "source_lines": {
+      "33": "Input: a finite stochastic shortest-path model, a finite value table $V_0:S\\to\\mathbb R$ with $V_0(g)=0$ on goals, a nonempty finite start set $S_0\\subseteq S\\setminus G$, a positive integer trial cap $L$, and an infinite supplied start sequence in which each member of $S_0$ occurs infinitely often. For each trial, set the current state to the next supplied start. For at most $L$ decision steps, or until a goal is reached, do the following: at the current nonglobal state $s$, compute",
+      "35": "$$q_V(s,a)=r(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\qquad(a\\in A(s)),$$",
+      "37": "choose uniformly from the nonempty set of actions attaining $\\max_{a\\in A(s)}q_V(s,a)$ using a fresh tie draw, execute the chosen action in the given MDP and observe the next state, then replace $V(s)$ by $\\max_{a\\in A(s)}q_V(s,a)$ using the value table from before that backup. Keep every other value unchanged. At a goal keep value $0$. After a trial ends, reset the state to the next supplied start without resetting the value table. The procedure returns the successive value tables and selected actions; it asserts no convergence guarantee by itself."
+    },
+    "source_snapshot": "snapshots/alg-real-time-dynamic-programming.md",
+    "source_sha256": "7ab613d93aeacc58bd0a33b4bb7747ffc4471e7ffe4f90b57fe5a1259bd4d176",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-reinforce",
+    "section": "Item body",
+    "lines": [
+      41,
+      51
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "algorithm-flow / episode timeline",
+    "exact_source_claim": "One episode is sampled with θ fixed at θ_0, then discounted returns and score vectors are summed to make a single post-episode parameter update.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-reinforce--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-reinforce--01.png": "2fae1c8a3825eeb2d1dfc25821992c0712e4028ba7294ee9f7d1cd36c6df4e00"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "policy-gradients-reinforce-and-actor-critic"
+    ],
+    "source_lines": {
+      "41": "**Inputs:** a finite episodic MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, joint transition-reward law $p$, terminal set $S_\\dagger\\subseteq S$, and initial state $s_0\\in S$; a discount $0\\le\\gamma<1$; a differentiable stationary policy family $\\pi_\\theta$ with fixed positive support on an open set $U\\subseteq\\mathbb R^d$; an initial parameter $\\theta_0\\in U$; and a step size $\\alpha\\ge0$.",
+      "51": "and return $\\theta_1$. All returns, scores, and the full sum use the same parameter value $\\theta_0$ that generated the episode; no policy update occurs while that episode is being sampled."
+    },
+    "source_snapshot": "snapshots/alg-reinforce.md",
+    "source_sha256": "2720c082419db77fac59dc79336478b08ecbb75690c9baf828e7c6ec67d1008f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-trajectory-importance-sampling-ope",
+    "section": "Item body",
+    "lines": [
+      36,
+      52
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial-illustration-candidate",
+    "exact_source_claim": "The procedure defines per-step ratios rho_{i,t}, prefix products W_{i,t}, full-horizon trajectory return G_i, then distinct OIS, PDIS, and self-normalized WIS formulas.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "A short trajectory S0,A0,R1,…,S_H with each rho_t on its action edge and W_t=product_{k≤t}rho_k above prefixes; below it align OIS using W_{H−1}G, PDIS summing gamma^t W_t R_{t+1}, and WIS as ratio of full-return weighted sums. Explicitly mark that WIS is self-normalized and no finite-sample unbiasedness claim is made. Optional and editorial because the formulas are already explicit.",
+    "mathematical_check": "A short trajectory S0,A0,R1,…,S_H with each rho_t on its action edge and W_t=product_{k≤t}rho_k above prefixes; below it align OIS using W_{H−1}G, PDIS summing gamma^t W_t R_{t+1}, and WIS as ratio of full-return weighted sums. Explicitly mark that WIS is self-normalized and no finite-sample unbiasedness claim is made. Optional and editorial because the formulas are already explicit.",
+    "screenshots": [
+      "screenshots/alg-trajectory-importance-sampling-ope--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-trajectory-importance-sampling-ope--01.png": "a4ee81be8dc94442f796d8e8042c7e924d785e676525b02dc078bfcbdf4d70e4"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "offline-reinforcement-learning-and-off-policy-evaluation"
+    ],
+    "source_lines": {
+      "36": "      locator: \"§3.1, PDF pp. 10–12, equations (5)–(6) and surrounding discussion.\"",
+      "52": ""
+    },
+    "source_snapshot": "snapshots/alg-trajectory-importance-sampling-ope.md",
+    "source_sha256": "fb8311f882d995b6febead5b3b036acaf92ee1737b614524bd7d33683fdcfc43",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-belief-state-and-bayes-filter",
+    "section": "Item body",
+    "lines": [
+      48,
+      49,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60
+    ],
+    "symptom": "The definition gives a concrete prediction, observation-likelihood, and posterior sequence, with a mathematically important zero-likelihood case.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Finite POMDP belief update and observation branch schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The definition gives a concrete prediction, observation-likelihood, and posterior sequence, with a mathematically important zero-likelihood case.",
+    "concrete_diagram_content": "Show prior belief b and action a mapping through T to predicted belief b̄; observation o has probability q(o|b,a)=Σ O(o|s′)b̄(s′); only if q>0, map to posterior τ(s′)=O(o|s′)b̄(s′)/q. Show K(C|b,a) as the q-weighted sum over positive-likelihood observations and explicitly label q=0 as undefined with no posterior node.",
+    "mathematical_check": "Show prior belief b and action a mapping through T to predicted belief b̄; observation o has probability q(o|b,a)=Σ O(o|s′)b̄(s′); only if q>0, map to posterior τ(s′)=O(o|s′)b̄(s′)/q. Show K(C|b,a) as the q-weighted sum over positive-likelihood observations and explicitly label q=0 as undefined with no posterior node.",
+    "screenshots": [
+      "screenshots/def-belief-state-and-bayes-filter--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-belief-state-and-bayes-filter--01.png": "b03b125037db536e729efe7960da22e2e1cffb3df90ae12cd06be1027633f63a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pomdps-and-belief-state-planning"
+    ],
+    "source_lines": {
+      "48": "For $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability",
+      "49": "",
+      "50": "$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$",
+      "52": "When $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector",
+      "54": "$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$",
+      "56": "When $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is",
+      "58": "$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$",
+      "60": "and the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$."
+    },
+    "source_snapshot": "snapshots/def-belief-state-and-bayes-filter.md",
+    "source_sha256": "d94f244fc7924f9d78b16378c89960a083448547bdcc671ba3433eb0229df177",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-finite-markov-decision-process",
+    "section": "Item body",
+    "lines": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "state-action transition/reward diagram",
+    "exact_source_claim": "The next-state and reward are sampled jointly and may be dependent; the state-transition and expected-reward marginals are derived from that same joint mass.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-finite-markov-decision-process--01.png",
+      "screenshots/def-finite-markov-decision-process--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-finite-markov-decision-process--01.png": "add7a431864244f82fdfa143dd3e0f1f2be5b6073ef158c496e0373992e19aa4",
+      "screenshots/def-finite-markov-decision-process--02.png": "873675e8433b50ee76f2af8c5fddcdcb0e1c72beb255655237916cbad748f003"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-mdps-and-bellman-operators"
+    ],
+    "source_lines": {
+      "46": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with",
+      "47": "",
+      "48": "$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$",
+      "49": "",
+      "50": "Equip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by",
+      "51": "",
+      "52": "$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$",
+      "53": "",
+      "54": "If $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous."
+    },
+    "source_snapshot": "snapshots/def-finite-markov-decision-process.md",
+    "source_sha256": "15672d75698499877c2bd32d6a00e24c0457d631242b07e184f1652c7cc6f734",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-mirror-map-and-bregman-divergence",
+    "section": "Item body",
+    "lines": [
+      36,
+      46
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "convex-geometry",
+    "exact_source_claim": "Bregman divergence compares R(x) to the first-order tangent approximation at y, while the local primal/dual norms are induced by H_R(z) and its inverse.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-mirror-map-and-bregman-divergence--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-mirror-map-and-bregman-divergence--01.png": "dba99cb5c2038cb0cd9444cc3c8670b3f87503d5caad0cda871948384965786c"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "mirror-descent-and-adaptive-regularization"
+    ],
+    "source_lines": {
+      "36": "Let $d\\ge1$, let $K\\subseteq\\mathbb R^d$ be a nonempty bounded closed convex set with nonempty interior, and let $U\\subseteq\\mathbb R^d$ be an open convex set such that $\\operatorname{int}(K)\\subseteq U$ and $K\\subseteq\\overline U$. If a decision set is lower-dimensional in an ambient Euclidean space, take $\\mathbb R^d$ to be orthonormal affine coordinates on its affine hull (the smallest affine subspace containing it); thus interior, gradients, Hessians, and norms are relative to that affine hull. A **mirror regularizer** on $(K,U)$ is a real-valued function $R$ on $K\\cup U$ that is continuous on $K$, twice continuously differentiable on $U$, agrees on $K\\cap U$, and has symmetric positive-definite Hessian $H_R(z):=\\nabla^2R(z)$ for every $z\\in U$. We call $R$ $m$-strongly convex on $K$ in the Euclidean norm if, for some $m>0$, all $x,y\\in K$ and $\\lambda\\in[0,1]$ satisfy",
+      "46": "$$\\|v\\|_z^2:=v^\\top H_R(z)v,\\qquad \\|h\\|_{*,z}^2:=h^\\top H_R(z)^{-1}h.$$"
+    },
+    "source_snapshot": "snapshots/def-mirror-map-and-bregman-divergence.md",
+    "source_sha256": "bbb3d289742e83fe75ddc6eec3c3af344acda4b34a930a7ca0592be826df6dc3",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-offline-reinforcement-learning-dataset",
+    "section": "Item body",
+    "lines": [
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      68
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "trajectory and support diagram",
+    "exact_source_claim": "A finite trajectory atom mass factors into policy action probabilities and shared next-state/reward probabilities; the target trajectory law is absolutely continuous with respect to the behavior law under the stated reachable state-action support condition.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-offline-reinforcement-learning-dataset--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-offline-reinforcement-learning-dataset--01.png": "ee8d7ecfd8a8d48b202c7c73c157576b941819e8f4db4f0324d5d1c8fc8b5f1a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "offline-reinforcement-learning-and-off-policy-evaluation"
+    ],
+    "source_lines": {
+      "44": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.",
+      "45": "",
+      "46": "Fix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are",
+      "47": "",
+      "48": "$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$",
+      "49": "",
+      "50": "For a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+      "68": "The stated state-action support condition implies full horizon coverage. Here a state-action pair $(s,a)$ is reachable under $\\pi$ before time $H$ when $P^\\pi_H(S_t=s,A_t=a)>0$ for some $0\\le t<H$. Suppose a trajectory atom $\\tau$ has $P^\\pi_H(\\{\\tau\\})>0$. Its atom mass is a product of nonnegative factors, so every target action probability and every shared transition/reward factor along $\\tau$ is positive. Each state-action pair on $\\tau$ is therefore reachable under $\\pi$, and the support condition gives $\\mu(a_t\\mid s_t)>0$ at every time. The same initial state and transition/reward factors then give $P^\\mu_H(\\{\\tau\\})>0$. Since $\\Omega_H$ is finite, every event is a finite union of atoms; thus every $P^\\mu_H$-null event is also $P^\\pi_H$-null, proving $P^\\pi_H\\ll P^\\mu_H$."
+    },
+    "source_snapshot": "snapshots/def-offline-reinforcement-learning-dataset.md",
+    "source_sha256": "95b3346d99f35ed610696e58c0c24c9a66611064ab070d8f55ff2b90a095d079",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-projected-bellman-error",
+    "section": "Item body",
+    "lines": [
+      38,
+      42
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Hilbert-space projection",
+    "exact_source_claim": "The Bellman residual δ_w is split into its projection onto the feature span V_μ and an orthogonal remainder; BE and PBE are the squared norms of the whole residual and projected component.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-projected-bellman-error--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-projected-bellman-error--01.png": "bd708d0fc1edf243bd4c994a735562e6acf5295eef6dc6795e5a719ec15b1a79"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "rl-function-approximation-and-off-policy-limits"
+    ],
+    "source_lines": {
+      "38": "Let $S$ be a nonempty finite state set of a finite Markov decision process, let $0\\leq\\gamma<1$, let $\\pi$ be a stationary Markov policy, and let $\\mu:S\\to[0,1]$ satisfy $\\sum_{s\\in S}\\mu(s)=1$. The function $\\mu$ is a fixed state-weighting distribution; it need not be stationary for $\\pi$. Let $d$ be a positive integer, let $\\phi:S\\to\\mathbb R^d$ be a feature map, and for $w\\in\\mathbb R^d$ put $v_w(s)=\\phi(s)^\\mathsf T w$.",
+      "42": "For $h\\in H_\\mu$, let $\\Pi_\\mu h$ be the unique vector in $V_\\mu$ whose difference from $h$ is orthogonal to every vector in $V_\\mu$. The Bellman-error vector for $v_w$ is $\\delta_w=[T^\\pi v_w-v_w]_\\mu$. Define the mean square Bellman error and mean square projected Bellman error by $\\operatorname{BE}_\\mu(w)=\\|\\delta_w\\|_\\mu^2$ and $\\operatorname{PBE}_\\mu(w)=\\|\\Pi_\\mu\\delta_w\\|_\\mu^2$."
+    },
+    "source_snapshot": "snapshots/def-projected-bellman-error.md",
+    "source_sha256": "f7f02557bc45b24634078593ded11bb99d9f9593e10c476910cd35afb41b534f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-bairds-seven-state-star-expected-update",
+    "section": "Item body",
+    "lines": [
+      32,
+      42,
+      44,
+      48,
+      50
+    ],
+    "symptom": "The example names the states, two transition structures, their behavior probabilities, the target policy, and distinct feature-value formulas; these relations are easy to confuse in prose.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Seven-state Baird star transition and feature schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The example names the states, two transition structures, their behavior probabilities, the target policy, and distinct feature-value formulas; these relations are easy to confuse in prose.",
+    "concrete_diagram_content": "Draw upper states s₁,…,s₆ and lower state s₇. From each upper state show dashed behavior transitions uniformly to the six upper states, and solid transitions to s₇; label the behavior choice probabilities 6/7 and 1/7 and indicate the target policy always takes the solid action. Annotate upper feature values 2wᵢ+w₈ and lower feature w₇+2w₈. Do not imply the dashed transitions belong to the target policy.",
+    "mathematical_check": "Draw upper states s₁,…,s₆ and lower state s₇. From each upper state show dashed behavior transitions uniformly to the six upper states, and solid transitions to s₇; label the behavior choice probabilities 6/7 and 1/7 and indicate the target policy always takes the solid action. Annotate upper feature values 2wᵢ+w₈ and lower feature w₇+2w₈. Do not imply the dashed transitions belong to the target policy.",
+    "screenshots": [
+      "screenshots/ex-bairds-seven-state-star-expected-update--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-bairds-seven-state-star-expected-update--01.png": "73ce82077191345d120dcd2bdd3b82109bd4b261b7dcf9bebd34ba03d718cd05"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "rl-function-approximation-and-off-policy-limits-examples"
+    ],
+    "source_lines": {
+      "32": "Use the seven-state MDP with zero rewards, discount $\\gamma=0.99$, dashed transitions uniform over the six upper states, solid transitions to the seventh state, behavior probabilities $6/7$ dashed and $1/7$ solid, target policy always solid, feature values $2w_i+w_8$ at upper state $s_i$ and $w_7+2w_8$ at $s_7$, and initial vector $w_0=(1,1,1,1,1,1,10,1)$. Under the uniform-state expected semi-gradient TD(0) update, with step size $\\alpha=1/100$, the first reduced weight vector $(a,b,c)$, where $a=w_1=\\cdots=w_6$, $b=w_7$, and $c=w_8$, is $(4486/4375,174997/17500,9413/8750)$; in particular, the first six weights and $w_8$ increase on this update.",
+      "42": "**Given:** The Baird seven-state model, feature values, policies, uniform state weighting, initial vector, and $\\alpha=1/100$ in the Example.",
+      "44": "[F1] [[thm-bairds-counterexample-off-policy-td-diverges]]: for the specified behavior transitions, the expected semi-gradient TD(0) update is $\\bar w^+=w+\\alpha\\,\\mathbb E_{\\mu,b}[\\rho\\delta\\phi(S)]$, where $\\rho=\\pi(A\\mid S)/b(A\\mid S)$ and $\\delta=\\gamma v_w(S')-v_w(S)$.",
+      "48": "1.1 At $w_0$, every upper-state value is $2(1)+1=3$ and the seventh-state value is $10+2(1)=12$. Thus $q_u=0.99(12)-3=222/25$ and $q_7=0.99(12)-12=-3/25$. The importance ratio is $7$ on solid and $0$ on dashed; because behavior selects solid with probability $1/7$, at each fixed state the behavior-action expectation is its solid-action TD error. Uniformly averaging the seven state contributions gives increments per unit step size $2q_u/7$, $q_7/7$, and $(6q_u+2q_7)/7$: each upper feature contributes $2q_u$ to its own coordinate and $q_u$ to the common eighth coordinate, while the seventh feature contributes $q_7$ and $2q_7$ to its last two coordinates. By [F1] these values are $444/175$, $-3/175$, and $1326/175$. [given, F1, algebra]",
+      "50": "2.1 Multiplying these increments by $\\alpha=1/100$ gives $a_1=1+444/17500=4486/4375$, $b_1=10-3/17500=174997/17500$, and $c_1=1+1326/17500=9413/8750$, exactly as claimed; the displayed fractions give $a_1>1$ and $c_1>1$. [given, step 1.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-bairds-seven-state-star-expected-update.md",
+    "source_sha256": "f32f7ae0fd44dcf66902d29bb67a2ee7cdecc3ce973116207b583d47b8bfe46a",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+    "section": "Item body",
+    "lines": [
+      31,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "finite-horizon risk tree",
+    "exact_source_claim": "The one-state safe/risky CMDP is expected-cost feasible while the probability of at least one risky action in seven decisions exceeds one-half.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-expected-discounted-cost-does-not-imply-pathwise-safety--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-expected-discounted-cost-does-not-imply-pathwise-safety--01.png": "aeeef7f53491fde8822d4ebce14ea8130c0e960bde33b8145becb5db81b7b802"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "constrained-mdps-and-policy-safety-examples"
+    ],
+    "source_lines": {
+      "31": "Consider a one-state CMDP with actions `safe` and `risky`, deterministic self-transition, zero reward, discount $\\gamma=1/10$, cost $0$ for `safe`, cost $1$ for `risky`, and cost threshold $b=1/8$. The stationary policy chooses `risky` with probability $1/10$ at every decision, with independent action draws in the first seven decisions. Its expected discounted cost is $1/9<1/8$, so it is feasible, while the probability of at least one cost during those seven decisions is $5{,}217{,}031/10{,}000{,}000>1/2$.",
+      "41": "**Given:** One state $s$, two actions, deterministic self-transition, $\\gamma=1/10$, cost $c(s,\\text{safe},0,s)=0$, cost $c(s,\\text{risky},0,s)=1$, threshold $b=1/8$, and policy probability $1/10$ for `risky` at each step.",
+      "42": "",
+      "43": "[F1] [[def-constrained-markov-decision-process]]: a finite CMDP's transition/reward masses and bounded transition-cost signals determine finite-time state and transition masses.",
+      "44": "",
+      "45": "[F2] [[def-discounted-cost-constraint]]: $J_c^\\pi(\\mu)$ is the discounted sum of the finite-time expected costs, and feasibility means $J_c^\\pi(\\mu)\\le b$.",
+      "46": "",
+      "47": "[F3] [[thm-geometric-series]]: for $0\\le r<1$, $\\sum_{t=0}^{\\infty}r^t=1/(1-r)$.",
+      "48": "",
+      "49": "## Verification",
+      "50": "",
+      "51": "1.1 At every time $t$, the state is $s$ and the expected one-step cost is $1/10$. Thus by [F2] and [F3], $J_c^\\pi(\\mu)=\\sum_{t=0}^{\\infty}(1/10)^t(1/10)=(1/10)/(1-1/10)=1/9$. [F1, F2, F3, given, algebra]",
+      "52": "",
+      "53": "2.1 Since $1/9<1/8=b$, the policy is feasible under the expected discounted-cost constraint. [F2, step 1.1, algebra]",
+      "54": "",
+      "55": "3.1 The probability that all seven independent action draws are `safe` is $(9/10)^7=4{,}782{,}969/10{,}000{,}000$. Hence the probability of at least one cost is $1-(9/10)^7=5{,}217{,}031/10{,}000{,}000>1/2$, as claimed. [given, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-expected-discounted-cost-does-not-imply-pathwise-safety.md",
+    "source_sha256": "aab0bd94de7434bf60e8a4fd7f24ee8d7799675b9ef224ff723d9e2a3e8b5b1f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-matched-observation-mrps-have-distinct-bellman-errors",
+    "section": "Item body",
+    "lines": [
+      37,
+      38,
+      39,
+      40,
+      41
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "paired Markov reward process graphs",
+    "exact_source_claim": "Two reward-labelled MRPs have identical stationary feature/reward sequence laws but different state-weighted Bellman-error minimizers and minima.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors--01.png",
+      "screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors--01.png": "e861311c15be6cdd22d96280a68fd61bdbf1f436610862dc8018364273ca87d5",
+      "screenshots/ex-matched-observation-mrps-have-distinct-bellman-errors--02.png": "39ff2f11b755498f6c6fd904553ff76211472b2074ebc7769ae0aca8e2d7f528"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "rl-function-approximation-and-off-policy-limits-examples"
+    ],
+    "source_lines": {
+      "37": "Assume Choice for the infinite trajectory laws and set $\\gamma=1/2$. In MRP 1, the states are $A,B$; $A\\to B$ has reward $0$ deterministically, while $B\\to A$ has reward $1$ and $B\\to B$ has reward $-1$, each with probability $1/2$. Its stationary weighting is $(1/3,2/3)$. In MRP 2, the states are $A,B,B'$; $A\\to B$ and $A\\to B'$ each have reward $0$ and probability $1/2$, $B\\to A$ has reward $1$ deterministically, and $B'\\to B$ and $B'\\to B'$ each have reward $-1$ and probability $1/2$. Its stationary weighting is $(1/3,1/3,1/3)$. Both processes use feature $\\psi(A)=(1,0)$ and $\\psi(B)=\\psi(B')=(0,1)$, and they induce the same stationary feature/reward sequence law. Their state-weighted mean square Bellman errors are",
+      "38": "$$",
+      "39": "\\begin{aligned}\\operatorname{BE}_1(a,b)&=\\frac13\\left(\\frac b2-a\\right)^2+\\frac23\\left(\\frac{a+b}{4}-b\\right)^2,\\\\ \\operatorname{BE}_2(a,b)&=\\frac13\\left[\\left(\\frac b2-a\\right)^2+\\left(1+\\frac a2-b\\right)^2+\\left(-1-\\frac b2\\right)^2\\right].\\end{aligned}",
+      "40": "$$",
+      "41": "The unique minimizers are $(0,0)$ for MRP 1 and $(-2/7,1/7)$ for MRP 2. Their minimum Bellman errors are $0$ and $25/42$, respectively, while $\\operatorname{BE}_2(0,0)=2/3$."
+    },
+    "source_snapshot": "snapshots/ex-matched-observation-mrps-have-distinct-bellman-errors.md",
+    "source_sha256": "1395b09b82beca37cb74be1c07d2896a9a9d898bd7a51d5532809d0114e289da",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-offline-ope-full-support-and-missing-support",
+    "section": "Item body",
+    "lines": [
+      39
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "finite-MDP / support comparison",
+    "exact_source_claim": "At H=1 full support permits an unbiased action reweighting score, whereas behavior support omitting target action b leaves two reward models observationally indistinguishable.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-offline-ope-full-support-and-missing-support--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-offline-ope-full-support-and-missing-support--01.png": "7690f6387727cdf229802130f649643a4037a91b48eddbe0bec727ba21ee73c8"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "offline-reinforcement-learning-and-off-policy-evaluation-examples"
+    ],
+    "source_lines": {
+      "39": "Assume AC and take horizon $H=1$, discount $\\gamma=\\tfrac12$, states $s_0,z$, actions $a,b$ at $s_0$, and action $c$ at $z$. Every action moves to $z$; action $a$ gives reward $0$, action $b$ gives reward $1$, and action $c$ gives reward $0$. The target policy chooses $b$ at $s_0$, and both policies choose $c$ at $z$. With behavior probabilities $\\mu(a\\mid s_0)=\\mu(b\\mid s_0)=\\tfrac12$, full trajectory coverage holds: the single-trajectory ordinary importance-sampling score is $2$ when action $b$ is observed and $0$ when action $a$ is observed, and its expectation is the target value $1$. If instead $\\mu(a\\mid s_0)=1$, the target action has no behavior support. Two processes that agree on the logged action $a$ and its reward $0$, but give action $b$ rewards $1$ and $-1$, respectively, have identical logged-data laws and different target values; the behavior data cannot identify which value is correct."
+    },
+    "source_snapshot": "snapshots/ex-offline-ope-full-support-and-missing-support.md",
+    "source_sha256": "b3dae8fe66d1821b55afcfe98a4b29f3845d140c11486ddae3187008e9fa669a",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-pomdp-observation-aliasing-preserves-belief",
+    "section": "Item body",
+    "lines": [
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "belief update diagram",
+    "exact_source_claim": "With identity hidden-state transition and equal likelihood 1 for the sole observation in both states, the prior (2/3,1/3) is predicted unchanged and Bayes-updated to itself.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-pomdp-observation-aliasing-preserves-belief--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-pomdp-observation-aliasing-preserves-belief--01.png": "6893454e71035b4876ecf354c1196f530d16dd2ec001ed788e851870472bdead"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pomdps-and-belief-state-planning-examples"
+    ],
+    "source_lines": {
+      "29": "",
+      "30": "## Facts & Assumptions",
+      "31": "",
+      "32": "**Given:** The finite POMDP model in the example and the observation $x$.",
+      "33": "",
+      "34": "[F1] The finite POMDP transition is the marginal of its joint reward-transition law, and each observation law is normalized. [[def-finite-pomdp]]",
+      "35": "",
+      "36": "[F2] The predicted state distribution, observation normalizer, and positive-probability Bayes update are the finite sums and quotient in the belief-filter definition. [[def-belief-state-and-bayes-filter]]",
+      "37": "",
+      "38": "[F3] A positive-normalizer update is a probability vector and the induced belief transition is a probability kernel. [[lem-finite-pomdp-belief-update-is-probability-kernel]]",
+      "39": "",
+      "40": "[F4] Finite sums over a finite index set are well defined and enumeration-independent. [[def-sum-over-a-finite-index-set]]",
+      "41": "",
+      "42": "## Verification",
+      "43": "",
+      "44": "1.1 The hidden-state transition is the identity, so the predicted distribution is $\\bar b(s_0)=2/3$ and $\\bar b(s_1)=1/3$. [given, F1, F2]",
+      "45": "",
+      "46": "2.1 The normalizer is $q(x\\mid b_0,a)=1\\cdot(2/3)+1\\cdot(1/3)=1>0$. [step 1.1, F2, F4, algebra]",
+      "47": "",
+      "48": "3.1 The posterior coordinates are $\\tau(b_0,a,x)(s_0)=1\\cdot(2/3)/1=2/3$ and $\\tau(b_0,a,x)(s_1)=1\\cdot(1/3)/1=1/3$. They sum to one as required by [F3], so the observation leaves the belief unchanged. [step 1.1, step 2.1, F2, F3, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-pomdp-observation-aliasing-preserves-belief.md",
+    "source_sha256": "bc05a048de3f6b9c24687c30da7e7d74e2fa9aa05638738b57eab7df06549126",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-pomdp-policy-tree-enumeration-grows-exponentially",
+    "section": "Item body",
+    "lines": [
+      30,
+      34
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial-illustration-candidate",
+    "exact_source_claim": "The example states that each binary action string y of length n defines a depth-n policy tree and alpha_y(x,0)=sum_{t<n}1{x(t)=y(t)}; belief delta_(y,0) uniquely witnesses alpha_y at value n.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "For n=2 only, map the four hidden strings x∈{00,01,10,11} through clock states (x,0)→(x,1), annotate reward 1 exactly when action y_t matches x_t, and show point-mass belief delta_(y,0) selecting that tree with value 2 while the three other strings score at most 1. Label as a finite illustrative slice, not a proof of the general 2^n count; make clear witness beliefs need not be reachable from the specified initial belief.",
+    "mathematical_check": "For n=2 only, map the four hidden strings x∈{00,01,10,11} through clock states (x,0)→(x,1), annotate reward 1 exactly when action y_t matches x_t, and show point-mass belief delta_(y,0) selecting that tree with value 2 while the three other strings score at most 1. Label as a finite illustrative slice, not a proof of the general 2^n count; make clear witness beliefs need not be reachable from the specified initial belief.",
+    "screenshots": [
+      "screenshots/ex-pomdp-policy-tree-enumeration-grows-exponentially--01.png",
+      "screenshots/ex-pomdp-policy-tree-enumeration-grows-exponentially--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-pomdp-policy-tree-enumeration-grows-exponentially--01.png": "26228cd0d3e63d1437ef648de3932c724fd046905611945d6b799628f66e21e9",
+      "screenshots/ex-pomdp-policy-tree-enumeration-grows-exponentially--02.png": "366f93b37c3ac394776a4d8fbdfd51d33e0c66a622ff8c95bccc6838643acaf3"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pomdps-and-belief-state-planning-examples"
+    ],
+    "source_lines": {
+      "30": "provenance:",
+      "34": "  role: example"
+    },
+    "source_snapshot": "snapshots/ex-pomdp-policy-tree-enumeration-grows-exponentially.md",
+    "source_sha256": "e1f473d5b47ac308a5368ee78db95069b20cd2e3e23b1f8832ba07394c689d27",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-pomdp-two-state-bayes-update",
+    "section": "Item body",
+    "lines": [
+      31
+    ],
+    "symptom": "The example gives a compact, source-supported update from prior odds 3:1 to posterior odds 9:1 after observing x; a diagram could make prior, likelihood, evidence, and posterior relations easy to check.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "two-state Bayesian update / probability-flow diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The example gives a compact, source-supported update from prior odds 3:1 to posterior odds 9:1 after observing x; a diagram could make prior, likelihood, evidence, and posterior relations easy to check.",
+    "concrete_diagram_content": "Draw latent states s0,s1 with prior masses 3/4 and 1/4; label x-emission likelihoods 3/4 and 1/4 and y-emission likelihoods 1/4 and 3/4; highlight x branch with evidence probability 5/8 and posterior masses 9/10 and 1/10. Keep identity state transition and horizon H=1 explicit.",
+    "mathematical_check": "Draw latent states s0,s1 with prior masses 3/4 and 1/4; label x-emission likelihoods 3/4 and 1/4 and y-emission likelihoods 1/4 and 3/4; highlight x branch with evidence probability 5/8 and posterior masses 9/10 and 1/10. Keep identity state transition and horizon H=1 explicit.",
+    "screenshots": [
+      "screenshots/ex-pomdp-two-state-bayes-update--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-pomdp-two-state-bayes-update--01.png": "10d9c3f207e96b80a47d8fb7df999ebdc516fab60888f3ba98749b19905a54c5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pomdps-and-belief-state-planning-examples"
+    ],
+    "source_lines": {
+      "31": "## Example"
+    },
+    "source_snapshot": "snapshots/ex-pomdp-two-state-bayes-update.md",
+    "source_sha256": "2b6ff321b3d6e38daca70e3dbe200b08a43fb4c5361f72a13bd0a551e9e1f7d5",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-two-arm-deterministic-gap",
+    "section": "Item body",
+    "lines": [
+      25
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "bandit timeline / schedule",
+    "exact_source_claim": "Explore-then-commit samples each arm m times, then commits to arm 1; deterministic stacks make regret exactly mΔ while the theorem gives a larger upper bound.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-two-arm-deterministic-gap--01.png",
+      "screenshots/ex-two-arm-deterministic-gap--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-two-arm-deterministic-gap--01.png": "348557fc7d8173fdab00f8130792e7f3f36435e060c45744eafddcea4e408da8",
+      "screenshots/ex-two-arm-deterministic-gap--02.png": "15045f69168783bab83b856f2bdb0ed0aa85d94c19341fee30f1c2a86ceb37ed"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "stochastic-finite-armed-bandits-examples"
+    ],
+    "source_lines": {
+      "25": "Let $m\\ge1$ be an integer, let $n\\ge2m+1$, and fix $0<\\Delta<1$. In a two-arm $n$-round bandit, let every reward-stack entry of arm 1 equal $1$ and every reward-stack entry of arm 2 equal $1-\\Delta$. Under explore-then-commit with exploration count $m$, the algorithm commits to arm 1 and has expected reward regret exactly $m\\Delta$. The expected-regret theorem gives the upper bound $m\\Delta+(n-2m)\\Delta e^{-m\\Delta^2/4}$ for this instance."
+    },
+    "source_snapshot": "snapshots/ex-two-arm-deterministic-gap.md",
+    "source_sha256": "6e3ae6b629a9d09775ac17101c241a60ad5de60a1eec576171acaec3bac24c0a",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-finite-mdp-policy-action-state-reward-path-law",
+    "section": "Item body",
+    "lines": [
+      45,
+      59
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "trajectory factorization",
+    "exact_source_claim": "Finite trajectory-prefix probability factors at every time into policy action probability and joint next-state/reward kernel; marginalizing actions yields state-reward prefix probabilities.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/lem-finite-mdp-policy-action-state-reward-path-law--01.png",
+      "screenshots/lem-finite-mdp-policy-action-state-reward-path-law--02.png",
+      "screenshots/lem-finite-mdp-policy-action-state-reward-path-law--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-finite-mdp-policy-action-state-reward-path-law--01.png": "bdd26ddae0048165bbe80e08b85d4f477ae9bdc88866e34a70cdf4496c9d3aa9",
+      "screenshots/lem-finite-mdp-policy-action-state-reward-path-law--02.png": "2f13f45cc0e075acb5e071e108f623ebfab6bb41b276b2b05ee447111fe9f1c9",
+      "screenshots/lem-finite-mdp-policy-action-state-reward-path-law--03.png": "8d566e0e8ae8214490f615ae8746c8a27e0cb4f9928a4ed642d369d2b55a4392"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "tabular-prediction-and-control"
+    ],
+    "source_lines": {
+      "45": "with its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is",
+      "59": "for each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$."
+    },
+    "source_snapshot": "snapshots/lem-finite-mdp-policy-action-state-reward-path-law.md",
+    "source_sha256": "73fba49d8b049d6332748e8b625c951c84acf011c8d8adb02900b73183d1a5ac",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-belief-mdp-sufficient-statistic",
+    "section": "Item body",
+    "lines": [
+      42,
+      44,
+      46,
+      48,
+      50
+    ],
+    "symptom": "The statement moves through hidden state, action, observation, posterior belief and the Bellman step; a schematic can make the conditioning and zero-probability branch explicit.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "POMDP belief update / controlled belief-state transition schematic",
+    "exact_source_claim": "For a positive-probability history h_t and chosen action a, the next-state/observation law is the belief mixture sum_s b_t(s)T(s′|s,a)O(o|s′); q(o|b,a) and posterior τ(b,a,o) induce a controlled Markov belief model and finite-horizon Bellman recursion over observations.",
+    "selection_reason": "The statement moves through hidden state, action, observation, posterior belief and the Bellman step; a schematic can make the conditioning and zero-probability branch explicit.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-belief-mdp-sufficient-statistic--01.png",
+      "screenshots/thm-belief-mdp-sufficient-statistic--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-belief-mdp-sufficient-statistic--01.png": "7d477d122a7b0b75b906a1b60776c305e75fed8567d40912193363acdf3176ad",
+      "screenshots/thm-belief-mdp-sufficient-statistic--02.png": "76dd4a145b693fa26742448cdc2289d146722088419db312b8195124f8d805b9"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pomdps-and-belief-state-planning"
+    ],
+    "source_lines": {
+      "42": "Let a finite POMDP with known model be fixed. A deterministic history policy chooses an action from the finite action set using only preceding actions and observations; a randomized history policy assigns an action distribution using only that history, with its randomization conditionally independent of the hidden state. For every positive-probability history $h_t$ with belief $b_t$ and every action $a$ having positive conditional selection probability at that history,",
+      "44": "$$\\Pr(S_{t+1}=s',O_{t+1}=o\\mid h_t,A_t=a)=\\sum_{s\\in S}b_t(s)T(s'\\mid s,a)O(o\\mid s').$$",
+      "46": "Consequently the observation probability is $q(o\\mid b_t,a)$, the next belief is $\\tau(b_t,a,o)$ whenever that probability is positive, and the conditional expected reward is $\\bar r(b_t,a)$. The controlled belief-state model has the fully observed Borel state space $\\Delta(S)$, action set $A$, transition kernel $K$, and reward $\\bar r$; under a policy depending only on the current belief, the belief process is Markov. For every remaining finite horizon $n$, the optimal value depends on the history only through $b$ and satisfies",
+      "48": "$$V_0(b)=0,\\qquad V_{n+1}(b)=\\max_{a\\in A}\\left[\\bar r(b,a)+\\gamma\\sum_{o:q(o\\mid b,a)>0}q(o\\mid b,a)V_n(\\tau(b,a,o))\\right].$$",
+      "50": "Each maximum is attained; randomizing an action cannot increase the value. An observation with zero probability requires no posterior update. The conclusion holds for $\\gamma\\in[0,1]$ and uses no Axiom of Choice."
+    },
+    "source_snapshot": "snapshots/thm-belief-mdp-sufficient-statistic.md",
+    "source_sha256": "79a2bd5c694368d650026f1ef7f7fc7f6c62ca2462389fb8953a1d777052f94f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "candidate (not a confirmed defect)",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-dagger-no-regret-reduction",
+    "section": "Item body",
+    "lines": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "proof-dependency flow diagram",
+    "exact_source_claim": "The reduction combines FTL regret, expert/learner occupancy shift, and expert-surrogate task-cost control to obtain a learned-policy task-cost bound.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-dagger-no-regret-reduction--01.png",
+      "screenshots/thm-dagger-no-regret-reduction--02.png",
+      "screenshots/thm-dagger-no-regret-reduction--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-dagger-no-regret-reduction--01.png": "ff38e779116c1ea1596dad14bc9916044197918f2fd1064a4742463c9d0a0d44",
+      "screenshots/thm-dagger-no-regret-reduction--02.png": "6968928212c7a1a5928c1f7abf58aae5d05fc0d237539df4dd22ae736221c5b5",
+      "screenshots/thm-dagger-no-regret-reduction--03.png": "beb46990820de1e4353081baac6b6674c3af460d6f4f200999cea9b072af8d4b"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "imitation-learning-and-dagger"
+    ],
+    "source_lines": {
+      "42": "for all $x,y\\in K$ and $\\lambda\\in[0,1]$. Run the population-loss version of DAgger for a positive integer $N$ rounds with exact FTL updates, and assume each cumulative population loss attains its minimum on $K$. Let $\\beta_i\\in[0,1]$ satisfy $\\beta_1\\le1$ and $\\beta_i\\le(1-\\alpha)^{i-1}$ for $2\\le i\\le N$, where $\\alpha\\in(0,1]$ is fixed independently of $T$ and $N$. Suppose $u\\ge0$ satisfies $Q_t^*(s,a)-V_t^*(s)\\le u$ for every time $t$, state $s$, and admissible action $a$.",
+      "43": "",
+      "44": "Let $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$ be the true round-$i$ loss under the mixed rollout policy, and let $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$, with the minimum attained. Define $H_0=0$, $H_n=\\sum_{j=1}^n1/j$, let $q_T$ be the least nonnegative integer with $T\\le2^{q_T}$, and let $k_\\alpha$ be the least positive integer with $k_\\alpha\\alpha\\ge1$. Then some learned policy $\\hat\\pi\\in\\{\\hat\\pi_1,\\ldots,\\hat\\pi_N\\}$ satisfies",
+      "45": "",
+      "46": "$$J(\\hat\\pi)\\le J(\\pi^*)+uT\\left[\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}+k_\\alpha(q_T+2)}{N}\\right].$$",
+      "47": "",
+      "48": "In particular, the additive term beyond $uT\\epsilon_N$ is at most $1$ whenever $N\\ge uT\\bigl(1+\\frac{4G^2}{\\mu}H_{N-1}+k_\\alpha(q_T+2)\\bigr)$. For fixed $\\alpha,\\mu,G$ and a valid scale $u\\ge1$, the sufficient iteration count is $\\widetilde O(uT)$ because $H_{N-1}$ and $q_T$ grow logarithmically. If a valid one-step bound has $u<1$, it may be enlarged to $1$ for this iteration-count corollary; the exact inequality above remains valid with the original $u$. This is an infinite-sample statement: expert labels must be obtained by interaction on states visited under $\\pi_i$.",
+      "72": "[F1] [[def-imitation-learning-and-expert-surrogate-loss]]: $d_\\pi$ is the normalized average state occupancy; $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$; the surrogate upper-bounds action disagreement; and $J(\\pi)$ is finite-horizon expected task cost.",
+      "73": "",
+      "74": "[F2] [[alg-dagger]]: at round $i$, DAgger rolls out $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, obtains expert labels on visited states, and sets $\\theta_{i+1}$ to an attained minimizer of the cumulative losses.",
+      "75": "",
+      "76": "[F3] [[lem-dagger-strongly-convex-follow-the-leader-regret]]: for the stated bounded $\\mu$-strongly convex $G$-Lipschitz losses, $\\sum_iL_i(\\theta_i)-N\\epsilon_N\\le1+(4G^2/\\mu)H_{N-1}$.",
+      "77": "",
+      "78": "[F4] [[lem-dagger-mixture-occupancy]]: for every $g:S\\to[0,1]$, the absolute difference between its mixed-policy and learner-policy occupancy expectations is at most $\\min(1,T\\beta_i)$; in particular, either expectation is at most the other plus this error.",
+      "79": "",
+      "80": "[F5] [[lem-dagger-task-cost-from-expert-surrogate]]: $J(\\hat\\pi_i)-J(\\pi^*)\\le uT\\sum_s d_{\\hat\\pi_i}(s)\\ell(s,\\theta_i)$.",
+      "90": "## Proof",
+      "91": "",
+      "92": "1.1 Since $L_i$ is the finite probability-weighted average of the statewise losses, averaging the uniform strong-convexity inequality and the $G$-Lipschitz inequality in [A1] over $d_{\\pi_i}$ shows that each $L_i$ is $\\mu$-strongly convex, $G$-Lipschitz, and valued in $[0,1]$. The exact FTL updates [F2], attained minima [A2], and bound [F3] therefore give $\\frac1N\\sum_{i=1}^NL_i(\\theta_i)\\le\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}}{N}$. [A1, A2, F1, F2, F3, algebra]",
+      "93": "",
+      "94": "1.2 Let $q=1-\\alpha$ and $k=k_\\alpha$. Since $(1-\\alpha)(1+\\alpha)=1-\\alpha^2\\le1$, $q\\le(1+\\alpha)^{-1}$. For every integer $n\\ge1$, $(1+\\alpha)^n\\ge1+n\\alpha$: it is equality at $n=1$, and multiplying the inductive inequality by $1+\\alpha>0$ gives $(1+\\alpha)^{n+1}\\ge1+(n+1)\\alpha+n\\alpha^2\\ge1+(n+1)\\alpha$. Thus $(1+\\alpha)^k\\ge1+k\\alpha\\ge2$ and $q^k\\le1/2$. Partition indices $i$ into blocks $i=jk+r+1$ with $j\\ge0$ and $0\\le r<k$. On block $j$, [A3] gives $\\min(1,T\\beta_i)\\le\\min(1,Tq^{jk})\\le\\min(1,T2^{-j})$. Hence $\\sum_{i=1}^N\\min(1,T\\beta_i)\\le k\\sum_{j=0}^{\\infty}\\min(1,T2^{-j})\\le k(q_T+2)$, because the first $q_T+1$ terms are at most $1$ and the remaining geometric tail is $T\\sum_{j=q_T+1}^{\\infty}2^{-j}=T2^{-q_T}\\le1$. [A3, F2, algebra]",
+      "95": "",
+      "96": "1.3 For every positive integer $n$, let $q_n$ be the least nonnegative integer with $n\\le2^{q_n}$. If $N=1$, then $H_{N-1}=0\\le1+q_N$. If $N\\ge2$, group $H_{N-1}$ into the initial term $1$ and blocks $2^{j-1}<r\\le2^j$, $1\\le j\\le q_N$. Each block has at most $2^{j-1}$ terms, each at most $2^{-(j-1)}$, so $H_{N-1}\\le1+q_N$. These dyadic lengths grow logarithmically in their arguments. [F3, algebra, construct]",
+      "97": "",
+      "98": "2.1 For each round, apply the absolute-value estimate [F4] to $g(s)=\\ell(s,\\theta_i)\\in[0,1]$, using its direction $\\sum_s d_{\\hat\\pi_i}(s)g(s)\\le L_i(\\theta_i)+\\min(1,T\\beta_i)$. Averaging over $i$ and using step 1.1 yields $\\frac1N\\sum_{i=1}^N\\sum_s d_{\\hat\\pi_i}(s)\\ell(s,\\theta_i)\\le\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}}N+\\frac1N\\sum_{i=1}^N\\min(1,T\\beta_i)$. [A2, F1, F2, F4, step 1.1, algebra]",
+      "99": "",
+      "100": "3.1 By step 1.2 and step 2.1, the average own-occupancy surrogate loss of the finite sequence $\\hat\\pi_1,\\ldots,\\hat\\pi_N$ is at most $\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}+k_\\alpha(q_T+2)}N$. At least one member $\\hat\\pi_i$ has own-occupancy surrogate loss no larger than this average, because otherwise every term in the finite average would be strictly larger than the average. [F2, step 1.2, step 2.1, algebra]",
+      "101": "",
+      "102": "4.1 Apply the one-step assumption [A4] through [F5] to that index $i$ and substitute the bound from step 3.1. This gives the stated task-cost inequality. [A4, F5, step 3.1, algebra]",
+      "103": "",
+      "104": "5.1 If $N\\ge uT\\bigl(1+\\frac{4G^2}{\\mu}H_{N-1}+k_\\alpha(q_T+2)\\bigr)$, then the additive term in the Statement is at most $1$. To verify the iteration order, set $\\bar u=\\max(1,u)$ and $B=\\bar uT\\ge1$; let $b=\\lceil B\\rceil$ and let $Q$ be the least integer with $b+T+2\\le2^Q$. Choose an integer $C\\ge1$ and set $N=\\lceil CbQ\\rceil$. Since $b\\le2^Q$ and $Q\\le2^Q$, $N\\le(C+1)2^{2Q}$, so the least $q_N$ with $N\\le2^{q_N}$ satisfies $q_N\\le2Q+q_{C+1}$. By step 1.3 and $q_T\\le Q$, the bracket is at most $1+\\frac{4G^2}{\\mu}(2Q+q_{C+1}+1)+k_\\alpha(Q+2)$. Set $c=4G^2/\\mu$, $a=2c+k_\\alpha$, $b_0=c$, and $b_1=1+c+2k_\\alpha$; the bracket bound equals $aQ+b_0q_{C+1}+b_1$. Choose an integer $r\\ge2$ so large that $r(r-1)/2\\ge a+b_0(r+1)+b_1$; such an $r$ exists because the left side is quadratic with positive leading coefficient and the right side is affine in $r$. The binomial theorem gives $C:=2^r\\ge r(r-1)/2$, while $C+1\\le2^{r+1}$ gives $q_{C+1}\\le r+1$. Hence $C\\ge a+b_0q_{C+1}+b_1$. Since $Q\\ge1$ and $a,b_0,b_1\\ge0$, $CQ\\ge(a+b_0q_{C+1}+b_1)Q\\ge aQ+b_0q_{C+1}+b_1$; as $b\\ge B$, this gives $N\\ge CbQ\\ge B(aQ+b_0q_{C+1}+b_1)$. Thus $N\\ge\\bar uT$ times the bracket, which also implies the required inequality with $u$. Moreover $Q=O(\\log(B+2))$, so $N=O(B\\log(B+2))=\\widetilde O(\\bar uT)$. When $u\\ge1$, this is $\\widetilde O(uT)$; if $u<1$, replacing it by $\\bar u=1$ is a valid upper-bound normalization for the iteration count. The estimate retains the hindsight optimum $\\epsilon_N$ and assumes no realizability condition $\\pi^*\\in\\Pi$. [A1, A3, A4, step 1.3, step 4.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/thm-dagger-no-regret-reduction.md",
+    "source_sha256": "8d057337cfcd6772eaa47013ffb5d9c9ec4ef37f53e28eeeb16c5a8f3297c0bb",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+    "section": "Item body",
+    "lines": [
+      46,
+      50,
+      98,
+      104
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-editorial-figure",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value--01.png",
+      "screenshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value--02.png",
+      "screenshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value--01.png": "5197c1388bd88e9068849f2d0bd46b302a871e5af112b4a30c773fe4ad678cac",
+      "screenshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value--02.png": "205edab5e6a9a7c0330b5dae5298e2d9b0be8051e2c9c70546a1de2cf38a6fb0",
+      "screenshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value--03.png": "5478f034ec460ee3f3a527d838961acfd1a132e519c45f9fdb02aa8bb22b64b7"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pomdps-and-belief-state-planning"
+    ],
+    "source_lines": {
+      "46": "Fix a finite POMDP, horizon $H\\in\\mathbb N$, and discount $\\gamma\\in[0,1]$. For $0\\le h\\le H$, let $\\Gamma_h$ be the finite alpha-vector set returned by the exhaustive backup, with set semantics for duplicate vectors. Then, for every belief $b\\in\\Delta(S)$,",
+      "50": "where $V_h$ is the optimal expected $h$-step discounted reward. Thus $V_h$ is the upper envelope of finitely many linear functions on $\\Delta(S)$: it is linear on each region $R_\\alpha=\\{b\\in\\Delta(S):\\sum_s b(s)\\alpha(s)\\ge\\sum_s b(s)\\beta(s)\\text{ for every }\\beta\\in\\Gamma_h\\}$ and is convex. Define a **witness belief** for $\\alpha\\in\\Gamma_h$ to be any $b\\in\\Delta(S)$ with $\\sum_s b(s)\\alpha(s)=V_h(b)$. Removing every vector with no witness belief leaves $V_h$ unchanged. For the count, $\\mathcal P_0$ contains the empty continuation and each $\\mathcal P_{h+1}$ consists of a root action and one depth-$h$ continuation for each observation; with $N_h=|\\mathcal P_h|$, $N_0=1$ and $N_{h+1}=|A|N_h^{|\\Omega|}$. The exhaustive candidate and witness-vector counts are bounded by $N_h$, which can grow exponentially in $h$. No infinite-horizon representation or polynomial-time pruning claim is made.",
+      "98": "5.1 For each $\\alpha\\in\\Gamma_h$, its maximizing region $R_\\alpha$ is the simplex intersected with the finitely many half-spaces $\\sum_s b(s)(\\alpha(s)-\\beta(s))\\ge0$, one for each $\\beta\\in\\Gamma_h$. These regions cover $\\Delta(S)$ because the maximum in step 4.1 is attained, and on $R_\\alpha$ the value equals the linear function $b\\mapsto\\sum_s b(s)\\alpha(s)$. This proves piecewise linearity. [step 4.1, F5, F6]",
+      "104": "5.4 Let $\\mathcal P_0$ contain only the empty continuation and $\\mathcal P_{h+1}=A\\times\\mathcal P_h^{\\Omega}$. A depth-$(h+1)$ tree is uniquely its root action and a function from observations to depth-$h$ trees. By [F8]–[F9], these sets are finite and their cardinalities satisfy $N_0=1$ and $N_{h+1}=|A|N_h^{|\\Omega|}$; [F10] fixes the natural-power convention. The map from trees to conditional-value vectors has image $\\Gamma_h$, the set of distinct exhaustive candidates by step 2.1. Enumerating the $N_h$ trees shows that this image has at most $N_h$ vectors, and the witness vectors form a subset, so their count is no larger. [step 4.1, F3, F7, F8, F9, F10]"
+    },
+    "source_snapshot": "snapshots/thm-finite-horizon-pomdp-piecewise-linear-convex-value.md",
+    "source_sha256": "ffadfa3568dd5bf4fa12acc1c47fb5389bb1cedadd2b406f38420994670faf9c",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-finite-mdp-policy-induces-reward-state-chain",
+    "section": "Item body",
+    "lines": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "lifted reward-state Markov chain",
+    "exact_source_claim": "A stationary policy and the MDP joint reward-transition law induce a homogeneous kernel on E=S×(R∪{0}), with initial coordinate (s,0).",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-finite-mdp-policy-induces-reward-state-chain--01.png",
+      "screenshots/thm-finite-mdp-policy-induces-reward-state-chain--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-finite-mdp-policy-induces-reward-state-chain--01.png": "7f10b0efb43a13bd0e9491c600c57002dad32eb311de3eb0f229f4d57e15676d",
+      "screenshots/thm-finite-mdp-policy-induces-reward-state-chain--02.png": "50ab3bd9c91ab53d8aff4cbcc154dbd25997d2abcbdb2f5ca6adb33aecb81784"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-mdps-and-bellman-operators"
+    ],
+    "source_lines": {
+      "46": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Put $E=S\\times(\\mathcal R\\cup\\{0\\})$ with its discrete sigma-algebra and define, for $x=(s,\\eta)\\in E$ and $B\\subseteq E$,",
+      "47": "",
+      "48": "$$ K_\\pi(x,B)=\\sum_{a\\in A(s)}\\pi(a\\mid s) \\sum_{\\substack{s'\\in S\\\\\\rho\\in\\mathcal R}}1_B(s',\\rho)\\,p(s',\\rho\\mid s,a). $$",
+      "49": "",
+      "50": "Then $K_\\pi$ is a probability kernel on $E$. For each initial state $s\\in S$, there is a probability law on $E^{\\mathbb N}$ whose coordinate process starts at $(s,0)$ and is a time-homogeneous Markov chain with transition kernel $K_\\pi$ relative to its natural filtration.",
+      "82": "1.1 Fix $x=(s,\\eta)\\in E$. By [F5], $E=S\\times(\\mathcal R\\cup\\{0\\})$ is finite: $\\{0\\}\\setminus\\mathcal R$ is a subset of a finite singleton, $\\mathcal R\\cup\\{0\\}=\\mathcal R\\cup(\\{0\\}\\setminus\\mathcal R)$ is a finite union, and then take its product with $S$. For each $a\\in A(s)$, the point masses $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R\\subseteq E$ (and zero on the added dummy-reward points) define a probability measure $\\mu_a$ on $E$: they are nonnegative and total $1$ by [F1]. To check countable additivity, fix a bijection $e:n\\to E$. For any disjoint sequence $(B_j)$, each nonempty $B_j$ has a least index $i_j<n$ with $e(i_j)\\in B_j$, by [F8]; disjointness makes these indices distinct, so only finitely many $B_j$ are nonempty. Additivity then follows from finite-sum additivity over the partition of the finite support, as in [F5]. The displayed kernel is the finite mixture $K_\\pi(x,B)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\mu_a(B)$. Its values are nonnegative and $K_\\pi(x,E)=\\sum_a\\pi(a\\mid s)=1$ by [F1]. For a disjoint countable family $(B_j)$, only finitely many $B_j$ are nonempty by the same argument; additivity of each $\\mu_a$ and finite-sum interchange [F6] give $K_\\pi(x,\\bigcup_jB_j)=\\sum_jK_\\pi(x,B_j)$. Thus $B\\mapsto K_\\pi(x,B)$ is a probability measure. Every subset of $E$ is measurable and every function on the discrete source $E$ is measurable, so [F2] makes $K_\\pi$ a probability kernel. [given, F1, F2, F5, F6, F8, algebra]",
+      "83": "",
+      "84": "2.1 For fixed $s\\in S$, the point mass $\\mu_0=\\delta_{(s,0)}$ is a probability measure on $E$. At every $n\\ge0$, use the history-dependent kernel $K_n(x_0,\\ldots,x_n,B)=K_\\pi(x_n,B)$. Its final-coordinate projection is measurable because the preimage of each measurable set is a product-measurable coordinate cylinder by [F7]; composition with the measurable section $x\\mapsto K_\\pi(x,B)$ is measurable. Each section is a probability measure by step 1.1, so $K_n$ is a probability kernel. [step 1.1, F2, F7, construct]",
+      "85": "",
+      "86": "3.1 Apply [F3] to $(E,\\mathcal P(E))$, $\\mu_0$, and the sequence $(K_n)$. Its homogeneous specialization gives a probability law on $E^{\\mathbb N}$ with initial state $(s,0)$ and the iterated finite-prefix laws of $K_\\pi$. [given, A1, step 2.1, F3]",
+      "87": "",
+      "88": "4.1 The coordinate process under that law is a homogeneous chain relative to its natural filtration by [F3], and its conditional transition identity is exactly the convention in [F4]. This proves the claimed chain construction for every initial $s\\in S$. [step 3.1, F3, F4] ∎"
+    },
+    "source_snapshot": "snapshots/thm-finite-mdp-policy-induces-reward-state-chain.md",
+    "source_sha256": "4401564ba12ed5472773c0ab43ef3a04acd17ab9b464fb0dee774785082a98e7",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-linucb-regret",
+    "section": "Item body",
+    "lines": [
+      42,
+      44,
+      46,
+      48,
+      50,
+      52
+    ],
+    "symptom": "The proof combines confidence geometry, optimistic scores, and a cumulative determinant potential; a low-dimensional schematic could clarify this proof route and distinguish per-round optimism from the summed bound.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Confidence ellipsoid and optimistic action geometry",
+    "exact_source_claim": "On the confidence event, the true parameter lies in the roundwise ridge-confidence ellipsoids; optimism bounds each best-action versus selected-action gap, and the elliptical-potential determinant sum yields the stated high-probability pseudo-regret bound.",
+    "selection_reason": "The proof combines confidence geometry, optimistic scores, and a cumulative determinant potential; a low-dimensional schematic could clarify this proof route and distinguish per-round optimism from the summed bound.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-linucb-regret--01.png",
+      "screenshots/thm-linucb-regret--02.png",
+      "screenshots/thm-linucb-regret--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-linucb-regret--01.png": "627f8adfe083df8331c702445f58413c50fbe0f3c0690fe8e45007c7de60fa2d",
+      "screenshots/thm-linucb-regret--02.png": "791e1338fd152dc4149af7e76fe4e18aa59aff25bb455d8146993b1c438e7531",
+      "screenshots/thm-linucb-regret--03.png": "c5b17d057505093ada5854519fa8339ae53f426b6e3fd9660fa6a7305dcb7047"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "linear-contextual-bandits-and-linucb"
+    ],
+    "source_lines": {
+      "42": "Assume AC and Countable Choice, the finite-dimensional linear contextual bandit model, and LinUCB with $\\beta_t=\\max\\{1,\\rho_t^2\\}$ as defined in the algorithm. Let $\\delta\\in(0,1)$ be the confidence input to LinUCB. Suppose also that for every round $t$,",
+      "44": "$$\\sup_{a,b\\in\\mathcal A_t}\\langle\\theta^*,a-b\\rangle\\le1.$$",
+      "46": "Define the random pseudo-regret by",
+      "48": "$$\\widehat R_n:=\\sum_{t=1}^n\\left(\\max_{a\\in\\mathcal A_t}\\langle\\theta^*,a\\rangle-\\langle\\theta^*,A_t\\rangle\\right).$$",
+      "50": "Then, with probability at least $1-\\delta$,",
+      "52": "$$\\widehat R_n\\le\\sqrt{8n\\beta_n\\log\\!\\left(\\frac{\\det V_n}{\\det V_0}\\right)}\\le\\sqrt{8dn\\beta_n\\log\\!\\left(1+\\frac{nL^2}{d\\lambda}\\right)}.$$"
+    },
+    "source_snapshot": "snapshots/thm-linucb-regret.md",
+    "source_sha256": "56f1082dca700c9ff906d86b3dc487294602f133f1f171ff757b2a081fb045ea",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "candidate (not a confirmed defect)",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-offline-coverage-impossibility-example",
+    "section": "Item body",
+    "lines": [
+      35
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "paired-MDP / identifiability",
+    "exact_source_claim": "Behavior policy always logs action a with reward 0 in both processes, while target action b has reward +1 in M_+ and −1 in M_−; logged-data laws coincide but target-optimal actions differ.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-offline-coverage-impossibility-example--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-offline-coverage-impossibility-example--01.png": "0a060eb8ace460a8588768ab1056f4f015901e47d981a01b75f7dcac9fce6f70"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "offline-reinforcement-learning-and-off-policy-evaluation"
+    ],
+    "source_lines": {
+      "35": "There are two finite one-step Markov decision processes with the same logged-data law under one behavior policy, but different target-policy values and different uniquely optimal actions. A finite one-step Markov decision process here has a finite state set, finite nonempty action sets, a finite reward set, and a probability mass on the next-state/reward pair for every state/action pair. Let the state set be $\\{s_0,z\\}$, the action sets be $A(s_0)=\\{a,b\\}$ and $A(z)=\\{c\\}$, the reward set be $\\{-1,0,1\\}$, and the horizon be $H=1$. In both processes, action $a$ at $s_0$ gives reward $0$ and moves to $z$, and action $c$ at $z$ gives reward $0$ and stays at $z$. In process $M_+$, action $b$ at $s_0$ gives reward $1$ and moves to $z$; in process $M_-$, it gives reward $-1$ and moves to $z$. The behavior policy chooses $a$ at $s_0$ with probability $1$, while the target policy chooses $b$ there with probability $1$; both policies choose $c$ at $z$ with probability $1$. Every behavior-generated logged trajectory is $(s_0,a,0,z)$ in both processes, so every sample size $n\\ge1$ has the same logged-data law in $M_+$ and $M_-$. The target value is the expected one-step reward: it is $1$ in $M_+$ and $-1$ in $M_-$, and the unique value-maximizing initial action is $b$ in $M_+$ and $a$ in $M_-$. An estimator here is a real-valued function of the logged dataset; it is unbiased for a target value when its expectation under the logged-data law equals that value. Consequently, no such estimator can be unbiased for the target value in both processes, and no data-based action selector can identify the unique optimal initial action with certainty in both."
+    },
+    "source_snapshot": "snapshots/thm-offline-coverage-impossibility-example.md",
+    "source_sha256": "286f9bc67d092bf59ac60ca08e76f5bd746b7050818ae9464c1673a9b70469ee",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-pac-mdp-value-functions",
+    "section": "Item body",
+    "lines": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Bellman backup map",
+    "exact_source_claim": "For each state, action values are expected immediate reward plus discounted next-state value, and the optimal value is their maximum, attained by a greedy stationary policy.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-pac-mdp-value-functions--01.png",
+      "screenshots/thm-pac-mdp-value-functions--02.png",
+      "screenshots/thm-pac-mdp-value-functions--03.png",
+      "screenshots/thm-pac-mdp-value-functions--04.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-pac-mdp-value-functions--01.png": "389fa37010522ae11b03d089d44228a74b6907d18ed1bafa4f99d6a760f1f6cd",
+      "screenshots/thm-pac-mdp-value-functions--02.png": "2e01760a50bc14d7f1ca8b2fadfeba20c8e9621c14184362f477e79947beec2d",
+      "screenshots/thm-pac-mdp-value-functions--03.png": "657594d2c5df36980e765aa27d11c915afc06f7c44287bca0423a8da6e7bde7a",
+      "screenshots/thm-pac-mdp-value-functions--04.png": "97ba6e30028294ee72db3fb174f8b54794d948c49a1ac87fcc8f1152a5803642"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "pac-mdp-exploration"
+    ],
+    "source_lines": {
+      "48": "Assume the Axiom of Choice. In every bounded-reward finite discounted Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, and $0\\le\\gamma<1$, the trajectory law of every history-dependent behavior from every starting state exists. Its discounted return is measurable, integrable, and between $0$ and $1/(1-\\gamma)$. For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation. The optimality operator",
+      "49": "",
+      "50": "$$T^*V(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]$$",
+      "51": "",
+      "52": "is a $\\gamma$ contraction in the supremum norm, meaning $\\|T^*V-T^*W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty$ for all $V,W:S\\to\\mathbb R$, where $\\|V\\|_\\infty=\\max_{s\\in S}|V(s)|$, and has a unique fixed point $V^*$. This fixed point is the supremum of the values of all history-dependent behaviors and is attained by a deterministic stationary greedy policy. The optimal action value is",
+      "53": "",
+      "54": "$$Q^*(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V^*(s'),$$",
+      "55": "",
+      "56": "and $V^*(s)=\\max_{a\\in A(s)}Q^*(s,a)$ with $Q^*(s,a)\\ge0$."
+    },
+    "source_snapshot": "snapshots/thm-pac-mdp-value-functions.md",
+    "source_sha256": "554258eef5fd7f508ae0a2cb2e8963dd6407769bbd51193730ce5e9c820039e6",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-ucrl2-regret-lower-bound",
+    "section": "Item body",
+    "lines": [
+      64,
+      65,
+      66,
+      67,
+      68,
+      72
+    ],
+    "symptom": "The proof’s large-diameter construction combines a routing tree, paired bad/good states, and a distinguished useful state-action pair; a diagram could make the construction easier to follow.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "paired-state MDP construction diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The proof’s large-diameter construction combines a routing tree, paired bad/good states, and a distinguished useful state-action pair; a diagram could make the construction easier to follow.",
+    "concrete_diagram_content": "For the D≥16 branch, show bad and optional bare routing states in the rooted b-ary tree, each bad state paired with a good state, and useful actions moving from bad to paired good with probability p (or p+e at the distinguished pair) and otherwise staying. Keep the D<16 direct-transition/self-loop-reward construction separate if represented.",
+    "mathematical_check": "For the D≥16 branch, show bad and optional bare routing states in the rooted b-ary tree, each bad state paired with a good state, and useful actions moving from bad to paired good with probability p (or p+e at the distinguished pair) and otherwise staying. Keep the D<16 direct-transition/self-loop-reward construction separate if represented.",
+    "screenshots": [
+      "screenshots/thm-ucrl2-regret-lower-bound--01.png",
+      "screenshots/thm-ucrl2-regret-lower-bound--02.png",
+      "screenshots/thm-ucrl2-regret-lower-bound--03.png",
+      "screenshots/thm-ucrl2-regret-lower-bound--04.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-ucrl2-regret-lower-bound--01.png": "a00071bccd92ddd6d11edac908ad1b98ae7320d41cb520b64187b11fffcbd354",
+      "screenshots/thm-ucrl2-regret-lower-bound--02.png": "397cddefd7345b2f6a74fcd38984e34319598fa0d65ad9c5f77d93655b0133d9",
+      "screenshots/thm-ucrl2-regret-lower-bound--03.png": "54341fd983a51cc7c20450952da094e4166d231921fb780977b2ac9546d4748e",
+      "screenshots/thm-ucrl2-regret-lower-bound--04.png": "0124ec7438276b50fb5bbc56306a37743ff7894e75e181829d0d5d71c38f7579"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "average-reward-regret-and-ucrl2"
+    ],
+    "source_lines": {
+      "64": "2.1 First suppose $D\\ge16$. In this branch, set $$k=\\lfloor S/2\\rfloor,\\qquad b=\\lfloor A/3\\rfloor,\\qquad B=A-b-1,\\qquad K=kB,\\qquad p=\\frac8{3D},\\qquad e=\\frac7{20}\\sqrt{\\frac{pK}{T}}.$$ There are $k$ paired bad/good states $(x_i,y_i)$. If $S$ is odd, include one additional bare routing state. Arrange the bad states and the optional bare state into a breadth-first rooted $b$-ary tree of height $h$. At each bad state, $B$ useful actions have reward zero and move to its good partner with probability $p$, otherwise staying put. The remaining $b+1$ actions route deterministically toward the parent or one of the $b$ child slots, with missing slots giving self-loops; their rewards are zero. At each good state all $A$ actions have reward one and move to the paired bad state with probability $p$, otherwise staying put. At the optional bare state use the same routing actions and duplicate them to obtain exactly $A$ actions, all with reward zero. This uses exactly $S$ states and exactly $A$ actions per state. For each of the $K$ useful pairs $j$, environment $M_j$ changes just that pair's probability of entering its good state from $p$ to $p+e$. The baseline $M_0$ has no change. Fix the initial state at the bad root. Every environment is communicating. [given, step 1.1, F2, construct, algebra]",
+      "65": "",
+      "66": "3.1 For every integer $A\\ge10$, $$B\\ge\\frac7{12}A,\\qquad B\\le\\frac23 A,\\qquad b\\ge A^{2/5},\\qquad 2b^2\\ge A^{6/5}.$$ For the first inequality, $A\\ge12$ gives $B\\ge2A/3-1\\ge7A/12$, and $A=10,11$ are immediate. The second follows from $\\lfloor A/3\\rfloor\\ge(A-2)/3$. For the last inequality, check $A=10,11,12,13$ directly; for $A\\ge14$, $b\\ge A/4$ and $A^{4/5}\\ge8$, so $2b^2\\ge A^2/8\\ge A^{6/5}$. This last inequality implies $b\\ge A^{2/5}$ because $A^{1/5}\\ge\\sqrt2$. The number of tree vertices is $n=\\lceil S/2\\rceil$. If $h=2$, breadth-first filling implies $n\\ge b+2$, so $S\\ge2b+3\\ge2A/3\\ge A^{4/5}$ and hence $h\\le(5/2)\\log_A S$. If $h\\ge3$, it implies $S\\ge2b^{h-1}$, so $$S\\ge(2b^2)b^{h-3}\\ge A^{6/5}A^{(2/5)(h-3)}=A^{2h/5}.$$ Thus always $h\\le\\max\\{1,(5/2)\\log_A S\\}\\le D/8$. The final inequality uses $D\\ge16$ and $D\\ge20\\log_A S$. To hit a target good state from any state, first leave an initial good state if necessary (mean at most $1/p$), follow the tree path (at most $2h$ steps), and repeatedly take a useful action at the target bad state (mean at most $1/p$). Hitting bad or bare targets takes no longer. Consequently $$\\operatorname{diam}(M_j)\\le\\frac2p+2h\\le\\frac{3D}{4}+\\frac D4=D.$$ [given, step 2.1, F2, construct, algebra]",
+      "67": "",
+      "68": "4.1 In $M_j$ the optimal average reward is $$\\rho^*=\\frac{p+e}{2p+e}=\\frac12+\\frac{e}{4p+2e}.$$ To prove this, take the function $v$ equal to $1/(2p+e)$ at every good state and zero elsewhere. At every state-action pair, $r+Pv-v\\le\\rho^*$: equality holds at good states and the special useful pair, ordinary useful pairs give $p/(2p+e)$, and routes give zero. Summing this inequality in conditional expectation gives average reward at most $\\rho^*$, because $v$ is bounded. Routing to the special bad state and then always using its special action realizes the two-state chain with transitions $p+e$ and $p$, whose invariant good-state mass is $(p+e)/(2p+e)$. Its convergence in Cesàro mean follows directly from the two-state recurrence; the finite expected routing/hitting transient changes no average reward. This proves the formula. Let $G_t$ be the indicator that the current state is good, let $U_t$ indicate a useful action at a bad state, and let $Q_t$ indicate a routing action (including every action at the bare state). Then $G_t+U_t+Q_t=1$ and $$\\mathbb E_j[G_{t+1}-G_t\\mid\\text{history, action}]=pU_t+e\\mathbf1\\{j\\text{ used at }t\\}-pG_t.$$ Rewards equal $G_t$. Since $G_1=0$, summing the equality gives the exact identity $$\\mathbb E_jR_T=\\frac T2-\\frac12\\mathbb E_j\\sum_{t=1}^TQ_t+\\frac e{2p}\\mathbb E_jN_j-\\frac{\\mathbb E_jG_{T+1}}{2p}.$$ In particular, $$\\mathbb E_j[T\\rho^*-R_T]\\ge\\frac{eT}{4p+2e}-\\frac e{2p}\\mathbb E_jN_j.$$ There is no adverse additive initial-transient term. In the baseline, the same identity with $e=0$ yields $$\\sum_{j=1}^K\\mathbb E_0N_j=\\mathbb E_0\\sum_tU_t=\\frac T2-\\frac12\\mathbb E_0\\sum_tQ_t+\\frac{\\mathbb E_0G_{T+1}}{2p}\\le\\frac T2+\\frac1{2p}.$$ [given, step 2.1, step 3.1, F1, construct, algebra]",
+      "72": "6.1 Now suppose $1\\le D<16$, the remaining allowed diameter range. The parameter condition gives $A\\ge S^{20/D}>S^{5/4}$, so $S/A<S^{-1/4}\\le10^{-1/4}<3/5$. Put $B=A-S+1$ and $K=SB$; then $B>(2/5)A$ and $K>(2/5)SA\\ge40$. At each of the $S$ states give one deterministic action to every other state, using $S-1$ actions, and $B$ distinct self-loop actions. All rewards in the baseline are independent Bernoulli variables of mean $1/2$. For each of the $K$ self-loop pairs $j$, environment $M_j$ changes that pair's reward mean to $1/2+e$, where $$e=\\frac15\\sqrt{K/T}\\le\\frac15.$$ The last inequality follows from $K\\le SA\\le T$ because $D\\ge1$. Rewards may be generated independently conditional on state-action history; transitions are the same deterministic transitions in all environments. Every environment has diameter one and exactly the required numbers of states and actions. Its optimal average reward is $1/2+e$: no reward mean exceeds this, and the learner can reach the special state in at most one step and then repeatedly use its special self-loop. Start at any fixed state. Here the testing calculation gives $$\\operatorname{KL}(P_0\\Vert P_j)\\le\\frac{10}{3}e^2\\mathbb E_0N_j,\\qquad \\frac1K\\sum_j\\mathbb E_jN_j\\le\\frac TK+Te\\sqrt{\\frac{5T}{3K}},$$ because $1/2-e\\ge3/10$ and $\\sum_j\\mathbb E_0N_j\\le T$. The expected regret in $M_j$ is exactly $e(T-\\mathbb E_jN_j)$. Consequently $$\\frac1K\\sum_j\\mathbb E_j[T\\rho^*-R_T]\\ge\\sqrt{KT}\\left[\\frac15\\left(1-\\frac1K\\right)-\\frac1{25}\\sqrt{\\frac53}\\right]>\\frac7{50}\\sqrt{KT}.$$ Indeed, $K\\ge40$ and $\\sqrt{5/3}<13/10$ make the bracket at least $39/200-13/250=143/1000>7/50$. Thus at least one $j$ has regret greater than $(7/50)\\sqrt{(2/5)SAT}$. Since $D<16$ and $(7/50)\\sqrt{2/5}>0.06=4(0.015)$, this is greater than $0.015\\sqrt{DSAT}$. Label the bad root in the large-diameter construction by the prescribed initial state; in the small-diameter construction any prescribed initial state works. Thus both branches prove the stated quantifiers. [given, step 1.1, step 5.1, F1, F2, F3, F4, F5, construct, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/thm-ucrl2-regret-lower-bound.md",
+    "source_sha256": "387bd3f743e172318cab7158f2ca0bf4623104ad1e101957c9b0a582eca3f850",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  }
+]

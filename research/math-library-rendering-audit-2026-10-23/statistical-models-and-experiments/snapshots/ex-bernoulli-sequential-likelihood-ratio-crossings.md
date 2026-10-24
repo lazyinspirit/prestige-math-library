@@ -1,0 +1,69 @@
+---
+id: ex-bernoulli-sequential-likelihood-ratio-crossings
+kind: example
+title: Exact Bernoulli crossings in a sequential likelihood-ratio test
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 2
+deps:
+  - alg-sequential-likelihood-ratio-test
+  - def-axiom-of-choice
+  - def-identically-distributed-and-iid-random-variables
+  - def-probability-measure
+  - lem-iid-sequential-likelihood-ratio-factorization
+  - thm-sequential-likelihood-ratio-test-error-bounds
+  - thm-sequential-likelihood-ratio-test-terminates-under-drift
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references: []
+---
+
+## Example
+
+Assume AC. Consider IID observations $X_i\in\{0,1\}$. Under $H_0$, let $P_0(X_i=1)=1/4$; under $H_1$, let $P_1(X_i=1)=3/4$. Use the procedure [[alg-sequential-likelihood-ratio-test]] with $\alpha=\beta=1/4$. A type-I error means deciding $H_1$ when $P_0$ governs the observations; a type-II error means deciding $H_0$ when $P_1$ governs them. The terminal type-I and type-II error probabilities are each $1/10$, and the test stops almost surely under either law.
+
+## Facts & Assumptions
+
+**Given:** A common measurable space $(\Omega,\mathcal F)$ carrying the $\{0,1\}$-valued observations, the Bernoulli laws and thresholds in the Example, AC, and the sequential likelihood-ratio procedure. For applying the procedure, use $\mathcal F_0=\{\varnothing,\Omega\}$ and $\mathcal F_t=\sigma(X_1,\ldots,X_t)$ for $t\ge1$. Compute both terminal error probabilities and verify almost-sure stopping.
+
+[A1] [[def-axiom-of-choice]]: AC states that every family of nonempty sets has a choice function.
+
+[F1] [[def-identically-distributed-and-iid-random-variables]]: IID observations are mutually independent and share a common law under each hypothesis.
+
+[F2] [[alg-sequential-likelihood-ratio-test]]: the procedure requires mutually equivalent restrictions on every $\mathcal F_t$, including $t=0$; the upper boundary is $1/\alpha$ and decides $H_1$, while the lower boundary is $\beta$ and decides $H_0$.
+
+[F3] [[lem-iid-sequential-likelihood-ratio-factorization]]: for IID observations, $L_t=\prod_{i=1}^t dQ_1/dQ_0(X_i)$ is the finite-time likelihood-ratio density.
+
+[F4] [[thm-sequential-likelihood-ratio-test-error-bounds]]: the two terminal error probabilities are bounded by $\alpha$ and $\beta$.
+
+[F5] [[thm-sequential-likelihood-ratio-test-terminates-under-drift]]: finite absolute log-likelihood means and strict negative/positive drifts imply almost-sure termination under $P_0$ and $P_1$.
+
+## Verification
+
+1.1 The one-observation likelihood ratio is $\lambda(1)=(3/4)/(1/4)=3$ and $\lambda(0)=(1/4)/(3/4)=1/3$. Both laws give positive mass to both outcomes, so they are equivalent. [given, construct]
+
+2.1 For $t\ge1$, set $G_t=\prod_{i=1}^t\lambda(X_i)$ and choose the algorithm's representatives to be $L_t=G_t$, with $L_0=1$. By [F3], $G_t$ is a version of the finite-time density. It is finite and strictly positive because each factor is either $3$ or $1/3$, so for every $A\in\mathcal F_t$, $P_1(A)=\int_A G_t\,dP_0$ implies $P_1(A)=0$ exactly when $P_0(A)=0$. At $t=0$, both restrictions to the trivial sigma-algebra assign zero to $\varnothing$ and one to $\Omega$, so they are equivalent and $L_0=1$ is their density. The algorithm's finite-time equivalence hypotheses therefore hold for every $t\ge0$. Also, each nonempty atom of $\mathcal F_t$ is a fiber for a binary word and has positive $P_0$-probability by [F1]; consequently any other $\mathcal F_t$-measurable density representative agrees with $G_t$ everywhere, since it agrees $P_0$-almost surely. [F1, F2, F3, step 1.1, given, algebra]
+
+3.1 The log increment is $Z(1)=\log3$ and $Z(0)=-\log3$. Hence $\mathbb E_{Q_0}|Z|=\mathbb E_{Q_1}|Z|=\log3<\infty$, $\mathbb E_{Q_0}Z=-(1/2)\log3<0$, and $\mathbb E_{Q_1}Z=(1/2)\log3>0$. The hypotheses of [F5] hold by steps 1.1 and 2.1, so its general termination theorem gives almost-sure stopping under both laws. [A1, given, F5, step 1.1, step 2.1, algebra]
+
+3.2 Put $S_t=\sum_{i=1}^tX_i$. By step 2.1 and the values in step 1.1, $L_t=\prod_{i=1}^t\lambda(X_i)=3^{S_t}(1/3)^{t-S_t}=3^{2S_t-t}$. [step 1.1, step 2.1, algebra]
+
+4.1 The boundaries are $4$ and $1/4$. Starting a two-observation block at $L=1$, the first observation gives $L=3$ or $1/3$, both strictly between the boundaries. A repeated outcome in the second observation gives $L=9$ for $11$ or $L=1/9$ for $00$, crossing the upper or lower boundary; a mixed pair multiplies by $1$ and returns to $L=1$. Induction over successive disjoint pairs shows that the procedure stops at the first pair with equal outcomes. [F2, step 3.2, algebra]
+
+5.1 Under either hypothesis, a pair is mixed with probability $2(1/4)(3/4)=3/8$. The disjoint pairs are independent by [F1], so the probability that the first $k$ pairs are all mixed is $(3/8)^k\to0$. Thus the pair calculation also verifies almost-sure stopping. [F1, step 4.1, algebra]
+
+5.2 Under $P_0$, each disjoint pair is $11$ with probability $1/16$, $00$ with probability $9/16$, and mixed with probability $3/8$. The event of a type-I error is that the first pair that is not mixed is $11$, so $P_0(\text{type-I error})=\sum_{k=1}^{\infty}(3/8)^{k-1}(1/16)=(1/16)/(1-3/8)=1/10$. Under $P_1$, the probability of $00$ is $1/16$ and of a mixed pair is again $3/8$, so the event of a type-II error gives the same geometric sum and probability $1/10$. [F1, step 4.1, algebra]
+
+6.1 Since $1/10\le1/4=\alpha=\beta$, these exact terminal errors satisfy both bounds in [F4]; the hypotheses for that theorem's procedure hold by step 2.1. [A1, F4, step 2.1, step 5.2, algebra] ∎

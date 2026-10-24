@@ -1,0 +1,180 @@
+{
+  "id": "thm-line-bundle-sections-define-projective-map",
+  "group": "dscm_009",
+  "agent": "/root/rendering_repair_supervisor2/dscm_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A concrete two-square diagram materially clarifies which open inclusions and local restrictions glue; the ratio and frame identities then explain why both charts give the same morphism and line-bundle identification. Original tiles have no such illustration. This is an explanatory addition, not a missing proof.",
+      "action": "Added final Remarks with six-object tikzcd, overlap coordinates and compatible frame relation.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile 03 visibly prints literal \\qed outside math; proof-layout also reports invalid final tags and missing rendered chips at step 6.1.",
+      "action": "Replaced only the terminal \\qed with Unicode \u220e, restoring proof chips and QED rendering.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added explanatory open-cover/chart gluing diagram and adjacent ratios/frame explanation; replaced literal terminal QED command.",
+  "source_lines_after": [
+    88,
+    90,
+    93,
+    98,
+    99,
+    100,
+    101,
+    102,
+    105,
+    108,
+    110,
+    111,
+    113
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "X_ij = X_si intersect X_sj, U_ij = U_i intersect U_j; horizontal arrows are the four open inclusions; vertical maps have domains/codomains X_ij\u2192U_ij, X_si\u2192U_i, X\u2192P^n_S.",
+      "justification": "F1-F3 and steps 1.1-1.2: the nonvanishing opens cover X, s_i is a frame on X_si, and s_j/s_i is a unit on X_ij, so phi_i restricts into U_ij. Read actual def-relative-projective-space-standard-charts, def-invertible-sheaf and def-globally-generated-sheaf."
+    },
+    {
+      "relation": "Left square: inclusion U_ij\u2192U_i composed with phi_ij equals phi_i restricted to X_ij; exchanging i,j gives the same overlap morphism. Right square: inclusion U_i\u2192P^n_S composed with phi_i equals phi restricted to X_si.",
+      "justification": "Step 2.1 checks equality after chart transition; step 3.1 and local gluing lemma define phi by these restrictions. All seven arrows have the displayed source/target; hooks only mark open inclusions, not the vertical morphisms."
+    },
+    {
+      "relation": "For ell distinct from i,j, (s_ell/s_i)/(s_j/s_i)=s_ell/s_j; reciprocal coordinate is 1/(s_j/s_i)=s_i/s_j.",
+      "justification": "Step 2.1 and standard-chart definition; division is legitimate only on X_ij where both sections trivialize L. No rational map outside the stated opens is asserted."
+    },
+    {
+      "relation": "Frame e_j=x_j^(i)e_i pulls back to s_j=(s_j/s_i)s_i; local isomorphisms phi*O(1)\u2192L glue.",
+      "justification": "Actual twisting-sheaf convention in def-very-ample-invertible-sheaf-relative and step 4.1 use precisely this direction of transition. Diagram is illustrative and no step relies on it; existing hypotheses, proof and nonimmersion caveat remain."
+    }
+  ],
+  "guard": {
+    "before_raw_sha256": "d9b0cc5af583ef8557d07ea469a58c327478c3f8dc91aa0abda7bbdca1b6e396",
+    "immediately_before_first_edit": "matched queue before_raw_sha256",
+    "after_raw_sha256": "8f4f3dc68f66ef6a2824147dc4a1ecd9d70bc05488990549b30628a617e5ea24",
+    "all_frontmatter_bytes_unchanged": true,
+    "original_body_preserved_except_qed": true
+  },
+  "original_evidence": {
+    "directory": "research/math-library-rendering-audit-2026-10-23/scheme-theory",
+    "path_resolution": "Finding evidence_dir correctly locates screenshots; inspection_dir diagram-supplement does not contain them. Actual hashes match recorded findings.",
+    "standalone_original_resolution_views": [
+      "screenshots/thm-line-bundle-sections-define-projective-map--01.png",
+      "screenshots/thm-line-bundle-sections-define-projective-map--02.png",
+      "screenshots/thm-line-bundle-sections-define-projective-map--03.png"
+    ],
+    "frozen_current_comparison": "Current raw source exactly equalled archived before before first edit."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-line-bundle-sections-define-projective-map.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects",
+      "preexisting_failure": "Initial run failed at 6.1 with missing-or-invalid-tags and rendered-chip-mismatch due to literal terminal QED command; repaired."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-line-bundle-sections-define-projective-map.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-line-bundle-sections-define-projective-map.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dscm009 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-line-bundle-sections-define-projective-map --out research/math-library-rendering-repairs-2026-10-23/previews/dscm009-reviewed",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dscm009-reviewed/manifest.json",
+    "manifest_sha256": "ee60c9f1f5d86b680e2a067bfcd285601ad60e3173d4e56560526657f53e7f13",
+    "source_binding": {
+      "id": "thm-line-bundle-sections-define-projective-map",
+      "status": "published",
+      "source": "items/thm-line-bundle-sections-define-projective-map.md",
+      "source_sha256": "8f4f3dc68f66ef6a2824147dc4a1ecd9d70bc05488990549b30628a617e5ea24",
+      "snapshot": "snapshots/thm-line-bundle-sections-define-projective-map.md",
+      "html": "html/thm-line-bundle-sections-define-projective-map.html",
+      "html_sha256": "bf6cd07649d1bd2cf84acf70febe640a6fbdb8714dad02757c47d43b7aaa4fc7",
+      "reference_map_sha256": "bcf6764f822de96488059a97bf0492aeae517b84601d60ec31d4a2c8bad0e899"
+    },
+    "capture": {
+      "capture_revision": 2,
+      "id": "thm-line-bundle-sections-define-projective-map",
+      "height": 3305,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/thm-line-bundle-sections-define-projective-map--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "c0c898bf185645d5d0094d1dddbaca1d35eb38826573932e4a74147e153ab965",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/thm-line-bundle-sections-define-projective-map--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "1526df52640882e710010d442dfe94c6459bf077f94d532959b20be89996ff72",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/thm-line-bundle-sections-define-projective-map--03.png",
+          "y": 2600,
+          "width": 1200,
+          "height": 705,
+          "sha256": "13d863ba7a4a4fb18b8b8cede6713d732851a9351c068485061b3c272b4ac71a",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 187,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T04:26:36.581Z"
+    },
+    "visual_check": "All three final PNGs independently viewed standalone at original resolution. Final dark native output displays all six object labels, three vertical labelled ordinary arrows, four horizontal inclusion arrows and both squares without clipping or overlap. Light labels/arrows contrast against black; no endpoint rings in this diagram. Final QED and step 6.1 chips render.",
+    "earlier_previews": [
+      "previews/dscm009",
+      "previews/dscm009-final"
+    ],
+    "limits": [
+      "Local native ItemBody SSR preview only; no production route, navigation, metadata Sources footer, publication or workflow gates.",
+      "Reference title map has 13 unrelated parse diagnostics; none affects the diagram.",
+      "Focused mathematical interface checks, not a full proof audit or external-source verification."
+    ]
+  },
+  "remaining_issues": [],
+  "completed_at": "2026-10-24T04:27:27.836953+00:00"
+}

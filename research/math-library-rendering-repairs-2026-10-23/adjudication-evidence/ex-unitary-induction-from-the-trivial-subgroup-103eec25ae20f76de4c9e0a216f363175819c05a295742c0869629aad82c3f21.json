@@ -1,0 +1,118 @@
+{
+  "id": "ex-unitary-induction-from-the-trivial-subgroup",
+  "agent": "/root/rendering_repair_coordinator/rtg_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other: proof/source-section-boundary-leak",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged PNG visibly prints literal ## Sources inside proof step 2.1. Frozen and current pre-edit line 53 have the heading and citation joined to that paragraph; Markdown cannot recognize this inline level-two heading.",
+      "action": "Replace the single ASCII space immediately before ## Sources with two LF newlines, and the single ASCII space immediately after Sources before Bekka with two LF newlines. No non-whitespace bytes were changed. Then relocate only the structural ∎ marker, together with its preceding separator space, from the end of the source note to immediately after the existing final proof-step tags.",
+      "status": "repaired; all three final scoped checks pass and fresh native original-resolution view confirms section boundary and proof QED"
+    }
+  ],
+  "changed": true,
+  "correction": {
+    "exact_replacements": [
+      {
+        "before": "[A1, F1, F2, F3, step 1.1] ## Sources Bekka",
+        "after": "[A1, F1, F2, F3, step 1.1]\n\n## Sources\n\nBekka"
+      },
+      {
+        "before": "unitarity. [A1, F1, F2, F3, step 1.1]\n",
+        "after": "unitarity. [A1, F1, F2, F3, step 1.1] ∎\n"
+      },
+      {
+        "before": "All relevant lines were inspected. [F3, F1, A1, F2, step 1.1] ∎",
+        "after": "All relevant lines were inspected. [F3, F1, A1, F2, step 1.1]"
+      }
+    ],
+    "explanation": "Two original ASCII spaces adjacent to ## Sources were each replaced by two LF newlines. Subsequently the sole structural QED marker ∎ and its preceding ASCII separator space were removed from the source-note suffix and appended to actual final proof step 2.1 after its existing tags. Both tag lists, complete mathematical argument, step order and all source-note prose are exact; no semantic reconstruction.",
+    "before_raw_sha256": "b38d2757a01c481c2d66f2ea2c040376b00846deac73fa60be208e0d50c58ac3",
+    "after_raw_sha256": "a2286b6dad794ffcc2dd9e4eb51ea7a0091ab2b53492e70d982fa2232e41196f",
+    "guard": "Immediately before item write, raw SHA256 asserted equal to queue before_raw_sha256 b38d2757a01c481c2d66f2ea2c040376b00846deac73fa60be208e0d50c58ac3.",
+    "followup_before_raw_sha256": "cfecfdd04acd5fcbcc0b3054d466d6d976c64ac9237db87603fed24f8cb1cf7b",
+    "followup_guard": "Immediately before structural QED relocation, asserted current raw SHA256 equals coordinator-provided followup preimage."
+  },
+  "source_lines_after": {
+    "proof_step_2_1": 53,
+    "sources_heading": 55,
+    "source_note": 57
+  },
+  "mathematical_meaning_preserved": true,
+  "metadata_status_preservation": "Entire original frontmatter byte-identical; status: published unchanged. Apart from whitespace and relocation of the sole structural QED marker, all bytes preserve exact original sequence.",
+  "visual_inspection": {
+    "original": "research/math-library-rendering-audit-2026-10-23/representation-theory/screenshots/ex-unitary-induction-from-the-trivial-subgroup--01.png",
+    "fresh": "research/math-library-rendering-repairs-2026-10-23/rtg_004-preview-v2/screenshots/ex-unitary-induction-from-the-trivial-subgroup--01.png",
+    "detail": "original",
+    "standalone_views": true,
+    "result": "Viewed final native PNG standalone at original resolution after final edit: proof step 2.1 ends within proof box with QED at upper right; Sources is a distinct heading below proof box; original citation and tag text retained, with QED no longer attached to source note."
+  },
+  "remaining_issues": [],
+  "report_version": 2,
+  "supersedes": {
+    "archive": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/ex-unitary-induction-from-the-trivial-subgroup.ea4fbeb16c9004aba08b5869fea58fbaade42399c9d46c1ba34c1325eb76cada.json",
+    "sha256": "ea4fbeb16c9004aba08b5869fea58fbaade42399c9d46c1ba34c1325eb76cada",
+    "reason": "Coordinator authorized structural QED relocation after first report completed, retaining exact original report archive."
+  },
+  "prior_checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-unitary-induction-from-the-trivial-subgroup.md --json",
+      "exit_code": 1,
+      "result": "1 file checked, 1 failed; status fail, strategy direct, error no-qed",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/precheck.json"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-unitary-induction-from-the-trivial-subgroup.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors [], warnings []",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/rendercheck.json"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-unitary-induction-from-the-trivial-subgroup.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 2 steps, 0 defects",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/proof-layout.txt"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts research/math-library-rendering-repairs-2026-10-23/before/ex-unitary-induction-from-the-trivial-subgroup.md --json",
+      "exit_code": 0,
+      "result": "Frozen original passes because original terminal QED remains attached to the merged proof/source paragraph. The repaired section boundary exposes missing QED inside the proof.",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/before-precheck.json"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-unitary-induction-from-the-trivial-subgroup --out research/math-library-rendering-repairs-2026-10-23/rtg_004-preview",
+      "exit_code": 0,
+      "result": "1 item; 1 tile; 16 reference map diagnostics; actual local native renderer preview generated",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-preview/manifest.json"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-unitary-induction-from-the-trivial-subgroup.md --json",
+      "exit_code": 0,
+      "result": "1 file checked; 0 failed; status pass; strategy direct",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/precheck-v2.json"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-unitary-induction-from-the-trivial-subgroup.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors [], warnings []",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/rendercheck-v2.json"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-unitary-induction-from-the-trivial-subgroup.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 2 steps, 0 defects",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-checks/proof-layout-v2.txt"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-unitary-induction-from-the-trivial-subgroup --out research/math-library-rendering-repairs-2026-10-23/rtg_004-preview-v2",
+      "exit_code": 0,
+      "result": "1 item, 1 tile, 16 reference map diagnostics; actual native local renderer preview",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/rtg_004-preview-v2/manifest.json"
+    }
+  ]
+}

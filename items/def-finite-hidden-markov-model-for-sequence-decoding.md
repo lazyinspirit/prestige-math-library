@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-finite-hidden-markov-model-for-sequence-decoding.json
+  precheck: n/a
 id: def-finite-hidden-markov-model-for-sequence-decoding
 kind: definition
 title: Finite hidden Markov models for sequence decoding
@@ -14,12 +17,6 @@ axiom_use: "No choice axiom is used; the joint law is defined on finite sets."
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Manolis Kellis, 6.096 Algorithms for Computational Biology, Lecture 7: Gene Finding and HMMs, MIT OpenCourseWare (Spring 2005)"
@@ -46,3 +43,30 @@ the conditional path mass is $p(z\mid y)=p(z,y)/p(y)$, and a
 the conditional path mass is undefined, so there is no posterior sequence MAP
 path for that observation sequence. A zero transition or emission factor gives
 that hidden path zero joint mass.
+
+
+## Remarks
+
+For $T=3$, the diagram separates the hidden-state transitions from the
+observations emitted at each time. Each hidden label $z_t$ lies in $S$ and
+each observation label $y_t$ lies in $Y$. The annotation $\pi(z_1)$ is the
+initial weight; a horizontal arrow contributes $A(z_{t-1},z_t)$ and a
+downward arrow contributes $B(z_t,y_t)$. Multiplying these five edge
+factors and the initial weight gives the joint mass defined above.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \node[draw,circle] (z1) at (0,0) {$z_1$};
+  \node[draw,circle] (z2) at (3.4,0) {$z_2$};
+  \node[draw,circle] (z3) at (6.8,0) {$z_3$};
+  \node[draw,rectangle] (y1) at (0,-1.8) {$y_1$};
+  \node[draw,rectangle] (y2) at (3.4,-1.8) {$y_2$};
+  \node[draw,rectangle] (y3) at (6.8,-1.8) {$y_3$};
+  \node at (0,0.9) {$\pi(z_1)$};
+  \draw[->] (z1) -- node[above] {$A(z_1,z_2)$} (z2);
+  \draw[->] (z2) -- node[above] {$A(z_2,z_3)$} (z3);
+  \draw[->] (z1) -- node[right] {$B(z_1,y_1)$} (y1);
+  \draw[->] (z2) -- node[right] {$B(z_2,y_2)$} (y2);
+  \draw[->] (z3) -- node[right] {$B(z_3,y_3)$} (y3);
+\end{tikzpicture}
+```

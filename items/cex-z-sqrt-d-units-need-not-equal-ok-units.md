@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-z-sqrt-d-units-need-not-equal-ok-units.json
+  precheck: pass
 id: cex-z-sqrt-d-units-need-not-equal-ok-units
 kind: counterexample
 title: "Units of Z[√5] are a proper subgroup of the units of its maximal order"
@@ -22,13 +25,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   references:
     - title: "William A. Stein, Algebraic Number Theory: A Computational Approach"
@@ -77,7 +73,7 @@ itself is a unit of the maximal order that is not in $\mathbb Z[\sqrt5]$.
 
 ## Counterexample
 
-**Proof technique:** direct; identify the units of the two orders by solving the norm equations $x^2-5y^2=\pm1$ and $x^2-5y^2=\pm4$, and compare the two cyclic groups through the common generator $\varepsilon$.
+**Proof technique:** direct; identify the units of the two orders by solving the norm equations x² − 5y² = ±1 and x² − 5y² = ±4, and compare the two cyclic groups through the common generator epsilon.
 
 1.1 The maximal order is $\mathcal O_K=\mathbb Z[\varepsilon]$ with $\varepsilon=(1+\sqrt5)/2$, and $\mathbb Z[\sqrt5]\subsetneq\mathcal O_K$; its elements are the $(x+y\sqrt5)/2$ with $x\equiv y\pmod2$, of nonzero norm when the element is nonzero because the norm is a product of the two embeddings. [F1]
 

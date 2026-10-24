@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing.json
+  precheck: pass
 id: ex-the-dual-of-ell-two-is-ell-two-by-the-counting-measure-pairing
 kind: example
 title: "Every bounded linear functional on $\\ell^2$ is summation against a unique $\\ell^2$ sequence"
@@ -11,13 +14,6 @@ generation:
   role: example
 deps: [cor-ell-p-duality-by-counting-measure, rem-ell-p-is-l-p-of-counting-measure]
 proof_strategy: "Specialize the counting-measure duality corollary to $p=q=2$ and rewrite the integral pairing as an ordinary series."
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Section 6.2"
@@ -44,7 +40,7 @@ $$\|\Lambda\|=\|b\|_{\ell^2}.$$
 
 ## Verification
 
-**Proof technique:** Specialize the counting-measure duality corollary to $p=q=2$ and rewrite the integral pairing as an ordinary series.
+**Proof technique:** Specialize the counting-measure duality corollary to p = q = 2 and rewrite the integral pairing as an ordinary series.
 
 1.1 Apply [L1] with $p=q=2$. Then there is a unique sequence $b \in \ell^2$ such that $$\Lambda(a)=\sum_{n=0}^\infty a_nb_n$$ for every $a \in \ell^2$, and $$\|\Lambda\|=\|b\|_{\ell^2}.$$ [L1, given]
 

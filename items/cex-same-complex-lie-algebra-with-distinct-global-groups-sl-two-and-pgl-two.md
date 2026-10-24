@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two.json
+  precheck: pass
 id: cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two
 kind: counterexample
-title: SL_2 and PGL_2 have the same Lie algebra but differ globally
+title: $\mathrm{SL}_2$ and $\mathrm{PGL}_2$ have the same Lie algebra but differ globally
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -19,8 +22,7 @@ sources:
       locator: "§3.8 on connected groups with the same Lie algebra, printed pp. 39-45"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement refuted
@@ -33,9 +35,9 @@ isomorphic.
 
 **Given:** Assume $\mathrm{AC}_\omega$. The groups $\operatorname{SL}_2(\mathbb C)$ and $\operatorname{PGL}_2(\mathbb C)=\operatorname{GL}_2(\mathbb C)/(\mathbb C^{\times}I)$, and their Lie algebras.
 
-[L1] The Möbius group is $\operatorname{GL}_2(\mathbb C)/(\mathbb C^{\times}I)=\operatorname{PGL}_2(\mathbb C)$, so $\operatorname{PGL}_2(\mathbb C)$ is a quotient of $\operatorname{GL}_2(\mathbb C)$ by the normal subgroup $\mathbb C^{\times}I$ ([[thm-mobius-group-and-projective-linear-identification]], [[def-invertible-matrix-and-general-linear-group]]).
+[L1] The Möbius group is $\operatorname{GL}_2(\mathbb C)/(\mathbb C^{\times}I)=\operatorname{PGL}_2(\mathbb C)$, so $\operatorname{PGL}_2(\mathbb C)$ is a quotient of $\operatorname{GL}_2(\mathbb C)$ by the normal subgroup $\mathbb C^{\times}I$ ([[thm-mobius-group-and-projective-linear-identification|Möbius transformations form a group and identify with the projective linear quotient of $\mathrm{GL}_2(\mathbb C)$]], [[def-invertible-matrix-and-general-linear-group]]).
 
-[L2] The traceless matrices form the complex Lie algebra $\mathfrak{sl}_2(\mathbb C)$ under the commutator, with basis $e,f,h$ satisfying $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$. [[def-special-linear-lie-algebra-sl-two]].
+[L2] The traceless matrices form the complex Lie algebra $\mathfrak{sl}_2(\mathbb C)$ under the commutator, with basis $e,f,h$ satisfying $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$. [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]].
 
 [A1] Countable choice is assumed for the following differential-geometric interfaces. [[def-countable-choice]].
 

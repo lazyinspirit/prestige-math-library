@@ -1,0 +1,113 @@
+{
+  "id": "ex-covariance-of-overlapping-brownian-increments",
+  "agent": "/root/dprob_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tiles show the complete interval-overlap formula and proof but no illustration. A common-time-axis schematic materially connects min/max to geometric overlap and distinguishes endpoint contact from positive length. This is a warranted expository addition under the expanded diagram scope, not a defect in the existing formula.",
+      "action": "Appended a final Remarks section with two TikZ time-interval panels: partial overlap and endpoint contact.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explicitly schematic interval diagram outside Facts and Verification; all original source, including claims, hypotheses, complete proof, references, dependencies and published status, is byte-preserved.",
+  "source_lines_after": {
+    "remarks": [
+      63,
+      71
+    ],
+    "tikz": [
+      73,
+      101
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Two closed real time intervals [s,t] and [u,v], with 0<=s<=t and 0<=u<=v; vertical levels distinguish intervals and carry no probabilistic meaning.",
+      "check": "Each panel projects both intervals onto a shared horizontal time scale. Dots represent included endpoints; neither panel claims equality of Brownian increments."
+    },
+    {
+      "objects": "Upper panel: s=0.7, u=2.6, t=4.5, v=6.4 in drawing coordinates.",
+      "check": "s<u<t<v. Intersection is [u,t]; the thick axis segment runs exactly from x=2.6 to x=4.5. Thus length=t-u=min(t,v)-max(s,u), matching Verification step 3.1. Dashed guides have matching x coordinates."
+    },
+    {
+      "objects": "Lower panel: s=0.7, t=u=3.5, v=6.4 in drawing coordinates.",
+      "check": "s<t=u<v. Intersection is the singleton {t}; the axis shows one point, with no thick segment. min(t,v)-max(s,u)=t-u=0, matching step 2.1."
+    },
+    {
+      "objects": "All six strict admissible endpoint orders.",
+      "check": "s<t<u<v and u<v<s<t give 0; s<u<t<v gives t-u; u<s<v<t gives v-s; s<u<v<t gives v-u; u<s<t<v gives t-s. These equal max(0,min(t,v)-max(s,u)) and follow by four-minimum expansion in step 1.1 and covariance symmetry in step 2.1."
+    },
+    {
+      "objects": "Coincident endpoints and degenerate intervals.",
+      "check": "The same inequalities partition after assuming s<=u into t<=u, u<t<=v, and u<=v<t (steps 2.1–4.1). Equal starts or ends do not change the formulas; t=u gives zero; s=t or u=v gives zero; identical intervals give t-s, including all endpoints zero. These cover shared endpoints, containment and degenerate intervals without relying on the picture."
+    },
+    {
+      "objects": "Independent algebra check.",
+      "check": "Enumerated all 441 ordered endpoint quadruples on {0,1,2,3,4,5}; the four-minimum expression equals the nonnegative overlap formula in every case. This finite check supplements the symbolic exhaustive case reasoning, rather than proving the real-endpoint result."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-covariance-of-overlapping-brownian-increments.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-covariance-of-overlapping-brownian-increments.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass",
+      "strategy": "direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-covariance-of-overlapping-brownian-increments.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "preservation": "Compared original full bytes: current starts with the complete frozen original; only final Remarks appended."
+  },
+  "original_evidence": {
+    "path_discrepancy": "Declared diagram-supplement/screenshots paths do not exist. Authentic tiles found one category directory above; both SHA256 values exactly match queue.",
+    "directory": "research/math-library-rendering-audit-2026-10-23/probability/screenshots",
+    "inspected_original_resolution": [
+      "--01.png",
+      "--02.png"
+    ],
+    "sha256": [
+      "f09865fe7b704f33cdfab478539195afc6b2ce5e2f54b0f43c1bcb902a375e47",
+      "dfe088b489cc4698824c5f2eda4aebb8aade1c5e99f8ff55001e4b2902a4eaab"
+    ]
+  },
+  "local_visual_check": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dprob-011-final",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dprob-011-final/manifest.json",
+    "source_sha256": "a8ed0694181977d4bfbeb42ff6b14455b8ef13db19a9825381fb29d1fd610eb2",
+    "capture_receipt_sha256": "734fe0c0a65db1cc5c59d84294a489c31c7b7fd7d91a42574b63e9dfef487992",
+    "inspected_standalone_original_resolution": [
+      "screenshots/ex-covariance-of-overlapping-brownian-increments--01.png",
+      "screenshots/ex-covariance-of-overlapping-brownian-increments--02.png"
+    ],
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "observation": "Native dark-background output shows both full panels, readable endpoint/time labels, matching vertical guides, closed endpoint dots, a clearly thick positive overlap segment and a singleton zero-length contact. No clipping or overlap defect observed.",
+    "limitations": "Local ItemBody/native TikZ renderer preview, not production route; unrelated reference-map diagnostics (13) remain outside scope. An initial pre-edit preview dprob-011 captured unchanged bytes and is not final repair evidence."
+  },
+  "remaining_issues": []
+}

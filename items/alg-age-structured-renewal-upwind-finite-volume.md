@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-age-structured-renewal-upwind-finite-volume.json
+  precheck: n/a
 id: alg-age-structured-renewal-upwind-finite-volume
 kind: algorithm
 title: Finite-volume upwind scheme for age renewal transport
@@ -16,8 +19,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"
@@ -41,3 +42,43 @@ Initialize birth, quadrature-status, and outflow records as empty, and set cumul
 $$M_j^{k+1}=M_j^k-\Delta t(F_j^k-F_{j-1}^k)-\Delta t\,\mu_jM_j^k.$$
 
 The right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim.
+
+
+## Remarks
+
+The schematic below shows a time-$k$ cell balance and the two boundary fluxes. The upper panel represents any cell $1\le j\le J$; the lower panel shows a representative grid with $J\ge3$, with intermediate cells omitted. The mortality arrow is a loss, and the cutoff arrow is discarded outflow, not a renewal return path. These illustrations do not change the algorithm, including the cases $J=1$ and $J=2$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\draw (3,1) rectangle (7,2.4);
+\node at (5,2) {$C_j=[a_{j-1},a_j]$};
+\node at (5,1.5) {$M_j^k$};
+\draw[->] (1,1.7) -- (3,1.7);
+\node at (1.8,2.15) {$F_{j-1}^k$};
+\draw[->] (7,1.7) -- (9,1.7);
+\node at (8.2,2.15) {$F_j^k$};
+\draw[->] (5,1) -- (5,0.2);
+\node[below] at (5,0.2) {$\mu_j M_j^k$};
+\node[below] at (3,1) {$a_{j-1}$};
+\node[below] at (7,1) {$a_j$};
+\draw[->] (0,-2) -- (10,-2);
+\draw (1,-2.15) -- (1,-1.85);
+\draw (3,-2.15) -- (3,-1.85);
+\draw (7,-2.15) -- (7,-1.85);
+\draw (9,-2.15) -- (9,-1.85);
+\node[below] at (1,-2.15) {$a_0=0$};
+\node[below] at (3,-2.15) {$a_1$};
+\node[below] at (7,-2.15) {$a_{J-1}$};
+\node[below] at (9,-2.15) {$a_J=A$};
+\node at (2,-1.65) {$C_1$};
+\node at (5,-1.65) {$\cdots$};
+\node at (8,-1.65) {$C_J$};
+\draw[->] (0,-1) -- (1.5,-1);
+\node[above] at (0.7,-1) {$F_0^k=B_h^k$};
+\draw[->] (8.5,-1) -- (10,-1);
+\node[above] at (9.3,-1) {$F_J^k=u_J^k$};
+\node[right] at (10,-2) {$a$};
+\end{tikzpicture}
+```
+
+In the upper panel, fluxes are rates: the step increments multiply them by $\Delta t$. Thus the cell receives $\Delta t F_{j-1}^k$, loses $\Delta t F_j^k$ to transport, and loses $\Delta t\,\mu_j M_j^k$ to mortality, exactly as in the update. The interior flux is $F_j^k=u_j^k=M_j^k/\Delta a$. At the two ends, $F_0^k=B_h^k$ supplies newborn inflow and $O_h^{k+1}=O_h^k+\Delta t F_J^k$ records discarded cutoff outflow. The defining formulas above remain independent of the illustration.

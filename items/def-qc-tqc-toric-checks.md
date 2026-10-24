@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-qc-tqc-toric-checks.json
+  precheck: pass
 id: def-qc-tqc-toric-checks
 kind: definition
 title: Toric star and plaquette checks
@@ -60,3 +63,39 @@ All indices are in $\mathbb Z_L$.
 
 2.1 Each factor in either product is Hermitian and squares to the identity by [F2]. The factors act on distinct tensor coordinates, so [F4] makes their two compositions agree on every elementary tensor; those tensors span the register by [F5]. Therefore each full product is Hermitian and squares to the identity. These are the star and plaquette checks used below. [F2, F3, F4, F5, step 1.1, algebra] ∎
 
+## Remarks
+
+The two local patches below distinguish the support of the star check
+$A_{i,j}$ (left, one $X$ on each drawn edge) from that of the plaquette check
+$B_{i,j}$ (right, one $Z$ on each drawn edge). They are patches in the square
+tiling before the periodic identification: coordinates differing by $L$ in
+either direction are identified, and every displayed index is read modulo $L$.
+The four star edges meet at $q_{i,j}$; the four plaquette edges bound
+$f_{i,j}$. These are precisely the edge lists in [F1]. The verification above
+is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (0,2.2) {$A_{i,j}:\ X\ \mathrm{support}$};
+\draw[very thick,blue] (-1.5,0) -- (0,0) -- (1.5,0);
+\draw[very thick,blue] (0,-1.5) -- (0,0) -- (0,1.5);
+\fill (0,0) circle (2pt);
+\node[below right] at (0,0) {$q_{i,j}$};
+\node[above] at (-0.85,0) {$h_{i-1,j}$};
+\node[above] at (0.85,0) {$h_{i,j}$};
+\node[left] at (0,-0.9) {$v_{i,j-1}$};
+\node[left] at (0,0.9) {$v_{i,j}$};
+\node at (6,2.2) {$B_{i,j}:\ Z\ \mathrm{support}$};
+\draw[very thick,orange] (4.5,-1.5) -- (7.5,-1.5) -- (7.5,1.5) -- (4.5,1.5) -- (4.5,-1.5);
+\fill (4.5,-1.5) circle (2pt);
+\fill (7.5,-1.5) circle (2pt);
+\fill (7.5,1.5) circle (2pt);
+\fill (4.5,1.5) circle (2pt);
+\node at (6,0) {$f_{i,j}$};
+\node[below] at (6,-1.5) {$h_{i,j}$};
+\node[right] at (7.5,0) {$v_{i+1,j}$};
+\node[above] at (6,1.5) {$h_{i,j+1}$};
+\node[left] at (4.5,0) {$v_{i,j}$};
+\node[below left] at (4.5,-1.5) {$q_{i,j}$};
+\end{tikzpicture}
+```

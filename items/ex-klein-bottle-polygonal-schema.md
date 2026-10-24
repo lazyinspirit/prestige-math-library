@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-klein-bottle-polygonal-schema.json
+  precheck: pass
 id: ex-klein-bottle-polygonal-schema
 kind: example
 title: "Klein bottle as two crosscaps"
@@ -21,9 +24,7 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 4, printed pp.5–6"
 pipeline_run: frontier-36-complete
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -105,3 +106,39 @@ corresponding block word, and the standard word $a\,b\,a^{-1}b$ of
 backwards. The argument uses only the finite cut-and-paste moves of
 [[lem-polygonal-schema-reduction-moves]] and never the classification theorem
 or the Axiom of Choice.
+
+
+The arrows in the square below give the matching boundary parameters of
+step 1.1. The bottom and right sides form the $a$ pair, and the top and
+left sides form the $b$ pair. Read counterclockwise from $v_0$ to obtain
+$aabb$; all four arrows agree with that boundary traversal.
+
+```tikz
+\begin{tikzpicture}[scale=1.2]
+\draw[thick] (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+\draw[thick,->] (1.1,0) -- (1.9,0);
+\draw[thick,->] (3,1.1) -- (3,1.9);
+\draw[thick,->] (1.9,3) -- (1.1,3);
+\draw[thick,->] (0,1.9) -- (0,1.1);
+\node[below] at (1.5,0) {$a$};
+\node[right] at (3,1.5) {$a$};
+\node[above] at (1.5,3) {$b$};
+\node[left] at (0,1.5) {$b$};
+\fill (0,0) circle (1.5pt);
+\fill (3,0) circle (1.5pt);
+\fill (3,3) circle (1.5pt);
+\fill (0,3) circle (1.5pt);
+\node[below left] at (0,0) {$v_0$};
+\node[below right] at (3,0) {$v_1$};
+\node[above right] at (3,3) {$v_2$};
+\node[above left] at (0,3) {$v_3$};
+\node at (1.5,1.5) {$Q$};
+\end{tikzpicture}
+```
+
+For $0\leq t\leq1$, the arrows specify $(t,0)\sim(1,t)$ and
+$(1-t,1)\sim(0,1-t)$. Thus $v_0\sim v_1\sim v_2\sim v_3$,
+as computed in step 1.1. This is gluing data for the two-crosscap schema,
+not an embedding of the quotient surface. The verification of its equivalence
+to the standard Klein-bottle word in step 1.2 and the rest of the proof are
+independent of this illustration.

@@ -1,0 +1,35 @@
+{
+  "id": "lem-arith-coherent-kunneth-and-proper-image-dual",
+  "agent": "/root/rendering_repair_coordinator/ag_010",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original-resolution tile 01 shows correctly rendered statement mathematics but ends before the flagged banner. Independent original-resolution tile 02 shows literal $H^1$ and $\\varphi_{\\mathcal L}$ in the uppercase technique banner while adjacent proof mathematics renders normally. This is the plain-text banner renderer limitation, not a malformed mathematical formula.",
+      "action": "Replaced the two formulas in the technique summary with equivalent prose: first coherent cohomology and the Mumford homomorphism.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed only the proof-technique summary on line 70 to equivalent plain prose supported by the plain-text banner renderer.",
+  "source_lines_after": {
+    "70": "**Proof technique:** direct: bound first coherent cohomology by a Hopf-algebra primitivity argument, identify the Picard tangent space, then control the image of the Mumford homomorphism and its kernel."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer still treats technique banners as plain React text with CSS uppercase; the local prose workaround avoids raw LaTeX."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-arith-coherent-kunneth-and-proper-image-dual.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "check": "Exact frontmatter comparison with frozen before file",
+      "result": "identical, including status: published"
+    }
+  ]
+}

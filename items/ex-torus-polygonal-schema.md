@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-torus-polygonal-schema.json
+  precheck: pass
 id: ex-torus-polygonal-schema
 kind: example
 title: "Torus commutator polygon"
@@ -21,9 +24,7 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 2, printed pp.3–5"
 pipeline_run: frontier-36-complete
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -100,3 +101,37 @@ the pairing is orientation compatible
 The word $a\,b\,a^{-1}b^{-1}$ is the genus-one case $g=1$ of the commutator
 word $\prod_{i=1}^{g}a_ib_ia_i^{-1}b_i^{-1}$, and the computation here is the
 $g=1$ instance of the cell count used later on the A page.
+
+
+The arrows below give the reference directions of the paired sides: both
+$a$-arrows point right and both $b$-arrows point up. Reading the boundary
+counterclockwise from the lower left corner gives $a\,b\,a^{-1}b^{-1}$.
+All four corners labelled $v$ represent the same quotient vertex.
+
+```tikz
+\begin{tikzpicture}[scale=1.3]
+  \draw[thick] (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+  \draw[thick,->] (1.1,0) -- (1.9,0);
+  \draw[thick,->] (1.1,3) -- (1.9,3);
+  \draw[thick,->] (0,1.1) -- (0,1.9);
+  \draw[thick,->] (3,1.1) -- (3,1.9);
+  \node[below] at (1.5,0) {$a$};
+  \node[above] at (1.5,3) {$a$};
+  \node[left] at (0,1.5) {$b$};
+  \node[right] at (3,1.5) {$b$};
+  \node at (1.5,1.5) {$Q=[0,1]^2$};
+  \fill (0,0) circle (1.5pt);
+  \fill (3,0) circle (1.5pt);
+  \fill (3,3) circle (1.5pt);
+  \fill (0,3) circle (1.5pt);
+  \node[below left] at (0,0) {$v$};
+  \node[below right] at (3,0) {$v$};
+  \node[above right] at (3,3) {$v$};
+  \node[above left] at (0,3) {$v$};
+\end{tikzpicture}
+```
+
+The identifications are $(s,0)\sim(s,1)$ and $(0,t)\sim(1,t)$, so the
+quotient has one vertex, two edges and one face. Under the homeomorphism
+of step 2.1, the quotient map is $f(s,t)=(p(s),p(t))$. The verification
+above is independent of this illustration.

@@ -1,0 +1,96 @@
+{
+  "id": "lem-rational-ball-b2-bounds-lens-l4",
+  "agent": "/root/rendering_repair_coordinator/knot_042",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --03 visibly prints the complete tikzpicture source rather than a diagram. The authored tilde fence is not recognized by this renderer as a TikZ block; replacing only its delimiters with backticks activates native rendering.",
+      "action": "Replaced the opening ~~~tikz and closing ~~~ delimiters with triple-backtick fences; preserved every TikZ command, label and all mathematical prose.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Recognize the existing one-component +4-framed unknot diagram by using the supported backtick TikZ fence.",
+  "source_lines_after": [
+    105,
+    111
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "One embedded planar circle U, no crossings, labelled +4.",
+      "check": "A single planar circle is the unknot, so the diagram has one surgery component and linking matrix [4]. The +4 label specifies integer framing, not blackboard framing; no twist or crossing is asserted by the drawing.",
+      "justification": "Existing Remark and Facts F5; inverse-matrix supplier Statement defines integer framing by delta=lambda+f mu and H1=Z^n/AZ^n."
+    },
+    {
+      "objects": "Normal unit-circle bundle of the conic and its two solid-torus charts.",
+      "check": "Proof 1.1 computes [Q]=2[P] and Q.Q=4. In proof 2.1 theta_N=theta_S-4 phi gives northern meridian m+4l; the substitutions l=mu_U and m=lambda_U yield 4mu_U+lambda_U, exactly integer +4 surgery. The unchanged picture encodes this slope, without adding any claim about the framing parallel being drawn.",
+      "justification": "Full local proof steps 1.1 and 2.1; def-oriented-slope-and-knot-dehn-filling Definition gives integer n filling slope n mu+lambda."
+    },
+    {
+      "objects": "Boundary orientation and L(4,1).",
+      "check": "The lens supplier defines L(p,q)=E_U(p/q), so the +4 coefficient gives L(4,1) in that convention. The carrier states the circle bundle identification up to orientation and explicitly chooses the orientation of B2 accordingly; the drawing has no orientation arrow and asserts no additional boundary orientation. The distinction between exterior-boundary and surgery-handlebody torus intersection conventions is not used to alter a sign.",
+      "justification": "def-lens-space-surgery-orientation-convention Definition; carrier Statement and proof 2.1. The filling supplier uses exterior-boundary mu.lambda=-1, while inverse-matrix supplier declares its own +1 convention."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-rational-ball-b2-bounds-lens-l4.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-rational-ball-b2-bounds-lens-l4.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-rational-ball-b2-bounds-lens-l4.md",
+            "item_id": "lem-rational-ball-b2-bounds-lens-l4",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-rational-ball-b2-bounds-lens-l4.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_review": {
+    "original_tiles": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/lem-rational-ball-b2-bounds-lens-l4--03.png",
+        "detail": "original",
+        "standalone": true
+      }
+    ],
+    "preview_command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-knot042\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-rational-ball-b2-bounds-lens-l4 --out research/math-library-rendering-repairs-2026-10-23/previews/knot042-final-unique",
+    "preview_exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/knot042-final-unique/manifest.json",
+    "reviewed_tile": "research/math-library-rendering-repairs-2026-10-23/previews/knot042-final-unique/screenshots/lem-rational-ball-b2-bounds-lens-l4--03.png",
+    "detail": "original",
+    "standalone": true,
+    "result": "Actual local native TikZ rendering displays exactly one closed circle, +4 above and U below. Both labels are legible and separate from the circle, with no clipping, overlapping or literal TeX. Preview reference map has 32 unrelated parse diagnostics; scoped rendercheck has none."
+  },
+  "before_raw_sha256": "101a4e1ca483e55e499dd16330eed1a3530ffdf18e8d997275c829c9e0acb398",
+  "after_raw_sha256": "c3066ce46b12a98c9269af733ab233348f797fc7513a401915dbeb7c10eccc12",
+  "metadata_preserved_byte_for_byte": true,
+  "remaining_issues": []
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-normal-coordinates-on-the-round-sphere.json
+  precheck: pass
 id: ex-normal-coordinates-on-the-round-sphere
 kind: example
 title: Normal coordinates on the round sphere
@@ -6,12 +9,6 @@ status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-normal-neighborhood-and-normal-coordinate-chart, thm-existence-of-normal-neighborhoods, ex-great-circles-as-round-sphere-geodesics, def-domain-and-exponential-map-of-a-connection, def-countable-choice, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, thm-sine-cosine-signs-monotonicity-and-ranges, cor-pi-is-the-first-positive-sine-zero, thm-quarter-turn-values-and-shift-formulas]
-verification:
-  audited: 2026-09-13
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-12
 sources:
   references:
     - title: Ved Datar, Lectures on Riemannian Geometry, Example 17.1.3 and Definition 17.2.1, pp. 128 and 130
@@ -65,3 +62,38 @@ At radius $\pi$, the distinct vectors $\pi e_1$ and $-\pi e_1$ both exponentiate
 ## Source locator
 
 Datar, Example 17.1.3, printed p. 128 (PDF p. 136), gives the coordinate formula at the north pole of $S^2$. Definition 17.2.1, printed p. 130 (PDF p. 138), defines geodesic normal neighborhoods and charts. The proof above derives the formula for every $S^n$, proves continuity at zero and injectivity on $|v|<\pi$, and supplies the collision witnesses at radius $\pi$.
+
+
+## Remarks
+
+The following is a schematic of the tangent ball and the sphere, not to scale or a dimension-specific embedding: for $n=1$ the ball is an interval and the sphere is a circle. The dashed boundary is excluded from $B_\pi(0_p)$. The two marked boundary vectors lie in the full exponential domain, and their common image is the antipode. For any normal domain $D\subseteq B_\pi(0_p)$, the inverse exponential followed by $E_e^{-1}$ gives $x_e^i(\exp_p(v))=v^i$ for $v\in D$. The verification above is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
+  \draw[dashed] (0,0) circle (1.35);
+  \draw[gray] (-1.35,0) -- (1.35,0);
+  \fill (0,0) circle (0.035);
+  \node[below] at (0,0) {$0_p$};
+  \draw[->] (0,0) -- (0.55,0.62);
+  \fill (0.55,0.62) circle (0.035);
+  \node[above right] at (0.55,0.62) {$v$};
+  \draw[fill=white] (-1.35,0) circle (0.055);
+  \draw[fill=white] (1.35,0) circle (0.055);
+  \node[below left] at (-1.35,-0.08) {$-\pi e_1$};
+  \node[below right] at (1.35,-0.08) {$\pi e_1$};
+  \node at (0,1.75) {$B_\pi(0_p)\subset T_pS^n$};
+  \draw[->] (1.9,0.7) -- (4.1,0.7);
+  \node[above] at (3,0.7) {$\exp_p$};
+  \node[below] at (3,0.7) {injective on the ball};
+  \draw (6,0) circle (1.35);
+  \draw (6,0) ellipse (1.35 and 0.35);
+  \fill (6,1.35) circle (0.04);
+  \node[above] at (6,1.35) {$p=\exp_p(0_p)$};
+  \fill (7.08,0.81) circle (0.04);
+  \node[right] at (7.08,0.81) {$\exp_p(v)$};
+  \draw[fill=white] (6,-1.35) circle (0.06);
+  \node[below] at (6,-1.35) {$-p$};
+  \node at (6,2.1) {$S^n$};
+  \node at (3,-2.2) {$\exp_p(-\pi e_1)=-p=\exp_p(\pi e_1)$};
+\end{tikzpicture}
+```

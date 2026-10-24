@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-oppositely-signed-intersections-of-two-three-manifolds-in-a-simply-connected-six-manifold.json
+  precheck: pass
 id: ex-oppositely-signed-intersections-of-two-three-manifolds-in-a-simply-connected-six-manifold
 kind: example
 title: Oppositely signed intersections of two three-manifolds in a simply connected six-manifold
@@ -34,12 +37,7 @@ origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct
 dependency_level: 6
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -68,3 +66,26 @@ In $S^6$ let $A=S^3\subset S^6$ be a standard linear $3$-sphere and let $B$ be a
 2.1 An intersection with $A$ forces $y_1=y_2=y_3=0$. On the changed cap it therefore forces $e_1^2=\rho^2$, giving exactly $p=(\rho,0,0,0,0,0)$ and $q=(-\rho,0,0,0,0,0)$. Outside the changed cap $y_3>0$ wherever $y_1=y_2=0$, so there are no other intersections. At either point the tangent directions of $B$ are $\partial_{e_1}+2e_1\partial_{y_3},\partial_{y_1},\partial_{y_2}$. Together with $TA=\operatorname{span}(\partial_{e_1},\partial_{e_2},\partial_{e_3})$ they span the six-dimensional ambient space; their determinant differs at the two points only by the sign of $2e_1$. Thus the local signs are opposite and $I(A,B)=0$. [step 1.1, construct, algebra, F2, F3]
 
 3.1 Here $a=b=3=m-3$, so the stable dimension inequalities are met at equality. The sphere $S^6$ is simply connected by the published sphere theorem, and the two connected sheets admit the required avoiding arcs. The high-dimensional Whitney trick therefore removes exactly this pair, producing an embedded $A'$ disjoint from $B$. The explicit cap verifies the claimed finger-move witness, rather than presupposing its intersection count. [step 2.1, construct, F4, F5] ∎
+
+
+## Remarks
+
+The picture is a rescaled coordinate slice of the inner graph cap in step 1.1, with $e_2=e_3=y_1=y_2=0$, $u=e_1/\rho$ and $v=y_3/\rho^2$. In this slice $A$ is $v=0$ and the changed cap of $B$ is $v=u^2-1$. It displays the two roots $q$ and $p$, rather than representing the full three-dimensional sheets. Write $\varepsilon=I(p)$; step 2.1 gives $I(q)=-\varepsilon$ because the tangent determinant has the sign of $2e_1$ up to one common orientation factor.
+
+```tikz
+\begin{tikzpicture}[x=1.8cm,y=1.1cm]
+\draw[->] (-1.9,0) -- (2.1,0) node[right] {$u$};
+\draw[->] (0,-1.4) -- (0,2.0) node[above] {$v$};
+\draw[thick,blue] plot[domain=-1.5:1.5,samples=61] (\x,{\x*\x-1});
+\node[blue] at (1.35,1.65) {$B:\ v=u^2-1$};
+\node at (-1.55,0.35) {$A:\ v=0$};
+\fill (-1,0) circle (1.5pt);
+\fill (1,0) circle (1.5pt);
+\node[above] at (-1,0) {$q$};
+\node[above] at (1,0) {$p$};
+\node[below] at (-1,-0.12) {$-\varepsilon$};
+\node[below] at (1,-0.12) {$\varepsilon$};
+\end{tikzpicture}
+```
+
+The horizontal segment and graph arc between the roots illustrate the two arcs of a Whitney circle in this local model. The existence and use of a clean framed Whitney disk are justified by step 3.1, using simple connectivity of $S^6$ and $a=b=3=m-3$; they are not consequences of this planar picture. The verification above remains independent of the illustration.

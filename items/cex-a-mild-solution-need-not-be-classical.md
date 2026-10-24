@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-a-mild-solution-need-not-be-classical.json
+  precheck: pass
 id: cex-a-mild-solution-need-not-be-classical
 kind: counterexample
 title: "A mild solution need not be classical"
@@ -33,8 +36,7 @@ sources:
     - title: "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)"
       url: "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf"
       locator: "Chapter II Section 6, the discussion of immediate differentiability after Proposition 6.2, printed pp. 145-146"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement refuted
@@ -59,7 +61,7 @@ Assume Dependent Choice ([[def-dependent-choice]]), hence Countable Choice. Let 
 
 ## Counterexample
 
-**Proof technique:** direct: identify the mild solution and test membership in $W^{1,p}$ by the defining weak-derivative identity.
+**Proof technique:** direct: identify the mild solution and test membership in the first-order Sobolev space with exponent p by the defining weak-derivative identity.
 
 1.1 $u(t)=T(t)f_0=\mathbf 1_{(-t,1-t)}$ and $u$ is the unique mild solution: with $x=f_0$ and $f=0$ the variation-of-constants formula gives $u(t)=T(t)f_0$, which is continuous, and [F2] gives uniqueness. [F2]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-knot-genus-additive-under-connected-sum.json
+  precheck: pass
 id: thm-knot-genus-additive-under-connected-sum
 kind: theorem
 title: "Knot genus is additive under connected sum"
@@ -32,13 +35,7 @@ sources:
     - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
       locator: "§4.3, Theorem 4.3.6, printed pp.21–23"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -96,3 +93,42 @@ Assume the Axiom of Countable Choice. For any smooth oriented knots $K,J\subset 
 [[lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups]]
 
 [[thm-higher-dimensional-spheres-are-simply-connected]]
+
+
+## Remarks
+
+The schematic shows the situation after steps 3.1–3.2 have removed all closed intersection curves. The dashed line represents the separating sphere $S$ edge-on; its intersection with $F$ is the single proper arc $\alpha$, with endpoints on $\partial F=K\#J$. Handles and knotting are suppressed: the shaded regions stand for surfaces of arbitrary genus, not disks. Cutting along $\alpha$ gives the connected surfaces $F_1,F_2$ of step 4.1. Each has one boundary circle, formed from its original knot subarc and one copy of $\alpha$; these boundaries represent $K$ and $J$, respectively, with the inherited orientations.
+
+```tikz
+\begin{tikzpicture}[scale=0.8,line cap=round,line join=round]
+  \fill[blue!35!black] (-3,1) .. controls (-5,1.6) and (-5,-1.6) .. (-3,-1) -- (-3,1);
+  \fill[orange!35!black] (-3,1) .. controls (-1,1.6) and (-1,-1.6) .. (-3,-1) -- (-3,1);
+  \draw[dashed] (-3,-1.8) -- (-3,1.8);
+  \node[above] at (-3,1.8) {$S$};
+  \draw[thick] (-3,1) .. controls (-5,1.6) and (-5,-1.6) .. (-3,-1);
+  \draw[thick] (-3,1) .. controls (-1,1.6) and (-1,-1.6) .. (-3,-1);
+  \draw[very thick,blue] (-3,-1) -- (-3,1);
+  \fill (-3,1) circle (0.045);
+  \fill (-3,-1) circle (0.045);
+  \node[left] at (-3,0) {$\alpha$};
+  \node at (-4,0) {$F_1$};
+  \node at (-2,0) {$F_2$};
+  \node[below] at (-3,-1.9) {$\partial F=K\#J$};
+  \draw[->,thick] (-0.9,0) -- (0.3,0);
+  \node[above] at (-0.3,0.15) {cut};
+  \fill[blue!35!black] (2,1) .. controls (0,1.6) and (0,-1.6) .. (2,-1) -- (2,1);
+  \draw[thick] (2,1) .. controls (0,1.6) and (0,-1.6) .. (2,-1);
+  \draw[very thick,blue] (2,-1) -- (2,1);
+  \node at (1.1,0) {$F_1$};
+  \node[right] at (2,0) {$\alpha_1$};
+  \node[below] at (1.4,-1.5) {$\partial F_1\simeq K$};
+  \fill[orange!35!black] (3.4,1) .. controls (5.4,1.6) and (5.4,-1.6) .. (3.4,-1) -- (3.4,1);
+  \draw[thick] (3.4,1) .. controls (5.4,1.6) and (5.4,-1.6) .. (3.4,-1);
+  \draw[very thick,blue] (3.4,-1) -- (3.4,1);
+  \node at (4.3,0) {$F_2$};
+  \node[left] at (3.4,0) {$\alpha_2$};
+  \node[below] at (4,-1.5) {$\partial F_2\simeq J$};
+\end{tikzpicture}
+```
+
+Here $\alpha_1,\alpha_2$ are the two copies of the cut arc, and $\simeq$ denotes the oriented knot class after rounding the corners. Gluing them back recovers $F$. The Euler-characteristic calculation is $\chi(F_1)+\chi(F_2)=\chi(F)+1$; with one boundary circle on each surface, this gives $g(F)=g(F_1)+g(F_2)$ as proved in step 4.1. The rigorous proof is independent of the schematic.

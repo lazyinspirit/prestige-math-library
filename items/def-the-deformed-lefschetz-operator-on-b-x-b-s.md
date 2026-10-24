@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-the-deformed-lefschetz-operator-on-b-x-b-s.json
+  precheck: n/a
 id: def-the-deformed-lefschetz-operator-on-b-x-b-s
 kind: definition
-title: "The deformed Lefschetz operator L_zeta on B_x B_s"
+title: 'The deformed Lefschetz operator $L_\zeta$ on $B_x B_s$'
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -22,12 +25,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Section 0.3 (the deformed operator L^{y,s}_zeta) and Section 2.4"
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
+
 ---
 
 ## Definition

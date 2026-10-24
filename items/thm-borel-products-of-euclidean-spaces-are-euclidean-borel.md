@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-borel-products-of-euclidean-spaces-are-euclidean-borel.json
+  precheck: pass
 id: thm-borel-products-of-euclidean-spaces-are-euclidean-borel
 kind: theorem
-title: "The Borel product of R^m and R^n is the Borel sigma-algebra of R^{m+n}"
+title: 'The Borel product of $\mathbb R^m$ and $\mathbb R^n$ is the Borel sigma-algebra of $\mathbb R^{m+n}$'
 status: published
 origin: session
 provenance:
@@ -9,8 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-rational-points-and-boxes-in-rn, def-borel-sigma-algebra, thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn, def-second-countable-space, prop-second-countability-is-hereditary, thm-countable-products-of-second-countable-spaces, thm-continuous-preimages-of-borel-sets-are-borel]
 proof_strategy: direct
-verification:
-  repair: research/mathematical-statistics-foundations-37-owner-e33-thm-borel-products-of-euclidean-spaces-are-euclidean-borel-repair.json
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Proposition 5.3"

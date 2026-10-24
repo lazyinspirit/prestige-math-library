@@ -1,0 +1,144 @@
+{
+  "id": "alg-policy-iteration",
+  "agent": "/root/rendering_repair_coordinator/dorl_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A warranted explanatory flow clarifies the distinction between statewise retained greedy selection (including ties) and the global equality stopping test. The original standalone screenshot has no figure. This is an explanatory diagram addition, not a failure of the existing rigorous definition.",
+      "action": "Added a final Remarks control-flow diagram with exact evaluation, Q computation, retained/earliest greedy choice, equality test, return and continue branch.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only Remarks prose and one TikZ flowchart; preserved the entire original item byte prefix, all frontmatter, publication status, definition, links and sources. No unsupported strict-improvement or finite-termination annotation was added because those are not claims proved within this algorithm carrier.",
+  "source_lines_after": {
+    "remarks": [
+      58,
+      60
+    ],
+    "tikz": [
+      62,
+      76
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Deterministic policy pi_k has pi_k(s) in A(s); V_k is in R^S; Q_k is real-valued on admissible pairs D={(s,a):s in S,a in A(s)}.",
+      "justification": "Definition step 1 and the finite-MDP/policy-Bellman-operator definitions give the policy and V types; step 2 defines Q by finite real sums. The local contraction supplier guarantees the exact V_k exists uniquely."
+    },
+    {
+      "relation": "pi_k -> V_k -> Q_k -> pi_{k+1}",
+      "justification": "These arrows are operational dependencies matching Definition steps 1 and 2; they are not MDP probability transitions or morphisms asserting commutativity."
+    },
+    {
+      "relation": "For each s, retain pi_k(s) if it maximizes Q_k(s,·); otherwise choose the earliest maximizing action in the supplied order.",
+      "justification": "Exactly Definition step 2. Finite nonempty A(s) gives an attained maximum; the input list contains each action once, so earliest maximizer exists uniquely. Retention explicitly includes tied maximizers. These choices again form a deterministic policy."
+    },
+    {
+      "relation": "Equality branch returns (pi_k,V_k); inequality branch increments k and enters the current-policy box.",
+      "justification": "Exactly Definition step 3. The equality test is global policy equality, following all statewise updates; the unequal branch uses the newly computed pi_{k+1} after incrementing k. For empty S, all statewise choices are vacuous and the unique empty policies compare equal, so the same flow returns immediately."
+    },
+    {
+      "relation": "The figure has six boxes and six directed edges: four sequential, one yes-return edge and one bent no-loop edge. The directed 5-cycle policy/evaluation/Q/choice/test closes explicitly from test.west to policy.west.",
+      "justification": "Source edges were compared with native SVG paths and the standalone original-resolution native crop. All six arrowheads are visible and the no-loop reaches the policy box; no --cycle shorthand is used. No open/closed endpoint convention or point fill is asserted."
+    },
+    {
+      "relation": "Proof independence",
+      "justification": "The diagram only restates the existing procedure. The exact-evaluation justification remains the existing local contraction theorem; no proof or theorem is inferred from the image."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "7998409f0f6470950c496c65568996f824d0acfbc55f8cc6a1f36549657669d6",
+    "after_raw_sha256": "32a442a18591f44c830d9345ee84d66fa677ac888e1107554b2e8725ee39aa06",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published",
+    "original_screenshot": {
+      "declared_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-policy-iteration--01.png",
+      "resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-policy-iteration--01.png",
+      "sha256": "9186118f13726a20d3129f95df82968a6a9d71115cc887526132401179162bd7",
+      "inspected": "Standalone original resolution; matching recorded SHA locates authentic category screenshot despite incorrect evidence_dir prefix."
+    },
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl007-policy-iteration-final/manifest.json",
+    "preview_manifest_sha256": "c7d21ddda97cb970d0c1f6e73de6ee0431f9ee40f304a8127b28ca8875a2255d",
+    "preview_source_sha256": "32a442a18591f44c830d9345ee84d66fa677ac888e1107554b2e8725ee39aa06",
+    "native_figure_png": "research/math-library-rendering-repairs-2026-10-23/previews/dorl007-policy-iteration-final/native-figure.png",
+    "native_figure_png_sha256": "738eacb4aab20b51b8d9441d8f3f4fe18fb66090827b35e745408af543f0ea88",
+    "native_figure_svg": "research/math-library-rendering-repairs-2026-10-23/previews/dorl007-policy-iteration-final/native-figure.svg",
+    "native_figure_svg_sha256": "c006b4ee49b2ffda8c98fa065b11276320158b722206b3eb83f50b2a11be054a",
+    "visual_checks": "Inspected final standalone native figure PNG at original resolution. Dark background: pale text, borders and all arrows visible; no pale filled boxes obscure strokes. Labels do not overlap boxes or arrows. Six directed edges and the explicit returning loop are present. SVG boxes/edge shafts use fill=none; arrowheads use inherited currentColor. Open endpoints are not applicable. The full-page capture exhibited omitted pre-existing text/figure content, so a fresh file-only Playwright native-figure capture after fonts and two animation frames supplies the actual final standalone visual evidence.",
+    "capture_summary": {
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": []
+    },
+    "renderer_bindings": [
+      {
+        "path": "components/library/ItemBody.tsx",
+        "sha256": "5a25daebcaaa80893a141561cbf37c8fa54e743c5439ac9758cdea83996f423d"
+      },
+      {
+        "path": "components/library/MathMarkdown.tsx",
+        "sha256": "a8465c5c62218f302ad4e84e66c6ad3587aed51df4c3e1262b5ff6fd5ff5fcc2"
+      },
+      {
+        "path": "components/library/TikzDiagram.tsx",
+        "sha256": "9e0a86b8c7e29bdff96c6ad46c1f0c8e8b11721b4f3607c4f8f73406ba783dd5"
+      },
+      {
+        "path": "lib/math-library.ts",
+        "sha256": "343a938b27cdc492cafece9736997a804113eca8b4ba242aeef1d9f22042aee9"
+      },
+      {
+        "path": "lib/tikz.ts",
+        "sha256": "176a135782a1e66a00d1d18b1610804266564aee875042928fa9bcff5e484968"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-policy-iteration.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-policy-iteration.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-policy-iteration.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Canonical repair-preview.mts --ids alg-policy-iteration --out research/math-library-rendering-repairs-2026-10-23/previews/dorl007-policy-iteration-final with repository-local TMPDIR and prescribed TSX_TSCONFIG_PATH",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 1,
+        "tikz_count": 1,
+        "katex_errors": [],
+        "diagram_failures": []
+      }
+    }
+  ],
+  "remaining_issues": [
+    "Full-page screenshot capture omission artifact; final figure independently verified via native-figure.png and compiled SVG. No unresolved item defect or blocker."
+  ]
+}

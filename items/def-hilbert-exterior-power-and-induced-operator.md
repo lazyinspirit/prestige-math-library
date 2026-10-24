@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-hilbert-exterior-power-and-induced-operator.json
+  precheck: pass
 id: def-hilbert-exterior-power-and-induced-operator
 kind: definition
 title: Hilbert exterior powers and induced operators
@@ -29,14 +32,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: gpt-6-sol
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
-  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/def-hilbert-exterior-power-and-induced-operator.json
 sources:
   scraped: []
   references:
@@ -100,7 +95,7 @@ induced operator is considered, a bounded linear operator $T:H\to H$.
 
 [A5] A supplied orthonormal basis is a complete orthonormal family, so its finite linear span is dense in $H$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). For the increasing-index enumeration of basis wedges in step 11.1, a linear order on its index set is supplied as additional data; no order on an arbitrary set is asserted to exist.
 
-[L1] The bounded operator space $\mathcal B(X,\mathbb C)$ has the unit-ball operator norm and is Banach because $\mathbb C$ is complete ([[def-space-of-bounded-linear-operators]], [[def-operator-norm]], [[thm-bounded-operator-space-is-banach]], [[thm-complex-plane-is-complete]]). The proof uses uniquely determined pointwise limits, not a family of arbitrary choices.
+[L1] The bounded operator space $\mathcal B(X,\mathbb C)$ has the unit-ball operator norm and is Banach because $\mathbb C$ is complete ([[def-space-of-bounded-linear-operators|Spaces of bounded linear operators]], [[def-operator-norm]], [[thm-bounded-operator-space-is-banach|Bounded operators into a Banach space form a Banach space]], [[thm-complex-plane-is-complete]]). The proof uses uniquely determined pointwise limits, not a family of arbitrary choices.
 
 [L2] Cauchy–Schwarz gives $|\langle x,y\rangle|\le\|x\|\|y\|$; the original norm satisfies the parallelogram law. A complex norm satisfying that law determines a unique first-variable-linear inner product by polarization ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[thm-parallelogram-law]], [[thm-jordan-von-neumann-polarization]], [[def-real-and-complex-inner-product-space]]).
 

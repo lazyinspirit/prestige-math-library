@@ -1,0 +1,90 @@
+{
+  "id": "prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm",
+  "group": "mt_034",
+  "agent": "/root/rendering_repair_supervisor2/mt_034",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 shows literal $1<P<\\INFTY$ and $P=1$ in the uppercase proof technique banner while neighboring body mathematics is typeset; tile 02 contains the clean proof continuation. Frozen/current source matched before repair. The renderer treats this banner as plain text.",
+      "action": "Replaced only the body banner conditions with equivalent prose: p strictly between one and infinity; p equal to one.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Body line 57 only: equivalent prose conditions avoid the plain React-text banner math limitation. Frontmatter proof_strategy retained byte-for-byte under the metadata write restriction. No TikZ change.",
+  "source_lines_after": [
+    57
+  ],
+  "mathematical_meaning_preserved": true,
+  "meaning_preservation_reason": "The same two exponent cases are described in words; all Statement, Facts, numbered proof steps, dependencies, citations and metadata are untouched.",
+  "guard": {
+    "before_raw_sha256": "241d49f5d03061a2ae07a4cbdae239a5dc8ba983a1234b8244b0e9397145730a",
+    "matched_immediately_before_edit": true,
+    "current_raw_sha256": "9c628bbba76e988c3b3479f4b0ddbe851b4795cb7921e5ba211513099a1e47eb",
+    "frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published"
+  },
+  "original_evidence": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/measure-theory",
+    "tiles_inspected_standalone_original_resolution": [
+      "screenshots/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm--01.png",
+      "screenshots/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm--02.png"
+    ],
+    "frozen_source": "research/math-library-rendering-repairs-2026-10-23/before/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm.md"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "current_native_visual": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/mt034-fresh",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/mt034-fresh/manifest.json",
+    "manifest_sha256": "b937183da558add104b6618b99b691674df03116c0a60d1f29e6624ba07aee2f",
+    "source_sha256": "9c628bbba76e988c3b3479f4b0ddbe851b4795cb7921e5ba211513099a1e47eb",
+    "standalone_original_resolution_tiles_inspected": [
+      "screenshots/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm--01.png",
+      "screenshots/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm--02.png"
+    ],
+    "result": "Banner now contains readable uppercase prose with no dollar delimiters or raw TeX; title, facts and proof render normally.",
+    "katex_errors": [],
+    "katex_count": 73,
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "reference_map_sha256": "a8eff304cf59200b21c972f67e2ed3d1cfa079eba8093d7d24299994a54b7352",
+    "reference_map_diagnostics": 13
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody/title preview only; no production route, navigation/dependency widgets or Sources-footer coverage.",
+    "Preview reference map reports 13 unrelated parse diagnostics; rendered assigned references were inspected.",
+    "Renderer banner still accepts plain text only; the equivalent-prose body workaround resolves this carrier without application or metadata edits.",
+    "This is focused rendering adjudication, not a broad proof audit."
+  ]
+}

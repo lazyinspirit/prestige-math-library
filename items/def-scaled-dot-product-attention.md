@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-scaled-dot-product-attention.json
+  precheck: n/a
 id: def-scaled-dot-product-attention
 kind: definition
 title: "Scaled dot-product attention"
@@ -10,12 +13,6 @@ deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Vaswani et al., Attention Is All You Need, §3.2.1"
@@ -39,3 +36,26 @@ Each output row is the weighted average of the value rows, with weights given by
 [Vaswani et al., §3.2.1: scaled dot-product formula and query/key/value dimensions](https://arxiv.org/pdf/1706.03762)
 
 [Dive into Deep Learning, §11.3.3: matrix formula and batched query/key/value shapes](https://www.d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html)
+
+
+## Remarks
+
+The dataflow below displays the matrix shapes and the order of the masked-attention operations. Here $S=QK^{\mathsf T}/\sqrt{d_k}$, $A=\operatorname{softmax}_{\rm row}(S+M)$, and $O=AV$. Setting $M=0$ gives unmasked attention. For a mask, $M_{ij}=0$ on allowed pairs and $M_{ij}=-\infty$ on disallowed pairs; every row must have at least one allowed key. The definition above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,rounded corners,align=center] (qk) at (0,0) {$Q:\ n_q\times d_k\qquad K:\ n_k\times d_k$};
+\node[draw,rounded corners,align=center] (s) at (0,-1.3) {$\begin{array}{c}S=QK^{\mathsf T}/\sqrt{d_k}\\n_q\times n_k\end{array}$};
+\node[draw,rounded corners,align=center] (t) at (0,-2.8) {$\begin{array}{c}S+M\\n_q\times n_k\end{array}$};
+\node[draw,rounded corners,align=center] (m) at (-4,-2.8) {$M:\ n_q\times n_k$};
+\node[draw,rounded corners,align=center] (a) at (0,-4.3) {$\begin{array}{c}A=\mathrm{softmax}_{\mathrm{row}}(S+M)\\n_q\times n_k\end{array}$};
+\node[draw,rounded corners,align=center] (o) at (0,-5.8) {$\begin{array}{c}O=AV\\n_q\times d_v\end{array}$};
+\node[draw,rounded corners,align=center] (v) at (-4,-5.8) {$V:\ n_k\times d_v$};
+\draw[->] (qk) -- (s);
+\draw[->] (s) -- (t);
+\draw[->] (m) -- (t);
+\draw[->] (t) -- (a);
+\draw[->] (a) -- (o);
+\draw[->] (v) -- (o);
+\end{tikzpicture}
+```

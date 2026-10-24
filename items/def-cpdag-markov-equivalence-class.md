@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-cpdag-markov-equivalence-class.json
+  precheck: n/a
 id: def-cpdag-markov-equivalence-class
 kind: definition
 title: "DAG Markov equivalence, patterns, and CPDAGs"
@@ -18,12 +21,7 @@ sources:
       url: "https://arxiv.org/pdf/1302.4972"
     - title: "Lauritzen, Graphical Models lecture notes, §2.6"
       url: "https://web.math.ku.dk/~lauritzen/papers/gmnotes.pdf"
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+
 ---
 
 ## Definition
@@ -54,3 +52,48 @@ consistent extensions.
 ## Definition references
 
 [[def-d-separation-in-a-dag]]
+
+## Remarks
+
+For the path skeleton on $V=\{A,B,C\}$, the following CPDAG has exactly
+the three consistent DAG extensions shown. In each extension, the only
+internal vertex on the path from $A$ to $C$ is the noncollider $B$: the path
+is active given the empty set and blocked given $\{B\}$. Adjacent vertices
+are always joined by an active one-edge path. Thus the three extensions have
+the same d-separation relations, and each edge occurs in both orientations
+within this class.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node[anchor=east] at (-0.7,0) {CPDAG};
+\node (pa) at (0,0) {$A$};
+\node (pb) at (1.5,0) {$B$};
+\node (pc) at (3,0) {$C$};
+\draw (pa) -- (pb);
+\draw (pb) -- (pc);
+\node[anchor=east] at (-0.7,-1) {Extension 1};
+\node (a1) at (0,-1) {$A$};
+\node (b1) at (1.5,-1) {$B$};
+\node (c1) at (3,-1) {$C$};
+\draw[->] (a1) -- (b1);
+\draw[->] (b1) -- (c1);
+\node[anchor=east] at (-0.7,-2) {Extension 2};
+\node (a2) at (0,-2) {$A$};
+\node (b2) at (1.5,-2) {$B$};
+\node (c2) at (3,-2) {$C$};
+\draw[->] (c2) -- (b2);
+\draw[->] (b2) -- (a2);
+\node[anchor=east] at (-0.7,-3) {Extension 3};
+\node (a3) at (0,-3) {$A$};
+\node (b3) at (1.5,-3) {$B$};
+\node (c3) at (3,-3) {$C$};
+\draw[->] (b3) -- (a3);
+\draw[->] (b3) -- (c3);
+\end{tikzpicture}
+```
+
+The remaining orientation $A\to B\leftarrow C$ is excluded: it creates an
+unshielded collider absent from the CPDAG. Its $A$--$C$ path is blocked given
+the empty set and active given $\{B\}$, so it is not Markov equivalent to
+the displayed extensions. The illustration is explanatory; the definitions
+and the d-separation checks do not depend on the picture.

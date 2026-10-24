@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-dagger-no-regret-reduction.json
+  precheck: pass
 id: thm-dagger-no-regret-reduction
 kind: theorem
 title: DAgger no-regret reduction under strongly convex surrogate losses
@@ -102,3 +105,22 @@ In particular, the additive term beyond $uT\epsilon_N$ is at most $1$ whenever $
 4.1 Apply the one-step assumption [A4] through [F5] to that index $i$ and substitute the bound from step 3.1. This gives the stated task-cost inequality. [A4, F5, step 3.1, algebra]
 
 5.1 If $N\ge uT\bigl(1+\frac{4G^2}{\mu}H_{N-1}+k_\alpha(q_T+2)\bigr)$, then the additive term in the Statement is at most $1$. To verify the iteration order, set $\bar u=\max(1,u)$ and $B=\bar uT\ge1$; let $b=\lceil B\rceil$ and let $Q$ be the least integer with $b+T+2\le2^Q$. Choose an integer $C\ge1$ and set $N=\lceil CbQ\rceil$. Since $b\le2^Q$ and $Q\le2^Q$, $N\le(C+1)2^{2Q}$, so the least $q_N$ with $N\le2^{q_N}$ satisfies $q_N\le2Q+q_{C+1}$. By step 1.3 and $q_T\le Q$, the bracket is at most $1+\frac{4G^2}{\mu}(2Q+q_{C+1}+1)+k_\alpha(Q+2)$. Set $c=4G^2/\mu$, $a=2c+k_\alpha$, $b_0=c$, and $b_1=1+c+2k_\alpha$; the bracket bound equals $aQ+b_0q_{C+1}+b_1$. Choose an integer $r\ge2$ so large that $r(r-1)/2\ge a+b_0(r+1)+b_1$; such an $r$ exists because the left side is quadratic with positive leading coefficient and the right side is affine in $r$. The binomial theorem gives $C:=2^r\ge r(r-1)/2$, while $C+1\le2^{r+1}$ gives $q_{C+1}\le r+1$. Hence $C\ge a+b_0q_{C+1}+b_1$. Since $Q\ge1$ and $a,b_0,b_1\ge0$, $CQ\ge(a+b_0q_{C+1}+b_1)Q\ge aQ+b_0q_{C+1}+b_1$; as $b\ge B$, this gives $N\ge CbQ\ge B(aQ+b_0q_{C+1}+b_1)$. Thus $N\ge\bar uT$ times the bracket, which also implies the required inequality with $u$. Moreover $Q=O(\log(B+2))$, so $N=O(B\log(B+2))=\widetilde O(\bar uT)$. When $u\ge1$, this is $\widetilde O(uT)$; if $u<1$, replacing it by $\bar u=1$ is a valid upper-bound normalization for the iteration count. The estimate retains the hindsight optimum $\epsilon_N$ and assumes no realizability condition $\pi^*\in\Pi$. [A1, A3, A4, step 1.3, step 4.1, algebra] ∎
+
+
+## Remarks
+
+The diagram separates the two distributions in the reduction. Write $S_i=\sum_s d_{\hat\pi_i}(s)\ell(s,\theta_i)$ for the learner's own-occupancy loss, $R_N=1+(4G^2/\mu)H_{N-1}$, $M_N=k_\alpha(q_T+2)$, and $B_N=\epsilon_N+(R_N+M_N)/N$. Arrows indicate deductions under the Statement's hypotheses, not maps between policy spaces. The occupancy comparison gives $S_i\le L_i(\theta_i)+\min(1,T\beta_i)$; combining the two top bounds therefore gives the middle bound. The final two arrows select one of the learned policies and apply the expert-surrogate task-cost bound. The rigorous proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={align=center}, box/.style={draw, rounded corners, minimum height=1.15cm, text width=4.9cm}, every path/.style={thick}]
+\node[box] (ftl) at (-3.2,0) {FTL regret (step 1.1)\\ $\frac1N\sum_i L_i(\theta_i)\le\epsilon_N+R_N/N$};
+\node[box] (mix) at (3.2,0) {Expert mixing (step 1.2)\\ $\sum_i\min(1,T\beta_i)\le M_N$};
+\node[box] (avg) at (0,-2.4) {Own-occupancy average\\ $\frac1N\sum_i S_i\le B_N$};
+\node[box] (pick) at (0,-4.7) {Some $i\in\{1,\ldots,N\}$\\ $S_i\le B_N$, $\hat\pi=\hat\pi_i$};
+\node[box] (cost) at (0,-7) {Task cost (step 4.1)\\ $J(\hat\pi)\le J(\pi^*)+uT B_N$};
+\draw[->] (ftl.south) -- (avg.north west);
+\draw[->] (mix.south) -- (avg.north east);
+\draw[->] (avg) -- node[right,font=\small] {finite average (step 3.1)} (pick);
+\draw[->] (pick) -- node[right,font=\small] {expert-surrogate bound [F5]} (cost);
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-heat-ball-and-its-slices.json
+  precheck: n/a
 id: def-heat-ball-and-its-slices
 kind: definition
 title: Heat balls and their time slices
@@ -25,11 +28,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)"
@@ -109,3 +107,34 @@ level set is a $C^\infty$ hypersurface.
 - **Choice.** Countable Choice is the declared ambient hypothesis and is carried
   by the topology and calculus suppliers; the definition and the displayed
   computations select no sets.
+
+
+For a unit spatial direction $v$, the picture shows the section $y=x+zv$:
+its horizontal segment at time $s=t-\tau$ is $|z|\le\rho_n(\tau)$.
+The full spatial slice is the $n$-dimensional closed ball in (ii).
+Horizontal and vertical scales are independent; the outline is sampled from
+the slice formula, rather than being a Euclidean circle.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (-2.2,-0.4) -- (-2.2,4.6) node[above] {$s$};
+\draw[densely dashed] (0,-0.2) -- (0,4.4);
+\draw[thick] plot coordinates {(0.0000,4.0000) (0.0801,3.9996) (0.1626,3.9980) (0.2192,3.9960) (0.2941,3.9920) (0.4294,3.9800) (0.5661,3.9600) (0.7379,3.9200) (0.8556,3.8800) (1.0209,3.8000) (1.0838,3.7600) (1.1858,3.6800) (1.2658,3.6000) (1.3306,3.5200) (1.3840,3.4400) (1.4284,3.3600) (1.4656,3.2800) (1.4966,3.2000) (1.5225,3.1200) (1.5438,3.0400) (1.5612,2.9600) (1.5749,2.8800) (1.5854,2.8000) (1.5929,2.7200) (1.5976,2.6400) (1.5998,2.5600) (1.6000,2.5285) (1.5996,2.4800) (1.5970,2.4000) (1.5923,2.3200) (1.5855,2.2400) (1.5766,2.1600) (1.5658,2.0800) (1.5530,2.0000) (1.5383,1.9200) (1.5217,1.8400) (1.5032,1.7600) (1.4828,1.6800) (1.4604,1.6000) (1.4361,1.5200) (1.4098,1.4400) (1.3814,1.3600) (1.3509,1.2800) (1.3181,1.2000) (1.2829,1.1200) (1.2452,1.0400) (1.2047,0.9600) (1.1613,0.8800) (1.1146,0.8000) (1.0641,0.7200) (1.0095,0.6400) (0.9501,0.5600) (0.8848,0.4800) (0.8123,0.4000) (0.7306,0.3200) (0.6362,0.2400) (0.5222,0.1600) (0.3712,0.0800) (0.2631,0.0400) (0.1863,0.0200) (0.0000,0.0000)};
+\draw[thick] plot coordinates {(0.0000,4.0000) (-0.0801,3.9996) (-0.1626,3.9980) (-0.2192,3.9960) (-0.2941,3.9920) (-0.4294,3.9800) (-0.5661,3.9600) (-0.7379,3.9200) (-0.8556,3.8800) (-1.0209,3.8000) (-1.0838,3.7600) (-1.1858,3.6800) (-1.2658,3.6000) (-1.3306,3.5200) (-1.3840,3.4400) (-1.4284,3.3600) (-1.4656,3.2800) (-1.4966,3.2000) (-1.5225,3.1200) (-1.5438,3.0400) (-1.5612,2.9600) (-1.5749,2.8800) (-1.5854,2.8000) (-1.5929,2.7200) (-1.5976,2.6400) (-1.5998,2.5600) (-1.6000,2.5285) (-1.5996,2.4800) (-1.5970,2.4000) (-1.5923,2.3200) (-1.5855,2.2400) (-1.5766,2.1600) (-1.5658,2.0800) (-1.5530,2.0000) (-1.5383,1.9200) (-1.5217,1.8400) (-1.5032,1.7600) (-1.4828,1.6800) (-1.4604,1.6000) (-1.4361,1.5200) (-1.4098,1.4400) (-1.3814,1.3600) (-1.3509,1.2800) (-1.3181,1.2000) (-1.2829,1.1200) (-1.2452,1.0400) (-1.2047,0.9600) (-1.1613,0.8800) (-1.1146,0.8000) (-1.0641,0.7200) (-1.0095,0.6400) (-0.9501,0.5600) (-0.8848,0.4800) (-0.8123,0.4000) (-0.7306,0.3200) (-0.6362,0.2400) (-0.5222,0.1600) (-0.3712,0.0800) (-0.2631,0.0400) (-0.1863,0.0200) (0.0000,0.0000)};
+\draw[thick] (-1.3181,1.2) -- (1.3181,1.2);
+\draw[densely dashed] (-1.6,2.5285) -- (1.6,2.5285);
+\fill (0,4) circle (2pt);
+\fill (0,0) circle (2pt);
+\node[anchor=west] at (1.9,4) {$(x,t)$};
+\node[anchor=west] at (1.9,2.5285) {$s=t-\frac{r^2}{4\pi e}$ (widest)};
+\node[anchor=west] at (1.9,1.2) {$s=t-\tau$};
+\node[anchor=west] at (1.9,0) {$s=t-\frac{r^2}{4\pi}$};
+\node at (0,3.15) {$E_r(t,x)$};
+\node at (0,-0.6) {empty below};
+\end{tikzpicture}
+```
+
+Both marked endpoints belong to the heat ball: the upper point is adjoined
+in its definition, and the lower point is the singleton slice in (ii).
+The dashed horizontal segment is the widest slice from (iii); the solid
+horizontal segment illustrates a different interior time slice.

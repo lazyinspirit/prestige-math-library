@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-na-periodic-staggered-grid-stokes-operators.json
+  precheck: n/a
 id: def-na-periodic-staggered-grid-stokes-operators
 kind: definition
 title: "Periodic staggered-grid velocity and pressure spaces"
@@ -20,8 +23,7 @@ sources:
     - title: "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity"
       url: "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf"
       locator: "§§2.3.1–2.3.3, printed pp. 45–47: fractional-step pressure projection, pressure update, and the staggered grid."
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -53,3 +55,44 @@ and the discrete velocity-gradient seminorm by
 $$ \|\mathcal G_hv\|_{M_h}^2=h^{d-2}\sum_{i=1}^d\sum_{\ell=1}^d\sum_{j\in J_N} |v_{i,j+e_\ell}-v_{i,j}|^2. $$
 The fixed cell/face placement is part of the definition; collocated central
 differences are a different discretization.
+
+
+## Remarks
+
+The two-dimensional sketch shows two adjacent cells in a local periodic lift.
+Dots mark pressure centres; short vertical and horizontal bars mark the face
+centres storing the first and second velocity components, respectively.
+The arrows fix the positive coordinate directions, not the signs of the
+velocity values. Dotted continuations are not domain boundaries: all indices
+are reduced modulo $N$, so, for example, $q_{j+Ne_1}=q_j$.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+  \draw (0,0) rectangle (3,2.5);
+  \draw (3,0) rectangle (6,2.5);
+  \draw[dotted] (-0.5,0) -- (0,0);
+  \draw[dotted] (-0.5,2.5) -- (0,2.5);
+  \draw[dotted] (6,0) -- (6.5,0);
+  \draw[dotted] (6,2.5) -- (6.5,2.5);
+  \fill (1.5,1.25) circle (1.6pt);
+  \fill (4.5,1.25) circle (1.6pt);
+  \node[above] at (1.5,1.35) {$q_j$};
+  \node[above] at (4.5,1.35) {$q_{j+e_1}$};
+  \draw[very thick] (0,1.1) -- (0,1.4);
+  \draw[very thick] (3,1.1) -- (3,1.4);
+  \node[below] at (0,1.0) {$v_{1,j-e_1}$};
+  \node[below] at (3,1.0) {$v_{1,j}$};
+  \draw[very thick] (1.35,0) -- (1.65,0);
+  \draw[very thick] (1.35,2.5) -- (1.65,2.5);
+  \node[below] at (1.5,-0.1) {$v_{2,j-e_2}$};
+  \node[above] at (1.5,2.6) {$v_{2,j}$};
+  \draw[->] (4,3.05) -- (5.5,3.05) node[right] {$+e_1$};
+  \draw[->] (6.8,0.4) -- (6.8,1.9) node[above] {$+e_2$};
+\end{tikzpicture}
+```
+
+Thus the common vertical face carries $(G_hq)_{1,j}=(q_{j+e_1}-q_j)/h$,
+and the left cell has
+$$(D_hv)_j=(v_{1,j}-v_{1,j-e_1})/h+(v_{2,j}-v_{2,j-e_2})/h.$$
+These are precisely the defining formulas for $d=2$; the sketch adds no
+boundary condition or proof assumption.

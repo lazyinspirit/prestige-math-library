@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-signature-additivity-under-gluing.json
+  precheck: pass
 id: lem-signature-additivity-under-gluing
 kind: lemma
 title: Signature additivity under gluing
@@ -30,20 +33,14 @@ sources:
         Whitney towers and L²-signatures"
       url: https://arxiv.org/pdf/math/9908117
       locator: §2.2, ordinary and L²-signature conventions
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 ## Statement
 
-Let W₀ and W₁ be compact oriented smooth 4-manifolds with a common identified boundary M, and let Γ be a discrete group. Suppose coefficient homomorphisms ψ_i:π₁(W_i)→Γ agree on π₁(M), and let X=W₀∪_M(−W₁) be the resulting closed oriented 4-manifold with its glued coefficient map. Then
-sign(X)=sign(W₀)−sign(W₁)
+Let $W_0$ and $W_1$ be compact oriented smooth 4-manifolds with a common identified boundary $M$, and let $\Gamma$ be a discrete group. Suppose coefficient homomorphisms $\psi_i:\pi_1(W_i)\to\Gamma$ agree on $\pi_1(M)$, and let $X=W_0\cup_M(-W_1)$ be the resulting closed oriented 4-manifold with its glued coefficient map. Then
+$$\operatorname{sign}(X)=\operatorname{sign}(W_0)-\operatorname{sign}(W_1)$$
 and
-sign_Γ^(2)(X)=sign_Γ^(2)(W₀,ψ₀)−sign_Γ^(2)(W₁,ψ₁).
+$$\operatorname{sign}_{\Gamma}^{(2)}(X)=\operatorname{sign}_{\Gamma}^{(2)}(W_0,\psi_0)-\operatorname{sign}_{\Gamma}^{(2)}(W_1,\psi_1).$$
 
 ## Statement references
 

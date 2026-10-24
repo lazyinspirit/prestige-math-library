@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-an-ext-dimension-shift.json
+  precheck: pass
 id: ex-an-ext-dimension-shift
 kind: example
 title: "An Ext dimension shift"
@@ -11,13 +14,6 @@ deps: [thm-ext-dimension-shifting-in-the-first-variable, thm-free-modules-are-pr
 generation:
   role: example
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -27,7 +23,7 @@ pipeline_run: frontier-31a
 ---
 ## Example
 
-Use the displayed cyclic-group projective presentation to identify Ext^{n+1}(M,N) with Ext^n(Omega M,N), distinguishing the low-degree exact segment.
+Use the displayed cyclic-group projective presentation to identify $\operatorname{Ext}^{n+1}(M,N)$ with $\operatorname{Ext}^n(\Omega M,N)$, distinguishing the low-degree exact segment.
 
 ## Facts & Assumptions
 

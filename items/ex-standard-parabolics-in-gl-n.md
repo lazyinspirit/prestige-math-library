@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-standard-parabolics-in-gl-n.json
+  precheck: pass
 id: ex-standard-parabolics-in-gl-n
 kind: example
-title: Standard parabolics in GL_n
+title: 'Standard parabolics in $\mathrm{GL}_n$'
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
@@ -29,7 +32,7 @@ Assume the Axiom of Choice inherited from the named suppliers. Let $k$ be a fiel
 
 **Given:** AC, a field $k$, $n\ge1$, $G=\mathrm{GL}_n$ with diagonal torus $T=D_n$, upper triangular Borel $B$, and the roots and root groups above ([[def-root-datum-of-a-split-reductive-group]]).
 
-[F1] The standard root datum of $\mathrm{GL}_n$: $X(T)=\bigoplus_i\mathbb Z\chi_i$, roots $\alpha_{ij}=\chi_i-\chi_j$ with $\alpha_{ij}^\vee=\lambda_i-\lambda_j$ and $\langle\alpha_{ij},\alpha_{ij}^\vee\rangle=2$, root groups $U_{ij}=\{I+aE_{ij}\}\cong\mathbf G_a$, positive system $i<j$, base $\{\alpha_{i,i+1}\}$ ([[def-root-datum-of-a-split-reductive-group]], [[lem-sl2-structure-and-root-coordinates]] for the rank-one case).
+[F1] The standard root datum of $\mathrm{GL}_n$: $X(T)=\bigoplus_i\mathbb Z\chi_i$, roots $\alpha_{ij}=\chi_i-\chi_j$ with $\alpha_{ij}^\vee=\lambda_i-\lambda_j$ and $\langle\alpha_{ij},\alpha_{ij}^\vee\rangle=2$, root groups $U_{ij}=\{I+aE_{ij}\}\cong\mathbf G_a$, positive system $i<j$, base $\{\alpha_{i,i+1}\}$ ([[def-root-datum-of-a-split-reductive-group]], [[lem-sl2-structure-and-root-coordinates|Structure of $\mathrm{SL}_2$ and root coordinates]] for the rank-one case).
 
 [F2] Parabolics and Levi decomposition: standard parabolics $P_I$ are described by subsets $I$ of the base, $R_u(P_I)\rtimes L_I\to P_I$ is an isomorphism with $L_I=C_G(T_I)$ the standard Levi subgroup, and the correspondence $I\mapsto P_I$ is a bijection ([[thm-parabolics-and-levi-decomposition]], [[lem-standard-levi-subgroup]]).
 
@@ -42,3 +45,38 @@ Assume the Axiom of Choice inherited from the named suppliers. Let $k$ be a fiel
 2.1 Let $I\subseteq\{1,\dots,n-1\}$ and let the complement of $I$ in the ordered set of simple roots be the partial sums listed, so that the integers $a_1,\dots,a_s\ge1$ sum to $n$. Choose a cocharacter with diagonal exponents constant within each block and strictly decreasing between consecutive blocks. Entrywise conjugation scales $x_{ij}$ by the exponent difference, so its limit subgroup is precisely the group with zero blocks below the diagonal and its limit kernel has identity diagonal blocks. By [F2] its zero simple-root pairings recover $I$. Thus $P_I$ is the group of invertible matrices preserving the flag of subspaces $0\subseteq k^{a_1}\subseteq k^{a_1+a_2}\subseteq\cdots\subseteq k^n$, i.e. the block upper triangular matrices with diagonal blocks of sizes $a_1,\dots,a_s$; its unipotent radical $R_u(P_I)$ has identity diagonal blocks, zeros below and arbitrary blocks above and its Levi factor is the block diagonal $\prod_i\mathrm{GL}_{a_i}$; the multiplication map $R_u(P_I)\rtimes L_I\to P_I$ is a group-scheme isomorphism by [F2], and $P_\varnothing=B$ and $P_{\Delta}=G$ because the corresponding flags are the complete flag and the trivial flag. The all-algebra matrix equations verify these stabilizers scheme-theoretically. For $n=1$ the simple-root set is empty, both endpoints are $G=B=\mathbf G_m$, and its unipotent radical is trivial. [F2, step 1.1, algebra]
 
 3.1 The maximal proper parabolics correspond to $I=\Delta\smallsetminus\{i\}$, i.e. to the stabilizers of a single subspace of dimension $i$: taking $a_1=i$, $a_2=n-i$ gives the block upper triangular group with two diagonal blocks, which is the stabilizer of $k^i\subseteq k^n$, and the general $P_I$ is the intersection of these stabilizers over the cuts $i\in\Delta\smallsetminus I$, not over $I$. For $n\ge3$, the minimal proper parabolics strictly above $B$ are $P_{\{i\}}$, since singletons are the minimal nonempty proper subsets of the base. For $n\le2$ there is no proper parabolic strictly between $B$ and $G$; in particular, for $n=2$ the singleton gives $G$, rather than a proper parabolic. Finally, the simple-root reflections act on the characters $\chi_i$ by adjacent transpositions. Since they generate the Weyl group, its faithful lattice action is precisely $S_n$. The Bruhat cells of $G/B$ are indexed by $S_n$, and the length $n(w)$ equals the dimension of the cell by the length formula of [F3]. For the roots $\chi_i-\chi_j$ with $i<j$, the count $|\Phi^+\cap w\Phi^-|$ is the inversion number of $w^{-1}$. This equals the inversion number of $w$: $(i,j)\mapsto(w(j),w(i))$ bijects their inversion sets. Thus the count is $\#\{(i,j):i<j,\ w(i)>w(j)\}$ over every field. [F2, F3, step 2.1, algebra] ∎
+
+
+## Remarks
+
+For a concrete instance of the cuts convention, take $n=5$ and $(a_1,a_2,a_3)=(2,1,2)$. Here $\Delta=\{1,2,3,4\}$, $I=\{1,4\}$ and $\Delta\smallsetminus I=\{2,3\}$. Write $F_d=\operatorname{span}_k(e_1,\dots,e_d)$. The arrow labels below are the dimensions of successive quotients, and each matrix cell is a block, of row and column sizes $(2,1,2)$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.5,every node/.style={font=\large}]
+\node (f0) at (-3,3.5) {$0$};
+\node (f2) at (-1,3.5) {$F_2$};
+\node (f3) at (1,3.5) {$F_3$};
+\node (f5) at (3,3.5) {$k^5$};
+\draw[->] (f0) -- node[above] {$2$} (f2);
+\draw[->] (f2) -- node[above] {$1$} (f3);
+\draw[->] (f3) -- node[above] {$2$} (f5);
+\node at (0,2.6) {$P_{\{1,4\}}=\mathrm{Stab}(F_2)\cap\mathrm{Stab}(F_3)$};
+\draw (-3,-1.5) rectangle (3,1.5);
+\draw (-1,-1.5) -- (-1,1.5);
+\draw (1,-1.5) -- (1,1.5);
+\draw (-3,-0.5) -- (3,-0.5);
+\draw (-3,0.5) -- (3,0.5);
+\node at (-2,1) {$A_1$};
+\node at (0,1) {$*$};
+\node at (2,1) {$*$};
+\node at (-2,0) {$0$};
+\node at (0,0) {$A_2$};
+\node at (2,0) {$*$};
+\node at (-2,-1) {$0$};
+\node at (0,-1) {$0$};
+\node at (2,-1) {$A_3$};
+\node at (0,-2) {$A_1,A_3\in\mathrm{GL}_2(k),\quad A_2\in\mathrm{GL}_1(k)$};
+\end{tikzpicture}
+```
+
+The stars denote arbitrary blocks of the indicated sizes. With matrices acting on column vectors, preservation of $F_2$ and $F_3$ forces exactly the displayed zero blocks below the diagonal, as in Verification 2.1–3.1. Setting the stars to zero gives $L_I$; replacing each $A_j$ by the identity block gives $R_u(P_I)$. This illustration uses only the two cuts in $\Delta\smallsetminus I$; the verification above is independent of the picture.

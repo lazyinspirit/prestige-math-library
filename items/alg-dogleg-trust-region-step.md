@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-dogleg-trust-region-step.json
+  precheck: n/a
 id: alg-dogleg-trust-region-step
 kind: algorithm
 title: "Dogleg steps for positive-definite trust-region models"
@@ -15,12 +18,6 @@ justified_by:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Jorge Nocedal and Stephen J. Wright, Numerical Optimization, second edition"
@@ -48,3 +45,42 @@ Newton-model step $p_N$ by solving $Bp_N=-g$.
    return $p_C$ otherwise.
 
 The status is `step` in the nonstationary branches.
+
+## Remarks
+
+The dogleg path first follows the negative gradient to $p_C$, then follows
+one straight segment toward $p_N$. The figure illustrates the
+boundary-intersection branch in two dimensions, with
+$g=(-1,0)^T$, $B=\begin{pmatrix}1&-1\\-1&2\end{pmatrix}$ and
+$\Delta=3/2$. Here $p_C=(1,0)^T$ is strictly inside the ball,
+$p_N=(2,1)^T$ is outside, and
+$p_D=p_C+t(p_N-p_C)$ with $t=(\sqrt{14}-2)/4$ lies on its boundary.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+  \coordinate (O) at (0,0);
+  \coordinate (C) at (2,0);
+  \coordinate (D) at (2.870829,0.870829);
+  \coordinate (N) at (4,2);
+  \draw[thick] (O) circle (3);
+  \node at (0,3.4) {$\|p\|_2=\Delta$};
+  \draw[very thick,blue,->] (O) -- (C);
+  \node at (0.9,0.35) {$-g$};
+  \draw[very thick,blue] (C) -- (D);
+  \draw[thick,dashed,->] (D) -- (N);
+  \fill (O) circle (2pt);
+  \fill[blue] (C) circle (2pt);
+  \fill[blue] (D) circle (2pt);
+  \fill (N) circle (2pt);
+  \node[below left] at (O) {$0$};
+  \node[below] at (C) {$p_C$};
+  \node[right] at (D) {$p_D$};
+  \node[above right] at (N) {$p_N$};
+\end{tikzpicture}
+```
+
+The dashed continuation is outside the ball; the solid dogleg ends at $p_D$.
+Step 4 still compares $m(p_D)$ and $m(p_C)$ before returning a step. The
+earlier branches return $p_N$ when it is feasible, or otherwise return
+$p_C$ when $p_C$ is already on the boundary; neither case is depicted here.
+The construction and its well-definedness do not depend on the figure.

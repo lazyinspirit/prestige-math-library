@@ -1,0 +1,76 @@
+{
+  "id": "thm-c-c-is-dense-in-l-p-for-radon-measures",
+  "agent": "/root/rendering_repair_coordinator/post_007",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution consumer PNG visibly prints C_c(X) and L^p(mu) literally in the supplier link. Both frozen and current provider titles lack math delimiters, whereas the unchanged provider Statement explicitly identifies the same spaces as $C_c(X)$ and $L^p(\\mu)$. The underscore and caret syntax is therefore intended mathematics left unrendered, rather than optional shorthand typography.",
+      "action": "Wrapped C_c(X) and L^p(\\mu) in inline math delimiters in the provider title, using YAML single quotes to preserve the TeX backslash.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "other: duplicated-literal-proof-justification-tags",
+      "verdict": "confirmed",
+      "reason": "Standalone original PNG shows literal [L1, choose] in step 1.1 and [step 1.1, L2] in step 2.1 while final source tag bundles already produce blue chips. Current and archived continuation bodies confirm these extra bundles repeat existing step justifications.",
+      "action": "Removed internal tag bundles from steps 1.1 and 2.1; retained all justification tokens by including choose in the final step-1.1 bundle. Every numbered step remains one source line with valid final tags.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Original title correction retained. Removed duplicated literal internal proof-tag bundles from steps 1.1 and 2.1, preserving all justifications in final bundles and every mathematical sentence/order.",
+  "source_lines_after": {
+    "7": "title: '$C_c(X)$ is dense in $L^p(\\mu)$ for a Radon measure'",
+    "37": "1.1 It suffices by [L1] to approximate $\\mathbf1_E$ when $\\mu(E)<\\infty$. Given $\\eta>0$, outer regularity gives open $U\\supseteq E$ with $\\mu(U\\setminus E)<\\eta^p/2$, and inner regularity of $U$ gives compact $K\\subseteq U$ with $\\mu(U\\setminus K)<\\eta^p/2$. [L1, choose]",
+    "39": "2.1 Choose $f\\in C_c(X)$ with $\\mathbf1_K\\le f\\le\\mathbf1_U$ by [L2]. Then $$|f-\\mathbf1_E|\\le\\mathbf1_{U\\setminus K}+\\mathbf1_{U\\setminus E}.$$ Since both indicators take only the values zero and one and their union is $U\\setminus(K\\cap E)$, while $0\\le f,\\mathbf1_E\\le1$, the error is bounded by the indicator of that union. Hence $$\\|f-\\mathbf1_E\\|_p^p\\le\\mu(U\\setminus K)+\\mu(U\\setminus E)<\\eta^p.$$ Thus $\\|f-\\mathbf1_E\\|_p<\\eta$. [step 1.1, L2]",
+    "41": "3.1 Approximate the finitely many indicator terms of a simple function separately and sum the resulting $C_c$ functions. Then use [L1] and the triangle inequality. [step 2.1, L1] \u220e "
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-c-c-is-dense-in-l-p-for-radon-measures.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-c-c-is-dense-in-l-p-for-radon-measures.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass",
+      "strategy": "direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-c-c-is-dense-in-l-p-for-radon-measures.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "status_preserved": "Entire continuation frontmatter, including exact status: published bytes and title, unchanged.",
+    "source_sha256": "25bf1bf249ec5ae6f1ebd816938484c982ede9550eb31bdab5852534ed0f6ace"
+  },
+  "previous_report": {
+    "path": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/thm-c-c-is-dense-in-l-p-for-radon-measures-before-trailing-tags-3fe192adea043d0892303fe9882d334353df695caf11319aa847c0267ffa0aca.json",
+    "sha256": "3fe192adea043d0892303fe9882d334353df695caf11319aa847c0267ffa0aca"
+  },
+  "preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-c-c-is-dense-in-l-p-for-radon-measures --out research/math-library-rendering-repairs-2026-10-23/previews/post007-trailing-tags-20261024T-followup-v2",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/post007-trailing-tags-20261024T-followup-v2/manifest.json",
+    "viewed_original_resolution": [
+      "screenshots/thm-c-c-is-dense-in-l-p-for-radon-measures--01.png"
+    ],
+    "result": "Affected body tile independently viewed: steps 1.1 and 2.1 no longer expose duplicate literal bundles; final blue chips remain, including choose.",
+    "initial_attempt": "Without TSX_TSCONFIG_PATH, preview failed with module alias resolution error; rerun with existing local web tsconfig succeeded."
+  }
+}

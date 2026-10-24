@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-colored-permutation-rsk-and-tableau-square-count.json
+  precheck: pass
 id: lem-hh-colored-permutation-rsk-and-tableau-square-count
 kind: lemma
 title: "Colored RSK and the multipartition square count"
@@ -44,3 +47,40 @@ $$ \sum_{\lambda\in\mathcal P_r(n)}(f^\lambda)^2=r^n n!. $$
 2.1 Starting with a colored permutation and applying the inverse just defined deletes, in each component, its recording boxes in reverse time order. The inverse identity in [F1] expels exactly the value inserted at that position, so it recovers every $\sigma(i)$ and the component records every $\kappa_i$. Conversely, starting from $(P,Q)$ and reversing, each expelled value is reinserted into the same component at the same recording time; the insertion/reverse-deletion identity of [F1] restores that component and its new box. Induction over $i$ therefore restores the original pair. Thus the two algorithms are mutually inverse. [step 1.1, step 1.2, F1]
 
 3.1 There are $n!$ permutations of $1,\ldots,n$ and independently $r$ choices of color at each of the $n$ positions, hence $r^n n!$ colored permutations. The bijection of step 2.1 sends them to the disjoint union over shapes $\lambda$ of pairs of standard multitableaux of shape $\lambda$, whose number is $\sum_\lambda(f^\lambda)^2$. This proves the square count. [step 2.1, F2, algebra] ∎
+
+
+## Remarks
+
+For $r=2$ and $n=4$, take $\sigma=(4,1,3,2)$ and $\kappa=(1,2,1,2)$. The two color subsequences of values are $(4,3)$ and $(1,2)$. The picture distinguishes the inserted values in $P$ from the global insertion times in $Q$; both multitableaux have shape $\lambda=((1,1),(2))$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (3.4,5) {$\sigma=(4,1,3,2),\quad\kappa=(1,2,1,2)$};
+\draw[->] (3.4,4.65) -- (3.4,3.85);
+\node[right] at (3.55,4.25) {colored row insertion};
+\node at (0.3,3.3) {$P^{(1)}$};
+\node at (2.3,3.3) {$Q^{(1)}$};
+\node at (4.6,3.3) {$P^{(2)}$};
+\node at (6.6,3.3) {$Q^{(2)}$};
+\draw (0,2.7) rectangle (0.6,2.1);
+\draw (0,2.1) rectangle (0.6,1.5);
+\node at (0.3,2.4) {$3$};
+\node at (0.3,1.8) {$4$};
+\draw (2,2.7) rectangle (2.6,2.1);
+\draw (2,2.1) rectangle (2.6,1.5);
+\node at (2.3,2.4) {$1$};
+\node at (2.3,1.8) {$3$};
+\draw (4,2.7) rectangle (4.6,2.1);
+\draw (4.6,2.7) rectangle (5.2,2.1);
+\node at (4.3,2.4) {$1$};
+\node at (4.9,2.4) {$2$};
+\draw (6,2.7) rectangle (6.6,2.1);
+\draw (6.6,2.7) rectangle (7.2,2.1);
+\node at (6.3,2.4) {$2$};
+\node at (6.9,2.4) {$4$};
+\node at (1.3,0.95) {color 1};
+\node at (5.6,0.95) {color 2};
+\end{tikzpicture}
+```
+
+For the inverse, the recording labels $4,3,2,1$ select components $2,1,2,1$. Reverse deletion expels the values $2,3,1,4$, respectively: in particular, deleting the lower box of $P^{(1)}$ moves its $4$ up and expels $3$. Thus the recovered pairs $(\sigma(i),\kappa_i)$ in descending time order are $(2,2),(3,1),(1,2),(4,1)$. The figure illustrates steps 1.1–2.1; the proof and square count remain independent of it.

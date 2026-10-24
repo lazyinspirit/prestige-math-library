@@ -1,10 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-nilpotent-polynomial-data-invisible-to-zero-locus.json
+  precheck: n/a
 id: cex-nilpotent-polynomial-data-invisible-to-zero-locus
 kind: counterexample
-title: "The ideals (x) and (x^2) have the same zero locus but different quotient rings"
+title: "The ideals $(x)$ and $(x^2)$ have the same zero locus but different quotient rings"
 status: published
-verification:
-  audited: 2026-09-12
 origin: session
 provenance:
   statement: literature-derived

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hardy-littlewood-maximal-operator-characterises-a-p.json
+  precheck: pass
 id: thm-hardy-littlewood-maximal-operator-characterises-a-p
 kind: theorem
-title: The Hardy-Littlewood maximal operator characterises A_p
+title: The Hardy-Littlewood maximal operator characterises Aₚ
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,17 +22,16 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorems 4.29 and 4.31 with §§4.3-4.4, printed pp. 81-85"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
 
 Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let
 $1<p<\infty$ and let $w$ be a weight
-([[def-weight-and-weighted-lp-space]]). Then the centred maximal operator $M$ is
+([[def-weight-and-weighted-lp-space|Weights, their associated measures, and the spaces $L^p(w)$]]). Then the centred maximal operator $M$ is
 bounded on $L^p(w)$ if and only if $w\in A_p$
-([[def-muckenhoupt-a-p-and-a-one-weights]]); equivalently the uncentred and the
+([[def-muckenhoupt-a-p-and-a-one-weights|Muckenhoupt $A_p$ and $A_1$ weights]]); equivalently the uncentred and the
 cube maximal operators are bounded on $L^p(w)$ exactly for $w\in A_p$. If
 $w\in A_p$ then
 $$\|Mf\|_{L^p(w)}\le C_{n,p}[w]_{A_p}^{1/(p-1)}\|f\|_{L^p(w)}\qquad(f\in L^p(w)),$$
@@ -40,7 +42,7 @@ then $w\in A_p$.
 
 **Given:** Countable Choice, $1<p<\infty$, a weight $w$, and the exponent $p'=p/(p-1)$; for the sufficiency direction also $w\in A_p$ and the dual weight $\sigma:=w^{-1/(p-1)}$.
 
-[F1] $A_p$ weights are doubling, $\sigma\in A_{p'}$ with $[\sigma]_{A_{p'}}=[w]_{A_p}^{1/(p-1)}$, and for every cube $Q$ $\langle w\rangle_Q\langle\sigma\rangle_Q^{p-1}\le[w]_{A_p}$ ([[lem-a-p-dual-weight-and-nesting-properties]], [[lem-a-p-weights-are-doubling]], [[def-muckenhoupt-a-p-and-a-one-weights]]).
+[F1] $A_p$ weights are doubling, $\sigma\in A_{p'}$ with $[\sigma]_{A_{p'}}=[w]_{A_p}^{1/(p-1)}$, and for every cube $Q$ $\langle w\rangle_Q\langle\sigma\rangle_Q^{p-1}\le[w]_{A_p}$ ([[lem-a-p-dual-weight-and-nesting-properties|Duality and nesting of the $A_p$ classes]], [[lem-a-p-weights-are-doubling|$A_p$ weights are doubling]], [[def-muckenhoupt-a-p-and-a-one-weights|Muckenhoupt $A_p$ and $A_1$ weights]]).
 
 [F2] Marcinkiewicz interpolation gives $\|Su\|_{L^q(\mu)}\le a_q\|u\|_{L^q(\mu)}$ for $q>1$ whenever $S$ is sublinear, weak $(1,1)$ with constant one and bounded on $L^\infty$ with constant one; here $a_q=2(q/(q-1))^{1/q}$ ([[thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity]]).
 

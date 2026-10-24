@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-plane-wave-shows-the-characteristic-speed-is-sharp.json
+  precheck: pass
 id: ex-plane-wave-shows-the-characteristic-speed-is-sharp
 kind: example
 title: "Plane-wave support translates at the characteristic speed"
@@ -22,12 +25,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)"
       url: "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "§4.4, printed pp. 88-90, (4.23)-(4.27): the wave equation on the line and travelling profiles"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -75,3 +73,35 @@ support need not be compact when $n\ge2$: the support is unbounded in transverse
 3.1 Translation and speed: the identity $\omega\cdot(x+ct\omega)=\omega\cdot x+ct$ gives $\operatorname{supp}u(\cdot,t)=\operatorname{supp}u(\cdot,0)+ct\omega$ directly from step 2.1; writing $a:=\min\operatorname{supp}F$ and $b:=\max\operatorname{supp}F$, both attained by [F5] applied to the identity on the nonempty compact $\operatorname{supp}F$, the support is contained in the closed slab $\{a+ct\le\omega\cdot x\le b+ct\}$ with $a<b$ (continuity and a nonzero value imply that the support contains an interval); the two bounding hyperplanes therefore translate by $ct\omega$, so each moves with velocity $c\omega$ and speed exactly $c$ along the direction $\omega$, and the support meets both bounding hyperplanes because $a,b\in\operatorname{supp}F$. [given, step 2.1, algebra, F5] ∎
 
 For $n=1$ the enclosing slab is the interval described by $a+ct\le\omega x\le b+ct$, and its front and back endpoints move with velocity $c\omega$; for $n\ge2$ the same hyperplanes bound the unbounded slab, and the statement is about the direction of propagation $\omega$ and not about compact support at time $t$. The statement of [[thm-finite-propagation-speed-for-the-wave-equation]] only gives the upper bound, which this family attains.
+
+## Remarks
+
+Write $s=\omega\cdot x$, $a=\min\operatorname{supp}F$ and
+$b=\max\operatorname{supp}F$ as in step 3.1. The space-time schematic below
+shows the enclosing slab $a+ct\le s\le b+ct$ for $t\ge0$. Both boundary
+lines have $ds/dt=c$; at a fixed time they represent the two bounding
+hyperplanes perpendicular to $\omega$. The region between them need not be
+filled by the support: gaps in $\operatorname{supp}F$ translate with the same
+velocity. For $n\ge2$, each allowed $s$ represents every transverse point in
+the corresponding hyperplane, so the picture does not assert spatial
+compactness. The verification above is independent of this schematic.
+
+```tikz
+\begin{tikzpicture}[x=1.05cm,y=1.05cm]
+  \draw[->] (0,0) -- (6.4,0) node[right] {$s=\omega\cdot x$};
+  \draw[->] (0,0) -- (0,3.4) node[above] {$t$};
+  \draw[thick,->] (1,0) -- (3.8,2.8);
+  \draw[thick,->] (3,0) -- (5.8,2.8);
+  \node[below] at (1,0) {$a$};
+  \node[below] at (3,0) {$b$};
+  \node[above left] at (3.8,2.8) {$s=a+ct$};
+  \node[above right] at (5.8,2.8) {$s=b+ct$};
+  \draw[dashed] (0,1.5) -- (5.1,1.5);
+  \node[left] at (0,1.5) {$T$};
+  \draw[thick] (2.5,1.4) -- (2.5,1.6);
+  \draw[thick] (4.5,1.4) -- (4.5,1.6);
+  \node[below right] at (2.5,1.4) {$a+cT$};
+  \node[above right] at (4.5,1.6) {$b+cT$};
+  \node[align=center] at (2.65,0.65) {enclosing\\slab};
+\end{tikzpicture}
+```

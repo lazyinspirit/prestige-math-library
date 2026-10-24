@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-omitting-strictly-semistable-objects-breaks-hn-factorization.json
+  precheck: pass
 id: cex-omitting-strictly-semistable-objects-breaks-hn-factorization
 kind: counterexample
 title: "Omitting strictly semistable objects breaks Hall factorization at the A₂ wall"
@@ -21,19 +24,18 @@ sources:
       url: "https://arxiv.org/pdf/1611.03696"
     - title: "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §§2 and 4"
       url: "https://arxiv.org/pdf/math/0204059"
-verification:
-  precheck: pass
+
 ---
 
 ## Quiver
 
-~~~tikz
-\begin{tikzpicture}[>=stealth]
+```tikz
+\begin{tikzpicture}[>=stealth,font=\Large]
   \node[circle,draw,inner sep=2pt,label=below:{1}] (v1) at (0,0) {};
   \node[circle,draw,inner sep=2pt,label=below:{2}] (v2) at (2,0) {};
   \draw[->] (v1) -- (v2);
 \end{tikzpicture}
-~~~
+```
 
 The vertices are $1,2$ and the single directed edge is $1\to2$.
 

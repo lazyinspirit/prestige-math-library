@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-square-root-kalman-triangular-solve-forward-bound.json
+  precheck: pass
 id: lem-square-root-kalman-triangular-solve-forward-bound
 kind: lemma
 title: "An innovation solve residual gives a singular-value forward bound"
@@ -23,12 +26,7 @@ sources:
     - title: "M. A. Salzmann, Some Aspects of Kalman Filtering, Technical Report 140"
       url: "https://gge.ext.unb.ca/Pubs/TR140.pdf"
       locator: "§3.3.1, square-root measurement update; the singular-value residual bound is proved locally here."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -58,7 +56,7 @@ $\nu>0$.
 [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
 
 [F2] For every linear map $A$, $\|A^TA\|_2=\|A\|_2^2$.
-[[cor-operator-norm-submultiplicative-and-t-star-t-identity]]
+[[cor-operator-norm-submultiplicative-and-t-star-t-identity|The operator norm is submultiplicative and satisfies $\lVert T^*T\rVert=\lVert T\rVert^2$]]
 
 [F3] Euclidean inner products satisfy $|x^Ty|\le\|x\|_2\|y\|_2$.
 [[thm-cauchy-schwarz-in-an-inner-product-space]]

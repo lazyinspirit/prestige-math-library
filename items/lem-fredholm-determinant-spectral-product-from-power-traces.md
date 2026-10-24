@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fredholm-determinant-spectral-product-from-power-traces.json
+  precheck: pass
 id: lem-fredholm-determinant-spectral-product-from-power-traces
 kind: lemma
 title: Spectral product from traces of powers
@@ -45,13 +48,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -139,6 +135,4 @@ locally uniformly; if the nonzero eigenvalue list is empty, the product is one.
 
 5.1 The disk $U=\{z:|z|<r\}$ is a complex domain. Since $\Phi$ is nonzero there, $Q:=D_T/\Phi$ is holomorphic on $U$. The quotient rule [A14] and the derivative equality above give $Q'=0$ on $U$. Hence [A14] makes $Q$ constant; as $D_T(0)=\Phi(0)=1$, $Q\equiv1$ on $U$. Thus $D_T=\Phi$ on a nonempty open disk. Both functions are entire by [A12] and the locally uniform product construction. The identity theorem [A14] extends their equality to all of $\mathbb C$, and the product convergence is locally uniform by construction. [A12, A14, step 1.3, step 1.4, step 4.1]
 
-6.1 If there is exactly one nonzero eigenvalue in the list, the finite product is the single factor $1+z\lambda_1(T)$ and the product and trace-power calculations above still apply. In particular, on a one-dimensional $H$ with $T=tI$, the local determinant construction reduces to $\det_H(I+zT)=1+zt$, which is exactly the product when $t\ne0$, and is the empty product when $t=0$. The zero operator and zero-dimensional space were handled above; finite lists stabilize in the product construction; no finite-dimensionality or nonzero-eigenvalue assumption is made for the general case. All disks used above have positive radius and every estimate is on a compact disk strictly inside the chosen radius; global equality includes every complex endpoint. AC is the exact assumption [A1], inherited by the spectral and trace suppliers, with no additional choice made. The conclusion is an equality, not an iff statement, so both iff directions are inapplicable. [A1, A10, A12, step 1.1, step 1.3, step 5.1]
-
-\qed
+6.1 If there is exactly one nonzero eigenvalue in the list, the finite product is the single factor $1+z\lambda_1(T)$ and the product and trace-power calculations above still apply. In particular, on a one-dimensional $H$ with $T=tI$, the local determinant construction reduces to $\det_H(I+zT)=1+zt$, which is exactly the product when $t\ne0$, and is the empty product when $t=0$. The zero operator and zero-dimensional space were handled above; finite lists stabilize in the product construction; no finite-dimensionality or nonzero-eigenvalue assumption is made for the general case. All disks used above have positive radius and every estimate is on a compact disk strictly inside the chosen radius; global equality includes every complex endpoint. AC is the exact assumption [A1], inherited by the spectral and trace suppliers, with no additional choice made. The conclusion is an equality, not an iff statement, so both iff directions are inapplicable. [A1, A10, A12, step 1.1, step 1.3, step 5.1] ∎

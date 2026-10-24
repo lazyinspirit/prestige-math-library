@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cg-affine-diagram-enumeration.json
+  precheck: pass
 id: lem-cg-affine-diagram-enumeration
 kind: lemma
 title: "Enumeration of the connected positive semidefinite corank-one diagrams"
@@ -37,12 +40,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, Princeton University Press, 2008; 600 PDF pages)"
@@ -151,3 +148,146 @@ In particular, if $|S|\ge3$, no edge is labelled $\infty$, every edge label is i
 5.1 The integer solutions to the inequality in Step 4.1, with $p\le q\le r$, are $(1,1,r)$ for $r\ge2$, $(1,2,r)$ for $2\le r\le5$, $(1,3,3)$, and $(2,2,2)$. Indeed, $p\ge3$ makes the sum at most $1/4+1/4+1/3<1$. If $p=2$ and $q\ge3$, the sum is at most $1/3+1/4+1/3<1$, so $q=2$ and then $1/3+1/3+1/r>1$ forces $r=2$. If $p=1$ and $q\ge4$, the sum is at most $1/2+1/5+1/4<1$, so $q\le3$; with $q=2$ the inequality gives $r\le5$, with $q=3$ it gives $r=3$, and $q=1$ allows every $r\ge2$. The $(1,1,r)$ stars and $(1,2,2),(1,2,3),(1,2,4)$ are the positive definite finite stars of Step 3.2 and so are excluded. The remaining cases $(2,2,2)$, $(1,3,3)$, and $(1,2,5)$ are precisely $\tilde E_6,\tilde E_7,\tilde E_8$ by [F21], as required. [F21,F25,step 3.2,step 4.1,algebra]
 
 6.1 The cases above exhaust connected affine form type diagrams: rank at most $2$ gives only $\tilde A_1$; in rank at least $3$, Step 1.3 gives the all-$3$ cycle case or a tree, Step 2.2 handles two or more labels at least $4$, Step 3.1 handles a single large label with a branch, Step 2.3 excludes an all-$3$ path, Steps 4.1-5.1 handle the remaining all-$3$ trees, and Steps 2.4-3.3 handle the remaining paths. Reading the resulting graph shapes against [F3,F18,F19,F20,F21,F22] gives exactly the list in the statement. Its families have no infinite labels above rank $2$, all finite labels among $3,4,6$, and at most two edges labelled at least $4$; the cyclic case is exactly $\tilde A_n$ ($n\ge2$). The low-rank aliases in the statement follow from [F15]. All witnesses and constructions use finitely many vertices and explicit formulas, so no Choice is used. [F1,F3,F5,F15,F18,F19,F20,F21,F22,F25,step 1.1,step 2.1,step 1.3,step 2.2,step 2.3,step 3.1,step 4.1,step 5.1,step 2.4,step 3.3,algebra] ∎
+
+## Remarks
+
+The following comparison plates show concrete members of the families in the statement, using the recipes in [[def-cg-standard-affine-diagrams]] (1)–(6). Every unlabelled edge has label $3$; vertices not joined by an edge have Coxeter label $2$. The pictures are undirected Coxeter diagrams, with no arrows or root-length data. The proof above is independent of these illustrations.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,every node/.style={font=\small},v/.style={circle,draw,fill=white,inner sep=1.7pt}]
+\node[anchor=east] at (-0.7,0) {$\tilde A_1$};
+\node[v] (v0) at (0,0) {};
+\node[v] (v1) at (1.5,0) {};
+\draw (v0) -- node[above] {$\infty$} (v1);
+\node[anchor=east] at (-0.7,-2) {$\tilde A_3$};
+\node[v] (v0) at (0,-2) {};
+\node[v] (v1) at (1,-1.4) {};
+\node[v] (v2) at (2,-2) {};
+\node[v] (v3) at (1,-2.6) {};
+\draw (v0) -- (v1);
+\draw (v1) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (v0);
+\node[anchor=east] at (-0.7,-4) {$\tilde B_4$};
+\node[v] (v0) at (0,-3.5) {};
+\node[v] (v1) at (0,-4.5) {};
+\node[v] (v2) at (1,-4) {};
+\node[v] (v3) at (2,-4) {};
+\node[v] (v4) at (3,-4) {};
+\draw (v0) -- (v2);
+\draw (v1) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- node[above] {$4$} (v4);
+\node[anchor=east] at (-0.7,-6) {$\tilde C_3$};
+\node[v] (v0) at (0,-6) {};
+\node[v] (v1) at (1,-6) {};
+\node[v] (v2) at (2,-6) {};
+\node[v] (v3) at (3,-6) {};
+\draw (v0) -- node[above] {$4$} (v1);
+\draw (v1) -- (v2);
+\draw (v2) -- node[above] {$4$} (v3);
+\node[anchor=east] at (-0.7,-8) {$\tilde D_4$};
+\node[v] (v0) at (1,-8) {};
+\node[v] (v1) at (0,-8) {};
+\node[v] (v2) at (2,-8) {};
+\node[v] (v3) at (1,-7.4) {};
+\node[v] (v4) at (1,-8.6) {};
+\draw (v0) -- (v1);
+\draw (v0) -- (v2);
+\draw (v0) -- (v3);
+\draw (v0) -- (v4);
+\node[anchor=east] at (-0.7,-10) {$\tilde D_6$};
+\node[v] (v0) at (0,-9.5) {};
+\node[v] (v1) at (0,-10.5) {};
+\node[v] (v2) at (1,-10) {};
+\node[v] (v3) at (2,-10) {};
+\node[v] (v4) at (3,-10) {};
+\node[v] (v5) at (4,-9.5) {};
+\node[v] (v6) at (4,-10.5) {};
+\draw (v0) -- (v2);
+\draw (v1) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (v4);
+\draw (v4) -- (v5);
+\draw (v4) -- (v6);
+\end{tikzpicture}
+```
+
+The cycle shown is $\tilde A_3$ (four vertices and four edges). The $\tilde B_4$ tree has one terminal $4$-edge, whereas $\tilde C_3$ has two. The two branch vertices of $\tilde D_6$ are separated by two edges; $\tilde D_4$ instead has a single degree-$4$ vertex.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,every node/.style={font=\small},v/.style={circle,draw,fill=white,inner sep=1.7pt}]
+\begin{scope}[xshift=3cm]
+\node[anchor=east] at (-2.8,0) {$\tilde E_6$};
+\node[v] (v0) at (0,0) {};
+\node[v] (v1) at (-0.7,0) {};
+\node[v] (v2) at (-1.4,0) {};
+\node[v] (v3) at (0.7,0) {};
+\node[v] (v4) at (1.4,0) {};
+\node[v] (v5) at (0,0.7) {};
+\node[v] (v6) at (0,1.4) {};
+\draw (v0) -- (v1);
+\draw (v1) -- (v2);
+\draw (v0) -- (v3);
+\draw (v3) -- (v4);
+\draw (v0) -- (v5);
+\draw (v5) -- (v6);
+\end{scope}
+\begin{scope}[xshift=3cm]
+\node[anchor=east] at (-2.8,-3.5) {$\tilde E_7$};
+\node[v] (v0) at (0,-3.5) {};
+\node[v] (v1) at (-0.7,-3.5) {};
+\node[v] (v2) at (0.7,-3.5) {};
+\node[v] (v3) at (1.4,-3.5) {};
+\node[v] (v4) at (2.0999999999999996,-3.5) {};
+\node[v] (v5) at (0,-2.8) {};
+\node[v] (v6) at (0,-2.1) {};
+\node[v] (v7) at (0,-1.4000000000000004) {};
+\draw (v0) -- (v1);
+\draw (v0) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (v4);
+\draw (v0) -- (v5);
+\draw (v5) -- (v6);
+\draw (v6) -- (v7);
+\end{scope}
+\begin{scope}[xshift=3cm]
+\node[anchor=east] at (-2.8,-7) {$\tilde E_8$};
+\node[v] (v0) at (0,-7) {};
+\node[v] (v1) at (-0.7,-7) {};
+\node[v] (v2) at (0.7,-7) {};
+\node[v] (v3) at (1.4,-7) {};
+\node[v] (v4) at (2.0999999999999996,-7) {};
+\node[v] (v5) at (2.8,-7) {};
+\node[v] (v6) at (3.5,-7) {};
+\node[v] (v7) at (0,-6.3) {};
+\node[v] (v8) at (0,-5.6) {};
+\draw (v0) -- (v1);
+\draw (v0) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (v4);
+\draw (v4) -- (v5);
+\draw (v5) -- (v6);
+\draw (v0) -- (v7);
+\draw (v7) -- (v8);
+\end{scope}
+\node[anchor=east] at (-0.7,-9) {$\tilde F_4$};
+\node[v] (v0) at (0,-9) {};
+\node[v] (v1) at (1,-9) {};
+\node[v] (v2) at (2,-9) {};
+\node[v] (v3) at (3,-9) {};
+\node[v] (v4) at (4,-9) {};
+\draw (v0) -- (v1);
+\draw (v1) -- (v2);
+\draw (v2) -- node[above] {$4$} (v3);
+\draw (v3) -- (v4);
+\node[anchor=east] at (-0.7,-11) {$\tilde G_2$};
+\node[v] (v0) at (0,-11) {};
+\node[v] (v1) at (1,-11) {};
+\node[v] (v2) at (2,-11) {};
+\draw (v0) -- (v1);
+\draw (v1) -- node[above] {$6$} (v2);
+\end{tikzpicture}
+```
+
+The three exceptional stars have arm lengths $(2,2,2)$, $(1,3,3)$ and $(1,2,5)$, respectively; length counts edges from the central vertex. Thus they have $7$, $8$ and $9$ vertices. The path labels are $(3,3,4,3)$ for $\tilde F_4$ and $(3,6)$ for $\tilde G_2$. The low-rank aliases remain $\tilde C_1=\tilde A_1$, $\tilde B_2=\tilde C_2$, $\tilde D_3=\tilde A_3$, $\tilde E_4=\tilde A_4$ and $\tilde E_5=\tilde D_5$, as in clause (7) of the standard recipes.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-relative-hard-lefschetz-and-perverse-splitting-for-projective-algebraic-maps.json
+  precheck: pass
 id: thm-relative-hard-lefschetz-and-perverse-splitting-for-projective-algebraic-maps
 kind: theorem
 title: "Relative hard Lefschetz and perverse splitting for compact projective algebraic maps"
@@ -11,12 +14,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -44,7 +41,7 @@ Assume the inherited Axiom of Choice. Let $f:X\to Y$ be a projective morphism of
 
 ## Proof
 
-**Proof technique:** lexicographic well-founded induction on the pair $(r(f),\dim f(X))$, with defect the primary integer, using the simultaneous induction step of [F1].
+**Proof technique:** lexicographic well-founded induction on the pair consisting of the defect and the dimension of the image, with defect the primary integer, using the simultaneous induction step of [F1].
 
 1.1 It suffices to treat a connected component of $X$: the connected components of the smooth variety $X$ are open and closed and there are finitely many of them, and the direct image of their direct sum is the direct sum of the direct images by [F3]. Such a component is irreducible. Replace $Y$ by the projective image of the component with reduced structure; a closed immersion is perverse exact by [F3], so extending by closed support later preserves the splitting and the IC description. For the reduced image the pair $(r,m)=(r(f),\dim f(X))$ consists of nonnegative integers, as in the induction-step supplier [F1]. If $m=0$, the map factors through a point, and [F2] proves the entire asserted package directly, including the semisimplicity of the complexified local systems (which are finite-dimensional vector spaces on a point). The empty source gives the zero complex and is covered by the same statement. For a remaining map fix its pair and assume the package of [F1] for every lexicographically smaller pair. [F1, F2, F3, given, base, ih]
 

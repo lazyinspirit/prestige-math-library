@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex.json
+  precheck: pass
 id: thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex
 kind: theorem
 title: Gaussian elimination splits a contractible two-term complex
@@ -19,9 +22,7 @@ sources:
       url: "https://www.math.utoronto.ca/~drorbn/papers/FastKh/FastKh.pdf"
     - title: "David Clark, Scott Morrison and Kevin Walker, Fixing the Functoriality of Khovanov Homology, Appendix A.1, printed pp. 1562-1563"
       url: "https://msp.org/gt/2009/13-3/gt-v13-n3-p08-p.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -89,3 +90,27 @@ biproduct.
 4.1 Define $p:=\tilde pT:X^\bullet\to\bar X^\bullet$, $\imath:=T^{-1}\tilde\imath:\bar X^\bullet\to X^\bullet$ and $h:=T^{-1}\tilde hT$. Then $p\imath=\tilde pTT^{-1}\tilde\imath=\tilde p\tilde\imath=1$ and $1-\imath p=T^{-1}(1-\tilde\imath\tilde p)T=T^{-1}(d\tilde h+\tilde h d)T=d(T^{-1}\tilde hT)+(T^{-1}\tilde hT)d=dh+hd$, using $Td=dT$ and $T^{-1}d=dT^{-1}$ for the chain isomorphisms $T,T^{-1}$ of steps 1.1 to 2.2. Hence $p$ and $\imath$ are cochain maps that are homotopy inverse, so $X^\bullet$ and $\bar X^\bullet$ are homotopy equivalent. [step 2.3, step 3.1, algebra]
 
 5.1 Steps 1.1, 1.2 and 2.1 show that $T$ is a cochain map and steps 2.2 and 3.1 show that $T'$ is a two-sided inverse cochain map, so $T$ is an isomorphism of complexes with inverse $T^{-1}=T'$; steps 1.3 and 1.4 show that $K$ is a complex contractible via $\varphi^{-1}$; and step 4.1 transports the direct-sum deformation retract along $T$ to the homotopy equivalence of $X^\bullet$ with $\bar X^\bullet$. Because the construction replaces the objects $A\oplus U$, $B\oplus V$ by $A$, $B$ and modifies the neighbouring differentials, it never asserts an equality of complexes between $X^\bullet$ and $\bar X^\bullet$: the deletion of $K$ is a homotopy equivalence only after the chain isomorphism $T$. [step 1.1, step 1.2, step 2.1, step 2.2, step 3.1, step 1.4, step 4.1] ∎
+
+## Remarks
+
+The diagram separates the change of coordinates from deletion of the
+contractible summand. Put
+$D=\begin{pmatrix}\bar d&0\\0&\varphi\end{pmatrix}$, where
+$\bar d=a-b\varphi^{-1}c$. The middle row is $\bar X^\bullet\oplus K$;
+the bottom row is $\bar X^\bullet$. The first vertical map is the cochain
+isomorphism $T$, and the second is the projection $\tilde p$.
+
+```tikzcd
+X^{n-1} \arrow[r,"d^{n-1}"] \arrow[d,"1"'] & A\oplus U \arrow[r,"d^n"] \arrow[d,"R^{-1}"'] & B\oplus V \arrow[r,"d^{n+1}"] \arrow[d,"L"'] & X^{n+2} \arrow[d,"1"] \\
+X^{n-1} \arrow[r,"j"'] \arrow[d,"1"'] & A\oplus U \arrow[r,"D"'] \arrow[d,"\mathrm{pr}_A"'] & B\oplus V \arrow[r,"(r\;0)"'] \arrow[d,"\mathrm{pr}_B"'] & X^{n+2} \arrow[d,"1"] \\
+X^{n-1} \arrow[r,"p"'] & A \arrow[r,"\bar d"'] & B \arrow[r,"r"'] & X^{n+2}
+```
+
+Here $j=\begin{pmatrix}p\\0\end{pmatrix}$, and
+$\mathrm{pr}_A$ and $\mathrm{pr}_B$ are the biproduct projections;
+the omitted degrees and vertical components are unchanged identities.
+The $U\xrightarrow{\varphi}V$ block of $D$ is precisely $K$, whose
+contracting homotopy has component $\varphi^{-1}:V\to U$. Thus the lower
+vertical map is a homotopy equivalence, whereas the upper one is an
+isomorphism. The proof above establishes these facts independently of the
+diagram.

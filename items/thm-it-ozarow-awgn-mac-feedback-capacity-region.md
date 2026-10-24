@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-it-ozarow-awgn-mac-feedback-capacity-region.json
+  precheck: pass
 id: thm-it-ozarow-awgn-mac-feedback-capacity-region
 kind: theorem
 title: Ozarow capacity region of the two-user real AWGN MAC with feedback
@@ -63,3 +66,42 @@ The parameter $\rho$ is induced by causal feedback; no preshared common randomne
 
 9.1 For $\rho>\rho_\star$, $a_j(\rho)\le a_j(\rho_\star)$ and $b(\rho)\ge b(\rho_\star)=a_1(\rho_\star)+a_2(\rho_\star)$. Thus the region at $\rho$ is a rectangle contained in the rectangle at $\rho_\star$ and adds no rates. Steps 6.1, 7.1 and 8.1 therefore achieve the full union in the Statement. Combining with the converse proves equality. [step 6.1, step 7.1, step 8.1, algebra, algebra] ∎
 
+
+## Remarks
+
+For the illustrative finite-power choice $P_1=P_2=N=1$, write $a(\rho)=\frac12\ln(2-\rho^2)$ and $b(\rho)=\frac12\ln(3+2\rho)$. Each shaded polygon below is the region for one fixed parameter: $0\le R_1,R_2\le a(\rho)$ and $R_1+R_2\le b(\rho)$. The first panel is the no-feedback region. The middle panel shows the larger sum bound and smaller individual bounds; at $\rho_\star\approx0.311108$, the sum face shrinks to the top-right corner of a rectangle. Coordinates are in nats/use and rounded for plotting.
+
+```tikz
+\begin{tikzpicture}[x=7cm,y=7cm]
+\fill[blue!15] (0,0) -- (0.346574,0) -- (0.346574,0.202733) -- (0.202733,0.346574) -- (0,0.346574) -- (0,0);
+\draw[thick,blue] (0,0) -- (0.346574,0) -- (0.346574,0.202733) -- (0.202733,0.346574) -- (0,0.346574) -- (0,0);
+\draw[->] (0,0) -- (0.43,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,0.43) node[above] {$R_2$};
+\draw (0.2,0.006) -- (0.2,-0.006) node[below] {$0.2$};
+\draw (0.006,0.2) -- (-0.006,0.2) node[left] {$0.2$};
+\node[below left] at (0,0) {$0$};
+\node at (0.20,0.49) {$\rho=0$};
+\begin{scope}[xshift=4cm]
+\fill[blue!15] (0,0) -- (0.330699,0) -- (0.330699,0.295682) -- (0.295682,0.330699) -- (0,0.330699) -- (0,0);
+\draw[thick,blue] (0,0) -- (0.330699,0) -- (0.330699,0.295682) -- (0.295682,0.330699) -- (0,0.330699) -- (0,0);
+\draw[->] (0,0) -- (0.43,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,0.43) node[above] {$R_2$};
+\draw (0.2,0.006) -- (0.2,-0.006) node[below] {$0.2$};
+\draw (0.006,0.2) -- (-0.006,0.2) node[left] {$0.2$};
+\node[below left] at (0,0) {$0$};
+\node at (0.20,0.49) {$\rho=1/4$};
+\end{scope}
+\begin{scope}[xshift=8cm]
+\fill[blue!15] (0,0) -- (0.321771,0) -- (0.321771,0.321771) -- (0,0.321771) -- (0,0);
+\draw[thick,blue] (0,0) -- (0.321771,0) -- (0.321771,0.321771) -- (0,0.321771) -- (0,0);
+\draw[->] (0,0) -- (0.43,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,0.43) node[above] {$R_2$};
+\draw (0.2,0.006) -- (0.2,-0.006) node[below] {$0.2$};
+\draw (0.006,0.2) -- (-0.006,0.2) node[left] {$0.2$};
+\node[below left] at (0,0) {$0$};
+\node at (0.20,0.49) {$\rho=\rho_\star$};
+\end{scope}
+\end{tikzpicture}
+```
+
+These are three members of the union over $0\le\rho\le1$, not a plot of the full union. As steps 6.1–9.1 show, parameters above $\rho_\star$ give smaller contained rectangles. If one power is zero, the union instead lies on the other user's rate axis; if both are zero, it is the origin. The proof does not rely on the illustration.

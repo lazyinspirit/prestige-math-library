@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-positive-conormal-degree-of-a-fibre-divisor.json
+  precheck: pass
 id: lem-positive-conormal-degree-of-a-fibre-divisor
 kind: lemma
 title: "A divisor supported in a special fibre has positive conormal degree on some component"
@@ -25,12 +28,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)"
       url: "https://stacks.math.columbia.edu/tag/0AX7"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -83,5 +81,5 @@ $\mathcal O_X(-Z)|_Z$ has a component of positive degree.
 
 ## Remarks
 
-- The rescaling by d_i/e_i is what makes the section vanish on all of Z while remaining nonzero on the chosen component.
-- No embedded associated points of Z is used twice: to conclude that u vanishes on Z and that multiplication by g_i is injective on O_Z.
+- The rescaling by $d_i/e_i$ is what makes the section vanish on all of $Z$ while remaining nonzero on the chosen component.
+- No embedded associated points of $Z$ is used twice: to conclude that $u$ vanishes on $Z$ and that multiplication by $g_i$ is injective on $\mathcal O_Z$.

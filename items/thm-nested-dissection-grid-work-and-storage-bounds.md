@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-nested-dissection-grid-work-and-storage-bounds.json
+  precheck: pass
 id: thm-nested-dissection-grid-work-and-storage-bounds
 kind: theorem
 title: Nested dissection gives the stated work and factor-storage bounds on regular grids
@@ -16,8 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Jennifer Scott and Miroslav Tůma, Algorithms for Sparse Linear Systems, Chapter 8, §8.4"
@@ -31,7 +32,9 @@ sources:
 ## Statement
 
 Let $d\in\{2,3\}$, $k\ge2$, and $n=k^d$. Identify the coordinate grid $\{0,\ldots,k-1\}^d$ with the zero-based matrix indices by the lexicographic bijection in [[alg-nested-dissection-ordering-on-regular-grids]]. Let $A\in\mathbb R^{n\times n}$ be symmetric positive definite, with structural graph a subgraph of the $d$-dimensional nearest-neighbor grid. Under the coordinate nested-dissection ordering, exact scalar multifrontal Cholesky has
+
 $$\begin{array}{c|c|c} d&\text{arithmetic work}&\text{symbolic factor storage}\\ 2&O(n^{3/2})&O(n\log n)\\ 3&O(n^2)&O(n^{4/3}). \end{array}$$
+
 The storage is the number of allocated factor entries, including structural zeros, and excludes temporary contribution arrays. The bounds use the stated grid geometry; they assert no general-graph bound. For $k=1$, there is one pivot and both work and factor storage are $O(1)$.
 
 ## Facts & Assumptions
@@ -62,3 +65,41 @@ The storage is the number of allocated factor entries, including structural zero
 
 3.1 When $d=2$, $n=k^2$ gives $k^3=n^{3/2}$ and $k^2\log k=O(n\log n)$ for $k\ge2$. When $d=3$, $n=k^3$ gives $k^6=n^2$ and $k^4=n^{4/3}$. Thus steps 1.2, 2.1 and 2.2 give the displayed rates and the $k=1$ case. The proof used the coordinate-box and grid-boundary counts in [F1]–[F2] together with the fill containment proved in step 1.3, so it does not imply a bound for arbitrary graphs. [step 1.2, step 2.1, step 2.2, F1, F2, F3, F4, algebra] ∎
 
+
+## Remarks
+
+For a concrete two-dimensional example, take $k=7$. The red vertices form the root separator $S_0=\{(x,y):x=3\text{ or }y=3\}$; its four child boxes $B_1,B_2,B_3,B_4$ have side length $3$ and are labelled in the lexicographic order of their lower corners. Inside $B_1=\{0,1,2\}^2$, the blue vertices form its separator $S_1=\{(x,y)\in B_1:x=1\text{ or }y=1\}$. Gray segments are nearest-neighbor grid edges; colors indicate separator membership, not fill edges.
+
+```tikz
+\begin{tikzpicture}[x=0.72cm,y=0.72cm]
+\foreach \x in {0,...,6} {
+  \draw[gray!55,thin] (\x,0) -- (\x,6);
+}
+\foreach \y in {0,...,6} {
+  \draw[gray!55,thin] (0,\y) -- (6,\y);
+}
+\foreach \x in {0,...,6} {
+  \foreach \y in {0,...,6} {
+    \fill[black] (\x,\y) circle (2pt);
+  }
+}
+\foreach \t in {0,...,6} {
+  \fill[red!75!black] (3,\t) circle (3pt);
+  \fill[red!75!black] (\t,3) circle (3pt);
+}
+\foreach \t in {0,1,2} {
+  \fill[blue!75!black] (1,\t) circle (3pt);
+  \fill[blue!75!black] (\t,1) circle (3pt);
+}
+\node at (1,-0.65) {$B_1$};
+\node at (1,6.65) {$B_2$};
+\node at (5,-0.65) {$B_3$};
+\node at (5,6.65) {$B_4$};
+\node[red!75!black,anchor=west] at (7,4.8) {$S_0$};
+\draw[red!75!black,->] (7,4.8) -- (3.15,4.8);
+\node[blue!75!black,anchor=east] at (-1,1) {$S_1$};
+\draw[blue!75!black,->] (-1,1) -- (0.85,1);
+\end{tikzpicture}
+```
+
+Deleting $S_0$ leaves exactly those four disconnected $3\times3$ grid boxes. Deleting $S_1$ from $B_1$ leaves four singleton child boxes. Each child is recursively ordered before its own separator, so all of $B_1$, then $B_2$, then $B_3$, then $B_4$ precede $S_0$; the other children's internal separators are not highlighted. Here $|S_0|=7+7-1=13\le2\cdot7$ and $|S_1|=3+3-1=5\le2\cdot3$, illustrating the two-dimensional separator bound $|S_B|\le2s$ in step 1.3. The actual side lengths at these first three depths are $7,3,1$, consistent with the upper bounds $s_r=\lceil7/2^r\rceil$ in step 1.1. This illustration is independent of the proof and makes no additional work or storage claim.

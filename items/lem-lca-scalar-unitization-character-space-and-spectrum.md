@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-lca-scalar-unitization-character-space-and-spectrum.json
+  precheck: pass
 id: lem-lca-scalar-unitization-character-space-and-spectrum
 kind: lemma
-title: "Scalar unitisation of L^1 of an LCA group: characters, spectrum and identity criterion"
+title: "Scalar unitisation of $L^1$ of an LCA group: characters, spectrum and identity criterion"
 dependency_level: 5
 deps:
 - lem-lca-lone-convolution-is-a-commutative-banach-star-algebra
@@ -43,11 +46,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)"
@@ -78,11 +76,11 @@ that $\widehat f\equiv0$ implies $f=0$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice and Dependent Choice, a locally compact Hausdorff abelian group $G$ with Haar measure $m_G$, $A=L^1(G,m_G)$ with its convolution, involution and norm ([[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-integrable-real-and-complex-functions-and-their-integrals]]), the product $A^+=\mathbb C\oplus A$ with the operations displayed above, and its character space $\Delta(A^+)$.
+**Given:** The Axiom of Choice and Dependent Choice, a locally compact Hausdorff abelian group $G$ with Haar measure $m_G$, $A=L^1(G,m_G)$ with its convolution, involution and norm ([[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra|$L^1$ of an LCA group is a commutative Banach star algebra under convolution]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-integrable-real-and-complex-functions-and-their-integrals]]), the product $A^+=\mathbb C\oplus A$ with the operations displayed above, and its character space $\Delta(A^+)$.
 
-[F1] $A^+$ is a unital commutative complex Banach algebra with $\|(z,f)\|=|z|+\|f\|_1$ ([[def-unital-banach-algebra]], [[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]]); every character of a nonzero unital commutative Banach algebra is unital and satisfies $|\chi|\le\|\cdot\|$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]]).
+[F1] $A^+$ is a unital commutative complex Banach algebra with $\|(z,f)\|=|z|+\|f\|_1$ ([[def-unital-banach-algebra]], [[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra|$L^1$ of an LCA group is a commutative Banach star algebra under convolution]]); every character of a nonzero unital commutative Banach algebra is unital and satisfies $|\chi|\le\|\cdot\|$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]]).
 
-[F2] The nonzero multiplicative linear functionals on $A$ are exactly $f\mapsto\widehat f(\gamma)$ for $\gamma\in\widehat G$ ([[lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations]]), and under this bijection the topology of pointwise convergence on $A$ equals the compact-open topology of $\widehat G$ ([[lem-lca-lone-character-topology-is-the-compact-open-topology]]).
+[F2] The nonzero multiplicative linear functionals on $A$ are exactly $f\mapsto\widehat f(\gamma)$ for $\gamma\in\widehat G$ ([[lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations|Nonzero multiplicative functionals on $L^1$ of an LCA group are Fourier evaluations]]), and under this bijection the topology of pointwise convergence on $A$ equals the compact-open topology of $\widehat G$ ([[lem-lca-lone-character-topology-is-the-compact-open-topology|The character topology on $L^1$ of an LCA group is the compact-open topology]]).
 
 [F3] $\sigma(a)=\{\chi(a):\chi\in\Delta\}$ for every element $a$ of a commutative unital Banach algebra, and this spectrum is a nonempty compact subset of $\mathbb C$ ([[thm-spectrum-as-character-values]], [[thm-spectrum-is-nonempty-compact-and-norm-bounded]]); the spectral radius satisfies $r(a)=\lim_n\|a^n\|^{1/n}=\max\{|\lambda|:\lambda\in\sigma(a)\}$ ([[thm-spectral-radius-formula]], [[def-spectral-radius]]).
 

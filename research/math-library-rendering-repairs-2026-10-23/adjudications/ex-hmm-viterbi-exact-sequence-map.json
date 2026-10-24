@@ -1,0 +1,83 @@
+{
+  "id": "ex-hmm-viterbi-exact-sequence-map",
+  "agent": "/root/rendering_repair_coordinator/info_008",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-diagram-fence",
+      "verdict": "confirmed",
+      "reason": "Individually viewed both original PNG tiles at original resolution. Tile 01 displays literal TikZ commands, rather than the two-state graph; current and frozen source use tilde fences, which the native diagram extraction does not recognize. The graph itself has the correct HMM weights.",
+      "action": "Changed only the opening and closing diagram fences from tildes to backticks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced unsupported tilde diagram fences with native backtick tikz fences; preserved all TikZ commands and every mathematical claim, parameter, verification step and frontmatter byte.",
+  "source_lines_after": [
+    61,
+    73
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Two-state directed transition graph on S={u,v}, with an auxiliary start node. This is the HMM parameter graph, not a time-layered trellis.",
+      "check": "The arrows start->u and start->v carry pi(u)=3/4 and pi(v)=1/4, respectively. These sum to 1 and are initial probabilities, not emission-weighted initial trellis weights."
+    },
+    {
+      "relations": "u->u and v->v have weight 3/4; u->v and v->u have weight 1/4.",
+      "check": "These are exactly A(u,u), A(v,v), A(u,v), A(v,u) in the Example and the definition supplier. Both outgoing transition rows sum to 1. Opposite curved arrows preserve their directions; loop arrows return to the same state."
+    },
+    {
+      "trellis_conventions": "The emission factors remain in the prose, and are not mislabeled as graph-edge weights.",
+      "check": "The algorithm supplier and F2 use alpha=(9/16,1/16) for observation 0 and w_t(r,s)=A(r,s)B(s,1) for t=2,3, with terminal weights 1. Thus weighted trellis rows are (3/16,3/16) and (1/16,9/16). Step 2.1 gives D2=(27/256,27/256) and D3=(81/4096,243/4096), yielding traceback u,v,v. No maximizing path is asserted visually by this parameter graph."
+    },
+    {
+      "exact_calculation": "Independently enumerated all 8 paths using Python fractions and the local joint-mass definition.",
+      "check": "Numerators over 4096 are uuu=81,uuv=81,uvu=27,uvv=243,vuu=3,vuv=3,vvu=9,vvv=81. Sum=528, evidence=33/256, unique maximum uvv, posterior=81/176. These agree with both numbered Verification steps. The proof uses explicit products and dynamic programming and remains independent of the illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-hmm-viterbi-exact-sequence-map.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs tools/precheck.mts --json items/ex-hmm-viterbi-exact-sequence-map.md",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-hmm-viterbi-exact-sequence-map.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-info-008\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-hmm-viterbi-exact-sequence-map --out research/math-library-rendering-repairs-2026-10-23/info-008-fresh-preview",
+      "exit_code": 0,
+      "output": "1 item, 2 tiles; 32 unrelated reference-map diagnostics",
+      "native_compile": "Fresh unique TMPDIR forces the native node-tikzjax renderer to compile without a pre-existing SVG cache. Capture receipt reports tikz_count=1, diagram_failures=[], katex_errors=[].",
+      "visual_inspection": "Standalone original-resolution fresh tile 01 shows all states, arrowheads and six probability labels without clipping or overlap. Labels are compact but readable; no source scaling or layout change warranted. Both tiles in initial current-state preview were also individually viewed at original resolution."
+    }
+  ],
+  "preview_directory": "research/math-library-rendering-repairs-2026-10-23/info-008-fresh-preview",
+  "guard_before_raw_sha256": "fb28ffcb7effb54d92ce569edc5d7462ed1f00d9bd595773e92c2bb5f555dbeb",
+  "after_raw_sha256": "5c3b1f67cdd89924313ffa01d63c7b63dfe2b494c5d1224676e448afbe2ddd32",
+  "status_preserved": "published; entire frontmatter byte-identical to frozen before",
+  "remaining_issues": []
+}

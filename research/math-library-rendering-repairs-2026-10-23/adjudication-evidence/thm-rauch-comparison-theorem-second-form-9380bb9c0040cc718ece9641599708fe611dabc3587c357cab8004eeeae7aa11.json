@@ -1,0 +1,67 @@
+{
+  "id": "thm-rauch-comparison-theorem-second-form",
+  "agent": "/root/rendering_repair_coordinator/dg_027",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --02 visibly displays dollar delimiters and TeX commands in the uppercase technique banner while adjacent proof equations are typeset. Queue tile --01 contains the statement and early Facts, not this banner; authentic same-item --02 supplies direct evidence. The banner is handled as plain text by the native renderer.",
+      "action": "Replaced mathematical markup only in the technique summary with equivalent readable prose: initial normal space, tensor Jacobi equation, identity and lambda times identity initial data, scalar model function.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Proof-technique banner at line 97 now uses prose rather than raw TeX; full statement, hypotheses, Facts, numbered proof and all frontmatter remain byte-identical.",
+  "source_lines_after": {
+    "97": "**Proof technique:** direct: transport the given field to the initial normal space, exhibit its tensor Jacobi equation with initial value the identity and initial derivative lambda times the identity, and apply the in-run Riccati comparison for scalar initial shape against the scalar model function."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "source_sha256_after": "a4b768c95a2994c3fa21c80143d64ae6a2f21497160c8fa2635cb1439e05d922",
+  "before_raw_sha256_guard": "b01c82e3945bea694660fd48f05e6a48e6831ed1217c778ba8b976b89a900ede",
+  "protected_metadata_preserved": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-rauch-comparison-theorem-second-form.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-rauch-comparison-theorem-second-form.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-rauch-comparison-theorem-second-form.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_viewed_standalone_original_resolution": [
+      "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-rauch-comparison-theorem-second-form--01.png",
+      "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-rauch-comparison-theorem-second-form--02.png",
+      "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-rauch-comparison-theorem-second-form--03.png"
+    ],
+    "fresh_preview_tile_viewed_standalone_original_resolution": "research/math-library-rendering-repairs-2026-10-23/previews/dg027/screenshots/thm-rauch-comparison-theorem-second-form--02.png",
+    "fresh_preview_observation": "The uppercase technique banner reads as clean prose across two lines with no dollar delimiters or TeX commands; adjacent Facts and proof equations remain typeset.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg027/manifest.json",
+    "manifest_sha256": "218ce00e1aeb8d1e04b105eeb94048d45d8e917dc9c30892c103ea03a269928d",
+    "source_binding": "a4b768c95a2994c3fa21c80143d64ae6a2f21497160c8fa2635cb1439e05d922",
+    "preview_limitations": "Local native ItemBody preview, not production HTTP route; reference-map diagnostics report 16 unrelated parse issues. No application edits."
+  },
+  "renderer_limitation": "Proof-technique summaries are rendered as plain React text with CSS uppercase; inline math is not parsed there."
+}

@@ -1,0 +1,101 @@
+---
+id: lem-the-level-one-vector-representation-has-a-perfect-crystal-with-lower-global-basis
+kind: lemma
+title: "The vector representation has a perfect crystal of level one and a lower global basis"
+status: published
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 6
+deps: [def-the-level-one-vector-representation-its-affinization-and-energy-function,
+       def-crystal-graph-epsilon-phi-and-weight, def-crystal-lattice-and-crystal-basis,
+       lem-rank-one-tensor-strings-have-the-crystal-limit-rule,
+       thm-quantized-sl-two-string-formulas, def-quantum-integers-factorials-and-divided-powers-at-q-i]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-11
+sources:
+  references:
+    - title: "Kashiwara-Miwa-Petersen-Yung, Perfect crystals and q-deformed Fock spaces"
+      url: "https://arxiv.org/pdf/q-alg/9603025"
+      locator: "sec. 3.1, printed pp. 12-13: perfectness axioms (P1)-(P3), including level-$l$ bijections $\\varepsilon,\\varphi$ onto the dominant level-$l$ weights and $B_{\\min}$; sec. 5.2, printed pp. 35-36: the level-one crystal $B=\\{b_0,\\dots,b_n\\}$ of $A_n^{(1)}$."
+    - title: "Kailash C. Misra and Tetsuji Miwa, Crystal base for the basic representation of $U_q(\\mathfrak{sl}(n))$, Comm. Math. Phys. 134 (1990), 79-88"
+      url: "https://projecteuclid.org/journals/communications-in-mathematical-physics/volume-134/issue-1/Crystal-base-for-the-basic-representation-of-U_qgerm-sgerm-ln/cmp/1104201614.pdf"
+      locator: "sec. 2-3, printed pp. 80-85: the level-one crystal data of the vector module and the crystal graph of the tensor square."
+    - title: "Bernard Leclerc, Fock space representations (author-hosted complete 38-page treatment)"
+      url: "https://leclercb.users.lmno.cnrs.fr/lectnotes_final.pdf"
+      locator: "sec. 3.1-3.2, printed pp. 16-17: the vector module $U$ with the actions (23)-(24) and the residue rule used for the tensor computations."
+---
+
+## Statement
+
+Keep the conventions of
+[[def-the-level-one-vector-representation-its-affinization-and-energy-function]].
+Then:
+
+(i) The derived level-$0$ module $V$ has **level-one perfect crystal**
+$B=\{b_1,\dots,b_e\}$ in the sense of axioms (P1)-(P3): the weights of $V$ are
+the finite Weyl orbit of $\lambda^\circ=\Lambda_1-\Lambda_0$ in $P_{\mathrm{cl}}$
+with one-dimensional weight spaces, $B\otimes B$ is connected,
+$\varepsilon(b)\in P_{\mathrm{cl}}^+$ and $\varphi(b)\in P_{\mathrm{cl}}^+$ have
+level one for every $b$, the maps $\varepsilon,\varphi:B\to(P_{\mathrm{cl}}^+)_1$
+are bijections onto the level-one dominant weights, and
+$B_{\min}:=\{b:\langle c,\varepsilon(b)\rangle=1\}$ equals $B$.
+
+(ii) The basis $G(b_j):=v_j$ is a **lower global basis** of $V$ for the ordinary
+semilinear bar involution with coefficient bar $q\mapsto q^{-1}$ and
+$\overline{v_j}=v_j$: the local $A_0$-lattice $V_0=\bigoplus_j A_0v_j$ is
+bar-stable up to $q\mapsto q^{-1}$, the images $b_j=G(b_j)+qV_0$ are the
+crystal elements, $\bar{E_iv}=E_i\bar v$ and $\bar{F_iv}=F_i\bar v$ for all
+$v\in V$, all nontrivial rank-one strings have exactly two vertices with $E$- and
+$F$-coefficients $1$, and all remaining color strings are frozen singletons, and the divided powers
+$E_i^{(m)},F_i^{(m)}$ vanish for $m\ge2$. Here
+$A=\mathbb Z[q,q^{-1}]$ and $A_0=\mathbb Q[q]_{(q)}$ are kept distinct, with the separate positive integral chart $\bigoplus_j\mathbb Z[q]v_j$. The Laurent, zero and infinity charts have balanced intersection $\bigoplus_j\mathbb Z v_j$, so this is the actual integral/bar-compatible lower basis.
+
+(iii) The bar, lower-basis and rank-one string statements of (ii) hold on the affinization with
+$G(z^ab_j)=z^av_j$, the loop variable fixed by the bar involution, and the full
+$P$-weight $\Lambda_j-\Lambda_{j-1}+a\delta$; the finite $V$ is a
+$U_q'(\mathfrak g)$-module with $P_{\mathrm{cl}}$-weights and is not a
+level-one $P$-graded highest weight module.
+
+## Facts & Assumptions
+
+**Given:** The vector module $V$, its affinization $V_{\mathrm{aff}}$ with the operators $E_i,F_i,K_h$ and the crystal data $\varepsilon_i,\varphi_i$ of [[def-the-level-one-vector-representation-its-affinization-and-energy-function]], the Bar/global basis framework of [[def-crystal-lattice-and-crystal-basis]], and the rank-one string formulas of [[thm-quantized-sl-two-string-formulas]].
+
+[F1] On $B$: $f_ib_j=b_{j+1}$ if $j\equiv i$ and $0$ otherwise; $e_ib_j=b_{j-1}$ if $j\equiv i+1$ and $0$ otherwise; $\varepsilon_i(b_j)=\delta_{j\equiv i+1}$, $\varphi_i(b_j)=\delta_{j\equiv i}$, $\varepsilon(b_j)=\Lambda^{\mathrm{cl}}_{j-1}$, $\varphi(b_j)=\Lambda^{\mathrm{cl}}_j$, and the weights of $V$ are the $\lambda_j=\Lambda_j-\Lambda_{j-1}$ with multiplicity one ([[def-the-level-one-vector-representation-its-affinization-and-energy-function]]).
+
+[F2] $U_q(\mathfrak g)$ has the rank-one subalgebra generated by $E_i,F_i,K_i^{\pm1}$ with the standard $U_q(\mathfrak{sl}_2)$-relations; on the two-dimensional string space $V_i(m)$ spanned by two consecutive basis vectors the operators $E_i,F_i$ are nonzero in both directions with coefficient $1$ and $E_i^{(2)}=F_i^{(2)}=0$ ([[thm-quantized-sl-two-string-formulas]], [[def-quantum-integers-factorials-and-divided-powers-at-q-i]]).
+
+[F3] A crystal lattice is a weight-graded local $A_0$-lattice stable under the normalized Kashiwara operators with residue basis given by the mod-$q$ images ([[def-crystal-graph-epsilon-phi-and-weight]], [[def-crystal-lattice-and-crystal-basis]]). The perfectness criteria used here are: (P1) all weights lie in the convex hull of the Weyl orbit of an extremal weight $\lambda^\circ$, whose orbit weight spaces are one-dimensional; (P2) connectedness of $B\otimes B$; and (P3) level at least one for $\varepsilon$, with $\varepsilon$ and $\varphi$ bijective from the minimal-level elements onto dominant level-one classical weights. These criteria are verified locally in steps 1.1 and 1.2; the cited lattice definitions are not claimed to define perfectness.
+
+[F4] $\mathbb Q(q)$ is a field and $q$ is transcendental; the finite Weyl group $W$ of the finite subdiagram acts on $P_{\mathrm{cl}}$ through its type $A_{e-1}$ permutation action, preserving levels.
+
+
+
+## Verification
+
+**Proof technique:** read the perfectness data off the explicit arrows, prove the connectedness of $B\otimes B$ by a two-sided raising procedure, and verify the lower-basis axioms by the coefficient-one string matrices.
+
+1.1 Perfectness of $B$ except connectedness. By [F1] every $\varepsilon(b_j)=\Lambda_{j-1}^{\mathrm{cl}}$ and $\varphi(b_j)=\Lambda_j^{\mathrm{cl}}$ has level one, and the two maps are bijections $\{1,\dots,e\}\to\{\Lambda_0^{\mathrm{cl}},\dots,\Lambda_{e-1}^{\mathrm{cl}}\}=(P_{\mathrm{cl}}^+)_1$ because both $j\mapsto\Lambda_j^{\mathrm{cl}}$ and $j\mapsto\Lambda_{j-1}^{\mathrm{cl}}$ run through the $e$ fundamental classes; hence $B_{\min}=\{b:\langle c,\varepsilon(b)\rangle=1\}=B$ and axiom (P3) holds. For (P1): the weights $\lambda_j$ of $V$ are pairwise distinct with multiplicity one by [F1], and the finite Weyl group of the subdiagram $I\setminus\{0\}$ acts transitively on them: its reflection $s_i$ exchanges $\lambda_i^{\mathrm{cl}}$ and $\lambda_{i+1}^{\mathrm{cl}}$ and fixes the others, so adjacent exchanges reach every weight, so they form the finite Weyl orbit of $\lambda^\circ$ with one-dimensional weight spaces. Moreover $\lambda_j^{\mathrm{cl}}=\lambda_1^{\mathrm{cl}}-\sum_{i=1}^{j-1}\alpha_i^{\mathrm{cl}}$, by telescoping the vector-weight differences, so the required finite negative-cone bound holds and the top weight space is one-dimensional. [F1, F3, F4, given, algebra]
+
+1.2 Connectedness of $B\otimes B$ for the fixed coproduct. Use the fixed rank-one tensor rule of [[lem-rank-one-tensor-strings-have-the-crystal-limit-rule]], applied to the coefficient-one strings established in the displayed vector formulas: $f_i$ selects the first factor if $\varphi_i(b_a)>\varepsilon_i(b_b)$, and $e_i$ does so if $\varphi_i(b_a)\ge\varepsilon_i(b_b)$. For an off-diagonal pair $(b_a,b_b)$ take $i\equiv a-1$. Then $\varphi_i(b_a)=0$ and $\varepsilon_i(b_b)=0$, because $b\ne a$, so the non-strict tie makes $e_i$ act on the first factor and sends $b_a$ to $b_{a-1}$ with cyclic representatives. Repeat until the first factor equals the second; at most $e-1$ steps are needed. From $(b_j,b_j)$, $f_j$ acts first on the first factor since $1>0$, producing $(b_{j+1},b_j)$, then on the second factor since $0\le0$, producing $(b_{j+1},b_{j+1})$. Thus every pair is connected to a diagonal and all diagonals are mutually connected, proving (P2). No attempt to apply $e_b$ to an arbitrary $b_a$ is made. [F1, F3, given, algebra]
+
+1.3 Lower basis and separated charts of $V$. Define coefficient bar by $q\mapsto q^{-1}$ and $\bar v_j=v_j$. The matrices of $E_i,F_i$ have entries $0,1$, so $\overline{E_iv}=E_i\bar v$ and $\overline{F_iv}=F_i\bar v$; derived torals satisfy the corresponding bar-inverted toral identity. Put $V_A=\bigoplus_j A v_j$, $V_0=\bigoplus_j A_0v_j$ and $V_\infty=\bar V_0$. Their intersection is $\bigoplus_j\mathbb Z v_j$: coefficientwise an integral Laurent polynomial regular at both zero and infinity is an integer constant. Its residue map at zero is the basis map $v_j\mapsto v_j+qV_0$, giving the balanced integral lifts $G(b_j)=v_j$. For a fixed color the nontrivial string is $v_i,v_{i+1}$, with $F_iv_i=v_{i+1}$ and $E_iv_{i+1}=v_i$ and coefficients $1$. Every other vector is a singleton killed by both operators. Therefore the normalized Kashiwara operators have the same $0,1$ matrices on this basis and preserve the genuine local chart; their residue arrows are $e_i,f_i$ from [F1]. Also $E_i^2=F_i^2=0$, hence the divided operators of order at least two vanish. The positive integral chart $\bigoplus_j\mathbb Z[q]v_j$ is retained separately and is stable here because the matrices are $0,1$; it is not the local coefficient ring. [F1, F2, F3, given, algebra]
+
+2.1 The affinized chart. Put $L_{\mathrm{aff}}:=\bigoplus_m A_0u_m$ and $G(z^ab_j)=z^av_j=u_{j-ae}$; extend the bar involution by $\overline z=z$. Then $\overline{\cdot}$ is semilinear with coefficient bar $q\mapsto q^{-1}$, fixes every $G(z^ab_j)$, and satisfies $\overline{E_iw}=E_i\overline w$, $\overline{F_iw}=F_i\overline w$ for $w\in V_{\mathrm{aff}}$: the only loop shift occurs for $i=0$, where $E_0(z^av_1)=z^{a+1}v_e$ and $\overline{z^{a+1}v_e}=z^{a+1}v_e=E_0\overline{z^av_1}$, and the remaining cases have coefficients in $\{0,1\}$. The weight of $G(z^ab_j)$ is $\Lambda_j-\Lambda_{j-1}+a\delta$, and the string bound of step 1.3 is unchanged because each $i$-orbit is either the same nontrivial two-vertex string shifted by loops or a frozen singleton. The finite module $V$ carries only the $P_{\mathrm{cl}}$-weights $\lambda_j$ and no dominant level-one highest weight vector, so it is a level-$0$ $U_q'(\mathfrak g)$-module and not a level-one $P$-graded highest weight module; the $A=\mathbb Z[q,q^{-1}]$, $A_0=\mathbb Q[q]_{(q)}$ and positive $\mathbb Z[q]$ charts are used separately and are not identified. [step 1.3, F1, F3, given, algebra]
+
+3.1 Conclusion. The level-$0$ vector module has the level-one perfect crystal $B=\{b_1,\dots,b_e\}$ with the explicit $\varepsilon,\varphi$, connected tensor square and $B_{\min}=B$; the basis $G(b_j)=v_j$ is a lower global basis of $V$ whose nontrivial $i$-strings have two vertices with coefficients $1$ and whose remaining color strings are frozen singletons and whose divided operators of order $\ge2$ vanish; and the affinized chart $G(z^ab_j)=z^av_j$ has the bar, lower-basis and rank-one string properties of (ii) with the full $P$-weight. The affinized crystal is not perfect: $u_m$ and $u_{m-e}$ have the same $\varepsilon$ and $\varphi$, so these maps are not injective. [step 1.1, step 1.2, step 1.3, step 2.1] ∎
+
+## Remarks
+
+- The connectedness argument uses only the fixed-coproduct tensor rule and the explicit arrows; the opposite channel has the mirrored rule and is not needed here.
+
+- The supplier [[def-crystal-graph-epsilon-phi-and-weight]] and [[def-crystal-lattice-and-crystal-basis]] are batch-6 items still under construction at authoring time; their exact uses are axioms (P1)-(P3) in step 1.1 and the lattice/residue formalism in steps 2.1 and 3.1. The decision is left escalated until the suppliers are completed and the interfaces rechecked.

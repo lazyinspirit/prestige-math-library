@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-embedding-dimension-at-least-local-dimension.json
+  precheck: pass
 id: "thm-embedding-dimension-at-least-local-dimension"
 kind: theorem
 title: "Tangent dimension bounds local dimension"
@@ -26,13 +29,6 @@ deps:
   - def-dual-numbers-scheme
   - def-prime-and-maximal-ideals
   - def-krull-dimension-of-a-ring
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -65,7 +61,7 @@ $X_i$ containing $x$.
 
 [F5] [[def-affine-scheme-spectrum]]: whose points are the prime ideals of $A$.
 
-[F6] [[thm-stalk-structure-sheaf-prime-localization]]: there is a canonical isomorphism $\mathcal O_{\operatorname{Spec}A,\mathfrak p}\cong A_{\mathfrak p}$.
+[F6] [[thm-stalk-structure-sheaf-prime-localization|The stalk of the affine structure sheaf at a prime is $A_{\mathfrak p}$]]: there is a canonical isomorphism $\mathcal O_{\operatorname{Spec}A,\mathfrak p}\cong A_{\mathfrak p}$.
 
 [F7] [[def-localisation-at-a-prime-ideal]]: $R_{\mathfrak p}=(R\setminus\mathfrak p)^{-1}R$.
 

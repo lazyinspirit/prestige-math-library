@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-density-of-elementary-predictable-processes-in-predictable-l2.json
+  precheck: pass
 id: thm-density-of-elementary-predictable-processes-in-predictable-l2
 kind: theorem
 title: "Density of elementary predictable processes in predictable L2"
@@ -13,8 +16,7 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Lemmas 5.21-5.23"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -88,3 +90,43 @@ $\|U-V\|_2=\bigl(\int(U-V)^2d\mu\bigr)^{1/2}$.
 ## Source notes
 
 Van der Vaart, Lemmas 5.21--5.23, obtains density by a monotone-class argument on the predictable rectangles followed by simple approximation. The version here separates the two steps: the lambda-system argument produces indicator approximants for every predictable set, and the increasing simple approximation plus dominated convergence produces the general $L^2$ approximant. No completeness of $L^2$ is used at this stage; the completion step is item 10.
+
+
+## Remarks
+
+The schematic separates the two types of predictable generator. The vertical
+direction merely depicts event membership in $\Omega$; it imposes no ordering,
+geometry or interval structure on the probability space. The dashed left edge
+of the rectangle is excluded and its solid right edge is included.
+
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1cm]
+\draw[->] (-0.3,0) -- (7.5,0) node[right] {$t$};
+\draw[thin] (0,0.3) rectangle (7,4);
+\node[above] at (3.5,4) {$[0,T]\times\Omega$};
+\draw[densely dotted] (2,0.3) -- (2,1.8);
+\draw[densely dotted] (5.4,0.3) -- (5.4,1.8);
+\draw[thick] (2,1.8) -- (5.4,1.8) -- (5.4,3.2) -- (2,3.2);
+\draw[thick,dashed] (2,1.8) -- (2,3.2);
+\node at (3.7,2.7) {$(s,u]\times C$};
+\node at (3.7,2.2) {$C\in\mathcal F_s$};
+\draw[very thick] (0,0.7) -- (0,1.4);
+\node[right] at (0.15,1.05) {$\{0\}\times C_0$};
+\node[right] at (0.15,0.55) {$C_0\in\mathcal F_0$};
+\node[below] at (0,0) {$0$};
+\node[below] at (2,0) {$s$};
+\node[below] at (5.4,0) {$u$};
+\node[below] at (7,0) {$T$};
+\end{tikzpicture}
+```
+
+The rectangle indicator is the elementary process
+$1_C(\omega)1_{(s,u]}(t)$: its coefficient $1_C$ is bounded and
+$\mathcal F_s$-measurable, as in proof step 1.2. A general elementary
+approximant uses a finite partition and coefficients $\xi_k$ measurable at
+$\mathcal F_{t_k}$ on $(t_k,t_{k+1}]$, as in [F1]. The separate time-zero
+generator has product measure zero by [F7], so its indicator represents the
+zero $L^2(\mathrm dt\otimes P)$ class. Density asserts that for every
+predictable $H\in L^2$ and every $\varepsilon>0$ one can choose such an
+approximant $G$ with $\|H-G\|_2<\varepsilon$; the figure does not assert
+pointwise approximation. The proof above is independent of the schematic.

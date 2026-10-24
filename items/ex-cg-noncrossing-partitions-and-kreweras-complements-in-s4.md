@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-noncrossing-partitions-and-kreweras-complements-in-s4.json
+  precheck: pass
 id: ex-cg-noncrossing-partitions-and-kreweras-complements-in-s4
 kind: example
 title: "The fourteen elements below (1 2 3 4), the noncrossing partitions of a square, and their Kreweras complements"
@@ -29,8 +32,7 @@ sources:
     - title: "D. Armstrong, Generalized Noncrossing Partitions and Combinatorics of Coxeter Groups, Memoirs of the AMS 202 (2009), no. 949, arXiv:math/0611106v2"
       url: "https://arxiv.org/pdf/math/0611106"
       locator: "§4.1, printed pp. 82–85, Lemmas 4.1.4–4.1.5 and Theorem 4.1.3 (cycle counts, transposition moves, and the type-A partition model); §4.2, printed pp. 87–89, Definitions 4.2.2–4.2.3 and identity (4.4) (interleaving and the classical complement). The list and complement products below are verified locally."
-verification:
-  audited: "2026-10-08"
+
 ---
 
 ## Example
@@ -42,7 +44,9 @@ Work in the type-$A_3$ Coxeter system realized as $S_4$, with $s_1=(1\ 2)$, $s_2
 **(2) The crossing obstruction and the partition model.** Of the fifteen partitions of $\{1,2,3,4\}$, exactly $\{1,3\}\mid\{2,4\}$ is crossing in the cyclic order $1<2<3<4<1$; its permutation $(1\ 3)(2\ 4)$ is the unique double transposition absent from (1). The cycle-support partition of every element in (1) is noncrossing and its cycles are cyclically increasing. Conversely, the fourteen noncrossing partitions each give exactly one element of (1), by the type-A criterion and partition isomorphism ([[thm-cg-kreweras-complement-and-type-a-partition-model]] (3)–(4)).
 
 **(3) Kreweras complements.** The map $K(w)=w^{-1}c$ is an order-reversing bijection and $K^2(w)=c^{-1}wc$ ([[thm-cg-kreweras-complement-and-type-a-partition-model]] (1)). Its values on (1) are
-$$\begin{aligned}&K(1)=c,\quad K(c)=1;\\&K(1\ 2)=(2\ 3\ 4),\quad K(2\ 3)=(1\ 3\ 4),\quad K(3\ 4)=(1\ 2\ 4),\\&K(1\ 3)=(1\ 2)(3\ 4),\quad K(2\ 4)=(1\ 4)(2\ 3),\quad K(1\ 4)=(1\ 2\ 3);\\&K((1\ 2)(3\ 4))=(2\ 4),\quad K((1\ 4)(2\ 3))=(1\ 3);\\&K(1\ 2\ 3)=(3\ 4),\quad K(1\ 2\ 4)=(2\ 3),\quad K(1\ 3\ 4)=(1\ 2),\quad K(2\ 3\ 4)=(1\ 4).\end{aligned}$$
+$$
+\begin{aligned}&K(1)=c,\quad K(c)=1;\\&K(1\ 2)=(2\ 3\ 4),\quad K(2\ 3)=(1\ 3\ 4),\quad K(3\ 4)=(1\ 2\ 4),\\&K(1\ 3)=(1\ 2)(3\ 4),\quad K(2\ 4)=(1\ 4)(2\ 3),\quad K(1\ 4)=(1\ 2\ 3);\\&K((1\ 2)(3\ 4))=(2\ 4),\quad K((1\ 4)(2\ 3))=(1\ 3);\\&K(1\ 2\ 3)=(3\ 4),\quad K(1\ 2\ 4)=(2\ 3),\quad K(1\ 3\ 4)=(1\ 2),\quad K(2\ 3\ 4)=(1\ 4).\end{aligned}
+$$
 For every $w$ in (1), the support partition of $K(w)$ has $5-|\pi(w)|$ blocks. On support partitions, $K^2$ rotates labels by $1\mapsto4\mapsto3\mapsto2\mapsto1$.
 
 ## Facts & Assumptions
@@ -70,3 +74,41 @@ For every $w$ in (1), the support partition of $K(w)$ has $5-|\pi(w)|$ blocks. O
 2.1 (The fifteen partitions.) By block sizes, the set partitions of four labels consist of one partition with one block, six with three blocks, seven with two blocks, and one with four blocks, for a total of fifteen. A partition with one or four blocks is noncrossing. The six three-block partitions have one pair and two singletons, so are noncrossing. Among the seven two-block partitions, the four triple-plus-singleton partitions are noncrossing; the three pairings are $\{1,2\}\mid\{3,4\}$, $\{1,4\}\mid\{2,3\}$, and $\{1,3\}\mid\{2,4\}$, of which only the last has alternating endpoints. This proves the unique crossing claim. The first-step list has fourteen elements, all with noncrossing cyclically increasing cycles; [F3] says each noncrossing partition has a unique such interval permutation. Thus the supports in (1) give exactly the fourteen noncrossing partitions. [F2, F3, step 1.1, algebra]
 
 3.1 (Order, square, and block counts.) [F4] gives that $K$ is an order-reversing bijection of the interval, $K^2(w)=c^{-1}wc$, and $\ell_T(K(w))=3-\ell_T(w)$. Conjugating a cycle by $c^{-1}$ relabels each entry by $1\mapsto4\mapsto3\mapsto2\mapsto1$, so the support partition rotates as stated. Since $\ell_T(w)=4-|\pi(w)|$ and $\ell_T(K(w))=4-|\pi(K(w))|$ by [F3], the length complement gives $|\pi(K(w))|=5-|\pi(w)|$. [F3, F4, step 1.1, step 1.2] ∎
+
+
+## Remarks
+
+The dashed squares below only indicate the cyclic order $1,2,3,4,1$; solid segments are block hulls, and unjoined vertices are singleton blocks. The left partition is excluded from the interval because its two block hulls cross. The two right panels show $K((1\ 2))=(2\ 3\ 4)$, with $c$ applied first in $w^{-1}c$.
+
+```tikz
+\begin{tikzpicture}[scale=0.85]
+\draw[gray,dashed] (-0.8,0.8) -- (0.8,0.8) -- (0.8,-0.8) -- (-0.8,-0.8) -- (-0.8,0.8);
+\draw[thick] (-0.8,0.8) -- (0.8,-0.8);
+\draw[thick] (0.8,0.8) -- (-0.8,-0.8);
+\fill (-0.8,0.8) circle (2pt); \fill (0.8,0.8) circle (2pt);
+\fill (0.8,-0.8) circle (2pt); \fill (-0.8,-0.8) circle (2pt);
+\node[above left] at (-0.8,0.8) {$1$}; \node[above right] at (0.8,0.8) {$2$};
+\node[below right] at (0.8,-0.8) {$3$}; \node[below left] at (-0.8,-0.8) {$4$};
+\node at (0,-1.5) {$(1\ 3)(2\ 4)$};
+\node at (0,-2.0) {crossing: excluded};
+\draw[gray,dashed] (3.4,0.8) -- (5,0.8) -- (5,-0.8) -- (3.4,-0.8) -- (3.4,0.8);
+\draw[thick] (3.4,0.8) -- (5,0.8);
+\fill (3.4,0.8) circle (2pt); \fill (5,0.8) circle (2pt);
+\fill (5,-0.8) circle (2pt); \fill (3.4,-0.8) circle (2pt);
+\node[above left] at (3.4,0.8) {$1$}; \node[above right] at (5,0.8) {$2$};
+\node[below right] at (5,-0.8) {$3$}; \node[below left] at (3.4,-0.8) {$4$};
+\node at (4.2,-1.5) {$w=(1\ 2)$};
+\node at (4.2,-2.0) {noncrossing};
+\draw[->,thick] (5.5,0) -- (7.1,0) node[midway,above] {$K$};
+\draw[gray,dashed] (7.6,0.8) -- (9.2,0.8) -- (9.2,-0.8) -- (7.6,-0.8) -- (7.6,0.8);
+\draw[thick] (9.2,0.8) -- (9.2,-0.8) -- (7.6,-0.8) -- (9.2,0.8);
+\fill (7.6,0.8) circle (2pt); \fill (9.2,0.8) circle (2pt);
+\fill (9.2,-0.8) circle (2pt); \fill (7.6,-0.8) circle (2pt);
+\node[above left] at (7.6,0.8) {$1$}; \node[above right] at (9.2,0.8) {$2$};
+\node[below right] at (9.2,-0.8) {$3$}; \node[below left] at (7.6,-0.8) {$4$};
+\node at (8.4,-1.5) {$K(w)=(2\ 3\ 4)$};
+\node at (8.4,-2.0) {noncrossing};
+\end{tikzpicture}
+```
+
+For the illustrated $w$, the block counts are $3$ and $2=5-3$. Applying $K$ again gives $(1\ 4)$, the relabeling of $(1\ 2)$ by $c^{-1}$: $1\mapsto4$, $2\mapsto1$, $3\mapsto2$, $4\mapsto3$. These pictures illustrate the computations above; the verification is independent of them.

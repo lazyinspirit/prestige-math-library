@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-the-p-functional-is-not-a-norm-for-zero-less-p-less-one.json
+  precheck: pass
 id: prop-the-p-functional-is-not-a-norm-for-zero-less-p-less-one
 kind: proposition
 title: "The $p$-functional need not be a norm for $0 < p < 1$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-real-power, thm-real-power-laws, thm-exponential-is-strictly-increasing, def-norm-and-normed-space, def-counting-measure, prop-counting-measure-is-a-measure]
 proof_strategy: "Use the concavity of t maps to t^p on [0, infinity) to show triangle inequality fails on two disjoint equal-mass indicators, so the p-functional is not subadditive and therefore is not a norm."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -42,7 +42,7 @@ a norm in general in the sense of [[def-norm-and-normed-space]].
 
 ## Proof
 
-**Proof technique:** Use two disjoint equal-mass indicators, so the triangle inequality becomes the scalar inequality $2^{1/p}\le2$, which fails because $1/p>1$.
+**Proof technique:** Use two disjoint equal-mass indicators, so the triangle inequality would require two raised to the reciprocal exponent to be at most two; this fails because the reciprocal exponent exceeds one.
 
 1.1 Work on the two-point counting space $\{0,1\}$ from [L3]. Let [L3, given] $e_0:=\chi_{\{0\}}$ and $e_1:=\chi_{\{1\}}$. Then $$\|e_0\|_p=\|e_1\|_p=1,\qquad \|e_0+e_1\|_p=(1+1)^{1/p}=2^{1/p}.$$ [L3, given]
 

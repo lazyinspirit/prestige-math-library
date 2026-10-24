@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-p-dual-weight-and-nesting-properties.json
+  precheck: pass
 id: lem-a-p-dual-weight-and-nesting-properties
 kind: lemma
-title: Duality and nesting of the A_p classes
+title: Duality and nesting of the $A_p$ classes
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.18 (1)-(2), printed pp. 76-78"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

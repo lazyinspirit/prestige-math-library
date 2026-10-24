@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-elliptic-function-divisor-laws.json
+  precheck: pass
 id: thm-elliptic-function-divisor-laws
 kind: theorem
 title: "Divisor and residue laws for elliptic functions"
@@ -54,9 +57,7 @@ sources:
     - title: "NIST Digital Library of Mathematical Functions, §23.2"
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(i)-(iii): existence of the fundamental parallelogram and the divisor conventions for doubly periodic functions."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -165,9 +166,52 @@ $$\sum_{c\in\operatorname{Zer}(f)\cap P^\circ}\operatorname{ord}_c(f)=\sum_{p\in
 
 5.1 Let $b\in\mathbb C$ be a translation for which $\partial P_b$ avoids $\operatorname{Zer}(f)\cup\operatorname{Pol}(f)$, where $P_b=\{b+s\omega_1+t\omega_2:0\le s,t\le1\}$. The argument of steps 1.2, 1.3, 2.2, 2.3, 2.4 and 3.1 uses only this avoidance and the lattice periodicity, so it applies verbatim with $b$ in place of $a$ and yields $Z_{P_b}=P_{P_b}$ and vanishing residue sum for $P_b$. By step 1.4 applied to $P$, the number $Z_P$ is the total multiplicity of the zeros of $f$ on $T_\Lambda$ (the sum of $\operatorname{ord}_c(f)$ over the finitely many zero classes), an invariant of $f$ and $\Lambda$ alone, and the same holds for $P_P$; applied to $P_b$ the same identification gives $Z_{P_b}=Z_P$ and $P_{P_b}=P_P$. Hence both multiplicities and, by step 3.2 applied to each translate, the residue sum are independent of the translation. [step 1.4, step 2.2, step 4.1, step 3.2]
 
-6.1 Steps 4.1 and 3.2 prove clauses (1) and (2) for the given translate, step 5.1 proves clause (3), and steps 2.5 and 4.2 prove the two assertions of clause (4). ∎
+6.1 Steps 4.1 and 3.2 prove clauses (1) and (2) for the given translate, step 5.1 proves clause (3), and steps 2.5 and 4.2 prove the two assertions of clause (4). [step 4.1, step 3.2, step 5.1, step 2.5, step 4.2] ∎
 
 ## Remarks
 
 
 The divisor law and the residue law are the two integrals of $f'/f$ and of $f$ over the parallelogram boundary, whose opposite sides cancel by periodicity; the index assertions of [[lem-index-of-graph-bounded-region-boundary]] replace the general Jordan curve theorem in evaluating the weighted counts. Clause (4) discharges the promise recorded in [[def-elliptic-function-for-a-lattice]] that the pole-free $\Lambda$-elliptic functions are exactly the constants, and it uses Liouville's theorem rather than the compactness of $T_\Lambda$ ([[thm-complex-torus-quotient-is-well-defined]]) so that no Riemann-surface degree theory is presupposed here. Alternatively, the isolated-zero theorem [[thm-isolated-zeros-holomorphic-function]] isolates the zeros of $f$ on the punctured plane and gives the same discreteness conclusion as the reciprocal argument in step 2.1. The proof selects nothing beyond the finitely many neighbourhoods of step 2.1 and the finitely many terms of the two sums; in particular no countable or dependent choice is invoked.
+
+
+The following schematic shows the positively oriented boundary from step 1.2.
+The interior marks stand for generic zeros $c_i$ (open circles) and poles $p_j$
+(crosses), not a prescribed number or configuration of divisor points. Their
+contributions are $\operatorname{ord}_{c_i}(f)$ to the zero count and
+$\operatorname{ord}^{\mathrm{pole}}_{p_j}(f)$ to the pole count; only poles
+contribute $\operatorname{Res}(f,p_j)$ to the residue sum. No zero or pole lies
+on the boundary.
+
+```tikz
+\begin{tikzpicture}[scale=0.9,>=stealth]
+\coordinate (A) at (0,0);
+\coordinate (B) at (6,0);
+\coordinate (C) at (7.3,3.6);
+\coordinate (D) at (1.3,3.6);
+\draw[thick,->] (A)--node[below] {$\gamma_1:\ +\omega_1$}(B);
+\draw[thick,->] (B)--node[right] {$\gamma_2:\ +\omega_2$}(C);
+\draw[thick,->] (C)--node[above] {$\gamma_3:\ -\omega_1$}(D);
+\draw[thick,->] (D)--node[left] {$\gamma_4:\ -\omega_2$}(A);
+\node[below left] at (A) {$a$};
+\node[below right] at (B) {$a+\omega_1$};
+\node[above right] at (C) {$a+\omega_1+\omega_2$};
+\node[above left] at (D) {$a+\omega_2$};
+\node at (3.65,3.0) {$P^\circ$};
+\draw (2.0,1.0) circle (0.07);
+\node[below] at (2.0,0.9) {$c_i$};
+\draw (4.3,2.3) circle (0.07);
+\node[right] at (4.4,2.3) {$c_{i'}$};
+\node at (3.0,2.0) {$\times$};
+\node[left] at (2.9,2.0) {$p_j$};
+\node at (5.3,1.0) {$\times$};
+\node[right] at (5.4,1.0) {$p_{j'}$};
+\end{tikzpicture}
+```
+
+For $0\le t\le1$, the opposite-side pairing is
+$\gamma_3(1-t)=\gamma_1(t)+\omega_2$ and
+$\gamma_2(t)=\gamma_4(1-t)+\omega_1$. Thus translation pairs each side with
+an oppositely traversed side. Periodicity makes their integrals cancel for
+both $f$ and $f'/f$, as proved in steps 1.5, 1.6, 2.4 and 3.1. Steps 2.2 and
+2.3 then identify the interior multiplicity counts and residue sum. The proof
+above is independent of this illustration.

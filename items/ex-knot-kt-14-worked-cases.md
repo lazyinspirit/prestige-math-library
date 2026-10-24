@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-14-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-14-worked-cases
 kind: example
 title: "Worked cases of three-manifold surgery presentations"
@@ -19,17 +22,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds"
@@ -89,12 +81,12 @@ Assume the Axiom of Choice. The empty integral surgery diagram gives the standar
 
 Each circle denotes the standard unknot and the adjacent integer is its framing. The first panel has no components. The second and third panels show the zero and positive-$p$ surgeries. The panels illustrate the examples only; the coordinate and gluing arguments in the verification establish the identifications.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
   \node at (0,1) {empty};
   \node at (3,1) {$0$-framed};
   \node at (6,1) {$p$-framed, $p>0$};
-  \node at (0,0) {$\varnothing$};
+  \node at (0,0) {$\emptyset$};
   \draw[thick] (3,0) circle (0.42);
   \node at (3.8,0) {$0$};
   \draw[thick] (6,0) circle (0.42);
@@ -102,4 +94,4 @@ Each circle denotes the standard unknot and the adjacent integer is its framing.
   \draw[->] (0.8,0) -- (2.1,0);
   \draw[->] (3.9,0) -- (5.1,0);
 \end{tikzpicture}
-~~~
+```

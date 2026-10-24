@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-partitions-into-three-parts-of-five-from-the-recurrence.json
+  precheck: n/a
 id: ex-partitions-into-three-parts-of-five-from-the-recurrence
 kind: example
-title: "The recurrence gives p_3(5)=2"
+title: "The recurrence gives $p_3(5)=2$"
 status: published
 origin: session
 provenance:
@@ -13,12 +16,6 @@ deps: [thm-partitions-into-k-parts-recurrence]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-08-28
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references: []

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-nine-lemma-variants-by-which-rows-are-assumed-exact.json
+  precheck: pass
 id: thm-nine-lemma-variants-by-which-rows-are-assumed-exact
 kind: theorem
 title: "Nine lemma variants by which rows are assumed exact"
@@ -18,9 +21,6 @@ deps: [thm-nine-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -67,3 +67,25 @@ In the $3 \times 3$ short-exact-column diagram of the nine lemma:
 2.1 Steps 1.3, 1.4, and 1.5 prove that the middle row is short exact. [L2, step 1.3, step 1.4, step 1.5]
 
 3.1 These are exactly the three standard variants of the nine lemma distinguished by which rows are assumed exact. [step 1.1, step 1.2, step 2.1] ∎
+
+## Remarks
+
+The grid used in the proof is displayed below. For $j=1,2,3$, the column
+$0\to A_j\xrightarrow{i_j}B_j\xrightarrow{p_j}C_j\to0$ is short exact.
+All four interior squares commute. The horizontal maps are
+$a_k:A_k\to A_{k+1}$, $b_k:B_k\to B_{k+1}$, and
+$c_k:C_k\to C_{k+1}$ for $k=1,2$.
+
+```tikzcd
+[column sep=huge, row sep=large, cells={nodes={font=\Large}}, labels={font=\large}]
+0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d] \\
+A_1 \arrow[r, "a_1"] \arrow[d, "i_1"'] & A_2 \arrow[r, "a_2"] \arrow[d, "i_2"'] & A_3 \arrow[d, "i_3"] \\
+B_1 \arrow[r, "b_1"] \arrow[d, "p_1"'] & B_2 \arrow[r, "b_2"] \arrow[d, "p_2"'] & B_3 \arrow[d, "p_3"] \\
+C_1 \arrow[r, "c_1"] \arrow[d] & C_2 \arrow[r, "c_2"] \arrow[d] & C_3 \arrow[d] \\
+0 & 0 & 0
+```
+
+Row exactness is specified separately in each of the three variants; the
+picture imposes no additional row-exactness hypothesis. In variant 3, the
+middle-row complex condition is $b_2b_1=0$. The proof above is independent
+of the illustration.

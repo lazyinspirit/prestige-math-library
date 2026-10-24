@@ -1,0 +1,83 @@
+{
+  "id": "lem-doubling-variables-maximum-localisation",
+  "agent": "/root/rendering_repair_supervisor2/pde_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tiles 01 and 02 were inspected. Tile 01 visibly prints $\\ALPHA$ and $C^1$ in the technique banner while adjacent body mathematics typesets correctly; the source has those dollar-delimited expressions in that banner. This is the renderer plain-text banner limitation, not invalid mathematics.",
+      "action": "Replaced the banner-only dollar expressions with Unicode α and the equivalent words continuously differentiable. No numbered proof step or statement changed.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only line 70 of the proof-technique paragraph changed: $\\alpha$ → α; $C^1$ → continuously differentiable.",
+  "source_lines_after": {
+    "70": "**Proof technique:** coercive weight for existence, monotonicity in α for the localisation, and explicit continuously differentiable contacts for the two tests."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The native technique banner remains plain text with CSS uppercase; α consequently appears as uppercase Greek Α in that banner. Its literal TeX markup is gone. No application changes made.",
+    "The local preview excludes full production routes, navigation/dependency widgets and metadata Sources footer; it reported 13 unrelated reference-map parse diagnostics. This was a focused rendering correction, not a broad mathematical audit."
+  ],
+  "before_raw_sha256": "088000d13af0affca1dce1e6f78f8dcae926d4ef65bbedebb0d491e4cf761e35",
+  "after_raw_sha256": "8e0c02c0cb22ba0445d20cc1137dbf75584f749964d4128390ad55ab7a038a44",
+  "frontmatter_byte_identical": true,
+  "status_byte_identical": true,
+  "original_images_inspected": [
+    "research/math-library-rendering-audit-2026-10-23/pde/screenshots/lem-doubling-variables-maximum-localisation--01.png",
+    "research/math-library-rendering-audit-2026-10-23/pde/screenshots/lem-doubling-variables-maximum-localisation--02.png"
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-doubling-variables-maximum-localisation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-doubling-variables-maximum-localisation.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-doubling-variables-maximum-localisation.md",
+            "item_id": "lem-doubling-variables-maximum-localisation",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-doubling-variables-maximum-localisation.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-pde-007-fresh node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-doubling-variables-maximum-localisation --out research/math-library-rendering-repairs-2026-10-23/previews/pde-007-fresh",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/pde-007-fresh/manifest.json",
+    "manifest_sha256": "2f9e7aef55269099e012bdaf7d1758f2d7555794ae887ffd2d490ee2977e616f",
+    "source_sha256": "8e0c02c0cb22ba0445d20cc1137dbf75584f749964d4128390ad55ab7a038a44",
+    "html_sha256": "bf31441fb0481847fdb62a280067ec09089dfa48b392a43c3f730aa4c7a9784d",
+    "reference_map_sha256": "d50ef4bfbc271f1b4080e1e8e72fa69b8e603c0e87c45f39e6ece7f6867370e1",
+    "images_inspected_standalone_original": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/pde-007-fresh/screenshots/lem-doubling-variables-maximum-localisation--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/pde-007-fresh/screenshots/lem-doubling-variables-maximum-localisation--02.png"
+    ],
+    "visual_result": "Both current native tiles inspected at original resolution. Banner contains no dollar delimiters, backslash alpha or caret expression; equivalent words wrap cleanly to a second line. Statement, Facts, numbered proof and Remarks remain rendered normally."
+  }
+}

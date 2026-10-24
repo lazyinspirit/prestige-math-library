@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rank-r-projector-grassmann-chart-and-tangent.json
+  precheck: pass
 id: lem-rank-r-projector-grassmann-chart-and-tangent
 kind: lemma
 title: "Graph charts and tangent directions for complex rank-r projectors"
@@ -25,7 +28,7 @@ sources:
       url: https://assets.press.princeton.edu/chapters/absil/Absil_Chap3.pdf
     - title: "Alan Edelman, Tomás A. Arias, and Steven T. Smith, The Geometry of Algorithms with Orthogonality Constraints, SIAM Journal on Matrix Analysis and Applications 20 (1998), §§2.3.2 and 2.5"
       url: https://math.mit.edu/~edelman/publications/geometry_of_algorithms.pdf
-verification: {judge: {model: "gpt-6-luna", verdict: pass, date: 2026-10-17}}
+
 ---
 
 ## Statement
@@ -70,3 +73,23 @@ multiplication by a unitary matrix.
 
 3.1 By [F3], each frame $Y$ with $Y^*Y=I$ and range $U$ exists. If $Y$ and $Z$ are two such frames, then $Q=Y^*Z$ satisfies $YQ=YY^*Z=P_0Z=Z$ and $Q^*Q=Z^*YY^*Z=Z^*Z=I$. Thus $Q$ is unitary and $Z=YQ$. Conversely, $YQ(YQ)^*=YY^*$ for every unitary $Q$. Hence projectors identify exactly the unitary changes of occupied frame. [F3, given, algebra] ∎
 
+## Remarks
+
+The diagram records the graph coordinates without choosing real axes for the complex spaces. Here $J_X:U\to V_X$ is the isomorphism $u\mapsto u+Xu$, and the projections on the right are restricted to $V_X$. Thus $\pi_UJ_X=I_U$ and $\pi_{U^\perp}J_X=X$, as in step 2.1. The adjacent block form uses the ordered splitting $U\oplus U^\perp$; $B^*$ is the complex adjoint of $B$. Step 2.2 proves the tangent characterization independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (u) at (0,1.7) {$U$};
+\node (v) at (3.5,1.7) {$V_X$};
+\node (ub) at (0,0) {$U$};
+\node (up) at (3.5,0) {$U^\perp$};
+\draw[->] (u) to[bend left=18] node[above] {$J_X$} (v);
+\draw[->] (v) to[bend left=18] node[below] {$\pi_U|_{V_X}$} (u);
+\draw[->] (u) -- node[left] {$I_U$} (ub);
+\draw[->] (ub) -- node[below] {$X$} (up);
+\draw[->] (v) -- node[right] {$\pi_{U^\perp}|_{V_X}$} (up);
+\node at (7.7,1.3) {$\displaystyle H=\left(\begin{array}{cc}0&B^*\\B&0\end{array}\right)$};
+\node at (7.7,0.25) {$B:U\longrightarrow U^\perp$};
+\node at (7.7,-0.4) {$H=P'(0),\quad P(t)=P(tB)$};
+\end{tikzpicture}
+```

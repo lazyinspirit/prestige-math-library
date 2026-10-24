@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-linearity-of-the-bochner-integral.json
+  precheck: pass
 id: lem-linearity-of-the-bochner-integral
 kind: lemma
 title: "Linearity of the Bochner integral"
@@ -26,12 +29,7 @@ sources:
     - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)"
       url: "https://www.math.toronto.edu/almut/Brezis.pdf"
       locator: "Chapter 7, integral manipulations in the proof of Theorems 7.4 and 7.10, printed pp. 186-198"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -54,7 +52,7 @@ Let $(\Omega,\mathcal A,\mu)$ be a measure space, let $X$ be a real or complex B
 
 ## Proof
 
-**Proof technique:** direct, approximating $\alpha f+\beta g$ by the corresponding linear combinations of the defining simple functions.
+**Proof technique:** direct, approximating the stated linear combination by the corresponding linear combinations of the defining simple functions.
 
 1.1 The functions $f,g$ are strongly measurable by [F1]. Let $u_n,v_n$ be their measurable simple approximations converging pointwise outside measurable null sets $N,N\prime$; these need not be the defining $L^1$ approximations $s_n,t_n$. The simple functions $\alpha u_n+\beta v_n$ converge to $\alpha f+\beta g$ off $N\cup N\prime$ by [F4], proving strong measurability. [F1, F4]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-dunford-contour-construction-satisfies-the-semigroup-law.json
+  precheck: pass
 id: lem-dunford-contour-construction-satisfies-the-semigroup-law
 kind: lemma
 title: The Dunford contour construction satisfies the semigroup law and strong continuity at the vertex
@@ -20,8 +23,7 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: 'Chapter 2 Section 2.3, Theorem 2.23(a) and the strong-continuity part of its proof, printed pp. 60-62'
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -69,3 +71,45 @@ angle $\delta$ in the sense of
 3.1 The semigroup law. Substituting [step 2.1] into [step 1.1] gives $T(z_1)T(z_2)=\frac1{(2\pi i)^2}\int_{\Gamma_2}e^{\lambda_2z_2}2\pi i e^{\lambda_2z_1}R(\lambda_2,A)\,d\lambda_2=\frac1{2\pi i}\int_{\Gamma_2}e^{\lambda_2(z_1+z_2)}R(\lambda_2,A)\,d\lambda_2=T(z_1+z_2)$, the last equality by the independence of the contour [L1], since $\Gamma_2$ is admissible for $z_1+z_2\in\Sigma_{\delta_0}$ when $\theta_2>\pi/2+\delta_0$. [step 1.1, step 2.1, L1, given, algebra]
 
 4.1 Extension to all $x$ and assembly. $D(A)$ is dense in $X$, and $\|T(z)\|\le M_{\delta'}$ on $\Sigma_{\delta'}$ by [L1], so the uniform estimate of [step 2.2] on the dense set extends the strong limit $T(z)x\to x$ to every $x\in X$. Together with the semigroup law [step 3.1], the holomorphy and boundedness of [L1], and $T(0)=I$, this exhibits $T$ as a bounded analytic semigroup of angle $\delta$; the argument used only the resolvent identity, the contour computations and norm estimates, so no choice principle beyond Dependent Choice was used. [step 2.2, step 3.1, L1, given] ∎
+
+
+## Remarks
+
+The sketch separates the finite closure in step 1.2 from the nested infinite contours in steps 1.1 and 2.1. In the left panel the solid path is $\Gamma_R(r,\theta)$, oriented from the lower ray inward, around the inner arc through the positive real axis, and outward along the upper ray. The dashed arc closes it counterclockwise through the left half-plane; the enclosed region is $D_R$. In the right panel the ray ends are only truncations of infinite rays. The parameters satisfy $r_2<r_1$ and $\pi/2<\theta_1<\theta_2<\pi/2+\delta$. Thus $\Gamma_2\subset D_{\infty,1}$, whereas $\Gamma_1\cap\overline{D_{\infty,2}}=\varnothing$. The marked poles illustrate the two inner-integral cases in step 2.1; the proof does not depend on the drawing.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\draw[->,gray] (-3,0) -- (1.7,0) node[right] {$\mathrm{Re}$};
+\draw[->,gray] (0,-2.8) -- (0,2.9) node[above] {$\mathrm{Im}$};
+\node[below left] at (0,0) {$0$};
+\draw[thick,blue] (240:2.6) -- (240:0.9) arc[start angle=-120,end angle=120,radius=0.9] -- (120:2.6);
+\draw[thick,blue,->] (240:2.1) -- (240:1.6);
+\draw[thick,blue,->] (0:0.9) arc[start angle=0,end angle=40,radius=0.9];
+\draw[thick,blue,->] (120:1.6) -- (120:2.1);
+\draw[thick,blue,dashed] (120:2.6) arc[start angle=120,end angle=240,radius=2.6];
+\draw[thick,blue,dashed,->] (170:2.6) arc[start angle=170,end angle=195,radius=2.6];
+\node at (-1.65,0.65) {$D_R$};
+\node[right] at (0.9,-0.55) {$r$};
+\node[left] at (-2.55,-0.75) {$R$};
+\node[right] at (-0.9,1.85) {$\Gamma_R$};
+\node at (-0.65,-3.25) {finite closure $C_R$};
+\begin{scope}[xshift=6.3cm]
+\draw[->,gray] (-2.8,0) -- (1.8,0) node[right] {$\mathrm{Re}$};
+\draw[->,gray] (0,-2.8) -- (0,2.9) node[above] {$\mathrm{Im}$};
+\node[below left] at (0,0) {$0$};
+\draw[thick,blue] (245:2.65) -- (245:1.25) arc[start angle=-115,end angle=115,radius=1.25] -- (115:2.65);
+\draw[thick,blue,->] (245:2.3) -- (245:1.8);
+\draw[thick,blue,->] (115:1.5) -- (115:1.85);
+\draw[thick,red] (220:2.65) -- (220:0.65) arc[start angle=-140,end angle=140,radius=0.65] -- (140:2.65);
+\draw[thick,red,->] (220:2.3) -- (220:1.8);
+\draw[thick,red,->] (140:1.1) -- (140:1.5);
+\fill[blue] (115:2.2) circle (0.045);
+\node[right] at (115:2.2) {$\lambda_1$};
+\fill[red] (140:2.05) circle (0.045);
+\node[left] at (-1.85,1.15) {$\lambda_2$};
+\node[right] at (1.25,-0.45) {$\Gamma_1$};
+\node[right] at (0.5,0.5) {$\Gamma_2$};
+\node at (-0.5,-3.25) {$r_2<r_1,\quad\theta_1<\theta_2$};
+\end{scope}
+\end{tikzpicture}
+```

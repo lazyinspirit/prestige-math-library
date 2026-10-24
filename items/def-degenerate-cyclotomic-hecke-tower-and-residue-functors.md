@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-degenerate-cyclotomic-hecke-tower-and-residue-functors.json
+  precheck: pass
 id: def-degenerate-cyclotomic-hecke-tower-and-residue-functors
 kind: definition
 title: "The degenerate cyclotomic Hecke tower and its residue functors"
@@ -43,8 +46,7 @@ sources:
     - title: "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)"
       url: "https://arxiv.org/pdf/math/0508003"
       locator: "Section 4.4 (printed pp. 45-47, (4.38)-(4.45)) and Section 8.5 (printed pp. 93-97): the parabolic category and Whittaker-functor context in which the blocks $H^\\Lambda_\\alpha$ occur; the relevant passages were read. Finite-I supported central cut distinguished from full $H_d$; primitivity is proved via actual16 single-linkage and actual17 full-projective centre comparison, not assumed from orbit sums."
-verification:
-  precheck: pass
+
 ---
 
 ## Definition
@@ -213,3 +215,33 @@ a finite-dimensional algebra.
 4.2 **Zero components and local units.** Centrality does not exclude $e_\alpha=0$: steps 2.2 and 3.2 prove primitivity only for nonzero components and do not assert that every content occurs. Suppose $I=[a,b]$. For any nonzero supported component choose the stable realization of step 3.2 with $k<a$. The nonzero object $T_\alpha$ has a simple constituent, hence a strict-column label of weight $\Lambda-\alpha$ by [[def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality]]. In this realization the ground column $j$ consists of the letters $k,\ldots,m_j$. Since $\alpha$ is supported on $[a,b]$ and $\alpha_i=\delta_i-\delta_{i+1}$, the multiplicity of every letter $k,\ldots,a-1$ in $\Lambda-\alpha$ is $l$, and that of every letter above $b+1$ is zero. Strictness allows each letter at most once per column, so every lower letter occurs in all columns and no upper letter occurs. Delete the common lower letters. The remaining columns have the fixed heights $m_j-a+1\ge0$ and entries in the finite alphabet $[a,b+1]$. Only finitely many such tableaux exist, independently of $k$ and $d$; their entry multisets determine $\alpha$ uniquely, since the simple roots are linearly independent. Consequently only finitely many supported components are nonzero, and the sum of their identities is a unit of the tower. For arbitrary $I$, finite sums of component identities are local units because every element of the direct sum has finite component support. [step 3.2, given, algebra]
 
 5.1 **Level zero and the vanishing witness.** At level $0$ the cyclotomic polynomial is the empty product $1$, so $H_d(m)=0$ for $d>0$ and only $H_0(m)=\mathbb C$ remains; this is the convention of (2). For the witness, $I=\{0\}$, level $1$, charge $(0)$, $d=2$: the level-one presentation gives $x_1=0$ and $x_2=s_1$, so $H_2(0)=\mathbb C[S_2]$ with eigenvalues $\pm1$ for $x_2$; hence $E_0(x_2)=0$, $e(0,0)=0$, and the supported component $H^\Lambda_{2\alpha_0}=e_{(0,0)}H_2(0)$ is $0$, while $H_2(0)\ne0$. This completes the proof of the two claims (b) and the level-$0$ convention; the exactness and biadjointness clauses of (4) are the declared supplier statements of [[def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks]], not reproved here. [step 1.1, step 2.2, step 3.2, given, algebra] ∎
+
+## Remarks
+
+For $d=\operatorname{ht}(\alpha)$ and $i\in I$, abbreviate
+$B=H^\Lambda_\alpha$, $A=H^\Lambda_{\alpha+\alpha_i}$ and $u=u_{\alpha,i}$.
+The two rows distinguish the non-unital algebra map from the functors on
+finite-dimensional unital left modules; no vertical maps are asserted.
+
+```tikz
+\begin{tikzpicture}
+\node (B) at (0,2) {$B$};
+\node (A) at (5,2) {$A$};
+\draw[->] (B) -- node[above] {$\iota_{\alpha,\alpha_i}$} (A);
+\node (BM) at (0,0) {$B\mathrm{-mod}$};
+\node (AM) at (5,0) {$A\mathrm{-mod}$};
+\draw[->,bend left=20] (BM) to node[above] {$f_i$} (AM);
+\draw[->,bend left=20] (AM) to node[below] {$e_i$} (BM);
+\end{tikzpicture}
+```
+
+Here $\iota_{\alpha,\alpha_i}(1_B)=u$, so the top arrow is not labelled as
+an embedding or a unital map. The lower arrows mean $f_i(N)=Au\otimes_BN$
+and $e_i(M)=uM$, with the $B$-action induced by the top arrow. The projector is
+$u=\sum_{\mathbf j\in I_{\alpha+\alpha_i},\ j_{d+1}=i}e(\mathbf j)$, as in (4).
+Exactness and both adjunctions $f_i\dashv e_i\dashv f_i$ are the supplied
+properties in (4), not consequences inferred from the picture. These blocks
+are summands of the supported tower $H^\Lambda=\bigoplus_\beta H^\Lambda_\beta$;
+the degree-$d$ supported algebra remains $f_{I,d}H_d(m)$, distinguished from
+the full ambient $H_d(m)$ in (2). The rigorous proof above is independent of
+the illustration.

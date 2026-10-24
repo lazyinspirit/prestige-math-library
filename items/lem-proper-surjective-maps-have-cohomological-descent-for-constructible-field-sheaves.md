@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves.json
+  precheck: pass
 id: lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves
 kind: lemma
 title: "Proper surjections have cohomological descent for constructible field sheaves"
@@ -51,3 +54,18 @@ where $\delta_p$ is the alternating sum of the pullbacks along the $(p+2)$ coord
 2.1 Explicit contraction of every augmented row. For $r\geq0$ let $\mathrm{ins}_r:S^r\to S^{r+1}$ insert $y$ as first coordinate, with $S^0=\mathrm{pt}$; so $\mathrm{ins}_0$ is the point $y$ itself. The deletion and insertion maps satisfy $d_0\,\mathrm{ins}_{r+1}=\mathrm{id}$ and $d_i\,\mathrm{ins}_{r+1}=\mathrm{ins}_r\,d_{i-1}$ for $i>0$. Put $h_{p+1}:=\mathrm{ins}_{p+1}^*:H^q(S^{p+2},K)\to H^q(S^{p+1},K)$ and $h_0:=\mathrm{ins}_0^*:H^q(S,K)\to H^q(K)$, with $\delta_{-1}$ the constant pullback of the projection $S\to\mathrm{pt}$. Applying the two identities termwise gives $h_{p+1}\delta_p+\delta_{p-1}h_p=\mathrm{id}$ for every $p\geq0$: the $i=0$ term of $h_{p+1}\delta_p$ is the identity, and the terms $i>0$ are the negatives of $\delta_{p-1}h_p$; moreover $h_0\delta_{-1}=\mathrm{id}$, because the projection followed by the chosen point is the identity of $\mathrm{pt}$. Hence every augmented horizontal row is contractible, in particular exact, in every internal degree $q$, using only functorial pullback on cohomology. [step 1.2, algebra]
 
 3.1 Conclusion and naturality. By step 2.1 the next page of the spectral sequence of the stalk cone vanishes at every stalk, and by step 1.1 its filtration is finite in each total degree, so [F3] identifies the associated graded of the stalk cohomology with zero in every degree; the stalk of the cone at $x$ is therefore acyclic, for every $x\in X$. A complex of sheaves whose stalks are all acyclic has zero cohomology sheaves, hence is acyclic; this proves the asserted quasi-isomorphism $F\xrightarrow{\sim}\operatorname{Tot}_{p\geq0}Rf_{p*}F_p$. All algebraic base changes of $f$ remain proper surjective, and the identifications of steps 1.2-3.1 are pullbacks of one another by the Cartesian-pasting naturality of [F1], so the pulled-back assertion follows without choosing compatible points; coefficient morphisms act componentwise by the same naturality. For the global statement use [F2]’s simplicial injective model: its levelwise injectives push forward to injectives, since inverse image is exact and left adjoint to direct image. The total is a bounded-below complex of injectives, because each total degree is a finite sum. Thus global sections compute its derived global sections termwise; derived composition in [F1] identifies the columns with $R\Gamma(Y_p,F_p)$, giving $R\Gamma(X,F)\simeq\operatorname{Tot}_pR\Gamma(Y_p,F_p)$. The Axiom of Choice is inherited exactly through [A1]. [F1, F3, A1, step 1.1, step 2.1] ∎
+
+
+## Remarks
+
+For the stalk calculation in steps 1.2 and 2.1, fix $x\in X$, put $S=Y_x$ and $K=F_x$, and choose $y\in S$. The first arrows of the augmented row and its contraction have opposite directions:
+
+```tikzcd
+[column sep=large, font=\Large]
+H^q(K) \arrow[r, "\delta_{-1}", bend left=18]
+& H^q(S,K) \arrow[l, "h_0", bend left=18] \arrow[r, "\delta_0", bend left=18]
+& H^q(S^2,K) \arrow[l, "h_1", bend left=18] \arrow[r, "\delta_1"]
+& \cdots
+```
+
+Here $\delta_{-1}$ is pullback along $S\to\mathrm{pt}$, $\delta_p=\sum_{i=0}^{p+1}(-1)^i d_i^*$ for coordinate deletion $d_i:S^{p+2}\to S^{p+1}$, and $h_p=\mathrm{ins}_p^*$ for first-coordinate insertion $\mathrm{ins}_p(s_1,\ldots,s_p)=(y,s_1,\ldots,s_p)$, with $S^0=\mathrm{pt}$. Thus the backward arrows are pullbacks, not inverse maps to individual forward arrows: step 2.1 gives $h_0\delta_{-1}=\mathrm{id}$ and $h_{p+1}\delta_p+\delta_{p-1}h_p=\mathrm{id}$ for $p\geq0$. The diagram illustrates the row contraction; it makes no acyclicity assertion about $S$, and the proof above is independent of the illustration.

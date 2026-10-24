@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals.json
+  precheck: pass
 id: thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals
 kind: theorem
-title: "The bounded complex dual of C_0(X) is regular complex measures"
+title: "The bounded complex dual of $C_0(X)$ is regular complex measures"
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-regular-complex-borel-measure-on-an-lch-space, lem-positive-c-zero-functionals-have-finite-regular-representing-measures, lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals, thm-total-variation-is-a-measure, def-integration-against-a-signed-or-complex-measure, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-dependent-choice]
 proof_strategy: direct
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"
@@ -32,7 +28,7 @@ by a finite regular complex Borel measure $\mu$. Conversely each such $\mu$ defi
 
 **Given:** Dependent Choice and a bounded complex linear functional $L$ on $C_0(X;\mathbb C)$.
 
-[L1] Bounded real functionals split into differences of positive functionals. ([[lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals]])
+[L1] Bounded real functionals split into differences of positive functionals. ([[lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals|A bounded real $C_0(X)$ functional is a difference of positive functionals]])
 
 [L2] Positive bounded functionals have finite regular representing measures. ([[lem-positive-c-zero-functionals-have-finite-regular-representing-measures]])
 

@@ -1,0 +1,83 @@
+{
+  "id": "lem-na-piola-divergence-and-flux-identities",
+  "agent": "/root/rendering_repair_coordinator/npde_013",
+  "model": "gpt-6.1-sol",
+  "configured_reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the sole original flagged PNG standalone at original resolution: the square is replaced by a red failure box. Reproduced the original diagram with the same node-tikzjax document packages (amsfonts and tikz-cd), showConsole:true: Undefined control sequence at the divergence arrow label \\operatorname{div}; the engine stops at \\end{tikzcd}. The row delimiter and arrow-label syntax are valid; the renderer document does not supply this amsmath command.",
+      "action": "Replaced only the two diagram arrow-label commands \\operatorname{div} with equivalent \\mathrm{div}; all objects, maps, row syntax and prose remain unchanged.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Two command substitutions inside the existing tikzcd square; no other source edits.",
+  "source_lines_after": [
+    66,
+    67
+  ],
+  "before_raw_sha256": "d405a25655720b0cb0d064882becb7f1f1e3408bb2128a4c20e1038b973b0f2f",
+  "after_raw_sha256": "4af3ee442071f7cbe39c822ee8b384de8ed9f99a4358a26f2ef752af0ede39ff",
+  "guard": "Immediately before edit, SHA256 matched queue before_raw_sha256 d405a25655720b0cb0d064882becb7f1f1e3408bb2128a4c20e1038b973b0f2f.",
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and vector push-forward domain/codomain",
+      "justification": "Read full local def-na-contravariant-piola-map Definition and full assigned lemma. F_K maps reference open simplex widehat K bijectively to K, with invertible constant A_K and J_K=det(A_K)>0. P_K maps C^1(overline widehat K;R^d) to C^1(overline K;R^d) by (P_K widehat v)(x)=J_K^{-1}A_K widehat v(F_K^{-1}(x)); the downward left arrow has precisely this direction. Affine maps extend to the closures."
+    },
+    {
+      "check": "Scalar arrow and divergence domains",
+      "justification": "Divergence of each indicated C^1 vector field is a continuous scalar function on its respective open simplex, giving the top C(widehat K) and bottom C(K) objects. The right downward arrow sends q on widehat K to x -> J_K^{-1}q(F_K^{-1}(x)) on K. This is scalar push-forward/pull-forward, not the inverse vector pull-back J_K A_K^{-1}v composed with F_K; no map direction was substituted."
+    },
+    {
+      "check": "Square commutativity and determinant factor",
+      "justification": "Full local proof step 1.1 and local chain-rule theorem give partial_x_i = sum_k (A_K^{-1})_ki partial_widehat_x_k. Hence div(P_K widehat v) = J_K^{-1} sum_i,k,j (A_K^{-1})_ki(A_K)_ij partial_k widehat v_j composed with F_K^{-1} = J_K^{-1}(div widehat v) composed with F_K^{-1}. Thus both paths agree with precisely J_K^{-1}; neither J_K nor an absolute-value/sign convention replaces it."
+    },
+    {
+      "check": "Oriented normals and flux preservation",
+      "justification": "The supplier Definition fixes consistent oriented normals and n ds=J_K A_K^{-T} widehat n d widehat s. Full local proof 2.1 uses this cofactor formula. Pairing it with J_K^{-1}A_K widehat v cancels determinants and gives (A_K widehat v) dot (A_K^{-T} widehat n)=widehat v dot widehat n, pointwise under F_K. Integrating corresponding facets yields the stated equality without a sign reversal. The square depicts divergence commutativity only and introduces no extra boundary arrow or unproved flux relation."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-na-piola-divergence-and-flux-identities.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-na-piola-divergence-and-flux-identities.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/lem-na-piola-divergence-and-flux-identities.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "fresh_native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/npde013-final-unique",
+      "standalone_original_resolution_review": true,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "visual_result": "All four objects and arrows appear in the square; left P_K and right J_K^{-1}(dot) composed with F_K^{-1} labels are distinct, divergence labels appear above/below their arrows, no clipping or overlap observed. Complete title/body tile independently reviewed.",
+      "limitations": "Local native ItemBody/TikZ SSR preview only; no production HTTP route or metadata Sources footer. Preview reference map reports 16 unrelated parse diagnostics."
+    },
+    "preservation": "Byte comparison confirms exact original frontmatter and exactly the two intended diagram-command replacements. Statement, Facts, proof, dependencies, sources and published status are unchanged."
+  },
+  "remaining_issues": []
+}

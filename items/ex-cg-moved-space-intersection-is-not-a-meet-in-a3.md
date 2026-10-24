@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-moved-space-intersection-is-not-a-meet-in-a3.json
+  precheck: pass
 id: ex-cg-moved-space-intersection-is-not-a-meet-in-a3
 kind: example
 title: "A moved-space intersection in $A_3$ that is not the meet"
@@ -19,13 +22,7 @@ sources:
       url: https://www.numdam.org/item/CM_1972__25_1_1_0.pdf
       locator: "Section 2 'Products of reflections', printed pp. 2-5: the root-system setup (i)-(iv) and Lemmas 1-5 with the proofs of Lemmas 2, 3 and 4"
 dependency_level: 18
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -79,3 +76,25 @@ and $M(\alpha)\cap M(\beta)=\mathbb R(e_1-e_2+e_3-e_4)$ is a line containing no 
 3.2 By step 1.1 the roots of $A_3$ in the model are the twelve vectors $\pm\frac1{\sqrt2}(e_p-e_q)$, $p\ne q$, and none of these is a real multiple of $e_1-e_2+e_3-e_4$, so the line $\mathbb R(e_1-e_2+e_3-e_4)$ of step 2.2 contains no root; hence no $w\in W$ has $M(w)=\mathbb R(e_1-e_2+e_3-e_4)$, because a nonzero moved space contains a root by [F3]. [step 1.1, step 2.2, F3]
 
 4.1 Let $\tau\in W$ be a common lower bound of $\alpha$ and $\beta$, so $M(\tau)\subseteq M(\alpha)\cap M(\beta)=\mathbb R(e_1-e_2+e_3-e_4)$ by [F4] and step 2.2. If $M(\tau)\ne0$, then $M(\tau)$ equals that line and $\tau$ is an element with moved space the line, contradicting step 3.2; hence $M(\tau)=0$ and $\tau=1$ by [F2]; since $1\le_T\alpha,\beta$, the greatest common lower bound of $\alpha$ and $\beta$ is $1$, and $M(1)=0$ is strictly smaller than the line $M(\alpha)\cap M(\beta)$. This verifies (i), (ii) and (iii). [step 2.2, step 3.1, step 3.2, F2, F4, F6] ∎
+
+
+## Remarks
+
+The following subspace-incidence schematic separates the intersection from the moved space of the meet. All arrows denote strict inclusions of subspaces of the three-dimensional space $\mathbf H$; positions do not represent a projection or metric geometry. Here $L=\mathbb R(e_1-e_2+e_3-e_4)$, while the two planes are exactly those in (ii).
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (H) at (0,5) {$\mathbf H\quad(\dim=3)$};
+\node (A) at (-2.6,3.5) {$M(\alpha)\quad(\dim=2)$};
+\node (B) at (2.6,3.5) {$M(\beta)\quad(\dim=2)$};
+\node (L) at (0,1.8) {$L=M(\alpha)\cap M(\beta)\quad(\dim=1)$};
+\node (Z) at (0,0) {$M(\alpha\wedge_T\beta)=M(1)=\{0\}$};
+\draw[->] (Z) -- (L);
+\draw[->] (L) -- (A);
+\draw[->] (L) -- (B);
+\draw[->] (A) -- (H);
+\draw[->] (B) -- (H);
+\end{tikzpicture}
+```
+
+The line $L$ contains no $A_3$ root, so it is absent from the image of $w\mapsto M(w)$, although it is the intersection of two subspaces in that image. Step 4.1 establishes $\alpha\wedge_T\beta=1$, giving the strict inclusion $M(\alpha\wedge_T\beta)=\{0\}\subsetneq L$. The verification above is independent of the schematic.

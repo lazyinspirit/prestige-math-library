@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-riemann-hurwitz-formula.json
+  precheck: pass
 id: thm-riemann-hurwitz-formula
 kind: theorem
 title: Riemann–Hurwitz formula for compact Riemann surfaces
@@ -33,9 +36,7 @@ sources:
     - title: "Vladimir Hinich, Riemann Surfaces, lecture 7"
       url: https://math.haifa.ac.il/hinich/RSlec/lec7.pdf
       locator: "§8.5.1–8.5.3, printed pp. 8–9: triangulate the target with the branch values as vertices, lift, and count 2−2g = d·2 − Σ(e_x−1) in the sphere case."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -109,3 +110,38 @@ Choice enters only through the genus-classification interface of
 ## Remarks
 
 The two interfaces of the statement are deliberately separated. The covering side is [[thm-proper-holomorphic-map-riemann-surfaces-has-degree]], which supplies the degree and the local model $z\mapsto z^{e}$; the genus side is [[def-genus-and-euler-characteristic-compact-riemann-surface]]. The local analytic bridge to the divisor language is [[lem-pullback-order-of-meromorphic-differentials-under-branched-maps]], whose formula $\operatorname{ord}_x(f^\ast\eta)=e_x\operatorname{ord}_{f(x)}(\eta)+e_x-1$ produces the same deficit $e_x-1$ as the cell count above, without requiring a global nonzero differential on $Y$. For the sphere case $g(Y)=0$ the formula reads $2g(X)-2=-2d+\sum(e_x-1)$, which is the count $2-2g=d\cdot2-\sum(e_x-1)$ of the sources. The hypothesis that $X$ is compact is essential here only through properness and finite ramification; the proper degree theorem already supplies the latter, so no separate finiteness argument for critical points is needed beyond step 1.1.
+
+
+For the local contribution at a point with $e_x=2$, the following topological
+schematic shows the two lifts $T_1,T_2$ of a small target triangle $T$ with
+branch vertex $v=f(x)$. The straight edges represent topological cell edges,
+not an assertion about their shapes in holomorphic coordinates. Each
+$f|_{T_i}:T_i\to T$ is a homeomorphism; the two lifted triangles meet only at
+$x$. Only the source neighbourhood of $x$ is shown, so other points of the
+fibre over $v$ are not excluded.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\draw[thick] (0,0) -- (1.7,0.8) -- (1.7,-0.8) -- (0,0);
+\draw[thick] (0,0) -- (-1.7,-0.8) -- (-1.7,0.8) -- (0,0);
+\fill (0,0) circle (2pt);
+\node[below] at (0,-0.15) {$x$};
+\node at (1.1,0) {$T_1$};
+\node at (-1.1,0) {$T_2$};
+\node at (0,1.4) {$X:\ e_x=2$};
+\draw[->,thick] (2.2,0) -- (3.8,0);
+\node[above] at (3,0.15) {$f$};
+\node[below] at (3,-0.15) {$z\mapsto z^2$};
+\draw[thick] (4.5,0) -- (6.2,1) -- (6.2,-1) -- (4.5,0);
+\fill (4.5,0) circle (2pt);
+\node[below left] at (4.5,0) {$v$};
+\node at (5.6,0) {$T$};
+\node at (5.3,1.4) {$Y$};
+\end{tikzpicture}
+```
+
+The two open faces and each pair of corresponding open edges remain distinct
+above $T$, whereas their two branch corners give just one vertex $x$.
+This is the local vertex deficit $e_x-1=2-1=1$ in step 3.2, with no edge or
+face deficit (steps 4.1–6.1). The figure illustrates those steps; the proof
+and the general degree-$d$ count above are independent of it.

@@ -1,0 +1,79 @@
+---
+id: lem-link-seifert-matrix-enlargement-under-arc-surgery
+kind: lemma
+title: An arc surgery enlarges a link Seifert matrix by two rows and columns
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 7
+deps:
+  - def-oriented-link-in-s-three-and-ambient-isotopy
+  - def-link-seifert-pairing-and-matrix
+  - lem-link-seifert-pairing-well-defined
+  - def-seifert-surface-arc-surgery
+  - lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups
+  - def-countable-choice
+  - thm-choice-implies-dependent-implies-countable-choice
+  - thm-mayer-vietoris-sequence-in-singular-homology
+  - thm-linking-number-equals-signed-intersection
+  - def-regular-oriented-link-diagram
+  - lem-every-oriented-link-admits-a-regular-projection
+  - def-axiom-of-choice
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: W. B. Raymond Lickorish, An Introduction to Knot Theory
+      url: https://ebooks.karbust.me/Mathematics/W.%20B.%20Raymond%20Lickorish%20-%20An%20Introduction%20to%20Knot%20Theory%20%281997%29%20%5B978-1-4612-0691-0%5D.pdf
+      locator: "Chapter 8, Theorem 8.4, printed pp. 81–82: Seifert matrices under embedded arc surgery; the link-matrix calculation is proved here."
+---
+## Statement
+
+Assume full AC. Let $L$ be a nonempty smooth oriented link with $r$ components, let $F$ be a connected compact smooth oriented spanning surface of genus $g$, and let $F'$ be obtained by choosing an embedded solid cylinder $[0,1]\times D^2$ that meets $F$ exactly in its two end disks and lies on the same local side at both disks, then replacing those disks by the cylinder's lateral annulus with the compatible orientation. This surgery preserves $L$. Put $m=2g+r-1$, choose an ordered integral basis of $H_1(F;\mathbb Z)$ represented away from the two end disks, and let $V_{ij}=\operatorname{lk}(a_i^+,a_j)$ be its positive-push Seifert matrix. The surviving classes of that basis extend by two classes to an integral basis of $H_1(F';\mathbb Z)$, and for some column vectors $x,y\in\mathbb Z^m$ and integer $z$, the new Seifert matrix is one of
+$$\begin{pmatrix}V&x&0\\y^T&z&0\\0^T&1&0\end{pmatrix},\qquad \begin{pmatrix}V&x&0\\y^T&z&1\\0^T&0&0\end{pmatrix}.$$
+
+## Statement references
+
+[[def-link-seifert-pairing-and-matrix|The positive-push Seifert matrix for a link surface]]
+
+[[def-seifert-surface-arc-surgery|The embedded product-cylinder arc surgery]]
+
+[[thm-mayer-vietoris-sequence-in-singular-homology|The homology calculation for the handle replacement]]
+
+## Facts & Assumptions
+
+**Given:** Full AC, a nonempty oriented link $L$, a connected compact oriented spanning surface $F$, an ordered basis of $H_1(F;\mathbb Z)$, and one embedded arc surgery producing $F'$.
+
+[A1] Full AC implies dependent choice and countable choice, supplying the Alexander-duality convention and compact-surface normal form. [[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]]
+
+[F1] The positive-push Seifert pairing is well-defined and bilinear on the homology of every connected link surface. [[lem-link-seifert-pairing-well-defined]]
+
+[F2] An arc surgery replaces two disks by the lateral annulus of an embedded product cylinder, leaving the oriented boundary unchanged. [[def-seifert-surface-arc-surgery]]
+
+[F3] Mayer–Vietoris computes the homology of two surfaces glued along a common boundary circle. [[thm-mayer-vietoris-sequence-in-singular-homology]]
+
+[F4] Linking is the signed intersection with a supplied spanning surface; linking of disjoint circles is symmetric. [[thm-linking-number-equals-signed-intersection]], [[lem-link-seifert-pairing-well-defined]], [[def-regular-oriented-link-diagram]], [[lem-every-oriented-link-admits-a-regular-projection]]
+
+## Proof
+
+**Given:** The data of the Statement.
+
+1.1 The two surgery disks and a narrow strip in $F$ joining them have a disk neighbourhood $D$. Replacing the disks by the lateral annulus of the cylinder changes this neighbourhood into a once-punctured torus $P$ with the same boundary $\partial D$. Write $F_0=\overline{F\setminus D}$. Any old homology class can be represented in $F_0$: replace each of its finitely many arcs through $D$ by an arc along $\partial D$, which changes the cycle by a boundary in the disk. Take open collar neighbourhoods in $F$ and $F'$ so that $F_0$ and respectively $D$ or $P$ form open covers whose intersection retracts onto $\partial D$. In the Mayer–Vietoris sequence [F3], the map from $H_0(\partial D;\mathbb Z)=\mathbb Z$ to the direct sum of the two $H_0$ groups is $n\mapsto(n,-n)$ and is injective. For $F=F_0\cup D$, the $H_1$ map from the intersection circle has image generated by $([\partial D],0)$, since $H_1(D;\mathbb Z)=0$. For $F'=F_0\cup P$, the same image is generated by $([\partial D],0)$ because the oriented boundary of $P$ is zero in $H_1(P;\mathbb Z)$, while $H_1(P;\mathbb Z)\cong\mathbb Z^2$ on its longitudinal and meridional curves. Thus $H_1(F')\cong H_1(F)\oplus\mathbb Z^2$, with the old classes as a direct summand. Choose the added basis classes $b,c$ from those two curves; together with the old basis they are an integral basis. [A1, F2, F3, given, construct]
+
+2.1 The surgery retains the old oriented surface outside the two attaching disks, so its positive normal there is unchanged and the old matrix block remains $V$. Use product coordinates $(t,w)$ on the cylinder, with $w\in D^2$, and take $c=\{t_0\}\times\partial D^2$. Let $b$ follow one longitudinal side of the tube and return through $F_0$; it crosses each cross-section disk once. The disks $\{t_0\}\times D^2$ and their sufficiently close parallel disks miss every old basis curve and its push-off, so [F4] gives zero for the two Seifert pairings between $c$ and every old basis curve. Along the lateral annulus, the positive normal points either out of or into the solid cylinder. If it points out, the radius-one cross-section disk misses $b^+$, giving $V(b,c)=0$, while the disk of slightly larger radius bounds $c^+$ and meets $b$ once; it gives $\operatorname{lk}(b,c^+)=+1$ after orienting $c$, hence $V(c,b)=+1$ by the symmetry in [F4]. If it points in, the radius-one disk meets $b^+$ once, giving $V(b,c)=+1$ after orienting $c$, while the disk of slightly smaller radius bounds $c^+$ and misses $b$, giving $\operatorname{lk}(b,c^+)=0$ and therefore $V(c,b)=0$. These intersection statements follow from the explicit single transverse point in the product coordinates and [F4]. In either case the concentric parallel meridians have $V(c,c)=0$. The remaining entries involving $b$ are integers $x$, $y$, and $z=\operatorname{lk}(b^+,b)$. Thus in the ordered basis $(a_1,\ldots,a_m,b,c)$ the matrix has exactly one of the two displayed forms. [F1, F2, F4, step 1.1, construct, algebra] ∎
+

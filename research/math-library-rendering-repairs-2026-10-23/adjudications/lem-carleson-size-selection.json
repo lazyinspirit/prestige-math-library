@@ -1,0 +1,44 @@
+{
+  "id": "lem-carleson-size-selection",
+  "agent": "/root/rendering_repair_coordinator/fourier_033",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original-resolution tile 1 visibly prints sigma>0, <=, sigma^(-2), and ||f||_2^2 as ASCII notation. The frozen and current-before-edit statement lacks math delimiters for these expressions.",
+      "action": "Added inline math delimiters and equivalent sigma, inequality, exponent, and norm notation to the three statement formulas.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original-resolution tile 2 shows raw comparison and indexing expressions in step 5.1, including l<=|J|, k=0, m-1, j>=0, Cl, and C|J|. Source confirms these formulas were outside delimiters; the existing m=|J|/l formula was already delimited and retained.",
+      "action": "Delimited the step 5.1 interval/scale, reciprocal length, indices, summation variable, and bounds, replacing ASCII <= and >= by equivalent LaTeX inequalities. Retained the existing variable l and all formulas.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Formatting-only repair of statement formulas and missing inline math delimiters in proof step 5.1.",
+  "source_lines_after": [
+    27,
+    57
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": {
+    "raw_guard": {
+      "expected": "2fce2af0464e946335360144e276c11568c59b84132a86c734d96e261128a9cf",
+      "matched_immediately_before_edit": true
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-carleson-size-selection.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects",
+      "pre_existing_formatting_failures": "None reported by this check."
+    }
+  },
+  "reading_limits": "Inspected both flagged local screenshot tiles at original resolution and read frozen/current item source. No HTTP(S) or live website access; no mathematical proof audit or post-edit visual render claimed."
+}

@@ -1,0 +1,88 @@
+---
+id: thm-the-i-string-decomposition-of-the-negative-half
+kind: theorem
+title: "The $i$-string decomposition of the negative half"
+status: published
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-kashiwara-skew-derivations-on-the-negative-quantum-half, def-positive-negative-and-toral-quantum-subalgebras, def-quantum-integers-factorials-and-divided-powers-at-q-i, def-lusztig-divided-power-integral-form, lem-quantum-pascal-recurrence-and-gaussian-integrality, lem-divided-power-half-has-integral-skew-string-coefficients]
+justified_by: []
+aliases: []
+landmark: false
+dependency_level: 2
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "Masaki Kashiwara, On crystal bases of the q-analogue of universal enveloping algebras, Duke Math. J. 63 (1991), no. 2, 465-516"
+      url: "https://webpages.math.luc.edu/~ptingley/oldseminars/QuantumGroupsSpring2011/Kashiwara91.pdf"
+      locator: "§3.2, printed pp. 479–481, Proposition 3.2.1 and (3.2.2)–(3.2.7): q-boson projector and unique coefficients."
+    - title: "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390"
+      url: "https://arxiv.org/pdf/math/0305390"
+      locator: "§6, printed pp. 22–24, (6.7)–(6.10), Proposition 6.1 and Definition 6.2: negative-half strings and operators."
+    - title: "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)"
+      url: "https://categorified.net/LieQuantumGroups.pdf"
+      locator: "§13.3, printed p. 328: background on divided-string shifts for modules; the negative-half projector is derived locally from the integral skew-string supplier."
+---
+
+## Statement
+
+Let $U_q^-$ be the negative half of the Drinfeld–Jimbo algebra with its skew derivations $e_i',e_i'':U_q^-\to U_q^-$ ([[def-kashiwara-skew-derivations-on-the-negative-quantum-half]], [[def-positive-negative-and-toral-quantum-subalgebras]]), fix $i\in I$, and write $f_i^{(n)}=F_i^n/[n]_i!$ for the divided powers ([[def-quantum-integers-factorials-and-divided-powers-at-q-i]]). Then:
+
+(i) $e_i'$ is locally nilpotent on $U_q^-$, and the endomorphism
+$$P_i:=\sum_{m\ge0}(-1)^mq_i^{-m(m-1)/2}F_i^{(m)}e_i'^{\,m}\in\operatorname{End}_{\mathbb Q(q)}(U_q^-)$$
+is well defined (each sum is finite on each element) and is the projection onto $\operatorname{Ker}e_i'$ along $f_iU_q^-$. In particular $e_i'P_i=0$, $P_iF_i=0$, $P_i^2=P_i$, $P_iu=u$ for $u\in\operatorname{Ker}e_i'$, and
+$$U_q^-=\operatorname{Ker}e_i'\oplus f_iU_q^-.$$
+
+(ii) Every $u\in U_q^-$ has a unique $i$-string decomposition
+$$u=\sum_{n\ge0}f_i^{(n)}u_n,\qquad u_n\in\operatorname{Ker}e_i',\qquad u_n=0\ \text{for }n\gg0,$$
+and the components are given by $u_n=q_i^{n(n-1)/2}P_ie_i'^{\,n}u$.
+
+(iii) The **Kashiwara operators on the negative half**, defined on the string decomposition by
+$$\tilde e_iu:=\sum_{n\ge1}f_i^{(n-1)}u_n,\qquad \tilde f_iu:=\sum_{n\ge0}f_i^{(n+1)}u_n,$$
+are $\mathbb Q(q)$-linear endomorphisms of $U_q^-$ with $\tilde e_i\tilde f_i=\operatorname{id}_{U_q^-}$; $\tilde e_iu=0$ if and only if $u\in\operatorname{Ker}e_i'$; $\tilde f_i$ is injective and $\tilde f_i(1)=F_i$. Both operators preserve the root grading and shift its degree by $\mp\alpha_i$, that is $\tilde e_i(U_q^-[-\nu])\subseteq U_q^-[-\nu+\alpha_i]$ and $\tilde f_i(U_q^-[-\nu])\subseteq U_q^-[-\nu-\alpha_i]$.
+
+No choice principle is used. Here $e_i'^{\,n}$ denotes the ordinary $n$-fold power of the derivation, not its divided power. The same projector and every string coefficient preserve the $\mathbb Z[q,q^{-1}]$ divided-power lattice $U_A^-$ ([[def-lusztig-divided-power-integral-form]]), as proved by the integral skew-string supplier; this does not assert that lattice's freeness.
+
+## Facts & Assumptions
+
+**Given:** The negative half $U_q^-$, the skew derivations $e_i',e_i''$, a fixed $i$, and the divided powers $f_i^{(n)}=F_i^n/[n]_i!$.
+
+[F1] $U_q^-=\bigoplus_{\nu\in Q_+}U_q^-[-\nu]$ is graded by the positive root lattice, with $\deg F_j=-\alpha_j$ and $U_q^-[0]=\mathbb Q(q)\cdot1$; the grading is the restriction of the root grading of $U_q(\mathfrak g)$ ([[def-positive-negative-and-toral-quantum-subalgebras]]).
+
+[F2] The maps $e_i',e_i'':U_q^-\to U_q^-$ are $\mathbb Q(q)$-linear, vanish on $1$, satisfy $e_i'(F_j)=\delta_{ij}$, the Leibniz rule $e_i'(xy)=e_i'(x)y+q_i^{\langle\mathrm{wt}(x),h_i\rangle}xe_i'(y)$ on homogeneous $x$ of actual weight $\mathrm{wt}(x)$, and similarly for $e_i''$ with the opposite twist; they satisfy $e_i'F_j=q_i^{-a_{ij}}F_je_i'+\delta_{ij}$ and decrease positive height by one, so $e_i'(U_q^-[-\nu])\subseteq U_q^-[-\nu+\alpha_i]$ (zero when $\nu-\alpha_i\notin Q_+$) and $e_i'$ is locally nilpotent ([[def-kashiwara-skew-derivations-on-the-negative-quantum-half]]).
+
+[F3] $[m]_i=(q_i^m-q_i^{-m})/(q_i-q_i^{-1})\in\mathbb Q(q)^\times$ for $m\ge1$, $f_i^{(m)}=F_i^m/[m]_i!$, and $f_i^{(m)}f_i^{(n)}=\binom{m+n}{m}_if_i^{(m+n)}$ with $F_if_i^{(n-1)}=[n]_if_i^{(n)}$; all displayed scalars are nonzero ([[def-quantum-integers-factorials-and-divided-powers-at-q-i]]).
+
+[F4] Gaussian identity: for $N\ge0$, $\sum_{r=0}^{N}(-1)^rq_i^{-r(N-1)}\binom{N}{r}_i$ equals $1$ for $N=0$ and $0$ for $N\ge1$; the Gaussian quotient is invariant under $q_i\mapsto q_i^{-1}$ and the identity is the inversion of the Gauss product formula ([[lem-quantum-pascal-recurrence-and-gaussian-integrality]], parts (iii)-(iv)).
+
+[F5] Integral skew-string supplier: the operator $P_i$ of (i) is finite on each vector and projects $U_q^-$ onto $\operatorname{Ker}e_i'$ along $F_iU_q^-$; every $x\in U_A^-$ has a unique finite expansion $x=\sum_nF_i^{(n)}x_n$ with $e_i'x_n=0$ and $x_n=q_i^{n(n-1)/2}P_i(e_i')^nx\in U_A^-$; the projector and coefficients preserve $U_A^-$, with no global basis or freeness assumed ([[lem-divided-power-half-has-integral-skew-string-coefficients]]).
+
+## Proof
+
+**Proof technique:** direct. The projector and its finite-sum properties are those of the integral skew-string supplier [F5]; the negative-half string decomposition, the operator identities and the grading shifts are then read off string by string, with the Gaussian identity [F4] supplying the only arithmetic input.
+
+1.1 The $q$-boson relation. By [F2] with $j=i$ and $a_{ii}=2$, $e_i'F_i=q_i^{-2}F_ie_i'+1$; applying the Leibniz rule to $F_i^r$ and summing the geometric series gives $e_i'(F_i^r)=q_i^{-(r-1)}[r]_iF_i^{r-1}$, and dividing by $[r]_i!$ yields $e_i'F_i^{(r)}=q_i^{-(r-1)}F_i^{(r-1)}+q_i^{-2r}F_i^{(r)}e_i'$ for $r\ge1$. [F2, F3, algebra]
+
+2.1 Iterated deletion. If $e_i'u=0$, then induction on $n$ using step 1.1 gives $(e_i')^nF_i^{(m)}u=q_i^{-nm+n(n+1)/2}F_i^{(m-n)}u$ for $0\le n\le m$, while $(e_i')^nF_i^{(m)}u=(e_i')^{n-m}u=0$ for $n>m$. [step 1.1, F3, algebra]
+
+2.2 Termination. By [F2] the derivation $e_i'$ lowers positive height by one, so for homogeneous $x\in U_q^-[-\nu]$ one has $(e_i')^nx=0$ whenever $n>\sum_j\nu_j=\operatorname{ht}(\nu)$; hence on each $x$ only finitely many terms of the sum defining $P_i$ are nonzero, and $P_i$ is a well-defined $\mathbb Q(q)$-linear endomorphism of $U_q^-$. [F1, F2, step 1.1]
+
+3.1 The projection. For $u\in\operatorname{Ker}e_i'$ and $M\ge0$, steps 2.1 and [F3] give $P_iF_i^{(M)}u=\sum_{m=0}^{M}(-1)^mq_i^{-m(m-1)/2}q_i^{-mM+m(m+1)/2}\binom{M}{m}_iF_i^{(M)}u=\bigl(\sum_{m=0}^{M}(-1)^mq_i^{-m(M-1)}\binom{M}{m}_i\bigr)F_i^{(M)}u$, which by the Gaussian identity [F4] equals $u$ for $M=0$ and $0$ for $M\ge1$. Hence $P_iF_i=0$, $P_i$ fixes $\operatorname{Ker}e_i'$, and $P_i$ kills $f_iU_q^-$; moreover $e_i'P_i=0$ by the cancellation of consecutive terms in $e_i'F_i^{(m)}e_i'^{\,m}$ using step 1.1, so $P_i^2=P_i$ and $P_i$ is the projection onto $\operatorname{Ker}e_i'$ along $f_iU_q^-$, with $U_q^-=\operatorname{Ker}e_i'\oplus f_iU_q^-$ because $u=P_iu+(u-P_iu)$ lies in the two subspaces. [F3, F4, step 1.1, step 2.1, step 2.2, F5]
+
+4.1 Existence of the string decomposition. The algebra $U_q^-$ is spanned over $\mathbb Q(q)$ by finite words in the $F_j$, and each such word belongs to $U_A^-$ because $F_j=F_j^{(1)}$. Thus write $u=\sum_{a=1}^tc_ax_a$ with $c_a\in\mathbb Q(q)$ and $x_a\in U_A^-$. Apply [F5] to each $x_a$ and use the $\mathbb Q(q)$-linearity of $P_i$ and $e_i'$ to obtain $u=\sum_nf_i^{(n)}u_n$, where $u_n:=\sum_ac_a(x_a)_n=q_i^{n(n-1)/2}P_ie_i'^{\,n}u\in\operatorname{Ker}e_i'$. This sum is finite by step 2.2. The field-valued decomposition therefore follows from the integral one without assuming an integral basis or freeness. [F1, F3, F5, step 2.2, step 3.1, algebra]
+
+5.1 Uniqueness and the coefficient formula. Suppose $u=\sum_mf_i^{(m)}v_m$ with $v_m\in\operatorname{Ker}e_i'$ and $v_m=0$ for $m$ large. Applying $e_i'^{\,n}$ and then $P_i$ for fixed $n$: by step 2.1, $e_i'^{\,n}f_i^{(m)}v_m=q_i^{-nm+n(n+1)/2}f_i^{(m-n)}v_m$ for $m\ge n$ and $0$ for $m<n$, and by step 3.1, $P_if_i^{(m-n)}v_m=0$ for $m>n$ while $P_iv_n=v_n$; hence $P_ie_i'^{\,n}u=q_i^{-n(n-1)/2}v_n$, that is $v_n=q_i^{n(n-1)/2}P_ie_i'^{\,n}u=u_n$. Thus the components of step 4.1 are determined by $u$, giving uniqueness and the displayed coefficient formula. [step 2.1, step 3.1, step 4.1]
+
+6.1 The Kashiwara operators. Given the unique decomposition $u=\sum_nf_i^{(n)}u_n$ of steps 4.1-5.1, the prescriptions $\tilde e_iu:=\sum_{n\ge1}f_i^{(n-1)}u_n$ and $\tilde f_iu:=\sum_{n\ge0}f_i^{(n+1)}u_n$ are well-defined $\mathbb Q(q)$-linear maps by uniqueness; shifting the index shows $\tilde e_i\tilde f_iu=\sum_{n\ge0}f_i^{(n)}u_n=u$, so $\tilde e_i\tilde f_i=\mathrm{id}_{U_q^-}$. [step 4.1, step 5.1]
+
+7.1 Kernel, injectivity and value at $1$. For $u=\sum_nf_i^{(n)}u_n$ one has $\tilde e_iu=0$ exactly when $u_n=0$ for every $n\ge1$, that is $u=u_0\in\operatorname{Ker}e_i'$; hence $\ker\tilde e_i=\operatorname{Ker}e_i'$. If $\tilde f_iu=0$, then $\sum_nf_i^{(n+1)}u_n=0$ is a decomposition with all top coefficients $u_n$ in $\operatorname{Ker}e_i'$, so uniqueness in step 5.1 forces $u_n=0$ for all $n$, that is $u=0$; hence $\tilde f_i$ is injective. Finally $1\in\operatorname{Ker}e_i'$ has decomposition $1=f_i^{(0)}\cdot1$, so $\tilde f_i(1)=f_i^{(1)}=F_i$. [step 4.1, step 5.1, step 6.1]
+
+7.2 Root grading. Let $u\in U_q^-[-\nu]$ be homogeneous. Since $f_i^{(n)}$ raises the degree by $-n\alpha_i$, the components $u_n$ of steps 4.1-5.1 may be taken homogeneous of degree $-\nu+n\alpha_i$ (decompose $u$ and each $u_n$ into finitely many homogeneous pieces and compare degrees), so $f_i^{(n-1)}u_n$ has degree $-\nu+\alpha_i$ and $f_i^{(n+1)}u_n$ has degree $-\nu-\alpha_i$; hence $\tilde e_i(U_q^-[-\nu])\subseteq U_q^-[-\nu+\alpha_i]$ and $\tilde f_i(U_q^-[-\nu])\subseteq U_q^-[-\nu-\alpha_i]$. [F1, step 6.1]
+
+8.1 Integrality and choice. By [F5] the projector $P_i$ and every coefficient $u_n=q_i^{n(n-1)/2}P_ie_i'^{\,n}u$ preserve the divided-power lattice $U_A^-$, and the shifts of step 6.1 preserve it as well; no freeness of $U_A^-$ is asserted. All constructions used unique decompositions, finite sums and the explicit operator $P_i$; no choice principle is used. [F5, step 6.1] ∎

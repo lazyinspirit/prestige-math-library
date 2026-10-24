@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-qc-zero-plus-bloch-and-hadamard.json
+  precheck: pass
 id: ex-qc-zero-plus-bloch-and-hadamard
 kind: example
-title: "Bloch coordinates of |0> and H|0>"
+title: 'Bloch coordinates of $|0\rangle$ and $H|0\rangle$'
 status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
@@ -40,12 +43,7 @@ sources:
     - title: "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)"
       url: "https://web.mit.edu/8.371/www/lectures/lect01.pdf"
       locator: "§1.2.1, PDF pp.2–3"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
+
 ---
 
 ## Example

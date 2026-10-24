@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-zp-is-the-pro-p-completion-of-the-integers.json
+  precheck: pass
 id: thm-zp-is-the-pro-p-completion-of-the-integers
 kind: theorem
-title: "Zp is the pro-p completion of the integers"
+title: '$\mathbb Z_p$ is the pro-$p$ completion of the integers'
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-pro-p-completion-of-an-abstract-group, def-canonical-map-from-the-integers-to-zp, thm-concrete-inverse-limit-universal-property-in-groups]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -33,7 +33,7 @@ $\iota:\mathbb Z\to\mathbb Z_p$.
 
 [F1] The pro-$p$ completion is the inverse limit over normal subgroups with finite $p$-group quotients ([[def-pro-p-completion-of-an-abstract-group]]).
 
-[L1] The canonical map into $\mathbb Z_p$ is $m\mapsto(m\bmod p^n)_n$ ([[def-canonical-map-from-the-integers-to-zp]]).
+[L1] The canonical map into $\mathbb Z_p$ is $m\mapsto(m\bmod p^n)_n$ ([[def-canonical-map-from-the-integers-to-zp|The canonical map from $\mathbb Z$ to $\mathbb Z_p$ sends an integer to its coherent residue classes modulo $p^n$]]).
 
 [L2] Compatible tuples satisfy the inverse-limit universal property ([[thm-concrete-inverse-limit-universal-property-in-groups]]).
 

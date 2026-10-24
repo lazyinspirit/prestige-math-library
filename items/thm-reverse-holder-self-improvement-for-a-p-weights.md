@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-reverse-holder-self-improvement-for-a-p-weights.json
+  precheck: pass
 id: thm-reverse-holder-self-improvement-for-a-p-weights
 kind: theorem
-title: Reverse Holder self-improvement for A_p weights
+title: Reverse Holder self-improvement for $A_p$ weights
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Lemma 4.36 and Remark 4.39, printed pp. 86-90"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

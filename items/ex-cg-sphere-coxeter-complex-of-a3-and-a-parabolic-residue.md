@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-sphere-coxeter-complex-of-a3-and-a-parabolic-residue.json
+  precheck: pass
 id: ex-cg-sphere-coxeter-complex-of-a3-and-a-parabolic-residue
 kind: example
 title: "The Coxeter complex of $A_3$: a triangulation of the sphere and the residue of a proper parabolic"
@@ -20,9 +23,7 @@ sources:
     - title: "Jean Michel, Lectures on Coxeter groups (Beijing lecture notes, April-May 2014, author-hosted PDF)"
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 5, Proposition 5.4(i) (the order of s_H s_H' equals pi divided by the angle of the walls, printed p. 7) and Proposition 5.8 (printed p. 9)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Example
@@ -87,7 +88,7 @@ $S_4$, and $\rho(w_0)e_{s_i}=-e_{s_{4-i}}$ for $i=1,2,3$; the permutation of
 
 ## Verification
 
-**Proof technique:** direct; coset counts, rank-two incidences, the type-$A$ length formula, and a choice-free finite-patch area calculation.
+**Proof technique:** direct; coset counts, rank-two incidences, the type A length formula, and a choice-free finite-patch area calculation.
 
 1.1 By [F2] and [F3] the group $W$ is finite, of order $24$; hence by [F7] the form $B$ is positive definite. [F2, F3, F7, algebra]
 
@@ -116,3 +117,39 @@ $S_4$, and $\rho(w_0)e_{s_i}=-e_{s_{4-i}}$ for $i=1,2,3$; the permutation of
 - **The area uses symmetry and finite patch integrals.** Steps 2.3, 3.2 and 4.1 prove the needed chart comparison locally and divide the sphere area by the $24$ congruent chambers. No spherical-excess theorem or examples-page supplier is used.
 
 - **The residue is an incidence statement.** Clause (ii) identifies the residue of a face with the Coxeter complex of the parabolic subsystem through its incidence structure (chambers, edges and their containment). It does not construct an abstract simplicial complex separate from $\Sigma$ and does not assert a metric identification with a standard simplex.
+
+
+**Local stars and their residue cycles.** These are combinatorial schematics of the closed stars of vertices $v$ and $v'$ of the indicated types, not metric drawings of spherical chambers. Each triangular sector is one chamber through the central vertex; the blue boundary is its link. Step 2.2 gives six sectors on the left and four on the right. Globally, step 2.1 counts $4+6+4=14$ vertices of the three types, $36$ edges and $24$ chambers; the pictures display only two local stars, not the entire sphere.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\coordinate (v) at (0,0);
+\coordinate (a) at (1.25,0);
+\coordinate (b) at (0.625,1.083);
+\coordinate (c) at (-0.625,1.083);
+\coordinate (d) at (-1.25,0);
+\coordinate (e) at (-0.625,-1.083);
+\coordinate (f) at (0.625,-1.083);
+\fill[blue!12] (v)--(a)--(b)--(v);
+\draw[gray] (v)--(a) (v)--(b) (v)--(c) (v)--(d) (v)--(e) (v)--(f);
+\draw[blue,thick] (a)--(b)--(c)--(d)--(e)--(f)--(a);
+\fill (a) circle (1.5pt) (b) circle (1.5pt) (c) circle (1.5pt) (d) circle (1.5pt) (e) circle (1.5pt) (f) circle (1.5pt);
+\node[draw,circle,fill=white,inner sep=2pt] at (v) {$v$};
+\node at (0,1.75) {$I=\{s_2,s_3\}$};
+\node at (0,-1.65) {$\mathrm{link}(v):\ 6\ \mathrm{edges}$};
+\coordinate (w) at (4.3,0);
+\coordinate (p) at (3.2,-1.1);
+\coordinate (q) at (5.4,-1.1);
+\coordinate (r) at (5.4,1.1);
+\coordinate (s) at (3.2,1.1);
+\fill[blue!12] (w)--(q)--(r)--(w);
+\draw[gray] (w)--(p) (w)--(q) (w)--(r) (w)--(s);
+\draw[blue,thick] (p)--(q)--(r)--(s)--(p);
+\fill (p) circle (1.5pt) (q) circle (1.5pt) (r) circle (1.5pt) (s) circle (1.5pt);
+\node[draw,circle,fill=white,inner sep=2pt] at (w) {$v'$};
+\node at (4.3,1.75) {$I=\{s_1,s_3\}$};
+\node at (4.3,-1.65) {$\mathrm{link}(v'):\ 4\ \mathrm{edges}$};
+\end{tikzpicture}
+```
+
+The outer vertices represent edges through the central vertex, and consecutive outer vertices bound one chamber sector, exactly as in step 2.2. The shaded sector in each star picks one such chamber without choosing a group-element label. The rigorous verification above is independent of these illustrations.

@@ -1,0 +1,87 @@
+{
+  "id": "def-kauffman-bracket-smoothing-and-loop-value",
+  "agent": "/root/rendering_repair_coordinator/knot_022",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 01 shows adjacent single-line A/B captions overwriting one another and the crossing caption. The actual crossing and both smoothings are intact; this is caption geometry, not a convention error.",
+      "action": "Raised scale from 0.72 to 1, separated panel centers to 3.8 cm, and set smoothing captions on two centered lines below the drawings. All strand paths, endpoint pairings and weights remain unchanged.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Separated overlapping local smoothing captions without changing the definition, coefficients, crossings, proof or metadata.",
+  "source_lines_after": [
+    61,
+    68,
+    71,
+    73,
+    76
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Local disk endpoints NW=(-1,1), NE=(1,1), SW=(-1,-1), SE=(1,-1), with right/up positive chart orientation.",
+      "relations": "The uninterrupted SW\u2013NE segment is the over-strand; NW\u2013SE under-strand ends at (-0.14,0.14) and resumes at (0.14,-0.14), leaving the undercrossing gap.",
+      "justification": "Exact local Definition specifies this crossing; supplier def-regular-oriented-link-diagram defines the over/under decoration. Native compiled figure retains this visible gap."
+    },
+    {
+      "objects": "A- and B-smoothing pairings of the same four boundary endpoints.",
+      "relations": "A has {NW,SW} and {NE,SE}; B has {NW,NE} and {SW,SE}. Both have precisely two nonintersecting arcs. Entering the under-strand from NW points SE; a right turn points SW, agreeing with A. Entering from SE points NW; a right turn points NE, again agreeing with A.",
+      "justification": "These are the exact endpoint pairs of the Definition and the four unchanged Bezier paths, so orientation-preserving chart transport keeps the convention. No A/B swap was made."
+    },
+    {
+      "objects": "State weights and closed-circle evaluation.",
+      "relations": "Each A smoothing contributes A and each B contributes A^{-1}, so the product is A^{a(S)-b(S)}. The unchanged delta is -A^2-A^{-2}; the crossingless k-component unlink has one state and weight delta^{k-1}, hence the unknot value is 1 and adding a disjoint circle multiplies by delta.",
+      "justification": "Direct substitution in the exact finite-state-sum Definition; labels in the figure agree. The suppliers supply finite crossings and orientation-preserving planar transport, as used in proof steps 1.1 and 2.1. Rigorous finite-sum well-definedness proof remains independent of this illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-kauffman-bracket-smoothing-and-loop-value.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-kauffman-bracket-smoothing-and-loop-value.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-kauffman-bracket-smoothing-and-loop-value.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_validation": {
+    "method": "Canonical local repair-preview.mts with repo-local TMPDIR and existing application TSX_TSCONFIG_PATH; native node-tikzjax SSR generated the current source SVG. Independently viewed repaired tile 01 at original resolution: all three captions are distinct, the figure has no overlaps and the crossing gap and both pairings are legible.",
+    "preview_dir": "research/math-library-rendering-repairs-2026-10-23/preview-knot022-independent-final-20261024",
+    "native_compiled_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-cache/pi-tikz-cache/3ac9b7882659b62281d9d5d0c43f88b0.svg",
+    "native_compiled_svg_sha256": "d5b0bbb5f7e394e7d49374d167f0dd9ab83da0c846d539f1cc89470c2095d0d6",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "tikz_count": 1,
+    "note": "An accidental duplicate preview invocation correctly refused the already-created output; the original invocation completed and produced the manifest/screenshots. No evidence was overwritten."
+  },
+  "before_raw_sha256": "ccab9ef013a2136ed4c1091839d145446be2ef1d86efca699da27369d945b882",
+  "after_raw_sha256": "0d54d0e7993ba4150aeb7ebff073bd05c93a5cdbf7abd4bcc6270f7cdf543023",
+  "status_preserved": "Exact full frontmatter byte comparison passed; status remains published.",
+  "remaining_issues": []
+}

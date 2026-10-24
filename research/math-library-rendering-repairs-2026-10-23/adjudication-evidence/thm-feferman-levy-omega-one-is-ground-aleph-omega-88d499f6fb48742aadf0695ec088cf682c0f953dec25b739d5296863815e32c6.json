@@ -1,0 +1,97 @@
+{
+  "id": "thm-feferman-levy-omega-one-is-ground-aleph-omega",
+  "agent": "/root/rendering_repair_coordinator/set_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 01 visibly shows literal $\\OMEGA_1$ in the technique banner while proof-body omega-one renders as mathematics. The technique text is rendered as plain uppercase text, so its inline TeX is exposed.",
+      "action": "Replaced the technique-banner inline formula with equivalent readable prose omega-one.",
+      "status": "repaired-and-visually-verified"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "malformed-math-subscript",
+      "verdict": "confirmed",
+      "reason": "The same original-resolution tile visibly displays the final letters mega after the aleph subscript in the Statement, Given line and final equality. Source \\aleph_omega subscripts only o; the Given equality to sup_{n<omega} aleph_n identifies the intended limit subscript unambiguously as omega.",
+      "action": "Replaced exactly three \\aleph_omega occurrences with \\aleph_{\\omega}, in Statement, Given and step 3.1.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Use omega-one prose in the plain-text proof-technique banner and repair the three malformed omega subscripts on aleph; no metadata or publication-status changes.",
+  "source_lines_after": [
+    {
+      "line": 28,
+      "text": "$$\\omega_1^N=\\aleph_{\\omega}^V.$$"
+    },
+    {
+      "line": 32,
+      "text": "**Given:** Put $\\kappa=\\aleph_{\\omega}^V=\\sup_{n<\\omega}\\aleph_n^V$ and regard all ground ordinals as the same ordinals in the transitive symmetric model."
+    },
+    {
+      "line": 48,
+      "text": "**Proof technique:** contradiction for uncountability of the ground limit, followed by leastness of omega-one."
+    },
+    {
+      "line": 58,
+      "text": "3.1 Since $\\omega_1^N$ is the least uncountable ordinal of $N$, step 2.1 gives $\\omega_1^N\\le\\kappa$, while step 1.1 gives the reverse inequality. Hence $\\omega_1^N=\\kappa=\\aleph_{\\omega}^V$. [step 1.1, step 2.1, discharge-contradiction: step 1.2] ∎"
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "73403cb2f606a0262558f6f6aeef0cb5c9df503eb357dcfa51eadd1f12321226",
+  "after_raw_sha256": "ce690c640e43d44f2a85c022c198de5fb34900e90ebcc596ea41695eb1868ff2",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/set-theory/screenshots/thm-feferman-levy-omega-one-is-ground-aleph-omega--01.png",
+    "view": "standalone original resolution",
+    "screenshot_sha256": "2deb0c907dddbcfb91f3719e45e625abe14fa8d761faef3e1b1e3553b23b26ec"
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-feferman-levy-omega-one-is-ground-aleph-omega.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "contradiction"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-feferman-levy-omega-one-is-ground-aleph-omega.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-feferman-levy-omega-one-is-ground-aleph-omega.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    }
+  ],
+  "fresh_native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-feferman-levy-omega-one-is-ground-aleph-omega --out research/math-library-rendering-repairs-2026-10-23/preview-set-004-independent-20261024",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/preview-set-004-independent-20261024/manifest.json",
+    "tiles_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/preview-set-004-independent-20261024/screenshots/thm-feferman-levy-omega-one-is-ground-aleph-omega--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/preview-set-004-independent-20261024/screenshots/thm-feferman-levy-omega-one-is-ground-aleph-omega--02.png"
+    ],
+    "view": "Each standalone at original resolution",
+    "result": "Technique banner reads OMEGA-ONE with no raw TeX; Statement and Given use omega subscript; final equality visibly uses omega subscript; all five proof rows retain rendered blue justification chips.",
+    "limitations": "Local actual ItemBody/MathMarkdown preview, not production route or footer coverage. Reference title map reports 16 unrelated parse diagnostics; no assigned reference label failed visually."
+  },
+  "renderer_limitation": "Proof-technique banners are plain uppercase React text rather than parsed math; local readable-prose workaround applied."
+}

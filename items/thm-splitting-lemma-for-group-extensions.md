@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-splitting-lemma-for-group-extensions.json
+  precheck: pass
 id: thm-splitting-lemma-for-group-extensions
 kind: theorem
 title: "Splitting lemma for groups: a section, a complement, and a semidirect-product decomposition are equivalent"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: iff
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -60,3 +60,20 @@ For a section $s$, the action is $h\cdot n=s(h)ns(h)^{-1}$.
 2.1 For $g\in G$, put $h=\pi(g)$. Then $gs(h)^{-1}\in\ker\pi$, so $g\in(\ker\pi)K$. Hence $K$ is a complement, and [L2] gives the compatible semidirect-product decomposition with the stated conjugation action. [step 1.1, L1, L2]
 
 3.1 The inverse $s=(\pi|_K)^{-1}:H\to K\hookrightarrow G$ is a homomorphic section. Finally, any compatible external semidirect decomposition supplies its canonical complement and hence a section by the same construction. [step 1.2, L1, L2] ∎
+
+## Remarks
+
+Choose a homomorphic section $s:H\to G$, as in condition 1, and put $M=\ker\pi=i(N)$ and $E=M\rtimes_\alpha H$, where $\alpha_h(m)=s(h)ms(h)^{-1}$. The diagram compares the resulting split extension with the original extension, identifying $N$ with its image $M$:
+
+```tikzcd
+\begin{tikzcd}[column sep=6em, row sep=5em, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+M \arrow[r, "a"] \arrow[d, equal] & E \arrow[r, "p"] \arrow[d, "\Phi", "\cong"'] & H \arrow[d, equal] \arrow[l, bend right=35, "j"'] \\
+M \arrow[r, "\iota"] & G \arrow[r, "\pi"] & H \arrow[l, bend left=35, "s"]
+\end{tikzcd}
+```
+
+Here $a(m)=(m,1)$, $p(m,h)=h$, $j(h)=(1,h)$, and $\iota:M\hookrightarrow G$ is inclusion. The vertical isomorphism and its inverse are
+
+$$\Phi(m,h)=ms(h),\qquad \Phi^{-1}(g)=\bigl(gs(\pi(g))^{-1},\pi(g)\bigr).$$
+
+Both rows are short exact after adjoining $1$ at either end. The squares commute: $\Phi\circ a=\iota$ and $\pi\circ\Phi=p$. The sections satisfy $p\circ j=\pi\circ s=\operatorname{id}_H$ and $\Phi\circ j=s$, so the canonical complement $j(H)$ maps onto $K=s(H)$. The product convention is $(m,h)(m',h')=(m\alpha_h(m'),hh')$; no triviality of the action is assumed. These relations illustrate the constructions in steps 1.1–3.1; the proof is independent of the diagram.

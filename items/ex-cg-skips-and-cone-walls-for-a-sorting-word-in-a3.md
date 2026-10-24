@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-skips-and-cone-walls-for-a-sorting-word-in-a3.json
+  precheck: pass
 id: "ex-cg-skips-and-cone-walls-for-a-sorting-word-in-a3"
 kind: "example"
-title: "All skips and the cone walls of the sortable element s1s2 in A3"
+title: "All skips and the cone walls of the sortable element $s_1s_2$ in $A_3$"
 status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
@@ -36,9 +39,7 @@ sources:
     - title: "A. Bjorner and F. Brenti, Combinatorics of Coxeter Groups, Graduate Texts in Mathematics 231, Springer 2005"
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 4.4, pp. 101-105 (roots and inversion sets; corroborative background)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Statement

@@ -1,0 +1,73 @@
+---
+id: alg-sqp-augmented-lagrangian-multiplier-method
+kind: algorithm
+title: "Finite-budget augmented-Lagrangian multiplier method"
+status: published
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 2
+deps:
+  - def-sqp-augmented-lagrangian-equality-and-inequality
+  - def-kkt-residual-and-normal-cone
+justified_by: [cor-sqp-augmented-lagrangian-finite-budget-status]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: "Jorge Nocedal and Stephen J. Wright, Numerical Optimization, 2nd ed."
+      url: https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf
+      locator: "Chapter 17 §17.4, printed pp. 511–521 / PDF pp. 529–539."
+    - title: "Dimitri P. Bertsekas, Constrained Optimization and Lagrange Multiplier Methods"
+      url: https://www.mit.edu/~dimitrib/Constrained-Opt.pdf
+      locator: "Chapter 2 §2.2, printed pp. 104–121."
+---
+
+## Definition
+
+Fix a $C^2$ program as in
+[[def-sqp-augmented-lagrangian-equality-and-inequality]], a penalty
+$\rho>0$, finite positive integer outer cap $K$, finite positive integer per-call inner cap $M$,
+tolerances $\epsilon_k\ge0$, and KKT tolerance $\tau\ge0$. A supplied
+finite-budget inner procedure receives
+$(x_k,\nu_k,\lambda_k,\rho,\epsilon_k,M)$, performs at most $M$ inner
+iterations, and returns one of: `success(x_k^+,\widehat\epsilon_k)` with
+$x_k^+\in U$ and
+$\widehat\epsilon_k=\|\nabla_x\mathcal L_\rho(x_k^+,\nu_k,\lambda_k)\|_2
+\le\epsilon_k$; `budget-exhausted(x_{\rm last},\widehat\epsilon_{\rm last})`
+with $x_{\rm last}\in U$ and
+$\widehat\epsilon_{\rm last}=
+\|\nabla_x\mathcal L_\rho(x_{\rm last},\nu_k,\lambda_k)\|_2$; or
+`failure(data)` when it cannot continue or report a residual. Each inner
+iteration and report computation is finite, and the procedure returns by its
+cap.
+
+Initialize $x_0\in U$, $\nu_0\in\mathbb R^p$, and
+$\lambda_0\in\mathbb R^m_+$. For $k=0,\ldots,K-1$:
+
+1. Call the inner procedure with cap $M$. On
+   `budget-exhausted(x_{\rm last},\widehat\epsilon_{\rm last})`, return
+   `inner-budget-exhausted` with current $(x_k,\nu_k,\lambda_k)$, that point,
+   and residual. On `failure(data)`,
+   return `inner-failure` with the data. If a purported success reports a
+   residual exceeding $\epsilon_k$, return `inner-failure` with the reported
+   data. Otherwise store its reported inner residual
+   $\widehat\epsilon_k$.
+2. Set
+   $$\nu_{k+1}=\nu_k+\rho h(x_k^+),\qquad \lambda_{k+1}=[\lambda_k+\rho g(x_k^+)]_+.$$
+3. Set $r_k=r_{\rm KKT}(x_k^+,\nu_{k+1},\lambda_{k+1})$. If $r_k\le\tau$,
+   return `kkt-tolerance-reached` with $x_k^+$, $(\nu_{k+1},\lambda_{k+1})$,
+   $r_k$, and $\widehat\epsilon_k$; otherwise set $x_{k+1}=x_k^+$ and
+   continue.
+
+If all $K$ outer iterations finish without that test passing, return
+`outer-budget-exhausted` with $x_K$, $(\nu_K,\lambda_K)$, the last KKT
+residual $r_{K-1}$, and inner residual $\widehat\epsilon_{K-1}$. The routine
+claims neither convergence nor that the inner procedure succeeds within its
+cap.
+
+## Remarks
+
+Domain preservation, finite-cap termination and reported-residual guarantees are proved in [[cor-sqp-augmented-lagrangian-finite-budget-status]].

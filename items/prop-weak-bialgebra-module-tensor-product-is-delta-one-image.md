@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-weak-bialgebra-module-tensor-product-is-delta-one-image.json
+  precheck: pass
 id: prop-weak-bialgebra-module-tensor-product-is-delta-one-image
 kind: proposition
 title: "Weak-bialgebra module tensor products are relative tensor products"
@@ -27,12 +30,7 @@ sources:
     - title: "G. Böhm, S. Caenepeel, and K. Janssen, Weak Bialgebras and Monoidal Categories"
       url: "https://arxiv.org/pdf/1103.2261"
       locator: "Sections 1–2, PDF pp. 3–16 (especially Theorems 2.3–2.4); Section 4, PDF pp. 20–22 (Propositions 4.3–4.4 and Corollary 4.5): monoidal module category, target base, and separable-base relative tensor product."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -48,8 +46,10 @@ With this action, the category of unital left $H$-modules is monoidal: its assoc
 The quotient map $q:V\otimes_kW\to V\otimes_{H_t}W$ and the idempotent $P=\Delta(1)|_{V\otimes W}$ fit into the following diagram. The lower arrow is the restriction of $q$ and is an isomorphism; the proof constructs its inverse.
 
 ```tikzcd
+\begin{tikzcd}[row sep=large,column sep=large,every cell/.append style={font=\Large},every label/.append style={font=\large}]
 V\otimes_k W \arrow[r,"q"] \arrow[d,"P"'] & V\otimes_{H_t}W \\
-\operatorname{im}P \arrow[ur,"q|_{\operatorname{im}P}"'] &
+\mathrm{im}P \arrow[ur,"q|_{\mathrm{im}P}"'] &
+\end{tikzcd}
 ```
 
 ## Facts & Assumptions

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization.json
+  precheck: pass
 id: lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization
 kind: lemma
 title: "Bicosimplicial total complexes agree with diagonal totalization"
@@ -11,11 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages."
@@ -58,3 +56,27 @@ On the left total degree is $p+r+q$ and differential is $\delta_h+(-1)^p\delta_v
 5.1 Cosimplicial variance and the internal differential. The maps and homotopies of steps 2.1–4.1 are finite linear combinations of morphisms in the simplex categories. Their identities can be tested on the free representables of step 1.1, so they are universal additive operator identities. Reverse every operator and every composition to obtain cochain maps in the opposite directions and cochain homotopies lowering simplicial total degree by one. This reverses the two homotopy-inverse identities, without taking algebraic duals. Apply these formulas in each internal degree $q$. Naturality makes them commute with $d$. A comparison preserves simplicial total degree $t=p+r=n$, so it commutes with the signed internal differential $(-1)^td$. For a homotopy $H$ lowering $t$ by one, the internal terms in $DH+HD$ are $(-1)^{t-1}dH+(-1)^tHd=0$. Hence the comparisons and homotopies apply to precisely the two cochain differentials in the Statement. [step 2.1, step 3.1, step 4.1, algebra]
 
 6.1 Finiteness, normalization, augmentation and derived presentations. In total degree $m$ the indices satisfy $p+r\leq m-a$ on the full total and $n\leq m-a$ on the diagonal. Thus only finitely many coefficient terms occur, and [F2] permits sum or product notation without dimensional hypotheses. All fillings above are specified finite formulas, so no choice principle is used. The degree-zero comparisons are identities and the homotopies have zero augmentation component, so they preserve augmentation. The natural normalization equivalence and homotopy of [F1] are also finite operator identities; reversing them gives the cosimplicial normalization equivalence. Applying these equivalences in either direction or on the diagonal permits normalization on either side. Finally, a supplied functorial strict resolution presents the coherent derived diagram. Naturality makes the comparisons compatible with quasi-isomorphisms between such presentations, hence gives the same derived comparison under the canonical presentation identifications. [F1, F2, step 2.1, step 3.1, step 4.1, step 5.1] ∎
+
+
+## Remarks
+
+For fixed internal degree $q$, the following square displays the signed horizontal and vertical components of the full total differential. Its two composites are negatives of one another: the unsigned alternating coface sums commute, while the horizontal step changes the vertical sign.
+
+```tikzcd
+\begin{tikzcd}[cells={nodes={font=\Large}}, labels={font=\large}, column sep=large, row sep=large]
+K^{p,r,q} \arrow[r, "\delta_h"] \arrow[d, "(-1)^p\delta_v"'] & K^{p+1,r,q} \arrow[d, "(-1)^{p+1}\delta_v"] \\
+K^{p,r+1,q} \arrow[r, "\delta_h"'] & K^{p+1,r+1,q}
+\end{tikzcd}
+```
+
+The internal component at $K^{p,r,q}$ is $(-1)^{p+r}d:K^{p,r,q}\to K^{p,r,q+1}$. In total degree $m$, put
+$$T^m=\bigoplus_{p+r+q=m}K^{p,r,q},\qquad A^m=\bigoplus_{n+q=m}K^{n,n,q}.$$
+Thus $T^m$ collects the slices $p+r=m-q$, whereas $A^m$ uses the entries $p=r=n$ with degree $n+q$, rather than $2n+q$. The comparison in step 5.1 is between these whole cochain complexes:
+
+```tikzcd
+\begin{tikzcd}[cells={nodes={font=\Large}}, labels={font=\large}, column sep=large]
+T^\bullet \arrow[r, shift left=1.2ex, "\alpha"] & A^\bullet \arrow[l, shift left=1.2ex, "\beta"]
+\end{tikzcd}
+```
+
+Here $\alpha$ and $\beta$ denote the reversed universal comparisons of steps 2.1–5.1, so $\beta\alpha\simeq1_{T^\bullet}$ and $\alpha\beta\simeq1_{A^\bullet}$. They preserve total degree and augmentation; they are not termwise identifications of the lattice entries. On $A^\bullet$ the differential is $\delta_{\mathrm{diag}}+(-1)^nd$. The rigorous proof above is independent of these illustrations.

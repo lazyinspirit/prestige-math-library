@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-seifert-matrix-skew-part-is-surface-intersection.json
+  precheck: pass
 id: lem-seifert-matrix-skew-part-is-surface-intersection
 kind: lemma
 title: "The skew part of a Seifert matrix is the surface intersection form"
@@ -38,17 +41,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Dale Rolfsen, Knots and Links, Chapter 8.A"
@@ -107,22 +99,22 @@ The orientation sign can be checked in a local oriented chart: when the positive
 
 ```tikz
 \begin{tikzpicture}[scale=0.82,>=stealth]
-  \draw[fill=gray!12] (-2,-0.65) -- (1.2,-1.15) -- (2,0.65) -- (-1.2,1.15) -- cycle;
+  \draw[dashed] (-2,-0.65) -- (1.2,-1.15) -- (2,0.65) -- (-1.2,1.15) -- cycle;
   \node at (1.45,0.85) {$F$};
   \draw[thick,->] (-1.25,0) -- (1.15,0) node[right] {$u$};
-  \draw[thick,->] (0,-0.6) -- (0.45,0.65) node[above] {$v$};
+  \draw[thick,->] (-0.24,-0.6) -- (0.26,0.65) node[above] {$v$};
   \fill (0,0) circle (1.6pt);
   \node[red] at (-1.35,0.72) {$\odot\,n$};
-  \node at (0,-1.55) {$F\text{ tangent plane}$};
+  \node at (0,-1.55) {$F$ tangent plane};
   \begin{scope}[xshift=5.2cm]
-    \draw[thick] (0,0) -- (2.8,0) node[right] {$F$};
-    \draw[->,red,thick] (1.4,-0.9) -- (1.4,0.95) node[above] {$n$};
-    \draw[blue,thick] (0.55,0.58) -- (2.25,0.58) node[right] {$a_i^+$};
-    \draw[blue,thick] (0.55,-0.58) -- (2.25,-0.58) node[right] {$a_i^-$};
-    \draw[thick] (0.55,0) -- (2.25,0) node[right] {$a_i$};
-    \node at (1.4,-1.3) {$\text{normal coordinate}$};
+    \draw[thick] (0,0) -- (2.8,0) node[above] {$F$};
+    \draw[->,red,thick] (0.15,-0.9) -- (0.15,0.95) node[above] {$n$};
+    \draw[blue,thick,->] (0.55,0.58) -- (2.25,0.58) node[right] {$a_i^+$};
+    \draw[blue,thick,->] (0.55,-0.58) -- (2.25,-0.58) node[right] {$a_i^-$};
+    \draw[thick,->] (0.55,0) -- (2.25,0) node[right] {$a_i$};
+    \node at (1.4,-1.3) {normal coordinate};
   \end{scope}
 \end{tikzpicture}
 ```
 
-The left panel places $u,v$ in the tangent plane $F$ and marks $n$ as the positive normal out of the page. The right panel shows the normal coordinate: the Seifert push-offs lie on opposite sides of $F$. The picture is schematic; by definition $(n,u,v)$ is positively oriented exactly when $(u,v)$ agrees with the surface orientation.
+The left panel shows a positive transverse crossing of the tangent directions $u,v$ in $F$, with $n$ the positive normal out of the page. The right panel shows the normal coordinate: $a_i^+$ is above $F$ in the positive $n$ direction and $a_i^-$ is below it; both inherit the direction of $a_i$. The red arrow indicates the normal coordinate, not a link strand. The picture is schematic; by definition $(n,u,v)$ is positively oriented exactly when $(u,v)$ agrees with the surface orientation.

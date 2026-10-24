@@ -1,0 +1,74 @@
+{
+  "id": "ex-cg-s4-rank-three-interval-mobius-from-recurrence",
+  "agent": "/root/rendering_repair_coordinator/cox_020",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "optional-typography",
+      "verdict": "not-a-defect",
+      "reason": "The standalone original-resolution title tile displays legible S4 baseline shorthand. It contains no exposed TeX or delimiter syntax; the body explicitly supplies the S_4 notation. Converting shorthand to a subscript would be optional title typography, so no correction is warranted within rendering-only scope.",
+      "action": "Preserved title.",
+      "status": "closed-no-change"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile 03 visibly exposes dollar delimiters and underscores in the uppercase technique banner, while the same reduced word renders correctly inside ordinary mathematical prose. This confirms the banner's plain React text rendering limitation.",
+      "action": "Replaced only the banner's $s_1s_2s_3$ with equivalent Unicode s₁s₂s₃; native preview tile 03 shows uppercase S₁S₂S₃ without raw delimiters.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Used equivalent Unicode subscripts for the fixed reduced word in the plain-text verification technique banner.",
+  "source_lines_after": {
+    "75": "**Proof technique:** finite computation on the fixed reduced word s₁s₂s₃."
+  },
+  "mathematical_meaning_preserved": true,
+  "protected_metadata_unchanged": true,
+  "before_raw_sha256": "a8b63502440392d6904c670330677dd73566e34b89bb532cc63b4952629a0a48",
+  "after_raw_sha256": "3666097202e5f8b43839070ec681d214858c97e134ee44887ec9552f6b3709d4",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-cg-s4-rank-three-interval-mobius-from-recurrence.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-cg-s4-rank-three-interval-mobius-from-recurrence.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-cg-s4-rank-three-interval-mobius-from-recurrence.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_inspected_at_original_resolution": [
+      "research/math-library-rendering-audit-2026-10-23/coxeter-groups/screenshots/ex-cg-s4-rank-three-interval-mobius-from-recurrence--01.png",
+      "research/math-library-rendering-audit-2026-10-23/coxeter-groups/screenshots/ex-cg-s4-rank-three-interval-mobius-from-recurrence--03.png"
+    ],
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cox-020/manifest.json",
+    "source_sha256": "3666097202e5f8b43839070ec681d214858c97e134ee44887ec9552f6b3709d4",
+    "preview_tile_inspected_at_original_resolution": "research/math-library-rendering-repairs-2026-10-23/previews/cox-020/screenshots/ex-cg-s4-rank-three-interval-mobius-from-recurrence--03.png",
+    "preview_result": "Technique banner correction is visibly successful. Fresh capture shows black/absent proof-body text within preserved panel outlines; original source and scoped checks remain correct. This unrelated fresh capture artifact limits full-body visual verification; no body changes were inferred from it."
+  },
+  "remaining_issues": [
+    "Renderer technique banners still uppercase plain text and do not process math; this local Unicode workaround resolves the assigned occurrence.",
+    "Fresh preview tile has absent proof-body text; banner remains visible and verifies the scoped repair. No claim of full-body fresh visual verification."
+  ]
+}

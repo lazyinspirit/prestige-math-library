@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-generalized-eigenspace-trace-decomposition.json
+  precheck: pass
 id: lem-generalized-eigenspace-trace-decomposition
 kind: lemma
 title: "Trace decomposition through generalized eigenspaces and the invariant quotient"
@@ -41,13 +44,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -216,4 +212,4 @@ full; no source premise is left unverified.
 
 6.1 Steps 5.2--5.3 show that $\lambda I_X-\bar T$ is boundedly invertible for every $\lambda\ne0$. By step 4.2, $\lambda I_N-D$ is also boundedly invertible. Since $B=0_M\oplus D$ on the orthogonal sum $H=M\oplus N$, the operator $\lambda I_H-B=\lambda I_M\oplus(\lambda I_N-D)$ has a bounded inverse for every $\lambda\ne0$. Thus [A20] gives $\sigma_H(B)\subseteq\{0\}$; the compression $D$ has no nonzero spectral values whenever $N\ne\{0\}$. [A20, step 4.2, step 5.2, step 5.3, algebra]
 
-7.1 Apply [A17] to the trace-class quasinilpotent operator $B$ on the original separable $H$ to get $\operatorname{tr}_H(B)=0$. Step 5.1 then gives $\operatorname{tr}_H(T)=\operatorname{tr}_M(T_M)$, and step 4.1 identifies this with the absolutely convergent eigenvalue sum. If there are no nonzero eigenvalues then $M=0$, $B=T$, and the same argument yields the empty sum $0$; this includes $T=0$. If $H=\mathbb C$ and $T=qI$, then for $q\ne0$ the sole eigenvalue is $q$ with multiplicity one, $M=H$, and the two traces are $q$ and $0$; for $q=0$ the eigenvalue list and $M$ are empty/zero and all traces vanish. There is no endpoint parameter, and the statement is not an equivalence, so both iff directions are inapplicable. AC is explicit in [A1] and propagates to AC$_\omega$ through [A2] for the trace, Weyl, projection and basis suppliers. [A1, A2, A17, step 4.1, step 5.1, step 6.1] \qed 
+7.1 Apply [A17] to the trace-class quasinilpotent operator $B$ on the original separable $H$ to get $\operatorname{tr}_H(B)=0$. Step 5.1 then gives $\operatorname{tr}_H(T)=\operatorname{tr}_M(T_M)$, and step 4.1 identifies this with the absolutely convergent eigenvalue sum. If there are no nonzero eigenvalues then $M=0$, $B=T$, and the same argument yields the empty sum $0$; this includes $T=0$. If $H=\mathbb C$ and $T=qI$, then for $q\ne0$ the sole eigenvalue is $q$ with multiplicity one, $M=H$, and the two traces are $q$ and $0$; for $q=0$ the eigenvalue list and $M$ are empty/zero and all traces vanish. There is no endpoint parameter, and the statement is not an equivalence, so both iff directions are inapplicable. AC is explicit in [A1] and propagates to AC$_\omega$ through [A2] for the trace, Weyl, projection and basis suppliers. [A1, A2, A17, step 4.1, step 5.1, step 6.1] ∎ 

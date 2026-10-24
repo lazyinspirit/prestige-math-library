@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-level-two-cyclotomic-polynomial-from-highest-weight-filtration.json
+  precheck: pass
 id: ex-a-level-two-cyclotomic-polynomial-from-highest-weight-filtration
 kind: example
 title: "A level-two cyclotomic polynomial from the highest-weight filtration"
@@ -23,8 +26,7 @@ sources:
     - title: "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)"
       url: "https://arxiv.org/pdf/0901.0057"
       locator: "Section 3.2, (3.7)-(3.8), printed pp. 23-24: the quotient H_d(Λ) with the bounded monomial basis and dimension l^d d!."
-verification:
-  precheck: pass
+
 ---
 
 ## Example
@@ -66,3 +68,31 @@ stated eigenspaces.
 
 - The two roots $0$ and $-1$ are exactly the column scalars $c_j+q_j-n$ of the two columns; the example shows how the highest-weight (column) filtration of the ground module produces the level-two cyclotomic polynomial $x(x+1)$.
 - The ordered-row dictionary matters here: the row lengths are read in the source order $p=(1,2)$ with column heights $q=(2,1)$, so box $3$ is the rightmost box of the second row and $e=E_{23}$; a different box numbering would produce a different matrix for $x_1$.
+
+The numbered shape below fixes the source row order. The labels above the
+columns are the diagonal scalars $a_j=c_j+q_j-n$; the arrow shows the
+nilpotent $e$, not the full operator $x_1$.
+
+```tikz
+\begin{tikzpicture}[x=1.7cm,y=1.25cm,>=stealth]
+\node at (0.5,1.55) {$a_1=0$};
+\node at (1.5,1.55) {$a_2=-1$};
+\node[anchor=east] at (-0.15,0.5) {row $1$};
+\node[anchor=east] at (-0.15,-0.5) {row $2$};
+\draw (0,0) rectangle (1,1);
+\draw (0,-1) rectangle (1,0);
+\draw (1,-1) rectangle (2,0);
+\node at (0.5,0.5) {$1:\ v_1$};
+\node at (0.5,-0.5) {$2:\ v_2$};
+\node at (1.5,-0.5) {$3:\ v_3$};
+\draw[->] (1.5,-1) .. controls (1.5,-1.75) and (0.5,-1.75) .. (0.5,-1);
+\node at (1,-1.85) {$e(v_3)=v_2$};
+\end{tikzpicture}
+```
+
+Here $e(v_1)=e(v_2)=0$, while the diagonal contribution is $0$ on the
+first column and $-1$ on the second. Thus the arrow together with the column
+scalars gives $x_1v_3=v_2-v_3$; $v_3$ itself is not a $-1$ eigenvector.
+The eigenspaces are $\ker x_1=\mathbb Cv_1\oplus\mathbb Cv_2$ and
+$\ker(x_1+1)=\mathbb C(v_3-v_2)$, as computed in step 1.1.
+The figure is illustrative; the proof above is independent of it.

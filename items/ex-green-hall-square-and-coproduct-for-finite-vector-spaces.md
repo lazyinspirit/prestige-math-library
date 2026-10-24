@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-green-hall-square-and-coproduct-for-finite-vector-spaces.json
+  precheck: pass
 id: ex-green-hall-square-and-coproduct-for-finite-vector-spaces
 kind: example
 title: "A one-vertex Green coproduct and twisted Hall square"
@@ -22,8 +25,7 @@ sources:
     - title: "Claus Michael Ringel, The Hall Algebra Approach to Quantum Groups, E.L.A.M. Lectures (1993)"
       url: "https://www.math.uni-bielefeld.de/~ringel/opus/elam.pdf"
       locator: "§2: the one-vertex Hall algebra and extension-count normalization."
-verification:
-  precheck: pending
+
 ---
 
 ## Statement
@@ -39,8 +41,10 @@ $\Delta'([T])=\sum_{A,B}\nu^{\dim A\dim B}P^T_{A,B}a_T^{-1}[A]\otimes[B]$;
 it is the one-vertex specialization of Green’s definition. The product is
 $[A]\star[B]=\nu^{\dim A\dim B}[A]*[B]$.
 
-```tikzpicture
+```tikz
+\begin{tikzpicture}
 \node[draw,circle] (v) {$1$};
+\end{tikzpicture}
 ```
 
 This is the quiver with one vertex and no arrows.

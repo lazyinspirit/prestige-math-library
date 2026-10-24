@@ -1,0 +1,57 @@
+---
+id: def-cluster-sampling-design-and-cluster-totals
+kind: definition
+title: "Cluster sampling units, cluster totals, and one-stage SRSWOR"
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 3
+deps: [def-finite-population-and-sampling-design]
+justified_by: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, Chapter 9: Cluster Sampling, PDF pp. 1–5 and 11–14, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter9-sampling-cluster-sampling.pdf"
+    - title: "Sharon L. Lohr, Sampling: Design and Analysis, 2nd ed., §§5.1 and 5.2.1, printed pp. 134–138"
+      url: "https://drive.uqu.edu.sa/_/maatia/files/Sampling.pdf"
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Definition
+
+Let the finite element population be partitioned into nonempty finite sets
+$$\mathcal U=\bigsqcup_{i=1}^{M}U_i,$$
+where $M\ge1$ and $U_i$ is the set of secondary sampling units (SSUs) in the
+$i$th primary sampling unit (PSU). Thus each element belongs to exactly one
+PSU. Write $N_i=|U_i|$, $N=\sum_{i=1}^{M}N_i$, and let $y_{ij}\in\mathbb R$
+be the fixed value for $j\in U_i$. The fixed total of PSU $i$ and the total
+over all elements are
+$$T_i=\sum_{j\in U_i}y_{ij},\qquad T=\sum_{i=1}^{M}T_i.$$
+
+A one-stage cluster design selects a subset $S_1\subseteq[M]$ of PSUs according
+to a finite sampling design in the sense of
+[[def-finite-population-and-sampling-design]]. The PSU totals and all SSU values
+are fixed; design probability is over $S_1$. A selected PSU is completely
+enumerated, so its observed SSUs are all of $U_i$ for $i\in S_1$.
+
+For a uniform simple random sample without replacement (SRSWOR) of $m$ PSUs,
+$1\le m\le M$, the first-stage sample space is the set of all $m$-element
+subsets of $[M]$, each with probability $\binom{M}{m}^{-1}$. For $i,r\in[M]$,
+write $I_i=1\{i\in S_1\}$,
+$$\pi_i^{(1)}=P_d(I_i=1),\qquad \pi_{ir}^{(1)}=P_d(I_i=I_r=1),$$
+with $\pi_{ii}^{(1)}=\pi_i^{(1)}$.
+
+When $M\ge2$, the finite-population variance of the PSU totals is
+$$S_T^2=\frac{1}{M-1}\sum_{i=1}^{M}(T_i-\bar T)^2, \qquad \bar T=\frac1M\sum_{i=1}^{M}T_i.$$
+
+## Remarks
+
+The finite-population design convention in [[def-finite-population-and-sampling-design]] fixes every $y_{ij}$ and averages only over the declared PSU-sampling law. A PSU is the sampling unit in one-stage cluster sampling; its SSUs are all observed after that PSU is selected. This does not treat the SSUs as independently sampled units.

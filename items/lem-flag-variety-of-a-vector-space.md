@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-flag-variety-of-a-vector-space.json
+  precheck: pass
 id: lem-flag-variety-of-a-vector-space
 kind: lemma
 title: The variety of complete flags of a finite-dimensional vector space is smooth projective
@@ -29,11 +32,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -78,3 +76,14 @@ carries the structure of a smooth projective classical $k$-variety: it is the cl
 2.1 I claim that $\mathrm{GL}(V)$ acts transitively on $\mathrm{Fl}(V)$, compatibly with its action on the Grassmannians, and that the stabilizer of a flag is a closed subgroup scheme. Given two flags $V_\bullet$, $V'_\bullet$, choose bases $v_1,\dots,v_n$ and $v'_1,\dots,v'_n$ adapted to them; the linear map $gv_i=v'_i$ lies in $\mathrm{GL}(V)(k)$ and carries $V_i$ onto $V'_i$ for every $i$. The action of $\mathrm{GL}(V)$ on $P$ preserves the incidence conditions, so it restricts to a morphism $\mathrm{GL}(V)\times\mathrm{Fl}(V)\to\mathrm{Fl}(V)$, an action of the group scheme $\mathrm{GL}(V)$ by [F5]; the scheme-theoretic stabilizer of a point is then a closed subgroup scheme of $\mathrm{GL}(V)$. Since $\mathrm{GL}(V)(k)$ acts transitively, the stabilizer of any complete flag is a $\mathrm{GL}(V)(k)$-conjugate of the stabilizer $T_n$ of the standard flag, so by [step 1.3] the stabilizer of every complete flag is solvable. Moreover $\mathrm{GL}(V)$ is the determinant-open integral subscheme of matrix affine space. The closure of its flag orbit is irreducible and contains every closed point by transitivity, hence is all of $\mathrm{Fl}(V)$; thus the flag variety is irreducible. [F1, F3, F5, step 1.1, step 1.3]
 
 3.1 Collecting: [step 1.1] gives the projective closed-subvariety model of $\mathrm{Fl}(V)$ via incidence, [step 1.2] its smoothness, [step 2.1] the transitive action and closed stabilizer subgroups, and [step 1.3] the solvability of the stabilizer of a complete flag. This proves the statement. [A1, step 1.1, step 1.2, step 2.1, step 1.3] ∎ 
+
+## Remarks
+
+The incidence construction in step 1.1 can be visualized by the following square. Put $P=\prod_{r=1}^{n-1}\operatorname{Gr}(r,V)$. For $n\ge3$ and $1\le i\le n-2$, put $Q_i=\operatorname{Gr}(i,V)\times\operatorname{Gr}(i+1,V)$ and $I_i=\{(W,W')\in Q_i:W\subseteq W'\}$. The map $\pi_i$ selects the adjacent factors, and $\rho_i$ sends a flag $V_\bullet$ to $(V_i,V_{i+1})$.
+
+```tikzcd
+\mathrm{Fl}(V) \arrow[r, hook, "j"] \arrow[d, "\rho_i"'] & P \arrow[d, "\pi_i"] \\
+I_i \arrow[r, hook, "\iota_i"'] & Q_i
+```
+
+Both routes send $V_\bullet$ to the same pair $(V_i,V_{i+1})$, so $\iota_i\circ\rho_i=\pi_i\circ j$. The hooks denote the closed inclusions from [F3] and step 1.1. Inside $P$, the flag variety is the intersection $\bigcap_{i=1}^{n-2}\pi_i^{-1}(I_i)$: adjacent inclusions impose nesting, while $V_0=0$ and $V_n=V$ are fixed. All Grassmannians here parameterize subspaces of the displayed dimensions, as in [F1]. For $n=2$ there are no adjacent-factor conditions and $\mathrm{Fl}(V)=\operatorname{Gr}(1,V)$; for $n=1$ it is a point. The diagram illustrates the construction; the proof above is independent of it.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-it-dephasing-quantum-relative-entropy-dpi.json
+  precheck: pass
 id: ex-it-dephasing-quantum-relative-entropy-dpi
 kind: example
 title: Qubit dephasing decreases quantum relative entropy
@@ -23,11 +26,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "John Watrous, The Theory of Quantum Information (2018), Chapter 5"
@@ -62,7 +60,7 @@ For the orthogonal pure states $|+\rangle,| -\rangle=(|0\rangle-|1\rangle)/\sqrt
 
 [F7] [[def-natural-logarithm]] and [[thm-natural-logarithm-laws]]: $\ln$ is the natural logarithm on positive numbers, is strictly increasing, and satisfies the product and quotient laws.
 
-[F8] [[thm-non-negative-operator-characterisations]]: a positive semidefinite operator is diagonalizable with nonnegative eigenvalues; rank-one orthogonal projections have eigenvalues $0,1$.
+[F8] [[thm-non-negative-operator-characterisations|A non-negative operator is equivalently self-adjoint with nonnegative eigenvalues, a positive semidefinite matrix in an orthonormal basis, or an operator of the form $S^*S$]]: a positive semidefinite operator is diagonalizable with nonnegative eigenvalues; rank-one orthogonal projections have eigenvalues $0,1$.
 
 [F9] [[thm-it-quantum-relative-entropy-channel-data-processing]]: a finite quantum channel does not increase quantum relative entropy, including its support-sensitive extended value.
 
@@ -70,13 +68,13 @@ For the orthogonal pure states $|+\rangle,| -\rangle=(|0\rangle-|1\rangle)/\sqrt
 
 The one wire is the qubit operator input/output, and the rectangular box denotes the linear map $\Delta$ defined above. This is only a map schematic; the channel and entropy claims are proved by the finite matrix calculations below.
 
-\begin{center}
+```tikz
 \begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
   \draw[->] (0,0) -- (1.2,0) node[midway,above] {$X$};
   \node[draw,rounded corners,minimum width=1.5cm,minimum height=.75cm] (deph) at (2,0) {$\Delta$};
   \draw[->] (deph.east) -- (3.3,0) node[midway,above] {$\Delta(X)$};
 \end{tikzpicture}
-\end{center}
+```
 
 ## Proof
 

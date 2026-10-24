@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-doubling-variables-maximum-localisation.json
+  precheck: pass
 id: lem-doubling-variables-maximum-localisation
 kind: lemma
 title: "Doubling variables: existence, relative contacts at the maximiser and localisation"
@@ -22,8 +25,7 @@ sources:
     - title: "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)"
       url: "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf"
       locator: "Chapter 1 Section 6, Steps 1--2 of the proof of Theorem 1.19, printed pp. 27--28"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -67,7 +69,7 @@ principle is used.
 
 ## Proof
 
-**Proof technique:** coercive weight for existence, monotonicity in $\alpha$ for the localisation, and explicit $C^1$ contacts for the two tests.
+**Proof technique:** coercive weight for existence, monotonicity in α for the localisation, and explicit continuously differentiable contacts for the two tests.
 
 1.1 Existence and finiteness of $M_{\alpha,\rho}$. On $\mathbb R^n\times\mathbb R^n\times[0,T]^2$ the function $\Phi$ is upper semicontinuous, being $u$ plus the upper semicontinuous $-v$ plus continuous terms by [F1]; it is bounded above by $\sup u-\inf v<\infty$ because the quadratic and weight terms are nonpositive. Pick any point $p_0:=(0,0,0,0)$ and put $m_0:=\Phi(p_0)\in\mathbb R$; the superlevel set $S_0:=\{\Phi\ge m_0\}$ is nonempty, closed by upper semicontinuity, and bounded because $\rho(|x|^2+|y|^2)\le\sup u-\inf v-m_0$ on it; hence $S_0$ is compact by [F3]. On $S_0$ the restriction of $\Phi$ is real-valued and upper semicontinuous, so it attains a maximum by [F2]; that maximum is a global maximum of $\Phi$ because every point outside $S_0$ has value $<m_0\le\max_{S_0}\Phi$. Hence $M_{\alpha,\rho}$ is finite and attained. [F1, F2, F3, algebra]
 

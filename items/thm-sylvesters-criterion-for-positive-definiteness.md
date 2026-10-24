@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-sylvesters-criterion-for-positive-definiteness.json
+  precheck: pass
 id: thm-sylvesters-criterion-for-positive-definiteness
 kind: theorem
 title: 'Sylvester''s criterion: a real symmetric $n\times n$ matrix with $n\geq1$ is positive definite if and only if all leading principal minors are positive'
@@ -11,9 +14,6 @@ deps: [lem-schur-complement-congruence-and-determinant, thm-sylvesters-law-of-in
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -46,7 +46,7 @@ $$\Delta_k>0\qquad(1\le k\le n).$$
 
 ## Proof
 
-**Proof technique:** forward determinant comparison and reverse induction on $n$.
+**Proof technique:** forward determinant comparison and reverse induction on matrix size.
 
 1.1 Suppose $A$ is positive definite. Its restriction $A_k$ to the first $k$ coordinate subspace is positive definite for every $1\le k\le n$. In the unique normal form of [L2], a negative or zero diagonal entry would give a nonzero vector of nonpositive value, so the normal form is $I_k$; choose invertible $P_k$ with $P_k^{\mathsf T}A_kP_k=I_k$. Taking determinants using [L4]–[L6] gives $1=(\det P_k)^2\Delta_k$. Since $\det P_k\ne0$, its square is positive by [L3], so $\Delta_k>0$. [L2, L3, L4, L5, L6, given, choose]
 

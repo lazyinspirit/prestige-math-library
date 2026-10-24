@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-p-adic-field-is-locally-compact-and-totally-disconnected.json
+  precheck: pass
 id: cor-p-adic-field-is-locally-compact-and-totally-disconnected
 kind: corollary
-title: "Q_p is locally compact and totally disconnected"
+title: '$\mathbb Q_p$ is locally compact and totally disconnected'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-zp-is-the-valuation-ring-of-qp, lem-p-adic-balls-are-clopen, thm-p-adic-digit-expansion, thm-complete-and-totally-bounded-implies-compact, def-countable-choice]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -34,7 +30,7 @@ particular, $\mathbb Z_p$ is a compact open subring.
 
 **Given:** The p-adic field $\mathbb Q_p$ and $\mathrm{AC}_\omega$.
 
-[L1] $\mathbb Z_p = \{x : |x|_p \le 1\}$, and $p$-adic balls are clopen ([[cor-zp-is-the-valuation-ring-of-qp]], [[lem-p-adic-balls-are-clopen]]).
+[L1] $\mathbb Z_p = \{x : |x|_p \le 1\}$, and $p$-adic balls are clopen ([[cor-zp-is-the-valuation-ring-of-qp|$\mathbb Z_p$ is the valuation ring of $\mathbb Q_p$]], [[lem-p-adic-balls-are-clopen]]).
 
 [L2] Every element of $\mathbb Z_p$ has a digit expansion ([[thm-p-adic-digit-expansion]]).
 

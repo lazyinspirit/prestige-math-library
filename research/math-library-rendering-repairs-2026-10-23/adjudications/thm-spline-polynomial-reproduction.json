@@ -1,0 +1,153 @@
+{
+  "id": "thm-spline-polynomial-reproduction",
+  "agent": "/root/rendering_repair_coordinator/dms_015",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The existing source and both original-resolution tiles have no illustration. A pair of degree-one hat splines concretely clarifies overlapping compact supports and local partition of unity, relationships that the long general recurrence proof leaves spatially implicit. A specific nonuniform clamped knot example avoids implying general equal spacing or repeated-knot continuity.",
+      "action": "Added a final Remarks paragraph and native TikZ graph of B2 and B3 for p=1, xi=(0,0,1,3,4,4), highlighting [1,3) and their unit sum.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-low-contrast",
+      "verdict": "confirmed",
+      "reason": "Same-owner followup independently re-viewed the actual standalone dms-015-final tile at original resolution: the gray!15 band is almost white, and pastel red/blue spline paths lose contrast inside it. This is a visible readability defect in the added native-rendered diagram.",
+      "action": "Changed only the cell fill from gray!15 to black!75. Native fresh preview shows a dark-gray band with clearly distinguished pastel spline paths. All path coordinates, knot labels, annotations, formulas, and metadata remain identical.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Append an independently checked degree-one support and partition-of-unity illustration; no original text changed. Moved the unit-sum label above the two spline labels after first native preview revealed crowding. Followup darkened only the highlighted-cell fill from gray!15 to black!75 to correct independently confirmed low contrast.",
+  "source_lines_after": {
+    "remarks": [
+      52,
+      54
+    ],
+    "tikz": [
+      56,
+      74
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "metadata_and_publication_status_preserved": true,
+  "preservation_checks": {
+    "before_raw_sha256": "190b8244ac8aa55a9982a8df86fa06ee1b0ec5db6798d9069c7e4558ead7f3a9",
+    "current_raw_sha256": "e92422952f845279c7cace8f6c2c6c6d9e139c4a917fec8b9d67c3ec8a41b205",
+    "original_bytes_preserved_as_prefix_except_terminal_newline": true,
+    "frontmatter_byte_identical": true
+  },
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Admissible concrete data",
+      "justification": "In def-b-spline-space-and-basis take p=1, n=4, a=0, b=4. Six knots (0,0,1,3,4,4) are clamped, interior multiplicities are one, and xi_j<xi_(j+2) for j=1,2,3,4. Nonuniform gaps 1,2,1 are drawn proportionally."
+    },
+    {
+      "check": "Exact graphs and supports",
+      "justification": "The supplier recurrence [F1] gives B_(2,1,xi)=x on [0,1), (3-x)/2 on [1,3), and zero outside [0,3]; its graph is (0,0)-(1,1)-(3,0). It gives B_(3,1,xi)=(x-1)/2 on [1,3), 4-x on [3,4], and zero outside [1,4]; its graph is (1,0)-(3,1)-(4,0). These are precisely the two colored paths. Supports denote closed supports, including the zero-valued endpoints."
+    },
+    {
+      "check": "Active cell and asserted relation",
+      "justification": "The highlighted cell is [xi_3,xi_4)=[1,3), m=3. The active index range m-p through m is 2 through 3. The other two basis splines are supported on [0,1] and [3,4], so vanish on [1,3). On that cell (3-x)/2+(x-1)/2=1, matching the dashed unit-height segment and label, and the theorem step 4.1."
+    },
+    {
+      "check": "Continuity and scope",
+      "justification": "Both interior knots 1 and 3 have multiplicity mu=1=p, so C^(p-mu)=C^0 agrees with the continuous hat vertices, as asserted in the Statement and step 4.2. The caption explicitly excludes an inference about multiplicity p+1. The graph illustrates this concrete example only; no maps, crossings, or commutativity claims are asserted."
+    },
+    {
+      "check": "Contrast-only followup invariance",
+      "justification": "Byte comparison with archived followup preimage proves the sole edit is fill[gray!15] to fill[black!75]. Exact piecewise-linear vertices, supports, half-open cell annotation, unit-sum relation and all caption formulas retain the previously checked values. No mathematical figure relation changes."
+    }
+  ],
+  "proof_independent": true,
+  "original_visual_evidence": {
+    "path_discrepancy": "Declared inspection_dir includes diagram-supplement, whose screenshots directory is absent. Authentic category-local PNGs were located by basename and matched both supplied SHA256 values.",
+    "inspected_at_original_resolution": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/thm-spline-polynomial-reproduction--01.png",
+        "sha256": "81f806f1d61e3b70576c028ea6f78056c1eb49a17746a9a5ec6cea5395109091"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/thm-spline-polynomial-reproduction--02.png",
+        "sha256": "c29120665d9b0ad786adda340bb105d9b4b22a7afd0cb80e9f4c48fd6f6b7dc7"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-spline-polynomial-reproduction.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects",
+      "rerun_after_contrast_edit": true,
+      "source_raw_sha256": "e92422952f845279c7cace8f6c2c6c6d9e139c4a917fec8b9d67c3ec8a41b205"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-spline-polynomial-reproduction.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-spline-polynomial-reproduction.md",
+            "item_id": "thm-spline-polynomial-reproduction",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      },
+      "rerun_after_contrast_edit": true,
+      "source_raw_sha256": "e92422952f845279c7cace8f6c2c6c6d9e139c4a917fec8b9d67c3ec8a41b205"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-spline-polynomial-reproduction.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      },
+      "rerun_after_contrast_edit": true,
+      "source_raw_sha256": "e92422952f845279c7cace8f6c2c6c6d9e139c4a917fec8b9d67c3ec8a41b205"
+    }
+  ],
+  "visual_verification": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dms-015 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-spline-polynomial-reproduction --out research/math-library-rendering-repairs-2026-10-23/previews/dms-015-contrast",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dms-015-contrast/manifest.json",
+    "manifest_sha256": "049927156e7ef3b9e73556e2e7180c927266aa7a2381c9708f9868b44d86209e",
+    "source_sha256": "e92422952f845279c7cace8f6c2c6c6d9e139c4a917fec8b9d67c3ec8a41b205",
+    "reference_map_sha256": "b319a1a4c3726d1caebd7f9ae26af4695c5d9996d42a73b2a88a6afae55b00fe",
+    "inspected_pngs_original_resolution": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dms-015-contrast/screenshots/thm-spline-polynomial-reproduction--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dms-015-contrast/screenshots/thm-spline-polynomial-reproduction--02.png"
+    ],
+    "result": "Fresh native preview completed successfully (one item, two tiles). Both standalone PNGs inspected at original resolution. The dark-gray cell band gives clear contrast to the pastel red and blue spline paths, including their intersection, while all axes, knots, labels and unit-sum line remain visible without overlap or clipping.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "prior_previews_preserved": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dms-015",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dms-015-final"
+    ]
+  },
+  "remaining_issues": [],
+  "followup_history": {
+    "original_report": "research/math-library-rendering-repairs-2026-10-23/dms015-contrast-followup/report-7d5cae27e3ef770ada41ab8113f0cb2c524021048b42999b4b217d1ef3b9f955.json",
+    "original_report_sha256": "7d5cae27e3ef770ada41ab8113f0cb2c524021048b42999b4b217d1ef3b9f955",
+    "followup_before_file": "research/math-library-rendering-repairs-2026-10-23/dms015-contrast-followup/before-942238c41936c6d790a03e921e2a704acca7d70363f3ba6d4e08f65ffb12b525.md",
+    "followup_before_sha256": "942238c41936c6d790a03e921e2a704acca7d70363f3ba6d4e08f65ffb12b525",
+    "authorized_by": "/root/rendering_repair_coordinator",
+    "scope": "Same-owner contrast-only continuation; previous report and both earlier native previews preserved. The original report assertion of no visible issues is superseded for contrast by this independently confirmed followup."
+  }
+}

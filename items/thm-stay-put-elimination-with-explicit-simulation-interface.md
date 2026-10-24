@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-stay-put-elimination-with-explicit-simulation-interface.json
+  precheck: pass
 id: thm-stay-put-elimination-with-explicit-simulation-interface
 kind: theorem
 title: "Stay-put elimination with an explicit simulation interface"
@@ -8,13 +11,6 @@ deps: ["def-stay-put-one-tape-machine-and-run-interface", "lem-stay-put-right-le
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-10
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -78,3 +74,30 @@ and the same head and entire tape, with original state represented by its unmark
 ## Sources
 
 [Checkoway, Lecture 16, printed slides 8–10 (PDF pp. 14–19)](https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf) supplies the inclusion and outcome-preserving simulation route. The counters, partition and exact time bounds are derived here for the specified model. [Savage, §5.1, pp. 210–211](https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf) discusses language acceptance, decision and tape output with different machine conventions; the consequences here use the explicit local predicates.
+
+
+## Remarks
+
+The diagram shows one stay-put macro from F2 and proof step 2.1 at index $i$; abbreviate $C_i$ by $C$ and $C_{i+1}$ by $C'$. Suppose $C=(q,h,t)$ is nonhalting and $\delta(q,t(h))=(p,b,S)$. Put $u=t[h:=b]$ and $c=u(h+1)$, so $C'=(p,h,u)$. Horizontal arrows are genuine machine transitions; vertical arrows apply the embedding $E$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\path[use as bounding box] (-2,-1.8) rectangle (12,2.5);
+\node (C) at (0,2) {$C=(q,h,t)$};
+\node (D) at (10,2) {$C'=(p,h,u)$};
+\node (A) at (0,0) {$((q,0),h,t)$};
+\node (B) at (5,0) {$((p,1),h+1,u)$};
+\node (Z) at (10,0) {$((p,0),h,u)$};
+\draw[->] (C) -- node[above] {$M:\ S,\ t(h)\mapsto b$} (D);
+\draw[->] (C) -- node[left] {$E$} (A);
+\draw[->] (D) -- node[right] {$E$} (Z);
+\draw[->] (A) -- node[above] {$N:\ R,\ t(h)\mapsto b$} (B);
+\draw[->] (B) -- node[above] {$N:\ L,\ c\mapsto c$} (Z);
+\node at (0,-0.7) {$k_i$};
+\node at (5,-0.7) {$k_i+1$};
+\node at (10,-0.7) {$k_{i+1}=k_i+2$};
+\node at (5,-1.3) {marked, nonhalting};
+\end{tikzpicture}
+```
+
+The tag trace is $0\to1\to0$, and the head trace is $h\to h+1\to h$, including $0\to1\to0$ at the left boundary. The return rewrites the scanned symbol $c$ unchanged, so the tape remains $u$. The middle configuration is nonhalting even when $p$ is an original halting state; only the unmarked copies are designated halting states. The two bottom arrows together give the embedded original step, explaining the extra unit of simulator time counted by $s_i$. The proof above is independent of this illustration.

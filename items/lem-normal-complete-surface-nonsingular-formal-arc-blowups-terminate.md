@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-normal-complete-surface-nonsingular-formal-arc-blowups-terminate.json
+  precheck: pass
 id: lem-normal-complete-surface-nonsingular-formal-arc-blowups-terminate
 kind: lemma
 title: A nonsingular formal arc on a normal Noetherian surface becomes regular
@@ -25,8 +28,7 @@ sources:
   references:
   - title: The Stacks Project, Resolution of Surfaces, Lemma 54.10.2, full generator/exponent termination argument
     url: https://stacks.math.columbia.edu/download/resolve.pdf
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -37,7 +39,7 @@ Assume AC and DC. Let $A$ be a normal Noetherian local domain of dimension two w
 
 **Given:** A normal Noetherian local domain $A$ of dimension two with a surjection onto a complete DVR $V$ inducing the residue-field identification, and the successive point blowups along this nonsingular arc.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 
@@ -67,6 +69,6 @@ Assume AC and DC. Let $A$ be a normal Noetherian local domain of dimension two w
 
 ## Remarks
 
-- The decreasing invariant is the pair consisting of the minimal number of generators and the exponents n_i, m_i; each drop strictly reduces it.
+- The decreasing invariant is the pair consisting of the minimal number of generators and the exponents $n_i$, $m_i$; each drop strictly reduces it.
 - Neither completeness nor equicharacteristic of $A$ is needed; the complete DVR $V$ is part of the arc data.
 - The final step uses dimension two to convert a two-generator maximal ideal into regularity.

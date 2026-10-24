@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-bounded-computation-tableau.json
+  precheck: n/a
 id: def-bounded-computation-tableau
 kind: definition
 title: "A bounded computation tableau for a nondeterministic Turing-machine run"
@@ -8,13 +11,6 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-dtime-ntime-dspace-and-nspace, def-turing-machine-configuration, def-tape-finite-support-convention]
-verification:
-  audited: 2026-09-12
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -53,3 +49,55 @@ The tableau is **accepting** when some row is an accepting configuration.
   tableau.
 
 - The tableau records one branch, not the whole nondeterministic tree.
+
+For a concrete example, take $w=1$ and $T=3$. Suppose the only instructions
+available at the two reached nonhalting state-symbol pairs are
+$\Delta(q_0,1)=\{(q_1,1,R)\}$ and
+$\Delta(q_1,\sqcup)=\{(q_{\mathrm{acc}},1,L)\}$.
+Here $q_1$ is nonhalting, and $\langle q,a\rangle$ denotes a tape symbol $a$
+tagged with the current state $q$. The following $4\times4$ tableau shows the
+resulting branch; thick cell borders mark its unique head position in each row.
+
+```tikz
+\begin{tikzpicture}[x=0.9cm,y=0.9cm,every node/.style={font=\small}]
+\draw (0,0) rectangle (8,4);
+\draw (2,0)--(2,4) (4,0)--(4,4) (6,0)--(6,4);
+\draw (0,1)--(8,1) (0,2)--(8,2) (0,3)--(8,3);
+\draw[very thick] (0,3) rectangle (2,4);
+\draw[very thick] (2,2) rectangle (4,3);
+\draw[very thick] (0,1) rectangle (2,2);
+\draw[very thick] (0,0) rectangle (2,1);
+\node at (1,4.4) {$0$};
+\node at (3,4.4) {$1$};
+\node at (5,4.4) {$2$};
+\node at (7,4.4) {$3$};
+\node at (4,5) {tape position};
+\node at (-0.5,3.5) {$0$};
+\node at (-0.5,2.5) {$1$};
+\node at (-0.5,1.5) {$2$};
+\node at (-0.5,0.5) {$3$};
+\node[rotate=90] at (-1.2,2) {time};
+\node at (1,3.5) {$\langle q_0,1\rangle$};
+\node at (3,3.5) {$\sqcup$};
+\node at (5,3.5) {$\sqcup$};
+\node at (7,3.5) {$\sqcup$};
+\node at (1,2.5) {$1$};
+\node at (3,2.5) {$\langle q_1,\sqcup\rangle$};
+\node at (5,2.5) {$\sqcup$};
+\node at (7,2.5) {$\sqcup$};
+\node at (1,1.5) {$\langle q_{\mathrm{acc}},1\rangle$};
+\node at (3,1.5) {$1$};
+\node at (5,1.5) {$\sqcup$};
+\node at (7,1.5) {$\sqcup$};
+\node at (1,0.5) {$\langle q_{\mathrm{acc}},1\rangle$};
+\node at (3,0.5) {$1$};
+\node at (5,0.5) {$\sqcup$};
+\node at (7,0.5) {$\sqcup$};
+\end{tikzpicture}
+```
+
+The first transition writes $1$ at position $0$ and moves right; the second
+writes $1$ at position $1$, moves left and enters the accepting state. Row $3$
+repeats halting row $2$ as padding, rather than taking another machine
+transition. Both visited positions are at most $T=3$, and $T\ge |w|=1$.
+The definition above is independent of this illustration.

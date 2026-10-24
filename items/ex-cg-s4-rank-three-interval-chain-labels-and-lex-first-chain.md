@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain.json
+  precheck: pass
 id: ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain
 kind: example
 title: "All maximal chains of a rank-three interval in S4, their deleted-position labels, and the lexicographically first chain"
@@ -20,13 +23,7 @@ sources:
     - title: "Anders Björner and Francesco Brenti, Combinatorics of Coxeter Groups (Graduate Texts in Mathematics 231, Springer 2005; author-hosted complete PDF)"
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 2.7 and Example 2.7.1, printed pp. 48-50: the induced label of a maximal chain and the four labelled chains of S3, which this example instantiates for a rank-three interval of S4"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -73,7 +70,7 @@ The six words are pairwise distinct and are exactly the six permutations of $\{1
 
 ## Verification
 
-**Proof technique:** finite computation on the cover diagram of $[e,2341]$ in $S_4$.
+**Proof technique:** finite computation on the cover diagram of the interval [e, 2341] in S₄.
 
 1.1 The eight elements. The fixed word $s_1s_2s_3$ is reduced with $\ell(c)=3$, because $2341$ has exactly the three inversions $(3,4)$, $(2,4)$, $(1,4)$ [F3]; here the displayed letters $\{1,2,3,4\}$ are those of the published $S_4$ on $\{0,1,2,3\}$ shifted by $j\mapsto j-1$ [F4]. By [F2] an element $x$ of $W$ satisfies $x\le c$ if and only if $x$ is the product of a subword of $s_1s_2s_3$, so it remains to note that each of the eight subwords, with positions $\varnothing,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},\{1,2,3\}$, is reduced: its product $1234,2134,1324,1243,2314,2143,1342,2341$ has inversion number equal to its number of letters, as displayed [F3]. The eight products are distinct one-line forms, so $[e,c]$ has exactly these eight elements, of ranks $0,1,1,1,2,2,2,3$. [F2, F3, F4]
 
@@ -84,3 +81,35 @@ The six words are pairwise distinct and are exactly the six permutations of $\{1
 3.1 The lexicographically first chain. By step 2.1 the six label words are distinct permutations of $\{1,2,3\}$, so the lexicographically first maximal chain is the one with word $(1,2,3)$, namely $2341\gtrdot1342\gtrdot1243\gtrdot1234$, and this word is increasing; by [F7] the increasing maximal chain of $[e,c]$ is unique and lexicographically first, in agreement. [F6, F7, step 2.1]
 
 4.1 The local descent replacement. Consider the chain $m\colon2341\gtrdot1342\gtrdot1324\gtrdot1234$, whose word $(1,3,2)$ has its descent at position $2$. Its part above $m_1=1342$ is the single cover $2341\gtrdot1342$, and the rooted rank-two interval $([m_3,m_1],c_m)=([1234,1342],\,2341\gtrdot1342)$ has retained expression $s_2s_3$, with the two maximal chains $1342\gtrdot1324\gtrdot1234$ and $1342\gtrdot1243\gtrdot1234$ and label words $(3,2)$ and $(2,3)$, by [F8] and step 2.1 (the words are computed from the retained expression with its original positions $2,3$). The second chain is the unique increasing one, so replacing the falling segment by it gives the maximal chain $2341\gtrdot1342\gtrdot1243\gtrdot1234$ with word $(1,2,3)\prec(1,3,2)$, which is the lexicographically first chain of step 3.1; this is the instance for $e=2$ of the local descent replacement [F9], and it agrees with the earlier/later comparison [F10] with $m'$ the lexicographically first chain, for which $m'\cap m=\{2341,1342,1234\}$, $|m'\cap m|=3=|m|-1$ and $\lambda(m')\prec\lambda(m)$. [F8, F9, F10, step 2.1, step 3.1] ∎
+
+
+## Remarks
+
+The Hasse diagram below displays all twelve covers from (i), with larger elements above smaller ones. Each edge label is the original position deleted when traversing the edge downward from the retained subword of $s_1s_2s_3$, as computed in step 2.1. The solid blue chain has word $(1,2,3)$; the dashed red chain has word $(3,2,1)$. Crossings of edges are not additional vertices.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1.2cm,every node/.style={font=\small}]
+\node (c) at (0,4.5) {$2341$};
+\node (ab) at (-3,3) {$2314$};
+\node (ac) at (0,3) {$2143$};
+\node (bc) at (3,3) {$1342$};
+\node (a) at (-3,1.5) {$2134$};
+\node (b) at (0,1.5) {$1324$};
+\node (d) at (3,1.5) {$1243$};
+\node (e) at (0,0) {$1234$};
+\draw[red,dashed,thick] (c) -- node[above left] {$3$} (ab);
+\draw (c) -- node[right] {$2$} (ac);
+\draw[blue,very thick] (c) -- node[above right] {$1$} (bc);
+\draw[red,dashed,thick] (ab) -- node[left] {$2$} (a);
+\draw (ab) -- node[pos=.28,above right] {$1$} (b);
+\draw (ac) -- node[pos=.28,above left] {$3$} (a);
+\draw (ac) -- node[pos=.28,above right] {$1$} (d);
+\draw (bc) -- node[pos=.28,above left] {$3$} (b);
+\draw[blue,very thick] (bc) -- node[right] {$2$} (d);
+\draw[red,dashed,thick] (a) -- node[below left] {$1$} (e);
+\draw (b) -- node[right] {$2$} (e);
+\draw[blue,very thick] (d) -- node[below right] {$3$} (e);
+\end{tikzpicture}
+```
+
+In the diamond $[1234,1342]$, the downward path through $1324$ has labels $(3,2)$, while the blue path through $1243$ has labels $(2,3)$. Replacing the former by the latter, while retaining the initial edge $2341\gtrdot1342$, is exactly the replacement in (iv). The verification above is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-a-stationary-chain-need-not-be-ergodic.json
+  precheck: pass
 id: cex-a-stationary-chain-need-not-be-ergodic
 kind: counterexample
 title: "A stationary chain need not be ergodic"
@@ -15,9 +18,6 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-verification:
-  audited: 2026-10-02
-  precheck: pass
 proof_strategy: direct
 ---
 
@@ -62,3 +62,20 @@ positive-recurrent chains.
 4.1 Evaluating at $A$: $\bar 0\in A$ and $\bar 1\notin A$, so $\mathbb P_\pi(A)=\frac12$, and by step 2.2 this is the measure of a strictly invariant event; since $\frac12\notin\{0,1\}$, [F4] shows that the canonical shift is not ergodic, even though $\mathbb P_\pi$ is shift-invariant by step 3.1. [F4, step 2.2, step 3.1, given]
 
 5.1 Boundary and axiom cases: the event $A$ is strictly invariant, not merely invariant modulo null sets, and step 2.2 verifies the identity on the whole path space; the value $1/2$ is neither $0$ nor $1$, so the criterion of [F4] genuinely fails; $A^c$ and the events "infinitely many ones" behave the same way; if $\pi$ were concentrated on $0$ or on $1$ the chain would be ergodic, so the mixture is essential; the chain is reducible with two communicating classes $\{0\}$ and $\{1\}$, which is exactly why the ergodicity result for irreducible chains does not apply; the explicit description of $\mathbb P_\pi$ in step 2.1 makes no selection and no choice principle is used; and no convergence claim is made, the example refuting only the implication "stationary $\Rightarrow$ ergodic". [F2, F3, F4, step 2.1, step 4.1, given] ∎
+
+## Remarks
+
+The transition diagram has two absorbing states. Edge labels are transition probabilities; the labels below the states give the initial distribution. There are no positive-probability transitions between the states.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,circle,minimum size=9mm] (zero) at (0,0) {$0$};
+\node[draw,circle,minimum size=9mm] (one) at (3,0) {$1$};
+\draw[->] (zero) edge[loop above] node {$1$} (zero);
+\draw[->] (one) edge[loop above] node {$1$} (one);
+\node at (0,-0.9) {$\pi(0)=1/2$};
+\node at (3,-0.9) {$\pi(1)=1/2$};
+\end{tikzpicture}
+```
+
+The two components correspond to the constant paths $\bar 0$ and $\bar 1$ in step 2.1. The proof of stationarity and non-ergodicity above is independent of this illustration.

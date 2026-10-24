@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-exit-side-probability-from-an-interval.json
+  precheck: pass
 id: ex-exit-side-probability-from-an-interval
 kind: example
 title: "Exit side from an interval"
@@ -13,8 +16,7 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 7.5.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example
@@ -62,3 +64,29 @@ levels at the same time.
 ## Source notes
 
 Durrett, Theorem 7.5.3, states the two-sided exit probability used here; the example substitutes the pair of endpoints and checks the complementary probability.
+
+## Remarks
+
+The number line shows the starting point and the two first-exit alternatives.
+The arrows indicate which boundary is hit first, not sample paths or a process
+stopped at a boundary. The two events partition a probability-one set, as
+verified in step 2.1.
+
+```tikz
+\begin{tikzpicture}[x=1.5cm,y=1cm]
+\draw[->] (-2.7,0) -- (3.7,0);
+\fill (-2,0) circle (2pt);
+\fill (0,0) circle (2pt);
+\fill (3,0) circle (2pt);
+\node[below] at (-2,-0.12) {$-2$};
+\node[below] at (0,-0.12) {$0$};
+\node[below] at (3,-0.12) {$3$};
+\node[below] at (0,-0.65) {start};
+\draw[->] (-0.1,0.6) -- (-2,0.6);
+\draw[->] (0.1,0.6) -- (3,0.6);
+\node[above] at (-1,0.75) {$T_{-2}<T_3$};
+\node[above] at (1.5,0.75) {$T_3<T_{-2}$};
+\node[above] at (-1,1.35) {$P=3/5$};
+\node[above] at (1.5,1.35) {$P=2/5$};
+\end{tikzpicture}
+```

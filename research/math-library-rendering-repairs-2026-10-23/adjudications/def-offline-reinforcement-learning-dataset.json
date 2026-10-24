@@ -1,0 +1,130 @@
+{
+  "id": "def-offline-reinforcement-learning-dataset",
+  "agent": "/root/rendering_repair_coordinator/dorl_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original capture contains the full construction and coverage argument but no figure. A paired sampling-stage picture materially clarifies which factors change with policy and which are shared; the support inclusion connects that comparison to the finite-atom coverage criterion. This is an explanatory addition warranted independently of the complete existing argument.",
+      "action": "Appended a fenced TikZ illustration and explanatory captions to the final Remarks section.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added two aligned trajectory-step rows for target and behavior policies, with their separate action probabilities and identical joint next-state/reward factors; included the resulting support inclusion under the existing support hypothesis.",
+  "source_lines_after": [
+    71,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    89
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For fixed trajectory tau and 0 <= t < H, s_t belongs to S, a_t belongs to A(s_t), and (s_{t+1},r_{t+1}) belongs to S x R.",
+      "justification": "Definition lines 44 and 46 specify these coordinate spaces. Each row represents sampling stages, explicitly described as such rather than deterministic maps."
+    },
+    {
+      "relation": "s_t -> (s_t,a_t) has target atom factor pi(a_t|s_t) or behavior atom factor mu(a_t|s_t).",
+      "justification": "The policy normalization in line 44 and trajectory atom factorization at line 48 give these action probabilities; only this factor changes between the rows."
+    },
+    {
+      "relation": "(s_t,a_t) -> (s_{t+1},r_{t+1}) has the same p(s_{t+1},r_{t+1}|s_t,a_t) in each row.",
+      "justification": "Line 44 defines the joint next-state/reward probability distribution for every admissible state/action pair; line 48 multiplies precisely this factor by the policy factor. The figure retains joint sampling rather than falsely splitting reward and state into independent draws. Supplier lem-finite-mdp-policy-action-state-reward-path-law proof step 3.1 explicitly derives the same factorization."
+    },
+    {
+      "relation": "{tau:P_H^pi({tau})>0} is a subset of {tau:P_H^mu({tau})>0} under the reachable state-action support hypothesis.",
+      "justification": "The unchanged argument at line 68 proves every target-positive trajectory uses reachable pairs, positive target action factors and positive shared transition/reward factors. The hypothesis supplies positive behavior action factors, so the behavior product is positive. Finiteness of Omega_H converts atom support inclusion into full event absolute continuity."
+    },
+    {
+      "relation": "Both rows point left-to-right through one time step; no cycle, crossing, backward transition, or deterministic commutativity claim is asserted.",
+      "justification": "Native view shows two disjoint three-node paths with two forward arrows each. The four asserted directed edges agree with action selection followed by joint reward/next-state sampling. The existing rigorous coverage argument remains byte-identical and independent of the figure."
+    }
+  ],
+  "before_guard": {
+    "expected_raw_sha256": "95b3346d99f35ed610696e58c0c24c9a66611064ab070d8f55ff2b90a095d079",
+    "actual_raw_sha256": "95b3346d99f35ed610696e58c0c24c9a66611064ab070d8f55ff2b90a095d079",
+    "checked_immediately_before_edit": true
+  },
+  "preservation": {
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true,
+    "original_source_exact_prefix_of_current": true,
+    "current_raw_sha256": "ccce95127cac7a3b58297e132a774de651d669f2af47b3d66a9790add8f8106c"
+  },
+  "original_evidence": {
+    "declared_path_missing": true,
+    "declared_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/def-offline-reinforcement-learning-dataset--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/def-offline-reinforcement-learning-dataset--01.png",
+    "sha256": "ee8d7ecfd8a8d48b202c7c73c157576b941819e8f4db4f0324d5d1c8fc8b5f1a",
+    "standalone_original_resolution_viewed": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-offline-reinforcement-learning-dataset.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-offline-reinforcement-learning-dataset.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-offline-reinforcement-learning-dataset.md",
+            "item_id": "def-offline-reinforcement-learning-dataset",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-offline-reinforcement-learning-dataset.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl014-native/manifest.json",
+    "source_sha256": "ccce95127cac7a3b58297e132a774de651d669f2af47b3d66a9790add8f8106c",
+    "html_sha256": "2cb83dcb85d9eaacc3ca904691d88c5d6549792a85b9eecdb74b98f0e2772213",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dorl014-native/screenshots/def-offline-reinforcement-learning-dataset.json",
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "standalone_original_resolution_tiles_viewed": [
+      "def-offline-reinforcement-learning-dataset--01.png",
+      "def-offline-reinforcement-learning-dataset--02.png"
+    ],
+    "visual_checks": "All six stage nodes, four forward arrows and support inclusion are visible. White labels/strokes contrast with the dark native background; no clipping or label overlap observed. There are no filled nodes or open/closed endpoint rings; endpoint-style checks are inapplicable. Paths are acyclic so graph closure is inapplicable; all four intended edges are actually rendered.",
+    "limitations": "Local native ItemBody preview, not the full production route. Reference-title-map records unrelated parse diagnostics."
+  },
+  "remaining_issues": []
+}

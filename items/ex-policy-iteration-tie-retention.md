@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-policy-iteration-tie-retention.json
+  precheck: pass
 id: ex-policy-iteration-tie-retention
 kind: example
 title: "Changing a tied greedy action can cycle, while retention stops"
@@ -21,11 +24,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -77,13 +75,13 @@ Let $S=\{s\}$, $A(s)=\{a,b\}$, $\gamma=1/2$, and let both actions give reward $0
 The diagram uses a circle for the state and rectangles for the available action nodes. Arrows from the state to each action show the available choices, not a single policy; arrows back to the state show each deterministic transition, labeled with probability and reward. The example separately specifies the initial policy and the alternative switching rule, and the verification does not rely on the drawing.
 
 ```tikz
-\begin{tikzpicture}[>=stealth]
+\begin{tikzpicture}[>=stealth,font=\large]
   \node[circle,draw] (s) at (0,0) {$s$};
-  \node[rectangle,draw] (a) at (-2,1.4) {$a$};
-  \node[rectangle,draw] (b) at (2,1.4) {$b$};
-  \draw[->] (s) -- node[above left] {choose $a$} (a);
-  \draw[->] (a) to[bend left=22] node[left] {$p(s,0\mid s,a)=1$} (s);
-  \draw[->] (s) -- node[above right] {choose $b$} (b);
-  \draw[->] (b) to[bend right=22] node[right] {$p(s,0\mid s,b)=1$} (s);
+  \node[rectangle,draw] (a) at (-4.5,0) {$a$};
+  \node[rectangle,draw] (b) at (4.5,0) {$b$};
+  \draw[->] (s) to[bend right=30] node[above] {choose $a$} (a);
+  \draw[->] (a) to[bend right=30] node[below] {$p(s,0\mid s,a)=1$} (s);
+  \draw[->] (s) to[bend left=30] node[above] {choose $b$} (b);
+  \draw[->] (b) to[bend left=30] node[below] {$p(s,0\mid s,b)=1$} (s);
 \end{tikzpicture}
 ```

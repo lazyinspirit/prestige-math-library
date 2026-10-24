@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-three-sat-reduces-to-directed-hamiltonian-cycle.json
+  precheck: pass
 id: thm-three-sat-reduces-to-directed-hamiltonian-cycle
 kind: theorem
 title: "3SAT polynomial-time many-one reduces to directed Hamiltonian cycle"
@@ -16,14 +19,7 @@ sources:
       url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
-verification:
-  verified:
-    model: "gpt-6-astra"
-    verdict: pass
-    date: 2026-09-08
-    scope: "Local reduction prerequisite and first-deviation proof repair; not independent review"
-    delegated_by: owner
-  precheck: pass
+
 ---
 
 ## Statement
@@ -67,3 +63,38 @@ Each clause is a disjunction of exactly three literal occurrences, where a liter
 3.1 Now add one fresh vertex $z_\varphi$ and the two arcs $z_\varphi\to s_\varphi$ and $t_\varphi\to z_\varphi$. If $D_\varphi$ has a Hamiltonian path from $s_\varphi$ to $t_\varphi$, then adjoining $z_\varphi$ closes that path to a directed Hamiltonian cycle in $D'_\varphi$. Conversely, any directed Hamiltonian cycle in $D'_\varphi$ must pass through the fresh vertex $z_\varphi$, whose only outgoing arc is to $s_\varphi$ and whose only incoming arc is from $t_\varphi$. Deleting $z_\varphi$ from the cycle therefore yields a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$ in $D_\varphi$. [F1, step 2.1, step 2.2, construct]
 
 4.1 Step 1.1 handles the empty formula and gives a polynomial-time construction for every well-formed $3$-CNF formula. For $m\ge1$, steps 2.1 and 2.2 prove the iff for directed Hamiltonian path, and step 3.1 converts that iff to directed Hamiltonian cycle. Extend the map to every input string by checking $3$-CNF syntax in polynomial time and sending any malformed string to the fixed one-vertex loopless digraph, which has no directed Hamiltonian cycle. By [L1] and [L2], the resulting total function is a polynomial-time many-one reduction from $3$-SAT to directed Hamiltonian cycle. [L1, L2, step 1.1, step 2.1, step 2.2, step 3.1, cases-exhaustive] ∎
+
+## Remarks
+
+For $m\ge1$, the two panels show the clause-$j$ segment of $X_i$ in step 1.1. Each double arrow denotes two opposite directed arcs. The upper panel shows the extra arcs when $x_i$ occurs in $C_j$; the lower panel shows those when $\neg x_i$ occurs. If both signs occur, both pairs of detour arcs are present, using the same vertex $c_j$. Other occurrences can also be incident to $c_j$; these are local segments, not entire gadgets.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=1cm,>=stealth]
+\node (a) at (0,0) {$s_{i,j-1}$};
+\node (b) at (2,0) {$\ell_{i,j}$};
+\node (c) at (4,0) {$r_{i,j}$};
+\node (d) at (6,0) {$s_{i,j}$};
+\node (e) at (3,1.2) {$c_j$};
+\draw[<->] (a) -- (b);
+\draw[<->] (b) -- (c);
+\draw[<->] (c) -- (d);
+\draw[->] (b) -- (e);
+\draw[->] (e) -- (c);
+\node at (3,2) {$x_i\in C_j$};
+\node at (3,-0.7) {left to right: $x_i=\mathrm{true}$};
+\node (f) at (0,-3.7) {$s_{i,j-1}$};
+\node (g) at (2,-3.7) {$\ell_{i,j}$};
+\node (h) at (4,-3.7) {$r_{i,j}$};
+\node (k) at (6,-3.7) {$s_{i,j}$};
+\node (l) at (3,-2.5) {$c_j$};
+\draw[<->] (f) -- (g);
+\draw[<->] (g) -- (h);
+\draw[<->] (h) -- (k);
+\draw[->] (h) -- (l);
+\draw[->] (l) -- (g);
+\node at (3,-1.7) {$\neg x_i\in C_j$};
+\node at (3,-4.4) {right to left: $x_i=\mathrm{false}$};
+\end{tikzpicture}
+```
+
+The labels $x_i\in C_j$ and $\neg x_i\in C_j$ mean literal occurrence in the clause. The crossbar continues through all clause indices: its boundary arcs are $p_i\to s_{i,0}$, $p_i\to s_{i,m}$, $s_{i,0}\to q_i$, and $s_{i,m}\to q_i$, with $q_i=p_{i+1}$ between gadgets. Step 2.1 replaces the selected pair edge by the matching two-arc detour. The proof, including the exclusion of other Hamiltonian traversals in step 2.2 and the cycle closure in step 3.1, is independent of the illustration.

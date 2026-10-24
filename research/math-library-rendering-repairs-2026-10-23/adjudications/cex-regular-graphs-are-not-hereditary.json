@@ -1,0 +1,85 @@
+{
+  "id": "cex-regular-graphs-are-not-hereditary",
+  "agent": "/root/rendering_repair_coordinator/comb_012",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the single original flagged PNG standalone at original resolution. Remarks visibly prints draw/node commands rather than a diagram. Frozen/current source agrees: the opening fence includes the picture source in its info string and the closing fence is inline.",
+      "action": "Placed the tikz opener and closing fence on their own lines.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "confirmed",
+      "reason": "After the fence-only repair, a fresh native local ItemBody preview rendered C4 with four vertices but only three visible edges: v0-v1, v1-v2, v2-v3. The bottom v3-v0 segment was absent despite --cycle. This contradicts the supplied C4 definition and caption. Standalone final original-resolution preview confirms the explicit closure restores all four edges.",
+      "action": "Replaced --cycle by --(v0) only after observing the actual omission.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Separated malformed TikZ fence lines and made the observed missing last-to-first C4 edge explicit. All claims, hypotheses, numbered proof steps, metadata, dependency/source declarations and exact published status preserved.",
+  "source_lines_after": [
+    54,
+    55,
+    57,
+    59,
+    60
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Left C4 on v0,v1,v2,v3",
+      "checks": "The local standard-cycle definition gives edges {v0,v1},{v1,v2},{v2,v3},{v3,v0}. Final native render visibly has exactly these four edges, no diagonals, and four vertices. Every vertex has two distinct neighbours, agreeing with Given/F1 and proof step 1.1."
+    },
+    {
+      "objects": "Right induced P3 on v0,v1,v2",
+      "checks": "Restricting the left edge set to W={v0,v1,v2} retains exactly {v0,v1},{v1,v2}, by def-subgraph-induced-subgraph-and-spanning-subgraph. Final native render has three vertices and exactly these two edges, hence degrees 1,2,1 in displayed vertex order, agreeing with F2 and step 1.2."
+    },
+    {
+      "objects": "Selection arrow and shading",
+      "checks": "The three blue-shaded left vertices are precisely W and reappear on the right. The labelled arrow depicts taking G[W], not a graph edge or directed graph. No graph-edge orientations are asserted. C4 and P3 are undirected, in accord with the finite simple graph conventions."
+    },
+    {
+      "objects": "Proof independence",
+      "checks": "Steps 1.1, 1.2 and 2.1 use the existing cited graph definitions and closure criterion F1-F3; explicit cycle/path edge sets give the counterexample without relying on the picture. No claim or proof text was changed."
+    }
+  ],
+  "proof_independent": true,
+  "before_raw_sha256": "cca07e3d60e6577a07d1d331f92803a6f4470e4ff911807bae37e7fe5bca3f65",
+  "after_raw_sha256": "e5de184c8b3c4d0048a67b160078f18944459aed1de30d8423ff04a7a5ce5752",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-regular-graphs-are-not-hereditary.md --json",
+      "exit_code": 0,
+      "output": "summary: files=1, checked=1, failed=0; status=pass, strategy=direct"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-regular-graphs-are-not-hereditary.md --json",
+      "exit_code": 0,
+      "output": "errors=[], warnings=[], checked=1"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-regular-graphs-are-not-hereditary.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "local_visual_check": {
+    "fence_only_preview": "research/math-library-rendering-repairs-2026-10-23/preview-comb-012-fence-20261024/manifest.json",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/preview-comb-012-final-20261024/manifest.json",
+    "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-regular-graphs-are-not-hereditary --out research/math-library-rendering-repairs-2026-10-23/preview-comb-012-final-20261024",
+    "exit_code": 0,
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "inspection": "Viewed each original/fence-only/final tile standalone at original resolution. Final graph has C4 four vertices/four edges/degrees 2,2,2,2, and P3 three vertices/two edges/degrees 1,2,1; captions and arrow fit without overlap."
+  },
+  "remaining_issues": [
+    "Local ItemBody preview only; no live website visited. Preview reference map records 32 unrelated parse diagnostics."
+  ]
+}

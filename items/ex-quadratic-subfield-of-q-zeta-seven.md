@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-quadratic-subfield-of-q-zeta-seven.json
+  precheck: pass
 id: ex-quadratic-subfield-of-q-zeta-seven
 kind: example
-title: Quadratic subfield of Q(zeta_7)
+title: Quadratic subfield of $\mathbb{Q}(\zeta_7)$
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -25,13 +28,7 @@ sources:
     - title: "J. S. Milne, Algebraic Number Theory, Ch. 8, Example 8.19"
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.19, pp. 143-144: the unique quadratic subfield of Q(zeta_p) is Q(sqrt(d)) with d = (-1)^{(p-1)/2} p."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Example

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-xd-immigration-death-finite-state-projection.json
+  precheck: pass
 id: ex-xd-immigration-death-finite-state-projection
 kind: example
 title: "Immigration-death chain projected onto two states"
@@ -24,11 +27,6 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 axiom_use: "Countable Choice and Dependent Choice are assumed only to apply the cited reaction-network nonexplosion theorem; the finite cemetery-matrix calculation is choice-free."
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation"
@@ -82,3 +80,31 @@ It equals the probability of having exited $F$ by time $t$ and therefore is the 
 3.1 Since $c_F'=p_1$ and $c_F(0)=0$, integrating the expression in step 2.1 gives the displayed formula for $c_F(t)$. By [F6], this coordinate is $\mathbb P(\tau_F\le t)$ and equals the embedded killed-vector $\ell^1$ error. [step 2.1, F6, algebra]
 
 4.1 Fix $t>0$ and choose ordered times $0<s_1<s_2<s_3<t$. The joint density for jumps $0\to1$ at $s_1$, $1\to2$ at $s_2$, and $2\to1$ at $s_3$, followed by no further jump through $t$, is $e^{-s_1}\cdot1\cdot e^{-2(s_2-s_1)}\cdot1\cdot e^{-3(s_3-s_2)}\cdot2\cdot e^{-2(t-s_3)}$, which is strictly positive; integrating this positive density over the nonempty ordered-time simplex gives positive probability. Such paths contribute to the full marginal at state $1$ but have already been killed at their first exit from $F$. [F1, F3, F4, given, construct] ∎
+
+
+## Remarks
+
+The upper row shows the transitions among states $0,1,2$ of the original chain; higher states and their incident transitions are omitted. The lower row shows the entire cemetery lift on $F\cup\{\dagger\}$ for $F=\{0,1\}$. Arrow labels are rates, not transition probabilities.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[anchor=east] at (-1.1,0) {Original};
+\node[draw,circle,minimum size=9mm] (a0) at (0,0) {$0$};
+\node[draw,circle,minimum size=9mm] (a1) at (3,0) {$1$};
+\node[draw,circle,minimum size=9mm] (a2) at (6,0) {$2$};
+\draw[->] (a0) to[bend left=25] node[above] {$1$} (a1);
+\draw[->] (a1) to[bend left=25] node[below] {$1$} (a0);
+\draw[->] (a1) to[bend left=25] node[above] {$1$} (a2);
+\draw[->] (a2) to[bend left=25] node[below] {$2$} (a1);
+\node[anchor=east] at (-1.1,-2.4) {Lift};
+\node[draw,circle,minimum size=9mm] (b0) at (0,-2.4) {$0$};
+\node[draw,circle,minimum size=9mm] (b1) at (3,-2.4) {$1$};
+\node[draw,circle,minimum size=9mm] (d) at (6,-2.4) {$\dagger$};
+\draw[->] (b0) to[bend left=25] node[above] {$1$} (b1);
+\draw[->] (b1) to[bend left=25] node[below] {$1$} (b0);
+\draw[->] (b1) -- node[above] {$1$} (d);
+\node at (6,-3.3) {absorbing};
+\end{tikzpicture}
+```
+
+The lift has the displayed column generator $\widetilde Q_F$: the rate-$1$ jump $1\to2$ becomes $1\to\dagger$, and there are no outgoing jumps from $\dagger$. Thus the upper path $0\to1\to2\to1$ is represented below by $0\to1\to\dagger$, with permanent absorption at the first exit. By the definition of the killed projection, $c_F(t)=\mathbb P(\tau_F\le t)$; steps 1.3 and 3.1 verify the rates and mass identity. The verification above is independent of this illustration.

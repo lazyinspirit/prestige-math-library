@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-leapfrog-is-reversible-and-volume-preserving.json
+  precheck: pass
 id: thm-leapfrog-is-reversible-and-volume-preserving
 kind: theorem
 title: Leapfrog is reversible and volume-preserving
@@ -32,11 +35,6 @@ axiom_use: "Countable Choice is used through the library's Lebesgue measure and 
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
 sources:
   references:
     - title: "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5"
@@ -71,7 +69,7 @@ For $U\in C^2$, the classical Jacobian matrices of the kick and drift are block 
 
 [F7] The determinant of a triangular matrix is the product of its diagonal entries. [[thm-determinant-of-a-triangular-matrix]]
 
-[F8] Under Countable Choice, the Borel sigma-algebra of $\mathbb R^{2d}$ is the product of the Borel sigma-algebras of the two factors, and the product of their Borel-restricted Lebesgue measures agrees with full Euclidean measure $\lambda_{2d}$. [[thm-borel-products-of-euclidean-spaces-are-euclidean-borel]], [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]]
+[F8] Under Countable Choice, the Borel sigma-algebra of $\mathbb R^{2d}$ is the product of the Borel sigma-algebras of the two factors, and the product of their Borel-restricted Lebesgue measures agrees with full Euclidean measure $\lambda_{2d}$. [[thm-borel-products-of-euclidean-spaces-are-euclidean-borel]], [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets|On Borel subsets of $\mathbb R^{m+n}$, the product $\lambda_m\times\lambda_n$ agrees with $\lambda_{m+n}$]]
 
 [F9] Under Countable Choice, every Lebesgue-measurable subset of $\mathbb R^{2d}$ differs from a Borel set by a subset of a Borel null set, and $\lambda_{2d}$ is the completion of its Borel restriction. [[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]]
 

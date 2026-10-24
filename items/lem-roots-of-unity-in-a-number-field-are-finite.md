@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-roots-of-unity-in-a-number-field-are-finite.json
+  precheck: pass
 id: lem-roots-of-unity-in-a-number-field-are-finite
 kind: lemma
 title: Finitely many roots of unity in a number field
@@ -41,13 +44,7 @@ sources:
     - title: "Andrew V. Sutherland, MIT 18.785 Lecture 15: Dirichlet's Unit Theorem (Fall 2021)"
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "Cor. 15.8 pp.5-6 (the torsion of K^× is the group of roots of unity in K)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement
@@ -79,7 +76,7 @@ $K$ is finite.
 
 ## Proof
 
-**Proof technique:** every root of unity in $K$ is an algebraic integer whose minimal polynomial has degree at most $n$ and all of whose complex roots have modulus $1$; the bounded-conjugate polynomials of that degree form a finite box, and each polynomial has at most $n$ roots.
+**Proof technique:** every root of unity in K is an algebraic integer whose minimal polynomial has degree at most n and all of whose complex roots have modulus 1; the bounded-conjugate polynomials of that degree form a finite box, and each polynomial has at most n roots.
 
 1.1 The set $\mu(K)$ is a subgroup of $K^{\times}$: it contains $1$; if $\zeta^{m}=1$ and $\eta^{k}=1$ then $(\zeta\eta)^{mk}=\zeta^{mk}\eta^{mk}=1$; and if $\zeta^{m}=1$ then $(\zeta^{-1})^{m}=(\zeta^{m})^{-1}=1$. [F1]
 

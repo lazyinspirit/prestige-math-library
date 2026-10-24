@@ -1,0 +1,101 @@
+{
+  "id": "ex-knot-kt-07-worked-cases",
+  "agent": "/root/rendering_repair_coordinator/knot_011",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-tilde-tikz-fence",
+      "verdict": "confirmed",
+      "reason": "Independently viewed both original flagged PNGs standalone at original resolution. The Diagram prose is typeset, but the complete TikZ program appears as literal text. The tilde fence is not recognized by this renderer\u2019s TikZ extraction; the same source renders through its supported backtick fence.",
+      "action": "Replaced only opening ~~~tikz and closing ~~~ with triple backticks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed the two fence delimiters at lines 128 and 152; preserved the entire TikZ program, explanatory prose, all mathematical statements and proofs, and all frontmatter bytes.",
+  "source_lines_after": [
+    128,
+    152
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and band signs",
+      "evidence": "Example paragraph specifies T as the one-boundary positive-positive Hopf plumbing, E as positive-negative, with positive core a first. Left blue horizontal a and orange vertical b are labelled T:+,+; right corresponding bands E:+,-. Thus the first band is positive in both panels and the second distinguishes the two cases. Verification 2.1 gives diagonal pairings (-1,-1) and (-1,+1) from exactly these signs."
+    },
+    {
+      "check": "Common square and core crossing",
+      "evidence": "Left common square is [-2.9,-2.1] x [-0.4,0.4]; horizontal a passes through (-2.5,0), vertical b through the same point. Right square is [2.1,2.9] x [-0.4,0.4], with unique crossing (2.5,0). Each square has alternating horizontal/vertical side incidences. Core tangents are rightward then upward, determinant +1 in the explicitly stipulated positive chart, so both a dot_F b=+1 labels agree with the Example and Verification 1.1."
+    },
+    {
+      "check": "Surface crossing versus link crossings",
+      "evidence": "Continuous crossing core strokes are curves on the same plumbing surface, not disjoint link strands: no over/under gap, twist count, boundary link diagram, or signed ambient crossing is asserted. The unchanged caption expressly says these are local charts whose cores close outside the neighborhoods and whose twists are not depicted. Hence the identical local geometry is compatible with different Hopf signs; no boundary trefoil/figure-eight topology is inferred from the local drawing alone."
+    },
+    {
+      "check": "Push-off side and matrix consistency",
+      "evidence": "The drawing makes no additional normal-side or disjoint-disk assertion. The given side condition a+ bounds a disk disjoint from b yields V12=0 in Verification 2.1. The full local supplier lem-seifert-matrix-skew-part-is-surface-intersection defines positive ordered tangent crossings and proves V-V^T=J_F, hence the depicted +1 intersection gives V21=-1, matching both displayed matrices under def-knot-seifert-pairing-and-matrix\u2019s positive-push convention."
+    },
+    {
+      "check": "Proof independence",
+      "evidence": "Verification 1.1\u20135.1 already proves the basis, matrix entries, determinant calculations, connected-sum polynomial and invariance from explicit assumptions and suppliers. The illustration is after the proof; the caption calls it schematic. Neither any proof step nor a dependency was altered."
+    }
+  ],
+  "original_visual_review": {
+    "standalone_original_resolution": true,
+    "tiles": [
+      "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/ex-knot-kt-07-worked-cases--03.png",
+      "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/ex-knot-kt-07-worked-cases--04.png"
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-knot-kt-07-worked-cases.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-knot-kt-07-worked-cases.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-knot-kt-07-worked-cases.md",
+            "item_id": "ex-knot-kt-07-worked-cases",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-knot-kt-07-worked-cases.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "preview": {
+    "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-knot011\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-knot-kt-07-worked-cases --out research/math-library-rendering-repairs-2026-10-23/previews/knot011-final-unique",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/knot011-final-unique/manifest.json",
+    "reviewed_tile": "research/math-library-rendering-repairs-2026-10-23/previews/knot011-final-unique/screenshots/ex-knot-kt-07-worked-cases--03.png",
+    "standalone_original_resolution": true,
+    "result": "Both complete panels rendered, labels and arrows visible, no clipping/overlap or raw program. Capture records tikz_count=1, diagram_failures=[], katex_errors=[].",
+    "limitations": "Local native ItemBody SSR preview only; no HTTP/site/app workflow transitions. Reference map reports 32 unrelated parse diagnostics."
+  },
+  "before_raw_sha256": "b5d766bc198ccb06b54e095e19194a6d6825f5fd5775c21ce73fe34d7f526d92",
+  "after_raw_sha256": "fc894e6f42a133b4725b3d2683c3d52e8e57f8ad43dc720034b535e200c9395a",
+  "status_preserved_byte_for_byte": true,
+  "remaining_issues": []
+}

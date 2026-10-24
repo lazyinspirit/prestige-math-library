@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-pure-three-strand-group-as-a-split-free-by-cyclic-extension.json
+  precheck: pass
 id: ex-the-pure-three-strand-group-as-a-split-free-by-cyclic-extension
 kind: example
-title: "PB_3 as F_2 by Z, with its section action"
+title: '$PB_3$ as $F_2$ by $\mathbb{Z}$, with its section action'
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -29,9 +32,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:

@@ -1,0 +1,114 @@
+{
+  "id": "def-positional-encoding-and-causal-mask",
+  "agent": "/root/rendering_repair_coordinator/dnn_010",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshot renders both definition paragraphs correctly but has no illustration. A concrete 4-by-4 mask makes row/query versus column/key orientation, the allowed diagonal, and the increasing allowed prefixes materially easier to verify. This is a warranted explanatory diagram under the authorized diagram scope, rather than a claim that the original formulas failed rendering.",
+      "action": "Added a final Remarks section with a labeled n=4 causal-mask grid and the allowed key prefix for each row.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only explanatory Remarks and a fenced TikZ illustration; the preexisting source is an exact byte prefix of the current item.",
+  "source_lines_after": {
+    "remarks": [
+      39,
+      41
+    ],
+    "tikz": [
+      43,
+      84
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and indexing",
+      "justification": "Definition line 27 specifies M in (R union {-infinity})^(n x n) with indices 0,...,n-1. The illustration specializes to n=4 and labels rows i=0,1,2,3 as queries and columns j=0,1,2,3 as keys; it depicts mask entries, not attention weights or data-flow arrows."
+    },
+    {
+      "check": "All 16 entries and diagonal convention",
+      "justification": "Using Definition line 27, j<=i gives zero: rows 0,1,2,3 have respectively 1,2,3,4 zeros (10 total). The complementary j>i entries are -infinity: respectively 3,2,1,0 per row (6 total). The four diagonal cells (0,0),(1,1),(2,2),(3,3) are all zero. Every rendered cell was checked against these row lists."
+    },
+    {
+      "check": "Allowed key prefixes",
+      "justification": "Definition line 27 identifies usable keys as 0,...,i. The right-hand labels are exactly {0}, {0,1}, {0,1,2}, {0,1,2,3} for rows 0 through 3. No future key occurs and every row contains its current position."
+    },
+    {
+      "check": "Expository independence",
+      "justification": "The original definition and references are byte-preserved. The Remarks state that this is a direct instance of the definition; the diagram supplies no hypothesis, dependency, or proof step. No proof relies on it."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-positional-encoding-and-causal-mask.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-positional-encoding-and-causal-mask.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-positional-encoding-and-causal-mask.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn-010 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-positional-encoding-and-causal-mask --out research/math-library-rendering-repairs-2026-10-23/previews/dnn-010",
+      "exit_code": 0,
+      "result": "1 item, 1 tile; native screenshot receipt has 1 TikZ diagram, no diagram failures and no KaTeX errors."
+    }
+  ],
+  "evidence": {
+    "before_sha256": "d2c43d16b911d0c52e3b24bdf2cf7fedc8a36740994c60b35c4005c5d1896e5c",
+    "after_sha256": "7fb8a2b1c6a845454f0d605cb78a8d3924404cfe7017972d0a34d0e7279cd36d",
+    "status_preserved": "Frontmatter byte-identical; status remains published.",
+    "original_image": {
+      "declared_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/def-positional-encoding-and-causal-mask--01.png",
+      "resolved_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-positional-encoding-and-causal-mask--01.png",
+      "sha256": "3d86004c0f7d3f56d1f969465da1960868885d2d55d7fea1e4d223217e747787",
+      "inspection": "Declared evidence_dir screenshot was absent; authenticated category screenshot has the exact recorded SHA256 and was viewed standalone at original resolution."
+    },
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-010/manifest.json",
+    "preview_manifest_sha256": "67d56c03f6e83a45521854faedd637d5e7c9f8be2fa10a9cc6e8217ef0b0fccd",
+    "preview_source_binding": {
+      "id": "def-positional-encoding-and-causal-mask",
+      "status": "published",
+      "source": "items/def-positional-encoding-and-causal-mask.md",
+      "source_sha256": "7fb8a2b1c6a845454f0d605cb78a8d3924404cfe7017972d0a34d0e7279cd36d",
+      "snapshot": "snapshots/def-positional-encoding-and-causal-mask.md",
+      "html": "html/def-positional-encoding-and-causal-mask.html",
+      "html_sha256": "2196c57c2b76d1bfd6ddb5a4d75846e36d8c7ad6133c2c57b83a880574133226",
+      "reference_map_sha256": "3272549257529a9de9ca39dbeccc4e629fdec6df68aecd683faf5a8c5dfae45b"
+    },
+    "native_image": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-010/screenshots/def-positional-encoding-and-causal-mask--01.png",
+      "sha256": "cd4dafadf1297fa97e3fd87cc1218658717d6e41f336609579086bafffad5411",
+      "inspection": "Standalone original-resolution native dark-background PNG inspected. All four row labels, four column labels, all 16 cells, complete outer grid, internal grid lines, and four allowed-prefix labels are visible with sufficient contrast, no clipping or overlaps."
+    }
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Preview covers local native title and ItemBody, not production-route navigation or metadata Sources footer. The reference map records 16 unrelated parse diagnostics; this item has no wikilinks."
+  ]
+}

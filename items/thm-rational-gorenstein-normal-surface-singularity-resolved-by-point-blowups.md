@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-rational-gorenstein-normal-surface-singularity-resolved-by-point-blowups.json
+  precheck: pass
 id: thm-rational-gorenstein-normal-surface-singularity-resolved-by-point-blowups
 kind: theorem
 title: "Rational Gorenstein normal surface singularities resolve by point blowups"
@@ -29,8 +32,7 @@ sources:
       url: "https://www.math.purdue.edu/~jlipman/papers-older/%5b1969%5d%20Rational%20singularities%20with%20applications%20to%20algebraic%20surfaces%20and%20unique%20factorization.pdf"
     - title: "Joseph Lipman, Desingularization of two-dimensional schemes (1978), pp.171\u2013174, (1.29) and fixed-coordinate termination"
       url: "https://www.math.purdue.edu/~jlipman/papers-older/%5b1978%5d%20Desingularization%20of%20two-dimensional%20schemes.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -41,7 +43,7 @@ Assume AC and DC. A rational Gorenstein normal local surface domain in the permi
 
 **Given:** A rational Gorenstein normal local surface domain $A$ in the permitted canonical-module setting with normal completion.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 
@@ -81,3 +83,25 @@ Assume AC and DC. A rational Gorenstein normal local surface domain in the permi
 
 - The proof is a finite-tree argument: termination of every branch plus finite branching gives a finite resolution.
 - All blowups are ordinary point blowups; no normalization occurs in this theorem.
+
+The following chain records the models of step 5.1, ordered after the finite tree of singular successors has been processed in ancestor order. Write $s$ for the closed point of $X_0=\operatorname{Spec}A$. Each $f_i:X_{i+1}\to X_i$ is the ordinary blowup at a singular closed point $p_i$ above $s$, and $X_N$ is regular. The intermediate $X_i$ are projective models over the local base, not spectra of the successor local rings.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.4,transform shape]
+\node (n) at (0,0) {$X_N$};
+\node (d1) at (1.5,0) {$\cdots$};
+\node (ip) at (3.1,0) {$X_{i+1}$};
+\node (i) at (5.2,0) {$X_i$};
+\node (d2) at (6.8,0) {$\cdots$};
+\node (zero) at (9.2,0) {$X_0=\mathrm{Spec}\,A$};
+\draw[->] (n) -- (d1);
+\draw[->] (d1) -- (ip);
+\draw[->] (ip) -- node[above] {$f_i$} (i);
+\draw[->] (i) -- (d2);
+\draw[->] (d2) -- (zero);
+\node[below] at (0,-0.35) {regular};
+\node[below] at (4.15,-0.35) {$X_{i+1}=\mathrm{Bl}_{p_i}X_i$};
+\end{tikzpicture}
+```
+
+All models retain normality, rational closed local rings and invertible canonical module (step 1.1). The composite is an isomorphism over $X_0\setminus\{s\}$ (step 6.1). Finiteness comes from the branch arguments in steps 2.1--4.1, rather than a prescribed length or unique choice of centres; the rigorous proof is independent of this illustration.

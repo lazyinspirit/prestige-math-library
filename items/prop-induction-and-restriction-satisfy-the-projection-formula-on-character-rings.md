@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings.json
+  precheck: pass
 id: prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings
 kind: proposition
 title: "Induction and restriction satisfy the projection formula on character rings"
@@ -18,9 +21,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Section 4.7-4.9"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
-  audited: 2026-08-30
-  precheck: pass
+
 ---
 
 ## Statement
@@ -57,3 +58,16 @@ in the character ring $R(G)$.
 3.1 So the identity holds for ordinary characters. By [F4], both induction and multiplication extend $\mathbb Z$-bilinearly to virtual characters, so the same pointwise identity holds for all $\chi\in R(H)$ and $\psi\in R(G)$. [F4, step 2.1, algebra]
 
 4.1 This pointwise equality is the projection formula in $R(G)$, and [F2] identifies the pointwise product on the right with the character-ring product coming from tensor products. The adjoint viewpoint from [F5] is compatible with it, but step 3.1 already proves the formula. [F2, F5, step 3.1] ∎
+
+## Remarks
+
+Fix $\psi\in R(G)$. Write $m_\psi(\eta)=\eta\psi$ for multiplication on $R(G)$ and $m_{\operatorname{Res}\psi}(\chi)=\chi\operatorname{Res}_H^G\psi$ for multiplication on $R(H)$. The projection formula says that the following square of additive maps commutes:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large]
+R(H) \arrow[r, "m_{\mathrm{Res}\psi}"] \arrow[d, "\mathrm{Ind}_H^G"'] & R(H) \arrow[d, "\mathrm{Ind}_H^G"] \\
+R(G) \arrow[r, "m_\psi"'] & R(G)
+\end{tikzcd}
+```
+
+Starting from $\chi$ at the upper left, the two paths give $\operatorname{Ind}_H^G(\chi\operatorname{Res}_H^G\psi)$ and $(\operatorname{Ind}_H^G\chi)\psi$. Thus induction respects the $R(G)$-action on $R(H)$ given by $\psi\cdot\chi=(\operatorname{Res}_H^G\psi)\chi$. For ordinary characters, the horizontal products are characters of tensor products, as in [F2]. Steps 1.1–4.1 establish the equality independently of this illustration.

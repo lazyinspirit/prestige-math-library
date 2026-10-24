@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ip-flexicast-link-loss-identifiability.json
+  precheck: pass
 id: thm-ip-flexicast-link-loss-identifiability
 kind: theorem
 title: "Link-loss identifiability from split and coverage"
@@ -23,13 +26,7 @@ sources:
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
       locator: "§3.1, PDF pp. 5–6 (printed pp. 28–29), reported split/coverage criterion and its exact model scope"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -72,3 +69,23 @@ Let $T=(V,E)$ and $\mathcal C=((C_d,N_d))_{d=1}^D$ be a finite-tree multicast lo
 3.1 The value $q_o=1$ is fixed; steps 1.1 and 2.1 determine $q_v$ for every other vertex. For each edge $e=(u,v)$, $p_e=q_v/q_u$, with $q_u>0$. Therefore equal experiment laws give equal $p_e$ on every edge, so $\mathsf L$ is injective. By [F3], the link-probability identity target is identifiable. [given, F1, F3, step 1.1, step 2.1, algebra]
 
 4.1 If the split/coverage condition fails, either a receiver is uncovered or a nonroot internal vertex is not split. Steps 1.2 and 1.3 give two distinct parameter vectors with the same full sampling law in either case. Thus injectivity of $\mathsf L$ implies the condition; together with step 3.1 this proves the equivalence. [F2, F3, step 1.2, step 1.3, step 3.1, algebra] ∎
+
+
+## Remarks
+
+The fork below is a concrete experiment with receivers $R=\{r,s\}$ and one design $C_1=\{r,s\}$, repeated any positive number $N_1$ of times. Both receivers are covered, and the design splits the only nonroot internal vertex $v$. Every arrow is one tree edge directed away from the root $o$; its label is its link-success probability.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (o) at (0,0) {$o$};
+\node (v) at (0,-1.4) {$v$};
+\node (r) at (-1.8,-2.8) {$r$};
+\node (s) at (1.8,-2.8) {$s$};
+\draw[->] (o) -- node[right] {$q_v=p_{(o,v)}$} (v);
+\draw[->] (v) -- node[above left] {$a_r=p_{(v,r)}$} (r);
+\draw[->] (v) -- node[above right] {$a_s=p_{(v,s)}$} (s);
+\node at (0,-3.5) {$C_1=\{r,s\}$};
+\end{tikzpicture}
+```
+
+For one probe of this design, $Y_r=X_{(o,v)}X_{(v,r)}$ and $Y_s=X_{(o,v)}X_{(v,s)}$. Independence therefore gives $m_r=q_va_r$, $m_s=q_va_s$, and $m_{rs}=q_va_ra_s$: the shared edge must succeed only once for both receivers to succeed. Thus $q_v=m_rm_s/m_{rs}$, as in step 2.1. All three factors lie in $(0,1)$; after recovering $q_v$, the two remaining link probabilities are $a_r=m_r/q_v$ and $a_s=m_s/q_v$. The general proof above uses whole path products in place of these single-edge products and remains independent of this illustration.

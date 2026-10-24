@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-three-core-and-three-quotient-by-abacus.json
+  precheck: pass
 id: ex-three-core-and-three-quotient-by-abacus
 kind: example
-title: "The three-core and three-quotient of (6,5,2,1^3) by abacus"
+title: "The three-core and three-quotient of $(6,5,2,1^3)$ by abacus"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -13,8 +16,6 @@ landmark: false
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 proof_strategy: direct
 sources:
   scraped: []

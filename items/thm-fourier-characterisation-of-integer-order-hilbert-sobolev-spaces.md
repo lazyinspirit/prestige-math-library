@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces.json
+  precheck: pass
 id: thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces
 kind: theorem
-title: "Integer-order W^{k,2} and H^k agree with equivalent norms"
+title: "Integer-order $W^{k,2}$ and $H^k$ agree with equivalent norms"
 status: published
 origin: pipeline
 deps:
@@ -32,13 +35,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"
@@ -58,7 +54,7 @@ the weak derivatives $D^\alpha f\in L^2(\mathbb R^n;\mathbb C)$ for
 $|\alpha|\le k$ and the norm
 $$\|f\|_{W^{k,2}}=\Bigl(\sum_{|\alpha|\le k}\|D^\alpha f\|_2^2\Bigr)^{1/2},$$
 and let $H^k=H^k(\mathbb R^n)$ be the real-order Bessel-potential completion
-of [[def-real-order-bessel-potential-sobolev-space]] with its canonical
+of [[def-real-order-bessel-potential-sobolev-space|Real-order Bessel-potential completion]] with its canonical
 embedding $E_k:H^k\to\mathcal S'(\mathbb R^n)$
 ([[thm-bessel-potential-completions-embed-in-tempered-distributions]]). Let
 $u_f\in\mathcal S'(\mathbb R^n)$ denote the regular tempered distribution of
@@ -112,7 +108,7 @@ $W^{k,p}$ formula is a genuine norm on classes
 [F3] The completion $H^s$ carries the norm
 $\|U\|_{H^s}=\lim_j\|\langle\xi\rangle^s\widehat u_j\|_2$ of Cauchy sequences,
 and $E_sU=\mathcal F^{-1}(u_{w_{-s}J_sU})$ is a linear injection
-([[def-real-order-bessel-potential-sobolev-space]],
+([[def-real-order-bessel-potential-sobolev-space|Real-order Bessel-potential completion]],
 [[thm-bessel-potential-completions-embed-in-tempered-distributions]]).
 
 [F4] For $s\in\mathbb R$ let
@@ -168,7 +164,9 @@ $r\to+\infty$ ([[thm-exponential-beats-every-polynomial]]).
 
 ## Proof
 
-**Proof technique:** compare the derivative-sum weight with the bracket weight and transfer the weighted tempered-distribution characterization. Throughout, $P_k(\xi)=\sum_{|\alpha|\le k}(2\pi)^{2|\alpha|}|\xi^\alpha|^2$ and $w_k(\xi)=\langle\xi\rangle^k$.
+**Proof technique:** compare the derivative-sum weight with the bracket weight and transfer the weighted tempered-distribution characterization.
+
+Throughout, $P_k(\xi)=\sum_{|\alpha|\le k}(2\pi)^{2|\alpha|}|\xi^\alpha|^2$ and $w_k(\xi)=\langle\xi\rangle^k$.
 
 1.1 Let $f\in W^{k,2}$ and $|\alpha|\le k$. By [F1] the class $D^\alpha f$ lies in $L^2$, and by [F2] the weak-derivative test identity for $(f,D^\alpha f)$ is equivalent to $\partial^\alpha u_f=u_{D^\alpha f}$; applying [F5] to the pair $(f,D^\alpha f)$ gives $\mathcal F_2(D^\alpha f)=(2\pi i\xi)^\alpha\mathcal F_2f$ almost everywhere, and [F7] gives $\|D^\alpha f\|_2=\|(2\pi i\xi)^\alpha\mathcal F_2f\|_2<\infty$. At $k=0$ this is $D^0f=f$ and the Plancherel identity. [F1, F2, F5, F7]
 

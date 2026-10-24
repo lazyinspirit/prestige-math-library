@@ -1,0 +1,78 @@
+{
+  "id": "def-linearity-test",
+  "agent": "/root/rendering_repair_coordinator/cpt_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile visibly prints F_2 with a baseline underscore. The local definition explicitly identifies the field as $\\mathbb F_2$, so this is intended subscripted mathematical notation, not an optional plain shorthand.",
+      "action": "Replaced only the title notation F_2 with $\\mathbb F_2$, retaining the same field and title wording.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added inline math delimiters and the existing body field notation to the title; no body or protected metadata changes.",
+  "source_lines_after": {
+    "4": "title: 'The BLR linearity test over $\\mathbb F_2$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "ffd1bfdd988ef242997bab18e38552e8c2bd1615bf432e5e1e4b2a5a0006ef2c",
+  "after_raw_sha256": "520dae9952079463d5f9483c4df690811cb4a10eb0e262c3a285d4670be34906",
+  "scope_check": "Exact comparison verifies that the sole raw source change is title line 4. Publication status and every other byte are unchanged.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-linearity-test.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-linearity-test.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-linearity-test.md",
+            "item_id": "def-linearity-test",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-linearity-test.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "check_history": "An initial title-edit script treated a dollar-sign replacement sequence specially, causing a missing YAML quote; rendercheck and the initial preview failed. Corrected the script using a replacement callback, restored all original non-title bytes, and reran every listed final check successfully. No pre-existing formatting failures were found.",
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/def-linearity-test--01.png",
+    "original_inspection": "Standalone view_image at original resolution.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt019-def-linearity-test-final/manifest.json",
+    "preview_manifest_sha256": "a2180a7d133501e53d13a111a63e7034f82134ed03d505470ce737998b4228d3",
+    "source_sha256": "520dae9952079463d5f9483c4df690811cb4a10eb0e262c3a285d4670be34906",
+    "preview_image": "research/math-library-rendering-repairs-2026-10-23/previews/cpt019-def-linearity-test-final/screenshots/def-linearity-test--01.png",
+    "preview_inspection": "Standalone view_image at original resolution: title now visibly shows blackboard-bold F with subscript 2, without literal underscore or raw TeX; the complete body remains readable.",
+    "preview_exit_code": 0,
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostics": 16
+  }
+}

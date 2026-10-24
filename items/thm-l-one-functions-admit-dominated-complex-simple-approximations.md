@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-l-one-functions-admit-dominated-complex-simple-approximations.json
+  precheck: pass
 id: thm-l-one-functions-admit-dominated-complex-simple-approximations
 kind: theorem
-title: "Every L^1 function admits dominated complex simple approximations"
+title: "Every $L^1$ function admits dominated complex simple approximations"
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-complex-simple-function, def-integrable-real-and-complex-functions-and-their-integrals, def-positive-and-negative-parts-of-a-function, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   references:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, §3A and §6B"

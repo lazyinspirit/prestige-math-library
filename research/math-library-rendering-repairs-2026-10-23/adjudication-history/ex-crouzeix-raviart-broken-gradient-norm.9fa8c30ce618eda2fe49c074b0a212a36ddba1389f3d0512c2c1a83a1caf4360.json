@@ -1,0 +1,76 @@
+{
+  "id": "ex-crouzeix-raviart-broken-gradient-norm",
+  "agent": "/root/rendering_repair_coordinator/npde_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-tikz-rendering",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile prints the entire raw tikzpicture as prose. The source lacks the fenced tikz carrier recognized by MathMarkdown; this is a missing supported diagram fence, not a geometric error or a failed TeX compilation.",
+      "action": "Enclosed the existing tikzpicture in a tikz code fence outside Facts and Verification.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-label-contrast-and-overlap",
+      "verdict": "confirmed",
+      "reason": "Once the original diagram was compiled locally, K1 and K2 inherited light currentColor over pale fills and were invisible; explicit black was also normalized to currentColor. After retaining dark-gray labels, the fresh native preview exposed overlap of the original K2 and F label positions.",
+      "action": "Set only K1/K2 node text to black!90 and moved the F label anchor from (0.5,0.5) to (0.75,0.75), still on the same diagonal, to separate the labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the supported TikZ fence and adjusted only diagram label contrast and F label placement. All triangle geometry, claims, proof, dependencies, title, sources and frontmatter remain unchanged.",
+  "source_lines_after": [
+    51,
+    52,
+    62,
+    63,
+    64,
+    65,
+    66
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Unit-square triangulation and actual segments",
+      "result": "K1 vertices (0,0),(1,0),(1,1) give y<=x; K2 vertices (0,0),(0,1),(1,1) give x<=y. Label positions (0.72,0.35) and (0.28,0.65) lie strictly on those respective sides. The rendered square has all four outer segments and the red segment (0,0) to (1,1). The coordinate-based --cycle closes correctly; no added closure is needed."
+    },
+    {
+      "check": "CR edge degrees of freedom",
+      "result": "The local-face-unisolvence supplier proves that affine edge means equal midpoint values. On the diagonal midpoint (1/2,1/2), both v1=1-2x+2y and v2=1+2x-2y equal 1. On bottom/right midpoints (1/2,0),(1,1/2), v1=0; on left/top midpoints (0,1/2),(1/2,1), v2=0. Thus the four corner dots denote geometric vertices, not CR degrees of freedom; F denotes the only interior edge. This agrees with local/global space and global-face-basis suppliers."
+    },
+    {
+      "check": "Broken gradient and homogeneous mean boundary condition",
+      "result": "Verification 1.1 gives gradients (-2,2) and (2,-2), each with squared length 8. Two area-1/2 triangles yield squared L2 broken-gradient norm 8 and norm 2 sqrt(2). The bottom trace 1-2x has integral zero but is not identically zero. No pointwise boundary condition or continuity claim is added by the figure."
+    },
+    {
+      "check": "Proof independence",
+      "result": "The full two-step Verification derives the polynomials, gradients, norm and edge-mean conditions algebraically from F1/F2, without invoking the diagram."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": "proof-layout: 1 items, 2 steps, 0 defects",
+    "precheck": "1 checked, 0 failed; pass, direct strategy",
+    "rendercheck": "1 checked; errors [], warnings []",
+    "metadata": "Full frontmatter byte-identical to frozen before, including status: published",
+    "final_source_sha256": "3d5f7c7e843cb2944431b2659e9e02482daa6dd0c0f96b7f8df2dce0f15142d6",
+    "preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/npde004-final-spaced/",
+      "standalone_original_resolution_reviewed": true,
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "screenshot_sha256": "c6deacc5b629d84732d8e7ae024e2a1f0fd7cdd8c75e4dfeca46097e9ec320f9",
+      "visual_result": "Reviewed fresh native local screenshot at original resolution: closed square, two filled triangles, red diagonal, coordinate labels and separated K1/K2/F labels; no diagram clipping."
+    }
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview only; no production HTTP route visited. Preview reference map reports 16 unrelated parse diagnostics."
+  ]
+}

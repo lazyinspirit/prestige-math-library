@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-commensurable-subspaces-and-ideals-of-endomorphisms.json
+  precheck: n/a
 id: def-commensurable-subspaces-and-ideals-of-endomorphisms
 kind: definition
-title: "Commensurable subspaces and the ideals E_0, E_1, E_2 of E"
+title: "Commensurable subspaces and the ideals $E_0$, $E_1$, $E_2$ of $E$"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -19,9 +22,7 @@ sources:
   references:
     - title: "John Tate, Residues of differentials on curves, Ann. Sci. E.N.S. (4) 1 (1968) 149-159"
       url: "http://www.numdam.org/article/ASENS_1968_4_1_1_149_0.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Definition

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-signed-infinite-product-square-summability-criterion.json
+  precheck: pass
 id: thm-signed-infinite-product-square-summability-criterion
 kind: theorem
-title: "Under square summability, the signed product of (1+p_n) converges iff the series of p_n converges"
+title: "Under square summability, the signed product of $(1+p_n)$ converges iff the series of $p_n$ converges"
 status: published
 origin: session
 authorship: ai-altered
@@ -13,9 +16,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-02
 sources:
   scraped: []
   references:
@@ -38,7 +38,7 @@ The product uses the tail convention of [[def-infinite-product]], so finitely ma
 
 [L1] A convergent series has terms tending to zero ([[lem-nth-term-test]]).
 
-[L2] $\log(1+t)=t+\sum_{k\ge2}(-1)^{k+1}t^k/k$ for $|t|<1$ ([[thm-log-one-plus-x-power-series]]).
+[L2] $\log(1+t)=t+\sum_{k\ge2}(-1)^{k+1}t^k/k$ for $|t|<1$ ([[thm-log-one-plus-x-power-series|logarithm power series]]).
 
 [L3] Direct comparison and absolute convergence give convergence of a series dominated by a convergent nonnegative series ([[thm-direct-comparison-test]], [[lem-absolute-convergence-implies-convergence]]).
 

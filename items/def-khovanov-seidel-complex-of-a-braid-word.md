@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-khovanov-seidel-complex-of-a-braid-word.json
+  precheck: pass
 id: def-khovanov-seidel-complex-of-a-braid-word
 kind: definition
 title: "The complex of a braid word"
@@ -25,18 +28,13 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Definition 2.6 and the following paragraph"
       url: "https://arxiv.org/pdf/math/0006056"
       locator: "Definition 2.6 and the paragraph defining R_sigma, printed p. 14"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Definition
 
 Fix $m\ge1$ and let $R_i,R_i^{-1}$ be the twist complexes of
-[[def-khovanov-seidel-positive-and-negative-twist-complexes]], built from
+[[def-khovanov-seidel-positive-and-negative-twist-complexes|The positive and negative twist complexes]], built from
 $\beta_i,\gamma_i$ of [[def-khovanov-seidel-beta-and-gamma-bimodule-maps]] and
 acting on $C_m=K^b(\operatorname{proj}^{gr}A_m)$. Fix a word
 $$\sigma=\tau_1\tau_2\cdots\tau_k,\qquad \tau_\ell\in\{\sigma_i^{\pm1}:1\le i\le m\},$$
@@ -45,7 +43,7 @@ $$R_{\sigma_i}:=R_i,\qquad R_{\sigma_i^{-1}}:=R_i^{-1},\qquad R_{1}:=A_m,$$
 the last being the diagonal bimodule $A_m$ concentrated in homological degree
 $0$. The **complex of the word** $\sigma$ is the iterated signed totalization
 $$R_\sigma:=R_{\tau_1}\otimes_{A_m}R_{\tau_2}\otimes_{A_m}\cdots\otimes_{A_m}R_{\tau_k}$$
-of [[def-signed-totalization-of-graded-a-m-bimodule-actions]], and $R_\sigma$
+of [[def-signed-totalization-of-graded-a-m-bimodule-actions|Signed totalization of graded bimodule actions]], and $R_\sigma$
 also denotes the endofunctor
 $$R_\sigma\colon C_m\to C_m,\qquad M\mapsto R_\sigma\otimes_{A_m}M .$$
 
@@ -67,9 +65,9 @@ is the content of the weak action theorem below and is **not** asserted here.
 
 [L2] For an $(A_m,A_m)$-bimodule $M$ and an integer $r$ there is a canonical degree-zero isomorphism of graded $(A_m,A_m)$-bimodules $M\otimes_{A_m}A_m\{r\}\cong M\{r\}$ and, symmetrically, $A_m\{r\}\otimes_{A_m}N\cong N\{r\}$ for a graded left $A_m$-module $N$, both given on elementary tensors by multiplication ([[lem-graded-balanced-tensor-and-shift-isomorphisms]]).
 
-[L3] The signed totalization $(R\otimes_{A_m}S)^n=\bigoplus_{p+q=n}R^p\otimes_{A_m}S^q$ of two bounded complexes of graded bimodules is a bounded complex of graded bimodules with $d(r\otimes s)=d_Rr\otimes s+(-1)^pr\otimes d_Ss$; the construction is functorial and associative up to canonical degree-zero isomorphism ([[def-signed-totalization-of-graded-a-m-bimodule-actions]]).
+[L3] The signed totalization $(R\otimes_{A_m}S)^n=\bigoplus_{p+q=n}R^p\otimes_{A_m}S^q$ of two bounded complexes of graded bimodules is a bounded complex of graded bimodules with $d(r\otimes s)=d_Rr\otimes s+(-1)^pr\otimes d_Ss$; the construction is functorial and associative up to canonical degree-zero isomorphism ([[def-signed-totalization-of-graded-a-m-bimodule-actions|Signed totalization of graded bimodule actions]]).
 
-[L4] $R_i$ and $R_i^{-1}$ are bounded complexes of graded $(A_m,A_m)$-bimodules with degree-zero differentials, and every term of either is finitely generated graded projective on the left and on the right ([[def-khovanov-seidel-positive-and-negative-twist-complexes]]).
+[L4] $R_i$ and $R_i^{-1}$ are bounded complexes of graded $(A_m,A_m)$-bimodules with degree-zero differentials, and every term of either is finitely generated graded projective on the left and on the right ([[def-khovanov-seidel-positive-and-negative-twist-complexes|The positive and negative twist complexes]]).
 
 [L5] For a bounded complex $R$ of graded $(A_m,A_m)$-bimodules whose every term is finitely generated graded projective as a left and as a right $A_m$-module, the functor $R\otimes_{A_m}-$ is a well-defined additive exact endofunctor of $C_m$ sending distinguished triangles to distinguished triangles, and it agrees with the derived tensor product through the identity replacements ([[lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m]]).
 

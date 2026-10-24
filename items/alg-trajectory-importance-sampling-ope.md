@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-trajectory-importance-sampling-ope.json
+  precheck: n/a
 id: alg-trajectory-importance-sampling-ope
 kind: algorithm
 title: "Ordinary, per-decision, and weighted trajectory importance sampling"
@@ -17,12 +20,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -63,3 +60,26 @@ The procedure specifies estimators; it includes no finite-sample unbiasedness as
 [Jiang and Li, Doubly Robust Off-policy Value Evaluation for Reinforcement Learning](https://proceedings.mlr.press/v48/jiang16.pdf)
 
 [Levine, Kumar, Tucker, and Fu, Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems](https://arxiv.org/pdf/2005.01643)
+
+## Remarks
+
+For illustration, take $H=3$ and suppress the trajectory index $i$. Each action ratio extends the prefix weight through the reward on that transition. Thus OIS applies the final weight to the whole return, whereas PDIS applies a different prefix weight to each reward:
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (s0) at (0,0) {$S_0$};
+\node (s1) at (3,0) {$S_1$};
+\node (s2) at (6,0) {$S_2$};
+\node (s3) at (9,0) {$S_3$};
+\draw[->] (s0) -- node[above] {$A_0,\ R_1$} node[below] {$\rho_0$} (s1);
+\draw[->] (s1) -- node[above] {$A_1,\ R_2$} node[below] {$\rho_1$} (s2);
+\draw[->] (s2) -- node[above] {$A_2,\ R_3$} node[below] {$\rho_2$} (s3);
+\node at (1.5,-1.1) {$W_0=\rho_0$};
+\node at (4.5,-1.1) {$W_1=\rho_0\rho_1$};
+\node at (7.5,-1.1) {$W_2=\rho_0\rho_1\rho_2$};
+\node[anchor=west] at (0,-2.1) {$\mathrm{OIS:}\quad W_2(R_1+\gamma R_2+\gamma^2 R_3)$};
+\node[anchor=west] at (0,-2.9) {$\mathrm{PDIS:}\quad W_0R_1+\gamma W_1R_2+\gamma^2W_2R_3$};
+\end{tikzpicture}
+```
+
+The bottom rows are the contributions of one trajectory before averaging over the dataset. For the same horizon, WIS sums the OIS contributions over trajectories and divides by $\sum_iW_{i,2}$ when that denominator is positive, using the stated zero convention otherwise. This self-normalization carries no finite-sample unbiasedness assertion. The diagram is explanatory; the procedure and its justification are independent of it.

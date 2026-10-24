@@ -1,0 +1,25 @@
+---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-borel-product-equality-needs-second-countability.json
+  precheck: n/a
+id: rem-borel-product-equality-needs-second-countability
+kind: remark
+title: 'The equality $\mathcal B(X)\otimes\mathcal B(Y) = \mathcal B(X\times Y)$ needs second countability'
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [thm-borel-products-of-euclidean-spaces-are-euclidean-borel, def-second-countable-space]
+sources:
+  references:
+    - title: "John K. Hunter, Measure Theory, Proposition 5.3"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+---
+
+The proof of
+[[thm-borel-products-of-euclidean-spaces-are-euclidean-borel]] uses the fact
+that every open subset of the product is a countable union of open rectangles.
+That countable basis input is exactly where second countability enters. Without
+it, $\mathcal B(X)\otimes\mathcal B(Y)$ can be strictly smaller than
+$\mathcal B(X \times Y)$.

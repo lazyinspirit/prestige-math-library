@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-elliptic-cubic-chord-tangent-group-law.json
+  precheck: pass
 id: thm-elliptic-cubic-chord-tangent-group-law
 kind: theorem
 title: "The chord-tangent group law and elliptic uniformization"
@@ -45,9 +48,7 @@ sources:
     - title: "C. T. McMullen, Advanced Complex Analysis, Math 213a notes (2 Dec 2025), Ch. 5 §5.2, Theorem 5.16 and Corollaries 5.17-5.20, pp. 148-150"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213a/course/course.pdf
       locator: "Ch. 5 §5.2, Theorem 5.16 and Corollaries 5.17-5.20, printed pp. 148-150."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -152,3 +153,43 @@ $\oplus$. Then:
 ## Remarks
 
 The point of the proof is that the group law is not postulated on the cubic: it is transported from the torus along the biholomorphism $\Phi$, so associativity and the identity cost nothing, and the content of the theorem is the agreement of the transported law with the line construction. For a nonvertical secant the third intersection point has $x$-coordinate $\tfrac14m^2-x_1-x_2$ by Vieta, which the addition formula identifies with $\wp(z_1+z_2)$, and the differentiated addition identity supplies the sign of its $y$-coordinate; this is the algebraic form of the classical statement that the third point is $\Phi(-z_1-z_2)$. Repeated intersections are handled by the same two identities evaluated on the diagonal, which is legitimate because the derivative quotients extend continuously; the vertical and infinity cases are the two lines through $O$ missed by the nonvertical normal form, and their multiplicities come from the local parameter $u$ and the graph at $O$. Nothing here uses the sigma function or the Weierstrass product; the only analytic inputs are the addition formula, the cubic differential equation and the local structure of the smooth cubic.
+
+
+The following real affine illustration uses the nonsingular model $y^2=4x^3-4x$ (discriminant $64$), not a picture of an arbitrary complex cubic. Each panel shows the same curve, with the vertical scale compressed. In the secant panel $L:y=2x$ has three simple intersections $P,Q,R$; the dashed arrow reflects $R$ to $-R=P\oplus Q$. In the tangent panel $T$ has divisor $2A+B$, so the reflected point is $-B=A\oplus A$. The vertical panel has divisor $V+(-V)+O$; its arrows indicate the projective direction toward the same point $O=[0:1:0]$, not extra affine intersections. The line at infinity is not drawn: it has divisor $3O$. At a root of $4x^3-4x$, the vertical case instead has divisor $2V+O$. These are the constructions of steps 1.1, 2.2, 2.3, 3.2 and 4.1; the proof above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[x=1.15cm,y=0.48cm, font=\small]
+\foreach \s in {0,4.3,8.6} {
+  \begin{scope}[shift={(\s,0)}]
+  \draw[gray,->] (-1.35,0)--(2.15,0) node[right] {$x$};
+  \draw[gray,->] (0,-4.9)--(0,5.0);
+  \draw[thick,blue] plot[domain=-1:0,samples=100] (\x,{sqrt(max(0,4*\x*\x*\x-4*\x))});
+  \draw[thick,blue] plot[domain=-1:0,samples=100] (\x,{-sqrt(max(0,4*\x*\x*\x-4*\x))});
+  \draw[thick,blue] plot[domain=1:1.9,samples=100] (\x,{sqrt(4*\x*\x*\x-4*\x)});
+  \draw[thick,blue] plot[domain=1:1.9,samples=100] (\x,{-sqrt(4*\x*\x*\x-4*\x)});
+  \end{scope}
+}
+\draw[red] (-1,-2)--(1.95,3.9) node[right] {$L$};
+\fill (-0.618034,-1.236068) circle (1.5pt) node[below left] {$P$};
+\fill (0,0) circle (1.5pt) node[above left] {$Q$};
+\fill (1.618034,3.236068) circle (1.5pt) node[above left] {$R$};
+\draw[dashed,->] (1.618034,3.08)--(1.618034,-3.08);
+\fill (1.618034,-3.236068) circle (1.5pt) node[right] {$-R$};
+\node at (0.45,-5.8) {Secant: $P\oplus Q=-R$};
+\begin{scope}[shift={(4.3,0)}]
+\draw[red] (-1.2,1.51093)--(1.95,0.22454) node[right] {$T$};
+\fill (-0.5,1.224745) circle (1.5pt) node[above] {$A\ (2)$};
+\fill (1.041667,0.595362) circle (1.5pt) node[above right] {$B$};
+\draw[dashed,->] (1.041667,0.48)--(1.041667,-0.48);
+\fill (1.041667,-0.595362) circle (1.5pt) node[below right] {$-B$};
+\node at (0.45,-5.8) {Tangent: $A\oplus A=-B$};
+\end{scope}
+\begin{scope}[shift={(8.6,0)}]
+\draw[red,<->] (1.5,-4.7)--(1.5,4.7);
+\node[above] at (1.5,4.7) {toward $O$};
+\fill (1.5,2.738613) circle (1.5pt) node[left] {$V$};
+\fill (1.5,-2.738613) circle (1.5pt) node[left] {$-V$};
+\node at (0.45,-5.8) {Vertical: $V\oplus(-V)=O$};
+\end{scope}
+\end{tikzpicture}
+```

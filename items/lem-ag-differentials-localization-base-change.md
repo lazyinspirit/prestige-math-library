@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ag-differentials-localization-base-change.json
+  precheck: pass
 id: "lem-ag-differentials-localization-base-change"
 kind: "lemma"
 title: "Localization, base change and functoriality of differentials"
@@ -15,8 +18,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §§22.2.K–L, pp.583–584"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Statement
@@ -49,3 +51,29 @@ For a general algebra map $B\to C$ this map is neither asserted injective nor as
 1.2 For (2), write $B_U:=U^{-1}B$ and let $D\colon B_U\to U^{-1}\Omega_{B/A}$ be $D(b/u):=(1/u)\mathrm{d}b-(b/u^{2})\mathrm{d}u$, an element of $U^{-1}\Omega_{B/A}$. This is well defined: if $b/u=b'/u'$ in $B_U$, there is $w\in U$ with $wx=0$ for $x:=bu'-b'u$, and applying $\mathrm{d}$ to $wx=0$ gives $w\,\mathrm{d}x=-x\,\mathrm{d}w$; multiplying by $u^{2}u'^{2}$ and writing $G:=u'^{2}(u\,\mathrm{d}b-b\,\mathrm{d}u)-u^{2}(u'\,\mathrm{d}b'-b'\,\mathrm{d}u')$, this yields $wG=-x\,(uu'\,\mathrm{d}w+wu\,\mathrm{d}u'+wu'\,\mathrm{d}u)$. In $U^{-1}\Omega_{B/A}$ the class of $x$ is zero, because $wx=0$ and $w$ becomes invertible, so the class of $wG$ is zero; since $w$ also becomes invertible as a scalar, the class of $G$ is zero, which is exactly $D(b/u)=D(b'/u')$. The map $D$ is additive and kills $V^{-1}A$; for the Leibniz rule one uses the relations implied by $\mathrm{d}(uu^{-1})=0$, namely $\mathrm{d}(u^{-1})=-u^{-2}\mathrm{d}u$ inside $U^{-1}\Omega_{B/A}$, after which the product rule for fractions follows from the product rule for $\mathrm{d}$. Hence $D$ is a $V^{-1}A$-derivation and [F1] for the $V^{-1}A$-algebra $B_U$ gives a $B_U$-linear $\psi\colon\Omega_{B_U/V^{-1}A}\to U^{-1}\Omega_{B/A}$ with $\psi(\mathrm{d}(b/u))=D(b/u)$. Conversely $b\mapsto\mathrm{d}(b/1)$ is an $A$-derivation of $B$ into $\Omega_{B_U/V^{-1}A}$, so [F1] gives a $B$-linear $\Omega_{B/A}\to\Omega_{B_U/V^{-1}A}$ with $\mathrm{d}b\mapsto\mathrm{d}(b/1)$, and under the identification $U^{-1}\Omega_{B/A}\cong(U^{-1}B)\otimes_B\Omega_{B/A}$ of [F3] the balanced assignment $(c,\omega)\mapsto c\cdot(\text{image of }\omega)$ yields the $B_U$-linear $\varphi\colon U^{-1}\Omega_{B/A}\to\Omega_{B_U/V^{-1}A}$ with $\varphi((b/u)\mathrm{d}b')=(b/u)\mathrm{d}(b'/1)$. On generators, $\varphi(\psi(\mathrm{d}(b/u)))=\varphi((1/u)\mathrm{d}b-(b/u^{2})\mathrm{d}u)=(1/u)\mathrm{d}(b/1)-(b/u^{2})\mathrm{d}(u/1)=\mathrm{d}(b/u)$, the last equality being the Leibniz rule applied to $b/u=(b/1)(u/1)^{-1}$ together with $\mathrm{d}((u/1)^{-1})=-(u/1)^{-2}\mathrm{d}(u/1)$; and $\psi(\varphi((1/u)\mathrm{d}b))=\psi((1/u)\mathrm{d}(b/1))=(1/u)D(b/1)=(1/u)\mathrm{d}b$. Both composites are module maps fixing generating sets, so they are inverse and $\varphi$ is the isomorphism of (2). [F1, F3, algebra]
 
 2.1 For (3) let $B\to C$ be an $A$-algebra map. The map $b\mapsto\mathrm{d}(1\otimes b)$ from $B$ to the $C$-module $\Omega_{C/A}$ is additive and $A$-constant and satisfies Leibniz, since $b\mapsto1\otimes b$ is a ring homomorphism and $\mathrm{d}$ is an $A$-derivation; here $1\otimes b$ denotes the image of $b$ in $C$ when $C$ is written as a $B$-algebra. So it is an $A$-derivation, [F1] turns it into a $B$-linear map $\Omega_{B/A}\to\Omega_{C/A}$, and extension of scalars along $B\to C$ gives the $C$-linear map of (3). For $C=B\otimes_AA'$, composing this map with the canonical map $\Omega_{C/A}\to\Omega_{C/A'}$ gives the base-change isomorphism of step 1.1: both send $1\otimes\mathrm{d}b$ to $\mathrm{d}(b\otimes1)$. The map before this composition need not be an isomorphism. For $C=U^{-1}B$, step 1.2 with $V=\{1\}$ does identify the functorial map with a localization isomorphism. No injectivity or surjectivity is claimed for a general $B\to C$. [step 1.1, step 1.2, F1, given] ∎
+
+## Remarks
+
+The ring maps underlying base change and localization fit into the following commutative squares. Write $f\colon A\to B$ for the given map and $g\colon A\to A'$ for the base-change map.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, every cell/.append style={font=\Large}, labels={font=\large}]
+A \arrow[r,"f"] \arrow[d,"g"'] & B \arrow[d,"i"] & A \arrow[r,"f"] \arrow[d,"\ell_A"'] & B \arrow[d,"\ell_B"] \\
+A' \arrow[r,"j"'] & B' & V^{-1}A \arrow[r,"\bar f"'] & U^{-1}B
+\end{tikzcd}
+```
+
+Here $i(b)=b\otimes1$ and $j(a')=1\otimes a'$. The left square is the tensor-product pushout of [F2]: $i(f(a))=j(g(a))$. On the right, $\ell_A(a)=a/1$, $\ell_B(b)=b/1$, and $\bar f(a/v)=f(a)/f(v)$; the hypothesis $f(V)\subseteq U$ makes $\bar f$ well defined. This square commutes because both paths take $a$ to $f(a)/1$.
+
+For $B'=B\otimes_AA'$, the differential comparison is the commutative triangle of $B'$-modules below. The tensor product in its upper-left corner is over $B$, whereas the two differential modules on the right have different base rings.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, every cell/.append style={font=\Large}, labels={font=\large}]
+B'\otimes_B\Omega_{B/A} \arrow[r,"\alpha"] \arrow[dr,"\varphi"',"\cong"] & \Omega_{B'/A} \arrow[d,"q"] \\
+& \Omega_{B'/A'}
+\end{tikzcd}
+```
+
+The map $\alpha$ is the functorial comparison of (3) for $i$, and $q$ sends $\mathrm{d}_{B'/A}x$ to $\mathrm{d}_{B'/A'}x$. Thus $q\alpha=\varphi$: on $1\otimes\mathrm{d}b$, both paths give $\mathrm{d}_{B'/A'}(b\otimes1)$, as in step 2.1. Only $\varphi$ is marked as an isomorphism here. Its inverse is induced by the $A'$-derivation $D(b\otimes a')=a'(1\otimes\mathrm{d}b)$ from step 1.1. For localization, step 1.2 instead uses $D(b/u)=u^{-1}\mathrm{d}b-bu^{-2}\mathrm{d}u$ and identifies $U^{-1}\Omega_{B/A}$ with $\Omega_{U^{-1}B/V^{-1}A}$; [F3] identifies its source with $(U^{-1}B)\otimes_B\Omega_{B/A}$.
+
+These diagrams illustrate the maps already constructed in the proof; the proof is independent of the figures.

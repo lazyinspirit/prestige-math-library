@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-nevanlinna-error-bound-without-exceptional-radii.json
+  precheck: pass
 id: cex-nevanlinna-error-bound-without-exceptional-radii
 kind: counterexample
 title: "Exceptional radii cannot be removed from the logarithmic-derivative estimate"
@@ -25,8 +28,7 @@ sources:
     - title: "Alexandre Eremenko, Lectures on Nevanlinna Theory, §6"
       url: "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf"
       locator: "§6, printed pp. 12–13: the logarithmic-derivative lemma and its exceptional set"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Statement refuted
@@ -51,7 +53,7 @@ valid at every radius.
 
 ## Counterexample
 
-**Proof technique:** build the Hayman lacunary series $\sum_n(z/r_n)^{\lambda_n}$ with super-exponentially growing exponents, estimate it from above and its derivative from below on the lacunary circles, and compare the standard proximity of $f'/f$ with the characteristic of $f$.
+**Proof technique:** build the Hayman lacunary series with super-exponentially growing exponents, estimate it from above and its derivative from below on the lacunary circles, and compare the standard proximity of the logarithmic derivative with the characteristic of the original function.
 
 1.1 Set $r_n:=2^{n-1}$ and define integers $\lambda_1:=2$, $\lambda_{n+1}:=4n\lambda_n2^{n\lambda_n}+n+1$ for $n\ge1$. Then $\lambda_n$ is strictly increasing with $\lambda_n>n$ and $\lambda_n\ge2^n$, and $\lambda_{n+1}\ge4n\lambda_n2^{n\lambda_n}\ge16n\lambda_n$ for every $n$. [construct, algebra]
 

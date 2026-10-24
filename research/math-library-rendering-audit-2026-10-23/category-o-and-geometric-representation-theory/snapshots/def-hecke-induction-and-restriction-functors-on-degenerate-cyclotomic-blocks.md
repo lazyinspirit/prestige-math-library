@@ -1,0 +1,73 @@
+---
+id: def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks
+kind: definition
+title: "Hecke induction and restriction functors on degenerate cyclotomic blocks"
+status: published
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 35
+deps: [def-degenerate-cyclotomic-hecke-algebra,
+       def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality,
+       def-axiom-of-choice,
+       thm-chinese-remainder-theorem-for-comaximal-ideals]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)"
+      url: "https://arxiv.org/pdf/0901.0057"
+      locator: "Section 3.3, the embedding iota : H^m_d -> H^m_{d+1}, (3.16)-(3.20), printed pp. 24-25: the maps iota_{alpha,alpha_i}, the idempotents e_{alpha,alpha_i}, the induction and restriction functors f_i and e_i, their biadjunction (citing [K, Lemma 8.2.2]) and their commutativity with the duality *."
+    - title: "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)"
+      url: "https://arxiv.org/pdf/math/0508003"
+      locator: "Chapter 6, Section 6.2, printed pp. 60-66: the embedding H_d into H_{d+1}, the block idempotents and the identification of the induced module with H_{d+1}u tensor_{H_d} M."
+verification:
+  precheck: pass
+---
+
+## Definition
+
+Assume inherited AC [[def-axiom-of-choice]] for the invoked cyclotomic PBW supplier. Fix a multiset of complex roots $\mathbf a=(a_1,\ldots,a_l)$ with $l\ge1$, allowing repeated roots. Write $B=H_d(\mathbf a)$ and $A=H_{d+1}(\mathbf a)$ for [[def-degenerate-cyclotomic-hecke-algebra]]. The generator-preserving tower map embeds $B$ in $A$.
+
+For every generalized eigenvalue $i$ of $x_{d+1}$ in the regular representation of $A$, let $u_i\in\mathbb C[x_{d+1}]$ be its polynomial generalized-eigenspace projector. All such eigenvalues lie in $\bigcup_j(a_j+\mathbb Z)$. These are additive residue chains, separately indexed in each coset of $\mathbb C/\mathbb Z$; coincident roots do not give extra projectors. The $u_i$ are mutually orthogonal, sum to one, commute with $B$ and satisfy $u_i^*=u_i$. They need not be central in $A$.
+
+For finite-dimensional left modules define the residue functors
+$$e_i(M)=u_iM,\qquad f_i(N)=Au_i\otimes_BN.$$
+Here the first functor takes its $B$-action from the tower inclusion and the second takes its $A$-action from the first factor. They are exact and biadjoint and commute naturally with the generator-fixing $*$-duality. Consequently they preserve projectives and induce adjoint operators for the projective/module Hom pairing. Projecting further by source and target content idempotents gives the supported-block functors. Neither primitivity of a central content projector nor equality $B=u_iAu_i$ is needed or asserted here. Actual image towers in admissible stable realizations use the compatible projected tensor actions of [[def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality]].
+
+For level zero use $H_0(\varnothing)=\mathbb C$ and $H_d(\varnothing)=0$ for $d>0$. The map $H_0\to H_1$ is the zero homomorphism $\mathbb C\to0$, so it is not an embedding. Every positive-degree residue induction and restriction functor is zero; all biadjunction and exactness assertions then hold for zero functors.
+
+## Facts & Assumptions
+
+**Given:** The roots $\mathbf a$ with $l\ge1$, the algebras $B=H_d(\mathbf a)$ and $A=H_{d+1}(\mathbf a)$, finite-dimensional left modules, and inherited AC for the PBW supplier. We prove the nonzero-level assertions and then the level-zero convention.
+
+[F1] The bounded PBW basis, polynomial-degree filtration and associated graded algebra are $\operatorname{gr}H_n=\mathbb C[X_1,\ldots,X_n]/(X_1^l,\ldots,X_n^l)\rtimes\mathbb C[S_n]$. The generator-fixing anti-involution $*$ and the nondegenerate symmetric trace $\tau_n$ given by the coefficient of $x_1^{l-1}\cdots x_n^{l-1}\cdot1$ are supplied by [[def-degenerate-cyclotomic-hecke-algebra]]. These hold for every complex root multiset, including repeated roots.
+
+[F2] Finite Chinese remainder interpolation gives the generalized-eigenspace polynomial projectors for a finite-dimensional operator ([[thm-chinese-remainder-theorem-for-comaximal-ideals]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 **The tower map and both finite free structures.** The first $d$ dot and crossing generators in $A$ satisfy the relations of $B$, including the same cyclotomic polynomial in $x_1$. Their bounded PBW words are a subset of the bounded basis of $A$, so the generator-preserving homomorphism is injective. Let $w_t=s_t\cdots s_d$ for $1\le t\le d$ and $w_{d+1}=1$; these are the minimal right $S_d$ coset representatives in $S_{d+1}$, with $w_t(d+1)=t$. The elements $w_tx_{d+1}^r$, $0\le r<l$, form a right $B$-basis of $A$. Indeed multiply them by the bounded PBW basis of $B$. In the associated graded algebra their symbols are the distinct bounded words obtained by permuting the first $d$ dot exponents by $w_t$ and placing exponent $r$ in the omitted position $t$, with permutation $w_tv$, $v\in S_d$. These run over exactly all bounded words of $\operatorname{gr}A$, so filtered leading-degree induction proves that the products form a basis of $A$. Applying $*$ gives the left $B$-basis $\eta_{t,r}=x_{d+1}^rw_t^{-1}$. Thus both ranks are $l(d+1)$, and this is valid without any separation of roots. [F1, given, construct, algebra]
+
+2.1 **An actual relative Frobenius trace.** Use the two symmetric traces to define $t:A\to B$ uniquely by $\tau_d(bt(a))=\tau_{d+1}(ba)$ for every $b\in B$. Nondegeneracy of $\tau_d$ proves existence and uniqueness. Cyclicity of both traces gives $t(b_1ab_2)=b_1t(a)b_2$, so $t$ is a $B$-bimodule map. The map $\Phi:A\to\operatorname{Hom}_B({}_BA,{}_BB)$, $\Phi(a)(c)=t(ca)$, is an $(A,B)$-bimodule isomorphism, where the left action on Hom is $(a\cdot h)(c)=h(ca)$ and its right action is multiplication on the output. To see invertibility directly, $h\mapsto\tau_d\circ h$ identifies this Hom space with $D_{\mathbb C}A$: given $\lambda\in D_{\mathbb C}A$, define $h(c)$ by $\tau_d(bh(c))=\lambda(bc)$, which is uniquely determined and $B$-linear. The symmetric $A$-trace identifies $A$ with $D_{\mathbb C}A$ by $a\mapsto[c\mapsto\tau_{d+1}(ca)]$. Their composite is precisely $\Phi$, including both bimodule actions. This proves the Frobenius extension identity using the two traces and the actual finite extension, rather than assuming tensor products commute with linear duality. [F1, step 1.1, construct, algebra]
+
+2.2 **The projectors and residue chains.** For each regular-spectrum eigenvalue $i$ of $x_{d+1}$, apply [F2] to its annihilating polynomial to obtain $u_i\in\mathbb C[x_{d+1}]$. Since the regular representation is faithful and every finite module is a quotient of a finite free module, these projectors act as the generalized-eigenspace projectors on every module. Cross relations show $x_{d+1}$ commutes with $B$, so $u_i$ centralizes $B$ and is fixed by $*$. Their products and sum give the stated orthogonality and identity. For the root-coset claim use joint dot projectors and $\phi_r=s_r(x_r-x_{r+1})+1$, which satisfies $\phi_r^2=1-(x_r-x_{r+1})^2$ and swaps the adjacent dot operators. On a weight with adjacent entries differing by neither $1$ nor $-1$, this square is invertible by a finite nilpotent geometric series. A leftmost eigenvalue outside $\bigcup_j(a_j+\mathbb Z)$ can therefore be moved past all preceding entries in that union, since its differences from them are not integers; this produces a nonzero first-position eigenvalue contradicting the cyclotomic relation. Thus every eigenvalue lies on one of the specified coset chains. No orbit-sum primitivity is used. [F1, F2, step 1.1, construct, algebra]
+
+3.1 **Induction equals coinduction, with explicit inverse.** Index the left basis $\eta_s$ from step 1.1 by $s=(t,r)$ and let $p_s:A\to B$ be its left-coordinate maps, so $c=\sum_sp_s(c)\eta_s$. Put $a_s=\Phi^{-1}p_s$. Then $t(\eta_sa_{s'})=\delta_{ss'}$ and $c=\sum_st(ca_s)\eta_s$. Finite freeness makes the natural map $\operatorname{Hom}_B(A,B)\otimes_BN\to\operatorname{Hom}_B(A,N)$ an isomorphism: it sends $h\otimes n$ to $[c\mapsto h(c)n]$ and its inverse sends $g$ to $\sum_sp_s\otimes g(\eta_s)$. Composing with $\Phi$ gives the natural $A$-module isomorphism $A\otimes_BN\cong\operatorname{Hom}_B({}_BA,N)$, $a\otimes n\mapsto[c\mapsto t(ca)n]$, with inverse $g\mapsto\sum_sa_s\otimes g(\eta_s)$. Consequently induction is both left and right adjoint to ordinary restriction. It is exact by the right freeness in step 1.1, independently of any duality argument. [step 1.1, step 2.1, construct, algebra]
+
+4.1 **The residue Frobenius isomorphism and two adjunctions.** Write $u=u_i$. For every $c\in A$, one has $t(uc)=t(cu)$: pairing either side with $b\in B$ under $\tau_d$ gives $\tau_{d+1}(buc)=\tau_{d+1}(bcu)$ by $bu=ub$ and trace cyclicity. Hence right multiplication by $u$ on $A$ corresponds under $\Phi$ to precomposition by left multiplication by $u$. Restricting the isomorphism of step 3.1 therefore gives $Au\otimes_BN\cong\operatorname{Hom}_B({}_BuA,N)$ as left $A$-modules, with the same explicit relative-trace formula on $uA$. The usual tensor-Hom adjunction gives $\operatorname{Hom}_A(Au\otimes_BN,M)\cong\operatorname{Hom}_B(N,uM)$, and the usual restriction-coinduction adjunction gives $\operatorname{Hom}_B(uM,N)\cong\operatorname{Hom}_A(M,\operatorname{Hom}_B(uA,N))$. Together these prove $f_i\dashv e_i\dashv f_i$. The functor $e_i$ is exact as an idempotent summand of restriction; $Au$ is a right-$B$ direct summand of the free module $A$, so $f_i$ is exact. The units and counits are the tensor-Hom evaluation maps and the relative-trace/dual-basis coinduction maps just constructed, not maps inferred from an abstract symmetry of two algebras. [step 1.1, step 2.1, step 3.1, step 2.2, construct, algebra]
+
+5.1 **The correct dual tensor comparison.** For a left $A$-module $X$ write $D_AX=\operatorname{Hom}_{\mathbb C}(X,\mathbb C)$ with action twisted by $*$, and write $D_BN$ for the same construction on the left $B$-module $N$. The actual natural isomorphism is $D_A(A\otimes_BN)\cong\operatorname{Hom}_B({}_BA,D_BN)$. It sends a linear functional $\lambda$ to $[c\mapsto(n\mapsto\lambda(c^*\otimes n))]$, with inverse $h\mapsto[a\otimes n\mapsto h(a^*)(n)]$. The balancing relation and $*$ show $B$-linearity and $A$-linearity directly. Composing its inverse with the genuine induction/coinduction isomorphism of step 3.1 gives $A\otimes_BD_BN\cong D_A(A\otimes_BN)$. The same formulas for the summands give $D_A(Au\otimes_BN)\cong\operatorname{Hom}_B(uA,D_BN)\cong Au\otimes_BD_BN$, since $u^*=u$ and step 4.1 applies. Restriction similarly gives $uD_AM\cong D_B(uM)$ by restricting functionals, with inverse extending by zero on $(1-u)M$. Thus each residue functor commutes with ordinary $*$-duality. This proof does not identify $Au$ with its linear dual as an unqualified bimodule. [step 3.1, step 2.2, step 4.1, construct, algebra]
+
+6.1 **Projectives and Grothendieck operators.** Exact biadjunction proves projective preservation: for projective $P$, $\operatorname{Hom}_A(f_iP,-)\cong\operatorname{Hom}_B(P,e_i-)$ is exact, and $\operatorname{Hom}_B(e_iQ,-)\cong\operatorname{Hom}_A(Q,f_i-)$ is exact for projective $Q$. The Hom pairing descends to split $K_0$ of projectives and $G_0$ of finite-dimensional modules, because Hom is additive on projective direct sums and exact in its second variable. The two adjunctions compute $\langle[f_iP],[M]\rangle=\langle[P],[e_iM]\rangle$ and $\langle[e_iQ],[N]\rangle=\langle[Q],[f_iN]\rangle$. Exactness makes all operators well defined on these groups. Central source/target projections restrict the bimodules, adjunctions and duality comparisons to supported content summands; no primitivity premise is required for those restrictions. [step 4.1, step 5.1, construct, algebra]
+
+7.1 **Boundaries and level zero.** The entire proof used only the actual bounded PBW extension and its two symmetric traces, so it applies to all complex roots and their repetitions. The realization assertion invokes only the actual admissible projected tensor actions of the named stable-range supplier, not a block-primitivity assertion. For $l=0$ the empty cyclotomic polynomial is $1$, so every positive-degree algebra is zero; the map $\mathbb C\to0$ is explicitly noninjective, all positive-degree functors are zero, and their exactness and adjunctions are the unique zero-functor ones. Together with steps 1.1–5.1 this proves every asserted boundary and functor property. [F1, step 1.1, step 2.2, step 4.1, step 5.1, step 6.1, given] ∎
+
+## Remarks
+
+The Frobenius extension is a relative statement: it uses finite left/right freeness and the two nondegenerate symmetric traces to construct $\operatorname{Hom}_B(A,B)\cong A$. Symmetry of $A$ alone neither gives the residue bimodule $Au$ an unqualified self-duality nor turns linear duals of tensor products into tensor products. Repeated roots use the same generalized-eigenvalue projectors and require no change to the proof.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-highest-components-in-a-small-type-a-two-tensor-crystal.json
+  precheck: pass
 id: ex-highest-components-in-a-small-type-a-two-tensor-crystal
 kind: example
 title: "Highest components in the $A_2$ tensor crystal $B(\\lambda_1)\\otimes B(\\lambda_1)$"
@@ -13,12 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 11
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   scraped: []
   references:
@@ -72,3 +69,31 @@ the second because $\varepsilon_1(u_2)=1\le\langle h_1,wt(u_1)\rangle=1$ and $\v
 4.1 The component-multiplicity clause of [F3] gives $V(\lambda_1)\otimes V(\lambda_1)\cong V(2\lambda_1)\oplus V(\lambda_2)$. The crystal-basis rank equality gives dimensions six and three from step 3.1, hence $9=6+3$. For the classical standard three-dimensional representation, the symmetric tensors and alternating tensors have dimensions six and three and are complementary under $(1\pm\mathrm{flip})/2$; their highest vectors have weights $2\lambda_1$ and $\lambda_2$, matching the quantum component calculation. [step 3.1, F3, F4, algebra]
 
 5.1 Choice: clause (a) of the criterion is a finite computation; the identification in step 3.1 uses the uniqueness theorem, whose axiom of choice is declared in this item through [F5] and used only as in its own contract. [step 3.1, F5, given] ∎
+
+## Remarks
+
+The diagram displays the two components enumerated in step 3.1. A vertex labelled $(j,k)$ means $u_j\otimes u_k$, and an arrow labelled $i$ is the nonzero lowering map $\tilde f_i$; the reverse arrow is $\tilde e_i$. The highest vertices are $(1,1)$ and $(1,2)$. The verification above establishes all arrows and the component identifications independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={inner sep=4pt}]
+\node at (0,0.8) {$B(2\lambda_1)$};
+\node (a) at (0,0) {$(1,1)$};
+\node (b) at (0,-1.2) {$(2,1)$};
+\node (c) at (-1.3,-2.4) {$(2,2)$};
+\node (d) at (1.3,-2.4) {$(3,1)$};
+\node (e) at (0,-3.6) {$(3,2)$};
+\node (f) at (0,-4.8) {$(3,3)$};
+\draw[->] (a) -- node[right] {$1$} (b);
+\draw[->] (b) -- node[left] {$1$} (c);
+\draw[->] (b) -- node[right] {$2$} (d);
+\draw[->] (c) -- node[left] {$2$} (e);
+\draw[->] (d) -- node[right] {$1$} (e);
+\draw[->] (e) -- node[right] {$2$} (f);
+\node at (4.2,0.8) {$B(\lambda_2)$};
+\node (g) at (4.2,0) {$(1,2)$};
+\node (h) at (4.2,-1.2) {$(1,3)$};
+\node (j) at (4.2,-2.4) {$(2,3)$};
+\draw[->] (g) -- node[right] {$2$} (h);
+\draw[->] (h) -- node[right] {$1$} (j);
+\end{tikzpicture}
+```

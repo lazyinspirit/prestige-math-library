@@ -1,0 +1,114 @@
+{
+  "id": "ex-na-periodic-taylor-green-vortex",
+  "agent": "/root/rendering_repair_coordinator/npde_012",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original PNG displays the entire raw center/tikzpicture block as prose. The unfenced environment is not recognized as a diagram by ItemBody; the local fenced tikz form compiles successfully.",
+      "action": "Replaced only the outer center environment with a supported tikz fence and relocated the unchanged picture plus its explanatory paragraph to final Remarks, outside the Example and proof-like sections. Updated below to above to reflect relocation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Render the existing fundamental-domain diagram using supported fenced TikZ in Remarks, preserving all coordinates, labels, colors, and pairings.",
+  "source_lines_after": [
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    66
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "The rectangle represents a fundamental domain for R^2/(2 pi Z)^2, as defined in Example line 31; it is explicitly a topology schematic, not a metric-scale square.",
+      "relations": "The two horizontal edges share y=0~2 pi and the two vertical edges share x=0~2 pi. These express (x,0)~(x,2 pi) and (0,y)~(2 pi,y), preserving the other coordinate point-for-point.",
+      "justification": "Example opposite-side identification and Given line 37. The diagram has no arrows; it makes no induced boundary-orientation assertion. In coordinate terms paired seams identify equal increasing coordinates, rather than following the opposite induced orientations of a positively oriented square boundary."
+    },
+    {
+      "objects": "The displayed velocity u and pressure p are periodic functions on the identified domain.",
+      "relations": "Each velocity component is a product of sine/cosine factors with 2 pi period; pressure factors cos(2x),cos(2y) also have 2 pi period. Repeated derivatives exchange sine and cosine and preserve the periodic seams.",
+      "justification": "Read local thm-sine-cosine-zero-sets-and-fundamental-period Statement and thm-sine-and-cosine-derivatives Statement; item F2/F3 and Verification 1.1. No velocity vectors, flow circulation, or vorticity are drawn or inferred from the boundary labels."
+    },
+    {
+      "objects": "The diagram contains one complete rectangular outline and four exterior seam labels.",
+      "relations": "Two equal-labeled pairs encode the two periodic identifications, with all corners belonging to the same quotient class. Unchanged unequal drawn side lengths merely reflect the explicitly schematic rectangle.",
+      "justification": "Original TikZ source and explanatory paragraph, retained exactly except relocation reference. The proof Verification 1.1 and 2.1 is analytic and unchanged."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "9a1672d81ecdeb90ed212a764cd80c659c985d93d48252eb7506dda3d32499d0",
+  "after_raw_sha256": "d6f9d7aba65d74df5d800dcf3b2ecf06b31901fea93e921ab50e7c76e54c9bac",
+  "status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "frontmatter_byte_identical": true
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-na-periodic-taylor-green-vortex.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-na-periodic-taylor-green-vortex.md",
+            "item_id": "ex-na-periodic-taylor-green-vortex",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-na-periodic-taylor-green-vortex.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-na-periodic-taylor-green-vortex.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    }
+  ],
+  "visual_evidence": {
+    "original_view": "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/ex-na-periodic-taylor-green-vortex--01.png",
+    "original_view_detail": "original; standalone",
+    "preview_command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-na-periodic-taylor-green-vortex --out research/math-library-rendering-repairs-2026-10-23/npde-012-preview-20261024",
+    "preview_exit_code": 0,
+    "preview_dir": "research/math-library-rendering-repairs-2026-10-23/npde-012-preview-20261024",
+    "fresh_views": [
+      "screenshots/ex-na-periodic-taylor-green-vortex--01.png",
+      "screenshots/ex-na-periodic-taylor-green-vortex--02.png"
+    ],
+    "fresh_view_detail": "Both separately viewed standalone at original resolution.",
+    "result": "Full rectangle and all four labels render with legible white interior text, blue horizontal and red vertical seam labels, with no overlaps or clipping. Original small schematic scale is retained because labels are readable. No raw TikZ source remains.",
+    "capture": {
+      "katex_count": 30,
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": []
+    },
+    "limitations": "Local ItemBody preview only; no HTTP/live website used. Preview reference map reports 16 unrelated parse diagnostics."
+  }
+}

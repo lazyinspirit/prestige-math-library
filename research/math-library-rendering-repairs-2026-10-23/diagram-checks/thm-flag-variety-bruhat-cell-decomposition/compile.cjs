@@ -1,0 +1,21 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const root=process.cwd();
+const out=path.resolve('research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-flag-variety-bruhat-cell-decomposition');
+const tex2svg=require('/home/lazyinspirit/Projects/prestige-intelligence/web/node_modules/node-tikzjax').default;
+const sharp=require('/home/lazyinspirit/Projects/prestige-intelligence/web/node_modules/sharp');
+const src=fs.readFileSync(path.join(root,'items/thm-flag-variety-bruhat-cell-decomposition.md'),'utf8');
+process.env.TMPDIR=path.join(out,'tmp');
+process.env.FONTCONFIG_FILE=path.join(out,'fonts.conf');
+(async()=>{
+const m=[...src.matchAll(/```tikzcd\n([\s\S]*?)```/g)];
+if(m.length!==1)throw new Error('Expected one diagram');
+const tex='\\usepackage{amsfonts}\n\\usepackage{tikz-cd}\n\\begin{document}\n\\begin{tikzcd}\n'+m[0][1].trim()+'\n\\end{tikzcd}\n\\end{document}';
+fs.writeFileSync(path.join(out,'diagram-1.tex'),tex);
+const svg=await tex2svg(tex,{showConsole:true});
+if(!svg.includes('<svg'))throw new Error('Missing SVG');
+fs.writeFileSync(path.join(out,'diagram-1.svg'),svg);
+await sharp(Buffer.from(svg),{density:200}).flatten({background:'#ffffff'}).png().toFile(path.join(out,'diagram-1.png'));
+fs.writeFileSync(path.join(out,'compilation-checks.json'),JSON.stringify({command:'node research/math-library-rendering-repairs-2026-10-23/diagram-checks/thm-flag-variety-bruhat-cell-decomposition/compile.cjs',engine:'node-tikzjax; sharp density 200',source:'exact final fenced tikzcd',result:'compiled and rasterized'},null,2)+'\n');
+console.log('Compiled one tikzcd diagram and rasterized SVG at density 200.');
+})().catch(e=>{console.error(e);process.exit(1)});

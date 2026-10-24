@@ -1,19 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-linearity-test.json
+  precheck: n/a
 id: def-linearity-test
 kind: definition
-title: "The BLR linearity test over F_2"
+title: 'The BLR linearity test over $\mathbb F_2$'
 status: published
 origin: pipeline
 deps: [def-field]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, January 2007 web draft, \u00a718.4.1, Definition 18.22, pp.363\u2013364"

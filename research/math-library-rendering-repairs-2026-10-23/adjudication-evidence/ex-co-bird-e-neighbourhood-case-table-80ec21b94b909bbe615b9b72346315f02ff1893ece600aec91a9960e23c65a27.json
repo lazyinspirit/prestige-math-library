@@ -1,0 +1,98 @@
+{
+  "id": "ex-co-bird-e-neighbourhood-case-table",
+  "agent": "/root/rendering_repair_coordinator/comb_026",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-markdown-table",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --02 shows literal pipe separators and the separator row embedded in a paragraph. Frozen and current pre-edit source match exactly: all header, separator, and 62 data rows occupy one physical line, preventing Markdown table recognition. This is a structural rendering defect, not optional mathematical typography.",
+      "action": "Split each existing row onto its own physical line; preserved every cell and its mathematical notation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced only the 63 spaces between adjacent Markdown table rows by newlines, producing a header, delimiter row and 62 data rows.",
+  "source_lines_after": [
+    52,
+    115
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "preservation_checks": {
+    "original_raw_sha256": "89028a82199bcae7961ce92430ec95a2e296d47fa7552d93c69bec44bb3570ff",
+    "current_raw_sha256": "bc8900b72a43ac3af86721a30bd18220671f7fd5eaa777b4e725f8ca7f626278",
+    "guard_matched_before_edit": true,
+    "frontmatter_byte_identical": true,
+    "publication_status": "published; entire frontmatter byte-identical",
+    "exact_transform": "before.replace(b\" | | \", b\" |\\n| \") == after; verified",
+    "table_data_rows": 62
+  },
+  "original_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/ex-co-bird-e-neighbourhood-case-table--02.png",
+    "sha256": "6c4df7ee007509437e6dc5b6d83cde27875457aa9477291e6852204e5d473a4d",
+    "viewed_standalone_original_resolution": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-co-bird-e-neighbourhood-case-table.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-co-bird-e-neighbourhood-case-table.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-co-bird-e-neighbourhood-case-table.md",
+            "item_id": "ex-co-bird-e-neighbourhood-case-table",
+            "status": "pass",
+            "strategy": "\"Finite"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-co-bird-e-neighbourhood-case-table.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/comb-026-final/manifest.json",
+    "manifest_sha256": "1ef1e31d73befd695c3d9b6c69f276539c30037d8a82dd16c55b1587cc2d2217",
+    "source_sha256": "bc8900b72a43ac3af86721a30bd18220671f7fd5eaa777b4e725f8ca7f626278",
+    "html_sha256": "453e06703fbc3709317ef89975aa3aa05801427cfa57c1fc9383433653bc5f80",
+    "reference_map_sha256": "c8f4e689c3ab5f01e0d3d3c8f8cb482984bce894635bc5c510f5c30ed06706fd",
+    "screenshots_viewed_standalone_original_resolution": [
+      "screenshots/ex-co-bird-e-neighbourhood-case-table--01.png",
+      "screenshots/ex-co-bird-e-neighbourhood-case-table--02.png",
+      "screenshots/ex-co-bird-e-neighbourhood-case-table--03.png",
+      "screenshots/ex-co-bird-e-neighbourhood-case-table--04.png"
+    ],
+    "visual_result": "Header and rows 1\u201362 form an aligned three-column table with rendered witness math; no raw pipe paragraph remains. Four original-resolution tiles inspected, with overlapping tiles covering all rows.",
+    "html_check": "One <table>, 63 <tr> tags (header plus 62 data rows).",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostics": 16
+  },
+  "pre_existing_formatting_failures": []
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-disconnected-unanchored-network-solve.json
+  precheck: pass
 id: ex-disconnected-unanchored-network-solve
 kind: example
 title: "A disconnected unanchored network gives a singular steady solve"
@@ -28,12 +31,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Example
@@ -46,8 +44,8 @@ component's Neumann balance, so it has no steady solution.
 
 The two disconnected edges and their conductances are shown below; all vertex masses are one, and the right-hand side is $b=(1,0,0,0)^{\mathsf T}$.
 
-\begin{center}
-\begin{tikzpicture}[every node/.style={font=\small}]
+```tikz
+\begin{tikzpicture}[scale=1.4,transform shape,every node/.style={font=\normalsize}]
   \node[circle,draw] (v1) at (0,0) {$1$};
   \node[circle,draw] (v2) at (1.7,0) {$2$};
   \node[circle,draw] (v3) at (3.5,0) {$3$};
@@ -59,7 +57,7 @@ The two disconnected edges and their conductances are shown below; all vertex ma
   \node[below=4pt] at (v3) {$b_3=0$};
   \node[below=4pt] at (v4) {$b_4=0$};
 \end{tikzpicture}
-\end{center}
+```
 
 ## Facts & Assumptions
 

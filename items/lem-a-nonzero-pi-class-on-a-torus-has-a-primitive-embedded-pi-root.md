@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-nonzero-pi-class-on-a-torus-has-a-primitive-embedded-pi-root.json
+  precheck: pass
 id: lem-a-nonzero-pi-class-on-a-torus-has-a-primitive-embedded-pi-root
 kind: lemma
 title: A nonzero pi class on a torus has a primitive embedded pi root
@@ -20,8 +23,6 @@ aliases: []
 landmark: false
 proof_strategy: direct
 dependency_level: 13
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -33,7 +34,7 @@ sources:
 
 ## Statement
 
-On the original compact torus leaf, a nonzero Π^j class has a primitive embedded representative with the same Π^j property; its sufficiently short fixed-flow fence is an embedded annulus and each positive boundary bounds an actual embedded disk in its leaf.
+On the original compact torus leaf, a nonzero $\Pi^j$ class has a primitive embedded representative with the same $\Pi^j$ property; its sufficiently short fixed-flow fence is an embedded annulus and each positive boundary bounds an actual embedded disk in its leaf.
 
 ## Facts & Assumptions
 

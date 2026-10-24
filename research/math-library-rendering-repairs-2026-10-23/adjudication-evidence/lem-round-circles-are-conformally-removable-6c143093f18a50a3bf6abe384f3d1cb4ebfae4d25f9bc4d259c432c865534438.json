@@ -1,0 +1,78 @@
+{
+  "id": "lem-round-circles-are-conformally-removable",
+  "agent": "/root/rendering_repair_coordinator/cxa_028",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 02 visibly prints literal $1$ in the CSS-uppercase proof-technique banner, while the ordinary proof math below renders correctly. Frozen and current source initially matched exactly. The banner is rendered as plain React text, so its inline delimiters are exposed.",
+      "action": "Replaced only $1$ with plain 1 in the proof-technique sentence; retained the complete 1-quasiconformality terminology and surrounding argument.",
+      "status": "repaired; fresh standalone original-resolution native tile 02 displays 1-QUASICONFORMALITY without dollar delimiters"
+    }
+  ],
+  "changed": true,
+  "correction": "Removed exposed inline-math delimiters around the numeral 1 in the proof-technique banner at line 68.",
+  "source_lines_after": {
+    "68": "**Proof technique:** prove removability of the unit circle by gluing analytic 1-quasiconformality across it, then use Möbius invariance and subset monotonicity."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Native technique banners remain plain text and do not parse LaTeX; this item now uses an equivalent readable numeral. No item rendering issues remain observed."
+  ],
+  "before_raw_sha256": "5a7de3e233a397b8bf6480b6bca10ee961364a3c68d1418c53aa3c4dc94cc854",
+  "after_raw_sha256": "9512b9e1e339e9fda3e6f9756b98da2d199aa1b63414c20bc80af47b00547f02",
+  "frontmatter_byte_identical": true,
+  "status_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-round-circles-are-conformally-removable.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-round-circles-are-conformally-removable.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-round-circles-are-conformally-removable.md",
+            "item_id": "lem-round-circles-are-conformally-removable",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-round-circles-are-conformally-removable.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_inspected": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/lem-round-circles-are-conformally-removable--02.png",
+    "original_detail": "original",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa028-native/manifest.json",
+    "preview_manifest_sha256": "bc2f63d53ec1a36125f0339463cf64342ba475a74b22b47fb6b7dd65a7fce127",
+    "preview_source_sha256": "9512b9e1e339e9fda3e6f9756b98da2d199aa1b63414c20bc80af47b00547f02",
+    "preview_tiles_inspected": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/cxa028-native/screenshots/lem-round-circles-are-conformally-removable--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/cxa028-native/screenshots/lem-round-circles-are-conformally-removable--02.png"
+    ],
+    "preview_detail": "original",
+    "preview_result": "Both current native tiles independently viewed at original resolution; technique banner shows plain 1 with no exposed math delimiters.",
+    "limitations": "Local native ItemBody preview only; no production HTTP route coverage. The preview reports 16 unrelated reference-map parse diagnostics."
+  }
+}

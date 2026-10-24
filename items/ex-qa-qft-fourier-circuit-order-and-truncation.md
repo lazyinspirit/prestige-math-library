@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-qa-qft-fourier-circuit-order-and-truncation.json
+  precheck: pass
 id: ex-qa-qft-fourier-circuit-order-and-truncation
 kind: example
 title: QFT circuit order and truncation examples
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)"
@@ -93,3 +91,52 @@ With cutoff $m=1$, the only controlled phase $\mathrm{CP}_2$ is omitted, while t
 2.1 Reversing the displayed wire order permutes both the input and output basis by $P$, so the matrix is $PF_4^+P$ by the tensor-register convention [L4]. Swapping rows and columns $2$ and $3$ gives $\frac12\begin{pmatrix}1&1&1&1\\1&1&-1&-1\\1&-1&i&-i\\1&-1&-i&i\end{pmatrix}$, which is the displayed reversed-order matrix. [L3, L4, L5, A1, step 1.1, algebra]
 
 3.1 The exact list has $2+1+1=4$ ideal gates, and its one SWAP adds three CNOTs by [F2]; the ideal convention is [F3]. The cutoff list has $2+1=3$ ideal gates and the same three-CNOT expansion. Neither circuit introduces an ancilla. [L1, L2, F2, F3, algebra] ∎
+
+
+## Remarks
+
+Both circuits below read chronologically from left to right, with wire order $q_1,q_0$ from top to bottom and basis order $|00\rangle,|01\rangle,|10\rangle,|11\rangle$. In the exact circuit, the filled dot on $q_0$ controls $P_2=\mathrm{diag}(1,i)$ on $q_1$; together they denote $\mathrm{CP}_2(q_0,q_1)=\mathrm{diag}(1,1,1,i)$. The connected crosses denote the final SWAP. The cutoff-$1$ circuit deletes only that controlled phase.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=1.1cm]
+\node[anchor=west] at (0,2.75) {Exact};
+\node[left] at (0,2) {$q_1$};
+\node[left] at (0,1) {$q_0$};
+\draw (0,2) -- (0.65,2);
+\draw (1.15,2) -- (1.85,2);
+\draw (2.35,2) -- (5.6,2);
+\draw (0,1) -- (3.05,1);
+\draw (3.55,1) -- (5.6,1);
+\draw (0.65,1.76) rectangle (1.15,2.24);
+\node at (0.9,2) {$H$};
+\draw (1.85,1.76) rectangle (2.35,2.24);
+\node at (2.1,2) {$P_2$};
+\draw (2.1,1) -- (2.1,1.76);
+\fill (2.1,1) circle (2pt);
+\draw (3.05,0.76) rectangle (3.55,1.24);
+\node at (3.3,1) {$H$};
+\draw (4.6,1) -- (4.6,2);
+\draw (4.48,1.88) -- (4.72,2.12);
+\draw (4.48,2.12) -- (4.72,1.88);
+\draw (4.48,0.88) -- (4.72,1.12);
+\draw (4.48,1.12) -- (4.72,0.88);
+\node[anchor=west] at (0,-0.1) {Cutoff $m=1$};
+\node[left] at (0,-0.85) {$q_1$};
+\node[left] at (0,-1.85) {$q_0$};
+\draw (0,-0.85) -- (0.65,-0.85);
+\draw (1.15,-0.85) -- (5.6,-0.85);
+\draw (0,-1.85) -- (3.05,-1.85);
+\draw (3.55,-1.85) -- (5.6,-1.85);
+\draw (0.65,-1.09) rectangle (1.15,-0.61);
+\node at (0.9,-0.85) {$H$};
+\draw (3.05,-2.09) rectangle (3.55,-1.61);
+\node at (3.3,-1.85) {$H$};
+\draw (4.6,-1.85) -- (4.6,-0.85);
+\draw (4.48,-0.97) -- (4.72,-0.73);
+\draw (4.48,-0.73) -- (4.72,-0.97);
+\draw (4.48,-1.97) -- (4.72,-1.73);
+\draw (4.48,-1.73) -- (4.72,-1.97);
+\end{tikzpicture}
+```
+
+The upper circuit has matrix $F_4^+$ in the stated basis. Displaying the same register instead in wire order $q_0,q_1$ changes both input and output coordinates by $P$, giving $PF_4^+P$; it does not add gates to the chronological list. These figures illustrate the gate lists only; the verification above is independent of them.

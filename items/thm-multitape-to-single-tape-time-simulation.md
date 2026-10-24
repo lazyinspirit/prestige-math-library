@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-multitape-to-single-tape-time-simulation.json
+  precheck: pass
 id: thm-multitape-to-single-tape-time-simulation
 kind: theorem
-title: "Every multitape time-T computation has a single-tape simulation in O((n+T(n))^2) time"
+title: "Every multitape time-T computation has a single-tape simulation in $O((n+T(n))^2)$ time"
 status: published
 origin: session
 provenance:
@@ -10,13 +13,6 @@ provenance:
 deps: [def-asymptotic-resource-comparison, def-dtime-ntime-dspace-and-nspace, thm-multitape-machines-have-one-tape-simulations, lem-multitape-simulation-has-quadratic-time-overhead]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-12
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:

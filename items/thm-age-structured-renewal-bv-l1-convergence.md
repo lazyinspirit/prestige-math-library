@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-age-structured-renewal-bv-l1-convergence.json
+  precheck: pass
 id: thm-age-structured-renewal-bv-l1-convergence
 kind: theorem
 title: L1 convergence for BV data without renewal-boundary compatibility
@@ -19,8 +22,6 @@ axiom_base: No choice axiom is used; the compactness argument uses finite partit
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"
@@ -61,3 +62,46 @@ Let $n_0\ge0$ belong to $BV(0,\infty)\cap L^1(0,\infty)$, where $BV$ means finit
 
 6.1 In characteristic coordinates $x=a-t$ on $a>t$, the weak identity [F1] becomes $\partial_t v(t,x)=-\mu(x+t)v(t,x)$ in distributions; multiplication by $\exp(\int_x^{x+t}\mu)$ makes its distributional $t$-derivative zero, and the initial trace gives $v(t,x)=n_0(x)S(x,t)$. On $0<a<t$, use $s=t-a$ and obtain $\partial_a w(s,a)=-\mu(a)w(s,a)$ with trace $w(s,0)=B(s)$; the same integrating-factor argument gives $w(s,a)=B(s)S(0,a)$. Substitution into the renewal relation in [F1] yields the Volterra equation of [F2], whose solution is unique. Thus every subsequential limit equals the mild solution. Since every subsequence has a further subsequence with this same limit, the entire sequence converges. [F1, F2, step 5.1, algebra] ∎
 
+## Remarks
+
+The age-time schematic separates initial cohorts from cohorts entering through the renewal boundary. The mesh is representative, with equal age and time drawing scales; the solid characteristic arrows have $da/dt=1$, whereas the finite-volume update transfers mass between adjacent cells. The bottom panel isolates one such update. It does not depict numerical mass as moving exactly along a continuous characteristic.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\draw[densely dotted] (1,0) -- (1,3);
+\draw[densely dotted] (2,0) -- (2,3);
+\draw[densely dotted] (3,0) -- (3,3);
+\draw[densely dotted] (4,0) -- (4,3);
+\draw[densely dotted] (5,0) -- (5,3);
+\draw[densely dotted] (0,1) -- (6,1);
+\draw[densely dotted] (0,2) -- (6,2);
+\draw (0,3) -- (6,3);
+\draw (6,0) -- (6,3);
+\draw[->] (0,0) -- (6.8,0) node[right] {$a$};
+\draw[->] (0,0) -- (0,3.6) node[above] {$t$};
+\node[below] at (6,0) {$A$};
+\node[left] at (0,3) {$T$};
+\node[below] at (3,-0.25) {initial data $n_0(a)$};
+\draw[dashed] (0,0) -- (3,3);
+\node[above] at (2.8,3.4) {$a=t$};
+\draw[->] (1.5,0) -- (4.5,3);
+\node[above] at (4.7,3.4) {initial cohort};
+\draw[->] (0,1.2) -- (1.8,3);
+\node[above] at (1.15,3.4) {born cohort};
+\draw[->] (-1.1,1.2) -- (0,1.2);
+\node[left] at (-1.1,1.2) {$B(t)$};
+\draw[->] (5.6,1.6) -- (6.7,2.7);
+\node[right] at (6.7,2.7) {cutoff outflow};
+\node[left] at (0,0) {$0$};
+\draw (2,-2.5) rectangle (5,-1.5);
+\node at (3.5,-2) {$M_j^k\longmapsto M_j^{k+1}$};
+\draw[->] (0.4,-2) -- (2,-2);
+\node[above] at (1.1,-2) {$F_{j-1}^k$};
+\draw[->] (5,-2) -- (6.6,-2);
+\node[above] at (5.8,-2) {$F_j^k$};
+\draw[->] (3.5,-2.5) -- (3.5,-3.2);
+\node[below] at (3.5,-3.2) {$\mu_j M_j^k$};
+\end{tikzpicture}
+```
+
+Here $F_0^k=B_h^k$, $F_j^k=M_j^k/\Delta a$ for $1\le j\le J$, and the cell balance is $M_j^{k+1}=M_j^k+\Delta t F_{j-1}^k-\Delta t F_j^k-\Delta t\mu_jM_j^k$. The bottom arrows label rates, multiplied by $\Delta t$ in this balance. At $a=A$, the outward flux is discarded; it is not returned to the renewal boundary. The dashed ray $a=t$ separates the two characteristic branches used in step 6.1. At the corner $(a,t)=(0,0)$, the one-sided value $n_0(0+)$ need not equal $B(0)=\int_0^\infty\beta(a)n_0(a)\,da$. Thus the figure imposes no corner compatibility or smooth error rate. The rigorous convergence proof above is independent of the illustration.

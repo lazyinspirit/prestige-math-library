@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle.json
+  precheck: pass
 id: lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle
 kind: lemma
 title: The fundamental-group label controls contractibility of the Whitney circle
@@ -43,8 +46,6 @@ sources:
     url: https://him-lueck.uni-bonn.de/data/ictp.pdf
     locator: Chapter 1 §1.3, printed pp. 14-15 (the Homology Lemma uses the Whitney trick exactly when the path-composed
       loop is null-homotopic in $W$)
-verification:
-  precheck: pass
 dependency_level: 1
 ---
 
@@ -79,3 +80,38 @@ Let $X$ be a path-connected smooth manifold, let $A,B\subseteq X$ be complementa
 2.2 For (iii), fix a base point $x_0\in X$ and a path $\lambda$ from $x_0$ to $p$, and for a double point $z$ choose a path $a_z$ in $A$ from $p$ to $z$ and a path $b_z$ in $B$ from $z$ to $p$; define the group label $g(z):=[\lambda*a_z*b_z*\bar\lambda]\in\pi_1(X,x_0)$. With the compatible choices $a_p,b_p$ constant, $a_q=\alpha$, $b_q=\beta$ this gives $g(p)=[\lambda*\bar\lambda]=1$ and $g(q)=[\lambda*\alpha*\beta*\bar\lambda]=\lambda_*[\gamma]$, so $g(q)=g(p)\,[\gamma]$ after transporting back along $\lambda$; changing $a_z$ along a loop of $A$ or $b_z$ along a loop of $B$ multiplies the label by an element of the image of the corresponding sheet group, which is the path convention left open in the statement. Hence the two points carry equal labels exactly when $[\gamma]=1$, which by step 1.1 is exactly the condition that the Whitney circle bounds a disk; When $X,A,B$ are oriented and the signs are opposite, [F5] defines $\varepsilon(z)$, and $I(z):=\varepsilon(z)g(z)$ satisfies $I(p)=-I(q)$ exactly when the labels are equal. The unsigned label equality and disk criterion do not require orientations. If $X$ is simply connected, then $\pi_1(X,p)=1$ by [F4] and $[\gamma]=1$ for every choice of arcs, so every Whitney circle is null-homotopic. [F1, F4, F5, step 1.1, step 1.2]
 
 3.1 Finally, the signed hypothesis alone is strictly weaker. For the declared smooth-torus supplier [F5] in this witness assume $\mathrm{AC}_\omega$. In the torus $X_0=T^2=\mathbb R^2/\mathbb Z^2$ oriented as the product of its two circle factors let $A_0$ be the horizontal circle $\mathbb R\times\{0\}/\mathbb Z^2$ and let $B_0$ be the graph of $f(x)=\tfrac14\sin(2\pi x)$; orient both circles by increasing $x$. They are closed connected embedded circles, so they are complementary in dimension $2$, and $A_0\cap B_0=\{(0,0),(1/2,0)\}$ with transverse crossings because $f$ vanishes exactly at $x=0$ and $x=1/2$ in $[0,1)$ and $f'(0)=\pi/2>0>f'(1/2)$. In the frame $(\partial_x,\partial_y)$ the isomorphism $T_pA_0\oplus T_pB_0\to T_pX_0$ has matrix with columns $(1,0)$ and $(1,f'(x))$, of determinant $f'(x)$, so by [F5] the intersection signs are $\varepsilon(0,0)=+1$ and $\varepsilon(1/2,0)=-1$: the two points have opposite signs and the signed count vanishes. Let $\alpha(t)=(t/2,0)$ and $\beta(t)=((1+t)/2,f((1+t)/2))$ for $t\in I$, using quotient coordinates; then $\gamma=\alpha*\beta$ is a Whitney circle for the pair. Its first coordinate traces $0\mapsto1/2$ along $\alpha$ and $1/2\mapsto1$ along $\beta$, so the projection $pr:T^2\to\mathbb R/\mathbb Z$ satisfies $pr\circ\gamma=\omega_1$, whose class is nontrivial by [F5]. If $[\gamma]$ were trivial, then by the induced homomorphism of [F4] the class $[pr\circ\gamma]=pr_*[\gamma]$ would be trivial as well, a contradiction; hence $[\gamma]\neq1$ and, by step 1.1, the circle bounds no disk, although its two points have opposite signs and vanishing signed count. Therefore the signed cancellation hypothesis alone does not make the Whitney circle contractible; the missing datum is exactly the label of step 2.2. [F1, F4, F5, step 1.1, step 2.2] ∎
+
+## Remarks
+
+The fundamental-domain picture illustrates the torus witness of step 3.1. Opposite sides of $[0,1]\times[-1/2,1/2]$ are identified by translation, so the two displayed copies of $p$ are the same point of $T^2$. Both sheets are oriented by increasing $x$. The blue arc is $\alpha$ from $p$ to $q$ on $A_0$; the red arc is $\beta$ from $q$ to $p$ on $B_0$. The other halves of the sheets are gray. Thus $\gamma=\alpha*\beta$ passes once from the left edge to the right edge. The signs are opposite because the determinant $f'(x)$ is positive at $p$ and negative at $q$, while the projection $pr:T^2\to\mathbb R/\mathbb Z$, $[x,y]\mapsto[x]$, detects winding number $1$. With the compatible paths of step 2.2 and base point $p$, the labels are $g(p)=1$ and $g(q)=[\gamma]\ne1$. The picture illustrates the obstruction; the proof above establishes it independently.
+
+```tikz
+\begin{tikzpicture}[x=6cm,y=6cm]
+\draw[gray] (0,-0.5) rectangle (1,0.5);
+\draw[->] (0.42,0.5) -- (0.58,0.5);
+\draw[->] (0.42,-0.5) -- (0.58,-0.5);
+\draw[->] (0,0.32) -- (0,0.43);
+\draw[->] (1,0.32) -- (1,0.43);
+\draw[gray,thick] (0,0) -- (1,0);
+\draw[gray,thick] plot[domain=0:1,samples=65] (\x,{0.25*sin(360*\x)});
+\draw[blue,very thick,->] (0,0) -- (0.32,0);
+\draw[blue,very thick] (0.32,0) -- (0.5,0);
+\draw[red,very thick] plot[domain=0.5:1,samples=33] (\x,{0.25*sin(360*\x)});
+\draw[red,thick,->] (0.71,-0.244) -- (0.75,-0.25);
+\fill (0,0) circle (1.8pt);
+\fill (0.5,0) circle (1.8pt);
+\fill (1,0) circle (1.8pt);
+\node[left] at (-0.02,0) {$p,+$};
+\node[right] at (1.02,0) {$p,+$};
+\node[above right] at (0.5,0.02) {$q,-$};
+\node[below,blue] at (0.23,-0.015) {$\alpha$};
+\node[below,red] at (0.77,-0.27) {$\beta$};
+\node[above] at (0.25,0.27) {$B_0$};
+\node[above] at (0.85,0.015) {$A_0$};
+\node[above] at (0.5,0.57) {$B_0:\ y=\frac{1}{4}\sin(2\pi x)$};
+\draw[->] (0,-0.65) -- (1,-0.65);
+\node[left] at (0,-0.65) {$0$};
+\node[right] at (1,-0.65) {$1$};
+\node[below] at (0.5,-0.65) {$pr\circ\gamma:\ 0\longrightarrow1$};
+\end{tikzpicture}
+```

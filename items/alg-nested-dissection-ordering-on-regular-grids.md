@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-nested-dissection-ordering-on-regular-grids.json
+  precheck: n/a
 id: alg-nested-dissection-ordering-on-regular-grids
 kind: algorithm
 title: Recursive coordinate-separator ordering for two- and three-dimensional grids
@@ -12,12 +15,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Jennifer Scott and Miroslav Tůma, Algorithms for Sparse Linear Systems, Chapter 8, §8.4"
@@ -33,3 +30,41 @@ Input an integer $k\ge1$ and dimension $d\in\{2,3\}$. The coordinate vertices ar
 Order a rectangular coordinate subbox recursively as follows. For each coordinate whose side length is at least $2$, choose its lower median coordinate, namely the coordinate with $\lfloor(m-1)/2\rfloor$ positions below it in a side of length $m$. Let $S$ be the union of the coordinate hyperplanes at those selected medians. Delete $S$, obtaining at most $2^d$ nonempty rectangular child boxes. Recursively order the child boxes in lexicographic order of their lower corners, then append the vertices of $S$ in lexicographic order. If no coordinate has side length at least $2$, append the remaining vertex as a terminal separator. Apply this rule first to the whole grid. The resulting order is the **coordinate nested-dissection ordering**.
 
 The recursion uses only the graph geometry. It makes no fill or complexity claim for arbitrary graphs.
+
+
+## Remarks
+
+For $k=6$ and $d=2$, both selected lower medians are $2$, since $\lfloor(6-1)/2\rfloor=2$. The orange vertices form $S=\{(i_1,i_2):i_1=2\text{ or }i_2=2\}$. Deleting them leaves the four child boxes shown below. Their lower corners, in the required lexicographic order, are $(0,0)$, $(0,3)$, $(3,0)$ and $(3,3)$, respectively.
+
+```tikz
+\begin{tikzpicture}[scale=0.85]
+\foreach \x in {0,...,5} {
+  \foreach \y in {0,...,4} {
+    \draw[gray] (\x,\y) -- (\x,\y+1);
+    \draw[gray] (\y,\x) -- (\y+1,\x);
+  }
+}
+\foreach \x in {0,...,5} {
+  \foreach \y in {0,...,5} {
+    \fill[cyan] (\x,\y) circle (2.3pt);
+  }
+}
+\foreach \t in {0,...,5} {
+  \fill[orange] (2,\t) circle (3.1pt);
+  \fill[orange] (\t,2) circle (3.1pt);
+}
+\node[left] at (-0.25,0.5) {$B_1$};
+\node[left] at (-0.25,4) {$B_2$};
+\node[right] at (5.25,0.5) {$B_3$};
+\node[right] at (5.25,4) {$B_4$};
+\node[orange,above] at (2,5.3) {$S$};
+\draw[->] (0,-0.6) -- (5.6,-0.6) node[right] {$i_1$};
+\draw[->] (-1,0) -- (-1,5.6) node[above] {$i_2$};
+\node[below] at (0,-0.6) {$0$};
+\node[below] at (2,-0.6) {$2$};
+\node[below] at (5,-0.6) {$5$};
+\node at (2.5,-1.6) {$B_1\ ;\ B_2\ ;\ B_3\ ;\ B_4\ ;\ S$};
+\end{tikzpicture}
+```
+
+The bottom row denotes concatenation of the recursively computed orders on $B_1,B_2,B_3,B_4$, followed by the lexicographic order on $S$; it does not specify the internal child orders. The gray segments are exactly the original grid edges. The picture illustrates only the separator recursion, not fill edges or a complexity bound; the definition of the algorithm is independent of it.

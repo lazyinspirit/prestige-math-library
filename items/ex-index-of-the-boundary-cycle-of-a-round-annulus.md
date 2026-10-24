@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-index-of-the-boundary-cycle-of-a-round-annulus.json
+  precheck: pass
 id: ex-index-of-the-boundary-cycle-of-a-round-annulus
 kind: example
 title: "The boundary cycle of a round annulus has index $1$ inside the annulus and $0$ on either side"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -68,3 +64,42 @@ an open set in which $\Gamma$ is a chain at all.
 3.1 Evaluating step 2.1 with step 1.1: for $|z-p|<r_1<r_2$ the value is $1-1=0$; for $r_1<|z-p|<r_2$ it is $1-0=1$; for $|z-p|>r_2>r_1$ it is $0-0=0$. [step 1.1, step 2.1]
 
 4.1 With $0<s_1<r_1$ and $r_2<s_2$ the trace of $\Gamma$ lies in $\Omega=\{s_1<|z-p|<s_2\}$, and $\mathbb C\setminus\Omega=\{|z-p|\le s_1\}\cup\{|z-p|\ge s_2\}$; every point of the first set has $|z-p|\le s_1<r_1$ and every point of the second has $|z-p|\ge s_2>r_2$, so step 3.1 gives index $0$ at each, and [L5] makes $\Gamma$ null-homologous in $\Omega$. [step 2.1, step 3.1, L5] ∎
+
+
+## Remarks
+
+The shaded region in the schematic is the ambient open annulus $\Omega$;
+its dashed boundary circles are excluded. The solid circles are the trace
+of $\Gamma$. Both arrows show the positive parameterizations $C_j(t)$,
+while the labels $-1$ and $+1$ are their coefficients in $\Gamma=C_2-C_1$.
+The index labels apply throughout the three components of the complement of
+the solid circles, including across the dashed circles.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+  \fill[blue!35!black] (0,0) circle (3.6);
+  \fill[white] (0,0) circle (0.65);
+  \draw[dashed,gray!70] (0,0) circle (3.6);
+  \draw[dashed,gray!70] (0,0) circle (0.65);
+  \draw[thick] (0,0) circle (1.6);
+  \draw[thick] (0,0) circle (2.8);
+  \draw[->,thick] (120:1.6) arc (120:155:1.6);
+  \draw[->,thick] (120:2.8) arc (120:155:2.8);
+  \fill (0,0) circle (0.04);
+  \node[below] at (0,0) {$p$};
+  \node at (0,1) {$n=0$};
+  \node at (-2.15,0) {$n=1$};
+  \node at (-4.2,0) {$n=0$};
+  \node[above right] at (1.13,1.13) {$C_1:\ -1$};
+  \node[below right] at (1.98,-1.98) {$C_2:\ +1$};
+  \draw[gray!70] (0.46,-0.46) -- (0.8,-0.7);
+  \node[right] at (0.8,-0.7) {$s_1$};
+  \node[above right] at (2.55,2.55) {$s_2$};
+  \node at (0,3.2) {$\Omega$};
+\end{tikzpicture}
+```
+
+Here $n$ abbreviates $n(\Gamma,z)$, and the dashed radii satisfy
+$0<s_1<r_1<r_2<s_2$. Thus the smaller annulus between the solid circles
+has index $1$, but excludes the trace itself. The verification above is
+independent of this illustration.

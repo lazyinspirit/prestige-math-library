@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-boundary-free-fundamental-parallelogram.json
+  precheck: pass
 id: ex-boundary-free-fundamental-parallelogram
 kind: example
 title: "Moving the boundary of a fundamental parallelogram"
@@ -32,9 +35,7 @@ sources:
     - title: "NIST Digital Library of Mathematical Functions, §23.2"
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii), equations 23.2.7-23.2.9: lattice poles of wp and the half-period values, used for the explicit Z+iZ computation."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Example
@@ -100,3 +101,35 @@ of $P_a$ contains exactly one lattice point, namely $1+i$. The same argument
 applies to any full lattice once one knows that a bounded set meets the lattice
 in finitely many points, which is the uniform-gap estimate used in the
 convergence proof for the $\wp$-series.
+
+
+The picture shows the boundaries in the same complex coordinate plane: the
+solid square is $\partial P_0$, the dashed square is $\partial P_a$, and the
+arrow is the translation vector $a=(1+i)/4$. The dots are lattice points,
+hence double poles of $\wp$ by [F2]; only a finite window is displayed.
+Neither boundary is assigned a contour orientation. The verification above
+is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=3]
+\draw[gray!35,thin] (0,0) grid[step=1] (2,2);
+\draw[->,gray] (-0.15,0) -- (2.3,0) node[right] {$\mathrm{Re}\,z$};
+\draw[->,gray] (0,-0.15) -- (0,2.3) node[above] {$\mathrm{Im}\,z$};
+\draw[thick,blue] (0,0) -- (1,0) -- (1,1) -- (0,1) -- (0,0);
+\draw[thick,red,dashed] (0.25,0.25) -- (1.25,0.25) -- (1.25,1.25) -- (0.25,1.25) -- (0.25,0.25);
+\foreach \x in {0,1,2} {
+  \foreach \y in {0,1,2} {
+    \fill (\x,\y) circle (0.018);
+  }
+}
+\draw[->,thick] (0,0) -- (0.25,0.25);
+\node[anchor=east] at (0.22,0.25) {$a$};
+\node[anchor=north east] at (0,-0.02) {$0$};
+\node[anchor=north] at (1,-0.02) {$1$};
+\node[anchor=east] at (-0.02,1) {$i$};
+\node[anchor=north east] at (0.98,0.98) {$1+i$};
+\node[blue,anchor=north] at (0.62,-0.15) {$\partial P_0$};
+\node[red,anchor=west] at (1.32,0.52) {$\partial P_a$};
+\node[anchor=west] at (1.32,1.5) {$\Lambda=\mathbb{Z}+i\mathbb{Z}$};
+\end{tikzpicture}
+```

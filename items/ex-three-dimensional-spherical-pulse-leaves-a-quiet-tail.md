@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail.json
+  precheck: pass
 id: ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail
 kind: example
 title: "A three-dimensional spherical pulse leaves a quiet interior"
@@ -22,12 +25,7 @@ sources:
     - title: "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #12: Kirchhoff's Formula and Minkowskian Geometry (Fall 2011)"
       url: "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/940561a138578640826f762b5a57bcad_MIT18_152F11_lec_12.pdf"
       locator: "Theorem 1.1, (1.0.2)–(1.0.6) and Remark 1.0.1, printed/PDF pp. 1–2: Kirchhoff's formula including the normal derivative and sharp Huygens support"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -60,3 +58,30 @@ three-dimensional side of the contrast with
 1.1 The support ball lies inside the sphere: if $|x-x_0|<ct-r$ (with $ct>r$) and $|y-x_0|\le r$, then $|y-x|\le|y-x_0|+|x_0-x|<r+(ct-r)=ct$, so $\overline B_r(x_0)$ is disjoint from $\partial B_{ct}(x)$ with positive distance; if $|x-x_0|>ct+r$ and $|y-x_0|\le r$, then $|y-x|\ge|x-x_0|-|y-x_0|>ct+r-r=ct$, so again the support ball is disjoint from the sphere with positive distance. [given, algebra]
 
 2.1 Vanishing: in either case of step 1.1 the data are supported in a compact set disjoint from $\partial B_{ct}(x)$, so [F2] gives $u(x,t)=0$; hence $u(\cdot,t)$ vanishes both outside the outer sphere $|x-x_0|=ct+r$ and inside the inner sphere $|x-x_0|=ct-r$, so its support is contained in the closed shell $ct-r\le|x-x_0|\le ct+r$; the quiet interior behind the front is the case $|x-x_0|<ct-r$, and the statement is exactly the three-dimensional instance of the shell form [F2], evaluated from the data on $\partial B_{ct}(x)$ as [F1] prescribes. [given, step 1.1, F1, F2, algebra] ∎ 
+
+## Remarks
+
+For $ct>r$, a plane through $x_0$ cuts the spherical shell into the annulus
+shown below. The two circles are the support bounds, not assertions that the
+solution is nonzero there or throughout the annulus. Both the inner disk
+$|x-x_0|<ct-r$ and the exterior $|x-x_0|>ct+r$ have $u(x,t)=0$.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick] (0,0) circle (2.8);
+  \draw[thick] (0,0) circle (1.4);
+  \fill (0,0) circle (0.04);
+  \node[above left] at (0,0) {$x_0$};
+  \node at (0,0.65) {quiet: $u=0$};
+  \node at (0,2.08) {possible support};
+  \node[right] at (3.05,0.5) {$u=0$};
+  \draw (0,0) -- (-1.4,0);
+  \node[below] at (-0.7,0) {$ct-r$};
+  \draw (0,0) -- (1.68,-2.24);
+  \node[right] at (0.95,-1.3) {$ct+r$};
+\end{tikzpicture}
+```
+
+This is a schematic cross-section at a fixed time, with radii $ct-r$ and
+$ct+r$. The verification above establishes the support inclusion independently
+of the picture.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-frechet-kolmogorov-compactness-criterion-in-lp.json
+  precheck: pass
 id: thm-frechet-kolmogorov-compactness-criterion-in-lp
 kind: theorem
-title: "The Fr\\'echet--Kolmogorov compactness criterion in $L^p(\\mathbb R^n)$"
+title: "The Fréchet–Kolmogorov compactness criterion in $L^p(\\mathbb R^n)$"
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)"
@@ -52,7 +50,7 @@ subsequence converging in $L^p(\mathbb R^n)$.
 
 [F1] *Mollification.* For $f_R\in L^p\subseteq L^1_{\mathrm{loc}}$, the function $f_R*\eta_\delta$ is smooth and $\partial^\alpha(f_R*\eta_\delta)=f_R*(\partial^\alpha\eta_\delta)$. ([[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]])
 
-[F2] *H\"older's inequality.* For conjugate exponents $p,p'$, $\int|uv|\le\|u\|_p\|v\|_{p'}$; in particular $|(f_R*\eta_\delta)(x)|\le\|f_R\|_p\|\eta_\delta\|_{p'}$ and $|\nabla(f_R*\eta_\delta)(x)|\le\|f_R\|_p\|\nabla\eta_\delta\|_{p'}$ pointwise. ([[thm-holder-inequality-for-integrals]])
+[F2] *Hölder's inequality.* For conjugate exponents $p,p'$, $\int|uv|\le\|u\|_p\|v\|_{p'}$; in particular $|(f_R*\eta_\delta)(x)|\le\|f_R\|_p\|\eta_\delta\|_{p'}$ and $|\nabla(f_R*\eta_\delta)(x)|\le\|f_R\|_p\|\nabla\eta_\delta\|_{p'}$ pointwise. ([[thm-holder-inequality-for-integrals]])
 
 [F3] *Minkowski's integral inequality.* For measurable $F$ on a product of sigma-finite measure spaces with $\int_Y\|F(\cdot,y)\|_p\,d\nu(y)<\infty$, $\bigl\|\int_YF(\cdot,y)\,d\nu(y)\bigr\|_p\le\int_Y\|F(\cdot,y)\|_p\,d\nu(y)$. ([[thm-minkowski-integral-inequality]])
 
@@ -66,7 +64,7 @@ subsequence converging in $L^p(\mathbb R^n)$.
 
 ## Proof
 
-**Proof technique:** Make the tails small and the translations small, regularise by convolution, use Arzel\`a--Ascoli to get a finite net for the regularised family, and transfer the net back to $\mathcal F$.
+**Proof technique:** Make the tails small and the translations small, regularise by convolution, use Arzelà–Ascoli to get a finite net for the regularised family, and transfer the net back to the original family.
 
 1.1 If $\mathcal F=\varnothing$ it is totally bounded and its closure is empty. Otherwise fix $\varepsilon>0$. By (ii) choose $R>0$ with $\|f-f_R\|_p<\varepsilon$ for every $f\in\mathcal F$, and by (iii) choose $\delta>0$ with $\|\tau_hf-f\|_p<\varepsilon$ for every $f\in\mathcal F$ and every $|h|<\delta$; let $\eta:=\eta_{\delta/2}$ be the radial mollifier at scale $\delta/2$, so $\int\eta=1$, $\eta\ge0$ and $\operatorname{supp}\eta\subseteq B(0,\delta/2)$. [given]
 

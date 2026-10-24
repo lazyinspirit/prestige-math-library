@@ -1,16 +1,7 @@
 ---
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-27.md"
-      - "research/frontier-38-owner-30-alpha-batch-27-5a.md"
-      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u27.json"
-    content_sha256: "0a5d59c32de2d442f21ab6335cad2faa7f811bbce2d44ee2c4abf27c54ae32af"
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-intersection-multiplicity-drop-under-point-blowup.json
+  precheck: pass
 id: lem-intersection-multiplicity-drop-under-point-blowup
 kind: lemma
 title: A point blowup drops pairwise intersection multiplicity by at least one
@@ -89,3 +80,43 @@ transform constructions and from [F1]; no further selection is made
 4.2 The strict transform of $Z$ in the chart is cut out by the saturation $J'=(J B):x_1^\infty$, the closure of $V(JB)$ on the open chart complement of $E$ ([[def-strict-transform-closed-subscheme]]); it contains $f/x_1$, because $x_1\cdot(f/x_1)=f\in JB$. Let $K=\psi(J')\subseteq A/I$ be the image, an ideal of the discrete valuation ring $A/I$ containing $\psi(f/x_1)=\overline f/\overline x_1$, which has valuation $N-1$. If $q\in Z'$, then the closed subscheme $Y'\cap Z'$ of $Y'=\operatorname{Spec}(A/I)$ contains the closed point $q$, so $K$ is a proper ideal contained in the maximal ideal $(\overline x_1)$ and therefore $K=(\overline x_1^{\,j})$ for some $j\ge1$; from $\overline x_1^{\,N-1}\in K$ we get $j\le N-1$, and hence $m_q(Y'\cap Z')=\ell_{A/I}(A/I/K)=j\le N-1<N=m_p(Y\cap Z)$ [F1], proving claim 3. [F1, step 1.1, step 2.1, step 3.1]
 
 5.1 Finally, if $m_p(Y\cap Z)=N=1$, then the element $\overline f/\overline x_1$ of step 4.2 is a unit, so $K$ is the unit ideal whenever $q\in Z'$, a contradiction; hence $q\notin Z'$, and since $q$ is the only point of $Y'$ over $p$ by step 2.1, the strict transforms $Y'$ and $Z'$ are disjoint over $p$. This completes claims 1-3 and the additional assertions. [F3, step 2.1, step 4.1, step 4.2] ∎
+
+
+## Remarks
+
+The diagram records the restricted blowup maps and the two possible contact
+outcomes over $p$. In its top row, $q$ denotes the reduced subscheme
+$Y'\cap E=\operatorname{Spec}\kappa(p)$ from step 4.1, so
+$\kappa(q)=\kappa(p)$. The horizontal arrows are closed immersions and both
+squares commute. Here $N=m_p(Y\cap Z)$ and, in the left branch only,
+$j=m_q(Y'\cap Z')$.
+
+```tikz
+\begin{tikzpicture}[scale=1.5, transform shape, >=stealth, every node/.style={font=\small}]
+\node (q) at (0,3) {$q=Y'\cap E$};
+\node (yp) at (3.2,3) {$Y'$};
+\node (xp) at (6.4,3) {$X'$};
+\node (p) at (0,1.5) {$p$};
+\node (y) at (3.2,1.5) {$Y$};
+\node (x) at (6.4,1.5) {$X$};
+\draw[->] (q) -- (yp);
+\draw[->] (yp) -- (xp);
+\draw[->] (p) -- (y);
+\draw[->] (y) -- (x);
+\draw[->] (q) -- node[left] {$\simeq$} (p);
+\draw[->] (yp) -- node[right] {$\pi|_{Y'}\;\simeq$} (y);
+\draw[->] (xp) -- node[right] {$\pi$} (x);
+\node (n) at (3.2,0) {$N=m_p(Y\cap Z)\geq1$};
+\node (yes) at (0,-1.3) {$q\in Z'$};
+\node at (0,-1.9) {$1\leq j\leq N-1$};
+\node (no) at (6.4,-1.3) {$q\notin Z'$};
+\node at (6.4,-1.9) {$Y',Z'$ disjoint over $p$};
+\draw[->] (n) -- (yes);
+\draw[->] (n) -- (no);
+\end{tikzpicture}
+```
+
+The bound in the left branch is a bound on local module length, not a count of
+points or an exact decrement. When $N=1$, only the right branch is possible
+(step 5.1). The diagram uses no geometric shape for $E=\pi^{-1}(p)$ or for the
+ambient scheme; the proof above is independent of it.

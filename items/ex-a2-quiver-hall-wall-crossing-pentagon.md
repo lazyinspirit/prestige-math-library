@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a2-quiver-hall-wall-crossing-pentagon.json
+  precheck: pass
 id: ex-a2-quiver-hall-wall-crossing-pentagon
 kind: example
 title: "The A₂ quiver gives the quantum-dilogarithm pentagon"
@@ -26,21 +29,20 @@ sources:
       url: "https://arxiv.org/pdf/1611.03696"
     - title: "Olivier Schiffmann, Lectures on Hall Algebras, Example 3.15"
       url: "https://arxiv.org/pdf/math/0611617"
-verification:
-  precheck: pass
+
 ---
 
 ## Example
 
 Let $Q$ be the A₂ quiver with one arrow $1\to2$:
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
   \node[circle,draw,inner sep=2pt,label=below:{1}] (v1) at (0,0) {};
   \node[circle,draw,inner sep=2pt,label=below:{2}] (v2) at (2,0) {};
   \draw[->] (v1) -- (v2);
 \end{tikzpicture}
-~~~
+```
 
 The nodes are the two vertices and the single directed edge is the unique
 arrow. Let $S_1,S_2$ be the vertex simples and let

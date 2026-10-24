@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-projective-covers-in-the-regular-sl2-block.json
+  precheck: pass
 id: ex-projective-covers-in-the-regular-sl2-block
 kind: example
 title: The two projectives in the principal sl2 block
@@ -26,17 +29,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "completed-independent-mathematical-review"
-    date: 2026-10-03
-    scope: "Complete item claim and mathematical body read in delegated Step 5a reader; evidence: research/frontier-38-owner-30-reader-7.md; immutable carrier: research/frontier-38-owner-30-step5-hash-7-post.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
-    delegated_by: "owner via tools/autopilot frontier-38-owner-30 reader-7 dispatch"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
   - title: Pavel Etingof, Representations of Lie Groups (18.757, Fall 2023), Proposition 16.4 and
@@ -106,7 +98,7 @@ $[\Delta(-2):L(0)]=0$.
 
 ## Verification
 
-**Proof technique:** direct: derive the rank-one Verma submodule and quotient from the PBW model, then identify both projective covers for every $n\ge0$ and specialise to $n=0$.
+**Proof technique:** direct: derive the rank-one Verma submodule and quotient from the PBW model, then identify both projective covers for every nonnegative integer n and specialise to n = 0.
 
 1.1 By the action of [F1], for $n\ge0$ the subspace $U=\sum_{k\ge n+1}\mathbb Cv_k$ is a submodule: it is $h$- and $f$-stable, and $e\cdot v_k=k(n-k+1)v_{k-1}$ lies in $U$ for $k\ge n+2$ while $e\cdot v_{n+1}=0$; the vector $v_{n+1}$ is a highest-weight vector of weight $-n-2$, so [F2] gives a nonzero map $M(-n-2)\to U$, which is surjective because the powers of $f$ on $v_{n+1}$ span $U$ and injective because $M(-n-2)$ is simple by [F3], hence an isomorphism; hence $U\cong L(-n-2)$. The quotient $M(n)/U$ has basis the images $u_0,\dots,u_n$ of $v_0,\dots,v_n$, on which $e\cdot u_j=j(n-j+1)u_{j-1}\ne0$ for $1\le j\le n$; any nonzero submodule contains some $u_j$, and applying $e^j$ with all factors $j!(n-j+1)\cdots n$ nonzero gives $u_0$, which generates the quotient, so $M(n)/U$ is simple of highest weight $n$, that is $L(n)$. A splitting of $0\to L(-n-2)\to M(n)\to L(n)\to0$ would exhibit a submodule of $M(n)$ isomorphic to $L(n)$, necessarily containing a nonzero vector of the weight-$n$ space $\mathbb Cv_0$ and hence, since $v_0$ generates the infinite-dimensional $M(n)$, the whole of $M(n)$; so the sequence is nonsplit. [F1, F2, F3]
 
@@ -119,3 +111,32 @@ $[\Delta(-2):L(0)]=0$.
 4.1 The socle of $\Delta(n)$ is $L(-n-2)$: it contains that simple submodule by step 1.1, and a simple submodule not contained there would map isomorphically to $L(n)$ and split that nonsplit sequence. Likewise, any simple submodule of $P(-n-2)$ outside $\Delta(n)$ would map isomorphically to its quotient $L(-n-2)$ and split step 3.1. Thus $P(-n-2)$ has socle $L(-n-2)$, head $L(-n-2)$, and middle composition factor $L(n)$, since its three factors come from the flag and step 1.1. [F7, step 1.1, step 2.2, step 3.1]
 
 5.1 Taking $n=0$ gives $P(0)=\Delta(0)$ and the nonsplit sequence $0\to\Delta(0)\to P(-2)\to\Delta(-2)\to0$, with head and socle $L(-2)$ and middle factor $L(0)$. The flag entries are $(P(0):\Delta(0))=1$, $(P(0):\Delta(-2))=0$, and $(P(-2):\Delta(0))=(P(-2):\Delta(-2))=1$; the standard composition entries are $[\Delta(0):L(0)]=[\Delta(0):L(-2)]=[\Delta(-2):L(-2)]=1$ and $[\Delta(-2):L(0)]=0$. They agree with BGG reciprocity by [F8]. [F8, step 1.1, step 2.1, step 2.2, step 4.1] ∎
+
+
+## Remarks
+
+The layer picture below compares the two projective covers in $C_n$ for
+$n\ge0$. Read each column from head at the top to socle at the bottom;
+the boxes represent successive simple factors, not direct summands or maps
+between simple modules. In the right column the bottom two layers form the
+submodule $\Delta(n)$ of the nonsplit sequence in step 3.1; the top quotient
+is $\Delta(-n-2)=L(-n-2)$. Steps 1.1, 2.1 and 4.1 establish these layers
+independently of the picture. Setting $n=0$ gives the two projectives of the
+principal block.
+
+```tikz
+\begin{tikzpicture}
+\node at (0,3.8) {$P(n)=\Delta(n)$};
+\node at (5,3.8) {$P(-n-2)$};
+\draw (-1.7,0) rectangle (1.7,2.4);
+\draw (-1.7,1.2) -- (1.7,1.2);
+\node at (0,1.8) {$L(n)$};
+\node at (0,0.6) {$L(-n-2)$};
+\draw (3.3,0) rectangle (6.7,3.6);
+\draw (3.3,1.2) -- (6.7,1.2);
+\draw (3.3,2.4) -- (6.7,2.4);
+\node at (5,3) {$L(-n-2)$};
+\node at (5,1.8) {$L(n)$};
+\node at (5,0.6) {$L(-n-2)$};
+\end{tikzpicture}
+```

@@ -1,0 +1,61 @@
+---
+id: lem-finite-homology-kernel-lines-have-rational-rank-charts
+kind: lemma
+title: Finite homology kernel lines have rational rank charts
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - thm-adjugate-identity-over-a-commutative-ring
+justified_by: []
+proof_strategy: direct
+axiom_use: Only finite Gaussian elimination, explicit matrix inverses and finite
+  products of nonzero denominators are used. No choice principle is assumed.
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: Bénard, Florens and Rodau, A slope invariant and the A-polynomial of
+        knots
+      url: https://arxiv.org/pdf/2103.14151
+      locator: Section3.3, Lemma3.10 proof, PDF/printed p9 asserts the algebraic
+        homology kernel section. The explicit finite-matrix rank charts and
+        base-change proof needed here are supplied below.
+dependency_level: 0
+---
+
+## Statement
+
+Let $A$ be a commutative integral domain with fraction field $F$. Let $B:A^s\to A^n$, $C:A^n\to A^t$ and $U=(u,v):A^2\to A^n$ be finite matrices with $CB=CU=0$. Put $\beta=\operatorname{rank}_F B$, $\gamma=\operatorname{rank}_F C$, and assume $$\operatorname{rank}_F(B\mid U)=\beta+1.$$ Then $h=n-\gamma-\beta\ge1$. There exists $0\ne f\in A$ such that, over $A_f$, the kernel, image and homology $H_f=\ker C_f/\operatorname{im}B_f$ have explicit free bases, with ranks $n-\gamma$, $\beta$ and $h$. The kernel $$L_f=\ker\{A_f^2\xrightarrow{U_f}H_f\}$$ is a free rank-one direct summand of $A_f^2$. In explicit homology coordinates the images of $u,v$ can be written $a e_1,b e_1$, with at least one of $a,b$ a unit of $A_f$. Hence $$L_f=A_f(-b,a).$$ All these assertions, including the displayed kernel, commute with any homomorphism $A_f\to E$ to a field. In particular they describe the actual homology kernel of the specialized matrices, not just a kernel before specialization.
+
+If $A=\mathbb C[X]$ for a nonempty irreducible affine algebraic set $X$, this gives a regular projective kernel line $[-b:a]$ on a nonempty dense principal open subset and hence a rational map $X\dashrightarrow\mathbb P^1$. Its slope convention $-\text{second coordinate}/\text{first coordinate}$ is the projective value $[a:b]$, including zero and infinity. The rank-chart expressions agree wherever both are defined. The kernel line is unchanged by invertible changes of the three chain bases, by adding boundary columns to $U$, and by multiplying both columns of $U$ by the same invertible scalar. For rational changes it is unchanged after restricting to a common open set where their denominators and inverses are defined. No assertion that the matrix rank hypotheses hold for an arbitrary topological or representation-theoretic family is part of this lemma.
+
+## Facts & Assumptions
+
+**Given:** The domain, finite matrices, square-zero and cycle identities and the two generic rank numbers in the Statement.
+
+[F1] A square matrix over a commutative ring satisfies $D\operatorname{adj}(D)=\operatorname{adj}(D)D=\det(D)I$ ([[thm-adjugate-identity-over-a-commutative-ring]]). Thus a nonzero determinant over a field gives its explicit inverse; after its determinant is made a unit the same formula works over the localized ring. Empty invertible blocks mean the unique identity on the zero module.
+
+## Proof
+
+1.1 **Finite field normal forms with all transformations retained.** Over $F$, Gaussian elimination is an actual finite algorithm: choose the first nonzero entry of the remaining rectangle in the fixed row/column order, swap its row and column into the next pivot position, divide the pivot row by that nonzero entry and subtract its multiples to clear its column and row. Each operation has an explicit inverse and removes one row and column from the remaining problem. It ends after at most the smaller matrix size, with a block identity and a zero rectangle. This proves that its number of pivots is the rank, since invertible operations preserve the column-span dimension and $\operatorname{diag}(I_r,0)$ has rank $r$; the same normal form also gives row-span dimension $r$; no real-only rank-minor theorem is invoked. Apply this to $C$, recording its changes of bases in $F^n$ and $F^t$. Its kernel has basis the last $n-\gamma$ domain coordinates. The identity $CB=0$ places every column of the transformed $B$ in those coordinates. Apply the same algorithm to this $(n-\gamma)$-row matrix, using only row operations within $\ker C$ and column operations on $F^s$. Its first $\beta$ coordinates are now the image of $B$, and its remaining $h=n-\gamma-\beta$ coordinates represent the quotient homology. Thus the entire chain pair has a split block form over $F$, not just separately computed nullities. [F1, given, construct, algebra]
+
+2.1 **Recover the kernel without changing its two prescribed coordinates.** Express $U$ in the chain basis from step 1.1. The identity $CU=0$ makes its first $\gamma$ coordinates zero. Ignore its next $\beta$ boundary coordinates and call the remaining $h\times2$ matrix $V$. The hypothesis on $(B\mid U)$ says exactly that $V$ has rank one: the image of $B$ already fills its own $\beta$ coordinates, while appending $U$ adds the dimension of its quotient image. In particular $h\ge1$. Choose the first nonzero row of $V$, call it $(a,b)$. If $a\ne0$, use $a$ as the pivot; if $a=0$, then $b\ne0$, and use $b$ as the pivot. Each other row is a multiple of $(a,b)$, since otherwise two rows would be independent and the matrix would have rank at least two. Compute each multiple using its first coordinate divided by $a$ when $a\ne0$, or its second coordinate divided by $b$ when $a=0$, and subtract that multiple of the pivot row. This makes every other row zero using only the chosen nonzero pivot. These are changes only of the homology basis; the two input coordinates of $U$ have not been altered. Consequently the quotient images are $a e_1,b e_1$ and the kernel consists precisely of $a x+b y=0$. If $a\ne0$, its vectors are $(-b,a)c$ with $c=y/a$; if $a=0$, then $b\ne0$, the kernel is $F(1,0)=F(-b,0)$. In either branch the generator has one nonzero coordinate, namely the selected pivot up to sign. [step 1.1, given, construct, algebra]
+
+3.1 **One finite localization makes every block calculation valid before specialization.** The algorithm used finitely many field entries: include every entry of its basis-change matrices, their inverse matrices, the transformed $B,C,U$, and the scalar divisions in step 2.1. If $a\ne0$, select the pivot $p=a$; otherwise select $p=b\ne0$. Write this pivot as a fraction of nonzero elements of $A$, and include its numerator and denominator among the finitely many elements to invert or clear, together with nonzero denominators for all other entries. Let $f$ be their product, omitting only zero entries and taking denominator $1$ where appropriate. It is nonzero because $A$ is a domain. Over $A_f$, all recorded transformations and their inverses are defined, and the specified pivot is a unit. All block identities valid over $F$ remain valid over $A_f$, since this ring injects into $F$. The identity blocks show directly that $\ker C_f$, $\operatorname{im}B_f$ and their quotient have the bases and ranks in the Statement. They also show that $L_f=A_f(-b,a)$: the field computation of step 2.1 uses only the specified unit in its branch, so the same solution formula holds in $A_f$. This generator has a unit coordinate and is therefore a direct summand, with a complement obtained by the other standard coordinate vector. Under any map $A_f\to E$ to a field the transformations retain their explicit inverses, the chosen unit stays nonzero, and the same identity and zero blocks persist. Hence the cycle, boundary, homology and kernel bases specialize to the actual bases of the specialized matrix complex. No flat-base-change theorem or choice of bases in an infinite module has been assumed. [F1, step 1.1, step 2.1, construct, algebra]
+
+4.1 **Agreement of charts and invariance under representative changes.** Two choices of elimination data yield the same submodule of $A_{ff'}^2$: in either description a vector belongs to it exactly when its original $U$ image belongs to the original boundary image. Each gives a basis vector with a unit coordinate after the stated localizations. If these generators are $k,k'$, then $k'=c k$ and $k=d k'$ for some scalars in the common ring. Since $k$ has a unit coordinate, the equality $k=dc k$ gives $dc=1$; hence $c$ is a unit, and the two projective lines agree. An invertible change of any of the three chain bases carries cycles, boundaries and the two cycle columns together and induces an isomorphism of the quotient; its preimage kernel in the fixed two input coordinates is therefore unchanged. Replacing $U$ by $U+BT$ has the same quotient map. Replacing it by $cU$ for a common unit $c$ has the same kernel. For rational changes, invert their finitely many denominators and the numerator needed for each inverse, reducing to the same assertion. In particular a common rescaling of two peripheral cycle representatives does not require an independently normalized invariant vector. [step 3.1, given, construct, algebra]
+
+5.1 **The actual rational projective map.** For $A=\mathbb C[X]$, the nonzero element $f$ is a nonzero regular function, so $D_X(f)$ is nonempty; it is dense because $X$ is irreducible and a nonempty open subset of an irreducible space is dense. The coordinates $-b,a$ are regular there and have no simultaneous zero, since one is a unit. Thus they define a regular map to $\mathbb P^1$ there, with a regular affine ratio in whichever standard chart has nonzero denominator. Step4.1 proves agreement on intersections, so this is a well-defined rational kernel line independent of the chosen rank charts. Its coefficient pair in the prescribed order is $[-b:a]$, and applying $[x:y]\mapsto[-y:x]$ gives its slope $[a:b]$. If $a=0$ its value is zero and if $b=0$ its value is infinity; neither boundary case is discarded. Zero-sized chain blocks in steps 1.1–3.1 are interpreted by empty bases, while the rank-one hypothesis itself excludes $h=0$ or a zero quotient image. All choices were witnesses for one finite matrix calculation and one finite list of denominators. This proves the exact rationality, specialization and compatibility assertions without a choice principle and without asserting the rank hypotheses for a geometric family. [step 1.1, step 2.1, step 3.1, step 4.1, given, construct, algebra] ∎

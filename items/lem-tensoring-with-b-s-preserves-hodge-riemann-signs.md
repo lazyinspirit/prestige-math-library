@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-tensoring-with-b-s-preserves-hodge-riemann-signs.json
+  precheck: pass
 id: lem-tensoring-with-b-s-preserves-hodge-riemann-signs
 kind: lemma
-title: "Tensoring a direct sum of Hodge-Riemann bimodules with B_s preserves the signs"
+title: "Tensoring a direct sum of Hodge-Riemann bimodules with $B_s$ preserves the signs"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -22,12 +25,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Section 2.5, Lemme 2.9 and its proof"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
+
 ---
 
 ## Facts & Assumptions

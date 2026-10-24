@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing.json
+  precheck: pass
 id: lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing
 kind: lemma
 title: "The variation-of-constants integral is continuous for integrable forcing"
@@ -31,12 +34,7 @@ sources:
     - title: "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)"
       url: "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf"
       locator: "Chapter 6 Section 3.1, formula (15) and its derivation, printed pp. 19-20"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -61,7 +59,7 @@ Assume Countable Choice ([[def-countable-choice]]) for Lebesgue time integration
 
 ## Proof
 
-**Proof technique:** direct: well-definedness from the Bochner criterion, then a uniform estimate $\int\|(T(h)-I)f\|\to0$ obtained from a single simple approximation, and a splitting of the increment.
+**Proof technique:** direct: well-definedness from the Bochner criterion, then a uniform integral estimate tending to zero obtained from a single simple approximation, and a splitting of the increment.
 
 1.1 Fix $t\in[0,T_0]$. For each measurable simple approximation $g_n=\sum_j x_{nj}\mathbf1_{E_{nj}}$ to $f$, the map $s\mapsto T(t-s)g_n(s)$ is strongly measurable: for each of its finitely many values $x_{nj}$, approximate the continuous curve $s\mapsto T(t-s)x_{nj}$ uniformly by step functions on equal partitions of $[0,t]$, then multiply by $\mathbf1_{E_{nj}}$. Choose a partition size by its least integer giving error below $1/n$ on all finitely many curves. The resulting measurable simple function approximates $T(t-s)g_n(s)$ uniformly within $1/n$. As $g_n(s)\to f(s)$ off a null set and $\|T(t-s)\|\le K$, these approximants converge pointwise there to $T(t-s)f(s)$. Its norm is bounded by $K\|f(s)\|$, so [F2] gives Bochner integrability and [F3] gives $\|u_f(t)\|\le Me^{\max(-\omega,0)T_0}e^{\omega t}\int_0^t\|f(s)\|\,ds$. [F1, F2, F3, F5]
 

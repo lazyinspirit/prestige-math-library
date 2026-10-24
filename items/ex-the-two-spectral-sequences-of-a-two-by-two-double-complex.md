@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-two-spectral-sequences-of-a-two-by-two-double-complex.json
+  precheck: pass
 id: ex-the-two-spectral-sequences-of-a-two-by-two-double-complex
 kind: example
 title: The two spectral sequences of a two by two double complex
@@ -10,12 +13,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: "Weibel, An Introduction to Homological Algebra, Chapter 5"
@@ -47,3 +44,31 @@ Put $k=\mathbb Z/2$ in all four positions $C_{1,1},C_{0,1},C_{1,0},C_{0,0}$. Let
 1.3 Order total degree one as $C_{1,0}\oplus C_{0,1}$. Then the total complex is $k\xrightarrow{x\mapsto(0,x)}k^2\xrightarrow{0}k$ in degrees $2,1,0$. The first map is injective, its image is $0\oplus k$, and the second map has kernel $k^2$ and zero image. Consequently $H_2=0$, $H_1=k^2/(0\oplus k)\cong k$ by the first coordinate, and $H_0=k$. Other degrees are zero. [F1, F2, F3]
 
 2.1 The surviving $H_1$ class is represented by $C_{1,0}$. Row cutoff zero already includes it, giving $F^{\mathrm{row}}_0H_1=H_1$ and $F^{\mathrm{row}}_{-1}H_1=0$. Column cutoff zero includes only the degree-one summand $C_{0,1}$, whose class in total homology is zero, so $F^{\mathrm{col}}_0H_1=0$ and $F^{\mathrm{col}}_1H_1=H_1$. This accounts for the limiting positions $(0,1)$ versus $(1,0)$ despite the common total target. The first-quadrant finite bounds, axes and all omitted zero degrees have been checked; no representatives or maps were selected using AC. [F1, F2, step 1.1, step 1.2, step 1.3] ∎
+
+## Remarks
+
+The square displays the original double-complex indices: horizontal arrows lower the first index and vertical arrows lower the second. All omitted components are zero, and $k=\mathbb Z/2$.
+
+```tikzcd
+C_{0,1}=k \arrow[d, "0"'] & C_{1,1}=k \arrow[l, "1_k"'] \arrow[d, "0"] \\
+C_{0,0}=k & C_{1,0}=k \arrow[l, "0"]
+```
+
+The two stationary pages below use spectral coordinates $(p,q)$, with $p$ increasing to the right and $q$ increasing upwards. Thus the row page transposes the original indices. Each displayed $k$ survives, each displayed $0$ vanishes, and every differential between displayed positions is zero.
+
+```tikz
+\begin{tikzpicture}
+\node at (1.25,2.9) {$E^{2,\mathrm{col}}=E^{\infty,\mathrm{col}}$};
+\node at (0,1.7) {$0\ (0,1)$};
+\node at (2.5,1.7) {$0\ (1,1)$};
+\node at (0,0.5) {$k\ (0,0)$};
+\node at (2.5,0.5) {$k\ (1,0)$};
+\node at (7.25,2.9) {$E^{1,\mathrm{row}}=E^{\infty,\mathrm{row}}$};
+\node at (6,1.7) {$k\ (0,1)$};
+\node at (8.5,1.7) {$0\ (1,1)$};
+\node at (6,0.5) {$k\ (0,0)$};
+\node at (8.5,0.5) {$0\ (1,0)$};
+\end{tikzpicture}
+```
+
+In both panels the degree-one class is represented by $C_{1,0}$. Its row-filtration jump is at $0$, while its column-filtration jump is at $1$: $F^{\mathrm{row}}_{-1}H_1=0$, $F^{\mathrm{row}}_0H_1=H_1$, $F^{\mathrm{col}}_0H_1=0$, and $F^{\mathrm{col}}_1H_1=H_1$. The verification above establishes these assertions independently of the figures.

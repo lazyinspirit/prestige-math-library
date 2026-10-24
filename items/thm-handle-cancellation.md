@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-handle-cancellation.json
+  precheck: pass
 id: thm-handle-cancellation
 kind: theorem
 title: "Handle cancellation"
@@ -21,8 +24,7 @@ sources:
     - title: "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes; complete author PDF)"
       url: "https://him-lueck.uni-bonn.de/data/ictp.pdf"
       locator: "Cancellation Lemma 1.12, Ch. 1 §1.1, printed pp. 6-7"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -60,3 +62,30 @@ Assume $\mathrm{AC}_\omega$. Let $W$ be a compact smooth $n$-manifold with colla
 5.1 By step 2.1 the normalization comparison is the identity off a collar of $D$ and the two handle bodies. The ball replacement and absorption in steps 3.1–4.1 take place in a collar of $E\subset\operatorname{int}D$ and the handles. Choose that collar inside the same collar neighbourhood of $D$; these maps then fix its complement and carry that neighbourhood onto the corresponding neighbourhood, so their composition has the asserted support. The affected boundary disk in the support clause is this enclosing disk $D$. Every later attaching embedding is carried by the composed boundary diffeomorphism; attaching those handles by the transported embeddings extends the comparison relative to $\partial_0W$. [F3, F4, step 2.1, step 3.1, step 4.1]
 
 6.1 Consequently a geometrically cancelling consecutive pair may be deleted from, or added to, any handle presentation of the same manifold, relative to the incoming boundary. The argument covers the endpoints $k=0$ and $k=n-1$, where the intersection is read by the endpoint conventions of [F1] and the standard model is the corresponding endpoint case of [F4]. [F1, F4, step 5.1, given] ∎
+
+## Remarks
+
+The schematic records the local incidence condition in the middle boundary $M=\partial_1(W\cup_\varphi h^k)$: $A=\psi(S^k\times\{0\})$ is the upper handle's attaching sphere, and $B=\{0\}\times S^{n-k-1}$ is the lower handle's belt sphere. For $1\le k\le n-2$, their dimensions sum to $\dim M=n-1$. The strokes depict only a neighbourhood of their unique transverse intersection $p$, not the whole spheres or their dimensions. The endpoint cases use the conventions in [F1] and are not pictured.
+
+```tikz
+\begin{tikzpicture}
+\draw[dashed,rounded corners] (-3,-1.6) rectangle (3,1.6);
+\node at (0,2) {Local incidence in the middle boundary};
+\draw[thick] (-2.4,-0.8) -- (2.4,0.8);
+\draw[thick] (-1.1,1.1) -- (1.1,-1.1);
+\fill (0,0) circle (2pt);
+\node[above right] at (0,0) {$p$};
+\node[above] at (2,0.8) {$A\ (\dim A=k)$};
+\node[below] at (1.1,-1.1) {$B\ (\dim B=n-k-1)$};
+\node at (0,-2) {$A\cap B=\{p\}$, transverse};
+\node at (0,-2.7) {Standardize the pair, then replace its ball region:};
+\node (X) at (-3,-3.6) {$W\cup_\varphi h^k\cup_\psi h^{k+1}$};
+\node (Y) at (0.8,-3.6) {$W\natural D^n$};
+\node (Z) at (3.5,-3.6) {$W$};
+\draw[->] (X) -- node[above] {$\cong$} (Y);
+\draw[->] (Y) -- node[above] {$\cong$} (Z);
+\node at (0,-4.3) {Both comparisons fix $\partial_0W$};
+\end{tikzpicture}
+```
+
+The lower row summarizes steps 1.1–4.1: after normalization, the standard complementary pair fills a ball attached along $E$, and the boundary connected sum with that ball is absorbed in a boundary collar. It records diffeomorphisms, not inclusions. The enclosing support disk $D$ in step 2.1 may be larger than $E$. The rigorous proof, including its support and endpoint arguments, is independent of the picture.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality.json
+  precheck: pass
 id: cex-the-zero-countable-infinity-cocountable-measure-space-breaks-p-equals-one-duality
 kind: counterexample
 title: "The zero-countable / infinity-cocountable measure space breaks the $p=1$ endpoint of duality"
@@ -11,13 +14,6 @@ generation:
   role: counterexample
 deps: [def-countable-choice, def-sigma-algebra, def-measure, thm-countable-union-of-countable, lem-subset-of-countable, def-l-p-space-as-a-quotient-by-null-functions, def-l-infinity-on-a-measure-space, def-l-one-of-a-measure, thm-chebyshev-markov-inequality-for-the-integral]
 proof_strategy: "Build the countable-cocountable measure directly, then use Chebyshev-Markov to force every $L^1$ representative to vanish off an at most countable set while $L^\\infty$ still contains distinct bounded representatives."
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., paragraph after Theorem 6.15"
@@ -45,7 +41,7 @@ unique element of $L^\infty(\mu)$ on every measure space.
 
 ## Counterexample
 
-**Proof technique:** Build the countable-cocountable measure directly, then use Chebyshev-Markov to force every $L^1$ representative to vanish off an at most countable set while $L^\infty$ still contains distinct bounded representatives.
+**Proof technique:** Build the countable-cocountable measure directly, then use Chebyshev-Markov to force every L¹ representative to vanish off an at most countable set while L∞ still contains distinct bounded representatives.
 
 1.1 The family $\mathcal A$ contains $\varnothing$ and is closed under complements by definition. Let $(E_n)$ lie in $\mathcal A$. If every $E_n$ is at most countable, then $\bigcup_{n=1}^\infty E_n$ is at most countable by [L1]. If some $E_j$ is cocountable, then $$X\setminus\bigcup_{n=1}^\infty E_n\subseteq X\setminus E_j,$$ so [L1] makes the complement at most countable. Thus $\mathcal A$ is a sigma-algebra on $X$. [L1, L2, given, construct]
 

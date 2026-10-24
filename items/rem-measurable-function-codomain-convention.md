@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-measurable-function-codomain-convention.json
+  precheck: n/a
 id: rem-measurable-function-codomain-convention
 kind: remark
 title: "Measurability is relative to sigma-algebras on both domain and codomain"
@@ -8,13 +11,6 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measurable-space]
-verification:
-  audited: 2026-08-27
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   references:
     - title: "Sheldon Axler, Measure, Integration and Real Analysis, Section 2B"
@@ -36,4 +32,4 @@ $$f : (\mathbb{R}^n,\mathcal{L}(\mathbb{R}^n)) \to (\mathbb{R}^m,\mathcal{B}(\ma
 
 not a map into $(\mathbb{R}^m,\mathcal{L}(\mathbb{R}^m))$. The distinction is
 exactly what makes the later counterexample
-`g \circ f` with $g$ merely Lebesgue measurable possible.
+$g \circ f$ with $g$ merely Lebesgue measurable possible.

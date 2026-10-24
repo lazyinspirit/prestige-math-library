@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-transitive-imprimitive-groups-embed-in-an-imprimitive-wreath-product.json
+  precheck: pass
 id: thm-transitive-imprimitive-groups-embed-in-an-imprimitive-wreath-product
 kind: theorem
 title: "A transitive imprimitive action embeds modulo its kernel in an imprimitive wreath product"
@@ -11,13 +14,6 @@ deps: [def-block-and-block-system-for-a-group-action, def-group-action, def-impr
 justified_by: []
 aliases: []
 proof_strategy: constructive
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
 sources:
   scraped: []
   references:
@@ -64,3 +60,14 @@ embedding.
 3.1 Identify $\Omega$ with $B \times \Sigma$ by $\Psi(b,C) := t_C \cdot b$. Then for every $g \in G$ one has $$\Psi\bigl(\Phi(g) \cdot (b,C)\bigr) = t_{g \cdot C} \cdot \bigl(f_g(g \cdot C) \cdot b\bigr) = g \cdot (t_C \cdot b) = g \cdot \Psi(b,C).$$ So $\Phi(g)=1$ exactly when $g$ fixes every point of $\Omega$. [step 1.1, step 2.1, L2, algebra]
 
 4.1 Step 3.1 shows that $\ker \Phi$ is the kernel of the given action. Therefore a faithful action makes $\ker \Phi = 1$, so in that case $\Phi$ is an embedding into $H \wr_\Sigma K$. [step 3.1, discharge-construct] ∎
+
+## Remarks
+
+For each fixed $g \in G$, the bijection $\Psi(b,C)=t_C\cdot b$ intertwines the wreath-product action with the original action:
+
+```tikzcd
+B \times \Sigma \arrow[r, "\Psi"] \arrow[d, "\Phi(g)\cdot -"'] & \Omega \arrow[d, "g\cdot -"] \\
+B \times \Sigma \arrow[r, "\Psi"'] & \Omega
+```
+
+The left arrow sends $(b,C)$ to $(f_g(g\cdot C)\cdot b,g\cdot C)$: its fibre permutation is evaluated at the target block $g\cdot C$. By step 1.1, $f_g(g\cdot C)$ is induced by $t_{g\cdot C}^{-1}gt_C$, so both routes send $(b,C)$ to $g\cdot(t_C\cdot b)$, as computed in step 3.1. The block partition makes $\Psi$ bijective: each $\omega\in\Omega$ lies in a unique $C\in\Sigma$ and has the unique preimage $(t_C^{-1}\cdot\omega,C)$. The proof above is independent of this illustration.

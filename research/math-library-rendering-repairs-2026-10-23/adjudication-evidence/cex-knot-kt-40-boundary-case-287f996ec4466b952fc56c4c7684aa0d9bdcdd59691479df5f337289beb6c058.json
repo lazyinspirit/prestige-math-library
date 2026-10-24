@@ -1,0 +1,122 @@
+{
+  "id": "cex-knot-kt-40-boundary-case",
+  "agent": "/root/rendering_repair_coordinator/knot_001",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution audit PNG visibly contains the red diagram-failed block. The same chain still failed in a fresh actual native preview after only matching the fence to tikzcd; replacing operatorname{id} with equivalent mathrm{id} in the two arrow labels yielded an actual SVG with no diagram failures. Thus the substantive repair is native TeX-compatible identity labels, rather than a mathematical change.",
+      "action": "Use a bare tikzcd fence and replace only the diagram identity-label command with mathrm; retain every object, arrow, formula and proof.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other: tikz-label-illegibility",
+      "verdict": "confirmed",
+      "reason": "Independently re-viewed the prior final tile01 standalone at original resolution: the approximately 150px-wide chain has very small arrow labels that are difficult to distinguish. This is a concrete readability issue, despite the absence of clipping. Fresh final-v2 original-resolution capture shows enlarged module symbols and clearly distinct identity-tensor-eta/epsilon labels with adequate arrow spacing.",
+      "action": "Layout only: add explicit tikzcd environment with column sep=large, cells={nodes={scale=1.8}}, labels={scale=1.8}. No objects, maps or mathematical text changed.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repaired the birth/death chain by normalizing its environment to a tikzcd fence and using native-compatible upright identity labels. Same-owner guarded followup enlarges module nodes and map labels and increases column spacing for legibility.",
+  "source_lines_after": {
+    "diagram": [
+      45,
+      53
+    ],
+    "layout_options": [
+      46
+    ],
+    "identity_labels": [
+      48,
+      50
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains/codomains",
+      "justification": "The three displayed modules remain A, A tensor A, A over Z. The first map is id_A tensor eta, from A tensor Z identified with A to A tensor A, a maps to a tensor 1. The second is id_A tensor epsilon, from A tensor A to A tensor Z identified with A, a tensor b maps to a epsilon(b). These are precisely the maps in the unchanged Statement refuted and the supplier Definition."
+    },
+    {
+      "check": "Composite and sign",
+      "justification": "Supplier eta(1)=1 and epsilon(1)=0 imply epsilon eta=0 on Z. Therefore the displayed two-arrow composite sends every a to a epsilon(1)=0, as checked algebraically in Counterexample steps 1.1 and 2.1. There is no asserted commutative square or extra relation. The zero map is neither id_A nor -id_A since 1 and -1 are nonzero; any overall sign on a movie map leaves its zero composite unchanged."
+    },
+    {
+      "check": "Grading and geometric interpretation",
+      "justification": "Supplier Definition assigns deg(1)=1, deg(X)=-1 and quantum degree +1 to eta and epsilon. The two displayed tensor maps each retain degree +1 and composite degree +2; the diagram asserts no degree-zero identity or altered grading. It depicts the unchanged unaffected cylinder and separate born/capped circle, so the closed component is a sphere. It adds no crossing, orientation or Koszul convention."
+    },
+    {
+      "check": "Proof independence",
+      "justification": "The unchanged two numbered algebraic steps establish the zero composite and its inequality to both signs of the identity without using the drawing. The existing prose explicitly says the diagram is not used as a proof."
+    },
+    {
+      "check": "Layout followup preserves the exact graph",
+      "justification": "Compared with the authenticated followup preimage: only the explicit tikzcd environment and layout options are added. The same three ordered nodes A, A tensor A, A and same two rightward arrows id tensor eta and id tensor epsilon remain. All source outside the diagram is byte-identical, so the existing domain/codomain, zero-composite, quantum-degree and overall-sign checks above remain applicable. Proof steps 1.1 and 2.1 remain independent and unchanged."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-knot-kt-40-boundary-case.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-knot-kt-40-boundary-case.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "counterexample"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-knot-kt-40-boundary-case.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-knot-kt-40-boundary-case --out research/math-library-rendering-repairs-2026-10-23/previews/knot-001-legibility-v2-20261024",
+      "exit_code": 0,
+      "output": "Fresh final followup: 1 item, 1 tile, native SSR actual SVG; receipt has tikz_count 1, diagram_failures [], katex_errors []. Independently viewed standalone original-resolution tile: enlarged three module labels and both map labels are readable, two rightward arrows visible, no clipping or overlap. First scale/transform-shape attempt enlarged only labels and was superseded by independently scaled cells/labels."
+    },
+    {
+      "command": "Exact outside-diagram byte comparison against authenticated followup preimage",
+      "exit_code": 0,
+      "output": "Entire source outside diagram byte-identical, including metadata, Statement text/formula, Facts and proof."
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/cex-knot-kt-40-boundary-case--01.png",
+    "interim_failed_preview": "research/math-library-rendering-repairs-2026-10-23/previews/knot-001-fresh-20261024",
+    "final": "research/math-library-rendering-repairs-2026-10-23/previews/knot-001-legibility-v2-20261024/screenshots/cex-knot-kt-40-boundary-case--01.png",
+    "viewed_detail": "original",
+    "prior_final": "research/math-library-rendering-repairs-2026-10-23/previews/knot-001-final-20261024/screenshots/cex-knot-kt-40-boundary-case--01.png",
+    "interim_layout_preview": "research/math-library-rendering-repairs-2026-10-23/previews/knot-001-legibility-20261024"
+  },
+  "before_raw_sha256": "5da203ad590ef332e479633f0114a5110760fada1902861b845da6f62985fcc2",
+  "after_raw_sha256": "4a581d659f056230093b1e84b2d6eb326fcbc98176269fc831dafe39e6b11b1b",
+  "pre_edit_guard": "Current raw bytes matched queue before_raw_sha256 immediately before first edit; own exact interim bytes guarded before second edit. Same-owner layout followup guarded exact queue followup SHA256 90f991d2490e14ec098d70dd859eaa7d25931ba6251a5916a72a7fd2e213f459 immediately before edit; original immutable report authenticated against coordinator archive before replacement.",
+  "metadata_preserved": true,
+  "publication_status_preserved": "status: published byte-identical; entire frontmatter unchanged",
+  "remaining_issues": [],
+  "limitations": [
+    "This is focused local diagram adjudication, not a whole-item audit or native workflow recertification. The preview reports 32 unrelated reference-map parse diagnostics, outside this carrier."
+  ],
+  "prior_report_archive": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/cex-knot-kt-40-boundary-case-27c63c88636c1883a1b6071e3dcf955e715ff03bf0ee1ddae764e746f58d55b7.json",
+  "followup_before_file": "research/math-library-rendering-repairs-2026-10-23/followup-before/cex-knot-kt-40-boundary-case-legibility-90f991d2490e.md",
+  "followup_before_raw_sha256": "90f991d2490e14ec098d70dd859eaa7d25931ba6251a5916a72a7fd2e213f459"
+}

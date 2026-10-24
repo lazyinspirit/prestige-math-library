@@ -1,0 +1,103 @@
+{
+  "id": "thm-fredholm-index-is-additive",
+  "agent": "/root/rendering_repair_coordinator/fa_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile 01 visibly prints literal \\to in the quotient-map reference label. The current supplier title still uses escaped parenthesis math; the frozen and pre-edit current carrier hashes match.",
+      "action": "Added a readable local explicit label to the same quotient-space wikilink in A3.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original two standalone tiles and source contain only a long prose introduction of six spaces and five maps. A compact exact-sequence picture materially clarifies their order, endpoint maps and the alternating-dimension argument. This is a warranted explanatory addition under the expanded diagram scope, not a missing proof premise.",
+      "action": "Added a final Remarks tikzcd exact sequence, followed by precise identifications and the unchanged map formulas and dimension signs.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced the raw-TeX inherited reference label locally and added a warranted exact-sequence illustration in final Remarks. Title, original statement, hypotheses, proof, metadata, dependencies, sources and published status are preserved.",
+  "source_lines_after": [
+    38,
+    60,
+    62,
+    64,
+    65,
+    66,
+    68
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "V1=ker T and V2=ker(UT) are subspaces of X; V3=ker U is a subspace of Y; V4=Y/ran T; V5=Z/ran(UT); V6=Z/ran U. These agree with proof step 2.1 and the local Fredholm definition.",
+      "domains_and_maps": "alpha:V1→V2 includes x since Tx=0 implies UTx=0. beta:V2→V3 sends x to Tx since UTx=0. gamma:V3→V4 sends y to y+ran T with positive sign. delta:V4→V5 sends y+ran T to Uy+ran(UT); replacing y by y+Tx changes Uy by UTx, so it is well-defined. epsilon:V5→V6 sends z+ran(UT) to z+ran U, well-defined because ran(UT)⊆ran U. These are exactly the formulas in step 1.2; endpoint arrows are zero maps."
+    },
+    {
+      "relations": "Exactness at V1: alpha injective. At V2: ker beta=ker T=im alpha. At V3: y in ker U maps to zero under gamma iff y=Tx, and then UTx=0, giving im beta. At V4: delta([y])=0 iff Uy=UTx, so [y]=[y−Tx] with y−Tx in ker U, giving im gamma. At V5: epsilon([z])=0 iff z in ran U, exactly im delta. At V6: epsilon is surjective because every z+ran U has preimage z+ran(UT). These verify the exactness claimed in steps 2.2–2.3; no commutative squares or extra exact relations are asserted."
+    },
+    {
+      "signs": "Step 3.1 uses (+,−,+,−,+,−) on V1,…,V6. Rearrangement gives dim V2−dim V5=(dim V1−dim V4)+(dim V3−dim V6), matching step 4.1 and the Fredholm index definition. No connecting-map sign was changed. The original rigorous proof remains untouched and independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-fredholm-index-is-additive.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-fredholm-index-is-additive.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-fredholm-index-is-additive.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "original_evidence": {
+    "inspection": "Both authentic original PNGs inspected individually with detail original; frozen-before and original pre-edit current source matched SHA256 90f9b4fc6cd3423af6b85a20c1b8b412a9095152b928ecf8a81da759e4d627c5.",
+    "path_discrepancy": "Supplement row evidence_dir/screenshots paths do not exist. Located authentic corresponding-category screenshots in functional-analysis/screenshots and verified both exact recorded SHA256 values.",
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-fredholm-index-is-additive--01.png",
+        "sha256": "6c4ea1cdbe2f94b115ebce76b08f75faa44b364581c67de0e4adf51cc0e87a36"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-fredholm-index-is-additive--02.png",
+        "sha256": "030965032f1afdb6e56e3c7853815eedea35fcbf136911617e6bebf503ce9095"
+      }
+    ]
+  },
+  "native_visual_check": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/fa016-native-final/manifest.json",
+    "source_sha256": "3f7cce95552c6b1d29d9b226d917c1b7c279ff76b31a9f877050ba9812bc4692",
+    "reference_map_sha256": "90b9fee995ef122a1357a135befc741742b1d338f17d744e3004bd6b4d3a044a",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/fa016-native-final/screenshots/thm-fredholm-index-is-additive.json",
+    "result": "Both fresh PNGs inspected independently at original resolution: explicit reference label readable; all eight sequence objects, seven right-pointing arrows and five Greek labels render completely without clipping or overlap. Caption definitions, map formulas and alternating signs render correctly.",
+    "katex_errors": [],
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody SSR preview, not a production-route check. Reference map has 16 unrelated parse diagnostics, recorded by the preview; assigned source and needed supplier labels are present."
+  },
+  "remaining_issues": []
+}

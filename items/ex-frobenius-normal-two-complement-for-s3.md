@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-frobenius-normal-two-complement-for-s3.json
+  precheck: pass
 id: ex-frobenius-normal-two-complement-for-s3
 kind: example
-title: "Frobenius normal two complement for S_3"
+title: "Frobenius normal two complement for $S_3$"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -21,9 +24,7 @@ sources:
     - title: "David Craven, Finite Group Theory, Lecture 3"
       url: "https://www.maths.ox.ac.uk/system/files/attachments/Lecture%203_0.pdf"
       locator: "Lecture 3, Theorem 3.8 and sheet 3 solutions, pp. 38, 83–84"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Example

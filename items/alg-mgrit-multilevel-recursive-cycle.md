@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-mgrit-multilevel-recursive-cycle.json
+  precheck: n/a
 id: alg-mgrit-multilevel-recursive-cycle
 kind: algorithm
 title: "Recursive multilevel MGRIT cycles"
@@ -17,8 +20,6 @@ forward_refs: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "R. D. Falgout, S. Friedhoff, Tz. V. Kolev, S. P. MacLachlan, and J. B. Schroder, Parallel Time Integration with Multigrid"
@@ -42,3 +43,22 @@ For a recursive call at level $\ell$, perform the following operations on an ini
 Return the updated fine-level vector when the call completes. At level $0$, check the residual before the first outer cycle and after every completed cycle; return status converged only when the residual tolerance is met. After $J_{\rm out}$ cycles without a verified residual certificate, return the last iterate with status budget-exhausted. Inexact level solves contribute explicit update defects; no such defect is hidden in the exact-arithmetic cycle.
 
 No two-grid contraction is transferred to this recursive cycle; convergence requires a bound for its actual full recursive error operator.
+
+
+## Remarks
+
+For a noncoarsest call, the arrows below show the order of residual restriction, recursive coarse correction, and prolongation. The lower-right box is repeated $\nu_\ell$ times, updating the coarse residual before each recursive call; the recursion terminates with the exact level-$L$ solve. These are procedural arrows, not an assertion that the practical coarse operator equals the exact Schur complement.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,rounded corners,align=center,text width=4.7cm,minimum height=1.4cm] (fine) at (0,0) {Pre-relax on level $\ell$\\ $r_\ell=b_\ell-A_\ell u_\ell$};
+\node[draw,rounded corners,align=center,text width=4.7cm,minimum height=1.4cm] (out) at (7,0) {$u_\ell\leftarrow u_\ell+P_\ell z_{\ell+1}$\\Then post-relax and return};
+\node[draw,rounded corners,align=center,text width=4.7cm,minimum height=1.8cm] (rhs) at (0,-3.1) {$r_{\ell+1}=R_\ell r_\ell$\\Initialize $z_{\ell+1}=0$};
+\node[draw,rounded corners,align=center,text width=4.7cm,minimum height=1.8cm] (visit) at (7,-3.1) {$\rho_{\ell+1}=r_{\ell+1}-A_{\ell+1}z_{\ell+1}$\\Recursive call from zero gives $\delta_{\ell+1}$\\ $z_{\ell+1}\leftarrow z_{\ell+1}+\delta_{\ell+1}$};
+\draw[->] (fine) -- node[left] {$R_\ell$} (rhs);
+\draw[->] (rhs) -- node[above] {$\nu_\ell$ visits} (visit);
+\draw[->] (visit) -- node[right] {$P_\ell$} (out);
+\end{tikzpicture}
+```
+
+The level-$\ell+1$ recursive call in the box uses right-hand side $\rho_{\ell+1}$ for $A_{\ell+1}\delta_{\ell+1}=\rho_{\ell+1}$. The figure only illustrates the stated procedure; all input conditions, stopping rules, and the absence of an automatic multilevel convergence guarantee remain as in the Definition.

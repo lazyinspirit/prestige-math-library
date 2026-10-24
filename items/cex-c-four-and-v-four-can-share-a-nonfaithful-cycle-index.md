@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index.json
+  precheck: pass
 id: cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index
 kind: counterexample
-title: "C_4 and V_4 can share the same cycle index through nonfaithful actions"
+title: "$C_4$ and $V_4$ can share the same cycle index through nonfaithful actions"
 status: published
 origin: session
 provenance:
@@ -15,8 +18,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
 sources:
   scraped: []
   references: []

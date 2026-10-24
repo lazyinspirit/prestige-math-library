@@ -1,0 +1,61 @@
+---
+id: lem-ip-bv-extension-translation-and-coarea
+kind: lemma
+title: BV extension, translation, and coarea
+status: published
+origin: pipeline
+deps:
+  - def-countable-choice
+  - def-ip-spatial-bv-and-distributional-tv
+  - lem-ip-bv-coarea-formula
+  - lem-ip-bv-extension-and-translation
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
+      url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
+    - title: "Piotr Rybka, The space in variational and evolution problems — Lecture Notes in Mathematical Sciences 15"
+      url: "https://www.ms.u-tokyo.ac.jp/publication/docs/lecturenotes15-rybka.pdf"
+proof_strategy: direct
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 5
+---
+
+## Statement
+
+Assume Countable Choice. For every bounded Lipschitz domain $\Omega\subseteq\mathbb R^n$ (a bounded open set with a finite Lipschitz graph cover of its boundary, with the domain on one side of each graph), zero extension is a bounded map $BV(\Omega)\to BV(\mathbb R^n)$ with support in $\overline\Omega$ and satisfies $\|\widetilde v\|_{L^1(\mathbb R^n)}+TV(\widetilde v;\mathbb R^n)\le C_\Omega(\|v\|_{L^1(\Omega)}+TV(v;\Omega))$; translations satisfy $\|w(\cdot+h)-w\|_{L^1(\mathbb R^n)}\le|h|TV(w;\mathbb R^n)$ for $w\in BV(\mathbb R^n)$; and, for every open $U\subseteq\mathbb R^n$ and every $u\in BV(U)$, if $E_t^+:=\{x\in U:u(x)>t\}$ for $t>0$ and $E_t^-:=\{x\in U:u(x)<t\}$ for $t<0$, then these sets have finite perimeter for almost every applicable $t$ and $$TV(u;U)=\int_0^\infty P(E_t^+;U)\,dt+\int_{-\infty}^0P(E_t^-;U)\,dt.$$
+
+## Statement references
+
+[[lem-ip-bv-extension-and-translation|The BV zero-extension and translation conclusions.]]
+
+[[lem-ip-bv-coarea-formula|The signed-level BV coarea identity.]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, bounded Lipschitz domains, and BV functions on the stated domains.
+
+[F1] Bounded zero extension and the full-space translation estimate hold under Countable Choice, including dimension one. ([[lem-ip-bv-extension-and-translation]])
+
+[F2] The signed-level coarea identity and almost-everywhere finite perimeter hold under Countable Choice on arbitrary open sets. ([[lem-ip-bv-coarea-formula]])
+
+## Proof
+
+**Given:** The hypotheses in the Statement.
+
+1.1 Apply [F1] to each bounded Lipschitz domain and to the stated full-space BV functions. This proves the support, norm and translation assertions. [F1, given]
+
+2.1 Apply [F2] on the arbitrary open set $U$ to $u\in BV(U)$. It gives exactly the two signed level families, their almost-everywhere finite perimeters, and the displayed equality. All suppliers assume only Countable Choice. [F2, given, step 1.1] ∎ 

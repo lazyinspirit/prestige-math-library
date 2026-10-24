@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-xd-two-state-gating-uniformization.json
+  precheck: pass
 id: ex-xd-two-state-gating-uniformization
 kind: example
 title: "Two-state gating through uniformization"
@@ -19,11 +22,6 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)"
@@ -62,3 +60,20 @@ Both columns equal the probability vector $v=(\beta/s,\alpha/s)^T$. Therefore $P
 2.1 By [F2], the on-coordinate at time $t$ is $\sum_{k\ge1}e^{-st}(st)^k(\alpha/s)/k!$. By [F3] the sum of the masses over $k\ge1$ is $1-e^{-st}$, so $p_{\rm on}(t)=\frac{\alpha}{s}(1-e^{-st})$. The off-coordinate is $1-p_{\rm on}(t)$ because the solution is a probability vector. [given, F2, F3, step 1.2, algebra]
 
 3.1 If $s=0$, nonnegativity of $\alpha,\beta$ implies $\alpha=\beta=0$, so $Q=0$ and the master equation keeps $e_{\rm off}$ fixed. If $s>0$ and $\alpha=0$, the formula gives $p_{\rm on}=0$; if $\beta=0$, it gives $p_{\rm on}=1-e^{-\alpha t}$. The endpoint cases agree with the stated rates. [given, F1, F2, step 2.1, algebra] ∎
+
+
+## Remarks
+
+The transition graph records the rates in the Example. The incoming unlabelled arrow marks the initial off state; an edge with rate zero is inactive. In the column convention, each arrow contributes to the row of its destination and the column of its source, giving $q_{\mathrm{on},\mathrm{off}}=\alpha$ and $q_{\mathrm{off},\mathrm{on}}=\beta$; the diagonal entries make both column sums zero.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node[draw,circle,minimum size=12mm] (off) at (0,0) {$\mathrm{off}$};
+\node[draw,circle,minimum size=12mm] (on) at (4,0) {$\mathrm{on}$};
+\draw[->] (-1.8,0) -- (off);
+\draw[->] (off) to[bend left=28] node[above] {$\alpha$} (on);
+\draw[->] (on) to[bend left=28] node[below] {$\beta$} (off);
+\end{tikzpicture}
+```
+
+The verification above establishes the probabilities independently of this illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-saltation-matrix-for-a-transverse-hybrid-reset.json
+  precheck: pass
 id: thm-saltation-matrix-for-a-transverse-hybrid-reset
 kind: theorem
 title: "The saltation matrix gives the first-order variation across a transverse hybrid reset"
@@ -18,8 +21,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Nathan J. Kong, J. Joe Payne, James Zhu, and Aaron M. Johnson, Saltation Matrices: The Essential Tool for Linearizing Hybrid Dynamical Systems"
@@ -59,3 +60,31 @@ where all derivatives and vector fields are evaluated at the nominal event and t
 ## Remarks
 
 The batch-96 supplier [[lem-parameter-ode-flow-tangent-on-common-tube]] is present on `library/numerical-optimization-inverse-problems-and-uncertainty-quantification/discrete-continuous-and-pde-adjoint-sensitivities.md`, with its companion page at the same canonical category. The earlier missing-page observation checked the different dynamics-category path. The exact common-tube interface and identity-initial-map/time-reversal specialization above are retained; this placement reconciliation grants no independent proof acceptance.
+
+
+For $\delta\tau=\tau_\delta-\tau>0$, the schematic below separates the two reset times from the comparison at $t_0=\tau_\delta$. Vertical placement only separates the trajectories and modes; it is not a scalar state coordinate. Write $z_\delta^-=\phi^-(\tau_\delta;\tau,x^-+\delta x^-)$ for the perturbed guard state and $x^+(\tau)=R(\tau,x^-)$ for the nominal reset state.
+
+```tikz
+\begin{tikzpicture}
+\draw[->] (-0.4,5) -- (8,5) node[right] {$t$};
+\node[above] at (0,5) {$\tau$};
+\node[above] at (7,5) {$\tau_\delta=t_0$};
+\draw[densely dotted] (0,4.8) -- (0,0);
+\draw[densely dotted] (7,4.8) -- (7,0);
+\node[left] at (0,4) {$x^-+\delta x^-$};
+\node[right] at (7,4) {$z_\delta^-$};
+\draw[->] (0,4) -- node[above] {incoming flow $f^-$} (7,4);
+\node[left] at (0,2.8) {$x^-$};
+\node[right] at (0.1,2.8) {$g(\tau,x^-)=0$};
+\draw[->] (0,2.6) -- node[left] {$R(\tau,\cdot)$} (0,0.7);
+\node[left] at (0,0.5) {$x^+(\tau)$};
+\draw[->] (0,0.5) -- node[below] {outgoing flow $f^+$} (7,0.5);
+\node[right] at (7,0.5) {$x^+(t_0)$};
+\draw[->] (7,3.8) -- node[right] {$R(\tau_\delta,\cdot)$} (7,2.2);
+\node[left] at (6.8,3.1) {$g(\tau_\delta,z_\delta^-)=0$};
+\node[right] at (7,2) {$x_\delta^+(t_0)$};
+\draw[->,dashed] (7,0.7) -- node[left] {$\delta x^+$} (7,1.8);
+\end{tikzpicture}
+```
+
+Here $x_\delta^+(t_0)=R(\tau_\delta,z_\delta^-)$ denotes the outgoing right limit. The dashed arrow denotes the difference $x_\delta^+(t_0)-x^+(t_0)$ at the same clock time, not an additional flow or reset. Step 1.1 gives $\delta\tau=-D_xg\,\delta x^-/\kappa+o(\|\delta x^-\|_2)$. In step 2.1, the perturbed reset contributes $D_xR\,\delta x^-+(D_xR f^-+\partial_tR)\delta\tau$, while nominal outgoing motion contributes the subtraction $-f^+\delta\tau$, all to first order. For $\delta\tau<0$ it is instead the perturbed outgoing trajectory that flows to $t_0=\tau$, giving the same formula. Thus the figure illustrates the sign in the saltation correction without being used in the proof.

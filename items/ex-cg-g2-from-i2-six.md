@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-g2-from-i2-six.json
+  precheck: pass
 id: ex-cg-g2-from-i2-six
 kind: example
 title: "G2 from I2(6): the scaled realization and its twelve roots"
@@ -23,13 +26,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Printed p. 3 preview of the finite irreducible Coxeter groups and the Weyl-type identification G2 := I2(6); Section 5 cosine table, printed p. 13. Both facts are independently derived in this item."
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -91,3 +88,36 @@ where $a_s=e_s$ and $a_t=\sqrt3e_t$. The squared $B$-norms are $1$ on $a_s,a_s+a
 5.1 Every root reflection is $\rho(w)r_{a_i}\rho(w)^{-1}$ as in step 3.1, so [F12] gives $W(\Phi_c)\subseteq\rho(W)$; conversely $r_{a_s}=\rho(s)$ and $r_{a_t}=\rho(t)$ generate $\rho(W)$, so $W(\Phi_c)=\rho(W)$ and it has order $12$. For the second scaling, $a'_s=\sqrt3e_s=(\sqrt3/2)a_s^\vee$ and $a'_t=e_t=(\sqrt3/2)a_t^\vee$; because $\rho(w)$ preserves $B$, $(\rho(w)a_i)^\vee=\rho(w)a_i^\vee$, whence $\Phi_{c'}=(\sqrt3/2)\Phi_c^\vee$ by [F7]. This construction uses only the two fixed generators and finitely many roots, so no form of the Axiom of Choice is used. [F3, F4, F7, F12, step 2.1, step 3.1, algebra] ∎
 
 No form of the Axiom of Choice is used; all choices and computations involve the two fixed generators and finite sets.
+
+## Remarks
+
+The two pictures use Euclidean coordinates in which $B$ is the ordinary dot product, with $a_s=(1,0)$ and $a_t=(-3/2,\sqrt3/2)$. Thus the simple roots meet at $150^\circ$; the coefficient pairs in step 2.2 are not orthonormal coordinates. Blue arrows have squared length $1$ and red arrows have squared length $3$. Each picture shows all twelve roots; the simple roots are labelled. In the left picture the six positive roots, read counterclockwise from $a_s$, are $a_s$, $3a_s+a_t$, $2a_s+a_t$, $3a_s+2a_t$, $a_s+a_t$, $a_t$.
+
+```tikz
+\begin{tikzpicture}[scale=1.25,>=stealth]
+\begin{scope}
+\foreach \ang in {0,60,120,180,240,300} {
+  \draw[->,blue,thick] (0,0) -- (\ang:1);
+}
+\foreach \ang in {30,90,150,210,270,330} {
+  \draw[->,red,thick] (0,0) -- (\ang:1.732050808);
+}
+\node[right] at (1,0) {$a_s$};
+\node[above left] at (150:1.732050808) {$a_t$};
+\node at (0,-2.12) {$\Phi_c$};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+\foreach \ang in {0,60,120,180,240,300} {
+  \draw[->,red,thick] (0,0) -- (\ang:1.732050808);
+}
+\foreach \ang in {30,90,150,210,270,330} {
+  \draw[->,blue,thick] (0,0) -- (\ang:1);
+}
+\node[right] at (1.732050808,0) {$a'_s$};
+\node[above left] at (150:1) {$a'_t$};
+\node at (0,-2.12) {$\Phi_{c'}=(\sqrt{3}/2)\Phi_c^\vee$};
+\end{scope}
+\end{tikzpicture}
+```
+
+The right picture keeps each root ray and exchanges its length class: step 5.1 gives $a'_s=\sqrt3a_s$ and $a'_t=a_t/\sqrt3$. Its Cartan matrix is $A^T$, as computed in step 2.1. Reflection in a root means reflection across the line perpendicular to its arrow, as in [F14]; for the left basis its actions on coefficient pairs are exactly $r_{a_s}(x,y)=(-x+3y,y)$ and $r_{a_t}(x,y)=(x,x-y)$ from step 2.2. The verification above is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-level-one-charge-zero-crystal-through-rank-four-at-e-three.json
+  precheck: pass
 id: ex-level-one-charge-zero-crystal-through-rank-four-at-e-three
 kind: example
 title: "The charge-zero level-one crystal through rank four at e = 3"
@@ -69,3 +72,37 @@ quantum-group Fock arrow $\tilde f_1$ from $(2,1)$ to $(2,1,1)$.
 2.1 The additions from rank $3$ and the vanishing claims. $(2,1)$: color $0$ has the addable $(2,2)$ (residue $0$), word $+$, so $\tilde f_0(2,1) = (2,2)$; color $1$ has the removable $(1,2)$ and the addable $(3,1)$, top-to-bottom word $-+$, which cancels, so $\tilde f_1 = \tilde e_1 = 0$ and in particular $(2,1)$ has no residue-$1$ arrow; color $2$ has the addable $(1,3)$ above the removable $(2,1)$, word $+-$ with no cancellable pair, so the last surviving $+$ is $(1,3)$, giving $\tilde f_2(2,1) = (3,1)$, and the first surviving $-$ is $(2,1)$, giving $\tilde e_2(2,1) = (2)$. $(1,1,1)$: color $0$ has the addable $(4,1)$ (residue $-3 \equiv 0$), word $+$, so $\tilde f_0(1,1,1) = (1,1,1,1)$; color $1$ has the addable $(1,2)$ above the removable $(3,1)$, word $+-$ with no cancellable pair, so $\tilde f_1(1,1,1) = (2,1,1)$ and $\tilde e_1(1,1,1) = (1,1)$; color $2$ has no nodes. These are all the additions from ranks $0$-$3$ inside the window, and every other color at these vertices has just been shown to have no surviving selected sign, hence a zero arrow. [given, F1, step 1.2]
 
 3.1 The deletions from rank $4$ and the boundary. $(2,2)$: the only removable node is $(2,2)$, of residue $0$ with word $-$, so $\tilde e_0(2,2) = (2,1)$, and there is no removable node of residue $1$ or $2$, so the good deletions $\tilde e_1$ and $\tilde e_2$ are zero; the addable nodes $(1,3)$ of residue $2$ and $(3,1)$ of residue $1$ are each the unique surviving $+$ of their color, so $\tilde f_2$ adds $(1,3)$ and $\tilde f_1$ adds $(3,1)$, both additions leaving rank $5$ and therefore omitted from the displayed window. $(3,1)$: color $2$ has the removables $(1,3)$ and $(2,1)$, both of residue $2$, word $--$, whose first surviving $-$ is $(1,3)$, so $\tilde e_2(3,1) = (2,1)$; color $1$ has the addable $(3,1)$ of residue $1$ and color $0$ the addables $(1,4)$, $(2,2)$ of residue $0$, all with no surviving $-$ for a good deletion and with cogood additions leaving rank $5$. $(2,1,1)$: color $1$ has the removables $(1,2)$ and $(3,1)$, word $--$ of residue $1$, first surviving $-$ equal to $(1,2)$, so $\tilde e_1(2,1,1) = (1,1,1)$; color $0$ has the addables $(2,2)$ and $(4,1)$, whose cogood is $(4,1)$ and leaves rank $5$; color $2$ has the single addable $(1,3)$, leaving rank $5$, and no removable. $(1,1,1,1)$: the only removable node is $(4,1)$ of residue $0$, so $\tilde e_0(1,1,1,1) = (1,1,1)$; the addables $(1,2)$ and $(5,1)$ have residues $1$ and $2$ and lead to rank $5$, so they are omitted rather than declared zero. Finally the conjugate comparison: transposition sends $(3,1)$ to $(2,1,1)$, fixes $(2,1)$, negates residues, so the arrow $(2,1)\xrightarrow{\tilde f_2}(3,1)$ corresponds to the quantum-group arrow $\tilde f_1$ from $(2,1)$ to $(2,1,1)$ with $f_2$ reflecting to $f_{-2} = f_1$. [given, F1, step 2.1] ∎
+
+
+## Remarks
+
+The rank-by-rank graph below displays the same restricted-label component.
+An edge labelled $i$ points downwards for $\tilde f_i$; traversing it upwards
+means $\tilde e_i$. The labels are residues modulo $3$, not multiplicities.
+Only ranks $0$ through $4$ are drawn: arrows out of rank $4$ are omitted,
+not declared zero. The verification above establishes all arrows independently
+of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.15cm,y=1cm,>=stealth, every node/.style={inner sep=4pt}]
+\node (v0) at (0,0) {$\emptyset$};
+\node (v1) at (0,-1.3) {$(1)$};
+\node (v2a) at (-1.8,-2.6) {$(2)$};
+\node (v2b) at (1.8,-2.6) {$(1,1)$};
+\node (v3a) at (-1.8,-3.9) {$(2,1)$};
+\node (v3b) at (1.8,-3.9) {$(1,1,1)$};
+\node (v4a) at (-2.9,-5.2) {$(3,1)$};
+\node (v4b) at (-0.8,-5.2) {$(2,2)$};
+\node (v4c) at (0.9,-5.2) {$(2,1,1)$};
+\node (v4d) at (3.1,-5.2) {$(1,1,1,1)$};
+\draw[->] (v0) -- node[right] {$0$} (v1);
+\draw[->] (v1) -- node[above left] {$1$} (v2a);
+\draw[->] (v1) -- node[above right] {$2$} (v2b);
+\draw[->] (v2a) -- node[left] {$2$} (v3a);
+\draw[->] (v2b) -- node[right] {$1$} (v3b);
+\draw[->] (v3a) -- node[left] {$2$} (v4a);
+\draw[->] (v3a) -- node[right] {$0$} (v4b);
+\draw[->] (v3b) -- node[left] {$1$} (v4c);
+\draw[->] (v3b) -- node[right] {$0$} (v4d);
+\end{tikzpicture}
+```

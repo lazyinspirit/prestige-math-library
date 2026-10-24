@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-bruhat-eulerian-intervals-and-mobius.json
+  precheck: pass
 id: thm-cg-bruhat-eulerian-intervals-and-mobius
 kind: theorem
 title: "Bruhat intervals are Eulerian: parity balance of the elements, and the Möbius function of a full interval"
@@ -24,13 +27,7 @@ sources:
     - title: "Brant C. Jones, An explicit derivation of the Möbius function for Bruhat order (arXiv:0904.4472v3, 11 December 2009)"
       url: "https://arxiv.org/pdf/0904.4472"
       locator: "Section 2, printed pp. 1-7: Lemma 2.1 (lifting), Theorem 2.12 (complete matching) and Corollary 2.13 (the sign formula via a sign-reversing involution), read as an independent alternative treatment of the same theorem"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -43,7 +40,7 @@ Let $u\le v$ in $W$ and let $[u,v]=\{x\in W:u\le x\le v\}$ be the Bruhat interva
 
 **(iii) Falling-chain form.** Equivalently, in the deleted-position labeling of [[def-cg-deletion-chain-labels-and-shelling]] the interval $[u,v]$ has exactly one strictly falling maximal chain: by the falling-chain formula of [[lem-cg-lexicographic-chain-shelling-and-mobius-cancellation]] (ii), instantiated through the shelling theorem [[thm-cg-bruhat-deletion-label-shelling]], one has $\mu(u,v)=(-1)^{\ell(v)-\ell(u)}\cdot\#\{\text{strictly falling maximal chains of }[u,v]\}$.
 
-**(iv) Scope.** The sign formula is proved for the full Bruhat order on $W$, that is for intervals $[u,v]\subseteq W$. It is not asserted for intervals of a proper parabolic quotient $W^I$ ([[thm-cg-bruhat-parabolic-projection-and-quotients]]): there the fullness of the interval is an additional hypothesis, and the companion page exhibits a quotient interval for which the sign formula fails.
+**(iv) Scope.** The sign formula is proved for the full Bruhat order on $W$, that is for intervals $[u,v]\subseteq W$. It is not asserted for intervals of a proper parabolic quotient $W^I$ ([[thm-cg-bruhat-parabolic-projection-and-quotients|The minimal-coset projection onto $W^I$ is order-preserving, and Bruhat order on the parabolic quotient $W^I$]]): there the fullness of the interval is an additional hypothesis, and the companion page exhibits a quotient interval for which the sign formula fails.
 
 ## Facts & Assumptions
 
@@ -75,7 +72,7 @@ Let $u\le v$ in $W$ and let $[u,v]=\{x\in W:u\le x\le v\}$ be the Bruhat interva
 
 [F13] Group associativity and inverses: "**(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \in G$", and every element of $G$ has an inverse ([[def-group]]).
 
-[F14] The quotient is graded by the ambient length: "so $k=\ell(w)-\ell(u)$ and every maximal chain in $[u,w]^I:=[u,w]\cap W^I$ has exactly $\ell(w)-\ell(u)$ steps: the subposet $W^I$ is graded by $\ell$, and $[u,w]^I$ is finite." ([[thm-cg-bruhat-parabolic-projection-and-quotients]] (3)).
+[F14] The quotient is graded by the ambient length: "so $k=\ell(w)-\ell(u)$ and every maximal chain in $[u,w]^I:=[u,w]\cap W^I$ has exactly $\ell(w)-\ell(u)$ steps: the subposet $W^I$ is graded by $\ell$, and $[u,w]^I$ is finite." ([[thm-cg-bruhat-parabolic-projection-and-quotients|The minimal-coset projection onto $W^I$ is order-preserving, and Bruhat order on the parabolic quotient $W^I$]] (3)).
 
 ## Proof
 

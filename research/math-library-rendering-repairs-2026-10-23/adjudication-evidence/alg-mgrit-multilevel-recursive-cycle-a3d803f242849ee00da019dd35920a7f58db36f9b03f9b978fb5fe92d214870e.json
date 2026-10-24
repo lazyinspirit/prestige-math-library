@@ -1,0 +1,77 @@
+{
+  "id": "alg-mgrit-multilevel-recursive-cycle",
+  "agent": "/root/rendering_repair_coordinator/dnde_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile has no illustration. A procedural schematic materially clarifies how restriction descends to a coarse residual problem, how each of the nu_l visits recomputes that residual and accumulates correction, and how prolongation returns to the fine level. This is useful explanatory content despite the already complete algorithm; no new convergence assertion is needed.",
+      "action": "Added a four-box directed TikZ schematic and exact interpretation in a final Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended explanatory Remarks and a native TikZ residual-restriction/recursive-visit/prolongation schematic; original file prefix, entire Definition and frontmatter preserved byte-for-byte.",
+  "source_lines_after": {
+    "remarks": [
+      47,
+      63
+    ],
+    "diagram": [
+      51,
+      61
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_maps": "At level l, u_l and r_l lie in (R^d)^{N_l}. The local two-level F/C transfer construction gives R_l: (R^d)^{N_l} -> (R^d)^{N_{l+1}} and P_l in the reverse direction; A_{l+1} is square on the coarse vector space.",
+      "justification": "Definition input, line 34; explicit block transfer matrices in alg-mgrit-two-level-cycle; unknown vector dimensions in def-linear-all-at-once-time-operator."
+    },
+    {
+      "relation": "The downward arrow computes r_{l+1}=R_l(b_l-A_l u_l) after pre-relaxation; the lower-left box initializes z_{l+1}=0.",
+      "justification": "Exact order and equations in Definition steps 2 and 3 (lines 38-39)."
+    },
+    {
+      "relation": "The lower-right box repeats nu_l times: rho_{l+1}=r_{l+1}-A_{l+1}z_{l+1}; recursive zero-initialized solve/cycle on A_{l+1}delta_{l+1}=rho_{l+1}; then accumulation z_{l+1} <- z_{l+1}+delta_{l+1}.",
+      "justification": "Definition step 3, line 39; the explanatory prose explicitly identifies the recursive right-hand side and zero initial correction. This does not label each recursive call as an exact solve."
+    },
+    {
+      "relation": "The upward arrow applies P_l to the accumulated coarse correction, then the upper-right box adds it to u_l and post-relaxes. The recursive base case is an exact solve only at L.",
+      "justification": "Definition steps 1 and 4, lines 37 and 40. Arrows indicate procedural order, not a commutative square or a claim A_{l+1}=R_l A_l P_l."
+    },
+    {
+      "relation": "No contraction or stopping criterion is inferred from the picture. The algorithm and any rigorous mathematical argument remain independent of this illustration.",
+      "justification": "Original final caveat line 44, original stopping rules line 42, and explicit final Remarks caveat line 63."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path is absent; located authentic same-category main screenshots tile and verified exact recorded SHA256.",
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/alg-mgrit-multilevel-recursive-cycle--01.png",
+    "original_tile_sha256": "01cfa74b63d79af396ad97fb5ee5f9f1e59cceb8ec41574ef0ddd80f1cebaee1",
+    "before_raw_sha256": "a1f5d628ccae7ba6ab94ac440c435a2465c2d1b4c3c406510c3bfa89f27eb292",
+    "after_raw_sha256": "931521bfd9be51b9e0e9f0e1f879bbb323e0dd410a15ae0bd18e9f39b63be49b",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde007-final/manifest.json",
+    "preview_manifest_sha256": "490125f55c47c59e26cd3bd44a7e8c41e67d9aa7c0f6d5aa8a6c8e219a848500",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/dnde007-final/screenshots/alg-mgrit-multilevel-recursive-cycle--01.png",
+    "preview_tile_sha256": "8be4e31132ba968e7de00a548c7ce9e3251cbf97d2d79fe9cd68d769d388066f",
+    "native_visual_check": "Viewed authentic original tile and final preview tile separately at original resolution. Final dark-background figure has four legible boxes, three visible directed edges and R_l, nu_l visits, P_l labels; no clipping or overlap observed. Capture receipt: tikz_count 1, diagram_failures [], katex_errors []."
+  },
+  "checks": {
+    "proof_layout": "proof-layout: 1 items, 0 steps, 0 defects (exit 0)",
+    "precheck": "1 file, checked 0, failed 0; not-applicable (exit 0)",
+    "rendercheck": "checked 1, errors [], warnings [] (exit 0)",
+    "native_preview": "Actual local repair-preview run completed: 1 item, 1 tile; source SHA matches final source.",
+    "status_preservation": "Entire frontmatter byte-identical; status: published preserved.",
+    "initial_check_repair": "Initial rendercheck found delimiter-scanner errors for TikZ linebreak immediately followed by a dollar; inserted whitespace after those linebreaks, then final rendercheck passed and final native preview compiled."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview, not a production route; 16 unrelated reference-map parse diagnostics recorded by preview. No external sources or websites visited."
+  ]
+}

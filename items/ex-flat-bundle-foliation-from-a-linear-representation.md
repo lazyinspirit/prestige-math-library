@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-flat-bundle-foliation-from-a-linear-representation.json
+  precheck: pass
 id: ex-flat-bundle-foliation-from-a-linear-representation
 kind: example
 title: "The flat-bundle foliation from a linear representation"
@@ -25,12 +28,7 @@ sources:
       url: "https://www.math.toronto.edu/mein/teaching/MAT1341_LieGroupoids/Groupoids.pdf"
     - title: "Danny Calegari, Foliations and the Geometry of 3-Manifolds (Oxford Mathematical Monographs)"
       url: "https://math.uchicago.edu/~dannyc/books/foliations/oupbook.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -76,3 +74,27 @@ $\rho(k)=A^k$ over $B=S^1$; let $F_A$ be the suspension foliation of $M_A$. Then
 2.1 **Transversality to the fibres.** The leaves of $F_A$ are locally the images of the $\mathbb R$-directions $t\mapsto(t,v)$ and the fibres of $M_A\to S^1$ are locally the images of the $\mathbb R^n$-directions $v\mapsto(t,v)$; these two directions are complementary in $T_{[t,v]}M_A$, of dimensions $1$ and $n$. Hence $F_A$ is transverse to the fibres at every point ([[def-local-transversal-to-a-regular-foliation]]). [F3, step 1.2]
 
 3.1 **Conclusion.** Steps 1.1, 1.2, 1.3 and 2.1 establish claims 1, 2 and 3. [step 1.1, step 1.2, step 1.3, step 2.1] ∎
+
+
+## Remarks
+
+The square illustrates forward transport around the circle when $Av=v$.
+Here $w$ varies near $v$, $q:\mathbb R\times\mathbb R^n\to M_A$ is the
+quotient map, and the bottom row uses the transversal $w\mapsto[0,w]$.
+The top arrow keeps $w$ constant along the lifted path $t\mapsto(t,w)$.
+
+```tikzcd
+\begin{tikzcd}[font=\Large, labels={font=\large}, column sep=huge, row sep=large]
+(0,w) \arrow[r, "\mathrm{transport}"] \arrow[d, "q"'] & (1,w) \arrow[d, "q"] \\
+{[0,w]} \arrow[r, "h_a"'] & {[1,w]=[0,A^{-1}w]}
+\end{tikzcd}
+```
+
+Indeed, $1\cdot(0,A^{-1}w)=(1,w)$ for the specified action, so the
+bottom arrow has coordinate expression $w\mapsto A^{-1}w$. At $w=v$
+the endpoints coincide, giving the loop $a$ and its forward holonomy germ
+$\operatorname{germ}_v(A^{-1})$. Under the bundle projection
+$p([t,w])=[t]\in S^1$, this path projects to $t\mapsto[t]$.
+The representation convention in [F1] instead assigns
+$k\mapsto\operatorname{germ}_v(A^k)$; it uses the inverse of forward-path
+transport. The verification above is independent of the illustration.

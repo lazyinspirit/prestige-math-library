@@ -1,0 +1,117 @@
+{
+  "id": "cex-density-continuity-fails-unequal-speed-routing",
+  "agent": "/root/rendering_repair_coordinator/npde_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Original standalone PNG visibly prints the raw center/tikzpicture environment instead of drawing it. The renderer requires a fenced tikz block. All three original speed/density/flux labels and arrow directions agree with Counterexample model and Refutation step 1.1. The unlegended dashed lower branch is an expository ambiguity: dashed styling alone asserts no zero-flow relation, and its original q₂=2 label is mathematically correct. Making it solid and adding a caption clarifies the intended assignment without correcting a false mathematical relation.",
+      "action": "Replaced raw center wrapper with fenced tikz in final Remarks; made the active lower outgoing branch solid and explicitly identified the picture as the equal-density assignment rather than P=(1,0)^T.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Render the existing one-in/two-out network picture; clarify both outgoing branches are active in the nonconservative equal-density assignment. Preserve exact statement, Counterexample model, Facts, Refutation, and all frontmatter.",
+  "source_lines_after": {
+    "remarks": [
+      73,
+      92
+    ],
+    "diagram": [
+      82,
+      92
+    ]
+  },
+  "before_raw_sha256": "c41053951f3a8fdfc19726018f5d444300ed48f77b16978f1979395af4deeee0",
+  "current_raw_sha256": "dd40ade75e67972c1488e58660432b0c77969d5d34c57f4a8df2dda0c8b56bf7",
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and orientations",
+      "result": "One junction with exactly three incident directed branches: incoming arrow points from the left edge to the junction; upper and lower arrows point away from the junction. Matches Counterexample model and Given data; no cyclic or commutative relation is asserted."
+    },
+    {
+      "check": "Flux labels",
+      "result": "By the stipulated q=vρ in Facts Given and Refutation 1.1, ρ=1 gives incoming (v,q)=(1,1), upper outgoing (v₁,q₁)=(1,1), lower outgoing (v₂,q₂)=(2,2). Thus both outgoing arrows are active, and 1+2=3 differs from the incoming 1."
+    },
+    {
+      "check": "Alternative conservative routing is separate",
+      "result": "Refutation 2.1 and local definition def-conservative-network-advection-routing give P: R¹→R² with column (1,0)^T and output (1,0)^T for input 1. The diagram explicitly depicts the unequal-total equal-density assignment, not that alternative routing; no density-equality conservation is implied."
+    },
+    {
+      "check": "Rendered topology",
+      "result": "Standalone enlarged native screenshot shows one circle and three complete arrow segments, one inward and two outward, with all stipulated labels visible and no overlap or clipping."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-density-continuity-fails-unequal-speed-routing.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-density-continuity-fails-unequal-speed-routing.md",
+            "item_id": "cex-density-continuity-fails-unequal-speed-routing",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-density-continuity-fails-unequal-speed-routing.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-density-continuity-fails-unequal-speed-routing.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    }
+  ],
+  "preservation_checks": {
+    "frontmatter_byte_identical": true,
+    "status": "published",
+    "statement_byte_identical": true,
+    "refutation_text_identical": true
+  },
+  "preview": {
+    "helper": "research/math-library-rendering-repairs-2026-10-23/repair-preview.mts",
+    "directory": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/npde_008/preview",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/npde_008/preview/manifest.json",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/npde_008/preview/screenshots/cex-density-continuity-fails-unequal-speed-routing.json",
+    "original_resolution_views": [
+      "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/cex-density-continuity-fails-unequal-speed-routing--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/diagram-checks/npde_008/preview/screenshots/cex-density-continuity-fails-unequal-speed-routing--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/diagram-checks/npde_008/diagram-detail.png"
+    ],
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "visual_result": "Native current local preview draws all arrows and labels. Additional standalone enlarged raster detail confirms label visibility after the viewer displayed inconsistent missing-text regions on repeated identical full-page views.",
+    "limitations": [
+      "Local ItemBody SSR and file-only browser capture; no HTTP/live website or production-route coverage."
+    ]
+  },
+  "remaining_issues": [],
+  "report_precision_review": {
+    "prior_report_archive": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/cex-density-continuity-fails-unequal-speed-routing.75fbf74780e3001f17884c8b57cca19f2f1b935c3e980dee2c09b23edbce1351.json",
+    "prior_report_sha256": "75fbf74780e3001f17884c8b57cca19f2f1b935c3e980dee2c09b23edbce1351",
+    "decision": "Set diagram_mathematics_corrected to false: the confirmed defect is literal raw markup, with an accompanying expository clarification of unlegended line styling. No original incorrect figure relation was demonstrated.",
+    "source_unchanged": true
+  }
+}

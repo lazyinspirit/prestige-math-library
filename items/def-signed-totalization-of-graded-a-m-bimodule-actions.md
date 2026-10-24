@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-signed-totalization-of-graded-a-m-bimodule-actions.json
+  precheck: pass
 id: def-signed-totalization-of-graded-a-m-bimodule-actions
 kind: definition
-title: "Signed totalization of graded A_m-bimodule actions"
+title: "Signed totalization of graded $A_m$-bimodule actions"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -18,9 +21,7 @@ sources:
   references:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c, printed pp. 10-11"
       url: "https://arxiv.org/pdf/math/0006056"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Definition

@@ -1,0 +1,160 @@
+{
+  "id": "cex-connected-even-degree-bowtie-is-not-a-cycle",
+  "agent": "/root/rendering_repair_coordinator/comb_021",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Authentic original-resolution screenshot displays raw TikZ commands in Remarks. Opening and closing fences shared the single source line with the entire picture, so the native renderer did not recognize a TikZ block. Original screenshot SHA256 independently matches the queue.",
+      "action": "Put the opening tikz fence and closing fence on separate lines; split diagram commands onto source lines without changing graph data.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-label-low-contrast",
+      "verdict": "confirmed",
+      "reason": "After actual native compilation of the fence repair, the center x label inherited light foreground over the fixed pale red fill and was barely visible in the standalone original-resolution capture. Native SVG confirms fill #ffe1e1 with currentColor text.",
+      "action": "Use fill=white for the center, which the native renderer maps to the themed background, retaining its red outline and all labels and geometry. Final native capture shows a readable x.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair the malformed TikZ fence and center-label contrast; preserve explicit triangle closures, all mathematical text, and all frontmatter bytes.",
+  "source_lines_after": [
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Vertex and edge inventory",
+      "result": "The five named nodes are x,a,b,c,d. The two explicit paths produce precisely xa,ab,bx and xc,cd,dx, matching Facts & Assumptions Given. Native SVG contains five circular vertex paths and one edge path with six straight subsegments; standalone final capture visibly closes both triangles."
+    },
+    {
+      "check": "Degrees and graph properties",
+      "result": "x is incident with xa,bx,xc,dx, so degree 4; a has xa,ab, b has ab,bx, c has xc,cd, and d has cd,dx, so each degree is 2 by F1/local degree definition. Every vertex reaches x (step 1.1); x degree 4 excludes a cycle graph by F2/step 2.1. No crossings other than the shared vertex and no extra vertices or edges are asserted."
+    },
+    {
+      "check": "Native closing edges",
+      "result": "Original source already used explicit (b)--(x) and (d)--(x), rather than --cycle. Actual native output displays both, giving six edges and degree sequence (4,2,2,2,2). No additional missing-edge finding is confirmed and no edge changes were made."
+    }
+  ],
+  "proof_independent": true,
+  "before_raw_sha256": "ce1dcb1f0958062adffdc3ee2bf42c95e31aefd52cd38e6e46c463a830a8bbb7",
+  "after_raw_sha256": "4c1f2cde6274e17fb4998113461254c7347717c335b01b194627c2c990097ab6",
+  "guards": {
+    "pre_edit_current_raw_sha256_matched_queue": true,
+    "frontmatter_byte_identical": true,
+    "publication_status": "published",
+    "proof_and_statement_byte_identical": true
+  },
+  "original_images_viewed": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/combinatorics/screenshots/cex-connected-even-degree-bowtie-is-not-a-cycle--01.png",
+      "detail": "original",
+      "sha256": "f380f78589852b7aa7e2fa8023b5927bc1b4d96bf4307acd59ad56108980a088"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-connected-even-degree-bowtie-is-not-a-cycle.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-connected-even-degree-bowtie-is-not-a-cycle.md",
+            "item_id": "cex-connected-even-degree-bowtie-is-not-a-cycle",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-connected-even-degree-bowtie-is-not-a-cycle.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-connected-even-degree-bowtie-is-not-a-cycle.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-connected-even-degree-bowtie-is-not-a-cycle --out research/math-library-rendering-repairs-2026-10-23/previews/comb021-independent-native-final-v3",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      },
+      "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/comb021-independent-native-final-v3/screenshots/cex-connected-even-degree-bowtie-is-not-a-cycle.json"
+    }
+  ],
+  "native_visual_check": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/comb021-independent-native-final-v3/manifest.json",
+    "standalone_original_images_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/comb021-independent-native-final-v3/screenshots/cex-connected-even-degree-bowtie-is-not-a-cycle--01.png"
+    ],
+    "capture": {
+      "capture_revision": 2,
+      "id": "cex-connected-even-degree-bowtie-is-not-a-cycle",
+      "height": 1400,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/cex-connected-even-degree-bowtie-is-not-a-cycle--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "45e2e3e4b4bfc3df2c4c2316a7205ea1f93ee4c5025d3b42ffb562f7f9f2345c",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 20,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-23T22:44:40.258Z"
+    },
+    "result": "One compiled native TikZ figure; no diagram failures or KaTeX errors. Final standalone capture shows the complete prose and proof, readable five vertex labels, six edges and both triangles.",
+    "limitations": [
+      "Local ItemBody SSR preview, not production HTTP route or full native loader. Reference map contains 16 unrelated parse diagnostics."
+    ]
+  },
+  "check_history_notes": [
+    "Initial preview invocation without TSX_TSCONFIG_PATH failed module alias resolution; explicit local app tsconfig succeeded.",
+    "First successful native capture presented missing prose glyphs; the final fresh capture shows complete prose. No prose-source change was made in response."
+  ],
+  "remaining_issues": [],
+  "completed_at": "2026-10-23T22:45:14.296940+00:00"
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-temperley-lieb-order-three-noncritical-gram-radical.json
+  precheck: pass
 id: ex-temperley-lieb-order-three-noncritical-gram-radical
 kind: example
 title: "An order-three noncritical link-state form with a one-dimensional radical"
@@ -18,11 +21,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "David Ridout and Yvan Saint-Aubin, Standard Modules, Induction and the Structure of the Temperley-Lieb Algebra"
@@ -41,7 +39,7 @@ Take $q=e^{\pi i/3}$, so $\delta=1$ and $\kappa=\operatorname{ord}(q^2)=3$. At r
 
 The sites are labeled from left to right. In each half-diagram, an arc joins its two labeled sites; the left panel is $x=(12)(34)$ and the right panel is $y=(14)(23)$. These are the two noncrossing perfect matchings on four sites; the picture records their basis labels, while the Gram entries below are computed from the overlay loop count.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[scale=0.9]
   \foreach \x in {0,1,2,3} { \fill (\x,0) circle (1.5pt); }
   \node[below] at (0,-0.05) {$1$};
@@ -61,7 +59,7 @@ The sites are labeled from left to right. In each half-diagram, an arc joins its
   \draw (6,0) .. controls (6,0.7) and (7,0.7) .. (7,0);
   \node at (6.5,1.7) {$y=(14)(23)$};
 \end{tikzpicture}
-~~~
+```
 
 ## Facts & Assumptions
 

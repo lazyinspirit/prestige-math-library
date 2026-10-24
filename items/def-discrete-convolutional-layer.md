@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-discrete-convolutional-layer.json
+  precheck: n/a
 id: def-discrete-convolutional-layer
 kind: definition
 title: "Discrete convolutional layer with local receptive fields, channel mixing, stride, and padding"
@@ -18,12 +21,7 @@ sources:
     - title: "Taco S. Cohen and Max Welling, Group Equivariant Convolutional Networks"
       url: "https://arxiv.org/pdf/1602.07576"
       locator: "§5, translation correlation formula (7) and derivation (8)."
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+
 ---
 
 ## Definition
@@ -43,3 +41,39 @@ where $s\odot p$ is coordinatewise multiplication. Thus each output uses only th
 [Goodfellow, Bengio, and Courville, *Deep Learning*, Chapter 9 §§9.1–9.5](https://www.deeplearningbook.org/contents/convnets.html)
 
 [Cohen and Welling, “Group Equivariant Convolutional Networks,” §5](https://arxiv.org/pdf/1602.07576)
+
+
+## Remarks
+
+For a concrete indexing picture, take $D=\{0,1,2,3\}\times\{0,1,2\}$, $K=\{-1,0,1\}^2$, $a=(0,1)$, $s=(2,1)$, and $O=\{p,q\}$ with $p=(0,0)$ and $q=(1,0)$, using zero padding. The shaded square is $a+s\odot p+K$: its three sites outside $D$ contribute zero, while its six sites in $D$ contribute their input row vectors multiplied by the corresponding $W_\delta$. The two circled anchors differ by $(2,0)$, illustrating the first-coordinate stride. This is the plus-offset convention in the definition; no kernel reversal is depicted.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\fill[blue!10] (-1.25,-0.25) rectangle (1.25,2.25);
+\draw[thick] (-0.35,-0.35) rectangle (3.35,2.35);
+\node at (3.15,2.7) {$D$};
+\foreach \u in {-1,0,1,2,3} {
+  \draw[gray!40] (\u,0) -- (\u,2);
+}
+\foreach \v in {0,1,2} {
+  \draw[gray!40] (-1,\v) -- (3,\v);
+  \foreach \u in {0,1,2,3} {
+    \fill (\u,\v) circle (2pt);
+  }
+  \draw[red,thick] (-1,\v) circle (3pt);
+}
+\draw[blue,thick] (-1.25,-0.25) rectangle (1.25,2.25);
+\draw[blue,thick] (0,1) circle (6pt);
+\draw[thick] (2,1) circle (6pt);
+\draw[->,thick] (0,2.9) -- (2,2.9);
+\node[above] at (1,2.9) {$s\odot(q-p)=(2,0)$};
+\draw[dashed] (0,2.4) -- (0,2.9);
+\draw[dashed] (2,2.4) -- (2,2.9);
+\node[below] at (0,-0.65) {$a+s\odot p=(0,1)$};
+\node[below] at (2.7,-1.2) {$a+s\odot q=(2,1)$};
+\draw[->] (0,-0.65) -- (0,0.75);
+\draw[->] (2.7,-1.2) -- (2,0.75);
+\node[red,left] at (-1.35,1) {$\widetilde x=0$};
+\node[blue] at (0,3.85) {$a+s\odot p+K$};
+\end{tikzpicture}
+```

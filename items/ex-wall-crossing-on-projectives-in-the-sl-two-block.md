@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-wall-crossing-on-projectives-in-the-sl-two-block.json
+  precheck: n/a
 id: ex-wall-crossing-on-projectives-in-the-sl-two-block
 kind: example
-title: Wall-crossing on the projectives in the sl_2 block
+title: Wall-crossing on the projectives in the $\mathfrak{sl}_2$ block
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28

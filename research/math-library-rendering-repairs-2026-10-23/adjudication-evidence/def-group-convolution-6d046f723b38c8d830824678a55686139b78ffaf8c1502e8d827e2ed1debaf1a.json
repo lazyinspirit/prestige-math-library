@@ -1,0 +1,100 @@
+{
+  "id": "def-group-convolution",
+  "agent": "/root/rendering_repair_coordinator/dnn_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile renders both formulas correctly but offers no visual comparison. A paired evaluation-and-summation schematic materially clarifies the differing group and lattice indices while making the common group-indexed output explicit. This is warranted explanatory diagram intake, not a defect in either displayed formula.",
+      "action": "Added two-row TikZ dataflow schematic and exact dimension/action/convergence explanations in final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended Remarks comparing group-to-group and image-to-group evaluation and summation; original title, Definition, references and all frontmatter are byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      59,
+      78
+    ],
+    "tikz": [
+      63,
+      76
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Group row, fixed g in G",
+      "check": "Definition lines 31\u201334 give f:G\u2192R^{C_in}, Psi:G\u2192R^{C_in\u00d7C_out}. Since g^{-1}h belongs to G, both evaluations are defined. The product is a row vector of C_out coordinates, and its sum over h in G is precisely (C_Psi f)(g). No reordering or exchange of the factors is depicted."
+    },
+    {
+      "data": "Lattice row, fixed g in G",
+      "check": "Definition lines 37\u201340 give f and Psi on Z\u00b2. The given left action sends g^{-1}\u00b7x into Z\u00b2, so the filter evaluation has the declared domain. Summation of the row-vector/matrix products over x in Z\u00b2 is exactly (E_Psi f)(g). The left-action convention agrees with def-group-action-on-feature-maps."
+    },
+    {
+      "data": "Four directed dataflow edges and six nodes",
+      "check": "Each row has only input-evaluations \u2192 indexed sum \u2192 output evaluation; no vertical edges or square assert equivariance or commutativity. Both output evaluations are at g in G. Channel multiplication is (1\u00d7C_in)(C_in\u00d7C_out)=1\u00d7C_out."
+    },
+    {
+      "data": "Convergence and independence",
+      "check": "Remarks retain the Definition line 43 finite-support or coordinatewise absolute-convergence requirement. No finite-group, commutativity or stronger convergence condition is introduced. The rigorous definition is complete and independent of the schematic; this definition has no proof section."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path is absent. Located authentic screenshot in category screenshots/ and verified exact recorded SHA256.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-group-convolution--01.png",
+    "original_screenshot_sha256": "3faa50ef3dba04b41f01284bd4b19e39a555581bcc7481c6c572589dbe7a14ca",
+    "original_view": "Standalone original-resolution view inspected.",
+    "pre_edit_guard_sha256": "7817a1730af1898dbc75a552c381b41a58b694deb7915fca44adde6daff25197",
+    "current_source_sha256": "c410993a7be21de71abc1b419ce9b5009d469fe47efc3e4e1125d201f91eb717",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn005-final/manifest.json",
+    "preview_source_sha256": "c410993a7be21de71abc1b419ce9b5009d469fe47efc3e4e1125d201f91eb717",
+    "preview_html_sha256": "c7167a323bd8ca83de3e47ae62c76c53df0e3353759db8487949fdd69f518140",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnn005-final/screenshots/def-group-convolution--01.png",
+    "visual_check": "Viewed final native PNG standalone at original resolution. Both rows, all six nodes, four arrowheads, inverse/filter arguments and group-indexed outputs are visible without overlap; light strokes and math labels contrast against the dark background. The capture omits some ordinary body text while retaining math and the figure, a local capture limitation; source and original standalone capture were independently read."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-group-convolution.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-group-convolution.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-group-convolution.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn005 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-group-convolution --out research/math-library-rendering-repairs-2026-10-23/previews/dnn005-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": []
+}

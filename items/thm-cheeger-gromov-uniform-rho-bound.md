@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cheeger-gromov-uniform-rho-bound.json
+  precheck: pass
 id: thm-cheeger-gromov-uniform-rho-bound
 kind: theorem
 title: "Cheeger–Gromov uniform bound for rho invariants"
@@ -24,18 +27,12 @@ sources:
     - title: "Jeff Cheeger and Mikhael Gromov, “Bounds on the von Neumann dimension of L²-cohomology and the Gauss–Bonnet theorem for open manifolds”"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/cheegergr.pdf"
       locator: "§4, eta-invariant variation and uniform bound"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
 
-Assume full AC. For every closed oriented 3-manifold M there exists a finite constant C_M such that for every discrete group Γ and every homomorphism φ:π₁(M)→Γ for which the rho invariant is defined, |ρ(M,φ)|≤C_M. The constant may depend on M but not on Γ or φ.
+Assume full AC. For every closed oriented 3-manifold $M$ there exists a finite constant $C_M$ such that for every discrete group $\Gamma$ and every homomorphism $\phi:\pi_1(M)\to\Gamma$ for which the rho invariant is defined, $|\rho(M,\phi)|\le C_M$. The constant may depend on $M$ but not on $\Gamma$ or $\phi$.
 
 ## Statement references
 

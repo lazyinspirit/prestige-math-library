@@ -1,0 +1,52 @@
+{
+  "id": "ex-c-two-free-product-c-three-is-infinite",
+  "agent": "/root/rendering_repair_coordinator/abstract_017",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution flagged PNG visibly prints literal C_2 and C_3 in the title, while the Example renders those same groups with mathematical subscripts. Frozen and current source both lacked dollar delimiters around the title group names. This is exposed TeX subscript notation, not a preference about plain shorthand.",
+      "action": "Wrapped C_2 and C_3 individually in inline math delimiters in the title.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only addition of inline math delimiters around C_2 and C_3.",
+  "source_lines_after": {
+    "4": "title: \"$C_2$ free-product $C_3$ has presentation with only the two factor relations and is infinite\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "independent_inspection": {
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/abstract-algebra/screenshots/ex-c-two-free-product-c-three-is-infinite--01.png",
+        "detail": "original",
+        "standalone": true
+      }
+    ],
+    "frozen_source": "research/math-library-rendering-repairs-2026-10-23/before/ex-c-two-free-product-c-three-is-infinite.md",
+    "current_suppliers_read": [
+      "thm-presentation-of-a-free-product",
+      "thm-normal-form-for-free-products",
+      "prop-integers-modulo-n-as-a-quotient-group"
+    ],
+    "supplier_assessment": "All three current supplier titles contain either readable prose or correctly delimited math. Their statements agree with the facts quoted in the assigned carrier; no inherited raw-title defect requires local labels. The complete flagged image shows no additional exposed TeX or clipping requiring repair."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-c-two-free-product-c-three-is-infinite.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "check": "Exact byte comparison against frozen before carrier with only the two intended title substitutions",
+      "result": "pass; body and all protected metadata including publication status byte-identical"
+    }
+  ],
+  "before_raw_sha256": "c0bc3c77d798bb23f8a266813dc7eae94c82a5c49e235b8d5049251de2918c79",
+  "after_raw_sha256": "4712c9b1da63c16d37432e946eb61a0982a8fef931c0fc1e5710d9c0d728561c",
+  "recorded_at": "2026-10-23T15:15:23.670007+00:00"
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-sharp-nine-lemma.json
+  precheck: pass
 id: thm-sharp-nine-lemma
 kind: theorem
 title: "Sharp nine lemma"
@@ -17,9 +20,6 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -60,3 +60,17 @@ first row is short exact.
 2.1 Assume in addition that the first column and the middle row are short exact. By steps 1.1 and 1.2, the top row is already exact at its first two nodes, so only epicity of $a_2:A_2\to A_3$ remains. Let $s$ be a member of $A_3$. Because the middle row is short exact, $b_2$ is epic by [L1], so [L2] gives a member $t$ of $B_2$ with $b_2 t \equiv i_3 s$. Then $$ c_2 p_2 t = p_3 b_2 t \equiv p_3 i_3 s \equiv 0, $$ so exactness of the bottom row at $C_2$ gives a member $u$ of $C_1$ with $c_1 u \equiv p_2 t$ by [L3]. Since the first column is short exact, $p_1$ is epic by [L1], so [L2] gives a member $y$ of $B_1$ with $p_1 y \equiv u$. Now $$ p_2 b_1 y = c_1 p_1 y \equiv c_1 u \equiv p_2 t. $$ By [L4], pass to one common epic refinement of all the preceding equivalences and define $w:=t-b_1y$. Then $p_2w=0$, $t=b_1y+w$, and $b_2t=i_3s$ on that domain. Exactness of the second column at $B_2$ gives a member $x$ of $A_2$ with $i_2 x \equiv w$ by [L3]. Therefore $$ i_3 a_2 x = b_2 i_2 x \equiv b_2 w = b_2 t \equiv i_3 s. $$ Because the third column is exact at its first node, $i_3$ is monic, so [L2] gives $a_2 x \equiv s$. Hence $a_2$ is epic, and the top row is short exact. [L1, L2, L3, L4, step 1.1, step 1.2, choose, construct, algebra]
 
 3.1 Hence the sharp nine lemma is the left-exact half together with the precise extra hypotheses needed to upgrade it to a short exact row. [step 1.1, step 1.2, step 2.1] ∎
+
+## Remarks
+
+The diagram below fixes the objects and maps used in the proof; all four squares commute.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=large]
+A_1 \arrow[r, "a_1"] \arrow[d, "i_1"'] & A_2 \arrow[r, "a_2"] \arrow[d, "i_2"'] & A_3 \arrow[d, "i_3"] \\
+B_1 \arrow[r, "b_1"] \arrow[d, "p_1"'] & B_2 \arrow[r, "b_2"] \arrow[d, "p_2"'] & B_3 \arrow[d, "p_3"] \\
+C_1 \arrow[r, "c_1"] & C_2 \arrow[r, "c_2"] & C_3
+\end{tikzcd}
+```
+
+Under the first set of hypotheses, the columns and the bottom two rows are exact at their first two nodes: $i_1,i_2,i_3,b_1,c_1$ are monic, and $\operatorname{im}(i_j)=\ker(p_j)$ for $j=1,2,3$, $\operatorname{im}(b_1)=\ker(b_2)$, and $\operatorname{im}(c_1)=\ker(c_2)$. The conclusion is that $a_1$ is monic and $\operatorname{im}(a_1)=\ker(a_2)$. The additional short-exact hypotheses make $p_1$ and $b_2$ epic; step 2.1 then proves that $a_2$ is epic. No epicity of $p_2,p_3$, or $c_2$ is asserted. The proof above is independent of this illustration.

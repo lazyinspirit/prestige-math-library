@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rank-one-tensor-strings-have-the-crystal-limit-rule.json
+  precheck: pass
 id: lem-rank-one-tensor-strings-have-the-crystal-limit-rule
 kind: lemma
 title: "Rank-one tensor strings and their crystal limit rule"
@@ -14,12 +17,6 @@ aliases: []
 landmark: false
 dependency_level: 3
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   scraped: []
   references:
@@ -70,7 +67,7 @@ This is a finite, choice-free calculation, independent of the grand loop and of 
 
 ## Proof
 
-**Proof technique:** direct. Construct the rank-one highest vectors of the tensor product by an explicit recurrence, use the $\mathbb Q$ positivity of the residue form to identify the tensor lattice, compute the residues of the divided strings and read off the crystal rule; all steps are finite and choice-free.
+**Proof technique:** direct. Construct the rank-one highest vectors of the tensor product by an explicit recurrence, use positivity over the rationals of the residue form to identify the tensor lattice, compute the residues of the divided strings and read off the crystal rule; all steps are finite and choice-free.
 
 1.1 Tensor contravariance and divided coproduct. Since $\Delta$ is an algebra map, $\Delta(\sigma(E_i))=z\Delta(F_i)\Delta(K_i^{-1})=zF_iK_i^{-1}\otimes K_i^{-1}+1\otimes zF_iK_i^{-1}=(\sigma\otimes\sigma)\Delta(E_i)$, and $\Delta(\sigma(F_i))=z^{-1}\Delta(K_i)\Delta(E_i)=z^{-1}K_iE_i\otimes1+z^{-1}K_i\otimes K_iE_i=(\sigma\otimes\sigma)\Delta(F_i)$; the equality for $K_i^{\pm1}$ is immediate. Both $\Delta\sigma$ and $(\sigma\otimes\sigma)\Delta$ reverse products, so equality on generators proves equality on the rank-one algebra. Factor contravariance then gives $B(\Delta(X)(x\otimes y),x'\otimes y')=B(x\otimes y,(\sigma\otimes\sigma)\Delta(X)(x'\otimes y'))=B(x\otimes y,\Delta(\sigma(X))(x'\otimes y'))$ for all $X$; extend by bilinearity to all tensor vectors. This proves the tensor contravariance of the product form. From $\Delta F_i=F_i\otimes1+K_i\otimes F_i$ and the $q$-commutation $(K_i\otimes F_i)(F_i\otimes1)=z^{-2}(F_i\otimes1)(K_i\otimes F_i)$, expanding the $n$-th power gives $\Delta F_i^{(n)}=\sum_{s=0}^{n}z^{-s(n-s)}F_i^{(n-s)}K_i^s\otimes F_i^{(s)}$: the coefficient of $(F_i\otimes1)^{n-s}(K_i\otimes F_i)^s$ in $(\Delta F_i)^n$ is $z^{-s(n-s)}\binom{n}{s}_z$, and division by $[n]_z!$ cancels the Gaussian binomials as $[n]_z!=\binom{n}{s}_z[s]_z![n-s]_z!$. [F1, F2, F3, algebra]
 
@@ -97,3 +94,35 @@ This is a finite, choice-free calculation, independent of the grand loop and of 
 8.1 $A_0$-basis. The matrix expressing the family $\{u_{t,n}\}$ in the product basis reduces modulo $q$ to a permutation matrix by steps 6.1-7.1, hence has determinant congruent to $\pm1$ modulo $q$, a unit of $A_0$; the adjugate identity over $A_0$ makes the matrix invertible over $A_0$. Since $\{u_{t,n}\}\subseteq L$ by step 3.1 and both families have $(a+1)(b+1)$ members, $\{u_{t,n}\}$ is an $A_0$-basis of $L$. [step 3.1, step 6.1, step 7.1, algebra]
 
 9.1 The crystal rule. By [F5] the operators act on the strings by $\tilde e_iF_i^{(n)}h_t=F_i^{(n-1)}h_t$ and $\tilde f_iF_i^{(n)}h_t=F_i^{(n+1)}h_t$, with the endpoint terms zero; since the strings form the $A_0$-basis of $L$ by step 8.1, both operators preserve $L$ and shift the residues along the chains of step 7.1. Reading off which tensor factor changes gives the two displayed rules: along $(n,t)\mapsto(n+1,t)$ the first factor moves exactly when $a-(n)>\ t$, that is $a-j>k$, and along $(a-t,k)\mapsto(a-t,k+1)$ the second factor moves, which is the case $a-j\le k$; the $\tilde e_i$-rule is read in the reverse direction, where the first factor moves exactly when $a-j\ge k$. Terms leaving the ranges are $0$. For residues $b=v_j\otimes w_k$ and $b'$: if $a-j>k$ then $\tilde f_ib=v_{j+1}\otimes w_k$ and $a-(j+1)\ge k$, so $\tilde e_ib'=b$; if $a-j\le k$ then $\tilde f_ib=v_j\otimes w_{k+1}$ and $a-j<k+1$, so $\tilde e_ib'=b$; the converse implications follow by the same two evaluations of the displayed rules. Hence $\tilde f_ib=b'$ if and only if $b=\tilde e_ib'$. No choice is used, and neither the grand loop nor any freeness over $\mathbb Z[q,q^{-1}]$ enters. [step 7.1, step 8.1, F5, algebra] ∎
+
+## Remarks
+
+For $a=3$ and $b=2$, the following grid illustrates the residue strings of (iii). A vertex $(j,k)$ denotes the residue of $v_j\otimes w_k$ in $L/qL$, and every arrow is $\tilde f_i$; $\tilde e_i$ reverses these arrows. The three strings start at $(0,t)$ for $t=0,1,2$. The circled vertices satisfy $a-j=k$: a string moves right while $a-j>k$ and then upward while $a-j\le k$, until it reaches the edge of the rectangle. At $(1,2)$ the upward move already leaves the rectangle and is zero. Only nonzero arrows are drawn.
+
+```tikz
+\begin{tikzpicture}[x=1.7cm,y=1.35cm,>=stealth]
+\node (p00) at (0,0) {$(0,0)$};
+\node (p10) at (1,0) {$(1,0)$};
+\node (p20) at (2,0) {$(2,0)$};
+\node[draw,circle,inner sep=2pt] (p30) at (3,0) {$(3,0)$};
+\node (p01) at (0,1) {$(0,1)$};
+\node (p11) at (1,1) {$(1,1)$};
+\node[draw,circle,inner sep=2pt] (p21) at (2,1) {$(2,1)$};
+\node (p31) at (3,1) {$(3,1)$};
+\node (p02) at (0,2) {$(0,2)$};
+\node[draw,circle,inner sep=2pt] (p12) at (1,2) {$(1,2)$};
+\node (p22) at (2,2) {$(2,2)$};
+\node (p32) at (3,2) {$(3,2)$};
+\draw[->] (p00) -- (p10);
+\draw[->] (p10) -- (p20);
+\draw[->] (p20) -- (p30);
+\draw[->] (p30) -- (p31);
+\draw[->] (p31) -- (p32);
+\draw[->] (p01) -- (p11);
+\draw[->] (p11) -- (p21);
+\draw[->] (p21) -- (p22);
+\draw[->] (p02) -- (p12);
+\end{tikzpicture}
+```
+
+This finite example illustrates the partition and branch conventions; steps 6.1–9.1 establish them for arbitrary $a,b$ independently of the picture.

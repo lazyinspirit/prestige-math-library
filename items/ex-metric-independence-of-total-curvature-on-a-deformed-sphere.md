@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-metric-independence-of-total-curvature-on-a-deformed-sphere.json
+  precheck: pass
 id: ex-metric-independence-of-total-curvature-on-a-deformed-sphere
 kind: example
 title: A deformed sphere has the same total curvature
@@ -21,13 +24,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"
@@ -71,7 +67,7 @@ substantive.
 
 ## Verification
 
-**Proof technique:** obtain the total curvature $4\pi$ for every metric from metric independence and the round sphere, then compute the spheroid metric explicitly to exhibit nonconstant pointwise curvature.
+**Proof technique:** obtain the total curvature four pi for every metric from metric independence and the round sphere, then compute the spheroid metric explicitly to exhibit nonconstant pointwise curvature.
 
 1.1 By [F2], $\chi(S^2)=2$ and the round metric has total curvature $4\pi$; applying [F1] with the round metric as $g_0$ and any smooth metric $g$ on $S^2$ as $g_1$ gives $\int_{S^2}K_g\,dA_g=2\pi\chi(S^2)=4\pi$. The spheroid metric transported by the diffeomorphism of [F3] is such a smooth metric, so it too has total curvature $4\pi$. [F1, F2, F3, given, algebra]
 

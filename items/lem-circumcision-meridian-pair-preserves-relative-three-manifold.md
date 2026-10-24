@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-circumcision-meridian-pair-preserves-relative-three-manifold.json
+  precheck: pass
 id: lem-circumcision-meridian-pair-preserves-relative-three-manifold
 kind: lemma
 title: "Circumcision by a framed core and zero-framed meridian preserves the boundary parametrization"
@@ -12,11 +15,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Justin Roberts, Kirby calculus in manifolds with boundary, Theorem 1 and Stage 1"
@@ -50,3 +48,29 @@ Assume full AC. Let $N\cong D^2\times S^1$ be an oriented solid torus in the int
 ## Remarks
 
 The local support can follow any ambient fundamental-group element. This proves the topology of Roberts’ O3 operation, not completeness of his calculus. The product cut-and-glue proof tracks the retained torus; it does not recognize the resulting solid torus from homology alone.
+
+The schematic uses the planar presentation of $P$ from step 2.1, with $A$ as the outer boundary. Each base boundary $b_i$ gives the torus $T_i=b_i\times S^1$; $h$ denotes the positive fiber, and the boundary-circle orientations are those used in the proof. The dashed arc $\alpha$ joins $A$ to $U$ without meeting $K$. Its product with the fiber is the annulus capped in step 3.1 to give $D$, with $\partial D=h\subset T_A$. The slope labels retain the signed integer framing $f$ of step 1.1; the drawing does not encode linking or crossing signs. The rigorous proof is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\draw[thick] (0,0) ellipse (2.5 and 1.6);
+\draw[thick] (-1,0) circle (0.58);
+\draw[thick] (1,0) circle (0.58);
+\node at (-1,0) {$K$};
+\node at (1,0) {$U$};
+\node at (0,-0.95) {$P$};
+\node[above] at (0,1.6) {$b_A\quad(T_A\;\mathrm{retained})$};
+\node[below] at (-1,-0.65) {$b_K$};
+\node[below] at (1,-0.65) {$b_U$};
+\draw[dashed,thick] (1,0.58) -- (1,1.466);
+\node[right] at (1,1.05) {$\alpha$};
+\node at (3,0) {$\times$};
+\draw[thick] (4.2,0) circle (0.5);
+\draw[thick,->] (4.2,0) ++(35:0.5) arc (35:120:0.5);
+\node at (4.2,0) {$h$};
+\node[below] at (4.2,-0.65) {$S^1$};
+\node at (1,-2.15) {$X=P\times S^1,\qquad T_i=b_i\times S^1$};
+\node at (1,-2.75) {$T_K:\quad \mu_K=h,\quad\lambda_K=b_K,\quad\mathrm{fill}\;b_K+fh$};
+\node at (1,-3.35) {$T_U:\quad \mu_U=b_U,\quad\lambda_U=h,\quad\mathrm{fill}\;h$};
+\end{tikzpicture}
+```

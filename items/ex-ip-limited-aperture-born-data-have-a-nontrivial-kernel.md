@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel.json
+  precheck: pass
 id: ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel
 kind: example
 title: Finite limited-aperture Born samples miss a nonzero contrast
@@ -34,14 +37,7 @@ sources:
     - title: "Semyon Dyatlov, MIT 18.155 Lecture Notes: Distributions, Elliptic Regularity, and Applications to PDEs"
       url: "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf"
       locator: "§11.1.1, Definition 11.1, printed p. 119: L1 Fourier-transform convention"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: pass
+
 ---
 
 ## Example
@@ -94,3 +90,23 @@ and give the regularized Born algorithm these direction lists and this partition
 3.1 For any scalar $t$, [F6] gives $\rho_k(th)\le C_D\|th\|_\infty=C_D|t|\|h\|_\infty$. The right-hand side tends to zero as $|t|\to0$, so choose $t\ne0$ small enough that $th\in\mathcal U_{D,k}$. Set $q:=th$. Linearity of $\mathcal B_k$ gives $\mathcal B_kq(\theta_b,d_a)=0$ for every acquisition pair while $q\ne0$. The vector $c$ is a nonzero coefficient representation of a contrast whose sampled first Born data are exactly those of zero. [A1, F1, F6, step 2.1, algebra]
 
 4.1 For input $y=0$, any filter application in the algorithm gives $\widehat c=0$ by [F7]; the reconstruction is zero and $R=\|F(0)-0\|_2=0\le\delta$, so the status is discrepancy for every $\delta\ge0$ and positive budget. This status cannot distinguish the zero contrast from the nonzero contrast in step 3.1 within the finite Born model, and no statement about the exact nonlinear data was used. [F7, step 3.1, algebra] ∎
+
+
+## Remarks
+
+The following diagram separates the slab coefficients from the contrast they represent. Put $V:=\{\sum_{n=1}^{m+1}c_n1_{E_n}:c\in\mathbb C^{m+1}\}\subset L^\infty(D;\mathbb C)$, let $Jc:=\sum_nc_n1_{E_n}$, and let $S:V\to\mathbb C^m$ be the finite sample map $(Sh)_{(b,a)}:=\mathcal B_kh(\theta_b,d_a)$. The map $J$ is an isomorphism onto $V$ because the disjoint slabs all have positive measure. Steps 1.1 and 2.1 give $F=S\circ J$.
+
+```tikz
+\begin{tikzpicture}
+\node (A) at (0,2) {$\mathbb C^{m+1}$};
+\node (B) at (5,2) {$\mathbb C^m$};
+\node (C) at (0,0) {$V$};
+\node (D) at (5,0) {$\mathbb C^m$};
+\draw[->] (A) -- node[above] {$F$} (B);
+\draw[->] (A) -- node[left] {$J$} (C);
+\draw[->] (B) -- node[right] {$\mathrm{id}$} (D);
+\draw[->] (C) -- node[below] {$S$} (D);
+\end{tikzpicture}
+```
+
+Here the rows of $F$ and the coordinates of $Sh$ are indexed by the $m=rs$ acquisition pairs, with $\xi_{ba}=k(\theta_b-d_a)/(2\pi)$ and $(Sh)_{(b,a)}=\widehat{h_0}(\xi_{ba})/(4\pi)$. Since $\dim\ker F\ge1$, a nonzero $c\in\ker F$ maps to $h=Jc\ne0$ with $Sh=0$. A sufficiently small nonzero multiple $q=th$ lies in $\mathcal U_{D,k}$ and still has zero sampled Born data, as in step 3.1. The kernel conclusion follows from the finite number of samples and $m+1$ slabs; the proper direction sets are part of the acquisition conditions, rather than an additional dimension argument. This diagram concerns only the finite first Born map and asserts no equality of exact nonlinear scattering data. The verification above is independent of the illustration.

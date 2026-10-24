@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-riesz-projection-for-a-matrix-with-separated-spectrum.json
+  precheck: pass
 id: ex-riesz-projection-for-a-matrix-with-separated-spectrum
 kind: example
 title: Riesz projection for a matrix with separated spectrum
@@ -17,8 +20,7 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 48–50"
       url: "https://arxiv.org/pdf/1211.3404"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example
@@ -63,3 +65,33 @@ be integrated term by term
 2.1 Contour integral: by [L3], $\frac{1}{2\pi i}\int_\gamma\frac{dz}{z-1} = 1$ because $\gamma$ is the circle about $1$. On this circle $|z-1|=1/2$, and $\frac1{z-2}=-\frac1{1-(z-1)}=-\sum_{n\ge0}(z-1)^n$ uniformly: the tail after degree $N$ has modulus at most $2^{-N-1}/(1-1/2)$. Each term has integral zero by [L3], so [L4] gives $\int_\gamma dz/(z-2)=0$. Hence $P_E = \frac{1}{2\pi i}\int_\gamma(zI-T)^{-1}dz = \operatorname{diag}(1,0)$, the locally constant characteristic function of $\{1\}$ evaluated on the diagonal. [step 1.1, L2, L3, L4, algebra]
 
 3.1 The projection $\operatorname{diag}(1,0)$ is idempotent, commutes with $T$ and has $\operatorname{ran}(P_E) = \mathbb C e_1$, $\ker(P_E) = \mathbb C e_2$; both are $T$-invariant, $T|_{\mathbb C e_1}$ is multiplication by $1$ and $T|_{\mathbb C e_2}$ is multiplication by $2$, so the two restrictions have spectra $\{1\}$ and $\{2\}$; this agrees with [L5] and the separation of the spectral parts. [step 2.1, L5, L1, algebra] ∎
+
+## Remarks
+
+The circle below is the positively oriented contour
+$\gamma(t)=1+\tfrac12e^{it}$: it encloses $1$ and excludes $2$.
+The arrows on the right show the action of $P_E$ on the standard basis;
+$T$ acts by $1$ on $\mathbb C e_1$ and by $2$ on $\mathbb C e_2$.
+These illustrate the contour computation and invariant summands in
+steps 2.1 and 3.1; the verification above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[x=2cm,y=2cm]
+\draw[->] (0.15,0) -- (2.55,0) node[right] {$\mathrm{Re}\,z$};
+\draw[->] (0.2,-0.75) -- (0.2,0.85) node[above] {$\mathrm{Im}\,z$};
+\draw[thick] (1,0) circle (0.5);
+\draw[->,thick] (1.5,0) arc (0:65:0.5);
+\fill (1,0) circle (0.025) node[below] {$1$};
+\fill (2,0) circle (0.025) node[below] {$2$};
+\node at (1,0.72) {$\gamma$};
+\node at (1,-0.85) {$E=\{1\}$};
+\node (a) at (3.2,0.5) {$e_1$};
+\node (b) at (4.3,0.5) {$e_1$};
+\node (c) at (3.2,-0.2) {$e_2$};
+\node (d) at (4.3,-0.2) {$0$};
+\draw[->] (a) -- node[above] {$P_E$} (b);
+\draw[->] (c) -- node[above] {$P_E$} (d);
+\node at (3.75,-0.65) {$\mathrm{ran}(P_E)=\mathbb C e_1$};
+\node at (3.75,-0.95) {$\ker(P_E)=\mathbb C e_2$};
+\end{tikzpicture}
+```

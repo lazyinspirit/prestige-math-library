@@ -1,0 +1,96 @@
+{
+  "id": "alg-ip-pnp-ista-with-denoiser",
+  "agent": "/root/rendering_repair_coordinator/inv_001",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-diagram-fence",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original PNG shows all TikZ commands as literal monospace source; tilde fence is parsed as ordinary code by the local diagram extractor. The three nodes and the two arrows correctly represent the recurrence and do not need mathematical changes.",
+      "action": "Replace opening and closing tilde fences with supported backtick fences, preserving every byte of the diagram body and algorithm.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Two fence delimiter replacements only, at lines 47 and 55.",
+  "source_lines_after": [
+    47,
+    55
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "For every integer t>=1, x_(t-1), z_t and x_t belong to R^n. g:R^n->R is C^1; the Euclidean gradient maps R^n to R^n. The gradient-step map u -> u-gamma grad g(u) maps R^n to R^n. The supplied deterministic denoiser D_tilde_sigma:R^n->R^n receives the resulting z_t.",
+      "local_justification": "Definition lines 39-40 state n>=1, sigma,gamma>0, the C^1 hypothesis and exact two-step recurrence; the declared Euclidean-inner-product supplier fixes the gradient convention."
+    },
+    {
+      "asserted_relations": "The first left-to-right edge is x_(t-1) -> z_t=x_(t-1)-gamma grad g(x_(t-1)); the second is z_t -> x_t=D_tilde_sigma(z_t). Both labels reproduce line 40 exactly, with the same time indices, minus sign, gamma and sigma.",
+      "local_justification": "The diagram node labels in lines 49-51 are identical to the corresponding terms in the defining recurrence. No alternate path, commutativity, convergence, proximal or MMSE identity is asserted."
+    },
+    {
+      "independence": "The displayed recurrence alone defines the iteration; no proof or claim relies on the picture.",
+      "local_justification": "Definition line 45 explicitly limits the picture to one update; lines 41 and 43 retain every qualification, including the lack of convergence, exact-MMSE, training or measurability assumptions."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-ip-pnp-ista-with-denoiser.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/alg-ip-pnp-ista-with-denoiser.md",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-ip-pnp-ista-with-denoiser.md",
+            "item_id": "alg-ip-pnp-ista-with-denoiser",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-ip-pnp-ista-with-denoiser.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-inv-001-fresh-20261024 TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-ip-pnp-ista-with-denoiser --out research/math-library-rendering-repairs-2026-10-23/preview-inv-001-freshcompile-20261024",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 32
+      },
+      "native_compilation": "New item-specific TMPDIR forced a cache miss in the native node-tikzjax rendering pipeline; resulting SVG is runtime-inv-001-fresh-20261024/pi-tikz-cache/d6f57e56f4d4c4507c25be83e6ebc0c4.svg. Capture records one TikZ figure, no diagram failures and no KaTeX errors.",
+      "visual_inspection": "Viewed fresh standalone PNG at original 1200x1400 resolution: complete three-node diagram, both rightward arrows, no overlap or clipping. No additional layout edit warranted."
+    }
+  ],
+  "evidence": {
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/inverse-problems/screenshots/alg-ip-pnp-ista-with-denoiser--01.png",
+    "fresh_preview": "research/math-library-rendering-repairs-2026-10-23/preview-inv-001-freshcompile-20261024",
+    "fresh_screenshot": "research/math-library-rendering-repairs-2026-10-23/preview-inv-001-freshcompile-20261024/screenshots/alg-ip-pnp-ista-with-denoiser--01.png"
+  },
+  "before_raw_sha256": "65db65ddce93a48d8cc02d1631163163f3a50393d1ce01febddb6fc564d588b4",
+  "after_raw_sha256": "de3076952b20784bd03ba74e00859d979a6feb36ff264c8a6b2e1579f27092cc",
+  "status_preserved": "published; entire frontmatter byte-identical",
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview only; not production-route coverage. Preview reference map records 32 unrelated parse diagnostics; this assigned item rendered successfully."
+  ],
+  "recorded_at": "2026-10-23T18:14:39.395524+00:00"
+}

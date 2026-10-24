@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-simplicial-four-polytope-facet-count.json
+  precheck: pass
 id: lem-simplicial-four-polytope-facet-count
 kind: lemma
-title: "A convex 4-polytope has at most m(m−3)/2 facets"
+title: "A convex 4-polytope has at most $m(m-3)/2$ facets"
 status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
@@ -20,12 +23,7 @@ sources:
     - title: "Mark de Berg et al., Computational Geometry: Algorithms and
         Applications, 3rd ed., Chapter 9"
       url: "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement

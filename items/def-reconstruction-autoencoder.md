@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-reconstruction-autoencoder.json
+  precheck: n/a
 id: def-reconstruction-autoencoder
 kind: definition
 title: "Reconstruction autoencoder and denoising risk"
@@ -18,12 +21,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, and Ross Girshick, Masked Autoencoders Are Scalable Vision Learners, §§3.1–3.3"
@@ -88,3 +85,29 @@ Because the encoder input and decoder output depend on $V$ and the loss is evalu
 [Goodfellow et al., §14.5, pp. 507–508: denoising corruption and clean-target reconstruction objective](https://www.deeplearningbook.org/contents/autoencoders.html)
 
 [Vincent et al., §§2.2–2.3, equations (1), (3), and (5): reconstruction risk and stochastic corruption with clean target](https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf)
+
+
+## Remarks
+
+For a fixed mask $V\in\mathcal V_k$, the masked-autoencoder flow is shown below. The notation $t_j$ abbreviates the decoder's token in slot $j$: it is $z_j$ at a visible position and the same learned vector $m\in\mathcal Z$ at every masked position. Slot positions accompany the tokens. The encoder sees only the visible patches and their positions; the decoder predicts all $M$ patches, while the loss compares only masked positions with the chosen targets. This is a schematic of the definition, independent of any proof or particular network architecture; the domain restriction for $T_{\rm norm}$ remains as stated above.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={align=center}, font=\large]
+  \node[draw,rounded corners,minimum width=11cm,minimum height=1cm] (visible) at (0,0)
+    {Visible input: $\bigl(V,(x_j)_{j\in V}\bigr)$, $x_j\in\mathbb R^q$};
+  \node[draw,rounded corners,minimum width=11cm,minimum height=1cm] (encoded) at (0,-1.8)
+    {Encoded visible tokens: $(z_j)_{j\in V}\in\mathcal Z^V$};
+  \node[draw,rounded corners,minimum width=11cm,minimum height=1.3cm] (slots) at (0,-3.8)
+    {$M$ ordered slots: $(t_1,\ldots,t_M)\in\mathcal Z^M$\\
+     $t_j=z_j$ for $j\in V$; $t_j=m$ for $j\notin V$\\
+     position information for all $M$ slots};
+  \node[draw,rounded corners,minimum width=11cm,minimum height=1cm] (predictions) at (0,-5.8)
+    {All predictions: $(\hat x_j)_{j=1}^M\in(\mathbb R^q)^M$};
+  \node[draw,rounded corners,minimum width=11cm,minimum height=1cm] (loss) at (0,-7.8)
+    {$\displaystyle\ell_{\rm MAE}=\frac{1}{(M-k)q}\sum_{j\in[M]\setminus V}\|\hat x_j-T(x_j)\|_2^2$};
+  \draw[->] (visible) -- node[right] {encoder} (encoded);
+  \draw[->] (encoded) -- node[right] {restore slots; insert shared $m$} (slots);
+  \draw[->] (slots) -- node[right] {decoder} (predictions);
+  \draw[->] (predictions) -- node[right] {score only $j\notin V$} (loss);
+\end{tikzpicture}
+```

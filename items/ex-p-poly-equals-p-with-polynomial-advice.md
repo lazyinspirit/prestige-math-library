@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-p-poly-equals-p-with-polynomial-advice.json
+  precheck: pass
 id: ex-p-poly-equals-p-with-polynomial-advice
 kind: example
 title: "Hardwiring a length-indexed advice string"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-p-poly-equals-p-with-polynomial-advice]
 proof_strategy: direct
-verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -43,6 +39,6 @@ and encoding that circuit as advice recovers the same computation.
 
 1.1 Replacing the advice wire by the constant $1$ turns the XOR gate into a NOT gate on $x_1$; the unused input $x_2$ remains an input wire. On $00$, both $M(00,1)$ and $C_2(00)$ output $1$. [given, construct]
 
-2.1 Conversely encode $C_2$ by the topological list ``inputs $x_1,x_2$; NOT $x_1$; designate the NOT gate as output.'' A fixed evaluator given this list as advice returns $1$ on $00$ and, for every two-bit $x$, returns $\neg x_1$; the declared input $x_2$ is simply unused. [L1, step 1.1, construct]
+2.1 Conversely encode $C_2$ by the topological list “inputs $x_1,x_2$; NOT $x_1$; designate the NOT gate as output.” A fixed evaluator given this list as advice returns $1$ on $00$ and, for every two-bit $x$, returns $\neg x_1$; the declared input $x_2$ is simply unused. [L1, step 1.1, construct]
 
 3.1 The same finite instance therefore exhibits both hardwiring and circuit- encoding directions of [L1]. [L1, step 1.1, step 2.1] ∎

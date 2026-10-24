@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-bounded-projective-homotopy-category-for-a-m.json
+  precheck: pass
 id: def-bounded-projective-homotopy-category-for-a-m
 kind: definition
-title: "The bounded projective homotopy category C_m and the two shifts"
+title: "The bounded projective homotopy category $C_m$ and the two shifts"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -20,13 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0006056"
     - title: "Charles Weibel, An Introduction to Homological Algebra, ch. 10 §10.4, pp. 387-390"
       url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
+
 ---
 
 ## Definition

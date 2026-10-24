@@ -1,0 +1,76 @@
+{
+  "id": "cex-exp-one-over-z-is-essential-and-omits-zero",
+  "agent": "/root/rendering_repair_coordinator/cxa_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution screenshot visibly prints e^{1/z} including caret and braces, while the same expression in the body is correctly typeset. Frozen and current source originally agreed and lacked title delimiters.",
+      "action": "Wrapped only e^{1/z} in inline dollar delimiters in title line 4.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Add supported inline math delimiters around the exponential expression in the title.",
+  "source_lines_after": {
+    "4": "title: \"$e^{1/z}$ has an essential singularity at 0 and omits the value 0\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "2dc7012385521e528c12162d70385e01410c569aa32acba0ac9716acecd0c005",
+  "after_raw_sha256": "a0379696098736a7eeb798ec0c33d931fd6a9c60844ddc4360421bd3ea912e55",
+  "publication_status_bytes_preserved": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-exp-one-over-z-is-essential-and-omits-zero.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-exp-one-over-z-is-essential-and-omits-zero.md",
+            "item_id": "cex-exp-one-over-z-is-essential-and-omits-zero",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-exp-one-over-z-is-essential-and-omits-zero.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-exp-one-over-z-is-essential-and-omits-zero.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/cex-exp-one-over-z-is-essential-and-omits-zero--01.png",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa009/manifest.json",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/cxa009/screenshots/cex-exp-one-over-z-is-essential-and-omits-zero--01.png",
+    "original_resolution_views": true,
+    "result": "Fresh native local screenshot renders the title exponential with a superscript; complete body also inspected.",
+    "source_sha256": "a0379696098736a7eeb798ec0c33d931fd6a9c60844ddc4360421bd3ea912e55",
+    "reference_map_sha256": "18e3a723d49674de213b977aec69b6f2571665487a899668d2b3655be6dd6dcf",
+    "preview_process_exit_code": 143,
+    "preview_process_note": "Utility emitted its completed one-item, one-tile summary and wrote complete manifest/capture, but shell session returned exit 143; scoped check commands independently exited 0.",
+    "limitations": [
+      "Local ItemBody/title preview; no production route coverage.",
+      "Preview reference map reports 16 unrelated parse diagnostics."
+    ]
+  }
+}

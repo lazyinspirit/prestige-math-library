@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-continuation-trajectories-are-compact-up-to-breaking.json
+  precheck: pass
 id: thm-continuation-trajectories-are-compact-up-to-breaking
 kind: theorem
 title: "Continuation trajectories are compact up to breaking"
@@ -25,8 +28,7 @@ sources:
     - title: "Michele Audin and Mihai Damian, Morse Theory and Floer Homology (complete author PDF of the English book, 628 pp.)"
       url: "https://audin.pages.math.unistra.fr/livres/audin-damian-en.pdf"
       locator: "Ch. 3 Sec. 3.2.b-c: compactness up to breaking and the manifold-with-boundary structure, printed pp. 63-68, PDF pp. 73-78"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -95,3 +97,42 @@ The same proof supplies the following pointed autonomous-tail interface for eith
 7.1 If the endpoint indices agree, step 4.1 permits no tail piece, so every limit is unbroken. The space is compact and is a zero-dimensional smooth manifold by [F2]. Its singleton neighbourhoods form an open cover; compactness gives a finite subcover, proving finiteness. The identical argument applied to full autonomous orbit classes with index drop one gives finite metric-end rigid trajectory sets: use a height path with fixed critical endpoints, the modulus and extraction of steps 1.1–4.1, and the transverse index dimension minus the free nonzero flow direction. No broken limit is possible at drop one. This proves the metric-end finiteness used in the statement, without promoting a normalized-field supplier beyond its hypotheses. [F1, F2, F4, step 1.1, step 4.1, step 6.1]
 
 8.1 If the endpoint index difference is one, the same telescoping identity permits exactly one autonomous tail piece and a middle of index difference zero at a broken object. A negative break has $\operatorname{ind}(a)=\operatorname{ind}(q)$; a positive break has $\operatorname{ind}(b)=\operatorname{ind}(p)$. The relevant tail spaces are finite by step 7.1. Step 6.1 identifies the remaining objects as precisely the added broken locus; its one-neck local charts are the boundary charts, while the unbroken dimension is one. Thus these two once-broken patterns are exactly the boundary configurations asserted. [F1, F2, F5, step 4.1, step 6.1, step 7.1] ∎
+
+
+## Remarks
+
+For index drop one, the following schematic distinguishes the two possible
+boundary types. Arrows denote trajectory pieces, read from left to right;
+they are not maps between moduli spaces. In each row the continuation piece
+uses the fixed middle window $[-S,S]$.
+
+```tikz
+\begin{tikzpicture}[x=1.5cm,y=1.3cm,>=stealth,font=\large]
+\node at (3,0.85) {unbroken};
+\node (p0) at (0,0) {$p$};
+\node (q0) at (6,0) {$q$};
+\draw[->] (p0) -- node[above] {$u\in\mathcal C(p,q)$} (q0);
+\node at (3,-0.8) {negative-end break};
+\node (pn) at (0,-1.65) {$p$};
+\node (a) at (3,-1.65) {$a$};
+\node (qn) at (6,-1.65) {$q$};
+\draw[->] (pn) -- node[above] {$\gamma^-\in\mathcal M^-(p,a)$} (a);
+\draw[->] (a) -- node[above] {$v\in\mathcal C(a,q)$} (qn);
+\node at (3,-2.15) {$\mathrm{ind}(a)=\mathrm{ind}(q)$};
+\node at (3,-2.8) {positive-end break};
+\node (pp) at (0,-3.65) {$p$};
+\node (b) at (3,-3.65) {$b$};
+\node (qp) at (6,-3.65) {$q$};
+\draw[->] (pp) -- node[above] {$v\in\mathcal C(p,b)$} (b);
+\draw[->] (b) -- node[above] {$\gamma^+\in\mathcal M^+(b,q)$} (qp);
+\node at (3,-4.15) {$\mathrm{ind}(b)=\mathrm{ind}(p)$};
+\end{tikzpicture}
+```
+
+Locally at either broken configuration, there is one neck coordinate
+$\rho=1/T$: $\rho>0$ gives unbroken trajectories and $\rho\to0$ gives the
+indicated broken configuration as the passage time $T\to\infty$. This is a
+local boundary picture, not an assertion that the compactified space is a
+single interval. The index count in step 8.1 excludes additional breaks;
+the neck description is [F5]. The rigorous proof above is independent of
+the illustration.

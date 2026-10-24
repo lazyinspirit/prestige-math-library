@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-discrete-strong-markov-property.json
+  precheck: pass
 id: thm-discrete-strong-markov-property
 kind: theorem
 title: "Discrete strong Markov property"
@@ -9,12 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, Section 5.2"
@@ -48,6 +45,10 @@ be omitted.
 
 1.1 Since $h$ is measurable, $(h(X_n))$ is adapted. Applying [F3] with value [F1, F3] zero at infinity shows that $R_h$ is $\mathcal F_\tau$-measurable. Moreover $|Z_H|,|R_h|\le\lVert H\rVert_\infty$, so both variables are integrable. This also covers $H=0$, constant $H=1$, and the event $\{\tau=\infty\}$, where both variables vanish by definition. [F1, F3]
 
-2.1 Fix $A\in\mathcal F_\tau$. For every finite $n$, [F2] and [F1] give [F1, F2, F4, step 1.1] $$ \begin{aligned} &\mathbb E[1_{A\cap\{\tau=n\}}H(X_n,X_{n+1},\ldots)]\\ &\qquad=\mathbb E[1_{A\cap\{\tau=n\}}h(X_n)]. \end{aligned} $$ Sum from $n=0$ to $N$. The partial sums on either side are bounded in absolute value by $\lVert H\rVert_\infty$ and converge pointwise to $1_AZ_H$ and $1_AR_h$. By [F4], letting $N\to\infty$ gives $\mathbb E[1_AZ_H]=\mathbb E[1_AR_h]$. Together with step 1.1 this is the defining event test for the displayed conditional expectation. Empty $A$, full $A$, $\tau=0$, and an almost-surely infinite $\tau$ require no separate argument. [F1, F2, F4, step 1.1]
+2.1 Fix $A\in\mathcal F_\tau$. For every finite $n$, [F2] and [F1] give [F1, F2, F4, step 1.1]
+$$
+\begin{aligned} &\mathbb E[1_{A\cap\{\tau=n\}}H(X_n,X_{n+1},\ldots)]\\ &\qquad=\mathbb E[1_{A\cap\{\tau=n\}}h(X_n)]. \end{aligned}
+$$
+Sum from $n=0$ to $N$. The partial sums on either side are bounded in absolute value by $\lVert H\rVert_\infty$ and converge pointwise to $1_AZ_H$ and $1_AR_h$. By [F4], letting $N\to\infty$ gives $\mathbb E[1_AZ_H]=\mathbb E[1_AR_h]$. Together with step 1.1 this is the defining event test for the displayed conditional expectation. Empty $A$, full $A$, $\tau=0$, and an almost-surely infinite $\tau$ require no separate argument. [F1, F2, F4, step 1.1]
 
 3.1 If $\mathbb P(\tau<\infty)=1$, the exceptional infinity event is null, so [step 2.1] $Z_H=H(X_\tau,X_{\tau+1},\ldots)$ and $R_h=h(X_\tau)$ almost surely for any arbitrary values assigned there. This proves the finite form. Choice is used only by [F1] and the conditional expectation in the conclusion. [step 2.1] ∎

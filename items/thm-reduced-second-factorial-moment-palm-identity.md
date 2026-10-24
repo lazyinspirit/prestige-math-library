@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-reduced-second-factorial-moment-palm-identity.json
+  precheck: pass
 id: thm-reduced-second-factorial-moment-palm-identity
 kind: theorem
 title: "The reduced second factorial moment measure is the Palm expectation after one-occurrence deletion"
@@ -61,7 +64,11 @@ The subtraction removes one distinguished occurrence at the origin; any other co
 
 1.1 Write each realization with occurrence indices, $\eta=\sum_i\delta_{X_i}$. For each selected occurrence $i$, recentering and subtracting one unit atom gives $$(\theta_{X_i}\eta-\delta_0)(D)=\sum_{j\ne i}\mathbf1_D(X_j-X_i).$$ Indeed, $X_i$ moves to $0$, and only the selected index is removed; if $X_j=X_i$ for another index $j$, that remaining occurrence is still counted at $0$. [F1, F2, algebra]
 
-1.2 Define on the product of location and configuration spaces $$h(x,\mu)=\begin{cases}\mathbf1_Q(x)\bigl(\mu(D)-\mathbf1_D(0)\bigr),&\mu(\{0\})\ge1,\\0,&\mu(\{0\})=0.\end{cases}$$ This is nonnegative and product measurable: the two cases are measurable by the configuration evaluation sigma-algebra, and on the first case $\mu-\delta_0$ is a counting measure. For every counted occurrence $x=X_i$, [F2] puts $\theta_x\eta$ in the first case, and $h(x,\theta_x\eta)=\mathbf1_Q(x)(\theta_x\eta-\delta_0)(D)$. [F2, F3, F4, construct]
+1.2 Define on the product of location and configuration spaces
+$$
+h(x,\mu)=\begin{cases}\mathbf1_Q(x)\bigl(\mu(D)-\mathbf1_D(0)\bigr),&\mu(\{0\})\ge1,\\0,&\mu(\{0\})=0.\end{cases}
+$$
+This is nonnegative and product measurable: the two cases are measurable by the configuration evaluation sigma-algebra, and on the first case $\mu-\delta_0$ is a counting measure. For every counted occurrence $x=X_i$, [F2] puts $\theta_x\eta$ in the first case, and $h(x,\theta_x\eta)=\mathbf1_Q(x)(\theta_x\eta-\delta_0)(D)$. [F2, F3, F4, construct]
 
 2.1 Summing the identity in step 1.1 over the selected indices with $X_i\in Q$ and taking expectations, [F1] gives $$\alpha^{(2)}_{\rm red}(D)=\mathbb E\int\mathbf1_Q(x)(\theta_x\eta-\delta_0)(D)\,\eta(dx).$$ This remains valid for extended nonnegative values by monotone summation. [step 1.1, F1, F4]
 

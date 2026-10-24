@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-bmw-kauffman-tangle-basis.json
+  precheck: pass
 id: thm-bmw-kauffman-tangle-basis
 kind: theorem
 title: BMW basis by descending Kauffman tangles
@@ -21,9 +24,7 @@ sources:
     - title: "Goodman and Hauschild, Affine Birman-Wenzl-Murakami Algebras and Tangles in the Solid Torus, §§2, 3.1, 5.1–5.5"
       url: https://arxiv.org/pdf/math/0411155
       locator: "PDF pp. 4–16 and 33–50: framed Kauffman tangles, the ordinary BMW presentation, descending-tangle basis, and the Morton–Wassermann isomorphism proof."
-verification:
-  precheck: pass
-  repair: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step3-supervision/bmw-page83/application/basis-repair-receipt.json
+
 ---
 
 ## Statement
@@ -91,3 +92,37 @@ Let $\Lambda_0=\mathbb Z[\lambda^{\pm1},z_0,\delta^{\pm1}]/(\lambda^{-1}-\lambda
 17.1 Put $H=g_{\pi\eta}(g_m\cdots g_{2k-2})$. The images $\pi\eta(j)$ increase for $j<2k$, so this is a positive permutation lift. Its final three relevant images are $\pi\eta(m),i,i+1$. Moving $e_{2k}$ past the $g$-string and applying the defining mixed relations gives $g_{\pi\eta}e_{2k}(g_m\cdots g_{2k-2})e_{2k-1}=H g_{2k-1}g_{2k}e_{2k-1}=H g_{2k-1}^{-1}g_{2k}^{-1}e_{2k-1}$. For the second equality, both products of the last two $g$'s times $e_{2k-1}$ equal $e_{2k}e_{2k-1}$; for adjacent $i,j$, expanding both inverses with step 6.1, using $g_ie_je_i=g_j^{-1}e_i$, and reducing cups gives $(g_i^{-1}g_j^{-1}-g_ig_j)e_i=(s(\lambda-\lambda^{-1})-s^2(\delta-1))e_i=0$ by the coefficient relation. This supplies the inverse identity without assuming invariance of the presentation under crossing reversal. If $\pi\eta(m)<i$, the positive-sign string is a positive permutation braid; if $\pi\eta(m)>i+1$, the negative-sign string removes exactly those two crossings from $H$ and is a positive permutation braid. No other case exists since the images are distinct. Thus the entire expression is $g_\theta e_{2k-1}$ for a positive permutation lift. Step 14.1 now puts each term of step 13.2 in $J$. This proves the mixed-block case, and hence left stability. Word reversal preserves $J$, so it is two-sided. [step 6.1, step 8.3, step 14.1, step 16.1, step 13.2, algebra]
 
 18.1 The ideal $J$ lies in $I_n^{(r)}$ and contains its generator $e_1e_3\cdots e_{2k-1}$, which belongs to the block ideal in $V_n^{(r)}$. Its two-sided stability therefore proves $I_n^{(r)}=I_n^{(r-2)}+V_n^{(r)}$. Induct on $n$, beginning at $n=0,1$, and within a fixed $n$ on the through-strand parity $r$. Step 12.1 starts the inner induction at $r=0$ or $1$; step 13.1 and the equality just proved advance it by two. At $r=n$ it proves injectivity on $W_n$. Together with step 9.2 this proves the universal isomorphism. Finally base-change along $\lambda\mapsto\rho,z_0\mapsto-(q-q^{-1}),\delta\mapsto\delta$ using step 5.1. The tangle basis tensors to the asserted BMW basis, and its cardinality is $(2n-1)!!$ by [F2], including the empty matching at $n=0$. [F2, step 5.1, step 9.2, step 12.1, step 13.1, step 17.1, induction] ∎
+
+
+## Remarks
+
+For $n=2$, the three pictures below are the standard descending representatives for all three boundary matchings. In each picture the upper vertices are $1,2$ from left to right and the lower vertices are $1',2'$ from left to right, so the traversal order is determined by $1<2<2'<1'$. At the middle crossing, the uninterrupted strand from $1$ to $2'$ passes over the strand from $2$ to $1'$: it is traversed first. This is the standard descending choice, rather than the positive permutation lift discussed in step 8.3.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=1pt]
+\draw (0,0)--(0,1.5);
+\draw (1,0)--(1,1.5);
+\node at (0,1.8) {$1$};
+\node at (1,1.8) {$2$};
+\node at (0,-.3) {$1'$};
+\node at (1,-.3) {$2'$};
+\node at (.5,-.8) {$T_{c_1}$};
+\draw (2.7,1.5)--(3.7,0);
+\draw (2.7,0)--(3.1,.6);
+\draw (3.3,.9)--(3.7,1.5);
+\node at (2.7,1.8) {$1$};
+\node at (3.7,1.8) {$2$};
+\node at (2.7,-.3) {$1'$};
+\node at (3.7,-.3) {$2'$};
+\node at (3.2,-.8) {$T_{c_2}$};
+\draw (5.4,1.5) .. controls (5.4,.8) and (6.4,.8) .. (6.4,1.5);
+\draw (5.4,0) .. controls (5.4,.7) and (6.4,.7) .. (6.4,0);
+\node at (5.4,1.8) {$1$};
+\node at (6.4,1.8) {$2$};
+\node at (5.4,-.3) {$1'$};
+\node at (6.4,-.3) {$2'$};
+\node at (5.9,-.8) {$T_{c_3}$};
+\end{tikzpicture}
+```
+
+The connectors are $c_1=\{\{1,1'\},\{2,2'\}\}$, $c_2=\{\{1,2'\},\{2,1'\}\}$ and $c_3=\{\{1,2\},\{1',2'\}\}$. Each has no closed component or self-crossing; the two crossing-free pictures are descending vacuously. Thus the illustration displays the $(2\cdot2-1)!!=3$ basis classes of steps 3.1 and 4.1. The rigorous spanning, independence and isomorphism arguments above remain independent of this illustration.

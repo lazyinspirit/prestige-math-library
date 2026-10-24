@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-borel-fixed-point-on-projective-space.json
+  precheck: pass
 id: ex-borel-fixed-point-on-projective-space
 kind: example
-title: Borel subgroups of GL_n are flag stabilizers and act on projective space with a fixed line
+title: Borel subgroups of $\mathrm{GL}_n$ are flag stabilizers and act on projective space with a fixed line
 dependency_level: 14
 deps:
   - def-axiom-of-choice
@@ -26,11 +29,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-sum-and-intersection-in-f-three.json
+  precheck: pass
 id: ex-sum-and-intersection-in-f-three
 kind: example
 title: "Two planes in $F^{3}$ whose sum is $F^{3}$ and whose intersection is a line, computed explicitly"
@@ -13,13 +16,6 @@ aliases: []
 landmark: false
 short: "two planes in $F^{3}$: sum and intersection"
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -99,3 +95,21 @@ uses it.
 - **The intersection did not have to be computed by hand to know it is a subspace**, since intersections of linear subspaces always are ([[lem-intersection-of-linear-subspaces]]). What the computation adds is the identification of that subspace as $\operatorname{span}\{e_1\}$, which is the point of the example.
 
 - **Everything here is over an arbitrary field.** No order, no square roots and no counting are used; the only field facts needed are $1_F \ne 0_F$ and the identity laws.
+
+The following inclusion diagram records the coordinate descriptions above. Each
+arrow is the inclusion of a subspace into the subspace above it. It is a
+schematic of sets over any field, including finite fields; it does not depict
+Euclidean planes. The nonzero vector $e_1$ lies in the bottom subspace.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (top) at (0,3.2) {$U+W=F^3$};
+\node (left) at (-3,1.6) {$U=\{(a,b,0_F):a,b\in F\}$};
+\node (right) at (3,1.6) {$W=\{(0_F,b,c):b,c\in F\}$};
+\node (bottom) at (0,0) {$U\cap W=\{(0_F,t,0_F):t\in F\}$};
+\draw[->] (bottom) -- (left);
+\draw[->] (bottom) -- (right);
+\draw[->] (left) -- (top);
+\draw[->] (right) -- (top);
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-substituting-perfect-graphs-preserves-perfection.json
+  precheck: pass
 id: thm-substituting-perfect-graphs-preserves-perfection
 kind: theorem
 title: "Substituting a perfect graph into a perfect graph preserves perfection"
@@ -15,16 +18,7 @@ sources:
       url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch5.pdf"
     - title: "Maria Chudnovsky and Shmuel Safra, The Erdos-Hajnal conjecture for bull-free graphs, Theorem 5.1"
       url: "https://web.math.princeton.edu/~mchudnov/EHbullfree.pdf"
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical new_item review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Statement
@@ -65,7 +59,9 @@ neighbors that $v$ had. Deleting a vertex set gives an induced subgraph
 
 3.1 Color $Q_C$ optimally with $\omega(Q_C)$ colors. Its $k$ mutually adjacent twin vertices use $k$ distinct colors. Color $R$ properly with $k$ colors and relabel those colors by the $k$ colors on $C$; keep the colors of all vertices in $S$ from the coloring of $Q_C$. This colors $G[W]$ properly. Indeed, inside $S$ and inside $R$ the colorings are proper; an outside vertex adjacent to $v$ was adjacent to every member of $C$, so its color differs from all $k$ colors now used on $R$; and an outside vertex not adjacent to $v$ has no edge into $R$. Thus $\chi(G[W])\le\omega(Q_C)=\omega(G[W])$. The reverse inequality holds for every graph, so equality follows. [L1, L3, step 2.1]
 
-4.1 Since $W$ was arbitrary, every induced subgraph of $G$ has $\chi=\omega$. Therefore $G$ is perfect. [L1, step 1.1, step 3.1] ∎ ## Source notes
+4.1 Since $W$ was arbitrary, every induced subgraph of $G$ has $\chi=\omega$. Therefore $G$ is perfect. [L1, step 1.1, step 3.1] ∎
+
+## Source notes
 
 Diestel, Exercise 51, p. 152, requests this substitution theorem after
 giving the replication lemma. Chudnovsky-Safra cite the theorem as their

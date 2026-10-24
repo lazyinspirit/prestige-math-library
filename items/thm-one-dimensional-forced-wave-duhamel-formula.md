@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-one-dimensional-forced-wave-duhamel-formula.json
+  precheck: pass
 id: thm-one-dimensional-forced-wave-duhamel-formula
 kind: theorem
 title: "The forced one-dimensional wave formula over the characteristic triangle"
@@ -11,11 +14,6 @@ deps: [thm-dalembert-formula, lem-derivative-of-an-integral-with-moving-endpoint
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)"
@@ -57,3 +55,26 @@ is the unique classical solution of $u_{tt}=c^2u_{xx}+f$ with $u(\cdot,0)=u_0$, 
 3.1 Data and uniqueness. At $t=0$ the source integral vanishes, so $u(\cdot,0)=u_0$ and $u_t(\cdot,0)=u_1$ are exactly the statements of [F3] for the homogeneous part. If $v$ is any classical solution of the forced problem with the same data, then $w:=u-v$ is $C^2$ with $w_{tt}=c^2w_{xx}$ and zero data, so $w=0$ by the uniqueness clause of [F3]; hence $u$ is the unique classical solution. [F3, step 1.1, step 2.1, algebra]
 
 4.1 The double integral runs over $0\le s\le t$ and $|y-x|\le c(t-s)$, the backward characteristic triangle with vertex $(x,t)$, and its coefficient is $1/(2c)$; this completes the identification of the displayed solution. [given] ∎
+
+## Remarks
+
+For $t>0$, the figure shows the source-integration region in the $(y,s)$ plane. Its sloping sides are $y=x-c(t-s)$ and $y=x+c(t-s)$; a horizontal slice at time $s$ is exactly the inner integration interval. At $t=0$ the triangle collapses to $(x,0)$. The source contribution is the integral of $f(y,s)$ over this region multiplied by $1/(2c)$. The proof above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\draw[->] (-0.8,0) -- (6.7,0) node[right] {$y$};
+\draw[->] (-0.6,-0.3) -- (-0.6,4.7) node[above] {$s$};
+\draw[thick] (0,0) -- (3,4) -- (6,0) -- (0,0);
+\draw[dashed] (-0.6,4) -- (3,4);
+\node[left] at (-0.6,4) {$t$};
+\draw[dashed] (-0.6,1.6) -- (1.2,1.6);
+\node[left] at (-0.6,1.6) {$s$};
+\draw[very thick] (1.2,1.6) -- (4.8,1.6);
+\fill (3,4) circle (1.8pt);
+\node[above right] at (3,4) {$(x,t)$};
+\node[below] at (0,0) {$(x-ct,0)$};
+\node[below] at (6,0) {$(x+ct,0)$};
+\node at (1.9,1.2) {$x-c(t-s)$};
+\node at (4.1,1.2) {$x+c(t-s)$};
+\end{tikzpicture}
+```

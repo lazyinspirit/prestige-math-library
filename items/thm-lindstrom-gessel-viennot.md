@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lindstrom-gessel-viennot.json
+  precheck: pass
 id: thm-lindstrom-gessel-viennot
 kind: theorem
 title: "$\\det\\bigl(\\lvert\\mathcal{M}(A_i,E_j)\\rvert\\bigr)_{i,j}=\\sum_{\\pi\\in S_r}\\operatorname{sgn}(\\pi)\\cdot\\#\\{\\text{non-intersecting }\\pi\\text{-systems}\\}$"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -74,3 +70,47 @@ $$\det(m_{i,j})_{0\le i,j<r}=\#\mathcal{N}_{\mathrm{id}}(A,E).$$
 ## Remarks
 
 - This is the lattice-path form of the Lindstrom-Gessel-Viennot lemma. The general acyclic-digraph statement needs digraph machinery that this page does not build, so the theorem is stated exactly in the form the page uses.
+
+For a concrete cancellation pair, take $r=2$, $A_0=(0,0)$,
+$A_1=(0,2)$, $E_0=(3,2)$ and $E_1=(3,4)$. In each panel below,
+blue denotes the path starting at $A_0$ and orange the path starting at
+$A_1$; arrows point along the east and north steps. The only common vertex
+is $x=(1,2)$, so it is the intersection selected by the involution in [L1].
+Swapping the tails at $x$ changes the endpoint permutation from
+$\mathrm{id}$ to $(0\,1)$ and back. These two intersecting systems have
+contributions $+1$ and $-1$ to the sum in proof step 2.1 and cancel.
+Every path is counted with unit weight; no weighted-digraph extension is
+being asserted. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=0.8cm,y=0.8cm,>=stealth]
+\begin{scope}
+\node at (1.5,5) {$\pi=\mathrm{id},\quad +1$};
+\draw[step=1,gray!20,very thin] (0,0) grid (3,4);
+\draw[blue!70!black,very thick,->] (0,0)--(1,0)--(1,1)--(1,2)--(2,2)--(3,2);
+\draw[orange!85!black,very thick,->] (0,2)--(1,2)--(1,3)--(1,4)--(2,4)--(3,4);
+\foreach \p in {(0,0),(1,0),(1,1),(1,2),(2,2),(3,2),(0,2),(1,3),(1,4),(2,4),(3,4)}
+  \fill \p circle (1.8pt);
+\node[left] at (0,0) {$A_0$};
+\node[left] at (0,2) {$A_1$};
+\node[right] at (3,2) {$E_0$};
+\node[right] at (3,4) {$E_1$};
+\node at (0.65,1.6) {$x$};
+\end{scope}
+\node at (5,2) {$\longleftrightarrow$};
+\node at (5,1.35) {tail swap};
+\begin{scope}[xshift=8cm]
+\node at (1.5,5) {$\pi'=(0\,1),\quad -1$};
+\draw[step=1,gray!20,very thin] (0,0) grid (3,4);
+\draw[blue!70!black,very thick,->] (0,0)--(1,0)--(1,1)--(1,2)--(1,3)--(1,4)--(2,4)--(3,4);
+\draw[orange!85!black,very thick,->] (0,2)--(1,2)--(2,2)--(3,2);
+\foreach \p in {(0,0),(1,0),(1,1),(1,2),(2,2),(3,2),(0,2),(1,3),(1,4),(2,4),(3,4)}
+  \fill \p circle (1.8pt);
+\node[left] at (0,0) {$A_0$};
+\node[left] at (0,2) {$A_1$};
+\node[right] at (3,2) {$E_0$};
+\node[right] at (3,4) {$E_1$};
+\node at (0.65,1.6) {$x$};
+\end{scope}
+\end{tikzpicture}
+```

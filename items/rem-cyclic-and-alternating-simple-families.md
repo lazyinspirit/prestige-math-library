@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-cyclic-and-alternating-simple-families.json
+  precheck: n/a
 id: rem-cyclic-and-alternating-simple-families
 kind: remark
 title: "Cyclic and alternating simple families"
@@ -8,12 +11,6 @@ deps: [cor-prime-order-group-is-cyclic, thm-alternating-group-is-simple-for-n-at
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -21,4 +18,4 @@ sources:
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 ---
 
-The elementary finite-simple entries are cyclic groups of prime order and A_n for n≥5.
+The elementary finite-simple entries are cyclic groups of prime order and $A_n$ for $n\ge5$.

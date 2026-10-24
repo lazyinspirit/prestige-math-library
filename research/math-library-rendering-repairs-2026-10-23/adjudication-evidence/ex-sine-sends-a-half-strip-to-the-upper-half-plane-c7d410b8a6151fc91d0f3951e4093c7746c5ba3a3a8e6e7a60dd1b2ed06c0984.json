@@ -1,0 +1,107 @@
+{
+  "id": "ex-sine-sends-a-half-strip-to-the-upper-half-plane",
+  "agent": "/root/rendering_repair_coordinator/dcxa_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile contains formulas but no picture. A two-panel boundary correspondence materially clarifies which vertical side maps to which exterior ray, and why the bottom edge covers the intervening interval. This is warranted expository diagram scope, not an assertion that the existing proof needs a diagram.",
+      "action": "Appended a final Remarks section with a boundary correspondence TikZ sketch, endpoint labels, directed parameter arrows and an explicit proof-independence sentence.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the schematic of sin:S→H and its continuous finite-boundary extension; no original bytes were removed or changed.",
+  "source_lines_after": {
+    "remarks_heading": 53,
+    "explanation": 55,
+    "tikz_fence": [
+      57,
+      87
+    ],
+    "diagram": [
+      58,
+      86
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "S={-π/2<Re z<π/2, Im z>0}; H={Im w>0}; interior arrow w=sin z",
+      "check": "Local supplier thm-sine-biholomorphism-from-upper-half-strip Statement and proof steps 2.1–5.1 give sin:S→H bijective and holomorphic with holomorphic inverse. The two shaded regions and central arrow represent precisely these domain/codomain objects; no metric or linear scale correspondence is asserted."
+    },
+    {
+      "objects": "Left boundary z=-π/2+iy and right boundary z=π/2+iy, y≥0",
+      "check": "Assigned Example identity and Verification 1.1 give images -cosh y and cosh y. From the locally defined cosh y=(exp y+exp(-y))/2, cosh(0)=1 and cosh increases unboundedly for y>0. Thus upward left-side parameter motion maps leftward along (-∞,-1], while upward right-side motion maps rightward along [1,∞). The actual arrows have these respective directions."
+    },
+    {
+      "objects": "Bottom boundary z=x, -π/2≤x≤π/2, and corner points",
+      "check": "Assigned Example formula and Verification 2.1 identify sin x on the real axis. On this interval sin is increasing, with derivative cos x>0 in the interior and endpoint values sin(±π/2)=±1. Consequently the bottom arrow from left to right maps from -1 toward 1. Corner dots are explicitly boundary points excluded from S, as the Remarks states, rather than interior points."
+    },
+    {
+      "objects": "Finite boundary extension and proof interface",
+      "check": "Complex sine is entire by its exponential definition in def-complex-trigonometric-and-hyperbolic-functions, the definition cited by the local theorem. Hence the displayed boundary formulas describe its continuous extension, without claiming that boundary points belong to the biholomorphism domain. Existing Facts and Verification remain byte-identical; their rigorous argument does not refer to the new figure."
+    }
+  ],
+  "before_raw_sha256": "7518a25e597673baf312a8452ad6d76658408ba8baf79a8a45171931fec0eb92",
+  "after_raw_sha256": "0a8e152d200d28e791902c1d69828707089cc4ac3a4a2b6f77b532f01c2750de",
+  "source_preservation": "Current raw source starts with the complete frozen before source byte-for-byte, including frontmatter/status and entire original statement/Facts/Verification.",
+  "original_evidence": {
+    "declared_path_missing": true,
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-sine-sends-a-half-strip-to-the-upper-half-plane--01.png",
+    "sha256": "7f330b1a74859a5b8642626f67aef938f27ed76c40e9edb5b91d1c80ce183f04",
+    "inspection": "Standalone view_image detail original; resolved within corresponding category and hash exactly matches queue."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-sine-sends-a-half-strip-to-the-upper-half-plane.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-sine-sends-a-half-strip-to-the-upper-half-plane.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-sine-sends-a-half-strip-to-the-upper-half-plane.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcxa006 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-sine-sends-a-half-strip-to-the-upper-half-plane --out research/math-library-rendering-repairs-2026-10-23/previews/dcxa006-sine-v4",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcxa006-sine-v4/manifest.json",
+    "manifest_sha256": "46dd6cc044af6f0e9bf3ef647313e1dc2a41b9ea4e6710404bef1292bf5aa624",
+    "source_sha256": "0a8e152d200d28e791902c1d69828707089cc4ac3a4a2b6f77b532f01c2750de",
+    "reference_map_sha256": "c26a21bf78ee894de5e116cf75c08530339093cca0b401f907b153cc918bf3f8",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dcxa006-sine-v4/screenshots/ex-sine-sends-a-half-strip-to-the-upper-half-plane--01.png",
+    "screenshot_sha256": "e362795b392e56533e4d1f89f238585fdd378687a797ffec32b0957937ac7c3d",
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "inspection": "Standalone original-resolution view of final complete 1200×1400 PNG. All three paired boundary colors, two vertical arrows, three image arrows, endpoint labels, interior labels and central map arrow are visible without overlap or clipping.",
+    "development_notes": "Initial native capture rejected operatorname labels; equivalent math roman labels compile. Subsequent visual adjustment uses mapped blue!10 shading and brighter green bottom edges; a transient arrow-option typo during color replacement was corrected before final capture. Earlier preview directories retain those authentic intermediate attempts."
+  },
+  "remaining_issues": [
+    "Local ItemBody preview does not cover production navigation or metadata footer. Reference map reports 16 unrelated parse diagnostics; the assigned supplier link renders correctly."
+  ]
+}

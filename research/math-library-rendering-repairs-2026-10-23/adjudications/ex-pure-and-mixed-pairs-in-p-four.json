@@ -1,0 +1,100 @@
+{
+  "id": "ex-pure-and-mixed-pairs-in-p-four",
+  "agent": "/root/rendering_repair_coordinator/comb_013",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --01 visibly prints raw comment and node/draw commands in Remarks. The opening fence shares its line with begin{tikzpicture}, and the closing fence shares its line with end{tikzpicture}, so ItemBody never recognizes a TikZ block. In addition, inline percent comments would swallow panel commands after fence repair.",
+      "action": "Put opener/closer and each percent comment on dedicated lines; preserve all nodes, coordinates, captions and edge paths.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other: tikz-dark-theme-label-contrast",
+      "verdict": "confirmed",
+      "reason": "Fresh initial native preview exposed white currentColor vertex labels on unmapped pale #ffe6cc orange!20 fills; standalone original-resolution review showed B labels nearly disappear. The native renderer maps an exact pale orange palette to its dark theme variable.",
+      "action": "Define bfill as exact HTML FFE8D1 and use it for B nodes, preserving orange membership while activating the existing native --tikz-fill-orange mapping; final standalone native 3x screenshot shows all twelve labels clearly.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repaired fenced TikZ and percent-comment line boundaries; made orange B fill compatible with native dark-theme color mapping. No mathematical relations changed.",
+  "source_lines_after": {
+    "diagram": [
+      56,
+      86
+    ],
+    "color_definition": 57,
+    "panel_edges": [
+      64,
+      72,
+      80
+    ],
+    "panel_captions": [
+      65,
+      73,
+      81
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Three copies of the path P4, vertex labels 1,2,3,4",
+      "check": "Each rendered panel has four vertices and three consecutive edges 12,23,34, with degree sequence (1,2,2,1) and no extra edges. Native SVG has exactly three edge paths, each with three horizontal segments.",
+      "local_basis": "Given edge set and F2; def-standard-complete-bipartite-path-and-cycle-graphs defines Pn on consecutive vertices (relabeled here from 0..3 to 1..4)."
+    },
+    {
+      "objects": "Complete panel A={2}, B={1,3}",
+      "check": "Blue vertex 2 and orange vertices 1,3 agree with caption; both cross pairs 21 and 23 are edges, so every A-B pair is adjacent.",
+      "local_basis": "def-edges-between-sets-and-pure-mixed-pairs complete clause; Verification 1.1."
+    },
+    {
+      "objects": "Anticomplete panel A={1}, B={3,4}",
+      "check": "Blue vertex 1 and orange vertices 3,4 agree with caption; cross pairs 13 and 14 are absent, hence no A-B edge. The orange internal edge 34 is allowed.",
+      "local_basis": "Local anticomplete clause and Verification 1.2."
+    },
+    {
+      "objects": "Mixed panel A={2}, B={3,4}",
+      "check": "Blue vertex 2 and orange vertices 3,4 agree with caption; cross pair 23 is present and 24 absent, hence neither complete nor anticomplete. The internal B-edge 34 is allowed. All A,B pairs are nonempty and disjoint.",
+      "local_basis": "Local mixed clause and Verification 1.3."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "before_raw_sha256": "3b35e6af8dc29a72db5ed4dc9967a119248ca2bc1b11dd1f96091e086ee967c7",
+    "after_raw_sha256": "01759f05d45dac39d3e6de68946ffa4e88886f0a12b690eff76d84a28d894fe0",
+    "write_guard": "Exact before SHA256 asserted immediately before first item write.",
+    "frontmatter_and_publication_status": "Entire frontmatter byte-identical; status remains published. Entire text before Remarks byte-identical.",
+    "proof_layout": "proof-layout: 1 items, 4 steps, 0 defects",
+    "precheck": {
+      "files": 1,
+      "checked": 1,
+      "failed": 0,
+      "status": "pass"
+    },
+    "rendercheck": {
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/previews/comb_013-final-v3",
+      "renderer": "Actual local application ItemBody/MathMarkdown and renderTikz via existing repair-preview.mts; isolated fresh TMPDIR cache; file-only browser network routing.",
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "original_resolution_review": [
+        "Original flagged tile --01 standalone",
+        "Final native full-page tile --01 original resolution",
+        "Final figure-native-3x.png standalone original resolution, actual browser deviceScaleFactor 3, no resampling"
+      ],
+      "figure": "All labels/captions readable; all three panels visible without clipping or overlap; actual edge segments counted.",
+      "limitations": "Local ItemBody preview, not native loader/production-route coverage; 32 reference-map diagnostics from shared corpus are outside assigned scope."
+    }
+  },
+  "remaining_issues": []
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-borel-nevanlinna-growth-increment.json
+  precheck: pass
 id: lem-borel-nevanlinna-growth-increment
 kind: lemma
 title: "Finite-measure growth increment lemma"
@@ -25,8 +28,7 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §1, Theorem 1.2 and its proof, printed pp. 89–91; use in Theorem 1.3, printed pp. 91–92"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Statement
@@ -55,7 +57,7 @@ $f$ after increasing $r_0$ so that $T(r,f)>1$ there.
 
 ## Proof
 
-**Proof technique:** split the failure set according to the integer level of $u$; the first crossing radii $s_m$ of the levels $m$ give an explicit cover of the failure set by intervals of lengths $m^{-1-\varepsilon}$, whose total length is a convergent series.
+**Proof technique:** split the failure set according to integer function levels; the first crossing radii of those levels give an explicit cover of the failure set by intervals whose lengths are the corresponding positive integer levels raised to the power minus one minus epsilon, with finite total length by convergence of the resulting series.
 
 1.1 For every integer $m\ge1$ the superlevel set $\{r\ge r_0:u(r)\ge m\}$ is closed in $[r_0,\infty)$, and it is nonempty for $m\le\lim_{r\to\infty}u(r)=\infty$; let $s_m$ be its least element, and put $m_0:=\lceil u(r_0)\rceil$. Then $s_m\le s_{m+1}$. [F1, given, choose]
 

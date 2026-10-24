@@ -1,0 +1,206 @@
+[
+  {
+    "id": "alg-adjoint-sensitivity-method",
+    "section": "Item body",
+    "lines": [
+      33,
+      39,
+      41,
+      49
+    ],
+    "symptom": "This is an explicitly staged procedure with opposite time directions and a terminal boundary condition; a compact diagram can clarify which trajectory feeds the adjoint and where each gradient contribution enters.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "forward/backward computational dependency diagram",
+    "exact_source_claim": "The exact sensitivity procedure first follows the state trajectory forward, initializes the adjoint at terminal time from D_u phi, solves the adjoint backward, and accumulates the initial-condition, terminal, and integral parameter contributions.",
+    "selection_reason": "This is an explicitly staged procedure with opposite time directions and a terminal boundary condition; a compact diagram can clarify which trajectory feeds the adjoint and where each gradient contribution enters.",
+    "concrete_diagram_content": "Show the forward state u_theta(t) from 0 to T with initial state u_0(theta), terminal output phi and running loss ell; show p(t) integrated backward from p(T)=D_u phi(u_theta(T),theta)^T along that same state path; attach the D_theta v and D_theta ell integral contributions and the D_theta u_0^T p(0) term to the returned G(theta). Make clear that this represents exact continuous equations and not a numerical solver guarantee.",
+    "mathematical_check": "Show the forward state u_theta(t) from 0 to T with initial state u_0(theta), terminal output phi and running loss ell; show p(t) integrated backward from p(T)=D_u phi(u_theta(T),theta)^T along that same state path; attach the D_theta v and D_theta ell integral contributions and the D_theta u_0^T p(0) term to the returned G(theta). Make clear that this represents exact continuous equations and not a numerical solver guarantee.",
+    "screenshots": [
+      "screenshots/alg-adjoint-sensitivity-method--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-adjoint-sensitivity-method--01.png": "c38f7bacc4f9d46c90b7ff2f37cfd179623ce414c1a657be5de1ca189f6edac0"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "neural-odes-and-continuous-normalizing-flows"
+    ],
+    "source_lines": {
+      "33": "Let $\\Omega\\subseteq\\Theta$ be open with compact closure contained in $\\Theta$, let $U_0\\subseteq\\Theta$ be an open neighborhood of $\\overline\\Omega$, and let $u_0:U_0\\to\\mathbb R^d$ be $C^1$. Write $u_\\theta$ for the exact solution of $\\dot u_\\theta(t)=v(t,u_\\theta(t),\\theta)$, $u_\\theta(0)=u_0(\\theta)$, and let $\\mathcal T:=\\{(t,u_\\theta(t),\\theta):t\\in[0,T],\\theta\\in\\overline\\Omega\\}$ be its common compact trajectory tube. Let",
+      "39": "$$\\mathcal J(\\theta)=\\phi(u_\\theta(T),\\theta)+\\int_0^T\\ell(t,u_\\theta(t),\\theta)\\,dt.$$",
+      "41": "For each $\\theta\\in\\Omega$, the exact continuous adjoint sensitivity procedure is:",
+      "49": "Here $D_u$ and $D_\\theta$ denote Jacobian matrices in the displayed variables, $p(t)\\in\\mathbb R^d$, and $G(\\theta)\\in\\mathbb R^q$. All state and adjoint equations and the integral are exact continuous mathematical objects. Replacing them by numerical solver outputs defines a finite computation and is outside this algorithm's accuracy guarantees."
+    },
+    "source_snapshot": "snapshots/alg-adjoint-sensitivity-method.md",
+    "source_sha256": "a84ad613546e0db835cbe5f91c29d02f4de3d5c6a2da1b9cd003b93cfbccc049",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+    "section": "Item body",
+    "lines": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56
+    ],
+    "symptom": "The counterexample turns precisely on a diagonal-supported joint law having uniform coordinate marginals but not their product. A side-by-side state-space table would make the failed factorization visible immediately; the existing proof is complete without it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-editorial",
+    "exact_source_claim": "",
+    "selection_reason": "The counterexample turns precisely on a diagonal-supported joint law having uniform coordinate marginals but not their product. A side-by-side state-space table would make the failed factorization visible immediately; the existing proof is complete without it.",
+    "concrete_diagram_content": "A pair of 2-by-2 probability tables indexed by the clean string (00, 01, 10, 11): the true reverse conditional given the all-mask state assigns (1/2, 0, 0, 1/2), while the learned independent-coordinate sampler assigns (1/4, 1/4, 1/4, 1/4). Connect the all-mask state to each table as the conditioning state.",
+    "mathematical_check": "A pair of 2-by-2 probability tables indexed by the clean string (00, 01, 10, 11): the true reverse conditional given the all-mask state assigns (1/2, 0, 0, 1/2), while the learned independent-coordinate sampler assigns (1/4, 1/4, 1/4, 1/4). Connect the all-mask state to each table as the conditioning state.",
+    "screenshots": [
+      "screenshots/cex-factorized-reverse-kernel-fails-for-correlated-tokens--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/cex-factorized-reverse-kernel-fails-for-correlated-tokens--01.png": "88d3801ab759a0342604e852f050b67b212067533577348ea5f0652a3abbc299"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "discrete-masked-diffusion-and-reverse-generation-examples"
+    ],
+    "source_lines": {
+      "48": "## Counterexample",
+      "49": "",
+      "50": "**Given:** The finite model and probability law in the Statement.",
+      "51": "",
+      "52": "1.1 Since $\\alpha_1=0$, [F1] gives $Z_1=(m,m)$ with probability one, independent of $X$. By [F2], conditioning on this state and reversing to $s=0$ returns $X$ exactly. Hence the true reverse law puts mass $1/2$ on $(0,0)$ and $1/2$ on $(1,1)$, and zero on the two unequal strings. [given, F1, F2, algebra]",
+      "53": "",
+      "54": "2.1 Each marginal coordinate of that true law is uniform on $\\{0,1\\}$, but its joint law is not their product: the product would assign mass $1/4$ to $(0,1)$, while the true law assigns zero. Therefore the exact reverse conditional is not independent across positions. [given, step 1.1, algebra]",
+      "55": "",
+      "56": "3.1 The learned sampler has $c_1=1$ and draws the two coordinates independently from their uniform predictors by [F3]. Its output assigns probability $1/4$ to each of the four strings, so it cannot equal the true reverse law in step 1.1. This refutes the universal factorization statement while leaving the forward conditional independence assumption intact. [F3, step 1.1, step 2.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/cex-factorized-reverse-kernel-fails-for-correlated-tokens.md",
+    "source_sha256": "71535945c7645fdc3ae7fdcf6813bdf1e64c3283038c2d95f2f8d78f2630ed8f",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-reconstruction-autoencoder",
+    "section": "Item body",
+    "lines": [
+      39,
+      53,
+      60,
+      61,
+      62,
+      63,
+      64
+    ],
+    "symptom": "The definition specifies visible-only encoding, insertion of a shared mask token at missing positions, decoding to predictions at every patch position, and evaluation only over masked patches. A compact flow would make those interfaces and the mask-conditioned objective easier to scan within a long definition.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "masked-autoencoder dataflow and objective schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The definition specifies visible-only encoding, insertion of a shared mask token at missing positions, decoding to predictions at every patch position, and evaluation only over masked patches. A compact flow would make those interfaces and the mask-conditioned objective easier to scan within a long definition.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-reconstruction-autoencoder--01.png",
+      "screenshots/def-reconstruction-autoencoder--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-reconstruction-autoencoder--01.png": "2154b6c0c832a2b63c3692f7fbe32a1bd79ce24a47c0f9179d33f4a4ec1497ee",
+      "screenshots/def-reconstruction-autoencoder--02.png": "a1c26849129b89ebdaaf8b4d80dace38d570dbb669b0772d1132292a14318828"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "reconstruction-and-masked-autoencoders"
+    ],
+    "source_lines": {
+      "39": "Fix integers $M,q\\ge1$, set $[M]=\\{1,\\ldots,M\\}$, and write the image space on a fixed patch grid as $\\mathcal X=(\\mathbb R^q)^M$. A measurable space is a set with a specified sigma-algebra; equip $\\mathcal X$ and a finite-dimensional latent space $\\mathcal Z$ with such structures. An image is $x=(x_1,\\ldots,x_M)\\in\\mathcal X$, with $q$ real pixel values in each of its $M$ patches. Let $S=(x^{(1)},\\ldots,x^{(n)})$ be a finite training set with $n\\ge1$. For $u\\in\\mathbb R^q$, set $\\|u\\|_2^2=\\sum_{r=1}^q u_r^2$. For $V\\subseteq[M]$ let $\\mathcal Z^V=\\{(z_j)_{j\\in V}:z_j\\in\\mathcal Z\\}$. For unmasked reconstruction, the encoder and decoder are deterministic measurable maps $E_\\phi:\\mathcal X\\to\\mathcal Z$ and $D_\\psi:\\mathcal Z\\to\\mathcal X$. For masked reconstruction, the encoder is a measurable deterministic map $(V,(x_j)_{j\\in V})\\mapsto(z_j)_{j\\in V}\\in\\mathcal Z^V$, and the decoder maps the ordered length-$M$ sequence of encoded visible tokens and mask tokens to an element of $\\mathcal X$. Each mask token is one learned vector $m\\in\\mathcal Z$ reused at every masked position. All maps take finite real values; when implemented by feedforward neural networks, each is a finite computation graph evaluated in the layered order of its vertices.",
+      "53": "For masked autoencoding, fix an integer $k$ with $1\\le k<M$ and let $\\mathcal V_k=\\{V\\subseteq[M]:|V|=k\\}$, a set with cardinality $\\binom{M}{k}$. A mask $V$ is sampled uniformly from $\\mathcal V_k$; the patches in $V$ are visible and the patches in $[M]\\setminus V$ are masked. The encoder receives only the visible patches, with their positions, and no mask tokens. The decoder receives the encoded visible patches and a shared learned mask token at each missing position, with position information for all $M$ slots, and outputs predictions $\\hat x_j(\\phi,\\psi;x,V)\\in\\mathbb R^q$ for every patch position.",
+      "60": "For $T=T_{\\rm norm}$, the masked-objective formulas below are defined only on $\\mathcal D_{\\rm norm}$, so a finite empirical objective requires $x^{(i)}\\in\\mathcal D_{\\rm norm}$ for every $i$. For a population objective, require the event $A:=\\{X\\in\\mathcal D_{\\rm norm}\\}$ to be measurable with $\\mathbb P(A)=1$; interpret each loss integrand by its displayed formula on $A$ and by $0$ on $A^c$. Since $A^c$ is null, any other measurable extension there gives the same expectation. The raw target has no such restriction. The **per-example masked-patch mean squared error**, its population objective, and its finite empirical objective are",
+      "61": "$$\\ell_{\\rm MAE}(\\phi,\\psi;x,V,T):=\\frac1{(M-k)q}\\sum_{j\\in[M]\\setminus V}\\|\\hat x_j(\\phi,\\psi;x,V)-T(x_j)\\|_2^2,$$",
+      "62": "$$R_{\\rm MAE}(\\phi,\\psi;X,k,T):=\\frac1{\\binom Mk}\\sum_{V\\in\\mathcal V_k}\\mathbb E[\\ell_{\\rm MAE}(\\phi,\\psi;X,V,T)],$$",
+      "63": "$$R_{\\rm MAE}^{\\rm emp}(\\phi,\\psi;S,k,T):=\\frac1{n\\binom Mk}\\sum_{i=1}^n\\sum_{V\\in\\mathcal V_k}\\ell_{\\rm MAE}(\\phi,\\psi;x^{(i)},V,T).$$",
+      "64": "The population objective averages the expectation over the image law for each fixed mask; equivalently, it is the joint expectation for an independent uniform mask. The finite empirical objective averages over every training image and mask."
+    },
+    "source_snapshot": "snapshots/def-reconstruction-autoencoder.md",
+    "source_sha256": "6311d23782b64743040656449a07498e15598b14c2c2bf5b512ea7bab4c3d2a2",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "editorial candidate; no mathematical error is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-anderson-reverse-time-diffusion",
+    "section": "Item body",
+    "lines": [
+      39,
+      47,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93
+    ],
+    "symptom": "The time reversal and subtraction order in the driving-noise process are easy to confuse; a labeled timeline would clarify how the forward augmented process yields the reversed state and Brownian driver.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "TikZ forward-to-reverse time/process map",
+    "exact_source_claim": "The theorem defines Y_u=X_{T-u} and B_u=~W_{T-u}-~W_T for 0≤u≤U, establishes Brownian increments in the reversed filtration, and states the backward-Itô reverse SDE.",
+    "selection_reason": "The time reversal and subtraction order in the driving-noise process are easy to confuse; a labeled timeline would clarify how the forward augmented process yields the reversed state and Brownian driver.",
+    "concrete_diagram_content": "Draw the forward time axis t0→T for (X_t,~W_t), then a reversed axis u=0→U with t=T-u. Map X_{T-u} to Y_u and show B_u=~W_{T-u}-~W_T, so B_0=0 and increments use the negative reversed increments. Label claim 1 (X_t independent of ~W_t-~W_s) as the noise fact supporting claim 2; keep the reverse-SDE drift formula adjacent or in a separate labeled output box. Do not imply reversibility of arbitrary SDEs absent the theorem hypotheses.",
+    "mathematical_check": "Draw the forward time axis t0→T for (X_t,~W_t), then a reversed axis u=0→U with t=T-u. Map X_{T-u} to Y_u and show B_u=~W_{T-u}-~W_T, so B_0=0 and increments use the negative reversed increments. Label claim 1 (X_t independent of ~W_t-~W_s) as the noise fact supporting claim 2; keep the reverse-SDE drift formula adjacent or in a separate labeled output box. Do not imply reversibility of arbitrary SDEs absent the theorem hypotheses.",
+    "screenshots": [
+      "screenshots/thm-anderson-reverse-time-diffusion--01.png",
+      "screenshots/thm-anderson-reverse-time-diffusion--02.png",
+      "screenshots/thm-anderson-reverse-time-diffusion--03.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-anderson-reverse-time-diffusion--01.png": "364c79e255a66a555d57e75c8c87708e80cd837c328cd0d1a93321af05441c96",
+      "screenshots/thm-anderson-reverse-time-diffusion--02.png": "9eca75f71ec9393c325843a48ed0bc6586b3071685052690d0e2e3620fb5bc2f",
+      "screenshots/thm-anderson-reverse-time-diffusion--03.png": "01c37a49756b23b7e5bf773dc60ea6f7652c68b5be191d5f3b10676a4786f224"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "anderson-reverse-time-diffusion"
+    ],
+    "source_lines": {
+      "39": "Define the $r$-vector process $\\widetilde W$ by $\\widetilde W_{t_0}=0$ and",
+      "47": "where $(\\nabla\\!\\cdot a)_i=\\sum_j\\partial_j a_{ij}$. The score is asserted only where $p_{T-u}>0$; no density or score regularity beyond the stated hypotheses is implied.",
+      "85": "2.1 Fix $s\\ge t_0$ and condition on $\\widetilde W_s=w_s$. Step 1.1 shows that $X_s$ has density $p_s$ independently of $\\widetilde W_s$, so the conditional initial density at time $s$ is $p_s(x)\\delta_{w_s}(dw)$. The candidate $R_s(x,w,t)=p_t(x)\\varphi_{t-s}(w-w_s)$ has that initial limit. The calculation in step 1.1, with $\\varphi_{t-s}(w-w_s)$ in place of $\\varphi_{t-t_0}(w)$, proves that it solves the conditional augmented equation. By the assumed uniqueness, this is the conditional joint density of $(X_t,\\widetilde W_t)$ given $\\widetilde W_s=w_s$. [step 1.1, F2, F3, F4]",
+      "86": "",
+      "87": "2.2 The resulting backward drift in the original time variable is $\\displaystyle \\widehat b_i=b_i-\\sum_k\\sigma_{ik}c_k-\\sum_{j,k}\\partial_j\\sigma_{ik}\\sigma_{jk}=b_i-\\frac1{p_t}\\sum_j\\partial_j(p_t a_{ij}).$ Indeed, substituting $c_k=p_t^{-1}\\sum_j\\partial_j(p_t\\sigma_{jk})$ and applying the product rule expands the last numerator as $\\sum_k\\sigma_{ik}\\partial_j(p_t\\sigma_{jk})+p_t\\sum_{j,k}(\\partial_j\\sigma_{ik})\\sigma_{jk}$. [F6, step 1.2]",
+      "88": "",
+      "89": "3.1 For $s>t_0$, multiplying the conditional density in step 2.1 by the density $\\varphi_{s-t_0}(w_s)$ from step 1.1 gives the joint density of $(X_t,\\widetilde W_t,\\widetilde W_s)$. Apply [F5] with $A=X_t$, $B=\\widetilde W_t$, $C=\\widetilde W_s$, and $f=\\varphi_{t-s}$. For $s=t_0$, the same conclusion follows directly from step 2.1 with the deterministic value $\\widetilde W_{t_0}=0$. Thus $X_t$ and $\\widetilde W_t-\\widetilde W_s$ are independent and the increment has law $N_r(0,(t-s)I_r)$, proving claim 1. [step 2.1, step 1.1, F5]",
+      "90": "",
+      "91": "4.1 For $0\\le u<v\\le U$, put $s=T-v$ and $t=T-u$. Then $B_v-B_u=-(\\widetilde W_t-\\widetilde W_s)$, so by claim 1 this increment has law $N_r(0,(v-u)I_r)$. It is measurable with respect to the forward filtration at time $t$. By the strong restart assumption in the Statement, the future $X$ path, and hence the future $\\widetilde W$ increments, are measurable functions of $X_t$ and the future Brownian increments of $W$; those Brownian increments are independent of $\\mathcal F_t$ by [F1]. Since $\\widetilde W_t-\\widetilde W_s$ is independent of $X_t$ by claim 1, it is independent of the pair consisting of $X_t$ and all future Brownian increments, and thus of the entire future segment $(X_r,\\widetilde W_r-\\widetilde W_t)_{r\\ge t}$. The variables $Y_q$ and $B_q$ for $q\\le u$ are measurable with respect to that segment. Therefore $B_v-B_u$ is independent of $\\mathcal G_u$. The process $B$ is continuous, starts at zero, and has these centered Gaussian increments independent of its past; hence it is standard Brownian motion in $(\\mathcal G_u)$. [F1, step 3.1, given]",
+      "92": "",
+      "93": "5.1 Reparameterize by $u=T-t$ and set $B_u=\\widetilde W_{T-u}-\\widetilde W_T$. Right-endpoint sums in forward time satisfy $\\int_{T-u}^T H_s\\,d^{\\mathrm b}\\widetilde W_s=-\\int_0^uH_{T-r}\\,dB_r$: each reversed increment is the negative of the corresponding right-endpoint forward increment. Therefore $Y_u-Y_0=-\\int_0^u\\widehat b(Y_r,T-r)dr+\\int_0^u\\sigma(Y_r,T-r)dB_r$. The drift is $-\\widehat b_i=-b_i+p_t^{-1}\\partial_j(p_ta_{ij})=-b_i+\\partial_j a_{ij}+\\sum_j a_{ij}\\partial_j\\log p_t$. With $t=T-u$, this is exactly the displayed reverse SDE and completes claim 3. [F6, step 2.2] ∎"
+    },
+    "source_snapshot": "snapshots/thm-anderson-reverse-time-diffusion.md",
+    "source_sha256": "d83876d020e8ec1009cc4fce7a395519039bfc932417c6784d7209c1a8ee25ff",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/representation-learning-and-generative-models/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "pedagogical candidate, not a defect; no existing diagram",
+    "additional_candidate_observations": []
+  }
+]

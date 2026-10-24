@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-genus-two-orientable-surface-polygonal-schema.json
+  precheck: pass
 id: ex-genus-two-orientable-surface-polygonal-schema
 kind: example
 title: "Genus-two orientable polygon"
@@ -21,9 +24,7 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 2, printed pp.3–5"
 pipeline_run: frontier-36-complete
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -72,3 +73,49 @@ cut-and-paste computation uses no choice axiom.
 ## Remarks
 
 The word $a\,b\,a^{-1}b^{-1}c\,d\,c^{-1}d^{-1}$ is the genus-two case $g=2$ of the commutator word $\prod_{i=1}^{g}a_ib_ia_i^{-1}b_i^{-1}$, and the count $V-E+F=1-4+1=-2$ matches $2-2g$ at $g=2$. The argument identifies the surface as the connected sum of two copies of the torus of [[ex-torus-polygonal-schema]] by an explicit double splitting, and never uses the classification theorem or the Axiom of Choice.
+
+
+The arrows below give the reference directions of the paired edges; the
+labels record the boundary word read from $v_0$ through $v_1,\dots,v_7$.
+Thus each inverse-labeled side is traversed against its arrow. Equal letters
+are identified in the arrow directions by the affine reversal of boundary
+traversal. The dashed diagonal $\delta$ is the cut of step 1.2, separating
+the $a,b$ block from the $c,d$ block.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\coordinate (v0) at (0,2);
+\coordinate (v1) at (-1.414,1.414);
+\coordinate (v2) at (-2,0);
+\coordinate (v3) at (-1.414,-1.414);
+\coordinate (v4) at (0,-2);
+\coordinate (v5) at (1.414,-1.414);
+\coordinate (v6) at (2,0);
+\coordinate (v7) at (1.414,1.414);
+\draw[thick,->] (v0) -- (v1) node[midway,above left] {$a$};
+\draw[thick,->] (v1) -- (v2) node[midway,above left] {$b$};
+\draw[thick,->] (v3) -- (v2) node[midway,below left] {$a^{-1}$};
+\draw[thick,->] (v4) -- (v3) node[midway,below left] {$b^{-1}$};
+\draw[thick,->] (v4) -- (v5) node[midway,below right] {$c$};
+\draw[thick,->] (v5) -- (v6) node[midway,below right] {$d$};
+\draw[thick,->] (v7) -- (v6) node[midway,above right] {$c^{-1}$};
+\draw[thick,->] (v0) -- (v7) node[midway,above right] {$d^{-1}$};
+\draw[dashed] (v0) -- (v4) node[midway,right] {$\delta$};
+\node at (-0.85,0) {$P_1$};
+\node at (0.85,0) {$P_2$};
+\node[above] at (v0) {$v_0$};
+\node[above left] at (v1) {$v_1$};
+\node[left] at (v2) {$v_2$};
+\node[below left] at (v3) {$v_3$};
+\node[below] at (v4) {$v_4$};
+\node[below right] at (v5) {$v_5$};
+\node[right] at (v6) {$v_6$};
+\node[above right] at (v7) {$v_7$};
+\end{tikzpicture}
+```
+
+Under $q:P\to Y=P/R\cong T^2\mathbin{\#}T^2$, all eight marked corners
+have one image, the eight sides give four edge classes, and the interior
+gives one face. The picture illustrates the pairings and cut; the
+verification above establishes the quotient description and cell counts
+independently.

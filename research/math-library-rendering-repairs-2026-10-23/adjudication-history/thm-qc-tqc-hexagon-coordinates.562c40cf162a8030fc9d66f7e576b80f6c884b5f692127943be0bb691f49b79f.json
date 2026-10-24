@@ -1,0 +1,126 @@
+{
+  "id": "thm-qc-tqc-hexagon-coordinates",
+  "agent": "/root/rendering_repair_coordinator/qc_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the sole flagged tile standalone at original resolution: both diagrams are error boxes. Direct compilation with the actual native amsfonts/tikz-cd preamble stops on Undefined control sequence at operatorname in the identity labels; the preamble does not load amsmath.",
+      "action": "In both figures only, use equivalent mathrm{id} identity labels. Add explicit tikzcd environments with huge row/column separation and Large base size so all maps remain readable and separated.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restored both hexagon route diagrams with their original objects, arrow directions, labels and asserted commutativity. No figure relation required correction.",
+  "source_lines_after": [
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "figure": 1,
+      "suppliers": [
+        "items/def-monoidal-category.md",
+        "items/def-braiding.md"
+      ],
+      "objects_and_maps": [
+        "(X⊗Y)⊗Z --α_{X,Y,Z}--> X⊗(Y⊗Z)",
+        "X⊗(Y⊗Z) --c_{X,Y⊗Z}--> (Y⊗Z)⊗X",
+        "(Y⊗Z)⊗X --α_{Y,Z,X}--> Y⊗(Z⊗X)",
+        "(X⊗Y)⊗Z --c_{X,Y}⊗id_Z--> (Y⊗X)⊗Z",
+        "(Y⊗X)⊗Z --α_{Y,X,Z}--> Y⊗(X⊗Z)",
+        "Y⊗(X⊗Z) --id_Y⊗c_{X,Z}--> Y⊗(Z⊗X)"
+      ],
+      "relation": "The top-top-right path is α_{Y,Z,X} ∘ c_{X,Y⊗Z} ∘ α_{X,Y,Z}; the left-bottom-bottom path is (id_Y⊗c_{X,Z}) ∘ α_{Y,X,Z} ∘ (c_{X,Y}⊗id_Z). Both have identical fully parenthesized source/target and are equal by the first hexagon in def-braiding, exactly Statement equation 1 and proof step 2.1. Tensor identity factors act on the untouched object. All six arrows and all six vertices are visible in the final original-resolution capture."
+    },
+    {
+      "figure": 2,
+      "suppliers": [
+        "items/def-monoidal-category.md",
+        "items/def-braiding.md"
+      ],
+      "objects_and_maps": [
+        "X⊗(Y⊗Z) --id_X⊗c_{Y,Z}--> X⊗(Z⊗Y)",
+        "X⊗(Z⊗Y) --α^{-1}_{X,Z,Y}--> (X⊗Z)⊗Y",
+        "(X⊗Z)⊗Y --c_{X,Z}⊗id_Y--> (Z⊗X)⊗Y",
+        "X⊗(Y⊗Z) --α^{-1}_{X,Y,Z}--> (X⊗Y)⊗Z",
+        "(X⊗Y)⊗Z --c_{X⊗Y,Z}--> Z⊗(X⊗Y)",
+        "Z⊗(X⊗Y) --α^{-1}_{Z,X,Y}--> (Z⊗X)⊗Y"
+      ],
+      "relation": "Each inverse associator reverses the supplier convention ((A⊗B)⊗C)→A⊗(B⊗C); no braiding is inverted. The left-bottom-bottom route is α^{-1}_{Z,X,Y} ∘ c_{X⊗Y,Z} ∘ α^{-1}_{X,Y,Z}; the top-top-right route is (c_{X,Z}⊗id_Y) ∘ α^{-1}_{X,Z,Y} ∘ (id_X⊗c_{Y,Z}). They are equal by the second hexagon in def-braiding, exactly Statement equation 2 and proof step 2.2. Tensor identities preserve the untouched factors. All six vertices and arrows are visible in the final capture."
+    },
+    {
+      "figure": "both",
+      "suppliers": [
+        "items/def-qc-tqc-f-symbol.md",
+        "items/def-qc-tqc-r-symbol.md",
+        "items/lem-qc-tqc-fusion-tree-dimension.md",
+        "items/def-qc-tqc-unitary-fusion-category.md"
+      ],
+      "relation": "Read the complete item and full listed suppliers. F uses inverse precomposition L∘α^{-1} between Hom-to-total-charge bases; R uses f∘c^{-1}. Thus the drawn forward object maps match the coordinate conventions, while the inverse associators in figure 2 correspond to inverse F changes. Complete finite tree bases retain all simple intermediate charges and multiplicity labels. The figures assert object-level hexagon equalities only; proof steps 1.1, 2.1 and 2.2 establish their coordinate composites independently and remain byte-identical."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qc-tqc-hexagon-coordinates.md --json",
+      "result": "exit 0: checked 1, failed 0, direct pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-qc-tqc-hexagon-coordinates.md --json",
+      "result": "exit 0: checked 1, errors [], warnings []"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-qc-tqc-hexagon-coordinates.md",
+      "result": "exit 0: proof-layout: 1 items, 4 steps, 0 defects"
+    }
+  ],
+  "visual_checks": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/thm-qc-tqc-hexagon-coordinates--02.png",
+    "native_diagnostic_log": "research/math-library-rendering-repairs-2026-10-23/qc004-checks/original-tex.log",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/qc004-preview-v3/manifest.json",
+    "standalone_original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/qc004-preview-v3/screenshots/thm-qc-tqc-hexagon-coordinates--02.png",
+    "result": "Two rendered TikZ figures, zero diagram failures, zero KaTeX errors; labels enlarged, separated, and fully within capture. First enlarged-preview capture (v2) had a Playwright screenshot Protocol error; fresh v3 completed successfully."
+  },
+  "before_sha256": "008ea183c01ef161414ef0c2dab7d5320c0dd87584ebcfc69d67d85158dc26c2",
+  "after_sha256": "981e5c4283486fd514ae8a8a505024e3a677010d50775875bd7f9ac34a2471c6",
+  "publication_status_preserved": "status: published byte-identical; entire frontmatter and all pre-diagram text byte-identical",
+  "remaining_issues": []
+}

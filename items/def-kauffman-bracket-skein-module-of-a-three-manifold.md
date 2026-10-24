@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-kauffman-bracket-skein-module-of-a-three-manifold.json
+  precheck: n/a
 id: def-kauffman-bracket-skein-module-of-a-three-manifold
 kind: definition
 title: "Kauffman bracket skein module of a three-manifold"
@@ -15,14 +18,6 @@ axiom_use: "Choice-free: the free module is the finitely supported formal R-line
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
 sources:
   references:
     - title: "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Definition 2.1"
@@ -56,22 +51,22 @@ projection, with no additional framing twists. Their framed strips coincide
 in a collar of the four endpoints.
 
 ```tikz
-\begin{tikzpicture}[scale=0.62,line cap=round,line join=round]
+\begin{tikzpicture}[scale=1,line cap=round,line join=round]
   \begin{scope}
     \draw[thick] (-1,1)--(-0.14,0.14);
     \draw[thick] (0.14,-0.14)--(1,-1);
     \draw[very thick] (-1,-1)--(1,1);
-    \node at (0,-1.38) {crossing};
+    \node at (0,-1.45) {crossing};
   \end{scope}
-  \begin{scope}[xshift=3.0cm]
+  \begin{scope}[xshift=3.8cm]
     \draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);
     \draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);
-    \node at (0,-1.38) {$A$-smoothing, weight $A$};
+    \node[align=center] at (0,-1.65) {$A$-smoothing\\weight $A$};
   \end{scope}
-  \begin{scope}[xshift=6.0cm]
+  \begin{scope}[xshift=7.6cm]
     \draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);
     \draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);
-    \node at (0,-1.38) {$B$-smoothing, weight $A^{-1}$};
+    \node[align=center] at (0,-1.65) {$B$-smoothing\\weight $A^{-1}$};
   \end{scope}
 \end{tikzpicture}
 ```

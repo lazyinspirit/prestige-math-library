@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-klr-projective-grothendieck-group-satisfies-the-negative-quantum-serre-relations.json
+  precheck: pass
 id: thm-klr-projective-grothendieck-group-satisfies-the-negative-quantum-serre-relations
 kind: theorem
 title: "The KLR Grothendieck ring satisfies the divided-power quantum Serre relations"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 7
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -56,7 +57,7 @@ with the convention $[P_{i,0}]=1$, and satisfy $[P_{i,1}][P_{j,1}]=[P_{j,1}][P_{
 
 ## Proof
 
-**Proof technique:** direct; build the induction algebra and restriction coalgebra, then the contracting homotopy for the Serre relation, then descend $\gamma$.
+**Proof technique:** direct; build the induction algebra and restriction coalgebra, then the contracting homotopy for the Serre relation, then descend gamma.
 
 1.1 (Induction algebra and restriction coalgebra.) The induction product is associative and unital: the balanced identifications of [[def-klr-induction-and-restriction-bimodules]] for the two parenthesizations of three blocks are inverse degree-zero isomorphisms, and the unit is $[R(0)]=[k]$. For the block algebra $B$, the positive-center quotient is the tensor product of the two finite-dimensional graded quotients from [[lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases]]. Their simples are absolutely simple by [[lem-klr-maximal-tail-restriction-and-induction-have-a-unique-simple-head]], so their graded semisimple quotients are products of split graded matrix algebras. Tensoring these matrix blocks gives all simple shift orbits of $B$; tensor products of the factor projective covers cover them, by reducing their kernels and using the graded least-degree argument. Uniqueness of covers therefore identifies $K_0(B)$ with $K_0(R(\beta))\otimes_AK_0(R(\gamma))$. Restriction is coassociative with counit the weight-zero component, because iterated idempotent restriction multiplies the corresponding block idempotents, and the two orders of multiplication agree. To prove that $[\mathrm{Res}]$ respects the twisted multiplication, apply the Mackey filtration [F1] to the corner $e_{\beta,\gamma}Re_{\beta',\gamma'}$: PBW partitions its basis by the double cosets of the two block permutation groups, ordered by crossing length, and multiplication across a braid move changes only smaller-length terms; the associated quotient is exactly the four-block restriction/induction bimodule shifted by minus the root pairing of the two crossed middle blocks. Taking classes gives $[\mathrm{Res}](xy)=\sum q^{-(|y_2|\mid|x_1'|)}x_1x_1'\otimes x_2x_2'$ with the twisted product, so $[\mathrm{Res}]$ is an algebra homomorphism; no use of the second adjunction is needed. [given, F1, algebra]
 

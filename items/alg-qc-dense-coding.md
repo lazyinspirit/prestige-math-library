@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-qc-dense-coding.json
+  precheck: n/a
 id: alg-qc-dense-coding
 kind: algorithm
 title: Dense-coding procedure
@@ -21,8 +24,6 @@ axiom_use: "None; the procedure has finite bit inputs, finite registers, and fix
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "John Watrous, The Theory of Quantum Information (2018), §6.3.1"
@@ -54,3 +55,49 @@ measurement use the conventions of [[def-qc-bell-basis]],
 [[def-qc-projective-measurement]]. No optimality claim is part of this
 procedure.
 
+## Remarks
+
+The circuit is read from left to right. The top wire is $A$ and the bottom
+wire is $B$; the bracket marks the preshared Bell pair. Only $A$ is sent to
+Bob, at the dashed divider. The filled control and circled target implement
+$\operatorname{CNOT}_{A\to B}$. Each $M_Z$ denotes computational-basis
+measurement, with the ordered classical outputs $(a,b)$. The circuit
+illustrates the instructions above; correctness is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=1cm,>=stealth]
+\node at (-0.9,0.5) {$|\Phi^+\rangle_{AB}$};
+\draw (0.15,0) -- (0,0) -- (0,1) -- (0.15,1);
+\node at (0.45,1.3) {$A$};
+\node at (0.45,-0.3) {$B$};
+\node at (2.35,1.85) {Alice: encode};
+\node at (7.3,1.85) {Bob: decode and measure};
+\draw (0.15,1) -- (1.1,1);
+\draw (1.1,0.7) rectangle (1.9,1.3);
+\node at (1.5,1) {$X^b$};
+\draw (1.9,1) -- (2.5,1);
+\draw (2.5,0.7) rectangle (3.3,1.3);
+\node at (2.9,1) {$Z^a$};
+\draw[->] (3.3,1) -- (4.7,1);
+\node at (4,1.5) {send $A$};
+\draw[dashed] (4.3,-0.55) -- (4.3,0.65);
+\draw[dashed] (4.3,1.15) -- (4.3,1.8);
+\draw (4.7,1) -- (6.2,1);
+\draw (0.15,0) -- (7.8,0);
+\node at (2.35,-0.55) {Bob holds $B$};
+\draw (5.3,0.16) -- (5.3,1);
+\fill (5.3,1) circle (0.065);
+\draw (5.3,0) circle (0.16);
+\draw (5.14,0) -- (5.46,0);
+\draw (5.3,-0.16) -- (5.3,0.16);
+\draw (6.2,0.7) rectangle (7,1.3);
+\node at (6.6,1) {$H$};
+\draw (7,1) -- (7.8,1);
+\draw (7.8,0.7) rectangle (8.7,1.3);
+\draw (7.8,-0.3) rectangle (8.7,0.3);
+\node at (8.25,1) {$M_Z$};
+\node at (8.25,0) {$M_Z$};
+\draw[->] (8.7,1) -- (9.5,1) node[right] {$a$};
+\draw[->] (8.7,0) -- (9.5,0) node[right] {$b$};
+\end{tikzpicture}
+```

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-infinity-weights-satisfy-power-decay.json
+  precheck: pass
 id: lem-a-infinity-weights-satisfy-power-decay
 kind: lemma
-title: A_infinity weights satisfy power decay
+title: $A_\infty$ weights satisfy power decay
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,12 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.40, (3) implies (1), printed p. 91"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement

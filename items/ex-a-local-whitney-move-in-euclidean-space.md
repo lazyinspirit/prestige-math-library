@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-local-whitney-move-in-euclidean-space.json
+  precheck: pass
 id: ex-a-local-whitney-move-in-euclidean-space
 kind: example
 title: A local Whitney move in Euclidean space
@@ -30,12 +33,7 @@ origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct
 dependency_level: 5
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -62,3 +60,43 @@ Assume $\mathrm{AC}_\omega$ for the compact-support flow supplier. In $\mathbb R
 2.1 Apply the explicit local flow of the model definition: $g(u)=b(u)(u^2-1-\varepsilon)$, with $b=1$ on $[-1,1]$, and use a compact vertical cutoff equal to one on the swept segments. The axis is taken to $v=g(u)$ at time one. For $|u|\le1$, $g=u^2-1-\varepsilon<u^2-1$. For $|u|>1$, $u^2-1>0$ and $g=b(u)(u^2-1)-b(u)\varepsilon<u^2-1$, also where $b=0$. Thus the moved axis and the unchanged graph are disjoint. The vector field has compact support, so its auxiliary time maps are diffeomorphisms; the first arc is embedded throughout. Pull back by the plane normalization to obtain the asserted isotopy of the original first arc, with the second held fixed. [step 1.1, construct, algebra, F2, F3]
 
 3.1 In complementary dimensions the sheet factors are $E=\mathbb R^{a-1}$ and $H=\mathbb R^{b-1}$, with sheets $\{v=0,h=0\}$ and $\{v=u^2-1,e=0\}$. Use the compact normal cutoff from the theorem; a possible intersection still forces $e=h=0$, where the preceding calculation applies. The normal factors are split sheet directions, not a simultaneous product action on both images. This verifies the exact local picture and the cancellation of the opposite-sign pair. [step 2.1, construct, F4] ∎
+
+
+## Remarks
+
+The picture shows only the normalized plane model of steps 1.1–2.1. Both initial curves are oriented by increasing $u$, and the plane has its standard orientation: the ordered tangents have determinant $2u$, so $p=(-1,0)$ has sign $-$ and $q=(1,0)$ has sign $+$. The shaded region is $D=\{(u,v):-1\le u\le1,\ u^2-1\le v\le0\}$. Only $C_0$ is moved; $C_1$ remains the comparison curve.
+
+```tikz
+\begin{tikzpicture}[x=1.05cm,y=1.05cm,>=stealth]
+\begin{scope}
+\fill[gray!30!black] (-1,0) -- (1,0) plot[domain=1:-1,samples=45] (\x,{\x*\x-1}) -- (-1,0);
+\draw[->,gray] (-1.8,0) -- (1.9,0) node[right] {$u$};
+\draw[->,gray] (0,-1.5) -- (0,1.5) node[above] {$v$};
+\draw[blue,thick,->] (-1.7,0) -- (1.7,0) node[below] {$C_0$};
+\draw[thick] plot[domain=-1.55:1.55,samples=65] (\x,{\x*\x-1});
+\draw[thick,->] (-1.4,.96) -- (-1.3,.69);
+\draw[thick,->] (1.3,.69) -- (1.4,.96);
+\node at (1.12,1.4) {$C_1$};
+\node at (.45,-.35) {$D$};
+\fill (-1,0) circle (1.5pt) node[above left] {$p\;(-)$};
+\fill (1,0) circle (1.5pt) node[above right] {$q\;(+)$};
+\draw[->,blue,dashed] (-.35,-.08) -- (-.35,-.72);
+\node at (0,-1.9) {Before};
+\end{scope}
+\draw[->,thick] (2.15,-.45) -- (3.1,-.45) node[midway,above] {$G_1$};
+\begin{scope}[xshift=5.7cm]
+\draw[->,gray] (-1.8,0) -- (1.9,0) node[right] {$u$};
+\draw[->,gray] (0,-1.5) -- (0,1.5) node[above] {$v$};
+\draw[thick] plot[domain=-1.55:1.55,samples=65] (\x,{\x*\x-1});
+\draw[thick,->] (-1.4,.96) -- (-1.3,.69);
+\draw[thick,->] (1.3,.69) -- (1.4,.96);
+\node at (1.12,1.4) {$C_1$};
+\draw[blue,thick] (-1.7,0) -- (-1.18,0) .. controls (-1.08,0) and (-1.1,-.24) .. (-1,-.44);
+\draw[blue,thick] plot[domain=-1:1,samples=45] (\x,{\x*\x-1.44});
+\draw[blue,thick,->] (1,-.44) .. controls (1.1,-.24) and (1.08,0) .. (1.18,0) -- (1.7,0) node[below] {$C_0'$};
+\node at (0,-1.9) {After};
+\end{scope}
+\end{tikzpicture}
+```
+
+The blue final arc is schematic in its cutoff collars. It represents $v=g(u)$, equal to $u^2-1-\varepsilon$ on $[-1,1]$ and zero outside the support of $b$; step 2.1 proves $g(u)<u^2-1$ everywhere. The dashed arrow indicates the sweep across $D$, and the horizontal arrow compares the initial and final first arcs. No simultaneous action on both curves or on the split normal factors is depicted. The verification above is independent of the illustration.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates.json
+  precheck: pass
 id: ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates
 kind: example
-title: Tonelli and the plane polar formula give int_R e^{-x^2} dx = sqrt(pi)
+title: Tonelli and the plane polar formula give $\int_{\mathbb R} e^{-x^2}\,dx = \sqrt{\pi}$
 status: published
 origin: session
 provenance:
@@ -19,8 +22,6 @@ deps:
   - thm-nonnegative-improper-multiple-integral-by-exhaustion
   - thm-of-square-roots
 proof_strategy: direct
-verification:
-  repair: research/bayesian-computational-statistics-62-owner-step2-b25-ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates-published-repair.json
 sources:
   references:
     - title: Gerald B. Folland, Real Analysis, 2nd ed., Proposition 2.53

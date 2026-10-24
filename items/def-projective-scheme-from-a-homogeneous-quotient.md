@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-projective-scheme-from-a-homogeneous-quotient.json
+  precheck: n/a
 id: def-projective-scheme-from-a-homogeneous-quotient
 kind: definition
 title: "Projective scheme of a homogeneous quotient and its standard affine charts"
@@ -20,8 +23,7 @@ sources:
     - title: "The Stacks Project, Sections 26.5 and 27.8: affine schemes and Proj"
       url: "https://stacks.math.columbia.edu/tag/01M3"
 pipeline_run: frontier-35-ten-categories
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Definition
@@ -93,3 +95,33 @@ $S$, then $S$ has no homogeneous prime avoiding $S_+$ and
 $\operatorname{Proj}S=\varnothing$; every $D_+(x_i)=\operatorname{Spec}0$ is
 empty, consistently with the gluing. In particular
 $\operatorname{Proj}\bigl(k[x_0,\ldots,x_n]/(x_0,\ldots,x_n)\bigr)=\varnothing$.
+
+## Remarks
+
+For the same standard-graded quotient $S=k[x_0,\ldots,x_n]/I$ over the field
+$k$, with $I$ homogeneous, write $U_i=D_+(x_i)$ and
+$U_{ij}=D_+(x_ix_j)=\operatorname{Spec}((S_{x_ix_j})_0)$. The common
+localization in part 3 gives the following commuting square of open immersions:
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (ij) at (0,2) {$U_{ij}$};
+\node (i) at (4,2) {$U_i$};
+\node (j) at (0,0) {$U_j$};
+\node (X) at (4,0) {$\mathrm{Proj}\,S$};
+\draw[->] (ij) -- (i);
+\draw[->] (ij) -- (j);
+\draw[->] (i) -- (X);
+\draw[->] (j) -- (X);
+\end{tikzpicture}
+```
+
+Here $U_{ij}\to U_i$ is the distinguished-open inclusion obtained by
+inverting $x_j/x_i$ in $(S_{x_i})_0$, and $U_{ij}\to U_j$ is obtained by
+inverting $x_i/x_j$ in $(S_{x_j})_0$. The other arrows are the chart
+inclusions into the glued scheme. Both routes include the same overlap into
+$\operatorname{Proj}S$. On $U_{ijk}=D_+(x_ix_jx_k)$, the overlap
+identifications all restrict to the canonical identification furnished by
+$(S_{x_ix_jx_k})_0$; this is the cocycle compatibility used in part 3.
+The diagram illustrates the construction; the definition and its gluing
+justification above are independent of it.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-lca-fourier-inversion-is-not-an-everywhere-statement-for-arbitrary-lone-functions.json
+  precheck: pass
 id: cex-lca-fourier-inversion-is-not-an-everywhere-statement-for-arbitrary-lone-functions
 kind: counterexample
-title: LCA Fourier inversion is not an everywhere statement for arbitrary L^1 functions
+title: LCA Fourier inversion is not an everywhere statement for arbitrary L¹ functions
 dependency_level: 1
 deps:
 - def-measure-null-set-and-almost-everywhere
@@ -20,11 +23,6 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
   - title: "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)"

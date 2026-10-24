@@ -1,0 +1,106 @@
+{
+  "id": "ex-doubling-dyadic-preimage-computation",
+  "agent": "/root/rendering_repair_coordinator/dmt_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic standalone original tile renders the formulas correctly but has no illustration. A concrete same-scale interval diagram materially clarifies why two disjoint quarter intervals map onto one half interval while that half interval maps forward onto the whole circle. This is a warranted explanatory addition under the expanded diagram criterion, not a claim that the existing proof was incomplete.",
+      "action": "Added a fenced TikZ interval schematic in final Remarks, with two branches over A, a separate forward-image pair for B, explicit endpoint conventions, and independence from the verification.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only Remarks and a TikZ diagram showing D^{-1}(A)=[0,1/4) union [1/2,3/4), A=[0,1/2), B=[0,1/2), and D(B)=[0,1), with branch labels 2x and 2x-1.",
+  "source_lines_after": {
+    "remarks": [
+      40,
+      84
+    ],
+    "diagram": [
+      44,
+      84
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "The circle is represented by [0,1), as in def-circle-rotation-and-doubling-map. A and B both denote [0,1/2); their distinct letters distinguish target and source roles in the two panels. All four rows have the same horizontal scale.",
+      "justification": "The item Example and Verification 1.1\u20132.1, together with the supplier definition of D(x)={2x}."
+    },
+    {
+      "relation": "The first highlighted component [0,1/4) maps onto A by x -> 2x; the second [1/2,3/4) maps onto A by x -> 2x-1. The two downward arrows indicate maps between intervals, rather than trajectories of their drawn attachment points.",
+      "justification": "Verification 1.1 explicitly solves 0<=2x<1/2 and 0<=2x-1<1/2 on the exhaustive two branches. Each component has length 1/4, so the drawn union has length 1/2."
+    },
+    {
+      "relation": "Filled endpoints at 0 and 1/2 in the preimage row are included and map to 0. Hollow endpoints at 1/4 and 3/4 are excluded and map to 1/2, the hollow endpoint of A.",
+      "justification": "Verification 2.1 explicitly identifies these endpoints and their images; the diagram preserves the half-open intervals of the Example."
+    },
+    {
+      "relation": "The lower arrow is the restriction D:B -> [0,1), x -> 2x. B has length 1/2 and D(B) has length one; 0 is included and the right endpoints 1/2 and 1 are excluded.",
+      "justification": "Verification 2.1 gives x=y/2 for every y in [0,1), proving surjectivity of this restriction. This displays forward-image expansion without contradicting inverse-image preservation."
+    },
+    {
+      "proof_independence": "The full original Example, Facts and Verification are byte-preserved. The Remarks explicitly state that the verification is independent of the picture."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-doubling-dyadic-preimage-computation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-doubling-dyadic-preimage-computation.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-doubling-dyadic-preimage-computation.md",
+            "item_id": "ex-doubling-dyadic-preimage-computation",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-doubling-dyadic-preimage-computation.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "before_raw_sha256": "748f998313a8165982bbe739d60923a71306d9ad0a39268b6f37eb643eb8d4ba",
+  "after_raw_sha256": "cbafd730c9a22d4fa27cad5f0c1a9f82c837019bc5804e3149963c50fc9f9b22",
+  "publication_status_preserved": true,
+  "visual_evidence": {
+    "original_declared_path_missing": "research/math-library-rendering-audit-2026-10-23/measure-theory/diagram-supplement/screenshots/ex-doubling-dyadic-preimage-computation--01.png",
+    "authentic_resolved_path": "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/ex-doubling-dyadic-preimage-computation--01.png",
+    "authentic_sha256": "cfa7dec7cd7fad9f3b17699bf608aca578979c3c5f4261d6808115b094d1850b",
+    "original_view": "Independently viewed standalone at original resolution; resolved image SHA matches queue.",
+    "current_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dmt-005-final/manifest.json",
+    "current_preview_source_sha256": "cbafd730c9a22d4fa27cad5f0c1a9f82c837019bc5804e3149963c50fc9f9b22",
+    "current_preview_html_sha256": "258547154a8b318c95dd74141b40b99124ea1254d5ec61193178b59a5258403c",
+    "current_reference_map_sha256": "0227e0262f61a9b96f2a86c0c214254ed4aef35367f08bc274c42d990deb0538",
+    "current_view": "Standalone original-resolution PNG inspected: native SVG is present and readable, all four rows, interval lengths, open/closed endpoint circles, three arrowheads, and branch labels visible without clipping or overlap. Native local compiler successfully produced the diagram.",
+    "preview_command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dmt-005-final node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-doubling-dyadic-preimage-computation --out research/math-library-rendering-repairs-2026-10-23/previews/dmt-005-final"
+  },
+  "remaining_issues": [
+    "The fresh local preview PNG shows a surrounding pre-existing text capture artifact (much original text is invisible); the added Remarks and complete SVG are visible. Original standalone tile shows the original text correctly. This is a preview limitation, not a source defect; no application code was changed.",
+    "Preview title-map diagnostics list 16 unrelated parse issues; this is local ItemBody/SSR TikZ evidence rather than production route coverage."
+  ]
+}

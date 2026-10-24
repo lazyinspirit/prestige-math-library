@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-half-norm-fails-the-triangle-inequality-on-two-indicators.json
+  precheck: pass
 id: cex-half-norm-fails-the-triangle-inequality-on-two-indicators
 kind: counterexample
 title: "The half-norm fails the triangle inequality on two indicators"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [prop-the-p-functional-is-not-a-norm-for-zero-less-p-less-one]
 proof_strategy: "Take two disjoint indicators of equal positive measure. Then the 1/2-functional of the sum exceeds the sum of the two 1/2-functionals."
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -36,7 +32,7 @@ triangle inequality.
 
 ## Counterexample
 
-**Proof technique:** Take two disjoint indicators of equal positive measure. Then the $1/2$-functional of the sum exceeds the sum of the two $1/2$-functionals.
+**Proof technique:** Take two disjoint indicators of equal positive measure. Then the 1/2-functional of the sum exceeds the sum of the two 1/2-functionals.
 
 1.1 On $[0,1]$ with Lebesgue measure, let [L1, given, algebra] $f:=\chi_{[0,1/2]}$ and $g:=\chi_{(1/2,1]}$. Then $$\|f\|_{1/2}=\left(\int_0^{1/2} 1\,d\lambda\right)^2=\frac14,\qquad \|g\|_{1/2}=\frac14,$$ while $$\|f+g\|_{1/2}=\left(\int_0^1 1\,d\lambda\right)^2=1.$$ [L1, given, algebra]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-complex-oriented-diagonal-thom-class-realizes-the-six-functor-exchange-on-supports.json
+  precheck: pass
 id: lem-complex-oriented-diagonal-thom-class-realizes-the-six-functor-exchange-on-supports
 kind: lemma
 title: "Complex-oriented diagonal Thom classes realize exceptional exchange on supports"
@@ -17,8 +20,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -65,3 +66,25 @@ Assume the Axiom of Choice ([[def-axiom-of-choice]]) as inherited from the analy
 4.1 Ordered iterated diagonals. For two ordered smooth middle factors the normal model of the product diagonal is the ordered direct sum of the two complex normal bundles, and on the product of normal coordinate disks the relative cup product of the two positive generators evaluates to $+1$ on the ordered product disk, which is the positive generator of the direct sum; local uniqueness as in step 1.1 and base-change mate pasting as in steps 2.1 and 3.1 therefore give the composed refined operation on every support, in the given order and without an interchange of factors. All real degrees involved are even, so reordering the two complex summands introduces no sign: the only possible sign is $(-1)^{(2d_1)(2d_2)}=+1$. Under the additional hypotheses of [F3], the equivariant form holds verbatim, which supplies the same localization, exchange and normalized orientation clauses in $D^b_{G,c}$, with $\omega_X^G|_X=\omega_X$ rather than a quotient-stack shift. [F1, F3, step 1.1, step 2.1, step 3.1]
 
 5.1 Zero sections and Euler classes. Let $V\to X$ have complex rank $c$ and zero section $s$. In a bundle chart the normal pair is the product with $(\mathbb C^c,\mathbb C^c\setminus\{0\})$, so the same relative cochain calculation gives $s^!k_V=k_X[-2c]$ and its positive supported counit; here $c$ is the bundle rank, independently of $\dim X$. These local orientations glue because the complex transition matrices preserve the positive fiber generator. On bases in the Thom scope of [F5], this supported class is the normalized Thom class by uniqueness. Pulling its relative-to-absolute image back by $s$ gives $e(V)$ by [F5]. Applying the supported cap construction of step 2.1 after $s_*$ restricts that class to the zero section; the projection formula thus gives $s^!s_*z=e(V)\cap z$. The same counit and base-change identities give its proper-pushforward and refined-pullback compatibility; the equivariant version requires the additional hypotheses of [F3]. AC is inherited through the stated suppliers, including the Thom supplier [F5]. [A1, F1, F3, F5, step 2.1, construct] ∎
+
+## Remarks
+
+The fiber-product square defining the exchange mate is Cartesian:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, scale=1.5, transform shape]
+T=A\times_M B \arrow[r,"a"] \arrow[d,"b"'] & A \arrow[d,"q"] \\
+B \arrow[r,"u"'] & M
+\end{tikzcd}
+```
+
+The graph factorization in step 3.1 fits into the following two Cartesian squares. Here $\Gamma_q(x)=(x,q(x))$, $\theta(x,y)=(x,y)$, and $\Delta(m)=(m,m)$.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, scale=1.5, transform shape]
+T \arrow[r,"a"] \arrow[d,hook,"\theta"'] & A \arrow[r,"q"] \arrow[d,hook,"\Gamma_q"] & M \arrow[d,hook,"\Delta"] \\
+A\times B \arrow[r,"\mathrm{id}_A\times u"'] & A\times M \arrow[r,"{(q,\mathrm{id}_M)}"'] & M\times M
+\end{tikzcd}
+```
+
+The bottom composite is $F=(q,u)$, while the top composite is $qa=ub$. Thus the outer rectangle identifies $T$ with $F^{-1}(\Delta(M))$, as used in step 2.1. Pulling the supported morphism $g_\Delta$ first through the right square and then through the left gives $g_F$ by the proper-base-change identifications in steps 2.1 and 3.1. The factorization of $q$ itself is $q=\operatorname{pr}_2\circ\Gamma_q$. These diagrams record the supports and maps only; the orientation, adjunction and counit arguments remain those of the proof, independently of the illustrations.

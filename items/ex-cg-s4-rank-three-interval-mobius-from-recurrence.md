@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-s4-rank-three-interval-mobius-from-recurrence.json
+  precheck: pass
 id: ex-cg-s4-rank-three-interval-mobius-from-recurrence
 kind: example
 title: "The Möbius value of the rank-three interval [e,c] in S4 from the recurrence, with the parity and falling-chain checks"
@@ -23,13 +26,7 @@ sources:
     - title: "Yufei Zhao, On the Bruhat order of the symmetric group and its shellability (expository notes, MIT, 12 December 2007)"
       url: "https://web.mit.edu/yufeiz/www/papers/bruhat.pdf"
       locator: "Section 4, printed pp. 5-7 (Verma's parity-balance induction and Corollary 4.3), of which the present finite computation is a special case"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -72,7 +69,7 @@ In the notation of the type $A_3$ Coxeter group $W$ with simple reflections $s_1
 
 ## Verification
 
-**Proof technique:** finite computation on the fixed reduced word $s_1s_2s_3$.
+**Proof technique:** finite computation on the fixed reduced word s₁s₂s₃.
 
 1.1 The eight elements and the twelve covers. The word $s_1s_2s_3$ is reduced and its subword products are $1234,2134,1324,1243,2314,2143,1342,2341$, each reduced of its number of letters because its inversion number equals its length [F3]; by [F1] these are exactly the elements of $[e,c]$, of ranks $0,1,1,1,2,2,2,3$. By [F2] the elements covered by $c$ are the single-letter deletions of $s_1s_2s_3$ whose remaining word is reduced, namely $s_2s_3=1342$, $s_1s_3=2143$, $s_1s_2=2314$, the three elements of length $2$; each atom covers $e$; and for a length-two element $x=t_it_j$ the subword products of the reduced word $t_it_j$ are exactly $e,t_i,t_j,x$, so the atoms below $x$ are $t_i$ and $t_j$ and every other adjacent-rank pair involving $x$ is incomparable, which yields the six covers $1342\gtrdot1243$, $1342\gtrdot1324$, $2143\gtrdot1243$, $2143\gtrdot2134$, $2314\gtrdot1324$, $2314\gtrdot2134$. This is the same twelve-cover diagram used for the label words below, and by [F12] every maximal chain of $[e,c]$ has three steps. [F1, F2, F3, F12]
 

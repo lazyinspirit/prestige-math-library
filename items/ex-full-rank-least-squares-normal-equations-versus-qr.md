@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-full-rank-least-squares-normal-equations-versus-qr.json
+  precheck: pass
 id: ex-full-rank-least-squares-normal-equations-versus-qr
 kind: example
 title: "A full rank least squares problem where rounded normal equations lose the pivot"
@@ -17,8 +20,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Fundamentals of Numerical Computation, normal equations"
@@ -31,10 +32,10 @@ sources:
 
 ## Example
 
-In binary64 RNE take A=((1,1),(0,2^-27)). Its determinant 2^-27 is nonzero. The exact Gram matrix is A^T A=((1,1),(1,1+2^-54)). The spacing above 1 is 2^-52, so the midpoint is 1+2^-53; 1+2^-54 lies strictly below it and rounds to 1. Thus the formed Gram matrix has equal rows and is singular. Reduced QR works directly on A and avoids forming this rounded Gram matrix; the computed stability statement remains conditional on its own hypotheses.
+In binary64 RNE take $A=\begin{pmatrix}1&1\\0&2^{-27}\end{pmatrix}$. Its determinant $2^{-27}$ is nonzero. The exact Gram matrix is $A^T A=\begin{pmatrix}1&1\\1&1+2^{-54}\end{pmatrix}$. The spacing above $1$ is $2^{-52}$, so the midpoint is $1+2^{-53}$; $1+2^{-54}$ lies strictly below it and rounds to $1$. Thus the formed Gram matrix has equal rows and is singular. Reduced QR works directly on $A$ and avoids forming this rounded Gram matrix; the computed stability statement remains conditional on its own hypotheses.
 
 ## Facts & Assumptions
-**Given:** binary64 RNE and A=((1,1),(0,2^-27)).
+**Given:** binary64 RNE and $A=\begin{pmatrix}1&1\\0&2^{-27}\end{pmatrix}$.
 
 [F1] [[thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number]]: exact reduced QR solves full-rank least squares without forming the Gram matrix.
 
@@ -44,8 +45,8 @@ In binary64 RNE take A=((1,1),(0,2^-27)). Its determinant 2^-27 is nonzero. The 
 
 ## Verification
 
-1.1 The determinant is 2^-27, while direct multiplication gives (A^T A)_22=1+2^-54. [given, algebra]
+1.1 The determinant is $2^{-27}$, while direct multiplication gives $(A^T A)_{22}=1+2^{-54}$. [given, algebra]
 
-2.1 Since 2^-54<2^-53, the exact entry is strictly below the RNE midpoint above 1 and rounds to 1. The rounded Gram matrix has equal rows and is singular. [step 1.1, F3, algebra]
+2.1 Since $2^{-54}<2^{-53}$, the exact entry is strictly below the RNE midpoint above $1$ and rounds to $1$. The rounded Gram matrix has equal rows and is singular. [step 1.1, F3, algebra]
 
-3.1 The exact result [F1] acts on the full-rank A without a Gram formation. The computed conclusion [F2] applies only if its separate successful-step hypotheses hold. [step 1.1, step 2.1, F1, F2] ∎
+3.1 The exact result [F1] acts on the full-rank $A$ without a Gram formation. The computed conclusion [F2] applies only if its separate successful-step hypotheses hold. [step 1.1, step 2.1, F1, F2] ∎

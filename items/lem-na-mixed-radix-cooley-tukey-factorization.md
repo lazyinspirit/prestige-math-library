@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-na-mixed-radix-cooley-tukey-factorization.json
+  precheck: pass
 id: lem-na-mixed-radix-cooley-tukey-factorization
 kind: lemma
 title: "Mixed-radix Cooley–Tukey factorization with fixed index maps"
@@ -12,11 +15,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "C. Sidney Burrus, Fast Fourier Transforms, Chapter 11 §11.2, equations (11.1)–(11.2)"
@@ -52,3 +50,24 @@ Here every $\mathcal F_q$ is the negative-sign unitary DFT with normalization $q
 2.1 Expanding the exponent gives $(u+rv)(k_2+sk_1)/(rs)=uk_2/(rs)+uk_1/r+vk_2/s+vk_1$. Since $vk_1$ is an integer, its exponential factor is $1$ by [F4]. Also $(rs)^{-1/2}=r^{-1/2}s^{-1/2}$ by [F4]. Regrouping the finite sums in [F3] now yields $(rs)^{-1/2}\sum_{u=0}^{r-1}e^{-2\pi iuk_2/N}e^{-2\pi iuk_1/r}\sum_{v=0}^{s-1}x_{u+rv}e^{-2\pi ivk_2/s}$. [step 1.1, F3, F4, algebra]
 
 3.1 The inner sum in step 2.1 is $s^{1/2}(\mathcal F_sx^{(u)})(k_2)$ by [F1]. The remaining coefficient and sum are exactly $r^{-1/2}\sum_{u=0}^{r-1}y^{(k_2)}_u e^{-2\pi iuk_1/r}=(\mathcal F_ry^{(k_2)})(k_1)$, again by [F1] and the definition of $y^{(k_2)}$. This is the claimed identity. [step 2.1, F1, given] ∎
+
+
+## Remarks
+
+The flow below separates the two transform stages from the index permutations. All arrays have $N=rs$ complex entries: $0\le u,k_1<r$ and $0\le v,k_2<s$. Write $A_{u,k_2}=(\mathcal F_sx^{(u)})(k_2)$ and $z_{k_1,k_2}=(\mathcal F_ry^{(k_2)})(k_1)$. Each transform uses the negative-sign unitary convention of [F1].
+
+```tikz
+\begin{tikzpicture}
+\node[draw,rounded corners,minimum width=7cm,minimum height=.7cm] (x) at (0,0) {$x=(x_0,\ldots,x_{N-1})$};
+\node[draw,rounded corners,minimum width=7cm,minimum height=.7cm] (split) at (0,-1.7) {$x^{(u)}_v=x_{u+rv}$};
+\node[draw,rounded corners,minimum width=7cm,minimum height=.7cm] (a) at (0,-3.4) {$A_{u,k_2}=(\mathcal F_sx^{(u)})(k_2)$};
+\node[draw,rounded corners,minimum width=7cm,minimum height=.7cm] (y) at (0,-5.1) {$y^{(k_2)}_u=e^{-2\pi iuk_2/N}A_{u,k_2}$};
+\node[draw,rounded corners,minimum width=7cm,minimum height=.7cm] (z) at (0,-6.8) {$z_{k_1,k_2}=(\mathcal F_Nx)(k_2+sk_1)$};
+\draw[->] (x) -- node[right] {$j=u+rv$} (split);
+\draw[->] (split) -- node[right] {$r$ transforms $\mathcal F_s$} (a);
+\draw[->] (a) -- node[right] {twiddle multiplication} (y);
+\draw[->] (y) -- node[right] {$s$ transforms $\mathcal F_r$} (z);
+\end{tikzpicture}
+```
+
+The first arrow is the input reindexing in [F2]; the last stage includes the output reindexing $k=k_2+sk_1$. Steps 2.1–3.1 justify the twiddle and the two transform stages, including the normalization $s^{-1/2}r^{-1/2}=N^{-1/2}$. The proof above is independent of this illustration.

@@ -1,0 +1,546 @@
+[
+  {
+    "id": "alg-neural-operator-mesh-discretization",
+    "section": "Item body",
+    "lines": [
+      27,
+      28,
+      30,
+      31,
+      33
+    ],
+    "symptom": "The algorithm distinguishes partition cells, tags and volume weights, shared layer parameters, sampled states, and arbitrary query evaluation; a domain-to-mesh-to-layer flow could expose those correspondences at a glance.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "continuous-domain mesh discretization schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm distinguishes partition cells, tags and volume weights, shared layer parameters, sampled states, and arbitrary query evaluation; a domain-to-mesh-to-layer flow could expose those correspondences at a glance.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/alg-neural-operator-mesh-discretization--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-neural-operator-mesh-discretization--01.png": "1c63f042cf8db2bed81dfa4725ca731bfeaecdaf68b383c06abcd991ea512255"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "neural-operators-and-physics-informed-learning"
+    ],
+    "source_lines": {
+      "27": "For the continuous-function architecture, take its pointwise lift $P$, layers indexed by $0\\le t<L$, and pointwise projection $Q$. Given a finite partition of $D$ into nonempty measurable cells $E_1,\\dots,E_N$, choose tags $\\xi_j\\in E_j$ and weights $\\omega_j=|E_j|$. Initialize the raw lifted field $v_{0,n}(x)=P(a(x))$ on $\\bar D$ and store $v_{0,n}(\\xi_j)$. For each layer whose output domain is $\\bar D$, define at every $x\\in\\bar D$",
+      "28": "$$v_{t+1,n}(x)=\\sigma_t\\!\\left(W_tv_{t,n}(x)+\\sum_{j=1}^N\\omega_j\\kappa_t(x,\\xi_j)v_{t,n}(\\xi_j)+b_t(x)\\right),$$",
+      "30": "$$v_{L,n}(x)=\\sigma_{L-1}\\!\\left(\\sum_{j=1}^N\\omega_j\\kappa_{L-1}(x,\\xi_j)v_{L-1,n}(\\xi_j)+b_{L-1}(x)\\right).$$",
+      "31": "Return the function $x\\mapsto Q(v_{L,n}(x))$ on the output closure, evaluating these same formulas at each requested query point. A refinement changes cells, tags, and weights, while all layer, lifting, and projection parameters remain fixed.",
+      "33": "For a finite-sampling realization on continuous inputs, first reconstruct the input from its prescribed tags by the normalized nonnegative weights in the finite-sampling reconstruction bridge. Run the raw rule on this reconstructed function, including in the pointwise lifting and every local term. Its output is then a function of the finite input sample vector alone, with the same continuum parameters. The weights and reconstruction change with the partition; the learned parameters do not. Along partition sequences whose maximal cell diameters $h_n=\\max_j\\operatorname{diam}(E_{n,j})$ tend to zero, if the raw maps converge compact-uniformly in the output supremum norm, the bridge transfers that convergence to this finite-sampling realization. For a stronger compatible Banach input/output formulation, supply reconstructions into the actual input Banach space that converge compact-uniformly in that input norm; the same bridge then preserves the raw rule's proved output Banach norm convergence. The explicit continuous-input weights alone do not assert this stronger reconstruction property."
+    },
+    "source_snapshot": "snapshots/alg-neural-operator-mesh-discretization.md",
+    "source_sha256": "52c9faafe67dd266b891e9993879d922ff0dd32311ae38790f6a13a64873e072",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "editorial candidate; no mathematical error is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-radix-two-fft",
+    "section": "Item body",
+    "lines": [
+      24
+    ],
+    "symptom": "The source explicitly defines the radix-two split into even and odd subsequences, their recursive length-M/2 transforms, and the paired twiddle-factor recombination. A small q=2 butterfly can make the recursion concrete.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "recursive butterfly / data-flow diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The source explicitly defines the radix-two split into even and odd subsequences, their recursive length-M/2 transforms, and the paired twiddle-factor recombination. A small q=2 butterfly can make the recursion concrete.",
+    "concrete_diagram_content": "Show a_0,a_2 and a_1,a_3 entering the two length-2 transforms E_0,E_1 and O_0,O_1; show outputs E_k+ω^k O_k and E_k−ω^k O_k at indices k and k+M/2. Mark inverse convention as conjugate root plus division by M, if included. Do not imply a diagram is needed for correctness.",
+    "mathematical_check": "Show a_0,a_2 and a_1,a_3 entering the two length-2 transforms E_0,E_1 and O_0,O_1; show outputs E_k+ω^k O_k and E_k−ω^k O_k at indices k and k+M/2. Mark inverse convention as conjugate root plus division by M, if included. Do not imply a diagram is needed for correctness.",
+    "screenshots": [
+      "screenshots/alg-radix-two-fft--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-radix-two-fft--01.png": "69ddff9618eec52bdeb40fe8a1f40c471f6f803c092e508dfe80417e827f939a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "recurrent-and-state-space-networks"
+    ],
+    "source_lines": {
+      "24": "For a nonnegative integer $q$, let $M=2^q$, set $\\omega=1$ when $M=1$ and $\\omega=e^{-2\\pi i/M}$ when $M>1$, and let $a=(a_0,\\ldots,a_{M-1})\\in\\mathbb C^M$. The forward discrete Fourier transform (DFT) is the vector $\\widehat a\\in\\mathbb C^M$ with $\\widehat a_k=\\sum_{j=0}^{M-1}a_j\\omega^{jk}$. The radix-two procedure returns this vector by the following exact recursion. If $M=1$, return $(a_0)$. If $M>1$, recursively compute the length-$M/2$ DFTs $E$ and $O$ of $(a_0,a_2,\\ldots,a_{M-2})$ and $(a_1,a_3,\\ldots,a_{M-1})$, using the primitive root $\\omega^2$. For $0\\le k<M/2$, return $\\widehat a_k=E_k+\\omega^k O_k$ and $\\widehat a_{k+M/2}=E_k-\\omega^kO_k$. The inverse transform is obtained by running the same procedure with $\\overline\\omega$ and dividing every output by $M$."
+    },
+    "source_snapshot": "snapshots/alg-radix-two-fft.md",
+    "source_sha256": "67e62334aa9b9cc9ba35d1750adde103858f58e8ada4c63559dff1eb38fa118e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain-editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-transformer-forward-pass",
+    "section": "Item body",
+    "lines": [
+      26,
+      30,
+      31,
+      32,
+      33,
+      34,
+      36
+    ],
+    "symptom": "The procedure describes two streams and their interaction across encoder, causal decoder self-attention, cross-attention, and tokenwise output. A flow diagram could make the distinction between source-wide access and target-prefix masking easier to scan; the existing step list is complete.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional encoder-decoder computation-flow diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The procedure describes two streams and their interaction across encoder, causal decoder self-attention, cross-attention, and tokenwise output. A flow diagram could make the distinction between source-wide access and target-prefix masking easier to scan; the existing step list is complete.",
+    "concrete_diagram_content": "Source tokens x_1,…,x_n → embedding plus position → encoder stack → E. Target prefix y_0,…,y_{m−1} → embedding plus position → decoder layers, with a causal self-attention arrow restricted to j≤i and a cross-attention arrow from decoder queries to E as keys/values → output linear map → vocabulary softmax. Label outputs as one next-token probability vector per prefix position.",
+    "mathematical_check": "Source tokens x_1,…,x_n → embedding plus position → encoder stack → E. Target prefix y_0,…,y_{m−1} → embedding plus position → decoder layers, with a causal self-attention arrow restricted to j≤i and a cross-attention arrow from decoder queries to E as keys/values → output linear map → vocabulary softmax. Label outputs as one next-token probability vector per prefix position.",
+    "screenshots": [
+      "screenshots/alg-transformer-forward-pass--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-transformer-forward-pass--01.png": "2c65ed85cdc9dceb74f5de655e29e8ba090daa2303954357d8de6970ae676a04"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "attention-and-transformer-expressivity"
+    ],
+    "source_lines": {
+      "26": "**Inputs:** A nonempty source token sequence $(x_1,\\ldots,x_n)$, a target prefix $(y_0,\\ldots,y_{m-1})$ with $m\\ge1$ and a start token $y_0$, source and target embedding maps into $\\mathbb R^d$, positional encoding matrices of compatible shapes, a finite encoder stack, a finite decoder stack, and a linear output map to a finite vocabulary of logits. Each layer has the parameters and conventions in the transformer encoder/decoder definition. All self-attention and cross-attention masks must leave at least one allowed key in every query row.",
+      "30": "1. Embed each source token and add its positional vector to form $X\\in\\mathbb R^{n\\times d}$.",
+      "31": "2. Apply the encoder layers in order to $X$ and call the final matrix $E\\in\\mathbb R^{n\\times d}$.",
+      "32": "3. Embed each target-prefix token and add its positional vector to form $U\\in\\mathbb R^{m\\times d}$.",
+      "33": "4. Apply each decoder layer in order. In every decoder layer, use the causal mask on decoder self-attention, use the current decoder rows as queries and $E$ as keys and values for cross-attention, and then apply the positionwise feedforward sublayer.",
+      "34": "5. Apply the output linear map to each final decoder row and apply softmax over vocabulary coordinates. Return the encoder matrix $E$, the final decoder hidden matrix, and the rowwise next-token probability matrix.",
+      "36": "**Outputs:** The source representations, decoder representations, and one probability vector for each target-prefix position. At position $i$, the decoder self-attention calculation uses only target-prefix positions $j\\le i$; the encoder cross-attention may use every source position."
+    },
+    "source_snapshot": "snapshots/alg-transformer-forward-pass.md",
+    "source_sha256": "c121c426ad8a09e8bb2cedf68a74a2b5b3d269c28a89dd9ce929e5a2ac5b448a",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-discrete-convolutional-layer",
+    "section": "Item body",
+    "lines": [
+      31,
+      34,
+      37
+    ],
+    "symptom": "The defining formula maps each output site to a translated, stride-scaled receptive field, applies per-offset channel-mixing matrices, and uses a boundary extension. A small lattice sketch would expose the indexing convention and the difference between cross-correlation and mathematical convolution.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "2D receptive-field and stride map",
+    "exact_source_claim": "",
+    "selection_reason": "The defining formula maps each output site to a translated, stride-scaled receptive field, applies per-offset channel-mixing matrices, and uses a boundary extension. A small lattice sketch would expose the indexing convention and the difference between cross-correlation and mathematical convolution.",
+    "concrete_diagram_content": "Draw a few input lattice sites with domain D, one output site p in O, its anchor a+s⊙p, and offsets δ∈K mapped to x̃(a+s⊙p+δ). Mark one padded site outside D as zero for zero padding, label each W_δ as C_in×C_out, and show output b plus the weighted row-vector sum. If comparing with mathematical convolution, show offset reversal explicitly.",
+    "mathematical_check": "Draw a few input lattice sites with domain D, one output site p in O, its anchor a+s⊙p, and offsets δ∈K mapped to x̃(a+s⊙p+δ). Mark one padded site outside D as zero for zero padding, label each W_δ as C_in×C_out, and show output b plus the weighted row-vector sum. If comparing with mathematical convolution, show offset reversal explicitly.",
+    "screenshots": [
+      "screenshots/def-discrete-convolutional-layer--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-discrete-convolutional-layer--01.png": "e53af40d1e5a5fdaa711f7fdcab253d0417960e7d765b910f6842b804237f702"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "convolution-and-group-equivariance"
+    ],
+    "source_lines": {
+      "31": "Let $D,O\\subseteq\\mathbb Z^2$ be input and output index sets, let $C_{\\rm in},C_{\\rm out}$ be positive integers, and let $x:D\\to\\mathbb R^{C_{\\rm in}}$ assign a row vector of input channels to each input site. A boundary extension is a function $\\widetilde x:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ whose restriction to $D$ is $x$; zero padding is the extension that is zero off $D$. Choose a finite receptive-field offset set $K\\subseteq\\mathbb Z^2$, a positive integer stride vector $s\\in\\mathbb Z_{>0}^2$, an origin $a\\in\\mathbb Z^2$, one matrix $W_\\delta\\in\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$ for each $\\delta\\in K$, and an output bias row vector $b\\in\\mathbb R^{C_{\\rm out}}$. The discrete convolutional layer is the map $y:O\\to\\mathbb R^{C_{\\rm out}}$ given by",
+      "34": "y(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),",
+      "37": "where $s\\odot p$ is coordinatewise multiplication. Thus each output uses only the input sites in its receptive field, mixes input channels by matrix multiplication, and uses the same weights and bias at every output site. With unit stride on the full lattice and no boundary truncation, this formula is a discrete cross-correlation; many machine-learning software packages call it convolution. Mathematical convolution instead reverses the kernel offsets. The choices of $O$, the extension $\\widetilde x$, and the stride specify cropping, padding, and subsampling, and need not preserve a symmetry of the full lattice."
+    },
+    "source_snapshot": "snapshots/def-discrete-convolutional-layer.md",
+    "source_sha256": "7ff65bf2632f462dcfe6ece27de5b2978987d6193027757f84ad9441328ba65c",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "editorial candidate; not a confirmed defect",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-group-convolution",
+    "section": "Item body",
+    "lines": [
+      31,
+      34,
+      37,
+      40,
+      43
+    ],
+    "symptom": "The Definition distinguishes group-indexed input features from lattice-indexed image features while both operators return group-indexed output; a diagram can make the different filter argument and index action easier to compare.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Two-row indexed dataflow schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The Definition distinguishes group-indexed input features from lattice-indexed image features while both operators return group-indexed output; a diagram can make the different filter argument and index action easier to compare.",
+    "concrete_diagram_content": "Top row: f(h) and Psi(g^{-1}h) feed the sum over h in G to (C_Psi f)(g), with channel dimensions C_in and C_out. Bottom row: f(x) and Psi(g^{-1}·x) feed the sum over x in Z^2 to (E_Psi f)(g). Label the lattice action as left action and keep each filter argument exactly as written; show both outputs indexed by g in G. Do not imply commutativity, finite G, or convergence beyond finite support/absolute convergence.",
+    "mathematical_check": "Top row: f(h) and Psi(g^{-1}h) feed the sum over h in G to (C_Psi f)(g), with channel dimensions C_in and C_out. Bottom row: f(x) and Psi(g^{-1}·x) feed the sum over x in Z^2 to (E_Psi f)(g). Label the lattice action as left action and keep each filter argument exactly as written; show both outputs indexed by g in G. Do not imply commutativity, finite G, or convergence beyond finite support/absolute convergence.",
+    "screenshots": [
+      "screenshots/def-group-convolution--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-group-convolution--01.png": "3faa50ef3dba04b41f01284bd4b19e39a555581bcc7481c6c572589dbe7a14ca"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "convolution-and-group-equivariance"
+    ],
+    "source_lines": {
+      "31": "Let $G$ be a discrete group acting on the lattice $\\mathbb Z^2$ on the left. Let $C_{\\rm in},C_{\\rm out}$ be positive integers, and regard channel vectors as row vectors. For a feature map $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the group-to-group cross-correlation is the map $C_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by",
+      "34": "(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).",
+      "37": "For an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation is the map $E_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by",
+      "40": "(E_\\Psi f)(g)=\\sum_{x\\in\\mathbb Z^2} f(x)\\Psi(g^{-1}\\cdot x).",
+      "43": "Each displayed sum is required to have finite support or to converge absolutely in every output coordinate. The first operation takes group-indexed features and filters; the second takes lattice-indexed image features and filters and returns group-indexed features. These are cross-correlations, with the filter argument displayed as written; they need not be commutative, and no finiteness of $G$ is assumed."
+    },
+    "source_snapshot": "snapshots/def-group-convolution.md",
+    "source_sha256": "7817a1730af1898dbc75a552c381b41a58b694deb7915fca44adde6daff25197",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "02"
+    ],
+    "candidate_certainty": "editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-hahn-hard-soft-attention-sequence-model",
+    "section": "Item body",
+    "lines": [
+      27,
+      30,
+      33
+    ],
+    "symptom": "The same sequence update supports two attention weight rules, and a diagram can distinguish softmax weighting from deterministic smallest-index argmax while showing the shared value aggregation and positionwise update.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "sequence attention data-flow comparison",
+    "exact_source_claim": "",
+    "selection_reason": "The same sequence update supports two attention weight rules, and a diagram can distinguish softmax weighting from deterministic smallest-index argmax while showing the shared value aggregation and positionwise update.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-hahn-hard-soft-attention-sequence-model--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-hahn-hard-soft-attention-sequence-model--01.png": "8471b0929b3b1c406748835a38b74d955b3a4d8a31e1ffba91ab65326dc9d5de"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "attention-and-transformer-expressivity"
+    ],
+    "source_lines": {
+      "27": "Let $\\Sigma$ be a finite token alphabet, let $\\mathtt{eos}\\notin\\Sigma$ be an end-of-sequence symbol, and let $d,L,H\\ge1$ be fixed integers. For each length $n\\ge1$, an input is $(x_1,\\ldots,x_{n-1},\\mathtt{eos})$. A symbol embedding assigns a vector $v_a\\in\\mathbb R^d$ to each $a\\in\\Sigma\\cup\\{\\mathtt{eos}\\}$; a positional embedding sequence assigns $p_i\\in\\mathbb R^d$ independent of the input symbols. A fixed shared input map gives $y_i^{(0)}=f_{\\rm in}(v_{x_i},p_i)$. For each layer $k=1,\\ldots,L$ and head $h=1,\\ldots,H$, a fixed score map $s_{k,h}:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R$ gives scores $a_{i,j}^{(k,h)}=s_{k,h}(y_i^{(k-1)},y_j^{(k-1)})$ for every query position $i$ and key position $j$. In the soft model, $\\widehat a_{i,\\cdot}^{(k,h)}=\\operatorname{softmax}(a_{i,\\cdot}^{(k,h)})$. In the hard model, $\\widehat a_{i,j}^{(k,h)}=1$ at the smallest index $j$ attaining $\\max_{r\\le n}a_{i,r}^{(k,h)}$ and is $0$ at other indices. With fixed value maps $V_{k,h}:\\mathbb R^d\\to\\mathbb R^d$ and fixed positionwise maps $F_k:(\\mathbb R^d)^{H+1}\\to\\mathbb R^d$, the update is",
+      "30": "b_{i,k,h}=\\sum_{j=1}^{n}\\widehat a_{i,j}^{(k,h)}V_{k,h}(y_j^{(k-1)}),\\qquad y_i^{(k)}=F_k(y_i^{(k-1)},b_{i,k,1},\\ldots,b_{i,k,H}).",
+      "33": "Each score, value, and positionwise map is shared across positions and is fixed independently of $n$. In the hard-attention limit theorem, the score, value, and positionwise maps may be arbitrary fixed maps; no activation-function or parameter-norm bound is imposed. For the soft-influence theorem below, each score is a scaled dot product of fixed linear query and key projections, each value map is a fixed linear map, the token and positional embeddings are uniformly bounded over all positions and lengths, the combined initial states satisfy $\\sup_{i\\ge1,\\ a\\in\\Sigma\\cup\\{\\mathtt{eos}\\}}\\|f_{\\rm in}(v_a,p_i)\\|_2<\\infty$, and every positionwise map is globally Lipschitz. The initial-state bound holds for addition or concatenation of bounded embeddings, but must be imposed separately for an arbitrary input map. A hard-attention recognizer classifies the input from $y_n^{(L)}$ after reading $\\mathtt{eos}$. A soft next-token predictor applies a fixed linear logit map and softmax to $y_n^{(L)}$ to obtain a probability vector on a fixed finite alphabet."
+    },
+    "source_snapshot": "snapshots/def-hahn-hard-soft-attention-sequence-model.md",
+    "source_sha256": "d67de28eb7c228e52147e829b14142e99386735f9f2ec9c76d9813272373d2a9",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "editorial candidate; no mathematical error is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-linear-state-space-model",
+    "section": "Item body",
+    "lines": [
+      28
+    ],
+    "symptom": "The definition gives the state equation and output equation, including the direct feedthrough term; a block diagram would make the state-mediated and direct paths easy to distinguish.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Continuous-time state-space block diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The definition gives the state equation and output equation, including the direct feedthrough term; a block diagram would make the state-mediated and direct paths easy to distinguish.",
+    "concrete_diagram_content": "Show input u(t) entering B and joining A x(t) at x'(t), with integration/state x(t), then Cx(t) to output y(t). Add a direct D u(t) branch from input to output. Label x(t0)=x0 and the defining relations x'=Ax+Bu and y=Cx+Du; distinguish the direct D path from the state contribution.",
+    "mathematical_check": "Show input u(t) entering B and joining A x(t) at x'(t), with integration/state x(t), then Cx(t) to output y(t). Add a direct D u(t) branch from input to output. Label x(t0)=x0 and the defining relations x'=Ax+Bu and y=Cx+Du; distinguish the direct D path from the state contribution.",
+    "screenshots": [
+      "screenshots/def-linear-state-space-model--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-linear-state-space-model--01.png": "e45d39f095b6117570c80fb2525e502a5ce858f151531f58e32d2a1727cb2d95"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "recurrent-and-state-space-networks"
+    ],
+    "source_lines": {
+      "28": "Assume the Axiom of Countable Choice, so the usual Lebesgue-measurable sets on $\\mathbb R$ form a complete measure space with Lebesgue measure $\\lambda$. Every bounded interval is Lebesgue measurable, and any interval is the countable union of its bounded intersections with $[-n,n]$; since the Lebesgue-measurable sets form a sigma-algebra, $I$ is measurable and $\\lambda$ restricts to $I$. Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $I\\subseteq\\mathbb R$ be an interval with $t_0\\in I$, and let $N,m,p\\ge1$ be finite. A continuous-time linear state-space model consists of matrices $A\\in\\mathbb F^{N\\times N}$, $B\\in\\mathbb F^{N\\times m}$, $C\\in\\mathbb F^{p\\times N}$, $D\\in\\mathbb F^{p\\times m}$, an initial value $x_0\\in\\mathbb F^N$, and an input $u:I\\to\\mathbb F^m$ whose real and imaginary coordinates are Lebesgue measurable and integrable on every compact subinterval of $I$. A state trajectory is a function $x:I\\to\\mathbb F^N$ whose real and imaginary coordinates are absolutely continuous on every compact subinterval of $I$ (with absolute continuity defined by the $\\varepsilon$–$\\delta$ condition on finite families of disjoint subintervals), with $x(t_0)=x_0$ and $x'(t)=Ax(t)+Bu(t)$ outside a Lebesgue-null subset of $I$. Its output is $y(t)=Cx(t)+Du(t)$. The term $Du(t)$ is the direct input-to-output term and is separate from the state contribution $Cx(t)$."
+    },
+    "source_snapshot": "snapshots/def-linear-state-space-model.md",
+    "source_sha256": "c0c8adee769c157fcb00bc1c029afcca0e10847cc783d91916c60bef7b3a2252",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-lstm-cell",
+    "section": "Item body",
+    "lines": [
+      28,
+      30,
+      32,
+      34
+    ],
+    "symptom": "The definition contains the standard gate equations and explicit recurrence, and a cell-state flow could clarify which gates modulate the carried state versus the hidden output. All relations are already specified by the equations.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional recurrent cell-state diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The definition contains the standard gate equations and explicit recurrence, and a cell-state flow could clarify which gates modulate the carried state versus the hidden output. All relations are already specified by the equations.",
+    "concrete_diagram_content": "Inputs x_t and h_{t−1} feed shared affine maps W_i,U_i,b_i; W_f,U_f,b_f; W_o,U_o,b_o; W_c,U_c,b_c, followed by σ for i_t,f_t,o_t and tanh for g_t. Draw c_{t−1}→multiply by f_t, add i_t⊙g_t to form c_t; then tanh(c_t) multiplied by o_t gives h_t. Mark parameter sharing across time steps.",
+    "mathematical_check": "Inputs x_t and h_{t−1} feed shared affine maps W_i,U_i,b_i; W_f,U_f,b_f; W_o,U_o,b_o; W_c,U_c,b_c, followed by σ for i_t,f_t,o_t and tanh for g_t. Draw c_{t−1}→multiply by f_t, add i_t⊙g_t to form c_t; then tanh(c_t) multiplied by o_t gives h_t. Mark parameter sharing across time steps.",
+    "screenshots": [
+      "screenshots/def-lstm-cell--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-lstm-cell--01.png": "216d212858d559d287d832b520a0f22072f094db2e2c16af9af4b16b75c84c4c"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "recurrent-and-state-space-networks"
+    ],
+    "source_lines": {
+      "28": "Fix positive finite dimensions $d_x,d_h$, inputs $x_t\\in\\mathbb R^{d_x}$, hidden states $h_t\\in\\mathbb R^{d_h}$, cell states $c_t\\in\\mathbb R^{d_h}$, and initial values $h_0,c_0$. A standard long short-term memory (LSTM) cell without peephole connections or projection has shared matrices $W_i,W_f,W_o,W_c\\in\\mathbb R^{d_h\\times d_x}$, $U_i,U_f,U_o,U_c\\in\\mathbb R^{d_h\\times d_h}$, and biases $b_i,b_f,b_o,b_c\\in\\mathbb R^{d_h}$. Apply $\\sigma(s)=(1+e^{-s})^{-1}$ and $\\tanh(s)=(e^s-e^{-s})/(e^s+e^{-s})$ coordinatewise. At each time $t\\ge1$, set",
+      "30": "$$ i_t=\\sigma(W_i x_t+U_i h_{t-1}+b_i),\\qquad f_t=\\sigma(W_f x_t+U_f h_{t-1}+b_f),\\qquad o_t=\\sigma(W_o x_t+U_o h_{t-1}+b_o), $$",
+      "32": "$$ g_t=\\tanh(W_c x_t+U_c h_{t-1}+b_c),\\qquad c_t=f_t\\odot c_{t-1}+i_t\\odot g_t,\\qquad h_t=o_t\\odot\\tanh(c_t), $$",
+      "34": "where $\\odot$ is coordinatewise multiplication. The same matrices and biases are reused at every time step. The vectors $i_t,f_t,o_t$ are the input, forget, and output gates, and $g_t$ is the candidate state update."
+    },
+    "source_snapshot": "snapshots/def-lstm-cell.md",
+    "source_sha256": "028dc8de489425a297edbaaa8da7af8a2a3595e2661bd70a6ee80608be9ea3b5",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-message-passing-gnn",
+    "section": "Item body",
+    "lines": [
+      34,
+      37,
+      40
+    ],
+    "symptom": "The definition centers on a repeated local neighborhood multiset aggregation followed by a node-state update and a graph-level multiset readout; a compact graph schematic would make the stages and shared maps easier to follow.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "neighborhood aggregation and readout flow",
+    "exact_source_claim": "",
+    "selection_reason": "The definition centers on a repeated local neighborhood multiset aggregation followed by a node-state update and a graph-level multiset readout; a compact graph schematic would make the stages and shared maps easier to follow.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/def-message-passing-gnn--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-message-passing-gnn--01.png": "77bae8acee81433e617c1deebde521d251698c385a58cd92d53c519902a85787"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "message-passing-graph-neural-networks"
+    ],
+    "source_lines": {
+      "34": "Fix a finite vertex-labeled simple undirected graph $G=(V,E,\\ell)$, a finite nonnegative depth $K$, feature sets $H_0,\\ldots,H_K$, and an initial map $\\eta:\\Sigma\\to H_0$. For each $k=1,\\ldots,K$, choose a set $Z_k$, an aggregation function $A_k:\\mathsf M_{\\mathrm{fin}}(H_{k-1})\\to Z_k$ on finite multisets, and an update function $U_k:H_{k-1}\\times Z_k\\to H_k$. Initialize $h_v^0=\\eta(\\ell(v))$ and recursively set",
+      "37": "a_v^k=A_k\\!\\left(\\{\\!\\{h_u^{k-1}:u\\in N_G(v)\\}\\!\\}\\right),\\qquad h_v^k=U_k(h_v^{k-1},a_v^k).",
+      "40": "For a chosen output set $Y$, a graph readout is a function $R:\\mathsf M_{\\mathrm{fin}}(H_K)\\to Y$; the graph output is $z_G=R(\\{\\!\\{h_v^K:v\\in V\\}\\!\\})$. The same maps are used on every graph being compared. The model has no vertex-identity input and uses no graph-wide information before the readout. It distinguishes two graphs when their outputs differ."
+    },
+    "source_snapshot": "snapshots/def-message-passing-gnn.md",
+    "source_sha256": "7552faca345504a56018f98ee3254e8e3bbd35deedbcdc409b59c0811dc16592",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "editorial candidate; no mathematical error is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-positional-encoding-and-causal-mask",
+    "section": "Definition",
+    "lines": [
+      27
+    ],
+    "symptom": "The lower-triangular allowed-key pattern is easier to verify at a glance as a small matrix than from the index rule alone.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potentially-useful-schematic",
+    "exact_source_claim": "Decoder self-attention uses mask M_ij=0 for j<=i and M_ij=-infinity for j>i; query i can attend to positions 0 through i and not future positions.",
+    "selection_reason": "The lower-triangular allowed-key pattern is easier to verify at a glance as a small matrix than from the index rule alone.",
+    "concrete_diagram_content": "A small n=4 causal-mask matrix with rows labeled query i=0..3 and columns key j=0..3; show 0 entries on and below the diagonal and -infinity above it. Add row labels indicating allowed key prefixes {0}, {0,1}, {0,1,2}, {0,1,2,3}. Preserve the convention that the diagonal is allowed.",
+    "mathematical_check": "A small n=4 causal-mask matrix with rows labeled query i=0..3 and columns key j=0..3; show 0 entries on and below the diagonal and -infinity above it. Add row labels indicating allowed key prefixes {0}, {0,1}, {0,1,2}, {0,1,2,3}. Preserve the convention that the diagonal is allowed.",
+    "screenshots": [
+      "screenshots/def-positional-encoding-and-causal-mask--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-positional-encoding-and-causal-mask--01.png": "3d86004c0f7d3f56d1f969465da1960868885d2d55d7fea1e4d223217e747787"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "attention-and-transformer-expressivity"
+    ],
+    "source_lines": {
+      "27": "For decoder self-attention on $n$ positions indexed by $0,\\ldots,n-1$, the causal mask is $M\\in(\\mathbb R\\cup\\{-\\infty\\})^{n\\times n}$ with $M_{ij}=0$ when $j\\le i$ and $M_{ij}=-\\infty$ when $j>i$. Thus query position $i$ can use keys at positions $0,\\ldots,i$ and cannot use a future position; every row has an allowed key because $M_{ii}=0$."
+    },
+    "source_snapshot": "snapshots/def-positional-encoding-and-causal-mask.md",
+    "source_sha256": "d2c43d16b911d0c52e3b24bdf2cf7fedc8a36740994c60b35c4005c5d1896e5c",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-scaled-dot-product-attention",
+    "section": "Item body",
+    "lines": [
+      29,
+      32,
+      35
+    ],
+    "symptom": "The definition specifies a sequential score, optional mask, row-softmax, and value aggregation pipeline; a small matrix/dataflow diagram could expose dimensions and ordering.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Query-key-value attention dataflow schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The definition specifies a sequential score, optional mask, row-softmax, and value aggregation pipeline; a small matrix/dataflow diagram could expose dimensions and ordering.",
+    "concrete_diagram_content": "Show Q (n_q×d_k) and K (n_k×d_k) feeding QKᵀ/√d_k (n_q×n_k), add M before row softmax when masking, then multiply by V (n_k×d_v) to produce n_q×d_v. Label allowed pairs with 0 and disallowed pairs with −∞, and indicate every row must retain an allowed key.",
+    "mathematical_check": "Show Q (n_q×d_k) and K (n_k×d_k) feeding QKᵀ/√d_k (n_q×n_k), add M before row softmax when masking, then multiply by V (n_k×d_v) to produce n_q×d_v. Label allowed pairs with 0 and disallowed pairs with −∞, and indicate every row must retain an allowed key.",
+    "screenshots": [
+      "screenshots/def-scaled-dot-product-attention--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-scaled-dot-product-attention--01.png": "c926e5e8b41ab7bae8b9e6282dabc48b5e0f8c7e72f9d825ffcdcbf1b10424e6"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "attention-and-transformer-expressivity"
+    ],
+    "source_lines": {
+      "29": "Let $n_q,n_k,d_k,d_v$ be positive integers, let $Q\\in\\mathbb R^{n_q\\times d_k}$ and $K\\in\\mathbb R^{n_k\\times d_k}$ be query and key matrices, and let $V\\in\\mathbb R^{n_k\\times d_v}$ be a value matrix. For a real matrix $S$ with $n_q$ rows and $n_k$ columns, define its row softmax by $\\operatorname{softmax}_{\\rm row}(S)_{ij}=\\exp(S_{ij})/\\sum_{\\ell=1}^{n_k}\\exp(S_{i\\ell})$. The scaled dot-product attention output is",
+      "32": "\\operatorname{Attn}(Q,K,V)=\\operatorname{softmax}_{\\rm row}\\!\\left(\\frac{QK^{\\mathsf T}}{\\sqrt{d_k}}\\right)V\\in\\mathbb R^{n_q\\times d_v}.",
+      "35": "Each output row is the weighted average of the value rows, with weights given by the softmax of that query's scaled dot products with all keys. A mask is an array $M\\in(\\mathbb R\\cup\\{-\\infty\\})^{n_q\\times n_k}$ whose entries are $0$ for allowed query-key pairs and $-\\infty$ for disallowed pairs; masked attention replaces the score matrix by $QK^{\\mathsf T}/\\sqrt{d_k}+M$ before row softmax and is defined only when every row has at least one allowed key. Here $\\exp(-\\infty)=0$."
+    },
+    "source_snapshot": "snapshots/def-scaled-dot-product-attention.md",
+    "source_sha256": "8629a8511d84d1d680b6d1e454dff05db0aad0c721e73c29cbb851e5a6e837ca",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "editorial",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-message-passing-gnn-no-more-powerful-than-1wl",
+    "section": "Statement; Facts & Assumptions; Proof",
+    "lines": [
+      39,
+      59,
+      61,
+      63,
+      71,
+      73
+    ],
+    "symptom": "The proof is an induction matching neighborhood color multisets with GNN aggregate inputs, a relationship that can be shown compactly across two graph panels.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potentially-useful-schematic",
+    "exact_source_claim": "If two graphs have equal 1-WL color multisets through rounds 0..K, a shared depth-K aggregation GNN has equal outputs; induction maps each occurring round-t color to a common GNN node state.",
+    "selection_reason": "The proof is an induction matching neighborhood color multisets with GNN aggregate inputs, a relationship that can be shown compactly across two graph panels.",
+    "concrete_diagram_content": "Two small labeled graphs G and H with round-0 colors, then matched color classes and multisets at each round through K; below each round show the shared map from WL color to GNN state and that equal neighbor-color multisets feed the same aggregation/update. End with equal graph color multisets feeding the same readout. Avoid implying the converse that 1-WL distinguishes every pair a GNN distinguishes.",
+    "mathematical_check": "Two small labeled graphs G and H with round-0 colors, then matched color classes and multisets at each round through K; below each round show the shared map from WL color to GNN state and that equal neighbor-color multisets feed the same aggregation/update. End with equal graph color multisets feeding the same readout. Avoid implying the converse that 1-WL distinguishes every pair a GNN distinguishes.",
+    "screenshots": [
+      "screenshots/thm-message-passing-gnn-no-more-powerful-than-1wl--01.png",
+      "screenshots/thm-message-passing-gnn-no-more-powerful-than-1wl--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-message-passing-gnn-no-more-powerful-than-1wl--01.png": "c99a70d884fd6f0adcde8d2d3a0e7c1977337b981c9fa0c6651069864d618651",
+      "screenshots/thm-message-passing-gnn-no-more-powerful-than-1wl--02.png": "ec4765eb953ad714713572b5a2002d7c3ef00df144d805a9bf1f1dfd4e70dcc0"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "message-passing-graph-neural-networks"
+    ],
+    "source_lines": {
+      "39": "Let $G,H$ be finite vertex-labeled simple undirected graphs with labels in a common set, and let a depth-$K$ aggregation-based message-passing graph neural network use the same initial embedding, layer maps, and graph readout on both graphs. If one-dimensional Weisfeiler–Leman color refinement has equal graph color multisets on $G$ and $H$ at every round $0,\\ldots,K$, then the network gives the same graph output on $G$ and $H$. Equivalently, whenever this network distinguishes the pair, one-dimensional Weisfeiler–Leman distinguishes the pair at some round at most $K$.",
+      "59": "**Given:** The two finite labeled graphs, their equal 1-WL color multisets through round $K$, and one shared depth-$K$ message-passing GNN as in the Statement. Prove its graph outputs agree.",
+      "61": "[F1] [[def-message-passing-gnn]]: Each layer applies the same aggregation function to the multiset of neighbor states and then the same update function to the center state and aggregate.",
+      "63": "[F2] [[def-one-dimensional-weisfeiler-lehman-test]]: Each next WL color is the ordered pair of the current color and the multiset of current neighbor colors; the graph color multiset records every vertex color with multiplicity.",
+      "71": "1.1 By induction on $t=0,\\ldots,K$, equal round-$t$ WL colors of vertices from either graph imply equal GNN states after $t$ layers. At $t=0$, the shared initial embedding gives this implication. If it holds at $t$ and two vertices have equal round-$(t+1)$ colors, [F2] says their center colors and neighbor-color multisets agree. By the induction hypothesis, equal neighbor colors have equal GNN states; applying this correspondence occurrence by occurrence gives equal neighbor-state multisets. The shared aggregation and update functions in [F1] therefore give equal next-layer states. Thus a well-defined map from each round-$t$ color occurring in either graph to its common GNN state exists. [given, F1, F2, induction, algebra]",
+      "73": "2.1 At round $K$, the assumed equal WL color multisets become equal multisets of GNN states when each color is sent to its common state from step 1.1; multiplicities are preserved by [F3]. The shared graph readout in [F4] receives equal multisets, so the two graph outputs are equal. The contrapositive gives the stated distinguishing implication. [given, F2, F3, F4, step 1.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/thm-message-passing-gnn-no-more-powerful-than-1wl.md",
+    "source_sha256": "50905e22c77fc12983c1eedf0f4e765ef008d835f3013ed6e2e5d9047fdb4eac",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "07"
+    ],
+    "candidate_certainty": "uncertain",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-shared-parameter-backpropagation-gradient-formula",
+    "section": "Item body",
+    "lines": [
+      31,
+      33,
+      35,
+      41,
+      43,
+      45,
+      47
+    ],
+    "symptom": "The theorem emphasizes a finite recurrence with the same parameter θ used at each transition and a reverse sweep that sums every transition pullback. A graph can clarify why the parameter gradient is accumulated across uses and why the T=0 boundary case leaves only direct and initial-state terms.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "forward/reverse computational graph",
+    "exact_source_claim": "",
+    "selection_reason": "The theorem emphasizes a finite recurrence with the same parameter θ used at each transition and a reverse sweep that sums every transition pullback. A graph can clarify why the parameter gradient is accumulated across uses and why the T=0 boundary case leaves only direct and initial-state terms.",
+    "concrete_diagram_content": "Draw θ→h₀ and for each t, (θ,h_{t−1})→h_t, followed by (θ,h_T)→J. In the reverse view, label λ_T=(D_hℓ)^T and λ_{t−1}=B_t^Tλ_t; send each A_t^Tλ_t arrow to one shared θ accumulator, then add (D_θℓ)^T and (Dh₀)^Tλ₀. Mark the transition-sum empty when T=0. Ensure the diagram is explanatory only; the proof remains the chain rule.",
+    "mathematical_check": "Draw θ→h₀ and for each t, (θ,h_{t−1})→h_t, followed by (θ,h_T)→J. In the reverse view, label λ_T=(D_hℓ)^T and λ_{t−1}=B_t^Tλ_t; send each A_t^Tλ_t arrow to one shared θ accumulator, then add (D_θℓ)^T and (Dh₀)^Tλ₀. Mark the transition-sum empty when T=0. Ensure the diagram is explanatory only; the proof remains the chain rule.",
+    "screenshots": [
+      "screenshots/thm-shared-parameter-backpropagation-gradient-formula--01.png",
+      "screenshots/thm-shared-parameter-backpropagation-gradient-formula--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-shared-parameter-backpropagation-gradient-formula--01.png": "c52c23ef9e4d025d57985bbdf501d57adf7977d0ca71b774fafd7c448226b7ef",
+      "screenshots/thm-shared-parameter-backpropagation-gradient-formula--02.png": "6821a13155cc3e0beee3567b3a8c9f59af5babf5afc0940a1be8b47011b0bccf"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "automatic-differentiation-and-backpropagation"
+    ],
+    "source_lines": {
+      "31": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and",
+      "33": "$$\\nabla_\\theta J(\\theta)=(D_\\theta\\ell(\\theta,h_T))^T+\\sum_{t=1}^{T}A_t^T\\lambda_t+(Dh_0(\\theta))^T\\lambda_0,$$",
+      "35": "where the sum is empty when $T=0$. The statement also applies when every primitive is evaluated on one fixed strict $C^1$ branch; it makes no assertion at a branch boundary.",
+      "41": "[F1] [[def-finite-straight-line-computational-program]]: a finite topologically ordered program has a scalar output, and repeated parent slots are separate uses in its dependency graph.",
+      "43": "[F2] [[alg-backpropagation-through-shared-parameter-recurrence]]: the forward pass computes $h_0,\\ldots,h_T$; the reverse pass initializes the loss cotangent, adds each transition's parameter pullback to the same parameter accumulator, propagates the state cotangent backward, and finally pulls back through $h_0$.",
+      "45": "[F3] [[thm-reverse-mode-computes-gradient]]: on a finite $C^1$ program and fixed strict branch, reverse mode returns the exact derivative transpose of its scalar output.",
+      "47": "[F4] [[thm-chain-rule-for-total-derivatives]]: for totally differentiable finite-dimensional maps, the total derivative of a composition is the ordered composition of their total derivatives."
+    },
+    "source_snapshot": "snapshots/thm-shared-parameter-backpropagation-gradient-formula.md",
+    "source_sha256": "582f7ea045d38a313c747e4d470f567e41b68e2062142b05fb35e2566c96331b",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "editorial candidate; not a confirmed defect",
+    "additional_candidate_observations": []
+  }
+]

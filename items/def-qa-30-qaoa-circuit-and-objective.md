@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-qa-30-qaoa-circuit-and-objective.json
+  precheck: pass
 id: def-qa-30-qaoa-circuit-and-objective
 kind: definition
 title: "QAOA circuit and expected combinatorial objective"
@@ -27,12 +30,7 @@ sources:
       url: "https://arxiv.org/pdf/2012.09265"
     - title: "Edward Farhi, Jeffrey Goldstone, and Sam Gutmann, A Quantum Approximate Optimization Algorithm (arXiv:1411.4028v1)"
       url: "https://arxiv.org/pdf/1411.4028"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
+
 ---
 
 ## Definition
@@ -58,3 +56,27 @@ The output state is $|\psi_{G,p}(\gamma,\beta)\rangle=U_{G,p}|+\rangle^{\otimes|
 1.1 On $|x\rangle$, the edge term $(I-Z_uZ_v)/2$ has eigenvalue $(1-(-1)^{x_u+x_v})/2$, which is $1$ exactly when $x_u\ne x_v$ and $0$ otherwise. Thus $C_G|x\rangle$ has eigenvalue equal to the cut size of $x$. [given, F1, algebra]
 
 2.1 The finite projective measurement law assigns probabilities $q_x\ge0$ summing to one, so the expectation of the measured cut size is $\sum_xq_x C_G(x)=\langle\psi|C_G|\psi\rangle_D$ by the diagonal spectral expansion. Each output is therefore a feasible cut with the stated score observable. [given, F2, step 1.1, algebra] ∎
+
+## Remarks
+
+The schematic uses one bundled wire for the entire $n=|V|$ qubit register; time runs left to right. The dashed block is applied successively for $j=1,\ldots,p$, so each cost operation precedes its corresponding mixer. All unitary boxes act on the full register, not on a single qubit.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
+\draw[thick] (0,0) -- (1.7,0);
+\node[anchor=east] at (0,0) {$|+\rangle^{\otimes n}$};
+\node[draw,minimum width=2.2cm,minimum height=1cm] (C) at (2.8,0) {$e^{-i\gamma_j C_G}$};
+\draw[thick,->] (C.east) -- (4.5,0);
+\node[draw,minimum width=2.2cm,minimum height=1cm] (B) at (5.6,0) {$e^{-i\beta_j B_G}$};
+\draw[dashed] (1.4,-0.85) rectangle (7,0.85);
+\node at (4.2,1.2) {repeat in order: $j=1,\ldots,p$};
+\draw[thick,->] (B.east) -- (8.4,0);
+\node at (7.55,0.5) {$|\psi\rangle$};
+\node[draw,minimum width=1.8cm,minimum height=1cm,align=center] (M) at (9.3,0) {measure\\basis $Z$};
+\draw[double,->] (M.east) -- (11.2,0);
+\node[anchor=west] at (11.2,0) {$x$};
+\node at (4.2,-1.2) {$n$-qubit register};
+\end{tikzpicture}
+```
+
+Here $|\psi\rangle=|\psi_{G,p}(\gamma,\beta)\rangle$. Measurement produces $x\in\{0,1\}^n$, whose score $C_G(x)$ is the number of edges with unequal endpoint bits. By Verification steps 1.1–2.1, $\mathbb E[C_G(x)]=\langle\psi|C_G|\psi\rangle_D$; no maximum-cut guarantee is implied. The verification above is independent of the schematic.

@@ -1,0 +1,76 @@
+{
+  "id": "cex-fubini-fails-without-l-one-integrability",
+  "group": "mt_001",
+  "agent": "/root/mt_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original screenshot visibly prints x^2 and y^2 with literal carets in the heading; the frozen/current title lacks math delimiters while the identical quotient is correctly typeset in the body.",
+      "action": "Added inline math delimiters around the unchanged quotient in the title.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only inline math delimiters render the polynomial powers; every other byte is unchanged.",
+  "source_lines_after": {
+    "4": "title: \"The function $(x^2-y^2)/(x^2+y^2)^2$ shows that Fubini's integrability hypothesis is not decorative\""
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "before_raw_sha256": "455a434ab077d994c830e8e5b141a4560df6bb1b22f5d67abf76f73ad232aab9",
+  "after_raw_sha256": "7ad9cd9df00a2a6f1b09ef1bee312f52d8f815c88dabc676700e5e74ff7c37a1",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-fubini-fails-without-l-one-integrability.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-fubini-fails-without-l-one-integrability.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/cex-fubini-fails-without-l-one-integrability.md",
+      "exit_code": 1,
+      "output": "FAIL proof-step-separation: items/cex-fubini-fails-without-l-one-integrability.md:30 Counterexample  [no-steps] Proof-like section has no numbered steps.\nproof-layout: 1 items, 3 steps, 1 defects",
+      "pre_existing": true,
+      "baseline_check": {
+        "command": "node tools/proof-layout.mjs research/math-library-rendering-repairs-2026-10-23/before/cex-fubini-fails-without-l-one-integrability.md",
+        "exit_code": 1,
+        "output": "Same Counterexample line 30 no-steps defect; 1 items, 3 steps, 1 defects."
+      }
+    }
+  ],
+  "visual_inspection": {
+    "original": "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/cex-fubini-fails-without-l-one-integrability--01.png",
+    "original_detail": "original",
+    "preview": "research/math-library-rendering-repairs-2026-10-23/previews/mt_001/screenshots/cex-fubini-fails-without-l-one-integrability--01.png",
+    "preview_detail": "original",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/mt_001/manifest.json",
+    "source_sha256": "7ad9cd9df00a2a6f1b09ef1bee312f52d8f815c88dabc676700e5e74ff7c37a1",
+    "html_sha256": "677643ff74b7164f982474ba52e9121382e0326f22120f0c6970d5fca1e7a70b",
+    "reference_map_sha256": "fd77306a5ba29492ca98874323e7fb99fd5ac1677d71264c2ea894d2d09f726e",
+    "result": "Fresh standalone native local preview shows superscript powers throughout the title, no literal carets or delimiters; complete body also inspected. No additional confirmed rendering defect.",
+    "limitations": "Local title/ItemBody preview only; 13 unrelated reference-map parse diagnostics, not full production route."
+  },
+  "remaining_issues": [
+    "Pre-existing proof-layout Counterexample no-steps failure remains; title-only repair does not alter proof structure."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "lem-anm-density-factorization-implies-dsep-conditional-independence",
+  "agent": "/root/rendering_repair_coordinator/slcm_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-tikz-fence",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution frozen tile --02 shows literal node/draw commands under Remarks. The tilde fence remains a code block and bypasses the native diagram renderer.",
+      "action": "Replaced only the opening and closing tilde fence with renderer-supported backtick fences.",
+      "status": "repaired-and-visually-verified"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "After the fence repair, actual native SSR displayed a diagram-failure box. Direct compilation with the same node-tikzjax packages and showConsole:true failed with Undefined control sequence at operatorname in the last diagram label.",
+      "action": "Replaced operatorname{mor} by equivalent supported mathrm{mor} in that diagram label only.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Activated the Remarks TikZ schematic using supported fences and changed its unsupported roman operator command to mathrm, retaining every graph relation and label meaning.",
+  "source_lines_after": [
+    96,
+    104,
+    106
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "H = An_G(A union B union C); L is the union of components of the moral graph on H minus C meeting A; R is the union of the remaining components.",
+      "justification": "Proof step 2.1 and the local ancestral moral graph definition give A subset L, B subset R, and no moral edge between L and R."
+    },
+    {
+      "relations": "Exactly two undirected strokes connect the L region to C and C to the R region, both explicitly labeled possible. They represent optional moral edges before C is deleted, with no assertion that such edges must exist. There are no directed arrows and no L--R stroke.",
+      "justification": "Fact F5 forgets DAG arrow directions; proof step 2.1 prohibits moral edges between L and R. The Remarks explicitly qualify strokes to C as possible."
+    },
+    {
+      "relations": "The bottom label states that mor_G(H) minus C has no path from L to R.",
+      "justification": "L and R are unions of disjoint connected components after deleting C, so a path joining them is impossible. Since H is ancestral, the local convention mor_G(H) has vertex set H. This implies the endpoint separation used in step 2.1; steps 3.1 and 4.1 derive the conditional-density identity independently."
+    }
+  ],
+  "checks": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-anm-density-factorization-implies-dsep-conditional-independence.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/lem-anm-density-factorization-implies-dsep-conditional-independence.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-anm-density-factorization-implies-dsep-conditional-independence.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    "native_preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-anm-density-factorization-implies-dsep-conditional-independence --out research/math-library-rendering-repairs-2026-10-23/previews/slcm-004-final",
+      "exit_code": 0,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "viewed_tiles": [
+        "--01.png",
+        "--02.png"
+      ],
+      "visual_result": "Both final tiles viewed standalone at original resolution. Three labeled regions and both undirected possible-edge strokes render with no overlap or clipping; no raw code or failure box remains."
+    }
+  },
+  "evidence": {
+    "frozen_tile": "research/math-library-rendering-audit-2026-10-23/statistical-learning-and-classical-models/screenshots/lem-anm-density-factorization-implies-dsep-conditional-independence--02.png",
+    "intermediate_failed_preview": "research/math-library-rendering-repairs-2026-10-23/previews/slcm-004-after",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/previews/slcm-004-final",
+    "before_raw_sha256": "d0a1ac60dc82fb3f79f562e3556bd180014c075d91e7678c035bf60947e0e7b6",
+    "after_raw_sha256": "0314c386af257412e375b8dfbbf8daf3bdf741daf0dedb061ae02c94e498e28a",
+    "metadata_byte_identical": true
+  },
+  "remaining_issues": []
+}

@@ -1,0 +1,53 @@
+---
+id: thm-reverse-mode-work-and-tape-storage-bound
+kind: theorem
+title: "Reverse-mode work is a fixed multiple of primal work under explicit primitive-cost bounds"
+status: published
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+deps: [def-finite-straight-line-computational-program, alg-reverse-mode-automatic-differentiation]
+justified_by: []
+proof_strategy: direct
+verification:
+  precheck: pass
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4"
+      url: "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf"
+    - title: "W. Baur and V. Strassen, The Complexity of Partial Derivatives, Theoretical Computer Science 22 (1983), §§2 and 4"
+      url: "https://web.vu.lt/mif/s.jukna/tropical/Baur-Strassen.pdf"
+dependency_level: 2
+---
+
+## Statement
+
+For a finite $C^1$ graph on a fixed strict branch, fix a finite set of scalar/vector primitive types with at most $r$ parent slots per operation and bounded dimensions. Suppose each operation $j$ has primal work $w_j\ge1$, its local vector-Jacobian product costs at most $c w_j$ operations, and accumulating each parent-slot contribution costs at most $a$ operations. Assume each invocation's retained local tape and peak pullback scratch use at most a fixed number of scalar entries. Let $S$ be the scalar storage in the primal tape and input-gradient buffer, counting all input and node-value coordinates, per-node and per-parent metadata, branch labels, and retained local-tape entries. Then the exact reverse-mode algorithm for a scalar output uses at most $(1+c+ar)\sum_{j=1}^T w_j$ operations for the primal evaluation, reverse sweep, and parent accumulations, and stores $O(S)$ scalar entries. Opaque solver calls are excluded unless their primal and derivative costs satisfy the same hypotheses.
+
+## Facts & Assumptions
+
+**Given:** A finite graph and the stated primitive-cost model, with $W:=\sum_{j=1}^T w_j$.
+
+[F1] [[def-finite-straight-line-computational-program]]: there are finitely many topologically ordered nodes and the primal tape stores their values and parent slots.
+
+[F2] [[alg-reverse-mode-automatic-differentiation]]: reverse mode evaluates each primitive once in the primal pass, then visits each node once and applies one local vector-Jacobian product per node while accumulating a contribution for each parent slot.
+
+[A1] The primitive set has fixed finite type and bounded dimensions. Local primal, pullback, and parent-accumulation costs obey the constants $w_j,c,a,r$ in the statement; an opaque solver call has no uncharged derivative cost.
+
+[A2] The operation count is arithmetic work; allocating or zero-initializing the cotangent buffers is counted in storage rather than arithmetic operations.
+
+[A3] Each primitive invocation's retained local tape and peak pullback scratch use a uniformly bounded number of scalar entries; parent-slot temporary vectors have bounded dimensions because the primitive types and arities are fixed.
+
+## Proof
+
+**Proof technique:** direct operation and storage count.
+
+1.1 The primal pass evaluates each node once, so its cost is $\sum_j w_j=W$. The reverse pass makes one local pullback call at node $j$, costing at most $c w_j$, and handles at most $r$ parent slots, costing at most $ar$ arithmetic operations. Since $w_j\ge1$, this node's reverse arithmetic work is at most $(c+ar)w_j$. Summing over all nodes gives total arithmetic work at most $(1+c+ar)W$; cotangent-buffer initialization is storage under [A2]. [F1, F2, A1, A2, given, algebra]
+
+2.1 The primal tape, per-node local tapes, metadata, and input-gradient entries are counted in $S$. Reverse cotangents require one vector of the corresponding dimension per node; all these dimensions are among the node/input-value coordinates counted in $S$. At each node, [A3] bounds local scratch and parent-slot temporaries by a constant, so their peak storage is $O(1)\subseteq O(S)$. Hence total storage is $O(S)$; the bound says nothing about an opaque solver whose local tape or pullback cost was excluded in [A1]. [F1, F2, A1, A3, algebra] ∎
+
+## Remarks
+
+Baur–Strassen proves a separate nonscalar arithmetic-circuit complexity theorem over an infinite field. The local bound above is proved directly for a fixed smooth primitive set with explicit primal/pullback cost ratios; it does not extend the arithmetic-circuit theorem to arbitrary opaque procedures or claim that every differentiable primitive has a cheap derivative.

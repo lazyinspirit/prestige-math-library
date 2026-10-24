@@ -1,0 +1,86 @@
+{
+  "id": "cex-a-mild-solution-need-not-be-classical",
+  "agent": "/root/rendering_repair_supervisor2/pde_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "pde_019",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly prints $W^{1,p}$ literally in the uppercase technique banner, while ordinary body math is typeset. Frozen and current pre-edit source match; this is a plain-text banner limitation rather than malformed Sobolev notation. Tile 01 was also inspected independently.",
+      "action": "Replaced only the banner notation with the equivalent prose “the first-order Sobolev space with exponent p”.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 62 replaces only $W^{1,p}$ in the technique banner with equivalent prose. All frontmatter, including exact status: published, is byte-identical to the frozen before carrier. Statement, Facts, numbered proof, hypotheses, sources and dependencies are unchanged.",
+  "source_lines_after": {
+    "62": "**Proof technique:** direct: identify the mild solution and test membership in the first-order Sobolev space with exponent p by the defining weak-derivative identity."
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_scope": "The equivalence is local to naming the first-order Sobolev space already explicitly identified as W^{1,p}(R) in the statement and F1. This rendering repair is not an independent audit of the underlying theorem/proof or its suppliers.",
+  "before_raw_sha256": "5ed8514063b809c0b6e4ca596ac88ee6c556e7772b08d98b2becf9bd66e34d9a",
+  "after_raw_sha256": "f71aeacf6bbced17501bf9fb666a3dc21df98fd500b5845316e702001cbd3d11",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-a-mild-solution-need-not-be-classical.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects",
+      "after_final_edit": true
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-a-mild-solution-need-not-be-classical.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cex-a-mild-solution-need-not-be-classical.md",
+            "item_id": "cex-a-mild-solution-need-not-be-classical",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      },
+      "after_final_edit": true
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-a-mild-solution-need-not-be-classical.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      },
+      "after_final_edit": true
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/pde/screenshots/cex-a-mild-solution-need-not-be-classical--01.png",
+      "research/math-library-rendering-audit-2026-10-23/pde/screenshots/cex-a-mild-solution-need-not-be-classical--02.png"
+    ],
+    "inspection": "Each original and each fresh current tile inspected using standalone view_image at detail original. Current tile 02 shows readable prose without dollar delimiters/TeX; banner wraps naturally to two lines, with proof rows and labels readable.",
+    "current_preview": "research/math-library-rendering-repairs-2026-10-23/previews/pde019-independent-current",
+    "manifest_sha256": "dbd876c4ca29b8afdcd6c5ba045b8e05ad8dfbfb77dcbe767bcd6e05ede700e5",
+    "source_sha256": "f71aeacf6bbced17501bf9fb666a3dc21df98fd500b5845316e702001cbd3d11",
+    "reference_map_sha256": "f9f0074580430dde5fc93f3210474fcfcf95e129ad8672ea77fc939a879d3d41",
+    "preview_exit_code": 0,
+    "preview_output": {
+      "items": 1,
+      "tiles": 2,
+      "reference_map_diagnostics": 13
+    }
+  },
+  "remaining_issues": [
+    "Native proof technique banners remain plain text with CSS uppercase; the local prose workaround avoids unsupported inline mathematics.",
+    "Local native ItemBody preview is not full production-route coverage. Its reference map records 13 unrelated parse diagnostics; scoped rendercheck reports no errors or warnings."
+  ],
+  "process_notes": "Initial python executable was unavailable and performed no edit. Guarded edit succeeded with python3. All recorded checks and the pde019-independent-current preview were run after the final edit. Earlier pde019-independent preview is a pre-edit artifact and is not current evidence."
+}

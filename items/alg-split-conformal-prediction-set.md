@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-split-conformal-prediction-set.json
+  precheck: n/a
 id: alg-split-conformal-prediction-set
 kind: algorithm
 title: "Split conformal prediction set"
@@ -14,9 +17,6 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/alg-split-conformal-prediction-set.json
-  precheck: n/a
 sources:
   references:
     - title: "Jing Lei et al., Distribution-Free Predictive Inference for Regression, JASA 113(523) (2018), §2.2 and Appendix A.1"
@@ -53,3 +53,36 @@ Finite order statistics and rank maps are measurable.
 
 [[lem-finite-order-statistic-and-rank-maps-are-measurable]]
 
+## Remarks
+
+The first flow shows the nonrandomized construction at fixed $x$: training
+fixes one score rule for both calibration and candidate responses. The lower
+flow summarizes the optional randomized construction using the same scores.
+Here $r(y)=s_H(x,y)$; the single $U$ is independent of the data and training
+information and is shared for every candidate $y$. The rank formula includes
+the candidate in its tie group. Arrows indicate computation, not a coverage
+claim.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}, box/.style={draw, rounded corners, align=center, text width=3.4cm, minimum height=0.8cm}]
+\node[box] (train) at (-4,0) {Training statistic $H$};
+\node[box] (rule) at (0,0) {Fixed score rule $s_H$};
+\node[box] (cal) at (0,-1.5) {Calibration scores\\ $R_i=s_H(Z_i)$, $1\le i\le m$};
+\node[box] (candidate) at (4.8,-1.5) {Candidate scan\\ $r(y)=s_H(x,y)$};
+\node[box] (sort) at (0,-3) {Sort keys $(R_i,i)$\\ fixed index tie-breaking};
+\node[box] (threshold) at (0,-4.5) {$k=\lceil(m+1)(1-\alpha)\rceil$\\ $q=R_{(k)}$ if $k\le m$;\\ $q=+\infty$ if $k=m+1$};
+\node[box] (set) at (4.8,-4.5) {$C(x)=\{y:r(y)\le q\}$};
+\draw[->] (train) -- (rule);
+\draw[->] (rule) -- (cal);
+\draw[->] (rule) -| (candidate);
+\draw[->] (cal) -- (sort);
+\draw[->] (sort) -- (threshold);
+\draw[->] (threshold) -- (set);
+\draw[->] (candidate) -- (set);
+\node[box] (inputs) at (0,-6.5) {Calibration scores, $r(y)$,\\ one shared independent $U$};
+\node[box] (rank) at (4.8,-6.5) {Tie-randomized $p_U(y)$\\ candidate included in tie group};
+\node[box] (randomset) at (4.8,-8) {$C_U(x)=\{y:p_U(y)>\alpha\}$};
+\draw[->] (inputs) -- (rank);
+\draw[->] (rank) -- (randomset);
+\end{tikzpicture}
+```

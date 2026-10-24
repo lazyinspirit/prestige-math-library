@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-belief-mdp-sufficient-statistic.json
+  precheck: pass
 id: thm-belief-mdp-sufficient-statistic
 kind: theorem
 title: "The belief state is a sufficient statistic for finite POMDP control"
@@ -19,11 +22,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08"
@@ -82,3 +80,22 @@ Each maximum is attained; randomizing an action cannot increase the value. An ob
 3.1 We prove the finite-horizon recursion by induction on $n$. With no decisions remaining, the reward sum is empty, so $V_0(b)=0$. Suppose the optimal $n$-step continuation value is the function $V_n$ of the current belief. If action $a$ is taken at belief $b$, its immediate expected reward is $\bar r(b,a)$ by step 2.2, and for each positive-probability observation $o$ the remaining belief is $\tau(b,a,o)$ by step 2.1. Conditional expectation over the finite observation set therefore gives the $n+1$ step action value $Q_{n+1}(b,a):=\bar r(b,a)+\gamma\sum_{o:q>0}q(o\mid b,a)V_n(\tau(b,a,o))$. The set $\{Q_{n+1}(b,a):a\in A\}$ is a nonempty finite image of $A$ in $\mathbb R$, so [F4] gives an attained maximum. Taking that maximum gives the displayed $V_{n+1}(b)$. The expression depends only on $b$, completing the induction and proving history sufficiency for every finite horizon. [given, step 2.1, step 2.2, F2, F4]
 
 4.1 If the action at a history is randomized with probabilities $\lambda_a$, its expected action value is $\sum_{a\in A}\lambda_a Q_{n+1}(b,a)$, where $Q_{n+1}$ is the finite action value from step 3.1, $\lambda_a\ge0$, and $\sum_a\lambda_a=1$. Since each $Q_{n+1}(b,a)\le\max_{c\in A}Q_{n+1}(b,c)$, [F5] gives $\sum_a\lambda_a Q_{n+1}(b,a)\le\max_{c\in A}Q_{n+1}(b,c)$. Randomization cannot improve the finite-horizon value. [step 3.1, F4, F5] ∎
+
+## Remarks
+
+Fix a reachable history $h_t$ and an action $a$ with positive conditional selection probability. For an observation $o$ with $q(o\mid b_t,a)>0$, write $h_{t+1}=(h_t,a,o)$. The square shows that extending the history and then taking its conditional hidden-state law gives the same belief as updating $b_t$ directly.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (h) at (0,0) {$h_t$};
+\node (next) at (7,0) {$h_{t+1}=(h_t,a,o)$};
+\node (b) at (0,-2.4) {$b_t\in\Delta(S)$};
+\node (post) at (7,-2.4) {$b_{t+1}=\tau(b_t,a,o)$};
+\draw[->] (h) -- node[above] {append $a,o$} (next);
+\draw[->] (h) -- node[left] {conditional law of $S_t$} (b);
+\draw[->] (next) -- node[right] {conditional law of $S_{t+1}$} (post);
+\draw[->] (b) -- node[above] {Bayes update} node[below] {$q(o\mid b_t,a)>0$} (post);
+\end{tikzpicture}
+```
+
+These arrows describe history extension and conditional-law computation, rather than transitions between individual hidden states. Given $h_t$ and $A_t=a$, the observation branch has probability $q(o\mid b_t,a)$; when it is zero, the extended history is unreachable and no posterior is assigned. Collecting the positive branches gives $K(\cdot\mid b_t,a)$. Together with the expected immediate reward $\bar r(b_t,a)$, these weighted next beliefs determine the Bellman step in the statement. The proof above is independent of this illustration.

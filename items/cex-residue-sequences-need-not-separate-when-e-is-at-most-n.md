@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-residue-sequences-need-not-separate-when-e-is-at-most-n.json
+  precheck: pass
 id: cex-residue-sequences-need-not-separate-when-e-is-at-most-n
 kind: counterexample
 title: "Residue sequences need not separate when e is at most n"
@@ -13,12 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 12
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   scraped: []
   references:
@@ -55,3 +52,35 @@ The hypothesis $e>n$ in [[thm-separated-hecke-residues-give-seminormal-idempoten
 4.1 Verify the failure of a JM-eigenbasis on this cell directly. Put $m_s=1+T_1$ and $m_t=(1+T_1)T_2$ modulo the higher row-shape ideal. The quadratic relation gives $m_sT_1=q m_s$. The higher row symmetrizer is $1+T_1+T_2+T_1T_2+T_2T_1+T_1T_2T_1$, so its vanishing in this cell gives $m_tT_1=-m_s-m_t$. At $q=-1$, since $L_2=q^{-1}T_1=-T_1$, it follows that $m_sL_2=m_s$ and $m_tL_2=m_s+m_t$. Thus $L_2-I$ is nonzero and $(L_2-I)^2=0$ on this two-dimensional cell. It is not diagonalizable over $\mathbb C$, so a simultaneous JM-eigenbasis cannot exist on this cell. Together with step 2.1 this supplies the claimed concrete boundary counterexample, without making a universal claim about all cells outside the separated range. [given, F2, step 2.1, step 3.1]
 
 5.1 Check the boundary case $n=e=2$. The row and column tableaux have contents $(0,1)$ and $(0,-1)$, whose q-content tuples both equal $(0,1)$ at $q=-1$ by [F2]. These are all standard tableaux of size two, so the theorem's global sets are $\mathcal R_1=\{0\}$ and $\mathcal R_2=\{1\}$. For either label every inner product in its Lagrange formula is empty, giving $F_{\rm row}=F_{\rm column}=1$. Their product is $1\ne0$ in the nonzero algebra $H_{\mathbb C,-1}(S_2)$, which has basis $1,T_1$. Hence they are not orthogonal, disproving replacement of $e>n$ by $e\ge n$ in the global theorem. This supplements the same-shape collision and Jordan block at size three. [given, F2, F3, step 2.1] ∎
+
+
+## Remarks
+
+The two Young diagrams below use rows numbered downward and columns rightward. The first arrow reads the node contents $c-r$ in entry order $1,2,3$; the second applies $[\,\cdot\,]_{-1}$ entrywise. Thus the distinct tableaux have the same q-content sequence, as calculated in steps 1.1 and 2.1. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (-0.45,-0.3) {$s=$};
+\draw (0,0) rectangle (0.6,-0.6);
+\draw (0.6,0) rectangle (1.2,-0.6);
+\draw (0,-0.6) rectangle (0.6,-1.2);
+\node at (0.3,-0.3) {$1$};
+\node at (0.9,-0.3) {$2$};
+\node at (0.3,-0.9) {$3$};
+\draw[->] (1.5,-0.6) -- node[above] {$c-r$} (2.5,-0.6);
+\node at (4,-0.6) {$(0,1,-1)$};
+\draw[->] (5.5,-0.6) -- node[above] {$[\,\cdot\,]_{-1}$} (6.5,-0.6);
+\node at (8,-0.6) {$(0,1,1)$};
+\node at (-0.45,-2.3) {$t=$};
+\draw (0,-2) rectangle (0.6,-2.6);
+\draw (0.6,-2) rectangle (1.2,-2.6);
+\draw (0,-2.6) rectangle (0.6,-3.2);
+\node at (0.3,-2.3) {$1$};
+\node at (0.9,-2.3) {$3$};
+\node at (0.3,-2.9) {$2$};
+\draw[->] (1.5,-2.6) -- node[above] {$c-r$} (2.5,-2.6);
+\node at (4,-2.6) {$(0,-1,1)$};
+\draw[->] (5.5,-2.6) -- node[above] {$[\,\cdot\,]_{-1}$} (6.5,-2.6);
+\node at (8,-2.6) {$(0,1,1)$};
+\end{tikzpicture}
+```

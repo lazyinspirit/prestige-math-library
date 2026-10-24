@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qa-35-quantum-fingerprint-message-lower-bound.json
+  precheck: pass
 id: thm-qa-35-quantum-fingerprint-message-lower-bound
 kind: theorem
-title: "Entanglement-free, randomness-free quantum fingerprints require Ω(log n) qubits"
+title: "Entanglement-free, randomness-free quantum fingerprints require $\\Omega(\\log n)$ qubits"
 status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
@@ -13,12 +16,6 @@ axiom_use: "No choice axiom is used; all distributions, sums, bases, and selecti
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting"
@@ -31,7 +28,7 @@ sources:
 
 ## Statement
 
-In an SMP Equality protocol on n≥2 bits with worst-case error at most 1/3, no shared randomness or entanglement, and fixed q-qubit messages, each sender must transmit Ω(log n) qubits. For fixed Bob input y, the referee’s equality POVM separates ρ_y from each ρ_x, x≠y, by trace distance at least 1/3; packing d×d density matrices in trace distance yields 2ⁿ≤(26d^(3/2))^(d²), d=2^q, and hence q=Ω(log n).
+In an SMP Equality protocol on $n\ge2$ bits with worst-case error at most $1/3$, no shared randomness or entanglement, and fixed $q$-qubit messages, each sender must transmit $\Omega(\log n)$ qubits. For fixed Bob input $y$, the referee’s equality POVM separates $\rho_y$ from each $\rho_x$, $x\ne y$, by trace distance at least $1/3$; packing $d\times d$ density matrices in trace distance yields $2^n\le(26d^{3/2})^{d^2}$, $d=2^q$, and hence $q=\Omega(\log n)$.
 
 ## Facts & Assumptions
 

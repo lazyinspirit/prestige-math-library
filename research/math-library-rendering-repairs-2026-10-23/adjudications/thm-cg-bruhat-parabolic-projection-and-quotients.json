@@ -1,0 +1,62 @@
+{
+  "id": "thm-cg-bruhat-parabolic-projection-and-quotients",
+  "agent": "/root/rendering_repair_coordinator/cox_021",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The original-resolution standalone tile visibly prints both title occurrences of W^I with a literal caret. The frozen and current-before-edit title use bare W^I, whereas the body defines the same quotient as mathematical W^I. This is missing intended superscript formatting rather than a change of notation.",
+      "action": "Wrapped both occurrences in inline math delimiters, retaining the exact title words and mathematical symbols.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title line 4: W^I \u2192 $W^I$ at both occurrences. No other carrier bytes changed.",
+  "source_lines_after": {
+    "4": "title: \"The minimal-coset projection onto $W^I$ is order-preserving, and Bruhat order on the parabolic quotient $W^I$\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-cg-bruhat-parabolic-projection-and-quotients.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-cg-bruhat-parabolic-projection-and-quotients.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-cg-bruhat-parabolic-projection-and-quotients.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_check": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/coxeter-groups/screenshots/thm-cg-bruhat-parabolic-projection-and-quotients--01.png",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cox-021/manifest.json",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/cox-021/screenshots/thm-cg-bruhat-parabolic-projection-and-quotients--01.png",
+    "inspection": "Viewed original and repaired standalone PNGs at original resolution. Both repaired title occurrences display raised I with no raw caret or dollar signs; title is fully visible.",
+    "source_sha256": "1cf6432dadfe75c98e8fd62ba4c531766a6cbdd9f57b03e58d21b4499c66e0b2",
+    "html_sha256": "230c67e078f6b03d5dd64206352f7e7dc35289ac294f6199d8554901648eb68c",
+    "limitation": "Local native ItemBody/title preview; not a production HTTP route or metadata footer check."
+  },
+  "scope_preservation": "Verified exact original raw SHA256 immediately before editing; exact text comparison shows only title delimiter additions. Status remains byte-identical status: published; body and all protected metadata unchanged."
+}

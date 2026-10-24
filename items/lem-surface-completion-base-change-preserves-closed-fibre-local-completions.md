@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-surface-completion-base-change-preserves-closed-fibre-local-completions.json
+  precheck: pass
 id: lem-surface-completion-base-change-preserves-closed-fibre-local-completions
 kind: lemma
 title: "Completion base change preserves completed local rings on the closed fibre"
@@ -20,12 +23,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Lemmas 54.11.1 and 54.11.2 (complete proof read)"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -36,7 +34,7 @@ Assume AC. Let $(A,\mathfrak m)$ be a Noetherian local ring, $\widehat A$ its ma
 
 **Given:** A Noetherian local ring $(A,\mathfrak m)$, its completion $\widehat A$, a scheme $X$ locally of finite type over $A$, the base change $Y=X\times_{\operatorname{Spec}A}\operatorname{Spec}\widehat A$, and corresponding points $x\in X$, $y\in Y$ on the closed fibre.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *thm-completion-of-a-noetherian-local-ring.* Assume the Axiom of Choice. Let $(R,\mathfrak m)$ be a Noetherian local ring, and let $\widehat R$ be its $\mathfrak m$-adic completion. 1. $\widehat R$ is a Noetherian local ring with maximal ideal $\mathfrak m\widehat R$. 2. The residue field is unchanged: $ \widehat R/\mathfrak m\widehat R \cong R/\mathfrak m. $ 3. The completion map $R \to \widehat R$ is faithfully flat. ([[thm-completion-of-a-noetherian-local-ring]])
 

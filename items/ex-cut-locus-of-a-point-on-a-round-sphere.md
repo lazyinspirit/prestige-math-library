@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cut-locus-of-a-point-on-a-round-sphere.json
+  precheck: pass
 id: ex-cut-locus-of-a-point-on-a-round-sphere
 kind: example
 title: Cut locus of a point on a round sphere
@@ -34,13 +37,6 @@ deps:
   - thm-the-induced-connection-is-levi-civita
   - thm-quarter-turn-values-and-shift-formulas
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -112,3 +108,24 @@ $$\operatorname{Cut}(p)=\{-p\}.$$
 ## Source locator
 
 Eschenburg, *Comparison Theorems in Riemannian Geometry*, Section 5, Example 5.1 (printed p.16), states without proof that every unit-sphere direction has cut time $\pi$ and remains shortest up to the antipode. Lee, *Riemannian Manifolds*, Chapter 10, printed p.190 / PDF P206, lines 7559--7571, supplies the finite cut-point and cut-locus convention. The induced-sphere geodesic formula, angular distance lower bound, radius-$R$ scaling, and exact cut-time calculation are proved locally above.
+
+## Remarks
+
+The sketch shows a round two-sphere section through $p$ and $-p$ inside $S_R^n$. The highlighted curves represent several distinct great-circle semicircles, rather than a unique minimizing path. For every unit direction $v$, step 2.1 gives $\gamma_v(0)=p$ and $\gamma_v(\pi R)=-p$; steps 3.2 and 4.1 show that each such semicircle has minimizing length $\pi R$. The rigorous verification above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\draw[gray] (0,0) circle (2);
+\draw[gray,dashed] (0,0) ellipse (2 and 0.45);
+\draw[blue,thick] (0,2) arc[start angle=90,end angle=-90,x radius=2,y radius=2];
+\draw[blue,thick] (0,2) arc[start angle=90,end angle=270,x radius=2,y radius=2];
+\draw[blue,thick] (0,2) arc[start angle=90,end angle=-90,x radius=0.8,y radius=2];
+\draw[blue,thick] (0,2) arc[start angle=90,end angle=270,x radius=0.8,y radius=2];
+\fill (0,2) circle (2pt);
+\fill (0,-2) circle (2pt);
+\node[above] at (0,2.08) {$p=\gamma_v(0)$};
+\node[below] at (0,-2.08) {$-p=\gamma_v(\pi R)$};
+\node[right,align=left] at (2.45,0.45) {Each highlighted arc:\\length $\pi R$};
+\node[right] at (2.45,-0.5) {$\mathrm{Cut}(p)=\{-p\}$};
+\end{tikzpicture}
+```

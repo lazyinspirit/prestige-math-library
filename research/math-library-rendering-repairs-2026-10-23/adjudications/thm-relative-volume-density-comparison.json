@@ -1,0 +1,55 @@
+{
+  "id": "thm-relative-volume-density-comparison",
+  "agent": "/root/rendering_repair_coordinator/dg_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile 02 at original resolution visibly prints dollar delimiters, backslashes, and operatorname in the uppercase technique banner. The same formula is properly typeset in proof step 1.1, confirming this is a plain-text banner rendering limitation.",
+      "action": "Replace only the formula in the technique introduction with its equivalent verbal description.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "The technique introduction now describes the logarithm of the radial volume Jacobian minus the dimension-minus-one multiple of the logarithm of the model sine. All statement, Facts, numbered proof steps, source locators and frontmatter are byte-identical.",
+  "source_lines_after": {
+    "86": "**Proof technique:** direct: write the logarithm of the relative density as the logarithm of the radial volume Jacobian minus the dimension-minus-one multiple of the logarithm of the model sine, differentiate with the logarithmic-derivative identity, bound the trace of the Riccati operator by the traced Riccati inequality and the scalar comparison with the model, and integrate from the common initial value one."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: proof technique banners render plain text; the local prose workaround avoids raw TeX.",
+    "Fresh native preview has missing left portions of some rows consistent with the known capture/viewer artifact; no source change was made for it. Preview scope is local ItemBody, not production route."
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-relative-volume-density-comparison.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-relative-volume-density-comparison.md --json",
+      "exit_code": 0,
+      "result": "1 file checked, 0 failed; pass, direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-relative-volume-density-comparison.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors [], warnings []"
+    },
+    "frontmatter_byte_identical": true
+  },
+  "visual_evidence": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-relative-volume-density-comparison--02.png",
+    "original_inspection": "Standalone original-resolution view inspected.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg014/manifest.json",
+    "preview_source_sha256": "8dd125b9370784bd061a78a6479ac9fee168c66b40b98f3efd902d33452df60d",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/dg014/screenshots/thm-relative-volume-density-comparison--02.png",
+    "preview_inspection": "Standalone original-resolution view inspected; visible replacement prose is readable with no raw math delimiters or TeX commands. No diagrams changed.",
+    "preview_reference_map_diagnostics": 16
+  },
+  "before_raw_sha256": "87e6a529c019e475b3dd3fe5ba33035bd242ea7d219c124e2ba1c22142f81dd5",
+  "after_raw_sha256": "8dd125b9370784bd061a78a6479ac9fee168c66b40b98f3efd902d33452df60d"
+}

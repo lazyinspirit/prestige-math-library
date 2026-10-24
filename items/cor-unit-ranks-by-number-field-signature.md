@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-unit-ranks-by-number-field-signature.json
+  precheck: pass
 id: cor-unit-ranks-by-number-field-signature
 kind: corollary
 title: Unit ranks by signature
@@ -39,9 +42,7 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory"
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "p.147 (rank-zero and rank-one signature analysis)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -76,7 +77,7 @@ $\mathcal O_K^\times\cong\mu(K)\times\mathbb Z$ with $\mu(K)=\{\pm1\}$.
 
 ## Proof
 
-**Proof technique:** read the rank $r_1+r_2-1$ off $\mathcal O_K^\times\cong\mu(K)\times\mathbb Z^{r_1+r_2-1}$, enumerate the signatures with $r_1+r_2=1$ to identify the rank-zero fields, and compute the real quadratic torsion from the real roots of unity.
+**Proof technique:** read the unit rank from Dirichlet’s unit-group decomposition, enumerate the signatures whose real-embedding count and complex-pair count sum to one to identify the rank-zero fields, and compute the real quadratic torsion from the real roots of unity.
 
 1.1 By [F2] the rank of $\mathcal O_K^\times$ equals $r_1+r_2-1$; in particular rank $0$ means $\mathcal O_K^\times=\mu(K)$, and a real quadratic field has signature $(2,0)$ and rank $1$. [F1, F2, F5]
 

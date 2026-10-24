@@ -1,0 +1,142 @@
+{
+  "id": "lem-arith-mumford-map-degree-is-euler-characteristic-square",
+  "agent": "/root/rendering_repair_coordinator/ag_066",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly prints dollar delimiters and uppercased TeX commands in the proof-technique banner, whereas the neighboring proof formulas render mathematically. Tiles 01 and 03 were also inspected. The source uses inline math in a banner rendered as plain text.",
+      "action": "Replaced the Mumford-map symbol and Euler-characteristic formula in the banner with equivalent descriptive prose: the finite flat Mumford isogeny and the Euler characteristic of the pulled-back Poincare bundle.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "All three supplemental original-resolution tiles show a complete textual proof but no displayed square. Step 2.1 explicitly invokes a Cartesian square and uses two distinct maps both denoted p₂; a concrete square materially clarifies their spaces, directions and the base change behind the kernel-supported direct image.",
+      "action": "Appended final Remarks containing the 2×2 Cartesian square of step 2.1, explanatory commutativity and Cartesian identification, the Poincare-bundle pullback, and the scheme-theoretic kernel fibre. No existing statement or proof text changed in this continuation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Cumulative repair: retained the original proof-technique prose workaround, then appended a final Remarks diagram and explanation. The entire continuation preimage is an exact byte prefix of the current file, including publication status and verification metadata.",
+  "source_lines_after": [
+    {
+      "line": 73,
+      "text": "**Proof technique:** direct: pull back the Poincare cohomology theorem along the finite flat Mumford isogeny, compute the Euler characteristic of the pulled-back Poincare bundle twice, and deduce the square-degree formula and its invariance under field extension."
+    },
+    {
+      "line": 87,
+      "text": "## Remarks"
+    },
+    {
+      "line": 88,
+      "text": ""
+    },
+    {
+      "line": 89,
+      "text": "The Cartesian square used in step 2.1 is displayed below, with $\\varphi=\\varphi_{\\mathcal L}$. Both vertical maps are second projections, and the horizontal maps are finite flat by step 1.1 and base change."
+    },
+    {
+      "line": 90,
+      "text": ""
+    },
+    {
+      "line": 91,
+      "text": "```tikzcd"
+    },
+    {
+      "line": 92,
+      "text": "\\begin{tikzcd}[column sep=large,row sep=large,scale=1.5,transform shape]"
+    },
+    {
+      "line": 93,
+      "text": "A\\times_k A \\arrow[r, \"\\mathrm{id}_A\\times\\varphi\"] \\arrow[d, \"p_2\"'] & A\\times_k A^\\vee \\arrow[d, \"p_2\"] \\\\"
+    },
+    {
+      "line": 94,
+      "text": "A \\arrow[r, \"\\varphi\"'] & A^\\vee"
+    },
+    {
+      "line": 95,
+      "text": "\\end{tikzcd}"
+    },
+    {
+      "line": 96,
+      "text": "```"
+    },
+    {
+      "line": 97,
+      "text": ""
+    },
+    {
+      "line": 98,
+      "text": "The square commutes because both composites send $(x,y)$ to $\\varphi(y)$, and it is Cartesian since $(A\\times_k A^\\vee)\\times_{A^\\vee}A\\cong A\\times_k A$. The normalized Poincare bundle $\\mathcal P$ on the upper-right space pulls back to $\\Lambda(\\mathcal L)$ on the upper-left space by [F2]. On the bases, the scheme-theoretic inverse image of the origin under $\\varphi$ is $K(\\mathcal L)$; its full length, including any nonreduced structure, is retained in the flat base-change identity of step 2.1. This diagram illustrates that step; the proof does not depend on the picture."
+    },
+    {
+      "line": 99,
+      "text": ""
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-arith-mumford-map-degree-is-euler-characteristic-square.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-arith-mumford-map-degree-is-euler-characteristic-square.md",
+      "exit_code": 0,
+      "output": "OK — 1 file(s): math delimiters, actual KaTeX spans, frontmatter and TikZ section placement pass."
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/diagram-checks/lem-arith-mumford-map-degree-is-euler-characteristic-square/tmp\" TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-arith-mumford-map-degree-is-euler-characteristic-square --out research/math-library-rendering-repairs-2026-10-23/diagram-checks/lem-arith-mumford-map-degree-is-euler-characteristic-square/preview-final-004",
+      "exit_code": 0,
+      "output": "Actual local ItemBody SSR with node-tikzjax compilation and file-only Chromium capture: 1 item, 3 tiles; tikz_count=1; diagram_failures=[]; katex_errors=[].",
+      "receipt": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/lem-arith-mumford-map-degree-is-euler-characteristic-square/preview-final-004/screenshots/lem-arith-mumford-map-degree-is-euler-characteristic-square.json",
+      "figure": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/lem-arith-mumford-map-degree-is-euler-characteristic-square/preview-final-004/screenshots/lem-arith-mumford-map-degree-is-euler-characteristic-square--03.png",
+      "visual_inspection": "Viewed the final tile standalone at original resolution. All four vertices, arrows and labels are visible, with no clipping or overlap.",
+      "limitations": "Local ItemBody preview, not the full production route. Unrelated title-map parse diagnostics: 32; exact requested item rendered successfully."
+    }
+  ],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains/codomains",
+      "evidence": "Top row A×_k A → A×_k A∨ is id_A×φ with φ=φ_L:A→A∨; bottom row is φ:A→A∨; left p₂:A×_k A→A and right p₂:A×_k A∨→A∨. These are exactly the maps in current step 2.1 and the local definition def-polarization-of-an-abelian-variety."
+    },
+    {
+      "check": "Commutativity",
+      "evidence": "For every test k-scheme T and T-points x,y of A, p₂(id_A×φ)(x,y)=φ(y)=φ(p₂(x,y)). This checks the two composites as scheme morphisms, not just on geometric points."
+    },
+    {
+      "check": "Cartesian property and flatness",
+      "evidence": "The natural isomorphism (A×_k A∨)×_{A∨}A ≅ A×_k A sends ((x,φ(y)),y) to (x,y), functorially on test schemes. Step 1.1 establishes φ finite locally free, hence finite flat; its base change id_A×φ is likewise finite flat. This is the flat base change used in step 2.1 and [F4]."
+    },
+    {
+      "check": "Bundle and fibre interpretation",
+      "evidence": "The local polarization definition and current [F2] identify (id_A×φ_L)^*P ≅ Λ(L). The statement and step 2.1 identify the scheme-theoretic fibre φ_L^{-1}(0)=K(L), retaining full scheme length; Poincare cohomology supplier lem-arith-poincare-cohomology-at-the-identity supplies Rp₂,*P≅k(0)[−g]. The caption merely explains the existing step 2.1 identity O_K(L)[−g]."
+    },
+    {
+      "check": "Proof independence",
+      "evidence": "The six original numbered proof steps remain byte-identical to the continuation preimage; all diagram material is appended in a separate final Remarks section and explicitly described as an illustration."
+    }
+  ],
+  "publication_status_preserved": "status: published and every other frontmatter byte are identical to the guarded continuation preimage; original and continuation status lines also agree.",
+  "continuation_guard": {
+    "before_file": "research/math-library-rendering-repairs-2026-10-23/continuation-before/lem-arith-mumford-map-degree-is-euler-characteristic-square-20261023T140116150879.md",
+    "before_raw_sha256": "4a3416d9b31ce981751f39da54a32ced1ca256a6e02b1af239d2d1f8250dae39",
+    "prefix_preserved": true,
+    "prior_report_archive": "research/math-library-rendering-repairs-2026-10-23/adjudications/lem-arith-mumford-map-degree-is-euler-characteristic-square-before-AG-diagram-followup-20261023T140209404161.json"
+  },
+  "render_iteration_notes": [
+    "Initial helper invocation omitted TSX_TSCONFIG_PATH and failed module-alias resolution; rerun with configured local tsconfig succeeded.",
+    "Initial diagram label used unsupported operatorname; replaced with equivalent mathrm identity label. Subsequent checks caught and repaired the new Remarks heading before final render. Final preview-final-004 is authoritative."
+  ],
+  "renderer_limitation": "Proof-technique banners remain plain text; the retained prose workaround avoids math markup. The default TikZ wrapper lacks operatorname; the final identity label uses supported mathrm."
+}

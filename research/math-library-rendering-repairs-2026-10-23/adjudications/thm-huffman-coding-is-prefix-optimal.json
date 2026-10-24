@@ -1,0 +1,78 @@
+{
+  "id": "thm-huffman-coding-is-prefix-optimal",
+  "agent": "/root/rendering_repair_coordinator/info_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints the literal dollar delimiters and uppercased TeX M\\GE2 in the proof-technique banner, while nearby body mathematics renders normally. Source has valid inline math, but this renderer presents technique content as plain text with CSS uppercase.",
+      "action": "Replaced only the banner phrase “list size $m\\ge2$” with “list size at least two”. The rest of the paragraph and all proof steps remain unchanged.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use equivalent readable prose in the plain-text proof-technique banner to avoid exposing math delimiters and TeX.",
+  "source_lines_after": [
+    {
+      "line": 52,
+      "text": "**Proof technique:** Induct on list size at least two: for every finite list of at least two positive weights with distinct serial numbers and total weight one, every sequence of minimum-weight merges, including every tie resolution, gives an optimal prefix code. The base case is size two; the one-symbol source is handled separately in step 1.1. A reduced list retains positive weights, total weight one, and distinct serials because each parent receives a fresh serial. The original source and each reduced active list are instances of this claim."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Native proof-technique banners still render plain text rather than math; the local prose workaround removes the affected raw TeX. Application code is outside scope."
+  ],
+  "before_raw_sha256": "617c2307a2225f0f15019c0bb0e8f5a5d35268500f65571692375ddf23c2363c",
+  "after_raw_sha256": "a1c3cbf1cb6adf71c438bfeb696048f7af32c0070975226412c2cd13f9394790",
+  "metadata_byte_identical": true,
+  "status_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-huffman-coding-is-prefix-optimal.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-huffman-coding-is-prefix-optimal.md",
+            "item_id": "thm-huffman-coding-is-prefix-optimal",
+            "status": "pass",
+            "strategy": "induction"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-huffman-coding-is-prefix-optimal.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-huffman-coding-is-prefix-optimal.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 10 steps, 0 defects"
+    }
+  ],
+  "visual_evidence": {
+    "original_standalone": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/thm-huffman-coding-is-prefix-optimal--01.png",
+    "current_standalone": "research/math-library-rendering-repairs-2026-10-23/previews/info-004/screenshots/thm-huffman-coding-is-prefix-optimal--01.png",
+    "detail": "original",
+    "observation": "The changed banner now reads INDUCT ON LIST SIZE AT LEAST TWO with no exposed dollar signs or TeX command. Adjacent proof rows remain legible.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/info-004/manifest.json",
+    "source_sha256": "a1c3cbf1cb6adf71c438bfeb696048f7af32c0070975226412c2cd13f9394790",
+    "html_sha256": "6f8bd564382eaea374e5824c3115608be88c17fd07cc33de3f933d127e24fa84",
+    "reference_map_sha256": "2d83adf9b3401816cef0719792dddeaef37fbf7c3a211449eedd866fe4d824b7",
+    "limitations": "Local native ItemBody preview, not full production-route coverage; 13 unrelated reference-map parse diagnostics are recorded in its manifest."
+  }
+}

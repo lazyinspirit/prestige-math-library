@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-curved-double-well-has-a-circular-minimum-energy-path.json
+  precheck: pass
 id: ex-curved-double-well-has-a-circular-minimum-energy-path
 kind: example
 title: "A curved double well has an exact circular minimum-energy path"
@@ -61,3 +64,30 @@ The domain satisfies $U\subseteq\mathbb R^2\setminus C_{\rm bad}$. Indeed, it is
 
 3.1 The fixed-endpoint finite-image string of [[alg-finite-image-string-method]] can sample and redistribute this arc, but that finite procedure alone does not imply convergence to it from arbitrary initial images. [given, step 2.1] ∎
 
+## Remarks
+
+The sketch shows the open sector $U$ with dashed, excluded boundary. The highlighted arc is $R([0,1])$: its filled endpoints are the two minima, and its middle point is the saddle. At the saddle the arrows show $T(0)=(0,1)$ and the outward normal $N(0)=(1,0)$, the direction of increasing $n$. The crossed origin is $C_{\rm bad}$ and lies outside $U$. These geometric labels follow from the chart and steps 1.1–2.1; the proof is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=3.4]
+\draw[->,gray] (-0.08,0) -- (1.62,0) node[right] {$x$};
+\draw[->,gray] (0,-1.02) -- (0,1.02) node[above] {$y$};
+\draw[dashed] (45:0.75) arc (45:-45:0.75);
+\draw[dashed] (45:1.25) arc (45:-45:1.25);
+\draw[dashed] (45:0.75) -- (45:1.25);
+\draw[dashed] (-45:0.75) -- (-45:1.25);
+\node at (0.83,0.18) {$U$};
+\draw[very thick,orange] (-30:1) arc (-30:30:1);
+\fill (30:1) circle (0.018);
+\fill (-30:1) circle (0.018);
+\fill (1,0) circle (0.018);
+\node[above right] at (30:1) {$X(a,0)$};
+\node[below right] at (-30:1) {$X(-a,0)$};
+\node[below right] at (1.02,-0.03) {$X(0,0)$};
+\draw[->,thick] (1,0) -- (1,0.31) node[above right] {$T(0)$};
+\draw[->,thick] (1,0) -- (1.40,0) node[above] {$N(0)$};
+\draw[thick] (-0.025,-0.025) -- (0.025,0.025);
+\draw[thick] (-0.025,0.025) -- (0.025,-0.025);
+\node[below left] at (0,-0.03) {$C_{\rm bad}$};
+\end{tikzpicture}
+```

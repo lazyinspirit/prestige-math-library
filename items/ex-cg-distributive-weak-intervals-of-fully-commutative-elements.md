@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-distributive-weak-intervals-of-fully-commutative-elements.json
+  precheck: pass
 id: ex-cg-distributive-weak-intervals-of-fully-commutative-elements
 kind: example
 title: "Two distributive right weak intervals of fully commutative elements in type $A_3$"
@@ -23,13 +26,7 @@ sources:
     - title: "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)"
       url: "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf"
       locator: "§3, PDF pp. 4-5 (linear extensions furnish the products of ideals)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -73,3 +70,49 @@ Let $S=\{s_1,s_2,s_3\}$ with $m(s_1,s_2)=m(s_2,s_3)=3$ and $m(s_1,s_3)=2$ (type 
 2.2 The interval $[1,w]_R$. By [F4] the map $x\mapsto I(x)$ is a bijection $[1,w]_R\to J(P_w)$, so $[1,w]_R$ has exactly five elements by 1.1, and it is a finite distributive lattice with meets and joins given by intersection and union of ideals. By [F6], the prefixes of the two reduced words $s_1s_3s_2$ and $s_3s_1s_2$ of 1.1 show that all five displayed elements lie in $[1,w]_R$. Their ideals are computed as follows: $I(1)=\varnothing$ and $I(w)=P_w$ by [F4]; and, using the chains $C_{s_1}=\{1\}$, $C_{s_3}=\{2\}$, $C_{s_2}=\{3\}$ of $P_w$, the reduced words $(s_1)$ and $(s_3)$ give $I(s_1)=\{1\}$ and $I(s_3)=\{2\}$, while the reduced word $(s_1,s_3)$ of 1.2 gives $I(s_1s_3)=\{1,2\}$; its prefixes are those of the reduced word $s_1s_3s_2$ of $w$, so that $s_1s_3\le_R w$ by [F6]. Their images $\varnothing,\{1\},\{2\},\{1,2\},\{1,2,3\}$ are the five distinct elements of $J(P_w)$, so $[1,w]_R=\{1,s_1,s_3,s_1s_3,w\}$ and each displayed element is the product of the ideal that is its image. In particular $s_1\wedge s_3$ has ideal $\{1\}\cap\{2\}=\varnothing$, so $s_1\wedge s_3=1$; $s_1\vee s_3$ has ideal $\{1\}\cup\{2\}=\{1,2\}$, so $s_1\vee s_3=s_1s_3$; and $s_1s_3\vee s_1$ has ideal $\{1,2\}\cup\{1\}=\{1,2\}$, so $s_1s_3\vee s_1=s_1s_3$. [given, F4, F6, step 1.1, step 1.2]
 
 3.1 Both intervals are finite distributive lattices by 2.1 and 2.2, illustrating [F4](2)-(3). Their heaps are the two-element antichain of 1.2 and the V-shaped poset of 1.1; the first is not a chain because its two elements are incomparable, and the second is not a chain because $1$ and $2$ are incomparable in $P_w$. So the distributivity exhibited here is not the chain case. [given, step 1.1, step 1.2, step 2.1, step 2.2] ∎
+
+
+## Remarks
+
+The following Hasse diagrams show the heaps on the left and the corresponding weak intervals and ideal lattices on the right. A heap vertex is labeled by its position and generator. Each lattice vertex pairs an element $x$ with its ideal $I(x)$, so the correspondence is $x\mapsto I(x)$. Edges point upward from a smaller element to a cover; no edge connects incomparable heap positions.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node at (1,3.2) {$P_u$};
+\node (h1) at (0,1.2) {$1:s_1$};
+\node (h2) at (2,1.2) {$2:s_3$};
+\node at (7,3.2) {$[1,u]_R\cong J(P_u)$};
+\node (b) at (7,0) {$1\leftrightarrow\emptyset$};
+\node (l) at (5,1.2) {$s_1\leftrightarrow\{1\}$};
+\node (r) at (9,1.2) {$s_3\leftrightarrow\{2\}$};
+\node (t) at (7,2.4) {$u\leftrightarrow\{1,2\}$};
+\draw[->] (b)--(l);
+\draw[->] (b)--(r);
+\draw[->] (l)--(t);
+\draw[->] (r)--(t);
+\end{tikzpicture}
+```
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node at (1,4.4) {$P_w$};
+\node (h1) at (0,1.2) {$1:s_1$};
+\node (h2) at (2,1.2) {$2:s_3$};
+\node (h3) at (1,2.4) {$3:s_2$};
+\draw[->] (h1)--(h3);
+\draw[->] (h2)--(h3);
+\node at (7,4.4) {$[1,w]_R\cong J(P_w)$};
+\node (b) at (7,0) {$1\leftrightarrow\emptyset$};
+\node (l) at (5,1.2) {$s_1\leftrightarrow\{1\}$};
+\node (r) at (9,1.2) {$s_3\leftrightarrow\{2\}$};
+\node (t) at (7,2.4) {$s_1s_3\leftrightarrow\{1,2\}$};
+\node (v) at (7,3.6) {$w\leftrightarrow\{1,2,3\}$};
+\draw[->] (b)--(l);
+\draw[->] (b)--(r);
+\draw[->] (l)--(t);
+\draw[->] (r)--(t);
+\draw[->] (t)--(v);
+\end{tikzpicture}
+```
+
+In both lattices, moving upward adds one heap position, increasing weak-order length by one. Meets and joins correspond to intersection and union of ideals: in particular, the two singleton vertices meet at the bottom and join at the vertex labeled by $\{1,2\}$. The verification above establishes these correspondences independently of the figures.

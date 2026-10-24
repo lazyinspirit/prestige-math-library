@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-zariski-braid-combing-words-alpha-and-x.json
+  precheck: n/a
 id: def-zariski-braid-combing-words-alpha-and-x
 kind: definition
-title: "The Zariski combing words alpha_i and x_i in the Artin presentation"
+title: 'The Zariski combing words $\alpha_i$ and $x_i$ in the Artin presentation'
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -20,13 +23,7 @@ sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-20"
       url: "https://arxiv.org/pdf/1010.0321"
-verification:
-  audited: 2026-10-02
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Definition

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-brauer-and-partition-composition-is-associative.json
+  precheck: pass
 id: lem-brauer-and-partition-composition-is-associative
 kind: lemma
 title: Associativity of Brauer and partition diagram composition
@@ -12,11 +15,6 @@ axiom_use: "No choice principle is used; the arguments concern finite diagrams."
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Lehrer and Zhang, The Brauer Category and Invariant Theory, §2.1"
@@ -44,3 +42,41 @@ For every commutative unital ring $R$, every $\delta\in R$, and every composable
 2.1 The classes meeting no outer vertex are also the same for both bracketings. Any class removed when the first two diagrams are composed meets neither of their exposed boundaries, so it contains no vertex of the third diagram; it can never merge with another class in the second composition. Conversely, every final class meeting no outer vertex is either removed at the first composition or is removed at the second. Hence the sum of the two loop counts in either bracketing equals the number of classes of $\sim$ meeting no outer vertex. [F1, step 1.1]
 
 3.1 By [F1], each bracketing therefore has the same outer diagram and coefficient $\delta^\ell$, with the same integer $\ell$. The two bracketings agree on basis diagrams, so bilinearity gives associativity on the free modules. The identity diagrams add no new equivalence identifications and remove no class; they act as left and right units. [F1, step 2.1, algebra] ∎
+
+## Remarks
+
+For a concrete Brauer example (also a partition example), take $A:1\to3$, $B:3\to3$, and $C:3\to1$, stacked from top to bottom. Number each three-vertex interface from left to right. In $A$, the input joins vertex $1$ and vertices $2,3$ are paired; $B$ has three through-strands; in $C$, vertex $1$ joins the output and vertices $2,3$ are paired.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[dashed,gray] (-0.4,2) -- (3.5,2);
+\draw[dashed,gray] (-0.4,0) -- (3.5,0);
+\draw[thick] (0,4) -- (0,2) -- (0,0) -- (0,-2);
+\draw[thick] (1.5,2) .. controls (1.5,3.2) and (3,3.2) .. (3,2);
+\draw[thick] (1.5,2) -- (1.5,0);
+\draw[thick] (3,2) -- (3,0);
+\draw[thick] (1.5,0) .. controls (1.5,-1.2) and (3,-1.2) .. (3,0);
+\fill (0,4) circle (2pt);
+\fill (0,2) circle (2pt);
+\fill (1.5,2) circle (2pt);
+\fill (3,2) circle (2pt);
+\fill (0,0) circle (2pt);
+\fill (1.5,0) circle (2pt);
+\fill (3,0) circle (2pt);
+\fill (0,-2) circle (2pt);
+\node at (-1.2,3) {$A:1\to3$};
+\node at (-1.2,1) {$B:3\to3$};
+\node at (-1.2,-1) {$C:3\to1$};
+\node[above] at (0,4) {input};
+\node[below] at (0,-2) {output};
+\node[above right] at (0,2) {$1$};
+\node[above right] at (1.5,2) {$2$};
+\node[above right] at (3,2) {$3$};
+\node[below right] at (0,0) {$1$};
+\node[below right] at (1.5,0) {$2$};
+\node[below right] at (3,0) {$3$};
+\node at (2.25,1) {$K$};
+\end{tikzpicture}
+```
+
+The dashed rows are the two glued interfaces, not diagram edges. The component $K$ consists of vertices $2,3$ on both interfaces and meets neither outer vertex; the left strand meets both outer vertices. Neither first composition, $B\circ A$ or $C\circ B$, removes a component, and the remaining composition removes precisely $K$. Thus both bracketings give $\delta\,\mathrm{id}_1$. The picture illustrates the equivalence-class count in steps 1.1–3.1; the proof is independent of the drawing.

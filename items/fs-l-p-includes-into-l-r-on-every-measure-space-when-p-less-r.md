@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-l-p-includes-into-l-r-on-every-measure-space-when-p-less-r.json
+  precheck: pass
 id: fs-l-p-includes-into-l-r-on-every-measure-space-when-p-less-r
 kind: false-statement
 title: "FALSE: $L^p$ includes into $L^r$ on every measure space when $p < r$"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cex-l-one-not-subset-l-two-on-the-line, cex-l-two-not-subset-l-one-on-the-line]
 proof_strategy: "Refute with the two power-function counterexamples on the line: one witness lies in L^1 minus L^2 and another lies in L^2 minus L^1."
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -38,7 +34,7 @@ $L^p\subseteq L^r$.
 
 ## Refutation
 
-**Proof technique:** Refute with the two power-function counterexamples on the line: one witness lies in $L^1\setminus L^2$ and another lies in $L^2\setminus L^1$.
+**Proof technique:** Refute with the two power-function counterexamples on the line: one witness lies in L¹ ∖ L² and another lies in L² ∖ L¹.
 
 1.1 Taking $p=1$ and $r=2$, [L1] already contradicts the claim. [L1]
 

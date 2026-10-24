@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-dual-crystal-reverses-arrows-and-weights.json
+  precheck: pass
 id: ex-dual-crystal-reverses-arrows-and-weights
 kind: example
 title: "Dual crystals reverse arrows and weights: two small computations"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 12
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -70,3 +71,43 @@ The example computes the dual crystal of [[prop-dual-crystal-and-reversal-conven
 2.1 (C) The swap sends $(v_j\otimes v_k)^\vee$ to $v_k^\vee\otimes v_j^\vee$. On the right the three-element lowering chain is $(v_1^\vee\otimes v_1^\vee)\to(v_0^\vee\otimes v_1^\vee)\to(v_0^\vee\otimes v_0^\vee)$, with weights $2\lambda_1,0,-2\lambda_1$; each next raising reverses the preceding arrow by [F4]. The remaining vertex $v_1^\vee\otimes v_0^\vee$ has weight zero and both operators vanish there: the tie $\varphi_1(v_1^\vee)=\varepsilon_1(v_0^\vee)=1$ selects the bottom second factor for lowering and the top first factor for raising. This is the image of the isolated dual vertex $(v_0\otimes v_1)^\vee$. The reversed three-element chain is $B(2)$ and the isolated vertex is $B(0)$ by [F5], so both sides have the claimed decomposition. [step 1.1, F1, F2, F4, F5]
 
 3.1 The arrow and tensor calculations are finite applications of [F1]; the canonical identification in (B) uses the explicit relation check, highest-weight module universality [F6] and lowering-word construction [F7]. No choice principle or general crystal-component uniqueness theorem is invoked. [step 1.2, step 2.1, F1, F6, F7, given] ∎
+
+
+## Remarks
+
+The solid arrows below are the lowering operators, labelled by their colors. The dashed vertical arrows give the crystal isomorphisms from steps 1.1 and 1.2. Weights are displayed above the dual vertices; reversing the original arrows and negating their weights gives exactly these two dual chains. In the lower comparison row, $w_1,w_2,w_3$ are the residue vertices constructed in step 1.2, in $B(\lambda_2)$. The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth, x=1cm, y=1cm]
+\node at (-1.5,0) {$B(1)^\vee$};
+\node (a) at (0,0) {$v_1^\vee$};
+\node (b) at (4,0) {$v_0^\vee$};
+\node at (0,0.6) {$\lambda_1$};
+\node at (4,0.6) {$-\lambda_1$};
+\draw[->] (a) -- node[above] {$1$} (b);
+\node at (-1.5,-1.5) {$B(1)$};
+\node (c) at (0,-1.5) {$v_0$};
+\node (d) at (4,-1.5) {$v_1$};
+\draw[->] (c) -- node[above] {$1$} (d);
+\draw[->,dashed] (a) -- (c);
+\draw[->,dashed] (b) -- (d);
+\node at (-1.5,-3.5) {$B(\lambda_1)^\vee$};
+\node (e) at (0,-3.5) {$u_3^\vee$};
+\node (f) at (3,-3.5) {$u_2^\vee$};
+\node (g) at (6,-3.5) {$u_1^\vee$};
+\node at (0,-2.9) {$\lambda_2$};
+\node at (3,-2.9) {$\lambda_1-\lambda_2$};
+\node at (6,-2.9) {$-\lambda_1$};
+\draw[->] (e) -- node[above] {$2$} (f);
+\draw[->] (f) -- node[above] {$1$} (g);
+\node at (-1.5,-5) {$B(\lambda_2)$};
+\node (h) at (0,-5) {$w_1$};
+\node (i) at (3,-5) {$w_2$};
+\node (j) at (6,-5) {$w_3$};
+\draw[->] (h) -- node[above] {$2$} (i);
+\draw[->] (i) -- node[above] {$1$} (j);
+\draw[->,dashed] (e) -- (h);
+\draw[->,dashed] (f) -- (i);
+\draw[->,dashed] (g) -- (j);
+\end{tikzpicture}
+```

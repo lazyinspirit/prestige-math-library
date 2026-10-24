@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-blowup-of-a-smooth-point.json
+  precheck: pass
 id: ex-blowup-of-a-smooth-point
 kind: example
 title: 'Blowing up a smooth point: charts, exceptional curve, and contraction'
@@ -30,12 +33,7 @@ sources:
     url: https://stacks.math.columbia.edu/tag/0C2I
   - title: Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)
     url: https://www.math.ens.psl.eu/~debarre/M2.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -100,3 +98,42 @@ The intrinsic contraction definition requires regularity at the contracted targe
 
 - The two charts and the glue are the reason the exceptional curve is a projective line over $k$ when the point is $k$-rational.
 - The companion counterexample page shows that for a non-normal target with one-dimensional singular locus the normalization is not a point blowup, which records the failure of the stated regular-target factorization after dropping target regularity.
+
+
+The chart gluing and the exceptional fibre can be read together as follows.
+Put $U_x=\operatorname{Spec}A[y/x]$, $U_y=\operatorname{Spec}A[x/y]$ and
+$W=U_x\cap U_y$. The top arrows are the open immersions of the common
+overlap; $U_x\cup U_y=\pi^{-1}(\operatorname{Spec}A)$.
+In the bottom Cartesian square, $i$ and $j$ are the closed immersions and
+$q$ is the structure map of $E\cong\mathbb P^1_k$. Here $\kappa(p)=k$
+by the rational-point hypothesis.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.3,transform shape]
+\node (Ux) at (0,0) {$U_x$};
+\node (W) at (3,0) {$W$};
+\node (Uy) at (6,0) {$U_y$};
+\draw[->] (W) -- (Ux);
+\draw[->] (W) -- (Uy);
+\node at (0,-0.7) {$T=y/x$};
+\node at (3,-0.7) {$U=T^{-1}$};
+\node at (6,-0.7) {$U=x/y$};
+\node (E) at (1,-2) {$E\cong\mathbb P^1_k$};
+\node (Sp) at (5,-2) {$S'=\mathrm{Bl}_p S$};
+\node (p) at (1,-3.8) {$\mathrm{Spec}\,k$};
+\node (S) at (5,-3.8) {$S$};
+\draw[->] (E) -- node[above] {$i$} (Sp);
+\draw[->] (E) -- node[left] {$q$} (p);
+\draw[->] (Sp) -- node[right] {$\pi$} (S);
+\draw[->] (p) -- node[below] {$j$} (S);
+\node at (3,-2.9) {Cartesian};
+\end{tikzpicture}
+```
+
+On the exceptional fibre the two charts restrict to affine lines with
+coordinates $T$ and $U$, glued by $U=T^{-1}$. The normal bundle is
+$\mathcal O_E(E)\cong\mathcal O_{\mathbb P^1_k}(-1)$; when $S$ is projective
+over $k$, this gives $E\cdot E=-1$. Away from this fibre,
+$\pi\colon S'\setminus E\xrightarrow{\sim}S\setminus\{p\}$.
+The picture summarizes Verification steps 1.1--3.1; the verification remains
+independent of it.

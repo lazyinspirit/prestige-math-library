@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-totality-is-pi-two-complete.json
+  precheck: pass
 id: thm-totality-is-pi-two-complete
 kind: theorem
-title: "The totality set is Pi_2^0-complete"
+title: 'The totality set is $\Pi_2^0$-complete'
 status: published
 origin: pipeline
 provenance:
@@ -13,13 +16,7 @@ sources:
   references:
     - title: "Ludovic Patey, Computability Theory, Example 1.5"
       url: "https://ludovicpatey.com/courses/comp-thy-2023/cr11-en.pdf"
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (thm-totality-is-pi-two-complete). No independent judge or whole-closure certification.
-    delegated_by: owner
+
 ---
 
 ## Statement
@@ -30,7 +27,7 @@ $\mathrm{TOT}=\{e:(\forall x)\,\varphi_e(x)\downarrow\}$ is $\Pi_2^0$-complete.
 
 **Given:** An acceptable numbering $(\varphi_e)$ and an arbitrary $\Pi_2^0$ set $A\subseteq\mathbb N$.
 
-[F1] $\Pi_2^0$ membership has a $\forall x\exists y$ formula with primitive-recursive matrix ([[def-sigma-n-pi-n-and-delta-n-sets]]).
+[F1] $\Pi_2^0$ membership has a $\forall x\exists y$ formula with primitive-recursive matrix ([[def-sigma-n-pi-n-and-delta-n-sets|The classes $\Sigma_n^0$, $\Pi_n^0$, and $\Delta_n^0$]]).
 
 [F2] Completeness means membership in $\Pi_2^0$ and a total computable many-one reduction from every $\Pi_2^0$ set ([[def-arithmetical-level-completeness]]).
 

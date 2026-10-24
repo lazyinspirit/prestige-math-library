@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-local-linear-transport-cauchy-problem.json
+  precheck: pass
 id: thm-local-linear-transport-cauchy-problem
 kind: theorem
 title: "Local linear transport has a unique solution from noncharacteristic Cauchy data"
@@ -17,9 +20,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -52,7 +52,7 @@ $$u(\gamma(\eta),\tau(\eta))=g(\eta)\quad(\eta\in V).$$
 
 [L1] Noncharacteristic first-order data mean that the transport vector $B=(a,1)$ is transverse to the parametrized surface ([[def-noncharacteristic-first-order-cauchy-surface]]).
 
-[L2] Characteristics depend $C^1$ on their initial position and satisfy the linearized variational equation ([[lem-transport-characteristics-depend-c-one-on-initial-position]]).
+[L2] Characteristics depend $C^1$ on their initial position and satisfy the linearized variational equation ([[lem-transport-characteristics-depend-c-one-on-initial-position|Transport characteristics depend $C^1$ on the initial position]]).
 
 [L3] A scalar linear ODE with continuous coefficients has a unique solution given by its integrating-factor formula ([[thm-first-order-linear-ode-integrating-factor]]).
 
@@ -73,3 +73,25 @@ $$u(\gamma(\eta),\tau(\eta))=g(\eta)\quad(\eta\in V).$$
 3.1 By [L4], after shrinking domains there are neighborhoods $I$ of $0$, $V$ of $\eta_*$, and $W$ of $(x_*,t_*)$ such that $\Phi:I\times V\to W$ is a $C^1$ diffeomorphism. Write $\Gamma(\rho;\sigma(\eta))=(X(\rho;\eta),T(\rho;\eta))$. For each $\eta\in V$, [L3] gives the unique solution $z(\cdot,\eta)$ of $$\partial_s z(s,\eta)+c(X(s;\eta),T(s;\eta))z(s,\eta)=f(X(s;\eta),T(s;\eta)),\qquad z(0,\eta)=g(\eta),$$ namely $$z(s,\eta)=e^{-\int_0^s c(X(\rho;\eta),T(\rho;\eta))\,d\rho}g(\eta)+\int_0^s e^{-\int_\lambda^s c(X(\rho;\eta),T(\rho;\eta))\,d\rho}f(X(\lambda;\eta),T(\lambda;\eta))\,d\lambda.$$ The $C^1$ integrands on the compact local interval may be differentiated in $s$ and $\eta$, so $z$ is $C^1$. Define $u:=z\circ\Phi^{-1}$ on $W$. [L3, L4, step 1.1, step 2.1]
 
 4.1 Because $\Phi(0,\eta)=\sigma(\eta)$, step 3.1 gives $u(\gamma(\eta),\tau(\eta))=g(\eta)$ for $\eta\in V$. Moreover $u(\Phi(s,\eta))=z(s,\eta)$, so [L5] and $\partial_s\Phi=(a,1)$ give $$\partial_s z(s,\eta)=u_t(\Phi(s,\eta))+a(\Phi(s,\eta))\cdot\nabla_xu(\Phi(s,\eta)).$$ Substitution into the scalar ODE for $z$ proves the transport PDE throughout $W$. If two $C^1$ solutions shared the data, [L5] would restrict each one to the same scalar IVP on every characteristic, and uniqueness in [L3] would make them agree throughout $W$. [L3, L5, step 3.1] ∎
+
+
+## Remarks
+
+The diagram separates the data slice from the characteristic coordinates. Here $i_0:V\to I\times V$ is $i_0(\eta)=(0,\eta)$, so $\Phi\circ i_0=\sigma|_V$. The lower square commutes because $u=z\circ\Phi^{-1}$; in particular, its restriction to the data slice gives $u\circ\sigma|_V=z\circ i_0=g$. At the base point, the derivative columns of $\Phi$ are the transport direction and the $n$ surface-tangent directions. Their independence is precisely the noncharacteristic condition used in step 2.1. The rigorous proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (V) at (0,2.7) {$V$};
+\node (P) at (0,0.8) {$I\times V$};
+\node (W) at (4.2,0.8) {$W$};
+\node (R1) at (0,-1.2) {$\mathbb R$};
+\node (R2) at (4.2,-1.2) {$\mathbb R$};
+\draw[->] (V) -- node[left] {$i_0$} (P);
+\draw[->] (V) -- node[above right] {$\sigma|_V$} (W);
+\draw[->] (P) -- node[above] {$\Phi$} (W);
+\draw[->] (P) -- node[left] {$z$} (R1);
+\draw[->] (W) -- node[right] {$u$} (R2);
+\node at (2.1,-1.2) {$=$};
+\node[align=center] at (2.1,-2.2) {$\Phi(s,\eta)=\Gamma(s;\sigma(\eta))$};
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-picard-group-of-a-point-blowup-of-the-projective-plane.json
+  precheck: pass
 id: lem-picard-group-of-a-point-blowup-of-the-projective-plane
 kind: lemma
 title: "The Picard group of a point blowup of the projective plane"
@@ -57,11 +60,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21"
@@ -118,7 +116,7 @@ $\ell\cdot\ell=1$, $\ell\cdot E=0$, $E\cdot E=-1$
 
 
 ## Proof
-**Proof technique:** direct: establish the surface and intersection data of the blowup, reduce $\operatorname{Pic}$ to the class group, exhibit an affine plane as the complement of the two curves $E$ and $m$, and use the excision sequence for class groups and the intersection matrix for injectivity.
+**Proof technique:** direct: establish the surface and intersection data of the blowup, reduce the Picard group to the class group, exhibit an affine plane as the complement of the exceptional curve and the strict transform of a line through the centre, and use the excision sequence for class groups and the intersection matrix for injectivity.
 
 1.1 Surface properties and intersection numbers of $X'$. Since $p$ is $k$-rational, $r=1$, and [F2] gives: $X'$ is an integral regular projective surface over $k$, $E$ is an effective Cartier divisor with $E\cong\mathbb P^1_k$ and $E\cdot E=-1$, and $\pi^*D\cdot\pi^*D'=D\cdot D'$, $E\cdot\pi^*D=0$ for all Cartier divisors $D,D'$ on $X$. The intersection product on $X$ is defined because $X$ is an integral regular projective surface [F1], so for $D=D'$ a line on $X$ with class $\mathcal O_X(1)$ this gives $\ell\cdot E=0$ and $\ell\cdot\ell=\mathcal O_X(1)\cdot\mathcal O_X(1)$. [F2, F1, F4]
 

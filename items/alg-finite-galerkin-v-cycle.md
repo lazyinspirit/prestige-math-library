@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-finite-galerkin-v-cycle.json
+  precheck: n/a
 id: alg-finite-galerkin-v-cycle
 kind: algorithm
 title: "Finite recursive Galerkin V- and W-cycle for an SPD hierarchy"
@@ -14,8 +17,6 @@ justified_by: [thm-galerkin-v-cycle-work-recurrence-master-regimes]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
   - title: "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6"
@@ -48,3 +49,32 @@ vector specified by these instructions for the system $A_jz=b$:
 The V-cycle is $\gamma=1$ and the W-cycle is $\gamma=2$. The definition fixes
 exact arithmetic and specifies an iterate; it makes no accuracy or convergence
 claim. Setup cost, floating-point error, and termination are separate claims.
+
+## Remarks
+
+For $j>0$, the schematic shows one invocation: descend with the restricted
+residual, update the coarse iterate $\gamma$ times, then lift its correction.
+Here $b_c=P_j^{\mathsf T}r$ is held fixed throughout those recursive calls,
+and $e_t\in\mathbb R^{n_{j-1}}$ denotes the result of the $t$th call.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node[draw,rounded corners,align=center,inner sep=7pt] (pre) at (0,0)
+  {$\begin{array}{c}\nu_1\ \mathrm{pre\!\! -\!\! sweeps}\\r=b-A_jx\end{array}$};
+\node[draw,rounded corners,align=center,inner sep=7pt] (coarse) at (3.6,-2.6)
+  {$\begin{array}{c}e_0=0\\e_t=\mathrm{Cycle}(j-1,e_{t-1},b_c)\\t=1,\ldots,\gamma\end{array}$};
+\node[draw,rounded corners,align=center,inner sep=7pt] (post) at (7.2,0)
+  {$\begin{array}{c}x\leftarrow x+P_je_\gamma\\\nu_2\ \mathrm{post\!\! -\!\! sweeps};\ \mathrm{return}\ x\end{array}$};
+\draw[->] (pre) -- node[above,sloped] {$b_c=P_j^{\mathsf T}r$} (coarse);
+\draw[->] (coarse) -- node[above,sloped] {$P_je_\gamma$} (post);
+\end{tikzpicture}
+```
+
+The downward transfer is $P_j^{\mathsf T}:\mathbb R^{n_j}\to
+\mathbb R^{n_{j-1}}$, and the upward transfer is
+$P_j:\mathbb R^{n_{j-1}}\to\mathbb R^{n_j}$. The V-cycle uses one coarse
+call and the W-cycle uses two successive coarse calls, with the second
+starting from the first result rather than from zero. Each coarse call follows
+the same instructions at level $j-1$; level zero returns $A_0^{-1}b$ for its
+own right-hand side. The figure illustrates only the instructions above and
+asserts no convergence property.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-na-graded-mini-mass-initialization-pressure-rate.json
+  precheck: pass
 id: cex-na-graded-mini-mass-initialization-pressure-rate
 kind: counterexample
 title: "Graded MINI mass initialization can destroy the smooth instantaneous pressure rate"
@@ -46,12 +49,6 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Jean-Luc Guermond, MATH 661, Chapter 53: Stokes equations"
@@ -383,3 +380,31 @@ This assertion is false. There are one fixed convex two-dimensional pentagon, fi
 
 The construction concerns instantaneous pressure with mass initialization on unrestricted shape-regular grading. It does not change any positive velocity estimate, the regular-pressure solution definition, or the integrated-pressure recovery and error results. It also does not use uniform $H^1$ stability of the orthogonal weak-kernel mass projector. All recursive, radiation, parity, source and nonlinear arguments above are local parts of this generated counterexample; the item is not a logical supplier for a theorem or lemma.
 
+
+**Seven-node kink lift.** The following schematic isolates the child box and the lift in steps 1.5 and 1.85; it is not the complete recursive triangulation. The two side-strip nodes have height $\varepsilon_{\mathrm{strip}}r$, exaggerated here for visibility. All seven dots are existing boundary nodes. The crease of $F(x,y)=|x-y|$ joins $o$ to the existing top-right corner, leaving the top edge whole.
+
+```tikz
+\begin{tikzpicture}[x=0.75cm,y=0.75cm]
+\draw[thick] (-4,0) -- (0,0) -- (4,0) -- (4,0.6) -- (4,4) -- (-4,4) -- (-4,0.6) -- (-4,0);
+\draw[very thick,blue] (0,0) -- (4,4);
+\fill (-4,0) circle (2pt);
+\fill (0,0) circle (2pt);
+\fill (4,0) circle (2pt);
+\fill (-4,0.6) circle (2pt);
+\fill (4,0.6) circle (2pt);
+\fill (-4,4) circle (2pt);
+\fill (4,4) circle (2pt);
+\node[below] at (-4,0) {$c_-$};
+\node[below] at (0,0) {$o=(0,0)$};
+\node[below] at (4,0) {$c_+$};
+\node[left] at (-4,0.6) {$(-4r,\varepsilon_{\mathrm{strip}}r)$};
+\node[right] at (4,0.6) {$(4r,\varepsilon_{\mathrm{strip}}r)$};
+\node[above] at (-4,4) {$(-4r,4r)$};
+\node[above] at (4,4) {$(4r,4r)$};
+\node at (-1.3,2.6) {$F=y-x$};
+\node at (2.6,1.2) {$F=x-y$};
+\node[above left,blue] at (2.6,2.6) {$x=y$};
+\end{tikzpicture}
+```
+
+Here $c_\pm=(\pm4r,0)$. On the two base edges $F=|x|$; on the left side $F=4r+y$, on the right side $F=4r-y$, and on the top $F=4r-x$. These restrictions are affine on each of the seven boundary edges, exactly as checked in step 1.85. The diagram illustrates that local interface fact; the counterexample and its estimates remain established by the argument above independently of the figure.

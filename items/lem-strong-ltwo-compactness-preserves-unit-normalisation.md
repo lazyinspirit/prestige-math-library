@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-strong-ltwo-compactness-preserves-unit-normalisation.json
+  precheck: pass
 id: "lem-strong-ltwo-compactness-preserves-unit-normalisation"
 kind: "lemma"
-title: "Weak H^1 convergence plus Rellich preserves the L^2 unit normalisation"
+title: "Weak $H^1$ convergence plus Rellich preserves the $L^2$ unit normalisation"
 status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"

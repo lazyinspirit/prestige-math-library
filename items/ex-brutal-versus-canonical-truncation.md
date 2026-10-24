@@ -1,13 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-brutal-versus-canonical-truncation.json
+  precheck: pass
 id: "ex-brutal-versus-canonical-truncation"
+title: "Brutal versus canonical truncation"
 kind: "example"
 deps: ["def-brutal-truncation-of-a-complex", "def-canonical-truncation-of-a-complex", "lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - url: "https://stacks.math.columbia.edu/tag/0118"

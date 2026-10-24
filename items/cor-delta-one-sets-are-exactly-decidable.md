@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-delta-one-sets-are-exactly-decidable.json
+  precheck: pass
 id: cor-delta-one-sets-are-exactly-decidable
 kind: corollary
-title: "Delta_1^0 sets are exactly the decidable sets"
+title: '$\Delta_1^0$ sets are exactly the decidable sets'
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-sigma-n-pi-n-and-delta-n-sets, thm-sigma-one-sets-are-exactly-ce-sets, def-decidable-and-recognizable-language]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, Proposition 2.2"

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-elementary-solid-region.json
+  precheck: n/a
 id: def-elementary-solid-region
 kind: definition
 title: "Elementary solid regions: one boundary presentation adapted in all three coordinate directions"
@@ -11,13 +14,6 @@ deps: [def-simple-solid-region-in-a-coordinate-direction, def-adapted-outward-bo
 justified_by: []
 aliases: []
 landmark: true
-verification:
-  audited: 2026-08-26
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -43,3 +39,57 @@ Explicitly, the data are: three simple descriptions $(x,D_x,\gamma^x_1,\gamma^x_
 - **A patch may be lateral in one direction and a face in another.** The six faces of a box illustrate both: the top and bottom faces are the upper and lower sublists for $k=z$ and lateral for $k=x$ and $k=y$. What cannot happen is a patch lateral in all three directions, and that is [[cor-every-face-of-an-elementary-solid-region-is-outward-oriented]].
 
 - **What is not assumed.** The solid need not be convex, its boundary need not be connected, and no patch is required to be a graph over a coordinate plane. Conversely, nothing here asserts that every compact solid with a piecewise smooth boundary can be presented this way; [[rem-the-reach-of-the-classical-divergence-and-stokes-theorems]] states what is and is not covered.
+
+**One box, the same six patches.** For $E=[0,1]^3$, let $F_k^-$ and $F_k^+$ be the faces $p_k=0$ and $p_k=1$, respectively, with outward orientations. Each panel repeats the same labeled cube net; only the upper ($+$), lower ($-$), and lateral ($0$) classifications change. Cyan outlines mark upper faces, orange lower faces, and gray lateral faces. The nets are schematic unfoldings, not new boundary presentations.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1.3cm,font=\large]
+\begin{scope}[xshift=0cm]
+\node at (2,2.4) {$k=x$};
+\draw[gray,thick] (0,0) rectangle (1,1);
+\node at (0.5,0.5) {$F_y^{-}:0$};
+\draw[cyan,thick] (1,0) rectangle (2,1);
+\node at (1.5,0.5) {$F_x^{+}:+$};
+\draw[gray,thick] (2,0) rectangle (3,1);
+\node at (2.5,0.5) {$F_y^{+}:0$};
+\draw[orange,thick] (3,0) rectangle (4,1);
+\node at (3.5,0.5) {$F_x^{-}:-$};
+\draw[gray,thick] (1,1) rectangle (2,2);
+\node at (1.5,1.5) {$F_z^{+}:0$};
+\draw[gray,thick] (1,-1) rectangle (2,0);
+\node at (1.5,-0.5) {$F_z^{-}:0$};
+\end{scope}
+\begin{scope}[xshift=6.4cm]
+\node at (2,2.4) {$k=y$};
+\draw[orange,thick] (0,0) rectangle (1,1);
+\node at (0.5,0.5) {$F_y^{-}:-$};
+\draw[gray,thick] (1,0) rectangle (2,1);
+\node at (1.5,0.5) {$F_x^{+}:0$};
+\draw[cyan,thick] (2,0) rectangle (3,1);
+\node at (2.5,0.5) {$F_y^{+}:+$};
+\draw[gray,thick] (3,0) rectangle (4,1);
+\node at (3.5,0.5) {$F_x^{-}:0$};
+\draw[gray,thick] (1,1) rectangle (2,2);
+\node at (1.5,1.5) {$F_z^{+}:0$};
+\draw[gray,thick] (1,-1) rectangle (2,0);
+\node at (1.5,-0.5) {$F_z^{-}:0$};
+\end{scope}
+\begin{scope}[xshift=12.8cm]
+\node at (2,2.4) {$k=z$};
+\draw[gray,thick] (0,0) rectangle (1,1);
+\node at (0.5,0.5) {$F_y^{-}:0$};
+\draw[gray,thick] (1,0) rectangle (2,1);
+\node at (1.5,0.5) {$F_x^{+}:0$};
+\draw[gray,thick] (2,0) rectangle (3,1);
+\node at (2.5,0.5) {$F_y^{+}:0$};
+\draw[gray,thick] (3,0) rectangle (4,1);
+\node at (3.5,0.5) {$F_x^{-}:0$};
+\draw[cyan,thick] (1,1) rectangle (2,2);
+\node at (1.5,1.5) {$F_z^{+}:+$};
+\draw[orange,thick] (1,-1) rectangle (2,0);
+\node at (1.5,-0.5) {$F_z^{-}:-$};
+\end{scope}
+\end{tikzpicture}
+```
+
+For every direction $k$, the sublists are $\Sigma_k^+=\{F_k^+\}$, $\Sigma_k^-=\{F_k^-\}$, and $\Sigma_k^0=\{F_\ell^-,F_\ell^+:\ell\ne k\}$. The outward unit normal on $F_\ell^\pm$ is $\pm e_\ell$, so its $k$th component is positive, negative, or zero exactly as labeled. Each upper or lower face projects onto the corresponding unit-square base; face seams have content zero. Thus all three panels classify the very same six outward-oriented patches.

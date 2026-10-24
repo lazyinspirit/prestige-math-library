@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fista-o1k2-objective-bound.json
+  precheck: pass
 id: thm-fista-o1k2-objective-bound
 kind: theorem
-title: "FISTA has an O(1/k^2) objective bound"
+title: "FISTA has an $O(1/k^2)$ objective bound"
 status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
@@ -13,12 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, Theorem 4.4"

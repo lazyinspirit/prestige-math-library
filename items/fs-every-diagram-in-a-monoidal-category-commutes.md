@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-every-diagram-in-a-monoidal-category-commutes.json
+  precheck: pass
 id: fs-every-diagram-in-a-monoidal-category-commutes
 kind: false-statement
 title: "Every diagram in a monoidal category commutes"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [rem-every-diagram-commutes-is-false-as-stated, thm-a-category-with-finite-products-is-monoidal]
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -41,3 +41,14 @@ pipeline_run: null
 2.1 The composite along the top and right edges is $c$, while the composite along the left and bottom edges is $1_A$. These maps differ because $c(1)=0\ne1=1_A(1)$, so the square does not commute. [step 1.1, algebra]
 
 3.1 This noncanonical square lies outside the scope described in [L1] and is a diagram in a monoidal category that does not commute. Therefore the claim is false. [L1, step 2.1] ∎
+
+## Remarks
+
+The square in the refutation is the following diagram in the cartesian monoidal category of sets, where $A=\{0,1\}$ and $c(a)=0$ for every $a\in A$.
+
+```tikzcd
+A \arrow[r, "c"] \arrow[d, "1_A"'] & A \arrow[d, "1_A"] \\
+A \arrow[r, "1_A"'] & A
+```
+
+This square does **not** commute: the top-then-right composite is $1_A\circ c=c$, whereas the left-then-bottom composite is $1_A\circ1_A=1_A$. They differ at $1\in A$. Coherence for associators and unitors concerns canonical structural maps between formal parenthesisations of a fixed ordered tensor word; it does not assert commutativity of this arbitrary square. The refutation above is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cochran-davis-ray-strong-winding-injectivity.json
+  precheck: pass
 id: thm-cochran-davis-ray-strong-winding-injectivity
 kind: theorem
 title: "Cochran–Davis–Ray satellite injectivity"
@@ -33,18 +36,12 @@ sources:
     - title: "Tim D. Cochran, Bridget D. Franklin, Matthew Hedden, and Peter D. Horn, “Knot concordance and homology cobordism”"
       url: "https://arxiv.org/pdf/1102.5730"
       locator: "Theorem 2.1, localized homology cobordism hypothesis"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
 
-Let P be a pattern of nonzero winding number n. Then P induces an injective function C^{1/n}→C^{1/n}. If P has strong winding number ±1, then it induces injective functions C_ex→C_ex and C_top→C_top. If, in addition, the smooth 4-sphere has a unique smooth structure up to diffeomorphism, then P induces an injective function C_sm→C_sm. No sliceness hypothesis on P(U) is required in this theorem; the proof constructs an auxiliary pattern with ribbon closure.
+Let P be a pattern of nonzero winding number n. Then P induces an injective function $C^{1/n}\to C^{1/n}$. If P has strong winding number ±1, then it induces injective functions $C_{\mathrm{ex}}\to C_{\mathrm{ex}}$ and $C_{\mathrm{top}}\to C_{\mathrm{top}}$. If, in addition, the smooth 4-sphere has a unique smooth structure up to diffeomorphism, then P induces an injective function $C_{\mathrm{sm}}\to C_{\mathrm{sm}}$. No sliceness hypothesis on P(U) is required in this theorem; the proof constructs an auxiliary pattern with ribbon closure.
 
 ## Statement references
 
@@ -60,7 +57,7 @@ Let P be a pattern of nonzero winding number n. Then P induces an injective func
 
 [F3] Weak injectivity and the auxiliary connected-sum reduction are proved with their category hypotheses ([[lem-cdr-weak-injectivity-and-auxiliary-pattern-reduction]]).
 
-[F4] The finite connected-sum/inverse instances for these actual knots and concordances are available without an ambient choice axiom by the compact-input construction in [F3], step 1.1. The general group theorem records these same operations with AC_omega ([[thm-cdr-concordance-categories-form-abelian-groups]]); its stronger choice assumption is not a premise of this unqualified theorem.
+[F4] The finite connected-sum/inverse instances for these actual knots and concordances are available without an ambient choice axiom by the compact-input construction in [F3], step 1.1. The general group theorem records these same operations with $\mathrm{AC}_\omega$ ([[thm-cdr-concordance-categories-form-abelian-groups]]); its stronger choice assumption is not a premise of this unqualified theorem.
 
 [F5] The satellite assignment descends to the concordance classes after concordance preservation ([[lem-satellite-operator-preserves-concordance]]).
 
@@ -68,7 +65,7 @@ Let P be a pattern of nonzero winding number n. Then P induces an injective func
 
 ## Proof
 
-1.1 Use the finite-input choice qualification in [F3]: encode the actual finite knots, pattern and witnessing concordance, including the finite smooth presentation and chain homotopies when localized coefficients are involved. Execute only the unconditional geometry in $L[r]$ and decode actual compact witnesses, finite group words and chain identities into $V$. Thus the finite uses of [F4] below do not apply an AC_omega theorem without its premise. No countable collection of representatives is selected. In the conditional ordinary smooth direction, the actual contractible smooth ball and capped sphere are constructed and decoded before the supplied smooth sphere-uniqueness hypothesis is applied in $V$. No transfer of that conditional hypothesis to $L[r]$ is made. [F2, F3, F4, given, construct]
+1.1 Use the finite-input choice qualification in [F3]: encode the actual finite knots, pattern and witnessing concordance, including the finite smooth presentation and chain homotopies when localized coefficients are involved. Execute only the unconditional geometry in $L[r]$ and decode actual compact witnesses, finite group words and chain identities into $V$. Thus the finite uses of [F4] below do not apply an $\mathrm{AC}_\omega$ theorem without its premise. No countable collection of representatives is selected. In the conditional ordinary smooth direction, the actual contractible smooth ball and capped sphere are constructed and decoded before the supplied smooth sphere-uniqueness hypothesis is applied in $V$. No transfer of that conditional hypothesis to $L[r]$ is made. [F2, F3, F4, given, construct]
 
 2.1 Suppose P(K)=P(J) as concordance classes. By [F5] these values are defined in the chosen category, and the group law gives −[P(K)]#[P(J)]=0. [F2, F4, F5, step 1.1, given, algebra]
 

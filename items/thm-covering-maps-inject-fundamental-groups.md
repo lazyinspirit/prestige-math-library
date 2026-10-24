@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-covering-maps-inject-fundamental-groups.json
+  precheck: pass
 id: thm-covering-maps-inject-fundamental-groups
 kind: theorem
 title: "A covering map induces an injective homomorphism on fundamental groups"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -52,3 +52,14 @@ For a covering $p:(E,e_0)\to(B,b_0)$, the induced homomorphism $p_*:\pi_1(E,e_0)
 3.1 Preserve the chosen basepoints and the exact published definition of the induced map. [step 2.1, F2]
 
 4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎
+
+## Remarks
+
+For the lifting construction in steps 1.1–2.1, let $I=[0,1]$ and let $\alpha:I\to E$ be a loop at $e_0$ whose image under $p$ is nullhomotopic as a based loop. Choose a homotopy $H:I\times I\to B$ with $H(s,0)=p(\alpha(s))$, $H(s,1)=b_0$, and $H(0,t)=H(1,t)=b_0$. With $i_0(s)=(s,0)$, the lifting problem is:
+
+```tikzcd
+I \arrow[r, "\alpha"] \arrow[d, "i_0"'] & E \arrow[d, "p"] \\
+I\times I \arrow[r, "H"'] \arrow[ur, dashed, "\widetilde H" description] & B
+```
+
+The square commutes because $H\circ i_0=p\circ\alpha$. Its dashed lift satisfies $p\circ\widetilde H=H$ and $\widetilde H\circ i_0=\alpha$ by [F1]. Uniqueness on the two side edges forces $\widetilde H(0,t)=\widetilde H(1,t)=e_0$; uniqueness on the final edge then forces $\widetilde H(s,1)=e_0$. Thus $\widetilde H$ is a homotopy of based loops from $\alpha$ to the constant loop at $e_0$. The diagram illustrates the lifting construction; the proof above remains independent of it.

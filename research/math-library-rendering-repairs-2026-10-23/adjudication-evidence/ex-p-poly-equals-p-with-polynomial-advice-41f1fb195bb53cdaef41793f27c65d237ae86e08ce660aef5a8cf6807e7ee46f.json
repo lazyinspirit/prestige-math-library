@@ -1,0 +1,75 @@
+{
+  "id": "ex-p-poly-equals-p-with-polynomial-advice",
+  "agent": "/root/rendering_repair_coordinator/cpt_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unparsed-tex-style-quotation-markers",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200×1400 PNG visibly prints two literal opening backticks before inputs in Verification step 2.1. The frozen and current pre-edit source agree: TeX-style opening `` and closing double apostrophes surround prose containing working inline math. This is unsupported quotation markup in the Markdown renderer, rather than a failed mathematical formula. Replacing those quotation markers alone preserves the exact gate-list text and all math.",
+      "action": "Replaced the opening double backticks and closing double apostrophes with Unicode curly quotation marks; retained every gate, variable, sentence, and proof citation.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Verification step 2.1 now uses supported Unicode quotation marks around the concrete gate list.",
+  "source_lines_after": {
+    "46": "2.1 Conversely encode $C_2$ by the topological list “inputs $x_1,x_2$; NOT $x_1$; designate the NOT gate as output.” A fixed evaluator given this list as advice returns $1$ on $00$ and, for every two-bit $x$, returns $\\neg x_1$; the declared input $x_2$ is simply unused. [L1, step 1.1, construct]"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "7b7be1e46a9220f91443ce3126a0d8cc27d8dc4647710b22166b7bae0fa61822",
+  "current_raw_sha256": "aa61879736755cb30570425aead54f9690d538ec26c5b75c33db24ae4aea8d4f",
+  "publication_status_preserved": true,
+  "metadata_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-p-poly-equals-p-with-polynomial-advice.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-p-poly-equals-p-with-polynomial-advice.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-p-poly-equals-p-with-polynomial-advice.md",
+            "item_id": "ex-p-poly-equals-p-with-polynomial-advice",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-p-poly-equals-p-with-polynomial-advice.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/ex-p-poly-equals-p-with-polynomial-advice--01.png",
+    "original_resolution_viewed": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt_001/manifest.json",
+    "preview_source_sha256": "aa61879736755cb30570425aead54f9690d538ec26c5b75c33db24ae4aea8d4f",
+    "preview_html_sha256": "cd6d84151643bc7303a3df926f86ea3ee1d170a1cc8373c0ae646718e3a0af0c",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/cpt_001/screenshots/ex-p-poly-equals-p-with-polynomial-advice--01.png",
+    "changed_region_original_resolution_viewed": true,
+    "result": "The final standalone original-resolution native ItemBody screenshot shows proper opening and closing curly quotes in step 2.1, no literal backticks, and retained typeset x_1, x_2, C_2, and negation. Complete item visible; no further confirmed math-rendering defect observed.",
+    "limitations": [
+      "Local native ItemBody preview only, not production HTTP route; preview reference map reports 17 unrelated parse diagnostics."
+    ]
+  }
+}

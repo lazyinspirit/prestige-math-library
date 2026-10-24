@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership.json
+  precheck: pass
 id: ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership
 kind: example
 title: "$x^{-a}$ on $(0,1)$ and on $(1,\\infty)$ calibrates $L^p$ membership"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-calligraphic-l-p-on-a-measure-space, thm-real-power-continuity-and-derivatives, thm-logarithm-derivative-and-integral, thm-comparison-test-for-improper-integrals]
 proof_strategy: "Integrate x^(-ap) on (0, 1) and on (1, infinity) using the real-power antiderivative and compare the two thresholds ap < 1 and ap > 1."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -46,7 +46,7 @@ So the single power family produces both inclusion failures on $\mathbb R$.
 
 ## Verification
 
-**Proof technique:** Integrate $x^{-ap}$ on $(0,1)$ and on $(1,\infty)$ using the real-power antiderivative and compare the two thresholds $ap<1$ and $ap>1$.
+**Proof technique:** Integrate the negative ap power of x over the intervals from zero to one and from one to infinity, using the real-power antiderivative, and compare the thresholds ap less than one and ap greater than one.
 
 1.1 Because $|f_0|^p=x^{-ap}\chi_{(0,1)}$ and $|f_\infty|^p=x^{-ap}\chi_{(1,\infty)}$, [L1] reduces both claims to the improper integrals of $x^{-ap}$. [L1, given]
 

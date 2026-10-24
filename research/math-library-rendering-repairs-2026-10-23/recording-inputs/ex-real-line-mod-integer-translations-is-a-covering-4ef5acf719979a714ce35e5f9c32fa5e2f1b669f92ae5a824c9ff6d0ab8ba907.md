@@ -1,0 +1,103 @@
+---
+id: ex-real-line-mod-integer-translations-is-a-covering
+kind: example
+title: "The quotient $\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering with integer translations as deck transformations"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [thm-orbit-map-of-a-covering-space-action-is-a-covering, def-deck-transformation-and-deck-group, def-quotient-topology, def-integers, lem-integer-part]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
+sources:
+  scraped: []
+  references:
+    - title: "Allen Hatcher, Algebraic Topology, §1.3"
+      url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "Marco Gualtieri, MAT1300 Week 4 Term 2, §1.6"
+      url: "https://www.math.toronto.edu/mgualt/MAT1300/Week%204%20Term%202.pdf"
+    - title: "Omar Antolín Camarena, Proper local homeomorphisms and covering maps"
+      url: "https://www.matem.unam.mx/~omar/notes/propetale.html"
+pipeline_run: null
+---
+
+## Example
+
+For the quotient by integer translation, $q:\mathbb R\to\mathbb R/\mathbb Z$ is a covering map, and every deck transformation is a unique translation $x\mapsto x+n$ with $n\in\mathbb Z$.
+
+## Facts & Assumptions
+
+**Given:** The objects, hypotheses, and choice principles stated above.
+
+[F1] For a covering-space action of $G$ on $E$, the orbit map $E\to E/G$ is a covering. If $E$ is path-connected, the deck group of this covering consists exactly of the transformations supplied by $G$. ([[thm-orbit-map-of-a-covering-space-action-is-a-covering]]).
+
+[F2] For a covering $p:E\to B$, a **deck transformation** is an isomorphism $h:E\to E$ over $B$, so $p\circ h=p$ (def-map-and-isomorphism-of-covering-spaces). Deck transformations form the **deck group** $\operatorname{Deck}(p)$ under composition, and this group acts on $E$ by evaluation (def-group, def-group-action). ([[def-deck-transformation-and-deck-group]]).
+
+[F3] **The quotient topology.** Let $(X, \mathcal{T})$ be a topological space (def-topological-space), let $Y$ be a set and let $q : X \to Y$ be a surjection (def-injection-surjection-bijection). The **quotient topology** on $Y$ induced by $q$ is the final topology of the one-element family $(q)$ (def-initial-and-final-topology): $$\mathcal{T}_q \;:=\; \{\, V \subseteq Y : q^{-1}[V] \in \mathcal{T} \,\} .$$ That this is a topology is discharged in def-initial-and-final-topology, where every final topology is verified to satisfy (T1), (T2) and (T3). Dually, $C \subseteq Y$ is closed in $\mathcal{T}_q$ exactly when $q^{-1}[C]$ is closed in $X$, because $q^{-1}[Y \setminus V] = X \setminus q^{-1}[V]$. ([[def-quotient-topology]]).
+
+[F4] On the set $\mathbb{N} \times \mathbb{N}$ of pairs of natural numbers, define $$(a,b) \sim (c,d) \iff a + d = b + c.$$ This is an equivalence relation (lem-int-equivalence). The **integers** are the quotient $$\mathbb{Z} := (\mathbb{N} \times \mathbb{N}) / \sim,$$ and we write $[(a,b)]$ for the equivalence class of $(a,b)$. ([[def-integers]]).
+
+[F5] Identify $\mathbb Z$ with its canonical copy inside $\mathbb R$ along the embeddings $\mathbb N\to\mathbb Z\to\mathbb Q\to\mathbb R$; then for every real $x$ there is exactly one integer $m$ with $m\le x<m+1$, written $\lfloor x\rfloor$ ([[lem-integer-part]]).
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 By [F5] the integers sit inside $\mathbb R$ as a subgroup under the ordered-field operations, so $x\sim y$ iff $x-y\in\mathbb Z$ is an equivalence relation on $\mathbb R$; [F4] supplies only the abstract construction of $\mathbb Z$ and not its copy in $\mathbb R$, so the embedding of [F5] is what makes the relation and the translations below meaningful. Take the quotient topology of [F3] on $\mathbb R/\mathbb Z$. [given, F3, F4, F5]
+
+2.1 For an **open** interval $I$ of length below $1$ the translates $I+k$, $k\in\mathbb Z$, are pairwise disjoint, since two points of $I$ differ by less than $1$ while distinct integer translates differ by at least $1$ in the order of [F5]; the preimage $q^{-1}(q[I])=\bigcup_{k\in\mathbb Z}(I+k)$ is then a union of open sets, so $q[I]$ is open and evenly covered. Openness of $I$ is required and not cosmetic: for $I=[0,\tfrac12]$ the preimage $\bigcup_{k\in\mathbb Z}[k,k+\tfrac12]$ is not open, so $q[I]$ is not even a neighbourhood. [step 1.1, F3, F4, F5]
+
+3.1 Each integer translation $\tau_n(x)=x+n$ is a homeomorphism satisfying $q\tau_n=q$. The intervals in step 2.1 show that this is a covering-space action of $\mathbb Z$ on $\mathbb R$. Since $\mathbb R$ is path-connected by straight-line paths, [F1] identifies the entire deck group with these translations. More explicitly, a deck transformation $h$ has $h(0)\in q^{-1}(q(0))=\mathbb Z$; the translation $\tau_{h(0)}$ agrees with $h$ at $0$, and the one-point determination used in [F1] makes them equal. Distinct integers give distinct translations. [step 2.1, F1, F2, F3]
+
+4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎
+
+
+## Remarks
+
+For an open interval $I$ of length below $1$, put $U=q[I]$. The picture shows three of the infinitely many disjoint sheets $I+k$ above $U$; each downward arrow denotes the homeomorphism $q|_{I+k}:I+k\to U$. Open endpoint rings indicate that the intervals and the displayed quotient arc exclude their endpoints. The circle is a schematic picture of the quotient, not an additional premise of the proof.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw (-4.9,0)--(-3.78,0);
+\draw (-2.22,0)--(-0.78,0);
+\draw (0.78,0)--(2.22,0);
+\draw[->] (3.78,0)--(5,0) node[right] {$\mathbb R$};
+\node at (-4.4,0.35) {$\cdots$};
+\node at (4.4,0.35) {$\cdots$};
+\draw[very thick] (-3.62,0)--(-2.38,0);
+\draw[very thick] (-0.62,0)--(0.62,0);
+\draw[very thick] (2.38,0)--(3.62,0);
+\draw (-3.7,0) circle (0.08);
+\draw (-2.3,0) circle (0.08);
+\draw (-0.7,0) circle (0.08);
+\draw (0.7,0) circle (0.08);
+\draw (2.3,0) circle (0.08);
+\draw (3.7,0) circle (0.08);
+\node[above] at (-3,0.12) {$I-1$};
+\node[above] at (0,0.12) {$I$};
+\node[above] at (3,0.12) {$I+1$};
+\draw[->] (0,0.8) to[bend left=25] node[above] {$\tau_1(x)=x+1$} (3,0.8);
+\draw (-0.65,-2.15) arc (135:405:0.92);
+\draw[very thick] (-0.59,-2.09) arc (130:50:0.92);
+\draw (-0.65,-2.15) circle (0.08);
+\draw (0.65,-2.15) circle (0.08);
+\node at (0,-2.42) {$U$};
+\node[right] at (1.12,-2.8) {$\mathbb R/\mathbb Z$};
+\draw[->] (-3,-0.2) to[bend right=15] node[left] {$q|_{I-1}$} (-0.42,-1.94);
+\draw[->] (0,-0.2)--node[right] {$q|_I$} (0,-1.76);
+\draw[->] (3,-0.2) to[bend left=15] node[right] {$q|_{I+1}$} (0.42,-1.94);
+\node at (0,-4.1) {$q\circ\tau_n=q\quad(n\in\mathbb Z)$};
+\end{tikzpicture}
+```
+
+Step 2.1 gives $q^{-1}(U)=\bigcup_{k\in\mathbb Z}(I+k)$ and the disjointness of these open sheets. Step 3.1 gives the translations $\tau_n(x)=x+n$ and $q\circ\tau_n=q$: shifting a sheet by an integer leaves its image in the quotient unchanged. The rigorous verification above is independent of the illustration.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-minimal-parabolic-flag-projection-is-p1-bundle.json
+  precheck: pass
 id: thm-minimal-parabolic-flag-projection-is-p1-bundle
 kind: theorem
 title: A minimal-parabolic flag projection is a projective-line bundle
@@ -16,13 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups"
@@ -43,7 +39,7 @@ root with minimal parabolic $P_\alpha=B\sqcup Bn_\alpha B$, root subgroup
 $U_{-\alpha}$ and Weyl subgroup $\{1,s_\alpha\}$ as in
 [[lem-semisimple-minimal-parabolic-root-subgroup]]. Let
 $\pi_B:G\to X_B$ and $\pi_\alpha:G\to X_\alpha$ be the orbit maps of
-[[lem-semisimple-projective-orbit-flag-quotients]]. Then:
+[[lem-semisimple-projective-orbit-flag-quotients|Projective orbit constructions for $G/B$ and $G/P_\alpha$]]. Then:
 
 (i) the induced map $f:X_B\to X_\alpha$, $g[v_B]\mapsto g[v_\alpha]$, is a
 surjective morphism of varieties, well defined because $B\subseteq P_\alpha$,
@@ -60,7 +56,7 @@ of [[lem-semisimple-minimal-parabolic-root-subgroup]];
 
 [F1] $P_\alpha$ is a closed connected subgroup containing $B$ and $U_{-\alpha}$ with $P_\alpha=B\sqcup Bn_\alpha B$, $\operatorname{Lie}P_\alpha=\mathfrak b\oplus\mathfrak g_{-\alpha}$ and $\dim P_\alpha=\dim B+1$; the coset space $P_\alpha/B$ is described by the two affine charts $z\mapsto u_{-\alpha}(z)B$ and $t\mapsto u_\alpha(t)n_\alpha B$ glued by $t=z^{-1}$. ([[lem-semisimple-minimal-parabolic-root-subgroup]])
 
-[F2] The stabilizer of $[v_B]$ in $G$ is $B$, the stabilizer of $[v_\alpha]$ is $P_\alpha$, and the fibres of $\pi_B$ and $\pi_\alpha$ are exactly the right cosets of $B$ respectively $P_\alpha$; both orbit maps are surjective onto the closed orbits $X_B=\pi_B(G)$, $X_\alpha=\pi_\alpha(G)$, which are smooth projective of dimensions $|\Phi^+|$ and $|\Phi^+|-1$. ([[lem-semisimple-projective-orbit-flag-quotients]])
+[F2] The stabilizer of $[v_B]$ in $G$ is $B$, the stabilizer of $[v_\alpha]$ is $P_\alpha$, and the fibres of $\pi_B$ and $\pi_\alpha$ are exactly the right cosets of $B$ respectively $P_\alpha$; both orbit maps are surjective onto the closed orbits $X_B=\pi_B(G)$, $X_\alpha=\pi_\alpha(G)$, which are smooth projective of dimensions $|\Phi^+|$ and $|\Phi^+|-1$. ([[lem-semisimple-projective-orbit-flag-quotients|Projective orbit constructions for $G/B$ and $G/P_\alpha$]])
 
 [F3] The orbit map $\pi_\alpha:G\to X_\alpha$ is a Zariski-locally trivial right $P_\alpha$-torsor. Its open chart $V=\sigma_\alpha(U^-_\alpha)$ satisfies $\pi_\alpha^{-1}(V)\cong V\times P_\alpha$, and the single $G$-translates $gV$ cover $X_\alpha$, with the product torsor transported to each translate. Likewise $\pi_B$ is a right $B$-torsor and represents the fppf sheaf quotient $G/B$. ([[lem-semisimple-flag-torsor-zariski-charts]])
 

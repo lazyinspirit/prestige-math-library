@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-cauchy-sequence-in-the-additive-p-adic-metric.json
+  precheck: pass
 id: ex-a-cauchy-sequence-in-the-additive-p-adic-metric
 kind: example
-title: "A standard p-adic digit sequence is Cauchy and converges in Zp"
+title: 'A standard p-adic digit sequence is Cauchy and converges in $\mathbb Z_p$'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-p-adic-metric-on-zp, thm-zp-is-compact-hausdorff-totally-disconnected-and-complete]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

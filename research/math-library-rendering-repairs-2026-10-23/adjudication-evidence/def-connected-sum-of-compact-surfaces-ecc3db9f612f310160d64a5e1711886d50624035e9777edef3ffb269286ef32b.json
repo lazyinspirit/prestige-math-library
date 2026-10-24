@@ -1,0 +1,116 @@
+{
+  "id": "def-connected-sum-of-compact-surfaces",
+  "agent": "/root/rendering_repair_supervisor2/top_010",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200x1400 capture has only the quotient formula and prose. Two punctured-surface silhouettes, marked boundary points, and a boundary-map arrow materially explain which points are identified without suggesting any choice-independence theorem.",
+      "action": "Added one explanatory TikZ schematic and caveats in a final Remarks section; preserved the complete original Definition byte-for-byte.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a two-punctured-surface schematic with circles labelled ∂D_S and ∂D_T, points x and φ(x), and a φ arrow. Caption explicitly distinguishes schematic exterior silhouettes from boundary components and repeats the conditional orientation-reversal requirement.",
+  "source_lines_after": {
+    "remarks": [
+      55,
+      85
+    ],
+    "tikz": [
+      64,
+      80
+    ],
+    "original_definition_unchanged": [
+      31,
+      53
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "S minus int(D_S) and T minus int(D_T), with their respective boundary circles.",
+      "check": "The Definition lines 33–40 takes these as the disjoint-union summands; diagram labels reproduce exactly these summands. Outer ellipses are explicitly silhouettes, not claimed planar embeddings or additional boundary components."
+    },
+    {
+      "map": "φ: ∂D_S → ∂D_T",
+      "check": "Definition lines 35–37 specifies a homeomorphism on these circles. The left dot lies on the radius-0.55 circle at (-2.5,0.55); the right dot lies on the corresponding circle at (2.5,0.55). Labels x and φ(x) and the left-to-right arrow match the stated domain/codomain."
+    },
+    {
+      "relation": "x ~_φ φ(x)",
+      "check": "Definition lines 42–44 identifies exactly these pairs, for every boundary point, with all other points left distinct. Remarks repeat that quantifier and singleton behavior; the arrow is a representative pair, not a path in the quotient."
+    },
+    {
+      "orientation": "For oriented S,T, φ reverses induced boundary orientations.",
+      "check": "Definition lines 44–46 is repeated conditionally in the caption. No direction around either circle is drawn, so the planar layout asserts no angular preservation or incompatible orientation relation."
+    },
+    {
+      "independence": "The figure is expository only.",
+      "check": "Definition lines 48–53 retaining choices remains byte-identical; Remarks expressly make no choice-independence assertion. No proof is supplied or required for this definition, and its mathematical text remains independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-connected-sum-of-compact-surfaces.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-connected-sum-of-compact-surfaces.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-connected-sum-of-compact-surfaces.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Canonical repair-preview.mts --ids def-connected-sum-of-compact-surfaces --out research/math-library-rendering-repairs-2026-10-23/previews/top-010-fresh, with repository-local TMPDIR and native web tsconfig",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 1,
+        "katex_errors": [],
+        "tikz_count": 1,
+        "diagram_failures": [],
+        "reference_map_diagnostics": 13
+      }
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "1da0d18b3eee5ed7b76342129eeb33753b903dc8f1df275f972be1156ab9d3c8",
+    "current_raw_sha256": "14bb09c0d1d70322f12a7a25c56e3f40722726bd195b6f9d0319a7c122558bae",
+    "pre_edit_guard": "Exact current raw SHA256 equalled queue before_raw_sha256 immediately before append.",
+    "original_capture": "research/math-library-rendering-audit-2026-10-23/topology/screenshots/def-connected-sum-of-compact-surfaces--01.png",
+    "original_capture_sha256": "f9c10a7f3d1fa4b93a4e04e92e76705f24c4687c6c7749df23e32e098c47c883",
+    "original_standalone_original_resolution_viewed": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/top-010-fresh/manifest.json",
+    "preview_manifest_sha256": "d3260fa87a4232ec7cc6fddd60b8506ef83ba0737c8b81c24b9e95165dc5d3ff",
+    "preview_source_sha256": "14bb09c0d1d70322f12a7a25c56e3f40722726bd195b6f9d0319a7c122558bae",
+    "native_diagram_standalone": "research/math-library-rendering-repairs-2026-10-23/previews/top-010-fresh/screenshots/diagram-native.png",
+    "native_standalone_original_resolution_viewed": true,
+    "visual_observation": "Standalone native figure screenshot visibly contains both outer ellipses, both hole circles, both marked points, all six mathematical labels and the φ arrow; light strokes and labels contrast against black and do not overlap. No TikZ compile failure.",
+    "frozen_current_comparison": "The full frozen carrier is an exact byte prefix of current carrier; only final Remarks were appended. Frontmatter including title, status, verification, dependencies and sources is byte-identical."
+  },
+  "remaining_issues": [
+    "Fresh complete-page PNGs show capture artifacts: the original title/Definition region is blank despite unchanged source and present HTML. A second capture after fonts.ready and 1500 ms also omitted prose. No source repair was inferred from this artifact. The actual native figure was separately captured and viewed at original resolution; the first canonical fresh PNG also visibly shows the new Remarks prose. Full current-page prose visual coverage is therefore limited.",
+    "Local preview is ItemBody SSR with current native styles and renderer, not the production route or metadata footer. It reported 13 unrelated reference-map parsing diagnostics; assigned links resolve. No external source reading or broad mathematical audit claimed."
+  ]
+}

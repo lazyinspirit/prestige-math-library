@@ -1,0 +1,65 @@
+---
+id: ex-rounding-neyman-allocation-to-integer-sample-sizes
+kind: example
+title: Continuous Neyman allocation may require constrained rounding
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 8
+deps:
+  - def-stratified-sampling-design-and-estimator
+  - thm-stratified-total-unbiasedness-and-variance
+  - thm-neyman-allocation-minimizes-stratified-variance
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, MTH 417 lecture notes, Chapter 4: Stratified Sampling, PDF pp. 8–9 and 16"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter4-sampling-stratified-sampling.pdf"
+    - title: "Robin Arnold, STAT392 Sample Surveys, Chapter 8: Stratified Sampling, §8.8 and Notes 1–2"
+      url: "https://homepages.ecs.vuw.ac.nz/~rarnold/STAT392/SampleSurveysBook/_book/stratified-sampling"
+    - title: "Tommy Wright, A Simple Method of Exact Optimal Sample Allocation under Stratification with Any Mixed Constraint Patterns, U.S. Census Bureau, §§2.1–2.3"
+      url: "https://www.census.gov/content/dam/Census/library/working-papers/2014/adrm/rrs2014-07.pdf"
+verification:
+  precheck: pass
+---
+
+## Example
+
+Take two strata of sizes $2$ and $10$. In the first, let the values be
+$(-1/\sqrt2,1/\sqrt2)$; in the second, take five copies each of
+$-9/\sqrt{10}$ and $9/\sqrt{10}$. With total sample size six, the continuous
+Neyman allocation rounds to zero units in the first stratum under nearest-
+integer rounding, which violates the stratified design's positive
+sample-size requirement.
+
+## Facts & Assumptions
+
+**Given:** The fixed strata above, independent within-stratum SRSWOR, total
+sample size six, and componentwise rounding to the nearest integer.
+
+[F1] [[def-stratified-sampling-design-and-estimator]]: A stratified design
+requires integer sample sizes $1\le n_h\le N_h$; for a noncertainty stratum,
+$S_h^2=(N_h-1)^{-1}\sum_{i\in U_h}(y_i-\bar y_h)^2$.
+
+[F2] [[thm-neyman-allocation-minimizes-stratified-variance]]: With positive
+noncertainty stratum variances and a fixed positive total sample size, the
+uncapped continuous optimum is proportional to $N_hS_h$; this relaxation
+imposes no integer, capacity, lower-bound, or minimum-sample constraints.
+
+[F3] [[thm-stratified-total-unbiasedness-and-variance]]: For an admissible
+allocation, the stratified total's variance is the sum of the stratum terms
+$N_h^2(1-n_h/N_h)S_h^2/n_h$ over noncertainty strata.
+
+## Verification
+
+1.1 The first stratum has mean zero and $S_1^2=((-1/\sqrt2)^2+(1/\sqrt2)^2)/(2-1)=1$. The second has mean zero and $S_2^2=10(9/\sqrt{10})^2/(10-1)=9$, so $S_2=3$. [given, choose, algebra]
+
+2.1 The Neyman weights are $N_1S_1=2$ and $N_2S_2=30$. By [F2] and step 1.1, $x_1=6(2)/(2+30)=3/8$ and $x_2=6(30)/(2+30)=45/8$. Nearest-integer rounding gives $(0,6)$, which violates [F1]'s $n_1\ge1$ condition. [F1, F2, step 1.1, algebra]
+
+3.1 Allocation $(n_1,n_2)=(1,5)$ is admissible. By [F3] and step 1.1 its variance is $2^2(1-1/2)1/1+10^2(1-5/10)9/5=2+90=92$; this feasible correction is not claimed to solve every constrained integer problem. [F1, F3, step 1.1, step 2.1, algebra] ∎

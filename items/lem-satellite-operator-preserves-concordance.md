@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-satellite-operator-preserves-concordance.json
+  precheck: pass
 id: lem-satellite-operator-preserves-concordance
 kind: lemma
 title: "Satellite operators preserve concordance"
@@ -17,17 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   scraped: []
   references:
@@ -44,7 +36,7 @@ sources:
 
 ## Statement
 
-Let P⊂S¹×D² be a smooth oriented pattern. If oriented knots K₀ and K₁ are concordant in one of the four categories C_sm, C_top, C_ex or C^{1/n}, then P(K₀) and P(K₁) are concordant in the same category. Thus P induces a well-defined set map on each of these concordance sets.
+Let $P\subset S^1\times D^2$ be a smooth oriented pattern. If oriented knots $K_0$ and $K_1$ are concordant in one of the four categories $C_{\mathrm{sm}}$, $C_{\mathrm{top}}$, $C_{\mathrm{ex}}$ or $C^{1/n}$, then $P(K_0)$ and $P(K_1)$ are concordant in the same category. Thus $P$ induces a well-defined set map on each of these concordance sets.
 
 ## Statement references
 
@@ -52,9 +44,9 @@ Let P⊂S¹×D² be a smooth oriented pattern. If oriented knots K₀ and K₁ a
 
 ## Facts & Assumptions
 
-**Given:** A pattern P and a concordance annulus A from K₀ to K₁ in one of the stated ambient categories.
+**Given:** A pattern $P$ and a concordance annulus $A$ from $K_0$ to $K_1$ in one of the stated ambient categories.
 
-[F1] Satellite insertion uses a zero-framed tubular copy of S¹×D² around each endpoint knot ([[def-satellite-induced-concordance-operator]]).
+[F1] Satellite insertion uses a zero-framed tubular copy of $S^1\times D^2$ around each endpoint knot ([[def-satellite-induced-concordance-operator]]).
 
 [F2] Each category specifies the ambient 4-manifold and regularity of its concordance annulus ([[def-cdr-satellite-concordance-categories]]).
 
@@ -68,7 +60,7 @@ Let P⊂S¹×D² be a smooth oriented pattern. If oriented knots K₀ and K₁ a
 
 1.1 For the TOP annulus the ambient manifold is the standard compact product, and the given annulus and end collars have exactly the finite pair-code description in [F5]. Apply the external normal theorem [F3] inside $L[r]$ with those collars. Restrict the resulting tube to a compact disk bundle, still with a slightly wider domain, and export its forward/inverse, pair and collar certificates as in [F5]. This gives an actual relative tube in $V$ without ambient AC. For the smooth annuli in the other three categories, a finite chart partition of unity gives a metric and connection along the compact annulus; parallel transport and the compact inverse-function construction give the smooth tube. Only finitely many chart choices and least integer radii are needed. Thus the external TOP input used below is earned at this particular finite input; no global choice-free version of FQ is being asserted. [F2, F3, F5, given, construct]
 
-1.2 In the smooth product category, choose a tubular neighborhood of the smooth annulus A. Its oriented normal 2-plane bundle over A has relative Euler obstruction in H²(A,∂A;Z)≅Z. The boundary trivializations are the zero framings of K₀ and K₁; the relative obstruction is the difference of their self-linking numbers, hence zero. A relative framing therefore identifies a neighborhood of A with A×D² and agrees with the two prescribed endpoint zero-framed neighborhoods. [F1, F2, given]
+1.2 In the smooth product category, choose a tubular neighborhood of the smooth annulus $A$. Its oriented normal 2-plane bundle over $A$ has relative Euler obstruction in $H^2(A,\partial A;\mathbb Z)\cong\mathbb Z$. The boundary trivializations are the zero framings of $K_0$ and $K_1$; the relative obstruction is the difference of their self-linking numbers, hence zero. A relative framing therefore identifies a neighborhood of $A$ with $A\times D^2$ and agrees with the two prescribed endpoint zero-framed neighborhoods. [F1, F2, given]
 
 2.1 In that framed neighborhood insert $P$ in every disk fiber. Orient the inserted annulus by the interval direction followed by the pattern orientation. Its oriented boundary is then $-P(K_0)$ at the lower end and $P(K_1)$ at the upper end. The product collars of $A$ and the endpoint framings give product collars matching the ambient end collars, and the two endpoint patterns use the preferred zero framings. This proves concordance preservation for smooth annuli in a standard product. [F1, F2, step 1.2, algebra]
 

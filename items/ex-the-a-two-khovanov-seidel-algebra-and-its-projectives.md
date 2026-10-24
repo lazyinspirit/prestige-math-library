@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-a-two-khovanov-seidel-algebra-and-its-projectives.json
+  precheck: pass
 id: ex-the-a-two-khovanov-seidel-algebra-and-its-projectives
 kind: example
-title: "The algebra A_2 and its vertex projectives"
+title: "The algebra $A_2$ and its vertex projectives"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -17,9 +20,7 @@ sources:
   references:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §1b, printed pp. 3-4"
       url: "https://arxiv.org/pdf/math/0006056"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Example

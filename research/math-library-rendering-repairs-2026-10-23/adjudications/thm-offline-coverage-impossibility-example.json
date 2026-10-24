@@ -1,0 +1,104 @@
+{
+  "id": "thm-offline-coverage-impossibility-example",
+  "agent": "/root/rendering_repair_coordinator/dorl_030",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original image contains only prose for the two deterministic MDPs. A paired state-transition illustration materially clarifies exactly which transition is observed identically and which unobserved reward changes, the central identifiability obstruction.",
+      "action": "Added paired deterministic transition diagrams and an explanatory legend in final Remarks.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended Remarks with paired M_+ and M_- TikZ diagrams showing identical logged a transitions, differing unlogged b rewards, and c self-loops. All original source bytes, including title, metadata, status, Statement and proof, remain an exact prefix.",
+  "source_lines_after": {
+    "remarks": [
+      60,
+      81
+    ],
+    "tikz": [
+      64,
+      79
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Each panel has precisely states s_0 and z; arrows encode deterministic next-state/reward rows, not general morphisms.",
+      "justification": "Statement line 35 fixes the state set, action sets, rewards and H=1; proof step 1.1 verifies that each row has mass 1."
+    },
+    {
+      "relations": "In both panels, a:s_0\u2192z has reward 0; c:z\u2192z has reward 0. In M_+, b:s_0\u2192z has reward +1; in M_-, b:s_0\u2192z has reward -1. Every arrow head points to the correct next state.",
+      "justification": "These are exactly the six transition rows in Statement line 35. Each rendered panel has two vertices and three directed edges including the visible c self-loop; z has two incoming initial edges and its loop, s_0 has the two outgoing initial edges."
+    },
+    {
+      "relations": "Solid a and c arrows denote behavior-selected actions; dashed b initial arrows denote target selection; both policies choose c at z. The self-loop specifies the process row, not an extra reward beyond the H=1 horizon.",
+      "justification": "Statement line 35 gives deterministic behavior a, target b, and common c. The Remarks legend explicitly states H=1 and each row probability 1."
+    },
+    {
+      "relations": "The logged trajectory remains (s_0,a,0,z) in both panels, while target values are +1 and -1.",
+      "justification": "Proof step 1.1 establishes the common point-mass data law; step 1.2 computes target expected one-step rewards and unique maximizers. The diagram adds no probabilistic or inferential premise; unchanged step 2.1 gives the impossibility proof independently."
+    }
+  ],
+  "checks": {
+    "before_guard": {
+      "sha256": "286f9bc67d092bf59ac60ca08e76f5bd746b7050818ae9464c1673a9b70469ee",
+      "matched_immediately_before_edit": true
+    },
+    "protected_metadata": "Frontmatter byte-identical; status remains published. Entire original carrier preserved as exact prefix.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-offline-coverage-impossibility-example.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-offline-coverage-impossibility-example.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-offline-coverage-impossibility-example.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-030/manifest.json",
+      "source_sha256": "cd84d0054007de1b7ee3259de7ed4d34750b0fb031cbe6a48bd1546b90563340",
+      "html_sha256": "e39b3d163aae3849ca30162a04fbd46234d3bc010ece061dd839deb2cf2390dd",
+      "reference_map_sha256": "39b12f341942bcbbc4078fa65dfa8d6aa26d6da84b7cc4793246fd2c570e9a78",
+      "exit_code": 0,
+      "tiles": 2,
+      "viewed_original_resolution": [
+        1,
+        2
+      ],
+      "visual_result": "Compiled native SVG present. Standalone tile 2 shows both panels, all six edges including both closed c self-loops, readable labels, separated solid/dashed routes and no clipping or overlap. CurrentColor strokes/text contrast clearly against black; unfilled state outlines remain visible. No open-versus-closed interval endpoints occur in this transition graph. No cycle shorthand used. SVG body uses stroke=currentColor, stroke=none, fill=none, and exactly two stroke-dasharray paths."
+    }
+  },
+  "evidence_path_resolution": {
+    "declared_path_missing": true,
+    "resolved_original_screenshot": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-offline-coverage-impossibility-example--01.png",
+    "sha256": "0a060eb8ace460a8588768ab1056f4f015901e47d981a01b75f7dcac9fce6f70",
+    "matches_intake_hash": true,
+    "viewed_standalone_original_resolution": true
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview only; no HTTP or live-site access. Preview reference-map diagnostics concern 16 unrelated parse diagnostics; the assigned item rendered successfully."
+  ]
+}

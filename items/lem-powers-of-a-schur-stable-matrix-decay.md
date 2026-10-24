@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-powers-of-a-schur-stable-matrix-decay.json
+  precheck: pass
 id: lem-powers-of-a-schur-stable-matrix-decay
 kind: lemma
 title: "Powers of a Schur-stable matrix decay geometrically up to a polynomial factor"
@@ -31,12 +34,7 @@ sources:
         and linear matrix inequality, Memorandum COSOR 94-16"
       url: "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf"
       locator: "§§2.5–2.7, stable finite invariant subspaces and DARE pencil spectrum"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -55,7 +53,7 @@ For a real matrix, interpret the same statement on its complexification.
 
 [F2] [[thm-schur-triangularisation]]: a complex finite-dimensional endomorphism has an orthonormal basis in which its matrix is upper triangular.
 
-[F3] [[cor-operator-norm-submultiplicative-and-t-star-t-identity]]: $\|ST\|_2\le\|S\|_2\|T\|_2$ for compatible finite-dimensional maps.
+[F3] [[cor-operator-norm-submultiplicative-and-t-star-t-identity|The operator norm is submultiplicative and satisfies $\lVert T^*T\rVert = \lVert T\rVert^2$]]: $\|ST\|_2\le\|S\|_2\|T\|_2$ for compatible finite-dimensional maps.
 
 [F4] [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]: $\|T\|_2=\max_{\|v\|_2=1}\|Tv\|_2$.
 

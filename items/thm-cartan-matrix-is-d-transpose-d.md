@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cartan-matrix-is-d-transpose-d.json
+  precheck: pass
 id: thm-cartan-matrix-is-d-transpose-d
 kind: theorem
-title: "The Cartan matrix is D^T D"
+title: 'The Cartan matrix is $D^{\mathsf T}D$'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-projective-indecomposable-characters-and-cartan-invariants, def-decomposition-numbers-and-decomposition-matrix, thm-brauer-reciprocity]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:

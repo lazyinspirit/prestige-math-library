@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-laplace-transform-formula-for-the-semigroup-resolvent.json
+  precheck: pass
 id: thm-laplace-transform-formula-for-the-semigroup-resolvent
 kind: theorem
 title: "Laplace transform formula for the resolvent"
@@ -38,8 +41,7 @@ sources:
     - title: "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)"
       url: "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf"
       locator: "Chapter 6 Section 2.2, the Laplace-transform derivation following Theorem 3, printed p. 14"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -62,7 +64,7 @@ Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\ge0}$ be a st
 
 ## Proof
 
-**Proof technique:** direct: define the Laplace integral as a norm limit of finite integrals, verify the two inverse identities on $D(A)$, and transfer them to $X$ by closedness and density.
+**Proof technique:** direct: define the Laplace integral as a norm limit of finite integrals, verify the two inverse identities on the generator domain, and transfer them to the ambient Banach space by closedness and density.
 
 1.1 Convergence and bound: for $0<R<R'$ the curves $e^{-\lambda t}T(t)x$ are continuous, hence Bochner integrable on compacts, and [F1] gives $\|J_{R'}x-J_Rx\|\le\int_R^{R'}Me^{(\omega-\lambda)t}\|x\|\,dt\le M\|x\|\frac{e^{(\omega-\lambda)R}}{\lambda-\omega}\to0$ as $R\to\infty$. Thus $(J_Rx)_R$ is Cauchy for every $x$, so $Jx:=\lim_{R\to\infty}J_Rx$ exists, and the same estimate at $R=0$ gives $\|Jx\|\le\frac{M}{\lambda-\omega}\|x\|$; the map $x\mapsto Jx$ is linear. [F1, F3]
 

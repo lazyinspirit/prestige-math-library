@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-e-to-n-z-converges-chordally-to-infinity-on-the-right-half-plane.json
+  precheck: pass
 id: cex-e-to-n-z-converges-chordally-to-infinity-on-the-right-half-plane
 kind: counterexample
-title: "The family e^(nz) converges chordally to infinity on the right half-plane without being holomorphically normal there"
+title: "The family $e^{nz}$ converges chordally to infinity on the right half-plane without being holomorphically normal there"
 status: published
 origin: pipeline
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:

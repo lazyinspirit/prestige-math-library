@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-conjugation-by-delta-reverses-artin-generators.json
+  precheck: pass
 id: lem-conjugation-by-delta-reverses-artin-generators
 kind: lemma
 title: "Conjugation by the half twist reverses Artin generators"
@@ -23,9 +26,7 @@ sources:
       url: "https://arxiv.org/abs/1010.0321"
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter I, Reference Structure 2 and formula (1.6), printed pp. 5-7"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -98,3 +99,42 @@ No choice principle is used.
 - **No source fact is assumed.** GM Section 4, printed p. 27, reports all of (a) and the reversed-word equality as Garside's "elementary arguments" without reproducing the slides; here every move is reconstructed. The reversed-word equality $\rho(\Delta)=\Delta$ is proved in step 1.2 by the auxiliary recursion $U_{m-1}\Delta_{m-1}=\Delta_m$, the case $i\le m-2$ of (a) is derived in step 2.1 from the sliding lemma 1.1, the case $i=m-1$ is obtained in step 3.1 by transporting the case $i=1$ through the reversal anti-automorphism $\rho$, and the mirror identity, $\tau(\Delta)=\Delta$ and the centrality of $\Delta^2$ are proved in steps 4.1--5.2 from (a) and cancellation.
 - Note how the two triangular blocks are used: the *recursion* $\Delta_n=\Delta_{n-1}T_{n-1}$ couples a letter $\sigma_i$ with the index $n-i$, and the sliding lemma 1.1 realises exactly that shift inside a block. Reversal $\rho$ is not the same operation as $\tau$: $\rho$ fixes each letter but reverses products, $\tau$ permutes letters without reversing products.
 - Conventions: all identities are in the monoid $B_n^{+}$, so no inverse of $\Delta$ and no conjugation in a group are used; the phrase "conjugation by $\Delta$" in the title refers to the two-sided sliding $\sigma_i\Delta=\Delta\sigma_{n-i}$, which is a conjugation identity only after the Ore embedding of [[thm-the-ore-fraction-group-of-positive-braids-is-the-artin-braid-group]]. No choice principle is used.
+
+
+**Index-reversal illustration.** The marked adjacent positions illustrate
+$\tau(\sigma_1)=\sigma_4$ for $n=5$. In general, reversing endpoint positions
+$j\mapsto n+1-j$ sends the pair $\{i,i+1\}$ to
+$\{n-i,n+1-i\}$, whose smaller index is $n-i$.
+The connecting arcs below only mark adjacent pairs; they are not strand
+crossings or a braid projection. Thus no crossing sign or direction of a
+geometric half turn is encoded. The displayed positive-word identity is
+part (a), proved in steps 2.1--3.1; the proof remains independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.7,every node/.style={font=\Large}]
+\draw (0,0) ellipse (1.8 and 1);
+\draw (6,0) ellipse (1.8 and 1);
+\foreach \x in {-1.2,-.6,0,.6,1.2} {
+  \fill (\x,0) circle (2pt);
+  \fill (6+\x,0) circle (2pt);
+}
+\node[below] at (-1.2,-.08) {$1$};
+\node[below] at (-0.6,-.08) {$2$};
+\node[below] at (0,-.08) {$3$};
+\node[below] at (0.6,-.08) {$4$};
+\node[below] at (1.2,-.08) {$5$};
+\node[below] at (4.8,-.08) {$1$};
+\node[below] at (5.4,-.08) {$2$};
+\node[below] at (6,-.08) {$3$};
+\node[below] at (6.6,-.08) {$4$};
+\node[below] at (7.2,-.08) {$5$};
+\draw[very thick] (-1.2,0) .. controls (-1.2,.55) and (-.6,.55) .. (-.6,0);
+\draw[very thick] (6.6,0) .. controls (6.6,.55) and (7.2,.55) .. (7.2,0);
+\node at (-.9,.7) {$\sigma_1$};
+\node at (6.9,.7) {$\sigma_4$};
+\draw[->] (2.1,0) -- (3.9,0);
+\node[above] at (3,.15) {$j\mapsto 6-j$};
+\node[below] at (3,-.15) {position reversal};
+\node at (3,-1.5) {$\sigma_1\Delta_5\equiv^{+}\Delta_5\sigma_4$};
+\end{tikzpicture}
+```

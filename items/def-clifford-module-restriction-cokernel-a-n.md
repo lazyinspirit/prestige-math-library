@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-clifford-module-restriction-cokernel-a-n.json
+  precheck: n/a
 id: def-clifford-module-restriction-cokernel-a-n
 kind: definition
-title: "Clifford-module restriction cokernels A_n"
+title: "Clifford-module restriction cokernels $A_n$"
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -12,11 +15,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "M. F. Atiyah, R. Bott, and A. Shapiro, Clifford Modules, Topology 3, Supplement 1 (1964)"
@@ -29,4 +27,4 @@ sources:
 
 ## Definition
 
-For n≥0 put C_n=Cl(ℝ^n,−‖·‖²). Let M_n be the Grothendieck group of finite-dimensional real Z/2-graded left C_n-modules and let r_n:M_{n+1}→M_n be restriction along the standard inclusion of the first n Clifford generators. Define A_n=coker(r_n). For n=0 the grading is retained, so M_0≅Z⊕Z from even and odd dimensions; no parity type is identified with a volume-element eigenspace.
+For $n\ge0$ put $C_n=\operatorname{Cl}(\mathbb{R}^n,-\lVert\cdot\rVert^2)$. Let $M_n$ be the Grothendieck group of finite-dimensional real $\mathbb{Z}/2$-graded left $C_n$-modules and let $r_n:M_{n+1}\to M_n$ be restriction along the standard inclusion of the first $n$ Clifford generators. Define $A_n=\operatorname{coker}(r_n)$. For $n=0$ the grading is retained, so $M_0\cong\mathbb{Z}\oplus\mathbb{Z}$ from even and odd dimensions; no parity type is identified with a volume-element eigenspace.

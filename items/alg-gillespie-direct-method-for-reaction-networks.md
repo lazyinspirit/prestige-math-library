@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-gillespie-direct-method-for-reaction-networks.json
+  precheck: n/a
 id: alg-gillespie-direct-method-for-reaction-networks
 kind: algorithm
 title: "Gillespie direct method with horizon and budget statuses"
@@ -29,8 +32,7 @@ sources:
     - title: "David F. Anderson, Introduction to Stochastic Processes with Applications to Biology, Chapters 6–7"
       url: "https://people.math.wisc.edu/~dfanderson/605F11/Notes/StochBioOLD.pdf"
       locator: "Chapter 7, §7.2.1, Algorithm 2, PDF pp. 195–196."
-verification:
-  precheck: pending
+
 ---
 
 ## Definition
@@ -48,3 +50,25 @@ verification:
 If the loop reaches $t=T$, return the path through $T$ with status horizon. Each event uses a linear scan of the $R$ propensities and a linear cumulative channel search; no update-tree acceleration is part of this procedure. If $B<\infty$ and the budget expires before $T$, the returned prefix is incomplete.
 
 The procedure assumes an ideal independent random source with the displayed laws. It makes no claim that a finite-state pseudorandom generator supplies independent exact exponential or uniform variables.
+
+
+## Remarks
+
+For a concrete illustration, take $E=\{0,1,2\}$, increments $\nu_1=-1$, $\nu_2=1$, and propensities $a_1(1)=2$, $a_2(1)=1$, with both propensities zero at $0$ and $2$. Starting from $x_0=1$, the total rate is $\lambda(1)=3$. Provided the budget permits an event and $t+\tau<T$, the next marked event follows one of the two arrows:
+
+```tikz
+\begin{tikzpicture}
+\node[draw,circle,minimum size=10mm] (left) at (-4,0) {$0$};
+\node[draw,circle,minimum size=10mm] (middle) at (0,0) {$1$};
+\node[draw,circle,minimum size=10mm] (right) at (4,0) {$2$};
+\draw[->] (middle) -- (left);
+\node at (-2,0.7) {$j=1,\quad a_1(1)=2$};
+\draw[->] (middle) -- (right);
+\node at (2,0.7) {$j=2,\quad a_2(1)=1$};
+\node at (0,-1) {$\lambda(1)=3,\qquad \tau=E_{n+1}/3$};
+\node at (-4,-0.8) {absorbing};
+\node at (4,-0.8) {absorbing};
+\end{tikzpicture}
+```
+
+Here $J=1$ for $0\le U_{n+1}<2/3$ and $J=2$ for $2/3\le U_{n+1}\le1$, including the specified null-event convention at $1$. The event is recorded as $(t+\tau,J,1+\nu_J)$. If instead $t+\tau\ge T$, the state stays at $1$ through $T$ and the status is horizon. If the budget is already exhausted at $1$, the algorithm stops before drawing this event and returns only the incomplete prefix. At either endpoint the total rate is zero, so the absorption check precedes the budget check and keeps that state through $T$. This illustration uses the same ideal independent random source as the definition; it does not replace the procedure or its stopping rules.

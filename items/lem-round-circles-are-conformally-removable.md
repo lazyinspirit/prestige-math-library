@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-round-circles-are-conformally-removable.json
+  precheck: pass
 id: lem-round-circles-are-conformally-removable
 kind: lemma
 title: Round circles and straight lines are conformally removable
@@ -23,13 +26,6 @@ deps:
   - thm-one-quasiconformal-is-conformal
 axiom_use: Assume the Axiom of Choice to use the analytic ACL/Sobolev convention, the 1-quasiconformal/conformal theorem, and the smooth-line gluing theorem. Countable Choice is used inside those interfaces and follows from AC by [[thm-choice-implies-dependent-implies-countable-choice]]. The Möbius and subset arguments use no choice.
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 dependency_level: 13
 sources:
   scraped: []
@@ -65,7 +61,7 @@ Assume the Axiom of Choice. Every compact subset $K$ of a straight line or a rou
 
 ## Proof
 
-**Proof technique:** prove removability of the unit circle by gluing analytic $1$-quasiconformality across it, then use Möbius invariance and subset monotonicity.
+**Proof technique:** prove removability of the unit circle by gluing analytic 1-quasiconformality across it, then use Möbius invariance and subset monotonicity.
 
 1.1 Let $F:\widehat{\mathbb C}\to\widehat{\mathbb C}$ be a homeomorphism conformal on $\widehat{\mathbb C}\setminus\mathbb S^1$. By [F4], around each point of this complement its local chart expression is a conformal homeomorphism between complex domains. By [F2] every such expression is analytically $1$-quasiconformal, so $F$ is analytically $1$-quasiconformal off $\mathbb S^1$. Countable Choice used in the analytic interface follows from AC by [F8]. [F2, F4, F8, given]
 

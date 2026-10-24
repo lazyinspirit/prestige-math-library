@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-pe05-hydrostatic-hll-scheme.json
+  precheck: n/a
 id: def-pe05-hydrostatic-hll-scheme
 kind: definition
 title: Hydrostatic reconstruction with a dry-safe HLL flux and one-sided pressure corrections
@@ -11,12 +14,6 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows"
@@ -66,7 +63,7 @@ The diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\eta_0
   \draw (2,0.1) -- (2,1.95);
   \node at (1,0.12) {$b_i$};
   \node at (3,0.75) {$b_{i+1}=b^*$};
-  \node at (2,2.08) {$i+\tfrac12$};
+  \node at (2,2.08) {$i+\frac{1}{2}$};
 \end{tikzpicture}
 ```
 

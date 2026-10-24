@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-projected-bellman-error.json
+  precheck: n/a
 id: def-projected-bellman-error
 kind: definition
 title: State-weighted Bellman error and projected Bellman error
@@ -17,12 +20,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -54,3 +51,24 @@ For $h\in H_\mu$, let $\Pi_\mu h$ be the unique vector in $V_\mu$ whose differen
 [Sutton and Barto, *Reinforcement Learning: An Introduction*, 2nd ed., §§9.2 and 11.4](https://raw.githubusercontent.com/mutual-ai/Book/main/books/RL/RLbook2020.pdf).
 
 [Tsitsiklis and Van Roy, “An Analysis of Temporal-Difference Learning with Function Approximation,” §III.A](https://web.mit.edu/~jnt/www/Papers/J063-97-bvr-td.pdf).
+
+## Remarks
+
+The schematic below shows the orthogonal decomposition of the Bellman residual in $H_\mu$. The horizontal line represents the projected direction in $V_\mu$, not necessarily the whole feature space. The diagonal vector has squared norm $\operatorname{BE}_\mu(w)$; its horizontal projection has squared norm $\operatorname{PBE}_\mu(w)$. The remainder is orthogonal to $V_\mu$. The picture depicts a nondegenerate configuration; either component may vanish in the definition.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\draw (-0.5,0) -- (4.5,0);
+\node at (4.35,-0.35) {$V_\mu$};
+\draw[->,thick] (0,0) -- (3,2);
+\node at (1.1,1.25) {$\delta_w$};
+\draw[->,thick] (0,0) -- (3,0);
+\node at (1.5,-0.4) {$\Pi_\mu\delta_w$};
+\draw[->,dashed,thick] (3,0) -- (3,2);
+\node[right] at (3.15,1.3) {$\delta_w-\Pi_\mu\delta_w$};
+\draw (2.75,0) -- (2.75,0.25) -- (3,0.25);
+\node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+```
+
+This illustration uses only the defining orthogonal-projection relation; the definition and its well-definedness justification are independent of the figure.

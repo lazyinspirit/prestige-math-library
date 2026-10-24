@@ -1,0 +1,109 @@
+{
+  "id": "ex-nonnormal-transient-growth-exponential-step",
+  "agent": "/root/rendering_repair_coordinator/dnde_029",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dnde_029",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The phase-plane trajectory concretely distinguishes temporary departure from the origin from eventual decay and places the norm-growth witness on the same exact orbit. This is a warranted explanatory diagram despite the complete algebraic verification.",
+      "action": "Appended a final Remarks section with a native TikZ trajectory, attained initial/growth points, increasing-time arrows, radial norm segment, and an explicitly limiting origin.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only final Remarks and a phase-plane TikZ illustration; all original bytes, including title, proof, dependencies, sources and publication status, remain preserved as an exact prefix.",
+  "source_lines_after": {
+    "remarks": [
+      78,
+      80
+    ],
+    "tikz": [
+      82,
+      100
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and parameter domain",
+      "evidence": "Verification 2.1 gives y(t)=e^{-t}(2et,1)^T for t>=0. The plotted coordinates are (2t exp(1-t),exp(-t)), sampled at t=0,0.1,...,8 and smoothed as an illustration in the real coordinate plane of this real initial-data orbit."
+    },
+    {
+      "check": "Attained points and norm witness",
+      "evidence": "At t=0 the coordinates are (0,1); at t=1 they are (2,e^{-1}). Their norms, from F5 and def-inner-product-norm, are 1 and sqrt(4+e^{-2})>2, exactly Verification 2.1. The dashed radial line joins the coordinate origin to the latter point and represents its Euclidean norm."
+    },
+    {
+      "check": "Time orientations and limiting origin",
+      "evidence": "The upper arrow follows samples at t=0.3 to 0.4 (x increases, y decreases); the lower arrow follows t=2 to approximately 2.1 (both coordinates decrease). The finite-time y_2=exp(-t)>0 by F6 excludes the origin. Verification 2.1 proves both coordinates tend to zero. The terminal short dashed arrow approaches a nonzero point near the origin; no filled origin endpoint is drawn, and the caption explicitly says the origin is only a limit."
+    },
+    {
+      "check": "Numerical-method interpretation",
+      "evidence": "The local definition def-exponential-euler-and-etd2-step-maps makes both g=0 maps equal to exp(hA)y. Verification 3.1 proves exact grid-point sampling of this same trajectory. The caption preserves this exact-action interpretation and introduces no approximate numerical orbit."
+    },
+    {
+      "check": "Proof independence",
+      "evidence": "Original Verification steps 1.1, 2.1 and 3.1 are byte-identical and precede the new Remarks; no proof step uses the figure."
+    }
+  ],
+  "checks": {
+    "preimage_guard": {
+      "expected": "71982f9e224cda5ff18168e896763f42880588efdb38980aedd689fcb5375a96",
+      "matched": true
+    },
+    "original_bytes_preserved_as_prefix": true,
+    "frontmatter_byte_identical": true,
+    "current_raw_sha256": "a5f846949de146e1f5d7bfc6d18287ba1b2082b59b68d0a1fab0ea49908ae65c",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-nonnormal-transient-growth-exponential-step.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-nonnormal-transient-growth-exponential-step.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-nonnormal-transient-growth-exponential-step.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde029-final/manifest.json",
+      "source_sha256": "a5f846949de146e1f5d7bfc6d18287ba1b2082b59b68d0a1fab0ea49908ae65c",
+      "html_sha256": "be83dce2328a8a816b19ace5afb5a761149edd592d9b14895f08513c94065ed6",
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "inspected_original_resolution_tiles": [
+        "screenshots/ex-nonnormal-transient-growth-exponential-step--01.png",
+        "screenshots/ex-nonnormal-transient-growth-exponential-step--02.png"
+      ],
+      "visual_result": "Both final native tiles inspected at original resolution. The white curve, filled points, labels and dashed radial segment contrast with the black background; the norm label was moved below the axes after the first preview to eliminate its observed overlap. Final labels are clear, arrows point along increasing time, and no clipping is visible. This is an open trajectory, with no graph-closing relation or open endpoint ring."
+    }
+  },
+  "evidence_resolution": {
+    "declared_path_missing": true,
+    "resolved_original_screenshot": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/ex-nonnormal-transient-growth-exponential-step--01.png",
+    "sha256": "00310e730eb90a70edb86648ea15de9e6b9ee10ad499bef8f542375031ce7010",
+    "reason": "The queue evidence_dir included diagram-supplement, but the authentic screenshot resides in its parent category screenshots directory; its SHA256 exactly matches the queue."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Sampled smooth trajectory is illustrative; precise values, limit and norm comparison are established by the unchanged algebraic Verification.",
+    "Native preview reports 16 unrelated reference-map parse diagnostics, zero KaTeX errors and zero diagram failures; it covers local ItemBody rather than a live route."
+  ]
+}

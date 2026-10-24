@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra.json
+  precheck: pass
 id: thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra
 kind: theorem
 title: The endomorphisms of the antidominant projective form the coinvariant algebra
@@ -86,3 +89,16 @@ invariants $C^{W_\lambda}$.
 2.1 Specializing the isomorphism of step 1.1 therefore gives the canonical algebra isomorphism $\operatorname{End}_{\mathfrak g}P(w_0\cdot\lambda)\cong C$, induced by the multiplication action alone and hence independent of the chosen projective cover up to the canonical identification; the specialized multiplication map is the shifted Harish-Chandra composite $z\mapsto\operatorname{HC}_\rho(z)(\lambda+\rho+\tau)$ followed by the quotient map $R\to C$, it is surjective, and the commutative diagram identifies its kernel with that of the multiplication map. Tensoring need not preserve kernels; no exactness of residue-field tensoring is used. [F1, F3, step 1.2]
 
 3.1 The grading in (3) is the internal grading of $C$ transported along the isomorphism of step 2.1; no $\mathbb Z$-grading of category-$\mathcal O$ objects or of the Hom spaces is used; for a singular dominant integral $\lambda$ the same specialization of the central-action lemma gives $\operatorname{End}_{\mathfrak g}P\cong C^{W_\lambda}$, replacing the coinvariant algebra by its invariants. [F1, F4, step 2.1] ∎
+
+## Remarks
+
+Write $Z=Z(U(\mathfrak g))$ and $E_R=\operatorname{End}_{\mathfrak g\otimes R}(P_R)$. The triangle displays the two paths in step 1.1: $m_R$ is central multiplication, $a_\lambda$ is the map in [F1], and $\phi$ is the unique algebra isomorphism induced by their common kernel, characterized by $\phi\circ a_\lambda=m_R$.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=large]
+Z\otimes_{\mathbb C}R \arrow[r, "a_\lambda"] \arrow[dr, "m_R"'] & R\otimes_{R^W}R \arrow[d, "\phi", "\sim"'] \\
+& E_R
+\end{tikzcd}
+```
+
+Both maps out of $Z\otimes_{\mathbb C}R$ are surjective; only $\phi$ is marked as an isomorphism. Specializing the right $R$ factor at $0$ gives the isomorphism $C\cong\operatorname{End}_{\mathfrak g}P(w_0\cdot\lambda)$ in steps 1.2–2.1, using Hom base change from [F2]. The figure illustrates these algebra maps; the rigorous proof is independent of it.

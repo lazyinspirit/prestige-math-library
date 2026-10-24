@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-framed-knot-surgery-trace-boundary.json
+  precheck: pass
 id: thm-framed-knot-surgery-trace-boundary
 kind: theorem
 title: "Boundary of the integer-framed knot surgery trace"
@@ -15,17 +18,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds, 2nd revised edition, Lecture 2 §2.4, Theorem 2.4"
@@ -77,14 +69,14 @@ The left decomposition is the original boundary of the $4$-ball. The handle remo
 ```tikz
 \begin{tikzpicture}[>=stealth]
   \node[draw,rounded corners,minimum width=2.3cm,minimum height=0.85cm] (e0) at (0,0) {$E_K$};
-  \node[draw,rounded corners,minimum width=2.2cm,minimum height=0.85cm] (n) at (3.3,0) {$N(K)$};
-  \node at (1.65,-0.72) {$S^3=E_K\cup N(K)$};
-  \draw[<->,thick] (1.15,0) -- node[above] {$T_K$} (2.15,0);
-  \node[draw,rounded corners,minimum width=2.3cm,minimum height=0.85cm] (e1) at (0,-2.2) {$E_K$};
-  \node[draw,rounded corners,minimum width=2.2cm,minimum height=0.85cm] (v) at (3.3,-2.2) {$D^2\times S^1$};
-  \node at (1.65,-2.92) {$\partial X_n(K)$};
-  \draw[<->,thick] (1.15,-2.2) -- node[above] {$\partial D^2\mapsto n\mu+\lambda$} (2.15,-2.2);
-  \draw[->,dashed] (3.1,-0.48) -- (1.05,-1.72) node[midway,above] {remove $N(K)$};
-  \draw[->,dashed] (2.9,-1.72) -- (1.0,-0.48) node[midway,below] {insert free face};
+  \node[draw,rounded corners,minimum width=2.4cm,minimum height=0.85cm] (n) at (5.5,0) {$N(K)$};
+  \node at (2.75,0.95) {$S^3=E_K\cup N(K)$};
+  \draw[<->,thick] (e0.east) -- node[above] {$T_K$} (n.west);
+  \node[draw,rounded corners,minimum width=2.3cm,minimum height=0.85cm] (e1) at (0,-3.6) {$E_K$};
+  \node[draw,rounded corners,minimum width=2.4cm,minimum height=0.85cm] (v) at (5.5,-3.6) {$D^2\times S^1$};
+  \node at (2.75,-4.85) {$\partial X_n(K)$};
+  \draw[<->,thick] (e1.east) -- node[below] {$\partial D^2\mapsto n\mu+\lambda$} (v.west);
+  \draw[->,dashed] (n.south) -- (v.north)
+    node[midway,right,align=left] {remove $N(K)$;\\insert free face};
 \end{tikzpicture}
 ```

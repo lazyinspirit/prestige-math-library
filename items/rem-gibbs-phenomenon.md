@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-gibbs-phenomenon.json
+  precheck: n/a
 id: rem-gibbs-phenomenon
 kind: remark
 title: "Gibbs phenomenon"
@@ -8,8 +11,6 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-fejer-kernel-is-a-positive-approximate-identity, lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity, thm-gibbs-overshoot-at-a-piecewise-c-one-jump]
-verification:
-  audited: 2026-09-05
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."
@@ -20,7 +21,7 @@ sources:
 
 Dirichlet partial sums are controlled by the oscillatory kernel $D_N$, whose
 sign changes create the persistent overshoot quantified in
-[[thm-gibbs-overshoot-at-a-piecewise-c-one-jump]]. By contrast,
+[[thm-gibbs-overshoot-at-a-piecewise-c-one-jump|Gibbs overshoot at a piecewise C¹ jump]]. By contrast,
 [[lem-fejer-kernel-is-a-positive-approximate-identity]] and
 [[lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity]] show
 that Fejer and Poisson kernels are positive and have total mass one. Their

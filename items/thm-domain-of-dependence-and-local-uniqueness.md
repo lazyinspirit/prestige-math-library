@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-domain-of-dependence-and-local-uniqueness.json
+  precheck: pass
 id: thm-domain-of-dependence-and-local-uniqueness
 kind: theorem
 title: "Domain of dependence and local uniqueness"
@@ -25,12 +28,7 @@ sources:
     - title: "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)"
       url: "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf"
       locator: "Corollary 2.0.4 and §3: uniqueness on the solid backward light cone"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -68,3 +66,32 @@ Cauchy data of the difference are the differences of the data.
 1.1 The difference solves a homogeneous equation on the cone: $w:=u-v$ is $C^2$ on a neighbourhood of $K^-(x_0,t_0)$ and, by linearity of differentiation [F2], $\Box_cw=f-g$, which vanishes on the cone because $f=g$ there; moreover $w(\cdot,0)=0$ and $w_t(\cdot,0)=0$ on the base ball $B_{ct_0}(x_0)$ because the Cauchy data of $u$ and $v$ agree there. [given, F2]
 
 2.1 Conclusion: the hypotheses of [F1] are met by $w$ on the cone $K^-(x_0,t_0)$, so $w=0$ there, that is, $u=v$ on $K^-(x_0,t_0)$; in particular the value at the vertex is determined by the base data and the source on the cone. [step 1.1, F1] ∎ 
+
+## Remarks
+
+The picture shows the case $n=1$: the outlined triangle is the closed cone
+$K^-(x_0,t_0)$, with sides $x=x_0\pm c(t_0-t)$. The source equality
+$f=g$ is a hypothesis throughout this cone; the equality $u=v$ there is the
+conclusion. The Cauchy data agree on the open base interval
+$B_{ct_0}(x_0)=(x_0-ct_0,x_0+ct_0)$, not an additional hypothesis on its two
+endpoints. For higher dimensions, the horizontal intervals become balls of
+radius $c(t_0-t)$. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\draw[->] (-4.3,0) -- (4.1,0) node[right] {$x$};
+\draw[->] (-4,-0.3) -- (-4,3.8) node[above] {$t$};
+\draw[thick] (-3,0) -- (0,3) -- (3,0) -- (-3,0);
+\fill (0,3) circle (2pt);
+\node[above] at (0,3.1) {$(x_0,t_0)$};
+\node at (0,2.1) {$K^-(x_0,t_0)$};
+\node at (0,1.35) {$f=g$};
+\node at (0,0.7) {$u=v$};
+\node[left] at (-4,0) {$0$};
+\node[below] at (-3,-0.08) {$x_0-ct_0$};
+\node[below] at (3,-0.08) {$x_0+ct_0$};
+\node[below] at (0,-0.08) {$x_0$};
+\node at (0,-1) {$u(\cdot,0)=v(\cdot,0),\quad u_t(\cdot,0)=v_t(\cdot,0)$};
+\node at (0,-1.55) {$\mathrm{on}\ B_{ct_0}(x_0)$};
+\end{tikzpicture}
+```

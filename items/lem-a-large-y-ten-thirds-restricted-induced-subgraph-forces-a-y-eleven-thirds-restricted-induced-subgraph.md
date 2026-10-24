@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph.json
+  precheck: pass
 id: lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph
 kind: lemma
-title: "Under failure of the global outcomes, a large y^(10/3)-restricted induced subgraph forces a y^(11/3)-restricted induced subgraph"
+title: "Under failure of the global outcomes, a large $y^{10/3}$-restricted induced subgraph forces a $y^{11/3}$-restricted induced subgraph"
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -57,7 +53,7 @@ $y^{c_4+2}|F|$ vertices.
 
 ## Proof
 
-**Proof technique:** apply the previous lemma to $F$ with parameter $y$ and show that every outcome except the deeper restricted-set outcome contradicts one of the assumed global failures.
+**Proof technique:** apply the previous lemma to F with parameter y and show that every outcome except the deeper restricted-set outcome contradicts one of the assumed global failures.
 
  1.1 Because $y\le c^3$, one has $y^{10/3}=y^3y^{1/3}\le cy^3$. Thus [L2] upgrades the hypothesis that $F$ is $y^{10/3}$-restricted to the statement that $F$ is $cy^3$-restricted. [given, L2, algebra]
 

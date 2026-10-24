@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qa-16-effective-spectral-gap.json
+  precheck: pass
 id: lem-qa-16-effective-spectral-gap
 kind: lemma
 title: Effective spectral gap for a product of two reflections
@@ -18,11 +21,6 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 axiom_use: None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)"
@@ -34,16 +32,16 @@ sources:
 ## Statement
 
 
-Let H be a finite-dimensional complex inner-product space, Π and Δ orthogonal projections on H, R_Π=2Π-I and R_Δ=2Δ-I, and U=R_ΠR_Δ. For 0≤ω≤π, let E_ω be the spectral projection of U onto eigenvalues e^{iφ} whose principal arguments satisfy |φ|≤ω. If Δw=0, then
+Let $H$ be a finite-dimensional complex inner-product space, $\Pi$ and $\Delta$ orthogonal projections on $H$, $R_\Pi=2\Pi-I$ and $R_\Delta=2\Delta-I$, and $U=R_\Pi R_\Delta$. For $0\le\omega\le\pi$, let $E_\omega$ be the spectral projection of $U$ onto eigenvalues $e^{i\varphi}$ whose principal arguments satisfy $|\varphi|\le\omega$. If $\Delta w=0$, then
 $$\|E_\omega\Pi w\|\le \frac{\omega}{2}\|w\|.$$
 
 ## Facts & Assumptions
 
-**Given:** The finite-dimensional projections and vector w in the Statement, with Δw=0.
+**Given:** The finite-dimensional projections and vector $w$ in the Statement, with $\Delta w=0$.
 
 
 
-[F1] [[def-qc-reflection]]: for an orthogonal projection P, the plus-on-range reflection is R_P=2P-I.
+[F1] [[def-qc-reflection]]: for an orthogonal projection $P$, the plus-on-range reflection is $R_P=2P-I$.
 
 [F2] [[thm-qc-reflection-unitary-involution]]: each such reflection is a unitary involution.
 
@@ -51,8 +49,8 @@ $$\|E_\omega\Pi w\|\le \frac{\omega}{2}\|w\|.$$
 
 ## Proof
 
-1.1 Put R_P=2P-I and R_D=2D-I. Since D w=0, R_D w=-w; hence U w=R_P R_Dw=-R_Pw and therefore P w=(w+R_Pw)/2=(I-U)w/2. [given, F1, algebra]
+1.1 Put $R_P=2P-I$ and $R_D=2D-I$. Since $Dw=0$, $R_Dw=-w$; hence $Uw=R_PR_Dw=-R_Pw$ and therefore $Pw=(w+R_Pw)/2=(I-U)w/2$. [given, F1, algebra]
 
-2.1 Let E_ω be the orthogonal spectral projection of U onto eigenvectors with eigenvalue e^{iφ} for a principal phase φ∈[-π,π] satisfying |φ|≤ω. By [F2], both reflections are unitary, so U is unitary. By [F3], E_ω commutes with U and has an orthonormal eigenbasis. Thus E_ω P w=(I-U)E_ωw/2, and on each selected eigenvector |1-e^{iφ}|≤|φ|≤ω. The squared norm in that basis is at most (ω/2)^2||E_ωw||²≤(ω/2)^2||w||². [given, F2, F3, step 1.1, algebra]
+2.1 Let $E_\omega$ be the orthogonal spectral projection of $U$ onto eigenvectors with eigenvalue $e^{i\varphi}$ for a principal phase $\varphi\in[-\pi,\pi]$ satisfying $|\varphi|\le\omega$. By [F2], both reflections are unitary, so $U$ is unitary. By [F3], $E_\omega$ commutes with $U$ and has an orthonormal eigenbasis. Thus $E_\omega Pw=(I-U)E_\omega w/2$, and on each selected eigenvector $|1-e^{i\varphi}|\le|\varphi|\le\omega$. The squared norm in that basis is at most $(\omega/2)^2\|E_\omega w\|^2\le(\omega/2)^2\|w\|^2$. [given, F2, F3, step 1.1, algebra]
 
-3.1 Taking square roots proves ||E_ωP w||≤ω||w||/2, including zero- and full-rank projections because step 1.1 used only the projection identities. [given, F1, step 1.1, step 2.1] ∎
+3.1 Taking square roots proves $\|E_\omega Pw\|\le\omega\|w\|/2$, including zero- and full-rank projections because step 1.1 used only the projection identities. [given, F1, step 1.1, step 2.1] ∎

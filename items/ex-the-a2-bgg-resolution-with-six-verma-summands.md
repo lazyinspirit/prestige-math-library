@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-a2-bgg-resolution-with-six-verma-summands.json
+  precheck: pass
 id: ex-the-a2-bgg-resolution-with-six-verma-summands
 kind: example
 title: The A2 BGG resolution with six Verma summands
@@ -10,12 +13,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for ex-the-a2-bgg-resolution-with-six-verma-summands and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-8; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"35f48f58310433372bec40afb2e348fdb434d1d3d25d35134587f546266b593f","evidence":["research/frontier-38-owner-30-reader-8.md","research/frontier-38-owner-30-reader-findings-8.json","research/frontier-38-owner-30-dispatch/reader-reader-8.result.json","research/frontier-38-owner-30-step5-hash-8-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/ex-the-a2-bgg-resolution-with-six-verma-summands.md","historical_raw_sha256":"88cb8f256daf52be22e535c27c4eed8481c4a286990df83b40f74dc987f84dd5","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:35:41.081Z"}}
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Fan Zhou, The classical and the functorial BGG resolutions (Columbia thesis 2021), Part I Sec. 3.2 and Sec. 4.1, pp. 11 and 14"
@@ -59,3 +56,37 @@ with $d_1$ given by the two embeddings $M(s_i\circ\lambda)\hookrightarrow M(\lam
 2.1 The rank-two intervals of the Bruhat poset of type $A_2$ are $[e,s_1s_2]$ with middles $s_1,s_2$, $[e,s_2s_1]$ with middles $s_1,s_2$, $[s_1,w_0]$ with middles $s_1s_2,s_2s_1$, and $[s_2,w_0]$ with middles $s_1s_2,s_2s_1$; each has exactly two middle elements by [F4]. Hence every component of $d^2$ either is zero (no middle) or cancels by the square condition, so $d_{k-1}\circ d_k=0$ for all $k\ge2$ by [F5]. [F4, F5, step 1.2]
 
 3.1 Each listed structural claim is verified: the terms in step 1.1, the signed cover differentials in step 1.2, vanishing of $d^2$ in step 2.1, and exactness and weight distinctness in step 1.3. [step 1.1, step 1.2, step 2.1, step 1.3] ∎
+
+
+## Remarks
+
+Write $V_w=M(w\circ\lambda)$, so $V_e=M(\lambda)$. The following layered diagram displays the six summands and all eight signed cover components. Each arrow from $V_x$ to $V_y$ denotes $f_{x,y}=\varepsilon(x,y)\iota_{x\to y}$; the two summands on a row form their direct sum $C_k$. Every arrow lowers the homological degree by one. The crossing between the middle rows is not a vertex.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (w) at (0,0) {$V_{w_0}$};
+\node (a) at (-2,-1.6) {$V_{s_1s_2}$};
+\node (b) at (2,-1.6) {$V_{s_2s_1}$};
+\node (c) at (-2,-3.6) {$V_{s_1}$};
+\node (d) at (2,-3.6) {$V_{s_2}$};
+\node (e) at (0,-5.2) {$V_e$};
+\node at (-4,0) {$C_3$};
+\node at (-4,-1.6) {$C_2$};
+\node at (-4,-3.6) {$C_1$};
+\node at (-4,-5.2) {$C_0$};
+\draw[->] (w) -- (a);
+\draw[->] (w) -- (b);
+\draw[->] (a) -- (c);
+\draw[->] (a) -- (d);
+\draw[->] (b) -- (c);
+\draw[->] (b) -- (d);
+\draw[->] (c) -- (e);
+\draw[->] (d) -- (e);
+\end{tikzpicture}
+```
+
+For each of the four rank-two intervals listed in Verification step 2.1, with middle vertices $m_1,m_2$, the two paths have the same underlying inclusion but opposite total signs:
+
+$$f_{m_1,y}\circ f_{x,m_1}=-f_{m_2,y}\circ f_{x,m_2}.$$
+
+Thus the figure records anticommuting diamonds, not commuting signed squares: the two contributions to each component of $d_{k-1}d_k$ cancel. No particular compatible signing is selected. The rigorous verification above, including exactness of the augmented complex, is independent of this illustration.

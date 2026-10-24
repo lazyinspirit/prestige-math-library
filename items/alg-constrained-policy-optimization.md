@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-constrained-policy-optimization.json
+  precheck: n/a
 id: alg-constrained-policy-optimization
 kind: algorithm
 title: "Sample-based constrained policy optimization update"
@@ -23,12 +26,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Joshua Achiam, David Held, Aviv Tamar, and Pieter Abbeel, Constrained Policy Optimization, PMLR 70 (2017)"
@@ -77,3 +74,38 @@ For finite constants $D_i\ge0$, optional nonnegative bounded transition signals 
 [[thm-policy-performance-bound-by-average-divergence|The exact policy-return bound that motivates the trust-region constraint; its KL branch assumes AC.]]
 
 [Achiam et al., *Constrained Policy Optimization*, §5.3 and §§6.1–6.3](https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf).
+
+## Remarks
+
+The branch map below summarizes steps 1–3. Here “QP” is the displayed local quadratic program. A recovery proposal need not satisfy its infeasible linearized cost constraint; it still proceeds to the sample tests. The diagram is explanatory: the numbered definition and its independent well-definedness argument specify the procedure.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small,align=center}, box/.style={draw,rounded corners,text width=3.2cm,minimum height=0.85cm}, flow/.style={->,thick}]
+\node[box] (h) at (0,0) {$H$ symmetric positive definite?};
+\node[box] (stopH) at (4.6,0) {Return \texttt{no-step}};
+\node[box] (qp) at (0,-1.6) {Form the local QP};
+\node[box] (feasible) at (0,-3) {QP feasible?};
+\node[box] (recoverable) at (-4.6,-4.8) {$m=1$ and $u_1\ne0$?};
+\node[box] (stopR) at (0,-4.8) {Return \texttt{no-step}};
+\node[box] (opt) at (4.6,-4.8) {$x^*$: lexicographically least global maximizer};
+\node[box] (recovery) at (-4.6,-6.6) {$v=H^{-1}u_1$\\{}$x^*=-\sqrt{2\delta/(u_1^Tv)}\,v$};
+\node[box,text width=6cm,minimum height=1.9cm] (search) at (0,-9) {Try $\theta_j=\theta_k+\beta^jx^*$ in order, $j=0,\ldots,L$.\\First require $\theta_j\in U$; then test\\{}$\widehat K(\theta_j)\le\delta$ and, for every $i$,\\{}$\widehat J_{i,k}+(1-\gamma)^{-1}\widehat L_i^c(\theta_j)\le b_i$.};
+\node[box] (accept) at (-2.7,-11.4) {Output first passing $\theta_j$ as $\theta_{k+1}$};
+\node[box] (stopS) at (2.7,-11.4) {Return \texttt{no-step}};
+\draw[flow] (h) -- node[above] {no} (stopH);
+\draw[flow] (h) -- node[right] {yes} (qp);
+\draw[flow] (qp) -- (feasible);
+\draw[flow] (feasible.west) -| node[above,pos=0.35] {no} (recoverable.north);
+\draw[flow] (feasible.east) -| node[above,pos=0.35] {yes} (opt.north);
+\draw[flow] (recoverable) -- node[above] {no} (stopR);
+\draw[flow] (recoverable) -- node[right] {yes} (recovery);
+\draw[flow] (recovery.south) -- (-4.6,-9) -- (search.west);
+\draw[flow] (opt.south) -- (4.6,-9) -- (search.east);
+\draw[flow] (search.south) -- (0,-10.4) -| (accept.north);
+\draw[flow] (search.south) -- (0,-10.4) -| (stopS.north);
+\node at (-2.7,-10.05) {passes};
+\node at (2.7,-10.05) {none passes};
+\end{tikzpicture}
+```
+
+Acceptance certifies only the displayed sample checks, not exact expected costs or exact-policy guarantees. The infeasible branch can reach recovery only in the one-cost, nonzero-gradient case; all other infeasible cases return `no-step`.

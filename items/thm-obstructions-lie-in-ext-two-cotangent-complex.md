@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-obstructions-lie-in-ext-two-cotangent-complex.json
+  precheck: pass
 id: "thm-obstructions-lie-in-ext-two-cotangent-complex"
 kind: "theorem"
-title: "Obstructions to deformations lie in Ext^2 of the cotangent complex"
+title: 'Obstructions to deformations lie in $\operatorname{Ext}^2$ of the cotangent complex'
 status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
@@ -29,8 +32,6 @@ proof_strategy: "direct"
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-verification:
-  precheck: "pass"
 sources:
   references:
     - title: "The Stacks Project, flatness across a square-zero extension"

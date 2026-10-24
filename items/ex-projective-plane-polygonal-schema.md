@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-projective-plane-polygonal-schema.json
+  precheck: pass
 id: ex-projective-plane-polygonal-schema
 kind: example
 title: "Projective plane crosscap polygon"
@@ -21,9 +24,7 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 3, printed pp.4–5"
 pipeline_run: frontier-36-complete
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -114,3 +115,33 @@ The digon is one of the two degenerate one-polygon presentations named in
 [[def-polygonal-schema-and-edge-pairing]]; the same quotient is the connected
 sum of one projective plane, later written as the one-crosscap square word
 $c_1c_1$ on the A page.
+
+
+The disk picture below uses counterclockwise boundary traversal. The upper
+semicircle runs from $(1,0)$ to $(-1,0)$, and the lower semicircle runs from
+$(-1,0)$ to $(1,0)$; the antipodal pairing carries the first traversal to
+the second. Thus both sides have label $a$. The two corners marked $v$
+represent one quotient vertex. The marked boundary points $u=(0,1)$ and
+$-u=(0,-1)$ are one sample paired pair; interior points are not paired.
+
+```tikz
+\begin{tikzpicture}[scale=1.5]
+  \draw[thick] (0,0) circle (1.3);
+  \draw[thick,->] (1.126,0.65) arc (30:150:1.3);
+  \draw[thick,->] (-1.126,-0.65) arc (210:330:1.3);
+  \node at (-0.9,1.3) {$a$};
+  \node at (0.9,-1.3) {$a$};
+  \node at (0,0) {$D^2$};
+  \fill (1.3,0) circle (0.035);
+  \fill (-1.3,0) circle (0.035);
+  \node[right] at (1.3,0) {$v$};
+  \node[left] at (-1.3,0) {$v$};
+  \fill (0,1.3) circle (0.035);
+  \fill (0,-1.3) circle (0.035);
+  \node[above] at (0,1.3) {$u$};
+  \node[below] at (0,-1.3) {$-u$};
+\end{tikzpicture}
+```
+
+This illustrates the boundary identification in step 1.1; the verification
+of the quotient and its nonorientability above is independent of the picture.

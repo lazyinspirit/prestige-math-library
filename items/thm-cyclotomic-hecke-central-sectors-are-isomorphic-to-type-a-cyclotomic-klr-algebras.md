@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cyclotomic-hecke-central-sectors-are-isomorphic-to-type-a-cyclotomic-klr-algebras.json
+  precheck: pass
 id: thm-cyclotomic-hecke-central-sectors-are-isomorphic-to-type-a-cyclotomic-klr-algebras
 kind: theorem
 title: "Cyclotomic Hecke central sectors are isomorphic to type-A cyclotomic KLR algebras"
@@ -16,8 +19,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Brundan and Kleshchev, Blocks of cyclotomic Hecke algebras and Khovanov-Lauda algebras, arXiv:0808.2032v4"
@@ -83,3 +84,29 @@ This is the sector-level isomorphism $H^\Lambda_\alpha\cong R^\Lambda_\alpha$
 for every content, proved before any dimension or primitivity input; it is the
 algebraic engine of the blockwise bridge. The zero-sector case is handled by
 the identity $\sigma(e_\alpha)=1_R$ rather than by a nonzero-block hypothesis.
+
+For each height-$d$ content $\alpha$, the two arrows below are the maps of
+[F1]–[F2]. The composite identities are those proved in step 2.1; the last
+line assembles these sectorwise isomorphisms using [F3] as in step 3.1.
+
+```tikz
+\begin{tikzpicture}
+\node (R) at (0,0) {$R^\Lambda_\alpha$};
+\node (H) at (5,0) {$H^\Lambda_\alpha$};
+\draw[->] (R) to[bend left=22] node[above] {$\rho$} (H);
+\draw[->] (H) to[bend left=22] node[below] {$\sigma$} (R);
+\node at (0,-1.3) {$\sigma\rho=\mathrm{id}_{R^\Lambda_\alpha}$};
+\node at (5,-1.3) {$\rho\sigma=\mathrm{id}_{H^\Lambda_\alpha}$};
+\node at (2.5,-2.5) {$H^\Lambda_d\cong\bigoplus_{\alpha}R^\Lambda_\alpha$};
+\end{tikzpicture}
+```
+
+Here $\alpha$ ranges over all height-$d$ contents, including zero sectors;
+$H^\Lambda_\alpha$ denotes the central content sector, without a primitivity
+assertion. Under $\rho$, $e(i)\mapsto e(i)$, $y_r\mapsto y_r$ and
+$\psi_r\mapsto\psi_r$, where the Hecke-side crossing is the intertwiner
+quotient of [F2]. On the word corner $e(i)$ the Hecke-side dot is
+$(x_r-i_r)e(i)$ in the degenerate branch and
+$(1-q_H^{-i_r}X_r)e(i)$ in the nondegenerate branch. The illustration uses
+only these established maps and identities; the proof above is independent
+of the figure.

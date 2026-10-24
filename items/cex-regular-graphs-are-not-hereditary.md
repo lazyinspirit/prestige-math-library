@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-regular-graphs-are-not-hereditary.json
+  precheck: pass
 id: cex-regular-graphs-are-not-hereditary
 kind: counterexample
 title: "The class of regular graphs is not hereditary"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-01
 sources:
   scraped: []
   references:
@@ -51,8 +51,10 @@ The class of finite regular graphs is hereditary.
 
 ## Remarks
 
-```tikz \begin{tikzpicture}[ vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\small}, chosen/.style={vertex,fill=blue!15}, edge/.style={draw=blue!70!black,line width=1.2pt}, caption/.style={font=\small,align=center} ] \node[chosen] (v0) at (0,0) {$v_0$}; \node[chosen] (v1) at (0,1.5) {$v_1$}; \node[chosen] (v2) at (1.5,1.5) {$v_2$}; \node[vertex] (v3) at (1.5,0) {$v_3$}; \draw[edge] (v0)--(v1)--(v2)--(v3)--cycle; \node[caption] at (.75,-.65) {$C_4$: every degree is $2$};
+```tikz
+\begin{tikzpicture}[ vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\small}, chosen/.style={vertex,fill=blue!15}, edge/.style={draw=blue!70!black,line width=1.2pt}, caption/.style={font=\small,align=center} ] \node[chosen] (v0) at (0,0) {$v_0$}; \node[chosen] (v1) at (0,1.5) {$v_1$}; \node[chosen] (v2) at (1.5,1.5) {$v_2$}; \node[vertex] (v3) at (1.5,0) {$v_3$}; \draw[edge] (v0)--(v1)--(v2)--(v3)--(v0); \node[caption] at (.75,-.65) {$C_4$: every degree is $2$};
 
 \draw[->,line width=.9pt] (2.1,.75)--node[above,font=\scriptsize] {$G[\{v_0,v_1,v_2\}]$} (4.05,.75);
 
-\node[chosen] (w0) at (4.55,0) {$v_0$}; \node[chosen] (w1) at (5.75,1.5) {$v_1$}; \node[chosen] (w2) at (6.95,0) {$v_2$}; \draw[edge] (w0)--(w1)--(w2); \node[caption] at (5.75,-.65) {$P_3$: degrees $1,2,1$}; \end{tikzpicture} ```
+\node[chosen] (w0) at (4.55,0) {$v_0$}; \node[chosen] (w1) at (5.75,1.5) {$v_1$}; \node[chosen] (w2) at (6.95,0) {$v_2$}; \draw[edge] (w0)--(w1)--(w2); \node[caption] at (5.75,-.65) {$P_3$: degrees $1,2,1$}; \end{tikzpicture}
+```

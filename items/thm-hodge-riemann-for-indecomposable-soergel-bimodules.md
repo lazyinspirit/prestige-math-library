@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hodge-riemann-for-indecomposable-soergel-bimodules.json
+  precheck: pass
 id: thm-hodge-riemann-for-indecomposable-soergel-bimodules
 kind: theorem
 title: "Simultaneous induction: Soergel's conjecture, hard Lefschetz and the Hodge-Riemann relations hold for all elements"
@@ -25,8 +28,7 @@ sources:
     - title: "Soergel, Kazhdan-Lusztig-Polynome und unzerlegbare Bimoduln ueber Polynomringen (arXiv:math/0403496, published J. Inst. Math. Jussieu 6 (2007) 501-525)"
       url: "https://arxiv.org/pdf/math/0403496"
       locator: "Lemma 7.1 and Bemerkung 6.15 (the omnibus lemma and the rank-one and rank-two cases)"
-verification:
-  precheck: pass
+
 ---
 
 ## Facts & Assumptions
@@ -37,7 +39,7 @@ verification:
 
 [F2] The embedding theorem: under $\mathrm S(<xs)$ and $\mathrm{HR}(y)$ for $y<xs$, the local intersection forms embed isometrically, up to a positive scalar, into the primitive Lefschetz forms of $B_x^RB_s^R$; consequently $\mathrm{HR}(x,s)$ implies $\mathrm S(xs)$, and more precisely $\mathrm{HR}(x,s)$ implies the definiteness statements $\mathrm S^\pm(<xs,x,s)$ ([[lem-local-intersection-forms-embed-in-primitive-lefschetz-forms]]).
 
-[F3] The three-case hard Lefschetz theorem for the deformed operator on $B_xB_s$: the cases $(\zeta>0,\ xs<x)$ under $\mathrm S(x)$ and $\mathrm hL(x)$; $(\zeta>0,\ xs>x)$ under $\mathrm S(\le x)$, the lower ascent HR statements, $\mathrm{HRbar}(<x,s)_\zeta$ and $\mathrm{HR}(x)$; and $(\zeta=0,\ xs>x)$ under $\mathrm S(\le x)$, the lower ascent HR statements, $\mathrm{HR}(x)$ and $\mathrm hL(z)$ for all $z<xs$; in each case the conclusion is $\mathrm hL(x,s)_\zeta$ for the stated parameters ([[thm-deformed-hard-lefschetz-for-b-x-b-s]]).
+[F3] The three-case hard Lefschetz theorem for the deformed operator on $B_xB_s$: the cases $(\zeta>0,\ xs<x)$ under $\mathrm S(x)$ and $\mathrm hL(x)$; $(\zeta>0,\ xs>x)$ under $\mathrm S(\le x)$, the lower ascent HR statements, $\mathrm{HRbar}(<x,s)_\zeta$ and $\mathrm{HR}(x)$; and $(\zeta=0,\ xs>x)$ under $\mathrm S(\le x)$, the lower ascent HR statements, $\mathrm{HR}(x)$ and $\mathrm hL(z)$ for all $z<xs$; in each case the conclusion is $\mathrm hL(x,s)_\zeta$ for the stated parameters ([[thm-deformed-hard-lefschetz-for-b-x-b-s|Hard Lefschetz for the deformed operator on $B_x B_s$, in the three cases]]).
 
 [F4] The deformation principle: $\mathrm{HR}(x)$ together with $\mathrm hL(x,s)_\zeta$ for all $\zeta$ in an interval implies $\mathrm{HR}(x,s)_\zeta$ throughout that interval, because $\mathrm{HR}(x,s)_{\zeta_0}$ holds for some $\zeta_0\gg0$ and signatures are constant on compact parameter intervals free of parameter values where the form degenerates; on $(0,\infty)$ one applies this on a compact subinterval joining any requested positive parameter to a sufficiently large one ([[lem-hodge-riemann-for-large-positive-deformation]], [[lem-family-signature-constancy-and-the-weak-lefschetz-substitute]]).
 

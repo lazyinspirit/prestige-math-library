@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-logarithmic-class-of-the-punctured-line-has-weight-two.json
+  precheck: pass
 id: ex-the-logarithmic-class-of-the-punctured-line-has-weight-two
 kind: example
 title: "The punctured line has a weight-two logarithmic class"
@@ -52,7 +55,7 @@ Assume AC ([[def-axiom-of-choice]]). For $U=\mathbb C^\times\subset\mathbb P^1$,
 
 ## Verification
 
-**Proof technique:** direct: compute both sides of the weight spectral sequence of the logarithmic complex for $\mathbb P^1$ and identify the surviving degree-one term with the Tate twist.
+**Proof technique:** direct: compute both sides of the weight spectral sequence of the logarithmic complex for the complex projective line and identify the surviving degree-one term with the Tate twist.
 
 1.1 The two cohomologies. By [F1] and [F2], $H^0(X;\mathbb Q)=\mathbb Q$, $H^1(X;\mathbb Q)=0$, $H^2(X;\mathbb Q)=\mathbb Q$; $H^0(D^{[1]};\mathbb Q)=\mathbb Q^2$ and $H^1(D^{[1]};\mathbb Q)=0$; and $H^0(U;\mathbb Q)=\mathbb Q$, $H^1(U;\mathbb Q)=\mathbb Q$, $H^2(U;\mathbb Q)=0$, the generator being the meridian class dual to the circle. [F1, F2, given, algebra]
 

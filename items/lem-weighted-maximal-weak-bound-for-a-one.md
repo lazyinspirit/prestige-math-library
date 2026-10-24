@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-weighted-maximal-weak-bound-for-a-one.json
+  precheck: pass
 id: lem-weighted-maximal-weak-bound-for-a-one
 kind: lemma
-title: Weighted weak (1,1) bound for the maximal function under A_1
+title: Weighted weak (1,1) bound for the maximal function under $A_1$
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.3 (1) with its Vitali proof, printed pp. 67-68"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

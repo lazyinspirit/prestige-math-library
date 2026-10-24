@@ -1,0 +1,109 @@
+{
+  "id": "ex-latent-confounding-mimics-anm-direction",
+  "agent": "/root/rendering_repair_coordinator/slcm_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the sole flagged tile standalone at original resolution: the Remarks displays literal begin/node/draw commands instead of both promised causal graphs. Frozen and current pre-edit source match exactly. The tilde TikZ fence is not recognized by this native ItemBody diagram parser.",
+      "action": "Replaced only the opening and closing tilde fences with triple backticks; retained every TikZ node, edge, label, and coordinate.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed only diagram fence lines 75 and 88 to the supported backtick form, making the existing two-panel causal graph render.",
+  "source_lines_after": [
+    75,
+    88
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Model A has vertices U, X, Y, with latent set {U} and observed set {X,Y}; Model B has observed vertices X,Y and no latent vertex.",
+      "justification": "Example lines 42\u201345 and def-recursive-structural-causal-model-and-dag Definition partition V=O disjoint-union H; dashed U and solid X,Y match the stated convention."
+    },
+    {
+      "relations": [
+        "Model A: U -> X",
+        "Model A: U -> Y",
+        "Model B: X -> Y"
+      ],
+      "justification": "Model A structural equations X=U+epsilon_X and Y=U+epsilon_Y each have U as their sole endogenous parent; U=N_U is a root. Model B X=sqrt(2)Z_1 is a root and Y=X/2+E has sole endogenous parent X. Checked against the parent-input definition in def-recursive-structural-causal-model-and-dag and def-additive-noise-model. All variables take real values; the structural functions are R x R -> R for each one-parent node and R -> R for roots. These are acyclic graphs with respectively 3 vertices/2 arrows and 2 vertices/1 arrow; the actual rendered arrowheads have the stated direction."
+    },
+    {
+      "comparison": "No arrow joins the two model panels and no graphical equivalence or intervention equality is asserted.",
+      "justification": "Verification steps 1.1\u20131.2 independently compare observational densities and step 2.1 independently distinguishes intervention laws. The diagram is illustrative and contains no equality annotation."
+    }
+  ],
+  "proof_independent": true,
+  "before_guard": {
+    "sha256": "5378708194b69d026af9350b5b1271f90014ffcd52dd20d142d84352d8eda633",
+    "result": "Exact raw SHA256 asserted immediately before the two-line edit."
+  },
+  "after_raw_sha256": "099445be65dabe46388ff2c416f68f6da627bf7882a1c5edeff524d21ebbe1a5",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "visual_checks": {
+    "original_tiles_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/statistical-learning-and-classical-models/screenshots/ex-latent-confounding-mimics-anm-direction--01.png"
+    ],
+    "current_tiles_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/slcm_006-final-v2/screenshots/ex-latent-confounding-mimics-anm-direction--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/slcm_006-final-v2/screenshots/ex-latent-confounding-mimics-anm-direction--02.png"
+    ],
+    "view_detail": "original, each image viewed standalone",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/slcm_006-final-v2/manifest.json",
+    "result": "Actual native ItemBody SSR TikZ compilation produced both graph panels. Visible dashed U, two outgoing Model A arrows and the Model B X-to-Y arrow are distinct and unobstructed. Receipt: tikz_count 1, katex_errors [], diagram_failures [].",
+    "limitations": "Local native ItemBody preview using file:// with external requests blocked; no production route or live website visited. First preview invocation lacked TSX_TSCONFIG_PATH and failed alias resolution, retained under previews/slcm_006-final; corrected invocation succeeded under slcm_006-final-v2."
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-latent-confounding-mimics-anm-direction.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-latent-confounding-mimics-anm-direction.md",
+            "item_id": "ex-latent-confounding-mimics-anm-direction",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-latent-confounding-mimics-anm-direction.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-latent-confounding-mimics-anm-direction.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-latent-confounding-mimics-anm-direction --out research/math-library-rendering-repairs-2026-10-23/previews/slcm_006-final-v2",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      },
+      "note": "Reference diagnostics concern unrelated malformed carriers omitted by the preview title map."
+    }
+  ],
+  "remaining_issues": []
+}

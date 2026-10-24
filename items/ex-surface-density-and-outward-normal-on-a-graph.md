@@ -1,16 +1,13 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-surface-density-and-outward-normal-on-a-graph.json
+  precheck: pass
 id: ex-surface-density-and-outward-normal-on-a-graph
 kind: example
 title: Graph density and outward orientation
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: Hunter, Notes on Partial Differential Equations
@@ -41,3 +38,31 @@ For a subgraph $z<h(y)$ in $\mathbb R^n$, the boundary chart $X(y)=(y,h(y))$ has
 ## Source notes
 
 Hunter §1.10.3, graph surface element and Example 1.43, printed p. 16 (PDF p. 22). The affine numerical instance is computed here.
+
+
+## Remarks
+
+The diagram shows the affine patch in parallel projection. Dashed outlines indicate the closures of the open parameter square and its image; their boundary edges are excluded. The tangent vectors are $t_1=(1,0,2)$ and $t_2=(0,1,-1)$, and $N=t_1\times t_2=(-2,1,1)$ points out of the subgraph. The normal arrow is a positive multiple of $N$; angles and lengths are not preserved by the projection.
+
+```tikz
+\begin{tikzpicture}[x=1.35cm,y=1.35cm,>=stealth,line width=0.9pt]
+\draw[dashed] (0,0) -- (1,0) -- (1,1) -- (0,1) -- (0,0);
+\node at (0.5,0.5) {$(0,1)^2$};
+\node[below] at (0.5,0) {$y_1$};
+\node[left] at (0,0.5) {$y_2$};
+\draw[->] (1.45,0.5) -- (2.65,0.5);
+\node[above] at (2.05,0.5) {$X$};
+\begin{scope}[shift={(3.6,0.2)}]
+\draw[dashed] (0,0) -- (1,1.05) -- (1.65,0.8) -- (0.65,-0.25) -- (0,0);
+\draw[->] (0.12,0.126) -- (0.78,0.819);
+\node[right] at (0.85,0.72) {$t_1$};
+\draw[->] (0.078,-0.03) -- (0.507,-0.195);
+\node[below] at (0.35,-0.16) {$t_2$};
+\draw[->] (0.825,0.4) -- (0.015,1.33);
+\node[above] at (0.015,1.33) {$N=(-2,1,1)$};
+\node[below] at (1.0,-0.55) {$dS=\sqrt{6}\,dy_1\,dy_2$};
+\end{scope}
+\end{tikzpicture}
+```
+
+Here $X(y_1,y_2)=(y_1,y_2,2y_1-y_2+3)$. Since $|N|=\sqrt6$ and $e_3\cdot N=1$, the density and upward flux over the parameter square are $\sqrt6$ and $1$, respectively, as computed in Verification step 2.1. The verification does not depend on the illustration.

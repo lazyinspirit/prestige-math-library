@@ -1,0 +1,138 @@
+{
+  "id": "alg-qc-teleportation",
+  "group": "dqc_003",
+  "agent": "/root/dqc_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic original-resolution tile shows only the textual protocol. An explanatory circuit materially clarifies the distinction between the preshared BC Bell resource and gate preparation, the ordered measurements (a,b), and their separate classical feed-forward to Bob. The complete existing definition is preserved.",
+      "action": "Added a three-wire TikZ circuit and explicit graphical convention caption in final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory teleportation circuit: preshared Bell resource on BC, CNOT A control/B target, H on A, ordered computational measurements producing a and b, and dashed classical feed-forward to X^b then Z^a on C.",
+  "source_lines_after": {
+    "remarks": [
+      55,
+      96
+    ],
+    "tikz_fence": [
+      63,
+      92
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "metadata_and_status_preserved": true,
+  "definition_preserved_byte_for_byte": true,
+  "before_raw_sha256": "68fa095854cdde8390927bac2d830927494665825a82c246a618292c083342c3",
+  "after_raw_sha256": "fb0bdc64f862067592f62fb833a9ee9d49721dfafa6105516039b984d9e6897c",
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "A,B,C are ordered Q_2 registers; the input vector is |psi>_A tensor |Phi+>_BC. Bell supplier defines |Phi+>=(|00>+|11>)/sqrt(2); the resource box has B and C output wires and is not a preparation operation.",
+      "justification": "Assigned Definition opening paragraph and resource caveat; def-qc-bell-basis Definition."
+    },
+    {
+      "gates_and_order": "The CNOT dot on top A and circled plus on B implement |a,t> -> |a,t xor a>; H acts on A afterwards, with C untouched. CNOT is an endomorphism of Q_2 tensor Q_2, H an endomorphism of Q_2; their embeddings act on the ordered three-register product.",
+      "justification": "Assigned Definition step 1; def-qc-cnot-and-control-target-order Definition; exact Hadamard matrix in def-qc-one-qubit-gate-alphabet-and-rotations."
+    },
+    {
+      "measurement_and_classical_edges": "The top M_Z records a from A; the middle M_Z records b from B. The two dashed arrows originate at distinct measurements and end on Z^a and X^b respectively, with no quantum connection from Alice to C. The caption defines M_Z as computational-basis measurement, not a coherent control gate.",
+      "justification": "Assigned Definition steps 2\u20133; finite measurement/classical suffix convention in def-qc-classical-control-and-measurement-circuit."
+    },
+    {
+      "correction_relation": "C runs left-to-right through X^b then Z^a, so its suffix is Z^a X^b as an endomorphism of Q_2. In particular the a=b=1 branch has uncorrected XZ|psi>; ZX(XZ)|psi>=|psi>, with no extra sign.",
+      "justification": "Assigned Definition step 4; explicit X and Z matrices in def-qc-pauli-matrices. Independent amplitude calculation applied CNOT then H to each of |0>_A and |1>_A tensored with Phi+ and checked all four outcomes after corrections: every unnormalized corrected branch equals one-half the input basis vector (absolute numerical error below 1e-12). Linearity gives the stated convention for arbitrary input."
+    },
+    {
+      "proof_independence": "The original complete procedural definition is byte-identical and contains no reliance on this figure; the added caption explicitly says the circuit does not replace the independent algebraic correctness argument."
+    }
+  ],
+  "proof_independent": true,
+  "original_visual_evidence": {
+    "declared_evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-computing/diagram-supplement",
+    "path_discrepancy": "Declared diagram-supplement/screenshots path is absent. Authentic matching image exists in the corresponding category screenshots directory.",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/alg-qc-teleportation--01.png",
+    "sha256": "e59ecd632f748e99ba0150f5f5968b27f006b3c4f8de2960d97a420771bb9eb0",
+    "inspection": "Standalone view_image at original resolution; hash equals queue screenshot_sha256."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qc-teleportation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qc-teleportation.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qc-teleportation.md",
+            "item_id": "alg-qc-teleportation",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qc-teleportation.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqc-003 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-qc-teleportation --out research/math-library-rendering-repairs-2026-10-23/previews/dqc-003-teleportation",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqc-003-teleportation/manifest.json",
+    "manifest_sha256": "c5c5d4539d06336108d0e4a899bb399315da099084d305511057231208b59f97",
+    "source_sha256": "fb0bdc64f862067592f62fb833a9ee9d49721dfafa6105516039b984d9e6897c",
+    "reference_map_sha256": "08d5d3580bb4f20ca11ab60ccf4a3ce3d74d703fbb394a32da9e2a094120763b",
+    "capture": {
+      "capture_revision": 2,
+      "id": "alg-qc-teleportation",
+      "height": 1400,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/alg-qc-teleportation--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "fae3c3a8bf2c638c047158e849d10c8a6e18c8490213b2e56332f039e2170dab",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 28,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T03:50:57.937Z"
+    },
+    "inspection": "Standalone original-resolution native PNG inspected. All three wires, resource box, CNOT filled control/circled-plus target, H, both measurements, separate dashed arrows and ordered X^b/Z^a gates are visible on the actual dark background; no clipping or label overlap observed.",
+    "limitations": [
+      "Local native ItemBody preview, not production route or loader/navigation coverage.",
+      "Reference map reports 13 unrelated parse diagnostics; assigned links render in the preview."
+    ]
+  },
+  "remaining_issues": []
+}

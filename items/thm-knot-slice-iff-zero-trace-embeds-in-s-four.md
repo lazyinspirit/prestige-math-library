@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-knot-slice-iff-zero-trace-embeds-in-s-four.json
+  precheck: pass
 id: thm-knot-slice-iff-zero-trace-embeds-in-s-four
 kind: theorem
 title: "A knot is smoothly slice exactly when its zero-trace embeds in $S^4$"
@@ -31,13 +34,7 @@ sources:
     - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
       locator: "§4.4, pp. 24–25, peripheral slopes and preferred longitude; the framing comparison is proved below"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -94,31 +91,47 @@ smooth codimension-zero embedding into the standard $S^4$.
 
 ## Diagram
 
-~~~tikz
-\begin{tikzpicture}[scale=0.9]
-  % The two circles on the left are separate disks whose boundaries are identified.
-  \draw[thick] (0,0) circle (0.62);
+```tikz
+\begin{tikzpicture}
+  % Intrinsic surface schematics, not knot projections in three-space.
+  \draw[thick] (0,0) circle (0.9);
   \foreach \a in {0,45,...,315} {
-    \draw[thin] (0,0) -- ({0.62*cos(\a)},{0.62*sin(\a)});
+    \draw[thin] (0,0) -- ({0.9*cos(\a)},{0.9*sin(\a)});
   }
   \fill (0,0) circle (1.5pt);
-  \node[above] at (0,0.82) {$\partial D_{\mathrm{cone}}=K$};
-  \node[below] at (0,-0.82) {$D_{\mathrm{cone}}$};
-  \node[below] at (0,-0.1) {$p$};
+  \node[below right] at (0,0) {$p$};
+  \node[above] at (0,1.05) {$\partial D_{\mathrm{cone}}=K$};
+  \node[below] at (0,-1.05) {$D_{\mathrm{cone}}$};
 
-\draw[thick] (1.65,0) circle (0.62); \node[above] at (1.65,0.82) {$\partial D_{\mathrm{core}}=K$}; \node[below] at (1.65,-0.82) {$D_{\mathrm{core}}$}; \node at (0.82,1.28) {identify boundaries}; \node at (0.82,1.02) {$K$};
+  \draw[thick] (3.5,0) circle (0.9);
+  \node[above] at (3.5,1.05) {$\partial D_{\mathrm{core}}=K$};
+  \node[below] at (3.5,-1.05) {$D_{\mathrm{core}}=D^2\times\{0\}$};
+  \node at (1.75,2) {identify boundaries along $K$};
 
-\draw[->,thick] (2.38,0) -- (2.95,0); \node[above] at (2.66,0.05) {glue};
+  \draw[->,thick] (4.8,0) -- (6.4,0);
+  \node[above] at (5.6,0.15) {glue};
 
-\draw[thick] (3.75,0) circle (0.75); \draw[thick] (3.0,0) -- (4.5,0); \node[left] at (3.0,0) {$K$}; \fill (3.75,0.75) circle (1.5pt); \node[above] at (3.75,0.9) {$p$}; \node at (3.75,0.34) {cone}; \node at (3.75,-0.34) {core}; \node[below] at (3.75,-0.92) {piecewise-smooth sphere}; \draw[dashed,thick] (3.47,0.68) .. controls (3.75,0.8) .. (4.03,0.68); \node[right] at (4.02,0.7) {$\Gamma_\epsilon$};
+  \draw[thick] (8.2,0) circle (1.2);
+  \draw[thick] (8.2,0) ellipse (1.2 and 0.2);
+  \node[left] at (7,0) {$K$};
+  \fill (8.2,1.2) circle (1.5pt);
+  \node[above] at (8.2,1.3) {$i(p)$};
+  \node at (8.2,0.4) {cone};
+  \node at (8.2,-0.55) {core};
+  \draw[dashed,thick] (8.2,0.82) ellipse (0.6 and 0.12);
+  \node[right] at (8.85,0.85) {$\Gamma_\epsilon$};
+  \node[below] at (8.2,-1.35) {$i(D_{\mathrm{cone}}\cup_K D_{\mathrm{core}})$};
+  \node[below] at (8.2,-1.85) {sphere, smooth away from $i(p)$};
 
-\draw[->,thick] (4.62,0) -- (5.2,0); \node[above] at (4.92,0.05) {remove cap};
+  \draw[->,thick] (10.4,0) -- (13.4,0);
+  \node[above] at (11.9,0.15) {remove cone cap};
 
-  \draw[thick] (5.9,0) ellipse (0.68 and 0.48);
-  \node at (5.9,0) {slice disk};
-  \node[above] at (5.9,0.55) {$\partial D=\Gamma_\epsilon$};
+  \draw[thick] (15.2,0) ellipse (1.25 and 0.8);
+  \node at (15.2,0) {$D_\epsilon$};
+  \node[above] at (15.2,1.05) {$\partial D_\epsilon=\Gamma_\epsilon$};
+  \node[below] at (15.2,-1.05) {$D_\epsilon\subset W\cong B^4$};
 \end{tikzpicture}
-~~~
+```
 
-The schematic identifies the cone disk and the $2$-handle core along their common boundary $K$, and marks the cone point and the small boundary $\Gamma_\epsilon$ created by deleting a cap. The proof uses the local coordinate-ball argument above, not the sketch.
+These are intrinsic surface schematics, not planar knot projections: the circles do not assert that $K$ is unknotted in $S^3$. The cone disk and the $2$-handle core are glued along $K$ and their join is smoothed, giving the sphere of step 1.2. In its image under $i$, the dashed loop marks $\Gamma_\epsilon$ around the cone point $i(p)$. Deleting the cone cap gives the smooth proper disk $D_\epsilon$ in the standard $4$-ball $W$; appending the collar annulus from the isotopy $\Gamma_\epsilon\simeq K$ gives the slice disk with boundary exactly $K$ in step 3.1. The proof uses the local coordinate-ball argument above, independently of this sketch.
 

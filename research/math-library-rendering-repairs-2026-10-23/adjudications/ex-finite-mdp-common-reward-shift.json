@@ -1,0 +1,68 @@
+{
+  "id": "ex-finite-mdp-common-reward-shift",
+  "agent": "/root/rendering_repair_coordinator/orl_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Both original PNGs were viewed independently and standalone at original resolution. The end tile visibly interleaves the choose-a/b text with the corresponding joint-mass equations near the action rectangles; this is internal to the complete diagram, not screenshot clipping. The small original labels also hinder reading.",
+      "action": "Retained node coordinates, node shapes, all four directed edges and original arc bends. Moved choice labels to the state ends below the straight edges and joint-mass labels above the action ends, with an explicit vertical offset; enlarged diagram and labels for readability.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "TikZ display-only scale/font and edge-label placement changes at lines 75 and 79\u201382. All frontmatter, claims, verification steps, references and explanatory prose are byte-identical to frozen before.",
+  "source_lines_after": [
+    75,
+    79,
+    80,
+    81,
+    82
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Actual objects and choices",
+      "justification": "The Example specifies S={s}, A(s)={a,b}. The single circular s and two rectangular a,b nodes match these sets. The arrows s\u2192a and s\u2192b represent available choices, not extra MDP states or transitions. Node identities, shapes and directed endpoints are unchanged."
+    },
+    {
+      "check": "Joint reward-transition relations",
+      "justification": "The Example states deterministic returns to s with reward 1 under a and 3 under b. In def-finite-markov-decision-process, p(s\u2032,rho|s,a) is joint mass on next state and reward. Thus the two curved arrows a\u2192s and b\u2192s labeled p(s,1|s,a)=1 and p(s,3|s,b)=1 are exactly the original model. There are three drawing vertices and four directed drawing edges; the two action rectangles are choice devices, so the MDP still has one state. No probabilities, rewards, or arrow directions changed."
+    },
+    {
+      "check": "Discount and shifted model convention",
+      "justification": "def-policy-bellman-operator and def-bellman-optimality-operator place gamma on the continuation term only; the Example uses gamma=1/2. The diagram depicts only original immediate rewards 1,3, consistent with Verification 1.1: v=1+v/2 or 3+v/2, hence fixed points 2,6. Verification 2.1 shifts rewards to 3,5 and values to 6,10; the unchanged Remarks accurately describe that change without suggesting additional discount on the edge rewards."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "precheck": {
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; direct strategy pass",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/checks/orl_002/precheck.json"
+    },
+    "rendercheck": {
+      "exit_code": 0,
+      "result": "1 checked; errors=[], warnings=[]",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/checks/orl_002/rendercheck.json"
+    },
+    "proof_layout": {
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 4 steps, 0 defects",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/checks/orl_002/proof-layout.json"
+    },
+    "native_current_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/orl_002-final",
+      "result": "Current native ItemBody SSR: 60 KaTeX expressions, one TikZ figure, no KaTeX errors or diagram failures. Both final tiles viewed standalone at original resolution; labels readable, separated from one another and nodes, all four directed edges present.",
+      "limitations": "Local file preview with native components, not an HTTP page. Reference-title map reports 16 unrelated malformed sources."
+    }
+  },
+  "before_raw_sha256": "82f26b3bb90f09be0caf5f2f4605830e2cf9c21136796f1753a0d1ec6d0dddba",
+  "after_raw_sha256": "8b4ccdfc49c153948d09e59e19b9cc526db83901edffd2b90f4d4585e213bfe7",
+  "write_guard": "Original raw SHA256 matched immediately before first edit. Frontmatter and all body before the TikZ fence remain byte-identical to frozen before; status: published unchanged.",
+  "remaining_issues": []
+}

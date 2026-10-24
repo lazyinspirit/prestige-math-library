@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-pit-is-in-corp.json
+  precheck: pass
 id: ex-pit-is-in-corp
 kind: example
-title: "A random evaluation test that separates the zero polynomial from x^2-y^2"
+title: "A random evaluation test that separates the zero polynomial from x²−y²"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ generation:
   role: example
 deps: [def-polynomial-identity-testing, thm-schwartz-zippel-lemma, cor-pit-is-in-corp]
 proof_strategy: direct
-verification:
-  audited: 2026-09-12
-  precheck: pass
 sources:
   scraped: []
   references:

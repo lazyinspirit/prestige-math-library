@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-john-nirenberg-tail-integration.json
+  precheck: pass
 id: ex-john-nirenberg-tail-integration
 kind: example
-title: "Integrating the John-Nirenberg tail recovers the Lq oscillation bound"
+title: "Integrating the John-Nirenberg tail recovers the $L^q$ oscillation bound"
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30

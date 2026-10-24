@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-pontryagin-thom-correspondence-in-fixed-codimension.json
+  precheck: pass
 id: thm-pontryagin-thom-correspondence-in-fixed-codimension
 kind: theorem
 title: "The Pontryagin-Thom correspondence in fixed codimension"
@@ -27,8 +30,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "John Milnor, Topology from the Differentiable Viewpoint"
@@ -94,3 +95,19 @@ are zero-dimensional.
 2.2 ($\Phi\circ\Psi$ is the identity.) Let $[f]\in\pi_n(S^k)$ and let $(N,\varphi)$ be the framed preimage produced by $\Psi$ from a smooth map $f'$ homotopic to $f$, a regular value $y$ and a positive basis $b$. Then $\Phi(\Psi[f])=[f_{(N,\varphi)}]$, and $f_{(N,\varphi)}$ is smoothly homotopic to $f'$ by [F6]; since $f'$ is homotopic to $f$, the classes agree: $\Phi(\Psi[f])=[f]$. [F5, F6, step 1.2]
 
 3.1 (Conclusion.) Steps 1.1-1.2 define the two maps, and steps 2.1-2.2 show that their composites are the identities on the two sets; hence they are mutually inverse bijections. Composing $\Psi$ with the identification of based and free classes [F7] gives the corresponding bijection with $[S^n,S^k]$. The case $n=k$ is included: the preimages are zero-dimensional, and the empty manifold is allowed as a framed submanifold and as a preimage. Only $\mathrm{AC}_\omega$, inherited through the transversality, approximation and normal-bundle suppliers, is used. [F1, F5, F7, F8, step 1.1, step 1.2, step 2.1, step 2.2] ∎
+
+
+## Remarks
+
+The two constructions can be pictured on classes. Write $\mathcal F_{n,k}$ for the framed cobordism classes in the statement. The arrows below are the maps of steps 1.1–1.2; the collapse arrow includes the identification of free and based homotopy classes in [F7].
+
+```tikz
+\begin{tikzpicture}
+\node (F) at (0,0) {$\mathcal F_{n,k}$};
+\node (P) at (6,0) {$\pi_n(S^k)$};
+\draw[->] (F) to[bend left=24] node[above] {$\Phi:\ \mathrm{collapse}$} (P);
+\draw[->] (P) to[bend left=24] node[below] {$\Psi:\ \mathrm{regular\ preimage}$} (F);
+\end{tikzpicture}
+```
+
+Concretely, $\Phi$ sends $[(N,\varphi)]$ to the class of $f_{(N,\varphi)}|_{S^n}$ under that identification. The reverse arrow sends $[f]$ to $[(f'^{-1}(y),f'_*b)]$, where $f'$ is a smooth representative, $y$ is regular and $b$ is a positive basis of $T_yS^k$. The two round trips satisfy $\Psi\circ\Phi=\mathrm{id}_{\mathcal F_{n,k}}$ by step 2.1 and $\Phi\circ\Psi=\mathrm{id}_{\pi_n(S^k)}$ by step 2.2. In the first round trip the normalized collapse has centre fibre exactly $(N,\varphi)$; in the second its collapse is homotopic to $f'$. Empty fibres and $n=k$ remain included. The proof above is independent of this illustration.

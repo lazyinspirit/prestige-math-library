@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-proportional-functions-realise-the-equality-case-of-holder.json
+  precheck: pass
 id: ex-proportional-functions-realise-the-equality-case-of-holder
 kind: example
 title: "Proportional functions realise the equality case of Holder"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-equality-case-in-holder-inequality]
 proof_strategy: "Choose nonnegative functions with |f|^p and |g|^q proportional almost everywhere and invoke the equality theorem."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -38,7 +38,7 @@ $$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$
 
 ## Verification
 
-**Proof technique:** Choose nonnegative functions with $|f|^p$ and $|g|^q$ proportional almost everywhere and invoke the equality theorem.
+**Proof technique:** Choose nonnegative functions whose p-th and q-th absolute-value powers are proportional almost everywhere and invoke the equality theorem.
 
 1.1 The functions satisfy [given] $$|f|^p=a^p\chi_{[0,1]},\qquad |g|^q=b^q\chi_{[0,1]},$$ so $|f|^p=(a^p/b^q)|g|^q$ almost everywhere. [given]
 

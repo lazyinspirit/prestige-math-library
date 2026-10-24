@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-relation-on-a-three-element-set-with-its-domain-range-inverse-and-composites.json
+  precheck: pass
 id: ex-a-relation-on-a-three-element-set-with-its-domain-range-inverse-and-composites
 kind: example
 title: "A four-pair relation on $\\{\\varnothing,\\{\\varnothing\\},\\{\\varnothing,\\{\\varnothing\\}\\}\\}$ with its domain, range, field, inverse, restriction, image and self-composite computed"
@@ -13,14 +16,6 @@ aliases: []
 landmark: false
 short: "a relation computed"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-08-06
-    scope: page
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -89,3 +84,25 @@ $$R \restriction \{u\} = \{(u,v),(u,u)\}, \qquad R[\{u\} \cup \{v\}] = A, \qquad
 2.3 For the self-composite, each pair $(a,b)$ of $R$ is matched with every pair of $R$ whose first coordinate is $b$: from $(u,v)$ and $(v,w)$ comes $(u,w)$; from $(u,u)$ and the two pairs starting at $u$ come $(u,v)$ and $(u,u)$; from $(v,w)$ and $(w,u)$ comes $(v,u)$; and from $(w,u)$ and the two pairs starting at $u$ come $(w,v)$ and $(w,u)$. These six pairs are exactly the displayed $R \circ R$. [L3, L5, L9, L11, step 1.1]
 
 3.1 The domain, range, field, inverse, restriction, image and self-composite are as displayed. [step 2.1, step 2.2, step 2.3] ∎
+
+## Remarks
+
+The arrows below encode $R$: an arrow from $a$ to $b$ means $(a,b) \in R$.
+Thus the three-cycle and the loop at $u$ represent exactly the four displayed pairs.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (u) at (0,1.8) {$u$};
+\node (v) at (-1.7,-0.9) {$v$};
+\node (w) at (1.7,-0.9) {$w$};
+\draw[->,thick] (u) -- (v);
+\draw[->,thick] (v) -- (w);
+\draw[->,thick] (w) -- (u);
+\draw[->,thick] (u) to[loop above,min distance=13mm] (u);
+\end{tikzpicture}
+```
+
+Following two arrows gives the self-composite: from $u$ one reaches $u,v,w$;
+from $v$ one reaches only $u$; and from $w$ one reaches $u,v$.
+Reversing every arrow gives $R^{-1}$, while keeping only arrows starting at $u$
+gives $R \restriction \{u\}$. The verification above is independent of this illustration.

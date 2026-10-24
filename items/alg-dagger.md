@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-dagger.json
+  precheck: n/a
 id: alg-dagger
 kind: algorithm
 title: Dataset Aggregation (DAgger)
@@ -15,8 +18,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Stéphane Ross, Geoffrey J. Gordon, and J. Andrew Bagnell, A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning"
@@ -59,3 +60,24 @@ The finite-sample output is the sequence $\hat\pi_1,\ldots,\hat\pi_N$ and the ag
 [Bagnell, Boots, and Choudhury, *Modern Adaptive Control and Reinforcement Learning*, Chapter 6](https://macrl-book.github.io/assets/pdf/6_macrl.pdf): PDF pp. 4–6 / printed pp. 57–59.
 
 [Duisterhof, Truong, and Agrawal, *Algorithmic Foundations of Interactive Learning*, Lecture 9](https://interactive-learning-algos.github.io/assets/pdfs/afil_scribe_book.pdf): PDF pp. 51–53 / note pages 47–48.
+
+## Remarks
+
+The loop below separates rollout actions from training labels. At each decision the independent coin chooses which action the MDP executes; every visited state receives an expert label regardless of that choice. The multiset $\mathcal D_i$ retains all rounds with multiplicity. Since every round has $mT$ samples, its labeled blocks supply the cumulative empirical objective $\sum_{r=1}^i\hat L_r$ used by the supplied minimizer selector. The return arrow advances to round $i+1$ only when another round is to be run. This is an illustration of the definition, not an additional guarantee.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={align=center}, box/.style={draw, rounded corners, minimum height=1.15cm, text width=3.25cm}, every path/.style={thick}]
+\node[box] (learner) at (0,0) {Current learner\\ $\hat\pi_i=\pi_{\theta_i}$};
+\node[box] (mix) at (4.4,0) {Per-decision mixture\\ $\beta_i\pi^*+(1-\beta_i)\hat\pi_i$};
+\node[box] (roll) at (8.8,0) {MDP rollout\\ $m$ trajectories, $T$ steps};
+\node[box] (data) at (8.8,-3) {Aggregate labels\\ $\mathcal D_i=\mathcal D_{i-1}\uplus$\\ $\{(S_{ijt},\pi^*(S_{ijt}))\}_{j,t}$};
+\node[box] (loss) at (4.4,-3) {Cumulative loss\\ $\sum_{r=1}^{i}\hat L_r(\theta)$};
+\node[box] (update) at (0,-3) {Supplied FTL selector\\ $\theta_{i+1}\in\arg\min_{\theta\in K}$\\ $\sum_{r=1}^{i}\hat L_r(\theta)$};
+\draw[->] (learner) -- (mix);
+\draw[->] (mix) -- (roll);
+\draw[->] (roll) -- node[right,font=\small,align=left] {visited states\\query expert} (data);
+\draw[->] (data) -- (loss);
+\draw[->] (loss) -- (update);
+\draw[->] (update) -- node[left,font=\small] {next round} (learner);
+\end{tikzpicture}
+```

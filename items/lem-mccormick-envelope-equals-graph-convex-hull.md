@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-mccormick-envelope-equals-graph-convex-hull.json
+  precheck: pass
 id: lem-mccormick-envelope-equals-graph-convex-hull
 kind: lemma
 title: The four McCormick inequalities give the convex hull of a bilinear graph over a box
@@ -12,11 +15,6 @@ deps: [def-convex-subset-of-euclidean-space, def-mccormick-bilinear-box-envelope
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "A. Tsoukalas and A. Mitsos, Multivariate McCormick relaxations, §5"
@@ -53,3 +51,27 @@ For every finite box $[l_x,u_x]\times[l_y,u_y]$, the McCormick polytope from [[d
 
 3.1 If either width is zero, step 2.2 gives equality directly. If both are positive, the affine map in step 1.2 is invertible, and steps 2.1 and 2.3 prove both inclusions after normalization. These cases exhaust the ordered endpoint choices, proving equality of the original polytope and graph convex hull. [step 1.2, step 2.1, step 2.2, step 2.3, algebra] ∎
 
+
+## Remarks
+
+For the nondegenerate normalization in step 1.2, the convex hull is the tetrahedron with vertices $A=(0,0,0)$, $B=(1,0,0)$, $C=(0,1,0)$, and $D=(1,1,1)$. All four vertices lie on $W=XY$. The faces $ABC$, $BCD$, $ACD$, and $ABD$ lie respectively in the planes $W=0$, $W=X+Y-1$, $W=X$, and $W=Y$. Thus the four normalized McCormick bounds are the four face bounds of this tetrahedron. The picture shows its six edges; the product graph also contains points in its interior and is not represented by these edges alone. Step 2.3 supplies the convex coefficients, independently of the illustration. Degenerate boxes are handled separately in step 2.2.
+
+```tikz
+\begin{tikzpicture}[x={(3.8cm,0cm)},y={(-1.6cm,1.4cm)},z={(0cm,3cm)}]
+\coordinate (A) at (0,0,0);
+\coordinate (B) at (1,0,0);
+\coordinate (C) at (0,1,0);
+\coordinate (D) at (1,1,1);
+\draw[cyan,thick] (A)--(B)--(C)--(A);
+\draw[cyan,thick] (A)--(D)--(B);
+\draw[cyan,thick] (C)--(D);
+\fill[cyan] (A) circle (1.5pt);
+\fill[cyan] (B) circle (1.5pt);
+\fill[cyan] (C) circle (1.5pt);
+\fill[cyan] (D) circle (1.5pt);
+\node[below left] at (A) {$A=(0,0,0)$};
+\node[below right] at (B) {$B=(1,0,0)$};
+\node[left] at (C) {$C=(0,1,0)$};
+\node[above] at (D) {$D=(1,1,1)$};
+\end{tikzpicture}
+```

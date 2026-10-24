@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-homogeneous-curves-and-automorphisms-of-p1.json
+  precheck: pass
 id: lem-homogeneous-curves-and-automorphisms-of-p1
 kind: lemma
-title: Homogeneous curves and automorphisms of P^1
+title: Homogeneous curves and automorphisms of the projective line
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-artin-action-of-the-b-three-generators.json
+  precheck: pass
 id: ex-the-artin-action-of-the-b-three-generators
 kind: example
-title: "The Artin action of the B_3 generators"
+title: "The Artin action of the $B_3$ generators"
 status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
@@ -13,17 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item ex-the-artin-action-of-the-b-three-generators; evidence research/frontier-38-owner-30-reader-15.md, research/frontier-38-owner-30-reader-findings-15.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 1.6, printed pp. 8-10"

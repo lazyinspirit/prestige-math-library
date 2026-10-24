@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-ip-exact-block-hankel-realization.json
+  precheck: n/a
 id: alg-ip-exact-block-hankel-realization
 kind: algorithm
 title: Exact block-Hankel realization
@@ -27,14 +30,7 @@ sources:
     - title: "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes"
       url: "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
       locator: "§9.2, Hankel factorization and realization context; §9.3, PDF pp. 5–8"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -96,3 +92,37 @@ parameter recovery.
 [Dahleh, Dahleh, and Verghese, *Lectures on Dynamic Systems and Control*, Chapter 25](https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf)
 
 [Lall, *State-Space Realization*, Engr207c lecture notes](https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf)
+
+## Remarks
+
+On the successful branch, the two diagrams show the factorization in step 2
+and the composition defining $\widehat A$ in step 4. Arrow labels denote
+linear maps acting on column vectors; consecutive arrows compose from left
+to right.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (u) at (0,0) {$\mathbb R^{qm}$};
+\node (x) at (4,0) {$\mathbb R^d$};
+\node (y) at (8,0) {$\mathbb R^{qp}$};
+\draw[->] (u) -- node[below] {$\widehat R$} (x);
+\draw[->] (x) -- node[below] {$\widehat O$} (y);
+\draw[->] (u) to[bend left=30] node[above] {$H_0=\widehat O\widehat R$} (y);
+\node (a) at (0,-3) {$\mathbb R^d$};
+\node (b) at (3,-3) {$\mathbb R^{qm}$};
+\node (c) at (6,-3) {$\mathbb R^{qp}$};
+\node (e) at (9,-3) {$\mathbb R^d$};
+\draw[->] (a) -- node[above] {$\widehat R^+$} (b);
+\draw[->] (b) -- node[above] {$H_1$} (c);
+\draw[->] (c) -- node[above] {$\widehat O^+$} (e);
+\draw[->] (a) to[bend right=30] node[below] {$\widehat A=\widehat O^+H_1\widehat R^+$} (e);
+\end{tikzpicture}
+```
+
+Here $\widehat B:\mathbb R^m\to\mathbb R^d$ restricts $\widehat R$ to the
+first input block, and $\widehat C:\mathbb R^d\to\mathbb R^p$ takes the
+first output block of $\widehat O$, exactly as in step 4. Both diagrams also
+apply for $d=0$, using the stated empty-matrix convention. They illustrate
+only the specified operations; in particular they do not assert
+$H_1=\widehat O\widehat A\widehat R$ for arbitrary input data. The algorithm
+specification is independent of the diagrams.

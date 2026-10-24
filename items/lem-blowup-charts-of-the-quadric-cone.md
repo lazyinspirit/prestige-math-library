@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-blowup-charts-of-the-quadric-cone.json
+  precheck: pass
 id: lem-blowup-charts-of-the-quadric-cone
 kind: lemma
 title: Blowup charts of the quadric cone at its vertex
@@ -40,11 +43,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: The Stacks Project, Divisors, Sections 31.33-31.34 (Blowing up; Strict
@@ -117,3 +115,28 @@ Then:
 4.1 On $U_x$, the polynomial coordinate change $(x,u,v)\mapsto(x,u-v^2,v)$ identifies $E$ and $\widetilde C$ with two coordinate hyperplanes. On $U_y$ use $(s,y,t)\mapsto(s-t^2,y,t)$ instead. These charts cover their intersection by step 3.2, so the divisors meet transversally everywhere; on $\widetilde C$ their intersection is cut out by the coordinate $x$ or $y$. It is therefore a reduced effective Cartier divisor, proving (3). [F5, F9, step 3.2]
 
 5.1 The blowup $X\to\mathbb A^3_k$ is proper by [F10]. Its base change $X\times_{\mathbb A^3_k}C\to C$ is proper, and the closed inclusion of $\widetilde C$ into that fibre product is proper, so $\widetilde C\to C$ is proper. It is an isomorphism over the dense open $C\setminus\{0\}$ by [F4] and the strict-transform construction, hence birational by integrality and [F11]. Its smooth source and transverse smooth exceptional divisor prove (1) and the embedded-resolution assertion (4). The displayed source chart rings are integrally closed by [F6] and localization, so no further normalization is needed. The Axiom of Choice is inherited only from the cited constructions. [F4, F6, F8, F10, F11, step 3.1, step 4.1] ∎ 
+
+## Remarks
+
+Write $f=\pi|_{\widetilde C}$ and $D=\widetilde C\cap E$. The square below is the scheme-theoretic exceptional fibre: $D=f^{-1}(0)$ is the conic $V(XY-Z^2)\subseteq\mathbb P^2_k$, where $[X:Y:Z]$ are homogeneous direction coordinates. All objects and maps are over $k$; this is a scheme diagram, with no real-topological interpretation assumed. The morphism $f$ is proper and birational and restricts to an isomorphism away from $D$ and $0$, respectively.
+
+```tikzcd
+\begin{tikzcd}[font=\Large, column sep=large, row sep=large]
+D \arrow[r,hook] \arrow[d] & \widetilde C \arrow[d,"f"] \\
+\mathrm{Spec}\,k \arrow[r,hook,"0"'] & C
+\end{tikzcd}
+```
+
+The local gluing can be seen in the following diagram. Put $V_x=\widetilde C\cap U_x=\operatorname{Spec}k[x,v]$, $V_y=\widetilde C\cap U_y=\operatorname{Spec}k[y,t]$ and $V_z=\widetilde C\cap U_z=\operatorname{Spec}k[p,p^{-1},z]$. Let $D_i=D\cap V_i$. The horizontal arrows are open immersions and the vertical arrows are closed immersions; both squares commute.
+
+```tikzcd
+\begin{tikzcd}[font=\Large, column sep=large, row sep=large]
+D_x \cong \mathbb A^1_k \arrow[d,hook] & D_z \cong \mathbb G_{m,k} \arrow[l,hook'] \arrow[r,hook] \arrow[d,hook] & D_y \cong \mathbb A^1_k \arrow[d,hook] \\
+V_x \cong \mathbb A^2_k & V_z \cong \mathbb G_{m,k}\times\mathbb A^1_k \arrow[l,hook'] \arrow[r,hook] & V_y \cong \mathbb A^2_k
+\end{tikzcd}
+```
+
+Here $\mathbb G_{m,k}=\operatorname{Spec}k[p,p^{-1}]$. The strict-transform equations are $u=v^2$, $s=t^2$, and $q=p^{-1}$, respectively, as proved by saturation in step 2.2. The maps to $C$ on these charts are $(x,v)\mapsto(x,xv^2,xv)$, $(y,t)\mapsto(yt^2,y,yt)$, and $(p,z)\mapsto(pz,z/p,z)$. The two lower horizontal arrows send $(p,z)$ to $(x,v)=(pz,p^{-1})$ and $(y,t)=(z/p,p)$, so $V_z=V_x\cap V_y$ is identified with $D(v)\subseteq V_x$ and with $D(t)\subseteq V_y$. Equivalently, the transition is $(y,t)=(xv^2,v^{-1})$ on $D(v)$, with inverse $(x,v)=(yt^2,t^{-1})$ on $D(t)$.
+
+The vertical immersions set $x=0$, $z=0$, and $y=0$, respectively. Thus the upper arrows send $p$ to $v=p^{-1}$ and $t=p$, giving the usual two affine charts of the conic with overlap $\mathbb G_{m,k}$. The two charts $V_x,V_y$ cover $\widetilde C$: in $V_z$, $pq=1$ forces both direction coordinates $X,Y$ to be nonzero. In the ambient chart $U_x$, the coordinates $(x,u-v^2,v)$ make $E$ and $\widetilde C$ the hyperplanes $x=0$ and $u-v^2=0$; the analogous coordinates on $U_y$ give the transverse intersection in (3). These diagrams summarize the computations; the proof above is independent of them.
+

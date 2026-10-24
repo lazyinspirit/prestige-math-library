@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-smooth-trigonalizable-group-normal-series-refinement.json
+  precheck: pass
 id: lem-smooth-trigonalizable-group-normal-series-refinement
 kind: lemma
-title: "Unipotent radicals of smooth connected trigonalizable groups over perfect fields have normal G_a series"
+title: "Unipotent radicals of smooth connected trigonalizable groups over perfect fields have normal $G_a$ series"
 dependency_level: 9
 deps:
   - def-axiom-of-choice
@@ -22,11 +25,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cartan-matrix-from-d-transpose-d.json
+  precheck: pass
 id: ex-cartan-matrix-from-d-transpose-d
 kind: example
-title: "A Cartan matrix computed from D^T D"
+title: 'A Cartan matrix computed from $D^{\mathsf T}D$'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-cartan-matrix-is-d-transpose-d, ex-decomposition-matrix-of-s-three-in-characteristic-two]
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:

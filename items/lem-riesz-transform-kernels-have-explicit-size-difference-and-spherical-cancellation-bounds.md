@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds.json
+  precheck: pass
 id: lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds
 kind: lemma
 title: "Riesz kernel size, difference and spherical-cancellation bounds"
@@ -9,9 +12,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, third edition"
@@ -32,7 +32,7 @@ $c_n=\Gamma((n+1)/2)/\pi^{(n+1)/2}$ be the Riesz kernel of
    $|h|\le|x|/2$; and
 3. $\int_{S^{n-1}}K_j(r\omega)\,d\sigma(\omega)=0$ for every $r>0$, where
    $\sigma$ is the polar surface measure of
-   [[thm-polar-coordinates-formula-for-lebesgue-measure]] on the unit sphere
+   [[thm-polar-coordinates-formula-for-lebesgue-measure|Polar coordinates decompose Lebesgue measure into $r^{n-1}\,dr\,d\sigma$]] on the unit sphere
    $S^{n-1}=\{\omega\in\mathbb R^n:|\omega|=1\}$.
 
 The constant $C_n$ is explicit and depends only on $n$; at $n=1$ it reads
@@ -54,7 +54,7 @@ kernel definition is invoked here.
 
 [F5] For every natural $m\ge1$ the function $s\mapsto s^{-m}$ is differentiable on $\mathbb R\setminus\{0\}$ with derivative $-m\,s^{-m-1}$. [[lem-derivative-of-a-power]]
 
-[F6] Polar coordinates: for $n\ge1$ and every Borel $h:\mathbb R^n\to[0,\infty]$, $\int_{\mathbb R^n}h\,d\lambda_n=\int_0^\infty\int_{S^{n-1}}h(r\omega)r^{n-1}\,d\sigma(\omega)\,dr$, and $\sigma$ is a finite Borel measure on $S^{n-1}$. [[thm-polar-coordinates-formula-for-lebesgue-measure]]
+[F6] Polar coordinates: for $n\ge1$ and every Borel $h:\mathbb R^n\to[0,\infty]$, $\int_{\mathbb R^n}h\,d\lambda_n=\int_0^\infty\int_{S^{n-1}}h(r\omega)r^{n-1}\,d\sigma(\omega)\,dr$, and $\sigma$ is a finite Borel measure on $S^{n-1}$. [[thm-polar-coordinates-formula-for-lebesgue-measure|Polar coordinates decompose Lebesgue measure into $r^{n-1}\,dr\,d\sigma$]]
 
 [F7] Linear change of variables for Lebesgue measure, in particular $\lambda_n(T[E])=|\det T|\,\lambda_n(E)$ for invertible linear $T$. [[thm-linear-change-of-variables-for-lebesgue-measure]]
 

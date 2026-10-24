@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-standard-and-dual-representations-of-sl-n-by-highest-weights.json
+  precheck: pass
 id: ex-standard-and-dual-representations-of-sl-n-by-highest-weights
 kind: example
-title: Standard and dual representations of sl_n
+title: Standard and dual representations of $\mathfrak{sl}_n$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -18,8 +21,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.7"
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example

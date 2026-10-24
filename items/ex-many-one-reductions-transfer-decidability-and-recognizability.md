@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-many-one-reductions-transfer-decidability-and-recognizability.json
+  precheck: pass
 id: ex-many-one-reductions-transfer-decidability-and-recognizability
 kind: example
-title: "Using A_TM <=m nonemptiness to transfer undecidability and recognizability information"
+title: 'Using $A_{TM} \le_m$ nonemptiness to transfer undecidability and recognizability information'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-many-one-reductions-transfer-decidability-and-recognizability, thm-machine-acceptance-is-undecidable]
 proof_strategy: direct
-verification:
-  audited: 2026-09-12
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

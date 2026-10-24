@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-neural-operator-mesh-discretization.json
+  precheck: n/a
 id: alg-neural-operator-mesh-discretization
 kind: algorithm
 title: "Riemann-sum realization of a neural operator"
@@ -11,8 +14,6 @@ forward_refs: [cex-raw-neural-operator-local-term-needs-input-reconstruction]
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Kovachki et al., Neural Operator: Learning Maps Between Function Spaces With Applications to PDEs"
@@ -36,6 +37,22 @@ For a finite-sampling realization on continuous inputs, first reconstruct the in
 [Kovachki et al., Appendix E: compatible finite-dimensional Riemann-sum maps](https://arxiv.org/pdf/2108.08481)
 
 ## Remarks
+
+For equal input and output domains, the schematic separates the mesh data from the raw field. Arrows indicate supplied data or evaluation order, not an assertion that the raw input factors through its samples. The layer box uses the full formula in the Definition, including the local term; the continuous input is still available through the initial field. All learned parameters remain fixed when the mesh changes.
+
+```tikz
+\begin{tikzpicture}[>=stealth,every node/.style={align=center},box/.style={draw,rounded corners,text width=4.6cm,minimum height=1.3cm}]
+  \node[box] (mesh) at (-3,0) {$D=E_1\sqcup\cdots\sqcup E_N$\\{}$\xi_j\in E_j,\quad\omega_j=|E_j|$};
+  \node[box] (field) at (3,0) {Raw continuous input $a$\\{}$v_{0,n}(x)=P(a(x))$};
+  \node[box] (layers) at (0,-2.5) {Quadrature layers\\store $v_{t,n}(\xi_j)$\\evaluate $v_{t+1,n}(x)$};
+  \node[box] (output) at (0,-5) {Pointwise projection $Q$\\query $Q(v_{L,n}(x))$\\at any $x\in\bar D$};
+  \draw[->] (mesh) -- node[left] {tags, weights} (layers);
+  \draw[->] (field) -- node[right] {initial field} (layers);
+  \draw[->] (layers) -- node[right] {final field} (output);
+\end{tikzpicture}
+```
+
+For the finite-sampling version, replace the input $a$ in this picture by its reconstructed function from the prescribed samples, including in the lift and every local term. For distinct output domains the final layer instead uses the zero local term specified above, and queries lie in $\bar D'$. This illustration is independent of the reconstruction and convergence arguments.
 
 At every refinement, each cell contributes its volume weight, all kernels and pointwise-network parameters are shared with the continuum operator, and the output can be evaluated at any query point. Changing only the mesh size without preserving these three conventions does not instantiate the discretization family defined above.
 

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-principal-series-module-for-finite-gl-n.json
+  precheck: n/a
 id: def-principal-series-module-for-finite-gl-n
 kind: definition
-title: "The principal series module for finite GL_n"
+title: 'The principal series module for finite $\operatorname{GL}_n$'
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
@@ -25,12 +28,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf"
     - title: "Jay Taylor, Finite Reductive Groups - Section 5 (Harish-Chandra induction from a split Levi), printed pp. 42-46"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Definition

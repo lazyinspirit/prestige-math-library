@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-circle-integral-of-one-over-z-minus-a.json
+  precheck: pass
 id: ex-circle-integral-of-one-over-z-minus-a
 kind: example
-title: "Direct computation of the integral of 1/(z-a) around a semicircle and a full circle centred at a"
+title: "Direct computation of the integral of $1/(z-a)$ around a semicircle and a full circle centred at $a$"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [thm-circle-integrals-of-integer-monomials, prop-reversal-and-concatenatio
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -32,7 +32,7 @@ Reversing either orientation negates its value.
 
 **Given:** The positively oriented semicircle and circle centred at $a$.
 
-[L1] The integer-monomial circle theorem gives the full-circle value $2\pi i$ for exponent $-1$ ([[thm-circle-integrals-of-integer-monomials]]).
+[L1] The integer-monomial circle theorem gives the full-circle value $2\pi i$ for exponent $-1$ ([[thm-circle-integrals-of-integer-monomials|On a positively oriented circle about $a$, the integral of $(z-a)^m$ is zero for every integer $m$ except $-1$, and is $2\pi i$ for $m=-1$]]).
 
 [L2] Reversal negates a complex contour integral ([[prop-reversal-and-concatenation-of-complex-line-integrals]]).
 

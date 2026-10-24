@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-size-structured-transport-and-division-kernel.json
+  precheck: n/a
 id: def-size-structured-transport-and-division-kernel
 kind: definition
 title: Size transport with a nonlocal division kernel
@@ -15,8 +18,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"
@@ -38,3 +39,25 @@ $$\int_{[0,X)}\phi(T,x)\,\nu_T(dx)-\int_{[0,X)}\phi(0,x)\,\nu_0(dx)=\int_0^T\!\i
 This is the measure-valued transport equation with daughter production $\int_{[0,X)}K_y(dx)\,\nu_t(dy)$, no incoming source at $x=0$, and absorbing outflow at $x=X$. The test condition $\phi(t,X)=0$ encodes removal when a characteristic reaches the upper boundary.
 
 Let $\Pi_{[0,X]}(x):=\min\{X,\max\{0,x\}\}$ and extend the growth field to $\widetilde g(x):=g(\Pi_{[0,X]}(x))$ on $\mathbb R$. This is a bounded globally Lipschitz vector field. By [[thm-size-structured-positivity-number-and-weighted-moment-identities]], its IVP has a unique solution $\chi_y$ on $[0,T]$ from every initial size $y\in[0,X]$. A model characteristic is $\chi_y$ restricted to $[0,\min\{T,\tau_y\}]$, where $\tau_y$ is its first hitting time of $X$ (taking $\tau_y=+\infty$ if there is no hit on $[0,T]$, and $\tau_y=0$ if $y=X$). On this restricted interval, $\widetilde g=g$. For $y<X$ the restricted interval is nondegenerate, and the characteristic is a first-order IVP solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. For $y=X$ the restriction is only the stopped path on $\{0\}$; no derivative on that singleton is asserted, while the extended path $\chi_X$ remains an IVP solution on $[0,T]$. The interval is fixed; moving boundaries, zero growth and discontinuous coefficients are outside this definition.
+
+## Remarks
+
+The schematic separates growth of a parent from nonlocal daughter production. The upper arrow follows the stopped characteristic from an initial size $y<X$; the boundary exit occurs only if it reaches $X$ within the time horizon. The lower arrows show the instantaneous terms at parent size $y$, rather than additional characteristic paths.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node (parent) at (3,0) {$y$};
+\node (exit) at (7,0) {$X$};
+\node at (0,0) {$0$};
+\draw[->] (parent) -- node[above] {$\chi_y'=g(\chi_y)>0$} (exit);
+\draw (7,-0.3) -- (7,0.3);
+\node[align=center] at (7,0.85) {absorbing\ outflow};
+\node[align=center] at (0,0.85) {no incoming\ boundary source};
+\node[draw,rounded corners,align=center] (daughters) at (0.7,-2) {daughter sizes\ $x\in[0,y]$};
+\node[draw,rounded corners,align=center] (removed) at (5.4,-2) {parent\ removal};
+\draw[->] (parent) -- node[above left] {$K_y(dx)$} (daughters);
+\draw[->] (parent) -- node[above right] {$\mu(y)+\gamma(y)$} (removed);
+\end{tikzpicture}
+```
+
+The daughter arrow denotes the measure $K_y(dx)$ per parent, whose population contribution is $\int_{[0,X)}K_y(dx)\,\nu_t(dy)$; no extra factor of $\gamma(y)$ is inserted. Its support may include $x=0$ and $x=y$, and the drawing imposes no atom, density, or conservation assumption. Absence of an incoming boundary source at $0$ does not exclude daughters produced there. The definition and its weak formulation are independent of this schematic.

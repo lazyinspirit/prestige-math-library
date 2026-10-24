@@ -1,0 +1,155 @@
+{
+  "id": "thm-nested-dissection-grid-work-and-storage-bounds",
+  "agent": "/root/rendering_repair_coordinator/nla_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "display-math-flow-wrapping",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly places the array beside both preceding and following Statement prose; frozen and guarded current source lack paragraph breaks around the display. This is a concrete display-flow defect.",
+      "action": "Inserted blank lines before and after the existing array without changing its contents.",
+      "status": "resolved"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic tiles show only prose for the median-hyperplane recursion. A concrete two-level 2D picture usefully distinguishes the separator, disconnected child boxes and children-before-separator ordering that underpin steps 1.1 and 1.3. A complete existing proof does not remove that expository benefit.",
+      "action": "Added a final Remarks illustration of the 7-by-7 grid, its median cross, and the median cross in its lower-left 3-by-3 child, with exact sizes, ordering and depth-bound explanations.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Separated the Statement table from prose and added a mathematically checked two-level 2D nested-dissection TikZ illustration in final Remarks.",
+  "source_lines_after": {
+    "display": [
+      34,
+      35,
+      36
+    ],
+    "remarks": [
+      68,
+      104
+    ],
+    "tikz": [
+      72,
+      102
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Full nearest-neighbor graph on {0,...,6}^2; gray grid segments represent its edges, not filled edges.",
+      "check": "Enumerated 49 vertices and 84 unit-coordinate edges. The drawn seven horizontal and seven vertical segments each contain six such edges. No diagonal adjacency is asserted.",
+      "local_basis": "alg-nested-dissection-ordering-on-regular-grids, Definition, first paragraph."
+    },
+    {
+      "objects": "Root separator S0 and children B1,...,B4.",
+      "check": "Lower median of a side of length 7 is coordinate 3. Its row/column union has 7+7-1=13 distinct vertices. Deleting it leaves four connected components of 9 vertices, each a 3-by-3 box. Lower corners (0,0),(0,4),(4,0),(4,4) agree with B1,B2,B3,B4 labels and lexicographic recursion order.",
+      "local_basis": "Algorithm Definition, recursive rule; carrier Facts F1 and proof step 1.3."
+    },
+    {
+      "objects": "Child separator S1 inside B1={0,1,2}^2.",
+      "check": "Lower median is coordinate 1; its row/column union has 3+3-1=5 vertices. Deleting it leaves four isolated corner vertices, verified as components [1,1,1,1]. Blue and red sets are disjoint. The other children have unhighlighted internal separators, explicitly stated.",
+      "local_basis": "Algorithm Definition, same recursive rule and terminal singleton clause."
+    },
+    {
+      "objects": "Separator cardinalities, depth convention and elimination order.",
+      "check": "13 <= 2*7 and 5 <= 2*3 exemplify |S_B| <= 2s. Actual sides at depths 0,1,2 are 7,3,1, bounded by ceil(7/2^r)=7,4,2. The child recursion precedes S1, then completed B1 precedes B2,B3,B4 and finally S0. Leader arrows label separator vertices and are not directed graph edges. No new asymptotic conclusion is asserted.",
+      "local_basis": "Carrier proof steps 1.1 and 1.3; algorithm lexicographic child and separator ordering. Rigorous proof is unchanged and independent."
+    }
+  ],
+  "original_evidence": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation",
+    "standalone_original_resolution_tiles": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/thm-nested-dissection-grid-work-and-storage-bounds--01.png",
+        "sha256": "a97abff98fca06bec25b041a9eb1bf454997382f7b41478a53db990b82b65d37"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/thm-nested-dissection-grid-work-and-storage-bounds--02.png",
+        "sha256": "222568bf2021319b19e38bbb2be35ad90092027d837aa4c5157f73774fc7b5c0"
+      }
+    ],
+    "path_discrepancy": "Finding 1 evidence_dir points to diagram-supplement, which has no screenshots subdirectory. Authentic images were located in the corresponding category screenshots directory and both recorded SHA256 values match.",
+    "before_raw_sha256": "89f9faac7466f4a233d5c4c21736b1dd876ef12422b603df2c7efd1ea81332bd",
+    "guard": "Exact current raw SHA256 checked immediately before the sole source edit; frozen/current comparison identical."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-nested-dissection-grid-work-and-storage-bounds.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects",
+      "pre_existing_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-nested-dissection-grid-work-and-storage-bounds.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-nested-dissection-grid-work-and-storage-bounds.md",
+            "item_id": "thm-nested-dissection-grid-work-and-storage-bounds",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-nested-dissection-grid-work-and-storage-bounds.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Local Python graph enumeration and exact before/current comparison",
+      "exit_code": 0,
+      "output": "49 vertices; 84 edges; root separator 13; root components [9,9,9,9]; child separator 5; grandchildren [1,1,1,1]. Exact frontmatter and proof preserved; Statement differs only in blank lines."
+    }
+  ],
+  "visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-nla014-final node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-nested-dissection-grid-work-and-storage-bounds --out research/math-library-rendering-repairs-2026-10-23/previews/nla014-final",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nla014-final/manifest.json",
+    "manifest_sha256": "ac1f80852a30e22a505d08e09ca345e4d6d699ff3c59002dd76ecfd2d2b981bf",
+    "source_sha256": "2af30d77e8e3139b739a8538ec253c3e3dfb17d7967e75d9aa4efeda14aa80c1",
+    "reference_map_sha256": "13187f9a12649131f2d9d4e107f50fa6e5d8e186c75cbaa9efc0af40d07acfe2",
+    "screenshots": [
+      {
+        "path": "screenshots/thm-nested-dissection-grid-work-and-storage-bounds--01.png",
+        "y": 0,
+        "width": 1200,
+        "height": 1400,
+        "sha256": "c7e29265ebde4444790d6097b4d1fb4055e3d213ceab727f98ade7eeac7944cf",
+        "encoding": "lossless PNG, compressionLevel 9"
+      },
+      {
+        "path": "screenshots/thm-nested-dissection-grid-work-and-storage-bounds--02.png",
+        "y": 1300,
+        "width": 1200,
+        "height": 1054,
+        "sha256": "8e649819923ac55b77edf89ce582a307379dd6526dd73f729dcd55b3fc9c82ab",
+        "encoding": "lossless PNG, compressionLevel 9"
+      }
+    ],
+    "inspected": "Both final PNGs viewed separately at original resolution. Table now has its own paragraph; all seven rows/columns and colored separator vertices are visible; labels and leader arrows clear, no clipping/overlap.",
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody rendering, not full production route. Preview lists 16 unrelated reference-map parse diagnostics; assigned links render correctly."
+  },
+  "remaining_issues": []
+}

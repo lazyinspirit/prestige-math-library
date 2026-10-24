@@ -1,0 +1,82 @@
+{
+  "id": "prop-mod-two-self-intersection-needs-no-orientation",
+  "group": "dt_009",
+  "agent": "/root/rendering_repair_coordinator/dt_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile --02 visibly prints CSS-uppercased raw $\\MATHBB F_2$ in the technique banner while ordinary proof formulas render correctly. The banner uses plain text, so math delimiters cannot resolve there.",
+      "action": "Replaced only the technique-banner phrase in $\\mathbb F_2$ coefficients with in mod 2 coefficients.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Equivalent prose for the coefficient field in the plain-text technique banner removes the raw-TeX leak.",
+  "source_lines_after": {
+    "51": "**Proof technique:** repeat the integral argument in mod 2 coefficients, where every bundle is canonically oriented and every manifold has a mod 2 fundamental class, and identify the mod 2 Euler class with the top Stiefel-Whitney class."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer technique banners still treat their values as plain text; the assigned carrier now avoids math markup there.",
+    "Fresh local screenshot contains an unrelated capture artifact: most body text is absent although borders and the changed technique banner are visible. The changed banner is fully visible and corrected; no source changes were inferred from the artifact."
+  ],
+  "before_raw_sha256": "5c6575aebca29e008a85e38f66e40628fdffc3643205d44bef8e0c2f7a31dc39",
+  "after_raw_sha256": "2cdd384b863d8d4f79d7ae74687e10ac5de593de1f865b4a6307a11545c023cc",
+  "guard": "Immediately before write, current raw SHA256 matched queue before_raw_sha256.",
+  "protected_metadata": "Full frontmatter is byte-identical to archived before, including status: published. Only the exact one-line replacement differs.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/prop-mod-two-self-intersection-needs-no-orientation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/prop-mod-two-self-intersection-needs-no-orientation.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/prop-mod-two-self-intersection-needs-no-orientation.md",
+            "item_id": "prop-mod-two-self-intersection-needs-no-orientation",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/prop-mod-two-self-intersection-needs-no-orientation.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/differential-topology/screenshots/prop-mod-two-self-intersection-needs-no-orientation--02.png",
+    "original_inspection": "Viewed standalone at original resolution.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dt-009-final/manifest.json",
+    "preview_source_sha256": "2cdd384b863d8d4f79d7ae74687e10ac5de593de1f865b4a6307a11545c023cc",
+    "preview_html_sha256": "b71e1a892e50ca533f3349f9c6fc307ed1aed8d564d7adc9c5702fe4018f2822",
+    "preview_reference_map_sha256": "c8baf0d657c6ff3a4e4265935a19bbbcf2212615dc6e82e79a5a1d26646393dc",
+    "preview_tile": "research/math-library-rendering-repairs-2026-10-23/previews/dt-009-final/screenshots/prop-mod-two-self-intersection-needs-no-orientation--02.png",
+    "inspection": "Viewed standalone at original resolution: technique banner visibly reads IN MOD 2 COEFFICIENTS with no dollars or TeX commands.",
+    "preview_result": {
+      "items": 1,
+      "tiles": 2,
+      "reference_map_diagnostics": 16
+    },
+    "limitations": "Local ItemBody preview, no live HTTP or full production route; unrelated parse diagnostics excluded from current reference map."
+  }
+}

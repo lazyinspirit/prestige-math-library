@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-grothendieck-riemann-roch-for-projective-morphisms.json
+  precheck: pass
 id: thm-grothendieck-riemann-roch-for-projective-morphisms
 kind: theorem
 title: "Grothendieck-Riemann-Roch for projective morphisms"
@@ -29,12 +32,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Borel and Serre, Le theoreme de Riemann-Roch (1958), §7, Lemma 15(a), together with §9 and §15"
@@ -91,3 +88,35 @@ $\chi(X,\mathcal F)=\deg(\operatorname{ch}(\mathcal F)\operatorname{td}(T_X))$
 2.1 Composition of the two squares. Consider the two commutative squares: $\tau\circ i_*=i_*\circ\tau$ on $X\to\mathbb P^n\times_kY$ by [L1], and $\tau\circ p_!=p_*\circ\tau$ on $\mathbb P^n\times_kY\to Y$ by [L2]. Composing them gives $\tau_Y\circ p_!\circ i_!=p_*\circ i_*\circ\tau_X$, and by the functoriality of both pushforwards, $p_!\circ i_!=f_!$ and $p_*i_*=f_*$, this is exactly $\tau_Y\circ f_!=f_*\circ\tau_X$, the displayed formula. [L1, L2, L3, step 1.1, algebra]
 
 3.1 Coherent classes and Hirzebruch-Riemann-Roch. Since $X$ is smooth and quasi-projective, $K_0(X)=K^0(X)$ and the identity proved for vector bundles extends to all coherent classes by additivity of $\operatorname{ch}$, of $f_!$ and of $f_*$ along finite resolutions [L3]. For $Y=\operatorname{Spec}k$, the Chow pushforward is the degree and the $K$-theory pushforward is the Euler characteristic, so the formula becomes Hirzebruch-Riemann-Roch $\chi(X,\mathcal F)=\deg(\operatorname{ch}(\mathcal F)\operatorname{td}(T_X))$; the transport of $\operatorname{ch}$ and $\operatorname{td}$ to coherent classes uses the naturality and multiplicativity of [L4]. [L3, L4, step 2.1, given, algebra] ∎ 
+
+## Remarks
+
+Put $P=\mathbb P^n_k\times_kY$ for the intermediate nonsingular scheme in
+step 1.1, so $X\xrightarrow{i}P\xrightarrow{p}Y$ has composite $f$.
+The two compatibility squares in step 2.1 can be pasted vertically:
+
+```tikzcd
+[column sep=huge, row sep=large, font=\Large, labels={font=\large}]
+K_0(X) \arrow[r, "\textstyle\tau_X"] \arrow[d, "\textstyle i_!"']
+& A^*(X)_{\mathbb Q} \arrow[d, "\textstyle i_*"] \\
+K_0(P) \arrow[r, "\textstyle\tau_P"] \arrow[d, "\textstyle p_!"']
+& A^*(P)_{\mathbb Q} \arrow[d, "\textstyle p_*"] \\
+K_0(Y) \arrow[r, "\textstyle\tau_Y"']
+& A^*(Y)_{\mathbb Q}
+```
+
+Here $\tau_S(\alpha)=\operatorname{ch}(\alpha)\operatorname{td}(T_S)$ for
+$S=X,P,Y$. The left column consists of coherent $K$-theory pushforwards;
+for the closed immersion, $i_!$ is the map denoted $i_*$ in [L1], since
+closed-immersion direct image is exact. The right column consists of proper
+Chow pushforwards, with rational coefficients. Both columns are covariant;
+no pullback maps occur. The Chow groups are displayed as total
+codimension-graded groups: a proper pushforward preserves cycle dimension,
+so its codimension shift depends on the dimensions of source and target.
+
+The upper square is the Todd-tangent form of [L1], and the lower square is
+[L2]. The Todd factors are essential: these are squares for $\tau_S$, rather
+than for the Chern character alone. Their outer rectangle states
+$\tau_Yp_!i_!=p_*i_*\tau_X$, which is $\tau_Yf_!=f_*\tau_X$ by [L3].
+This illustrates the given projective factorization and the composition in
+step 2.1; the proof above remains independent of the figure.

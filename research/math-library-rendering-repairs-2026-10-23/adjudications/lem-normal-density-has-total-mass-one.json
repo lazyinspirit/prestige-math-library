@@ -1,0 +1,102 @@
+{
+  "id": "lem-normal-density-has-total-mass-one",
+  "agent": "/root/rendering_repair_supervisor2/prob_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The cited original --01 tile does not reach proof step 2.1; the authentic original --02 tile does. Its standalone original-resolution view visibly prints f(t)=exp(-t^2) as plain text with literal caret notation, while adjacent formulas are typeset. Frozen/current pre-edit bytes agree. This is explicit mathematical syntax, not a discretionary font preference.",
+      "action": "Wrapped the same function formula in inline math using the equivalent TeX exp operator.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "In the same original --02 step, the derivative is visibly printed as literal 1/sqrt2. Differentiating the already stated x/sqrt2 independently gives exactly 1/sqrt2, so no mathematical inference or claim change is needed to format it.",
+      "action": "Replaced plain 1/sqrt2 by inline $1/\\sqrt2$.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added inline math delimiters and equivalent TeX spelling for two explicit formulas in proof step 2.1 only.",
+  "source_lines_after": {
+    "68": "2.1 For integer $n\\ge1$, F5 with $\\varphi(x)=x/\\sqrt2$ and continuous $f(t)=\\exp(-t^2)$ gives $\\int_{-n}^n e^{-x^2/2}\\,dx=\\sqrt2\\int_{-n/\\sqrt2}^{n/\\sqrt2}e^{-t^2}\\,dt$. The derivative is the constant $1/\\sqrt2$, hence integrable. Both integrands are continuous on the compact intervals, so F6 gives bounded Riemann integrability. F7 identifies the left side with its Lebesgue integral, under the CC in step 1.1. [F5, F6, F7, step 1.1]"
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_checks": [
+    "The function remains f(t)=exp(-t^2), with identical exponent and sign.",
+    "For varphi(x)=x/sqrt(2), the derivative is 1/sqrt(2); substitution gives the same factor sqrt(2) and scaled endpoints already printed in step 2.1.",
+    "No statement, hypothesis, proof justification, dependency, source or metadata changed. Full frontmatter bytes equal the frozen preimage."
+  ],
+  "before_raw_sha256": "d4a2b6fe0cb4904c39f1d190d7a3ace708d76d34cd21f5ba0aeacbd49cc53c6b",
+  "current_raw_sha256": "fb211f7946d828f05bfd030882f4120ffd55286e85894242b4bcc3fc2a049401",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-normal-density-has-total-mass-one.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-normal-density-has-total-mass-one.md",
+            "item_id": "lem-normal-density-has-total-mass-one",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-normal-density-has-total-mass-one.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-normal-density-has-total-mass-one.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_inspected": [
+      "research/math-library-rendering-audit-2026-10-23/probability/screenshots/lem-normal-density-has-total-mass-one--01.png",
+      "research/math-library-rendering-audit-2026-10-23/probability/screenshots/lem-normal-density-has-total-mass-one--02.png"
+    ],
+    "current_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/prob-003-fresh-20261024/manifest.json",
+    "manifest_sha256": "866a416f16a44e4f09a15c4188748c6c19ece13b3e9caf7efc29960df3e7ad9b",
+    "source_binding": {
+      "id": "lem-normal-density-has-total-mass-one",
+      "status": "published",
+      "source": "items/lem-normal-density-has-total-mass-one.md",
+      "source_sha256": "fb211f7946d828f05bfd030882f4120ffd55286e85894242b4bcc3fc2a049401",
+      "snapshot": "snapshots/lem-normal-density-has-total-mass-one.md",
+      "html": "html/lem-normal-density-has-total-mass-one.html",
+      "html_sha256": "ed8f518354ddc7a1af406a8205967bd375f8061165d75da09c302951c1b8eef7",
+      "reference_map_sha256": "b71a87b55d9453aa62552f91045ef9912e6274c7a6ad116f35292ed2fa47e3f5"
+    },
+    "current_tiles_inspected": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/prob-003-fresh-20261024/screenshots/lem-normal-density-has-total-mass-one--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/prob-003-fresh-20261024/screenshots/lem-normal-density-has-total-mass-one--02.png"
+    ],
+    "inspection": "Each PNG viewed independently at original resolution. Corrected formulas in step 2.1 render as mathematics, without literal caret/sqrt text; tags remain blue and step wrapping is legible. A transient viewer display omitted unchanged text on an initial call; an immediate standalone repeat of the exact same second PNG displayed the complete text, so no source change was inferred from that artifact.",
+    "capture_result": "108 KaTeX expressions, zero KaTeX errors; no TikZ."
+  },
+  "remaining_issues": [],
+  "limits": [
+    "Bounded rendering repair with independent checks of the changed formulas; no whole-proof or supplier audit.",
+    "Native local ItemBody/title preview only, not production route or Sources footer. Preview reference-map manifest records 13 unrelated parse diagnostics.",
+    "No network, application edits, metadata edits, publication changes, shared-ledger changes or commit."
+  ]
+}

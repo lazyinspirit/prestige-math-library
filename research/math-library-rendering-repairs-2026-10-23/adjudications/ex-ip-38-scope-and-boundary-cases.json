@@ -1,0 +1,109 @@
+{
+  "id": "ex-ip-38-scope-and-boundary-cases",
+  "agent": "/root/rendering_repair_coordinator/inv_002",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile shows the error fallback instead of the disk. The diagram used operatorname, unavailable in the local TikZ TeX document; equivalent mathrm support notation compiles.",
+      "action": "Replaced operatorname support label by mathrm support with thin spacing; used default theme-following ink because fresh rendered blue-black label was poorly legible.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile confirms all three annulus labels crowd the positive horizontal axis and intersect the circles/each other. This is actual source placement, not screenshot clipping.",
+      "action": "Moved coordinate labels to three separated external callouts with thin leaders and endpoint dots; retained all three circles and directed trapped-geodesic arc. Added explicit schematic radius convention.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Disk support label uses supported TeX with legible default ink; annulus labels are separated outside the circles and its radial schematic convention is explicit.",
+  "source_lines_after": [
+    59,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    85
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "figure": "simple disk",
+      "objects": "Euclidean unit disk, closed radius-1/2 support disk, oriented horizontal diameter from (-1,0) to (1,0).",
+      "relations_checked": [
+        "The bump is positive exactly for |x|<1/2 and vanishes outside, so its support is the closed radius-1/2 disk drawn blue (Proof 1.1).",
+        "The red line stays on y=0, enters at (-1,0), crosses the entire support, and exits at (1,0); its arrow points toward increasing x, matching the incoming velocity (1,0) and Proof 3.1.",
+        "The support label changed only typographical implementation; the positive integral remains established analytically in Proof 3.1."
+      ]
+    },
+    {
+      "figure": "trapped annulus",
+      "objects": "Coordinate cylinder [0,2] times R/(2pi Z), schematically embedded by drawn radius rho=1/2+3r/4; circles of drawn radii .5,1.25,2 represent r=0,1,2.",
+      "relations_checked": [
+        "rho is strictly increasing and maps r=0,1,2 to .5,1.25,2; the inner circle is r=0, not r=.5. All original coordinate labels are preserved.",
+        "Leader endpoints are on their correct circles: (45:.5) for r=0, (1.25,0) for r=1, and (-45:2) for r=2. External label positions are callouts only.",
+        "The red arc is on drawn radius 1.25, hence r=1, strictly between the two boundary circles. Its increasing-angle direction agrees with theta(t)=theta0+t/a(1), since a(1)=5/2>0.",
+        "Proof 1.4 computes a'(1)=0, verifies the geodesic equations, unit speed, and periodic interior containment; the sketch asserts no metric-isometry or nullspace claim."
+      ]
+    },
+    {
+      "figure": "unchanged conjugate-pair schematic",
+      "objects": "Great circle with p and -p at opposite ends of a semicircle.",
+      "relations_checked": [
+        "Opposite endpoints represent gamma(0)=p and gamma(pi)=-p; the increasing-angle arc is compatible with gamma(t)=(cos t,sin t,0). Proof 4.1, independent of the picture, gives J(t)=sin(t)(0,0,1) and establishes conjugacy. This source figure was unchanged."
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-ip-38-scope-and-boundary-cases.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-ip-38-scope-and-boundary-cases.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-ip-38-scope-and-boundary-cases.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache/inv-002-v2\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-ip-38-scope-and-boundary-cases --out research/math-library-rendering-repairs-2026-10-23/previews/inv-002-final-v2",
+      "exit_code": 0,
+      "output": "1 item, 3 tiles, 32 unrelated reference-map diagnostics; standalone original-resolution final tile 01 inspected.",
+      "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/inv-002-final-v2/screenshots/ex-ip-38-scope-and-boundary-cases.json"
+    }
+  ],
+  "raw_sha256_before": "8ea8119cb63e0fad870ff41808ae615484771135c8787fa233c64280a4ff1964",
+  "raw_sha256_after": "c2aa261442fb4d5d0e78bebeb5e49124d5610d5b1d61793d7c632bf2ac05c6b9",
+  "write_guard": "Queue raw SHA256 verified immediately before initial edit; current and frozen frontmatter are byte-identical.",
+  "remaining_issues": [],
+  "limitations": "Local ItemBody rendering only; no HTTP/live website or full native workflow gate coverage claimed."
+}

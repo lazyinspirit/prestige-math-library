@@ -1,20 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-canonical-map-from-the-integers-to-zp.json
+  precheck: n/a
 id: def-canonical-map-from-the-integers-to-zp
 kind: definition
-title: "The canonical map from Z to Zp sends an integer to its coherent residue classes modulo p^n"
+title: 'The canonical map from $\mathbb Z$ to $\mathbb Z_p$ sends an integer to its coherent residue classes modulo $p^n$'
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-p-adic-integers-as-compatible-residue-classes]
-verification:
-  audited: 2026-09-04
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -33,4 +29,4 @@ $$ (m\bmod p^n)_{n\ge1}. $$
 
 Compatibility is immediate because reducing $m\bmod p^{n+1}$ modulo $p^n$
 recovers $m\bmod p^n$, so the image really lies in
-[[def-p-adic-integers-as-compatible-residue-classes]].
+[[def-p-adic-integers-as-compatible-residue-classes|The $p$-adic integers are the compatible residue-class tuples in the inverse limit of $\mathbb Z$ mod $p^n$]].

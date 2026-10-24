@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric.json
+  precheck: pass
 id: thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric
 kind: theorem
 title: "The $L^p$ distance for $0 < p < 1$ is a complete translation-invariant metric"
@@ -16,16 +19,7 @@ sources:
       url: "https://djvu.online/file/u1gYJemR8hzMe"
     - title: "John K. Hunter, Measure Theory, reverse inequality discussion before Definition 7.6"
       url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Statement
@@ -60,7 +54,7 @@ $(L^p(\mu),d_p)$ is complete.
 
 ## Proof
 
-**Proof technique:** Because $(a+b)^p\le a^p+b^p$ for $0<p<1$, $d_p([f],[g])=\int|f-g|^p\,d\mu$ defines a metric on quotient classes and is translation invariant. Completeness follows by repeating the Riesz-Fischer telescoping argument without taking $p$-th roots.
+**Proof technique:** Subadditivity of the positive power with exponent between zero and one makes the integral of the powered absolute difference a translation-invariant metric on quotient classes. Completeness follows by repeating the Riesz-Fischer telescoping argument without taking roots of that exponent.
 
 1.1 If $f\sim f'$ and $g\sim g'$, then $f-f'$ and $g-g'$ vanish almost everywhere. Outside the union of those two null sets, one has $f-g=f'-g'$, so $|f-g|^p=|f'-g'|^p$ almost everywhere. Hence $d_p([f],[g])$ is well defined. The same union-of-null-sets argument shows that addition and scalar multiplication descend to the quotient classes, and the inequality in [L7] shows that $\mathcal L^p(\mu)$ is closed under those operations. [L1, L5, L6, L7]
 

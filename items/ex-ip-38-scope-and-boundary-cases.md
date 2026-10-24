@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ip-38-scope-and-boundary-cases.json
+  precheck: pass
 id: ex-ip-38-scope-and-boundary-cases
 kind: example
 title: "Simple disk, trapped annulus, and conjugate-point cancellation"
@@ -27,13 +30,7 @@ sources:
       url: "https://users.jyu.fi/~jojapeil/opetus/mats4120k26/mats4120-v2.pdf"
       locator: "Chapter 8, §§8.1–8.2, Jacobi fields and conjugate points; Chapter 13, §§13.1–13.4, the surface transform examples and proof."
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -56,7 +53,7 @@ so this nonzero compactly supported function is detected by the transform. The d
   \draw[red,very thick] (0.65,0) -- (1,0);
   \node[below] at (-1,0) {$(-1,0)$};
   \node[below] at (1,0) {exit};
-  \node[blue!60!black] at (0,0.72) {$\operatorname{supp}f$};
+  \node at (0,0.72) {$\mathrm{supp}\,f$};
 \end{tikzpicture}
 ```
 
@@ -70,13 +67,19 @@ A diameter chord crosses the compact support of the bump.
   \draw[thick] (0,0) circle (1.25);
   \draw[thick] (0,0) circle (2);
   \draw[red,very thick,->] (30:1.25) arc[start angle=30,end angle=300,radius=1.25];
-  \node[right] at (0.5,0) {$r=0$};
-  \node[right] at (1.25,0) {$r=1$ trapped};
-  \node[right] at (2,0) {$r=2$};
+  \draw[gray,thin] (45:0.5) -- (2.4,1.7);
+  \draw[gray,thin] (1.25,0) -- (2.4,0);
+  \draw[gray,thin] (-45:2) -- (2.4,-1.7);
+  \fill (45:0.5) circle (1pt);
+  \fill (1.25,0) circle (1pt);
+  \fill (-45:2) circle (1pt);
+  \node[right] at (2.4,1.7) {$r=0$};
+  \node[right] at (2.4,0) {$r=1$ trapped};
+  \node[right] at (2.4,-1.7) {$r=2$};
 \end{tikzpicture}
 ```
 
-A parallel circle at a critical radius is a closed trapped geodesic.
+A parallel circle at a critical radius is a closed trapped geodesic. The annulus is schematic: drawn radius $\rho=\tfrac12+\tfrac34r$ represents the coordinate $r$, rather than metric distance.
 
 **Conjugate points and closed-geodesic visibility failure.** On the unit sphere $S^2\subset\mathbb R^3$ with its induced Riemannian metric, write $x_3$ for the third coordinate and define the closed-geodesic transform by $I_{\rm cl}f(c)=\int_0^{2\pi}f(c(t))\,dt$ for every unit-speed great circle $c(t)=a\cos t+b\sin t$ with orthonormal $a,b\in\mathbb R^3$. The nonzero function $f(x)=x_3$ is invisible to this transform, since $f(c(t))=a_3\cos t+b_3\sin t$ and both trigonometric integrals over $[0,2\pi]$ vanish. Also the antipodes $p=(1,0,0)$ and $-p$ are conjugate along $\gamma(t)=(\cos t,\sin t,0)$: for $\gamma_s(t)=\cos t(1,0,0)+\sin t(0,\cos s,\sin s)$, each $t$-curve is a unit-speed great circle and its variation field at $s=0$ is $J(t)=\sin t(0,0,1)$. Differentiating the geodesic equation in $s$ and using the curvature commutator gives $D_t^2J+R(J,\dot\gamma)\dot\gamma=0$; the field is nonzero but vanishes at $t=0$ and $t=\pi$. The closed sphere has no boundary, so this closed-geodesic example is not a counterexample to the boundary-to-boundary theorem; it exhibits an exact invisible mode in a conjugate-point setting.
 

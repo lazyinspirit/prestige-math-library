@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-abstract-residue-exists-unique.json
+  precheck: pass
 id: thm-abstract-residue-exists-unique
 kind: theorem
-title: "Existence and uniqueness of the abstract residue map res_V: Omega^1_{K/k} -> k"
+title: 'Existence and uniqueness of the abstract residue map $\operatorname{res}_V:\Omega^1_{K/k}\to k$'
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -22,13 +25,7 @@ sources:
   references:
     - title: "John Tate, Residues of differentials on curves, Ann. Sci. E.N.S. (4) 1 (1968) 149-159"
       url: "http://www.numdam.org/article/ASENS_1968_4_1_1_149_0.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement

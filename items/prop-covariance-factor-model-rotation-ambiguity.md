@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-covariance-factor-model-rotation-ambiguity.json
+  precheck: pass
 id: prop-covariance-factor-model-rotation-ambiguity
 kind: proposition
 title: "Orthogonal rotation preserves the covariance factor model"
@@ -13,12 +16,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   scraped: []
   references:
@@ -50,3 +47,15 @@ For every orthogonal matrix $R\in\mathbb R^{q\times q}$, the transformed loading
 1.1 By [F1], bilinearity of covariance gives $\operatorname{Cov}(X)=A\operatorname{Cov}(S)A^T+A\operatorname{Cov}(S,\varepsilon)+\operatorname{Cov}(\varepsilon,S)A^T+\operatorname{Cov}(\varepsilon)=AA^T+D$. [F1, given, algebra]
 
 2.1 The transformed factors have mean zero, covariance $R I_q R^T=I_q$, and cross-covariance $\operatorname{Cov}(RS,\varepsilon)=R\operatorname{Cov}(S,\varepsilon)=0$. Also $A_RS_R=AR^TRS=AS$, and $A_RA_R^T+D=AR^TRA^T+D=AA^T+D$. Hence the transformed pair is another covariance factor model with the same covariance. [F1, step 1.1, algebra] ∎
+
+## Remarks
+
+For a fixed residual vector $e\in\mathbb R^p$, define $f_e(s)=As+e$ and $f_{R,e}(t)=AR^Tt+e$. The square commutes because $f_{R,e}(Rs)=AR^TRs+e=f_e(s)$:
+
+```tikzcd
+[column sep=large, row sep=large, scale=1.6, transform shape]
+\mathbb R^q \arrow[r, "f_e"] \arrow[d, "R"'] & \mathbb R^p \arrow[d, "\mathrm{id}"] \\
+\mathbb R^q \arrow[r, "f_{R,e}"'] & \mathbb R^p
+```
+
+Taking $s=S(\omega)$ and $e=\varepsilon(\omega)$ shows that the two representations give the same observed vector pointwise. Step 2.1 separately checks the covariance-model conditions and $A_RA_R^T+D=AA^T+D$. The diagram asserts no preservation of mutual independence under rotation.

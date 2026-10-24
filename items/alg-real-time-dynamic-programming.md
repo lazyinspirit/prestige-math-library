@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-real-time-dynamic-programming.json
+  precheck: n/a
 id: alg-real-time-dynamic-programming
 kind: algorithm
 title: "Trial-based real-time dynamic programming"
@@ -15,12 +18,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Andrew G. Barto, Steven J. Bradtke, and Satinder P. Singh, Learning to Act Using Real-Time Dynamic Programming"
@@ -43,3 +40,31 @@ choose uniformly from the nonempty set of actions attaining $\max_{a\in A(s)}q_V
 [[lem-finite-set-has-max|Every finite nonempty set of real action values has an attained maximum.]]
 
 [Barto, Bradtke, and Singh, “Learning to Act Using Real-Time Dynamic Programming”](https://ai.dmi.unibas.ch/research/reading_group/barto-etal-ai1995.pdf).
+
+## Remarks
+
+The flow below separates the trial-local state and step count from the value table retained across trials. Initially $V=V_0$. Here $k$ counts completed decision steps in the current trial; $W$ is a saved copy of the table before the current backup, and $m$ is the maximum computed from that copy. The figure describes the procedure only and adds no convergence assertion.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}, box/.style={draw, rounded corners, align=center, text width=7.1cm, minimum height=0.85cm}, check/.style={draw, align=center, text width=4.8cm, minimum height=0.85cm}]
+\node[box] (start) at (0,0) {Next supplied start: $s\gets s_0$, $k\gets0$; retain $V$};
+\node[check] (stop) at (0,-1.5) {Is $s\in G$ or $k=L$?};
+\node[box] (compute) at (0,-3) {Save $W\gets V$; compute all $q_W(s,a)$\\ and $m=\max_{a\in A(s)}q_W(s,a)$};
+\node[box] (choose) at (0,-4.5) {Fresh uniform draw among actions\\ attaining $q_W(s,a)=m$};
+\node[box] (execute) at (0,-6) {Execute that action; observe $s'$};
+\node[box] (backup) at (0,-7.5) {Set $V(s)\gets m$; keep all other entries};
+\node[box] (advance) at (0,-9) {Set $s\gets s'$, $k\gets k+1$};
+\node[draw, align=center, text width=2cm] (end) at (6,-1.5) {Trial ends\\ retain $V$};
+\draw[->] (start) -- (stop);
+\draw[->] (stop) -- node[right] {no} (compute);
+\draw[->] (compute) -- (choose);
+\draw[->] (choose) -- (execute);
+\draw[->] (execute) -- (backup);
+\draw[->] (backup) -- (advance);
+\draw[->] (advance.west) -- (-4.6,-9) -- (-4.6,-1.5) -- (stop.west);
+\draw[->] (stop.east) -- node[above] {yes} (end.west);
+\draw[->] (end.north) -- (6,0) -- (start.east);
+\end{tikzpicture}
+```
+
+The stopping test precedes every decision step, so a goal is never backed up and the cap allows at most $L$ such steps. Since starts lie outside $G$ and only a current non-goal entry is changed, the initial goal values remain $0$. In the backup box, $s$ still denotes the state from which the action was executed; the assignment to the observed state occurs only in the next box. Both the greedy draw and the backup use the same saved $W$. These relations restate the Definition independently of the picture.

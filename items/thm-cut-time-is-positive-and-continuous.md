@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cut-time-is-positive-and-continuous.json
+  precheck: pass
 id: thm-cut-time-is-positive-and-continuous
 kind: theorem
 title: Cut time is positive and continuous
@@ -24,13 +27,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -96,7 +92,7 @@ of $M$ is assumed, and exactly $\mathrm{AC}_\omega$ is used.
 
 ## Proof
 
-**Proof technique:** minimizing times are read off as distance equalities; upper semicontinuity contradicts minimality at a fixed later time, and lower semicontinuity uses local invertibility of $\exp_p$ plus the two-minimizer alternative at a hypothetical drop.
+**Proof technique:** minimizing times are read off as distance equalities; upper semicontinuity contradicts minimality at a fixed later time, and lower semicontinuity uses local invertibility of the exponential map at p plus the two-minimizer alternative at a hypothetical drop.
 
 1.1 Near-minimal times and their stability. [F1, F2, given] Fix $v\in S_pM$. By [F1] the set over which the supremum defining $c(v)$ is taken is nonempty and $c(v)>0$, which is (a). If $0\le t<c(v)$, then $t$ is not an upper bound of that set, so there is $T\in A_p(v)$ with $T>t$; the initial-interval property [F2] gives $t\in A_p(v)$, that is $d_g(p,\gamma_v(t))=t$. [F1, F2, given]
 

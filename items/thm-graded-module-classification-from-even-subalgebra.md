@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-graded-module-classification-from-even-subalgebra.json
+  precheck: pass
 id: thm-graded-module-classification-from-even-subalgebra
 kind: theorem
 title: "Graded modules over an algebra with an invertible odd element"
@@ -16,11 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "M. F. Atiyah, R. Bott, and A. Shapiro, Clifford Modules, Part I, §5, Proposition 5.1"
@@ -56,3 +54,24 @@ Let $A=A^0\oplus A^1$ be a $\mathbb Z/2$-graded unital associative algebra over 
 3.2 If $L\subseteq M$ is a graded submodule, then $L^1=uL^0$ by invertibility of $u$ and the grading. Conversely, for any $A^0$-submodule $N\subseteq M^0$, the subspace $N\oplus uN$ is graded and is stable under $A$: for $a\in A^0$, $u^{-1}au\in A^0$, so $a(un)=u(u^{-1}au)n\in uN$; for $b\in A^1$, step 1.1 writes $b=ua_0$ with $a_0\in A^0$, whence $bN\subseteq uN$ and $b(uN)\subseteq N$ because $ua_0u\in A^0$. Thus it is an $A$-submodule. By the definition of graded-simple in [F2], $M$ has a proper nonzero graded submodule exactly when $M^0$ has a proper nonzero $A^0$-submodule. [given, F1, F2, step 1.1, step 2.1, algebra]
 
 4.1 For any left $A^0$-module $N$, the induced module $A\otimes_{A^0}N$ splits as $A^0\otimes_{A^0}N\oplus A^1\otimes_{A^0}N$: the map $(a_0+a_1)\otimes n\mapsto(a_0\otimes n,a_1\otimes n)$ is well defined by balancing and has inverse given by addition. This is a grading because left multiplication respects the parity of $A$, while the balancing relations use only even elements. Its degree-zero part is isomorphic to $N$ by $a_0\otimes n\mapsto a_0n$, with inverse $n\mapsto1\otimes n$. If $N$ is simple, step 3.2 makes the induced module graded-simple. Conversely, step 3.1 identifies any graded $M$ with the module induced from $M^0$, and step 3.2 says $M$ is graded-simple exactly when $M^0$ is simple. Restriction to degree zero and induction are therefore inverse on isomorphism classes: even $A$-isomorphisms restrict to $A^0$-isomorphisms, and $A^0$-isomorphisms induce even $A$-isomorphisms. [F2, F3, step 3.1, step 3.2, algebra] ∎
+
+## Remarks
+
+The following arrows act on isomorphism classes: on the left, graded-simple modules are taken up to even isomorphism; on the right, simple modules are taken up to $A^0$-module isomorphism. The two arrows are inverse by step 4.1.
+
+```tikzcd
+\begin{tikzcd}[column sep=huge, cells={font=\large}, labels={font=\normalsize}]
+{[M]} \arrow[r, shift left=2, "{[M]\mapsto[M^0]}"] & {[N]} \arrow[l, shift left=2, "{[N]\mapsto[A\otimes_{A^0}N]}"]
+\end{tikzcd}
+```
+
+For an individual graded module $M$, the multiplication isomorphism $\mu(a\otimes m)=am$ from step 3.1 restricts to $\mu_0(a_0\otimes m)=a_0m$. The square below is a square of $A^0$-modules; its horizontal arrows are the inclusions of the degree-zero components.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={font=\large}, labels={font=\normalsize}]
+A^0\otimes_{A^0}M^0 \arrow[r, hook] \arrow[d, "\mu_0"'] & A\otimes_{A^0}M^0 \arrow[d, "\mu"] \\
+M^0 \arrow[r, hook] & M
+\end{tikzcd}
+```
+
+Both paths send $a_0\otimes m$ to $a_0m$. The vertical maps are isomorphisms, with $\mu$ additionally a graded $A$-module isomorphism. For the other composite, $(A\otimes_{A^0}N)^0=A^0\otimes_{A^0}N\cong N$ by $a_0\otimes n\mapsto a_0n$, as in step 4.1. These illustrations summarize the constructions; the proof above establishes them independently.

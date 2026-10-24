@@ -1,0 +1,44 @@
+---
+id: lem-root-unity-toral-quotient-by-group-like-generators
+kind: lemma
+title: The root-specialized toral quotient by group-like generators
+status: published
+dependency_level: 1
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+deps: [def-root-of-unity-quantum-group-forms, def-lusztig-divided-power-integral-form, lem-root-unity-quantum-lucas-and-divided-power-generation, lem-unmodified-integral-torus-has-a-quantum-binomial-basis ]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: George Lusztig, Introduction to Quantum Groups
+      url: https://math.mit.edu/~gyuri/papers/quant.gr.pdf
+      locator: Chapters 23, 34–35; toral binomials and Frobenius specialization.
+---
+
+## Statement
+
+Take a finite-type semisimple Cartan datum with standard symmetrizers $d_i$, chosen weight lattice $Q_{\rm root}\subseteq P\subseteq P_{\rm full}$, dual lattice $P^\vee$, and $K_i=K_{d_ih_i}$. Specialize at a primitive root $\zeta$ of odd order $\ell>1$, with $\gcd(\ell,d_i)=1$ for all $i$, and put $z_i=\zeta^{d_i}$. In the actual specialized toral algebra, the quotient by all $K_h-1$ is the polynomial algebra on $H_i=T_{i,0,\ell}$. If $c=\ell c_1+c_0$ and $t=\ell t_1+t_0$, with residues in $[0,\ell-1]$, its exact formula is
+$$T_{i,c,t}=\binom{H_i+c_1}{t_1}\begin{bmatrix}c_0\\t_0\end{bmatrix}_{z_i}.$$
+
+## Facts & Assumptions
+
+**Given:** The datum, isogeny lattice, and good odd root order above.
+
+[F1] The actual toral basis, product and shift formulas are supplied by [[lem-unmodified-integral-torus-has-a-quantum-binomial-basis]]. In one color, writing $T_t=T_{i,0,t}$, $K=K_i$, $z=q_i$, they include $(z^t-z^{-t})T_t=T_{t-1}(Kz^{1-t}-K^{-1}z^{t-1})$ and $T_rT_s=\sum_{j=0}^{\min(r,s)}z^{rs}K^{-j}\left[\begin{smallmatrix}r+s-j\\r\end{smallmatrix}\right]_z\left[\begin{smallmatrix}r\\j\end{smallmatrix}\right]_zT_{r+s-j}$.
+
+[F2] Quantum Lucas and single-color generation hold at each $z_i$, which has exact odd order $\ell$ ([[lem-root-unity-quantum-lucas-and-divided-power-generation]]).
+
+[F3] The toral generators are the actual quantum-binomial product expressions in the integral form ([[def-lusztig-divided-power-integral-form]]); evaluating $K_i=q_i^n$ gives the Laurent-integral Gaussian with upper index $n+c$.
+
+## Proof
+
+**Given:** The data above.
+
+1.1 Fix one color. Modulo $K=1$, the first recurrence of [F1] gives $T_{a\ell+1}=0$: its right numerator is zero and its left scalar $z-z^{-1}$ is nonzero. Successively for $1<r<\ell$, the scalar $z^r-z^{-r}$ is nonzero and the preceding term vanishes, so $T_{a\ell+r}=0$. In the product formula of [F1] with $r=\ell$, $s=a\ell$, Lucas makes all terms vanish except $j=0$ and $j=\ell$; these have coefficients $a+1$ and $a$, respectively. Thus $H T_{a\ell}=(a+1)T_{(a+1)\ell}+aT_{a\ell}$, where $H=T_\ell$. Induction from $T_0=1$ gives $T_{a\ell}=\binom Ha$. The toral spanning statement in [F1] now shows that the full quotient by all $K_h-1$ is spanned by polynomials in the $H_i$. [F1, F2, given, algebra]
+
+2.1 For each $\mu\in P$, evaluate the integral torus at $K_h=q^{\langle\ell\mu,h\rangle}$ and then specialize $q=\zeta$. These are well-defined integral evaluations, since a toral binomial evaluates to the Laurent-integral quantum binomial with upper index $\langle\ell\mu,h_i\rangle+c$, including negative indices by [F2]. They annihilate every $K_h-1$ and send $H_i$ to $\langle\mu,h_i\rangle$. The coordinate image of $P$ is a finite-index subgroup of $\mathbb Z^I$, since $P$ has finite index in the full weight lattice; hence it contains $N\mathbb Z^I$ for some positive integer $N$. A polynomial vanishing on this grid is zero: regard it as a polynomial in one variable with infinitely many grid values, then apply the same argument to each coefficient in the other finitely many variables. There is consequently no polynomial relation among the $H_i$ in the quotient. This proves its exact polynomial-algebra description. [F1, F2, F3, step 1.1, algebra]
+
+3.1 Every $T_{i,c,t}$ is already a polynomial in $H_i$ in the quotient by step 1.1 and the toral shift spanning. Its evaluation at $\mu$ in step 2.1 is $\left[\begin{smallmatrix}\ell\langle\mu,h_i\rangle+c\\t\end{smallmatrix}\right]_{z_i}=\binom{\langle\mu,h_i\rangle+c_1}{t_1}\left[\begin{smallmatrix}c_0\\t_0\end{smallmatrix}\right]_{z_i}$ by [F2]. Polynomial separation from step 2.1 gives the formula in the statement, including negative $c$. In particular $T_{i,-\ell a_{ij},\ell}=H_i-a_{ij}$ in this quotient. [F1, F2, step 2.1, algebra] ∎

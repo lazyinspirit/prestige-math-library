@@ -1,0 +1,97 @@
+{
+  "id": "def-monotone-finite-volume-entropy-scheme",
+  "agent": "/root/rendering_repair_coordinator/npde_021",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "model_basis": "Configured launcher reported by assigning coordinator; no independent runtime model introspection.",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the sole flagged original PNG standalone at original resolution: the complete stencil is replaced by a red diagram-failed block. A fresh local node-tikzjax call using the actual native preamble (amsfonts and tikz-cd) reports Undefined control sequence at the first \\text in the bottom update node. The native preamble does not supply that command. This is a real compilation defect, not a mathematical stencil mismatch.",
+      "action": "Replace only the two \\text prose labels with \\mathrm{right\\ flux} and \\mathrm{left\\ flux}; preserve the boxes, arrows, flux labels and formula.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 73: replace unsupported \\text labels by equivalent upright math letters with explicit word spaces, supported by both native TeX and the scoped KaTeX checker.",
+  "source_lines_after": [
+    73
+  ],
+  "before_raw_sha256": "173c4dd185c1489a86bdbf1b82c4a51260da43cf5869e761d0e182f5393d2136",
+  "after_raw_sha256": "36fcbfa1e3eaeab76bcac297af01a3696c2f1191febbaa793c0968796b68c810",
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Cells and time indices",
+      "evidence": "Definition lines 48–53 uses I_j=[jh,(j+1)h), U_j^0 as its average, and U_j^{n+1} from three time-n states. The three adjacent rectangles represent I_{j-1}, I_j, I_{j+1} in increasing spatial order, labelled U_{j-1}^n,U_j^n,U_{j+1}^n; only the lower update label has time n+1."
+    },
+    {
+      "check": "Shared face fluxes and direction",
+      "evidence": "The arrow across the left face of the central cell carries F(U_{j-1}^n,U_j^n), the arrow across its right face carries F(U_j^n,U_{j+1}^n). Both arrows point right, matching the signed positive-rightward convention and Q_{j+1/2}=F(U_j,U_{j+1}) in def-conservative-finite-volume-scheme. Arrow direction denotes sign convention, not a claim that numerical flux values are positive."
+    },
+    {
+      "check": "Central update signs",
+      "evidence": "The lower label U_j^{n+1}=U_j^n-lambda(right flux-left flux) agrees exactly with the displayed recurrence at line 53: a rightward right-face flux is subtracted and a rightward left-face flux is added. Adjacent cells use the shared value with opposite signs."
+    },
+    {
+      "check": "Monotonicity and CFL consistency",
+      "evidence": "The figure asserts no stronger stability claim. For H(a,b,c)=b-lambda(F(b,c)-F(a,b)), monotonicity of F in a and antitonicity in b imply nonnegative outer coordinate increments; the central increment is bounded below by (1-lambda(L1+L2)) times its state increment. The unchanged full CFL gives this nonnegativity; consistency gives H(s,s,s)=s. These are exactly lem-monotone-fv-update-preserves-range-and-tvd steps 1.2 and 2.1, read in full."
+    },
+    {
+      "check": "Entropy and independence",
+      "evidence": "Read the full local discrete Kruzhkov inequality supplier/consumer interface. Its entropy flux G_k uses the same right-face-minus-left-face orientation, with a plus lambda flux difference on the inequality left side. The stencil draws ordinary F, not G_k, and makes no new entropy assertion. Both this inequality proof and the full range/TVD proof use the recurrence and monotone map H independently of the figure; the assigned definition also expressly says proofs use the recurrence rather than the drawing."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-monotone-finite-volume-entropy-scheme.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-monotone-finite-volume-entropy-scheme.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-monotone-finite-volume-entropy-scheme.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-npde021-final\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-monotone-finite-volume-entropy-scheme --out research/math-library-rendering-repairs-2026-10-23/previews/npde021-final-v2-unique",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      },
+      "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/npde021-final-v2-unique/screenshots/def-monotone-finite-volume-entropy-scheme.json",
+      "result": "tikz_count=1; diagram_failures=[]; katex_errors=[]"
+    }
+  ],
+  "visual_review": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/def-monotone-finite-volume-entropy-scheme--01.png",
+    "final_tile": "research/math-library-rendering-repairs-2026-10-23/previews/npde021-final-v2-unique/screenshots/def-monotone-finite-volume-entropy-scheme--01.png",
+    "additional_standalone_native_capture": "research/math-library-rendering-repairs-2026-10-23/previews/npde021-final-v2-unique/screenshots/stencil-native-standalone.png",
+    "detail": "original",
+    "result": "Reviewed final full tile and additionally captured the native figure element standalone at original resolution. All three boxes, three time-n labels, both flux labels, both rightward arrows, and lower n+1 update are visible without overlap or clipping. Standalone capture resolves the image-viewer partial repaint artifact in the full tile; PNG pixels and native receipt remain intact."
+  },
+  "preservation": "Exact before/after byte comparison confirms the only two replacements are in line 73; frontmatter including publication status is byte-identical. No defining, hypothesis, proof, dependency, provenance or metadata change.",
+  "remaining_issues": []
+}

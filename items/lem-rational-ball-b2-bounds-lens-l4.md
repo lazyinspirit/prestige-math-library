@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rational-ball-b2-bounds-lens-l4.json
+  precheck: pass
 id: lem-rational-ball-b2-bounds-lens-l4
 kind: lemma
 title: "A rational homology ball bounded by L(4,1)"
@@ -38,18 +41,6 @@ axiom_strength: "Assume AC through the UCT, tubular-neighbourhood, Thom, Poincar
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Hisaaki Endo and Yusuf Z. Gurtas, Lantern Relations and Rational Blowdowns"
@@ -102,10 +93,10 @@ Assume AC. Let $Q\subset\mathbb{CP}^2$ be the nonsingular complex conic parametr
 
 The picture is the one-component surgery diagram for the boundary circle bundle. The planar circle has no crossings and represents the unknot; its integer framing is specified by the label $+4$, meaning the chosen parallel has linking number $+4$ with the core. The proof identifies this handle attachment from the normal disk bundle and does not depend on the drawing.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}
   \draw[thick] (0,0) circle (0.7);
   \node at (0,1.05) {$+4$};
   \node at (0,-1.05) {$U$};
 \end{tikzpicture}
-~~~
+```

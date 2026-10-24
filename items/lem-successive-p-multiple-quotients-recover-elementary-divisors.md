@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-successive-p-multiple-quotients-recover-elementary-divisors.json
+  precheck: pass
 id: lem-successive-p-multiple-quotients-recover-elementary-divisors
 kind: lemma
-title: "The successive quotients p^iG/p^{i+1}G recover the cyclic summand multiplicities of a finite abelian p-group"
+title: "The successive quotients $p^iG/p^{i+1}G$ recover the cyclic summand multiplicities of a finite abelian p-group"
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references:

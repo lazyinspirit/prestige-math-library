@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-it-two-user-real-awgn-mac-capacity-region.json
+  precheck: pass
 id: thm-it-two-user-real-awgn-mac-capacity-region
 kind: theorem
 title: No-feedback real AWGN MAC capacity region
@@ -57,3 +60,28 @@ The overline means closure; equivalently the strict inequalities for positive-ra
 
 6.1 If a power is zero, its input is zero almost surely under the expected-power constraint; remove that user and apply the one-user specialization of steps 1.1, 2.1, 3.1, 4.1, 5.1, 1.2, 2.2 and 3.2. If both powers are zero only rate $(0,0)$ is possible. Closing the achievable strict region proves the stated region, including its boundary. [F1, step 1.1, step 5.1, step 3.2, cases, algebra] ∎
 
+## Remarks
+
+Write $C_j=\frac12\ln(1+P_j/N)$ and $S=\frac12\ln(1+(P_1+P_2)/N)$. For positive powers, $\max(C_1,C_2)<S<C_1+C_2$, so the region is the closed pentagon with vertices $(0,0)$, $(C_1,0)$, $(C_1,S-C_1)$, $(S-C_2,C_2)$ and $(0,C_2)$. Its sloping edge is the sum-rate boundary $R_1+R_2=S$.
+
+The illustration uses $P_1=P_2=N$, hence $C_1=C_2=C=\frac12\ln2$ and $S=\frac12\ln3$. The shaded region includes its boundary; the dashed lines show the excluded corner of the individual-rate rectangle. The labelled vertices are $U=(C,S-C)$ and $V=(S-C,C)$, with $S-C=\frac12\ln(3/2)$.
+
+```tikz
+\begin{tikzpicture}[scale=1.25]
+\fill[blue!15] (0,0) -- (3,0) -- (3,1.7548875) -- (1.7548875,3) -- (0,3) -- (0,0);
+\draw[dashed,gray] (0,3) -- (3,3) -- (3,0);
+\draw[thick,blue] (0,0) -- (3,0) -- (3,1.7548875) -- (1.7548875,3) -- (0,3) -- (0,0);
+\draw[->] (0,0) -- (4,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,4) node[above] {$R_2$};
+\node[below left] at (0,0) {$0$};
+\node[below] at (3,0) {$C$};
+\node[left] at (0,3) {$C$};
+\fill (3,1.7548875) circle (1.5pt) node[right] {$U$};
+\fill (1.7548875,3) circle (1.5pt) node[above] {$V$};
+\node at (1.1,1.2) {$R_1+R_2\le S$};
+\node at (3.5,3.7) {$R_1+R_2=S$};
+\draw (3.3,3.45) -- (2.45,2.3048875);
+\end{tikzpicture}
+```
+
+The coordinate scale is common to both axes. If $P_1=0$, then $C_1=0$ and $S=C_2$, and the region becomes the segment from $(0,0)$ to $(0,C_2)$; interchanging users gives the other zero-power case. If both powers vanish it is the single point $(0,0)$, as in proof step 6.1. The proof above is independent of this illustration.

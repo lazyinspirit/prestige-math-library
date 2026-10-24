@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-knot-exterior-homology-and-longitude.json
+  precheck: pass
 id: thm-knot-exterior-homology-and-longitude
 kind: theorem
 title: "Homology and preferred longitude of a knot exterior"
@@ -24,17 +27,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology"
@@ -107,3 +99,21 @@ Assume countable choice. Let $K:S^1\to S^3$ be a smooth oriented embedding and w
 
 7.1 Let $k\in\mathbb Z$ be the unique integer with $i_*[\sigma]=k[\mu]$, and put $[\lambda]=[\sigma]-k[\mu]$. Then $i_*[\lambda]=0$, $p_*[\lambda]=1$, and the change from the basis $([\mu],[\sigma])$ to $([\mu],[\lambda])$ has determinant $1$. In the new basis, $i_*(a[\mu]+b[\lambda])=a[\mu]$, so the kernel is exactly $\mathbb Z[\lambda]$, a primitive rank-one direct summand. Every degree-one class is $[\sigma]+a[\mu]$ and maps to zero exactly when $a=-k$, proving uniqueness. The curve $t\mapsto(e^{2\pi it},e^{-2\pi ikt})$ is embedded in $S^1\times S^1$ because its first coordinate is injective on $S^1$; it represents $[\lambda]$ and is a preferred longitude. [F4, F8, step 6.1, algebra, construct] ∎
 
+
+## Remarks
+
+The peripheral homology maps can be displayed in the preferred basis $([\mu],[\lambda])$. Write $g=i_*[\mu]$ for the generator of $H_1(E_K;\mathbb Z)$ and $c$ for the positive generator of $H_1(S^1;\mathbb Z)$. The coordinates $(a,b)$ below mean $a[\mu]+b[\lambda]$; thus $p_*(a[\mu]+b[\lambda])=bc$ and $i_*(a[\mu]+b[\lambda])=ag$.
+
+```tikz
+\begin{tikzpicture}
+  \node (T) at (0,2.4) {$H_1(T_K;\mathbb Z)\cong\mathbb Z^2$};
+  \node (S) at (-3,0) {$H_1(S^1;\mathbb Z)=\mathbb Z c$};
+  \node (E) at (3,0) {$H_1(E_K;\mathbb Z)=\mathbb Z g$};
+  \draw[->,thick] (T) -- (S) node[midway,above left] {$p_*$};
+  \draw[->,thick] (T) -- (E) node[midway,above right] {$i_*$};
+  \node at (-3,-0.7) {$(a,b)\longmapsto bc$};
+  \node at (3,-0.7) {$(a,b)\longmapsto ag$};
+\end{tikzpicture}
+```
+
+The meridian bounds a normal disk in $N(K)$ and has $p_*[\mu]=0$, whereas the preferred longitude has $p_*[\lambda]=c$ and $i_*[\lambda]=0$. The two arrows are induced by the product projection $p:T_K\to S^1$ and the inclusion $i:T_K\hookrightarrow E_K$; no map between their targets is asserted. In the original product basis of proof step 7.1, $[\lambda]=[\sigma]-k[\mu]$ with $i_*[\sigma]=kg$, so the figure does not identify the product section with the preferred longitude. The proof above is independent of this diagram.

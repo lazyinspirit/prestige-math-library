@@ -1,0 +1,130 @@
+{
+  "id": "def-na-periodic-staggered-grid-stokes-operators",
+  "group": "dnpde_005",
+  "agent": "/root/rendering_repair_coordinator/dnpde_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A two-cell picture materially clarifies that each first-component velocity shares the face between successive pressure centres, whereas divergence uses the faces on opposite sides of one cell. The existing prose is complete but this spatial interface is central to the definition; completeness does not remove the explanatory benefit. Original standalone screenshot confirms no diagram.",
+      "action": "Added a two-dimensional periodic-lift illustration in final Remarks, with pressure centres, horizontal/vertical velocity face locations, coordinate arrows and explicit matching gradient/divergence formulas.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a justified two-cell MAC-grid illustration and explanatory Remarks. Original Definition and complete frontmatter remain byte-identical; status stays published.",
+  "source_lines_after": {
+    "remarks": [
+      58,
+      96
+    ],
+    "tikz": [
+      67,
+      90
+    ],
+    "matching_formulas": [
+      92,
+      96
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and placement",
+      "justification": "Definition lines 37\u201339 put q_j at x_j and v_{i,j} at x_j+(h/2)e_i. With the left cell represented by [0,3] x [0,2.5], its pressure centre is (1.5,1.25). The next centre is (4.5,1.25), and their common vertical face x=3 carries v_{1,j}; the left face x=0 carries v_{1,j-e_1}. Top/bottom face bars at (1.5,2.5)/(1.5,0) carry v_{2,j}/v_{2,j-e_2}. The rectangular aspect ratio is schematic."
+    },
+    {
+      "check": "Gradient domain, codomain and sign",
+      "justification": "G_h maps scalar cell arrays in tilde Q_h to face arrays V_h (lines 41\u201347). The positive e_1 arrow points from the q_j cell toward q_{j+e_1}. Therefore the shared face label is accompanied by (G_h q)_{1,j}=(q_{j+e_1}-q_j)/h, exactly line 47, without implying a sign for arbitrary velocity values."
+    },
+    {
+      "check": "Divergence indexing and orientation",
+      "justification": "D_h maps V_h to Q_h (lines 45\u201347). The illustrated left cell has right-minus-left first-component contribution and top-minus-bottom second-component contribution. Their sum is precisely the d=2 specialization displayed below the diagram, with no missing component or reversed sign."
+    },
+    {
+      "check": "Periodicity and small resolution",
+      "justification": "Lines 32\u201335 reduce every coordinate index modulo N and identify opposite domain faces. Remarks explicitly call this a local periodic lift and state q_{j+N e_1}=q_j. Dotted horizontal continuations mark extension rather than physical boundaries; the two labels remain valid also when N=2. No new boundary condition or distinct-index assumption is introduced."
+    },
+    {
+      "check": "Logical independence",
+      "justification": "The underlying Definition remains unchanged. Both displayed operator relations are direct specializations of line 47 and all storage positions come from lines 37\u201339. No proof or later argument is replaced by the illustration; no new supplier/dependency is asserted."
+    }
+  ],
+  "guard": {
+    "before_raw_sha256": "1db4f14e1b820a63d1fb28f54367ed883beaec440af25b228f3cda1d9313b415",
+    "actual_pre_edit_guard_matched": true,
+    "current_raw_sha256": "c92533403e42c2abc0c62b90caebd753d1a15125a588d3fcd06d15bcac138e56",
+    "original_definition_prefix_unchanged": true,
+    "frontmatter_byte_identical": true,
+    "publication_status_unchanged": "published"
+  },
+  "original_evidence": {
+    "declared_path_missing": true,
+    "declared_path": "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/diagram-supplement/screenshots/def-na-periodic-staggered-grid-stokes-operators--01.png",
+    "resolved_authentic_path": "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/def-na-periodic-staggered-grid-stokes-operators--01.png",
+    "sha256": "ebca98fcf4430d9c0dd729e7714b57869dac53e1e448e9c69eb549374fa464cf",
+    "standalone_original_resolution_inspected": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-na-periodic-staggered-grid-stokes-operators.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-na-periodic-staggered-grid-stokes-operators.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-na-periodic-staggered-grid-stokes-operators.md",
+            "item_id": "def-na-periodic-staggered-grid-stokes-operators",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-na-periodic-staggered-grid-stokes-operators.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnpde005 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-na-periodic-staggered-grid-stokes-operators --out research/math-library-rendering-repairs-2026-10-23/previews/dnpde005",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnpde005/manifest.json",
+    "manifest_sha256": "ddbcd3ffb9a1e58f2e0b9b74b1a655c16a002b6554fefa9d3a3c54935ca3d680",
+    "source_sha256": "c92533403e42c2abc0c62b90caebd753d1a15125a588d3fcd06d15bcac138e56",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dnpde005/screenshots/def-na-periodic-staggered-grid-stokes-operators.json",
+    "standalone_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dnpde005/screenshots/diagram-standalone.png",
+    "compiled_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dnpde005/pi-tikz-cache/33a69fccd1073ede96c4db6c31d5dabe.svg",
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "observations": [
+      "Original-resolution native screenshot and separate standalone crop inspected. All four face bars, two filled pressure dots, labels, positive arrowheads and dotted continuations are visible on dark background without overlap.",
+      "Both cell rectangles visibly close on all four sides; compiled SVG paths contain explicit Z closure. No named-node cycle is used.",
+      "Pressure markers are intentionally filled dots; SVG circular paths have stroke none and inherited fill. No open endpoints are asserted.",
+      "The fresh full screenshot has an unexplained black upper area at the unchanged Definition/title position, although the generated HTML retains the original content and native screenshot of the added Remarks/diagram is intact. This is recorded as a capture limitation, not a source defect."
+    ]
+  },
+  "remaining_issues": [
+    "Fresh full-page capture has blank upper unchanged title/Definition area; no claim of fresh whole-item visual coverage is made. Original authentic screenshot covers that unchanged area.",
+    "Native preview reference map reports 16 unrelated parse diagnostics; no assigned-item KaTeX or diagram failure."
+  ]
+}

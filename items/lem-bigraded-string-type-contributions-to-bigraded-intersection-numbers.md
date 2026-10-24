@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers.json
+  precheck: pass
 id: lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers
 kind: lemma
-title: "Bigraded string types and their contributions to I^{bigr}"
+title: "Bigraded string types and their contributions to bigraded intersection numbers"
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
@@ -24,8 +27,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemma 3.20"
       url: "https://arxiv.org/pdf/math/0006056"
       locator: "Lemma 3.20 with its proof, printed pp. 32-33"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

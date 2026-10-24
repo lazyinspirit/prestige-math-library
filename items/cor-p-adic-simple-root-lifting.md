@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-p-adic-simple-root-lifting.json
+  precheck: pass
 id: cor-p-adic-simple-root-lifting
 kind: corollary
-title: "Simple roots lift uniquely in Z_p"
+title: 'Simple roots lift uniquely in $\mathbb{Z}_p$'
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-completion-is-a-field]
 proof_strategy: constructive
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -35,7 +35,7 @@ $f(a)=0$.
 
 **Given:** A polynomial $f \in \mathbb Z_p[X]$ and $a_0 \in \mathbb Z_p$ with $f(a_0) \in p\mathbb Z_p$ and $f'(a_0) \notin p\mathbb Z_p$.
 
-[L1] $\mathbb Z_p$ is the valuation ring in $\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_p$ is the valuation ring in $\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp|$\mathbb{Z}_p$ is the valuation ring of $\mathbb{Q}_p$]]).
 
 [L2] $\mathbb Q_p$ is complete ([[thm-p-adic-completion-is-a-field]]).
 

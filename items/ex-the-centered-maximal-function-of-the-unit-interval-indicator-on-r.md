@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-centered-maximal-function-of-the-unit-interval-indicator-on-r.json
+  precheck: pass
 id: ex-the-centered-maximal-function-of-the-unit-interval-indicator-on-r
 kind: example
 title: "The centered maximal function of $\\mathbf{1}_{[0,1]}$ on $\\mathbb{R}$"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-countable-choice, def-centered-and-uncentered-hardy-littlewood-maximal-functions]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   references:
     - title: "G. H. Hardy and J. E. Littlewood, A maximal theorem with function-theoretic applications, Section IV"
@@ -47,3 +43,29 @@ In particular $Mf(0)=Mf(1)=1/2$ and $Mf(x)\sim (2|x|)^{-1}$ at infinity.
 2.1 The same calculation with the reflected interval shows that for $x<0$ the [step 1.1, algebra] maximum is attained at $r=1-x$ and equals $1/(2(1-x))$. At the endpoints this gives $Mf(0)=Mf(1)=1/2$. [step 1.1, algebra]
 
 3.1 Steps 1.1, 1.2, and 2.1 give the displayed formula. [step 1.1, step 1.2, step 2.1] ∎
+
+
+## Remarks
+
+The graph below illustrates the displayed formula. Filled dots give the values $Mf(0)=Mf(1)=1/2$; the open circles at height $1$ are excluded endpoints of the plateau on $(0,1)$. Both tails continue toward $0$ at infinity. The verification above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[x=1.4cm,y=2.8cm]
+\draw[->] (-2.5,0) -- (3.6,0) node[right] {$x$};
+\draw[->] (0,-0.1) -- (0,1.3) node[above] {$Mf(x)$};
+\draw[dashed,gray] (0,0.5) -- (1,0.5);
+\draw (1,-0.025) -- (1,0.025) node[below=4pt] {$1$};
+\node[below left] at (0,0) {$0$};
+\node[left] at (0,0.5) {$\frac12$};
+\node[left] at (0,1) {$1$};
+\draw[blue,thick,<-] plot[domain=-2.3:0,samples=70] (\x,{1/(2*(1-\x))});
+\draw[blue,thick] (0,1) -- (1,1);
+\draw[blue,thick,->] plot[domain=1:3.3,samples=70] (\x,{1/(2*\x)});
+\fill[blue] (0,0.5) circle (1.7pt);
+\fill[blue] (1,0.5) circle (1.7pt);
+\draw[blue,thick,fill=white] (0,1) circle (2pt);
+\draw[blue,thick,fill=white] (1,1) circle (2pt);
+\node[above] at (-1.25,0.43) {$\frac{1}{2(1-x)}$};
+\node[above] at (2.3,0.43) {$\frac{1}{2x}$};
+\end{tikzpicture}
+```

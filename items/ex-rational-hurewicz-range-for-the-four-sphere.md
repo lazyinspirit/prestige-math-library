@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-rational-hurewicz-range-for-the-four-sphere.json
+  precheck: pass
 id: ex-rational-hurewicz-range-for-the-four-sphere
 kind: example
 title: "The rational Hurewicz range for the four-sphere"
@@ -24,13 +27,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "Theorem 4.32 and Corollary 4.33, printed pp. 366–368: the integral relative-Hurewicz comparison used in the local range proof."
-verification:
-  precheck: pass
+
 ---
 
 ## Example
 
-Assume AC. For S⁴, the rational Hurewicz map is an isomorphism in degrees 4, 5, and 6: π₄(S⁴)⊗Q≅H₄(S⁴;Q)≅Q, and both π_i(S⁴)⊗Q and H_i(S⁴;Q) vanish for i=5,6.
+Assume AC. For S⁴, the rational Hurewicz map is an isomorphism in degrees 4, 5, and 6: π₄(S⁴)⊗Q≅H₄(S⁴;Q)≅Q, and both $\pi_i(S^4)\otimes\mathbb Q$ and $H_i(S^4;\mathbb Q)$ vanish for i=5,6.
 
 ## Facts & Assumptions
 

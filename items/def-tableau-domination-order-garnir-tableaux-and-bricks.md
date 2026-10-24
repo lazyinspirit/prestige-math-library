@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-tableau-domination-order-garnir-tableaux-and-bricks.json
+  precheck: pass
 id: def-tableau-domination-order-garnir-tableaux-and-bricks
 kind: definition
 title: "The domination order on tableaux, Garnir tableaux and bricks"
@@ -26,12 +29,7 @@ sources:
     - title: "Jun Hu and Andrew Mathas, Graded induction for Specht modules, arXiv:1008.1462v1 (complete 19-page article)"
       url: "https://arxiv.org/pdf/1008.1462"
       locator: "Introduction pp. 1-2 and Section 2 pp. 3-12: the induced graded Specht filtration and the strong-dominance statements used by the consumers of these conventions; complete relevant passages read."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
+
 ---
 
 ## Definition
@@ -155,3 +153,65 @@ with equality only for $y=w$
 4.2 **The four terminal alternatives (horizontal).** Let $\mu$ be a multipartition and $T$ be standard with $r\to_Tr+1$. Consider the three properties: (a) there is $t$ with $|t-r|>1$ such that $t\nearrow_Tt+1$ or $t$ lies in a later component than $t+1$; (b) $r+1\nearrow_Tr+2$ or $r+1$ lies in a later component than $r+2$; (c) $r-1\nearrow_Tr$ or $r-1$ lies in a later component than $r$. By step 3.1 an incoming edge at $t$ (that is, $s_tT$ standard with $t$ earlier than $t+1$ in $s_tT$) is equivalent to $t\nearrow_Tt+1$ or $t$ in a later component than $t+1$. If (a) holds, then $X:=s_tT$ is standard and $X\xrightarrow{t}T$ is an edge, so $T$ is $t$-terminal, and since $t\notin\{r,r+1\}$ the relation $r\to_Tr+1$ persists in $X$; this is alternative (1). If (b) holds with $r+1\nearrow_Tr+2$, then in $X:=s_{r+1}T$ the entry $r+1$ occupies the higher node of $r+2$, so $X\xrightarrow{r+1}T$ is an edge; since $r,r+1$ are adjacent in one row and $r+2$ is above and right, $r+1$ is above and right of $r$ in $X$, so $Y:=s_rX$ is standard and $Y\xrightarrow{r}X$ is an edge with $r$ moving to the higher node, and in $Y$ the entries $r+1,r+2$ are adjacent in one row with $r+1$ to the left; this is alternative (2). If (b) holds with $r+1$ in a later component than $r+2$, the same construction with component arguments gives (2). If (c) holds, the mirror construction gives (3). It remains to observe that if none of (a),(b),(c) holds, then $T$ has no incoming edge: indeed (a) is exactly the incoming-edge alternative at any $t\notin\{r-1,r,r+1\}$, (c) at $t=r-1$, and (b) at $t=r+1$, while at $t=r$ both alternatives of step 3.1 fail because $r$ and $r+1$ lie in one row with $r$ to the left. A standard tableau with no incoming edge is $t^\mu$: if $T\ne t^\mu$, choose the least $t$ with the node of $t+1$ earlier than the node of $t$ in $T$ (such $t$ exists because otherwise the entries occur in the order $1,2,\dots,d$); then standardness forces $t\nearrow_Tt+1$ or an earlier component for $t+1$, so the incoming-edge alternative at $t$ holds and gives the existence of an edge into $T$, a contradiction. Hence in this final case $T=t^\mu$, which is alternative (4). [step 1.1, step 3.1, algebra]
 
 5.1 **The vertical terminal alternatives.** Let $\mu$ be a multipartition and $r\downarrow_Tr+1$ at $(a,b,n)$, so the two nodes are vertically adjacent. Use the following precise tests: (a) an incoming edge $t$ with $|t-r|>1$; (b) $r\nearrow_Tr+2$ or $r+1$ is in a later component than $r+2$; (c) $r-1\nearrow_Tr+1$ or $r-1$ is in a later component than $r$. Test (a) gives $s_tT\xrightarrow{t}T$ and preserves the vertical pair. In test (b), standardness and the consecutiveness of the three entries force $s_{r+1}T$ and $s_rs_{r+1}T$ to be standard: the node of $r+2$ is above and right of $r$, hence above and right of the node of $r+1$, and after the first swap the nodes of $r,r+1$ are incomparable. Thus $s_rs_{r+1}T\xrightarrow{r}s_{r+1}T\xrightarrow{r+1}T$, while $r+1,r+2$ occupy the original vertical pair in $s_rs_{r+1}T$. The different-component case uses the same two swaps without any within-component inequality. Test (c) gives the analogous $s_rs_{r-1}T\xrightarrow{r}s_{r-1}T\xrightarrow{r-1}T$, with $r-1,r$ in the original vertical pair. If none of the tests holds, labels other than the triple adjacent to $r$ cannot have an inversion between consecutive row-reading positions: any such inverse-order consecutive pair is in incomparable nodes or distinct components and is exactly an incoming edge. Reading $r-1,r-2,\ldots,1$ backwards and $r+2,r+3,\ldots,d$ forwards consequently places them in row-reading order except for the lower-row prefix before the vertical pair and the upper-row tail after it; tests (c) and (b) exclude any further excursion. More explicitly, if $L$ is the initial label at $(a,b,n)$ and $U$ the initial label at $(a+1,b,n)$, the forced belt filling is $L,\ldots,L+b-2$ in the first $b-1$ lower-row positions, $r=L+b-1$ in $(a,b,n)$, $r+1=L+b$ in $(a+1,b,n)$, and $L+b+1,\ldots,U$ in the remaining upper-row tail; all outside entries are unchanged. Among standard belt fillings this is Bruhat-maximal: the $b$ lower-row entries are the lexicographically smallest possible increasing subset, namely $L,\ldots,L+b-2,L+b$, because choosing the $b$ smallest would violate column $b$. Every other valid subset has no smaller prefix counts in the upper row, hence is below it by step 2.1. This is exactly the Garnir tableau, including $b=1=\mu_a$. A horizontal brick is a consecutive same-row string. All selections, chains and comparisons are finite, so no choice principle is used. [F3, F4, step 1.1, step 2.1, step 3.1, algebra] ∎
+
+
+## Remarks
+
+**A Garnir belt in English orientation.** Take the single-component shape
+$\mu=(5,4)$ and the node $(a,b,n)=(1,3,1)$. Shaded boxes form its belt:
+columns $3,4,5$ of row $1$ and columns $1,2,3$ of row $2$. The left tableau
+is $t^\mu$; the right is the Garnir tableau described in step 5.1.
+
+```tikz
+\begin{tikzpicture}[x=0.65cm,y=0.65cm]
+\fill[blue!15] (2,1) rectangle (5,2);
+\fill[blue!15] (0,0) rectangle (3,1);
+\draw (0,0) -- (4,0) -- (4,1) -- (5,1) -- (5,2) -- (0,2) -- (0,0);
+\draw (0,1) -- (4,1);
+\draw (1,0) -- (1,2);
+\draw (2,0) -- (2,2);
+\draw (3,0) -- (3,2);
+\draw (4,1) -- (4,2);
+\node at (0.5,1.5) {$1$};
+\node at (1.5,1.5) {$2$};
+\node at (2.5,1.5) {$3$};
+\node at (3.5,1.5) {$4$};
+\node at (4.5,1.5) {$5$};
+\node at (0.5,0.5) {$6$};
+\node at (1.5,0.5) {$7$};
+\node at (2.5,0.5) {$8$};
+\node at (3.5,0.5) {$9$};
+\node at (2.5,2.7) {$t^\mu$};
+\node at (2.5,-0.6) {initial row-reading labels};
+\fill[blue!15] (9,1) rectangle (12,2);
+\fill[blue!15] (7,0) rectangle (10,1);
+\draw (7,0) -- (11,0) -- (11,1) -- (12,1) -- (12,2) -- (7,2) -- (7,0);
+\draw (7,1) -- (11,1);
+\draw (8,0) -- (8,2);
+\draw (9,0) -- (9,2);
+\draw (10,0) -- (10,2);
+\draw (11,1) -- (11,2);
+\node at (7.5,1.5) {$1$};
+\node at (8.5,1.5) {$2$};
+\node at (9.5,1.5) {$5$};
+\node at (10.5,1.5) {$7$};
+\node at (11.5,1.5) {$8$};
+\node at (7.5,0.5) {$3$};
+\node at (8.5,0.5) {$4$};
+\node at (9.5,0.5) {$6$};
+\node at (10.5,0.5) {$9$};
+\draw[very thick] (9,0) rectangle (10,2);
+\node at (9.5,2.7) {Garnir tableau};
+\node at (9.5,-0.6) {$r=5,\quad r+1=6$};
+\end{tikzpicture}
+```
+
+Here $L=3$, $U=8$ and $r=L+b-1=5$. Thus the lower belt entries are
+$3,4,6$ and the upper belt entries are $5,7,8$; the outlined column contains
+$r\downarrow_T r+1$. Both tableaux are standard and all boxes outside the
+belt retain their labels. The initial upper-row string $3,4,5$ is a horizontal
+brick. For example, at cutoff $3$ the prefix shapes are $(3,0)$ on the left
+and $(2,1)$ on the right, in accordance with the dominance direction in
+step 2.1. The picture illustrates the belt filling, without asserting a
+weak Bruhat graph edge between these tableaux; the proof above is independent
+of the picture.

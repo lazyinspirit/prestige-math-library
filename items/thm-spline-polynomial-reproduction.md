@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-spline-polynomial-reproduction.json
+  precheck: pass
 id: thm-spline-polynomial-reproduction
 kind: theorem
 title: B-spline basis properties and polynomial reproduction
@@ -48,3 +51,27 @@ Let $p\in\mathbb N_0$ and let $\xi$ be a clamped knot vector as in [[def-b-splin
 4.2 Induct on $p$. If the knot multiplicity $\mu\le p-1$, the lower-degree splines in the recurrence are continuous there by induction, so the recurrence makes $B_{j,p,\xi}$ continuous; the derivative formula then makes its derivative $C^{p-1-\mu}$, hence $B_{j,p,\xi}\in C^{p-\mu}$. If $\mu=p$, a B-spline whose support crosses the repeated knot has one nonzero piece on either side, namely $(x-\xi_j)^p/(\xi_{j+p}-\xi_j)^p$ and $(\xi_{j+p+1}-x)^p/(\xi_{j+p+1}-\xi_{j+1})^p$; both one-sided limits equal $1$, while any B-spline not crossing it has zero endpoint value there. If $\mu=p+1$, the required order is $C^{-1}$ and no matching is asserted. [A1, step 3.2, F1, algebra]
 
 5.1 The smoothness and piecewise-degree properties from steps 1.1 and 4.2 put every B-spline in $S_{p,\xi}$. If a linear combination of all $n$ B-splines is zero, then on every nonempty knot interval its active coefficients vanish by the local basis property in step 4.1. Each B-spline has a nonempty support interval by the clamped-knot hypothesis, so every coefficient occurs on at least one such interval and is zero. The B-splines are therefore $n$ independent members of the $n$-dimensional space in step 1.2, hence form its basis. The unique global expansion includes every polynomial from step 3.1. [A1, step 3.1, step 4.1, step 1.2, step 1.1, step 4.2, algebra] ∎
+
+## Remarks
+
+The illustration uses the degree-one clamped knot vector $\xi=(0,0,1,3,4,4)$. On the highlighted cell $[1,3)$, the active splines are $B_{2,1,\xi}(x)=(3-x)/2$ and $B_{3,1,\xi}(x)=(x-1)/2$, so their sum is one. Their supports are $[0,3]$ and $[1,4]$, respectively; the other degree-one B-splines vanish on this cell. These formulas follow directly from the recurrence in [F1]. The simple interior knots in this example give continuous piecewise-linear functions; no continuity at a knot of multiplicity $p+1$ is depicted. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.5cm,y=2cm]
+\fill[black!75] (1,0) rectangle (3,1);
+\draw[->] (-0.2,0) -- (4.4,0) node[right] {$x$};
+\draw[->] (0,-0.1) -- (0,1.3);
+\draw[dashed] (1,1) -- (3,1);
+\draw[blue,thick] (0,0) -- (1,1) -- (3,0);
+\draw[red,thick] (1,0) -- (3,1) -- (4,0);
+\draw (0,-0.04) -- (0,0.04) node[below=5pt] {$0$};
+\draw (1,-0.04) -- (1,0.04) node[below=5pt] {$1$};
+\draw (3,-0.04) -- (3,0.04) node[below=5pt] {$3$};
+\draw (4,-0.04) -- (4,0.04) node[below=5pt] {$4$};
+\node[left] at (0,1) {$1$};
+\node[blue,above] at (0.8,1.1) {$B_{2,1,\xi}$};
+\node[red,above] at (3.3,1.1) {$B_{3,1,\xi}$};
+\node[above] at (2,1.65) {$B_{2,1,\xi}+B_{3,1,\xi}=1$};
+\node at (2,-0.4) {$[1,3)$};
+\end{tikzpicture}
+```

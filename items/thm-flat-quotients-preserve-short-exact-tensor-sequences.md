@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-flat-quotients-preserve-short-exact-tensor-sequences.json
+  precheck: pass
 id: thm-flat-quotients-preserve-short-exact-tensor-sequences
 kind: theorem
 title: "A short exact sequence with flat quotient remains short exact after tensoring"
@@ -11,9 +14,6 @@ deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, thm-right-exactness-o
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -69,3 +69,15 @@ is short exact.
 6.1 The composite $A\otimes_RK\to A\otimes_RF\to A\otimes_RN$ is zero because $K\to F\to N$ is zero. Hence step 5.1 gives $x=0$, proving $i\otimes1$ injective. [step 3.1, step 5.1, algebra]
 
 7.1 Right exactness [L2] already gives exactness at $B\otimes_RN$, surjectivity onto $C\otimes_RN$, and the terminal zero. Together with step 6.1, the tensored sequence is short exact. [step 6.1, L2, L5] ∎
+
+## Remarks
+
+The diagram displays the rows and columns used in the proof. Write $j:K\hookrightarrow F$ for the kernel inclusion and $\varepsilon:F\twoheadrightarrow N$ for the chosen free presentation. All tensor products are over the commutative ring $R$.
+
+```tikzcd
+0 \arrow[r] & A\otimes_R N \arrow[r,"i\otimes 1_N"] & B\otimes_R N \arrow[r,"p\otimes 1_N"] & C\otimes_R N \arrow[r] & 0 \\
+0 \arrow[r] & A\otimes_R F \arrow[u,"1_A\otimes\varepsilon"] \arrow[r,"i\otimes 1_F"] & B\otimes_R F \arrow[u,"1_B\otimes\varepsilon"] \arrow[r,"p\otimes 1_F"] & C\otimes_R F \arrow[u,"1_C\otimes\varepsilon"] \arrow[r] & 0 \\
+& A\otimes_R K \arrow[u,"1_A\otimes j"] \arrow[r,"i\otimes 1_K"] & B\otimes_R K \arrow[u,"1_B\otimes j"] \arrow[r,"p\otimes 1_K"] & C\otimes_R K \arrow[u,hook,"1_C\otimes j"] \arrow[r] & 0
+```
+
+Every square commutes by functoriality of tensor products. The middle row is short exact because $F$ is free and flat; the bottom row and the columns ending at the top row are right exact. The marked injection in the $C$-column uses flatness of $C$. The proof establishes the initial injection in the top row, completing its short exactness. No flatness of $A$, $B$, $K$, or $N$ is asserted. The rigorous proof above is independent of the diagram.

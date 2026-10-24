@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qa-35-private-coin-equality-lower-bound.json
+  precheck: pass
 id: thm-qa-35-private-coin-equality-lower-bound
 kind: theorem
 title: "Private-coin SMP equality requires Ω(√n) bits"
@@ -13,12 +16,6 @@ axiom_use: "No choice axiom is used; all distributions, sums, bases, and selecti
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games"
@@ -31,7 +28,7 @@ sources:
 
 ## Statement
 
-For a classical simultaneous-message Equality protocol on n-bit inputs, with independent private randomness, no shared resource, and worst-case error at most 1/3, let c be the maximum of the two senders’ worst-case message lengths. For the fixed odd t used in the proof, c+1≥sqrt(n/(60 ln 2))/t; consequently the total communication is Ω(√n).
+For a classical simultaneous-message Equality protocol on n-bit inputs, with independent private randomness, no shared resource, and worst-case error at most 1/3, let c be the maximum of the two senders’ worst-case message lengths. For the fixed odd t used in the proof, $c+1\ge\frac{1}{t}\sqrt{\frac{n}{60\ln 2}}$; consequently the total communication is Ω(√n).
 
 ## Facts & Assumptions
 

@@ -1,0 +1,105 @@
+{
+  "id": "def-finite-two-way-relay-channel-and-causal-code",
+  "agent": "/root/rendering_repair_coordinator/dinfo_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile and frozen/current source show only the dense three-encoder definition. A concrete block diagram materially clarifies which past observations and messages feed each encoder, and that all three current inputs enter one joint channel; it is warranted under the expanded diagram scope. This is an explanatory diagram omission, not failed LaTeX.",
+      "action": "Added one native TikZ block diagram and concise causal/joint-law explanation in a final Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added the three causal encoder blocks, their exact permitted information arguments, three current-input arcs into the single joint channel W, and three current-output arcs; caption preserves full-duplex timing and exact exchanged-message decoding. Original Definition and all frontmatter bytes are unchanged.",
+  "source_lines_after": {
+    "definition": [
+      29
+    ],
+    "remarks": [
+      32,
+      57
+    ],
+    "tikz": [
+      36,
+      55
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "For i=1,...,n, f_{1,i}: M_1 x Y_1^{i-1} -> X_1 and f_{2,i}: M_2 x Y_2^{i-1} -> X_2; f_{r,i}: Y_r^{i-1} -> X_r. Histories are empty at i=1.",
+      "justification": "Assigned Definition line 29 gives each encoder equation; supplier def-finite-discrete-memoryless-network-and-code defines finite alphabets and histories, including the empty tuple."
+    },
+    {
+      "arcs_and_timing": "Exactly three information-to-encoder arrows, three encoder-to-channel input arrows labelled X_{1,i}, X_{2,i}, X_{r,i}, and three channel-to-output arrows labelled Y_{1,i}, Y_{2,i}, Y_{r,i}. All nine point left to right. There are no output-to-current-encoder arrows and no relay message input.",
+      "justification": "Each displayed input equals its line-29 causal function, using only i-1 histories. Line 29 explicitly states full duplex at every use; the caption explains that only earlier outputs feed later encoders."
+    },
+    {
+      "joint_channel_relation": "W maps each current input tuple to a probability vector on the joint output tuple (Y_1,Y_2,Y_r); separate output arrows do not assert independence or a factorization or absent physical links.",
+      "justification": "Assigned line 29 specifies W(y_1,y_2,y_r | x_1,x_2,x_r), and supplier Definition specifies outputs drawn jointly conditional on the current input tuple, independently of earlier uses."
+    },
+    {
+      "message_exchange": "Terminal 1 estimates M_2 from (M_1,Y_1^n); terminal 2 estimates M_1 from (M_2,Y_2^n). No own-message/remote-message swap or extra decoder information is introduced.",
+      "justification": "Caption repeats the exact two decoder information sets from assigned Definition line 29; M_1 and M_2 retain the original independent uniform-message assumption."
+    },
+    {
+      "proof_independence": "This is a proof-free definition; its full defining paragraph is byte-identical and sufficient without the figure. The illustration imposes no added topology, conditional independence, capacity claim or proof premise."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-finite-two-way-relay-channel-and-causal-code.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-finite-two-way-relay-channel-and-causal-code.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-finite-two-way-relay-channel-and-causal-code.md",
+            "item_id": "def-finite-two-way-relay-channel-and-causal-code",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-finite-two-way-relay-channel-and-causal-code.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "6c6a457744e7b7e9643047f0f78429f7e7d235aaf57d75ac05c5805b99d2e093",
+    "current_raw_sha256": "7e78587cf331289cdfb53adb65358b66754831b78063348c1cb8bfc5aa19af5d",
+    "before_edit_guard": "Matched queue before_raw_sha256 immediately before first write.",
+    "status_preservation": "Entire original frontmatter byte-identical, including status: published; complete original file retained as prefix.",
+    "original_screenshot_path_discrepancy": "Declared evidence_dir/screenshots path is absent. Located authentic screenshot one level up within the same information-theory category and verified recorded hash.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/def-finite-two-way-relay-channel-and-causal-code--01.png",
+    "original_screenshot_sha256": "06f39fa03c2dc511ac87777f89afea0390ffb4cd792571334f9835266a0ba420",
+    "original_view": "Standalone original-resolution inspected.",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo006-final/manifest.json",
+    "final_manifest_sha256": "26265bed71c4e33a4c9a3ca6eeccd9b48bcaadfd10a2378c7f53abfd60a6367c",
+    "final_screenshot_sha256": "e8cf757059cef631c1a228b6ad55ed496e097ac01a0587d2629810d77c7056e4",
+    "visual_check": "Standalone original-resolution final native preview inspected: all three encoder blocks, nine arrowheads, three input labels, three output labels and complete joint-law box are visible without clipping or overlaps. Capture reports 1 TikZ, no diagram failures and no KaTeX errors.",
+    "preview_limitations": "Local native ItemBody SSR preview, not production route; reference-map has 16 unrelated parse diagnostics."
+  },
+  "remaining_issues": []
+}

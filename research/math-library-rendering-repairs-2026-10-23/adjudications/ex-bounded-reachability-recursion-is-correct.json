@@ -1,0 +1,111 @@
+{
+  "id": "ex-bounded-reachability-recursion-is-correct",
+  "agent": "/root/rendering_repair_coordinator/dcpt_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The explicit four-vertex path is central to this example. Drawing its three arcs and marking b clarifies that the two recursive subproblems have unequal lengths 2 and 1, both within the level-1 budget. This is a warranted explanatory illustration; the original proof was already complete.",
+      "action": "Added fenced TikZ in final Remarks with exactly the original directed path, highlighted b, and the two level-1 predicates.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile visibly prints literal 2^i in the L1 supplier label. The current supplier title still has undelimited 2^i, so no upstream repair resolves this consumer.",
+      "action": "Added a local explicit wikilink label identical in wording with $2^i$ delimited; supplier untouched.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a final-Remarks path illustration and repaired the inherited raw exponent in the L1 reference label. Original statement, three verification steps, dependencies, all frontmatter and published status are preserved.",
+  "source_lines_after": {
+    "reference_label": [
+      36
+    ],
+    "remarks": [
+      50,
+      69
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Exact digraph and degrees",
+      "evidence": "Example line 30 specifies V={s,a,b,t} and only arcs s→a,a→b,b→t. Figure lines 56–62 has exactly four vertex circles and these three directed edges. Native original PNG independently shows each arrow. In/out-degrees are s=(0,1), a=(1,1), b=(1,1), t=(1,0). This is an open directed path: no closing edge is intended or drawn."
+    },
+    {
+      "check": "Recursion index and witness",
+      "evidence": "Read def-bounded-reachability-recursion: Reach_0(u,v) iff u=v or arc(u,v); Reach_i(u,v) iff some z satisfies Reach_(i−1)(u,z) and Reach_(i−1)(z,v). At i=2,z=b, labels must be Reach_1(s,b) and Reach_1(b,t), as drawn. Both endpoints and b lie in V."
+    },
+    {
+      "check": "Exact lengths and truth values",
+      "evidence": "Verification steps 1.1 and 2.1 give only s→t path length 3, s→b length 2, b→t length 1. Read local correctness lemma to check budget 2^i. Hence Reach_1(s,t)=false, Reach_1(s,b)=true, Reach_1(b,t)=true, Reach_2(s,t)=true. Independently evaluated the exact finite recurrence in Node with V and A above and obtained these four values."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "guard": {
+      "before_raw_sha256": "d630a350e29484382f927270962db101e3d0718b1814670f222b9e12aa933daa",
+      "passed": true,
+      "frontmatter_byte_identical": true
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-bounded-reachability-recursion-is-correct.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-bounded-reachability-recursion-is-correct.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-bounded-reachability-recursion-is-correct.md",
+            "item_id": "ex-bounded-reachability-recursion-is-correct",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-bounded-reachability-recursion-is-correct.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt009",
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt009/manifest.json",
+      "source_sha256": "3e229c0bcecf086261134b5f93529a62e4ac80ed0785e39e2bacaa109ab914e0",
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "original_resolution_view": "Viewed standalone 1200×1400 PNG; graph has four labelled vertices, three right-directed arrows, a midpoint label over b and separated subproblem/length labels; no figure clipping or overlap. This fresh capture omits some unchanged nonfigure text visually, so it is evidence for the actual compiled figure and corrected reference label rather than a new full-ItemBody text certification."
+    }
+  },
+  "evidence": {
+    "original_declared_path_discrepancy": "Declared evidence_dir includes diagram-supplement, which has no screenshot. Located authentic PNG in the same category parent/screenshots and verified exact supplied SHA256.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/ex-bounded-reachability-recursion-is-correct--01.png",
+    "original_screenshot_sha256": "9ea344126e3873c8fa1c76bfd78119e8d9b14d91bf6a0b0c78a0c93843ec4a9f",
+    "current_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt009/screenshots/ex-bounded-reachability-recursion-is-correct--01.png",
+    "current_screenshot_sha256": "1d4411b4bb84f85901c580857dadcfb84d0d04a976955126e5cca3b0b6ec331d"
+  },
+  "remaining_issues": [
+    "Native preview manifest lists 16 unrelated reference-map parse diagnostics; scoped item checks pass. Fresh capture has missing unchanged nonfigure text as described above; no source change inferred from this artifact."
+  ]
+}

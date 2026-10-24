@@ -1,0 +1,89 @@
+{
+  "id": "lem-translation-estimate-for-w-one-p-functions",
+  "agent": "/root/rendering_repair_supervisor2/pde_036",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 exposes literal $W^{1,p}$ in the uppercase technique banner while adjacent body formulas typeset. The banner is plain text.",
+      "action": "Replace only the banner phrase with equivalent Sobolev-norm limit prose.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile 01 shows W^{k,p}(R^n) as raw inherited reference-title text in F1. Current supplier title still contains that un-delimited notation.",
+      "action": "Add a local explicit label with math delimiters to the existing smooth-density wikilink, preserving target and mathematical reference.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use plain Sobolev-norm limit wording in the technique banner and typeset the inherited smooth-density reference label locally.",
+  "source_lines_after": {
+    "50": "[F1] *Smooth density in $W^{1,p}(\\mathbb R^n)$.* Under Countable Choice, for every $u\\in W^{1,p}(\\mathbb R^n;\\mathbb K)$ there are $\\varphi_m\\in C_c^\\infty(\\mathbb R^n;\\mathbb K)$ with $\\|\\varphi_m-u\\|_{W^{1,p}}\\to0$; Countable Choice is supplied by the assumed Axiom of Choice. ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn|Compactly supported smooth functions are dense in $W^{k,p}(\\mathbb R^n)$]], [[def-countable-choice]])",
+    "62": "**Proof technique:** Prove the estimate for smooth approximants along line segments, then use density to pass to the Sobolev-norm limit. Identify the translated weak derivatives by testing against compactly supported smooth functions."
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_review": "The changed banner still describes convergence in the same W^{1,p} norm explicitly present in F1 and steps 1.1/2.1; the local link label names the same W^{k,p}(R^n) supplier without changing its target. Statement, hypotheses, proof steps, dependencies and all frontmatter are byte-identical to the frozen source. This was a rendering review, not a full proof audit.",
+  "before_raw_sha256": "627d983ef37b6354e4a94e9eb82c2e852edda7ba68b9f95e3158fcb4d3b7bd6c",
+  "after_raw_sha256": "777fb3280fa0fb995b34a3e8dc428c191821eb718783b10cf004087f3d34a40a",
+  "guard": "Current raw SHA matched queue before_raw_sha256 and frozen bytes before initial edit.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-translation-estimate-for-w-one-p-functions.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-translation-estimate-for-w-one-p-functions.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-translation-estimate-for-w-one-p-functions.md",
+            "item_id": "lem-translation-estimate-for-w-one-p-functions",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-translation-estimate-for-w-one-p-functions.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/pde/screenshots/lem-translation-estimate-for-w-one-p-functions--01.png",
+      "research/math-library-rendering-audit-2026-10-23/pde/screenshots/lem-translation-estimate-for-w-one-p-functions--02.png"
+    ],
+    "inspection": "All original and current PNGs opened separately with view_image detail original. Current tile 01 typesets the repaired reference label; current tile 02 shows readable Sobolev-norm limit with no literal dollar delimiters.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/pde-036/manifest.json",
+    "manifest_sha256": "ee72cd6148183212b4d0c2eb51231e0852dfe255403ca8d1a5a9f89af2d9cb56",
+    "source_sha256": "777fb3280fa0fb995b34a3e8dc428c191821eb718783b10cf004087f3d34a40a",
+    "current_tiles": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/pde-036/screenshots/lem-translation-estimate-for-w-one-p-functions--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/pde-036/screenshots/lem-translation-estimate-for-w-one-p-functions--02.png"
+    ],
+    "preview_exit_code": 0
+  },
+  "remaining_issues": [
+    "Renderer technique banners remain plain text; equivalent prose avoids unsupported inline math locally.",
+    "Preview covers current title and ItemBody, not the production route or Sources footer. Reference map reported 13 unrelated parse diagnostics; this item rendered successfully."
+  ]
+}

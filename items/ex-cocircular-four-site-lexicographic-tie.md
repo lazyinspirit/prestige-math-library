@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cocircular-four-site-lexicographic-tie.json
+  precheck: pass
 id: ex-cocircular-four-site-lexicographic-tie
 kind: example
 title: "A cocircular four-site tie selects the stable-id diagonal"
@@ -25,8 +28,7 @@ sources:
     - title: "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22"
       url: "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delau\
         nay.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -60,3 +62,44 @@ For the square sites $A=(0,0),B=(1,0),C=(1,1),D=(0,1)$ with identifiers $1,2,3,4
 3.1 The plane through $A,B,D$ has value $2+\varepsilon^2+\varepsilon^8-\varepsilon$ at $C$; subtracting from $C$'s height $2+\varepsilon^4$ gives $\varepsilon-\varepsilon^2+\varepsilon^4-\varepsilon^8$, which is formally positive. The plane through $B,C,D$ has value $\varepsilon^8-\varepsilon^4+\varepsilon^2$ at $A$; subtracting from $A$'s height $\varepsilon$ gives $\varepsilon-\varepsilon^2+\varepsilon^4-\varepsilon^8$, also formally positive. Hence both $ABD$ and $BCD$ are lower triangles for the common lift. [F2, F3, step 2.1, algebra]
 
 4.1 When three synthetic identifiers are inserted below $1,2,3,4$, each input rank increases by three and each exponent $2^{r_i}$ is multiplied by $8$. Thus every input-only determinant polynomial becomes the four-site polynomial with $\varepsilon$ replaced by $\varepsilon^8$, which preserves the first nonzero coefficient sign. The augmented run therefore retains diagonal $BD$, and [F5] returns the stated weakly empty triangulation. [F1, F2, F3, F5, step 2.1, step 1.2, algebra] ∎
+
+## Remarks
+
+The two panels show the same four-site universe $U=\{A,B,C,D\}$ in the plane, with the coordinates and counterclockwise ordering from the statement. The arrow denotes the diagonal flip of step 2.1, not a motion of the sites. Here “illegal” refers to the formal perturbed lift: before perturbation, both diagonals give weakly empty-circle triangulations. The right panel consists of the lower triangles $ABD$ and $BCD$ checked in step 3.1. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\coordinate (A) at (0,0);
+\coordinate (B) at (2,0);
+\coordinate (C) at (2,2);
+\coordinate (D) at (0,2);
+\draw[thick] (A) -- (B) -- (C) -- (D) -- (A);
+\draw[thick,dashed] (A) -- (C);
+\fill (A) circle (1.6pt);
+\fill (B) circle (1.6pt);
+\fill (C) circle (1.6pt);
+\fill (D) circle (1.6pt);
+\node[below left] at (A) {$A=(0,0)$};
+\node[below right] at (B) {$B=(1,0)$};
+\node[above right] at (C) {$C=(1,1)$};
+\node[above left] at (D) {$D=(0,1)$};
+\node at (1,-1) {$AC$ illegal after perturbation};
+\draw[->,thick] (3,1) -- (4,1);
+\node[above] at (3.5,1) {flip};
+\coordinate (E) at (5,0);
+\coordinate (F) at (7,0);
+\coordinate (G) at (7,2);
+\coordinate (H) at (5,2);
+\draw[thick] (E) -- (F) -- (G) -- (H) -- (E);
+\draw[very thick] (F) -- (H);
+\fill (E) circle (1.6pt);
+\fill (F) circle (1.6pt);
+\fill (G) circle (1.6pt);
+\fill (H) circle (1.6pt);
+\node[below left] at (E) {$A$};
+\node[below right] at (F) {$B$};
+\node[above right] at (G) {$C$};
+\node[above left] at (H) {$D$};
+\node at (6,-1) {$BD$ selected};
+\end{tikzpicture}
+```

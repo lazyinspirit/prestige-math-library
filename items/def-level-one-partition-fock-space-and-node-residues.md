@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-level-one-partition-fock-space-and-node-residues.json
+  precheck: pass
 id: def-level-one-partition-fock-space-and-node-residues
 kind: definition
 title: "The level-one partition Fock space and node residues"
@@ -15,12 +18,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Bernard Leclerc, Fock space representations (author-hosted complete 38-page treatment)"
@@ -79,3 +76,47 @@ module structure, so nothing about $F$ is silently assumed in this Definition.
 2.1 The boundary example. For $e\ge2$ the partition $(1^e)$ has parts of multiplicity exactly $e$, so it is not $e$-regular, while its adjacent differences are $0$ except for the final difference $1<e$, so it is $e$-restricted; this shows the two conditions are genuinely different and that the full Fock space contains non-regular labels. All partitions are vertices of the full Fock module; the regular ones will be the labels of the empty component. [step 1.2, given, algebra]
 
 3.1 Conclusion. The level-one partition Fock space is the charge-$0$ Fock space with weight $\Lambda_0-\sum_im_i\alpha_i$ and residues $c-r\bmod e$, its operators are the stable finite-prefix node operators, and the $e$-regular and $e$-restricted conventions are conjugate to each other with the column-height dictionary. [step 1.1, step 1.2, step 2.1] ∎
+
+
+## Remarks
+
+For $e=3$ and $\lambda=(3,2)$, the English diagram below labels each cell
+by its residue $c-r\bmod 3$. Rows increase downward and columns rightward.
+Circled entries are removable nodes; dashed boxes marked $A_i$ are addable
+nodes of residue $i$, outside the original diagram.
+
+```tikz
+\begin{tikzpicture}[x=1.05cm,y=1.05cm]
+\draw (0,0) rectangle (1,-1);
+\draw (1,0) rectangle (2,-1);
+\draw (2,0) rectangle (3,-1);
+\draw (0,-1) rectangle (1,-2);
+\draw (1,-1) rectangle (2,-2);
+\node at (0.5,-0.5) {$0$};
+\node at (1.5,-0.5) {$1$};
+\node at (2.5,-0.5) {$2$};
+\node at (0.5,-1.5) {$2$};
+\node at (1.5,-1.5) {$0$};
+\draw (2.5,-0.5) circle (0.28);
+\draw (1.5,-1.5) circle (0.28);
+\draw[dashed] (3,0) rectangle (4,-1);
+\draw[dashed] (2,-1) rectangle (3,-2);
+\draw[dashed] (0,-2) rectangle (1,-3);
+\node at (3.5,-0.5) {$A_0$};
+\node at (2.5,-1.5) {$A_1$};
+\node at (0.5,-2.5) {$A_1$};
+\node at (0.5,0.45) {$c=1$};
+\node at (1.5,0.45) {$2$};
+\node at (2.5,0.45) {$3$};
+\node at (3.5,0.45) {$4$};
+\node at (-0.65,-0.5) {$r=1$};
+\node at (-0.65,-1.5) {$2$};
+\node at (-0.65,-2.5) {$3$};
+\end{tikzpicture}
+```
+
+Indeed, [F2] gives removable nodes $(1,3),(2,2)$ and addable nodes
+$(1,4),(2,3),(3,1)$. Their residues are respectively $2,0$ and $0,1,1$.
+The five original cells give $(m_0,m_1,m_2)=(2,1,2)$ in the weight formula.
+This illustration records the indexing and corners only; the verification
+and the node-action formulas remain independent of the picture.

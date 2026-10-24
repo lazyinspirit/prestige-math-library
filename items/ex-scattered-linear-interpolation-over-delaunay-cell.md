@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-scattered-linear-interpolation-over-delaunay-cell.json
+  precheck: pass
 id: ex-scattered-linear-interpolation-over-delaunay-cell
 kind: example
 title: "A scattered affine interpolant on one Delaunay cell"
@@ -24,8 +27,7 @@ sources:
       url: "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
     - title: "David M. Mount, CMSC 754 Computational Geometry, Lecture 11"
       url: "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -55,3 +57,28 @@ On the Delaunay triangle with vertices $(0,0),(2,0),(0,2)$ and vertex data $0,2,
 2.1 The interpolated value is $0\cdot\lambda_0+2\cdot\lambda_1+2\cdot\lambda_2=2(1/4)+2(1/4)=1$. Uniqueness follows from [F4]. [F3, F4, step 1.1, algebra]
 
 3.1 The three sites are noncollinear, so by [F2] their convex hull is their single triangle. Its circumcircle has center $(1,1)$ and radius squared $2$; there are no other sites by [A1], so it is weakly empty, and [F5] returns this cell. [F2, F5, A1, algebra] ∎
+
+
+## Remarks
+
+The sketch places the query inside the single triangular cell. At vertex $p_i$, the labels give its data $f_i$ and the query's weight $\lambda_i$; these weights reconstruct $x$ and give $I_Tf(x)=1$ as computed above. The proof is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=2]
+\coordinate (A) at (0,0);
+\coordinate (B) at (2,0);
+\coordinate (C) at (0,2);
+\draw[thick] (A) -- (B) -- (C) -- (A);
+\fill (A) circle (1.5pt);
+\fill (B) circle (1.5pt);
+\fill (C) circle (1.5pt);
+\fill (0.5,0.5) circle (1.5pt);
+\node[below left] at (A) {$p_0=(0,0)$};
+\node[below right] at (B) {$p_1=(2,0)$};
+\node[above] at (C) {$p_2=(0,2)$};
+\node[left] at (0,0.3) {$f_0=0,\ \lambda_0=1/2$};
+\node[right] at (2,0.3) {$f_1=2,\ \lambda_1=1/4$};
+\node[above] at (0,2.25) {$f_2=2,\ \lambda_2=1/4$};
+\node[below] at (0.9,0.4) {$x=(1/2,1/2)$};
+\end{tikzpicture}
+```

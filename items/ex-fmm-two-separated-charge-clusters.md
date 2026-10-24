@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-fmm-two-separated-charge-clusters.json
+  precheck: pass
 id: ex-fmm-two-separated-charge-clusters
 kind: example
 title: Two separated planar charge clusters
@@ -12,8 +15,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348"
@@ -45,3 +46,47 @@ Use the dyadic root square $H=[0,4]^2$. Put $P=[0,2]\times[0,2]$ and $Q=[2,4]\ti
 2.1 The two nonzero source-target differences are $9/4$ and $7/4$, so the exact potential is $\log(9/4)+\log(7/4)=2\log2+\log(63/64)$ and the exact derivative is $4/9+4/7=64/63$. Comparing with step 1.2, the absolute errors are $\log(64/63)<1/63$ and $|64/63-1|=1/63$; the logarithmic inequality follows from $\log(1+x)=\int_0^x(1+t)^{-1}\,dt<x$ for $x>0$. Zero-charge labels add no contribution. [given, step 1.2, algebra]
 
 3.1 For the only far interaction with nonzero source charge, $Q_C=2$, $R=2$, and $\rho=\sqrt2/2\in(1/2,1)$. The [F3] bounds are $\rho^2/(1-\rho)>1/4$ and $\rho/(1-\rho)>1/2$; all other far source cells have $Q_C=0$. Any direct near pairs from the zero-charge labels contribute exactly zero, so the errors in step 2.1 satisfy the theorem's global sums. [given, F3, step 2.1, algebra] ∎
+
+
+## Remarks
+
+The cell picture shows all six labels; each dot is labelled by its charge. The top half of $H$ is empty. The cell boundaries depict the dyadic subdivision, with point membership assigned by the half-open convention in the definition. The arrows below select one branch of the ordered pair recursion, with source cell first. The last pair is far because $|d-c|=2>\sqrt2=a_C+a_D$. In $C$, the two unit charges have offsets $-1/4$ and $1/4$ from $c$, so $M_0=2$ and $M_1=0$; the zero-charge target is at $d$. The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.5]
+\draw[thick] (0,0) rectangle (4,4);
+\draw[thick] (0,2) -- (4,2);
+\draw[thick] (2,0) -- (2,4);
+\draw (1,0) -- (1,2);
+\draw (3,0) -- (3,2);
+\draw (0,1) -- (4,1);
+\node at (2,4.25) {$H=[0,4]^2$};
+\node at (1,3) {empty};
+\node at (3,3) {empty};
+\node at (-0.3,1) {$P$};
+\node at (4.3,1) {$Q$};
+\node at (0.5,0.83) {$C_0$};
+\node at (1.5,0.83) {$C$};
+\node at (2.5,0.83) {$D_0$};
+\node at (3.5,0.83) {$D$};
+\node at (2.5,1.83) {$D_1$};
+\fill (0.5,0.5) circle (1.5pt);
+\fill (1.25,0.5) circle (1.5pt);
+\fill (1.75,0.5) circle (1.5pt);
+\fill (2.5,0.5) circle (1.5pt);
+\fill (3.5,0.5) circle (1.5pt);
+\fill (2.5,1.5) circle (1.5pt);
+\node at (0.5,0.25) {$0$};
+\node at (1.25,0.25) {$1$};
+\node at (1.75,0.25) {$1$};
+\node at (2.5,0.25) {$0$};
+\node at (3.5,0.25) {$0$};
+\node at (2.5,1.25) {$0$};
+\node (pq) at (0,-0.65) {$(P,Q)$};
+\node (cq) at (2,-0.65) {$(C,Q)$};
+\node (cd) at (4,-0.65) {$(C,D)$};
+\draw[->] (pq) -- node[above] {split $P$} (cq);
+\draw[->] (cq) -- node[above] {split $Q$} (cd);
+\node at (4,-1) {far};
+\end{tikzpicture}
+```

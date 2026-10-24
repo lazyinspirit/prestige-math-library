@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-lca-transform-range-is-dense-in-ltwo-of-the-dual.json
+  precheck: pass
 id: lem-lca-transform-range-is-dense-in-ltwo-of-the-dual
 kind: lemma
-title: The Plancherel transform range is dense in L^2 of the dual
+title: The Plancherel transform range is dense in $L^2$ of the dual
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     url: https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf
     locator: 'Appendix C.3, printed p. 435, paragraph preceding Theorem C.8: the transform on the integrable square-integrable intersection has dense range and extends surjectively.'
 proof_strategy: direct
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

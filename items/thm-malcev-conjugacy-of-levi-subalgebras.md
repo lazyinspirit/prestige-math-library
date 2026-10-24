@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-malcev-conjugacy-of-levi-subalgebras.json
+  precheck: pass
 id: thm-malcev-conjugacy-of-levi-subalgebras
 kind: theorem
 title: Malcev conjugacy of Levi subalgebras
@@ -11,12 +14,6 @@ proof_strategy: induction
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Milne, Lie Algebras, Theorem 6.25"
@@ -47,7 +44,7 @@ $x\in\operatorname{nilrad}(\mathfrak g)$.
 
 ## Proof
 
-**Proof technique:** induction on the radical, strengthened to place every conjugator in $[\mathfrak g,\mathfrak r]$.
+**Proof technique:** induction on the radical, strengthened to place every conjugator in the commutator of the Lie algebra with its radical.
 
 1.1 We prove the stronger assertion that the conjugating factors may all be $\exp(\operatorname{ad}x)$ with $x\in[\mathfrak g,\mathfrak r]$. If this commutator is zero, then $\mathfrak r$ is central. Each Levi factor is a section of $\mathfrak g\to\mathfrak g/\mathfrak r$ by [L1]. The difference of two such sections is a linear map to the central algebra $\mathfrak r$; the two sections preserve brackets, so that difference vanishes on the derived algebra of the quotient. The quotient is semisimple and hence perfect by [L4], so the sections, and therefore the Levi factors, coincide. [L1, L4, base]
 

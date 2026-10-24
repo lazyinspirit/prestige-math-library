@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-schur-multiplier-of-a-group.json
+  precheck: n/a
 id: def-schur-multiplier-of-a-group
 kind: definition
 title: "Schur multiplier"
@@ -8,12 +11,6 @@ deps: [def-group-homology-as-a-derived-functor]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -23,4 +20,4 @@ sources:
 
 ## Definition
 
-M(G)=H_2(G;Z), not H²(G,C×) by definition.
+$M(G)=H_2(G;\mathbb{Z})$, not $H^2(G,\mathbb{C}^{\times})$ by definition.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-euler-characteristic-twist-integral-proper-curve.json
+  precheck: pass
 id: lem-euler-characteristic-twist-integral-proper-curve
 kind: lemma
 title: "Twisting a coherent sheaf by an invertible sheaf on an integral proper curve"
@@ -34,19 +37,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: devissage
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-26.md"
-      - "research/frontier-38-owner-30-alpha-batch-26-5a.md"
-      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u26.json"
-    content_sha256: "a6c88a526d577e504b89b0ad951106d2ef72b5d684e259c9ad06408b22e43630"
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Varieties, Section 33.44 (Degrees on curves), Lemma 33.44.5 (tag 0AYV)"
@@ -97,7 +87,7 @@ $\chi$ the Euler characteristic of [[def-euler-characteristic-coherent-sheaf]].
 
 ## Proof
 
-**Proof technique:** devissage on the Noetherian scheme $X$ for the property $P(\mathcal G)$: "$\chi(X,\mathcal L\otimes\mathcal G)=r(\mathcal G)\deg_X(\mathcal L)+\chi(X,\mathcal G)$".
+**Proof technique:** devissage on the Noetherian scheme for the Euler-characteristic identity defined as property P in step 1.1.
 
 1.1 The property $P$ and its defect. For a coherent $\mathcal O_X$-module $\mathcal G$ define $P(\mathcal G)$ to be the identity $\chi(X,\mathcal L\otimes\mathcal G)=r(\mathcal G)\deg_X(\mathcal L)+\chi(X,\mathcal G)$, and define the defect $D(\mathcal G):=\chi(X,\mathcal L\otimes\mathcal G)-r(\mathcal G)\deg_X(\mathcal L)-\chi(X,\mathcal G)$, so that $P(\mathcal G)$ holds exactly when $D(\mathcal G)=0$. The tensor products and stalks appearing are coherent and finite-dimensional by [F1]–[F3]. [F1, F2, F3]
 

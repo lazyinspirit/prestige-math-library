@@ -1,0 +1,77 @@
+{
+  "id": "def-standard-pure-braid-generators",
+  "agent": "/root/rendering_repair_coordinator/braid_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution authentic tile visibly prints A_ij literally in the heading, whereas the body consistently uses the indexed generator A_{ij}. The title lacks math delimiters; this is a concrete unrendered subscript, not an optional stylistic change.",
+      "action": "Wrapped the exact generator symbol in inline math and grouped its two-letter subscript: $A_{ij}$.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed only title line 4 from literal A_ij to $A_{ij}$.",
+  "source_lines_after": {
+    "4": "title: \"Standard geometric pure braid generators $A_{ij}$\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "pre_edit_guard": {
+    "expected_raw_sha256": "2c9888d13258f0dcd3533e0a554f897560a04e82c5d62ec170fabf83ff81bbb1",
+    "matched": true
+  },
+  "source_sha256": "89bd5925f36df9257c2fd971dddb0b5d6ceecac990f679412fcd6df4cc2572dd",
+  "scope_check": "Exact byte comparison confirms the title replacement is the sole source change. Body, braid word W_ij, inverse sign in Psi, stacking/multiplication conventions, dependencies, verification and status are unchanged.",
+  "original_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/braid-groups/screenshots/def-standard-pure-braid-generators--01.png",
+    "sha256": "8728149a286e13b0efabcb4177c9824d443d311cb9aea28a945986f5b2b11c66",
+    "viewed": "standalone original resolution"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-standard-pure-braid-generators.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-standard-pure-braid-generators.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-standard-pure-braid-generators.md",
+            "item_id": "def-standard-pure-braid-generators",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-standard-pure-braid-generators.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/braid003-native/manifest.json",
+    "manifest_sha256": "e78a29713c0f88e40f55b54d3e22ff9985b1cfd34975cf2904a1a2a53e0c071b",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/braid003-native/screenshots/def-standard-pure-braid-generators--01.png",
+    "screenshot_sha256": "50066e03164df96c4c40603fdcc914a65ca371034cbc59dea4b4007b91b6a55c",
+    "viewed": "standalone original resolution",
+    "outcome": "Title now displays A with ij subscript, no literal underscore or dollar delimiters. Complete body inspected with no additional confirmed LaTeX/TikZ defect.",
+    "limitations": "Local native ItemBody/title preview, not production route or Sources footer; 16 unrelated reference-map parse diagnostics reported by preview."
+  }
+}
