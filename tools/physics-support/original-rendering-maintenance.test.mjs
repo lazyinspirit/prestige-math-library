@@ -11,15 +11,22 @@ import { originalPresentationChanges } from './original-presentation-maintenance
 import { itemHashGuard } from '../item-hash.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const exactNativeFixtures = JSON.parse(readFileSync(new URL('./fixtures/exact-native-presentation.json', import.meta.url)));
 const counterexampleFixture = JSON.parse(readFileSync(new URL('./fixtures/counterexample-math-spelling.json', import.meta.url)));
 // All receipts here are synthetic test fixtures; they confer no real review.
-function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, findingStatus = 'repaired', findingVerdict = 'confirmed', sourceExtra = '', factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
+function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, findingStatus = 'repaired', findingVerdict = 'confirmed', sourceExtra = '', exactNativeId = null, factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'original-rendering-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
-  const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = mode === 'counterexample-spelling' ? counterexampleFixture.option.id : definition ? 'def-supplier' : 'thm-supplier';
+  const exactFixture = mode === 'exact-native' ? exactNativeFixtures.find(f => f.selector.id === exactNativeId) : null;
+  const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = exactFixture ? exactFixture.selector.id : mode === 'counterexample-spelling' ? counterexampleFixture.option.id : definition ? 'def-supplier' : 'thm-supplier';
   for (const dir of [root, source]) for (const sub of ['items', 'library/math', 'research']) mkdirSync(join(dir, sub), { recursive: true });
   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+  if (exactFixture) {
+    const body = exactFixture.before.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)([\s\S]*)$/)[1];
+    const kind = /^kind: (.+)$/m.exec(exactFixture.before)[1];
+    before = before.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/)[0].replace('kind: theorem', 'kind: ' + kind) + body;
+  }
   if (mode === 'counterexample-spelling') {
     before='---\nid: '+id+'\nkind: counterexample\ntitle: Exact known published body pair\nstatus: published\ndeps: '+JSON.stringify(counterexampleFixture.targets)+'\naliases: [supplier-alias]\nprovenance: {statement: ai-altered, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n'+counterexampleFixture.before_body;
     for (const target of counterexampleFixture.targets) save(source,'items/'+target+'.md','---\nid: '+target+'\nkind: '+(target.startsWith('def-')?'definition':'lemma')+'\nstatus: published\ndeps: []\ntitle: Synthetic unchanged published target\n---\n## '+(target.startsWith('def-')?'Definition':'Statement')+'\nSynthetic unchanged pin, not a real target review.\n');
@@ -44,6 +51,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
+  if (exactFixture) after = after.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/)[0] + exactFixture.after.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)([\s\S]*)$/)[1];
   if (mode === 'definition-display') after = after.replace('\n$$A=A.$$\n', ()=>'\n\n$$\nA=A.\n$$\n\n');
   if (mode === 'counterexample-spelling') after = after.slice(0, after.length - counterexampleFixture.before_body.length) + counterexampleFixture.after_body;
   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
@@ -75,7 +83,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     output: tool === 'precheck' ? definition ? JSON.stringify({summary:{files:1,checked:0,failed:0},results:[{file:`items/${id}.md`,item_id:id,status:'not-applicable'}]}) : `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
   const repair = { version: 1, kind: 'recorded-local-published-repair', id, run: 'source-repair', group: 'g', correction: 'Exact synthetic rendering presentation correction.', content_sha256: content,
     before_file: beforePath, before_raw_sha256: sha(before), pre_sha256: itemHashGuard(before), recorded_at: '2026-10-23T00:00:03Z', ledger_marker: marker, ledger_sha256: sha(block),
-    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : mode === 'counterexample-spelling' ? 3 : mode.startsWith('support-consolidation') ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
+    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : exactFixture ? [...before.matchAll(/^\d+\.\d+ /gm)].length : mode === 'counterexample-spelling' ? 3 : mode.startsWith('support-consolidation') ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
     adjudication_file: adjudicationPath, adjudication_sha256: sha(readFileSync(join(source, adjudicationPath))) };
   save(source, repairPath, repair);
   const pages = [];
@@ -96,7 +104,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
   const supportLayout=mode.startsWith('support-layout')?{version:1,steps:['1.1']}:undefined,paragraphLayout=mode==='paragraph-layout'?{version:1,steps:['1.1'],technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.',after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}:undefined;
   const spelling = mode === 'counterexample-spelling' ? counterexampleFixture.option : undefined;
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading, supportLayout, paragraphLayout, spelling) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading, supportLayout, paragraphLayout, spelling, exactFixture?.selector) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -124,8 +132,9 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     if (supportLayout) entry.proof_support_relocation_layout=supportLayout;
     if (paragraphLayout) entry.proof_paragraph_join_layout=paragraphLayout;
     if (spelling) entry.counterexample_math_spelling=structuredClone(spelling);
+    if (exactFixture) entry.exact_native_presentation=structuredClone(exactFixture.selector);
     Object.assign(entry.scientific_review, changes.review_classification);
-    entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
+    entry.presentation_reviews = changes.deltas.map(delta => ({...(exactFixture ? {reviewer:'/root',decision:'accepted',review_kind:delta.kind} : {}),delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
       reading_limits:'Only this exact synthetic delta and declared fixture use are reviewed; no real paper reading, source approval, imported publication or native permission is claimed.',
       evidence:[{path:evidence,sha256:hashFile(evidence)}],
@@ -400,3 +409,38 @@ test('exact counterexample case retains authenticated source/pins and actual abs
 for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('counterexample exact case rejects false/partial/null supplied flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/counterexample spelling native\/purity/);});
 test('counterexample exact case never expands default or legacy kind support',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.entry.counterexample_math_spelling;f.seal();assert.throws(()=>f.verify(),/unsupported item kind/);const g=fixture(t);g.entry.counterexample_math_spelling=counterexampleFixture.option;g.seal();assert.throws(()=>g.verify(),/counterexample spelling requires V2/);});
 test('counterexample unchanged published refs and runtime require actual authority input bindings',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.review.inputs['items/'+counterexampleFixture.targets[0]+'.md'];f.save(f.root,originalRenderingMaintenancePath(f.root,f.run),f.review);assert.throws(()=>f.verify(),/unbound input/);});
+
+
+for (const id of ['lem-normal-density-has-total-mass-one', 'prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class']) {
+  test(`exact native ${id} preserves honestly absent diagram flags and strict current evidence`, t => {
+    const f = fixture(t, { mode: 'exact-native', exactNativeId: id, presentationVersion: 2, authored: true });
+    const adjudication = JSON.parse(readFileSync(join(f.source, f.adjudicationPath)));
+    delete adjudication.proof_independent; delete adjudication.diagram_mathematics_corrected;
+    f.save(f.source, f.adjudicationPath, adjudication);
+    f.repair.adjudication_sha256 = sha(readFileSync(join(f.source, f.adjudicationPath)));
+    f.save(f.source, f.repairPath, f.repair); f.entry.repair_receipt.sha256 = f.hashFile(join(f.source, f.repairPath));
+    f.seal(); assert.ok(f.verify() > 0);
+    f.entry.presentation_reviews[0].decision = 'pending'; f.seal();
+    assert.throws(() => f.verify(), /typed Root/);
+  });
+  test(`exact native ${id} rejects partial, null or contradictory supplied native flags`, t => {
+    for (const flags of [{proof_independent:true}, {diagram_mathematics_corrected:false}, {proof_independent:null,diagram_mathematics_corrected:null}, {proof_independent:false,diagram_mathematics_corrected:false}, {proof_independent:true,diagram_mathematics_corrected:true}]) {
+      const f = fixture(t, { mode: 'exact-native', exactNativeId: id, presentationVersion: 2, authored: true });
+      const adjudication = JSON.parse(readFileSync(join(f.source, f.adjudicationPath)));
+      delete adjudication.proof_independent; delete adjudication.diagram_mathematics_corrected; Object.assign(adjudication, flags);
+      f.save(f.source, f.adjudicationPath, adjudication); f.repair.adjudication_sha256 = sha(readFileSync(join(f.source, f.adjudicationPath)));
+      f.save(f.source, f.repairPath, f.repair); f.entry.repair_receipt.sha256 = f.hashFile(join(f.source, f.repairPath)); f.seal();
+      assert.throws(() => f.verify(), /native\/purity guards/);
+    }
+  });
+}
+
+for (const id of ['cor-interval-uncountable', 'lem-equivalence-classes-partition']) test(`exact native ${id} existing Remarks additions retain explicit native diagram requirements`, t => {
+  const f = fixture(t, { mode: 'exact-native', exactNativeId: id, presentationVersion: 2, authored: true });
+  f.seal(); assert.ok(f.verify() > 0);
+  const adjudication = JSON.parse(readFileSync(join(f.source, f.adjudicationPath)));
+  delete adjudication.proof_independent; delete adjudication.diagram_mathematics_corrected;
+  f.save(f.source, f.adjudicationPath, adjudication); f.repair.adjudication_sha256 = sha(readFileSync(join(f.source, f.adjudicationPath)));
+  f.save(f.source, f.repairPath, f.repair); f.entry.repair_receipt.sha256 = f.hashFile(join(f.source, f.repairPath)); f.seal();
+  assert.throws(() => f.verify(), /diagram independence/);
+});

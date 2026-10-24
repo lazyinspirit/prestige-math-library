@@ -746,7 +746,166 @@ function counterexampleSpellingChanges(beforeBytes,afterBytes,option) {
     deltas,counterexample_math_spelling:option,counterexample_spelling_context:{version:1,...contexts,preserved_math:preservedMath,reference_targets:[...counterexampleTargets],graphics_free:true},
     proof_support_parser_runtime:parserDescriptor()};
 }
-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading, proofSupportRelocationLayout, proofParagraphJoinLayout, counterexampleMathSpelling) {
+// Closed inventory of observed source/body pairs. These hashes identify syntax
+// cases; only a separate Root review can accept their mathematical meaning.
+const exactNativeCases = [
+  {
+    "version": 1,
+    "id": "cor-interval-uncountable",
+    "before_body_sha256": "c5d6e1c0e745c67abe97ead92e3d53e4e38eea3c5d39867368898af3941cd289",
+    "after_body_sha256": "8c64fa31e8b497a3a7624a7f953a900b77150c18415280328f5d012f472ad60c"
+  },
+  {
+    "version": 1,
+    "id": "lem-equivalence-classes-partition",
+    "before_body_sha256": "707bb690471ad4f4a0bebaae2f95ba9d0edf5cece6caeabf40c508e767348c63",
+    "after_body_sha256": "8618bc37dc0f4ee21b8f704b79e9863bbfabdb9181bdba9982f3b90063f92d6d"
+  },
+  {
+    "version": 1,
+    "id": "lem-section-zero-if-all-germs-zero",
+    "before_body_sha256": "b3d701be05f5ce79ea77e78fb066dfd1760c444ee22250414b406a1fa35c6ec2",
+    "after_body_sha256": "aa69ebee9aeb8a69022c46ea3897a043bfee47e48da18d04a36faba030824f47"
+  },
+  {
+    "version": 1,
+    "id": "def-cholesky-factorisation-with-positive-diagonal",
+    "before_body_sha256": "383bb686ab020b45864844a552e9165073d86185a7751ae9dd8c88f761444309",
+    "after_body_sha256": "589d9a64f9a44baaba6e898386aa1da6a5449a68773d498ec805750e935ccc69"
+  },
+  {
+    "version": 1,
+    "id": "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+    "before_body_sha256": "bd503e811b429db00375a6893cdf17f9db1c8b7b244c5d6f670913327f8a9828",
+    "after_body_sha256": "12b80e11d85839a0584a867ba1f22edf1134f984d1dea9439508742ea5ff19e5"
+  },
+  {
+    "version": 1,
+    "id": "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+    "before_body_sha256": "25018a72e1579b6652c8d919eb6873d06b187fbec7fb4b416faab5ade180dd12",
+    "after_body_sha256": "1f57870a10da89f2158fbeaaae12efc3b2c6a8bc586d968889882a83dfe7fb55"
+  },
+  {
+    "version": 1,
+    "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+    "before_body_sha256": "b1f71c83a7f0faffaf65100e0de5c0f3f09915d01898df45999f2b34685cb814",
+    "after_body_sha256": "a509d18069c051ac539a5e902b0a97fdbffde48cacd127bbb80769c2656a867e"
+  },
+  {
+    "version": 1,
+    "id": "prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class",
+    "before_body_sha256": "efcb0f4f2de5438cc4366e588581538e3eca3791770840295e914df52fb8c040",
+    "after_body_sha256": "d6bf8a9bcfee396cc2524a9e5d43ec35001aff810b1308808f812a534a64a679"
+  },
+  {
+    "version": 1,
+    "id": "lem-normal-density-has-total-mass-one",
+    "before_body_sha256": "691b8c652e3feeaadfe7862cdc46f758aa4bc1543b29e8a07590af3044591248",
+    "after_body_sha256": "63303142498671bb9f6c8bcbf3897792632f2cf23416d5e18b518b223d740260"
+  }
+];
+function exactNativeOption(value) {
+  if (value === undefined) return null;
+  const found = exactNativeCases.find(row => equal(row, value));
+  if (!found) fail('unsupported exact native presentation selector');
+  return structuredClone(found);
+}
+function exactNativeChanges(beforeBytes, afterBytes, option) {
+  const before = parse(beforeBytes), after = parse(afterBytes);
+  if (before.data.id !== option.id || after.data.id !== option.id
+      || before.data.status !== 'published' || after.data.status !== 'published'
+      || sha(before.body) !== option.before_body_sha256 || sha(after.body) !== option.after_body_sha256)
+    fail('exact native published case/body binding');
+  rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body);
+  const headers = { before: canonicalHeadings(before.body), after: canonicalHeadings(after.body) };
+  const a = sections(before.body), b = sections(after.body), deltas = [];
+  let normalized = after.body;
+  const change = (section, old, next, kind, extra = {}) => {
+    const x = a.values.get(section), y = b.values.get(section);
+    if (!old || !next || old === next || !x?.includes(old) || !y?.includes(next)
+        || x.indexOf(old) !== x.lastIndexOf(old) || y.indexOf(next) !== y.lastIndexOf(next))
+      fail('exact native unique section region');
+    const at = normalized.indexOf(y) + y.indexOf(next);
+    if (at < 0 || normalized.slice(at, at + next.length) !== next) fail('exact native reconstruction region');
+    normalized = normalized.slice(0, at) + old + normalized.slice(at + next.length);
+    deltas.push({ id: `${section}:exact-native:${deltas.length}`, kind, section, before: old, after: next, ...extra });
+  };
+  const id = option.id;
+  if (['cor-interval-uncountable', 'lem-equivalence-classes-partition'].includes(id)) {
+    const x = a.values.get('Remarks'), y = b.values.get('Remarks');
+    if (!x || !y?.startsWith(x) || a.names.at(-1) !== 'Remarks' || !equal(a.names,b.names)) fail('exact native existing Remarks prefix');
+    change('Remarks', x, y, 'existing-remarks-derived-exposition');
+  } else if (id === 'lem-section-zero-if-all-germs-zero') {
+    const x=a.values.get('Statement'), y=b.values.get('Statement'), displays=[...x.matchAll(/(?<=\n)\$\$([^\r\n$]+)\$\$(?=\n)/g)];
+    if(displays.length!==1||x.replace(displays[0][0],()=> '\n$$\n'+displays[0][1]+'\n$$')!==y)fail('exact native unchanged display payload');
+    change('Statement', x, y, 'statement-display-layout');
+  } else if (id === 'def-cholesky-factorisation-with-positive-diagonal') {
+    change('Definition', '$$x^*Ax>0$$for', '$$x^*Ax>0$$ for', 'definition-prose-spacing');
+    // The first replacement shifts this region; use the current normalized
+    // section rather than searching a stale whole-section carrier.
+    const old = 'factorisation$$A=LL^*,$$', next = 'factorisation $$A=LL^*,$$';
+    const at = normalized.indexOf(next);
+    if (at < 0 || at !== normalized.lastIndexOf(next)) fail('exact native second prose space');
+    normalized = normalized.slice(0, at) + old + normalized.slice(at + next.length);
+    deltas.push({id:'Definition:exact-native:1',kind:'definition-prose-spacing',section:'Definition',before:old,after:next});
+  } else if (id === 'thm-frechet-kolmogorov-compactness-criterion-in-lp') {
+    change('Facts & Assumptions', String.raw`[F2] *H\"older's inequality.*`, "[F2] *Hölder's inequality.*", 'fact-prose-name-spelling', {fact_label:'F2'});
+  } else if (id === 'thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain') {
+    change('Facts & Assumptions', String.raw`[F5] *The Fr\'echet--Kolmogorov criterion.*`, '[F5] *The Fréchet–Kolmogorov criterion.*', 'fact-prose-name-spelling', {fact_label:'F5'});
+  } else if (id === 'lem-characteristic-function-of-a-multivariate-normal-law') {
+    change('Facts & Assumptions', 'exp(ims-sigma^2s^2/2)', String.raw`$\exp(ims-\sigma^2s^2/2)$`, 'fact-inline-math-transcription', {fact_label:'F2'});
+  } else if (id === 'prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class') {
+    const x = proofParts(a.values.get('Proof')).steps.find(s=>s.label==='1.2')?.text;
+    const y = proofParts(b.values.get('Proof')).steps.find(s=>s.label==='1.2')?.text;
+    if (!x || y !== trim(x) + ' [L1, L5]' + tail(x)) fail('exact native redundant support suffix');
+    change('Proof', x, y, 'proof-redundant-support-suffix', {label:'1.2'});
+  } else if (id === 'lem-normal-density-has-total-mass-one') {
+    const x = proofParts(a.values.get('Proof')).steps.find(s=>s.label==='2.1')?.text;
+    const y = proofParts(b.values.get('Proof')).steps.find(s=>s.label==='2.1')?.text;
+    if (!x || x.replace('f(t)=exp(-t^2)', String.raw`$f(t)=\exp(-t^2)$`).replace('1/sqrt2',String.raw`$1/\sqrt2$`) !== y)
+      fail('exact native normal density transcription');
+    change('Proof', x, y, 'proof-inline-math-transcription', {label:'2.1'});
+  } else fail('unused exact native case');
+  const context = {version:1, headers, regions:[], graphics_free:false};
+  for (const side of ['before','after']) {
+    const body = side==='before'?before.body:after.body, ast = stepAst(body,true);
+    for (const delta of deltas) {
+      const raw=delta[side], start=body.indexOf(raw), end=start+raw.length;
+      if(start<0||start!==body.lastIndexOf(raw))fail('exact native full-body region ownership');
+      const rows=ast.rows.filter(r=>r.start<end&&r.end>start);
+      if(rows.some(r=>['html','image','imageReference','definition','footnoteDefinition','inlineCode'].includes(r.node.type)))fail('exact native hidden region');
+      context.regions.push({side,id:delta.id,start,end,nodes:rows.map(r=>({type:r.node.type,start:r.start,end:r.end,parent:r.parent?.type??null,...(r.node.type==='code'?{lang:r.node.lang}:{} )}))});
+      if(delta.fact_label){const p=ast.rows.find(r=>r.node.type==='paragraph'&&r.start<=start&&r.end>=end&&r.parent?.type==='root');
+        if(!p||!body.slice(p.start,p.end).startsWith(`[${delta.fact_label}] `))fail('exact native actual Fact paragraph');}
+      if(delta.label){const p=ast.rows.find(r=>r.node.type==='paragraph'&&r.start===start&&r.end===start+trim(raw).length&&r.parent?.type==='root');
+        if(!p||!raw.startsWith(delta.label+' '))fail('exact native actual named proof paragraph');}
+      if(delta.kind==='existing-remarks-derived-exposition'&&side==='after'){
+        const prefix=a.values.get('Remarks'), appendedStart=start+prefix.length;
+        const codes=rows.filter(r=>r.node.type==='code'&&r.start>=appendedStart&&r.parent?.type==='root'&&r.node.lang==='tikz');
+        if(codes.length!==1||rows.some(r=>r.node.type==='code'&&r.start>=appendedStart&&!codes.includes(r)))fail('exact native appended TikZ role');
+      }
+    }
+  }
+  context.graphics_free=[before.body,after.body].every(body=>!sections(body).values.has('Remarks')
+    && !stepAst(body,true).rows.some(r=>['html','image','imageReference','code'].includes(r.node.type))
+    && !/\\(?:includegraphics|tikz)\b|\\begin\s*\{\s*(?:tikzcd|tikzpicture)\s*\}/.test(body));
+  // Existing extraction still guards every unrelated section, metadata field,
+  // proof support and reference target. Only named exact regions were reverted.
+  const text=afterBytes.toString('utf8'), offset=text.length-after.body.length;
+  const base=originalPresentationChanges(beforeBytes,Buffer.from(text.slice(0,offset)+normalized));
+  base.source_hashes={before:sha(beforeBytes),after:sha(afterBytes)};
+  base.deltas.push(...deltas); base.exact_native_presentation=option; base.exact_native_context=context;
+  if(deltas.some(d=>d.section==='Statement'||d.section==='Definition'))base.review_classification.statements='exact-case-presentation';
+  if(deltas.some(d=>d.fact_label))base.review_classification.facts='exact-case-presentation';
+  if(deltas.some(d=>d.label))base.review_classification.proof='exact-case-presentation';
+  for(const d of deltas.filter(d=>d.label))base.steps.push({label:d.label,before:d.before,after:d.after,kind:d.kind});
+  const remarks=deltas.find(d=>d.section==='Remarks');if(remarks)base.remarks={before:remarks.before,after:remarks.after};
+  base.proof_support_parser_runtime=parserDescriptor();return base;
+}
+
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading, proofSupportRelocationLayout, proofParagraphJoinLayout, counterexampleMathSpelling, exactNativePresentation) {
+  const exactNative=exactNativeOption(exactNativePresentation);
+  if(exactNative){if([proofSupportConsolidation,proofReferenceRelocation,definitionDisplay,terminalRemarksHeading,proofSupportRelocationLayout,proofParagraphJoinLayout,counterexampleMathSpelling].some(x=>x!==undefined))fail('exact native selector cannot combine');return exactNativeChanges(beforeBytes,afterBytes,exactNative);}
   const spelling=counterexampleSpellingOption(counterexampleMathSpelling);
   if(spelling){if([proofSupportConsolidation,proofReferenceRelocation,definitionDisplay,terminalRemarksHeading,proofSupportRelocationLayout,proofParagraphJoinLayout].some(x=>x!==undefined))fail('counterexample selector cannot combine');return counterexampleSpellingChanges(beforeBytes,afterBytes,spelling);}
   const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay), terminalHeading = terminalRemarksOption(terminalRemarksHeading);
@@ -824,6 +983,8 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
+  const exactNative=exactNativeOption(entry.exact_native_presentation);
+  if(!equal(exactNative,changes.exact_native_presentation??null)||Boolean(exactNative)!==Boolean(changes.exact_native_context))fail('unbound exact native case/context');
   const spelling=counterexampleSpellingOption(entry.counterexample_math_spelling);
   if(!equal(spelling,changes.counterexample_math_spelling??null)||Boolean(spelling)!==Boolean(changes.counterexample_spelling_context))fail('unbound counterexample spelling case');
   const consolidation = consolidationOption(entry.proof_support_consolidation), terminalHeading = terminalRemarksOption(entry.terminal_remarks_heading);
@@ -851,7 +1012,7 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
-  if (consolidation || relocation || displayLayout || terminalHeading || supportLayout || paragraphLayout || spelling) {
+  if (consolidation || relocation || displayLayout || terminalHeading || supportLayout || paragraphLayout || spelling || exactNative) {
     const runtime = parserDescriptor();
     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);
@@ -875,6 +1036,7 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
     const review = reviews.find(r => r.delta_id === delta.id);
     if (!review || review.delta_sha256 !== sha(JSON.stringify(delta)) || !substantive(review.reason) || !substantive(review.reading_limits)
         || !Array.isArray(review.evidence) || !review.evidence.length) fail(`unreviewed V2 delta ${delta.id}`);
+    if(exactNative && (review.reviewer!=='/root'||review.decision!=='accepted'||review.review_kind!==delta.kind))fail('missing typed Root exact native review');
     for (const evidence of review.evidence) localEvidence(evidence);
     if (delta.target) {
       const pin = receipt?.files?.filter(p => p.path === `items/${delta.target}.md`), target = review.pinned_target;

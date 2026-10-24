@@ -1,6 +1,6 @@
 # Opt-in V2 original item presentation protocol
 
-`originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation?, proofReferenceRelocation?)` describes exact structural
+`originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation?, proofReferenceRelocation?, definitionDisplay?, terminalRemarksHeading?, proofSupportRelocationLayout?, proofParagraphJoinLayout?, counterexampleMathSpelling?, exactNativePresentation?)` describes exact structural
 changes. It does **not** decide mathematical equivalence or grant source,
 publication, import, consumer, native-review or gate authority. Legacy
 `originalRenderingChanges` is unchanged. Only an explicit
@@ -147,7 +147,7 @@ The extractor returns `version`, `kind`, `id`, exact raw `source_hashes`,
 `review_classification`, and `deltas`. Deltas include their location, exact
 before/after text and, where relevant, ordered reference index, target or Fact
 label. No real item's allowed title spelling or mathematical conclusion is
-hardcoded in a source whitelist.
+hardcoded in a source whitelist by the general structural route. Separately typed exact-body cases below use explicit finite source/body allowlists; they are not implicit fallbacks.
 
 ## Explicit V2 reviews
 
@@ -386,3 +386,57 @@ with mathematical_meaning_preserved true, or retain the existing valid
 true/false pair. Partial/null/contradictory keys reject. This exception is
 case-bound, not a generic proof rewrite or kind/diagram waiver. Generic
 counterexamples/default outputs and all earlier routes are unchanged.
+
+
+## Nine explicit native presentation cases
+
+The independent tenth argument / V2 entry `exact_native_presentation` is
+`{version: 1, id, before_body_sha256, after_body_sha256}`. It accepts only the
+nine exact source/body pairs in the installed finite allowlist, without combining
+another selector. An unlisted item, changed body or metadata, changed source
+role, draft status or additional edit fails. This establishes exact syntax
+reconstruction and input identity; it does not prove an item or approve its
+mathematical content.
+
+| Exact source | Additional represented presentation |
+|---|---|
+| `cor-interval-uncountable` | Existing Remarks preserved as a prefix; exact appended exposition and TikZ |
+| `lem-equivalence-classes-partition` | Existing Remarks preserved as a prefix; exact appended exposition and TikZ |
+| `lem-section-zero-if-all-germs-zero` | Line breaks around the same Statement display payload |
+| `def-cholesky-factorisation-with-positive-diagonal` | Two specified literal spaces between prose and display delimiters |
+| `thm-frechet-kolmogorov-compactness-criterion-in-lp` | Exact F2 name accent spelling; existing title/technique deltas remain separately represented |
+| `thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain` | Exact F5 name accent/dash spelling; existing reference/technique deltas remain separately represented |
+| `lem-characteristic-function-of-a-multivariate-normal-law` | Exact F2 inline TeX transcription |
+| `prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class` | The same already-inline support IDs repeated in the final suffix of step1.2 |
+| `lem-normal-density-has-total-mass-one` | Two exact inline TeX transcriptions in step2.1 |
+
+The extractor reverses only the fixed additional presentation regions and then
+applies the existing structural extractor to every remaining byte. It records
+the real whole-body AST roles and offsets, unique region ownership, exact body
+hashes, headers, and current parser runtime. Existing Remarks additions must
+contain the fixed appended top-level TikZ role and preserve all earlier Remarks
+bytes. Statement/Definition delimiter changes preserve the exact mathematical
+payload. Fact and proof changes belong to the actual named paragraph; arbitrary
+TeX, prose, support or whitespace normalization is not allowed.
+
+Every delta in an opted exact case requires its current delta hash, matching
+`review_kind`, `reviewer: /root`, `decision: accepted`, concrete reason/reading
+limits and bound evidence. Private candidate reviews remain `pending`; a
+transient projected diagnostic decision is not Root adoption. Native repair
+meaning-preserved findings retain their actual attribution and limits; neither
+this selector nor its tests assert a fresh full proof or diagram audit.
+
+The outer wrapper retains all current source/pin/frontier/consumer/native
+receipt authentication. Both existing Remarks additions still require explicit
+native `proof_independent: true` and `diagram_mathematics_corrected: false`.
+Only the fixed, actually graphics-free normal-density transcription and
+null-functions redundant-support case may retain both genuinely absent native
+diagram keys, with `mathematical_meaning_preserved: true` and exact step/delta
+purity. Supplied partial, null or contradictory flags fail. There is no generic
+missing-flags exemption.
+
+Canonical synthetic test fixtures are in
+`fixtures/exact-native-presentation.json`; they are fixed test data, not real
+acceptance receipts. `original-rendering-maintenance.test.mjs` checks outer
+native evidence and flag behavior. Research case dossiers preserve genuine
+source/native evidence and pending decisions separately from these tests.

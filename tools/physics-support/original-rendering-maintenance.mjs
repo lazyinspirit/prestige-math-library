@@ -183,6 +183,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (!presentationV2 && entry.definition_display_layout !== undefined) fail('definition display layout requires V2');
     if (!presentationV2 && entry.terminal_remarks_heading !== undefined) fail('terminal Remarks heading requires V2');
     if (!presentationV2 && entry.counterexample_math_spelling !== undefined) fail('counterexample spelling requires V2');
+    if (!presentationV2 && entry.exact_native_presentation !== undefined) fail('exact native presentation requires V2');
     if (!presentationV2 && (entry.proof_support_relocation_layout !== undefined || entry.proof_paragraph_join_layout !== undefined)) fail('strict proof layout requires V2');
     const pin = receipt.files.find(p => p.path === entry.path);
     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
@@ -217,7 +218,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
     const block = ledger.split(begin)[1].split(end)[0];
     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading, entry.proof_support_relocation_layout, entry.proof_paragraph_join_layout, entry.counterexample_math_spelling) : originalRenderingChanges(beforeBytes, afterBytes);
+    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading, entry.proof_support_relocation_layout, entry.proof_paragraph_join_layout, entry.counterexample_math_spelling, entry.exact_native_presentation) : originalRenderingChanges(beforeBytes, afterBytes);
     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');
@@ -290,6 +291,30 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
       const pure=changes.kind==='counterexample'&&changes.deltas.length===5&&changes.deltas.every(d=>d.kind==='counterexample-math-spelling')
         &&!changes.title&&!changes.technique&&!changes.remarks&&changes.steps.length===3&&changes.counterexample_spelling_context?.graphics_free===true;
       if(!pure||!unchangedDiagramRule&&!(noDiagramKeys&&adjudication.mathematical_meaning_preserved===true))fail('counterexample spelling native/purity guards');
+    }
+    // One fixed, graphics-free normal-density transcription has an honest
+    // native record without diagram flags. Exact body/AST/delta guards and
+    // Root's typed reviews are required; this is not a missing-flags waiver.
+    if (presentationV2 && changes.exact_native_presentation?.id === 'lem-normal-density-has-total-mass-one') {
+      const pure = changes.exact_native_context?.version === 1 && changes.exact_native_context.graphics_free === true
+        && changes.deltas.length === 1 && changes.deltas[0].kind === 'proof-inline-math-transcription'
+        && changes.deltas[0].label === '2.1' && changes.steps.length === 1
+        && changes.steps[0].label === '2.1' && changes.steps[0].kind === 'proof-inline-math-transcription'
+        && !changes.title && !changes.technique && !changes.remarks;
+      if (!pure || !unchangedDiagramRule && !(noDiagramKeys && adjudication.mathematical_meaning_preserved === true))
+        fail('exact normal-density transcription native/purity guards');
+    }
+    // This fixed support-only suffix repeats labels already present in the
+    // same paragraph. Its absent native flags are preserved only behind the
+    // exact source/body/AST and typed Root review guards, not by step-kind fallthrough.
+    if (presentationV2 && changes.exact_native_presentation?.id === 'prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class') {
+      const pure = changes.exact_native_context?.version === 1 && changes.exact_native_context.graphics_free === true
+        && equal(changes.deltas.map(d => d.kind).sort(), ['proof-redundant-support-suffix', 'proof-technique'])
+        && changes.steps.length === 1 && changes.steps[0].label === '1.2'
+        && changes.steps[0].kind === 'proof-redundant-support-suffix'
+        && !changes.title && Boolean(changes.technique) && !changes.remarks;
+      if (!pure || !unchangedDiagramRule && !(noDiagramKeys && adjudication.mathematical_meaning_preserved === true))
+        fail('exact redundant-support suffix native/purity guards');
     }
     if ((changes.remarks || substantiveSteps.length) && !unchangedDiagramRule
       && !(strictSupportOnly && noDiagramKeys && adjudication.mathematical_meaning_preserved === true)) fail('diagram independence');

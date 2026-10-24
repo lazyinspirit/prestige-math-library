@@ -1,0 +1,49 @@
+--- items/lem-equivalence-classes-partition.md	2026-10-17 13:10:05.643746459 +1100
++++ /home/lazyinspirit/Projects/prestige-math-library/items/lem-equivalence-classes-partition.md	2026-10-24 15:36:41.761239375 +1100
+@@ -1,4 +1,7 @@
+ ---
++verification:
++  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-equivalence-classes-partition.json
++  precheck: pass
+ id: lem-equivalence-classes-partition
+ kind: lemma
+ title: "The equivalence classes of an equivalence relation are nonempty, cover $A$, and are pairwise equal or disjoint; conversely every such cover arises from exactly one equivalence relation"
+@@ -15,13 +18,6 @@
+ landmark: false
+ short: "classes = partition"
+ proof_strategy: direct
+-verification:
+-  precheck: pass
+-  judge:
+-    model: z-ai/glm-5.2
+-    verdict: pass
+-    date: 2026-07-27
+-  audited: 2026-07-27
+ sources:
+   scraped: []
+   references:
+@@ -88,3 +84,24 @@
+ - Claim 2 is the fact used constantly in practice: an equation between classes may always be replaced by a relation between representatives, and conversely. Claim 3 is what makes a quotient set behave like a set of disjoint boxes.
+ 
+ - The converse half is what licenses building an equivalence relation by describing its classes rather than its pairs. The uniqueness clause matters: it says that no information is lost either way, so a partition and an equivalence relation are interchangeable descriptions of the same structure.
++
++For a fixed set $A$, write $\mathcal E(A)$ for its equivalence relations and
++$\Pi(A)$ for its partitions. The two constructions can be pictured as follows:
++$\Phi(R)=A/R$ takes classes, while $\Psi(P)={\sim_P}$ relates elements in the
++same block.
++
++```tikz
++\begin{tikzpicture}
++\node (E) at (-2,0) {$\mathcal E(A)$};
++\node (P) at (2,0) {$\Pi(A)$};
++\draw[->] (E) to[bend left=28] node[above] {$\Phi$} (P);
++\draw[->] (P) to[bend left=28] node[below] {$\Psi$} (E);
++\node at (0,-1.8) {$\Psi(\Phi(R))=R\qquad\Phi(\Psi(P))=P$};
++\end{tikzpicture}
++```
++
++The right-to-left construction uses the unique block $B_a$ containing each
++$a\in A$, with $[a]_P=B_a$ (steps 1.3 and 3.1). The round-trip identities are
++steps 4.1 and 4.2, applied also to the class partition of $R$. This includes
++$A=\varnothing$, whose partition and equivalence relation are both empty.
++The rigorous proof above is independent of the diagram.
