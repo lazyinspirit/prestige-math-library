@@ -66,6 +66,23 @@ test('Step-3 cross-group causal authority and its repair evidence are gate input
   writeFileSync(join(f.repo, archive), 'Changed evidence invalidates the owner snapshot.');
   assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-split']).sha256, first.sha256);
 });
+test('Root shared-finding authority, scientific inputs and verifier code bind native recertification', t => {
+  const f = fixture(t), evidence = 'research/demo-shared-scientific-review.json';
+  writeFileSync(join(f.repo, evidence), '{"review":"actual supplier and consumer evidence"}');
+  const authority = 'research/demo-step3-root-shared-findings.json';
+  writeFileSync(join(f.repo, authority), JSON.stringify({inputs: {[evidence]: sha(readFileSync(join(f.repo, evidence), 'utf8'))}}));
+  mkdirSync(join(f.repo, 'tools/physics-support'), {recursive: true});
+  const verifier = 'tools/physics-support/step3-root-shared-findings.mjs';
+  writeFileSync(join(f.repo, verifier), '// fixture verifier bytes');
+  const gates = [{id: 'routing', argv: ['node', 'tools/physics-support/step3-scope.mjs', 'check', '--run', 'demo']}];
+  const first = gateReviewSnapshot(f.ctx, gates, ['3a-adjudicate']);
+  for (const path of [authority, evidence, verifier]) assert.ok(first.inputs.some((row: any) => row.path.endsWith(path)));
+  writeFileSync(join(f.repo, evidence), '{"review":"changed evidence"}');
+  const second = gateReviewSnapshot(f.ctx, gates, ['3a-adjudicate']);
+  assert.notEqual(second.sha256, first.sha256);
+  writeFileSync(join(f.repo, verifier), '// changed verifier bytes');
+  assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-adjudicate']).sha256, second.sha256);
+});
 test('Step-3 continuation authority and immutable references invalidate stale snapshots', t => {
   const f = fixture(t);
   const authority = 'research/demo-step3-refuter-continuations.json';

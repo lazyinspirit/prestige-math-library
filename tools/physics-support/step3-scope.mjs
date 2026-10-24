@@ -30,6 +30,7 @@ import { partialReaderRepairs, validatePartialReaderBindings } from './step3-par
 import { downstreamHandoffs } from './step3-downstream-handoff.mjs';
 import { observedCurrentHistory } from './step3-observed-current-history.mjs';
 import { sharedCausalRepair } from './step3-shared-causal-repair.mjs';
+import { rootSharedFinding } from './step3-root-shared-findings.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -1521,8 +1522,15 @@ if (command === 'check') {
               canonicalRow: mine.find(row => row.defect_id === defectId),
               currentCarrier: liveFor(String(target.producer_batch)).items[target.id],
               readBytes: relative => readFileSync(R(relative)), hashValue });
+          const supplierBatch = Object.keys(manifests).find(batch => (manifests[batch] ?? []).includes(decision.id));
+          const rootShared = prior && supplierBatch
+            && /^[a-f0-9]{64}$/.test(decision.root_shared_finding_receipt_sha256 ?? '')
+            && rootSharedFinding({run, prior, decision, target,
+              canonicalRow: mine.find(row => row.defect_id === defectId),
+              currentCarrier: liveFor(supplierBatch).items[decision.id],
+              readBytes: relative => readFileSync(R(relative)), hashValue});
           if (prior && !sharedFinding && !sharedCausalAddition && !sharedPostReaderRepair
-            && !sharedCrossGroupCausalRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+            && !sharedCrossGroupCausalRepair && !rootShared) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             historical_delta_unknown: decision.historical_delta_unknown, owner_resolution: decision.owner_resolution,

@@ -560,6 +560,50 @@ finding, an exact original finding and typed post-reader snapshot, and an
 explicit same-defect reference with substantive evidence. Independent ledger,
 severity, current-content and application checks remain mandatory.
 
+Root may classify independent **reader/flagged findings only** as one actual
+repaired defect through `research/RUN-step3-root-shared-findings.json`. Decisions
+point to its raw SHA256 with `root_shared_finding_receipt_sha256`. This is a
+separate scientific classification route: original findings may have different
+raw-source observations or an originally unbound observation. It never asserts
+historical byte equality, adds a native finding, or shares touched/page coverage.
+An independent producer's touched nonfatal cover repair retains its own row;
+only actual frozen fatal findings participate in the shared fatal row. Legitimate
+severity reclassification uses an append-only taxonomy successor; original
+finding severity and observation fields remain exact. All participating decisions
+must have the same final `confirmed_fatal` or `confirmed_nonfatal` verdict,
+confidence 1, and the current canonical fixed row's severity. Ordinary source
+application, consumer checks, ledger validity, readiness and full gates remain.
+
+The receipt schema is version 1, `run`, `reviewed_by: root`,
+`kind: root-adjudicated-shared-findings`, `inputs` (path → raw SHA256), and
+`findings`. Each finding entry has `canonical_defect_id`, `subject`,
+`canonical_row_sha256` (canonical object hash), `one_actual_defect: true`,
+`final_severity`, a substantive `rationale` of at least 100 characters,
+`participants`, `scientific_evidence`, `current_carrier_sha256`, `current_source`
+(`{path, sha256}` for the actual item), and 2–12 distinct
+`reviewed_source_excerpts` of 80–4000 characters actually present in that source.
+At least two distinct existing scientific evidence guards `{path, sha256}` are
+required; routing scopes, decisions and original reader/refuter reports cannot
+stand in for scientific reviews. Every guard and the current source must appear
+in `inputs`; native owner recertification recursively binds those inputs and the
+verifier code. This is Root's explicit same-issue judgment, not a new independent
+scientific review or proof-acceptance stamp.
+
+Each participant has `batch`, `obligation` (`reader:N:K` or `refuter:N:K`),
+`route` (`reader` or `flagged`), `decision_path` (the canonical
+`research/RUN-alpha-batch-N-3a-decisions.json`), `decision_core_sha256`,
+`frozen_finding_sha256`, `scope_guard`, and exactly two `report_guards` for
+`RUN-reader-findings-N.json` and `RUN-refute-N.json`. Their hashes must equal
+the frozen scope's report hashes. The complete participant set must equal the
+canonical row's complete `adjudication_ref` set. Each decision references only
+that canonical defect ID. Decision cores exclude only their own receipt pointer
+and `subject_sha256`, avoiding circular hashes while ordinary current stamp
+checks remain mandatory. Decision files remain native recertification inputs;
+do not put their raw hashes in the receipt's `inputs`, creating a circular
+receipt/decision hash. Frozen original unbound observations retain explicit
+`historical_delta_unknown` and owner-resolution limits, never a manufactured
+historical `observed_source`.
+
 One bounded refuter coverage correction per unit may be authorized through
 `research/RUN-step3-refuter-continuations.json`. When the native receipt's
 40-line diagnostic clips the coverage headers, `original_last_message` can bind
