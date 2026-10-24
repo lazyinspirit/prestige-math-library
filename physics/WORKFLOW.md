@@ -1558,3 +1558,41 @@ substantive `owner_resolution`; ordinary verdict, ledger, current-carrier,
 unchanged-repair and exact refuter-coverage checks still apply. Do not dispatch
 recovery, manufacture a receipt, or alter existing observations to use this
 route. Root owns the actual authorization, guarded recovery and recertification.
+
+### Coupled Penrose finite smoke checks
+
+The physics-private `finite-smoke-penrose.mjs` registers the seven batch-68
+coupled-Penrose obligations through the ordinary `finite_smoke` selector and
+exact current item assertion excerpts. It retains native assertion, selection,
+error and check-count handling. A supplied `expected` value must match the
+computed invariant; registration supplies no readiness or review acceptance.
+
+- `quadratic-curvature-polynomial` evaluates 729 real two-forms on the actual
+  incidence alpha vectors at four complex parameters, verifies interpolation,
+  the positive-orientation ASD conditions and the second-chart infinity value.
+- `unit-four-sphere-curvature-trace` contracts the unit-sphere Gauss tensor over
+  16 ordered pairs, obtaining six unordered two-planes and scalar curvature 12.
+- `negative-twist-fibre-groups` computes chart intersection and quotient modes
+  for twists -1 and -2 in the Laurent window -6 through 6. Only the degree-one
+  mode `t^-1` for twist -2 survives.
+- `flat-constant-section-coefficient` differentiates `1/(1+|x|^2)` twice and
+  contracts the local residual at the 81 points of `{-1,0,1}^4`. Dividing by
+  the local nonzero conformal frame factor gives the coefficient 2.
+- `trivial-rank-one-case` checks 25 complex constants and computes degree-one
+  cohomology of 206 homogeneous degree -2 Laurent-mode Čech subcomplexes on
+  the four standard projective charts, with exponents in -3 through 3. Matrix
+  ranks use exact integer elimination, and adjacent differentials compose to zero.
+- `flat-ranks-zero-and-one` checks the empty complex and the same scalar
+  rank-one complex, which also represents the identical trivial dual.
+- `overlap-and-zero-class` checks the canonical-frame/chart-order residue sign
+  on 65 bounded fibre cochains, explicitly reconstructs the 60 chart-tail
+  primitives, and checks the absent horizontal twist -1 degree-zero modes.
+
+These are bounded algebraic tests. They do not prove convergence of infinite
+Laurent sums, analytic sheaf/Dolbeault comparison, smooth parameter dependence,
+Hodge theory, base-chart gluing of general bundle data, global injectivity, or
+the general coupled theorem. The overlap check models the fibre trace under
+coordinate inversion; it does not certify arbitrary stereographic transition
+functions. The full authored proofs and ordinary workflow gates retain those
+duties. Run `node --test tools/physics-support/finite-smoke-penrose.test.mjs`
+for the focused model, assertion/selection, expected-value and mutation checks.
