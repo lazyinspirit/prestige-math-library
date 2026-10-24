@@ -182,6 +182,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (!presentationV2 && entry.proof_reference_relocation !== undefined) fail('proof reference relocation requires V2');
     if (!presentationV2 && entry.definition_display_layout !== undefined) fail('definition display layout requires V2');
     if (!presentationV2 && entry.terminal_remarks_heading !== undefined) fail('terminal Remarks heading requires V2');
+    if (!presentationV2 && (entry.proof_support_relocation_layout !== undefined || entry.proof_paragraph_join_layout !== undefined)) fail('strict proof layout requires V2');
     const pin = receipt.files.find(p => p.path === entry.path);
     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
         || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
@@ -215,7 +216,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
     const block = ledger.split(begin)[1].split(end)[0];
     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading) : originalRenderingChanges(beforeBytes, afterBytes);
+    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading, entry.proof_support_relocation_layout, entry.proof_paragraph_join_layout) : originalRenderingChanges(beforeBytes, afterBytes);
     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');
@@ -270,6 +271,19 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
         && !changes.title && !changes.technique && !changes.steps.length && !changes.remarks;
       if (!unchangedDiagramRule && !(pureBoundary && !graphics && noDiagramKeys
           && adjudication.mathematical_meaning_preserved === true)) fail('terminal Remarks native diagram flags');
+    }
+    // These opt-in format routes prove exact reconstruction. The only
+    // compound extras are published/predeclared Fact labels or the one exact
+    // Fourier technique label. They never authorize generic proof rewrites.
+    if (presentationV2 && (changes.proof_support_relocation_layout || changes.proof_paragraph_join_layout)) {
+      const paragraph=changes.proof_paragraph_join_layout, request=paragraph??changes.proof_support_relocation_layout,
+        kind=paragraph?'proof-paragraph-join-layout':'proof-support-relocation-layout';
+      const pure=equal(request.steps,changes.steps.map(s=>s.label))&&changes.steps.every(s=>s.kind===kind)
+        &&!changes.title&&!changes.remarks&&(!changes.technique||paragraph&&equal(changes.technique,paragraph.technique))
+        &&changes.deltas.every(d=>d.kind===kind || (paragraph?d.kind==='proof-technique'&&equal({before:d.before,after:d.after},paragraph.technique)
+          :d.kind==='reference-label'&&d.section==='Facts & Assumptions'&&before.data.deps?.includes(d.target)));
+      if(!pure||changes.proof_layout_context?.graphics_free!==true
+          ||!unchangedDiagramRule&&!(noDiagramKeys&&adjudication.mathematical_meaning_preserved===true)) fail('strict proof layout native/purity guards');
     }
     if ((changes.remarks || substantiveSteps.length) && !unchangedDiagramRule
       && !(strictSupportOnly && noDiagramKeys && adjudication.mathematical_meaning_preserved === true)) fail('diagram independence');

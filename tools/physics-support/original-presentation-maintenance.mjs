@@ -101,17 +101,17 @@ function rejectReferenceDefinitions(body) {
   };
   walk(markdownTree(body));
 }
-function stepAst(text) {
+function stepAst(text, wholeBody = false) {
   const rows = [], allowed = new Set(['root', 'paragraph', 'text', 'inlineMath', 'math', 'inlineCode']);
   const walk = (node, parent = null) => {
-    if (!allowed.has(node.type)) fail('unsupported support consolidation Markdown node ' + node.type);
+    if (!wholeBody && !allowed.has(node.type)) fail('unsupported support consolidation Markdown node ' + node.type);
     const start = node.position?.start.offset, end = node.position?.end.offset;
     if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || end < start || end > text.length) fail('invalid Markdown source offsets');
     rows.push({ node, parent, start, end });
     for (const child of node.children ?? []) walk(child, node);
   };
   walk(markdownTree(text));
-  const literals = rows.filter(r => ['inlineCode', 'inlineMath', 'math'].includes(r.node.type));
+  const literals = rows.filter(r => ['inlineCode', 'inlineMath', 'math', ...(wholeBody ? ['code'] : [])].includes(r.node.type));
   const wikis = []; let cursor = 0;
   while (true) {
     const start = text.indexOf('[[', cursor); if (start < 0) break;
@@ -226,8 +226,7 @@ function definitionDisplayOption(value) {
       || !Number.isSafeInteger(value.display) || value.display < 0) fail('invalid definition display layout option');
   return { version: 1, display: value.display };
 }
-function definitionDisplayLayout(before, after, option, deltas) {
-  definitionSuffixUnchanged(before, after);
+function rejectStyleIndirection(texts, context) {
   // Display style may select different mathematical tokens even with identical
   // TeX bytes. Reject ambient definitions/indirection as well as direct choices:
   // an unchanged earlier formula could otherwise define an alias for the span.
@@ -239,14 +238,18 @@ function definitionDisplayLayout(before, after, option, deltas) {
     'sfcode', 'chardef', 'mathchardef', 'countdef', 'dimendef', 'skipdef', 'muskipdef',
     'toksdef', 'everymath', 'everydisplay', 'input', 'include', 'write', 'read', 'openout', 'openin', 'verb',
     'endlinechar', 'newlinechar', 'obeylines', 'obeyspaces', 'active', 'begingroup', 'endgroup']);
-  for (const text of [before, after]) {
-    if (text.includes('^^')) fail('unsafe definition style/indirection TeX');
+  for (const text of texts) {
+    if (text.includes('^^')) fail('unsafe ' + context + ' style/indirection TeX');
     for (const m of text.matchAll(/\\([A-Za-z@]+)/g)) {
       const name = m[1].toLowerCase();
       if (unsafe.has(name) || name.includes('@') || /^(?:if|new|renew|provide|declare)/.test(name))
-        fail('unsafe definition style/indirection TeX');
+        fail('unsafe ' + context + ' style/indirection TeX');
     }
   }
+}
+function definitionDisplayLayout(before, after, option, deltas) {
+  definitionSuffixUnchanged(before, after);
+  rejectStyleIndirection([before, after], 'definition');
   const candidates = [...before.matchAll(/(?<=\n)\$\$([^\r\n$]+)\$\$(?=\n)/g)]
     .map(m => Object.assign(['\n' + m[0] + '\n', m[1]], { index: m.index - 1 }));
   const selected = candidates[option.display];
@@ -400,7 +403,156 @@ function supportConsolidation(before, after) {
       old_display: { type: displayNode.node.type, role: standalone ? 'standalone-double-dollar' : 'display-math', start: displayStart, end: displayEnd },
       new_inline: { type: 'inlineMath', start: inlineNode.start, end: inlineNode.end } } };
 }
-function proofChange(before, after, deltas, consolidation, relocation, deps) {
+const fourierTechniquePair = {
+  before: '**Proof technique:** Fubini followed by $L^2$ approximation.',
+  after: '**Proof technique:** Fubini followed by square-integrable approximation.',
+};
+function supportLayoutOption(value) {
+  if (value === undefined) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !equal(Object.keys(value).sort(), ['steps', 'version']) || value.version !== 1
+      || !Array.isArray(value.steps) || !value.steps.length
+      || value.steps.some(s => typeof s !== 'string' || !/^[1-9]\d*\.[1-9]\d*$/.test(s))
+      || new Set(value.steps).size !== value.steps.length) fail('invalid support relocation layout option');
+  return { version: 1, steps: [...value.steps] };
+}
+function paragraphLayoutOption(value) {
+  if (value === undefined) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !equal(Object.keys(value).sort(), ['steps', 'technique', 'version'])
+      || !equal(value.technique, fourierTechniquePair)) fail('invalid exact paragraph layout technique option');
+  const base = supportLayoutOption({ version: value.version, steps: value.steps });
+  return { ...base, technique: { ...fourierTechniquePair } };
+}
+function layoutSupportTags(raw) {
+  const tags = raw.slice(1, -1).split(',').map(t => t.trim());
+  if (!tags.length || tags.some(t => !/^(?:[FAL][1-9]\d*|step [1-9]\d*\.[1-9]\d*|given|choose|construct)$/.test(t))
+      || new Set(tags).size !== tags.length) fail('invalid layout support cluster');
+  return tags;
+}
+function layoutStep(before, after, label, mode) {
+  const oldAst = stepAst(before), nextAst = stepAst(after), separator = mode === 'support-relocation' ? ' ' : '\n';
+  const labelRole = ast => {
+    const role = plaintextRole(ast, 0, label.length + 1), paragraph = ast.rows.find(r => r.node.type === 'paragraph' && r.start === 0);
+    if (!paragraph || paragraph.end < role.end) fail('layout named step is not an actual paragraph start');
+    return { ...role, paragraph: { start: paragraph.start, end: paragraph.end } };
+  };
+  const beforeLabel = labelRole(oldAst), afterLabel = labelRole(nextAst);
+  const literals = (text, ast) => ast.ranges.map(r => ({ raw: text.slice(r.start, r.end),
+    type: ast.rows.find(n => n.start === r.start && n.end === r.end && ['math','inlineMath','inlineCode'].includes(n.node.type))?.node.type ?? 'canonical-wiki',
+    start: r.start, end: r.end }));
+  const oldLiterals = literals(before, oldAst), newLiterals = literals(after, nextAst);
+  if (!equal(oldLiterals.map(({raw,type})=>({raw,type})), newLiterals.map(({raw,type})=>({raw,type})))) fail('layout changed protected literal bytes/types');
+  const displays = oldAst.rows.filter(r => ['math', 'inlineMath'].includes(r.node.type) && before.slice(r.start,r.end).startsWith('$$'));
+  if (!displays.length) fail('layout lacks actual double-dollar math');
+  const patches = [], joins = [], mathRoles = [];
+  for (const r of displays) {
+    const raw = before.slice(r.start,r.end), standalone = r.node.type === 'math' && r.parent?.type === 'root'
+      || r.parent?.type === 'paragraph' && r.parent.children.length === 1
+        && r.parent.position.start.offset === r.start && r.parent.position.end.offset === r.end;
+    if (!standalone || !/^\$\$[^\r\n$]+\$\$$/.test(raw)
+        || !oldAst.ranges.some(p=>p.start===r.start&&p.end===r.end)) fail('layout old math is not a literal sole-paragraph double-dollar span');
+    const a = /[ \t\r\n]+$/.exec(before.slice(0,r.start)), b = /^[ \t\r\n]+/.exec(before.slice(r.end));
+    if (a?.[0] !== '\n\n' || b?.[0] !== '\n\n') fail('layout requires exact old two-LF math boundaries');
+    for (const [start,end] of [[r.start-2,r.start],[r.end,r.end+2]]) {
+      patches.push({start,end,text:separator}); joins.push({start,end,before:'\n\n',after:separator});
+    }
+    mathRoles.push({before:{type:r.node.type,start:r.start,end:r.end,paragraph_role:'sole-math-paragraph'},raw_sha256:sha(raw)});
+  }
+  const first = displays[0], prefix = before.slice(0,first.start), pre = /(\[[^\[\]\r\n]+\])\n\n$/.exec(prefix);
+  if (!pre) fail('layout needs a complete plaintext pre-first-display support cluster');
+  const cluster = pre[1], clusterStart = pre.index, tags = layoutSupportTags(cluster), oldClusterRole = plaintextRole(oldAst,clusterStart,clusterStart+cluster.length);
+  if(oldClusterRole.end>beforeLabel.paragraph.end) fail('layout pre-display cluster is not in named-step opening paragraph');
+  let moved = null;
+  if (mode === 'support-relocation') {
+    if (/\[[^\]\r\n]+\][ \t\r\n]*$/.test(before) || before.includes('∎') || before.includes('\\qed')) fail('support layout requires no old terminal cluster or endmarker');
+    if (before.indexOf(cluster) !== before.lastIndexOf(cluster) || before[clusterStart-1] !== ' '
+        || /[\s\]]/.test(before[clusterStart-2] ?? '')) fail('ambiguous or adjacent support layout cluster');
+    patches.push({start:clusterStart-1,end:clusterStart+cluster.length,text:''});
+    moved = {raw:cluster,tags,owned_before:' '+cluster,before:oldClusterRole,endmarker:''};
+  }
+  patches.sort((a,b)=>a.start-b.start);
+  if (patches.some((p,i)=>i && p.start<patches[i-1].end)) fail('overlapping layout boundary patches');
+  let expected=before;
+  for (const p of [...patches].reverse()) expected=expected.slice(0,p.start)+p.text+expected.slice(p.end);
+  if (moved) expected=trim(expected)+' '+cluster+tail(expected);
+  if (expected !== after) fail('layout changed prose, support, payload or unapproved whitespace');
+  const newDisplays = nextAst.rows.filter(r=>['math','inlineMath'].includes(r.node.type)&&after.slice(r.start,r.end).startsWith('$$'));
+  if (newDisplays.length !== displays.length) fail('layout math spans changed');
+  for(let i=0;i<newDisplays.length;i++) {
+    const r=newDisplays[i];
+    if(after.slice(r.start,r.end)!==before.slice(displays[i].start,displays[i].end)) fail('layout math literal changed');
+    if(r.parent?.type!=='paragraph'||r.parent.position.start.offset!==0||r.parent.children.length<2) fail('layout new math is not embedded in actual named-step paragraph');
+    mathRoles[i].after={type:r.node.type,start:r.start,end:r.end,paragraph_role:'embedded-math',paragraph:{start:r.parent.position.start.offset,end:r.parent.position.end.offset}};
+  }
+  const terminal = (text,ast) => {
+    const m=/\[([^\]\r\n]+)\]([ \t]*∎)?[ \t\r\n]*$/.exec(text);
+    if(!m) fail('layout terminal support is absent');
+    layoutSupportTags('['+m[1]+']');
+    return {raw:'['+m[1]+']',endmarker:m[2]??'',role:plaintextRole(ast,m.index,m.index+m[1].length+2)};
+  };
+  const nextTerminal=terminal(after,nextAst);
+  if (moved) {
+    if(nextTerminal.raw!==cluster || nextTerminal.endmarker) fail('support layout terminal cluster changed');
+    const p=nextAst.rows.find(r=>r.node.type==='paragraph'&&r.start===0);
+    if(!p || nextTerminal.role.end>p.end) fail('support layout terminal is not in complete named-step paragraph');
+    moved.after=nextTerminal.role;
+  } else {
+    const oldTerminal=terminal(before,oldAst);
+    if(oldTerminal.raw!==nextTerminal.raw || oldTerminal.endmarker!==nextTerminal.endmarker) fail('paragraph layout changed terminal support');
+    const preNew=/(\[[^\[\]\r\n]+\])\n$/.exec(after.slice(0,newDisplays[0].start));
+    if(!preNew||preNew[1]!==cluster) fail('paragraph layout pre-display support changed');
+    moved={raw:cluster,tags,unchanged_before:oldClusterRole,unchanged_after:plaintextRole(nextAst,preNew.index,preNew.index+cluster.length),terminal_before:oldTerminal,terminal_after:nextTerminal};
+  }
+  return {version:1,mode,separator,patches,joins,support:moved,protected_literals:oldLiterals.map(({raw,type})=>({type,sha256:sha(raw)})),
+    protected_ranges:{before:oldLiterals.map(({raw,...r})=>({...r,sha256:sha(raw)})),after:newLiterals.map(({raw,...r})=>({...r,sha256:sha(raw)}))},
+    markdown_roles:{offset_unit:'UTF-16',named_step_before:beforeLabel,named_step_after:afterLabel,math:mathRoles}};
+}
+function strictLayoutContext(before,after,request,paragraphMode,deltas,deps) {
+  const a=sections(before),b=sections(after);
+  if(a.values.has('Remarks')||b.values.has('Remarks')) fail('strict layout cannot include Remarks');
+  const headers={before:canonicalHeadings(before),after:canonicalHeadings(after)};
+  rejectStyleIndirection([a.values.get('Proof')??'',b.values.get('Proof')??''],'proof');
+  for(const body of [before,after]) {
+    const walk=node=>{if(['html','image','imageReference','code'].includes(node.type)) fail('strict layout graphics/code context');for(const c of node.children??[])walk(c);};
+    walk(markdownTree(body));
+    if(/\\(?:includegraphics|tikz)\b|\\begin\s*\{\s*(?:tikzcd|tikzpicture)\s*\}/.test(body)) fail('strict layout TeX graphics context');
+  }
+  const kind=paragraphMode?'proof-paragraph-join-layout':'proof-support-relocation-layout';
+  if(!equal(request.steps,deltas.filter(d=>d.kind===kind).map(d=>d.label))) fail('unused/unknown strict layout step selector');
+  if(deltas.some(d=>d.kind!==kind && !(paragraphMode ? d.kind==='proof-technique' && d.before===fourierTechniquePair.before && d.after===fourierTechniquePair.after
+      : d.kind==='reference-label' && d.section==='Facts & Assumptions' && Array.isArray(deps)&&deps.includes(d.target)))) fail('strict layout has unrelated deltas');
+  if(paragraphMode && deltas.filter(d=>d.kind==='proof-technique').length!==1) fail('strict paragraph layout requires exact technique delta');
+  const contextual=[];
+  for(const [side,body,section]of [['before',before,a],['after',after,b]]) {
+    const ast=stepAst(body,true),proof=section.values.get('Proof'),proofStart=headers[side].find(h=>h.name==='Proof')?.start;
+    if(!Number.isSafeInteger(proofStart)) fail('layout has no actual Proof ownership');
+    const marks=[...proof.matchAll(/^(\d+\.\d+) /gm)];
+    const textRole=(start,end)=>{
+      const node=ast.rows.find(r=>r.node.type==='text'&&r.start<=start&&r.end>=end),paragraph=node?.parent;
+      if(!node||paragraph?.type!=='paragraph'||ast.rows.find(r=>r.node===paragraph)?.parent?.type!=='root'
+          ||ast.ranges.some(r=>start<r.end&&end>r.start)) fail('layout full-body range is not actual root-paragraph plaintext');
+      return {type:'text',start,end,paragraph:{start:paragraph.position.start.offset,end:paragraph.position.end.offset}};
+    };
+    for(const label of request.steps) {
+      const matches=marks.map((m,i)=>({m,i})).filter(r=>r.m[1]===label);
+      if(matches.length!==1) fail('layout full-body step ownership is ambiguous');
+      const {m,i}=matches[0],start=proofStart+m.index,end=proofStart+(marks[i+1]?.index??proof.length),delta=deltas.find(d=>d.kind===kind&&d.label===label);
+      if(body.slice(start,end)!==delta[side]) fail('layout full-body step bytes do not match');
+      const named=textRole(start,start+label.length+1);
+      if(named.paragraph.start!==start) fail('layout full-body named step is not a paragraph start');
+      if(ast.ranges.some(r=>r.start<end&&r.end>start&&(r.start<start||r.end>end))) fail('layout protected context crosses named-step boundary');
+      const actual=ast.ranges.filter(r=>r.start>=start&&r.end<=end).map(r=>({type:ast.rows.find(n=>n.start===r.start&&n.end===r.end&&['math','inlineMath','inlineCode','code'].includes(n.node.type))?.node.type??'canonical-wiki',start:r.start-start,end:r.end-start,sha256:sha(body.slice(r.start,r.end))}));
+      if(!equal(actual,delta.layout.protected_ranges[side])) fail('layout full-body protected ranges/types differ from fragment');
+      const support=delta.layout.support,relative=side==='before'?[support.before??support.unchanged_before,support.terminal_before?.role]:[support.after??support.unchanged_after,support.terminal_after?.role];
+      const supports=relative.filter(Boolean).map(r=>textRole(start+r.start,start+r.end));
+      if(supports[0].paragraph.start!==start) fail('layout full-body opening support is outside named paragraph');
+      contextual.push({side,label,start,end,named_step:named,support:supports,protected_ranges:actual.map(r=>({...r,start:r.start+start,end:r.end+start}))});
+    }
+  }
+  return {version:1,canonical_sections:headers,steps:contextual,proof_before_sha256:sha(a.values.get('Proof')),proof_after_sha256:sha(b.values.get('Proof')),graphics_free:true};
+}
+function proofChange(before, after, deltas, consolidation, relocation, deps, supportLayout, paragraphLayout) {
   const a = proofParts(before), b = proofParts(after);
   if (!equal(a.steps.map(s => s.label), b.steps.map(s => s.label))) fail('proof step sequence change');
   let technique = null;
@@ -413,6 +565,11 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
   const steps = [];
   for (let i = 0; i < a.steps.length; i++) if (a.steps[i].text !== b.steps[i].text) {
     const x = a.steps[i], y = b.steps[i], support = text => /\[([^\]\n]+)\](?:[ \t]*∎)?[ \t\r\n]*$/.exec(text)?.[1];
+    if (supportLayout?.steps.includes(x.label) || paragraphLayout?.steps.includes(x.label)) {
+      const paragraphMode=Boolean(paragraphLayout), layout=layoutStep(x.text,y.text,x.label,paragraphMode?'paragraph-join':'support-relocation');
+      const delta={id:`Proof:step:${x.label}`,kind:paragraphMode?'proof-paragraph-join-layout':'proof-support-relocation-layout',section:'Proof',label:x.label,before:x.text,after:y.text,layout};
+      steps.push({label:x.label,before:x.text,after:y.text,kind:delta.kind});deltas.push(delta);continue;
+    }
     const requested = relocation?.steps.find(s => s.label === x.label);
     if (requested) {
       const relocated = referenceRelocation(x.text, y.text, requested, deps);
@@ -442,6 +599,18 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
     steps.push({ label: x.label, before: x.text, after: y.text, kind: delta.kind }); deltas.push(delta);
   }
   return { technique, steps };
+}
+function canonicalHeadings(text) {
+    const raw = [...text.matchAll(/^## ([^\r\n]+)\r?$/gm)],
+      actual = markdownTree(text).children.filter(node => node.type === 'heading' && node.depth === 2);
+    if (raw.length !== actual.length) fail('terminal Remarks canonical section headings are not actual root H2');
+    return raw.map((m, i) => {
+      const node = actual[i], end = m.index + m[0].replace(/\r$/, '').length;
+      if (node.position?.start.offset !== m.index || node.position?.end.offset !== end
+          || node.children?.length !== 1 || node.children[0].type !== 'text' || node.children[0].value !== m[1])
+        fail('terminal Remarks canonical section headings are not actual root H2');
+      return { name: m[1], type: 'heading', depth: 2, start: m.index, end };
+    });
 }
 function terminalRemarksOption(value) {
   if (value === undefined) return null;
@@ -476,18 +645,6 @@ function terminalRemarksBody(before, after, option, deltas) {
     return { type, start: low, end: high, ...(type === 'heading' ? { depth: 2 } : {}),
       ...(paragraph ? { paragraph: { start: paragraph.position.start.offset, end: paragraph.position.end.offset } } : {}) };
   };
-  const canonicalHeadings = text => {
-    const raw = [...text.matchAll(/^## ([^\r\n]+)\r?$/gm)],
-      actual = markdownTree(text).children.filter(node => node.type === 'heading' && node.depth === 2);
-    if (raw.length !== actual.length) fail('terminal Remarks canonical section headings are not actual root H2');
-    return raw.map((m, i) => {
-      const node = actual[i], end = m.index + m[0].replace(/\r$/, '').length;
-      if (node.position?.start.offset !== m.index || node.position?.end.offset !== end
-          || node.children?.length !== 1 || node.children[0].type !== 'text' || node.children[0].value !== m[1])
-        fail('terminal Remarks canonical section headings are not actual root H2');
-      return { name: m[1], type: 'heading', depth: 2, start: m.index, end };
-    });
-  };
   const sectionRoles = { before: canonicalHeadings(before), after: canonicalHeadings(after) };
   const stepStart = proofStart + steps.at(-1).index, stepEnd = stepStart + option.step.length + 1;
   if (sectionRoles.before.find(h => h.name === 'Proof')?.start >= stepStart
@@ -505,11 +662,14 @@ function terminalRemarksBody(before, after, option, deltas) {
     remarks_bytes_sha256: sha(before.slice(start + old.length)), markdown_roles: roles });
   return after;
 }
-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading) {
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading, proofSupportRelocationLayout, proofParagraphJoinLayout) {
   const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay), terminalHeading = terminalRemarksOption(terminalRemarksHeading);
-  const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
+  const supportLayout=supportLayoutOption(proofSupportRelocationLayout), paragraphLayout=paragraphLayoutOption(proofParagraphJoinLayout);
+  if ((supportLayout||paragraphLayout) && (supportLayout&&paragraphLayout || consolidation||displayLayout||terminalHeading||proofReferenceRelocation!==undefined)) fail('strict layout selectors cannot combine with other modes');
+  const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation || supportLayout || paragraphLayout);
   if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
+  if ((supportLayout||paragraphLayout) && !resultKinds.has(prior.kind)) fail('strict layout requires a proved result');
   if (terminalHeading && !resultKinds.has(prior.kind)) fail('terminal Remarks heading requires a proved result');
   if (displayLayout && prior.kind !== 'definition') fail('definition display layout requires definition kind');
   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
@@ -537,7 +697,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
       else interfaceChange(x, y, name, deltas);
     }
     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
-    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps));
+    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps, supportLayout, paragraphLayout));
     else {
       if (x !== y) {
         const extra = y?.startsWith(x) ? y.slice(x.length) : null;
@@ -562,20 +722,31 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
     interface_section: primary,
     statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
-    proof: terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
+    proof: supportLayout ? 'support-relocation-layout-only' : paragraphLayout ? 'paragraph-join-layout-and-exact-technique-label' : terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
   };
   if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
+  const layoutContext=(supportLayout||paragraphLayout)?strictLayoutContext(before.body,after.body,supportLayout??paragraphLayout,Boolean(paragraphLayout),deltas,prior.deps):null;
   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
     ...(displayLayout ? { definition_display_layout: displayLayout } : {}),
     ...(terminalHeading ? { terminal_remarks_heading: terminalHeading } : {}),
+    ...(supportLayout?{proof_support_relocation_layout:supportLayout}:{}), ...(paragraphLayout?{proof_paragraph_join_layout:paragraphLayout}:{}),
+    ...(layoutContext?{proof_layout_context:layoutContext}:{}),
     ...(strictProof || displayLayout || terminalHeading ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
 }
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
   const consolidation = consolidationOption(entry.proof_support_consolidation), terminalHeading = terminalRemarksOption(entry.terminal_remarks_heading);
+  const supportLayout=supportLayoutOption(entry.proof_support_relocation_layout), paragraphLayout=paragraphLayoutOption(entry.proof_paragraph_join_layout);
+  if(!equal(supportLayout,changes.proof_support_relocation_layout??null)||!equal(paragraphLayout,changes.proof_paragraph_join_layout??null)) fail('unbound strict layout selector');
+  if(Boolean(supportLayout||paragraphLayout)!==Boolean(changes.proof_layout_context)) fail('unbound strict layout context');
+  if(supportLayout||paragraphLayout) {
+    const requested=supportLayout??paragraphLayout,kind=supportLayout?'proof-support-relocation-layout':'proof-paragraph-join-layout';
+    if(!equal(requested.steps,changes.deltas.filter(d=>d.kind===kind).map(d=>d.label))
+      ||changes.proof_layout_context?.version!==1||changes.proof_layout_context?.graphics_free!==true) fail('unbound strict layout steps/context');
+  }
   const relocation = relocationOption(entry.proof_reference_relocation), displayLayout = definitionDisplayOption(entry.definition_display_layout);
   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
@@ -592,7 +763,7 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
-  if (consolidation || relocation || displayLayout || terminalHeading) {
+  if (consolidation || relocation || displayLayout || terminalHeading || supportLayout || paragraphLayout) {
     const runtime = parserDescriptor();
     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);

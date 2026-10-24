@@ -21,7 +21,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
   if (mode === 'definition-display') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n$$A=A.$$\nThe zero convention is fixed.');
-  if (mode === 'fact-label' || mode === 'reference-relocation') {
+  if (mode === 'fact-label' || mode === 'reference-relocation' || mode === 'support-layout-labels') {
     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
     before += '\n## Sources\n\nExact unchanged source section.\n';
     save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
@@ -31,9 +31,11 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (mode === 'reference-relocation') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The Evaluation theorem gives $A=A$. [L1, [[lem-title-target]]]');
   if (mode === 'support-consolidation-both') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', () => '1.1 Reflexivity gives [L1]\n\n$$ A=A. $$\n\n[L1]\n');
   if (mode.startsWith('support-consolidation')) before += '\n1.2 By [L1], [L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]\n';
+  if (mode.startsWith('support-layout')) before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', ()=>'1.1 The identity follows [L1, construct]\n\n$$A=A.$$\n\nThe conclusion holds.\n');
+  if (mode === 'paragraph-layout') before = before.replace('**Proof technique:** direct on $A$.', '**Proof technique:** Fubini followed by $L^2$ approximation.').replace('1.1 Reflexivity gives $A=A$. [L1]\n', ()=>'1.1 The identity follows. [L1]\n\n$$A=A.$$\n\nThe conclusion holds. [L1] ∎\n');
   before += sourceExtra;
   save(source, `items/${id}.md`, before);
-  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${['fact-label', 'reference-relocation'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
+  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${['fact-label', 'reference-relocation', 'support-layout-labels'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
@@ -50,6 +52,9 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (mode.startsWith('support-consolidation')) after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
   if (mode === 'support-consolidation-both') after = after.replace('[L1]\n\n$$ A=A. $$\n\n[L1]', '$A=A$. [L1]');
   if (mode === 'support-consolidation-mixed') after = after.replace('1.1 Reflexivity gives', '1.1 The same reflexivity gives');
+  if (mode.startsWith('support-layout')) after = after.replace(' [L1, construct]\n\n$$A=A.$$\n\nThe conclusion holds.', ()=>' $$A=A.$$ The conclusion holds. [L1, construct]');
+  if (mode === 'support-layout-labels') after = after.replace('[[lem-title-target]]', '[[lem-title-target|Exact reviewed display label]]');
+  if (mode === 'paragraph-layout') after = after.replace('**Proof technique:** Fubini followed by $L^2$ approximation.', '**Proof technique:** Fubini followed by square-integrable approximation.').replace('\n\n$$A=A.$$\n\n', ()=>'\n$$A=A.$$\n');
   save(source, `items/${id}.md`, after);
   const content = itemHashGuard(after), claim = { version: 1, run: 'source-repair', group: 'g', id, pre_sha256: itemHashGuard(before), claimed_at: '2026-10-23T00:00:00Z' };
   const claimLine = JSON.stringify(claim) + '\n', block = `\n${id}: exact fixture repair ${content}.\n`, marker = 'rendering:' + id;
@@ -83,7 +88,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
   const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
   const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const supportLayout=mode.startsWith('support-layout')?{version:1,steps:['1.1']}:undefined,paragraphLayout=mode==='paragraph-layout'?{version:1,steps:['1.1'],technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.',after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}:undefined;
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading, supportLayout, paragraphLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -108,6 +114,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     if (relocation) entry.proof_reference_relocation = relocation;
     if (displayLayout) entry.definition_display_layout = displayLayout;
     if (terminalHeading) entry.terminal_remarks_heading = terminalHeading;
+    if (supportLayout) entry.proof_support_relocation_layout=supportLayout;
+    if (paragraphLayout) entry.proof_paragraph_join_layout=paragraphLayout;
     Object.assign(entry.scientific_review, changes.review_classification);
     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
@@ -372,3 +380,9 @@ test('exact authenticated terminal Remarks boundary preserves old native absent 
 for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('terminal Remarks boundary rejects supplied false/partial/null flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/native diagram flags/);});
 for(const extra of ['```text\nunchanged graphic context\n```','![image](figure.svg)','<span>unchanged HTML</span>',String.raw`\includegraphics{figure}`])test('terminal Remarks absent flags require graphics-free source '+extra,t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true,sourceExtra:'\n'+extra+'\n'});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/native diagram flags/);});
 test('legacy entries cannot declare terminal Remarks boundary',t=>{const f=fixture(t);f.entry.terminal_remarks_heading={version:1,step:'1.1'};f.seal();assert.throws(()=>f.verify(),/requires V2/);});
+
+for(const mode of ['support-layout','support-layout-labels','paragraph-layout'])test('strict authenticated format route accepts only true absent or original valid native pair '+mode,t=>{const f=fixture(t,{mode,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);f.entry.presentation_reviews[0].delta_sha256='0'.repeat(64);f.seal();assert.throws(()=>f.verify(),/unreviewed V2 delta/);});
+for(const mode of ['support-layout-labels','paragraph-layout'])for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('strict compound rejects partial/null/contradictory flags '+mode+JSON.stringify(flags),t=>{const f=fixture(t,{mode,presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/strict proof layout native\/purity/);});
+test('strict support plus Fact labels retain exact published pin review and live runtime bindings',t=>{const f=fixture(t,{mode:'support-layout-labels',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);const label=f.entry.presentation_reviews.find(r=>r.pinned_target);delete label.pinned_target;f.seal();assert.throws(()=>f.verify(),/unbound V2 reference target/);});
+test('strict routes do not admit graphics or Remarks even with original valid native flags',t=>{for(const mode of ['support-layout','paragraph-layout'])for(const sourceExtra of ['\n## Remarks\n\nUnchanged qualification.\n','\n## Background\n\n```text\nunchanged\n```\n','\n## Background\n\n![image](figure.svg)\n','\n## Background\n\n<span>unchanged HTML</span>\n'])assert.throws(()=>fixture(t,{mode,presentationVersion:2,authored:true,sourceExtra}),/Remarks|graphics/);});
+test('legacy cannot declare either strict format selector',t=>{for(const field of ['proof_support_relocation_layout','proof_paragraph_join_layout']){const f=fixture(t);f.entry[field]={version:1,steps:['1.1']};f.seal();assert.throws(()=>f.verify(),/strict proof layout requires V2/);}});

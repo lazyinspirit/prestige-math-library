@@ -220,3 +220,16 @@ authenticated finalized main repair remain required. It creates no generic
 proof rewrite or diagram waiver; supplied partial/null/contradictory native
 flags reject and graphics retain their ordinary requirements. See the
 presentation maintenance guide for the full schema and restrictions.
+
+Two further independent V2 format selectors cover exact proof paragraph
+layout: seventh `proof_support_relocation_layout` moves one unchanged
+pre-display support cluster to complete step end and joins exact 2LF math
+boundaries to ASCII spaces; eighth `proof_paragraph_join_layout` retains
+clusters and joins 2LF to one LF, with only the exact documented Fourier
+technique label pair. Literal reconstruction, full-body AST ownership,
+protected bytes/types, whole-Proof style guards and runtime inputs are
+mandatory. Compound native eligibility is limited to those deltas plus
+reviewed predeclared Fact labels (support mode) or the exact technique pair
+(paragraph mode); no title/Remarks/other deltas/graphics even with valid
+flags. Existing flag routes stay unchanged. See the presentation guide for
+exact schemas and per-delta scientific/authentication requirements.

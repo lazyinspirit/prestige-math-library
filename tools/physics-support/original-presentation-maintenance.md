@@ -273,3 +273,68 @@ valid; partial, null or contradictory supplied flags reject. Existing Remarks
 alone is not a graphics exclusion, because its entire bytes are preserved.
 Actual figures/fences/images/HTML/TikZ retain the original native flags.
 Default/legacy extraction is unchanged; legacy entries reject the selector.
+
+## Explicit support relocation and paragraph joins
+
+Two independent V2 format selectors share only an exact reconstruction
+primitive. They cannot combine with each other or earlier selectors.
+
+* Seventh argument / `proof_support_relocation_layout`:
+  `{version:1, steps:['2.1','4.1','5.1','6.1']}`. Each named old step has no
+  terminal cluster/endmarker, one unique complete plaintext support cluster
+  immediately before its first sole-paragraph raw `$$` formula, and the new
+  complete step ends with that identical raw cluster. Its owned preceding
+  ASCII space moves with it. Tags/order/routines such as choose/construct
+  remain exact; adjacent/duplicate clusters reject. Exact old two-LF
+  boundaries on both sides of every sole-paragraph `$$` span become exactly
+  one ASCII space. All other prose/support/payload/delimiter bytes remain
+  exact. The typed per-step delta is `proof-support-relocation-layout`.
+* Eighth argument / `proof_paragraph_join_layout`:
+  `{version:1, steps:['1.1','1.2','2.1'], technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.', after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}`.
+  This exact full constant pair is the only technique mapping admitted.
+  Named steps retain every support cluster and marker in place; only exact
+  two-LF boundaries around sole-paragraph raw `$$` formulas become one LF.
+  Typed steps are `proof-paragraph-join-layout`, plus the exact reviewed
+  `proof-technique` delta. This does not admit arbitrary technique prose.
+
+Entire after-step bytes must equal the sorted literal splice reconstruction;
+no global whitespace collapse, prose token normalization, punctuation moves,
+math payload/delimiter changes or single-dollar boundary joins occur. Actual
+AST protected math/code/wiki bytes AND types match in order. Named labels,
+complete clusters, terminals and math require real roles; old math is an
+actual sole-math paragraph and new math is actually embedded in the named
+paragraph. For the actual Hilbert case, node type remains inlineMath before
+and after: no node-type or rendered-style change is inferred from paragraph
+joins.
+
+Fragment checks are additionally bound to the ENTIRE body AST with absolute
+UTF-16 offsets: the actual named label starts its root paragraph, clusters
+are actual plaintext, no protected span crosses the owned step bounds, and
+all actual full-body protected ranges/types/hashes equal fragment ranges.
+All canonical headers are real ordered root H2s. Reference definitions,
+whole-Proof style choices/conditional/macro indirection controls, actual
+HTML/image/fenced-code nodes and explicit includegraphics/TikZ commands
+reject. The style guard is conservative, not renderer-driven equivalence.
+Math such as `$x<d$` is not misidentified as HTML by a raw less-than heuristic.
+Existing older flag routes retain their previous behavior.
+
+Support relocation permits only its typed deltas plus ordinary Facts
+reference-label deltas to predeclared published pinned targets with exact
+Root label review. Paragraph joining permits only its typed deltas plus
+that one exact technique pair. Neither route permits title, Remarks,
+generic proof rewrites, other deltas or graphics, EVEN with a valid native
+flag pair. Both actual native diagram keys may be absent only with
+mathematical_meaning_preserved true; the original true/false pair also
+works, while partial/null/contradictory supplied keys reject. These are
+bounded format routes, not generic substantiveSteps flag exemptions.
+
+Scientific proof classifications are respectively
+`support-relocation-layout-only` and
+`paragraph-join-layout-and-exact-technique-label`. Every delta still needs
+exact source hashes, Root reason/reading limits/evidence, actual consumer
+bindings and finalized native main repair authentication. Selectors and
+`proof_layout_context` (body/Proof hashes, canonical and absolute step roles,
+no-graphics checks) are exact consumed changes. The existing live-bound
+403-input parser/runtime descriptor is mandatory. No source adoption,
+proof acceptance, import replacement or coverage follows from extraction.
+Default/legacy JSON remains unchanged and legacy selectors reject.
