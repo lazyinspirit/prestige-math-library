@@ -32,6 +32,8 @@ import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans,
 import { holdStep1 } from './step1-hold.mts';
 import { appendStages } from '../src/frontier-append.mts';
 import { originalConstructionBatches, step2PrerequisiteStages } from '../src/step2-prerequisites.mts';
+import {repairReviewInputs,repairGraphFingerprint} from '../../physics-support/step2-prerequisite-repairs.mjs';
+import {authoredMetadataReviewInputs} from '../../physics-support/step2-authored-metadata.mjs';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
@@ -1651,12 +1653,15 @@ export const workflowRevision = 'physics-six-step-v1-construction-scope';
  * remain intact; only new authoring-readiness subjects and source URLs are local.
  * No original drift report is retroactively extended or claimed as new review. */
 export function supplementalConstructionGates(ctx:any,entry:any) {
+  const repairGraph=repairGraphFingerprint(ctx.repo,ctx.run,entry.number);
   const coverage=entry.batches.map((batch:string)=>`research/${ctx.run}-batch-${batch}.coverage.json`);
   const liveness=`research/${ctx.run}-prerequisite-${entry.number}-url-liveness.json`;
   return [
-    gate('supplemental-construction', ['node','tools/physics-support/step2-prerequisites.mjs','check','--run',ctx.run,'--generation',String(entry.number)], {
+    gate('supplemental-construction', ['node','tools/physics-support/step2-prerequisites.mjs','check','--run',ctx.run,'--generation',String(entry.number),...(repairGraph?['--repair-graph-sha256',repairGraph]:[])], {
       liveness:{pattern:'step2-prerequisites: (\\d+) items constructed',min:1,unit:'supplemental items'},
       ownerReviewInputs:[`research/${ctx.run}-step2-prerequisites.json`,entry.request.path,
+        ...repairReviewInputs(ctx.repo,ctx.run,entry.number),'tools/physics-support/step2-prerequisite-repairs.mjs',
+        ...authoredMetadataReviewInputs(ctx.repo,ctx.run,entry.number),'tools/physics-support/step2-authored-metadata.mjs',
         'tools/physics-autopilot/src/step2-prerequisites.mts','tools/physics-support/step2-prerequisites.mjs',
         ...Object.keys(entry.protected_native??{}),...Object.keys(entry.inputs).filter((path:string)=>!/-scope-review\/batch-\d+\/state\.json$/.test(path))],
     }),

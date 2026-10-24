@@ -1748,3 +1748,57 @@ coordinate inversion; it does not certify arbitrary stereographic transition
 functions. The full authored proofs and ordinary workflow gates retain those
 duties. Run `node --test tools/physics-support/finite-smoke-penrose.test.mjs`
 for the focused model, assertion/selection, expected-value and mutation checks.
+
+
+### Root source repairs inside unfinished Step-2 prerequisite construction
+
+Protected old source bytes remain immutable unless Root first uses native
+`prerequisites repair-authorize` at a paused, stopped, fully drained latest
+`2-prerequisite-construct-N` boundary. Root names exact current-run draft items
+and a committed original preimage, then performs the admitted repairs. Native
+`repair-complete` requires exact before/after hashes, actual scientific and
+focused review, scoped proof-supplier-use justification, and same-owner full
+consumer checks when public contract bytes change. Proof-only corrections do not
+claim a blanket consumer proof audit. Only exact predeclared source-mirror JSON pointers (deps, dependency roles or
+canonical public-section statement) and computed numeric metadata consequences
+are admitted, with genuine current full-graph validation. Foreign planning
+context remains unchanged.
+
+The original registration generation, Step-1 stamps and native history are never
+rewritten. Separate immutable authorization/completion receipts authenticate the
+new exact bytes; incomplete or stale receipts block construction. Receipt
+presence/absence and every bound input invalidate earlier owner preparation.
+Fresh preparation and the full ordinary battery remain required. The commands
+do not edit sources, state, authority or acceptance and create no backups. Exact
+request fields and fail-closed interruption behavior are documented in
+`tools/physics-autopilot/README.md` under “Guarded Root repair during supplemental
+construction”.
+
+### Exact malformed and duplicate proof-support rendering successors
+
+The opt-in `exact_native_presentation` inventory includes the observed
+`lem-one-variable-completion-of-the-square-with-a-smooth-parameter` and
+`thm-c-c-is-dense-in-l-p-for-radon-measures` body pairs. The first removes only
+the malformed nested case tag in step 1.2; its explicit positive-parameter
+assumption remains. The second renders the exact Radon-density title and moves
+or removes only duplicate support clusters in steps 1.1 and 2.1. Fixed body
+hashes, unique named proof paragraphs, unchanged mathematical AST literals,
+exact title pairs and unchanged scientific metadata guard these two routes.
+Every individual delta still requires a typed Root review and all current
+consumer, native published-repair authentication, evidence and gate checks.
+Graphics-free exact cases retain honestly absent diagram keys; partial, null
+or contradictory supplied keys fail. These routes neither modify import pins
+nor accept original mathematical changes or arbitrary support rewrites.
+
+
+When a genuine supplemental native author clarifies an approved full-scope
+statement or supplies actual references, Root may reconcile only the new-owned
+item's exact source/header mirrors through native
+`prerequisites authored-metadata-adopt`, after successful native completion and
+writer drain, before original-source repair authorization. This grants no source
+edit permission and cannot change original rows, identities or inventories.
+The separate immutable receipt authenticates only new-batch manifest hashes,
+actual Root full-scope/reference/consumer review and real ended native results.
+Its effective baseline can then be committed and consumed by original-source
+repair authorization. Both receipts invalidate old owner preparation and retain
+all ordinary gates; detailed schema is in the native physics README.

@@ -35,7 +35,7 @@ import { writeCommand } from '../src/control.mts';
 import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
-import { registerStep2Prerequisites, finishStep2Prerequisites, assertNoPrerequisiteTransaction } from '../src/step2-prerequisites.mts';
+import { registerStep2Prerequisites, finishStep2Prerequisites, repairStep2Prerequisites, assertNoPrerequisiteTransaction } from '../src/step2-prerequisites.mts';
 import { doctor } from '../src/doctor.mts';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { formatProblems } from '../src/spec.mts';
@@ -320,7 +320,12 @@ switch (cmd) {
   case 'prerequisites': {
     const run=opt('run')??die('--run is required');
     const action=argv[1], config=loadConfig();
-    if(!['register','finish'].includes(action))die('prerequisites register --request FILE | finish --run RUN --state-dir DIR');
+    if(!['register','finish','repair-authorize','repair-complete','authored-metadata-adopt'].includes(action))die('prerequisites register|repair-authorize|repair-complete|authored-metadata-adopt --request FILE | finish --run RUN --state-dir DIR');
+    if(action.startsWith('repair-')||action==='authored-metadata-adopt'){
+      const result=repairStep2Prerequisites({repo,run,stateDir:config.stateDir,request:opt('request')??die('--request is required'),complete:action==='repair-complete',authored:action==='authored-metadata-adopt'});
+      console.log(`Root prerequisite repair ${action}: generation ${result.generation}. Fresh owner preparation and full ordinary gates remain required.`);
+      break;
+    }
     const result=action==='register'
       ? registerStep2Prerequisites({repo,run,stateDir:config.stateDir,request:opt('request')??die('--request is required')})
       : finishStep2Prerequisites({repo,run,stateDir:config.stateDir});

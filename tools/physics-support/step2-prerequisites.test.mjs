@@ -11,6 +11,10 @@ import {
   assertNoPrerequisiteTransaction, checkOwnerAdditions,checkSupplement,
 } from './step2-prerequisites.mjs';
 import { batchInput, accepted,resolveOwner } from './batch-scope-review.mjs';
+import {authorizePrerequisiteRepairs,completePrerequisiteRepairs,checkedRepairOverlay,repairReviewInputs,repairPaths,repairValueDigest,repairPublicSection,repairGraphFingerprint} from './step2-prerequisite-repairs.mjs';
+import {writeBatchDependencyLevels} from './batch-dependency-levels.mjs';
+import {gateReviewSnapshot} from '../physics-autopilot/src/owner-gate-recertification.mjs';
+import {adoptAuthoredMetadata,checkedAuthoredMetadata,authoredMetadataPath,authoredMetadataReviewInputs} from './step2-authored-metadata.mjs';
 
 const run = 'fixture-prerequisites';
 const digest = value => createHash('sha256').update(value).digest('hex');
@@ -69,6 +73,212 @@ function fixture(t) {
   const prepare = (options = {}) => preparePrerequisiteRegistration(root, run, requestPath, { stateDir, scan: drained, invoke: value => calls.push(value), ...options });
   return { root, stateDir, statePath, put, read, json, bind, requestPath, request, prepare, calls, originals, evidence, escalation };
 }
+
+function repairFixture(t){
+  const f=fixture(t),commit=()=>{
+    for(const args of [['add','.'],['commit','-qm','Exact fixture repair preimages']]){
+      const result=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(result.status,0,result.stderr);
+    }
+    return spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim();
+  };
+  for(const pages of f.originals)for(const page of pages)for(const item of page.items){
+    item.dependency_level=0;
+    const path=`items/${item.id}.md`;f.put(path,f.read(path).replace('kind:',`status: draft\npipeline_run: ${run}\nkind:`));
+  }
+  f.put('research/plan-spec.json',{pages:f.originals.flat()});
+  f.originals.forEach((pages,i)=>f.put(`research/${run}-batch-${i+1}.pages.json`,pages));
+  f.request.base_commit=commit();
+  for(const page of f.request.pairs[0].pages)for(const item of page.items)item.dependency_level=0;
+  f.put(f.requestPath,f.request);
+  const entry=installPrerequisiteRegistration(f.root,run,f.stateDir,f.prepare());
+  const state=f.json(f.statePath);state.stage='2-prerequisite-construct-1';state.stages[state.stage]={enteredAt:'2026-01-04'};f.put(f.statePath,state);
+  const base=commit(),path='items/lem-original-one.md',authorization=`research/${run}-repair-authorize.json`,completion=`research/${run}-repair-complete.json`;
+  const common={version:1,run,generation:1,reviewer:'/root',writers_drained:true,writer_scopes:[],reason:'Repair the exact observed proof formatting defect under actual Root scientific review while preserving original immutable construction history.',evidence:[f.bind(f.evidence)]};
+  f.put(authorization,{...common,base_commit:base,items:['lem-original-one']});
+  const authorize=()=>authorizePrerequisiteRepairs(f.root,run,f.stateDir,authorization,{scan:drained});
+  const after=()=>{
+    const before=f.bind(path).sha256;f.put(path,f.read(path)+'\n## Proof\n\nThe corrected focused proof formatting keeps the public assertion intact.\n');
+    f.put(completion,{...common,reviews:[{id:'lem-original-one',before_sha256:before,after_sha256:f.bind(path).sha256,interface_changed:false,scientific_review:'Root checked the actual corrected proof and supplier hypotheses in this controlled fixture.',focused_checks:'Root performed the focused source layout and exact dependency-use checks in this fixture.',scoped_use_justification:'This proof-only correction preserves the public assertion and requires no changed consumer contract.',consumer_checks:[]}]});
+  };
+  const complete=(validate=()=>{})=>completePrerequisiteRepairs(f.root,run,f.stateDir,completion,{scan:drained,validate});
+  return {...f,entry,path,authorization,completion,authorize,after,complete};
+}
+
+test('guarded repair preserves original generation/state and binds pending and completed evidence',t=>{
+  const f=repairFixture(t),originalRegistry=f.read(`research/${run}-step2-prerequisites.json`),state=f.read(f.statePath),source=f.read(f.path);
+  const absent=repairReviewInputs(f.root,run,1);assert.equal(absent.length,2);
+  const snapshot=()=>gateReviewSnapshot({repo:f.root,run},[{id:'repair-inputs',argv:['true'],ownerReviewInputs:repairReviewInputs(f.root,run,1)}],['2-prerequisite-construct-1']).sha256;
+  const beforeSnapshot=snapshot();
+  f.authorize();assert.equal(f.read(f.path),source);
+  const pendingSnapshot=snapshot();assert.notEqual(pendingSnapshot,beforeSnapshot);
+  assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/incomplete/);
+  const pending=repairReviewInputs(f.root,run,1);assert(pending.includes(f.authorization));
+  f.after();let invoked=false;const result=f.complete(()=>{invoked=true;});assert(invoked);
+  assert.equal(result.scientific_acceptance,false);
+  assert.equal(f.read(f.statePath),state);assert.equal(f.read(`research/${run}-step2-prerequisites.json`),originalRegistry);
+  assert.equal(checkedRepairOverlay(f.root,run,f.entry).sources[f.path],f.bind(f.path).sha256);
+  assert(repairReviewInputs(f.root,run,1).includes(f.completion));
+  assert.notEqual(snapshot(),pendingSnapshot);
+  f.put(f.evidence,'Changed actual evidence');assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/evidence/);
+});
+
+test('repair admission refuses running writers, wrong stage, closed stage and uncommitted preimages',t=>{
+  for(const mode of ['writers','stage','closed','preimage']){
+    const f=repairFixture(t);
+    if(mode==='preimage')f.put(f.path,f.read(f.path)+'\nUnregistered edit.\n');
+    else {const state=f.json(f.statePath);if(mode==='writers')state.dispatches.worker={startedAt:'now'};if(mode==='stage')state.stage='2-scope-review';if(mode==='closed')state.stages[state.stage].gatesPassedAt='done';f.put(f.statePath,state);}
+    assert.throws(f.authorize,/drained|paused|closed|preimage/);
+    assert.equal(existsSync(join(f.root,repairPaths(run,1).authorization)),false);
+  }
+});
+
+test('repair completion rejects unlisted sources, public interface misclassification and unrelated metadata edits',t=>{
+  for(const mode of ['unlisted','interface','metadata']){
+    const f=repairFixture(t);f.authorize();f.after();
+    if(mode==='unlisted')f.put('items/lem-original-two.md',f.read('items/lem-original-two.md')+'\nUnlisted repair.\n');
+    if(mode==='interface'){
+      f.put(f.path,f.read(f.path).replace('Original interface.','Changed interface.'));
+      const req=f.json(f.completion);req.reviews[0].after_sha256=f.bind(f.path).sha256;f.put(f.completion,req);
+    }
+    if(mode==='metadata'){const spec=f.json('research/plan-spec.json');spec.pages[0].order=99;f.put('research/plan-spec.json',spec);}
+    assert.throws(f.complete,/unlisted source|classification|unapproved metadata/);
+    assert.equal(existsSync(join(f.root,repairPaths(run,1).completion)),false);
+  }
+});
+
+test('repair completion requires actual full-frontier validator and refuses stale receipt after success',t=>{
+  const f=repairFixture(t);f.authorize();f.after();
+  assert.throws(()=>f.complete(()=>{throw Error('actual current validator failed');}),/validator failed/);
+  assert.equal(existsSync(join(f.root,repairPaths(run,1).completion)),false);
+  f.complete();f.put(f.path,f.read(f.path)+'\nLater proof edit.\n');
+  assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/stale/);
+  assert.throws(f.complete,/already exists/);
+});
+
+test('repair permits exact source deps mirrored in plan/manifest with computed levels and ledger',t=>{
+  const f=repairFixture(t),manifest=`research/${run}-batch-1.pages.json`;
+  const auth=f.json(f.authorization);auth.metadata_changes=[
+    {path:manifest,pointer:'/0/items/0/deps'},
+    {path:'research/plan-spec.json',pointer:'/pages/0/items/0/deps'},
+  ].map(row=>({...row,before_sha256:repairValueDigest([]),after_sha256:repairValueDigest(['lem-original-two'])}));
+  f.put(f.authorization,auth);f.authorize();f.after();
+  f.put(f.path,f.read(f.path).replace('deps: []','deps: [lem-original-two]'));
+  const pages=f.json(manifest),plan=f.json('research/plan-spec.json');
+  for(const list of [pages,plan.pages]){const item=list.flatMap(page=>page.items).find(item=>item.id==='lem-original-one');item.deps=['lem-original-two'];item.dependency_level=1;}
+  f.put(manifest,pages);f.put('research/plan-spec.json',plan);writeBatchDependencyLevels(f.root,run);
+  const request=f.json(f.completion);request.reviews[0].after_sha256=f.bind(f.path).sha256;request.reviews[0].interface_changed=true;f.put(f.completion,request);
+  const done=f.complete();assert.equal(done.metadata[manifest],f.bind(manifest).sha256);
+  assert.equal(checkedRepairOverlay(f.root,run,f.entry).metadata[manifest],f.bind(manifest).sha256);
+  plan.pages[0].items[0].dependency_level=20;f.put('research/plan-spec.json',plan);
+  assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/stale/);
+});
+
+test('repair rejects stale computed levels, foreign draft ownership and changed-interface missing consumer checks',t=>{
+  for(const mode of ['level','foreign','consumer']){
+    const f=repairFixture(t);f.authorize();f.after();
+    if(mode==='level'){const pages=f.json(`research/${run}-batch-1.pages.json`);pages[0].items[0].dependency_level=7;f.put(`research/${run}-batch-1.pages.json`,pages);}
+    if(mode==='foreign'){f.put(f.path,f.read(f.path).replace(`pipeline_run: ${run}`,'pipeline_run: foreign-run'));const req=f.json(f.completion);req.reviews[0].after_sha256=f.bind(f.path).sha256;f.put(f.completion,req);}
+    if(mode==='consumer'){
+      // A live consumer outside the owned frontier is still in the public-interface cone.
+      f.put('items/lem-outside-consumer.md','---\nid: lem-outside-consumer\ndeps: [lem-original-one]\n---\n');
+      f.put(f.path,f.read(f.path).replace('Original interface.','Changed interface.'));
+      const req=f.json(f.completion);req.reviews[0].after_sha256=f.bind(f.path).sha256;req.reviews[0].interface_changed=true;f.put(f.completion,req);
+    }
+    assert.throws(f.complete,/differs from computed|identity\/status|same-owner consumer cone/);
+  }
+});
+
+test('repair admits only predeclared exact source role/statement mirrors and retains foreign plan context',t=>{
+  const f=repairFixture(t),manifest=`research/${run}-batch-1.pages.json`,plan=f.json('research/plan-spec.json');
+  plan.pages.push({id:'foreign-context',category:'foreign',items:[{id:'def-foreign-context',deps:[],dependency_level:999,statement:'Foreign context remains untouched.'}]});
+  f.put('research/plan-spec.json',plan);
+  for(const args of [['add','.'],['commit','-qm','Exact foreign planning context']])assert.equal(spawnSync('git',args,{cwd:f.root}).status,0);
+  const auth=f.json(f.authorization);auth.base_commit=spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim();
+  const statement='Original interface.$';
+  auth.metadata_changes=[manifest,'research/plan-spec.json'].flatMap(path=>['statement','dependency_roles'].map(field=>({path,pointer:`/${path===manifest?'':'pages/'}0/items/0/${field}`,before_sha256:repairValueDigest((path===manifest?f.json(manifest):plan.pages)[0].items[0][field]),after_sha256:repairValueDigest(field==='statement'?statement:{})})));
+  f.put(f.authorization,auth);f.authorize();f.after();
+  f.put(f.path,f.read(f.path).replace('Original interface.',statement).replace('deps: []','deps: []\ndependency_roles: {}'));
+  const pages=f.json(manifest);
+  for(const list of [pages,plan.pages]){list[0].items[0].statement=statement;list[0].items[0].dependency_roles={};}
+  f.put(manifest,pages);f.put('research/plan-spec.json',plan);writeBatchDependencyLevels(f.root,run);
+  const req=f.json(f.completion);req.reviews[0].after_sha256=f.bind(f.path).sha256;req.reviews[0].interface_changed=true;f.put(f.completion,req);
+  // A same-hash planned value still cannot substitute for exact canonical source text.
+  const invalid=structuredClone(plan);invalid.pages[0].items[0].statement='A different assertion.';f.put('research/plan-spec.json',invalid);
+  assert.throws(f.complete,/exact repaired source mirror/);
+  f.put('research/plan-spec.json',plan);f.complete();
+  assert.equal(f.json('research/plan-spec.json').pages.at(-1).items[0].dependency_level,999);
+});
+
+test('repair freezes carrier identity and treats logical deps/roles as interface changes',t=>{
+  for(const mode of ['kind','domain','library','aliases','deps','dependency_roles']){
+    const f=repairFixture(t);f.authorize();f.after();
+    const edit=mode==='kind'?f.read(f.path).replace('kind: lemma','kind: theorem'):f.read(f.path).replace('deps: []',mode==='deps'?'deps: [lem-original-two]':`deps: []\n${mode}: ${mode==='aliases'?'[lem-new-alias]':mode==='dependency_roles'?'{lem-original-two: mathematical-premise}':'physics'}`);
+    f.put(f.path,edit);const req=f.json(f.completion);req.reviews[0].after_sha256=f.bind(f.path).sha256;f.put(f.completion,req);
+    assert.throws(f.complete,mode==='deps'||mode==='dependency_roles'?/classification mismatch/:/must remain immutable/);
+  }
+  assert.equal(repairPublicSection('---\nkind: open-problem\n---\n## Open problem\n\nThe precise unresolved claim.\n\n## Status\nOpen.\n'),'The precise unresolved claim.');
+  assert.throws(()=>repairPublicSection('---\nkind: open-problem\n---\n## Statement\nA misleading fallback.\n'),/missing canonical Open problem/);
+});
+
+test('authorized before consumers survive removed edges and completed repair rejects new consumers',t=>{
+  const f=repairFixture(t),consumer='items/lem-prior-consumer.md';
+  f.put(consumer,'---\nid: lem-prior-consumer\ndeps: [lem-original-one]\n---\n');
+  const auth=f.authorize();assert.equal(auth.before_consumer_cones['lem-original-one'][0].sha256,f.bind(consumer).sha256);
+  f.after();f.put(f.path,f.read(f.path).replace('Original interface.','Changed interface.'));
+  f.put(consumer,'---\nid: lem-prior-consumer\ndeps: []\n---\n');
+  const req=f.json(f.completion);req.reviews[0].after_sha256=f.bind(f.path).sha256;req.reviews[0].interface_changed=true;f.put(f.completion,req);
+  assert.throws(f.complete,/same-owner consumer cone/);
+  req.reviews[0].consumer_checks=[{id:'lem-prior-consumer',sha256:f.bind(consumer).sha256,decision:'unaffected',reason:'Actual fixture check confirms the removed consumer edge remains covered by before/after use review.'}];f.put(f.completion,req);f.complete();
+  checkedRepairOverlay(f.root,run,f.entry);const before=repairGraphFingerprint(f.root,run,1);
+  f.put('items/lem-unrelated-context.md','---\nid: lem-unrelated-context\ndeps: []\n---\nUnrelated [[def-unrelated-context]] use.\n');
+  assert.equal(repairGraphFingerprint(f.root,run,1),before);
+  f.put('items/lem-later-consumer.md','---\nid: lem-later-consumer\ndeps: []\n---\nNew actual [[lem-original-one]] use.\n');
+  assert.notEqual(repairGraphFingerprint(f.root,run,1),before);
+  assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/same-owner consumer cone/);
+});
+
+function authoredFixture(t){
+  const f=repairFixture(t),manifest=`research/${run}-batch-3.pages.json`,pages=f.json(manifest),plan=f.json('research/plan-spec.json'),id='lem-new-one',source=`items/${id}.md`;
+  f.put(source,`---\nid: ${id}\nkind: lemma\ndomain: mathematics\nlibrary: mathematics\nstatus: draft\npipeline_run: ${run}\ndeps: []\nsources: {references: [{title: Actual author fixture reference, url: https://example.invalid/full-text}]}\n---\n## Statement\n\nActual complete approved clarification.\n`);
+  const sourceItem={statement:'Actual complete approved clarification.',sources:{references:[{title:'Actual author fixture reference',url:'https://example.invalid/full-text'}]}};
+  const base=f.json(f.authorization).base_commit,changes=[];
+  for(const [path,list,prefix] of [[manifest,pages,''],['research/plan-spec.json',plan.pages,'pages/']]){
+    const index=list.findIndex(page=>page.items.some(item=>item.id===id)),row=list[index].items[0];
+    for(const field of ['statement','sources']){changes.push({path,pointer:`/${prefix}${index}/items/0/${field}`,before_sha256:repairValueDigest(row[field]),after_sha256:repairValueDigest(sourceItem[field])});row[field]=sourceItem[field];}
+  }
+  f.put(manifest,pages);f.put('research/plan-spec.json',plan);writeBatchDependencyLevels(f.root,run);
+  const stage='2-prerequisite-construct-1',label='prerequisite-1-batch-3',state=f.json(f.statePath),resultPath=`research/${run}-dispatch/beta-${label}.result.json`;
+  state.dispatches[`${stage}:${label}`]={stage,role:'beta',label,covers:['3'],attempt:1,startedAt:'2026-01-04T00:00:00.000Z',endedAt:'2026-01-04T01:00:00.000Z',lastExitOk:true};f.put(f.statePath,state);
+  f.put(resultPath,{run,role:'beta',label,covers:['3'],attempt:1,stage,started_at:'2026-01-04T00:00:00.000Z',ended_at:'2026-01-04T01:00:00.000Z',ok:true,exit_code:0,timed_out:false});
+  const request=`research/${run}-authored-adopt-request.json`,req={...f.json(f.authorization),base_commit:base,items:[id],metadata_changes:changes,reviews:[{id,source_sha256:f.bind(source).sha256,scope_preserved:true,scientific_review:'Root actually checked the full approved assertion and that the author clarification preserves every intended case.',reference_review:'Root read the actual fixture source reference and records the reading limits without claiming native proof acceptance.',consumer_checks:[]}]};f.put(request,req);
+  return {...f,id,source,manifest,resultPath,adoptRequest:request,adoptReq:req,adopt:()=>adoptAuthoredMetadata(f.root,run,f.stateDir,request,{scan:drained,validate:()=>{}})};
+}
+
+test('new-author metadata adoption binds real native results without changing sources/history and precedes original repair',t=>{
+  const f=authoredFixture(t),registry=f.read(`research/${run}-step2-prerequisites.json`),source=f.read(f.source),state=f.read(f.statePath);
+  assert.deepEqual(authoredMetadataReviewInputs(f.root,run,1),[authoredMetadataPath(run,1)]);
+  const adopted=f.adopt();assert.equal(adopted.scientific_acceptance,false);assert.deepEqual(Object.keys(adopted.manifests),[f.manifest]);
+  assert.equal(f.read(f.source),source);assert.equal(f.read(f.statePath),state);assert.equal(f.read(`research/${run}-step2-prerequisites.json`),registry);
+  assert.equal(checkedAuthoredMetadata(f.root,run,f.entry).manifests[f.manifest],f.bind(f.manifest).sha256);
+  assert(authoredMetadataReviewInputs(f.root,run,1).includes(f.resultPath));
+  for(const args of [['add','.'],['commit','-qm','Accepted metadata mirrors only; not scientific acceptance']])assert.equal(spawnSync('git',args,{cwd:f.root}).status,0);
+  const auth=f.json(f.authorization);auth.base_commit=spawnSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).stdout.trim();f.put(f.authorization,auth);
+  f.authorize();f.after();f.complete();checkedRepairOverlay(f.root,run,f.entry);
+  f.put(f.resultPath,JSON.stringify({...f.json(f.resultPath),ok:false}));assert.throws(()=>checkedAuthoredMetadata(f.root,run,f.entry),/evidence|result/);
+});
+
+test('new-author metadata rejects unfinished/failed native authors, old source edits, old rows and false source mirrors',t=>{
+  for(const mode of ['unfinished','failed','source','row','mirror']){
+    const f=authoredFixture(t);
+    if(mode==='unfinished'){const state=f.json(f.statePath);Object.values(state.dispatches)[0].endedAt=null;f.put(f.statePath,state);}
+    if(mode==='failed'){const result=f.json(f.resultPath);result.ok=false;f.put(f.resultPath,result);}
+    if(mode==='source')f.put(f.path,f.read(f.path)+'\nUnauthorized old source change.\n');
+    if(mode==='row'){const plan=f.json('research/plan-spec.json');plan.pages[0].items[0].title='Unrelated old-row change';f.put('research/plan-spec.json',plan);}
+    if(mode==='mirror'){const req=f.json(f.adoptRequest);req.metadata_changes[0].after_sha256=repairValueDigest('Invented narrowed assertion.');f.put(f.adoptRequest,req);}
+    assert.throws(f.adopt,/drained|successful|old-source|original rows|exactly mirror/);
+    assert.equal(existsSync(join(f.root,authoredMetadataPath(run,1))),false);
+  }
+});
 
 test('registration is prospective, preserves original sources/Step 1, and enters ordinary Step-2 inventory without acceptance', t => {
   const f = fixture(t), oldState = f.read(f.statePath), oldScope = f.read(f.escalation);

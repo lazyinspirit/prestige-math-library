@@ -13,6 +13,8 @@ import { consumers } from './batch-scope-review.mjs';
 import {frontmatterList} from './frontmatter-list.mjs';
 import {readOriginalItemIdentity} from './original-item-index.mjs';
 import {yaml} from './pathway-lib.mjs';
+import { checkedRepairOverlay,repairGraphFingerprint } from './step2-prerequisite-repairs.mjs';
+import {checkedAuthoredMetadata} from './step2-authored-metadata.mjs';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const regular=path=>{const stat=lstatSync(path);assert(stat.isFile()&&!stat.isSymbolicLink()&&realpathSync(path)===resolve(path),`nonregular/symlinked file ${path}`);return stat;};
@@ -62,13 +64,14 @@ export function prerequisiteRegistry(root, run, {allowPending=false}={}) {
 export function assertNoPrerequisiteTransaction(stateDir) {
   assert(!existsSync(join(stateDir, 'step2-prerequisites.lock')), 'interrupted/active installation; inspect journal and use prerequisites finish');
 }
-export function prerequisiteBoundary(root, run, stateDir, scan) {
+export function prerequisiteBoundary(root, run, stateDir, scan, {stage='2-scope-review'}={}) {
   assert(resolve(stateDir).startsWith(resolve(root) + '/'), 'state directory outside physics');
   stateDir=local(root,relative(root,resolve(stateDir)));
   assert(lstatSync(stateDir).isDirectory(),'state directory is not regular');
   const state = json(local(root,relative(root,join(stateDir, 'state.json'))));
   assert(state.version === 1 && state.run === run && state.paused && !state.finishedAt
-    && state.stage === '2-scope-review', 'exact paused unfinished Step 2 required');
+    && state.stage === stage, 'exact paused unfinished Step 2 required');
+  if(stage!=='2-scope-review')assert(!state.stages?.[stage]?.doneAt && !state.stages?.[stage]?.gatesPassedAt, 'active stage already closed');
   assert(state.stages?.['1-scaffold']?.doneAt && state.stages['1-scaffold'].gatesPassedAt, 'original construction is not closed');
   assert(!state.stages?.['2-scope-review']?.doneAt && !state.stages?.['2-scope-review']?.gatesPassedAt,
     'Step 2 already closed');
@@ -430,8 +433,10 @@ export function checkSupplement(root, run, number) {
   assert(state.run===run&&JSON.stringify(state.stages?.['1-scaffold'])===JSON.stringify(entry.original_step1), 'original Step-1 stamp changed');
   const snapshot = loadStep3(root, run);
   for (const id of entry.items) { const ready = step1Decision(snapshot, id); assert(ready.closed, `${id}: ${ready.reason}`); }
-  for (const [path, expected] of Object.entries(entry.protected_sources)) assert(rawHash(local(root, path)) === expected, `supplemental author changed original source ${path}`);
-  for (const [path, expected] of Object.entries(entry.manifest_sha256)) assert(rawHash(local(root,path)) === expected, `supplemental author changed manifest ${path}`);
+  const repairs=checkedRepairOverlay(root,run,entry);
+  const authored=checkedAuthoredMetadata(root,run,entry);
+  for (const [path, expected] of Object.entries({...entry.protected_sources,...repairs.sources})) assert(rawHash(local(root, path)) === expected, `supplemental author changed original source ${path}`);
+  for (const [path, expected] of Object.entries({...entry.manifest_sha256,...authored.manifests,...repairs.metadata})) assert(rawHash(local(root,path)) === expected, `supplemental author changed manifest ${path}`);
   for (const [path, expected] of Object.entries(entry.protected_native)) assert(rawHash(local(root,path))===expected,`supplemental author changed native history ${path}`);
   for (const addition of entry.additions) reference(root, run, addition.review);
   for (const batch of entry.batches) {
@@ -460,6 +465,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
   try {
     const args = process.argv.slice(2), opt = name => args[args.indexOf(`--${name}`) + 1];
     assert(args[0] === 'check' && args.includes('--run') && args.includes('--generation'), 'Usage: step2-prerequisites.mjs check --run RUN --generation N');
+    if(args.includes('--repair-graph-sha256'))assert(opt('repair-graph-sha256')===repairGraphFingerprint(process.cwd(),opt('run'),opt('generation')),'repair graph changed since owner preparation');
     console.log(`step2-prerequisites: ${checkSupplement(process.cwd(), opt('run'), opt('generation'))} items constructed`);
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

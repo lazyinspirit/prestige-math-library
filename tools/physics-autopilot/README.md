@@ -145,3 +145,134 @@ Use immutable prior-plan/source/scaffold evidence, rather than binding a canonic
 file whose new-row prerequisite/order edits the fresh Alpha is allowed to make.
 The new generation still receives fresh Luna-max Alpha/apply stages and ordinary
 new Beta authoring; completed prior units and every later full gate stay intact.
+
+
+### Guarded Root repair during supplemental construction
+
+`prerequisites repair-authorize --run RUN --state-dir DIR --request FILE`
+and `prerequisites repair-complete` use the same native physics CLI as
+`prerequisites register`. These commands write immutable repair receipts only;
+they never edit sources, planning metadata, state, native results or acceptance.
+Both require the latest unfinished `2-prerequisite-construct-N` stage paused,
+controller stopped, every native/adopted/outside writer drained and all ordinary
+boundary locks clear. A successful stage cannot be reopened with this API.
+
+The authorization request is run-local JSON with `version: 1`, `run`,
+`generation: N`, `reviewer: "/root"`, `writers_drained: true`,
+`writer_scopes: []`, a substantive `reason`, nonempty `evidence` references
+(`{path, sha256}`), exact committed `base_commit`, and distinct `items` IDs. Optional `metadata_changes` rows name exact
+`{path, pointer, before_sha256, after_sha256}` source mirrors. Each pointer is
+`/pages/P/items/I/FIELD` for the canonical plan or `/P/items/I/FIELD` for a
+manifest; FIELD is only `deps`, `dependency_roles` or `statement`, and its item
+must be authorized. Precompute the exact prospective value digests before
+authorization using exported `repairValueDigest(value)`; it hashes compact JSON
+`{present:true,value}` (or `{present:false}` for an absent field), never stores
+preimage copies. Every declared after-value must equal the exact current source
+frontmatter field, or the trimmed canonical Statement/Definition/Example body
+for `statement`, selected by exact item kind (including Open problem).
+Unlisted mirror edits are rejected.
+Every selected carrier must be an original protected current-run draft. Current
+raw bytes must match both the original generation and the exact Git preimage.
+All original protected sources and full current manifests, plan and batch-level
+ledger must likewise match that committed baseline. No copies or backups are
+created. Existing Git objects and the immutable generation retain the preimages.
+
+Authorization creates
+`research/RUN-prerequisite-N-owner-repair-authorization.json`. Root then performs
+only the admitted source repairs and necessary metadata consequences. The
+completion request repeats the common fields (without `base_commit`/`items`)
+and supplies one `reviews` row per authorized ID:
+
+```json
+{
+  "id": "lem-exact-supplier",
+  "before_sha256": "EXACT_ORIGINAL_RAW_SHA256",
+  "after_sha256": "EXACT_CURRENT_RAW_SHA256",
+  "interface_changed": false,
+  "scientific_review": "Actual Root review of the corrected argument and hypotheses...",
+  "focused_checks": "Actual focused source and formatting checks performed...",
+  "scoped_use_justification": "Why these proof-only corrections preserve supplier uses, including the actual affected use checks...",
+  "consumer_checks": []
+}
+```
+
+`scientific_review`, `focused_checks`, `scoped_use_justification` and consumer
+`reason` values each require at least 40 nonblank characters. Carrier id/kind/domain/library/aliases remain immutable. For changed public
+contract bytes (the exact kind-specific section, deps/dependency roles, or physical contract),
+`interface_changed` must be true and `consumer_checks` must cover the complete
+union of the authorization-time and current transitive cones, each with `{id, sha256, decision: "accept" | "unaffected",
+reason}`. Authorization stores only actual before-consumer IDs/path/hash records, never
+source copies. Completion and replay recompute the current cone and require the
+exact union and current consumer hashes; new consumers invalidate the receipt.
+The native gate argv also binds a lightweight current identity/alias/dependency/
+reference graph fingerprint, so new graph inputs invalidate old owner preparation
+without an unrelated proof-body audit. Root owns those actual reviews. A textual correction can preserve
+mathematical meaning; the review records that distinction. Proof-only repairs
+require scoped supplier-use justification and any actual focused consumer checks,
+not a fabricated full-cone proof audit.
+
+Only predeclared exact source-mirror pointers and computed current-run item
+`dependency_level` consequences may change in manifests/plan. Foreign plan
+context rows and all other planning fields and inventories remain exact.
+Source deps must match their rows, levels must match the full DAG, and the batch
+ledger must match the current full graph. Completion runs the native current
+full-frontier plan and dependency validators, retains immutable import pins and
+old native history, and rejects any unlisted protected source change. Ordinary
+content, contracts, coverage and all other gates still run afterward.
+
+Completion exclusively creates
+`research/RUN-prerequisite-N-owner-repair-completion.json`. A pending or stale
+repair blocks supplemental construction. Receipts and all request/evidence,
+source/metadata and checked-consumer paths enter native `ownerReviewInputs`,
+including receipt absence before admission, so previous owner preparation loses
+currency. Root must freshly prepare and run the full ordinary battery. Neither
+receipt closes a hold or certifies proof acceptance. Failure before a receipt
+write leaves no new receipt; an interrupted/partial exclusive receipt fails
+closed for inspection, with no backup restoration or implicit replay.
+
+
+### Reconcile completed supplemental authors' metadata
+
+Root can run `prerequisites authored-metadata-adopt --run RUN --state-dir DIR
+--request FILE` at the same paused/stopped/drained unfinished supplemental
+boundary, **before** original-source repair authorization. This performs no
+source edit. Eligible `items` are a nonempty subset of the generation's new
+items, never the original frontier. The request uses the common version/run/
+generation/reviewer/reason/writers/evidence fields, an exact committed
+`base_commit`, and `metadata_changes` with the same value-digest envelope and
+exact JSON-pointer convention as original repairs. The committed new-manifest
+baseline must match the immutable generation. Root installs its proposed
+metadata mirrors before invoking this guarded admission; until admission,
+ordinary construction protection rejects those changed manifest bytes.
+
+Allowed selected source mirrors are `statement` (the exact kind-specific public
+section), `sources`, `title`, `deps`, `dependency_roles`, `proof_strategy` and
+`provenance`. Fields must equal actual current source data, with exact expected
+before/after digests. Inventory, pages, original rows, id/kind/domain/library and
+all other scope fields remain fixed; only computed new-item numeric levels may
+also change. Root's same-owner review establishes that the full approved scope
+is preserved by any author clarification, rather than a mechanical assertion of
+semantic equivalence. Each `reviews` row has `id`, current `source_sha256`,
+`scope_preserved: true`, substantive `scientific_review` and `reference_review`
+(including actual reading limits), and exact current full-cone `consumer_checks`
+with the same current-hash/disposition/reason schema as original repairs.
+
+Every affected batch must have its actual native beta result, a matching ended
+successful dispatch/attempt, exact role/label/run/covers, and successful untimed
+result. Missing, failed or still-running authors cannot be adopted. The helper
+runs full current scoped plan/dependency and computed-level checks, then
+exclusively creates `research/RUN-prerequisite-N-authored-metadata.json`. This
+receipt binds the actual sources, Root reviews, references and native results;
+it overrides only the new batches' effective manifest hashes. Original 69 rows
+and sources gain no edit license, and no readiness, coverage, proof acceptance,
+owner hold or native history is fabricated or closed.
+
+Root commits those actual accepted metadata bytes before original-source
+`repair-authorize`. The latter recognizes the authenticated effective new-batch
+baseline and separately owns its admitted old-source consequences. Both
+immutable receipts coexist; the initial generation remains unchanged. Receipt
+absence/presence, request/evidence/source/native-result paths and relevant
+consumer graph projection invalidate previous owner preparation. Replay checks
+current source mirrors, consumers and native result ownership; later changes
+stale the receipt. Fresh ordinary owner preparation and the full battery remain
+required. Interrupted exclusive receipt writes fail closed without backups.

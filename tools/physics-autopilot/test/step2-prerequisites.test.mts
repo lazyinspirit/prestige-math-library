@@ -74,6 +74,8 @@ test('supplement artifacts require real carriers, coverage, readiness and contra
   for(const path of ['research/demo-batch-3.coverage.json','research/demo-batch-3.proof-contracts.json','research/demo-step1-def-third.json','items/def-third.md','library/math/third.md'])assert.ok(artifacts.includes(path),path);
   assert.equal(existsSync(join(f.ctx.repo,'items/def-third.md')),false);
   const gates=stage.gates!(f.ctx),ids=gates.map(gate=>gate.id);
+  const repairInputs=gates.find(gate=>gate.id==='supplemental-construction')!.ownerReviewInputs!;
+  for(const suffix of ['authorization','completion'])assert.ok(repairInputs.includes(`research/demo-prerequisite-1-owner-repair-${suffix}.json`));
   for(const id of ['supplemental-construction','physics-content','item-dependency-levels','coverage-1','coverage-4','content-policy-items','proof-contract','finite-smoke','boundary-audit','citation-fidelity','gate-liveness','supplemental-source-fetch'])assert.ok(ids.includes(id),id);
   assert.ok(!ids.includes('batch-scope-review')); // genuine new review follows construction
   assert.ok(!ids.includes('drift-review')); // original report never gains new review coverage

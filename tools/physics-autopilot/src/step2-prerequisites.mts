@@ -10,7 +10,29 @@ import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import {readSchedulingBatchDependencyLevels} from '../../physics-support/batch-dependency-levels.mjs';
 import {step1HoldPacket} from './step1-hold-evidence.mjs';
 import type { Stage } from './types.mts';
+import {authorizePrerequisiteRepairs,completePrerequisiteRepairs} from '../../physics-support/step2-prerequisite-repairs.mjs';
+import {runPages} from '../../physics-support/item-dependency-levels.mjs';
+import {adoptAuthoredMetadata} from '../../physics-support/step2-authored-metadata.mjs';
 export { assertNoPrerequisiteTransaction };
+
+export function repairStep2Prerequisites({repo,run,stateDir,request,complete=false,authored=false,scan=scanAppendProcesses}:any){
+  const validate=()=>{
+    const dir=mkdtempSync(join(tmpdir(),'physics-prerequisite-repair-'));
+    try{
+      const pages=runPages(repo,run),selector=join(dir,'pages.json'),items=join(dir,'items.json');
+      writeFileSync(selector,JSON.stringify(pages.map((page:any)=>page.id)));
+      writeFileSync(items,JSON.stringify(pages.flatMap((page:any)=>page.items.map((item:any)=>item.id))));
+      for(const argv of [
+        ['tools/physics-support/validate-plan.mjs','research/plan-spec.json','--repo',repo,'--pages-file',selector],
+        ['tools/physics-support/depcheck.mjs','--items-file',items,'--quiet'],
+      ]){
+        const result=spawnSync(process.execPath,argv,{cwd:repo,encoding:'utf8',env:{...process.env,PHYSICS_REPO:repo},maxBuffer:32*1024*1024});
+        if(result.status!==0)throw Error(`Repair current full-frontier validation failed: ${result.stderr||result.stdout}`);
+      }
+    }finally{rmSync(dir,{recursive:true,force:true});}
+  };
+  return (authored?adoptAuthoredMetadata:complete?completePrerequisiteRepairs:authorizePrerequisiteRepairs)(repo,run,stateDir,request,{scan,validate});
+}
 
 export function registerStep2Prerequisites({repo, run, stateDir, request, scan = scanAppendProcesses}: any) {
   const invoke = ({plan, pages}: any) => {
