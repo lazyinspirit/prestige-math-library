@@ -1,0 +1,37 @@
+// Read-only production source inspection; writes only this private research directory.
+import {readFileSync,writeFileSync,readdirSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {resolve,join,relative} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+import {markdownFiles,readItem} from '../../../../../tools/physics-support/physics-content.mjs';
+import {readOriginalItemIdentity} from '../../../../../tools/physics-support/original-item-index.mjs';
+import {frontierMathematicsImportScope} from '../../../../../tools/physics-support/frontier-import-scope.mjs';
+import {readRunManifestPages} from '../../../../../tools/physics-support/run-manifest-pages.mjs';
+const dir=fileURLToPath(new URL('.',import.meta.url)),root=resolve(dir,'../../../..');
+const run='advanced-qft-supersymmetry-build-2026-10-23',id='lem-borel-product-of-second-countable-spaces',path=`items/${id}.md`;
+const sha=x=>createHash('sha256').update(x).digest('hex'),hash=p=>sha(readFileSync(resolve(root,p)));
+const receipt=JSON.parse(readFileSync(join(root,'research/math-imports.json')));
+const originals={items:markdownFiles(join(receipt.source_root,'items')).map(readOriginalItemIdentity),pages:markdownFiles(join(receipt.source_root,'library')).filter(p=>!p.split('/').at(-1).startsWith('_')).map(p=>({...readItem(p),path:relative(receipt.source_root,p)}))};
+const scope=frontierMathematicsImportScope(root,run,{receipt,originals});
+const pages=readRunManifestPages(root,run),names=readdirSync(join(root,'research')).filter(n=>new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(n)).sort();
+const queue=[id],seen=new Set(),parent={};
+for(let i=0;i<queue.length;i++){const x=queue[i];if(seen.has(x))continue;seen.add(x);for(const y of scope.consumers.get(x)??[]){if(!(y in parent)&&y!==id)parent[y]=x;queue.push(y);}}
+const consumers=[...seen].filter(x=>scope.owned.has(x)).sort();
+const chain=x=>{const out=[x];while(parent[x]){x=parent[x];out.push(x);}return out;};
+const original=resolve(receipt.source_root,path),before=readFileSync(join(root,path)),after=readFileSync(original);
+const commit='29450da28f82d81f6865b920e64b2dd106cbe4e6',blob='7593c68f7ed478e48d42176d47580c5899ef10b3';
+const opts={cwd:receipt.source_root,env:{...process.env,GIT_NO_REPLACE_OBJECTS:'1'}};
+const actualBlob=execFileSync('git',['rev-parse','--verify',`${commit}:${path}`],opts).toString().trim();
+const committed=execFileSync('git',['cat-file','blob',`${commit}:${path}`],opts);
+const deletion='verification:\n  precheck: pending\n',text=before.toString(),parts=text.split(deletion);
+const byteReview={pinned_sha256:sha(before),current_sha256:sha(after),source_commit:commit,source_blob:actualBlob,committed_bytes_equal:committed.equals(after),exact_two_line_deletion:parts.length===2&&Buffer.from(parts.join('')).equals(after),body_identical:before.subarray(before.indexOf(Buffer.from('\n---\n'))+5).equals(after.subarray(after.indexOf(Buffer.from('\n---\n'))+5))};
+if(actualBlob!==blob||!byteReview.committed_bytes_equal||!byteReview.exact_two_line_deletion||!byteReview.body_identical)throw Error('Exact mechanical transition not observed');
+const evidencePath=relative(root,join(dir,'mechanical-review.json'));
+const evidence={version:1,run,status:'pending-root-adoption',reviewer:'/root/fusion_two_category_conventions',native_review:false,scientific_acceptance:false,reading_limit:'Only exact raw-byte transition, parsed dependency/identity scope and consumer chains were inspected. No mathematical body audit, independent source reading, proof approval or judge-stamp approval was performed or inferred.',scope:{batches:names.length,pages:pages.length,manifest_items:pages.reduce((n,p)=>n+p.items.length,0),owned_items:scope.owned.size,imported_items:scope.importedItems.size,import_paths:scope.paths.size},transition:byteReview,consumer_paths:consumers.map(x=>({id:x,dependency_path:chain(x),source_sha256:hash(`items/${x}.md`)})),canonical_authority_absent:!existsSync(join(root,'research',`${run}-original-maintenance.json`)),plan_sha256:hash('research/plan-spec.json'),import_receipt_sha256:hash('research/math-imports.json')};
+writeFileSync(resolve(root,evidencePath),JSON.stringify(evidence,null,2)+'\n');
+const frontier=Object.fromEntries(names.map(n=>[`research/${n}`,hash(`research/${n}`)]));
+const entry={path,pinned_sha256:sha(before),original_path:original,original_sha256:sha(after),verification_metadata_relocation:{source_commit:commit,source_blob:blob},evidence:[{path:evidencePath,sha256:hash(evidencePath)}],consumers:consumers.map(x=>({id:x,decision:'unaffected',reason:'Pending Root adoption: exact statement/proof bytes and all dependency metadata are unchanged by the two-line verification metadata relocation; this is a mechanical use-interface check only, with no proof or source audit.'})),consumer_sha256:Object.fromEntries(consumers.map(x=>[x,hash(`items/${x}.md`)])),titles:[]};
+const candidate={version:1,run,reviewer:'/root',native_review:false,status:'pending-root-adoption',reason:'PENDING Root review and adoption only: exact committed Borel metadata relocation preserves every statement/proof byte and dependency interface; no scientific proof or stamp approval is inferred.',import_receipt_sha256:hash('research/math-imports.json'),frontier,entries:[entry],inputs:{'research/math-imports.json':hash('research/math-imports.json'),...frontier,[path]:sha(before),[original]:sha(after),[evidencePath]:hash(evidencePath),...Object.fromEntries(consumers.map(x=>[`items/${x}.md`,hash(`items/${x}.md`)]))}};
+writeFileSync(join(dir,'PENDING-original-maintenance.json'),JSON.stringify(candidate,null,2)+'\n');
+console.log(JSON.stringify({directory:relative(root,dir),scope:evidence.scope,consumers,transition:byteReview,canonical_authority_absent:evidence.canonical_authority_absent},null,2));
