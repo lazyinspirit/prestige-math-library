@@ -1802,3 +1802,16 @@ actual Root full-scope/reference/consumer review and real ended native results.
 Its effective baseline can then be committed and consumed by original-source
 repair authorization. Both receipts invalidate old owner preparation and retain
 all ordinary gates; detailed schema is in the native physics README.
+
+
+At authored-metadata admission, native plan/dependency subjects are the actual
+new generation pages/items with full prerequisite context; unresolved old-page
+prerequisite defects remain blockers before the full supplemental battery.
+The existing original repair authorization may explicitly name old protected
+draft `pages` for frontmatter `requires` additions only. Original entries/order,
+body, inventory and every other source byte remain exact. Root reviews actual
+source-dependency homes and exact before/after hashes, with matching explicit
+plan/manifest requires pointers. Published mathematical context may be local or
+imported, but is not edited. The existing repair completion receipt binds the
+used context and replay checks it. Full current-frontier validation at original
+repair completion and all ordinary native gates remain mandatory.

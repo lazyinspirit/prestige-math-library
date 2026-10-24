@@ -260,7 +260,8 @@ with the same current-hash/disposition/reason schema as original repairs.
 Every affected batch must have its actual native beta result, a matching ended
 successful dispatch/attempt, exact role/label/run/covers, and successful untimed
 result. Missing, failed or still-running authors cannot be adopted. The helper
-runs full current scoped plan/dependency and computed-level checks, then
+runs plan/dependency validation for all new generation pages/items with their
+full prerequisite context, and current computed-level checks, then
 exclusively creates `research/RUN-prerequisite-N-authored-metadata.json`. This
 receipt binds the actual sources, Root reviews, references and native results;
 it overrides only the new batches' effective manifest hashes. Original 69 rows
@@ -276,3 +277,41 @@ consumer graph projection invalidate previous owner preparation. Replay checks
 current source mirrors, consumers and native result ownership; later changes
 stale the receipt. Fresh ordinary owner preparation and the full battery remain
 required. Interrupted exclusive receipt writes fail closed without backups.
+
+
+### Add missing old-page prerequisite context under the existing repair guard
+
+Original-source `repair-authorize` optionally accepts `pages: [PAGE_ID, ...]`
+in addition to its scientific item list. Each page must be an original registered
+protected draft at its exact category/path, with current raw bytes matching the
+immutable generation and committed Git preimage. New pages, published pages,
+foreign pipeline markers and unregistered carriers receive no edit license.
+The authorization stores `page_sources` hashes separately from item sources.
+
+The sole permitted page source change is additions to the existing explicit
+frontmatter `requires` sequence. Existing entries and their relative order must
+be preserved; entries remain unique. The complete body and every other source
+byte outside that YAML field remain exact, including inventory and order. Each
+added target must have a real unambiguous published mathematical or current-run
+mathematical home in the current plan, and its actual item inventory must contain
+a dependency used by a source item on the repaired page. Local published math
+homes are valid context without being immutable import snapshots; no supplier
+source is modified by this permission.
+
+Exact `metadata_changes` pointers `/pages/P/requires` (plan) or `/P/requires`
+(manifest) bind before/after value digests and must belong only to authorized
+pages. Both manifest and plan lists must match the exact current page source.
+Completion also requires `page_reviews`, one row per page: `id`, exact
+`before_sha256`/`after_sha256`, substantive `scoped_use_justification` for the
+actual dependency-home additions, and `focused_checks` confirming preserved
+body/inventory/other metadata. These are reading-context checks, not a claim of
+new scientific interface review. The existing immutable completion receipt binds
+these sources plus current used item/supplier/home hashes as `page_context`;
+replay rechecks the additions and exact context. Native owner inputs bind them.
+
+New-author metadata admission validates only its actual new generation subjects
+and full prerequisite context. Known old-page defects remain unresolved, and
+that admission grants no proof readiness or acceptance. Original repair
+**completion still validates the full current run frontier**, including every
+old page, after all admitted old source/page/metadata repairs. The subsequent
+full supplemental native battery and every ordinary gate remain unchanged.

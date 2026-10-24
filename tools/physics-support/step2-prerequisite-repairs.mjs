@@ -13,6 +13,7 @@ import {runPages,dependencyLevels} from './item-dependency-levels.mjs';
 import {checkBatchDependencyLevels} from './batch-dependency-levels.mjs';
 import {frontmatterList} from './frontmatter-list.mjs';
 import {checkedAuthoredMetadata,authoredMetadataPath} from './step2-authored-metadata.mjs';
+import {yaml} from './pathway-lib.mjs';
 
 const assert=(ok,message)=>{if(!ok)throw Error(`Prerequisite repair: ${message}`);};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -50,7 +51,7 @@ function evidenceInputs(row){return [row.request?.path,...(row.evidence??[]).map
 export function repairReviewInputs(root,run,number){
   const paths=repairPaths(run,number),inputs=Object.values(paths);
   for(const path of Object.values(paths))if(!absent(root,path)){
-    const row=json(root,path);inputs.push(...evidenceInputs(row),...Object.keys(row.sources??{}),...Object.keys(row.metadata??{}));
+    const row=json(root,path);inputs.push(...evidenceInputs(row),...Object.keys(row.sources??{}),...Object.keys(row.page_sources??{}),...Object.keys(row.page_context??{}),...Object.keys(row.metadata??{}));
     if(path===paths.completion&&row.request?.path)for(const review of json(root,row.request.path).reviews??[])for(const consumer of review.consumer_checks??[])inputs.push(`items/${consumer.id}.md`);
   }
   return [...new Set(inputs)];
@@ -78,7 +79,7 @@ function affectedConsumers(root,auth,id,current=currentGraph(root)){
 // Gate argv carries this lightweight graph digest, avoiding unrelated proof-body binding.
 export function repairGraphFingerprint(root,run,number){
   const paths=repairPaths(run,number),authored=authoredMetadataPath(run,number),ids=new Set(),before=new Set();
-  if(!absent(root,paths.authorization)){const auth=json(root,paths.authorization);for(const path of Object.keys(auth.sources))ids.add(basename(path,'.md'));for(const rows of Object.values(auth.before_consumer_cones??{}))for(const row of rows)before.add(row.id);}
+  if(!absent(root,paths.authorization)){const auth=json(root,paths.authorization);for(const path of Object.keys(auth.sources))ids.add(basename(path,'.md'));for(const page of runPages(root,run))if(Object.hasOwn(auth.page_sources??{},`library/${page.category}/${page.id}.md`))for(const item of page.items)ids.add(item.id);for(const rows of Object.values(auth.before_consumer_cones??{}))for(const row of rows)before.add(row.id);}
   if(!absent(root,authored))for(const id of json(root,json(root,authored).request.path).items)ids.add(id);
   if(!ids.size)return null;
   const graph=currentGraph(root),selected=new Set([...ids,...before,...consumers(root,[...ids],[],graph).map(row=>row.id)]);
@@ -86,8 +87,44 @@ export function repairGraphFingerprint(root,run,number){
 }
 // Digests distinguish absent fields from present JSON null without storing preimages.
 export const repairValueDigest=value=>hash(JSON.stringify(value===undefined?{present:false}:{present:true,value}));
+function pagePath(root,id){const pages=json(root,'research/plan-spec.json').pages.filter(page=>page.id===id);assert(pages.length===1,'ambiguous/missing planned page');return `library/${pages[0].category}/${id}.md`;}
+function pageRequires(source){
+  const {fm}=splitFrontmatter(source),doc=yaml().parseDocument(fm),pairs=doc.contents?.items?.filter(pair=>pair.key?.value==='requires')??[];
+  assert(!doc.errors.length&&pairs.length===1&&yaml().isSeq(pairs[0].value),'page requires must be an explicit sequence');
+  const meta=parseFrontmatter(fm),start=source.match(/^---\r?\n/)?.[0].length;
+  assert(start&&Array.isArray(meta.requires)&&meta.requires.every(id=>/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))&&new Set(meta.requires).size===meta.requires.length,'invalid page requires');
+  const begin=start+pairs[0].key.range[0],end=start+pairs[0].value.range[2];
+  return {meta,requires:meta.requires,rest:source.slice(0,begin)+'requires: <guarded>\n'+source.slice(end)};
+}
+function libraryHomes(root){
+  const walk=dir=>readdirSync(join(root,dir),{withFileTypes:true}).flatMap(row=>row.isDirectory()?walk(`${dir}/${row.name}`):row.name.endsWith('.md')&&!row.name.startsWith('_')?[`${dir}/${row.name}`]:[]);
+  return walk('library').map(path=>{const source=raw(root,path),{fm}=splitFrontmatter(source),id=fm.match(/^page:[ \t]*['"]?([^\s'"\r\n]+)['"]?[ \t]*$/m)?.[1]??basename(path,'.md');return {path,id,source,items:[...frontmatterList(fm,'items'),...frontmatterList(fm,'examples')]};});
+}
+function reviewedPages(root,run,req,auth){
+  const authorized=auth.page_sources??{},reviews=req.page_reviews??[];
+  assert(Array.isArray(reviews)&&reviews.length===Object.keys(authorized).length&&new Set(reviews.map(row=>row.id)).size===reviews.length,'exact page context reviews required');
+  const sources={},context={},graph=currentGraph(root),aliases=new Map(),canonical=new Set(graph.map(row=>row.id)),homes=reviews.length?libraryHomes(root):[],pages=runPages(root,run),planned=json(root,'research/plan-spec.json').pages;
+  for(const row of graph)for(const alias of row.aliases)if(!canonical.has(alias)){assert(!aliases.has(alias)||aliases.get(alias)===row.id,'ambiguous page supplier alias');aliases.set(alias,row.id);}
+  for(const review of reviews){
+    const path=pagePath(root,review.id),expected=authorized[path],before=pageRequires(gitSource(root,auth.base_commit,path).toString()),after=pageRequires(raw(root,path));
+    assert(expected&&review.before_sha256===expected&&review.after_sha256===digest(root,path)&&review.after_sha256!==expected&&text(review.scoped_use_justification)&&text(review.focused_checks),'missing/stale page context review');
+    assert(after.meta.page===review.id&&after.meta.status==='draft'&&(!after.meta.pipeline_run||after.meta.pipeline_run===run)&&before.rest===after.rest,'page body, identity, inventory and other metadata must remain exact');
+    const retained=after.requires.filter(id=>before.requires.includes(id));assert(same(retained,before.requires)&&after.requires.length>before.requires.length,'page requires must only add context, preserving old order');
+    const page=pages.find(row=>row.id===review.id);assert(page&&path===`library/${page.category}/${page.id}.md`,'page repair is outside registered ownership');
+    const used=new Set();for(const item of page.items){const itemPath=`items/${item.id}.md`,source=readItem(file(root,itemPath));assert(Array.isArray(source.deps),'page item deps missing');for(const dep of source.deps)used.add(aliases.get(dep)??dep);context[itemPath]=digest(root,itemPath);}
+    for(const target of after.requires.filter(id=>!before.requires.includes(id))){
+      const candidates=homes.filter(home=>home.id===target);assert(candidates.length===1,'added page context home missing/ambiguous');
+      const home=candidates[0],meta=parseFrontmatter(splitFrontmatter(home.source).fm),current=pages.find(row=>row.id===target);
+      assert(planned.some(page=>page.id===target)&&(meta.library??'mathematics')==='mathematics'&&(meta.status==='published'||current&&current.library==='mathematics'&&home.path===`library/${current.category}/${current.id}.md`),'added page context must be planned published mathematics or current registered mathematics carrier');
+      const suppliers=home.items.filter(id=>used.has(id));assert(suppliers.length,'added page context is not an actual item dependency home');context[home.path]=digest(root,home.path);
+      for(const id of suppliers)context[`items/${id}.md`]=digest(root,`items/${id}.md`);
+    }
+    sources[path]=review.after_sha256;
+  }
+  return {sources,context};
+}
 function pointer(root,path,key,commit){
-  assert(/^\/(?:pages\/)?\d+\/items\/\d+\/(?:deps|dependency_roles|statement)$/.test(key??''),'unsupported metadata pointer');
+  assert(/^\/(?:pages\/)?\d+\/(?:items\/\d+\/(?:deps|dependency_roles|statement)|requires)$/.test(key??''),'unsupported metadata pointer');
   const doc=commit?JSON.parse(gitSource(root,commit,path)):json(root,path),parts=key.slice(1).split('/'),field=parts.pop();
   let row=doc;for(const part of parts){assert(row&&Object.hasOwn(row,part),'missing metadata pointer parent');row=row[part];}
   return {row,field,value:row[field]};
@@ -98,9 +135,10 @@ function changes(root,auth,ids,{current=false}={}){
   for(const change of auth.metadata_changes??[]){
     const key=`${change.path}#${change.pointer}`;assert(!selected.has(key)&&Object.hasOwn(auth.metadata,change.path)&&!change.path.endsWith('-batch-dependency-levels.json'),'invalid/duplicate metadata change');selected.add(key);
     const before=pointer(root,change.path,change.pointer,auth.base_commit);
-    assert(ids.has(before.row.id)&&repairValueDigest(before.value)===change.before_sha256&&/^[a-f0-9]{64}$/.test(change.after_sha256??''),'metadata change not bound to authorized preimage');
+    const page=before.field==='requires',owned=page?Object.hasOwn(auth.page_sources??{},pagePath(root,before.row.id)):ids.has(before.row.id);
+    assert(owned&&repairValueDigest(before.value)===change.before_sha256&&/^[a-f0-9]{64}$/.test(change.after_sha256??''),'metadata change not bound to authorized preimage');
     if(current){
-      const after=pointer(root,change.path,change.pointer),source=readItem(file(root,`items/${before.row.id}.md`));
+      const after=pointer(root,change.path,change.pointer),source=readItem(file(root,page?pagePath(root,before.row.id):`items/${before.row.id}.md`));
       const expected=after.field==='statement'?repairPublicSection(source.raw):source[after.field];
       assert(after.row.id===before.row.id&&repairValueDigest(after.value)===change.after_sha256&&same(after.value,expected),`metadata pointer is not exact repaired source mirror ${key}`);
     }
@@ -111,10 +149,11 @@ function checkAuthorization(root,run,entry,auth){
   ref(root,run,auth.request);auth.evidence.forEach(value=>ref(root,run,value));
   const req=json(root,auth.request.path);
   assert(same(Object.keys(auth.sources).sort(),req.items.map(id=>`items/${id}.md`).sort()),'authorization source inventory changed');
+  assert(same(Object.keys(auth.page_sources??{}).sort(),(req.pages??[]).map(id=>pagePath(root,id)).sort()),'authorization page inventory changed');
   const effective={...entry.manifest_sha256,...checkedAuthoredMetadata(root,run,entry).manifests};
   const keys=[...Object.keys(effective),'research/plan-spec.json',`research/${run}-batch-dependency-levels.json`].sort();
   assert(same(Object.keys(auth.metadata).sort(),keys),'authorization metadata inventory changed');
-  for(const [path,expected] of Object.entries(auth.sources))assert(entry.protected_sources[path]===expected&&hash(gitSource(root,auth.base_commit,path))===expected,`authorization preimage changed ${path}`);
+  for(const [path,expected] of Object.entries({...auth.sources,...auth.page_sources}))assert(entry.protected_sources[path]===expected&&hash(gitSource(root,auth.base_commit,path))===expected,`authorization preimage changed ${path}`);
   for(const [path,expected] of Object.entries(auth.metadata))assert((!effective[path]||effective[path]===expected)&&hash(gitSource(root,auth.base_commit,path))===expected,`authorization metadata preimage changed ${path}`);
   assert(same(auth.metadata_changes,req.metadata_changes??[]),'authorization metadata pointers changed');
   assert(same(Object.keys(auth.before_consumer_cones??{}).sort(),[...req.items].sort()),'authorized consumer inventory changed');
@@ -133,10 +172,19 @@ export function authorizePrerequisiteRepairs(root,run,stateDir,requestPath,{scan
     assert(before&&item.id===id&&item.status==='draft'&&(!item.pipeline_run||item.pipeline_run===run),'only current-run original draft carriers may be repaired');
     assert(digest(root,path)===before&&hash(gitSource(root,req.base_commit,path))===before,`preimage not original committed source ${id}`);sources[path]=before;
   }
+  const page_sources={},ownedPages=runPages(root,run);
+  assert(Array.isArray(req.pages??[])&&new Set(req.pages??[]).size===(req.pages??[]).length,'invalid/duplicate repair pages');
+  for(const id of req.pages??[]){
+    const owned=ownedPages.find(page=>page.id===id),path=owned?`library/${owned.category}/${id}.md`:null;
+    assert(path&&!entry.pages.includes(id)&&Object.hasOwn(entry.protected_sources,path)&&pagePath(root,id)===path,'only original registered protected pages may be repaired');
+    const source=raw(root,path),before=pageRequires(source);
+    assert(before.meta.page===id&&before.meta.status==='draft'&&(!before.meta.pipeline_run||before.meta.pipeline_run===run),'only current-run draft pages may be repaired');
+    assert(digest(root,path)===entry.protected_sources[path]&&hash(gitSource(root,req.base_commit,path))===entry.protected_sources[path],'page preimage not original committed source');page_sources[path]=entry.protected_sources[path];
+  }
   const metadata={...entry.manifest_sha256,...checkedAuthoredMetadata(root,run,entry).manifests,'research/plan-spec.json':digest(root,'research/plan-spec.json'),[`research/${run}-batch-dependency-levels.json`]:digest(root,`research/${run}-batch-dependency-levels.json`)};
   for(const [path,expected] of Object.entries({...entry.protected_sources,...metadata}))assert(digest(root,path)===expected&&hash(gitSource(root,req.base_commit,path))===expected,`uncommitted or changed preimage ${path}`);
   const graph=currentGraph(root),before_consumer_cones=Object.fromEntries(req.items.map(id=>[id,consumers(root,[id],[],graph).map(row=>({id:row.id,path:`items/${row.id}.md`,sha256:digest(root,`items/${row.id}.md`)}))]));
-  const value={version:1,run,generation:entry.number,reviewer:'/root',request:{path:requestPath,sha256:digest(root,requestPath)},evidence:req.evidence,base_commit:req.base_commit,reason:req.reason,sources,metadata,before_consumer_cones,metadata_changes:req.metadata_changes??[],scientific_acceptance:false};
+  const value={version:1,run,generation:entry.number,reviewer:'/root',request:{path:requestPath,sha256:digest(root,requestPath)},evidence:req.evidence,base_commit:req.base_commit,reason:req.reason,sources,page_sources,metadata,before_consumer_cones,metadata_changes:req.metadata_changes??[],scientific_acceptance:false};
   changes(root,value,new Set(req.items));
   assert(boundary(root,run,stateDir,scan,entry)===stateHash,'boundary changed before authorization');
   writeOnce(root,paths.authorization,value);return value;
@@ -170,6 +218,10 @@ function validateMetadata(root,run,entry,auth,ids){
     }
   }
   checkBatchDependencyLevels(root,run);
+  for(const path of Object.keys(auth.page_sources??{})){
+    const source=readItem(file(root,path)),owned=current.find(page=>page.id===source.page),planned=json(root,'research/plan-spec.json').pages.find(page=>page.id===source.page);
+    assert(owned&&planned&&same(source.requires,owned.requires)&&same(source.requires,planned.requires),'page requires mirrors do not match current source');
+  }
 }
 function reviewedSources(root,run,req,entry,auth){
   assert(auth.run===run&&auth.generation===entry.number&&Array.isArray(req.reviews)&&req.reviews.length===Object.keys(auth.sources).length,'exact source reviews required');
@@ -195,12 +247,12 @@ export function completePrerequisiteRepairs(root,run,stateDir,requestPath,{scan,
   const req=request(root,run,requestPath),entry=entryAt(root,run,req.generation),paths=repairPaths(run,entry.number),auth=json(root,paths.authorization);
   const stateHash=boundary(root,run,stateDir,scan,entry);assert(absent(root,paths.completion),'repair completion already exists');
   checkAuthorization(root,run,entry,auth);
-  const {sources,ids}=reviewedSources(root,run,req,entry,auth);
+  const reviewed=reviewedSources(root,run,req,entry,auth),pages=reviewedPages(root,run,req,auth),sources={...reviewed.sources,...pages.sources},ids=reviewed.ids;
   for(const [path,expected] of Object.entries(entry.protected_sources))if(!sources[path])assert(digest(root,path)===expected,`unlisted source changed ${path}`);
   validateMetadata(root,run,entry,auth,ids);
   assert(typeof validate==='function','native full plan/graph validator required');validate();
   const metadata=Object.fromEntries(Object.keys(auth.metadata).map(path=>[path,digest(root,path)]));
-  const value={version:1,run,generation:entry.number,reviewer:'/root',authorization:{path:paths.authorization,sha256:digest(root,paths.authorization)},request:{path:requestPath,sha256:digest(root,requestPath)},evidence:req.evidence,sources,metadata,scientific_acceptance:false};
+  const value={version:1,run,generation:entry.number,reviewer:'/root',authorization:{path:paths.authorization,sha256:digest(root,paths.authorization)},request:{path:requestPath,sha256:digest(root,requestPath)},evidence:req.evidence,sources,page_context:pages.context,metadata,scientific_acceptance:false};
   assert(boundary(root,run,stateDir,scan,entry)===stateHash,'boundary changed before completion');
   for(const [path,expected] of Object.entries({...sources,...metadata}))assert(digest(root,path)===expected,'repair inputs changed before completion');
   ref(root,run,value.authorization);ref(root,run,value.request);value.evidence.forEach(value=>ref(root,run,value));
@@ -212,10 +264,10 @@ export function checkedRepairOverlay(root,run,entry){
   const auth=json(root,paths.authorization);checkAuthorization(root,run,entry,auth);
   assert(!absent(root,paths.completion),'authorized repair incomplete; full battery blocked');
   const done=json(root,paths.completion);ref(root,run,done.authorization);ref(root,run,done.request);done.evidence.forEach(value=>ref(root,run,value));
-  assert(done.version===1&&done.scientific_acceptance===false&&done.authorization.path===paths.authorization&&done.run===run&&done.generation===entry.number&&done.reviewer==='/root'&&same(Object.keys(done.sources).sort(),Object.keys(auth.sources).sort())&&same(Object.keys(done.metadata).sort(),Object.keys(auth.metadata).sort()),'invalid repair completion');
+  assert(done.version===1&&done.scientific_acceptance===false&&done.authorization.path===paths.authorization&&done.run===run&&done.generation===entry.number&&done.reviewer==='/root'&&same(Object.keys(done.sources).sort(),Object.keys({...auth.sources,...auth.page_sources}).sort())&&same(Object.keys(done.metadata).sort(),Object.keys(auth.metadata).sort()),'invalid repair completion');
   for(const [path,expected] of Object.entries({...done.sources,...done.metadata}))assert(digest(root,path)===expected,`repair receipt stale ${path}`);
-  const reviewed=reviewedSources(root,run,json(root,done.request.path),entry,auth);
-  assert(same(reviewed.sources,done.sources),'completion source review map changed');
+  const req=json(root,done.request.path),reviewed=reviewedSources(root,run,req,entry,auth),pages=reviewedPages(root,run,req,auth);
+  assert(same({...reviewed.sources,...pages.sources},done.sources)&&same(pages.context,done.page_context??{}),'completion source/context review map changed');
   return done;
 }
 // Shared only by the bounded physics author-metadata admission protocol.

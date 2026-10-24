@@ -63,7 +63,9 @@ export function adoptAuthoredMetadata(root,run,stateDir,requestPath,{scan,valida
   p.assert(p.absent(root,path)&&p.absent(root,repairPaths(run,entry.number).authorization),'adopt new-author metadata before original repair authorization');
   for(const [file,sha] of Object.entries(entry.protected_sources))p.assert(p.digest(root,file)===sha,'new-author adoption cannot license old-source edits');
   const {pages,owned}=validate(root,run,entry,req),batches=[...new Set(req.items.map(id=>owned.get(id).page.batch))],results=batches.map(batch=>nativeResult(root,run,entry,batch));
-  p.assert(typeof validateNative==='function','native full-frontier validators required');validateNative();
+  p.assert(typeof validateNative==='function','native new-subject validators required');
+  const subjects=pages.filter(page=>entry.batches.includes(page.batch));
+  validateNative({pages:subjects.map(page=>page.id),items:subjects.flatMap(page=>page.items.map(item=>item.id))});
   const manifests=Object.fromEntries(entry.batches.map(batch=>{const file=`research/${run}-batch-${batch}.pages.json`;return [file,p.digest(root,file)];}));
   const value={version:1,run,generation:entry.number,reviewer:'/root',request:{path:requestPath,sha256:p.digest(root,requestPath)},evidence:req.evidence,results,manifests,plan_sha256:p.digest(root,'research/plan-spec.json'),scientific_acceptance:false};
   p.assert(p.boundary(root,run,stateDir,scan,entry)===stateHash,'boundary changed during authored metadata adoption');

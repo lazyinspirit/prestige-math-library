@@ -74,7 +74,7 @@ function fixture(t) {
   return { root, stateDir, statePath, put, read, json, bind, requestPath, request, prepare, calls, originals, evidence, escalation };
 }
 
-function repairFixture(t){
+function repairFixture(t,{pageSetup=false}={}){
   const f=fixture(t),commit=()=>{
     for(const args of [['add','.'],['commit','-qm','Exact fixture repair preimages']]){
       const result=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(result.status,0,result.stderr);
@@ -84,6 +84,12 @@ function repairFixture(t){
   for(const pages of f.originals)for(const page of pages)for(const item of page.items){
     item.dependency_level=0;
     const path=`items/${item.id}.md`;f.put(path,f.read(path).replace('kind:',`status: draft\npipeline_run: ${run}\nkind:`));
+  }
+  if(pageSetup){
+    f.originals[0][0].requires=['original-two-b'];f.originals[0][0].items[0].deps=['lem-original-two'];f.originals[0][0].items[0].dependency_level=1;
+    f.put('items/lem-original-one.md',f.read('items/lem-original-one.md').replace('deps: []','deps: [lem-original-two]'));
+    f.put('library/test/original-one-a.md','---\npage: original-one-a\nstatus: draft\nrequires: [original-two-b]\nitems: [lem-original-one]\nexamples: []\n---\n\nExact untouched page body.\n');
+    f.put('library/test/original-two-a.md','---\npage: original-two-a\nstatus: published\nlibrary: mathematics\nrequires: []\nitems: [lem-original-two]\nexamples: []\n---\n\nPublished supplier context.\n');
   }
   f.put('research/plan-spec.json',{pages:f.originals.flat()});
   f.originals.forEach((pages,i)=>f.put(`research/${run}-batch-${i+1}.pages.json`,pages));
@@ -251,13 +257,14 @@ function authoredFixture(t){
   state.dispatches[`${stage}:${label}`]={stage,role:'beta',label,covers:['3'],attempt:1,startedAt:'2026-01-04T00:00:00.000Z',endedAt:'2026-01-04T01:00:00.000Z',lastExitOk:true};f.put(f.statePath,state);
   f.put(resultPath,{run,role:'beta',label,covers:['3'],attempt:1,stage,started_at:'2026-01-04T00:00:00.000Z',ended_at:'2026-01-04T01:00:00.000Z',ok:true,exit_code:0,timed_out:false});
   const request=`research/${run}-authored-adopt-request.json`,req={...f.json(f.authorization),base_commit:base,items:[id],metadata_changes:changes,reviews:[{id,source_sha256:f.bind(source).sha256,scope_preserved:true,scientific_review:'Root actually checked the full approved assertion and that the author clarification preserves every intended case.',reference_review:'Root read the actual fixture source reference and records the reading limits without claiming native proof acceptance.',consumer_checks:[]}]};f.put(request,req);
-  return {...f,id,source,manifest,resultPath,adoptRequest:request,adoptReq:req,adopt:()=>adoptAuthoredMetadata(f.root,run,f.stateDir,request,{scan:drained,validate:()=>{}})};
+  return {...f,id,source,manifest,resultPath,adoptRequest:request,adoptReq:req,adopt:(validate=()=>{})=>adoptAuthoredMetadata(f.root,run,f.stateDir,request,{scan:drained,validate})};
 }
 
 test('new-author metadata adoption binds real native results without changing sources/history and precedes original repair',t=>{
   const f=authoredFixture(t),registry=f.read(`research/${run}-step2-prerequisites.json`),source=f.read(f.source),state=f.read(f.statePath);
   assert.deepEqual(authoredMetadataReviewInputs(f.root,run,1),[authoredMetadataPath(run,1)]);
-  const adopted=f.adopt();assert.equal(adopted.scientific_acceptance,false);assert.deepEqual(Object.keys(adopted.manifests),[f.manifest]);
+  let subjects;const adopted=f.adopt(selection=>{subjects=selection;});assert.deepEqual(subjects,{pages:['new-one-a','new-one-b'],items:['lem-new-one','ex-new-one']});
+  assert.equal(adopted.scientific_acceptance,false);assert.deepEqual(Object.keys(adopted.manifests),[f.manifest]);
   assert.equal(f.read(f.source),source);assert.equal(f.read(f.statePath),state);assert.equal(f.read(`research/${run}-step2-prerequisites.json`),registry);
   assert.equal(checkedAuthoredMetadata(f.root,run,f.entry).manifests[f.manifest],f.bind(f.manifest).sha256);
   assert(authoredMetadataReviewInputs(f.root,run,1).includes(f.resultPath));
@@ -277,6 +284,42 @@ test('new-author metadata rejects unfinished/failed native authors, old source e
     if(mode==='mirror'){const req=f.json(f.adoptRequest);req.metadata_changes[0].after_sha256=repairValueDigest('Invented narrowed assertion.');f.put(f.adoptRequest,req);}
     assert.throws(f.adopt,/drained|successful|old-source|original rows|exactly mirror/);
     assert.equal(existsSync(join(f.root,authoredMetadataPath(run,1))),false);
+  }
+});
+
+function pageRepairFixture(t){
+  const f=repairFixture(t,{pageSetup:true}),page='original-one-a',pageSource=`library/test/${page}.md`,manifest=`research/${run}-batch-1.pages.json`,requires=['original-two-b','original-two-a'];
+  const auth=f.json(f.authorization);auth.pages=[page];auth.metadata_changes=[{path:manifest,pointer:'/0/requires'},{path:'research/plan-spec.json',pointer:'/pages/0/requires'}].map(row=>({...row,before_sha256:repairValueDigest(['original-two-b']),after_sha256:repairValueDigest(requires)}));f.put(f.authorization,auth);
+  const change=()=>{
+    f.after();const before=f.bind(pageSource).sha256;f.put(pageSource,f.read(pageSource).replace('requires: [original-two-b]','requires: [original-two-b, original-two-a]'));
+    const pages=f.json(manifest),plan=f.json('research/plan-spec.json');pages[0].requires=requires;plan.pages[0].requires=requires;f.put(manifest,pages);f.put('research/plan-spec.json',plan);writeBatchDependencyLevels(f.root,run);
+    const req=f.json(f.completion);req.page_reviews=[{id:page,before_sha256:before,after_sha256:f.bind(pageSource).sha256,scoped_use_justification:'Root checked the actual item dependency supplier home and confirms this adds only necessary prerequisite reading context.',focused_checks:'Root checked unchanged body, complete item inventories and ordering, and all non-requires frontmatter bytes.'}];f.put(f.completion,req);
+  };
+  return {...f,page,pageSource,manifest,change};
+}
+
+test('guarded page requires additions preserve original bytes/history and require exact source mirrors/context',t=>{
+  const f=pageRepairFixture(t),registry=f.read(`research/${run}-step2-prerequisites.json`);f.authorize();f.change();let full=false;
+  const done=f.complete(selection=>{assert.equal(selection,undefined);full=true;});assert(full);
+  assert.equal(done.sources[f.pageSource],f.bind(f.pageSource).sha256);assert(done.page_context['library/test/original-two-a.md']);assert.equal(f.read(`research/${run}-step2-prerequisites.json`),registry);
+  checkedRepairOverlay(f.root,run,f.entry);assert(repairReviewInputs(f.root,run,1).includes('library/test/original-two-a.md'));
+  f.put('library/test/original-two-a.md',f.read('library/test/original-two-a.md')+'\nChanged context.\n');assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/context review map/);
+});
+
+test('page context admission rejects requires deletion, body/inventory edits, foreign ownership and unlisted pages',t=>{
+  for(const mode of ['delete','body','inventory','foreign','unlisted','unused','pointer']){
+    const f=pageRepairFixture(t);
+    if(mode==='foreign'){const auth=f.json(f.authorization);auth.pages=['original-two-a'];f.put(f.authorization,auth);assert.throws(f.authorize,/draft pages/);continue;}
+    f.authorize();f.change();
+    if(mode==='delete')f.put(f.pageSource,f.read(f.pageSource).replace('original-two-b, ',''));
+    if(mode==='body')f.put(f.pageSource,f.read(f.pageSource)+'\nChanged claim.\n');
+    if(mode==='inventory')f.put(f.pageSource,f.read(f.pageSource).replace('items: [lem-original-one]','items: []'));
+    if(mode==='unlisted')f.put('library/test/original-one-b.md',f.read('library/test/original-one-b.md')+'\nUnlisted page edit.\n');
+    if(mode==='unused')f.put(f.pageSource,f.read(f.pageSource).replace('original-two-b, original-two-a','original-two-b, original-one-b'));
+    if(mode==='pointer'){const plan=f.json('research/plan-spec.json');plan.pages[1].requires=['original-one-a','original-two-a'];f.put('research/plan-spec.json',plan);}
+    const req=f.json(f.completion);req.page_reviews[0].after_sha256=f.bind(f.pageSource).sha256;f.put(f.completion,req);
+    assert.throws(f.complete,/only add context|must remain exact|unlisted source|actual item dependency home|unapproved metadata/);
+    assert.equal(existsSync(join(f.root,repairPaths(run,1).completion)),false);
   }
 });
 
