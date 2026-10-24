@@ -26,6 +26,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
   }
   if (mode === 'terminal-heading') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] $\\square$ ## Source qualification\n\nExact unchanged source qualification.\n');
+  if (mode === 'support-consolidation') before += '\n1.2 By [L1], [L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]\n';
   save(source, `items/${id}.md`, before);
   save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${mode === 'fact-label' ? ', lem-title-target' : ''}]\n---\n`);
   importMathematics(root, source);
@@ -38,6 +39,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (mode === 'remarks-tikz') after = after.replace(/```tikzcd[\s\S]*?```/, '```tikz\n\\begin{tikzpicture}\n\\node (A) {A};\n\\end{tikzpicture}\n```');
   if (mode === 'fact-label') after = after.replace('[[lem-title-target]]', `[[lem-title-target|${factLabel}]]`);
   if (mode === 'terminal-heading') after = after.replace('$\\square$ ## Source qualification\n', '∎\n\n## Source qualification\n');
+  if (mode === 'support-consolidation') after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
   save(source, `items/${id}.md`, after);
   const content = itemHashGuard(after), claim = { version: 1, run: 'source-repair', group: 'g', id, pre_sha256: itemHashGuard(before), claimed_at: '2026-10-23T00:00:00Z' };
   const claimLine = JSON.stringify(claim) + '\n', block = `\n${id}: exact fixture repair ${content}.\n`, marker = 'rendering:' + id;
@@ -52,7 +54,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     output: tool === 'precheck' ? definition ? JSON.stringify({summary:{files:1,checked:0,failed:0},results:[{file:`items/${id}.md`,item_id:id,status:'not-applicable'}]}) : `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
   const repair = { version: 1, kind: 'recorded-local-published-repair', id, run: 'source-repair', group: 'g', correction: 'Exact synthetic rendering presentation correction.', content_sha256: content,
     before_file: beforePath, before_raw_sha256: sha(before), pre_sha256: itemHashGuard(before), recorded_at: '2026-10-23T00:00:03Z', ledger_marker: marker, ledger_sha256: sha(block),
-    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
+    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : mode === 'support-consolidation' ? 2 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
     adjudication_file: adjudicationPath, adjudication_sha256: sha(readFileSync(join(source, adjudicationPath))) };
   save(source, repairPath, repair);
   const pages = [];
@@ -67,7 +69,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   save(root, evidence, 'Root fixture review of exact scientific hypotheses, proof presentation equivalence and every actual declared consumer use. No real scientific approval is issued by this test.');
   save(root, ownership, claimLine); save(root, ledger, block);
   const hashFile = path => sha(readFileSync(resolve(root, path)));
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after)) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const consolidation = mode === 'support-consolidation' ? { version: 1, steps: ['1.2'] } : undefined;
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -88,6 +91,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     reading_limits:'Only this exact terminal heading presentation is fixture-reviewed, without new source retrieval, proof acceptance, additional premises or authored consumer coverage.'};
   if (presentationVersion === 2) {
     entry.presentation_version = 2;
+    if (consolidation) entry.proof_support_consolidation = consolidation;
     Object.assign(entry.scientific_review, changes.review_classification);
     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
@@ -292,4 +296,17 @@ test('unfinished, arbitrary, visual-only or unconfirmed findings are not complet
   }
   const f = fixture(t, { findingStatus: 'repaired-and-visually-verified', findingVerdict: 'unconfirmed' }); f.seal();
   assert.throws(() => f.verify(), /main adjudication\/layout evidence/);
+});
+
+test('V2 support consolidation stays inside genuine repair, exact option and per-delta review guards',t=>{
+  const f=fixture(t,{mode:'support-consolidation',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);
+  delete f.entry.proof_support_consolidation;f.seal();assert.throws(()=>f.verify(),/support/);
+  f.entry.proof_support_consolidation={version:1,steps:['1.2']};f.entry.presentation_reviews=[];f.seal();assert.throws(()=>f.verify(),/delta reviews/);
+});
+test('support consolidation opt-in is forbidden on legacy entries',t=>{
+  const f=fixture(t);f.entry.proof_support_consolidation={version:1,steps:['1.2']};f.seal();assert.throws(()=>f.verify(),/requires V2/);
+});
+for(const mutation of [{proof_independent:false},{diagram_mathematics_corrected:true}])test(`new consolidation delta preserves diagram independence ${JSON.stringify(mutation)}`,t=>{
+  const f=fixture(t,{mode:'support-consolidation',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);
+  const adjudication=JSON.parse(readFileSync(join(f.source,f.adjudicationPath),'utf8'));Object.assign(adjudication,mutation);f.save(f.source,f.adjudicationPath,adjudication);f.repair.adjudication_sha256=f.hashFile(join(f.source,f.adjudicationPath));f.save(f.source,f.repairPath,f.repair);f.entry.repair_receipt.sha256=f.hashFile(join(f.source,f.repairPath));f.seal();assert.throws(()=>f.verify(),/diagram independence/);
 });

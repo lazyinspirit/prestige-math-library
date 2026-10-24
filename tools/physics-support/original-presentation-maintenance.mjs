@@ -102,7 +102,65 @@ function proofParts(text) {
   if (!heads.length || new Set(heads.map(h => h[1])).size !== heads.length) fail('invalid numbered proof');
   return { intro: text.slice(0, heads[0].index), steps: heads.map((h, i) => ({ label: h[1], text: text.slice(h.index, heads[i + 1]?.index ?? text.length) })) };
 }
-function proofChange(before, after, deltas) {
+function consolidationOption(value) {
+  if (value === undefined) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !equal(Object.keys(value).sort(), ['steps', 'version']) || value.version !== 1
+      || !Array.isArray(value.steps) || !value.steps.length
+      || value.steps.some(s => typeof s !== 'string' || !/^[1-9]\d*\.[1-9]\d*$/.test(s))
+      || new Set(value.steps).size !== value.steps.length) fail('invalid proof support consolidation option');
+  return { version: 1, steps: [...value.steps] };
+}
+function consolidationTokens(text) {
+  // Protected spans are compared byte-for-byte, never whitespace-normalized.
+  // Fences/comments are deliberately unsupported by this narrowly scoped route.
+  if (/```|~~~|<!--/.test(text)) fail('unsupported protected support consolidation span');
+  const spans = /\$\$[\s\S]*?\$\$|\$(?:\\.|[^$\r\n])*\$|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|`[^`\r\n]*`|\[\[[\s\S]*?\]\]/g;
+  const tokens = []; let at = 0;
+  const prose = s => {
+    if (/\$|`|\[\[|\\\(|\\\[/.test(s)) fail('unclosed protected support consolidation span');
+    return s.replace(/[ \t\r\n]+/g, ' ');
+  };
+  for (const m of text.matchAll(spans)) {
+    tokens.push({ prose: prose(text.slice(at, m.index)) }, { protected: m[0] }); at = m.index + m[0].length;
+  }
+  tokens.push({ prose: prose(text.slice(at)) }); return tokens;
+}
+function supportConsolidation(before, after) {
+  const terminal = text => {
+    const m = /\[([^\]\r\n]+)\]([ \t]*∎)?[ \t\r\n]*$/.exec(text);
+    if (!m || mathOrCodeAt(text, m.index)) fail('invalid consolidation terminal support');
+    return { text: m[0], tags: m[1], marker: m[2]?.trim() ?? '', offset: m.index };
+  };
+  const tags = text => {
+    const out = text.split(',').map(t => t.trim());
+    if (!out.length || out.some(t => !/^(?:[FAL][1-9]\d*|step [1-9]\d*\.[1-9]\d*)$/.test(t))
+        || new Set(out).size !== out.length) fail('invalid consolidation support tags');
+    return out;
+  };
+  const old = terminal(before), next = terminal(after);
+  if (old.marker !== next.marker) fail('consolidation QED changed');
+  const oldBody = before.slice(0, old.offset), nextBody = after.slice(0, next.offset);
+  const clusters = [...oldBody.matchAll(/(\[[^\[\]\r\n]+\])([ \t\r\n]+)\$\$([^\r\n]*?)\$\$/g)];
+  if (clusters.length !== 1) fail('consolidation needs exactly one pre-display support cluster');
+  const c = clusters[0];
+  if (!/[\r\n]/.test(c[2]) || mathOrCodeAt(oldBody, c.index)) fail('consolidation cluster is not prose before display');
+  const removed = tags(c[1].slice(1, -1)), prior = tags(old.tags), current = tags(next.tags);
+  const union = [...new Set([...prior, ...removed])];
+  if (!equal(union, current)) fail('consolidation changed support union');
+  const payload = c[3].replace(/^[ \t]+|[ \t]+$/g, '');
+  // Only the actual observed comma may move out of the math delimiters.
+  if (!payload.endsWith(',') || payload.includes('%') || payload.includes('$')) fail('unsupported consolidation display payload');
+  const inline = '$' + payload.slice(0, -1) + '$,';
+  const folded = oldBody.slice(0, c.index) + inline + oldBody.slice(c.index + c[0].length);
+  const scientific = consolidationTokens(folded);
+  if (!equal(scientific, consolidationTokens(nextBody))) fail('consolidation changed scientific tokens');
+  return { version: 1, terminal_before: old.tags, terminal_after: next.tags,
+    removed_cluster: { text: c[1], offset: c.index }, support_union: union,
+    display_before: '$$' + c[3] + '$$', inline_after: inline,
+    qed: old.marker, scientific_tokens_sha256: sha(JSON.stringify(scientific)) };
+}
+function proofChange(before, after, deltas, consolidation) {
   const a = proofParts(before), b = proofParts(after);
   if (!equal(a.steps.map(s => s.label), b.steps.map(s => s.label))) fail('proof step sequence change');
   let technique = null;
@@ -125,13 +183,18 @@ function proofChange(before, after, deltas) {
         qed = { before_marker: '\\qed', after_marker: '∎', before_suffix: oldMarker[0], after_suffix: nextMarker[0] };
       }
     }
-    if (oldSupport === undefined || oldSupport !== support(y.text)) fail('changed proof support labels');
-    const delta = { id: `Proof:step:${x.label}`, kind: qed ? 'proof-terminal-qed' : trim(x.text) === trim(y.text) ? 'separator-spacing' : 'proof-step-presentation', section: 'Proof', label: x.label, before: x.text, after: y.text, ...(qed ? { terminal_qed: qed } : {}) };
+    let consolidated = null;
+    if (oldSupport === undefined || oldSupport !== support(y.text)) {
+      if (!consolidation?.steps.includes(x.label) || qed) fail('changed proof support labels');
+      consolidated = supportConsolidation(x.text, y.text);
+    }
+    const delta = { id: `Proof:step:${x.label}`, kind: consolidated ? 'proof-support-consolidation' : qed ? 'proof-terminal-qed' : trim(x.text) === trim(y.text) ? 'separator-spacing' : 'proof-step-presentation', section: 'Proof', label: x.label, before: x.text, after: y.text, ...(qed ? { terminal_qed: qed } : {}), ...(consolidated ? { support_consolidation: consolidated } : {}) };
     steps.push({ label: x.label, before: x.text, after: y.text, kind: delta.kind }); deltas.push(delta);
   }
   return { technique, steps };
 }
-export function originalPresentationChanges(beforeBytes, afterBytes) {
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation) {
+  const consolidation = consolidationOption(proofSupportConsolidation);
   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
   const verification = { before: prior.verification ?? null, after: current.verification ?? null };
@@ -153,7 +216,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes) {
     const x = a.values.get(name), y = b.values.get(name);
     if (name === primary) interfaceChange(x, y, name, deltas);
     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
-    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas));
+    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation));
     else {
       if (x !== y) {
         const extra = y?.startsWith(x) ? y.slice(x.length) : null;
@@ -180,11 +243,15 @@ export function originalPresentationChanges(beforeBytes, afterBytes) {
     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
     proof: steps.length || technique ? 'equivalent-presentation' : 'unchanged',
   };
-  return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas };
+  if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
+  return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas, ...(consolidation ? { proof_support_consolidation: consolidation } : {}) };
 }
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
+  const consolidation = consolidationOption(entry.proof_support_consolidation);
+  if (!equal(consolidation, changes.proof_support_consolidation ?? null)
+      || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');

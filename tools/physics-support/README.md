@@ -155,6 +155,17 @@ See [the V2 protocol](original-presentation-maintenance.md) for the precise
 classification and review fields. This changes neither category handling nor
 immutable imports, authority or native readiness.
 
+V2 support-label consolidation has an additional explicit, per-step opt-in:
+`proof_support_consolidation: {version: 1, steps: ['2.2']}`. It permits only the
+exact same-step pre-display-cluster/terminal-support union and narrowly checked
+display-to-inline comma movement described in the
+[V2 protocol](original-presentation-maintenance.md). Every scientific token,
+protected span, source/consumer binding and individual Root delta review remains
+required. Unused requests and legacy opt-ins fail; ordinary V2 extraction output
+is unchanged without this field. The new delta retains the existing upstream
+diagram-independence requirement. No import, source acceptance or native gate
+waiver follows from extraction.
+
 The original-successor wrapper recognizes exactly the authenticated confirmed
 finding statuses `repaired`, `repaired-and-visually-verified` and `resolved` as
 completed repairs. These are exact completion values on confirmed findings in

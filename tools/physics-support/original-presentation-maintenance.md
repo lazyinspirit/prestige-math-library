@@ -1,6 +1,6 @@
 # Opt-in V2 original item presentation protocol
 
-`originalPresentationChanges(beforeBytes, afterBytes)` describes exact structural
+`originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation?)` describes exact structural
 changes. It does **not** decide mathematical equivalence or grant source,
 publication, import, consumer, native-review or gate authority. Legacy
 `originalRenderingChanges` is unchanged. Only an explicit
@@ -35,6 +35,31 @@ V2 module bytes, so changing the extractor invalidates a cached owner receipt.
   deltas requiring individual reviews. Definitions retain Proof and protected
   Well-definedness/Well-formedness suffixes, apart from represented section
   separators; no well-definedness argument may be silently rewritten.
+- A separately typed V2 entry may opt in to a specific support consolidation:
+  `proof_support_consolidation: {version: 1, steps: ['2.2']}`. The native wrapper
+  passes this exact object as the extractor's third argument only for V2.
+  Unknown, duplicate, malformed or unused step requests fail; legacy entries
+  reject the field. Without it, changed terminal support still fails.
+  In the named step only, one prose support cluster immediately before one
+  single-line `$$...$$` display may be removed and consolidated into terminal
+  support. The final ordered tags must equal the stable union of the old final
+  tags and that one cluster, without duplicates, new or lost tags. The QED
+  marker must remain identical. The display becomes inline math with exactly
+  the same payload bytes after outer space trimming; only its existing final
+  comma may move immediately outside the new delimiters. All surrounding
+  scientific tokens stay fixed: only prose whitespace can collapse, while
+  other math, inline code and wikilink spans compare byte-for-byte. Code fences,
+  HTML comments, ambiguous clusters, unclosed spans, cross-step movement and
+  other payload/punctuation rewrites fail conservatively. Code, math indices
+  and wikilinks cannot supply the removed cluster.
+  This emits `proof-support-consolidation` with the full before/after step,
+  exact removed cluster/offset, old/new final support, stable union, display and
+  inline bytes, QED and scientific-token hash. The result also binds the exact
+  opt-in object. Its ordinary exact per-delta Root review, evidence, source
+  hashes, scientific classification and main repair authentication are still
+  mandatory; it also participates in the existing diagram-independence guard.
+  This is support presentation bookkeeping, not acceptance of new premises or
+  a general support/TeX normalization rule.
 - A literal terminal old `\qed` may become `∎` only on the actual final
   numbered Proof step. The entire preceding step text, including exact support
   tags and mathematics, must be byte-identical; only the marker separator and
