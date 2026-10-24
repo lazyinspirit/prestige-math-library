@@ -443,11 +443,74 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
   }
   return { technique, steps };
 }
-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay) {
-  const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay);
+function terminalRemarksOption(value) {
+  if (value === undefined) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !equal(Object.keys(value).sort(), ['step', 'version']) || value.version !== 1
+      || typeof value.step !== 'string' || !/^[1-9]\d*\.[1-9]\d*$/.test(value.step)) fail('invalid terminal Remarks heading option');
+  return { version: 1, step: value.step };
+}
+function terminalRemarksBody(before, after, option, deltas) {
+  const old = '∎ ## Remarks\n\n', next = '∎\n\n## Remarks\n\n', start = before.indexOf(old);
+  if (start < 0 || start !== before.lastIndexOf(old) || [...before.matchAll(/∎/g)].length !== 1
+      || before.slice(0, start) + next + before.slice(start + old.length) !== after) fail('terminal Remarks whole-body literal change');
+  const a = sections(before), b = sections(after);
+  if (a.names.at(-1) !== 'Proof' || b.names.at(-1) !== 'Remarks' || a.values.has('Remarks')
+      || !equal(a.names, b.names.slice(0, -1))) fail('terminal Remarks section sequence');
+  const proofStart = before.indexOf(a.values.get('Proof')), steps = [...before.slice(proofStart).matchAll(/^(\d+\.\d+) /gm)];
+  if (!steps.length || new Set(steps.map(m => m[1])).size !== steps.length || steps.at(-1)[1] !== option.step
+      || proofStart + steps.at(-1).index >= start || /[\r\n]/.test(before.slice(proofStart + steps.at(-1).index, start))
+      || !/\[[^\]\r\n]+\][ \t]+$/.test(before.slice(0, start))) fail('terminal Remarks is not the named final numbered step');
+  const role = (text, low, high, type, content) => {
+    const rows = [];
+    const walk = (node, ancestors = []) => {
+      if (node.type === type && node.position?.start.offset <= low && node.position?.end.offset >= high
+          && ancestors.every(p => ['root', 'paragraph'].includes(p.type))
+          && (type !== 'heading' || node.depth === 2 && node.position.start.offset === low && node.position.end.offset === high
+            && node.children?.length === 1 && node.children[0].type === 'text' && node.children[0].value === content)) rows.push({ node, ancestors });
+      for (const child of node.children ?? []) walk(child, [...ancestors, node]);
+    };
+    walk(markdownTree(text));
+    if (rows.length !== 1 || links(text).some(r => low < r.end && high > r.start)) fail('terminal Remarks hidden Markdown role');
+    const paragraph = rows[0].ancestors.find(p => p.type === 'paragraph');
+    return { type, start: low, end: high, ...(type === 'heading' ? { depth: 2 } : {}),
+      ...(paragraph ? { paragraph: { start: paragraph.position.start.offset, end: paragraph.position.end.offset } } : {}) };
+  };
+  const canonicalHeadings = text => {
+    const raw = [...text.matchAll(/^## ([^\r\n]+)\r?$/gm)],
+      actual = markdownTree(text).children.filter(node => node.type === 'heading' && node.depth === 2);
+    if (raw.length !== actual.length) fail('terminal Remarks canonical section headings are not actual root H2');
+    return raw.map((m, i) => {
+      const node = actual[i], end = m.index + m[0].replace(/\r$/, '').length;
+      if (node.position?.start.offset !== m.index || node.position?.end.offset !== end
+          || node.children?.length !== 1 || node.children[0].type !== 'text' || node.children[0].value !== m[1])
+        fail('terminal Remarks canonical section headings are not actual root H2');
+      return { name: m[1], type: 'heading', depth: 2, start: m.index, end };
+    });
+  };
+  const sectionRoles = { before: canonicalHeadings(before), after: canonicalHeadings(after) };
+  const stepStart = proofStart + steps.at(-1).index, stepEnd = stepStart + option.step.length + 1;
+  if (sectionRoles.before.find(h => h.name === 'Proof')?.start >= stepStart
+      || sectionRoles.after.find(h => h.name === 'Proof')?.start >= stepStart) fail('terminal Remarks actual Proof heading must precede named step');
+  const roles = { offset_unit: 'UTF-16', canonical_sections: sectionRoles, before_step: role(before, stepStart, stepEnd, 'text'),
+    after_step: role(after, stepStart, stepEnd, 'text'), before: role(before, start, start + '∎ ## Remarks'.length, 'text'),
+    after_qed: role(after, start, start + 1, 'text'), after_heading: role(after, start + 3, start + 13, 'heading', 'Remarks') };
+  if (!roles.before_step.paragraph || roles.before_step.paragraph.start !== stepStart
+      || !equal(roles.before_step.paragraph, roles.before.paragraph)
+      || roles.after_step.paragraph?.start !== stepStart || !equal(roles.after_step.paragraph, roles.after_qed.paragraph))
+    fail('terminal Remarks named step and QED are not one actual proof paragraph');
+  deltas.push({ id: 'Proof:terminal-remarks-heading:' + option.step, kind: 'terminal-remarks-heading', section: 'Proof', label: option.step,
+    before: old, after: next, body_before_sha256: sha(before), body_after_sha256: sha(after),
+    suffix_before_sha256: sha(before.slice(start)), suffix_after_sha256: sha(after.slice(start)),
+    remarks_bytes_sha256: sha(before.slice(start + old.length)), markdown_roles: roles });
+  return after;
+}
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading) {
+  const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay), terminalHeading = terminalRemarksOption(terminalRemarksHeading);
   const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
   if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
+  if (terminalHeading && !resultKinds.has(prior.kind)) fail('terminal Remarks heading requires a proved result');
   if (displayLayout && prior.kind !== 'definition') fail('definition display layout requires definition kind');
   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
   const verification = { before: prior.verification ?? null, after: current.verification ?? null };
@@ -460,8 +523,9 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
     delete prior.title; delete current.title;
   }
   if (!equal(prior, current)) fail('scientific metadata/interface change');
-  const a = sections(before.body), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
-  if (strictProof || displayLayout) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
+  const comparedBefore = terminalHeading ? terminalRemarksBody(before.body, after.body, terminalHeading, deltas) : before.body;
+  const a = sections(comparedBefore), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
+  if (strictProof || displayLayout || terminalHeading) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
   if (!a.values.has(primary) || a.prefix !== b.prefix) fail('primary section/prefix change');
   const appended = !a.values.has('Remarks') && b.names.at(-1) === 'Remarks' && equal(a.names, b.names.slice(0, -1));
   if (!equal(a.names, b.names) && !appended) fail('new/deleted/reordered scientific section');
@@ -498,19 +562,20 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
     interface_section: primary,
     statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
-    proof: steps.length || technique ? 'equivalent-presentation' : 'unchanged',
+    proof: terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
   };
   if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
     ...(displayLayout ? { definition_display_layout: displayLayout } : {}),
-    ...(strictProof || displayLayout ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
+    ...(terminalHeading ? { terminal_remarks_heading: terminalHeading } : {}),
+    ...(strictProof || displayLayout || terminalHeading ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
 }
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
-  const consolidation = consolidationOption(entry.proof_support_consolidation);
+  const consolidation = consolidationOption(entry.proof_support_consolidation), terminalHeading = terminalRemarksOption(entry.terminal_remarks_heading);
   const relocation = relocationOption(entry.proof_reference_relocation), displayLayout = definitionDisplayOption(entry.definition_display_layout);
   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
@@ -520,10 +585,14 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
       || (displayLayout ? changes.kind !== 'definition' || changes.deltas.filter(d => d.kind === 'definition-display-layout').length !== 1
         || changes.deltas.find(d => d.kind === 'definition-display-layout')?.display !== displayLayout.display
         : changes.deltas.some(d => d.kind === 'definition-display-layout'))) fail('unbound definition display layout option');
+  if (!equal(terminalHeading, changes.terminal_remarks_heading ?? null)
+      || (terminalHeading ? changes.deltas.filter(d => d.kind === 'terminal-remarks-heading').length !== 1
+        || changes.deltas.find(d => d.kind === 'terminal-remarks-heading')?.label !== terminalHeading.step
+        : changes.deltas.some(d => d.kind === 'terminal-remarks-heading'))) fail('unbound terminal Remarks heading option');
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
-  if (consolidation || relocation || displayLayout) {
+  if (consolidation || relocation || displayLayout || terminalHeading) {
     const runtime = parserDescriptor();
     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);

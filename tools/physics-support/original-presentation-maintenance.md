@@ -232,3 +232,44 @@ source hashes, authentic finalized native repair, individual per-delta Root
 scientific review/evidence, consumer review and runtime input bindings.
 This option grants no diagram-flag exception or source permission and does
 not normalize whitespace anywhere else.
+
+## Exact terminal Remarks heading boundary
+
+V2 may independently declare `terminal_remarks_heading: {version:1, step:'7.1'}`,
+the sixth extractor argument after the three other optional selectors. It
+applies only to a proved result's unique final numbered step. The entire
+new body must be the single literal replacement `∎ ## Remarks\n\n` with
+`∎\n\n## Remarks\n\n`. All proof, support, Remarks prose (including Fact
+references), section order and remaining bytes are identical. Multiple or
+nonterminal markers, wrong/unused selectors, reference-definition contexts
+and any other body change reject.
+
+Actual synchronous Markdown AST roles must show the old QED/inline heading
+as plaintext in a root paragraph, the unchanged new QED as plaintext, and
+the new exact `## Remarks` as a real root H2. Every raw canonical section header in both bodies must match the same
+ordered actual root H2 sequence, with a real Proof heading preceding the
+named step; headings hidden in code/HTML/link titles cannot establish proof
+ownership. Exact header types, spans and names are recorded. The named step label must
+itself be actual plaintext at the start of the same paragraph as its QED
+in both bodies; raw numbered text inside code or a different paragraph
+cannot borrow a valid plaintext terminator. Math, code, HTML, ordinary link
+titles and canonical wiki contexts cannot supply the boundary. The existing
+403-input lazy parser descriptor and live authority bindings are mandatory.
+
+The single typed delta `terminal-remarks-heading` records the step, exact
+old/new boundary bytes, whole-body and suffix hashes, preserved Remarks hash
+and truthful AST source spans. Its proof classification is
+`terminal-heading-layout-only`; Statement/Facts remain identical. Root's
+exact per-delta reason, reading limits, evidence, actual consumer review and
+genuine finalized native repair remain required.
+
+This is a whitespace heading-boundary repair, analogous to the existing
+terminal source-heading format path, not a substantive proof rewrite or
+new derived Remarks. It does not enter substantiveSteps or the support-only
+flag exception. For this exact one-delta format-only path, both native
+independence keys may be absent only on graphics-free source with true
+mathematical_meaning_preserved. Existing valid true/false flag pairs remain
+valid; partial, null or contradictory supplied flags reject. Existing Remarks
+alone is not a graphics exclusion, because its entire bytes are preserved.
+Actual figures/fences/images/HTML/TikZ retain the original native flags.
+Default/legacy extraction is unchanged; legacy entries reject the selector.

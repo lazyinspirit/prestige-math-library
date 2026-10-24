@@ -208,3 +208,15 @@ Root per-delta/source/consumer reviews remain mandatory. See
 [original-presentation-maintenance.md](original-presentation-maintenance.md)
 for the selector, typed delta and limits; no generic Statement normalization
 or diagram-flag exception is introduced.
+
+V2 also has an exact sixth-argument `terminal_remarks_heading: {version:1,
+step:'7.1'}` selector for separating a unique final proof QED from an inline
+`## Remarks` by the exact two-LF boundary. Entire proof/Remarks/body bytes
+otherwise remain identical and actual plaintext/H2 Markdown roles are bound.
+All canonical section headers must be real root H2 nodes in matching order,
+including a real Proof heading before the named final step.
+The typed boundary-only delta, parser-runtime inputs, exact Root review and
+authenticated finalized main repair remain required. It creates no generic
+proof rewrite or diagram waiver; supplied partial/null/contradictory native
+flags reject and graphics retain their ordinary requirements. See the
+presentation maintenance guide for the full schema and restrictions.

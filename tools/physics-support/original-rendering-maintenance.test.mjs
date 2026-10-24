@@ -26,6 +26,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     before += '\n## Sources\n\nExact unchanged source section.\n';
     save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
   }
+  if (mode === 'terminal-remarks') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] ∎ ## Remarks\n\nExact unchanged Remarks cite [L1].\n');
   if (mode === 'terminal-heading') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] $\\square$ ## Source qualification\n\nExact unchanged source qualification.\n');
   if (mode === 'reference-relocation') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The Evaluation theorem gives $A=A$. [L1, [[lem-title-target]]]');
   if (mode === 'support-consolidation-both') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', () => '1.1 Reflexivity gives [L1]\n\n$$ A=A. $$\n\n[L1]\n');
@@ -43,6 +44,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   if (mode === 'remarks' || mode === 'remarks-tikz' || mode === 'step') after += '\n## Remarks\n\nThe following square displays the identity maps used in the unchanged argument.\n\n```tikzcd\nA \\arrow[r] \\arrow[d] & A \\arrow[d] \\\\\nA \\arrow[r] & A\n```\n';
   if (mode === 'remarks-tikz') after = after.replace(/```tikzcd[\s\S]*?```/, '```tikz\n\\begin{tikzpicture}\n\\node (A) {A};\n\\end{tikzpicture}\n```');
   if (mode === 'fact-label') after = after.replace('[[lem-title-target]]', `[[lem-title-target|${factLabel}]]`);
+  if (mode === 'terminal-remarks') after = after.replace('∎ ## Remarks\n\n', '∎\n\n## Remarks\n\n');
   if (mode === 'terminal-heading') after = after.replace('$\\square$ ## Source qualification\n', '∎\n\n## Source qualification\n');
   if (mode === 'reference-relocation') after = after.replace('The Evaluation theorem gives', 'The [[lem-title-target|Evaluation theorem]] gives').replace('[L1, [[lem-title-target]]]', '[L1]');
   if (mode.startsWith('support-consolidation')) after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
@@ -80,7 +82,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const consolidation = mode.startsWith('support-consolidation') ? { version: 1, steps: mode === 'support-consolidation-both' ? ['1.1', '1.2'] : ['1.2'] } : undefined;
   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
   const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -104,6 +107,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     if (consolidation) entry.proof_support_consolidation = consolidation;
     if (relocation) entry.proof_reference_relocation = relocation;
     if (displayLayout) entry.definition_display_layout = displayLayout;
+    if (terminalHeading) entry.terminal_remarks_heading = terminalHeading;
     Object.assign(entry.scientific_review, changes.review_classification);
     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
@@ -363,3 +367,8 @@ test('authenticated V2 definition display layout retains exact option, review, r
  const f=fixture(t,{mode:'definition-display',definition:true,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);assert.equal(f.entry.changes.deltas[0].kind,'definition-display-layout');delete f.entry.definition_display_layout;f.seal();assert.throws(()=>f.verify(),/scientific Definition/);
 });
 test('legacy entries cannot use the definition display selector',t=>{const f=fixture(t);f.entry.definition_display_layout={version:1,display:0};f.seal();assert.throws(()=>f.verify(),/definition display layout requires V2/);});
+
+test('exact authenticated terminal Remarks boundary preserves old native absent keys and all repair/review guards',t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);delete f.entry.terminal_remarks_heading;f.seal();assert.throws(()=>f.verify(),/support|Remarks/);});
+for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('terminal Remarks boundary rejects supplied false/partial/null flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/native diagram flags/);});
+for(const extra of ['```text\nunchanged graphic context\n```','![image](figure.svg)','<span>unchanged HTML</span>',String.raw`\includegraphics{figure}`])test('terminal Remarks absent flags require graphics-free source '+extra,t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true,sourceExtra:'\n'+extra+'\n'});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/native diagram flags/);});
+test('legacy entries cannot declare terminal Remarks boundary',t=>{const f=fixture(t);f.entry.terminal_remarks_heading={version:1,step:'1.1'};f.seal();assert.throws(()=>f.verify(),/requires V2/);});
