@@ -69,7 +69,9 @@ Every identity extends to localization at the virtual representations whose char
 
 ## Facts & Assumptions
 
-**Given:** The compact torus actions, compact symbol triples, embeddings and doubled-normal complex convention in the Statement. Full AC is assumed through the listed analytic and topological suppliers. [[def-axiom-of-choice]]
+**Given:** The compact torus actions, compact symbol triples, embeddings and doubled-normal complex convention in the Statement.
+
+[A1] Full AC is adopted as the background set-theoretic hypothesis for the listed analytic and topological constructions. [[def-axiom-of-choice]]
 
 [F1] The triple presentation, its $R(T)$ action and the exterior-multiplication normal Koszul symbol are defined explicitly. On a complexified real normal the invariant complex-bilinear metric identifies the bundle with its complex dual. [[def-equivariant-compact-symbol-k-theory]]
 
@@ -89,7 +91,7 @@ Every identity extends to localization at the virtual representations whose char
 
 **Given:** The data and exact conventions in the Statement and [F1]–[F6].
 
-1.1 Apply [F2] to a representative of a compact-support triple. Its continuous bundles and maps are smoothed, radially identified with base bundles, and represented by a homogeneous elliptic symbol by the proved constructions in that supplier. Every relation in the group of [F1] is preserved by [F2], so its additive index descends to $a_{T,M}$. Tensoring by representations proves $R(T)$-linearity. The same supplier proves the claimed operator and complex identifications, using matrix ellipticity and harmonic representatives. Its group restriction and diffeomorphism assertions give the stated naturality. In particular this step constructs an index on symbols; it does not assume an embedding theorem for that index. [F1, F2, algebra]
+1.1 Apply [F2] to a representative of a compact-support triple. Its continuous bundles and maps are smoothed, radially identified with base bundles, and represented by a homogeneous elliptic symbol by the proved constructions in that supplier. Every relation in the group of [F1] is preserved by [F2], so its additive index descends to $a_{T,M}$. Tensoring by representations proves $R(T)$-linearity. The same supplier proves the claimed operator and complex identifications, using matrix ellipticity and harmonic representatives. Its group restriction and diffeomorphism assertions give the stated naturality. In particular this step constructs an index on symbols; it does not assume an embedding theorem for that index. [A1, F1, F2, algebra]
 
 1.2 First consider the zero section of a real rank-$k$ equivariant metric bundle $N\to Y$. Its orthonormal frame bundle $P\to Y$ is a smooth principal right $O(k)$-bundle; $T$ acts on frames by the differential fiber action and commutes with right multiplication. Its compact normal sphere bundle is $Z=P\times_{O(k)}S(\mathbb R^k\oplus\mathbb R)$. It has an invariant open chart $P\times_{O(k)}\mathbb R^k=N$ around its north section. The vertical compact symbol is the $O(k)$-equivariant extension of $b_{\mathbb R^k}$ from this chart. By [F2] it has a smooth equivariant homogeneous realization, whose order may be changed to one without changing its class or index. Its finite-dimensional kernel $K$ and adjoint kernel $L$ obey $[K]-[L]=1$ by [F4]. Invariant orthogonal decompositions into irreducible finite-dimensional $O(k)$ modules then give an actual $O(k)$-equivariant isomorphism $K\cong L\oplus\mathbb C$: equality of their multiplicities is exactly this virtual equality. The fiber has trivial additional $T$ action, so the associated isomorphism is also $T$-equivariant. [F2, F3, F4, construct, algebra]
 

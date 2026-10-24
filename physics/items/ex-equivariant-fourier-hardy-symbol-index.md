@@ -26,7 +26,7 @@ sources:
   references:
     - title: "M. F. Atiyah and I. M. Singer, The Index of Elliptic Operators: I,
         Annals of Mathematics 87 (1968), 484–530"
-      url: https://doi.org/10.2307/1970715
+      url: https://math.uchicago.edu/~shmuel/tom-readings/ASI.pdf
       locator: "§8, printed pp. 525–526, the Hardy projection and rectangle clutching
         computation."
 dependency_level: 2
@@ -34,7 +34,7 @@ dependency_level: 2
 
 ## Example
 
-Assume AC. Let $S^1=\mathbb R/(2\pi\mathbb Z)$, with coordinate $x$ and density $dx/(2\pi)$. Let a compact Lie group $G$ act trivially on $S^1$ and let $V$ be a finite-dimensional unitary complex $G$-representation. On $L^2(S^1;V)$ let $P_+$ be the orthogonal projection onto the closed span of $e^{inx}v$ with $n\ge0$. The bounded operator
+Assume AC. Let $S^1=\mathbb R/(2\pi\mathbb Z)$, with coordinate $x$ and density $dx/(2\pi)$. Let a compact Lie group $G$ act trivially on $S^1$ and let $V$ be a finite-dimensional unitary complex $G$-representation, acting pointwise on $L^2(S^1;V)$. Write $R(G)$ for the Grothendieck group of finite-dimensional continuous complex $G$-representations. For a bounded $G$-equivariant Fredholm operator $Q$ between Hilbert $G$-representations, set $\operatorname{Ind}_G(Q)=[\ker Q]-[\operatorname{coker}Q]\in R(G)$. In the finite-chart classical calculus, an order-zero operator has localized symbols satisfying $|\partial_x^\alpha\partial_\xi^\beta p(x,\xi)|\le C_{\alpha\beta K}\langle\xi\rangle^{-|\beta|}$ on compact coordinate subsets, with a degree-zero leading symbol on nonzero cotangent vectors; ellipticity means that this leading symbol is invertible at every such vector. On $L^2(S^1;V)$ let $P_+$ be the orthogonal projection onto the closed span of $e^{inx}v$ with $n\ge0$. The bounded operator
 
 $$A=e^{ix}P_++(1-P_+)$$
 
@@ -46,7 +46,7 @@ For clarity about orientation, the tautological cotangent form is $\theta=\xi\,d
 
 ## Example references
 
-[Atiyah–Singer I, §8, printed pp. 525–526](https://doi.org/10.2307/1970715)
+[Atiyah–Singer I, §8, printed pp. 525–526](https://math.uchicago.edu/~shmuel/tom-readings/ASI.pdf)
 
 [[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]
 
@@ -66,7 +66,7 @@ For clarity about orientation, the tautological cotangent form is $\theta=\xi\,d
 
 **Given:** The preceding data and symbol/index conventions.
 
-1.1 The exponentials are an orthonormal complete system. Completeness can be checked without an additional spectral theorem: convolution of a continuous periodic function with the Fejér kernel is a trigonometric polynomial and converges uniformly, since the nonnegative kernel has integral one and its mass outside each neighborhood of zero tends to zero; continuous functions are dense in $L^2$ by approximation of interval indicators and simple functions. Thus an $L^2$ function orthogonal to every exponential is zero. Consequently $P_+$ is a norm-one orthogonal projection. On Fourier basis vectors, $A(e^{inx}v)=e^{i(n+1)x}v$ for $n\ge0$ and $A(e^{inx}v)=e^{inx}v$ for $n<0$. These images are exactly the distinct nonzero modes, so $A$ is an isometry onto their closed span, its kernel is zero, and its cokernel is the constants. Every identification commutes with $G$, proving $\operatorname{Ind}_G(A)=-[V]$. [A1, given, construct, algebra]
+1.1 Under [A1], all calculus and index constructions below use the declared AC hypothesis. The exponentials are an orthonormal complete system. Completeness can be checked without an additional spectral theorem: convolution of a continuous periodic function with the Fejér kernel is a trigonometric polynomial and converges uniformly, since the nonnegative kernel has integral one and its mass outside each neighborhood of zero tends to zero; continuous functions are dense in $L^2$ by approximation of interval indicators and simple functions. Thus an $L^2$ function orthogonal to every exponential is zero. Consequently $P_+$ is a norm-one orthogonal projection. On Fourier basis vectors, $A(e^{inx}v)=e^{i(n+1)x}v$ for $n\ge0$ and $A(e^{inx}v)=e^{inx}v$ for $n<0$. These images are exactly the distinct nonzero modes, so $A$ is an isometry onto their closed span, its kernel is zero, and its cokernel is the constants. Every identification commutes with $G$, proving $\operatorname{Ind}_G(A)=-[V]$. [A1, given, construct, algebra]
 
 2.1 To verify the actual classical symbol, let $f$ be a smooth cutoff supported in a coordinate interval of length less than $2\pi$, and extend it by zero to $\mathbb R$. With $\widehat f(\eta)=\int e^{-ix\eta}f(x)\,dx$, local application to $f(x)e^{ix\xi}$ gives $e^{-ix\xi}P_+(fe^{i(\cdot)\xi})(x)=(2\pi)^{-1}\sum_{n\ge0}\widehat f(n-\xi)e^{ix(n-\xi)}$. Every derivative of $\widehat f$ decays faster than every power, by repeated integration by parts. For $\xi\to-\infty$ the sum and all its $x,\xi$ derivatives are rapidly decreasing, since $n-\xi\ge n+|\xi|$. For $\xi\to+\infty$ use full Fourier reconstruction, whose sum is $f(x)$ on the chosen chart, and subtract the sum over $n<0$; that sum has the same rapid estimates. Uniform bounds on the remaining compact $\xi$ interval follow by convergence of the differentiated sums. Hence this localized complete symbol has leading term $f(x)$ on the positive ray and zero on the negative ray, with smooth rapidly decreasing remainders away from a bounded frequency interval. Off the diagonal the localized kernels are smooth by the same integration-by-parts estimates. This establishes $P_+$ in the calculus [F1], with the asserted two-ray symbol. Multiplication by $e^{ix}$ gives the displayed elliptic symbol of $A$. [F1, step 1.1, construct, algebra]
 
@@ -77,3 +77,16 @@ For clarity about orientation, the tautological cotangent form is $\theta=\xi\,d
 ## Remarks
 
 The geometric action on the circle is trivial here. Multiplication by $e^{ix}$ does not commute with geometric circle rotations on the same source and target bundle, so this operator does not supply a rotation-equivariant Hardy index. The coefficient-representation statement is the equivariant assertion used here.
+
+The rectangle below uses coordinates $(x,\xi)$ and the orientation $dx\wedge d\xi$. Its counterclockwise top edge runs from right to left, where the compact representative has value $e^{i\varphi(x)}$; it equals $1$ on the other three edges. The diagram records this setup only; the winding and class identity are established in the Verification.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \draw[->] (-0.2,0) -- (3.5,0) node[below] {$x$};
+  \draw[->] (0,-0.2) -- (0,2.7) node[left] {$\xi$};
+  \draw[->] (0.6,0.6) -- (3.0,0.6) node[midway,below] {$1$};
+  \draw[->] (3.0,0.6) -- (3.0,2.0) node[midway,right] {$1$};
+  \draw[->] (3.0,2.0) -- (0.6,2.0) node[midway,above] {$e^{i\varphi(x)}$};
+  \draw[->] (0.6,2.0) -- (0.6,0.6) node[midway,left] {$1$};
+\end{tikzpicture}
+```
