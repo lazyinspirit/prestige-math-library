@@ -34,17 +34,9 @@ verification:
 Fix a field $k$. In the ordinary categorical case, a **finite semisimple fusion category over $k$** is a finite semisimple tensor category in the sense of the earlier fusion-and-multifusion definition. Concretely, it is a locally small category (each Hom collection is a set) whose Hom spaces are $k$-vector spaces and whose composition maps are $k$-bilinear. A monomorphism $u:Y\to X$ is a morphism for which precomposition $\operatorname{Hom}(Z,Y)\to\operatorname{Hom}(Z,X)$ is injective for every object $Z$; a subobject of $X$ is an isomorphism class of monomorphisms into $X$. An epimorphism is defined by the dual cancellation condition. The category is abelian: it has finite biproducts, kernels, and cokernels, every monomorphism is a kernel, and every epimorphism is a cokernel. Each Hom space is finite-dimensional, and every object has finite length, meaning a finite composition series with simple quotients. A simple object is nonzero with only the zero subobject and itself as subobjects; every object is a finite direct sum of simple objects, and only finitely many simple isomorphism classes occur. It has a $k$-bilinear tensor bifunctor, a tensor unit $\mathbf 1$ with $\operatorname{End}(\mathbf 1)\cong k$, and a natural associator $\alpha_{X,Y,Z}:(X\otimes Y)\otimes Z\to X\otimes(Y\otimes Z)$ and left and right unitors satisfying the pentagon and triangle axioms.
 
 For an object $X$, a left dual $X^L$ consists of morphisms $\operatorname{ev}_L:X^L\otimes X\to\mathbf 1$ and $\operatorname{coev}_L:\mathbf 1\to X\otimes X^L$ for which
-$$
-(\operatorname{id}_X\otimes\operatorname{ev}_L)\circ\alpha_{X,X^L,X}\circ(\operatorname{coev}_L\otimes\operatorname{id}_X)=\operatorname{id}_X,
-\qquad
-(\operatorname{ev}_L\otimes\operatorname{id}_{X^L})\circ\alpha^{-1}_{X^L,X,X^L}\circ(\operatorname{id}_{X^L}\otimes\operatorname{coev}_L)=\operatorname{id}_{X^L}.
-$$
+$$(\operatorname{id}_X\otimes\operatorname{ev}_L)\circ\alpha_{X,X^L,X}\circ(\operatorname{coev}_L\otimes\operatorname{id}_X)=\operatorname{id}_X, \qquad (\operatorname{ev}_L\otimes\operatorname{id}_{X^L})\circ\alpha^{-1}_{X^L,X,X^L}\circ(\operatorname{id}_{X^L}\otimes\operatorname{coev}_L)=\operatorname{id}_{X^L}.$$
 A right dual $X^R$ consists of $\operatorname{ev}_R:X\otimes X^R\to\mathbf 1$ and $\operatorname{coev}_R:\mathbf 1\to X^R\otimes X$ for which
-$$
-(\operatorname{ev}_R\otimes\operatorname{id}_X)\circ\alpha^{-1}_{X,X^R,X}\circ(\operatorname{id}_X\otimes\operatorname{coev}_R)=\operatorname{id}_X,
-\qquad
-(\operatorname{id}_{X^R}\otimes\operatorname{ev}_R)\circ\alpha_{X^R,X,X^R}\circ(\operatorname{coev}_R\otimes\operatorname{id}_{X^R})=\operatorname{id}_{X^R}.
-$$
+$$(\operatorname{ev}_R\otimes\operatorname{id}_X)\circ\alpha^{-1}_{X,X^R,X}\circ(\operatorname{id}_X\otimes\operatorname{coev}_R)=\operatorname{id}_X, \qquad (\operatorname{id}_{X^R}\otimes\operatorname{ev}_R)\circ\alpha_{X^R,X,X^R}\circ(\operatorname{coev}_R\otimes\operatorname{id}_{X^R})=\operatorname{id}_{X^R}.$$
 The unitors are suppressed in these four composites. Rigidity means that each object has both kinds of dual.
 
 For the ordinary fusion-category clauses below, write $\mathcal C$ for this category.
@@ -52,11 +44,7 @@ For the ordinary fusion-category clauses below, write $\mathcal C$ for this cate
 Choose representatives $i\in I$ of the finitely many simple-object isomorphism classes, with $0\in I$ representing $\mathbf 1$. For each $i,j,\ell\in I$, the **fusion multiplicity** $N_{ij}^{\ell}\in\mathbb Z_{\ge 0}$ is the number of copies of $\ell$ in a semisimple decomposition of $i\otimes j$, so $i\otimes j\cong\bigoplus_{\ell\in I}N_{ij}^{\ell}\ell$. The associated fusion space is $V_{ij}^{\ell}:=\operatorname{Hom}_{\mathcal C}(i\otimes j,\ell)$. For $D_\ell:=\operatorname{End}_{\mathcal C}(\ell)$, simplicity makes $D_\ell$ a finite-dimensional division $k$-algebra and $V_{ij}^{\ell}$ a left $D_\ell$-module by postcomposition; its rank as a left $D_\ell$-module is $N_{ij}^{\ell}$. When $D_\ell=k$ (in particular for absolutely simple objects), $\dim_k V_{ij}^{\ell}=N_{ij}^{\ell}$.
 
 For simple $i,j,k,\ell$, the associator induces an isomorphism between the two fusion-channel spaces
-$$
-\bigoplus_{m\in I} V_{mk}^{\ell}\otimes_{D_m}V_{ij}^{m}
-\xrightarrow{\ \cong\ }
-\bigoplus_{n\in I} V_{in}^{\ell}\otimes_{D_n}V_{jk}^{n}.
-$$
+$$\bigoplus_{m\in I} V_{mk}^{\ell}\otimes_{D_m}V_{ij}^{m} \xrightarrow{\ \cong\ } \bigoplus_{n\in I} V_{in}^{\ell}\otimes_{D_n}V_{jk}^{n}.$$
 Here $V_{mk}^{\ell}$ is a right $D_m$-module by $g\cdot d=g\circ(d\otimes\operatorname{id}_k)$, $V_{ij}^{m}$ is a left $D_m$-module by $d\cdot f=d\circ f$, $V_{in}^{\ell}$ is a right $D_n$-module by $f\cdot d=f\circ(\operatorname{id}_i\otimes d)$, and $V_{jk}^{n}$ is a left $D_n$-module by postcomposition. The isomorphism is defined by the semisimple decomposition identifications with $\operatorname{Hom}_{\mathcal C}((i\otimes j)\otimes k,\ell)$ and $\operatorname{Hom}_{\mathcal C}(i\otimes(j\otimes k),\ell)$, and the middle map sends $h$ to $h\circ\alpha^{-1}_{i,j,k}$. Thus its domain and codomain are the stated fusion-channel spaces, not unspecified multiplicity symbols. In chosen decompositions and bases these are the associator matrices; their coherence is the pentagon. The fusion datum includes the actual associator, unitors, and both duality structures, not just the integers $N_{ij}^{\ell}$; the unitors satisfy the triangle and the dual maps satisfy the four displayed snake identities.
 
 A **tensor-invertible object** $D$ is an object for which some object $E$ satisfies $D\otimes E\cong\mathbf 1$ and $E\otimes D\cong\mathbf 1$. An object with no such two-sided inverse is **non-invertible**. Simplicity and tensor-invertibility are separate properties: an object can be simple and non-invertible, or a direct sum of invertible simple objects and non-invertible as a whole.

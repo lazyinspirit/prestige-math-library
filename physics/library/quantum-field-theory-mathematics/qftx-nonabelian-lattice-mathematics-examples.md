@@ -10,5 +10,9 @@ examples:
 requires:
   - qftx-nonabelian-lattice-mathematics
   - countability-and-uncountability
+  - measures-and-their-basic-properties
+  - product-measures-and-the-fubini-tonelli-theorems
+  - td-math-ensembles-and-limits
+  - the-lebesgue-integral-and-the-convergence-theorems
 page_layout: compact-v1
 ---

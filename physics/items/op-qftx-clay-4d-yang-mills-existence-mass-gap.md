@@ -50,45 +50,27 @@ $$
 
 for every $R\in SO(4)$ and $a\in\mathbb R^4$. They are symmetric under permutations of bosonic field insertions, reflection positive, and clustering: when two groups of test-function supports are separated by a Euclidean translation $a$ with $|a|\to\infty$, their joint correlation tends to the product of the separate correlations. For reflection positivity put $\theta x=Jx$, $J=\operatorname{diag}(-1,1,1,1)$. Choose real tensor labels first and extend by complex linearity, writing $P^\dagger$ for the conjugate label. On a rank-$r$ ordinary tensor field define
 
-$$
-\Theta\!\left(c\,\Phi_{P;a_1\cdots a_r}(x)\right)
-=\overline c\,J_{a_1b_1}\cdots J_{a_rb_r}\Phi_{P^\dagger;b_1\cdots b_r}(\theta x).
-$$
+$$\Theta\!\left(c\,\Phi_{P;a_1\cdots a_r}(x)\right) =\overline c\,J_{a_1b_1}\cdots J_{a_rb_r}\Phi_{P^\dagger;b_1\cdots b_r}(\theta x).$$
 
 Repeated tensor indices are summed; upper and lower Euclidean indices have the same reflection matrix. For a pseudotensor there is also the factor $\det J=-1$ for each orientation-tensor factor in its transformation law. Thus an ordinary scalar has no index factor and a pseudoscalar has an additional minus sign. On smeared fields this formula conjugates the test function and composes it with $\theta$, as well as applying the displayed index factors. Extend $\Theta$ antilinearly to field polynomials, reversing the order in a monomial (irrelevant after evaluation by the symmetric bosonic Schwinger distributions). The positive-time test algebra uses finite test-function sequences supported where all times are positive and vanishing to every order on coincidence diagonals when only $\mathcal S_0'$ data are available. Reflection positivity is the real inequality $\langle\Theta(F)F\rangle_S\ge0$ for every $F$ in this algebra. There is no further adjoint after $\Theta$: it already includes coefficient conjugation. For the corrected Osterwalder–Schrader reconstruction theorem, use either of its two regularity hypotheses, E0$'$ or the stronger E0$^{\prime\prime}$. For $n\ge1$, let $\mathcal S_0((\mathbb R^4)^n)$ be the Schwartz functions whose derivatives of every order vanish on each coincidence diagonal $x_i=x_j$, and let $\mathcal S_0'$ be its continuous dual. For an integer $N\ge0$, define the Schwartz seminorm $\|f\|_{N,n}=\max_{|\alpha|\le N}\sup_{x\in\mathbb R^{4n}}(1+|x|)^N|\partial^\alpha f(x)|$. E0$'$ requires $S_n\in\mathcal S_0'$ and $|S_n(f)|\le\sigma_n\|f\|_{sn,n}$ for every $f\in\mathcal S_0$, while E0$^{\prime\prime}$ requires $S_n\in\mathcal S'((\mathbb R^4)^n)$ and the same bound for every $f\in\mathcal S((\mathbb R^4)^n)$. Here $s$ is one fixed positive integer and $\sigma_n\le A^n(n!)^B$ for fixed constants $A\ge1$ and $B>0$. The corrected theorem states that either regularity condition, together with the stated covariance, reflection-positivity, symmetry, and clustering conditions, reconstructs Wightman distributions satisfying the Wightman axioms; those reconstructed distributions must give a realization with all the properties specified here. A Euclidean hierarchy without that reconstructed theory does not meet this alternative.
 
 The perturbative comparison data are fixed as follows; they are formal series, not an asserted construction of the required theory. In a $\kappa$-orthonormal real basis write $[T_a,T_b]=f_{ab}^{\ \ c}T_c$ and define $C_A>0$ by $\sum_{c,d}f_{ac}^{\ \ d}f_{bc}^{\ \ d}=C_A\delta_{ab}$. Use the geometric connection $A=gB$, with canonical gluon variable $B$, and Euclidean gauge-fixed density
 
-$$
-\mathcal L=\tfrac14\kappa(\mathcal F_{\mu\nu},\mathcal F_{\mu\nu})
-+\tfrac1{2\xi}\kappa(\partial_\mu B_\mu,\partial_\nu B_\nu)
-+\kappa(\bar c,-\partial_\mu(\partial_\mu c+g[B_\mu,c])),\qquad
-\mathcal F_{\mu\nu}=\partial_\mu B_\nu-\partial_\nu B_\mu+g[B_\mu,B_\nu].
-$$
+$$\mathcal L=\tfrac14\kappa(\mathcal F_{\mu\nu},\mathcal F_{\mu\nu}) +\tfrac1{2\xi}\kappa(\partial_\mu B_\mu,\partial_\nu B_\nu) +\kappa(\bar c,-\partial_\mu(\partial_\mu c+g[B_\mu,c])),\qquad \mathcal F_{\mu\nu}=\partial_\mu B_\nu-\partial_\nu B_\mu+g[B_\mu,B_\nu].$$
 
 Here $c,\bar c$ are anticommuting adjoint scalar variables used only in the formal calculation, not physical fields in $\mathcal H$. Compute with generic covariant gauge parameter $\xi$ and take $\xi=1$ after renormalization. The coefficient rule is Wick expansion of $\exp(-\int\mathcal L_{\rm int})$ about the quadratic part, with gluon propagator $\delta_{ab}(\delta_{\mu\nu}-(1-\xi)p_\mu p_\nu/p^2)/p^2$, ghost propagator $\delta_{ab}/p^2$, a minus sign per closed ghost loop, and loop measure $d^Dp/(2\pi)^D$, continued meromorphically from $D=4-2\epsilon$. Use modified minimal subtraction at inverse-length scale $\mu$: write $g_B=\mu^\epsilon Z_g g$, and subtract poles with the associated $-\gamma_E+\log(4\pi)$ constants, equivalently use $\bar\mu^2=4\pi e^{-\gamma_E}\mu^2$ and pole subtraction. These are equivalent conventions, used once, not simultaneously. $\gamma_E=\lim_{n\to\infty}(\sum_{j=1}^n1/j-\log n)$. At each loop order subtract proper ultraviolet subdivergences using the already computed counterterm vertices, then subtract the remaining local pole part; add no finite counterterms. More explicitly, for a regularized graph amplitude $I_\Gamma$ let $K$ extract its pole part in the equivalent pole-subtraction convention. Set
 
-$$
-\overline R I_\Gamma=I_\Gamma+\sum_{S\ne\varnothing}\left(\prod_{\gamma\in S}\Delta_\gamma\right)I_{\Gamma/S},\qquad
-\Delta_\Gamma=-K\overline R I_\Gamma,\qquad
-R I_\Gamma=(1-K)\overline R I_\Gamma.
-$$
+$$\overline R I_\Gamma=I_\Gamma+\sum_{S\ne\varnothing}\left(\prod_{\gamma\in S}\Delta_\gamma\right)I_{\Gamma/S},\qquad \Delta_\Gamma=-K\overline R I_\Gamma,\qquad R I_\Gamma=(1-K)\overline R I_\Gamma.$$
 
 The sum runs over sets $S$ of mutually disjoint proper ultraviolet-divergent one-particle-irreducible subgraphs; $\Gamma/S$ contracts each member to its local counterterm vertex. Nested subdivergences enter recursively in $\Delta_\gamma$, and overlapping ones occur in separate allowed sets. At loop order zero there is no subtraction. A counterterm is the local polynomial in external momenta represented by the displayed pole part, with composite-source vertices included. This recursive rule, applied to every graph with its Wick-expansion symmetry factor and then taking its finite $\epsilon\to0$ value, defines the formal coefficients to every finite order. For ultraviolet counterterms use nonexceptional Euclidean external momenta (no vanishing proper partial sum); infrared poles are not subtracted as ultraviolet poles. Composite insertions are generated by adding sources $J_P P(gB)$ before Wick expansion, differentiating in the sources, and applying the same subtraction rule including counterterms polynomial in the sources. Choose and explicitly specify a basis of local tensor monomials at each engineering dimension, including total derivatives, equation-of-motion terms, ghost terms and evanescent tensors needed for this subtraction; retain their mixing before projecting to gauge-invariant physical labels. For labels involving the four-dimensional orientation tensor, use a four-dimensional external-index subspace with its orientation tensor, orthogonal to the formal $(D-4)$-dimensional complement, and subtract in this enlarged basis before taking $\epsilon\to0$. These conventions fix a reference scheme; another scheme is admissible only with an explicit finite coupling redefinition and finite local-field mixing and the corresponding transformed comparison coefficients.
 
 For clarity, the higher beta coefficients are defined by this graph rule rather than by an unknown list of numbers. Let $Z_B,Z_c,Z_1$ be the multiplicative factors making respectively the one-particle-irreducible gluon two-point function, ghost two-point function, and ghost–gluon vertex finite under that recursion; one-particle-irreducible means connected after removal of any one internal edge. Define $Z_g=Z_1/(Z_c\sqrt{Z_B})$, with the formal square root having constant term one, and let $z_1(g)$ be its simple $1/\epsilon$ pole coefficient in the equivalent pole-subtraction convention. The formal four-dimensional beta function is $g^2\,d z_1/dg$. In the notation
 
-$$
-\beta_{\rm pert}(g)=-\sum_{\ell\ge0}\frac{b_\ell g^{2\ell+3}}{(16\pi^2)^{\ell+1}},\qquad
-b_\ell=-2(\ell+1)(16\pi^2)^{\ell+1}[g^{2\ell+2}]z_1(g),
-$$
+$$\beta_{\rm pert}(g)=-\sum_{\ell\ge0}\frac{b_\ell g^{2\ell+3}}{(16\pi^2)^{\ell+1}},\qquad b_\ell=-2(\ell+1)(16\pi^2)^{\ell+1}[g^{2\ell+2}]z_1(g),$$
 
 $[g^k]$ extracts the formal coefficient, $b_0=11C_A/3$ and $b_1=34C_A^2/3$. No closed formula for all $b_\ell$, nor convergence of this series, is required or asserted. The constructed theory must supply a positive dimensionless running coupling $g(\mu)$, nonzero at a finite scale, with $g(\mu)\to0$ as $\mu\to\infty$ and $\beta(g)=\mu\,dg/d\mu$ satisfying, for every integer $L\ge0$,
 
-$$
-\beta(g)+\sum_{\ell=0}^{L}\frac{b_\ell g^{2\ell+3}}{(16\pi^2)^{\ell+1}}
-=o(g^{2L+3})\quad(g\downarrow0).
-$$
+$$\beta(g)+\sum_{\ell=0}^{L}\frac{b_\ell g^{2\ell+3}}{(16\pi^2)^{\ell+1}} =o(g^{2L+3})\quad(g\downarrow0).$$
 
 The correlation comparison also has a finite-order meaning, with no summation of a divergent series presumed. Use a homogeneous local-field basis and its scale-dependent mixing in the reference scheme just defined. At fixed reference inverse length $\mu_*>0$, put $\mu_\lambda=\mu_*/\lambda$ and $g_\lambda=g(\mu_\lambda)$ for dimensionless $\lambda\downarrow0$. For labels $P_1,\ldots,P_n$ of dimensions $d_1,\ldots,d_n$, let $\mathcal W_\lambda(y)=\lambda^{\sum_i d_i}\langle\prod_i\Phi_{P_i}^{(\mu_\lambda)}(\lambda y_i)\rangle_E$ be the Euclidean continuation of the constructed vacuum correlation with fields renormalized at $\mu_\lambda$. The superscript specifies the full field mixing, not just replacement of a coupling in fields fixed at another scale. Let $w_k(y;\mu_*)$ be the coefficient of $g^k$ in the vacuum-normalized Wick expansion from the preceding graph rule, with insertions $P_i(gB)$ at $y_i$ and scale $\mu_*$. Vacuum normalization divides the insertion series by its vacuum series, whose constant term is one. Require for every $N\ge0$ and every smooth compactly supported tensor test function $h$ on the configuration space $y_i\ne y_j$,
 
@@ -102,10 +84,7 @@ In addition, the actual fields must admit an operator product expansion $\Phi_P(
 
 The theory also has a local symmetric stress-energy tensor $T_{\mu\nu}$, conserved as a spacetime distribution, $\partial^\mu T_{\mu\nu}=0$. Require $\mathcal D\subseteq\bigcap_\nu\operatorname{Dom}(P^\nu)$. For real $h\in C_c^\infty(\mathbb R)$ with $\int h(t)dt=1$, set $h_\varepsilon(t)=\varepsilon^{-1}h(t/\varepsilon)$, $\varepsilon>0$. For any real $\chi\in C_c^\infty(\mathbb R^3)$ equal to one near the origin, put $\chi_R(\mathbf x)=\chi(\mathbf x/R)$ and define the genuine spacetime smearing $Q^\nu_{R,\varepsilon}=T^{0\nu}(h_\varepsilon\otimes\chi_R)$. For every fixed $\varepsilon>0$ require
 
-$$
-\lim_{R\to\infty}\langle\psi,Q^\nu_{R,\varepsilon}\varphi\rangle
-=\langle\psi,P^\nu\varphi\rangle\qquad(\psi,\varphi\in\mathcal D).
-$$
+$$\lim_{R\to\infty}\langle\psi,Q^\nu_{R,\varepsilon}\varphi\rangle =\langle\psi,P^\nu\varphi\rangle\qquad(\psi,\varphi\in\mathcal D).$$
 
 The topology here is pointwise convergence of sesquilinear forms on $\mathcal D\times\mathcal D$; its limiting form must be represented on $\mathcal D$ by the specified translation generator. The limit must exist for every such $h,\chi$ and be independent of both. Taking $\varepsilon\downarrow0$ only after $R\to\infty$ therefore gives the same generator in the same topology, independently of $h$. No restriction of the distribution $T$ to a time-zero hypersurface or interchange of these limits is assumed.
 

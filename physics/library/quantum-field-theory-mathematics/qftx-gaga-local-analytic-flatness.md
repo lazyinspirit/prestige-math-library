@@ -21,5 +21,6 @@ requires:
   - the-field-of-fractions-and-localisation
   - construction-of-the-natural-numbers
   - free-modules-and-exact-sequences
+  - field-extensions-and-the-complex-numbers
 page_layout: compact-v1
 ---

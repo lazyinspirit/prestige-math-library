@@ -31,6 +31,8 @@ requires:
   - character-groups-and-elementary-lca-duals
   - cup-cap-cross-products-and-cohomology-rings
   - universal-coefficients-and-kunneth-theorems
+  - compactness-in-metric-spaces
+  - subspaces-products-and-quotients
 examples: []
 page_layout: compact-v1
 ---

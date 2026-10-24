@@ -99,6 +99,7 @@ If a $T$-equivariant isomorphism from the positive-FI quotient to the moduli of 
 
 
 [A4] Full AC is the opening hypothesis. The stable quotient and torus-lift input [[lem-adhm-stable-quotient-and-torus-lift]], the linear-reductivity input [[lem-multiplicative-type-groups-are-linearly-reductive]], the smooth fixed-scheme input [[thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions]], and the localized Borel–Moore input [[thm-qftx-proper-fixed-locus-noncompact-localization]] all use AC through their stated prerequisites. The conditional Gieseker and ordinary-ASD comparisons inherit it through the charge and monad/twistor suppliers in [A1]–[A2]. Only the local finite-word, matrix and character calculations are choice-free. [[def-axiom-of-choice]]
+
 [F6] The noncompact Borel–Moore theorem constructs the intrinsic localized pushforward $p_{F*}(i_*)^{-1}$ for a smooth separated finite-type variety with a finite invariant affine cover and proper fixed locus. It proves the Euler-denominator identity for $\alpha\cap[X]_T$, including the unit insertion, by concentration and self-intersection. Its properness requirement is on the fixed locus; it does not require a chosen compactification or define the integral by the desired fixed-point sum. [[thm-qftx-proper-fixed-locus-noncompact-localization]]
 
 ## Proof

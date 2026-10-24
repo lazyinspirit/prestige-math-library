@@ -56,8 +56,7 @@ the inner product dual to the fixed inner product on $\mathfrak g$; this
 value is independent of the chosen orthonormal basis. The tree-level scalar
 potential is
 
-$$V_{\mathrm{tree}}(\phi)=\sum_{i=1}^n|F_i(\phi)|^2+\frac12\|\mathbf D(\phi)\|_{\mathfrak g^*}^2
-=\sum_{i=1}^n|F_i(\phi)|^2+\frac12\sum_{a=1}^rD_a(\phi)^2.$$
+$$V_{\mathrm{tree}}(\phi)=\sum_{i=1}^n|F_i(\phi)|^2+\frac12\|\mathbf D(\phi)\|_{\mathfrak g^*}^2 =\sum_{i=1}^n|F_i(\phi)|^2+\frac12\sum_{a=1}^rD_a(\phi)^2.$$
 
 For $h\in G$, define its dual action by
 $(\operatorname{Ad}_h^*\lambda)(X)=\lambda(\operatorname{Ad}_{h^{-1}}X)$.

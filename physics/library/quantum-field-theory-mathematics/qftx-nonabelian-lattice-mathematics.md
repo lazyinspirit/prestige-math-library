@@ -20,5 +20,15 @@ requires:
   - the-group-algebra-and-representations
   - lie-groups-invariant-fields-and-the-exponential-map
   - compactness-in-metric-spaces
+  - smooth-manifolds-and-smooth-maps
+  - sigma-algebras-and-borel-sets
+  - finite-window-spatial-point-process-likelihoods
+  - measures-and-their-basic-properties
+  - compact-lie-groups-maximal-tori-and-peter-weyl-theory
+  - product-measures-and-the-fubini-tonelli-theorems
+  - td-math-ensembles-and-limits
+  - the-lebesgue-integral-and-the-convergence-theorems
+  - complex-lp-spaces-and-test-function-conventions
+  - euclidean-surface-measure-divergence-and-green-identities
 page_layout: compact-v1
 ---

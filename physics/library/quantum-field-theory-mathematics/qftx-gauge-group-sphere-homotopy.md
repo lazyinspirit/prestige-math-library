@@ -43,5 +43,6 @@ requires:
   - covering-spaces-and-lifting
   - the-topology-of-euclidean-space
   - local-coefficients-twisted-homology-and-duality
+  - spectra-and-stable-homotopy-groups
 page_layout: compact-v1
 ---

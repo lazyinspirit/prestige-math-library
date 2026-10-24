@@ -136,7 +136,7 @@ The present review actually read that appendix through (A.66), Part II's abstrac
 
 A current bounded arXiv Atom search for fusion-2-category anomaly, categorical anomaly matching, ASCies, and higher exact-sequence/tensor-2-functor terms found the matching paper and neighboring work, including higher-dimensional and mixed-state results. This is evidence of the review performed, not an exhaustive literature theorem or a proof that no solution exists. Exact queries, retrieval hashes, titles and reading limits are recorded in the accompanying owner-resolution evidence. The root owner adopted this formulation after reading Appendix A.6 through (A.66), the Part II abstract and selected lattice introduction/classification passages. This item is never a logical prerequisite for an established result. Workflow readiness and declared dependency levels are recorded outside this mathematical question.
 
-## Status references
+## Sources
 
 [Córdova, Hsin, and Zhang, *Anomalies of Non-Invertible Symmetries in (3+1)d*, Abstract, Introduction, and §5](https://arxiv.org/pdf/2308.11706)
 

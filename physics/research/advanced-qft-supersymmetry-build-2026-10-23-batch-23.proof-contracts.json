@@ -27,8 +27,8 @@
       "derivations": [
         {
           "id": "step-1-1",
+          "claim": "Write $p=a+u$ and $q=b+v$ with $a,b\\in\\mathbb R$, $u=u_1i+u_2j+u_3k$, and $v=v_1i+v_2j+v_3k$. From the stated quaternion multiplication, $uv=-u\\cdot v+u\\times v$; in coordinates, $u\\times v=(u_2v_3-u_3v_2)i+(u_3v_1-u_1v_3)j+(u_1v_2-u_2v_1)k$. Hence $u\\cdot(u\\times v)=v\\cdot(u\\times v)=0$ and $|u\\times v|^2=|u|^2|v|^2-(u\\cdot v)^2$, by expansion of these coordinates. Therefore $pq=(ab-u\\cdot v)+(av+bu+u\\times v)$, and $|pq|^2=(ab-u\\cdot v)^2+|av+bu+u\\times v|^2=(a^2+|u|^2)(b^2+|v|^2)=|p|^2|q|^2$. The same multiplication table gives $q\\overline q=\\overline q q=|q|^2$, so a unit quaternion has inverse $q^{-1}=\\overline q$ and $|q^{-1}|=1$.",
           "step": "1.1",
-          "claim": "Quaternion conjugation preserves the imaginary subspace and norm, is a homomorphism into SO(3), and is onto by the axis-angle representation.",
           "inputs": [
             "given",
             "A1",
@@ -37,8 +37,8 @@
         },
         {
           "id": "step-1-2",
+          "claim": "If $\\pi(q)$ is the identity, then $q$ commutes with every imaginary quaternion. Commuting with both $i$ and $j$ forces $q$ to be real, so the unit condition gives $q=\\pm1$; hence $\\ker\\pi=\\{1,-1\\}$. The differential at the identity sends $v\\in\\operatorname{Im}\\mathbb{H}$ to the linear map $x\\mapsto[v,x]=2v\\times x$. It is injective because $v\\times x=0$ for every $x$ forces $v=0$. The tangent space of $SU(2)\\cong S^3$ has dimension three, and the tangent space of $SO(3)$ at the identity consists of the skew-symmetric $3\\times3$ matrices, also dimension three; therefore the differential is an isomorphism. It preserves brackets because it is the differential of a Lie-group homomorphism. The cross-product bracket is simple: if an ideal contains $v\\ne0$, then it contains $w\\times v$ for every $w$, which spans $v^\\perp$; together with $v$ this is all of $\\mathbb R^3$. Therefore both Lie algebras are nonabelian and simple.",
           "step": "1.2",
-          "claim": "The kernel is {1,-1}; the differential is the isomorphism v -> (x -> [v,x]); and the cross-product Lie algebra is nonabelian and simple.",
           "inputs": [
             "given",
             "A1",
@@ -47,23 +47,34 @@
         },
         {
           "id": "step-2-1",
+          "claim": "For $q=a+u$ unit and $x\\in\\operatorname{Im}\\mathbb H$, the scalar part of $qxq^{-1}$ is $-a(u\\cdot x)+(ax+u\\times x)\\cdot u=0$, so conjugation preserves $\\operatorname{Im}\\mathbb H$. It preserves the norm because $|q x q^{-1}|=|q||x||q^{-1}|=|x|$ by step 1.1. The map $q\\mapsto\\pi(q)$ is a homomorphism by associativity. Its determinant is $+1$: it depends continuously on $q$, takes values in $\\{-1,+1\\}$, and equals $+1$ at $q=1$; the unit quaternions form the connected sphere $S^3$. For any $R\\in SO(3)$, its eigenvalues have modulus one and nonreal eigenvalues occur in conjugate pairs. If there is a nonreal pair, the remaining real eigenvalue is $+1$ because the determinant is $+1$; if all eigenvalues are real, they are $\\pm1$ and their product $+1$ forces at least one eigenvalue $+1$. Thus $R$ has a unit fixed axis $n$. Its restriction to $n^\\perp$ preserves orientation, since its determinant there equals $\\det R=1$, and so it is a planar rotation through some angle $\\theta$. Expanding with $n x=-n\\cdot x+n\\times x$ gives $q x q^{-1}=\\cos(\\theta)x+\\sin(\\theta)(n\\times x)+(1-\\cos(\\theta))(n\\cdot x)n$ for $q=\\cos(\\theta/2)+n\\sin(\\theta/2)$, which is precisely that rotation. Thus $\\pi$ is onto.",
           "step": "2.1",
-          "claim": "SU(2) has center {1,-1}, SO(3) has trivial center, and the groups are distinct compact global forms with isomorphic simple Lie algebras.",
           "inputs": [
             "given",
             "A1",
             "step 1.1",
-            "step 1.2",
             "algebra"
           ]
         },
         {
           "id": "step-3-1",
+          "claim": "The center of $SU(2)$ is $\\{\\pm1\\}$, since an element commuting with every imaginary quaternion must be real. If $R$ is in the center of $SO(3)$, it commutes with every half-turn about a unit axis $n$; each half-turn has $\\mathbb R n$ as its $+1$ eigenspace, so $R$ preserves every line. In particular, in the basis $i,j,k$ it sends each basis vector to itself or its negative; preserving the lines spanned by $i+j$ and $j+k$ forces the three signs equal. Thus $R=\\pm I$, and only $I$ has determinant $+1$. The centers differ, so the groups are not isomorphic. The unit quaternions form the compact connected sphere $S^3$, and $SO(3)$ is its continuous surjective image under $\\pi$, hence is compact and connected as well. The differential is an isomorphism by step 1.2, so these are distinct compact global forms with isomorphic simple Lie algebras.",
           "step": "3.1",
-          "claim": "A result at G=SU(2) is one instance and does not discharge the separate G=SO(3) case of the universal group claim.",
           "inputs": [
             "given",
+            "A1",
             "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The universal group quantifier includes both of these distinct groups. A proof with the fixed value $G=SU(2)$ establishes only that instance; it contains no argument for the separate value $G=SO(3)$. Hence it does not by itself establish the universally quantified claim.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
             "algebra"
           ]
         }
@@ -122,8 +133,8 @@
       "derivations": [
         {
           "id": "step-1-1",
+          "claim": "Products and inverses of matrices in $G$ remain in $G$, so $U_p\\in G$. By [A1], $\\operatorname{Re}\\operatorname{Tr}U_p=2\\operatorname{Re}a_p$ for some $a_p$ with $|a_p|\\le1$. Hence $-2\\le\\operatorname{Re}\\operatorname{Tr}U_p\\le2$, and the defined action satisfies $0\\le S_\\beta(U)\\le2\\beta$.",
           "step": "1.1",
-          "claim": "The plaquette product lies in SU(2), its real trace lies in [-2,2], and the Wilson action lies in [0,2 beta].",
           "inputs": [
             "given",
             "A1",
@@ -132,8 +143,8 @@
         },
         {
           "id": "step-1-2",
+          "claim": "Left and right multiplication by any fixed $V\\in G$ preserve the Hilbert–Schmidt inner product [A3]: $\\operatorname{Tr}((VU)^\\dagger(VU))=\\operatorname{Tr}(U^\\dagger U)$ and $\\operatorname{Tr}((UV)^\\dagger(UV))=\\operatorname{Tr}(U^\\dagger U)$ by unitarity and cyclicity of trace. The tangent variation $(\\dot a,\\dot b)$ maps to a matrix with squared Hilbert–Schmidt norm $2(|\\dot a|^2+|\\dot b|^2)$, so the displayed embedding induces twice the standard round metric on the $(a,b)$ sphere. These multiplications therefore preserve its round volume and normalization. Thus $\\mu$ is a left- and right-invariant probability measure, and the product measure in [A2] has total mass one.",
           "step": "1.2",
-          "claim": "Left and right multiplication preserve the round volume on SU(2), so the normalized link measure is invariant and its fourfold product has total mass one.",
           "inputs": [
             "given",
             "A2",
@@ -143,8 +154,8 @@
         },
         {
           "id": "step-2-1",
+          "claim": "Exponentiating the action bounds gives $e^{-2\\beta}\\le e^{-S_\\beta(U)}\\le1$ for every $U\\in G^4$. The integrand is continuous, hence measurable and integrable on the compact probability space $(G^4,\\mu^{\\otimes4})$. Integrating the pointwise bounds yields $e^{-2\\beta}\\le Z_\\beta\\le1$, which proves finiteness and strict positivity. At $\\beta=0$, the integrand is identically one and $Z_0=1$.",
           "step": "2.1",
-          "claim": "Integrating the pointwise exponential bounds against the finite probability measure gives e^(-2 beta) <= Z_beta <= 1 and Z_0=1.",
           "inputs": [
             "given",
             "A1",
@@ -156,8 +167,8 @@
         },
         {
           "id": "step-3-1",
+          "claim": "The defined object is one integral over the finite-dimensional space $G^4$; its definition contains no fields on $\\mathbb R^4$, no limiting construction, no reconstructed Hilbert space, and no Hamiltonian whose spectrum could satisfy the required gap condition. It establishes only the finite-regulator integral asserted in the Example, not a continuum Yang–Mills theory or a mass gap.",
           "step": "3.1",
-          "claim": "The finite graph integral specifies no continuum fields, continuum limit, reconstructed Hilbert space, or Hamiltonian and therefore establishes no Clay mass-gap result.",
           "inputs": [
             "given",
             "step 2.1",

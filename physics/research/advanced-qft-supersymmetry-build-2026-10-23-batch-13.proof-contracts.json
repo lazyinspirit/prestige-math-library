@@ -71,6 +71,7 @@
           "uses": [
             "1.1",
             "2.1",
+            "2.4",
             "3.1",
             "4.1"
           ]
@@ -81,19 +82,20 @@
           "source_section": "Definition",
           "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
           "uses": [
-            "2.2",
-            "3.1",
             "1.2",
+            "2.2",
             "2.3",
+            "2.4",
+            "3.1",
             "4.1"
           ]
         }
       ],
       "derivations": [
         {
-          "id": "transformed-edge-flatness",
+          "id": "step-1-1",
+          "claim": "Flatness of $a$ gives $a'_{ij}a'_{jk}=g_i a_{ij}g_j^{-1}g_j a_{jk}g_k^{-1}=g_i a_{ik}g_k^{-1}=a'_{ik}$, so $a'$ is flat and $\\rho(a'_{ij})$ defines its local coefficient transport.",
           "step": "1.1",
-          "claim": "Use the vertex conjugation formula and flatness of a to verify a^g_ij a^g_jk=a^g_ik.",
           "inputs": [
             "given",
             "F1",
@@ -101,9 +103,20 @@
           ]
         },
         {
-          "id": "twisted-differential-square",
+          "id": "step-1-2",
+          "claim": "For consecutive transformations $(g,\\lambda)$ and $(h,\\mu)$, start with the edge product $(h_i g_i)a_{ij}$. The successive associator/edge-morphism labels along $(h_i g_i)a_{ij}\\to h_i(g_i a_{ij})\\to h_i(a'_{ij}g_j)\\to(h_i a'_{ij})g_j\\to(a''_{ij}h_j)g_j\\to a''_{ij}(h_jg_j)$ are $\\beta(h_i,g_i,a_{ij})$, $\\rho_{h_i}\\lambda_{ij}$, $-\\beta(h_i,a'_{ij},g_j)$, $\\mu_{ij}$, and $\\beta(a''_{ij},h_j,g_j)$, respectively; adding them gives exactly $\\nu_{ij}$ in the Statement.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an edge cochain $\\lambda$, expanding $\\delta_{a'}^2\\lambda$ on $[ijkl]$ gives terms $\\rho(a'_{ij})\\rho(a'_{jk})\\lambda_{kl}-\\rho(a'_{ij})\\lambda_{jl}+\\rho(a'_{ij})\\lambda_{jk}-\\rho(a'_{ik})\\lambda_{kl}+\\lambda_{il}-\\lambda_{ik}+\\rho(a'_{ij})\\lambda_{jl}-\\lambda_{il}+\\lambda_{ij}-\\rho(a'_{ij})\\lambda_{jk}+\\lambda_{ik}-\\lambda_{ij}$; the first and fourth cancel because $a'$ is flat and $\\rho$ is an action, and every other term cancels with its displayed opposite. Hence the $1$-form shift contributes zero to the transformed tetrahedron equation.",
           "step": "2.1",
-          "claim": "Expand the local coefficient differential twice on an edge cochain; flatness and the action law cancel every term, so the shifted two-cochain satisfies no extra tetrahedron obstruction.",
           "inputs": [
             "F1",
             "step 1.1",
@@ -111,9 +124,9 @@
           ]
         },
         {
-          "id": "postnikov-descendant-identity",
+          "id": "step-2-2",
+          "claim": "Write $u=a'_{01}$, $v=a'_{12}$, $w=a'_{23}$, $x=a_{01}$, $y=a_{12}$, and $z=a_{23}$. Expanding $\\delta_{a'}\\zeta$ using the three displayed terms in each $\\zeta_{ijk}$ and applying the five-term cocycle identity to the four ordered quadruples $(g_0,x,y,z)$, $(u,g_1,y,z)$, $(u,v,g_2,z)$, and $(u,v,w,g_3)$ yields $(\\delta_{a'}\\zeta)_{0123}+\\rho_{g_0}\\beta(x,y,z)-\\beta(u,v,w)=D(g_0,x,y,z)-D(u,g_1,y,z)+D(u,v,g_2,z)-D(u,v,w,g_3)=0$, where $D(s,t,r,q):=\\rho_s\\beta(t,r,q)-\\beta(st,r,q)+\\beta(s,tr,q)-\\beta(s,t,rq)+\\beta(s,t,r)$. The cancellation uses flatness and $a'_{ij}g_j=g_i a_{ij}$ to identify the adjacent products. Hence $\\delta_{a'}\\zeta=\\beta(a'_{01},a'_{12},a'_{23})-\\rho_{g_0}\\beta(a_{01},a_{12},a_{23})$ on each tetrahedron.",
           "step": "2.2",
-          "claim": "Expand delta_a^g zeta and express the discrepancy as the signed sum of four normalized group 3-cocycle identities.",
           "inputs": [
             "F2",
             "step 1.1",
@@ -121,9 +134,30 @@
           ]
         },
         {
-          "id": "background-equation-preservation",
+          "id": "step-2-3",
+          "claim": "Let $\\tau_{ij}=\\beta(h_i,g_i,a_{ij})-\\beta(h_i,a'_{ij},g_j)+\\beta(a''_{ij},h_j,g_j)$ be the $\\beta$ part of $\\nu$. The sequential and direct face formulas agree exactly when $\\rho_{h_i}\\zeta^g_{ijk}+\\zeta^h_{ijk}(a')-\\zeta^{hg}_{ijk}(a)=(\\delta_{a''}\\tau)_{ijk}$, where $(\\delta_{a''}\\tau)_{ijk}=\\rho_{a''_{ij}}\\tau_{jk}-\\tau_{ik}+\\tau_{ij}$. For a fixed ordered triangle $i<j<k$, write $x=a_{ij}$, $y=a_{jk}$, $b_{rs}=a'_{rs}$, and $c_{rs}=a''_{rs}$. For the cocycle expression $D$, direct expansion gives the exact formal identity $\\rho_{h_i}\\zeta^g_{ijk}+\\zeta^h_{ijk}(a')-\\zeta^{hg}_{ijk}(a)-(\\delta_c\\tau)_{ijk}=-D(h_i,g_i,x,y)+D(h_i,b_{ij},g_j,y)-D(h_i,b_{ij},b_{jk},g_k)-D(c_{ij},h_j,g_j,y)+D(c_{ij},h_j,b_{jk},g_k)-D(c_{ij},c_{jk},h_k,g_k)$. To verify it, substitute $D(s,t,r,q)=\\rho_s\\beta(t,r,q)-\\beta(st,r,q)+\\beta(s,tr,q)-\\beta(s,t,rq)+\\beta(s,t,r)$ in these six terms, use $b_{ij}g_j=g_i a_{ij}$ and $c_{ij}h_j=h_i b_{ij}$ to identify mixed products, and use $a_{ik}=a_{ij}a_{jk}$, $b_{ik}=b_{ij}b_{jk}$, $c_{ik}=c_{ij}c_{jk}$ to identify long edges. The remaining terms are precisely the three $\\zeta$ expressions and the three terms of $-\\delta_c\\tau$ on the left; every other beta term cancels with its opposite. All six $D$ terms vanish by [F2]. In full, $B_{\\rm seq}=\\rho_{hg}B+\\rho_h\\zeta^g+\\zeta^h+\\delta_{a''}(\\rho_h\\lambda+\\mu)$ and $B_{\\rm direct}=\\rho_{hg}B+\\zeta^{hg}+\\delta_{a''}(\\rho_h\\lambda+\\mu+\\tau)$, so the displayed identity proves equality on every triangle.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "For a fixed source background, set $h_i=g_i^{-1}$ and choose $\\mu_{ij}$ by the displayed reverse formula. Substitution into the composite law cancels its five terms and gives $h_i g_i=e$, $\\nu_{ij}=0$, and $a''=a$. The identity transformation fixes $B$ because $\\beta$ is normalized and $\\rho_e=\\operatorname{id}_A$.",
+          "step": "2.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coefficient transport identity $\\rho(a'_{ij})\\rho(g_j)=\\rho(g_i)\\rho(a_{ij})$ gives $(\\delta_{a'}(\\rho_g B))_{ijkl}=\\rho_{g_i}(\\delta_aB)_{ijkl}$. Combining this with $B'=\\rho_gB+\\zeta+\\delta_{a'}\\lambda$, steps 2.1–2.2, and $\\delta_aB=a^*\\beta$ gives $\\delta_{a'}B'=\\rho_{g_i}\\beta(a_{ij},a_{jk},a_{kl})+\\beta(a'_{ij},a'_{jk},a'_{kl})-\\rho_{g_i}\\beta(a_{ij},a_{jk},a_{kl})=a'^*\\beta$.",
           "step": "3.1",
-          "claim": "Use the transported-coefficient identity, the source background equation, the zeta identity, and delta squared zero to obtain delta_a^g B^g,lambda=(a^g)^*beta.",
           "inputs": [
             "given",
             "F1",
@@ -134,34 +168,14 @@
           ]
         },
         {
-          "id": "edge-composition-law",
-          "step": "1.2",
-          "claim": "Compose the five associator and edge-morphism labels to obtain the stated nu_ij formula.",
-          "inputs": [
-            "given",
-            "F2",
-            "construct",
-            "algebra"
-          ]
-        },
-        {
-          "id": "triangle-composition-coherence",
-          "step": "2.3",
-          "claim": "Apply the associator pentagon to show the sequential and composite formulas agree on each triangle, not only on edges.",
-          "inputs": [
-            "F2",
-            "step 1.2",
-            "algebra"
-          ]
-        },
-        {
-          "id": "weak-associativity-and-gauge-two-groupoid",
+          "id": "step-4-1",
+          "claim": "To check the opposite composite on the target $(b,C)=(a',B')$, first apply $(h,\\mu)$ and then $(g,\\lambda)$. Its $0$-form labels are $g_i h_i=e$. For a fixed edge $ij$, write $x=a_{ij}$, $u=g_i$, $v=g_j$, and $b=b_{ij}=u x v^{-1}$; substituting the reverse formula for $\\mu_{ij}$ in the composite law gives\n$\\nu^{\\mathrm{op}}_{ij}=\\beta(u,u^{-1},b)-\\rho_u\\beta(u^{-1},u,x)+\\rho_u\\beta(u^{-1},b,v)-\\rho_u\\beta(x,v^{-1},v)-\\beta(u,x,v^{-1})+\\beta(b,v,v^{-1})$.\nSet $\\sigma_i=\\beta(g_i,g_i^{-1},g_i)$ and $\\sigma_j=\\beta(g_j,g_j^{-1},g_j)$. The identities $D=0$ on $(u,u^{-1},u,x)$, $(u,u^{-1},b,v)$, $(u,x,v^{-1},v)$ and $(b,v,v^{-1},v)$, with normalization of $\\beta$, give respectively $\\rho_u\\beta(u^{-1},u,x)=\\beta(u,u^{-1},ux)-\\sigma_i$, $\\rho_u\\beta(u^{-1},b,v)=-\\beta(u,xv^{-1},v)+\\beta(u,u^{-1},ux)-\\beta(u,u^{-1},b)$, $\\rho_u\\beta(x,v^{-1},v)=\\beta(ux,v^{-1},v)-\\beta(u,xv^{-1},v)-\\beta(u,x,v^{-1})$, and $\\rho_b\\sigma_j=\\beta(bv,v^{-1},v)-\\beta(b,v,v^{-1})$. Substituting the first two identities into the first three terms of $\\nu^{\\mathrm{op}}_{ij}$ gives $\\sigma_i-\\beta(u,xv^{-1},v)$; the third identity then combines all remaining terms involving $u$ into $-\\beta(ux,v^{-1},v)$, and the fourth gives $\\nu^{\\mathrm{op}}_{ij}=\\sigma_i-\\rho_b\\sigma_j=-(\\delta_b\\sigma)_{ij}$, since $bv=ux$. The composite has identity vertex labels, so normalization gives $\\zeta^e=0$ and its $B$-shift is $\\delta_b\\nu^{\\mathrm{op}}=-\\delta_b^2\\sigma=0$: explicitly, on $i<j<k$, flatness of $b$ and the action law give\n$\\rho_{b_{ij}}(\\rho_{b_{jk}}\\sigma_k-\\sigma_j)-(\\rho_{b_{ik}}\\sigma_k-\\sigma_i)+(\\rho_{b_{ij}}\\sigma_j-\\sigma_i)=0$.\nThus the opposite composite also induces the identity on background cochains. Each gauge arrow therefore has a two-sided inverse, while sequential induced maps compose associatively as ordinary function composition.",
           "step": "4.1",
-          "claim": "For a fixed source background, choose h_i=g_i^{-1} and the reverse edge cochain that cancels the other terms in nu; the composite is the identity transformation, so every gauge arrow has a reverse.",
           "inputs": [
             "F1",
             "F2",
             "step 1.2",
+            "step 2.4",
             "algebra"
           ]
         }
@@ -244,9 +258,9 @@
       ],
       "derivations": [
         {
-          "id": "split-background-flatness",
+          "id": "step-1-1",
+          "claim": "The edge labels are $a_{01}=1$, $a_{12}=1$, $a_{23}=1$, $a_{02}=0$, $a_{13}=0$, and $a_{03}=1$, so each triangle satisfies $a_{ij}+a_{jk}=a_{ik}$. Since $\\beta=0$ and $B=0$, the tetrahedron equation also holds.",
           "step": "1.1",
-          "claim": "Compute the six edges from the vertex potential, verify each triangle is flat, and check the zero cochain against beta=0.",
           "inputs": [
             "given",
             "F1",
@@ -254,9 +268,9 @@
           ]
         },
         {
-          "id": "one-form-face-shift",
+          "id": "step-1-2",
+          "claim": "With $g_i=0$, the 0-form correction is zero and $\\delta_a\\lambda$ has values $1$ on $[012]$ and $[013]$ and $0$ on $[023]$ and $[123]$: on the first two faces its formula is $\\rho(a_{01})\\lambda_{1k}-\\lambda_{0k}+\\lambda_{01}=1$, and the other two faces contain only zero edge labels.",
           "step": "1.2",
-          "claim": "Compute delta_a lambda on all four faces; the two faces incident to edge 01 receive label 1 and the other two receive 0.",
           "inputs": [
             "given",
             "F1",
@@ -264,9 +278,9 @@
           ]
         },
         {
-          "id": "shifted-background-check",
+          "id": "step-2-1",
+          "claim": "The transformed tetrahedron equation is $\\rho(a_{01})B'_{123}-B'_{023}+B'_{013}-B'_{012}=0-0+1-1=0=\\beta(a_{01},a_{12},a_{23})$. Thus the displayed nonzero face cochain is a valid gauge transform of the zero cochain.",
           "step": "2.1",
-          "claim": "Substitute the four shifted face values into the twisted tetrahedron equation and obtain zero on both sides.",
           "inputs": [
             "F1",
             "step 1.1",
@@ -336,18 +350,18 @@
           "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
           "uses": [
             "1.1",
-            "2.1",
             "1.2",
             "1.3",
+            "2.1",
             "3.1"
           ]
         }
       ],
       "derivations": [
         {
-          "id": "normalized-cocycle-check",
+          "id": "step-1-1",
+          "claim": "The function $\\beta(g,h,k)=ghk$ vanishes if any input is $0$. Its $3$-cocycle coboundary on $(w,x,y,z)$ is $xyz-(w+x)yz+w(x+y)z-wx(y+z)+wxy$ modulo $2$; after expansion every monomial occurs twice, so this is $0$.",
           "step": "1.1",
-          "claim": "Expand the inhomogeneous coboundary of beta(g,h,k)=ghk over Z2 and cancel equal monomials.",
           "inputs": [
             "given",
             "F1",
@@ -355,9 +369,29 @@
           ]
         },
         {
-          "id": "nonzero-postnikov-class-check",
+          "id": "step-1-2",
+          "claim": "The edge values are $a_{01}=a_{12}=a_{23}=a_{03}=1$ and $a_{02}=a_{13}=0$, so they are differences of the stated vertex potential and are flat. On the tetrahedron, $\\delta_aB=B_{123}-B_{023}+B_{013}-B_{012}=-1=1=\\beta(1,1,1)$ in $\\mathbb Z_2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "With $g=(1,0,0,0)$ and $\\lambda=0$, the transformation formula gives $a'_{ij}=g_i+a_{ij}-g_j$ and $\\zeta_{012}=-\\beta(1,1,1)=-1=1$; each other $\\zeta_{ijk}=0$ because its three arguments include $0$. Therefore $B'_{012}=1+1=0$ and the other face labels remain zero, as asserted.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\beta=\\delta c$ for any $2$-cochain $c:\\mathbb Z_2^2\\to\\mathbb Z_2$, evaluation at $(0,1,1)$ gives $c(0,0)=c(0,1)$, while evaluation at $(1,0,1)$ gives $c(0,1)=c(1,0)$. Thus $(\\delta c)(1,1,1)=c(1,0)-c(0,1)=0$, contradicting $\\beta(1,1,1)=1$. Hence the displayed cocycle class is nonzero.",
           "step": "2.1",
-          "claim": "Assume beta=delta c and use the coboundary equations at (0,1,1), (1,0,1), and (1,1,1) to derive a contradiction.",
           "inputs": [
             "given",
             "F1",
@@ -366,29 +400,9 @@
           ]
         },
         {
-          "id": "nontrivial-background-check",
-          "step": "1.2",
-          "claim": "Compute the edge labels from the vertex potential and verify flatness and the original tetrahedron equation.",
-          "inputs": [
-            "given",
-            "F1",
-            "algebra"
-          ]
-        },
-        {
-          "id": "zero-form-gauge-transform",
-          "step": "1.3",
-          "claim": "Substitute the vertex gauge labels into the explicit formula to compute a prime and the four zeta face values.",
-          "inputs": [
-            "given",
-            "F1",
-            "algebra"
-          ]
-        },
-        {
-          "id": "transformed-background-check",
+          "id": "step-3-1",
+          "claim": "The transformed tetrahedron has $\\delta_{a'}B'=0$, while $\\beta(a'_{01},a'_{12},a'_{23})=\\beta(0,1,1)=0$. Thus the transformed cochains satisfy the required equation.",
           "step": "3.1",
-          "claim": "Verify the transformed zero face cochain has twisted coboundary zero and beta(a prime)=0.",
           "inputs": [
             "F1",
             "step 1.3",
@@ -522,9 +536,9 @@
       ],
       "derivations": [
         {
-          "id": "local-1-1",
+          "id": "step-1-1",
+          "claim": "For a vertex cochain, $(\\delta_b^2t)_{ijk}=\\rho_{b_{ij}}\\rho_{b_{jk}}t_k-\\rho_{b_{ij}}t_j-\\rho_{b_{ik}}t_k+t_i+\\rho_{b_{ij}}t_j-t_i=0$ by flatness. Hence adding $\\delta_b t$ to an edge parameter preserves its target background. Addition, zero and negation give each hom-category its composition, identity and inverses. For horizontal composition, $c_{ij}h_j=h_i b_{ij}$ gives $\\delta_c(\\rho_h t)=\\rho_h\\delta_b t$, so changing the two input parameters by $\\delta_b t,\\delta_c s$ changes their composite by $\\delta_c(\\rho_h t+s)$. This proves that horizontal composition is a functor; its preservation of vertical sums and interchange follow from additivity.",
           "step": "1.1",
-          "claim": "For a vertex cochain, $(\\delta_b^2t)_{ijk}=\\rho_{b_{ij}}\\rho_{b_{jk}}t_k-\\rho_{b_{ij}}t_j-\\rho_{b_{ik}}t_k+t_i+\\rho_{b_{ij}}t_j-t_i=0$ by flatness",
           "inputs": [
             "given",
             "F1",
@@ -532,9 +546,9 @@
           ]
         },
         {
-          "id": "local-1-2",
+          "id": "step-1-2",
+          "claim": "For three consecutive arrows with vertex labels $g,h,k$, write $a,b,c,d$ for their edge backgrounds and $L=((k\\circ h)\\circ g)$, $R=k\\circ(h\\circ g)$. Set $\\sigma_i=\\beta(k_i,h_i,g_i)$. Expanding the four $\\tau$ terms gives $\\lambda_L-\\lambda_R=\\tau(k,h;b)+\\tau(kh,g;a)-\\rho_k\\tau(h,g;a)-\\tau(k,hg;a)$. On an edge $ij$, this difference plus $\\rho_{d_{ij}}\\sigma_j-\\sigma_i$ is exactly $-D(k_i,h_i,g_i,a_{ij})+D(k_i,h_i,b_{ij},g_j)-D(k_i,c_{ij},h_j,g_j)+D(d_{ij},k_j,h_j,g_j)$: substitution of the five-term definition of $D$ cancels mixed products using $b_{ij}g_j=g_i a_{ij}$, $c_{ij}h_j=h_i b_{ij}$, and $d_{ij}k_j=k_i c_{ij}$. All four terms vanish. Thus $\\lambda_R-\\lambda_L=\\delta_d\\sigma$, exactly the required associator $2$-arrow.",
           "step": "1.2",
-          "claim": "For three consecutive arrows with vertex labels $g,h,k$, write $a,b,c,d$ for their edge backgrounds and $L=((k\\circ h)\\circ g)$, $R=k\\circ(h\\circ g)$",
           "inputs": [
             "given",
             "F1",
@@ -542,9 +556,9 @@
           ]
         },
         {
-          "id": "local-1-3",
+          "id": "step-1-3",
+          "claim": "The associator's vertex cochain depends only on the vertex labels, so its naturality reduces to commuting additions of $A$-cochains. For four consecutive arrows $g,h,k,l$, the difference of the two pentagon path labels at vertex $i$ is $\\rho_{l_i}\\beta(k_i,h_i,g_i)-\\beta(l_i k_i,h_i,g_i)+\\beta(l_i,k_i h_i,g_i)-\\beta(l_i,k_i,h_i g_i)+\\beta(l_i,k_i,h_i)=D(l_i,k_i,h_i,g_i)=0$. Normalization makes every composition correction with an identity arrow zero and every associator containing one identity label zero. Thus the units are strict and the triangle identity holds.",
           "step": "1.3",
-          "claim": "The associator's vertex cochain depends only on the vertex labels, so its naturality reduces to commuting additions of $A$-cochains",
           "inputs": [
             "given",
             "F1",
@@ -552,9 +566,9 @@
           ]
         },
         {
-          "id": "local-1-4",
+          "id": "step-1-4",
+          "claim": "Given $f=(g,\\lambda):x\\to y$, choose the reverse $r=(g^{-1},\\mu)$ from [F2]; its composite $r\\circ f$ is the identity raw pair at $x$. Write $\\eta$ for the edge label of $f\\circ r$, whose vertex labels are identities at $y$. Substituting $(g,g^{-1},g)$ into the associator identity gives $\\eta=-\\delta_b\\beta(g_i,g_i^{-1},g_i)$, since the left composite $((f\\circ r)\\circ f)$ has edge label $\\eta+\\lambda$ and the right composite $f\\circ(r\\circ f)$ has edge label $\\lambda$. The vertex cochain $\\beta(g_i,g_i^{-1},g_i)$ therefore gives a $2$-isomorphism $f\\circ r\\Rightarrow\\mathrm{id}_y$. All $1$-arrows are equivalences. Restricting operations to a subcomplex commutes with every formula. For relative arrows, identity boundary vertex labels and zero boundary edge labels force all corrections and associators there to vanish, so relative arrows and their reverses remain relative. Finite label sets prove finiteness.",
           "step": "1.4",
-          "claim": "Given $f=(g,\\lambda):x\\to y$, choose the reverse $r=(g^{-1},\\mu)$ from [F2]; its composite $r\\circ f$ is the identity raw pair at $x$",
           "inputs": [
             "given",
             "F1",
@@ -563,9 +577,9 @@
           ]
         },
         {
-          "id": "local-1-5",
+          "id": "step-1-5",
+          "claim": "A $2$-automorphism of the identity $1$-arrow is exactly a vertex cochain with $\\delta_a t=0$. For fixed vertex labels of a raw automorphism, $2$-isomorphism identifies exactly its edge parameters differing by an element of $\\operatorname{im}\\delta_a$; these translations act freely on parameters. Consequently each class has that image's order and the asserted quotient count follows. At a single vertex there are no edge parameters and no differentials: raw $1$-labels are $G$, each has $A$ as its $2$-automorphisms, and different $G$-labels have no $2$-arrows between them. Thus $\\pi_1=G$ and $\\pi_2=A$. The same kernel/image argument applies to relative cochains.",
           "step": "1.5",
-          "claim": "A $2$-automorphism of the identity $1$-arrow is exactly a vertex cochain with $\\delta_a t=0$",
           "inputs": [
             "given",
             "F1",
@@ -573,9 +587,9 @@
           ]
         },
         {
-          "id": "local-2-1",
+          "id": "step-2-1",
+          "claim": "The hom-category, composition, associator, unit and equivalence checks above establish all the specified $2$-groupoid axioms. The kernel/image counts establish the claimed stabilizers, including the single-vertex and relative cases.",
           "step": "2.1",
-          "claim": "The hom-category, composition, associator, unit and equivalence checks above establish all the specified $2$-groupoid axioms",
           "inputs": [
             "step 1.1",
             "step 1.2",

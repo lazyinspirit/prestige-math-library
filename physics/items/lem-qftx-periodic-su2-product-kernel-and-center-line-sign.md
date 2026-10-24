@@ -65,19 +65,13 @@ $$
 
 Independently, for the general version let $M$ be a nonempty compact closed oriented Riemannian four-manifold. Let $F^+_{SO}(M)$ be its principal $SO(4)$-bundle of positively oriented orthonormal frames, and specify a spin lift $Q\to F^+_{SO}(M)$, meaning a principal $\operatorname{Spin}(4)$-bundle with an equivariant double covering for $\operatorname{Spin}(4)\to SO(4)$. Use $\operatorname{Spin}(4)=Sp(1)_+\times Sp(1)_-$, where $Sp(1)$ is the unit-quaternion group identified with $SU(2)$ and $(a,b)$ acts on $\mathbb H\cong\mathbb R^4$ by $q\mapsto aqb^{-1}$. Let $\Delta^+$ and $\Delta^-$ be the two defining two-dimensional complex half-spin representations, labeled by the Clifford chirality operator $\Gamma=-c(e_1)c(e_2)c(e_3)c(e_4)$ so that it acts by $+1$ on $\Delta^+$ and $-1$ on $\Delta^-$. Define $S^\pm:=Q\times_{\Delta^\pm}\mathbb C^2$. The Clifford action is skew-Hermitian and satisfies $c(v)c(w)+c(w)c(v)=-2g(v,w)$. Let $E\to M$ be a smooth Hermitian rank-two bundle with a specified $SU(2)$ structure and supplied unitary connection $A$, and let $\nabla$ be the tensor-product connection induced by the lifted Levi-Civita connection and $A$. Define the full Dirac operator and its positive chiral restriction by
 
-$$
-D_A=\sum_{i=1}^4c(e_i)\nabla_{e_i}:H^1(M;S\otimes E)\longrightarrow L^2(M;S\otimes E),\qquad S:=S^+\oplus S^-;
-\quad D_A^+:=D_A|_{H^1(M;S^+\otimes E)}:H^1(M;S^+\otimes E)\longrightarrow L^2(M;S^-\otimes E),
-$$
+$$D_A=\sum_{i=1}^4c(e_i)\nabla_{e_i}:H^1(M;S\otimes E)\longrightarrow L^2(M;S\otimes E),\qquad S:=S^+\oplus S^-; \quad D_A^+:=D_A|_{H^1(M;S^+\otimes E)}:H^1(M;S^+\otimes E)\longrightarrow L^2(M;S^-\otimes E),$$
 
 where the displayed local expression is independent of the chosen oriented orthonormal frame. Define $\operatorname{coker}D_A^+:=L^2(M;S^-\otimes E)/\operatorname{ran}D_A^+$. Assume $D_A^+$ is Fredholm; put $n_+=\dim_{\mathbb C}\ker D_A^+$, $n_-=\dim_{\mathbb C}\operatorname{coker}D_A^+$, and $\operatorname{ind}_{\mathbb C}D_A^+:=n_+-n_-$. This hypothesis assigns no index value to an arbitrary bundle.
 
 For either fixed four-dimensional background, set $H_+=H^1(M;S^+\otimes E)$ and $H_-=L^2(M;S^-\otimes E)$, and write $\mathfrak F=\operatorname{Fred}(H_+,H_-)$ for the norm-topological space of Fredholm operators from $H_+$ to $H_-$. For a finite-dimensional complex vector space $V$, define $\det_{\mathbb C}V=\bigwedge^{\dim_{\mathbb C}V}V$ and $\det_{\mathbb C}0=\mathbb C$. Use the inverse determinant-line bundle $\operatorname{Det}^{-1}\to\mathfrak F$ whose fiber at $T\in\mathfrak F$ is
 
-$$
-\mathcal L_T=(\det_{\mathbb C}\ker T)^*\otimes\det_{\mathbb C}\operatorname{coker}T,
-\qquad \operatorname{coker}T:=H_-/\operatorname{ran}T.
-$$
+$$\mathcal L_T=(\det_{\mathbb C}\ker T)^*\otimes\det_{\mathbb C}\operatorname{coker}T, \qquad \operatorname{coker}T:=H_-/\operatorname{ran}T.$$
 
 Suppose a connection $\nabla^{\operatorname{Det}}$ on this line bundle is supplied. The central gauge automorphism $z$ fixes $A$ and induces multiplication by $-1$ on both chiral section spaces, hence on $\ker D_A^+$ and $\operatorname{coker}D_A^+$. Its induced fiber map $z_*:\mathcal L_{D_A^+}\to\mathcal L_{D_A^+}$ is the dual top-exterior-power action on $\ker D_A^+$ tensored with the top-exterior-power action on $\operatorname{coker}D_A^+$; thus it acts by $(-1)^{n_++n_-}$. The constant connection path $A_t=A$ gives the constant operator path $\gamma(t)=D_A^+$ in $\mathfrak F$, so parallel transport $\operatorname{PT}_\gamma$ for any supplied line-bundle connection is the identity. For the loop closed by the endpoint gauge identification, the automorphism $z_*^{-1}\circ\operatorname{PT}_\gamma$ is therefore $(-1)^{n_++n_-}=(-1)^{\operatorname{ind}_{\mathbb C}D_A^+}$. On $M\times S^1$ the general product operator is $D_5=D_A+i\Gamma\partial_t$ with periodic domain $H^1$; its real kernel has dimension $n_++n_-$, so its parity is $\operatorname{ind}_{\mathbb C}D_A^+\bmod2$. This calculation does not assign an index value to an arbitrary bundle.
 

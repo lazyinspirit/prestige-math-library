@@ -1,7 +1,7 @@
 ---
 id: thm-qftx-framed-p2-monad-adhm-correspondence
 kind: theorem
-title: "Framed P² monads and stable ADHM data"
+title: Framed P² monads and stable ADHM data
 status: draft
 origin: pipeline
 domain: mathematics
@@ -20,6 +20,7 @@ deps:
   - thm-the-complex-numbers-are-algebraically-closed
   - thm-auslander-buchsbaum-serre-regularity-criterion
   - lem-noetherian-local-flatness-criterion-finite-over-target
+  - thm-cech-computes-qc-cohomology-separated-scheme-affine-cover
 dependency_roles:
   def-qftx-adhm-linear-data-stability-and-regularity: mathematical-premise
   lem-adhm-stable-quotient-and-torus-lift: mathematical-premise
@@ -31,23 +32,29 @@ dependency_roles:
   thm-the-complex-numbers-are-algebraically-closed: mathematical-premise
   thm-auslander-buchsbaum-serre-regularity-criterion: mathematical-premise
   lem-noetherian-local-flatness-criterion-finite-over-target: mathematical-premise
-axiom_base: "ZF + full Axiom of Choice through the stated quotient, finite-matrix, local-algebra and projective-cohomology suppliers."
+  thm-cech-computes-qc-cohomology-separated-scheme-affine-cover: mathematical-premise
+axiom_base: ZF + full Axiom of Choice through the stated quotient,
+  finite-matrix, local-algebra and projective-cohomology suppliers.
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
 sources:
   references:
-    - title: "F. Henni, Monads for framed torsion-free sheaves on multi-blow-ups of the projective plane"
+    - title: F. Henni, Monads for framed torsion-free sheaves on multi-blow-ups of the
+        projective plane
       url: https://arxiv.org/pdf/0903.3190
-      locator: "§§2–3: monad and ADHM constructions; the P² torsion/depth and normalized converse are supplied locally here."
-    - title: "Andrew J. Donaldson, The ADHM construction of Yang–Mills instantons"
+      locator: "§§2–3: monad and ADHM constructions; the P² torsion/depth and
+        normalized converse are supplied locally here."
+    - title: Andrew J. Donaldson, The ADHM construction of Yang–Mills instantons
       url: https://arxiv.org/pdf/2205.08639
-      locator: "Printed pp. 3–12: ADHM data, twistor/Ward context and monads; this is a roadmap, not the local P² proof."
-    - title: "Hiraku Nakajima and Kota Yoshioka, Lectures on Instanton Counting"
+      locator: "Printed pp. 3–12: ADHM data, twistor/Ward context and monads; this is
+        a roadmap, not the local P² proof."
+    - title: Hiraku Nakajima and Kota Yoshioka, Lectures on Instanton Counting
       url: https://arxiv.org/pdf/math/0311058
-      locator: "§3.1, PDF pp. 17–19: framed-sheaf conventions and locally-free locus; no monad dictionary proof is claimed from this section."
-    - title: "Nikita A. Nekrasov, Seiberg–Witten Prepotential from Instanton Counting"
+      locator: "§3.1, PDF pp. 17–19: framed-sheaf conventions and locally-free locus;
+        no monad dictionary proof is claimed from this section."
+    - title: Nikita A. Nekrasov, Seiberg–Witten Prepotential from Instanton Counting
       url: https://arxiv.org/pdf/hep-th/0206161
       locator: "§§3.1–3.3: ADHM equations, FI levels and framing torus conventions."
 verification:
@@ -98,6 +105,8 @@ and define $d_0:\operatorname{End}_{\mathbb C}(V)\to\operatorname{End}_{\mathbb 
 
 [F8] For a finite module over a Noetherian local algebra, if its residue fiber is flat over the residue field and the maximal-ideal multiplication map is injective, then it is flat over the base local ring; vanishing of the residue-field Tor group gives that injection. [[lem-noetherian-local-flatness-criterion-finite-over-target]]
 
+[F10] Assume AC. On $\mathbb P^2_A$ for an affine base $\operatorname{Spec}A$, the three standard affine charts and their affine intersections form an acyclic cover for every quasi-coherent sheaf. Its ordered Čech complex computes sheaf cohomology and has no terms above degree two. This applies to $A=\mathbb C$ and $A=\mathbb C[\epsilon]/(\epsilon^2)$. [[thm-cech-computes-qc-cohomology-separated-scheme-affine-cover]]
+
 ## Proof
 
 **Given:** The Statement's data. Let $k>0$ until the separate $k=0$ check.
@@ -118,7 +127,7 @@ and define $d_0:\operatorname{End}_{\mathbb C}(V)\to\operatorname{End}_{\mathbb 
 
 4.1 On $L_\infty$, the complex is $0\to V\mathcal O_{L_\infty}(-1)\xrightarrow{(-z_1,-z_2,0)^T}(V\oplus V\oplus W)\mathcal O_{L_\infty}\xrightarrow{(z_2,-z_1,0)}V\mathcal O_{L_\infty}(1)\to0$. The first two $V$ summands form the Euler resolution of the zero sheaf on the line, while the $W$ summand passes unchanged to middle cohomology. The framing is therefore the canonical identification $\mathcal E|_{L_\infty}=W\otimes\mathcal O_{L_\infty}$. In the Grothendieck group, the monad gives $[\mathcal E]=[(V\oplus V\oplus W)\mathcal O]-[V\mathcal O(-1)]-[V\mathcal O(1)]$. Taking Euler characteristics after twisting by $\mathcal O(m)$ and using $\chi(\mathcal O(d))=\binom{d+2}{2}$ yields $\chi(\mathcal E(m))=N\binom{m+2}{2}-k$. [F5, step 1.1, step 2.1, step 3.1, algebra]
 
-4.2 The Beilinson construction is natural under framed sheaf isomorphisms, so an isomorphism of framed sheaves induces maps on the cohomology vector spaces used in steps 1.2–6.2 and hence a single change of basis $g\in GL(V)$; the normalized Euler blocks force the recovered tuples to differ by $g\cdot(B_1,B_2,I,J)$. Conversely such a $g$ is an isomorphism of monads acting trivially on $W$, and therefore induces a framed sheaf isomorphism. This proves the pointwise inverse equivalence modulo $GL(V)$. For a finite-type data family, step 2.1 makes $\beta$ surjective on the total space, so $K=\ker\beta$ is locally free. The sequence $0\to V\mathcal O(-1)\to K\to\mathcal E\to0$ is exact and its terms before $\mathcal E$ are flat over the base. After tensoring with any residue field of the base, the first map remains sheaf-injective by step 1.1; hence $\operatorname{Tor}_1(k(s),\mathcal E)=0$. Since $\mathcal E$ is finite over each local ring of $\mathbb P^2\times S$ and its residue fiber is a vector space over the residue field, [F8] gives flatness over $S$. Under the stated relative cohomology and base-change hypotheses, the same constructions use vector bundles and are inverse for families. [F2, F3, F8, step 1.1, step 2.1, step 1.2, step 2.3, step 3.2, algebra]
+4.2 The Beilinson construction is natural under framed sheaf isomorphisms, so an isomorphism of framed sheaves induces maps on the cohomology vector spaces used in steps 1.2, 2.3 and 3.2 and hence a single change of basis $g\in GL(V)$; the normalized Euler blocks force the recovered tuples to differ by $g\cdot(B_1,B_2,I,J)$. Conversely such a $g$ is an isomorphism of monads acting trivially on $W$, and therefore induces a framed sheaf isomorphism. This proves the pointwise inverse equivalence modulo $GL(V)$. For a finite-type data family, step 2.1 makes $\beta$ surjective on the total space, so $K=\ker\beta$ is locally free. The sequence $0\to V\mathcal O(-1)\to K\to\mathcal E\to0$ is exact and its terms before $\mathcal E$ are flat over the base. After tensoring with any residue field of the base, the first map remains sheaf-injective by step 1.1; hence $\operatorname{Tor}_1(k(s),\mathcal E)=0$. Since $\mathcal E$ is finite over each local ring of $\mathbb P^2\times S$ and its residue fiber is a vector space over the residue field, [F8] gives flatness over $S$. Under the stated relative cohomology and base-change hypotheses, the same constructions use vector bundles and are inverse for families. [F2, F3, F8, step 1.1, step 2.1, step 1.2, step 2.3, step 3.2, algebra]
 
 4.3 Step 2.2 proves that costability is equivalent to fiberwise injectivity of $\alpha$. Since $\beta$ is surjective and $K$ is locally free, the quotient $K/\operatorname{im}\alpha$ is locally free exactly when $\alpha$ has constant full rank; failure at any point gives a fiber dimension jump. Hence the locally-free sheaf locus is precisely the regular ADHM locus. Combining this with [F4] gives the positive-FI and zero-FI identifications in the Statement. [F1, F4, step 2.1, step 2.2, step 3.1]
 

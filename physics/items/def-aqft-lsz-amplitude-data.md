@@ -34,7 +34,7 @@ $$
 $$
 If $n_1=0$, $\mathcal B_\rho$ is the identity. The full integration functional is $\mathcal I_\rho=\ell_\rho\circ\mathcal B_\rho$, extended coefficientwise to source variables and $R_N$. Thus “integration over odd coordinates” means coefficient extraction in the chosen exterior algebra, not an ordinary integral over odd numbers.
 
-Introduce commuting formal source variables $j_1,\ldots,j_{n_0}$ dual to the even coordinates and independent anticommuting formal source generators $\eta_1,\ldots,\eta_{n_1}$ dual to the ordered odd coordinates. Their algebra is $\mathscr J_\rho=\mathbb C[[j_1,\ldots,j_{n_0}]]\otimes\Lambda(\eta_1,\ldots,\eta_{n_1})$. In these bases the source pairing is
+Introduce commuting formal source variables $j_1,\ldots,j_{n_0}$ dual to the even coordinates and independent anticommuting formal source generators $\eta_1,\ldots,\eta_{n_1}$ dual to the ordered odd coordinates. Their algebra is $\mathscr J_\rho=\mathbb C[\![j_1,\ldots,j_{n_0}]\!]\otimes\Lambda(\eta_1,\ldots,\eta_{n_1})$. In these bases the source pairing is
 $$
 \langle J,\varphi\rangle=\sum_{a=1}^{n_0}j_aq^a+\sum_{b=1}^{n_1}\eta_b\xi_b,
 $$
