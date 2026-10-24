@@ -1,7 +1,7 @@
 ---
 id: lem-qftx-gaga-frechet-complex-compact-finiteness
 kind: lemma
-title: Compact morphisms of Fréchet complexes have finite Hausdorff cohomology
+title: Compact maps surjective on cohomology give finite Hausdorff target cohomology
 status: draft
 origin: pipeline
 domain: mathematics

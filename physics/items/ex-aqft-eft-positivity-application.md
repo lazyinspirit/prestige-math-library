@@ -40,7 +40,7 @@ sources:
 
 ## Example
 
-Fix one hypothetical channel satisfying all amplitude hypotheses in this page's channel definition and the exact matching identity $c_1=4C_8/\Lambda^4+\Delta_{\mathrm{match}}$. Take $\Lambda=4m$ and $\Delta_{\mathrm{match}}=0$. Compare $C_8=+1/2$ with $C_8=-1/2$ under these same assumptions. The first coefficient passes the necessary forward-positivity inequality; the second is excluded by it. Passing the inequality is not sufficient for a full amplitude.
+Fix $m>0$, $\Lambda=4m$, and one common matching scale $0<\mu_*<4m$ in the fixed local representative of this page's channel definition. Impose all its amplitude hypotheses and the exact matching identity $c_1=4C_8(\mu_*)/\Lambda^4+\Delta_{\mathrm{match}}$ with $\Delta_{\mathrm{match}}=0$ at this scale. Compare the candidate values $C_8(\mu_*)=+1/2$ and $C_8(\mu_*)=-1/2$ under these same conditions. The first coefficient passes the necessary forward-positivity inequality; the second is excluded by it. Passing the inequality is not sufficient for a full amplitude.
 
 ## Example references
 
@@ -54,29 +54,29 @@ Fix one hypothetical channel satisfying all amplitude hypotheses in this page's 
 
 ## Facts & Assumptions
 
-**Given:** A gapped scalar channel with $m>0$, $\Lambda=4m$, exact $\Delta_{\mathrm{match}}=0$, and the two candidate coefficients $C_8=+1/2$ and $C_8=-1/2$.
+**Given:** A gapped scalar channel with $m>0$, $\Lambda=4m$, one fixed common matching scale $0<\mu_*<4m$, exact $\Delta_{\mathrm{match}}=0$ at that scale, and the two candidate coefficients $C_8(\mu_*)=+1/2$ and $C_8(\mu_*)=-1/2$.
 
-[A1] [[def-aqft-eft-scattering-channel]]: $c_1=B''(0)/2!$ and the declared match is $c_1=4C_8/\Lambda^4+\Delta_{\mathrm{match}}$ for the fixed operator representative.
+[A1] [[def-aqft-eft-scattering-channel]]: $c_1=B''(0)/2!$ and the declared match is $c_1=4C_8(\mu_*)/\Lambda^4+\Delta_{\mathrm{match}}$ for the fixed operator representative at the common scale $\mu_*$.
 
-[F1] [[pthm-aqft-forward-positivity-wilson-coefficient]]: under the same mass-gap, analytic, crossing, pole-subtraction, spectral, and matching assumptions with $\Delta_{\mathrm{match}}=0$, the necessary bound is $C_8\ge0$.
+[F1] [[pthm-aqft-forward-positivity-wilson-coefficient]]: under the same mass-gap, analytic, crossing, pole-subtraction, spectral, and matching assumptions with $\Delta_{\mathrm{match}}=0$, the necessary bound is $C_8(\mu_*)\ge0$.
 
 ## Verification
 
-1.1 For $C_8=+1/2$ and $\Lambda=4m$, [A1] gives $c_1=4(1/2)/(4m)^4=1/(128m^4)>0$. This value passes the necessary forward-positivity test. [given, A1, algebra]
+1.1 For $C_8(\mu_*)=+1/2$ and $\Lambda=4m$, [A1] gives $c_1=4(1/2)/(4m)^4=1/(128m^4)>0$. This value passes the necessary forward-positivity test. [given, A1, algebra]
 
-1.2 For $C_8=-1/2$ under the same $m$, $\Lambda$, and $\Delta_{\mathrm{match}}$, [A1] gives $c_1=4(-1/2)/(4m)^4=-1/(128m^4)<0$. This violates [F1], so the value is excluded under the stated channel assumptions. [given, A1, F1, algebra]
+1.2 For $C_8(\mu_*)=-1/2$ under the same $m$, $\Lambda$, $\mu_*$, and $\Delta_{\mathrm{match}}$, [A1] gives $c_1=4(-1/2)/(4m)^4=-1/(128m^4)<0$. This violates [F1], so the value is excluded under the stated channel assumptions. [given, A1, F1, algebra]
 
-2.1 Since [F1] permits equality, $C_8=0$ lies on the boundary of the region that passes this necessary inequality. The positive point and boundary pass do not establish that an amplitude realizing them exists. [F1, step 1.1, step 1.2, algebra] ∎
+2.1 Since [F1] permits equality, $C_8(\mu_*)=0$ lies on the boundary of the region that passes this necessary inequality. The positive point and boundary pass do not establish that an amplitude realizing them exists. [F1, step 1.1, step 1.2, algebra] ∎
 
 ## Remarks
 
-The horizontal coordinate is the dimensionless coefficient $C_8$ in the fixed representative. Red shading denotes values excluded by this one necessary inequality; blue shading denotes values that pass it, including the zero boundary. The diagram encodes only $C_8\ge0$ when $\Delta_{\mathrm{match}}=0$ and does not assert amplitude existence.
+At the fixed common matching scale $\mu_*$, the horizontal coordinate is the dimensionless coefficient $C_8(\mu_*)$ in the fixed representative. Red shading denotes values excluded by this one necessary inequality; blue shading denotes values that pass it, including the zero boundary. The diagram encodes only $C_8(\mu_*)\ge0$ when $\Delta_{\mathrm{match}}=0$ and does not assert amplitude existence.
 
 ```tikz
 \begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
   \fill[red!18] (-3,-0.35) rectangle (0,0.35);
   \fill[blue!18] (0,-0.35) rectangle (3.5,0.35);
-  \draw[->,thick] (-3.2,0) -- (3.8,0) node[right] {$C_8$};
+  \draw[->,thick] (-3.2,0) -- (3.8,0) node[right] {$C_8(\mu_*)$};
   \draw[thick] (0,-0.5) -- (0,0.5);
   \node[below] at (0,-0.5) {$0$};
   \node[above] at (-1.5,0.45) {excluded};

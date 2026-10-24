@@ -15,12 +15,16 @@ deps:
   - lem-torus-classifying-space-cohomology
   - lem-qftx-rational-torus-classifying-space-cohomology
   - prop-first-chern-class-of-tensor-dual-and-conjugate-lines
+  - def-singular-cochain-complex-with-coefficients
+  - def-singular-cohomology-with-coefficients
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-torus-equivariant-cohomology-cartan-model: mathematical-premise
   lem-torus-classifying-space-cohomology: mathematical-premise
   lem-qftx-rational-torus-classifying-space-cohomology: mathematical-premise
   prop-first-chern-class-of-tensor-dual-and-conjugate-lines: mathematical-premise
+  def-singular-cochain-complex-with-coefficients: mathematical-premise
+  def-singular-cohomology-with-coefficients: mathematical-premise
 justified_by: []
 axiom_strength: ZF + AC
 proof_strategy: direct
@@ -62,13 +66,15 @@ Assume AC. Let $T=(\mathbb R/\mathbb Z)^r$ and use the product Milnor model $ET=
 
 [F2] For $k=\mathbb Q$, $A_T(\mathbb Q)=\mathbb Q[u_1,\ldots,u_r]$, every smooth character has a unique integer weight vector $\mathbf n$, and its associated line has class $\sum_i n_i u_i$. [[lem-qftx-rational-torus-classifying-space-cohomology]]
 
-[F3] First Chern classes are additive under tensor products, change sign for dual lines, and are natural under coefficient change. [[prop-first-chern-class-of-tensor-dual-and-conjugate-lines]]
+[F3] Integral first Chern classes are additive under tensor products and change sign for dual lines. For coefficients $k$, the notation $c_1(L;k)$ means the image of the integral class under $\mathbb Z\to k$. [[prop-first-chern-class-of-tensor-dual-and-conjugate-lines]]
+
+[F4] Singular cochains are $C^n(X;k)=\operatorname{Hom}_{\mathbb Z}(C_n(X;\mathbb Z),k)$, with $\delta\varphi=\varphi\circ\partial$, and cohomology is $\ker\delta/\operatorname{im}\delta$. [[def-singular-cochain-complex-with-coefficients]] [[def-singular-cohomology-with-coefficients]]
 
 ## Proof
 
 **Given:** The data in the statement.
 
-1.1 The rational character formula is [F2]. For the real formula, restrict a smooth character to the coordinate circles; the rational supplier [F2] gives its integer vector $\mathbf n$. The associated one-dimensional representation $\mathbb C_{\chi_{\mathbf n}}$ is the tensor product of the coordinate representations $\mathbb C_{\chi_i}^{\otimes n_i}$, interpreting negative powers as duals; taking associated bundles preserves this tensor-product isomorphism. Additivity and duality in [F3] give $c_1(L_{\chi_{\mathbf n}})=\sum_i n_i u_i$ over $\mathbb R$ as well, since the real generators in [F1] are the coefficient images of the same tautological Euler classes. The formula is unique because restriction to each coordinate circle recovers $n_i$. [A1, F1, F2, F3, construct]
+1.1 The rational character formula and the unique integer vector $\mathbf n$ are [F2]. To pass to real coefficients, let $j:\mathbb Q\hookrightarrow\mathbb R$ and, for any space $Y$, send a rational singular cochain $\varphi$ to $j\circ\varphi$. By [F4], $\delta(j\circ\varphi)=j\circ\varphi\circ\partial=j\circ\delta\varphi$, so this additive map sends cocycles to cocycles and coboundaries to coboundaries and induces $j_*:H^2(Y;\mathbb Q)\to H^2(Y;\mathbb R)$. It commutes with pullback, since postcomposition by $j$ commutes with precomposition by the induced singular chain map. Using the coefficient convention in [F3] and $\mathbb Z\to\mathbb Q\to\mathbb R=\mathbb Z\to\mathbb R$, it sends $c_1(L;\mathbb Q)$ to $c_1(L;\mathbb R)$. The coordinate associated lines in [F2] are the tautological lines whose real coefficient images define $u_i$ in [F1]. Applying $j_*$ to the rational identity therefore gives $c_1(L_{\chi_{\mathbf n}};\mathbb R)=\sum_i n_i u_i$. Uniqueness of $\mathbf n$ is the character classification in [F2]; the polynomial generators are independent in both coefficient fields. [A1, F1, F2, F3, F4, construct]
 
 2.1 The empty product is $1$, concatenation of two finite character lists multiplies their products, so $1\in\mathscr S_T(k)$ and $\mathscr S_T(k)$ is multiplicatively closed. For each nontrivial character $\mathbf n\ne0$, step 1.1 gives the nonzero linear polynomial $\sum_i n_i u_i$; a polynomial ring over a field is an integral domain, so every finite product of these classes remains nonzero. If $r=0$, the generating list is empty and the set is $\{1\}$. Hence $0\notin\mathscr S_T(k)$ in all cases. [F1, F2, step 1.1, algebra]
 
@@ -78,4 +84,4 @@ s't'(tn+sm)-st(t'n'+s'm')=tt'(s'n-sn')+ss'(t'm-tm').
 $$
 Multiplying by $ab$ makes the right side zero, proving the displayed addition is independent of representatives. For the scalar action, if $n/s\sim n'/s'$ with witness $a$, then the cross-multiplied numerator difference between $(c/q)(n/s)$ and $(c/q)(n'/s')$ is $cq(s'n-sn')$, killed by $a$. If $c/q\sim c'/q'$ with witness $b$, the corresponding difference between $(c/q)(n/s)$ and $(c'/q')(n/s)$ is $sn(q'c-qc')$, killed by $b$. Thus the scalar action is independent of both representatives. These formulas define the stated localized module, and every $s\in\mathscr S_T(k)$ acts invertibly with inverse $1/s$. [given, step 2.1, algebra]
 
-4.1 For a continuous left $T$-action on $X$, the projection $ET\times_T X\to BT$ makes singular cohomology a module over $A_T(k)$ by pullback and cup product; pulling back first Chern classes defines the character actions used in the localization. The Borel space and module are defined for empty $X$ as zero, and for $r=0$ the localization changes no module because $\mathscr S_T(k)=\{1\}$. This verifies the constructions in the Definition. [F1, F2, step 2.1, step 3.1, given] ∎
+4.1 For a continuous left $T$-action on $X$, the projection $ET\times_T X\to BT$ makes singular cohomology a module over $A_T(k)$ by pullback and cup product; pulling back first Chern classes defines the character actions used in the localization. For empty $X$ the Borel space is empty and its cohomology module is zero, and for $r=0$ the localization changes no module because $\mathscr S_T(k)=\{1\}$. This verifies the constructions in the Definition. [F1, F2, step 2.1, step 3.1, given] ∎

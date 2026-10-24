@@ -29,7 +29,7 @@ dependency_roles:
 provenance:
   statement: literature-derived
   proof: not-applicable
-physical_scope: Source-reported CMS global dimension-six SMEFT fit combining seven CMS measurement sets and electroweak precision inputs. This item does not reanalyse the component datasets or claim that the fit tension is evidence for new physics.
+physical_scope: Source-reported CMS global dimension-six SMEFT fit combining seven CMS measurement sets and electroweak precision inputs, with the source's topU3l flavor restriction and CP-violating variants excluded. Its 64 studied coefficients are a subset of the resulting 129-operator model; the simultaneous linear fit retains 43 directions and fixes 21 insufficiently constrained directions to zero. This item does not reanalyse the component datasets or claim that the fit tension is evidence for new physics.
 empirical_result:
   observation: >-
     CMS reports a 2.5% Standard Model compatibility p-value for its
@@ -49,8 +49,10 @@ empirical_result:
   conditions: >-
     Seven CMS measurement sets at 13 TeV with 36.3 or 138 fb^-1, supplemented
     by electroweak precision observables; 64 individual dimension-six
-    coefficients and a 43-direction principal-component fit. The main
-    constraints are linear in dimension-six coefficients.
+    coefficients selected from the source's 129-operator topU3l model with
+    CP-violating variants excluded, and a 43-direction principal-component
+    fit with 21 insufficiently constrained directions fixed to zero. The main
+    simultaneous constraints are linear in dimension-six coefficients.
   source_url: https://arxiv.org/pdf/2504.02958v2
 sources:
   references:
@@ -66,7 +68,11 @@ verification:
 
 ## Setup
 
-The CMS collaboration combines seven CMS measurement sets with proton-proton collision data at $13\ {\rm TeV}$, using input-specific integrated luminosities of $36.3$ or $138\ {\rm fb}^{-1}$, and supplements them with electroweak precision observables. Integrated luminosity denotes the calibrated exposure of a dataset. The fit treats 64 individual dimension-six Wilson coefficients and also uses principal-component directions; 21 directions with no sensitivity in the selected inputs are fixed to zero, leaving the reported 43-direction fit.
+The CMS collaboration combines seven CMS measurement sets with proton-proton collision data at $13\ {\rm TeV}$, using input-specific integrated luminosities of $36.3$ or $138\ {\rm fb}^{-1}$, and supplements them with electroweak precision observables. Integrated luminosity denotes the calibrated exposure of a dataset.
+
+The analysis restricts the supplied three-family SMEFT coefficient convention to the source's “topU3l” flavor model, labelled by $U(3)_\ell\times U(3)_e\times U(2)_q\times U(2)_u\times U(2)_d$. Here $U(n)=\{V\in\mathbb C^{n\times n}:V^\dagger V=I_n\}$; the first two factors rotate the three lepton families of $\ell_L,e_R$, and each quark factor rotates the first two families of its named field, with the third family separate. The source's coefficient restrictions, rather than unrestricted three-family tensors, are used. CMS excludes the variants violating charge conjugation followed by spatial parity (CP), leaving its 129-operator model; the 64 coefficients studied are the subset listed in its Table 1. These are additional analysis assumptions, not restrictions imposed by the general Warsaw supplier.
+
+For the simultaneous linear fit, the source uses orthogonal linear combinations $\mathbf e=R\mathbf c$, where $\mathbf c\in\mathbb R^{64}$ is its coefficient vector and $R\in\mathbb R^{64\times64}$, $RR^T=I_{64}$, is the source's principal-component rotation from the likelihood Hessian. It retains 43 directions under its finite sensitivity cutoff and fixes the remaining 21 insufficiently constrained directions to zero. This does not assert identically zero sensitivity to those 21 directions.
 
 ## Setup references
 
@@ -114,7 +120,7 @@ Experimental likelihood and nuisance-correlation details vary by input. The pape
 
 ## Interpretation
 
-The main coefficient constraints are linear in the dimension-six coefficients. The separately reported quadratic terms include squares of dimension-six amplitudes, but by themselves do not include the dimension-eight interference terms also contributing at order $\Lambda^{-4}$; they are not a complete prediction through that order. The $2.5\%$ compatibility result is driven mainly by one selected input and depends on the chosen PDF and likelihood treatment. It does not establish new physics or exclude the Standard Model as a model.
+The main simultaneous coefficient constraints are linear in the dimension-six coefficients and conditional on the stated topU3l restriction, excluded CP-violating variants and fixed directions. The separately reported quadratic terms include squares of dimension-six amplitudes, but by themselves do not include the dimension-eight interference terms also contributing at order $\Lambda^{-4}$; they are not a complete prediction through that order. The $2.5\%$ compatibility result is driven mainly by one selected input and depends on the chosen PDF and likelihood treatment. It does not establish new physics or exclude the Standard Model as a model.
 
 ## Interpretation references
 

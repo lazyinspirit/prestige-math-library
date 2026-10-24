@@ -15,5 +15,6 @@ requires:
   - qftx-gauge-geometry
   - qftx-eft-operator-quotients
   - countability-and-uncountability
+  - gr-fx13-tetrads-and-lorentz-spin
 page_layout: compact-v1
 ---

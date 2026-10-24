@@ -45,7 +45,9 @@ with basis $Q^I_\alpha=s_\alpha\otimes f_I$ and $\bar Q_{\dot\alpha I}=\dot s_{\
 
 $$[ (A,B),(A',B') ]=([A,A'],[B,B']),\qquad [(A,B),T]= (A\otimes I+I\otimes B)T,$$
 
-$$[(A,B),Q^I_\alpha]=A_\alpha{}^\gamma Q^I_\gamma,\qquad [(A,B),\bar Q_{\dot\alpha I}]=B_{\dot\alpha}{}^{\dot\gamma}\bar Q_{\dot\gamma I},$$
+$$[(A,B),Q^I_\alpha]=A^\gamma{}_{\alpha}Q^I_\gamma,\qquad [(A,B),\bar Q_{\dot\alpha I}]=B^{\dot\gamma}{}_{\dot\alpha}\bar Q_{\dot\gamma I},$$
+
+Here $A^\gamma{}_{\alpha}$ is the entry in row $\gamma$, column $\alpha$, so $As_\alpha=\sum_\gamma A^\gamma{}_{\alpha}s_\gamma$; dotted entries use the same convention. Thus on the translation basis the tensor action is $[(A,B),T_{\alpha\dot\beta}]=\sum_\gamma A^\gamma{}_{\alpha}T_{\gamma\dot\beta}+\sum_{\dot\gamma}B^{\dot\gamma}{}_{\dot\beta}T_{\alpha\dot\gamma}$.
 
 $$\{Q^I_\alpha,\bar Q_{\dot\beta J}\}=-2\delta^I{}_J T_{\alpha\dot\beta},\qquad \{Q^I_\alpha,Q^J_\beta\}=2\epsilon_{\alpha\beta}Z^{IJ},\qquad \{\bar Q_{\dot\alpha I},\bar Q_{\dot\beta J}\}=2\epsilon_{\dot\alpha\dot\beta}\bar Z_{IJ}.$$
 
@@ -65,7 +67,7 @@ They obey
 
 $$\sigma^\mu\bar\sigma^\nu+\sigma^\nu\bar\sigma^\mu=-2\eta^{\mu\nu}I_2.$$
 
-Define abstract translation coordinates $p_0=(T_{1\dot1}+T_{2\dot2})/2$, $p_1=(T_{1\dot2}+T_{2\dot1})/2$, $p_2=(T_{2\dot1}-T_{1\dot2})/(2i)$, and $p_3=(T_{1\dot1}-T_{2\dot2})/2$. Then $T_{\alpha\dot\beta}=\sigma^\mu_{\alpha\dot\beta}p_\mu$, $p_\mu^*=p_\mu$, and $\tau(ip_\mu)=ip_\mu$. A representation of the complex supertranslation algebra $\mathfrak t=V\oplus C_N\oplus\mathfrak g_{\bar1}$ on a graded complex vector space $\mathcal D$ means a parity-preserving complex-linear map $\rho:\mathfrak t\to\operatorname{End}_{\mathbb C}(\mathcal D)$ preserving the bracket, where the target bracket is the operator supercommutator. Write $P_\mu=\rho(p_\mu)$ and use the charge symbols for their images. Thus $\rho(T_{\alpha\dot\beta})=\sigma^\mu_{\alpha\dot\beta}P_\mu$ and the represented mixed relation is $\{Q^I_\alpha,\bar Q_{\dot\beta J}\}=-2\sigma^\mu_{\alpha\dot\beta}P_\mu\delta^I{}_J$, with $P_\mu=\eta_{\mu\nu}P^\nu$. In a unitary realization the images $P_\mu$ are restrictions of the self-adjoint physical momenta to their common invariant domain; $\rho(ip_\mu)=iP_\mu$, so $-i\rho(ip_\mu)=P_\mu$. In a massive rest fiber $P^\mu=(M,0,0,0)$, so $P_0=-M$ and the mixed anticommutator is $2M\delta_{\alpha\dot\beta}\delta^I{}_J$. Here $N$ counts left Weyl spinors; the scalar central-charge matrix is antisymmetric and therefore vanishes for $N=1$. Tensorial or topological extensions are outside this scalar-central-charge algebra. The convention uses natural units $\hbar=c=1$; translation and central-charge generators have mass dimension one and supercharges have mass dimension one-half.
+Define abstract translation coordinates $p_0=(T_{1\dot1}+T_{2\dot2})/2$, $p_1=(T_{1\dot2}+T_{2\dot1})/2$, $p_2=(T_{2\dot1}-T_{1\dot2})/(2i)$, and $p_3=(T_{1\dot1}-T_{2\dot2})/2$. Then $T_{\alpha\dot\beta}=\sigma^\mu_{\alpha\dot\beta}p_\mu$, $p_\mu^*=p_\mu$, and $\tau(ip_\mu)=ip_\mu$. A representation of the complex supertranslation algebra $\mathfrak t=V\oplus C_N\oplus\mathfrak g_{\bar1}$ on a graded complex vector space $\mathcal D$ means a parity-preserving complex-linear map $\rho:\mathfrak t\to\operatorname{End}_{\mathbb C}(\mathcal D)$ preserving the bracket, where the target bracket on homogeneous endomorphisms is $[X,Y]=XY-(-1)^{|X||Y|}YX$. Write $P_\mu=\rho(p_\mu)$ and use the charge symbols for their images. Thus $\rho(T_{\alpha\dot\beta})=\sigma^\mu_{\alpha\dot\beta}P_\mu$ and the represented mixed relation is $\{Q^I_\alpha,\bar Q_{\dot\beta J}\}=-2\sigma^\mu_{\alpha\dot\beta}P_\mu\delta^I{}_J$, with $P_\mu=\eta_{\mu\nu}P^\nu$. Complex linearity gives $\rho(ip_\mu)=iP_\mu$, hence $-i\rho(ip_\mu)=P_\mu$. For a real number $M>0$, a massive rest module here means such a supertranslation representation with $P^0=M I_{\mathcal D}$ and $P^j=0$ for $j=1,2,3$. Consequently $P_0=-M I_{\mathcal D}$ and its mixed anticommutator is $2M\delta_{\alpha\dot\beta}\delta^I{}_J I_{\mathcal D}$. This is an algebraic specialization, with no assertion of a Hilbert adjoint or a spectral fiber. Here $N$ counts left Weyl spinors; the scalar central-charge matrix is antisymmetric and therefore vanishes for $N=1$. Tensorial or topological extensions are outside this scalar-central-charge algebra. The convention uses natural units $\hbar=c=1$; translation and central-charge generators have mass dimension one and supercharges have mass dimension one-half.
 
 ## Definition references
 
@@ -78,3 +80,11 @@ The complex numbers as $\mathbb R[x]/(x^2+1)$, with the real embedding and imagi
 $\mathbb C=\mathbb R[x]/(x^2+1)$ is a field, every element is uniquely $a+bi$, and every nonzero element has inverse $(a-bi)/(a^2+b^2)$: [[thm-complex-numbers-form-a-field]].
 
 Real and imaginary parts, complex conjugation, and modulus: [[def-complex-conjugate-real-imaginary-part-and-modulus]].
+
+## Remarks
+
+The separate positive unitary representation definition supplies a nonzero graded complex Hilbert space $\mathcal H$, a joint momentum projection-valued measure $E$, self-adjoint coordinate integrals $p_\mu(E)$ on their square-integrability domains, and a common dense invariant domain $\mathcal D$. In that setting the algebraic images above are $P_\mu=p_\mu(E)|_{\mathcal D}$, and $-i\rho(ip_\mu)=P_\mu$ on $\mathcal D$. Self-adjointness and spectral assertions require those additional hypotheses; they do not follow from a representation on a graded complex vector space. The rest-module relation above applies on any separately supplied invariant domain on which the momenta have the stated scalar values; no existence of a nonzero spectral fiber is asserted here.
+
+## Remarks references
+
+[[def-qftx-unitary-super-poincare-representation|positive unitary representation definition]]

@@ -14,6 +14,7 @@ requires:
 - complex-topological-k-theory-and-bott-periodicity
 - exotic-smooth-structures-and-milnor-spheres
 - leray-hirsch-thom-isomorphism-and-gysin-sequences
+- lie-subgroups-actions-and-homogeneous-spaces
 - orientations-poincare-lefschetz-and-alexander-duality
 - qftx-borel-localization
 - qftx-equivariant-pseudodifferential-calculus

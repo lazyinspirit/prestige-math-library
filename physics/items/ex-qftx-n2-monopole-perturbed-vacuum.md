@@ -66,7 +66,7 @@ D map, kinetic normalization, and cutoff regime in the Example.
 
 [F1] [[def-qftx-n2-monopole-local-dual-higgs-model]]: $W_\mu=\sqrt2 A_D M\widetilde M+\mu u(A_D)$, $D=g_D(|M|^2-|\widetilde M|^2)$, the F/D potential is a sum of squares, and the charged hypermultiplet kinetic terms are canonical while $A_D$ has kinetic coefficient $g_D^{-2}$, and the gauge kinetic term fixes the dual vector mass normalization.
 
-[F2] [[def-qftx-susy-vacuum-moduli-data]]: a classical supersymmetric vacuum is an orbit of simultaneous zeros of all F and D maps under the compact gauge group.
+[F2] [[def-qftx-susy-vacuum-moduli-data]] supplies the convention of taking compact-group orbits of simultaneous F/D zeros. Its global polynomial-superpotential model is not assumed to include this local holomorphic model; the latter's potential and vacuum equations are supplied directly by [F1].
 
 [A1] Assume $\mu\ne0$, $c=u'(0)\ne0$, $u'(A_D)\ne0$ throughout the selected neighborhood, and the induced scale is below the effective cutoff.
 
@@ -83,7 +83,13 @@ By the chain rule its canonical auxiliary field is
 $F_{A_{\mathrm{can}}}=\partial W_\mu/\partial A_{\mathrm{can}}
 =g_D\,\partial W_\mu/\partial A_D=g_DF_{A_D}$. Since $g_D>0$, the
 canonical and connection-normalized neutral F equations have the same zero
-set, so [F2] applies to this local model. At $A_D=0$, the first equation
+set. Directly from [F1], the potential is
+$|g_DF_{A_D}|^2+|F_M|^2+|F_{\widetilde M}|^2+D^2/2$;
+positivity makes its zero locus exactly these four simultaneous zeros.
+This argument uses only local holomorphy of $u$, without applying the global
+polynomial hypothesis of [F2]. The zero locus is invariant under the stated
+compact $U(1)_D$ action, and we use its orbit convention.
+At $A_D=0$, the first equation
 is $\sqrt2M\widetilde M+\mu c=0$, while the other two vanish.
 [A1, F1, F2, given, algebra]
 

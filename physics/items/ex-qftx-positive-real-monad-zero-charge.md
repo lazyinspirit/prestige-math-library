@@ -80,8 +80,9 @@ $F\cong\pi^*E$.
 $W$.
 
 1.1 Every map into or out of $V=0$ is the unique zero map. Thus both moments
-are zero. The span of the empty family is $0=V$, and no nonzero invariant
-subspace exists; hence stability and costability hold. Since $U(0)$ has one
+are zero. Every word vector $B_{i_1}\cdots B_{i_m}I(w)$ is zero,
+including the $m=0$ vectors $I(w)$ for $w\in W$, so their span is $0=V$.
+No nonzero invariant subspace exists; hence stability and costability hold. Since $U(0)$ has one
 element, the data have no gauge parameters.
 [given, F1, algebra]
 

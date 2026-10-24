@@ -22,6 +22,7 @@ deps:
   - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
   - def-tdmath-measure-integral
   - def-measure-with-density
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-wilson-loop: mathematical-premise
@@ -35,6 +36,7 @@ dependency_roles:
   thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
   def-tdmath-measure-integral: mathematical-premise
   def-measure-with-density: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -95,14 +97,18 @@ Assume $\mathrm{AC}_\omega$. For one square face with free boundary in the finit
 
 [F3] [[lem-qftx-planar-plaquette-factorization]]: on a one-face free-boundary rectangle, the plaquette holonomy has law $\nu_\beta$.
 
-[F4] [[lem-qftx-su2-one-plaquette-average]]: $\int\tau\,d\nu_\beta=\lambda(\beta)$ and $\lambda(\beta)=\beta/4+O(\beta^3)$.
+[F4] [[lem-qftx-su2-one-plaquette-average]]: $\mu_2$ is a normalized bi-invariant Borel probability, $\int\tau\,d\nu_\beta=\lambda(\beta)$, and $\lambda(\beta)=\beta/4+O(\beta^3)$.
 
 [F5] [[lem-qftx-wilson-loop-gauge-invariance]]: the loop trace in the original link variables equals its value in the tree-gauge representative, while [[lem-qftx-planar-plaquette-factorization]] supplies the law of the representative's plaquette variable.
 
+[F6] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: an $L^1$ function on a product of sigma-finite measure spaces has equal product and iterated integrals. In particular this applies successively to bounded measurable functions on a finite product of probability spaces, since their absolute integrals are finite.
+
 ## Verification
 
-1.1 On one face the action weight is $e^{-\beta}e^{\beta\tau(U_p)}$. Let $U^{\mathrm{tree}}$ be the tree-gauge representative of the original link configuration. By [F5] the original loop observable is pointwise unchanged by this gauge fixing, and [F3] gives the normalized law $\nu_\beta$ of the representative's plaquette variable. Hence the partition factor is $e^{-\beta}z_\beta$. The only inherited choice premise is [A1]. [given, A1, F1, F3, F5, algebra]
+1.1 Write $A,B,C,D\in SU(2)$ for the eastward bottom, northward right, eastward top, and northward left link matrices. The counterclockwise face word is $U_p=ABC^{-1}D^{-1}$ by [F3]. Multiplication is product-Borel measurable in this finite Lie-group case, as specified in [F3], and inversion is continuous, so this group word is measurable. For any bounded Borel function $f:SU(2)\to\mathbb C$, its composition with the group word is bounded on the four-link product probability space. By [F6] integrate first in $A$: for fixed $B,C,D$, right invariance in [F4] gives $\int f(ABC^{-1}D^{-1})\,d\mu_2(A)=\int f(U)\,d\mu_2(U)$. Integrating the remaining three probability factors therefore proves $\int_{SU(2)^4}f(U_p)\,d\mu_2^{\otimes4}=\int_{SU(2)}f(U)\,d\mu_2(U)$. The only inherited choice premise is [A1]. [given, A1, F3, F4, F6, algebra]
 
-2.1 In the chosen orientation the loop word is exactly the positively oriented face word, so its ordered holonomy is $U_p$ and its Wilson observable is $W(\partial\square)=\tau(U_p)$ by [F2]. The equality with the original loop observable follows pointwise from [F5]; integrating against the representative plaquette law in [F3] gives $\int\tau\,d\nu_\beta=\lambda(\beta)$ by [F4]. [F2, F3, F4, F5, step 1.1, algebra]
+2.1 On one face the action weight is $e^{-\beta}e^{\beta\tau(U_p)}$ by [F1]. Since $|\tau|\leq1$, the function $e^{\beta\tau}$ is bounded. Apply step 1.1 to it to obtain $Z_\square=e^{-\beta}\int e^{\beta\tau(U)}\,d\mu_2(U)=e^{-\beta}z_\beta$. Applying the same identity to $f(U)=\mathbf1_H(U)e^{\beta\tau(U)}$ for each Borel set $H\subseteq SU(2)$ and dividing by $Z_\square>0$ shows that the original plaquette holonomy has law $\nu_\beta$. [F1, step 1.1, algebra]
 
-3.1 Substituting the expansion from [F4] yields $\langle W(\partial\square)\rangle_\beta=\beta/4+O(\beta^3)$ as $\beta\downarrow0$. This is a finite-regulator model expectation. [F4, step 2.1, algebra] ∎
+3.1 In the chosen orientation the loop word is exactly the positively oriented face word, so its ordered holonomy is $U_p$ and its Wilson observable is $W(\partial\square)=\tau(U_p)$ by [F2]. The equality with the original loop observable follows pointwise from [F5]; integrating against the representative plaquette law in [F3] gives $\int\tau\,d\nu_\beta=\lambda(\beta)$ by [F4], also directly from the original holonomy law in step 2.1. [F2, F3, F4, F5, step 2.1, algebra]
+
+4.1 Substituting the expansion from [F4] yields $\langle W(\partial\square)\rangle_\beta=\beta/4+O(\beta^3)$ as $\beta\downarrow0$. This is a finite-regulator model expectation. [F4, step 3.1, algebra] ∎

@@ -38,11 +38,13 @@ Let $e,\xi>0$, $\kappa=2e^2\xi$, and let $z_0\ne z_1$ be any two points of $\mat
 $$\Delta h+\kappa(1-e^h)=8\pi\delta_{z_0}+4\pi\delta_{z_1},\qquad h-4\log|z-z_0|\text{ extends smoothly at }z_0,\qquad h-2\log|z-z_1|\text{ extends smoothly at }z_1,\qquad h\to0\text{ at infinity},$$
 with $h<0$ off $\{z_0,z_1\}$. For $P(z)=(z-z_0)^2(z-z_1)$ and $s=2\log|P|$, the reconstructed fields $q=\sqrt\xi e^{(h-s)/2}P$ and $A=-\tfrac12*d(h-s)$ are smooth, have flux $6\pi$, and attain transverse energy $6\pi\xi$. The solution is specified by this unique nonlinear elliptic problem; no elementary closed-form profile is asserted.
 
-Separately, for each $n\in\mathbb Z$ and each effective divisor of degree $|n|$, the corresponding planar minimizer has signed flux $2\pi n$ and transverse energy $T_n=2\pi\xi|n|$. For fixed smooth end traces in winding $n$ and the same canonical exterior gauge, its cylinder infimum satisfies
+Separately, for each $n\in\mathbb Z$ and each effective divisor of degree $|n|$, the corresponding planar minimizer has signed flux $2\pi n$ and transverse energy $T_n=2\pi\xi|n|$. Use the transverse energy $E_\perp$, cylinder energy $\mathcal E_L$, and admissible cylinder class defined in Fixed-flux cylinders and uniform end-collar energy. Fix smooth end traces $p_j=(A^j,q^j)$ on $\mathbb R^2$, $j\in\{0,1\}$, with $E_\perp(p_j)<\infty$ and flux $2\pi n$. Prescribe their representatives after the globally smooth degree-zero gauge cleanup: outside a disk, $q^j=\rho_j e^{in\theta}$ with $\rho_j>0$, $\rho_j\to\sqrt\xi$ uniformly in $\theta$, $A^j-n\,d\theta\in L^2$, and $\lim_{R\to\infty}\int_{\partial D_R}(A^j-n\,d\theta)=0$. The infimum over that admissible class with these fixed ends satisfies
 $$T_nL\le\inf\mathcal E_L\le T_n(L-2\ell)+C_0+C_1\quad(L\ge2\ell),$$
 for a fixed collar width $\ell>0$ and finite constants $C_0,C_1$ independent of $L$; matching minimizing end traces give the exact value $T_nL$. This is the fixed-flux variational estimate for the stated cylinder class.
 
 ## Example references
+
+[Transverse and cylinder energies, admissible fields, and the fixed-end estimate](items/thm-qftx-critical-flux-cylinder-linear-energy.md#Statement)
 
 [Critical vortex winding, square completion and tension (Tong, §§3.1–3.3)](https://www.damtp.cam.ac.uk/user/tong/tasi/vortex.pdf)
 
@@ -58,7 +60,7 @@ for a fixed collar width $\ell>0$ and finite constants $C_0,C_1$ independent of 
 
 [F3] [[thm-qftx-critical-vortex-global-energy-minimum]]: a reconstructed fixed-divisor solution attains the absolute transverse minimum $2\pi\xi|n|$ in its winding sector.
 
-[F4] [[thm-qftx-critical-flux-cylinder-linear-energy]]: for fixed canonical-gauge ends in winding $n$, the finite-cylinder infimum obeys $T_nL\le\inf\mathcal E_L\le T_n(L-2\ell)+C_0+C_1$ for $L\ge2\ell$, and identical minimizing ends attain $T_nL$.
+[F4] [[thm-qftx-critical-flux-cylinder-linear-energy]]: for fixed smooth finite-energy end traces of flux $2\pi n$, after the stated global degree-zero gauge cleanup into the canonical exterior gauge with the angular one-form limit, the infimum over its admissible cylinder class obeys $T_nL\le\inf\mathcal E_L\le T_n(L-2\ell)+C_0+C_1$ for $L\ge2\ell$, and identical minimizing ends attain $T_nL$.
 
 ## Proof
 
@@ -70,7 +72,7 @@ for a fixed collar width $\ell>0$ and finite constants $C_0,C_1$ independent of 
 
 2.1 Here $P=(z-z_0)^2(z-z_1)$ and $s=2\log|P|$. The reconstruction in [F2] extends smoothly over both centers, solves the positive critical equations, and has flux $2\pi N=6\pi$. Since it is a fixed-divisor reconstructed solution, [F3] gives its attained absolute transverse energy $2\pi\xi N=6\pi\xi$. The argument determines the profile by the unique scalar boundary-value problem and supplies no elementary closed form. [F1, F2, F3, step 1.1, algebra]
 
-3.1 Fix end traces in that same winding sector and canonical exterior gauge. Applying [F4] with the value of $T_n$ from step 1.2 gives the stated cylinder bounds for every $L\ge2\ell$; if both traces are the same selected planar minimizer, [F4] gives the exact translation-invariant minimum. No step assumes radial symmetry or a unit-winding profile. [F4, step 1.2, given, algebra] ∎
+3.1 Fix the smooth end traces specified in the Example. Their finite transverse energy, winding $n$, flux $2\pi n$, canonical exterior gauge and angular one-form limit are exactly the end hypotheses of [F4]; the infimum uses its admissible cylinder class. Applying [F4] with the value of $T_n$ from step 1.2 gives the stated cylinder bounds for every $L\ge2\ell$, for any selected divisor of degree $|n|$; if both traces are the same selected planar minimizer, [F4] gives the exact translation-invariant minimum. No step assumes radial symmetry or a unit-winding profile. [F4, step 1.2, given, algebra] ∎
 ## Proof sources
 
 [Arbitrary-divisor scalar equation and reconstruction (Taubes attribution; local proof in supplier)](https://doi.org/10.1007/BF01197552)

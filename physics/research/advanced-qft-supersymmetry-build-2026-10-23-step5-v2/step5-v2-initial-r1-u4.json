@@ -1,0 +1,105 @@
+{
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "4",
+  "input_sha256": "79ce228292c28cf4dc516ab9bc72619009c0b56046675966598cb75a0933c758",
+  "decisions": [
+    {
+      "id": "ex-qftx-su2-brst-nilpotence",
+      "model": "gpt-6-luna",
+      "context_sha256": "5838ba02f6ea23fa8ee960e7cabe2a27a419ad6cf7837fe459514ca72e5d8a2e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Both suppliers require n>=1; the original step 2.1 invokes the lemma without excluding n=0. The repair preserves the zero-dimensional case by a local graded-algebra calculation instead of narrowing the example.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-qftx-su2-brst-nilpotence",
+      "disposition": "repaired",
+      "post_sha256": "66f3bc25f5fe568f4c5c1e260998568ee87655a103fd35334ec8a250375e8187",
+      "review_context_sha256": "7fb32f667129d8dc7ccc59f31d612d24d1a040ce3d9d7d9730de58fff6fb40e4",
+      "reason": "Checked the Pauli commutators, Jacobi expansion, parity-preserving defining representation and complete supplier proof. The repaired verification invokes the suppliers only for n>=1; for n=0 it explicitly checks s squared on ghosts and matter and extends by the even-derivation identity. Both matter parities and the original dimension range are retained. This is the author repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "ex-qftx-su2-brst-nilpotence",
+      "model": "gpt-6-luna",
+      "context_sha256": "5838ba02f6ea23fa8ee960e7cabe2a27a419ad6cf7837fe459514ca72e5d8a2e",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "Original verification step 2.1 applied an n>=1 supplier without that hypothesis. Steps 2.1 and 3.1 now separate the positive-dimensional supplier invocation from a complete local zero-dimensional proof. The fatal finding still counts in this round despite its completed repair."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Assigned tuple adjudicated and repaired; no unresolved mathematical obligations in this unit. Native rejudgment, round collection and certification remain controller duties.",
+    "mathematics": "The Example now specifies nonnegative n and either pure matter parity. For n=0 the algebra has two matter generators and three exterior ghost generators, with no gauge components or positive-order jets. Step 3.1 proves s^2 c=0 and C^2=-sC, hence s^2 psi=0. The square of an odd derivation is an even derivation. For n>=1 the original lemma applies with its exact hypotheses.",
+    "suppliers": [
+      "items/def-qftx-nonabelian-brst-complex.md: complete Definition",
+      "items/lem-qftx-nonabelian-brst-nilpotence.md: complete Statement, Facts and Proof"
+    ],
+    "source_limits": "Elementary matrix and graded-algebra calculations were checked locally. No external source retrieval or independent review of the new repair is claimed. The Step-4 digest was inspected as evidence and had no concerns.",
+    "metadata": "Only the assigned item statement mirror and its contract derivations, citation uses and zero boundary record changed. Shared writes used step5-shared-write-lock with rereads and a scoped updater, subsequently removed. Other contract entries retain their original bytes.",
+    "interfaces": "The Example description was clarified without dropping n=0. There is no Statement or Definition section in this example. Search of items and library found no dependency or reference consumer item; the sole page occurrence is its inventory placement. No new supplier or physical interface was introduced.",
+    "page_uses": [
+      {
+        "path": "library/quantum-field-theory-mathematics/qftx-nonabelian-brst-bv-mathematics-examples.md",
+        "affected_use": "The examples inventory lists ex-qftx-su2-brst-nilpotence; the page has no body, argument or additional use of its nilpotence assertion.",
+        "disposition": "unaffected",
+        "reason": "The preserved SU(2) example remains a valid inventory entry with its original title, kind and supplier dependencies."
+      }
+    ],
+    "published_consumers": "No published or outside consumer item was found; no published-ledger update is proposed.",
+    "diagrams": "The assigned item contains no TikZ/tikzcd diagram; the explicit component-algebra argument requires no diagram.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-4.proof-contracts.json --strict --items ex-qftx-su2-brst-nilpotence",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-qftx-su2-brst-nilpotence.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-qftx-su2-brst-nilpotence.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and real KaTeX parse checks passed"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u4-items.txt",
+        "exit_code": 0,
+        "result": "Selection JSON contains only the assigned ID; selected checks and prerequisite cycles passed, covering 3 items and 2 pages"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-qftx-su2-brst-nilpotence.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run advanced-qft-supersymmetry-build-2026-10-23 --items ex-qftx-su2-brst-nilpotence",
+        "exit_code": 0,
+        "result": "Copied both current hashes into the review immediately after completing the mathematical review"
+      }
+    ],
+    "corrected_check_attempts": "Initial precheck requested canonical phase numbering 3.1 in place of 2.2; adopted and synchronized the contract. Initial depcheck invocation used a plain-text selection; corrected to the required JSON array and reran successfully.",
+    "next_action": "Controller collects this report and performs the ordinary remaining workflow."
+  },
+  "supporting_evidence": {
+    "research/advanced-qft-supersymmetry-build-2026-10-23-batch-4-step5-context.json": "a999f2fb4e6882eac752e52793ee8841c1af3eb458e43a65ee88b39702f55cae"
+  }
+}

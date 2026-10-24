@@ -12,6 +12,7 @@ category: quantum-field-theory-mathematics
 deps:
   - def-countable-choice
   - thm-quotient-manifold-by-a-closed-lie-subgroup
+  - thm-constant-rank-theorem-for-manifolds
   - thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero
   - thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields
   - prop-exponential-scales-one-parameter-subgroups
@@ -21,6 +22,7 @@ deps:
 dependency_roles:
   def-countable-choice: mathematical-premise
   thm-quotient-manifold-by-a-closed-lie-subgroup: mathematical-premise
+  thm-constant-rank-theorem-for-manifolds: mathematical-premise
   thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero: mathematical-premise
   thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields: mathematical-premise
   prop-exponential-scales-one-parameter-subgroups: mathematical-premise
@@ -60,7 +62,7 @@ Assume countable choice. Let $T=(\mathbb R/\mathbb Z)^r$ with $r\geq1$, and let 
 
 [A1] Countable choice supplies the embedded Lie subgroup and smooth quotient structures used here. [[def-countable-choice]]
 
-[F1] For a closed subgroup $H$ of a finite-dimensional Lie group $T$, the quotient $Q=T/H$ is a smooth Lie group, the quotient map is a surjective submersion, and its dimension is $\dim T-\dim H$. [[thm-quotient-manifold-by-a-closed-lie-subgroup]]
+[F1] For a closed subgroup $H$ of a finite-dimensional Lie group $T$, the quotient $Q=T/H$ is a smooth manifold, the quotient map is a surjective submersion, and its dimension is $\dim T-\dim H$. [[thm-quotient-manifold-by-a-closed-lie-subgroup]]
 
 [F2] The exponential map of a finite-dimensional Lie group is smooth, has identity differential at zero, and is obtained from its one-parameter subgroups. [[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]] [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]] [[prop-exponential-scales-one-parameter-subgroups]] [[def-one-parameter-subgroup-of-a-lie-group]]
 
@@ -68,13 +70,15 @@ Assume countable choice. Let $T=(\mathbb R/\mathbb Z)^r$ with $r\geq1$, and let 
 
 [F4] A continuous image of a compact space is compact. [[thm-compactness-under-continuous-maps]]
 
+[F5] A smooth submersion has local coordinate form $(u,v)\mapsto u$ and hence smooth local sections, obtained by fixing $v$. [[thm-constant-rank-theorem-for-manifolds]]
+
 ## Proof
 
 **Given:** The data in the statement.
 
-1.1 Since $T$ is compact and connected, $Q=T/H$ is compact and connected. By [F1], it is a Lie group. It is abelian because $T$ is abelian. It is not a point because $H\subsetneq T$; a connected zero-dimensional Lie group is discrete and hence a point, so $Q$ has dimension $d\geq1$. [A1, F1, F4, given, algebra]
+1.1 Since $T$ is compact and connected, $Q=T/H$ is compact and connected, and [F1] makes $\pi:T\to Q$ a smooth surjective submersion. As $T$ is abelian, $H$ is normal: the operations $(aH)(bH)=(ab)H$ and $(aH)^{-1}=a^{-1}H$ are independent of representatives and give an abelian group with identity $H$. By [F5], each point of $Q$ has an open neighborhood $U$ and a smooth section $s_U:U\to T$ with $\pi s_U=\operatorname{id}_U$. On $U\times V$, multiplication is $(x,y)\mapsto\pi(s_U(x)s_V(y))$; on $U$, inversion is $x\mapsto\pi(s_U(x)^{-1})$. These formulas prove both operations smooth, so $Q$ is a Lie group. It is not a point because $H\subsetneq T$; a zero-dimensional manifold is discrete, and connectedness would then make it a point. Hence $d=\dim Q\geq1$. [A1, F1, F4, F5, given, algebra]
 
-2.1 Let $\mathfrak q=T_eQ$. The exponential map $\exp_Q:\mathfrak q\to Q$ has differential the identity at zero by [F2], so [F3] makes it a diffeomorphism from a neighborhood of zero onto a neighborhood of the identity. Since $Q$ is abelian, $\exp_Q(X+Y)=\exp_Q(X)\exp_Q(Y)$: the product of the one-parameter subgroups with velocities $X,Y$ is a one-parameter subgroup with velocity $X+Y$, and uniqueness of integral curves gives the identity. Thus $\exp_Q(\mathfrak q)$ is a subgroup containing an open identity neighborhood, hence is open. Its other cosets are open, so its complement is open; connectedness of $Q$ gives $\exp_Q(\mathfrak q)=Q$. The kernel $\Lambda=\ker(\exp_Q)$ is discrete because the exponential is injective near zero. [F2, F3, step 1.1]
+2.1 Let $\mathfrak q=T_eQ$. The exponential map $\exp_Q:\mathfrak q\to Q$ has differential the identity at zero by [F2], so [F3] makes it a diffeomorphism from a neighborhood of zero onto a neighborhood of the identity. Since $Q$ is abelian, $\exp_Q(X+Y)=\exp_Q(X)\exp_Q(Y)$: the product of the one-parameter subgroups with velocities $X,Y$ is a one-parameter subgroup with velocity $X+Y$, and uniqueness of integral curves gives the identity. Thus $\exp_Q(\mathfrak q)$ is a subgroup containing an open identity neighborhood, hence is open. Its other cosets are open, so its complement is open; connectedness of $Q$ gives $\exp_Q(\mathfrak q)=Q$. The kernel $\Lambda=\ker(\exp_Q)$ is discrete because the exponential is injective near zero. Translating its local inverse shows that $\exp_Q$ is open, so it induces a homeomorphism $\mathfrak q/\Lambda\cong Q$. [F2, F3, step 1.1]
 
 3.1 The linear span of $\Lambda$ is all of $\mathfrak q$. Otherwise the quotient linear map $\mathfrak q\to\mathfrak q/\operatorname{span}_{\mathbb R}\Lambda$ factors through the compact space $Q=\mathfrak q/\Lambda$ and is onto a nonzero real vector space; that is impossible by [F4]. A discrete additive subgroup of a finite-dimensional real vector space that spans it is a lattice. To see this, a discrete subgroup has a neighborhood of zero containing no other subgroup point, so distinct subgroup points are uniformly separated and every bounded subset of it is finite. Choose a shortest nonzero vector $\lambda_1$; the intersection with $\mathbb R\lambda_1$ is $\mathbb Z\lambda_1$, since any smaller positive step would contradict shortestness. If projections of subgroup points to $\lambda_1^\perp$ approach zero, subtract nearest integer multiples of $\lambda_1$; the resulting points lie in a bounded set, hence in a finite set, so zero is isolated in the projected subgroup. The projection remains discrete and spans $\lambda_1^\perp$. Induction on $d$ gives a lattice basis for the projection; lifting that finite basis and adjoining $\lambda_1$ gives a $\mathbb Z$-basis $\lambda_1,\ldots,\lambda_d$ of $\Lambda$ that is also a real basis of $\mathfrak q$. [F4, step 2.1, algebra]
 

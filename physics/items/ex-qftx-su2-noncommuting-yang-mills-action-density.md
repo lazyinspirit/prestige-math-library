@@ -65,7 +65,15 @@ no stationarity or field-equation claim is made.
 
 [A1] [[post-qftx-nonabelian-yang-mills-model]]: the action density is $-\kappa(F\wedge *_\eta F)/(2g_{\mathrm{YM}}^2)$ with fixed $g_{\mathrm{YM}}>0$.
 
-[F2] [[lem-qftx-su2-compact-nonabelian-invariant-form]]: $[T_1,T_2]=T_3$ and $\kappa(T_3,T_3)=1$.
+[F2] Use the explicit matrices and trace form fixed in [[lem-qftx-su2-compact-nonabelian-invariant-form]]:
+$T_1=\frac12\begin{pmatrix}0&-i\\-i&0\end{pmatrix}$,
+$T_2=\frac12\begin{pmatrix}0&-1\\1&0\end{pmatrix}$,
+$T_3=\frac12\begin{pmatrix}-i&0\\0&i\end{pmatrix}$, and
+$\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$. Direct multiplication gives
+$T_1T_2=T_3/2$, $T_2T_1=-T_3/2$, and $T_3^2=-I_2/4$.
+Consequently $[T_1,T_2]=T_1T_2-T_2T_1=T_3$ and
+$\kappa(T_3,T_3)=-2\operatorname{Tr}_2(-I_2/4)=1$.
+These finite matrix identities are established here without countable choice.
 
 [F3] [[def-qftx-lie-algebra-valued-form-bracket]] and [[lem-qftx-principal-curvature-cartan-bianchi]]: local curvature is $F=dA+\frac12[A\wedge A]$ with the alternating-form bracket convention.
 

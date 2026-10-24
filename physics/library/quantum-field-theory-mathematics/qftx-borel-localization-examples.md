@@ -15,5 +15,6 @@ requires:
   - singular-cohomology-and-coefficient-theorems
   - qftx-equivariant-cohomology
   - cup-cap-cross-products-and-cohomology-rings
+  - countability-and-uncountability
 page_layout: compact-v1
 ---

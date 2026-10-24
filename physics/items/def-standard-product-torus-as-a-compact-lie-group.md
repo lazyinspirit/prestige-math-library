@@ -71,7 +71,7 @@ landmark: false
 
 ## Definition
 
-Assume the full Axiom of Choice. For $r\geq0$, let
+Assume the full Axiom of Choice. For a nonnegative integer $r$, let
 $T=(\mathbb R/\mathbb Z)^r$ with the quotient topology and coordinatewise
 addition. On each circle factor, for every open interval $I\subset\mathbb R$
 of length less than $1$, use the chart
@@ -112,7 +112,7 @@ so this based group is well-pointed.
 
 ## Facts & Assumptions
 
-**Given:** AC, $r\geq0$, and the coordinate product $T=(\mathbb R/\mathbb Z)^r$.
+**Given:** AC, a nonnegative integer $r$, and the coordinate product $T=(\mathbb R/\mathbb Z)^r$.
 
 [A1] Assume the full Axiom of Choice. [[def-axiom-of-choice]]
 

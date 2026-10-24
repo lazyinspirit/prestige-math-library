@@ -21,7 +21,7 @@ sources:
   references:
     - title: David Tong, Supersymmetric Field Theory
       url: https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy.pdf
-      locator: "§4.3, printed pp. 109–121: F/D-flat scalar configurations, gauge quotient, and the distinction between a classical moduli space and quantum dynamics."
+      locator: "§§4.2.2–4.3, printed pp. 107–121: F/D-flat scalar configurations, gauge quotient, and the distinction between a classical moduli space and quantum dynamics."
 verification:
   precheck: n/a
 ---
@@ -44,12 +44,20 @@ gauge-invariant holomorphic polynomial $W:V\to\mathbb C$. Assume canonical
 scalar kinetic energy and no Fayet--Iliopoulos term. Write
 $x=(x^0,x^1,x^2,x^3)\in\mathbb R^{1,3}$, fix
 $\eta=\operatorname{diag}(-1,1,1,1)$, sum repeated spacetime indices, and
-set $\partial^\mu=\eta^{\mu\nu}\partial_\nu$. Define the
-auxiliary-field maps
+let the spacetime scalar field be a smooth map $\phi:\mathbb R^{1,3}\to V$,
+and let $\mathcal A=\mathcal A_\mu dx^\mu$ be a smooth $\mathfrak g$-valued
+connection one-form on the trivial bundle. Use connection normalization:
+$\nabla_\mu\phi=\partial_\mu\phi+d\rho(\mathcal A_\mu)\phi$ and
+$\nabla^\mu=\eta^{\mu\nu}\nabla_\nu$. A smooth gauge transformation
+$h:\mathbb R^{1,3}\to G$ acts by $\phi\mapsto\rho(h)\phi$ and
+$\mathcal A_\mu\mapsto\operatorname{Ad}_h\mathcal A_\mu-(\partial_\mu h)h^{-1}$;
+then $\nabla_\mu\phi\mapsto\rho(h)\nabla_\mu\phi$. The canonical scalar
+kinetic Lagrangian is therefore
 
-$$\mathcal L_{\mathrm{kin}}=-\sum_i\partial_\mu\overline{\phi^i}\,\partial^\mu\phi^i,\qquad [\phi^i]=\mathrm{mass},\quad [W]=\mathrm{mass}^3.$$
+$$\mathcal L_{\mathrm{kin}}=-\sum_i\overline{(\nabla_\mu\phi)^i}\,(\nabla^\mu\phi)^i,\qquad [\phi^i]=[\mathcal A_\mu]=\mathrm{mass},\quad [W]=\mathrm{mass}^3.$$
 
-The gauge coupling $g$ is dimensionless in these natural units.
+The gauge coupling $g$ is dimensionless in these natural units. Define the
+auxiliary-field maps on the scalar value space by
 
 $$F_i(\phi)=\frac{\partial W}{\partial\phi^i}(\phi),\qquad D_a(\phi)=-g\,\phi^\dagger T(X_a)\phi.$$
 
@@ -102,4 +110,4 @@ $\mathcal M_{\mathrm{cl}}$ and $\mathcal M_{\mathrm q}(\mathcal T)$.
 
 ## Definition references
 
-[Tong, §4.3, “The Moduli Space of Vacua”](https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy.pdf).
+[Tong, §§4.2.2–4.3, gauge-covariant kinetic terms and vacuum moduli](https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy.pdf).

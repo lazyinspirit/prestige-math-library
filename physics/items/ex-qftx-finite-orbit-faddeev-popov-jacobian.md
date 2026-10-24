@@ -26,6 +26,8 @@ verification:
 ---
 
 ## Example
+All coordinates $x,y$, radii $r$, and angles $\theta$ in this finite-dimensional toy are dimensionless; the stated coordinate densities and $\Delta_{\rm FP}$ therefore carry no physical units.
+
 Let $X=\mathbb R^2\setminus\{(0,0)\}$ have positive density $|dx\,dy|$, and let $K=S^1$ have angle coordinate $\theta$ and right-invariant density $|d\theta|$. Let $K$ act on the right by
 $$(x,y)\cdot e^{i\theta}=(x\cos\theta-y\sin\theta,x\sin\theta+y\cos\theta).$$
 For $r>0$, set $s_r=(r,0)$, choose an open neighborhood $U_r\subset\{x>0\}$ of $s_r$, let $S_r=U_r\cap\{y=0\}$ have density $|dx|$, and set $\chi(x,y)=y$ on $U_r$. The unit angular generator $1\in\mathfrak k=T_eK\cong\mathbb R$ has infinitesimal orbit vector

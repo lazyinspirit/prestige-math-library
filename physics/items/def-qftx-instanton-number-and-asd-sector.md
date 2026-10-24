@@ -75,7 +75,7 @@ $$
 q_B(P,\omega):=\int_X\beta_B.
 $$
 
-The number $q_B(P,\omega)$ is independent of the supplied connection. For a general compact matrix group and invariant $B$, it is a real characteristic number; no integrality is asserted. In the special case $G=SU(2)$ in its defining representation on $\mathbb C^2$, with $h(v,w)=v^*w$ and $B(X,Y)=-\operatorname{tr}_2(XY)$, the associated Hermitian bundle $E=P\times_{SU(2)}\mathbb C^2$ has
+The number $q_B(P,\omega)$ is independent of the supplied connection. For a general compact matrix group and invariant $B$, it is a real characteristic number; no integrality is asserted. In the special case $G=SU(2)$ in its defining representation on $\mathbb C^2$, with $h(v,w)=w^*v$ (linear in $v$ and conjugate-linear in $w$) and $B(X,Y)=-\operatorname{tr}_2(XY)$, the associated Hermitian bundle $E=P\times_{SU(2)}\mathbb C^2$ has
 
 $$
 q_B(P,\omega)=-\langle c_2(E),[X]\rangle\in\mathbb Z,
@@ -145,7 +145,7 @@ The Hodge operator $*_g$ on two-forms is characterized by $\alpha\wedge *_g\beta
 
 [F6] With full AC, the Chern form class is the real coefficient image of the integral topological Chern class. [[thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals]], [[def-chern-classes-from-the-projective-bundle-relation]]
 
-[F7] A Hermitian connection satisfies $Xh(s,t)=h(\nabla_Xs,t)+h(s,\nabla_Xt)$; for an $SU(2)$ local matrix $A_i^*=-A_i$, this identity holds for the defining associated connection. [[def-complex-linear-and-compatible-bundle-connections]]
+[F7] A Hermitian metric is linear in its first variable and conjugate-linear in its second; a Hermitian connection satisfies $Xh(s,t)=h(\nabla_Xs,t)+h(s,\nabla_Xt)$. For $h(v,w)=w^*v$, an $SU(2)$ matrix preserves $h$, so it induces a global metric on the associated bundle. For a real vector field $X$, the local connection matrix satisfies $A_i(X)^*=-A_i(X)$, whence $h(A_i(X)s,t)+h(s,A_i(X)t)=t^*(A_i(X)+A_i(X)^*)s=0$; the ordinary product rule proves the compatibility identity for $d+A_i$. [[def-complex-linear-and-compatible-bundle-connections]]
 
 [F8] The de Rham isomorphism is induced by integration on smooth singular simplices, so its evaluation on the oriented fundamental class is integration of a top-degree form. [[thm-de-rham-theorem]]
 

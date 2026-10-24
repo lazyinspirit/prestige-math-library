@@ -17,6 +17,7 @@ deps:
   - thm-higher-dimensional-spheres-are-simply-connected
   - thm-a-flat-connection-admits-local-parallel-frames
   - prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball
+  - def-axiom-of-choice
 dependency_roles:
   thm-qftx-zero-fi-regular-adhm-asd-correspondence: mathematical-premise
   def-qftx-adhm-linear-data-stability-and-regularity: mathematical-premise
@@ -25,6 +26,8 @@ dependency_roles:
   thm-higher-dimensional-spheres-are-simply-connected: mathematical-premise
   thm-a-flat-connection-admits-local-parallel-frames: mathematical-premise
   prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
+axiom_base: "The direct zero-charge classification uses the displayed energy identity and supplied local parallel frames; the additional comparison with the general correspondence assumes full AC and its ordinary supplier hypotheses."
 proof_strategy: direct
 provenance:
   statement: ai-generated
@@ -77,7 +80,9 @@ modulo unitary bundle isomorphisms preserving the framing and connection. This s
 
 [F1] For $V=\mathbb C^0$, each ADHM endomorphism or framing map is the unique zero-dimensional map; stability and costability hold vacuously, and both $U(0)$ and $GL(0)$ are trivial. [[def-qftx-adhm-linear-data-stability-and-regularity]]
 
-[F2] For $B(X,Y)=-\operatorname{tr}_N(XY)$, the instanton charge $q_B$ equals $q_N$. On an ASD connection, $q_B=0$ implies $F_A=0$. [[def-qftx-instanton-number-and-asd-sector]], [[thm-qftx-yang-mills-selfdual-action-bound]]
+[F2] On the real vector space $\mathfrak u(N)$ of skew-Hermitian matrices, $B(X,Y)=-\operatorname{tr}_N(XY)$ is a positive-definite real bilinear form. The charge formula in the Example is $q_N=(8\pi^2)^{-1}\int B(F_A\wedge F_A)$. Under full AC the general action-bound supplier gives the ASD zero-charge implication; step 1.2 proves the needed identity directly here, so that supplier is not used without its axiom premise. [[def-qftx-instanton-number-and-asd-sector]], [[thm-qftx-yang-mills-selfdual-action-bound]]
+
+[A1] Only for the additional comparison in step 2.1, assume full AC and the exact ordinary quotient, GAGA, Ward and monad supplier hypotheses of the conditional correspondence theorem. The direct classification below does not invoke that general correspondence. [[thm-qftx-zero-fi-regular-adhm-asd-correspondence]], [[def-axiom-of-choice]]
 
 [F3] The sphere $S^4$ is simply connected. A flat connection has local parallel frames and path-independent parallel transport on coordinate balls. [[thm-higher-dimensional-spheres-are-simply-connected]], [[thm-a-flat-connection-admits-local-parallel-frames]], [[prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball]]
 
@@ -87,6 +92,6 @@ modulo unitary bundle isomorphisms preserving the framing and connection. This s
 
 1.1 When $k=0$, $V=0$. There is exactly one quadruple of maps, all with zero-dimensional domain or codomain. Both moment equations are the unique equality of endomorphisms of $0$; the span of the empty family is $0=V$, and no nonzero subspace of $V$ exists. Thus this datum is stable and costable, and the quotient by $U(0)$ is one point. [F1, algebra]
 
-1.2 For the framed ASD connection, $q_B=q_N=0$ by [F2], so the ASD action bound gives $F_A=0$. For two piecewise smooth paths from $\infty$ to $x$, their concatenation is a loop and is null-homotopic by [F3]. Pull back a cover by coordinate balls with local parallel frames to the compact homotopy square; a Lebesgue number gives a finite subdivision with each cell mapped into one such ball. Transport along a continuous edge is defined using that ball's parallel frame; on overlaps the change between parallel frames is constant, so the definition is independent of the chosen ball. Each cell has identity boundary transport, and multiplying over the subdivision cancels all interior edges. Therefore the loop holonomy is identity and transport from $\infty$ is path-independent. The resulting sections of a framed orthonormal basis are smooth and parallel in local parallel frames, so the bundle with connection is framed-isomorphic to the trivial bundle with its flat connection. The framing fixes that isomorphism at $\infty$. Any covariantly constant unitary automorphism preserving the framing is identity, since its value at every point is its parallel transport from the identity at $\infty$. Thus the framed flat gauge class is unique and has no residual based stabilizer. [F2, F3, construct]
+1.2 The Hodge identity and $*_gF_A=-F_A$ give $\int_{S^4}|F_A|_B^2\,d\mathrm{vol}=\int B(F_A\wedge *_gF_A)=-8\pi^2q_N=0$, where the norm uses the round metric and the positive form [F2]. Its continuous nonnegative integrand must vanish everywhere: a positive value would give a positive integral on an open neighborhood. Hence $F_A=0$. For two piecewise smooth paths from $\infty$ to $x$, their concatenation is a loop and is null-homotopic by [F3]. Pull back a cover by coordinate balls with local parallel frames to the compact homotopy square; a Lebesgue number gives a finite subdivision with each cell mapped into one such ball. Transport along a continuous edge is defined using that ball's parallel frame; on overlaps parallel-frame changes are locally constant, so the definition agrees along each connected edge. Each cell has identity boundary transport. Sweeping through successive cells cancels the transport on shared edges with its inverse and leaves identity transport around the external boundary. Thus transport from $\infty$ is path-independent. Transporting the fixed framed orthonormal basis gives smooth parallel sections, as seen in local parallel frames, and a framed unitary isomorphism with the trivial flat bundle. A parallel unitary automorphism preserving the framing is identity, since its value everywhere is transported from its identity value at $\infty$. Conversely, the trivial framed flat connection is ASD and has $q_N=0$. Thus the sector has exactly one class and its based parallel stabilizer is trivial. [given, F2, F3, construct]
 
-2.1 The conditional correspondence of [[thm-qftx-zero-fi-regular-adhm-asd-correspondence]] sends the unique zero-dimensional datum to this unique framed flat ASD class and preserves $q_N=0$. This verifies the $k=0$ boundary without an irreducibility assumption. [F1, F2, step 1.1, step 1.2] ∎
+2.1 Pairing the unique empty datum with the trivial framed flat bundle gives the bijection of the two singleton sets established in steps 1.1 and 1.2. For the additional comparison, impose all hypotheses [A1], including full AC: the conditional correspondence then applies, and its bijection necessarily sends that datum to this class, with $q_N=0$. The direct classification and its no-stabilizer conclusion were proved before this comparison and require no irreducibility assumption. [A1, F1, F2, step 1.1, step 1.2] ∎

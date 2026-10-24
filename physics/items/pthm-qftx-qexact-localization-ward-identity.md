@@ -19,7 +19,7 @@ dependency_roles:
   def-qftx-supersymmetry-fluctuation-complex: formulation-prerequisite
   post-qftx-rigid-supersymmetric-background: physical-assumption
   thm-finite-dimensional-q-exact-deformation-invariance: mathematical-premise
-dependency_level: 9
+dependency_level: 10
 proof_strategy: direct
 provenance:
   statement: ai-altered

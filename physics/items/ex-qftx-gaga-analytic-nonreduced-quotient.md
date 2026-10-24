@@ -71,8 +71,8 @@ nonzero element whose square is zero in both rings.
 
 ## Verification
 
-1.1 Apply [F1] to $X$ and $p$. The map $A\to B$ is faithfully flat, and both completions identify with $T=\mathbb C\llbracket x,y\rrbracket/(x^2)$. [given, A1, F1]
+1.1 Apply [F1] with $n=2$ and $I=(x^2)\subseteq(x,y)$ to the finite-type complex scheme $X$ at its closed point $p$ with residue field $\mathbb C$. The map $A\to B$ is faithfully flat, and both completions identify with $Q:=T/(x^2T)$. Both completion maps send the class of $x$ to $x+x^2T\in Q$. [given, A1, F1]
 
-2.1 The class of $x$ in $T$ is nonzero: its coefficient of $x^1y^0$ is $1$, whereas every element of the ideal $x^2\mathbb C\llbracket x,y\rrbracket$ has coefficient $0$ there by [F2]. If the class of $x$ were zero in either $A$ or $B$, its image under that ring's completion map would be zero in $T$, contradicting this coefficient. [F1, F2, step 1.1]
+2.1 In the formal ring $T$, the coefficient of $x^1y^0$ in $x$ is $1$, whereas every element of $x^2T$ has coefficient $0$ there by [F2]. Thus $x\notin x^2T$, so $x+x^2T$ is nonzero in $Q$. If the class of $x$ were zero in either $A$ or $B$, its image under that ring's completion map would be zero in $Q$, contradicting step 1.1 and this nonvanishing. [F1, F2, step 1.1]
 
 3.1 By the quotient definitions in the example, $x^2=0$ in $A$ and $B$. Step 2.1 proves that $x$ is nonzero in both, so it is a nonzero nilpotent class preserved by the faithfully flat comparison. [given, step 1.1, step 2.1] ∎

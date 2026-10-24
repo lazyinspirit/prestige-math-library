@@ -49,7 +49,7 @@ At $t=\tfrac12$ both values are the wedge basepoint.
 
 **Given:** The based space and reduced suspension quotient in the Definition.
 
-[F1] The reduced suspension is the quotient of $Z\times[0,1]$ by both end slices and the basepoint track; the wedge is the based coproduct. [[def-reduced-cone-suspension-and-cofiber-sequence]]
+[F1] The cited supplier gives the reduced-suspension quotient formula under its well-pointed compactly generated weak Hausdorff hypotheses. For arbitrary based spaces in this item, use the quotient defined above with ordinary product and quotient topologies; the wedge is the quotient of two disjoint copies of $\Sigma Z$ identifying their basepoints. Its inclusions are continuous by the quotient construction. The verification below establishes the pinch map directly without the supplier's additional hypotheses. [[def-reduced-cone-suspension-and-cofiber-sequence]]
 
 [F2] A map constant on the equivalence classes of a quotient descends uniquely to a continuous map on the quotient. [[thm-quotient-universal-property]]
 

@@ -14,19 +14,19 @@ deps:
   - def-chern-character-and-todd-class
   - lem-integral-cohomology-ring-of-complex-projective-space-by-splitting
   - lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold
-  - thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals
   - thm-cohomology-projective-space-twisting-sheaves
   - lem-chern-class-naturality-additivity-and-splitting
   - thm-long-exact-sequence-sheaf-cohomology
+  - thm-naturality-normalization-and-whitney-sum-for-chern-classes
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-chern-character-and-todd-class: mathematical-premise
   lem-integral-cohomology-ring-of-complex-projective-space-by-splitting: mathematical-premise
   lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold: mathematical-premise
-  thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals: mathematical-premise
   thm-cohomology-projective-space-twisting-sheaves: mathematical-premise
   lem-chern-class-naturality-additivity-and-splitting: mathematical-premise
   thm-long-exact-sequence-sheaf-cohomology: mathematical-premise
+  thm-naturality-normalization-and-whitney-sum-for-chern-classes: mathematical-premise
 axiom_base: "ZF + full AC inherited from the named projective-cohomology and characteristic-class suppliers."
 proof_strategy: direct
 provenance:
@@ -92,7 +92,7 @@ and the fiber over the remaining point is $\ell_\infty=\{\lambda_1=\lambda_2=0\}
 
 [F4] The algebraic cohomology of $\mathcal O(d)$ on projective space is given by the twisting-sheaf theorem; in particular on $\mathbb P^3$, $\chi(\mathcal O(-1))=0$, $\chi(\mathcal O)=1$, and $\chi(\mathcal O(1))=4$. [[thm-cohomology-projective-space-twisting-sheaves]]
 
-[F5] Chern–Weil forms represent the real images of topological Chern classes, Chern classes are natural and Whitney-additive, and the first Chern class of a complex line is its oriented real Euler class. [[thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals]]
+[F5] For numerable finite-rank complex bundles over a path-connected CW base, integral Chern classes are natural, satisfy $c(E\oplus G)=c(E)c(G)$, and obey $c_1(L)=e(L_{\mathbb R})$ for a complex line, with $c(0)=1$ and $c(E\oplus\varepsilon^r)=c(E)$. [[thm-naturality-normalization-and-whitney-sum-for-chern-classes]]
 
 [F6] The algebraic first Chern class of $\mathcal O(1)$ is the hyperplane divisor class; its cycle class is the Poincaré dual of the complex hyperplane, which is the Euler class of its complex normal line. Thus its cycle class is $H_{\rm top}$. [[def-chern-character-and-todd-class]], [[lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold]]
 
@@ -116,10 +116,10 @@ By [F4], the cohomology groups of $\mathcal O(-1)$, $\mathcal O$, and $\mathcal 
 $$
 \operatorname{ch}(\mathcal F)=(2k+N)-ke^{-H}-ke^H=N-kH^2,
 $$
-because $H^4=0$ on the complex threefold and the odd powers cancel. The integral Whitney formula [F7] applied to the same two sequences gives $c^{\rm alg}(\mathcal F)=(1-H^2)^{-k}=1+kH^2$ through codimension three, so $c_1^{\rm alg}(\mathcal F)=0$ and $c_2^{\rm alg}(\mathcal F)=kH^2$ integrally. In the underlying topological category the same exact sequences are exact sequences of complex vector bundles, so [F5] and the line-class identity $c_1(\mathcal O(1))=H$ give
+because $H^4=0$ on the complex threefold and the odd powers cancel. The integral Whitney formula [F7] applied to the same two sequences gives $c^{\rm alg}(\mathcal F)=(1-H^2)^{-k}=1+kH^2$ through codimension three, so $c_1^{\rm alg}(\mathcal F)=0$ and $c_2^{\rm alg}(\mathcal F)=kH^2$ integrally. Analytification preserves these locally split exact bundle sequences. Their underlying topological sequences split: a Hermitian metric on each middle bundle identifies the orthogonal complement of the subbundle with the quotient. Such metrics exist by patching local metrics with a partition of unity on compact $\mathbb P^3$. This base is a path-connected finite CW complex, and its finite-rank bundles are numerable. Thus the integral Whitney formula [F5], applied to these splittings with $c_1(\mathcal O(1))=H$ and $c_1(\mathcal O(-1))=-H$ from [F2], gives
 $$
 c(\mathcal F)=\frac{1}{(1-H)^k(1+H)^k}=(1-H^2)^{-k}=1+kH^2
 $$
-through degree six, since $H^4=0$. Hence the topological classes are $c_1(\mathcal F)=0$, $c_2(\mathcal F)=kH^2$, and $c_3(\mathcal F)=0$. The universal formulas $\operatorname{ch}_1=c_1$, $\operatorname{ch}_2=\tfrac12(c_1^2-2c_2)$, and $\operatorname{ch}_3=\tfrac16(c_1^3-3c_1c_2+3c_3)$ then give the topological $\operatorname{ch}(\mathcal F)=N-kH^2$. This compares only the identical finite line-bundle resolution and its line class, not arbitrary analytic and algebraic cohomology. [F1, F2, F5, F7, step 1.1, algebra]
+through degree six, since $H^4=0$. Hence the topological classes are $c_1(\mathcal F)=0$, $c_2(\mathcal F)=kH^2$, and $c_3(\mathcal F)=0$. The universal formulas $\operatorname{ch}_1=c_1$, $\operatorname{ch}_2=\tfrac12(c_1^2-2c_2)$, and $\operatorname{ch}_3=\tfrac16(c_1^3-3c_1c_2+3c_3)$ then give the topological $\operatorname{ch}(\mathcal F)=N-kH^2$. This compares only the identical finite line-bundle resolution and its line class, not arbitrary analytic and algebraic cohomology. [A1, F1, F2, F5, F7, step 1.1, algebra]
 
-3.1 Write $c_2(E)=m u$ for $m\in\mathbb Z$. Naturality of Chern classes and the pullback hypothesis give $mH^2=\pi^*c_2(E)=c_2(\mathcal F)=kH^2$ by steps 2.1 and 1.2. Since $H^2$ is a nonzero generator by [F2], $m=k$, proving both the stated Chern class and its evaluation on $[S^4]$. [F2, step 2.1, step 1.2, algebra] ∎
+3.1 Write $c_2(E)=m u$ for $m\in\mathbb Z$. Naturality of Chern classes [F5] and the pullback hypothesis give $mH^2=\pi^*c_2(E)=c_2(\mathcal F)=kH^2$ by steps 2.1 and 1.2. Since $H^2$ is a nonzero generator by [F2], $m=k$, proving both the stated Chern class and its evaluation on $[S^4]$. [F2, F5, step 2.1, step 1.2, algebra] ∎

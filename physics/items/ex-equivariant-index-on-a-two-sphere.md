@@ -26,14 +26,24 @@ provenance:
 generation:
   role: example
 sources:
-  references: []
+  references:
+    - title: "Zelin Yi, A Groupoid Proof of the Lefschetz fixed point formula, Theorem 1.1 (local-term convention)"
+      url: "https://arxiv.org/pdf/2003.00955"
 verification:
   precheck: pass
 ---
 
 ## Example
 
-Assume countable choice. Give $S^2=\{(x,y,z)\in\mathbb R^3:x^2+y^2+z^2=1\}$ its outward orientation and the complexified de Rham complex $E^j=\Lambda^jT^*S^2\otimes_{\mathbb R}\mathbb C$, with differential $d_{\mathbb C}(\alpha+i\beta)=d\alpha+i\,d\beta$. Let $T=\mathbb R/\mathbb Z$ act by rotation through angle $2\pi s$ about the $z$-axis for $[s]\in T$. For every nonidentity $g=[s]$, the fixed set consists of the north and south poles. The de Rham index character is $2$, and the two isolated fixed-point contributions are each $1$.
+Assume countable choice. Give $S^2=\{(x,y,z)\in\mathbb R^3:x^2+y^2+z^2=1\}$ its outward orientation and the complexified de Rham complex $E^j=\Lambda^jT^*S^2\otimes_{\mathbb R}\mathbb C$, with differential $d_{\mathbb C}(\alpha+i\beta)=d\alpha+i\,d\beta$. Let $T=\mathbb R/\mathbb Z$ act by rotation through angle $2\pi s$ about the $z$-axis for $[s]\in T$, with section action $(g^{-1})^*$. For every nonidentity $g=[s]$, the fixed set consists of the north and south poles. At a fixed point $p$ for which $I-dg_p$ is invertible, put $A_p=(d(g^{-1})_p)^*\otimes1$ on $T_p^*S^2\otimes_{\mathbb R}\mathbb C$ and define its isolated fixed-point contribution by
+
+$$c_p(g):=\frac{\sum_{j=0}^2(-1)^j\operatorname{tr}(\Lambda^j A_p)}{|\det_{\mathbb R}(I-dg_p)|}.$$
+
+For every nonidentity rotation both poles satisfy this invertibility condition, $c_p(g)=1$ at each pole, and the de Rham index character satisfies $\chi_{E^\bullet}(g)=\sum_{p\in(S^2)^g}c_p(g)=2$.
+
+## Example references
+
+[Yi, Theorem 1.1: the isolated fixed-point quotient convention; the identity for this sphere is verified directly below](https://arxiv.org/pdf/2003.00955)
 
 ## Facts & Assumptions
 
@@ -53,4 +63,4 @@ Assume countable choice. Give $S^2=\{(x,y,z)\in\mathbb R^3:x^2+y^2+z^2=1\}$ its 
 
 1.2 Write $\theta=2\pi s$. The equation $g(x,y,z)=(x,y,z)$ and $\theta\notin2\pi\mathbb Z$ force $x=y=0$, so $M^g=\{(0,0,1),(0,0,-1)\}$. At either pole, $dg$ on the tangent plane is the rotation matrix $R_\theta$, hence $|\det_{\mathbb R}(I-dg)|=\det(I-R_\theta)=(1-\cos\theta)^2+\sin^2\theta=2-2\cos\theta>0$. [given, algebra]
 
-2.1 The complex graded fiber at a pole is $\Lambda^\bullet(T_p^*S^2\otimes_{\mathbb R}\mathbb C)$, and the induced fiber action has eigenvalues $e^{i\theta}$ and $e^{-i\theta}$ on $T_p^*S^2\otimes_{\mathbb R}\mathbb C$. Its alternating trace is $1-(e^{i\theta}+e^{-i\theta})+1=2-2\cos\theta$, equal to the denominator in step 1.2. Each local quotient is therefore $1$, and summing the two fixed-point contributions gives $2$, the character computed in step 1.1. [F1, step 1.1, step 1.2, algebra] ∎
+2.1 The complex graded fiber at a pole is $\Lambda^\bullet(T_p^*S^2\otimes_{\mathbb R}\mathbb C)$, with fiber action $\Lambda^j A_p$ in degree $j$. The eigenvalues of $A_p$ are $e^{i\theta}$ and $e^{-i\theta}$, so its exterior powers have traces $1$, $e^{i\theta}+e^{-i\theta}$, and $1$ in degrees zero, one, and two. Their alternating sum is $2-2\cos\theta$. Substitution into the definition of $c_p(g)$, using the positive denominator in step 1.2, gives $c_p(g)=1$ at each pole. Thus $\sum_{p\in(S^2)^g}c_p(g)=1+1=2=\chi_{E^\bullet}(g)$ by step 1.1. This proves the fixed-point identity for this example by computing its two sides independently. [given, step 1.1, step 1.2, algebra] ∎

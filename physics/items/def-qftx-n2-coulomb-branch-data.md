@@ -28,7 +28,7 @@ sources:
     locator: '§§2.2–2.4, printed pp. 5–14, and §5.1, printed pp. 20–21: pure SU(2) field content, the gauge-invariant vacuum coordinate, the local prepotential, and the weak-coupling period convention.'
   - title: Adel Bilal, Duality in N=2 SUSY SU(2) Yang-Mills Theory
     url: https://arxiv.org/pdf/hep-th/9601007v1
-    locator: '§§2.2–2.3, printed pp. 5–10: the N=2 vector multiplet, classical moduli, the adjoint scalar, and local low-energy prepotential data.'
+    locator: '§2.2 and §§3.2–3.4, printed pp. 6–12, especially §3.4 and its footnote: vector multiplet, classical moduli, local prepotential, and the asymptotic weak-coupling relation; §6.1, equation (6.12), gives the periods.'
   - title: David Tong, Supersymmetric Field Theory
     url: https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy.pdf
     locator: '§4.4.1, printed pp. 125–128: the N=2 vector-plus-adjoint-chiral decomposition and its coupling convention.'
@@ -48,12 +48,18 @@ configuration satisfying the model's zero auxiliary-field conditions, taken
 modulo the compact $SU(2)$ gauge action. This uses the compact-group orbit
 quotient in the preceding vacuum-moduli definition; it does not replace that
 quotient by a complexified-group stability construction. In the
-weak-coupling semiclassical frame, let $a$ be the eigenvalue coordinate fixed
-by $\phi=\tfrac12\operatorname{diag}(a,-a)$, of mass dimension one. When a quantum
+weak-coupling semiclassical frame, let $a_{\mathrm{cl}}$ be the eigenvalue coordinate fixed
+by $\phi=\tfrac12\operatorname{diag}(a_{\mathrm{cl}},-a_{\mathrm{cl}})$, of mass dimension one. When a quantum
 theory with a vacuum-moduli set has actually been constructed, the **quantum
 Coulomb-branch coordinate** $u$ denotes the chosen gauge-invariant chiral
 quadratic-operator expectation value in the source trace normalization for
-which the weak-coupling relation is $u=a^2/2$. Its mass dimension is two.
+which the classical relation is $u_{\mathrm{cl}}=a_{\mathrm{cl}}^2/2$.
+Here $a_{\mathrm{cl}}$ denotes the preceding classical eigenvalue coordinate;
+the quantum $a(u)$ below is a local period, with weak-coupling normalization
+$a(u)^2/(2u)\to1$ as $|u|/\Lambda^2\to\infty$ on a chosen electric branch,
+where $\Lambda>0$ is the fixed dynamical scale of mass dimension one.
+This is an asymptotic relation, not an identity at finite quantum $u$.
+The mass dimension of $u$ is two.
 This definition does not assert that $u$ globally parameterizes the quantum
 vacua.
 
@@ -93,7 +99,7 @@ about arbitrary $\mathcal N=2$ theories.
 
 [Seiberg and Witten, §§2.2–2.4, §5.1](https://arxiv.org/pdf/hep-th/9407087v1).
 
-[Bilal, §§2.2–2.3](https://arxiv.org/pdf/hep-th/9601007v1).
+[Bilal, §2.2, §§3.2–3.4, and §6.1](https://arxiv.org/pdf/hep-th/9601007v1).
 
 [Tong, §4.4.1](https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy.pdf).
 
