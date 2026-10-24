@@ -239,7 +239,11 @@ if(process.argv[1] && import.meta.url===pathToFileURL(realpathSync(process.argv[
     const args=process.argv.slice(2),run=args[args.indexOf('--run')+1];
     const option=name=>args.includes(`--${name}`)?args[args.indexOf(`--${name}`)+1]:undefined;
     assert(args.includes('--run'),'Specify --run');
-    if(option('prerequisite-lifecycle-sha256'))assert(prerequisiteLifecycleBinding(process.cwd(),run)?.fingerprint===option('prerequisite-lifecycle-sha256'),'Native prerequisite lifecycle changed since owner preparation');
+    if(args.includes('--prerequisite-lifecycle-sha256')){
+      const expected=option('prerequisite-lifecycle-sha256');
+      assert(/^[a-f0-9]{64}$/.test(expected??''),'Specify a valid --prerequisite-lifecycle-sha256');
+      assert(prerequisiteLifecycleBinding(process.cwd(),run)?.fingerprint===expected,'Native prerequisite lifecycle changed since owner preparation');
+    }
     if(args[0]==='owner-resolve')console.log(JSON.stringify(resolveOwner(process.cwd(),run,option('batch'),
       {decision:option('decision'),reason:option('reason'),reviewer:option('reviewer')})));
     else {assert(args[0]==='check','Usage: batch-scope-review.mjs check|owner-resolve --run RUN');
