@@ -316,3 +316,14 @@ that admission grants no proof readiness or acceptance. Original repair
 **completion still validates the full current run frontier**, including every
 old page, after all admitted old source/page/metadata repairs. The subsequent
 full supplemental native battery and every ordinary gate remain unchanged.
+
+
+An existing owner-addition review remains immutable after a guarded old-consumer
+repair. Its original source hash may recognize only the exact authenticated
+successor in that same generation's fully replay-checked repair completion:
+the original consumer hash must equal both the generation's protected source
+and the repair authorization preimage, and the current hash must equal the
+completion's admitted source. Pending repairs, altered evidence, unadmitted or
+later source edits fail. The original full current consumer selection and actual
+review dispositions remain required, and explicit native owner adoption remains
+separate. This does not rehash old reviews or create acceptance/coverage.

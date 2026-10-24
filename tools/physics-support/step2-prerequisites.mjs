@@ -113,7 +113,7 @@ function declaration(page, known) {
     known.add(item.id);
   }
 }
-function additionReview(root,run,addition,ref,{current=true}={}) {
+function additionReview(root,run,addition,ref,{current=true,repairEntry=null}={}) {
   reference(root,run,ref);
   const review=json(local(root,ref.path));
   assert(review.run===run&&review.reviewer==='/root'&&review.native_review===false&&review.decision==='accept'
@@ -129,7 +129,16 @@ function additionReview(root,run,addition,ref,{current=true}={}) {
   assert(JSON.stringify(review.consumer_checks.map(row=>row.id).sort())===JSON.stringify(affected)
     &&review.consumer_checks.every(row=>['accept','unaffected'].includes(row.decision)&&typeof row.reason==='string'&&row.reason.trim().length>=40), 'owner addition consumer review incomplete');
   assert(JSON.stringify(Object.keys(review.consumer_sha256??{}).sort())===JSON.stringify(affected), 'owner addition consumer source selection');
-  for(const id of affected)assert(review.consumer_sha256[id]===rawHash(local(root,`items/${id}.md`)),`stale owner addition consumer ${id}`);
+  let successor;
+  for(const id of affected){
+    const path=`items/${id}.md`,before=review.consumer_sha256[id],after=rawHash(local(root,path));
+    if(before===after)continue;
+    if(repairEntry&&!successor){
+      const completed=checkedRepairOverlay(root,run,repairEntry);
+      successor={completed,authorization:completed.authorization?json(local(root,completed.authorization.path)):null};
+    }
+    assert(successor?.authorization?.sources?.[path]===before&&repairEntry?.protected_sources?.[path]===before&&successor.completed.sources[path]===after,`stale owner addition consumer ${id}`);
+  }
   return review;
 }
 /** Identity/home projection only. Unrelated prose and proof bodies grant no
@@ -453,7 +462,7 @@ export function checkOwnerAdditions(root, run, batch, {requireAdoption=false}={}
     const statePath=local(root,`${generation.state_dir}/state.json`),state=json(statePath);
     assert(state.run===run,'owner addition state identity');
     // A genuine later native repair does not retroactively erase Step-2 acceptance.
-    additionReview(root,run,addition,addition.review,{current:!state.stages?.['2-scope-review']?.doneAt});
+    additionReview(root,run,addition,addition.review,{current:!state.stages?.['2-scope-review']?.doneAt,repairEntry:generation});
     if(requireAdoption) {
       const owner=json(local(root,`research/${run}-scope-review/batch-${batch}/state.json`)).owner_resolution;
       assert(owner?.owner_additions?.some(ref=>ref.path===addition.review.path&&ref.sha256===addition.review.sha256)

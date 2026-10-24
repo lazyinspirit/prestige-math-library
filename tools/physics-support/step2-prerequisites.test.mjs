@@ -74,7 +74,7 @@ function fixture(t) {
   return { root, stateDir, statePath, put, read, json, bind, requestPath, request, prepare, calls, originals, evidence, escalation };
 }
 
-function repairFixture(t,{pageSetup=false,importedContext=null}={}){
+function repairFixture(t,{pageSetup=false,importedContext=null,ownerAddition=false}={}){
   const f=fixture(t),commit=()=>{
     for(const args of [['add','.'],['commit','-qm','Exact fixture repair preimages']]){
       const result=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(result.status,0,result.stderr);
@@ -98,6 +98,14 @@ function repairFixture(t,{pageSetup=false,importedContext=null}={}){
     f.put('research/math-imports.json',{version:1,files:[{path,sha256:alteredPin?'a'.repeat(64):f.bind(path).sha256},f.bind('items/lem-pinned-context.md')]});
     f.originals[0][0].items[0].deps.push('lem-pinned-context');
     f.put('items/lem-original-one.md',f.read('items/lem-original-one.md').replace('deps: [lem-original-two]','deps: [lem-original-two, lem-pinned-context]'));
+  }
+  if(ownerAddition){
+    const id='lem-owner-repair-supplier',source=`items/${id}.md`,consumer='lem-original-one',reviewPath=`research/${run}-repair-addition-review.json`;
+    f.put(source,`---\nid: ${id}\nkind: lemma\nstatus: draft\ndomain: mathematics\nlibrary: mathematics\ndeps: []\n---\n## Statement\n\nExact approved owner prerequisite.\n`);
+    f.put(`items/${consumer}.md`,f.read(`items/${consumer}.md`)+`\n## Proof\n\nThe consumer uses exactly [[${id}]] under its declared hypotheses.\n`);
+    f.put('library/test/original-one-a.md',`---\npage: original-one-a\nstatus: draft\nlibrary: mathematics\nitems: [${id}, ${consumer}]\nexamples: []\nrequires: []\n---\n`);
+    f.put(reviewPath,{run,reviewer:'/root',native_review:false,decision:'accept',reason:'Root actually checked the added prerequisite statement, its complete proof and exact consumer use under all current hypotheses, preserving original scope.',items:[id],source_sha256:{[id]:f.bind(source).sha256},consumer_checks:[{id:consumer,decision:'unaffected',reason:'The exact original consumer uses the approved supplier conclusion and hypotheses without a scientific interface change.'}],consumer_sha256:{[consumer]:f.bind(`items/${consumer}.md`).sha256}});
+    f.request.additions=[{batch:'1',page:'original-one-a',before:consumer,items:[{...item(id),dependency_level:0}],review:f.bind(reviewPath)}];
   }
   f.put('research/plan-spec.json',{pages:f.originals.flat()});
   f.originals.forEach((pages,i)=>f.put(`research/${run}-batch-${i+1}.pages.json`,pages));
@@ -249,6 +257,25 @@ test('authorized before consumers survive removed edges and completed repair rej
   f.put('items/lem-later-consumer.md','---\nid: lem-later-consumer\ndeps: []\n---\nNew actual [[lem-original-one]] use.\n');
   assert.notEqual(repairGraphFingerprint(f.root,run,1),before);
   assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/same-owner consumer cone/);
+});
+
+test('owner addition consumers accept only the exact fully checked repair successor and preserve original review',t=>{
+  const f=repairFixture(t,{ownerAddition:true}),reviewPath=f.request.additions[0].review.path,original=f.read(reviewPath);
+  checkOwnerAdditions(f.root,run,'1');f.authorize();f.after();
+  assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/incomplete/);
+  f.complete();checkOwnerAdditions(f.root,run,'1');assert.equal(f.read(reviewPath),original);
+  assert.throws(()=>checkOwnerAdditions(f.root,run,'1',{requireAdoption:true}),/still requires explicit owner adoption/);
+  f.put(f.path,f.read(f.path)+'\nUnauthorized successor edit.\n');
+  assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),/repair receipt stale/);
+});
+
+test('owner addition successor does not waive consumer selection or stale repair evidence',t=>{
+  for(const mode of ['consumer','evidence']){
+    const f=repairFixture(t,{ownerAddition:true});f.authorize();f.after();f.complete();
+    if(mode==='consumer')f.put('items/lem-extra-addition-consumer.md','---\nid: lem-extra-addition-consumer\ndeps: [lem-owner-repair-supplier]\n---\n');
+    else f.put(f.evidence,'Changed scientific repair evidence after completion.\n');
+    assert.throws(()=>checkOwnerAdditions(f.root,run,'1'),mode==='consumer'?/consumer review incomplete/:/stale\/nonlocal evidence/);
+  }
 });
 
 function authoredFixture(t){
