@@ -17,7 +17,7 @@ justified_by: []
 dependency_roles:
   post-aqft-heft-model: formulation-prerequisite
   def-aqft-anomaly-matching-data: formulation-prerequisite
-physical_scope: "A selected perturbative U(1)_V-singlet chiral threshold sector inside H=SU(3)×U(1)_V on the trivial bundle over four-dimensional Minkowski space; no dynamical gauge-consistency or global-anomaly claim."
+physical_scope: "A selected perturbative SU(3)-singlet chiral threshold sector inside H=SU(3)×U(1)_V, with U(1)_V charge +1 for the positive-chirality Weyl field and order parameter and charge zero for the negative-chirality mass partner, on the trivial bundle over four-dimensional Minkowski space; no dynamical gauge-consistency or global-anomaly claim."
 provenance:
   statement: ai-altered
   proof: not-applicable

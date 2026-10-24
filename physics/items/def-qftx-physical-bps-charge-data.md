@@ -42,7 +42,7 @@ sources:
       locator: "Section 2.4.2, printed pages 40–41: central-charge bounds and shortened massive representations; Tong uses a different central-charge normalization, so the item retains the exact Seiberg–Witten convention."
     - title: Davide Gaiotto, Gregory W. Moore, and Andrew Neitzke, Four-dimensional wall-crossing via three-dimensional field theory
       url: https://arxiv.org/pdf/0807.4723
-      locator: "Section 1 equation (1.1) and Section 2.2 equations (2.10)–(2.18): the second-helicity supertrace, support condition, sign refinement, and ordered KS factors; their physical derivation has its own stated assumptions and does not identify finite-field Hall groupoids."
+      locator: "Section 1 equation (1.1), Section 2.1 equation (2.10) and its following paragraph, and Section 2.2 equations (2.11)–(2.18): the second-helicity supertrace on complete massive short multiplets, support condition, sign refinement, and ordered KS factors; their physical derivation has its own stated assumptions and does not identify finite-field Hall groupoids."
     - title: Frederik Denef, Quantum Quivers and Hall/Hole Halos
       url: https://arxiv.org/pdf/hep-th/0206072
       locator: "Section 5.3, printed pages 35–36: the pure SU(2) monopole/dyon two-arrow quiver, DSZ pairing magnitude 2, and model-specific stability discussion."
@@ -68,7 +68,7 @@ Indeed $\Phi(P_{u,\gamma})=M_{u,\gamma}I_2$, so the stabilizer condition is $gg^
 $$\pi(g)Q^I_\alpha\pi(g)^{-1}=\sum_\beta g^\beta{}_{\alpha}Q^I_\beta,\qquad \pi(g)(Q^I_\alpha)^*\pi(g)^{-1}=\sum_\beta\overline{g^\beta{}_{\alpha}}(Q^I_\beta)^*,$$
 where $g^\beta{}_{\alpha}$ is row $\beta$, column $\alpha$; scalar momenta and central charges are unchanged. This is supplied rest-fiber rotation data, not a restriction of an unspecified full-space operator $U(g,0)$. Choose the spin axis $3$ and the one-parameter rotation subgroup
 $$r_3(\theta)=\begin{pmatrix}e^{-i\theta/2}&0\\0&e^{i\theta/2}\end{pmatrix},\qquad \theta\in\mathbb R/(4\pi\mathbb Z).$$
-Supply a nonzero closed Hilbert subspace $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}\subseteq\mathcal H^1_{u,\gamma}$ invariant under this supplied $\mathrm{SU}(2)$ action and identified as the selected BPS sector. Its vectors lie in $\mathcal D_{u,\gamma}$, and every nonzero vector is BPS-saturated in the exact sense of the earlier BPS-state definition: $M_{u,\gamma}=|z_u(\gamma)|$, and the two $\mathcal N=2$ annihilating supercharge combinations in that definition vanish on them. Stability is supplied model data: this sector is discrete and separated by a positive spectral gap from the multiparticle continuum at the same conserved charge. The sector and gap are inputs, not conclusions here. On $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$, supply a self-adjoint operator $J_3$ with $2J_3$-integer spectrum such that the restricted action of $r_3(\theta)$ is $e^{-i\theta J_3}$ for every $\theta\in\mathbb R$. Require its spectral calculus to define a bounded trace-class operator $B_{u,\gamma}=(-1)^{2J_3}(2J_3)^2$, and supply a Hilbert basis $E_{u,\gamma}$ of $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$.
+Supply a nonzero closed Hilbert subspace $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}\subseteq\mathcal H^1_{u,\gamma}$ invariant under this supplied $\mathrm{SU}(2)$ action and identified as the selected BPS sector. Its vectors lie in $\mathcal D_{u,\gamma}$. Require the grading involution to preserve this subspace and, for every $I,\alpha$, require $Q^I_\alpha\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}\subseteq\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$ and $(Q^I_\alpha)^*\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}\subseteq\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$; thus the selected sector includes every supercharge partner of each of its states. Every nonzero vector is BPS-saturated in the exact sense of the earlier BPS-state definition: $M_{u,\gamma}=|z_u(\gamma)|$, and the two $\mathcal N=2$ annihilating supercharge combinations in that definition vanish on them. Stability is supplied model data: this sector is discrete and separated by a positive spectral gap from the multiparticle continuum at the same conserved charge. The sector and gap are inputs, not conclusions here. On $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$, supply a self-adjoint operator $J_3$ with $2J_3$-integer spectrum such that the restricted action of $r_3(\theta)$ is $e^{-i\theta J_3}$ for every $\theta\in\mathbb R$. Require its spectral calculus to define a bounded trace-class operator $B_{u,\gamma}=(-1)^{2J_3}(2J_3)^2$, and supply a Hilbert basis $E_{u,\gamma}$ of $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$.
 
 Define the four-dimensional $\mathcal N=2$ second-helicity supertrace, also called the $B_2$ index here, by
 
@@ -102,6 +102,6 @@ Countable Choice: [[def-countable-choice]].
 
 [Tong, Section 2.4.2](https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy.pdf).
 
-[Gaiotto, Moore, and Neitzke, Sections 1 and 2.2](https://arxiv.org/pdf/0807.4723).
+[Gaiotto, Moore, and Neitzke, Sections 1, 2.1, and 2.2](https://arxiv.org/pdf/0807.4723).
 
 [Denef, Section 5.3](https://arxiv.org/pdf/hep-th/0206072).
